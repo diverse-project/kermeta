@@ -93,6 +93,23 @@ public class UtilsSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+		case UtilsPackage.STACK: {
+			Stack<?> stack = (Stack<?>) theEObject;
+			T result = caseStack(stack);
+			if (result == null)
+				result = caseSequence(stack);
+			if (result == null)
+				result = caseBag(stack);
+			if (result == null)
+				result = caseOrderedCollection(stack);
+			if (result == null)
+				result = caseCollection(stack);
+			if (result == null)
+				result = caseObject(stack);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case UtilsPackage.STRING_BUFFER: {
 			kermeta.utils.StringBuffer stringBuffer = (kermeta.utils.StringBuffer) theEObject;
 			T result = caseStringBuffer(stringBuffer);
@@ -111,26 +128,24 @@ public class UtilsSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case UtilsPackage.STACK: {
-			Stack<?> stack = (Stack<?>) theEObject;
-			T result = caseStack(stack);
-			if (result == null)
-				result = caseSequence(stack);
-			if (result == null)
-				result = caseBag(stack);
-			if (result == null)
-				result = caseOrderedCollection(stack);
-			if (result == null)
-				result = caseCollection(stack);
-			if (result == null)
-				result = caseObject(stack);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stack</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stack</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <G> T caseStack(Stack<G> object) {
+		return null;
 	}
 
 	/**
@@ -160,21 +175,6 @@ public class UtilsSwitch<T> {
 	 * @generated
 	 */
 	public <K, V> T caseHashtable(Hashtable<K, V> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Stack</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Stack</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <G> T caseStack(Stack<G> object) {
 		return null;
 	}
 

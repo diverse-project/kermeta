@@ -86,15 +86,6 @@ public class IoSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case IoPackage.STD_IO: {
-			StdIO stdIO = (StdIO) theEObject;
-			T result = caseStdIO(stdIO);
-			if (result == null)
-				result = caseObject(stdIO);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case IoPackage.FILE_IO: {
 			FileIO fileIO = (FileIO) theEObject;
 			T result = caseFileIO(fileIO);
@@ -104,24 +95,18 @@ public class IoSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case IoPackage.STD_IO: {
+			StdIO stdIO = (StdIO) theEObject;
+			T result = caseStdIO(stdIO);
+			if (result == null)
+				result = caseObject(stdIO);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Std IO</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Std IO</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStdIO(StdIO object) {
-		return null;
 	}
 
 	/**
@@ -136,6 +121,21 @@ public class IoSwitch<T> {
 	 * @generated
 	 */
 	public T caseFileIO(FileIO object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Std IO</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Std IO</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStdIO(StdIO object) {
 		return null;
 	}
 

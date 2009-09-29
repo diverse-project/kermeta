@@ -96,7 +96,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 	 * @generated
 	 */
 	public TypeContainer getTypeContainer() {
-		if (eContainerFeatureID != StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER)
+		if (eContainerFeatureID() != StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER)
 			return null;
 		return (TypeContainer) eContainer();
 	}
@@ -107,7 +107,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 	 * @generated
 	 */
 	public TypeContainer basicGetTypeContainer() {
-		if (eContainerFeatureID != StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER)
+		if (eContainerFeatureID() != StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER)
 			return null;
 		return (TypeContainer) eInternalContainer();
 	}
@@ -131,7 +131,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 	 */
 	public void setTypeContainer(TypeContainer newTypeContainer) {
 		if (newTypeContainer != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER && newTypeContainer != null)) {
+				|| (eContainerFeatureID() != StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER && newTypeContainer != null)) {
 			if (EcoreUtil.isAncestor(this, newTypeContainer))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -228,8 +228,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_246 = false;
-		idIfCond_246 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_38 = false;
+		idIfCond_38 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.containerSwitcher(elem),
@@ -238,26 +238,26 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 								.getMetaClass(
 										"kermeta.language.structure.NamedElement"));
 
-		if (idIfCond_246) {
+		if (idIfCond_38) {
 
 			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeOrVoid(
 							org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.containerSwitcher(elem),
 							"kermeta.language.structure.NamedElement");
-			java.lang.Boolean idLoopCond_247 = false;
-			while (!idLoopCond_247) {
-				idLoopCond_247 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idLoopCond_39 = false;
+			while (!idLoopCond_39) {
+				idLoopCond_39 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equalsSwitcher(elem, null);
-				if (idLoopCond_247) {
+				if (idLoopCond_39) {
 				} else {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus(elem
 									.getName(), "::"), result);
 
-					java.lang.Boolean idIfCond_248 = false;
-					idIfCond_248 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_40 = false;
+					idIfCond_40 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.containerSwitcher(elem),
@@ -266,7 +266,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 											.getMetaClass(
 													"kermeta.language.structure.NamedElement"));
 
-					if (idIfCond_248) {
+					if (idIfCond_40) {
 
 						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asTypeOrVoid(
@@ -317,12 +317,14 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isInstance(kermeta.language.structure.Object element) {
+	public Boolean isSuperTypeOf(Type object) {
 
 		java.lang.Boolean result = null;
 
-		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOfSwitcher(element, this);
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.TypeUtil
+								.hasSubType(this, object), "java.lang.Boolean");
 
 		return result;
 
@@ -333,14 +335,12 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isSuperTypeOf(Type object) {
+	public Boolean isInstance(kermeta.language.structure.Object element) {
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asTypeOrVoid(
-						org.kermeta.compil.runtime.helper.language.TypeUtil
-								.hasSubType(this, object), "java.lang.Boolean");
+		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(element, this);
 
 		return result;
 
@@ -402,7 +402,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
 			return eInternalContainer().eInverseRemove(this,
 					StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE,

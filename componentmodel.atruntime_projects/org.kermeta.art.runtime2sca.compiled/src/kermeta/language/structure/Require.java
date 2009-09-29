@@ -21,7 +21,8 @@ package kermeta.language.structure;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getRequire()
- * @model annotation="kermeta documentation='To be written'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='To be written'"
  * @generated
  */
 public interface Require extends kermeta.language.structure.Object {
@@ -37,6 +38,7 @@ public interface Require extends kermeta.language.structure.Object {
 	 * @see #setUri(String)
 	 * @see kermeta.language.structure.StructurePackage#getRequire_Uri()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='To be written'"
 	 * @generated
 	 */

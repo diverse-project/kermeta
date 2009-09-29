@@ -16,6 +16,7 @@ package kermeta.language;
  *
  * @see kermeta.language.LanguagePackage#getDummyClass()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='This class is used to workaround an EMF bug, it doesn\'t really belong to Kermeta metamodel'"
  * @generated
  */

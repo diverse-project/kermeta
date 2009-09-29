@@ -34,7 +34,7 @@ public interface ArtFactory extends EFactory {
 	 * @return a new object of class '<em>System</em>'.
 	 * @generated
 	 */
-	art.System createSystem();
+	System createSystem();
 
 	/**
 	 * Returns a new object of class '<em>Data Type</em>'.

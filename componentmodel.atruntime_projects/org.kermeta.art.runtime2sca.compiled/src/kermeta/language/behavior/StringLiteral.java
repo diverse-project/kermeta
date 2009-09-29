@@ -21,7 +21,8 @@ package kermeta.language.behavior;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getStringLiteral()
- * @model annotation="kermeta documentation='This expression is a literal representing a String value, typically : \"my string\"'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='This expression is a literal representing a String value, typically : \"my string\"'"
  * @generated
  */
 public interface StringLiteral extends Literal {
@@ -37,6 +38,7 @@ public interface StringLiteral extends Literal {
 	 * @see #setValue(String)
 	 * @see kermeta.language.behavior.BehaviorPackage#getStringLiteral_Value()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='The concrete value represented by this literal'"
 	 * @generated
 	 */

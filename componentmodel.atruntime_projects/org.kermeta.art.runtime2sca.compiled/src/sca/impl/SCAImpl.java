@@ -58,7 +58,7 @@ public class SCAImpl extends ObjectImpl implements SCA {
 						.getStringBuffer()));
 
 		_res
-				.append("\n<sca:composite xmlns:sca=\"http://www.osoa.org/xmlns/sca/1.0\" xmlns:sample=\"http://sample\" xmlns=\"http://www.osoa.org/xmlns/sca/1.0\" name=\"");
+				.append("\n<sca:composite xmlns:sca=\"http://www.osoa.org/xmlns/sca/1.0\" name=\"");
 
 		_res.append(system.getRoot().getName());
 
@@ -68,60 +68,73 @@ public class SCAImpl extends ObjectImpl implements SCA {
 
 		{
 
-			kermeta.standard.Iterator<art.instance.ComponentInstance> it_ft112 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<art.instance.ComponentInstance> it_ft95 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<art.instance.ComponentInstance> convertAsOrderedSet(
 							system.getRoot().getSubComponent()).iterator();
-			java.lang.Boolean idLoopCond_394 = false;
-			while (!idLoopCond_394) {
-				idLoopCond_394 = it_ft112.isOff();
-				if (idLoopCond_394) {
+			java.lang.Boolean idLoopCond_382 = false;
+			while (!idLoopCond_382) {
+				idLoopCond_382 = it_ft95.isOff();
+				if (idLoopCond_382) {
 				} else {
 
 					//BIle:func
-					art.instance.ComponentInstance sub_lbdExp112 = it_ft112
+					art.instance.ComponentInstance sub_lbdExp95 = it_ft95
 							.next();
 
-					_res.append("\t<sca:component name=\"");
+					_res.append("\t<sca:component constrainingType=\"eu.diva.");
 
-					_res.append(sub_lbdExp112.getName());
+					_res.append(sub_lbdExp95.getName());
 
-					_res.append("\">\n");
+					_res.append("\" name=\"");
+
+					_res.append(sub_lbdExp95.getName());
+
+					_res
+							.append("\">\n\t<sca:implementation.java class=\"eu.diva.");
+
+					_res.append(sub_lbdExp95.getName());
+
+					_res.append(".");
+
+					_res.append(sub_lbdExp95.getName());
+
+					_res.append("Impl\"/>\n");
 
 					//BIft:select
 
-					kermeta.standard.Sequence<art.type.Port> result_ft114 = null;
+					kermeta.standard.Sequence<art.type.Port> result_ft97 = null;
 
-					art.type.Port elem_ft114 = null;
+					art.type.Port elem_ft97 = null;
 
-					result_ft114 = ((kermeta.standard.Sequence<art.type.Port>) org.kermeta.compil.runtime.helper.language.ClassUtil
+					result_ft97 = ((kermeta.standard.Sequence<art.type.Port>) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject(kermeta.standard.StandardPackage.eINSTANCE
 									.getSequence()));
 
 					{
 
-						kermeta.standard.Iterator<art.type.Port> it_ft114 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<art.type.Port> it_ft97 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<art.type.Port> convertAsOrderedSet(
-										sub_lbdExp112.getType().getPort())
+										sub_lbdExp95.getType().getPort())
 								.iterator();
-						java.lang.Boolean idLoopCond_396 = false;
-						while (!idLoopCond_396) {
-							idLoopCond_396 = it_ft114.isOff();
-							if (idLoopCond_396) {
+						java.lang.Boolean idLoopCond_384 = false;
+						while (!idLoopCond_384) {
+							idLoopCond_384 = it_ft97.isOff();
+							if (idLoopCond_384) {
 							} else {
 
-								elem_ft114 = it_ft114.next();
+								elem_ft97 = it_ft97.next();
 
-								java.lang.Boolean idIfCond_397 = false;
+								java.lang.Boolean idIfCond_385 = false;
 								//BIle:selector
-								art.type.Port p_lbdExp114 = elem_ft114;
+								art.type.Port p_lbdExp97 = elem_ft97;
 
-								idIfCond_397 = kermeta.standard.helper.StringWrapper
-										.equals(p_lbdExp114.getRole(), "server");
+								idIfCond_385 = kermeta.standard.helper.StringWrapper
+										.equals(p_lbdExp97.getRole(), "server");
 								//EIle:selector
 
-								if (idIfCond_397) {
+								if (idIfCond_385) {
 
-									result_ft114.add(elem_ft114);
+									result_ft97.add(elem_ft97);
 								}
 
 							}
@@ -133,25 +146,25 @@ public class SCAImpl extends ObjectImpl implements SCA {
 
 					{
 
-						kermeta.standard.Iterator<art.type.Port> it_ft113 = result_ft114
+						kermeta.standard.Iterator<art.type.Port> it_ft96 = result_ft97
 								.iterator();
-						java.lang.Boolean idLoopCond_395 = false;
-						while (!idLoopCond_395) {
-							idLoopCond_395 = it_ft113.isOff();
-							if (idLoopCond_395) {
+						java.lang.Boolean idLoopCond_383 = false;
+						while (!idLoopCond_383) {
+							idLoopCond_383 = it_ft96.isOff();
+							if (idLoopCond_383) {
 							} else {
 
 								//BIle:func
-								art.type.Port p_lbdExp113 = it_ft113.next();
+								art.type.Port p_lbdExp96 = it_ft96.next();
 
 								_res.append("\t\t<sca:service name=\"");
 
-								_res.append(p_lbdExp113.getName());
+								_res.append(p_lbdExp96.getName());
 
 								_res
 										.append("\">\n\t\t\t<sca:interface.java interface=\"");
 
-								_res.append(p_lbdExp113.getService().getName());
+								_res.append(p_lbdExp96.getService().getName());
 
 								_res.append("\"/>\n\t\t</sca:service>\n");
 								//EIle:func
@@ -166,39 +179,39 @@ public class SCAImpl extends ObjectImpl implements SCA {
 
 					//BIft:select
 
-					kermeta.standard.Sequence<art.type.Port> result_ft116 = null;
+					kermeta.standard.Sequence<art.type.Port> result_ft99 = null;
 
-					art.type.Port elem_ft116 = null;
+					art.type.Port elem_ft99 = null;
 
-					result_ft116 = ((kermeta.standard.Sequence<art.type.Port>) org.kermeta.compil.runtime.helper.language.ClassUtil
+					result_ft99 = ((kermeta.standard.Sequence<art.type.Port>) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject(kermeta.standard.StandardPackage.eINSTANCE
 									.getSequence()));
 
 					{
 
-						kermeta.standard.Iterator<art.type.Port> it_ft116 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<art.type.Port> it_ft99 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<art.type.Port> convertAsOrderedSet(
-										sub_lbdExp112.getType().getPort())
+										sub_lbdExp95.getType().getPort())
 								.iterator();
-						java.lang.Boolean idLoopCond_399 = false;
-						while (!idLoopCond_399) {
-							idLoopCond_399 = it_ft116.isOff();
-							if (idLoopCond_399) {
+						java.lang.Boolean idLoopCond_387 = false;
+						while (!idLoopCond_387) {
+							idLoopCond_387 = it_ft99.isOff();
+							if (idLoopCond_387) {
 							} else {
 
-								elem_ft116 = it_ft116.next();
+								elem_ft99 = it_ft99.next();
 
-								java.lang.Boolean idIfCond_400 = false;
+								java.lang.Boolean idIfCond_388 = false;
 								//BIle:selector
-								art.type.Port p_lbdExp116 = elem_ft116;
+								art.type.Port p_lbdExp99 = elem_ft99;
 
-								idIfCond_400 = kermeta.standard.helper.StringWrapper
-										.equals(p_lbdExp116.getRole(), "client");
+								idIfCond_388 = kermeta.standard.helper.StringWrapper
+										.equals(p_lbdExp99.getRole(), "client");
 								//EIle:selector
 
-								if (idIfCond_400) {
+								if (idIfCond_388) {
 
-									result_ft116.add(elem_ft116);
+									result_ft99.add(elem_ft99);
 								}
 
 							}
@@ -210,20 +223,20 @@ public class SCAImpl extends ObjectImpl implements SCA {
 
 					{
 
-						kermeta.standard.Iterator<art.type.Port> it_ft115 = result_ft116
+						kermeta.standard.Iterator<art.type.Port> it_ft98 = result_ft99
 								.iterator();
-						java.lang.Boolean idLoopCond_398 = false;
-						while (!idLoopCond_398) {
-							idLoopCond_398 = it_ft115.isOff();
-							if (idLoopCond_398) {
+						java.lang.Boolean idLoopCond_386 = false;
+						while (!idLoopCond_386) {
+							idLoopCond_386 = it_ft98.isOff();
+							if (idLoopCond_386) {
 							} else {
 
 								//BIle:func
-								art.type.Port p_lbdExp115 = it_ft115.next();
+								art.type.Port p_lbdExp98 = it_ft98.next();
 
 								_res.append("\t\t <sca:reference name=\"");
 
-								_res.append(p_lbdExp115.getName());
+								_res.append(p_lbdExp98.getName());
 
 								_res.append("\"/>\n");
 								//EIle:func
@@ -240,18 +253,17 @@ public class SCAImpl extends ObjectImpl implements SCA {
 
 					{
 
-						kermeta.standard.Iterator<art.instance.ValuedAttribute> it_ft117 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<art.instance.ValuedAttribute> it_ft100 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<art.instance.ValuedAttribute> convertAsOrderedSet(
-										sub_lbdExp112.getAttribute())
-								.iterator();
-						java.lang.Boolean idLoopCond_401 = false;
-						while (!idLoopCond_401) {
-							idLoopCond_401 = it_ft117.isOff();
-							if (idLoopCond_401) {
+										sub_lbdExp95.getAttribute()).iterator();
+						java.lang.Boolean idLoopCond_389 = false;
+						while (!idLoopCond_389) {
+							idLoopCond_389 = it_ft100.isOff();
+							if (idLoopCond_389) {
 							} else {
 
 								//BIle:func
-								art.instance.ValuedAttribute a_lbdExp117 = it_ft117
+								art.instance.ValuedAttribute a_lbdExp100 = it_ft100
 										.next();
 
 								_res.append("\t\t<sca:property name=\"");
@@ -261,7 +273,7 @@ public class SCAImpl extends ObjectImpl implements SCA {
 												.substring(
 														kermeta.standard.helper.StringWrapper
 																.split(
-																		a_lbdExp117
+																		a_lbdExp100
 																				.getValue(),
 																		":")
 																.elementAt(0),
@@ -269,7 +281,7 @@ public class SCAImpl extends ObjectImpl implements SCA {
 														kermeta.standard.helper.StringWrapper
 																.size(kermeta.standard.helper.StringWrapper
 																		.split(
-																				a_lbdExp117
+																				a_lbdExp100
 																						.getValue(),
 																				": ")
 																		.elementAt(
@@ -279,7 +291,7 @@ public class SCAImpl extends ObjectImpl implements SCA {
 
 								_res
 										.append(kermeta.standard.helper.StringWrapper
-												.split(a_lbdExp117.getValue(),
+												.split(a_lbdExp100.getValue(),
 														": ").elementAt(1));
 
 								_res.append("</sca:property>\n");
@@ -306,17 +318,17 @@ public class SCAImpl extends ObjectImpl implements SCA {
 
 		{
 
-			kermeta.standard.Iterator<art.instance.TransmissionBinding> it_ft118 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<art.instance.TransmissionBinding> it_ft101 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<art.instance.TransmissionBinding> convertAsOrderedSet(
 							system.getRoot().getterGetAllBindings()).iterator();
-			java.lang.Boolean idLoopCond_402 = false;
-			while (!idLoopCond_402) {
-				idLoopCond_402 = it_ft118.isOff();
-				if (idLoopCond_402) {
+			java.lang.Boolean idLoopCond_390 = false;
+			while (!idLoopCond_390) {
+				idLoopCond_390 = it_ft101.isOff();
+				if (idLoopCond_390) {
 				} else {
 
 					//BIle:func
-					art.instance.TransmissionBinding b_lbdExp118 = it_ft118
+					art.instance.TransmissionBinding b_lbdExp101 = it_ft101
 							.next();
 
 					_res.append("\t<sca:wire source=\"");
@@ -325,7 +337,7 @@ public class SCAImpl extends ObjectImpl implements SCA {
 							.append(((art.instance.ComponentInstance) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
 											org.kermeta.compil.runtime.helper.language.ObjectUtil
-													.containerSwitcher(b_lbdExp118),
+													.containerSwitcher(b_lbdExp101),
 											org.kermeta.compil.runtime.ExecutionContext
 													.getInstance()
 													.getMetaClass(
@@ -334,15 +346,15 @@ public class SCAImpl extends ObjectImpl implements SCA {
 
 					_res.append("/");
 
-					_res.append(b_lbdExp118.getClient().getName());
+					_res.append(b_lbdExp101.getClient().getName());
 
 					_res.append("\" target=\"");
 
-					_res.append(b_lbdExp118.getServerInstance().getName());
+					_res.append(b_lbdExp101.getServerInstance().getName());
 
 					_res.append("/");
 
-					_res.append(b_lbdExp118.getServer().getName());
+					_res.append(b_lbdExp101.getServer().getName());
 
 					_res.append("\"/>\n");
 					//EIle:func
@@ -359,30 +371,30 @@ public class SCAImpl extends ObjectImpl implements SCA {
 
 		{
 
-			kermeta.standard.Iterator<art.instance.DelegationBinding> it_ft119 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<art.instance.DelegationBinding> it_ft102 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<art.instance.DelegationBinding> convertAsOrderedSet(
 							system.getRoot().getDelegation()).iterator();
-			java.lang.Boolean idLoopCond_403 = false;
-			while (!idLoopCond_403) {
-				idLoopCond_403 = it_ft119.isOff();
-				if (idLoopCond_403) {
+			java.lang.Boolean idLoopCond_391 = false;
+			while (!idLoopCond_391) {
+				idLoopCond_391 = it_ft102.isOff();
+				if (idLoopCond_391) {
 				} else {
 
 					//BIle:func
-					art.instance.DelegationBinding d_lbdExp119 = it_ft119
+					art.instance.DelegationBinding d_lbdExp102 = it_ft102
 							.next();
 
 					_res.append("\t<sca:service name=\"");
 
-					_res.append(d_lbdExp119.getSource().getName());
+					_res.append(d_lbdExp102.getSource().getName());
 
 					_res.append("\" promote=\"");
 
-					_res.append(d_lbdExp119.getServerInstance().getName());
+					_res.append(d_lbdExp102.getServerInstance().getName());
 
 					_res.append("/");
 
-					_res.append(d_lbdExp119.getExported().getName());
+					_res.append(d_lbdExp102.getExported().getName());
 
 					_res.append("\"/>\n");
 					//EIle:func

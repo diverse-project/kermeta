@@ -19,13 +19,14 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link kermeta.language.behavior.JavaStaticCall#getJmethod <em>Jmethod</em>}</li>
- *   <li>{@link kermeta.language.behavior.JavaStaticCall#getJclass <em>Jclass</em>}</li>
  *   <li>{@link kermeta.language.behavior.JavaStaticCall#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link kermeta.language.behavior.JavaStaticCall#getJclass <em>Jclass</em>}</li>
  * </ul>
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getJavaStaticCall()
- * @model annotation="kermeta documentation='This class represent a call to an extern Java operation. \nThis Java operation must be static and have at least one RuntimeO'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='This class represent a call to an extern Java operation. \nThis Java operation must be static and have at least one RuntimeO'"
  * @generated
  */
 public interface JavaStaticCall extends Expression {
@@ -41,6 +42,7 @@ public interface JavaStaticCall extends Expression {
 	 * @see #setJmethod(String)
 	 * @see kermeta.language.behavior.BehaviorPackage#getJavaStaticCall_Jmethod()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Name of the Java method to be launched in the identified Java class'"
 	 * @generated
 	 */
@@ -57,6 +59,24 @@ public interface JavaStaticCall extends Expression {
 	void setJmethod(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link kermeta.language.behavior.Expression}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parameters</em>' containment reference list.
+	 * @see kermeta.language.behavior.BehaviorPackage#getJavaStaticCall_Parameters()
+	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='Parameters of the Java static call provided as KerMeta expressions'"
+	 * @generated
+	 */
+	EList<Expression> getParameters();
+
+	/**
 	 * Returns the value of the '<em><b>Jclass</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -68,6 +88,7 @@ public interface JavaStaticCall extends Expression {
 	 * @see #setJclass(String)
 	 * @see kermeta.language.behavior.BehaviorPackage#getJavaStaticCall_Jclass()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Qualified name of the targeted Java class'"
 	 * @generated
 	 */
@@ -82,22 +103,5 @@ public interface JavaStaticCall extends Expression {
 	 * @generated
 	 */
 	void setJclass(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link kermeta.language.behavior.Expression}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see kermeta.language.behavior.BehaviorPackage#getJavaStaticCall_Parameters()
-	 * @model containment="true" resolveProxies="true"
-	 *        annotation="kermeta documentation='Parameters of the Java static call provided as KerMeta expressions'"
-	 * @generated
-	 */
-	EList<Expression> getParameters();
 
 } // JavaStaticCall

@@ -25,6 +25,7 @@ import kermeta.language.structure.TypeContainer;
  *
  * @see kermeta.language.behavior.BehaviorPackage#getExpression()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='The base class for every entity used to define a behavior in operation body.'"
  * @generated
  */
@@ -40,7 +41,8 @@ public interface Expression extends TypeContainer {
 	 * @return the value of the '<em>Static Type</em>' reference.
 	 * @see #setStaticType(Type)
 	 * @see kermeta.language.behavior.BehaviorPackage#getExpression_StaticType()
-	 * @model annotation="kermeta documentation='Type of the Expression (set by type checking)'"
+	 * @model annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='Type of the Expression (set by type checking)'"
 	 * @generated
 	 */
 	Type getStaticType();

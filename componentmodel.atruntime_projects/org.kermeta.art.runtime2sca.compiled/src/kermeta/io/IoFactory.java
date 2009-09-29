@@ -28,15 +28,6 @@ public interface IoFactory extends EFactory {
 	IoFactory eINSTANCE = kermeta.io.impl.IoFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Std IO</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Std IO</em>'.
-	 * @generated
-	 */
-	StdIO createStdIO();
-
-	/**
 	 * Returns a new object of class '<em>File IO</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -44,6 +35,15 @@ public interface IoFactory extends EFactory {
 	 * @generated
 	 */
 	FileIO createFileIO();
+
+	/**
+	 * Returns a new object of class '<em>Std IO</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Std IO</em>'.
+	 * @generated
+	 */
+	StdIO createStdIO();
 
 	/**
 	 * Returns the package supported by this factory.

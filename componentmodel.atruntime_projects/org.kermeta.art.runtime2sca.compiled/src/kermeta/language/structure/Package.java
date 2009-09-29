@@ -25,7 +25,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getPackage()
- * @model annotation="kermeta documentation='Package in kermeta. Each kermeta model must have a root package. '"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Package in kermeta. Each kermeta model must have a root package. '"
  * @generated
  */
 public interface Package extends NamedElement, TypeDefinitionContainer {
@@ -43,6 +44,7 @@ public interface Package extends NamedElement, TypeDefinitionContainer {
 	 * @see kermeta.language.structure.StructurePackage#getPackage_NestedPackage()
 	 * @see kermeta.language.structure.Package#getNestingPackage
 	 * @model opposite="nestingPackage" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Nested Packages contained by the Package'"
 	 * @generated
 	 */
@@ -62,6 +64,7 @@ public interface Package extends NamedElement, TypeDefinitionContainer {
 	 * @see kermeta.language.structure.StructurePackage#getPackage_NestingPackage()
 	 * @see kermeta.language.structure.Package#getNestedPackage
 	 * @model opposite="nestedPackage"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 *        annotation="kermeta documentation='Owning Package, if any'"
 	 * @generated
@@ -90,6 +93,7 @@ public interface Package extends NamedElement, TypeDefinitionContainer {
 	 * @see #setUri(String)
 	 * @see kermeta.language.structure.StructurePackage#getPackage_Uri()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Uri of the Package'"
 	 * @generated
 	 */

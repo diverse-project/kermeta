@@ -74,6 +74,10 @@ import kermeta.utils.UtilsPackage;
 
 import kermeta.utils.impl.UtilsPackageImpl;
 
+import kermeta.xmltype.XmltypePackage;
+
+import kermeta.xmltype.impl.XmltypePackageImpl;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
@@ -103,13 +107,6 @@ public class LanguagePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass dummyClassEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass reflectiveCollectionEClass = null;
 
 	/**
@@ -118,6 +115,13 @@ public class LanguagePackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	private EClass reflectiveSequenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dummyClassEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -146,20 +150,10 @@ public class LanguagePackageImpl extends EPackageImpl implements
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link LanguagePackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -174,8 +168,8 @@ public class LanguagePackageImpl extends EPackageImpl implements
 
 		// Obtain or create and register package
 		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI)
+				.get(eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
+				.get(eNS_URI)
 				: new LanguagePackageImpl());
 
 		isInited = true;
@@ -185,14 +179,6 @@ public class LanguagePackageImpl extends EPackageImpl implements
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
-		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI)
-				: StandardPackage.eINSTANCE);
-		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI)
-				: UtilsPackage.eINSTANCE);
 		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StructurePackage.eNS_URI)
@@ -201,34 +187,50 @@ public class LanguagePackageImpl extends EPackageImpl implements
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI)
-				: ExceptionsPackage.eINSTANCE);
-		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI)
-				: IoPackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
-		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI)
-				: EcorePackage.eINSTANCE);
+		XmltypePackageImpl theXmltypePackage = (XmltypePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(XmltypePackage.eNS_URI) instanceof XmltypePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(XmltypePackage.eNS_URI)
+				: XmltypePackage.eINSTANCE);
 		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI)
 				: InterpreterPackage.eINSTANCE);
+		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI)
+				: StandardPackage.eINSTANCE);
+		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI)
+				: IoPackage.eINSTANCE);
+		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI)
+				: ExceptionsPackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
+		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI)
+				: UtilsPackage.eINSTANCE);
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI)
+				: EcorePackage.eINSTANCE);
 		Runtime2SCAPackageImpl theRuntime2SCAPackage = (Runtime2SCAPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(Runtime2SCAPackage.eNS_URI) instanceof Runtime2SCAPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(Runtime2SCAPackage.eNS_URI)
 				: Runtime2SCAPackage.eINSTANCE);
+		ScaPackageImpl theScaPackage = (ScaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ScaPackage.eNS_URI) instanceof ScaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ScaPackage.eNS_URI)
+				: ScaPackage.eINSTANCE);
 		ArtPackageImpl theArtPackage = (ArtPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ArtPackage.eNS_URI) instanceof ArtPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ArtPackage.eNS_URI)
@@ -245,64 +247,56 @@ public class LanguagePackageImpl extends EPackageImpl implements
 				.getEPackage(ImplemPackage.eNS_URI) instanceof ImplemPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ImplemPackage.eNS_URI)
 				: ImplemPackage.eINSTANCE);
-		ScaPackageImpl theScaPackage = (ScaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ScaPackage.eNS_URI) instanceof ScaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ScaPackage.eNS_URI)
-				: ScaPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theLanguagePackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
-		theStandardPackage.createPackageContents();
-		theUtilsPackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
-		theExceptionsPackage.createPackageContents();
-		theIoPackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
-		theEcorePackage.createPackageContents();
+		theXmltypePackage.createPackageContents();
 		theInterpreterPackage.createPackageContents();
+		theStandardPackage.createPackageContents();
+		theIoPackage.createPackageContents();
+		theExceptionsPackage.createPackageContents();
+		thePersistencePackage.createPackageContents();
+		theKunitPackage.createPackageContents();
+		theUtilsPackage.createPackageContents();
+		theEcorePackage.createPackageContents();
 		theRuntime2SCAPackage.createPackageContents();
+		theScaPackage.createPackageContents();
 		theArtPackage.createPackageContents();
 		theInstancePackage.createPackageContents();
 		theTypePackage.createPackageContents();
 		theImplemPackage.createPackageContents();
-		theScaPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theLanguagePackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
-		theStandardPackage.initializePackageContents();
-		theUtilsPackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
-		theExceptionsPackage.initializePackageContents();
-		theIoPackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
-		theEcorePackage.initializePackageContents();
+		theXmltypePackage.initializePackageContents();
 		theInterpreterPackage.initializePackageContents();
+		theStandardPackage.initializePackageContents();
+		theIoPackage.initializePackageContents();
+		theExceptionsPackage.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
+		theUtilsPackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
 		theRuntime2SCAPackage.initializePackageContents();
+		theScaPackage.initializePackageContents();
 		theArtPackage.initializePackageContents();
 		theInstancePackage.initializePackageContents();
 		theTypePackage.initializePackageContents();
 		theImplemPackage.initializePackageContents();
-		theScaPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theLanguagePackage.freeze();
 
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(LanguagePackage.eNS_URI,
+				theLanguagePackage);
 		return theLanguagePackage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getDummyClass() {
-		return dummyClassEClass;
 	}
 
 	/**
@@ -321,6 +315,15 @@ public class LanguagePackageImpl extends EPackageImpl implements
 	 */
 	public EClass getReflectiveSequence() {
 		return reflectiveSequenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDummyClass() {
+		return dummyClassEClass;
 	}
 
 	/**
@@ -352,11 +355,11 @@ public class LanguagePackageImpl extends EPackageImpl implements
 		isCreated = true;
 
 		// Create classes and their features
-		dummyClassEClass = createEClass(DUMMY_CLASS);
-
 		reflectiveCollectionEClass = createEClass(REFLECTIVE_COLLECTION);
 
 		reflectiveSequenceEClass = createEClass(REFLECTIVE_SEQUENCE);
+
+		dummyClassEClass = createEClass(DUMMY_CLASS);
 	}
 
 	/**
@@ -404,7 +407,6 @@ public class LanguagePackageImpl extends EPackageImpl implements
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		dummyClassEClass.getESuperTypes().add(theStructurePackage.getObject());
 		EGenericType g1 = createEGenericType(theStandardPackage.getSet());
 		EGenericType g2 = createEGenericType(reflectiveCollectionEClass_G);
 		g1.getETypeArguments().add(g2);
@@ -417,11 +419,9 @@ public class LanguagePackageImpl extends EPackageImpl implements
 		g2 = createEGenericType(reflectiveSequenceEClass_G);
 		g1.getETypeArguments().add(g2);
 		reflectiveSequenceEClass.getEGenericSuperTypes().add(g1);
+		dummyClassEClass.getESuperTypes().add(theStructurePackage.getObject());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(dummyClassEClass, DummyClass.class, "DummyClass",
-				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(reflectiveCollectionEClass, ReflectiveCollection.class,
 				"ReflectiveCollection", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -473,6 +473,9 @@ public class LanguagePackageImpl extends EPackageImpl implements
 		g1 = createEGenericType(reflectiveSequenceEClass_G);
 		addEParameter(op, g1, "element", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		initEClass(dummyClassEClass, DummyClass.class, "DummyClass",
+				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		// Create annotations
 		// kermeta
 		createKermetaAnnotations();
@@ -494,12 +497,7 @@ public class LanguagePackageImpl extends EPackageImpl implements
 				new String[] {
 						"documentation",
 						"/**\n * Contains the implementation of Kermeta reflective collections.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_package.png\"/>\n */" });
-		addAnnotation(
-				dummyClassEClass,
-				source,
-				new String[] {
-						"documentation",
-						"This class is used to workaround an EMF bug, it doesn\'t really belong to Kermeta metamodel" });
+		addAnnotation(this, source, new String[] { "ecore", "true" });
 		addAnnotation(
 				reflectiveCollectionEClass,
 				source,
@@ -585,6 +583,14 @@ public class LanguagePackageImpl extends EPackageImpl implements
 		addAnnotation(reflectiveSequenceEClass.getEOperations().get(5), source,
 				new String[] { "superOperation",
 						"kermeta::language::ReflectiveCollection" });
+		addAnnotation(dummyClassEClass, source,
+				new String[] { "ecore", "true" });
+		addAnnotation(
+				dummyClassEClass,
+				source,
+				new String[] {
+						"documentation",
+						"This class is used to workaround an EMF bug, it doesn\'t really belong to Kermeta metamodel" });
 	}
 
 } //LanguagePackageImpl

@@ -21,7 +21,8 @@ package kermeta.language.structure;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getFilter()
- * @model annotation="kermeta documentation='Filter is the class that represent a filter on a ModelingUnit.\nthe qualifiedName represent the beginning of the matched names'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Filter is the class that represent a filter on a ModelingUnit.\nthe qualifiedName represent the beginning of the matched names'"
  * @generated
  */
 public interface Filter extends kermeta.language.structure.Object {
@@ -37,6 +38,7 @@ public interface Filter extends kermeta.language.structure.Object {
 	 * @see #setQualifiedName(String)
 	 * @see kermeta.language.structure.StructurePackage#getFilter_QualifiedName()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='To be written'"
 	 * @generated
 	 */

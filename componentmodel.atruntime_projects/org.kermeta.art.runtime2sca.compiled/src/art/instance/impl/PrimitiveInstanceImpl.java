@@ -62,38 +62,38 @@ public class PrimitiveInstanceImpl extends ComponentInstanceImpl implements
 
 		//BIft:select
 
-		kermeta.standard.Sequence<art.type.Port> result_ft99 = null;
+		kermeta.standard.Sequence<art.type.Port> result_ft114 = null;
 
-		art.type.Port elem_ft99 = null;
+		art.type.Port elem_ft114 = null;
 
-		result_ft99 = ((kermeta.standard.Sequence<art.type.Port>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft114 = ((kermeta.standard.Sequence<art.type.Port>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject(kermeta.standard.StandardPackage.eINSTANCE
 						.getSequence()));
 
 		{
 
-			kermeta.standard.Iterator<art.type.Port> it_ft99 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<art.type.Port> it_ft114 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<art.type.Port> convertAsOrderedSet(
 							this.getType().getPort()).iterator();
-			java.lang.Boolean idLoopCond_379 = false;
-			while (!idLoopCond_379) {
-				idLoopCond_379 = it_ft99.isOff();
-				if (idLoopCond_379) {
+			java.lang.Boolean idLoopCond_410 = false;
+			while (!idLoopCond_410) {
+				idLoopCond_410 = it_ft114.isOff();
+				if (idLoopCond_410) {
 				} else {
 
-					elem_ft99 = it_ft99.next();
+					elem_ft114 = it_ft114.next();
 
-					java.lang.Boolean idIfCond_380 = false;
+					java.lang.Boolean idIfCond_411 = false;
 					//BIle:selector
-					art.type.Port p_lbdExp99 = elem_ft99;
+					art.type.Port p_lbdExp114 = elem_ft114;
 
-					idIfCond_380 = kermeta.standard.helper.StringWrapper
-							.equals(p_lbdExp99.getRole(), "server");
+					idIfCond_411 = kermeta.standard.helper.StringWrapper
+							.equals(p_lbdExp114.getRole(), "server");
 					//EIle:selector
 
-					if (idIfCond_380) {
+					if (idIfCond_411) {
 
-						result_ft99.add(elem_ft99);
+						result_ft114.add(elem_ft114);
 					}
 
 				}
@@ -103,30 +103,30 @@ public class PrimitiveInstanceImpl extends ComponentInstanceImpl implements
 		//EIft:select
 		//BIft:collect
 
-		kermeta.standard.Sequence<art.type.Service> result_ft98 = null;
+		kermeta.standard.Sequence<art.type.Service> result_ft113 = null;
 
-		result_ft98 = ((kermeta.standard.Sequence<art.type.Service>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft113 = ((kermeta.standard.Sequence<art.type.Service>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject(kermeta.standard.StandardPackage.eINSTANCE
 						.getSequence()));
 
 		{
 
-			kermeta.standard.Iterator<art.type.Port> it_ft98 = result_ft99
+			kermeta.standard.Iterator<art.type.Port> it_ft113 = result_ft114
 					.iterator();
-			java.lang.Boolean idLoopCond_378 = false;
-			while (!idLoopCond_378) {
-				idLoopCond_378 = it_ft98.isOff();
-				if (idLoopCond_378) {
+			java.lang.Boolean idLoopCond_409 = false;
+			while (!idLoopCond_409) {
+				idLoopCond_409 = it_ft113.isOff();
+				if (idLoopCond_409) {
 				} else {
 
-					art.type.Service result_lambda_ft98 = null;
+					art.type.Service result_lambda_ft113 = null;
 					//BIle:collector
-					art.type.Port p_lbdExp98 = it_ft98.next();
+					art.type.Port p_lbdExp113 = it_ft113.next();
 
-					result_lambda_ft98 = p_lbdExp98.getService();
+					result_lambda_ft113 = p_lbdExp113.getService();
 					//EIle:collector
 
-					result_ft98.add(result_lambda_ft98);
+					result_ft113.add(result_lambda_ft113);
 				}
 			}
 		}
@@ -136,20 +136,20 @@ public class PrimitiveInstanceImpl extends ComponentInstanceImpl implements
 
 		{
 
-			kermeta.standard.Iterator<art.type.Service> it_ft97 = result_ft98
+			kermeta.standard.Iterator<art.type.Service> it_ft112 = result_ft113
 					.iterator();
-			java.lang.Boolean idLoopCond_377 = false;
-			while (!idLoopCond_377) {
-				idLoopCond_377 = it_ft97.isOff();
-				if (idLoopCond_377) {
+			java.lang.Boolean idLoopCond_408 = false;
+			while (!idLoopCond_408) {
+				idLoopCond_408 = it_ft112.isOff();
+				if (idLoopCond_408) {
 				} else {
 
 					//BIle:func
-					art.type.Service s_lbdExp97 = it_ft97.next();
+					art.type.Service s_lbdExp112 = it_ft112.next();
 
 					result
 							.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-									.<art.type.Operation> convertAsOrderedSet(s_lbdExp97
+									.<art.type.Operation> convertAsOrderedSet(s_lbdExp112
 											.getOperation()));
 					//EIle:func
 

@@ -21,7 +21,8 @@ package kermeta.language.structure;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getType()
- * @model annotation="kermeta documentation='Alias to kermeta::standard::Integer'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Alias to kermeta::standard::Integer'"
  *        annotation="kermeta documentation='Base class definition for the <b>use</b> of a type.'"
  * @generated
  */
@@ -40,6 +41,7 @@ public interface Type extends kermeta.language.structure.Object {
 	 * @see kermeta.language.structure.StructurePackage#getType_TypeContainer()
 	 * @see kermeta.language.structure.TypeContainer#getContainedType
 	 * @model opposite="containedType" transient="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Owning TypeContainer, if any'"
 	 * @generated
 	 */
@@ -81,6 +83,17 @@ public interface Type extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta documentation='/**\n \t * Implements Type.isSuperTypeOf(Type)\n \t * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)\n \t * it won\'t work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers\n \t * to extend it.\n \t \052/'"
+	 *        annotation="kermeta RecopyInValueTypes='true'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeOrVoid(org.kermeta.compil.runtime.helper.language.TypeUtil.hasSubType(this, object), \"java.lang.Boolean\");\n\nreturn result;\n'"
+	 * @generated
+	 */
+	Boolean isSuperTypeOf(Type object);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="kermeta.standard.JavaBoolean"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
 	 *        annotation="kermeta documentation='/**\n\t * Implements Type.isInstance(Object)\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(element, this);\n\nreturn result;\n'"
@@ -93,18 +106,7 @@ public interface Type extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
-	 *        annotation="kermeta documentation='/**\n \t * Implements Type.isSuperTypeOf(Type)\n \t * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)\n \t * it won\'t work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers\n \t * to extend it.\n \t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeOrVoid(org.kermeta.compil.runtime.helper.language.TypeUtil.hasSubType(this, object), \"java.lang.Boolean\");\n\nreturn result;\n'"
-	 * @generated
-	 */
-	Boolean isSuperTypeOf(Type object);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="kermeta.standard.JavaBoolean"
 	 *        annotation="kermeta documentation='/**\n \t * Implements Type.isSubTypeOf(Type)\n \t * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)\n \t * it won\'t work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers\n \t * to extend it.\n \t \052/'"
-	 *        annotation="kermeta RecopyInValueTypes='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = org.kermeta.compil.runtime.helper.language.TypeUtil.isSuperTypeOfSwitcher(object, this);\n\nreturn result;\n'"
 	 * @generated
 	 */

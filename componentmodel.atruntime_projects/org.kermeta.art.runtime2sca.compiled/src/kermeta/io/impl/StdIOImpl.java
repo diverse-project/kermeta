@@ -51,11 +51,11 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 	 */
 	public void writeln(String object) {
 
-		java.lang.Boolean idIfCond_309 = false;
-		idIfCond_309 = kermeta.standard.helper.StringWrapper.equals(object,
+		java.lang.Boolean idIfCond_295 = false;
+		idIfCond_295 = kermeta.standard.helper.StringWrapper.equals(object,
 				null);
 
-		if (idIfCond_309) {
+		if (idIfCond_295) {
 
 			object = "<void>";
 		}
@@ -71,11 +71,11 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 	 */
 	public void errorln(String object) {
 
-		java.lang.Boolean idIfCond_310 = false;
-		idIfCond_310 = kermeta.standard.helper.StringWrapper.equals(object,
+		java.lang.Boolean idIfCond_296 = false;
+		idIfCond_296 = kermeta.standard.helper.StringWrapper.equals(object,
 				null);
 
-		if (idIfCond_310) {
+		if (idIfCond_296) {
 
 			object = "<void>";
 		}
@@ -91,11 +91,11 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 	 */
 	public void error(String object) {
 
-		java.lang.Boolean idIfCond_311 = false;
-		idIfCond_311 = kermeta.standard.helper.StringWrapper.equals(object,
+		java.lang.Boolean idIfCond_297 = false;
+		idIfCond_297 = kermeta.standard.helper.StringWrapper.equals(object,
 				null);
 
-		if (idIfCond_311) {
+		if (idIfCond_297) {
 
 			object = "<void>";
 		}
@@ -111,11 +111,11 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 	 */
 	public void write(String object) {
 
-		java.lang.Boolean idIfCond_312 = false;
-		idIfCond_312 = kermeta.standard.helper.StringWrapper.equals(object,
+		java.lang.Boolean idIfCond_298 = false;
+		idIfCond_298 = kermeta.standard.helper.StringWrapper.equals(object,
 				null);
 
-		if (idIfCond_312) {
+		if (idIfCond_298) {
 
 			object = "<void>";
 		}
@@ -133,11 +133,11 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_313 = false;
-		idIfCond_313 = kermeta.standard.helper.StringWrapper.equals(prompt,
+		java.lang.Boolean idIfCond_299 = false;
+		idIfCond_299 = kermeta.standard.helper.StringWrapper.equals(prompt,
 				null);
 
-		if (idIfCond_313) {
+		if (idIfCond_299) {
 
 			prompt = "";
 		}

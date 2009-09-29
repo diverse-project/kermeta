@@ -23,7 +23,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getModelType()
- * @model annotation="kermeta documentation='Type of a model, consisting of a set of included type definitions'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Type of a model, consisting of a set of included type definitions'"
  * @generated
  */
 public interface ModelType extends Type, TypeDefinition {
@@ -38,7 +39,8 @@ public interface ModelType extends Type, TypeDefinition {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Included Type Definition</em>' reference list.
 	 * @see kermeta.language.structure.StructurePackage#getModelType_IncludedTypeDefinition()
-	 * @model annotation="kermeta documentation='To be written'"
+	 * @model annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='To be written'"
 	 * @generated
 	 */
 	EList<TypeDefinition> getIncludedTypeDefinition();

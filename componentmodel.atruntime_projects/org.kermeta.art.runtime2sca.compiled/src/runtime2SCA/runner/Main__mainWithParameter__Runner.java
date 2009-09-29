@@ -23,11 +23,11 @@ public class Main__mainWithParameter__Runner {
 		// but you could customize it with your own paths according to your usage
 		/*org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl.URI_MAP.put(
 		    org.eclipse.emf.common.util.URI.createURI("platform:/resource/"),
-		    org.eclipse.emf.common.util.URI.createURI("file://E:/diva_dev/eclipse/workspace/")
+		    org.eclipse.emf.common.util.URI.createURI("file://E:/diva_dev/DiVAStudio_dev/eclipse/workspace/")
 		  );*/
 		/*org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl.URI_MAP.put(
 		    org.eclipse.emf.common.util.URI.createURI("platform:/plugin/"),
-		    org.eclipse.emf.common.util.URI.createURI("file://E:/diva_dev/eclipse/workspace/")
+		    org.eclipse.emf.common.util.URI.createURI("file://E:/diva_dev/DiVAStudio_dev/eclipse/workspace/")
 		  );*/
 
 		//Initialize the reflection

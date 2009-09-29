@@ -23,7 +23,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getProductType()
- * @model annotation="kermeta documentation='Type corresponding to a set of Types\nOnly used in the context of FunctionType'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Type corresponding to a set of Types\nOnly used in the context of FunctionType'"
  * @generated
  */
 public interface ProductType extends TypeContainer, Type {
@@ -38,7 +39,8 @@ public interface ProductType extends TypeContainer, Type {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference list.
 	 * @see kermeta.language.structure.StructurePackage#getProductType_Type()
-	 * @model annotation="kermeta documentation='Types '"
+	 * @model annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='Types '"
 	 * @generated
 	 */
 	EList<Type> getType();

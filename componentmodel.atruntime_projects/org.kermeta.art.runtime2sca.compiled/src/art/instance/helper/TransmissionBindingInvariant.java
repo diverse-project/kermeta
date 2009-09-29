@@ -10,7 +10,7 @@ public class TransmissionBindingInvariant {
 	 *
 	 * @generated
 	 */
-	public static java.lang.Boolean checkInvariant_17429499__wellFormedTransmissionBinding(
+	public static java.lang.Boolean checkInvariant_4823066__wellFormedTransmissionBinding(
 
 	art.instance.TransmissionBinding self
 
@@ -19,40 +19,40 @@ public class TransmissionBindingInvariant {
 
 		//BIft:andThen
 
-		java.lang.Boolean result_ft108 = null;
+		java.lang.Boolean result_ft123 = null;
 
-		java.lang.Boolean idIfCond_390 = false;
-		idIfCond_390 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_421 = false;
+		idIfCond_421 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(self.getClient(), null);
 
-		if (idIfCond_390) {
+		if (idIfCond_421) {
 
 			//BIle:right
-			/*This variable should be never used*/kermeta.language.structure.Object b_lbdExp108 = null;
+			/*This variable should be never used*/kermeta.language.structure.Object b_lbdExp123 = null;
 
-			result_ft108 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			result_ft123 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isNotEqualSwitcher(self.getServer(), null);
 			//EIle:right
 
 		} else {
 
-			result_ft108 = false;
+			result_ft123 = false;
 		}
 
 		//EIft:andThen
 		//BIft:andThen
 
-		java.lang.Boolean result_ft107 = null;
+		java.lang.Boolean result_ft122 = null;
 
-		java.lang.Boolean idIfCond_389 = false;
-		idIfCond_389 = result_ft108;
+		java.lang.Boolean idIfCond_420 = false;
+		idIfCond_420 = result_ft123;
 
-		if (idIfCond_389) {
+		if (idIfCond_420) {
 
 			//BIle:right
-			/*This variable should be never used*/kermeta.language.structure.Object b_lbdExp107 = null;
+			/*This variable should be never used*/kermeta.language.structure.Object b_lbdExp122 = null;
 
-			result_ft107 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			result_ft122 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isNotEqualSwitcher(
 							self.getClient().getRole(),
 							org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -61,34 +61,34 @@ public class TransmissionBindingInvariant {
 
 		} else {
 
-			result_ft107 = false;
+			result_ft122 = false;
 		}
 
 		//EIft:andThen
 		//BIft:andThen
 
-		java.lang.Boolean result_ft106 = null;
+		java.lang.Boolean result_ft121 = null;
 
-		java.lang.Boolean idIfCond_388 = false;
-		idIfCond_388 = result_ft107;
+		java.lang.Boolean idIfCond_419 = false;
+		idIfCond_419 = result_ft122;
 
-		if (idIfCond_388) {
+		if (idIfCond_419) {
 
 			//BIle:right
-			/*This variable should be never used*/kermeta.language.structure.Object b_lbdExp106 = null;
+			/*This variable should be never used*/kermeta.language.structure.Object b_lbdExp121 = null;
 
-			result_ft106 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			result_ft121 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.equalsSwitcher(self.getClient().getService(), self
 							.getServer().getService());
 			//EIle:right
 
 		} else {
 
-			result_ft106 = false;
+			result_ft121 = false;
 		}
 
 		//EIft:andThen
-		result = result_ft106;
+		result = result_ft121;
 
 		return result;
 	}

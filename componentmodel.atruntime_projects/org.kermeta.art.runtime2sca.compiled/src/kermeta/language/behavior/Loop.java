@@ -23,7 +23,8 @@ package kermeta.language.behavior;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getLoop()
- * @model annotation="kermeta documentation='Loop refers to <code>from var x : X init a until booleanCondition loop ... end</code>'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Loop refers to <code>from var x : X init a until booleanCondition loop ... end</code>'"
  * @generated
  */
 public interface Loop extends Expression {
@@ -39,6 +40,7 @@ public interface Loop extends Expression {
 	 * @see #setInitialization(Expression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getLoop_Initialization()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Initialization expression for the loop'"
 	 * @generated
 	 */
@@ -66,6 +68,7 @@ public interface Loop extends Expression {
 	 * @see #setBody(Expression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getLoop_Body()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Body of the loop'"
 	 * @generated
 	 */
@@ -93,6 +96,7 @@ public interface Loop extends Expression {
 	 * @see #setStopCondition(Expression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getLoop_StopCondition()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Stop condition of the loop, is interpreted as a Bollean value'"
 	 * @generated
 	 */

@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see kermeta.language.structure.StructurePackage#getGenericTypeDefinition()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Abstracts the definition of generic type definitions (i.e. type definitions that\ncan be parameterized), namely, for ClassDefinition and ModelTypeDefinition.'"
  * @generated
  */
@@ -40,6 +41,7 @@ public interface GenericTypeDefinition extends TypeDefinition {
 	 * @return the value of the '<em>Type Parameter</em>' containment reference list.
 	 * @see kermeta.language.structure.StructurePackage#getGenericTypeDefinition_TypeParameter()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Type variables defined for the GenericTypeDefinition'"
 	 * @generated
 	 */

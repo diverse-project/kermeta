@@ -15,7 +15,8 @@ package kermeta.language.structure;
  *
  *
  * @see kermeta.language.structure.StructurePackage#getObjectTypeVariable()
- * @model annotation="kermeta documentation='To be written'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='To be written'"
  * @generated
  */
 public interface ObjectTypeVariable extends TypeVariable {

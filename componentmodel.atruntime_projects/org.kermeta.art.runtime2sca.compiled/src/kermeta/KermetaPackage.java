@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EPackage;
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta'"
  *        annotation="kermeta documentation='/**\n * The root package. See the other packages if you want to browse the classes of Kermeta api.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png\"/>\n \052/'"
+ *        annotation="kermeta ecore='true'"
  * @generated
  */
 public interface KermetaPackage extends EPackage {

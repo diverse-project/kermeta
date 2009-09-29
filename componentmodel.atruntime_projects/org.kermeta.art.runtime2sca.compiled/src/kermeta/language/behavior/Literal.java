@@ -16,6 +16,7 @@ package kermeta.language.behavior;
  *
  * @see kermeta.language.behavior.BehaviorPackage#getLiteral()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Literal refers to String values, Integer values, etc.'"
  * @generated
  */

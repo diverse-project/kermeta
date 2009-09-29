@@ -84,7 +84,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * @generated
 	 */
 	public TypeContainer getTypeContainer() {
-		if (eContainerFeatureID != StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER)
+		if (eContainerFeatureID() != StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER)
 			return null;
 		return (TypeContainer) eContainer();
 	}
@@ -95,7 +95,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * @generated
 	 */
 	public TypeContainer basicGetTypeContainer() {
-		if (eContainerFeatureID != StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER)
+		if (eContainerFeatureID() != StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER)
 			return null;
 		return (TypeContainer) eInternalContainer();
 	}
@@ -119,7 +119,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 */
 	public void setTypeContainer(TypeContainer newTypeContainer) {
 		if (newTypeContainer != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER && newTypeContainer != null)) {
+				|| (eContainerFeatureID() != StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER && newTypeContainer != null)) {
 			if (EcoreUtil.isAncestor(this, newTypeContainer))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -251,12 +251,14 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isInstance(kermeta.language.structure.Object element) {
+	public Boolean isSuperTypeOf(Type object) {
 
 		java.lang.Boolean result = null;
 
-		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOfSwitcher(element, this);
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.TypeUtil
+								.hasSubType(this, object), "java.lang.Boolean");
 
 		return result;
 
@@ -267,14 +269,12 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isSuperTypeOf(Type object) {
+	public Boolean isInstance(kermeta.language.structure.Object element) {
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asTypeOrVoid(
-						org.kermeta.compil.runtime.helper.language.TypeUtil
-								.hasSubType(this, object), "java.lang.Boolean");
+		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(element, this);
 
 		return result;
 
@@ -336,7 +336,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER:
 			return eInternalContainer().eInverseRemove(this,
 					StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE,

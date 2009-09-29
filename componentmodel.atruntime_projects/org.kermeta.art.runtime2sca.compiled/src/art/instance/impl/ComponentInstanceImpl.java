@@ -45,8 +45,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link art.instance.impl.ComponentInstanceImpl#getBinding <em>Binding</em>}</li>
- *   <li>{@link art.instance.impl.ComponentInstanceImpl#getType <em>Type</em>}</li>
  *   <li>{@link art.instance.impl.ComponentInstanceImpl#getSuperComponent <em>Super Component</em>}</li>
+ *   <li>{@link art.instance.impl.ComponentInstanceImpl#getType <em>Type</em>}</li>
  *   <li>{@link art.instance.impl.ComponentInstanceImpl#getState <em>State</em>}</li>
  *   <li>{@link art.instance.impl.ComponentInstanceImpl#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link art.instance.impl.ComponentInstanceImpl#getImplem <em>Implem</em>}</li>
@@ -155,6 +155,67 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CompositeInstance getSuperComponent() {
+		if (eContainerFeatureID() != InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT)
+			return null;
+		return (CompositeInstance) eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CompositeInstance basicGetSuperComponent() {
+		if (eContainerFeatureID() != InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT)
+			return null;
+		return (CompositeInstance) eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSuperComponent(
+			CompositeInstance newSuperComponent, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newSuperComponent,
+				InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSuperComponent(CompositeInstance newSuperComponent) {
+		if (newSuperComponent != eInternalContainer()
+				|| (eContainerFeatureID() != InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT && newSuperComponent != null)) {
+			if (EcoreUtil.isAncestor(this, newSuperComponent))
+				throw new IllegalArgumentException(
+						"Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newSuperComponent != null)
+				msgs = ((InternalEObject) newSuperComponent).eInverseAdd(this,
+						InstancePackage.COMPOSITE_INSTANCE__SUB_COMPONENT,
+						CompositeInstance.class, msgs);
+			msgs = basicSetSuperComponent(newSuperComponent, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT,
+					newSuperComponent, newSuperComponent));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ComponentType getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject) type;
@@ -189,67 +250,6 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					InstancePackage.COMPONENT_INSTANCE__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CompositeInstance getSuperComponent() {
-		if (eContainerFeatureID != InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT)
-			return null;
-		return (CompositeInstance) eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CompositeInstance basicGetSuperComponent() {
-		if (eContainerFeatureID != InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT)
-			return null;
-		return (CompositeInstance) eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetSuperComponent(
-			CompositeInstance newSuperComponent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newSuperComponent,
-				InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSuperComponent(CompositeInstance newSuperComponent) {
-		if (newSuperComponent != eInternalContainer()
-				|| (eContainerFeatureID != InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT && newSuperComponent != null)) {
-			if (EcoreUtil.isAncestor(this, newSuperComponent))
-				throw new IllegalArgumentException(
-						"Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newSuperComponent != null)
-				msgs = ((InternalEObject) newSuperComponent).eInverseAdd(this,
-						InstancePackage.COMPOSITE_INSTANCE__SUB_COMPONENT,
-						CompositeInstance.class, msgs);
-			msgs = basicSetSuperComponent(newSuperComponent, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT,
-					newSuperComponent, newSuperComponent));
 	}
 
 	/**
@@ -395,24 +395,6 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Operation> getterOperation() {
-
-		kermeta.standard.OrderedSet<art.type.Operation> result = null;
-
-		result = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-				.<art.type.Operation> convertAsOrderedSet(this
-						.getOperationEMF_renameAs());
-
-		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-				.convertAsEList(result);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<TransmissionBinding> getterGetAllBindings() {
 
 		kermeta.standard.OrderedSet<art.instance.TransmissionBinding> result = null;
@@ -425,20 +407,20 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 				.<art.instance.TransmissionBinding> convertAsOrderedSet(this
 						.getBinding()));
 
-		java.lang.Boolean idIfCond_361 = false;
-		idIfCond_361 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_392 = false;
+		idIfCond_392 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(this,
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance().getMetaClass(
 										"art.instance.CompositeInstance"));
 
-		if (idIfCond_361) {
+		if (idIfCond_392) {
 
 			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<art.instance.ComponentInstance> it_ft88 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<art.instance.ComponentInstance> it_ft103 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<art.instance.ComponentInstance> convertAsOrderedSet(
 								((art.instance.CompositeInstance) org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.asTypeSwitcher(
@@ -448,19 +430,19 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 														.getMetaClass(
 																"art.instance.CompositeInstance")))
 										.getSubComponent()).iterator();
-				java.lang.Boolean idLoopCond_362 = false;
-				while (!idLoopCond_362) {
-					idLoopCond_362 = it_ft88.isOff();
-					if (idLoopCond_362) {
+				java.lang.Boolean idLoopCond_393 = false;
+				while (!idLoopCond_393) {
+					idLoopCond_393 = it_ft103.isOff();
+					if (idLoopCond_393) {
 					} else {
 
 						//BIle:func
-						art.instance.ComponentInstance sub_lbdExp88 = it_ft88
+						art.instance.ComponentInstance sub_lbdExp103 = it_ft103
 								.next();
 
 						res
 								.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-										.<art.instance.TransmissionBinding> convertAsOrderedSet(sub_lbdExp88
+										.<art.instance.TransmissionBinding> convertAsOrderedSet(sub_lbdExp103
 												.getterGetAllBindings()));
 						//EIle:func
 
@@ -473,6 +455,24 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 		}
 
 		result = res;
+
+		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				.convertAsEList(result);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Operation> getterOperation() {
+
+		kermeta.standard.OrderedSet<art.type.Operation> result = null;
+
+		result = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				.<art.type.Operation> convertAsOrderedSet(this
+						.getOperationEMF_renameAs());
 
 		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.convertAsEList(result);
@@ -509,20 +509,20 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 
 		art.instance.CompositeInstance composite = this.getSuperComponent();
 
-		java.lang.Boolean idIfCond_363 = false;
-		idIfCond_363 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_394 = false;
+		idIfCond_394 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(composite, null);
 
-		if (idIfCond_363) {
+		if (idIfCond_394) {
 
-			java.lang.Boolean idIfCond_364 = false;
-			idIfCond_364 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_395 = false;
+			idIfCond_395 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(this,
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"art.instance.CompositeInstance"));
 
-			if (idIfCond_364) {
+			if (idIfCond_395) {
 
 				res
 						.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
@@ -538,79 +538,80 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 
 			//BIft:select
 
-			kermeta.standard.Sequence<art.instance.ComponentInstance> result_ft89 = null;
+			kermeta.standard.Sequence<art.instance.ComponentInstance> result_ft104 = null;
 
-			art.instance.ComponentInstance elem_ft89 = null;
+			art.instance.ComponentInstance elem_ft104 = null;
 
-			result_ft89 = ((kermeta.standard.Sequence<art.instance.ComponentInstance>) org.kermeta.compil.runtime.helper.language.ClassUtil
+			result_ft104 = ((kermeta.standard.Sequence<art.instance.ComponentInstance>) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(kermeta.standard.StandardPackage.eINSTANCE
 							.getSequence()));
 
 			{
 
-				kermeta.standard.Iterator<art.instance.ComponentInstance> it_ft89 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<art.instance.ComponentInstance> it_ft104 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<art.instance.ComponentInstance> convertAsOrderedSet(
 								composite.getSubComponent()).iterator();
-				java.lang.Boolean idLoopCond_365 = false;
-				while (!idLoopCond_365) {
-					idLoopCond_365 = it_ft89.isOff();
-					if (idLoopCond_365) {
+				java.lang.Boolean idLoopCond_396 = false;
+				while (!idLoopCond_396) {
+					idLoopCond_396 = it_ft104.isOff();
+					if (idLoopCond_396) {
 					} else {
 
-						elem_ft89 = it_ft89.next();
+						elem_ft104 = it_ft104.next();
 
-						java.lang.Boolean idIfCond_366 = false;
+						java.lang.Boolean idIfCond_397 = false;
 						//BIle:selector
-						art.instance.ComponentInstance c_lbdExp89 = elem_ft89;
+						art.instance.ComponentInstance c_lbdExp104 = elem_ft104;
 
 						//BIft:exists
 
-						java.lang.Boolean result_ft90 = null;
+						java.lang.Boolean result_ft105 = null;
 
-						java.lang.Boolean test_ft90 = false;
+						java.lang.Boolean test_ft105 = false;
 
 						{
 
-							kermeta.standard.Iterator<art.instance.TransmissionBinding> it_ft90 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<art.instance.TransmissionBinding> it_ft105 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<art.instance.TransmissionBinding> convertAsOrderedSet(
-											c_lbdExp89.getBinding()).iterator();
-							java.lang.Boolean idLoopCond_367 = false;
-							while (!idLoopCond_367) {
-								idLoopCond_367 = kermeta.standard.helper.BooleanWrapper
+											c_lbdExp104.getBinding())
+									.iterator();
+							java.lang.Boolean idLoopCond_398 = false;
+							while (!idLoopCond_398) {
+								idLoopCond_398 = kermeta.standard.helper.BooleanWrapper
 										.or(
-												it_ft90.isOff(),
+												it_ft105.isOff(),
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isNotEqualSwitcher(
-																test_ft90,
+																test_ft105,
 																false));
-								if (idLoopCond_367) {
+								if (idLoopCond_398) {
 								} else {
 
-									java.lang.Boolean result_lambda_ft90 = null;
+									java.lang.Boolean result_lambda_ft105 = null;
 									//BIle:func
-									art.instance.TransmissionBinding b_lbdExp90 = it_ft90
+									art.instance.TransmissionBinding b_lbdExp105 = it_ft105
 											.next();
 
-									result_lambda_ft90 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.equalsSwitcher(b_lbdExp90
+									result_lambda_ft105 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.equalsSwitcher(b_lbdExp105
 													.getServerInstance(), this);
 									//EIle:func
 
-									test_ft90 = kermeta.standard.helper.BooleanWrapper
-											.or(test_ft90, result_lambda_ft90);
+									test_ft105 = kermeta.standard.helper.BooleanWrapper
+											.or(test_ft105, result_lambda_ft105);
 								}
 							}
 						}
 
-						result_ft90 = test_ft90;
+						result_ft105 = test_ft105;
 						//EIft:exists
-						idIfCond_366 = result_ft90;
+						idIfCond_397 = result_ft105;
 
 						//EIle:selector
 
-						if (idIfCond_366) {
+						if (idIfCond_397) {
 
-							result_ft89.add(elem_ft89);
+							result_ft104.add(elem_ft104);
 						}
 
 					}
@@ -618,47 +619,47 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 			}
 
 			//EIft:select
-			res.addAll(result_ft89);
+			res.addAll(result_ft104);
 
 			//BIft:select
 
-			kermeta.standard.Sequence<art.instance.ComponentInstance> result_ft93 = null;
+			kermeta.standard.Sequence<art.instance.ComponentInstance> result_ft108 = null;
 
-			art.instance.ComponentInstance elem_ft93 = null;
+			art.instance.ComponentInstance elem_ft108 = null;
 
-			result_ft93 = ((kermeta.standard.Sequence<art.instance.ComponentInstance>) org.kermeta.compil.runtime.helper.language.ClassUtil
+			result_ft108 = ((kermeta.standard.Sequence<art.instance.ComponentInstance>) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(kermeta.standard.StandardPackage.eINSTANCE
 							.getSequence()));
 
 			{
 
-				kermeta.standard.Iterator<art.instance.ComponentInstance> it_ft93 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<art.instance.ComponentInstance> it_ft108 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<art.instance.ComponentInstance> convertAsOrderedSet(
 								composite.getSubComponent()).iterator();
-				java.lang.Boolean idLoopCond_371 = false;
-				while (!idLoopCond_371) {
-					idLoopCond_371 = it_ft93.isOff();
-					if (idLoopCond_371) {
+				java.lang.Boolean idLoopCond_402 = false;
+				while (!idLoopCond_402) {
+					idLoopCond_402 = it_ft108.isOff();
+					if (idLoopCond_402) {
 					} else {
 
-						elem_ft93 = it_ft93.next();
+						elem_ft108 = it_ft108.next();
 
-						java.lang.Boolean idIfCond_372 = false;
+						java.lang.Boolean idIfCond_403 = false;
 						//BIle:selector
-						art.instance.ComponentInstance c_lbdExp93 = elem_ft93;
+						art.instance.ComponentInstance c_lbdExp108 = elem_ft108;
 
-						idIfCond_372 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						idIfCond_403 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOfSwitcher(
-										c_lbdExp93,
+										c_lbdExp108,
 										org.kermeta.compil.runtime.ExecutionContext
 												.getInstance()
 												.getMetaClass(
 														"art.instance.CompositeInstance"));
 						//EIle:selector
 
-						if (idIfCond_372) {
+						if (idIfCond_403) {
 
-							result_ft93.add(elem_ft93);
+							result_ft108.add(elem_ft108);
 						}
 
 					}
@@ -668,86 +669,86 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 			//EIft:select
 			//BIft:select
 
-			kermeta.standard.Sequence<art.instance.ComponentInstance> result_ft91 = null;
+			kermeta.standard.Sequence<art.instance.ComponentInstance> result_ft106 = null;
 
-			art.instance.ComponentInstance elem_ft91 = null;
+			art.instance.ComponentInstance elem_ft106 = null;
 
-			result_ft91 = ((kermeta.standard.Sequence<art.instance.ComponentInstance>) org.kermeta.compil.runtime.helper.language.ClassUtil
+			result_ft106 = ((kermeta.standard.Sequence<art.instance.ComponentInstance>) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(kermeta.standard.StandardPackage.eINSTANCE
 							.getSequence()));
 
 			{
 
-				kermeta.standard.Iterator<art.instance.ComponentInstance> it_ft91 = result_ft93
+				kermeta.standard.Iterator<art.instance.ComponentInstance> it_ft106 = result_ft108
 						.iterator();
-				java.lang.Boolean idLoopCond_368 = false;
-				while (!idLoopCond_368) {
-					idLoopCond_368 = it_ft91.isOff();
-					if (idLoopCond_368) {
+				java.lang.Boolean idLoopCond_399 = false;
+				while (!idLoopCond_399) {
+					idLoopCond_399 = it_ft106.isOff();
+					if (idLoopCond_399) {
 					} else {
 
-						elem_ft91 = it_ft91.next();
+						elem_ft106 = it_ft106.next();
 
-						java.lang.Boolean idIfCond_369 = false;
+						java.lang.Boolean idIfCond_400 = false;
 						//BIle:selector
-						art.instance.ComponentInstance c_lbdExp91 = elem_ft91;
+						art.instance.ComponentInstance c_lbdExp106 = elem_ft106;
 
 						//BIft:exists
 
-						java.lang.Boolean result_ft92 = null;
+						java.lang.Boolean result_ft107 = null;
 
-						java.lang.Boolean test_ft92 = false;
+						java.lang.Boolean test_ft107 = false;
 
 						{
 
-							kermeta.standard.Iterator<art.instance.DelegationBinding> it_ft92 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<art.instance.DelegationBinding> it_ft107 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<art.instance.DelegationBinding> convertAsOrderedSet(
 											((art.instance.CompositeInstance) org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.asTypeSwitcher(
-															c_lbdExp91,
+															c_lbdExp106,
 															org.kermeta.compil.runtime.ExecutionContext
 																	.getInstance()
 																	.getMetaClass(
 																			"art.instance.CompositeInstance")))
 													.getDelegation())
 									.iterator();
-							java.lang.Boolean idLoopCond_370 = false;
-							while (!idLoopCond_370) {
-								idLoopCond_370 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idLoopCond_401 = false;
+							while (!idLoopCond_401) {
+								idLoopCond_401 = kermeta.standard.helper.BooleanWrapper
 										.or(
-												it_ft92.isOff(),
+												it_ft107.isOff(),
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isNotEqualSwitcher(
-																test_ft92,
+																test_ft107,
 																false));
-								if (idLoopCond_370) {
+								if (idLoopCond_401) {
 								} else {
 
-									java.lang.Boolean result_lambda_ft92 = null;
+									java.lang.Boolean result_lambda_ft107 = null;
 									//BIle:func
-									art.instance.DelegationBinding d_lbdExp92 = it_ft92
+									art.instance.DelegationBinding d_lbdExp107 = it_ft107
 											.next();
 
-									result_lambda_ft92 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.equalsSwitcher(d_lbdExp92
+									result_lambda_ft107 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.equalsSwitcher(d_lbdExp107
 													.getServerInstance(), this);
 									//EIle:func
 
-									test_ft92 = kermeta.standard.helper.BooleanWrapper
-											.or(test_ft92, result_lambda_ft92);
+									test_ft107 = kermeta.standard.helper.BooleanWrapper
+											.or(test_ft107, result_lambda_ft107);
 								}
 							}
 						}
 
-						result_ft92 = test_ft92;
+						result_ft107 = test_ft107;
 						//EIft:exists
-						idIfCond_369 = result_ft92;
+						idIfCond_400 = result_ft107;
 
 						//EIle:selector
 
-						if (idIfCond_369) {
+						if (idIfCond_400) {
 
-							result_ft91.add(elem_ft91);
+							result_ft106.add(elem_ft106);
 						}
 
 					}
@@ -811,7 +812,7 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
 			return eInternalContainer().eInverseRemove(this,
 					InstancePackage.COMPOSITE_INSTANCE__SUB_COMPONENT,
@@ -830,14 +831,14 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 		switch (featureID) {
 		case InstancePackage.COMPONENT_INSTANCE__BINDING:
 			return getBinding();
-		case InstancePackage.COMPONENT_INSTANCE__TYPE:
-			if (resolve)
-				return getType();
-			return basicGetType();
 		case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
 			if (resolve)
 				return getSuperComponent();
 			return basicGetSuperComponent();
+		case InstancePackage.COMPONENT_INSTANCE__TYPE:
+			if (resolve)
+				return getType();
+			return basicGetType();
 		case InstancePackage.COMPONENT_INSTANCE__STATE:
 			return getState();
 		case InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE:
@@ -864,11 +865,11 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 			getBinding().addAll(
 					(Collection<? extends TransmissionBinding>) newValue);
 			return;
-		case InstancePackage.COMPONENT_INSTANCE__TYPE:
-			setType((ComponentType) newValue);
-			return;
 		case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
 			setSuperComponent((CompositeInstance) newValue);
+			return;
+		case InstancePackage.COMPONENT_INSTANCE__TYPE:
+			setType((ComponentType) newValue);
 			return;
 		case InstancePackage.COMPONENT_INSTANCE__STATE:
 			setState((String) newValue);
@@ -896,11 +897,11 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 		case InstancePackage.COMPONENT_INSTANCE__BINDING:
 			getBinding().clear();
 			return;
-		case InstancePackage.COMPONENT_INSTANCE__TYPE:
-			setType((ComponentType) null);
-			return;
 		case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
 			setSuperComponent((CompositeInstance) null);
+			return;
+		case InstancePackage.COMPONENT_INSTANCE__TYPE:
+			setType((ComponentType) null);
 			return;
 		case InstancePackage.COMPONENT_INSTANCE__STATE:
 			setState(STATE_EDEFAULT);
@@ -925,10 +926,10 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements
 		switch (featureID) {
 		case InstancePackage.COMPONENT_INSTANCE__BINDING:
 			return binding != null && !binding.isEmpty();
-		case InstancePackage.COMPONENT_INSTANCE__TYPE:
-			return type != null;
 		case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
 			return basicGetSuperComponent() != null;
+		case InstancePackage.COMPONENT_INSTANCE__TYPE:
+			return type != null;
 		case InstancePackage.COMPONENT_INSTANCE__STATE:
 			return STATE_EDEFAULT == null ? state != null : !STATE_EDEFAULT
 					.equals(state);

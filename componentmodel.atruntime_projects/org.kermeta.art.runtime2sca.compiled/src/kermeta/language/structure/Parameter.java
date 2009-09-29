@@ -21,7 +21,8 @@ package kermeta.language.structure;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getParameter()
- * @model annotation="kermeta documentation='Definition for operation parameter'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Definition for operation parameter'"
  * @generated
  */
 public interface Parameter extends MultiplicityElement {
@@ -39,6 +40,7 @@ public interface Parameter extends MultiplicityElement {
 	 * @see kermeta.language.structure.StructurePackage#getParameter_Operation()
 	 * @see kermeta.language.structure.Operation#getOwnedParameter
 	 * @model opposite="ownedParameter"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 *        annotation="kermeta documentation='Owning operation'"
 	 * @generated

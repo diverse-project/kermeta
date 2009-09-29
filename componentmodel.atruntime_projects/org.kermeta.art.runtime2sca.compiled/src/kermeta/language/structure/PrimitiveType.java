@@ -21,7 +21,8 @@ package kermeta.language.structure;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getPrimitiveType()
- * @model annotation="kermeta documentation='The class definition for kermeta aliases. Above statement defines a primitive\r\ntype called MyString, which instanceType is <code>kermeta::standard::String</code>\r\n<pre>alias MyString : kermeta::standard::String</pre>. Another example could be: <code>root::apackage::AClass</code>\r\n<pre>alias MyClass : root::apackage::AClass</pre>, thus a primitive type may be not a subtype of ValueType (ValueType is a concept from the Kermeta framework).'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='The class definition for kermeta aliases. Above statement defines a primitive\r\ntype called MyString, which instanceType is <code>kermeta::standard::String</code>\r\n<pre>alias MyString : kermeta::standard::String</pre>. Another example could be: <code>root::apackage::AClass</code>\r\n<pre>alias MyClass : root::apackage::AClass</pre>, thus a primitive type may be not a subtype of ValueType (ValueType is a concept from the Kermeta framework).'"
  * @generated
  */
 public interface PrimitiveType extends DataType, TypeContainer {
@@ -36,7 +37,8 @@ public interface PrimitiveType extends DataType, TypeContainer {
 	 * @return the value of the '<em>Instance Type</em>' reference.
 	 * @see #setInstanceType(Type)
 	 * @see kermeta.language.structure.StructurePackage#getPrimitiveType_InstanceType()
-	 * @model annotation="kermeta documentation='The type the primitive type is linked with'"
+	 * @model annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='The type the primitive type is linked with'"
 	 * @generated
 	 */
 	Type getInstanceType();

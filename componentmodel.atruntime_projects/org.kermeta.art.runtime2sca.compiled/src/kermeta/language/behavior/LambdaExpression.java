@@ -24,7 +24,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getLambdaExpression()
- * @model annotation="kermeta documentation='Refers to lambda expression definition (<code>function { e | stdio.writeln(e.toString) }</code>)\n<img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_lambda_expressions.png\"/>'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Refers to lambda expression definition (<code>function { e | stdio.writeln(e.toString) }</code>)\n<img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_lambda_expressions.png\"/>'"
  * @generated
  */
 public interface LambdaExpression extends Expression {
@@ -40,6 +41,7 @@ public interface LambdaExpression extends Expression {
 	 * @see #setBody(Expression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getLambdaExpression_Body()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Body of the lambda expression providede as a KerMeta expression'"
 	 * @generated
 	 */
@@ -67,6 +69,7 @@ public interface LambdaExpression extends Expression {
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see kermeta.language.behavior.BehaviorPackage#getLambdaExpression_Parameters()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Parameters of the lambda expression'"
 	 * @generated
 	 */

@@ -21,7 +21,8 @@ package kermeta.language.behavior;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getBooleanLiteral()
- * @model annotation="kermeta documentation='This expression is a literal representing a Boolean value, typically : true or false keyword'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='This expression is a literal representing a Boolean value, typically : true or false keyword'"
  * @generated
  */
 public interface BooleanLiteral extends Literal {
@@ -38,6 +39,7 @@ public interface BooleanLiteral extends Literal {
 	 * @see #setValue(Boolean)
 	 * @see kermeta.language.behavior.BehaviorPackage#getBooleanLiteral_Value()
 	 * @model default="false" dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='The concrete value represented by this literal'"
 	 * @generated
 	 */

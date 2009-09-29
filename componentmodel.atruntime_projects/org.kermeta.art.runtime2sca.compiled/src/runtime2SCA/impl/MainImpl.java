@@ -55,13 +55,25 @@ public class MainImpl extends ObjectImpl implements Main {
 
 		art.System result = null;
 
-		kermeta.persistence.Resource resource = repository.createResource(
-				model, "http://art");
+		kermeta.persistence.Resource resource = null;
 
-		resource.load();
+		{
+			try {
+				resource = repository.createResource(model, "http://art");
 
-		result = (art.System) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asTypeOrVoid(resource.instances().one(), "art.System");
+				resource.load();
+
+				result = (art.System) org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.asTypeOrVoid(resource.instances().one(), "art.System");
+			} catch (org.kermeta.compil.runtime.helper.error.KRuntimeError ex_switcher_5) {
+				boolean caught_5 = false;
+
+				if (!caught_5) {
+					throw ex_switcher_5;
+				}
+
+			}
+		}
 
 		return result;
 
@@ -107,9 +119,13 @@ public class MainImpl extends ObjectImpl implements Main {
 	 */
 	public void main() {
 
-		java.lang.String modelURI = "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/DAModel.art";
+		java.lang.String modelURI = "platform:/resource/org.kermeta.art.Runtime2SCA/model/diagram.art";
 
-		java.lang.String file = "C:/Documents and Settings/bmorin/workspace/SCA_example/src/test.composite";
+		java.lang.String file = kermeta.standard.helper.StringWrapper.plus(
+				kermeta.standard.helper.StringWrapper.substring(modelURI, 0,
+						kermeta.standard.helper.IntegerWrapper.minus(
+								kermeta.standard.helper.StringWrapper
+										.size(modelURI), 3)), "composite");
 
 		this.mainWithParameter(modelURI, file);
 

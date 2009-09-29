@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * @see kermeta.language.structure.StructurePackage#getConstraintLanguage()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public enum ConstraintLanguage implements Enumerator {

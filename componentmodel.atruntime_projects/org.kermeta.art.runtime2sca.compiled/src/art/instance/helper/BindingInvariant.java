@@ -10,7 +10,7 @@ public class BindingInvariant {
 	 *
 	 * @generated
 	 */
-	public static java.lang.Boolean checkInvariant_8672196__wellFormedBinding(
+	public static java.lang.Boolean checkInvariant_23827999__wellFormedBinding(
 
 	art.instance.Binding self
 

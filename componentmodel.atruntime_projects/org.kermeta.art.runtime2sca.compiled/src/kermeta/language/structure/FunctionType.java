@@ -22,8 +22,9 @@ package kermeta.language.structure;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getFunctionType()
- * @model annotation="kermeta documentation='Type used to define the use of lambda expressions.\n Uses :\n <pre>operation forAll(func : <G -> Boolean>) : Boolean is do\n     var test : Boolean init true\n     from var it : Iterator<G> init iterator\n     until it.isOff\n     loop\n        test := test and func(it.next)\n     end\n     result := test\n end\n </pre>\n *\n In the above example, &lt;G -> Boolean&gt; is a function type f(G) -&gt; \n Boolean, with a parameter of type G and a return type of type Boolean\n The operation <code>forAll</code> takes a lambda expression as parameter.'"
- *        annotation="kermeta.inv resultType=''"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Type used to define the use of lambda expressions.\n Uses :\n <pre>operation forAll(func : <G -> Boolean>) : Boolean is do\n     var test : Boolean init true\n     from var it : Iterator<G> init iterator\n     until it.isOff\n     loop\n        test := test and func(it.next)\n     end\n     result := test\n end\n </pre>\n *\n In the above example, &lt;G -> Boolean&gt; is a function type f(G) -&gt; \n Boolean, with a parameter of type G and a return type of type Boolean\n The operation <code>forAll</code> takes a lambda expression as parameter.'"
+ *        annotation="kermeta.inv resultType_must_not_be_a_ProductType=''"
  * @generated
  */
 public interface FunctionType extends TypeContainer, Type {
@@ -38,7 +39,8 @@ public interface FunctionType extends TypeContainer, Type {
 	 * @return the value of the '<em>Right</em>' reference.
 	 * @see #setRight(Type)
 	 * @see kermeta.language.structure.StructurePackage#getFunctionType_Right()
-	 * @model annotation="kermeta documentation='Result type of the function'"
+	 * @model annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='Result type of the function'"
 	 * @generated
 	 */
 	Type getRight();
@@ -64,7 +66,8 @@ public interface FunctionType extends TypeContainer, Type {
 	 * @return the value of the '<em>Left</em>' reference.
 	 * @see #setLeft(Type)
 	 * @see kermeta.language.structure.StructurePackage#getFunctionType_Left()
-	 * @model annotation="kermeta documentation='Parameters of the function (a ProductType for multiple parameters)'"
+	 * @model annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='Parameters of the function (a ProductType for multiple parameters)'"
 	 * @generated
 	 */
 	Type getLeft();

@@ -28,7 +28,8 @@ import kermeta.language.behavior.Expression;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getConstraint()
- * @model annotation="kermeta documentation='Constraint is part of a contract implementation in a Class definition or an operation.\nThree kinds of constraints are available : pre, post, and inv (invariant constraint)'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Constraint is part of a contract implementation in a Class definition or an operation.\nThree kinds of constraints are available : pre, post, and inv (invariant constraint)'"
  * @generated
  */
 public interface Constraint extends NamedElement {
@@ -44,6 +45,7 @@ public interface Constraint extends NamedElement {
 	 * @see #setBody(Expression)
 	 * @see kermeta.language.structure.StructurePackage#getConstraint_Body()
 	 * @model containment="true" resolveProxies="true" required="true" ordered="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Body of the constraint, expressed as a KerMeta expression'"
 	 * @generated
 	 */
@@ -73,6 +75,7 @@ public interface Constraint extends NamedElement {
 	 * @see kermeta.language.structure.StructurePackage#getConstraint_PreOwner()
 	 * @see kermeta.language.structure.Operation#getPre
 	 * @model opposite="pre" transient="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Owning Operation if Constraint corresponds to pre-condition'"
 	 * @generated
 	 */
@@ -102,6 +105,7 @@ public interface Constraint extends NamedElement {
 	 * @see #setStereotype(ConstraintType)
 	 * @see kermeta.language.structure.StructurePackage#getConstraint_Stereotype()
 	 * @model transient="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Type of the Constraint (precond/postcond/inv)'"
 	 * @generated
 	 */
@@ -132,6 +136,7 @@ public interface Constraint extends NamedElement {
 	 * @see kermeta.language.structure.StructurePackage#getConstraint_PostOwner()
 	 * @see kermeta.language.structure.Operation#getPost
 	 * @model opposite="post" transient="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Owning Operation if Constraint corresponds to post-condition'"
 	 * @generated
 	 */
@@ -161,6 +166,7 @@ public interface Constraint extends NamedElement {
 	 * @see #setLanguage(ConstraintLanguage)
 	 * @see kermeta.language.structure.StructurePackage#getConstraint_Language()
 	 * @model transient="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Language in which the constraint is expressed'"
 	 * @generated
 	 */
@@ -191,6 +197,7 @@ public interface Constraint extends NamedElement {
 	 * @see kermeta.language.structure.StructurePackage#getConstraint_InvOwner()
 	 * @see kermeta.language.structure.ClassDefinition#getInv
 	 * @model opposite="inv" transient="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Owning ClassDefinition if Constraint corresponds to invariant'"
 	 * @generated
 	 */

@@ -36,11 +36,6 @@ final public class PersistenceMapping {
 		EPackage.Registry.INSTANCE.put(kermeta.KermetaPackage.eNS_URI,
 				kermeta.KermetaPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
-				kermeta.standard.StandardPackage.eNS_URI,
-				kermeta.standard.StandardPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(kermeta.utils.UtilsPackage.eNS_URI,
-				kermeta.utils.UtilsPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(
 				kermeta.language.LanguagePackage.eNS_URI,
 				kermeta.language.LanguagePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
@@ -49,23 +44,32 @@ final public class PersistenceMapping {
 		EPackage.Registry.INSTANCE.put(
 				kermeta.language.behavior.BehaviorPackage.eNS_URI,
 				kermeta.language.behavior.BehaviorPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(kermeta.kunit.KunitPackage.eNS_URI,
-				kermeta.kunit.KunitPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(
-				kermeta.exceptions.ExceptionsPackage.eNS_URI,
-				kermeta.exceptions.ExceptionsPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(kermeta.io.IoPackage.eNS_URI,
-				kermeta.io.IoPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(
-				kermeta.persistence.PersistencePackage.eNS_URI,
-				kermeta.persistence.PersistencePackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(kermeta.ecore.EcorePackage.eNS_URI,
-				kermeta.ecore.EcorePackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(kermeta.xmltype.XmltypePackage.eNS_URI,
+				kermeta.xmltype.XmltypePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
 				kermeta.interpreter.InterpreterPackage.eNS_URI,
 				kermeta.interpreter.InterpreterPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(
+				kermeta.standard.StandardPackage.eNS_URI,
+				kermeta.standard.StandardPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(kermeta.io.IoPackage.eNS_URI,
+				kermeta.io.IoPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(
+				kermeta.exceptions.ExceptionsPackage.eNS_URI,
+				kermeta.exceptions.ExceptionsPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(
+				kermeta.persistence.PersistencePackage.eNS_URI,
+				kermeta.persistence.PersistencePackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(kermeta.kunit.KunitPackage.eNS_URI,
+				kermeta.kunit.KunitPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(kermeta.utils.UtilsPackage.eNS_URI,
+				kermeta.utils.UtilsPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(kermeta.ecore.EcorePackage.eNS_URI,
+				kermeta.ecore.EcorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(runtime2SCA.Runtime2SCAPackage.eNS_URI,
 				runtime2SCA.Runtime2SCAPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(sca.ScaPackage.eNS_URI,
+				sca.ScaPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(art.ArtPackage.eNS_URI,
 				art.ArtPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(art.instance.InstancePackage.eNS_URI,
@@ -74,8 +78,6 @@ final public class PersistenceMapping {
 				art.type.TypePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(art.implem.ImplemPackage.eNS_URI,
 				art.implem.ImplemPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(sca.ScaPackage.eNS_URI,
-				sca.ScaPackage.eINSTANCE);
 
 	}
 

@@ -23,7 +23,8 @@ package kermeta.language.behavior;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getConditional()
- * @model annotation="kermeta documentation='Condition is the model-element representation for the <code></code> '"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Condition is the model-element representation for the <code></code> '"
  * @generated
  */
 public interface Conditional extends Expression {
@@ -39,6 +40,7 @@ public interface Conditional extends Expression {
 	 * @see #setThenBody(Expression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getConditional_ThenBody()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Then part of the conditional statement'"
 	 * @generated
 	 */
@@ -66,6 +68,7 @@ public interface Conditional extends Expression {
 	 * @see #setCondition(Expression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getConditional_Condition()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Condition expression of conditional statement'"
 	 * @generated
 	 */
@@ -93,6 +96,7 @@ public interface Conditional extends Expression {
 	 * @see #setElseBody(Expression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getConditional_ElseBody()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Optional else part of the conditional statement'"
 	 * @generated
 	 */

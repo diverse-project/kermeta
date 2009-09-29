@@ -250,11 +250,11 @@ public class LogImpl extends ObjectImpl implements Log {
 	 */
 	public void newAttempt() {
 
-		java.lang.Boolean idIfCond_272 = false;
-		idIfCond_272 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_354 = false;
+		idIfCond_354 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.getRuntests(), null);
 
-		if (idIfCond_272) {
+		if (idIfCond_354) {
 
 			this.setRuntests(0);
 		}

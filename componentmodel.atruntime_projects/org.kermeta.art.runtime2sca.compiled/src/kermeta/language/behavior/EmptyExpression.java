@@ -15,7 +15,8 @@ package kermeta.language.behavior;
  *
  *
  * @see kermeta.language.behavior.BehaviorPackage#getEmptyExpression()
- * @model annotation="kermeta documentation='As suggested by its name, this class represents an expression that do nothing. Like a \"nop\"'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='As suggested by its name, this class represents an expression that do nothing. Like a \"nop\"'"
  * @generated
  */
 public interface EmptyExpression extends Expression {

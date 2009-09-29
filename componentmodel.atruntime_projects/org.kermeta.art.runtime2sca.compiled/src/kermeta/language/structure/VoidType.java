@@ -15,7 +15,8 @@ package kermeta.language.structure;
  *
  *
  * @see kermeta.language.structure.StructurePackage#getVoidType()
- * @model annotation="kermeta documentation='Class definition for the <pre>Void</pre> type'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Class definition for the <pre>Void</pre> type'"
  * @generated
  */
 public interface VoidType extends Type {

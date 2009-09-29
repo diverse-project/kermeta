@@ -17,7 +17,8 @@ import kermeta.language.structure.MultiplicityElement;
  *
  *
  * @see kermeta.language.behavior.BehaviorPackage#getTypeReference()
- * @model annotation="kermeta documentation='TypeReference refers to the type used in a variable declaration'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='TypeReference refers to the type used in a variable declaration'"
  * @generated
  */
 public interface TypeReference extends MultiplicityElement {

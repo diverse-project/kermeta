@@ -138,7 +138,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements
 	 */
 	public EList<Operation> getterOwnedOperation() {
 
-		kermeta.standard.OrderedSet<kermeta.language.structure.Operation> result = null;
+		kermeta.standard.Set<kermeta.language.structure.Operation> result = null;
 
 		kermeta.language.structure.ClassDefinition cDef = null;
 
@@ -162,7 +162,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements
 	 */
 	public EList<kermeta.language.structure.Class> getterSuperClass() {
 
-		kermeta.standard.Set<kermeta.language.structure.Class> result = null;
+		kermeta.standard.OrderedSet<kermeta.language.structure.Class> result = null;
 
 		kermeta.language.structure.ClassDefinition cDef = null;
 
@@ -178,34 +178,34 @@ public class ClassImpl extends ParameterizedTypeImpl implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft55 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft8 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Type> convertAsOrderedSet(
 							cDef.getSuperType()).iterator();
-			java.lang.Boolean idLoopCond_249 = false;
-			while (!idLoopCond_249) {
-				idLoopCond_249 = it_ft55.isOff();
-				if (idLoopCond_249) {
+			java.lang.Boolean idLoopCond_22 = false;
+			while (!idLoopCond_22) {
+				idLoopCond_22 = it_ft8.isOff();
+				if (idLoopCond_22) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Type elem_lbdExp55 = it_ft55
+					kermeta.language.structure.Type elem_lbdExp8 = it_ft8
 							.next();
 
-					java.lang.Boolean idIfCond_250 = false;
-					idIfCond_250 = org.kermeta.compil.runtime.helper.language.TypeUtil
+					java.lang.Boolean idIfCond_23 = false;
+					idIfCond_23 = org.kermeta.compil.runtime.helper.language.TypeUtil
 							.isInstanceSwitcher(
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance()
 											.getMetaClass(
 													"kermeta.language.structure.Class"),
-									elem_lbdExp55);
+									elem_lbdExp8);
 
-					if (idIfCond_250) {
+					if (idIfCond_23) {
 
 						kermeta.language.structure.Class c = null;
 
 						c = (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.asTypeOrVoid(elem_lbdExp55,
+								.asTypeOrVoid(elem_lbdExp8,
 										"kermeta.language.structure.Class");
 
 						supertypes.add(c);

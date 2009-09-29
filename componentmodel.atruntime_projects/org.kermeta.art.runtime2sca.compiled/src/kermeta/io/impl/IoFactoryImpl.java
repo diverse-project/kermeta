@@ -62,10 +62,10 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case IoPackage.STD_IO:
-			return createStdIO();
 		case IoPackage.FILE_IO:
 			return createFileIO();
+		case IoPackage.STD_IO:
+			return createStdIO();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -77,9 +77,9 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StdIO createStdIO() {
-		StdIOImpl stdIO = new StdIOImpl();
-		return stdIO;
+	public FileIO createFileIO() {
+		FileIOImpl fileIO = new FileIOImpl();
+		return fileIO;
 	}
 
 	/**
@@ -87,9 +87,9 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FileIO createFileIO() {
-		FileIOImpl fileIO = new FileIOImpl();
-		return fileIO;
+	public StdIO createStdIO() {
+		StdIOImpl stdIO = new StdIOImpl();
+		return stdIO;
 	}
 
 	/**

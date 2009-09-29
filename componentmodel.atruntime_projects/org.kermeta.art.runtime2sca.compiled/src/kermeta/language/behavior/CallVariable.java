@@ -21,7 +21,8 @@ package kermeta.language.behavior;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getCallVariable()
- * @model annotation="kermeta documentation='We call \"CallVariable\" the use of a variable in a statement.\nin <code>i := j + 1</code>, i and j are 2 CallVariables.'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='We call \"CallVariable\" the use of a variable in a statement.\nin <code>i := j + 1</code>, i and j are 2 CallVariables.'"
  * @generated
  */
 public interface CallVariable extends CallExpression {
@@ -38,6 +39,7 @@ public interface CallVariable extends CallExpression {
 	 * @see #setIsAtpre(Boolean)
 	 * @see kermeta.language.behavior.BehaviorPackage#getCallVariable_IsAtpre()
 	 * @model default="false" dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Tells whether this CallVariable represents a call to @pre in a postcondition'"
 	 * @generated
 	 */

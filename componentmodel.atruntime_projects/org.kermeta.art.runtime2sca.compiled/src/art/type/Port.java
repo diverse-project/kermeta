@@ -10,6 +10,8 @@ package art.type;
 
 import art.CardinalityElement;
 
+import art.implem.PortImplementation;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Port</b></em>'.
@@ -20,6 +22,7 @@ import art.CardinalityElement;
  * <ul>
  *   <li>{@link art.type.Port#getService <em>Service</em>}</li>
  *   <li>{@link art.type.Port#getRole <em>Role</em>}</li>
+ *   <li>{@link art.type.Port#getImplem <em>Implem</em>}</li>
  *   <li>{@link art.type.Port#getIsOptional <em>Is Optional</em>}</li>
  * </ul>
  * </p>
@@ -82,6 +85,33 @@ public interface Port extends CardinalityElement {
 	 * @generated
 	 */
 	void setRole(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Implem</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Implem</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Implem</em>' containment reference.
+	 * @see #setImplem(PortImplementation)
+	 * @see art.type.TypePackage#getPort_Implem()
+	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
+	 * @generated
+	 */
+	PortImplementation getImplem();
+
+	/**
+	 * Sets the value of the '{@link art.type.Port#getImplem <em>Implem</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Implem</em>' containment reference.
+	 * @see #getImplem()
+	 * @generated
+	 */
+	void setImplem(PortImplementation value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Optional</b></em>' attribute.

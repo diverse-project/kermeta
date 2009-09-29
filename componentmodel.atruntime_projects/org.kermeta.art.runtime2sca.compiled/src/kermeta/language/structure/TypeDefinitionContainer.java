@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see kermeta.language.structure.StructurePackage#getTypeDefinitionContainer()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Abstraction of the notion of containment for type definitions. Now, kermeta metamodel contains one container\nelement, that is Package. In a later release, ModelTypeDefinition will be the main container for type and\npackage definition.'"
  * @generated
  */
@@ -40,6 +41,7 @@ public interface TypeDefinitionContainer extends NamedElement {
 	 * @return the value of the '<em>Owned Type Definition</em>' containment reference list.
 	 * @see kermeta.language.structure.StructurePackage#getTypeDefinitionContainer_OwnedTypeDefinition()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Contained TypeDefinitions'"
 	 * @generated
 	 */

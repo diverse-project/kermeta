@@ -267,9 +267,9 @@ public class ExecutionContext {
 			if (java_keywords != null) {
 				return java_keywords;
 			}
-		
+
 			java_keywords = new ArrayList<String>();
-	
+
 			java_keywords.add("abstract");
 			java_keywords.add("continue");
 			java_keywords.add("for");
@@ -320,12 +320,12 @@ public class ExecutionContext {
 			java_keywords.add("native");
 			java_keywords.add("super");
 			java_keywords.add("while");
-	
+
 			// To see
 			java_keywords.add("true");
 			java_keywords.add("false");
 			java_keywords.add("null");
-	
+
 			// Specific to Kermeta
 			java_keywords.add("result");
 		}

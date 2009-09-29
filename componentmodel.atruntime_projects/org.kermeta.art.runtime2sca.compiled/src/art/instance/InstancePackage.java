@@ -131,22 +131,22 @@ public interface InstancePackage extends EPackage {
 	int COMPONENT_INSTANCE__BINDING = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__TYPE = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Super Component</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__SUPER_COMPONENT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int COMPONENT_INSTANCE__SUPER_COMPONENT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__TYPE = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -249,15 +249,6 @@ public interface InstancePackage extends EPackage {
 	int PRIMITIVE_INSTANCE__BINDING = COMPONENT_INSTANCE__BINDING;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_INSTANCE__TYPE = COMPONENT_INSTANCE__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Super Component</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -265,6 +256,15 @@ public interface InstancePackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_INSTANCE__SUPER_COMPONENT = COMPONENT_INSTANCE__SUPER_COMPONENT;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_INSTANCE__TYPE = COMPONENT_INSTANCE__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -367,15 +367,6 @@ public interface InstancePackage extends EPackage {
 	int COMPOSITE_INSTANCE__BINDING = COMPONENT_INSTANCE__BINDING;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_INSTANCE__TYPE = COMPONENT_INSTANCE__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Super Component</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -383,6 +374,15 @@ public interface InstancePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_INSTANCE__SUPER_COMPONENT = COMPONENT_INSTANCE__SUPER_COMPONENT;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_INSTANCE__TYPE = COMPONENT_INSTANCE__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -798,17 +798,6 @@ public interface InstancePackage extends EPackage {
 	EReference getComponentInstance_Binding();
 
 	/**
-	 * Returns the meta object for the reference '{@link art.instance.ComponentInstance#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see art.instance.ComponentInstance#getType()
-	 * @see #getComponentInstance()
-	 * @generated
-	 */
-	EReference getComponentInstance_Type();
-
-	/**
 	 * Returns the meta object for the container reference '{@link art.instance.ComponentInstance#getSuperComponent <em>Super Component</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -818,6 +807,17 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getComponentInstance_SuperComponent();
+
+	/**
+	 * Returns the meta object for the reference '{@link art.instance.ComponentInstance#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see art.instance.ComponentInstance#getType()
+	 * @see #getComponentInstance()
+	 * @generated
+	 */
+	EReference getComponentInstance_Type();
 
 	/**
 	 * Returns the meta object for the attribute '{@link art.instance.ComponentInstance#getState <em>State</em>}'.
@@ -1074,15 +1074,6 @@ public interface InstancePackage extends EPackage {
 				.getComponentInstance_Binding();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPONENT_INSTANCE__TYPE = eINSTANCE
-				.getComponentInstance_Type();
-
-		/**
 		 * The meta object literal for the '<em><b>Super Component</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1090,6 +1081,15 @@ public interface InstancePackage extends EPackage {
 		 */
 		EReference COMPONENT_INSTANCE__SUPER_COMPONENT = eINSTANCE
 				.getComponentInstance_SuperComponent();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONENT_INSTANCE__TYPE = eINSTANCE
+				.getComponentInstance_Type();
 
 		/**
 		 * The meta object literal for the '<em><b>State</b></em>' attribute feature.

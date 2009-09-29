@@ -470,22 +470,22 @@ public interface PersistencePackage extends EPackage {
 	int EMF_REPOSITORY__RESOURCES = REPOSITORY__RESOURCES;
 
 	/**
-	 * The feature id for the '<em><b>Ignore Load Error Unknown Metaclass</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS = REPOSITORY_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Use Interpreter Internal Resources</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES = REPOSITORY_FEATURE_COUNT + 1;
+	int EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES = REPOSITORY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Ignore Load Error Unknown Metaclass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS = REPOSITORY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Ignore All Load Errors</b></em>' attribute.
@@ -653,17 +653,6 @@ public interface PersistencePackage extends EPackage {
 	EClass getEMFRepository();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kermeta.persistence.EMFRepository#getIgnoreLoadErrorUnknownMetaclass <em>Ignore Load Error Unknown Metaclass</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Ignore Load Error Unknown Metaclass</em>'.
-	 * @see kermeta.persistence.EMFRepository#getIgnoreLoadErrorUnknownMetaclass()
-	 * @see #getEMFRepository()
-	 * @generated
-	 */
-	EAttribute getEMFRepository_IgnoreLoadErrorUnknownMetaclass();
-
-	/**
 	 * Returns the meta object for the attribute '{@link kermeta.persistence.EMFRepository#getUseInterpreterInternalResources <em>Use Interpreter Internal Resources</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -673,6 +662,17 @@ public interface PersistencePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEMFRepository_UseInterpreterInternalResources();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.persistence.EMFRepository#getIgnoreLoadErrorUnknownMetaclass <em>Ignore Load Error Unknown Metaclass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ignore Load Error Unknown Metaclass</em>'.
+	 * @see kermeta.persistence.EMFRepository#getIgnoreLoadErrorUnknownMetaclass()
+	 * @see #getEMFRepository()
+	 * @generated
+	 */
+	EAttribute getEMFRepository_IgnoreLoadErrorUnknownMetaclass();
 
 	/**
 	 * Returns the meta object for the attribute '{@link kermeta.persistence.EMFRepository#getIgnoreAllLoadErrors <em>Ignore All Load Errors</em>}'.
@@ -837,15 +837,6 @@ public interface PersistencePackage extends EPackage {
 		EClass EMF_REPOSITORY = eINSTANCE.getEMFRepository();
 
 		/**
-		 * The meta object literal for the '<em><b>Ignore Load Error Unknown Metaclass</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS = eINSTANCE
-				.getEMFRepository_IgnoreLoadErrorUnknownMetaclass();
-
-		/**
 		 * The meta object literal for the '<em><b>Use Interpreter Internal Resources</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -853,6 +844,15 @@ public interface PersistencePackage extends EPackage {
 		 */
 		EAttribute EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES = eINSTANCE
 				.getEMFRepository_UseInterpreterInternalResources();
+
+		/**
+		 * The meta object literal for the '<em><b>Ignore Load Error Unknown Metaclass</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS = eINSTANCE
+				.getEMFRepository_IgnoreLoadErrorUnknownMetaclass();
 
 		/**
 		 * The meta object literal for the '<em><b>Ignore All Load Errors</b></em>' attribute feature.

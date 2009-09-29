@@ -76,6 +76,10 @@ import kermeta.utils.UtilsPackage;
 
 import kermeta.utils.impl.UtilsPackageImpl;
 
+import kermeta.xmltype.XmltypePackage;
+
+import kermeta.xmltype.impl.XmltypePackageImpl;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EGenericType;
@@ -163,20 +167,10 @@ public class PersistencePackageImpl extends EPackageImpl implements
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link PersistencePackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -191,8 +185,8 @@ public class PersistencePackageImpl extends EPackageImpl implements
 
 		// Obtain or create and register package
 		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI)
+				.get(eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.get(eNS_URI)
 				: new PersistencePackageImpl());
 
 		isInited = true;
@@ -202,14 +196,6 @@ public class PersistencePackageImpl extends EPackageImpl implements
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
-		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI)
-				: StandardPackage.eINSTANCE);
-		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI)
-				: UtilsPackage.eINSTANCE);
 		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI)
@@ -222,30 +208,46 @@ public class PersistencePackageImpl extends EPackageImpl implements
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI)
-				: ExceptionsPackage.eINSTANCE);
-		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI)
-				: IoPackage.eINSTANCE);
-		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI)
-				: EcorePackage.eINSTANCE);
+		XmltypePackageImpl theXmltypePackage = (XmltypePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(XmltypePackage.eNS_URI) instanceof XmltypePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(XmltypePackage.eNS_URI)
+				: XmltypePackage.eINSTANCE);
 		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI)
 				: InterpreterPackage.eINSTANCE);
+		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI)
+				: StandardPackage.eINSTANCE);
+		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI)
+				: IoPackage.eINSTANCE);
+		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI)
+				: ExceptionsPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
+		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI)
+				: UtilsPackage.eINSTANCE);
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI)
+				: EcorePackage.eINSTANCE);
 		Runtime2SCAPackageImpl theRuntime2SCAPackage = (Runtime2SCAPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(Runtime2SCAPackage.eNS_URI) instanceof Runtime2SCAPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(Runtime2SCAPackage.eNS_URI)
 				: Runtime2SCAPackage.eINSTANCE);
+		ScaPackageImpl theScaPackage = (ScaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ScaPackage.eNS_URI) instanceof ScaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ScaPackage.eNS_URI)
+				: ScaPackage.eINSTANCE);
 		ArtPackageImpl theArtPackage = (ArtPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ArtPackage.eNS_URI) instanceof ArtPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ArtPackage.eNS_URI)
@@ -262,54 +264,55 @@ public class PersistencePackageImpl extends EPackageImpl implements
 				.getEPackage(ImplemPackage.eNS_URI) instanceof ImplemPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ImplemPackage.eNS_URI)
 				: ImplemPackage.eINSTANCE);
-		ScaPackageImpl theScaPackage = (ScaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ScaPackage.eNS_URI) instanceof ScaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ScaPackage.eNS_URI)
-				: ScaPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		thePersistencePackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
-		theStandardPackage.createPackageContents();
-		theUtilsPackage.createPackageContents();
 		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
-		theExceptionsPackage.createPackageContents();
-		theIoPackage.createPackageContents();
-		theEcorePackage.createPackageContents();
+		theXmltypePackage.createPackageContents();
 		theInterpreterPackage.createPackageContents();
+		theStandardPackage.createPackageContents();
+		theIoPackage.createPackageContents();
+		theExceptionsPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
+		theUtilsPackage.createPackageContents();
+		theEcorePackage.createPackageContents();
 		theRuntime2SCAPackage.createPackageContents();
+		theScaPackage.createPackageContents();
 		theArtPackage.createPackageContents();
 		theInstancePackage.createPackageContents();
 		theTypePackage.createPackageContents();
 		theImplemPackage.createPackageContents();
-		theScaPackage.createPackageContents();
 
 		// Initialize created meta-data
 		thePersistencePackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
-		theStandardPackage.initializePackageContents();
-		theUtilsPackage.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
-		theExceptionsPackage.initializePackageContents();
-		theIoPackage.initializePackageContents();
-		theEcorePackage.initializePackageContents();
+		theXmltypePackage.initializePackageContents();
 		theInterpreterPackage.initializePackageContents();
+		theStandardPackage.initializePackageContents();
+		theIoPackage.initializePackageContents();
+		theExceptionsPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
+		theUtilsPackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
 		theRuntime2SCAPackage.initializePackageContents();
+		theScaPackage.initializePackageContents();
 		theArtPackage.initializePackageContents();
 		theInstancePackage.initializePackageContents();
 		theTypePackage.initializePackageContents();
 		theImplemPackage.initializePackageContents();
-		theScaPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		thePersistencePackage.freeze();
 
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(PersistencePackage.eNS_URI,
+				thePersistencePackage);
 		return thePersistencePackage;
 	}
 
@@ -438,7 +441,7 @@ public class PersistencePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEMFRepository_IgnoreLoadErrorUnknownMetaclass() {
+	public EAttribute getEMFRepository_UseInterpreterInternalResources() {
 		return (EAttribute) emfRepositoryEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -447,7 +450,7 @@ public class PersistencePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEMFRepository_UseInterpreterInternalResources() {
+	public EAttribute getEMFRepository_IgnoreLoadErrorUnknownMetaclass() {
 		return (EAttribute) emfRepositoryEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -519,9 +522,9 @@ public class PersistencePackageImpl extends EPackageImpl implements
 
 		emfRepositoryEClass = createEClass(EMF_REPOSITORY);
 		createEAttribute(emfRepositoryEClass,
-				EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS);
-		createEAttribute(emfRepositoryEClass,
 				EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES);
+		createEAttribute(emfRepositoryEClass,
+				EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS);
 		createEAttribute(emfRepositoryEClass,
 				EMF_REPOSITORY__IGNORE_ALL_LOAD_ERRORS);
 		createEAttribute(emfRepositoryEClass,
@@ -594,11 +597,6 @@ public class PersistencePackageImpl extends EPackageImpl implements
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
 				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(resourceEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(resourceEClass, theStandardPackage.getJavaString(),
-				"normalizedUri", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		addEOperation(resourceEClass, null, "save", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		EOperation op = addEOperation(resourceEClass, null, "saveWithNewURI",
@@ -613,8 +611,13 @@ public class PersistencePackageImpl extends EPackageImpl implements
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
+		addEOperation(resourceEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		addEOperation(resourceEClass, this.getResource(), "instances", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(resourceEClass, theStandardPackage.getJavaString(),
+				"normalizedUri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(resourceEClass, this.getResource(),
 				"getterDependentResources", 0, -1, IS_UNIQUE, !IS_ORDERED);
@@ -625,13 +628,13 @@ public class PersistencePackageImpl extends EPackageImpl implements
 		initEClass(emfResourceEClass, EMFResource.class, "EMFResource",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		addEOperation(emfResourceEClass, null, "save", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
 		op = addEOperation(emfResourceEClass, null, "remove", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 		addEParameter(op, theStructurePackage.getObject(), "instance", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(emfResourceEClass, null, "save", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
 
 		op = addEOperation(emfResourceEClass, null, "saveWithNewURI", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
@@ -706,15 +709,15 @@ public class PersistencePackageImpl extends EPackageImpl implements
 
 		initEClass(emfRepositoryEClass, EMFRepository.class, "EMFRepository",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEMFRepository_IgnoreLoadErrorUnknownMetaclass(),
-				theStandardPackage.getJavaBoolean(),
-				"ignoreLoadErrorUnknownMetaclass", "false", 0, 1,
-				EMFRepository.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
 		initEAttribute(getEMFRepository_UseInterpreterInternalResources(),
 				theStandardPackage.getJavaBoolean(),
 				"useInterpreterInternalResources", "false", 0, 1,
+				EMFRepository.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getEMFRepository_IgnoreLoadErrorUnknownMetaclass(),
+				theStandardPackage.getJavaBoolean(),
+				"ignoreLoadErrorUnknownMetaclass", "false", 0, 1,
 				EMFRepository.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
@@ -776,44 +779,44 @@ public class PersistencePackageImpl extends EPackageImpl implements
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Loads the Resource, thus making content of the Resource browsable.\n\t * Raises a ResourceLoadException in case loaded Resource is empty\n\t */" });
+						"/**\n\t * Save a Resource in the file specified by the current value of uri \n\t */" });
 		addAnnotation(
 				resourceEClass.getEOperations().get(1),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Return a normalized version of the Uri of this resource\n\t * in order to prevent several loading of the same file because they have diffent path that leads to them, kermeta uses normalizedURI\n\t * for some of its functions (eg. repository.getResource )\n\t * As EMF needs URI of the form platform:/resource or platform:/plugin, kermeta automatically\n\t * normalize the uri when loading or saving. This is especially true for file:/ uri or relative uri (./ or / ) \n\t * If you wish to know what concrete uri is used by kermeta when loading and saving you can use this function\n\t * to check how a given uri is normalized by kermeta\n\t */" });
-		addAnnotation(resourceEClass.getEOperations().get(2), source,
-				new String[] { "isAbstract", "true" });
+						"/**\n\t * Save a Resource in a file referenced by the new uri.\n\t * note: this doesn\'t change the URI of the resource, it is only saved in another place \n\t */" });
 		addAnnotation(
 				resourceEClass.getEOperations().get(2),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Save a Resource in the file specified by the current value of uri \n\t */" });
+						"/**\n\t * Search for elements referenced by one element contained by this resource that are not contained by this repository\n\t * ie. element that EMF would claim as \"not contained in a resource\"\n\t * checks only objects directly referenced by the element in this resource, ignores indirectly referenced objects\n\t * example of use :\n\t *  var report : Set&lt;DanglingDiagnostic&gt;\n\t *\treport := resource.findDanglingModelElements()\n\t *\treport.each{ diag | stdio.writeln(diag.toString ) }\n\t */" });
+		addAnnotation(resourceEClass.getEOperations().get(3), source,
+				new String[] { "isAbstract", "true" });
 		addAnnotation(
 				resourceEClass.getEOperations().get(3),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Save a Resource in a file referenced by the new uri.\n\t * note: this doesn\'t change the URI of the resource, it is only saved in another place \n\t */" });
+						"/**\n\t * Loads the Resource, thus making content of the Resource browsable.\n\t * Raises a ResourceLoadException in case loaded Resource is empty\n\t */" });
 		addAnnotation(
 				resourceEClass.getEOperations().get(4),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Search for elements referenced by one element contained by this resource that are not contained by this repository\n\t * ie. element that EMF would claim as \"not contained in a resource\"\n\t * checks only objects directly referenced by the element in this resource, ignores indirectly referenced objects\n\t * example of use :\n\t *  var report : Set&lt;DanglingDiagnostic&gt;\n\t *\treport := resource.findDanglingModelElements()\n\t *\treport.each{ diag | stdio.writeln(diag.toString ) }\n\t */" });
+						"/**\n\t * The entities contained in the model-instance, that are provided when user loads a resource \n\t * instances == rootContents\n\t * this is a loop on Resource itself in order to get backward compatibility\n\t */" });
+		addAnnotation(
+				resourceEClass.getEOperations().get(4),
+				source,
+				new String[] { "deprecated",
+						"user should use the resource directly since this is a collection" });
 		addAnnotation(
 				resourceEClass.getEOperations().get(5),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * The entities contained in the model-instance, that are provided when user loads a resource \n\t * instances == rootContents\n\t * this is a loop on Resource itself in order to get backward compatibility\n\t */" });
-		addAnnotation(
-				resourceEClass.getEOperations().get(5),
-				source,
-				new String[] { "deprecated",
-						"user should use the resource directly since this is a collection" });
+						"/**\n\t * Return a normalized version of the Uri of this resource\n\t * in order to prevent several loading of the same file because they have different path that leads to them, kermeta uses normalizedURI\n\t * for some of its functions (eg. repository.getResource )\n\t * As EMF needs URI of the form platform:/resource or platform:/plugin, kermeta automatically\n\t * normalize the uri when loading or saving. This is especially true for file:/ uri or relative uri (./ or / ) \n\t * If you wish to know what concrete uri is used by kermeta when loading and saving you can use this function\n\t * to check how a given uri is normalized by kermeta\n\t */" });
 		addAnnotation(getResource_Uri(), source,
 				new String[] { "documentation",
 						"/**\n\t * Uri of the Resource to load\n\t */" });
@@ -840,20 +843,20 @@ public class PersistencePackageImpl extends EPackageImpl implements
 				new String[] {
 						"documentation",
 						"/**\n * Extension of the Resource class definition that is specific to EMF Repository.\n * User is not supposed to directly create it. Otherwise it will not be correctly initialized\n * You must To create one \n */" });
-		addAnnotation(emfResourceEClass.getEOperations().get(0), source,
-				new String[] { "documentation",
-						"/**\n\t * Overrides Resource.save()\n\t */" });
-		addAnnotation(emfResourceEClass.getEOperations().get(0), source,
-				new String[] { "superOperation",
-						"kermeta::persistence::Resource" });
 		addAnnotation(
-				emfResourceEClass.getEOperations().get(1),
+				emfResourceEClass.getEOperations().get(0),
 				source,
 				new String[] {
 						"documentation",
 						"/**\n\t * Overrides Set<Object>.remove(Object)\n\t * Remove the instance from the Resource\n\t */" });
-		addAnnotation(emfResourceEClass.getEOperations().get(1), source,
+		addAnnotation(emfResourceEClass.getEOperations().get(0), source,
 				new String[] { "superOperation", "kermeta::standard::Set" });
+		addAnnotation(emfResourceEClass.getEOperations().get(1), source,
+				new String[] { "documentation",
+						"/**\n\t * Overrides Resource.save()\n\t */" });
+		addAnnotation(emfResourceEClass.getEOperations().get(1), source,
+				new String[] { "superOperation",
+						"kermeta::persistence::Resource" });
 		addAnnotation(
 				emfResourceEClass.getEOperations().get(2),
 				source,
@@ -974,17 +977,17 @@ public class PersistencePackageImpl extends EPackageImpl implements
 						"documentation",
 						"/**\n\t  * Register the content of the given ecore file into EMF registry\n\t  * Once registered, EMF will be able to load and save models conformant to this ecore file\n\t  * Warning: if the NSURI you wish to register is already, registered (either statically or due to a previous call)\n\t  *  it will do nothing. Ie. modification in the ecore file will not be taken into account unless you manually unregister it.\t    \n\t  */" });
 		addAnnotation(
-				getEMFRepository_IgnoreLoadErrorUnknownMetaclass(),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * When loading the Resources, \n\t * if there are some errors due to an unknown metaclass while loading some objects, the loader try to ignore them\n\t * by default, not setting this attribute is considered as false.\n\t */" });
-		addAnnotation(
 				getEMFRepository_UseInterpreterInternalResources(),
 				source,
 				new String[] {
 						"documentation",
 						"/** \n\t * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself\n\t * this is useful for example to make a dependency to framework.km\n\t * by default, not setting this is considered as false.\n\t */" });
+		addAnnotation(
+				getEMFRepository_IgnoreLoadErrorUnknownMetaclass(),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * When loading the Resources, \n\t * if there are some errors due to an unknown metaclass while loading some objects, the loader try to ignore them\n\t * by default, not setting this attribute is considered as false.\n\t */" });
 		addAnnotation(
 				getEMFRepository_IgnoreAllLoadErrors(),
 				source,

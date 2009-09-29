@@ -18,17 +18,36 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link kermeta.language.behavior.Rescue#getExceptionName <em>Exception Name</em>}</li>
  *   <li>{@link kermeta.language.behavior.Rescue#getBody <em>Body</em>}</li>
+ *   <li>{@link kermeta.language.behavior.Rescue#getExceptionName <em>Exception Name</em>}</li>
  *   <li>{@link kermeta.language.behavior.Rescue#getExceptionType <em>Exception Type</em>}</li>
  * </ul>
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getRescue()
- * @model annotation="kermeta documentation='Refers to rescue exception block'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Refers to rescue exception block'"
  * @generated
  */
 public interface Rescue extends kermeta.language.structure.Object {
+	/**
+	 * Returns the value of the '<em><b>Body</b></em>' containment reference list.
+	 * The list contents are of type {@link kermeta.language.behavior.Expression}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Body</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Body</em>' containment reference list.
+	 * @see kermeta.language.behavior.BehaviorPackage#getRescue_Body()
+	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='Body of the rescue block, specified as a KerMeta expression'"
+	 * @generated
+	 */
+	EList<Expression> getBody();
+
 	/**
 	 * Returns the value of the '<em><b>Exception Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -41,6 +60,7 @@ public interface Rescue extends kermeta.language.structure.Object {
 	 * @see #setExceptionName(String)
 	 * @see kermeta.language.behavior.BehaviorPackage#getRescue_ExceptionName()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Name of the catched exception'"
 	 * @generated
 	 */
@@ -57,23 +77,6 @@ public interface Rescue extends kermeta.language.structure.Object {
 	void setExceptionName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Body</b></em>' containment reference list.
-	 * The list contents are of type {@link kermeta.language.behavior.Expression}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Body</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Body</em>' containment reference list.
-	 * @see kermeta.language.behavior.BehaviorPackage#getRescue_Body()
-	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="kermeta documentation='Body of the rescue block, specified as a KerMeta expression'"
-	 * @generated
-	 */
-	EList<Expression> getBody();
-
-	/**
 	 * Returns the value of the '<em><b>Exception Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -85,6 +88,7 @@ public interface Rescue extends kermeta.language.structure.Object {
 	 * @see #setExceptionType(TypeReference)
 	 * @see kermeta.language.behavior.BehaviorPackage#getRescue_ExceptionType()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Type of the cathed exception'"
 	 * @generated
 	 */

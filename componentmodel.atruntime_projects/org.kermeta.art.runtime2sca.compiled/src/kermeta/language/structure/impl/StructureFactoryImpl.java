@@ -21,6 +21,7 @@ import kermeta.language.structure.ModelType;
 import kermeta.language.structure.ModelTypeVariable;
 import kermeta.language.structure.ModelingUnit;
 import kermeta.language.structure.MultiplicityElement;
+import kermeta.language.structure.NamedElement;
 import kermeta.language.structure.ObjectTypeVariable;
 import kermeta.language.structure.Operation;
 import kermeta.language.structure.Parameter;
@@ -96,6 +97,20 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 			return createObject();
 		case StructurePackage.TYPE:
 			return createType();
+		case StructurePackage.MODEL_TYPE:
+			return createModelType();
+		case StructurePackage.CLASS:
+			return createClass();
+		case StructurePackage.CLASS_DEFINITION:
+			return createClassDefinition();
+		case StructurePackage.MODEL:
+			return createModel();
+		case StructurePackage.NAMED_ELEMENT:
+			return createNamedElement();
+		case StructurePackage.ENUMERATION:
+			return createEnumeration();
+		case StructurePackage.FUNCTION_TYPE:
+			return createFunctionType();
 		case StructurePackage.OPERATION:
 			return createOperation();
 		case StructurePackage.PROPERTY:
@@ -108,10 +123,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 			return createMultiplicityElement();
 		case StructurePackage.TYPE_DEFINITION:
 			return createTypeDefinition();
-		case StructurePackage.CLASS:
-			return createClass();
-		case StructurePackage.ENUMERATION:
-			return createEnumeration();
 		case StructurePackage.PACKAGE:
 			return createPackage();
 		case StructurePackage.PARAMETER:
@@ -122,18 +133,12 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 			return createTag();
 		case StructurePackage.CONSTRAINT:
 			return createConstraint();
-		case StructurePackage.CLASS_DEFINITION:
-			return createClassDefinition();
 		case StructurePackage.OBJECT_TYPE_VARIABLE:
 			return createObjectTypeVariable();
-		case StructurePackage.MODEL_TYPE:
-			return createModelType();
 		case StructurePackage.MODEL_TYPE_VARIABLE:
 			return createModelTypeVariable();
 		case StructurePackage.VIRTUAL_TYPE:
 			return createVirtualType();
-		case StructurePackage.MODEL:
-			return createModel();
 		case StructurePackage.MODELING_UNIT:
 			return createModelingUnit();
 		case StructurePackage.REQUIRE:
@@ -144,8 +149,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 			return createFilter();
 		case StructurePackage.PRODUCT_TYPE:
 			return createProductType();
-		case StructurePackage.FUNCTION_TYPE:
-			return createFunctionType();
 		case StructurePackage.VOID_TYPE:
 			return createVoidType();
 		default:
@@ -237,6 +240,76 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ModelType createModelType() {
+		ModelTypeImpl modelType = new ModelTypeImpl();
+		return modelType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public kermeta.language.structure.Class createClass() {
+		ClassImpl class_ = new ClassImpl();
+		return class_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassDefinition createClassDefinition() {
+		ClassDefinitionImpl classDefinition = new ClassDefinitionImpl();
+		return classDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Model createModel() {
+		ModelImpl model = new ModelImpl();
+		return model;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NamedElement createNamedElement() {
+		NamedElementImpl namedElement = new NamedElementImpl();
+		return namedElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Enumeration createEnumeration() {
+		EnumerationImpl enumeration = new EnumerationImpl();
+		return enumeration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FunctionType createFunctionType() {
+		FunctionTypeImpl functionType = new FunctionTypeImpl();
+		return functionType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Operation createOperation() {
 		OperationImpl operation = new OperationImpl();
 		return operation;
@@ -297,26 +370,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public kermeta.language.structure.Class createClass() {
-		ClassImpl class_ = new ClassImpl();
-		return class_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Enumeration createEnumeration() {
-		EnumerationImpl enumeration = new EnumerationImpl();
-		return enumeration;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public kermeta.language.structure.Package createPackage() {
 		PackageImpl package_ = new PackageImpl();
 		return package_;
@@ -367,29 +420,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDefinition createClassDefinition() {
-		ClassDefinitionImpl classDefinition = new ClassDefinitionImpl();
-		return classDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ObjectTypeVariable createObjectTypeVariable() {
 		ObjectTypeVariableImpl objectTypeVariable = new ObjectTypeVariableImpl();
 		return objectTypeVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ModelType createModelType() {
-		ModelTypeImpl modelType = new ModelTypeImpl();
-		return modelType;
 	}
 
 	/**
@@ -410,16 +443,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	public VirtualType createVirtualType() {
 		VirtualTypeImpl virtualType = new VirtualTypeImpl();
 		return virtualType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Model createModel() {
-		ModelImpl model = new ModelImpl();
-		return model;
 	}
 
 	/**
@@ -470,16 +493,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	public ProductType createProductType() {
 		ProductTypeImpl productType = new ProductTypeImpl();
 		return productType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FunctionType createFunctionType() {
-		FunctionTypeImpl functionType = new FunctionTypeImpl();
-		return functionType;
 	}
 
 	/**

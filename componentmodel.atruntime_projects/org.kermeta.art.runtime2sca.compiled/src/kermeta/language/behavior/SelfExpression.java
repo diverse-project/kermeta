@@ -15,7 +15,8 @@ package kermeta.language.behavior;
  *
  *
  * @see kermeta.language.behavior.BehaviorPackage#getSelfExpression()
- * @model annotation="kermeta documentation='Refers to <code>self</code> use'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Refers to <code>self</code> use'"
  * @generated
  */
 public interface SelfExpression extends Expression {

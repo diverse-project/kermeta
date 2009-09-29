@@ -141,7 +141,7 @@ public class PackageImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	public kermeta.language.structure.Package getNestingPackage() {
-		if (eContainerFeatureID != StructurePackage.PACKAGE__NESTING_PACKAGE)
+		if (eContainerFeatureID() != StructurePackage.PACKAGE__NESTING_PACKAGE)
 			return null;
 		return (kermeta.language.structure.Package) eContainer();
 	}
@@ -152,7 +152,7 @@ public class PackageImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	public kermeta.language.structure.Package basicGetNestingPackage() {
-		if (eContainerFeatureID != StructurePackage.PACKAGE__NESTING_PACKAGE)
+		if (eContainerFeatureID() != StructurePackage.PACKAGE__NESTING_PACKAGE)
 			return null;
 		return (kermeta.language.structure.Package) eInternalContainer();
 	}
@@ -178,7 +178,7 @@ public class PackageImpl extends NamedElementImpl implements
 	public void setNestingPackage(
 			kermeta.language.structure.Package newNestingPackage) {
 		if (newNestingPackage != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.PACKAGE__NESTING_PACKAGE && newNestingPackage != null)) {
+				|| (eContainerFeatureID() != StructurePackage.PACKAGE__NESTING_PACKAGE && newNestingPackage != null)) {
 			if (EcoreUtil.isAncestor(this, newNestingPackage))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -271,7 +271,7 @@ public class PackageImpl extends NamedElementImpl implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case StructurePackage.PACKAGE__NESTING_PACKAGE:
 			return eInternalContainer().eInverseRemove(this,
 					StructurePackage.PACKAGE__NESTED_PACKAGE,

@@ -21,7 +21,8 @@ package kermeta.language.structure;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getTypeDefinition()
- * @model annotation="kermeta documentation='This boolean allows to tell if this Type definition is an aspect or not\nIf it is an aspect, then at runtime, its definition will be merged with the definition of another\nTypeDefinition that has exactly the same qualified name'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='This boolean allows to tell if this Type definition is an aspect or not\nIf it is an aspect, then at runtime, its definition will be merged with the definition of another\nTypeDefinition that has exactly the same qualified name'"
  *        annotation="kermeta documentation='Abstraction for type definitions (ClassDefinition, ModelTypeDefinition, DataType inherit\nthis class)'"
  * @generated
  */
@@ -39,6 +40,7 @@ public interface TypeDefinition extends NamedElement {
 	 * @see #setIsAspect(Boolean)
 	 * @see kermeta.language.structure.StructurePackage#getTypeDefinition_IsAspect()
 	 * @model default="false" dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	Boolean getIsAspect();

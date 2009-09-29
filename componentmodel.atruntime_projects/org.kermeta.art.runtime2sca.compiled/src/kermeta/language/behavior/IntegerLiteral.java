@@ -21,7 +21,8 @@ package kermeta.language.behavior;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getIntegerLiteral()
- * @model annotation="kermeta documentation='This expression is a literal representing an Integer value'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='This expression is a literal representing an Integer value'"
  * @generated
  */
 public interface IntegerLiteral extends Literal {
@@ -37,6 +38,7 @@ public interface IntegerLiteral extends Literal {
 	 * @see #setValue(Integer)
 	 * @see kermeta.language.behavior.BehaviorPackage#getIntegerLiteral_Value()
 	 * @model dataType="kermeta.standard.JavaInteger"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='The concrete value represented by this literal'"
 	 * @generated
 	 */

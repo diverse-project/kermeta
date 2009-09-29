@@ -23,7 +23,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getModelTypeVariable()
- * @model annotation="kermeta documentation='To be written'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='To be written'"
  * @generated
  */
 public interface ModelTypeVariable extends TypeVariable {
@@ -41,6 +42,7 @@ public interface ModelTypeVariable extends TypeVariable {
 	 * @see kermeta.language.structure.StructurePackage#getModelTypeVariable_VirtualType()
 	 * @see kermeta.language.structure.VirtualType#getModelType
 	 * @model opposite="modelType" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='To be written'"
 	 * @generated
 	 */

@@ -28,13 +28,22 @@ public interface UtilsFactory extends EFactory {
 	UtilsFactory eINSTANCE = kermeta.utils.impl.UtilsFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Stack</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Stack</em>'.
+	 * @generated
+	 */
+	<G> Stack<G> createStack();
+
+	/**
 	 * Returns a new object of class '<em>String Buffer</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>String Buffer</em>'.
 	 * @generated
 	 */
-	kermeta.utils.StringBuffer createStringBuffer();
+	StringBuffer createStringBuffer();
 
 	/**
 	 * Returns a new object of class '<em>Hashtable</em>'.
@@ -44,15 +53,6 @@ public interface UtilsFactory extends EFactory {
 	 * @generated
 	 */
 	<K, V> Hashtable<K, V> createHashtable();
-
-	/**
-	 * Returns a new object of class '<em>Stack</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Stack</em>'.
-	 * @generated
-	 */
-	<G> Stack<G> createStack();
 
 	/**
 	 * Returns the package supported by this factory.

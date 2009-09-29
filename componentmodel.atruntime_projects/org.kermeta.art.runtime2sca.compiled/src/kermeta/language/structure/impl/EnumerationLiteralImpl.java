@@ -62,7 +62,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	public Enumeration getEnumeration() {
-		if (eContainerFeatureID != StructurePackage.ENUMERATION_LITERAL__ENUMERATION)
+		if (eContainerFeatureID() != StructurePackage.ENUMERATION_LITERAL__ENUMERATION)
 			return null;
 		return (Enumeration) eContainer();
 	}
@@ -73,7 +73,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	public Enumeration basicGetEnumeration() {
-		if (eContainerFeatureID != StructurePackage.ENUMERATION_LITERAL__ENUMERATION)
+		if (eContainerFeatureID() != StructurePackage.ENUMERATION_LITERAL__ENUMERATION)
 			return null;
 		return (Enumeration) eInternalContainer();
 	}
@@ -97,7 +97,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	public void setEnumeration(Enumeration newEnumeration) {
 		if (newEnumeration != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.ENUMERATION_LITERAL__ENUMERATION && newEnumeration != null)) {
+				|| (eContainerFeatureID() != StructurePackage.ENUMERATION_LITERAL__ENUMERATION && newEnumeration != null)) {
 			if (EcoreUtil.isAncestor(this, newEnumeration))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -157,7 +157,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
 			return eInternalContainer().eInverseRemove(this,
 					StructurePackage.ENUMERATION__OWNED_LITERAL,

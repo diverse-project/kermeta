@@ -98,20 +98,20 @@ public class StandardSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case StandardPackage.COLLECTION: {
-			Collection<?> collection = (Collection<?>) theEObject;
-			T result = caseCollection(collection);
+		case StandardPackage.UNKNOWN_JAVA_OBJECT: {
+			UnknownJavaObject unknownJavaObject = (UnknownJavaObject) theEObject;
+			T result = caseUnknownJavaObject(unknownJavaObject);
 			if (result == null)
-				result = caseObject(collection);
+				result = caseObject(unknownJavaObject);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case StandardPackage.ITERATOR: {
-			Iterator<?> iterator = (Iterator<?>) theEObject;
-			T result = caseIterator(iterator);
+		case StandardPackage.VOID: {
+			kermeta.standard.Void void_ = (kermeta.standard.Void) theEObject;
+			T result = caseVoid(void_);
 			if (result == null)
-				result = caseObject(iterator);
+				result = caseObject(void_);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -139,6 +139,17 @@ public class StandardSwitch<T> {
 			T result = caseSummable(summable);
 			if (result == null)
 				result = caseObject(summable);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.NOT_COMPARABLE_EXCEPTION: {
+			NotComparableException notComparableException = (NotComparableException) theEObject;
+			T result = caseNotComparableException(notComparableException);
+			if (result == null)
+				result = caseException(notComparableException);
+			if (result == null)
+				result = caseObject(notComparableException);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -198,31 +209,11 @@ public class StandardSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case StandardPackage.UNKNOWN_JAVA_OBJECT: {
-			UnknownJavaObject unknownJavaObject = (UnknownJavaObject) theEObject;
-			T result = caseUnknownJavaObject(unknownJavaObject);
+		case StandardPackage.COLLECTION: {
+			Collection<?> collection = (Collection<?>) theEObject;
+			T result = caseCollection(collection);
 			if (result == null)
-				result = caseObject(unknownJavaObject);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.VOID: {
-			kermeta.standard.Void void_ = (kermeta.standard.Void) theEObject;
-			T result = caseVoid(void_);
-			if (result == null)
-				result = caseObject(void_);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.NOT_COMPARABLE_EXCEPTION: {
-			NotComparableException notComparableException = (NotComparableException) theEObject;
-			T result = caseNotComparableException(notComparableException);
-			if (result == null)
-				result = caseException(notComparableException);
-			if (result == null)
-				result = caseObject(notComparableException);
+				result = caseObject(collection);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -290,38 +281,47 @@ public class StandardSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case StandardPackage.ITERATOR: {
+			Iterator<?> iterator = (Iterator<?>) theEObject;
+			T result = caseIterator(iterator);
+			if (result == null)
+				result = caseObject(iterator);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Collection</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Collection</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <G> T caseCollection(Collection<G> object) {
+	public T caseUnknownJavaObject(UnknownJavaObject object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Iterator</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Void</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Iterator</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Void</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <G> T caseIterator(Iterator<G> object) {
+	public T caseVoid(kermeta.standard.Void object) {
 		return null;
 	}
 
@@ -367,6 +367,21 @@ public class StandardSwitch<T> {
 	 * @generated
 	 */
 	public <G> T caseSummable(Summable<G> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Not Comparable Exception</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Not Comparable Exception</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNotComparableException(NotComparableException object) {
 		return null;
 	}
 
@@ -446,47 +461,17 @@ public class StandardSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Collection</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Collection</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseUnknownJavaObject(UnknownJavaObject object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Void</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Void</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVoid(kermeta.standard.Void object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Not Comparable Exception</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Not Comparable Exception</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNotComparableException(NotComparableException object) {
+	public <G> T caseCollection(Collection<G> object) {
 		return null;
 	}
 
@@ -562,6 +547,21 @@ public class StandardSwitch<T> {
 	 * @generated
 	 */
 	public <G> T caseSequence(Sequence<G> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Iterator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Iterator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <G> T caseIterator(Iterator<G> object) {
 		return null;
 	}
 

@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see kermeta.language.behavior.BehaviorPackage#getCallExpression()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Any callable expression inherits this class, e.g : \n  - variable call\n  - feature call ( <code>a.b</code> : b is a feature call)\n\n<img alt=\"\"  height=\"90%\" width=\"90%\"  src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png\" />'"
  * @generated
  */
@@ -43,7 +44,8 @@ public interface CallExpression extends Expression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Static Type Variable Bindings</em>' reference list.
 	 * @see kermeta.language.behavior.BehaviorPackage#getCallExpression_StaticTypeVariableBindings()
-	 * @model annotation="kermeta documentation='To be written'"
+	 * @model annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='To be written'"
 	 * @generated
 	 */
 	EList<Type> getStaticTypeVariableBindings();
@@ -60,6 +62,7 @@ public interface CallExpression extends Expression {
 	 * @see #setName(String)
 	 * @see kermeta.language.behavior.BehaviorPackage#getCallExpression_Name()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='A call must be named'"
 	 * @generated
 	 */
@@ -87,6 +90,7 @@ public interface CallExpression extends Expression {
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see kermeta.language.behavior.BehaviorPackage#getCallExpression_Parameters()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Kermeta calls can embedd expressions as parameters'"
 	 * @generated
 	 */

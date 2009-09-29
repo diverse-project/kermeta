@@ -61,7 +61,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * @generated
 	 */
 	public Operation getOperation() {
-		if (eContainerFeatureID != StructurePackage.PARAMETER__OPERATION)
+		if (eContainerFeatureID() != StructurePackage.PARAMETER__OPERATION)
 			return null;
 		return (Operation) eContainer();
 	}
@@ -72,7 +72,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * @generated
 	 */
 	public Operation basicGetOperation() {
-		if (eContainerFeatureID != StructurePackage.PARAMETER__OPERATION)
+		if (eContainerFeatureID() != StructurePackage.PARAMETER__OPERATION)
 			return null;
 		return (Operation) eInternalContainer();
 	}
@@ -96,7 +96,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 */
 	public void setOperation(Operation newOperation) {
 		if (newOperation != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.PARAMETER__OPERATION && newOperation != null)) {
+				|| (eContainerFeatureID() != StructurePackage.PARAMETER__OPERATION && newOperation != null)) {
 			if (EcoreUtil.isAncestor(this, newOperation))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -156,7 +156,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case StructurePackage.PARAMETER__OPERATION:
 			return eInternalContainer().eInverseRemove(this,
 					StructurePackage.OPERATION__OWNED_PARAMETER,

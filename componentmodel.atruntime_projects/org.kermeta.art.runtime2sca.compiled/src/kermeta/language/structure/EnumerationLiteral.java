@@ -21,7 +21,8 @@ package kermeta.language.structure;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getEnumerationLiteral()
- * @model annotation="kermeta documentation='Item definition for enumeration'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Item definition for enumeration'"
  * @generated
  */
 public interface EnumerationLiteral extends NamedElement {
@@ -39,6 +40,7 @@ public interface EnumerationLiteral extends NamedElement {
 	 * @see kermeta.language.structure.StructurePackage#getEnumerationLiteral_Enumeration()
 	 * @see kermeta.language.structure.Enumeration#getOwnedLiteral
 	 * @model opposite="ownedLiteral"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 *        annotation="kermeta documentation='Owning Enumeration'"
 	 * @generated

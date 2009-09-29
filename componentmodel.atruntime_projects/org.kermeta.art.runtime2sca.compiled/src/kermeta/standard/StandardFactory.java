@@ -29,13 +29,31 @@ public interface StandardFactory extends EFactory {
 			.init();
 
 	/**
-	 * Returns a new object of class '<em>Iterator</em>'.
+	 * Returns a new object of class '<em>Unknown Java Object</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Iterator</em>'.
+	 * @return a new object of class '<em>Unknown Java Object</em>'.
 	 * @generated
 	 */
-	<G> Iterator<G> createIterator();
+	UnknownJavaObject createUnknownJavaObject();
+
+	/**
+	 * Returns a new object of class '<em>Void</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Void</em>'.
+	 * @generated
+	 */
+	Void createVoid();
+
+	/**
+	 * Returns a new object of class '<em>Not Comparable Exception</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Not Comparable Exception</em>'.
+	 * @generated
+	 */
+	NotComparableException createNotComparableException();
 
 	/**
 	 * Returns a new object of class '<em>Boolean</em>'.
@@ -44,7 +62,7 @@ public interface StandardFactory extends EFactory {
 	 * @return a new object of class '<em>Boolean</em>'.
 	 * @generated
 	 */
-	kermeta.standard.Boolean createBoolean();
+	Boolean createBoolean();
 
 	/**
 	 * Returns a new object of class '<em>Integer</em>'.
@@ -53,7 +71,7 @@ public interface StandardFactory extends EFactory {
 	 * @return a new object of class '<em>Integer</em>'.
 	 * @generated
 	 */
-	kermeta.standard.Integer createInteger();
+	Integer createInteger();
 
 	/**
 	 * Returns a new object of class '<em>Real</em>'.
@@ -71,7 +89,7 @@ public interface StandardFactory extends EFactory {
 	 * @return a new object of class '<em>Character</em>'.
 	 * @generated
 	 */
-	kermeta.standard.Character createCharacter();
+	Character createCharacter();
 
 	/**
 	 * Returns a new object of class '<em>String</em>'.
@@ -80,34 +98,7 @@ public interface StandardFactory extends EFactory {
 	 * @return a new object of class '<em>String</em>'.
 	 * @generated
 	 */
-	kermeta.standard.String createString();
-
-	/**
-	 * Returns a new object of class '<em>Unknown Java Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unknown Java Object</em>'.
-	 * @generated
-	 */
-	UnknownJavaObject createUnknownJavaObject();
-
-	/**
-	 * Returns a new object of class '<em>Void</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Void</em>'.
-	 * @generated
-	 */
-	kermeta.standard.Void createVoid();
-
-	/**
-	 * Returns a new object of class '<em>Not Comparable Exception</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Not Comparable Exception</em>'.
-	 * @generated
-	 */
-	NotComparableException createNotComparableException();
+	String createString();
 
 	/**
 	 * Returns a new object of class '<em>Set</em>'.
@@ -144,6 +135,15 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	<G> Sequence<G> createSequence();
+
+	/**
+	 * Returns a new object of class '<em>Iterator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Iterator</em>'.
+	 * @generated
+	 */
+	<G> Iterator<G> createIterator();
 
 	/**
 	 * Returns the package supported by this factory.

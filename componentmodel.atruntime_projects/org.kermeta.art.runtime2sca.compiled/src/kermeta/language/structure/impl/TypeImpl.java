@@ -61,7 +61,7 @@ public class TypeImpl extends ObjectImpl implements Type {
 	 * @generated
 	 */
 	public TypeContainer getTypeContainer() {
-		if (eContainerFeatureID != StructurePackage.TYPE__TYPE_CONTAINER)
+		if (eContainerFeatureID() != StructurePackage.TYPE__TYPE_CONTAINER)
 			return null;
 		return (TypeContainer) eContainer();
 	}
@@ -72,7 +72,7 @@ public class TypeImpl extends ObjectImpl implements Type {
 	 * @generated
 	 */
 	public TypeContainer basicGetTypeContainer() {
-		if (eContainerFeatureID != StructurePackage.TYPE__TYPE_CONTAINER)
+		if (eContainerFeatureID() != StructurePackage.TYPE__TYPE_CONTAINER)
 			return null;
 		return (TypeContainer) eInternalContainer();
 	}
@@ -96,7 +96,7 @@ public class TypeImpl extends ObjectImpl implements Type {
 	 */
 	public void setTypeContainer(TypeContainer newTypeContainer) {
 		if (newTypeContainer != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.TYPE__TYPE_CONTAINER && newTypeContainer != null)) {
+				|| (eContainerFeatureID() != StructurePackage.TYPE__TYPE_CONTAINER && newTypeContainer != null)) {
 			if (EcoreUtil.isAncestor(this, newTypeContainer))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -147,12 +147,14 @@ public class TypeImpl extends ObjectImpl implements Type {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isInstance(kermeta.language.structure.Object element) {
+	public Boolean isSuperTypeOf(Type object) {
 
 		java.lang.Boolean result = null;
 
-		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOfSwitcher(element, this);
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.TypeUtil
+								.hasSubType(this, object), "java.lang.Boolean");
 
 		return result;
 
@@ -163,14 +165,12 @@ public class TypeImpl extends ObjectImpl implements Type {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isSuperTypeOf(Type object) {
+	public Boolean isInstance(kermeta.language.structure.Object element) {
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asTypeOrVoid(
-						org.kermeta.compil.runtime.helper.language.TypeUtil
-								.hasSubType(this, object), "java.lang.Boolean");
+		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(element, this);
 
 		return result;
 
@@ -232,7 +232,7 @@ public class TypeImpl extends ObjectImpl implements Type {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case StructurePackage.TYPE__TYPE_CONTAINER:
 			return eInternalContainer().eInverseRemove(this,
 					StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE,

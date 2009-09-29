@@ -15,7 +15,8 @@ package kermeta.language.behavior;
  *
  *
  * @see kermeta.language.behavior.BehaviorPackage#getVoidLiteral()
- * @model annotation="kermeta documentation='This class is used to represent the special expression void'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='This class is used to represent the special expression void'"
  * @generated
  */
 public interface VoidLiteral extends Literal {

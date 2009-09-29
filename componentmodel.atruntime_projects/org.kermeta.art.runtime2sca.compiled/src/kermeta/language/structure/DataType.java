@@ -16,6 +16,7 @@ package kermeta.language.structure;
  *
  * @see kermeta.language.structure.StructurePackage#getDataType()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Special type definition for Enumeration, PrimitiveType'"
  * @generated
  */

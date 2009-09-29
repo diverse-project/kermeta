@@ -27,8 +27,8 @@ import org.eclipse.emf.ecore.EPackage;
  * @see kermeta.io.IoFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/io'"
- *        annotation="kermeta documentation='/**\n * Contains standard input/output related classes. \n \052/'"
  *        annotation="kermeta documentation='/**\n * Contains file input/output related classes. \n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png\"/>\n \052/'"
+ *        annotation="kermeta documentation='/**\n * Contains standard input/output related classes. \n \052/'"
  * @generated
  */
 public interface IoPackage extends EPackage {
@@ -65,61 +65,6 @@ public interface IoPackage extends EPackage {
 	IoPackage eINSTANCE = kermeta.io.impl.IoPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link kermeta.io.impl.StdIOImpl <em>Std IO</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.io.impl.StdIOImpl
-	 * @see kermeta.io.impl.IoPackageImpl#getStdIO()
-	 * @generated
-	 */
-	int STD_IO = 0;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STD_IO__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STD_IO__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STD_IO__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STD_IO__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
-
-	/**
-	 * The number of structural features of the '<em>Std IO</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STD_IO_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link kermeta.io.impl.FileIOImpl <em>File IO</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -127,7 +72,7 @@ public interface IoPackage extends EPackage {
 	 * @see kermeta.io.impl.IoPackageImpl#getFileIO()
 	 * @generated
 	 */
-	int FILE_IO = 1;
+	int FILE_IO = 0;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -175,14 +120,59 @@ public interface IoPackage extends EPackage {
 	int FILE_IO_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * Returns the meta object for class '{@link kermeta.io.StdIO <em>Std IO</em>}'.
+	 * The meta object id for the '{@link kermeta.io.impl.StdIOImpl <em>Std IO</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Std IO</em>'.
-	 * @see kermeta.io.StdIO
+	 * @see kermeta.io.impl.StdIOImpl
+	 * @see kermeta.io.impl.IoPackageImpl#getStdIO()
 	 * @generated
 	 */
-	EClass getStdIO();
+	int STD_IO = 1;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STD_IO__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STD_IO__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STD_IO__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STD_IO__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
+	 * The number of structural features of the '<em>Std IO</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STD_IO_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.io.FileIO <em>File IO</em>}'.
@@ -193,6 +183,16 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getFileIO();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.io.StdIO <em>Std IO</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Std IO</em>'.
+	 * @see kermeta.io.StdIO
+	 * @generated
+	 */
+	EClass getStdIO();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -217,16 +217,6 @@ public interface IoPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link kermeta.io.impl.StdIOImpl <em>Std IO</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.io.impl.StdIOImpl
-		 * @see kermeta.io.impl.IoPackageImpl#getStdIO()
-		 * @generated
-		 */
-		EClass STD_IO = eINSTANCE.getStdIO();
-
-		/**
 		 * The meta object literal for the '{@link kermeta.io.impl.FileIOImpl <em>File IO</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -235,6 +225,16 @@ public interface IoPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FILE_IO = eINSTANCE.getFileIO();
+
+		/**
+		 * The meta object literal for the '{@link kermeta.io.impl.StdIOImpl <em>Std IO</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.io.impl.StdIOImpl
+		 * @see kermeta.io.impl.IoPackageImpl#getStdIO()
+		 * @generated
+		 */
+		EClass STD_IO = eINSTANCE.getStdIO();
 
 	}
 

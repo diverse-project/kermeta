@@ -21,7 +21,8 @@ package kermeta.language.structure;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getUsing()
- * @model annotation="kermeta documentation='To be written'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='To be written'"
  * @generated
  */
 public interface Using extends kermeta.language.structure.Object {
@@ -37,6 +38,7 @@ public interface Using extends kermeta.language.structure.Object {
 	 * @see #setQualifiedName(String)
 	 * @see kermeta.language.structure.StructurePackage#getUsing_QualifiedName()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='To be written'"
 	 * @generated
 	 */

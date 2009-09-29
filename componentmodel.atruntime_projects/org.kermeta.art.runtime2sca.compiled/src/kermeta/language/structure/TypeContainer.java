@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see kermeta.language.structure.StructurePackage#getTypeContainer()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Phantom class : EMF reflexive editors need that any element of a metamodel \nhas a direct or indirect containment relationship with the root model element of\nthe metamodel. This class resolves this technical requirement.'"
  * @generated
  */
@@ -42,6 +43,7 @@ public interface TypeContainer extends kermeta.language.structure.Object {
 	 * @see kermeta.language.structure.StructurePackage#getTypeContainer_ContainedType()
 	 * @see kermeta.language.structure.Type#getTypeContainer
 	 * @model opposite="typeContainer" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Contained types'"
 	 * @generated
 	 */

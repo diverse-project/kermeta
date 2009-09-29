@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see kermeta.language.structure.StructurePackage#getParameterizedType()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Abstraction for Parameterized types, namely, Class and ModelType'"
  * @generated
  */
@@ -42,6 +43,7 @@ public interface ParameterizedType extends Type {
 	 * @return the value of the '<em>Type Param Binding</em>' containment reference list.
 	 * @see kermeta.language.structure.StructurePackage#getParameterizedType_TypeParamBinding()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Bindings between type variables and provided types '"
 	 * @generated
 	 */
@@ -59,6 +61,7 @@ public interface ParameterizedType extends Type {
 	 * @see #setTypeDefinition(GenericTypeDefinition)
 	 * @see kermeta.language.structure.StructurePackage#getParameterizedType_TypeDefinition()
 	 * @model required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Definition of the Type'"
 	 * @generated
 	 */
@@ -86,6 +89,7 @@ public interface ParameterizedType extends Type {
 	 * @return the value of the '<em>Virtual Type Binding</em>' containment reference list.
 	 * @see kermeta.language.structure.StructurePackage#getParameterizedType_VirtualTypeBinding()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='To be written'"
 	 * @generated
 	 */

@@ -24,7 +24,8 @@ package kermeta.language.structure;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getMultiplicityElement()
- * @model annotation="kermeta documentation=' Model elements with a multiplicity [lower..upper] inherit this class'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation=' Model elements with a multiplicity [lower..upper] inherit this class'"
  * @generated
  */
 public interface MultiplicityElement extends TypedElement {
@@ -41,6 +42,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @see #setIsOrdered(Boolean)
 	 * @see kermeta.language.structure.StructurePackage#getMultiplicityElement_IsOrdered()
 	 * @model default="false" dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Boolean stating whether the element is ordered'"
 	 * @generated
 	 */
@@ -68,6 +70,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @see #setUpper(Integer)
 	 * @see kermeta.language.structure.StructurePackage#getMultiplicityElement_Upper()
 	 * @model dataType="kermeta.standard.JavaInteger"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Max cardinality of the element, \'-1\' for \'*\''"
 	 * @generated
 	 */
@@ -95,6 +98,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @see #setLower(Integer)
 	 * @see kermeta.language.structure.StructurePackage#getMultiplicityElement_Lower()
 	 * @model dataType="kermeta.standard.JavaInteger"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Min cardinality of the element'"
 	 * @generated
 	 */
@@ -123,6 +127,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @see #setIsUnique(Boolean)
 	 * @see kermeta.language.structure.StructurePackage#getMultiplicityElement_IsUnique()
 	 * @model default="true" dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Boolean stating whether duplicated elements are allowed'"
 	 * @generated
 	 */

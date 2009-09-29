@@ -22,6 +22,7 @@ package kermeta.language.structure;
  *
  * @see kermeta.language.structure.StructurePackage#getTypeVariable()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Definition of a type variable for generic types :  \nin class definition <pre>class AClass<X,Y> {}</pre>, X and Y are type variables.'"
  * @generated
  */
@@ -37,7 +38,8 @@ public interface TypeVariable extends TypeContainer, Type, NamedElement {
 	 * @return the value of the '<em>Supertype</em>' reference.
 	 * @see #setSupertype(Type)
 	 * @see kermeta.language.structure.StructurePackage#getTypeVariable_Supertype()
-	 * @model annotation="kermeta documentation='Reference to the supertype, if any'"
+	 * @model annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='Reference to the supertype, if any'"
 	 * @generated
 	 */
 	Type getSupertype();

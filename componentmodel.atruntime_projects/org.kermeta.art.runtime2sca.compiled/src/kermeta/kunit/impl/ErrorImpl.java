@@ -242,12 +242,12 @@ public class ErrorImpl extends ObjectImpl implements kermeta.kunit.Error {
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_273 = false;
-		idIfCond_273 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_355 = false;
+		idIfCond_355 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equalsSwitcher(this.getKind(), kermeta.kunit.ErrorKind
 						.getByName("testError"));
 
-		if (idIfCond_273) {
+		if (idIfCond_355) {
 
 			result = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.toStringSwitcher(this.getError());
@@ -259,12 +259,12 @@ public class ErrorImpl extends ObjectImpl implements kermeta.kunit.Error {
 									.getMetaClassSwitcher(this.getError())
 									.getterName(), ".");
 
-			java.lang.Boolean idIfCond_274 = false;
-			idIfCond_274 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_356 = false;
+			idIfCond_356 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.equalsSwitcher(this.getKind(), kermeta.kunit.ErrorKind
 							.getByName("setUpError"));
 
-			if (idIfCond_274) {
+			if (idIfCond_356) {
 
 				result = kermeta.standard.helper.StringWrapper.plus(result,
 						"setUp()");
@@ -283,11 +283,11 @@ public class ErrorImpl extends ObjectImpl implements kermeta.kunit.Error {
 								.getMetaClassSwitcher(this.getException())
 								.getterName());
 
-		java.lang.Boolean idIfCond_275 = false;
-		idIfCond_275 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_357 = false;
+		idIfCond_357 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(this.getException().getMessage(), null);
 
-		if (idIfCond_275) {
+		if (idIfCond_357) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(result,
@@ -299,11 +299,11 @@ public class ErrorImpl extends ObjectImpl implements kermeta.kunit.Error {
 					"\n    (no message)");
 		}
 
-		java.lang.Boolean idIfCond_276 = false;
-		idIfCond_276 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_358 = false;
+		idIfCond_358 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(this.getException().getStackTrace(), null);
 
-		if (idIfCond_276) {
+		if (idIfCond_358) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(result,

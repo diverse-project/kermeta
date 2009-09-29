@@ -805,13 +805,22 @@ public interface TypePackage extends EPackage {
 	int PORT__ROLE = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Implem</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT__IMPLEM = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Is Optional</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__IS_OPTIONAL = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 2;
+	int PORT__IS_OPTIONAL = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Port</em>' class.
@@ -820,7 +829,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_FEATURE_COUNT = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 3;
+	int PORT_FEATURE_COUNT = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link art.type.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -1106,6 +1115,17 @@ public interface TypePackage extends EPackage {
 	EAttribute getPort_Role();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link art.type.Port#getImplem <em>Implem</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Implem</em>'.
+	 * @see art.type.Port#getImplem()
+	 * @see #getPort()
+	 * @generated
+	 */
+	EReference getPort_Implem();
+
+	/**
 	 * Returns the meta object for the attribute '{@link art.type.Port#getIsOptional <em>Is Optional</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1331,6 +1351,14 @@ public interface TypePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PORT__ROLE = eINSTANCE.getPort_Role();
+
+		/**
+		 * The meta object literal for the '<em><b>Implem</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PORT__IMPLEM = eINSTANCE.getPort_Implem();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Optional</b></em>' attribute feature.

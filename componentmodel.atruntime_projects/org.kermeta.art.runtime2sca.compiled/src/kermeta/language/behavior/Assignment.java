@@ -23,7 +23,8 @@ package kermeta.language.behavior;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getAssignment()
- * @model annotation="kermeta documentation='Assignment is the model-element representation of the assignment statement <code>x := y</code>\n<img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png\"/>'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Assignment is the model-element representation of the assignment statement <code>x := y</code>\n<img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png\"/>'"
  * @generated
  */
 public interface Assignment extends Expression {
@@ -39,6 +40,7 @@ public interface Assignment extends Expression {
 	 * @see #setValue(Expression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getAssignment_Value()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Value to be assigned, as a KerMeta expression'"
 	 * @generated
 	 */
@@ -66,6 +68,7 @@ public interface Assignment extends Expression {
 	 * @see #setTarget(CallExpression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getAssignment_Target()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Target of the assignment, as a CallExpression'"
 	 * @generated
 	 */
@@ -94,6 +97,7 @@ public interface Assignment extends Expression {
 	 * @see #setIsCast(Boolean)
 	 * @see kermeta.language.behavior.BehaviorPackage#getAssignment_IsCast()
 	 * @model default="false" dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Boolean stating whether current assignment corresponds to a cast operation '"
 	 * @generated
 	 */

@@ -203,7 +203,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public Operation getPreOwner() {
-		if (eContainerFeatureID != StructurePackage.CONSTRAINT__PRE_OWNER)
+		if (eContainerFeatureID() != StructurePackage.CONSTRAINT__PRE_OWNER)
 			return null;
 		return (Operation) eContainer();
 	}
@@ -214,7 +214,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public Operation basicGetPreOwner() {
-		if (eContainerFeatureID != StructurePackage.CONSTRAINT__PRE_OWNER)
+		if (eContainerFeatureID() != StructurePackage.CONSTRAINT__PRE_OWNER)
 			return null;
 		return (Operation) eInternalContainer();
 	}
@@ -238,7 +238,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	public void setPreOwner(Operation newPreOwner) {
 		if (newPreOwner != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.CONSTRAINT__PRE_OWNER && newPreOwner != null)) {
+				|| (eContainerFeatureID() != StructurePackage.CONSTRAINT__PRE_OWNER && newPreOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newPreOwner))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -287,7 +287,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public Operation getPostOwner() {
-		if (eContainerFeatureID != StructurePackage.CONSTRAINT__POST_OWNER)
+		if (eContainerFeatureID() != StructurePackage.CONSTRAINT__POST_OWNER)
 			return null;
 		return (Operation) eContainer();
 	}
@@ -298,7 +298,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public Operation basicGetPostOwner() {
-		if (eContainerFeatureID != StructurePackage.CONSTRAINT__POST_OWNER)
+		if (eContainerFeatureID() != StructurePackage.CONSTRAINT__POST_OWNER)
 			return null;
 		return (Operation) eInternalContainer();
 	}
@@ -322,7 +322,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	public void setPostOwner(Operation newPostOwner) {
 		if (newPostOwner != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.CONSTRAINT__POST_OWNER && newPostOwner != null)) {
+				|| (eContainerFeatureID() != StructurePackage.CONSTRAINT__POST_OWNER && newPostOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newPostOwner))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -371,7 +371,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public ClassDefinition getInvOwner() {
-		if (eContainerFeatureID != StructurePackage.CONSTRAINT__INV_OWNER)
+		if (eContainerFeatureID() != StructurePackage.CONSTRAINT__INV_OWNER)
 			return null;
 		return (ClassDefinition) eContainer();
 	}
@@ -382,7 +382,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public ClassDefinition basicGetInvOwner() {
-		if (eContainerFeatureID != StructurePackage.CONSTRAINT__INV_OWNER)
+		if (eContainerFeatureID() != StructurePackage.CONSTRAINT__INV_OWNER)
 			return null;
 		return (ClassDefinition) eInternalContainer();
 	}
@@ -406,7 +406,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	public void setInvOwner(ClassDefinition newInvOwner) {
 		if (newInvOwner != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.CONSTRAINT__INV_OWNER && newInvOwner != null)) {
+				|| (eContainerFeatureID() != StructurePackage.CONSTRAINT__INV_OWNER && newInvOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newInvOwner))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -480,7 +480,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case StructurePackage.CONSTRAINT__PRE_OWNER:
 			return eInternalContainer().eInverseRemove(this,
 					StructurePackage.OPERATION__PRE, Operation.class, msgs);

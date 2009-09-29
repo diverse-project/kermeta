@@ -21,7 +21,8 @@ package kermeta.language.behavior;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getRaise()
- * @model annotation="kermeta documentation='Refers to raise exception block'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Refers to raise exception block'"
  * @generated
  */
 public interface Raise extends Expression {
@@ -37,6 +38,7 @@ public interface Raise extends Expression {
 	 * @see #setExpression(Expression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getRaise_Expression()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='To be written #######################'"
 	 * @generated
 	 */

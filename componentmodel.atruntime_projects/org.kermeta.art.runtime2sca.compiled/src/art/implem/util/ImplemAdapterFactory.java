@@ -84,6 +84,21 @@ public class ImplemAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseOSGiComponent(OSGiComponent object) {
+			return createOSGiComponentAdapter();
+		}
+
+		@Override
+		public Adapter casePortImplementation(PortImplementation object) {
+			return createPortImplementationAdapter();
+		}
+
+		@Override
+		public Adapter caseOSGiPort(OSGiPort object) {
+			return createOSGiPortAdapter();
+		}
+
+		@Override
 		public Adapter caseObject(kermeta.language.structure.Object object) {
 			return createObjectAdapter();
 		}
@@ -132,6 +147,48 @@ public class ImplemAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFractalComponentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.implem.OSGiComponent <em>OS Gi Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.implem.OSGiComponent
+	 * @generated
+	 */
+	public Adapter createOSGiComponentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.implem.PortImplementation <em>Port Implementation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.implem.PortImplementation
+	 * @generated
+	 */
+	public Adapter createPortImplementationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.implem.OSGiPort <em>OS Gi Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.implem.OSGiPort
+	 * @generated
+	 */
+	public Adapter createOSGiPortAdapter() {
 		return null;
 	}
 

@@ -35,7 +35,7 @@ public interface ExceptionsFactory extends EFactory {
 	 * @return a new object of class '<em>Exception</em>'.
 	 * @generated
 	 */
-	kermeta.exceptions.Exception createException();
+	Exception createException();
 
 	/**
 	 * Returns a new object of class '<em>Runtime Error</em>'.

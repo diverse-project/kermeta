@@ -23,7 +23,8 @@ package kermeta.language.behavior;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getVariableDecl()
- * @model annotation="kermeta documentation='refers to variable declaration <code>var x : X init a</code>\n<img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png\"/>'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='refers to variable declaration <code>var x : X init a</code>\n<img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png\"/>'"
  * @generated
  */
 public interface VariableDecl extends Expression {
@@ -39,6 +40,7 @@ public interface VariableDecl extends Expression {
 	 * @see #setInitialization(Expression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getVariableDecl_Initialization()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Initialization expression for the variable\nDefault value is <code>void</code> ????'"
 	 * @generated
 	 */
@@ -66,6 +68,7 @@ public interface VariableDecl extends Expression {
 	 * @see #setType(TypeReference)
 	 * @see kermeta.language.behavior.BehaviorPackage#getVariableDecl_Type()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Type of the declared variable'"
 	 * @generated
 	 */
@@ -93,6 +96,7 @@ public interface VariableDecl extends Expression {
 	 * @see #setIdentifier(String)
 	 * @see kermeta.language.behavior.BehaviorPackage#getVariableDecl_Identifier()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Initialization expression for the variable\nDefault value is <code>void</code> ????'"
 	 * @generated
 	 */

@@ -127,32 +127,32 @@ public class CompositeInstanceImpl extends ComponentInstanceImpl implements
 
 		//BIft:collect
 
-		kermeta.standard.Sequence<art.instance.ComponentInstance> result_ft101 = null;
+		kermeta.standard.Sequence<art.instance.ComponentInstance> result_ft116 = null;
 
-		result_ft101 = ((kermeta.standard.Sequence<art.instance.ComponentInstance>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft116 = ((kermeta.standard.Sequence<art.instance.ComponentInstance>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject(kermeta.standard.StandardPackage.eINSTANCE
 						.getSequence()));
 
 		{
 
-			kermeta.standard.Iterator<art.instance.DelegationBinding> it_ft101 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<art.instance.DelegationBinding> it_ft116 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<art.instance.DelegationBinding> convertAsOrderedSet(
 							this.getDelegation()).iterator();
-			java.lang.Boolean idLoopCond_382 = false;
-			while (!idLoopCond_382) {
-				idLoopCond_382 = it_ft101.isOff();
-				if (idLoopCond_382) {
+			java.lang.Boolean idLoopCond_413 = false;
+			while (!idLoopCond_413) {
+				idLoopCond_413 = it_ft116.isOff();
+				if (idLoopCond_413) {
 				} else {
 
-					art.instance.ComponentInstance result_lambda_ft101 = null;
+					art.instance.ComponentInstance result_lambda_ft116 = null;
 					//BIle:collector
-					art.instance.DelegationBinding d_lbdExp101 = it_ft101
+					art.instance.DelegationBinding d_lbdExp116 = it_ft116
 							.next();
 
-					result_lambda_ft101 = d_lbdExp101.getServerInstance();
+					result_lambda_ft116 = d_lbdExp116.getServerInstance();
 					//EIle:collector
 
-					result_ft101.add(result_lambda_ft101);
+					result_ft116.add(result_lambda_ft116);
 				}
 			}
 		}
@@ -162,21 +162,21 @@ public class CompositeInstanceImpl extends ComponentInstanceImpl implements
 
 		{
 
-			kermeta.standard.Iterator<art.instance.ComponentInstance> it_ft100 = result_ft101
+			kermeta.standard.Iterator<art.instance.ComponentInstance> it_ft115 = result_ft116
 					.iterator();
-			java.lang.Boolean idLoopCond_381 = false;
-			while (!idLoopCond_381) {
-				idLoopCond_381 = it_ft100.isOff();
-				if (idLoopCond_381) {
+			java.lang.Boolean idLoopCond_412 = false;
+			while (!idLoopCond_412) {
+				idLoopCond_412 = it_ft115.isOff();
+				if (idLoopCond_412) {
 				} else {
 
 					//BIle:func
-					art.instance.ComponentInstance c_lbdExp100 = it_ft100
+					art.instance.ComponentInstance c_lbdExp115 = it_ft115
 							.next();
 
 					result
 							.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-									.<art.type.Operation> convertAsOrderedSet(c_lbdExp100
+									.<art.type.Operation> convertAsOrderedSet(c_lbdExp115
 											.getterOperation()));
 					//EIle:func
 

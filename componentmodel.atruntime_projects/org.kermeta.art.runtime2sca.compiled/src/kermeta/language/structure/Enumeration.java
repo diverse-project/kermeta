@@ -23,7 +23,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getEnumeration()
- * @model annotation="kermeta documentation='Definition for Enumeration'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Definition for Enumeration'"
  * @generated
  */
 public interface Enumeration extends DataType {
@@ -41,6 +42,7 @@ public interface Enumeration extends DataType {
 	 * @see kermeta.language.structure.StructurePackage#getEnumeration_OwnedLiteral()
 	 * @see kermeta.language.structure.EnumerationLiteral#getEnumeration
 	 * @model opposite="enumeration" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Owned items in an Enumeration'"
 	 * @generated
 	 */

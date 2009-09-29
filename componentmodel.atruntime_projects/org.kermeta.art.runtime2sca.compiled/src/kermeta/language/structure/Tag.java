@@ -25,7 +25,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getTag()
- * @model annotation="kermeta documentation='Tag is intended to be used to add documentation on a  model element,\nor add some textual information that cannot be expressed with any\nmodel element definition.'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Tag is intended to be used to add documentation on a  model element,\nor add some textual information that cannot be expressed with any\nmodel element definition.'"
  * @generated
  */
 public interface Tag extends kermeta.language.structure.Object {
@@ -41,6 +42,7 @@ public interface Tag extends kermeta.language.structure.Object {
 	 * @see #setName(String)
 	 * @see kermeta.language.structure.StructurePackage#getTag_Name()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Name of the Tag'"
 	 * @generated
 	 */
@@ -68,6 +70,7 @@ public interface Tag extends kermeta.language.structure.Object {
 	 * @see #setValue(String)
 	 * @see kermeta.language.structure.StructurePackage#getTag_Value()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='String value of the Tag'"
 	 * @generated
 	 */
@@ -97,6 +100,7 @@ public interface Tag extends kermeta.language.structure.Object {
 	 * @see kermeta.language.structure.StructurePackage#getTag_Object()
 	 * @see kermeta.language.structure.Object#getTag
 	 * @model opposite="tag" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Objects to which the Tag is attached to'"
 	 * @generated
 	 */

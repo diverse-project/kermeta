@@ -37,6 +37,33 @@ public interface ImplemFactory extends EFactory {
 	FractalComponent createFractalComponent();
 
 	/**
+	 * Returns a new object of class '<em>OS Gi Component</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>OS Gi Component</em>'.
+	 * @generated
+	 */
+	OSGiComponent createOSGiComponent();
+
+	/**
+	 * Returns a new object of class '<em>Port Implementation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Port Implementation</em>'.
+	 * @generated
+	 */
+	PortImplementation createPortImplementation();
+
+	/**
+	 * Returns a new object of class '<em>OS Gi Port</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>OS Gi Port</em>'.
+	 * @generated
+	 */
+	OSGiPort createOSGiPort();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

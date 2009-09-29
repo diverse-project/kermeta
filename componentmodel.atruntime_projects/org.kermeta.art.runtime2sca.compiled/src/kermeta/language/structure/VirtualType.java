@@ -25,7 +25,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getVirtualType()
- * @model annotation="kermeta documentation='To be written'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='To be written'"
  * @generated
  */
 public interface VirtualType extends ObjectTypeVariable {
@@ -43,6 +44,7 @@ public interface VirtualType extends ObjectTypeVariable {
 	 * @see kermeta.language.structure.StructurePackage#getVirtualType_ModelType()
 	 * @see kermeta.language.structure.ModelTypeVariable#getVirtualType
 	 * @model opposite="virtualType" required="true" transient="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='To be written'"
 	 * @generated
 	 */
@@ -70,6 +72,7 @@ public interface VirtualType extends ObjectTypeVariable {
 	 * @return the value of the '<em>Type Param Binding</em>' containment reference list.
 	 * @see kermeta.language.structure.StructurePackage#getVirtualType_TypeParamBinding()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='To be written'"
 	 * @generated
 	 */
@@ -87,6 +90,7 @@ public interface VirtualType extends ObjectTypeVariable {
 	 * @see #setClassDefinition(ClassDefinition)
 	 * @see kermeta.language.structure.StructurePackage#getVirtualType_ClassDefinition()
 	 * @model required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='To be written'"
 	 * @generated
 	 */

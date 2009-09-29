@@ -17,9 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
@@ -30,8 +27,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 
 
 /**
@@ -66,12 +61,7 @@ public class Saver extends SaverOrLoader {
 			resource.getContents().addAll(instancesToSave);
 			
 			resource.save(null);
-			IFile savedFile = ResourceHelper.getIFile(resource.getURI().toPlatformString(true));
-			savedFile.getProject().refreshLocal(IFile.DEPTH_INFINITE, new NullProgressMonitor());
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -32,16 +32,16 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * <ul>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#get_default <em>default</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsDerived <em>Is Derived</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getOpposite <em>Opposite</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsDerived <em>Is Derived</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getGetterBody <em>Getter Body</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsReadOnly <em>Is Read Only</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getSetterBody <em>Setter Body</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getOwningClass <em>Owning Class</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsID <em>Is ID</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsSetterAbstract <em>Is Setter Abstract</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsComposite <em>Is Composite</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsID <em>Is ID</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsGetterAbstract <em>Is Getter Abstract</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsComposite <em>Is Composite</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,6 +69,16 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	protected String _default = _DEFAULT_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getOpposite() <em>Opposite</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOpposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property opposite;
+
+	/**
 	 * The default value of the '{@link #getIsDerived() <em>Is Derived</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,16 +97,6 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @ordered
 	 */
 	protected Boolean isDerived = IS_DERIVED_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getOpposite() <em>Opposite</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOpposite()
-	 * @generated
-	 * @ordered
-	 */
-	protected Property opposite;
 
 	/**
 	 * The cached value of the '{@link #getGetterBody() <em>Getter Body</em>}' containment reference.
@@ -139,26 +139,6 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	protected Expression setterBody;
 
 	/**
-	 * The default value of the '{@link #getIsID() <em>Is ID</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsID()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Boolean IS_ID_EDEFAULT = Boolean.FALSE;
-
-	/**
-	 * The cached value of the '{@link #getIsID() <em>Is ID</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsID()
-	 * @generated
-	 * @ordered
-	 */
-	protected Boolean isID = IS_ID_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getIsSetterAbstract() <em>Is Setter Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -179,24 +159,24 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	protected Boolean isSetterAbstract = IS_SETTER_ABSTRACT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getIsComposite() <em>Is Composite</em>}' attribute.
+	 * The default value of the '{@link #getIsID() <em>Is ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsComposite()
+	 * @see #getIsID()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_COMPOSITE_EDEFAULT = Boolean.FALSE;
+	protected static final Boolean IS_ID_EDEFAULT = Boolean.FALSE;
 
 	/**
-	 * The cached value of the '{@link #getIsComposite() <em>Is Composite</em>}' attribute.
+	 * The cached value of the '{@link #getIsID() <em>Is ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsComposite()
+	 * @see #getIsID()
 	 * @generated
 	 * @ordered
 	 */
-	protected Boolean isComposite = IS_COMPOSITE_EDEFAULT;
+	protected Boolean isID = IS_ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getIsGetterAbstract() <em>Is Getter Abstract</em>}' attribute.
@@ -217,6 +197,26 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @ordered
 	 */
 	protected Boolean isGetterAbstract = IS_GETTER_ABSTRACT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIsComposite() <em>Is Composite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsComposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_COMPOSITE_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIsComposite() <em>Is Composite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsComposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isComposite = IS_COMPOSITE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -264,29 +264,6 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getIsDerived() {
-		return isDerived;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsDerived(Boolean newIsDerived) {
-		Boolean oldIsDerived = isDerived;
-		isDerived = newIsDerived;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__IS_DERIVED, oldIsDerived,
-					isDerived));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Property getOpposite() {
 		if (opposite != null && opposite.eIsProxy()) {
 			InternalEObject oldOpposite = (InternalEObject) opposite;
@@ -321,6 +298,29 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					StructurePackage.PROPERTY__OPPOSITE, oldOpposite, opposite));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getIsDerived() {
+		return isDerived;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsDerived(Boolean newIsDerived) {
+		Boolean oldIsDerived = isDerived;
+		isDerived = newIsDerived;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PROPERTY__IS_DERIVED, oldIsDerived,
+					isDerived));
 	}
 
 	/**
@@ -529,10 +529,8 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDefinition getOwningClass() {
-		if (eContainerFeatureID != StructurePackage.PROPERTY__OWNING_CLASS)
-			return null;
-		return (ClassDefinition) eContainer();
+	public Boolean getIsSetterAbstract() {
+		return isSetterAbstract;
 	}
 
 	/**
@@ -540,49 +538,13 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDefinition basicGetOwningClass() {
-		if (eContainerFeatureID != StructurePackage.PROPERTY__OWNING_CLASS)
-			return null;
-		return (ClassDefinition) eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwningClass(
-			ClassDefinition newOwningClass, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newOwningClass,
-				StructurePackage.PROPERTY__OWNING_CLASS, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOwningClass(ClassDefinition newOwningClass) {
-		if (newOwningClass != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.PROPERTY__OWNING_CLASS && newOwningClass != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningClass))
-				throw new IllegalArgumentException(
-						"Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningClass != null)
-				msgs = ((InternalEObject) newOwningClass).eInverseAdd(this,
-						StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE,
-						ClassDefinition.class, msgs);
-			msgs = basicSetOwningClass(newOwningClass, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
+	public void setIsSetterAbstract(Boolean newIsSetterAbstract) {
+		Boolean oldIsSetterAbstract = isSetterAbstract;
+		isSetterAbstract = newIsSetterAbstract;
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__OWNING_CLASS, newOwningClass,
-					newOwningClass));
+					StructurePackage.PROPERTY__IS_SETTER_ABSTRACT,
+					oldIsSetterAbstract, isSetterAbstract));
 	}
 
 	/**
@@ -612,8 +574,10 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getIsSetterAbstract() {
-		return isSetterAbstract;
+	public ClassDefinition getOwningClass() {
+		if (eContainerFeatureID() != StructurePackage.PROPERTY__OWNING_CLASS)
+			return null;
+		return (ClassDefinition) eContainer();
 	}
 
 	/**
@@ -621,36 +585,49 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsSetterAbstract(Boolean newIsSetterAbstract) {
-		Boolean oldIsSetterAbstract = isSetterAbstract;
-		isSetterAbstract = newIsSetterAbstract;
-		if (eNotificationRequired())
+	public ClassDefinition basicGetOwningClass() {
+		if (eContainerFeatureID() != StructurePackage.PROPERTY__OWNING_CLASS)
+			return null;
+		return (ClassDefinition) eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningClass(
+			ClassDefinition newOwningClass, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newOwningClass,
+				StructurePackage.PROPERTY__OWNING_CLASS, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOwningClass(ClassDefinition newOwningClass) {
+		if (newOwningClass != eInternalContainer()
+				|| (eContainerFeatureID() != StructurePackage.PROPERTY__OWNING_CLASS && newOwningClass != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningClass))
+				throw new IllegalArgumentException(
+						"Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningClass != null)
+				msgs = ((InternalEObject) newOwningClass).eInverseAdd(this,
+						StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE,
+						ClassDefinition.class, msgs);
+			msgs = basicSetOwningClass(newOwningClass, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__IS_SETTER_ABSTRACT,
-					oldIsSetterAbstract, isSetterAbstract));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Boolean getIsComposite() {
-		return isComposite;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsComposite(Boolean newIsComposite) {
-		Boolean oldIsComposite = isComposite;
-		isComposite = newIsComposite;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__IS_COMPOSITE, oldIsComposite,
-					isComposite));
+					StructurePackage.PROPERTY__OWNING_CLASS, newOwningClass,
+					newOwningClass));
 	}
 
 	/**
@@ -674,6 +651,29 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					StructurePackage.PROPERTY__IS_GETTER_ABSTRACT,
 					oldIsGetterAbstract, isGetterAbstract));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getIsComposite() {
+		return isComposite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsComposite(Boolean newIsComposite) {
+		Boolean oldIsComposite = isComposite;
+		isComposite = newIsComposite;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PROPERTY__IS_COMPOSITE, oldIsComposite,
+					isComposite));
 	}
 
 	/**
@@ -720,7 +720,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case StructurePackage.PROPERTY__OWNING_CLASS:
 			return eInternalContainer().eInverseRemove(this,
 					StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE,
@@ -739,12 +739,12 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 		switch (featureID) {
 		case StructurePackage.PROPERTY__DEFAULT:
 			return get_default();
-		case StructurePackage.PROPERTY__IS_DERIVED:
-			return getIsDerived();
 		case StructurePackage.PROPERTY__OPPOSITE:
 			if (resolve)
 				return getOpposite();
 			return basicGetOpposite();
+		case StructurePackage.PROPERTY__IS_DERIVED:
+			return getIsDerived();
 		case StructurePackage.PROPERTY__GETTER_BODY:
 			if (resolve)
 				return getGetterBody();
@@ -755,18 +755,18 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 			if (resolve)
 				return getSetterBody();
 			return basicGetSetterBody();
+		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
+			return getIsSetterAbstract();
+		case StructurePackage.PROPERTY__IS_ID:
+			return getIsID();
 		case StructurePackage.PROPERTY__OWNING_CLASS:
 			if (resolve)
 				return getOwningClass();
 			return basicGetOwningClass();
-		case StructurePackage.PROPERTY__IS_ID:
-			return getIsID();
-		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
-			return getIsSetterAbstract();
-		case StructurePackage.PROPERTY__IS_COMPOSITE:
-			return getIsComposite();
 		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
 			return getIsGetterAbstract();
+		case StructurePackage.PROPERTY__IS_COMPOSITE:
+			return getIsComposite();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -782,11 +782,11 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 		case StructurePackage.PROPERTY__DEFAULT:
 			set_default((String) newValue);
 			return;
-		case StructurePackage.PROPERTY__IS_DERIVED:
-			setIsDerived((Boolean) newValue);
-			return;
 		case StructurePackage.PROPERTY__OPPOSITE:
 			setOpposite((Property) newValue);
+			return;
+		case StructurePackage.PROPERTY__IS_DERIVED:
+			setIsDerived((Boolean) newValue);
 			return;
 		case StructurePackage.PROPERTY__GETTER_BODY:
 			setGetterBody((Expression) newValue);
@@ -797,20 +797,20 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 		case StructurePackage.PROPERTY__SETTER_BODY:
 			setSetterBody((Expression) newValue);
 			return;
-		case StructurePackage.PROPERTY__OWNING_CLASS:
-			setOwningClass((ClassDefinition) newValue);
+		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
+			setIsSetterAbstract((Boolean) newValue);
 			return;
 		case StructurePackage.PROPERTY__IS_ID:
 			setIsID((Boolean) newValue);
 			return;
-		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
-			setIsSetterAbstract((Boolean) newValue);
-			return;
-		case StructurePackage.PROPERTY__IS_COMPOSITE:
-			setIsComposite((Boolean) newValue);
+		case StructurePackage.PROPERTY__OWNING_CLASS:
+			setOwningClass((ClassDefinition) newValue);
 			return;
 		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
 			setIsGetterAbstract((Boolean) newValue);
+			return;
+		case StructurePackage.PROPERTY__IS_COMPOSITE:
+			setIsComposite((Boolean) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -827,11 +827,11 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 		case StructurePackage.PROPERTY__DEFAULT:
 			set_default(_DEFAULT_EDEFAULT);
 			return;
-		case StructurePackage.PROPERTY__IS_DERIVED:
-			setIsDerived(IS_DERIVED_EDEFAULT);
-			return;
 		case StructurePackage.PROPERTY__OPPOSITE:
 			setOpposite((Property) null);
+			return;
+		case StructurePackage.PROPERTY__IS_DERIVED:
+			setIsDerived(IS_DERIVED_EDEFAULT);
 			return;
 		case StructurePackage.PROPERTY__GETTER_BODY:
 			setGetterBody((Expression) null);
@@ -842,20 +842,20 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 		case StructurePackage.PROPERTY__SETTER_BODY:
 			setSetterBody((Expression) null);
 			return;
-		case StructurePackage.PROPERTY__OWNING_CLASS:
-			setOwningClass((ClassDefinition) null);
+		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
+			setIsSetterAbstract(IS_SETTER_ABSTRACT_EDEFAULT);
 			return;
 		case StructurePackage.PROPERTY__IS_ID:
 			setIsID(IS_ID_EDEFAULT);
 			return;
-		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
-			setIsSetterAbstract(IS_SETTER_ABSTRACT_EDEFAULT);
-			return;
-		case StructurePackage.PROPERTY__IS_COMPOSITE:
-			setIsComposite(IS_COMPOSITE_EDEFAULT);
+		case StructurePackage.PROPERTY__OWNING_CLASS:
+			setOwningClass((ClassDefinition) null);
 			return;
 		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
 			setIsGetterAbstract(IS_GETTER_ABSTRACT_EDEFAULT);
+			return;
+		case StructurePackage.PROPERTY__IS_COMPOSITE:
+			setIsComposite(IS_COMPOSITE_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -872,11 +872,11 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 		case StructurePackage.PROPERTY__DEFAULT:
 			return _DEFAULT_EDEFAULT == null ? _default != null
 					: !_DEFAULT_EDEFAULT.equals(_default);
+		case StructurePackage.PROPERTY__OPPOSITE:
+			return opposite != null;
 		case StructurePackage.PROPERTY__IS_DERIVED:
 			return IS_DERIVED_EDEFAULT == null ? isDerived != null
 					: !IS_DERIVED_EDEFAULT.equals(isDerived);
-		case StructurePackage.PROPERTY__OPPOSITE:
-			return opposite != null;
 		case StructurePackage.PROPERTY__GETTER_BODY:
 			return getterBody != null;
 		case StructurePackage.PROPERTY__IS_READ_ONLY:
@@ -884,20 +884,20 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 					: !IS_READ_ONLY_EDEFAULT.equals(isReadOnly);
 		case StructurePackage.PROPERTY__SETTER_BODY:
 			return setterBody != null;
-		case StructurePackage.PROPERTY__OWNING_CLASS:
-			return basicGetOwningClass() != null;
-		case StructurePackage.PROPERTY__IS_ID:
-			return IS_ID_EDEFAULT == null ? isID != null : !IS_ID_EDEFAULT
-					.equals(isID);
 		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
 			return IS_SETTER_ABSTRACT_EDEFAULT == null ? isSetterAbstract != null
 					: !IS_SETTER_ABSTRACT_EDEFAULT.equals(isSetterAbstract);
-		case StructurePackage.PROPERTY__IS_COMPOSITE:
-			return IS_COMPOSITE_EDEFAULT == null ? isComposite != null
-					: !IS_COMPOSITE_EDEFAULT.equals(isComposite);
+		case StructurePackage.PROPERTY__IS_ID:
+			return IS_ID_EDEFAULT == null ? isID != null : !IS_ID_EDEFAULT
+					.equals(isID);
+		case StructurePackage.PROPERTY__OWNING_CLASS:
+			return basicGetOwningClass() != null;
 		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
 			return IS_GETTER_ABSTRACT_EDEFAULT == null ? isGetterAbstract != null
 					: !IS_GETTER_ABSTRACT_EDEFAULT.equals(isGetterAbstract);
+		case StructurePackage.PROPERTY__IS_COMPOSITE:
+			return IS_COMPOSITE_EDEFAULT == null ? isComposite != null
+					: !IS_COMPOSITE_EDEFAULT.equals(isComposite);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -919,14 +919,14 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 		result.append(isDerived);
 		result.append(", isReadOnly: ");
 		result.append(isReadOnly);
-		result.append(", isID: ");
-		result.append(isID);
 		result.append(", isSetterAbstract: ");
 		result.append(isSetterAbstract);
-		result.append(", isComposite: ");
-		result.append(isComposite);
+		result.append(", isID: ");
+		result.append(isID);
 		result.append(", isGetterAbstract: ");
 		result.append(isGetterAbstract);
+		result.append(", isComposite: ");
+		result.append(isComposite);
 		result.append(')');
 		return result.toString();
 	}

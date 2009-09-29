@@ -92,7 +92,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements
 	 * @generated
 	 */
 	public ModelTypeVariable getModelType() {
-		if (eContainerFeatureID != StructurePackage.VIRTUAL_TYPE__MODEL_TYPE)
+		if (eContainerFeatureID() != StructurePackage.VIRTUAL_TYPE__MODEL_TYPE)
 			return null;
 		return (ModelTypeVariable) eContainer();
 	}
@@ -103,7 +103,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements
 	 * @generated
 	 */
 	public ModelTypeVariable basicGetModelType() {
-		if (eContainerFeatureID != StructurePackage.VIRTUAL_TYPE__MODEL_TYPE)
+		if (eContainerFeatureID() != StructurePackage.VIRTUAL_TYPE__MODEL_TYPE)
 			return null;
 		return (ModelTypeVariable) eInternalContainer();
 	}
@@ -127,7 +127,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements
 	 */
 	public void setModelType(ModelTypeVariable newModelType) {
 		if (newModelType != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.VIRTUAL_TYPE__MODEL_TYPE && newModelType != null)) {
+				|| (eContainerFeatureID() != StructurePackage.VIRTUAL_TYPE__MODEL_TYPE && newModelType != null)) {
 			if (EcoreUtil.isAncestor(this, newModelType))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -246,7 +246,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
 			return eInternalContainer().eInverseRemove(this,
 					StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE,

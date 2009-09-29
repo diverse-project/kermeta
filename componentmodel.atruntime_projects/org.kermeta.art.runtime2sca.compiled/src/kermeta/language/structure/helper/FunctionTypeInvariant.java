@@ -10,7 +10,7 @@ public class FunctionTypeInvariant {
 	 *
 	 * @generated
 	 */
-	public static java.lang.Boolean checkInvariant_29523334__resultType(
+	public static java.lang.Boolean checkInvariant_5223029__resultType_must_not_be_a_ProductType(
 
 	kermeta.language.structure.FunctionType self
 

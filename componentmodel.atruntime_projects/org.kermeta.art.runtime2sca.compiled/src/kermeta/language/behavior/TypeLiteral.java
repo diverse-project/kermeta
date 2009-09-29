@@ -21,7 +21,8 @@ package kermeta.language.behavior;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getTypeLiteral()
- * @model annotation="kermeta documentation='This expression is a literal representing a Type.\nfor example, in \n   Integer.new\nInteger is a type literal representing the type kermeta::standard::Integer'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='This expression is a literal representing a Type.\nfor example, in \n   Integer.new\nInteger is a type literal representing the type kermeta::standard::Integer'"
  * @generated
  */
 public interface TypeLiteral extends Literal {
@@ -37,6 +38,7 @@ public interface TypeLiteral extends Literal {
 	 * @see #setTyperef(TypeReference)
 	 * @see kermeta.language.behavior.BehaviorPackage#getTypeLiteral_Typeref()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='The type refered by this literal'"
 	 * @generated
 	 */

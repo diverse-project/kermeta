@@ -24,7 +24,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getBlock()
- * @model annotation="kermeta documentation='Block is the model-element representation for the <code>do...end</code> block.'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Block is the model-element representation for the <code>do...end</code> block.'"
  * @generated
  */
 public interface Block extends Expression {
@@ -40,6 +41,7 @@ public interface Block extends Expression {
 	 * @return the value of the '<em>Statement</em>' containment reference list.
 	 * @see kermeta.language.behavior.BehaviorPackage#getBlock_Statement()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='List of statements composing the block'"
 	 * @generated
 	 */
@@ -57,6 +59,7 @@ public interface Block extends Expression {
 	 * @return the value of the '<em>Rescue Block</em>' containment reference list.
 	 * @see kermeta.language.behavior.BehaviorPackage#getBlock_RescueBlock()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='List of rescues defined for the block'"
 	 * @generated
 	 */
