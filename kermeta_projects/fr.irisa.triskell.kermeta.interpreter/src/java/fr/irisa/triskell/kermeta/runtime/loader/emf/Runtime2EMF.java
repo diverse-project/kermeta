@@ -404,7 +404,8 @@ public class Runtime2EMF {
 					"Could not find an EClass for RuntimeObject : " + rObject
 					+ "\n   properties : "	+ rObject.getProperties() + ";"
 					+ "\n   origin : "	+ runtimeObjectsToUpdateTrace.get(rObject) + ";"
-					+ "\n   possible reason : the RuntimeObject has a weird type? Please check '"
+					+ "\n   possible reason 1 : did you try to save a Void object ? '" 
+					+ "\n   possible reason 2 : the RuntimeObject has a weird type? Please check '" 
 					+ unit.getMetaModelUri() + "'", null);
 		EStructuralFeature feature = null;
 		internalLog.debug("  setting property of  "+ rObject + "; \t" +	eObject);
