@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.openembedd.wizards.AbstractNewExampleWizard;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.openembedd.logo.csm.tutorial.LogoCSMDemoPlugin;
 
-public class LogoCSMDemoSampleWizard extends AbstractNewExampleWizard
+import fr.irisa.triskell.eclipse.wizard.AbstractExampleWizard;
+
+
+
+public class LogoCSMDemoSampleWizard extends AbstractExampleWizard
 {
 
 	protected Collection<ProjectDescriptor> getProjectDescriptors()
@@ -30,5 +35,10 @@ public class LogoCSMDemoSampleWizard extends AbstractNewExampleWizard
 		projects.add(new ProjectDescriptor("org.openembedd.logo.csm.tutorial", "zip/org.openembedd.logo.csm.ui.zip",
 			"org.openembedd.logo.csm.ui"));
 		return projects;
+	}
+
+	@Override
+	protected AbstractUIPlugin getContainerPlugin() {
+		return LogoCSMDemoPlugin.getDefault();
 	}
 }
