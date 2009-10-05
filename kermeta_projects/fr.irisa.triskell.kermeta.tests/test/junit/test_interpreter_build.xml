@@ -6,7 +6,7 @@
     </description>
 
 	<property name="report.dir" location="../../reports" />
-	<property name="eclipse.home" location="c:/eclipse3.3/eclipse" />
+	<property name="eclipse.home" location="c:/eclipse3.5/eclipse" />
 	<property name="cobertura.dir" location="\\nas1a\triskell\bin\multiplatform\cobertura-1.7" />
 	<property name="dot.or.bin" value="bin"/>
 	<!-- <property name="dot.or.bin" value="@dot"/> -->
@@ -65,6 +65,7 @@
 		<property name="emf.compare.diff.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.diff_1.0.0.v200906160908.jar" />
 		<property name="emf.compare.match.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.match_1.0.0.v200906160908.jar" />
 	<property name="junit4.jar" location="${eclipse.home}/plugins/org.junit4_4.5.0.v20090423/junit.jar" />
+	<!--<property name="junit4.jar" location="file://C:/eclipse3.4_v1.2.0/eclipse/plugins/org.junit_3.8.2.v20080602-1318/junit.jar" />-->
 	<property name="hamcrest.core.jar" location="${eclipse.home}/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar" />
 	<property name="apache.commons.logging.jar" location="..\..\..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-1.1.1.jar" />
 	<property name="apache.commons.logging.adapters.jar" location="..\..\..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-adapters-1.1.1.jar" />
@@ -199,9 +200,10 @@
 		</cobertura-report>
 	</target>
 
-	<target name="test" description="run interpreter tests" depends="compile_java">
+	<target name="test" description="run interpreter tests"> <!--  depends="compile_java"> -->
 		<mkdir dir="${report.dir}" />
 		<mkdir dir="${report.dir}/html" />
+		<echo>${hamcrest.core.jar} </echo>
 		<junit printsummary="yes" haltonfailure="no" showoutput="yes" fork="yes">
 			<jvmarg value="-Xms40m" />
 			<jvmarg value="-Xmx512m" />
@@ -209,6 +211,8 @@
 			<classpath>
 				<pathelement location="${instrumented.dir}" />
 				<pathelement location="${kermeta.interpreter.class}" />
+
+				<pathelement location="${hamcrest.core.jar}" />
 				<!-- this entry is normally not usefull because duplicate with the instrumented dir, 
 		    	however for some unkown reason, sometimes some classes are not build correctly-->
 				<path refid="interpreter.class.path" />
@@ -221,16 +225,16 @@
 			<!--<classpath refid="cobertura_classpath" />-->
 
 			<formatter type="plain" />
-			<test name="kermeta_interpreter.test.InterpreterTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-interpreter-result">
+			<test name="kermeta_interpreter.test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-interpreter-result">
 				<formatter type="xml" />
 			</test>
 			<!-- <test name="kermeta_interpreter.emf_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-emf-result">
 				<formatter type="xml" /> 
 			</test> this test is run separately -->
-			<test name="kermeta_interpreter.constraint_test.ConstraintTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-constraint-result">
+			<test name="kermeta_interpreter.constraint_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-constraint-result">
 				<formatter type="xml" />
 			</test>
-			<test name="kermeta_interpreter.jar_test.JarTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-jar-result">
+			<test name="kermeta_interpreter.jar_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-jar-result">
 				<formatter type="xml" />
 			</test>
 			<!--<batchtest todir="${reports.xml.dir}" unless="testcase">
@@ -258,7 +262,7 @@
 
 			<formatter type="plain" />
 
-			<test name="kermeta_interpreter.emf_test.EmfTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-emf-result">
+			<test name="kermeta_interpreter.emf_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-emf-result">
 				<formatter type="xml" />
 			</test>
 
