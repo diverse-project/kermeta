@@ -58,6 +58,7 @@ public class BundleManagementImpl implements BundleManagement {
 	}
 
 	public long install(String location) {
+		System.out.println(location);
 		try {
 			return bundleContext.installBundle(location).getBundleId();
 		} catch (BundleException e) {
@@ -84,6 +85,7 @@ public class BundleManagementImpl implements BundleManagement {
 					bundleId = findBundleId(symbolicName, version);
 				}
 				if (bundleId > -1) {
+					System.out.println("There is a stack trace but there is no problem because this exception is handle.");
 					return bundleId;
 				} else {
 					System.err
@@ -223,18 +225,23 @@ public class BundleManagementImpl implements BundleManagement {
 			Bundle bundle = bundleContext.getBundle(bundleId);
 			long remoteBundleId = -1;
 			// FIXME for the moment, it only works with felix dosgi RI
-			String filter = "(&(osgi.remote=true) (osgi.remote.configuration.pojo.address="
-					+ remoteLocation + "*))";
+			//String filter = "(&(osgi.remote=true) (osgi.remote.configuration.pojo.address="
+			//String filter = "(&(service.imported=true) (org.apache.cxf.ws.address="
+			String filter = "(&(service.imported=true) (management.location="
+					//+ remoteLocation + "*))";
+				+ remoteLocation + "))";
 			BundleManagement remoteManager = null;
 			Long[] remoteBundleManagerIds = serviceManager.findServiceIds(
 					BundleManagement.class.getName(), filter, -1);
 			if (remoteBundleManagerIds.length == 0) {
+				System.out.println("there is no remote bundle manager");
 				return false;
 			}
 			remoteManager = (BundleManagement)serviceManager.getService(remoteBundleManagerIds[0]);
-
+			
 			// Maybe the bundle is already available with a HTTPService
 			if (new File(bundle.getLocation()).exists()) {
+				// Try to install the bundle on the remote platform with hte location stored on Bundle-location
 				remoteBundleId = remoteManager.install(bundle.getLocation());
 			}
 			if (remoteBundleId == -1) {
@@ -269,16 +276,20 @@ public class BundleManagementImpl implements BundleManagement {
 						output.close();
 					} catch (FileNotFoundException e) {
 						// e.printStackTrace();
-						// TODO Exception
+						// TODO_ Exception
+						return false;
 					} catch (IOException e) {
 						// e.printStackTrace();
-						// TODO Exception
+						// TODO_ Exception
+						return false;
 					}
 					String alias = "/" + bundleSymbolicName + "_" + version;
 					service.registerResources(alias, file.getName(),
 							new HttpContextImpl());
-
 					try {
+						// TODO need to edit /etc/hosts to delete the name of the node on the static DNS
+						// TODO problem if the DNS on the network is not good.
+						// TODO maybe it could be better to choose the name of the node like node.irisa.fr
 						InetAddress address = InetAddress.getLocalHost();
 						String bundleAddress = "http://"
 								+ address.getHostAddress();
@@ -292,14 +303,20 @@ public class BundleManagementImpl implements BundleManagement {
 						bundleAddress += alias;
 						System.out.println(bundleAddress);
 						remoteBundleId = remoteManager.install(bundleAddress);
+						System.out.println("remote bundle id is " + remoteBundleId);
+						if (remoteBundleId == -1) {
+							return false;
+						}
 					} catch (UnknownHostException e) {
 						// e.printStackTrace();
-						// TODO Exception
+						// TODO_ Exception
+							return false;
 					}
 
 				} catch (NamespaceException e1) {
 					// e1.printStackTrace();
-					// TODO Exception
+					// TODO_ Exception
+					return false;
 				}
 
 			}
@@ -450,7 +467,7 @@ public class BundleManagementImpl implements BundleManagement {
 			bundleIds.toArray(array);
 			return array;
 		}
-		// should not appears into OSGi R4.1
+		// should not appears into OSGi R4.x
 		System.err.println("There is no PackageAdmin service.");
 		return new Long[0];
 	}
@@ -476,7 +493,7 @@ public class BundleManagementImpl implements BundleManagement {
 			bundleIds.toArray(array);
 			return array;
 		}
-		// should not appears into OSGi R4.1
+		// should not appears into OSGi R4.x
 		System.err.println("There is no PackageAdmin service.");
 		return new Long[0];
 	}
@@ -497,7 +514,7 @@ public class BundleManagementImpl implements BundleManagement {
 			bundleIds.toArray(array);
 			return array;
 		}
-		// should not appears into OSGi R4.1
+		// should not appears into OSGi R4.x
 		System.err.println("There is no PackageAdmin service.");
 		return new Long[0];
 	}
@@ -511,7 +528,7 @@ public class BundleManagementImpl implements BundleManagement {
 			return packageAdmin.getHosts(bundleContext.getBundle(bundleId))[0]
 					.getBundleId();
 		}
-		// should not appears into OSGi R4.1
+		// should not appears into OSGi R4.x
 		System.err.println("There is no PackageAdmin service.");
 		return -1;
 	}

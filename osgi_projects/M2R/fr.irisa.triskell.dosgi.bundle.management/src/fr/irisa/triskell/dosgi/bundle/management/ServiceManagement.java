@@ -14,10 +14,29 @@ import org.osgi.framework.Constants;
  */
 public interface ServiceManagement {
 
-	// TODO define two type of BundleManagement and ServiceManagement : one for locals actions and one for remotes actions 
+	// TODO define two type of BundleManagement and ServiceManagement : one for locals actions and one for remotes actions ?
 	// TODO ALL javadocs
-	// TODO synchronized functions ?
 	// TODO add functions when the service is registered with many interfaces (addProperties, unregister, updateProperties ...) => maybe not
+	
+	/**
+	 * This function allows you to register a service into the OSGi platform.
+	 * @param interfaceName the name of the interface on which the service will be registered
+	 * @param service the service object
+	 * @param properties the properties of the services
+	 * @param bundleId the identifier of the bundle which want to register the service.
+	 * @return the identifier of the service into the platform
+	 */
+	public long registerService(String interfaceName, Object service, Dictionary<String, Object> properties, long bundleId);
+	
+	/**
+	 * This function allows you to register a service into the OSGi platform.
+	 * @param interfaceNames the name of the interfaces on which the service will be registered
+	 * @param service the service object
+	 * @param properties the properties of the services
+	 * @param bundleId the identifier of the bundle which want to register the service.
+	 * @return the identifier of the service into the platform
+	 */
+	public long registerService(String[] interfaceNames, Object service, Dictionary<String, Object> properties, long bundleId);
 	
 	
 	/**
@@ -25,7 +44,7 @@ public interface ServiceManagement {
 	 * @param interfaceName the name of the interface on which the service will be registered
 	 * @param service the service object
 	 * @param properties the properties of the services
-	 * @param remote true if you want to define remote properties, false else. If you want to specify your own remote properties, set false and define it into the properties attribut
+	 * @param remote true if you want to define remote properties, false else. If you want to specify your own remote properties, use {@link #registerService(String, Object, Dictionary, long)} and define your own remote properties.
 	 * @param bundleId the identifier of the bundle which want to register the service.
 	 * @return the identifier of the service into the platform
 	 */
@@ -36,7 +55,7 @@ public interface ServiceManagement {
 	 * @param interfaceNames the name of the interfaces on which the service will be registered
 	 * @param service the service object
 	 * @param properties the properties of the services
-	 * @param remote true if you want to define remote properties, false else. If you want to specify your own remote properties, set false and define it into the properties attribut
+	 * @param remote true if you want to define remote properties, false else. If you want to specify your own remote properties, use {@link #registerService(String[], Object, Dictionary, long)} and define your own remote properties.
 	 * @param bundleId the identifier of the bundle which want to register the service.
 	 * @return the identifier of the service into the platform
 	 */

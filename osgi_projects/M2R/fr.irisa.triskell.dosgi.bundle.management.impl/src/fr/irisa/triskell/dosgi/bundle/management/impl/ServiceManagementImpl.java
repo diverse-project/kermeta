@@ -33,8 +33,12 @@ public class ServiceManagementImpl implements ServiceManagement {
 	private Map<Long, List<Object[]>> mementos;
 
 	private Map<Long, List<Object[]>> properties;
+	
+	private String managementLocation;
+	
+	private int managementPortNumber;
 
-	public ServiceManagementImpl(BundleContext context) {
+	public ServiceManagementImpl(BundleContext context, String location, int portNumber) {
 		this.bundleManagementId = -1;
 		this.bundleContext = context;
 		this.serviceRegistrations = new HashMap<Long, ServiceRegistration>();
@@ -42,6 +46,8 @@ public class ServiceManagementImpl implements ServiceManagement {
 		this.filteringServices = new HashMap<Long, List<String[]>>();
 		this.mementos = new HashMap<Long, List<Object[]>>();
 		this.properties = new HashMap<Long, List<Object[]>>();
+		this.managementLocation = location;
+		this.managementPortNumber = portNumber;
 	}
 
 	public BundleContext getBundleContext() {
@@ -139,14 +145,18 @@ public class ServiceManagementImpl implements ServiceManagement {
 			}
 		}
 			
-			// FIXME for the moment, it only works with felix dosgi RI with this
+			// FIXMEOK for the moment, it only works with felix dosgi RI with this
 			// filter
-			String filter = "(&(osgi.remote=true) (osgi.remote.configuration.pojo.address="
-					+ remoteLocation + "*))";
+			//String filter = "(&(osgi.remote=true) (osgi.remote.configuration.pojo.address="
+			//String filter = "(&(service.imported=true) (org.apache.cxf.ws.address="
+			String filter = "(&(service.imported=true) (management.location="
+					//+ remoteLocation + "*))";
+				+ remoteLocation + "))";
 			Long[] remoteBundleManagerIds = findServiceIds(
 					BundleManagement.class.getName(), filter, -1);
 
 			if (remoteBundleManagerIds.length == 0) {
+				// TODO replace all System.err by log service
 				System.err.println("there is no remote BundleManagement");
 				return false;
 			}
@@ -200,18 +210,18 @@ public class ServiceManagementImpl implements ServiceManagement {
 				for (String key : keys) {
 					properties.put(key, reference.getProperty(key));
 				}
-				if (remote) {
+				/*if (remote) {
 					for (String key : remoteManager.getRemoteProperties().keySet()) {
 						Object value = remoteProperties.get(key);
-						// FIXME maybe there is no key which contains address ...
+						// FIXME_ maybe there is no key which contains address ...
 						// Only work with Felix RI
 						if (key.contains("address")) {
-							// FIXME How define the address when there are many interface names?
+							// FIXME_ How define the address when there are many interface names?
 							value = ((String) value) + "/" + ((String[])reference.getProperty(Constants.OBJECTCLASS))[0];
 						}
 						properties.put((String) key, (String) value);
 					}
-				}
+				}*/
 
 				remoteManager.defineProperties(objectClass, remoteBundleId,
 						properties);
@@ -219,7 +229,8 @@ public class ServiceManagementImpl implements ServiceManagement {
 				remoteBundleManager.start(remoteBundleId);
 				remoteManager.ungetBundleManager();
 			}
-			// TODO create a proxy if it is necessary to use the service which
+			// DONE we choose to use the Service discovery so all proxies is automaticaly managed
+			//create a proxy if it is necessary to use the service which
 			// is
 			// became remote into the local platform
 			// remoteManager.unbindService(remoteBundleManager,
@@ -247,23 +258,27 @@ public class ServiceManagementImpl implements ServiceManagement {
 		}
 	}
 
-	private void setRemotePropertiesBeforeRegistration(String[] interfaceNames,
-			Dictionary<String, Object> properties, boolean remote) {
-		if (remote) {
+	private void setDefaultRemoteProperties(Object service,
+			Dictionary<String, Object> properties) {
 			/*Enumeration<String> keysTmp = remoteProperties.keys();
 			while (keysTmp.hasMoreElements()) {
 				String key = keysTmp.nextElement();*/
-			for (String key : remoteProperties.keySet()) {
+			/*for (String key : remoteProperties.keySet()) {
 				Object value = remoteProperties.get(key);
-				// FIXME maybe any properties contains address
+				// FIXMEOK maybe any properties contains address
 				// it is only good for Felix RI
 				if (((String) key).contains("address")) {
-					// FIXME How define the address when there are many interface names?
+					// FIXMEOK How define the address when there are many interface names?
 					value = ((String) value) + "/" + interfaceNames[0];
 				}
 				properties.put((String) key, (String) value);
-			}
-		}
+			}*/
+			properties.put("service.exported.interfaces", "*");
+			properties.put("service.exported.configs", new String[] {"org.apache.cxf.ws"/*, "pojo", "org.apache.cxf.rs"*/});
+			properties.put("service.exported.intents", new String[] {/*"addressing", "logging", */"SOAP", "SOAP.1_1", "SOAP.1_2", "HTTP"});
+			properties.put("org.apache.cxf.ws.address", "http://localhost:" + managementPortNumber + "/" + service.getClass().getName());
+			properties.put("management.location", managementLocation);
+			// TODO_ add all remote properties
 	}
 	
 	public long registerService(String interfaceName, Object service,
@@ -282,8 +297,18 @@ public class ServiceManagementImpl implements ServiceManagement {
 				properties.put((String) key, (String) value);
 			}
 		}*/
-		setRemotePropertiesBeforeRegistration(new String[] {interfaceName}, properties, remote);
-		try {
+		//setRemotePropertiesBeforeRegistration(new String[] {interfaceName}, properties, remote);
+		/*if (remote) {
+			String filter = "()";
+			/*remote.configs.supported
+			remote.intents.supported*
+			DistributedServiceFactory factory = (DistributedServiceFactory)getService(DistributedServiceFactory.class.getName(), filter, -1);
+			factory.initProperties(service, properties, configs, intents);
+		}*/
+		if (remote) {
+			this.setDefaultRemoteProperties(service, properties);
+		}
+		//try {
 
 			// TODOOK set this loops into a function or a new Class because it is
 			// the same code into the other registerService function
@@ -313,7 +338,7 @@ public class ServiceManagementImpl implements ServiceManagement {
 				}
 			}*/
 			//
-			beforeRegisteringMigratedService(new String[] {interfaceName}, service, properties, remote, bundleId);
+			/*beforeRegisteringMigratedService(new String[] {interfaceName}, service, properties, bundleId);
 
 			ServiceRegistration registration = bundleContext
 					.getBundle(bundleId).getBundleContext().registerService(
@@ -330,7 +355,8 @@ public class ServiceManagementImpl implements ServiceManagement {
 		} catch (IllegalArgumentException e) {
 			System.err.println(e.getMessage());
 		}
-		return -1;
+		return -1;*/
+		return registerService(interfaceName, service, properties, bundleId);
 	}
 
 	public long registerService(String[] interfaceNames, Object service,
@@ -347,15 +373,19 @@ public class ServiceManagementImpl implements ServiceManagement {
 				String key = keysTmp.nextElement();
 				Object value = remoteProperties.get(key);
 				if (((String) key).contains("address")) {
-					// TODO How define the address ?
+					// TODOOK How define the address ?
 					// value = ((String)value) + "/" + interfaceName;
 				}
 				properties.put((String) key, (String) value);
 			}
 		}*/
-		setRemotePropertiesBeforeRegistration(interfaceNames, properties, remote);
-		try {
-			beforeRegisteringMigratedService(interfaceNames, service, properties, remote, bundleId);
+		//setRemotePropertiesBeforeRegistration(interfaceNames, properties, remote);
+
+		if (remote) {
+			this.setDefaultRemoteProperties(service, properties);
+		}
+		/*try {
+			beforeRegisteringMigratedService(interfaceNames, service, properties, bundleId);
 			
 			ServiceRegistration registration = bundleContext
 					.getBundle(bundleId).getBundleContext().registerService(
@@ -371,12 +401,13 @@ public class ServiceManagementImpl implements ServiceManagement {
 		} catch (IllegalArgumentException e) {
 			System.err.println(e.getMessage());
 		}
-		return -1;
+		return -1;*/
+		return registerService(interfaceNames, service, properties, bundleId);
 	}
 	
 	@SuppressWarnings("unchecked")
 	private void beforeRegisteringMigratedService(String[] interfaceNames, Object service,
-			Dictionary<String, Object> properties, boolean remote, long bundleId) {
+			Dictionary<String, Object> properties, long bundleId) {
 		if (service instanceof Originator && mementos.containsKey(bundleId)) {
 			List<Object[]> objs = mementos.get(bundleId);
 			for (Object[] obj : objs) {
@@ -437,7 +468,7 @@ public class ServiceManagementImpl implements ServiceManagement {
 		ServiceRegistration tmp = serviceRegistrations.get(id);
 		if (tmp != null) {
 			tmp.unregister();
-			serviceRegistrations.remove(tmp);
+			serviceRegistrations.remove(id);
 			System.out.println("Service " + id + " is unregistered");
 		}
 	}
@@ -545,10 +576,23 @@ public class ServiceManagementImpl implements ServiceManagement {
 
 	public Dictionary<String, Object> getProperties(long id) {
 		Dictionary<String, Object> properties = new Hashtable<String, Object>();
-		ServiceReference reference = serviceRegistrations.get(id)
-				.getReference();
-		for (String key : reference.getPropertyKeys()) {
-			properties.put(key, reference.getProperty(key));
+		ServiceRegistration registration = serviceRegistrations.get(id);
+
+		ServiceReference reference = null;
+		if (registration != null) {
+			reference = registration.getReference();
+		}else {
+			try {
+				reference = bundleContext.getServiceReferences(null, "(" + Constants.SERVICE_ID + "=" + id + ")")[0];
+			} catch (InvalidSyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (reference != null) {
+			for (String key : reference.getPropertyKeys()) {
+				properties.put(key, reference.getProperty(key));
+			}
 		}
 		return properties;
 	}
@@ -603,5 +647,56 @@ public class ServiceManagementImpl implements ServiceManagement {
 		if (serviceIds.length > 0) {
 			ungetService(serviceIds[0]);
 		}
+	}
+
+	public long registerService(String interfaceName, Object service,
+			Dictionary<String, Object> properties, long bundleId) {
+		if (properties == null) {
+			properties = new Hashtable<String, Object>();
+		}
+		try {
+			beforeRegisteringMigratedService(new String[] {interfaceName}, service, properties, bundleId);
+	
+			ServiceRegistration registration = bundleContext
+					.getBundle(bundleId).getBundleContext().registerService(
+							interfaceName, service, properties);
+	
+			long id = (Long) registration.getReference().getProperty(
+					Constants.SERVICE_ID);
+	
+			serviceRegistrations.put(id, registration);
+			System.out.println("Service " + interfaceName + " is registered");
+			return id;
+		} catch (IllegalStateException e) {
+			System.err.println(e.getMessage());
+		} catch (IllegalArgumentException e) {
+			System.err.println(e.getMessage());
+		}
+		return -1;
+	}
+
+	public long registerService(String[] interfaceNames, Object service,
+			Dictionary<String, Object> properties, long bundleId) {
+		if (properties == null) {
+			properties = new Hashtable<String, Object>();
+		}
+		try {
+			beforeRegisteringMigratedService(interfaceNames, service, properties, bundleId);
+			
+			ServiceRegistration registration = bundleContext
+					.getBundle(bundleId).getBundleContext().registerService(
+							interfaceNames, service, properties);
+	
+			long id = (Long) registration.getReference().getProperty(
+					Constants.SERVICE_ID);
+	
+			serviceRegistrations.put(id, registration);
+			return id;
+		} catch (IllegalStateException e) {
+			System.err.println(e.getMessage());
+		} catch (IllegalArgumentException e) {
+			System.err.println(e.getMessage());
+		}
+		return -1;
 	}
 }
