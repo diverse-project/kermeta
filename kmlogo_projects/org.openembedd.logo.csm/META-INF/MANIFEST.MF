@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OpenEmbeDD LogoCSM Model
+Bundle-SymbolicName: org.openembedd.logo.csm; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: OpenEmbeDD integration team
+Export-Package: org.openembedd.logo.csm.logoCSM,
+ org.openembedd.logo.csm.logoCSM.impl,
+ org.openembedd.logo.csm.logoCSM.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport
+Bundle-ActivationPolicy: lazy
