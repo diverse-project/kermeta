@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OpenEmbeDD LogoCSM Translator
+Bundle-SymbolicName: org.openembedd.logo.csm.translator;singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle: org.openembedd.logo.csm,
+ fr.irisa.triskell.kmlogo.model
+Bundle-Vendor: OpenEmbeDD integration team

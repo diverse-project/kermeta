@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphconf:DiagramGraphConf xmlns:graphconf="http://www.topcased.org/1.0/graphconf"
+    id="org.openembedd.logo.csm.diagram.block"
+    defaultBackgroundColor="255,255,255"
+    defaultForegroundColor="0,0,0"
+    defaultFont="Tahoma-regular-8">
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="-1"
+        minimumWidth="-1"
+        maximumHeight="-1"
+        maximumWidth="-1"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="false"
+        isHeightResizable="false">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://openembedd.org/logoCSM#//Instruction"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="-1"
+        minimumWidth="-1"
+        maximumHeight="-1"
+        maximumWidth="-1"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="false"
+        isHeightResizable="false">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://openembedd.org/logoCSM#//Back"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="-1"
+        minimumWidth="-1"
+        maximumHeight="-1"
+        maximumWidth="-1"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="false"
+        isHeightResizable="false">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://openembedd.org/logoCSM#//Forward"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="-1"
+        minimumWidth="-1"
+        maximumHeight="-1"
+        maximumWidth="-1"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="false"
+        isHeightResizable="false">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://openembedd.org/logoCSM#//Left"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="-1"
+        minimumWidth="-1"
+        maximumHeight="-1"
+        maximumWidth="-1"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="false"
+        isHeightResizable="false">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://openembedd.org/logoCSM#//Right"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="-1"
+        minimumWidth="-1"
+        maximumHeight="-1"
+        maximumWidth="-1"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="false"
+        isHeightResizable="false">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://openembedd.org/logoCSM#//PenDown"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="-1"
+        minimumWidth="-1"
+        maximumHeight="-1"
+        maximumWidth="-1"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="false"
+        isHeightResizable="false">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://openembedd.org/logoCSM#//PenUp"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="-1"
+        minimumWidth="-1"
+        maximumHeight="-1"
+        maximumWidth="-1"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="false"
+        isHeightResizable="false">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://openembedd.org/logoCSM#//Clear"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="50"
+        defaultWidth="50"
+        minimumHeight="20"
+        minimumWidth="20"
+        maximumHeight="0"
+        maximumWidth="0"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://openembedd.org/logoCSM#//Block"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="50"
+        defaultWidth="50"
+        minimumHeight="20"
+        minimumWidth="20"
+        maximumHeight="0"
+        maximumWidth="0"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://openembedd.org/logoCSM#//If"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="50"
+        defaultWidth="50"
+        minimumHeight="20"
+        minimumWidth="20"
+        maximumHeight="0"
+        maximumWidth="0"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://openembedd.org/logoCSM#//Repeat"/>
+        </bridge>
+    </node>
+    <edge
+        presentation="default"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:StringBridge" type="Sequence"/>
+    </edge>
+</graphconf:DiagramGraphConf>
+

@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OpenEmbeDD LogoCSM Graphical Modeler
+Bundle-SymbolicName: org.openembedd.logo.csm.modeler; singleton:=true
+Bundle-Version: 1.3.0
+Bundle-Activator: org.openembedd.logo.csm.modeler.LogoCSMPlugin
+Bundle-Vendor: OpenEmbeDD integration team
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.edit,
+ org.eclipse.emf.edit.ui,
+ org.eclipse.ui.ide,
+ org.eclipse.emf.edit,
+ org.openembedd.logo.csm.edit,
+ org.eclipse.core.resources,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.emf.ecore,
+ org.openembedd.logo.csm,
+ org.topcased.modeler
+Bundle-ActivationPolicy: lazy

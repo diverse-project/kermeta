@@ -1,0 +1,288 @@
+/**
+ * Copyright : IRISA / INRIA Rennes Bretagne Atlantique - OpenEmbeDD integration team
+ * 
+ * This plug-in is under the terms of the EPL License. http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * @author Vincent Mahe
+ */
+@mainClass "logoCSM::CSMLogo2ASMLogo"
+@mainOperation "main"
+
+package logoCSM;
+
+require kermeta
+require "http://openembedd.org/logoCSM"
+require "http://www.kermeta.org/kmLogo"
+
+
+class CSMLogo2ASMLogo
+{
+	reference inModel : Block
+	reference outModel : kmLogo::ASM::Block
+	
+	operation main() : Void is do
+		var inputModel : kermeta::standard::String init "platform:/resource/org.openembedd.logo.csm.translator/models/DefaultName.logocsm"
+		var outputModel : kermeta::standard::String init "platform:/resource/org.openembedd.logo.csm.translator/models/DefaultName.asmLogo"
+		compile(inputModel, outputModel)
+	end
+	
+	operation compile(inModelUri : kermeta::standard::String, outModelUri : kermeta::standard::String) is do
+		load(inModelUri)
+		
+		outModel ?= inModel.logo2ASM
+		
+		save(outModelUri)
+	end
+	
+	operation load(modelFullPath : kermeta::standard::String) is do
+		var rep : kermeta::persistence::Repository init kermeta::persistence::EMFRepository.new
+		var res : kermeta::persistence::Resource init rep.getResource(modelFullPath)
+		inModel ?= res.one
+	end
+
+	operation save(modelFullPath : kermeta::standard::String) is do
+		var metaModelFullPath : kermeta::standard::String init "http://www.kermeta.org/kmLogo"
+		var rep : kermeta::persistence::Repository init kermeta::persistence::EMFRepository.new
+		var res : kermeta::persistence::EMFResource
+		res ?= rep.createResource(modelFullPath, metaModelFullPath)
+		res.add(outModel)
+		res.save
+	end
+}
+
+aspect class Instruction {
+	operation logo2ASM() : kmLogo::ASM::Instruction is abstract
+	
+	operation processNext (blockInstructions : kmLogo::ASM::Instruction[0..*]) is do
+		var ins : kmLogo::ASM::Instruction init self.logo2ASM()
+		blockInstructions.add(ins)
+		if next != void then
+			next.processNext(blockInstructions)
+		end
+	end
+}
+
+
+aspect class Back{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmBack : kmLogo::ASM::Back init kmLogo::ASM::Back.new
+		asmBack.steps ?= self.steps.logo2ASM
+		result := asmBack
+	end
+}
+
+aspect class Block{
+	method logo2ASM () : kmLogo::ASM::Instruction is do
+		// the block which will be generated, with its instructions
+		var asmBlock : kmLogo::ASM::Block init kmLogo::ASM::Block.new
+		result := asmBlock
+		
+		// the entry point of the block
+		var initial : Instruction
+		if self.instructions.select{ i | i.previous == void }.size == 1 then
+			initial := self.instructions.detect{ i | i.previous == void }
+			
+			// launch the process of the instruction flow
+//			asmBlock.instructions.add(initial.logo2ASM)
+			initial.processNext(asmBlock.instructions)
+		else
+			if self.instructions.size == 0 then
+				stdio.writeln("No instruction in the block")
+			else
+				stdio.writeln("More than one initial instruction in the block")
+			end
+			raise kermeta::exceptions::Exception.new
+		end
+	end
+}
+
+aspect class Forward{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmForward : kmLogo::ASM::Forward init kmLogo::ASM::Forward.new
+		asmForward.steps ?= self.steps.logo2ASM
+		result := asmForward
+	end
+}
+
+aspect class Left{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmLeft : kmLogo::ASM::Left init kmLogo::ASM::Left.new
+		asmLeft.angle ?= self.angle.logo2ASM
+		result := asmLeft
+	end
+}
+
+aspect class Right{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmRight : kmLogo::ASM::Right init kmLogo::ASM::Right.new
+		asmRight.angle ?= self.angle.logo2ASM
+		result := asmRight
+	end
+}
+
+aspect class PenUp{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		result := kmLogo::ASM::PenUp.new
+	end
+}
+
+aspect class PenDown{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		result := kmLogo::ASM::PenDown.new
+	end
+}
+
+aspect class Clear{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		result := kmLogo::ASM::Clear.new
+	end
+}
+
+aspect class ProcDeclaration{
+	// needed to stop cycle between ProcDeclaration & ProcCall 
+	reference asmProcDeclaration : kmLogo::ASM::ProcDeclaration
+	
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		asmProcDeclaration := kmLogo::ASM::ProcDeclaration.new
+		self.args.each{ arg | 
+			asmProcDeclaration.args.add(arg.logo2ASM)
+		}
+		asmProcDeclaration.block ?= self.block.logo2ASM
+		asmProcDeclaration.name := self.name
+		// ProcCalls are managed at the Block level (which contains them)
+//		self.procCall.each{ pc | 
+//			var asmProcCall :  kmLogo::ASM::ProcCall
+//			asmProcCall ?=  pc.logo2ASM
+//		}
+		result :=asmProcDeclaration
+	end
+}
+
+aspect class ProcCall{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmProcCall : kmLogo::ASM::ProcCall init kmLogo::ASM::ProcCall.new
+		self.actualArgs.each{ arg |
+			var asmExpression : kmLogo::ASM::Expression
+			asmExpression ?= arg.logo2ASM
+			asmProcCall.actualArgs.add(asmExpression)
+		}
+		asmProcCall.declaration := self.declaration.asmProcDeclaration
+		result := asmProcCall
+	end
+}
+
+aspect class Constant{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmConstant : kmLogo::ASM::Constant init kmLogo::ASM::Constant.new
+		asmConstant.integerValue := self.integerValue
+		result := asmConstant
+	end
+}
+
+aspect class If{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmIf : kmLogo::ASM::If init  kmLogo::ASM::If.new
+		asmIf.condition ?= self.condition.logo2ASM
+		asmIf.elsePart ?= self.elsePart.logo2ASM
+		asmIf.thenPart ?= self.thenPart.logo2ASM
+		result := asmIf
+	end
+}
+
+aspect class Repeat{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmRepeat : kmLogo::ASM::Repeat init  kmLogo::ASM::Repeat.new
+		asmRepeat.block ?= self.block.logo2ASM
+		asmRepeat.condition ?= self.condition.logo2ASM 
+		result := asmRepeat
+	end
+}
+
+aspect class While{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmWhile : kmLogo::ASM::While init  kmLogo::ASM::While.new
+		asmWhile.block ?= self.block.logo2ASM
+		asmWhile.condition ?= self.condition.logo2ASM 
+		result := asmWhile
+	end
+}
+
+aspect class Parameter{
+	reference asmParameter : kmLogo::ASM::Parameter
+	operation logo2ASM () : kmLogo::ASM::Parameter is do 
+		asmParameter := kmLogo::ASM::Parameter.new
+		asmParameter.name := self.name
+		result := asmParameter
+	end
+}
+
+aspect class ParameterCall{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmParameterCall : kmLogo::ASM::ParameterCall init kmLogo::ASM::ParameterCall.new
+		asmParameterCall.parameter := self.parameter.asmParameter
+		result := asmParameterCall
+	end
+}
+
+aspect class Plus{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmPlus : kmLogo::ASM::Plus init kmLogo::ASM::Plus.new
+		asmPlus.lhs ?= self.lhs.logo2ASM
+		asmPlus.rhs ?= self.rhs.logo2ASM
+		result := asmPlus
+	end
+}
+
+aspect class Minus{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmMinus : kmLogo::ASM::Minus init kmLogo::ASM::Minus.new
+		asmMinus.lhs ?= self.lhs.logo2ASM
+		asmMinus.rhs ?= self.rhs.logo2ASM
+		result := asmMinus
+	end
+}
+
+aspect class Mult{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmMult : kmLogo::ASM::Mult init kmLogo::ASM::Mult.new
+		asmMult.lhs ?= self.lhs.logo2ASM
+		asmMult.rhs ?= self.rhs.logo2ASM
+		result := asmMult
+	end
+}
+
+aspect class Div{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmDiv : kmLogo::ASM::Div init kmLogo::ASM::Div.new
+		asmDiv.lhs ?= self.lhs.logo2ASM
+		asmDiv.rhs ?= self.rhs.logo2ASM
+		result := asmDiv
+	end
+}
+
+aspect class Equals{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmEquals : kmLogo::ASM::Equals init kmLogo::ASM::Equals.new
+		asmEquals.lhs ?= self.lhs.logo2ASM
+		asmEquals.rhs ?= self.rhs.logo2ASM
+		result := asmEquals
+	end
+}
+
+aspect class Lower{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmLower : kmLogo::ASM::Lower init kmLogo::ASM::Lower.new
+		asmLower.lhs ?= self.lhs.logo2ASM
+		asmLower.rhs ?= self.rhs.logo2ASM
+		result := asmLower
+	end
+}
+
+aspect class Greater{
+	method logo2ASM () : kmLogo::ASM::Instruction is do 
+		var asmGreater : kmLogo::ASM::Greater init kmLogo::ASM::Greater.new
+		asmGreater.lhs ?= self.lhs.logo2ASM
+		asmGreater.rhs ?= self.rhs.logo2ASM
+		result := asmGreater
+	end
+}

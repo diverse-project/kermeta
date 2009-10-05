@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.openembedd.demos"
+            name="OpenEmbeDD demo"
+            parentCategory="org.eclipse.ui.Examples">
+      </category>
+      <wizard
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/org.openembedd.demos"
+            class="org.openembedd.logo.csm.tutorial.wizards.LogoCSMDemoSampleWizard"
+            hasPages="false"
+            icon="icons/OpenEmbeDD16x16.png"
+            id="org.openembedd.logo.csm.tutorial.wizards"
+            name="OpenEmbeDD graphical modeler for LOGO demo">
+      </wizard>
+   </extension>
+
+</plugin>

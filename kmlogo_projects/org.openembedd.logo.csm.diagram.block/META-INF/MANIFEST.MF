@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OpenEmbeDD LogoCSM Block Diagram
+Bundle-SymbolicName: org.openembedd.logo.csm.diagram.block; singleton:=true
+Bundle-Version: 1.3.0
+Bundle-Activator: org.openembedd.logo.csm.diagram.block.LogoCSMPlugin
+Bundle-Vendor: OpenEmbeDD integration team
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.edit,
+ org.eclipse.emf.edit.ui,
+ org.openembedd.logo.csm,
+ org.eclipse.ui.ide,
+ org.openembedd.logo.csm.edit,
+ org.eclipse.emf.edit,
+ org.eclipse.core.resources,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.emf.ecore,
+ org.topcased.modeler
+Bundle-ActivationPolicy: lazy
+Export-Package: org.openembedd.logo.csm.diagram.block,
+ org.openembedd.logo.csm.diagram.block.actions,
+ org.openembedd.logo.csm.diagram.block.commands,
+ org.openembedd.logo.csm.diagram.block.dialogs,
+ org.openembedd.logo.csm.diagram.block.edit,
+ org.openembedd.logo.csm.diagram.block.figures,
+ org.openembedd.logo.csm.diagram.block.policies,
+ org.openembedd.logo.csm.diagram.block.preferences

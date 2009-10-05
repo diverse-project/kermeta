@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kpm:KPM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpm="http://kpm">
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.unloadContext"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.loadContext"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.typecheck"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.constraintcheck"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.finalizeUpdate"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.openProject"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.kmt2km"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.ecore2kmt"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.kmt"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.km"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.ecore"/>
+  <rules event="//@events.0" name="Open Project" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:NullExpression"/>
+    </in>
+    <outs action="//@actions.7">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update KMT File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
+    </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.5">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.6">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update KM File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.1"/>
+    </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.5">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.6">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update Ecore File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.2"/>
+    </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.5">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.6">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <events name="open"/>
+  <events name="update"/>
+  <events name="close"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/.project"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/.project.kpm"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/atl/Logo2ASMLogo.asm"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/atl/Logo2ASMLogo.atl"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/atl/Logo2OrderedLogo.asm"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/atl/Logo2OrderedLogo.atl"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/atl/NOTES.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/atl/delay1_tr.asm"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/atl/delay1_tr.atl"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/atl/functionOp1_tr.asm"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/atl/functionOp1_tr.atl"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/models/Test1.mlogo"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/models/k.mlogo"/>
+  <units rules="//@rules.0 //@rules.1" lastTimeModified="2008-05-29T10:02:39.000+0200" value="/org.openembedd.logo.csm.translator/src/kermeta/CSMLogo2ASMLogo.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/models/DefaultName.asmLogo"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.openembedd.logo.csm.translator/plugin.xml"/>
+  <ruleTypes name="require"/>
+  <ruleTypes name="normal"/>
+</kpm:KPM>

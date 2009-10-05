@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="org.openembedd.logo.csm.tutorial" default="build_all_zips" basedir=".">
+	<target name="build_all_zips" 
+		depends="build_org_openembedd_logo_csm, 
+		         build_org_openembedd_logo_csm_diagram_block,  
+		         build_org_openembedd_logo_csm_edit,  
+		         build_org_openembedd_logo_csm_editor, 
+		         build_org_openembedd_logo_csm_modeler, 
+		         build_org_openembedd_logo_csm_translator, 
+		         build_org_openembedd_logo_csm_ui">
+	</target>
+	
+	<target name="build_org_openembedd_logo_csm" >
+			<tstamp>
+			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+			</tstamp>
+			<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+			<mkdir dir="mytemp"/>
+			<copy todir="mytemp" failonerror="true" overwrite="true">
+				<fileset dir="../org.openembedd.logo.csm" includes="**" excludes="*mytemp"/>
+			</copy>
+			<zip destfile="zip/org.openembedd.logo.csm.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+			<delete dir="mytemp"/>
+	</target>
+
+	<target name="build_org_openembedd_logo_csm_diagram_block" >
+			<tstamp>
+				<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+			</tstamp>
+			<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+			<mkdir dir="mytemp"/>
+			<copy todir="mytemp" failonerror="true" overwrite="true">
+				<fileset dir="../org.openembedd.logo.csm.diagram.block" includes="**" excludes="*mytemp"/>
+			</copy>
+			<zip destfile="zip/org.openembedd.logo.csm.diagram.block.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+			<delete dir="mytemp"/>
+	</target>
+
+	<target name="build_org_openembedd_logo_csm_edit" >
+			<tstamp>
+				<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+			</tstamp>
+			<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+			<mkdir dir="mytemp"/>
+			<copy todir="mytemp" failonerror="true" overwrite="true">
+				<fileset dir="../org.openembedd.logo.csm.edit" includes="**" excludes="*mytemp"/>
+			</copy>
+			 <zip destfile="zip/org.openembedd.logo.csm.edit.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+			<delete dir="mytemp"/>
+	</target>
+	
+	<target name="build_org_openembedd_logo_csm_editor" >
+			<tstamp>
+				<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+			</tstamp>
+			<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+			<mkdir dir="mytemp"/>
+			<copy todir="mytemp" failonerror="true" overwrite="true">
+				<fileset dir="../org.openembedd.logo.csm.editor" includes="**" excludes="*mytemp"/>
+			</copy>
+			<zip destfile="zip/org.openembedd.logo.csm.editor.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+			<delete dir="mytemp"/>
+	</target>
+
+	<target name="build_org_openembedd_logo_csm_modeler" >
+			<tstamp>
+				<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+			</tstamp>
+			<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+			<mkdir dir="mytemp"/>
+			<copy todir="mytemp" failonerror="true" overwrite="true">
+				<fileset dir="../org.openembedd.logo.csm.modeler" includes="**" excludes="*mytemp"/>
+			</copy>
+			<zip destfile="zip/org.openembedd.logo.csm.modeler.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+			<delete dir="mytemp"/>
+	</target>
+	
+	<target name="build_org_openembedd_logo_csm_translator" >
+			<tstamp>
+				<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+			</tstamp>
+			<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+			<mkdir dir="mytemp"/>
+			<copy todir="mytemp" failonerror="true" overwrite="true">
+				<fileset dir="../org.openembedd.logo.csm.translator" includes="**" excludes="*mytemp"/>
+			</copy>
+			<zip destfile="zip/org.openembedd.logo.csm.translator.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+			<delete dir="mytemp"/>
+	</target>
+	
+	<target name="build_org_openembedd_logo_csm_ui" >
+			<tstamp>
+				<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+			</tstamp>
+			<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+			<mkdir dir="mytemp"/>
+			<copy todir="mytemp" failonerror="true" overwrite="true">
+				<fileset dir="../org.openembedd.logo.csm.ui" includes="**" excludes="*mytemp"/>
+			</copy>
+			<zip destfile="zip/org.openembedd.logo.csm.ui.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+			<delete dir="mytemp"/>
+	</target>
+</project>

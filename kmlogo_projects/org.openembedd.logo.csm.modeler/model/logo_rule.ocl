@@ -1,0 +1,21 @@
+MainModel : http://openembedd.org/logo
+
+context Block 
+
+inv LinkedBlocks_Have_Same_Parents : 	-- The next and previous instruction of any instructions contained in a block must be contained by the same block
+	self.instructions->forAll(ins: Instruction | 
+		( (ins.next.oclIsUndefined() or self.instructions->includes(ins.next))
+			and 
+			(ins.previous.oclIsUndefined() or self.instructions->includes(ins.previous)) ) )
+
+inv Only_One_Starting_Instruction:			-- One and only one instruction in a block has no previous instruction, if there are at least one instruction in the block.
+	 self.instructions->select(ins : Instruction | ins.previous.oclIsUndefined())->size() < 2
+
+inv Only_One_Ending_Instruction:			-- One and only one instruction in a block has no next instruction, if there are at least one instruction in the block.
+	self.instructions->select(ins : Instruction | ins.next.oclIsUndefined())->size() < 2
+
+--inv:	-- There is only one path to visit each instructions contained by the block.
+	--let initIns : Set(Instruction) = self.instructions->select(ins: Instruction | ins.previous.oclIsUndefined()) in
+		--	 initIns->isEmpty() 
+			--or 
+		--	(( initIns->size() = 1) and ) 

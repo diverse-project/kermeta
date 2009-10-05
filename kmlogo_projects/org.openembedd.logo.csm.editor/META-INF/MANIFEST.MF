@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OpenEmbeDD LogoCSM Editor
+Bundle-SymbolicName: org.openembedd.logo.csm.editor; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Activator: org.openembedd.logo.csm.presentation.LogoCSMEditorPlugin$Implementation
+Bundle-Vendor: OpenEmbeDD integration team
+Bundle-Localization: plugin
+Export-Package: org.openembedd.logo.csm.logoCSM.presentation,
+ org.openembedd.logo.csm.presentation
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.openembedd.logo.csm.edit;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.emf.edit.ui;visibility:=reexport,
+ org.eclipse.ui.ide;visibility:=reexport
+Bundle-ActivationPolicy: lazy

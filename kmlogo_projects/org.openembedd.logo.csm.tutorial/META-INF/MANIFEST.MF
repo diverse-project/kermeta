@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tutorial for LOGO DSL tool chain example
+Bundle-SymbolicName: org.openembedd.logo.csm.tutorial;singleton:=true
+Bundle-Version: 1.0.0
+Export-Package: org.openembedd.logo.csm.tutorial,
+ org.openembedd.logo.csm.tutorial.wizards
+Bundle-Vendor: OpenEmbeDD integration team
+Require-Bundle: org.eclipse.jface,
+ org.eclipse.ui,
+ org.openembedd.wizards,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.kermeta.kmlogo.tutorial
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.openembedd.logo.csm.tutorial.LogoCSMDemoPlugin

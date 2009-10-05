@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_vne58CMxEd2hB6SbKqQ6oA" projectName="org.openembedd.logo.csm.diagram.block" name="Block Diagram" package="block" prefix="LogoCSM" copyrightText="Copyright : INRIA OpenEmbeDD - integration team&#xD;&#xA;This plug-in is under the terms of the EPL License.&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;@author Christian Brunette&#xD;&#xA;" provider="INRIA OpenEmbeDD - integration team">
+  <palette xmi:id="_iDf-QCM2Ed2hB6SbKqQ6oA" name="Block Diagram Palette">
+    <paletteCategories xmi:id="_kE_U4CM2Ed2hB6SbKqQ6oA" name="Primitives">
+      <items xmi:id="_Rei4ACNTEd2hB6SbKqQ6oA" name="Go Forward" part="_VL_yQCM0Ed2hB6SbKqQ6oA"/>
+      <items xmi:id="_TQiaECNTEd2hB6SbKqQ6oA" name="Go Backward" part="_D-NQkCM0Ed2hB6SbKqQ6oA"/>
+      <items xmi:id="_Xe2NkCNTEd2hB6SbKqQ6oA" name="Turn Left" part="_c5XtoCM0Ed2hB6SbKqQ6oA"/>
+      <items xmi:id="_ZfcMUCNTEd2hB6SbKqQ6oA" name="Turn Right" part="_oZpS4CM0Ed2hB6SbKqQ6oA"/>
+      <items xmi:id="_uTAh4CNTEd2hB6SbKqQ6oA" name="Pen Up" part="_7v7LECM0Ed2hB6SbKqQ6oA"/>
+      <items xmi:id="_0MT3kCNTEd2hB6SbKqQ6oA" name="Pen Down" part="_xCxr4CM0Ed2hB6SbKqQ6oA"/>
+      <items xmi:id="_2Hr_ICNTEd2hB6SbKqQ6oA" name="Clear the window" part="_OsuzUCM1Ed2hB6SbKqQ6oA"/>
+    </paletteCategories>
+    <paletteCategories xmi:id="_oru2gCM2Ed2hB6SbKqQ6oA" name="Control">
+      <items xmi:id="_fI5UgCWKEd2gLIHubxdtAQ" name="Block" part="_XV3MUCM1Ed2hB6SbKqQ6oA"/>
+      <items xmi:id="_v8DpgCM2Ed2hB6SbKqQ6oA" name="If" part="_sZYCYCM1Ed2hB6SbKqQ6oA"/>
+      <items xmi:id="_xSLu8CM2Ed2hB6SbKqQ6oA" name="Repeat" part="_51xWECM1Ed2hB6SbKqQ6oA"/>
+    </paletteCategories>
+    <paletteCategories xmi:id="_rGQYMCM2Ed2hB6SbKqQ6oA" name="Links">
+      <items xmi:id="_s2nikCM2Ed2hB6SbKqQ6oA" name="Sequence" part="_Iv5MACM2Ed2hB6SbKqQ6oA"/>
+    </paletteCategories>
+  </palette>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_pXAIcCMzEd2hB6SbKqQ6oA" object="_iWCAECMzEd2hB6SbKqQ6oA" defaultFont="Sans-regular-10" resizing="NONE" directEditable="false" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_D-NQkCM0Ed2hB6SbKqQ6oA" object="_ffnCACMyEd2hB6SbKqQ6oA" defaultFont="Sans-regular-10" type="Image With Label Figure" superType="_pXAIcCMzEd2hB6SbKqQ6oA" resizing="NONE" directEditable="false" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_VL_yQCM0Ed2hB6SbKqQ6oA" object="_hOoIkCMyEd2hB6SbKqQ6oA" defaultFont="Sans-regular-10" type="Image With Label Figure" superType="_pXAIcCMzEd2hB6SbKqQ6oA" resizing="NONE" directEditable="false" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_c5XtoCM0Ed2hB6SbKqQ6oA" object="_jXRQECMyEd2hB6SbKqQ6oA" defaultFont="Sans-regular-10" type="Image With Label Figure" superType="_pXAIcCMzEd2hB6SbKqQ6oA" resizing="NONE" directEditable="false" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_oZpS4CM0Ed2hB6SbKqQ6oA" object="_l2RCECMyEd2hB6SbKqQ6oA" defaultFont="Sans-regular-10" type="Image With Label Figure" superType="_pXAIcCMzEd2hB6SbKqQ6oA" resizing="NONE" directEditable="false" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_xCxr4CM0Ed2hB6SbKqQ6oA" object="_oERKsCMyEd2hB6SbKqQ6oA" defaultFont="Sans-regular-10" type="ImageFigure" superType="_pXAIcCMzEd2hB6SbKqQ6oA" resizing="NONE" directEditable="false" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_7v7LECM0Ed2hB6SbKqQ6oA" object="_qHsbACMyEd2hB6SbKqQ6oA" defaultFont="Sans-regular-10" type="ImageFigure" superType="_pXAIcCMzEd2hB6SbKqQ6oA" resizing="NONE" directEditable="false" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_OsuzUCM1Ed2hB6SbKqQ6oA" object="_ufZbECMyEd2hB6SbKqQ6oA" defaultFont="Sans-regular-10" type="ImageFigure" superType="_pXAIcCMzEd2hB6SbKqQ6oA" resizing="NONE" directEditable="false" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="-1" maximumHeight="-1"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_XV3MUCM1Ed2hB6SbKqQ6oA" object="_a-hccCMyEd2hB6SbKqQ6oA" defaultFont="Sans-regular-10" type="Container" childElements="_pXAIcCMzEd2hB6SbKqQ6oA" superType="_pXAIcCMzEd2hB6SbKqQ6oA" container="true" directEditable="false" maximumWidth="0" maximumHeight="0"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_sZYCYCM1Ed2hB6SbKqQ6oA" object="_wL4LACMyEd2hB6SbKqQ6oA" defaultFont="Sans-regular-10" type="Container With Inner Label" childElements="_XV3MUCM1Ed2hB6SbKqQ6oA" superType="_pXAIcCMzEd2hB6SbKqQ6oA" container="true" directEditable="false" maximumWidth="0" maximumHeight="0"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_51xWECM1Ed2hB6SbKqQ6oA" object="_z8-eECMyEd2hB6SbKqQ6oA" defaultFont="Sans-regular-10" type="Container With Inner Label" childElements="_XV3MUCM1Ed2hB6SbKqQ6oA" superType="_pXAIcCMzEd2hB6SbKqQ6oA" container="true" directEditable="false" maximumWidth="0" maximumHeight="0"/>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_Iv5MACM2Ed2hB6SbKqQ6oA" object="_HJ0mECM2Ed2hB6SbKqQ6oA" defaultFont="Sans-regular-10" targetDecoration="TRIANGLE">
+    <sourceTargetCouple xmi:id="_JCGFQSwIEd2pca-qdisCnQ" sourceNode="_pXAIcCMzEd2hB6SbKqQ6oA" targetNode="_pXAIcCMzEd2hB6SbKqQ6oA">
+      <refSourceToTarget xsi:type="ecore:EReference" href="../../org.openembedd.logo.csm/model/logoCSM.ecore#//Instruction/next"/>
+      <refTargetToSource xsi:type="ecore:EReference" href="../../org.openembedd.logo.csm/model/logoCSM.ecore#//Instruction/previous"/>
+    </sourceTargetCouple>
+  </parts>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_a-hccCMyEd2hB6SbKqQ6oA">
+    <genClass href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#//logoCSM/Block"/>
+    <diagrams xmi:id="__xP5MCWqEd2gLIHubxdtAQ" diagram="_vne58CMxEd2hB6SbKqQ6oA" upperBound="1"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_ffnCACMyEd2hB6SbKqQ6oA">
+    <genClass href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#//logoCSM/Back"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_hOoIkCMyEd2hB6SbKqQ6oA">
+    <genClass href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#//logoCSM/Forward"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_jXRQECMyEd2hB6SbKqQ6oA">
+    <genClass href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#//logoCSM/Left"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_l2RCECMyEd2hB6SbKqQ6oA">
+    <genClass href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#//logoCSM/Right"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_oERKsCMyEd2hB6SbKqQ6oA">
+    <genClass href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#//logoCSM/PenDown"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_qHsbACMyEd2hB6SbKqQ6oA">
+    <genClass href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#//logoCSM/PenUp"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_ufZbECMyEd2hB6SbKqQ6oA">
+    <genClass href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#//logoCSM/Clear"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_wL4LACMyEd2hB6SbKqQ6oA">
+    <genClass href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#//logoCSM/If"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_z8-eECMyEd2hB6SbKqQ6oA">
+    <genClass href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#//logoCSM/Repeat"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_iWCAECMzEd2hB6SbKqQ6oA">
+    <genClass href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#//logoCSM/Instruction"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_HJ0mECM2Ed2hB6SbKqQ6oA" name="Sequence"/>
+  <genModel href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#/"/>
+  <templateRootObject href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#//logoCSM/Block"/>
+  <editorConfigurator href="logo.editorconfigurator#_gW6aQCMuEd2hB6SbKqQ6oA"/>
+</diagramconfigurator:DiagramConfiguration>

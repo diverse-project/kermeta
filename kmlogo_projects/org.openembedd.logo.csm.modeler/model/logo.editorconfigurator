@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editorconfigurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:editorconfigurator="http://www.topcased.org/editorconfigurator/0.10" xmi:id="_gW6aQCMuEd2hB6SbKqQ6oA" name="OpenEmbeDD Logo Graphical Modeler" projectName="org.openembedd.logo.csm.modeler" provider="INRIA OpenEmbeDD - integration team" copyrightText="Copyright : INRIA OpenEmbeDD - integration team&#xD;&#xA;This plug-in is under the terms of the EPL License.&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;@author Christian Brunette&#xD;&#xA;">
+  <genModel href="../../org.openembedd.logo.csm/model/logoCSM.genmodel#/"/>
+</editorconfigurator:EditorConfiguration>

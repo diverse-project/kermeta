@@ -1,0 +1,13 @@
+We failed to process recursively the chained model.
+The problem is to obtain the OUT model with all its elements
+ordered like they are chain into blocks of the IN model.
+
+A pattern-like solution has been evocated by Frédéric Jouault
+ during a phone call with VM (26/6/08):
+ 	it is the translation from a chained list to an ordered list
+ 2 helpers:
+ 	allInstances(firstInstance, next) : list
+ 		call the allNext()
+ 	
+ 	allNext(instance, next) : list
+ 		call itself recursively until there is no more next to process

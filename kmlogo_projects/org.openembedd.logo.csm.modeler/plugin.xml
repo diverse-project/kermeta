@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            class="org.openembedd.logo.csm.modeler.editor.LogoCSMEditor"
+            icon="icons/LogoCSM.gif"
+            default="true"
+            name="OpenEmbeDD Logo Graphical Modeler"
+            id="org.openembedd.logo.csm.modeler.editor.LogoCSMEditor"
+            contributorClass="org.openembedd.logo.csm.modeler.actions.LogoCSMEditorActionBarContributor"
+            extensions="logocsmdi">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.newWizards">
+      <wizard
+            icon="icons/LogoCSM.gif"
+            class="org.openembedd.logo.csm.modeler.wizards.NewLogoCSMDiagrams"
+            category="org.topcased.facilities.newWizards/org.topcased.modeler.newdiagram"
+            name="LogoCSM Diagram"
+            id="org.openembedd.logo.csm.modeler.wizards.NewLogoCSMDiagrams">
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+   
+   <extension point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="org.topcased.modeler.perspective">
+         <newWizardShortcut id="org.openembedd.logo.csm.modeler.wizards.NewLogoCSMDiagrams"/>
+      </perspectiveExtension>
+   </extension>
+   
+   <extension point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.topcased.modeler.preferences.ModelerPreferencePage"
+            class="org.openembedd.logo.csm.modeler.preferences.LogoCSMPreferencePage"
+            id="org.openembedd.logo.csm.modeler.preferences.LogoCSMPreferencePage"
+            name="LogoCSM"/>
+   </extension>
+   
+</plugin>

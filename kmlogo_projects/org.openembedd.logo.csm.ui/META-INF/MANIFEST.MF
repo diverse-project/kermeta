@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OpenEmbeDD Logo Demo UI
+Bundle-SymbolicName: org.openembedd.logo.csm.ui;singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.ui.console,
+ fr.irisa.triskell.kermeta.io,
+ fr.irisa.triskell.kermeta.interpreter,
+ org.openembedd.logo.csm.translator
+Bundle-Vendor: OpenEmbeDD integration team
+Export-Package: org.openembedd.logo.csm.ui,
+ org.openembedd.logo.csm.ui.popup.actions

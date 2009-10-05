@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<logo:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:logo="http://openembedd.org/logoCSM">
+  <instructions xsi:type="logoCSM:Forward" next="//@instructions.1">
+    <steps xsi:type="logoCSM:Constant" integerValue="100"/>
+  </instructions>
+  <instructions xsi:type="logoCSM:Left" previous="//@instructions.0" next="//@instructions.2">
+    <angle xsi:type="logoCSM:Constant" integerValue="30"/>
+  </instructions>
+  <instructions xsi:type="logoCSM:Repeat" previous="//@instructions.1" next="//@instructions.3">
+    <condition xsi:type="logoCSM:Plus">
+      <lhs xsi:type="logoCSM:Constant" integerValue="4"/>
+      <rhs xsi:type="logoCSM:Constant" integerValue="3"/>
+    </condition>
+    <block>
+      <instructions xsi:type="logoCSM:Back">
+        <steps xsi:type="logoCSM:Constant" integerValue="15"/>
+      </instructions>
+    </block>
+  </instructions>
+  <instructions xsi:type="logoCSM:ProcDeclaration" previous="//@instructions.2" next="//@instructions.4" name="Toto" procCall="//@instructions.4 //@instructions.3/@block/@instructions.2">
+    <args name="p1"/>
+    <args name="p2"/>
+    <block>
+      <instructions xsi:type="logoCSM:Back" next="//@instructions.3/@block/@instructions.1">
+        <steps xsi:type="logoCSM:Constant" integerValue="10"/>
+      </instructions>
+      <instructions xsi:type="logoCSM:Left" previous="//@instructions.3/@block/@instructions.0" next="//@instructions.3/@block/@instructions.2">
+        <angle xsi:type="logoCSM:ParameterCall" parameter="//@instructions.3/@args.1"/>
+      </instructions>
+      <instructions xsi:type="logoCSM:ProcCall" previous="//@instructions.3/@block/@instructions.1" declaration="//@instructions.3">
+        <actualArgs xsi:type="logoCSM:ParameterCall" parameter="//@instructions.3/@args.0"/>
+      </instructions>
+    </block>
+  </instructions>
+  <instructions xsi:type="logoCSM:ProcCall" previous="//@instructions.3" declaration="//@instructions.3">
+    <actualArgs xsi:type="logoCSM:Plus">
+      <lhs xsi:type="logoCSM:Constant"/>
+      <rhs xsi:type="logoCSM:Constant"/>
+    </actualArgs>
+    <actualArgs xsi:type="logoCSM:Constant"/>
+  </instructions>
+</logo:Block>

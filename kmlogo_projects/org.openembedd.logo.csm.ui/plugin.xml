@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.openembedd.logo.csm.ui.objectContribution1"
+            nameFilter="*.logocsm"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.openembedd.logo.csm.ui.menu1"
+               label="Logo"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="org.openembedd.logo.csm.ui.popup.actions.CompileLogoCSM2ASM"
+               icon="icons/turtlemodel16_16.gif"
+               id="org.openembedd.logo.csm.ui.action1"
+               label="Compile CSM to ASM"
+               menubarPath="org.openembedd.logo.csm.ui.menu1/group1">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

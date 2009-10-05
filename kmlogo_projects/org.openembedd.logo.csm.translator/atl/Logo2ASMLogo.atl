@@ -1,0 +1,288 @@
+module Logo2ASMLogo; -- Module Template
+create OUT : ASMLogo from IN : Logo;
+
+--helper
+--helper def: buildListInstruction(list_src : Sequence(Logo!Instruction), list_dst : Sequence(Logo!Instruction), current : Logo!Instruction) :
+--	Sequence(Logo!Instruction) =  if not current.oclIsUndefined() 
+--		then if list_src->includes(current) 
+--			then 
+--				thisModule.buildListInstruction(list_src->excluding(current), list_dst->append(current), current.next)
+--			else
+--				Sequence{}
+--			endif
+--		else
+--			list_dst
+--		endif;
+
+--Called rule
+rule buildListInstruction (list_src : Sequence(Logo!Instruction), block : Logo!ASMBlock, current : Logo!Instruction) {
+	do {
+		if (not current.oclIsUndefined() )
+		{
+			if(list_src->includes(current) )
+			{
+				block.instructions <- block.instructions->append(current);
+				thisModule.buildListInstruction(list_src->excluding(current), block, current.next);				
+			}
+			else
+			{
+				'Error: the instruction is not in the source instruction list or there is a cycle'.println();
+			}
+		}
+	}
+}
+
+rule Block{
+	from 
+		block : Logo!Block
+	using {
+			list_src : Sequence(Logo!Instruction) = block.instructions;
+			list_dst : Sequence(Logo!Instruction) = Sequence{};
+			init_ins : Sequence(Logo!Instruction) = list_src->select(ins | ins.previous.oclIsUndefined() );
+			nb : Integer = init_ins->size();
+		}
+	to
+		dst: ASMLogo!Block (
+				instructions <- Sequence{}
+			)
+	do {
+			if (not list_src->isEmpty() )
+			{
+				if(nb <> 0)
+				{
+					if (nb = 1)
+					{
+--						list_dst <- thisModule.buildListInstruction(list_src, Sequence{}, init_ins->first() );
+						thisModule.buildListInstruction(list_src, dst, init_ins->first() );
+--						if(list_src->includesAll(list_dst) )
+--						{
+--							dst.instructions <- list_dst;
+--						}
+--						else
+--						{
+--							'Error: There are more than one path between all block instructions'.println();
+--						}
+					}
+					else
+					{
+						'Error : Two or more starting instructions are found in the source program'.println();
+					}
+				}
+				else
+				{
+					'Error : There is no starting instructions in the source program'.println();
+				}
+			}
+	}
+}
+
+rule Back{
+	from 
+		back : Logo!Back
+	to
+		dst: ASMLogo!Back(
+			steps <- back.steps
+			)
+}
+
+rule Forward{
+	from 
+		forward : Logo!Forward
+	to
+		dst: ASMLogo!Forward(
+			steps <- forward.steps
+			)
+}
+
+rule Left{
+	from 
+		left : Logo!Left
+	to
+		dst: ASMLogo!Left(
+			angle <- left.angle
+			)
+}
+
+rule Right{
+	from 
+		right : Logo!Right
+	to
+		dst: ASMLogo!Right(
+			angle <- right.angle
+			)
+}
+
+rule PenUp{
+	from 
+		penup : Logo!PenUp
+	to
+		dst: ASMLogo!PenUp(
+			)
+}
+
+rule PenDown{
+	from 
+		pendown : Logo!PenDown
+	to
+		dst: ASMLogo!PenDown(
+			)
+}
+
+rule Clear{
+	from 
+		clear : Logo!Clear
+	to
+		dst : ASMLogo!Clear(			
+			)
+}
+
+rule ProcDeclaration{
+	from
+		decl : Logo!ProcDeclaration
+	to
+		dstDecl: ASMLogo!ProcDeclaration (
+			name <- decl.name,
+			block <- decl.block,
+			procCall <- decl.procCall,
+			args <- decl.args
+			)
+}
+
+rule ProcCall{
+	from
+		call : Logo!ProcCall
+	to
+		dstDecl: ASMLogo!ProcCall (
+			declaration <- call.declaration,
+			actualArgs <- call.actualArgs
+			)
+}
+
+rule Constant{
+	from 
+		cst : Logo!Constant
+	to
+		dst : ASMLogo!Constant (
+				integerValue <- cst.integerValue
+			)
+}
+
+rule If{
+	from 
+		ifop : Logo!If
+	to
+		dst: ASMLogo!If(
+			condition <- ifop.condition,
+			thenPart <- ifop.thenPart,
+			elsePart <- ifop.elsePart
+			)
+}
+
+rule Repeat{
+	from 
+		repeat : Logo!Repeat
+	to
+		dst: ASMLogo!Repeat(
+			condition <- repeat.condition,
+			block <- repeat.block
+			)
+}
+
+rule While{
+	from 
+		while : Logo!While
+	to
+		dst: ASMLogo!While(
+			condition <- while.condition,
+			block <- while.block
+			)
+}
+
+rule Parameter{
+	from 
+		par : Logo!Parameter
+	to
+		dst: ASMLogo!Parameter(
+			name <- par.name
+			)
+}
+
+rule ParameterCall{
+	from 
+		par : Logo!ParameterCall
+	to
+		dst: ASMLogo!ParameterCall(
+			parameter <- par.parameter
+			)
+}
+
+rule Plus{
+	from 
+		op : Logo!Plus
+	to
+		opdst: ASMLogo!Plus(
+			lhs <- op.lhs,
+			rhs <- op.rhs
+			)
+}
+
+rule Minus{
+	from 
+		op : Logo!Minus
+	to
+		opdst: ASMLogo!Minus(
+			lhs <- op.lhs,
+			rhs <- op.rhs
+			)
+}
+
+rule Mult{
+	from 
+		op : Logo!Mult
+	to
+		opdst: ASMLogo!Mult(
+			lhs <- op.lhs,
+			rhs <- op.rhs
+			)
+}
+
+rule Div{
+	from 
+		op : Logo!Div
+	to
+		opdst: ASMLogo!Div(
+			lhs <- op.lhs,
+			rhs <- op.rhs
+			)
+}
+
+rule Equals{
+	from 
+		op : Logo!Equals
+	to
+		opdst: ASMLogo!Equals(
+			lhs <- op.lhs,
+			rhs <- op.rhs
+			)
+}
+
+rule Lower{
+	from 
+		op : Logo!Lower
+	to
+		opdst: ASMLogo!Lower(
+			lhs <- op.lhs,
+			rhs <- op.rhs
+			)
+}
+
+rule Greater{
+	from 
+		op : Logo!Greater
+	to
+		opdst: ASMLogo!Greater(
+			lhs <- op.lhs,
+			rhs <- op.rhs
+			)
+}
+

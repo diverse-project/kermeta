@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.openembedd.logo.csm"
+      label="OpenEmbeDD graphical modeler for Logo language Kermeta sample"
+      version="1.0.0"
+      provider-name="INRIA">
+
+   <description>
+      OpenEmbeDD graphical modeler for the Logo language Kermeta sample
+   </description>
+
+   <copyright>
+      Copyright 2007-2009 - OpenEmbeDD - IRISA/INRIA Rennes
+All rights reserved.
+   </copyright>
+
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      The OpenEmbeDD demo is made available
+under the terms of the Eclipse Public License v1.0 which accompanies
+this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+   </license>
+
+   <url>
+      <update label="OpenEmbeDD Update Site" url="http://openembedd.org/update"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import feature="fr.irisa.triskell.kermeta.graphical" version="1.2.1" match="greaterOrEqual"/>
+      <import feature="fr.irisa.triskell.kermeta" version="1.2.1" match="greaterOrEqual"/>
+      <import feature="org.kermeta.kmlogo.feature" version="1.2.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.openembedd.logo.csm.tutorial"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.openembedd.wizards"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.topcased.modeler.templates">
+      <template
+            di="templates/block/%name%.logocsmdi"
+            model="templates/block/%name%.logocsm"
+            name="Block Diagram"
+            id="org.openembedd.logo.csm.diagram.block.templates.block"
+            editorId="org.openembedd.logo.csm.modeler.editor.LogoCSMEditor"/>
+   </extension>
+   
+   <extension point="org.topcased.modeler.diagrams">
+      <diagram
+            configuration="org.openembedd.logo.csm.diagram.block.LogoCSMConfiguration"
+            id="org.openembedd.logo.csm.diagram.block"
+            name="Block Diagram">
+         <enableFor class="org.openembedd.logo.csm.logoCSM.Block"/>
+      </diagram>
+	</extension>
+	
+   
+</plugin>
