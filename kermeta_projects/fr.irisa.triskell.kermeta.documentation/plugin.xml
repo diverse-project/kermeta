@@ -10,6 +10,7 @@
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.kermeta.io.loader"/>
+      <import plugin="org.kermeta.log4j.util"/>
    </requires>
   <extension point="org.eclipse.help.toc">
 	<toc file="toc.xml" primary="true"/>
