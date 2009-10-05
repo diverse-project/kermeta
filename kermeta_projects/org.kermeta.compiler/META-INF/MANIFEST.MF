@@ -29,5 +29,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.compiler.common,
  org.apache.commons.logging;bundle-version="1.0.4",
  org.kermeta.compiler.generator,
- org.kermeta.framework.compiler.directives
+ org.kermeta.framework.compiler.directives,
+ org.kermeta.log4j.util
 Bundle-ActivationPolicy: lazy
