@@ -18,6 +18,7 @@
 	<!-- ===================================================================== -->
 	<target name="pre.build.jars">
 		<echo>pre build jar ${build.result.folder}</echo>
+		<ant antfile="scripts/jar_unzipper_build.xml"  dir="."></ant>
 	</target>
 
 	<!-- ===================================================================== -->
