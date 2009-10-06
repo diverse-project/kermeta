@@ -15,6 +15,11 @@
 	<target name="all" depends="getSources, compile">
 		
 	</target>
+	
+	<target name="cleanOutput"
+		description="Clean the output folder to make sure eclipse won't update an old zip from previous build">
+		<delete dir="${eclipse.build.dir}/I.TestBuild"></delete>
+	</target>
 	<target name="getSources">	
 		<mkdir dir="${previousStep.dir}"/>			
 		<get src="http://pamplemousse.irisa.fr:8080/job/prepare_Kermeta_sources/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
@@ -57,7 +62,7 @@
 -->
 
 	</target>
-	<target name="compile" depends="organizeSources">	
+	<target name="compile" depends="cleanOutput, organizeSources">	
 		<mkdir dir="${eclipse.workspace.dir}"/>
 		<java jar="${equinox.jar}"
 		           fork="true"
