@@ -1,0 +1,20 @@
+<!-- $Id: jar_unzipper_build.xml,v 1.1 2008-05-27 12:30:07 dvojtise Exp $ -->
+<project name="jar_unzipper" default="unzip_commons_logging_jar" basedir="..">
+	<description>
+       
+	</description>
+	<property name="jarfile" value="lib/thirdparty/log4j.jar"/>	
+  	<target name="unzip_commons_logging_jar" description="unzip commons-logging.jar in order to use it in eclipse">
+  		<unzip dest="extracted_src"
+  			src= "lib/thirdparty/commons-logging-1.1.1/commons-logging-1.1.1-sources.jar">
+			<patternset>		    
+		        <exclude name="**/META-INF/**"/>
+		        <exclude name="**/*.html"/>
+				<!-- also exclude logger for which we don't really care because we don't have them here -->
+				<exclude name="**/AvalonLogger.java"/>
+				<exclude name="**/LogKitLogger.java"/>
+				<exclude name="**/ServletContextCleaner.java"/>
+		    </patternset>
+		</unzip>
+  	</target> 
+</project>
