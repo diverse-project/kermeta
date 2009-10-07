@@ -6,8 +6,12 @@
     </description>
 	
     <property name="report.dir" location="./reports"/>
-	<property name="eclipse.home" location="c:/eclipse3.1.1/eclipse"/>
-	<property name="cobertura.dir" location="\\jersey\triskell\bin\multiplatform\cobertura-1.7"/>
+	<property name="eclipse.home" location="c:/eclipse3.5/eclipse"/>
+	<property name="cobertura.dir" location="\\nas1a\triskell\bin\multiplatform\cobertura-1.7"/>
+	<property name="dot.or.bin" value="bin"/>
+	<!-- <property name="dot.or.bin" value="@dot"/> -->
+	<property name="dot.or.buildclass" value="build/class"/>
+	<!-- <property name="dot.or.buildclass" value="@dot"/> -->
 		
 	<property name="build.bin" location="../../bin"/>
 	<property name="src" location="../../src"/>
@@ -21,15 +25,16 @@
 	
 	
 	<property name="kermeta.test.class" location="${build.bin}"/>
-	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\@dot"/>
-	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\@dot" />
-	<property name="kermeta.io.loader.jar" location="..\..\..\org.kermeta.io.loader\@dot" />
-	<property name="kermeta.merger.jar" location="..\..\..\org.kermeta.merger\@dot" />
-	<property name="kermeta.log4j.util.jar" location="..\..\..\org.kermeta.log4j.util\@dot" />
-	<property name="kermeta.interest.jar" location="..\..\..\org.kermeta.interest\@dot" />
-	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\@dot"/>	
-	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.traceability.model\@dot"/>	
-	<property name="ecoretools.registration.jar" location="..\..\..\org.eclipse.emf.ecoretools.registration\@dot"/>
+	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\${dot.or.buildclass}"/>
+	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\${dot.or.buildclass}" />
+	<property name="kermeta.io.loader.jar" location="..\..\..\org.kermeta.io.loader\${dot.or.bin}" />
+	<property name="kermeta.merger.jar" location="..\..\..\org.kermeta.merger\${dot.or.bin}" />
+	<property name="kermeta.log4j.util.jar" location="..\..\..\org.kermeta.log4j.util\${dot.or.bin}" />
+	<property name="kermeta.interest.jar" location="..\..\..\org.kermeta.interest\${dot.or.bin}" />
+	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\${dot.or.bin}"/>	
+	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.traceability.model\${dot.or.bin}"/>	
+	<property name="ecoretools.registration.jar" location="..\..\..\org.eclipse.emf.ecoretools.registration\${dot.or.bin}"/>
+	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta.interpreter\${dot.or.buildclass}" />
 
 	<property name="log4j.jar" location="${eclipse.home}/plugins/org.apache.log4j_1.2.13.v200903072027.jar" />
 	<property name="antlr.jar" location="..\..\..\org.antlr.antlr2\${dot.or.bin}"/>
@@ -126,6 +131,7 @@
    			<classpath >
    				<!--<pathelement path="${MTLcompiler.path}/bin"/>-->
    				<path refid="io.class.path"/> 
+   				<pathelement path="${kermeta.interpreter.jar}"/>
    			</classpath>
    		</javac>
 	</target>
