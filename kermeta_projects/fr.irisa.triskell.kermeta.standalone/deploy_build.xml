@@ -67,6 +67,10 @@
 			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta.interpreter_*.jar"/>
 		    <mapper type="merge" to="kermeta.interpreter.jar"/>
 		</copy>
+		<copy todir="./lib/" flatten="true"> <!-- rename io to kermeta.interpreter.jar -->
+			<fileset dir="${kermeta.plugins}" includes="**/org.eclipse.emf.ecoretools.registration_*.jar"/>
+		    <mapper type="merge" to="ecoretools.registration.jar"/>
+		</copy>
 		<copy todir="./lib/" flatten="true"> <!-- rename io to triskell.eclipse.util.jar -->
 			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.eclipse.util_*.jar"/>
 		    <mapper type="merge" to="triskell.eclipse.util.jar"/>
