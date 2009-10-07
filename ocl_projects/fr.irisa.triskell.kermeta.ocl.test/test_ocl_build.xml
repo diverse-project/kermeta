@@ -6,7 +6,7 @@
     </description>
 
 	<property name="report.dir" location="../../reports" />
-	<property name="eclipse.home" location="c:/eclipse3.3/eclipse" />
+	<property name="eclipse.home" location="c:/eclipse3.5/eclipse" />
 	<property name="dot.or.bin" value="bin"/>
 	<!-- <property name="dot.or.bin" value="@dot"/> -->
 	<property name="dot.or.buildclass" value="build/class"/>
