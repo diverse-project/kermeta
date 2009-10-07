@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Repository;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 
 
@@ -111,22 +112,38 @@ public class SimpleFileIO {
         	 */
         	java.lang.String filePath = getOSFileLocation(String.getValue(filename));
         	
+        	filePath = Repository.normalizeUri(filePath, 
+        			filename.getFactory().getMemory().getUnit(), 
+        			filename.getFactory().getMemory().getInterpreter());
+	
+        	
         	int i = filePath.lastIndexOf("/");
         	java.lang.String folderPath = filePath.substring(0, i);
-        	
+        	java.lang.String platformFolderPath = folderPath;
+        	IFolder result_folder = null;
         	if ( folderPath.startsWith("platform:/resource") ) {
-        		java.lang.String platformFolderPath = folderPath.replace("platform:/resource", "");
-        		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFolderPath) );
-        		IProject project = folder.getProject();
-        		if(!project.exists()){
-        			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::IOException",
-        	    			"Cannot write file because project '" + project.getName() + "' doesn't exist. (we can create intermediate folders but cannot create the project)",
-        	    			filename.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
-        	    			filename.getFactory().getMemory(),
-        	    			null);
+        		java.lang.String notPlatformFolderPath = folderPath.replace("platform:/resource", "");
+        		// is this a project ?
+        		if(notPlatformFolderPath.lastIndexOf("/")==0){
+        			IProject project = ResourceHelper.getIProject(notPlatformFolderPath.replace("/", ""));
+        			result_folder = project.getFolder("/");
+        			folderPath = project.getLocation().toString();
+	        		filePath = folderPath + filePath.substring(i);
         		}
-        		folderPath = folder.getLocation().toString();
-        		filePath = folderPath + filePath.substring(i);
+        		else {
+        			
+        			result_folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(notPlatformFolderPath) );
+	        		IProject project = result_folder.getProject();
+	        		if(!project.exists()){
+	        			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::IOException",
+	        	    			"Cannot write file because project '" + project.getName() + "' doesn't exist. (we can create intermediate folders but cannot create the project)",
+	        	    			filename.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
+	        	    			filename.getFactory().getMemory(),
+	        	    			null);
+	        		}
+	        		folderPath = result_folder.getLocation().toString();
+	        		filePath = folderPath + filePath.substring(i);
+        		}
         	}
         	       	
         	/*
@@ -150,12 +167,7 @@ public class SimpleFileIO {
             
             // Refresh the content of the folder that contains the created file
         	try {
-            	int i_folder = String.getValue(filename).lastIndexOf("/");
-            	if(i_folder == -1){
-            		// maybe this is a windows like path
-            		i_folder = String.getValue(filename).lastIndexOf("\\");
-            	}
-				IFolder result_folder = ResourceHelper.getIFolder(String.getValue(filename).substring(0, i_folder));
+            	//IFolder result_folder = ResourceHelper.getIFolder(platformFolderPath);
 				if(result_folder != null)
 					result_folder.refreshLocal(1, new NullProgressMonitor());
 			} catch (CoreException e) {
