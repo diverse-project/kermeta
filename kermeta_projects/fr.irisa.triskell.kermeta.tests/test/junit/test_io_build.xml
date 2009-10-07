@@ -5,7 +5,7 @@
         Run interpreter tests
     </description>
 	
-    <property name="report.dir" location="./reports"/>
+    <property name="report.dir" location="../../reports"/>
 	<property name="eclipse.home" location="c:/eclipse3.5/eclipse"/>
 	<property name="cobertura.dir" location="\\nas1a\triskell\bin\multiplatform\cobertura-1.7"/>
 	<property name="dot.or.bin" value="bin"/>
@@ -89,6 +89,7 @@
 		<pathelement location="${equinox.preferences.jar}"/>
 	    <pathelement location="${osgi.jar}"/>
 	    <pathelement location="${core.runtime.jar}"/>
+	    <pathelement location="${core.resources.jar}"/>
 		<pathelement location="${ui.workbench.jar}"/>
 		<pathelement location="${jface.jar}"/>
 		<pathelement location="${swt.jar}"/>
