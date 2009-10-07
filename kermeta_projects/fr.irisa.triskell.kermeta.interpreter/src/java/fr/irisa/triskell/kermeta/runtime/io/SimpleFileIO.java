@@ -126,7 +126,7 @@ public class SimpleFileIO {
         		// is this a project ?
         		if(notPlatformFolderPath.lastIndexOf("/")==0){
         			IProject project = ResourceHelper.getIProject(notPlatformFolderPath.replace("/", ""));
-        			result_folder = project.getFolder("/");
+        			result_folder = project.getFolder(notPlatformFolderPath+"/");
         			folderPath = project.getLocation().toString();
 	        		filePath = folderPath + filePath.substring(i);
         		}
@@ -167,7 +167,7 @@ public class SimpleFileIO {
             
             // Refresh the content of the folder that contains the created file
         	try {
-            	//IFolder result_folder = ResourceHelper.getIFolder(platformFolderPath);
+            	if(result_folder == null) result_folder = ResourceHelper.getIFolder(platformFolderPath);
 				if(result_folder != null)
 					result_folder.refreshLocal(1, new NullProgressMonitor());
 			} catch (CoreException e) {
