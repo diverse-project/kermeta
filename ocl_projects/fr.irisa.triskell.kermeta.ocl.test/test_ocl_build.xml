@@ -34,10 +34,10 @@
 	<property name="ocl.jar" location="..\org.kermeta.eclipse.ocl.parser\${dot.or.bin}" />
 		
 	<property name="log4j.jar" location="${eclipse.home}/plugins/org.apache.log4j_1.2.13.v200903072027.jar" />
-	<property name="antlr.jar" location="..\..\..\org.antlr.antlr2\${dot.or.bin}"/>
+	<property name="antlr.jar" location="..\org.antlr.antlr2\${dot.or.bin}"/>
 	<!--<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar" />-->
-	<!--<property name="emfatic-core.jar" location="..\..\..\org.eclipse.gymnast.runtime.core\${dot.or.bin}"/>-->
-	<property name="emfatic-core.jar" location="${eclipse.home}/plugins/org.eclipse.gymnast.runtime.core_0.3.0.jar"/>
+	<property name="emfatic-core.jar" location="..\org.eclipse.gymnast.runtime.core\${dot.or.bin}"/>
+	<!--<property name="emfatic-core.jar" location="${eclipse.home}/plugins/org.eclipse.gymnast.runtime.core_0.3.0.jar"/>-->
 
 	
 	<property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.5.0.v200906151043.jar" />
