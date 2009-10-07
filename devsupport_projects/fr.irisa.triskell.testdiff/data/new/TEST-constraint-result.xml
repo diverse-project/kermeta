@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="1" failures="0" name="kermeta_interpreter.constraint_test.JunitTestSuite" tests="37" time="4.753">
+  <properties>
+    <property name="java.vendor" value="Sun Microsystems Inc."></property>
+    <property name="equinox.preferences.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.equinox.preferences_3.2.100.v20070522.jar"></property>
+    <property name="kermeta.io.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/@dot"></property>
+    <property name="sun.java.launcher" value="SUN_STANDARD"></property>
+    <property name="sun.management.compiler" value="HotSpot Server Compiler"></property>
+    <property name="osgi.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.osgi_3.3.0.v20070530.jar"></property>
+    <property name="os.name" value="Linux"></property>
+    <property name="sun.boot.class.path" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/i18n.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/sunrsasign.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/jsse.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/jce.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/charsets.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/classes"></property>
+    <property name="triskell.eclipse.util.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.eclipse.util/@dot"></property>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="ant.home" value="/udd/triskell/bin/multiplatform/apache-ant-1.5.4"></property>
+    <property name="java.runtime.version" value="1.5.0_12-b04"></property>
+    <property name="equinox.common.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.equinox.common_3.3.0.v20070426.jar"></property>
+    <property name="cobertura.dir" value="/udd/triskell/bin/multiplatform/cobertura-1.7/"></property>
+    <property name="user.name" value="dvojtise"></property>
+    <property name="core.runtime.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.core.runtime_3.3.100.v20070530.jar"></property>
+    <property name="ui.workbench.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.ui.workbench_3.3.0.I20070608-1100.jar"></property>
+    <property name="user.language" value="en"></property>
+    <property name="core.jobs.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.core.jobs_3.3.0.v20070423.jar"></property>
+    <property name="sun.boot.library.path" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/i386"></property>
+    <property name="ant.project.name" value="run interpreter tests"></property>
+    <property name="java.version" value="1.5.0_12"></property>
+    <property name="build.bin" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/build/class"></property>
+    <property name="coverage.html.dir" value="/tmp/kermeta_build/unittestreports/coverage/html"></property>
+    <property name="user.timezone" value="Europe/Paris"></property>
+    <property name="sun.arch.data.model" value="32"></property>
+    <property name="java.endorsed.dirs" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/endorsed"></property>
+    <property name="sun.cpu.isalist" value=""></property>
+    <property name="emf.validation.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.emf.validation_1.1.0.v200706071520.jar"></property>
+    <property name="sun.jnu.encoding" value="ISO-8859-15"></property>
+    <property name="file.encoding.pkg" value="sun.io"></property>
+    <property name="file.separator" value="/"></property>
+    <property name="java.specification.name" value="Java Platform API Specification"></property>
+    <property name="java.class.version" value="49.0"></property>
+    <property name="src" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/src/java"></property>
+    <property name="user.country" value="US"></property>
+    <property name="ldt-core.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/thirdparty/ldt-core.jar"></property>
+    <property name="java.home" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre"></property>
+    <property name="java.vm.info" value="mixed mode"></property>
+    <property name="ant.file" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/junit/test_build.xml"></property>
+    <property name="os.version" value="2.6.19-1.2911.6.4.fc6"></property>
+    <property name="path.separator" value=":"></property>
+    <property name="eclipse.home" value="/local/daily_build/eclipse3.3_with_topcased/eclipse"></property>
+    <property name="java.vm.version" value="1.5.0_12-b04"></property>
+    <property name="report.dir" value="/tmp/kermeta_build/unittestreports"></property>
+    <property name="emf.ecore.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.emf.ecore_2.3.0.v200706262000.jar"></property>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"></property>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"></property>
+    <property name="kermeta.model.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.model/@dot"></property>
+    <property name="kermeta.interpreter.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/interpreter_kermeta.jar"></property>
+    <property name="coverage.dir" value="/tmp/kermeta_build/unittestreports/coverage"></property>
+    <property name="user.home" value="/udd/dvojtise"></property>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="coverage.xml.dir" value="/tmp/kermeta_build/unittestreports/coverage/xml"></property>
+    <property name="java.library.path" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/i386/server:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/i386:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/../lib/i386"></property>
+    <property name="java.vendor.url" value="http://java.sun.com/"></property>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."></property>
+    <property name="cobertura.lib.dir" value="/udd/triskell/bin/multiplatform/cobertura-1.7/lib"></property>
+    <property name="java.runtime.name" value="Java(TM) 2 Runtime Environment, Standard Edition"></property>
+    <property name="java.class.path" value="/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xml-apis.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xercesImpl.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xalan.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/optional.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/junit.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/ant.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/junit.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/optional.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/lib/tools.jar"></property>
+    <property name="ant.version" value="Apache Ant version 1.5.4 compiled on August 12 2003"></property>
+    <property name="traceability.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.traceability.model/@dot"></property>
+    <property name="core.resources.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.core.resources_3.3.0.v20070604.jar"></property>
+    <property name="swt.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.swt.gtk.linux.x86_3.3.0.v3346.jar"></property>
+    <property name="emf.common.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.emf.common_2.3.0.v200706262000.jar"></property>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"></property>
+    <property name="java.vm.specification.version" value="1.0"></property>
+    <property name="sun.cpu.endian" value="little"></property>
+    <property name="sun.os.patch.level" value="unknown"></property>
+    <property name="log4j.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/thirdparty/log4j.jar"></property>
+    <property name="java.io.tmpdir" value="/tmp"></property>
+    <property name="test.src" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/junit"></property>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"></property>
+    <property name="emf.ecore.xmi.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar"></property>
+    <property name="instrumented.dir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/junit/instrumented"></property>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"></property>
+    <property name="os.arch" value="i386"></property>
+    <property name="java.ext.dirs" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/ext"></property>
+    <property name="user.dir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter"></property>
+    <property name="equinox.registry.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.equinox.registry_3.3.0.v20070522.jar"></property>
+    <property name="line.separator" value="
+"></property>
+    <property name="java.vm.name" value="Java HotSpot(TM) Server VM"></property>
+    <property name="kermeta.interpreter.class" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/build/class"></property>
+    <property name="jface.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.jface_3.3.0.I20070606-0010.jar"></property>
+    <property name="basedir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/junit"></property>
+    <property name="ant.java.version" value="1.4"></property>
+    <property name="file.encoding" value="ISO-8859-15"></property>
+    <property name="antlr.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/lib/thirdparty/antlr.jar"></property>
+    <property name="java.specification.version" value="1.5"></property>
+  </properties>
+  <testcase name="root_package::Main.test0" time="0.454"></testcase>
+  <testcase name="root_package::Main.test0" time="0.473"></testcase>
+  <testcase name="root_package::Main.test0" time="1.54"></testcase>
+  <testcase name="root_package::Main.test0" time="0.055"></testcase>
+  <testcase name="root_package::Main.test0" time="0.037"></testcase>
+  <testcase name="root_package::Main.test0" time="0.027"></testcase>
+  <testcase name="root_package::Main.test0" time="0.024"></testcase>
+  <testcase name="root_package::Main.test0" time="0.027"></testcase>
+  <testcase name="root_package::Main.test0" time="0.027"></testcase>
+  <testcase name="testInvariant::Main.test0" time="0.017"></testcase>
+  <testcase name="testInvariant::Main.test1" time="0.022"></testcase>
+  <testcase name="testInvariant::Main.test2" time="0.021"></testcase>
+  <testcase name="testInvariant::Main.test3" time="0.026"></testcase>
+  <testcase name="root_package::Main.test0" time="0.175"></testcase>
+  <testcase name="root_package::Main.test0" time="0.025"></testcase>
+  <testcase name="root_package::Main.test0" time="0.056">
+    <error message="kermeta exception : [kermeta::exceptions::ConstraintViolatedPost : 13889]" type="fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException">fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::exceptions::ConstraintViolatedPost : 13889]
+post logDefined of operation getLog of class Fallible violated
+Trace: 
+      [root_package::Main : 13781].getLog
+ -&gt; file &apos;platform:/plugin/fr.irisa.triskell.kermeta.interpreter/test/constraint_testcases/001_testInv_fail_inherited_catched.main.kmt&apos;, line 38, in &apos;[root_package::Main : 13781].assert&apos; ( assert(false) )
+ -&gt; file &apos;platform:/plugin/fr.irisa.triskell.kermeta.interpreter/test/constraint_testcases/001_testInv_fail_inherited_catched.main.kmt&apos;, line 32, in &apos;[root_package::Main : 13781].test0&apos; ( operation test0() : Void is (...) )
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException.createKermetaException(KermetaRaisedException.java:230)
+	at fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException.createKermetaException(KermetaRaisedException.java:252)
+	at fr.irisa.triskell.kermeta.interpreter.ConstraintInterpreter.visitConstraint(ConstraintInterpreter.java:158)
+	at fr.irisa.triskell.kermeta.visitor.ConstraintAcceptCommand.accept(KermetaOptimizedVisitor.java:713)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ConstraintInterpreter.visitOperation(ConstraintInterpreter.java:86)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:557)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ConstraintInterpreter.visitCallFeature(ConstraintInterpreter.java:248)
+	at fr.irisa.triskell.kermeta.visitor.CallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:425)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ConstraintInterpreter.visitCallFeature(ConstraintInterpreter.java:188)
+	at fr.irisa.triskell.kermeta.visitor.CallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:425)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1441)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:455)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitConditional(ExpressionInterpreter.java:668)
+	at fr.irisa.triskell.kermeta.visitor.ConditionalAcceptCommand.accept(KermetaOptimizedVisitor.java:401)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1441)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:455)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ConstraintInterpreter.visitOperation(ConstraintInterpreter.java:76)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:557)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ConstraintInterpreter.visitCallFeature(ConstraintInterpreter.java:248)
+	at fr.irisa.triskell.kermeta.visitor.CallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:425)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1441)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:601)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:455)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1441)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:455)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ConstraintInterpreter.visitOperation(ConstraintInterpreter.java:76)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:557)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:144)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launchConstraint(KermetaInterpreter.java:311)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:113)
+</error>
+  </testcase>
+  <testcase name="root_package::Main.test0" time="0.031"></testcase>
+  <testcase name="testInvariant::Main.test4" time="0.041"></testcase>
+  <testcase name="testInvariant::Main.test5" time="0.027"></testcase>
+  <testcase name="testInvariant::Main.test6" time="0.038"></testcase>
+  <testcase name="testInvariant::Main.test7" time="0.411"></testcase>
+  <testcase name="root_package::Main.test0" time="0.031"></testcase>
+  <testcase name="root_package::Main.test0" time="0.109"></testcase>
+  <testcase name="root_package::Main.test0" time="0.024"></testcase>
+  <testcase name="root_package::Main.test0" time="0.012"></testcase>
+  <testcase name="root_package::Main.test0" time="0.186"></testcase>
+  <testcase name="root_package::Main.test0" time="0.012"></testcase>
+  <testcase name="root_package::Main.test0" time="0.021"></testcase>
+  <testcase name="root_package::Main.test0" time="0.054"></testcase>
+  <testcase name="root_package::Main.test0" time="0.027"></testcase>
+  <testcase name="root_package::Main.test0" time="0.102"></testcase>
+  <testcase name="root_package::Main.test0" time="0.132"></testcase>
+  <testcase name="root_package::Main.test0" time="0.167"></testcase>
+  <testcase name="root_package::Main.test0" time="0.025"></testcase>
+  <testcase name="root_package::Main.test0" time="0.019"></testcase>
+  <testcase name="root_package::Main.test0" time="0.21"></testcase>
+  <testcase name="root_package::Main.test0" time="0.022"></testcase>
+  <system-out><![CDATA[[kermeta::exceptions::ConstraintViolatedPre:742]
+pre lapre of operation truc of class Main violated
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 487
+    * #ro created     : 892
+    * #ro total       : 892
+    * time (ms)       : 454
+    ************************************************
+test
+Exception catched
+[kermeta::exceptions::ConstraintViolatedPost:1610]
+post lapost of operation truc of class Main violated
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 482
+    * #ro created     : 869
+    * #ro total       : 1761
+    * time (ms)       : 472
+    ************************************************
+test_require
+[kermeta::exceptions::ConstraintViolatedPost:2492]
+post lapostRequired of operation truc of class MainToBeRequired violated
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 486
+    * #ro created     : 883
+    * #ro total       : 2644
+    * time (ms)       : 1540
+    ************************************************
+test
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 471
+    * #ro created     : 743
+    * #ro total       : 3387
+    * time (ms)       : 55
+    ************************************************
+test
+[kermeta::exceptions::ConstraintViolatedPre:4145]
+pre lapreparent1 of operation truc of class MainParent violated
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 489
+    * #ro created     : 907
+    * #ro total       : 4294
+    * time (ms)       : 37
+    ************************************************
+test
+test
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 473
+    * #ro created     : 764
+    * #ro total       : 5058
+    * time (ms)       : 27
+    ************************************************
+[kermeta::exceptions::ConstraintViolatedPre:5767]
+pre lapre of operation truc of class Main violated
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 485
+    * #ro created     : 864
+    * #ro total       : 5922
+    * time (ms)       : 24
+    ************************************************
+[kermeta::exceptions::ConstraintViolatedInv:6675]
+Inv superMain2Inv of class Main violated
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 489
+    * #ro created     : 895
+    * #ro total       : 6817
+    * time (ms)       : 27
+    ************************************************
+test
+[kermeta::exceptions::ConstraintViolatedPost:7560]
+post lapost of operation truc of class Main violated
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 487
+    * #ro created     : 892
+    * #ro total       : 7709
+    * time (ms)       : 27
+    ************************************************
+Inv superMainInv : supertiti
+Inv superMain2Inv : supertiti2
+Inv titi : titi
+OK for test0
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 476
+    * #ro created     : 746
+    * #ro total       : 8455
+    * time (ms)       : 17
+    ************************************************
+Inv superMainInv : supertiti
+Inv superMain2Inv : supertiti2
+Inv titi : not titi
+OK for test1
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 487
+    * #ro created     : 816
+    * #ro total       : 9271
+    * time (ms)       : 22
+    ************************************************
+Inv superMainInv : not supertiti
+OK for test2
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 488
+    * #ro created     : 811
+    * #ro total       : 10082
+    * time (ms)       : 21
+    ************************************************
+Inv superMainInv : supertiti
+Inv superMain2Inv : not supertiti2
+OK for test3
+    ************************************************
+    * Consumed memory : 334823424/832045056
+    * #objects cached : 488
+    * #ro created     : 814
+    * #ro total       : 10896
+    * time (ms)       : 26
+    ************************************************
+test
+test
+[kermeta::exceptions::ConstraintViolatedPost:11815]
+post lapostparentparent1 of operation truc of class MainParentParent violated
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 489
+    * #ro created     : 1413
+    * #ro total       : 12309
+    * time (ms)       : 175
+    ************************************************
+test
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 463
+    * #ro created     : 771
+    * #ro total       : 13080
+    * time (ms)       : 24
+    ************************************************
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 494
+    * #ro created     : 855
+    * #ro total       : 13935
+    * time (ms)       : 51
+    ************************************************
+[kermeta::exceptions::ConstraintViolatedPre:14693]
+pre lapre of operation truc of class Main violated
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 487
+    * #ro created     : 892
+    * #ro total       : 14843
+    * time (ms)       : 31
+    ************************************************
+Inv superMainInv : supertiti
+Inv superMain2Inv : supertiti2
+Inv stringTata : titi
+Inv titi : titi
+Inv superMainInvTata : supertiti
+Inv superMain2InvTata : supertiti2
+OK for test4
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 483
+    * #ro created     : 784
+    * #ro total       : 15627
+    * time (ms)       : 40
+    ************************************************
+Inv superMainInv : supertiti
+Inv superMain2Inv : supertiti2
+Inv stringTata : no titi
+OK for test5
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 494
+    * #ro created     : 891
+    * #ro total       : 16518
+    * time (ms)       : 27
+    ************************************************
+Inv superMainInv : supertiti
+Inv superMain2Inv : supertiti2
+Inv stringTata : titi
+Inv titi : titi
+Inv superMainInvTata : no supertiti
+OK for test6
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 495
+    * #ro created     : 852
+    * #ro total       : 17370
+    * time (ms)       : 38
+    ************************************************
+Inv superMainInv : supertiti
+Inv superMain2Inv : supertiti2
+Inv stringTata : titi
+Inv titi : titi
+Inv superMainInvTata : supertiti
+Inv superMain2InvTata : no supertiti2
+OK for test7
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 495
+    * #ro created     : 855
+    * #ro total       : 18225
+    * time (ms)       : 411
+    ************************************************
+[kermeta::exceptions::ConstraintViolatedInv:18976]
+Inv superMain2Inv of class Main violated
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 489
+    * #ro created     : 899
+    * #ro total       : 19124
+    * time (ms)       : 31
+    ************************************************
+test
+[kermeta::exceptions::ConstraintViolatedPre:20322]
+pre lapre of operation truc of class Main violated
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 487
+    * #ro created     : 1673
+    * #ro total       : 20797
+    * time (ms)       : 109
+    ************************************************
+[kermeta::exceptions::ConstraintViolatedInv:21721]
+Inv toBeRedefined of class Main violated
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 491
+    * #ro created     : 1256
+    * #ro total       : 22053
+    * time (ms)       : 23
+    ************************************************
+test
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 465
+    * #ro created     : 794
+    * #ro total       : 22847
+    * time (ms)       : 12
+    ************************************************
+[kermeta::exceptions::ConstraintViolatedPre:23605]
+pre lapreparent1 of operation truc of class MainParent violated
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 487
+    * #ro created     : 1134
+    * #ro total       : 23983
+    * time (ms)       : 186
+    ************************************************
+test
+test_require
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 468
+    * #ro created     : 861
+    * #ro total       : 24849
+    * time (ms)       : 12
+    ************************************************
+[kermeta::exceptions::ConstraintViolatedPre:25735]
+pre lapreRequired of operation truc of class MainToBeRequired violated
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 484
+    * #ro created     : 1224
+    * #ro total       : 26078
+    * time (ms)       : 21
+    ************************************************
+test
+test
+[kermeta::exceptions::ConstraintViolatedPost:26989]
+post lapostparent1 of operation truc of class MainParent violated
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 487
+    * #ro created     : 1058
+    * #ro total       : 27138
+    * time (ms)       : 54
+    ************************************************
+[kermeta::exceptions::ConstraintViolatedInv:27867]
+Inv linvRequired of class MainToBeRequired violated
+[kermeta::exceptions::ConstraintViolatedInv:28017]
+Inv linvRequired of class MainToBeRequired violated
+    ************************************************
+    * Consumed memory : 334692352/832045056
+    * #objects cached : 484
+    * #ro created     : 898
+    * #ro total       : 28036
+    * time (ms)       : 27
+    ************************************************
+test
+[kermeta::exceptions::ConstraintViolatedPost:28789]
+post lapost of operation truc of class Main violated
+    ************************************************
+    * Consumed memory : 333381632/832045056
+    * #objects cached : 487
+    * #ro created     : 1067
+    * #ro total       : 29103
+    * time (ms)       : 102
+    ************************************************
+test
+[kermeta::exceptions::ConstraintViolatedPost:30368]
+post lapost2 of operation truc of class Main violated
+    ************************************************
+    * Consumed memory : 333381632/832045056
+    * #objects cached : 487
+    * #ro created     : 1470
+    * #ro total       : 30574
+    * time (ms)       : 132
+    ************************************************
+test
+test
+[kermeta::exceptions::ConstraintViolatedPost:32742]
+post lapostparent1 of operation truc of class MainParent violated
+    ************************************************
+    * Consumed memory : 333381632/832045056
+    * #objects cached : 489
+    * #ro created     : 2315
+    * #ro total       : 32891
+    * time (ms)       : 167
+    ************************************************
+test
+[kermeta::exceptions::ConstraintViolatedPost:33638]
+post lapostparent1 of operation truc of class MainParent violated
+    ************************************************
+    * Consumed memory : 333381632/832045056
+    * #objects cached : 487
+    * #ro created     : 896
+    * #ro total       : 33787
+    * time (ms)       : 25
+    ************************************************
+test
+[kermeta::exceptions::ConstraintViolatedPost:34496]
+post lapost of operation truc of class Main violated
+    ************************************************
+    * Consumed memory : 333381632/832045056
+    * #objects cached : 481
+    * #ro created     : 860
+    * #ro total       : 34647
+    * time (ms)       : 19
+    ************************************************
+test_require
+[kermeta::exceptions::ConstraintViolatedPost:35378]
+post lapostRequired of operation truc of class MainToBeRequired violated
+    ************************************************
+    * Consumed memory : 333381632/832045056
+    * #objects cached : 486
+    * #ro created     : 885
+    * #ro total       : 35532
+    * time (ms)       : 209
+    ************************************************
+test
+[kermeta::exceptions::ConstraintViolatedPost:36275]
+post lapost of operation truc of class Main violated
+    ************************************************
+    * Consumed memory : 333381632/832045056
+    * #objects cached : 487
+    * #ro created     : 892
+    * #ro total       : 36424
+    * time (ms)       : 22
+    ************************************************
+]]></system-out>
+  <system-err><![CDATA[Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334823424
+Memory after interpreter : 334823424
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 334692352
+Memory after interpreter : 334692352
+launch_constraint
+Memory before interpreter : 333381632
+Memory after interpreter : 333381632
+launch_constraint
+Memory before interpreter : 333381632
+Memory after interpreter : 333381632
+launch_constraint
+Memory before interpreter : 333381632
+Memory after interpreter : 333381632
+launch_constraint
+Memory before interpreter : 333381632
+Memory after interpreter : 333381632
+launch_constraint
+Memory before interpreter : 333381632
+Memory after interpreter : 333381632
+launch_constraint
+Memory before interpreter : 333381632
+Memory after interpreter : 333381632
+launch_constraint
+]]></system-err>
+</testsuite>

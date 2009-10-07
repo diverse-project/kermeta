@@ -1,0 +1,2975 @@
+Testsuite: kermeta_interpreter.test.JunitTestSuite
+Tests run: 237, Failures: 0, Errors: 30, Time elapsed: 5.461 sec
+------------- Standard Output ---------------
+4
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 650
+    * #ro created     : 802
+    * #ro total       : 802
+    * time (ms)       : 209
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 650
+    * #ro created     : 3
+    * #ro total       : 805
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 650
+    * #ro created     : 3
+    * #ro total       : 808
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 650
+    * #ro created     : 2
+    * #ro total       : 810
+    * time (ms)       : 1
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 650
+    * #ro created     : 3
+    * #ro total       : 813
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 650
+    * #ro created     : 2
+    * #ro total       : 815
+    * time (ms)       : 4
+    ************************************************
+5    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 48
+    * #ro total       : 863
+    * time (ms)       : 12
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 5
+    * #ro total       : 868
+    * time (ms)       : 5
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 1
+    * #ro total       : 869
+    * time (ms)       : 0
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 5
+    * #ro total       : 874
+    * time (ms)       : 5
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 1
+    * #ro total       : 875
+    * time (ms)       : 0
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 1
+    * #ro total       : 876
+    * time (ms)       : 0
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 5
+    * #ro total       : 881
+    * time (ms)       : 5
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 5
+    * #ro total       : 886
+    * time (ms)       : 9
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 9
+    * #ro total       : 895
+    * time (ms)       : 10
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 5
+    * #ro total       : 900
+    * time (ms)       : 5
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 17
+    * #ro total       : 917
+    * time (ms)       : 30
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 15
+    * #ro total       : 932
+    * time (ms)       : 17
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 17
+    * #ro total       : 949
+    * time (ms)       : 14
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 20
+    * #ro total       : 969
+    * time (ms)       : 23
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 7
+    * #ro total       : 976
+    * time (ms)       : 7
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 7
+    * #ro total       : 983
+    * time (ms)       : 6
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 9
+    * #ro total       : 992
+    * time (ms)       : 13
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 7
+    * #ro total       : 999
+    * time (ms)       : 20
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 10
+    * #ro total       : 1009
+    * time (ms)       : 9
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 10
+    * #ro total       : 1019
+    * time (ms)       : 9
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 680
+    * #ro created     : 14
+    * #ro total       : 1033
+    * time (ms)       : 25
+    ************************************************
+1237
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 682
+    * #ro created     : 15
+    * #ro total       : 1048
+    * time (ms)       : 12
+    ************************************************
+5
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 683
+    * #ro created     : 15
+    * #ro total       : 1063
+    * time (ms)       : 5
+    ************************************************
+4
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 684
+    * #ro created     : 15
+    * #ro total       : 1078
+    * time (ms)       : 4
+    ************************************************
+0
+-6
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 702
+    * #ro created     : 46
+    * #ro total       : 1124
+    * time (ms)       : 21
+    ************************************************
+0-6    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 702
+    * #ro created     : 11
+    * #ro total       : 1135
+    * time (ms)       : 15
+    ************************************************
+Prepend_Append
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 702
+    * #ro created     : 7
+    * #ro total       : 1142
+    * time (ms)       : 7
+    ************************************************
+Prependwithplus_Append
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 702
+    * #ro created     : 7
+    * #ro total       : 1149
+    * time (ms)       : 11
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 702
+    * #ro created     : 3
+    * #ro total       : 1152
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 702
+    * #ro created     : 3
+    * #ro total       : 1155
+    * time (ms)       : 3
+    ************************************************
+<void>
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 702
+    * #ro created     : 4
+    * #ro total       : 1159
+    * time (ms)       : 5
+    ************************************************
+tititoto    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 702
+    * #ro created     : 6
+    * #ro total       : 1165
+    * time (ms)       : 6
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 709
+    * #ro created     : 30
+    * #ro total       : 1195
+    * time (ms)       : 16
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 709
+    * #ro created     : 5
+    * #ro total       : 1200
+    * time (ms)       : 3
+    ************************************************
+onj    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 709
+    * #ro created     : 16
+    * #ro total       : 1216
+    * time (ms)       : 110
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 709
+    * #ro created     : 4
+    * #ro total       : 1220
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 709
+    * #ro created     : 5
+    * #ro total       : 1225
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 709
+    * #ro created     : 6
+    * #ro total       : 1231
+    * time (ms)       : 5
+    ************************************************
+3
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 709
+    * #ro created     : 6
+    * #ro total       : 1237
+    * time (ms)       : 7
+    ************************************************
+testBackslashes s1
+
+
+testBackslashes s2
+\n
+testBackslashes s3
+\
+
+testBackslashes s4
+"
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 709
+    * #ro created     : 43
+    * #ro total       : 1280
+    * time (ms)       : 80
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 722
+    * #ro created     : 22
+    * #ro total       : 1302
+    * time (ms)       : 8
+    ************************************************
+ERROR  visitFJavaStaticCall, NoSuchMethodException invoking callBooleanReturn on Class fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall => Throwing KermetaInterpreterError !!!
+java.lang.NoSuchMethodException: fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall.callBooleanReturn()
+	at java.lang.Class.getMethod(Class.java:986)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:926)
+	at fr.irisa.triskell.kermeta.visitor.FJavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:376)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFAssignement(ExpressionInterpreter.java:232)
+	at fr.irisa.triskell.kermeta.visitor.FAssignementAcceptCommand.accept(KermetaOptimizedVisitor.java:334)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+9036 [main] ERROR KMT.model  - NoSuchMethodException invoking callBooleanReturn on Class fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall => Throwing KermetaInterpreterError !!!
+java.lang.NoSuchMethodException: fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall.callBooleanReturn()
+	at java.lang.Class.getMethod(Class.java:986)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:926)
+	at fr.irisa.triskell.kermeta.visitor.FJavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:376)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFAssignement(ExpressionInterpreter.java:232)
+	at fr.irisa.triskell.kermeta.visitor.FAssignementAcceptCommand.accept(KermetaOptimizedVisitor.java:334)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 722
+    * #ro created     : 1
+    * #ro total       : 1303
+    * time (ms)       : 8
+    ************************************************
+ERROR  visitFJavaStaticCall, InvocationTargetException invoking callIntegerReturn on Class fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:324)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:936)
+	at fr.irisa.triskell.kermeta.visitor.FJavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:376)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFAssignement(ExpressionInterpreter.java:232)
+	at fr.irisa.triskell.kermeta.visitor.FAssignementAcceptCommand.accept(KermetaOptimizedVisitor.java:334)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+Caused by: java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(Integer.java:138)
+	at fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall.callIntegerReturn(TestJavaCall.java:69)
+	... 43 more
+9047 [main] ERROR KMT.model  - InvocationTargetException invoking callIntegerReturn on Class fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:324)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:936)
+	at fr.irisa.triskell.kermeta.visitor.FJavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:376)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFAssignement(ExpressionInterpreter.java:232)
+	at fr.irisa.triskell.kermeta.visitor.FAssignementAcceptCommand.accept(KermetaOptimizedVisitor.java:334)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+Caused by: java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(Integer.java:138)
+	at fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall.callIntegerReturn(TestJavaCall.java:69)
+	... 43 more
+ERROR  visitFJavaStaticCall, The cause : class java.lang.NullPointerException
+9055 [main] ERROR KMT.model  - The cause : class java.lang.NullPointerException
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 722
+    * #ro created     : 1
+    * #ro total       : 1304
+    * time (ms)       : 11
+    ************************************************
+ERROR  visitFJavaStaticCall, InvocationTargetException invoking callStringReturn on Class fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:324)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:936)
+	at fr.irisa.triskell.kermeta.visitor.FJavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:376)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFAssignement(ExpressionInterpreter.java:232)
+	at fr.irisa.triskell.kermeta.visitor.FAssignementAcceptCommand.accept(KermetaOptimizedVisitor.java:334)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+Caused by: java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.runtime.basetypes.String.create(String.java:131)
+	at fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall.callStringReturn(TestJavaCall.java:75)
+	... 43 more
+9061 [main] ERROR KMT.model  - InvocationTargetException invoking callStringReturn on Class fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:324)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:936)
+	at fr.irisa.triskell.kermeta.visitor.FJavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:376)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFAssignement(ExpressionInterpreter.java:232)
+	at fr.irisa.triskell.kermeta.visitor.FAssignementAcceptCommand.accept(KermetaOptimizedVisitor.java:334)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+Caused by: java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.runtime.basetypes.String.create(String.java:131)
+	at fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall.callStringReturn(TestJavaCall.java:75)
+	... 43 more
+ERROR  visitFJavaStaticCall, The cause : class java.lang.NullPointerException
+9069 [main] ERROR KMT.model  - The cause : class java.lang.NullPointerException
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 722
+    * #ro created     : 1
+    * #ro total       : 1305
+    * time (ms)       : 10
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 722
+    * #ro created     : 3
+    * #ro total       : 1308
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 722
+    * #ro created     : 9
+    * #ro total       : 1317
+    * time (ms)       : 6
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 722
+    * #ro created     : 12
+    * #ro total       : 1329
+    * time (ms)       : 8
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 731
+    * #ro created     : 34
+    * #ro total       : 1363
+    * time (ms)       : 15
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 731
+    * #ro created     : 4
+    * #ro total       : 1367
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 731
+    * #ro created     : 4
+    * #ro total       : 1371
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 737
+    * #ro created     : 22
+    * #ro total       : 1393
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 738
+    * #ro created     : 9
+    * #ro total       : 1402
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 738
+    * #ro created     : 4
+    * #ro total       : 1406
+    * time (ms)       : 1
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 740
+    * #ro created     : 33
+    * #ro total       : 1439
+    * time (ms)       : 17
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 744
+    * #ro created     : 24
+    * #ro total       : 1463
+    * time (ms)       : 6
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 744
+    * #ro created     : 1
+    * #ro total       : 1464
+    * time (ms)       : 0
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 755
+    * #ro created     : 31
+    * #ro total       : 1495
+    * time (ms)       : 7
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 757
+    * #ro created     : 14
+    * #ro total       : 1509
+    * time (ms)       : 14
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 757
+    * #ro created     : 3
+    * #ro total       : 1512
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 757
+    * #ro created     : 4
+    * #ro total       : 1516
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 757
+    * #ro created     : 3
+    * #ro total       : 1519
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 757
+    * #ro created     : 4
+    * #ro total       : 1523
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 757
+    * #ro created     : 5
+    * #ro total       : 1528
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 757
+    * #ro created     : 8
+    * #ro total       : 1536
+    * time (ms)       : 8
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 757
+    * #ro created     : 7
+    * #ro total       : 1543
+    * time (ms)       : 8
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 774
+    * #ro created     : 42
+    * #ro total       : 1585
+    * time (ms)       : 8
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 774
+    * #ro created     : 3
+    * #ro total       : 1588
+    * time (ms)       : 43
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 774
+    * #ro created     : 4
+    * #ro total       : 1592
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 774
+    * #ro created     : 4
+    * #ro total       : 1596
+    * time (ms)       : 6
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 777
+    * #ro created     : 28
+    * #ro total       : 1624
+    * time (ms)       : 92
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 777
+    * #ro created     : 15
+    * #ro total       : 1639
+    * time (ms)       : 14
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 777
+    * #ro created     : 11
+    * #ro total       : 1650
+    * time (ms)       : 81
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 777
+    * #ro created     : 19
+    * #ro total       : 1669
+    * time (ms)       : 16
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 777
+    * #ro created     : 15
+    * #ro total       : 1684
+    * time (ms)       : 20
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 777
+    * #ro created     : 7
+    * #ro total       : 1691
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 777
+    * #ro created     : 19
+    * #ro total       : 1710
+    * time (ms)       : 31
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 779
+    * #ro created     : 36
+    * #ro total       : 1746
+    * time (ms)       : 16
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 779
+    * #ro created     : 29
+    * #ro total       : 1775
+    * time (ms)       : 24
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 779
+    * #ro created     : 33
+    * #ro total       : 1808
+    * time (ms)       : 28
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 800
+    * #ro created     : 47
+    * #ro total       : 1855
+    * time (ms)       : 182
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 802
+    * #ro created     : 7
+    * #ro total       : 1862
+    * time (ms)       : 9
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 811
+    * #ro created     : 52
+    * #ro total       : 1914
+    * time (ms)       : 6
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 811
+    * #ro created     : 5
+    * #ro total       : 1919
+    * time (ms)       : 6
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 811
+    * #ro created     : 1
+    * #ro total       : 1920
+    * time (ms)       : 2
+    ************************************************
+[kermeta::language::structure::EnumerationLiteral:1856]
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 829
+    * #ro created     : 148
+    * #ro total       : 2068
+    * time (ms)       : 55
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 829
+    * #ro created     : 5
+    * #ro total       : 2073
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 829
+    * #ro created     : 3
+    * #ro total       : 2076
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 836
+    * #ro created     : 61
+    * #ro total       : 2137
+    * time (ms)       : 52
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 836
+    * #ro created     : 1
+    * #ro total       : 2138
+    * time (ms)       : 2
+    ************************************************
+Division par zero
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 847
+    * #ro created     : 29
+    * #ro total       : 2167
+    * time (ms)       : 41
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 847
+    * #ro created     : 5
+    * #ro total       : 2172
+    * time (ms)       : 2
+    ************************************************
+Integer undeclared test
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 858
+    * #ro created     : 50
+    * #ro total       : 2222
+    * time (ms)       : 7
+    ************************************************
+Bool undeclared test
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 864
+    * #ro created     : 15
+    * #ro total       : 2237
+    * time (ms)       : 3
+    ************************************************
+Conditional exception
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 876
+    * #ro created     : 33
+    * #ro total       : 2270
+    * time (ms)       : 8
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 882
+    * #ro created     : 17
+    * #ro total       : 2287
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 882
+    * #ro created     : 3
+    * #ro total       : 2290
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 885
+    * #ro created     : 11
+    * #ro total       : 2301
+    * time (ms)       : 2
+    ************************************************
+metaclass_package::TheClass
+TheClass
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 889
+    * #ro created     : 21
+    * #ro total       : 2322
+    * time (ms)       : 21
+    ************************************************
+    ************************************************
+    * Consumed memory : 14458880/66650112
+    * #objects cached : 889
+    * #ro created     : 5
+    * #ro total       : 2327
+    * time (ms)       : 7
+    ************************************************
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@165b124 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@175ae09]; null
+11599 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@165b124 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@175ae09]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1204c3e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@f50903]; null
+11600 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1204c3e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@f50903]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@a4871e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@122c960]; null
+11639 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@a4871e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@122c960]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@23cfcf (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.4)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@d2e636]; null
+11640 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@23cfcf (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.4)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@d2e636]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@18c908b (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@81f25]; null
+11641 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@18c908b (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@81f25]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FTypeVariableImpl@153e9c (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.1/@fTypeParameter.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@134d801]; null
+11643 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FTypeVariableImpl@153e9c (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.1/@fTypeParameter.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@134d801]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@141cf63 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@513bb5]; null
+11646 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@141cf63 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@513bb5]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@466c30 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.9)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1271a80]; null
+11647 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@466c30 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.9)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1271a80]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1172d81 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1a63a1c]; null
+11649 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1172d81 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1a63a1c]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FTypeVariableImpl@6ee035 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.0/@fTypeParameter.1)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@3126f6]; null
+11651 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FTypeVariableImpl@6ee035 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.0/@fTypeParameter.1)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@3126f6]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@7299a (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@f50caf]; null
+11652 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@7299a (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@f50caf]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@13d8fb0 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@13d052]; null
+11653 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@13d8fb0 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@13d052]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@acaa28 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@d1da68]; null
+11659 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@acaa28 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@d1da68]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@12c384b (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.4)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@15a1bb5]; null
+11660 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@12c384b (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.4)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@15a1bb5]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@4983d8 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.9)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@d13a01]; null
+11661 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@4983d8 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.9)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@d13a01]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@5b9d44 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@374a56]; null
+11662 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@5b9d44 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@374a56]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1a2f216 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1f15f7f]; null
+11663 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1a2f216 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1f15f7f]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@b10618 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.9)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1b48eeb]; null
+11665 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@b10618 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.9)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1b48eeb]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1e2e854 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.9)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@11323b2]; null
+11666 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1e2e854 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.9)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@11323b2]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@b1e0ac (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.1)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@18cb416]; null
+11667 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@b1e0ac (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.1)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@18cb416]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@56042 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.1)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@833a2d]; null
+11668 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@56042 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.1)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@833a2d]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1b66175 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1609803]; null
+11670 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1b66175 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1609803]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@c39ddc (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@9bfaff]; null
+11674 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@c39ddc (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@9bfaff]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FTypeVariableImpl@15927e2 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.0/@fTypeParameter.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@7badec]; null
+11676 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FTypeVariableImpl@15927e2 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.0/@fTypeParameter.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@7badec]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@3c72d1 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1d7999e]; null
+11677 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@3c72d1 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1d7999e]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@15b5d86 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1a69290]; null
+11678 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@15b5d86 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1a69290]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@2f94e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.9)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@e04981]; null
+11680 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@2f94e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.9)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@e04981]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1d4bd9 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@f9e8eb]; null
+11681 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1d4bd9 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@f9e8eb]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FTypeVariableImpl@f2a5af (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.1/@fTypeParameter.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@12aa3fb]; null
+11682 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FTypeVariableImpl@f2a5af (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.4/@fOwnedTypeDefinition.1/@fTypeParameter.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@12aa3fb]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1d73cf4 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@73d10f]; null
+11686 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@1d73cf4 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@73d10f]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@150c296 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1a23f67]; null
+11688 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@150c296 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@1a23f67]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@c1918e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@f0a6e8]; null
+11695 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@c1918e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@f0a6e8]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@17a29ff (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@15dd936]; null
+11697 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@17a29ff (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@15dd936]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@168c78e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@5f8ddb]; null
+11698 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@168c78e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@5f8ddb]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@16d864e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@15a3dac]; null
+11699 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@16d864e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@15a3dac]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@b86e21 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@18710ed]; null
+11700 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@b86e21 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@18710ed]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@3b26f3 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@6876f6]; null
+11701 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@3b26f3 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@6876f6]; null
+ERROR  loadunit, EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@960f0e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@5a41ec]; null
+11702 [main] ERROR KMT.EMF2Runtime  - EMF reports unresolved reference: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@960f0e (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.0)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@5a41ec]; null
+ERROR  loadunit, EMF reports unresolved reference(s): You must load the corresponding files before trying to load this model.
+  First unresolved proxy is: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@165b124 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@175ae09]
+  a new URI_MAP entry may solve your problem
+11704 [main] ERROR KermetaUnit  - EMF reports unresolved reference(s): You must load the corresponding files before trying to load this model.
+  First unresolved proxy is: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@165b124 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@175ae09]
+  a new URI_MAP entry may solve your problem
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 914
+    * #ro created     : 105
+    * #ro total       : 2432
+    * time (ms)       : 1668
+    ************************************************
+*** First column (u) ***
+Up
+Up
+Up
+Compilation error
+Up
+Up
+Compilation error
+Compilation error
+Up
+*** Second column (d) ***
+Compilation error
+Down
+Down
+Compilation error
+Down
+Down
+Compilation error
+Down
+Down
+*** Third column (ud) ***
+Down
+Down
+Down
+Compilation error
+Down
+Down
+Compilation error
+Compilation error
+Down
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 916
+    * #ro created     : 93
+    * #ro total       : 2525
+    * time (ms)       : 94
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 922
+    * #ro created     : 17
+    * #ro total       : 2542
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 922
+    * #ro created     : 3
+    * #ro total       : 2545
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 922
+    * #ro created     : 3
+    * #ro total       : 2548
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 25
+    * #ro total       : 2573
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2574
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2575
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2576
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2577
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2578
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2579
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2580
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2581
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2582
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2583
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2584
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2585
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2586
+    * time (ms)       : 5
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 938
+    * #ro created     : 1
+    * #ro total       : 2587
+    * time (ms)       : 5
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 946
+    * #ro created     : 21
+    * #ro total       : 2608
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 946
+    * #ro created     : 5
+    * #ro total       : 2613
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 946
+    * #ro created     : 5
+    * #ro total       : 2618
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 946
+    * #ro created     : 5
+    * #ro total       : 2623
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 946
+    * #ro created     : 3
+    * #ro total       : 2626
+    * time (ms)       : 37
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 957
+    * #ro created     : 22
+    * #ro total       : 2648
+    * time (ms)       : 7
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 957
+    * #ro created     : 3
+    * #ro total       : 2651
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 957
+    * #ro created     : 3
+    * #ro total       : 2654
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 957
+    * #ro created     : 4
+    * #ro total       : 2658
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 957
+    * #ro created     : 4
+    * #ro total       : 2662
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 957
+    * #ro created     : 6
+    * #ro total       : 2668
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 957
+    * #ro created     : 3
+    * #ro total       : 2671
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 957
+    * #ro created     : 3
+    * #ro total       : 2674
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 957
+    * #ro created     : 3
+    * #ro total       : 2677
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 957
+    * #ro created     : 3
+    * #ro total       : 2680
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 968
+    * #ro created     : 38
+    * #ro total       : 2718
+    * time (ms)       : 12
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 968
+    * #ro created     : 9
+    * #ro total       : 2727
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 968
+    * #ro created     : 15
+    * #ro total       : 2742
+    * time (ms)       : 7
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 968
+    * #ro created     : 9
+    * #ro total       : 2751
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 968
+    * #ro created     : 14
+    * #ro total       : 2765
+    * time (ms)       : 8
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 968
+    * #ro created     : 14
+    * #ro total       : 2779
+    * time (ms)       : 6
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 968
+    * #ro created     : 29
+    * #ro total       : 2808
+    * time (ms)       : 30
+    ************************************************
+toto    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 28
+    * #ro total       : 2836
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 6
+    * #ro total       : 2842
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 6
+    * #ro total       : 2848
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 6
+    * #ro total       : 2854
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 7
+    * #ro total       : 2861
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 10
+    * #ro total       : 2871
+    * time (ms)       : 11
+    ************************************************
+7
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 12
+    * #ro total       : 2883
+    * time (ms)       : 5
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 14
+    * #ro total       : 2897
+    * time (ms)       : 14
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 15
+    * #ro total       : 2912
+    * time (ms)       : 12
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 6
+    * #ro total       : 2918
+    * time (ms)       : 7
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 8
+    * #ro total       : 2926
+    * time (ms)       : 5
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 8
+    * #ro total       : 2934
+    * time (ms)       : 5
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 6
+    * #ro total       : 2940
+    * time (ms)       : 5
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 15
+    * #ro total       : 2955
+    * time (ms)       : 44
+    ************************************************
+hello 0
+1hello 1
+2hello 2
+3    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 28
+    * #ro total       : 2983
+    * time (ms)       : 87
+    ************************************************
+5040
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 986
+    * #ro created     : 65
+    * #ro total       : 3048
+    * time (ms)       : 120
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 990
+    * #ro created     : 36
+    * #ro total       : 3084
+    * time (ms)       : 10
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1016
+    * #ro created     : 58
+    * #ro total       : 3142
+    * time (ms)       : 18
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1016
+    * #ro created     : 15
+    * #ro total       : 3157
+    * time (ms)       : 13
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1016
+    * #ro created     : 9
+    * #ro total       : 3166
+    * time (ms)       : 14
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1016
+    * #ro created     : 47
+    * #ro total       : 3213
+    * time (ms)       : 37
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1016
+    * #ro created     : 35
+    * #ro total       : 3248
+    * time (ms)       : 25
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 24
+    * #ro total       : 3272
+    * time (ms)       : 16
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 15
+    * #ro total       : 3287
+    * time (ms)       : 5
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 18
+    * #ro total       : 3305
+    * time (ms)       : 7
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 13
+    * #ro total       : 3318
+    * time (ms)       : 6
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 32
+    * #ro total       : 3350
+    * time (ms)       : 22
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 22
+    * #ro total       : 3372
+    * time (ms)       : 11
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 38
+    * #ro total       : 3410
+    * time (ms)       : 42
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 32
+    * #ro total       : 3442
+    * time (ms)       : 20
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 40
+    * #ro total       : 3482
+    * time (ms)       : 27
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 36
+    * #ro total       : 3518
+    * time (ms)       : 23
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 27
+    * #ro total       : 3545
+    * time (ms)       : 33
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 31
+    * #ro total       : 3576
+    * time (ms)       : 40
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 29
+    * #ro total       : 3605
+    * time (ms)       : 19
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 33
+    * #ro total       : 3638
+    * time (ms)       : 23
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 19
+    * #ro total       : 3657
+    * time (ms)       : 9
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 21
+    * #ro total       : 3678
+    * time (ms)       : 10
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1017
+    * #ro created     : 23
+    * #ro total       : 3701
+    * time (ms)       : 14
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1053
+    * #ro created     : 45
+    * #ro total       : 3746
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1053
+    * #ro created     : 1
+    * #ro total       : 3747
+    * time (ms)       : 1
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1053
+    * #ro created     : 1
+    * #ro total       : 3748
+    * time (ms)       : 1
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1053
+    * #ro created     : 2
+    * #ro total       : 3750
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1054
+    * #ro created     : 7
+    * #ro total       : 3757
+    * time (ms)       : 2
+    ************************************************
+Integer
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1054
+    * #ro created     : 3
+    * #ro total       : 3760
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1054
+    * #ro created     : 3
+    * #ro total       : 3763
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1054
+    * #ro created     : 3
+    * #ro total       : 3766
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1054
+    * #ro created     : 3
+    * #ro total       : 3769
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1054
+    * #ro created     : 5
+    * #ro total       : 3774
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1054
+    * #ro created     : 5
+    * #ro total       : 3779
+    * time (ms)       : 6
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1054
+    * #ro created     : 5
+    * #ro total       : 3784
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1054
+    * #ro created     : 5
+    * #ro total       : 3789
+    * time (ms)       : 4
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1054
+    * #ro created     : 3
+    * #ro total       : 3792
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1054
+    * #ro created     : 3
+    * #ro total       : 3795
+    * time (ms)       : 2
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1054
+    * #ro created     : 3
+    * #ro total       : 3798
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1055
+    * #ro created     : 23
+    * #ro total       : 3821
+    * time (ms)       : 8
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1055
+    * #ro created     : 27
+    * #ro total       : 3848
+    * time (ms)       : 25
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1055
+    * #ro created     : 30
+    * #ro total       : 3878
+    * time (ms)       : 24
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1055
+    * #ro created     : 29
+    * #ro total       : 3907
+    * time (ms)       : 20
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1055
+    * #ro created     : 17
+    * #ro total       : 3924
+    * time (ms)       : 9
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1056
+    * #ro created     : 61
+    * #ro total       : 3985
+    * time (ms)       : 51
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1056
+    * #ro created     : 36
+    * #ro total       : 4021
+    * time (ms)       : 60
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1056
+    * #ro created     : 14
+    * #ro total       : 4035
+    * time (ms)       : 9
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1056
+    * #ro created     : 23
+    * #ro total       : 4058
+    * time (ms)       : 12
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1056
+    * #ro created     : 17
+    * #ro total       : 4075
+    * time (ms)       : 7
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1056
+    * #ro created     : 42
+    * #ro total       : 4117
+    * time (ms)       : 47
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1056
+    * #ro created     : 53
+    * #ro total       : 4170
+    * time (ms)       : 38
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1056
+    * #ro created     : 31
+    * #ro total       : 4201
+    * time (ms)       : 26
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1056
+    * #ro created     : 48
+    * #ro total       : 4249
+    * time (ms)       : 79
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1056
+    * #ro created     : 69
+    * #ro total       : 4318
+    * time (ms)       : 68
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1056
+    * #ro created     : 51
+    * #ro total       : 4369
+    * time (ms)       : 34
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1056
+    * #ro created     : 26
+    * #ro total       : 4395
+    * time (ms)       : 22
+    ************************************************
+hello world!
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1085
+    * #ro created     : 97
+    * #ro total       : 4492
+    * time (ms)       : 26
+    ************************************************
+4
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1089
+    * #ro created     : 35
+    * #ro total       : 4527
+    * time (ms)       : 18
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1092
+    * #ro created     : 17
+    * #ro total       : 4544
+    * time (ms)       : 3
+    ************************************************
+    ************************************************
+    * Consumed memory : 21798912/66650112
+    * #objects cached : 1092
+    * #ro created     : 7
+    * #ro total       : 4551
+    * time (ms)       : 3
+    ************************************************
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+Memory before interpreter : 14458880
+Memory after interpreter : 14458880
+------------- ---------------- ---------------
+
+Testcase: testAssignment::Test_assignment.testoperation1 took 0.212 sec
+Testcase: testAssignment::Test_assignment.test1 took 0.005 sec
+Testcase: testAssignment::Test_assignment.test2 took 0.004 sec
+Testcase: testAssignment::Test_assignment.test3 took 0.002 sec
+Testcase: testAssignment::Test_assignment.testCast1 took 0.007 sec
+Testcase: testAssignment::Test_assignment.testCast2 took 0.005 sec
+Testcase: testArithm::Test_arithm.testOp10 took 0.013 sec
+Testcase: testArithm::Test_arithm.testOp18 took 0.006 sec
+Testcase: testArithm::Test_arithm.testOp1_8 took 0 sec
+Testcase: testArithm::Test_arithm.testOp20 took 0.005 sec
+Testcase: testArithm::Test_arithm.testOp28 took 0 sec
+Testcase: testArithm::Test_arithm.testOp2_8 took 0.003 sec
+Testcase: testArithm::Test_arithm.testOp30 took 0.005 sec
+Testcase: testArithm::Test_arithm.testOp38 took 0.009 sec
+Testcase: testArithm::Test_arithm.testOp3_8 took 0.01 sec
+Testcase: testArithm::Test_arithm.testCompareToNumeric took 0.005 sec
+Testcase: testArithm::Test_arithm.testop1 took 0.031 sec
+Testcase: testArithm::Test_arithm.testop2 took 0.017 sec
+Testcase: testArithm::Test_arithm.testop3 took 0.015 sec
+Testcase: testArithm::Test_arithm.testop4 took 0.023 sec
+Testcase: testArithm::Test_arithm.testoperationpplus took 0.008 sec
+Testcase: testArithm::Test_arithm.testoperationpplusbis took 0.006 sec
+Testcase: testArithm::Test_arithm.testoperationpminus took 0.014 sec
+Testcase: testArithm::Test_arithm.testoperationpminusbis took 0.02 sec
+Testcase: testArithm::Test_arithm.testoperationpdivtimes took 0.009 sec
+Testcase: testArithm::Test_arithm.testoperationpdivtimesbis took 0.009 sec
+Testcase: testArithm::Test_arithm.testoperation_ptm took 0.025 sec
+Testcase: testOpCall::Test_opcall.operation1 took 0.012 sec
+Testcase: testOpOpCall::Test_opopcall.operation1 took 0.005 sec
+Testcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/005_testOpPkgCall.main.kmt contains errors took 0.001 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory$FailedTestCase.runTest(RunJunitFactory.java:178)
+
+Testcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/005_testOpPkgCall.main.kmt contains errorsTestcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/006_testOpPkgCall.main.kmt contains errors took 0 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory$FailedTestCase.runTest(RunJunitFactory.java:178)
+
+Testcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/006_testOpPkgCall.main.kmt contains errorsTestcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/007_testOpPkgCall.main.kmt contains errors took 0 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory$FailedTestCase.runTest(RunJunitFactory.java:178)
+
+Testcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/007_testOpPkgCall.main.kmt contains errorsTestcase: testOpInternPkgCall::test_package1::Test_operation_pkg1.operation_pkg1 took 0.005 sec
+Testcase: test/kmt_testcases/009_testOpCallObject.main.kmt took 0 sec
+	Caused an ERROR
+Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')
+java.lang.Exception: Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:136)
+	at kermeta_interpreter.test.JunitTestSuite.testWithFile(JunitTestSuite.java:168)
+	at kermeta_interpreter.test.JunitTestSuite.<init>(JunitTestSuite.java:83)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:274)
+
+Testcase: test/kmt_testcases/009_testOpCallObject.main.kmtTestcase: test/kmt_testcases/010_testLoop.main.kmt took 0 sec
+	Caused an ERROR
+Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')
+java.lang.Exception: Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:136)
+	at kermeta_interpreter.test.JunitTestSuite.testWithFile(JunitTestSuite.java:168)
+	at kermeta_interpreter.test.JunitTestSuite.<init>(JunitTestSuite.java:85)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:274)
+
+Testcase: test/kmt_testcases/010_testLoop.main.kmtTestcase: test/kmt_testcases/011_testBenchmark.main.kmt took 0 sec
+	Caused an ERROR
+Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')
+java.lang.Exception: Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:136)
+	at kermeta_interpreter.test.JunitTestSuite.testWithFile(JunitTestSuite.java:168)
+	at kermeta_interpreter.test.JunitTestSuite.<init>(JunitTestSuite.java:87)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:274)
+
+Testcase: test/kmt_testcases/011_testBenchmark.main.kmtTestcase: testString::TestString.testfailCompareTo took 0.022 sec
+Testcase: testString::TestString.testCompareTo took 0.015 sec
+Testcase: testString::TestString.testplus took 0.008 sec
+Testcase: testString::TestString.testplus_literal took 0.011 sec
+Testcase: testString::TestString.testfailop_equals took 0.003 sec
+Testcase: testString::TestString.testop_equals took 0.003 sec
+Testcase: testString::TestString.testWrite took 0.005 sec
+Testcase: testString::TestString.testappend took 0.008 sec
+Testcase: testString::TestString.testelementAt took 0.016 sec
+Testcase: testString::TestString.testindexOf took 0.004 sec
+Testcase: testString::TestString.testsubString took 0.112 sec
+Testcase: testString::TestString.testsize took 0.005 sec
+Testcase: testString::TestString.testIntegerToStr took 0.003 sec
+Testcase: testString::TestString.testIntegerToStr2 took 0.005 sec
+Testcase: testString::TestString.testIntegerToStr3 took 0.007 sec
+Testcase: testString::TestString.testBackslashes took 0.08 sec
+Testcase: testExternJavaCall::Test_ExternJavaCall.test1 took 0.008 sec
+Testcase: testExternJavaCall::Test_ExternJavaCall.testReturn1 took 0.008 sec
+	Caused an ERROR
+NoSuchMethodException invoking callBooleanReturn on Class fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall
+fr.irisa.triskell.kermeta.error.KermetaVisitorError: NoSuchMethodException invoking callBooleanReturn on Class fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:932)
+	at fr.irisa.triskell.kermeta.visitor.FJavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:376)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFAssignement(ExpressionInterpreter.java:232)
+	at fr.irisa.triskell.kermeta.visitor.FAssignementAcceptCommand.accept(KermetaOptimizedVisitor.java:334)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+Caused by: java.lang.NoSuchMethodException: fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall.callBooleanReturn()
+	at java.lang.Class.getMethod(Class.java:986)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:926)
+	... 38 more
+
+Testcase: testExternJavaCall::Test_ExternJavaCall.testReturn1Testcase: testExternJavaCall::Test_ExternJavaCall.testReturn2 took 0.011 sec
+	Caused an ERROR
+InvocationTargetException invoking callIntegerReturn on Class fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall
+fr.irisa.triskell.kermeta.error.KermetaVisitorError: InvocationTargetException invoking callIntegerReturn on Class fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:961)
+	at fr.irisa.triskell.kermeta.visitor.FJavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:376)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFAssignement(ExpressionInterpreter.java:232)
+	at fr.irisa.triskell.kermeta.visitor.FAssignementAcceptCommand.accept(KermetaOptimizedVisitor.java:334)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:936)
+	... 38 more
+Caused by: java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(Integer.java:138)
+	at fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall.callIntegerReturn(TestJavaCall.java:69)
+	... 43 more
+
+Testcase: testExternJavaCall::Test_ExternJavaCall.testReturn2Testcase: testExternJavaCall::Test_ExternJavaCall.testReturn3 took 0.012 sec
+	Caused an ERROR
+InvocationTargetException invoking callStringReturn on Class fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall
+fr.irisa.triskell.kermeta.error.KermetaVisitorError: InvocationTargetException invoking callStringReturn on Class fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:961)
+	at fr.irisa.triskell.kermeta.visitor.FJavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:376)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFAssignement(ExpressionInterpreter.java:232)
+	at fr.irisa.triskell.kermeta.visitor.FAssignementAcceptCommand.accept(KermetaOptimizedVisitor.java:334)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:936)
+	... 38 more
+Caused by: java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.runtime.basetypes.String.create(String.java:131)
+	at fr.irisa.triskell.kermeta.interpreter.test.TestJavaCall.callStringReturn(TestJavaCall.java:75)
+	... 43 more
+
+Testcase: testExternJavaCall::Test_ExternJavaCall.testReturn3Testcase: testExternJavaCall::Test_ExternJavaCall.testOneParam1 took 0.004 sec
+Testcase: testExternJavaCall::Test_ExternJavaCall.test2IntegersParams took 0.006 sec
+Testcase: testExternJavaCall::Test_ExternJavaCall.test3IntegersParams took 0.008 sec
+Testcase: testExternJavaCall::Test_ExternJavaCall.test3Integers2Strings1BooleanParams took 0.017 sec
+	Caused an ERROR
+kermeta exception : [kermeta::kunit::AssertionFailedError : 1338]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::kunit::AssertionFailedError : 1338]
+test3Integers2Strings1BooleanParams failed (1)
+      [testExternJavaCall::Test_ExternJavaCall : 1329].fail
+     [testExternJavaCall::Test_ExternJavaCall : 1329].assertTrueWithMsg
+     [testExternJavaCall::Test_ExternJavaCall : 1329].test3Integers2Strings1BooleanParams
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.raiseKermetaException(ExpressionInterpreter.java:1203)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFRaise(ExpressionInterpreter.java:1033)
+	at fr.irisa.triskell.kermeta.visitor.FRaiseAcceptCommand.accept(KermetaOptimizedVisitor.java:352)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFConditionnal(ExpressionInterpreter.java:610)
+	at fr.irisa.triskell.kermeta.visitor.FConditionnalAcceptCommand.accept(KermetaOptimizedVisitor.java:346)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: testExternJavaCall::Test_ExternJavaCall.test3Integers2Strings1BooleanParamsTestcase: testExternJavaCall::Test_ExternJavaCall.testOneVarParam1 took 0.006 sec
+Testcase: testExternJavaCall::Test_ExternJavaCall.testOneParamParam1 took 0.005 sec
+Testcase: test/kmt_testcases/015_testAttributes.main.kmt took 0 sec
+	Caused an ERROR
+Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')
+java.lang.Exception: Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:136)
+	at kermeta_interpreter.test.JunitTestSuite.testWithFile(JunitTestSuite.java:168)
+	at kermeta_interpreter.test.JunitTestSuite.<init>(JunitTestSuite.java:93)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:274)
+
+Testcase: test/kmt_testcases/015_testAttributes.main.kmtTestcase: testPackageTestParametricClass::TestParametricClass.test1 took 0.003 sec
+Testcase: testPackageTestParametricClass::TestParametricClass.test2 took 0.002 sec
+Testcase: testPackageTestParametricClass::TestParametricClass.test3 took 0.001 sec
+	Caused an ERROR
+Error in visitor : the node to visit is null
+java.lang.Error: Error in visitor : the node to visit is null
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:115)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.getterDerivedProperty(ExpressionInterpreter.java:704)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:844)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitList(ExpressionInterpreter.java:1082)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:798)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitList(ExpressionInterpreter.java:1082)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:798)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: testPackageTestParametricClass::TestParametricClass.test3Testcase: testPackageTestParametricClass::TestParametricClass.test_main_operation took 0.017 sec
+Testcase: test/kmt_testcases/017_testSuperFeaturesCalls.main.kmt took 0 sec
+	Caused an ERROR
+Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')
+java.lang.Exception: Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:136)
+	at kermeta_interpreter.test.JunitTestSuite.testWithFile(JunitTestSuite.java:168)
+	at kermeta_interpreter.test.JunitTestSuite.<init>(JunitTestSuite.java:97)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:274)
+
+Testcase: test/kmt_testcases/017_testSuperFeaturesCalls.main.kmtTestcase: testPackageTestReflection::TestReflection.testGetMetaClass1 took 0.006 sec
+Testcase: testPackageTestReflection::TestReflection.testGetMetaClassNew took 0 sec
+Testcase: testContainement::TestContainment.testSetOnAssign took 0.009 sec
+Testcase: testContainement::TestContainment.testSetOnAdd took 0.014 sec
+Testcase: testContainement::TestContainment.testUnsetSetOnAssign took 0.004 sec
+Testcase: testContainement::TestContainment.testUnsetSetOnRemove took 0.005 sec
+Testcase: testContainement::TestContainment.testAssignVoidWhenNewAssign0 took 0.005 sec
+Testcase: testContainement::TestContainment.testAssignVoidWhenNewAssign took 0.004 sec
+Testcase: testContainement::TestContainment.testAssignVoidWhenNewAdd took 0.004 sec
+Testcase: testContainement::TestContainment.testRemoveWhenNewAdd took 0.008 sec
+Testcase: testContainement::TestContainment.testRemoveWhenNewAssign took 0.009 sec
+Testcase: testOpposites::TestOpposites.test1_1Opposites1 took 0.008 sec
+Testcase: testOpposites::TestOpposites.test1_1Opposites2 took 0.044 sec
+Testcase: testOpposites::TestOpposites.test1_1Opposites3 took 0.004 sec
+Testcase: testOpposites::TestOpposites.test1_1Opposites4 took 0.006 sec
+Testcase: testOpposites::TestOpposites.test1_starOpposites1 took 0.092 sec
+Testcase: testOpposites::TestOpposites.test1_starOpposites2 took 0.015 sec
+Testcase: testOpposites::TestOpposites.test1_starOpposites3 took 0.081 sec
+Testcase: testOpposites::TestOpposites.test1_starOpposites4 took 0.016 sec
+Testcase: testOpposites::TestOpposites.test1_starOpposites5 took 0.02 sec
+Testcase: testOpposites::TestOpposites.test1_starOpposites6 took 0.004 sec
+Testcase: testOpposites::TestOpposites.test1_starOpposites7 took 0.031 sec
+Testcase: testOpposites::TestOpposites.teststar_starOpposites1 took 0.018 sec
+Testcase: testOpposites::TestOpposites.teststar_starOpposites2 took 0.024 sec
+Testcase: testOpposites::TestOpposites.teststar_starOpposites3 took 0.029 sec
+Testcase: testEnum::TestEnum.testCompareLiteral took 0.182 sec
+Testcase: testEnum::TestEnum.testAssignVar took 0.009 sec
+Testcase: testEnum::TestEnum.testGeneric took 0.006 sec
+Testcase: testEnum::TestEnum.testGenericParameter took 0.006 sec
+Testcase: testEnum::TestEnum.testGenericOperation took 0.004 sec
+Testcase: testEnum::TestEnum.testCollection took 0.056 sec
+	Caused an ERROR
+kermeta exception : [kermeta::exceptions::CallOnVoidTarget : 2025]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::exceptions::CallOnVoidTarget : 2025]
+      [testEnum::TestEnum : 1920].testCollection#function call
+     [kermeta::standard::OrderedSet : 1925].each
+     [testEnum::TestEnum : 1920].testCollection
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException.createKermetaException(KermetaRaisedException.java:210)
+	at fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException.createKermetaException(KermetaRaisedException.java:232)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.raiseCallOnVoidTargetException(ExpressionInterpreter.java:1212)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:817)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitList(ExpressionInterpreter.java:1082)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:798)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject.call(RuntimeLambdaObject.java:63)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallVariable(ExpressionInterpreter.java:502)
+	at fr.irisa.triskell.kermeta.visitor.FCallVariableAcceptCommand.accept(KermetaOptimizedVisitor.java:304)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFLoop(ExpressionInterpreter.java:656)
+	at fr.irisa.triskell.kermeta.visitor.FLoopAcceptCommand.accept(KermetaOptimizedVisitor.java:424)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: testEnum::TestEnum.testCollectionTestcase: testEnum::TestEnum.testCast1 took 0.004 sec
+	Caused an ERROR
+kermeta exception : [kermeta::kunit::AssertionFailedError : 2072]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::kunit::AssertionFailedError : 2072]
+assert failed
+      [testEnum::TestEnum : 2068].fail
+     [testEnum::TestEnum : 2068].assert
+     [testEnum::TestEnum : 2068].testCast1
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.raiseKermetaException(ExpressionInterpreter.java:1203)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFRaise(ExpressionInterpreter.java:1033)
+	at fr.irisa.triskell.kermeta.visitor.FRaiseAcceptCommand.accept(KermetaOptimizedVisitor.java:352)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFConditionnal(ExpressionInterpreter.java:610)
+	at fr.irisa.triskell.kermeta.visitor.FConditionnalAcceptCommand.accept(KermetaOptimizedVisitor.java:346)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: testEnum::TestEnum.testCast1Testcase: testEnum::TestEnum.testCast2 took 0.002 sec
+Testcase: testEnum::TestEnum.testReflect took 0.052 sec
+	Caused an ERROR
+kermeta exception : [kermeta::kunit::AssertionFailedError : 2136]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::kunit::AssertionFailedError : 2136]
+assert failed
+      [testEnum::TestEnum : 2076].fail
+     [testEnum::TestEnum : 2076].assert
+     [testEnum::TestEnum : 2076].testReflect
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.raiseKermetaException(ExpressionInterpreter.java:1203)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFRaise(ExpressionInterpreter.java:1033)
+	at fr.irisa.triskell.kermeta.visitor.FRaiseAcceptCommand.accept(KermetaOptimizedVisitor.java:352)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFConditionnal(ExpressionInterpreter.java:610)
+	at fr.irisa.triskell.kermeta.visitor.FConditionnalAcceptCommand.accept(KermetaOptimizedVisitor.java:346)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: testEnum::TestEnum.testReflectTestcase: testEnum::TestEnum.testOpCall took 0.002 sec
+Testcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/023_testSimpleException.main.kmt contains errors took 0 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory$FailedTestCase.runTest(RunJunitFactory.java:178)
+
+Testcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/023_testSimpleException.main.kmt contains errorsTestcase: root_package::Main.testZeroDivision took 0.041 sec
+Testcase: root_package::Main.testUnrescuedZeroDivision took 0.003 sec
+	Caused an ERROR
+kermeta exception : [kermeta::exceptions::DivisionByZero : 2171]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::exceptions::DivisionByZero : 2171]
+      [kermeta::standard::Integer : 2168 = 5].div
+     [root_package::Main : 2167].testUnrescuedZeroDivision
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.raiseKermetaException(ExpressionInterpreter.java:1203)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFRaise(ExpressionInterpreter.java:1033)
+	at fr.irisa.triskell.kermeta.visitor.FRaiseAcceptCommand.accept(KermetaOptimizedVisitor.java:352)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFConditionnal(ExpressionInterpreter.java:610)
+	at fr.irisa.triskell.kermeta.visitor.FConditionnalAcceptCommand.accept(KermetaOptimizedVisitor.java:346)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFAssignement(ExpressionInterpreter.java:232)
+	at fr.irisa.triskell.kermeta.visitor.FAssignementAcceptCommand.accept(KermetaOptimizedVisitor.java:334)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: root_package::Main.testUnrescuedZeroDivisionTestcase: root_package::Main.testUndeclared took 0.008 sec
+	Caused an ERROR
+kermeta exception : [kermeta::exceptions::CallOnVoidTarget : 2176]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::exceptions::CallOnVoidTarget : 2176]
+      [kermeta::standard::Integer : 2174 = 5].div
+     [root_package::Main : 2172].testUndeclared
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.raiseKermetaException(ExpressionInterpreter.java:1203)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFRaise(ExpressionInterpreter.java:1033)
+	at fr.irisa.triskell.kermeta.visitor.FRaiseAcceptCommand.accept(KermetaOptimizedVisitor.java:352)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFConditionnal(ExpressionInterpreter.java:610)
+	at fr.irisa.triskell.kermeta.visitor.FConditionnalAcceptCommand.accept(KermetaOptimizedVisitor.java:346)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: root_package::Main.testUndeclaredTestcase: root_package::Main.testBoolUndeclared took 0.003 sec
+	Caused an ERROR
+kermeta exception : [kermeta::exceptions::CallOnVoidTarget : 2224]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::exceptions::CallOnVoidTarget : 2224]
+      [root_package::Main : 2222].testBoolUndeclared
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException.createKermetaException(KermetaRaisedException.java:210)
+	at fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException.createKermetaException(KermetaRaisedException.java:232)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:781)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: root_package::Main.testBoolUndeclaredTestcase: root_package::Main.testIllegalConditionalType took 0.008 sec
+	Caused an ERROR
+kermeta exception : [kermeta::exceptions::RuntimeError : 2250]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::exceptions::RuntimeError : 2250]
+      [root_package::Main : 2237].testIllegalConditionalType
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.raiseKermetaException(ExpressionInterpreter.java:1203)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFConditionnal(ExpressionInterpreter.java:603)
+	at fr.irisa.triskell.kermeta.visitor.FConditionnalAcceptCommand.accept(KermetaOptimizedVisitor.java:346)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: root_package::Main.testIllegalConditionalTypeTestcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/025_testParametricOperations.main.kmt contains errors took 0 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory$FailedTestCase.runTest(RunJunitFactory.java:178)
+
+Testcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/025_testParametricOperations.main.kmt contains errorsTestcase: metaclass_package::TestMetaClass.testMetaClassOfClass took 0.003 sec
+Testcase: metaclass_package::TestMetaClass.testClassDefinitionOfMetaClass took 0.004 sec
+	Caused an ERROR
+kermeta exception : [kermeta::kunit::AssertionFailedError : 2289]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::kunit::AssertionFailedError : 2289]
+assert failed
+      [metaclass_package::TestMetaClass : 2287].fail
+     [metaclass_package::TestMetaClass : 2287].assert
+     [metaclass_package::TestMetaClass : 2287].testClassDefinitionOfMetaClass
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.raiseKermetaException(ExpressionInterpreter.java:1203)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFRaise(ExpressionInterpreter.java:1033)
+	at fr.irisa.triskell.kermeta.visitor.FRaiseAcceptCommand.accept(KermetaOptimizedVisitor.java:352)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFConditionnal(ExpressionInterpreter.java:610)
+	at fr.irisa.triskell.kermeta.visitor.FConditionnalAcceptCommand.accept(KermetaOptimizedVisitor.java:346)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: metaclass_package::TestMetaClass.testClassDefinitionOfMetaClassTestcase: metaclass_package::TestMetaClass.testClassDefinitionPropertiesOfMetaClass took 0.002 sec
+	Caused an ERROR
+kermeta exception : [kermeta::exceptions::CallOnVoidTarget : 2291]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::exceptions::CallOnVoidTarget : 2291]
+      [metaclass_package::TestMetaClass : 2290].testClassDefinitionPropertiesOfMetaClass
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException.createKermetaException(KermetaRaisedException.java:210)
+	at fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException.createKermetaException(KermetaRaisedException.java:232)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.raiseCallOnVoidTargetException(ExpressionInterpreter.java:1212)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:817)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:736)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitList(ExpressionInterpreter.java:1082)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:798)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: metaclass_package::TestMetaClass.testClassDefinitionPropertiesOfMetaClassTestcase: metaclass_package::TestMetaClass.testClassProperties took 0.022 sec
+	Caused an ERROR
+kermeta exception : [kermeta::kunit::AssertionFailedError : 2321]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::kunit::AssertionFailedError : 2321]
+assert failed
+      [metaclass_package::TestMetaClass : 2301].fail
+     [metaclass_package::TestMetaClass : 2301].assert
+     [metaclass_package::TestMetaClass : 2301].testClassProperties
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.raiseKermetaException(ExpressionInterpreter.java:1203)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFRaise(ExpressionInterpreter.java:1033)
+	at fr.irisa.triskell.kermeta.visitor.FRaiseAcceptCommand.accept(KermetaOptimizedVisitor.java:352)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFConditionnal(ExpressionInterpreter.java:610)
+	at fr.irisa.triskell.kermeta.visitor.FConditionnalAcceptCommand.accept(KermetaOptimizedVisitor.java:346)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: metaclass_package::TestMetaClass.testClassPropertiesTestcase: metaclass_package::TestMetaClass.testClassContents took 0.007 sec
+Testcase: RuntimeModelImportTests::Main.testmain took 1.668 sec
+	Caused an ERROR
+kermeta exception : [kermeta::persistence::ResourceLoadException : 2401]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::persistence::ResourceLoadException : 2401]
+EMF reports unresolved reference(s): You must load the corresponding files before trying to load this model.
+  First unresolved proxy is: fr.irisa.triskell.kermeta.structure.impl.FClassDefinitionImpl@165b124 (eProxyURI: platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@fNestedPackage.0/@fOwnedTypeDefinition.6)=[org.eclipse.emf.ecore.impl.BasicEObjectImpl$2@175ae09]
+  a new URI_MAP entry may solve your problem
+      [kermeta::persistence::EMFResource : 2346].load
+     [RuntimeModelImportTests::Main : 2338].loadClassModel
+     [RuntimeModelImportTests::Main : 2338].testmain
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException.createKermetaException(KermetaRaisedException.java:210)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMF2Runtime.loadunit(EMF2Runtime.java:194)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.load(EMFRuntimeUnit.java:151)
+	at fr.irisa.triskell.kermeta.runtime.basetypes.Resource.load(Resource.java:66)
+	at fr.irisa.triskell.kermeta.runtime.fr__irisa__triskell__kermeta__runtime__basetypes__Resource_load_4Comd.execute(FrameworkExternCommand.java:560)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFJavaStaticCall(ExpressionInterpreter.java:877)
+	at fr.irisa.triskell.kermeta.visitor.FJavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:376)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFAssignement(ExpressionInterpreter.java:232)
+	at fr.irisa.triskell.kermeta.visitor.FAssignementAcceptCommand.accept(KermetaOptimizedVisitor.java:334)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFCallFeature(ExpressionInterpreter.java:803)
+	at fr.irisa.triskell.kermeta.visitor.FCallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:310)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFVariableDecl(ExpressionInterpreter.java:148)
+	at fr.irisa.triskell.kermeta.visitor.FVariableDeclAcceptCommand.accept(KermetaOptimizedVisitor.java:436)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1103)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFBlock(ExpressionInterpreter.java:528)
+	at fr.irisa.triskell.kermeta.visitor.FBlockAcceptCommand.accept(KermetaOptimizedVisitor.java:340)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitFOperation(ExpressionInterpreter.java:683)
+	at fr.irisa.triskell.kermeta.visitor.FOperationAcceptCommand.accept(KermetaOptimizedVisitor.java:442)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:126)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:123)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:242)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:104)
+
+Testcase: RuntimeModelImportTests::Main.testmainTestcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/028_testLoadEcoreFile.main.kmt contains errors took 0 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory$FailedTestCase.runTest(RunJunitFactory.java:178)
+
+Testcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/028_testLoadEcoreFile.main.kmt contains errorsTestcase: test/kmt_testcases/029_testClone1.main.kmt took 0 sec
+	Caused an ERROR
+Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')
+java.lang.Exception: Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:136)
+	at kermeta_interpreter.test.JunitTestSuite.testWithFile(JunitTestSuite.java:168)
+	at kermeta_interpreter.test.JunitTestSuite.<init>(JunitTestSuite.java:121)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:274)
+
+Testcase: test/kmt_testcases/029_testClone1.main.kmtTestcase: helloworld::Main.testSignature took 0.095 sec
+Testcase: root::TestVariable.testop1 took 0.003 sec
+Testcase: root::TestVariable.testop2 took 0.003 sec
+Testcase: root::TestVariable.testop3 took 0.003 sec
+Testcase: testBoolean::TestBoolean.testAssertTrue took 0.002 sec
+Testcase: testBoolean::TestBoolean.testoptat took 0.003 sec
+Testcase: testBoolean::TestBoolean.testnott took 0.004 sec
+Testcase: testBoolean::TestBoolean.testoptot took 0.003 sec
+Testcase: testBoolean::TestBoolean.testoptof took 0.002 sec
+Testcase: testBoolean::TestBoolean.testoptaf took 0.002 sec
+Testcase: testBoolean::TestBoolean.testopfof took 0.003 sec
+Testcase: testBoolean::TestBoolean.testopfot took 0.003 sec
+Testcase: testBoolean::TestBoolean.testoportotaf took 0.008 sec
+Testcase: testBoolean::TestBoolean.testoptatof took 0.003 sec
+Testcase: testBoolean::TestBoolean.testoptafaf took 0.003 sec
+Testcase: testBoolean::TestBoolean.testoptofaf took 0.003 sec
+Testcase: testBoolean::TestBoolean.testoptofafotot took 0.003 sec
+Testcase: testBoolean::TestBoolean.testoptofafototaf took 0.005 sec
+Testcase: testBoolean::TestBoolean.testoptofanf took 0.005 sec
+Testcase: root::TestBooleanResults.testop1 took 0.005 sec
+Testcase: root::TestBooleanResults.testop2 took 0.004 sec
+Testcase: root::TestBooleanResults.testop1i took 0.004 sec
+Testcase: root::TestBooleanResults.testop2i took 0.004 sec
+Testcase: root::TestBooleanResults.testop3i took 0.037 sec
+Testcase: testFrameworkToString::TestFrameworkToString.testOnString1 took 0.007 sec
+Testcase: testFrameworkToString::TestFrameworkToString.testOnString2 took 0.003 sec
+Testcase: testFrameworkToString::TestFrameworkToString.testOnString3Void took 0.003 sec
+Testcase: testFrameworkToString::TestFrameworkToString.testOnInteger1 took 0.003 sec
+Testcase: testFrameworkToString::TestFrameworkToString.testOnInteger2 took 0.003 sec
+Testcase: testFrameworkToString::TestFrameworkToString.testOnInteger3 took 0.005 sec
+Testcase: testFrameworkToString::TestFrameworkToString.testOnBoolean1 took 0.003 sec
+Testcase: testFrameworkToString::TestFrameworkToString.testOnBoolean2 took 0.003 sec
+Testcase: testFrameworkToString::TestFrameworkToString.testOnBoolean3 took 0.003 sec
+Testcase: testFrameworkToString::TestFrameworkToString.testOnVoid took 0.003 sec
+Testcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/035_testHashtable.main.kmt contains errors took 0 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory$FailedTestCase.runTest(RunJunitFactory.java:178)
+
+Testcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/035_testHashtable.main.kmt contains errorsTestcase: testPackageTestIterator::TestIterator.testhasNext took 0.013 sec
+Testcase: testPackageTestIterator::TestIterator.testnext took 0.002 sec
+Testcase: testPackageTestIterator::TestIterator.testnextbis took 0.008 sec
+Testcase: testPackageTestIterator::TestIterator.testisOff took 0.004 sec
+Testcase: testPackageTestIterator::TestIterator.testisOffbis took 0.008 sec
+Testcase: testPackageTestIterator::TestIterator.testisOffter took 0.006 sec
+Testcase: testPackageTestIterator::TestIterator.testLoop took 0.031 sec
+Testcase: testLambda::TestLambda.testNoLambda took 0.003 sec
+Testcase: testLambda::TestLambda.testLambda1 took 0.004 sec
+Testcase: testLambda::TestLambda.testLambdaWithDef took 0.004 sec
+Testcase: testLambda::TestLambda.testLambdaWithTwoParams took 0.004 sec
+Testcase: testLambda::TestLambda.testLambdaSimpleWithString took 0.003 sec
+Testcase: testLambda::TestLambda.testLambdaWithString took 0.013 sec
+Testcase: testLambda::TestLambda.testLambdaWithThreeParams took 0.005 sec
+Testcase: testLambda::TestLambda.testLambdaWithThreeParams2 took 0.014 sec
+Testcase: testLambda::TestLambda.testNestedLambda took 0.012 sec
+Testcase: testLambda::TestLambda.testLambdaWithExtVar took 0.007 sec
+Testcase: testLambda::TestLambda.testLambdaVarPriority took 0.006 sec
+Testcase: testLambda::TestLambda.testLambdaInOperation took 0.005 sec
+Testcase: testLambda::TestLambda.testOpWithLambdaAsParam took 0.005 sec
+Testcase: testLambda::TestLambda.testintegerTimes took 0.044 sec
+Testcase: testLambda::TestLambda.testintegerTimesToString took 0.087 sec
+Testcase: testLambda::TestLambda.testFract took 0.12 sec
+Testcase: testReferences::TestMyObjectCreation.testCreateMyObject took 0.01 sec
+Testcase: testSequence::TestSequence.teststradd took 0.019 sec
+Testcase: testSequence::TestSequence.teststrremove took 0.013 sec
+Testcase: testSequence::TestSequence.teststrclear took 0.015 sec
+Testcase: testSequence::TestSequence.testaddAllSet took 0.037 sec
+Testcase: testSequence::TestSequence.testaddAllSequence took 0.025 sec
+Testcase: testSequence::TestSequence.teststrcontains took 0.016 sec
+Testcase: testSequence::TestSequence.teststrsize took 0.006 sec
+Testcase: testSequence::TestSequence.teststriterator took 0.007 sec
+Testcase: testSequence::TestSequence.testone took 0.007 sec
+Testcase: testSequence::TestSequence.teststreach took 0.022 sec
+Testcase: testSequence::TestSequence.testinteach took 0.011 sec
+Testcase: testSequence::TestSequence.teststrcollect took 0.042 sec
+Testcase: testSequence::TestSequence.testdetect took 0.02 sec
+Testcase: testSequence::TestSequence.testselect took 0.027 sec
+Testcase: testSequence::TestSequence.testreject took 0.024 sec
+Testcase: testSequence::TestSequence.testForAll took 0.033 sec
+Testcase: testSequence::TestSequence.testExists took 0.04 sec
+Testcase: testSequence::TestSequence.testaddAt took 0.02 sec
+Testcase: testSequence::TestSequence.testremoveAt took 0.023 sec
+Testcase: testSequence::TestSequence.testelementAt took 0.009 sec
+Testcase: testSequence::TestSequence.testfirst took 0.011 sec
+Testcase: testSequence::TestSequence.testlast took 0.014 sec
+Testcase: testPackageTestSet::TestSet.testVoid1 took 0.003 sec
+Testcase: testPackageTestSet::TestSet.testVoid2 took 0.001 sec
+Testcase: testPackageTestSet::TestSet.testVoid3 took 0.001 sec
+Testcase: testPackageTestSet::TestSet.testVoid4 took 0.003 sec
+Testcase: testPackageTestSet::TestSet.testVoid5 took 0.002 sec
+Testcase: testPackageTestSet::TestSet.testMetaClass took 0.004 sec
+Testcase: testPackageTestSet::TestSet.testCompareInt1 took 0.003 sec
+Testcase: testPackageTestSet::TestSet.testCompareInt2 took 0.002 sec
+Testcase: testPackageTestSet::TestSet.testCompareInt3 took 0.002 sec
+Testcase: testPackageTestSet::TestSet.testCompareInt4 took 0.004 sec
+Testcase: testPackageTestSet::TestSet.testCompareInt5 took 0.006 sec
+Testcase: testPackageTestSet::TestSet.testCompareInt6 took 0.004 sec
+Testcase: testPackageTestSet::TestSet.testCompareInt7 took 0.004 sec
+Testcase: testPackageTestSet::TestSet.testCompareInt8 took 0.003 sec
+Testcase: testPackageTestSet::TestSet.testCompareInt9 took 0.002 sec
+Testcase: testPackageTestSet::TestSet.testCompareInt10 took 0.003 sec
+Testcase: testPackageTestSet::TestSet.testAdd took 0.008 sec
+Testcase: testPackageTestSet::TestSet.testSize took 0.025 sec
+Testcase: testPackageTestSet::TestSet.testRemove took 0.024 sec
+Testcase: testPackageTestSet::TestSet.testRemovebis took 0.02 sec
+Testcase: testPackageTestSet::TestSet.testClear took 0.009 sec
+Testcase: testPackageTestSet::TestSet.testAddAll took 0.051 sec
+Testcase: testPackageTestSet::TestSet.testContains took 0.06 sec
+Testcase: testPackageTestSet::TestSet.testEmpty took 0.009 sec
+Testcase: testPackageTestSet::TestSet.testIterator took 0.012 sec
+Testcase: testPackageTestSet::TestSet.testOne took 0.007 sec
+Testcase: testPackageTestSet::TestSet.testEach took 0.047 sec
+Testcase: testPackageTestSet::TestSet.testCollect took 0.038 sec
+Testcase: testPackageTestSet::TestSet.testDetect took 0.026 sec
+Testcase: testPackageTestSet::TestSet.testSelect took 0.08 sec
+Testcase: testPackageTestSet::TestSet.testReject took 0.068 sec
+Testcase: testPackageTestSet::TestSet.testUnicityOfSet took 0.034 sec
+Testcase: testPackageTestSet::TestSet.testNotUnicityOfBag took 0.022 sec
+Testcase: testSimpleEval::TestEx.test1 took 0.026 sec
+Testcase: testSimpleEval::TestEx.test2 took 0.019 sec
+Testcase: root::testPackage::TestClass.testopsub took 0.003 sec
+Testcase: root::testPackage::TestClass.testopsubsub took 0.003 sec
+Testcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/043_testUML2km.main.kmt contains errors took 0 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory$FailedTestCase.runTest(RunJunitFactory.java:178)
+
+Testcase: Unit file:/tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/043_testUML2km.main.kmt contains errors

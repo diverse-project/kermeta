@@ -1,0 +1,1748 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="3" name="kermeta_interpreter.emf_test.JunitTestSuite" tests="39" time="37.389">
+  <properties>
+    <property name="java.vendor" value="Sun Microsystems Inc."></property>
+    <property name="kermeta.io.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/@dot"></property>
+    <property name="sun.java.launcher" value="SUN_STANDARD"></property>
+    <property name="sun.management.compiler" value="HotSpot Server Compiler"></property>
+    <property name="osgi.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.osgi_3.2.1.R32x_v20060919.jar"></property>
+    <property name="os.name" value="Linux"></property>
+    <property name="sun.boot.class.path" value="/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/rt.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/i18n.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/sunrsasign.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/jsse.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/jce.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/charsets.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/classes"></property>
+    <property name="triskell.eclipse.util.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.eclipse.util/@dot"></property>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="ant.home" value="/udd/triskell/bin/multiplatform/apache-ant-1.5.4"></property>
+    <property name="java.runtime.version" value="1.5.0_11-b03"></property>
+    <property name="equinox.common.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.equinox.common_3.2.0.v20060603.jar"></property>
+    <property name="cobertura.dir" value="/udd/triskell/bin/multiplatform/cobertura-1.7/"></property>
+    <property name="user.name" value="dvojtise"></property>
+    <property name="core.runtime.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.core.runtime_3.2.0.v20060603.jar"></property>
+    <property name="user.language" value="en"></property>
+    <property name="core.jobs.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.core.jobs_3.2.0.v20060603.jar"></property>
+    <property name="sun.boot.library.path" value="/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/i386"></property>
+    <property name="ant.project.name" value="run interpreter tests"></property>
+    <property name="java.version" value="1.5.0_11"></property>
+    <property name="build.bin" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/build/class"></property>
+    <property name="coverage.html.dir" value="/tmp/kermeta_build/unittestreports/coverage/html"></property>
+    <property name="user.timezone" value="Europe/Paris"></property>
+    <property name="sun.arch.data.model" value="32"></property>
+    <property name="java.endorsed.dirs" value="/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/endorsed"></property>
+    <property name="sun.cpu.isalist" value=""></property>
+    <property name="emf.validation.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.emf.validation_1.0.1.v200609250852.jar"></property>
+    <property name="sun.jnu.encoding" value="ISO-8859-15"></property>
+    <property name="file.encoding.pkg" value="sun.io"></property>
+    <property name="file.separator" value="/"></property>
+    <property name="java.specification.name" value="Java Platform API Specification"></property>
+    <property name="java.class.version" value="49.0"></property>
+    <property name="src" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/src/java"></property>
+    <property name="user.country" value="US"></property>
+    <property name="ldt-core.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/thirdparty/ldt-core.jar"></property>
+    <property name="java.home" value="/soft/jdk_hd/Linux/jdk1.5.0_11/jre"></property>
+    <property name="java.vm.info" value="mixed mode"></property>
+    <property name="ant.file" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/junit/test_build.xml"></property>
+    <property name="os.version" value="2.6.19-1.2911.6.4.fc6"></property>
+    <property name="path.separator" value=":"></property>
+    <property name="eclipse.home" value="/local/daily_build/eclipse3.2_with_topcased/eclipse"></property>
+    <property name="java.vm.version" value="1.5.0_11-b03"></property>
+    <property name="report.dir" value="/tmp/kermeta_build/unittestreports"></property>
+    <property name="emf.ecore.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.emf.ecore_2.2.1.v200609210005.jar"></property>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"></property>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"></property>
+    <property name="kermeta.model.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.model/@dot"></property>
+    <property name="kermeta.interpreter.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/interpreter_kermeta.jar"></property>
+    <property name="coverage.dir" value="/tmp/kermeta_build/unittestreports/coverage"></property>
+    <property name="user.home" value="/udd/dvojtise"></property>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="coverage.xml.dir" value="/tmp/kermeta_build/unittestreports/coverage/xml"></property>
+    <property name="java.library.path" value="/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/i386/server:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/i386:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/../lib/i386"></property>
+    <property name="java.vendor.url" value="http://java.sun.com/"></property>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."></property>
+    <property name="cobertura.lib.dir" value="/udd/triskell/bin/multiplatform/cobertura-1.7/lib"></property>
+    <property name="java.runtime.name" value="Java(TM) 2 Runtime Environment, Standard Edition"></property>
+    <property name="java.class.path" value="/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xml-apis.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xercesImpl.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xalan.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/optional.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/junit.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/ant.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/junit.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/optional.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/lib/tools.jar"></property>
+    <property name="ant.version" value="Apache Ant version 1.5.4 compiled on August 12 2003"></property>
+    <property name="traceability.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.traceability.model/@dot"></property>
+    <property name="core.resources.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.core.resources_3.2.1.R32x_v20060914.jar"></property>
+    <property name="emf.common.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.emf.common_2.2.1.v200609210005.jar"></property>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"></property>
+    <property name="java.vm.specification.version" value="1.0"></property>
+    <property name="sun.cpu.endian" value="little"></property>
+    <property name="sun.os.patch.level" value="unknown"></property>
+    <property name="log4j.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/thirdparty/log4j.jar"></property>
+    <property name="java.io.tmpdir" value="/tmp"></property>
+    <property name="test.src" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/junit"></property>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"></property>
+    <property name="emf.ecore.xmi.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.2.1.v200609210005.jar"></property>
+    <property name="instrumented.dir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/junit/instrumented"></property>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"></property>
+    <property name="os.arch" value="i386"></property>
+    <property name="java.ext.dirs" value="/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/ext"></property>
+    <property name="user.dir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter"></property>
+    <property name="equinox.registry.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.equinox.registry_3.2.1.R32x_v20060814.jar"></property>
+    <property name="line.separator" value="
+"></property>
+    <property name="java.vm.name" value="Java HotSpot(TM) Server VM"></property>
+    <property name="kermeta.interpreter.class" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/build/class"></property>
+    <property name="basedir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/junit"></property>
+    <property name="ant.java.version" value="1.4"></property>
+    <property name="file.encoding" value="ISO-8859-15"></property>
+    <property name="antlr.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/lib/thirdparty/antlr.jar"></property>
+    <property name="java.specification.version" value="1.5"></property>
+  </properties>
+  <testcase name="RuntimeModelImportTests::Main.testmain" time="4.99"></testcase>
+  <testcase name="testLoadEcoreFile::Main.main" time="0.244"></testcase>
+  <testcase name="testFrameworkModelConformance::Main.testmain" time="21.649"></testcase>
+  <testcase name="testLoadEcoreSplittedModel::Main.testmain" time="0.079"></testcase>
+  <testcase name="testLoadEcoreSplittedModel_withcyclicref::Main.testmain" time="0.075"></testcase>
+  <testcase name="testSplittedMetamodel::Main.testmain" time="0.033"></testcase>
+  <testcase name="testChunkedmodel::Main.testmain" time="0.039"></testcase>
+  <testcase name="testChunkedmodel::Main.testResourceCreationwhenLoadingSplittedModel" time="0.033"></testcase>
+  <testcase name="testSaveEcoreSplittedXRefModel::Main.testmain" time="0.277"></testcase>
+  <testcase name="testSaveEcoreSplittedModel::Main.testLogicalOrder" time="0.16"></testcase>
+  <testcase name="testSaveEcoreSplittedModel::Main.testReverseOrder" time="0.221"></testcase>
+  <testcase name="savingKM::Main.testmain" time="0.084"></testcase>
+  <testcase name="savingKM2::Main.testmain" time="0.035"></testcase>
+  <testcase name="pb_olivier::Test.testmain" time="7.21"></testcase>
+  <testcase name="simpleLoadFromDynamicInstance::SimpleLoader.testBasicSimpleLoad" time="0.062"></testcase>
+  <testcase name="simpleLoadFromDynamicInstance::SimpleLoader.testBasicSimpleGenericFSMLoad" time="0.083"></testcase>
+  <testcase name="simpleLoadFromDynamicInstance::SimpleLoader.testBasicSimpleGenericLoad" time="0.109"></testcase>
+  <testcase name="simpleLoadFromDynamicInstance::SimpleLoader.testCompositeSimpleLoad" time="0.071"></testcase>
+  <testcase name="simpleLoadFromDynamicInstance::SimpleLoader.testCompositeSimpleGenericLoad" time="0.138"></testcase>
+  <testcase name="simpleLoadFromDynamicInstance::SimpleLoader.testFinalStatesSimpleLoad" time="0.061"></testcase>
+  <testcase name="simpleLoadFromDynamicInstance::SimpleLoader.testFinalStatesSimpleGenericLoad" time="0.071"></testcase>
+  <testcase name="simpleLoadFromDynamicInstance::SimpleLoader.testBasicSimpleLoadFromCompositeModel" time="0.089">
+    <failure message="fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::kunit::AssertionFailedError : 230264]
+assertTrueWithMsg number 1 failed : didn&apos;t find the 7 objects in the model, found 0
+Trace: 
+      [simpleLoadFromDynamicInstance::SimpleLoader : 229745].fail
+    file &apos;file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/kermeta/055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt&apos;, line -2, in &apos;[simpleLoadFromDynamicInstance::SimpleLoader : 229745].assertTrueWithMsg&apos; ( assertTrueWithMsg((myModel.contents.size) == (7), &quot;didn&apos;t find the 7 objects in the model, found &quot;.plus(myModel.contents.size.toString)) )
+    file &apos;file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/kermeta/055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt&apos;, line -2, in &apos;[simpleLoadFromDynamicInstance::SimpleLoader : 229745].testBasicSimpleLoadFromCompositeModel&apos; ( operation testBasicSimpleLoadFromCompositeModel() : Void is (...) )
+------------END OF STACK TRACE------------
+" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::kunit::AssertionFailedError : 230264]
+assertTrueWithMsg number 1 failed : didn&apos;t find the 7 objects in the model, found 0
+Trace: 
+      [simpleLoadFromDynamicInstance::SimpleLoader : 229745].fail
+    file &apos;file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/kermeta/055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt&apos;, line -2, in &apos;[simpleLoadFromDynamicInstance::SimpleLoader : 229745].assertTrueWithMsg&apos; ( assertTrueWithMsg((myModel.contents.size) == (7), &quot;didn&apos;t find the 7 objects in the model, found &quot;.plus(myModel.contents.size.toString)) )
+    file &apos;file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/kermeta/055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt&apos;, line -2, in &apos;[simpleLoadFromDynamicInstance::SimpleLoader : 229745].testBasicSimpleLoadFromCompositeModel&apos; ( operation testBasicSimpleLoadFromCompositeModel() : Void is (...) )
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:117)
+</failure>
+  </testcase>
+  <testcase name="simpleLoadFromDynamicInstance::SimpleLoader.testBasicSimpleLoadFromFinalStatesModel" time="0.05">
+    <failure message="fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::kunit::AssertionFailedError : 231521]
+assertTrueWithMsg number 1 failed : didn&apos;t find the 7 objects in the model, found 0
+Trace: 
+      [simpleLoadFromDynamicInstance::SimpleLoader : 231000].fail
+    file &apos;file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/kermeta/055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt&apos;, line -2, in &apos;[simpleLoadFromDynamicInstance::SimpleLoader : 231000].assertTrueWithMsg&apos; ( assertTrueWithMsg((myModel.contents.size) == (7), &quot;didn&apos;t find the 7 objects in the model, found &quot;.plus(myModel.contents.size.toString)) )
+    file &apos;file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/kermeta/055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt&apos;, line -2, in &apos;[simpleLoadFromDynamicInstance::SimpleLoader : 231000].testBasicSimpleLoadFromFinalStatesModel&apos; ( operation testBasicSimpleLoadFromFinalStatesModel() : Void is (...) )
+------------END OF STACK TRACE------------
+" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::kunit::AssertionFailedError : 231521]
+assertTrueWithMsg number 1 failed : didn&apos;t find the 7 objects in the model, found 0
+Trace: 
+      [simpleLoadFromDynamicInstance::SimpleLoader : 231000].fail
+    file &apos;file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/kermeta/055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt&apos;, line -2, in &apos;[simpleLoadFromDynamicInstance::SimpleLoader : 231000].assertTrueWithMsg&apos; ( assertTrueWithMsg((myModel.contents.size) == (7), &quot;didn&apos;t find the 7 objects in the model, found &quot;.plus(myModel.contents.size.toString)) )
+    file &apos;file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/kermeta/055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt&apos;, line -2, in &apos;[simpleLoadFromDynamicInstance::SimpleLoader : 231000].testBasicSimpleLoadFromFinalStatesModel&apos; ( operation testBasicSimpleLoadFromFinalStatesModel() : Void is (...) )
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:117)
+</failure>
+  </testcase>
+  <testcase name="load_and_save_in_another_location::Main.testLoadSaveEcoreFileUsingSaveAsNewURI" time="0.184"></testcase>
+  <testcase name="load_and_save_in_another_location::Main.testLoadSaveEcoreFileChangingTheURI" time="0.191"></testcase>
+  <testcase name="load_and_save_in_another_location::Main.testLoadSaveEcoreFileUsingAnotherResource" time="0.19"></testcase>
+  <testcase name="load_and_save_in_another_location::Main.testLoadSaveEcoreFileUsingAnotherResourceSeparateRepository" time="0.137"></testcase>
+  <testcase name="load_and_save_in_another_location::Main.testLoadSaveFileUsingAnotherResource" time="0.07"></testcase>
+  <testcase name="load_and_save_in_another_location::Main.testLoadWithoutMMThenSaveFile" time="0.023"></testcase>
+  <testcase name="load_and_save_in_another_location::Main.testLoadWithoutMMThenIndirectlySaveFile" time="0.046"></testcase>
+  <testcase name="save_DependentModels::Main.testSaveDependentModels" time="0.058"></testcase>
+  <testcase name="save_DependentModels::Main.testSaveDependentModelsReverseOrder" time="0.052"></testcase>
+  <testcase name="save_DependentModels::Main.testSaveDependentModelsViaObjectRef" time="0.056"></testcase>
+  <testcase name="save_DependentModels::Main.testSaveDependentModelsViaObjectRefReverseOrder" time="0.058"></testcase>
+  <testcase name="loadSaveEnum::Main.testLoadModelWithEnum" time="0.038"></testcase>
+  <testcase name="loadSaveEnum::Main.testSaveModelWithEnum" time="0.038"></testcase>
+  <testcase name="multipleIndirectLoad::Main.testMultipleIndirectLoad" time="0.044">
+    <failure message="fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::kunit::AssertionFailedError : 254613]
+assertTrueWithMsg number 3 failed : looking for 3 resources, found 4
+Trace: 
+      [multipleIndirectLoad::Main : 254068].fail
+    file &apos;file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/kermeta/061_multipleIndirectLoad.main.kmt&apos;, line -2, in &apos;[multipleIndirectLoad::Main : 254068].assertTrueWithMsg&apos; ( assertTrueWithMsg((emfRep.resources.size) == (3), &quot;looking for 3 resources, found &quot;.plus(emfRep.resources.size.toString)) )
+    file &apos;file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/kermeta/061_multipleIndirectLoad.main.kmt&apos;, line -2, in &apos;[multipleIndirectLoad::Main : 254068].testMultipleIndirectLoad&apos; ( operation testMultipleIndirectLoad() : kermeta::standard::~Void is (...) )
+------------END OF STACK TRACE------------
+" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::kunit::AssertionFailedError : 254613]
+assertTrueWithMsg number 3 failed : looking for 3 resources, found 4
+Trace: 
+      [multipleIndirectLoad::Main : 254068].fail
+    file &apos;file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/kermeta/061_multipleIndirectLoad.main.kmt&apos;, line -2, in &apos;[multipleIndirectLoad::Main : 254068].assertTrueWithMsg&apos; ( assertTrueWithMsg((emfRep.resources.size) == (3), &quot;looking for 3 resources, found &quot;.plus(emfRep.resources.size.toString)) )
+    file &apos;file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/kermeta/061_multipleIndirectLoad.main.kmt&apos;, line -2, in &apos;[multipleIndirectLoad::Main : 254068].testMultipleIndirectLoad&apos; ( operation testMultipleIndirectLoad() : kermeta::standard::~Void is (...) )
+------------END OF STACK TRACE------------
+
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:117)
+</failure>
+  </testcase>
+  <testcase name="resourceTests::Main.testLoadDependentResources" time="0.198"></testcase>
+  <testcase name="resourceTests::Main.testContainingResource" time="0.1"></testcase>
+  <system-out><![CDATA[
+Begin
+kmLogo
+[kermeta::language::structure::ClassDefinition:2618]
+End    ************************************************
+    * Consumed memory : 242221056/832045056
+    * #objects cached : 861
+    * #ro created     : 50352
+    * #ro total       : 50352
+    * time (ms)       : 4990
+    ************************************************
+[kermeta::persistence::EMFResource:51189]
+[kermeta::persistence::EMFResource:51189]
+1
+Beg\in
+ tr
+ucPackage fsm
+   Class Main
+   Class FSM
+   Class State
+   Class Transition
+   Class FSMException
+   Class NonDeterminism
+   Class NoTransition
+   Class String
+
+End
+    ************************************************
+    * Consumed memory : 242483200/832045056
+    * #objects cached : 702
+    * #ro created     : 1816
+    * #ro total       : 52168
+    * time (ms)       : 244
+    ************************************************
+Begin checking
+EPackage [ecore::EPackage:53062] kermeta
+Package [kermeta::language::structure::Package:52871] kermeta
+EPackage kermeta retreived
+EPackage language retreived
+EPackage behavior retreived
+  Known classes:
+    CallExpression
+    Expression
+    CallVariable
+    CallFeature
+    CallSuperOperation
+    CallResult
+    CallValue
+    Assignment
+    Block
+    Conditional
+    Literal
+    EmptyExpression
+    IntegerLiteral
+    StringLiteral
+    BooleanLiteral
+    TypeLiteral
+    TypeReference
+    VoidLiteral
+    Loop
+    SelfExpression
+    VariableDecl
+    Raise
+    Rescue
+    JavaStaticCall
+    LambdaExpression
+    LambdaParameter
+    KMExpressionVisitor
+    KMExpressionVisitable
+h: [ecore::EClass:53077]
+h: [ecore::EClass:53085]
+h: [ecore::EClass:53087]
+h: [ecore::EClass:53091]
+h: [ecore::EClass:53094]
+h: [ecore::EClass:53096]
+h: [ecore::EClass:53102]
+h: [ecore::EClass:53103]
+h: [ecore::EClass:53104]
+h: [ecore::EClass:53105]
+h: [ecore::EClass:53109]
+h: [ecore::EClass:53111]
+h: [ecore::EClass:53115]
+h: [ecore::EClass:53116]
+h: [ecore::EClass:53117]
+h: [ecore::EClass:53118]
+h: [ecore::EClass:53122]
+h: [ecore::EClass:53125]
+h: [ecore::EClass:53128]
+h: [ecore::EClass:53130]
+h: [ecore::EClass:53132]
+h: [ecore::EClass:53134]
+h: [ecore::EClass:53136]
+h: [ecore::EClass:53137]
+h: [ecore::EClass:53141]
+h: [ecore::EClass:53142]
+zoe: Assignment
+  EClass Assignment retreived
+  Known properties:
+     Assignment.target
+     Assignment.value
+     Assignment.isCast
+     Assignment.staticType
+     Assignment.tag
+     Assignment.containedType
+zoe: Expression
+  EClass Expression retreived
+  Known properties:
+     Expression.staticType
+     Expression.tag
+     Expression.containedType
+zoe: CallExpression
+  EClass CallExpression retreived
+  Known properties:
+     CallExpression.parameters
+     CallExpression.name
+     CallExpression.staticTypeVariableBindings
+     CallExpression.staticType
+     CallExpression.tag
+     CallExpression.containedType
+zoe: Block
+  EClass Block retreived
+  Known properties:
+     Block.statement
+     Block.rescueBlock
+     Block.staticType
+     Block.tag
+     Block.containedType
+zoe: CallVariable
+  EClass CallVariable retreived
+  Known properties:
+     CallVariable.isAtpre
+     CallVariable.parameters
+     CallVariable.name
+     CallVariable.staticTypeVariableBindings
+     CallVariable.staticType
+     CallVariable.tag
+     CallVariable.containedType
+zoe: CallFeature
+  EClass CallFeature retreived
+  Known properties:
+     CallFeature.staticOperation
+     CallFeature.staticEnumLiteral
+     CallFeature.staticProperty
+     CallFeature.isAtpre
+     CallFeature.target
+     CallFeature.parameters
+     CallFeature.name
+     CallFeature.staticTypeVariableBindings
+     CallFeature.staticType
+     CallFeature.tag
+     CallFeature.containedType
+zoe: CallSuperOperation
+  EClass CallSuperOperation retreived
+  Known properties:
+     CallSuperOperation.parameters
+     CallSuperOperation.name
+     CallSuperOperation.staticTypeVariableBindings
+     CallSuperOperation.staticType
+     CallSuperOperation.tag
+     CallSuperOperation.containedType
+zoe: CallResult
+  EClass CallResult retreived
+  Known properties:
+     CallResult.isAtpre
+     CallResult.parameters
+     CallResult.name
+     CallResult.staticTypeVariableBindings
+     CallResult.staticType
+     CallResult.tag
+     CallResult.containedType
+zoe: CallValue
+  EClass CallValue retreived
+  Known properties:
+     CallValue.parameters
+     CallValue.name
+     CallValue.staticTypeVariableBindings
+     CallValue.staticType
+     CallValue.tag
+     CallValue.containedType
+zoe: Conditional
+  EClass Conditional retreived
+  Known properties:
+     Conditional.thenBody
+     Conditional.elseBody
+     Conditional.condition
+     Conditional.staticType
+     Conditional.tag
+     Conditional.containedType
+zoe: Raise
+  EClass Raise retreived
+  Known properties:
+     Raise.expression
+     Raise.staticType
+     Raise.tag
+     Raise.containedType
+zoe: Rescue
+  EClass Rescue retreived
+  Known properties:
+     Rescue.body
+     Rescue.exceptionType
+     Rescue.exceptionName
+     Rescue.tag
+zoe: TypeReference
+  EClass TypeReference retreived
+  Known properties:
+     TypeReference.tag
+     TypeReference.containedType
+     TypeReference.name
+     TypeReference.type
+     TypeReference.isOrdered
+     TypeReference.isUnique
+     TypeReference.lower
+     TypeReference.upper
+zoe: Literal
+  EClass Literal retreived
+  Known properties:
+     Literal.staticType
+     Literal.tag
+     Literal.containedType
+zoe: EmptyExpression
+  EClass EmptyExpression retreived
+  Known properties:
+     EmptyExpression.staticType
+     EmptyExpression.tag
+     EmptyExpression.containedType
+zoe: JavaStaticCall
+  EClass JavaStaticCall retreived
+  Known properties:
+     JavaStaticCall.parameters
+     JavaStaticCall.jclass
+     JavaStaticCall.jmethod
+     JavaStaticCall.staticType
+     JavaStaticCall.tag
+     JavaStaticCall.containedType
+zoe: LambdaExpression
+  EClass LambdaExpression retreived
+  Known properties:
+     LambdaExpression.parameters
+     LambdaExpression.body
+     LambdaExpression.staticType
+     LambdaExpression.tag
+     LambdaExpression.containedType
+zoe: LambdaParameter
+  EClass LambdaParameter retreived
+  Known properties:
+     LambdaParameter.name
+     LambdaParameter.type
+     LambdaParameter.tag
+zoe: IntegerLiteral
+  EClass IntegerLiteral retreived
+  Known properties:
+     IntegerLiteral.value
+     IntegerLiteral.staticType
+     IntegerLiteral.tag
+     IntegerLiteral.containedType
+zoe: StringLiteral
+  EClass StringLiteral retreived
+  Known properties:
+     StringLiteral.value
+     StringLiteral.staticType
+     StringLiteral.tag
+     StringLiteral.containedType
+zoe: BooleanLiteral
+  EClass BooleanLiteral retreived
+  Known properties:
+     BooleanLiteral.value
+     BooleanLiteral.staticType
+     BooleanLiteral.tag
+     BooleanLiteral.containedType
+zoe: TypeLiteral
+  EClass TypeLiteral retreived
+  Known properties:
+     TypeLiteral.typeref
+     TypeLiteral.staticType
+     TypeLiteral.tag
+     TypeLiteral.containedType
+zoe: VoidLiteral
+  EClass VoidLiteral retreived
+  Known properties:
+     VoidLiteral.staticType
+     VoidLiteral.tag
+     VoidLiteral.containedType
+zoe: Loop
+  EClass Loop retreived
+  Known properties:
+     Loop.initialization
+     Loop.body
+     Loop.stopCondition
+     Loop.staticType
+     Loop.tag
+     Loop.containedType
+zoe: SelfExpression
+  EClass SelfExpression retreived
+  Known properties:
+     SelfExpression.staticType
+     SelfExpression.tag
+     SelfExpression.containedType
+zoe: VariableDecl
+  EClass VariableDecl retreived
+  Known properties:
+     VariableDecl.initialization
+     VariableDecl.identifier
+     VariableDecl.type
+     VariableDecl.staticType
+     VariableDecl.tag
+     VariableDecl.containedType
+EPackage structure retreived
+  Known classes:
+    String
+    Object
+    Boolean
+    Integer
+    ParameterizedType
+    ModelType
+    Class
+    MultiplicityElement
+    Constraint
+    ConstraintLanguage
+    ConstraintType
+    Operation
+    Tag
+    Property
+    TypeContainer
+    VirtualTypeContainer
+    GenericTypeDefinition
+    ClassDefinition
+    TypedElement
+    TypeVariable
+    ObjectTypeVariable
+    VirtualType
+    ModelTypeVariable
+    Model
+    ProductType
+    FunctionType
+    Type
+    TypeVariableBinding
+    PrimitiveType
+    NamedElement
+    TypeDefinitionContainer
+    Package
+    TypeDefinition
+    VoidType
+    DataType
+    Enumeration
+    EnumerationLiteral
+    Parameter
+    UnlimitedNatural
+    KMStructureVisitor
+    KMStructureVisitable
+h: [ecore::EDataType:53149]
+h: [ecore::EDataType:53150]
+h: [ecore::EClass:53151]
+h: [ecore::EClass:53160]
+h: [ecore::EClass:53179]
+h: [ecore::EClass:53187]
+h: [ecore::EDataType:53192]
+h: [ecore::EClass:53193]
+h: [ecore::EClass:53203]
+h: [ecore::EClass:53213]
+h: [ecore::EClass:53217]
+h: [ecore::EClass:53219]
+h: [ecore::EClass:53221]
+h: [ecore::EClass:53224]
+h: [ecore::EClass:53229]
+h: [ecore::EClass:53232]
+h: [ecore::EClass:53233]
+h: [ecore::EClass:53235]
+h: [ecore::EClass:53237]
+h: [ecore::EClass:53241]
+h: [ecore::EClass:53243]
+h: [ecore::EClass:53245]
+h: [ecore::EDataType:53247]
+h: [ecore::EClass:53248]
+h: [ecore::EClass:53252]
+h: [ecore::EEnum:53261]
+h: [ecore::EClass:53266]
+h: [ecore::EEnum:53272]
+h: [ecore::EClass:53276]
+h: [ecore::EClass:53278]
+h: [ecore::EClass:53282]
+h: [ecore::EClass:53284]
+h: [ecore::EClass:53285]
+h: [ecore::EClass:53287]
+h: [ecore::EClass:53288]
+h: [ecore::EClass:53292]
+h: [ecore::EClass:53294]
+h: [ecore::EClass:53297]
+h: [ecore::EClass:53298]
+zoe: String
+    data type String retreived
+zoe: Boolean
+    data type Boolean retreived
+zoe: Class
+  EClass Class retreived
+  Known properties:
+     Class.tag
+     Class.typeContainer
+     Class.typeDefinition
+     Class.typeParamBinding
+     Class.virtualTypeBinding
+     Class.ownedAttribute
+     Class.ownedOperation
+     Class.superClass
+     Class.isAbstract
+     Class.name
+zoe: Object
+  EClass Object retreived
+  Known properties:
+     Object.tag
+zoe: Model
+  EClass Model retreived
+  Known properties:
+     Model.tag
+     Model.contents
+zoe: ModelType
+  EClass ModelType retreived
+  Known properties:
+     ModelType.tag
+     ModelType.typeContainer
+     ModelType.name
+     ModelType.isAspect
+     ModelType.baseAspects
+     ModelType.includedTypeDefinition
+zoe: Integer
+    data type Integer retreived
+zoe: Operation
+  EClass Operation retreived
+  Known properties:
+     Operation.body
+     Operation.tag
+     Operation.containedType
+     Operation.name
+     Operation.type
+     Operation.isOrdered
+     Operation.isUnique
+     Operation.lower
+     Operation.upper
+     Operation.isAbstract
+     Operation.pre
+     Operation.post
+     Operation.superOperation
+     Operation.owningClass
+     Operation.typeParameter
+     Operation.raisedException
+     Operation.ownedParameter
+zoe: Property
+  EClass Property retreived
+  Known properties:
+     Property.getterBody
+     Property.setterBody
+     Property.tag
+     Property.containedType
+     Property.name
+     Property.type
+     Property.isOrdered
+     Property.isUnique
+     Property.lower
+     Property.upper
+     Property.owningClass
+     Property.opposite
+     Property.isReadOnly
+     Property.default
+     Property.isComposite
+     Property.isDerived
+     Property.isID
+zoe: Type
+  EClass Type retreived
+  Known properties:
+     Type.tag
+     Type.typeContainer
+zoe: TypeContainer
+  EClass TypeContainer retreived
+  Known properties:
+     TypeContainer.tag
+     TypeContainer.containedType
+zoe: EnumerationLiteral
+  EClass EnumerationLiteral retreived
+  Known properties:
+     EnumerationLiteral.tag
+     EnumerationLiteral.name
+     EnumerationLiteral.enumeration
+zoe: TypeVariableBinding
+  EClass TypeVariableBinding retreived
+  Known properties:
+     TypeVariableBinding.tag
+     TypeVariableBinding.containedType
+     TypeVariableBinding.variable
+     TypeVariableBinding.type
+zoe: MultiplicityElement
+  EClass MultiplicityElement retreived
+  Known properties:
+     MultiplicityElement.tag
+     MultiplicityElement.containedType
+     MultiplicityElement.name
+     MultiplicityElement.type
+     MultiplicityElement.isOrdered
+     MultiplicityElement.isUnique
+     MultiplicityElement.lower
+     MultiplicityElement.upper
+zoe: TypeDefinition
+  EClass TypeDefinition retreived
+  Known properties:
+     TypeDefinition.tag
+     TypeDefinition.name
+     TypeDefinition.isAspect
+     TypeDefinition.baseAspects
+zoe: DataType
+  EClass DataType retreived
+  Known properties:
+     DataType.tag
+     DataType.name
+     DataType.isAspect
+     DataType.baseAspects
+     DataType.typeContainer
+zoe: Enumeration
+  EClass Enumeration retreived
+  Known properties:
+     Enumeration.tag
+     Enumeration.name
+     Enumeration.isAspect
+     Enumeration.baseAspects
+     Enumeration.typeContainer
+     Enumeration.ownedLiteral
+zoe: NamedElement
+  EClass NamedElement retreived
+  Known properties:
+     NamedElement.tag
+     NamedElement.name
+zoe: Package
+  EClass Package retreived
+  Known properties:
+     Package.tag
+     Package.name
+     Package.ownedTypeDefinition
+     Package.nestedPackage
+     Package.nestingPackage
+     Package.uri
+zoe: Parameter
+  EClass Parameter retreived
+  Known properties:
+     Parameter.tag
+     Parameter.containedType
+     Parameter.name
+     Parameter.type
+     Parameter.isOrdered
+     Parameter.isUnique
+     Parameter.lower
+     Parameter.upper
+     Parameter.operation
+zoe: PrimitiveType
+  EClass PrimitiveType retreived
+  Known properties:
+     PrimitiveType.tag
+     PrimitiveType.containedType
+     PrimitiveType.name
+     PrimitiveType.isAspect
+     PrimitiveType.baseAspects
+     PrimitiveType.typeContainer
+     PrimitiveType.instanceType
+zoe: TypedElement
+  EClass TypedElement retreived
+  Known properties:
+     TypedElement.tag
+     TypedElement.containedType
+     TypedElement.name
+     TypedElement.type
+zoe: UnlimitedNatural
+    data type UnlimitedNatural retreived
+zoe: Tag
+  EClass Tag retreived
+  Known properties:
+     Tag.tag
+     Tag.object
+     Tag.name
+     Tag.value
+zoe: Constraint
+  EClass Constraint retreived
+  Known properties:
+     Constraint.language
+     Constraint.stereotype
+     Constraint.body
+     Constraint.invOwner
+     Constraint.preOwner
+     Constraint.postOwner
+     Constraint.name
+     Constraint.tag
+     Constraint.isAbstract
+     Constraint.pre
+     Constraint.post
+     Constraint.superOperation
+     Constraint.owningClass
+     Constraint.typeParameter
+     Constraint.raisedException
+     Constraint.ownedParameter
+     Constraint.isOrdered
+     Constraint.isUnique
+     Constraint.lower
+     Constraint.upper
+     Constraint.type
+     Constraint.containedType
+zoe: ConstraintLanguage
+    data type ConstraintLanguage retreived
+zoe: ClassDefinition
+  EClass ClassDefinition retreived
+  Known properties:
+     ClassDefinition.tag
+     ClassDefinition.containedType
+     ClassDefinition.name
+     ClassDefinition.isAspect
+     ClassDefinition.baseAspects
+     ClassDefinition.typeParameter
+     ClassDefinition.isAbstract
+     ClassDefinition.ownedAttribute
+     ClassDefinition.ownedOperation
+     ClassDefinition.inv
+     ClassDefinition.superType
+     ClassDefinition.allOwnedAttribute
+     ClassDefinition.ownedCompositeAttribute
+     ClassDefinition.allOwnedCompositeAttribute
+     ClassDefinition.ownedAttributeAsReference
+     ClassDefinition.allOwnedAttributeAsReference
+     ClassDefinition.ownedAttributeAsProperty
+     ClassDefinition.allOwnedAttributeAsProperty
+     ClassDefinition.allOwnedOperation
+zoe: ConstraintType
+    data type ConstraintType retreived
+zoe: GenericTypeDefinition
+  EClass GenericTypeDefinition retreived
+  Known properties:
+     GenericTypeDefinition.tag
+     GenericTypeDefinition.name
+     GenericTypeDefinition.isAspect
+     GenericTypeDefinition.baseAspects
+     GenericTypeDefinition.typeParameter
+zoe: ParameterizedType
+  EClass ParameterizedType retreived
+  Known properties:
+     ParameterizedType.tag
+     ParameterizedType.typeContainer
+     ParameterizedType.typeDefinition
+     ParameterizedType.typeParamBinding
+     ParameterizedType.virtualTypeBinding
+zoe: TypeVariable
+  EClass TypeVariable retreived
+  Known properties:
+     TypeVariable.tag
+     TypeVariable.typeContainer
+     TypeVariable.name
+     TypeVariable.supertype
+     TypeVariable.containedType
+zoe: ObjectTypeVariable
+  EClass ObjectTypeVariable retreived
+  Known properties:
+     ObjectTypeVariable.tag
+     ObjectTypeVariable.containedType
+     ObjectTypeVariable.typeContainer
+     ObjectTypeVariable.name
+     ObjectTypeVariable.supertype
+zoe: VirtualTypeContainer
+  EClass VirtualTypeContainer retreived
+  Known properties:
+     VirtualTypeContainer.tag
+     VirtualTypeContainer.virtualType
+zoe: ModelTypeVariable
+  EClass ModelTypeVariable retreived
+  Known properties:
+     ModelTypeVariable.tag
+     ModelTypeVariable.typeContainer
+     ModelTypeVariable.name
+     ModelTypeVariable.supertype
+     ModelTypeVariable.containedType
+     ModelTypeVariable.virtualType
+zoe: VirtualType
+  EClass VirtualType retreived
+  Known properties:
+     VirtualType.tag
+     VirtualType.containedType
+     VirtualType.typeContainer
+     VirtualType.name
+     VirtualType.supertype
+     VirtualType.classDefinition
+     VirtualType.modelType
+     VirtualType.typeParamBinding
+zoe: ProductType
+  EClass ProductType retreived
+  Known properties:
+     ProductType.tag
+     ProductType.containedType
+     ProductType.typeContainer
+     ProductType.type
+zoe: FunctionType
+  EClass FunctionType retreived
+  Known properties:
+     FunctionType.tag
+     FunctionType.containedType
+     FunctionType.typeContainer
+     FunctionType.left
+     FunctionType.right
+zoe: VoidType
+  EClass VoidType retreived
+  Known properties:
+     VoidType.tag
+     VoidType.typeContainer
+zoe: TypeDefinitionContainer
+  EClass TypeDefinitionContainer retreived
+  Known properties:
+     TypeDefinitionContainer.tag
+     TypeDefinitionContainer.name
+     TypeDefinitionContainer.ownedTypeDefinition
+  Known classes:
+    ReflectiveCollection
+    ReflectiveSequence
+h: [ecore::EClass:53073]
+zoe: DummyClass
+  Known classes:
+h: [ecore::EClass:53065]
+zoe: DummyClass
+End
+    ************************************************
+    * Consumed memory : 252706816/832045056
+    * #objects cached : 3926
+    * #ro created     : 112292
+    * #ro total       : 164460
+    * time (ms)       : 21649
+    ************************************************
+Begin
+C2 [ecore::EClass:165356]
+C3 [ecore::EClass:165359]
+    ************************************************
+    * Consumed memory : 252706816/832045056
+    * #objects cached : 603
+    * #ro created     : 1337
+    * #ro total       : 165797
+    * time (ms)       : 78
+    ************************************************
+Begin
+C2 [ecore::EClass:166693]
+C3 [ecore::EClass:166696]
+C1 [ecore::EClass:166688]
+    ************************************************
+    * Consumed memory : 252706816/832045056
+    * #objects cached : 607
+    * #ro created     : 1394
+    * #ro total       : 167191
+    * time (ms)       : 75
+    ************************************************
+End of simple splitted MM1
+    ************************************************
+    * Consumed memory : 252706816/832045056
+    * #objects cached : 462
+    * #ro created     : 844
+    * #ro total       : 168035
+    * time (ms)       : 32
+    ************************************************
+testChunkedmodel End
+    ************************************************
+    * Consumed memory : 252706816/832045056
+    * #objects cached : 472
+    * #ro created     : 946
+    * #ro total       : 168981
+    * time (ms)       : 39
+    ************************************************
+    ************************************************
+    * Consumed memory : 252706816/832045056
+    * #objects cached : 472
+    * #ro created     : 927
+    * #ro total       : 169908
+    * time (ms)       : 33
+    ************************************************
+Begin
+   model saved
+   reloaded model checked
+End
+    ************************************************
+    * Consumed memory : 250740736/832045056
+    * #objects cached : 605
+    * #ro created     : 1349
+    * #ro total       : 171257
+    * time (ms)       : 277
+    ************************************************
+Begin
+   model saved
+   reloaded model checked
+End
+    ************************************************
+    * Consumed memory : 250740736/832045056
+    * #objects cached : 614
+    * #ro created     : 1362
+    * #ro total       : 172619
+    * time (ms)       : 159
+    ************************************************
+   model saved
+   reloaded model checked
+    ************************************************
+    * Consumed memory : 250740736/832045056
+    * #objects cached : 614
+    * #ro created     : 1360
+    * #ro total       : 173979
+    * time (ms)       : 221
+    ************************************************
+Creating pb_EnregKM.km...
+Saving pb_EnregKM.km...
+WARN   validateWithEMF, Didn't succeed to validate EObject with EMF validator, maybe you are running outside of eclipse ...
+java.lang.ExceptionInInitializerError
+	at org.eclipse.emf.validation.internal.service.BatchValidator$DefaultRecursiveTraversalStrategy.initDelegates(BatchValidator.java:338)
+	at org.eclipse.emf.validation.internal.service.BatchValidator$DefaultRecursiveTraversalStrategy.startTraversal(BatchValidator.java:259)
+	at org.eclipse.emf.validation.internal.service.BatchValidator.validate(BatchValidator.java:169)
+	at org.eclipse.emf.validation.internal.service.BatchValidator.doValidate(BatchValidator.java:137)
+	at org.eclipse.emf.validation.internal.service.AbstractValidator.validate(AbstractValidator.java:136)
+	at org.eclipse.emf.validation.internal.service.AbstractValidator.validate(AbstractValidator.java:115)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.OptionalEMFValidator.validateWithEMF(OptionalEMFValidator.java:47)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.validateWithEMF(EMFRuntimeUnit.java:786)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.save(EMFRuntimeUnit.java:431)
+	at fr.irisa.triskell.kermeta.runtime.basetypes.Resource.save(Resource.java:58)
+	at fr.irisa.triskell.kermeta.runtime.fr__irisa__triskell__kermeta__runtime__basetypes__Resource_save_6Comd.execute(FrameworkExternCommand.java:609)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitJavaStaticCall(ExpressionInterpreter.java:1201)
+	at fr.irisa.triskell.kermeta.visitor.JavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:426)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitCallFeature(ExpressionInterpreter.java:876)
+	at fr.irisa.triskell.kermeta.visitor.CallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:372)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:144)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:266)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:109)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+Caused by: java.lang.NullPointerException
+	at org.eclipse.emf.validation.internal.EMFModelValidationPlugin.getPluginId(EMFModelValidationPlugin.java:195)
+	at org.eclipse.emf.validation.internal.service.TraversalStrategyManager.initStrategies(TraversalStrategyManager.java:100)
+	at org.eclipse.emf.validation.internal.service.TraversalStrategyManager.<init>(TraversalStrategyManager.java:62)
+	at org.eclipse.emf.validation.internal.service.TraversalStrategyManager.<clinit>(TraversalStrategyManager.java:54)
+	... 57 more
+33232 [main] WARN KMT.EMFRuntime  - Didn't succeed to validate EObject with EMF validator, maybe you are running outside of eclipse ...
+java.lang.ExceptionInInitializerError
+	at org.eclipse.emf.validation.internal.service.BatchValidator$DefaultRecursiveTraversalStrategy.initDelegates(BatchValidator.java:338)
+	at org.eclipse.emf.validation.internal.service.BatchValidator$DefaultRecursiveTraversalStrategy.startTraversal(BatchValidator.java:259)
+	at org.eclipse.emf.validation.internal.service.BatchValidator.validate(BatchValidator.java:169)
+	at org.eclipse.emf.validation.internal.service.BatchValidator.doValidate(BatchValidator.java:137)
+	at org.eclipse.emf.validation.internal.service.AbstractValidator.validate(AbstractValidator.java:136)
+	at org.eclipse.emf.validation.internal.service.AbstractValidator.validate(AbstractValidator.java:115)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.OptionalEMFValidator.validateWithEMF(OptionalEMFValidator.java:47)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.validateWithEMF(EMFRuntimeUnit.java:786)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.save(EMFRuntimeUnit.java:431)
+	at fr.irisa.triskell.kermeta.runtime.basetypes.Resource.save(Resource.java:58)
+	at fr.irisa.triskell.kermeta.runtime.fr__irisa__triskell__kermeta__runtime__basetypes__Resource_save_6Comd.execute(FrameworkExternCommand.java:609)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitJavaStaticCall(ExpressionInterpreter.java:1201)
+	at fr.irisa.triskell.kermeta.visitor.JavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:426)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitCallFeature(ExpressionInterpreter.java:876)
+	at fr.irisa.triskell.kermeta.visitor.CallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:372)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:144)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:266)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:109)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+Caused by: java.lang.NullPointerException
+	at org.eclipse.emf.validation.internal.EMFModelValidationPlugin.getPluginId(EMFModelValidationPlugin.java:195)
+	at org.eclipse.emf.validation.internal.service.TraversalStrategyManager.initStrategies(TraversalStrategyManager.java:100)
+	at org.eclipse.emf.validation.internal.service.TraversalStrategyManager.<init>(TraversalStrategyManager.java:62)
+	at org.eclipse.emf.validation.internal.service.TraversalStrategyManager.<clinit>(TraversalStrategyManager.java:54)
+	... 57 more
+done
+    ************************************************
+    * Consumed memory : 250740736/832045056
+    * #objects cached : 459
+    * #ro created     : 871
+    * #ro total       : 174850
+    * time (ms)       : 84
+    ************************************************
+Creating pb_EnregKM2.km...
+Saving pb_EnregKM2.km...
+WARN   validateWithEMF, Didn't succeed to validate EObject with EMF validator, maybe you are running outside of eclipse ...
+java.lang.NoClassDefFoundError
+	at org.eclipse.emf.validation.internal.service.BatchValidator$DefaultRecursiveTraversalStrategy.initDelegates(BatchValidator.java:338)
+	at org.eclipse.emf.validation.internal.service.BatchValidator$DefaultRecursiveTraversalStrategy.startTraversal(BatchValidator.java:259)
+	at org.eclipse.emf.validation.internal.service.BatchValidator.validate(BatchValidator.java:169)
+	at org.eclipse.emf.validation.internal.service.BatchValidator.doValidate(BatchValidator.java:137)
+	at org.eclipse.emf.validation.internal.service.AbstractValidator.validate(AbstractValidator.java:136)
+	at org.eclipse.emf.validation.internal.service.AbstractValidator.validate(AbstractValidator.java:115)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.OptionalEMFValidator.validateWithEMF(OptionalEMFValidator.java:47)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.validateWithEMF(EMFRuntimeUnit.java:786)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.save(EMFRuntimeUnit.java:431)
+	at fr.irisa.triskell.kermeta.runtime.basetypes.Resource.save(Resource.java:58)
+	at fr.irisa.triskell.kermeta.runtime.fr__irisa__triskell__kermeta__runtime__basetypes__Resource_save_6Comd.execute(FrameworkExternCommand.java:609)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitJavaStaticCall(ExpressionInterpreter.java:1201)
+	at fr.irisa.triskell.kermeta.visitor.JavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:426)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitCallFeature(ExpressionInterpreter.java:876)
+	at fr.irisa.triskell.kermeta.visitor.CallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:372)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:144)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:266)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:109)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+33268 [main] WARN KMT.EMFRuntime  - Didn't succeed to validate EObject with EMF validator, maybe you are running outside of eclipse ...
+java.lang.NoClassDefFoundError
+	at org.eclipse.emf.validation.internal.service.BatchValidator$DefaultRecursiveTraversalStrategy.initDelegates(BatchValidator.java:338)
+	at org.eclipse.emf.validation.internal.service.BatchValidator$DefaultRecursiveTraversalStrategy.startTraversal(BatchValidator.java:259)
+	at org.eclipse.emf.validation.internal.service.BatchValidator.validate(BatchValidator.java:169)
+	at org.eclipse.emf.validation.internal.service.BatchValidator.doValidate(BatchValidator.java:137)
+	at org.eclipse.emf.validation.internal.service.AbstractValidator.validate(AbstractValidator.java:136)
+	at org.eclipse.emf.validation.internal.service.AbstractValidator.validate(AbstractValidator.java:115)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.OptionalEMFValidator.validateWithEMF(OptionalEMFValidator.java:47)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.validateWithEMF(EMFRuntimeUnit.java:786)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.save(EMFRuntimeUnit.java:431)
+	at fr.irisa.triskell.kermeta.runtime.basetypes.Resource.save(Resource.java:58)
+	at fr.irisa.triskell.kermeta.runtime.fr__irisa__triskell__kermeta__runtime__basetypes__Resource_save_6Comd.execute(FrameworkExternCommand.java:609)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitJavaStaticCall(ExpressionInterpreter.java:1201)
+	at fr.irisa.triskell.kermeta.visitor.JavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:426)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitCallFeature(ExpressionInterpreter.java:876)
+	at fr.irisa.triskell.kermeta.visitor.CallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:372)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:144)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:266)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:109)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+done
+    ************************************************
+    * Consumed memory : 250740736/832045056
+    * #objects cached : 454
+    * #ro created     : 868
+    * #ro total       : 175718
+    * time (ms)       : 35
+    ************************************************
+loading km user model...
+saving km user model...
+WARN   loadMetaModelResource, patching EMF problem about generated java EPackage. cannot resolve http://kermeta/kermeta.ecore into a physical file:/ scheme
+36043 [main] WARN KMT.EMFRuntime  - patching EMF problem about generated java EPackage. cannot resolve http://kermeta/kermeta.ecore into a physical file:/ scheme
+WARN   loadMetaModelResource, patching EMF problem about generated java EPackage. cannot resolve http://kermeta/kermeta.ecore into a physical file:/ scheme
+39377 [main] WARN KMT.EMFRuntime  - patching EMF problem about generated java EPackage. cannot resolve http://kermeta/kermeta.ecore into a physical file:/ scheme
+WARN   validateWithEMF, Didn't succeed to validate EObject with EMF validator, maybe you are running outside of eclipse ...
+java.lang.NoClassDefFoundError
+	at org.eclipse.emf.validation.internal.service.BatchValidator$DefaultRecursiveTraversalStrategy.initDelegates(BatchValidator.java:338)
+	at org.eclipse.emf.validation.internal.service.BatchValidator$DefaultRecursiveTraversalStrategy.startTraversal(BatchValidator.java:259)
+	at org.eclipse.emf.validation.internal.service.BatchValidator.validate(BatchValidator.java:169)
+	at org.eclipse.emf.validation.internal.service.BatchValidator.doValidate(BatchValidator.java:137)
+	at org.eclipse.emf.validation.internal.service.AbstractValidator.validate(AbstractValidator.java:136)
+	at org.eclipse.emf.validation.internal.service.AbstractValidator.validate(AbstractValidator.java:115)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.OptionalEMFValidator.validateWithEMF(OptionalEMFValidator.java:47)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.validateWithEMF(EMFRuntimeUnit.java:786)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.save(EMFRuntimeUnit.java:431)
+	at fr.irisa.triskell.kermeta.runtime.basetypes.Resource.save(Resource.java:58)
+	at fr.irisa.triskell.kermeta.runtime.fr__irisa__triskell__kermeta__runtime__basetypes__Resource_save_6Comd.execute(FrameworkExternCommand.java:609)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitJavaStaticCall(ExpressionInterpreter.java:1201)
+	at fr.irisa.triskell.kermeta.visitor.JavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:426)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitCallFeature(ExpressionInterpreter.java:876)
+	at fr.irisa.triskell.kermeta.visitor.CallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:372)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitCallFeature(ExpressionInterpreter.java:876)
+	at fr.irisa.triskell.kermeta.visitor.CallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:372)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:144)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:266)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:109)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+40478 [main] WARN KMT.EMFRuntime  - Didn't succeed to validate EObject with EMF validator, maybe you are running outside of eclipse ...
+java.lang.NoClassDefFoundError
+	at org.eclipse.emf.validation.internal.service.BatchValidator$DefaultRecursiveTraversalStrategy.initDelegates(BatchValidator.java:338)
+	at org.eclipse.emf.validation.internal.service.BatchValidator$DefaultRecursiveTraversalStrategy.startTraversal(BatchValidator.java:259)
+	at org.eclipse.emf.validation.internal.service.BatchValidator.validate(BatchValidator.java:169)
+	at org.eclipse.emf.validation.internal.service.BatchValidator.doValidate(BatchValidator.java:137)
+	at org.eclipse.emf.validation.internal.service.AbstractValidator.validate(AbstractValidator.java:136)
+	at org.eclipse.emf.validation.internal.service.AbstractValidator.validate(AbstractValidator.java:115)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.OptionalEMFValidator.validateWithEMF(OptionalEMFValidator.java:47)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.validateWithEMF(EMFRuntimeUnit.java:786)
+	at fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit.save(EMFRuntimeUnit.java:431)
+	at fr.irisa.triskell.kermeta.runtime.basetypes.Resource.save(Resource.java:58)
+	at fr.irisa.triskell.kermeta.runtime.fr__irisa__triskell__kermeta__runtime__basetypes__Resource_save_6Comd.execute(FrameworkExternCommand.java:609)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitJavaStaticCall(ExpressionInterpreter.java:1201)
+	at fr.irisa.triskell.kermeta.visitor.JavaStaticCallAcceptCommand.accept(KermetaOptimizedVisitor.java:426)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitCallFeature(ExpressionInterpreter.java:876)
+	at fr.irisa.triskell.kermeta.visitor.CallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:372)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitCallFeature(ExpressionInterpreter.java:876)
+	at fr.irisa.triskell.kermeta.visitor.CallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:372)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1442)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:360)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:516)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:156)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:144)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:266)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:109)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+done
+    ************************************************
+    * Consumed memory : 242089984/832045056
+    * #objects cached : 849
+    * #ro created     : 43518
+    * #ro total       : 219236
+    * time (ms)       : 7210
+    ************************************************
+BasicFSMLoader : before loading ../instances/055_MT_FSM_createDynamicInstance.basic.xmi
+after loading (7 instances in the resource)
+    ************************************************
+    * Consumed memory : 242089984/832045056
+    * #objects cached : 592
+    * #ro created     : 1322
+    * #ro total       : 220558
+    * time (ms)       : 62
+    ************************************************
+GenericBasicFSMLoader : before loading ../instances/055_MT_FSM_createDynamicInstance.basic.xmi
+after loading (7 instances in the resource)
+7 instances in the resource
+testBasicSimpleGenericLoad contents.size = 7
+    ************************************************
+    * Consumed memory : 242089984/832045056
+    * #objects cached : 606
+    * #ro created     : 1399
+    * #ro total       : 221957
+    * time (ms)       : 82
+    ************************************************
+GenericModelLoader : before loading ../instances/055_MT_FSM_createDynamicInstance.basic.xmi
+after loading (7 instances in the resource)
+testBasicSimpleGenericLoad contents.size = 7
+    ************************************************
+    * Consumed memory : 242089984/832045056
+    * #objects cached : 599
+    * #ro created     : 1329
+    * #ro total       : 223286
+    * time (ms)       : 109
+    ************************************************
+before loading ../instances/055_MT_FSM_createDynamicInstance.composite.xmi
+after loading (7 instances in the resource)
+ number of States in composite model : 4
+    ************************************************
+    * Consumed memory : 242089984/832045056
+    * #objects cached : 595
+    * #ro created     : 1354
+    * #ro total       : 224640
+    * time (ms)       : 71
+    ************************************************
+GenericModelLoader : before loading ../instances/055_MT_FSM_createDynamicInstance.composite.xmi
+after loading (7 instances in the resource)
+ number of States in composite model : 4
+    ************************************************
+    * Consumed memory : 242548736/832045056
+    * #objects cached : 604
+    * #ro created     : 1743
+    * #ro total       : 226383
+    * time (ms)       : 138
+    ************************************************
+FinalStateFSMLoader : before loading ../instances/055_MT_FSM_createDynamicInstance.finalstates.xmi
+after loading (7 instances in the resource)
+    ************************************************
+    * Consumed memory : 242548736/832045056
+    * #objects cached : 592
+    * #ro created     : 1326
+    * #ro total       : 227709
+    * time (ms)       : 60
+    ************************************************
+GenericModelLoader : before loading ../instances/055_MT_FSM_createDynamicInstance.finalstates.xmi
+after loading (7 instances in the resource)
+    ************************************************
+    * Consumed memory : 242548736/832045056
+    * #objects cached : 599
+    * #ro created     : 1327
+    * #ro total       : 229036
+    * time (ms)       : 71
+    ************************************************
+BasicFSMLoader : before loading ../instances/055_MT_FSM_createDynamicInstance.composite.xmi
+after loading (7 instances in the resource)
+    ************************************************
+    * Consumed memory : 242548736/832045056
+    * #objects cached : 608
+    * #ro created     : 1255
+    * #ro total       : 230291
+    * time (ms)       : 86
+    ************************************************
+BasicFSMLoader : before loading ../instances/055_MT_FSM_createDynamicInstance.finalstates.xmi
+after loading (7 instances in the resource)
+    ************************************************
+    * Consumed memory : 242548736/832045056
+    * #objects cached : 603
+    * #ro created     : 1257
+    * #ro total       : 231548
+    * time (ms)       : 49
+    ************************************************
+    ************************************************
+    * Consumed memory : 243990528/832045056
+    * #objects cached : 822
+    * #ro created     : 2290
+    * #ro total       : 233838
+    * time (ms)       : 183
+    ************************************************
+    ************************************************
+    * Consumed memory : 243990528/832045056
+    * #objects cached : 822
+    * #ro created     : 3589
+    * #ro total       : 237427
+    * time (ms)       : 191
+    ************************************************
+DVK ! another resource of the same repository was containing this element
+    ************************************************
+    * Consumed memory : 243990528/832045056
+    * #objects cached : 1050
+    * #ro created     : 2807
+    * #ro total       : 240234
+    * time (ms)       : 189
+    ************************************************
+    ************************************************
+    * Consumed memory : 243990528/832045056
+    * #objects cached : 937
+    * #ro created     : 2568
+    * #ro total       : 242802
+    * time (ms)       : 137
+    ************************************************
+Loading model at platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/056_test.xmi using platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/056_test_MdlSave.ecore
+DVK ! another resource of the same repository was containing this element
+    ************************************************
+    * Consumed memory : 244187136/832045056
+    * #objects cached : 592
+    * #ro created     : 1063
+    * #ro total       : 243865
+    * time (ms)       : 70
+    ************************************************
+Loading model at platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/056_test2.xmi using platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/056_test_MdlSave.ecore
+Model saved
+    ************************************************
+    * Consumed memory : 244187136/832045056
+    * #objects cached : 589
+    * #ro created     : 1017
+    * #ro total       : 244884
+    * time (ms)       : 23
+    ************************************************
+Loading model at platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/056_test3.xmi using platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/056_test_MdlSave.ecore
+Loading model at platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/056_test2.xmi using platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/056_test_MdlSave.ecore
+Model saved
+    ************************************************
+    * Consumed memory : 244187136/832045056
+    * #objects cached : 590
+    * #ro created     : 1340
+    * #ro total       : 246232
+    * time (ms)       : 45
+    ************************************************
+Create ModelA resource
+Create ModelB resource
+Create ModelB
+Create ModelA
+Save ModelB
+Save ModelA
+ModelA loaded as [modelA::ModelA:247191]
+    ************************************************
+    * Consumed memory : 244187136/832045056
+    * #objects cached : 485
+    * #ro created     : 1066
+    * #ro total       : 247298
+    * time (ms)       : 58
+    ************************************************
+Create ModelA resource
+Create ModelB resource
+Create ModelB
+Create ModelA
+Save ModelA
+Save ModelB
+ModelA loaded as [modelA::ModelA:248257]
+    ************************************************
+    * Consumed memory : 244187136/832045056
+    * #objects cached : 485
+    * #ro created     : 1066
+    * #ro total       : 248364
+    * time (ms)       : 51
+    ************************************************
+Create ModelC resource
+Create ModelB resource
+Create ModelB
+Create ModelC
+Save ModelB
+Save ModelC
+WARN   getPackageQualifiedNameFromMetamodel, patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel...org.eclipse.emf.ecore.impl.EcorePackageImpl || org.eclipse.emf.ecore.impl.EcorePackageImpl@10d2dc6 (name: ecore) (nsURI: http://www.eclipse.org/emf/2002/Ecore, nsPrefix: ecore)
+42217 [main] WARN KMT.EMFRuntime  - patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel...org.eclipse.emf.ecore.impl.EcorePackageImpl || org.eclipse.emf.ecore.impl.EcorePackageImpl@10d2dc6 (name: ecore) (nsURI: http://www.eclipse.org/emf/2002/Ecore, nsPrefix: ecore)
+ModelC loaded as [modelC::ModelC:249322]
+    ************************************************
+    * Consumed memory : 244187136/832045056
+    * #objects cached : 484
+    * #ro created     : 1064
+    * #ro total       : 249428
+    * time (ms)       : 56
+    ************************************************
+Create ModelC resource
+Create ModelB resource
+Create ModelB
+Create ModelC
+Save ModelC
+Save ModelB
+WARN   getPackageQualifiedNameFromMetamodel, patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel...org.eclipse.emf.ecore.impl.EcorePackageImpl || org.eclipse.emf.ecore.impl.EcorePackageImpl@10d2dc6 (name: ecore) (nsURI: http://www.eclipse.org/emf/2002/Ecore, nsPrefix: ecore)
+42274 [main] WARN KMT.EMFRuntime  - patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel...org.eclipse.emf.ecore.impl.EcorePackageImpl || org.eclipse.emf.ecore.impl.EcorePackageImpl@10d2dc6 (name: ecore) (nsURI: http://www.eclipse.org/emf/2002/Ecore, nsPrefix: ecore)
+ModelC loaded as [modelC::ModelC:250386]
+    ************************************************
+    * Consumed memory : 244187136/832045056
+    * #objects cached : 484
+    * #ro created     : 1064
+    * #ro total       : 250492
+    * time (ms)       : 57
+    ************************************************
+WARN   getPackageQualifiedNameFromMetamodel, patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel...org.eclipse.emf.ecore.impl.EcorePackageImpl || org.eclipse.emf.ecore.impl.EcorePackageImpl@10d2dc6 (name: ecore) (nsURI: http://www.eclipse.org/emf/2002/Ecore, nsPrefix: ecore)
+42296 [main] WARN KMT.EMFRuntime  - patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel...org.eclipse.emf.ecore.impl.EcorePackageImpl || org.eclipse.emf.ecore.impl.EcorePackageImpl@10d2dc6 (name: ecore) (nsURI: http://www.eclipse.org/emf/2002/Ecore, nsPrefix: ecore)
+[kermeta::language::structure::EnumerationLiteral:251539]accPrivate[kermeta::language::structure::Enumeration:250939]
+[kermeta::language::structure::EnumerationLiteral:251538]accPublic[kermeta::language::structure::Enumeration:250939]
+[kermeta::language::structure::EnumerationLiteral:251539]accPrivate[kermeta::language::structure::Enumeration:250939]
+    ************************************************
+    * Consumed memory : 244187136/832045056
+    * #objects cached : 613
+    * #ro created     : 1423
+    * #ro total       : 251915
+    * time (ms)       : 38
+    ************************************************
+before save1
+after save1
+WARN   getPackageQualifiedNameFromMetamodel, patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel...org.eclipse.emf.ecore.impl.EcorePackageImpl || org.eclipse.emf.ecore.impl.EcorePackageImpl@10d2dc6 (name: ecore) (nsURI: http://www.eclipse.org/emf/2002/Ecore, nsPrefix: ecore)
+42342 [main] WARN KMT.EMFRuntime  - patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel...org.eclipse.emf.ecore.impl.EcorePackageImpl || org.eclipse.emf.ecore.impl.EcorePackageImpl@10d2dc6 (name: ecore) (nsURI: http://www.eclipse.org/emf/2002/Ecore, nsPrefix: ecore)
+after load1
+[kermeta::language::structure::EnumerationLiteral:252788]
+[kermeta::language::structure::EnumerationLiteral:252906]
+[kermeta::language::structure::EnumerationLiteral:252788]
+    ************************************************
+    * Consumed memory : 244187136/832045056
+    * #objects cached : 616
+    * #ro created     : 1416
+    * #ro total       : 253331
+    * time (ms)       : 37
+    ************************************************
+WARN   loadMetaModelResource, patching EMF problem about generated java EPackage. cannot resolve http://www.eclipse.org/emf/2002/Ecore into a physical file:/ scheme
+42375 [main] WARN KMT.EMFRuntime  - patching EMF problem about generated java EPackage. cannot resolve http://www.eclipse.org/emf/2002/Ecore into a physical file:/ scheme
+   after resB.load
+platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/061_multipleIndirectLoad_B.ecore
+platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/061_multipleIndirectLoad_C.ecore
+platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/061_multipleIndirectLoad_A.ecore
+WARN   loadMetaModelResource, patching EMF problem about generated java EPackage. cannot resolve http://www.eclipse.org/emf/2002/Ecore into a physical file:/ scheme
+42390 [main] WARN KMT.EMFRuntime  - patching EMF problem about generated java EPackage. cannot resolve http://www.eclipse.org/emf/2002/Ecore into a physical file:/ scheme
+   after resC.load
+platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/061_multipleIndirectLoad_B.ecore
+platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/061_multipleIndirectLoad_C.ecore
+platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/061_multipleIndirectLoad_A.ecore
+platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/061_multipleIndirectLoad_A.ecore
+    ************************************************
+    * Consumed memory : 244187136/832045056
+    * #objects cached : 613
+    * #ro created     : 1309
+    * #ro total       : 254640
+    * time (ms)       : 43
+    ************************************************
+WARN   getPackageQualifiedNameFromMetamodel, patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel...org.eclipse.emf.ecore.impl.EcorePackageImpl || org.eclipse.emf.ecore.impl.EcorePackageImpl@10d2dc6 (name: ecore) (nsURI: http://www.eclipse.org/emf/2002/Ecore, nsPrefix: ecore)
+42565 [main] WARN KMT.EMFRuntime  - patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel...org.eclipse.emf.ecore.impl.EcorePackageImpl || org.eclipse.emf.ecore.impl.EcorePackageImpl@10d2dc6 (name: ecore) (nsURI: http://www.eclipse.org/emf/2002/Ecore, nsPrefix: ecore)
+    ************************************************
+    * Consumed memory : 243597312/832045056
+    * #objects cached : 665
+    * #ro created     : 3294
+    * #ro total       : 257934
+    * time (ms)       : 198
+    ************************************************
+WARN   getPackageQualifiedNameFromMetamodel, patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel...org.eclipse.emf.ecore.impl.EcorePackageImpl || org.eclipse.emf.ecore.impl.EcorePackageImpl@10d2dc6 (name: ecore) (nsURI: http://www.eclipse.org/emf/2002/Ecore, nsPrefix: ecore)
+42663 [main] WARN KMT.EMFRuntime  - patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel...org.eclipse.emf.ecore.impl.EcorePackageImpl || org.eclipse.emf.ecore.impl.EcorePackageImpl@10d2dc6 (name: ecore) (nsURI: http://www.eclipse.org/emf/2002/Ecore, nsPrefix: ecore)
+    ************************************************
+    * Consumed memory : 243597312/832045056
+    * #objects cached : 669
+    * #ro created     : 1665
+    * #ro total       : 259599
+    * time (ms)       : 99
+    ************************************************
+]]></system-out>
+  <system-err><![CDATA[Memory before interpreter : 188547072
+Memory after interpreter : 188547072
+Memory before interpreter : 242221056
+Memory after interpreter : 242483200
+Memory before interpreter : 242483200
+Memory after interpreter : 242483200
+Memory before interpreter : 252706816
+Memory after interpreter : 252706816
+Memory before interpreter : 252706816
+Memory after interpreter : 252706816
+Memory before interpreter : 252706816
+Memory after interpreter : 252706816
+Memory before interpreter : 252706816
+Memory after interpreter : 252706816
+Memory before interpreter : 252706816
+Memory after interpreter : 252706816
+Memory before interpreter : 252706816
+Memory after interpreter : 252706816
+Memory before interpreter : 250740736
+Memory after interpreter : 250740736
+Memory before interpreter : 250740736
+Memory after interpreter : 250740736
+Memory before interpreter : 250740736
+Memory after interpreter : 250740736
+Memory before interpreter : 250740736
+Memory after interpreter : 250740736
+Memory before interpreter : 250740736
+Memory after interpreter : 250740736
+Memory before interpreter : 242089984
+Memory after interpreter : 242089984
+Memory before interpreter : 242089984
+Memory after interpreter : 242089984
+Memory before interpreter : 242089984
+Memory after interpreter : 242089984
+Memory before interpreter : 242089984
+Memory after interpreter : 242089984
+Memory before interpreter : 242089984
+Memory after interpreter : 242089984
+Memory before interpreter : 242548736
+Memory after interpreter : 242548736
+Memory before interpreter : 242548736
+Memory after interpreter : 242548736
+Memory before interpreter : 242548736
+Memory after interpreter : 242548736
+Memory before interpreter : 242548736
+Memory after interpreter : 242548736
+Memory before interpreter : 242548736
+Memory after interpreter : 242548736
+Memory before interpreter : 243990528
+Memory after interpreter : 243990528
+Memory before interpreter : 243990528
+Memory after interpreter : 243990528
+Memory before interpreter : 243990528
+Memory after interpreter : 243990528
+Memory before interpreter : 243990528
+Memory after interpreter : 243990528
+Memory before interpreter : 244187136
+Memory after interpreter : 244187136
+Memory before interpreter : 244187136
+Memory after interpreter : 244187136
+Memory before interpreter : 244187136
+Memory after interpreter : 244187136
+Memory before interpreter : 244187136
+Memory after interpreter : 244187136
+Memory before interpreter : 244187136
+Memory after interpreter : 244187136
+Memory before interpreter : 244187136
+Memory after interpreter : 244187136
+Memory before interpreter : 244187136
+Memory after interpreter : 244187136
+Memory before interpreter : 244187136
+Memory after interpreter : 244187136
+Memory before interpreter : 244187136
+Memory after interpreter : 244187136
+Memory before interpreter : 244187136
+Memory after interpreter : 244187136
+Memory before interpreter : 243597312
+Memory after interpreter : 243597312
+]]></system-err>
+</testsuite>

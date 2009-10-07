@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="5" name="kermeta_io.constraintchecker_test.JunitTestSuite" tests="27" time="5.225">
+  <properties>
+    <property name="java.vendor" value="Sun Microsystems Inc."></property>
+    <property name="sun.java.launcher" value="SUN_STANDARD"></property>
+    <property name="sun.management.compiler" value="HotSpot Server Compiler"></property>
+    <property name="os.name" value="Linux"></property>
+    <property name="sun.boot.class.path" value="/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/rt.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/i18n.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/sunrsasign.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/jsse.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/jce.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/charsets.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/classes"></property>
+    <property name="triskell.eclipse.util.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.eclipse.util/@dot"></property>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="ant.home" value="/udd/triskell/bin/multiplatform/apache-ant-1.5.4"></property>
+    <property name="java.runtime.version" value="1.5.0_11-b03"></property>
+    <property name="cobertura.dir" value="/udd/triskell/bin/multiplatform/cobertura-1.7/"></property>
+    <property name="user.name" value="dvojtise"></property>
+    <property name="emfatic-core.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/thirdparty/emfatic-core.jar"></property>
+    <property name="user.language" value="en"></property>
+    <property name="sun.boot.library.path" value="/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/i386"></property>
+    <property name="ant.project.name" value="run interpreter tests"></property>
+    <property name="java.version" value="1.5.0_11"></property>
+    <property name="build.bin" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/@dot"></property>
+    <property name="coverage.html.dir" value="/tmp/kermeta_build/unittestreports/coverage/html"></property>
+    <property name="user.timezone" value="Europe/Paris"></property>
+    <property name="sun.arch.data.model" value="32"></property>
+    <property name="java.endorsed.dirs" value="/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/endorsed"></property>
+    <property name="sun.cpu.isalist" value=""></property>
+    <property name="sun.jnu.encoding" value="ISO-8859-15"></property>
+    <property name="file.encoding.pkg" value="sun.io"></property>
+    <property name="file.separator" value="/"></property>
+    <property name="java.specification.name" value="Java Platform API Specification"></property>
+    <property name="java.class.version" value="49.0"></property>
+    <property name="src" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/src/java"></property>
+    <property name="user.country" value="US"></property>
+    <property name="ldt-core.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/thirdparty/ldt-core.jar"></property>
+    <property name="java.home" value="/soft/jdk_hd/Linux/jdk1.5.0_11/jre"></property>
+    <property name="java.vm.info" value="mixed mode"></property>
+    <property name="ant.file" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/junit/test_build.xml"></property>
+    <property name="os.version" value="2.6.19-1.2911.6.4.fc6"></property>
+    <property name="path.separator" value=":"></property>
+    <property name="eclipse.home" value="/local/daily_build/eclipse3.2_with_topcased/eclipse"></property>
+    <property name="java.vm.version" value="1.5.0_11-b03"></property>
+    <property name="report.dir" value="/tmp/kermeta_build/unittestreports"></property>
+    <property name="emf.ecore.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.emf.ecore_2.2.1.v200609210005.jar"></property>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"></property>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"></property>
+    <property name="kermeta.model.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.model/@dot"></property>
+    <property name="coverage.dir" value="/tmp/kermeta_build/unittestreports/coverage"></property>
+    <property name="user.home" value="/udd/dvojtise"></property>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="coverage.xml.dir" value="/tmp/kermeta_build/unittestreports/coverage/xml"></property>
+    <property name="java.library.path" value="/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/i386/server:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/i386:/soft/jdk_hd/Linux/jdk1.5.0_11/jre/../lib/i386"></property>
+    <property name="java.vendor.url" value="http://java.sun.com/"></property>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."></property>
+    <property name="cobertura.lib.dir" value="/udd/triskell/bin/multiplatform/cobertura-1.7/lib"></property>
+    <property name="java.runtime.name" value="Java(TM) 2 Runtime Environment, Standard Edition"></property>
+    <property name="java.class.path" value="/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xml-apis.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xercesImpl.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xalan.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/optional.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/junit.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/ant.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/junit.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/optional.jar:/soft/jdk_hd/Linux/jdk1.5.0_11/lib/tools.jar"></property>
+    <property name="ant.version" value="Apache Ant version 1.5.4 compiled on August 12 2003"></property>
+    <property name="traceability.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.traceability.model/@dot"></property>
+    <property name="emf.common.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.emf.common_2.2.1.v200609210005.jar"></property>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"></property>
+    <property name="java.vm.specification.version" value="1.0"></property>
+    <property name="sun.cpu.endian" value="little"></property>
+    <property name="sun.os.patch.level" value="unknown"></property>
+    <property name="log4j.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/thirdparty/log4j.jar"></property>
+    <property name="java.io.tmpdir" value="/tmp"></property>
+    <property name="test.src" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/junit"></property>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"></property>
+    <property name="emf.ecore.xmi.jar" value="/local/daily_build/eclipse3.2_with_topcased/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.2.1.v200609210005.jar"></property>
+    <property name="os.arch" value="i386"></property>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"></property>
+    <property name="instrumented.dir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/junit/instrumented"></property>
+    <property name="kermeta.io.class" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/@dot"></property>
+    <property name="java.ext.dirs" value="/soft/jdk_hd/Linux/jdk1.5.0_11/jre/lib/ext"></property>
+    <property name="user.dir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io"></property>
+    <property name="line.separator" value="
+"></property>
+    <property name="java.vm.name" value="Java HotSpot(TM) Server VM"></property>
+    <property name="basedir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/junit"></property>
+    <property name="ant.java.version" value="1.4"></property>
+    <property name="file.encoding" value="ISO-8859-15"></property>
+    <property name="antlr.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/lib/thirdparty/antlr.jar"></property>
+    <property name="java.specification.version" value="1.5"></property>
+  </properties>
+  <testcase name="testvalid_003_associations" time="2.328"></testcase>
+  <testcase name="testvalid_005_operations" time="0.099"></testcase>
+  <testcase name="testvalid_005_operations_dep" time="0.077"></testcase>
+  <testcase name="testinvalid_001_cyclicinheritance_01" time="0.388"></testcase>
+  <testcase name="testinvalid_001_cyclicinheritance_02" time="0.374"></testcase>
+  <testcase name="testinvalid_001_cyclicinheritance_03" time="0.371"></testcase>
+  <testcase name="testinvalid_003_associations_01" time="0.067">
+    <failure message="Looking for a constraint error but none found" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: Looking for a constraint error but none found
+	at kermeta_io.constraintchecker_test.JunitTestSuite.testinvalidFile(JunitTestSuite.java:235)
+	at kermeta_io.constraintchecker_test.JunitTestSuite.testinvalid_003_associations_01(JunitTestSuite.java:91)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+</failure>
+  </testcase>
+  <testcase name="testinvalid_003_associations_02" time="0.065"></testcase>
+  <testcase name="testinvalid_003_associations_03" time="0.066"></testcase>
+  <testcase name="testinvalid_003_associations_04" time="0.068"></testcase>
+  <testcase name="testinvalid_003_associations_05" time="0.066"></testcase>
+  <testcase name="testinvalid_003_associations_06" time="0.067">
+    <failure message="Looking for a constraint error but none found" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: Looking for a constraint error but none found
+	at kermeta_io.constraintchecker_test.JunitTestSuite.testinvalidFile(JunitTestSuite.java:235)
+	at kermeta_io.constraintchecker_test.JunitTestSuite.testinvalid_003_associations_06(JunitTestSuite.java:111)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+</failure>
+  </testcase>
+  <testcase name="testinvalid_003_associations_07" time="0.066">
+    <failure message="Looking for a constraint error but none found" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: Looking for a constraint error but none found
+	at kermeta_io.constraintchecker_test.JunitTestSuite.testinvalidFile(JunitTestSuite.java:235)
+	at kermeta_io.constraintchecker_test.JunitTestSuite.testinvalid_003_associations_07(JunitTestSuite.java:115)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+</failure>
+  </testcase>
+  <testcase name="testinvalid_004_cyclicCompositions_01" time="0.065"></testcase>
+  <testcase name="testinvalid_004_cyclicCompositions_02" time="0.071"></testcase>
+  <testcase name="testinvalid_004_cyclicCompositions_03" time="0.064"></testcase>
+  <testcase name="testinvalid_004_cyclicCompositions_04" time="0.07"></testcase>
+  <testcase name="testinvalid_004_cyclicCompositions_05" time="0.066"></testcase>
+  <testcase name="testinvalid_005_superoperations_parammismatch1_inv" time="0.071">
+    <failure message="Looking for a constraint error but none found" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: Looking for a constraint error but none found
+	at kermeta_io.constraintchecker_test.JunitTestSuite.testinvalidFile(JunitTestSuite.java:235)
+	at kermeta_io.constraintchecker_test.JunitTestSuite.testinvalid_005_superoperations_parammismatch1_inv(JunitTestSuite.java:139)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+</failure>
+  </testcase>
+  <testcase name="testinvalid_005_superoperations_parammismatch2_inv" time="0.068">
+    <failure message="Looking for a constraint error but none found" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: Looking for a constraint error but none found
+	at kermeta_io.constraintchecker_test.JunitTestSuite.testinvalidFile(JunitTestSuite.java:235)
+	at kermeta_io.constraintchecker_test.JunitTestSuite.testinvalid_005_superoperations_parammismatch2_inv(JunitTestSuite.java:143)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+</failure>
+  </testcase>
+  <testcase name="testinvalid_005_superoperations_parammismatch3_inv" time="0.069"></testcase>
+  <testcase name="testinvalid_005_superoperations_parammismatch4_inv" time="0.068"></testcase>
+  <testcase name="testinvalid_005_superoperations_parammismatch5_inv" time="0.07"></testcase>
+  <testcase name="testinvalid_006_inheritedproperty1_inv" time="0.063"></testcase>
+  <testcase name="testinvalid_006_inheritedproperty2_inv" time="0.063"></testcase>
+  <testcase name="testinvalid_006_inheritedproperty3_inv" time="0.062"></testcase>
+  <testcase name="testinvalid_006_inheritedproperty4_inv" time="0.063"></testcase>
+  <system-out><![CDATA[WARN   configureLogger, not able to retrieve log4jconfiguration file; check the system property kermeta.log4j.configurationfile.name="null"
+0 [main] WARN root  - not able to retrieve log4jconfiguration file; check the system property kermeta.log4j.configurationfile.name="null"
+WARN   configureLogger, using default configuration (ie. all messages on the console)
+3 [main] WARN root  - using default configuration (ie. all messages on the console)
+free memory before running gc(): 87309872
+free memory after running gc(): 96551136
+free memory before running gc(): 89912776
+free memory after running gc(): 96486048
+free memory before running gc(): 96486048
+free memory after running gc(): 97059184
+free memory before running gc(): 97059184
+free memory after running gc(): 97079832
+load Ok for 001_cyclicinheritance_01.kmt
+free memory before running gc(): 45309928
+free memory after running gc(): 96947568
+load Ok for 001_cyclicinheritance_02.kmt
+free memory before running gc(): 44084600
+free memory after running gc(): 96365952
+load Ok for 001_cyclicinheritance_03.kmt
+free memory before running gc(): 43505280
+free memory after running gc(): 97070784
+load Ok for 003_associations_01.kmt
+free memory before running gc(): 97070784
+free memory after running gc(): 96339496
+load Ok for 003_associations_02.kmt
+succesfully found error in 003_associations_02.kmt
+Double composition problem (container contained by its content)class B{
+	...
+	attribute a : root_package::A#b
+	...
+}
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/003_associations_02.kmt (line -2)
+Double composition problem (container contained by its content)class A{
+	...
+	attribute b : root_package::B#a
+	...
+}
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/003_associations_02.kmt (line -2)
+
+free memory before running gc(): 96339496
+free memory after running gc(): 96979448
+load Ok for 003_associations_03.kmt
+succesfully found error in 003_associations_03.kmt
+Opposite mismatch  : the association is illformed. class B{
+	...
+	reference r1 : root_package::A#b
+	...
+}
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/003_associations_03.kmt (line -2)
+Opposite mismatch  : the association is illformed. class A{
+	...
+	reference b : root_package::B#r2
+	...
+}
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/003_associations_03.kmt (line -2)
+Opposite mismatch  : the association is illformed. class B{
+	...
+	reference r2 : root_package::A
+	...
+}
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/003_associations_03.kmt (line -2)
+
+free memory before running gc(): 96979448
+free memory after running gc(): 96359480
+load Ok for 003_associations_04.kmt
+succesfully found error in 003_associations_04.kmt
+Opposite mismatch  : the association is illformed. class B{
+	...
+	reference r1 : root_package::A#b
+	...
+}
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/003_associations_04.kmt (line -2)
+Opposite mismatch  : the association is illformed. class A{
+	...
+	reference b : root_package::B#r2
+	...
+}
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/003_associations_04.kmt (line -2)
+
+free memory before running gc(): 96359480
+free memory after running gc(): 96931944
+load Ok for 003_associations_05.kmt
+succesfully found error in 003_associations_05.kmt
+Opposite mismatch  : the association is illformed. class B{
+	...
+	reference r1 : root_package::A#b
+	...
+}
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/003_associations_05.kmt (line -2)
+Opposite mismatch  : the association is illformed. class A{
+	...
+	attribute b : root_package::B
+	...
+}
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/003_associations_05.kmt (line -2)
+
+free memory before running gc(): 96931944
+free memory after running gc(): 96322616
+load Ok for 003_associations_06.kmt
+free memory before running gc(): 96322616
+free memory after running gc(): 96829424
+load Ok for 003_associations_07.kmt
+free memory before running gc(): 96829424
+free memory after running gc(): 96329424
+load Ok for 004_cyclicCompositions_01.kmt
+les cycles sont :[[B, A], [A, B]]
+succesfully found error in 004_cyclicCompositions_01.kmt
+CONSTRAINT-CHECKER : Cycle of composition : [[B, A], [A, B]]
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/004_cyclicCompositions_01.kmt (line -2)
+
+free memory before running gc(): 96329424
+free memory after running gc(): 96767048
+load Ok for 004_cyclicCompositions_02.kmt
+les cycles sont :[[C, A, B], [B, C, A], [A, B, C]]
+succesfully found error in 004_cyclicCompositions_02.kmt
+CONSTRAINT-CHECKER : Cycle of composition : [[C, A, B], [B, C, A], [A, B, C]]
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/004_cyclicCompositions_02.kmt (line -2)
+
+free memory before running gc(): 96767048
+free memory after running gc(): 96292976
+load Ok for 004_cyclicCompositions_03.kmt
+les cycles sont :[[H, G], [G, H]]
+succesfully found error in 004_cyclicCompositions_03.kmt
+CONSTRAINT-CHECKER : Cycle of composition : [[H, G], [G, H]]
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/004_cyclicCompositions_03.kmt (line -2)
+
+free memory before running gc(): 96292976
+free memory after running gc(): 96683208
+load Ok for 004_cyclicCompositions_04.kmt
+les cycles sont :[[H, G], [G, H], [D, C], [C, D], [B, A], [A, B]]
+succesfully found error in 004_cyclicCompositions_04.kmt
+CONSTRAINT-CHECKER : Cycle of composition : [[H, G], [G, H], [D, C], [C, D], [B, A], [A, B]]
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/004_cyclicCompositions_04.kmt (line -2)
+
+free memory before running gc(): 96683208
+free memory after running gc(): 96306072
+load Ok for 004_cyclicCompositions_05.kmt
+succesfully found error in 004_cyclicCompositions_05.kmt
+Double composition problem (container contained by its content)class A{
+	...
+	attribute b : root_package::B#a
+	...
+}
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/004_cyclicCompositions_05.kmt (line -2)
+
+free memory before running gc(): 96306072
+free memory after running gc(): 96630768
+load Ok for 005_superoperations_parammismatch1_inv.kmt
+free memory before running gc(): 96630768
+free memory after running gc(): 96610144
+load Ok for 005_superoperations_parammismatch2_inv.kmt
+free memory before running gc(): 96610144
+free memory after running gc(): 96459368
+load Ok for 005_superoperations_parammismatch3_inv.kmt
+succesfully found error in 005_superoperations_parammismatch3_inv.kmt
+CONSTRAINT-CHECKER: 'm' and 'm' do not have the same number of parameters.
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/005_superoperations_parammismatch3_inv.kmt (line -2)
+
+free memory before running gc(): 96459368
+free memory after running gc(): 96570464
+load Ok for 005_superoperations_parammismatch4_inv.kmt
+succesfully found error in 005_superoperations_parammismatch4_inv.kmt
+CONSTRAINT-CHECKER: 'm' and 'm' do not have the same number of parameters.
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/005_superoperations_parammismatch4_inv.kmt (line -2)
+
+free memory before running gc(): 96570464
+free memory after running gc(): 96553864
+load Ok for 005_superoperations_parammismatch5_inv.kmt
+succesfully found error in 005_superoperations_parammismatch5_inv.kmt
+CONSTRAINT-CHECKER: 'C2.op1' is not well redefined : parameters a : kermeta::standard::String, b : kermeta::standard::Integer (expected [a : kermeta::standard::Integer, b : kermeta::standard::String]
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/005_superoperations_parammismatch5_inv.kmt (line -2)
+
+free memory before running gc(): 96553864
+free memory after running gc(): 96267832
+load Ok for 006_inheritedproperty1_inv.kmt
+succesfully found error in 006_inheritedproperty1_inv.kmt
+CONSTRAINT-CHECKER: Class 'C3' duplicate definition of property 'p1'.
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/006_inheritedproperty1_inv.kmt (line -2)
+
+free memory before running gc(): 96267832
+free memory after running gc(): 96451224
+load Ok for 006_inheritedproperty2_inv.kmt
+succesfully found error in 006_inheritedproperty2_inv.kmt
+CONSTRAINT-CHECKER: Class 'C2' duplicate definition of property 'p1'.
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/006_inheritedproperty2_inv.kmt (line -2)
+
+free memory before running gc(): 96451224
+free memory after running gc(): 96497736
+load Ok for 006_inheritedproperty3_inv.kmt
+succesfully found error in 006_inheritedproperty3_inv.kmt
+CONSTRAINT-CHECKER: Class 'C3' duplicate definition of property 'p1'.
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/006_inheritedproperty3_inv.kmt (line -2)
+
+free memory before running gc(): 96497736
+free memory after running gc(): 96484520
+load Ok for 006_inheritedproperty4_inv.kmt
+succesfully found error in 006_inheritedproperty4_inv.kmt
+CONSTRAINT-CHECKER: Class 'C3' duplicate definition of property 'p1'.
+  ->   file:/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/constraintchecker_tests/invalid/006_inheritedproperty4_inv.kmt (line -2)
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

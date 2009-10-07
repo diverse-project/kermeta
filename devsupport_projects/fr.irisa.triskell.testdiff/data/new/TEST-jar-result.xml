@@ -1,0 +1,1387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="3" failures="0" name="kermeta_interpreter.jar_test.JunitTestSuite" tests="3" time="1.024">
+  <properties>
+    <property name="java.vendor" value="Sun Microsystems Inc."></property>
+    <property name="equinox.preferences.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.equinox.preferences_3.2.100.v20070522.jar"></property>
+    <property name="kermeta.io.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/@dot"></property>
+    <property name="sun.java.launcher" value="SUN_STANDARD"></property>
+    <property name="sun.management.compiler" value="HotSpot Server Compiler"></property>
+    <property name="osgi.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.osgi_3.3.0.v20070530.jar"></property>
+    <property name="os.name" value="Linux"></property>
+    <property name="sun.boot.class.path" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/i18n.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/sunrsasign.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/jsse.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/jce.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/charsets.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/classes"></property>
+    <property name="triskell.eclipse.util.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.eclipse.util/@dot"></property>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="ant.home" value="/udd/triskell/bin/multiplatform/apache-ant-1.5.4"></property>
+    <property name="java.runtime.version" value="1.5.0_12-b04"></property>
+    <property name="equinox.common.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.equinox.common_3.3.0.v20070426.jar"></property>
+    <property name="cobertura.dir" value="/udd/triskell/bin/multiplatform/cobertura-1.7/"></property>
+    <property name="user.name" value="dvojtise"></property>
+    <property name="core.runtime.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.core.runtime_3.3.100.v20070530.jar"></property>
+    <property name="ui.workbench.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.ui.workbench_3.3.0.I20070608-1100.jar"></property>
+    <property name="user.language" value="en"></property>
+    <property name="core.jobs.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.core.jobs_3.3.0.v20070423.jar"></property>
+    <property name="sun.boot.library.path" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/i386"></property>
+    <property name="ant.project.name" value="run interpreter tests"></property>
+    <property name="java.version" value="1.5.0_12"></property>
+    <property name="build.bin" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/build/class"></property>
+    <property name="coverage.html.dir" value="/tmp/kermeta_build/unittestreports/coverage/html"></property>
+    <property name="user.timezone" value="Europe/Paris"></property>
+    <property name="sun.arch.data.model" value="32"></property>
+    <property name="java.endorsed.dirs" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/endorsed"></property>
+    <property name="sun.cpu.isalist" value=""></property>
+    <property name="emf.validation.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.emf.validation_1.1.0.v200706071520.jar"></property>
+    <property name="sun.jnu.encoding" value="ISO-8859-15"></property>
+    <property name="file.encoding.pkg" value="sun.io"></property>
+    <property name="file.separator" value="/"></property>
+    <property name="java.specification.name" value="Java Platform API Specification"></property>
+    <property name="java.class.version" value="49.0"></property>
+    <property name="src" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/src/java"></property>
+    <property name="user.country" value="US"></property>
+    <property name="ldt-core.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/thirdparty/ldt-core.jar"></property>
+    <property name="java.home" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre"></property>
+    <property name="java.vm.info" value="mixed mode"></property>
+    <property name="ant.file" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/junit/test_build.xml"></property>
+    <property name="os.version" value="2.6.19-1.2911.6.4.fc6"></property>
+    <property name="path.separator" value=":"></property>
+    <property name="eclipse.home" value="/local/daily_build/eclipse3.3_with_topcased/eclipse"></property>
+    <property name="java.vm.version" value="1.5.0_12-b04"></property>
+    <property name="report.dir" value="/tmp/kermeta_build/unittestreports"></property>
+    <property name="emf.ecore.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.emf.ecore_2.3.0.v200706262000.jar"></property>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"></property>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"></property>
+    <property name="kermeta.model.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.model/@dot"></property>
+    <property name="kermeta.interpreter.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/interpreter_kermeta.jar"></property>
+    <property name="coverage.dir" value="/tmp/kermeta_build/unittestreports/coverage"></property>
+    <property name="user.home" value="/udd/dvojtise"></property>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="coverage.xml.dir" value="/tmp/kermeta_build/unittestreports/coverage/xml"></property>
+    <property name="java.library.path" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/i386/server:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/i386:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/../lib/i386"></property>
+    <property name="java.vendor.url" value="http://java.sun.com/"></property>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."></property>
+    <property name="cobertura.lib.dir" value="/udd/triskell/bin/multiplatform/cobertura-1.7/lib"></property>
+    <property name="java.runtime.name" value="Java(TM) 2 Runtime Environment, Standard Edition"></property>
+    <property name="java.class.path" value="/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xml-apis.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xercesImpl.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xalan.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/optional.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/junit.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/ant.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/junit.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/optional.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/lib/tools.jar"></property>
+    <property name="ant.version" value="Apache Ant version 1.5.4 compiled on August 12 2003"></property>
+    <property name="traceability.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.traceability.model/@dot"></property>
+    <property name="core.resources.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.core.resources_3.3.0.v20070604.jar"></property>
+    <property name="swt.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.swt.gtk.linux.x86_3.3.0.v3346.jar"></property>
+    <property name="emf.common.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.emf.common_2.3.0.v200706262000.jar"></property>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"></property>
+    <property name="java.vm.specification.version" value="1.0"></property>
+    <property name="sun.cpu.endian" value="little"></property>
+    <property name="sun.os.patch.level" value="unknown"></property>
+    <property name="log4j.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/thirdparty/log4j.jar"></property>
+    <property name="java.io.tmpdir" value="/tmp"></property>
+    <property name="test.src" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/junit"></property>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"></property>
+    <property name="emf.ecore.xmi.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar"></property>
+    <property name="instrumented.dir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/junit/instrumented"></property>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"></property>
+    <property name="os.arch" value="i386"></property>
+    <property name="java.ext.dirs" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/ext"></property>
+    <property name="user.dir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter"></property>
+    <property name="equinox.registry.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.equinox.registry_3.3.0.v20070522.jar"></property>
+    <property name="line.separator" value="
+"></property>
+    <property name="java.vm.name" value="Java HotSpot(TM) Server VM"></property>
+    <property name="kermeta.interpreter.class" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/build/class"></property>
+    <property name="jface.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.jface_3.3.0.I20070606-0010.jar"></property>
+    <property name="basedir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.interpreter/test/junit"></property>
+    <property name="ant.java.version" value="1.4"></property>
+    <property name="file.encoding" value="ISO-8859-15"></property>
+    <property name="antlr.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/lib/thirdparty/antlr.jar"></property>
+    <property name="java.specification.version" value="1.5"></property>
+  </properties>
+  <testcase name="testRequireJavaRT::testRequireJava.testmain" time="0.911">
+    <error message="kermeta exception : [kermeta::exceptions::RuntimeError : 966]" type="fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException">fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::exceptions::RuntimeError : 966]
+Problem calling java operation or constructor initialize_File
+Trace: 
+  -&gt; file &apos;platform:/plugin/fr.irisa.triskell.kermeta.interpreter/test/jar_testcases/kermeta/001_requireJava_rt_io.main.kmt&apos;, line 35, in &apos;[java::io::FileWriter : 951].initialize_File&apos; ( java::io::FileWriter.new.initialize_File(f) )
+ -&gt; file &apos;platform:/plugin/fr.irisa.triskell.kermeta.interpreter/test/jar_testcases/kermeta/001_requireJava_rt_io.main.kmt&apos;, line 31, in &apos;[testRequireJavaRT::testRequireJava : 934].testmain&apos; ( operation testmain() : Void is (...) )
+------------END OF STACK TRACE------------
+
+Underlying java exception cause : null
+	at fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException.createKermetaException(KermetaRaisedException.java:230)
+	at fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException.createKermetaException(KermetaRaisedException.java:252)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invokeOperationOnProxy(ExpressionInterpreter.java:1043)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitCallFeature(ExpressionInterpreter.java:871)
+	at fr.irisa.triskell.kermeta.visitor.CallFeatureAcceptCommand.accept(KermetaOptimizedVisitor.java:425)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitVariableDecl(ExpressionInterpreter.java:171)
+	at fr.irisa.triskell.kermeta.visitor.VariableDeclAcceptCommand.accept(KermetaOptimizedVisitor.java:527)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitStatementList(ExpressionInterpreter.java:1441)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitBlock(ExpressionInterpreter.java:569)
+	at fr.irisa.triskell.kermeta.visitor.BlockAcceptCommand.accept(KermetaOptimizedVisitor.java:455)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.visitOperation(ExpressionInterpreter.java:745)
+	at fr.irisa.triskell.kermeta.visitor.OperationAcceptCommand.accept(KermetaOptimizedVisitor.java:557)
+	at fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor.accept(KermetaOptimizedVisitor.java:171)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invoke(ExpressionInterpreter.java:144)
+	at fr.irisa.triskell.kermeta.launcher.KermetaInterpreter.launch(KermetaInterpreter.java:279)
+	at fr.irisa.triskell.kermeta.launcher.RunTestCase.runTest(RunTestCase.java:115)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:494)
+	at fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter.invokeOperationOnProxy(ExpressionInterpreter.java:1004)
+	... 39 more
+Caused by: java.io.FileNotFoundException: c:/temp/test.txt (No such file or directory)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:179)
+	at java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:131)
+	at java.io.FileWriter.&lt;init&gt;(FileWriter.java:73)
+	... 44 more
+</error>
+  </testcase>
+  <testcase name="Unit platform:/plugin/fr.irisa.triskell.kermeta.interpreter/test/jar_testcases/kermeta/002_requireJava_rt_awt.main.kmt contains errors (ie. didn&apos;t load or typecheck correctly)" time="0.0020">
+    <error message="In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharArrayReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::LineNumberInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::LineNumberReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::NotActiveException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PushbackReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SequenceInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SerializablePermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StreamCorruptedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringBufferInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UTFDataFormatException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::WriteAbortedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OptionalDataException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharArrayWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharConversionException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInputValidation&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SyncFailedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::NotSerializableException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InvalidObjectException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InvalidClassException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Bits&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InterruptedIOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PushbackInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UnsupportedEncodingException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::EOFException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Externalizable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PrintWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamConstants&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectOutput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::RandomAccessFile&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataOutput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StreamTokenizer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilenameFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InputStreamReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Reader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilePermissionCollection&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilePermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileNotFoundException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::IOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ByteArrayOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ByteArrayInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataInput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ExpiringCache&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UnixFileSystem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileSystem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::File&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OutputStreamWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Writer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PrintStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Flushable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileDescriptor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Closeable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamClass&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamField&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Serializable&apos; already exists.
+" type="java.lang.Exception">java.lang.Exception: In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharArrayReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::LineNumberInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::LineNumberReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::NotActiveException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PushbackReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SequenceInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SerializablePermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StreamCorruptedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringBufferInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UTFDataFormatException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::WriteAbortedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OptionalDataException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharArrayWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharConversionException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInputValidation&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SyncFailedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::NotSerializableException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InvalidObjectException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InvalidClassException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Bits&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InterruptedIOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PushbackInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UnsupportedEncodingException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::EOFException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Externalizable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PrintWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamConstants&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectOutput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::RandomAccessFile&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataOutput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StreamTokenizer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilenameFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InputStreamReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Reader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilePermissionCollection&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilePermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileNotFoundException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::IOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ByteArrayOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ByteArrayInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataInput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ExpiringCache&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UnixFileSystem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileSystem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::File&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OutputStreamWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Writer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PrintStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Flushable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileDescriptor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Closeable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamClass&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamField&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Serializable&apos; already exists.
+
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:89)
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:60)
+	at kermeta_interpreter.jar_test.JunitTestSuite.testWithFile(JunitTestSuite.java:85)
+	at kermeta_interpreter.jar_test.JunitTestSuite.&lt;init&gt;(JunitTestSuite.java:64)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:494)
+</error>
+  </testcase>
+  <testcase name="Unit platform:/plugin/fr.irisa.triskell.kermeta.interpreter/test/jar_testcases/kermeta/003_requireJava_rt_math.main.kmt contains errors (ie. didn&apos;t load or typecheck correctly)" time="0.031">
+    <error message="In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharArrayReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::LineNumberInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::LineNumberReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::NotActiveException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PushbackReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SequenceInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SerializablePermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StreamCorruptedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringBufferInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UTFDataFormatException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::WriteAbortedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OptionalDataException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharArrayWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharConversionException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInputValidation&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SyncFailedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::NotSerializableException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InvalidObjectException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InvalidClassException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Bits&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InterruptedIOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PushbackInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UnsupportedEncodingException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::EOFException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Externalizable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PrintWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamConstants&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectOutput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::RandomAccessFile&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataOutput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StreamTokenizer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilenameFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InputStreamReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Reader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilePermissionCollection&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilePermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileNotFoundException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::IOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ByteArrayOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ByteArrayInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataInput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ExpiringCache&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UnixFileSystem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileSystem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::File&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OutputStreamWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Writer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PrintStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Flushable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileDescriptor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Closeable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamClass&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamField&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Serializable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AttributeValue&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Button&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Checkbox&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::CheckboxGroup&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::CheckboxMenuItem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Choice&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ColorPaintContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::CompositeContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::DisplayMode&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::FileDialog&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::FocusManager&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GradientPaint&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GradientPaintContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GraphicsConfigTemplate&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GridBagConstraints&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GridBagLayout&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GridBagLayoutInfo&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::IllegalComponentStateException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Label&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::List&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MenuShortcut&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MouseInfo&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PaintContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PeerFixer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Polygon&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Robot&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ScrollPane&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ScrollPaneAdjustable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Scrollbar&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::TextArea&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::TextComponent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::TextField&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::TexturePaint&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::TexturePaintContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::CMMException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::ICC_ProfileGray&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::ProfileDataException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::FlavorEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::FlavorListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::MimeTypeParseException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::StringSelection&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::UnsupportedFlavorException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::Autoscroll&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DnDConstants&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DnDEventMulticaster&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceDragEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceDropEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceMotionListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTargetAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTargetDragEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTargetDropEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTargetEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::MouseDragGestureRecognizer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::SerializationTester&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ContainerAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::HierarchyBoundsAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::TextEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::CharArrayIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::GlyphJustificationInfo&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::GlyphMetrics&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::GraphicAttribute&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::ImageGraphicAttribute&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::LineBreakMeasurer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::MultipleMaster&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::NumericShaper&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::OpenType&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::ShapeGraphicAttribute&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::StyledParagraph&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TextHitInfo&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TextJustifier&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TextLayout&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TextLine&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TextMeasurer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Arc2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::ArcIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Area&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::AreaIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::CubicCurve2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::CubicIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Ellipse2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::EllipseIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::FlatteningPathIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::GeneralPathIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::IllegalPathStateException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Line2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::LineIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::NoninvertibleTransformException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::PathIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::QuadCurve2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::QuadIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::RectIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::RoundRectIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::RoundRectangle2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::InputSubset&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::AffineTransformOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::AreaAveragingScaleFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::BandCombineOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::BandedSampleModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::BufferedImageFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::BufferedImageOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ByteLookupTable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ColorConvertOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ComponentColorModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ConvolveOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::CropImageFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBufferDouble&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBufferFloat&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBufferShort&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBufferUShort&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ImagingOpException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::Kernel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::LookupOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::LookupTable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::MemoryImageSource&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::MultiPixelPackedSampleModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::PixelGrabber&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::RasterFormatException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::RasterOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ReplicateScaleFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::RescaleOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ShortLookupTable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::TileObserver&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::ContextualRenderedImageFactory&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::ParameterBlock&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::RenderContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::RenderableImage&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::RenderableImageOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::RenderableImageProducer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::RenderedImageFactory&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ButtonPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::CheckboxMenuItemPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::CheckboxPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ChoicePeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::DialogPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::FileDialogPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::FontPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::LabelPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ListPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::MenuBarPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::MenuItemPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::MenuPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::MouseInfoPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::PopupMenuPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::RobotPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ScrollPanePeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ScrollbarPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::TextAreaPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::TextComponentPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::TextFieldPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::Book&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::Pageable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::Paper&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::Printable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::PrinterIOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharArrayReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::LineNumberInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::LineNumberReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::NotActiveException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PushbackReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SequenceInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SerializablePermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StreamCorruptedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringBufferInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UTFDataFormatException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::WriteAbortedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AWTError&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::PageFormat&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AWTPermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::PrinterJob&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::PrinterAbortException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::PrinterException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OptionalDataException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharArrayWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharConversionException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GraphicsCallback&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInputValidation&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SyncFailedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::NotSerializableException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InvalidObjectException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::spi::InputMethod&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::SentEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::peer::DropTargetContextPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InvalidClassException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Bits&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::FontFormatException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InterruptedIOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ItemEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GridLayout&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::FilteredImageSource&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::RGBImageFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ImageFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PrintGraphics&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::PrinterGraphics&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PushbackInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UnsupportedEncodingException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::SequencedEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::WindowEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MenuBar&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::AdjustmentEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::spi::InputMethodDescriptor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::spi::InputMethodContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Panel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::ClipboardOwner&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ComponentAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTargetContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::LineMetrics&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::GlyphVector&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::RenderingHints&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Adjustable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::WindowAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::FocusAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::AWTEventListenerProxy&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ContainerEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::CardLayout&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AWTEventMulticaster&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::TextListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::AdjustmentListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::WindowStateListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::WindowFocusListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ItemListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::VKCollection&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::FlowLayout&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseMotionAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ActionListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::EOFException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::Transferable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::DataFlavor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::MimeTypeParameterList&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::MimeType&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Externalizable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::SystemFlavorMap&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::FlavorTable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::FlavorMap&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::SinglePixelPackedSampleModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBufferInt&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ActionEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::EventQueueItem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::InvocationEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ActiveEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Conditional&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::PaintEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Dialog&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::LightweightPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::MenuComponentPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::BasicStroke&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Stroke&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AlphaComposite&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Graphics2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Composite&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::InputMethodEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::HierarchyEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::FocusEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::InputMethodRequests&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::InputContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PointerInfo&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::VolatileImage&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AWTException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::BufferCapabilities&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseWheelEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Event&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Graphics&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PrintWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamConstants&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectOutput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PopupMenu&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Menu&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MenuItem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MenuComponent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ContainerListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::InputMethodListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseWheelListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseMotionListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::HierarchyBoundsListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::HierarchyListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::FocusListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ComponentListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTarget&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTargetListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::BufferStrategy&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::peer::DropTargetPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::CanvasPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::PanelPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::FramePeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::WindowPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ContainerPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ComponentPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::BorderLayout&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::LayoutManager2&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::LightweightDispatcher&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::RandomAccessFile&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataOutput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Canvas&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::BufferedImage&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::WritableRenderedImage&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::RenderedImage&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Rectangle&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::WritableRaster&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::PixelInterleavedSampleModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ComponentSampleModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::SampleModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBufferByte&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBuffer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::Raster&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::IndexColorModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::ICC_ColorSpace&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::ICC_ProfileRGB&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::ICC_Profile&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::ColorSpace&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DirectColorModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::PackedColorModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ImageConsumer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ImageMediaEntry&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MediaEntry&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MediaTracker&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ComponentOrientation&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::NativeLibLoader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::KeyEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::InputEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ComponentEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::WindowListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::LayoutManager&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ItemSelectable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::KeyboardFocusManagerPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MutableBoolean&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::DefaultFocusTraversalPolicy&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ContainerOrderFocusTraversalPolicy&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::FocusTraversalPolicy&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::DefaultKeyboardFocusManager&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AWTKeyStroke&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::KeyboardFocusManager&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::KeyEventPostProcessor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::KeyEventDispatcher&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::InputMethodHighlight&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::Clipboard&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PageAttributes&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::JobAttributes&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PrintJob&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::InvalidDnDOperationException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::peer::DragSourceContextPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragGestureEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragGestureRecognizer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragGestureListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSource&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Cursor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Point&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::AWTEventListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Dimension&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Dimension2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::HeadlessException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ColorModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ImageProducer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Image&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::SystemColor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Color&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Paint&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Transparency&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TextAttribute&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Insets&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Queue&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::EventDispatchThread&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AWTEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ImageCapabilities&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GraphicsConfiguration&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GraphicsDevice&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::GeneralPath&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Rectangle2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::RectangularShape&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Shape&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Point2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::FontRenderContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::AffineTransform&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TransformAttribute&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Font&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StreamTokenizer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilenameFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::FontMetrics&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Toolkit&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GraphicsEnvironment&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::EventQueue&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Frame&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Window&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Container&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Component&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MenuContainer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ImageObserver&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::KeyAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::KeyListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InputStreamReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Reader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilePermissionCollection&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilePermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileNotFoundException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::IOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ByteArrayOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ByteArrayInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataInput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ExpiringCache&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UnixFileSystem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileSystem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::File&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OutputStreamWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Writer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PrintStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Flushable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileDescriptor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Closeable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamClass&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamField&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Serializable&apos; already exists.
+" type="java.lang.Exception">java.lang.Exception: In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharArrayReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::LineNumberInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::LineNumberReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::NotActiveException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PushbackReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SequenceInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SerializablePermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StreamCorruptedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringBufferInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UTFDataFormatException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::WriteAbortedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OptionalDataException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharArrayWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharConversionException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInputValidation&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SyncFailedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::NotSerializableException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InvalidObjectException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InvalidClassException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Bits&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InterruptedIOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PushbackInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UnsupportedEncodingException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::EOFException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Externalizable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PrintWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamConstants&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectOutput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::RandomAccessFile&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataOutput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StreamTokenizer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilenameFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InputStreamReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Reader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilePermissionCollection&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilePermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileNotFoundException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::IOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ByteArrayOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ByteArrayInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataInput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ExpiringCache&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UnixFileSystem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileSystem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::File&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OutputStreamWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Writer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PrintStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Flushable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileDescriptor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Closeable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamClass&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamField&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Serializable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AttributeValue&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Button&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Checkbox&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::CheckboxGroup&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::CheckboxMenuItem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Choice&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ColorPaintContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::CompositeContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::DisplayMode&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::FileDialog&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::FocusManager&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GradientPaint&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GradientPaintContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GraphicsConfigTemplate&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GridBagConstraints&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GridBagLayout&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GridBagLayoutInfo&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::IllegalComponentStateException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Label&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::List&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MenuShortcut&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MouseInfo&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PaintContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PeerFixer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Polygon&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Robot&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ScrollPane&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ScrollPaneAdjustable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Scrollbar&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::TextArea&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::TextComponent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::TextField&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::TexturePaint&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::TexturePaintContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::CMMException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::ICC_ProfileGray&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::ProfileDataException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::FlavorEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::FlavorListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::MimeTypeParseException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::StringSelection&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::UnsupportedFlavorException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::Autoscroll&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DnDConstants&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DnDEventMulticaster&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceDragEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceDropEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSourceMotionListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTargetAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTargetDragEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTargetDropEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTargetEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::MouseDragGestureRecognizer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::SerializationTester&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ContainerAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::HierarchyBoundsAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::TextEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::CharArrayIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::GlyphJustificationInfo&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::GlyphMetrics&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::GraphicAttribute&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::ImageGraphicAttribute&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::LineBreakMeasurer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::MultipleMaster&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::NumericShaper&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::OpenType&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::ShapeGraphicAttribute&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::StyledParagraph&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TextHitInfo&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TextJustifier&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TextLayout&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TextLine&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TextMeasurer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Arc2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::ArcIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Area&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::AreaIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::CubicCurve2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::CubicIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Ellipse2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::EllipseIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::FlatteningPathIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::GeneralPathIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::IllegalPathStateException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Line2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::LineIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::NoninvertibleTransformException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::PathIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::QuadCurve2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::QuadIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::RectIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::RoundRectIterator&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::RoundRectangle2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::InputSubset&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::AffineTransformOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::AreaAveragingScaleFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::BandCombineOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::BandedSampleModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::BufferedImageFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::BufferedImageOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ByteLookupTable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ColorConvertOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ComponentColorModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ConvolveOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::CropImageFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBufferDouble&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBufferFloat&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBufferShort&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBufferUShort&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ImagingOpException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::Kernel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::LookupOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::LookupTable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::MemoryImageSource&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::MultiPixelPackedSampleModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::PixelGrabber&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::RasterFormatException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::RasterOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ReplicateScaleFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::RescaleOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ShortLookupTable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::TileObserver&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::ContextualRenderedImageFactory&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::ParameterBlock&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::RenderContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::RenderableImage&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::RenderableImageOp&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::RenderableImageProducer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::renderable::RenderedImageFactory&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ButtonPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::CheckboxMenuItemPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::CheckboxPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ChoicePeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::DialogPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::FileDialogPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::FontPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::LabelPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ListPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::MenuBarPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::MenuItemPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::MenuPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::MouseInfoPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::PopupMenuPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::RobotPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ScrollPanePeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ScrollbarPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::TextAreaPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::TextComponentPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::TextFieldPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::Book&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::Pageable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::Paper&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::Printable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::PrinterIOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharArrayReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::LineNumberInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::LineNumberReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::NotActiveException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PipedWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PushbackReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SequenceInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SerializablePermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StreamCorruptedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringBufferInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UTFDataFormatException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::WriteAbortedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AWTError&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::PageFormat&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AWTPermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::PrinterJob&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::PrinterAbortException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::PrinterException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OptionalDataException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharArrayWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::CharConversionException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GraphicsCallback&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInputValidation&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::SyncFailedException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::NotSerializableException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InvalidObjectException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::spi::InputMethod&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::SentEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::peer::DropTargetContextPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InvalidClassException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Bits&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::FontFormatException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InterruptedIOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ItemEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GridLayout&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::FilteredImageSource&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::RGBImageFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ImageFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PrintGraphics&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::print::PrinterGraphics&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PushbackInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UnsupportedEncodingException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::SequencedEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::WindowEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MenuBar&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::AdjustmentEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::spi::InputMethodDescriptor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::spi::InputMethodContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Panel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::ClipboardOwner&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ComponentAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTargetContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::LineMetrics&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::GlyphVector&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::RenderingHints&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Adjustable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::WindowAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::FocusAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::AWTEventListenerProxy&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ContainerEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::CardLayout&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AWTEventMulticaster&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::TextListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::AdjustmentListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::WindowStateListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::WindowFocusListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ItemListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::VKCollection&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::FlowLayout&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseMotionAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ActionListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::EOFException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::Transferable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::DataFlavor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::MimeTypeParameterList&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::MimeType&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Externalizable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::SystemFlavorMap&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::FlavorTable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::FlavorMap&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StringReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::SinglePixelPackedSampleModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBufferInt&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ActionEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::EventQueueItem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::InvocationEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ActiveEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Conditional&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::PaintEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Dialog&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::LightweightPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::MenuComponentPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::BasicStroke&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Stroke&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AlphaComposite&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Graphics2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Composite&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::InputMethodEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::HierarchyEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::FocusEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::InputMethodRequests&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::InputContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PointerInfo&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::VolatileImage&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AWTException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::BufferCapabilities&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseWheelEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Event&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectInput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Graphics&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PrintWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamConstants&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectOutput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PopupMenu&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Menu&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MenuItem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MenuComponent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ContainerListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::InputMethodListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseWheelListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseMotionListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::MouseListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::HierarchyBoundsListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::HierarchyListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::FocusListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ComponentListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTarget&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DropTargetListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::BufferStrategy&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::peer::DropTargetPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::CanvasPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::PanelPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::FramePeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::WindowPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ContainerPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::ComponentPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::BorderLayout&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::LayoutManager2&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::LightweightDispatcher&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::RandomAccessFile&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataOutput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Canvas&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::BufferedImage&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::WritableRenderedImage&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::RenderedImage&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Rectangle&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::WritableRaster&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::PixelInterleavedSampleModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ComponentSampleModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::SampleModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBufferByte&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DataBuffer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::Raster&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::IndexColorModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::ICC_ColorSpace&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::ICC_ProfileRGB&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::ICC_Profile&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::color::ColorSpace&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::DirectColorModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::PackedColorModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ImageConsumer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ImageMediaEntry&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MediaEntry&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MediaTracker&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ComponentOrientation&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::NativeLibLoader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::KeyEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::InputEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::ComponentEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::WindowListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::LayoutManager&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ItemSelectable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::peer::KeyboardFocusManagerPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MutableBoolean&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::DefaultFocusTraversalPolicy&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ContainerOrderFocusTraversalPolicy&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::FocusTraversalPolicy&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::DefaultKeyboardFocusManager&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AWTKeyStroke&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::KeyboardFocusManager&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::KeyEventPostProcessor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::KeyEventDispatcher&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::im::InputMethodHighlight&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::datatransfer::Clipboard&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PageAttributes&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::JobAttributes&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::PrintJob&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::InvalidDnDOperationException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::peer::DragSourceContextPeer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragGestureEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragGestureRecognizer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragGestureListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::dnd::DragSource&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Cursor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Point&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::AWTEventListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Dimension&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Dimension2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::HeadlessException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ColorModel&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ImageProducer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Image&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::SystemColor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Color&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Paint&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Transparency&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TextAttribute&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Insets&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Queue&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::EventDispatchThread&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::AWTEvent&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::ImageCapabilities&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GraphicsConfiguration&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GraphicsDevice&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::GeneralPath&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Rectangle2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::RectangularShape&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Shape&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::Point2D&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::FontRenderContext&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::geom::AffineTransform&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::font::TransformAttribute&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Font&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::StreamTokenizer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilenameFilter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::FontMetrics&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Toolkit&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::GraphicsEnvironment&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::EventQueue&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Frame&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Window&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Container&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::Component&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::MenuContainer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::image::ImageObserver&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::KeyAdapter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::awt::event::KeyListener&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InputStreamReader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Reader&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilePermissionCollection&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilePermission&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileNotFoundException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::IOException&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ByteArrayOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ByteArrayInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::DataInput&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ExpiringCache&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::UnixFileSystem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileSystem&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::File&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OutputStreamWriter&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Writer&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::PrintStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::BufferedInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FilterInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileOutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::OutputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Flushable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileDescriptor&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::FileInputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::InputStream&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Closeable&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamClass&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::ObjectStreamField&apos; already exists.
+In file://soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar : A type definition for &apos;java::io::Serializable&apos; already exists.
+
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:89)
+	at fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:60)
+	at kermeta_interpreter.jar_test.JunitTestSuite.testWithFile(JunitTestSuite.java:85)
+	at kermeta_interpreter.jar_test.JunitTestSuite.&lt;init&gt;(JunitTestSuite.java:66)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:494)
+</error>
+  </testcase>
+  <system-out><![CDATA[ERROR  initializeMemory, INTERPRETER INITIALIZATION ERROR : The program contains errors:
+
+10058 [main] ERROR KMT.launcher  - INTERPRETER INITIALIZATION ERROR : The program contains errors:
+
+    ************************************************
+    * Consumed memory : 337313792/832045056
+    * #objects cached : 718
+    * #ro created     : 1054
+    * #ro total       : 1054
+    * time (ms)       : 908
+    ************************************************
+]]></system-out>
+  <system-err><![CDATA[Memory before interpreter : 337313792
+Memory after interpreter : 337313792
+]]></system-err>
+</testsuite>

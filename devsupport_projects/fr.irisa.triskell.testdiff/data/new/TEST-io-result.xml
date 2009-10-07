@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" name="kermeta_io.test.JunitTestSuite" tests="73" time="9.686">
+  <properties>
+    <property name="java.vendor" value="Sun Microsystems Inc."></property>
+    <property name="equinox.preferences.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.equinox.preferences_3.2.100.v20070522.jar"></property>
+    <property name="sun.java.launcher" value="SUN_STANDARD"></property>
+    <property name="sun.management.compiler" value="HotSpot Server Compiler"></property>
+    <property name="osgi.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.osgi_3.3.0.v20070530.jar"></property>
+    <property name="os.name" value="Linux"></property>
+    <property name="sun.boot.class.path" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/rt.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/i18n.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/sunrsasign.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/jsse.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/jce.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/charsets.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/classes"></property>
+    <property name="triskell.eclipse.util.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.eclipse.util/@dot"></property>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="ant.home" value="/udd/triskell/bin/multiplatform/apache-ant-1.5.4"></property>
+    <property name="java.runtime.version" value="1.5.0_12-b04"></property>
+    <property name="equinox.common.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.equinox.common_3.3.0.v20070426.jar"></property>
+    <property name="cobertura.dir" value="/udd/triskell/bin/multiplatform/cobertura-1.7/"></property>
+    <property name="user.name" value="dvojtise"></property>
+    <property name="core.runtime.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.core.runtime_3.3.100.v20070530.jar"></property>
+    <property name="ui.workbench.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.ui.workbench_3.3.0.I20070608-1100.jar"></property>
+    <property name="emfatic-core.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/thirdparty/emfatic-core.jar"></property>
+    <property name="user.language" value="en"></property>
+    <property name="sun.boot.library.path" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/i386"></property>
+    <property name="ant.project.name" value="run interpreter tests"></property>
+    <property name="java.version" value="1.5.0_12"></property>
+    <property name="build.bin" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/@dot"></property>
+    <property name="coverage.html.dir" value="/tmp/kermeta_build/unittestreports/coverage/html"></property>
+    <property name="user.timezone" value="Europe/Paris"></property>
+    <property name="sun.arch.data.model" value="32"></property>
+    <property name="java.endorsed.dirs" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/endorsed"></property>
+    <property name="sun.cpu.isalist" value=""></property>
+    <property name="sun.jnu.encoding" value="ISO-8859-15"></property>
+    <property name="file.encoding.pkg" value="sun.io"></property>
+    <property name="file.separator" value="/"></property>
+    <property name="java.specification.name" value="Java Platform API Specification"></property>
+    <property name="java.class.version" value="49.0"></property>
+    <property name="src" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/src/java"></property>
+    <property name="user.country" value="US"></property>
+    <property name="ldt-core.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/thirdparty/ldt-core.jar"></property>
+    <property name="java.home" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre"></property>
+    <property name="java.vm.info" value="mixed mode"></property>
+    <property name="ant.file" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/junit/test_build.xml"></property>
+    <property name="os.version" value="2.6.19-1.2911.6.4.fc6"></property>
+    <property name="path.separator" value=":"></property>
+    <property name="eclipse.home" value="/local/daily_build/eclipse3.3_with_topcased/eclipse"></property>
+    <property name="java.vm.version" value="1.5.0_12-b04"></property>
+    <property name="report.dir" value="/tmp/kermeta_build/unittestreports"></property>
+    <property name="emf.ecore.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.emf.ecore_2.3.0.v200706262000.jar"></property>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"></property>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"></property>
+    <property name="kermeta.model.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.model/@dot"></property>
+    <property name="coverage.dir" value="/tmp/kermeta_build/unittestreports/coverage"></property>
+    <property name="user.home" value="/udd/dvojtise"></property>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="coverage.xml.dir" value="/tmp/kermeta_build/unittestreports/coverage/xml"></property>
+    <property name="java.library.path" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/i386/server:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/i386:/soft/jdk_hd/Linux/jdk1.5.0_12/jre/../lib/i386"></property>
+    <property name="java.vendor.url" value="http://java.sun.com/"></property>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."></property>
+    <property name="cobertura.lib.dir" value="/udd/triskell/bin/multiplatform/cobertura-1.7/lib"></property>
+    <property name="java.runtime.name" value="Java(TM) 2 Runtime Environment, Standard Edition"></property>
+    <property name="java.class.path" value="/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xml-apis.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xercesImpl.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/xalan.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/optional.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/junit.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/ant.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/junit.jar:/udd/triskell/bin/multiplatform/apache-ant-1.5.4/lib/optional.jar:/soft/jdk_hd/Linux/jdk1.5.0_12/lib/tools.jar"></property>
+    <property name="ant.version" value="Apache Ant version 1.5.4 compiled on August 12 2003"></property>
+    <property name="traceability.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.traceability.model/@dot"></property>
+    <property name="swt.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.swt.gtk.linux.x86_3.3.0.v3346.jar"></property>
+    <property name="emf.common.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.emf.common_2.3.0.v200706262000.jar"></property>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"></property>
+    <property name="java.vm.specification.version" value="1.0"></property>
+    <property name="sun.cpu.endian" value="little"></property>
+    <property name="sun.os.patch.level" value="unknown"></property>
+    <property name="log4j.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta/lib/thirdparty/log4j.jar"></property>
+    <property name="java.io.tmpdir" value="/tmp"></property>
+    <property name="test.src" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/junit"></property>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"></property>
+    <property name="emf.ecore.xmi.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar"></property>
+    <property name="instrumented.dir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/junit/instrumented"></property>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"></property>
+    <property name="os.arch" value="i386"></property>
+    <property name="kermeta.io.class" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/@dot"></property>
+    <property name="java.ext.dirs" value="/soft/jdk_hd/Linux/jdk1.5.0_12/jre/lib/ext"></property>
+    <property name="user.dir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io"></property>
+    <property name="equinox.registry.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.equinox.registry_3.3.0.v20070522.jar"></property>
+    <property name="line.separator" value="
+"></property>
+    <property name="java.vm.name" value="Java HotSpot(TM) Server VM"></property>
+    <property name="jface.jar" value="/local/daily_build/eclipse3.3_with_topcased/eclipse/plugins/org.eclipse.jface_3.3.0.I20070606-0010.jar"></property>
+    <property name="basedir" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/test/junit"></property>
+    <property name="ant.java.version" value="1.4"></property>
+    <property name="file.encoding" value="ISO-8859-15"></property>
+    <property name="antlr.jar" value="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.io/lib/thirdparty/antlr.jar"></property>
+    <property name="java.specification.version" value="1.5"></property>
+  </properties>
+  <testcase name="testUML2" time="3.418"></testcase>
+  <testcase name="testpuzzle" time="0.587"></testcase>
+  <testcase name="testSimple" time="0.55"></testcase>
+  <testcase name="testtestVariable" time="0.073"></testcase>
+  <testcase name="testtestSCommentInline" time="0.068"></testcase>
+  <testcase name="testtestSCommentEndOfFile" time="0.061"></testcase>
+  <testcase name="testtestBlock" time="0.083"></testcase>
+  <testcase name="testtestMCommentInline" time="0.066"></testcase>
+  <testcase name="testtestCycleA" time="0.262"></testcase>
+  <testcase name="testtestCycleB" time="0.0060"></testcase>
+  <testcase name="testtestCycleC" time="0.0070"></testcase>
+  <testcase name="testtestCycleD" time="0.0070"></testcase>
+  <testcase name="testtestCycleE" time="0.0060"></testcase>
+  <testcase name="test6_testExternPackageCall2" time="0.064"></testcase>
+  <testcase name="testtestSimpleCond" time="0.067"></testcase>
+  <testcase name="test10_testEnum" time="0.072"></testcase>
+  <testcase name="testtestModelTypesStateMachines" time="0.096"></testcase>
+  <testcase name="testtestInterDependA" time="0.079"></testcase>
+  <testcase name="testtestInterDependB" time="0.0020"></testcase>
+  <testcase name="testtestGenericClass" time="0.068"></testcase>
+  <testcase name="test7_testOpPkgCall" time="0.098"></testcase>
+  <testcase name="test5_testOpPkgCall" time="0.181"></testcase>
+  <testcase name="test2_testArithm" time="0.069"></testcase>
+  <testcase name="testtestExpression" time="0.081"></testcase>
+  <testcase name="testtestInjectOperation" time="0.064"></testcase>
+  <testcase name="testtestLambdaExpressionAsCallFeature" time="0.066"></testcase>
+  <testcase name="testtestSCommentEmptyOp" time="0.062"></testcase>
+  <testcase name="testtestPackageDepA" time="0.369"></testcase>
+  <testcase name="testtestPackageDepB" time="0.0030"></testcase>
+  <testcase name="testtestPackageDepC" time="0.0020"></testcase>
+  <testcase name="testtestSimpleAnnotations" time="0.061"></testcase>
+  <testcase name="testtestPackageDepD" time="0.0020"></testcase>
+  <testcase name="testtestConditional" time="0.072"></testcase>
+  <testcase name="test9_testOpCallObject" time="0.063"></testcase>
+  <testcase name="test4_testOpOpCall" time="0.056"></testcase>
+  <testcase name="test6_failtestExternPackageCall" time="0.128"></testcase>
+  <testcase name="testtestSCommentMiddleOfLoop" time="0.058"></testcase>
+  <testcase name="testtestPackage" time="0.054"></testcase>
+  <testcase name="testtestSCommentAlone" time="0.065"></testcase>
+  <testcase name="testtestOperation" time="0.075"></testcase>
+  <testcase name="test7_testInterPackageCall" time="0.0030"></testcase>
+  <testcase name="testtestPackageDepA2" time="0.479"></testcase>
+  <testcase name="testtestSCommentMany" time="0.067"></testcase>
+  <testcase name="testtestPackageDepB2" time="0.0040"></testcase>
+  <testcase name="testtestImportAlias" time="0.169"></testcase>
+  <testcase name="testtestSimpleLoop" time="0.061"></testcase>
+  <testcase name="testtestPackageDepC2" time="0.0020"></testcase>
+  <testcase name="testtestSimpleAnnotations2" time="0.074"></testcase>
+  <testcase name="testtestResult" time="0.063"></testcase>
+  <testcase name="testtestPackageDepD2" time="0.0020"></testcase>
+  <testcase name="testtestMCommentMiddleOfLoop" time="0.084"></testcase>
+  <testcase name="testtestMCommentMany" time="0.064"></testcase>
+  <testcase name="test6_testExternPackageCall" time="0.112"></testcase>
+  <testcase name="testtestSCommentBegin" time="0.057"></testcase>
+  <testcase name="testtestModelType" time="0.057"></testcase>
+  <testcase name="testtestMCommentAlone" time="0.058"></testcase>
+  <testcase name="testtestSimpleExpression" time="0.055"></testcase>
+  <testcase name="test6_testOpPkgCall" time="0.171"></testcase>
+  <testcase name="testtestBlocksSequence" time="0.058"></testcase>
+  <testcase name="test8_testOpInternPkgCall" time="0.06"></testcase>
+  <testcase name="testtestMCommentEmptyOp" time="0.054"></testcase>
+  <testcase name="test3_testOpCall" time="0.057"></testcase>
+  <testcase name="test1_testAssignment" time="0.058"></testcase>
+  <testcase name="testtestProperty" time="0.063"></testcase>
+  <testcase name="test5_testExternPackageCall" time="0.0020"></testcase>
+  <testcase name="testtestLoadStdLibSource" time="0.057"></testcase>
+  <testcase name="testtestClass" time="0.0020"></testcase>
+  <testcase name="testtestMCommentBegin" time="0.052"></testcase>
+  <testcase name="testtestPrimitiveType" time="0.053"></testcase>
+  <testcase name="testtestExtractOperation" time="0.056"></testcase>
+  <testcase name="testtestOperationOnObject" time="0.065"></testcase>
+  <testcase name="testtestCallExp" time="0.069"></testcase>
+  <testcase name="testtestEnum" time="0.062"></testcase>
+  <system-out><![CDATA[
+
+
+
+
+
+
+
+Ignoring phase 3bis of platform:/plugin/fr.irisa.triskell.kermeta.io/test/kmt_testcases/testCycleA.kmt, due to a cycle in its require statements. 
+ (in this case a per file basis test cannot be applied)
+Ignoring phase 3bis of platform:/plugin/fr.irisa.triskell.kermeta.io/test/kmt_testcases/testCycleB.kmt, due to a cycle in its require statements. 
+ (in this case a per file basis test cannot be applied)
+Ignoring phase 3bis of platform:/plugin/fr.irisa.triskell.kermeta.io/test/kmt_testcases/testCycleC.kmt, due to a cycle in its require statements. 
+ (in this case a per file basis test cannot be applied)
+Ignoring phase 3bis of platform:/plugin/fr.irisa.triskell.kermeta.io/test/kmt_testcases/testCycleD.kmt, due to a cycle in its require statements. 
+ (in this case a per file basis test cannot be applied)
+Ignoring phase 3bis of platform:/plugin/fr.irisa.triskell.kermeta.io/test/kmt_testcases/testCycleE.kmt, due to a cycle in its require statements. 
+ (in this case a per file basis test cannot be applied)
+
+
+
+
+Ignoring phase 3bis of platform:/plugin/fr.irisa.triskell.kermeta.io/test/kmt_testcases/testInterDependA.kmt, due to a cycle in its require statements. 
+ (in this case a per file basis test cannot be applied)
+Ignoring phase 3bis of platform:/plugin/fr.irisa.triskell.kermeta.io/test/kmt_testcases/testInterDependB.kmt, due to a cycle in its require statements. 
+ (in this case a per file basis test cannot be applied)
+
+Ignoring phase 3bis of platform:/plugin/fr.irisa.triskell.kermeta.io/test/kmt_testcases/7_testOpPkgCall.kmt, due to a cycle in its require statements. 
+ (in this case a per file basis test cannot be applied)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ignoring phase 3bis of platform:/plugin/fr.irisa.triskell.kermeta.io/test/kmt_testcases/7_testInterPackageCall.kmt, due to a cycle in its require statements. 
+ (in this case a per file basis test cannot be applied)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></system-out>
+  <system-err><![CDATA[org.eclipse.emf.ecore.resource.Resource$IOWrappedException: The object 'fr.irisa.triskell.kermeta.language.structure.impl.TagImpl@1e1e197 (name: documentation, value: The Elements owned by this element. This is a derived union.)' is not contained in a resource.
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.endSave(XMLSaveImpl.java:303)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.save(XMLSaveImpl.java:267)
+	at org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl.doSave(XMLResourceImpl.java:205)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.save(ResourceImpl.java:1253)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.save(ResourceImpl.java:964)
+	at fr.irisa.triskell.kermeta.exporter.km.KmExporter.export(KmExporter.java:55)
+	at fr.irisa.triskell.kermeta.exporter.km.KmExporter.export(KmExporter.java:64)
+	at kermeta_io.test.JunitTestSuite.testWithFile(JunitTestSuite.java:385)
+	at kermeta_io.test.JunitTestSuite.testUML2(JunitTestSuite.java:75)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:585)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:325)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:848)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:556)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:532)
+	at org.apache.tools.ant.Task.perform(Task.java:341)
+	at org.apache.tools.ant.Target.execute(Target.java:309)
+	at org.apache.tools.ant.Target.performTasks(Target.java:336)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1339)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1255)
+	at org.apache.tools.ant.Main.runBuild(Main.java:609)
+	at org.apache.tools.ant.Main.start(Main.java:196)
+	at org.apache.tools.ant.Main.main(Main.java:235)
+Caused by: org.eclipse.emf.ecore.xmi.DanglingHREFException: The object 'fr.irisa.triskell.kermeta.language.structure.impl.TagImpl@1e1e197 (name: documentation, value: The Elements owned by this element. This is a derived union.)' is not contained in a resource.
+	at org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl.handleDanglingHREF(XMLHelperImpl.java:759)
+	at org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl.getURIFragment(XMLHelperImpl.java:730)
+	at org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl.getIDREF(XMLHelperImpl.java:752)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveIDRefMany(XMLSaveImpl.java:1934)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveFeatures(XMLSaveImpl.java:1286)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveElementID(XMLSaveImpl.java:2590)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveElement(XMLSaveImpl.java:1105)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveElement(XMLSaveImpl.java:986)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveContainedMany(XMLSaveImpl.java:2291)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveFeatures(XMLSaveImpl.java:1464)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveElementID(XMLSaveImpl.java:2590)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveElement(XMLSaveImpl.java:1105)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveElement(XMLSaveImpl.java:986)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveContainedMany(XMLSaveImpl.java:2291)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveFeatures(XMLSaveImpl.java:1464)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveElementID(XMLSaveImpl.java:2590)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveElement(XMLSaveImpl.java:1105)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveElement(XMLSaveImpl.java:986)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveContainedMany(XMLSaveImpl.java:2291)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveFeatures(XMLSaveImpl.java:1464)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.saveElementID(XMLSaveImpl.java:2590)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.writeTopObject(XMLSaveImpl.java:653)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.traverse(XMLSaveImpl.java:581)
+	at org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl.save(XMLSaveImpl.java:253)
+	... 31 more
+]]></system-err>
+</testsuite>
