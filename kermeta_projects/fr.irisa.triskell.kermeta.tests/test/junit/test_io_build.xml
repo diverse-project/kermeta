@@ -8,6 +8,7 @@
     <property name="report.dir" location="../../reports"/>
 	<property name="eclipse.home" location="c:/eclipse3.5/eclipse"/>
 	<property name="cobertura.dir" location="\\nas1a\triskell\bin\multiplatform\cobertura-1.7"/>
+	<property name="ant.dir" location="/udd/triskell/bin/multiplatform/apache-ant-1.7.0"/>
 	<property name="dot.or.bin" value="bin"/>
 	<!-- <property name="dot.or.bin" value="@dot"/> -->
 	<property name="dot.or.buildclass" value="build/class"/>
@@ -223,7 +224,7 @@
 		    <include name="TEST-*.xml"/>
 		  </fileset>
 		  <!--<report format="frames" todir="${report.dir}/html" styledir="./report_stylesheet"/>-->
-		  <report format="frames" todir="${report.dir}/html"  styledir="/udd/triskell/bin/multiplatform/apache-ant-1.7.0/etc"/>
+		  <report format="frames" todir="${report.dir}/html"  styledir="${ant.dir}/etc"/>
 		</junitreport>
 		<!-- generate the Build date -->
 		<tstamp>

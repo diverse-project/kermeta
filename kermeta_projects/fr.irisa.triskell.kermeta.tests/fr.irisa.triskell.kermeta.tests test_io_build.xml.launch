@@ -15,6 +15,7 @@
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.ant.ui.AntClasspathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:fr.irisa.triskell.kermeta.tests}"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:/fr.irisa.triskell.kermeta.tests/test/junit/test_io_build.xml}"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="-Dant.dir=\\nas1a\triskell\bin\multiplatform\apache-ant-1.7.0"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="${workspace_loc:/fr.irisa.triskell.kermeta.tests/test/junit}"/>
 <stringAttribute key="process_factory_id" value="org.eclipse.ant.ui.remoteAntProcessFactory"/>
 </launchConfiguration>
