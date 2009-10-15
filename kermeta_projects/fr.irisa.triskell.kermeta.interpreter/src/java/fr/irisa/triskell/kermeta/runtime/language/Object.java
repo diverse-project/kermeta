@@ -142,6 +142,49 @@ public class Object {
 	     //checkInheritedInvariants(classDef , self);
          return self.getFactory().getMemory().trueINSTANCE; //if the constraints don't raise any constraint exception then it means that the constraints are true
 	}
+
+    /** Implementation of method checkInvariant called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariant() */
+	public static RuntimeObject checkInvariant(RuntimeObject self, RuntimeObject invariant) {
+		
+		fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getKCoreObject();
+		ClassDefinition classDef = (ClassDefinition)metaClass.getTypeDefinition();
+	     
+		// Retrieve Constraint 
+		Constraint inv = (Constraint) invariant.getKCoreObject();
+	     
+		java.lang.String message = "";
+		if ( checkConstraint(inv.getBody(), classDef, self)) {
+			RuntimeMemory memory = self.getFactory().getMemory();
+			message += "Invariant " + inv.getName() + " of class " + classDef.getName() + " violated";
+			KermetaRaisedException kre = KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
+						message,
+	        			memory.getInterpreter().getBasicInterpreter(),
+	        			memory,
+						inv.getBody(),
+						null);
+
+			//Set additional data in the raised Exception
+			fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)kre.raised_object.getMetaclass().getKCoreObject();        	
+			SimpleType target = new SimpleType(t_target);	   			
+			// set the constraintAppliedTo reference
+			CallableProperty constraintAppliedToproperty = target.getPropertyByName("constraintAppliedTo");
+			RuntimeObject ro_property = memory.getRuntimeObjectForFObject(constraintAppliedToproperty.getProperty());
+			RuntimeObject rovalue = self;
+			fr.irisa.triskell.kermeta.runtime.language.Object.set(kre.raised_object, ro_property, rovalue);
+	   		    
+			// set the failedConstraint reference
+			CallableProperty failedConstraintproperty = target.getPropertyByName("failedConstraint");
+			RuntimeObject failedConstraint_ro_property = memory.getRuntimeObjectForFObject(failedConstraintproperty.getProperty());
+			RuntimeObject failedConstraint_rovalue = memory.getRuntimeObjectForFObject(inv);
+			fr.irisa.triskell.kermeta.runtime.language.Object.set(kre.raised_object, failedConstraint_ro_property, failedConstraint_rovalue);
+	   		    
+			throw kre;
+		}
+		//if the constraint doesn't raise any constraint exception then it means that the constraint is true
+		return self.getFactory().getMemory().trueINSTANCE; 
+	}
+	
 	
 	/**
 	 * Search the inherited invariants for a given class defifition 
