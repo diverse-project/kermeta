@@ -1,0 +1,30 @@
+/* $Id:$ 
+ * Creation : October 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "test2::Main"
+@mainOperation "main"
+
+
+package test2;
+
+
+require kermeta
+
+using kermeta::standard
+
+class Main
+{
+	operation main() : Void is do 
+		var t : Set<Integer> init Set<Integer>.new
+		t.add(1)
+		t.add(2)
+		t.add(3)
+		t.add(4)
+		t.add(5)
+		t.select{e|e<3}.each{e|stdio.writeln(e.toString)}
+	end
+}

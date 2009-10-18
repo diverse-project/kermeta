@@ -1,0 +1,48 @@
+/* $Id:$ 
+ * Creation : October 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "test1::Main"
+@mainOperation "main"
+
+
+package test1;
+
+
+require kermeta
+require "platform:/resource/KermetaCompilerTestCase/src/test1/A.ecore"
+
+using kermeta::standard
+using kermeta::persistence
+
+class Main
+{
+	operation main() : Void is do 
+		 var repository : EMFRepository init EMFRepository.new
+		 var resource : EMFResource 
+ 		resource ?= repository.createResource("platform:/resource/KermetaCompilerTestCase/src/saveModel/AModelSaveKermetas.xmi","http://a/1.0")
+ 		var a : A init A.new
+ 		a.name := "titi"
+		a.toto := "essaie"
+ 		
+ 		resource.add(a)
+ 		resource.save
+		
+	end
+}
+
+aspect class A{
+	
+	
+	attribute  toto : String
+	
+	operation test() : Void is do
+	self.toto := "toto"
+		stdio.writeln(self.name + " " + self.toto ) 
+	end
+	
+	
+}
