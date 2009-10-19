@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<!-- $Id: KET-Manual.docb.xml 8015 2009-06-08 21:12:21Z kermeta_bot $ -->
+<book lang="en-US">
+  <bookinfo>
+    <title>Kermeta Emitter Template</title>
+
+    <pubdate>Build date: @BUILD.DATE@</pubdate>
+    <pubdate>$Date:: 2009-10-15 16:31:00#$</pubdate>
+
+    <author>
+      <firstname>Cyril</firstname>
+      <surname>Faucher</surname>
+    </author>
+
+    <author>
+      <firstname>Mickael</firstname>
+      <surname>Clavreul</surname>
+    </author>
+
+    <keywordset>
+      <keyword>Kermeta</keyword>
+      <keyword>script</keyword>
+      <keyword>language</keyword>
+      <keyword>text generation</keyword>
+    </keywordset>
+
+    <subtitle>Reference manual</subtitle>
+    <bibliomisc>License EPL</bibliomisc>
+
+    <abstract>
+      <para>This manual presents the Kermeta Emitter Template language. 
+This is the reference manual for anybody who want to use KET.</para>
+    </abstract>
+
+    <publisher>
+      <publishername>INRIA</publishername>
+
+      <address><state>France</state>
+<otheraddr><ulink url="http://www.inria.fr">http://www.inria.fr</ulink></otheraddr></address>
+    </publisher>
+  </bookinfo>
+
+  <preface id="preface.link">
+    <title id="preface.title.link">Preface<phrase
+    id="preface"></phrase></title>
+
+    <para>Kermeta Emitter Template is a scripting language dedicated to text generation.
+    Similarly to other scripting languages, it offers end-users a simple language
+    that supports interactions with the Kermeta Language to generate text from complex
+    computations.</para>
+
+    <para>This document gives beginners an <link
+    linkend="chapter_introduction.link">introduction</link> to the KET
+    language, then it offers an overview of the definition of 
+    the <link linkend="chapter_generator">generator parameters</link>.
+    Follows a definition of main <link linkend="chapter_tags">
+    tags</link>, the <link linkend="chapter_compilation">compilation</link>
+    of KET files to Kermeta files and <link linkend="chapter_how_to">
+    how to use</link> them to generate text.</para>
+
+    <important>
+      <para>KET is part of an evolving software and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
+
+      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+        <emphasis
+        role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+      </ulink>
+
+       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v1.2.0 
+    </para></important>
+
+    <tip><para>
+       The most update version of this document is available on line from 
+
+      <ulink type=""
+      url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
+
+       . 
+    </para></tip>
+  </preface>
+
+  <chapter id="chapter_introduction.link">
+    <title id="chapter_introduction.title.link">Introduction to KET<phrase>
+    </phrase></title>
+
+    <para>KET is based on the JET
+    <footnote><para>http://www.eclipse.org/modeling/m2t/?project=jet#jet
+    </para></footnote> 
+    <footnote><para>http://help.eclipse.org/ganymede/index.jsp?nav=/27</para>
+    </footnote> 
+    engine enhanced by the syntax of Kermeta 
+    for the model navigation. It is also very similar to Velocity or JSP. 
+    This is a user-friendly text-based template engine wich generate text 
+    from a KET template and a model.
+	Templates are composed of two main elements: text that should be written 
+	in the output and tags that are interpreted to generated string values 
+	from some computation.
+	Once templates are ready to be compiled, they are interpreted by the 
+	template engine. It creates a new Kermeta file that declares a generator 
+	as a generate(params) method.
+	Using KET is efficient when templates contains more text that expressions 
+	(i.e a text with holes). If you need more computation than text, you 
+	should consider writing a pretty printer in Kermeta.</para>
+  </chapter>
+
+  <chapter id="chapter_generator.link">
+    <title id="chapter_generator.title.link">Generator Parameters<phrase
+    id="chapter_generator"></phrase></title>
+
+    <para>A KET template starts with the definition of the tag <literal>&lt;%@ket %&gt;</literal>. 
+    This tag is helpful to define how the Kermeta file should be generated. 
+    There is eight parameters either mandatory (m) or optional (o):</para>
+
+    <itemizedlist>
+    	<listitem>
+            <para><emphasis role="strong">package (m)</emphasis> - root package of the Kermeta file</para>
+        </listitem>
+        <listitem>
+            <para><emphasis role="strong">require (m)</emphasis> - set of requires that the Kermeta file should contain (separated by whitespaces)</para>
+        </listitem>
+        <listitem>
+            <para><emphasis role="strong">using (m)</emphasis> - set of using that the Kermeta file should contain (separated by whitespaces)</para>
+        </listitem>
+        <listitem>
+            <para><emphasis role="strong">class (m)</emphasis> - main class of the Kermeta file</para>
+        </listitem>
+        <listitem>
+            <para><emphasis role="strong">isAspectClass (o)</emphasis> - true if the main class should be an aspect (reopen an existing class)</para>
+        </listitem>
+        <listitem>
+            <para><emphasis role="strong">operation (o)</emphasis> - name of the main operation</para>
+        </listitem>
+        <listitem>
+            <para><emphasis role="strong">ismethod (o)</emphasis> - true if the main operation is a redefinition of an existing operation</para>
+        </listitem>
+        <listitem>
+            <para><emphasis role="strong">parameters (m)</emphasis> - parameters of the <literal>generate(...)</literal> method. Those parameters can be used in KET tags to acquire data from outside the generator</para>
+        </listitem>
+    </itemizedlist>
+        <programlisting language="ket">&lt;%@ket
+package="example"
+require="my_require other_require"
+using="package1 package2"
+isAspectClass="false"
+class="example"
+ismethod="false"
+operation="generate"
+parameters=""
+%&gt;</programlisting>
+        
+  </chapter>
+
+  <chapter id="section_tags.link">
+    <title id="section_tags.title.link">Tags and Syntax<phrase
+    id="chapter_tags"></phrase></title>
+
+    <para>KET provides four types of tags.</para>
+    
+    <section id="section_comments.link">
+      <title id="section_comments.title.link">Comments</title>
+
+    <para>KET templates may contain comments. Comments are defined between
+     the characters &lt;%-- and --%&gt;. Comments have no impact on the execution
+      of the template, except that they may influence whitespace stripping
+       rules. KET comments are copied to the generated kermeta class as
+        Kermeta comments. 
+	KET templates accept two special tags in the first non-blank line of
+	 a comment. The tag <literal>@header</literal> will cause the comment
+	  to be emitted as the file header comment for the generated Kermeta
+	   class. This is generally useful to insert copyright notices into 
+	   the generated Kermeta code. The tag <literal>@class</literal> will
+	    cause the comment to be emitted as the class Kermeta doc comment 
+	    for the generated Kermeta class.</para>
+		<section id="section_comments_valid.link">
+			<title id="section_comments_valid.title.link">Valid comments</title>
+			<para>Comments may span several lines, and may contain any text.</para>
+			<programlisting language="ket">&lt;%-- @header
+This comment will appear as the file header comment in the generated kermeta code
+--%&gt;
+&lt;%-- @class
+This comment will appear as the kermeta class doc comment in the generated kermeta code --%&gt;
+&lt;%-- This comment will not appear in the template output --%&gt;
+&lt;%-- This directive is not used &lt;%= attr.name%> --%&gt;</programlisting>
+		</section>
+		<section id="section_comments_invalid.link">
+			<title id="section_comments_invalid.title.link">Invalid comments</title>
+			<para>Comments may not appear within other KET elements.</para>
+			<programlisting language="ket">&lt;%= attr.name &lt;%-- illegal comment --%&gt; %&gt;
+			</programlisting>
+		</section>
+		<section id="section_comments_escape.link">
+			<title id="section_comments_escape.title.link">Escaping comments characters</title>
+			<para>To emit the characters &lt;%-- in a template output, enter &lt;\%--. 
+To emit --%&gt;, enter --%\&gt;.</para>
+			<programlisting language="ket">&lt;\%-- this will show in the template 
+			output --%\&gt;</programlisting>
+		</section>
+    </section>
+    <section id="section_expressions.link">
+      <title id="section_expressions.title.link">Kermeta expressions</title>
+      <para>KET templates may emit the result of a Kermeta expression by enclosing
+       the Kermeta expression between the characters &lt;%= and %&gt;. One scenario
+        is to compute some data in Kermeta and include the result into your template
+        .</para>
+        <programlisting language="ket">The name of the class executing is: 
+        &lt;%= aClass.name %&gt;
+This is the &lt;%= 5th %&gt; execution of the generator: it says&lt;%= "hello" %&gt;.
+	</programlisting>
+      <section id="section_expressions_valid.link">
+			<title id="section_expressions_valid.title.link">Valid expressions</title>
+			<para>Expressions contain valid Kermeta expressions. Expressions may access
+			 any Kermeta element in scope, including generator parameters or field and
+			  methods declared in <link linkend="section_scriptlets.link">Kermeta 
+			  scriptlets</link>. The emitted Kermeta code for the template will evaluate
+			   the Kermeta expression and convert the result to a String (if necessary).
+			    Expressions may be constants but it looks weird.</para>
+			<programlisting language="ket">&lt;%= 3 + 4; %&gt; &lt;%-- semicolon not allowed in 
+			Kermeta expressions --%&gt;</programlisting>
+		</section>
+		<section id="section_expressions_invalid.link">
+			<title id="section_expressions_invalid.title.link">Invalid expressions</title>
+			<para>Expressions are not statically checked to any error in the Kermeta 
+			expression will only be detected in the emitted Kermeta code. Errors are 
+			not correlate back to the KET template.</para>
+		</section>
+		<section id="section_expressions_escape.link">
+			<title id="section_expressions_escape.title.link">Escaping expressions 
+			characters</title>
+			<para>To emit the characters &lt;%= in a template output, enter &lt;\%=.
+			 To emit %&gt;, enter %\&gt;.</para>
+		</section>
+    </section>
+    <section id="section_scriptlets.link">
+      <title id="section_scriptlets.title.link">Kermeta scriplets</title>
+      <para>KET templates may contain sections that contain Kermeta statements by 
+      enclosing the Kermeta expressions between the characters &lt;% and %&gt;.</para>
+      <section id="section_scriptlets_valid.link">
+			<title id="section_scriptlets_valid.title.link">Valid scriptlets</title>
+			<para>Scripts may contain one more more valid Kermeta statements or blocks.
+			 A scriptlet may also include a partial Kermeta block, so long as a 
+			 subsequent scriptlet completes it. Scriplets may reference any Kermeta 
+			 elements in scope, including variables declared in other scriptlets, and 
+			 methods and fields declared in Kermeta declarations. The emitted Kermeta 
+			 code from the template will contain the Kermeta statements in the generation
+			  method.</para>
+			  <programlisting language="ket">&lt;% var x : Integer init 2 %&gt;
+&lt;% var y : Integer init x*5 %&gt;
+&lt;% if y &gt;= 10 then %&gt;
+   Y is &gt;= 10
+&lt;% end %&gt;</programlisting>
+		</section>
+		<section id="section_scriptlets_invalid.link">
+			<title id="section_scriptlets_invalid.title.link">Invalid scriptlets</title>
+			<para>Expressions are not statically checked to any error in the Kermeta 
+			expression will only be detected in the emitted Kermeta code. Errors are not
+			 correlate back to the KET template.</para>
+		</section>
+		<section id="section_scriptlets_escape.link">
+			<title id="section_scriptlets_escape.title.link">Escaping scriptlets characters</title>
+			<para>To emit the characters &lt;% in a templates output, enter &lt;\%. To emit %&gt;, 
+			enter %\&gt;.</para>
+		</section>
+    </section>
+  </chapter>
+  <chapter id="chapter_compilation.link">
+    <title id="chapter_compilation.title.link">Compilation with Kermeta</title>
+    <para>Ket templates should be compiled to generate a Kermeta file. Right click on your KET 
+    file and select <emphasis role="italic"> Kermeta -> Translate Kermeta Template</emphasis>.
+	You get a new .kmt file with the same name of your KET template. The .kmt file contains a Kermeta 
+	class that conforms to the parameters you provide. This Kermeta class provides also a 
+	<literal>generate(...)</literal> operation you would execute to pretty-print the text you expect.</para>
+	<informaltable frame="none">
+    <tgroup cols="3" align="justify" colsep="1" rowsep="1">
+        <colspec colname="c1" colwidth="1*"/>
+        <colspec colname="c2" colwidth="1*"/>
+        <colspec colname="c3" colwidth="1*"/>
+        <spanspec spanname="span1" namest="c1" nameend="c2"/>
+        <tbody>
+            <row>
+                <entry align="center"><programlisting language="ket">&lt;%@ket
+package="hello_world"
+require=""
+using=""
+class="Hello_World"
+parameters=""
+%%&gt;
+&lt;%-- Pretty printer code --%&gt;
+Hello World !!</programlisting></entry>
+				<entry><mediaobject><imageobject><imagedata fileref="KET-Manual_figures/process.png" format="PNG" scale="10" align="center"/></imageobject></mediaobject></entry>
+                <entry align="center"><programlisting language="kermeta">package hello_world;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class Hello_World{
+operation generate():String is do
+var _res: StringBuffer init
+StringBuffer.new
+
+// Pretty printer code
+_res.append("Hello World !!")
+result := _res.toString
+end
+}</programlisting></entry>
+            </row>
+        </tbody>
+    </tgroup>
+</informaltable>
+	<section id="section_nested.link">
+			<title id="section_nested.title.link">Nesting templates</title>
+			<para>If you need to nest templates because you produce modular templates that can be included in 
+			each other, one way is to enclose the <literal>generate(...)</literal> operation you get from the 
+			generated Kermeta file into a Kermeta scriptlet.</para>
+	</section>
+	</chapter>
+	<chapter id="chapter_chapter_how_to.link">
+    <title id="chapter_chapter_how_to.title.link">How to use generated code in Kermeta programs</title>
+    <para>Once your templates have been properly compiled into Kermeta files, you can call the <literal>
+    generate(...)</literal> method into your main Kermeta code to generate the text.</para>
+    <programlisting language="kermeta">package root_package;
+require kermeta
+require "templates/generator.kmt"
+using kermeta::standard
+using kermeta::utils
+using hello_world
+class Main{
+operation main() : Void is do
+	// Generator initialization
+	var gen : Hello_World init Hello_World.new
+
+	// Displays text generated on the console output
+	stdio.writeln(gen.generate())
+end
+}</programlisting>
+    </chapter>
+</book>
