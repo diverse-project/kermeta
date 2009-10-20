@@ -1,7 +1,7 @@
 package ecoreWithAspectAndInherithance
 
 trait implicit2 {
-	
+ 	
    //génération des feuiiles au noeuds
     implicit def richa(xs: AAspect) = xs match { 
     	case (ys : BAspect) => ys.asInstanceOf[RichB];
@@ -12,7 +12,7 @@ trait implicit2 {
     	case (ys : ecorewithaspectandInherithance.B) => ys.asInstanceOf[RichB];
     	case (ys : ecorewithaspectandInherithance.A) => ys.asInstanceOf[RichA];
     } 
- 
+  
     implicit def richa(xs: BAspect) = xs.asInstanceOf[RichB];
     implicit def richb(xs: ecorewithaspectandInherithance.B) = xs.asInstanceOf[RichB]
 } 

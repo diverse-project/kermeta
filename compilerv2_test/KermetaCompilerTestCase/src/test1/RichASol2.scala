@@ -16,7 +16,7 @@ trait AAspect  extends implicit2 {
 	}
 
 }
-
+ 
 class RichA extends test1.impl.AImpl with AAspect{}
 
 class RichFactory() extends test1.impl.Test1FactoryImpl{
@@ -24,7 +24,7 @@ class RichFactory() extends test1.impl.Test1FactoryImpl{
 		return  new RichA();
 	}
 }
-
+ 
 
 
 object Main extends implicit2{

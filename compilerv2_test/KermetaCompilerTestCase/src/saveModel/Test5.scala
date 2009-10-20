@@ -5,7 +5,7 @@ import test1.impl._
 
 trait implicit1 {
     implicit def richa(xs: test1.A) = new RichA(xs)
-}  
+}   
  
 class RichA (value: test1.A) extends implicit1 {
 	var toto : String="";
@@ -15,7 +15,7 @@ class RichA (value: test1.A) extends implicit1 {
 		println(value.getName() +  " "+ this.toto.toString() ) ;
 	}
 
-}
+} 
 
 
 object Test5 {
