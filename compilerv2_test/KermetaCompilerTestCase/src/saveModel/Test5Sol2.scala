@@ -3,13 +3,13 @@ package saveModel
 import test1._
 import test1.impl._
 
-trait implicit1 { 
+trait implicit2 { 
     implicit def richa(xs: AAspect) = xs.asInstanceOf[RichA];
     implicit def richb(xs: A) = xs.asInstanceOf[RichA]
 } 
 
 
-trait AAspect extends implicit1 {
+trait AAspect extends implicit2 {
 	var toto : String="";	 
 	def test()  = { 
 		this.toto = "toto";
@@ -26,7 +26,7 @@ class RichFactory() extends test1.impl.Test1FactoryImpl{
 
 
 
-object Test5 extends implicit1{
+object Test5 extends implicit2{
   def main(args : Array[String]) : Unit = {
 	Test1Package.eINSTANCE.setEFactoryInstance(new RichFactory());
 	var a : A = Test1Package.eINSTANCE.getEFactoryInstance().asInstanceOf[Test1FactoryImpl].createA();

@@ -1,6 +1,6 @@
 package ecoreWithAspectAndInherithance
 
-trait implicit1 {
+trait implicit2 {
 	
    //génération des feuiiles au noeuds
     implicit def richa(xs: AAspect) = xs match { 
@@ -32,7 +32,7 @@ class RichFactory() extends ecorewithaspectandInherithance.impl.Ecorewithaspecta
 	}
 }
 
-object Test41 extends implicit1{
+object Test41 extends implicit2{
   def main(args : Array[String]) : Unit = {
 	  ecorewithaspectandInherithance.EcorewithaspectandInherithancePackage.eINSTANCE.setEFactoryInstance(new RichFactory());
 	  var v : helper.EmfResource[ecorewithaspectandInherithance.EcorewithaspectandInherithancePackage] = new helper.EmfResource[ecorewithaspectandInherithance.EcorewithaspectandInherithancePackage](ecorewithaspectandInherithance.EcorewithaspectandInherithancePackage.eINSTANCE);
@@ -48,7 +48,7 @@ trait AAspect {
 }
 
 
-trait BAspect extends implicit1{
+trait BAspect extends implicit2{
 	var baraspect : Int=4;
 	def test()  ={
 		this.fooaspect = "fooaspect"
