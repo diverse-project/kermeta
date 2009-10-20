@@ -65,6 +65,9 @@ public class RequireContentAssistProcessor implements IContentAssistProcessor {
 				
 			replacementLength = index -1 + replacementLength;
 			
+			if ( "\"platform:/lookup".matches( startString + ".*") )
+				proposals.add( new CompletionProposal("\"platform:/lookup/", offset - index+1, replacementLength, "\"platform:/lookup/".length()));
+
 			if ( "\"platform:/resource".matches( startString + ".*") )
 				proposals.add( new CompletionProposal("\"platform:/resource/", offset - index+1, replacementLength, "\"platform:/resource/".length()));
 
