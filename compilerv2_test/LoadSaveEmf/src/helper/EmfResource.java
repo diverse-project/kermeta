@@ -84,7 +84,7 @@ public class EmfResource <T extends EPackage>{
 		resource = rs.createResource(uri);
 		return resource;
 	}
-
+ 
 	public void save() {
 		try {
 			resource.save(Collections.EMPTY_MAP);
