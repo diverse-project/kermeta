@@ -12,7 +12,7 @@
 		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
 		<mkdir dir="mytemp"/>
 		<copy todir="mytemp" failonerror="true" overwrite="true">
-			<fileset dir="." includes="**" excludes="*automata/**,*km2ecore/**,*helloworld/**,*kermeta2doc/**,*persistence/**,*zip_build.xml,*mytemp,fr.irisa.triskell.kermeta.samples.zip,.project.kpm,modeltype/doc/*.odp"/>
+			<fileset dir="." includes="**" excludes="*automata/**,*km2ecore/**,*helloworld/**,*kermeta2doc/**,*persistence/**,*kmlogo/**,*zip_build.xml,*mytemp,fr.irisa.triskell.kermeta.samples.zip,.project.kpm,modeltype/doc/*.odp"/>
 		</copy>
 		<copy file="readme.txt" 
 			tofile="mytemp/readme.txt"
