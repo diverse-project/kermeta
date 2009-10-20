@@ -35,9 +35,11 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 
 import org.kermeta.log4j.util.LogConfigurationHelper;
 
+import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -213,6 +215,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	 * Checked constraints :
 	 *   - Only CallFeature contained in postcondition can have isIsAtPre == true.
 	 *   - Sometimes it is not possible to anticipate the value of a callfeature
+	 *   - calling a new on a value type (ie. String, Integer, Real, ... doesn't make sense unless we have the notion of default value
 	 * 
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitConstraint(fr.irisa.triskell.kermeta.language.structure.Constraint)
 	 */
@@ -233,6 +236,17 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 			if(!nodetargetatpre_or_null){
 				addProblem("It is not possible to anticipate the value of '"+((CallExpression)node.getTarget()).getName()+"', you must postfix '"+((CallExpression)node.getTarget()).getName()+"' with @pre, or change your expression.",node);
 			}
+		}
+		if(node.getName().equals("new")){
+			if(node.getStaticType() instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+				//fr.irisa.triskell.kermeta.language.structure.Class cl = (fr.irisa.triskell.kermeta.language.structure.Class) node.getStaticType();
+				if(TypeHelper.isValueType(node.getStaticType()))
+				{
+					addWarning("Since Kermeta currently doesn't support default values, it doesn't make sense to do a new on a ValueType", node);
+				}
+			}			
+			
+			///addWarning(msg, node)
 		}
 		return super.visitCallFeature(node);
 	}

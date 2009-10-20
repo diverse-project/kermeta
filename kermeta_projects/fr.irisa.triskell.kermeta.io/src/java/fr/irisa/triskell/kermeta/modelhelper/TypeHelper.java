@@ -10,6 +10,7 @@
 package fr.irisa.triskell.kermeta.modelhelper;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -126,6 +127,21 @@ public class TypeHelper {
 		}
 
 		return true;
+	}
+	/**
+	 * returns true if this type inherits from ValueType
+	 * @param type
+	 * @return
+	 */
+	public static boolean isValueType(Type type ){
+		if (type instanceof Class) {
+			List<Type> tlist = ClassHelper.allSuperTypes((Class) type);
+			for(Type t : tlist){
+				if(getMangledQualifiedName(t).equals("kermeta::standard::ValueType"))
+					return true;
+			}
+		}
+		return false;
 	}
 
 	/**
