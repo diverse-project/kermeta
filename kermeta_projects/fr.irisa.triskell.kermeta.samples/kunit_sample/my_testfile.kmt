@@ -1,5 +1,3 @@
-@mainClass "root_package::MyTestCase"
-@mainOperation "main"
 
 package root_package;
 
