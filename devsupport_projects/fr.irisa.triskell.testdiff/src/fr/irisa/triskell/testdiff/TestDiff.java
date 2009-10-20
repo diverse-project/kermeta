@@ -14,9 +14,11 @@ import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -25,11 +27,15 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import fr.irisa.triskell.testdiff.utils.MapUtil;
+
 public class TestDiff implements Constants{
 
 	private String resultFilesPattern;
+	private String mapFileName = null;
 	private String oldResultsDir;
 	private String currentResultsDir;
+	Map<String,String> testSuiteNameMap;
 	private Boolean isVerbose = true;
 	private String outputDir;
 	private String outputFileName;
@@ -76,6 +82,8 @@ public class TestDiff implements Constants{
 	
 	
 	private void run() throws Exception {
+		
+		loadMap(mapFileName);
 		oldSuites = DOMUtils.buildMultiFilesDOMTree(resultFilesPattern, oldResultsDir);
 		currentSuites = DOMUtils.buildMultiFilesDOMTree(resultFilesPattern, currentResultsDir);
 		
@@ -125,7 +133,9 @@ public class TestDiff implements Constants{
 			while (iterator.hasNext() && !found) {
 				Node currentSuite = (Node) iterator.next();
 				if (DOMUtils.getAttribute(oldSuite, "name") != ""
-				  && DOMUtils.getAttribute(currentSuite, "name").equals(DOMUtils.getAttribute(oldSuite, "name"))) {
+				  && DOMUtils.getAttribute(currentSuite, "name").equals(
+						  MapUtil.getMappedValue(testSuiteNameMap, 
+								  				 DOMUtils.getAttribute(oldSuite, "name")))) {
 					testsDiffResult = testsDiff(oldSuite, currentSuite);
 					found = true;
 					currentSuites.remove(currentSuite);
@@ -297,6 +307,18 @@ public class TestDiff implements Constants{
 		return status;
 	}
 	
+	/**
+	 * load the map file or create an empty map if no file is provided
+	 * @param mapfilename
+	 */
+	private void loadMap(String mapfilename){
+		if(mapfilename != null)
+			testSuiteNameMap  = MapUtil.readMapFile(mapfilename);
+		else
+			// simply use an empty map
+			testSuiteNameMap = new HashMap<String,String>();
+	}
+	
 	public void saveXML(String directory, String xmlFileName) {
 		DOMUtils.saveXML(diffResult, directory, xmlFileName);
 	}
@@ -307,6 +329,7 @@ public class TestDiff implements Constants{
 		if (args.length < 10)
 			throw new Exception("Uncorrect arguments! Give:\n" +
 					" -pattern + the result files pattern\n" +
+					" -mapfile + a file containing a mapping between old and new test suite name\n" +
 					" -olddir + the old results dir path\n" +
 					" -currentdir + the current results dir path\n" +
 					" -outputdir + the output dir path\n" +
@@ -316,6 +339,9 @@ public class TestDiff implements Constants{
 			if (args[i].equalsIgnoreCase("-pattern")
 				&& args.length >= i)
 				resultFilesPattern = args[i+1];
+			if (args[i].equalsIgnoreCase("-mapfile")
+					&& args.length >= i)
+					mapFileName = args[i+1];
 			if (args[i].equalsIgnoreCase("-olddir")
 					&& args.length >= i)
 				oldResultsDir = args[i+1];
