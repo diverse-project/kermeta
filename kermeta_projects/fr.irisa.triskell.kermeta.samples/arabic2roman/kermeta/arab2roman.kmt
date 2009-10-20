@@ -24,7 +24,7 @@ class ArabicNumber
 {
 	reference content : Digit[0..*]
 	method toString() : String is do
-	    result := String.new()
+	    result := ""
 		content.each{digit  | result := result + digit.~value.toString()}
 	end
 	operation getValue() : Integer is do
@@ -59,7 +59,7 @@ class RomanNumber
 {
 	reference content : seq Letter[0..*]
 	method toString() : String is do
-	    result := String.new()
+	    result := ""
 		content.each{letter  | result := result + letter.~value}
 	end
 	operation getValue() : Integer is do
