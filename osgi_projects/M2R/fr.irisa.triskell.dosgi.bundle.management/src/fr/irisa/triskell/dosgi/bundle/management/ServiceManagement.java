@@ -15,7 +15,6 @@ import org.osgi.framework.Constants;
 public interface ServiceManagement {
 
 	// TODO define two type of BundleManagement and ServiceManagement : one for locals actions and one for remotes actions ?
-	// TODO ALL javadocs
 	// TODO add functions when the service is registered with many interfaces (addProperties, unregister, updateProperties ...) => maybe not
 	
 	/**
