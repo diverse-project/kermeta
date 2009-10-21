@@ -1,4 +1,4 @@
-@mainClass "test::Main"
+@mainClass "test::TestRemoveAtInSequenceAndReflectiveSequence"
 @mainOperation "main"
 
 package test;
@@ -18,8 +18,13 @@ class A2
     reference b: seq Integer[0..*]
 }
 
-class TestA1A2 inherits TestCase
+class TestRemoveAtInSequenceAndReflectiveSequence inherits TestCase
 {
+	 operation main() : Void is do
+          var runner : TestRunner init TestRunner.new()
+          runner.run(TestRemoveAtInSequenceAndReflectiveSequence)
+          runner.printTestResult()
+    end
     operation testA1_Sequence() is
     do
         var a: A1 init A1.new()
@@ -56,11 +61,3 @@ class TestA1A2 inherits TestCase
     end
 }
 
-class Main
-{
-    operation main() : Void is do
-          var runner : TestRunner init TestRunner.new()
-          runner.run(TestA1A2)
-          runner.printTestResult()
-    end
-}
