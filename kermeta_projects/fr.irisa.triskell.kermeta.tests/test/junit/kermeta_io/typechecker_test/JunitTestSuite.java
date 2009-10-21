@@ -195,6 +195,10 @@ public void testvalid_032_classNameScopeMultipackage() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","032_classNameScopeMultipackage.kmt" );
 }
 
+public void testvalid_033_testLiteralParenthesis() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","033_testLiteralParenthesis.kmt" );
+}
+
 public void testvalid_AliasAndFunctions() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","AliasAndFunctions.kmt" );
 }
