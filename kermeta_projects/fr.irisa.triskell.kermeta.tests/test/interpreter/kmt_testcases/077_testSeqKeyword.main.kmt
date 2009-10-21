@@ -20,7 +20,7 @@ class A2
 
 class TestA1A2 inherits TestCase
 {
-    operation testA1() is
+    operation testA1_Sequence() is
     do
         var a: A1 init A1.new()
         stdio.writeln("testA1")
@@ -38,7 +38,7 @@ class TestA1A2 inherits TestCase
         assert(a.b.elementAt(1) == 2)
     end
 
-    operation testA2() is
+    operation testA2_ReflectiveSequence() is
     do
         var a: A2 init A2.new()
         stdio.writeln("testA2")
