@@ -236,6 +236,8 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/interpreter/kmt_testcases","077_testSeqKeyword.main.kmt" );
 
+		testWithFile("test/interpreter/kmt_testcases","078_testAddVoidInReflectiveCollection.main.kmt" );
+
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
 		//IOPlugin.getDefault().unloadAll();
