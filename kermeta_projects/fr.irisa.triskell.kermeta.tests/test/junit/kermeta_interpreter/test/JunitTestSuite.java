@@ -234,6 +234,8 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/interpreter/kmt_testcases","076_testMultipleInheritance.main.kmt" );
 
+		testWithFile("test/interpreter/kmt_testcases","077_testSeqKeyword.main.kmt" );
+
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
 		//IOPlugin.getDefault().unloadAll();
