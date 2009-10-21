@@ -60,16 +60,9 @@
 		<copy todir="${build.docbook.dir}/${project.name}">
 			<fileset file="${docbook.source.dir}/${project.name}.docb.xml"/>
 		</copy>
-		<!-- copy the images -->		
-		<copy todir="${build.docbook.dir}/${project.name}/figures">
-			<fileset dir="${OOo.source.dir}/figures"/>
-		</copy>
 		<copy todir="${build.docbook.dir}/${project.name}/${project.name}_figures">
 			<fileset dir="${docbook.source.dir}/${project.name}_figures"/>
 		</copy>
-    	<copy todir="${build.dir}/figures">
-    	    <fileset dir="${OOo.source.dir}/figures"/>
-    	</copy>	
     	<copy todir="${build.dir}/figures">
     	    <fileset dir="${project.base.dir}/src/figures"/>
     	</copy>	
@@ -84,9 +77,6 @@
 					en particulier la possibilité d'ajouter un docbook file ? == merge ??-->
 		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
 				
-		<copy todir="${build.docbook.dir}/${project.name}">
-						<fileset file="${OOo.source.dir}/ooo2dbk.xml"/>
-		</copy>
 		<copy file="${build.docbook.dir}/${project.name}/${project.name}.docb.xml" 
 			tofile="${build.docbook.dir}/${project.name}/index.xml"
 			filtering="true"
