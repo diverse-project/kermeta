@@ -217,16 +217,17 @@ public class OCLParseWizard extends Wizard {
 			
 			
 			//IFile outfile = inputFile.getWorkspace().getRoot().getFile(inputFile.getLocation().removeFileExtension().addFileExtension("fixed.istecq"));
-			IFile tmpfile = ResourceHelper.getIFile(kmtFile.getFullPath().removeFileExtension().addFileExtension("xmi").toString(),false);
-			if (tmpfile.exists())
-				try {
-					tmpfile.delete(true, null);
-				} catch (CoreException e1) {
-					console.println(new ThrowableMessage(e1));
-					e1.printStackTrace();
-				}
-				
 			
+			if(!outputPage.keepIntermediateXMI()){
+				IFile tmpfile = ResourceHelper.getIFile(kmtFile.getFullPath().removeFileExtension().addFileExtension("xmi").toString(),false);
+				if (tmpfile.exists())
+					try {
+						tmpfile.delete(true, null);
+					} catch (CoreException e1) {
+						console.println(new ThrowableMessage(e1));
+						e1.printStackTrace();
+					}				
+			}
 			
 			// Here I need to redirect Kermeta Console !
 			

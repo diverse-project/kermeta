@@ -82,6 +82,8 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 
 	// cache of newly-created file
 	protected IFile newFile;
+	
+	
 
 	protected IPath linkTargetPath;
 
@@ -196,6 +198,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 
 	IFile ecoreFile = null;
 	
+	
 	/**
 	 * (non-Javadoc) Method declared on IDialogPage.
 	 */
@@ -254,6 +257,25 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 				SIZING_CONTAINER_GROUP_HEIGHT); //$NON-NLS-1$
 		resourceGroup.setAllowExistingResources(false);
 		initialPopulateContainerNameField();
+		
+		
+		
+		//Label keepIntermediateLbl = new Label(topLevel, SWT.LEFT);
+		//keepIntermediateLbl.setText("Keep intermediate xmi model : ");
+		sKeepIntermediateBtn = new Button(topLevel, SWT.CHECK);
+		sKeepIntermediateBtn.setToolTipText("Will not delete the intermediate XMI file that represents the abstract syntax tree of the OCL text");
+		sKeepIntermediateBtn.setText("Keep intermediate xmi model :");
+		sKeepIntermediateBtn.setAlignment(SWT.LEFT);
+	/*	sKeepIntermediateBtn.addSelectionListener(
+			new SelectionAdapter() {
+				public void widgetSelected(SelectionEvent e) {
+					keepIntermediateXMI = sKeepIntermediateBtn.getSelection();
+					ecoreFile = handleBrowseButtonSelect();
+					ecoreText.setText(ecoreFile.getFullPath().toPortableString());
+					Activator.getDefault().getOptionManager().setLastUsedMetamodel(ecoreFile.getFullPath().toPortableString());
+				}
+			}
+		);*/
 		createFileExistsBehaviorControls(topLevel);
 		createAdvancedControls(topLevel);
 		if (initialFileName != null)
@@ -714,6 +736,12 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 
 	public IFile getEcoreFile() {
 		return ecoreFile;
+	}
+	
+	protected Button sKeepIntermediateBtn;
+	//protected boolean keepIntermediateXMI = false;
+	public boolean keepIntermediateXMI(){
+		return sKeepIntermediateBtn.getSelection();
 	}
 
 }
