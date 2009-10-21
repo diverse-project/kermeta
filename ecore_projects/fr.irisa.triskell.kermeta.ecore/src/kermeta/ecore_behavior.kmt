@@ -63,11 +63,13 @@ aspect class EClass
 	property eAllAttributes : EAttribute[0..*]
 		getter is do
 	 		result := kermeta::standard::OrderedSet<EAttribute>.new
+	 		result.addAll(self.eAttributes)
 			self.eAllSuperTypes.each{ t | result.addAll(t.eAttributes) }
 		end
 	property eAllReferences : EReference[0..*]
 		getter is do
 	 		result := kermeta::standard::OrderedSet<EReference>.new 
+	 		result.addAll(self.eReferences) 
 			self.eAllSuperTypes.each{ t | result.addAll(t.eReferences) }
 		end
 	property eReferences : EReference[0..*]
