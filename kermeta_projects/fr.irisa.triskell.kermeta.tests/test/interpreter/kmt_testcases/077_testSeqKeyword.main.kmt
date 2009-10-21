@@ -1,0 +1,66 @@
+@mainClass "test::Main"
+@mainOperation "main"
+
+package test;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::kunit
+
+class A1
+{
+    reference b: Sequence<Integer>
+}
+
+class A2
+{
+    reference b: seq Integer[0..*]
+}
+
+class TestA1A2 inherits TestCase
+{
+    operation testA1() is
+    do
+        var a: A1 init A1.new()
+        stdio.writeln("testA1")
+        a.b := Sequence<Integer>.new()
+        a.b.add(1)
+        a.b.add(2)
+        a.b.add(1)
+        stdio.writeln(a.b.getMetaClass().toString)
+        a.b.each{i | stdio.write(i.toString)}
+        stdio.writeln("")
+        a.b.removeAt(2)
+        a.b.each{i | stdio.write(i.toString)}
+        stdio.writeln("")
+        assert(a.b.elementAt(0) == 1)
+        assert(a.b.elementAt(1) == 2)
+    end
+
+    operation testA2() is
+    do
+        var a: A2 init A2.new()
+        stdio.writeln("testA2")
+        a.b.add(1)
+        a.b.add(2)
+        a.b.add(1)
+        stdio.writeln(a.b.getMetaClass().toString)
+        a.b.each{i | stdio.write(i.toString)}
+        stdio.writeln("")
+        a.b.removeAt(2)
+        a.b.each{i | stdio.write(i.toString)}
+        stdio.writeln("")
+        assert(a.b.elementAt(0) == 1)
+        assert(a.b.elementAt(1) == 2)
+    end
+}
+
+class Main
+{
+    operation main() : Void is do
+          var runner : TestRunner init TestRunner.new()
+          runner.run(TestA1A2)
+          runner.printTestResult()
+    end
+}
