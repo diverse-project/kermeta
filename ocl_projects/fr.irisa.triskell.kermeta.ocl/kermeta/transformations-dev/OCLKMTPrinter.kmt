@@ -47,9 +47,9 @@ class OCLKMTPrinter
     operation main(): Void is
 		do
 				//self.generateOCL("../../ocl/speedsDepTest.xmi", "../../ocl/speedsL1.ecore", "speedsDepTest.kmt")
-				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl/test/1.xmi",
-				"platform:/resource/fr.irisa.triskell.kermeta.ocl/test/ASMLogo.ecore",
-				"/tmp/test.kmt")//"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/01.kmt")
+				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/tcl/ocl/constraints2.xmi",
+				"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/tcl/metamodel/TCL.ecore",
+				"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/tcl/ocl/constraints2.kmt")//"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/01.kmt")
 	    end
 	     
 	      

@@ -52,6 +52,18 @@ class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor
 	method visitPackageDeclarationCS(visitable : PackageDeclarationCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting package declaration")
+			if visitable.isVoid then
+				var e : UserError init UserError.new
+				e.message := "Missing package declaration"
+				raise e
+			end
+			if visitable.pathNameCS.isVoid then
+				var e : UserError init UserError.new
+				e.message := "Missing package declaration2"
+				raise e
+			end
+			stdio.writeln(visitable.toString)
+			
 			packageFQN := qualifiedNames::QualifiedName.new.fromSequence( visitable.pathNameCS.sequenceOfNames.asSequence()) 
 			stdio.writeln("   got package: " + packageFQN.toString)
 			visitable.contextDecls.each{ cd | cd.accept(self) }

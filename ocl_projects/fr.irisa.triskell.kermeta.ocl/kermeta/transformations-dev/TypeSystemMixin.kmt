@@ -415,3 +415,9 @@ class TypeError inherits Exception {
 			
 		end
 }
+
+/**
+ * Exception raised typically to warn a user that he has made a mistake and the program cannot continue
+ */
+class UserError inherits Exception {
+}
