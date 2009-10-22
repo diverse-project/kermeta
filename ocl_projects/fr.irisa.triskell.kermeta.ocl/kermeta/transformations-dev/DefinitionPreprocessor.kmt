@@ -59,7 +59,7 @@ class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor
 			end
 			if visitable.pathNameCS.isVoid then
 				var e : UserError init UserError.new
-				e.message := "Missing package declaration2"
+				e.message := "Missing package declaration"
 				raise e
 			end
 			stdio.writeln(visitable.toString)
