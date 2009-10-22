@@ -13,7 +13,7 @@ package ecore;
 require kermeta
 require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
 require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
-require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/UMLUtils/EcoreQualifiedNameAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/UMLUtils/EcoreQualifiedNameAspect.kmt"
 using ecore
 using kermeta::standard
 using kermeta::language::structure
