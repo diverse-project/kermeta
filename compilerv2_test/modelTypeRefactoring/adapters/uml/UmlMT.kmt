@@ -1,0 +1,22 @@
+/* $Id: UmlMT.kmt,v 1.4 2009-02-17 16:16:11 vmahe Exp $ 
+ * Creation : December 24, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+
+// "UmlMT.kmt" file
+package uml;
+
+
+require kermeta
+require "UmlAdapter.kmt"
+
+modeltype UmlMT
+{
+	Class,
+	Property,
+	Operation,
+	Parameter
+}

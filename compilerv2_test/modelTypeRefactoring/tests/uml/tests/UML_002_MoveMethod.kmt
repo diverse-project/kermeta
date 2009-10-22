@@ -1,0 +1,76 @@
+/* $Id:$ 
+ * Creation : Arpil 17, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : moha
+ */
+@mainClass "refactor::Main"
+@mainOperation "main"
+
+
+package refactor;
+
+
+require kermeta
+require "../../../adapters/uml/UmlMT.kmt"
+require "../../../refactoring/library/MoveMethod.kmt"
+require "UML_pretty_printer.kmt"
+
+class Main
+{
+	operation main() : Void is do 
+		// initialization 
+		var rep : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+		var res : kermeta::persistence::EMFResource
+		res ?= rep.getResource("platform:/resource/org.kermeta.class_refactoring.tests/uml/models/lan_simulation2.uml")
+		var model : uml::Model
+		model ?= res.one
+		
+		
+		var refactor : refactor::Refactor<uml::UmlMT> init refactor::Refactor<uml::UmlMT>.new
+		
+		var rootPack : uml::Package
+		rootPack ?= model.packagedElement.one
+		
+		var pack1 : uml::Package
+		pack1 ?= rootPack.packagedElement.detect{ p | p.name == "files"}
+		
+		var pack2 : uml::Package
+		pack2 ?= rootPack.packagedElement.detect{ p | p.name == "nodes"}
+		
+		var class1 : uml::Class
+		class1 ?= pack1.packagedElement.detect{ p | p.name == "Document"}
+		
+		var class2 : uml::Class
+		class2 ?= pack2.packagedElement.detect{ p | p.name == "Node"}
+		
+		var class3 : uml::Class
+		class3 ?= pack2.packagedElement.detect{ p | p.name == "Printserver"}
+		
+		var class4 : uml::Class
+		class4 ?= pack1.packagedElement.detect{ p | p.name == "ASCIIDocument"}
+		
+		var field : uml::Property
+		field := class2.ownedAttribute.detect{ a | a.name == "_name"}
+			
+		var opToMove : uml::Operation
+		opToMove := class1.ownedOperation.detect { p | p.name == "formatDocument"}
+		
+		var opToPullUp : uml::Operation
+		opToPullUp := class4.ownedOperation.detect { p | p.name == "includeFigure"}
+		
+		refactor.moveMethod(opToMove, class1, class3, true)
+						 
+		stdio.writeln("Done with MoveMethod(formatDocument(), Document, Printserver, true)!")
+		
+		// we save the refactored UML model
+		var outputRep : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+		var outputRes : kermeta::persistence::EMFResource
+		outputRes ?= outputRep.createResource("platform:/resource/org.kermeta.class_refactoring.tests/uml/models/lan_simulation2_moveMethod_refactored.uml",
+										"http://www.eclipse.org/uml2/2.1.0/UML")
+		outputRes.add(model)
+		outputRes.save
+	end
+}
+
+

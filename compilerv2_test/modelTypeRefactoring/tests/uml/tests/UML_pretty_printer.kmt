@@ -1,0 +1,84 @@
+/* $Id:$ 
+ * Creation : April 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+
+package uml;
+
+require kermeta
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+
+using kermeta::standard
+
+aspect class Element
+{
+	operation print(indent : String) : Void is do
+		// empty body, for elements which do not print 
+	end
+}
+
+aspect class Model
+{
+	method print(indent : String) : Void is do 
+		stdio.writeln(indent + "Model: "+ self.name)
+		self.packagedElement.each{ pe |
+			pe.print(indent + "  ")
+		}
+	end
+}
+
+aspect class Package
+{
+	method print(indent : String) : Void is do 
+		stdio.writeln(indent + "Package: "+ self.name)
+		self.packagedElement.each{ pe |
+			pe.print(indent + "  ")
+		}
+	end
+}
+
+aspect class Class
+{
+	method print(indent : String) : Void is do 
+		stdio.writeln(indent + "Class: "+ self.name)
+		self.ownedAttribute.each{ oa |
+			oa.print(indent + "  ")
+		}
+		self.ownedOperation.each{ oo |
+			oo.print(indent + "  ")
+		}
+	end
+}
+
+aspect class Property
+{
+	method print(indent : String) : Void is do 
+		stdio.writeln(indent + "Property: "+ self.name)
+		if self.type != void then
+			stdio.writeln(indent + "   - property type : " + self.type.name)
+		end
+	end
+}
+
+aspect class Operation
+{
+	method print(indent : String) : Void is do 
+		stdio.writeln(indent + "Operation: "+ self.name)
+		self.ownedParameter.each{ op |
+			op.print(indent + "  ")
+		}
+	end
+}
+
+aspect class Parameter
+{
+	method print(indent : String) : Void is do 
+		stdio.writeln(indent + "Parameter: "+ self.name + " - direction : " + self.direction.toString)
+		if self.type != void then
+			stdio.writeln(indent + "   - property type : " + self.type.name)
+		end
+	end
+}

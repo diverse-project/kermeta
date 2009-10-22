@@ -1,0 +1,67 @@
+/* $Id:$ 
+ * Creation : April 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : moha
+ */
+
+package refactor;
+
+require kermeta
+require "../metamodel/ClassRefactoringMT.kmt"
+
+
+class Refactor<MT : classrefactoring::ClassRefactoringMT>
+{
+	operation moveMethod(aMethod : MT::Operation,
+						  sourceClass : MT::Class,
+						  targetClass : MT::Class,
+						  useDelegation : kermeta::standard::Boolean) : Void
+		
+	pre methodExists is
+		do sourceClass.operations.exists{op | op.name == aMethod.name} end
+	
+	// TODO : verify the return type and the parameters!
+	pre notSameMethodInTarget is
+		do
+			not targetClass.operations.exists{ op |
+				op.name == aMethod.name
+			}
+		end
+	
+	// TODO : verify the return type and the parameters!
+	pre noCallToSuper is
+		do
+			not sourceClass.superClasses.exists{ sc |
+					sc.operations.exists{ o |	
+						o.name.equals(aMethod.name)	
+					}
+				}
+		end
+	
+	is do
+	
+		// in any case, we move existing method to target
+		targetClass.operations.add(aMethod)
+		sourceClass.operations.remove(aMethod)
+		
+		if useDelegation then
+			////// we must create the delegate 
+			var op : MT::Operation init MT::Operation.new
+			op.name := "delegate_method" //aMethod.name
+			aMethod.parameters.each{ p |
+				var par : MT::Parameter init MT::Parameter.new
+				par.name := p.name
+				op.parameters.add(par)
+			}
+			sourceClass.operations.add(op)
+			
+			op.calls.add(aMethod)
+			
+		else
+			// as the call references are directly on operations in our GenericMM metamodel
+			// we do not need to change the references and calls on the method/operation
+		end
+		
+	end
+}

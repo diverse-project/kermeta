@@ -1,0 +1,200 @@
+/* $Id: UmlPlus.kmt,v 1.4 2009-02-17 16:16:11 vmahe Exp $ 
+ * Creation : December 24, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : vmahe, moha
+ */
+
+// "UmlPlus.kmt" file
+package uml;
+
+
+require "UmlHelper.kmt"
+
+
+aspect class Generalization {
+	reference general : Classifier#inv_general
+}
+
+aspect class Classifier {
+	reference inv_general : Generalization[0..*]#general
+}
+
+aspect class Class
+{
+	property operations : Operation[0..*]
+		getter is do
+			var coll : kermeta::standard::ClassOperationsOSet<Operation>
+					init kermeta::standard::ClassOperationsOSet<Operation>.new
+			coll.owner := self
+			// we must duplicate data in the wrapping collection
+			coll.addAll(self.ownedOperation)
+			// we pass the wrapper as derived property value
+			result := coll
+		end
+	
+	property attributes : Property[0..*]
+		getter is do
+			var coll : kermeta::standard::ClassAttributesOSet<Property>
+					init kermeta::standard::ClassAttributesOSet<Property>.new
+			coll.owner := self
+			// we must duplicate data in the wrapping collection
+			coll.addAll(self.ownedAttribute)
+			// we pass the wrapper as derived property value
+			result := coll
+		end
+		
+	property isAClass : kermeta::standard::Boolean
+	
+	property superClasses : Class[0..*]#subClasses
+		getter is do
+			result := kermeta::standard::OrderedSet<uml::Class>.new
+			self.generalization.each{ g | 
+				var clazz : uml::Class
+				clazz ?= g.general
+				if clazz != void then result.add(clazz) end
+			}
+		end
+	
+	property subClasses : Class[0..*]#superClasses
+		getter is do
+			result := kermeta::standard::OrderedSet<uml::Class>.new
+			self.inv_general.each{ g | 
+				var clazz : uml::Class
+				clazz ?= g.specific
+				if clazz != void then result.add(clazz) end
+			} 
+		end
+}
+
+aspect class Operation
+{
+	
+	property calledBy : Operation[0..*]#calls
+		getter is do
+			result := kermeta::standard::OrderedSet<uml::Operation>.new
+		end
+		
+	
+	property calls : Operation[0..*]#calledBy
+		getter is do
+			result := kermeta::standard::OrderedSet<uml::Operation>.new
+		end
+		
+	
+	property parameters : Parameter[0..*]
+		getter is do
+			var coll : kermeta::standard::OperationParametersOSet<Parameter>
+					init kermeta::standard::OperationParametersOSet<Parameter>.new
+			coll.owner := self
+			// we must duplicate data in the wrapping collection
+			coll.addAll(self.ownedParameter)
+			// we pass the wrapper as derived property value
+			result := coll
+		end
+	
+	property isVisible : kermeta::standard::Boolean
+		getter is do
+			if self.visibility == VisibilityKind.private
+				then result := false end
+			if self.visibility == VisibilityKind.protected
+				then result := true end
+			if self.visibility == VisibilityKind.public
+				then result := true end
+		end
+		setter is do
+			if value then
+				self.visibility == VisibilityKind.public
+			else
+				self.visibility == VisibilityKind.private
+			end
+		end
+	
+	property returnType : uml::Class
+		getter is do
+			var returnPar : uml::Parameter
+			returnPar := self.parameters.detect{ par |
+				par.direction == ParameterDirectionKind.return
+			}
+			if returnPar != void then
+				result ?= returnPar.type
+			else
+				result := void
+			end
+		end
+		setter is do
+			var returnPar : uml::Parameter
+			returnPar := self.parameters.detect{ par |
+				par.direction == ParameterDirectionKind.return
+			}
+			if value != void then
+				if returnPar == void then
+					returnPar := Parameter.new
+					returnPar.direction == ParameterDirectionKind.return
+					self.ownedParameter.add(returnPar)
+				end
+				returnPar.type := value
+			else
+				if returnPar != void then
+					self.ownedParameter.remove(returnPar)
+				end
+			end
+		end
+		
+	property isAnOperation : kermeta::standard::Boolean
+}
+
+aspect class Property
+{
+	property isVisible : kermeta::standard::Boolean
+		getter is do
+			if self.visibility == VisibilityKind.private
+				then result := false end
+			if self.visibility == VisibilityKind.protected
+				then result := true end
+			if self.visibility == VisibilityKind.public
+				then result := true end
+		end
+		setter is do
+			if value then
+				self.visibility := VisibilityKind.public
+			else
+				self.visibility := VisibilityKind.private
+			end
+		end
+	
+	property isComposite : kermeta::standard::Boolean
+		getter is do
+			result := self.aggregation == AggregationKind.composite
+		end
+		setter is do
+			if value then
+				self.aggregation == AggregationKind.composite
+			else
+				self.aggregation == AggregationKind.none
+			end
+		end
+	
+	property isOfType : uml::Class
+		getter is do
+			result ?= self.type
+		end
+		setter is do
+			self.type := value
+		end
+		
+	property isAnAttribute : kermeta::standard::Boolean
+}
+
+aspect class Parameter
+{
+	property isOfType : uml::Class
+		getter is do
+			result ?= self.type
+		end
+		setter is do
+			self.type := value
+		end
+		
+	property isAParameter : kermeta::standard::Boolean
+}

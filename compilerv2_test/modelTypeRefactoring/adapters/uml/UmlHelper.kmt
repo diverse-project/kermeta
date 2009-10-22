@@ -1,0 +1,103 @@
+/* $Id: UmlHelper.kmt,v 1.2 2009-02-17 16:16:11 vmahe Exp $ 
+ * Creation : January 13, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+
+// "UmlHelper.kmt" file
+package kermeta;
+
+
+require kermeta
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+
+
+// extend the Kermeta collections: "kermeta::standard::OrderedSet" and others
+package standard {
+
+	/** dedicated class for derived property on 'uml::Class' 'ownedOperation' attribute,
+	    because of its [0..*] multiplicity */
+	aspect class ClassOperationsOSet<O : uml::Operation> inherits kermeta::standard::OrderedSet<uml::Operation> {
+		
+		reference owner : uml::Class
+		
+		method add(element : uml::Operation) is do
+			owner.ownedOperation.add(element)
+			// we must maintain equivalence between real collection and the wrapping one
+			super(element)
+		end
+	}
+	
+	/** idem for 'uml::Class' 'ownedAttribute' attribute */
+	aspect class ClassAttributesOSet<O : uml::Property> inherits kermeta::standard::OrderedSet<uml::Property> {
+		
+		reference owner : uml::Class
+		
+		method add(element : uml::Property) is do
+			owner.ownedAttribute.add(element)
+			// we must maintain equivalence between real collection and the wrapping one
+			super(element)
+		end
+	}
+	
+	/** idem for 'uml::Operation' 'ownedParameter' */
+	aspect class OperationParametersOSet<O : uml::Parameter> inherits kermeta::standard::OrderedSet<uml::Parameter> {
+		
+		reference owner : uml::Operation
+		
+		method add(element : uml::Parameter) is do
+			owner.ownedParameter.add(element)
+			// we must maintain equivalence between real collection and the wrapping one
+			super(element)
+		end
+	}
+	
+} // kermeta::standard
+
+/** specific routines to extract elements or compute the model */
+aspect class Helper{
+	
+	operation getAllModelClasses(startingPoint : uml::Class) : kermeta::standard::Set<uml::Class> is do
+		var rootPackage : uml::Package
+		// we use the UML model as root package to explore the model
+		rootPackage ?= startingPoint.containingResource().one
+		result := getPackageClasses(rootPackage)
+	end
+	/** recursive up-bottom exploration of package tree */
+	operation getPackageClasses(currentPackage : uml::Package) : kermeta::standard::Set<uml::Class> is do
+		result := kermeta::standard::Set<uml::Class>.new
+		currentPackage.packagedElement.each{ e |
+			var c : uml::Class
+			c ?= e
+			if c != void then result.add(c) end
+		}
+		currentPackage.nestedPackage.each{ p |
+			result.addAll(getPackageClasses(p))
+		}
+	end
+	
+	operation getClassPath(c : uml::Class) : kermeta::standard::String is do
+		var rootPackage : uml::Package
+		// we use the UML model as root package to explore the model
+		rootPackage ?= c.containingResource().one
+		result := getClassSubPath(c, rootPackage)
+	end
+	operation getClassSubPath(c : uml::Class, p : uml::Package) : kermeta::standard::String is do
+		result := ""
+		p.packagedElement.each{ element |
+			if element == c then
+				result := p.name
+			else
+				var subpack : uml::Package
+				subpack ?= element
+				if subpack != void then
+					var subpath : kermeta::standard::String
+					subpath := getClassSubPath(c, subpack)
+					if subpath != "" then result := subpath + "." + p.name end
+				end
+			end
+		}
+	end
+}

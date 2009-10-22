@@ -1,0 +1,20 @@
+/* $Id:$ 
+ * Creation : March 23, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe@irisa.fr
+ */
+
+package classrefactoring;
+
+require kermeta
+require "ClassRefactoringMM.ecore"
+
+modeltype ClassRefactoringMT
+{
+	Class,
+	Attribute,
+	Operation,
+	Parameter
+}
