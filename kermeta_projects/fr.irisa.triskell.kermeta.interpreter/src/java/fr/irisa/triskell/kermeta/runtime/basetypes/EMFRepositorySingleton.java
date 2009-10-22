@@ -104,7 +104,10 @@ public class EMFRepositorySingleton {
     public RuntimeObject registerEcoreFile(RuntimeObject mmUriRO) {
     	
     	java.lang.String ecore_file = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(mmUriRO);
-    	URI ecoreFileUri = URI.createURI(ecore_file);
+    	java.lang.String filePath = Repository.normalizeUri(ecore_file, 
+    			mmUriRO.getFactory().getMemory().getUnit(), 
+    			mmUriRO.getFactory().getMemory().getInterpreter());
+    	URI ecoreFileUri = URI.createURI(filePath);
     	try {
 			EcoreRegistering.registerPackages(ecoreFileUri);
 		} catch (NotValidEPackageURIException e) {
