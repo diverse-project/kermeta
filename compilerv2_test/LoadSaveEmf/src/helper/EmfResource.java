@@ -30,7 +30,7 @@ public class EmfResource <T extends EPackage>{
   
 		// Initialize the FSML Package information (ie. URI)
 		EcorePackageImpl.init();
-
+	//EcorePackageImpl.eINSTANCE.setEFactoryInstance()
 		// Set OPTION_RECORD_UNKNOWN_FEATURE prior to calling getResource
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*",
 				new EcoreResourceFactoryImpl() {
@@ -45,6 +45,8 @@ public class EmfResource <T extends EPackage>{
 					}
 				});
 
+		
+		
 		XMIResource resource = (XMIResource) resourceSet.getResource(URI
 				.createFileURI(file.toString()), true);
 
@@ -57,9 +59,23 @@ public class EmfResource <T extends EPackage>{
 	
 	public EmfResource(T pack) {
 		rs = new ResourceSetImpl(); 
+		EcorePackageImpl.init();
 		Resource.Factory.Registry f = rs.getResourceFactoryRegistry();
 		java.util.Map<String,Object> m = f.getExtensionToFactoryMap();
 		m.put("xmi",new XMIResourceFactoryImpl());
+		m.put("*",
+				new EcoreResourceFactoryImpl() {
+					@Override
+					public Resource createResource(URI uri) {
+						XMIResourceImpl resource = (XMIResourceImpl) super
+								.createResource(uri);
+						resource.getDefaultLoadOptions().put(
+								XMLResource.OPTION_RECORD_UNKNOWN_FEATURE,
+								Boolean.TRUE);
+						return resource;
+					}
+				});
+
 		rs.getPackageRegistry().put(pack.getNsURI(), pack);
 		
 	}
@@ -69,6 +85,15 @@ public class EmfResource <T extends EPackage>{
 	public EList<EObject> getResourceContents(String fileName) {
 		URI uri = URI.createFileURI(fileName);
 		resource = rs.getResource(uri, true);
+//		System.out.println(resource.getEObjectToExtensionMap());
+
+		try {
+			resource.load(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return resource.getContents();
 	}
 	public Resource getResource(String fileName) {
