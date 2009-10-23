@@ -28,6 +28,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.io.loader,
  org.kermeta.merger,
  fr.irisa.triskell.kermeta.interpreter,
- org.kermeta.log4j.util
+ org.kermeta.log4j.util,
+ org.eclipse.ui.intro
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

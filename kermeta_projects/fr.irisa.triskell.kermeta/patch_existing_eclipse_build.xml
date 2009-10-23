@@ -1,0 +1,12 @@
+<project name="patch_existing_eclipse_branding" default="all" basedir=".">
+        
+    <description>
+        Deploy the standalone version of kermeta
+    </description>
+
+	<property name="eclipse.platform.location" location="E:\diva_distrib\eclipse\plugins\org.eclipse.platform_3.3.101.v200902111700"/>
+	
+	<target name="all">
+		<copy file="splash.bmp" todir="${eclipse.platform.location}" overwrite="true"/>
+	</target>
+</project>

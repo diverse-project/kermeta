@@ -1,0 +1,75 @@
+
+a#euictdivastudio-introLink img { background-image : url(graphics/sample.gif); }
+a#euictdivastudio-introLink:hover img { background-image : url(graphics/sample_hov.gif); }
+
+#euictdivastudio-introLink-group a#euictdivastudio-introLink {
+	height : 118px;
+	width: 202px;
+	padding-top: 50px;
+	padding-left: 20px;
+	background-image: url(graphics/diva_root.png);
+	background-repeat: no-repeat;
+}
+
+#euictdivastudio-introLink-group a#euictdivastudio-introLink:hover,
+#euictdivastudio-introLink-group a#euictdivastudio-introLink:focus,
+#euictdivastudio-introLink-group a#euictdivastudio-introLink:active {
+	background-image: url(graphics/diva_root_tophov.png);
+}
+/* Paint bottom edge of the text box as a background image */
+
+#euictdivastudio-introLink-group .link-label{
+	
+	margin-left: -6px;
+	padding-left: 8px;
+	z-index: 55;
+	background-color : #FFFFFF; 
+}
+#euictdivastudio-introLink-group a p .text {
+	margin-left: -16px;
+	position: relative;
+	//background-color : #FFFFFF;
+	
+	top: -1px;
+	padding-left: 5px;
+	padding-top: 8px;
+	
+	padding-right: 2px;
+	font-size : 11pt;
+	font-weight : 500;
+	padding-bottom: 5px;
+	z-index: 15;
+	background-image: url("graphics/root_midhov2.gif");
+	background-repeat: repeat-y;
+}
+
+#euictdivastudio-introLink-group a:hover .text,
+#euictdivastudio-introLink-group a:focus .text,
+#euictdivastudio-introLink-group a:active .text{
+	background-image: url("graphics/root_bottomhov.gif");
+	background-repeat: no-repeat;
+	background-position: bottom left;
+	//z-index: 45;;
+}
+
+/* Hide the link label in the normal state */
+#euictdivastudio-introLink-group a .link-label,
+#euictdivastudio-introLink-group a .text {
+	display : none;
+}
+
+/* Show the link label and link text as block on hover */
+
+#euictdivastudio-introLink-group a:hover .link-label,
+#euictdivastudio-introLink-group a:focus .link-label,
+#euictdivastudio-introLink-group a:active .link-label {
+	display : block;
+	z-index: 60;
+}
+
+#euictdivastudio-introLink-group a:hover p .text,
+#euictdivastudio-introLink-group a:focus p .text,
+#euictdivastudio-introLink-group a:active p .text {
+	display : block;
+	z-index: 35;
+}

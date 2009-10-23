@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+  	<extensionContent id="kermeta-introExtension" style="css/overviewConfigExtension.css" name="Kermeta overview Extension" path="overview/@">
+		<group style-id="content-group" id="kermeta-introOverviewLink-group">
+       		<link label="Kermeta" url="http://org.eclipse.ui.intro/showHelpTopic?id=/fr.irisa.triskell.kermeta.documentation/build/eclipse.help/KerMeta-Manual/ch01.html" 
+       				id="kermeta-introOverviewLink" style-id="content-link">
+          		<text>Find out how to enhance your model experience using executable metamodeling.</text>
+       		</link>
+       	</group>
+  	</extensionContent>
+</introContent>

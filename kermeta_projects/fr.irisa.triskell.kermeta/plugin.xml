@@ -154,5 +154,12 @@
           id="fr.irisa.triskell.kermeta.KermetaNatureImage"
           natureId="fr.irisa.triskell.kermeta.KermetaNature"/>
  </extension>
+ <extension
+       point="org.eclipse.ui.intro.configExtension">
+    <configExtension
+          configId="org.eclipse.ui.intro.universalConfig"
+          content="intro/overviewConfigExtension.xml">
+    </configExtension>
+ </extension>
  
 </plugin>
