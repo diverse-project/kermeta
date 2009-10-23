@@ -11,6 +11,7 @@
 			</fileset>
 			<fileset dir="features"/>
 			<fileset dir="plugins"/>
+			<fileset file="logs.zip"/>
 		</delete>
 
 	</target>
