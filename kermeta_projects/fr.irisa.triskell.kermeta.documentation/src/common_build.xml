@@ -263,8 +263,8 @@
 		  	</copy>
 			<copy file="${build.dir}/pdf.fop/${project.name}/${project.name}.pdf" 
 					todir="${deployment.dest}"/>
-			<copy file="${build.dir}/html.help/${project.name}/${project.name}.chm" 
-				todir="${deployment.dest}"/>
+			<!-- <copy file="${build.dir}/html.help/${project.name}/${project.name}.chm" 
+				todir="${deployment.dest}"/> -->
 
 		</target>
 	

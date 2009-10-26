@@ -65,7 +65,7 @@ public class ProjectVisitor implements IResourceVisitor {
 		String fileName = project.getFullPath().toString();
 		for(String pattern : KPMPreferenceHelper.getExcludedFilePatterns()){
 			if(fileName.matches(EscapeChars.forSimpleRegex(pattern))){
-				KPMPlugin.internalLog.debug("Ignored add KMPBuilder to the buildCommand of project " + project.getName());
+				KPMPlugin.internalLog.debug("Ignored add KPMBuilder to the buildCommand of project " + project.getName());
 				return;
 			}
 		}
@@ -83,7 +83,7 @@ public class ProjectVisitor implements IResourceVisitor {
 		nc[0] = command;
 		desc.setBuildSpec(nc);
 		project.setDescription(desc, null);
-		KPMPlugin.internalLog.debug("Added KMPBuilder to the buildCommand of project " + project.getName());
+		KPMPlugin.internalLog.debug("Added KPMBuilder to the buildCommand of project " + project.getName());
 		project.build( IncrementalProjectBuilder.FULL_BUILD, null );
 	}
 	

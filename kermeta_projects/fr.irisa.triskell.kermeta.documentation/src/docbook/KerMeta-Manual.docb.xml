@@ -155,6 +155,9 @@
         <listitem>
           <para>Object-Oriented</para>
         </listitem>
+        <listitem>
+          <para>Aspect-Oriented</para>
+        </listitem>
 
         <listitem>
           <para>Statically Typed (100% typesafe)</para>
@@ -169,7 +172,7 @@
       Section 2 presents the general syntax of the language, sections 3 &amp;
       4 give details about the object-oriented and model-oriented features of
       the language and finally section 4 provides information about some extra
-      concepts in Kermeta.</para>
+      concepts in Kermeta (including aspect orientation).</para>
       <para>With its workbench, it's goal is to provide a 
       support for all Language Driven Engineering activities. It will be typically 
       used to build tools useful to build software.  This includes (but is not restricted to):
