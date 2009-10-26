@@ -1,0 +1,51 @@
+/* $Id:$ 
+ * Creation : October 13, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package kermeta::exceptions;
+
+
+require kermeta
+//require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/visitor/prettyprinters/kmtPrettyPrinter.kmt"
+
+require "persistence_aspect.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+
+aspect class ConstraintsDiagnostic 
+{
+	attribute setConstraints : Set<ConstraintViolatedInv>
+	
+	/* Initialize */
+	operation initialize() : ConstraintsDiagnostic is do
+		setConstraints := Set<ConstraintViolatedInv>.new
+		result := self
+	end
+	
+	/* Adds a ConstraintViolatedInv object to setConstraints */	
+	operation add(cons : ConstraintViolatedInv) is do
+		setConstraints.add(cons)
+	end
+	
+	/* Prints the content */
+	operation prettyPrint() : Void is do
+		//stdio.writeln("Number of violated constraints : " + setConstraints.size.toString)
+	
+		//Clean the markers on the associated resources
+		setConstraints.collect{constraint|constraint.constraintAppliedTo.containingResource.asType(EMFResource)}
+					  .asSet
+					  .each{resource|resource.clean}
+					  
+	
+		setConstraints.each{c|
+			//stdio.writeln("exceptions_aspect : " + c.message + " /exceptions_aspect" /*+c.failedConstraint.body.toString*/)
+			c.constraintAppliedTo.containingResource.asType(EMFResource).mark(c.message)
+		}
+	end
+}

@@ -1,0 +1,185 @@
+/* $Id:$ 
+ * Creation : September 28, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+//@mainClass "language::Main"
+//@mainOperation "main"
+
+/* $Id:$ 
+ * Creation : September 25, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+//@mainClass "language::Main"
+//@mainOperation "main"
+
+
+package kermeta::language::structure;
+
+require kermeta
+require "exceptions_aspect.kmt"
+
+using kermeta::language::structure
+using kermeta::language::behavior
+using kermeta::exceptions
+using kermeta::standard
+using kermeta::persistence
+
+
+
+/*
+ * The class PropertyConstraint extends the class Constraint in order to
+ * differentiate multiplicity invaraints from genuine Class invariants 
+ */
+aspect class PropertyConstraint inherits Constraint {
+	attribute ~property : Property // the property
+}
+
+aspect class Object
+{
+
+	operation getViolatedConstraints() : ConstraintsDiagnostic is do
+	
+		// init result
+		var contraintes : ConstraintsDiagnostic init ConstraintsDiagnostic.new.initialize
+		
+		var cd : ClassDefinition 
+		cd := self.getMetaClass().classDefinition
+		
+		//stdio.writeln("getViolatedConstraints >> Class def : " + cd.name )
+		
+		if ( not cd.isVoid ) then
+			
+			//cd.allAttribute.each{a | stdio.writeln(" listing attributes : " + a.name)}
+			
+			// Checking properties
+			cd.allAttribute.each{ prop |
+				
+				//stdio.writeln("  checking " + prop.name + ", composite " + prop.isComposite.toString )			
+				if not prop.tag.exists{t| t.name == "ecore.isTransient"} and
+				   not prop.isDerived
+				then
+					// build a constraint with the property
+					var constraint : PropertyConstraint init PropertyConstraint.new
+					constraint.name := cd.name + "_" + prop.name + "_" + prop.type.toString()
+					//constraint.invOwner := cd // ajout pour les markers
+					constraint.~property := prop
+					
+					do
+						checkInvariant(constraint)
+						rescue (e : ConstraintViolatedInv)
+							// add the violated constraint to the report 
+							contraintes.add(e)
+					end		
+			
+					// Recursivity
+					if ( prop.isComposite /*and not prop.isDerived*/) 
+					then
+						if not self.get(prop).isVoid() 
+						then
+							
+							if self.get(prop).getMetaClass.typeDefinition.asType(ClassDefinition).allSuperTypes.exists{ t |
+								if t.isInstanceOf(ParameterizedType) 
+								then
+									t.asType(ParameterizedType).typeDefinition.qualifiedName=="kermeta::standard::Collection"
+								else
+									false
+								end } 
+							/*if self.get(prop).isInstanceOf(Collection<Object>)*/
+							then
+						
+								var subObjInstances : kermeta::standard::Collection<Object>
+								subObjInstances ?= self.get(prop)
+								subObjInstances.each { aSubObjInstances | aSubObjInstances.getViolatedConstraints
+																			.setConstraints. each{v|contraintes.add(v)} }
+							else
+								self.get(prop).getViolatedConstraints.setConstraints.each{v|contraintes.add(v)}
+							end
+						end
+					end
+				end
+				
+				
+			}
+			
+			// Checking invariants
+			cd.~inv.each{invariant |
+				//stdio.writeln("Checking invariant : " + invariant.name)
+				do
+					checkInvariant(invariant)
+					rescue (e : ConstraintViolatedInv) 
+						contraintes.add(e)
+				end
+			}
+			
+		end
+	
+		result := contraintes
+	end
+
+	/**
+	 * Runs checking of an invariant defined for the metaclass of the Object
+	 */
+	operation checkInvariant(invariant : Constraint) : Void is do 
+	
+		var cd : ClassDefinition init self.getMetaClass.classDefinition
+		
+		//stdio.writeln("	Checking property " + invariant.name + " on " + cd.name)
+		
+		// If the invariant is a PropertyConstraint, check the multiplicities
+		if (invariant.isKindOf(PropertyConstraint))
+		then
+			// retrieve property
+			var prop : Property init invariant.asType(PropertyConstraint).~property		
+			var v : Object init self.get(prop)
+					
+			if ( (not v.isVoid).andThen{f| v.isInstanceOf(Collection<Object>)} )
+			then
+				var coll : Collection<Object> init v.asType(Collection<Object>)
+				
+				//stdio.writeln("		lower " + prop.lower.toString + " - size of the collection " + coll.size.toString + " - upper " + prop.upper.toString )
+				
+				// A collection that does not respect the defined bounds raises an exception.
+				if ( prop.upper != -1 and coll.size() > prop.upper ) then
+					var e : ConstraintViolatedInv init ConstraintViolatedInv.new
+					e.constraintAppliedTo := self
+					e.message := "Invariant upper bound of " + cd.name + "_" + prop.name + "_" + prop.type.toString + " violated on " + self.toString
+					e.failedConstraint := invariant
+					raise e
+				end
+				if ( coll.size() < prop.lower ) then
+					var e : ConstraintViolatedInv init ConstraintViolatedInv.new
+					e.constraintAppliedTo := self
+					e.message := "Invariant lower bound of " + cd.name + "_" + prop.name + "_" + prop.type.toString + " violated on " + self.toString
+					e.failedConstraint := invariant
+					raise e
+				end
+			else
+			// A required property that is void raises an exception.
+				if ( prop.lower == 1 and v.isVoid ) then
+					var e : ConstraintViolatedInv init ConstraintViolatedInv.new
+					e.constraintAppliedTo := self
+					e.message := "Invariant lower bound of " + cd.name + "_" + prop.name + "_" + prop.type.toString + " violated on " + self.toString
+					e.failedConstraint := invariant
+					raise e
+					//violatedConstraints.add(e)
+				end					
+			end
+			
+		
+		else // This is a Class invariant
+			do
+				@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariant(this, invariant)"
+				extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariant(self, invariant.asType(Object))
+			end	
+		end
+
+
+	end
+
+}

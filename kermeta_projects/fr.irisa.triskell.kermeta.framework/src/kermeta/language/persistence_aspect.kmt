@@ -1,0 +1,49 @@
+/* $Id:$ 
+ * Creation : October 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package kermeta::persistence;
+
+require kermeta
+
+using kermeta::standard
+
+aspect class EMFResource {
+
+	operation mark(message : String) is do
+		
+		// stdio.writeln("Marking file " + self.uri + " with message : " + message)
+		// extern call
+		do
+			@compiledJavaExtern "fr.irisa.triskell.kermeta.runtime.io.MarkerTest.markFile(self.uri, message)"
+			extern fr::irisa::triskell::kermeta::runtime::io::MarkerTest.markFile(self.uri, message)
+		end	
+		
+	end
+	
+	operation clean() is do
+	
+		// stdio.writeln("Cleaning file " + self.uri)
+		// extern call
+		do
+			@compiledJavaExtern "fr.irisa.triskell.kermeta.runtime.io.MarkerTest.markFile(self.uri, message)"
+			extern fr::irisa::triskell::kermeta::runtime::io::MarkerTest.cleanFile(self.uri)
+		end
+	end
+}
+
+
+/*
+
+class Main
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}
+*/
