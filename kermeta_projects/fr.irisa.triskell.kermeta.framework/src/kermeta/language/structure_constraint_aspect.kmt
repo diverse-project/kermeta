@@ -34,15 +34,23 @@ using kermeta::persistence
 
 /*
  * The class PropertyConstraint extends the class Constraint in order to
- * differentiate multiplicity invaraints from genuine Class invariants 
+ * differentiate multiplicity invariants from genuine Class invariants 
  */
-aspect class PropertyConstraint inherits Constraint {
-	attribute ~property : Property // the property
+class PropertyConstraint inherits Constraint {
+	/**
+	 * The property that is checked by this constraint
+	 * Typically, it will check the lower and upper bounds
+	 */
+	attribute ~property : Property 
 }
 
 aspect class Object
 {
 
+	/**
+	 * Checks all the invariants for this object and return a complete diagnostic.
+	 * This also includes the structural constraints associated to the properties.
+	 */
 	operation getViolatedConstraints() : kermeta::exceptions::ConstraintsDiagnostic is do
 	
 		// init result
@@ -123,7 +131,8 @@ aspect class Object
 	end
 
 	/**
-	 * Runs checking of an invariant defined for the metaclass of the Object
+	 * Checks a constraint invariant defined for the metaclass of the Object
+	 * You can use PropertyConstraint for checking structural constraints associated to a property
 	 */
 	operation checkInvariant(invariant : Constraint) : Void is do 
 	
