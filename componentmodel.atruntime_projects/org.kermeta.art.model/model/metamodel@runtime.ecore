@@ -85,7 +85,7 @@
           eType="#//type/Attribute" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1"
           eType="#//group/TypeGroup" eOpposite="#//group/TypeGroup/types"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="implem" eType="#//implem/ComponentImplementation"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="implem" eType="#//implem/TypeImplementation"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//type/ComponentType">

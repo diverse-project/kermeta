@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import art.impl.ModelElementImpl;
+import art.implem.TypeImplementation;
 import art.implem.ComponentImplementation;
 import art.type.Attribute;
 import art.type.ComponentType;
@@ -81,7 +82,7 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 	 * @generated
 	 * @ordered
 	 */
-	protected ComponentImplementation implem;
+	protected TypeImplementation implem;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -145,7 +146,7 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentImplementation getImplem() {
+	public TypeImplementation getImplem() {
 		return implem;
 	}
 
@@ -154,8 +155,8 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetImplem(ComponentImplementation newImplem, NotificationChain msgs) {
-		ComponentImplementation oldImplem = implem;
+	public NotificationChain basicSetImplem(TypeImplementation newImplem, NotificationChain msgs) {
+		TypeImplementation oldImplem = implem;
 		implem = newImplem;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypePackage.COMPONENT_TYPE__IMPLEM, oldImplem, newImplem);
@@ -169,7 +170,7 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setImplem(ComponentImplementation newImplem) {
+	public void setImplem(TypeImplementation newImplem) {
 		if (newImplem != implem) {
 			NotificationChain msgs = null;
 			if (implem != null)
@@ -260,7 +261,7 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 				getGroups().addAll((Collection<? extends TypeGroup>)newValue);
 				return;
 			case TypePackage.COMPONENT_TYPE__IMPLEM:
-				setImplem((ComponentImplementation)newValue);
+				setImplem((TypeImplementation)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -284,7 +285,7 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 				getGroups().clear();
 				return;
 			case TypePackage.COMPONENT_TYPE__IMPLEM:
-				setImplem((ComponentImplementation)null);
+				setImplem((TypeImplementation)null);
 				return;
 		}
 		super.eUnset(featureID);

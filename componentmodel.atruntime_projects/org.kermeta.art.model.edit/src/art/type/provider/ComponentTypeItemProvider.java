@@ -183,12 +183,7 @@ public class ComponentTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypePackage.Literals.COMPONENT_TYPE__IMPLEM,
-				 ImplemFactory.eINSTANCE.createFractalComponent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypePackage.Literals.COMPONENT_TYPE__IMPLEM,
-				 ImplemFactory.eINSTANCE.createOSGiComponent()));
+				 ImplemFactory.eINSTANCE.createOSGiType()));
 	}
 
 	/**

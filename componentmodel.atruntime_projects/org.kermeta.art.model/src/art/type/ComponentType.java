@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import art.AddElement;
 import art.ModelElement;
 import art.group.TypeGroup;
+import art.implem.TypeImplementation;
 import art.implem.ComponentImplementation;
 import art.RemoveElement;
 
@@ -93,12 +94,12 @@ public interface ComponentType extends ModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Implem</em>' containment reference.
-	 * @see #setImplem(ComponentImplementation)
+	 * @see #setImplem(TypeImplementation)
 	 * @see art.type.TypePackage#getComponentType_Implem()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ComponentImplementation getImplem();
+	TypeImplementation getImplem();
 
 	/**
 	 * Sets the value of the '{@link art.type.ComponentType#getImplem <em>Implem</em>}' containment reference.
@@ -108,6 +109,6 @@ public interface ComponentType extends ModelElement {
 	 * @see #getImplem()
 	 * @generated
 	 */
-	void setImplem(ComponentImplementation value);
+	void setImplem(TypeImplementation value);
 
 } // ComponentType
