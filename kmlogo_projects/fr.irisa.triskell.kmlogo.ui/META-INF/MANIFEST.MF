@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kmlogo.model.edit,
  fr.irisa.triskell.kermeta.io,
  fr.irisa.triskell.kermeta.interpreter,
- org.apache.commons.logging;bundle-version="[1.0.4,2.0.0)"
+ org.kermeta.log4j.util
 Bundle-ActivationPolicy: lazy
 Export-Package: fr.irisa.triskell.kmlogo.ui,
  fr.irisa.triskell.kmlogo.ui.popup.actions,
