@@ -135,14 +135,6 @@ public class TypeAdapterFactory extends AdapterFactoryImpl {
 				return createModelElementAdapter();
 			}
 			@Override
-			public Adapter caseAddElement(AddElement object) {
-				return createAddElementAdapter();
-			}
-			@Override
-			public Adapter caseRemoveElement(RemoveElement object) {
-				return createRemoveElementAdapter();
-			}
-			@Override
 			public Adapter caseTypedElement(TypedElement object) {
 				return createTypedElementAdapter();
 			}
@@ -335,34 +327,6 @@ public class TypeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link art.AddElement <em>Add Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see art.AddElement
-	 * @generated
-	 */
-	public Adapter createAddElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link art.RemoveElement <em>Remove Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see art.RemoveElement
-	 * @generated
-	 */
-	public Adapter createRemoveElementAdapter() {
 		return null;
 	}
 

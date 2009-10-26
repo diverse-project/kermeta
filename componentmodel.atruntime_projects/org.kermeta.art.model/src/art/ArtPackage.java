@@ -246,63 +246,6 @@ public interface ArtPackage extends EPackage {
 	int TYPED_ELEMENT_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link art.impl.AddElementImpl <em>Add Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see art.impl.AddElementImpl
-	 * @see art.impl.ArtPackageImpl#getAddElement()
-	 * @generated
-	 */
-	int ADD_ELEMENT = 5;
-
-	/**
-	 * The number of structural features of the '<em>Add Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADD_ELEMENT_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link art.impl.RemoveElementImpl <em>Remove Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see art.impl.RemoveElementImpl
-	 * @see art.impl.ArtPackageImpl#getRemoveElement()
-	 * @generated
-	 */
-	int REMOVE_ELEMENT = 6;
-
-	/**
-	 * The number of structural features of the '<em>Remove Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REMOVE_ELEMENT_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link art.impl.UpdateElementImpl <em>Update Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see art.impl.UpdateElementImpl
-	 * @see art.impl.ArtPackageImpl#getUpdateElement()
-	 * @generated
-	 */
-	int UPDATE_ELEMENT = 7;
-
-	/**
-	 * The number of structural features of the '<em>Update Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UPDATE_ELEMENT_FEATURE_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link art.impl.CardinalityElementImpl <em>Cardinality Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -310,7 +253,7 @@ public interface ArtPackage extends EPackage {
 	 * @see art.impl.ArtPackageImpl#getCardinalityElement()
 	 * @generated
 	 */
-	int CARDINALITY_ELEMENT = 8;
+	int CARDINALITY_ELEMENT = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -356,7 +299,7 @@ public interface ArtPackage extends EPackage {
 	 * @see art.impl.ArtPackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 9;
+	int STRING = 6;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -366,7 +309,7 @@ public interface ArtPackage extends EPackage {
 	 * @see art.impl.ArtPackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 10;
+	int BOOLEAN = 7;
 
 
 	/**
@@ -377,7 +320,7 @@ public interface ArtPackage extends EPackage {
 	 * @see art.impl.ArtPackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 11;
+	int INTEGER = 8;
 
 
 	/**
@@ -495,36 +438,6 @@ public interface ArtPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTypedElement_Type();
-
-	/**
-	 * Returns the meta object for class '{@link art.AddElement <em>Add Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Add Element</em>'.
-	 * @see art.AddElement
-	 * @generated
-	 */
-	EClass getAddElement();
-
-	/**
-	 * Returns the meta object for class '{@link art.RemoveElement <em>Remove Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Remove Element</em>'.
-	 * @see art.RemoveElement
-	 * @generated
-	 */
-	EClass getRemoveElement();
-
-	/**
-	 * Returns the meta object for class '{@link art.UpdateElement <em>Update Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Update Element</em>'.
-	 * @see art.UpdateElement
-	 * @generated
-	 */
-	EClass getUpdateElement();
 
 	/**
 	 * Returns the meta object for class '{@link art.CardinalityElement <em>Cardinality Element</em>}'.
@@ -710,36 +623,6 @@ public interface ArtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPED_ELEMENT__TYPE = eINSTANCE.getTypedElement_Type();
-
-		/**
-		 * The meta object literal for the '{@link art.impl.AddElementImpl <em>Add Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see art.impl.AddElementImpl
-		 * @see art.impl.ArtPackageImpl#getAddElement()
-		 * @generated
-		 */
-		EClass ADD_ELEMENT = eINSTANCE.getAddElement();
-
-		/**
-		 * The meta object literal for the '{@link art.impl.RemoveElementImpl <em>Remove Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see art.impl.RemoveElementImpl
-		 * @see art.impl.ArtPackageImpl#getRemoveElement()
-		 * @generated
-		 */
-		EClass REMOVE_ELEMENT = eINSTANCE.getRemoveElement();
-
-		/**
-		 * The meta object literal for the '{@link art.impl.UpdateElementImpl <em>Update Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see art.impl.UpdateElementImpl
-		 * @see art.impl.ArtPackageImpl#getUpdateElement()
-		 * @generated
-		 */
-		EClass UPDATE_ELEMENT = eINSTANCE.getUpdateElement();
 
 		/**
 		 * The meta object literal for the '{@link art.impl.CardinalityElementImpl <em>Cardinality Element</em>}' class.

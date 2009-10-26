@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import art.impl.UpdateElementImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import art.instance.InstancePackage;
 import art.instance.ValuedAttribute;
 import art.type.Attribute;
@@ -30,7 +30,7 @@ import art.type.Attribute;
  *
  * @generated
  */
-public class ValuedAttributeImpl extends UpdateElementImpl implements ValuedAttribute {
+public class ValuedAttributeImpl extends EObjectImpl implements ValuedAttribute {
 	/**
 	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
 	 * <!-- begin-user-doc -->

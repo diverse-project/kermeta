@@ -32,7 +32,7 @@ public interface ArtFactory extends EFactory {
 	 * @return a new object of class '<em>System</em>'.
 	 * @generated
 	 */
-	art.System createSystem();
+	System createSystem();
 
 	/**
 	 * Returns a new object of class '<em>Data Type</em>'.
@@ -42,33 +42,6 @@ public interface ArtFactory extends EFactory {
 	 * @generated
 	 */
 	DataType createDataType();
-
-	/**
-	 * Returns a new object of class '<em>Add Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Add Element</em>'.
-	 * @generated
-	 */
-	AddElement createAddElement();
-
-	/**
-	 * Returns a new object of class '<em>Remove Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Remove Element</em>'.
-	 * @generated
-	 */
-	RemoveElement createRemoveElement();
-
-	/**
-	 * Returns a new object of class '<em>Update Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Update Element</em>'.
-	 * @generated
-	 */
-	UpdateElement createUpdateElement();
 
 	/**
 	 * Returns a new object of class '<em>Cardinality Element</em>'.

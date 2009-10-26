@@ -28,7 +28,7 @@ import art.RemoveElement;
  * @model abstract="true"
  * @generated
  */
-public interface Service extends ModelElement, AddElement, RemoveElement {
+public interface Service extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Operation</b></em>' containment reference list.
 	 * The list contents are of type {@link art.type.Operation}.

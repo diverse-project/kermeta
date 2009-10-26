@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import art.ArtPackage;
+import art.group.GroupPackage;
+import art.group.impl.GroupPackageImpl;
 import art.impl.ArtPackageImpl;
 import art.implem.ImplemPackage;
 import art.implem.impl.ImplemPackageImpl;
@@ -144,20 +146,10 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link TypePackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -169,7 +161,7 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		if (isInited) return (TypePackage)EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI);
 
 		// Obtain or create and register package
-		TypePackageImpl theTypePackage = (TypePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof TypePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new TypePackageImpl());
+		TypePackageImpl theTypePackage = (TypePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TypePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TypePackageImpl());
 
 		isInited = true;
 
@@ -177,22 +169,28 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		ArtPackageImpl theArtPackage = (ArtPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) instanceof ArtPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) : ArtPackage.eINSTANCE);
 		InstancePackageImpl theInstancePackage = (InstancePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI) instanceof InstancePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI) : InstancePackage.eINSTANCE);
 		ImplemPackageImpl theImplemPackage = (ImplemPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI) instanceof ImplemPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI) : ImplemPackage.eINSTANCE);
+		GroupPackageImpl theGroupPackage = (GroupPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI) instanceof GroupPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI) : GroupPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theTypePackage.createPackageContents();
 		theArtPackage.createPackageContents();
 		theInstancePackage.createPackageContents();
 		theImplemPackage.createPackageContents();
+		theGroupPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theTypePackage.initializePackageContents();
 		theArtPackage.initializePackageContents();
 		theInstancePackage.initializePackageContents();
 		theImplemPackage.initializePackageContents();
+		theGroupPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theTypePackage.freeze();
 
+  
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(TypePackage.eNS_URI, theTypePackage);
 		return theTypePackage;
 	}
 
@@ -221,6 +219,24 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 */
 	public EReference getComponentType_Attribute() {
 		return (EReference)componentTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentType_Groups() {
+		return (EReference)componentTypeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentType_Implem() {
+		return (EReference)componentTypeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -434,6 +450,8 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		componentTypeEClass = createEClass(COMPONENT_TYPE);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__PORT);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__ATTRIBUTE);
+		createEReference(componentTypeEClass, COMPONENT_TYPE__GROUPS);
+		createEReference(componentTypeEClass, COMPONENT_TYPE__IMPLEM);
 
 		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
 		createEReference(primitiveTypeEClass, PRIMITIVE_TYPE__BINDING);
@@ -492,8 +510,9 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 
 		// Obtain other dependent packages
 		ArtPackage theArtPackage = (ArtPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI);
-		InstancePackage theInstancePackage = (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
+		GroupPackage theGroupPackage = (GroupPackage)EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI);
 		ImplemPackage theImplemPackage = (ImplemPackage)EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI);
+		InstancePackage theInstancePackage = (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -501,13 +520,9 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 
 		// Add supertypes to classes
 		componentTypeEClass.getESuperTypes().add(theArtPackage.getModelElement());
-		componentTypeEClass.getESuperTypes().add(theArtPackage.getAddElement());
-		componentTypeEClass.getESuperTypes().add(theArtPackage.getRemoveElement());
 		primitiveTypeEClass.getESuperTypes().add(this.getComponentType());
 		compositeTypeEClass.getESuperTypes().add(this.getComponentType());
 		serviceEClass.getESuperTypes().add(theArtPackage.getModelElement());
-		serviceEClass.getESuperTypes().add(theArtPackage.getAddElement());
-		serviceEClass.getESuperTypes().add(theArtPackage.getRemoveElement());
 		operationEClass.getESuperTypes().add(theArtPackage.getModelElement());
 		parameterEClass.getESuperTypes().add(theArtPackage.getTypedElement());
 		functionalServiceEClass.getESuperTypes().add(this.getService());
@@ -519,6 +534,8 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		initEClass(componentTypeEClass, ComponentType.class, "ComponentType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentType_Port(), this.getPort(), null, "port", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentType_Attribute(), this.getAttribute(), null, "attribute", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentType_Groups(), theGroupPackage.getTypeGroup(), theGroupPackage.getTypeGroup_Types(), "groups", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentType_Implem(), theImplemPackage.getComponentImplementation(), null, "implem", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPrimitiveType_Binding(), theInstancePackage.getTransmissionBinding(), null, "binding", null, 0, -1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -6,6 +6,8 @@
  */
 package art.instance.impl;
 
+import art.group.GroupPackage;
+import art.group.InstanceGroup;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -16,6 +18,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -42,6 +45,7 @@ import art.type.Port;
  *   <li>{@link art.instance.impl.ComponentInstanceImpl#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link art.instance.impl.ComponentInstanceImpl#getBinding <em>Binding</em>}</li>
  *   <li>{@link art.instance.impl.ComponentInstanceImpl#getImplem <em>Implem</em>}</li>
+ *   <li>{@link art.instance.impl.ComponentInstanceImpl#getGroups <em>Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,6 +106,16 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * @ordered
 	 */
 	protected ComponentImplementation implem;
+
+	/**
+	 * The cached value of the '{@link #getGroups() <em>Groups</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGroups()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<InstanceGroup> groups;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -187,7 +201,7 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * @generated
 	 */
 	public CompositeInstance getSuperComponent() {
-		if (eContainerFeatureID != InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT) return null;
+		if (eContainerFeatureID() != InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT) return null;
 		return (CompositeInstance)eContainer();
 	}
 
@@ -207,7 +221,7 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * @generated
 	 */
 	public void setSuperComponent(CompositeInstance newSuperComponent) {
-		if (newSuperComponent != eInternalContainer() || (eContainerFeatureID != InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT && newSuperComponent != null)) {
+		if (newSuperComponent != eInternalContainer() || (eContainerFeatureID() != InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT && newSuperComponent != null)) {
 			if (EcoreUtil.isAncestor(this, newSuperComponent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -296,6 +310,19 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<InstanceGroup> getGroups() {
+		if (groups == null) {
+			groups = new EObjectWithInverseResolvingEList.ManyInverse<InstanceGroup>(InstanceGroup.class, this, InstancePackage.COMPONENT_INSTANCE__GROUPS, GroupPackage.INSTANCE_GROUP__INSTANCES);
+		}
+		return groups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -303,6 +330,8 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetSuperComponent((CompositeInstance)otherEnd, msgs);
+			case InstancePackage.COMPONENT_INSTANCE__GROUPS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGroups()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -323,6 +352,8 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 				return ((InternalEList<?>)getBinding()).basicRemove(otherEnd, msgs);
 			case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
 				return basicSetImplem(null, msgs);
+			case InstancePackage.COMPONENT_INSTANCE__GROUPS:
+				return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -334,7 +365,7 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
 				return eInternalContainer().eInverseRemove(this, InstancePackage.COMPOSITE_INSTANCE__SUB_COMPONENT, CompositeInstance.class, msgs);
 		}
@@ -362,6 +393,8 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 				return getBinding();
 			case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
 				return getImplem();
+			case InstancePackage.COMPONENT_INSTANCE__GROUPS:
+				return getGroups();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -395,6 +428,10 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 			case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
 				setImplem((ComponentImplementation)newValue);
 				return;
+			case InstancePackage.COMPONENT_INSTANCE__GROUPS:
+				getGroups().clear();
+				getGroups().addAll((Collection<? extends InstanceGroup>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -425,6 +462,9 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 			case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
 				setImplem((ComponentImplementation)null);
 				return;
+			case InstancePackage.COMPONENT_INSTANCE__GROUPS:
+				getGroups().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -449,6 +489,8 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 				return binding != null && !binding.isEmpty();
 			case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
 				return implem != null;
+			case InstancePackage.COMPONENT_INSTANCE__GROUPS:
+				return groups != null && !groups.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -132,24 +132,6 @@ public class ArtSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ArtPackage.ADD_ELEMENT: {
-				AddElement addElement = (AddElement)theEObject;
-				T result = caseAddElement(addElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ArtPackage.REMOVE_ELEMENT: {
-				RemoveElement removeElement = (RemoveElement)theEObject;
-				T result = caseRemoveElement(removeElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ArtPackage.UPDATE_ELEMENT: {
-				UpdateElement updateElement = (UpdateElement)theEObject;
-				T result = caseUpdateElement(updateElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ArtPackage.CARDINALITY_ELEMENT: {
 				CardinalityElement cardinalityElement = (CardinalityElement)theEObject;
 				T result = caseCardinalityElement(cardinalityElement);
@@ -234,51 +216,6 @@ public class ArtSwitch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Add Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Add Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAddElement(AddElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Remove Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Remove Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRemoveElement(RemoveElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Update Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Update Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUpdateElement(UpdateElement object) {
 		return null;
 	}
 

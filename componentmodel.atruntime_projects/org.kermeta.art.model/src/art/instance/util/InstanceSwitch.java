@@ -104,9 +104,6 @@ public class InstanceSwitch<T> {
 				ComponentInstance componentInstance = (ComponentInstance)theEObject;
 				T result = caseComponentInstance(componentInstance);
 				if (result == null) result = caseModelElement(componentInstance);
-				if (result == null) result = caseAddElement(componentInstance);
-				if (result == null) result = caseRemoveElement(componentInstance);
-				if (result == null) result = caseUpdateElement(componentInstance);
 				if (result == null) result = caseNamedElement(componentInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -116,9 +113,6 @@ public class InstanceSwitch<T> {
 				T result = casePrimitiveInstance(primitiveInstance);
 				if (result == null) result = caseComponentInstance(primitiveInstance);
 				if (result == null) result = caseModelElement(primitiveInstance);
-				if (result == null) result = caseAddElement(primitiveInstance);
-				if (result == null) result = caseRemoveElement(primitiveInstance);
-				if (result == null) result = caseUpdateElement(primitiveInstance);
 				if (result == null) result = caseNamedElement(primitiveInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -128,9 +122,6 @@ public class InstanceSwitch<T> {
 				T result = caseCompositeInstance(compositeInstance);
 				if (result == null) result = caseComponentInstance(compositeInstance);
 				if (result == null) result = caseModelElement(compositeInstance);
-				if (result == null) result = caseAddElement(compositeInstance);
-				if (result == null) result = caseRemoveElement(compositeInstance);
-				if (result == null) result = caseUpdateElement(compositeInstance);
 				if (result == null) result = caseNamedElement(compositeInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -138,16 +129,12 @@ public class InstanceSwitch<T> {
 			case InstancePackage.VALUED_ATTRIBUTE: {
 				ValuedAttribute valuedAttribute = (ValuedAttribute)theEObject;
 				T result = caseValuedAttribute(valuedAttribute);
-				if (result == null) result = caseUpdateElement(valuedAttribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case InstancePackage.BINDING: {
 				Binding binding = (Binding)theEObject;
 				T result = caseBinding(binding);
-				if (result == null) result = caseAddElement(binding);
-				if (result == null) result = caseRemoveElement(binding);
-				if (result == null) result = caseUpdateElement(binding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -155,9 +142,6 @@ public class InstanceSwitch<T> {
 				TransmissionBinding transmissionBinding = (TransmissionBinding)theEObject;
 				T result = caseTransmissionBinding(transmissionBinding);
 				if (result == null) result = caseBinding(transmissionBinding);
-				if (result == null) result = caseAddElement(transmissionBinding);
-				if (result == null) result = caseRemoveElement(transmissionBinding);
-				if (result == null) result = caseUpdateElement(transmissionBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -165,9 +149,6 @@ public class InstanceSwitch<T> {
 				DelegationBinding delegationBinding = (DelegationBinding)theEObject;
 				T result = caseDelegationBinding(delegationBinding);
 				if (result == null) result = caseBinding(delegationBinding);
-				if (result == null) result = caseAddElement(delegationBinding);
-				if (result == null) result = caseRemoveElement(delegationBinding);
-				if (result == null) result = caseUpdateElement(delegationBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -307,51 +288,6 @@ public class InstanceSwitch<T> {
 	 * @generated
 	 */
 	public T caseModelElement(ModelElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Add Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Add Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAddElement(AddElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Remove Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Remove Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRemoveElement(RemoveElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Update Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Update Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUpdateElement(UpdateElement object) {
 		return null;
 	}
 

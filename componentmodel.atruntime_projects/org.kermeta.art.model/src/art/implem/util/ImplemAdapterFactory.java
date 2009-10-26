@@ -93,6 +93,14 @@ public class ImplemAdapterFactory extends AdapterFactoryImpl {
 				return createOSGiPortAdapter();
 			}
 			@Override
+			public Adapter caseTypeImplementation(TypeImplementation object) {
+				return createTypeImplementationAdapter();
+			}
+			@Override
+			public Adapter caseOSGiType(OSGiType object) {
+				return createOSGiTypeAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -179,6 +187,34 @@ public class ImplemAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOSGiPortAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.implem.TypeImplementation <em>Type Implementation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.implem.TypeImplementation
+	 * @generated
+	 */
+	public Adapter createTypeImplementationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.implem.OSGiType <em>OS Gi Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.implem.OSGiType
+	 * @generated
+	 */
+	public Adapter createOSGiTypeAdapter() {
 		return null;
 	}
 

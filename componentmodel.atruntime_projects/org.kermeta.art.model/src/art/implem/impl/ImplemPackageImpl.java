@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import art.ArtPackage;
+import art.group.GroupPackage;
+import art.group.impl.GroupPackageImpl;
 import art.impl.ArtPackageImpl;
 import art.implem.ComponentImplementation;
 import art.implem.FractalComponent;
@@ -19,7 +21,9 @@ import art.implem.ImplemFactory;
 import art.implem.ImplemPackage;
 import art.implem.OSGiComponent;
 import art.implem.OSGiPort;
+import art.implem.OSGiType;
 import art.implem.PortImplementation;
+import art.implem.TypeImplementation;
 import art.instance.InstancePackage;
 import art.instance.impl.InstancePackageImpl;
 import art.type.TypePackage;
@@ -68,6 +72,20 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 	private EClass osGiPortEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeImplementationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass osGiTypeEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -94,20 +112,10 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link ImplemPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -119,7 +127,7 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 		if (isInited) return (ImplemPackage)EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ImplemPackageImpl theImplemPackage = (ImplemPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ImplemPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ImplemPackageImpl());
+		ImplemPackageImpl theImplemPackage = (ImplemPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ImplemPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ImplemPackageImpl());
 
 		isInited = true;
 
@@ -127,22 +135,28 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 		ArtPackageImpl theArtPackage = (ArtPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) instanceof ArtPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) : ArtPackage.eINSTANCE);
 		InstancePackageImpl theInstancePackage = (InstancePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI) instanceof InstancePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI) : InstancePackage.eINSTANCE);
 		TypePackageImpl theTypePackage = (TypePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI) instanceof TypePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI) : TypePackage.eINSTANCE);
+		GroupPackageImpl theGroupPackage = (GroupPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI) instanceof GroupPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI) : GroupPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theImplemPackage.createPackageContents();
 		theArtPackage.createPackageContents();
 		theInstancePackage.createPackageContents();
 		theTypePackage.createPackageContents();
+		theGroupPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theImplemPackage.initializePackageContents();
 		theArtPackage.initializePackageContents();
 		theInstancePackage.initializePackageContents();
 		theTypePackage.initializePackageContents();
+		theGroupPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theImplemPackage.freeze();
 
+  
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(ImplemPackage.eNS_URI, theImplemPackage);
 		return theImplemPackage;
 	}
 
@@ -232,6 +246,33 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTypeImplementation() {
+		return typeImplementationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOSGiType() {
+		return osGiTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOSGiType_GenerateInstanceBundle() {
+		return (EAttribute)osGiTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ImplemFactory getImplemFactory() {
 		return (ImplemFactory)getEFactoryInstance();
 	}
@@ -268,6 +309,11 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 
 		osGiPortEClass = createEClass(OS_GI_PORT);
 		createEAttribute(osGiPortEClass, OS_GI_PORT__SERVICE_ID);
+
+		typeImplementationEClass = createEClass(TYPE_IMPLEMENTATION);
+
+		osGiTypeEClass = createEClass(OS_GI_TYPE);
+		createEAttribute(osGiTypeEClass, OS_GI_TYPE__GENERATE_INSTANCE_BUNDLE);
 	}
 
 	/**
@@ -304,6 +350,7 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 		fractalComponentEClass.getESuperTypes().add(this.getComponentImplementation());
 		osGiComponentEClass.getESuperTypes().add(this.getComponentImplementation());
 		osGiPortEClass.getESuperTypes().add(this.getPortImplementation());
+		osGiTypeEClass.getESuperTypes().add(this.getTypeImplementation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(componentImplementationEClass, ComponentImplementation.class, "ComponentImplementation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -319,6 +366,11 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 
 		initEClass(osGiPortEClass, OSGiPort.class, "OSGiPort", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOSGiPort_ServiceId(), theArtPackage.getString(), "serviceId", null, 1, 1, OSGiPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeImplementationEClass, TypeImplementation.class, "TypeImplementation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(osGiTypeEClass, OSGiType.class, "OSGiType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOSGiType_GenerateInstanceBundle(), theArtPackage.getBoolean(), "generateInstanceBundle", "true", 1, 1, OSGiType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } //ImplemPackageImpl

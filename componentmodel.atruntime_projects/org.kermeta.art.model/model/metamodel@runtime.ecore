@@ -23,9 +23,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AddElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RemoveElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="UpdateElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="CardinalityElement" eSuperTypes="#//ModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="#//Integer"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="#//Integer"/>
@@ -33,7 +30,7 @@
   <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
   <eSubpackages name="instance" nsURI="http://art/instance" nsPrefix="instance">
     <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" abstract="true"
-        eSuperTypes="#//ModelElement #//AddElement #//RemoveElement #//UpdateElement">
+        eSuperTypes="#//ModelElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//type/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" lowerBound="1"
@@ -46,6 +43,8 @@
           eType="#//instance/TransmissionBinding" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="implem" eType="#//implem/ComponentImplementation"
           containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1"
+          eType="#//group/InstanceGroup" eOpposite="#//group/InstanceGroup/instances"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveInstance" eSuperTypes="#//instance/ComponentInstance"/>
     <eClassifiers xsi:type="ecore:EClass" name="CompositeInstance" eSuperTypes="#//instance/ComponentInstance">
@@ -58,11 +57,11 @@
       <eLiterals name="OFF"/>
       <eLiterals name="ON" value="1"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute" eSuperTypes="#//UpdateElement">
+    <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute">
       <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//type/Attribute"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//String"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Binding" abstract="true" eSuperTypes="#//AddElement #//RemoveElement #//UpdateElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Binding" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EReference" name="serverInstance" lowerBound="1"
           eType="#//instance/ComponentInstance"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="#//String"/>
@@ -79,11 +78,15 @@
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="type" nsURI="http://art/type" nsPrefix="type">
-    <eClassifiers xsi:type="ecore:EClass" name="ComponentType" abstract="true" eSuperTypes="#//ModelElement #//AddElement #//RemoveElement">
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentType" abstract="true" eSuperTypes="#//ModelElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="port" upperBound="-1"
           eType="#//type/Port" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
           eType="#//type/Attribute" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1"
+          eType="#//group/TypeGroup" eOpposite="#//group/TypeGroup/types"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="implem" eType="#//implem/ComponentImplementation"
+          containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//type/ComponentType">
       <eStructuralFeatures xsi:type="ecore:EReference" name="binding" upperBound="-1"
@@ -95,7 +98,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="delegation" upperBound="-1"
           eType="#//instance/DelegationBinding" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Service" abstract="true" eSuperTypes="#//ModelElement #//AddElement #//RemoveElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Service" abstract="true" eSuperTypes="#//ModelElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="operation" upperBound="-1"
           eType="#//type/Operation" containment="true"/>
     </eClassifiers>
@@ -138,6 +141,25 @@
     <eClassifiers xsi:type="ecore:EClass" name="OSGiPort" eSuperTypes="#//implem/PortImplementation">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceId" lowerBound="1"
           eType="#//String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeImplementation" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="OSGiType" eSuperTypes="#//implem/TypeImplementation">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="generateInstanceBundle"
+          lowerBound="1" eType="#//Boolean" defaultValueLiteral="true"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="group" nsURI="http://art/group" nsPrefix="group">
+    <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="#//NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subGroups" upperBound="-1"
+          eType="#//group/Group" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeGroup" eSuperTypes="#//group/Group">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+          eType="#//type/ComponentType" eOpposite="#//type/ComponentType/groups"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InstanceGroup" eSuperTypes="#//group/Group">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
+          eType="#//instance/ComponentInstance" eOpposite="#//instance/ComponentInstance/groups"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

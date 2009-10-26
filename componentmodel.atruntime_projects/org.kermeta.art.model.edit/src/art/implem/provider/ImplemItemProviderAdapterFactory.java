@@ -168,6 +168,29 @@ public class ImplemItemProviderAdapterFactory extends ImplemAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link art.implem.OSGiType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OSGiTypeItemProvider osGiTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link art.implem.OSGiType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOSGiTypeAdapter() {
+		if (osGiTypeItemProvider == null) {
+			osGiTypeItemProvider = new OSGiTypeItemProvider(this);
+		}
+
+		return osGiTypeItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -217,7 +240,7 @@ public class ImplemItemProviderAdapterFactory extends ImplemAdapterFactory imple
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -270,6 +293,7 @@ public class ImplemItemProviderAdapterFactory extends ImplemAdapterFactory imple
 		if (osGiComponentItemProvider != null) osGiComponentItemProvider.dispose();
 		if (portImplementationItemProvider != null) portImplementationItemProvider.dispose();
 		if (osGiPortItemProvider != null) osGiPortItemProvider.dispose();
+		if (osGiTypeItemProvider != null) osGiTypeItemProvider.dispose();
 	}
 
 }

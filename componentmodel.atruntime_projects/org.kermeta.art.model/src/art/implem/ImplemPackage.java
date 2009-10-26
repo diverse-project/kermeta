@@ -192,6 +192,54 @@ public interface ImplemPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link art.implem.impl.TypeImplementationImpl <em>Type Implementation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.implem.impl.TypeImplementationImpl
+	 * @see art.implem.impl.ImplemPackageImpl#getTypeImplementation()
+	 * @generated
+	 */
+	int TYPE_IMPLEMENTATION = 5;
+
+	/**
+	 * The number of structural features of the '<em>Type Implementation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_IMPLEMENTATION_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link art.implem.impl.OSGiTypeImpl <em>OS Gi Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.implem.impl.OSGiTypeImpl
+	 * @see art.implem.impl.ImplemPackageImpl#getOSGiType()
+	 * @generated
+	 */
+	int OS_GI_TYPE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Generate Instance Bundle</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_TYPE__GENERATE_INSTANCE_BUNDLE = TYPE_IMPLEMENTATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>OS Gi Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_TYPE_FEATURE_COUNT = TYPE_IMPLEMENTATION_FEATURE_COUNT + 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link art.implem.ComponentImplementation <em>Component Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -284,6 +332,37 @@ public interface ImplemPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getOSGiPort_ServiceId();
+
+	/**
+	 * Returns the meta object for class '{@link art.implem.TypeImplementation <em>Type Implementation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Implementation</em>'.
+	 * @see art.implem.TypeImplementation
+	 * @generated
+	 */
+	EClass getTypeImplementation();
+
+	/**
+	 * Returns the meta object for class '{@link art.implem.OSGiType <em>OS Gi Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>OS Gi Type</em>'.
+	 * @see art.implem.OSGiType
+	 * @generated
+	 */
+	EClass getOSGiType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.implem.OSGiType#getGenerateInstanceBundle <em>Generate Instance Bundle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Generate Instance Bundle</em>'.
+	 * @see art.implem.OSGiType#getGenerateInstanceBundle()
+	 * @see #getOSGiType()
+	 * @generated
+	 */
+	EAttribute getOSGiType_GenerateInstanceBundle();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -388,6 +467,34 @@ public interface ImplemPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OS_GI_PORT__SERVICE_ID = eINSTANCE.getOSGiPort_ServiceId();
+
+		/**
+		 * The meta object literal for the '{@link art.implem.impl.TypeImplementationImpl <em>Type Implementation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.implem.impl.TypeImplementationImpl
+		 * @see art.implem.impl.ImplemPackageImpl#getTypeImplementation()
+		 * @generated
+		 */
+		EClass TYPE_IMPLEMENTATION = eINSTANCE.getTypeImplementation();
+
+		/**
+		 * The meta object literal for the '{@link art.implem.impl.OSGiTypeImpl <em>OS Gi Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.implem.impl.OSGiTypeImpl
+		 * @see art.implem.impl.ImplemPackageImpl#getOSGiType()
+		 * @generated
+		 */
+		EClass OS_GI_TYPE = eINSTANCE.getOSGiType();
+
+		/**
+		 * The meta object literal for the '<em><b>Generate Instance Bundle</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OS_GI_TYPE__GENERATE_INSTANCE_BUNDLE = eINSTANCE.getOSGiType_GenerateInstanceBundle();
 
 	}
 

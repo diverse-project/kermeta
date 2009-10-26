@@ -68,6 +68,7 @@ public class ComponentInstanceItemProvider
 
 			addTypePropertyDescriptor(object);
 			addStatePropertyDescriptor(object);
+			addGroupsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -112,6 +113,28 @@ public class ComponentInstanceItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Groups feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addGroupsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ComponentInstance_groups_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentInstance_groups_feature", "_UI_ComponentInstance_type"),
+				 InstancePackage.Literals.COMPONENT_INSTANCE__GROUPS,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

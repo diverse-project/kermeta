@@ -119,18 +119,6 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 				return createModelElementAdapter();
 			}
 			@Override
-			public Adapter caseAddElement(AddElement object) {
-				return createAddElementAdapter();
-			}
-			@Override
-			public Adapter caseRemoveElement(RemoveElement object) {
-				return createRemoveElementAdapter();
-			}
-			@Override
-			public Adapter caseUpdateElement(UpdateElement object) {
-				return createUpdateElementAdapter();
-			}
-			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -273,48 +261,6 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link art.AddElement <em>Add Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see art.AddElement
-	 * @generated
-	 */
-	public Adapter createAddElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link art.RemoveElement <em>Remove Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see art.RemoveElement
-	 * @generated
-	 */
-	public Adapter createRemoveElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link art.UpdateElement <em>Update Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see art.UpdateElement
-	 * @generated
-	 */
-	public Adapter createUpdateElementAdapter() {
 		return null;
 	}
 

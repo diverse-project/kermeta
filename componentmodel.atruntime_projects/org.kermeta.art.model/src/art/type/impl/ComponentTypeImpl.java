@@ -6,16 +6,22 @@
  */
 package art.type.impl;
 
+import art.group.GroupPackage;
+import art.group.TypeGroup;
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import art.impl.ModelElementImpl;
+import art.implem.ComponentImplementation;
 import art.type.Attribute;
 import art.type.ComponentType;
 import art.type.Port;
@@ -30,6 +36,8 @@ import art.type.TypePackage;
  * <ul>
  *   <li>{@link art.type.impl.ComponentTypeImpl#getPort <em>Port</em>}</li>
  *   <li>{@link art.type.impl.ComponentTypeImpl#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link art.type.impl.ComponentTypeImpl#getGroups <em>Groups</em>}</li>
+ *   <li>{@link art.type.impl.ComponentTypeImpl#getImplem <em>Implem</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,6 +62,26 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 	 * @ordered
 	 */
 	protected EList<Attribute> attribute;
+
+	/**
+	 * The cached value of the '{@link #getGroups() <em>Groups</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGroups()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeGroup> groups;
+
+	/**
+	 * The cached value of the '{@link #getImplem() <em>Implem</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImplem()
+	 * @generated
+	 * @ordered
+	 */
+	protected ComponentImplementation implem;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,6 +133,76 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<TypeGroup> getGroups() {
+		if (groups == null) {
+			groups = new EObjectWithInverseResolvingEList.ManyInverse<TypeGroup>(TypeGroup.class, this, TypePackage.COMPONENT_TYPE__GROUPS, GroupPackage.TYPE_GROUP__TYPES);
+		}
+		return groups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComponentImplementation getImplem() {
+		return implem;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetImplem(ComponentImplementation newImplem, NotificationChain msgs) {
+		ComponentImplementation oldImplem = implem;
+		implem = newImplem;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypePackage.COMPONENT_TYPE__IMPLEM, oldImplem, newImplem);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setImplem(ComponentImplementation newImplem) {
+		if (newImplem != implem) {
+			NotificationChain msgs = null;
+			if (implem != null)
+				msgs = ((InternalEObject)implem).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypePackage.COMPONENT_TYPE__IMPLEM, null, msgs);
+			if (newImplem != null)
+				msgs = ((InternalEObject)newImplem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypePackage.COMPONENT_TYPE__IMPLEM, null, msgs);
+			msgs = basicSetImplem(newImplem, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypePackage.COMPONENT_TYPE__IMPLEM, newImplem, newImplem));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypePackage.COMPONENT_TYPE__GROUPS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGroups()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -112,6 +210,10 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 				return ((InternalEList<?>)getPort()).basicRemove(otherEnd, msgs);
 			case TypePackage.COMPONENT_TYPE__ATTRIBUTE:
 				return ((InternalEList<?>)getAttribute()).basicRemove(otherEnd, msgs);
+			case TypePackage.COMPONENT_TYPE__GROUPS:
+				return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
+			case TypePackage.COMPONENT_TYPE__IMPLEM:
+				return basicSetImplem(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -128,6 +230,10 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 				return getPort();
 			case TypePackage.COMPONENT_TYPE__ATTRIBUTE:
 				return getAttribute();
+			case TypePackage.COMPONENT_TYPE__GROUPS:
+				return getGroups();
+			case TypePackage.COMPONENT_TYPE__IMPLEM:
+				return getImplem();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -149,6 +255,13 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 				getAttribute().clear();
 				getAttribute().addAll((Collection<? extends Attribute>)newValue);
 				return;
+			case TypePackage.COMPONENT_TYPE__GROUPS:
+				getGroups().clear();
+				getGroups().addAll((Collection<? extends TypeGroup>)newValue);
+				return;
+			case TypePackage.COMPONENT_TYPE__IMPLEM:
+				setImplem((ComponentImplementation)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -167,6 +280,12 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 			case TypePackage.COMPONENT_TYPE__ATTRIBUTE:
 				getAttribute().clear();
 				return;
+			case TypePackage.COMPONENT_TYPE__GROUPS:
+				getGroups().clear();
+				return;
+			case TypePackage.COMPONENT_TYPE__IMPLEM:
+				setImplem((ComponentImplementation)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -183,6 +302,10 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 				return port != null && !port.isEmpty();
 			case TypePackage.COMPONENT_TYPE__ATTRIBUTE:
 				return attribute != null && !attribute.isEmpty();
+			case TypePackage.COMPONENT_TYPE__GROUPS:
+				return groups != null && !groups.isEmpty();
+			case TypePackage.COMPONENT_TYPE__IMPLEM:
+				return implem != null;
 		}
 		return super.eIsSet(featureID);
 	}

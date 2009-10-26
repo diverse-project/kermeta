@@ -10,6 +10,7 @@ import org.eclipse.emf.common.util.EList;
 
 import art.AddElement;
 import art.ModelElement;
+import art.group.InstanceGroup;
 import art.RemoveElement;
 import art.UpdateElement;
 import art.implem.ComponentImplementation;
@@ -29,6 +30,7 @@ import art.type.ComponentType;
  *   <li>{@link art.instance.ComponentInstance#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link art.instance.ComponentInstance#getBinding <em>Binding</em>}</li>
  *   <li>{@link art.instance.ComponentInstance#getImplem <em>Implem</em>}</li>
+ *   <li>{@link art.instance.ComponentInstance#getGroups <em>Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,7 +38,7 @@ import art.type.ComponentType;
  * @model abstract="true"
  * @generated
  */
-public interface ComponentInstance extends ModelElement, AddElement, RemoveElement, UpdateElement {
+public interface ComponentInstance extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -174,5 +176,23 @@ public interface ComponentInstance extends ModelElement, AddElement, RemoveEleme
 	 * @generated
 	 */
 	void setImplem(ComponentImplementation value);
+
+	/**
+	 * Returns the value of the '<em><b>Groups</b></em>' reference list.
+	 * The list contents are of type {@link art.group.InstanceGroup}.
+	 * It is bidirectional and its opposite is '{@link art.group.InstanceGroup#getInstances <em>Instances</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Groups</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Groups</em>' reference list.
+	 * @see art.instance.InstancePackage#getComponentInstance_Groups()
+	 * @see art.group.InstanceGroup#getInstances
+	 * @model opposite="instances"
+	 * @generated
+	 */
+	EList<InstanceGroup> getGroups();
 
 } // ComponentInstance

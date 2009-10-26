@@ -136,13 +136,22 @@ public interface InstancePackage extends EPackage {
 	int COMPONENT_INSTANCE__IMPLEM = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Groups</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__GROUPS = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Component Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE_FEATURE_COUNT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 6;
+	int COMPONENT_INSTANCE_FEATURE_COUNT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link art.instance.impl.PrimitiveInstanceImpl <em>Primitive Instance</em>}' class.
@@ -216,6 +225,15 @@ public interface InstancePackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_INSTANCE__IMPLEM = COMPONENT_INSTANCE__IMPLEM;
+
+	/**
+	 * The feature id for the '<em><b>Groups</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_INSTANCE__GROUPS = COMPONENT_INSTANCE__GROUPS;
 
 	/**
 	 * The number of structural features of the '<em>Primitive Instance</em>' class.
@@ -300,6 +318,15 @@ public interface InstancePackage extends EPackage {
 	int COMPOSITE_INSTANCE__IMPLEM = COMPONENT_INSTANCE__IMPLEM;
 
 	/**
+	 * The feature id for the '<em><b>Groups</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_INSTANCE__GROUPS = COMPONENT_INSTANCE__GROUPS;
+
+	/**
 	 * The feature id for the '<em><b>Sub Component</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -343,7 +370,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUED_ATTRIBUTE__ATTRIBUTE = ArtPackage.UPDATE_ELEMENT_FEATURE_COUNT + 0;
+	int VALUED_ATTRIBUTE__ATTRIBUTE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -352,7 +379,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUED_ATTRIBUTE__VALUE = ArtPackage.UPDATE_ELEMENT_FEATURE_COUNT + 1;
+	int VALUED_ATTRIBUTE__VALUE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Valued Attribute</em>' class.
@@ -361,7 +388,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUED_ATTRIBUTE_FEATURE_COUNT = ArtPackage.UPDATE_ELEMENT_FEATURE_COUNT + 2;
+	int VALUED_ATTRIBUTE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link art.instance.impl.BindingImpl <em>Binding</em>}' class.
@@ -380,7 +407,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING__SERVER_INSTANCE = ArtPackage.ADD_ELEMENT_FEATURE_COUNT + 0;
+	int BINDING__SERVER_INSTANCE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -389,7 +416,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING__ID = ArtPackage.ADD_ELEMENT_FEATURE_COUNT + 1;
+	int BINDING__ID = 1;
 
 	/**
 	 * The number of structural features of the '<em>Binding</em>' class.
@@ -398,7 +425,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_FEATURE_COUNT = ArtPackage.ADD_ELEMENT_FEATURE_COUNT + 2;
+	int BINDING_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link art.instance.impl.TransmissionBindingImpl <em>Transmission Binding</em>}' class.
@@ -596,6 +623,17 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getComponentInstance_Implem();
+
+	/**
+	 * Returns the meta object for the reference list '{@link art.instance.ComponentInstance#getGroups <em>Groups</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Groups</em>'.
+	 * @see art.instance.ComponentInstance#getGroups()
+	 * @see #getComponentInstance()
+	 * @generated
+	 */
+	EReference getComponentInstance_Groups();
 
 	/**
 	 * Returns the meta object for class '{@link art.instance.PrimitiveInstance <em>Primitive Instance</em>}'.
@@ -856,6 +894,14 @@ public interface InstancePackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPONENT_INSTANCE__IMPLEM = eINSTANCE.getComponentInstance_Implem();
+
+		/**
+		 * The meta object literal for the '<em><b>Groups</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONENT_INSTANCE__GROUPS = eINSTANCE.getComponentInstance_Groups();
 
 		/**
 		 * The meta object literal for the '{@link art.instance.impl.PrimitiveInstanceImpl <em>Primitive Instance</em>}' class.

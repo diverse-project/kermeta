@@ -8,6 +8,7 @@ package art.instance;
 
 import art.UpdateElement;
 import art.type.Attribute;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +27,7 @@ import art.type.Attribute;
  * @model
  * @generated
  */
-public interface ValuedAttribute extends UpdateElement {
+public interface ValuedAttribute extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Attribute</b></em>' reference.
 	 * <!-- begin-user-doc -->

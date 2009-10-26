@@ -65,6 +65,7 @@ public class ImplemFactoryImpl extends EFactoryImpl implements ImplemFactory {
 			case ImplemPackage.OS_GI_COMPONENT: return createOSGiComponent();
 			case ImplemPackage.PORT_IMPLEMENTATION: return createPortImplementation();
 			case ImplemPackage.OS_GI_PORT: return createOSGiPort();
+			case ImplemPackage.OS_GI_TYPE: return createOSGiType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -108,6 +109,16 @@ public class ImplemFactoryImpl extends EFactoryImpl implements ImplemFactory {
 	public OSGiPort createOSGiPort() {
 		OSGiPortImpl osGiPort = new OSGiPortImpl();
 		return osGiPort;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OSGiType createOSGiType() {
+		OSGiTypeImpl osGiType = new OSGiTypeImpl();
+		return osGiType;
 	}
 
 	/**

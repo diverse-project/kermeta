@@ -108,8 +108,6 @@ public class TypeSwitch<T> {
 				ComponentType componentType = (ComponentType)theEObject;
 				T result = caseComponentType(componentType);
 				if (result == null) result = caseModelElement(componentType);
-				if (result == null) result = caseAddElement(componentType);
-				if (result == null) result = caseRemoveElement(componentType);
 				if (result == null) result = caseNamedElement(componentType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -119,8 +117,6 @@ public class TypeSwitch<T> {
 				T result = casePrimitiveType(primitiveType);
 				if (result == null) result = caseComponentType(primitiveType);
 				if (result == null) result = caseModelElement(primitiveType);
-				if (result == null) result = caseAddElement(primitiveType);
-				if (result == null) result = caseRemoveElement(primitiveType);
 				if (result == null) result = caseNamedElement(primitiveType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -130,8 +126,6 @@ public class TypeSwitch<T> {
 				T result = caseCompositeType(compositeType);
 				if (result == null) result = caseComponentType(compositeType);
 				if (result == null) result = caseModelElement(compositeType);
-				if (result == null) result = caseAddElement(compositeType);
-				if (result == null) result = caseRemoveElement(compositeType);
 				if (result == null) result = caseNamedElement(compositeType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -140,8 +134,6 @@ public class TypeSwitch<T> {
 				Service service = (Service)theEObject;
 				T result = caseService(service);
 				if (result == null) result = caseModelElement(service);
-				if (result == null) result = caseAddElement(service);
-				if (result == null) result = caseRemoveElement(service);
 				if (result == null) result = caseNamedElement(service);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -168,8 +160,6 @@ public class TypeSwitch<T> {
 				T result = caseFunctionalService(functionalService);
 				if (result == null) result = caseService(functionalService);
 				if (result == null) result = caseModelElement(functionalService);
-				if (result == null) result = caseAddElement(functionalService);
-				if (result == null) result = caseRemoveElement(functionalService);
 				if (result == null) result = caseNamedElement(functionalService);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -179,8 +169,6 @@ public class TypeSwitch<T> {
 				T result = caseControlService(controlService);
 				if (result == null) result = caseService(controlService);
 				if (result == null) result = caseModelElement(controlService);
-				if (result == null) result = caseAddElement(controlService);
-				if (result == null) result = caseRemoveElement(controlService);
 				if (result == null) result = caseNamedElement(controlService);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -384,36 +372,6 @@ public class TypeSwitch<T> {
 	 * @generated
 	 */
 	public T caseModelElement(ModelElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Add Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Add Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAddElement(AddElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Remove Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Remove Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRemoveElement(RemoveElement object) {
 		return null;
 	}
 

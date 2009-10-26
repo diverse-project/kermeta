@@ -7,6 +7,7 @@
 package art.type.provider;
 
 
+import art.implem.ImplemFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -63,8 +65,31 @@ public class ComponentTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addGroupsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Groups feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addGroupsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ComponentType_groups_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_groups_feature", "_UI_ComponentType_type"),
+				 TypePackage.Literals.COMPONENT_TYPE__GROUPS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -81,6 +106,7 @@ public class ComponentTypeItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypePackage.Literals.COMPONENT_TYPE__PORT);
 			childrenFeatures.add(TypePackage.Literals.COMPONENT_TYPE__ATTRIBUTE);
+			childrenFeatures.add(TypePackage.Literals.COMPONENT_TYPE__IMPLEM);
 		}
 		return childrenFeatures;
 	}
@@ -126,6 +152,7 @@ public class ComponentTypeItemProvider
 		switch (notification.getFeatureID(ComponentType.class)) {
 			case TypePackage.COMPONENT_TYPE__PORT:
 			case TypePackage.COMPONENT_TYPE__ATTRIBUTE:
+			case TypePackage.COMPONENT_TYPE__IMPLEM:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -152,6 +179,16 @@ public class ComponentTypeItemProvider
 			(createChildParameter
 				(TypePackage.Literals.COMPONENT_TYPE__ATTRIBUTE,
 				 TypeFactory.eINSTANCE.createAttribute()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypePackage.Literals.COMPONENT_TYPE__IMPLEM,
+				 ImplemFactory.eINSTANCE.createFractalComponent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypePackage.Literals.COMPONENT_TYPE__IMPLEM,
+				 ImplemFactory.eINSTANCE.createOSGiComponent()));
 	}
 
 	/**

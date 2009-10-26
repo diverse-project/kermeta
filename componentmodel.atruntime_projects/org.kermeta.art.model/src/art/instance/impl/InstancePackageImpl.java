@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import art.ArtPackage;
+import art.group.GroupPackage;
+import art.group.impl.GroupPackageImpl;
 import art.impl.ArtPackageImpl;
 import art.implem.ImplemPackage;
 import art.implem.impl.ImplemPackageImpl;
@@ -120,20 +122,10 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link InstancePackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -145,7 +137,7 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		if (isInited) return (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
 
 		// Obtain or create and register package
-		InstancePackageImpl theInstancePackage = (InstancePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof InstancePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new InstancePackageImpl());
+		InstancePackageImpl theInstancePackage = (InstancePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof InstancePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new InstancePackageImpl());
 
 		isInited = true;
 
@@ -153,22 +145,28 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		ArtPackageImpl theArtPackage = (ArtPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) instanceof ArtPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) : ArtPackage.eINSTANCE);
 		TypePackageImpl theTypePackage = (TypePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI) instanceof TypePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI) : TypePackage.eINSTANCE);
 		ImplemPackageImpl theImplemPackage = (ImplemPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI) instanceof ImplemPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI) : ImplemPackage.eINSTANCE);
+		GroupPackageImpl theGroupPackage = (GroupPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI) instanceof GroupPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI) : GroupPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theInstancePackage.createPackageContents();
 		theArtPackage.createPackageContents();
 		theTypePackage.createPackageContents();
 		theImplemPackage.createPackageContents();
+		theGroupPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theInstancePackage.initializePackageContents();
 		theArtPackage.initializePackageContents();
 		theTypePackage.initializePackageContents();
 		theImplemPackage.initializePackageContents();
+		theGroupPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theInstancePackage.freeze();
 
+  
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(InstancePackage.eNS_URI, theInstancePackage);
 		return theInstancePackage;
 	}
 
@@ -233,6 +231,15 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 */
 	public EReference getComponentInstance_Implem() {
 		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentInstance_Groups() {
+		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -423,6 +430,7 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__ATTRIBUTE);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__BINDING);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__IMPLEM);
+		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__GROUPS);
 
 		primitiveInstanceEClass = createEClass(PRIMITIVE_INSTANCE);
 
@@ -477,6 +485,7 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		ArtPackage theArtPackage = (ArtPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI);
 		TypePackage theTypePackage = (TypePackage)EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI);
 		ImplemPackage theImplemPackage = (ImplemPackage)EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI);
+		GroupPackage theGroupPackage = (GroupPackage)EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -484,15 +493,8 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 
 		// Add supertypes to classes
 		componentInstanceEClass.getESuperTypes().add(theArtPackage.getModelElement());
-		componentInstanceEClass.getESuperTypes().add(theArtPackage.getAddElement());
-		componentInstanceEClass.getESuperTypes().add(theArtPackage.getRemoveElement());
-		componentInstanceEClass.getESuperTypes().add(theArtPackage.getUpdateElement());
 		primitiveInstanceEClass.getESuperTypes().add(this.getComponentInstance());
 		compositeInstanceEClass.getESuperTypes().add(this.getComponentInstance());
-		valuedAttributeEClass.getESuperTypes().add(theArtPackage.getUpdateElement());
-		bindingEClass.getESuperTypes().add(theArtPackage.getAddElement());
-		bindingEClass.getESuperTypes().add(theArtPackage.getRemoveElement());
-		bindingEClass.getESuperTypes().add(theArtPackage.getUpdateElement());
 		transmissionBindingEClass.getESuperTypes().add(this.getBinding());
 		delegationBindingEClass.getESuperTypes().add(this.getBinding());
 
@@ -504,6 +506,7 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		initEReference(getComponentInstance_Attribute(), this.getValuedAttribute(), null, "attribute", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentInstance_Binding(), this.getTransmissionBinding(), null, "binding", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentInstance_Implem(), theImplemPackage.getComponentImplementation(), null, "implem", null, 0, 1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentInstance_Groups(), theGroupPackage.getInstanceGroup(), theGroupPackage.getInstanceGroup_Instances(), "groups", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primitiveInstanceEClass, PrimitiveInstance.class, "PrimitiveInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

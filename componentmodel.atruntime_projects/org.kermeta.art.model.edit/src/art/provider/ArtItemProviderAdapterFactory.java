@@ -121,75 +121,6 @@ public class ArtItemProviderAdapterFactory extends ArtAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link art.AddElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AddElementItemProvider addElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link art.AddElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAddElementAdapter() {
-		if (addElementItemProvider == null) {
-			addElementItemProvider = new AddElementItemProvider(this);
-		}
-
-		return addElementItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link art.RemoveElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RemoveElementItemProvider removeElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link art.RemoveElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRemoveElementAdapter() {
-		if (removeElementItemProvider == null) {
-			removeElementItemProvider = new RemoveElementItemProvider(this);
-		}
-
-		return removeElementItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link art.UpdateElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected UpdateElementItemProvider updateElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link art.UpdateElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createUpdateElementAdapter() {
-		if (updateElementItemProvider == null) {
-			updateElementItemProvider = new UpdateElementItemProvider(this);
-		}
-
-		return updateElementItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link art.CardinalityElement} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -262,7 +193,7 @@ public class ArtItemProviderAdapterFactory extends ArtAdapterFactory implements 
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -313,9 +244,6 @@ public class ArtItemProviderAdapterFactory extends ArtAdapterFactory implements 
 	public void dispose() {
 		if (systemItemProvider != null) systemItemProvider.dispose();
 		if (dataTypeItemProvider != null) dataTypeItemProvider.dispose();
-		if (addElementItemProvider != null) addElementItemProvider.dispose();
-		if (removeElementItemProvider != null) removeElementItemProvider.dispose();
-		if (updateElementItemProvider != null) updateElementItemProvider.dispose();
 		if (cardinalityElementItemProvider != null) cardinalityElementItemProvider.dispose();
 	}
 

@@ -100,13 +100,31 @@ public interface TypePackage extends EPackage {
 	int COMPONENT_TYPE__ATTRIBUTE = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Groups</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_TYPE__GROUPS = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Implem</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_TYPE__IMPLEM = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Component Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE_FEATURE_COUNT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int COMPONENT_TYPE_FEATURE_COUNT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link art.type.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
@@ -144,6 +162,24 @@ public interface TypePackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE__ATTRIBUTE = COMPONENT_TYPE__ATTRIBUTE;
+
+	/**
+	 * The feature id for the '<em><b>Groups</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__GROUPS = COMPONENT_TYPE__GROUPS;
+
+	/**
+	 * The feature id for the '<em><b>Implem</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__IMPLEM = COMPONENT_TYPE__IMPLEM;
 
 	/**
 	 * The feature id for the '<em><b>Binding</b></em>' containment reference list.
@@ -199,6 +235,24 @@ public interface TypePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_TYPE__ATTRIBUTE = COMPONENT_TYPE__ATTRIBUTE;
+
+	/**
+	 * The feature id for the '<em><b>Groups</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_TYPE__GROUPS = COMPONENT_TYPE__GROUPS;
+
+	/**
+	 * The feature id for the '<em><b>Implem</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_TYPE__IMPLEM = COMPONENT_TYPE__IMPLEM;
 
 	/**
 	 * The feature id for the '<em><b>Sub Types</b></em>' reference list.
@@ -584,6 +638,28 @@ public interface TypePackage extends EPackage {
 	EReference getComponentType_Attribute();
 
 	/**
+	 * Returns the meta object for the reference list '{@link art.type.ComponentType#getGroups <em>Groups</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Groups</em>'.
+	 * @see art.type.ComponentType#getGroups()
+	 * @see #getComponentType()
+	 * @generated
+	 */
+	EReference getComponentType_Groups();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link art.type.ComponentType#getImplem <em>Implem</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Implem</em>'.
+	 * @see art.type.ComponentType#getImplem()
+	 * @see #getComponentType()
+	 * @generated
+	 */
+	EReference getComponentType_Implem();
+
+	/**
 	 * Returns the meta object for class '{@link art.type.PrimitiveType <em>Primitive Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -840,6 +916,22 @@ public interface TypePackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPONENT_TYPE__ATTRIBUTE = eINSTANCE.getComponentType_Attribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Groups</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONENT_TYPE__GROUPS = eINSTANCE.getComponentType_Groups();
+
+		/**
+		 * The meta object literal for the '<em><b>Implem</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONENT_TYPE__IMPLEM = eINSTANCE.getComponentType_Implem();
 
 		/**
 		 * The meta object literal for the '{@link art.type.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.

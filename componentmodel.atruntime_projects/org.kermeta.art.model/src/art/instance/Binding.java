@@ -6,6 +6,7 @@
  */
 package art.instance;
 
+import org.eclipse.emf.ecore.EObject;
 import art.AddElement;
 import art.RemoveElement;
 import art.UpdateElement;
@@ -27,7 +28,7 @@ import art.UpdateElement;
  * @model abstract="true"
  * @generated
  */
-public interface Binding extends AddElement, RemoveElement, UpdateElement {
+public interface Binding extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Server Instance</b></em>' reference.
 	 * <!-- begin-user-doc -->

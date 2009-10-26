@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import art.impl.AddElementImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import art.instance.Binding;
 import art.instance.ComponentInstance;
 import art.instance.InstancePackage;
@@ -30,7 +30,7 @@ import art.instance.InstancePackage;
  *
  * @generated
  */
-public abstract class BindingImpl extends AddElementImpl implements Binding {
+public abstract class BindingImpl extends EObjectImpl implements Binding {
 	/**
 	 * The cached value of the '{@link #getServerInstance() <em>Server Instance</em>}' reference.
 	 * <!-- begin-user-doc -->

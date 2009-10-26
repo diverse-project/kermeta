@@ -67,9 +67,6 @@ public class ArtFactoryImpl extends EFactoryImpl implements ArtFactory {
 		switch (eClass.getClassifierID()) {
 			case ArtPackage.SYSTEM: return createSystem();
 			case ArtPackage.DATA_TYPE: return createDataType();
-			case ArtPackage.ADD_ELEMENT: return createAddElement();
-			case ArtPackage.REMOVE_ELEMENT: return createRemoveElement();
-			case ArtPackage.UPDATE_ELEMENT: return createUpdateElement();
 			case ArtPackage.CARDINALITY_ELEMENT: return createCardinalityElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -132,36 +129,6 @@ public class ArtFactoryImpl extends EFactoryImpl implements ArtFactory {
 	public DataType createDataType() {
 		DataTypeImpl dataType = new DataTypeImpl();
 		return dataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AddElement createAddElement() {
-		AddElementImpl addElement = new AddElementImpl();
-		return addElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RemoveElement createRemoveElement() {
-		RemoveElementImpl removeElement = new RemoveElementImpl();
-		return removeElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UpdateElement createUpdateElement() {
-		UpdateElementImpl updateElement = new UpdateElementImpl();
-		return updateElement;
 	}
 
 	/**

@@ -123,6 +123,19 @@ public class ImplemSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ImplemPackage.TYPE_IMPLEMENTATION: {
+				TypeImplementation typeImplementation = (TypeImplementation)theEObject;
+				T result = caseTypeImplementation(typeImplementation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImplemPackage.OS_GI_TYPE: {
+				OSGiType osGiType = (OSGiType)theEObject;
+				T result = caseOSGiType(osGiType);
+				if (result == null) result = caseTypeImplementation(osGiType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -199,6 +212,36 @@ public class ImplemSwitch<T> {
 	 * @generated
 	 */
 	public T caseOSGiPort(OSGiPort object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Implementation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Implementation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeImplementation(TypeImplementation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>OS Gi Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>OS Gi Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOSGiType(OSGiType object) {
 		return null;
 	}
 

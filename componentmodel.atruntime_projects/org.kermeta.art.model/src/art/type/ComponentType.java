@@ -10,6 +10,8 @@ import org.eclipse.emf.common.util.EList;
 
 import art.AddElement;
 import art.ModelElement;
+import art.group.TypeGroup;
+import art.implem.ComponentImplementation;
 import art.RemoveElement;
 
 /**
@@ -22,6 +24,8 @@ import art.RemoveElement;
  * <ul>
  *   <li>{@link art.type.ComponentType#getPort <em>Port</em>}</li>
  *   <li>{@link art.type.ComponentType#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link art.type.ComponentType#getGroups <em>Groups</em>}</li>
+ *   <li>{@link art.type.ComponentType#getImplem <em>Implem</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,7 +33,7 @@ import art.RemoveElement;
  * @model abstract="true"
  * @generated
  */
-public interface ComponentType extends ModelElement, AddElement, RemoveElement {
+public interface ComponentType extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Port</b></em>' containment reference list.
 	 * The list contents are of type {@link art.type.Port}.
@@ -61,5 +65,49 @@ public interface ComponentType extends ModelElement, AddElement, RemoveElement {
 	 * @generated
 	 */
 	EList<Attribute> getAttribute();
+
+	/**
+	 * Returns the value of the '<em><b>Groups</b></em>' reference list.
+	 * The list contents are of type {@link art.group.TypeGroup}.
+	 * It is bidirectional and its opposite is '{@link art.group.TypeGroup#getTypes <em>Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Groups</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Groups</em>' reference list.
+	 * @see art.type.TypePackage#getComponentType_Groups()
+	 * @see art.group.TypeGroup#getTypes
+	 * @model opposite="types"
+	 * @generated
+	 */
+	EList<TypeGroup> getGroups();
+
+	/**
+	 * Returns the value of the '<em><b>Implem</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Implem</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Implem</em>' containment reference.
+	 * @see #setImplem(ComponentImplementation)
+	 * @see art.type.TypePackage#getComponentType_Implem()
+	 * @model containment="true"
+	 * @generated
+	 */
+	ComponentImplementation getImplem();
+
+	/**
+	 * Sets the value of the '{@link art.type.ComponentType#getImplem <em>Implem</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Implem</em>' containment reference.
+	 * @see #getImplem()
+	 * @generated
+	 */
+	void setImplem(ComponentImplementation value);
 
 } // ComponentType
