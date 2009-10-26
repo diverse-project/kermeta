@@ -4,7 +4,7 @@
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
- * Creation date : 16 f�vr. 2005
+ * Creation date : 16 fevr. 2005
  * Authors : 
  * 		Franck FLEUREY (ffleurey@irisa.fr)
  * Description :  	
