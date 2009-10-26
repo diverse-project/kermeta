@@ -60,28 +60,35 @@ public class GenerateKMT {
 //		return  rs.getResource(URI.createFileURI(oclcst_ecore), true);
 	}
 	
-	
-	public void generate(URI ecoreURI, URI inputOclFileURI, URI outputKMTFileURI){
+	/**
+	 * 
+	 * @param ecoreURI
+	 * @param inputOclFileURI
+	 * @param outputKMTFileURI
+	 * @return true if the generation was successful
+	 */
+	public boolean generate(URI ecoreURI, URI inputOclFileURI, URI outputKMTFileURI){
 		URI xmiTempFileURI = inputOclFileURI.trimFileExtension().appendFileExtension("xmi");
 		getConsole().println("Parsing: \nfrom: " + inputOclFileURI + " \nto  : " + xmiTempFileURI  );
 		try {
-				OCLFileParser.parseTextFileToXmiFile(inputOclFileURI, xmiTempFileURI);
+				OCLFileParser.parseTextFileToXmiFileWithConsole(inputOclFileURI, xmiTempFileURI, getConsole());
 		} catch (ParserException e) {
 			getConsole().println(new ThrowableMessage(e));
-				return;
+				return false;
 		} catch (IOException e) {
 			getConsole().println(new ThrowableMessage(e));
-			return;
+			return false;
 		}
 		try {
 			runOclCstToKmtPrinter( xmiTempFileURI, ecoreURI,  outputKMTFileURI);
 		} catch (KermetaRaisedException e) {
 			defaultConsole.println(new ErrorMessage(e.toString()));
-			return;
+			return false;
 		} catch (Throwable t) {
 			defaultConsole.println(new ThrowableMessage(t));
-			return;
+			return false;
 		}
+		return true;
 	}
 	
 	

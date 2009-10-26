@@ -196,11 +196,22 @@ public class OCLParseWizard extends Wizard {
 		URI kmtURI = URI.createURI(kmtPath);
 		try{
 			GenerateKMT generator = new GenerateKMT(console);
-			generator.generate(ecoreURI, oclURI, kmtURI);		
+			if(!generator.generate(ecoreURI, oclURI, kmtURI)){
+				// failed, so do not keep the kmt file (which empty anyway )
+				try{ 
+					kmtFile.delete(true, null);			
+				} catch (CoreException e1) {
+				}				
+			}
 		}
 		catch(Throwable e){
 			console.println(new ThrowableMessage(e));
 			e.printStackTrace();
+			try{ 
+				// failed, so do not keep the kmt file (which empty anyway )
+				kmtFile.delete(true, null);			
+			} catch (CoreException e1) {
+			}
 			return true;
 		}
 			

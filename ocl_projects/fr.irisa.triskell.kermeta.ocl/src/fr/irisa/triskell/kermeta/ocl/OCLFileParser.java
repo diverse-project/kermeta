@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collections;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -15,7 +16,11 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.parser.OCLProblemHandler;
 
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
+import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
+import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 
 /**
@@ -47,6 +52,10 @@ public class OCLFileParser {
 		MyOCLParser parser = new MyOCLParser(oclSourceText);
 		EObject constraint = null;
 		constraint = parser.parseConcreteSyntax();
+		OCLProblemHandler pbHandler = (OCLProblemHandler) parser.getEnvironment().getProblemHandler();
+		if(pbHandler.getDiagnostic() != null){
+			System.err.println(getDiagnosticFullMessage(pbHandler.getDiagnostic()));
+		}
 		if (constraint != null) {
 			Resource resource = new XMIResourceFactoryImpl().createResource(outputXmiURI);
 			resource.getContents().add(constraint);
@@ -58,6 +67,44 @@ public class OCLFileParser {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * Parse the given OCL Source text and save the resulting object tree, together with 
+	 * its cross-references, in a file described by the given URI
+	 * @param oclSourceText - the text to parse
+	 * @param outputXmiURI - the URI of the output XMI file 
+	 * @throws ParserException
+	 */
+	public static void parseToXMIFileWithConsole(String oclSourceText, URI outputXmiURI, EclipseConsole console) throws ParserException {
+		MyOCLParser parser = new MyOCLParser(oclSourceText);
+		EObject constraint = null;
+		constraint = parser.parseConcreteSyntax();
+		OCLProblemHandler pbHandler = (OCLProblemHandler) parser.getEnvironment().getProblemHandler();
+		if(pbHandler.getDiagnostic() != null){
+			console.println(new ErrorMessage("Error parsing the file:\n"+getDiagnosticFullMessage(pbHandler.getDiagnostic())));
+		}
+		if (constraint != null) {
+			Resource resource = new XMIResourceFactoryImpl().createResource(outputXmiURI);
+			resource.getContents().add(constraint);
+			saveCrossReferences(resource, constraint.eCrossReferences());
+			try {
+				resource.save(Collections.EMPTY_MAP);
+				System.out.println("saved: " + outputXmiURI);
+			} catch (IOException e) {
+				e.printStackTrace();
+				console.println(new ThrowableMessage(e));
+			}
+		}
+	}
+	
+	public static String getDiagnosticFullMessage(Diagnostic diag){
+		StringBuffer result = new StringBuffer();
+		for(Diagnostic child : diag.getChildren()){
+			result.append(getDiagnosticFullMessage(child)+"\n");
+		}
+		result.append(diag.getMessage());
+		return result.toString();
 	}
 		
 	/**
@@ -71,7 +118,13 @@ public class OCLFileParser {
 		String oclSourceText =  getContents(sourceTextURI);
 		parseToXMIFile(oclSourceText, outputXmiURI);
 	}
-	
+
+	public static void parseTextFileToXmiFileWithConsole(URI sourceTextURI,
+			URI outputXmiURI, EclipseConsole console) throws ParserException, IOException {
+		String oclSourceText =  getContents(sourceTextURI);
+		parseToXMIFileWithConsole(oclSourceText, outputXmiURI, console);
+		
+	}
 	/**
 	 * Return the contents of the file specified by oclURI as a single large string
 	 * @param oclURI
@@ -112,6 +165,8 @@ public class OCLFileParser {
 			e.printStackTrace();
 		}
 	 }
+
+	
 	
 
 }
