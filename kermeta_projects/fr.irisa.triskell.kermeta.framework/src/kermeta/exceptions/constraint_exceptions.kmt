@@ -9,7 +9,7 @@
 package kermeta::exceptions;
 
 
-require kermeta
+require "../Standard.kmt"
 //require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/visitor/prettyprinters/kmtPrettyPrinter.kmt"
 
 //require "../persistence/persistence_aspect.kmt"
@@ -44,7 +44,7 @@ class ConstraintsDiagnostic
 					  
 	
 		setConstraints.each{c|
-			//stdio.writeln("exceptions_aspect : " + c.message + " /exceptions_aspect" /*+c.failedConstraint.body.toString*/)
+			//stdio.writeln("exceptions_aspect : " + c.message + " /exceptions_aspect" +c.failedConstraint.body.toString)
 			c.constraintAppliedTo.containingResource.asType(EMFResource).mark(c.message)
 		}
 	end */

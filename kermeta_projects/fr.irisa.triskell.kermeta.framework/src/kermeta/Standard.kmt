@@ -17,6 +17,8 @@ require "standard/collections.kmt"
 
 require "language/structure.kmt"
 
+require "language/structure_constraint_aspect.kmt"
+
 require "language/reflective_collections.kmt"
 
 require "kunit/kunit.kmt"

@@ -21,8 +21,8 @@
 
 package kermeta::language::structure;
 
-require kermeta
-require "exceptions_aspect.kmt"
+require "../Standard.kmt"
+require "../exceptions/constraint_exceptions.kmt"
 
 using kermeta::language::structure
 using kermeta::language::behavior
@@ -43,10 +43,10 @@ aspect class PropertyConstraint inherits Constraint {
 aspect class Object
 {
 
-	operation getViolatedConstraints() : ConstraintsDiagnostic is do
+	operation getViolatedConstraints() : kermeta::exceptions::ConstraintsDiagnostic is do
 	
 		// init result
-		var contraintes : ConstraintsDiagnostic init ConstraintsDiagnostic.new.initialize
+		var contraintes : ConstraintsDiagnostic init kermeta::exceptions::ConstraintsDiagnostic.new.initialize
 		
 		var cd : ClassDefinition 
 		cd := self.getMetaClass().classDefinition
