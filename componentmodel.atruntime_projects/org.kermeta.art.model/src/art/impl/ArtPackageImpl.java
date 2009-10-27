@@ -254,6 +254,15 @@ public class ArtPackageImpl extends EPackageImpl implements ArtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getSystem_Groups() {
+		return (EReference)systemEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDataType() {
 		return dataTypeEClass;
 	}
@@ -368,6 +377,7 @@ public class ArtPackageImpl extends EPackageImpl implements ArtPackage {
 		createEReference(systemEClass, SYSTEM__SERVICES);
 		createEReference(systemEClass, SYSTEM__TYPES);
 		createEReference(systemEClass, SYSTEM__DATA_TYPES);
+		createEReference(systemEClass, SYSTEM__GROUPS);
 
 		dataTypeEClass = createEClass(DATA_TYPE);
 
@@ -441,6 +451,7 @@ public class ArtPackageImpl extends EPackageImpl implements ArtPackage {
 		initEReference(getSystem_Services(), theTypePackage.getService(), null, "services", null, 0, -1, art.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSystem_Types(), theTypePackage.getComponentType(), null, "types", null, 0, -1, art.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSystem_DataTypes(), this.getDataType(), null, "dataTypes", null, 0, -1, art.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSystem_Groups(), theGroupPackage.getGroup(), null, "groups", null, 0, -1, art.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -76,29 +76,6 @@ public class GroupItemProviderAdapterFactory extends GroupAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link art.group.Group} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected GroupItemProvider groupItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link art.group.Group}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createGroupAdapter() {
-		if (groupItemProvider == null) {
-			groupItemProvider = new GroupItemProvider(this);
-		}
-
-		return groupItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link art.group.TypeGroup} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -243,7 +220,6 @@ public class GroupItemProviderAdapterFactory extends GroupAdapterFactory impleme
 	 * @generated
 	 */
 	public void dispose() {
-		if (groupItemProvider != null) groupItemProvider.dispose();
 		if (typeGroupItemProvider != null) typeGroupItemProvider.dispose();
 		if (instanceGroupItemProvider != null) instanceGroupItemProvider.dispose();
 	}

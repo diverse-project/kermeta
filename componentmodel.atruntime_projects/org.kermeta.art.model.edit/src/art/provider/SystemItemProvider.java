@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import art.ArtFactory;
 import art.ArtPackage;
+import art.group.GroupFactory;
 import art.instance.InstanceFactory;
 import art.type.TypeFactory;
 
@@ -82,6 +83,7 @@ public class SystemItemProvider
 			childrenFeatures.add(ArtPackage.Literals.SYSTEM__SERVICES);
 			childrenFeatures.add(ArtPackage.Literals.SYSTEM__TYPES);
 			childrenFeatures.add(ArtPackage.Literals.SYSTEM__DATA_TYPES);
+			childrenFeatures.add(ArtPackage.Literals.SYSTEM__GROUPS);
 		}
 		return childrenFeatures;
 	}
@@ -140,6 +142,7 @@ public class SystemItemProvider
 			case ArtPackage.SYSTEM__SERVICES:
 			case ArtPackage.SYSTEM__TYPES:
 			case ArtPackage.SYSTEM__DATA_TYPES:
+			case ArtPackage.SYSTEM__GROUPS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -186,6 +189,16 @@ public class SystemItemProvider
 			(createChildParameter
 				(ArtPackage.Literals.SYSTEM__DATA_TYPES,
 				 ArtFactory.eINSTANCE.createDataType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArtPackage.Literals.SYSTEM__GROUPS,
+				 GroupFactory.eINSTANCE.createTypeGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArtPackage.Literals.SYSTEM__GROUPS,
+				 GroupFactory.eINSTANCE.createInstanceGroup()));
 	}
 
 }

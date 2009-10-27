@@ -60,22 +60,11 @@ public class GroupFactoryImpl extends EFactoryImpl implements GroupFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case GroupPackage.GROUP: return createGroup();
 			case GroupPackage.TYPE_GROUP: return createTypeGroup();
 			case GroupPackage.INSTANCE_GROUP: return createInstanceGroup();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Group createGroup() {
-		GroupImpl group = new GroupImpl();
-		return group;
 	}
 
 	/**

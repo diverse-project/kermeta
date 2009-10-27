@@ -159,11 +159,6 @@ public class GroupItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(GroupPackage.Literals.GROUP__SUB_GROUPS,
-				 GroupFactory.eINSTANCE.createGroup()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(GroupPackage.Literals.GROUP__SUB_GROUPS,
 				 GroupFactory.eINSTANCE.createTypeGroup()));
 
 		newChildDescriptors.add

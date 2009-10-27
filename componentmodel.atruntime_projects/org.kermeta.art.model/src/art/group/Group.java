@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see art.group.GroupPackage#getGroup()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Group extends NamedElement {

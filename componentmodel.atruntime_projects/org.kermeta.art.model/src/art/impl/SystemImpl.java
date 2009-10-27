@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import art.ArtPackage;
 import art.DataType;
+import art.group.Group;
 import art.instance.CompositeInstance;
 import art.type.ComponentType;
 import art.type.Service;
@@ -34,6 +35,7 @@ import art.type.Service;
  *   <li>{@link art.impl.SystemImpl#getServices <em>Services</em>}</li>
  *   <li>{@link art.impl.SystemImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link art.impl.SystemImpl#getDataTypes <em>Data Types</em>}</li>
+ *   <li>{@link art.impl.SystemImpl#getGroups <em>Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,6 +78,16 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 	 * @ordered
 	 */
 	protected EList<DataType> dataTypes;
+
+	/**
+	 * The cached value of the '{@link #getGroups() <em>Groups</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGroups()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Group> groups;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -183,6 +195,18 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Group> getGroups() {
+		if (groups == null) {
+			groups = new EObjectContainmentEList<Group>(Group.class, this, ArtPackage.SYSTEM__GROUPS);
+		}
+		return groups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -194,6 +218,8 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
 			case ArtPackage.SYSTEM__DATA_TYPES:
 				return ((InternalEList<?>)getDataTypes()).basicRemove(otherEnd, msgs);
+			case ArtPackage.SYSTEM__GROUPS:
+				return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -214,6 +240,8 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 				return getTypes();
 			case ArtPackage.SYSTEM__DATA_TYPES:
 				return getDataTypes();
+			case ArtPackage.SYSTEM__GROUPS:
+				return getGroups();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -242,6 +270,10 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 				getDataTypes().clear();
 				getDataTypes().addAll((Collection<? extends DataType>)newValue);
 				return;
+			case ArtPackage.SYSTEM__GROUPS:
+				getGroups().clear();
+				getGroups().addAll((Collection<? extends Group>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -266,6 +298,9 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 			case ArtPackage.SYSTEM__DATA_TYPES:
 				getDataTypes().clear();
 				return;
+			case ArtPackage.SYSTEM__GROUPS:
+				getGroups().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -286,6 +321,8 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 				return types != null && !types.isEmpty();
 			case ArtPackage.SYSTEM__DATA_TYPES:
 				return dataTypes != null && !dataTypes.isEmpty();
+			case ArtPackage.SYSTEM__GROUPS:
+				return groups != null && !groups.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

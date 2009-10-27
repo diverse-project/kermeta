@@ -16,6 +16,8 @@
         eType="#//type/ComponentType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataTypes" upperBound="-1"
         eType="#//DataType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1"
+        eType="#//group/Group" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//ModelElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="#//ModelElement">
@@ -149,7 +151,7 @@
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="group" nsURI="http://art/group" nsPrefix="group">
-    <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="#//NamedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Group" abstract="true" eSuperTypes="#//NamedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="subGroups" upperBound="-1"
           eType="#//group/Group" containment="true"/>
     </eClassifiers>

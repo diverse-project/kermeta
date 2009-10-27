@@ -6,6 +6,7 @@
  */
 package art;
 
+import art.group.Group;
 import org.eclipse.emf.common.util.EList;
 
 import art.instance.CompositeInstance;
@@ -24,6 +25,7 @@ import art.type.Service;
  *   <li>{@link art.System#getServices <em>Services</em>}</li>
  *   <li>{@link art.System#getTypes <em>Types</em>}</li>
  *   <li>{@link art.System#getDataTypes <em>Data Types</em>}</li>
+ *   <li>{@link art.System#getGroups <em>Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -105,5 +107,21 @@ public interface System extends ModelElement {
 	 * @generated
 	 */
 	EList<DataType> getDataTypes();
+
+	/**
+	 * Returns the value of the '<em><b>Groups</b></em>' containment reference list.
+	 * The list contents are of type {@link art.group.Group}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Groups</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Groups</em>' containment reference list.
+	 * @see art.ArtPackage#getSystem_Groups()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Group> getGroups();
 
 } // System

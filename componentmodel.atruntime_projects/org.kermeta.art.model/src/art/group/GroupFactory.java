@@ -26,15 +26,6 @@ public interface GroupFactory extends EFactory {
 	GroupFactory eINSTANCE = art.group.impl.GroupFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Group</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Group</em>'.
-	 * @generated
-	 */
-	Group createGroup();
-
-	/**
 	 * Returns a new object of class '<em>Type Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class GroupImpl extends NamedElementImpl implements Group {
+public abstract class GroupImpl extends NamedElementImpl implements Group {
 	/**
 	 * The cached value of the '{@link #getSubGroups() <em>Sub Groups</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

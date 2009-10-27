@@ -172,13 +172,22 @@ public interface ArtPackage extends EPackage {
 	int SYSTEM__DATA_TYPES = MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Groups</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYSTEM__GROUPS = MODEL_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>System</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int SYSTEM_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link art.impl.DataTypeImpl <em>Data Type</em>}' class.
@@ -409,6 +418,17 @@ public interface ArtPackage extends EPackage {
 	EReference getSystem_DataTypes();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link art.System#getGroups <em>Groups</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Groups</em>'.
+	 * @see art.System#getGroups()
+	 * @see #getSystem()
+	 * @generated
+	 */
+	EReference getSystem_Groups();
+
+	/**
 	 * Returns the meta object for class '{@link art.DataType <em>Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -595,6 +615,14 @@ public interface ArtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SYSTEM__DATA_TYPES = eINSTANCE.getSystem_DataTypes();
+
+		/**
+		 * The meta object literal for the '<em><b>Groups</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SYSTEM__GROUPS = eINSTANCE.getSystem_Groups();
 
 		/**
 		 * The meta object literal for the '{@link art.impl.DataTypeImpl <em>Data Type</em>}' class.
