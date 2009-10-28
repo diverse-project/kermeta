@@ -68,7 +68,7 @@ public class CompileEcoreAction implements IObjectActionDelegate {
 		boolean isConfirmed = MessageDialog.openConfirm(
 			shell,
 			"KermetaCompiler Ecore2Java",
-			"This action skips the kmt2ecore compilation, the potential changes in your kmt sources will be not taking into account !");
+			"This action skips the kmt2ecore compilation, the potential changes in your kmt sources won't be taken into account !");
 		
 		if ( isConfirmed ) {
 			

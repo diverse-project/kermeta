@@ -96,6 +96,35 @@
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/org.kermeta.advanced.subsubmenu/kermetagroup1">
          </action>
       </objectContribution>
+      <objectContribution
+            id="org.kermeta.compiler.compilekm2ecorecontribution"
+            nameFilter="*.km"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+               label="Kermeta"
+               path="additions">
+            <separator
+                  name="kermetagroup1">
+            </separator>
+         </menu>
+         <menu
+               id="org.kermeta.advanced.subsubmenu"
+               label="Kermeta advanced"
+               path="org.eclipse.ui.articles.action.contribution.navigator.subMenu/additions">
+            <separator
+                  name="kermetagroup1">
+            </separator>
+         </menu>
+         <action
+               class="org.kermeta.compiler.ui.popup.actions.CompileKM2EcoreAction"
+               enablesFor="1"
+               icon="icons/etools_persp.gif"
+               id="fr.irisa.triskell.kermeta.compiler.CompileKermeta2EcoreAction"
+               label="Generate Ecore for compilation (experimental)"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/org.kermeta.advanced.subsubmenu/kermetagroup1">
+         </action>
+      </objectContribution>
    </extension>
    
 </plugin>
