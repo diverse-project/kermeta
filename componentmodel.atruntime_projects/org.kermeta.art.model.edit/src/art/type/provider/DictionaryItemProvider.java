@@ -4,15 +4,18 @@
  *
  * $Id$
  */
-package art.instance.provider;
+package art.type.provider;
 
+
+import art.type.Dictionary;
+import art.type.TypePackage;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -20,28 +23,20 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
-import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import art.instance.InstancePackage;
-import art.instance.ValuedAttribute;
-import art.provider.MetamodelruntimeEditPlugin;
-import art.provider.UpdateElementItemProvider;
 
 /**
- * This is the item provider adapter for a {@link art.instance.ValuedAttribute} object.
+ * This is the item provider adapter for a {@link art.type.Dictionary} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ValuedAttributeItemProvider
-	extends AttributeInstanceItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+public class DictionaryItemProvider
+	extends AttributeItemProvider
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -49,7 +44,7 @@ public class ValuedAttributeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ValuedAttributeItemProvider(AdapterFactory adapterFactory) {
+	public DictionaryItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,42 +59,42 @@ public class ValuedAttributeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addValuePropertyDescriptor(object);
+			addKeyTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Value feature.
+	 * This adds a property descriptor for the Key Type feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addValuePropertyDescriptor(Object object) {
+	protected void addKeyTypePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ValuedAttribute_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ValuedAttribute_value_feature", "_UI_ValuedAttribute_type"),
-				 InstancePackage.Literals.VALUED_ATTRIBUTE__VALUE,
+				 getString("_UI_Dictionary_keyType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Dictionary_keyType_feature", "_UI_Dictionary_type"),
+				 TypePackage.Literals.DICTIONARY__KEY_TYPE,
 				 true,
 				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 true,
+				 null,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This returns ValuedAttribute.gif.
+	 * This returns Dictionary.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ValuedAttribute"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Dictionary"));
 	}
 
 	/**
@@ -110,10 +105,10 @@ public class ValuedAttributeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ValuedAttribute)object).getValue();
+		String label = ((Dictionary)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ValuedAttribute_type") :
-			getString("_UI_ValuedAttribute_type") + " " + label;
+			getString("_UI_Dictionary_type") :
+			getString("_UI_Dictionary_type") + " " + label;
 	}
 
 	/**
@@ -126,12 +121,6 @@ public class ValuedAttributeItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(ValuedAttribute.class)) {
-			case InstancePackage.VALUED_ATTRIBUTE__VALUE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

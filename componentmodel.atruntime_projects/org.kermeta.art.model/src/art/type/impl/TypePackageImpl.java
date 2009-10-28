@@ -25,6 +25,7 @@ import art.type.Attribute;
 import art.type.ComponentType;
 import art.type.CompositeType;
 import art.type.ControlService;
+import art.type.Dictionary;
 import art.type.FunctionalService;
 import art.type.Operation;
 import art.type.Parameter;
@@ -111,6 +112,13 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * @generated
 	 */
 	private EClass attributeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dictionaryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -415,6 +423,24 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDictionary() {
+		return dictionaryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDictionary_KeyType() {
+		return (EReference)dictionaryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getPortRole() {
 		return portRoleEEnum;
 	}
@@ -481,6 +507,9 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 
 		attributeEClass = createEClass(ATTRIBUTE);
 
+		dictionaryEClass = createEClass(DICTIONARY);
+		createEReference(dictionaryEClass, DICTIONARY__KEY_TYPE);
+
 		// Create enums
 		portRoleEEnum = createEEnum(PORT_ROLE);
 	}
@@ -529,6 +558,7 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		controlServiceEClass.getESuperTypes().add(this.getService());
 		portEClass.getESuperTypes().add(theArtPackage.getCardinalityElement());
 		attributeEClass.getESuperTypes().add(theArtPackage.getTypedElement());
+		dictionaryEClass.getESuperTypes().add(this.getAttribute());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(componentTypeEClass, ComponentType.class, "ComponentType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -564,6 +594,9 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		initEReference(getPort_Implem(), theImplemPackage.getPortImplementation(), null, "implem", null, 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(dictionaryEClass, Dictionary.class, "Dictionary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDictionary_KeyType(), theArtPackage.getDataType(), null, "keyType", null, 1, 1, Dictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(portRoleEEnum, PortRole.class, "PortRole");

@@ -227,6 +227,11 @@ public class ComponentInstanceItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(InstancePackage.Literals.COMPONENT_INSTANCE__ATTRIBUTE,
+				 InstanceFactory.eINSTANCE.createDictionaryValuedAttribute()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(InstancePackage.Literals.COMPONENT_INSTANCE__BINDING,
 				 InstanceFactory.eINSTANCE.createTransmissionBinding()));
 

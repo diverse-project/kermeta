@@ -7,12 +7,18 @@
 package art.instance.provider;
 
 
+import art.instance.InstancePackage;
+
+import art.provider.MetamodelruntimeEditPlugin;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -20,28 +26,21 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
-import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import art.instance.InstancePackage;
-import art.instance.ValuedAttribute;
-import art.provider.MetamodelruntimeEditPlugin;
-import art.provider.UpdateElementItemProvider;
 
 /**
- * This is the item provider adapter for a {@link art.instance.ValuedAttribute} object.
+ * This is the item provider adapter for a {@link art.instance.AttributeInstance} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ValuedAttributeItemProvider
-	extends AttributeInstanceItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+public class AttributeInstanceItemProvider
+	extends ItemProviderAdapter
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -49,7 +48,7 @@ public class ValuedAttributeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ValuedAttributeItemProvider(AdapterFactory adapterFactory) {
+	public AttributeInstanceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,42 +63,31 @@ public class ValuedAttributeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addValuePropertyDescriptor(object);
+			addAttributePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Value feature.
+	 * This adds a property descriptor for the Attribute feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addValuePropertyDescriptor(Object object) {
+	protected void addAttributePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ValuedAttribute_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ValuedAttribute_value_feature", "_UI_ValuedAttribute_type"),
-				 InstancePackage.Literals.VALUED_ATTRIBUTE__VALUE,
+				 getString("_UI_AttributeInstance_attribute_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AttributeInstance_attribute_feature", "_UI_AttributeInstance_type"),
+				 InstancePackage.Literals.ATTRIBUTE_INSTANCE__ATTRIBUTE,
 				 true,
 				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 true,
+				 null,
 				 null,
 				 null));
-	}
-
-	/**
-	 * This returns ValuedAttribute.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ValuedAttribute"));
 	}
 
 	/**
@@ -110,10 +98,7 @@ public class ValuedAttributeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ValuedAttribute)object).getValue();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ValuedAttribute_type") :
-			getString("_UI_ValuedAttribute_type") + " " + label;
+		return getString("_UI_AttributeInstance_type");
 	}
 
 	/**
@@ -126,12 +111,6 @@ public class ValuedAttributeItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(ValuedAttribute.class)) {
-			case InstancePackage.VALUED_ATTRIBUTE__VALUE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -145,6 +124,17 @@ public class ValuedAttributeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return MetamodelruntimeEditPlugin.INSTANCE;
 	}
 
 }

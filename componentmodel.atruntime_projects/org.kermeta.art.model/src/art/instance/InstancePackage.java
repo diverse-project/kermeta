@@ -354,14 +354,14 @@ public interface InstancePackage extends EPackage {
 	int COMPOSITE_INSTANCE_FEATURE_COUNT = COMPONENT_INSTANCE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link art.instance.impl.ValuedAttributeImpl <em>Valued Attribute</em>}' class.
+	 * The meta object id for the '{@link art.instance.impl.AttributeInstanceImpl <em>Attribute Instance</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see art.instance.impl.ValuedAttributeImpl
-	 * @see art.instance.impl.InstancePackageImpl#getValuedAttribute()
+	 * @see art.instance.impl.AttributeInstanceImpl
+	 * @see art.instance.impl.InstancePackageImpl#getAttributeInstance()
 	 * @generated
 	 */
-	int VALUED_ATTRIBUTE = 3;
+	int ATTRIBUTE_INSTANCE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -370,7 +370,35 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUED_ATTRIBUTE__ATTRIBUTE = 0;
+	int ATTRIBUTE_INSTANCE__ATTRIBUTE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Attribute Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_INSTANCE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link art.instance.impl.ValuedAttributeImpl <em>Valued Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.instance.impl.ValuedAttributeImpl
+	 * @see art.instance.impl.InstancePackageImpl#getValuedAttribute()
+	 * @generated
+	 */
+	int VALUED_ATTRIBUTE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Attribute</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUED_ATTRIBUTE__ATTRIBUTE = ATTRIBUTE_INSTANCE__ATTRIBUTE;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -379,7 +407,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUED_ATTRIBUTE__VALUE = 1;
+	int VALUED_ATTRIBUTE__VALUE = ATTRIBUTE_INSTANCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Valued Attribute</em>' class.
@@ -388,7 +416,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUED_ATTRIBUTE_FEATURE_COUNT = 2;
+	int VALUED_ATTRIBUTE_FEATURE_COUNT = ATTRIBUTE_INSTANCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link art.instance.impl.BindingImpl <em>Binding</em>}' class.
@@ -398,7 +426,7 @@ public interface InstancePackage extends EPackage {
 	 * @see art.instance.impl.InstancePackageImpl#getBinding()
 	 * @generated
 	 */
-	int BINDING = 4;
+	int BINDING = 5;
 
 	/**
 	 * The feature id for the '<em><b>Server Instance</b></em>' reference.
@@ -435,7 +463,7 @@ public interface InstancePackage extends EPackage {
 	 * @see art.instance.impl.InstancePackageImpl#getTransmissionBinding()
 	 * @generated
 	 */
-	int TRANSMISSION_BINDING = 5;
+	int TRANSMISSION_BINDING = 6;
 
 	/**
 	 * The feature id for the '<em><b>Server Instance</b></em>' reference.
@@ -490,7 +518,7 @@ public interface InstancePackage extends EPackage {
 	 * @see art.instance.impl.InstancePackageImpl#getDelegationBinding()
 	 * @generated
 	 */
-	int DELEGATION_BINDING = 6;
+	int DELEGATION_BINDING = 7;
 
 	/**
 	 * The feature id for the '<em><b>Server Instance</b></em>' reference.
@@ -538,6 +566,89 @@ public interface InstancePackage extends EPackage {
 	int DELEGATION_BINDING_FEATURE_COUNT = BINDING_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link art.instance.impl.DictionaryValuedAttributeImpl <em>Dictionary Valued Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.instance.impl.DictionaryValuedAttributeImpl
+	 * @see art.instance.impl.InstancePackageImpl#getDictionaryValuedAttribute()
+	 * @generated
+	 */
+	int DICTIONARY_VALUED_ATTRIBUTE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Attribute</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_VALUED_ATTRIBUTE__ATTRIBUTE = VALUED_ATTRIBUTE__ATTRIBUTE;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_VALUED_ATTRIBUTE__VALUE = VALUED_ATTRIBUTE__VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Entries</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_VALUED_ATTRIBUTE__ENTRIES = VALUED_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Dictionary Valued Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_VALUED_ATTRIBUTE_FEATURE_COUNT = VALUED_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link art.instance.impl.EntryImpl <em>Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.instance.impl.EntryImpl
+	 * @see art.instance.impl.InstancePackageImpl#getEntry()
+	 * @generated
+	 */
+	int ENTRY = 9;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link art.instance.InstanceState <em>State</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -545,7 +656,7 @@ public interface InstancePackage extends EPackage {
 	 * @see art.instance.impl.InstancePackageImpl#getInstanceState()
 	 * @generated
 	 */
-	int INSTANCE_STATE = 7;
+	int INSTANCE_STATE = 10;
 
 
 	/**
@@ -678,6 +789,27 @@ public interface InstancePackage extends EPackage {
 	EReference getCompositeInstance_Delegation();
 
 	/**
+	 * Returns the meta object for class '{@link art.instance.AttributeInstance <em>Attribute Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Attribute Instance</em>'.
+	 * @see art.instance.AttributeInstance
+	 * @generated
+	 */
+	EClass getAttributeInstance();
+
+	/**
+	 * Returns the meta object for the reference '{@link art.instance.AttributeInstance#getAttribute <em>Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Attribute</em>'.
+	 * @see art.instance.AttributeInstance#getAttribute()
+	 * @see #getAttributeInstance()
+	 * @generated
+	 */
+	EReference getAttributeInstance_Attribute();
+
+	/**
 	 * Returns the meta object for class '{@link art.instance.ValuedAttribute <em>Valued Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -686,17 +818,6 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getValuedAttribute();
-
-	/**
-	 * Returns the meta object for the reference '{@link art.instance.ValuedAttribute#getAttribute <em>Attribute</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Attribute</em>'.
-	 * @see art.instance.ValuedAttribute#getAttribute()
-	 * @see #getValuedAttribute()
-	 * @generated
-	 */
-	EReference getValuedAttribute_Attribute();
 
 	/**
 	 * Returns the meta object for the attribute '{@link art.instance.ValuedAttribute#getValue <em>Value</em>}'.
@@ -804,6 +925,59 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDelegationBinding_Exported();
+
+	/**
+	 * Returns the meta object for class '{@link art.instance.DictionaryValuedAttribute <em>Dictionary Valued Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Dictionary Valued Attribute</em>'.
+	 * @see art.instance.DictionaryValuedAttribute
+	 * @generated
+	 */
+	EClass getDictionaryValuedAttribute();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link art.instance.DictionaryValuedAttribute#getEntries <em>Entries</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Entries</em>'.
+	 * @see art.instance.DictionaryValuedAttribute#getEntries()
+	 * @see #getDictionaryValuedAttribute()
+	 * @generated
+	 */
+	EReference getDictionaryValuedAttribute_Entries();
+
+	/**
+	 * Returns the meta object for class '{@link art.instance.Entry <em>Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Entry</em>'.
+	 * @see art.instance.Entry
+	 * @generated
+	 */
+	EClass getEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.instance.Entry#getKey <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see art.instance.Entry#getKey()
+	 * @see #getEntry()
+	 * @generated
+	 */
+	EAttribute getEntry_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.instance.Entry#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see art.instance.Entry#getValue()
+	 * @see #getEntry()
+	 * @generated
+	 */
+	EAttribute getEntry_Value();
 
 	/**
 	 * Returns the meta object for enum '{@link art.instance.InstanceState <em>State</em>}'.
@@ -940,6 +1114,24 @@ public interface InstancePackage extends EPackage {
 		EReference COMPOSITE_INSTANCE__DELEGATION = eINSTANCE.getCompositeInstance_Delegation();
 
 		/**
+		 * The meta object literal for the '{@link art.instance.impl.AttributeInstanceImpl <em>Attribute Instance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.instance.impl.AttributeInstanceImpl
+		 * @see art.instance.impl.InstancePackageImpl#getAttributeInstance()
+		 * @generated
+		 */
+		EClass ATTRIBUTE_INSTANCE = eINSTANCE.getAttributeInstance();
+
+		/**
+		 * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ATTRIBUTE_INSTANCE__ATTRIBUTE = eINSTANCE.getAttributeInstance_Attribute();
+
+		/**
 		 * The meta object literal for the '{@link art.instance.impl.ValuedAttributeImpl <em>Valued Attribute</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -948,14 +1140,6 @@ public interface InstancePackage extends EPackage {
 		 * @generated
 		 */
 		EClass VALUED_ATTRIBUTE = eINSTANCE.getValuedAttribute();
-
-		/**
-		 * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VALUED_ATTRIBUTE__ATTRIBUTE = eINSTANCE.getValuedAttribute_Attribute();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -1042,6 +1226,50 @@ public interface InstancePackage extends EPackage {
 		 * @generated
 		 */
 		EReference DELEGATION_BINDING__EXPORTED = eINSTANCE.getDelegationBinding_Exported();
+
+		/**
+		 * The meta object literal for the '{@link art.instance.impl.DictionaryValuedAttributeImpl <em>Dictionary Valued Attribute</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.instance.impl.DictionaryValuedAttributeImpl
+		 * @see art.instance.impl.InstancePackageImpl#getDictionaryValuedAttribute()
+		 * @generated
+		 */
+		EClass DICTIONARY_VALUED_ATTRIBUTE = eINSTANCE.getDictionaryValuedAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Entries</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DICTIONARY_VALUED_ATTRIBUTE__ENTRIES = eINSTANCE.getDictionaryValuedAttribute_Entries();
+
+		/**
+		 * The meta object literal for the '{@link art.instance.impl.EntryImpl <em>Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.instance.impl.EntryImpl
+		 * @see art.instance.impl.InstancePackageImpl#getEntry()
+		 * @generated
+		 */
+		EClass ENTRY = eINSTANCE.getEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ENTRY__KEY = eINSTANCE.getEntry_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ENTRY__VALUE = eINSTANCE.getEntry_Value();
 
 		/**
 		 * The meta object literal for the '{@link art.instance.InstanceState <em>State</em>}' enum.

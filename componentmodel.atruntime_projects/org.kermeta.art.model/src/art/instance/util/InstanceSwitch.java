@@ -126,9 +126,16 @@ public class InstanceSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case InstancePackage.ATTRIBUTE_INSTANCE: {
+				AttributeInstance attributeInstance = (AttributeInstance)theEObject;
+				T result = caseAttributeInstance(attributeInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case InstancePackage.VALUED_ATTRIBUTE: {
 				ValuedAttribute valuedAttribute = (ValuedAttribute)theEObject;
 				T result = caseValuedAttribute(valuedAttribute);
+				if (result == null) result = caseAttributeInstance(valuedAttribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -149,6 +156,20 @@ public class InstanceSwitch<T> {
 				DelegationBinding delegationBinding = (DelegationBinding)theEObject;
 				T result = caseDelegationBinding(delegationBinding);
 				if (result == null) result = caseBinding(delegationBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case InstancePackage.DICTIONARY_VALUED_ATTRIBUTE: {
+				DictionaryValuedAttribute dictionaryValuedAttribute = (DictionaryValuedAttribute)theEObject;
+				T result = caseDictionaryValuedAttribute(dictionaryValuedAttribute);
+				if (result == null) result = caseValuedAttribute(dictionaryValuedAttribute);
+				if (result == null) result = caseAttributeInstance(dictionaryValuedAttribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case InstancePackage.ENTRY: {
+				Entry entry = (Entry)theEObject;
+				T result = caseEntry(entry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -198,6 +219,21 @@ public class InstanceSwitch<T> {
 	 * @generated
 	 */
 	public T caseCompositeInstance(CompositeInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAttributeInstance(AttributeInstance object) {
 		return null;
 	}
 
@@ -258,6 +294,36 @@ public class InstanceSwitch<T> {
 	 * @generated
 	 */
 	public T caseDelegationBinding(DelegationBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dictionary Valued Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dictionary Valued Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDictionaryValuedAttribute(DictionaryValuedAttribute object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEntry(Entry object) {
 		return null;
 	}
 

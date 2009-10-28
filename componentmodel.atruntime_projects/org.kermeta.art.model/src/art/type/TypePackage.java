@@ -595,6 +595,52 @@ public interface TypePackage extends EPackage {
 	int ATTRIBUTE_FEATURE_COUNT = ArtPackage.TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link art.type.impl.DictionaryImpl <em>Dictionary</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.type.impl.DictionaryImpl
+	 * @see art.type.impl.TypePackageImpl#getDictionary()
+	 * @generated
+	 */
+	int DICTIONARY = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY__NAME = ATTRIBUTE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY__TYPE = ATTRIBUTE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Key Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY__KEY_TYPE = ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Dictionary</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_FEATURE_COUNT = ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link art.type.PortRole <em>Port Role</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -602,7 +648,7 @@ public interface TypePackage extends EPackage {
 	 * @see art.type.impl.TypePackageImpl#getPortRole()
 	 * @generated
 	 */
-	int PORT_ROLE = 10;
+	int PORT_ROLE = 11;
 
 
 	/**
@@ -860,6 +906,27 @@ public interface TypePackage extends EPackage {
 	EClass getAttribute();
 
 	/**
+	 * Returns the meta object for class '{@link art.type.Dictionary <em>Dictionary</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Dictionary</em>'.
+	 * @see art.type.Dictionary
+	 * @generated
+	 */
+	EClass getDictionary();
+
+	/**
+	 * Returns the meta object for the reference '{@link art.type.Dictionary#getKeyType <em>Key Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Key Type</em>'.
+	 * @see art.type.Dictionary#getKeyType()
+	 * @see #getDictionary()
+	 * @generated
+	 */
+	EReference getDictionary_KeyType();
+
+	/**
 	 * Returns the meta object for enum '{@link art.type.PortRole <em>Port Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1102,6 +1169,24 @@ public interface TypePackage extends EPackage {
 		 * @generated
 		 */
 		EClass ATTRIBUTE = eINSTANCE.getAttribute();
+
+		/**
+		 * The meta object literal for the '{@link art.type.impl.DictionaryImpl <em>Dictionary</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.type.impl.DictionaryImpl
+		 * @see art.type.impl.TypePackageImpl#getDictionary()
+		 * @generated
+		 */
+		EClass DICTIONARY = eINSTANCE.getDictionary();
+
+		/**
+		 * The meta object literal for the '<em><b>Key Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DICTIONARY__KEY_TYPE = eINSTANCE.getDictionary_KeyType();
 
 		/**
 		 * The meta object literal for the '{@link art.type.PortRole <em>Port Role</em>}' enum.

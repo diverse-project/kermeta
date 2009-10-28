@@ -190,6 +190,52 @@ public class InstanceItemProviderAdapterFactory extends InstanceAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link art.instance.DictionaryValuedAttribute} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DictionaryValuedAttributeItemProvider dictionaryValuedAttributeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link art.instance.DictionaryValuedAttribute}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDictionaryValuedAttributeAdapter() {
+		if (dictionaryValuedAttributeItemProvider == null) {
+			dictionaryValuedAttributeItemProvider = new DictionaryValuedAttributeItemProvider(this);
+		}
+
+		return dictionaryValuedAttributeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link art.instance.Entry} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EntryItemProvider entryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link art.instance.Entry}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEntryAdapter() {
+		if (entryItemProvider == null) {
+			entryItemProvider = new EntryItemProvider(this);
+		}
+
+		return entryItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -293,6 +339,8 @@ public class InstanceItemProviderAdapterFactory extends InstanceAdapterFactory i
 		if (valuedAttributeItemProvider != null) valuedAttributeItemProvider.dispose();
 		if (transmissionBindingItemProvider != null) transmissionBindingItemProvider.dispose();
 		if (delegationBindingItemProvider != null) delegationBindingItemProvider.dispose();
+		if (dictionaryValuedAttributeItemProvider != null) dictionaryValuedAttributeItemProvider.dispose();
+		if (entryItemProvider != null) entryItemProvider.dispose();
 	}
 
 }

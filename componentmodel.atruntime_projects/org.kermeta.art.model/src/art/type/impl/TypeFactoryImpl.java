@@ -78,6 +78,7 @@ public class TypeFactoryImpl extends EFactoryImpl implements TypeFactory {
 			case TypePackage.CONTROL_SERVICE: return createControlService();
 			case TypePackage.PORT: return createPort();
 			case TypePackage.ATTRIBUTE: return createAttribute();
+			case TypePackage.DICTIONARY: return createDictionary();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -191,6 +192,16 @@ public class TypeFactoryImpl extends EFactoryImpl implements TypeFactory {
 	public Attribute createAttribute() {
 		AttributeImpl attribute = new AttributeImpl();
 		return attribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Dictionary createDictionary() {
+		DictionaryImpl dictionary = new DictionaryImpl();
+		return dictionary;
 	}
 
 	/**

@@ -19,10 +19,13 @@ import art.group.impl.GroupPackageImpl;
 import art.impl.ArtPackageImpl;
 import art.implem.ImplemPackage;
 import art.implem.impl.ImplemPackageImpl;
+import art.instance.AttributeInstance;
 import art.instance.Binding;
 import art.instance.ComponentInstance;
 import art.instance.CompositeInstance;
 import art.instance.DelegationBinding;
+import art.instance.DictionaryValuedAttribute;
+import art.instance.Entry;
 import art.instance.InstanceFactory;
 import art.instance.InstancePackage;
 import art.instance.InstanceState;
@@ -65,6 +68,13 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass attributeInstanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass valuedAttributeEClass = null;
 
 	/**
@@ -87,6 +97,20 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 * @generated
 	 */
 	private EClass delegationBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dictionaryValuedAttributeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass entryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -283,6 +307,24 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAttributeInstance() {
+		return attributeInstanceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAttributeInstance_Attribute() {
+		return (EReference)attributeInstanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getValuedAttribute() {
 		return valuedAttributeEClass;
 	}
@@ -292,17 +334,8 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getValuedAttribute_Attribute() {
-		return (EReference)valuedAttributeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getValuedAttribute_Value() {
-		return (EAttribute)valuedAttributeEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)valuedAttributeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -391,6 +424,51 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDictionaryValuedAttribute() {
+		return dictionaryValuedAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDictionaryValuedAttribute_Entries() {
+		return (EReference)dictionaryValuedAttributeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEntry() {
+		return entryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEntry_Key() {
+		return (EAttribute)entryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEntry_Value() {
+		return (EAttribute)entryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getInstanceState() {
 		return instanceStateEEnum;
 	}
@@ -438,8 +516,10 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		createEReference(compositeInstanceEClass, COMPOSITE_INSTANCE__SUB_COMPONENT);
 		createEReference(compositeInstanceEClass, COMPOSITE_INSTANCE__DELEGATION);
 
+		attributeInstanceEClass = createEClass(ATTRIBUTE_INSTANCE);
+		createEReference(attributeInstanceEClass, ATTRIBUTE_INSTANCE__ATTRIBUTE);
+
 		valuedAttributeEClass = createEClass(VALUED_ATTRIBUTE);
-		createEReference(valuedAttributeEClass, VALUED_ATTRIBUTE__ATTRIBUTE);
 		createEAttribute(valuedAttributeEClass, VALUED_ATTRIBUTE__VALUE);
 
 		bindingEClass = createEClass(BINDING);
@@ -453,6 +533,13 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		delegationBindingEClass = createEClass(DELEGATION_BINDING);
 		createEReference(delegationBindingEClass, DELEGATION_BINDING__SOURCE);
 		createEReference(delegationBindingEClass, DELEGATION_BINDING__EXPORTED);
+
+		dictionaryValuedAttributeEClass = createEClass(DICTIONARY_VALUED_ATTRIBUTE);
+		createEReference(dictionaryValuedAttributeEClass, DICTIONARY_VALUED_ATTRIBUTE__ENTRIES);
+
+		entryEClass = createEClass(ENTRY);
+		createEAttribute(entryEClass, ENTRY__KEY);
+		createEAttribute(entryEClass, ENTRY__VALUE);
 
 		// Create enums
 		instanceStateEEnum = createEEnum(INSTANCE_STATE);
@@ -495,8 +582,10 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		componentInstanceEClass.getESuperTypes().add(theArtPackage.getModelElement());
 		primitiveInstanceEClass.getESuperTypes().add(this.getComponentInstance());
 		compositeInstanceEClass.getESuperTypes().add(this.getComponentInstance());
+		valuedAttributeEClass.getESuperTypes().add(this.getAttributeInstance());
 		transmissionBindingEClass.getESuperTypes().add(this.getBinding());
 		delegationBindingEClass.getESuperTypes().add(this.getBinding());
+		dictionaryValuedAttributeEClass.getESuperTypes().add(this.getValuedAttribute());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(componentInstanceEClass, ComponentInstance.class, "ComponentInstance", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -514,8 +603,10 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		initEReference(getCompositeInstance_SubComponent(), this.getComponentInstance(), this.getComponentInstance_SuperComponent(), "subComponent", null, 0, -1, CompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeInstance_Delegation(), this.getDelegationBinding(), null, "delegation", null, 0, -1, CompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(attributeInstanceEClass, AttributeInstance.class, "AttributeInstance", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAttributeInstance_Attribute(), theTypePackage.getAttribute(), null, "attribute", null, 0, 1, AttributeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(valuedAttributeEClass, ValuedAttribute.class, "ValuedAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getValuedAttribute_Attribute(), theTypePackage.getAttribute(), null, "attribute", null, 0, 1, ValuedAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getValuedAttribute_Value(), theArtPackage.getString(), "value", null, 0, 1, ValuedAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bindingEClass, Binding.class, "Binding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -529,6 +620,13 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		initEClass(delegationBindingEClass, DelegationBinding.class, "DelegationBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDelegationBinding_Source(), theTypePackage.getPort(), null, "source", null, 1, 1, DelegationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDelegationBinding_Exported(), theTypePackage.getPort(), null, "exported", null, 1, 1, DelegationBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dictionaryValuedAttributeEClass, DictionaryValuedAttribute.class, "DictionaryValuedAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDictionaryValuedAttribute_Entries(), this.getEntry(), null, "entries", null, 0, -1, DictionaryValuedAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(entryEClass, Entry.class, "Entry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEntry_Key(), theArtPackage.getString(), "key", null, 1, 1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEntry_Value(), theArtPackage.getString(), "value", null, 1, 1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(instanceStateEEnum, InstanceState.class, "InstanceState");

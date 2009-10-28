@@ -72,6 +72,8 @@ public class InstanceFactoryImpl extends EFactoryImpl implements InstanceFactory
 			case InstancePackage.VALUED_ATTRIBUTE: return createValuedAttribute();
 			case InstancePackage.TRANSMISSION_BINDING: return createTransmissionBinding();
 			case InstancePackage.DELEGATION_BINDING: return createDelegationBinding();
+			case InstancePackage.DICTIONARY_VALUED_ATTRIBUTE: return createDictionaryValuedAttribute();
+			case InstancePackage.ENTRY: return createEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -155,6 +157,26 @@ public class InstanceFactoryImpl extends EFactoryImpl implements InstanceFactory
 	public DelegationBinding createDelegationBinding() {
 		DelegationBindingImpl delegationBinding = new DelegationBindingImpl();
 		return delegationBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DictionaryValuedAttribute createDictionaryValuedAttribute() {
+		DictionaryValuedAttributeImpl dictionaryValuedAttribute = new DictionaryValuedAttributeImpl();
+		return dictionaryValuedAttribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Entry createEntry() {
+		EntryImpl entry = new EntryImpl();
+		return entry;
 	}
 
 	/**

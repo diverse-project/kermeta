@@ -4,18 +4,21 @@
  *
  * $Id$
  */
-package art.type.provider;
+package art.instance.provider;
 
 
-import art.implem.ImplemFactory;
+import art.instance.DictionaryValuedAttribute;
+import art.instance.InstanceFactory;
+import art.instance.InstancePackage;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -24,25 +27,19 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import art.provider.MetamodelruntimeEditPlugin;
-import art.provider.ModelElementItemProvider;
-import art.type.ComponentType;
-import art.type.TypeFactory;
-import art.type.TypePackage;
-
 /**
- * This is the item provider adapter for a {@link art.type.ComponentType} object.
+ * This is the item provider adapter for a {@link art.instance.DictionaryValuedAttribute} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ComponentTypeItemProvider
-	extends ModelElementItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+public class DictionaryValuedAttributeItemProvider
+	extends ValuedAttributeItemProvider
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -50,7 +47,7 @@ public class ComponentTypeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentTypeItemProvider(AdapterFactory adapterFactory) {
+	public DictionaryValuedAttributeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -65,31 +62,8 @@ public class ComponentTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addGroupsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Groups feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addGroupsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComponentType_groups_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_groups_feature", "_UI_ComponentType_type"),
-				 TypePackage.Literals.COMPONENT_TYPE__GROUPS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -104,9 +78,7 @@ public class ComponentTypeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypePackage.Literals.COMPONENT_TYPE__PORT);
-			childrenFeatures.add(TypePackage.Literals.COMPONENT_TYPE__ATTRIBUTE);
-			childrenFeatures.add(TypePackage.Literals.COMPONENT_TYPE__IMPLEM);
+			childrenFeatures.add(InstancePackage.Literals.DICTIONARY_VALUED_ATTRIBUTE__ENTRIES);
 		}
 		return childrenFeatures;
 	}
@@ -125,6 +97,17 @@ public class ComponentTypeItemProvider
 	}
 
 	/**
+	 * This returns DictionaryValuedAttribute.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DictionaryValuedAttribute"));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -132,10 +115,10 @@ public class ComponentTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ComponentType)object).getName();
+		String label = ((DictionaryValuedAttribute)object).getValue();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ComponentType_type") :
-			getString("_UI_ComponentType_type") + " " + label;
+			getString("_UI_DictionaryValuedAttribute_type") :
+			getString("_UI_DictionaryValuedAttribute_type") + " " + label;
 	}
 
 	/**
@@ -149,10 +132,8 @@ public class ComponentTypeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ComponentType.class)) {
-			case TypePackage.COMPONENT_TYPE__PORT:
-			case TypePackage.COMPONENT_TYPE__ATTRIBUTE:
-			case TypePackage.COMPONENT_TYPE__IMPLEM:
+		switch (notification.getFeatureID(DictionaryValuedAttribute.class)) {
+			case InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__ENTRIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -172,34 +153,8 @@ public class ComponentTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypePackage.Literals.COMPONENT_TYPE__PORT,
-				 TypeFactory.eINSTANCE.createPort()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypePackage.Literals.COMPONENT_TYPE__ATTRIBUTE,
-				 TypeFactory.eINSTANCE.createAttribute()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypePackage.Literals.COMPONENT_TYPE__ATTRIBUTE,
-				 TypeFactory.eINSTANCE.createDictionary()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypePackage.Literals.COMPONENT_TYPE__IMPLEM,
-				 ImplemFactory.eINSTANCE.createOSGiType()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return MetamodelruntimeEditPlugin.INSTANCE;
+				(InstancePackage.Literals.DICTIONARY_VALUED_ATTRIBUTE__ENTRIES,
+				 InstanceFactory.eINSTANCE.createEntry()));
 	}
 
 }

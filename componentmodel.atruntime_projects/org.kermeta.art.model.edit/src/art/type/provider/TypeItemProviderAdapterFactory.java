@@ -259,6 +259,29 @@ public class TypeItemProviderAdapterFactory extends TypeAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link art.type.Dictionary} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DictionaryItemProvider dictionaryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link art.type.Dictionary}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDictionaryAdapter() {
+		if (dictionaryItemProvider == null) {
+			dictionaryItemProvider = new DictionaryItemProvider(this);
+		}
+
+		return dictionaryItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -365,6 +388,7 @@ public class TypeItemProviderAdapterFactory extends TypeAdapterFactory implement
 		if (controlServiceItemProvider != null) controlServiceItemProvider.dispose();
 		if (portItemProvider != null) portItemProvider.dispose();
 		if (attributeItemProvider != null) attributeItemProvider.dispose();
+		if (dictionaryItemProvider != null) dictionaryItemProvider.dispose();
 	}
 
 }

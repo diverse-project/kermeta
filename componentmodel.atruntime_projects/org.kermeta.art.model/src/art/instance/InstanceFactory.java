@@ -71,6 +71,24 @@ public interface InstanceFactory extends EFactory {
 	DelegationBinding createDelegationBinding();
 
 	/**
+	 * Returns a new object of class '<em>Dictionary Valued Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dictionary Valued Attribute</em>'.
+	 * @generated
+	 */
+	DictionaryValuedAttribute createDictionaryValuedAttribute();
+
+	/**
+	 * Returns a new object of class '<em>Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Entry</em>'.
+	 * @generated
+	 */
+	Entry createEntry();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

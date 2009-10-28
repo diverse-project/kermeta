@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link art.instance.ValuedAttribute#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link art.instance.ValuedAttribute#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
@@ -27,33 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ValuedAttribute extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Attribute</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Attribute</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Attribute</em>' reference.
-	 * @see #setAttribute(Attribute)
-	 * @see art.instance.InstancePackage#getValuedAttribute_Attribute()
-	 * @model
-	 * @generated
-	 */
-	Attribute getAttribute();
-
-	/**
-	 * Sets the value of the '{@link art.instance.ValuedAttribute#getAttribute <em>Attribute</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Attribute</em>' reference.
-	 * @see #getAttribute()
-	 * @generated
-	 */
-	void setAttribute(Attribute value);
-
+public interface ValuedAttribute extends AttributeInstance {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

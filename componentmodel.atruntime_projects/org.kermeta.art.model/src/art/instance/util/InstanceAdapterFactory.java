@@ -95,6 +95,10 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 				return createCompositeInstanceAdapter();
 			}
 			@Override
+			public Adapter caseAttributeInstance(AttributeInstance object) {
+				return createAttributeInstanceAdapter();
+			}
+			@Override
 			public Adapter caseValuedAttribute(ValuedAttribute object) {
 				return createValuedAttributeAdapter();
 			}
@@ -109,6 +113,14 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDelegationBinding(DelegationBinding object) {
 				return createDelegationBindingAdapter();
+			}
+			@Override
+			public Adapter caseDictionaryValuedAttribute(DictionaryValuedAttribute object) {
+				return createDictionaryValuedAttributeAdapter();
+			}
+			@Override
+			public Adapter caseEntry(Entry object) {
+				return createEntryAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -181,6 +193,20 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link art.instance.AttributeInstance <em>Attribute Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.instance.AttributeInstance
+	 * @generated
+	 */
+	public Adapter createAttributeInstanceAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link art.instance.ValuedAttribute <em>Valued Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -233,6 +259,34 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDelegationBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.instance.DictionaryValuedAttribute <em>Dictionary Valued Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.instance.DictionaryValuedAttribute
+	 * @generated
+	 */
+	public Adapter createDictionaryValuedAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.instance.Entry <em>Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.instance.Entry
+	 * @generated
+	 */
+	public Adapter createEntryAdapter() {
 		return null;
 	}
 
