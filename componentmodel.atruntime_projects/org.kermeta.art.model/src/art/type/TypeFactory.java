@@ -89,15 +89,6 @@ public interface TypeFactory extends EFactory {
 	Port createPort();
 
 	/**
-	 * Returns a new object of class '<em>Attribute</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Attribute</em>'.
-	 * @generated
-	 */
-	Attribute createAttribute();
-
-	/**
 	 * Returns a new object of class '<em>Dictionary</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -105,6 +96,24 @@ public interface TypeFactory extends EFactory {
 	 * @generated
 	 */
 	Dictionary createDictionary();
+
+	/**
+	 * Returns a new object of class '<em>Basic Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Basic Attribute</em>'.
+	 * @generated
+	 */
+	BasicAttribute createBasicAttribute();
+
+	/**
+	 * Returns a new object of class '<em>Dictionary Default Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dictionary Default Value</em>'.
+	 * @generated
+	 */
+	DictionaryDefaultValue createDictionaryDefaultValue();
 
 	/**
 	 * Returns the package supported by this factory.

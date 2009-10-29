@@ -40,7 +40,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="superComponent" eType="#//instance/CompositeInstance"
           eOpposite="#//instance/CompositeInstance/subComponent"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
-          eType="#//instance/ValuedAttribute" containment="true"/>
+          eType="#//instance/AttributeInstance" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="binding" upperBound="-1"
           eType="#//instance/TransmissionBinding" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="implem" eType="#//implem/ComponentImplementation"
@@ -59,12 +59,6 @@
       <eLiterals name="OFF"/>
       <eLiterals name="ON" value="1"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AttributeInstance" abstract="true">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//type/Attribute"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute" eSuperTypes="#//instance/AttributeInstance">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//String"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Binding" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EReference" name="serverInstance" lowerBound="1"
           eType="#//instance/ComponentInstance"/>
@@ -80,14 +74,25 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="exported" lowerBound="1"
           eType="#//type/Port"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DictionaryValuedAttribute" eSuperTypes="#//instance/ValuedAttribute">
+    <eClassifiers xsi:type="ecore:EClass" name="AttributeInstance" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute" eSuperTypes="#//instance/AttributeInstance">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//type/BasicAttribute"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DictionaryValuedAttribute" eSuperTypes="#//instance/AttributeInstance">
       <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
           eType="#//instance/Entry" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//type/Dictionary"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Entry">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="#//String"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Entry" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
           eType="#//String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DefaultEntry" eSuperTypes="#//instance/Entry">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="key" lowerBound="1" eType="#//type/DictionaryDefaultValue"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OtherEntry" eSuperTypes="#//instance/Entry">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="#//String"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="type" nsURI="http://art/type" nsPrefix="type">
@@ -101,16 +106,8 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="implem" eType="#//implem/TypeImplementation"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//type/ComponentType">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="binding" upperBound="-1"
-          eType="#//instance/TransmissionBinding" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="CompositeType" eSuperTypes="#//type/ComponentType">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="subTypes" upperBound="-1"
-          eType="#//type/CompositeType"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="delegation" upperBound="-1"
-          eType="#//instance/DelegationBinding" containment="true"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//type/ComponentType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CompositeType" eSuperTypes="#//type/ComponentType"/>
     <eClassifiers xsi:type="ecore:EClass" name="Service" abstract="true" eSuperTypes="#//ModelElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="operation" upperBound="-1"
           eType="#//type/Operation" containment="true"/>
@@ -134,14 +131,23 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="implem" eType="#//implem/PortImplementation"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//TypedElement"/>
     <eClassifiers xsi:type="ecore:EEnum" name="PortRole">
       <eLiterals name="client"/>
       <eLiterals name="server" value="1"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Attribute" abstract="true" eSuperTypes="#//TypedElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BasicAttribute" eSuperTypes="#//type/Attribute">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="#//String"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Dictionary" eSuperTypes="#//type/Attribute">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="keyType" lowerBound="1"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="valueType" lowerBound="1"
           eType="#//DataType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="keys" upperBound="-1"
+          eType="#//type/DictionaryDefaultValue" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DictionaryDefaultValue">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//String"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="implem" nsURI="http://art/implem" nsPrefix="implem">
@@ -166,17 +172,18 @@
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="group" nsURI="http://art/group" nsPrefix="group">
-    <eClassifiers xsi:type="ecore:EClass" name="Group" abstract="true" eSuperTypes="#//NamedElement">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="subGroups" upperBound="-1"
-          eType="#//group/Group" containment="true"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Group" abstract="true" eSuperTypes="#//NamedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypeGroup" eSuperTypes="#//group/Group">
       <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
           eType="#//type/ComponentType" eOpposite="#//type/ComponentType/groups"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subGroups" upperBound="-1"
+          eType="#//group/TypeGroup" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="InstanceGroup" eSuperTypes="#//group/Group">
       <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
           eType="#//instance/ComponentInstance" eOpposite="#//instance/ComponentInstance/groups"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subGroups" upperBound="-1"
+          eType="#//group/InstanceGroup" containment="true"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

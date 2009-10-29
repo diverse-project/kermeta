@@ -80,13 +80,22 @@ public interface InstanceFactory extends EFactory {
 	DictionaryValuedAttribute createDictionaryValuedAttribute();
 
 	/**
-	 * Returns a new object of class '<em>Entry</em>'.
+	 * Returns a new object of class '<em>Default Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Entry</em>'.
+	 * @return a new object of class '<em>Default Entry</em>'.
 	 * @generated
 	 */
-	Entry createEntry();
+	DefaultEntry createDefaultEntry();
+
+	/**
+	 * Returns a new object of class '<em>Other Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Other Entry</em>'.
+	 * @generated
+	 */
+	OtherEntry createOtherEntry();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -8,9 +8,14 @@ package art.type.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import art.impl.TypedElementImpl;
 import art.type.Attribute;
+import art.type.DefaultValue;
 import art.type.TypePackage;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +26,7 @@ import art.type.TypePackage;
  *
  * @generated
  */
-public class AttributeImpl extends TypedElementImpl implements Attribute {
+public abstract class AttributeImpl extends TypedElementImpl implements Attribute {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

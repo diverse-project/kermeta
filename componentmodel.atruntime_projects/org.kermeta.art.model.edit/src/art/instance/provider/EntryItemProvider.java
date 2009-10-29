@@ -66,32 +66,9 @@ public class EntryItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addKeyPropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Key feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addKeyPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Entry_key_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Entry_key_feature", "_UI_Entry_type"),
-				 InstancePackage.Literals.ENTRY__KEY,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -117,17 +94,6 @@ public class EntryItemProvider
 	}
 
 	/**
-	 * This returns Entry.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Entry"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -135,7 +101,7 @@ public class EntryItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Entry)object).getKey();
+		String label = ((Entry)object).getValue();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Entry_type") :
 			getString("_UI_Entry_type") + " " + label;
@@ -153,7 +119,6 @@ public class EntryItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Entry.class)) {
-			case InstancePackage.ENTRY__KEY:
 			case InstancePackage.ENTRY__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

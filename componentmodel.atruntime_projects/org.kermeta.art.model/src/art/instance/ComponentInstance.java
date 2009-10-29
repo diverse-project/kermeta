@@ -121,7 +121,7 @@ public interface ComponentInstance extends ModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Attribute</b></em>' containment reference list.
-	 * The list contents are of type {@link art.instance.ValuedAttribute}.
+	 * The list contents are of type {@link art.instance.AttributeInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Attribute</em>' containment reference list isn't clear,
@@ -133,7 +133,7 @@ public interface ComponentInstance extends ModelElement {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ValuedAttribute> getAttribute();
+	EList<AttributeInstance> getAttribute();
 
 	/**
 	 * Returns the value of the '<em><b>Binding</b></em>' containment reference list.

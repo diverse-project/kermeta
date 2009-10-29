@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -32,6 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link art.group.impl.TypeGroupImpl#getTypes <em>Types</em>}</li>
+ *   <li>{@link art.group.impl.TypeGroupImpl#getSubGroups <em>Sub Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,6 +49,16 @@ public class TypeGroupImpl extends GroupImpl implements TypeGroup {
 	 * @ordered
 	 */
 	protected EList<ComponentType> types;
+
+	/**
+	 * The cached value of the '{@link #getSubGroups() <em>Sub Groups</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubGroups()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeGroup> subGroups;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -84,6 +96,18 @@ public class TypeGroupImpl extends GroupImpl implements TypeGroup {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<TypeGroup> getSubGroups() {
+		if (subGroups == null) {
+			subGroups = new EObjectContainmentEList<TypeGroup>(TypeGroup.class, this, GroupPackage.TYPE_GROUP__SUB_GROUPS);
+		}
+		return subGroups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -104,6 +128,8 @@ public class TypeGroupImpl extends GroupImpl implements TypeGroup {
 		switch (featureID) {
 			case GroupPackage.TYPE_GROUP__TYPES:
 				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
+			case GroupPackage.TYPE_GROUP__SUB_GROUPS:
+				return ((InternalEList<?>)getSubGroups()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -118,6 +144,8 @@ public class TypeGroupImpl extends GroupImpl implements TypeGroup {
 		switch (featureID) {
 			case GroupPackage.TYPE_GROUP__TYPES:
 				return getTypes();
+			case GroupPackage.TYPE_GROUP__SUB_GROUPS:
+				return getSubGroups();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -135,6 +163,10 @@ public class TypeGroupImpl extends GroupImpl implements TypeGroup {
 				getTypes().clear();
 				getTypes().addAll((Collection<? extends ComponentType>)newValue);
 				return;
+			case GroupPackage.TYPE_GROUP__SUB_GROUPS:
+				getSubGroups().clear();
+				getSubGroups().addAll((Collection<? extends TypeGroup>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -150,6 +182,9 @@ public class TypeGroupImpl extends GroupImpl implements TypeGroup {
 			case GroupPackage.TYPE_GROUP__TYPES:
 				getTypes().clear();
 				return;
+			case GroupPackage.TYPE_GROUP__SUB_GROUPS:
+				getSubGroups().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -164,6 +199,8 @@ public class TypeGroupImpl extends GroupImpl implements TypeGroup {
 		switch (featureID) {
 			case GroupPackage.TYPE_GROUP__TYPES:
 				return types != null && !types.isEmpty();
+			case GroupPackage.TYPE_GROUP__SUB_GROUPS:
+				return subGroups != null && !subGroups.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

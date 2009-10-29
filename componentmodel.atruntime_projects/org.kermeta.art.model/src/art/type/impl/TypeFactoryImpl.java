@@ -77,8 +77,9 @@ public class TypeFactoryImpl extends EFactoryImpl implements TypeFactory {
 			case TypePackage.FUNCTIONAL_SERVICE: return createFunctionalService();
 			case TypePackage.CONTROL_SERVICE: return createControlService();
 			case TypePackage.PORT: return createPort();
-			case TypePackage.ATTRIBUTE: return createAttribute();
+			case TypePackage.BASIC_ATTRIBUTE: return createBasicAttribute();
 			case TypePackage.DICTIONARY: return createDictionary();
+			case TypePackage.DICTIONARY_DEFAULT_VALUE: return createDictionaryDefaultValue();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -189,9 +190,9 @@ public class TypeFactoryImpl extends EFactoryImpl implements TypeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Attribute createAttribute() {
-		AttributeImpl attribute = new AttributeImpl();
-		return attribute;
+	public Dictionary createDictionary() {
+		DictionaryImpl dictionary = new DictionaryImpl();
+		return dictionary;
 	}
 
 	/**
@@ -199,9 +200,19 @@ public class TypeFactoryImpl extends EFactoryImpl implements TypeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Dictionary createDictionary() {
-		DictionaryImpl dictionary = new DictionaryImpl();
-		return dictionary;
+	public BasicAttribute createBasicAttribute() {
+		BasicAttributeImpl basicAttribute = new BasicAttributeImpl();
+		return basicAttribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DictionaryDefaultValue createDictionaryDefaultValue() {
+		DictionaryDefaultValueImpl dictionaryDefaultValue = new DictionaryDefaultValueImpl();
+		return dictionaryDefaultValue;
 	}
 
 	/**

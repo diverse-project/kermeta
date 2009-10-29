@@ -191,6 +191,16 @@ public class TypeSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TypePackage.BASIC_ATTRIBUTE: {
+				BasicAttribute basicAttribute = (BasicAttribute)theEObject;
+				T result = caseBasicAttribute(basicAttribute);
+				if (result == null) result = caseAttribute(basicAttribute);
+				if (result == null) result = caseTypedElement(basicAttribute);
+				if (result == null) result = caseModelElement(basicAttribute);
+				if (result == null) result = caseNamedElement(basicAttribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case TypePackage.DICTIONARY: {
 				Dictionary dictionary = (Dictionary)theEObject;
 				T result = caseDictionary(dictionary);
@@ -198,6 +208,12 @@ public class TypeSwitch<T> {
 				if (result == null) result = caseTypedElement(dictionary);
 				if (result == null) result = caseModelElement(dictionary);
 				if (result == null) result = caseNamedElement(dictionary);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypePackage.DICTIONARY_DEFAULT_VALUE: {
+				DictionaryDefaultValue dictionaryDefaultValue = (DictionaryDefaultValue)theEObject;
+				T result = caseDictionaryDefaultValue(dictionaryDefaultValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -367,6 +383,36 @@ public class TypeSwitch<T> {
 	 * @generated
 	 */
 	public T caseDictionary(Dictionary object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Basic Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Basic Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBasicAttribute(BasicAttribute object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dictionary Default Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dictionary Default Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDictionaryDefaultValue(DictionaryDefaultValue object) {
 		return null;
 	}
 

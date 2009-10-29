@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import art.impl.ModelElementImpl;
 import art.implem.ComponentImplementation;
+import art.instance.AttributeInstance;
 import art.instance.ComponentInstance;
 import art.instance.CompositeInstance;
 import art.instance.InstancePackage;
@@ -87,7 +88,7 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ValuedAttribute> attribute;
+	protected EList<AttributeInstance> attribute;
 	/**
 	 * The cached value of the '{@link #getBinding() <em>Binding</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -242,9 +243,9 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
-	public EList<ValuedAttribute> getAttribute() {
+	public EList<AttributeInstance> getAttribute() {
 		if (attribute == null) {
-			attribute = new EObjectContainmentEList<ValuedAttribute>(ValuedAttribute.class, this, InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE);
+			attribute = new EObjectContainmentEList<AttributeInstance>(AttributeInstance.class, this, InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE);
 		}
 		return attribute;
 	}
@@ -419,7 +420,7 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 				return;
 			case InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE:
 				getAttribute().clear();
-				getAttribute().addAll((Collection<? extends ValuedAttribute>)newValue);
+				getAttribute().addAll((Collection<? extends AttributeInstance>)newValue);
 				return;
 			case InstancePackage.COMPONENT_INSTANCE__BINDING:
 				getBinding().clear();

@@ -15,7 +15,7 @@ import art.TypedElement;
  *
  *
  * @see art.type.TypePackage#getAttribute()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Attribute extends TypedElement {

@@ -19,6 +19,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -34,7 +35,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class DictionaryValuedAttributeItemProvider
-	extends ValuedAttributeItemProvider
+	extends AttributeInstanceItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -62,8 +63,31 @@ public class DictionaryValuedAttributeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addAttributePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Attribute feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAttributePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DictionaryValuedAttribute_attribute_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DictionaryValuedAttribute_attribute_feature", "_UI_DictionaryValuedAttribute_type"),
+				 InstancePackage.Literals.DICTIONARY_VALUED_ATTRIBUTE__ATTRIBUTE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -115,10 +139,7 @@ public class DictionaryValuedAttributeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DictionaryValuedAttribute)object).getValue();
-		return label == null || label.length() == 0 ?
-			getString("_UI_DictionaryValuedAttribute_type") :
-			getString("_UI_DictionaryValuedAttribute_type") + " " + label;
+		return getString("_UI_DictionaryValuedAttribute_type");
 	}
 
 	/**
@@ -154,7 +175,12 @@ public class DictionaryValuedAttributeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(InstancePackage.Literals.DICTIONARY_VALUED_ATTRIBUTE__ENTRIES,
-				 InstanceFactory.eINSTANCE.createEntry()));
+				 InstanceFactory.eINSTANCE.createDefaultEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(InstancePackage.Literals.DICTIONARY_VALUED_ATTRIBUTE__ENTRIES,
+				 InstanceFactory.eINSTANCE.createOtherEntry()));
 	}
 
 }

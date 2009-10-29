@@ -16,42 +16,15 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link art.instance.Entry#getKey <em>Key</em>}</li>
  *   <li>{@link art.instance.Entry#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @see art.instance.InstancePackage#getEntry()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Entry extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Key</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Key</em>' attribute.
-	 * @see #setKey(String)
-	 * @see art.instance.InstancePackage#getEntry_Key()
-	 * @model dataType="art.String" required="true"
-	 * @generated
-	 */
-	String getKey();
-
-	/**
-	 * Sets the value of the '{@link art.instance.Entry#getKey <em>Key</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Key</em>' attribute.
-	 * @see #getKey()
-	 * @generated
-	 */
-	void setKey(String value);
-
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

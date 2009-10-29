@@ -127,8 +127,16 @@ public class TypeAdapterFactory extends AdapterFactoryImpl {
 				return createAttributeAdapter();
 			}
 			@Override
+			public Adapter caseBasicAttribute(BasicAttribute object) {
+				return createBasicAttributeAdapter();
+			}
+			@Override
 			public Adapter caseDictionary(Dictionary object) {
 				return createDictionaryAdapter();
+			}
+			@Override
+			public Adapter caseDictionaryDefaultValue(DictionaryDefaultValue object) {
+				return createDictionaryDefaultValueAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -317,6 +325,34 @@ public class TypeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDictionaryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.type.BasicAttribute <em>Basic Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.type.BasicAttribute
+	 * @generated
+	 */
+	public Adapter createBasicAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.type.DictionaryDefaultValue <em>Dictionary Default Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.type.DictionaryDefaultValue
+	 * @generated
+	 */
+	public Adapter createDictionaryDefaultValueAdapter() {
 		return null;
 	}
 

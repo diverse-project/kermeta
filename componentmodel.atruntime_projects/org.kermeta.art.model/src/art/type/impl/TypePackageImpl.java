@@ -22,10 +22,14 @@ import art.implem.impl.ImplemPackageImpl;
 import art.instance.InstancePackage;
 import art.instance.impl.InstancePackageImpl;
 import art.type.Attribute;
+import art.type.BasicAttribute;
+import art.type.BasicDefaultValue;
 import art.type.ComponentType;
 import art.type.CompositeType;
 import art.type.ControlService;
+import art.type.DefaultValue;
 import art.type.Dictionary;
+import art.type.DictionaryDefaultValue;
 import art.type.FunctionalService;
 import art.type.Operation;
 import art.type.Parameter;
@@ -119,6 +123,20 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * @generated
 	 */
 	private EClass dictionaryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass basicAttributeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dictionaryDefaultValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,35 +279,8 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPrimitiveType_Binding() {
-		return (EReference)primitiveTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCompositeType() {
 		return compositeTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCompositeType_SubTypes() {
-		return (EReference)compositeTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCompositeType_Delegation() {
-		return (EReference)compositeTypeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -432,8 +423,62 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDictionary_KeyType() {
+	public EReference getDictionary_ValueType() {
 		return (EReference)dictionaryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDictionary_Keys() {
+		return (EReference)dictionaryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBasicAttribute() {
+		return basicAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBasicAttribute_DefaultValue() {
+		return (EAttribute)basicAttributeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDictionaryDefaultValue() {
+		return dictionaryDefaultValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDictionaryDefaultValue_Key() {
+		return (EAttribute)dictionaryDefaultValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDictionaryDefaultValue_Value() {
+		return (EAttribute)dictionaryDefaultValueEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -480,11 +525,8 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		createEReference(componentTypeEClass, COMPONENT_TYPE__IMPLEM);
 
 		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
-		createEReference(primitiveTypeEClass, PRIMITIVE_TYPE__BINDING);
 
 		compositeTypeEClass = createEClass(COMPOSITE_TYPE);
-		createEReference(compositeTypeEClass, COMPOSITE_TYPE__SUB_TYPES);
-		createEReference(compositeTypeEClass, COMPOSITE_TYPE__DELEGATION);
 
 		serviceEClass = createEClass(SERVICE);
 		createEReference(serviceEClass, SERVICE__OPERATION);
@@ -507,8 +549,16 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 
 		attributeEClass = createEClass(ATTRIBUTE);
 
+		basicAttributeEClass = createEClass(BASIC_ATTRIBUTE);
+		createEAttribute(basicAttributeEClass, BASIC_ATTRIBUTE__DEFAULT_VALUE);
+
 		dictionaryEClass = createEClass(DICTIONARY);
-		createEReference(dictionaryEClass, DICTIONARY__KEY_TYPE);
+		createEReference(dictionaryEClass, DICTIONARY__VALUE_TYPE);
+		createEReference(dictionaryEClass, DICTIONARY__KEYS);
+
+		dictionaryDefaultValueEClass = createEClass(DICTIONARY_DEFAULT_VALUE);
+		createEAttribute(dictionaryDefaultValueEClass, DICTIONARY_DEFAULT_VALUE__KEY);
+		createEAttribute(dictionaryDefaultValueEClass, DICTIONARY_DEFAULT_VALUE__VALUE);
 
 		// Create enums
 		portRoleEEnum = createEEnum(PORT_ROLE);
@@ -541,7 +591,6 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		ArtPackage theArtPackage = (ArtPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI);
 		GroupPackage theGroupPackage = (GroupPackage)EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI);
 		ImplemPackage theImplemPackage = (ImplemPackage)EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI);
-		InstancePackage theInstancePackage = (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -558,6 +607,7 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		controlServiceEClass.getESuperTypes().add(this.getService());
 		portEClass.getESuperTypes().add(theArtPackage.getCardinalityElement());
 		attributeEClass.getESuperTypes().add(theArtPackage.getTypedElement());
+		basicAttributeEClass.getESuperTypes().add(this.getAttribute());
 		dictionaryEClass.getESuperTypes().add(this.getAttribute());
 
 		// Initialize classes and features; add operations and parameters
@@ -568,11 +618,8 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		initEReference(getComponentType_Implem(), theImplemPackage.getTypeImplementation(), null, "implem", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPrimitiveType_Binding(), theInstancePackage.getTransmissionBinding(), null, "binding", null, 0, -1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(compositeTypeEClass, CompositeType.class, "CompositeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCompositeType_SubTypes(), this.getCompositeType(), null, "subTypes", null, 0, -1, CompositeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCompositeType_Delegation(), theInstancePackage.getDelegationBinding(), null, "delegation", null, 0, -1, CompositeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(serviceEClass, Service.class, "Service", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getService_Operation(), this.getOperation(), null, "operation", null, 0, -1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -593,10 +640,18 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		initEAttribute(getPort_Role(), theArtPackage.getString(), "role", null, 1, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPort_Implem(), theImplemPackage.getPortImplementation(), null, "implem", null, 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(attributeEClass, Attribute.class, "Attribute", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(basicAttributeEClass, BasicAttribute.class, "BasicAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBasicAttribute_DefaultValue(), theArtPackage.getString(), "defaultValue", null, 0, 1, BasicAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dictionaryEClass, Dictionary.class, "Dictionary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDictionary_KeyType(), theArtPackage.getDataType(), null, "keyType", null, 1, 1, Dictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDictionary_ValueType(), theArtPackage.getDataType(), null, "valueType", null, 1, 1, Dictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDictionary_Keys(), this.getDictionaryDefaultValue(), null, "keys", null, 0, -1, Dictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dictionaryDefaultValueEClass, DictionaryDefaultValue.class, "DictionaryDefaultValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDictionaryDefaultValue_Key(), theArtPackage.getString(), "key", null, 1, 1, DictionaryDefaultValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDictionaryDefaultValue_Value(), theArtPackage.getString(), "value", null, 0, 1, DictionaryDefaultValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(portRoleEEnum, PortRole.class, "PortRole");

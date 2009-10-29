@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link art.group.TypeGroup#getTypes <em>Types</em>}</li>
+ *   <li>{@link art.group.TypeGroup#getSubGroups <em>Sub Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,5 +45,21 @@ public interface TypeGroup extends Group {
 	 * @generated
 	 */
 	EList<ComponentType> getTypes();
+
+	/**
+	 * Returns the value of the '<em><b>Sub Groups</b></em>' containment reference list.
+	 * The list contents are of type {@link art.group.TypeGroup}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sub Groups</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sub Groups</em>' containment reference list.
+	 * @see art.group.GroupPackage#getTypeGroup_SubGroups()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<TypeGroup> getSubGroups();
 
 } // TypeGroup

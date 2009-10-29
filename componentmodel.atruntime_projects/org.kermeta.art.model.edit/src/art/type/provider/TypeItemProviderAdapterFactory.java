@@ -236,29 +236,6 @@ public class TypeItemProviderAdapterFactory extends TypeAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link art.type.Attribute} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AttributeItemProvider attributeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link art.type.Attribute}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAttributeAdapter() {
-		if (attributeItemProvider == null) {
-			attributeItemProvider = new AttributeItemProvider(this);
-		}
-
-		return attributeItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link art.type.Dictionary} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -279,6 +256,52 @@ public class TypeItemProviderAdapterFactory extends TypeAdapterFactory implement
 		}
 
 		return dictionaryItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link art.type.BasicAttribute} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BasicAttributeItemProvider basicAttributeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link art.type.BasicAttribute}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBasicAttributeAdapter() {
+		if (basicAttributeItemProvider == null) {
+			basicAttributeItemProvider = new BasicAttributeItemProvider(this);
+		}
+
+		return basicAttributeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link art.type.DictionaryDefaultValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DictionaryDefaultValueItemProvider dictionaryDefaultValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link art.type.DictionaryDefaultValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDictionaryDefaultValueAdapter() {
+		if (dictionaryDefaultValueItemProvider == null) {
+			dictionaryDefaultValueItemProvider = new DictionaryDefaultValueItemProvider(this);
+		}
+
+		return dictionaryDefaultValueItemProvider;
 	}
 
 	/**
@@ -387,8 +410,9 @@ public class TypeItemProviderAdapterFactory extends TypeAdapterFactory implement
 		if (functionalServiceItemProvider != null) functionalServiceItemProvider.dispose();
 		if (controlServiceItemProvider != null) controlServiceItemProvider.dispose();
 		if (portItemProvider != null) portItemProvider.dispose();
-		if (attributeItemProvider != null) attributeItemProvider.dispose();
+		if (basicAttributeItemProvider != null) basicAttributeItemProvider.dispose();
 		if (dictionaryItemProvider != null) dictionaryItemProvider.dispose();
+		if (dictionaryDefaultValueItemProvider != null) dictionaryDefaultValueItemProvider.dispose();
 	}
 
 }

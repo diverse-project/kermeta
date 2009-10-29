@@ -95,14 +95,6 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 				return createCompositeInstanceAdapter();
 			}
 			@Override
-			public Adapter caseAttributeInstance(AttributeInstance object) {
-				return createAttributeInstanceAdapter();
-			}
-			@Override
-			public Adapter caseValuedAttribute(ValuedAttribute object) {
-				return createValuedAttributeAdapter();
-			}
-			@Override
 			public Adapter caseBinding(Binding object) {
 				return createBindingAdapter();
 			}
@@ -115,12 +107,28 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 				return createDelegationBindingAdapter();
 			}
 			@Override
+			public Adapter caseAttributeInstance(AttributeInstance object) {
+				return createAttributeInstanceAdapter();
+			}
+			@Override
+			public Adapter caseValuedAttribute(ValuedAttribute object) {
+				return createValuedAttributeAdapter();
+			}
+			@Override
 			public Adapter caseDictionaryValuedAttribute(DictionaryValuedAttribute object) {
 				return createDictionaryValuedAttributeAdapter();
 			}
 			@Override
 			public Adapter caseEntry(Entry object) {
 				return createEntryAdapter();
+			}
+			@Override
+			public Adapter caseDefaultEntry(DefaultEntry object) {
+				return createDefaultEntryAdapter();
+			}
+			@Override
+			public Adapter caseOtherEntry(OtherEntry object) {
+				return createOtherEntryAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -287,6 +295,34 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.instance.DefaultEntry <em>Default Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.instance.DefaultEntry
+	 * @generated
+	 */
+	public Adapter createDefaultEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.instance.OtherEntry <em>Other Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.instance.OtherEntry
+	 * @generated
+	 */
+	public Adapter createOtherEntryAdapter() {
 		return null;
 	}
 

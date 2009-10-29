@@ -178,7 +178,7 @@ public class ComponentTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypePackage.Literals.COMPONENT_TYPE__ATTRIBUTE,
-				 TypeFactory.eINSTANCE.createAttribute()));
+				 TypeFactory.eINSTANCE.createBasicAttribute()));
 
 		newChildDescriptors.add
 			(createChildParameter

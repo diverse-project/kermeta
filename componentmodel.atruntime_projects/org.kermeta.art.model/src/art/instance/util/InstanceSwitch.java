@@ -126,19 +126,6 @@ public class InstanceSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case InstancePackage.ATTRIBUTE_INSTANCE: {
-				AttributeInstance attributeInstance = (AttributeInstance)theEObject;
-				T result = caseAttributeInstance(attributeInstance);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case InstancePackage.VALUED_ATTRIBUTE: {
-				ValuedAttribute valuedAttribute = (ValuedAttribute)theEObject;
-				T result = caseValuedAttribute(valuedAttribute);
-				if (result == null) result = caseAttributeInstance(valuedAttribute);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case InstancePackage.BINDING: {
 				Binding binding = (Binding)theEObject;
 				T result = caseBinding(binding);
@@ -159,10 +146,22 @@ public class InstanceSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case InstancePackage.ATTRIBUTE_INSTANCE: {
+				AttributeInstance attributeInstance = (AttributeInstance)theEObject;
+				T result = caseAttributeInstance(attributeInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case InstancePackage.VALUED_ATTRIBUTE: {
+				ValuedAttribute valuedAttribute = (ValuedAttribute)theEObject;
+				T result = caseValuedAttribute(valuedAttribute);
+				if (result == null) result = caseAttributeInstance(valuedAttribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case InstancePackage.DICTIONARY_VALUED_ATTRIBUTE: {
 				DictionaryValuedAttribute dictionaryValuedAttribute = (DictionaryValuedAttribute)theEObject;
 				T result = caseDictionaryValuedAttribute(dictionaryValuedAttribute);
-				if (result == null) result = caseValuedAttribute(dictionaryValuedAttribute);
 				if (result == null) result = caseAttributeInstance(dictionaryValuedAttribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -170,6 +169,20 @@ public class InstanceSwitch<T> {
 			case InstancePackage.ENTRY: {
 				Entry entry = (Entry)theEObject;
 				T result = caseEntry(entry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case InstancePackage.DEFAULT_ENTRY: {
+				DefaultEntry defaultEntry = (DefaultEntry)theEObject;
+				T result = caseDefaultEntry(defaultEntry);
+				if (result == null) result = caseEntry(defaultEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case InstancePackage.OTHER_ENTRY: {
+				OtherEntry otherEntry = (OtherEntry)theEObject;
+				T result = caseOtherEntry(otherEntry);
+				if (result == null) result = caseEntry(otherEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -324,6 +337,36 @@ public class InstanceSwitch<T> {
 	 * @generated
 	 */
 	public T caseEntry(Entry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Default Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Default Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDefaultEntry(DefaultEntry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Other Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Other Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOtherEntry(OtherEntry object) {
 		return null;
 	}
 

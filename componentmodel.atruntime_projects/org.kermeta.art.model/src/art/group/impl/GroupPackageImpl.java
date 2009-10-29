@@ -151,15 +151,6 @@ public class GroupPackageImpl extends EPackageImpl implements GroupPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGroup_SubGroups() {
-		return (EReference)groupEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getTypeGroup() {
 		return typeGroupEClass;
 	}
@@ -178,6 +169,15 @@ public class GroupPackageImpl extends EPackageImpl implements GroupPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTypeGroup_SubGroups() {
+		return (EReference)typeGroupEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInstanceGroup() {
 		return instanceGroupEClass;
 	}
@@ -189,6 +189,15 @@ public class GroupPackageImpl extends EPackageImpl implements GroupPackage {
 	 */
 	public EReference getInstanceGroup_Instances() {
 		return (EReference)instanceGroupEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInstanceGroup_SubGroups() {
+		return (EReference)instanceGroupEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -220,13 +229,14 @@ public class GroupPackageImpl extends EPackageImpl implements GroupPackage {
 
 		// Create classes and their features
 		groupEClass = createEClass(GROUP);
-		createEReference(groupEClass, GROUP__SUB_GROUPS);
 
 		typeGroupEClass = createEClass(TYPE_GROUP);
 		createEReference(typeGroupEClass, TYPE_GROUP__TYPES);
+		createEReference(typeGroupEClass, TYPE_GROUP__SUB_GROUPS);
 
 		instanceGroupEClass = createEClass(INSTANCE_GROUP);
 		createEReference(instanceGroupEClass, INSTANCE_GROUP__INSTANCES);
+		createEReference(instanceGroupEClass, INSTANCE_GROUP__SUB_GROUPS);
 	}
 
 	/**
@@ -268,13 +278,14 @@ public class GroupPackageImpl extends EPackageImpl implements GroupPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(groupEClass, Group.class, "Group", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGroup_SubGroups(), this.getGroup(), null, "subGroups", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeGroupEClass, TypeGroup.class, "TypeGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeGroup_Types(), theTypePackage.getComponentType(), theTypePackage.getComponentType_Groups(), "types", null, 0, -1, TypeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeGroup_SubGroups(), this.getTypeGroup(), null, "subGroups", null, 0, -1, TypeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(instanceGroupEClass, InstanceGroup.class, "InstanceGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInstanceGroup_Instances(), theInstancePackage.getComponentInstance(), theInstancePackage.getComponentInstance_Groups(), "instances", null, 0, -1, InstanceGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstanceGroup_SubGroups(), this.getInstanceGroup(), null, "subGroups", null, 0, -1, InstanceGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } //GroupPackageImpl

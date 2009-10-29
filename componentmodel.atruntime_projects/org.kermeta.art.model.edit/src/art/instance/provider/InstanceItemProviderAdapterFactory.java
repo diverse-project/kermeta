@@ -213,26 +213,49 @@ public class InstanceItemProviderAdapterFactory extends InstanceAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link art.instance.Entry} instances.
+	 * This keeps track of the one adapter used for all {@link art.instance.DefaultEntry} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EntryItemProvider entryItemProvider;
+	protected DefaultEntryItemProvider defaultEntryItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link art.instance.Entry}.
+	 * This creates an adapter for a {@link art.instance.DefaultEntry}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createEntryAdapter() {
-		if (entryItemProvider == null) {
-			entryItemProvider = new EntryItemProvider(this);
+	public Adapter createDefaultEntryAdapter() {
+		if (defaultEntryItemProvider == null) {
+			defaultEntryItemProvider = new DefaultEntryItemProvider(this);
 		}
 
-		return entryItemProvider;
+		return defaultEntryItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link art.instance.OtherEntry} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OtherEntryItemProvider otherEntryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link art.instance.OtherEntry}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOtherEntryAdapter() {
+		if (otherEntryItemProvider == null) {
+			otherEntryItemProvider = new OtherEntryItemProvider(this);
+		}
+
+		return otherEntryItemProvider;
 	}
 
 	/**
@@ -336,11 +359,12 @@ public class InstanceItemProviderAdapterFactory extends InstanceAdapterFactory i
 	public void dispose() {
 		if (primitiveInstanceItemProvider != null) primitiveInstanceItemProvider.dispose();
 		if (compositeInstanceItemProvider != null) compositeInstanceItemProvider.dispose();
-		if (valuedAttributeItemProvider != null) valuedAttributeItemProvider.dispose();
 		if (transmissionBindingItemProvider != null) transmissionBindingItemProvider.dispose();
 		if (delegationBindingItemProvider != null) delegationBindingItemProvider.dispose();
+		if (valuedAttributeItemProvider != null) valuedAttributeItemProvider.dispose();
 		if (dictionaryValuedAttributeItemProvider != null) dictionaryValuedAttributeItemProvider.dispose();
-		if (entryItemProvider != null) entryItemProvider.dispose();
+		if (defaultEntryItemProvider != null) defaultEntryItemProvider.dispose();
+		if (otherEntryItemProvider != null) otherEntryItemProvider.dispose();
 	}
 
 }

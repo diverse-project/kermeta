@@ -69,11 +69,12 @@ public class InstanceFactoryImpl extends EFactoryImpl implements InstanceFactory
 		switch (eClass.getClassifierID()) {
 			case InstancePackage.PRIMITIVE_INSTANCE: return createPrimitiveInstance();
 			case InstancePackage.COMPOSITE_INSTANCE: return createCompositeInstance();
-			case InstancePackage.VALUED_ATTRIBUTE: return createValuedAttribute();
 			case InstancePackage.TRANSMISSION_BINDING: return createTransmissionBinding();
 			case InstancePackage.DELEGATION_BINDING: return createDelegationBinding();
+			case InstancePackage.VALUED_ATTRIBUTE: return createValuedAttribute();
 			case InstancePackage.DICTIONARY_VALUED_ATTRIBUTE: return createDictionaryValuedAttribute();
-			case InstancePackage.ENTRY: return createEntry();
+			case InstancePackage.DEFAULT_ENTRY: return createDefaultEntry();
+			case InstancePackage.OTHER_ENTRY: return createOtherEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -174,9 +175,19 @@ public class InstanceFactoryImpl extends EFactoryImpl implements InstanceFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Entry createEntry() {
-		EntryImpl entry = new EntryImpl();
-		return entry;
+	public DefaultEntry createDefaultEntry() {
+		DefaultEntryImpl defaultEntry = new DefaultEntryImpl();
+		return defaultEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OtherEntry createOtherEntry() {
+		OtherEntryImpl otherEntry = new OtherEntryImpl();
+		return otherEntry;
 	}
 
 	/**

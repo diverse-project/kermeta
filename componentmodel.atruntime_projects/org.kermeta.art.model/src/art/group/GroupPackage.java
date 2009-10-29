@@ -80,22 +80,13 @@ public interface GroupPackage extends EPackage {
 	int GROUP__NAME = ArtPackage.NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Sub Groups</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GROUP__SUB_GROUPS = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GROUP_FEATURE_COUNT = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int GROUP_FEATURE_COUNT = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link art.group.impl.TypeGroupImpl <em>Type Group</em>}' class.
@@ -117,15 +108,6 @@ public interface GroupPackage extends EPackage {
 	int TYPE_GROUP__NAME = GROUP__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Sub Groups</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_GROUP__SUB_GROUPS = GROUP__SUB_GROUPS;
-
-	/**
 	 * The feature id for the '<em><b>Types</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -135,13 +117,22 @@ public interface GroupPackage extends EPackage {
 	int TYPE_GROUP__TYPES = GROUP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Sub Groups</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_GROUP__SUB_GROUPS = GROUP_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Type Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_GROUP_FEATURE_COUNT = GROUP_FEATURE_COUNT + 1;
+	int TYPE_GROUP_FEATURE_COUNT = GROUP_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link art.group.impl.InstanceGroupImpl <em>Instance Group</em>}' class.
@@ -163,15 +154,6 @@ public interface GroupPackage extends EPackage {
 	int INSTANCE_GROUP__NAME = GROUP__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Sub Groups</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_GROUP__SUB_GROUPS = GROUP__SUB_GROUPS;
-
-	/**
 	 * The feature id for the '<em><b>Instances</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -181,13 +163,22 @@ public interface GroupPackage extends EPackage {
 	int INSTANCE_GROUP__INSTANCES = GROUP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Sub Groups</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_GROUP__SUB_GROUPS = GROUP_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Instance Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_GROUP_FEATURE_COUNT = GROUP_FEATURE_COUNT + 1;
+	int INSTANCE_GROUP_FEATURE_COUNT = GROUP_FEATURE_COUNT + 2;
 
 
 	/**
@@ -199,17 +190,6 @@ public interface GroupPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getGroup();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link art.group.Group#getSubGroups <em>Sub Groups</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Sub Groups</em>'.
-	 * @see art.group.Group#getSubGroups()
-	 * @see #getGroup()
-	 * @generated
-	 */
-	EReference getGroup_SubGroups();
 
 	/**
 	 * Returns the meta object for class '{@link art.group.TypeGroup <em>Type Group</em>}'.
@@ -233,6 +213,17 @@ public interface GroupPackage extends EPackage {
 	EReference getTypeGroup_Types();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link art.group.TypeGroup#getSubGroups <em>Sub Groups</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Sub Groups</em>'.
+	 * @see art.group.TypeGroup#getSubGroups()
+	 * @see #getTypeGroup()
+	 * @generated
+	 */
+	EReference getTypeGroup_SubGroups();
+
+	/**
 	 * Returns the meta object for class '{@link art.group.InstanceGroup <em>Instance Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -252,6 +243,17 @@ public interface GroupPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getInstanceGroup_Instances();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link art.group.InstanceGroup#getSubGroups <em>Sub Groups</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Sub Groups</em>'.
+	 * @see art.group.InstanceGroup#getSubGroups()
+	 * @see #getInstanceGroup()
+	 * @generated
+	 */
+	EReference getInstanceGroup_SubGroups();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -286,14 +288,6 @@ public interface GroupPackage extends EPackage {
 		EClass GROUP = eINSTANCE.getGroup();
 
 		/**
-		 * The meta object literal for the '<em><b>Sub Groups</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GROUP__SUB_GROUPS = eINSTANCE.getGroup_SubGroups();
-
-		/**
 		 * The meta object literal for the '{@link art.group.impl.TypeGroupImpl <em>Type Group</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -312,6 +306,14 @@ public interface GroupPackage extends EPackage {
 		EReference TYPE_GROUP__TYPES = eINSTANCE.getTypeGroup_Types();
 
 		/**
+		 * The meta object literal for the '<em><b>Sub Groups</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_GROUP__SUB_GROUPS = eINSTANCE.getTypeGroup_SubGroups();
+
+		/**
 		 * The meta object literal for the '{@link art.group.impl.InstanceGroupImpl <em>Instance Group</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -328,6 +330,14 @@ public interface GroupPackage extends EPackage {
 		 * @generated
 		 */
 		EReference INSTANCE_GROUP__INSTANCES = eINSTANCE.getInstanceGroup_Instances();
+
+		/**
+		 * The meta object literal for the '<em><b>Sub Groups</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INSTANCE_GROUP__SUB_GROUPS = eINSTANCE.getInstanceGroup_SubGroups();
 
 	}
 

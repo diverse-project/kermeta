@@ -10,8 +10,10 @@ import art.instance.DictionaryValuedAttribute;
 import art.instance.Entry;
 import art.instance.InstancePackage;
 
+import art.type.Dictionary;
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -19,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -30,12 +33,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link art.instance.impl.DictionaryValuedAttributeImpl#getEntries <em>Entries</em>}</li>
+ *   <li>{@link art.instance.impl.DictionaryValuedAttributeImpl#getAttribute <em>Attribute</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class DictionaryValuedAttributeImpl extends ValuedAttributeImpl implements DictionaryValuedAttribute {
+public class DictionaryValuedAttributeImpl extends AttributeInstanceImpl implements DictionaryValuedAttribute {
 	/**
 	 * The cached value of the '{@link #getEntries() <em>Entries</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -45,6 +49,16 @@ public class DictionaryValuedAttributeImpl extends ValuedAttributeImpl implement
 	 * @ordered
 	 */
 	protected EList<Entry> entries;
+
+	/**
+	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttribute()
+	 * @generated
+	 * @ordered
+	 */
+	protected Dictionary attribute;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,6 +96,44 @@ public class DictionaryValuedAttributeImpl extends ValuedAttributeImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Dictionary getAttribute() {
+		if (attribute != null && attribute.eIsProxy()) {
+			InternalEObject oldAttribute = (InternalEObject)attribute;
+			attribute = (Dictionary)eResolveProxy(oldAttribute);
+			if (attribute != oldAttribute) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+			}
+		}
+		return attribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Dictionary basicGetAttribute() {
+		return attribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAttribute(Dictionary newAttribute) {
+		Dictionary oldAttribute = attribute;
+		attribute = newAttribute;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -101,6 +153,9 @@ public class DictionaryValuedAttributeImpl extends ValuedAttributeImpl implement
 		switch (featureID) {
 			case InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__ENTRIES:
 				return getEntries();
+			case InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__ATTRIBUTE:
+				if (resolve) return getAttribute();
+				return basicGetAttribute();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,6 +173,9 @@ public class DictionaryValuedAttributeImpl extends ValuedAttributeImpl implement
 				getEntries().clear();
 				getEntries().addAll((Collection<? extends Entry>)newValue);
 				return;
+			case InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__ATTRIBUTE:
+				setAttribute((Dictionary)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -133,6 +191,9 @@ public class DictionaryValuedAttributeImpl extends ValuedAttributeImpl implement
 			case InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__ENTRIES:
 				getEntries().clear();
 				return;
+			case InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__ATTRIBUTE:
+				setAttribute((Dictionary)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -147,6 +208,8 @@ public class DictionaryValuedAttributeImpl extends ValuedAttributeImpl implement
 		switch (featureID) {
 			case InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__ENTRIES:
 				return entries != null && !entries.isEmpty();
+			case InstancePackage.DICTIONARY_VALUED_ATTRIBUTE__ATTRIBUTE:
+				return attribute != null;
 		}
 		return super.eIsSet(featureID);
 	}

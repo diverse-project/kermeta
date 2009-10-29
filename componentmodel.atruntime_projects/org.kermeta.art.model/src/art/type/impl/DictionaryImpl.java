@@ -8,15 +8,22 @@ package art.type.impl;
 
 import art.DataType;
 
+import art.type.DefaultValue;
 import art.type.Dictionary;
+import art.type.DictionaryDefaultValue;
 import art.type.TypePackage;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +32,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link art.type.impl.DictionaryImpl#getKeyType <em>Key Type</em>}</li>
+ *   <li>{@link art.type.impl.DictionaryImpl#getValueType <em>Value Type</em>}</li>
+ *   <li>{@link art.type.impl.DictionaryImpl#getKeys <em>Keys</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,14 +41,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class DictionaryImpl extends AttributeImpl implements Dictionary {
 	/**
-	 * The cached value of the '{@link #getKeyType() <em>Key Type</em>}' reference.
+	 * The cached value of the '{@link #getValueType() <em>Value Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKeyType()
+	 * @see #getValueType()
 	 * @generated
 	 * @ordered
 	 */
-	protected DataType keyType;
+	protected DataType valueType;
+
+	/**
+	 * The cached value of the '{@link #getKeys() <em>Keys</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKeys()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DictionaryDefaultValue> keys;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -66,16 +84,16 @@ public class DictionaryImpl extends AttributeImpl implements Dictionary {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataType getKeyType() {
-		if (keyType != null && keyType.eIsProxy()) {
-			InternalEObject oldKeyType = (InternalEObject)keyType;
-			keyType = (DataType)eResolveProxy(oldKeyType);
-			if (keyType != oldKeyType) {
+	public DataType getValueType() {
+		if (valueType != null && valueType.eIsProxy()) {
+			InternalEObject oldValueType = (InternalEObject)valueType;
+			valueType = (DataType)eResolveProxy(oldValueType);
+			if (valueType != oldValueType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypePackage.DICTIONARY__KEY_TYPE, oldKeyType, keyType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypePackage.DICTIONARY__VALUE_TYPE, oldValueType, valueType));
 			}
 		}
-		return keyType;
+		return valueType;
 	}
 
 	/**
@@ -83,8 +101,8 @@ public class DictionaryImpl extends AttributeImpl implements Dictionary {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataType basicGetKeyType() {
-		return keyType;
+	public DataType basicGetValueType() {
+		return valueType;
 	}
 
 	/**
@@ -92,11 +110,37 @@ public class DictionaryImpl extends AttributeImpl implements Dictionary {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setKeyType(DataType newKeyType) {
-		DataType oldKeyType = keyType;
-		keyType = newKeyType;
+	public void setValueType(DataType newValueType) {
+		DataType oldValueType = valueType;
+		valueType = newValueType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypePackage.DICTIONARY__KEY_TYPE, oldKeyType, keyType));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypePackage.DICTIONARY__VALUE_TYPE, oldValueType, valueType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<DictionaryDefaultValue> getKeys() {
+		if (keys == null) {
+			keys = new EObjectContainmentEList<DictionaryDefaultValue>(DictionaryDefaultValue.class, this, TypePackage.DICTIONARY__KEYS);
+		}
+		return keys;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypePackage.DICTIONARY__KEYS:
+				return ((InternalEList<?>)getKeys()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -107,9 +151,11 @@ public class DictionaryImpl extends AttributeImpl implements Dictionary {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypePackage.DICTIONARY__KEY_TYPE:
-				if (resolve) return getKeyType();
-				return basicGetKeyType();
+			case TypePackage.DICTIONARY__VALUE_TYPE:
+				if (resolve) return getValueType();
+				return basicGetValueType();
+			case TypePackage.DICTIONARY__KEYS:
+				return getKeys();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -119,11 +165,16 @@ public class DictionaryImpl extends AttributeImpl implements Dictionary {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypePackage.DICTIONARY__KEY_TYPE:
-				setKeyType((DataType)newValue);
+			case TypePackage.DICTIONARY__VALUE_TYPE:
+				setValueType((DataType)newValue);
+				return;
+			case TypePackage.DICTIONARY__KEYS:
+				getKeys().clear();
+				getKeys().addAll((Collection<? extends DictionaryDefaultValue>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,8 +188,11 @@ public class DictionaryImpl extends AttributeImpl implements Dictionary {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypePackage.DICTIONARY__KEY_TYPE:
-				setKeyType((DataType)null);
+			case TypePackage.DICTIONARY__VALUE_TYPE:
+				setValueType((DataType)null);
+				return;
+			case TypePackage.DICTIONARY__KEYS:
+				getKeys().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -152,8 +206,10 @@ public class DictionaryImpl extends AttributeImpl implements Dictionary {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypePackage.DICTIONARY__KEY_TYPE:
-				return keyType != null;
+			case TypePackage.DICTIONARY__VALUE_TYPE:
+				return valueType != null;
+			case TypePackage.DICTIONARY__KEYS:
+				return keys != null && !keys.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

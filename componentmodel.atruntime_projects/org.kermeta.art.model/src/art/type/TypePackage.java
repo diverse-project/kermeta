@@ -182,22 +182,13 @@ public interface TypePackage extends EPackage {
 	int PRIMITIVE_TYPE__IMPLEM = COMPONENT_TYPE__IMPLEM;
 
 	/**
-	 * The feature id for the '<em><b>Binding</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE__BINDING = COMPONENT_TYPE_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Primitive Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_FEATURE_COUNT = COMPONENT_TYPE_FEATURE_COUNT + 1;
+	int PRIMITIVE_TYPE_FEATURE_COUNT = COMPONENT_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link art.type.impl.CompositeTypeImpl <em>Composite Type</em>}' class.
@@ -255,31 +246,13 @@ public interface TypePackage extends EPackage {
 	int COMPOSITE_TYPE__IMPLEM = COMPONENT_TYPE__IMPLEM;
 
 	/**
-	 * The feature id for the '<em><b>Sub Types</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_TYPE__SUB_TYPES = COMPONENT_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Delegation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_TYPE__DELEGATION = COMPONENT_TYPE_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Composite Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_TYPE_FEATURE_COUNT = COMPONENT_TYPE_FEATURE_COUNT + 2;
+	int COMPOSITE_TYPE_FEATURE_COUNT = COMPONENT_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link art.type.impl.ServiceImpl <em>Service</em>}' class.
@@ -602,7 +575,53 @@ public interface TypePackage extends EPackage {
 	 * @see art.type.impl.TypePackageImpl#getDictionary()
 	 * @generated
 	 */
-	int DICTIONARY = 10;
+	int DICTIONARY = 11;
+
+	/**
+	 * The meta object id for the '{@link art.type.impl.BasicAttributeImpl <em>Basic Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.type.impl.BasicAttributeImpl
+	 * @see art.type.impl.TypePackageImpl#getBasicAttribute()
+	 * @generated
+	 */
+	int BASIC_ATTRIBUTE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_ATTRIBUTE__NAME = ATTRIBUTE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_ATTRIBUTE__TYPE = ATTRIBUTE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_ATTRIBUTE__DEFAULT_VALUE = ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Basic Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_ATTRIBUTE_FEATURE_COUNT = ATTRIBUTE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -623,13 +642,22 @@ public interface TypePackage extends EPackage {
 	int DICTIONARY__TYPE = ATTRIBUTE__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Key Type</b></em>' reference.
+	 * The feature id for the '<em><b>Value Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY__KEY_TYPE = ATTRIBUTE_FEATURE_COUNT + 0;
+	int DICTIONARY__VALUE_TYPE = ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Keys</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY__KEYS = ATTRIBUTE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Dictionary</em>' class.
@@ -638,7 +666,44 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_FEATURE_COUNT = ATTRIBUTE_FEATURE_COUNT + 1;
+	int DICTIONARY_FEATURE_COUNT = ATTRIBUTE_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link art.type.impl.DictionaryDefaultValueImpl <em>Dictionary Default Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.type.impl.DictionaryDefaultValueImpl
+	 * @see art.type.impl.TypePackageImpl#getDictionaryDefaultValue()
+	 * @generated
+	 */
+	int DICTIONARY_DEFAULT_VALUE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_DEFAULT_VALUE__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_DEFAULT_VALUE__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Dictionary Default Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_DEFAULT_VALUE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link art.type.PortRole <em>Port Role</em>}' enum.
@@ -648,7 +713,7 @@ public interface TypePackage extends EPackage {
 	 * @see art.type.impl.TypePackageImpl#getPortRole()
 	 * @generated
 	 */
-	int PORT_ROLE = 11;
+	int PORT_ROLE = 13;
 
 
 	/**
@@ -716,17 +781,6 @@ public interface TypePackage extends EPackage {
 	EClass getPrimitiveType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link art.type.PrimitiveType#getBinding <em>Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Binding</em>'.
-	 * @see art.type.PrimitiveType#getBinding()
-	 * @see #getPrimitiveType()
-	 * @generated
-	 */
-	EReference getPrimitiveType_Binding();
-
-	/**
 	 * Returns the meta object for class '{@link art.type.CompositeType <em>Composite Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -735,28 +789,6 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCompositeType();
-
-	/**
-	 * Returns the meta object for the reference list '{@link art.type.CompositeType#getSubTypes <em>Sub Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sub Types</em>'.
-	 * @see art.type.CompositeType#getSubTypes()
-	 * @see #getCompositeType()
-	 * @generated
-	 */
-	EReference getCompositeType_SubTypes();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link art.type.CompositeType#getDelegation <em>Delegation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Delegation</em>'.
-	 * @see art.type.CompositeType#getDelegation()
-	 * @see #getCompositeType()
-	 * @generated
-	 */
-	EReference getCompositeType_Delegation();
 
 	/**
 	 * Returns the meta object for class '{@link art.type.Service <em>Service</em>}'.
@@ -916,15 +948,79 @@ public interface TypePackage extends EPackage {
 	EClass getDictionary();
 
 	/**
-	 * Returns the meta object for the reference '{@link art.type.Dictionary#getKeyType <em>Key Type</em>}'.
+	 * Returns the meta object for the reference '{@link art.type.Dictionary#getValueType <em>Value Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Key Type</em>'.
-	 * @see art.type.Dictionary#getKeyType()
+	 * @return the meta object for the reference '<em>Value Type</em>'.
+	 * @see art.type.Dictionary#getValueType()
 	 * @see #getDictionary()
 	 * @generated
 	 */
-	EReference getDictionary_KeyType();
+	EReference getDictionary_ValueType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link art.type.Dictionary#getKeys <em>Keys</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Keys</em>'.
+	 * @see art.type.Dictionary#getKeys()
+	 * @see #getDictionary()
+	 * @generated
+	 */
+	EReference getDictionary_Keys();
+
+	/**
+	 * Returns the meta object for class '{@link art.type.BasicAttribute <em>Basic Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Basic Attribute</em>'.
+	 * @see art.type.BasicAttribute
+	 * @generated
+	 */
+	EClass getBasicAttribute();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.type.BasicAttribute#getDefaultValue <em>Default Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Value</em>'.
+	 * @see art.type.BasicAttribute#getDefaultValue()
+	 * @see #getBasicAttribute()
+	 * @generated
+	 */
+	EAttribute getBasicAttribute_DefaultValue();
+
+	/**
+	 * Returns the meta object for class '{@link art.type.DictionaryDefaultValue <em>Dictionary Default Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Dictionary Default Value</em>'.
+	 * @see art.type.DictionaryDefaultValue
+	 * @generated
+	 */
+	EClass getDictionaryDefaultValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.type.DictionaryDefaultValue#getKey <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see art.type.DictionaryDefaultValue#getKey()
+	 * @see #getDictionaryDefaultValue()
+	 * @generated
+	 */
+	EAttribute getDictionaryDefaultValue_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.type.DictionaryDefaultValue#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see art.type.DictionaryDefaultValue#getValue()
+	 * @see #getDictionaryDefaultValue()
+	 * @generated
+	 */
+	EAttribute getDictionaryDefaultValue_Value();
 
 	/**
 	 * Returns the meta object for enum '{@link art.type.PortRole <em>Port Role</em>}'.
@@ -1011,14 +1107,6 @@ public interface TypePackage extends EPackage {
 		EClass PRIMITIVE_TYPE = eINSTANCE.getPrimitiveType();
 
 		/**
-		 * The meta object literal for the '<em><b>Binding</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PRIMITIVE_TYPE__BINDING = eINSTANCE.getPrimitiveType_Binding();
-
-		/**
 		 * The meta object literal for the '{@link art.type.impl.CompositeTypeImpl <em>Composite Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1027,22 +1115,6 @@ public interface TypePackage extends EPackage {
 		 * @generated
 		 */
 		EClass COMPOSITE_TYPE = eINSTANCE.getCompositeType();
-
-		/**
-		 * The meta object literal for the '<em><b>Sub Types</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPOSITE_TYPE__SUB_TYPES = eINSTANCE.getCompositeType_SubTypes();
-
-		/**
-		 * The meta object literal for the '<em><b>Delegation</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPOSITE_TYPE__DELEGATION = eINSTANCE.getCompositeType_Delegation();
 
 		/**
 		 * The meta object literal for the '{@link art.type.impl.ServiceImpl <em>Service</em>}' class.
@@ -1181,12 +1253,64 @@ public interface TypePackage extends EPackage {
 		EClass DICTIONARY = eINSTANCE.getDictionary();
 
 		/**
-		 * The meta object literal for the '<em><b>Key Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Value Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DICTIONARY__KEY_TYPE = eINSTANCE.getDictionary_KeyType();
+		EReference DICTIONARY__VALUE_TYPE = eINSTANCE.getDictionary_ValueType();
+
+		/**
+		 * The meta object literal for the '<em><b>Keys</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DICTIONARY__KEYS = eINSTANCE.getDictionary_Keys();
+
+		/**
+		 * The meta object literal for the '{@link art.type.impl.BasicAttributeImpl <em>Basic Attribute</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.type.impl.BasicAttributeImpl
+		 * @see art.type.impl.TypePackageImpl#getBasicAttribute()
+		 * @generated
+		 */
+		EClass BASIC_ATTRIBUTE = eINSTANCE.getBasicAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BASIC_ATTRIBUTE__DEFAULT_VALUE = eINSTANCE.getBasicAttribute_DefaultValue();
+
+		/**
+		 * The meta object literal for the '{@link art.type.impl.DictionaryDefaultValueImpl <em>Dictionary Default Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.type.impl.DictionaryDefaultValueImpl
+		 * @see art.type.impl.TypePackageImpl#getDictionaryDefaultValue()
+		 * @generated
+		 */
+		EClass DICTIONARY_DEFAULT_VALUE = eINSTANCE.getDictionaryDefaultValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DICTIONARY_DEFAULT_VALUE__KEY = eINSTANCE.getDictionaryDefaultValue_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DICTIONARY_DEFAULT_VALUE__VALUE = eINSTANCE.getDictionaryDefaultValue_Value();
 
 		/**
 		 * The meta object literal for the '{@link art.type.PortRole <em>Port Role</em>}' enum.
