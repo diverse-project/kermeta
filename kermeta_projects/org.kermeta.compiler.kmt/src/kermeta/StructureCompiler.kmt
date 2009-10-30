@@ -78,6 +78,10 @@ class Main {
     	main_mode(modelInput, "", modelInput.replaceExtension("ecore"), CompilingMode.behaviorJava, false)
     end
     
+    operation main_km2ecore_4trek_tests(modelInput : String, traceInput : String, output : String) : Void is do
+    	main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava, false)
+    end
+    
     /**
      * Last operation before running the transfo.
      */
