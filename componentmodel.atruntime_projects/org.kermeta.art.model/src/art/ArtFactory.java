@@ -44,15 +44,6 @@ public interface ArtFactory extends EFactory {
 	DataType createDataType();
 
 	/**
-	 * Returns a new object of class '<em>Cardinality Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Cardinality Element</em>'.
-	 * @generated
-	 */
-	CardinalityElement createCardinalityElement();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

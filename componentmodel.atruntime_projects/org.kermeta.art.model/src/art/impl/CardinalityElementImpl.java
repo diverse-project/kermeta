@@ -27,7 +27,7 @@ import art.CardinalityElement;
  *
  * @generated
  */
-public class CardinalityElementImpl extends ModelElementImpl implements CardinalityElement {
+public abstract class CardinalityElementImpl extends ModelElementImpl implements CardinalityElement {
 	/**
 	 * The default value of the '{@link #getLower() <em>Lower</em>}' attribute.
 	 * <!-- begin-user-doc -->

@@ -25,7 +25,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CardinalityElement" eSuperTypes="#//ModelElement">
+  <eClassifiers xsi:type="ecore:EClass" name="CardinalityElement" abstract="true"
+      eSuperTypes="#//ModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="#//Integer"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="#//Integer"/>
   </eClassifiers>

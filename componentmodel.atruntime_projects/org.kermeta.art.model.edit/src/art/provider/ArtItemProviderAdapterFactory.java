@@ -121,29 +121,6 @@ public class ArtItemProviderAdapterFactory extends ArtAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link art.CardinalityElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected CardinalityElementItemProvider cardinalityElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link art.CardinalityElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createCardinalityElementAdapter() {
-		if (cardinalityElementItemProvider == null) {
-			cardinalityElementItemProvider = new CardinalityElementItemProvider(this);
-		}
-
-		return cardinalityElementItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -244,7 +221,6 @@ public class ArtItemProviderAdapterFactory extends ArtAdapterFactory implements 
 	public void dispose() {
 		if (systemItemProvider != null) systemItemProvider.dispose();
 		if (dataTypeItemProvider != null) dataTypeItemProvider.dispose();
-		if (cardinalityElementItemProvider != null) cardinalityElementItemProvider.dispose();
 	}
 
 }

@@ -19,8 +19,7 @@ Export-Package: art,
  art.type,
  art.type.impl,
  art.type.util,
- art.util,
- com.wutka.dtd
+ art.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

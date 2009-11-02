@@ -25,7 +25,7 @@
     <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//TypedElement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//TypedElement/type"/>
     </genClasses>
-    <genClasses ecoreClass="metamodel@runtime.ecore#//CardinalityElement">
+    <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//CardinalityElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//CardinalityElement/lower"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//CardinalityElement/upper"/>
     </genClasses>
@@ -51,11 +51,6 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/CompositeInstance/subComponent"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/CompositeInstance/delegation"/>
       </genClasses>
-      <genClasses ecoreClass="metamodel@runtime.ecore#//instance/ValuedAttribute">
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/ValuedAttribute/attribute"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//instance/ValuedAttribute/value"/>
-      </genClasses>
       <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//instance/Binding">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/Binding/serverInstance"/>
@@ -73,6 +68,27 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/DelegationBinding/exported"/>
       </genClasses>
+      <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//instance/AttributeInstance"/>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//instance/ValuedAttribute">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//instance/ValuedAttribute/value"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/ValuedAttribute/attribute"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//instance/DictionaryValuedAttribute">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/DictionaryValuedAttribute/entries"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/DictionaryValuedAttribute/attribute"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//instance/Entry">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//instance/Entry/value"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//instance/DefaultEntry">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/DefaultEntry/key"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//instance/OtherEntry">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//instance/OtherEntry/key"/>
+      </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Type" disposableProviderFactory="true" childCreationExtenders="true"
         ecorePackage="metamodel@runtime.ecore#//type">
@@ -87,14 +103,8 @@
             ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/ComponentType/groups"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/ComponentType/implem"/>
       </genClasses>
-      <genClasses ecoreClass="metamodel@runtime.ecore#//type/PrimitiveType">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/PrimitiveType/binding"/>
-      </genClasses>
-      <genClasses ecoreClass="metamodel@runtime.ecore#//type/CompositeType">
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/CompositeType/subTypes"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/CompositeType/delegation"/>
-      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/PrimitiveType"/>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/CompositeType"/>
       <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//type/Service">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/Service/operation"/>
       </genClasses>
@@ -113,6 +123,18 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/Port/implem"/>
       </genClasses>
       <genClasses ecoreClass="metamodel@runtime.ecore#//type/Attribute"/>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/BasicAttribute">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//type/BasicAttribute/defaultValue"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/Dictionary">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/Dictionary/valueType"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/Dictionary/keys"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/DictionaryDefaultValue">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//type/DictionaryDefaultValue/key"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//type/DictionaryDefaultValue/value"/>
+      </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Implem" disposableProviderFactory="true" childCreationExtenders="true"
         ecorePackage="metamodel@runtime.ecore#//implem">
@@ -135,16 +157,16 @@
     </nestedGenPackages>
     <nestedGenPackages prefix="Group" disposableProviderFactory="true" childCreationExtenders="true"
         ecorePackage="metamodel@runtime.ecore#//group">
-      <genClasses ecoreClass="metamodel@runtime.ecore#//group/Group">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//group/Group/subGroups"/>
-      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//group/Group"/>
       <genClasses ecoreClass="metamodel@runtime.ecore#//group/TypeGroup">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference metamodel@runtime.ecore#//group/TypeGroup/types"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//group/TypeGroup/subGroups"/>
       </genClasses>
       <genClasses ecoreClass="metamodel@runtime.ecore#//group/InstanceGroup">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference metamodel@runtime.ecore#//group/InstanceGroup/instances"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//group/InstanceGroup/subGroups"/>
       </genClasses>
     </nestedGenPackages>
   </genPackages>

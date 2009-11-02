@@ -21,7 +21,7 @@ package art;
  * </p>
  *
  * @see art.ArtPackage#getCardinalityElement()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface CardinalityElement extends ModelElement {
