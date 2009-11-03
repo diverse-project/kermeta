@@ -114,7 +114,6 @@ public interface ImplemPackage extends EPackage {
 	 */
 	int FRACTAL_COMPONENT_FEATURE_COUNT = COMPONENT_IMPLEMENTATION_FEATURE_COUNT + 2;
 
-
 	/**
 	 * The meta object id for the '{@link art.implem.impl.OSGiComponentImpl <em>OS Gi Component</em>}' class.
 	 * <!-- begin-user-doc -->
@@ -189,7 +188,6 @@ public interface ImplemPackage extends EPackage {
 	 * @ordered
 	 */
 	int OS_GI_PORT_FEATURE_COUNT = PORT_IMPLEMENTATION_FEATURE_COUNT + 1;
-
 
 	/**
 	 * The meta object id for the '{@link art.implem.impl.TypeImplementationImpl <em>Type Implementation</em>}' class.

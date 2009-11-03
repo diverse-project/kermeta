@@ -7,6 +7,7 @@
 package art.type;
 
 import art.CardinalityElement;
+
 import art.implem.PortImplementation;
 
 /**

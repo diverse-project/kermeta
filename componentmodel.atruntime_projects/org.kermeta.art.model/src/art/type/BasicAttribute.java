@@ -28,7 +28,7 @@ public interface BasicAttribute extends Attribute {
 	 * Returns the value of the '<em><b>Default Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Default Value</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Default Value</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

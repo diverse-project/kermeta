@@ -6,29 +6,17 @@
  */
 package art.type.util;
 
+import art.CardinalityElement;
+import art.ModelElement;
+import art.NamedElement;
+import art.TypedElement;
+
+import art.type.*;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import art.AddElement;
-import art.CardinalityElement;
-import art.ModelElement;
-import art.NamedElement;
-import art.RemoveElement;
-import art.TypedElement;
-import art.type.*;
-import art.type.Attribute;
-import art.type.ComponentType;
-import art.type.CompositeType;
-import art.type.ControlService;
-import art.type.FunctionalService;
-import art.type.Operation;
-import art.type.Parameter;
-import art.type.Port;
-import art.type.PrimitiveType;
-import art.type.Service;
-import art.type.TypePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -372,21 +360,6 @@ public class TypeSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Dictionary</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Dictionary</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDictionary(Dictionary object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Basic Attribute</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -398,6 +371,21 @@ public class TypeSwitch<T> {
 	 * @generated
 	 */
 	public T caseBasicAttribute(BasicAttribute object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dictionary</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dictionary</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDictionary(Dictionary object) {
 		return null;
 	}
 

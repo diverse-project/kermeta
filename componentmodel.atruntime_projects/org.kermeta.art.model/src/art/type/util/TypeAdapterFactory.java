@@ -6,29 +6,19 @@
  */
 package art.type.util;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-import org.eclipse.emf.ecore.EObject;
-
-import art.AddElement;
 import art.CardinalityElement;
 import art.ModelElement;
 import art.NamedElement;
-import art.RemoveElement;
 import art.TypedElement;
+
 import art.type.*;
-import art.type.Attribute;
-import art.type.ComponentType;
-import art.type.CompositeType;
-import art.type.ControlService;
-import art.type.FunctionalService;
-import art.type.Operation;
-import art.type.Parameter;
-import art.type.Port;
-import art.type.PrimitiveType;
-import art.type.Service;
-import art.type.TypePackage;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -315,20 +305,6 @@ public class TypeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link art.type.Dictionary <em>Dictionary</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see art.type.Dictionary
-	 * @generated
-	 */
-	public Adapter createDictionaryAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link art.type.BasicAttribute <em>Basic Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -339,6 +315,20 @@ public class TypeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBasicAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.type.Dictionary <em>Dictionary</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.type.Dictionary
+	 * @generated
+	 */
+	public Adapter createDictionaryAdapter() {
 		return null;
 	}
 

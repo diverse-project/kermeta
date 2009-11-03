@@ -7,6 +7,7 @@
 package art.type;
 
 import art.DataType;
+
 import org.eclipse.emf.common.util.EList;
 
 /**

@@ -6,13 +6,13 @@
  */
 package art.instance;
 
+import art.ArtPackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
-import art.ArtPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -354,26 +354,6 @@ public interface InstancePackage extends EPackage {
 	int COMPOSITE_INSTANCE_FEATURE_COUNT = COMPONENT_INSTANCE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link art.instance.impl.AttributeInstanceImpl <em>Attribute Instance</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see art.instance.impl.AttributeInstanceImpl
-	 * @see art.instance.impl.InstancePackageImpl#getAttributeInstance()
-	 * @generated
-	 */
-	int ATTRIBUTE_INSTANCE = 6;
-
-	/**
-	 * The meta object id for the '{@link art.instance.impl.ValuedAttributeImpl <em>Valued Attribute</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see art.instance.impl.ValuedAttributeImpl
-	 * @see art.instance.impl.InstancePackageImpl#getValuedAttribute()
-	 * @generated
-	 */
-	int VALUED_ATTRIBUTE = 7;
-
-	/**
 	 * The meta object id for the '{@link art.instance.impl.BindingImpl <em>Binding</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -382,36 +362,6 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 */
 	int BINDING = 3;
-
-	/**
-	 * The meta object id for the '{@link art.instance.impl.TransmissionBindingImpl <em>Transmission Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see art.instance.impl.TransmissionBindingImpl
-	 * @see art.instance.impl.InstancePackageImpl#getTransmissionBinding()
-	 * @generated
-	 */
-	int TRANSMISSION_BINDING = 4;
-
-	/**
-	 * The meta object id for the '{@link art.instance.impl.DelegationBindingImpl <em>Delegation Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see art.instance.impl.DelegationBindingImpl
-	 * @see art.instance.impl.InstancePackageImpl#getDelegationBinding()
-	 * @generated
-	 */
-	int DELEGATION_BINDING = 5;
-
-	/**
-	 * The meta object id for the '{@link art.instance.impl.DictionaryValuedAttributeImpl <em>Dictionary Valued Attribute</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see art.instance.impl.DictionaryValuedAttributeImpl
-	 * @see art.instance.impl.InstancePackageImpl#getDictionaryValuedAttribute()
-	 * @generated
-	 */
-	int DICTIONARY_VALUED_ATTRIBUTE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Server Instance</b></em>' reference.
@@ -439,6 +389,16 @@ public interface InstancePackage extends EPackage {
 	 * @ordered
 	 */
 	int BINDING_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link art.instance.impl.TransmissionBindingImpl <em>Transmission Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.instance.impl.TransmissionBindingImpl
+	 * @see art.instance.impl.InstancePackageImpl#getTransmissionBinding()
+	 * @generated
+	 */
+	int TRANSMISSION_BINDING = 4;
 
 	/**
 	 * The feature id for the '<em><b>Server Instance</b></em>' reference.
@@ -486,6 +446,16 @@ public interface InstancePackage extends EPackage {
 	int TRANSMISSION_BINDING_FEATURE_COUNT = BINDING_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link art.instance.impl.DelegationBindingImpl <em>Delegation Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.instance.impl.DelegationBindingImpl
+	 * @see art.instance.impl.InstancePackageImpl#getDelegationBinding()
+	 * @generated
+	 */
+	int DELEGATION_BINDING = 5;
+
+	/**
 	 * The feature id for the '<em><b>Server Instance</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -531,6 +501,16 @@ public interface InstancePackage extends EPackage {
 	int DELEGATION_BINDING_FEATURE_COUNT = BINDING_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link art.instance.impl.AttributeInstanceImpl <em>Attribute Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.instance.impl.AttributeInstanceImpl
+	 * @see art.instance.impl.InstancePackageImpl#getAttributeInstance()
+	 * @generated
+	 */
+	int ATTRIBUTE_INSTANCE = 6;
+
+	/**
 	 * The number of structural features of the '<em>Attribute Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -538,6 +518,16 @@ public interface InstancePackage extends EPackage {
 	 * @ordered
 	 */
 	int ATTRIBUTE_INSTANCE_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link art.instance.impl.ValuedAttributeImpl <em>Valued Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.instance.impl.ValuedAttributeImpl
+	 * @see art.instance.impl.InstancePackageImpl#getValuedAttribute()
+	 * @generated
+	 */
+	int VALUED_ATTRIBUTE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -565,6 +555,16 @@ public interface InstancePackage extends EPackage {
 	 * @ordered
 	 */
 	int VALUED_ATTRIBUTE_FEATURE_COUNT = ATTRIBUTE_INSTANCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link art.instance.impl.DictionaryValuedAttributeImpl <em>Dictionary Valued Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.instance.impl.DictionaryValuedAttributeImpl
+	 * @see art.instance.impl.InstancePackageImpl#getDictionaryValuedAttribute()
+	 * @generated
+	 */
+	int DICTIONARY_VALUED_ATTRIBUTE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Entries</b></em>' containment reference list.
@@ -836,48 +836,6 @@ public interface InstancePackage extends EPackage {
 	EReference getCompositeInstance_Delegation();
 
 	/**
-	 * Returns the meta object for class '{@link art.instance.AttributeInstance <em>Attribute Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Attribute Instance</em>'.
-	 * @see art.instance.AttributeInstance
-	 * @generated
-	 */
-	EClass getAttributeInstance();
-
-	/**
-	 * Returns the meta object for class '{@link art.instance.ValuedAttribute <em>Valued Attribute</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Valued Attribute</em>'.
-	 * @see art.instance.ValuedAttribute
-	 * @generated
-	 */
-	EClass getValuedAttribute();
-
-	/**
-	 * Returns the meta object for the attribute '{@link art.instance.ValuedAttribute#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see art.instance.ValuedAttribute#getValue()
-	 * @see #getValuedAttribute()
-	 * @generated
-	 */
-	EAttribute getValuedAttribute_Value();
-
-	/**
-	 * Returns the meta object for the reference '{@link art.instance.ValuedAttribute#getAttribute <em>Attribute</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Attribute</em>'.
-	 * @see art.instance.ValuedAttribute#getAttribute()
-	 * @see #getValuedAttribute()
-	 * @generated
-	 */
-	EReference getValuedAttribute_Attribute();
-
-	/**
 	 * Returns the meta object for class '{@link art.instance.Binding <em>Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -972,6 +930,48 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDelegationBinding_Exported();
+
+	/**
+	 * Returns the meta object for class '{@link art.instance.AttributeInstance <em>Attribute Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Attribute Instance</em>'.
+	 * @see art.instance.AttributeInstance
+	 * @generated
+	 */
+	EClass getAttributeInstance();
+
+	/**
+	 * Returns the meta object for class '{@link art.instance.ValuedAttribute <em>Valued Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Valued Attribute</em>'.
+	 * @see art.instance.ValuedAttribute
+	 * @generated
+	 */
+	EClass getValuedAttribute();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.instance.ValuedAttribute#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see art.instance.ValuedAttribute#getValue()
+	 * @see #getValuedAttribute()
+	 * @generated
+	 */
+	EAttribute getValuedAttribute_Value();
+
+	/**
+	 * Returns the meta object for the reference '{@link art.instance.ValuedAttribute#getAttribute <em>Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Attribute</em>'.
+	 * @see art.instance.ValuedAttribute#getAttribute()
+	 * @see #getValuedAttribute()
+	 * @generated
+	 */
+	EReference getValuedAttribute_Attribute();
 
 	/**
 	 * Returns the meta object for class '{@link art.instance.DictionaryValuedAttribute <em>Dictionary Valued Attribute</em>}'.
@@ -1203,42 +1203,6 @@ public interface InstancePackage extends EPackage {
 		EReference COMPOSITE_INSTANCE__DELEGATION = eINSTANCE.getCompositeInstance_Delegation();
 
 		/**
-		 * The meta object literal for the '{@link art.instance.impl.AttributeInstanceImpl <em>Attribute Instance</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see art.instance.impl.AttributeInstanceImpl
-		 * @see art.instance.impl.InstancePackageImpl#getAttributeInstance()
-		 * @generated
-		 */
-		EClass ATTRIBUTE_INSTANCE = eINSTANCE.getAttributeInstance();
-
-		/**
-		 * The meta object literal for the '{@link art.instance.impl.ValuedAttributeImpl <em>Valued Attribute</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see art.instance.impl.ValuedAttributeImpl
-		 * @see art.instance.impl.InstancePackageImpl#getValuedAttribute()
-		 * @generated
-		 */
-		EClass VALUED_ATTRIBUTE = eINSTANCE.getValuedAttribute();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VALUED_ATTRIBUTE__VALUE = eINSTANCE.getValuedAttribute_Value();
-
-		/**
-		 * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VALUED_ATTRIBUTE__ATTRIBUTE = eINSTANCE.getValuedAttribute_Attribute();
-
-		/**
 		 * The meta object literal for the '{@link art.instance.impl.BindingImpl <em>Binding</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1315,6 +1279,42 @@ public interface InstancePackage extends EPackage {
 		 * @generated
 		 */
 		EReference DELEGATION_BINDING__EXPORTED = eINSTANCE.getDelegationBinding_Exported();
+
+		/**
+		 * The meta object literal for the '{@link art.instance.impl.AttributeInstanceImpl <em>Attribute Instance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.instance.impl.AttributeInstanceImpl
+		 * @see art.instance.impl.InstancePackageImpl#getAttributeInstance()
+		 * @generated
+		 */
+		EClass ATTRIBUTE_INSTANCE = eINSTANCE.getAttributeInstance();
+
+		/**
+		 * The meta object literal for the '{@link art.instance.impl.ValuedAttributeImpl <em>Valued Attribute</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.instance.impl.ValuedAttributeImpl
+		 * @see art.instance.impl.InstancePackageImpl#getValuedAttribute()
+		 * @generated
+		 */
+		EClass VALUED_ATTRIBUTE = eINSTANCE.getValuedAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VALUED_ATTRIBUTE__VALUE = eINSTANCE.getValuedAttribute_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VALUED_ATTRIBUTE__ATTRIBUTE = eINSTANCE.getValuedAttribute_Attribute();
 
 		/**
 		 * The meta object literal for the '{@link art.instance.impl.DictionaryValuedAttributeImpl <em>Dictionary Valued Attribute</em>}' class.

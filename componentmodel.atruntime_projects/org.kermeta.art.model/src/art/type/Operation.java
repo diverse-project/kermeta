@@ -6,9 +6,9 @@
  */
 package art.type;
 
-import org.eclipse.emf.common.util.EList;
-
 import art.ModelElement;
+
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->

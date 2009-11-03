@@ -7,9 +7,6 @@
 package art.instance;
 
 import org.eclipse.emf.ecore.EObject;
-import art.AddElement;
-import art.RemoveElement;
-import art.UpdateElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,7 +51,7 @@ public interface Binding extends EObject {
 	 * @generated
 	 */
 	void setServerInstance(ComponentInstance value);
-	
+
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -80,15 +77,5 @@ public interface Binding extends EObject {
 	 * @generated
 	 */
 	void setId(String value);
-
-	/**
-	 * @generated NOT
-	 */
-	String getServerName();
-
-	/**
-	 * @generated NOT
-	 */
-	String getClientName();
 
 } // Binding

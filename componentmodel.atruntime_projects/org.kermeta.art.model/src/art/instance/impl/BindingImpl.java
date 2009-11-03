@@ -6,15 +6,17 @@
  */
 package art.instance.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import art.instance.Binding;
 import art.instance.ComponentInstance;
 import art.instance.InstancePackage;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,6 +42,7 @@ public abstract class BindingImpl extends EObjectImpl implements Binding {
 	 * @ordered
 	 */
 	protected ComponentInstance serverInstance;
+
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -49,6 +52,7 @@ public abstract class BindingImpl extends EObjectImpl implements Binding {
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->

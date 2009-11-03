@@ -6,23 +6,30 @@
  */
 package art.impl;
 
+import art.ArtPackage;
+import art.DataType;
+
+import art.group.Group;
+
+import art.instance.CompositeInstance;
+
+import art.type.ComponentType;
+import art.type.Service;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import art.ArtPackage;
-import art.DataType;
-import art.group.Group;
-import art.instance.CompositeInstance;
-import art.type.ComponentType;
-import art.type.Service;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,6 +58,7 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 	 * @ordered
 	 */
 	protected CompositeInstance root;
+
 	/**
 	 * The cached value of the '{@link #getServices() <em>Services</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -60,6 +68,7 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 	 * @ordered
 	 */
 	protected EList<Service> services;
+
 	/**
 	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -69,6 +78,7 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 	 * @ordered
 	 */
 	protected EList<ComponentType> types;
+
 	/**
 	 * The cached value of the '{@link #getDataTypes() <em>Data Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -156,7 +166,6 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<Service> getServices() {
 		if (services == null) {
 			services = new EObjectContainmentEList<Service>(Service.class, this, ArtPackage.SYSTEM__SERVICES);
@@ -169,7 +178,6 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<ComponentType> getTypes() {
 		if (types == null) {
 			types = new EObjectContainmentEList<ComponentType>(ComponentType.class, this, ArtPackage.SYSTEM__TYPES);
@@ -182,7 +190,6 @@ public class SystemImpl extends ModelElementImpl implements art.System {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<DataType> getDataTypes() {
 		if (dataTypes == null) {
 			dataTypes = new EObjectContainmentEList<DataType>(DataType.class, this, ArtPackage.SYSTEM__DATA_TYPES);

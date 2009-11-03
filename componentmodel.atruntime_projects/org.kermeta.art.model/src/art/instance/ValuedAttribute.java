@@ -7,9 +7,6 @@
 package art.instance;
 
 import art.type.BasicAttribute;
-import art.UpdateElement;
-import art.type.Attribute;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

@@ -7,11 +7,13 @@
 package art;
 
 import art.group.Group;
-import org.eclipse.emf.common.util.EList;
 
 import art.instance.CompositeInstance;
+
 import art.type.ComponentType;
 import art.type.Service;
+
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->

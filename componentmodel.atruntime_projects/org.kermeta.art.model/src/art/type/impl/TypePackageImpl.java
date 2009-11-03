@@ -6,28 +6,27 @@
  */
 package art.type.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import art.ArtPackage;
+
 import art.group.GroupPackage;
+
 import art.group.impl.GroupPackageImpl;
+
 import art.impl.ArtPackageImpl;
+
 import art.implem.ImplemPackage;
+
 import art.implem.impl.ImplemPackageImpl;
+
 import art.instance.InstancePackage;
+
 import art.instance.impl.InstancePackageImpl;
+
 import art.type.Attribute;
 import art.type.BasicAttribute;
-import art.type.BasicDefaultValue;
 import art.type.ComponentType;
 import art.type.CompositeType;
 import art.type.ControlService;
-import art.type.DefaultValue;
 import art.type.Dictionary;
 import art.type.DictionaryDefaultValue;
 import art.type.FunctionalService;
@@ -39,6 +38,14 @@ import art.type.PrimitiveType;
 import art.type.Service;
 import art.type.TypeFactory;
 import art.type.TypePackage;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -122,14 +129,14 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass dictionaryEClass = null;
+	private EClass basicAttributeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass basicAttributeEClass = null;
+	private EClass dictionaryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -414,6 +421,24 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBasicAttribute() {
+		return basicAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBasicAttribute_DefaultValue() {
+		return (EAttribute)basicAttributeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDictionary() {
 		return dictionaryEClass;
 	}
@@ -434,24 +459,6 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 */
 	public EReference getDictionary_Keys() {
 		return (EReference)dictionaryEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getBasicAttribute() {
-		return basicAttributeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBasicAttribute_DefaultValue() {
-		return (EAttribute)basicAttributeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**

@@ -6,12 +6,15 @@
  */
 package art.instance.provider;
 
+import art.instance.util.InstanceAdapterFactory;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -23,8 +26,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import art.instance.util.InstanceAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -121,29 +122,6 @@ public class InstanceItemProviderAdapterFactory extends InstanceAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link art.instance.ValuedAttribute} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ValuedAttributeItemProvider valuedAttributeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link art.instance.ValuedAttribute}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createValuedAttributeAdapter() {
-		if (valuedAttributeItemProvider == null) {
-			valuedAttributeItemProvider = new ValuedAttributeItemProvider(this);
-		}
-
-		return valuedAttributeItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link art.instance.TransmissionBinding} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -187,6 +165,29 @@ public class InstanceItemProviderAdapterFactory extends InstanceAdapterFactory i
 		}
 
 		return delegationBindingItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link art.instance.ValuedAttribute} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ValuedAttributeItemProvider valuedAttributeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link art.instance.ValuedAttribute}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createValuedAttributeAdapter() {
+		if (valuedAttributeItemProvider == null) {
+			valuedAttributeItemProvider = new ValuedAttributeItemProvider(this);
+		}
+
+		return valuedAttributeItemProvider;
 	}
 
 	/**

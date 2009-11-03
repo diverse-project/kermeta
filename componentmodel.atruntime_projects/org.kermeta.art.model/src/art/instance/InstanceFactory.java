@@ -44,15 +44,6 @@ public interface InstanceFactory extends EFactory {
 	CompositeInstance createCompositeInstance();
 
 	/**
-	 * Returns a new object of class '<em>Valued Attribute</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Valued Attribute</em>'.
-	 * @generated
-	 */
-	ValuedAttribute createValuedAttribute();
-
-	/**
 	 * Returns a new object of class '<em>Transmission Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,6 +60,15 @@ public interface InstanceFactory extends EFactory {
 	 * @generated
 	 */
 	DelegationBinding createDelegationBinding();
+
+	/**
+	 * Returns a new object of class '<em>Valued Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Valued Attribute</em>'.
+	 * @generated
+	 */
+	ValuedAttribute createValuedAttribute();
 
 	/**
 	 * Returns a new object of class '<em>Dictionary Valued Attribute</em>'.

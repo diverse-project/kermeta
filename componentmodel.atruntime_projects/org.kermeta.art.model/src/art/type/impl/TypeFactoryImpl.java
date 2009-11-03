@@ -7,24 +7,15 @@
 package art.type.impl;
 
 import art.type.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import art.type.Attribute;
-import art.type.CompositeType;
-import art.type.ControlService;
-import art.type.FunctionalService;
-import art.type.Operation;
-import art.type.Parameter;
-import art.type.Port;
-import art.type.PortRole;
-import art.type.PrimitiveType;
-import art.type.TypeFactory;
-import art.type.TypePackage;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -190,9 +181,9 @@ public class TypeFactoryImpl extends EFactoryImpl implements TypeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Dictionary createDictionary() {
-		DictionaryImpl dictionary = new DictionaryImpl();
-		return dictionary;
+	public BasicAttribute createBasicAttribute() {
+		BasicAttributeImpl basicAttribute = new BasicAttributeImpl();
+		return basicAttribute;
 	}
 
 	/**
@@ -200,9 +191,9 @@ public class TypeFactoryImpl extends EFactoryImpl implements TypeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BasicAttribute createBasicAttribute() {
-		BasicAttributeImpl basicAttribute = new BasicAttributeImpl();
-		return basicAttribute;
+	public Dictionary createDictionary() {
+		DictionaryImpl dictionary = new DictionaryImpl();
+		return dictionary;
 	}
 
 	/**

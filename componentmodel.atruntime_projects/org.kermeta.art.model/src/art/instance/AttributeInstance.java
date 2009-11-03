@@ -6,8 +6,6 @@
  */
 package art.instance;
 
-import art.type.Attribute;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -21,5 +19,4 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface AttributeInstance extends EObject {
-
 } // AttributeInstance

@@ -6,20 +6,19 @@
  */
 package art.util;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-import org.eclipse.emf.ecore.EObject;
-
-import art.AddElement;
 import art.ArtPackage;
 import art.CardinalityElement;
 import art.DataType;
 import art.ModelElement;
 import art.NamedElement;
-import art.RemoveElement;
 import art.TypedElement;
-import art.UpdateElement;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

@@ -8,30 +8,35 @@ package art.instance.impl;
 
 import art.group.GroupPackage;
 import art.group.InstanceGroup;
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 import art.impl.ModelElementImpl;
+
 import art.implem.ComponentImplementation;
+
 import art.instance.AttributeInstance;
 import art.instance.ComponentInstance;
 import art.instance.CompositeInstance;
 import art.instance.InstancePackage;
 import art.instance.TransmissionBinding;
-import art.instance.ValuedAttribute;
+
 import art.type.ComponentType;
-import art.type.Port;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,6 +67,7 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * @ordered
 	 */
 	protected ComponentType type;
+
 	/**
 	 * The default value of the '{@link #getState() <em>State</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -71,6 +77,7 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * @ordered
 	 */
 	protected static final String STATE_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getState() <em>State</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -80,6 +87,7 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * @ordered
 	 */
 	protected String state = STATE_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -89,6 +97,7 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * @ordered
 	 */
 	protected EList<AttributeInstance> attribute;
+
 	/**
 	 * The cached value of the '{@link #getBinding() <em>Binding</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -98,6 +107,7 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * @ordered
 	 */
 	protected EList<TransmissionBinding> binding;
+
 	/**
 	 * The cached value of the '{@link #getImplem() <em>Implem</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -242,7 +252,6 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<AttributeInstance> getAttribute() {
 		if (attribute == null) {
 			attribute = new EObjectContainmentEList<AttributeInstance>(AttributeInstance.class, this, InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE);
@@ -255,7 +264,6 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<TransmissionBinding> getBinding() {
 		if (binding == null) {
 			binding = new EObjectContainmentEList<TransmissionBinding>(TransmissionBinding.class, this, InstancePackage.COMPONENT_INSTANCE__BINDING);
@@ -510,28 +518,6 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 		result.append(state);
 		result.append(')');
 		return result.toString();
-	}
-
-	public boolean o(){
-		EList<Port> selectedPorts = new BasicEList<Port>();
-		Boolean isOK = true;
-		for(Port p : this.getType().getPort()){
-			if (p.getIsOptional() && p.getRole().equals("client")){
-				selectedPorts.add(p);
-			}
-		}
-		for(Port p : selectedPorts){
-			Boolean existBinding = false;
-			for(TransmissionBinding b : getBinding()){
-				existBinding = (b.getClient() == p);
-				if (existBinding)
-					break;
-			}
-			isOK &= existBinding;
-			if (! isOK)
-				break;
-		}
-		return isOK;
 	}
 
 } //ComponentInstanceImpl

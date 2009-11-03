@@ -6,13 +6,13 @@
  */
 package art.type;
 
+import art.ArtPackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
-import art.ArtPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -568,16 +568,6 @@ public interface TypePackage extends EPackage {
 	int ATTRIBUTE_FEATURE_COUNT = ArtPackage.TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link art.type.impl.DictionaryImpl <em>Dictionary</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see art.type.impl.DictionaryImpl
-	 * @see art.type.impl.TypePackageImpl#getDictionary()
-	 * @generated
-	 */
-	int DICTIONARY = 11;
-
-	/**
 	 * The meta object id for the '{@link art.type.impl.BasicAttributeImpl <em>Basic Attribute</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -622,6 +612,16 @@ public interface TypePackage extends EPackage {
 	 * @ordered
 	 */
 	int BASIC_ATTRIBUTE_FEATURE_COUNT = ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link art.type.impl.DictionaryImpl <em>Dictionary</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.type.impl.DictionaryImpl
+	 * @see art.type.impl.TypePackageImpl#getDictionary()
+	 * @generated
+	 */
+	int DICTIONARY = 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -938,6 +938,27 @@ public interface TypePackage extends EPackage {
 	EClass getAttribute();
 
 	/**
+	 * Returns the meta object for class '{@link art.type.BasicAttribute <em>Basic Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Basic Attribute</em>'.
+	 * @see art.type.BasicAttribute
+	 * @generated
+	 */
+	EClass getBasicAttribute();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.type.BasicAttribute#getDefaultValue <em>Default Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Value</em>'.
+	 * @see art.type.BasicAttribute#getDefaultValue()
+	 * @see #getBasicAttribute()
+	 * @generated
+	 */
+	EAttribute getBasicAttribute_DefaultValue();
+
+	/**
 	 * Returns the meta object for class '{@link art.type.Dictionary <em>Dictionary</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -968,27 +989,6 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDictionary_Keys();
-
-	/**
-	 * Returns the meta object for class '{@link art.type.BasicAttribute <em>Basic Attribute</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Basic Attribute</em>'.
-	 * @see art.type.BasicAttribute
-	 * @generated
-	 */
-	EClass getBasicAttribute();
-
-	/**
-	 * Returns the meta object for the attribute '{@link art.type.BasicAttribute#getDefaultValue <em>Default Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Value</em>'.
-	 * @see art.type.BasicAttribute#getDefaultValue()
-	 * @see #getBasicAttribute()
-	 * @generated
-	 */
-	EAttribute getBasicAttribute_DefaultValue();
 
 	/**
 	 * Returns the meta object for class '{@link art.type.DictionaryDefaultValue <em>Dictionary Default Value</em>}'.
@@ -1243,6 +1243,24 @@ public interface TypePackage extends EPackage {
 		EClass ATTRIBUTE = eINSTANCE.getAttribute();
 
 		/**
+		 * The meta object literal for the '{@link art.type.impl.BasicAttributeImpl <em>Basic Attribute</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.type.impl.BasicAttributeImpl
+		 * @see art.type.impl.TypePackageImpl#getBasicAttribute()
+		 * @generated
+		 */
+		EClass BASIC_ATTRIBUTE = eINSTANCE.getBasicAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BASIC_ATTRIBUTE__DEFAULT_VALUE = eINSTANCE.getBasicAttribute_DefaultValue();
+
+		/**
 		 * The meta object literal for the '{@link art.type.impl.DictionaryImpl <em>Dictionary</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1267,24 +1285,6 @@ public interface TypePackage extends EPackage {
 		 * @generated
 		 */
 		EReference DICTIONARY__KEYS = eINSTANCE.getDictionary_Keys();
-
-		/**
-		 * The meta object literal for the '{@link art.type.impl.BasicAttributeImpl <em>Basic Attribute</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see art.type.impl.BasicAttributeImpl
-		 * @see art.type.impl.TypePackageImpl#getBasicAttribute()
-		 * @generated
-		 */
-		EClass BASIC_ATTRIBUTE = eINSTANCE.getBasicAttribute();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BASIC_ATTRIBUTE__DEFAULT_VALUE = eINSTANCE.getBasicAttribute_DefaultValue();
 
 		/**
 		 * The meta object literal for the '{@link art.type.impl.DictionaryDefaultValueImpl <em>Dictionary Default Value</em>}' class.

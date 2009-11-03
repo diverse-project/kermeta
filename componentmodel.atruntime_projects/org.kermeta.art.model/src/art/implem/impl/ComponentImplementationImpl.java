@@ -6,11 +6,12 @@
  */
 package art.implem.impl;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import art.implem.ComponentImplementation;
 import art.implem.ImplemPackage;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->

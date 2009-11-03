@@ -6,31 +6,37 @@
  */
 package art.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import art.AddElement;
 import art.ArtFactory;
 import art.ArtPackage;
 import art.CardinalityElement;
 import art.DataType;
 import art.ModelElement;
 import art.NamedElement;
-import art.RemoveElement;
 import art.TypedElement;
+
 import art.group.GroupPackage;
+
 import art.group.impl.GroupPackageImpl;
-import art.UpdateElement;
+
 import art.implem.ImplemPackage;
+
 import art.implem.impl.ImplemPackageImpl;
+
 import art.instance.InstancePackage;
+
 import art.instance.impl.InstancePackageImpl;
+
 import art.type.TypePackage;
+
 import art.type.impl.TypePackageImpl;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

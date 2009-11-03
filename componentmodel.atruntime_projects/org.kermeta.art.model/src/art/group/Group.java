@@ -8,8 +8,6 @@ package art.group;
 
 import art.NamedElement;
 
-import org.eclipse.emf.common.util.EList;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Group</b></em>'.
@@ -21,5 +19,4 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Group extends NamedElement {
-
 } // Group

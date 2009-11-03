@@ -6,20 +6,23 @@
  */
 package art.instance.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import art.instance.ComponentInstance;
 import art.instance.CompositeInstance;
 import art.instance.DelegationBinding;
 import art.instance.InstancePackage;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,6 +48,7 @@ public class CompositeInstanceImpl extends ComponentInstanceImpl implements Comp
 	 * @ordered
 	 */
 	protected EList<ComponentInstance> subComponent;
+
 	/**
 	 * The cached value of the '{@link #getDelegation() <em>Delegation</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -79,7 +83,6 @@ public class CompositeInstanceImpl extends ComponentInstanceImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<ComponentInstance> getSubComponent() {
 		if (subComponent == null) {
 			subComponent = new EObjectContainmentWithInverseEList<ComponentInstance>(ComponentInstance.class, this, InstancePackage.COMPOSITE_INSTANCE__SUB_COMPONENT, InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT);
@@ -92,7 +95,6 @@ public class CompositeInstanceImpl extends ComponentInstanceImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<DelegationBinding> getDelegation() {
 		if (delegation == null) {
 			delegation = new EObjectContainmentEList<DelegationBinding>(DelegationBinding.class, this, InstancePackage.COMPOSITE_INSTANCE__DELEGATION);

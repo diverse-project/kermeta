@@ -6,12 +6,14 @@
  */
 package art.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import art.ArtPackage;
 import art.CardinalityElement;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,6 +39,7 @@ public abstract class CardinalityElementImpl extends ModelElementImpl implements
 	 * @ordered
 	 */
 	protected static final Integer LOWER_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getLower() <em>Lower</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -46,6 +49,7 @@ public abstract class CardinalityElementImpl extends ModelElementImpl implements
 	 * @ordered
 	 */
 	protected Integer lower = LOWER_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getUpper() <em>Upper</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,6 +59,7 @@ public abstract class CardinalityElementImpl extends ModelElementImpl implements
 	 * @ordered
 	 */
 	protected static final Integer UPPER_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getUpper() <em>Upper</em>}' attribute.
 	 * <!-- begin-user-doc -->

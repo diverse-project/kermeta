@@ -8,25 +8,31 @@ package art.type.impl;
 
 import art.group.GroupPackage;
 import art.group.TypeGroup;
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 import art.impl.ModelElementImpl;
+
 import art.implem.TypeImplementation;
-import art.implem.ComponentImplementation;
+
 import art.type.Attribute;
 import art.type.ComponentType;
 import art.type.Port;
 import art.type.TypePackage;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,6 +60,7 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 	 * @ordered
 	 */
 	protected EList<Port> port;
+
 	/**
 	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -108,7 +115,6 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<Port> getPort() {
 		if (port == null) {
 			port = new EObjectContainmentEList<Port>(Port.class, this, TypePackage.COMPONENT_TYPE__PORT);
@@ -121,7 +127,6 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<Attribute> getAttribute() {
 		if (attribute == null) {
 			attribute = new EObjectContainmentEList<Attribute>(Attribute.class, this, TypePackage.COMPONENT_TYPE__ATTRIBUTE);

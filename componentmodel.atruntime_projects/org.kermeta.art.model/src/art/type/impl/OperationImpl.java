@@ -6,19 +6,23 @@
  */
 package art.type.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import art.impl.ModelElementImpl;
+
 import art.type.Operation;
 import art.type.Parameter;
 import art.type.TypePackage;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,6 +48,7 @@ public class OperationImpl extends ModelElementImpl implements Operation {
 	 * @ordered
 	 */
 	protected EList<Parameter> input;
+
 	/**
 	 * The cached value of the '{@link #getOutput() <em>Output</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -78,7 +83,6 @@ public class OperationImpl extends ModelElementImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<Parameter> getInput() {
 		if (input == null) {
 			input = new EObjectContainmentEList<Parameter>(Parameter.class, this, TypePackage.OPERATION__INPUT);
@@ -91,7 +95,6 @@ public class OperationImpl extends ModelElementImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<Parameter> getOutput() {
 		if (output == null) {
 			output = new EObjectContainmentEList<Parameter>(Parameter.class, this, TypePackage.OPERATION__OUTPUT);

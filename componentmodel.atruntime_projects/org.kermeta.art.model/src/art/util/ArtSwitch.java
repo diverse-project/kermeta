@@ -6,20 +6,17 @@
  */
 package art.util;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-
-import art.AddElement;
 import art.ArtPackage;
 import art.CardinalityElement;
 import art.DataType;
 import art.ModelElement;
 import art.NamedElement;
-import art.RemoveElement;
 import art.TypedElement;
-import art.UpdateElement;
+
+import java.util.List;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

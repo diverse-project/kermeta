@@ -10,7 +10,6 @@ import art.instance.DefaultEntry;
 import art.instance.InstancePackage;
 
 import art.type.DictionaryDefaultValue;
-import art.type.DefaultValue;
 
 import org.eclipse.emf.common.notify.Notification;
 

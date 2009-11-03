@@ -333,7 +333,7 @@ public class ImplemModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-	@Override
+		@Override
 		protected boolean validatePage() {
 			if (super.validatePage()) {
 				String extension = new Path(getFileName()).getFileExtension();
@@ -401,7 +401,8 @@ public class ImplemModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public void createControl(Composite parent) {
-			Composite composite = new Composite(parent, SWT.NONE); {
+			Composite composite = new Composite(parent, SWT.NONE);
+			{
 				GridLayout layout = new GridLayout();
 				layout.numColumns = 1;
 				layout.verticalSpacing = 12;

@@ -6,16 +6,12 @@
  */
 package art.type.impl;
 
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import art.impl.TypedElementImpl;
+
 import art.type.Attribute;
-import art.type.DefaultValue;
 import art.type.TypePackage;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

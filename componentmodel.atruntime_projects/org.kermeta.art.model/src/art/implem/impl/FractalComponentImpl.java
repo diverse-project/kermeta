@@ -6,12 +6,14 @@
  */
 package art.implem.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import art.implem.FractalComponent;
 import art.implem.ImplemPackage;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,6 +39,7 @@ public class FractalComponentImpl extends ComponentImplementationImpl implements
 	 * @ordered
 	 */
 	protected static final String CONTROLLER_DESC_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getControllerDesc() <em>Controller Desc</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -46,6 +49,7 @@ public class FractalComponentImpl extends ComponentImplementationImpl implements
 	 * @ordered
 	 */
 	protected String controllerDesc = CONTROLLER_DESC_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getContentDesc() <em>Content Desc</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,6 +59,7 @@ public class FractalComponentImpl extends ComponentImplementationImpl implements
 	 * @ordered
 	 */
 	protected static final String CONTENT_DESC_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getContentDesc() <em>Content Desc</em>}' attribute.
 	 * <!-- begin-user-doc -->

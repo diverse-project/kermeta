@@ -6,17 +6,21 @@
  */
 package art.type.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import art.impl.CardinalityElementImpl;
+
 import art.implem.PortImplementation;
+
 import art.type.Port;
 import art.type.Service;
 import art.type.TypePackage;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,6 +48,7 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	 * @ordered
 	 */
 	protected static final Boolean IS_OPTIONAL_EDEFAULT = Boolean.TRUE;
+
 	/**
 	 * The cached value of the '{@link #getIsOptional() <em>Is Optional</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -53,6 +58,7 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	 * @ordered
 	 */
 	protected Boolean isOptional = IS_OPTIONAL_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getService() <em>Service</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -62,6 +68,7 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	 * @ordered
 	 */
 	protected Service service;
+
 	/**
 	 * The default value of the '{@link #getRole() <em>Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -71,6 +78,7 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	 * @ordered
 	 */
 	protected static final String ROLE_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getRole() <em>Role</em>}' attribute.
 	 * <!-- begin-user-doc -->

@@ -6,10 +6,10 @@
  */
 package art.instance.impl;
 
-import org.eclipse.emf.ecore.EClass;
-
 import art.instance.InstancePackage;
 import art.instance.PrimitiveInstance;
+
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

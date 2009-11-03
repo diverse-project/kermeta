@@ -6,15 +6,14 @@
  */
 package art.implem.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import art.ArtPackage;
+
 import art.group.GroupPackage;
+
 import art.group.impl.GroupPackageImpl;
+
 import art.impl.ArtPackageImpl;
+
 import art.implem.ComponentImplementation;
 import art.implem.FractalComponent;
 import art.implem.ImplemFactory;
@@ -24,10 +23,20 @@ import art.implem.OSGiPort;
 import art.implem.OSGiType;
 import art.implem.PortImplementation;
 import art.implem.TypeImplementation;
+
 import art.instance.InstancePackage;
+
 import art.instance.impl.InstancePackageImpl;
+
 import art.type.TypePackage;
+
 import art.type.impl.TypePackageImpl;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

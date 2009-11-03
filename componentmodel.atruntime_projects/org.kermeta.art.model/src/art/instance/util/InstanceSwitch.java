@@ -6,25 +6,15 @@
  */
 package art.instance.util;
 
+import art.ModelElement;
+import art.NamedElement;
+
+import art.instance.*;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import art.AddElement;
-import art.ModelElement;
-import art.NamedElement;
-import art.RemoveElement;
-import art.UpdateElement;
-import art.instance.*;
-import art.instance.Binding;
-import art.instance.ComponentInstance;
-import art.instance.CompositeInstance;
-import art.instance.DelegationBinding;
-import art.instance.InstancePackage;
-import art.instance.PrimitiveInstance;
-import art.instance.TransmissionBinding;
-import art.instance.ValuedAttribute;
 
 /**
  * <!-- begin-user-doc -->
@@ -236,36 +226,6 @@ public class InstanceSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Attribute Instance</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Attribute Instance</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAttributeInstance(AttributeInstance object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Valued Attribute</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Valued Attribute</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseValuedAttribute(ValuedAttribute object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -307,6 +267,36 @@ public class InstanceSwitch<T> {
 	 * @generated
 	 */
 	public T caseDelegationBinding(DelegationBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAttributeInstance(AttributeInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Valued Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Valued Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseValuedAttribute(ValuedAttribute object) {
 		return null;
 	}
 

@@ -6,14 +6,13 @@
  */
 package art.type;
 
-import org.eclipse.emf.common.util.EList;
-
-import art.AddElement;
 import art.ModelElement;
+
 import art.group.TypeGroup;
+
 import art.implem.TypeImplementation;
-import art.implem.ComponentImplementation;
-import art.RemoveElement;
+
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->

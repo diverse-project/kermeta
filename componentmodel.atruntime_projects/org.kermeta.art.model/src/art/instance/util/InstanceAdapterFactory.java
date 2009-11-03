@@ -6,25 +6,17 @@
  */
 package art.instance.util;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-import org.eclipse.emf.ecore.EObject;
-
-import art.AddElement;
 import art.ModelElement;
 import art.NamedElement;
-import art.RemoveElement;
-import art.UpdateElement;
+
 import art.instance.*;
-import art.instance.Binding;
-import art.instance.ComponentInstance;
-import art.instance.CompositeInstance;
-import art.instance.DelegationBinding;
-import art.instance.InstancePackage;
-import art.instance.PrimitiveInstance;
-import art.instance.TransmissionBinding;
-import art.instance.ValuedAttribute;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -201,34 +193,6 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link art.instance.AttributeInstance <em>Attribute Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see art.instance.AttributeInstance
-	 * @generated
-	 */
-	public Adapter createAttributeInstanceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link art.instance.ValuedAttribute <em>Valued Attribute</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see art.instance.ValuedAttribute
-	 * @generated
-	 */
-	public Adapter createValuedAttributeAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link art.instance.Binding <em>Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -267,6 +231,34 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDelegationBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.instance.AttributeInstance <em>Attribute Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.instance.AttributeInstance
+	 * @generated
+	 */
+	public Adapter createAttributeInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.instance.ValuedAttribute <em>Valued Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.instance.ValuedAttribute
+	 * @generated
+	 */
+	public Adapter createValuedAttributeAdapter() {
 		return null;
 	}
 

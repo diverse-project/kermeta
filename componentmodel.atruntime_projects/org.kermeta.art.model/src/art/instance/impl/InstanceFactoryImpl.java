@@ -7,21 +7,15 @@
 package art.instance.impl;
 
 import art.instance.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import art.instance.CompositeInstance;
-import art.instance.DelegationBinding;
-import art.instance.InstanceFactory;
-import art.instance.InstancePackage;
-import art.instance.InstanceState;
-import art.instance.PrimitiveInstance;
-import art.instance.TransmissionBinding;
-import art.instance.ValuedAttribute;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -135,16 +129,6 @@ public class InstanceFactoryImpl extends EFactoryImpl implements InstanceFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ValuedAttribute createValuedAttribute() {
-		ValuedAttributeImpl valuedAttribute = new ValuedAttributeImpl();
-		return valuedAttribute;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TransmissionBinding createTransmissionBinding() {
 		TransmissionBindingImpl transmissionBinding = new TransmissionBindingImpl();
 		return transmissionBinding;
@@ -158,6 +142,16 @@ public class InstanceFactoryImpl extends EFactoryImpl implements InstanceFactory
 	public DelegationBinding createDelegationBinding() {
 		DelegationBindingImpl delegationBinding = new DelegationBindingImpl();
 		return delegationBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ValuedAttribute createValuedAttribute() {
+		ValuedAttributeImpl valuedAttribute = new ValuedAttributeImpl();
+		return valuedAttribute;
 	}
 
 	/**

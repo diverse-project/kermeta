@@ -320,7 +320,6 @@ public interface ArtPackage extends EPackage {
 	 */
 	int BOOLEAN = 7;
 
-
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
 	 * <!-- begin-user-doc -->

@@ -7,7 +7,6 @@
 package art.instance;
 
 import art.type.DictionaryDefaultValue;
-import art.type.DefaultValue;
 
 /**
  * <!-- begin-user-doc -->

@@ -8,6 +8,7 @@ package art.type.provider;
 
 
 import art.provider.MetamodelruntimeEditPlugin;
+
 import art.type.DictionaryDefaultValue;
 import art.type.TypePackage;
 
@@ -18,6 +19,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;

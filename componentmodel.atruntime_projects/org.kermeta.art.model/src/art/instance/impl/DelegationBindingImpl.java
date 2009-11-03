@@ -6,14 +6,17 @@
  */
 package art.instance.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import art.instance.DelegationBinding;
 import art.instance.InstancePackage;
+
 import art.type.Port;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,6 +42,7 @@ public class DelegationBindingImpl extends BindingImpl implements DelegationBind
 	 * @ordered
 	 */
 	protected Port source;
+
 	/**
 	 * The cached value of the '{@link #getExported() <em>Exported</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -212,20 +216,6 @@ public class DelegationBindingImpl extends BindingImpl implements DelegationBind
 				return exported != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * @generated NOT
-	 */
-	public String getClientName() {
-		return getExported().getName();
-	}
-
-	/**
-	 * @generated NOT
-	 */
-	public String getServerName() {
-		return getSource().getName();
 	}
 
 } //DelegationBindingImpl

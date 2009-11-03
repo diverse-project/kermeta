@@ -8,7 +8,6 @@ package art.type;
 
 import org.eclipse.emf.ecore.EObject;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Dictionary Default Value</b></em>'.

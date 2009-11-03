@@ -6,10 +6,10 @@
  */
 package art.impl;
 
-import org.eclipse.emf.ecore.EClass;
-
 import art.ArtPackage;
 import art.DataType;
+
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

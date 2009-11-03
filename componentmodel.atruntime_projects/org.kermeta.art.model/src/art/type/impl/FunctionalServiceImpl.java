@@ -6,10 +6,10 @@
  */
 package art.type.impl;
 
-import org.eclipse.emf.ecore.EClass;
-
 import art.type.FunctionalService;
 import art.type.TypePackage;
+
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

@@ -7,14 +7,11 @@
 package art.implem.util;
 
 import art.implem.*;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import art.implem.ComponentImplementation;
-import art.implem.FractalComponent;
-import art.implem.ImplemPackage;
 
 /**
  * <!-- begin-user-doc -->

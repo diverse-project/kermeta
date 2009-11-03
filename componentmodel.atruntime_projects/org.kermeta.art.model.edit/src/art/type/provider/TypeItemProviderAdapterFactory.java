@@ -6,12 +6,15 @@
  */
 package art.type.provider;
 
+import art.type.util.TypeAdapterFactory;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -23,8 +26,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import art.type.util.TypeAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -236,29 +237,6 @@ public class TypeItemProviderAdapterFactory extends TypeAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link art.type.Dictionary} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DictionaryItemProvider dictionaryItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link art.type.Dictionary}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDictionaryAdapter() {
-		if (dictionaryItemProvider == null) {
-			dictionaryItemProvider = new DictionaryItemProvider(this);
-		}
-
-		return dictionaryItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link art.type.BasicAttribute} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -279,6 +257,29 @@ public class TypeItemProviderAdapterFactory extends TypeAdapterFactory implement
 		}
 
 		return basicAttributeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link art.type.Dictionary} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DictionaryItemProvider dictionaryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link art.type.Dictionary}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDictionaryAdapter() {
+		if (dictionaryItemProvider == null) {
+			dictionaryItemProvider = new DictionaryItemProvider(this);
+		}
+
+		return dictionaryItemProvider;
 	}
 
 	/**

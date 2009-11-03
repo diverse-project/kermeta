@@ -6,19 +6,18 @@
  */
 package art.instance.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import art.ArtPackage;
+
 import art.group.GroupPackage;
+
 import art.group.impl.GroupPackageImpl;
+
 import art.impl.ArtPackageImpl;
+
 import art.implem.ImplemPackage;
+
 import art.implem.impl.ImplemPackageImpl;
+
 import art.instance.AttributeInstance;
 import art.instance.Binding;
 import art.instance.ComponentInstance;
@@ -34,8 +33,18 @@ import art.instance.OtherEntry;
 import art.instance.PrimitiveInstance;
 import art.instance.TransmissionBinding;
 import art.instance.ValuedAttribute;
+
 import art.type.TypePackage;
+
 import art.type.impl.TypePackageImpl;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,20 +79,6 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass attributeInstanceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass valuedAttributeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass bindingEClass = null;
 
 	/**
@@ -99,6 +94,20 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 * @generated
 	 */
 	private EClass delegationBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass attributeInstanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass valuedAttributeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -323,42 +332,6 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAttributeInstance() {
-		return attributeInstanceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getValuedAttribute() {
-		return valuedAttributeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getValuedAttribute_Value() {
-		return (EAttribute)valuedAttributeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getValuedAttribute_Attribute() {
-		return (EReference)valuedAttributeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getBinding() {
 		return bindingEClass;
 	}
@@ -433,6 +406,42 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 */
 	public EReference getDelegationBinding_Exported() {
 		return (EReference)delegationBindingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAttributeInstance() {
+		return attributeInstanceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getValuedAttribute() {
+		return valuedAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getValuedAttribute_Value() {
+		return (EAttribute)valuedAttributeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getValuedAttribute_Attribute() {
+		return (EReference)valuedAttributeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**

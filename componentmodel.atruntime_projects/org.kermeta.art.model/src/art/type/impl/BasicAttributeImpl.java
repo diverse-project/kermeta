@@ -7,15 +7,11 @@
 package art.type.impl;
 
 import art.type.BasicAttribute;
-import art.type.BasicDefaultValue;
-import art.type.DefaultValue;
 import art.type.TypePackage;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -42,6 +38,7 @@ public class BasicAttributeImpl extends AttributeImpl implements BasicAttribute 
 	 * @ordered
 	 */
 	protected static final String DEFAULT_VALUE_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getDefaultValue() <em>Default Value</em>}' attribute.
 	 * <!-- begin-user-doc -->

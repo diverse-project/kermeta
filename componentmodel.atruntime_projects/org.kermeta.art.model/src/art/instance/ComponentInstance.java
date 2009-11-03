@@ -6,15 +6,15 @@
  */
 package art.instance;
 
-import org.eclipse.emf.common.util.EList;
-
-import art.AddElement;
 import art.ModelElement;
+
 import art.group.InstanceGroup;
-import art.RemoveElement;
-import art.UpdateElement;
+
 import art.implem.ComponentImplementation;
+
 import art.type.ComponentType;
+
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->

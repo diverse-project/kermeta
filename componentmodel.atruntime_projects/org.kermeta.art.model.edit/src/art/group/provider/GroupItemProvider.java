@@ -8,8 +8,6 @@ package art.group.provider;
 
 
 import art.group.Group;
-import art.group.GroupFactory;
-import art.group.GroupPackage;
 
 import art.provider.MetamodelruntimeEditPlugin;
 import art.provider.NamedElementItemProvider;
@@ -22,15 +20,12 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link art.group.Group} object.
@@ -69,17 +64,6 @@ public class GroupItemProvider
 
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This returns Group.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Group"));
 	}
 
 	/**

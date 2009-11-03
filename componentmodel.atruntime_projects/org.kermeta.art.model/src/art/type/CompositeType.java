@@ -6,9 +6,6 @@
  */
 package art.type;
 
-import org.eclipse.emf.common.util.EList;
-
-import art.instance.DelegationBinding;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,5 +18,4 @@ import art.instance.DelegationBinding;
  * @generated
  */
 public interface CompositeType extends ComponentType {
-
 } // CompositeType

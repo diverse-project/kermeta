@@ -7,6 +7,7 @@
 package art.instance;
 
 import art.type.Dictionary;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
