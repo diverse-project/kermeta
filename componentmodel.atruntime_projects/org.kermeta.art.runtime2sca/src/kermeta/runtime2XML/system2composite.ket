@@ -1,22 +1,25 @@
 <%@ket
 package="sca"
-require="platform:/resource/org.kermeta.art.Runtime2SCA/src/kermeta/runtime2XML/metamodel@runtime.kmt platform:/resource/org.kermeta.art.Runtime2SCA/src/kermeta/runtime2XML/stringHelper.kmt"
-using="art art::instance art::type"
+require="./metamodel@runtime.kmt"
+using="art art::instance art::type art::implem"
 class="SCA"
 parameters="system:System"
 %>
 
-<sca:composite xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" name="<%=system.root.name%>" targetNamespace="http://sample">
+<sca:composite xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:sample="http://sample" xmlns="http://www.osoa.org/xmlns/sca/1.0" name="<%=system.root.name%>" targetNamespace="http://sample">
 <%system.root.subComponent.each{ sub |%>
-	<sca:component constrainingType="eu.diva.<%=sub.name.cleanName()%>" name="<%=sub.name.cleanName()%>">
-	<sca:implementation.java class="eu.diva.<%=sub.name.cleanName()%>.<%=sub.name.cleanName()%>Impl"/>
+	<sca:component name="<%=sub.name%>">
+		<sca:implementation.java class="<%=sub.implem.asType(OSGiComponent).implementingClass%>"/>
+		<sca:property name="Type"><%=sub.type.name%></sca:property>
 	<%sub.type.port.select{p | p.role == "server"}.each{p |%>
 		<sca:service name="<%=p.name%>">
 			<sca:interface.java interface="<%=p.service.name%>"/>
 		</sca:service>
 	<%}%>
 	<%sub.type.port.select{p | p.role == "client"}.each{p |%>
-		 <sca:reference name="<%=p.name%>"/>
+		 <sca:reference name="<%=p.name%>">
+		 	<sca:interface.java interface="<%=p.service.name%>"/>
+		 </sca:reference>
 	<%}%>
 	<%sub.~attribute.each{a | %>
 		<sca:property name="<%=a.~value.split(":").elementAt(0).substring(3,a.~value.split(": ").elementAt(0).size)%>"><%=a.~value.split(": ").elementAt(1)%></sca:property>

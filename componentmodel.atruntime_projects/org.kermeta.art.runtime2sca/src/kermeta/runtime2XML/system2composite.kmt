@@ -1,28 +1,26 @@
 package sca;
 require kermeta
-require "platform:/resource/org.kermeta.art.Runtime2SCA/src/kermeta/runtime2XML/metamodel@runtime.kmt"
-require "platform:/resource/org.kermeta.art.Runtime2SCA/src/kermeta/runtime2XML/stringHelper.kmt"
+require "./metamodel@runtime.kmt"
 using kermeta::standard
 using kermeta::utils
 using art
 using art::instance
 using art::type
+using art::implem
 class SCA{
 operation generate(system:System):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("\n<sca:composite xmlns:sca=\"http://www.osoa.org/xmlns/sca/1.0\" name=\"")
+_res.append("\n<sca:composite xmlns:sca=\"http://www.osoa.org/xmlns/sca/1.0\" xmlns:sample=\"http://sample\" xmlns=\"http://www.osoa.org/xmlns/sca/1.0\" name=\"")
 _res.append(system.root.name)
 _res.append("\" targetNamespace=\"http://sample\">\n")
 system.root.subComponent.each{ sub |
-_res.append("\t<sca:component constrainingType=\"eu.diva.")
-_res.append(sub.name.cleanName())
-_res.append("\" name=\"")
-_res.append(sub.name.cleanName())
-_res.append("\">\n\t<sca:implementation.java class=\"eu.diva.")
-_res.append(sub.name.cleanName())
-_res.append(".")
-_res.append(sub.name.cleanName())
-_res.append("Impl\"/>\n")
+_res.append("\t<sca:component name=\"")
+_res.append(sub.name)
+_res.append("\">\n\t\t<sca:implementation.java class=\"")
+_res.append(sub.implem.asType(OSGiComponent).implementingClass)
+_res.append("\"/>\n\t\t<sca:property name=\"Type\">")
+_res.append(sub.type.name)
+_res.append("</sca:property>\n")
 sub.type.port.select{p | p.role == "server"}.each{p |
 _res.append("\t\t<sca:service name=\"")
 _res.append(p.name)
@@ -34,16 +32,18 @@ _res.append("")
 sub.type.port.select{p | p.role == "client"}.each{p |
 _res.append("\t\t <sca:reference name=\"")
 _res.append(p.name)
-_res.append("\"/>\n")
+_res.append("\">\n\t\t \t<sca:interface.java interface=\"")
+_res.append(p.service.name)
+_res.append("\"/>\n\t\t </sca:reference>\n")
 }
 _res.append("")
-sub.~attribute.each{a | 
+/*sub.~attribute.each{a | 
 _res.append("\t\t<sca:property name=\"")
 _res.append(a.~value.split(":").elementAt(0).substring(3,a.~value.split(": ").elementAt(0).size))
 _res.append("\">")
 _res.append(a.~value.split(": ").elementAt(1))
 _res.append("</sca:property>\n")
-}
+}*/
 _res.append("\t</sca:component>\n")
 }
 _res.append("")
