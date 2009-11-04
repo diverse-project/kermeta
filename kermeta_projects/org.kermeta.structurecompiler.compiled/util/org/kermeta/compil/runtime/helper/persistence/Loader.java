@@ -28,6 +28,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+
 /**
  * @generated
  */
@@ -117,6 +119,11 @@ public class Loader extends SaverOrLoader {
 	 * @param targetObject
 	 */
 	private void cloneEObject(EObject sourceObject, EObject targetObject) {
+		if(sourceObject instanceof Operation){
+			if(((Operation)sourceObject).getName().equals("createExpression")){
+				System.out.println("cloneEObject of Operation createExpression");
+			}
+		}
 		for ( EStructuralFeature sourceFeature : sourceObject.eClass().getEAllStructuralFeatures() ) {
 			Object value = sourceObject.eGet(sourceFeature);
 			
@@ -178,7 +185,9 @@ public class Loader extends SaverOrLoader {
 				if( !sourceFeature.isDerived() && sourceFeature.isChangeable() ) {
 					EList sourceList = (EList) sourceObject.eGet(sourceFeature);
 					EList targetList = (EList) targetObject.eGet(targetFeature);
+					int index = 0;
 					for ( Object o : sourceList ) {
+						Object valueToAdd = null;
 						if ( o instanceof EObject ) {
 							EObject sourceListObject = (EObject) o;
 							EObject targetListObject = _instanceMapping.get(sourceListObject);
@@ -188,31 +197,42 @@ public class Loader extends SaverOrLoader {
 							}
 							
 							if( targetList!=null ) {
-								if( !targetFeature.isUnique() && targetList instanceof BasicEList ) {
-									((BasicEList) targetList).addUnique(targetListObject);
-								} else {
-									targetList.add(targetListObject);
-								}
+								valueToAdd = targetListObject;								
 							}
 							
 						} else if ( o instanceof Enumerator ) {
-							Object realValue = createInstance( (Enumerator) o, this.getMetamodelURISpecialCompiler());
-							
-							if( !targetFeature.isUnique() && targetList instanceof BasicEList ) {
-								((BasicEList) targetList).addUnique(realValue);
-							} else {
-								targetList.add(realValue);
-							}
+							valueToAdd = createInstance( (Enumerator) o, this.getMetamodelURISpecialCompiler());							
 							
 						} else {
-							
-							if( !targetFeature.isUnique() && targetList instanceof BasicEList ) {
-								((BasicEList) targetList).addUnique(o);
-							} else {
-								targetList.add(o);
-							}
+							valueToAdd = o;							
 							
 						}
+						if(valueToAdd != null){
+							if( !targetFeature.isUnique() && targetList instanceof BasicEList ) {
+								if(targetFeature.isOrdered())
+									((BasicEList) targetList).addUnique(index,valueToAdd);
+								else
+									((BasicEList) targetList).addUnique(valueToAdd);
+							} else {
+								if(targetFeature.isOrdered()){
+									if(!targetList.contains(valueToAdd))
+										if(index<targetList.size())
+											targetList.add(index,valueToAdd);
+										else
+											targetList.add(valueToAdd);
+									else {
+										// maybe we should try to move it if not at the right place ?
+										int currentValueIndex =targetList.indexOf(valueToAdd);
+										if(currentValueIndex != index){
+											targetList.move(index<targetList.size()?index:targetList.size()-1, valueToAdd);
+										}
+									}
+								}
+								else
+									targetList.add(valueToAdd);
+							}
+						}
+						index++;
 					}
 				}
 					
