@@ -40,8 +40,8 @@ aspect class Operation {
 			or (type_label == "kermeta.standard.Void")
 			//or (type_label == "kermeta.standard.VoidType")
 			//or (type_label == "kermeta.language.structure.Void")
-			or (type_label == "kermeta.language.structure.VoidType") then
-			result := true
+			then
+				result := true
 		end
 	end
 
