@@ -110,7 +110,7 @@ public class GenerateHelperAction //implements IActionDelegate
 
         WorkspaceModifyOperation op = new WorkspaceModifyOperation() {
             public void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
-                monitor.beginTask("Compiler Helper Generation process", 11);
+                monitor.beginTask("Compiler Helper Generation process:", 11);
                 try {
                     ConfiguratorObjectManager manager = new ConfiguratorObjectManager();
                     manager.load(file.getFullPath());

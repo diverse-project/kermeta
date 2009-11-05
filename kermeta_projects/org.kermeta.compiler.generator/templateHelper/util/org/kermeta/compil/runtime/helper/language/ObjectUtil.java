@@ -10,10 +10,12 @@ import kermeta.exceptions.ExceptionsFactory;
 import kermeta.exceptions.TypeCastError;
 import kermeta.language.structure.Class;
 import kermeta.language.structure.ClassDefinition;
+import kermeta.language.structure.Constraint;
 import kermeta.language.structure.Object;
 import kermeta.language.structure.ParameterizedType;
 import kermeta.language.structure.Property;
 import kermeta.language.structure.Type;
+import kermeta.language.structure.impl.ObjectImpl;
 import kermeta.standard.Set;
 import kermeta.standard.StandardFactory;
 
@@ -903,6 +905,18 @@ public class ObjectUtil {
 	}
 	
 	/**
+	 * Check one invariant that apply to this object
+	 * @param objectImpl
+	 * @param invariant
+	 */
+	public static void checkInvariant(ObjectImpl objectImpl,
+			Constraint invariant) {
+		throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+				((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+						.newObject("kermeta.exceptions.NotImplementedException")));
+		
+	}
+	/**
 	 * 
 	 * @param self
 	 */
@@ -1135,4 +1149,5 @@ public class ObjectUtil {
 	/**********************************************************/
 	/**********************************************************/
 
+	
 }

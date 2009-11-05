@@ -195,7 +195,11 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		
 			// Please do not remove this comment, old value of the project name variable:
 			// "kermeta"; project.getName();
-			String projectName = EcoreHelper.getQualifiedName(genpack.getEcorePackage()).replace("::", ".");
+			
+			String projectName = genpack.getEcorePackage().getName(); 
+			if(genpack.getBasePackage() !=  null){
+				projectName = genpack.getBasePackage()+"."+projectName;
+			}
 			IPath packagePath = new Path(projectName.replace('.', IPath.SEPARATOR));
 	
 			for (int i = 1; i < packagePath.segmentCount() + 1; i++) {
