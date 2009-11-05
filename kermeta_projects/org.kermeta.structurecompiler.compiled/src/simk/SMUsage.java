@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SMUsage.java,v 1.12 2009-02-23 15:26:55 cfaucher Exp $
+ * $Id$
  */
 package simk;
 
@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * @see simk.SimkPackage#getSMUsage()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public enum SMUsage implements Enumerator {

@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EParameter.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -21,7 +21,7 @@ package ecore;
  * </p>
  *
  * @see ecore.EcorePackage#getEParameter()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EParameter extends ETypedElement {
@@ -38,6 +38,7 @@ public interface EParameter extends ETypedElement {
 	 * @see ecore.EcorePackage#getEParameter_EOperation()
 	 * @see ecore.EOperation#getEParameters
 	 * @model opposite="eParameters" changeable="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */

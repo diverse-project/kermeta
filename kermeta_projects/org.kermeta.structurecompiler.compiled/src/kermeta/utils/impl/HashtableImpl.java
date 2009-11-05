@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: HashtableImpl.java,v 1.12 2009-02-23 15:26:44 cfaucher Exp $
+ * $Id$
  */
 package kermeta.utils.impl;
 
@@ -151,17 +151,17 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		{
 
-			kermeta.standard.Iterator<K> it_ft9 = this.keys().iterator();
-			java.lang.Boolean idLoopCond_47 = false;
-			while (!idLoopCond_47) {
-				idLoopCond_47 = it_ft9.isOff();
-				if (idLoopCond_47) {
+			kermeta.standard.Iterator<K> it_ft215 = this.keys().iterator();
+			java.lang.Boolean idLoopCond_966 = false;
+			while (!idLoopCond_966) {
+				idLoopCond_966 = it_ft215.isOff();
+				if (idLoopCond_966) {
 				} else {
 
 					//BIle:func
-					K k_lbdExp9 = it_ft9.next();
+					K k_lbdExp215 = it_ft215.next();
 
-					result.add(this.getValue(k_lbdExp9));
+					result.add(this.getValue(k_lbdExp215));
 					//EIle:func
 
 				}
@@ -212,10 +212,10 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		{
 
 			kermeta.standard.Iterator<K> it = this.keyIterator();
-			java.lang.Boolean idLoopCond_48 = false;
-			while (!idLoopCond_48) {
-				idLoopCond_48 = it.isOff();
-				if (idLoopCond_48) {
+			java.lang.Boolean idLoopCond_967 = false;
+			while (!idLoopCond_967) {
+				idLoopCond_967 = it.isOff();
+				if (idLoopCond_967) {
 				} else {
 
 					result.add(it.next());

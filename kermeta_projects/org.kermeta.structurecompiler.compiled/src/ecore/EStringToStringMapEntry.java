@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EStringToStringMapEntry.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -22,7 +22,7 @@ package ecore;
  * </p>
  *
  * @see ecore.EcorePackage#getEStringToStringMapEntry()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EStringToStringMapEntry extends
@@ -38,7 +38,7 @@ public interface EStringToStringMapEntry extends
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see ecore.EcorePackage#getEStringToStringMapEntry_Value()
-	 * @model dataType="ecore.EString"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getValue();
@@ -64,7 +64,7 @@ public interface EStringToStringMapEntry extends
 	 * @return the value of the '<em>Key</em>' attribute.
 	 * @see #setKey(String)
 	 * @see ecore.EcorePackage#getEStringToStringMapEntry_Key()
-	 * @model dataType="ecore.EString"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getKey();

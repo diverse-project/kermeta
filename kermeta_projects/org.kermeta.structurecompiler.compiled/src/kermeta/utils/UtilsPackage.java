@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: UtilsPackage.java,v 1.12 2009-02-23 15:26:53 cfaucher Exp $
+ * $Id$
  */
 package kermeta.utils;
 
@@ -31,8 +31,8 @@ import org.eclipse.emf.ecore.EPackage;
  * @see kermeta.utils.UtilsFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/utils'"
- *        annotation="kermeta documentation='/** \r\n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\r\n * metamodel\r\n \052/'"
- *        annotation="kermeta documentation='/** \r\n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\r\n * metamodel\r\n * \r\n * <img src=\"./figures/utils_package.png\"/>\r\n \052/'"
+ *        annotation="kermeta documentation='/** \n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\n * metamodel\n * \n * <img src=\"./figures/utils_package.png\"/>\n \052/'"
+ *        annotation="kermeta documentation='/** \n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\n * metamodel\n \052/'"
  * @generated
  */
 public interface UtilsPackage extends EPackage {

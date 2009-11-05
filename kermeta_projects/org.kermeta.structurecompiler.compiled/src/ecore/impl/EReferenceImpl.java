@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EReferenceImpl.java,v 1.14 2009-02-23 15:26:41 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -261,11 +261,11 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 				return getEOpposite();
 			return basicGetEOpposite();
 		case EcorePackage.EREFERENCE__RESOLVE_PROXIES:
-			return isResolveProxies() ? Boolean.TRUE : Boolean.FALSE;
+			return isResolveProxies();
 		case EcorePackage.EREFERENCE__EKEYS:
 			return getEKeys();
 		case EcorePackage.EREFERENCE__CONTAINMENT:
-			return isContainment() ? Boolean.TRUE : Boolean.FALSE;
+			return isContainment();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -283,14 +283,14 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 			setEOpposite((EReference) newValue);
 			return;
 		case EcorePackage.EREFERENCE__RESOLVE_PROXIES:
-			setResolveProxies(((Boolean) newValue).booleanValue());
+			setResolveProxies((Boolean) newValue);
 			return;
 		case EcorePackage.EREFERENCE__EKEYS:
 			getEKeys().clear();
 			getEKeys().addAll((Collection<? extends EAttribute>) newValue);
 			return;
 		case EcorePackage.EREFERENCE__CONTAINMENT:
-			setContainment(((Boolean) newValue).booleanValue());
+			setContainment((Boolean) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);

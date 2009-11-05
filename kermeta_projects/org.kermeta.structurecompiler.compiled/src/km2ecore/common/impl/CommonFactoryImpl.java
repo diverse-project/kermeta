@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: CommonFactoryImpl.java,v 1.12 2009-02-23 15:26:50 cfaucher Exp $
+ * $Id$
  */
 package km2ecore.common.impl;
 

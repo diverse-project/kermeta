@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EDataTypeImpl.java,v 1.13 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -102,7 +102,7 @@ public class EDataTypeImpl extends EClassifierImpl implements EDataType {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case EcorePackage.EDATA_TYPE__SERIALIZABLE:
-			return isSerializable() ? Boolean.TRUE : Boolean.FALSE;
+			return isSerializable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -116,7 +116,7 @@ public class EDataTypeImpl extends EClassifierImpl implements EDataType {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case EcorePackage.EDATA_TYPE__SERIALIZABLE:
-			setSerializable(((Boolean) newValue).booleanValue());
+			setSerializable((Boolean) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);

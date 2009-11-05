@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EcoreFactory.java,v 1.12 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 

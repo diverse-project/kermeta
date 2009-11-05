@@ -119,11 +119,6 @@ public class Loader extends SaverOrLoader {
 	 * @param targetObject
 	 */
 	private void cloneEObject(EObject sourceObject, EObject targetObject) {
-		if(sourceObject instanceof Operation){
-			if(((Operation)sourceObject).getName().equals("createExpression")){
-				System.out.println("cloneEObject of Operation createExpression");
-			}
-		}
 		for ( EStructuralFeature sourceFeature : sourceObject.eClass().getEAllStructuralFeatures() ) {
 			Object value = sourceObject.eGet(sourceFeature);
 			

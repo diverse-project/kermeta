@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: MessageImpl.java,v 1.12 2009-02-23 15:26:52 cfaucher Exp $
+ * $Id$
  */
 package traceability.impl;
 
@@ -144,7 +144,7 @@ public class MessageImpl extends ObjectImpl implements Message {
 	 * @generated
 	 */
 	public TraceModel getTraceMdl() {
-		if (eContainerFeatureID != TraceabilityPackage.MESSAGE__TRACE_MDL)
+		if (eContainerFeatureID() != TraceabilityPackage.MESSAGE__TRACE_MDL)
 			return null;
 		return (TraceModel) eContainer();
 	}
@@ -155,7 +155,7 @@ public class MessageImpl extends ObjectImpl implements Message {
 	 * @generated
 	 */
 	public TraceModel basicGetTraceMdl() {
-		if (eContainerFeatureID != TraceabilityPackage.MESSAGE__TRACE_MDL)
+		if (eContainerFeatureID() != TraceabilityPackage.MESSAGE__TRACE_MDL)
 			return null;
 		return (TraceModel) eInternalContainer();
 	}
@@ -179,7 +179,7 @@ public class MessageImpl extends ObjectImpl implements Message {
 	 */
 	public void setTraceMdl(TraceModel newTraceMdl) {
 		if (newTraceMdl != eInternalContainer()
-				|| (eContainerFeatureID != TraceabilityPackage.MESSAGE__TRACE_MDL && newTraceMdl != null)) {
+				|| (eContainerFeatureID() != TraceabilityPackage.MESSAGE__TRACE_MDL && newTraceMdl != null)) {
 			if (EcoreUtil.isAncestor(this, newTraceMdl))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -326,7 +326,7 @@ public class MessageImpl extends ObjectImpl implements Message {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case TraceabilityPackage.MESSAGE__TRACE_MDL:
 			return eInternalContainer().eInverseRemove(this,
 					TraceabilityPackage.TRACE_MODEL__MESSAGES,

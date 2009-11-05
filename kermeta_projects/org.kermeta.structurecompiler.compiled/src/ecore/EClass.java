@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EClass.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see ecore.EcorePackage#getEClass()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EClass extends EClassifier {
@@ -46,6 +46,7 @@ public interface EClass extends EClassifier {
 	 * @see ecore.EcorePackage#getEClass_EStructuralFeatures()
 	 * @see ecore.EStructuralFeature#getEContainingClass
 	 * @model opposite="eContainingClass" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EStructuralFeature> getEStructuralFeatures();
@@ -62,7 +63,8 @@ public interface EClass extends EClassifier {
 	 * @return the value of the '<em>abstract</em>' attribute.
 	 * @see #set_abstract(boolean)
 	 * @see ecore.EcorePackage#getEClass__abstract()
-	 * @model default="false" dataType="ecore.EBoolean"
+	 * @model default="false"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	boolean is_abstract();
@@ -91,6 +93,7 @@ public interface EClass extends EClassifier {
 	 * @see ecore.EcorePackage#getEClass_EOperations()
 	 * @see ecore.EOperation#getEContainingClass
 	 * @model opposite="eContainingClass" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EOperation> getEOperations();
@@ -107,7 +110,8 @@ public interface EClass extends EClassifier {
 	 * @return the value of the '<em>interface</em>' attribute.
 	 * @see #set_interface(boolean)
 	 * @see ecore.EcorePackage#getEClass__interface()
-	 * @model default="false" dataType="ecore.EBoolean"
+	 * @model default="false"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	boolean is_interface();
@@ -133,7 +137,7 @@ public interface EClass extends EClassifier {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>ESuper Types</em>' reference list.
 	 * @see ecore.EcorePackage#getEClass_ESuperTypes()
-	 * @model
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EClass> getESuperTypes();
@@ -150,6 +154,7 @@ public interface EClass extends EClassifier {
 	 * @return the value of the '<em>EGeneric Super Types</em>' containment reference list.
 	 * @see ecore.EcorePackage#getEClass_EGenericSuperTypes()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EGenericType> getEGenericSuperTypes();
@@ -157,18 +162,8 @@ public interface EClass extends EClassifier {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model featureNameDataType="ecore.EString"
-	 *        annotation="kermeta isAbstract='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EStructuralFeature result = null;\n\nreturn result;\n'"
-	 * @generated
-	 */
-	EStructuralFeature getEStructuralFeature(String featureName);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="ecore.EInt"
-	 *        annotation="kermeta isAbstract='true'"
+	 * @model annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Integer result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -177,8 +172,19 @@ public interface EClass extends EClassifier {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="ecore.EBoolean"
-	 *        annotation="kermeta isAbstract='true'"
+	 * @model annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
+	 *        annotation="kermeta ecore='true'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EStructuralFeature result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	EStructuralFeature getEStructuralFeature(String featureName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Boolean result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -187,22 +193,13 @@ public interface EClass extends EClassifier {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="ecore.EInt"
+	 * @model kind="operation"
 	 *        annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Integer result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	int getFeatureCount();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model featureIDDataType="ecore.EInt"
-	 *        annotation="kermeta isAbstract='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EStructuralFeature result = null;\n\nreturn result;\n'"
-	 * @generated
-	 */
-	EStructuralFeature op_getEStructuralFeature(int featureID);
 
 	/**
 	 * <!-- begin-user-doc -->

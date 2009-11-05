@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TagImpl.java,v 1.12 2009-02-23 15:26:40 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure.impl;
 
@@ -186,8 +186,8 @@ public class TagImpl extends TraceabilityImpl<EAnnotation> implements Tag {
 		kermeta.language.structure.Object c = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.containerSwitcher(this);
 
-		java.lang.Boolean idIfCond_337 = false;
-		idIfCond_337 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_597 = false;
+		idIfCond_597 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						c,
 						org.kermeta.compil.runtime.ExecutionContext
@@ -195,7 +195,7 @@ public class TagImpl extends TraceabilityImpl<EAnnotation> implements Tag {
 								.getMetaClass(
 										"kermeta.language.structure.ModelingUnit"));
 
-		if (idIfCond_337) {
+		if (idIfCond_597) {
 
 			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EAnnotation> convertAsOrderedSet(
@@ -212,12 +212,12 @@ public class TagImpl extends TraceabilityImpl<EAnnotation> implements Tag {
 			kermeta.language.structure.Property p = c
 					.getPropertyValue("ecoreModelElement");
 
-			java.lang.Boolean idIfCond_338 = false;
-			idIfCond_338 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_598 = false;
+			idIfCond_598 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(p));
 
-			if (idIfCond_338) {
+			if (idIfCond_598) {
 
 				ecore.EModelElement ecoreModelElement_retrieved = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(
@@ -252,11 +252,11 @@ public class TagImpl extends TraceabilityImpl<EAnnotation> implements Tag {
 				.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
 						.getEAnnotationHelper())).getKermetaEAnnotation(this);
 
-		java.lang.Boolean idIfCond_339 = false;
-		idIfCond_339 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_599 = false;
+		idIfCond_599 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(this.getName());
 
-		if (idIfCond_339) {
+		if (idIfCond_599) {
 
 			((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE

@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EDataType.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -21,7 +21,7 @@ package ecore;
  * </p>
  *
  * @see ecore.EcorePackage#getEDataType()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EDataType extends EClassifier {
@@ -37,7 +37,8 @@ public interface EDataType extends EClassifier {
 	 * @return the value of the '<em>Serializable</em>' attribute.
 	 * @see #setSerializable(boolean)
 	 * @see ecore.EcorePackage#getEDataType_Serializable()
-	 * @model default="true" dataType="ecore.EBoolean"
+	 * @model default="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	boolean isSerializable();

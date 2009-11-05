@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EAnnotationImpl.java,v 1.13 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -186,7 +186,7 @@ public class EAnnotationImpl extends EModelElementImpl implements EAnnotation {
 	 * @generated
 	 */
 	public EModelElement getEModelElement() {
-		if (eContainerFeatureID != EcorePackage.EANNOTATION__EMODEL_ELEMENT)
+		if (eContainerFeatureID() != EcorePackage.EANNOTATION__EMODEL_ELEMENT)
 			return null;
 		return (EModelElement) eContainer();
 	}
@@ -197,7 +197,7 @@ public class EAnnotationImpl extends EModelElementImpl implements EAnnotation {
 	 * @generated
 	 */
 	public EModelElement basicGetEModelElement() {
-		if (eContainerFeatureID != EcorePackage.EANNOTATION__EMODEL_ELEMENT)
+		if (eContainerFeatureID() != EcorePackage.EANNOTATION__EMODEL_ELEMENT)
 			return null;
 		return (EModelElement) eInternalContainer();
 	}
@@ -221,7 +221,7 @@ public class EAnnotationImpl extends EModelElementImpl implements EAnnotation {
 	 */
 	public void setEModelElement(EModelElement newEModelElement) {
 		if (newEModelElement != eInternalContainer()
-				|| (eContainerFeatureID != EcorePackage.EANNOTATION__EMODEL_ELEMENT && newEModelElement != null)) {
+				|| (eContainerFeatureID() != EcorePackage.EANNOTATION__EMODEL_ELEMENT && newEModelElement != null)) {
 			if (EcoreUtil.isAncestor(this, newEModelElement))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -287,7 +287,7 @@ public class EAnnotationImpl extends EModelElementImpl implements EAnnotation {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case EcorePackage.EANNOTATION__EMODEL_ELEMENT:
 			return eInternalContainer().eInverseRemove(this,
 					EcorePackage.EMODEL_ELEMENT__EANNOTATIONS,

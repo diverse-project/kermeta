@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EFactory.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -21,7 +21,7 @@ package ecore;
  * </p>
  *
  * @see ecore.EcorePackage#getEFactory()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EFactory extends EModelElement {
@@ -39,6 +39,7 @@ public interface EFactory extends EModelElement {
 	 * @see ecore.EcorePackage#getEFactory_EPackage()
 	 * @see ecore.EPackage#getEFactoryInstance
 	 * @model opposite="eFactoryInstance" required="true" transient="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */
@@ -57,8 +58,9 @@ public interface EFactory extends EModelElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="ecore.EJavaObject" literalValueDataType="ecore.EString"
+	 * @model dataType="ecore.EJavaObject"
 	 *        annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Object result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -67,8 +69,8 @@ public interface EFactory extends EModelElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="ecore.EString" instanceValueDataType="ecore.EJavaObject"
-	 *        annotation="kermeta isAbstract='true'"
+	 * @model annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.String result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -78,6 +80,7 @@ public interface EFactory extends EModelElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EObject result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */

@@ -4,9 +4,15 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TraceabilityPackageImpl.java,v 1.12 2009-02-23 15:26:52 cfaucher Exp $
+ * $Id$
  */
 package traceability.impl;
+
+import ecore.EcorePackage;
+
+import ecore.impl.EcorePackageImpl;
+
+import kermeta.KermetaPackage;
 
 import kermeta.compiler.CompilerPackage;
 
@@ -15,6 +21,8 @@ import kermeta.compiler.impl.CompilerPackageImpl;
 import kermeta.exceptions.ExceptionsPackage;
 
 import kermeta.exceptions.impl.ExceptionsPackageImpl;
+
+import kermeta.impl.KermetaPackageImpl;
 
 import kermeta.interpreter.InterpreterPackage;
 
@@ -52,6 +60,10 @@ import kermeta.utils.UtilsPackage;
 
 import kermeta.utils.impl.UtilsPackageImpl;
 
+import kermeta.xmltype.XmltypePackage;
+
+import kermeta.xmltype.impl.XmltypePackageImpl;
+
 import km2ecore.Km2ecorePackage;
 
 import km2ecore.common.CommonPackage;
@@ -62,17 +74,9 @@ import km2ecore.common.exception.impl.ExceptionPackageImpl;
 
 import km2ecore.common.impl.CommonPackageImpl;
 
-import km2ecore.helper.ecore.EcorePackage;
-
-import km2ecore.helper.ecore.impl.EcorePackageImpl;
-
 import km2ecore.helper.java.JavaPackage;
 
 import km2ecore.helper.java.impl.JavaPackageImpl;
-
-import km2ecore.helper.kermeta.KermetaPackage;
-
-import km2ecore.helper.kermeta.impl.KermetaPackageImpl;
 
 import km2ecore.impl.Km2ecorePackageImpl;
 
@@ -115,7 +119,21 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass traceabilityHelperEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass traceModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fileEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -171,20 +189,6 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass traceabilityHelperEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass fileEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EDataType stringEDataType = null;
 
 	/**
@@ -228,20 +232,10 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link TraceabilityPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -256,29 +250,13 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 
 		// Obtain or create and register package
 		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI)
+				.get(eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
+				.get(eNS_URI)
 				: new TraceabilityPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI)
-				: Km2ecorePackage.eINSTANCE);
-		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI)
-				: CommonPackage.eINSTANCE);
-		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI)
-				: ExceptionPackage.eINSTANCE);
-		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI)
-				: JavaPackage.eINSTANCE);
 		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(EcorePackage.eNS_URI)
@@ -287,46 +265,18 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
-		kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI) instanceof kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI)
-				: kermeta.KermetaPackage.eINSTANCE);
-		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI)
-				: UtilsPackage.eINSTANCE);
 		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI)
 				: LanguagePackage.eINSTANCE);
-		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StructurePackage.eNS_URI)
-				: StructurePackage.eINSTANCE);
 		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
-		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI)
-				: StandardPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI)
-				: IoPackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
-		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
-				: kermeta.ecore.EcorePackage.eINSTANCE);
+		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StructurePackage.eNS_URI)
+				: StructurePackage.eINSTANCE);
 		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionsPackage.eNS_URI)
@@ -335,6 +285,34 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI)
 				: InterpreterPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
+		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI)
+				: StandardPackage.eINSTANCE);
+		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI)
+				: UtilsPackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
+		XmltypePackageImpl theXmltypePackage = (XmltypePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(XmltypePackage.eNS_URI) instanceof XmltypePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(XmltypePackage.eNS_URI)
+				: XmltypePackage.eINSTANCE);
+		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
+				: kermeta.ecore.EcorePackage.eINSTANCE);
+		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI)
+				: IoPackage.eINSTANCE);
 		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(CompilerPackage.eNS_URI)
@@ -343,63 +321,97 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI)
 				: SimkPackage.eINSTANCE);
-		ecore.impl.EcorePackageImpl theEcorePackage_2 = (ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ecore.EcorePackage.eNS_URI)
-				: ecore.EcorePackage.eINSTANCE);
+		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI)
+				: Km2ecorePackage.eINSTANCE);
+		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_2 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
+				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
+		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
+				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
+		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI)
+				: JavaPackage.eINSTANCE);
+		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI)
+				: CommonPackage.eINSTANCE);
+		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI)
+				: ExceptionPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theTraceabilityPackage.createPackageContents();
-		theKm2ecorePackage.createPackageContents();
-		theCommonPackage.createPackageContents();
-		theExceptionPackage.createPackageContents();
-		theJavaPackage.createPackageContents();
 		theEcorePackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
-		theUtilsPackage.createPackageContents();
 		theLanguagePackage.createPackageContents();
-		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
-		theStandardPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
-		theIoPackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
-		theEcorePackage_1.createPackageContents();
+		theStructurePackage.createPackageContents();
 		theExceptionsPackage.createPackageContents();
 		theInterpreterPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
+		theStandardPackage.createPackageContents();
+		theUtilsPackage.createPackageContents();
+		thePersistencePackage.createPackageContents();
+		theXmltypePackage.createPackageContents();
+		theEcorePackage_1.createPackageContents();
+		theIoPackage.createPackageContents();
 		theCompilerPackage.createPackageContents();
 		theSimkPackage.createPackageContents();
+		theKm2ecorePackage.createPackageContents();
 		theEcorePackage_2.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
+		theJavaPackage.createPackageContents();
+		theCommonPackage.createPackageContents();
+		theExceptionPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theTraceabilityPackage.initializePackageContents();
-		theKm2ecorePackage.initializePackageContents();
-		theCommonPackage.initializePackageContents();
-		theExceptionPackage.initializePackageContents();
-		theJavaPackage.initializePackageContents();
 		theEcorePackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
-		theUtilsPackage.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
-		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
-		theStandardPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
-		theIoPackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
-		theEcorePackage_1.initializePackageContents();
+		theStructurePackage.initializePackageContents();
 		theExceptionsPackage.initializePackageContents();
 		theInterpreterPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
+		theStandardPackage.initializePackageContents();
+		theUtilsPackage.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
+		theXmltypePackage.initializePackageContents();
+		theEcorePackage_1.initializePackageContents();
+		theIoPackage.initializePackageContents();
 		theCompilerPackage.initializePackageContents();
 		theSimkPackage.initializePackageContents();
+		theKm2ecorePackage.initializePackageContents();
 		theEcorePackage_2.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
+		theJavaPackage.initializePackageContents();
+		theCommonPackage.initializePackageContents();
+		theExceptionPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theTraceabilityPackage.freeze();
 
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(TraceabilityPackage.eNS_URI,
+				theTraceabilityPackage);
 		return theTraceabilityPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTraceabilityHelper() {
+		return traceabilityHelperEClass;
 	}
 
 	/**
@@ -445,6 +457,33 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 	 */
 	public EReference getTraceModel_Messages() {
 		return (EReference) traceModelEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFile() {
+		return fileEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFile_Id() {
+		return (EAttribute) fileEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFile_Uri() {
+		return (EAttribute) fileEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -687,42 +726,6 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTraceabilityHelper() {
-		return traceabilityHelperEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFile() {
-		return fileEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFile_Id() {
-		return (EAttribute) fileEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFile_Uri() {
-		return (EAttribute) fileEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EDataType getString() {
 		return stringEDataType;
 	}
@@ -774,11 +777,17 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 		isCreated = true;
 
 		// Create classes and their features
+		traceabilityHelperEClass = createEClass(TRACEABILITY_HELPER);
+
 		traceModelEClass = createEClass(TRACE_MODEL);
 		createEReference(traceModelEClass, TRACE_MODEL__FILES);
 		createEReference(traceModelEClass, TRACE_MODEL__REFERENCES);
 		createEReference(traceModelEClass, TRACE_MODEL__TRACES);
 		createEReference(traceModelEClass, TRACE_MODEL__MESSAGES);
+
+		fileEClass = createEClass(FILE);
+		createEAttribute(fileEClass, FILE__ID);
+		createEAttribute(fileEClass, FILE__URI);
 
 		messageEClass = createEClass(MESSAGE);
 		createEReference(messageEClass, MESSAGE__TRACE_MDL);
@@ -813,12 +822,6 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 		modelReferenceEClass = createEClass(MODEL_REFERENCE);
 		createEReference(modelReferenceEClass, MODEL_REFERENCE__REF_OBJECT);
 
-		traceabilityHelperEClass = createEClass(TRACEABILITY_HELPER);
-
-		fileEClass = createEClass(FILE);
-		createEAttribute(fileEClass, FILE__ID);
-		createEAttribute(fileEClass, FILE__URI);
-
 		// Create data types
 		stringEDataType = createEDataType(STRING);
 		integerEDataType = createEDataType(INTEGER);
@@ -852,15 +855,18 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 		// Obtain other dependent packages
 		StructurePackage theStructurePackage = (StructurePackage) EPackage.Registry.INSTANCE
 				.getEPackage(StructurePackage.eNS_URI);
-		ecore.EcorePackage theEcorePackage_2 = (ecore.EcorePackage) EPackage.Registry.INSTANCE
-				.getEPackage(ecore.EcorePackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage) EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		traceabilityHelperEClass.getESuperTypes().add(
+				theStructurePackage.getObject());
 		traceModelEClass.getESuperTypes().add(theStructurePackage.getObject());
+		fileEClass.getESuperTypes().add(theStructurePackage.getObject());
 		messageEClass.getESuperTypes().add(theStructurePackage.getObject());
 		traceEClass.getESuperTypes().add(theStructurePackage.getObject());
 		referenceEClass.getESuperTypes().add(theStructurePackage.getObject());
@@ -868,11 +874,18 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 		textReferenceEClass.getESuperTypes().add(this.getFileReference());
 		xmlReferenceEClass.getESuperTypes().add(this.getFileReference());
 		modelReferenceEClass.getESuperTypes().add(this.getReference());
-		traceabilityHelperEClass.getESuperTypes().add(
-				theStructurePackage.getObject());
-		fileEClass.getESuperTypes().add(theStructurePackage.getObject());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(traceabilityHelperEClass, TraceabilityHelper.class,
+				"TraceabilityHelper", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		EOperation op = addEOperation(traceabilityHelperEClass, this
+				.getTextReference(), "getFirstTextReference", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, this.getModelReference(), "mr", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
 		initEClass(traceModelEClass, TraceModel.class, "TraceModel",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTraceModel_Files(), this.getFile(), null, "files",
@@ -894,6 +907,25 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 				TraceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, !IS_ORDERED);
+
+		initEClass(fileEClass, File.class, "File", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFile_Id(), this.getInteger(), "id", null, 0, 1,
+				File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFile_Uri(), this.getString(), "uri", null, 1, 1,
+				File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(fileEClass, this.getFile(), "getFileEMF_renameAs",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getTraceModel(), "traceModel", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, this.getString(), "uri_toFind", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		addEOperation(fileEClass, this.getString(), "toString", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
 
 		initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -995,40 +1027,11 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 		initEClass(modelReferenceEClass, ModelReference.class,
 				"ModelReference", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelReference_RefObject(), theEcorePackage_2
+		initEReference(getModelReference_RefObject(), theEcorePackage
 				.getEObject(), null, "refObject", null, 1, 1,
 				ModelReference.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(traceabilityHelperEClass, TraceabilityHelper.class,
-				"TraceabilityHelper", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-
-		EOperation op = addEOperation(traceabilityHelperEClass, this
-				.getTextReference(), "getFirstTextReference", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, this.getModelReference(), "mr", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		initEClass(fileEClass, File.class, "File", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFile_Id(), this.getInteger(), "id", null, 0, 1,
-				File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFile_Uri(), this.getString(), "uri", null, 1, 1,
-				File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(fileEClass, this.getFile(), "getFileEMF_renameAs",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getTraceModel(), "traceModel", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, this.getString(), "uri_toFind", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(fileEClass, this.getString(), "toString", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE,
@@ -1058,62 +1061,97 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 		String source = "kermeta";
 		addAnnotation(this, source, new String[] { "ecoreUri",
 				"http://www.kermeta.org/Traceability" });
+		addAnnotation(this, source, new String[] { "ecore", "true" });
+		addAnnotation(traceModelEClass, source,
+				new String[] { "ecore", "true" });
 		addAnnotation(
 				traceModelEClass,
 				source,
 				new String[] {
 						"documentation",
 						"/**\r\n * This class represents a trace model.\r\n * This is a set of traces, references and messages.\r\n */" });
+		addAnnotation(getTraceModel_References(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(
 				getTraceModel_References(),
 				source,
 				new String[] { "documentation",
 						"/** Set of references to the traced objects of the trace model */" });
+		addAnnotation(getTraceModel_Traces(), source, new String[] { "ecore",
+				"true" });
 		addAnnotation(getTraceModel_Traces(), source, new String[] {
 				"documentation",
 				"/** Set of traces contained by the trace model */" });
+		addAnnotation(getTraceModel_Messages(), source, new String[] { "ecore",
+				"true" });
 		addAnnotation(getTraceModel_Messages(), source, new String[] {
 				"documentation",
 				"/** Set of messages contained by the trace model */" });
+		addAnnotation(fileEClass.getEOperations().get(0), source, new String[] {
+				"EMF_renameAs", "getFileEMF_renameAs" });
+		addAnnotation(fileEClass.getEOperations().get(1), source, new String[] {
+				"superOperation", "kermeta::language::structure::Object" });
+		addAnnotation(messageEClass, source, new String[] { "ecore", "true" });
 		addAnnotation(
 				messageEClass,
 				source,
 				new String[] {
 						"documentation",
 						"/**\r\n * This class represents a trace message, used to add some information to traces.\r\n * Typically, in order to known what had generated a given trace or provide a user\r\n * friendly message to the user.\r\n */" });
+		addAnnotation(getMessage_TraceMdl(), source, new String[] { "ecore",
+				"true" });
 		addAnnotation(getMessage_TraceMdl(), source, new String[] {
 				"documentation", "/** Link to the containing trace model */" });
+		addAnnotation(getMessage_Traces(), source, new String[] { "ecore",
+				"true" });
 		addAnnotation(getMessage_Traces(), source, new String[] {
 				"documentation",
 				"/** Link to the traces the message is associated with */" });
+		addAnnotation(getMessage_Value(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getMessage_Language(), source, new String[] { "ecore",
+				"true" });
 		addAnnotation(getMessage_Language(), source, new String[] {
 				"documentation",
 				"/** Language of the message (english, french, etc.) */" });
+		addAnnotation(getMessage_Type(), source,
+				new String[] { "ecore", "true" });
 		addAnnotation(getMessage_Type(), source, new String[] {
 				"documentation", "/** Message kind */" });
 		addAnnotation(stringEDataType, source, new String[] { "alias",
 				"kermeta::standard::String" });
+		addAnnotation(stringEDataType, source, new String[] { "ecore", "true" });
 		addAnnotation(stringEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.String" });
 		addAnnotation(stringEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
+		addAnnotation(traceEClass, source, new String[] { "ecore", "true" });
 		addAnnotation(traceEClass, source, new String[] { "documentation",
 				"/**\r\n * This class represents a trace element\r\n */" });
+		addAnnotation(getTrace_TraceMdl(), source, new String[] { "ecore",
+				"true" });
 		addAnnotation(getTrace_TraceMdl(), source, new String[] {
 				"documentation", "/** Link to the containing trace model */" });
+		addAnnotation(getTrace_SourceReferences(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(
 				getTrace_SourceReferences(),
 				source,
 				new String[] { "documentation",
 						"/** Link to the references to the trace incoming elements */" });
+		addAnnotation(getTrace_Description(), source, new String[] { "ecore",
+				"true" });
 		addAnnotation(getTrace_Description(), source, new String[] {
 				"documentation",
 				"/** Link to the messages describing the trace */" });
+		addAnnotation(getTrace_TargetReferences(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(
 				getTrace_TargetReferences(),
 				source,
 				new String[] { "documentation",
 						"/** Link to the references to the trace outgoing elements */" });
+		addAnnotation(referenceEClass, source, new String[] { "ecore", "true" });
 		addAnnotation(
 				referenceEClass,
 				source,
@@ -1121,22 +1159,34 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 						"documentation",
 						"/**\r\n * This abstract class represents a reference to a concrete object\r\n */" });
 		addAnnotation(getReference_TargetTraces(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getReference_TargetTraces(), source, new String[] {
 				"documentation", "/** Link to the reference target traces */" });
+		addAnnotation(getReference_TraceMdl(), source, new String[] { "ecore",
+				"true" });
 		addAnnotation(getReference_TraceMdl(), source, new String[] {
 				"documentation", "/** Link to the containing trace model */" });
 		addAnnotation(getReference_SourceTraces(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getReference_SourceTraces(), source, new String[] {
 				"documentation", "/** Link to the reference source traces */" });
+		addAnnotation(fileReferenceEClass, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(
 				fileReferenceEClass,
 				source,
 				new String[] {
 						"documentation",
 						"/**\r\n * This class represents a reference to a concrete object contained by a file\r\n */" });
+		addAnnotation(getFileReference_FileURI(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(
 				getFileReference_FileURI(),
 				source,
 				new String[] { "documentation",
 						"/** URI of the file containing the referred concrete object */" });
+		addAnnotation(textReferenceEClass, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(
 				textReferenceEClass,
 				source,
@@ -1144,42 +1194,57 @@ public class TraceabilityPackageImpl extends EPackageImpl implements
 						"documentation",
 						"/**\r\n * This class represents a reference to a textual file concrete object\r\n */" });
 		addAnnotation(getTextReference_CharEndAt(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getTextReference_CharEndAt(), source, new String[] {
 				"documentation", "/** Ending character number */" });
+		addAnnotation(getTextReference_CharBeginAt(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(getTextReference_CharBeginAt(), source, new String[] {
 				"documentation", "/** Starting character number */" });
 		addAnnotation(getTextReference_LineEndAt(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getTextReference_LineEndAt(), source, new String[] {
 				"documentation", "/** Ending line number */" });
+		addAnnotation(getTextReference_LineBeginAt(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(getTextReference_LineBeginAt(), source, new String[] {
 				"documentation", "/** Starting line number */" });
 		addAnnotation(integerEDataType, source, new String[] { "alias",
 				"kermeta::standard::Integer" });
+		addAnnotation(integerEDataType, source,
+				new String[] { "ecore", "true" });
 		addAnnotation(integerEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.Integer" });
 		addAnnotation(integerEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
+		addAnnotation(xmlReferenceEClass, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(
 				xmlReferenceEClass,
 				source,
 				new String[] { "documentation",
 						"/**\r\n * This class represents a reference to a XML concrete object\r\n */" });
 		addAnnotation(getXMLReference_XPointer(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getXMLReference_XPointer(), source, new String[] {
 				"documentation",
 				"/** XML link to the referred XML concrete object */" });
+		addAnnotation(modelReferenceEClass, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(
 				modelReferenceEClass,
 				source,
 				new String[] { "documentation",
 						"/**\r\n * This class represents a reference to a model element\r\n */" });
+		addAnnotation(getModelReference_RefObject(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(objectEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(objectEDataType, source, new String[] { "ecore", "true" });
 		addAnnotation(objectEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.Object" });
 		addAnnotation(objectEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
-		addAnnotation(fileEClass.getEOperations().get(0), source, new String[] {
-				"EMF_renameAs", "getFileEMF_renameAs" });
-		addAnnotation(fileEClass.getEOperations().get(1), source, new String[] {
-				"superOperation", "kermeta::language::structure::Object" });
 	}
 
 	/**

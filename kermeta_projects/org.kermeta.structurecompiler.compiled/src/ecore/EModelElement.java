@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EModelElement.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see ecore.EcorePackage#getEModelElement()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EModelElement extends EObject {
@@ -41,6 +42,7 @@ public interface EModelElement extends EObject {
 	 * @see ecore.EcorePackage#getEModelElement_EAnnotations()
 	 * @see ecore.EAnnotation#getEModelElement
 	 * @model opposite="eModelElement" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EAnnotation> getEAnnotations();
@@ -48,8 +50,8 @@ public interface EModelElement extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model sourceDataType="ecore.EString"
-	 *        annotation="kermeta isAbstract='true'"
+	 * @model annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EAnnotation result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */

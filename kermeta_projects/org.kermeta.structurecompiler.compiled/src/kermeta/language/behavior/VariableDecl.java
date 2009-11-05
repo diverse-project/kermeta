@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: VariableDecl.java,v 1.12 2009-02-23 15:26:38 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior;
 
@@ -25,7 +25,8 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getVariableDecl()
- * @model annotation="kermeta documentation='refers to variable declaration <code>var x : X init a</code>\n<img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png\"/>'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='refers to variable declaration <code>var x : X init a</code>\n<img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png\"/>'"
  * @generated
  */
 public interface VariableDecl extends Expression {
@@ -41,6 +42,7 @@ public interface VariableDecl extends Expression {
 	 * @see #setInitialization(Expression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getVariableDecl_Initialization()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Initialization expression for the variable\nDefault value is <code>void</code> ????'"
 	 * @generated
 	 */
@@ -68,6 +70,7 @@ public interface VariableDecl extends Expression {
 	 * @see #setType(TypeReference)
 	 * @see kermeta.language.behavior.BehaviorPackage#getVariableDecl_Type()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Type of the declared variable'"
 	 * @generated
 	 */
@@ -95,6 +98,7 @@ public interface VariableDecl extends Expression {
 	 * @see #setIdentifier(String)
 	 * @see kermeta.language.behavior.BehaviorPackage#getVariableDecl_Identifier()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Initialization expression for the variable\nDefault value is <code>void</code> ????'"
 	 * @generated
 	 */
@@ -115,7 +119,7 @@ public interface VariableDecl extends Expression {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta superOperation='kermeta::language::behavior::Expression'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = \"\";\n\n\tjava.lang.String localType = this.getStaticType().createBehaviorJava(context);\n\n\tjava.lang.String var_id = kermeta.standard.helper.StringWrapper.plus(((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE.getIdentifierHelper())).getMangledIdentifier(this.getIdentifier(), context), context.printFtSuffix());\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, localType), \" \"), var_id);\n\n\tjava.lang.Boolean idIfCond_704 = false;\n\tidIfCond_704 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getInitialization()));\n\n\tif( idIfCond_704 ) {\n\n\tjava.lang.Boolean idIfCond_705 = false;\n\tidIfCond_705 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(this.getInitialization(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.Conditional\"));\n\n\tif( idIfCond_705 ) {\n\n\tcontext.getResultLastStatementStack().push(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(var_id, \" = \"), context.getTYPE_SEPARATOR()), localType));\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \" = null;\\n\"), this.getInitialization().createBehaviorJava(context));\n\n\tcontext.getResultLastStatementStack().pop();\n}\n else {\n\n\tjava.lang.String literal_prefix = \"\";\n\n\tjava.lang.String literal_suffix = \"\";\n\n\tjava.lang.Boolean idIfCond_706 = false;\n\tidIfCond_706 = this.requireConversionValueTypeToObject();\n\n\tif( idIfCond_706 ) {\n\n\tliteral_prefix = kermeta.standard.helper.StringWrapper.plus(context.getOBJECT_UTIL_CLASS(), \".convertAsObject(\");\n\n\tliteral_suffix = \")\";\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \" = \"), literal_prefix), this.getInitialization().createBehaviorJava(context)), literal_suffix), this.endOfExpressionFixer());\n}\n\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \" = null;\");\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = \"\";\n\n\tjava.lang.String localType = this.getStaticType().createBehaviorJava(context);\n\n\tjava.lang.String var_id = kermeta.standard.helper.StringWrapper.plus(((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE.getIdentifierHelper())).getMangledIdentifier(this.getIdentifier(), context), context.printFtSuffix());\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, localType), \" \"), var_id);\n\n\tjava.lang.Boolean idIfCond_1 = false;\n\tidIfCond_1 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getInitialization()));\n\n\tif( idIfCond_1 ) {\n\n\tjava.lang.Boolean idIfCond_2 = false;\n\tidIfCond_2 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(this.getInitialization(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.Conditional\"));\n\n\tif( idIfCond_2 ) {\n\n\tcontext.getResultLastStatementStack().push(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(var_id, \" = \"), context.getTYPE_SEPARATOR()), localType));\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \" = null;\\n\"), this.getInitialization().createBehaviorJava(context));\n\n\tcontext.getResultLastStatementStack().pop();\n}\n else {\n\n\tjava.lang.String literal_prefix = \"\";\n\n\tjava.lang.String literal_suffix = \"\";\n\n\tjava.lang.Boolean idIfCond_3 = false;\n\tidIfCond_3 = this.requireConversionValueTypeToObject();\n\n\tif( idIfCond_3 ) {\n\n\tliteral_prefix = kermeta.standard.helper.StringWrapper.plus(context.getOBJECT_UTIL_CLASS(), \".convertAsObject(\");\n\n\tliteral_suffix = \")\";\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \" = \"), literal_prefix), this.getInitialization().createBehaviorJava(context)), literal_suffix), this.endOfExpressionFixer());\n}\n\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \" = null;\");\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String createBehaviorJava(KM2EcoreContext context);
@@ -124,7 +128,7 @@ public interface VariableDecl extends Expression {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = false;\n\n\tjava.lang.Boolean idIfCond_707 = false;\n\tidIfCond_707 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(this.getInitialization(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.Literal\"));\n\n\tif( idIfCond_707 ) {\n\n\tjava.lang.Boolean idIfCond_708 = false;\n\tidIfCond_708 = ((kermeta.language.behavior.Literal) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getInitialization(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.Literal\"))).getStaticType().isValueType();\n\n\tif( idIfCond_708 ) {\n\n\tjava.lang.String left_type = this.getStaticType().getTypeQName();\n\n\tjava.lang.Boolean idIfCond_709 = false;\n\tidIfCond_709 = kermeta.standard.helper.StringWrapper.equals(left_type, \"kermeta::language::structure::Object\");\n\n\tif( idIfCond_709 ) {\n\n\tjava.lang.Boolean idIfCond_710 = false;\n\tidIfCond_710 = this.getInitialization().getStaticType().isValueType();\n\n\tif( idIfCond_710 ) {\n\n\tresult = true;\n}\n\n}\n\n}\n\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = false;\n\n\tjava.lang.Boolean idIfCond_4 = false;\n\tidIfCond_4 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(this.getInitialization(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.Literal\"));\n\n\tif( idIfCond_4 ) {\n\n\tjava.lang.Boolean idIfCond_5 = false;\n\tidIfCond_5 = ((kermeta.language.behavior.Literal) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getInitialization(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.Literal\"))).getStaticType().isValueType();\n\n\tif( idIfCond_5 ) {\n\n\tjava.lang.String left_type = this.getStaticType().getTypeQName();\n\n\tjava.lang.Boolean idIfCond_6 = false;\n\tidIfCond_6 = kermeta.standard.helper.StringWrapper.equals(left_type, \"kermeta::language::structure::Object\");\n\n\tif( idIfCond_6 ) {\n\n\tjava.lang.Boolean idIfCond_7 = false;\n\tidIfCond_7 = this.getInitialization().getStaticType().isValueType();\n\n\tif( idIfCond_7 ) {\n\n\tresult = true;\n}\n\n}\n\n}\n\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Boolean requireConversionValueTypeToObject();

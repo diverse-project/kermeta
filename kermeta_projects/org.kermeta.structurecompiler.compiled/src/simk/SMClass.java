@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SMClass.java,v 1.12 2009-02-23 15:26:55 cfaucher Exp $
+ * $Id$
  */
 package simk;
 
@@ -22,7 +22,7 @@ package simk;
  * </p>
  *
  * @see simk.SimkPackage#getSMClass()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface SMClass extends SMNamedElement {
@@ -40,6 +40,7 @@ public interface SMClass extends SMNamedElement {
 	 * @see simk.SimkPackage#getSMClass_Context()
 	 * @see simk.SMContext#getSMClass
 	 * @model opposite="sMClass" required="true" transient="false"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	SMContext getContext();
@@ -68,6 +69,7 @@ public interface SMClass extends SMNamedElement {
 	 * @see #setUsages(SMUsage)
 	 * @see simk.SimkPackage#getSMClass_Usages()
 	 * @model transient="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	SMUsage getUsages();
@@ -95,8 +97,9 @@ public interface SMClass extends SMNamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="ecore.EString"
+	 * @model kind="operation"
 	 *        annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.String result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */

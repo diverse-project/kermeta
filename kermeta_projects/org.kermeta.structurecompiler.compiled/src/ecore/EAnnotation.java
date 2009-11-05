@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EAnnotation.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see ecore.EcorePackage#getEAnnotation()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EAnnotation extends EModelElement {
@@ -42,7 +42,7 @@ public interface EAnnotation extends EModelElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>References</em>' reference list.
 	 * @see ecore.EcorePackage#getEAnnotation_References()
-	 * @model
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EObject> getReferences();
@@ -59,6 +59,7 @@ public interface EAnnotation extends EModelElement {
 	 * @return the value of the '<em>Details</em>' containment reference list.
 	 * @see ecore.EcorePackage#getEAnnotation_Details()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EStringToStringMapEntry> getDetails();
@@ -74,7 +75,7 @@ public interface EAnnotation extends EModelElement {
 	 * @return the value of the '<em>Source</em>' attribute.
 	 * @see #setSource(String)
 	 * @see ecore.EcorePackage#getEAnnotation_Source()
-	 * @model dataType="ecore.EString"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getSource();
@@ -101,6 +102,7 @@ public interface EAnnotation extends EModelElement {
 	 * @return the value of the '<em>Contents</em>' containment reference list.
 	 * @see ecore.EcorePackage#getEAnnotation_Contents()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EObject> getContents();
@@ -119,6 +121,7 @@ public interface EAnnotation extends EModelElement {
 	 * @see ecore.EcorePackage#getEAnnotation_EModelElement()
 	 * @see ecore.EModelElement#getEAnnotations
 	 * @model opposite="eAnnotations"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */

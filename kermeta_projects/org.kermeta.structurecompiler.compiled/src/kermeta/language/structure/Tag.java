@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Tag.java,v 1.12 2009-02-23 15:26:48 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure;
 
@@ -29,8 +29,9 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getTag()
- * @model annotation="kermeta documentation='/**\r\n *\r\n \052/'"
+ * @model annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Tag is intended to be used to add documentation on a  model element,\nor add some textual information that cannot be expressed with any\nmodel element definition.'"
+ *        annotation="kermeta documentation='/**\r\n *\r\n \052/'"
  * @generated
  */
 public interface Tag extends Traceability<EAnnotation> {
@@ -46,6 +47,7 @@ public interface Tag extends Traceability<EAnnotation> {
 	 * @see #setName(String)
 	 * @see kermeta.language.structure.StructurePackage#getTag_Name()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Name of the Tag'"
 	 * @generated
 	 */
@@ -73,6 +75,7 @@ public interface Tag extends Traceability<EAnnotation> {
 	 * @see #setValue(String)
 	 * @see kermeta.language.structure.StructurePackage#getTag_Value()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='String value of the Tag'"
 	 * @generated
 	 */
@@ -102,6 +105,7 @@ public interface Tag extends Traceability<EAnnotation> {
 	 * @see kermeta.language.structure.StructurePackage#getTag_Object()
 	 * @see kermeta.language.structure.Object#getTag
 	 * @model opposite="tag" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Objects to which the Tag is attached to'"
 	 * @generated
 	 */
@@ -111,7 +115,7 @@ public interface Tag extends Traceability<EAnnotation> {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tecore.EAnnotation ecoreAnnotation = this.createEcoreModelElement(context);\n\n\tkermeta.language.structure.Object c = org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this);\n\n\tjava.lang.Boolean idIfCond_337 = false;\n\tidIfCond_337 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(c, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ModelingUnit\"));\n\n\tif( idIfCond_337 ) {\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAnnotation>convertAsOrderedSet(((kermeta.language.structure.ModelingUnit) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(c, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ModelingUnit\"))).getEntryPoints()).add(ecoreAnnotation);\n}\n else {\n\n\tkermeta.language.structure.Property p = c.getPropertyValue(\"ecoreModelElement\");\n\n\tjava.lang.Boolean idIfCond_338 = false;\n\tidIfCond_338 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(p));\n\n\tif( idIfCond_338 ) {\n\n\tecore.EModelElement ecoreModelElement_retrieved = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.getSwitcher(c, p), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EModelElement\")));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAnnotation>convertAsOrderedSet(ecoreModelElement_retrieved.getEAnnotations()).add(ecoreAnnotation);\n}\n\n}\n\n\n\tthis.setEcoreModelElement(ecoreAnnotation);\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tecore.EAnnotation ecoreAnnotation = this.createEcoreModelElement(context);\n\n\tkermeta.language.structure.Object c = org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this);\n\n\tjava.lang.Boolean idIfCond_597 = false;\n\tidIfCond_597 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(c, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ModelingUnit\"));\n\n\tif( idIfCond_597 ) {\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAnnotation>convertAsOrderedSet(((kermeta.language.structure.ModelingUnit) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(c, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ModelingUnit\"))).getEntryPoints()).add(ecoreAnnotation);\n}\n else {\n\n\tkermeta.language.structure.Property p = c.getPropertyValue(\"ecoreModelElement\");\n\n\tjava.lang.Boolean idIfCond_598 = false;\n\tidIfCond_598 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(p));\n\n\tif( idIfCond_598 ) {\n\n\tecore.EModelElement ecoreModelElement_retrieved = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.getSwitcher(c, p), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EModelElement\")));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAnnotation>convertAsOrderedSet(ecoreModelElement_retrieved.getEAnnotations()).add(ecoreAnnotation);\n}\n\n}\n\n\n\tthis.setEcoreModelElement(ecoreAnnotation);\n'"
 	 * @generated
 	 */
 	void applyPass1(KM2EcoreContext context);
@@ -119,7 +123,7 @@ public interface Tag extends Traceability<EAnnotation> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EAnnotation result = null;\n\n\tecore.EAnnotation ecoreAnnotation = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE.getEAnnotationHelper())).getKermetaEAnnotation(this);\n\n\tjava.lang.Boolean idIfCond_339 = false;\n\tidIfCond_339 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getName());\n\n\tif( idIfCond_339 ) {\n\n\t((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE.getEAnnotationHelper())).addEntry(ecoreAnnotation, kermeta.standard.helper.StringWrapper.toString(km2ecore.helper.ecore.KermetaEAnnotationKey.getByName(\"documentation\").getName()), this.getValue());\n}\n else {\n\n\t((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE.getEAnnotationHelper())).addEntry(ecoreAnnotation, this.getName(), this.getValue());\n}\n\n\n\tresult = ecoreAnnotation;\n\nreturn result;\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EAnnotation result = null;\n\n\tecore.EAnnotation ecoreAnnotation = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE.getEAnnotationHelper())).getKermetaEAnnotation(this);\n\n\tjava.lang.Boolean idIfCond_599 = false;\n\tidIfCond_599 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getName());\n\n\tif( idIfCond_599 ) {\n\n\t((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE.getEAnnotationHelper())).addEntry(ecoreAnnotation, kermeta.standard.helper.StringWrapper.toString(km2ecore.helper.ecore.KermetaEAnnotationKey.getByName(\"documentation\").getName()), this.getValue());\n}\n else {\n\n\t((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE.getEAnnotationHelper())).addEntry(ecoreAnnotation, this.getName(), this.getValue());\n}\n\n\n\tresult = ecoreAnnotation;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	EAnnotation createEcoreModelElement(KM2EcoreContext context);

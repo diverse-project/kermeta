@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EClassImpl.java,v 1.13 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -255,8 +255,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EStructuralFeature getEStructuralFeature(String featureName) {
-		ecore.EStructuralFeature result = null;
+	public int getFeatureID(EStructuralFeature feature) {
+		java.lang.Integer result = null;
 
 		return result;
 
@@ -267,8 +267,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getFeatureID(EStructuralFeature feature) {
-		java.lang.Integer result = null;
+	public EStructuralFeature getEStructuralFeature(String featureName) {
+		ecore.EStructuralFeature result = null;
 
 		return result;
 
@@ -293,18 +293,6 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 */
 	public int getFeatureCount() {
 		java.lang.Integer result = null;
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EStructuralFeature op_getEStructuralFeature(int featureID) {
-		ecore.EStructuralFeature result = null;
 
 		return result;
 
@@ -502,11 +490,11 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 		case EcorePackage.ECLASS__ESTRUCTURAL_FEATURES:
 			return getEStructuralFeatures();
 		case EcorePackage.ECLASS__ABSTRACT:
-			return is_abstract() ? Boolean.TRUE : Boolean.FALSE;
+			return is_abstract();
 		case EcorePackage.ECLASS__EOPERATIONS:
 			return getEOperations();
 		case EcorePackage.ECLASS__INTERFACE:
-			return is_interface() ? Boolean.TRUE : Boolean.FALSE;
+			return is_interface();
 		case EcorePackage.ECLASS__ESUPER_TYPES:
 			return getESuperTypes();
 		case EcorePackage.ECLASS__EGENERIC_SUPER_TYPES:
@@ -530,7 +518,7 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 					(Collection<? extends EStructuralFeature>) newValue);
 			return;
 		case EcorePackage.ECLASS__ABSTRACT:
-			set_abstract(((Boolean) newValue).booleanValue());
+			set_abstract((Boolean) newValue);
 			return;
 		case EcorePackage.ECLASS__EOPERATIONS:
 			getEOperations().clear();
@@ -538,7 +526,7 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 					.addAll((Collection<? extends EOperation>) newValue);
 			return;
 		case EcorePackage.ECLASS__INTERFACE:
-			set_interface(((Boolean) newValue).booleanValue());
+			set_interface((Boolean) newValue);
 			return;
 		case EcorePackage.ECLASS__ESUPER_TYPES:
 			getESuperTypes().clear();

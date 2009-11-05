@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Km2ecorePackage.java,v 1.12 2009-02-23 15:26:38 cfaucher Exp $
+ * $Id$
  */
 package km2ecore;
 
@@ -275,22 +275,22 @@ public interface Km2ecorePackage extends EPackage {
 	int KM2_ECORE_CONTEXT__OUTPUT_REPOSITORY = StructurePackage.OBJECT_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>SEPARATOR STATEMENT FT</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KM2_ECORE_CONTEXT__SEPARATOR_STATEMENT_FT = StructurePackage.OBJECT_FEATURE_COUNT + 6;
-
-	/**
 	 * The feature id for the '<em><b>Input Repository</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KM2_ECORE_CONTEXT__INPUT_REPOSITORY = StructurePackage.OBJECT_FEATURE_COUNT + 7;
+	int KM2_ECORE_CONTEXT__INPUT_REPOSITORY = StructurePackage.OBJECT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>SEPARATOR STATEMENT FT</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KM2_ECORE_CONTEXT__SEPARATOR_STATEMENT_FT = StructurePackage.OBJECT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Result Last Statement Stack</b></em>' reference.
@@ -338,22 +338,22 @@ public interface Km2ecorePackage extends EPackage {
 	int KM2_ECORE_CONTEXT__CURRENT_VALUE_TYPE = StructurePackage.OBJECT_FEATURE_COUNT + 12;
 
 	/**
-	 * The feature id for the '<em><b>Before Function Type Result</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KM2_ECORE_CONTEXT__BEFORE_FUNCTION_TYPE_RESULT = StructurePackage.OBJECT_FEATURE_COUNT + 13;
-
-	/**
 	 * The feature id for the '<em><b>Inc cond Stack</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KM2_ECORE_CONTEXT__INC_COND_STACK = StructurePackage.OBJECT_FEATURE_COUNT + 14;
+	int KM2_ECORE_CONTEXT__INC_COND_STACK = StructurePackage.OBJECT_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Before Function Type Result</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KM2_ECORE_CONTEXT__BEFORE_FUNCTION_TYPE_RESULT = StructurePackage.OBJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Ft Suffix</b></em>' reference.
@@ -365,13 +365,13 @@ public interface Km2ecorePackage extends EPackage {
 	int KM2_ECORE_CONTEXT__FT_SUFFIX = StructurePackage.OBJECT_FEATURE_COUNT + 15;
 
 	/**
-	 * The feature id for the '<em><b>Ft Map Type Stack</b></em>' reference.
+	 * The feature id for the '<em><b>JAVA SEPARATOR</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KM2_ECORE_CONTEXT__FT_MAP_TYPE_STACK = StructurePackage.OBJECT_FEATURE_COUNT + 16;
+	int KM2_ECORE_CONTEXT__JAVA_SEPARATOR = StructurePackage.OBJECT_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Simk Model</b></em>' reference.
@@ -383,13 +383,13 @@ public interface Km2ecorePackage extends EPackage {
 	int KM2_ECORE_CONTEXT__SIMK_MODEL = StructurePackage.OBJECT_FEATURE_COUNT + 17;
 
 	/**
-	 * The feature id for the '<em><b>JAVA SEPARATOR</b></em>' attribute.
+	 * The feature id for the '<em><b>Ft Map Type Stack</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KM2_ECORE_CONTEXT__JAVA_SEPARATOR = StructurePackage.OBJECT_FEATURE_COUNT + 18;
+	int KM2_ECORE_CONTEXT__FT_MAP_TYPE_STACK = StructurePackage.OBJECT_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Ft Product Type Stack</b></em>' reference.
@@ -428,22 +428,22 @@ public interface Km2ecorePackage extends EPackage {
 	int KM2_ECORE_CONTEXT__FT_CONTEXTUAL_SELF = StructurePackage.OBJECT_FEATURE_COUNT + 22;
 
 	/**
-	 * The feature id for the '<em><b>JAVA CLASS EXECUTION CONTEXT</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KM2_ECORE_CONTEXT__JAVA_CLASS_EXECUTION_CONTEXT = StructurePackage.OBJECT_FEATURE_COUNT + 23;
-
-	/**
 	 * The feature id for the '<em><b>Before Lambda Expression Result</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KM2_ECORE_CONTEXT__BEFORE_LAMBDA_EXPRESSION_RESULT = StructurePackage.OBJECT_FEATURE_COUNT + 24;
+	int KM2_ECORE_CONTEXT__BEFORE_LAMBDA_EXPRESSION_RESULT = StructurePackage.OBJECT_FEATURE_COUNT + 23;
+
+	/**
+	 * The feature id for the '<em><b>JAVA CLASS EXECUTION CONTEXT</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KM2_ECORE_CONTEXT__JAVA_CLASS_EXECUTION_CONTEXT = StructurePackage.OBJECT_FEATURE_COUNT + 24;
 
 	/**
 	 * The feature id for the '<em><b>Ft Return Type</b></em>' attribute.
@@ -509,22 +509,22 @@ public interface Km2ecorePackage extends EPackage {
 	int KM2_ECORE_CONTEXT__INC_RESULT_LAST_STATEMENT_STACK = StructurePackage.OBJECT_FEATURE_COUNT + 31;
 
 	/**
-	 * The feature id for the '<em><b>RETURN EXPRESSION TO REPLACE</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE = StructurePackage.OBJECT_FEATURE_COUNT + 32;
-
-	/**
 	 * The feature id for the '<em><b>Value Type Mapping</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KM2_ECORE_CONTEXT__VALUE_TYPE_MAPPING = StructurePackage.OBJECT_FEATURE_COUNT + 33;
+	int KM2_ECORE_CONTEXT__VALUE_TYPE_MAPPING = StructurePackage.OBJECT_FEATURE_COUNT + 32;
+
+	/**
+	 * The feature id for the '<em><b>RETURN EXPRESSION TO REPLACE</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE = StructurePackage.OBJECT_FEATURE_COUNT + 33;
 
 	/**
 	 * The feature id for the '<em><b>Mode</b></em>' attribute.
@@ -554,22 +554,22 @@ public interface Km2ecorePackage extends EPackage {
 	int KM2_ECORE_CONTEXT__KM_INPUT = StructurePackage.OBJECT_FEATURE_COUNT + 36;
 
 	/**
-	 * The feature id for the '<em><b>Ft Stack</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KM2_ECORE_CONTEXT__FT_STACK = StructurePackage.OBJECT_FEATURE_COUNT + 37;
-
-	/**
 	 * The feature id for the '<em><b>Cond Stack</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KM2_ECORE_CONTEXT__COND_STACK = StructurePackage.OBJECT_FEATURE_COUNT + 38;
+	int KM2_ECORE_CONTEXT__COND_STACK = StructurePackage.OBJECT_FEATURE_COUNT + 37;
+
+	/**
+	 * The feature id for the '<em><b>Ft Stack</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KM2_ECORE_CONTEXT__FT_STACK = StructurePackage.OBJECT_FEATURE_COUNT + 38;
 
 	/**
 	 * The feature id for the '<em><b>Simk Output</b></em>' attribute.
@@ -776,17 +776,6 @@ public interface Km2ecorePackage extends EPackage {
 	EReference getKM2EcoreContext_OutputRepository();
 
 	/**
-	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getSEPARATOR_STATEMENT_FT <em>SEPARATOR STATEMENT FT</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>SEPARATOR STATEMENT FT</em>'.
-	 * @see km2ecore.KM2EcoreContext#getSEPARATOR_STATEMENT_FT()
-	 * @see #getKM2EcoreContext()
-	 * @generated
-	 */
-	EAttribute getKM2EcoreContext_SEPARATOR_STATEMENT_FT();
-
-	/**
 	 * Returns the meta object for the reference '{@link km2ecore.KM2EcoreContext#getInputRepository <em>Input Repository</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -796,6 +785,17 @@ public interface Km2ecorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getKM2EcoreContext_InputRepository();
+
+	/**
+	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getSEPARATOR_STATEMENT_FT <em>SEPARATOR STATEMENT FT</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SEPARATOR STATEMENT FT</em>'.
+	 * @see km2ecore.KM2EcoreContext#getSEPARATOR_STATEMENT_FT()
+	 * @see #getKM2EcoreContext()
+	 * @generated
+	 */
+	EAttribute getKM2EcoreContext_SEPARATOR_STATEMENT_FT();
 
 	/**
 	 * Returns the meta object for the reference '{@link km2ecore.KM2EcoreContext#getResultLastStatementStack <em>Result Last Statement Stack</em>}'.
@@ -853,17 +853,6 @@ public interface Km2ecorePackage extends EPackage {
 	EReference getKM2EcoreContext_Current_valueType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getBeforeFunctionTypeResult <em>Before Function Type Result</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Before Function Type Result</em>'.
-	 * @see km2ecore.KM2EcoreContext#getBeforeFunctionTypeResult()
-	 * @see #getKM2EcoreContext()
-	 * @generated
-	 */
-	EAttribute getKM2EcoreContext_BeforeFunctionTypeResult();
-
-	/**
 	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getInc_condStack <em>Inc cond Stack</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -873,6 +862,17 @@ public interface Km2ecorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getKM2EcoreContext_Inc_condStack();
+
+	/**
+	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getBeforeFunctionTypeResult <em>Before Function Type Result</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Before Function Type Result</em>'.
+	 * @see km2ecore.KM2EcoreContext#getBeforeFunctionTypeResult()
+	 * @see #getKM2EcoreContext()
+	 * @generated
+	 */
+	EAttribute getKM2EcoreContext_BeforeFunctionTypeResult();
 
 	/**
 	 * Returns the meta object for the reference '{@link km2ecore.KM2EcoreContext#getFtSuffix <em>Ft Suffix</em>}'.
@@ -886,15 +886,15 @@ public interface Km2ecorePackage extends EPackage {
 	EReference getKM2EcoreContext_FtSuffix();
 
 	/**
-	 * Returns the meta object for the reference '{@link km2ecore.KM2EcoreContext#getFtMapTypeStack <em>Ft Map Type Stack</em>}'.
+	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getJAVA_SEPARATOR <em>JAVA SEPARATOR</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Ft Map Type Stack</em>'.
-	 * @see km2ecore.KM2EcoreContext#getFtMapTypeStack()
+	 * @return the meta object for the attribute '<em>JAVA SEPARATOR</em>'.
+	 * @see km2ecore.KM2EcoreContext#getJAVA_SEPARATOR()
 	 * @see #getKM2EcoreContext()
 	 * @generated
 	 */
-	EReference getKM2EcoreContext_FtMapTypeStack();
+	EAttribute getKM2EcoreContext_JAVA_SEPARATOR();
 
 	/**
 	 * Returns the meta object for the reference '{@link km2ecore.KM2EcoreContext#getSimkModel <em>Simk Model</em>}'.
@@ -908,15 +908,15 @@ public interface Km2ecorePackage extends EPackage {
 	EReference getKM2EcoreContext_SimkModel();
 
 	/**
-	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getJAVA_SEPARATOR <em>JAVA SEPARATOR</em>}'.
+	 * Returns the meta object for the reference '{@link km2ecore.KM2EcoreContext#getFtMapTypeStack <em>Ft Map Type Stack</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>JAVA SEPARATOR</em>'.
-	 * @see km2ecore.KM2EcoreContext#getJAVA_SEPARATOR()
+	 * @return the meta object for the reference '<em>Ft Map Type Stack</em>'.
+	 * @see km2ecore.KM2EcoreContext#getFtMapTypeStack()
 	 * @see #getKM2EcoreContext()
 	 * @generated
 	 */
-	EAttribute getKM2EcoreContext_JAVA_SEPARATOR();
+	EReference getKM2EcoreContext_FtMapTypeStack();
 
 	/**
 	 * Returns the meta object for the reference '{@link km2ecore.KM2EcoreContext#getFtProductTypeStack <em>Ft Product Type Stack</em>}'.
@@ -963,17 +963,6 @@ public interface Km2ecorePackage extends EPackage {
 	EAttribute getKM2EcoreContext_FtContextualSelf();
 
 	/**
-	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getJAVA_CLASS_EXECUTION_CONTEXT <em>JAVA CLASS EXECUTION CONTEXT</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>JAVA CLASS EXECUTION CONTEXT</em>'.
-	 * @see km2ecore.KM2EcoreContext#getJAVA_CLASS_EXECUTION_CONTEXT()
-	 * @see #getKM2EcoreContext()
-	 * @generated
-	 */
-	EAttribute getKM2EcoreContext_JAVA_CLASS_EXECUTION_CONTEXT();
-
-	/**
 	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getBeforeLambdaExpressionResult <em>Before Lambda Expression Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -983,6 +972,17 @@ public interface Km2ecorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getKM2EcoreContext_BeforeLambdaExpressionResult();
+
+	/**
+	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getJAVA_CLASS_EXECUTION_CONTEXT <em>JAVA CLASS EXECUTION CONTEXT</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>JAVA CLASS EXECUTION CONTEXT</em>'.
+	 * @see km2ecore.KM2EcoreContext#getJAVA_CLASS_EXECUTION_CONTEXT()
+	 * @see #getKM2EcoreContext()
+	 * @generated
+	 */
+	EAttribute getKM2EcoreContext_JAVA_CLASS_EXECUTION_CONTEXT();
 
 	/**
 	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getFtReturnType <em>Ft Return Type</em>}'.
@@ -1062,17 +1062,6 @@ public interface Km2ecorePackage extends EPackage {
 	EAttribute getKM2EcoreContext_Inc_resultLastStatementStack();
 
 	/**
-	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getRETURN_EXPRESSION_TO_REPLACE <em>RETURN EXPRESSION TO REPLACE</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>RETURN EXPRESSION TO REPLACE</em>'.
-	 * @see km2ecore.KM2EcoreContext#getRETURN_EXPRESSION_TO_REPLACE()
-	 * @see #getKM2EcoreContext()
-	 * @generated
-	 */
-	EAttribute getKM2EcoreContext_RETURN_EXPRESSION_TO_REPLACE();
-
-	/**
 	 * Returns the meta object for the attribute list '{@link km2ecore.KM2EcoreContext#getValueTypeMapping <em>Value Type Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1082,6 +1071,17 @@ public interface Km2ecorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getKM2EcoreContext_ValueTypeMapping();
+
+	/**
+	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getRETURN_EXPRESSION_TO_REPLACE <em>RETURN EXPRESSION TO REPLACE</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>RETURN EXPRESSION TO REPLACE</em>'.
+	 * @see km2ecore.KM2EcoreContext#getRETURN_EXPRESSION_TO_REPLACE()
+	 * @see #getKM2EcoreContext()
+	 * @generated
+	 */
+	EAttribute getKM2EcoreContext_RETURN_EXPRESSION_TO_REPLACE();
 
 	/**
 	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getMode <em>Mode</em>}'.
@@ -1117,17 +1117,6 @@ public interface Km2ecorePackage extends EPackage {
 	EAttribute getKM2EcoreContext_KmInput();
 
 	/**
-	 * Returns the meta object for the reference '{@link km2ecore.KM2EcoreContext#getFtStack <em>Ft Stack</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Ft Stack</em>'.
-	 * @see km2ecore.KM2EcoreContext#getFtStack()
-	 * @see #getKM2EcoreContext()
-	 * @generated
-	 */
-	EReference getKM2EcoreContext_FtStack();
-
-	/**
 	 * Returns the meta object for the reference '{@link km2ecore.KM2EcoreContext#getCondStack <em>Cond Stack</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1137,6 +1126,17 @@ public interface Km2ecorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getKM2EcoreContext_CondStack();
+
+	/**
+	 * Returns the meta object for the reference '{@link km2ecore.KM2EcoreContext#getFtStack <em>Ft Stack</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ft Stack</em>'.
+	 * @see km2ecore.KM2EcoreContext#getFtStack()
+	 * @see #getKM2EcoreContext()
+	 * @generated
+	 */
+	EReference getKM2EcoreContext_FtStack();
 
 	/**
 	 * Returns the meta object for the attribute '{@link km2ecore.KM2EcoreContext#getSimkOutput <em>Simk Output</em>}'.
@@ -1366,15 +1366,6 @@ public interface Km2ecorePackage extends EPackage {
 				.getKM2EcoreContext_OutputRepository();
 
 		/**
-		 * The meta object literal for the '<em><b>SEPARATOR STATEMENT FT</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute KM2_ECORE_CONTEXT__SEPARATOR_STATEMENT_FT = eINSTANCE
-				.getKM2EcoreContext_SEPARATOR_STATEMENT_FT();
-
-		/**
 		 * The meta object literal for the '<em><b>Input Repository</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1382,6 +1373,15 @@ public interface Km2ecorePackage extends EPackage {
 		 */
 		EReference KM2_ECORE_CONTEXT__INPUT_REPOSITORY = eINSTANCE
 				.getKM2EcoreContext_InputRepository();
+
+		/**
+		 * The meta object literal for the '<em><b>SEPARATOR STATEMENT FT</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KM2_ECORE_CONTEXT__SEPARATOR_STATEMENT_FT = eINSTANCE
+				.getKM2EcoreContext_SEPARATOR_STATEMENT_FT();
 
 		/**
 		 * The meta object literal for the '<em><b>Result Last Statement Stack</b></em>' reference feature.
@@ -1429,15 +1429,6 @@ public interface Km2ecorePackage extends EPackage {
 				.getKM2EcoreContext_Current_valueType();
 
 		/**
-		 * The meta object literal for the '<em><b>Before Function Type Result</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute KM2_ECORE_CONTEXT__BEFORE_FUNCTION_TYPE_RESULT = eINSTANCE
-				.getKM2EcoreContext_BeforeFunctionTypeResult();
-
-		/**
 		 * The meta object literal for the '<em><b>Inc cond Stack</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1445,6 +1436,15 @@ public interface Km2ecorePackage extends EPackage {
 		 */
 		EAttribute KM2_ECORE_CONTEXT__INC_COND_STACK = eINSTANCE
 				.getKM2EcoreContext_Inc_condStack();
+
+		/**
+		 * The meta object literal for the '<em><b>Before Function Type Result</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KM2_ECORE_CONTEXT__BEFORE_FUNCTION_TYPE_RESULT = eINSTANCE
+				.getKM2EcoreContext_BeforeFunctionTypeResult();
 
 		/**
 		 * The meta object literal for the '<em><b>Ft Suffix</b></em>' reference feature.
@@ -1456,13 +1456,13 @@ public interface Km2ecorePackage extends EPackage {
 				.getKM2EcoreContext_FtSuffix();
 
 		/**
-		 * The meta object literal for the '<em><b>Ft Map Type Stack</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>JAVA SEPARATOR</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KM2_ECORE_CONTEXT__FT_MAP_TYPE_STACK = eINSTANCE
-				.getKM2EcoreContext_FtMapTypeStack();
+		EAttribute KM2_ECORE_CONTEXT__JAVA_SEPARATOR = eINSTANCE
+				.getKM2EcoreContext_JAVA_SEPARATOR();
 
 		/**
 		 * The meta object literal for the '<em><b>Simk Model</b></em>' reference feature.
@@ -1474,13 +1474,13 @@ public interface Km2ecorePackage extends EPackage {
 				.getKM2EcoreContext_SimkModel();
 
 		/**
-		 * The meta object literal for the '<em><b>JAVA SEPARATOR</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Ft Map Type Stack</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute KM2_ECORE_CONTEXT__JAVA_SEPARATOR = eINSTANCE
-				.getKM2EcoreContext_JAVA_SEPARATOR();
+		EReference KM2_ECORE_CONTEXT__FT_MAP_TYPE_STACK = eINSTANCE
+				.getKM2EcoreContext_FtMapTypeStack();
 
 		/**
 		 * The meta object literal for the '<em><b>Ft Product Type Stack</b></em>' reference feature.
@@ -1519,15 +1519,6 @@ public interface Km2ecorePackage extends EPackage {
 				.getKM2EcoreContext_FtContextualSelf();
 
 		/**
-		 * The meta object literal for the '<em><b>JAVA CLASS EXECUTION CONTEXT</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute KM2_ECORE_CONTEXT__JAVA_CLASS_EXECUTION_CONTEXT = eINSTANCE
-				.getKM2EcoreContext_JAVA_CLASS_EXECUTION_CONTEXT();
-
-		/**
 		 * The meta object literal for the '<em><b>Before Lambda Expression Result</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1535,6 +1526,15 @@ public interface Km2ecorePackage extends EPackage {
 		 */
 		EAttribute KM2_ECORE_CONTEXT__BEFORE_LAMBDA_EXPRESSION_RESULT = eINSTANCE
 				.getKM2EcoreContext_BeforeLambdaExpressionResult();
+
+		/**
+		 * The meta object literal for the '<em><b>JAVA CLASS EXECUTION CONTEXT</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KM2_ECORE_CONTEXT__JAVA_CLASS_EXECUTION_CONTEXT = eINSTANCE
+				.getKM2EcoreContext_JAVA_CLASS_EXECUTION_CONTEXT();
 
 		/**
 		 * The meta object literal for the '<em><b>Ft Return Type</b></em>' attribute feature.
@@ -1600,15 +1600,6 @@ public interface Km2ecorePackage extends EPackage {
 				.getKM2EcoreContext_Inc_resultLastStatementStack();
 
 		/**
-		 * The meta object literal for the '<em><b>RETURN EXPRESSION TO REPLACE</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE = eINSTANCE
-				.getKM2EcoreContext_RETURN_EXPRESSION_TO_REPLACE();
-
-		/**
 		 * The meta object literal for the '<em><b>Value Type Mapping</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1616,6 +1607,15 @@ public interface Km2ecorePackage extends EPackage {
 		 */
 		EAttribute KM2_ECORE_CONTEXT__VALUE_TYPE_MAPPING = eINSTANCE
 				.getKM2EcoreContext_ValueTypeMapping();
+
+		/**
+		 * The meta object literal for the '<em><b>RETURN EXPRESSION TO REPLACE</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE = eINSTANCE
+				.getKM2EcoreContext_RETURN_EXPRESSION_TO_REPLACE();
 
 		/**
 		 * The meta object literal for the '<em><b>Mode</b></em>' attribute feature.
@@ -1645,15 +1645,6 @@ public interface Km2ecorePackage extends EPackage {
 				.getKM2EcoreContext_KmInput();
 
 		/**
-		 * The meta object literal for the '<em><b>Ft Stack</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference KM2_ECORE_CONTEXT__FT_STACK = eINSTANCE
-				.getKM2EcoreContext_FtStack();
-
-		/**
 		 * The meta object literal for the '<em><b>Cond Stack</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1661,6 +1652,15 @@ public interface Km2ecorePackage extends EPackage {
 		 */
 		EReference KM2_ECORE_CONTEXT__COND_STACK = eINSTANCE
 				.getKM2EcoreContext_CondStack();
+
+		/**
+		 * The meta object literal for the '<em><b>Ft Stack</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KM2_ECORE_CONTEXT__FT_STACK = eINSTANCE
+				.getKM2EcoreContext_FtStack();
 
 		/**
 		 * The meta object literal for the '<em><b>Simk Output</b></em>' attribute feature.

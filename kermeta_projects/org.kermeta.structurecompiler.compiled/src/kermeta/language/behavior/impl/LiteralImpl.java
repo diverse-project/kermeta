@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: LiteralImpl.java,v 1.12 2009-02-23 15:26:46 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior.impl;
 
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class LiteralImpl extends ExpressionImpl implements Literal {
+public class LiteralImpl extends ExpressionImpl implements Literal {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

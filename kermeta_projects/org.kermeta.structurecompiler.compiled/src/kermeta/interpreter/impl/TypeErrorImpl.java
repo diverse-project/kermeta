@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TypeErrorImpl.java,v 1.12 2009-02-23 15:26:47 cfaucher Exp $
+ * $Id$
  */
 package kermeta.interpreter.impl;
 

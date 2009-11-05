@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: KermetaEAnnotationSource.java,v 1.12 2009-02-23 15:26:55 cfaucher Exp $
+ * $Id$
  */
 package km2ecore.helper.ecore;
 

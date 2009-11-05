@@ -4,29 +4,38 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ParameterImpl.java,v 1.13 2009-02-23 15:26:40 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure.impl;
 
 import ecore.EParameter;
 
+import java.util.Collection;
+
+import kermeta.language.structure.MultiplicityElement;
+import kermeta.language.structure.NamedElement;
 import kermeta.language.structure.Operation;
 import kermeta.language.structure.Parameter;
 import kermeta.language.structure.StructurePackage;
-import kermeta.language.structure.Traceability;
+import kermeta.language.structure.Type;
+import kermeta.language.structure.TypeContainer;
+import kermeta.language.structure.TypedElement;
 
 import km2ecore.KM2EcoreContext;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,23 +44,140 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.language.structure.impl.ParameterImpl#getEcoreModelElement <em>Ecore Model Element</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ParameterImpl#getContainedType <em>Contained Type</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ParameterImpl#getName <em>Name</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ParameterImpl#getType <em>Type</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ParameterImpl#getIsOrdered <em>Is Ordered</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ParameterImpl#getUpper <em>Upper</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ParameterImpl#getLower <em>Lower</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ParameterImpl#getIsUnique <em>Is Unique</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ParameterImpl#getOperation <em>Operation</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ParameterImpl extends MultiplicityElementImpl implements Parameter {
+public class ParameterImpl extends TraceabilityImpl<EParameter> implements
+		Parameter {
 	/**
-	 * The cached value of the '{@link #getEcoreModelElement() <em>Ecore Model Element</em>}' reference.
+	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEcoreModelElement()
+	 * @see #getContainedType()
 	 * @generated
 	 * @ordered
 	 */
-	protected EParameter ecoreModelElement;
+	protected EList<Type> containedType;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected Type type;
+
+	/**
+	 * The default value of the '{@link #getIsOrdered() <em>Is Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsOrdered()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_ORDERED_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIsOrdered() <em>Is Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsOrdered()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isOrdered = IS_ORDERED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getUpper() <em>Upper</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpper()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer UPPER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getUpper() <em>Upper</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpper()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer upper = UPPER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLower() <em>Lower</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLower()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer LOWER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLower() <em>Lower</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLower()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer lower = LOWER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIsUnique() <em>Is Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_UNIQUE_EDEFAULT = Boolean.TRUE;
+
+	/**
+	 * The cached value of the '{@link #getIsUnique() <em>Is Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isUnique = IS_UNIQUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -77,19 +203,14 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EParameter getEcoreModelElement() {
-		if (ecoreModelElement != null
-				&& ((EObject) ecoreModelElement).eIsProxy()) {
-			InternalEObject oldEcoreModelElement = (InternalEObject) ecoreModelElement;
-			ecoreModelElement = (EParameter) eResolveProxy(oldEcoreModelElement);
-			if (ecoreModelElement != oldEcoreModelElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							StructurePackage.PARAMETER__ECORE_MODEL_ELEMENT,
-							oldEcoreModelElement, ecoreModelElement));
-			}
+	public EList<Type> getContainedType() {
+		if (containedType == null) {
+			containedType = new EObjectContainmentWithInverseEList.Resolving<Type>(
+					Type.class, this,
+					StructurePackage.PARAMETER__CONTAINED_TYPE,
+					StructurePackage.TYPE__TYPE_CONTAINER);
 		}
-		return ecoreModelElement;
+		return containedType;
 	}
 
 	/**
@@ -97,8 +218,8 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EParameter basicGetEcoreModelElement() {
-		return ecoreModelElement;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -106,13 +227,142 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEcoreModelElement(EParameter newEcoreModelElement) {
-		EParameter oldEcoreModelElement = ecoreModelElement;
-		ecoreModelElement = newEcoreModelElement;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PARAMETER__ECORE_MODEL_ELEMENT,
-					oldEcoreModelElement, ecoreModelElement));
+					StructurePackage.PARAMETER__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject) type;
+			type = (Type) eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							StructurePackage.PARAMETER__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type basicGetType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(Type newType) {
+		Type oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PARAMETER__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getIsOrdered() {
+		return isOrdered;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsOrdered(Boolean newIsOrdered) {
+		Boolean oldIsOrdered = isOrdered;
+		isOrdered = newIsOrdered;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PARAMETER__IS_ORDERED, oldIsOrdered,
+					isOrdered));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Integer getUpper() {
+		return upper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUpper(Integer newUpper) {
+		Integer oldUpper = upper;
+		upper = newUpper;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PARAMETER__UPPER, oldUpper, upper));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Integer getLower() {
+		return lower;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLower(Integer newLower) {
+		Integer oldLower = lower;
+		lower = newLower;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PARAMETER__LOWER, oldLower, lower));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getIsUnique() {
+		return isUnique;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsUnique(Boolean newIsUnique) {
+		Boolean oldIsUnique = isUnique;
+		isUnique = newIsUnique;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PARAMETER__IS_UNIQUE, oldIsUnique,
+					isUnique));
 	}
 
 	/**
@@ -121,7 +371,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * @generated
 	 */
 	public Operation getOperation() {
-		if (eContainerFeatureID != StructurePackage.PARAMETER__OPERATION)
+		if (eContainerFeatureID() != StructurePackage.PARAMETER__OPERATION)
 			return null;
 		return (Operation) eContainer();
 	}
@@ -132,7 +382,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * @generated
 	 */
 	public Operation basicGetOperation() {
-		if (eContainerFeatureID != StructurePackage.PARAMETER__OPERATION)
+		if (eContainerFeatureID() != StructurePackage.PARAMETER__OPERATION)
 			return null;
 		return (Operation) eInternalContainer();
 	}
@@ -156,7 +406,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 */
 	public void setOperation(Operation newOperation) {
 		if (newOperation != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.PARAMETER__OPERATION && newOperation != null)) {
+				|| (eContainerFeatureID() != StructurePackage.PARAMETER__OPERATION && newOperation != null)) {
 			if (EcoreUtil.isAncestor(this, newOperation))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -187,14 +437,14 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 
 		result = false;
 
-		java.lang.Boolean idIfCond_298 = false;
-		idIfCond_298 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_589 = false;
+		idIfCond_589 = kermeta.standard.helper.BooleanWrapper
 				.and(kermeta.standard.helper.IntegerWrapper.equals(this
 						.getUpper(), 1), kermeta.standard.helper.StringWrapper
 						.equals(this.getType().getTypeQName(),
 								"kermeta::standard::String"));
 
-		if (idIfCond_298) {
+		if (idIfCond_589) {
 
 			result = true;
 		}
@@ -214,10 +464,10 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 
 		result = false;
 
-		java.lang.Boolean idIfCond_299 = false;
-		idIfCond_299 = this.isFunctionType();
+		java.lang.Boolean idIfCond_590 = false;
+		idIfCond_590 = this.isFunctionType();
 
-		if (idIfCond_299) {
+		if (idIfCond_590) {
 
 			kermeta.language.structure.FunctionType ft = ((kermeta.language.structure.FunctionType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
@@ -227,10 +477,10 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 									.getMetaClass(
 											"kermeta.language.structure.FunctionType")));
 
-			java.lang.Boolean idIfCond_300 = false;
-			idIfCond_300 = ft.getRight().isBooleanTypeDef(context);
+			java.lang.Boolean idIfCond_591 = false;
+			idIfCond_591 = ft.getRight().isBooleanTypeDef(context);
 
-			if (idIfCond_300) {
+			if (idIfCond_591) {
 
 				result = true;
 			}
@@ -250,8 +500,8 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 
 		ecore.EParameter ecoreParameter = null;
 
-		java.lang.Boolean idIfCond_301 = false;
-		idIfCond_301 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_592 = false;
+		idIfCond_592 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						this.getType(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -259,7 +509,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 								.getMetaClass(
 										"kermeta.language.structure.FunctionType"));
 
-		if (idIfCond_301) {
+		if (idIfCond_592) {
 
 			ecoreParameter = ((ecore.EParameter) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(ecore.EcorePackage.eINSTANCE.getEParameter()));
@@ -340,8 +590,8 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 */
 	public void setLinks(KM2EcoreContext context) {
 
-		java.lang.Boolean idIfCond_302 = false;
-		idIfCond_302 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_593 = false;
+		idIfCond_593 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						this.getType(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -349,7 +599,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 								.getMetaClass(
 										"kermeta.language.structure.FunctionType"));
 
-		if (idIfCond_302) {
+		if (idIfCond_593) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil
 					.getInstance()
@@ -399,12 +649,12 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 							.getEAnnotationHelper()))
 					.createEmpty("kermeta.functionType");
 
-			java.lang.Boolean idIfCond_303 = false;
-			idIfCond_303 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_594 = false;
+			idIfCond_594 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(ft.getLeft()));
 
-			if (idIfCond_303) {
+			if (idIfCond_594) {
 
 				((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
@@ -412,12 +662,12 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 						ft_annotation, "0", ft.getLeft().getTypeQName());
 			}
 
-			java.lang.Boolean idIfCond_304 = false;
-			idIfCond_304 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_595 = false;
+			idIfCond_595 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(ft.getLeft()));
 
-			if (idIfCond_304) {
+			if (idIfCond_595) {
 
 				((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
@@ -437,8 +687,56 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 					.newObject(kermeta.language.structure.StructurePackage.eINSTANCE
 							.getLinkSetterForTypedElement()));
 
+			s.setForceVoidTypeLink(true);
+
 			s.setLinks(this, this.getEcoreModelElement(), context);
 		}
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void applyPass2BehaviorJava(KM2EcoreContext context) {
+
+		this.setLinks(context);
+
+		//BIft:eachOwnedElement
+
+		//BIft:each
+
+		{
+
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft123 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					.<kermeta.language.structure.Tag> convertAsOrderedSet(
+							this.getOwnedTags()).iterator();
+			java.lang.Boolean idLoopCond_596 = false;
+			while (!idLoopCond_596) {
+				idLoopCond_596 = it_ft123.isOff();
+				if (idLoopCond_596) {
+				} else {
+
+					//BIle:func
+					kermeta.language.structure.Tag o_lbdExp123 = it_ft123
+							.next();
+
+					//BIle:func
+					kermeta.language.structure.Tag p_lbdExp122 = o_lbdExp123;
+
+					p_lbdExp122.applyPass2BehaviorJava(context);
+					//EIle:func
+
+					//EIle:func
+
+				}
+			}
+		}
+
+		//EIft:each
+
+		//EIft:eachOwnedElement
 
 	}
 
@@ -468,44 +766,13 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void applyPass2BehaviorJava(KM2EcoreContext context) {
+	public String getRecopyInValueTypes() {
 
-		this.setLinks(context);
+		java.lang.String result = null;
 
-		//BIft:eachOwnedElement
+		result = this.getUniqueTagValue("RecopyInValueTypes");
 
-		//BIft:each
-
-		{
-
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft107 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<kermeta.language.structure.Tag> convertAsOrderedSet(
-							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_305 = false;
-			while (!idLoopCond_305) {
-				idLoopCond_305 = it_ft107.isOff();
-				if (idLoopCond_305) {
-				} else {
-
-					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp107 = it_ft107
-							.next();
-
-					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp106 = o_lbdExp107;
-
-					p_lbdExp106.applyPass2BehaviorJava(context);
-					//EIle:func
-
-					//EIle:func
-
-				}
-			}
-		}
-
-		//EIft:each
-
-		//EIft:eachOwnedElement
+		return result;
 
 	}
 
@@ -514,10 +781,210 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getFinalName(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		result = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+				.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE
+						.getIdentifierHelper())).getMangledIdentifier(this
+				.getName(), context);
+
+		java.lang.Boolean idIfCond_558 = false;
+		idIfCond_558 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isNotEqualSwitcher(this.getEMFRenameAs(), "");
+
+		if (idIfCond_558) {
+
+			result = this.getEMFRenameAs();
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getEMFRenameAs() {
+
+		java.lang.String result = null;
+
+		result = this.getUniqueTagValue("EMF_renameAs");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String ppReturnResult(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		result = "\nreturn ";
+
+		java.lang.Boolean idIfCond_559 = false;
+		idIfCond_559 = kermeta.standard.helper.IntegerWrapper.equals(this
+				.getUpper(), 1);
+
+		if (idIfCond_559) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result,
+					"result");
+		} else {
+
+			result = kermeta.standard.helper.StringWrapper.plus(
+					kermeta.standard.helper.StringWrapper.plus(result, context
+							.getCOLLECTION_UTIL_CLASS()),
+					".convertAsEList(result)");
+		}
+
+		result = kermeta.standard.helper.StringWrapper.plus(result, ";\n");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGenModelQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.plus(
+				kermeta.standard.helper.StringWrapper.plus(this
+						.getRootPackage().getGenModelBasePackage(), "::"), this
+						.qualifiedName());
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.qualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGenModelJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.getGenModelQualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String qualifiedName() {
+
+		java.lang.String result = null;
+
+		kermeta.language.structure.NamedElement elem = this;
+
+		result = this.getName();
+
+		java.lang.Boolean idIfCond_560 = false;
+		idIfCond_560 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.containerSwitcher(elem),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.NamedElement"));
+
+		if (idIfCond_560) {
+
+			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.language.ObjectUtil
+									.containerSwitcher(elem),
+							"kermeta.language.structure.NamedElement");
+			java.lang.Boolean idLoopCond_561 = false;
+			while (!idLoopCond_561) {
+				idLoopCond_561 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.equalsSwitcher(elem, null);
+				if (idLoopCond_561) {
+				} else {
+
+					result = kermeta.standard.helper.StringWrapper.plus(
+							kermeta.standard.helper.StringWrapper.plus(elem
+									.getName(), "::"), result);
+
+					java.lang.Boolean idIfCond_562 = false;
+					idIfCond_562 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isInstanceOfSwitcher(
+									org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.containerSwitcher(elem),
+									org.kermeta.compil.runtime.ExecutionContext
+											.getInstance()
+											.getMetaClass(
+													"kermeta.language.structure.NamedElement"));
+
+					if (idIfCond_562) {
+
+						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.asTypeOrVoid(
+										org.kermeta.compil.runtime.helper.language.ObjectUtil
+												.containerSwitcher(elem),
+										"kermeta.language.structure.NamedElement");
+					} else {
+
+						elem = null;
+					}
+
+				}
+			}
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
+		case StructurePackage.PARAMETER__CONTAINED_TYPE:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getContainedType())
+					.basicAdd(otherEnd, msgs);
 		case StructurePackage.PARAMETER__OPERATION:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
@@ -535,6 +1002,9 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
+		case StructurePackage.PARAMETER__CONTAINED_TYPE:
+			return ((InternalEList<?>) getContainedType()).basicRemove(
+					otherEnd, msgs);
 		case StructurePackage.PARAMETER__OPERATION:
 			return basicSetOperation(null, msgs);
 		}
@@ -549,7 +1019,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case StructurePackage.PARAMETER__OPERATION:
 			return eInternalContainer().eInverseRemove(this,
 					StructurePackage.OPERATION__OWNED_PARAMETER,
@@ -566,10 +1036,22 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case StructurePackage.PARAMETER__ECORE_MODEL_ELEMENT:
+		case StructurePackage.PARAMETER__CONTAINED_TYPE:
+			return getContainedType();
+		case StructurePackage.PARAMETER__NAME:
+			return getName();
+		case StructurePackage.PARAMETER__TYPE:
 			if (resolve)
-				return getEcoreModelElement();
-			return basicGetEcoreModelElement();
+				return getType();
+			return basicGetType();
+		case StructurePackage.PARAMETER__IS_ORDERED:
+			return getIsOrdered();
+		case StructurePackage.PARAMETER__UPPER:
+			return getUpper();
+		case StructurePackage.PARAMETER__LOWER:
+			return getLower();
+		case StructurePackage.PARAMETER__IS_UNIQUE:
+			return getIsUnique();
 		case StructurePackage.PARAMETER__OPERATION:
 			if (resolve)
 				return getOperation();
@@ -583,11 +1065,31 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case StructurePackage.PARAMETER__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EParameter) newValue);
+		case StructurePackage.PARAMETER__CONTAINED_TYPE:
+			getContainedType().clear();
+			getContainedType().addAll((Collection<? extends Type>) newValue);
+			return;
+		case StructurePackage.PARAMETER__NAME:
+			setName((String) newValue);
+			return;
+		case StructurePackage.PARAMETER__TYPE:
+			setType((Type) newValue);
+			return;
+		case StructurePackage.PARAMETER__IS_ORDERED:
+			setIsOrdered((Boolean) newValue);
+			return;
+		case StructurePackage.PARAMETER__UPPER:
+			setUpper((Integer) newValue);
+			return;
+		case StructurePackage.PARAMETER__LOWER:
+			setLower((Integer) newValue);
+			return;
+		case StructurePackage.PARAMETER__IS_UNIQUE:
+			setIsUnique((Boolean) newValue);
 			return;
 		case StructurePackage.PARAMETER__OPERATION:
 			setOperation((Operation) newValue);
@@ -604,8 +1106,26 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case StructurePackage.PARAMETER__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EParameter) null);
+		case StructurePackage.PARAMETER__CONTAINED_TYPE:
+			getContainedType().clear();
+			return;
+		case StructurePackage.PARAMETER__NAME:
+			setName(NAME_EDEFAULT);
+			return;
+		case StructurePackage.PARAMETER__TYPE:
+			setType((Type) null);
+			return;
+		case StructurePackage.PARAMETER__IS_ORDERED:
+			setIsOrdered(IS_ORDERED_EDEFAULT);
+			return;
+		case StructurePackage.PARAMETER__UPPER:
+			setUpper(UPPER_EDEFAULT);
+			return;
+		case StructurePackage.PARAMETER__LOWER:
+			setLower(LOWER_EDEFAULT);
+			return;
+		case StructurePackage.PARAMETER__IS_UNIQUE:
+			setIsUnique(IS_UNIQUE_EDEFAULT);
 			return;
 		case StructurePackage.PARAMETER__OPERATION:
 			setOperation((Operation) null);
@@ -622,8 +1142,25 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case StructurePackage.PARAMETER__ECORE_MODEL_ELEMENT:
-			return ecoreModelElement != null;
+		case StructurePackage.PARAMETER__CONTAINED_TYPE:
+			return containedType != null && !containedType.isEmpty();
+		case StructurePackage.PARAMETER__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
+		case StructurePackage.PARAMETER__TYPE:
+			return type != null;
+		case StructurePackage.PARAMETER__IS_ORDERED:
+			return IS_ORDERED_EDEFAULT == null ? isOrdered != null
+					: !IS_ORDERED_EDEFAULT.equals(isOrdered);
+		case StructurePackage.PARAMETER__UPPER:
+			return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT
+					.equals(upper);
+		case StructurePackage.PARAMETER__LOWER:
+			return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT
+					.equals(lower);
+		case StructurePackage.PARAMETER__IS_UNIQUE:
+			return IS_UNIQUE_EDEFAULT == null ? isUnique != null
+					: !IS_UNIQUE_EDEFAULT.equals(isUnique);
 		case StructurePackage.PARAMETER__OPERATION:
 			return basicGetOperation() != null;
 		}
@@ -637,10 +1174,40 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Traceability.class) {
+		if (baseClass == TypeContainer.class) {
 			switch (derivedFeatureID) {
-			case StructurePackage.PARAMETER__ECORE_MODEL_ELEMENT:
-				return StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT;
+			case StructurePackage.PARAMETER__CONTAINED_TYPE:
+				return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.PARAMETER__NAME:
+				return StructurePackage.NAMED_ELEMENT__NAME;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == TypedElement.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.PARAMETER__TYPE:
+				return StructurePackage.TYPED_ELEMENT__TYPE;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == MultiplicityElement.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.PARAMETER__IS_ORDERED:
+				return StructurePackage.MULTIPLICITY_ELEMENT__IS_ORDERED;
+			case StructurePackage.PARAMETER__UPPER:
+				return StructurePackage.MULTIPLICITY_ELEMENT__UPPER;
+			case StructurePackage.PARAMETER__LOWER:
+				return StructurePackage.MULTIPLICITY_ELEMENT__LOWER;
+			case StructurePackage.PARAMETER__IS_UNIQUE:
+				return StructurePackage.MULTIPLICITY_ELEMENT__IS_UNIQUE;
 			default:
 				return -1;
 			}
@@ -655,15 +1222,70 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Traceability.class) {
+		if (baseClass == TypeContainer.class) {
 			switch (baseFeatureID) {
-			case StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT:
-				return StructurePackage.PARAMETER__ECORE_MODEL_ELEMENT;
+			case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE:
+				return StructurePackage.PARAMETER__CONTAINED_TYPE;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.NAMED_ELEMENT__NAME:
+				return StructurePackage.PARAMETER__NAME;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == TypedElement.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.TYPED_ELEMENT__TYPE:
+				return StructurePackage.PARAMETER__TYPE;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == MultiplicityElement.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.MULTIPLICITY_ELEMENT__IS_ORDERED:
+				return StructurePackage.PARAMETER__IS_ORDERED;
+			case StructurePackage.MULTIPLICITY_ELEMENT__UPPER:
+				return StructurePackage.PARAMETER__UPPER;
+			case StructurePackage.MULTIPLICITY_ELEMENT__LOWER:
+				return StructurePackage.PARAMETER__LOWER;
+			case StructurePackage.MULTIPLICITY_ELEMENT__IS_UNIQUE:
+				return StructurePackage.PARAMETER__IS_UNIQUE;
 			default:
 				return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", isOrdered: ");
+		result.append(isOrdered);
+		result.append(", upper: ");
+		result.append(upper);
+		result.append(", lower: ");
+		result.append(lower);
+		result.append(", isUnique: ");
+		result.append(isUnique);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ParameterImpl

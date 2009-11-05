@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EcorePackageImpl.java,v 1.11 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -30,6 +30,8 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.Map;
 
+import kermeta.KermetaPackage;
+
 import kermeta.compiler.CompilerPackage;
 
 import kermeta.compiler.impl.CompilerPackageImpl;
@@ -37,6 +39,8 @@ import kermeta.compiler.impl.CompilerPackageImpl;
 import kermeta.exceptions.ExceptionsPackage;
 
 import kermeta.exceptions.impl.ExceptionsPackageImpl;
+
+import kermeta.impl.KermetaPackageImpl;
 
 import kermeta.interpreter.InterpreterPackage;
 
@@ -74,6 +78,10 @@ import kermeta.utils.UtilsPackage;
 
 import kermeta.utils.impl.UtilsPackageImpl;
 
+import kermeta.xmltype.XmltypePackage;
+
+import kermeta.xmltype.impl.XmltypePackageImpl;
+
 import km2ecore.Km2ecorePackage;
 
 import km2ecore.common.CommonPackage;
@@ -87,10 +95,6 @@ import km2ecore.common.impl.CommonPackageImpl;
 import km2ecore.helper.java.JavaPackage;
 
 import km2ecore.helper.java.impl.JavaPackageImpl;
-
-import km2ecore.helper.kermeta.KermetaPackage;
-
-import km2ecore.helper.kermeta.impl.KermetaPackageImpl;
 
 import km2ecore.impl.Km2ecorePackageImpl;
 
@@ -520,20 +524,10 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link EcorePackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -548,77 +542,29 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		// Obtain or create and register package
 		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(eNS_URI)
+				.get(eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.get(eNS_URI)
 				: new EcorePackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI)
-				: Km2ecorePackage.eINSTANCE);
-		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI)
-				: CommonPackage.eINSTANCE);
-		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI)
-				: ExceptionPackage.eINSTANCE);
-		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI)
-				: JavaPackage.eINSTANCE);
-		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
-				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
 		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
-		kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI) instanceof kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI)
-				: kermeta.KermetaPackage.eINSTANCE);
-		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI)
-				: UtilsPackage.eINSTANCE);
 		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI)
 				: LanguagePackage.eINSTANCE);
-		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StructurePackage.eNS_URI)
-				: StructurePackage.eINSTANCE);
 		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
-		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI)
-				: StandardPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI)
-				: IoPackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
-		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_2 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
-				: kermeta.ecore.EcorePackage.eINSTANCE);
+		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StructurePackage.eNS_URI)
+				: StructurePackage.eINSTANCE);
 		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionsPackage.eNS_URI)
@@ -627,6 +573,34 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI)
 				: InterpreterPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
+		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI)
+				: StandardPackage.eINSTANCE);
+		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI)
+				: UtilsPackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
+		XmltypePackageImpl theXmltypePackage = (XmltypePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(XmltypePackage.eNS_URI) instanceof XmltypePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(XmltypePackage.eNS_URI)
+				: XmltypePackage.eINSTANCE);
+		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
+				: kermeta.ecore.EcorePackage.eINSTANCE);
+		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI)
+				: IoPackage.eINSTANCE);
 		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(CompilerPackage.eNS_URI)
@@ -635,6 +609,30 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI)
 				: SimkPackage.eINSTANCE);
+		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI)
+				: Km2ecorePackage.eINSTANCE);
+		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_2 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
+				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
+		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
+				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
+		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI)
+				: JavaPackage.eINSTANCE);
+		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI)
+				: CommonPackage.eINSTANCE);
+		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI)
+				: ExceptionPackage.eINSTANCE);
 		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI)
@@ -642,55 +640,59 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		// Create package meta-data objects
 		theEcorePackage.createPackageContents();
-		theKm2ecorePackage.createPackageContents();
-		theCommonPackage.createPackageContents();
-		theExceptionPackage.createPackageContents();
-		theJavaPackage.createPackageContents();
-		theEcorePackage_1.createPackageContents();
 		theKermetaPackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
-		theUtilsPackage.createPackageContents();
 		theLanguagePackage.createPackageContents();
-		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
-		theStandardPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
-		theIoPackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
-		theEcorePackage_2.createPackageContents();
+		theStructurePackage.createPackageContents();
 		theExceptionsPackage.createPackageContents();
 		theInterpreterPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
+		theStandardPackage.createPackageContents();
+		theUtilsPackage.createPackageContents();
+		thePersistencePackage.createPackageContents();
+		theXmltypePackage.createPackageContents();
+		theEcorePackage_1.createPackageContents();
+		theIoPackage.createPackageContents();
 		theCompilerPackage.createPackageContents();
 		theSimkPackage.createPackageContents();
+		theKm2ecorePackage.createPackageContents();
+		theEcorePackage_2.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
+		theJavaPackage.createPackageContents();
+		theCommonPackage.createPackageContents();
+		theExceptionPackage.createPackageContents();
 		theTraceabilityPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theEcorePackage.initializePackageContents();
-		theKm2ecorePackage.initializePackageContents();
-		theCommonPackage.initializePackageContents();
-		theExceptionPackage.initializePackageContents();
-		theJavaPackage.initializePackageContents();
-		theEcorePackage_1.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
-		theUtilsPackage.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
-		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
-		theStandardPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
-		theIoPackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
-		theEcorePackage_2.initializePackageContents();
+		theStructurePackage.initializePackageContents();
 		theExceptionsPackage.initializePackageContents();
 		theInterpreterPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
+		theStandardPackage.initializePackageContents();
+		theUtilsPackage.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
+		theXmltypePackage.initializePackageContents();
+		theEcorePackage_1.initializePackageContents();
+		theIoPackage.initializePackageContents();
 		theCompilerPackage.initializePackageContents();
 		theSimkPackage.initializePackageContents();
+		theKm2ecorePackage.initializePackageContents();
+		theEcorePackage_2.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
+		theJavaPackage.initializePackageContents();
+		theCommonPackage.initializePackageContents();
+		theExceptionPackage.initializePackageContents();
 		theTraceabilityPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theEcorePackage.freeze();
 
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, theEcorePackage);
 		return theEcorePackage;
 	}
 
@@ -1222,8 +1224,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEStructuralFeature_DefaultValueLiteral() {
-		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
+	public EReference getEStructuralFeature_EContainingClass() {
+		return (EReference) eStructuralFeatureEClass.getEStructuralFeatures()
 				.get(1);
 	}
 
@@ -1232,8 +1234,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEStructuralFeature_EContainingClass() {
-		return (EReference) eStructuralFeatureEClass.getEStructuralFeatures()
+	public EAttribute getEStructuralFeature_DefaultValueLiteral() {
+		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
 				.get(2);
 	}
 
@@ -1833,10 +1835,10 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		eStructuralFeatureEClass = createEClass(ESTRUCTURAL_FEATURE);
 		createEAttribute(eStructuralFeatureEClass,
 				ESTRUCTURAL_FEATURE__VOLATILE);
-		createEAttribute(eStructuralFeatureEClass,
-				ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL);
 		createEReference(eStructuralFeatureEClass,
 				ESTRUCTURAL_FEATURE__ECONTAINING_CLASS);
+		createEAttribute(eStructuralFeatureEClass,
+				ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL);
 		createEAttribute(eStructuralFeatureEClass,
 				ESTRUCTURAL_FEATURE__TRANSIENT);
 		createEAttribute(eStructuralFeatureEClass,
@@ -1986,10 +1988,10 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				EAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEAnnotation_Source(), this.getEString(), "source",
-				null, 0, 1, EAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEAttribute(getEAnnotation_Source(), ecorePackage.getEString(),
+				"source", null, 0, 1, EAnnotation.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 		initEReference(getEAnnotation_Contents(), this.getEObject(), null,
 				"contents", null, 0, -1, EAnnotation.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
@@ -2009,16 +2011,16 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEAttribute(getEClass__abstract(), this.getEBoolean(), "_abstract",
-				"false", 0, 1, ecore.EClass.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEAttribute(getEClass__abstract(), ecorePackage.getEBoolean(),
+				"_abstract", "false", 0, 1, ecore.EClass.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 		initEReference(getEClass_EOperations(), this.getEOperation(), this
 				.getEOperation_EContainingClass(), "eOperations", null, 0, -1,
 				ecore.EClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEClass__interface(), this.getEBoolean(),
+		initEAttribute(getEClass__interface(), ecorePackage.getEBoolean(),
 				"_interface", "false", 0, 1, ecore.EClass.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
@@ -2032,29 +2034,23 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
-		EOperation op = addEOperation(eClassEClass, this
-				.getEStructuralFeature(), "getEStructuralFeature", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEString(), "featureName", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		op = addEOperation(eClassEClass, this.getEInt(), "getFeatureID", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(eClassEClass, ecorePackage.getEInt(),
+				"getFeatureID", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEStructuralFeature(), "feature", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(eClassEClass, this.getEBoolean(), "isSuperTypeOf",
-				0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(eClassEClass, this.getEStructuralFeature(),
+				"getEStructuralFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "featureName", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(eClassEClass, ecorePackage.getEBoolean(),
+				"isSuperTypeOf", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEClass(), "someClass", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 
-		addEOperation(eClassEClass, this.getEInt(), "getFeatureCount", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(eClassEClass, this.getEStructuralFeature(),
-				"op_getEStructuralFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEInt(), "featureID", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
+		addEOperation(eClassEClass, ecorePackage.getEInt(), "getFeatureCount",
+				0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(eClassEClass, this.getEAttribute(),
 				"getterEAllAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
@@ -2102,32 +2098,32 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				EClassifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEClassifier_InstanceTypeName(), this.getEString(),
-				"instanceTypeName", null, 0, 1, EClassifier.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEClassifier_InstanceTypeName(), ecorePackage
+				.getEString(), "instanceTypeName", null, 0, 1,
+				EClassifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(eClassifierEClass, this.getEBoolean(), "isInstance",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEJavaObject(), "object", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
+		op = addEOperation(eClassifierEClass, ecorePackage.getEBoolean(),
+				"isInstance", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEJavaObject(), "object", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(eClassifierEClass, this.getEInt(), "getClassifierID", 0,
-				1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(eClassifierEClass, ecorePackage.getEInt(),
+				"getClassifierID", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(eClassifierEClass, null, "getterInstanceClass", 0,
 				1, IS_UNIQUE, IS_ORDERED);
-		EGenericType g1 = createEGenericType(this.getEJavaClass());
+		EGenericType g1 = createEGenericType(ecorePackage.getEJavaClass());
 		EGenericType g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		addEOperation(eClassifierEClass, this.getEJavaObject(),
+		addEOperation(eClassifierEClass, ecorePackage.getEJavaObject(),
 				"getterDefaultValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(eDataTypeEClass, ecore.EDataType.class, "EDataType",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEDataType_Serializable(), this.getEBoolean(),
+		initEAttribute(getEDataType_Serializable(), ecorePackage.getEBoolean(),
 				"serializable", "true", 0, 1, ecore.EDataType.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
 				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2141,18 +2137,14 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				!IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(eEnumEClass, this.getEEnumLiteral(),
-				"op_getEEnumLiteral", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEString(), "name", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		op = addEOperation(eEnumEClass, this.getEEnumLiteral(),
 				"getEEnumLiteral", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEInt(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "value", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
 
 		op = addEOperation(eEnumEClass, this.getEEnumLiteral(),
 				"getEEnumLiteralByLiteral", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEString(), "literal", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "literal", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
 
 		initEClass(eEnumLiteralEClass, EEnumLiteral.class, "EEnumLiteral",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2161,18 +2153,18 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEAttribute(getEEnumLiteral_Value(), this.getEInt(), "value", null,
-				0, 1, EEnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEAttribute(getEEnumLiteral_Value(), ecorePackage.getEInt(),
+				"value", null, 0, 1, EEnumLiteral.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEEnumLiteral_Instance(), this.getEEnumerator(),
 				"instance", null, 0, 1, EEnumLiteral.class, IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEEnumLiteral_Literal(), this.getEString(), "literal",
-				null, 0, 1, EEnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEAttribute(getEEnumLiteral_Literal(), ecorePackage.getEString(),
+				"literal", null, 0, 1, EEnumLiteral.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
 		initEClass(eFactoryEClass, EFactory.class, "EFactory", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2186,14 +2178,14 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				"createFromString", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEDataType(), "eDataType", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
-		addEParameter(op, this.getEString(), "literalValue", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "literalValue", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(eFactoryEClass, this.getEString(),
+		op = addEOperation(eFactoryEClass, ecorePackage.getEString(),
 				"convertToString", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEDataType(), "eDataType", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
-		addEParameter(op, this.getEJavaObject(), "instanceValue", 0, 1,
+		addEParameter(op, ecorePackage.getEJavaObject(), "instanceValue", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(eFactoryEClass, this.getEObject(), "create", 0, 1,
@@ -2211,15 +2203,15 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		op = addEOperation(eModelElementEClass, this.getEAnnotation(),
 				"getEAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEString(), "source", 0, 1, IS_UNIQUE,
+		addEParameter(op, ecorePackage.getEString(), "source", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 
 		initEClass(eNamedElementEClass, ENamedElement.class, "ENamedElement",
 				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getENamedElement_Name(), this.getEString(), "name",
-				null, 0, 1, ENamedElement.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEAttribute(getENamedElement_Name(), ecorePackage.getEString(),
+				"name", null, 0, 1, ENamedElement.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
 		initEClass(eObjectEClass, EObject.class, "EObject", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2254,8 +2246,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		initEClass(ePackageEClass, ecore.EPackage.class, "EPackage",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEPackage_NsURI(), this.getEString(), "nsURI", null,
-				0, 1, ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
+		initEAttribute(getEPackage_NsURI(), ecorePackage.getEString(), "nsURI",
+				null, 0, 1, ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 		initEReference(getEPackage_ESubpackages(), this.getEPackage(), this
@@ -2268,10 +2260,10 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				ecore.EPackage.class, IS_TRANSIENT, !IS_VOLATILE,
 				!IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEPackage_NsPrefix(), this.getEString(), "nsPrefix",
-				null, 0, 1, ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEAttribute(getEPackage_NsPrefix(), ecorePackage.getEString(),
+				"nsPrefix", null, 0, 1, ecore.EPackage.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 		initEReference(getEPackage_EClassifiers(), this.getEClassifier(), this
 				.getEClassifier_EPackage(), "eClassifiers", null, 0, -1,
 				ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
@@ -2285,7 +2277,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		op = addEOperation(ePackageEClass, this.getEClassifier(),
 				"getEClassifier", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEString(), "name", 0, 1, IS_UNIQUE,
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 
 		initEClass(eParameterEClass, EParameter.class, "EParameter",
@@ -2302,15 +2294,16 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				"eOpposite", null, 0, 1, ecore.EReference.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEReference_ResolveProxies(), this.getEBoolean(),
-				"resolveProxies", "true", 0, 1, ecore.EReference.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEReference_ResolveProxies(), ecorePackage
+				.getEBoolean(), "resolveProxies", "true", 0, 1,
+				ecore.EReference.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 		initEReference(getEReference_EKeys(), this.getEAttribute(), null,
 				"eKeys", null, 0, -1, ecore.EReference.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEReference_Containment(), this.getEBoolean(),
+		initEAttribute(getEReference_Containment(), ecorePackage.getEBoolean(),
 				"containment", "false", 0, 1, ecore.EReference.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
 				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2318,18 +2311,14 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		addEOperation(eReferenceEClass, this.getEClass(),
 				"getterEReferenceType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(eReferenceEClass, this.getEBoolean(), "getterContainer",
-				0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(eReferenceEClass, ecorePackage.getEBoolean(),
+				"getterContainer", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(eStructuralFeatureEClass, EStructuralFeature.class,
 				"EStructuralFeature", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEStructuralFeature__volatile(), this.getEBoolean(),
-				"_volatile", "false", 0, 1, EStructuralFeature.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEStructuralFeature_DefaultValueLiteral(), this
-				.getEString(), "defaultValueLiteral", null, 0, 1,
+		initEAttribute(getEStructuralFeature__volatile(), ecorePackage
+				.getEBoolean(), "_volatile", "false", 0, 1,
 				EStructuralFeature.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
@@ -2339,22 +2328,31 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEAttribute(getEStructuralFeature__transient(), this.getEBoolean(),
-				"_transient", "false", 0, 1, EStructuralFeature.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEStructuralFeature_Unsettable(), this.getEBoolean(),
-				"unsettable", "false", 0, 1, EStructuralFeature.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEStructuralFeature_Derived(), this.getEBoolean(),
-				"derived", "false", 0, 1, EStructuralFeature.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEStructuralFeature_Changeable(), this.getEBoolean(),
-				"changeable", "true", 0, 1, EStructuralFeature.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEStructuralFeature_DefaultValueLiteral(),
+				ecorePackage.getEString(), "defaultValueLiteral", null, 0, 1,
+				EStructuralFeature.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getEStructuralFeature__transient(), ecorePackage
+				.getEBoolean(), "_transient", "false", 0, 1,
+				EStructuralFeature.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getEStructuralFeature_Unsettable(), ecorePackage
+				.getEBoolean(), "unsettable", "false", 0, 1,
+				EStructuralFeature.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getEStructuralFeature_Derived(), ecorePackage
+				.getEBoolean(), "derived", "false", 0, 1,
+				EStructuralFeature.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getEStructuralFeature_Changeable(), ecorePackage
+				.getEBoolean(), "changeable", "true", 0, 1,
+				EStructuralFeature.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 
 		addEOperation(eStructuralFeatureEClass, this.getEInt(), "getFeatureID",
 				0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2366,28 +2364,28 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		addEOperation(eStructuralFeatureEClass, this.getEJavaObject(),
+		addEOperation(eStructuralFeatureEClass, ecorePackage.getEJavaObject(),
 				"getterDefaultValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(eTypedElementEClass, ETypedElement.class, "ETypedElement",
 				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getETypedElement_LowerBound(), this.getEInt(),
+		initEAttribute(getETypedElement_LowerBound(), ecorePackage.getEInt(),
 				"lowerBound", null, 0, 1, ETypedElement.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getETypedElement_Unique(), this.getEBoolean(), "unique",
-				"true", 0, 1, ETypedElement.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEAttribute(getETypedElement_Unique(), ecorePackage.getEBoolean(),
+				"unique", "true", 0, 1, ETypedElement.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 		initEReference(getETypedElement_EType(), this.getEClassifier(), null,
 				"eType", null, 0, 1, ETypedElement.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getETypedElement_Ordered(), this.getEBoolean(),
+		initEAttribute(getETypedElement_Ordered(), ecorePackage.getEBoolean(),
 				"ordered", "true", 0, 1, ETypedElement.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getETypedElement_UpperBound(), this.getEInt(),
+		initEAttribute(getETypedElement_UpperBound(), ecorePackage.getEInt(),
 				"upperBound", "1", 0, 1, ETypedElement.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
@@ -2397,23 +2395,25 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
-		addEOperation(eTypedElementEClass, this.getEBoolean(), "getterMany", 0,
-				1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(eTypedElementEClass, ecorePackage.getEBoolean(),
+				"getterMany", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(eTypedElementEClass, this.getEBoolean(),
+		addEOperation(eTypedElementEClass, ecorePackage.getEBoolean(),
 				"getterRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(eStringToStringMapEntryEClass,
 				EStringToStringMapEntry.class, "EStringToStringMapEntry",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEStringToStringMapEntry_Value(), this.getEString(),
-				"value", null, 0, 1, EStringToStringMapEntry.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEStringToStringMapEntry_Key(), this.getEString(),
-				"key", null, 0, 1, EStringToStringMapEntry.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEStringToStringMapEntry_Value(), ecorePackage
+				.getEString(), "value", null, 0, 1,
+				EStringToStringMapEntry.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getEStringToStringMapEntry_Key(), ecorePackage
+				.getEString(), "key", null, 0, 1,
+				EStringToStringMapEntry.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 
 		initEClass(eGenericTypeEClass, ecore.EGenericType.class,
 				"EGenericType", !IS_ABSTRACT, !IS_INTERFACE,
@@ -2543,38 +2543,96 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		String source = "kermeta";
 		addAnnotation(this, source, new String[] { "ecoreUri",
 				"http://www.eclipse.org/emf/2002/Ecore" });
+		addAnnotation(this, source, new String[] { "ecore", "true" });
+		addAnnotation(eAttributeEClass, source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEAttribute_ID(), source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eBooleanEDataType, source, new String[] { "alias",
 				"kermeta::standard::Boolean" });
+		addAnnotation(eBooleanEDataType, source,
+				new String[] { "ecore", "true" });
 		addAnnotation(eBooleanEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "boolean" });
 		addAnnotation(eBooleanEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
+		addAnnotation(eAnnotationEClass, source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEAnnotation_References(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEAnnotation_Details(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEAnnotation_Source(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEAnnotation_Contents(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEAnnotation_EModelElement(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(getEAnnotation_EModelElement(), source, new String[] {
 				"ecore.isTransient", "true" });
 		addAnnotation(eStringEDataType, source, new String[] { "alias",
 				"kermeta::standard::String" });
+		addAnnotation(eStringEDataType, source,
+				new String[] { "ecore", "true" });
 		addAnnotation(eStringEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.String" });
 		addAnnotation(eStringEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
+		addAnnotation(eClassEClass, source, new String[] { "ecore", "true" });
 		addAnnotation(eClassEClass.getEOperations().get(0), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassEClass.getEOperations().get(0), source,
+				new String[] { "ecore", "true" });
 		addAnnotation(eClassEClass.getEOperations().get(1), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassEClass.getEOperations().get(1), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(eClassEClass.getEOperations().get(1), source,
+				new String[] { "ecore", "true" });
 		addAnnotation(eClassEClass.getEOperations().get(2), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassEClass.getEOperations().get(2), source,
+				new String[] { "ecore", "true" });
 		addAnnotation(eClassEClass.getEOperations().get(3), source,
 				new String[] { "isAbstract", "true" });
-		addAnnotation(eClassEClass.getEOperations().get(4), source,
-				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassEClass.getEOperations().get(3), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEClass_EStructuralFeatures(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEClass__abstract(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEClass_EOperations(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEClass__interface(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEClass_ESuperTypes(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEClass_EGenericSuperTypes(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(eClassifierEClass, source,
+				new String[] { "ecore", "true" });
 		addAnnotation(eClassifierEClass.getEOperations().get(0), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassifierEClass.getEOperations().get(0), source,
+				new String[] { "ecore", "true" });
 		addAnnotation(eClassifierEClass.getEOperations().get(1), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassifierEClass.getEOperations().get(1), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEClassifier_InstanceClassName(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEClassifier_EPackage(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(getEClassifier_EPackage(), source, new String[] {
 				"ecore.isTransient", "true" });
+		addAnnotation(getEClassifier_ETypeParameters(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEClassifier_InstanceTypeName(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(eJavaClassEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eJavaClassEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eJavaClassEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.Class" });
 		addAnnotation(eJavaClassEDataType, source, new String[] {
@@ -2583,95 +2641,249 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				"ecore.EDataType_eTypeParameters", "T" });
 		addAnnotation(eJavaObjectEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eJavaObjectEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eJavaObjectEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.Object" });
 		addAnnotation(eJavaObjectEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
+		addAnnotation(eDataTypeEClass, source, new String[] { "ecore", "true" });
+		addAnnotation(getEDataType_Serializable(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(eEnumEClass, source, new String[] { "ecore", "true" });
 		addAnnotation(eEnumEClass.getEOperations().get(0), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(eEnumEClass.getEOperations().get(0), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(eEnumEClass.getEOperations().get(0), source,
+				new String[] { "ecore", "true" });
 		addAnnotation(eEnumEClass.getEOperations().get(1), source,
 				new String[] { "isAbstract", "true" });
-		addAnnotation(eEnumEClass.getEOperations().get(2), source,
-				new String[] { "isAbstract", "true" });
+		addAnnotation(eEnumEClass.getEOperations().get(1), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEEnum_ELiterals(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(eEnumLiteralEClass, source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEEnumLiteral_EEnum(), source, new String[] { "ecore",
+				"true" });
 		addAnnotation(getEEnumLiteral_EEnum(), source, new String[] {
 				"ecore.isTransient", "true" });
+		addAnnotation(getEEnumLiteral_Value(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEEnumLiteral_Instance(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(getEEnumLiteral_Instance(), source, new String[] {
 				"ecore.isTransient", "true" });
+		addAnnotation(getEEnumLiteral_Literal(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(eIntEDataType, source, new String[] { "alias",
 				"kermeta::standard::Integer" });
+		addAnnotation(eIntEDataType, source, new String[] { "ecore", "true" });
 		addAnnotation(eIntEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "int" });
 		addAnnotation(eIntEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eEnumeratorEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eEnumeratorEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eEnumeratorEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName",
 				"org.eclipse.emf.common.util.Enumerator" });
+		addAnnotation(eFactoryEClass, source, new String[] { "ecore", "true" });
 		addAnnotation(eFactoryEClass.getEOperations().get(0), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(eFactoryEClass.getEOperations().get(0), source,
+				new String[] { "ecore", "true" });
 		addAnnotation(eFactoryEClass.getEOperations().get(1), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(eFactoryEClass.getEOperations().get(1), source,
+				new String[] { "ecore", "true" });
 		addAnnotation(eFactoryEClass.getEOperations().get(2), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(eFactoryEClass.getEOperations().get(2), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEFactory_EPackage(), source, new String[] { "ecore",
+				"true" });
 		addAnnotation(getEFactory_EPackage(), source, new String[] {
 				"ecore.isTransient", "true" });
+		addAnnotation(eModelElementEClass, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eModelElementEClass.getEOperations().get(0), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(eModelElementEClass.getEOperations().get(0), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEModelElement_EAnnotations(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(eNamedElementEClass, source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getENamedElement_Name(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(eObjectEClass, source, new String[] { "ecore", "true" });
+		addAnnotation(eOperationEClass, source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEOperation_EContainingClass(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(getEOperation_EContainingClass(), source, new String[] {
 				"ecore.isTransient", "true" });
+		addAnnotation(getEOperation_EGenericExceptions(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEOperation_EParameters(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEOperation_ETypeParameters(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEOperation_EExceptions(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(ePackageEClass, source, new String[] { "ecore", "true" });
 		addAnnotation(ePackageEClass.getEOperations().get(0), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(ePackageEClass.getEOperations().get(0), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEPackage_NsURI(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEPackage_ESubpackages(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEPackage_ESuperPackage(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(getEPackage_ESuperPackage(), source, new String[] {
 				"ecore.isTransient", "true" });
+		addAnnotation(getEPackage_NsPrefix(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEPackage_EClassifiers(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEPackage_EFactoryInstance(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(getEPackage_EFactoryInstance(), source, new String[] {
 				"ecore.isTransient", "true" });
+		addAnnotation(eParameterEClass, source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEParameter_EOperation(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(getEParameter_EOperation(), source, new String[] {
 				"ecore.isTransient", "true" });
+		addAnnotation(eReferenceEClass, source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEReference_EOpposite(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEReference_ResolveProxies(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEReference_EKeys(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEReference_Containment(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(eStructuralFeatureEClass, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eStructuralFeatureEClass.getEOperations().get(0), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(eStructuralFeatureEClass.getEOperations().get(0), source,
+				new String[] { "ecore", "true" });
 		addAnnotation(eStructuralFeatureEClass.getEOperations().get(1), source,
 				new String[] { "isAbstract", "true" });
+		addAnnotation(eStructuralFeatureEClass.getEOperations().get(1), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEStructuralFeature__volatile(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEStructuralFeature_EContainingClass(), source,
+				new String[] { "ecore", "true" });
 		addAnnotation(getEStructuralFeature_EContainingClass(), source,
 				new String[] { "ecore.isTransient", "true" });
+		addAnnotation(getEStructuralFeature_DefaultValueLiteral(), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getEStructuralFeature__transient(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEStructuralFeature_Unsettable(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEStructuralFeature_Derived(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEStructuralFeature_Changeable(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(eTypedElementEClass, source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getETypedElement_LowerBound(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getETypedElement_Unique(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getETypedElement_EType(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getETypedElement_Ordered(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getETypedElement_UpperBound(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getETypedElement_EGenericType(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(eStringToStringMapEntryEClass, source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEStringToStringMapEntry_Value(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEStringToStringMapEntry_Key(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(eGenericTypeEClass, source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEGenericType_EUpperBound(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEGenericType_ETypeArguments(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEGenericType_EClassifier(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEGenericType_ETypeParameter(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getEGenericType_ELowerBound(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(eTypeParameterEClass, source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getETypeParameter_EBounds(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(eBigDecimalEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eBigDecimalEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eBigDecimalEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.math.BigDecimal" });
 		addAnnotation(eBigDecimalEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eBigIntegerEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eBigIntegerEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eBigIntegerEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.math.BigInteger" });
 		addAnnotation(eBigIntegerEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eBooleanObjectEDataType, source, new String[] { "alias",
 				"kermeta::standard::Boolean" });
+		addAnnotation(eBooleanObjectEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eBooleanObjectEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.Boolean" });
 		addAnnotation(eBooleanObjectEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eByteEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eByteEDataType, source, new String[] { "ecore", "true" });
 		addAnnotation(eByteEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "byte" });
 		addAnnotation(eByteEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eByteArrayEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eByteArrayEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eByteArrayEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "byte[]" });
 		addAnnotation(eByteArrayEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eByteObjectEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eByteObjectEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eByteObjectEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.Byte" });
 		addAnnotation(eByteObjectEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eCharEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eCharEDataType, source, new String[] { "ecore", "true" });
 		addAnnotation(eCharEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "char" });
 		addAnnotation(eCharEDataType, source, new String[] {
@@ -2679,11 +2891,14 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		addAnnotation(eCharacterObjectEDataType, source, new String[] {
 				"alias", "kermeta::language::structure::Object" });
 		addAnnotation(eCharacterObjectEDataType, source, new String[] {
+				"ecore", "true" });
+		addAnnotation(eCharacterObjectEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.Character" });
 		addAnnotation(eCharacterObjectEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eDateEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eDateEDataType, source, new String[] { "ecore", "true" });
 		addAnnotation(eDateEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.util.Date" });
 		addAnnotation(eDateEDataType, source, new String[] {
@@ -2691,22 +2906,29 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		addAnnotation(eDiagnosticChainEDataType, source, new String[] {
 				"alias", "kermeta::language::structure::Object" });
 		addAnnotation(eDiagnosticChainEDataType, source, new String[] {
+				"ecore", "true" });
+		addAnnotation(eDiagnosticChainEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName",
 				"org.eclipse.emf.common.util.DiagnosticChain" });
 		addAnnotation(eDoubleEDataType, source, new String[] { "alias",
 				"kermeta::standard::Real" });
+		addAnnotation(eDoubleEDataType, source,
+				new String[] { "ecore", "true" });
 		addAnnotation(eDoubleEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "double" });
 		addAnnotation(eDoubleEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eDoubleObjectEDataType, source, new String[] { "alias",
 				"kermeta::standard::Real" });
+		addAnnotation(eDoubleObjectEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eDoubleObjectEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.Double" });
 		addAnnotation(eDoubleObjectEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eeListEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eeListEDataType, source, new String[] { "ecore", "true" });
 		addAnnotation(eeListEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName",
 				"org.eclipse.emf.common.util.EList" });
@@ -2714,74 +2936,96 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				"ecore.EDataType_eTypeParameters", "E" });
 		addAnnotation(eFeatureMapEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eFeatureMapEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eFeatureMapEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName",
 				"org.eclipse.emf.ecore.util.FeatureMap" });
 		addAnnotation(eFeatureMapEntryEDataType, source, new String[] {
 				"alias", "kermeta::ecore::EFeatureMapEntry" });
 		addAnnotation(eFeatureMapEntryEDataType, source, new String[] {
+				"ecore", "true" });
+		addAnnotation(eFeatureMapEntryEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName",
 				"org.eclipse.emf.ecore.util.FeatureMap$Entry" });
 		addAnnotation(eFloatEDataType, source, new String[] { "alias",
 				"kermeta::standard::Real" });
+		addAnnotation(eFloatEDataType, source, new String[] { "ecore", "true" });
 		addAnnotation(eFloatEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "float" });
 		addAnnotation(eFloatEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eFloatObjectEDataType, source, new String[] { "alias",
 				"kermeta::standard::Real" });
+		addAnnotation(eFloatObjectEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eFloatObjectEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.Float" });
 		addAnnotation(eFloatObjectEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eIntegerObjectEDataType, source, new String[] { "alias",
 				"kermeta::standard::Integer" });
+		addAnnotation(eIntegerObjectEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eIntegerObjectEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.Integer" });
 		addAnnotation(eIntegerObjectEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eLongEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eLongEDataType, source, new String[] { "ecore", "true" });
 		addAnnotation(eLongEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "long" });
 		addAnnotation(eLongEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eLongObjectEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eLongObjectEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eLongObjectEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.Long" });
 		addAnnotation(eLongObjectEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eMapEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eMapEDataType, source, new String[] { "ecore", "true" });
 		addAnnotation(eMapEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.util.Map" });
 		addAnnotation(eMapEDataType, source, new String[] {
 				"ecore.EDataType_eTypeParameters", "K , V" });
 		addAnnotation(eResourceEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eResourceEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eResourceEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName",
 				"org.eclipse.emf.ecore.resource.Resource" });
 		addAnnotation(eResourceSetEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eResourceSetEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eResourceSetEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName",
 				"org.eclipse.emf.ecore.resource.ResourceSet" });
 		addAnnotation(eShortEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eShortEDataType, source, new String[] { "ecore", "true" });
 		addAnnotation(eShortEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "short" });
 		addAnnotation(eShortEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eShortObjectEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eShortObjectEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eShortObjectEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName", "java.lang.Short" });
 		addAnnotation(eShortObjectEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
 		addAnnotation(eTreeIteratorEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
+		addAnnotation(eTreeIteratorEDataType, source, new String[] { "ecore",
+				"true" });
 		addAnnotation(eTreeIteratorEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName",
 				"org.eclipse.emf.common.util.TreeIterator" });

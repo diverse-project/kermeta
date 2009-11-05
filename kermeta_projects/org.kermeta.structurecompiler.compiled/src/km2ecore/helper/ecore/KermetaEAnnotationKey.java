@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: KermetaEAnnotationKey.java,v 1.12 2009-02-23 15:26:55 cfaucher Exp $
+ * $Id$
  */
 package km2ecore.helper.ecore;
 
@@ -73,7 +73,7 @@ public enum KermetaEAnnotationKey implements Enumerator {
 	 * @ordered
 	 */
 	DOCUMENTATION(4, "documentation", "documentation"),
-	
+
 	/**
 	 * The '<em><b>Ecore</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -158,7 +158,20 @@ public enum KermetaEAnnotationKey implements Enumerator {
 	 * @ordered
 	 */
 	public static final int DOCUMENTATION_VALUE = 4;
-	
+
+	/**
+	 * The '<em><b>Ecore</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Ecore</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #ECORE
+	 * @model name="ecore"
+	 * @generated
+	 * @ordered
+	 */
 	public static final int ECORE_VALUE = 5;
 
 	/**
@@ -168,7 +181,8 @@ public enum KermetaEAnnotationKey implements Enumerator {
 	 * @generated
 	 */
 	private static final KermetaEAnnotationKey[] VALUES_ARRAY = new KermetaEAnnotationKey[] {
-			IS_ABSTRACT, ALIAS, SUPER_OPERATION, IS_READ_ONLY, DOCUMENTATION, ECORE, };
+			IS_ABSTRACT, ALIAS, SUPER_OPERATION, IS_READ_ONLY, DOCUMENTATION,
+			ECORE, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Kermeta EAnnotation Key</b></em>' enumerators.

@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: KunitFactory.java,v 1.12 2009-02-23 15:26:50 cfaucher Exp $
+ * $Id$
  */
 package kermeta.kunit;
 
@@ -88,7 +88,7 @@ public interface KunitFactory extends EFactory {
 	 * @return a new object of class '<em>Error</em>'.
 	 * @generated
 	 */
-	kermeta.kunit.Error createError();
+	Error createError();
 
 	/**
 	 * Returns a new object of class '<em>Test Suite</em>'.

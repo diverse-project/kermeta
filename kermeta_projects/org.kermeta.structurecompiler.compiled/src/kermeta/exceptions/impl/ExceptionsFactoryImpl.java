@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ExceptionsFactoryImpl.java,v 1.12 2009-02-23 15:26:38 cfaucher Exp $
+ * $Id$
  */
 package kermeta.exceptions.impl;
 
@@ -14,6 +14,7 @@ import kermeta.exceptions.ConstraintViolatedException;
 import kermeta.exceptions.ConstraintViolatedInv;
 import kermeta.exceptions.ConstraintViolatedPost;
 import kermeta.exceptions.ConstraintViolatedPre;
+import kermeta.exceptions.ConstraintsDiagnostic;
 import kermeta.exceptions.DivisionByZero;
 import kermeta.exceptions.DynamicExpressionException;
 import kermeta.exceptions.EmptyCollection;
@@ -93,6 +94,8 @@ public class ExceptionsFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+		case ExceptionsPackage.CONSTRAINTS_DIAGNOSTIC:
+			return createConstraintsDiagnostic();
 		case ExceptionsPackage.EXCEPTION:
 			return createException();
 		case ExceptionsPackage.RUNTIME_ERROR:
@@ -183,6 +186,16 @@ public class ExceptionsFactoryImpl extends EFactoryImpl implements
 			throw new IllegalArgumentException("The datatype '"
 					+ eDataType.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstraintsDiagnostic createConstraintsDiagnostic() {
+		ConstraintsDiagnosticImpl constraintsDiagnostic = new ConstraintsDiagnosticImpl();
+		return constraintsDiagnostic;
 	}
 
 	/**

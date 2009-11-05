@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TraceabilityImpl.java,v 1.12 2009-02-23 15:26:39 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure.impl;
 

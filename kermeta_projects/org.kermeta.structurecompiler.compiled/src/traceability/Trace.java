@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Trace.java,v 1.12 2009-02-23 15:26:52 cfaucher Exp $
+ * $Id$
  */
 package traceability;
 
@@ -26,7 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see traceability.TraceabilityPackage#getTrace()
- * @model annotation="kermeta documentation='/**\r\n * This class represents a trace element\r\n \052/'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='/**\r\n * This class represents a trace element\r\n \052/'"
  * @generated
  */
 public interface Trace extends kermeta.language.structure.Object {
@@ -44,6 +45,7 @@ public interface Trace extends kermeta.language.structure.Object {
 	 * @see traceability.TraceabilityPackage#getTrace_TraceMdl()
 	 * @see traceability.TraceModel#getTraces
 	 * @model opposite="traces" required="true" transient="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Link to the containing trace model \052/'"
 	 * @generated
 	 */
@@ -73,6 +75,7 @@ public interface Trace extends kermeta.language.structure.Object {
 	 * @see traceability.TraceabilityPackage#getTrace_SourceReferences()
 	 * @see traceability.Reference#getTargetTraces
 	 * @model opposite="targetTraces"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Link to the references to the trace incoming elements \052/'"
 	 * @generated
 	 */
@@ -92,6 +95,7 @@ public interface Trace extends kermeta.language.structure.Object {
 	 * @see traceability.TraceabilityPackage#getTrace_Description()
 	 * @see traceability.Message#getTraces
 	 * @model opposite="traces"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Link to the messages describing the trace \052/'"
 	 * @generated
 	 */
@@ -111,6 +115,7 @@ public interface Trace extends kermeta.language.structure.Object {
 	 * @see traceability.TraceabilityPackage#getTrace_TargetReferences()
 	 * @see traceability.Reference#getSourceTraces
 	 * @model opposite="sourceTraces"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Link to the references to the trace outgoing elements \052/'"
 	 * @generated
 	 */

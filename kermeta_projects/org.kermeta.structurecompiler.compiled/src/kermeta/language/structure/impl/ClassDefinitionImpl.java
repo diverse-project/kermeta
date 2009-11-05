@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ClassDefinitionImpl.java,v 1.13 2009-02-23 15:26:40 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure.impl;
 
@@ -15,12 +15,15 @@ import java.util.Collection;
 
 import kermeta.language.structure.ClassDefinition;
 import kermeta.language.structure.Constraint;
+import kermeta.language.structure.GenericTypeDefinition;
+import kermeta.language.structure.NamedElement;
 import kermeta.language.structure.Operation;
 import kermeta.language.structure.Property;
 import kermeta.language.structure.StructurePackage;
-import kermeta.language.structure.Traceability;
 import kermeta.language.structure.Type;
 import kermeta.language.structure.TypeContainer;
+import kermeta.language.structure.TypeDefinition;
+import kermeta.language.structure.TypeVariable;
 
 import kermeta.standard.Set;
 
@@ -31,11 +34,11 @@ import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -47,22 +50,74 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getIsAspect <em>Is Aspect</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getTypeParameter <em>Type Parameter</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getContainedType <em>Contained Type</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getEcoreModelElement <em>Ecore Model Element</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getOwnedOperation <em>Owned Operation</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getInv <em>Inv</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getSubClassDefinitions <em>Sub Class Definitions</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getOwnedAttribute <em>Owned Attribute</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getEcoreDataType <em>Ecore Data Type</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ClassDefinitionImpl#getOwnedAttribute <em>Owned Attribute</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
+public class ClassDefinitionImpl extends TraceabilityImpl<EClass> implements
 		ClassDefinition {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAspect()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_ASPECT_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIsAspect() <em>Is Aspect</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAspect()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isAspect = IS_ASPECT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeParameter()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeVariable> typeParameter;
+
 	/**
 	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -72,16 +127,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	 * @ordered
 	 */
 	protected EList<Type> containedType;
-
-	/**
-	 * The cached value of the '{@link #getEcoreModelElement() <em>Ecore Model Element</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEcoreModelElement()
-	 * @generated
-	 * @ordered
-	 */
-	protected EClass ecoreModelElement;
 
 	/**
 	 * The cached value of the '{@link #getOwnedOperation() <em>Owned Operation</em>}' containment reference list.
@@ -144,16 +189,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	protected EList<ClassDefinition> subClassDefinitions;
 
 	/**
-	 * The cached value of the '{@link #getOwnedAttribute() <em>Owned Attribute</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedAttribute()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Property> ownedAttribute;
-
-	/**
 	 * The cached value of the '{@link #getEcoreDataType() <em>Ecore Data Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -162,6 +197,16 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	 * @ordered
 	 */
 	protected EDataType ecoreDataType;
+
+	/**
+	 * The cached value of the '{@link #getOwnedAttribute() <em>Owned Attribute</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedAttribute()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Property> ownedAttribute;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -187,6 +232,65 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.CLASS_DEFINITION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getIsAspect() {
+		return isAspect;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsAspect(Boolean newIsAspect) {
+		Boolean oldIsAspect = isAspect;
+		isAspect = newIsAspect;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.CLASS_DEFINITION__IS_ASPECT, oldIsAspect,
+					isAspect));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypeVariable> getTypeParameter() {
+		if (typeParameter == null) {
+			typeParameter = new EObjectContainmentEList.Resolving<TypeVariable>(
+					TypeVariable.class, this,
+					StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER);
+		}
+		return typeParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Type> getContainedType() {
 		if (containedType == null) {
 			containedType = new EObjectContainmentWithInverseEList.Resolving<Type>(
@@ -195,51 +299,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 					StructurePackage.TYPE__TYPE_CONTAINER);
 		}
 		return containedType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEcoreModelElement() {
-		if (ecoreModelElement != null
-				&& ((EObject) ecoreModelElement).eIsProxy()) {
-			InternalEObject oldEcoreModelElement = (InternalEObject) ecoreModelElement;
-			ecoreModelElement = (EClass) eResolveProxy(oldEcoreModelElement);
-			if (ecoreModelElement != oldEcoreModelElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(
-							this,
-							Notification.RESOLVE,
-							StructurePackage.CLASS_DEFINITION__ECORE_MODEL_ELEMENT,
-							oldEcoreModelElement, ecoreModelElement));
-			}
-		}
-		return ecoreModelElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass basicGetEcoreModelElement() {
-		return ecoreModelElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEcoreModelElement(EClass newEcoreModelElement) {
-		EClass oldEcoreModelElement = ecoreModelElement;
-		ecoreModelElement = newEcoreModelElement;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.CLASS_DEFINITION__ECORE_MODEL_ELEMENT,
-					oldEcoreModelElement, ecoreModelElement));
 	}
 
 	/**
@@ -327,21 +386,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Property> getOwnedAttribute() {
-		if (ownedAttribute == null) {
-			ownedAttribute = new EObjectContainmentWithInverseEList.Resolving<Property>(
-					Property.class, this,
-					StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE,
-					StructurePackage.PROPERTY__OWNING_CLASS);
-		}
-		return ownedAttribute;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EDataType getEcoreDataType() {
 		if (ecoreDataType != null && ecoreDataType.eIsProxy()) {
 			InternalEObject oldEcoreDataType = (InternalEObject) ecoreDataType;
@@ -384,17 +428,32 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Property> getOwnedAttribute() {
+		if (ownedAttribute == null) {
+			ownedAttribute = new EObjectContainmentWithInverseEList.Resolving<Property>(
+					Property.class, this,
+					StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE,
+					StructurePackage.PROPERTY__OWNING_CLASS);
+		}
+		return ownedAttribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Boolean isMappedToJavaRawType() {
 
 		java.lang.Boolean result = null;
 
 		result = false;
 
-		java.lang.Boolean idIfCond_153 = false;
-		idIfCond_153 = kermeta.standard.helper.BooleanWrapper.or(this
+		java.lang.Boolean idIfCond_606 = false;
+		idIfCond_606 = kermeta.standard.helper.BooleanWrapper.or(this
 				.isCollection(), this.isIterator());
 
-		if (idIfCond_153) {
+		if (idIfCond_606) {
 
 			result = true;
 		}
@@ -414,49 +473,52 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 		{
 
-			kermeta.standard.Iterator<java.lang.String> it_ft60 = this
+			kermeta.standard.Iterator<java.lang.String> it_ft128 = this
 					.getEMFNeedProperty().iterator();
-			java.lang.Boolean idLoopCond_154 = false;
-			while (!idLoopCond_154) {
-				idLoopCond_154 = it_ft60.isOff();
-				if (idLoopCond_154) {
+			java.lang.Boolean idLoopCond_607 = false;
+			while (!idLoopCond_607) {
+				idLoopCond_607 = it_ft128.isOff();
+				if (idLoopCond_607) {
 				} else {
 
 					//BIle:func
-					java.lang.String emfNeedProperty_lbdExp60 = it_ft60.next();
+					java.lang.String emfNeedProperty_lbdExp128 = it_ft128
+							.next();
 
-					java.lang.Boolean idIfCond_155 = false;
-					idIfCond_155 = kermeta.standard.helper.IntegerWrapper
-							.isGreater(kermeta.standard.helper.StringWrapper
-									.getPropertyInfos(emfNeedProperty_lbdExp60)
-									.size(), 0);
+					java.lang.Boolean idIfCond_608 = false;
+					idIfCond_608 = kermeta.standard.helper.IntegerWrapper
+							.isGreater(
+									kermeta.standard.helper.StringWrapper
+											.getPropertyInfos(
+													emfNeedProperty_lbdExp128)
+											.size(), 0);
 
-					if (idIfCond_155) {
+					if (idIfCond_608) {
 
 						ecore.EStructuralFeature newProperty = ((ecore.EAttribute) org.kermeta.compil.runtime.helper.language.ClassUtil
 								.newObject(ecore.EcorePackage.eINSTANCE
 										.getEAttribute()));
 
-						java.lang.Boolean idIfCond_156 = false;
-						idIfCond_156 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_609 = false;
+						idIfCond_609 = kermeta.standard.helper.BooleanWrapper
 								.and(
 										kermeta.standard.helper.BooleanWrapper
 												.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isVoidSwitcher(kermeta.standard.helper.StringWrapper
 																.getPropertyInfos(
-																		emfNeedProperty_lbdExp60)
+																		emfNeedProperty_lbdExp128)
 																.getValue(
 																		"javaClass"))),
 										org.kermeta.compil.runtime.helper.language.ObjectUtil
 												.isNotEqualSwitcher(
 														kermeta.standard.helper.StringWrapper
 																.getPropertyInfos(
-																		emfNeedProperty_lbdExp60)
+																		emfNeedProperty_lbdExp128)
 																.getValue(
 																		"javaClass"),
 														""));
 
-						if (idIfCond_156) {
+						if (idIfCond_609) {
 
 							newProperty = ((ecore.EAttribute) org.kermeta.compil.runtime.helper.language.ClassUtil
 									.newObject(ecore.EcorePackage.eINSTANCE
@@ -465,7 +527,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 							newProperty
 									.setName(kermeta.standard.helper.StringWrapper
 											.getPropertyInfos(
-													emfNeedProperty_lbdExp60)
+													emfNeedProperty_lbdExp128)
 											.getValue("name"));
 
 							newProperty.set_transient(false);
@@ -487,13 +549,13 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 																	"_"),
 													kermeta.standard.helper.StringWrapper
 															.getPropertyInfos(
-																	emfNeedProperty_lbdExp60)
+																	emfNeedProperty_lbdExp128)
 															.getValue("name")));
 
 							newProperty_EDataType
 									.setInstanceClassName(kermeta.standard.helper.StringWrapper
 											.getPropertyInfos(
-													emfNeedProperty_lbdExp60)
+													emfNeedProperty_lbdExp128)
 											.getValue("javaClass"));
 
 							org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
@@ -520,8 +582,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 							newProperty
 									.setEGenericType(newJavaCollection_EGenericType);
 
-							java.lang.Boolean idIfCond_157 = false;
-							idIfCond_157 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_610 = false;
+							idIfCond_610 = kermeta.standard.helper.BooleanWrapper
 									.and(
 											kermeta.standard.helper.BooleanWrapper
 													.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -538,33 +600,33 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 																					.getETypeParameters())
 																	.size(), 0));
 
-							if (idIfCond_157) {
+							if (idIfCond_610) {
 
 								//BIft:each
 
 								{
 
-									kermeta.standard.Iterator<ecore.ETypeParameter> it_ft61 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+									kermeta.standard.Iterator<ecore.ETypeParameter> it_ft129 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 											.<ecore.ETypeParameter> convertAsOrderedSet(
 													this
 															.getEcoreModelElement()
 															.getETypeParameters())
 											.iterator();
-									java.lang.Boolean idLoopCond_158 = false;
-									while (!idLoopCond_158) {
-										idLoopCond_158 = it_ft61.isOff();
-										if (idLoopCond_158) {
+									java.lang.Boolean idLoopCond_611 = false;
+									while (!idLoopCond_611) {
+										idLoopCond_611 = it_ft129.isOff();
+										if (idLoopCond_611) {
 										} else {
 
 											//BIle:func
-											ecore.ETypeParameter etp_lbdExp61 = it_ft61
+											ecore.ETypeParameter etp_lbdExp129 = it_ft129
 													.next();
 
 											ecore.ETypeParameter newEtp = ((ecore.ETypeParameter) org.kermeta.compil.runtime.helper.language.ClassUtil
 													.newObject(ecore.EcorePackage.eINSTANCE
 															.getETypeParameter()));
 
-											newEtp.setName(etp_lbdExp61
+											newEtp.setName(etp_lbdExp129
 													.getName());
 
 											org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
@@ -577,7 +639,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 													.newObject(ecore.EcorePackage.eINSTANCE
 															.getEGenericType()));
 
-											eta.setETypeParameter(etp_lbdExp61);
+											eta
+													.setETypeParameter(etp_lbdExp129);
 
 											org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 													.<ecore.EGenericType> convertAsOrderedSet(
@@ -597,26 +660,26 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 						} else {
 
-							java.lang.Boolean idIfCond_159 = false;
-							idIfCond_159 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_612 = false;
+							idIfCond_612 = kermeta.standard.helper.BooleanWrapper
 									.and(
 											kermeta.standard.helper.BooleanWrapper
 													.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isVoidSwitcher(kermeta.standard.helper.StringWrapper
 																	.getPropertyInfos(
-																			emfNeedProperty_lbdExp60)
+																			emfNeedProperty_lbdExp128)
 																	.getValue(
 																			"classDefinitionQN"))),
 											org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isNotEqualSwitcher(
 															kermeta.standard.helper.StringWrapper
 																	.getPropertyInfos(
-																			emfNeedProperty_lbdExp60)
+																			emfNeedProperty_lbdExp128)
 																	.getValue(
 																			"classDefinitionQN"),
 															""));
 
-							if (idIfCond_159) {
+							if (idIfCond_612) {
 
 								newProperty = ((ecore.EReference) org.kermeta.compil.runtime.helper.language.ClassUtil
 										.newObject(ecore.EcorePackage.eINSTANCE
@@ -625,7 +688,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 								newProperty
 										.setName(kermeta.standard.helper.StringWrapper
 												.getPropertyInfos(
-														emfNeedProperty_lbdExp60)
+														emfNeedProperty_lbdExp128)
 												.getValue("name"));
 
 								newProperty.set_transient(false);
@@ -635,7 +698,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 										.getEClassifierByQualifiedName(
 												kermeta.standard.helper.StringWrapper
 														.getPropertyInfos(
-																emfNeedProperty_lbdExp60)
+																emfNeedProperty_lbdExp128)
 														.getValue(
 																"classDefinitionQN"));
 
@@ -649,8 +712,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 								newProperty
 										.setEGenericType(newJavaCollection_EGenericType);
 
-								java.lang.Boolean idIfCond_160 = false;
-								idIfCond_160 = kermeta.standard.helper.BooleanWrapper
+								java.lang.Boolean idIfCond_613 = false;
+								idIfCond_613 = kermeta.standard.helper.BooleanWrapper
 										.and(
 												kermeta.standard.helper.BooleanWrapper
 														.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -668,26 +731,26 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 																		.size(),
 																0));
 
-								if (idIfCond_160) {
+								if (idIfCond_613) {
 
 									//BIft:each
 
 									{
 
-										kermeta.standard.Iterator<ecore.ETypeParameter> it_ft62 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+										kermeta.standard.Iterator<ecore.ETypeParameter> it_ft130 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 												.<ecore.ETypeParameter> convertAsOrderedSet(
 														this
 																.getEcoreModelElement()
 																.getETypeParameters())
 												.iterator();
-										java.lang.Boolean idLoopCond_161 = false;
-										while (!idLoopCond_161) {
-											idLoopCond_161 = it_ft62.isOff();
-											if (idLoopCond_161) {
+										java.lang.Boolean idLoopCond_614 = false;
+										while (!idLoopCond_614) {
+											idLoopCond_614 = it_ft130.isOff();
+											if (idLoopCond_614) {
 											} else {
 
 												//BIle:func
-												ecore.ETypeParameter etp_lbdExp62 = it_ft62
+												ecore.ETypeParameter etp_lbdExp130 = it_ft130
 														.next();
 
 												ecore.EGenericType eta = ((ecore.EGenericType) org.kermeta.compil.runtime.helper.language.ClassUtil
@@ -695,7 +758,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 																.getEGenericType()));
 
 												eta
-														.setETypeParameter(etp_lbdExp62);
+														.setETypeParameter(etp_lbdExp130);
 
 												org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 														.<ecore.EGenericType> convertAsOrderedSet(
@@ -722,8 +785,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 										.getTypeDefinitionByQualifiedName(
 												"ecore::EEList");
 
-								java.lang.Boolean idIfCond_162 = false;
-								idIfCond_162 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								java.lang.Boolean idIfCond_615 = false;
+								idIfCond_615 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
 												retrievedTypeDef,
 												org.kermeta.compil.runtime.ExecutionContext
@@ -731,7 +794,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 														.getMetaClass(
 																"kermeta.language.structure.ClassDefinition"));
 
-								if (idIfCond_162) {
+								if (idIfCond_615) {
 
 									newProperty
 											.setEType(((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -744,8 +807,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 													.getEcoreModelElement());
 								} else {
 
-									java.lang.Boolean idIfCond_163 = false;
-									idIfCond_163 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+									java.lang.Boolean idIfCond_616 = false;
+									idIfCond_616 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isInstanceOfSwitcher(
 													retrievedTypeDef,
 													org.kermeta.compil.runtime.ExecutionContext
@@ -753,7 +816,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 															.getMetaClass(
 																	"kermeta.language.structure.PrimitiveType"));
 
-									if (idIfCond_163) {
+									if (idIfCond_616) {
 
 										newProperty
 												.setEType(((kermeta.language.structure.PrimitiveType) org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -813,18 +876,18 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 								.getInstance().getMetaClass(
 										"kermeta.language.structure.Package")));
 
-		java.lang.Boolean idIfCond_164 = false;
-		idIfCond_164 = this.isValueType();
+		java.lang.Boolean idIfCond_617 = false;
+		idIfCond_617 = this.isValueType();
 
-		if (idIfCond_164) {
+		if (idIfCond_617) {
 
 			java.lang.String instanceClassName = this.getEMFInstanceClassName();
 
-			java.lang.Boolean idIfCond_165 = false;
-			idIfCond_165 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_618 = false;
+			idIfCond_618 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isNotEqualSwitcher(instanceClassName, "");
 
-			if (idIfCond_165) {
+			if (idIfCond_618) {
 
 				ecore.EDataType eDataType = ((ecore.EDataType) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject(ecore.EcorePackage.eINSTANCE.getEDataType()));
@@ -846,11 +909,11 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 				this.setEcoreDataType(eDataType);
 
-				java.lang.Boolean idIfCond_166 = false;
-				idIfCond_166 = kermeta.standard.helper.BooleanWrapper.not(this
+				java.lang.Boolean idIfCond_619 = false;
+				idIfCond_619 = kermeta.standard.helper.BooleanWrapper.not(this
 						.getIsAbstract());
 
-				if (idIfCond_166) {
+				if (idIfCond_619) {
 
 					ecore.EClass eClass = ((ecore.EClass) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject(ecore.EcorePackage.eINSTANCE.getEClass()));
@@ -875,11 +938,11 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 			} else {
 
-				java.lang.Boolean idIfCond_167 = false;
-				idIfCond_167 = kermeta.standard.helper.BooleanWrapper.not(this
+				java.lang.Boolean idIfCond_620 = false;
+				idIfCond_620 = kermeta.standard.helper.BooleanWrapper.not(this
 						.getIsAbstract());
 
-				if (idIfCond_167) {
+				if (idIfCond_620) {
 
 					km2ecore.common.exception.UndefinedValueTypeInstanceClassNameException except = ((km2ecore.common.exception.UndefinedValueTypeInstanceClassNameException) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject(km2ecore.common.exception.ExceptionPackage.eINSTANCE
@@ -916,56 +979,56 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 			//BIft:eachOwnedElement
 
-			kermeta.language.structure.ClassDefinition cd_ft63 = this;
+			kermeta.language.structure.ClassDefinition cd_ft131 = this;
 
 			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft64 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft132 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Tag> convertAsOrderedSet(
-								cd_ft63.getOwnedTags()).iterator();
-				java.lang.Boolean idLoopCond_168 = false;
-				while (!idLoopCond_168) {
-					idLoopCond_168 = it_ft64.isOff();
-					if (idLoopCond_168) {
+								cd_ft131.getOwnedTags()).iterator();
+				java.lang.Boolean idLoopCond_621 = false;
+				while (!idLoopCond_621) {
+					idLoopCond_621 = it_ft132.isOff();
+					if (idLoopCond_621) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Tag o_lbdExp64 = it_ft64
+						kermeta.language.structure.Tag o_lbdExp132 = it_ft132
 								.next();
 
 						//BIle:func
-						kermeta.language.structure.Tag o_lbdExp63 = o_lbdExp64;
+						kermeta.language.structure.Tag o_lbdExp131 = o_lbdExp132;
 
-						java.lang.Boolean idIfCond_169 = false;
-						idIfCond_169 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_622 = false;
+						idIfCond_622 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
-												o_lbdExp63,
+												o_lbdExp131,
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
 																"kermeta.language.structure.Operation")));
 
-						if (idIfCond_169) {
+						if (idIfCond_622) {
 
-							o_lbdExp63.applyPass1(context);
+							o_lbdExp131.applyPass1(context);
 						} else {
 
 							kermeta.language.structure.Operation op = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
-											o_lbdExp63,
+											o_lbdExp131,
 											org.kermeta.compil.runtime.ExecutionContext
 													.getInstance()
 													.getMetaClass(
 															"kermeta.language.structure.Operation")));
 
-							java.lang.Boolean idIfCond_170 = false;
-							idIfCond_170 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_623 = false;
+							idIfCond_623 = kermeta.standard.helper.BooleanWrapper
 									.not(op.isFunctionType());
 
-							if (idIfCond_170) {
+							if (idIfCond_623) {
 
 								op.applyPass1(context);
 							}
@@ -986,50 +1049,50 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft65 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft133 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Property> convertAsOrderedSet(
-								cd_ft63.getOwnedAttribute()).iterator();
-				java.lang.Boolean idLoopCond_171 = false;
-				while (!idLoopCond_171) {
-					idLoopCond_171 = it_ft65.isOff();
-					if (idLoopCond_171) {
+								cd_ft131.getOwnedAttribute()).iterator();
+				java.lang.Boolean idLoopCond_624 = false;
+				while (!idLoopCond_624) {
+					idLoopCond_624 = it_ft133.isOff();
+					if (idLoopCond_624) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Property o_lbdExp65 = it_ft65
+						kermeta.language.structure.Property o_lbdExp133 = it_ft133
 								.next();
 
 						//BIle:func
-						kermeta.language.structure.Property o_lbdExp63 = o_lbdExp65;
+						kermeta.language.structure.Property o_lbdExp131 = o_lbdExp133;
 
-						java.lang.Boolean idIfCond_172 = false;
-						idIfCond_172 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_625 = false;
+						idIfCond_625 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
-												o_lbdExp63,
+												o_lbdExp131,
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
 																"kermeta.language.structure.Operation")));
 
-						if (idIfCond_172) {
+						if (idIfCond_625) {
 
-							o_lbdExp63.applyPass1(context);
+							o_lbdExp131.applyPass1(context);
 						} else {
 
 							kermeta.language.structure.Operation op = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
-											o_lbdExp63,
+											o_lbdExp131,
 											org.kermeta.compil.runtime.ExecutionContext
 													.getInstance()
 													.getMetaClass(
 															"kermeta.language.structure.Operation")));
 
-							java.lang.Boolean idIfCond_173 = false;
-							idIfCond_173 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_626 = false;
+							idIfCond_626 = kermeta.standard.helper.BooleanWrapper
 									.not(op.isFunctionType());
 
-							if (idIfCond_173) {
+							if (idIfCond_626) {
 
 								op.applyPass1(context);
 							}
@@ -1050,50 +1113,50 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft66 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft134 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Operation> convertAsOrderedSet(
-								cd_ft63.getOwnedOperation()).iterator();
-				java.lang.Boolean idLoopCond_174 = false;
-				while (!idLoopCond_174) {
-					idLoopCond_174 = it_ft66.isOff();
-					if (idLoopCond_174) {
+								cd_ft131.getOwnedOperation()).iterator();
+				java.lang.Boolean idLoopCond_627 = false;
+				while (!idLoopCond_627) {
+					idLoopCond_627 = it_ft134.isOff();
+					if (idLoopCond_627) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Operation o_lbdExp66 = it_ft66
+						kermeta.language.structure.Operation o_lbdExp134 = it_ft134
 								.next();
 
 						//BIle:func
-						kermeta.language.structure.Operation o_lbdExp63 = o_lbdExp66;
+						kermeta.language.structure.Operation o_lbdExp131 = o_lbdExp134;
 
-						java.lang.Boolean idIfCond_175 = false;
-						idIfCond_175 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_628 = false;
+						idIfCond_628 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
-												o_lbdExp63,
+												o_lbdExp131,
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
 																"kermeta.language.structure.Operation")));
 
-						if (idIfCond_175) {
+						if (idIfCond_628) {
 
-							o_lbdExp63.applyPass1(context);
+							o_lbdExp131.applyPass1(context);
 						} else {
 
 							kermeta.language.structure.Operation op = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
-											o_lbdExp63,
+											o_lbdExp131,
 											org.kermeta.compil.runtime.ExecutionContext
 													.getInstance()
 													.getMetaClass(
 															"kermeta.language.structure.Operation")));
 
-							java.lang.Boolean idIfCond_176 = false;
-							idIfCond_176 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_629 = false;
+							idIfCond_629 = kermeta.standard.helper.BooleanWrapper
 									.not(op.isFunctionType());
 
-							if (idIfCond_176) {
+							if (idIfCond_629) {
 
 								op.applyPass1(context);
 							}
@@ -1114,50 +1177,50 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft67 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft135 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Constraint> convertAsOrderedSet(
-								cd_ft63.getInv()).iterator();
-				java.lang.Boolean idLoopCond_177 = false;
-				while (!idLoopCond_177) {
-					idLoopCond_177 = it_ft67.isOff();
-					if (idLoopCond_177) {
+								cd_ft131.getInv()).iterator();
+				java.lang.Boolean idLoopCond_630 = false;
+				while (!idLoopCond_630) {
+					idLoopCond_630 = it_ft135.isOff();
+					if (idLoopCond_630) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Constraint i_lbdExp67 = it_ft67
+						kermeta.language.structure.Constraint i_lbdExp135 = it_ft135
 								.next();
 
 						//BIle:func
-						kermeta.language.structure.Constraint o_lbdExp63 = i_lbdExp67;
+						kermeta.language.structure.Constraint o_lbdExp131 = i_lbdExp135;
 
-						java.lang.Boolean idIfCond_178 = false;
-						idIfCond_178 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_631 = false;
+						idIfCond_631 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
-												o_lbdExp63,
+												o_lbdExp131,
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
 																"kermeta.language.structure.Operation")));
 
-						if (idIfCond_178) {
+						if (idIfCond_631) {
 
-							o_lbdExp63.applyPass1(context);
+							o_lbdExp131.applyPass1(context);
 						} else {
 
 							kermeta.language.structure.Operation op = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
-											o_lbdExp63,
+											o_lbdExp131,
 											org.kermeta.compil.runtime.ExecutionContext
 													.getInstance()
 													.getMetaClass(
 															"kermeta.language.structure.Operation")));
 
-							java.lang.Boolean idIfCond_179 = false;
-							idIfCond_179 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_632 = false;
+							idIfCond_632 = kermeta.standard.helper.BooleanWrapper
 									.not(op.isFunctionType());
 
-							if (idIfCond_179) {
+							if (idIfCond_632) {
 
 								op.applyPass1(context);
 							}
@@ -1178,50 +1241,50 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft68 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft136 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.TypeVariable> convertAsOrderedSet(
-								cd_ft63.getTypeParameter()).iterator();
-				java.lang.Boolean idLoopCond_180 = false;
-				while (!idLoopCond_180) {
-					idLoopCond_180 = it_ft68.isOff();
-					if (idLoopCond_180) {
+								cd_ft131.getTypeParameter()).iterator();
+				java.lang.Boolean idLoopCond_633 = false;
+				while (!idLoopCond_633) {
+					idLoopCond_633 = it_ft136.isOff();
+					if (idLoopCond_633) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.TypeVariable t_lbdExp68 = it_ft68
+						kermeta.language.structure.TypeVariable t_lbdExp136 = it_ft136
 								.next();
 
 						//BIle:func
-						kermeta.language.structure.TypeVariable o_lbdExp63 = t_lbdExp68;
+						kermeta.language.structure.TypeVariable o_lbdExp131 = t_lbdExp136;
 
-						java.lang.Boolean idIfCond_181 = false;
-						idIfCond_181 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_634 = false;
+						idIfCond_634 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
-												o_lbdExp63,
+												o_lbdExp131,
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
 																"kermeta.language.structure.Operation")));
 
-						if (idIfCond_181) {
+						if (idIfCond_634) {
 
-							o_lbdExp63.applyPass1(context);
+							o_lbdExp131.applyPass1(context);
 						} else {
 
 							kermeta.language.structure.Operation op = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
-											o_lbdExp63,
+											o_lbdExp131,
 											org.kermeta.compil.runtime.ExecutionContext
 													.getInstance()
 													.getMetaClass(
 															"kermeta.language.structure.Operation")));
 
-							java.lang.Boolean idIfCond_182 = false;
-							idIfCond_182 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_635 = false;
+							idIfCond_635 = kermeta.standard.helper.BooleanWrapper
 									.not(op.isFunctionType());
 
-							if (idIfCond_182) {
+							if (idIfCond_635) {
 
 								op.applyPass1(context);
 							}
@@ -1269,53 +1332,54 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft69 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft137 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Type> convertAsOrderedSet(
 							this.getSuperType()).iterator();
-			java.lang.Boolean idLoopCond_183 = false;
-			while (!idLoopCond_183) {
-				idLoopCond_183 = it_ft69.isOff();
-				if (idLoopCond_183) {
+			java.lang.Boolean idLoopCond_636 = false;
+			while (!idLoopCond_636) {
+				idLoopCond_636 = it_ft137.isOff();
+				if (idLoopCond_636) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Type t_lbdExp69 = it_ft69.next();
+					kermeta.language.structure.Type t_lbdExp137 = it_ft137
+							.next();
 
-					java.lang.Boolean idIfCond_184 = false;
-					idIfCond_184 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_637 = false;
+					idIfCond_637 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
-									t_lbdExp69,
+									t_lbdExp137,
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance()
 											.getMetaClass(
 													"kermeta.language.structure.Class"));
 
-					if (idIfCond_184) {
+					if (idIfCond_637) {
 
 						kermeta.language.structure.ClassDefinition classDefinition = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asTypeSwitcher(
-										t_lbdExp69,
+										t_lbdExp137,
 										org.kermeta.compil.runtime.ExecutionContext
 												.getInstance()
 												.getMetaClass(
 														"kermeta.language.structure.Class")))
 								.getClassDefinitionAsTyped();
 
-						java.lang.Boolean idIfCond_185 = false;
-						idIfCond_185 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_638 = false;
+						idIfCond_638 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isVoidSwitcher(this
 												.getEcoreModelElement()));
 
-						if (idIfCond_185) {
+						if (idIfCond_638) {
 
-							java.lang.Boolean idIfCond_186 = false;
-							idIfCond_186 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_639 = false;
+							idIfCond_639 = kermeta.standard.helper.BooleanWrapper
 									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isVoidSwitcher(classDefinition
 													.getEcoreModelElement()));
 
-							if (idIfCond_186) {
+							if (idIfCond_639) {
 
 								ecore.EGenericType new_eGenericType = ((ecore.EGenericType) org.kermeta.compil.runtime.helper.language.ClassUtil
 										.newObject(ecore.EcorePackage.eINSTANCE
@@ -1333,7 +1397,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 								((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.asTypeSwitcher(
-												t_lbdExp69,
+												t_lbdExp137,
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
@@ -1342,7 +1406,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 								((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.asTypeSwitcher(
-												t_lbdExp69,
+												t_lbdExp137,
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
@@ -1390,35 +1454,36 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft70 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft138 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Type> convertAsOrderedSet(
 							this.getSuperType()).iterator();
-			java.lang.Boolean idLoopCond_187 = false;
-			while (!idLoopCond_187) {
-				idLoopCond_187 = it_ft70.isOff();
-				if (idLoopCond_187) {
+			java.lang.Boolean idLoopCond_640 = false;
+			while (!idLoopCond_640) {
+				idLoopCond_640 = it_ft138.isOff();
+				if (idLoopCond_640) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Type t_lbdExp70 = it_ft70.next();
+					kermeta.language.structure.Type t_lbdExp138 = it_ft138
+							.next();
 
-					java.lang.Boolean idIfCond_188 = false;
-					idIfCond_188 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_641 = false;
+					idIfCond_641 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
-									t_lbdExp70,
+									t_lbdExp138,
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance()
 											.getMetaClass(
 													"kermeta.language.structure.ParameterizedType"));
 
-					if (idIfCond_188) {
+					if (idIfCond_641) {
 
-						java.lang.Boolean idIfCond_189 = false;
-						idIfCond_189 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_642 = false;
+						idIfCond_642 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOfSwitcher(
 										((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 												.asTypeSwitcher(
-														t_lbdExp70,
+														t_lbdExp138,
 														org.kermeta.compil.runtime.ExecutionContext
 																.getInstance()
 																.getMetaClass(
@@ -1429,7 +1494,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 												.getMetaClass(
 														"kermeta.language.structure.ClassDefinition"));
 
-						if (idIfCond_189) {
+						if (idIfCond_642) {
 
 							org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.ClassDefinition> convertAsOrderedSet(
@@ -1437,7 +1502,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 													.asTypeSwitcher(
 															((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			t_lbdExp70,
+																			t_lbdExp138,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -1476,8 +1541,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 		java.lang.String qName = this.qualifiedName();
 
-		java.lang.Boolean idIfCond_190 = false;
-		idIfCond_190 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_643 = false;
+		idIfCond_643 = kermeta.standard.helper.BooleanWrapper
 				.or(
 						kermeta.standard.helper.BooleanWrapper
 								.or(
@@ -1485,24 +1550,120 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 												.or(
 														kermeta.standard.helper.BooleanWrapper
 																.or(
+																		kermeta.standard.helper.BooleanWrapper
+																				.or(
+																						kermeta.standard.helper.StringWrapper
+																								.equals(
+																										qName,
+																										"kermeta::standard::String"),
+																						kermeta.standard.helper.StringWrapper
+																								.equals(
+																										qName,
+																										"kermeta::standard::Integer")),
 																		kermeta.standard.helper.StringWrapper
 																				.equals(
 																						qName,
-																						"kermeta::standard::String"),
-																		kermeta.standard.helper.StringWrapper
-																				.equals(
-																						qName,
-																						"kermeta::standard::Integer")),
+																						"kermeta::standard::Boolean")),
 														kermeta.standard.helper.StringWrapper
 																.equals(qName,
-																		"kermeta::standard::Boolean")),
+																		"kermeta::standard::Character")),
 										kermeta.standard.helper.StringWrapper
 												.equals(qName,
-														"kermeta::standard::Character")),
+														"kermeta::standard::Real")),
 						kermeta.standard.helper.StringWrapper.equals(qName,
-								"kermeta::standard::Real"));
+								"kermeta::xmltype::QName"));
 
-		if (idIfCond_190) {
+		if (idIfCond_643) {
+
+			result = true;
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isSubTypeOf(String superType_qualifiedName) {
+
+		java.lang.Boolean result = null;
+
+		result = false;
+
+		kermeta.language.structure.Type res = null;
+		//BIft:detect
+
+		kermeta.language.structure.Type result_ft139 = null;
+
+		kermeta.language.structure.Type elem_ft139 = null;
+
+		result_ft139 = null;
+
+		{
+
+			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft139 = this
+					.allSuperTypes().iterator();
+			java.lang.Boolean idLoopCond_644 = false;
+			while (!idLoopCond_644) {
+				idLoopCond_644 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft139.isOff(),
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.isNotEqualSwitcher(result_ft139, null));
+				if (idLoopCond_644) {
+				} else {
+
+					elem_ft139 = it_ft139.next();
+
+					java.lang.Boolean idIfCond_645 = false;
+					//BIle:detector
+					kermeta.language.structure.Type st_lbdExp139 = elem_ft139;
+
+					idIfCond_645 = kermeta.standard.helper.BooleanWrapper
+							.and(
+									org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.isInstanceOfSwitcher(
+													st_lbdExp139,
+													org.kermeta.compil.runtime.ExecutionContext
+															.getInstance()
+															.getMetaClass(
+																	"kermeta.language.structure.ParameterizedType")),
+									kermeta.standard.helper.StringWrapper
+											.equals(
+													((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
+															.asTypeSwitcher(
+																	st_lbdExp139,
+																	org.kermeta.compil.runtime.ExecutionContext
+																			.getInstance()
+																			.getMetaClass(
+																					"kermeta.language.structure.ParameterizedType")))
+															.getTypeDefinition()
+															.qualifiedName(),
+													superType_qualifiedName));
+					//EIle:detector
+
+					if (idIfCond_645) {
+
+						result_ft139 = elem_ft139;
+					}
+
+				}
+			}
+		}
+
+		//CE
+		res = result_ft139;
+		//EIft:detect
+		;
+
+		java.lang.Boolean idIfCond_646 = false;
+		idIfCond_646 = kermeta.standard.helper.BooleanWrapper
+				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.isVoidSwitcher(res));
+
+		if (idIfCond_646) {
 
 			result = true;
 		}
@@ -1532,10 +1693,10 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 								.getSuperType()));
 
 		kermeta.standard.helper.BooleanWrapper.not(superClasses.isEmpty());
-		java.lang.Boolean idLoopCond_191 = false;
-		while (!idLoopCond_191) {
-			idLoopCond_191 = superClasses.isEmpty();
-			if (idLoopCond_191) {
+		java.lang.Boolean idLoopCond_647 = false;
+		while (!idLoopCond_647) {
+			idLoopCond_647 = superClasses.isEmpty();
+			if (idLoopCond_647) {
 			} else {
 
 				allSuperClasses.addAll(superClasses);
@@ -1548,35 +1709,35 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft71 = superClasses
+					kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft140 = superClasses
 							.iterator();
-					java.lang.Boolean idLoopCond_192 = false;
-					while (!idLoopCond_192) {
-						idLoopCond_192 = it_ft71.isOff();
-						if (idLoopCond_192) {
+					java.lang.Boolean idLoopCond_648 = false;
+					while (!idLoopCond_648) {
+						idLoopCond_648 = it_ft140.isOff();
+						if (idLoopCond_648) {
 						} else {
 
 							//BIle:func
-							kermeta.language.structure.Type s_lbdExp71 = it_ft71
+							kermeta.language.structure.Type s_lbdExp140 = it_ft140
 									.next();
 
-							java.lang.Boolean idIfCond_193 = false;
-							idIfCond_193 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							java.lang.Boolean idIfCond_649 = false;
+							idIfCond_649 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isInstanceOfSwitcher(
-											s_lbdExp71,
+											s_lbdExp140,
 											org.kermeta.compil.runtime.ExecutionContext
 													.getInstance()
 													.getMetaClass(
 															"kermeta.language.structure.ParameterizedType"));
 
-							if (idIfCond_193) {
+							if (idIfCond_649) {
 
-								java.lang.Boolean idIfCond_194 = false;
-								idIfCond_194 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								java.lang.Boolean idIfCond_650 = false;
+								idIfCond_650 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
 												((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.asTypeSwitcher(
-																s_lbdExp71,
+																s_lbdExp140,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
@@ -1587,7 +1748,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 														.getMetaClass(
 																"kermeta.language.structure.ClassDefinition"));
 
-								if (idIfCond_194) {
+								if (idIfCond_650) {
 
 									temp
 											.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
@@ -1595,7 +1756,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 															.asTypeSwitcher(
 																	((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																			.asTypeSwitcher(
-																					s_lbdExp71,
+																					s_lbdExp140,
 																					org.kermeta.compil.runtime.ExecutionContext
 																							.getInstance()
 																							.getMetaClass(
@@ -1635,96 +1796,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isSubTypeOf(String superType_qualifiedName) {
-
-		java.lang.Boolean result = null;
-
-		result = false;
-
-		kermeta.language.structure.Type res = null;
-		//BIft:detect
-
-		kermeta.language.structure.Type result_ft72 = null;
-
-		kermeta.language.structure.Type elem_ft72 = null;
-
-		result_ft72 = null;
-
-		{
-
-			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft72 = this
-					.allSuperTypes().iterator();
-			java.lang.Boolean idLoopCond_195 = false;
-			while (!idLoopCond_195) {
-				idLoopCond_195 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft72.isOff(),
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft72, null));
-				if (idLoopCond_195) {
-				} else {
-
-					elem_ft72 = it_ft72.next();
-
-					java.lang.Boolean idIfCond_196 = false;
-					//BIle:detector
-					kermeta.language.structure.Type st_lbdExp72 = elem_ft72;
-
-					idIfCond_196 = kermeta.standard.helper.BooleanWrapper
-							.and(
-									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.isInstanceOfSwitcher(
-													st_lbdExp72,
-													org.kermeta.compil.runtime.ExecutionContext
-															.getInstance()
-															.getMetaClass(
-																	"kermeta.language.structure.ParameterizedType")),
-									kermeta.standard.helper.StringWrapper
-											.equals(
-													((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
-															.asTypeSwitcher(
-																	st_lbdExp72,
-																	org.kermeta.compil.runtime.ExecutionContext
-																			.getInstance()
-																			.getMetaClass(
-																					"kermeta.language.structure.ParameterizedType")))
-															.getTypeDefinition()
-															.qualifiedName(),
-													superType_qualifiedName));
-					//EIle:detector
-
-					if (idIfCond_196) {
-
-						result_ft72 = elem_ft72;
-					}
-
-				}
-			}
-		}
-
-		//CE
-		res = result_ft72;
-		//EIft:detect
-		;
-
-		java.lang.Boolean idIfCond_197 = false;
-		idIfCond_197 = kermeta.standard.helper.BooleanWrapper
-				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.isVoidSwitcher(res));
-
-		if (idIfCond_197) {
-
-			result = true;
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Boolean isIterator() {
 
 		java.lang.Boolean result = null;
@@ -1733,11 +1804,11 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 		result = this.isSubTypeOf("kermeta::standard::Iterator");
 
-		java.lang.Boolean idIfCond_198 = false;
-		idIfCond_198 = kermeta.standard.helper.StringWrapper.equals(this
+		java.lang.Boolean idIfCond_651 = false;
+		idIfCond_651 = kermeta.standard.helper.StringWrapper.equals(this
 				.qualifiedName(), "kermeta::standard::Iterator");
 
-		if (idIfCond_198) {
+		if (idIfCond_651) {
 
 			result = true;
 		}
@@ -1759,11 +1830,11 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 		result = this.isSubTypeOf("kermeta::standard::Collection");
 
-		java.lang.Boolean idIfCond_199 = false;
-		idIfCond_199 = kermeta.standard.helper.StringWrapper.equals(this
+		java.lang.Boolean idIfCond_652 = false;
+		idIfCond_652 = kermeta.standard.helper.StringWrapper.equals(this
 				.qualifiedName(), "kermeta::standard::Collection");
 
-		if (idIfCond_199) {
+		if (idIfCond_652) {
 
 			result = true;
 		}
@@ -1807,11 +1878,11 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	 */
 	public void applyPass2BehaviorJava(KM2EcoreContext context) {
 
-		java.lang.Boolean idIfCond_200 = false;
-		idIfCond_200 = kermeta.standard.helper.BooleanWrapper.not(this
+		java.lang.Boolean idIfCond_653 = false;
+		idIfCond_653 = kermeta.standard.helper.BooleanWrapper.not(this
 				.isAddedValueType());
 
-		if (idIfCond_200) {
+		if (idIfCond_653) {
 
 			this.setLinks(context);
 		} else {
@@ -1830,13 +1901,13 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 							cd_valueType.getEcoreModelElement());
 		}
 
-		java.lang.Boolean idIfCond_201 = false;
-		idIfCond_201 = kermeta.standard.helper.BooleanWrapper.and(this
+		java.lang.Boolean idIfCond_654 = false;
+		idIfCond_654 = kermeta.standard.helper.BooleanWrapper.and(this
 				.isValueType(),
 				org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isNotEqualSwitcher(this.getName(), "Numeric"));
 
-		if (idIfCond_201) {
+		if (idIfCond_654) {
 
 			context.setCurrent_valueType(this);
 
@@ -1844,20 +1915,20 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft73 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft141 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Operation> convertAsOrderedSet(
 								this.getOwnedOperation()).iterator();
-				java.lang.Boolean idLoopCond_202 = false;
-				while (!idLoopCond_202) {
-					idLoopCond_202 = it_ft73.isOff();
-					if (idLoopCond_202) {
+				java.lang.Boolean idLoopCond_655 = false;
+				while (!idLoopCond_655) {
+					idLoopCond_655 = it_ft141.isOff();
+					if (idLoopCond_655) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Operation op_lbdExp73 = it_ft73
+						kermeta.language.structure.Operation op_lbdExp141 = it_ft141
 								.next();
 
-						op_lbdExp73.applyPass2BehaviorJava(context);
+						op_lbdExp141.applyPass2BehaviorJava(context);
 						//EIle:func
 
 					}
@@ -1870,34 +1941,34 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft74 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft142 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Type> convertAsOrderedSet(
 								this.getSuperType()).iterator();
-				java.lang.Boolean idLoopCond_203 = false;
-				while (!idLoopCond_203) {
-					idLoopCond_203 = it_ft74.isOff();
-					if (idLoopCond_203) {
+				java.lang.Boolean idLoopCond_656 = false;
+				while (!idLoopCond_656) {
+					idLoopCond_656 = it_ft142.isOff();
+					if (idLoopCond_656) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Type t_lbdExp74 = it_ft74
+						kermeta.language.structure.Type t_lbdExp142 = it_ft142
 								.next();
 
-						java.lang.Boolean idIfCond_204 = false;
-						idIfCond_204 = org.kermeta.compil.runtime.helper.language.TypeUtil
+						java.lang.Boolean idIfCond_657 = false;
+						idIfCond_657 = org.kermeta.compil.runtime.helper.language.TypeUtil
 								.isInstanceSwitcher(
 										org.kermeta.compil.runtime.ExecutionContext
 												.getInstance()
 												.getMetaClass(
 														"kermeta.language.structure.Class"),
-										t_lbdExp74);
+										t_lbdExp142);
 
-						if (idIfCond_204) {
+						if (idIfCond_657) {
 
 							kermeta.language.structure.Class c = null;
 
 							c = (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.asTypeOrVoid(t_lbdExp74,
+									.asTypeOrVoid(t_lbdExp142,
 											"kermeta.language.structure.Class");
 
 							kermeta.language.structure.ClassDefinition cDef = null;
@@ -1910,30 +1981,30 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 							{
 
-								kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft75 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+								kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft143 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 										.<kermeta.language.structure.Operation> convertAsSet(
 												cDef.getterAllOperation())
 										.iterator();
-								java.lang.Boolean idLoopCond_205 = false;
-								while (!idLoopCond_205) {
-									idLoopCond_205 = it_ft75.isOff();
-									if (idLoopCond_205) {
+								java.lang.Boolean idLoopCond_658 = false;
+								while (!idLoopCond_658) {
+									idLoopCond_658 = it_ft143.isOff();
+									if (idLoopCond_658) {
 									} else {
 
 										//BIle:func
-										kermeta.language.structure.Operation p_lbdExp75 = it_ft75
+										kermeta.language.structure.Operation p_lbdExp143 = it_ft143
 												.next();
 
-										java.lang.Boolean idIfCond_206 = false;
-										idIfCond_206 = kermeta.standard.helper.StringWrapper
+										java.lang.Boolean idIfCond_659 = false;
+										idIfCond_659 = kermeta.standard.helper.StringWrapper
 												.equals(
-														p_lbdExp75
+														p_lbdExp143
 																.getRecopyInValueTypes(),
 														"true");
 
-										if (idIfCond_206) {
+										if (idIfCond_659) {
 
-											p_lbdExp75
+											p_lbdExp143
 													.applyPass2BehaviorJava(context);
 										}
 
@@ -1958,37 +2029,37 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 			context.setCurrent_valueType(null);
 		} else {
 
-			java.lang.Boolean idIfCond_207 = false;
-			idIfCond_207 = kermeta.standard.helper.BooleanWrapper.not(this
+			java.lang.Boolean idIfCond_660 = false;
+			idIfCond_660 = kermeta.standard.helper.BooleanWrapper.not(this
 					.isAddedValueType());
 
-			if (idIfCond_207) {
+			if (idIfCond_660) {
 
 				//BIft:eachOwnedElement
 
-				kermeta.language.structure.ClassDefinition cd_ft76 = this;
+				kermeta.language.structure.ClassDefinition cd_ft144 = this;
 
 				//BIft:each
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft77 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft145 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.language.structure.Tag> convertAsOrderedSet(
-									cd_ft76.getOwnedTags()).iterator();
-					java.lang.Boolean idLoopCond_208 = false;
-					while (!idLoopCond_208) {
-						idLoopCond_208 = it_ft77.isOff();
-						if (idLoopCond_208) {
+									cd_ft144.getOwnedTags()).iterator();
+					java.lang.Boolean idLoopCond_661 = false;
+					while (!idLoopCond_661) {
+						idLoopCond_661 = it_ft145.isOff();
+						if (idLoopCond_661) {
 						} else {
 
 							//BIle:func
-							kermeta.language.structure.Tag o_lbdExp77 = it_ft77
+							kermeta.language.structure.Tag o_lbdExp145 = it_ft145
 									.next();
 
 							//BIle:func
-							kermeta.language.structure.Tag p_lbdExp76 = o_lbdExp77;
+							kermeta.language.structure.Tag p_lbdExp144 = o_lbdExp145;
 
-							p_lbdExp76.applyPass2BehaviorJava(context);
+							p_lbdExp144.applyPass2BehaviorJava(context);
 							//EIle:func
 
 							//EIle:func
@@ -2003,23 +2074,23 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft78 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft146 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.language.structure.Property> convertAsOrderedSet(
-									cd_ft76.getOwnedAttribute()).iterator();
-					java.lang.Boolean idLoopCond_209 = false;
-					while (!idLoopCond_209) {
-						idLoopCond_209 = it_ft78.isOff();
-						if (idLoopCond_209) {
+									cd_ft144.getOwnedAttribute()).iterator();
+					java.lang.Boolean idLoopCond_662 = false;
+					while (!idLoopCond_662) {
+						idLoopCond_662 = it_ft146.isOff();
+						if (idLoopCond_662) {
 						} else {
 
 							//BIle:func
-							kermeta.language.structure.Property o_lbdExp78 = it_ft78
+							kermeta.language.structure.Property o_lbdExp146 = it_ft146
 									.next();
 
 							//BIle:func
-							kermeta.language.structure.Property p_lbdExp76 = o_lbdExp78;
+							kermeta.language.structure.Property p_lbdExp144 = o_lbdExp146;
 
-							p_lbdExp76.applyPass2BehaviorJava(context);
+							p_lbdExp144.applyPass2BehaviorJava(context);
 							//EIle:func
 
 							//EIle:func
@@ -2034,23 +2105,23 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft79 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft147 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.language.structure.Operation> convertAsOrderedSet(
-									cd_ft76.getOwnedOperation()).iterator();
-					java.lang.Boolean idLoopCond_210 = false;
-					while (!idLoopCond_210) {
-						idLoopCond_210 = it_ft79.isOff();
-						if (idLoopCond_210) {
+									cd_ft144.getOwnedOperation()).iterator();
+					java.lang.Boolean idLoopCond_663 = false;
+					while (!idLoopCond_663) {
+						idLoopCond_663 = it_ft147.isOff();
+						if (idLoopCond_663) {
 						} else {
 
 							//BIle:func
-							kermeta.language.structure.Operation o_lbdExp79 = it_ft79
+							kermeta.language.structure.Operation o_lbdExp147 = it_ft147
 									.next();
 
 							//BIle:func
-							kermeta.language.structure.Operation p_lbdExp76 = o_lbdExp79;
+							kermeta.language.structure.Operation p_lbdExp144 = o_lbdExp147;
 
-							p_lbdExp76.applyPass2BehaviorJava(context);
+							p_lbdExp144.applyPass2BehaviorJava(context);
 							//EIle:func
 
 							//EIle:func
@@ -2065,23 +2136,23 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft80 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft148 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.language.structure.Constraint> convertAsOrderedSet(
-									cd_ft76.getInv()).iterator();
-					java.lang.Boolean idLoopCond_211 = false;
-					while (!idLoopCond_211) {
-						idLoopCond_211 = it_ft80.isOff();
-						if (idLoopCond_211) {
+									cd_ft144.getInv()).iterator();
+					java.lang.Boolean idLoopCond_664 = false;
+					while (!idLoopCond_664) {
+						idLoopCond_664 = it_ft148.isOff();
+						if (idLoopCond_664) {
 						} else {
 
 							//BIle:func
-							kermeta.language.structure.Constraint i_lbdExp80 = it_ft80
+							kermeta.language.structure.Constraint i_lbdExp148 = it_ft148
 									.next();
 
 							//BIle:func
-							kermeta.language.structure.Constraint p_lbdExp76 = i_lbdExp80;
+							kermeta.language.structure.Constraint p_lbdExp144 = i_lbdExp148;
 
-							p_lbdExp76.applyPass2BehaviorJava(context);
+							p_lbdExp144.applyPass2BehaviorJava(context);
 							//EIle:func
 
 							//EIle:func
@@ -2096,23 +2167,23 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft81 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft149 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.language.structure.TypeVariable> convertAsOrderedSet(
-									cd_ft76.getTypeParameter()).iterator();
-					java.lang.Boolean idLoopCond_212 = false;
-					while (!idLoopCond_212) {
-						idLoopCond_212 = it_ft81.isOff();
-						if (idLoopCond_212) {
+									cd_ft144.getTypeParameter()).iterator();
+					java.lang.Boolean idLoopCond_665 = false;
+					while (!idLoopCond_665) {
+						idLoopCond_665 = it_ft149.isOff();
+						if (idLoopCond_665) {
 						} else {
 
 							//BIle:func
-							kermeta.language.structure.TypeVariable t_lbdExp81 = it_ft81
+							kermeta.language.structure.TypeVariable t_lbdExp149 = it_ft149
 									.next();
 
 							//BIle:func
-							kermeta.language.structure.TypeVariable p_lbdExp76 = t_lbdExp81;
+							kermeta.language.structure.TypeVariable p_lbdExp144 = t_lbdExp149;
 
-							p_lbdExp76.applyPass2BehaviorJava(context);
+							p_lbdExp144.applyPass2BehaviorJava(context);
 							//EIle:func
 
 							//EIle:func
@@ -2154,33 +2225,34 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft56 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft124 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Type> convertAsOrderedSet(
 							this.getSuperType()).iterator();
-			java.lang.Boolean idLoopCond_147 = false;
-			while (!idLoopCond_147) {
-				idLoopCond_147 = it_ft56.isOff();
-				if (idLoopCond_147) {
+			java.lang.Boolean idLoopCond_600 = false;
+			while (!idLoopCond_600) {
+				idLoopCond_600 = it_ft124.isOff();
+				if (idLoopCond_600) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Type t_lbdExp56 = it_ft56.next();
+					kermeta.language.structure.Type t_lbdExp124 = it_ft124
+							.next();
 
-					java.lang.Boolean idIfCond_148 = false;
-					idIfCond_148 = org.kermeta.compil.runtime.helper.language.TypeUtil
+					java.lang.Boolean idIfCond_601 = false;
+					idIfCond_601 = org.kermeta.compil.runtime.helper.language.TypeUtil
 							.isInstanceSwitcher(
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance()
 											.getMetaClass(
 													"kermeta.language.structure.Class"),
-									t_lbdExp56);
+									t_lbdExp124);
 
-					if (idIfCond_148) {
+					if (idIfCond_601) {
 
 						kermeta.language.structure.Class c = null;
 
 						c = (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.asTypeOrVoid(t_lbdExp56,
+								.asTypeOrVoid(t_lbdExp124,
 										"kermeta.language.structure.Class");
 
 						kermeta.language.structure.ClassDefinition cDef = null;
@@ -2193,21 +2265,21 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 						{
 
-							kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft57 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft125 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.Operation> convertAsSet(
 											cDef.getterAllOperation())
 									.iterator();
-							java.lang.Boolean idLoopCond_149 = false;
-							while (!idLoopCond_149) {
-								idLoopCond_149 = it_ft57.isOff();
-								if (idLoopCond_149) {
+							java.lang.Boolean idLoopCond_602 = false;
+							while (!idLoopCond_602) {
+								idLoopCond_602 = it_ft125.isOff();
+								if (idLoopCond_602) {
 								} else {
 
 									//BIle:func
-									kermeta.language.structure.Operation p_lbdExp57 = it_ft57
+									kermeta.language.structure.Operation p_lbdExp125 = it_ft125
 											.next();
 
-									result.add(p_lbdExp57);
+									result.add(p_lbdExp125);
 									//EIle:func
 
 								}
@@ -2252,33 +2324,34 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft58 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft126 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Type> convertAsOrderedSet(
 							this.getSuperType()).iterator();
-			java.lang.Boolean idLoopCond_150 = false;
-			while (!idLoopCond_150) {
-				idLoopCond_150 = it_ft58.isOff();
-				if (idLoopCond_150) {
+			java.lang.Boolean idLoopCond_603 = false;
+			while (!idLoopCond_603) {
+				idLoopCond_603 = it_ft126.isOff();
+				if (idLoopCond_603) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Type t_lbdExp58 = it_ft58.next();
+					kermeta.language.structure.Type t_lbdExp126 = it_ft126
+							.next();
 
-					java.lang.Boolean idIfCond_151 = false;
-					idIfCond_151 = org.kermeta.compil.runtime.helper.language.TypeUtil
+					java.lang.Boolean idIfCond_604 = false;
+					idIfCond_604 = org.kermeta.compil.runtime.helper.language.TypeUtil
 							.isInstanceSwitcher(
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance()
 											.getMetaClass(
 													"kermeta.language.structure.Class"),
-									t_lbdExp58);
+									t_lbdExp126);
 
-					if (idIfCond_151) {
+					if (idIfCond_604) {
 
 						kermeta.language.structure.Class c = null;
 
 						c = (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.asTypeOrVoid(t_lbdExp58,
+								.asTypeOrVoid(t_lbdExp126,
 										"kermeta.language.structure.Class");
 
 						kermeta.language.structure.ClassDefinition cDef = null;
@@ -2291,21 +2364,21 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 						{
 
-							kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft59 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft127 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.Property> convertAsSet(
 											cDef.getterAllAttribute())
 									.iterator();
-							java.lang.Boolean idLoopCond_152 = false;
-							while (!idLoopCond_152) {
-								idLoopCond_152 = it_ft59.isOff();
-								if (idLoopCond_152) {
+							java.lang.Boolean idLoopCond_605 = false;
+							while (!idLoopCond_605) {
+								idLoopCond_605 = it_ft127.isOff();
+								if (idLoopCond_605) {
 								} else {
 
 									//BIle:func
-									kermeta.language.structure.Property p_lbdExp59 = it_ft59
+									kermeta.language.structure.Property p_lbdExp127 = it_ft127
 											.next();
 
-									result.add(p_lbdExp59);
+									result.add(p_lbdExp127);
 									//EIle:func
 
 								}
@@ -2326,6 +2399,127 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 
 		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.convertAsEList(result);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGenModelQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.plus(
+				kermeta.standard.helper.StringWrapper.plus(this
+						.getRootPackage().getGenModelBasePackage(), "::"), this
+						.qualifiedName());
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.qualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGenModelJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.getGenModelQualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String qualifiedName() {
+
+		java.lang.String result = null;
+
+		kermeta.language.structure.NamedElement elem = this;
+
+		result = this.getName();
+
+		java.lang.Boolean idIfCond_560 = false;
+		idIfCond_560 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.containerSwitcher(elem),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.NamedElement"));
+
+		if (idIfCond_560) {
+
+			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.language.ObjectUtil
+									.containerSwitcher(elem),
+							"kermeta.language.structure.NamedElement");
+			java.lang.Boolean idLoopCond_561 = false;
+			while (!idLoopCond_561) {
+				idLoopCond_561 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.equalsSwitcher(elem, null);
+				if (idLoopCond_561) {
+				} else {
+
+					result = kermeta.standard.helper.StringWrapper.plus(
+							kermeta.standard.helper.StringWrapper.plus(elem
+									.getName(), "::"), result);
+
+					java.lang.Boolean idIfCond_562 = false;
+					idIfCond_562 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isInstanceOfSwitcher(
+									org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.containerSwitcher(elem),
+									org.kermeta.compil.runtime.ExecutionContext
+											.getInstance()
+											.getMetaClass(
+													"kermeta.language.structure.NamedElement"));
+
+					if (idIfCond_562) {
+
+						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.asTypeOrVoid(
+										org.kermeta.compil.runtime.helper.language.ObjectUtil
+												.containerSwitcher(elem),
+										"kermeta.language.structure.NamedElement");
+					} else {
+
+						elem = null;
+					}
+
+				}
+			}
+		}
+
+		return result;
 
 	}
 
@@ -2364,6 +2558,9 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
+		case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+			return ((InternalEList<?>) getTypeParameter()).basicRemove(
+					otherEnd, msgs);
 		case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
 			return ((InternalEList<?>) getContainedType()).basicRemove(
 					otherEnd, msgs);
@@ -2387,12 +2584,14 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+		case StructurePackage.CLASS_DEFINITION__NAME:
+			return getName();
+		case StructurePackage.CLASS_DEFINITION__IS_ASPECT:
+			return getIsAspect();
+		case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+			return getTypeParameter();
 		case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
 			return getContainedType();
-		case StructurePackage.CLASS_DEFINITION__ECORE_MODEL_ELEMENT:
-			if (resolve)
-				return getEcoreModelElement();
-			return basicGetEcoreModelElement();
 		case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
 			return getOwnedOperation();
 		case StructurePackage.CLASS_DEFINITION__IS_ABSTRACT:
@@ -2403,12 +2602,12 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 			return getInv();
 		case StructurePackage.CLASS_DEFINITION__SUB_CLASS_DEFINITIONS:
 			return getSubClassDefinitions();
-		case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
-			return getOwnedAttribute();
 		case StructurePackage.CLASS_DEFINITION__ECORE_DATA_TYPE:
 			if (resolve)
 				return getEcoreDataType();
 			return basicGetEcoreDataType();
+		case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
+			return getOwnedAttribute();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2422,12 +2621,20 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+		case StructurePackage.CLASS_DEFINITION__NAME:
+			setName((String) newValue);
+			return;
+		case StructurePackage.CLASS_DEFINITION__IS_ASPECT:
+			setIsAspect((Boolean) newValue);
+			return;
+		case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+			getTypeParameter().clear();
+			getTypeParameter().addAll(
+					(Collection<? extends TypeVariable>) newValue);
+			return;
 		case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
 			getContainedType().clear();
 			getContainedType().addAll((Collection<? extends Type>) newValue);
-			return;
-		case StructurePackage.CLASS_DEFINITION__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EClass) newValue);
 			return;
 		case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
 			getOwnedOperation().clear();
@@ -2450,13 +2657,13 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 			getSubClassDefinitions().addAll(
 					(Collection<? extends ClassDefinition>) newValue);
 			return;
+		case StructurePackage.CLASS_DEFINITION__ECORE_DATA_TYPE:
+			setEcoreDataType((EDataType) newValue);
+			return;
 		case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
 			getOwnedAttribute().clear();
 			getOwnedAttribute().addAll(
 					(Collection<? extends Property>) newValue);
-			return;
-		case StructurePackage.CLASS_DEFINITION__ECORE_DATA_TYPE:
-			setEcoreDataType((EDataType) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -2470,11 +2677,17 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+		case StructurePackage.CLASS_DEFINITION__NAME:
+			setName(NAME_EDEFAULT);
+			return;
+		case StructurePackage.CLASS_DEFINITION__IS_ASPECT:
+			setIsAspect(IS_ASPECT_EDEFAULT);
+			return;
+		case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+			getTypeParameter().clear();
+			return;
 		case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
 			getContainedType().clear();
-			return;
-		case StructurePackage.CLASS_DEFINITION__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EClass) null);
 			return;
 		case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
 			getOwnedOperation().clear();
@@ -2491,11 +2704,11 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 		case StructurePackage.CLASS_DEFINITION__SUB_CLASS_DEFINITIONS:
 			getSubClassDefinitions().clear();
 			return;
-		case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
-			getOwnedAttribute().clear();
-			return;
 		case StructurePackage.CLASS_DEFINITION__ECORE_DATA_TYPE:
 			setEcoreDataType((EDataType) null);
+			return;
+		case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
+			getOwnedAttribute().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -2509,10 +2722,16 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+		case StructurePackage.CLASS_DEFINITION__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
+		case StructurePackage.CLASS_DEFINITION__IS_ASPECT:
+			return IS_ASPECT_EDEFAULT == null ? isAspect != null
+					: !IS_ASPECT_EDEFAULT.equals(isAspect);
+		case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+			return typeParameter != null && !typeParameter.isEmpty();
 		case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
 			return containedType != null && !containedType.isEmpty();
-		case StructurePackage.CLASS_DEFINITION__ECORE_MODEL_ELEMENT:
-			return ecoreModelElement != null;
 		case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
 			return ownedOperation != null && !ownedOperation.isEmpty();
 		case StructurePackage.CLASS_DEFINITION__IS_ABSTRACT:
@@ -2525,10 +2744,10 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 		case StructurePackage.CLASS_DEFINITION__SUB_CLASS_DEFINITIONS:
 			return subClassDefinitions != null
 					&& !subClassDefinitions.isEmpty();
-		case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
-			return ownedAttribute != null && !ownedAttribute.isEmpty();
 		case StructurePackage.CLASS_DEFINITION__ECORE_DATA_TYPE:
 			return ecoreDataType != null;
+		case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
+			return ownedAttribute != null && !ownedAttribute.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2540,18 +2759,34 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == TypeContainer.class) {
+		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
+			case StructurePackage.CLASS_DEFINITION__NAME:
+				return StructurePackage.NAMED_ELEMENT__NAME;
 			default:
 				return -1;
 			}
 		}
-		if (baseClass == Traceability.class) {
+		if (baseClass == TypeDefinition.class) {
 			switch (derivedFeatureID) {
-			case StructurePackage.CLASS_DEFINITION__ECORE_MODEL_ELEMENT:
-				return StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT;
+			case StructurePackage.CLASS_DEFINITION__IS_ASPECT:
+				return StructurePackage.TYPE_DEFINITION__IS_ASPECT;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == GenericTypeDefinition.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+				return StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == TypeContainer.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
+				return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
 			default:
 				return -1;
 			}
@@ -2566,18 +2801,34 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == TypeContainer.class) {
+		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-			case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE:
-				return StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE;
+			case StructurePackage.NAMED_ELEMENT__NAME:
+				return StructurePackage.CLASS_DEFINITION__NAME;
 			default:
 				return -1;
 			}
 		}
-		if (baseClass == Traceability.class) {
+		if (baseClass == TypeDefinition.class) {
 			switch (baseFeatureID) {
-			case StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT:
-				return StructurePackage.CLASS_DEFINITION__ECORE_MODEL_ELEMENT;
+			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
+				return StructurePackage.CLASS_DEFINITION__IS_ASPECT;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == GenericTypeDefinition.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:
+				return StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == TypeContainer.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE:
+				return StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE;
 			default:
 				return -1;
 			}
@@ -2596,7 +2847,11 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isAbstract: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", isAspect: ");
+		result.append(isAspect);
+		result.append(", isAbstract: ");
 		result.append(isAbstract);
 		result.append(')');
 		return result.toString();

@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SMNamedElement.java,v 1.12 2009-02-23 15:26:55 cfaucher Exp $
+ * $Id$
  */
 package simk;
 
@@ -22,6 +22,7 @@ package simk;
  *
  * @see simk.SimkPackage#getSMNamedElement()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  * @generated
  */
 public interface SMNamedElement extends kermeta.language.structure.Object {
@@ -36,7 +37,7 @@ public interface SMNamedElement extends kermeta.language.structure.Object {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see simk.SimkPackage#getSMNamedElement_Name()
-	 * @model dataType="ecore.EString"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getName();

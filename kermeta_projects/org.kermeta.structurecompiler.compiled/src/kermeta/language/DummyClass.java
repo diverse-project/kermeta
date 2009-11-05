@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: DummyClass.java,v 1.12 2009-02-23 15:26:50 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language;
 
@@ -16,6 +16,7 @@ package kermeta.language;
  *
  * @see kermeta.language.LanguagePackage#getDummyClass()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='This class is used to workaround an EMF bug, it doesn\'t really belong to Kermeta metamodel'"
  * @generated
  */

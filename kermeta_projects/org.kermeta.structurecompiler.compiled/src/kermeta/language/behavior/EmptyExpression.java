@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EmptyExpression.java,v 1.12 2009-02-23 15:26:38 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior;
 
@@ -15,7 +15,8 @@ package kermeta.language.behavior;
  *
  *
  * @see kermeta.language.behavior.BehaviorPackage#getEmptyExpression()
- * @model annotation="kermeta documentation='As suggested by its name, this class represents an expression that do nothing. Like a \"nop\"'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='As suggested by its name, this class represents an expression that do nothing. Like a \"nop\"'"
  * @generated
  */
 public interface EmptyExpression extends Expression {

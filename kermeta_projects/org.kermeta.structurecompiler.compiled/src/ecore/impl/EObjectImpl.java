@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EObjectImpl.java,v 1.11 2009-02-23 15:26:41 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 

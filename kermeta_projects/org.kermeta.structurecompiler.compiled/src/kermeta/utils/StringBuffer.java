@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StringBuffer.java,v 1.12 2009-02-23 15:26:53 cfaucher Exp $
+ * $Id$
  */
 package kermeta.utils;
 
@@ -21,8 +21,8 @@ package kermeta.utils;
  * </p>
  *
  * @see kermeta.utils.UtilsPackage#getStringBuffer()
- * @model annotation="kermeta EMF_needProperty='name=content javaClass=java.lang.StringBuffer'"
- *        annotation="kermeta documentation='/**\n * This class mimic the behavior of the java\'s StringBuffer class. This enables better performance in long\n * string concatenation.<br>\n * <b>Only work on Strings</b>\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png\"/>\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * This class mimic the behavior of the java\'s StringBuffer class. This enables better performance in long\n * string concatenation.<br>\n * <b>Only work on Strings</b>\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png\"/>\n \052/'"
+ *        annotation="kermeta EMF_needProperty='name=content javaClass=java.lang.StringBuffer'"
  * @generated
  */
 public interface StringBuffer extends kermeta.language.structure.Object {

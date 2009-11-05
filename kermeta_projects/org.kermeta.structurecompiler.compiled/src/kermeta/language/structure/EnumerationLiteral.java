@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EnumerationLiteral.java,v 1.12 2009-02-23 15:26:48 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure;
 
@@ -25,12 +25,13 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getEnumerationLiteral()
- * @model annotation="kermeta documentation='/**\r\n *\r\n \052/'"
+ * @model annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Item definition for enumeration'"
+ *        annotation="kermeta documentation='/**\r\n *\r\n \052/'"
  * @generated
  */
-public interface EnumerationLiteral extends NamedElement,
-		Traceability<EEnumLiteral> {
+public interface EnumerationLiteral extends Traceability<EEnumLiteral>,
+		NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Enumeration</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link kermeta.language.structure.Enumeration#getOwnedLiteral <em>Owned Literal</em>}'.
@@ -45,6 +46,7 @@ public interface EnumerationLiteral extends NamedElement,
 	 * @see kermeta.language.structure.StructurePackage#getEnumerationLiteral_Enumeration()
 	 * @see kermeta.language.structure.Enumeration#getOwnedLiteral
 	 * @model opposite="ownedLiteral"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 *        annotation="kermeta documentation='Owning Enumeration'"
 	 * @generated

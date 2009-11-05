@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SMTypedElement.java,v 1.12 2009-02-23 15:26:55 cfaucher Exp $
+ * $Id$
  */
 package simk;
 
@@ -22,6 +22,7 @@ package simk;
  *
  * @see simk.SimkPackage#getSMTypedElement()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  * @generated
  */
 public interface SMTypedElement extends kermeta.language.structure.Object {
@@ -36,7 +37,8 @@ public interface SMTypedElement extends kermeta.language.structure.Object {
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see #setType(String)
 	 * @see simk.SimkPackage#getSMTypedElement_Type()
-	 * @model dataType="ecore.EString" required="true"
+	 * @model required="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getType();

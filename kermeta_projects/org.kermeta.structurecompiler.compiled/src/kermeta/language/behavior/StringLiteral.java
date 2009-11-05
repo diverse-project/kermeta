@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StringLiteral.java,v 1.12 2009-02-23 15:26:37 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior;
 
@@ -23,8 +23,9 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getStringLiteral()
- * @model annotation="kermeta documentation='This expression is a literal representing a String value, typically : \"my string\"'"
- *        annotation="kermeta documentation='/** Complete \052/'"
+ * @model annotation="kermeta documentation='/** Complete \052/'"
+ *        annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='This expression is a literal representing a String value, typically : \"my string\"'"
  * @generated
  */
 public interface StringLiteral extends Literal {
@@ -40,6 +41,7 @@ public interface StringLiteral extends Literal {
 	 * @see #setValue(String)
 	 * @see kermeta.language.behavior.BehaviorPackage#getStringLiteral_Value()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='The concrete value represented by this literal'"
 	 * @generated
 	 */
@@ -60,7 +62,7 @@ public interface StringLiteral extends Literal {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta superOperation='kermeta::language::behavior::Literal'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = this.getValue();\n\n\tjava.lang.Boolean idIfCond_696 = false;\n\tidIfCond_696 = kermeta.standard.helper.StringWrapper.equals(result, \".\");\n\n\tif( idIfCond_696 ) {\n\n\tresult = \"\\\".\\\"\";\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\\\\", \"\\\\\\\\\");\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"\\\"\", kermeta.standard.helper.StringWrapper.replace(result, \"\\\"\", \"\\\\\\\"\")), \"\\\"\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\n\", \"\\\\n\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\t\", \"\\\\t\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\r\", \"\\\\r\");\n}\n\n\n\tjava.lang.Boolean idIfCond_697 = false;\n\tidIfCond_697 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.VariableDecl\")));\n\n\tif( idIfCond_697 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = this.getValue();\n\n\tjava.lang.Boolean idIfCond_288 = false;\n\tidIfCond_288 = kermeta.standard.helper.StringWrapper.equals(result, \".\");\n\n\tif( idIfCond_288 ) {\n\n\tresult = \"\\\".\\\"\";\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\\\\", \"\\\\\\\\\");\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"\\\"\", kermeta.standard.helper.StringWrapper.replace(result, \"\\\"\", \"\\\\\\\"\")), \"\\\"\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\n\", \"\\\\n\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\t\", \"\\\\t\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\r\", \"\\\\r\");\n}\n\n\n\tjava.lang.Boolean idIfCond_289 = false;\n\tidIfCond_289 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.VariableDecl\")));\n\n\tif( idIfCond_289 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String createBehaviorJava(KM2EcoreContext context);

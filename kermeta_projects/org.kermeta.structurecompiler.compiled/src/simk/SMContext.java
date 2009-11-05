@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SMContext.java,v 1.12 2009-02-23 15:26:55 cfaucher Exp $
+ * $Id$
  */
 package simk;
 
@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see simk.SimkPackage#getSMContext()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface SMContext extends kermeta.language.structure.Object {
@@ -43,6 +43,7 @@ public interface SMContext extends kermeta.language.structure.Object {
 	 * @see simk.SimkPackage#getSMContext_SMClass()
 	 * @see simk.SMClass#getContext
 	 * @model opposite="context" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	SMClass getSMClass();
@@ -71,6 +72,7 @@ public interface SMContext extends kermeta.language.structure.Object {
 	 * @see simk.SimkPackage#getSMContext_SMMethods()
 	 * @see simk.SMMethod#getSMContext
 	 * @model opposite="sMContext"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<SMMethod> getSMMethods();
@@ -86,7 +88,7 @@ public interface SMContext extends kermeta.language.structure.Object {
 	 * @return the value of the '<em>Final Package QName</em>' attribute.
 	 * @see #setFinalPackageQName(String)
 	 * @see simk.SimkPackage#getSMContext_FinalPackageQName()
-	 * @model dataType="ecore.EString"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getFinalPackageQName();

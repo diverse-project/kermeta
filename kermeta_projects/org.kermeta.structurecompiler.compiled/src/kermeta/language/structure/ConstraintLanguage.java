@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ConstraintLanguage.java,v 1.12 2009-02-23 15:26:48 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure;
 
@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * @see kermeta.language.structure.StructurePackage#getConstraintLanguage()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public enum ConstraintLanguage implements Enumerator {

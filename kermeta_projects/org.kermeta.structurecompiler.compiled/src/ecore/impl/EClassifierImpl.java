@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EClassifierImpl.java,v 1.13 2009-02-23 15:26:41 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -144,7 +144,7 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 	 * @generated
 	 */
 	public EPackage getEPackage() {
-		if (eContainerFeatureID != EcorePackage.ECLASSIFIER__EPACKAGE)
+		if (eContainerFeatureID() != EcorePackage.ECLASSIFIER__EPACKAGE)
 			return null;
 		return (EPackage) eContainer();
 	}
@@ -155,7 +155,7 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 	 * @generated
 	 */
 	public EPackage basicGetEPackage() {
-		if (eContainerFeatureID != EcorePackage.ECLASSIFIER__EPACKAGE)
+		if (eContainerFeatureID() != EcorePackage.ECLASSIFIER__EPACKAGE)
 			return null;
 		return (EPackage) eInternalContainer();
 	}
@@ -292,7 +292,7 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case EcorePackage.ECLASSIFIER__EPACKAGE:
 			return eInternalContainer().eInverseRemove(this,
 					EcorePackage.EPACKAGE__ECLASSIFIERS, EPackage.class, msgs);

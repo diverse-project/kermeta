@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ExceptionsSwitch.java,v 1.12 2009-02-23 15:26:46 cfaucher Exp $
+ * $Id$
  */
 package kermeta.exceptions.util;
 
@@ -16,6 +16,7 @@ import kermeta.exceptions.ConstraintViolatedException;
 import kermeta.exceptions.ConstraintViolatedInv;
 import kermeta.exceptions.ConstraintViolatedPost;
 import kermeta.exceptions.ConstraintViolatedPre;
+import kermeta.exceptions.ConstraintsDiagnostic;
 import kermeta.exceptions.DivisionByZero;
 import kermeta.exceptions.DynamicExpressionException;
 import kermeta.exceptions.EmptyCollection;
@@ -114,6 +115,15 @@ public class ExceptionsSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+		case ExceptionsPackage.CONSTRAINTS_DIAGNOSTIC: {
+			ConstraintsDiagnostic constraintsDiagnostic = (ConstraintsDiagnostic) theEObject;
+			T result = caseConstraintsDiagnostic(constraintsDiagnostic);
+			if (result == null)
+				result = caseObject(constraintsDiagnostic);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case ExceptionsPackage.EXCEPTION: {
 			kermeta.exceptions.Exception exception = (kermeta.exceptions.Exception) theEObject;
 			T result = caseException(exception);
@@ -456,6 +466,21 @@ public class ExceptionsSwitch<T> {
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constraints Diagnostic</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constraints Diagnostic</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstraintsDiagnostic(ConstraintsDiagnostic object) {
+		return null;
 	}
 
 	/**

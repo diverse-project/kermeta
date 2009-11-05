@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ModelReference.java,v 1.12 2009-02-23 15:26:53 cfaucher Exp $
+ * $Id$
  */
 package traceability;
 
@@ -23,7 +23,8 @@ import ecore.EObject;
  * </p>
  *
  * @see traceability.TraceabilityPackage#getModelReference()
- * @model annotation="kermeta documentation='/**\r\n * This class represents a reference to a model element\r\n \052/'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='/**\r\n * This class represents a reference to a model element\r\n \052/'"
  * @generated
  */
 public interface ModelReference extends Reference {
@@ -39,6 +40,7 @@ public interface ModelReference extends Reference {
 	 * @see #setRefObject(EObject)
 	 * @see traceability.TraceabilityPackage#getModelReference_RefObject()
 	 * @model required="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EObject getRefObject();

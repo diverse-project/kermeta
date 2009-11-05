@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EGenericTypeImpl.java,v 1.13 2009-02-23 15:26:41 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 

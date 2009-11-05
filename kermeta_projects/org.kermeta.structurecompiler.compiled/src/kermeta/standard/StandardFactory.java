@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StandardFactory.java,v 1.12 2009-02-23 15:26:46 cfaucher Exp $
+ * $Id$
  */
 package kermeta.standard;
 
@@ -27,51 +27,6 @@ public interface StandardFactory extends EFactory {
 	 */
 	StandardFactory eINSTANCE = kermeta.standard.impl.StandardFactoryImpl
 			.init();
-
-	/**
-	 * Returns a new object of class '<em>Boolean</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Boolean</em>'.
-	 * @generated
-	 */
-	kermeta.standard.Boolean createBoolean();
-
-	/**
-	 * Returns a new object of class '<em>Integer</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Integer</em>'.
-	 * @generated
-	 */
-	kermeta.standard.Integer createInteger();
-
-	/**
-	 * Returns a new object of class '<em>Real</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Real</em>'.
-	 * @generated
-	 */
-	Real createReal();
-
-	/**
-	 * Returns a new object of class '<em>Character</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Character</em>'.
-	 * @generated
-	 */
-	kermeta.standard.Character createCharacter();
-
-	/**
-	 * Returns a new object of class '<em>String</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>String</em>'.
-	 * @generated
-	 */
-	kermeta.standard.String createString();
 
 	/**
 	 * Returns a new object of class '<em>Set</em>'.
@@ -125,7 +80,7 @@ public interface StandardFactory extends EFactory {
 	 * @return a new object of class '<em>Void</em>'.
 	 * @generated
 	 */
-	kermeta.standard.Void createVoid();
+	Void createVoid();
 
 	/**
 	 * Returns a new object of class '<em>Not Comparable Exception</em>'.
@@ -135,6 +90,51 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	NotComparableException createNotComparableException();
+
+	/**
+	 * Returns a new object of class '<em>Boolean</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Boolean</em>'.
+	 * @generated
+	 */
+	Boolean createBoolean();
+
+	/**
+	 * Returns a new object of class '<em>Integer</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Integer</em>'.
+	 * @generated
+	 */
+	Integer createInteger();
+
+	/**
+	 * Returns a new object of class '<em>Real</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Real</em>'.
+	 * @generated
+	 */
+	Real createReal();
+
+	/**
+	 * Returns a new object of class '<em>Character</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Character</em>'.
+	 * @generated
+	 */
+	Character createCharacter();
+
+	/**
+	 * Returns a new object of class '<em>String</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String</em>'.
+	 * @generated
+	 */
+	String createString();
 
 	/**
 	 * Returns a new object of class '<em>Unknown Java Object</em>'.

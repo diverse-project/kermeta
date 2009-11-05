@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EOperationImpl.java,v 1.13 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -112,7 +112,7 @@ public class EOperationImpl extends ETypedElementImpl implements EOperation {
 	 * @generated
 	 */
 	public ecore.EClass getEContainingClass() {
-		if (eContainerFeatureID != EcorePackage.EOPERATION__ECONTAINING_CLASS)
+		if (eContainerFeatureID() != EcorePackage.EOPERATION__ECONTAINING_CLASS)
 			return null;
 		return (ecore.EClass) eContainer();
 	}
@@ -123,7 +123,7 @@ public class EOperationImpl extends ETypedElementImpl implements EOperation {
 	 * @generated
 	 */
 	public ecore.EClass basicGetEContainingClass() {
-		if (eContainerFeatureID != EcorePackage.EOPERATION__ECONTAINING_CLASS)
+		if (eContainerFeatureID() != EcorePackage.EOPERATION__ECONTAINING_CLASS)
 			return null;
 		return (ecore.EClass) eInternalContainer();
 	}
@@ -240,7 +240,7 @@ public class EOperationImpl extends ETypedElementImpl implements EOperation {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case EcorePackage.EOPERATION__ECONTAINING_CLASS:
 			return eInternalContainer().eInverseRemove(this,
 					EcorePackage.ECLASS__EOPERATIONS, ecore.EClass.class, msgs);

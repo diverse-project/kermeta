@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: DanglingDiagnostic.java,v 1.12 2009-02-23 15:26:53 cfaucher Exp $
+ * $Id$
  */
 package kermeta.persistence;
 
@@ -25,7 +25,7 @@ import kermeta.language.structure.Property;
  * </p>
  *
  * @see kermeta.persistence.PersistencePackage#getDanglingDiagnostic()
- * @model annotation="kermeta documentation='/**\r\n * class used to gather the information required to make a user friendly report about a dangling element\r\n * (see. findDanglingModelElements())\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * class used to gather the information required to make a user friendly report about a dangling element\n * (see. findDanglingModelElements())\n \052/'"
  * @generated
  */
 public interface DanglingDiagnostic extends kermeta.language.structure.Object {
@@ -40,7 +40,7 @@ public interface DanglingDiagnostic extends kermeta.language.structure.Object {
 	 * @return the value of the '<em>Referencing Element</em>' reference.
 	 * @see #setReferencingElement(kermeta.language.structure.Object)
 	 * @see kermeta.persistence.PersistencePackage#getDanglingDiagnostic_ReferencingElement()
-	 * @model annotation="kermeta documentation='/**\r\n\t * Element that has a reference to the dangling element  \r\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\n\t * Element that has a reference to the dangling element  \n\t \052/'"
 	 * @generated
 	 */
 	kermeta.language.structure.Object getReferencingElement();
@@ -66,7 +66,7 @@ public interface DanglingDiagnostic extends kermeta.language.structure.Object {
 	 * @return the value of the '<em>Dangling Element</em>' reference.
 	 * @see #setDanglingElement(kermeta.language.structure.Object)
 	 * @see kermeta.persistence.PersistencePackage#getDanglingDiagnostic_DanglingElement()
-	 * @model annotation="kermeta documentation='/**\r\n\t * Element that is not contained by a resource in the repository  \r\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\n\t * Element that is not contained by a resource in the repository  \n\t \052/'"
 	 * @generated
 	 */
 	kermeta.language.structure.Object getDanglingElement();
@@ -92,7 +92,7 @@ public interface DanglingDiagnostic extends kermeta.language.structure.Object {
 	 * @return the value of the '<em>Referencing Property</em>' reference.
 	 * @see #setReferencingProperty(Property)
 	 * @see kermeta.persistence.PersistencePackage#getDanglingDiagnostic_ReferencingProperty()
-	 * @model annotation="kermeta documentation='/**\r\n\t * Property used to reference the dangling element  \r\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\n\t * Property used to reference the dangling element  \n\t \052/'"
 	 * @generated
 	 */
 	Property getReferencingProperty();
@@ -111,7 +111,7 @@ public interface DanglingDiagnostic extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\r\n\t * user friendly message build with those informations\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\n\t * user friendly message build with those informations\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::language::structure::Object'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(org.kermeta.compil.runtime.helper.language.ObjectUtil.toStringSwitcher(this.getDanglingElement()), \" referenced by \"), org.kermeta.compil.runtime.helper.language.ObjectUtil.toStringSwitcher(this.getReferencingElement())), \".\"), this.getReferencingProperty().getName()), \" is dangling\");\n\nreturn result;\n'"
 	 * @generated

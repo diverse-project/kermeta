@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: LambdaParameter.java,v 1.12 2009-02-23 15:26:37 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior;
 
@@ -24,7 +24,8 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getLambdaParameter()
- * @model annotation="kermeta documentation='Refers to parameter definition in lambda expression'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Refers to parameter definition in lambda expression'"
  * @generated
  */
 public interface LambdaParameter extends kermeta.language.structure.Object {
@@ -40,6 +41,7 @@ public interface LambdaParameter extends kermeta.language.structure.Object {
 	 * @see #setName(String)
 	 * @see kermeta.language.behavior.BehaviorPackage#getLambdaParameter_Name()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Name of the lambda parameter'"
 	 * @generated
 	 */
@@ -67,6 +69,7 @@ public interface LambdaParameter extends kermeta.language.structure.Object {
 	 * @see #setType(TypeReference)
 	 * @see kermeta.language.behavior.BehaviorPackage#getLambdaParameter_Type()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='To be written ################################'"
 	 * @generated
 	 */

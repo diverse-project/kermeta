@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: UnregisteredMetamodelException.java,v 1.12 2009-02-23 15:26:43 cfaucher Exp $
+ * $Id$
  */
 package kermeta.exceptions;
 
@@ -15,7 +15,7 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getUnregisteredMetamodelException()
- * @model annotation="kermeta documentation='/** Raised when a resource cannot be loaded or saved because the URI used for \r\n * the  metamodel is not registered\r\n \052/'"
+ * @model annotation="kermeta documentation='/** Raised when a resource cannot be loaded or saved because the URI used for \n * the  metamodel is not registered\n \052/'"
  * @generated
  */
 public interface UnregisteredMetamodelException extends

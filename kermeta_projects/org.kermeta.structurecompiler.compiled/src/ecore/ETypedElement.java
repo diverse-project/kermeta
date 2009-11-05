@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ETypedElement.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -27,6 +27,7 @@ package ecore;
  *
  * @see ecore.EcorePackage#getETypedElement()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  * @generated
  */
 public interface ETypedElement extends ENamedElement {
@@ -41,7 +42,7 @@ public interface ETypedElement extends ENamedElement {
 	 * @return the value of the '<em>Lower Bound</em>' attribute.
 	 * @see #setLowerBound(int)
 	 * @see ecore.EcorePackage#getETypedElement_LowerBound()
-	 * @model dataType="ecore.EInt"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	int getLowerBound();
@@ -68,7 +69,8 @@ public interface ETypedElement extends ENamedElement {
 	 * @return the value of the '<em>Unique</em>' attribute.
 	 * @see #setUnique(boolean)
 	 * @see ecore.EcorePackage#getETypedElement_Unique()
-	 * @model default="true" dataType="ecore.EBoolean"
+	 * @model default="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	boolean isUnique();
@@ -94,7 +96,7 @@ public interface ETypedElement extends ENamedElement {
 	 * @return the value of the '<em>EType</em>' reference.
 	 * @see #setEType(EClassifier)
 	 * @see ecore.EcorePackage#getETypedElement_EType()
-	 * @model
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EClassifier getEType();
@@ -121,7 +123,8 @@ public interface ETypedElement extends ENamedElement {
 	 * @return the value of the '<em>Ordered</em>' attribute.
 	 * @see #setOrdered(boolean)
 	 * @see ecore.EcorePackage#getETypedElement_Ordered()
-	 * @model default="true" dataType="ecore.EBoolean"
+	 * @model default="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	boolean isOrdered();
@@ -148,7 +151,8 @@ public interface ETypedElement extends ENamedElement {
 	 * @return the value of the '<em>Upper Bound</em>' attribute.
 	 * @see #setUpperBound(int)
 	 * @see ecore.EcorePackage#getETypedElement_UpperBound()
-	 * @model default="1" dataType="ecore.EInt"
+	 * @model default="1"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	int getUpperBound();
@@ -175,6 +179,7 @@ public interface ETypedElement extends ENamedElement {
 	 * @see #setEGenericType(EGenericType)
 	 * @see ecore.EcorePackage#getETypedElement_EGenericType()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EGenericType getEGenericType();
@@ -192,8 +197,7 @@ public interface ETypedElement extends ENamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="ecore.EBoolean"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\nreturn result;\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	boolean getterMany();
@@ -201,8 +205,7 @@ public interface ETypedElement extends ENamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="ecore.EBoolean"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\nreturn result;\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	boolean getterRequired();

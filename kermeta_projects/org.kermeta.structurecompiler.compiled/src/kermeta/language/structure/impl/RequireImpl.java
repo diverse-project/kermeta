@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: RequireImpl.java,v 1.12 2009-02-23 15:26:40 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure.impl;
 
@@ -129,39 +129,39 @@ public class RequireImpl extends ObjectImpl implements Require {
 		ecore.EStringToStringMapEntry requireEntry = null;
 		//BIft:detect
 
-		ecore.EStringToStringMapEntry result_ft108 = null;
+		ecore.EStringToStringMapEntry result_ft152 = null;
 
-		ecore.EStringToStringMapEntry elem_ft108 = null;
+		ecore.EStringToStringMapEntry elem_ft152 = null;
 
-		result_ft108 = null;
+		result_ft152 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft108 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft152 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EStringToStringMapEntry> convertAsOrderedSet(
 							ecoreAnnotation.getDetails()).iterator();
-			java.lang.Boolean idLoopCond_313 = false;
-			while (!idLoopCond_313) {
-				idLoopCond_313 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft108.isOff(),
+			java.lang.Boolean idLoopCond_670 = false;
+			while (!idLoopCond_670) {
+				idLoopCond_670 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft152.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft108, null));
-				if (idLoopCond_313) {
+								.isNotEqualSwitcher(result_ft152, null));
+				if (idLoopCond_670) {
 				} else {
 
-					elem_ft108 = it_ft108.next();
+					elem_ft152 = it_ft152.next();
 
-					java.lang.Boolean idIfCond_314 = false;
+					java.lang.Boolean idIfCond_671 = false;
 					//BIle:detector
-					ecore.EStringToStringMapEntry d_lbdExp108 = elem_ft108;
+					ecore.EStringToStringMapEntry d_lbdExp152 = elem_ft152;
 
-					idIfCond_314 = kermeta.standard.helper.StringWrapper
-							.equals(d_lbdExp108.getKey(), "require");
+					idIfCond_671 = kermeta.standard.helper.StringWrapper
+							.equals(d_lbdExp152.getKey(), "require");
 					//EIle:detector
 
-					if (idIfCond_314) {
+					if (idIfCond_671) {
 
-						result_ft108 = elem_ft108;
+						result_ft152 = elem_ft152;
 					}
 
 				}
@@ -169,7 +169,7 @@ public class RequireImpl extends ObjectImpl implements Require {
 		}
 
 		//CE
-		requireEntry = result_ft108;
+		requireEntry = result_ft152;
 		//EIft:detect
 		;
 

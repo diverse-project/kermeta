@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: AbstractFallibleImpl.java,v 1.12 2009-02-23 15:26:38 cfaucher Exp $
+ * $Id$
  */
 package kermeta.kunit.impl;
 
@@ -70,30 +70,30 @@ public abstract class AbstractFallibleImpl extends ObjectImpl implements
 		{
 
 			java.lang.Integer i = 0;
-			java.lang.Boolean idLoopCond_949 = false;
-			while (!idLoopCond_949) {
-				idLoopCond_949 = kermeta.standard.helper.IntegerWrapper.equals(
+			java.lang.Boolean idLoopCond_691 = false;
+			while (!idLoopCond_691) {
+				idLoopCond_691 = kermeta.standard.helper.IntegerWrapper.equals(
 						i, kermeta.standard.helper.StringWrapper.size(s));
-				if (idLoopCond_949) {
+				if (idLoopCond_691) {
 				} else {
 
 					java.lang.String c = kermeta.standard.helper.CharacterWrapper
 							.toString(kermeta.standard.helper.StringWrapper
 									.elementAt(s, i));
 
-					java.lang.Boolean idIfCond_950 = false;
-					idIfCond_950 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_692 = false;
+					idIfCond_692 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(
 									kermeta.standard.helper.StringWrapper
 											.indexOf(" \n\t", c), 0);
 
-					if (idIfCond_950) {
+					if (idIfCond_692) {
 
-						java.lang.Boolean idIfCond_951 = false;
-						idIfCond_951 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_693 = false;
+						idIfCond_693 = kermeta.standard.helper.BooleanWrapper
 								.not(white);
 
-						if (idIfCond_951) {
+						if (idIfCond_693) {
 
 							white = true;
 
@@ -106,10 +106,10 @@ public abstract class AbstractFallibleImpl extends ObjectImpl implements
 						result = kermeta.standard.helper.StringWrapper.plus(
 								result, c);
 
-						java.lang.Boolean idIfCond_952 = false;
-						idIfCond_952 = white;
+						java.lang.Boolean idIfCond_694 = false;
+						idIfCond_694 = white;
 
-						if (idIfCond_952) {
+						if (idIfCond_694) {
 
 							white = false;
 						}

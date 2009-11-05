@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.15 2009-02-23 15:26:54 cfaucher Exp $
+/*$Id: SaverOrLoader.java,v 1.11 2009-02-04 00:23:53 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	SaverOrLoader.java
 * License : EPL
@@ -19,10 +19,13 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import kermeta.exceptions.ResourceLoadException;
+
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
@@ -136,6 +139,12 @@ abstract public class SaverOrLoader {
 		return target_root_epack.getEFactoryInstance();
 	}
 	
+	/**
+	 * search the EPackage in target_root_epack that correspond to source_epack_qn
+	 * @param target_root_epack
+	 * @param source_epack_qn
+	 * @return
+	 */
 	public EPackage getPackPack(EPackage target_root_epack, String source_epack_qn) {
 		String[] array_qualified_name = source_epack_qn.split("\\.");
 		
@@ -227,8 +236,17 @@ abstract public class SaverOrLoader {
 			
 			if( current_EPackage.getClass() != org.eclipse.emf.ecore.impl.EPackageImpl.class ) { //The EPackage does not come from an Ecore file
 				EPackage root_pack = getRootEPackage(current_EPackage);
-				
-				EObject targetObject = EcoreUtil.create(getTargetEClassGenerated(root_pack, sourceObject.eClass()));
+				EClass eclasstoCreate = getTargetEClassGenerated(root_pack, sourceObject.eClass());
+				if(eclasstoCreate == null){
+					kermeta.exceptions.ResourceLoadException ke = 
+						(ResourceLoadException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE.getResourceLoadException());
+					ke.setMessage("Failed to create an instance of " + EcoreHelper.getQualifiedName(sourceObject.eClass(), "::") + 
+							" from " + metamodelURI +".\nAre you sure to use the correct metamodel for this model ?");
+					
+					throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(ke); 
+				}
+				EObject targetObject = EcoreUtil.create(eclasstoCreate);
 					
 				// Make the mapping between the source object and the target one.
 				_instanceMapping.put(sourceObject, targetObject);
@@ -491,6 +509,12 @@ abstract public class SaverOrLoader {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param root_pack
+	 * @param eClass
+	 * @return
+	 */
 	public org.eclipse.emf.ecore.EClass getTargetEClassGenerated(EPackage root_pack, org.eclipse.emf.ecore.EClass eClass) {
 		for(EClassifier e : getPackPack(root_pack, EcoreHelper.getQualifiedName(eClass.getEPackage(), ".")).getEClassifiers() ) {
 			if(e instanceof org.eclipse.emf.ecore.EClass && e.getName().equals(eClass.getName()) ) {

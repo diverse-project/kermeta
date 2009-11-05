@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Void.java,v 1.12 2009-02-23 15:26:46 cfaucher Exp $
+ * $Id$
  */
 package kermeta.standard;
 
@@ -20,7 +20,7 @@ import kermeta.language.structure.Type;
  *
  *
  * @see kermeta.standard.StandardPackage#getVoid()
- * @model annotation="kermeta documentation='/**\r\n * The class Void \r\n * By convention it is a sub-type of everything\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * The class Void \n * By convention it is a sub-type of everything\n \052/'"
  * @generated
  */
 public interface Void extends kermeta.language.structure.Object {
@@ -28,7 +28,7 @@ public interface Void extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="kermeta documentation='/**\r\n\t * Return true\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\n\t * Return true\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::language::structure::Object'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = true;\n\nreturn result;\n'"
 	 * @generated
@@ -39,7 +39,7 @@ public interface Void extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="kermeta documentation='/**\r\n\t * Returns true\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\n\t * Returns true\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::language::structure::Object'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = true;\n\nreturn result;\n'"
 	 * @generated
@@ -50,7 +50,7 @@ public interface Void extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\r\n\t * Returns the String identifier \'<void>\'\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\n\t * Returns the String identifier \'<void>\'\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::language::structure::Object'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"<void>\";\n\nreturn result;\n'"
 	 * @generated

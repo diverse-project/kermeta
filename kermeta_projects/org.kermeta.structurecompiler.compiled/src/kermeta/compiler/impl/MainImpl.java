@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: MainImpl.java,v 1.14 2009-02-23 15:27:04 cfaucher Exp $
+ * $Id$
  */
 package kermeta.compiler.impl;
 
@@ -115,19 +115,6 @@ public class MainImpl extends ObjectImpl implements Main {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void main_km2ecore_onlyEcore(String modelInput) {
-
-		this.main_mode(modelInput, "", kermeta.standard.helper.StringWrapper
-				.replaceExtension(modelInput, "ecore"), km2ecore.CompilingMode
-				.getByName("onlyEcore"), false);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public void saveSingleEcore(String output) {
 
 		kermeta.persistence.Resource ecore_resource = this.getContext()
@@ -138,20 +125,20 @@ public class MainImpl extends ObjectImpl implements Main {
 
 		{
 
-			kermeta.standard.Iterator<ecore.EPackage> it_ft228 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EPackage> it_ft236 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EPackage> convertAsOrderedSet(
 							this.getContext().getMu().getEcorePackages())
 					.iterator();
-			java.lang.Boolean idLoopCond_1037 = false;
-			while (!idLoopCond_1037) {
-				idLoopCond_1037 = it_ft228.isOff();
-				if (idLoopCond_1037) {
+			java.lang.Boolean idLoopCond_1035 = false;
+			while (!idLoopCond_1035) {
+				idLoopCond_1035 = it_ft236.isOff();
+				if (idLoopCond_1035) {
 				} else {
 
 					//BIle:func
-					ecore.EPackage p_lbdExp228 = it_ft228.next();
+					ecore.EPackage p_lbdExp236 = it_ft236.next();
 
-					ecore_resource.instances().add(p_lbdExp228);
+					ecore_resource.instances().add(p_lbdExp236);
 					//EIle:func
 
 				}
@@ -161,6 +148,19 @@ public class MainImpl extends ObjectImpl implements Main {
 		//EIft:each
 
 		ecore_resource.save();
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void main_km2ecore_onlyEcore(String modelInput) {
+
+		this.main_mode(modelInput, "", kermeta.standard.helper.StringWrapper
+				.replaceExtension(modelInput, "ecore"), km2ecore.CompilingMode
+				.getByName("onlyEcore"), false);
 
 	}
 
@@ -191,26 +191,26 @@ public class MainImpl extends ObjectImpl implements Main {
 
 		{
 
-			kermeta.standard.Iterator<ecore.EPackage> it_ft229 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EPackage> it_ft237 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EPackage> convertAsOrderedSet(
 							this.getContext().getMu().getEcorePackages())
 					.iterator();
-			java.lang.Boolean idLoopCond_1038 = false;
-			while (!idLoopCond_1038) {
-				idLoopCond_1038 = it_ft229.isOff();
-				if (idLoopCond_1038) {
+			java.lang.Boolean idLoopCond_1036 = false;
+			while (!idLoopCond_1036) {
+				idLoopCond_1036 = it_ft237.isOff();
+				if (idLoopCond_1036) {
 				} else {
 
 					//BIle:func
-					ecore.EPackage p_lbdExp229 = it_ft229.next();
+					ecore.EPackage p_lbdExp237 = it_ft237.next();
 
 					java.lang.String output_final = output;
 
-					java.lang.Boolean idIfCond_1039 = false;
-					idIfCond_1039 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_1037 = false;
+					idIfCond_1037 = kermeta.standard.helper.IntegerWrapper
 							.isGreater(resourceBag.size(), 0);
 
-					if (idIfCond_1039) {
+					if (idIfCond_1037) {
 
 						output_final = kermeta.standard.helper.StringWrapper
 								.plus(
@@ -219,7 +219,7 @@ public class MainImpl extends ObjectImpl implements Main {
 														kermeta.standard.helper.StringWrapper
 																.plus(output,
 																		"__"),
-														p_lbdExp229.getName()),
+														p_lbdExp237.getName()),
 										".ecore");
 					}
 
@@ -228,7 +228,7 @@ public class MainImpl extends ObjectImpl implements Main {
 									output_final,
 									"http://www.eclipse.org/emf/2002/Ecore");
 
-					ecore_resource.instances().add(p_lbdExp229);
+					ecore_resource.instances().add(p_lbdExp237);
 
 					resourceBag.add(ecore_resource);
 					//EIle:func
@@ -243,19 +243,19 @@ public class MainImpl extends ObjectImpl implements Main {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft230 = resourceBag
+			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft238 = resourceBag
 					.iterator();
-			java.lang.Boolean idLoopCond_1040 = false;
-			while (!idLoopCond_1040) {
-				idLoopCond_1040 = it_ft230.isOff();
-				if (idLoopCond_1040) {
+			java.lang.Boolean idLoopCond_1038 = false;
+			while (!idLoopCond_1038) {
+				idLoopCond_1038 = it_ft238.isOff();
+				if (idLoopCond_1038) {
 				} else {
 
 					//BIle:func
-					kermeta.persistence.Resource res__lbdExp230 = it_ft230
+					kermeta.persistence.Resource res__lbdExp238 = it_ft238
 							.next();
 
-					res__lbdExp230.save();
+					res__lbdExp238.save();
 					//EIle:func
 
 				}
@@ -278,12 +278,46 @@ public class MainImpl extends ObjectImpl implements Main {
 				.newObject(kermeta.standard.StandardPackage.eINSTANCE
 						.getOrderedSet()));
 
-		operations.add("createResource");
-
-		operations.add("main");
-
 		this.main_compilingOnlyOperations(modelInput, traceInput, output, mode,
 				operations);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void main_inner() {
+
+		java.lang.String modelInput = null;
+
+		java.lang.String output = null;
+
+		java.lang.String traceInput = "";
+
+		modelInput = "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km";
+
+		modelInput = "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/StructureCompiler.km";
+
+		output = kermeta.standard.helper.StringWrapper.replaceExtension(
+				modelInput, "ecore");
+
+		this.main_mode(modelInput, traceInput, output, km2ecore.CompilingMode
+				.getByName("behaviorJava"), false);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void main_km2ecore_4trek_tests(String modelInput, String traceInput,
+			String output) {
+
+		this.main_mode(modelInput, traceInput, output, km2ecore.CompilingMode
+				.getByName("behaviorJava"), false);
 
 	}
 
@@ -314,23 +348,23 @@ public class MainImpl extends ObjectImpl implements Main {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft231 = this
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft239 = this
 					.getContext().getMu().getAllPackages().iterator();
-			java.lang.Boolean idLoopCond_1041 = false;
-			while (!idLoopCond_1041) {
-				idLoopCond_1041 = it_ft231.isOff();
-				if (idLoopCond_1041) {
+			java.lang.Boolean idLoopCond_1039 = false;
+			while (!idLoopCond_1039) {
+				idLoopCond_1039 = it_ft239.isOff();
+				if (idLoopCond_1039) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp231 = it_ft231
+					kermeta.language.structure.Package p_lbdExp239 = it_ft239
 							.next();
 
 					//BIft:eachOwnedElement
 
-					kermeta.language.structure.Package pack_ft232 = ((kermeta.language.structure.Package) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					kermeta.language.structure.Package pack_ft240 = ((kermeta.language.structure.Package) org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.asTypeSwitcher(
-									p_lbdExp231,
+									p_lbdExp239,
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance()
 											.getMetaClass(
@@ -340,38 +374,38 @@ public class MainImpl extends ObjectImpl implements Main {
 
 					{
 
-						kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft233 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft241 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<kermeta.language.structure.Tag> convertAsOrderedSet(
-										pack_ft232.getOwnedTags()).iterator();
-						java.lang.Boolean idLoopCond_1042 = false;
-						while (!idLoopCond_1042) {
-							idLoopCond_1042 = it_ft233.isOff();
-							if (idLoopCond_1042) {
+										pack_ft240.getOwnedTags()).iterator();
+						java.lang.Boolean idLoopCond_1040 = false;
+						while (!idLoopCond_1040) {
+							idLoopCond_1040 = it_ft241.isOff();
+							if (idLoopCond_1040) {
 							} else {
 
 								//BIle:func
-								kermeta.language.structure.Tag o_lbdExp233 = it_ft233
+								kermeta.language.structure.Tag o_lbdExp241 = it_ft241
 										.next();
 
 								//BIle:func
-								kermeta.language.structure.Tag cd_lbdExp232 = o_lbdExp233;
+								kermeta.language.structure.Tag cd_lbdExp240 = o_lbdExp241;
 
-								java.lang.Boolean idIfCond_1043 = false;
-								idIfCond_1043 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								java.lang.Boolean idIfCond_1041 = false;
+								idIfCond_1041 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
-												cd_lbdExp232,
+												cd_lbdExp240,
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
 																"kermeta.language.structure.ClassDefinition"));
 
-								if (idIfCond_1043) {
+								if (idIfCond_1041) {
 
 									//BIft:eachOwnedElement
 
-									kermeta.language.structure.ClassDefinition cd_ft234 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+									kermeta.language.structure.ClassDefinition cd_ft242 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.asTypeSwitcher(
-													cd_lbdExp232,
+													cd_lbdExp240,
 													org.kermeta.compil.runtime.ExecutionContext
 															.getInstance()
 															.getMetaClass(
@@ -381,41 +415,41 @@ public class MainImpl extends ObjectImpl implements Main {
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft235 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+										kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft243 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 												.<kermeta.language.structure.Tag> convertAsOrderedSet(
-														cd_ft234.getOwnedTags())
+														cd_ft242.getOwnedTags())
 												.iterator();
-										java.lang.Boolean idLoopCond_1044 = false;
-										while (!idLoopCond_1044) {
-											idLoopCond_1044 = it_ft235.isOff();
-											if (idLoopCond_1044) {
+										java.lang.Boolean idLoopCond_1042 = false;
+										while (!idLoopCond_1042) {
+											idLoopCond_1042 = it_ft243.isOff();
+											if (idLoopCond_1042) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Tag o_lbdExp235 = it_ft235
+												kermeta.language.structure.Tag o_lbdExp243 = it_ft243
 														.next();
 
 												//BIle:func
-												kermeta.language.structure.Tag op_lbdExp234 = o_lbdExp235;
+												kermeta.language.structure.Tag op_lbdExp242 = o_lbdExp243;
 
-												java.lang.Boolean idIfCond_1045 = false;
-												idIfCond_1045 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+												java.lang.Boolean idIfCond_1043 = false;
+												idIfCond_1043 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isInstanceOfSwitcher(
-																op_lbdExp234,
+																op_lbdExp242,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
 																				"kermeta.language.structure.Operation"));
 
-												if (idIfCond_1045) {
+												if (idIfCond_1043) {
 
-													java.lang.Boolean idIfCond_1046 = false;
-													idIfCond_1046 = kermeta.standard.helper.BooleanWrapper
+													java.lang.Boolean idIfCond_1044 = false;
+													idIfCond_1044 = kermeta.standard.helper.BooleanWrapper
 															.and(
 																	kermeta.standard.helper.BooleanWrapper
 																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp234,
+																							op_lbdExp242,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -424,62 +458,96 @@ public class MainImpl extends ObjectImpl implements Main {
 																	operations
 																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp234,
+																							op_lbdExp242,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
 																											"kermeta.language.structure.Operation")))
 																					.getName()));
 
-													if (idIfCond_1046) {
+													if (idIfCond_1044) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp234,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
+														java.lang.Boolean idIfCond_1045 = false;
+														idIfCond_1045 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp242,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
 
-														java.lang.String javaSourceCode = op_lbdExp234
-																.createBehaviorJava(this
-																		.getContext());
+														if (idIfCond_1045) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp242,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp242
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp242,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
 													}
 
 												} else {
 
-													java.lang.Boolean idIfCond_1047 = false;
-													idIfCond_1047 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+													java.lang.Boolean idIfCond_1046 = false;
+													idIfCond_1046 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isInstanceOfSwitcher(
-																	op_lbdExp234,
+																	op_lbdExp242,
 																	org.kermeta.compil.runtime.ExecutionContext
 																			.getInstance()
 																			.getMetaClass(
 																					"kermeta.language.structure.Property"));
 
-													if (idIfCond_1047) {
+													if (idIfCond_1046) {
 
-														java.lang.Boolean idIfCond_1048 = false;
-														idIfCond_1048 = kermeta.standard.helper.BooleanWrapper
+														java.lang.Boolean idIfCond_1047 = false;
+														idIfCond_1047 = kermeta.standard.helper.BooleanWrapper
 																.and(
 																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																				.asTypeSwitcher(
-																						op_lbdExp234,
+																						op_lbdExp242,
 																						org.kermeta.compil.runtime.ExecutionContext
 																								.getInstance()
 																								.getMetaClass(
@@ -488,14 +556,14 @@ public class MainImpl extends ObjectImpl implements Main {
 																		operations
 																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																						.asTypeSwitcher(
-																								op_lbdExp234,
+																								op_lbdExp242,
 																								org.kermeta.compil.runtime.ExecutionContext
 																										.getInstance()
 																										.getMetaClass(
 																												"kermeta.language.structure.Property")))
 																						.getName()));
 
-														if (idIfCond_1048) {
+														if (idIfCond_1047) {
 
 															org.kermeta.compil.runtime.helper.io.StdIOUtil
 																	.getInstance()
@@ -507,7 +575,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																											"================= ",
 																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp234,
+																															op_lbdExp242,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
@@ -517,7 +585,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			op_lbdExp234,
+																			op_lbdExp242,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -551,42 +619,42 @@ public class MainImpl extends ObjectImpl implements Main {
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft236 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+										kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft244 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 												.<kermeta.language.structure.Property> convertAsOrderedSet(
-														cd_ft234
+														cd_ft242
 																.getOwnedAttribute())
 												.iterator();
-										java.lang.Boolean idLoopCond_1049 = false;
-										while (!idLoopCond_1049) {
-											idLoopCond_1049 = it_ft236.isOff();
-											if (idLoopCond_1049) {
+										java.lang.Boolean idLoopCond_1048 = false;
+										while (!idLoopCond_1048) {
+											idLoopCond_1048 = it_ft244.isOff();
+											if (idLoopCond_1048) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Property o_lbdExp236 = it_ft236
+												kermeta.language.structure.Property o_lbdExp244 = it_ft244
 														.next();
 
 												//BIle:func
-												kermeta.language.structure.Property op_lbdExp234 = o_lbdExp236;
+												kermeta.language.structure.Property op_lbdExp242 = o_lbdExp244;
 
-												java.lang.Boolean idIfCond_1050 = false;
-												idIfCond_1050 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+												java.lang.Boolean idIfCond_1049 = false;
+												idIfCond_1049 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isInstanceOfSwitcher(
-																op_lbdExp234,
+																op_lbdExp242,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
 																				"kermeta.language.structure.Operation"));
 
-												if (idIfCond_1050) {
+												if (idIfCond_1049) {
 
-													java.lang.Boolean idIfCond_1051 = false;
-													idIfCond_1051 = kermeta.standard.helper.BooleanWrapper
+													java.lang.Boolean idIfCond_1050 = false;
+													idIfCond_1050 = kermeta.standard.helper.BooleanWrapper
 															.and(
 																	kermeta.standard.helper.BooleanWrapper
 																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp234,
+																							op_lbdExp242,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -595,41 +663,75 @@ public class MainImpl extends ObjectImpl implements Main {
 																	operations
 																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp234,
+																							op_lbdExp242,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
 																											"kermeta.language.structure.Operation")))
 																					.getName()));
 
-													if (idIfCond_1051) {
+													if (idIfCond_1050) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp234,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
+														java.lang.Boolean idIfCond_1051 = false;
+														idIfCond_1051 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp242,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
 
-														java.lang.String javaSourceCode = op_lbdExp234
-																.createBehaviorJava(this
-																		.getContext());
+														if (idIfCond_1051) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp242,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp242
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp242,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
 													}
 
 												} else {
@@ -637,7 +739,7 @@ public class MainImpl extends ObjectImpl implements Main {
 													java.lang.Boolean idIfCond_1052 = false;
 													idIfCond_1052 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isInstanceOfSwitcher(
-																	op_lbdExp234,
+																	op_lbdExp242,
 																	org.kermeta.compil.runtime.ExecutionContext
 																			.getInstance()
 																			.getMetaClass(
@@ -650,7 +752,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.and(
 																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																				.asTypeSwitcher(
-																						op_lbdExp234,
+																						op_lbdExp242,
 																						org.kermeta.compil.runtime.ExecutionContext
 																								.getInstance()
 																								.getMetaClass(
@@ -659,7 +761,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																		operations
 																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																						.asTypeSwitcher(
-																								op_lbdExp234,
+																								op_lbdExp242,
 																								org.kermeta.compil.runtime.ExecutionContext
 																										.getInstance()
 																										.getMetaClass(
@@ -678,7 +780,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																											"================= ",
 																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp234,
+																															op_lbdExp242,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
@@ -688,7 +790,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			op_lbdExp234,
+																			op_lbdExp242,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -722,28 +824,28 @@ public class MainImpl extends ObjectImpl implements Main {
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft237 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+										kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft245 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 												.<kermeta.language.structure.Operation> convertAsOrderedSet(
-														cd_ft234
+														cd_ft242
 																.getOwnedOperation())
 												.iterator();
 										java.lang.Boolean idLoopCond_1054 = false;
 										while (!idLoopCond_1054) {
-											idLoopCond_1054 = it_ft237.isOff();
+											idLoopCond_1054 = it_ft245.isOff();
 											if (idLoopCond_1054) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Operation o_lbdExp237 = it_ft237
+												kermeta.language.structure.Operation o_lbdExp245 = it_ft245
 														.next();
 
 												//BIle:func
-												kermeta.language.structure.Operation op_lbdExp234 = o_lbdExp237;
+												kermeta.language.structure.Operation op_lbdExp242 = o_lbdExp245;
 
 												java.lang.Boolean idIfCond_1055 = false;
 												idIfCond_1055 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isInstanceOfSwitcher(
-																op_lbdExp234,
+																op_lbdExp242,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
@@ -757,7 +859,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																	kermeta.standard.helper.BooleanWrapper
 																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp234,
+																							op_lbdExp242,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -766,7 +868,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																	operations
 																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp234,
+																							op_lbdExp242,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -775,53 +877,87 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_1056) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp234,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
+														java.lang.Boolean idIfCond_1057 = false;
+														idIfCond_1057 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp242,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
 
-														java.lang.String javaSourceCode = op_lbdExp234
-																.createBehaviorJava(this
-																		.getContext());
+														if (idIfCond_1057) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp242,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp242
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp242,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
 													}
 
 												} else {
 
-													java.lang.Boolean idIfCond_1057 = false;
-													idIfCond_1057 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+													java.lang.Boolean idIfCond_1058 = false;
+													idIfCond_1058 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isInstanceOfSwitcher(
-																	op_lbdExp234,
+																	op_lbdExp242,
 																	org.kermeta.compil.runtime.ExecutionContext
 																			.getInstance()
 																			.getMetaClass(
 																					"kermeta.language.structure.Property"));
 
-													if (idIfCond_1057) {
+													if (idIfCond_1058) {
 
-														java.lang.Boolean idIfCond_1058 = false;
-														idIfCond_1058 = kermeta.standard.helper.BooleanWrapper
+														java.lang.Boolean idIfCond_1059 = false;
+														idIfCond_1059 = kermeta.standard.helper.BooleanWrapper
 																.and(
 																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																				.asTypeSwitcher(
-																						op_lbdExp234,
+																						op_lbdExp242,
 																						org.kermeta.compil.runtime.ExecutionContext
 																								.getInstance()
 																								.getMetaClass(
@@ -830,14 +966,14 @@ public class MainImpl extends ObjectImpl implements Main {
 																		operations
 																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																						.asTypeSwitcher(
-																								op_lbdExp234,
+																								op_lbdExp242,
 																								org.kermeta.compil.runtime.ExecutionContext
 																										.getInstance()
 																										.getMetaClass(
 																												"kermeta.language.structure.Property")))
 																						.getName()));
 
-														if (idIfCond_1058) {
+														if (idIfCond_1059) {
 
 															org.kermeta.compil.runtime.helper.io.StdIOUtil
 																	.getInstance()
@@ -849,7 +985,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																											"================= ",
 																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp234,
+																															op_lbdExp242,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
@@ -859,7 +995,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			op_lbdExp234,
+																			op_lbdExp242,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -893,41 +1029,41 @@ public class MainImpl extends ObjectImpl implements Main {
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft238 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+										kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft246 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 												.<kermeta.language.structure.Constraint> convertAsOrderedSet(
-														cd_ft234.getInv())
+														cd_ft242.getInv())
 												.iterator();
-										java.lang.Boolean idLoopCond_1059 = false;
-										while (!idLoopCond_1059) {
-											idLoopCond_1059 = it_ft238.isOff();
-											if (idLoopCond_1059) {
+										java.lang.Boolean idLoopCond_1060 = false;
+										while (!idLoopCond_1060) {
+											idLoopCond_1060 = it_ft246.isOff();
+											if (idLoopCond_1060) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Constraint i_lbdExp238 = it_ft238
+												kermeta.language.structure.Constraint i_lbdExp246 = it_ft246
 														.next();
 
 												//BIle:func
-												kermeta.language.structure.Constraint op_lbdExp234 = i_lbdExp238;
+												kermeta.language.structure.Constraint op_lbdExp242 = i_lbdExp246;
 
-												java.lang.Boolean idIfCond_1060 = false;
-												idIfCond_1060 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+												java.lang.Boolean idIfCond_1061 = false;
+												idIfCond_1061 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isInstanceOfSwitcher(
-																op_lbdExp234,
+																op_lbdExp242,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
 																				"kermeta.language.structure.Operation"));
 
-												if (idIfCond_1060) {
+												if (idIfCond_1061) {
 
-													java.lang.Boolean idIfCond_1061 = false;
-													idIfCond_1061 = kermeta.standard.helper.BooleanWrapper
+													java.lang.Boolean idIfCond_1062 = false;
+													idIfCond_1062 = kermeta.standard.helper.BooleanWrapper
 															.and(
 																	kermeta.standard.helper.BooleanWrapper
 																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp234,
+																							op_lbdExp242,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -936,76 +1072,25 @@ public class MainImpl extends ObjectImpl implements Main {
 																	operations
 																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp234,
+																							op_lbdExp242,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
 																											"kermeta.language.structure.Operation")))
 																					.getName()));
 
-													if (idIfCond_1061) {
-
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp234,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
-
-														java.lang.String javaSourceCode = op_lbdExp234
-																.createBehaviorJava(this
-																		.getContext());
-
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
-													}
-
-												} else {
-
-													java.lang.Boolean idIfCond_1062 = false;
-													idIfCond_1062 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-															.isInstanceOfSwitcher(
-																	op_lbdExp234,
-																	org.kermeta.compil.runtime.ExecutionContext
-																			.getInstance()
-																			.getMetaClass(
-																					"kermeta.language.structure.Property"));
-
 													if (idIfCond_1062) {
 
 														java.lang.Boolean idIfCond_1063 = false;
-														idIfCond_1063 = kermeta.standard.helper.BooleanWrapper
-																.and(
-																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																				.asTypeSwitcher(
-																						op_lbdExp234,
-																						org.kermeta.compil.runtime.ExecutionContext
-																								.getInstance()
-																								.getMetaClass(
-																										"kermeta.language.structure.Property")))
-																				.getIsDerived(),
-																		operations
-																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																						.asTypeSwitcher(
-																								op_lbdExp234,
-																								org.kermeta.compil.runtime.ExecutionContext
-																										.getInstance()
-																										.getMetaClass(
-																												"kermeta.language.structure.Property")))
-																						.getName()));
+														idIfCond_1063 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp242,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
 
 														if (idIfCond_1063) {
 
@@ -1017,9 +1102,94 @@ public class MainImpl extends ObjectImpl implements Main {
 																							kermeta.standard.helper.StringWrapper
 																									.plus(
 																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp242,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp242
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp242,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
+													}
+
+												} else {
+
+													java.lang.Boolean idIfCond_1064 = false;
+													idIfCond_1064 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+															.isInstanceOfSwitcher(
+																	op_lbdExp242,
+																	org.kermeta.compil.runtime.ExecutionContext
+																			.getInstance()
+																			.getMetaClass(
+																					"kermeta.language.structure.Property"));
+
+													if (idIfCond_1064) {
+
+														java.lang.Boolean idIfCond_1065 = false;
+														idIfCond_1065 = kermeta.standard.helper.BooleanWrapper
+																.and(
+																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																				.asTypeSwitcher(
+																						op_lbdExp242,
+																						org.kermeta.compil.runtime.ExecutionContext
+																								.getInstance()
+																								.getMetaClass(
+																										"kermeta.language.structure.Property")))
+																				.getIsDerived(),
+																		operations
+																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																						.asTypeSwitcher(
+																								op_lbdExp242,
+																								org.kermeta.compil.runtime.ExecutionContext
+																										.getInstance()
+																										.getMetaClass(
+																												"kermeta.language.structure.Property")))
+																						.getName()));
+
+														if (idIfCond_1065) {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
 																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp234,
+																															op_lbdExp242,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
@@ -1029,7 +1199,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			op_lbdExp234,
+																			op_lbdExp242,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -1063,42 +1233,42 @@ public class MainImpl extends ObjectImpl implements Main {
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft239 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+										kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft247 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 												.<kermeta.language.structure.TypeVariable> convertAsOrderedSet(
-														cd_ft234
+														cd_ft242
 																.getTypeParameter())
 												.iterator();
-										java.lang.Boolean idLoopCond_1064 = false;
-										while (!idLoopCond_1064) {
-											idLoopCond_1064 = it_ft239.isOff();
-											if (idLoopCond_1064) {
+										java.lang.Boolean idLoopCond_1066 = false;
+										while (!idLoopCond_1066) {
+											idLoopCond_1066 = it_ft247.isOff();
+											if (idLoopCond_1066) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.TypeVariable t_lbdExp239 = it_ft239
+												kermeta.language.structure.TypeVariable t_lbdExp247 = it_ft247
 														.next();
 
 												//BIle:func
-												kermeta.language.structure.TypeVariable op_lbdExp234 = t_lbdExp239;
+												kermeta.language.structure.TypeVariable op_lbdExp242 = t_lbdExp247;
 
-												java.lang.Boolean idIfCond_1065 = false;
-												idIfCond_1065 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+												java.lang.Boolean idIfCond_1067 = false;
+												idIfCond_1067 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isInstanceOfSwitcher(
-																op_lbdExp234,
+																op_lbdExp242,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
 																				"kermeta.language.structure.Operation"));
 
-												if (idIfCond_1065) {
+												if (idIfCond_1067) {
 
-													java.lang.Boolean idIfCond_1066 = false;
-													idIfCond_1066 = kermeta.standard.helper.BooleanWrapper
+													java.lang.Boolean idIfCond_1068 = false;
+													idIfCond_1068 = kermeta.standard.helper.BooleanWrapper
 															.and(
 																	kermeta.standard.helper.BooleanWrapper
 																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp234,
+																							op_lbdExp242,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -1107,62 +1277,96 @@ public class MainImpl extends ObjectImpl implements Main {
 																	operations
 																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp234,
+																							op_lbdExp242,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
 																											"kermeta.language.structure.Operation")))
 																					.getName()));
 
-													if (idIfCond_1066) {
+													if (idIfCond_1068) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp234,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
+														java.lang.Boolean idIfCond_1069 = false;
+														idIfCond_1069 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp242,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
 
-														java.lang.String javaSourceCode = op_lbdExp234
-																.createBehaviorJava(this
-																		.getContext());
+														if (idIfCond_1069) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp242,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp242
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp242,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
 													}
 
 												} else {
 
-													java.lang.Boolean idIfCond_1067 = false;
-													idIfCond_1067 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+													java.lang.Boolean idIfCond_1070 = false;
+													idIfCond_1070 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isInstanceOfSwitcher(
-																	op_lbdExp234,
+																	op_lbdExp242,
 																	org.kermeta.compil.runtime.ExecutionContext
 																			.getInstance()
 																			.getMetaClass(
 																					"kermeta.language.structure.Property"));
 
-													if (idIfCond_1067) {
+													if (idIfCond_1070) {
 
-														java.lang.Boolean idIfCond_1068 = false;
-														idIfCond_1068 = kermeta.standard.helper.BooleanWrapper
+														java.lang.Boolean idIfCond_1071 = false;
+														idIfCond_1071 = kermeta.standard.helper.BooleanWrapper
 																.and(
 																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																				.asTypeSwitcher(
-																						op_lbdExp234,
+																						op_lbdExp242,
 																						org.kermeta.compil.runtime.ExecutionContext
 																								.getInstance()
 																								.getMetaClass(
@@ -1171,14 +1375,14 @@ public class MainImpl extends ObjectImpl implements Main {
 																		operations
 																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																						.asTypeSwitcher(
-																								op_lbdExp234,
+																								op_lbdExp242,
 																								org.kermeta.compil.runtime.ExecutionContext
 																										.getInstance()
 																										.getMetaClass(
 																												"kermeta.language.structure.Property")))
 																						.getName()));
 
-														if (idIfCond_1068) {
+														if (idIfCond_1071) {
 
 															org.kermeta.compil.runtime.helper.io.StdIOUtil
 																	.getInstance()
@@ -1190,7 +1394,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																											"================= ",
 																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp234,
+																															op_lbdExp242,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
@@ -1200,7 +1404,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			op_lbdExp234,
+																			op_lbdExp242,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -1248,39 +1452,39 @@ public class MainImpl extends ObjectImpl implements Main {
 
 					{
 
-						kermeta.standard.Iterator<kermeta.language.structure.TypeDefinition> it_ft240 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<kermeta.language.structure.TypeDefinition> it_ft248 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<kermeta.language.structure.TypeDefinition> convertAsOrderedSet(
-										pack_ft232.getOwnedTypeDefinition())
+										pack_ft240.getOwnedTypeDefinition())
 								.iterator();
-						java.lang.Boolean idLoopCond_1069 = false;
-						while (!idLoopCond_1069) {
-							idLoopCond_1069 = it_ft240.isOff();
-							if (idLoopCond_1069) {
+						java.lang.Boolean idLoopCond_1072 = false;
+						while (!idLoopCond_1072) {
+							idLoopCond_1072 = it_ft248.isOff();
+							if (idLoopCond_1072) {
 							} else {
 
 								//BIle:func
-								kermeta.language.structure.TypeDefinition o_lbdExp240 = it_ft240
+								kermeta.language.structure.TypeDefinition o_lbdExp248 = it_ft248
 										.next();
 
 								//BIle:func
-								kermeta.language.structure.TypeDefinition cd_lbdExp232 = o_lbdExp240;
+								kermeta.language.structure.TypeDefinition cd_lbdExp240 = o_lbdExp248;
 
-								java.lang.Boolean idIfCond_1070 = false;
-								idIfCond_1070 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								java.lang.Boolean idIfCond_1073 = false;
+								idIfCond_1073 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
-												cd_lbdExp232,
+												cd_lbdExp240,
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
 																"kermeta.language.structure.ClassDefinition"));
 
-								if (idIfCond_1070) {
+								if (idIfCond_1073) {
 
 									//BIft:eachOwnedElement
 
-									kermeta.language.structure.ClassDefinition cd_ft241 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+									kermeta.language.structure.ClassDefinition cd_ft249 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.asTypeSwitcher(
-													cd_lbdExp232,
+													cd_lbdExp240,
 													org.kermeta.compil.runtime.ExecutionContext
 															.getInstance()
 															.getMetaClass(
@@ -1290,41 +1494,41 @@ public class MainImpl extends ObjectImpl implements Main {
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft242 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+										kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft250 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 												.<kermeta.language.structure.Tag> convertAsOrderedSet(
-														cd_ft241.getOwnedTags())
+														cd_ft249.getOwnedTags())
 												.iterator();
-										java.lang.Boolean idLoopCond_1071 = false;
-										while (!idLoopCond_1071) {
-											idLoopCond_1071 = it_ft242.isOff();
-											if (idLoopCond_1071) {
+										java.lang.Boolean idLoopCond_1074 = false;
+										while (!idLoopCond_1074) {
+											idLoopCond_1074 = it_ft250.isOff();
+											if (idLoopCond_1074) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Tag o_lbdExp242 = it_ft242
+												kermeta.language.structure.Tag o_lbdExp250 = it_ft250
 														.next();
 
 												//BIle:func
-												kermeta.language.structure.Tag op_lbdExp241 = o_lbdExp242;
+												kermeta.language.structure.Tag op_lbdExp249 = o_lbdExp250;
 
-												java.lang.Boolean idIfCond_1072 = false;
-												idIfCond_1072 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+												java.lang.Boolean idIfCond_1075 = false;
+												idIfCond_1075 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isInstanceOfSwitcher(
-																op_lbdExp241,
+																op_lbdExp249,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
 																				"kermeta.language.structure.Operation"));
 
-												if (idIfCond_1072) {
+												if (idIfCond_1075) {
 
-													java.lang.Boolean idIfCond_1073 = false;
-													idIfCond_1073 = kermeta.standard.helper.BooleanWrapper
+													java.lang.Boolean idIfCond_1076 = false;
+													idIfCond_1076 = kermeta.standard.helper.BooleanWrapper
 															.and(
 																	kermeta.standard.helper.BooleanWrapper
 																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp241,
+																							op_lbdExp249,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -1333,78 +1537,27 @@ public class MainImpl extends ObjectImpl implements Main {
 																	operations
 																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp241,
+																							op_lbdExp249,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
 																											"kermeta.language.structure.Operation")))
 																					.getName()));
 
-													if (idIfCond_1073) {
+													if (idIfCond_1076) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp241,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
+														java.lang.Boolean idIfCond_1077 = false;
+														idIfCond_1077 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp249,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
 
-														java.lang.String javaSourceCode = op_lbdExp241
-																.createBehaviorJava(this
-																		.getContext());
-
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
-													}
-
-												} else {
-
-													java.lang.Boolean idIfCond_1074 = false;
-													idIfCond_1074 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-															.isInstanceOfSwitcher(
-																	op_lbdExp241,
-																	org.kermeta.compil.runtime.ExecutionContext
-																			.getInstance()
-																			.getMetaClass(
-																					"kermeta.language.structure.Property"));
-
-													if (idIfCond_1074) {
-
-														java.lang.Boolean idIfCond_1075 = false;
-														idIfCond_1075 = kermeta.standard.helper.BooleanWrapper
-																.and(
-																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																				.asTypeSwitcher(
-																						op_lbdExp241,
-																						org.kermeta.compil.runtime.ExecutionContext
-																								.getInstance()
-																								.getMetaClass(
-																										"kermeta.language.structure.Property")))
-																				.getIsDerived(),
-																		operations
-																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																						.asTypeSwitcher(
-																								op_lbdExp241,
-																								org.kermeta.compil.runtime.ExecutionContext
-																										.getInstance()
-																										.getMetaClass(
-																												"kermeta.language.structure.Property")))
-																						.getName()));
-
-														if (idIfCond_1075) {
+														if (idIfCond_1077) {
 
 															org.kermeta.compil.runtime.helper.io.StdIOUtil
 																	.getInstance()
@@ -1414,152 +1567,66 @@ public class MainImpl extends ObjectImpl implements Main {
 																							kermeta.standard.helper.StringWrapper
 																									.plus(
 																											"================= ",
-																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp241,
+																															op_lbdExp249,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
-																																			"kermeta.language.structure.Property")))
+																																			"kermeta.language.structure.Operation")))
 																													.qualifiedName()),
 																							" ================="));
 
-															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																	.asTypeSwitcher(
-																			op_lbdExp241,
-																			org.kermeta.compil.runtime.ExecutionContext
-																					.getInstance()
-																					.getMetaClass(
-																							"kermeta.language.structure.Property")))
-																	.getGetterBody()
-																	.createBehaviorJava(
-																			this
-																					.getContext());
+															java.lang.String javaSourceCode = op_lbdExp249
+																	.createBehaviorJava(this
+																			.getContext());
 
 															org.kermeta.compil.runtime.helper.io.StdIOUtil
 																	.getInstance()
 																	.writeln(
 																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp249,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
 														}
 
 													}
 
-												}
-
-												//EIle:func
-
-												//EIle:func
-
-											}
-										}
-									}
-
-									//EIft:each
-
-									//BIft:each
-
-									{
-
-										kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft243 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.language.structure.Property> convertAsOrderedSet(
-														cd_ft241
-																.getOwnedAttribute())
-												.iterator();
-										java.lang.Boolean idLoopCond_1076 = false;
-										while (!idLoopCond_1076) {
-											idLoopCond_1076 = it_ft243.isOff();
-											if (idLoopCond_1076) {
-											} else {
-
-												//BIle:func
-												kermeta.language.structure.Property o_lbdExp243 = it_ft243
-														.next();
-
-												//BIle:func
-												kermeta.language.structure.Property op_lbdExp241 = o_lbdExp243;
-
-												java.lang.Boolean idIfCond_1077 = false;
-												idIfCond_1077 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-														.isInstanceOfSwitcher(
-																op_lbdExp241,
-																org.kermeta.compil.runtime.ExecutionContext
-																		.getInstance()
-																		.getMetaClass(
-																				"kermeta.language.structure.Operation"));
-
-												if (idIfCond_1077) {
+												} else {
 
 													java.lang.Boolean idIfCond_1078 = false;
-													idIfCond_1078 = kermeta.standard.helper.BooleanWrapper
-															.and(
-																	kermeta.standard.helper.BooleanWrapper
-																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																					.asTypeSwitcher(
-																							op_lbdExp241,
-																							org.kermeta.compil.runtime.ExecutionContext
-																									.getInstance()
-																									.getMetaClass(
-																											"kermeta.language.structure.Operation")))
-																					.isFunctionType()),
-																	operations
-																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																					.asTypeSwitcher(
-																							op_lbdExp241,
-																							org.kermeta.compil.runtime.ExecutionContext
-																									.getInstance()
-																									.getMetaClass(
-																											"kermeta.language.structure.Operation")))
-																					.getName()));
+													idIfCond_1078 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+															.isInstanceOfSwitcher(
+																	op_lbdExp249,
+																	org.kermeta.compil.runtime.ExecutionContext
+																			.getInstance()
+																			.getMetaClass(
+																					"kermeta.language.structure.Property"));
 
 													if (idIfCond_1078) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp241,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
-
-														java.lang.String javaSourceCode = op_lbdExp241
-																.createBehaviorJava(this
-																		.getContext());
-
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
-													}
-
-												} else {
-
-													java.lang.Boolean idIfCond_1079 = false;
-													idIfCond_1079 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-															.isInstanceOfSwitcher(
-																	op_lbdExp241,
-																	org.kermeta.compil.runtime.ExecutionContext
-																			.getInstance()
-																			.getMetaClass(
-																					"kermeta.language.structure.Property"));
-
-													if (idIfCond_1079) {
-
-														java.lang.Boolean idIfCond_1080 = false;
-														idIfCond_1080 = kermeta.standard.helper.BooleanWrapper
+														java.lang.Boolean idIfCond_1079 = false;
+														idIfCond_1079 = kermeta.standard.helper.BooleanWrapper
 																.and(
 																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																				.asTypeSwitcher(
-																						op_lbdExp241,
+																						op_lbdExp249,
 																						org.kermeta.compil.runtime.ExecutionContext
 																								.getInstance()
 																								.getMetaClass(
@@ -1568,14 +1635,14 @@ public class MainImpl extends ObjectImpl implements Main {
 																		operations
 																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																						.asTypeSwitcher(
-																								op_lbdExp241,
+																								op_lbdExp249,
 																								org.kermeta.compil.runtime.ExecutionContext
 																										.getInstance()
 																										.getMetaClass(
 																												"kermeta.language.structure.Property")))
 																						.getName()));
 
-														if (idIfCond_1080) {
+														if (idIfCond_1079) {
 
 															org.kermeta.compil.runtime.helper.io.StdIOUtil
 																	.getInstance()
@@ -1587,7 +1654,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																											"================= ",
 																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp241,
+																															op_lbdExp249,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
@@ -1597,7 +1664,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			op_lbdExp241,
+																			op_lbdExp249,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -1631,42 +1698,42 @@ public class MainImpl extends ObjectImpl implements Main {
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft244 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.language.structure.Operation> convertAsOrderedSet(
-														cd_ft241
-																.getOwnedOperation())
+										kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft251 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+												.<kermeta.language.structure.Property> convertAsOrderedSet(
+														cd_ft249
+																.getOwnedAttribute())
 												.iterator();
-										java.lang.Boolean idLoopCond_1081 = false;
-										while (!idLoopCond_1081) {
-											idLoopCond_1081 = it_ft244.isOff();
-											if (idLoopCond_1081) {
+										java.lang.Boolean idLoopCond_1080 = false;
+										while (!idLoopCond_1080) {
+											idLoopCond_1080 = it_ft251.isOff();
+											if (idLoopCond_1080) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Operation o_lbdExp244 = it_ft244
+												kermeta.language.structure.Property o_lbdExp251 = it_ft251
 														.next();
 
 												//BIle:func
-												kermeta.language.structure.Operation op_lbdExp241 = o_lbdExp244;
+												kermeta.language.structure.Property op_lbdExp249 = o_lbdExp251;
 
-												java.lang.Boolean idIfCond_1082 = false;
-												idIfCond_1082 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+												java.lang.Boolean idIfCond_1081 = false;
+												idIfCond_1081 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isInstanceOfSwitcher(
-																op_lbdExp241,
+																op_lbdExp249,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
 																				"kermeta.language.structure.Operation"));
 
-												if (idIfCond_1082) {
+												if (idIfCond_1081) {
 
-													java.lang.Boolean idIfCond_1083 = false;
-													idIfCond_1083 = kermeta.standard.helper.BooleanWrapper
+													java.lang.Boolean idIfCond_1082 = false;
+													idIfCond_1082 = kermeta.standard.helper.BooleanWrapper
 															.and(
 																	kermeta.standard.helper.BooleanWrapper
 																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp241,
+																							op_lbdExp249,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -1675,41 +1742,75 @@ public class MainImpl extends ObjectImpl implements Main {
 																	operations
 																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp241,
+																							op_lbdExp249,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
 																											"kermeta.language.structure.Operation")))
 																					.getName()));
 
-													if (idIfCond_1083) {
+													if (idIfCond_1082) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp241,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
+														java.lang.Boolean idIfCond_1083 = false;
+														idIfCond_1083 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp249,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
 
-														java.lang.String javaSourceCode = op_lbdExp241
-																.createBehaviorJava(this
-																		.getContext());
+														if (idIfCond_1083) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp249,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp249
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp249,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
 													}
 
 												} else {
@@ -1717,7 +1818,7 @@ public class MainImpl extends ObjectImpl implements Main {
 													java.lang.Boolean idIfCond_1084 = false;
 													idIfCond_1084 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isInstanceOfSwitcher(
-																	op_lbdExp241,
+																	op_lbdExp249,
 																	org.kermeta.compil.runtime.ExecutionContext
 																			.getInstance()
 																			.getMetaClass(
@@ -1730,7 +1831,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.and(
 																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																				.asTypeSwitcher(
-																						op_lbdExp241,
+																						op_lbdExp249,
 																						org.kermeta.compil.runtime.ExecutionContext
 																								.getInstance()
 																								.getMetaClass(
@@ -1739,7 +1840,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																		operations
 																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																						.asTypeSwitcher(
-																								op_lbdExp241,
+																								op_lbdExp249,
 																								org.kermeta.compil.runtime.ExecutionContext
 																										.getInstance()
 																										.getMetaClass(
@@ -1758,7 +1859,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																											"================= ",
 																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp241,
+																															op_lbdExp249,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
@@ -1768,7 +1869,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			op_lbdExp241,
+																			op_lbdExp249,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -1802,27 +1903,28 @@ public class MainImpl extends ObjectImpl implements Main {
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft245 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.language.structure.Constraint> convertAsOrderedSet(
-														cd_ft241.getInv())
+										kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft252 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+												.<kermeta.language.structure.Operation> convertAsOrderedSet(
+														cd_ft249
+																.getOwnedOperation())
 												.iterator();
 										java.lang.Boolean idLoopCond_1086 = false;
 										while (!idLoopCond_1086) {
-											idLoopCond_1086 = it_ft245.isOff();
+											idLoopCond_1086 = it_ft252.isOff();
 											if (idLoopCond_1086) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Constraint i_lbdExp245 = it_ft245
+												kermeta.language.structure.Operation o_lbdExp252 = it_ft252
 														.next();
 
 												//BIle:func
-												kermeta.language.structure.Constraint op_lbdExp241 = i_lbdExp245;
+												kermeta.language.structure.Operation op_lbdExp249 = o_lbdExp252;
 
 												java.lang.Boolean idIfCond_1087 = false;
 												idIfCond_1087 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isInstanceOfSwitcher(
-																op_lbdExp241,
+																op_lbdExp249,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
@@ -1836,7 +1938,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																	kermeta.standard.helper.BooleanWrapper
 																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp241,
+																							op_lbdExp249,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -1845,7 +1947,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																	operations
 																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp241,
+																							op_lbdExp249,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -1854,53 +1956,87 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_1088) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp241,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
+														java.lang.Boolean idIfCond_1089 = false;
+														idIfCond_1089 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp249,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
 
-														java.lang.String javaSourceCode = op_lbdExp241
-																.createBehaviorJava(this
-																		.getContext());
+														if (idIfCond_1089) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp249,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp249
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp249,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
 													}
 
 												} else {
 
-													java.lang.Boolean idIfCond_1089 = false;
-													idIfCond_1089 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+													java.lang.Boolean idIfCond_1090 = false;
+													idIfCond_1090 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isInstanceOfSwitcher(
-																	op_lbdExp241,
+																	op_lbdExp249,
 																	org.kermeta.compil.runtime.ExecutionContext
 																			.getInstance()
 																			.getMetaClass(
 																					"kermeta.language.structure.Property"));
 
-													if (idIfCond_1089) {
+													if (idIfCond_1090) {
 
-														java.lang.Boolean idIfCond_1090 = false;
-														idIfCond_1090 = kermeta.standard.helper.BooleanWrapper
+														java.lang.Boolean idIfCond_1091 = false;
+														idIfCond_1091 = kermeta.standard.helper.BooleanWrapper
 																.and(
 																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																				.asTypeSwitcher(
-																						op_lbdExp241,
+																						op_lbdExp249,
 																						org.kermeta.compil.runtime.ExecutionContext
 																								.getInstance()
 																								.getMetaClass(
@@ -1909,14 +2045,14 @@ public class MainImpl extends ObjectImpl implements Main {
 																		operations
 																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																						.asTypeSwitcher(
-																								op_lbdExp241,
+																								op_lbdExp249,
 																								org.kermeta.compil.runtime.ExecutionContext
 																										.getInstance()
 																										.getMetaClass(
 																												"kermeta.language.structure.Property")))
 																						.getName()));
 
-														if (idIfCond_1090) {
+														if (idIfCond_1091) {
 
 															org.kermeta.compil.runtime.helper.io.StdIOUtil
 																	.getInstance()
@@ -1928,7 +2064,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																											"================= ",
 																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp241,
+																															op_lbdExp249,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
@@ -1938,7 +2074,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			op_lbdExp241,
+																			op_lbdExp249,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -1972,42 +2108,41 @@ public class MainImpl extends ObjectImpl implements Main {
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft246 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.language.structure.TypeVariable> convertAsOrderedSet(
-														cd_ft241
-																.getTypeParameter())
+										kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft253 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+												.<kermeta.language.structure.Constraint> convertAsOrderedSet(
+														cd_ft249.getInv())
 												.iterator();
-										java.lang.Boolean idLoopCond_1091 = false;
-										while (!idLoopCond_1091) {
-											idLoopCond_1091 = it_ft246.isOff();
-											if (idLoopCond_1091) {
+										java.lang.Boolean idLoopCond_1092 = false;
+										while (!idLoopCond_1092) {
+											idLoopCond_1092 = it_ft253.isOff();
+											if (idLoopCond_1092) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.TypeVariable t_lbdExp246 = it_ft246
+												kermeta.language.structure.Constraint i_lbdExp253 = it_ft253
 														.next();
 
 												//BIle:func
-												kermeta.language.structure.TypeVariable op_lbdExp241 = t_lbdExp246;
+												kermeta.language.structure.Constraint op_lbdExp249 = i_lbdExp253;
 
-												java.lang.Boolean idIfCond_1092 = false;
-												idIfCond_1092 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+												java.lang.Boolean idIfCond_1093 = false;
+												idIfCond_1093 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isInstanceOfSwitcher(
-																op_lbdExp241,
+																op_lbdExp249,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
 																				"kermeta.language.structure.Operation"));
 
-												if (idIfCond_1092) {
+												if (idIfCond_1093) {
 
-													java.lang.Boolean idIfCond_1093 = false;
-													idIfCond_1093 = kermeta.standard.helper.BooleanWrapper
+													java.lang.Boolean idIfCond_1094 = false;
+													idIfCond_1094 = kermeta.standard.helper.BooleanWrapper
 															.and(
 																	kermeta.standard.helper.BooleanWrapper
 																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp241,
+																							op_lbdExp249,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -2016,76 +2151,25 @@ public class MainImpl extends ObjectImpl implements Main {
 																	operations
 																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp241,
+																							op_lbdExp249,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
 																											"kermeta.language.structure.Operation")))
 																					.getName()));
 
-													if (idIfCond_1093) {
-
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp241,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
-
-														java.lang.String javaSourceCode = op_lbdExp241
-																.createBehaviorJava(this
-																		.getContext());
-
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
-													}
-
-												} else {
-
-													java.lang.Boolean idIfCond_1094 = false;
-													idIfCond_1094 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-															.isInstanceOfSwitcher(
-																	op_lbdExp241,
-																	org.kermeta.compil.runtime.ExecutionContext
-																			.getInstance()
-																			.getMetaClass(
-																					"kermeta.language.structure.Property"));
-
 													if (idIfCond_1094) {
 
 														java.lang.Boolean idIfCond_1095 = false;
-														idIfCond_1095 = kermeta.standard.helper.BooleanWrapper
-																.and(
-																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																				.asTypeSwitcher(
-																						op_lbdExp241,
-																						org.kermeta.compil.runtime.ExecutionContext
-																								.getInstance()
-																								.getMetaClass(
-																										"kermeta.language.structure.Property")))
-																				.getIsDerived(),
-																		operations
-																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																						.asTypeSwitcher(
-																								op_lbdExp241,
-																								org.kermeta.compil.runtime.ExecutionContext
-																										.getInstance()
-																										.getMetaClass(
-																												"kermeta.language.structure.Property")))
-																						.getName()));
+														idIfCond_1095 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp249,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
 
 														if (idIfCond_1095) {
 
@@ -2097,9 +2181,94 @@ public class MainImpl extends ObjectImpl implements Main {
 																							kermeta.standard.helper.StringWrapper
 																									.plus(
 																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp249,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp249
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp249,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
+													}
+
+												} else {
+
+													java.lang.Boolean idIfCond_1096 = false;
+													idIfCond_1096 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+															.isInstanceOfSwitcher(
+																	op_lbdExp249,
+																	org.kermeta.compil.runtime.ExecutionContext
+																			.getInstance()
+																			.getMetaClass(
+																					"kermeta.language.structure.Property"));
+
+													if (idIfCond_1096) {
+
+														java.lang.Boolean idIfCond_1097 = false;
+														idIfCond_1097 = kermeta.standard.helper.BooleanWrapper
+																.and(
+																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																				.asTypeSwitcher(
+																						op_lbdExp249,
+																						org.kermeta.compil.runtime.ExecutionContext
+																								.getInstance()
+																								.getMetaClass(
+																										"kermeta.language.structure.Property")))
+																				.getIsDerived(),
+																		operations
+																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																						.asTypeSwitcher(
+																								op_lbdExp249,
+																								org.kermeta.compil.runtime.ExecutionContext
+																										.getInstance()
+																										.getMetaClass(
+																												"kermeta.language.structure.Property")))
+																						.getName()));
+
+														if (idIfCond_1097) {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
 																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp241,
+																															op_lbdExp249,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
@@ -2109,7 +2278,212 @@ public class MainImpl extends ObjectImpl implements Main {
 
 															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			op_lbdExp241,
+																			op_lbdExp249,
+																			org.kermeta.compil.runtime.ExecutionContext
+																					.getInstance()
+																					.getMetaClass(
+																							"kermeta.language.structure.Property")))
+																	.getGetterBody()
+																	.createBehaviorJava(
+																			this
+																					.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														}
+
+													}
+
+												}
+
+												//EIle:func
+
+												//EIle:func
+
+											}
+										}
+									}
+
+									//EIft:each
+
+									//BIft:each
+
+									{
+
+										kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft254 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+												.<kermeta.language.structure.TypeVariable> convertAsOrderedSet(
+														cd_ft249
+																.getTypeParameter())
+												.iterator();
+										java.lang.Boolean idLoopCond_1098 = false;
+										while (!idLoopCond_1098) {
+											idLoopCond_1098 = it_ft254.isOff();
+											if (idLoopCond_1098) {
+											} else {
+
+												//BIle:func
+												kermeta.language.structure.TypeVariable t_lbdExp254 = it_ft254
+														.next();
+
+												//BIle:func
+												kermeta.language.structure.TypeVariable op_lbdExp249 = t_lbdExp254;
+
+												java.lang.Boolean idIfCond_1099 = false;
+												idIfCond_1099 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+														.isInstanceOfSwitcher(
+																op_lbdExp249,
+																org.kermeta.compil.runtime.ExecutionContext
+																		.getInstance()
+																		.getMetaClass(
+																				"kermeta.language.structure.Operation"));
+
+												if (idIfCond_1099) {
+
+													java.lang.Boolean idIfCond_1100 = false;
+													idIfCond_1100 = kermeta.standard.helper.BooleanWrapper
+															.and(
+																	kermeta.standard.helper.BooleanWrapper
+																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																					.asTypeSwitcher(
+																							op_lbdExp249,
+																							org.kermeta.compil.runtime.ExecutionContext
+																									.getInstance()
+																									.getMetaClass(
+																											"kermeta.language.structure.Operation")))
+																					.isFunctionType()),
+																	operations
+																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																					.asTypeSwitcher(
+																							op_lbdExp249,
+																							org.kermeta.compil.runtime.ExecutionContext
+																									.getInstance()
+																									.getMetaClass(
+																											"kermeta.language.structure.Operation")))
+																					.getName()));
+
+													if (idIfCond_1100) {
+
+														java.lang.Boolean idIfCond_1101 = false;
+														idIfCond_1101 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp249,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
+
+														if (idIfCond_1101) {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp249,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp249
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp249,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
+													}
+
+												} else {
+
+													java.lang.Boolean idIfCond_1102 = false;
+													idIfCond_1102 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+															.isInstanceOfSwitcher(
+																	op_lbdExp249,
+																	org.kermeta.compil.runtime.ExecutionContext
+																			.getInstance()
+																			.getMetaClass(
+																					"kermeta.language.structure.Property"));
+
+													if (idIfCond_1102) {
+
+														java.lang.Boolean idIfCond_1103 = false;
+														idIfCond_1103 = kermeta.standard.helper.BooleanWrapper
+																.and(
+																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																				.asTypeSwitcher(
+																						op_lbdExp249,
+																						org.kermeta.compil.runtime.ExecutionContext
+																								.getInstance()
+																								.getMetaClass(
+																										"kermeta.language.structure.Property")))
+																				.getIsDerived(),
+																		operations
+																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																						.asTypeSwitcher(
+																								op_lbdExp249,
+																								org.kermeta.compil.runtime.ExecutionContext
+																										.getInstance()
+																										.getMetaClass(
+																												"kermeta.language.structure.Property")))
+																						.getName()));
+
+														if (idIfCond_1103) {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp249,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Property")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																	.asTypeSwitcher(
+																			op_lbdExp249,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -2157,39 +2531,39 @@ public class MainImpl extends ObjectImpl implements Main {
 
 					{
 
-						kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft247 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft255 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<kermeta.language.structure.Package> convertAsOrderedSet(
-										pack_ft232.getNestedPackage())
+										pack_ft240.getNestedPackage())
 								.iterator();
-						java.lang.Boolean idLoopCond_1096 = false;
-						while (!idLoopCond_1096) {
-							idLoopCond_1096 = it_ft247.isOff();
-							if (idLoopCond_1096) {
+						java.lang.Boolean idLoopCond_1104 = false;
+						while (!idLoopCond_1104) {
+							idLoopCond_1104 = it_ft255.isOff();
+							if (idLoopCond_1104) {
 							} else {
 
 								//BIle:func
-								kermeta.language.structure.Package p_lbdExp247 = it_ft247
+								kermeta.language.structure.Package p_lbdExp255 = it_ft255
 										.next();
 
 								//BIle:func
-								kermeta.language.structure.Package cd_lbdExp232 = p_lbdExp247;
+								kermeta.language.structure.Package cd_lbdExp240 = p_lbdExp255;
 
-								java.lang.Boolean idIfCond_1097 = false;
-								idIfCond_1097 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								java.lang.Boolean idIfCond_1105 = false;
+								idIfCond_1105 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
-												cd_lbdExp232,
+												cd_lbdExp240,
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
 																"kermeta.language.structure.ClassDefinition"));
 
-								if (idIfCond_1097) {
+								if (idIfCond_1105) {
 
 									//BIft:eachOwnedElement
 
-									kermeta.language.structure.ClassDefinition cd_ft248 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+									kermeta.language.structure.ClassDefinition cd_ft256 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.asTypeSwitcher(
-													cd_lbdExp232,
+													cd_lbdExp240,
 													org.kermeta.compil.runtime.ExecutionContext
 															.getInstance()
 															.getMetaClass(
@@ -2199,41 +2573,41 @@ public class MainImpl extends ObjectImpl implements Main {
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft249 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+										kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft257 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 												.<kermeta.language.structure.Tag> convertAsOrderedSet(
-														cd_ft248.getOwnedTags())
+														cd_ft256.getOwnedTags())
 												.iterator();
-										java.lang.Boolean idLoopCond_1098 = false;
-										while (!idLoopCond_1098) {
-											idLoopCond_1098 = it_ft249.isOff();
-											if (idLoopCond_1098) {
+										java.lang.Boolean idLoopCond_1106 = false;
+										while (!idLoopCond_1106) {
+											idLoopCond_1106 = it_ft257.isOff();
+											if (idLoopCond_1106) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Tag o_lbdExp249 = it_ft249
+												kermeta.language.structure.Tag o_lbdExp257 = it_ft257
 														.next();
 
 												//BIle:func
-												kermeta.language.structure.Tag op_lbdExp248 = o_lbdExp249;
+												kermeta.language.structure.Tag op_lbdExp256 = o_lbdExp257;
 
-												java.lang.Boolean idIfCond_1099 = false;
-												idIfCond_1099 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+												java.lang.Boolean idIfCond_1107 = false;
+												idIfCond_1107 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isInstanceOfSwitcher(
-																op_lbdExp248,
+																op_lbdExp256,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
 																				"kermeta.language.structure.Operation"));
 
-												if (idIfCond_1099) {
+												if (idIfCond_1107) {
 
-													java.lang.Boolean idIfCond_1100 = false;
-													idIfCond_1100 = kermeta.standard.helper.BooleanWrapper
+													java.lang.Boolean idIfCond_1108 = false;
+													idIfCond_1108 = kermeta.standard.helper.BooleanWrapper
 															.and(
 																	kermeta.standard.helper.BooleanWrapper
 																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp248,
+																							op_lbdExp256,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -2242,78 +2616,27 @@ public class MainImpl extends ObjectImpl implements Main {
 																	operations
 																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp248,
+																							op_lbdExp256,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
 																											"kermeta.language.structure.Operation")))
 																					.getName()));
 
-													if (idIfCond_1100) {
+													if (idIfCond_1108) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp248,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
+														java.lang.Boolean idIfCond_1109 = false;
+														idIfCond_1109 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp256,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
 
-														java.lang.String javaSourceCode = op_lbdExp248
-																.createBehaviorJava(this
-																		.getContext());
-
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
-													}
-
-												} else {
-
-													java.lang.Boolean idIfCond_1101 = false;
-													idIfCond_1101 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-															.isInstanceOfSwitcher(
-																	op_lbdExp248,
-																	org.kermeta.compil.runtime.ExecutionContext
-																			.getInstance()
-																			.getMetaClass(
-																					"kermeta.language.structure.Property"));
-
-													if (idIfCond_1101) {
-
-														java.lang.Boolean idIfCond_1102 = false;
-														idIfCond_1102 = kermeta.standard.helper.BooleanWrapper
-																.and(
-																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																				.asTypeSwitcher(
-																						op_lbdExp248,
-																						org.kermeta.compil.runtime.ExecutionContext
-																								.getInstance()
-																								.getMetaClass(
-																										"kermeta.language.structure.Property")))
-																				.getIsDerived(),
-																		operations
-																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																						.asTypeSwitcher(
-																								op_lbdExp248,
-																								org.kermeta.compil.runtime.ExecutionContext
-																										.getInstance()
-																										.getMetaClass(
-																												"kermeta.language.structure.Property")))
-																						.getName()));
-
-														if (idIfCond_1102) {
+														if (idIfCond_1109) {
 
 															org.kermeta.compil.runtime.helper.io.StdIOUtil
 																	.getInstance()
@@ -2323,168 +2646,25 @@ public class MainImpl extends ObjectImpl implements Main {
 																							kermeta.standard.helper.StringWrapper
 																									.plus(
 																											"================= ",
-																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp248,
+																															op_lbdExp256,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
-																																			"kermeta.language.structure.Property")))
+																																			"kermeta.language.structure.Operation")))
 																													.qualifiedName()),
 																							" ================="));
 
-															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																	.asTypeSwitcher(
-																			op_lbdExp248,
-																			org.kermeta.compil.runtime.ExecutionContext
-																					.getInstance()
-																					.getMetaClass(
-																							"kermeta.language.structure.Property")))
-																	.getGetterBody()
-																	.createBehaviorJava(
-																			this
-																					.getContext());
+															java.lang.String javaSourceCode = op_lbdExp256
+																	.createBehaviorJava(this
+																			.getContext());
 
 															org.kermeta.compil.runtime.helper.io.StdIOUtil
 																	.getInstance()
 																	.writeln(
 																			javaSourceCode);
-														}
-
-													}
-
-												}
-
-												//EIle:func
-
-												//EIle:func
-
-											}
-										}
-									}
-
-									//EIft:each
-
-									//BIft:each
-
-									{
-
-										kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft250 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.language.structure.Property> convertAsOrderedSet(
-														cd_ft248
-																.getOwnedAttribute())
-												.iterator();
-										java.lang.Boolean idLoopCond_1103 = false;
-										while (!idLoopCond_1103) {
-											idLoopCond_1103 = it_ft250.isOff();
-											if (idLoopCond_1103) {
-											} else {
-
-												//BIle:func
-												kermeta.language.structure.Property o_lbdExp250 = it_ft250
-														.next();
-
-												//BIle:func
-												kermeta.language.structure.Property op_lbdExp248 = o_lbdExp250;
-
-												java.lang.Boolean idIfCond_1104 = false;
-												idIfCond_1104 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-														.isInstanceOfSwitcher(
-																op_lbdExp248,
-																org.kermeta.compil.runtime.ExecutionContext
-																		.getInstance()
-																		.getMetaClass(
-																				"kermeta.language.structure.Operation"));
-
-												if (idIfCond_1104) {
-
-													java.lang.Boolean idIfCond_1105 = false;
-													idIfCond_1105 = kermeta.standard.helper.BooleanWrapper
-															.and(
-																	kermeta.standard.helper.BooleanWrapper
-																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																					.asTypeSwitcher(
-																							op_lbdExp248,
-																							org.kermeta.compil.runtime.ExecutionContext
-																									.getInstance()
-																									.getMetaClass(
-																											"kermeta.language.structure.Operation")))
-																					.isFunctionType()),
-																	operations
-																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																					.asTypeSwitcher(
-																							op_lbdExp248,
-																							org.kermeta.compil.runtime.ExecutionContext
-																									.getInstance()
-																									.getMetaClass(
-																											"kermeta.language.structure.Operation")))
-																					.getName()));
-
-													if (idIfCond_1105) {
-
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp248,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
-
-														java.lang.String javaSourceCode = op_lbdExp248
-																.createBehaviorJava(this
-																		.getContext());
-
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
-													}
-
-												} else {
-
-													java.lang.Boolean idIfCond_1106 = false;
-													idIfCond_1106 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-															.isInstanceOfSwitcher(
-																	op_lbdExp248,
-																	org.kermeta.compil.runtime.ExecutionContext
-																			.getInstance()
-																			.getMetaClass(
-																					"kermeta.language.structure.Property"));
-
-													if (idIfCond_1106) {
-
-														java.lang.Boolean idIfCond_1107 = false;
-														idIfCond_1107 = kermeta.standard.helper.BooleanWrapper
-																.and(
-																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																				.asTypeSwitcher(
-																						op_lbdExp248,
-																						org.kermeta.compil.runtime.ExecutionContext
-																								.getInstance()
-																								.getMetaClass(
-																										"kermeta.language.structure.Property")))
-																				.getIsDerived(),
-																		operations
-																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																						.asTypeSwitcher(
-																								op_lbdExp248,
-																								org.kermeta.compil.runtime.ExecutionContext
-																										.getInstance()
-																										.getMetaClass(
-																												"kermeta.language.structure.Property")))
-																						.getName()));
-
-														if (idIfCond_1107) {
+														} else {
 
 															org.kermeta.compil.runtime.helper.io.StdIOUtil
 																	.getInstance()
@@ -2494,152 +2674,38 @@ public class MainImpl extends ObjectImpl implements Main {
 																							kermeta.standard.helper.StringWrapper
 																									.plus(
 																											"================= ",
-																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp248,
+																															op_lbdExp256,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
-																																			"kermeta.language.structure.Property")))
+																																			"kermeta.language.structure.Operation")))
 																													.qualifiedName()),
-																							" ================="));
-
-															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																	.asTypeSwitcher(
-																			op_lbdExp248,
-																			org.kermeta.compil.runtime.ExecutionContext
-																					.getInstance()
-																					.getMetaClass(
-																							"kermeta.language.structure.Property")))
-																	.getGetterBody()
-																	.createBehaviorJava(
-																			this
-																					.getContext());
-
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
-																	.getInstance()
-																	.writeln(
-																			javaSourceCode);
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
 														}
 
 													}
 
-												}
-
-												//EIle:func
-
-												//EIle:func
-
-											}
-										}
-									}
-
-									//EIft:each
-
-									//BIft:each
-
-									{
-
-										kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft251 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.language.structure.Operation> convertAsOrderedSet(
-														cd_ft248
-																.getOwnedOperation())
-												.iterator();
-										java.lang.Boolean idLoopCond_1108 = false;
-										while (!idLoopCond_1108) {
-											idLoopCond_1108 = it_ft251.isOff();
-											if (idLoopCond_1108) {
-											} else {
-
-												//BIle:func
-												kermeta.language.structure.Operation o_lbdExp251 = it_ft251
-														.next();
-
-												//BIle:func
-												kermeta.language.structure.Operation op_lbdExp248 = o_lbdExp251;
-
-												java.lang.Boolean idIfCond_1109 = false;
-												idIfCond_1109 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-														.isInstanceOfSwitcher(
-																op_lbdExp248,
-																org.kermeta.compil.runtime.ExecutionContext
-																		.getInstance()
-																		.getMetaClass(
-																				"kermeta.language.structure.Operation"));
-
-												if (idIfCond_1109) {
+												} else {
 
 													java.lang.Boolean idIfCond_1110 = false;
-													idIfCond_1110 = kermeta.standard.helper.BooleanWrapper
-															.and(
-																	kermeta.standard.helper.BooleanWrapper
-																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																					.asTypeSwitcher(
-																							op_lbdExp248,
-																							org.kermeta.compil.runtime.ExecutionContext
-																									.getInstance()
-																									.getMetaClass(
-																											"kermeta.language.structure.Operation")))
-																					.isFunctionType()),
-																	operations
-																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																					.asTypeSwitcher(
-																							op_lbdExp248,
-																							org.kermeta.compil.runtime.ExecutionContext
-																									.getInstance()
-																									.getMetaClass(
-																											"kermeta.language.structure.Operation")))
-																					.getName()));
+													idIfCond_1110 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+															.isInstanceOfSwitcher(
+																	op_lbdExp256,
+																	org.kermeta.compil.runtime.ExecutionContext
+																			.getInstance()
+																			.getMetaClass(
+																					"kermeta.language.structure.Property"));
 
 													if (idIfCond_1110) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp248,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
-
-														java.lang.String javaSourceCode = op_lbdExp248
-																.createBehaviorJava(this
-																		.getContext());
-
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
-													}
-
-												} else {
-
-													java.lang.Boolean idIfCond_1111 = false;
-													idIfCond_1111 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-															.isInstanceOfSwitcher(
-																	op_lbdExp248,
-																	org.kermeta.compil.runtime.ExecutionContext
-																			.getInstance()
-																			.getMetaClass(
-																					"kermeta.language.structure.Property"));
-
-													if (idIfCond_1111) {
-
-														java.lang.Boolean idIfCond_1112 = false;
-														idIfCond_1112 = kermeta.standard.helper.BooleanWrapper
+														java.lang.Boolean idIfCond_1111 = false;
+														idIfCond_1111 = kermeta.standard.helper.BooleanWrapper
 																.and(
 																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																				.asTypeSwitcher(
-																						op_lbdExp248,
+																						op_lbdExp256,
 																						org.kermeta.compil.runtime.ExecutionContext
 																								.getInstance()
 																								.getMetaClass(
@@ -2648,14 +2714,14 @@ public class MainImpl extends ObjectImpl implements Main {
 																		operations
 																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																						.asTypeSwitcher(
-																								op_lbdExp248,
+																								op_lbdExp256,
 																								org.kermeta.compil.runtime.ExecutionContext
 																										.getInstance()
 																										.getMetaClass(
 																												"kermeta.language.structure.Property")))
 																						.getName()));
 
-														if (idIfCond_1112) {
+														if (idIfCond_1111) {
 
 															org.kermeta.compil.runtime.helper.io.StdIOUtil
 																	.getInstance()
@@ -2667,7 +2733,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																											"================= ",
 																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp248,
+																															op_lbdExp256,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
@@ -2677,7 +2743,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			op_lbdExp248,
+																			op_lbdExp256,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -2711,41 +2777,42 @@ public class MainImpl extends ObjectImpl implements Main {
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft252 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.language.structure.Constraint> convertAsOrderedSet(
-														cd_ft248.getInv())
+										kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft258 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+												.<kermeta.language.structure.Property> convertAsOrderedSet(
+														cd_ft256
+																.getOwnedAttribute())
 												.iterator();
-										java.lang.Boolean idLoopCond_1113 = false;
-										while (!idLoopCond_1113) {
-											idLoopCond_1113 = it_ft252.isOff();
-											if (idLoopCond_1113) {
+										java.lang.Boolean idLoopCond_1112 = false;
+										while (!idLoopCond_1112) {
+											idLoopCond_1112 = it_ft258.isOff();
+											if (idLoopCond_1112) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Constraint i_lbdExp252 = it_ft252
+												kermeta.language.structure.Property o_lbdExp258 = it_ft258
 														.next();
 
 												//BIle:func
-												kermeta.language.structure.Constraint op_lbdExp248 = i_lbdExp252;
+												kermeta.language.structure.Property op_lbdExp256 = o_lbdExp258;
 
-												java.lang.Boolean idIfCond_1114 = false;
-												idIfCond_1114 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+												java.lang.Boolean idIfCond_1113 = false;
+												idIfCond_1113 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isInstanceOfSwitcher(
-																op_lbdExp248,
+																op_lbdExp256,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
 																				"kermeta.language.structure.Operation"));
 
-												if (idIfCond_1114) {
+												if (idIfCond_1113) {
 
-													java.lang.Boolean idIfCond_1115 = false;
-													idIfCond_1115 = kermeta.standard.helper.BooleanWrapper
+													java.lang.Boolean idIfCond_1114 = false;
+													idIfCond_1114 = kermeta.standard.helper.BooleanWrapper
 															.and(
 																	kermeta.standard.helper.BooleanWrapper
 																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp248,
+																							op_lbdExp256,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -2754,41 +2821,75 @@ public class MainImpl extends ObjectImpl implements Main {
 																	operations
 																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp248,
+																							op_lbdExp256,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
 																											"kermeta.language.structure.Operation")))
 																					.getName()));
 
-													if (idIfCond_1115) {
+													if (idIfCond_1114) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp248,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
+														java.lang.Boolean idIfCond_1115 = false;
+														idIfCond_1115 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp256,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
 
-														java.lang.String javaSourceCode = op_lbdExp248
-																.createBehaviorJava(this
-																		.getContext());
+														if (idIfCond_1115) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp256,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp256
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp256,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
 													}
 
 												} else {
@@ -2796,7 +2897,7 @@ public class MainImpl extends ObjectImpl implements Main {
 													java.lang.Boolean idIfCond_1116 = false;
 													idIfCond_1116 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isInstanceOfSwitcher(
-																	op_lbdExp248,
+																	op_lbdExp256,
 																	org.kermeta.compil.runtime.ExecutionContext
 																			.getInstance()
 																			.getMetaClass(
@@ -2809,7 +2910,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.and(
 																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																				.asTypeSwitcher(
-																						op_lbdExp248,
+																						op_lbdExp256,
 																						org.kermeta.compil.runtime.ExecutionContext
 																								.getInstance()
 																								.getMetaClass(
@@ -2818,7 +2919,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																		operations
 																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																						.asTypeSwitcher(
-																								op_lbdExp248,
+																								op_lbdExp256,
 																								org.kermeta.compil.runtime.ExecutionContext
 																										.getInstance()
 																										.getMetaClass(
@@ -2837,7 +2938,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																											"================= ",
 																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp248,
+																															op_lbdExp256,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
@@ -2847,7 +2948,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			op_lbdExp248,
+																			op_lbdExp256,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -2881,28 +2982,28 @@ public class MainImpl extends ObjectImpl implements Main {
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft253 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.language.structure.TypeVariable> convertAsOrderedSet(
-														cd_ft248
-																.getTypeParameter())
+										kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft259 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+												.<kermeta.language.structure.Operation> convertAsOrderedSet(
+														cd_ft256
+																.getOwnedOperation())
 												.iterator();
 										java.lang.Boolean idLoopCond_1118 = false;
 										while (!idLoopCond_1118) {
-											idLoopCond_1118 = it_ft253.isOff();
+											idLoopCond_1118 = it_ft259.isOff();
 											if (idLoopCond_1118) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.TypeVariable t_lbdExp253 = it_ft253
+												kermeta.language.structure.Operation o_lbdExp259 = it_ft259
 														.next();
 
 												//BIle:func
-												kermeta.language.structure.TypeVariable op_lbdExp248 = t_lbdExp253;
+												kermeta.language.structure.Operation op_lbdExp256 = o_lbdExp259;
 
 												java.lang.Boolean idIfCond_1119 = false;
 												idIfCond_1119 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isInstanceOfSwitcher(
-																op_lbdExp248,
+																op_lbdExp256,
 																org.kermeta.compil.runtime.ExecutionContext
 																		.getInstance()
 																		.getMetaClass(
@@ -2916,7 +3017,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																	kermeta.standard.helper.BooleanWrapper
 																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp248,
+																							op_lbdExp256,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -2925,7 +3026,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																	operations
 																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																					.asTypeSwitcher(
-																							op_lbdExp248,
+																							op_lbdExp256,
 																							org.kermeta.compil.runtime.ExecutionContext
 																									.getInstance()
 																									.getMetaClass(
@@ -2934,53 +3035,87 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_1120) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						kermeta.standard.helper.StringWrapper
-																								.plus(
-																										"================= ",
-																										((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																												.asTypeSwitcher(
-																														op_lbdExp248,
-																														org.kermeta.compil.runtime.ExecutionContext
-																																.getInstance()
-																																.getMetaClass(
-																																		"kermeta.language.structure.Operation")))
-																												.qualifiedName()),
-																						" ================="));
+														java.lang.Boolean idIfCond_1121 = false;
+														idIfCond_1121 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp256,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
 
-														java.lang.String javaSourceCode = op_lbdExp248
-																.createBehaviorJava(this
-																		.getContext());
+														if (idIfCond_1121) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
-																.getInstance()
-																.writeln(
-																		javaSourceCode);
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp256,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp256
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp256,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
 													}
 
 												} else {
 
-													java.lang.Boolean idIfCond_1121 = false;
-													idIfCond_1121 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+													java.lang.Boolean idIfCond_1122 = false;
+													idIfCond_1122 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isInstanceOfSwitcher(
-																	op_lbdExp248,
+																	op_lbdExp256,
 																	org.kermeta.compil.runtime.ExecutionContext
 																			.getInstance()
 																			.getMetaClass(
 																					"kermeta.language.structure.Property"));
 
-													if (idIfCond_1121) {
+													if (idIfCond_1122) {
 
-														java.lang.Boolean idIfCond_1122 = false;
-														idIfCond_1122 = kermeta.standard.helper.BooleanWrapper
+														java.lang.Boolean idIfCond_1123 = false;
+														idIfCond_1123 = kermeta.standard.helper.BooleanWrapper
 																.and(
 																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																				.asTypeSwitcher(
-																						op_lbdExp248,
+																						op_lbdExp256,
 																						org.kermeta.compil.runtime.ExecutionContext
 																								.getInstance()
 																								.getMetaClass(
@@ -2989,14 +3124,14 @@ public class MainImpl extends ObjectImpl implements Main {
 																		operations
 																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																						.asTypeSwitcher(
-																								op_lbdExp248,
+																								op_lbdExp256,
 																								org.kermeta.compil.runtime.ExecutionContext
 																										.getInstance()
 																										.getMetaClass(
 																												"kermeta.language.structure.Property")))
 																						.getName()));
 
-														if (idIfCond_1122) {
+														if (idIfCond_1123) {
 
 															org.kermeta.compil.runtime.helper.io.StdIOUtil
 																	.getInstance()
@@ -3008,7 +3143,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																											"================= ",
 																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																													.asTypeSwitcher(
-																															op_lbdExp248,
+																															op_lbdExp256,
 																															org.kermeta.compil.runtime.ExecutionContext
 																																	.getInstance()
 																																	.getMetaClass(
@@ -3018,7 +3153,416 @@ public class MainImpl extends ObjectImpl implements Main {
 
 															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.asTypeSwitcher(
-																			op_lbdExp248,
+																			op_lbdExp256,
+																			org.kermeta.compil.runtime.ExecutionContext
+																					.getInstance()
+																					.getMetaClass(
+																							"kermeta.language.structure.Property")))
+																	.getGetterBody()
+																	.createBehaviorJava(
+																			this
+																					.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														}
+
+													}
+
+												}
+
+												//EIle:func
+
+												//EIle:func
+
+											}
+										}
+									}
+
+									//EIft:each
+
+									//BIft:each
+
+									{
+
+										kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft260 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+												.<kermeta.language.structure.Constraint> convertAsOrderedSet(
+														cd_ft256.getInv())
+												.iterator();
+										java.lang.Boolean idLoopCond_1124 = false;
+										while (!idLoopCond_1124) {
+											idLoopCond_1124 = it_ft260.isOff();
+											if (idLoopCond_1124) {
+											} else {
+
+												//BIle:func
+												kermeta.language.structure.Constraint i_lbdExp260 = it_ft260
+														.next();
+
+												//BIle:func
+												kermeta.language.structure.Constraint op_lbdExp256 = i_lbdExp260;
+
+												java.lang.Boolean idIfCond_1125 = false;
+												idIfCond_1125 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+														.isInstanceOfSwitcher(
+																op_lbdExp256,
+																org.kermeta.compil.runtime.ExecutionContext
+																		.getInstance()
+																		.getMetaClass(
+																				"kermeta.language.structure.Operation"));
+
+												if (idIfCond_1125) {
+
+													java.lang.Boolean idIfCond_1126 = false;
+													idIfCond_1126 = kermeta.standard.helper.BooleanWrapper
+															.and(
+																	kermeta.standard.helper.BooleanWrapper
+																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																					.asTypeSwitcher(
+																							op_lbdExp256,
+																							org.kermeta.compil.runtime.ExecutionContext
+																									.getInstance()
+																									.getMetaClass(
+																											"kermeta.language.structure.Operation")))
+																					.isFunctionType()),
+																	operations
+																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																					.asTypeSwitcher(
+																							op_lbdExp256,
+																							org.kermeta.compil.runtime.ExecutionContext
+																									.getInstance()
+																									.getMetaClass(
+																											"kermeta.language.structure.Operation")))
+																					.getName()));
+
+													if (idIfCond_1126) {
+
+														java.lang.Boolean idIfCond_1127 = false;
+														idIfCond_1127 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp256,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
+
+														if (idIfCond_1127) {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp256,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp256
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp256,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
+													}
+
+												} else {
+
+													java.lang.Boolean idIfCond_1128 = false;
+													idIfCond_1128 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+															.isInstanceOfSwitcher(
+																	op_lbdExp256,
+																	org.kermeta.compil.runtime.ExecutionContext
+																			.getInstance()
+																			.getMetaClass(
+																					"kermeta.language.structure.Property"));
+
+													if (idIfCond_1128) {
+
+														java.lang.Boolean idIfCond_1129 = false;
+														idIfCond_1129 = kermeta.standard.helper.BooleanWrapper
+																.and(
+																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																				.asTypeSwitcher(
+																						op_lbdExp256,
+																						org.kermeta.compil.runtime.ExecutionContext
+																								.getInstance()
+																								.getMetaClass(
+																										"kermeta.language.structure.Property")))
+																				.getIsDerived(),
+																		operations
+																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																						.asTypeSwitcher(
+																								op_lbdExp256,
+																								org.kermeta.compil.runtime.ExecutionContext
+																										.getInstance()
+																										.getMetaClass(
+																												"kermeta.language.structure.Property")))
+																						.getName()));
+
+														if (idIfCond_1129) {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp256,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Property")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																	.asTypeSwitcher(
+																			op_lbdExp256,
+																			org.kermeta.compil.runtime.ExecutionContext
+																					.getInstance()
+																					.getMetaClass(
+																							"kermeta.language.structure.Property")))
+																	.getGetterBody()
+																	.createBehaviorJava(
+																			this
+																					.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														}
+
+													}
+
+												}
+
+												//EIle:func
+
+												//EIle:func
+
+											}
+										}
+									}
+
+									//EIft:each
+
+									//BIft:each
+
+									{
+
+										kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft261 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+												.<kermeta.language.structure.TypeVariable> convertAsOrderedSet(
+														cd_ft256
+																.getTypeParameter())
+												.iterator();
+										java.lang.Boolean idLoopCond_1130 = false;
+										while (!idLoopCond_1130) {
+											idLoopCond_1130 = it_ft261.isOff();
+											if (idLoopCond_1130) {
+											} else {
+
+												//BIle:func
+												kermeta.language.structure.TypeVariable t_lbdExp261 = it_ft261
+														.next();
+
+												//BIle:func
+												kermeta.language.structure.TypeVariable op_lbdExp256 = t_lbdExp261;
+
+												java.lang.Boolean idIfCond_1131 = false;
+												idIfCond_1131 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+														.isInstanceOfSwitcher(
+																op_lbdExp256,
+																org.kermeta.compil.runtime.ExecutionContext
+																		.getInstance()
+																		.getMetaClass(
+																				"kermeta.language.structure.Operation"));
+
+												if (idIfCond_1131) {
+
+													java.lang.Boolean idIfCond_1132 = false;
+													idIfCond_1132 = kermeta.standard.helper.BooleanWrapper
+															.and(
+																	kermeta.standard.helper.BooleanWrapper
+																			.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																					.asTypeSwitcher(
+																							op_lbdExp256,
+																							org.kermeta.compil.runtime.ExecutionContext
+																									.getInstance()
+																									.getMetaClass(
+																											"kermeta.language.structure.Operation")))
+																					.isFunctionType()),
+																	operations
+																			.contains(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																					.asTypeSwitcher(
+																							op_lbdExp256,
+																							org.kermeta.compil.runtime.ExecutionContext
+																									.getInstance()
+																									.getMetaClass(
+																											"kermeta.language.structure.Operation")))
+																					.getName()));
+
+													if (idIfCond_1132) {
+
+														java.lang.Boolean idIfCond_1133 = false;
+														idIfCond_1133 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.isVoidSwitcher(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																		.asTypeSwitcher(
+																				op_lbdExp256,
+																				org.kermeta.compil.runtime.ExecutionContext
+																						.getInstance()
+																						.getMetaClass(
+																								"kermeta.language.structure.Operation")))
+																		.getSuperOperation());
+
+														if (idIfCond_1133) {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp256,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = op_lbdExp256
+																	.createBehaviorJava(this
+																			.getContext());
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			javaSourceCode);
+														} else {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp256,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Operation")))
+																													.qualifiedName()),
+																							" is an inherited method => compilation is not available by using this launcher ! ================="));
+														}
+
+													}
+
+												} else {
+
+													java.lang.Boolean idIfCond_1134 = false;
+													idIfCond_1134 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+															.isInstanceOfSwitcher(
+																	op_lbdExp256,
+																	org.kermeta.compil.runtime.ExecutionContext
+																			.getInstance()
+																			.getMetaClass(
+																					"kermeta.language.structure.Property"));
+
+													if (idIfCond_1134) {
+
+														java.lang.Boolean idIfCond_1135 = false;
+														idIfCond_1135 = kermeta.standard.helper.BooleanWrapper
+																.and(
+																		((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																				.asTypeSwitcher(
+																						op_lbdExp256,
+																						org.kermeta.compil.runtime.ExecutionContext
+																								.getInstance()
+																								.getMetaClass(
+																										"kermeta.language.structure.Property")))
+																				.getIsDerived(),
+																		operations
+																				.contains(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																						.asTypeSwitcher(
+																								op_lbdExp256,
+																								org.kermeta.compil.runtime.ExecutionContext
+																										.getInstance()
+																										.getMetaClass(
+																												"kermeta.language.structure.Property")))
+																						.getName()));
+
+														if (idIfCond_1135) {
+
+															org.kermeta.compil.runtime.helper.io.StdIOUtil
+																	.getInstance()
+																	.writeln(
+																			kermeta.standard.helper.StringWrapper
+																					.plus(
+																							kermeta.standard.helper.StringWrapper
+																									.plus(
+																											"================= ",
+																											((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																													.asTypeSwitcher(
+																															op_lbdExp256,
+																															org.kermeta.compil.runtime.ExecutionContext
+																																	.getInstance()
+																																	.getMetaClass(
+																																			"kermeta.language.structure.Property")))
+																													.qualifiedName()),
+																							" ================="));
+
+															java.lang.String javaSourceCode = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil
+																	.asTypeSwitcher(
+																			op_lbdExp256,
 																			org.kermeta.compil.runtime.ExecutionContext
 																					.getInstance()
 																					.getMetaClass(
@@ -3082,37 +3626,12 @@ public class MainImpl extends ObjectImpl implements Main {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void main_inner() {
-
-		java.lang.String modelInput = null;
-
-		java.lang.String output = null;
-
-		java.lang.String traceInput = "";
-
-		modelInput = "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km";
-
-		modelInput = "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/StructureCompiler.km";
-
-		output = kermeta.standard.helper.StringWrapper.replaceExtension(
-				modelInput, "ecore");
-
-		this.main_mode(modelInput, traceInput, output, km2ecore.CompilingMode
-				.getByName("behaviorJava"), false);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String typeDefinitionToString(TypeDefinition td) {
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_1123 = false;
-		idIfCond_1123 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1136 = false;
+		idIfCond_1136 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -3125,7 +3644,7 @@ public class MainImpl extends ObjectImpl implements Main {
 												.getMetaClass(
 														"kermeta.language.structure.ClassDefinition")));
 
-		if (idIfCond_1123) {
+		if (idIfCond_1136) {
 
 			kermeta.language.structure.ClassDefinition cd = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
@@ -3161,12 +3680,12 @@ public class MainImpl extends ObjectImpl implements Main {
 		kermeta.language.structure.TypeDefinition td_tmp = this.getContext()
 				.getMu().getTypeDefinitionByQualifiedName(qn);
 
-		java.lang.Boolean idIfCond_1124 = false;
-		idIfCond_1124 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1137 = false;
+		idIfCond_1137 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(td_tmp));
 
-		if (idIfCond_1124) {
+		if (idIfCond_1137) {
 
 			td = td_tmp;
 		}
@@ -3174,6 +3693,19 @@ public class MainImpl extends ObjectImpl implements Main {
 		result = td;
 
 		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void main(String modelInput) {
+
+		this.main_mode(modelInput, "", kermeta.standard.helper.StringWrapper
+				.replaceExtension(modelInput, "ecore"), km2ecore.CompilingMode
+				.getByName("behaviorJava"), false);
 
 	}
 
@@ -3207,22 +3739,22 @@ public class MainImpl extends ObjectImpl implements Main {
 		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln(
 				"KermetaCompiler - Pass 1 is finished");
 
-		java.lang.Boolean idIfCond_1125 = false;
-		idIfCond_1125 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1138 = false;
+		idIfCond_1138 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equalsSwitcher(this.getContext().getMode(),
 						km2ecore.CompilingMode.getByName("onlyEcore"));
 
-		if (idIfCond_1125) {
+		if (idIfCond_1138) {
 
 			this.getContext().getMu().applyPass2(this.getContext());
 		}
 
-		java.lang.Boolean idIfCond_1126 = false;
-		idIfCond_1126 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1139 = false;
+		idIfCond_1139 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equalsSwitcher(this.getContext().getMode(),
 						km2ecore.CompilingMode.getByName("behaviorKmt"));
 
-		if (idIfCond_1126) {
+		if (idIfCond_1139) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -3232,12 +3764,12 @@ public class MainImpl extends ObjectImpl implements Main {
 
 		}
 
-		java.lang.Boolean idIfCond_1127 = false;
-		idIfCond_1127 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1140 = false;
+		idIfCond_1140 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equalsSwitcher(this.getContext().getMode(),
 						km2ecore.CompilingMode.getByName("behaviorJava"));
 
-		if (idIfCond_1127) {
+		if (idIfCond_1140) {
 
 			this.getContext().getMu().preprocess(this.getContext());
 
@@ -3258,10 +3790,10 @@ public class MainImpl extends ObjectImpl implements Main {
 		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln(
 				"Save the Ecore Model");
 
-		java.lang.Boolean idIfCond_1128 = false;
-		idIfCond_1128 = splitEcore;
+		java.lang.Boolean idIfCond_1141 = false;
+		idIfCond_1141 = splitEcore;
 
-		if (idIfCond_1128) {
+		if (idIfCond_1141) {
 
 			this.saveSplitEcore(output);
 		} else {
@@ -3288,19 +3820,6 @@ public class MainImpl extends ObjectImpl implements Main {
 
 		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln(
 				"Finish");
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void main(String modelInput) {
-
-		this.main_mode(modelInput, "", kermeta.standard.helper.StringWrapper
-				.replaceExtension(modelInput, "ecore"), km2ecore.CompilingMode
-				.getByName("behaviorJava"), false);
 
 	}
 

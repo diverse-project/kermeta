@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TextReference.java,v 1.12 2009-02-23 15:26:52 cfaucher Exp $
+ * $Id$
  */
 package traceability;
 
@@ -24,7 +24,8 @@ package traceability;
  * </p>
  *
  * @see traceability.TraceabilityPackage#getTextReference()
- * @model annotation="kermeta documentation='/**\r\n * This class represents a reference to a textual file concrete object\r\n \052/'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='/**\r\n * This class represents a reference to a textual file concrete object\r\n \052/'"
  *        annotation="kermeta.inv validTextRef=''"
  * @generated
  */
@@ -41,6 +42,7 @@ public interface TextReference extends FileReference {
 	 * @see #setCharEndAt(Integer)
 	 * @see traceability.TraceabilityPackage#getTextReference_CharEndAt()
 	 * @model dataType="traceability.Integer" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Ending character number \052/'"
 	 * @generated
 	 */
@@ -68,6 +70,7 @@ public interface TextReference extends FileReference {
 	 * @see #setCharBeginAt(Integer)
 	 * @see traceability.TraceabilityPackage#getTextReference_CharBeginAt()
 	 * @model dataType="traceability.Integer" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Starting character number \052/'"
 	 * @generated
 	 */
@@ -95,6 +98,7 @@ public interface TextReference extends FileReference {
 	 * @see #setLineEndAt(Integer)
 	 * @see traceability.TraceabilityPackage#getTextReference_LineEndAt()
 	 * @model dataType="traceability.Integer" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Ending line number \052/'"
 	 * @generated
 	 */
@@ -122,6 +126,7 @@ public interface TextReference extends FileReference {
 	 * @see #setLineBeginAt(Integer)
 	 * @see traceability.TraceabilityPackage#getTextReference_LineBeginAt()
 	 * @model dataType="traceability.Integer" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Starting line number \052/'"
 	 * @generated
 	 */

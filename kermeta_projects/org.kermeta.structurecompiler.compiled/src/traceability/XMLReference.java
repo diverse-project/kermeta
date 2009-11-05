@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: XMLReference.java,v 1.12 2009-02-23 15:26:52 cfaucher Exp $
+ * $Id$
  */
 package traceability;
 
@@ -21,7 +21,8 @@ package traceability;
  * </p>
  *
  * @see traceability.TraceabilityPackage#getXMLReference()
- * @model annotation="kermeta documentation='/**\r\n * This class represents a reference to a XML concrete object\r\n \052/'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='/**\r\n * This class represents a reference to a XML concrete object\r\n \052/'"
  * @generated
  */
 public interface XMLReference extends FileReference {
@@ -37,6 +38,7 @@ public interface XMLReference extends FileReference {
 	 * @see #setXPointer(String)
 	 * @see traceability.TraceabilityPackage#getXMLReference_XPointer()
 	 * @model dataType="traceability.String" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** XML link to the referred XML concrete object \052/'"
 	 * @generated
 	 */

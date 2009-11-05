@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ErrorKind.java,v 1.12 2009-02-23 15:26:50 cfaucher Exp $
+ * $Id$
  */
 package kermeta.kunit;
 
@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * @see kermeta.kunit.KunitPackage#getErrorKind()
- * @model annotation="kermeta documentation='/**\r\n * all kinds of error we can meet\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * all kinds of error we can meet\n \052/'"
  * @generated
  */
 public enum ErrorKind implements Enumerator {

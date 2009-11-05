@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ETypedElementImpl.java,v 1.13 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -432,17 +432,17 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case EcorePackage.ETYPED_ELEMENT__LOWER_BOUND:
-			return new Integer(getLowerBound());
+			return getLowerBound();
 		case EcorePackage.ETYPED_ELEMENT__UNIQUE:
-			return isUnique() ? Boolean.TRUE : Boolean.FALSE;
+			return isUnique();
 		case EcorePackage.ETYPED_ELEMENT__ETYPE:
 			if (resolve)
 				return getEType();
 			return basicGetEType();
 		case EcorePackage.ETYPED_ELEMENT__ORDERED:
-			return isOrdered() ? Boolean.TRUE : Boolean.FALSE;
+			return isOrdered();
 		case EcorePackage.ETYPED_ELEMENT__UPPER_BOUND:
-			return new Integer(getUpperBound());
+			return getUpperBound();
 		case EcorePackage.ETYPED_ELEMENT__EGENERIC_TYPE:
 			if (resolve)
 				return getEGenericType();
@@ -460,19 +460,19 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case EcorePackage.ETYPED_ELEMENT__LOWER_BOUND:
-			setLowerBound(((Integer) newValue).intValue());
+			setLowerBound((Integer) newValue);
 			return;
 		case EcorePackage.ETYPED_ELEMENT__UNIQUE:
-			setUnique(((Boolean) newValue).booleanValue());
+			setUnique((Boolean) newValue);
 			return;
 		case EcorePackage.ETYPED_ELEMENT__ETYPE:
 			setEType((EClassifier) newValue);
 			return;
 		case EcorePackage.ETYPED_ELEMENT__ORDERED:
-			setOrdered(((Boolean) newValue).booleanValue());
+			setOrdered((Boolean) newValue);
 			return;
 		case EcorePackage.ETYPED_ELEMENT__UPPER_BOUND:
-			setUpperBound(((Integer) newValue).intValue());
+			setUpperBound((Integer) newValue);
 			return;
 		case EcorePackage.ETYPED_ELEMENT__EGENERIC_TYPE:
 			setEGenericType((EGenericType) newValue);

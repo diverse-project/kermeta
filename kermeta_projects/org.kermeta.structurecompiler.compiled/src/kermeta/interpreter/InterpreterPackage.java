@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: InterpreterPackage.java,v 1.12 2009-02-23 15:26:49 cfaucher Exp $
+ * $Id$
  */
 package kermeta.interpreter;
 
@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EReference;
  * @see kermeta.interpreter.InterpreterFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/interpreter'"
- *        annotation="kermeta documentation='/**\r\n * Contains a set of classes whose function is to evaluate a kermeta \r\n * expression written as a string.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/interpreter_package.png\"/>\r\n \052/'"
+ *        annotation="kermeta documentation='/**\n * Contains a set of classes whose function is to evaluate a kermeta \n * expression written as a string.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/interpreter_package.png\"/>\n \052/'"
  * @generated
  */
 public interface InterpreterPackage extends EPackage {

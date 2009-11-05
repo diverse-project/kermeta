@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ConstraintViolatedExceptionImpl.java,v 1.10 2009-02-23 15:26:38 cfaucher Exp $
+ * $Id$
  */
 package kermeta.exceptions.impl;
 

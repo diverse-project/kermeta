@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: CommonPackage.java,v 1.12 2009-02-23 15:27:04 cfaucher Exp $
+ * $Id$
  */
 package km2ecore.common;
 

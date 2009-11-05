@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Model.java,v 1.12 2009-02-23 15:26:48 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure;
 
@@ -26,7 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getModel()
- * @model annotation="kermeta documentation='Is the holder of a set of model elements (Object) that are compatible with the ModelType that has \ninstantiated this Model.'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Is the holder of a set of model elements (Object) that are compatible with the ModelType that has \ninstantiated this Model.'"
  * @generated
  */
 public interface Model extends kermeta.language.structure.Object {
@@ -42,6 +43,7 @@ public interface Model extends kermeta.language.structure.Object {
 	 * @return the value of the '<em>Contents</em>' reference list.
 	 * @see kermeta.language.structure.StructurePackage#getModel_Contents()
 	 * @model changeable="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Contents of this model...'"
 	 * @generated
 	 */
@@ -50,7 +52,7 @@ public interface Model extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n \t * Add the Object if it is copmpatible with the ModelDefinition. Other objects are ignored.\r\n \t * Returns the object if it has been added (One can check that some element have been ignored or not)\r\n \t * return Void if not added\r\n \t \052/'"
+	 * @model annotation="kermeta documentation='/**\n \t * Add the Object if it is copmpatible with the ModelDefinition. Other objects are ignored.\n \t * Returns the object if it has been added (One can check that some element have been ignored or not)\n \t * return Void if not added\n \t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Object result = null;\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Object>convertAsOrderedSet(this.getContents());\n\n\tresult = org.kermeta.compil.runtime.helper.language.ModelUtil.addCompatible(this, objectToAdd);\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -60,7 +62,7 @@ public interface Model extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n \t * Remove an object from the model\r\n \t \052/'"
+	 * @model annotation="kermeta documentation='/**\n \t * Remove an object from the model\n \t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.language.ReflectiveCollectionUtil.remove(contents, obj);\n'"
 	 * @generated
 	 */
@@ -69,8 +71,8 @@ public interface Model extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n \t * Add all the Object of the collection that are copmpatible with the ModelDefinition. Other objects are ignored.\r\n \t * Returns the list of Object that have been added (One can check that some element have been ignored or not)\r\n \t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.Collection<kermeta.language.structure.Object> result = null;\n\n\tresult = ((kermeta.standard.Set<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.standard.StandardPackage.eINSTANCE.getSet()));\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Object> it_ft127 = objectsToAdd.iterator();\n\tjava.lang.Boolean idLoopCond_414 = false;\n\twhile( !idLoopCond_414 ) {\n\tidLoopCond_414 = it_ft127.isOff();\n\tif ( idLoopCond_414 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Object obj_lbdExp127 = it_ft127.next();\n\n\tkermeta.language.structure.Object addedObject = this.addCompatible(obj_lbdExp127);\n\n\tjava.lang.Boolean idIfCond_415 = false;\n\tidIfCond_415 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(addedObject));\n\n\tif( idIfCond_415 ) {\n\n\tresult.add(obj_lbdExp127);\n}\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\nreturn result;\n'"
+	 * @model annotation="kermeta documentation='/**\n \t * Add all the Object of the collection that are copmpatible with the ModelDefinition. Other objects are ignored.\n \t * Returns the list of Object that have been added (One can check that some element have been ignored or not)\n \t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.Collection<kermeta.language.structure.Object> result = null;\n\n\tresult = ((kermeta.standard.Set<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.standard.StandardPackage.eINSTANCE.getSet()));\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Object> it_ft150 = objectsToAdd.iterator();\n\tjava.lang.Boolean idLoopCond_666 = false;\n\twhile( !idLoopCond_666 ) {\n\tidLoopCond_666 = it_ft150.isOff();\n\tif ( idLoopCond_666 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Object obj_lbdExp150 = it_ft150.next();\n\n\tkermeta.language.structure.Object addedObject = this.addCompatible(obj_lbdExp150);\n\n\tjava.lang.Boolean idIfCond_667 = false;\n\tidIfCond_667 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(addedObject));\n\n\tif( idIfCond_667 ) {\n\n\tresult.add(obj_lbdExp150);\n}\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Collection<kermeta.language.structure.Object> addAllCompatible(
@@ -79,7 +81,7 @@ public interface Model extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n \t * Add an object to the model. According to the ModelType, the typechecker will statically verify if the object can be added or not\r\n \t \052/'"
+	 * @model annotation="kermeta documentation='/**\n \t * Add an object to the model. According to the ModelType, the typechecker will statically verify if the object can be added or not\n \t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Object>convertAsOrderedSet(this.getContents());\n\n\torg.kermeta.compil.runtime.helper.language.ModelUtil.add(this, obj);\n'"
 	 * @generated
 	 */
@@ -88,8 +90,8 @@ public interface Model extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n \t * Returns a set of all the elements of the model that are instance of the given Type\r\n \t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.Set<kermeta.language.structure.Object> result = null;\n\n\t//BIft:select\n\nkermeta.standard.Sequence<kermeta.language.structure.Object> result_ft128 = null;\n\n\tkermeta.language.structure.Object elem_ft128 = null;\n\n\tresult_ft128 = ((kermeta.standard.Sequence<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.standard.StandardPackage.eINSTANCE.getSequence()));\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Object> it_ft128 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Object>convertAsOrderedSet(this.getContents()).iterator();\n\tjava.lang.Boolean idLoopCond_416 = false;\n\twhile( !idLoopCond_416 ) {\n\tidLoopCond_416 = it_ft128.isOff();\n\tif ( idLoopCond_416 ) {\n\t} else {\n\n\telem_ft128 = it_ft128.next();\n\n\tjava.lang.Boolean idIfCond_417 = false;\n//BIle:selector\nkermeta.language.structure.Object o_lbdExp128 = elem_ft128;\n\n\tidIfCond_417 = org.kermeta.compil.runtime.helper.language.TypeUtil.isInstanceSwitcher(typeName, o_lbdExp128);\n//EIle:selector\n\n\n\tif( idIfCond_417 ) {\n\n\tresult_ft128.add(elem_ft128);\n}\n\n}\n\t}\n}\n\n//EIft:select\nresult = result_ft128.asSet();\n\nreturn result;\n'"
+	 * @model annotation="kermeta documentation='/**\n \t * Returns a set of all the elements of the model that are instance of the given Type\n \t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.Set<kermeta.language.structure.Object> result = null;\n\n\t//BIft:select\n\nkermeta.standard.Sequence<kermeta.language.structure.Object> result_ft151 = null;\n\n\tkermeta.language.structure.Object elem_ft151 = null;\n\n\tresult_ft151 = ((kermeta.standard.Sequence<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.standard.StandardPackage.eINSTANCE.getSequence()));\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Object> it_ft151 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Object>convertAsOrderedSet(this.getContents()).iterator();\n\tjava.lang.Boolean idLoopCond_668 = false;\n\twhile( !idLoopCond_668 ) {\n\tidLoopCond_668 = it_ft151.isOff();\n\tif ( idLoopCond_668 ) {\n\t} else {\n\n\telem_ft151 = it_ft151.next();\n\n\tjava.lang.Boolean idIfCond_669 = false;\n//BIle:selector\nkermeta.language.structure.Object o_lbdExp151 = elem_ft151;\n\n\tidIfCond_669 = org.kermeta.compil.runtime.helper.language.TypeUtil.isInstanceSwitcher(typeName, o_lbdExp151);\n//EIle:selector\n\n\n\tif( idIfCond_669 ) {\n\n\tresult_ft151.add(elem_ft151);\n}\n\n}\n\t}\n}\n\n//EIft:select\nresult = result_ft151.asSet();\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Set<kermeta.language.structure.Object> filter(Type typeName);

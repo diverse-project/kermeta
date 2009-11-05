@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EnumerationImpl.java,v 1.12 2009-02-23 15:26:40 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure.impl;
 
@@ -150,14 +150,12 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public kermeta.language.structure.Object clone(
-			kermeta.language.structure.Object objectToClone) {
+	public String createBehaviorJava(KM2EcoreContext context) {
 
-		kermeta.language.structure.Object result = null;
+		java.lang.String result = null;
 
-		if (true)
-			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-					"NOT IMPLEMENTED");
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.qualifiedName(), "::", ".");
 
 		return result;
 
@@ -168,12 +166,14 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String createBehaviorJava(KM2EcoreContext context) {
+	public kermeta.language.structure.Object clone(
+			kermeta.language.structure.Object objectToClone) {
 
-		java.lang.String result = null;
+		kermeta.language.structure.Object result = null;
 
-		result = kermeta.standard.helper.StringWrapper.replace(this
-				.qualifiedName(), "::", ".");
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					"NOT IMPLEMENTED");
 
 		return result;
 
@@ -209,23 +209,23 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft114 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft105 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_326 = false;
-			while (!idLoopCond_326) {
-				idLoopCond_326 = it_ft114.isOff();
-				if (idLoopCond_326) {
+			java.lang.Boolean idLoopCond_547 = false;
+			while (!idLoopCond_547) {
+				idLoopCond_547 = it_ft105.isOff();
+				if (idLoopCond_547) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp114 = it_ft114
+					kermeta.language.structure.Tag o_lbdExp105 = it_ft105
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag l_lbdExp113 = o_lbdExp114;
+					kermeta.language.structure.Tag l_lbdExp104 = o_lbdExp105;
 
-					l_lbdExp113.applyPass1(context);
+					l_lbdExp104.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -240,23 +240,23 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.EnumerationLiteral> it_ft115 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.EnumerationLiteral> it_ft106 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.EnumerationLiteral> convertAsOrderedSet(
 							this.getOwnedLiteral()).iterator();
-			java.lang.Boolean idLoopCond_327 = false;
-			while (!idLoopCond_327) {
-				idLoopCond_327 = it_ft115.isOff();
-				if (idLoopCond_327) {
+			java.lang.Boolean idLoopCond_548 = false;
+			while (!idLoopCond_548) {
+				idLoopCond_548 = it_ft106.isOff();
+				if (idLoopCond_548) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.EnumerationLiteral l_lbdExp115 = it_ft115
+					kermeta.language.structure.EnumerationLiteral l_lbdExp106 = it_ft106
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.EnumerationLiteral l_lbdExp113 = l_lbdExp115;
+					kermeta.language.structure.EnumerationLiteral l_lbdExp104 = l_lbdExp106;
 
-					l_lbdExp113.applyPass1(context);
+					l_lbdExp104.applyPass1(context);
 					//EIle:func
 
 					//EIle:func

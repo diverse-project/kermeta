@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TypeReference.java,v 1.12 2009-02-23 15:26:37 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior;
 
@@ -19,7 +19,8 @@ import km2ecore.KM2EcoreContext;
  *
  *
  * @see kermeta.language.behavior.BehaviorPackage#getTypeReference()
- * @model annotation="kermeta documentation='TypeReference refers to the type used in a variable declaration'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='TypeReference refers to the type used in a variable declaration'"
  * @generated
  */
 public interface TypeReference extends MultiplicityElement {

@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: PropertyImpl.java,v 1.13 2009-02-23 15:26:40 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure.impl;
 
@@ -44,11 +44,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getGetterBody <em>Getter Body</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsReadOnly <em>Is Read Only</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getSetterBody <em>Setter Body</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getOwningClass <em>Owning Class</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsSetterAbstract <em>Is Setter Abstract</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsID <em>Is ID</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsComposite <em>Is Composite</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsSetterAbstract <em>Is Setter Abstract</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsGetterAbstract <em>Is Getter Abstract</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsComposite <em>Is Composite</em>}</li>
  * </ul>
  * </p>
  *
@@ -156,26 +156,6 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	protected Expression setterBody;
 
 	/**
-	 * The default value of the '{@link #getIsSetterAbstract() <em>Is Setter Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsSetterAbstract()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Boolean IS_SETTER_ABSTRACT_EDEFAULT = Boolean.FALSE;
-
-	/**
-	 * The cached value of the '{@link #getIsSetterAbstract() <em>Is Setter Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsSetterAbstract()
-	 * @generated
-	 * @ordered
-	 */
-	protected Boolean isSetterAbstract = IS_SETTER_ABSTRACT_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getIsID() <em>Is ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -196,24 +176,24 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	protected Boolean isID = IS_ID_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getIsComposite() <em>Is Composite</em>}' attribute.
+	 * The default value of the '{@link #getIsSetterAbstract() <em>Is Setter Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsComposite()
+	 * @see #getIsSetterAbstract()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_COMPOSITE_EDEFAULT = Boolean.FALSE;
+	protected static final Boolean IS_SETTER_ABSTRACT_EDEFAULT = Boolean.FALSE;
 
 	/**
-	 * The cached value of the '{@link #getIsComposite() <em>Is Composite</em>}' attribute.
+	 * The cached value of the '{@link #getIsSetterAbstract() <em>Is Setter Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsComposite()
+	 * @see #getIsSetterAbstract()
 	 * @generated
 	 * @ordered
 	 */
-	protected Boolean isComposite = IS_COMPOSITE_EDEFAULT;
+	protected Boolean isSetterAbstract = IS_SETTER_ABSTRACT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getIsGetterAbstract() <em>Is Getter Abstract</em>}' attribute.
@@ -234,6 +214,26 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @ordered
 	 */
 	protected Boolean isGetterAbstract = IS_GETTER_ABSTRACT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIsComposite() <em>Is Composite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsComposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_COMPOSITE_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIsComposite() <em>Is Composite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsComposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isComposite = IS_COMPOSITE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -589,10 +589,8 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDefinition getOwningClass() {
-		if (eContainerFeatureID != StructurePackage.PROPERTY__OWNING_CLASS)
-			return null;
-		return (ClassDefinition) eContainer();
+	public Boolean getIsID() {
+		return isID;
 	}
 
 	/**
@@ -600,49 +598,12 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDefinition basicGetOwningClass() {
-		if (eContainerFeatureID != StructurePackage.PROPERTY__OWNING_CLASS)
-			return null;
-		return (ClassDefinition) eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwningClass(
-			ClassDefinition newOwningClass, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newOwningClass,
-				StructurePackage.PROPERTY__OWNING_CLASS, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOwningClass(ClassDefinition newOwningClass) {
-		if (newOwningClass != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.PROPERTY__OWNING_CLASS && newOwningClass != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningClass))
-				throw new IllegalArgumentException(
-						"Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningClass != null)
-				msgs = ((InternalEObject) newOwningClass).eInverseAdd(this,
-						StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE,
-						ClassDefinition.class, msgs);
-			msgs = basicSetOwningClass(newOwningClass, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
+	public void setIsID(Boolean newIsID) {
+		Boolean oldIsID = isID;
+		isID = newIsID;
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__OWNING_CLASS, newOwningClass,
-					newOwningClass));
+					StructurePackage.PROPERTY__IS_ID, oldIsID, isID));
 	}
 
 	/**
@@ -673,8 +634,10 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getIsID() {
-		return isID;
+	public ClassDefinition getOwningClass() {
+		if (eContainerFeatureID() != StructurePackage.PROPERTY__OWNING_CLASS)
+			return null;
+		return (ClassDefinition) eContainer();
 	}
 
 	/**
@@ -682,35 +645,49 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsID(Boolean newIsID) {
-		Boolean oldIsID = isID;
-		isID = newIsID;
-		if (eNotificationRequired())
+	public ClassDefinition basicGetOwningClass() {
+		if (eContainerFeatureID() != StructurePackage.PROPERTY__OWNING_CLASS)
+			return null;
+		return (ClassDefinition) eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningClass(
+			ClassDefinition newOwningClass, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newOwningClass,
+				StructurePackage.PROPERTY__OWNING_CLASS, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOwningClass(ClassDefinition newOwningClass) {
+		if (newOwningClass != eInternalContainer()
+				|| (eContainerFeatureID() != StructurePackage.PROPERTY__OWNING_CLASS && newOwningClass != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningClass))
+				throw new IllegalArgumentException(
+						"Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningClass != null)
+				msgs = ((InternalEObject) newOwningClass).eInverseAdd(this,
+						StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE,
+						ClassDefinition.class, msgs);
+			msgs = basicSetOwningClass(newOwningClass, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__IS_ID, oldIsID, isID));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Boolean getIsComposite() {
-		return isComposite;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsComposite(Boolean newIsComposite) {
-		Boolean oldIsComposite = isComposite;
-		isComposite = newIsComposite;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__IS_COMPOSITE, oldIsComposite,
-					isComposite));
+					StructurePackage.PROPERTY__OWNING_CLASS, newOwningClass,
+					newOwningClass));
 	}
 
 	/**
@@ -741,6 +718,29 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean getIsComposite() {
+		return isComposite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsComposite(Boolean newIsComposite) {
+		Boolean oldIsComposite = isComposite;
+		isComposite = newIsComposite;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PROPERTY__IS_COMPOSITE, oldIsComposite,
+					isComposite));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String createBehaviorJava(KM2EcoreContext context) {
 
 		java.lang.String result = null;
@@ -749,13 +749,13 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		java.lang.String javaCode = "";
 
-		java.lang.Boolean idIfCond_213 = false;
-		idIfCond_213 = this.getIsDerived();
+		java.lang.Boolean idIfCond_402 = false;
+		idIfCond_402 = this.getIsDerived();
 
-		if (idIfCond_213) {
+		if (idIfCond_402) {
 
-			java.lang.Boolean idIfCond_214 = false;
-			idIfCond_214 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_403 = false;
+			idIfCond_403 = kermeta.standard.helper.BooleanWrapper
 					.and(
 							kermeta.standard.helper.BooleanWrapper.not(this
 									.getIsReadOnly()),
@@ -764,7 +764,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 											.isVoidSwitcher(this
 													.getSetterBody())));
 
-			if (idIfCond_214) {
+			if (idIfCond_403) {
 
 				javaCode = this.getSetterBody().createBehaviorJava(context);
 
@@ -807,10 +807,10 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 			java.lang.String type_label = "";
 
-			java.lang.Boolean idIfCond_215 = false;
-			idIfCond_215 = context.getFtSuffixActivation();
+			java.lang.Boolean idIfCond_404 = false;
+			idIfCond_404 = context.getFtSuffixActivation();
 
-			if (idIfCond_215) {
+			if (idIfCond_404) {
 
 				type_label = context.getFtReturnType();
 
@@ -823,13 +823,13 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 						.ppTypeFromMultiplicityElement(this, context);
 			}
 
-			java.lang.Boolean idIfCond_216 = false;
-			idIfCond_216 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_405 = false;
+			idIfCond_405 = kermeta.standard.helper.BooleanWrapper
 					.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject(kermeta.language.structure.StructurePackage.eINSTANCE
 									.getOperation())).isVoidType(type_label));
 
-			if (idIfCond_216) {
+			if (idIfCond_405) {
 
 				javaCode = kermeta.standard.helper.StringWrapper
 						.plus(
@@ -849,12 +849,12 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 								" = null;\n");
 			}
 
-			java.lang.Boolean idIfCond_217 = false;
-			idIfCond_217 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_406 = false;
+			idIfCond_406 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(this.getGetterBody()));
 
-			if (idIfCond_217) {
+			if (idIfCond_406) {
 
 				javaCode = kermeta.standard.helper.StringWrapper.plus(javaCode,
 						this.getGetterBody().createBehaviorJava(context));
@@ -941,22 +941,22 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft83 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft74 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_218 = false;
-			while (!idLoopCond_218) {
-				idLoopCond_218 = it_ft83.isOff();
-				if (idLoopCond_218) {
+			java.lang.Boolean idLoopCond_407 = false;
+			while (!idLoopCond_407) {
+				idLoopCond_407 = it_ft74.isOff();
+				if (idLoopCond_407) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp83 = it_ft83.next();
+					kermeta.language.structure.Tag o_lbdExp74 = it_ft74.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp82 = o_lbdExp83;
+					kermeta.language.structure.Tag o_lbdExp73 = o_lbdExp74;
 
-					o_lbdExp82.applyPass1(context);
+					o_lbdExp73.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -988,13 +988,13 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 								.getInstance().getMetaClass(
 										"kermeta.language.structure.Type")));
 
-		java.lang.Boolean idIfCond_219 = false;
-		idIfCond_219 = kermeta.standard.helper.BooleanWrapper.or(
+		java.lang.Boolean idIfCond_408 = false;
+		idIfCond_408 = kermeta.standard.helper.BooleanWrapper.or(
 				kermeta.standard.helper.BooleanWrapper.or(current_type
 						.isValueType(), current_type.isEnumeration()),
 				current_type.isEDataType());
 
-		if (idIfCond_219) {
+		if (idIfCond_408) {
 
 			ecoreStructuralFeature = ((ecore.EAttribute) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(ecore.EcorePackage.eINSTANCE.getEAttribute()));
@@ -1017,10 +1017,10 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 				.setEStructuralFeatureProperties(this, ecoreStructuralFeature,
 						context);
 
-		java.lang.Boolean idIfCond_220 = false;
-		idIfCond_220 = this.getIsDerived();
+		java.lang.Boolean idIfCond_409 = false;
+		idIfCond_409 = this.getIsDerived();
 
-		if (idIfCond_220) {
+		if (idIfCond_409) {
 
 			ecore.EAnnotation annotation = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
@@ -1040,8 +1040,8 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		ecoreStructuralFeature.set_transient(this.getEMFIsTransient());
 
-		java.lang.Boolean idIfCond_221 = false;
-		idIfCond_221 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_410 = false;
+		idIfCond_410 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.and(
@@ -1064,7 +1064,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 												.qualifiedName(),
 										"kermeta::language::structure::Enumeration"));
 
-		if (idIfCond_221) {
+		if (idIfCond_410) {
 
 			((ecore.EAttribute) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(ecoreStructuralFeature,
@@ -1091,39 +1091,39 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		result = "";
 
-		java.lang.Boolean idIfCond_222 = false;
-		idIfCond_222 = this.getIsDerived();
+		java.lang.Boolean idIfCond_411 = false;
+		idIfCond_411 = this.getIsDerived();
 
-		if (idIfCond_222) {
+		if (idIfCond_411) {
 
 			result = "getter";
 		} else {
 
 			java.lang.Boolean isBoolean = false;
 
-			java.lang.Boolean idIfCond_223 = false;
-			idIfCond_223 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_412 = false;
+			idIfCond_412 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(this.getEcoreModelElement()));
 
-			if (idIfCond_223) {
+			if (idIfCond_412) {
 
-				java.lang.Boolean idIfCond_224 = false;
-				idIfCond_224 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_413 = false;
+				idIfCond_413 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(this.getEcoreModelElement(),
 								org.kermeta.compil.runtime.ExecutionContext
 										.getInstance().getMetaClass(
 												"ecore.EAttribute"));
 
-				if (idIfCond_224) {
+				if (idIfCond_413) {
 
-					java.lang.Boolean idIfCond_225 = false;
-					idIfCond_225 = kermeta.standard.helper.StringWrapper
+					java.lang.Boolean idIfCond_414 = false;
+					idIfCond_414 = kermeta.standard.helper.StringWrapper
 							.equals(this.getType()
 									.getEMFEDataTypeInstanceClassName(),
 									"boolean");
 
-					if (idIfCond_225) {
+					if (idIfCond_414) {
 
 						isBoolean = true;
 					}
@@ -1132,10 +1132,10 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 			}
 
-			java.lang.Boolean idIfCond_226 = false;
-			idIfCond_226 = isBoolean;
+			java.lang.Boolean idIfCond_415 = false;
+			idIfCond_415 = isBoolean;
 
-			if (idIfCond_226) {
+			if (idIfCond_415) {
 
 				result = "is";
 			} else {
@@ -1178,10 +1178,10 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		result = "";
 
-		java.lang.Boolean idIfCond_227 = false;
-		idIfCond_227 = this.getIsDerived();
+		java.lang.Boolean idIfCond_416 = false;
+		idIfCond_416 = this.getIsDerived();
 
-		if (idIfCond_227) {
+		if (idIfCond_416) {
 
 			result = "setter";
 		} else {
@@ -1209,20 +1209,20 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 						.getLinkSetterForTypedElement())).setLinks(this, this
 				.getEcoreModelElement(), context);
 
-		java.lang.Boolean idIfCond_228 = false;
-		idIfCond_228 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_417 = false;
+		idIfCond_417 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getOpposite()));
 
-		if (idIfCond_228) {
+		if (idIfCond_417) {
 
-			java.lang.Boolean idIfCond_229 = false;
-			idIfCond_229 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_418 = false;
+			idIfCond_418 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(this.getOpposite()
 									.getEcoreModelElement()));
 
-			if (idIfCond_229) {
+			if (idIfCond_418) {
 
 				((ecore.EReference) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(this.getEcoreModelElement(),
@@ -1240,40 +1240,40 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		}
 
-		java.lang.Boolean idIfCond_230 = false;
-		idIfCond_230 = kermeta.standard.helper.StringWrapper.equals(this
+		java.lang.Boolean idIfCond_419 = false;
+		idIfCond_419 = kermeta.standard.helper.StringWrapper.equals(this
 				.getType().getTypeQName(), "kermeta::standard::Boolean");
 
-		if (idIfCond_230) {
+		if (idIfCond_419) {
 
 			java.lang.Boolean mustSetted = false;
 
-			java.lang.Boolean idIfCond_231 = false;
-			idIfCond_231 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_420 = false;
+			idIfCond_420 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isVoidSwitcher(this.getEcoreModelElement()
 							.getDefaultValueLiteral());
 
-			if (idIfCond_231) {
+			if (idIfCond_420) {
 
 				mustSetted = true;
 			} else {
 
-				java.lang.Boolean idIfCond_232 = false;
-				idIfCond_232 = kermeta.standard.helper.StringWrapper.equals(
+				java.lang.Boolean idIfCond_421 = false;
+				idIfCond_421 = kermeta.standard.helper.StringWrapper.equals(
 						this.getEcoreModelElement().getDefaultValueLiteral(),
 						"");
 
-				if (idIfCond_232) {
+				if (idIfCond_421) {
 
 					mustSetted = true;
 				}
 
 			}
 
-			java.lang.Boolean idIfCond_233 = false;
-			idIfCond_233 = mustSetted;
+			java.lang.Boolean idIfCond_422 = false;
+			idIfCond_422 = mustSetted;
 
-			if (idIfCond_233) {
+			if (idIfCond_422) {
 
 				this.getEcoreModelElement().setDefaultValueLiteral("false");
 			}
@@ -1297,22 +1297,22 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft85 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft76 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_234 = false;
-			while (!idLoopCond_234) {
-				idLoopCond_234 = it_ft85.isOff();
-				if (idLoopCond_234) {
+			java.lang.Boolean idLoopCond_423 = false;
+			while (!idLoopCond_423) {
+				idLoopCond_423 = it_ft76.isOff();
+				if (idLoopCond_423) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp85 = it_ft85.next();
+					kermeta.language.structure.Tag o_lbdExp76 = it_ft76.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp84 = o_lbdExp85;
+					kermeta.language.structure.Tag p_lbdExp75 = o_lbdExp76;
 
-					p_lbdExp84.applyPass2BehaviorJava(context);
+					p_lbdExp75.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -1373,7 +1373,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case StructurePackage.PROPERTY__OWNING_CLASS:
 			return eInternalContainer().eInverseRemove(this,
 					StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE,
@@ -1412,18 +1412,18 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 			if (resolve)
 				return getSetterBody();
 			return basicGetSetterBody();
+		case StructurePackage.PROPERTY__IS_ID:
+			return getIsID();
+		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
+			return getIsSetterAbstract();
 		case StructurePackage.PROPERTY__OWNING_CLASS:
 			if (resolve)
 				return getOwningClass();
 			return basicGetOwningClass();
-		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
-			return getIsSetterAbstract();
-		case StructurePackage.PROPERTY__IS_ID:
-			return getIsID();
-		case StructurePackage.PROPERTY__IS_COMPOSITE:
-			return getIsComposite();
 		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
 			return getIsGetterAbstract();
+		case StructurePackage.PROPERTY__IS_COMPOSITE:
+			return getIsComposite();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1457,20 +1457,20 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 		case StructurePackage.PROPERTY__SETTER_BODY:
 			setSetterBody((Expression) newValue);
 			return;
-		case StructurePackage.PROPERTY__OWNING_CLASS:
-			setOwningClass((ClassDefinition) newValue);
+		case StructurePackage.PROPERTY__IS_ID:
+			setIsID((Boolean) newValue);
 			return;
 		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
 			setIsSetterAbstract((Boolean) newValue);
 			return;
-		case StructurePackage.PROPERTY__IS_ID:
-			setIsID((Boolean) newValue);
-			return;
-		case StructurePackage.PROPERTY__IS_COMPOSITE:
-			setIsComposite((Boolean) newValue);
+		case StructurePackage.PROPERTY__OWNING_CLASS:
+			setOwningClass((ClassDefinition) newValue);
 			return;
 		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
 			setIsGetterAbstract((Boolean) newValue);
+			return;
+		case StructurePackage.PROPERTY__IS_COMPOSITE:
+			setIsComposite((Boolean) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -1505,20 +1505,20 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 		case StructurePackage.PROPERTY__SETTER_BODY:
 			setSetterBody((Expression) null);
 			return;
-		case StructurePackage.PROPERTY__OWNING_CLASS:
-			setOwningClass((ClassDefinition) null);
+		case StructurePackage.PROPERTY__IS_ID:
+			setIsID(IS_ID_EDEFAULT);
 			return;
 		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
 			setIsSetterAbstract(IS_SETTER_ABSTRACT_EDEFAULT);
 			return;
-		case StructurePackage.PROPERTY__IS_ID:
-			setIsID(IS_ID_EDEFAULT);
-			return;
-		case StructurePackage.PROPERTY__IS_COMPOSITE:
-			setIsComposite(IS_COMPOSITE_EDEFAULT);
+		case StructurePackage.PROPERTY__OWNING_CLASS:
+			setOwningClass((ClassDefinition) null);
 			return;
 		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
 			setIsGetterAbstract(IS_GETTER_ABSTRACT_EDEFAULT);
+			return;
+		case StructurePackage.PROPERTY__IS_COMPOSITE:
+			setIsComposite(IS_COMPOSITE_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -1549,20 +1549,20 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 					: !IS_READ_ONLY_EDEFAULT.equals(isReadOnly);
 		case StructurePackage.PROPERTY__SETTER_BODY:
 			return setterBody != null;
-		case StructurePackage.PROPERTY__OWNING_CLASS:
-			return basicGetOwningClass() != null;
-		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
-			return IS_SETTER_ABSTRACT_EDEFAULT == null ? isSetterAbstract != null
-					: !IS_SETTER_ABSTRACT_EDEFAULT.equals(isSetterAbstract);
 		case StructurePackage.PROPERTY__IS_ID:
 			return IS_ID_EDEFAULT == null ? isID != null : !IS_ID_EDEFAULT
 					.equals(isID);
-		case StructurePackage.PROPERTY__IS_COMPOSITE:
-			return IS_COMPOSITE_EDEFAULT == null ? isComposite != null
-					: !IS_COMPOSITE_EDEFAULT.equals(isComposite);
+		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
+			return IS_SETTER_ABSTRACT_EDEFAULT == null ? isSetterAbstract != null
+					: !IS_SETTER_ABSTRACT_EDEFAULT.equals(isSetterAbstract);
+		case StructurePackage.PROPERTY__OWNING_CLASS:
+			return basicGetOwningClass() != null;
 		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
 			return IS_GETTER_ABSTRACT_EDEFAULT == null ? isGetterAbstract != null
 					: !IS_GETTER_ABSTRACT_EDEFAULT.equals(isGetterAbstract);
+		case StructurePackage.PROPERTY__IS_COMPOSITE:
+			return IS_COMPOSITE_EDEFAULT == null ? isComposite != null
+					: !IS_COMPOSITE_EDEFAULT.equals(isComposite);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1620,14 +1620,14 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 		result.append(isDerived);
 		result.append(", isReadOnly: ");
 		result.append(isReadOnly);
-		result.append(", isSetterAbstract: ");
-		result.append(isSetterAbstract);
 		result.append(", isID: ");
 		result.append(isID);
-		result.append(", isComposite: ");
-		result.append(isComposite);
+		result.append(", isSetterAbstract: ");
+		result.append(isSetterAbstract);
 		result.append(", isGetterAbstract: ");
 		result.append(isGetterAbstract);
+		result.append(", isComposite: ");
+		result.append(isComposite);
 		result.append(')');
 		return result.toString();
 	}

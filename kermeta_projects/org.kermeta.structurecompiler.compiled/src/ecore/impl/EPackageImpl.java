@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EPackageImpl.java,v 1.13 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -178,7 +178,7 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 	 * @generated
 	 */
 	public EPackage getESuperPackage() {
-		if (eContainerFeatureID != EcorePackage.EPACKAGE__ESUPER_PACKAGE)
+		if (eContainerFeatureID() != EcorePackage.EPACKAGE__ESUPER_PACKAGE)
 			return null;
 		return (EPackage) eContainer();
 	}
@@ -189,7 +189,7 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 	 * @generated
 	 */
 	public EPackage basicGetESuperPackage() {
-		if (eContainerFeatureID != EcorePackage.EPACKAGE__ESUPER_PACKAGE)
+		if (eContainerFeatureID() != EcorePackage.EPACKAGE__ESUPER_PACKAGE)
 			return null;
 		return (EPackage) eInternalContainer();
 	}
@@ -380,7 +380,7 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case EcorePackage.EPACKAGE__ESUPER_PACKAGE:
 			return eInternalContainer().eInverseRemove(this,
 					EcorePackage.EPACKAGE__ESUBPACKAGES, EPackage.class, msgs);

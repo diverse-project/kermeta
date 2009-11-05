@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EEnum.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see ecore.EcorePackage#getEEnum()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EEnum extends EDataType {
@@ -41,6 +41,7 @@ public interface EEnum extends EDataType {
 	 * @see ecore.EcorePackage#getEEnum_ELiterals()
 	 * @see ecore.EEnumLiteral#getEEnum
 	 * @model opposite="eEnum" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EEnumLiteral> getELiterals();
@@ -48,18 +49,9 @@ public interface EEnum extends EDataType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model nameDataType="ecore.EString"
-	 *        annotation="kermeta isAbstract='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EEnumLiteral result = null;\n\nreturn result;\n'"
-	 * @generated
-	 */
-	EEnumLiteral op_getEEnumLiteral(String name);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model valueDataType="ecore.EInt"
-	 *        annotation="kermeta isAbstract='true'"
+	 * @model annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EEnumLiteral result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -68,8 +60,8 @@ public interface EEnum extends EDataType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model literalDataType="ecore.EString"
-	 *        annotation="kermeta isAbstract='true'"
+	 * @model annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EEnumLiteral result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */

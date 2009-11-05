@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Exception.java,v 1.12 2009-02-23 15:26:43 cfaucher Exp $
+ * $Id$
  */
 package kermeta.exceptions;
 
@@ -23,7 +23,7 @@ package kermeta.exceptions;
  * </p>
  *
  * @see kermeta.exceptions.ExceptionsPackage#getException()
- * @model annotation="kermeta documentation='/**\r\n * Generic exceptions\r\n * The main class from which all the exception inherit\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * Generic exceptions\n * The main class from which all the exception inherit\n \052/'"
  * @generated
  */
 public interface Exception extends kermeta.language.structure.Object {
@@ -93,7 +93,7 @@ public interface Exception extends kermeta.language.structure.Object {
 	 * @see #setStackTrace(String)
 	 * @see kermeta.exceptions.ExceptionsPackage#getException_StackTrace()
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\r\n     * The stack trace as a String\r\n     * Filled by the interpreted when the exception is raised\r\n     \052/'"
+	 *        annotation="kermeta documentation='/**\n     * The stack trace as a String\n     * Filled by the interpreted when the exception is raised\n     \052/'"
 	 * @generated
 	 */
 	String getStackTrace();

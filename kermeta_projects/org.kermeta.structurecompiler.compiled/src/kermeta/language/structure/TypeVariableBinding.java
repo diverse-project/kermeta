@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TypeVariableBinding.java,v 1.12 2009-02-23 15:26:48 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure;
 
@@ -22,7 +22,8 @@ package kermeta.language.structure;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getTypeVariableBinding()
- * @model annotation="kermeta documentation='Definition of a binding between a TypeVariable and a Type'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Definition of a binding between a TypeVariable and a Type'"
  * @generated
  */
 public interface TypeVariableBinding extends TypeContainer {
@@ -38,6 +39,7 @@ public interface TypeVariableBinding extends TypeContainer {
 	 * @see #setType(Type)
 	 * @see kermeta.language.structure.StructurePackage#getTypeVariableBinding_Type()
 	 * @model required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Assigned Type'"
 	 * @generated
 	 */
@@ -65,6 +67,7 @@ public interface TypeVariableBinding extends TypeContainer {
 	 * @see #setVariable(TypeVariable)
 	 * @see kermeta.language.structure.StructurePackage#getTypeVariableBinding_Variable()
 	 * @model required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='TypeVariable'"
 	 * @generated
 	 */

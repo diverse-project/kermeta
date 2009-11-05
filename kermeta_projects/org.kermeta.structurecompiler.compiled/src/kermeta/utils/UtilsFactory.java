@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: UtilsFactory.java,v 1.12 2009-02-23 15:26:53 cfaucher Exp $
+ * $Id$
  */
 package kermeta.utils;
 
@@ -34,7 +34,7 @@ public interface UtilsFactory extends EFactory {
 	 * @return a new object of class '<em>String Buffer</em>'.
 	 * @generated
 	 */
-	kermeta.utils.StringBuffer createStringBuffer();
+	StringBuffer createStringBuffer();
 
 	/**
 	 * Returns a new object of class '<em>Hashtable</em>'.

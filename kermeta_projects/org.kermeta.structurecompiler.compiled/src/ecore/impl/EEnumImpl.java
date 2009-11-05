@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EEnumImpl.java,v 1.13 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -79,18 +79,6 @@ public class EEnumImpl extends EDataTypeImpl implements EEnum {
 					EcorePackage.EENUM_LITERAL__EENUM);
 		}
 		return eLiterals;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EEnumLiteral op_getEEnumLiteral(String name) {
-		ecore.EEnumLiteral result = null;
-
-		return result;
-
 	}
 
 	/**

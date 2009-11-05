@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EReference.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see ecore.EcorePackage#getEReference()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EReference extends EStructuralFeature {
@@ -41,7 +41,7 @@ public interface EReference extends EStructuralFeature {
 	 * @return the value of the '<em>EOpposite</em>' reference.
 	 * @see #setEOpposite(EReference)
 	 * @see ecore.EcorePackage#getEReference_EOpposite()
-	 * @model
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EReference getEOpposite();
@@ -68,7 +68,8 @@ public interface EReference extends EStructuralFeature {
 	 * @return the value of the '<em>Resolve Proxies</em>' attribute.
 	 * @see #setResolveProxies(boolean)
 	 * @see ecore.EcorePackage#getEReference_ResolveProxies()
-	 * @model default="true" dataType="ecore.EBoolean"
+	 * @model default="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	boolean isResolveProxies();
@@ -94,7 +95,7 @@ public interface EReference extends EStructuralFeature {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>EKeys</em>' reference list.
 	 * @see ecore.EcorePackage#getEReference_EKeys()
-	 * @model
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EAttribute> getEKeys();
@@ -111,7 +112,8 @@ public interface EReference extends EStructuralFeature {
 	 * @return the value of the '<em>Containment</em>' attribute.
 	 * @see #setContainment(boolean)
 	 * @see ecore.EcorePackage#getEReference_Containment()
-	 * @model default="false" dataType="ecore.EBoolean"
+	 * @model default="false"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	boolean isContainment();
@@ -137,8 +139,7 @@ public interface EReference extends EStructuralFeature {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="ecore.EBoolean"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\nreturn result;\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	boolean getterContainer();

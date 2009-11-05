@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: PrimitiveTypeImpl.java,v 1.12 2009-02-23 15:26:40 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure.impl;
 
@@ -212,20 +212,20 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 
 		result = "";
 
-		java.lang.Boolean idIfCond_317 = false;
-		idIfCond_317 = kermeta.standard.helper.BooleanWrapper.and(
+		java.lang.Boolean idIfCond_518 = false;
+		idIfCond_518 = kermeta.standard.helper.BooleanWrapper.and(
 				kermeta.standard.helper.BooleanWrapper.not(this.isValueType()),
 				this.isEDataType());
 
-		if (idIfCond_317) {
+		if (idIfCond_518) {
 
 			result = this.getEMFEDataTypeInstanceClassName();
 		}
 
-		java.lang.Boolean idIfCond_318 = false;
-		idIfCond_318 = kermeta.standard.helper.StringWrapper.equals(result, "");
+		java.lang.Boolean idIfCond_519 = false;
+		idIfCond_519 = kermeta.standard.helper.StringWrapper.equals(result, "");
 
-		if (idIfCond_318) {
+		if (idIfCond_519) {
 
 			result = this.getInstanceType().createBehaviorJava(context);
 		}
@@ -264,23 +264,23 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft111 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft100 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_319 = false;
-			while (!idLoopCond_319) {
-				idLoopCond_319 = it_ft111.isOff();
-				if (idLoopCond_319) {
+			java.lang.Boolean idLoopCond_520 = false;
+			while (!idLoopCond_520) {
+				idLoopCond_520 = it_ft100.isOff();
+				if (idLoopCond_520) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp111 = it_ft111
+					kermeta.language.structure.Tag o_lbdExp100 = it_ft100
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag cd_lbdExp110 = o_lbdExp111;
+					kermeta.language.structure.Tag cd_lbdExp99 = o_lbdExp100;
 
-					cd_lbdExp110.applyPass1(context);
+					cd_lbdExp99.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -318,43 +318,43 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 		java.lang.String instanceClassName = this
 				.getEMFEDataTypeInstanceClassName();
 
-		java.lang.Boolean idIfCond_320 = false;
-		idIfCond_320 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_521 = false;
+		idIfCond_521 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(instanceClassName, "");
 
-		if (idIfCond_320) {
+		if (idIfCond_521) {
 
 			eModelElement.setInstanceClassName(instanceClassName);
 
 			kermeta.standard.Sequence<java.lang.String> etps = kermeta.standard.helper.StringWrapper
 					.split(this.getEMFEDataTypeETypeParameters(), " , ");
 
-			java.lang.Boolean idIfCond_321 = false;
-			idIfCond_321 = kermeta.standard.helper.IntegerWrapper.isGreater(
+			java.lang.Boolean idIfCond_522 = false;
+			idIfCond_522 = kermeta.standard.helper.IntegerWrapper.isGreater(
 					etps.size(), 0);
 
-			if (idIfCond_321) {
+			if (idIfCond_522) {
 
 				//BIft:each
 
 				{
 
-					kermeta.standard.Iterator<java.lang.String> it_ft112 = etps
+					kermeta.standard.Iterator<java.lang.String> it_ft101 = etps
 							.iterator();
-					java.lang.Boolean idLoopCond_322 = false;
-					while (!idLoopCond_322) {
-						idLoopCond_322 = it_ft112.isOff();
-						if (idLoopCond_322) {
+					java.lang.Boolean idLoopCond_523 = false;
+					while (!idLoopCond_523) {
+						idLoopCond_523 = it_ft101.isOff();
+						if (idLoopCond_523) {
 						} else {
 
 							//BIle:func
-							java.lang.String etp_lbdExp112 = it_ft112.next();
+							java.lang.String etp_lbdExp101 = it_ft101.next();
 
-							java.lang.Boolean idIfCond_323 = false;
-							idIfCond_323 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.isNotEqualSwitcher(etp_lbdExp112, "");
+							java.lang.Boolean idIfCond_524 = false;
+							idIfCond_524 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+									.isNotEqualSwitcher(etp_lbdExp101, "");
 
-							if (idIfCond_323) {
+							if (idIfCond_524) {
 
 								ecore.ETypeParameter ecoreTypeParameter = ((ecore.ETypeParameter) org.kermeta.compil.runtime.helper.language.ClassUtil
 										.newObject(ecore.EcorePackage.eINSTANCE
@@ -365,7 +365,7 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 												.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE
 														.getIdentifierHelper()))
 												.getMangledIdentifier(
-														etp_lbdExp112, context));
+														etp_lbdExp101, context));
 
 								org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 										.<ecore.ETypeParameter> convertAsOrderedSet(
@@ -397,8 +397,8 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 		java.lang.String typeDef_EMFInstanceClassName = typeDef
 				.getEMFInstanceClassName();
 
-		java.lang.Boolean idIfCond_324 = false;
-		idIfCond_324 = kermeta.standard.helper.BooleanWrapper.and(
+		java.lang.Boolean idIfCond_525 = false;
+		idIfCond_525 = kermeta.standard.helper.BooleanWrapper.and(
 				org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isNotEqualSwitcher(typeDef_EMFInstanceClassName, ""),
 				kermeta.standard.helper.BooleanWrapper.or(
@@ -408,7 +408,7 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 								eModelElement.getInstanceClassName(),
 								"java.lang.Object")));
 
-		if (idIfCond_324) {
+		if (idIfCond_525) {
 
 			eModelElement.setInstanceClassName(typeDef_EMFInstanceClassName);
 		}
@@ -429,11 +429,11 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 														.getName()),
 										qualifiedName));
 
-		java.lang.Boolean idIfCond_325 = false;
-		idIfCond_325 = kermeta.standard.helper.StringWrapper.equals(
+		java.lang.Boolean idIfCond_526 = false;
+		idIfCond_526 = kermeta.standard.helper.StringWrapper.equals(
 				eModelElement.getInstanceClassName(), "");
 
-		if (idIfCond_325) {
+		if (idIfCond_526) {
 
 			eModelElement
 					.setInstanceClassName(kermeta.standard.helper.StringWrapper

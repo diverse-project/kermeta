@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: DataType.java,v 1.12 2009-02-23 15:26:48 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure;
 
@@ -16,6 +16,7 @@ package kermeta.language.structure;
  *
  * @see kermeta.language.structure.StructurePackage#getDataType()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Special type definition for Enumeration, PrimitiveType'"
  * @generated
  */

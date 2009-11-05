@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SMMethod.java,v 1.9 2009-02-23 15:26:55 cfaucher Exp $
+ * $Id$
  */
 package simk;
 
@@ -26,19 +26,19 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link simk.SMMethod#getBody <em>Body</em>}</li>
  *   <li>{@link simk.SMMethod#getParentEReference <em>Parent EReference</em>}</li>
  *   <li>{@link simk.SMMethod#is_static <em>static</em>}</li>
- *   <li>{@link simk.SMMethod#getParentEOperation <em>Parent EOperation</em>}</li>
  *   <li>{@link simk.SMMethod#getTypeParameters <em>Type Parameters</em>}</li>
+ *   <li>{@link simk.SMMethod#getParentEOperation <em>Parent EOperation</em>}</li>
  *   <li>{@link simk.SMMethod#getParentEAttribute <em>Parent EAttribute</em>}</li>
  *   <li>{@link simk.SMMethod#getSMParameters <em>SM Parameters</em>}</li>
  *   <li>{@link simk.SMMethod#getSMReturn <em>SM Return</em>}</li>
- *   <li>{@link simk.SMMethod#getSMContext <em>SM Context</em>}</li>
  *   <li>{@link simk.SMMethod#getUsages <em>Usages</em>}</li>
+ *   <li>{@link simk.SMMethod#getSMContext <em>SM Context</em>}</li>
  *   <li>{@link simk.SMMethod#getAccess <em>Access</em>}</li>
  * </ul>
  * </p>
  *
  * @see simk.SimkPackage#getSMMethod()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface SMMethod extends SMNamedElement {
@@ -54,7 +54,8 @@ public interface SMMethod extends SMNamedElement {
 	 * @return the value of the '<em>abstract</em>' attribute.
 	 * @see #set_abstract(boolean)
 	 * @see simk.SimkPackage#getSMMethod__abstract()
-	 * @model default="false" dataType="ecore.EBoolean"
+	 * @model default="false"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	boolean is_abstract();
@@ -80,7 +81,7 @@ public interface SMMethod extends SMNamedElement {
 	 * @return the value of the '<em>Body</em>' attribute.
 	 * @see #setBody(String)
 	 * @see simk.SimkPackage#getSMMethod_Body()
-	 * @model dataType="ecore.EString"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getBody();
@@ -106,7 +107,7 @@ public interface SMMethod extends SMNamedElement {
 	 * @return the value of the '<em>Parent EReference</em>' reference.
 	 * @see #setParentEReference(EReference)
 	 * @see simk.SimkPackage#getSMMethod_ParentEReference()
-	 * @model
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EReference getParentEReference();
@@ -133,7 +134,8 @@ public interface SMMethod extends SMNamedElement {
 	 * @return the value of the '<em>static</em>' attribute.
 	 * @see #set_static(boolean)
 	 * @see simk.SimkPackage#getSMMethod__static()
-	 * @model default="true" dataType="ecore.EBoolean"
+	 * @model default="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	boolean is_static();
@@ -149,32 +151,6 @@ public interface SMMethod extends SMNamedElement {
 	void set_static(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Parent EOperation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Parent EOperation</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent EOperation</em>' reference.
-	 * @see #setParentEOperation(EOperation)
-	 * @see simk.SimkPackage#getSMMethod_ParentEOperation()
-	 * @model
-	 * @generated
-	 */
-	EOperation getParentEOperation();
-
-	/**
-	 * Sets the value of the '{@link simk.SMMethod#getParentEOperation <em>Parent EOperation</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent EOperation</em>' reference.
-	 * @see #getParentEOperation()
-	 * @generated
-	 */
-	void setParentEOperation(EOperation value);
-
-	/**
 	 * Returns the value of the '<em><b>Type Parameters</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -185,7 +161,7 @@ public interface SMMethod extends SMNamedElement {
 	 * @return the value of the '<em>Type Parameters</em>' attribute.
 	 * @see #setTypeParameters(String)
 	 * @see simk.SimkPackage#getSMMethod_TypeParameters()
-	 * @model dataType="ecore.EString"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getTypeParameters();
@@ -201,6 +177,32 @@ public interface SMMethod extends SMNamedElement {
 	void setTypeParameters(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Parent EOperation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parent EOperation</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parent EOperation</em>' reference.
+	 * @see #setParentEOperation(EOperation)
+	 * @see simk.SimkPackage#getSMMethod_ParentEOperation()
+	 * @model annotation="kermeta ecore='true'"
+	 * @generated
+	 */
+	EOperation getParentEOperation();
+
+	/**
+	 * Sets the value of the '{@link simk.SMMethod#getParentEOperation <em>Parent EOperation</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Parent EOperation</em>' reference.
+	 * @see #getParentEOperation()
+	 * @generated
+	 */
+	void setParentEOperation(EOperation value);
+
+	/**
 	 * Returns the value of the '<em><b>Parent EAttribute</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -211,7 +213,7 @@ public interface SMMethod extends SMNamedElement {
 	 * @return the value of the '<em>Parent EAttribute</em>' reference.
 	 * @see #setParentEAttribute(EAttribute)
 	 * @see simk.SimkPackage#getSMMethod_ParentEAttribute()
-	 * @model
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EAttribute getParentEAttribute();
@@ -238,6 +240,7 @@ public interface SMMethod extends SMNamedElement {
 	 * @return the value of the '<em>SM Parameters</em>' containment reference list.
 	 * @see simk.SimkPackage#getSMMethod_SMParameters()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<SMParameter> getSMParameters();
@@ -254,6 +257,7 @@ public interface SMMethod extends SMNamedElement {
 	 * @see #setSMReturn(SMReturn)
 	 * @see simk.SimkPackage#getSMMethod_SMReturn()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	SMReturn getSMReturn();
@@ -269,34 +273,6 @@ public interface SMMethod extends SMNamedElement {
 	void setSMReturn(SMReturn value);
 
 	/**
-	 * Returns the value of the '<em><b>SM Context</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link simk.SMContext#getSMMethods <em>SM Methods</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SM Context</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>SM Context</em>' reference.
-	 * @see #setSMContext(SMContext)
-	 * @see simk.SimkPackage#getSMMethod_SMContext()
-	 * @see simk.SMContext#getSMMethods
-	 * @model opposite="sMMethods"
-	 * @generated
-	 */
-	SMContext getSMContext();
-
-	/**
-	 * Sets the value of the '{@link simk.SMMethod#getSMContext <em>SM Context</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SM Context</em>' reference.
-	 * @see #getSMContext()
-	 * @generated
-	 */
-	void setSMContext(SMContext value);
-
-	/**
 	 * Returns the value of the '<em><b>Usages</b></em>' attribute.
 	 * The literals are from the enumeration {@link simk.SMUsage}.
 	 * <!-- begin-user-doc -->
@@ -310,6 +286,7 @@ public interface SMMethod extends SMNamedElement {
 	 * @see #setUsages(SMUsage)
 	 * @see simk.SimkPackage#getSMMethod_Usages()
 	 * @model transient="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	SMUsage getUsages();
@@ -326,6 +303,35 @@ public interface SMMethod extends SMNamedElement {
 	void setUsages(SMUsage value);
 
 	/**
+	 * Returns the value of the '<em><b>SM Context</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link simk.SMContext#getSMMethods <em>SM Methods</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SM Context</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SM Context</em>' reference.
+	 * @see #setSMContext(SMContext)
+	 * @see simk.SimkPackage#getSMMethod_SMContext()
+	 * @see simk.SMContext#getSMMethods
+	 * @model opposite="sMMethods"
+	 *        annotation="kermeta ecore='true'"
+	 * @generated
+	 */
+	SMContext getSMContext();
+
+	/**
+	 * Sets the value of the '{@link simk.SMMethod#getSMContext <em>SM Context</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>SM Context</em>' reference.
+	 * @see #getSMContext()
+	 * @generated
+	 */
+	void setSMContext(SMContext value);
+
+	/**
 	 * Returns the value of the '<em><b>Access</b></em>' attribute.
 	 * The default value is <code>"public"</code>.
 	 * The literals are from the enumeration {@link simk.SMAccess}.
@@ -340,6 +346,7 @@ public interface SMMethod extends SMNamedElement {
 	 * @see #setAccess(SMAccess)
 	 * @see simk.SimkPackage#getSMMethod_Access()
 	 * @model default="public" transient="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	SMAccess getAccess();
@@ -369,6 +376,7 @@ public interface SMMethod extends SMNamedElement {
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 *        annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EOperation result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */

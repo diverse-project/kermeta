@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EClassifier.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see ecore.EcorePackage#getEClassifier()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EClassifier extends ENamedElement {
@@ -42,6 +43,7 @@ public interface EClassifier extends ENamedElement {
 	 * @see #setInstanceClassName(String)
 	 * @see ecore.EcorePackage#getEClassifier_InstanceClassName()
 	 * @model dataType="ecore.EString"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getInstanceClassName();
@@ -69,6 +71,7 @@ public interface EClassifier extends ENamedElement {
 	 * @see ecore.EcorePackage#getEClassifier_EPackage()
 	 * @see ecore.EPackage#getEClassifiers
 	 * @model opposite="eClassifiers" changeable="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */
@@ -86,6 +89,7 @@ public interface EClassifier extends ENamedElement {
 	 * @return the value of the '<em>EType Parameters</em>' containment reference list.
 	 * @see ecore.EcorePackage#getEClassifier_ETypeParameters()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<ETypeParameter> getETypeParameters();
@@ -101,7 +105,7 @@ public interface EClassifier extends ENamedElement {
 	 * @return the value of the '<em>Instance Type Name</em>' attribute.
 	 * @see #setInstanceTypeName(String)
 	 * @see ecore.EcorePackage#getEClassifier_InstanceTypeName()
-	 * @model dataType="ecore.EString"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getInstanceTypeName();
@@ -119,8 +123,8 @@ public interface EClassifier extends ENamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="ecore.EBoolean" objectDataType="ecore.EJavaObject"
-	 *        annotation="kermeta isAbstract='true'"
+	 * @model annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Boolean result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -129,8 +133,9 @@ public interface EClassifier extends ENamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="ecore.EInt"
+	 * @model kind="operation"
 	 *        annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Integer result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -139,8 +144,7 @@ public interface EClassifier extends ENamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="ecore.EJavaClass<?>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Class result = null;\n\nreturn result;\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Class result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Class<?> getterInstanceClass();
@@ -148,8 +152,7 @@ public interface EClassifier extends ENamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="ecore.EJavaObject"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Object result = null;\n\nreturn result;\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Object result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Object getterDefaultValue();

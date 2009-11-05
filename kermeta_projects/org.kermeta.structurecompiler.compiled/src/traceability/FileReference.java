@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: FileReference.java,v 1.12 2009-02-23 15:26:53 cfaucher Exp $
+ * $Id$
  */
 package traceability;
 
@@ -22,6 +22,7 @@ package traceability;
  *
  * @see traceability.TraceabilityPackage#getFileReference()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='/**\r\n * This class represents a reference to a concrete object contained by a file\r\n \052/'"
  * @generated
  */
@@ -38,6 +39,7 @@ public interface FileReference extends Reference {
 	 * @see #setFileURI(String)
 	 * @see traceability.TraceabilityPackage#getFileReference_FileURI()
 	 * @model dataType="traceability.String" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** URI of the file containing the referred concrete object \052/'"
 	 * @generated
 	 */

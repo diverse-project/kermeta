@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StringLiteralImpl.java,v 1.13 2009-02-23 15:26:46 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior.impl;
 
@@ -107,11 +107,11 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 
 		result = this.getValue();
 
-		java.lang.Boolean idIfCond_696 = false;
-		idIfCond_696 = kermeta.standard.helper.StringWrapper
+		java.lang.Boolean idIfCond_288 = false;
+		idIfCond_288 = kermeta.standard.helper.StringWrapper
 				.equals(result, ".");
 
-		if (idIfCond_696) {
+		if (idIfCond_288) {
 
 			result = "\".\"";
 		} else {
@@ -134,8 +134,8 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 					"\r", "\\r");
 		}
 
-		java.lang.Boolean idIfCond_697 = false;
-		idIfCond_697 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_289 = false;
+		idIfCond_289 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -145,7 +145,7 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 										.getMetaClass(
 												"kermeta.language.behavior.VariableDecl")));
 
-		if (idIfCond_697) {
+		if (idIfCond_289) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result, this
 					.endOfExpressionFixer());

@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIOUtil.java,v 1.12 2009-02-23 15:27:04 cfaucher Exp $
+/* $Id: SimpleFileIOUtil.java,v 1.7 2008-11-19 15:07:06 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -16,19 +16,27 @@
 package org.kermeta.compil.runtime.helper.io;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 
 
 public class SimpleFileIOUtil {
@@ -46,8 +54,11 @@ public class SimpleFileIOUtil {
 		return file.isDirectory();
     }
 	
-	
 	public static void writeTextFile(java.lang.String filename, java.lang.String text) {
+		writeTextFileWithEncoding(filename, text, null);
+    }
+	
+	public static void writeTextFileWithEncoding(java.lang.String filename, java.lang.String text, java.lang.String encoding) {
 		
         try {
         	// Getting the file
@@ -66,19 +77,28 @@ public class SimpleFileIOUtil {
         		folder.mkdirs();
         	}
         	
-        	FileWriter fw = new FileWriter( filePath );
-            fw.write(text);
-            fw.close();
+        	BufferedWriter out = null;
+        	if( encoding!=null ) { // Write with a specific encoding
+        		out = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(filePath.replace("file://", "").replace("file:/", "")), encoding));
+        	} else { // Write with the default encoding
+        		out = new BufferedWriter(new OutputStreamWriter(
+    					new FileOutputStream(filePath.replace("file://", "").replace("file:/", ""))));
+        	}
+        	
+            out.write(text);
+            out.close();
             
             // Refresh the content of the folder that contains the created file
-        	try {
-            	int i_folder = filename.lastIndexOf("/");
-            	if(i_folder == -1){
-            		// maybe this is a windows like path
-            		i_folder = filename.lastIndexOf("\\");
-            	}
-			} catch (Exception e) {
-				e.printStackTrace();
+            try {
+            	IPath wsLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+            	String wsRelativeFilename = filename.replaceAll("\\\\", "/").replaceFirst(wsLocation.toString(), "platform:/resource");
+            	IFile savedFile = ResourceHelper.getIFile(wsRelativeFilename, false);	
+            	if(savedFile != null)
+            		savedFile.getParent().refreshLocal(IFile.DEPTH_INFINITE, new NullProgressMonitor());
+			} catch (CoreException e1) {
+				// doesn't care if it doesn't work, this probably mean that this is outside of the workspace 
+				//e1.printStackTrace();
 			}
         }
         catch(IOException e) {

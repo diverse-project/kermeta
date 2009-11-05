@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EGenericType.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see ecore.EcorePackage#getEGenericType()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EGenericType extends EObject {
@@ -43,6 +43,7 @@ public interface EGenericType extends EObject {
 	 * @see #setEUpperBound(EGenericType)
 	 * @see ecore.EcorePackage#getEGenericType_EUpperBound()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EGenericType getEUpperBound();
@@ -69,6 +70,7 @@ public interface EGenericType extends EObject {
 	 * @return the value of the '<em>EType Arguments</em>' containment reference list.
 	 * @see ecore.EcorePackage#getEGenericType_ETypeArguments()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EGenericType> getETypeArguments();
@@ -84,7 +86,7 @@ public interface EGenericType extends EObject {
 	 * @return the value of the '<em>EClassifier</em>' reference.
 	 * @see #setEClassifier(EClassifier)
 	 * @see ecore.EcorePackage#getEGenericType_EClassifier()
-	 * @model
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EClassifier getEClassifier();
@@ -110,7 +112,7 @@ public interface EGenericType extends EObject {
 	 * @return the value of the '<em>EType Parameter</em>' reference.
 	 * @see #setETypeParameter(ETypeParameter)
 	 * @see ecore.EcorePackage#getEGenericType_ETypeParameter()
-	 * @model
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	ETypeParameter getETypeParameter();
@@ -137,6 +139,7 @@ public interface EGenericType extends EObject {
 	 * @see #setELowerBound(EGenericType)
 	 * @see ecore.EcorePackage#getEGenericType_ELowerBound()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EGenericType getELowerBound();

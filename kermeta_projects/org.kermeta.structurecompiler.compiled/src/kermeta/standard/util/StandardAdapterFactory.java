@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StandardAdapterFactory.java,v 1.12 2009-02-23 15:27:04 cfaucher Exp $
+ * $Id$
  */
 package kermeta.standard.util;
 
@@ -85,46 +85,6 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected StandardSwitch<Adapter> modelSwitch = new StandardSwitch<Adapter>() {
 		@Override
-		public Adapter caseValueType(ValueType object) {
-			return createValueTypeAdapter();
-		}
-
-		@Override
-		public Adapter caseComparable(kermeta.standard.Comparable object) {
-			return createComparableAdapter();
-		}
-
-		@Override
-		public <G> Adapter caseSummable(Summable<G> object) {
-			return createSummableAdapter();
-		}
-
-		@Override
-		public Adapter caseBoolean(kermeta.standard.Boolean object) {
-			return createBooleanAdapter();
-		}
-
-		@Override
-		public Adapter caseInteger(kermeta.standard.Integer object) {
-			return createIntegerAdapter();
-		}
-
-		@Override
-		public Adapter caseReal(Real object) {
-			return createRealAdapter();
-		}
-
-		@Override
-		public Adapter caseCharacter(kermeta.standard.Character object) {
-			return createCharacterAdapter();
-		}
-
-		@Override
-		public Adapter caseString(kermeta.standard.String object) {
-			return createStringAdapter();
-		}
-
-		@Override
 		public <G> Adapter caseCollection(Collection<G> object) {
 			return createCollectionAdapter();
 		}
@@ -165,8 +125,48 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseValueType(ValueType object) {
+			return createValueTypeAdapter();
+		}
+
+		@Override
+		public Adapter caseComparable(kermeta.standard.Comparable object) {
+			return createComparableAdapter();
+		}
+
+		@Override
+		public <G> Adapter caseSummable(Summable<G> object) {
+			return createSummableAdapter();
+		}
+
+		@Override
 		public Adapter caseNotComparableException(NotComparableException object) {
 			return createNotComparableExceptionAdapter();
+		}
+
+		@Override
+		public Adapter caseBoolean(kermeta.standard.Boolean object) {
+			return createBooleanAdapter();
+		}
+
+		@Override
+		public Adapter caseInteger(kermeta.standard.Integer object) {
+			return createIntegerAdapter();
+		}
+
+		@Override
+		public Adapter caseReal(Real object) {
+			return createRealAdapter();
+		}
+
+		@Override
+		public Adapter caseCharacter(kermeta.standard.Character object) {
+			return createCharacterAdapter();
+		}
+
+		@Override
+		public Adapter caseString(kermeta.standard.String object) {
+			return createStringAdapter();
 		}
 
 		@Override
@@ -201,118 +201,6 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	@Override
 	public Adapter createAdapter(Notifier target) {
 		return modelSwitch.doSwitch((EObject) target);
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.ValueType <em>Value Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.ValueType
-	 * @generated
-	 */
-	public Adapter createValueTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.Comparable <em>Comparable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.Comparable
-	 * @generated
-	 */
-	public Adapter createComparableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.Summable <em>Summable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.Summable
-	 * @generated
-	 */
-	public Adapter createSummableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.Boolean <em>Boolean</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.Boolean
-	 * @generated
-	 */
-	public Adapter createBooleanAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.Integer <em>Integer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.Integer
-	 * @generated
-	 */
-	public Adapter createIntegerAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.Real <em>Real</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.Real
-	 * @generated
-	 */
-	public Adapter createRealAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.Character <em>Character</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.Character
-	 * @generated
-	 */
-	public Adapter createCharacterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.String <em>String</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.String
-	 * @generated
-	 */
-	public Adapter createStringAdapter() {
-		return null;
 	}
 
 	/**
@@ -428,6 +316,48 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.ValueType <em>Value Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.ValueType
+	 * @generated
+	 */
+	public Adapter createValueTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.Comparable <em>Comparable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.Comparable
+	 * @generated
+	 */
+	public Adapter createComparableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.Summable <em>Summable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.Summable
+	 * @generated
+	 */
+	public Adapter createSummableAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.standard.NotComparableException <em>Not Comparable Exception</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -438,6 +368,76 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNotComparableExceptionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.Boolean <em>Boolean</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.Boolean
+	 * @generated
+	 */
+	public Adapter createBooleanAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.Integer <em>Integer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.Integer
+	 * @generated
+	 */
+	public Adapter createIntegerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.Real <em>Real</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.Real
+	 * @generated
+	 */
+	public Adapter createRealAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.Character <em>Character</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.Character
+	 * @generated
+	 */
+	public Adapter createCharacterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.String <em>String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.String
+	 * @generated
+	 */
+	public Adapter createStringAdapter() {
 		return null;
 	}
 

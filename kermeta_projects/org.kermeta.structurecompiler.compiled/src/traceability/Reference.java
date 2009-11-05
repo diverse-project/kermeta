@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Reference.java,v 1.12 2009-02-23 15:26:53 cfaucher Exp $
+ * $Id$
  */
 package traceability;
 
@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see traceability.TraceabilityPackage#getReference()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='/**\r\n * This abstract class represents a reference to a concrete object\r\n \052/'"
  * @generated
  */
@@ -44,6 +45,7 @@ public interface Reference extends kermeta.language.structure.Object {
 	 * @see traceability.TraceabilityPackage#getReference_TargetTraces()
 	 * @see traceability.Trace#getSourceReferences
 	 * @model opposite="sourceReferences"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Link to the reference target traces \052/'"
 	 * @generated
 	 */
@@ -63,6 +65,7 @@ public interface Reference extends kermeta.language.structure.Object {
 	 * @see traceability.TraceabilityPackage#getReference_TraceMdl()
 	 * @see traceability.TraceModel#getReferences
 	 * @model opposite="references" required="true" transient="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Link to the containing trace model \052/'"
 	 * @generated
 	 */
@@ -92,6 +95,7 @@ public interface Reference extends kermeta.language.structure.Object {
 	 * @see traceability.TraceabilityPackage#getReference_SourceTraces()
 	 * @see traceability.Trace#getTargetReferences
 	 * @model opposite="targetReferences"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Link to the reference source traces \052/'"
 	 * @generated
 	 */

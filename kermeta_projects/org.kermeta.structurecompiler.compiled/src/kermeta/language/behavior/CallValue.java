@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: CallValue.java,v 1.12 2009-02-23 15:26:38 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior;
 
@@ -17,7 +17,8 @@ import km2ecore.KM2EcoreContext;
  *
  *
  * @see kermeta.language.behavior.BehaviorPackage#getCallValue()
- * @model annotation="kermeta documentation='CallValue refers to the use of the <code>value</code> reserved keyword. This keyword is\nonly used in the body of the <code>setter</code> part of derived properties.'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='CallValue refers to the use of the <code>value</code> reserved keyword. This keyword is\nonly used in the body of the <code>setter</code> part of derived properties.'"
  * @generated
  */
 public interface CallValue extends CallExpression {

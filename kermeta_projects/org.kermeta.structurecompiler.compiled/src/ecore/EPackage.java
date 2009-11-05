@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EPackage.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see ecore.EcorePackage#getEPackage()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EPackage extends ENamedElement {
@@ -43,7 +43,7 @@ public interface EPackage extends ENamedElement {
 	 * @return the value of the '<em>Ns URI</em>' attribute.
 	 * @see #setNsURI(String)
 	 * @see ecore.EcorePackage#getEPackage_NsURI()
-	 * @model dataType="ecore.EString"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getNsURI();
@@ -72,6 +72,7 @@ public interface EPackage extends ENamedElement {
 	 * @see ecore.EcorePackage#getEPackage_ESubpackages()
 	 * @see ecore.EPackage#getESuperPackage
 	 * @model opposite="eSuperPackage" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EPackage> getESubpackages();
@@ -89,6 +90,7 @@ public interface EPackage extends ENamedElement {
 	 * @see ecore.EcorePackage#getEPackage_ESuperPackage()
 	 * @see ecore.EPackage#getESubpackages
 	 * @model opposite="eSubpackages" changeable="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */
@@ -105,7 +107,7 @@ public interface EPackage extends ENamedElement {
 	 * @return the value of the '<em>Ns Prefix</em>' attribute.
 	 * @see #setNsPrefix(String)
 	 * @see ecore.EcorePackage#getEPackage_NsPrefix()
-	 * @model dataType="ecore.EString"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getNsPrefix();
@@ -134,6 +136,7 @@ public interface EPackage extends ENamedElement {
 	 * @see ecore.EcorePackage#getEPackage_EClassifiers()
 	 * @see ecore.EClassifier#getEPackage
 	 * @model opposite="ePackage" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EClassifier> getEClassifiers();
@@ -152,6 +155,7 @@ public interface EPackage extends ENamedElement {
 	 * @see ecore.EcorePackage#getEPackage_EFactoryInstance()
 	 * @see ecore.EFactory#getEPackage
 	 * @model opposite="ePackage" required="true" transient="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */
@@ -170,8 +174,8 @@ public interface EPackage extends ENamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model nameDataType="ecore.EString"
-	 *        annotation="kermeta isAbstract='true'"
+	 * @model annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EClassifier result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */

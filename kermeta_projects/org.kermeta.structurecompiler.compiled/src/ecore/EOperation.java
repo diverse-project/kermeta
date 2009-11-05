@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EOperation.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see ecore.EcorePackage#getEOperation()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EOperation extends ETypedElement {
@@ -44,6 +44,7 @@ public interface EOperation extends ETypedElement {
 	 * @see ecore.EcorePackage#getEOperation_EContainingClass()
 	 * @see ecore.EClass#getEOperations
 	 * @model opposite="eOperations" changeable="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */
@@ -61,6 +62,7 @@ public interface EOperation extends ETypedElement {
 	 * @return the value of the '<em>EGeneric Exceptions</em>' containment reference list.
 	 * @see ecore.EcorePackage#getEOperation_EGenericExceptions()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EGenericType> getEGenericExceptions();
@@ -79,6 +81,7 @@ public interface EOperation extends ETypedElement {
 	 * @see ecore.EcorePackage#getEOperation_EParameters()
 	 * @see ecore.EParameter#getEOperation
 	 * @model opposite="eOperation" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EParameter> getEParameters();
@@ -95,6 +98,7 @@ public interface EOperation extends ETypedElement {
 	 * @return the value of the '<em>EType Parameters</em>' containment reference list.
 	 * @see ecore.EcorePackage#getEOperation_ETypeParameters()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<ETypeParameter> getETypeParameters();
@@ -110,7 +114,7 @@ public interface EOperation extends ETypedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>EExceptions</em>' reference list.
 	 * @see ecore.EcorePackage#getEOperation_EExceptions()
-	 * @model
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EClassifier> getEExceptions();

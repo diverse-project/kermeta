@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ExceptionsFactory.java,v 1.12 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package kermeta.exceptions;
 
@@ -29,13 +29,22 @@ public interface ExceptionsFactory extends EFactory {
 			.init();
 
 	/**
+	 * Returns a new object of class '<em>Constraints Diagnostic</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constraints Diagnostic</em>'.
+	 * @generated
+	 */
+	ConstraintsDiagnostic createConstraintsDiagnostic();
+
+	/**
 	 * Returns a new object of class '<em>Exception</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Exception</em>'.
 	 * @generated
 	 */
-	kermeta.exceptions.Exception createException();
+	Exception createException();
 
 	/**
 	 * Returns a new object of class '<em>Runtime Error</em>'.

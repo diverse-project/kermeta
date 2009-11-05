@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SimkFactory.java,v 1.12 2009-02-23 15:26:55 cfaucher Exp $
+ * $Id$
  */
 package simk;
 
@@ -37,15 +37,6 @@ public interface SimkFactory extends EFactory {
 	SIMKModel createSIMKModel();
 
 	/**
-	 * Returns a new object of class '<em>SM Class</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>SM Class</em>'.
-	 * @generated
-	 */
-	SMClass createSMClass();
-
-	/**
 	 * Returns a new object of class '<em>SM Method</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -62,6 +53,15 @@ public interface SimkFactory extends EFactory {
 	 * @generated
 	 */
 	SMContext createSMContext();
+
+	/**
+	 * Returns a new object of class '<em>SM Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SM Class</em>'.
+	 * @generated
+	 */
+	SMClass createSMClass();
 
 	/**
 	 * Returns a new object of class '<em>SM Parameter</em>'.

@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: LanguageSwitch.java,v 1.12 2009-02-23 15:26:54 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.util;
 
@@ -91,6 +91,15 @@ public class LanguageSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+		case LanguagePackage.DUMMY_CLASS: {
+			DummyClass dummyClass = (DummyClass) theEObject;
+			T result = caseDummyClass(dummyClass);
+			if (result == null)
+				result = caseObject(dummyClass);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case LanguagePackage.REFLECTIVE_COLLECTION: {
 			ReflectiveCollection<?> reflectiveCollection = (ReflectiveCollection<?>) theEObject;
 			T result = caseReflectiveCollection(reflectiveCollection);
@@ -123,18 +132,24 @@ public class LanguageSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case LanguagePackage.DUMMY_CLASS: {
-			DummyClass dummyClass = (DummyClass) theEObject;
-			T result = caseDummyClass(dummyClass);
-			if (result == null)
-				result = caseObject(dummyClass);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dummy Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dummy Class</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDummyClass(DummyClass object) {
+		return null;
 	}
 
 	/**
@@ -164,21 +179,6 @@ public class LanguageSwitch<T> {
 	 * @generated
 	 */
 	public <G> T caseReflectiveSequence(ReflectiveSequence<G> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Dummy Class</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Dummy Class</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDummyClass(DummyClass object) {
 		return null;
 	}
 

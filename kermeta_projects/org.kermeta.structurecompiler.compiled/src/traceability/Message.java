@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Message.java,v 1.12 2009-02-23 15:26:52 cfaucher Exp $
+ * $Id$
  */
 package traceability;
 
@@ -27,7 +27,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see traceability.TraceabilityPackage#getMessage()
- * @model annotation="kermeta documentation='/**\r\n * This class represents a trace message, used to add some information to traces.\r\n * Typically, in order to known what had generated a given trace or provide a user\r\n * friendly message to the user.\r\n \052/'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='/**\r\n * This class represents a trace message, used to add some information to traces.\r\n * Typically, in order to known what had generated a given trace or provide a user\r\n * friendly message to the user.\r\n \052/'"
  * @generated
  */
 public interface Message extends kermeta.language.structure.Object {
@@ -45,6 +46,7 @@ public interface Message extends kermeta.language.structure.Object {
 	 * @see traceability.TraceabilityPackage#getMessage_TraceMdl()
 	 * @see traceability.TraceModel#getMessages
 	 * @model opposite="messages" required="true" transient="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Link to the containing trace model \052/'"
 	 * @generated
 	 */
@@ -74,6 +76,7 @@ public interface Message extends kermeta.language.structure.Object {
 	 * @see traceability.TraceabilityPackage#getMessage_Traces()
 	 * @see traceability.Trace#getDescription
 	 * @model opposite="description"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Link to the traces the message is associated with \052/'"
 	 * @generated
 	 */
@@ -91,6 +94,7 @@ public interface Message extends kermeta.language.structure.Object {
 	 * @see #setValue(String)
 	 * @see traceability.TraceabilityPackage#getMessage_Value()
 	 * @model dataType="traceability.String" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getValue();
@@ -117,6 +121,7 @@ public interface Message extends kermeta.language.structure.Object {
 	 * @see #setLanguage(String)
 	 * @see traceability.TraceabilityPackage#getMessage_Language()
 	 * @model dataType="traceability.String"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Language of the message (english, french, etc.) \052/'"
 	 * @generated
 	 */
@@ -144,6 +149,7 @@ public interface Message extends kermeta.language.structure.Object {
 	 * @see #setType(String)
 	 * @see traceability.TraceabilityPackage#getMessage_Type()
 	 * @model dataType="traceability.String"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Message kind \052/'"
 	 * @generated
 	 */

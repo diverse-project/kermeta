@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SMClassImpl.java,v 1.12 2009-02-23 15:26:43 cfaucher Exp $
+ * $Id$
  */
 package simk.impl;
 
@@ -83,7 +83,7 @@ public class SMClassImpl extends SMNamedElementImpl implements SMClass {
 	 * @generated
 	 */
 	public SMContext getContext() {
-		if (eContainerFeatureID != SimkPackage.SM_CLASS__CONTEXT)
+		if (eContainerFeatureID() != SimkPackage.SM_CLASS__CONTEXT)
 			return null;
 		return (SMContext) eContainer();
 	}
@@ -94,7 +94,7 @@ public class SMClassImpl extends SMNamedElementImpl implements SMClass {
 	 * @generated
 	 */
 	public SMContext basicGetContext() {
-		if (eContainerFeatureID != SimkPackage.SM_CLASS__CONTEXT)
+		if (eContainerFeatureID() != SimkPackage.SM_CLASS__CONTEXT)
 			return null;
 		return (SMContext) eInternalContainer();
 	}
@@ -118,7 +118,7 @@ public class SMClassImpl extends SMNamedElementImpl implements SMClass {
 	 */
 	public void setContext(SMContext newContext) {
 		if (newContext != eInternalContainer()
-				|| (eContainerFeatureID != SimkPackage.SM_CLASS__CONTEXT && newContext != null)) {
+				|| (eContainerFeatureID() != SimkPackage.SM_CLASS__CONTEXT && newContext != null)) {
 			if (EcoreUtil.isAncestor(this, newContext))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -222,7 +222,7 @@ public class SMClassImpl extends SMNamedElementImpl implements SMClass {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case SimkPackage.SM_CLASS__CONTEXT:
 			return eInternalContainer().eInverseRemove(this,
 					SimkPackage.SM_CONTEXT__SM_CLASS, SMContext.class, msgs);

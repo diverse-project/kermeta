@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ETypeParameter.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see ecore.EcorePackage#getETypeParameter()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface ETypeParameter extends ENamedElement {
@@ -39,6 +39,7 @@ public interface ETypeParameter extends ENamedElement {
 	 * @return the value of the '<em>EBounds</em>' containment reference list.
 	 * @see ecore.EcorePackage#getETypeParameter_EBounds()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	EList<EGenericType> getEBounds();

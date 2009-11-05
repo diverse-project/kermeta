@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EEnumLiteralImpl.java,v 1.13 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -124,7 +124,7 @@ public class EEnumLiteralImpl extends ENamedElementImpl implements EEnumLiteral 
 	 * @generated
 	 */
 	public EEnum getEEnum() {
-		if (eContainerFeatureID != EcorePackage.EENUM_LITERAL__EENUM)
+		if (eContainerFeatureID() != EcorePackage.EENUM_LITERAL__EENUM)
 			return null;
 		return (EEnum) eContainer();
 	}
@@ -135,7 +135,7 @@ public class EEnumLiteralImpl extends ENamedElementImpl implements EEnumLiteral 
 	 * @generated
 	 */
 	public EEnum basicGetEEnum() {
-		if (eContainerFeatureID != EcorePackage.EENUM_LITERAL__EENUM)
+		if (eContainerFeatureID() != EcorePackage.EENUM_LITERAL__EENUM)
 			return null;
 		return (EEnum) eInternalContainer();
 	}
@@ -248,7 +248,7 @@ public class EEnumLiteralImpl extends ENamedElementImpl implements EEnumLiteral 
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case EcorePackage.EENUM_LITERAL__EENUM:
 			return eInternalContainer().eInverseRemove(this,
 					EcorePackage.EENUM__ELITERALS, EEnum.class, msgs);
@@ -269,7 +269,7 @@ public class EEnumLiteralImpl extends ENamedElementImpl implements EEnumLiteral 
 				return getEEnum();
 			return basicGetEEnum();
 		case EcorePackage.EENUM_LITERAL__VALUE:
-			return new Integer(getValue());
+			return getValue();
 		case EcorePackage.EENUM_LITERAL__INSTANCE:
 			return getInstance();
 		case EcorePackage.EENUM_LITERAL__LITERAL:
@@ -287,7 +287,7 @@ public class EEnumLiteralImpl extends ENamedElementImpl implements EEnumLiteral 
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case EcorePackage.EENUM_LITERAL__VALUE:
-			setValue(((Integer) newValue).intValue());
+			setValue((Integer) newValue);
 			return;
 		case EcorePackage.EENUM_LITERAL__INSTANCE:
 			setInstance((Enumerator) newValue);

@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EParameterImpl.java,v 1.13 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -56,7 +56,7 @@ public class EParameterImpl extends ETypedElementImpl implements EParameter {
 	 * @generated
 	 */
 	public EOperation getEOperation() {
-		if (eContainerFeatureID != EcorePackage.EPARAMETER__EOPERATION)
+		if (eContainerFeatureID() != EcorePackage.EPARAMETER__EOPERATION)
 			return null;
 		return (EOperation) eContainer();
 	}
@@ -67,7 +67,7 @@ public class EParameterImpl extends ETypedElementImpl implements EParameter {
 	 * @generated
 	 */
 	public EOperation basicGetEOperation() {
-		if (eContainerFeatureID != EcorePackage.EPARAMETER__EOPERATION)
+		if (eContainerFeatureID() != EcorePackage.EPARAMETER__EOPERATION)
 			return null;
 		return (EOperation) eInternalContainer();
 	}
@@ -114,7 +114,7 @@ public class EParameterImpl extends ETypedElementImpl implements EParameter {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case EcorePackage.EPARAMETER__EOPERATION:
 			return eInternalContainer().eInverseRemove(this,
 					EcorePackage.EOPERATION__EPARAMETERS, EOperation.class,

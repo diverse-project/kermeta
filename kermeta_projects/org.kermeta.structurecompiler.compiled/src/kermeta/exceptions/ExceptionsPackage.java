@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ExceptionsPackage.java,v 1.12 2009-02-23 15:26:43 cfaucher Exp $
+ * $Id$
  */
 package kermeta.exceptions;
 
@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EReference;
  * @see kermeta.exceptions.ExceptionsFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/exceptions'"
- *        annotation="kermeta documentation='/** \r\n * Contains the definition of a Kermeta exception and a few basic exceptions.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png\"/>\r\n \052/'"
+ *        annotation="kermeta documentation='/** \n * Contains the definition of a Kermeta exception and a few basic exceptions.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png\"/>\n \052/'"
  * @generated
  */
 public interface ExceptionsPackage extends EPackage {
@@ -68,6 +68,97 @@ public interface ExceptionsPackage extends EPackage {
 			.init();
 
 	/**
+	 * The meta object id for the '{@link kermeta.exceptions.impl.ConstraintsDiagnosticImpl <em>Constraints Diagnostic</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.exceptions.impl.ConstraintsDiagnosticImpl
+	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getConstraintsDiagnostic()
+	 * @generated
+	 */
+	int CONSTRAINTS_DIAGNOSTIC = 0;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINTS_DIAGNOSTIC__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINTS_DIAGNOSTIC__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINTS_DIAGNOSTIC__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINTS_DIAGNOSTIC__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINTS_DIAGNOSTIC__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINTS_DIAGNOSTIC__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINTS_DIAGNOSTIC__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Set Constraints</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINTS_DIAGNOSTIC__SET_CONSTRAINTS = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Constraints Diagnostic</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINTS_DIAGNOSTIC_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link kermeta.exceptions.impl.ExceptionImpl <em>Exception</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,7 +166,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 0;
+	int EXCEPTION = 1;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -184,7 +275,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getRuntimeError()
 	 * @generated
 	 */
-	int RUNTIME_ERROR = 1;
+	int RUNTIME_ERROR = 2;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -302,7 +393,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getCallOnVoidTarget()
 	 * @generated
 	 */
-	int CALL_ON_VOID_TARGET = 2;
+	int CALL_ON_VOID_TARGET = 3;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -420,7 +511,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getTypeCastError()
 	 * @generated
 	 */
-	int TYPE_CAST_ERROR = 3;
+	int TYPE_CAST_ERROR = 4;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -538,7 +629,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getNotImplementedException()
 	 * @generated
 	 */
-	int NOT_IMPLEMENTED_EXCEPTION = 4;
+	int NOT_IMPLEMENTED_EXCEPTION = 5;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -656,7 +747,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getUpperBoundReachedError()
 	 * @generated
 	 */
-	int UPPER_BOUND_REACHED_ERROR = 5;
+	int UPPER_BOUND_REACHED_ERROR = 6;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -774,7 +865,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getAbstractClassInstantiationError()
 	 * @generated
 	 */
-	int ABSTRACT_CLASS_INSTANTIATION_ERROR = 6;
+	int ABSTRACT_CLASS_INSTANTIATION_ERROR = 7;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -892,7 +983,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getIncompatibleTypeError()
 	 * @generated
 	 */
-	int INCOMPATIBLE_TYPE_ERROR = 7;
+	int INCOMPATIBLE_TYPE_ERROR = 8;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1010,7 +1101,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getDivisionByZero()
 	 * @generated
 	 */
-	int DIVISION_BY_ZERO = 8;
+	int DIVISION_BY_ZERO = 9;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1119,7 +1210,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getOverflowError()
 	 * @generated
 	 */
-	int OVERFLOW_ERROR = 9;
+	int OVERFLOW_ERROR = 10;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1228,7 +1319,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getVoidOperandError()
 	 * @generated
 	 */
-	int VOID_OPERAND_ERROR = 10;
+	int VOID_OPERAND_ERROR = 11;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1337,7 +1428,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getStringIndexOutOfBound()
 	 * @generated
 	 */
-	int STRING_INDEX_OUT_OF_BOUND = 11;
+	int STRING_INDEX_OUT_OF_BOUND = 12;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1446,7 +1537,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getStringFormatException()
 	 * @generated
 	 */
-	int STRING_FORMAT_EXCEPTION = 12;
+	int STRING_FORMAT_EXCEPTION = 13;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1555,7 +1646,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getIndexOutOfBound()
 	 * @generated
 	 */
-	int INDEX_OUT_OF_BOUND = 13;
+	int INDEX_OUT_OF_BOUND = 14;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1664,7 +1755,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getEmptyCollection()
 	 * @generated
 	 */
-	int EMPTY_COLLECTION = 14;
+	int EMPTY_COLLECTION = 15;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1773,7 +1864,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getIteratorIsOff()
 	 * @generated
 	 */
-	int ITERATOR_IS_OFF = 15;
+	int ITERATOR_IS_OFF = 16;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1882,7 +1973,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getIOException()
 	 * @generated
 	 */
-	int IO_EXCEPTION = 16;
+	int IO_EXCEPTION = 17;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1991,7 +2082,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getFileNotFoundException()
 	 * @generated
 	 */
-	int FILE_NOT_FOUND_EXCEPTION = 17;
+	int FILE_NOT_FOUND_EXCEPTION = 18;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2100,7 +2191,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getConstraintViolatedException()
 	 * @generated
 	 */
-	int CONSTRAINT_VIOLATED_EXCEPTION = 18;
+	int CONSTRAINT_VIOLATED_EXCEPTION = 19;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2227,7 +2318,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getConstraintViolatedPre()
 	 * @generated
 	 */
-	int CONSTRAINT_VIOLATED_PRE = 19;
+	int CONSTRAINT_VIOLATED_PRE = 20;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2354,7 +2445,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getConstraintViolatedPost()
 	 * @generated
 	 */
-	int CONSTRAINT_VIOLATED_POST = 20;
+	int CONSTRAINT_VIOLATED_POST = 21;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2481,7 +2572,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getConstraintViolatedInv()
 	 * @generated
 	 */
-	int CONSTRAINT_VIOLATED_INV = 21;
+	int CONSTRAINT_VIOLATED_INV = 22;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2608,7 +2699,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getResourceLoadException()
 	 * @generated
 	 */
-	int RESOURCE_LOAD_EXCEPTION = 22;
+	int RESOURCE_LOAD_EXCEPTION = 23;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2717,7 +2808,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getResourceSaveException()
 	 * @generated
 	 */
-	int RESOURCE_SAVE_EXCEPTION = 23;
+	int RESOURCE_SAVE_EXCEPTION = 24;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2835,7 +2926,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getResourceMixedLevelsException()
 	 * @generated
 	 */
-	int RESOURCE_MIXED_LEVELS_EXCEPTION = 24;
+	int RESOURCE_MIXED_LEVELS_EXCEPTION = 25;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2953,7 +3044,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getResourceCreateException()
 	 * @generated
 	 */
-	int RESOURCE_CREATE_EXCEPTION = 25;
+	int RESOURCE_CREATE_EXCEPTION = 26;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -3062,7 +3153,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getResourceUnconformityException()
 	 * @generated
 	 */
-	int RESOURCE_UNCONFORMITY_EXCEPTION = 26;
+	int RESOURCE_UNCONFORMITY_EXCEPTION = 27;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -3171,7 +3262,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getUnregisteredMetamodelException()
 	 * @generated
 	 */
-	int UNREGISTERED_METAMODEL_EXCEPTION = 27;
+	int UNREGISTERED_METAMODEL_EXCEPTION = 28;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -3280,7 +3371,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getDynamicExpressionException()
 	 * @generated
 	 */
-	int DYNAMIC_EXPRESSION_EXCEPTION = 28;
+	int DYNAMIC_EXPRESSION_EXCEPTION = 29;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -3389,7 +3480,28 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getKRuntimeError()
 	 * @generated
 	 */
-	int KRUNTIME_ERROR = 29;
+	int KRUNTIME_ERROR = 30;
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.exceptions.ConstraintsDiagnostic <em>Constraints Diagnostic</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constraints Diagnostic</em>'.
+	 * @see kermeta.exceptions.ConstraintsDiagnostic
+	 * @generated
+	 */
+	EClass getConstraintsDiagnostic();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link kermeta.exceptions.ConstraintsDiagnostic#getSetConstraints <em>Set Constraints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Set Constraints</em>'.
+	 * @see kermeta.exceptions.ConstraintsDiagnostic#getSetConstraints()
+	 * @see #getConstraintsDiagnostic()
+	 * @generated
+	 */
+	EReference getConstraintsDiagnostic_SetConstraints();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.exceptions.Exception <em>Exception</em>}'.
@@ -3791,6 +3903,25 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
+		/**
+		 * The meta object literal for the '{@link kermeta.exceptions.impl.ConstraintsDiagnosticImpl <em>Constraints Diagnostic</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.exceptions.impl.ConstraintsDiagnosticImpl
+		 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getConstraintsDiagnostic()
+		 * @generated
+		 */
+		EClass CONSTRAINTS_DIAGNOSTIC = eINSTANCE.getConstraintsDiagnostic();
+
+		/**
+		 * The meta object literal for the '<em><b>Set Constraints</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTRAINTS_DIAGNOSTIC__SET_CONSTRAINTS = eINSTANCE
+				.getConstraintsDiagnostic_SetConstraints();
+
 		/**
 		 * The meta object literal for the '{@link kermeta.exceptions.impl.ExceptionImpl <em>Exception</em>}' class.
 		 * <!-- begin-user-doc -->

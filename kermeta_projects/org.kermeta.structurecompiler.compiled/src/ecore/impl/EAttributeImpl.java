@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EAttributeImpl.java,v 1.13 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package ecore.impl;
 
@@ -116,7 +116,7 @@ public class EAttributeImpl extends EStructuralFeatureImpl implements
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case EcorePackage.EATTRIBUTE__ID:
-			return isID() ? Boolean.TRUE : Boolean.FALSE;
+			return isID();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -130,7 +130,7 @@ public class EAttributeImpl extends EStructuralFeatureImpl implements
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case EcorePackage.EATTRIBUTE__ID:
-			setID(((Boolean) newValue).booleanValue());
+			setID((Boolean) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);

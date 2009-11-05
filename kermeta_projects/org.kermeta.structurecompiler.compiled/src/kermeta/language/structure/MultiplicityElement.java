@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: MultiplicityElement.java,v 1.12 2009-02-23 15:26:48 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure;
 
@@ -26,7 +26,8 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getMultiplicityElement()
- * @model annotation="kermeta documentation=' Model elements with a multiplicity [lower..upper] inherit this class'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation=' Model elements with a multiplicity [lower..upper] inherit this class'"
  * @generated
  */
 public interface MultiplicityElement extends TypedElement {
@@ -43,6 +44,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @see #setIsOrdered(Boolean)
 	 * @see kermeta.language.structure.StructurePackage#getMultiplicityElement_IsOrdered()
 	 * @model default="false" dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Boolean stating whether the element is ordered'"
 	 * @generated
 	 */
@@ -70,6 +72,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @see #setUpper(Integer)
 	 * @see kermeta.language.structure.StructurePackage#getMultiplicityElement_Upper()
 	 * @model dataType="kermeta.standard.JavaInteger"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Max cardinality of the element, \'-1\' for \'*\''"
 	 * @generated
 	 */
@@ -97,6 +100,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @see #setLower(Integer)
 	 * @see kermeta.language.structure.StructurePackage#getMultiplicityElement_Lower()
 	 * @model dataType="kermeta.standard.JavaInteger"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Min cardinality of the element'"
 	 * @generated
 	 */
@@ -125,6 +129,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @see #setIsUnique(Boolean)
 	 * @see kermeta.language.structure.StructurePackage#getMultiplicityElement_IsUnique()
 	 * @model default="true" dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Boolean stating whether duplicated elements are allowed'"
 	 * @generated
 	 */
@@ -154,7 +159,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE.getIdentifierHelper())).getMangledIdentifier(this.getName(), context);\n\n\tjava.lang.Boolean idIfCond_340 = false;\n\tidIfCond_340 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getEMFRenameAs(), \"\");\n\n\tif( idIfCond_340 ) {\n\n\tresult = this.getEMFRenameAs();\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE.getIdentifierHelper())).getMangledIdentifier(this.getName(), context);\n\n\tjava.lang.Boolean idIfCond_558 = false;\n\tidIfCond_558 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getEMFRenameAs(), \"\");\n\n\tif( idIfCond_558 ) {\n\n\tresult = this.getEMFRenameAs();\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String getFinalName(KM2EcoreContext context);
@@ -174,7 +179,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/** Generation of the String representing the end of a method: return of the result value \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\\nreturn \";\n\n\tjava.lang.Boolean idIfCond_341 = false;\n\tidIfCond_341 = kermeta.standard.helper.IntegerWrapper.equals(this.getUpper(), 1);\n\n\tif( idIfCond_341 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"result\");\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, context.getCOLLECTION_UTIL_CLASS()), \".convertAsEList(result)\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \";\\n\");\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\\nreturn \";\n\n\tjava.lang.Boolean idIfCond_559 = false;\n\tidIfCond_559 = kermeta.standard.helper.IntegerWrapper.equals(this.getUpper(), 1);\n\n\tif( idIfCond_559 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"result\");\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, context.getCOLLECTION_UTIL_CLASS()), \".convertAsEList(result)\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \";\\n\");\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String ppReturnResult(KM2EcoreContext context);

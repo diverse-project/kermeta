@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EcorePackage.java,v 1.12 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EReference;
  * @see ecore.EcoreFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.eclipse.org/emf/2002/Ecore'"
+ *        annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EcorePackage extends EPackage {
@@ -647,22 +648,22 @@ public interface EcorePackage extends EPackage {
 	int ESTRUCTURAL_FEATURE__VOLATILE = ETYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL = ETYPED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>EContaining Class</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ESTRUCTURAL_FEATURE__ECONTAINING_CLASS = ETYPED_ELEMENT_FEATURE_COUNT + 2;
+	int ESTRUCTURAL_FEATURE__ECONTAINING_CLASS = ETYPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL = ETYPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>transient</b></em>' attribute.
@@ -864,15 +865,6 @@ public interface EcorePackage extends EPackage {
 	int EATTRIBUTE__VOLATILE = ESTRUCTURAL_FEATURE__VOLATILE;
 
 	/**
-	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EATTRIBUTE__DEFAULT_VALUE_LITERAL = ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL;
-
-	/**
 	 * The feature id for the '<em><b>EContaining Class</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -880,6 +872,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EATTRIBUTE__ECONTAINING_CLASS = ESTRUCTURAL_FEATURE__ECONTAINING_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EATTRIBUTE__DEFAULT_VALUE_LITERAL = ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL;
 
 	/**
 	 * The feature id for the '<em><b>transient</b></em>' attribute.
@@ -2603,15 +2604,6 @@ public interface EcorePackage extends EPackage {
 	int EREFERENCE__VOLATILE = ESTRUCTURAL_FEATURE__VOLATILE;
 
 	/**
-	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EREFERENCE__DEFAULT_VALUE_LITERAL = ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL;
-
-	/**
 	 * The feature id for the '<em><b>EContaining Class</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2619,6 +2611,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EREFERENCE__ECONTAINING_CLASS = ESTRUCTURAL_FEATURE__ECONTAINING_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EREFERENCE__DEFAULT_VALUE_LITERAL = ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL;
 
 	/**
 	 * The feature id for the '<em><b>transient</b></em>' attribute.
@@ -3971,17 +3972,6 @@ public interface EcorePackage extends EPackage {
 	EAttribute getEStructuralFeature__volatile();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Value Literal</em>'.
-	 * @see ecore.EStructuralFeature#getDefaultValueLiteral()
-	 * @see #getEStructuralFeature()
-	 * @generated
-	 */
-	EAttribute getEStructuralFeature_DefaultValueLiteral();
-
-	/**
 	 * Returns the meta object for the container reference '{@link ecore.EStructuralFeature#getEContainingClass <em>EContaining Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3991,6 +3981,17 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEStructuralFeature_EContainingClass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Value Literal</em>'.
+	 * @see ecore.EStructuralFeature#getDefaultValueLiteral()
+	 * @see #getEStructuralFeature()
+	 * @generated
+	 */
+	EAttribute getEStructuralFeature_DefaultValueLiteral();
 
 	/**
 	 * Returns the meta object for the attribute '{@link ecore.EStructuralFeature#is_transient <em>transient</em>}'.
@@ -4237,6 +4238,7 @@ public interface EcorePackage extends EPackage {
 	 * @return the meta object for data type '<em>EBoolean</em>'.
 	 * @model instanceClass="boolean"
 	 *        annotation="kermeta alias='kermeta::standard::Boolean'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='boolean'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4251,6 +4253,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.lang.String
 	 * @model instanceClass="java.lang.String"
 	 *        annotation="kermeta alias='kermeta::standard::String'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.lang.String'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4265,6 +4268,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.lang.Class
 	 * @model instanceClass="java.lang.Class" typeParameters="T"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.lang.Class'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 *        annotation="kermeta ecore.EDataType_eTypeParameters='T'"
@@ -4280,6 +4284,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.lang.Object
 	 * @model instanceClass="java.lang.Object"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.lang.Object'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4293,6 +4298,7 @@ public interface EcorePackage extends EPackage {
 	 * @return the meta object for data type '<em>EInt</em>'.
 	 * @model instanceClass="int"
 	 *        annotation="kermeta alias='kermeta::standard::Integer'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='int'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4307,6 +4313,7 @@ public interface EcorePackage extends EPackage {
 	 * @see org.eclipse.emf.common.util.Enumerator
 	 * @model instanceClass="org.eclipse.emf.common.util.Enumerator" serializeable="false"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='org.eclipse.emf.common.util.Enumerator'"
 	 * @generated
 	 */
@@ -4320,6 +4327,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.math.BigDecimal
 	 * @model instanceClass="java.math.BigDecimal"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.math.BigDecimal'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4334,6 +4342,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.math.BigInteger
 	 * @model instanceClass="java.math.BigInteger"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.math.BigInteger'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4348,6 +4357,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.lang.Boolean
 	 * @model instanceClass="java.lang.Boolean"
 	 *        annotation="kermeta alias='kermeta::standard::Boolean'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.lang.Boolean'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4361,6 +4371,7 @@ public interface EcorePackage extends EPackage {
 	 * @return the meta object for data type '<em>EByte</em>'.
 	 * @model instanceClass="byte"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='byte'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4374,6 +4385,7 @@ public interface EcorePackage extends EPackage {
 	 * @return the meta object for data type '<em>EByte Array</em>'.
 	 * @model instanceClass="byte[]"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='byte[]'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4388,6 +4400,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.lang.Byte
 	 * @model instanceClass="java.lang.Byte"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.lang.Byte'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4401,6 +4414,7 @@ public interface EcorePackage extends EPackage {
 	 * @return the meta object for data type '<em>EChar</em>'.
 	 * @model instanceClass="char"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='char'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4415,6 +4429,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.lang.Character
 	 * @model instanceClass="java.lang.Character"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.lang.Character'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4429,6 +4444,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.util.Date
 	 * @model instanceClass="java.util.Date"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.util.Date'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4443,6 +4459,7 @@ public interface EcorePackage extends EPackage {
 	 * @see org.eclipse.emf.common.util.DiagnosticChain
 	 * @model instanceClass="org.eclipse.emf.common.util.DiagnosticChain" serializeable="false"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='org.eclipse.emf.common.util.DiagnosticChain'"
 	 * @generated
 	 */
@@ -4455,6 +4472,7 @@ public interface EcorePackage extends EPackage {
 	 * @return the meta object for data type '<em>EDouble</em>'.
 	 * @model instanceClass="double"
 	 *        annotation="kermeta alias='kermeta::standard::Real'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='double'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4469,6 +4487,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.lang.Double
 	 * @model instanceClass="java.lang.Double"
 	 *        annotation="kermeta alias='kermeta::standard::Real'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.lang.Double'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4483,6 +4502,7 @@ public interface EcorePackage extends EPackage {
 	 * @see org.eclipse.emf.common.util.EList
 	 * @model instanceClass="org.eclipse.emf.common.util.EList" serializeable="false" typeParameters="E"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='org.eclipse.emf.common.util.EList'"
 	 *        annotation="kermeta ecore.EDataType_eTypeParameters='E'"
 	 * @generated
@@ -4497,6 +4517,7 @@ public interface EcorePackage extends EPackage {
 	 * @see org.eclipse.emf.ecore.util.FeatureMap
 	 * @model instanceClass="org.eclipse.emf.ecore.util.FeatureMap" serializeable="false"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='org.eclipse.emf.ecore.util.FeatureMap'"
 	 * @generated
 	 */
@@ -4510,6 +4531,7 @@ public interface EcorePackage extends EPackage {
 	 * @see org.eclipse.emf.ecore.util.FeatureMap.Entry
 	 * @model instanceClass="org.eclipse.emf.ecore.util.FeatureMap$Entry" serializeable="false"
 	 *        annotation="kermeta alias='kermeta::ecore::EFeatureMapEntry'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='org.eclipse.emf.ecore.util.FeatureMap$Entry'"
 	 * @generated
 	 */
@@ -4522,6 +4544,7 @@ public interface EcorePackage extends EPackage {
 	 * @return the meta object for data type '<em>EFloat</em>'.
 	 * @model instanceClass="float"
 	 *        annotation="kermeta alias='kermeta::standard::Real'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='float'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4536,6 +4559,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.lang.Float
 	 * @model instanceClass="java.lang.Float"
 	 *        annotation="kermeta alias='kermeta::standard::Real'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.lang.Float'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4550,6 +4574,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.lang.Integer
 	 * @model instanceClass="java.lang.Integer"
 	 *        annotation="kermeta alias='kermeta::standard::Integer'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.lang.Integer'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4563,6 +4588,7 @@ public interface EcorePackage extends EPackage {
 	 * @return the meta object for data type '<em>ELong</em>'.
 	 * @model instanceClass="long"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='long'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4577,6 +4603,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.lang.Long
 	 * @model instanceClass="java.lang.Long"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.lang.Long'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4591,6 +4618,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.util.Map
 	 * @model instanceClass="java.util.Map" serializeable="false" typeParameters="K V"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.util.Map'"
 	 *        annotation="kermeta ecore.EDataType_eTypeParameters='K , V'"
 	 * @generated
@@ -4605,6 +4633,7 @@ public interface EcorePackage extends EPackage {
 	 * @see org.eclipse.emf.ecore.resource.Resource
 	 * @model instanceClass="org.eclipse.emf.ecore.resource.Resource" serializeable="false"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='org.eclipse.emf.ecore.resource.Resource'"
 	 * @generated
 	 */
@@ -4618,6 +4647,7 @@ public interface EcorePackage extends EPackage {
 	 * @see org.eclipse.emf.ecore.resource.ResourceSet
 	 * @model instanceClass="org.eclipse.emf.ecore.resource.ResourceSet" serializeable="false"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='org.eclipse.emf.ecore.resource.ResourceSet'"
 	 * @generated
 	 */
@@ -4630,6 +4660,7 @@ public interface EcorePackage extends EPackage {
 	 * @return the meta object for data type '<em>EShort</em>'.
 	 * @model instanceClass="short"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='short'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4644,6 +4675,7 @@ public interface EcorePackage extends EPackage {
 	 * @see java.lang.Short
 	 * @model instanceClass="java.lang.Short"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='java.lang.Short'"
 	 *        annotation="kermeta ecore.EDataType_isSerializable='true'"
 	 * @generated
@@ -4658,6 +4690,7 @@ public interface EcorePackage extends EPackage {
 	 * @see org.eclipse.emf.common.util.TreeIterator
 	 * @model instanceClass="org.eclipse.emf.common.util.TreeIterator" serializeable="false" typeParameters="E"
 	 *        annotation="kermeta alias='kermeta::language::structure::Object'"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.EDataType_instanceClassName='org.eclipse.emf.common.util.TreeIterator'"
 	 *        annotation="kermeta ecore.EDataType_eTypeParameters='E'"
 	 * @generated
@@ -5206,15 +5239,6 @@ public interface EcorePackage extends EPackage {
 				.getEStructuralFeature__volatile();
 
 		/**
-		 * The meta object literal for the '<em><b>Default Value Literal</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL = eINSTANCE
-				.getEStructuralFeature_DefaultValueLiteral();
-
-		/**
 		 * The meta object literal for the '<em><b>EContaining Class</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5222,6 +5246,15 @@ public interface EcorePackage extends EPackage {
 		 */
 		EReference ESTRUCTURAL_FEATURE__ECONTAINING_CLASS = eINSTANCE
 				.getEStructuralFeature_EContainingClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Value Literal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL = eINSTANCE
+				.getEStructuralFeature_DefaultValueLiteral();
 
 		/**
 		 * The meta object literal for the '<em><b>transient</b></em>' attribute feature.

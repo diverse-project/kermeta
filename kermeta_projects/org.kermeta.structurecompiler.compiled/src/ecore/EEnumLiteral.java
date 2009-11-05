@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EEnumLiteral.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * </p>
  *
  * @see ecore.EcorePackage#getEEnumLiteral()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EEnumLiteral extends ENamedElement {
@@ -43,6 +43,7 @@ public interface EEnumLiteral extends ENamedElement {
 	 * @see ecore.EcorePackage#getEEnumLiteral_EEnum()
 	 * @see ecore.EEnum#getELiterals
 	 * @model opposite="eLiterals" changeable="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */
@@ -59,7 +60,7 @@ public interface EEnumLiteral extends ENamedElement {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(int)
 	 * @see ecore.EcorePackage#getEEnumLiteral_Value()
-	 * @model dataType="ecore.EInt"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	int getValue();
@@ -86,6 +87,7 @@ public interface EEnumLiteral extends ENamedElement {
 	 * @see #setInstance(Enumerator)
 	 * @see ecore.EcorePackage#getEEnumLiteral_Instance()
 	 * @model dataType="ecore.EEnumerator" transient="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */
@@ -112,7 +114,7 @@ public interface EEnumLiteral extends ENamedElement {
 	 * @return the value of the '<em>Literal</em>' attribute.
 	 * @see #setLiteral(String)
 	 * @see ecore.EcorePackage#getEEnumLiteral_Literal()
-	 * @model dataType="ecore.EString"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getLiteral();

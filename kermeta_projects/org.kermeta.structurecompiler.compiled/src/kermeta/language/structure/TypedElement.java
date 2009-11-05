@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TypedElement.java,v 1.12 2009-02-23 15:26:48 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure;
 
@@ -22,6 +22,7 @@ package kermeta.language.structure;
  *
  * @see kermeta.language.structure.StructurePackage#getTypedElement()
  * @model abstract="true"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Abstraction of the notion of typed element : each element \nthat is typed inherits this class.'"
  * @generated
  */
@@ -37,7 +38,8 @@ public interface TypedElement extends TypeContainer, NamedElement {
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(Type)
 	 * @see kermeta.language.structure.StructurePackage#getTypedElement_Type()
-	 * @model annotation="kermeta documentation='Type of the model element'"
+	 * @model annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='Type of the model element'"
 	 * @generated
 	 */
 	Type getType();

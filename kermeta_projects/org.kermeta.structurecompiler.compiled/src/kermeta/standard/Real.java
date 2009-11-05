@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Real.java,v 1.7 2009-02-23 15:26:46 cfaucher Exp $
+ * $Id$
  */
 package kermeta.standard;
 

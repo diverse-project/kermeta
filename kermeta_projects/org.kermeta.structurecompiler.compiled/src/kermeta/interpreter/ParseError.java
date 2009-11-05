@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ParseError.java,v 1.12 2009-02-23 15:26:49 cfaucher Exp $
+ * $Id$
  */
 package kermeta.interpreter;
 
@@ -15,7 +15,7 @@ package kermeta.interpreter;
  *
  *
  * @see kermeta.interpreter.InterpreterPackage#getParseError()
- * @model annotation="kermeta documentation='/**\r\n * Kermeta error for parsing problems\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * Kermeta error for parsing problems\n \052/'"
  * @generated
  */
 public interface ParseError extends KermetaError {

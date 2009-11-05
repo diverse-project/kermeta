@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ReferenceImpl.java,v 1.12 2009-02-23 15:26:52 cfaucher Exp $
+ * $Id$
  */
 package traceability.impl;
 
@@ -107,7 +107,7 @@ public abstract class ReferenceImpl extends ObjectImpl implements Reference {
 	 * @generated
 	 */
 	public TraceModel getTraceMdl() {
-		if (eContainerFeatureID != TraceabilityPackage.REFERENCE__TRACE_MDL)
+		if (eContainerFeatureID() != TraceabilityPackage.REFERENCE__TRACE_MDL)
 			return null;
 		return (TraceModel) eContainer();
 	}
@@ -118,7 +118,7 @@ public abstract class ReferenceImpl extends ObjectImpl implements Reference {
 	 * @generated
 	 */
 	public TraceModel basicGetTraceMdl() {
-		if (eContainerFeatureID != TraceabilityPackage.REFERENCE__TRACE_MDL)
+		if (eContainerFeatureID() != TraceabilityPackage.REFERENCE__TRACE_MDL)
 			return null;
 		return (TraceModel) eInternalContainer();
 	}
@@ -142,7 +142,7 @@ public abstract class ReferenceImpl extends ObjectImpl implements Reference {
 	 */
 	public void setTraceMdl(TraceModel newTraceMdl) {
 		if (newTraceMdl != eInternalContainer()
-				|| (eContainerFeatureID != TraceabilityPackage.REFERENCE__TRACE_MDL && newTraceMdl != null)) {
+				|| (eContainerFeatureID() != TraceabilityPackage.REFERENCE__TRACE_MDL && newTraceMdl != null)) {
 			if (EcoreUtil.isAncestor(this, newTraceMdl))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -230,7 +230,7 @@ public abstract class ReferenceImpl extends ObjectImpl implements Reference {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case TraceabilityPackage.REFERENCE__TRACE_MDL:
 			return eInternalContainer().eInverseRemove(this,
 					TraceabilityPackage.TRACE_MODEL__REFERENCES,

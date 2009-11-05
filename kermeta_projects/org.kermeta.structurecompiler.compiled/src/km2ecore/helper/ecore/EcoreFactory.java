@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EcoreFactory.java,v 1.12 2009-02-23 15:26:55 cfaucher Exp $
+ * $Id$
  */
 package km2ecore.helper.ecore;
 
@@ -28,15 +28,6 @@ public interface EcoreFactory extends EFactory {
 	EcoreFactory eINSTANCE = km2ecore.helper.ecore.impl.EcoreFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>EAnnotation Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>EAnnotation Helper</em>'.
-	 * @generated
-	 */
-	EAnnotationHelper createEAnnotationHelper();
-
-	/**
 	 * Returns a new object of class '<em>Model Analizer</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -53,6 +44,15 @@ public interface EcoreFactory extends EFactory {
 	 * @generated
 	 */
 	EcoreModelElementHelper createEcoreModelElementHelper();
+
+	/**
+	 * Returns a new object of class '<em>EAnnotation Helper</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>EAnnotation Helper</em>'.
+	 * @generated
+	 */
+	EAnnotationHelper createEAnnotationHelper();
 
 	/**
 	 * Returns the package supported by this factory.

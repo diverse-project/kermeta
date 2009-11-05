@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TraceModel.java,v 1.12 2009-02-23 15:26:53 cfaucher Exp $
+ * $Id$
  */
 package traceability;
 
@@ -26,7 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see traceability.TraceabilityPackage#getTraceModel()
- * @model annotation="kermeta documentation='/**\r\n * This class represents a trace model.\r\n * This is a set of traces, references and messages.\r\n \052/'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='/**\r\n * This class represents a trace model.\r\n * This is a set of traces, references and messages.\r\n \052/'"
  * @generated
  */
 public interface TraceModel extends kermeta.language.structure.Object {
@@ -60,6 +61,7 @@ public interface TraceModel extends kermeta.language.structure.Object {
 	 * @see traceability.TraceabilityPackage#getTraceModel_References()
 	 * @see traceability.Reference#getTraceMdl
 	 * @model opposite="traceMdl" containment="true" resolveProxies="true" ordered="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Set of references to the traced objects of the trace model \052/'"
 	 * @generated
 	 */
@@ -79,6 +81,7 @@ public interface TraceModel extends kermeta.language.structure.Object {
 	 * @see traceability.TraceabilityPackage#getTraceModel_Traces()
 	 * @see traceability.Trace#getTraceMdl
 	 * @model opposite="traceMdl" containment="true" resolveProxies="true" ordered="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Set of traces contained by the trace model \052/'"
 	 * @generated
 	 */
@@ -98,6 +101,7 @@ public interface TraceModel extends kermeta.language.structure.Object {
 	 * @see traceability.TraceabilityPackage#getTraceModel_Messages()
 	 * @see traceability.Message#getTraceMdl
 	 * @model opposite="traceMdl" containment="true" resolveProxies="true" ordered="false"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='/** Set of messages contained by the trace model \052/'"
 	 * @generated
 	 */

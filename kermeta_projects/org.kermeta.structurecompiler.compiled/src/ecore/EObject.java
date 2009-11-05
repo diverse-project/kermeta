@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EObject.java,v 1.11 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -15,7 +15,7 @@ package ecore;
  *
  *
  * @see ecore.EcorePackage#getEObject()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EObject extends kermeta.language.structure.Object {

@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ExceptionsAdapterFactory.java,v 1.12 2009-02-23 15:26:46 cfaucher Exp $
+ * $Id$
  */
 package kermeta.exceptions.util;
 
@@ -14,6 +14,7 @@ import kermeta.exceptions.ConstraintViolatedException;
 import kermeta.exceptions.ConstraintViolatedInv;
 import kermeta.exceptions.ConstraintViolatedPost;
 import kermeta.exceptions.ConstraintViolatedPre;
+import kermeta.exceptions.ConstraintsDiagnostic;
 import kermeta.exceptions.DivisionByZero;
 import kermeta.exceptions.DynamicExpressionException;
 import kermeta.exceptions.EmptyCollection;
@@ -100,6 +101,11 @@ public class ExceptionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected ExceptionsSwitch<Adapter> modelSwitch = new ExceptionsSwitch<Adapter>() {
+		@Override
+		public Adapter caseConstraintsDiagnostic(ConstraintsDiagnostic object) {
+			return createConstraintsDiagnosticAdapter();
+		}
+
 		@Override
 		public Adapter caseException(kermeta.exceptions.Exception object) {
 			return createExceptionAdapter();
@@ -275,6 +281,20 @@ public class ExceptionsAdapterFactory extends AdapterFactoryImpl {
 	@Override
 	public Adapter createAdapter(Notifier target) {
 		return modelSwitch.doSwitch((EObject) target);
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.exceptions.ConstraintsDiagnostic <em>Constraints Diagnostic</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.exceptions.ConstraintsDiagnostic
+	 * @generated
+	 */
+	public Adapter createConstraintsDiagnosticAdapter() {
+		return null;
 	}
 
 	/**

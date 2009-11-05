@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: JavaStaticCall.java,v 1.12 2009-02-23 15:26:37 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior;
 
@@ -27,8 +27,9 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getJavaStaticCall()
- * @model annotation="kermeta documentation='This class represent a call to an extern Java operation. \nThis Java operation must be static and have at least one RuntimeO'"
- *        annotation="kermeta documentation='/** Complete \052/'"
+ * @model annotation="kermeta documentation='/** Complete \052/'"
+ *        annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='This class represent a call to an extern Java operation. \nThis Java operation must be static and have at least one RuntimeO'"
  * @generated
  */
 public interface JavaStaticCall extends Expression {
@@ -44,6 +45,7 @@ public interface JavaStaticCall extends Expression {
 	 * @see #setJmethod(String)
 	 * @see kermeta.language.behavior.BehaviorPackage#getJavaStaticCall_Jmethod()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Name of the Java method to be launched in the identified Java class'"
 	 * @generated
 	 */
@@ -71,6 +73,7 @@ public interface JavaStaticCall extends Expression {
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see kermeta.language.behavior.BehaviorPackage#getJavaStaticCall_Parameters()
 	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Parameters of the Java static call provided as KerMeta expressions'"
 	 * @generated
 	 */
@@ -88,6 +91,7 @@ public interface JavaStaticCall extends Expression {
 	 * @see #setJclass(String)
 	 * @see kermeta.language.behavior.BehaviorPackage#getJavaStaticCall_Jclass()
 	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='Qualified name of the targeted Java class'"
 	 * @generated
 	 */
@@ -108,7 +112,7 @@ public interface JavaStaticCall extends Expression {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta superOperation='kermeta::language::behavior::Expression'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tjava.lang.Boolean idIfCond_691 = false;\n\tidIfCond_691 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(context.getCompiledJavaExtern(), \"\");\n\n\tif( idIfCond_691 ) {\n\n\tjava.lang.Boolean idIfCond_692 = false;\n\tidIfCond_692 = kermeta.standard.helper.IntegerWrapper.isLower(kermeta.standard.helper.StringWrapper.split(kermeta.standard.helper.StringWrapper.replace(context.getCompiledJavaExtern(), \"(\", \"%\"), \"%\").size(), 2);\n\n\tif( idIfCond_692 ) {\n\n\tcontext.setCompiledJavaExtern(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(context.getCompiledJavaExtern(), \"(\"), ((km2ecore.helper.kermeta.CompilerHelperJava) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.kermeta.KermetaPackage.eINSTANCE.getCompilerHelperJava())).ppComaSeparatedNodes(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.behavior.Expression>convertAsOrderedSet(this.getParameters()), context)), \")\"));\n}\n\n}\n\n\n\tjava.lang.Boolean idIfCond_693 = false;\n\tidIfCond_693 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(context.getCompiledJavaExtern(), \"\");\n\n\tif( idIfCond_693 ) {\n\n\tresult = context.getCompiledJavaExtern();\n\n\tcontext.setCompiledJavaExtern(\"\");\n}\n else {\n\n\tjava.lang.Boolean idIfCond_694 = false;\n\tidIfCond_694 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getContainerAsType(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ClassDefinition\")), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ClassDefinition\"))).isValueType();\n\n\tif( idIfCond_694 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"org.kermeta.compil.runtime.helper.basetypes.\", ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getContainerAsType(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ClassDefinition\")), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ClassDefinition\"))).getName()), \"Util.\"), this.getJmethod());\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.replace(this.getJclass(), \"::\", \".\"), \".\"), ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE.getIdentifierHelper())).getMangledIdentifier(this.getJmethod(), context));\n}\n\n\n\tthis.setBeforeLambdaExpressionResult(\"\");\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \"(\"), ((km2ecore.helper.kermeta.CompilerHelperJava) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.kermeta.KermetaPackage.eINSTANCE.getCompilerHelperJava())).ppComaSeparatedNodes(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.behavior.Expression>convertAsOrderedSet(this.getParameters()), context)), \")\");\n\n\tcontext.setBeforeLambdaExpressionResult(this.getBeforeLambdaExpressionResult());\n\n\tthis.setBeforeLambdaExpressionResult(\"\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tjava.lang.Boolean idIfCond_284 = false;\n\tidIfCond_284 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(context.getCompiledJavaExtern(), \"\");\n\n\tif( idIfCond_284 ) {\n\n\tjava.lang.Boolean idIfCond_285 = false;\n\tidIfCond_285 = kermeta.standard.helper.IntegerWrapper.isLower(kermeta.standard.helper.StringWrapper.split(kermeta.standard.helper.StringWrapper.replace(context.getCompiledJavaExtern(), \"(\", \"%\"), \"%\").size(), 2);\n\n\tif( idIfCond_285 ) {\n\n\tcontext.setCompiledJavaExtern(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(context.getCompiledJavaExtern(), \"(\"), ((km2ecore.helper.kermeta.CompilerHelperJava) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.kermeta.KermetaPackage.eINSTANCE.getCompilerHelperJava())).ppComaSeparatedNodes(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.behavior.Expression>convertAsOrderedSet(this.getParameters()), context)), \")\"));\n}\n\n}\n\n\n\tjava.lang.Boolean idIfCond_286 = false;\n\tidIfCond_286 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(context.getCompiledJavaExtern(), \"\");\n\n\tif( idIfCond_286 ) {\n\n\tresult = context.getCompiledJavaExtern();\n\n\tcontext.setCompiledJavaExtern(\"\");\n}\n else {\n\n\tjava.lang.Boolean idIfCond_287 = false;\n\tidIfCond_287 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getContainerAsType(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ClassDefinition\")), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ClassDefinition\"))).isValueType();\n\n\tif( idIfCond_287 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"org.kermeta.compil.runtime.helper.basetypes.\", ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getContainerAsType(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ClassDefinition\")), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ClassDefinition\"))).getName()), \"Util.\"), this.getJmethod());\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.replace(this.getJclass(), \"::\", \".\"), \".\"), ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE.getIdentifierHelper())).getMangledIdentifier(this.getJmethod(), context));\n}\n\n\n\tthis.setBeforeLambdaExpressionResult(\"\");\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \"(\"), ((km2ecore.helper.kermeta.CompilerHelperJava) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.kermeta.KermetaPackage.eINSTANCE.getCompilerHelperJava())).ppComaSeparatedNodes(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.behavior.Expression>convertAsOrderedSet(this.getParameters()), context)), \")\");\n\n\tcontext.setBeforeLambdaExpressionResult(this.getBeforeLambdaExpressionResult());\n\n\tthis.setBeforeLambdaExpressionResult(\"\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String createBehaviorJava(KM2EcoreContext context);

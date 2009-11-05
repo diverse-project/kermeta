@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SMReturn.java,v 1.12 2009-02-23 15:26:55 cfaucher Exp $
+ * $Id$
  */
 package simk;
 
@@ -15,7 +15,7 @@ package simk;
  *
  *
  * @see simk.SimkPackage#getSMReturn()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface SMReturn extends SMTypedElement {

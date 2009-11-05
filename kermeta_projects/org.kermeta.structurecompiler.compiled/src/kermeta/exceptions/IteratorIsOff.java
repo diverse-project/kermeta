@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: IteratorIsOff.java,v 1.12 2009-02-23 15:26:43 cfaucher Exp $
+ * $Id$
  */
 package kermeta.exceptions;
 
@@ -15,7 +15,7 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getIteratorIsOff()
- * @model annotation="kermeta documentation='/**\r\n * Occurs when calling next() operation while iterator is already\r\n * positioned on the last element of a collection\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * Occurs when calling next() operation while iterator is already\n * positioned on the last element of a collection\n \052/'"
  * @generated
  */
 public interface IteratorIsOff extends kermeta.exceptions.Exception {

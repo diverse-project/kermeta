@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: BehaviorFactory.java,v 1.12 2009-02-23 15:26:38 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior;
 
@@ -29,6 +29,24 @@ public interface BehaviorFactory extends EFactory {
 			.init();
 
 	/**
+	 * Returns a new object of class '<em>Variable Decl</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Variable Decl</em>'.
+	 * @generated
+	 */
+	VariableDecl createVariableDecl();
+
+	/**
+	 * Returns a new object of class '<em>Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expression</em>'.
+	 * @generated
+	 */
+	Expression createExpression();
+
+	/**
 	 * Returns a new object of class '<em>Block</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -38,22 +56,13 @@ public interface BehaviorFactory extends EFactory {
 	Block createBlock();
 
 	/**
-	 * Returns a new object of class '<em>Assignment</em>'.
+	 * Returns a new object of class '<em>Call Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Assignment</em>'.
+	 * @return a new object of class '<em>Call Expression</em>'.
 	 * @generated
 	 */
-	Assignment createAssignment();
-
-	/**
-	 * Returns a new object of class '<em>Call Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Call Variable</em>'.
-	 * @generated
-	 */
-	CallVariable createCallVariable();
+	CallExpression createCallExpression();
 
 	/**
 	 * Returns a new object of class '<em>Call Feature</em>'.
@@ -65,13 +74,13 @@ public interface BehaviorFactory extends EFactory {
 	CallFeature createCallFeature();
 
 	/**
-	 * Returns a new object of class '<em>Call Super Operation</em>'.
+	 * Returns a new object of class '<em>Call Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Call Super Operation</em>'.
+	 * @return a new object of class '<em>Call Variable</em>'.
 	 * @generated
 	 */
-	CallSuperOperation createCallSuperOperation();
+	CallVariable createCallVariable();
 
 	/**
 	 * Returns a new object of class '<em>Call Result</em>'.
@@ -92,58 +101,22 @@ public interface BehaviorFactory extends EFactory {
 	CallValue createCallValue();
 
 	/**
-	 * Returns a new object of class '<em>Conditional</em>'.
+	 * Returns a new object of class '<em>Call Super Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Conditional</em>'.
+	 * @return a new object of class '<em>Call Super Operation</em>'.
 	 * @generated
 	 */
-	Conditional createConditional();
+	CallSuperOperation createCallSuperOperation();
 
 	/**
-	 * Returns a new object of class '<em>Raise</em>'.
+	 * Returns a new object of class '<em>Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Raise</em>'.
+	 * @return a new object of class '<em>Assignment</em>'.
 	 * @generated
 	 */
-	Raise createRaise();
-
-	/**
-	 * Returns a new object of class '<em>Rescue</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rescue</em>'.
-	 * @generated
-	 */
-	Rescue createRescue();
-
-	/**
-	 * Returns a new object of class '<em>Type Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Reference</em>'.
-	 * @generated
-	 */
-	TypeReference createTypeReference();
-
-	/**
-	 * Returns a new object of class '<em>Empty Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Empty Expression</em>'.
-	 * @generated
-	 */
-	EmptyExpression createEmptyExpression();
-
-	/**
-	 * Returns a new object of class '<em>Java Static Call</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Java Static Call</em>'.
-	 * @generated
-	 */
-	JavaStaticCall createJavaStaticCall();
+	Assignment createAssignment();
 
 	/**
 	 * Returns a new object of class '<em>Lambda Expression</em>'.
@@ -164,13 +137,76 @@ public interface BehaviorFactory extends EFactory {
 	LambdaParameter createLambdaParameter();
 
 	/**
-	 * Returns a new object of class '<em>Integer Literal</em>'.
+	 * Returns a new object of class '<em>Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Integer Literal</em>'.
+	 * @return a new object of class '<em>Type Reference</em>'.
 	 * @generated
 	 */
-	IntegerLiteral createIntegerLiteral();
+	TypeReference createTypeReference();
+
+	/**
+	 * Returns a new object of class '<em>Raise</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Raise</em>'.
+	 * @generated
+	 */
+	Raise createRaise();
+
+	/**
+	 * Returns a new object of class '<em>Rescue</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rescue</em>'.
+	 * @generated
+	 */
+	Rescue createRescue();
+
+	/**
+	 * Returns a new object of class '<em>Self Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Self Expression</em>'.
+	 * @generated
+	 */
+	SelfExpression createSelfExpression();
+
+	/**
+	 * Returns a new object of class '<em>Conditional</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Conditional</em>'.
+	 * @generated
+	 */
+	Conditional createConditional();
+
+	/**
+	 * Returns a new object of class '<em>Loop</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Loop</em>'.
+	 * @generated
+	 */
+	Loop createLoop();
+
+	/**
+	 * Returns a new object of class '<em>Java Static Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Java Static Call</em>'.
+	 * @generated
+	 */
+	JavaStaticCall createJavaStaticCall();
+
+	/**
+	 * Returns a new object of class '<em>Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Literal</em>'.
+	 * @generated
+	 */
+	Literal createLiteral();
 
 	/**
 	 * Returns a new object of class '<em>String Literal</em>'.
@@ -180,6 +216,15 @@ public interface BehaviorFactory extends EFactory {
 	 * @generated
 	 */
 	StringLiteral createStringLiteral();
+
+	/**
+	 * Returns a new object of class '<em>Integer Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Integer Literal</em>'.
+	 * @generated
+	 */
+	IntegerLiteral createIntegerLiteral();
 
 	/**
 	 * Returns a new object of class '<em>Boolean Literal</em>'.
@@ -209,31 +254,13 @@ public interface BehaviorFactory extends EFactory {
 	VoidLiteral createVoidLiteral();
 
 	/**
-	 * Returns a new object of class '<em>Loop</em>'.
+	 * Returns a new object of class '<em>Empty Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Loop</em>'.
+	 * @return a new object of class '<em>Empty Expression</em>'.
 	 * @generated
 	 */
-	Loop createLoop();
-
-	/**
-	 * Returns a new object of class '<em>Self Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Self Expression</em>'.
-	 * @generated
-	 */
-	SelfExpression createSelfExpression();
-
-	/**
-	 * Returns a new object of class '<em>Variable Decl</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Variable Decl</em>'.
-	 * @generated
-	 */
-	VariableDecl createVariableDecl();
+	EmptyExpression createEmptyExpression();
 
 	/**
 	 * Returns the package supported by this factory.

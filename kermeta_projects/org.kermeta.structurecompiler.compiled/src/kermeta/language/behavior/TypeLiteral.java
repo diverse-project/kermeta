@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TypeLiteral.java,v 1.12 2009-02-23 15:26:38 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior;
 
@@ -23,7 +23,8 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getTypeLiteral()
- * @model annotation="kermeta documentation='This expression is a literal representing a Type.\nfor example, in \n   Integer.new\nInteger is a type literal representing the type kermeta::standard::Integer'"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='This expression is a literal representing a Type.\nfor example, in \n   Integer.new\nInteger is a type literal representing the type kermeta::standard::Integer'"
  * @generated
  */
 public interface TypeLiteral extends Literal {
@@ -39,6 +40,7 @@ public interface TypeLiteral extends Literal {
 	 * @see #setTyperef(TypeReference)
 	 * @see kermeta.language.behavior.BehaviorPackage#getTypeLiteral_Typeref()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='The type refered by this literal'"
 	 * @generated
 	 */

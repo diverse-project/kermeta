@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ConstraintImpl.java,v 1.12 2009-02-23 15:26:40 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.structure.impl;
 
@@ -306,7 +306,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public Operation getPreOwner() {
-		if (eContainerFeatureID != StructurePackage.CONSTRAINT__PRE_OWNER)
+		if (eContainerFeatureID() != StructurePackage.CONSTRAINT__PRE_OWNER)
 			return null;
 		return (Operation) eContainer();
 	}
@@ -317,7 +317,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public Operation basicGetPreOwner() {
-		if (eContainerFeatureID != StructurePackage.CONSTRAINT__PRE_OWNER)
+		if (eContainerFeatureID() != StructurePackage.CONSTRAINT__PRE_OWNER)
 			return null;
 		return (Operation) eInternalContainer();
 	}
@@ -341,7 +341,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	public void setPreOwner(Operation newPreOwner) {
 		if (newPreOwner != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.CONSTRAINT__PRE_OWNER && newPreOwner != null)) {
+				|| (eContainerFeatureID() != StructurePackage.CONSTRAINT__PRE_OWNER && newPreOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newPreOwner))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -390,7 +390,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public Operation getPostOwner() {
-		if (eContainerFeatureID != StructurePackage.CONSTRAINT__POST_OWNER)
+		if (eContainerFeatureID() != StructurePackage.CONSTRAINT__POST_OWNER)
 			return null;
 		return (Operation) eContainer();
 	}
@@ -401,7 +401,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public Operation basicGetPostOwner() {
-		if (eContainerFeatureID != StructurePackage.CONSTRAINT__POST_OWNER)
+		if (eContainerFeatureID() != StructurePackage.CONSTRAINT__POST_OWNER)
 			return null;
 		return (Operation) eInternalContainer();
 	}
@@ -425,7 +425,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	public void setPostOwner(Operation newPostOwner) {
 		if (newPostOwner != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.CONSTRAINT__POST_OWNER && newPostOwner != null)) {
+				|| (eContainerFeatureID() != StructurePackage.CONSTRAINT__POST_OWNER && newPostOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newPostOwner))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -474,7 +474,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public ClassDefinition getInvOwner() {
-		if (eContainerFeatureID != StructurePackage.CONSTRAINT__INV_OWNER)
+		if (eContainerFeatureID() != StructurePackage.CONSTRAINT__INV_OWNER)
 			return null;
 		return (ClassDefinition) eContainer();
 	}
@@ -485,7 +485,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public ClassDefinition basicGetInvOwner() {
-		if (eContainerFeatureID != StructurePackage.CONSTRAINT__INV_OWNER)
+		if (eContainerFeatureID() != StructurePackage.CONSTRAINT__INV_OWNER)
 			return null;
 		return (ClassDefinition) eInternalContainer();
 	}
@@ -509,7 +509,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	public void setInvOwner(ClassDefinition newInvOwner) {
 		if (newInvOwner != eInternalContainer()
-				|| (eContainerFeatureID != StructurePackage.CONSTRAINT__INV_OWNER && newInvOwner != null)) {
+				|| (eContainerFeatureID() != StructurePackage.CONSTRAINT__INV_OWNER && newInvOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newInvOwner))
 				throw new IllegalArgumentException(
 						"Recursive containment not allowed for " + toString());
@@ -540,14 +540,14 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 		result = "";
 
-		java.lang.Boolean idIfCond_306 = false;
-		idIfCond_306 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_551 = false;
+		idIfCond_551 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(this.getBody(),
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance().getMetaClass(
 										"kermeta.language.behavior.Block"));
 
-		if (idIfCond_306) {
+		if (idIfCond_551) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result, this
 					.getBody().createBehaviorJava(context));
@@ -589,12 +589,12 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		simk.SMContext smContext = context.getSimkModel()
 				.retrieveOrCreateContextForInvariant(this, context);
 
-		java.lang.Boolean idIfCond_307 = false;
-		idIfCond_307 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_552 = false;
+		idIfCond_552 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(smContext));
 
-		if (idIfCond_307) {
+		if (idIfCond_552) {
 
 			simk.SMMethod staticMethod = ((simk.SMMethod) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(simk.SimkPackage.eINSTANCE.getSMMethod()));
@@ -686,11 +686,11 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		kermeta.language.structure.Property p = c
 				.getPropertyValue("ecoreModelElement");
 
-		java.lang.Boolean idIfCond_308 = false;
-		idIfCond_308 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_553 = false;
+		idIfCond_553 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(p, null);
 
-		if (idIfCond_308) {
+		if (idIfCond_553) {
 
 			ecore.EModelElement ecoreModelElement = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
@@ -743,13 +743,13 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 		java.lang.String body = "";
 
-		java.lang.Boolean idIfCond_309 = false;
-		idIfCond_309 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_554 = false;
+		idIfCond_554 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equalsSwitcher(this.getStereotype(),
 						kermeta.language.structure.ConstraintType
 								.getByName("inv"));
 
-		if (idIfCond_309) {
+		if (idIfCond_554) {
 
 			result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
@@ -757,13 +757,13 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 					this.getName(), body);
 		} else {
 
-			java.lang.Boolean idIfCond_310 = false;
-			idIfCond_310 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_555 = false;
+			idIfCond_555 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.equalsSwitcher(this.getStereotype(),
 							kermeta.language.structure.ConstraintType
 									.getByName("pre"));
 
-			if (idIfCond_310) {
+			if (idIfCond_555) {
 
 				result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
@@ -771,13 +771,13 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 						this.getName(), body);
 			} else {
 
-				java.lang.Boolean idIfCond_311 = false;
-				idIfCond_311 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_556 = false;
+				idIfCond_556 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equalsSwitcher(this.getStereotype(),
 								kermeta.language.structure.ConstraintType
 										.getByName("post"));
 
-				if (idIfCond_311) {
+				if (idIfCond_556) {
 
 					result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
@@ -816,6 +816,26 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void applyPass2BehaviorJava(KM2EcoreContext context) {
+
+		java.lang.Boolean idIfCond_557 = false;
+		idIfCond_557 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.equalsSwitcher(this.getStereotype(),
+						kermeta.language.structure.ConstraintType
+								.getByName("inv"));
+
+		if (idIfCond_557) {
+
+			this.setSimkForInvariant(context);
+		}
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Boolean isPost(Constraint c) {
 
 		java.lang.Boolean result = null;
@@ -826,26 +846,6 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 								.getByName("post"));
 
 		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void applyPass2BehaviorJava(KM2EcoreContext context) {
-
-		java.lang.Boolean idIfCond_312 = false;
-		idIfCond_312 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.equalsSwitcher(this.getStereotype(),
-						kermeta.language.structure.ConstraintType
-								.getByName("inv"));
-
-		if (idIfCond_312) {
-
-			this.setSimkForInvariant(context);
-		}
 
 	}
 
@@ -903,7 +903,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 		case StructurePackage.CONSTRAINT__PRE_OWNER:
 			return eInternalContainer().eInverseRemove(this,
 					StructurePackage.OPERATION__PRE, Operation.class, msgs);

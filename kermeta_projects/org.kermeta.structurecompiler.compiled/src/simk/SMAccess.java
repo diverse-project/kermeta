@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SMAccess.java,v 1.9 2009-02-23 15:26:55 cfaucher Exp $
+ * $Id$
  */
 package simk;
 
@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * @see simk.SimkPackage#getSMAccess()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public enum SMAccess implements Enumerator {

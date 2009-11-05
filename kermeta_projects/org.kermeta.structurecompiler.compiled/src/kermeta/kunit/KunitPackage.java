@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: KunitPackage.java,v 1.12 2009-02-23 15:26:50 cfaucher Exp $
+ * $Id$
  */
 package kermeta.kunit;
 
@@ -32,8 +32,8 @@ import org.eclipse.emf.ecore.EReference;
  * @see kermeta.kunit.KunitFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/kunit'"
- *        annotation="kermeta documentation='/**\r\n * main features of the famous Unit test tool for Kermeta language\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png\"/>\r\n \052/'"
- *        annotation="kermeta documentation='/**\r\n * Contains the implementation of a unit test tool. This is a clone of\r\n * JUnit architecture.\r\n * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm\r\n *\r\n * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.\r\n *\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png\"/>\r\n \052/'"
+ *        annotation="kermeta documentation='/**\n * main features of the famous Unit test tool for Kermeta language\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png\"/>\n \052/'"
+ *        annotation="kermeta documentation='/**\n * Contains the implementation of a unit test tool. This is a clone of\n * JUnit architecture.\n * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm\n *\n * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.\n *\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png\"/>\n \052/'"
  * @generated
  */
 public interface KunitPackage extends EPackage {
@@ -77,7 +77,7 @@ public interface KunitPackage extends EPackage {
 	 * @see kermeta.kunit.impl.KunitPackageImpl#getAbstractFallible()
 	 * @generated
 	 */
-	int ABSTRACT_FALLIBLE = 2;
+	int ABSTRACT_FALLIBLE = 0;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -152,197 +152,6 @@ public interface KunitPackage extends EPackage {
 	int ABSTRACT_FALLIBLE_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link kermeta.kunit.impl.FallibleImpl <em>Fallible</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.kunit.impl.FallibleImpl
-	 * @see kermeta.kunit.impl.KunitPackageImpl#getFallible()
-	 * @generated
-	 */
-	int FALLIBLE = 0;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FALLIBLE__FILE = ABSTRACT_FALLIBLE__FILE;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FALLIBLE__TAG = ABSTRACT_FALLIBLE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FALLIBLE__FILE_NAME = ABSTRACT_FALLIBLE__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FALLIBLE__LINE_NUMBER = ABSTRACT_FALLIBLE__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FALLIBLE__OWNED_TAGS = ABSTRACT_FALLIBLE__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FALLIBLE__OID = ABSTRACT_FALLIBLE__OID;
-
-	/**
-	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FALLIBLE__INTERNAL_CONTAINING_RESOURCE = ABSTRACT_FALLIBLE__INTERNAL_CONTAINING_RESOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Stop On Failure</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FALLIBLE__STOP_ON_FAILURE = ABSTRACT_FALLIBLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Rank</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FALLIBLE__RANK = ABSTRACT_FALLIBLE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Fallible</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FALLIBLE_FEATURE_COUNT = ABSTRACT_FALLIBLE_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link kermeta.kunit.impl.TestImpl <em>Test</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.kunit.impl.TestImpl
-	 * @see kermeta.kunit.impl.KunitPackageImpl#getTest()
-	 * @generated
-	 */
-	int TEST = 1;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Log</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST__LOG = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Test</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link kermeta.kunit.impl.AssertionFailedErrorImpl <em>Assertion Failed Error</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -350,7 +159,7 @@ public interface KunitPackage extends EPackage {
 	 * @see kermeta.kunit.impl.KunitPackageImpl#getAssertionFailedError()
 	 * @generated
 	 */
-	int ASSERTION_FAILED_ERROR = 3;
+	int ASSERTION_FAILED_ERROR = 1;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -459,7 +268,7 @@ public interface KunitPackage extends EPackage {
 	 * @see kermeta.kunit.impl.KunitPackageImpl#getAssert()
 	 * @generated
 	 */
-	int ASSERT = 4;
+	int ASSERT = 2;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -541,7 +350,7 @@ public interface KunitPackage extends EPackage {
 	 * @see kermeta.kunit.impl.KunitPackageImpl#getInvalidTestCaseNameException()
 	 * @generated
 	 */
-	int INVALID_TEST_CASE_NAME_EXCEPTION = 5;
+	int INVALID_TEST_CASE_NAME_EXCEPTION = 3;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -650,7 +459,7 @@ public interface KunitPackage extends EPackage {
 	 * @see kermeta.kunit.impl.KunitPackageImpl#getInvalidParameterException()
 	 * @generated
 	 */
-	int INVALID_PARAMETER_EXCEPTION = 6;
+	int INVALID_PARAMETER_EXCEPTION = 4;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -752,6 +561,106 @@ public interface KunitPackage extends EPackage {
 	int INVALID_PARAMETER_EXCEPTION_FEATURE_COUNT = ExceptionsPackage.EXCEPTION_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link kermeta.kunit.impl.FallibleImpl <em>Fallible</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.kunit.impl.FallibleImpl
+	 * @see kermeta.kunit.impl.KunitPackageImpl#getFallible()
+	 * @generated
+	 */
+	int FALLIBLE = 5;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FALLIBLE__FILE = ABSTRACT_FALLIBLE__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FALLIBLE__TAG = ABSTRACT_FALLIBLE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FALLIBLE__FILE_NAME = ABSTRACT_FALLIBLE__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FALLIBLE__LINE_NUMBER = ABSTRACT_FALLIBLE__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FALLIBLE__OWNED_TAGS = ABSTRACT_FALLIBLE__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FALLIBLE__OID = ABSTRACT_FALLIBLE__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FALLIBLE__INTERNAL_CONTAINING_RESOURCE = ABSTRACT_FALLIBLE__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Stop On Failure</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FALLIBLE__STOP_ON_FAILURE = ABSTRACT_FALLIBLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Rank</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FALLIBLE__RANK = ABSTRACT_FALLIBLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Fallible</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FALLIBLE_FEATURE_COUNT = ABSTRACT_FALLIBLE_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link kermeta.kunit.impl.LogImpl <em>Log</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -759,7 +668,7 @@ public interface KunitPackage extends EPackage {
 	 * @see kermeta.kunit.impl.KunitPackageImpl#getLog()
 	 * @generated
 	 */
-	int LOG = 7;
+	int LOG = 6;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -877,7 +786,7 @@ public interface KunitPackage extends EPackage {
 	 * @see kermeta.kunit.impl.KunitPackageImpl#getFailure()
 	 * @generated
 	 */
-	int FAILURE = 8;
+	int FAILURE = 7;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -977,7 +886,7 @@ public interface KunitPackage extends EPackage {
 	 * @see kermeta.kunit.impl.KunitPackageImpl#getError()
 	 * @generated
 	 */
-	int ERROR = 9;
+	int ERROR = 8;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1077,6 +986,97 @@ public interface KunitPackage extends EPackage {
 	 * @ordered
 	 */
 	int ERROR_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link kermeta.kunit.impl.TestImpl <em>Test</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.kunit.impl.TestImpl
+	 * @see kermeta.kunit.impl.KunitPackageImpl#getTest()
+	 * @generated
+	 */
+	int TEST = 9;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Log</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST__LOG = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Test</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link kermeta.kunit.impl.TestSuiteImpl <em>Test Suite</em>}' class.
@@ -1398,59 +1398,6 @@ public interface KunitPackage extends EPackage {
 	int ERROR_KIND = 13;
 
 	/**
-	 * Returns the meta object for class '{@link kermeta.kunit.Fallible <em>Fallible</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Fallible</em>'.
-	 * @see kermeta.kunit.Fallible
-	 * @generated
-	 */
-	EClass getFallible();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.kunit.Fallible#getStopOnFailure <em>Stop On Failure</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Stop On Failure</em>'.
-	 * @see kermeta.kunit.Fallible#getStopOnFailure()
-	 * @see #getFallible()
-	 * @generated
-	 */
-	EAttribute getFallible_StopOnFailure();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.kunit.Fallible#getRank <em>Rank</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Rank</em>'.
-	 * @see kermeta.kunit.Fallible#getRank()
-	 * @see #getFallible()
-	 * @generated
-	 */
-	EAttribute getFallible_Rank();
-
-	/**
-	 * Returns the meta object for class '{@link kermeta.kunit.Test <em>Test</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Test</em>'.
-	 * @see kermeta.kunit.Test
-	 * @generated
-	 */
-	EClass getTest();
-
-	/**
-	 * Returns the meta object for the reference '{@link kermeta.kunit.Test#getLog <em>Log</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Log</em>'.
-	 * @see kermeta.kunit.Test#getLog()
-	 * @see #getTest()
-	 * @generated
-	 */
-	EReference getTest_Log();
-
-	/**
 	 * Returns the meta object for class '{@link kermeta.kunit.AbstractFallible <em>Abstract Fallible</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1499,6 +1446,38 @@ public interface KunitPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getInvalidParameterException();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.kunit.Fallible <em>Fallible</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Fallible</em>'.
+	 * @see kermeta.kunit.Fallible
+	 * @generated
+	 */
+	EClass getFallible();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.kunit.Fallible#getStopOnFailure <em>Stop On Failure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Stop On Failure</em>'.
+	 * @see kermeta.kunit.Fallible#getStopOnFailure()
+	 * @see #getFallible()
+	 * @generated
+	 */
+	EAttribute getFallible_StopOnFailure();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.kunit.Fallible#getRank <em>Rank</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rank</em>'.
+	 * @see kermeta.kunit.Fallible#getRank()
+	 * @see #getFallible()
+	 * @generated
+	 */
+	EAttribute getFallible_Rank();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.kunit.Log <em>Log</em>}'.
@@ -1630,6 +1609,27 @@ public interface KunitPackage extends EPackage {
 	EAttribute getError_Kind();
 
 	/**
+	 * Returns the meta object for class '{@link kermeta.kunit.Test <em>Test</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Test</em>'.
+	 * @see kermeta.kunit.Test
+	 * @generated
+	 */
+	EClass getTest();
+
+	/**
+	 * Returns the meta object for the reference '{@link kermeta.kunit.Test#getLog <em>Log</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Log</em>'.
+	 * @see kermeta.kunit.Test#getLog()
+	 * @see #getTest()
+	 * @generated
+	 */
+	EReference getTest_Log();
+
+	/**
 	 * Returns the meta object for class '{@link kermeta.kunit.TestSuite <em>Test Suite</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1725,51 +1725,6 @@ public interface KunitPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link kermeta.kunit.impl.FallibleImpl <em>Fallible</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.kunit.impl.FallibleImpl
-		 * @see kermeta.kunit.impl.KunitPackageImpl#getFallible()
-		 * @generated
-		 */
-		EClass FALLIBLE = eINSTANCE.getFallible();
-
-		/**
-		 * The meta object literal for the '<em><b>Stop On Failure</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FALLIBLE__STOP_ON_FAILURE = eINSTANCE
-				.getFallible_StopOnFailure();
-
-		/**
-		 * The meta object literal for the '<em><b>Rank</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FALLIBLE__RANK = eINSTANCE.getFallible_Rank();
-
-		/**
-		 * The meta object literal for the '{@link kermeta.kunit.impl.TestImpl <em>Test</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.kunit.impl.TestImpl
-		 * @see kermeta.kunit.impl.KunitPackageImpl#getTest()
-		 * @generated
-		 */
-		EClass TEST = eINSTANCE.getTest();
-
-		/**
-		 * The meta object literal for the '<em><b>Log</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TEST__LOG = eINSTANCE.getTest_Log();
-
-		/**
 		 * The meta object literal for the '{@link kermeta.kunit.impl.AbstractFallibleImpl <em>Abstract Fallible</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1820,6 +1775,33 @@ public interface KunitPackage extends EPackage {
 		 */
 		EClass INVALID_PARAMETER_EXCEPTION = eINSTANCE
 				.getInvalidParameterException();
+
+		/**
+		 * The meta object literal for the '{@link kermeta.kunit.impl.FallibleImpl <em>Fallible</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.kunit.impl.FallibleImpl
+		 * @see kermeta.kunit.impl.KunitPackageImpl#getFallible()
+		 * @generated
+		 */
+		EClass FALLIBLE = eINSTANCE.getFallible();
+
+		/**
+		 * The meta object literal for the '<em><b>Stop On Failure</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FALLIBLE__STOP_ON_FAILURE = eINSTANCE
+				.getFallible_StopOnFailure();
+
+		/**
+		 * The meta object literal for the '<em><b>Rank</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FALLIBLE__RANK = eINSTANCE.getFallible_Rank();
 
 		/**
 		 * The meta object literal for the '{@link kermeta.kunit.impl.LogImpl <em>Log</em>}' class.
@@ -1922,6 +1904,24 @@ public interface KunitPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ERROR__KIND = eINSTANCE.getError_Kind();
+
+		/**
+		 * The meta object literal for the '{@link kermeta.kunit.impl.TestImpl <em>Test</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.kunit.impl.TestImpl
+		 * @see kermeta.kunit.impl.KunitPackageImpl#getTest()
+		 * @generated
+		 */
+		EClass TEST = eINSTANCE.getTest();
+
+		/**
+		 * The meta object literal for the '<em><b>Log</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEST__LOG = eINSTANCE.getTest_Log();
 
 		/**
 		 * The meta object literal for the '{@link kermeta.kunit.impl.TestSuiteImpl <em>Test Suite</em>}' class.

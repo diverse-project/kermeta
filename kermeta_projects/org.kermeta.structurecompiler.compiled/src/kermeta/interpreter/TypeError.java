@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TypeError.java,v 1.12 2009-02-23 15:26:49 cfaucher Exp $
+ * $Id$
  */
 package kermeta.interpreter;
 
@@ -15,7 +15,7 @@ package kermeta.interpreter;
  *
  *
  * @see kermeta.interpreter.InterpreterPackage#getTypeError()
- * @model annotation="kermeta documentation='/**\r\n * Type errors in a code written in Kermeta\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * Type errors in a code written in Kermeta\n \052/'"
  * @generated
  */
 public interface TypeError extends KermetaError {

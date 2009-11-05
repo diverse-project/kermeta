@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EcoreFactoryImpl.java,v 1.12 2009-02-23 15:26:56 cfaucher Exp $
+ * $Id$
  */
 package km2ecore.helper.ecore.impl;
 
@@ -63,12 +63,12 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case EcorePackage.EANNOTATION_HELPER:
-			return createEAnnotationHelper();
 		case EcorePackage.MODEL_ANALIZER:
 			return createModelAnalizer();
 		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
 			return createEcoreModelElementHelper();
+		case EcorePackage.EANNOTATION_HELPER:
+			return createEAnnotationHelper();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -120,16 +120,6 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAnnotationHelper createEAnnotationHelper() {
-		EAnnotationHelperImpl eAnnotationHelper = new EAnnotationHelperImpl();
-		return eAnnotationHelper;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ModelAnalizer createModelAnalizer() {
 		ModelAnalizerImpl modelAnalizer = new ModelAnalizerImpl();
 		return modelAnalizer;
@@ -143,6 +133,16 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	public EcoreModelElementHelper createEcoreModelElementHelper() {
 		EcoreModelElementHelperImpl ecoreModelElementHelper = new EcoreModelElementHelperImpl();
 		return ecoreModelElementHelper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAnnotationHelper createEAnnotationHelper() {
+		EAnnotationHelperImpl eAnnotationHelper = new EAnnotationHelperImpl();
+		return eAnnotationHelper;
 	}
 
 	/**

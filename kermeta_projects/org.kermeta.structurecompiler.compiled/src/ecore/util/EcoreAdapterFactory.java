@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EcoreAdapterFactory.java,v 1.11 2009-02-23 15:26:56 cfaucher Exp $
+ * $Id$
  */
 package ecore.util;
 
@@ -180,7 +180,7 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 
 		@Override
 		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
+			return createEcore_EObjectAdapter();
 		}
 	};
 
@@ -338,6 +338,20 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link ecore.EObject <em>EObject</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ecore.EObject
+	 * @generated
+	 */
+	public Adapter createEObjectAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link ecore.EOperation <em>EOperation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -485,7 +499,7 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	 * @return the new adapter.
 	 * @generated
 	 */
-	public Adapter createEObjectAdapter() {
+	public Adapter createEcore_EObjectAdapter() {
 		return null;
 	}
 

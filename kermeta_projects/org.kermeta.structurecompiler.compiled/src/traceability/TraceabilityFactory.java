@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TraceabilityFactory.java,v 1.12 2009-02-23 15:26:52 cfaucher Exp $
+ * $Id$
  */
 package traceability;
 
@@ -29,6 +29,15 @@ public interface TraceabilityFactory extends EFactory {
 			.init();
 
 	/**
+	 * Returns a new object of class '<em>Helper</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Helper</em>'.
+	 * @generated
+	 */
+	TraceabilityHelper createTraceabilityHelper();
+
+	/**
 	 * Returns a new object of class '<em>Trace Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -36,6 +45,15 @@ public interface TraceabilityFactory extends EFactory {
 	 * @generated
 	 */
 	TraceModel createTraceModel();
+
+	/**
+	 * Returns a new object of class '<em>File</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>File</em>'.
+	 * @generated
+	 */
+	File createFile();
 
 	/**
 	 * Returns a new object of class '<em>Message</em>'.
@@ -81,24 +99,6 @@ public interface TraceabilityFactory extends EFactory {
 	 * @generated
 	 */
 	ModelReference createModelReference();
-
-	/**
-	 * Returns a new object of class '<em>Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Helper</em>'.
-	 * @generated
-	 */
-	TraceabilityHelper createTraceabilityHelper();
-
-	/**
-	 * Returns a new object of class '<em>File</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>File</em>'.
-	 * @generated
-	 */
-	File createFile();
 
 	/**
 	 * Returns the package supported by this factory.

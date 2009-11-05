@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TypeCastError.java,v 1.12 2009-02-23 15:26:42 cfaucher Exp $
+ * $Id$
  */
 package kermeta.exceptions;
 
@@ -15,7 +15,7 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getTypeCastError()
- * @model annotation="kermeta documentation='/**\r\n * Occurs when a cast (Object::asType operation) fails\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * Occurs when a cast (Object::asType operation) fails\n \052/'"
  * @generated
  */
 public interface TypeCastError extends RuntimeError {

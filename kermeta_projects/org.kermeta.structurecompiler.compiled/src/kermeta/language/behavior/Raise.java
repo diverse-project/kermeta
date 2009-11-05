@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Raise.java,v 1.12 2009-02-23 15:26:37 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior;
 
@@ -23,8 +23,9 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getRaise()
- * @model annotation="kermeta documentation='Refers to raise exception block'"
- *        annotation="kermeta documentation='/** Complete \052/'"
+ * @model annotation="kermeta documentation='/** Complete \052/'"
+ *        annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='Refers to raise exception block'"
  * @generated
  */
 public interface Raise extends Expression {
@@ -40,6 +41,7 @@ public interface Raise extends Expression {
 	 * @see #setExpression(Expression)
 	 * @see kermeta.language.behavior.BehaviorPackage#getRaise_Expression()
 	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
 	 *        annotation="kermeta documentation='To be written #######################'"
 	 * @generated
 	 */

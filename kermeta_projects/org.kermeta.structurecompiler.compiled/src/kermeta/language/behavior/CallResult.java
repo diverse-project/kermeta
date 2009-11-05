@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: CallResult.java,v 1.12 2009-02-23 15:26:37 cfaucher Exp $
+ * $Id$
  */
 package kermeta.language.behavior;
 
@@ -17,7 +17,8 @@ import km2ecore.KM2EcoreContext;
  *
  *
  * @see kermeta.language.behavior.BehaviorPackage#getCallResult()
- * @model annotation="kermeta documentation='This class represents a call to the special internal variable \"result\" that is used to store the return value of any operation '"
+ * @model annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='This class represents a call to the special internal variable \"result\" that is used to store the return value of any operation '"
  * @generated
  */
 public interface CallResult extends CallVariable {

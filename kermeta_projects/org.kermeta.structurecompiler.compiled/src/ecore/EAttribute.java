@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EAttribute.java,v 1.13 2009-02-23 15:26:51 cfaucher Exp $
+ * $Id$
  */
 package ecore;
 
@@ -21,7 +21,7 @@ package ecore;
  * </p>
  *
  * @see ecore.EcorePackage#getEAttribute()
- * @model
+ * @model annotation="kermeta ecore='true'"
  * @generated
  */
 public interface EAttribute extends EStructuralFeature {
@@ -38,6 +38,7 @@ public interface EAttribute extends EStructuralFeature {
 	 * @see #setID(boolean)
 	 * @see ecore.EcorePackage#getEAttribute_ID()
 	 * @model default="false" dataType="ecore.EBoolean"
+	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	boolean isID();
