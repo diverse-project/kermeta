@@ -206,7 +206,7 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
     protected void kmToEcore(IFile source_km_file) throws CoreException{
     	String[] _args = new String[1];
 		_args[0] = source_km_file.getFullPath().toString();
-		Main__main_km2ecore_behaviorJava__Runner.main_forDeployedVersion(_args);
+		Main__main_km2ecore_behaviorJava__Runner.main(_args);
 
 		source_km_file.getProject().refreshLocal(IFile.DEPTH_INFINITE, new NullProgressMonitor());
     }
