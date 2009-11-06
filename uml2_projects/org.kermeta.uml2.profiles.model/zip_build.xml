@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="org.kermeta.compiler.generator" default="gather.bin.parts" basedir=".">
+	<target name="gather.bin.parts" >
+		<tstamp>
+			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+		</tstamp>
+		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+		<delete file="UMLbaseTypesUtil.zip"/>
+		<zip destfile="UMLbaseTypesUtil.zip" basedir="templateHelper/util" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+
+</project>
