@@ -710,18 +710,28 @@ public class EMF2Runtime {
     				RuntimeObject roEnum = unit.getRuntimeMemory().getTypeDefinitionAsRuntimeObject(enumName);
     				// get the enumliteral
     				String litValue = null;
+    				String litName = null;
     				if (fvalue instanceof org.eclipse.emf.common.util.AbstractEnumerator){
     					litValue = ((org.eclipse.emf.common.util.AbstractEnumerator)fvalue).getLiteral();
+    					litName = ((org.eclipse.emf.common.util.AbstractEnumerator)fvalue).getName();
     				}
-    				else if (fvalue instanceof EEnumLiteral)
+    				else if (fvalue instanceof EEnumLiteral){
     					litValue = ((EEnumLiteral)fvalue).getLiteral();
+    					litName = ((EEnumLiteral)fvalue).getName();
+    				}
     				else if (fvalue instanceof org.eclipse.emf.common.util.Enumerator){
     					litValue = ((org.eclipse.emf.common.util.Enumerator)fvalue).getLiteral();
+    					litName = ((org.eclipse.emf.common.util.Enumerator)fvalue).getName();
     				}
     				else {
     					internalLog.warn("not able to retreive literal value for " + fvalue + ", unable to reconnect to the kermeta definition ...");
     				}
+    				// try first with the literalValue    				
     				RuntimeObject roEnumLit = fr.irisa.triskell.kermeta.runtime.rohelper.EnumerationHelper.getLiteral(roEnum, litValue);
+    				// if no literal found, try with the literalName
+    				if(RuntimeObjectHelper.isVoid(roEnumLit)){
+    					roEnumLit = fr.irisa.triskell.kermeta.runtime.rohelper.EnumerationHelper.getLiteral(roEnum, litName);
+    				}
     				rObject.getProperties().put(kprop.getName(), roEnumLit);
     			}
     			// Get the RO-repr of this EObject

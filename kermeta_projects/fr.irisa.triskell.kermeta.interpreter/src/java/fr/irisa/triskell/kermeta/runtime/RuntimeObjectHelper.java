@@ -181,4 +181,12 @@ public class RuntimeObjectHelper {
 		result += ")";
 		return result;
 	}
+	/**
+	 * return true if the RuntimeObject is the Void object
+	 * @param rObj
+	 * @return
+	 */
+	public static boolean isVoid(RuntimeObject rObj){
+		return rObj == rObj.getFactory().getMemory().voidINSTANCE;
+	}
 }
