@@ -10,6 +10,8 @@
 
 package org.kermeta.compiler;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -19,7 +21,7 @@ import org.osgi.framework.BundleContext;
 public class CompilerPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.compiler";
+	public static final String PLUGIN_ID = "org.kermeta.compiler";
 
 	// The shared instance
 	private static CompilerPlugin plugin;
@@ -55,5 +57,31 @@ public class CompilerPlugin extends AbstractUIPlugin {
 	 */
 	public static CompilerPlugin getDefault() {
 		return plugin;
+	}
+	
+	/**
+	 * This method logs an error message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logErrorMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.ERROR, message, e));
+		
+	}
+	
+	/**
+	 * This method logs a warning message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logWarningMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.WARNING, PLUGIN_ID, IStatus.WARNING, message, e));
+		
 	}
 }
