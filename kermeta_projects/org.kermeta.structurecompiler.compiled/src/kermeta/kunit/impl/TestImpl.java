@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -109,12 +109,12 @@ public abstract class TestImpl extends ObjectImpl implements Test {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLogKermeta(Log log) {
+	public void setLogEMF_renameAs(Log log) {
 
 		//PreConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("pre__9851021__paramNotVoid")) {
+					.mustBeChecked("pre__16307337__paramNotVoid")) {
 				java.lang.Boolean result_pre = false;
 
 				result_pre = org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -132,7 +132,7 @@ public abstract class TestImpl extends ObjectImpl implements Test {
 		//PostConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("post__8545424__logNotVoid")) {
+					.mustBeChecked("post__4826691__logNotVoid")) {
 				java.lang.Boolean result_post = false;
 
 				result_post = org.kermeta.compil.runtime.helper.language.ObjectUtil

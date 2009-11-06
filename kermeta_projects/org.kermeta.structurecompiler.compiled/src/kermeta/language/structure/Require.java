@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -25,9 +25,9 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getRequire()
- * @model annotation="kermeta ecore='true'"
+ * @model annotation="kermeta documentation='/**\r\n * \r\n \052/'"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='To be written'"
- *        annotation="kermeta documentation='/**\r\n * \r\n \052/'"
  * @generated
  */
 public interface Require extends kermeta.language.structure.Object {
@@ -71,7 +71,7 @@ public interface Require extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EAnnotation result = null;\n\n\tecore.EAnnotation ecoreAnnotation = ((kermeta.language.structure.ModelingUnit) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ModelingUnit\"))).getEcoreModelElement();\n\n\tecore.EStringToStringMapEntry requireEntry = null;\n//BIft:detect\n\necore.EStringToStringMapEntry result_ft152 = null;\n\n\tecore.EStringToStringMapEntry elem_ft152 = null;\n\n\tresult_ft152 = null;\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft152 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStringToStringMapEntry>convertAsOrderedSet(ecoreAnnotation.getDetails()).iterator();\n\tjava.lang.Boolean idLoopCond_670 = false;\n\twhile( !idLoopCond_670 ) {\n\tidLoopCond_670 = kermeta.standard.helper.BooleanWrapper.or(it_ft152.isOff(), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(result_ft152, null));\n\tif ( idLoopCond_670 ) {\n\t} else {\n\n\telem_ft152 = it_ft152.next();\n\n\tjava.lang.Boolean idIfCond_671 = false;\n//BIle:detector\necore.EStringToStringMapEntry d_lbdExp152 = elem_ft152;\n\n\tidIfCond_671 = kermeta.standard.helper.StringWrapper.equals(d_lbdExp152.getKey(), \"require\");\n//EIle:detector\n\n\n\tif( idIfCond_671 ) {\n\n\tresult_ft152 = elem_ft152;\n}\n\n}\n\t}\n}\n\n\n//CE\nrequireEntry = result_ft152;\n//EIft:detect\n;\n\n\trequireEntry.setValue(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(requireEntry.getValue(), this.getUri()), \"|\"));\n\n\tresult = ecoreAnnotation;\n\nreturn result;\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EAnnotation result = null;\n\n\tecore.EAnnotation ecoreAnnotation = ((kermeta.language.structure.ModelingUnit) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ModelingUnit\"))).getEcoreModelElement();\n\n\tecore.EStringToStringMapEntry requireEntry = null;\n//BIft:detect\n\necore.EStringToStringMapEntry result_ft26 = null;\n\n\tecore.EStringToStringMapEntry elem_ft26 = null;\n\n\tresult_ft26 = null;\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft26 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStringToStringMapEntry>convertAsOrderedSet(ecoreAnnotation.getDetails()).iterator();\n\tjava.lang.Boolean idLoopCond_57 = false;\n\twhile( !idLoopCond_57 ) {\n\tidLoopCond_57 = kermeta.standard.helper.BooleanWrapper.or(it_ft26.isOff(), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(result_ft26, null));\n\tif ( idLoopCond_57 ) {\n\t} else {\n\n\telem_ft26 = it_ft26.next();\n\n\tjava.lang.Boolean idIfCond_58 = false;\n//BIle:detector\necore.EStringToStringMapEntry d_lbdExp26 = elem_ft26;\n\n\tidIfCond_58 = kermeta.standard.helper.StringWrapper.equals(d_lbdExp26.getKey(), \"require\");\n//EIle:detector\n\n\n\tif( idIfCond_58 ) {\n\n\tresult_ft26 = elem_ft26;\n}\n\n}\n\t}\n}\n\n\n//CE\nrequireEntry = result_ft26;\n//EIft:detect\n;\n\n\trequireEntry.setValue(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(requireEntry.getValue(), this.getUri()), \"|\"));\n\n\tresult = ecoreAnnotation;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	EAnnotation createEcoreModelElement(KM2EcoreContext context);

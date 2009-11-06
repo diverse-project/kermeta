@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -108,8 +108,8 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 		result = kermeta.standard.helper.BooleanWrapper.toString(this
 				.getValue());
 
-		java.lang.Boolean idIfCond_291 = false;
-		idIfCond_291 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_684 = false;
+		idIfCond_684 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -119,7 +119,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 										.getMetaClass(
 												"kermeta.language.behavior.VariableDecl")));
 
-		if (idIfCond_291) {
+		if (idIfCond_684) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result, this
 					.endOfExpressionFixer());

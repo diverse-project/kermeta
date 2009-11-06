@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -108,8 +108,8 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 		result = kermeta.standard.helper.IntegerWrapper.toString(this
 				.getValue());
 
-		java.lang.Boolean idIfCond_290 = false;
-		idIfCond_290 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_683 = false;
+		idIfCond_683 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -119,7 +119,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 										.getMetaClass(
 												"kermeta.language.behavior.VariableDecl")));
 
-		if (idIfCond_290) {
+		if (idIfCond_683) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result, this
 					.endOfExpressionFixer());

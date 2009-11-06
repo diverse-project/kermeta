@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -23,8 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getGenericTypeDefinition()
- * @model abstract="true"
- *        annotation="kermeta ecore='true'"
+ * @model annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Abstracts the definition of generic type definitions (i.e. type definitions that\ncan be parameterized), namely, for ClassDefinition and ModelTypeDefinition.'"
  * @generated
  */

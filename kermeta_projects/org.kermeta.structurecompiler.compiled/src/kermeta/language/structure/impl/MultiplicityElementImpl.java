@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -257,11 +257,11 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 						.getIdentifierHelper())).getMangledIdentifier(this
 				.getName(), context);
 
-		java.lang.Boolean idIfCond_558 = false;
-		idIfCond_558 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_313 = false;
+		idIfCond_313 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(this.getEMFRenameAs(), "");
 
-		if (idIfCond_558) {
+		if (idIfCond_313) {
 
 			result = this.getEMFRenameAs();
 		}
@@ -296,11 +296,11 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 
 		result = "\nreturn ";
 
-		java.lang.Boolean idIfCond_559 = false;
-		idIfCond_559 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_314 = false;
+		idIfCond_314 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.getUpper(), 1);
 
-		if (idIfCond_559) {
+		if (idIfCond_314) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result,
 					"result");

@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -86,15 +86,6 @@ public class Km2ecoreSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case Km2ecorePackage.SOURCE_TRACER: {
-			SourceTracer sourceTracer = (SourceTracer) theEObject;
-			T result = caseSourceTracer(sourceTracer);
-			if (result == null)
-				result = caseObject(sourceTracer);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case Km2ecorePackage.KM2_ECORE_CONTEXT: {
 			KM2EcoreContext km2EcoreContext = (KM2EcoreContext) theEObject;
 			T result = caseKM2EcoreContext(km2EcoreContext);
@@ -104,24 +95,18 @@ public class Km2ecoreSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case Km2ecorePackage.SOURCE_TRACER: {
+			SourceTracer sourceTracer = (SourceTracer) theEObject;
+			T result = caseSourceTracer(sourceTracer);
+			if (result == null)
+				result = caseObject(sourceTracer);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Source Tracer</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Source Tracer</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSourceTracer(SourceTracer object) {
-		return null;
 	}
 
 	/**
@@ -136,6 +121,21 @@ public class Km2ecoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseKM2EcoreContext(KM2EcoreContext object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Source Tracer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Source Tracer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSourceTracer(SourceTracer object) {
 		return null;
 	}
 

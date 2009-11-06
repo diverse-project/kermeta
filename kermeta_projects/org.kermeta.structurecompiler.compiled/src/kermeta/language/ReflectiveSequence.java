@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -36,23 +36,23 @@ public interface ReflectiveSequence<G> extends OrderedSet<G>,
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model indexDataType="kermeta.standard.JavaInteger"
-	 *        annotation="kermeta documentation='/**\n\t * Overrides kermeta::standard::OrderedSet.addAt(Integer)\n\t \052/'"
-	 *        annotation="kermeta superOperation='kermeta::standard::OrderedSet'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.language.ReflectiveSequenceUtil.addAt(this, index, element);\n'"
-	 * @generated
-	 */
-	void addAt(Integer index, G element);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model indexDataType="kermeta.standard.JavaInteger"
 	 *        annotation="kermeta documentation='/**\n\t * Overrides kermeta::standard::OrderedSet.removeAt(Integer)\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::standard::OrderedCollection'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.language.ReflectiveSequenceUtil.removeAt(this, index);\n'"
 	 * @generated
 	 */
 	void removeAt(Integer index);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model indexDataType="kermeta.standard.JavaInteger"
+	 *        annotation="kermeta documentation='/**\n\t * Overrides kermeta::standard::OrderedSet.addAt(Integer)\n\t \052/'"
+	 *        annotation="kermeta superOperation='kermeta::standard::OrderedSet'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.language.ReflectiveSequenceUtil.addAt(this, index, element);\n'"
+	 * @generated
+	 */
+	void addAt(Integer index, G element);
 
 	/**
 	 * <!-- begin-user-doc -->

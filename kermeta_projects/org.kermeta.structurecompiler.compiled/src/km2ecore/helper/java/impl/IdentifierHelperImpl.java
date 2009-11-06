@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -56,19 +56,19 @@ public class IdentifierHelperImpl extends ObjectImpl implements
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_1204 = false;
-		idIfCond_1204 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1188 = false;
+		idIfCond_1188 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(id);
 
-		if (idIfCond_1204) {
+		if (idIfCond_1188) {
 
 			result = id;
 		}
 
-		java.lang.Boolean idIfCond_1205 = false;
-		idIfCond_1205 = context.getJavaKeyWordList().isKeyword(id);
+		java.lang.Boolean idIfCond_1189 = false;
+		idIfCond_1189 = context.getJavaKeyWordList().isKeyword(id);
 
-		if (idIfCond_1205) {
+		if (idIfCond_1189) {
 
 			result = kermeta.standard.helper.StringWrapper.plus("_", id);
 		} else {

@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -250,11 +250,11 @@ public class LogImpl extends ObjectImpl implements Log {
 	 */
 	public void newAttempt() {
 
-		java.lang.Boolean idIfCond_709 = false;
-		idIfCond_709 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_1064 = false;
+		idIfCond_1064 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.getRuntests(), null);
 
-		if (idIfCond_709) {
+		if (idIfCond_1064) {
 
 			this.setRuntests(0);
 		}

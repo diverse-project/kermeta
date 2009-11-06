@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -98,6 +98,17 @@ public class StandardSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+		case StandardPackage.STRING: {
+			kermeta.standard.String string = (kermeta.standard.String) theEObject;
+			T result = caseString(string);
+			if (result == null)
+				result = caseValueType(string);
+			if (result == null)
+				result = caseObject(string);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case StandardPackage.COLLECTION: {
 			Collection<?> collection = (Collection<?>) theEObject;
 			T result = caseCollection(collection);
@@ -270,17 +281,6 @@ public class StandardSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case StandardPackage.STRING: {
-			kermeta.standard.String string = (kermeta.standard.String) theEObject;
-			T result = caseString(string);
-			if (result == null)
-				result = caseValueType(string);
-			if (result == null)
-				result = caseObject(string);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case StandardPackage.UNKNOWN_JAVA_OBJECT: {
 			UnknownJavaObject unknownJavaObject = (UnknownJavaObject) theEObject;
 			T result = caseUnknownJavaObject(unknownJavaObject);
@@ -293,6 +293,21 @@ public class StandardSwitch<T> {
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseString(kermeta.standard.String object) {
+		return null;
 	}
 
 	/**
@@ -532,21 +547,6 @@ public class StandardSwitch<T> {
 	 * @generated
 	 */
 	public T caseCharacter(kermeta.standard.Character object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>String</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>String</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseString(kermeta.standard.String object) {
 		return null;
 	}
 

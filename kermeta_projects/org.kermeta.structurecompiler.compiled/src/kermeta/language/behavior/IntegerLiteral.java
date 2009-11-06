@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -62,7 +62,7 @@ public interface IntegerLiteral extends Literal {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta superOperation='kermeta::language::behavior::Literal'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = kermeta.standard.helper.IntegerWrapper.toString(this.getValue());\n\n\tjava.lang.Boolean idIfCond_290 = false;\n\tidIfCond_290 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.VariableDecl\")));\n\n\tif( idIfCond_290 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = kermeta.standard.helper.IntegerWrapper.toString(this.getValue());\n\n\tjava.lang.Boolean idIfCond_683 = false;\n\tidIfCond_683 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.VariableDecl\")));\n\n\tif( idIfCond_683 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String createBehaviorJava(KM2EcoreContext context);

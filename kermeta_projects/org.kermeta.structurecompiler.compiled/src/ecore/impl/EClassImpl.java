@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -255,8 +255,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getFeatureID(EStructuralFeature feature) {
-		java.lang.Integer result = null;
+	public EStructuralFeature getEStructuralFeature(String featureName) {
+		ecore.EStructuralFeature result = null;
 
 		return result;
 
@@ -267,8 +267,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EStructuralFeature getEStructuralFeature(String featureName) {
-		ecore.EStructuralFeature result = null;
+	public int getFeatureID(EStructuralFeature feature) {
+		java.lang.Integer result = null;
 
 		return result;
 
@@ -293,6 +293,18 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 */
 	public int getFeatureCount() {
 		java.lang.Integer result = null;
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EStructuralFeature op_getEStructuralFeature(int featureID) {
+		ecore.EStructuralFeature result = null;
 
 		return result;
 

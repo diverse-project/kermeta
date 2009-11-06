@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -29,15 +29,6 @@ public interface KermetaFactory extends EFactory {
 			.init();
 
 	/**
-	 * Returns a new object of class '<em>Generic Type Definition Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Generic Type Definition Helper</em>'.
-	 * @generated
-	 */
-	GenericTypeDefinitionHelper createGenericTypeDefinitionHelper();
-
-	/**
 	 * Returns a new object of class '<em>Compiler Helper Java</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -45,6 +36,15 @@ public interface KermetaFactory extends EFactory {
 	 * @generated
 	 */
 	CompilerHelperJava createCompilerHelperJava();
+
+	/**
+	 * Returns a new object of class '<em>Generic Type Definition Helper</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Generic Type Definition Helper</em>'.
+	 * @generated
+	 */
+	GenericTypeDefinitionHelper createGenericTypeDefinitionHelper();
 
 	/**
 	 * Returns the package supported by this factory.

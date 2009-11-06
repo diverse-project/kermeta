@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -65,12 +65,12 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 		switch (eClass.getClassifierID()) {
 		case SimkPackage.SIMK_MODEL:
 			return createSIMKModel();
+		case SimkPackage.SM_CLASS:
+			return createSMClass();
 		case SimkPackage.SM_METHOD:
 			return createSMMethod();
 		case SimkPackage.SM_CONTEXT:
 			return createSMContext();
-		case SimkPackage.SM_CLASS:
-			return createSMClass();
 		case SimkPackage.SM_PARAMETER:
 			return createSMParameter();
 		case SimkPackage.SM_RETURN:
@@ -132,6 +132,16 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public SMClass createSMClass() {
+		SMClassImpl smClass = new SMClassImpl();
+		return smClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SMMethod createSMMethod() {
 		SMMethodImpl smMethod = new SMMethodImpl();
 		return smMethod;
@@ -145,16 +155,6 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 	public SMContext createSMContext() {
 		SMContextImpl smContext = new SMContextImpl();
 		return smContext;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SMClass createSMClass() {
-		SMClassImpl smClass = new SMClassImpl();
-		return smClass;
 	}
 
 	/**

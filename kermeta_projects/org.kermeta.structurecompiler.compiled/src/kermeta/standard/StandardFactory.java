@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -27,6 +27,15 @@ public interface StandardFactory extends EFactory {
 	 */
 	StandardFactory eINSTANCE = kermeta.standard.impl.StandardFactoryImpl
 			.init();
+
+	/**
+	 * Returns a new object of class '<em>String</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String</em>'.
+	 * @generated
+	 */
+	String createString();
 
 	/**
 	 * Returns a new object of class '<em>Set</em>'.
@@ -126,15 +135,6 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	Character createCharacter();
-
-	/**
-	 * Returns a new object of class '<em>String</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>String</em>'.
-	 * @generated
-	 */
-	String createString();
 
 	/**
 	 * Returns a new object of class '<em>Unknown Java Object</em>'.

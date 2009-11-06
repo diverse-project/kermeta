@@ -10,7 +10,7 @@ public class TextReferenceInvariant {
 	 *
 	 * @generated
 	 */
-	public static java.lang.Boolean checkInvariant_18742069__validTextRef(
+	public static java.lang.Boolean checkInvariant_25702619__validTextRef(
 
 	traceability.TextReference self
 

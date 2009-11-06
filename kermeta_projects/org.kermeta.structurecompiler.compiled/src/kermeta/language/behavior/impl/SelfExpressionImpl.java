@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -58,8 +58,8 @@ public class SelfExpressionImpl extends ExpressionImpl implements
 
 		result = "this";
 
-		java.lang.Boolean idIfCond_268 = false;
-		idIfCond_268 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_661 = false;
+		idIfCond_661 = kermeta.standard.helper.BooleanWrapper
 				.or(
 						kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -67,15 +67,15 @@ public class SelfExpressionImpl extends ExpressionImpl implements
 												.getCurrent_valueType())),
 						context.getStaticOperationMode());
 
-		if (idIfCond_268) {
+		if (idIfCond_661) {
 
 			result = "self";
 		}
 
-		java.lang.Boolean idIfCond_269 = false;
-		idIfCond_269 = context.getFtSuffixActivation();
+		java.lang.Boolean idIfCond_662 = false;
+		idIfCond_662 = context.getFtSuffixActivation();
 
-		if (idIfCond_269) {
+		if (idIfCond_662) {
 
 			result = context.getFtContextualSelf();
 		}

@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -129,39 +129,39 @@ public class RequireImpl extends ObjectImpl implements Require {
 		ecore.EStringToStringMapEntry requireEntry = null;
 		//BIft:detect
 
-		ecore.EStringToStringMapEntry result_ft152 = null;
+		ecore.EStringToStringMapEntry result_ft26 = null;
 
-		ecore.EStringToStringMapEntry elem_ft152 = null;
+		ecore.EStringToStringMapEntry elem_ft26 = null;
 
-		result_ft152 = null;
+		result_ft26 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft152 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft26 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EStringToStringMapEntry> convertAsOrderedSet(
 							ecoreAnnotation.getDetails()).iterator();
-			java.lang.Boolean idLoopCond_670 = false;
-			while (!idLoopCond_670) {
-				idLoopCond_670 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft152.isOff(),
+			java.lang.Boolean idLoopCond_57 = false;
+			while (!idLoopCond_57) {
+				idLoopCond_57 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft26.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft152, null));
-				if (idLoopCond_670) {
+								.isNotEqualSwitcher(result_ft26, null));
+				if (idLoopCond_57) {
 				} else {
 
-					elem_ft152 = it_ft152.next();
+					elem_ft26 = it_ft26.next();
 
-					java.lang.Boolean idIfCond_671 = false;
+					java.lang.Boolean idIfCond_58 = false;
 					//BIle:detector
-					ecore.EStringToStringMapEntry d_lbdExp152 = elem_ft152;
+					ecore.EStringToStringMapEntry d_lbdExp26 = elem_ft26;
 
-					idIfCond_671 = kermeta.standard.helper.StringWrapper
-							.equals(d_lbdExp152.getKey(), "require");
+					idIfCond_58 = kermeta.standard.helper.StringWrapper.equals(
+							d_lbdExp26.getKey(), "require");
 					//EIle:detector
 
-					if (idIfCond_671) {
+					if (idIfCond_58) {
 
-						result_ft152 = elem_ft152;
+						result_ft26 = elem_ft26;
 					}
 
 				}
@@ -169,7 +169,7 @@ public class RequireImpl extends ObjectImpl implements Require {
 		}
 
 		//CE
-		requireEntry = result_ft152;
+		requireEntry = result_ft26;
 		//EIft:detect
 		;
 

@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -37,8 +37,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl
-		implements GenericTypeDefinition {
+public class GenericTypeDefinitionImpl extends TypeDefinitionImpl implements
+		GenericTypeDefinition {
 	/**
 	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

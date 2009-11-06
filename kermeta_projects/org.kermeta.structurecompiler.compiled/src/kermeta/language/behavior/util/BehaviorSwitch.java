@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -91,6 +91,19 @@ public class BehaviorSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+		case BehaviorPackage.BLOCK: {
+			Block block = (Block) theEObject;
+			T result = caseBlock(block);
+			if (result == null)
+				result = caseExpression(block);
+			if (result == null)
+				result = caseTypeContainer(block);
+			if (result == null)
+				result = caseObject(block);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case BehaviorPackage.VARIABLE_DECL: {
 			VariableDecl variableDecl = (VariableDecl) theEObject;
 			T result = caseVariableDecl(variableDecl);
@@ -111,19 +124,6 @@ public class BehaviorSwitch<T> {
 				result = caseTypeContainer(expression);
 			if (result == null)
 				result = caseObject(expression);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case BehaviorPackage.BLOCK: {
-			Block block = (Block) theEObject;
-			T result = caseBlock(block);
-			if (result == null)
-				result = caseExpression(block);
-			if (result == null)
-				result = caseTypeContainer(block);
-			if (result == null)
-				result = caseObject(block);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -451,6 +451,21 @@ public class BehaviorSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Block</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Block</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBlock(Block object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Variable Decl</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -477,21 +492,6 @@ public class BehaviorSwitch<T> {
 	 * @generated
 	 */
 	public T caseExpression(Expression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Block</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Block</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBlock(Block object) {
 		return null;
 	}
 

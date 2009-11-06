@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -75,15 +75,6 @@ public interface XmltypePackage extends EPackage {
 	int QNAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QNAME__FILE = StandardPackage.VALUE_TYPE__FILE;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -91,6 +82,15 @@ public interface XmltypePackage extends EPackage {
 	 * @ordered
 	 */
 	int QNAME__TAG = StandardPackage.VALUE_TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QNAME__FILE = StandardPackage.VALUE_TYPE__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.

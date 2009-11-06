@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -27,8 +27,8 @@ public interface Comparable extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="kermeta documentation='/**\n\t * return true if self < other\n\t \052/'"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
+	 *        annotation="kermeta documentation='/**\n\t * return true if self < other\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = kermeta.standard.helper.IntegerWrapper.isLower(this.compareTo(other), 0);\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -61,8 +61,8 @@ public interface Comparable extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="kermeta RecopyInValueTypes='true'"
 	 *        annotation="kermeta documentation='/**\n\t * return true if self <= other\n\t \052/'"
+	 *        annotation="kermeta RecopyInValueTypes='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(this.compareTo(other), 0);\n\nreturn result;\n'"
 	 * @generated
 	 */

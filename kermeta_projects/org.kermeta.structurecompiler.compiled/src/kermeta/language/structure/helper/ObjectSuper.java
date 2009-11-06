@@ -10,24 +10,6 @@ public class ObjectSuper {
 	 *
 	 * @generated
 	 */
-	public static <G> java.lang.String super_createBehaviorJava(
-
-	kermeta.language.structure.Object self, km2ecore.KM2EcoreContext context
-
-	) {
-
-		java.lang.String result = null;
-
-		result = "";
-
-		return result;
-
-	}
-
-	/**
-	 *
-	 * @generated
-	 */
 	public static <G> void super_applyPass2(
 
 	kermeta.language.structure.Object self, km2ecore.KM2EcoreContext context
@@ -76,6 +58,24 @@ public class ObjectSuper {
 		//EIft:each
 
 		//EIft:eachOwnedElement
+
+	}
+
+	/**
+	 *
+	 * @generated
+	 */
+	public static <G> java.lang.String super_createBehaviorJava(
+
+	kermeta.language.structure.Object self, km2ecore.KM2EcoreContext context
+
+	) {
+
+		java.lang.String result = null;
+
+		result = "";
+
+		return result;
 
 	}
 

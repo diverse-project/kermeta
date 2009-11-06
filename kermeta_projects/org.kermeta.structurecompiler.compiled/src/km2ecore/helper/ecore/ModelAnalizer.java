@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -34,7 +34,7 @@ public interface ModelAnalizer extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = false;\n\n\tjava.lang.Boolean idIfCond_1168 = false;\n\tidIfCond_1168 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(super_class, org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EGenericType>convertAsOrderedSet(extended_class.getEGenericSuperTypes()).first().getEClassifier());\n\n\tif( idIfCond_1168 ) {\n\n\tresult = true;\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = false;\n\n\tjava.lang.Boolean idIfCond_1174 = false;\n\tidIfCond_1174 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(super_class, org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EGenericType>convertAsOrderedSet(extended_class.getEGenericSuperTypes()).first().getEClassifier());\n\n\tif( idIfCond_1174 ) {\n\n\tresult = true;\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Boolean isExtendedBy(EClass extended_class, EClass super_class);

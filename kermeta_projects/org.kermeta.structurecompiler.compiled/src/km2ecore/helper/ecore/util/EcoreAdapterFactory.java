@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -78,14 +78,14 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseEcoreModelElementHelper(
-				EcoreModelElementHelper object) {
-			return createEcoreModelElementHelperAdapter();
+		public Adapter caseEAnnotationHelper(EAnnotationHelper object) {
+			return createEAnnotationHelperAdapter();
 		}
 
 		@Override
-		public Adapter caseEAnnotationHelper(EAnnotationHelper object) {
-			return createEAnnotationHelperAdapter();
+		public Adapter caseEcoreModelElementHelper(
+				EcoreModelElementHelper object) {
+			return createEcoreModelElementHelperAdapter();
 		}
 
 		@Override
@@ -127,20 +127,6 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link km2ecore.helper.ecore.EcoreModelElementHelper <em>Model Element Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see km2ecore.helper.ecore.EcoreModelElementHelper
-	 * @generated
-	 */
-	public Adapter createEcoreModelElementHelperAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link km2ecore.helper.ecore.EAnnotationHelper <em>EAnnotation Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -151,6 +137,20 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEAnnotationHelperAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link km2ecore.helper.ecore.EcoreModelElementHelper <em>Model Element Helper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see km2ecore.helper.ecore.EcoreModelElementHelper
+	 * @generated
+	 */
+	public Adapter createEcoreModelElementHelperAdapter() {
 		return null;
 	}
 

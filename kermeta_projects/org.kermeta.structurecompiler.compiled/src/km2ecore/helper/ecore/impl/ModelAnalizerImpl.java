@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -73,8 +73,8 @@ public class ModelAnalizerImpl extends ObjectImpl implements ModelAnalizer {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_1168 = false;
-		idIfCond_1168 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1174 = false;
+		idIfCond_1174 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equalsSwitcher(
 						super_class,
 						org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
@@ -82,7 +82,7 @@ public class ModelAnalizerImpl extends ObjectImpl implements ModelAnalizer {
 										extended_class.getEGenericSuperTypes())
 								.first().getEClassifier());
 
-		if (idIfCond_1168) {
+		if (idIfCond_1174) {
 
 			result = true;
 		}

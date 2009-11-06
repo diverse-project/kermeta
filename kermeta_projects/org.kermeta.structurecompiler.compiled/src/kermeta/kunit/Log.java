@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -146,7 +146,7 @@ public interface Log extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\n\t * Increments the runtests counter\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_709 = false;\n\tidIfCond_709 = kermeta.standard.helper.IntegerWrapper.equals(this.getRuntests(), null);\n\n\tif( idIfCond_709 ) {\n\n\tthis.setRuntests(0);\n}\n\n\n\tthis.setRuntests(kermeta.standard.helper.IntegerWrapper.plus(1, this.getRuntests()));\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1064 = false;\n\tidIfCond_1064 = kermeta.standard.helper.IntegerWrapper.equals(this.getRuntests(), null);\n\n\tif( idIfCond_1064 ) {\n\n\tthis.setRuntests(0);\n}\n\n\n\tthis.setRuntests(kermeta.standard.helper.IntegerWrapper.plus(1, this.getRuntests()));\n'"
 	 * @generated
 	 */
 	void newAttempt();

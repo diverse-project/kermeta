@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -65,10 +65,10 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 		switch (eClass.getClassifierID()) {
 		case EcorePackage.MODEL_ANALIZER:
 			return createModelAnalizer();
-		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
-			return createEcoreModelElementHelper();
 		case EcorePackage.EANNOTATION_HELPER:
 			return createEAnnotationHelper();
+		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
+			return createEcoreModelElementHelper();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -130,9 +130,9 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EcoreModelElementHelper createEcoreModelElementHelper() {
-		EcoreModelElementHelperImpl ecoreModelElementHelper = new EcoreModelElementHelperImpl();
-		return ecoreModelElementHelper;
+	public EAnnotationHelper createEAnnotationHelper() {
+		EAnnotationHelperImpl eAnnotationHelper = new EAnnotationHelperImpl();
+		return eAnnotationHelper;
 	}
 
 	/**
@@ -140,9 +140,9 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAnnotationHelper createEAnnotationHelper() {
-		EAnnotationHelperImpl eAnnotationHelper = new EAnnotationHelperImpl();
-		return eAnnotationHelper;
+	public EcoreModelElementHelper createEcoreModelElementHelper() {
+		EcoreModelElementHelperImpl ecoreModelElementHelper = new EcoreModelElementHelperImpl();
+		return ecoreModelElementHelper;
 	}
 
 	/**

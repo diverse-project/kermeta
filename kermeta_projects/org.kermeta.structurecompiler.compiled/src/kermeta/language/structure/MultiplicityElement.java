@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -159,7 +159,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE.getIdentifierHelper())).getMangledIdentifier(this.getName(), context);\n\n\tjava.lang.Boolean idIfCond_558 = false;\n\tidIfCond_558 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getEMFRenameAs(), \"\");\n\n\tif( idIfCond_558 ) {\n\n\tresult = this.getEMFRenameAs();\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE.getIdentifierHelper())).getMangledIdentifier(this.getName(), context);\n\n\tjava.lang.Boolean idIfCond_313 = false;\n\tidIfCond_313 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getEMFRenameAs(), \"\");\n\n\tif( idIfCond_313 ) {\n\n\tresult = this.getEMFRenameAs();\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String getFinalName(KM2EcoreContext context);
@@ -179,7 +179,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/** Generation of the String representing the end of a method: return of the result value \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\\nreturn \";\n\n\tjava.lang.Boolean idIfCond_559 = false;\n\tidIfCond_559 = kermeta.standard.helper.IntegerWrapper.equals(this.getUpper(), 1);\n\n\tif( idIfCond_559 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"result\");\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, context.getCOLLECTION_UTIL_CLASS()), \".convertAsEList(result)\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \";\\n\");\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\\nreturn \";\n\n\tjava.lang.Boolean idIfCond_314 = false;\n\tidIfCond_314 = kermeta.standard.helper.IntegerWrapper.equals(this.getUpper(), 1);\n\n\tif( idIfCond_314 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"result\");\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, context.getCOLLECTION_UTIL_CLASS()), \".convertAsEList(result)\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \";\\n\");\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String ppReturnResult(KM2EcoreContext context);

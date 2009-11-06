@@ -2,21 +2,21 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
 package kermeta.language.behavior.impl;
-
-import ecore.EcorePackage;
-
-import ecore.impl.EcorePackageImpl;
 
 import kermeta.KermetaPackage;
 
 import kermeta.compiler.CompilerPackage;
 
 import kermeta.compiler.impl.CompilerPackageImpl;
+
+import kermeta.ecore.EcorePackage;
+
+import kermeta.ecore.impl.EcorePackageImpl;
 
 import kermeta.exceptions.ExceptionsPackage;
 
@@ -134,6 +134,13 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass blockEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass variableDeclEClass = null;
 
 	/**
@@ -142,13 +149,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	private EClass expressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass blockEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -363,10 +363,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI)
-				: EcorePackage.eINSTANCE);
 		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
@@ -379,18 +375,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StructurePackage.eNS_URI)
 				: StructurePackage.eINSTANCE);
-		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI)
-				: ExceptionsPackage.eINSTANCE);
-		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI)
-				: InterpreterPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
 		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI)
@@ -399,42 +383,50 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(UtilsPackage.eNS_URI)
 				: UtilsPackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
 		XmltypePackageImpl theXmltypePackage = (XmltypePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(XmltypePackage.eNS_URI) instanceof XmltypePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(XmltypePackage.eNS_URI)
 				: XmltypePackage.eINSTANCE);
-		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
-				: kermeta.ecore.EcorePackage.eINSTANCE);
-		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI)
-				: IoPackage.eINSTANCE);
 		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(CompilerPackage.eNS_URI)
 				: CompilerPackage.eINSTANCE);
-		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(SimkPackage.eNS_URI)
-				: SimkPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
+		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI)
+				: ExceptionsPackage.eINSTANCE);
+		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI)
+				: InterpreterPackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI)
+				: EcorePackage.eINSTANCE);
+		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI)
+				: IoPackage.eINSTANCE);
 		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI)
 				: Km2ecorePackage.eINSTANCE);
-		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_2 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
-				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
 		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
 				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
+		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
+				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
 		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI)
@@ -451,56 +443,64 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI)
 				: TraceabilityPackage.eINSTANCE);
+		ecore.impl.EcorePackageImpl theEcorePackage_2 = (ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ecore.EcorePackage.eNS_URI)
+				: ecore.EcorePackage.eINSTANCE);
+		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(SimkPackage.eNS_URI)
+				: SimkPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theBehaviorPackage.createPackageContents();
-		theEcorePackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
 		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
-		theExceptionsPackage.createPackageContents();
-		theInterpreterPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
 		theStandardPackage.createPackageContents();
 		theUtilsPackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
 		theXmltypePackage.createPackageContents();
-		theEcorePackage_1.createPackageContents();
-		theIoPackage.createPackageContents();
 		theCompilerPackage.createPackageContents();
-		theSimkPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
+		theExceptionsPackage.createPackageContents();
+		theInterpreterPackage.createPackageContents();
+		thePersistencePackage.createPackageContents();
+		theEcorePackage.createPackageContents();
+		theIoPackage.createPackageContents();
 		theKm2ecorePackage.createPackageContents();
-		theEcorePackage_2.createPackageContents();
 		theKermetaPackage_1.createPackageContents();
+		theEcorePackage_1.createPackageContents();
 		theJavaPackage.createPackageContents();
 		theCommonPackage.createPackageContents();
 		theExceptionPackage.createPackageContents();
 		theTraceabilityPackage.createPackageContents();
+		theEcorePackage_2.createPackageContents();
+		theSimkPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theBehaviorPackage.initializePackageContents();
-		theEcorePackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
-		theExceptionsPackage.initializePackageContents();
-		theInterpreterPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
 		theStandardPackage.initializePackageContents();
 		theUtilsPackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
 		theXmltypePackage.initializePackageContents();
-		theEcorePackage_1.initializePackageContents();
-		theIoPackage.initializePackageContents();
 		theCompilerPackage.initializePackageContents();
-		theSimkPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
+		theExceptionsPackage.initializePackageContents();
+		theInterpreterPackage.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
+		theIoPackage.initializePackageContents();
 		theKm2ecorePackage.initializePackageContents();
-		theEcorePackage_2.initializePackageContents();
 		theKermetaPackage_1.initializePackageContents();
+		theEcorePackage_1.initializePackageContents();
 		theJavaPackage.initializePackageContents();
 		theCommonPackage.initializePackageContents();
 		theExceptionPackage.initializePackageContents();
 		theTraceabilityPackage.initializePackageContents();
+		theEcorePackage_2.initializePackageContents();
+		theSimkPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theBehaviorPackage.freeze();
@@ -509,6 +509,33 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		EPackage.Registry.INSTANCE.put(BehaviorPackage.eNS_URI,
 				theBehaviorPackage);
 		return theBehaviorPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBlock() {
+		return blockEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBlock_Statement() {
+		return (EReference) blockEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBlock_RescueBlock() {
+		return (EReference) blockEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -588,33 +615,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBlock() {
-		return blockEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBlock_Statement() {
-		return (EReference) blockEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBlock_RescueBlock() {
-		return (EReference) blockEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCallExpression() {
 		return callExpressionEClass;
 	}
@@ -663,7 +663,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCallFeature_IsAtpre() {
+	public EAttribute getCallFeature_CalledFtResult() {
 		return (EAttribute) callFeatureEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -681,7 +681,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCallFeature_CalledFtResult() {
+	public EAttribute getCallFeature_IsAtpre() {
 		return (EAttribute) callFeatureEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -807,7 +807,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAssignment_Value() {
+	public EReference getAssignment_Target() {
 		return (EReference) assignmentEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -816,7 +816,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAssignment_Target() {
+	public EReference getAssignment_Value() {
 		return (EReference) assignmentEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -947,8 +947,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRescue_Body() {
-		return (EReference) rescueEClass.getEStructuralFeatures().get(0);
+	public EAttribute getRescue_ExceptionName() {
+		return (EAttribute) rescueEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -956,8 +956,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRescue_ExceptionName() {
-		return (EAttribute) rescueEClass.getEStructuralFeatures().get(1);
+	public EReference getRescue_Body() {
+		return (EReference) rescueEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1074,8 +1074,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getJavaStaticCall_Parameters() {
-		return (EReference) javaStaticCallEClass.getEStructuralFeatures()
+	public EAttribute getJavaStaticCall_Jclass() {
+		return (EAttribute) javaStaticCallEClass.getEStructuralFeatures()
 				.get(1);
 	}
 
@@ -1084,8 +1084,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getJavaStaticCall_Jclass() {
-		return (EAttribute) javaStaticCallEClass.getEStructuralFeatures()
+	public EReference getJavaStaticCall_Parameters() {
+		return (EReference) javaStaticCallEClass.getEStructuralFeatures()
 				.get(2);
 	}
 
@@ -1219,6 +1219,10 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		isCreated = true;
 
 		// Create classes and their features
+		blockEClass = createEClass(BLOCK);
+		createEReference(blockEClass, BLOCK__STATEMENT);
+		createEReference(blockEClass, BLOCK__RESCUE_BLOCK);
+
 		variableDeclEClass = createEClass(VARIABLE_DECL);
 		createEReference(variableDeclEClass, VARIABLE_DECL__INITIALIZATION);
 		createEReference(variableDeclEClass, VARIABLE_DECL__TYPE);
@@ -1230,10 +1234,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		createEAttribute(expressionEClass, EXPRESSION__IS_LAST_EXPRESSION);
 		createEReference(expressionEClass, EXPRESSION__STATIC_TYPE);
 
-		blockEClass = createEClass(BLOCK);
-		createEReference(blockEClass, BLOCK__STATEMENT);
-		createEReference(blockEClass, BLOCK__RESCUE_BLOCK);
-
 		callExpressionEClass = createEClass(CALL_EXPRESSION);
 		createEReference(callExpressionEClass,
 				CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS);
@@ -1241,9 +1241,9 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		createEReference(callExpressionEClass, CALL_EXPRESSION__PARAMETERS);
 
 		callFeatureEClass = createEClass(CALL_FEATURE);
-		createEAttribute(callFeatureEClass, CALL_FEATURE__IS_ATPRE);
-		createEReference(callFeatureEClass, CALL_FEATURE__STATIC_OPERATION);
 		createEAttribute(callFeatureEClass, CALL_FEATURE__CALLED_FT_RESULT);
+		createEReference(callFeatureEClass, CALL_FEATURE__STATIC_OPERATION);
+		createEAttribute(callFeatureEClass, CALL_FEATURE__IS_ATPRE);
 		createEReference(callFeatureEClass, CALL_FEATURE__TARGET);
 		createEReference(callFeatureEClass, CALL_FEATURE__STATIC_ENUM_LITERAL);
 		createEReference(callFeatureEClass, CALL_FEATURE__STATIC_PROPERTY);
@@ -1262,8 +1262,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		createEAttribute(assignmentEClass, ASSIGNMENT__CACHE_CAST_PREFIX);
 		createEAttribute(assignmentEClass, ASSIGNMENT__CACHE_CAST_SUFFIX);
 		createEAttribute(assignmentEClass, ASSIGNMENT__VALUE_TYPE_CAST_SUFFIX);
-		createEReference(assignmentEClass, ASSIGNMENT__VALUE);
 		createEReference(assignmentEClass, ASSIGNMENT__TARGET);
+		createEReference(assignmentEClass, ASSIGNMENT__VALUE);
 		createEAttribute(assignmentEClass, ASSIGNMENT__IS_CAST);
 		createEAttribute(assignmentEClass, ASSIGNMENT__VALUE_TYPE_CAST_PREFIX);
 
@@ -1282,8 +1282,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		createEReference(raiseEClass, RAISE__EXPRESSION);
 
 		rescueEClass = createEClass(RESCUE);
-		createEReference(rescueEClass, RESCUE__BODY);
 		createEAttribute(rescueEClass, RESCUE__EXCEPTION_NAME);
+		createEReference(rescueEClass, RESCUE__BODY);
 		createEReference(rescueEClass, RESCUE__EXCEPTION_TYPE);
 
 		selfExpressionEClass = createEClass(SELF_EXPRESSION);
@@ -1300,8 +1300,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 
 		javaStaticCallEClass = createEClass(JAVA_STATIC_CALL);
 		createEAttribute(javaStaticCallEClass, JAVA_STATIC_CALL__JMETHOD);
-		createEReference(javaStaticCallEClass, JAVA_STATIC_CALL__PARAMETERS);
 		createEAttribute(javaStaticCallEClass, JAVA_STATIC_CALL__JCLASS);
+		createEReference(javaStaticCallEClass, JAVA_STATIC_CALL__PARAMETERS);
 
 		literalEClass = createEClass(LITERAL);
 
@@ -1361,10 +1361,10 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		blockEClass.getESuperTypes().add(this.getExpression());
 		variableDeclEClass.getESuperTypes().add(this.getExpression());
 		expressionEClass.getESuperTypes().add(
 				theStructurePackage.getTypeContainer());
-		blockEClass.getESuperTypes().add(this.getExpression());
 		callExpressionEClass.getESuperTypes().add(this.getExpression());
 		callFeatureEClass.getESuperTypes().add(this.getCallExpression());
 		callVariableEClass.getESuperTypes().add(this.getCallExpression());
@@ -1392,6 +1392,26 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		emptyExpressionEClass.getESuperTypes().add(this.getExpression());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(blockEClass, Block.class, "Block", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBlock_Statement(), this.getExpression(), null,
+				"statement", null, 0, -1, Block.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBlock_RescueBlock(), this.getRescue(), null,
+				"rescueBlock", null, 0, -1, Block.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = addEOperation(blockEClass, theStandardPackage
+				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(blockEClass, theStandardPackage.getJavaBoolean(),
+				"containsRescue", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(variableDeclEClass, VariableDecl.class, "VariableDecl",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariableDecl_Initialization(), this.getExpression(),
@@ -1408,7 +1428,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
 				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(variableDeclEClass, theStandardPackage
+		op = addEOperation(variableDeclEClass, theStandardPackage
 				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
@@ -1457,25 +1477,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		addEOperation(expressionEClass, theStandardPackage.getJavaBoolean(),
 				"isFunctionTypeVariable", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(blockEClass, Block.class, "Block", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBlock_Statement(), this.getExpression(), null,
-				"statement", null, 0, -1, Block.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBlock_RescueBlock(), this.getRescue(), null,
-				"rescueBlock", null, 0, -1, Block.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(blockEClass, theStandardPackage.getJavaString(),
-				"createBehaviorJava", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(blockEClass, theStandardPackage.getJavaBoolean(),
-				"containsRescue", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(callExpressionEClass, CallExpression.class,
 				"CallExpression", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -1495,15 +1496,15 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
-		addEOperation(callExpressionEClass,
-				theStandardPackage.getJavaBoolean(),
-				"isCallFeatureAsStaticEnumLiteral", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		op = addEOperation(callExpressionEClass, theStandardPackage
 				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(callExpressionEClass,
+				theStandardPackage.getJavaBoolean(),
+				"isCallFeatureAsStaticEnumLiteral", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(callExpressionEClass,
 				theStandardPackage.getJavaBoolean(),
@@ -1515,19 +1516,19 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 
 		initEClass(callFeatureEClass, CallFeature.class, "CallFeature",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCallFeature_IsAtpre(), theStandardPackage
-				.getJavaBoolean(), "isAtpre", "false", 0, 1, CallFeature.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCallFeature_CalledFtResult(), theStandardPackage
+				.getJavaString(), "calledFtResult", null, 0, 1,
+				CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCallFeature_StaticOperation(), theStructurePackage
 				.getOperation(), null, "staticOperation", null, 0, 1,
 				CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCallFeature_CalledFtResult(), theStandardPackage
-				.getJavaString(), "calledFtResult", null, 0, 1,
-				CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCallFeature_IsAtpre(), theStandardPackage
+				.getJavaBoolean(), "isAtpre", "false", 0, 1, CallFeature.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCallFeature_Target(), this.getExpression(), null,
 				"target", null, 0, 1, CallFeature.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
@@ -1640,16 +1641,16 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		addEOperation(callVariableEClass, theStandardPackage.getJavaBoolean(),
 				"isDeclaredInLambdaExpression", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(callVariableEClass, this.getLambdaParameter(),
+				"getCorrespondingLambdaExpressionParameter", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
 		addEOperation(callVariableEClass, theStandardPackage.getJavaBoolean(),
 				"isLambdaExpressionParameter", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(callVariableEClass, this.getExpression(),
 				"getVariableDeclInBlock", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getBlock(), "block", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(callVariableEClass, this.getLambdaParameter(),
-				"getCorrespondingLambdaExpressionParameter", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
 
 		op = addEOperation(callVariableEClass, this.getLambdaParameter(),
 				"getLambdaParameter", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1723,16 +1724,16 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				IS_GENERATED_INSTANCE_CLASS);
 
 		op = addEOperation(callSuperOperationEClass, theStandardPackage
-				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(callSuperOperationEClass, theStandardPackage
 				.getJavaString(), "getCallStaticSignature", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 		addEParameter(op, theStructurePackage.getOperation(),
 				"owningOperation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(callSuperOperationEClass, theStandardPackage
+				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1750,12 +1751,12 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				.getJavaString(), "valueTypeCastSuffix", null, 0, 1,
 				Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAssignment_Value(), this.getExpression(), null,
-				"value", null, 1, 1, Assignment.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssignment_Target(), this.getCallExpression(), null,
 				"target", null, 1, 1, Assignment.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssignment_Value(), this.getExpression(), null,
+				"value", null, 1, 1, Assignment.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssignment_IsCast(), theStandardPackage
@@ -1773,8 +1774,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(assignmentEClass, theStandardPackage
-				.getJavaBoolean(), "requireConversionObjectToValueType", 0, 1,
+		op = addEOperation(assignmentEClass,
+				theStandardPackage.getJavaString(), "createBehaviorJava", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1785,15 +1786,14 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(assignmentEClass,
-				theStandardPackage.getJavaString(), "createBehaviorJava", 0, 1,
+		op = addEOperation(assignmentEClass, theStandardPackage
+				.getJavaBoolean(), "requireConversionObjectToValueType", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(assignmentEClass,
-				theStandardPackage.getJavaString(), "getCastTypeQName", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(assignmentEClass, null, "initCast", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1803,8 +1803,9 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(assignmentEClass, null, "initCast", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
+		op = addEOperation(assignmentEClass,
+				theStandardPackage.getJavaString(), "getCastTypeQName", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1890,14 +1891,14 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 
 		initEClass(rescueEClass, Rescue.class, "Rescue", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRescue_Body(), this.getExpression(), null, "body",
-				null, 1, -1, Rescue.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRescue_ExceptionName(), theStandardPackage
 				.getJavaString(), "exceptionName", null, 0, 1, Rescue.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
 				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRescue_Body(), this.getExpression(), null, "body",
+				null, 1, -1, Rescue.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRescue_ExceptionType(), this.getTypeReference(),
 				null, "exceptionType", null, 1, 1, Rescue.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
@@ -1970,15 +1971,15 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				.getJavaString(), "jmethod", null, 0, 1, JavaStaticCall.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
 				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJavaStaticCall_Jclass(), theStandardPackage
+				.getJavaString(), "jclass", null, 0, 1, JavaStaticCall.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJavaStaticCall_Parameters(), this.getExpression(),
 				null, "parameters", null, 0, -1, JavaStaticCall.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEAttribute(getJavaStaticCall_Jclass(), theStandardPackage
-				.getJavaString(), "jclass", null, 0, 1, JavaStaticCall.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(javaStaticCallEClass, theStandardPackage
 				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
@@ -2081,6 +2082,26 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				new String[] { "ecoreUri",
 						"http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior" });
 		addAnnotation(this, source, new String[] { "ecore", "true" });
+		addAnnotation(blockEClass, source, new String[] { "documentation",
+				"/** Complete */" });
+		addAnnotation(blockEClass, source, new String[] { "ecore", "true" });
+		addAnnotation(
+				blockEClass,
+				source,
+				new String[] {
+						"documentation",
+						"Block is the model-element representation for the <code>do...end</code> block." });
+		addAnnotation(blockEClass.getEOperations().get(0), source,
+				new String[] { "superOperation",
+						"kermeta::language::behavior::Expression" });
+		addAnnotation(getBlock_Statement(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getBlock_Statement(), source, new String[] {
+				"documentation", "List of statements composing the block" });
+		addAnnotation(getBlock_RescueBlock(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getBlock_RescueBlock(), source, new String[] {
+				"documentation", "List of rescues defined for the block" });
 		addAnnotation(variableDeclEClass, source, new String[] { "ecore",
 				"true" });
 		addAnnotation(
@@ -2138,26 +2159,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		addAnnotation(getExpression_StaticType(), source, new String[] {
 				"documentation",
 				"Type of the Expression (set by type checking)" });
-		addAnnotation(blockEClass, source, new String[] { "documentation",
-				"/** Complete */" });
-		addAnnotation(blockEClass, source, new String[] { "ecore", "true" });
-		addAnnotation(
-				blockEClass,
-				source,
-				new String[] {
-						"documentation",
-						"Block is the model-element representation for the <code>do...end</code> block." });
-		addAnnotation(blockEClass.getEOperations().get(0), source,
-				new String[] { "superOperation",
-						"kermeta::language::behavior::Expression" });
-		addAnnotation(getBlock_Statement(), source, new String[] { "ecore",
-				"true" });
-		addAnnotation(getBlock_Statement(), source, new String[] {
-				"documentation", "List of statements composing the block" });
-		addAnnotation(getBlock_RescueBlock(), source, new String[] { "ecore",
-				"true" });
-		addAnnotation(getBlock_RescueBlock(), source, new String[] {
-				"documentation", "List of rescues defined for the block" });
 		addAnnotation(callExpressionEClass, source, new String[] { "ecore",
 				"true" });
 		addAnnotation(
@@ -2166,7 +2167,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				new String[] {
 						"documentation",
 						"Any callable expression inherits this class, e.g : \n  - variable call\n  - feature call ( <code>a.b</code> : b is a feature call)\n\n<img alt=\"\"  height=\"90%\" width=\"90%\"  src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png\" />" });
-		addAnnotation(callExpressionEClass.getEOperations().get(1), source,
+		addAnnotation(callExpressionEClass.getEOperations().get(0), source,
 				new String[] { "superOperation",
 						"kermeta::language::behavior::Expression" });
 		addAnnotation(getCallExpression_StaticTypeVariableBindings(), source,
@@ -2196,13 +2197,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		addAnnotation(callFeatureEClass.getEOperations().get(10), source,
 				new String[] { "documentation",
 						"/**\n\t * Unused for the moment\n\t */" });
-		addAnnotation(getCallFeature_IsAtpre(), source, new String[] { "ecore",
-				"true" });
-		addAnnotation(
-				getCallFeature_IsAtpre(),
-				source,
-				new String[] { "documentation",
-						"Tells whether this CallFeature represents a call to @pre in a postcondition" });
 		addAnnotation(getCallFeature_StaticOperation(), source, new String[] {
 				"ecore", "true" });
 		addAnnotation(
@@ -2211,6 +2205,13 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				new String[] {
 						"documentation",
 						"The method which will be executed (operation case)\nand the result value passed to the caller" });
+		addAnnotation(getCallFeature_IsAtpre(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(
+				getCallFeature_IsAtpre(),
+				source,
+				new String[] { "documentation",
+						"Tells whether this CallFeature represents a call to @pre in a postcondition" });
 		addAnnotation(getCallFeature_Target(), source, new String[] { "ecore",
 				"true" });
 		addAnnotation(getCallFeature_Target(), source,
@@ -2283,7 +2284,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				new String[] {
 						"documentation",
 						"This class represents a call to the operataion in the parent class\n\tIn the following example, the type of super(element) is CallSuperOperation:\n\nclass ParentClass {\n  operation op(element : Integer) : Integer is do\n      result := element + 1\n  end\n}\n *\nclass ChildClass {\n  method op(element : Integer) : Integer is do\n      result := super(element)\n  end\n}" });
-		addAnnotation(callSuperOperationEClass.getEOperations().get(0), source,
+		addAnnotation(callSuperOperationEClass.getEOperations().get(1), source,
 				new String[] { "superOperation",
 						"kermeta::language::behavior::CallExpression" });
 		addAnnotation(assignmentEClass, source,
@@ -2294,19 +2295,19 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				new String[] {
 						"documentation",
 						"Assignment is the model-element representation of the assignment statement <code>x := y</code>\n<img alt=\"\" src=\"http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png\"/>" });
-		addAnnotation(assignmentEClass.getEOperations().get(3), source,
+		addAnnotation(assignmentEClass.getEOperations().get(1), source,
 				new String[] { "superOperation",
 						"kermeta::language::behavior::Expression" });
-		addAnnotation(getAssignment_Value(), source, new String[] { "ecore",
-				"true" });
-		addAnnotation(getAssignment_Value(), source, new String[] {
-				"documentation",
-				"Value to be assigned, as a KerMeta expression" });
 		addAnnotation(getAssignment_Target(), source, new String[] { "ecore",
 				"true" });
 		addAnnotation(getAssignment_Target(), source, new String[] {
 				"documentation",
 				"Target of the assignment, as a CallExpression" });
+		addAnnotation(getAssignment_Value(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getAssignment_Value(), source, new String[] {
+				"documentation",
+				"Value to be assigned, as a KerMeta expression" });
 		addAnnotation(getAssignment_IsCast(), source, new String[] { "ecore",
 				"true" });
 		addAnnotation(
@@ -2383,14 +2384,14 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 		addAnnotation(rescueEClass.getEOperations().get(0), source,
 				new String[] { "superOperation",
 						"kermeta::language::structure::Object" });
-		addAnnotation(getRescue_Body(), source,
-				new String[] { "ecore", "true" });
-		addAnnotation(getRescue_Body(), source, new String[] { "documentation",
-				"Body of the rescue block, specified as a KerMeta expression" });
 		addAnnotation(getRescue_ExceptionName(), source, new String[] {
 				"ecore", "true" });
 		addAnnotation(getRescue_ExceptionName(), source, new String[] {
 				"documentation", "Name of the catched exception" });
+		addAnnotation(getRescue_Body(), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getRescue_Body(), source, new String[] { "documentation",
+				"Body of the rescue block, specified as a KerMeta expression" });
 		addAnnotation(getRescue_ExceptionType(), source, new String[] {
 				"ecore", "true" });
 		addAnnotation(getRescue_ExceptionType(), source, new String[] {
@@ -2475,6 +2476,10 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				source,
 				new String[] { "documentation",
 						"Name of the Java method to be launched in the identified Java class" });
+		addAnnotation(getJavaStaticCall_Jclass(), source, new String[] {
+				"ecore", "true" });
+		addAnnotation(getJavaStaticCall_Jclass(), source, new String[] {
+				"documentation", "Qualified name of the targeted Java class" });
 		addAnnotation(getJavaStaticCall_Parameters(), source, new String[] {
 				"ecore", "true" });
 		addAnnotation(
@@ -2482,10 +2487,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements
 				source,
 				new String[] { "documentation",
 						"Parameters of the Java static call provided as KerMeta expressions" });
-		addAnnotation(getJavaStaticCall_Jclass(), source, new String[] {
-				"ecore", "true" });
-		addAnnotation(getJavaStaticCall_Jclass(), source, new String[] {
-				"documentation", "Qualified name of the targeted Java class" });
 		addAnnotation(literalEClass, source, new String[] { "ecore", "true" });
 		addAnnotation(literalEClass, source, new String[] { "documentation",
 				"Literal refers to String values, Integer values, etc." });

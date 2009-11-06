@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -333,15 +333,15 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 						kermeta.standard.helper.StringWrapper.plus(result,
 								localType), " "), var_id);
 
-		java.lang.Boolean idIfCond_1 = false;
-		idIfCond_1 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_402 = false;
+		idIfCond_402 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getInitialization()));
 
-		if (idIfCond_1) {
+		if (idIfCond_402) {
 
-			java.lang.Boolean idIfCond_2 = false;
-			idIfCond_2 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_403 = false;
+			idIfCond_403 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							this.getInitialization(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -349,7 +349,7 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 									.getMetaClass(
 											"kermeta.language.behavior.Conditional"));
 
-			if (idIfCond_2) {
+			if (idIfCond_403) {
 
 				context.getResultLastStatementStack().push(
 						kermeta.standard.helper.StringWrapper.plus(
@@ -371,10 +371,10 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 
 				java.lang.String literal_suffix = "";
 
-				java.lang.Boolean idIfCond_3 = false;
-				idIfCond_3 = this.requireConversionValueTypeToObject();
+				java.lang.Boolean idIfCond_404 = false;
+				idIfCond_404 = this.requireConversionValueTypeToObject();
 
-				if (idIfCond_3) {
+				if (idIfCond_404) {
 
 					literal_prefix = kermeta.standard.helper.StringWrapper
 							.plus(context.getOBJECT_UTIL_CLASS(),
@@ -425,17 +425,17 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_4 = false;
-		idIfCond_4 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_405 = false;
+		idIfCond_405 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(this.getInitialization(),
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance().getMetaClass(
 										"kermeta.language.behavior.Literal"));
 
-		if (idIfCond_4) {
+		if (idIfCond_405) {
 
-			java.lang.Boolean idIfCond_5 = false;
-			idIfCond_5 = ((kermeta.language.behavior.Literal) org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_406 = false;
+			idIfCond_406 = ((kermeta.language.behavior.Literal) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
 							this.getInitialization(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -444,22 +444,22 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 											"kermeta.language.behavior.Literal")))
 					.getStaticType().isValueType();
 
-			if (idIfCond_5) {
+			if (idIfCond_406) {
 
 				java.lang.String left_type = this.getStaticType()
 						.getTypeQName();
 
-				java.lang.Boolean idIfCond_6 = false;
-				idIfCond_6 = kermeta.standard.helper.StringWrapper.equals(
+				java.lang.Boolean idIfCond_407 = false;
+				idIfCond_407 = kermeta.standard.helper.StringWrapper.equals(
 						left_type, "kermeta::language::structure::Object");
 
-				if (idIfCond_6) {
+				if (idIfCond_407) {
 
-					java.lang.Boolean idIfCond_7 = false;
-					idIfCond_7 = this.getInitialization().getStaticType()
+					java.lang.Boolean idIfCond_408 = false;
+					idIfCond_408 = this.getInitialization().getStaticType()
 							.isValueType();
 
-					if (idIfCond_7) {
+					if (idIfCond_408) {
 
 						result = true;
 					}

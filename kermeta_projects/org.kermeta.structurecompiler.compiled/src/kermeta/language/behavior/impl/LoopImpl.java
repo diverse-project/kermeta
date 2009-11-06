@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -362,8 +362,8 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 
 		context.pushCondStack();
 
-		java.lang.Boolean idIfCond_281 = false;
-		idIfCond_281 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_674 = false;
+		idIfCond_674 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						this.getInitialization(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -371,11 +371,11 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 								.getMetaClass(
 										"kermeta.language.behavior.CallVariable"));
 
-		if (idIfCond_281) {
+		if (idIfCond_674) {
 		} else {
 
-			java.lang.Boolean idIfCond_282 = false;
-			idIfCond_282 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_675 = false;
+			idIfCond_675 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							this.getInitialization(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -383,7 +383,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 									.getMetaClass(
 											"kermeta.language.behavior.VariableDecl"));
 
-			if (idIfCond_282) {
+			if (idIfCond_675) {
 
 				result = kermeta.standard.helper.StringWrapper.plus(
 						kermeta.standard.helper.StringWrapper
@@ -433,8 +433,8 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 
 		result = kermeta.standard.helper.StringWrapper.plus(result, "\n\t}");
 
-		java.lang.Boolean idIfCond_283 = false;
-		idIfCond_283 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_676 = false;
+		idIfCond_676 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						this.getInitialization(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -442,7 +442,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 								.getMetaClass(
 										"kermeta.language.behavior.VariableDecl"));
 
-		if (idIfCond_283) {
+		if (idIfCond_676) {
 
 			result = kermeta.standard.helper.StringWrapper
 					.plus(result, "\n}\n");

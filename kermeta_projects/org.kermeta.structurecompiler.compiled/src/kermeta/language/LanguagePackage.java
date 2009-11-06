@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -29,10 +29,10 @@ import org.eclipse.emf.ecore.EPackage;
  * @see kermeta.language.LanguageFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/language'"
- *        annotation="kermeta ecore='true'"
- *        annotation="kermeta documentation='/**\n * Contains the implementation of Kermeta reflective collections.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_package.png\"/>\n \052/'"
  *        annotation="kermeta documentation='/**\n *\n * func : <Object -> Object> because we need to visit the tags.\n *\n \052/'"
  *        annotation="kermeta usage='containment_traversable'"
+ *        annotation="kermeta ecore='true'"
+ *        annotation="kermeta documentation='/**\n * Contains the implementation of Kermeta reflective collections.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_package.png\"/>\n \052/'"
  * @generated
  */
 public interface LanguagePackage extends EPackage {
@@ -80,15 +80,6 @@ public interface LanguagePackage extends EPackage {
 	int DUMMY_CLASS = 0;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DUMMY_CLASS__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -96,6 +87,15 @@ public interface LanguagePackage extends EPackage {
 	 * @ordered
 	 */
 	int DUMMY_CLASS__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DUMMY_CLASS__FILE = StructurePackage.OBJECT__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -162,15 +162,6 @@ public interface LanguagePackage extends EPackage {
 	int REFLECTIVE_COLLECTION = 1;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFLECTIVE_COLLECTION__FILE = StandardPackage.SET__FILE;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -178,6 +169,15 @@ public interface LanguagePackage extends EPackage {
 	 * @ordered
 	 */
 	int REFLECTIVE_COLLECTION__TAG = StandardPackage.SET__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFLECTIVE_COLLECTION__FILE = StandardPackage.SET__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -253,15 +253,6 @@ public interface LanguagePackage extends EPackage {
 	int REFLECTIVE_SEQUENCE = 2;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFLECTIVE_SEQUENCE__FILE = StandardPackage.ORDERED_SET__FILE;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -269,6 +260,15 @@ public interface LanguagePackage extends EPackage {
 	 * @ordered
 	 */
 	int REFLECTIVE_SEQUENCE__TAG = StandardPackage.ORDERED_SET__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFLECTIVE_SEQUENCE__FILE = StandardPackage.ORDERED_SET__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.

@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -107,11 +107,11 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 
 		result = this.getValue();
 
-		java.lang.Boolean idIfCond_288 = false;
-		idIfCond_288 = kermeta.standard.helper.StringWrapper
+		java.lang.Boolean idIfCond_681 = false;
+		idIfCond_681 = kermeta.standard.helper.StringWrapper
 				.equals(result, ".");
 
-		if (idIfCond_288) {
+		if (idIfCond_681) {
 
 			result = "\".\"";
 		} else {
@@ -134,8 +134,8 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 					"\r", "\\r");
 		}
 
-		java.lang.Boolean idIfCond_289 = false;
-		idIfCond_289 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_682 = false;
+		idIfCond_682 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -145,7 +145,7 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 										.getMetaClass(
 												"kermeta.language.behavior.VariableDecl")));
 
-		if (idIfCond_289) {
+		if (idIfCond_682) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result, this
 					.endOfExpressionFixer());

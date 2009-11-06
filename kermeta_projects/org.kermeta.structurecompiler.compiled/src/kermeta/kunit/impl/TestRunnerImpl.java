@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -157,7 +157,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 		//PreConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("pre__22229970__testNotVoid")) {
+					.mustBeChecked("pre__27571938__testNotVoid")) {
 				java.lang.Boolean result_pre = false;
 
 				result_pre = org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -175,14 +175,14 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 						.newObject(kermeta.kunit.KunitPackage.eINSTANCE
 								.getLog())));
 
-		test.setLogKermeta(this.getLog());
+		test.setLogEMF_renameAs(this.getLog());
 
 		test.run();
 
 		//PostConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("post__24070580__logNotVoid")) {
+					.mustBeChecked("post__14867816__logNotVoid")) {
 				java.lang.Boolean result_post = false;
 
 				result_post = org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -209,13 +209,13 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 				.writeln(
 						"\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n");
 
-		java.lang.Boolean idIfCond_729 = false;
-		idIfCond_729 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1084 = false;
+		idIfCond_1084 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Failure> convertAsOrderedSet(
 								this.getLog().getFailures()).empty());
 
-		if (idIfCond_729) {
+		if (idIfCond_1084) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln("\nFailures: ");
@@ -224,22 +224,22 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.kunit.Failure> it_ft164 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.kunit.Failure> it_ft245 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Failure> convertAsOrderedSet(
 								this.getLog().getFailures()).iterator();
-				java.lang.Boolean idLoopCond_730 = false;
-				while (!idLoopCond_730) {
-					idLoopCond_730 = it_ft164.isOff();
-					if (idLoopCond_730) {
+				java.lang.Boolean idLoopCond_1085 = false;
+				while (!idLoopCond_1085) {
+					idLoopCond_1085 = it_ft245.isOff();
+					if (idLoopCond_1085) {
 					} else {
 
 						//BIle:func
-						kermeta.kunit.Failure f_lbdExp164 = it_ft164.next();
+						kermeta.kunit.Failure f_lbdExp245 = it_ft245.next();
 
 						org.kermeta.compil.runtime.helper.io.StdIOUtil
 								.getInstance().writeln(
 										kermeta.standard.helper.StringWrapper
-												.plus("\n   ", f_lbdExp164
+												.plus("\n   ", f_lbdExp245
 														.toString()));
 						//EIle:func
 
@@ -251,13 +251,13 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 		}
 
-		java.lang.Boolean idIfCond_731 = false;
-		idIfCond_731 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1086 = false;
+		idIfCond_1086 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getErrors()).empty());
 
-		if (idIfCond_731) {
+		if (idIfCond_1086) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln("\nErrors: ");
@@ -266,22 +266,22 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft165 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft246 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getErrors()).iterator();
-				java.lang.Boolean idLoopCond_732 = false;
-				while (!idLoopCond_732) {
-					idLoopCond_732 = it_ft165.isOff();
-					if (idLoopCond_732) {
+				java.lang.Boolean idLoopCond_1087 = false;
+				while (!idLoopCond_1087) {
+					idLoopCond_1087 = it_ft246.isOff();
+					if (idLoopCond_1087) {
 					} else {
 
 						//BIle:func
-						kermeta.kunit.Error e_lbdExp165 = it_ft165.next();
+						kermeta.kunit.Error e_lbdExp246 = it_ft246.next();
 
 						org.kermeta.compil.runtime.helper.io.StdIOUtil
 								.getInstance().writeln(
 										kermeta.standard.helper.StringWrapper
-												.plus("\n   ", e_lbdExp165
+												.plus("\n   ", e_lbdExp246
 														.toString()));
 						//EIle:func
 
@@ -293,13 +293,13 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 		}
 
-		java.lang.Boolean idIfCond_733 = false;
-		idIfCond_733 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1088 = false;
+		idIfCond_1088 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getHarnessErrors()).empty());
 
-		if (idIfCond_733) {
+		if (idIfCond_1088) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln("\nErrors from setUp or tearDown : ");
@@ -308,22 +308,22 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft166 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft247 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getHarnessErrors()).iterator();
-				java.lang.Boolean idLoopCond_734 = false;
-				while (!idLoopCond_734) {
-					idLoopCond_734 = it_ft166.isOff();
-					if (idLoopCond_734) {
+				java.lang.Boolean idLoopCond_1089 = false;
+				while (!idLoopCond_1089) {
+					idLoopCond_1089 = it_ft247.isOff();
+					if (idLoopCond_1089) {
 					} else {
 
 						//BIle:func
-						kermeta.kunit.Error e_lbdExp166 = it_ft166.next();
+						kermeta.kunit.Error e_lbdExp247 = it_ft247.next();
 
 						org.kermeta.compil.runtime.helper.io.StdIOUtil
 								.getInstance().writeln(
 										kermeta.standard.helper.StringWrapper
-												.plus("\n   ", e_lbdExp166
+												.plus("\n   ", e_lbdExp247
 														.toString()));
 						//EIle:func
 
@@ -403,7 +403,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 		//PreConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("pre__22011833__cIsATestCase")) {
+					.mustBeChecked("pre__3538503__cIsATestCase")) {
 				java.lang.Boolean result_pre = false;
 
 				result_pre = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil

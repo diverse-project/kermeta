@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -79,6 +79,18 @@ public class EEnumImpl extends EDataTypeImpl implements EEnum {
 					EcorePackage.EENUM_LITERAL__EENUM);
 		}
 		return eLiterals;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnumLiteral op_getEEnumLiteral(String name) {
+		ecore.EEnumLiteral result = null;
+
+		return result;
+
 	}
 
 	/**

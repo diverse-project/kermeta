@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -95,17 +95,6 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void clear() {
-
-		org.kermeta.compil.runtime.helper.basetypes.MapUtil.clear(this);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public V getValue(K key) {
 
 		V result = null;
@@ -116,6 +105,17 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 								.get(this, key), "V");
 
 		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void clear() {
+
+		org.kermeta.compil.runtime.helper.basetypes.MapUtil.clear(this);
 
 	}
 
@@ -151,17 +151,17 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		{
 
-			kermeta.standard.Iterator<K> it_ft215 = this.keys().iterator();
-			java.lang.Boolean idLoopCond_966 = false;
-			while (!idLoopCond_966) {
-				idLoopCond_966 = it_ft215.isOff();
-				if (idLoopCond_966) {
+			kermeta.standard.Iterator<K> it_ft203 = this.keys().iterator();
+			java.lang.Boolean idLoopCond_916 = false;
+			while (!idLoopCond_916) {
+				idLoopCond_916 = it_ft203.isOff();
+				if (idLoopCond_916) {
 				} else {
 
 					//BIle:func
-					K k_lbdExp215 = it_ft215.next();
+					K k_lbdExp203 = it_ft203.next();
 
-					result.add(this.getValue(k_lbdExp215));
+					result.add(this.getValue(k_lbdExp203));
 					//EIle:func
 
 				}
@@ -212,10 +212,10 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		{
 
 			kermeta.standard.Iterator<K> it = this.keyIterator();
-			java.lang.Boolean idLoopCond_967 = false;
-			while (!idLoopCond_967) {
-				idLoopCond_967 = it.isOff();
-				if (idLoopCond_967) {
+			java.lang.Boolean idLoopCond_917 = false;
+			while (!idLoopCond_917) {
+				idLoopCond_917 = it.isOff();
+				if (idLoopCond_917) {
 				} else {
 
 					result.add(it.next());

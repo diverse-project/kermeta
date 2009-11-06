@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -130,39 +130,39 @@ public class UsingImpl extends ObjectImpl implements Using {
 		ecore.EStringToStringMapEntry usingEntry = null;
 		//BIft:detect
 
-		ecore.EStringToStringMapEntry result_ft153 = null;
+		ecore.EStringToStringMapEntry result_ft27 = null;
 
-		ecore.EStringToStringMapEntry elem_ft153 = null;
+		ecore.EStringToStringMapEntry elem_ft27 = null;
 
-		result_ft153 = null;
+		result_ft27 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft153 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft27 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EStringToStringMapEntry> convertAsOrderedSet(
 							ecoreAnnotation.getDetails()).iterator();
-			java.lang.Boolean idLoopCond_672 = false;
-			while (!idLoopCond_672) {
-				idLoopCond_672 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft153.isOff(),
+			java.lang.Boolean idLoopCond_59 = false;
+			while (!idLoopCond_59) {
+				idLoopCond_59 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft27.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft153, null));
-				if (idLoopCond_672) {
+								.isNotEqualSwitcher(result_ft27, null));
+				if (idLoopCond_59) {
 				} else {
 
-					elem_ft153 = it_ft153.next();
+					elem_ft27 = it_ft27.next();
 
-					java.lang.Boolean idIfCond_673 = false;
+					java.lang.Boolean idIfCond_60 = false;
 					//BIle:detector
-					ecore.EStringToStringMapEntry d_lbdExp153 = elem_ft153;
+					ecore.EStringToStringMapEntry d_lbdExp27 = elem_ft27;
 
-					idIfCond_673 = kermeta.standard.helper.StringWrapper
-							.equals(d_lbdExp153.getKey(), "using");
+					idIfCond_60 = kermeta.standard.helper.StringWrapper.equals(
+							d_lbdExp27.getKey(), "using");
 					//EIle:detector
 
-					if (idIfCond_673) {
+					if (idIfCond_60) {
 
-						result_ft153 = elem_ft153;
+						result_ft27 = elem_ft27;
 					}
 
 				}
@@ -170,7 +170,7 @@ public class UsingImpl extends ObjectImpl implements Using {
 		}
 
 		//CE
-		usingEntry = result_ft153;
+		usingEntry = result_ft27;
 		//EIft:detect
 		;
 

@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -64,10 +64,10 @@ public class Km2ecoreFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case Km2ecorePackage.SOURCE_TRACER:
-			return createSourceTracer();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT:
 			return createKM2EcoreContext();
+		case Km2ecorePackage.SOURCE_TRACER:
+			return createSourceTracer();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -111,9 +111,9 @@ public class Km2ecoreFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SourceTracer createSourceTracer() {
-		SourceTracerImpl sourceTracer = new SourceTracerImpl();
-		return sourceTracer;
+	public KM2EcoreContext createKM2EcoreContext() {
+		KM2EcoreContextImpl km2EcoreContext = new KM2EcoreContextImpl();
+		return km2EcoreContext;
 	}
 
 	/**
@@ -121,9 +121,9 @@ public class Km2ecoreFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KM2EcoreContext createKM2EcoreContext() {
-		KM2EcoreContextImpl km2EcoreContext = new KM2EcoreContextImpl();
-		return km2EcoreContext;
+	public SourceTracer createSourceTracer() {
+		SourceTracerImpl sourceTracer = new SourceTracerImpl();
+		return sourceTracer;
 	}
 
 	/**

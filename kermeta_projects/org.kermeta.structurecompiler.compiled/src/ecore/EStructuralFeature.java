@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -17,8 +17,8 @@ package ecore;
  * The following features are supported:
  * <ul>
  *   <li>{@link ecore.EStructuralFeature#is_volatile <em>volatile</em>}</li>
- *   <li>{@link ecore.EStructuralFeature#getEContainingClass <em>EContaining Class</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
+ *   <li>{@link ecore.EStructuralFeature#getEContainingClass <em>EContaining Class</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#is_transient <em>transient</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isUnsettable <em>Unsettable</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isDerived <em>Derived</em>}</li>
@@ -44,7 +44,7 @@ public interface EStructuralFeature extends ETypedElement {
 	 * @return the value of the '<em>volatile</em>' attribute.
 	 * @see #set_volatile(boolean)
 	 * @see ecore.EcorePackage#getEStructuralFeature__volatile()
-	 * @model default="false"
+	 * @model default="false" dataType="ecore.EBoolean"
 	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */
@@ -59,6 +59,33 @@ public interface EStructuralFeature extends ETypedElement {
 	 * @generated
 	 */
 	void set_volatile(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Value Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Default Value Literal</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Default Value Literal</em>' attribute.
+	 * @see #setDefaultValueLiteral(String)
+	 * @see ecore.EcorePackage#getEStructuralFeature_DefaultValueLiteral()
+	 * @model dataType="ecore.EString"
+	 *        annotation="kermeta ecore='true'"
+	 * @generated
+	 */
+	String getDefaultValueLiteral();
+
+	/**
+	 * Sets the value of the '{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Value Literal</em>' attribute.
+	 * @see #getDefaultValueLiteral()
+	 * @generated
+	 */
+	void setDefaultValueLiteral(String value);
 
 	/**
 	 * Returns the value of the '<em><b>EContaining Class</b></em>' container reference.
@@ -78,32 +105,6 @@ public interface EStructuralFeature extends ETypedElement {
 	 * @generated
 	 */
 	EClass getEContainingClass();
-
-	/**
-	 * Returns the value of the '<em><b>Default Value Literal</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Default Value Literal</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Value Literal</em>' attribute.
-	 * @see #setDefaultValueLiteral(String)
-	 * @see ecore.EcorePackage#getEStructuralFeature_DefaultValueLiteral()
-	 * @model annotation="kermeta ecore='true'"
-	 * @generated
-	 */
-	String getDefaultValueLiteral();
-
-	/**
-	 * Sets the value of the '{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Value Literal</em>' attribute.
-	 * @see #getDefaultValueLiteral()
-	 * @generated
-	 */
-	void setDefaultValueLiteral(String value);
 
 	/**
 	 * Returns the value of the '<em><b>transient</b></em>' attribute.
@@ -242,7 +243,8 @@ public interface EStructuralFeature extends ETypedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Object result = null;\n\nreturn result;\n'"
+	 * @model dataType="ecore.EJavaObject"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Object result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Object getterDefaultValue();

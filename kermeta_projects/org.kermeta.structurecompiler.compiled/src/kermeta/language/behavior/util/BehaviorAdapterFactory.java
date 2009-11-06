@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -78,6 +78,11 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected BehaviorSwitch<Adapter> modelSwitch = new BehaviorSwitch<Adapter>() {
 		@Override
+		public Adapter caseBlock(Block object) {
+			return createBlockAdapter();
+		}
+
+		@Override
 		public Adapter caseVariableDecl(VariableDecl object) {
 			return createVariableDeclAdapter();
 		}
@@ -85,11 +90,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseExpression(Expression object) {
 			return createExpressionAdapter();
-		}
-
-		@Override
-		public Adapter caseBlock(Block object) {
-			return createBlockAdapter();
 		}
 
 		@Override
@@ -252,6 +252,20 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Block <em>Block</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.Block
+	 * @generated
+	 */
+	public Adapter createBlockAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.VariableDecl <em>Variable Decl</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -276,20 +290,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Block <em>Block</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.Block
-	 * @generated
-	 */
-	public Adapter createBlockAdapter() {
 		return null;
 	}
 

@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -28,15 +28,6 @@ public interface UtilsFactory extends EFactory {
 	UtilsFactory eINSTANCE = kermeta.utils.impl.UtilsFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>String Buffer</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>String Buffer</em>'.
-	 * @generated
-	 */
-	StringBuffer createStringBuffer();
-
-	/**
 	 * Returns a new object of class '<em>Hashtable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -44,6 +35,15 @@ public interface UtilsFactory extends EFactory {
 	 * @generated
 	 */
 	<K, V> Hashtable<K, V> createHashtable();
+
+	/**
+	 * Returns a new object of class '<em>String Buffer</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String Buffer</em>'.
+	 * @generated
+	 */
+	StringBuffer createStringBuffer();
 
 	/**
 	 * Returns a new object of class '<em>Stack</em>'.

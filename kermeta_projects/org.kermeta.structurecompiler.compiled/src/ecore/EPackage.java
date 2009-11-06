@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -22,8 +22,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link ecore.EPackage#getESubpackages <em>ESubpackages</em>}</li>
  *   <li>{@link ecore.EPackage#getESuperPackage <em>ESuper Package</em>}</li>
  *   <li>{@link ecore.EPackage#getNsPrefix <em>Ns Prefix</em>}</li>
- *   <li>{@link ecore.EPackage#getEClassifiers <em>EClassifiers</em>}</li>
  *   <li>{@link ecore.EPackage#getEFactoryInstance <em>EFactory Instance</em>}</li>
+ *   <li>{@link ecore.EPackage#getEClassifiers <em>EClassifiers</em>}</li>
  * </ul>
  * </p>
  *
@@ -123,25 +123,6 @@ public interface EPackage extends ENamedElement {
 	void setNsPrefix(String value);
 
 	/**
-	 * Returns the value of the '<em><b>EClassifiers</b></em>' containment reference list.
-	 * The list contents are of type {@link ecore.EClassifier}.
-	 * It is bidirectional and its opposite is '{@link ecore.EClassifier#getEPackage <em>EPackage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>EClassifiers</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EClassifiers</em>' containment reference list.
-	 * @see ecore.EcorePackage#getEPackage_EClassifiers()
-	 * @see ecore.EClassifier#getEPackage
-	 * @model opposite="ePackage" containment="true" resolveProxies="true"
-	 *        annotation="kermeta ecore='true'"
-	 * @generated
-	 */
-	EList<EClassifier> getEClassifiers();
-
-	/**
 	 * Returns the value of the '<em><b>EFactory Instance</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link ecore.EFactory#getEPackage <em>EPackage</em>}'.
 	 * <!-- begin-user-doc -->
@@ -170,6 +151,25 @@ public interface EPackage extends ENamedElement {
 	 * @generated
 	 */
 	void setEFactoryInstance(EFactory value);
+
+	/**
+	 * Returns the value of the '<em><b>EClassifiers</b></em>' containment reference list.
+	 * The list contents are of type {@link ecore.EClassifier}.
+	 * It is bidirectional and its opposite is '{@link ecore.EClassifier#getEPackage <em>EPackage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>EClassifiers</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>EClassifiers</em>' containment reference list.
+	 * @see ecore.EcorePackage#getEPackage_EClassifiers()
+	 * @see ecore.EClassifier#getEPackage
+	 * @model opposite="ePackage" containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
+	 * @generated
+	 */
+	EList<EClassifier> getEClassifiers();
 
 	/**
 	 * <!-- begin-user-doc -->

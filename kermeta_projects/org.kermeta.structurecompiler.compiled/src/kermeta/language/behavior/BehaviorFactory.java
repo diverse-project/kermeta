@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -29,6 +29,15 @@ public interface BehaviorFactory extends EFactory {
 			.init();
 
 	/**
+	 * Returns a new object of class '<em>Block</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Block</em>'.
+	 * @generated
+	 */
+	Block createBlock();
+
+	/**
 	 * Returns a new object of class '<em>Variable Decl</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -45,15 +54,6 @@ public interface BehaviorFactory extends EFactory {
 	 * @generated
 	 */
 	Expression createExpression();
-
-	/**
-	 * Returns a new object of class '<em>Block</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Block</em>'.
-	 * @generated
-	 */
-	Block createBlock();
 
 	/**
 	 * Returns a new object of class '<em>Call Expression</em>'.

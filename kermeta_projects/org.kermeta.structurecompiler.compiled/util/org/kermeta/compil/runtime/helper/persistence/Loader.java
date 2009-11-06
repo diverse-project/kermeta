@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import fr.irisa.triskell.kermeta.language.structure.Operation;
+//import fr.irisa.triskell.kermeta.language.structure.Operation;
 
 /**
  * @generated

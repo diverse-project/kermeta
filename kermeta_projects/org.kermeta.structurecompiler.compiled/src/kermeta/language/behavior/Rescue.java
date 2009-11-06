@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -20,8 +20,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link kermeta.language.behavior.Rescue#getBody <em>Body</em>}</li>
  *   <li>{@link kermeta.language.behavior.Rescue#getExceptionName <em>Exception Name</em>}</li>
+ *   <li>{@link kermeta.language.behavior.Rescue#getBody <em>Body</em>}</li>
  *   <li>{@link kermeta.language.behavior.Rescue#getExceptionType <em>Exception Type</em>}</li>
  * </ul>
  * </p>
@@ -33,24 +33,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Rescue extends kermeta.language.structure.Object {
-	/**
-	 * Returns the value of the '<em><b>Body</b></em>' containment reference list.
-	 * The list contents are of type {@link kermeta.language.behavior.Expression}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Body</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Body</em>' containment reference list.
-	 * @see kermeta.language.behavior.BehaviorPackage#getRescue_Body()
-	 * @model containment="true" resolveProxies="true" required="true"
-	 *        annotation="kermeta ecore='true'"
-	 *        annotation="kermeta documentation='Body of the rescue block, specified as a KerMeta expression'"
-	 * @generated
-	 */
-	EList<Expression> getBody();
-
 	/**
 	 * Returns the value of the '<em><b>Exception Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -78,6 +60,24 @@ public interface Rescue extends kermeta.language.structure.Object {
 	 * @generated
 	 */
 	void setExceptionName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Body</b></em>' containment reference list.
+	 * The list contents are of type {@link kermeta.language.behavior.Expression}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Body</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Body</em>' containment reference list.
+	 * @see kermeta.language.behavior.BehaviorPackage#getRescue_Body()
+	 * @model containment="true" resolveProxies="true" required="true"
+	 *        annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='Body of the rescue block, specified as a KerMeta expression'"
+	 * @generated
+	 */
+	EList<Expression> getBody();
 
 	/**
 	 * Returns the value of the '<em><b>Exception Type</b></em>' containment reference.
@@ -112,7 +112,7 @@ public interface Rescue extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = \"\";\n\n\tjava.lang.Boolean idIfCond_265 = false;\n\tidIfCond_265 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getExceptionType()));\n\n\tif( idIfCond_265 ) {\n\n\tjava.lang.String str_exceptionType = this.getExceptionType().createBehaviorJava(context);\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \"if( \"), context.getVARIABLE_EXCEPTION_SWITCHER()), \"_\"), context.getKRErrorStack().peek()), \".getRealException() instanceof \"), str_exceptionType), \" ) {\\n\");\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \"caught_\"), context.getKRErrorStack().peek()), \" = true;\\n\");\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, str_exceptionType), \" \"), this.getExceptionName()), \" = (\"), str_exceptionType), \") \"), context.getVARIABLE_EXCEPTION_SWITCHER()), \"_\"), context.getKRErrorStack().peek()), \".getRealException();\\n\");\n\n\t//BIft:eachOwnedElement\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft25 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(this.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_266 = false;\n\twhile( !idLoopCond_266 ) {\n\tidLoopCond_266 = it_ft25.isOff();\n\tif ( idLoopCond_266 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Tag o_lbdExp25 = it_ft25.next();\n\n\t//BIle:func\nkermeta.language.structure.Tag e_lbdExp24 = o_lbdExp25;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, e_lbdExp24.createBehaviorJava(context));\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft26 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.behavior.Expression>convertAsOrderedSet(this.getBody()).iterator();\n\tjava.lang.Boolean idLoopCond_267 = false;\n\twhile( !idLoopCond_267 ) {\n\tidLoopCond_267 = it_ft26.isOff();\n\tif ( idLoopCond_267 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.behavior.Expression s_lbdExp26 = it_ft26.next();\n\n\t//BIle:func\nkermeta.language.behavior.Expression e_lbdExp24 = s_lbdExp26;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, e_lbdExp24.createBehaviorJava(context));\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n//EIft:eachOwnedElement\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"\\n}\");\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = \"\";\n\n\tjava.lang.Boolean idIfCond_658 = false;\n\tidIfCond_658 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getExceptionType()));\n\n\tif( idIfCond_658 ) {\n\n\tjava.lang.String str_exceptionType = this.getExceptionType().createBehaviorJava(context);\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \"if( \"), context.getVARIABLE_EXCEPTION_SWITCHER()), \"_\"), context.getKRErrorStack().peek()), \".getRealException() instanceof \"), str_exceptionType), \" ) {\\n\");\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \"caught_\"), context.getKRErrorStack().peek()), \" = true;\\n\");\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, str_exceptionType), \" \"), this.getExceptionName()), \" = (\"), str_exceptionType), \") \"), context.getVARIABLE_EXCEPTION_SWITCHER()), \"_\"), context.getKRErrorStack().peek()), \".getRealException();\\n\");\n\n\t//BIft:eachOwnedElement\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft153 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(this.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_659 = false;\n\twhile( !idLoopCond_659 ) {\n\tidLoopCond_659 = it_ft153.isOff();\n\tif ( idLoopCond_659 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Tag o_lbdExp153 = it_ft153.next();\n\n\t//BIle:func\nkermeta.language.structure.Tag e_lbdExp152 = o_lbdExp153;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, e_lbdExp152.createBehaviorJava(context));\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft154 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.behavior.Expression>convertAsOrderedSet(this.getBody()).iterator();\n\tjava.lang.Boolean idLoopCond_660 = false;\n\twhile( !idLoopCond_660 ) {\n\tidLoopCond_660 = it_ft154.isOff();\n\tif ( idLoopCond_660 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.behavior.Expression s_lbdExp154 = it_ft154.next();\n\n\t//BIle:func\nkermeta.language.behavior.Expression e_lbdExp152 = s_lbdExp154;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, e_lbdExp152.createBehaviorJava(context));\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n//EIft:eachOwnedElement\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"\\n}\");\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String createBehaviorJava(KM2EcoreContext context);

@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -24,7 +24,7 @@ public interface StdIO extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model objectDataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\n\t * Writeln the object to standard output\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1030 = false;\n\tidIfCond_1030 = kermeta.standard.helper.StringWrapper.equals(object, null);\n\n\tif( idIfCond_1030 ) {\n\n\tobject = \"<void>\";\n}\n\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.writeln(object);\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1137 = false;\n\tidIfCond_1137 = kermeta.standard.helper.StringWrapper.equals(object, null);\n\n\tif( idIfCond_1137 ) {\n\n\tobject = \"<void>\";\n}\n\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.writeln(object);\n'"
 	 * @generated
 	 */
 	void writeln(String object);
@@ -34,7 +34,7 @@ public interface StdIO extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model objectDataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\n\t * Writeln the object to error output\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1031 = false;\n\tidIfCond_1031 = kermeta.standard.helper.StringWrapper.equals(object, null);\n\n\tif( idIfCond_1031 ) {\n\n\tobject = \"<void>\";\n}\n\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.errorln(object);\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1138 = false;\n\tidIfCond_1138 = kermeta.standard.helper.StringWrapper.equals(object, null);\n\n\tif( idIfCond_1138 ) {\n\n\tobject = \"<void>\";\n}\n\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.errorln(object);\n'"
 	 * @generated
 	 */
 	void errorln(String object);
@@ -44,7 +44,7 @@ public interface StdIO extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model objectDataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\n\t * Writes the object to error output\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1032 = false;\n\tidIfCond_1032 = kermeta.standard.helper.StringWrapper.equals(object, null);\n\n\tif( idIfCond_1032 ) {\n\n\tobject = \"<void>\";\n}\n\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.error(object);\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1139 = false;\n\tidIfCond_1139 = kermeta.standard.helper.StringWrapper.equals(object, null);\n\n\tif( idIfCond_1139 ) {\n\n\tobject = \"<void>\";\n}\n\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.error(object);\n'"
 	 * @generated
 	 */
 	void error(String object);
@@ -54,7 +54,7 @@ public interface StdIO extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model objectDataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\n\t * Writes the object to standard output\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1033 = false;\n\tidIfCond_1033 = kermeta.standard.helper.StringWrapper.equals(object, null);\n\n\tif( idIfCond_1033 ) {\n\n\tobject = \"<void>\";\n}\n\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.write(object);\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1140 = false;\n\tidIfCond_1140 = kermeta.standard.helper.StringWrapper.equals(object, null);\n\n\tif( idIfCond_1140 ) {\n\n\tobject = \"<void>\";\n}\n\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.write(object);\n'"
 	 * @generated
 	 */
 	void write(String object);
@@ -64,7 +64,7 @@ public interface StdIO extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString" promptDataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\n\t * Reads a String from standard input\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tjava.lang.Boolean idIfCond_1034 = false;\n\tidIfCond_1034 = kermeta.standard.helper.StringWrapper.equals(prompt, null);\n\n\tif( idIfCond_1034 ) {\n\n\tprompt = \"\";\n}\n\n\n\tresult = (java.lang.String) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeOrVoid(org.kermeta.compil.runtime.helper.io.StdIOUtil.read(prompt), \"java.lang.String\");\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tjava.lang.Boolean idIfCond_1141 = false;\n\tidIfCond_1141 = kermeta.standard.helper.StringWrapper.equals(prompt, null);\n\n\tif( idIfCond_1141 ) {\n\n\tprompt = \"\";\n}\n\n\n\tresult = (java.lang.String) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeOrVoid(org.kermeta.compil.runtime.helper.io.StdIOUtil.read(prompt), \"java.lang.String\");\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String read(String prompt);

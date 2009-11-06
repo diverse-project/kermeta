@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -93,20 +93,20 @@ public class UtilsSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case UtilsPackage.STRING_BUFFER: {
-			kermeta.utils.StringBuffer stringBuffer = (kermeta.utils.StringBuffer) theEObject;
-			T result = caseStringBuffer(stringBuffer);
-			if (result == null)
-				result = caseObject(stringBuffer);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case UtilsPackage.HASHTABLE: {
 			Hashtable<?, ?> hashtable = (Hashtable<?, ?>) theEObject;
 			T result = caseHashtable(hashtable);
 			if (result == null)
 				result = caseObject(hashtable);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case UtilsPackage.STRING_BUFFER: {
+			kermeta.utils.StringBuffer stringBuffer = (kermeta.utils.StringBuffer) theEObject;
+			T result = caseStringBuffer(stringBuffer);
+			if (result == null)
+				result = caseObject(stringBuffer);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -134,21 +134,6 @@ public class UtilsSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>String Buffer</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>String Buffer</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStringBuffer(kermeta.utils.StringBuffer object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Hashtable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -160,6 +145,21 @@ public class UtilsSwitch<T> {
 	 * @generated
 	 */
 	public <K, V> T caseHashtable(Hashtable<K, V> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String Buffer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String Buffer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStringBuffer(kermeta.utils.StringBuffer object) {
 		return null;
 	}
 

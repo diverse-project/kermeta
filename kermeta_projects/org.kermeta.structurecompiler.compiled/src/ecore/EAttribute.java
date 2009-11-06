@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -37,7 +37,7 @@ public interface EAttribute extends EStructuralFeature {
 	 * @return the value of the '<em>ID</em>' attribute.
 	 * @see #setID(boolean)
 	 * @see ecore.EcorePackage#getEAttribute_ID()
-	 * @model default="false" dataType="ecore.EBoolean"
+	 * @model default="false"
 	 *        annotation="kermeta ecore='true'"
 	 * @generated
 	 */

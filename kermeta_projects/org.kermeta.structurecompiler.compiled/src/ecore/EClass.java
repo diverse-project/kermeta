@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -164,21 +164,20 @@ public interface EClass extends EClassifier {
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta isAbstract='true'"
 	 *        annotation="kermeta ecore='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Integer result = null;\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EStructuralFeature result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
-	int getFeatureID(EStructuralFeature feature);
+	EStructuralFeature getEStructuralFeature(String featureName);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta isAbstract='true'"
 	 *        annotation="kermeta ecore='true'"
-	 *        annotation="kermeta ecore='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EStructuralFeature result = null;\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Integer result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
-	EStructuralFeature getEStructuralFeature(String featureName);
+	int getFeatureID(EStructuralFeature feature);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -200,6 +199,16 @@ public interface EClass extends EClassifier {
 	 * @generated
 	 */
 	int getFeatureCount();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="kermeta isAbstract='true'"
+	 *        annotation="kermeta ecore='true'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EStructuralFeature result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	EStructuralFeature op_getEStructuralFeature(int featureID);
 
 	/**
 	 * <!-- begin-user-doc -->

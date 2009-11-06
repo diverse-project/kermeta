@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -170,11 +170,11 @@ public class IteratorImpl<G> extends ObjectImpl implements Iterator<G> {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_810 = false;
-		idIfCond_810 = kermeta.standard.helper.BooleanWrapper.not(this
+		java.lang.Boolean idIfCond_799 = false;
+		idIfCond_799 = kermeta.standard.helper.BooleanWrapper.not(this
 				.hasNext());
 
-		if (idIfCond_810) {
+		if (idIfCond_799) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(

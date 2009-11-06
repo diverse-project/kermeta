@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -97,6 +97,17 @@ public class SimkSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case SimkPackage.SM_CLASS: {
+			SMClass smClass = (SMClass) theEObject;
+			T result = caseSMClass(smClass);
+			if (result == null)
+				result = caseSMNamedElement(smClass);
+			if (result == null)
+				result = caseObject(smClass);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case SimkPackage.SM_METHOD: {
 			SMMethod smMethod = (SMMethod) theEObject;
 			T result = caseSMMethod(smMethod);
@@ -113,17 +124,6 @@ public class SimkSwitch<T> {
 			T result = caseSMContext(smContext);
 			if (result == null)
 				result = caseObject(smContext);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case SimkPackage.SM_CLASS: {
-			SMClass smClass = (SMClass) theEObject;
-			T result = caseSMClass(smClass);
-			if (result == null)
-				result = caseSMNamedElement(smClass);
-			if (result == null)
-				result = caseObject(smClass);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -191,6 +191,21 @@ public class SimkSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SM Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SM Class</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSMClass(SMClass object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>SM Method</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -217,21 +232,6 @@ public class SimkSwitch<T> {
 	 * @generated
 	 */
 	public T caseSMContext(SMContext object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>SM Class</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>SM Class</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSMClass(SMClass object) {
 		return null;
 	}
 

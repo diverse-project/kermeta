@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -63,12 +63,12 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+		case BehaviorPackage.BLOCK:
+			return createBlock();
 		case BehaviorPackage.VARIABLE_DECL:
 			return createVariableDecl();
 		case BehaviorPackage.EXPRESSION:
 			return createExpression();
-		case BehaviorPackage.BLOCK:
-			return createBlock();
 		case BehaviorPackage.CALL_EXPRESSION:
 			return createCallExpression();
 		case BehaviorPackage.CALL_FEATURE:
@@ -126,6 +126,16 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Block createBlock() {
+		BlockImpl block = new BlockImpl();
+		return block;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public VariableDecl createVariableDecl() {
 		VariableDeclImpl variableDecl = new VariableDeclImpl();
 		return variableDecl;
@@ -139,16 +149,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	public Expression createExpression() {
 		ExpressionImpl expression = new ExpressionImpl();
 		return expression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Block createBlock() {
-		BlockImpl block = new BlockImpl();
-		return block;
 	}
 
 	/**

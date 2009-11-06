@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -51,6 +51,15 @@ public interface EEnum extends EDataType {
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta isAbstract='true'"
 	 *        annotation="kermeta ecore='true'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EEnumLiteral result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	EEnumLiteral op_getEEnumLiteral(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="kermeta isAbstract='true'"
 	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EEnumLiteral result = null;\n\nreturn result;\n'"
 	 * @generated

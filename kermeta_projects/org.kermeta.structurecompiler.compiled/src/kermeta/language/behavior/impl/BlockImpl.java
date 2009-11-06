@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -122,8 +122,8 @@ public class BlockImpl extends ExpressionImpl implements Block {
 				.newObject(kermeta.utils.UtilsPackage.eINSTANCE
 						.getStringBuffer()));
 
-		java.lang.Boolean idIfCond_37 = false;
-		idIfCond_37 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_394 = false;
+		idIfCond_394 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.and(
@@ -166,15 +166,15 @@ public class BlockImpl extends ExpressionImpl implements Block {
 														.getMetaClass(
 																"kermeta.language.behavior.LambdaExpression"))));
 
-		if (idIfCond_37) {
+		if (idIfCond_394) {
 
 			javaCode.append("{\n");
 		}
 
-		java.lang.Boolean idIfCond_38 = false;
-		idIfCond_38 = this.containsRescue();
+		java.lang.Boolean idIfCond_395 = false;
+		idIfCond_395 = this.containsRescue();
 
-		if (idIfCond_38) {
+		if (idIfCond_395) {
 
 			javaCode.append("try {");
 		}
@@ -189,30 +189,30 @@ public class BlockImpl extends ExpressionImpl implements Block {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft2 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft129 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.behavior.Expression> convertAsOrderedSet(
 							this.getStatement()).iterator();
-			java.lang.Boolean idLoopCond_39 = false;
-			while (!idLoopCond_39) {
-				idLoopCond_39 = it_ft2.isOff();
-				if (idLoopCond_39) {
+			java.lang.Boolean idLoopCond_396 = false;
+			while (!idLoopCond_396) {
+				idLoopCond_396 = it_ft129.isOff();
+				if (idLoopCond_396) {
 				} else {
 
 					//BIle:func
-					kermeta.language.behavior.Expression stm_lbdExp2 = it_ft2
+					kermeta.language.behavior.Expression stm_lbdExp129 = it_ft129
 							.next();
 
-					java.lang.Boolean idIfCond_40 = false;
-					idIfCond_40 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_397 = false;
+					idIfCond_397 = kermeta.standard.helper.IntegerWrapper
 							.equals(i_stm,
 									kermeta.standard.helper.IntegerWrapper
 											.minus(nbrStm, 1));
 
-					if (idIfCond_40) {
+					if (idIfCond_397) {
 
 						((kermeta.language.behavior.Expression) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asTypeSwitcher(
-										stm_lbdExp2,
+										stm_lbdExp129,
 										org.kermeta.compil.runtime.ExecutionContext
 												.getInstance()
 												.getMetaClass(
@@ -220,7 +220,8 @@ public class BlockImpl extends ExpressionImpl implements Block {
 								.setIsLastExpression(true);
 					}
 
-					javaCode = stm_lbdExp2.createExpression(context, javaCode);
+					javaCode = stm_lbdExp129
+							.createExpression(context, javaCode);
 
 					javaCode.append("\n");
 
@@ -234,10 +235,10 @@ public class BlockImpl extends ExpressionImpl implements Block {
 
 		//EIft:each
 
-		java.lang.Boolean idIfCond_41 = false;
-		idIfCond_41 = this.containsRescue();
+		java.lang.Boolean idIfCond_398 = false;
+		idIfCond_398 = this.containsRescue();
 
-		if (idIfCond_41) {
+		if (idIfCond_398) {
 
 			context.pushKRErrorStack();
 
@@ -275,20 +276,21 @@ public class BlockImpl extends ExpressionImpl implements Block {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.behavior.Rescue> it_ft3 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.behavior.Rescue> it_ft130 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.behavior.Rescue> convertAsOrderedSet(
 								this.getRescueBlock()).iterator();
-				java.lang.Boolean idLoopCond_42 = false;
-				while (!idLoopCond_42) {
-					idLoopCond_42 = it_ft3.isOff();
-					if (idLoopCond_42) {
+				java.lang.Boolean idLoopCond_399 = false;
+				while (!idLoopCond_399) {
+					idLoopCond_399 = it_ft130.isOff();
+					if (idLoopCond_399) {
 					} else {
 
 						//BIle:func
-						kermeta.language.behavior.Rescue e_lbdExp3 = it_ft3
+						kermeta.language.behavior.Rescue e_lbdExp130 = it_ft130
 								.next();
 
-						javaCode.append(e_lbdExp3.createBehaviorJava(context));
+						javaCode
+								.append(e_lbdExp130.createBehaviorJava(context));
 						//EIle:func
 
 					}
@@ -324,8 +326,8 @@ public class BlockImpl extends ExpressionImpl implements Block {
 			context.getKRErrorStack().pop();
 		}
 
-		java.lang.Boolean idIfCond_43 = false;
-		idIfCond_43 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_400 = false;
+		idIfCond_400 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.and(
@@ -368,7 +370,7 @@ public class BlockImpl extends ExpressionImpl implements Block {
 														.getMetaClass(
 																"kermeta.language.behavior.LambdaExpression"))));
 
-		if (idIfCond_43) {
+		if (idIfCond_400) {
 
 			javaCode.append("}");
 		}
@@ -390,8 +392,8 @@ public class BlockImpl extends ExpressionImpl implements Block {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_44 = false;
-		idIfCond_44 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_401 = false;
+		idIfCond_401 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -405,7 +407,7 @@ public class BlockImpl extends ExpressionImpl implements Block {
 														this.getRescueBlock())
 												.size(), 0));
 
-		if (idIfCond_44) {
+		if (idIfCond_401) {
 
 			result = true;
 		}

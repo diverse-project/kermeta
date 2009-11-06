@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -557,26 +557,14 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI)
 				: LanguagePackage.eINSTANCE);
-		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI)
-				: BehaviorPackage.eINSTANCE);
 		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StructurePackage.eNS_URI)
 				: StructurePackage.eINSTANCE);
-		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI)
-				: ExceptionsPackage.eINSTANCE);
-		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI)
-				: InterpreterPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
+		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI)
+				: BehaviorPackage.eINSTANCE);
 		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI)
@@ -585,14 +573,30 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(UtilsPackage.eNS_URI)
 				: UtilsPackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
 		XmltypePackageImpl theXmltypePackage = (XmltypePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(XmltypePackage.eNS_URI) instanceof XmltypePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(XmltypePackage.eNS_URI)
 				: XmltypePackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
+		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI)
+				: ExceptionsPackage.eINSTANCE);
+		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI)
+				: InterpreterPackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
 		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
@@ -601,26 +605,18 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI)
 				: IoPackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
-		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(SimkPackage.eNS_URI)
-				: SimkPackage.eINSTANCE);
 		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI)
 				: Km2ecorePackage.eINSTANCE);
-		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_2 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
-				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
 		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
 				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
+		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_2 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
+				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
 		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI)
@@ -637,56 +633,60 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI)
 				: TraceabilityPackage.eINSTANCE);
+		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(SimkPackage.eNS_URI)
+				: SimkPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theEcorePackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
 		theLanguagePackage.createPackageContents();
-		theBehaviorPackage.createPackageContents();
 		theStructurePackage.createPackageContents();
-		theExceptionsPackage.createPackageContents();
-		theInterpreterPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
+		theBehaviorPackage.createPackageContents();
 		theStandardPackage.createPackageContents();
 		theUtilsPackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
 		theXmltypePackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
+		theExceptionsPackage.createPackageContents();
+		theInterpreterPackage.createPackageContents();
+		thePersistencePackage.createPackageContents();
 		theEcorePackage_1.createPackageContents();
 		theIoPackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
-		theSimkPackage.createPackageContents();
 		theKm2ecorePackage.createPackageContents();
-		theEcorePackage_2.createPackageContents();
 		theKermetaPackage_1.createPackageContents();
+		theEcorePackage_2.createPackageContents();
 		theJavaPackage.createPackageContents();
 		theCommonPackage.createPackageContents();
 		theExceptionPackage.createPackageContents();
 		theTraceabilityPackage.createPackageContents();
+		theSimkPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theEcorePackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
-		theBehaviorPackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
-		theExceptionsPackage.initializePackageContents();
-		theInterpreterPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
+		theBehaviorPackage.initializePackageContents();
 		theStandardPackage.initializePackageContents();
 		theUtilsPackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
 		theXmltypePackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
+		theExceptionsPackage.initializePackageContents();
+		theInterpreterPackage.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
 		theEcorePackage_1.initializePackageContents();
 		theIoPackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
-		theSimkPackage.initializePackageContents();
 		theKm2ecorePackage.initializePackageContents();
-		theEcorePackage_2.initializePackageContents();
 		theKermetaPackage_1.initializePackageContents();
+		theEcorePackage_2.initializePackageContents();
 		theJavaPackage.initializePackageContents();
 		theCommonPackage.initializePackageContents();
 		theExceptionPackage.initializePackageContents();
 		theTraceabilityPackage.initializePackageContents();
+		theSimkPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theEcorePackage.freeze();
@@ -737,8 +737,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEAnnotation_Details() {
-		return (EReference) eAnnotationEClass.getEStructuralFeatures().get(1);
+	public EAttribute getEAnnotation_Source() {
+		return (EAttribute) eAnnotationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -746,8 +746,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEAnnotation_Source() {
-		return (EAttribute) eAnnotationEClass.getEStructuralFeatures().get(2);
+	public EReference getEAnnotation_Details() {
+		return (EReference) eAnnotationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1124,7 +1124,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEPackage_EClassifiers() {
+	public EReference getEPackage_EFactoryInstance() {
 		return (EReference) ePackageEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1133,7 +1133,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEPackage_EFactoryInstance() {
+	public EReference getEPackage_EClassifiers() {
 		return (EReference) ePackageEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1224,8 +1224,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEStructuralFeature_EContainingClass() {
-		return (EReference) eStructuralFeatureEClass.getEStructuralFeatures()
+	public EAttribute getEStructuralFeature_DefaultValueLiteral() {
+		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
 				.get(1);
 	}
 
@@ -1234,8 +1234,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEStructuralFeature_DefaultValueLiteral() {
-		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
+	public EReference getEStructuralFeature_EContainingClass() {
+		return (EReference) eStructuralFeatureEClass.getEStructuralFeatures()
 				.get(2);
 	}
 
@@ -1766,8 +1766,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		eAnnotationEClass = createEClass(EANNOTATION);
 		createEReference(eAnnotationEClass, EANNOTATION__REFERENCES);
-		createEReference(eAnnotationEClass, EANNOTATION__DETAILS);
 		createEAttribute(eAnnotationEClass, EANNOTATION__SOURCE);
+		createEReference(eAnnotationEClass, EANNOTATION__DETAILS);
 		createEReference(eAnnotationEClass, EANNOTATION__CONTENTS);
 		createEReference(eAnnotationEClass, EANNOTATION__EMODEL_ELEMENT);
 
@@ -1820,8 +1820,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		createEReference(ePackageEClass, EPACKAGE__ESUBPACKAGES);
 		createEReference(ePackageEClass, EPACKAGE__ESUPER_PACKAGE);
 		createEAttribute(ePackageEClass, EPACKAGE__NS_PREFIX);
-		createEReference(ePackageEClass, EPACKAGE__ECLASSIFIERS);
 		createEReference(ePackageEClass, EPACKAGE__EFACTORY_INSTANCE);
+		createEReference(ePackageEClass, EPACKAGE__ECLASSIFIERS);
 
 		eParameterEClass = createEClass(EPARAMETER);
 		createEReference(eParameterEClass, EPARAMETER__EOPERATION);
@@ -1835,10 +1835,10 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		eStructuralFeatureEClass = createEClass(ESTRUCTURAL_FEATURE);
 		createEAttribute(eStructuralFeatureEClass,
 				ESTRUCTURAL_FEATURE__VOLATILE);
-		createEReference(eStructuralFeatureEClass,
-				ESTRUCTURAL_FEATURE__ECONTAINING_CLASS);
 		createEAttribute(eStructuralFeatureEClass,
 				ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL);
+		createEReference(eStructuralFeatureEClass,
+				ESTRUCTURAL_FEATURE__ECONTAINING_CLASS);
 		createEAttribute(eStructuralFeatureEClass,
 				ESTRUCTURAL_FEATURE__TRANSIENT);
 		createEAttribute(eStructuralFeatureEClass,
@@ -1969,10 +1969,10 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(eAttributeEClass, ecore.EAttribute.class, "EAttribute",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEAttribute_ID(), this.getEBoolean(), "iD", "false",
-				0, 1, ecore.EAttribute.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEAttribute(getEAttribute_ID(), ecorePackage.getEBoolean(), "iD",
+				"false", 0, 1, ecore.EAttribute.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
 		addEOperation(eAttributeEClass, this.getEDataType(),
 				"getterEAttributeType", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1983,14 +1983,14 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				"references", null, 0, -1, EAnnotation.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEAnnotation_Source(), ecorePackage.getEString(),
+				"source", null, 0, 1, EAnnotation.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 		initEReference(getEAnnotation_Details(), this
 				.getEStringToStringMapEntry(), null, "details", null, 0, -1,
 				EAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEAnnotation_Source(), ecorePackage.getEString(),
-				"source", null, 0, 1, EAnnotation.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEReference(getEAnnotation_Contents(), this.getEObject(), null,
 				"contents", null, 0, -1, EAnnotation.class, !IS_TRANSIENT,
@@ -2034,14 +2034,15 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
-		EOperation op = addEOperation(eClassEClass, ecorePackage.getEInt(),
-				"getFeatureID", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEStructuralFeature(), "feature", 0, 1,
+		EOperation op = addEOperation(eClassEClass, this
+				.getEStructuralFeature(), "getEStructuralFeature", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "featureName", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(eClassEClass, this.getEStructuralFeature(),
-				"getEStructuralFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "featureName", 0, 1,
+		op = addEOperation(eClassEClass, ecorePackage.getEInt(),
+				"getFeatureID", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getEStructuralFeature(), "feature", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(eClassEClass, ecorePackage.getEBoolean(),
@@ -2051,6 +2052,11 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		addEOperation(eClassEClass, ecorePackage.getEInt(), "getFeatureCount",
 				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(eClassEClass, this.getEStructuralFeature(),
+				"op_getEStructuralFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "featureID", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
 
 		addEOperation(eClassEClass, this.getEAttribute(),
 				"getterEAllAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
@@ -2084,10 +2090,10 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		initEClass(eClassifierEClass, EClassifier.class, "EClassifier",
 				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEClassifier_InstanceClassName(), this.getEString(),
-				"instanceClassName", null, 0, 1, EClassifier.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEClassifier_InstanceClassName(), ecorePackage
+				.getEString(), "instanceClassName", null, 0, 1,
+				EClassifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEClassifier_EPackage(), this.getEPackage(), this
 				.getEPackage_EClassifiers(), "ePackage", null, 0, 1,
 				EClassifier.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE,
@@ -2137,6 +2143,11 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				!IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(eEnumEClass, this.getEEnumLiteral(),
+				"op_getEEnumLiteral", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		op = addEOperation(eEnumEClass, this.getEEnumLiteral(),
 				"getEEnumLiteral", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEInt(), "value", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
@@ -2174,7 +2185,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(eFactoryEClass, this.getEJavaObject(),
+		op = addEOperation(eFactoryEClass, ecorePackage.getEJavaObject(),
 				"createFromString", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEDataType(), "eDataType", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
@@ -2264,15 +2275,15 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				"nsPrefix", null, 0, 1, ecore.EPackage.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEReference(getEPackage_EClassifiers(), this.getEClassifier(), this
-				.getEClassifier_EPackage(), "eClassifiers", null, 0, -1,
-				ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEPackage_EFactoryInstance(), this.getEFactory(), this
 				.getEFactory_EPackage(), "eFactoryInstance", null, 1, 1,
 				ecore.EPackage.class, IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEPackage_EClassifiers(), this.getEClassifier(), this
+				.getEClassifier_EPackage(), "eClassifiers", null, 0, -1,
+				ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(ePackageEClass, this.getEClassifier(),
@@ -2317,8 +2328,12 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		initEClass(eStructuralFeatureEClass, EStructuralFeature.class,
 				"EStructuralFeature", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEStructuralFeature__volatile(), ecorePackage
-				.getEBoolean(), "_volatile", "false", 0, 1,
+		initEAttribute(getEStructuralFeature__volatile(), this.getEBoolean(),
+				"_volatile", "false", 0, 1, EStructuralFeature.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEStructuralFeature_DefaultValueLiteral(), this
+				.getEString(), "defaultValueLiteral", null, 0, 1,
 				EStructuralFeature.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
@@ -2327,11 +2342,6 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				"eContainingClass", null, 0, 1, EStructuralFeature.class,
 				IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getEStructuralFeature_DefaultValueLiteral(),
-				ecorePackage.getEString(), "defaultValueLiteral", null, 0, 1,
-				EStructuralFeature.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 		initEAttribute(getEStructuralFeature__transient(), ecorePackage
 				.getEBoolean(), "_transient", "false", 0, 1,
@@ -2364,7 +2374,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		addEOperation(eStructuralFeatureEClass, ecorePackage.getEJavaObject(),
+		addEOperation(eStructuralFeatureEClass, this.getEJavaObject(),
 				"getterDefaultValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(eTypedElementEClass, ETypedElement.class, "ETypedElement",
@@ -2560,9 +2570,9 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				new String[] { "ecore", "true" });
 		addAnnotation(getEAnnotation_References(), source, new String[] {
 				"ecore", "true" });
-		addAnnotation(getEAnnotation_Details(), source, new String[] { "ecore",
-				"true" });
 		addAnnotation(getEAnnotation_Source(), source, new String[] { "ecore",
+				"true" });
+		addAnnotation(getEAnnotation_Details(), source, new String[] { "ecore",
 				"true" });
 		addAnnotation(getEAnnotation_Contents(), source, new String[] {
 				"ecore", "true" });
@@ -2587,8 +2597,6 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				new String[] { "isAbstract", "true" });
 		addAnnotation(eClassEClass.getEOperations().get(1), source,
 				new String[] { "ecore", "true" });
-		addAnnotation(eClassEClass.getEOperations().get(1), source,
-				new String[] { "ecore", "true" });
 		addAnnotation(eClassEClass.getEOperations().get(2), source,
 				new String[] { "isAbstract", "true" });
 		addAnnotation(eClassEClass.getEOperations().get(2), source,
@@ -2596,6 +2604,10 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		addAnnotation(eClassEClass.getEOperations().get(3), source,
 				new String[] { "isAbstract", "true" });
 		addAnnotation(eClassEClass.getEOperations().get(3), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(eClassEClass.getEOperations().get(4), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassEClass.getEOperations().get(4), source,
 				new String[] { "ecore", "true" });
 		addAnnotation(getEClass_EStructuralFeatures(), source, new String[] {
 				"ecore", "true" });
@@ -2655,11 +2667,13 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				new String[] { "isAbstract", "true" });
 		addAnnotation(eEnumEClass.getEOperations().get(0), source,
 				new String[] { "ecore", "true" });
-		addAnnotation(eEnumEClass.getEOperations().get(0), source,
-				new String[] { "ecore", "true" });
 		addAnnotation(eEnumEClass.getEOperations().get(1), source,
 				new String[] { "isAbstract", "true" });
 		addAnnotation(eEnumEClass.getEOperations().get(1), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(eEnumEClass.getEOperations().get(2), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eEnumEClass.getEOperations().get(2), source,
 				new String[] { "ecore", "true" });
 		addAnnotation(getEEnum_ELiterals(), source, new String[] { "ecore",
 				"true" });
@@ -2750,12 +2764,12 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				"ecore.isTransient", "true" });
 		addAnnotation(getEPackage_NsPrefix(), source, new String[] { "ecore",
 				"true" });
-		addAnnotation(getEPackage_EClassifiers(), source, new String[] {
-				"ecore", "true" });
 		addAnnotation(getEPackage_EFactoryInstance(), source, new String[] {
 				"ecore", "true" });
 		addAnnotation(getEPackage_EFactoryInstance(), source, new String[] {
 				"ecore.isTransient", "true" });
+		addAnnotation(getEPackage_EClassifiers(), source, new String[] {
+				"ecore", "true" });
 		addAnnotation(eParameterEClass, source,
 				new String[] { "ecore", "true" });
 		addAnnotation(getEParameter_EOperation(), source, new String[] {
@@ -2784,12 +2798,12 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				new String[] { "ecore", "true" });
 		addAnnotation(getEStructuralFeature__volatile(), source, new String[] {
 				"ecore", "true" });
+		addAnnotation(getEStructuralFeature_DefaultValueLiteral(), source,
+				new String[] { "ecore", "true" });
 		addAnnotation(getEStructuralFeature_EContainingClass(), source,
 				new String[] { "ecore", "true" });
 		addAnnotation(getEStructuralFeature_EContainingClass(), source,
 				new String[] { "ecore.isTransient", "true" });
-		addAnnotation(getEStructuralFeature_DefaultValueLiteral(), source,
-				new String[] { "ecore", "true" });
 		addAnnotation(getEStructuralFeature__transient(), source, new String[] {
 				"ecore", "true" });
 		addAnnotation(getEStructuralFeature_Unsettable(), source, new String[] {

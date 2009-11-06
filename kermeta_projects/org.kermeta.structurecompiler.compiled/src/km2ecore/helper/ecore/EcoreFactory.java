@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -37,15 +37,6 @@ public interface EcoreFactory extends EFactory {
 	ModelAnalizer createModelAnalizer();
 
 	/**
-	 * Returns a new object of class '<em>Model Element Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model Element Helper</em>'.
-	 * @generated
-	 */
-	EcoreModelElementHelper createEcoreModelElementHelper();
-
-	/**
 	 * Returns a new object of class '<em>EAnnotation Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -53,6 +44,15 @@ public interface EcoreFactory extends EFactory {
 	 * @generated
 	 */
 	EAnnotationHelper createEAnnotationHelper();
+
+	/**
+	 * Returns a new object of class '<em>Model Element Helper</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Element Helper</em>'.
+	 * @generated
+	 */
+	EcoreModelElementHelper createEcoreModelElementHelper();
 
 	/**
 	 * Returns the package supported by this factory.

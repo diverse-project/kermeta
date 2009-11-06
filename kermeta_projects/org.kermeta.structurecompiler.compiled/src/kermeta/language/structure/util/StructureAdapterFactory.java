@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -109,33 +109,28 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected StructureSwitch<Adapter> modelSwitch = new StructureSwitch<Adapter>() {
 		@Override
+		public Adapter caseConstraint(Constraint object) {
+			return createConstraintAdapter();
+		}
+
+		@Override
 		public Adapter caseModelingUnit(ModelingUnit object) {
 			return createModelingUnitAdapter();
 		}
 
 		@Override
-		public Adapter caseObject(kermeta.language.structure.Object object) {
-			return createObjectAdapter();
+		public Adapter caseRequire(Require object) {
+			return createRequireAdapter();
 		}
 
 		@Override
-		public Adapter caseProperty(Property object) {
-			return createPropertyAdapter();
+		public Adapter caseUsing(Using object) {
+			return createUsingAdapter();
 		}
 
 		@Override
-		public Adapter caseOperation(Operation object) {
-			return createOperationAdapter();
-		}
-
-		@Override
-		public Adapter caseType(Type object) {
-			return createTypeAdapter();
-		}
-
-		@Override
-		public Adapter caseVoidType(VoidType object) {
-			return createVoidTypeAdapter();
+		public Adapter casePackage(kermeta.language.structure.Package object) {
+			return createPackageAdapter();
 		}
 
 		@Override
@@ -144,38 +139,8 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseParameterizedType(ParameterizedType object) {
-			return createParameterizedTypeAdapter();
-		}
-
-		@Override
-		public Adapter caseObjectTypeVariable(ObjectTypeVariable object) {
-			return createObjectTypeVariableAdapter();
-		}
-
-		@Override
 		public Adapter caseEnumeration(Enumeration object) {
 			return createEnumerationAdapter();
-		}
-
-		@Override
-		public Adapter caseFunctionType(FunctionType object) {
-			return createFunctionTypeAdapter();
-		}
-
-		@Override
-		public Adapter caseProductType(ProductType object) {
-			return createProductTypeAdapter();
-		}
-
-		@Override
-		public Adapter caseConstraint(Constraint object) {
-			return createConstraintAdapter();
-		}
-
-		@Override
-		public Adapter caseTypeContainer(TypeContainer object) {
-			return createTypeContainerAdapter();
 		}
 
 		@Override
@@ -184,13 +149,104 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseTypeVariableBinding(TypeVariableBinding object) {
-			return createTypeVariableBindingAdapter();
+		public Adapter caseClassDefinition(ClassDefinition object) {
+			return createClassDefinitionAdapter();
+		}
+
+		@Override
+		public Adapter caseOperation(Operation object) {
+			return createOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseParameter(Parameter object) {
+			return createParameterAdapter();
+		}
+
+		@Override
+		public Adapter caseProperty(Property object) {
+			return createPropertyAdapter();
+		}
+
+		@Override
+		public Adapter caseObjectTypeVariable(ObjectTypeVariable object) {
+			return createObjectTypeVariableAdapter();
+		}
+
+		@Override
+		public Adapter caseTag(Tag object) {
+			return createTagAdapter();
+		}
+
+		@Override
+		public Adapter caseObject(kermeta.language.structure.Object object) {
+			return createObjectAdapter();
+		}
+
+		@Override
+		public Adapter caseGenericTypeDefinition(GenericTypeDefinition object) {
+			return createGenericTypeDefinitionAdapter();
 		}
 
 		@Override
 		public Adapter caseMultiplicityElement(MultiplicityElement object) {
 			return createMultiplicityElementAdapter();
+		}
+
+		@Override
+		public Adapter caseType(Type object) {
+			return createTypeAdapter();
+		}
+
+		@Override
+		public <X> Adapter caseTraceability(Traceability<X> object) {
+			return createTraceabilityAdapter();
+		}
+
+		@Override
+		public Adapter caseClass(kermeta.language.structure.Class object) {
+			return createClassAdapter();
+		}
+
+		@Override
+		public Adapter caseFunctionType(FunctionType object) {
+			return createFunctionTypeAdapter();
+		}
+
+		@Override
+		public Adapter caseParameterizedType(ParameterizedType object) {
+			return createParameterizedTypeAdapter();
+		}
+
+		@Override
+		public Adapter caseLinkSetterForTypedElement(
+				LinkSetterForTypedElement object) {
+			return createLinkSetterForTypedElementAdapter();
+		}
+
+		@Override
+		public Adapter caseNamedElement(NamedElement object) {
+			return createNamedElementAdapter();
+		}
+
+		@Override
+		public Adapter caseVoidType(VoidType object) {
+			return createVoidTypeAdapter();
+		}
+
+		@Override
+		public Adapter caseProductType(ProductType object) {
+			return createProductTypeAdapter();
+		}
+
+		@Override
+		public Adapter caseTypeContainer(TypeContainer object) {
+			return createTypeContainerAdapter();
+		}
+
+		@Override
+		public Adapter caseTypeVariableBinding(TypeVariableBinding object) {
+			return createTypeVariableBindingAdapter();
 		}
 
 		@Override
@@ -204,43 +260,8 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseNamedElement(NamedElement object) {
-			return createNamedElementAdapter();
-		}
-
-		@Override
-		public Adapter caseClass(kermeta.language.structure.Class object) {
-			return createClassAdapter();
-		}
-
-		@Override
 		public Adapter caseDataType(DataType object) {
 			return createDataTypeAdapter();
-		}
-
-		@Override
-		public Adapter casePackage(kermeta.language.structure.Package object) {
-			return createPackageAdapter();
-		}
-
-		@Override
-		public Adapter caseParameter(Parameter object) {
-			return createParameterAdapter();
-		}
-
-		@Override
-		public Adapter caseTag(Tag object) {
-			return createTagAdapter();
-		}
-
-		@Override
-		public Adapter caseClassDefinition(ClassDefinition object) {
-			return createClassDefinitionAdapter();
-		}
-
-		@Override
-		public Adapter caseGenericTypeDefinition(GenericTypeDefinition object) {
-			return createGenericTypeDefinitionAdapter();
 		}
 
 		@Override
@@ -269,16 +290,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseRequire(Require object) {
-			return createRequireAdapter();
-		}
-
-		@Override
-		public Adapter caseUsing(Using object) {
-			return createUsingAdapter();
-		}
-
-		@Override
 		public Adapter caseFilter(Filter object) {
 			return createFilterAdapter();
 		}
@@ -292,17 +303,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter casePropertyConstraint(PropertyConstraint object) {
 			return createPropertyConstraintAdapter();
-		}
-
-		@Override
-		public Adapter caseLinkSetterForTypedElement(
-				LinkSetterForTypedElement object) {
-			return createLinkSetterForTypedElementAdapter();
-		}
-
-		@Override
-		public <X> Adapter caseTraceability(Traceability<X> object) {
-			return createTraceabilityAdapter();
 		}
 
 		@Override
@@ -325,6 +325,20 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Constraint <em>Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.Constraint
+	 * @generated
+	 */
+	public Adapter createConstraintAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.ModelingUnit <em>Modeling Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -339,72 +353,44 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Object <em>Object</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Require <em>Require</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.structure.Object
+	 * @see kermeta.language.structure.Require
 	 * @generated
 	 */
-	public Adapter createObjectAdapter() {
+	public Adapter createRequireAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Property <em>Property</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Using <em>Using</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.structure.Property
+	 * @see kermeta.language.structure.Using
 	 * @generated
 	 */
-	public Adapter createPropertyAdapter() {
+	public Adapter createUsingAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Operation <em>Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Package <em>Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.structure.Operation
+	 * @see kermeta.language.structure.Package
 	 * @generated
 	 */
-	public Adapter createOperationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Type <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.Type
-	 * @generated
-	 */
-	public Adapter createTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.VoidType <em>Void Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.VoidType
-	 * @generated
-	 */
-	public Adapter createVoidTypeAdapter() {
+	public Adapter createPackageAdapter() {
 		return null;
 	}
 
@@ -423,34 +409,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.ParameterizedType <em>Parameterized Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.ParameterizedType
-	 * @generated
-	 */
-	public Adapter createParameterizedTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.ObjectTypeVariable <em>Object Type Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.ObjectTypeVariable
-	 * @generated
-	 */
-	public Adapter createObjectTypeVariableAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Enumeration <em>Enumeration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -461,62 +419,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEnumerationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.FunctionType <em>Function Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.FunctionType
-	 * @generated
-	 */
-	public Adapter createFunctionTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.ProductType <em>Product Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.ProductType
-	 * @generated
-	 */
-	public Adapter createProductTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Constraint <em>Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.Constraint
-	 * @generated
-	 */
-	public Adapter createConstraintAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.TypeContainer <em>Type Container</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.TypeContainer
-	 * @generated
-	 */
-	public Adapter createTypeContainerAdapter() {
 		return null;
 	}
 
@@ -535,16 +437,114 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.TypeVariableBinding <em>Type Variable Binding</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.ClassDefinition <em>Class Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.structure.TypeVariableBinding
+	 * @see kermeta.language.structure.ClassDefinition
 	 * @generated
 	 */
-	public Adapter createTypeVariableBindingAdapter() {
+	public Adapter createClassDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Operation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.Operation
+	 * @generated
+	 */
+	public Adapter createOperationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Parameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.Parameter
+	 * @generated
+	 */
+	public Adapter createParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Property <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.Property
+	 * @generated
+	 */
+	public Adapter createPropertyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.ObjectTypeVariable <em>Object Type Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.ObjectTypeVariable
+	 * @generated
+	 */
+	public Adapter createObjectTypeVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Tag <em>Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.Tag
+	 * @generated
+	 */
+	public Adapter createTagAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Object <em>Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.Object
+	 * @generated
+	 */
+	public Adapter createObjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.GenericTypeDefinition <em>Generic Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.GenericTypeDefinition
+	 * @generated
+	 */
+	public Adapter createGenericTypeDefinitionAdapter() {
 		return null;
 	}
 
@@ -559,6 +559,160 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMultiplicityElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Type <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.Type
+	 * @generated
+	 */
+	public Adapter createTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Traceability <em>Traceability</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.Traceability
+	 * @generated
+	 */
+	public Adapter createTraceabilityAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Class <em>Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.Class
+	 * @generated
+	 */
+	public Adapter createClassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.FunctionType <em>Function Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.FunctionType
+	 * @generated
+	 */
+	public Adapter createFunctionTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.ParameterizedType <em>Parameterized Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.ParameterizedType
+	 * @generated
+	 */
+	public Adapter createParameterizedTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.LinkSetterForTypedElement <em>Link Setter For Typed Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.LinkSetterForTypedElement
+	 * @generated
+	 */
+	public Adapter createLinkSetterForTypedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.NamedElement
+	 * @generated
+	 */
+	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.VoidType <em>Void Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.VoidType
+	 * @generated
+	 */
+	public Adapter createVoidTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.ProductType <em>Product Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.ProductType
+	 * @generated
+	 */
+	public Adapter createProductTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.TypeContainer <em>Type Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.TypeContainer
+	 * @generated
+	 */
+	public Adapter createTypeContainerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.TypeVariableBinding <em>Type Variable Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.structure.TypeVariableBinding
+	 * @generated
+	 */
+	public Adapter createTypeVariableBindingAdapter() {
 		return null;
 	}
 
@@ -591,34 +745,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.NamedElement <em>Named Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.NamedElement
-	 * @generated
-	 */
-	public Adapter createNamedElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Class <em>Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.Class
-	 * @generated
-	 */
-	public Adapter createClassAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.DataType <em>Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -629,76 +755,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDataTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Package <em>Package</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.Package
-	 * @generated
-	 */
-	public Adapter createPackageAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Parameter <em>Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.Parameter
-	 * @generated
-	 */
-	public Adapter createParameterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Tag <em>Tag</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.Tag
-	 * @generated
-	 */
-	public Adapter createTagAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.ClassDefinition <em>Class Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.ClassDefinition
-	 * @generated
-	 */
-	public Adapter createClassDefinitionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.GenericTypeDefinition <em>Generic Type Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.GenericTypeDefinition
-	 * @generated
-	 */
-	public Adapter createGenericTypeDefinitionAdapter() {
 		return null;
 	}
 
@@ -773,34 +829,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Require <em>Require</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.Require
-	 * @generated
-	 */
-	public Adapter createRequireAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Using <em>Using</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.Using
-	 * @generated
-	 */
-	public Adapter createUsingAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Filter <em>Filter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -839,34 +867,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPropertyConstraintAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.LinkSetterForTypedElement <em>Link Setter For Typed Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.LinkSetterForTypedElement
-	 * @generated
-	 */
-	public Adapter createLinkSetterForTypedElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.structure.Traceability <em>Traceability</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.structure.Traceability
-	 * @generated
-	 */
-	public Adapter createTraceabilityAdapter() {
 		return null;
 	}
 

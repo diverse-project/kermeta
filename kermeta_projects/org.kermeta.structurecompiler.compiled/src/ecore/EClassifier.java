@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -42,8 +42,7 @@ public interface EClassifier extends ENamedElement {
 	 * @return the value of the '<em>Instance Class Name</em>' attribute.
 	 * @see #setInstanceClassName(String)
 	 * @see ecore.EcorePackage#getEClassifier_InstanceClassName()
-	 * @model dataType="ecore.EString"
-	 *        annotation="kermeta ecore='true'"
+	 * @model annotation="kermeta ecore='true'"
 	 * @generated
 	 */
 	String getInstanceClassName();

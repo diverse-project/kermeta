@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -58,8 +58,7 @@ public interface EFactory extends EModelElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="ecore.EJavaObject"
-	 *        annotation="kermeta isAbstract='true'"
+	 * @model annotation="kermeta isAbstract='true'"
 	 *        annotation="kermeta ecore='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Object result = null;\n\nreturn result;\n'"
 	 * @generated

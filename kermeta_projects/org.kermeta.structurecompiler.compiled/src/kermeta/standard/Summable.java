@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -24,8 +24,8 @@ public interface Summable<G> extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta isAbstract='true'"
-	 *        annotation="kermeta RecopyInValueTypes='true'"
 	 *        annotation="kermeta documentation='/**\n\t * Summarization method to be implemented by any summable class.\n\t * The parameter must have the same type (or one of its subtypes)\n\t *  than the current object .\n\t \052/'"
+	 *        annotation="kermeta RecopyInValueTypes='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='G result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */

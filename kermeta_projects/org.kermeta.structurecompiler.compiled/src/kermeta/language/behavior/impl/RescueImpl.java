@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -39,8 +39,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.language.behavior.impl.RescueImpl#getBody <em>Body</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.RescueImpl#getExceptionName <em>Exception Name</em>}</li>
+ *   <li>{@link kermeta.language.behavior.impl.RescueImpl#getBody <em>Body</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.RescueImpl#getExceptionType <em>Exception Type</em>}</li>
  * </ul>
  * </p>
@@ -48,16 +48,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class RescueImpl extends ObjectImpl implements Rescue {
-	/**
-	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBody()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Expression> body;
-
 	/**
 	 * The default value of the '{@link #getExceptionName() <em>Exception Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -77,6 +67,16 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * @ordered
 	 */
 	protected String exceptionName = EXCEPTION_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBody()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Expression> body;
 
 	/**
 	 * The cached value of the '{@link #getExceptionType() <em>Exception Type</em>}' containment reference.
@@ -112,19 +112,6 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Expression> getBody() {
-		if (body == null) {
-			body = new EObjectContainmentEList.Resolving<Expression>(
-					Expression.class, this, BehaviorPackage.RESCUE__BODY);
-		}
-		return body;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getExceptionName() {
 		return exceptionName;
 	}
@@ -141,6 +128,19 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					BehaviorPackage.RESCUE__EXCEPTION_NAME, oldExceptionName,
 					exceptionName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Expression> getBody() {
+		if (body == null) {
+			body = new EObjectContainmentEList.Resolving<Expression>(
+					Expression.class, this, BehaviorPackage.RESCUE__BODY);
+		}
+		return body;
 	}
 
 	/**
@@ -245,12 +245,12 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 
 		result = "";
 
-		java.lang.Boolean idIfCond_265 = false;
-		idIfCond_265 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_658 = false;
+		idIfCond_658 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getExceptionType()));
 
-		if (idIfCond_265) {
+		if (idIfCond_658) {
 
 			java.lang.String str_exceptionType = this.getExceptionType()
 					.createBehaviorJava(context);
@@ -326,24 +326,25 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft25 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft153 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Tag> convertAsOrderedSet(
 								this.getOwnedTags()).iterator();
-				java.lang.Boolean idLoopCond_266 = false;
-				while (!idLoopCond_266) {
-					idLoopCond_266 = it_ft25.isOff();
-					if (idLoopCond_266) {
+				java.lang.Boolean idLoopCond_659 = false;
+				while (!idLoopCond_659) {
+					idLoopCond_659 = it_ft153.isOff();
+					if (idLoopCond_659) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Tag o_lbdExp25 = it_ft25
+						kermeta.language.structure.Tag o_lbdExp153 = it_ft153
 								.next();
 
 						//BIle:func
-						kermeta.language.structure.Tag e_lbdExp24 = o_lbdExp25;
+						kermeta.language.structure.Tag e_lbdExp152 = o_lbdExp153;
 
-						result = kermeta.standard.helper.StringWrapper.plus(
-								result, e_lbdExp24.createBehaviorJava(context));
+						result = kermeta.standard.helper.StringWrapper
+								.plus(result, e_lbdExp152
+										.createBehaviorJava(context));
 						//EIle:func
 
 						//EIle:func
@@ -358,24 +359,25 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft26 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft154 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.behavior.Expression> convertAsOrderedSet(
 								this.getBody()).iterator();
-				java.lang.Boolean idLoopCond_267 = false;
-				while (!idLoopCond_267) {
-					idLoopCond_267 = it_ft26.isOff();
-					if (idLoopCond_267) {
+				java.lang.Boolean idLoopCond_660 = false;
+				while (!idLoopCond_660) {
+					idLoopCond_660 = it_ft154.isOff();
+					if (idLoopCond_660) {
 					} else {
 
 						//BIle:func
-						kermeta.language.behavior.Expression s_lbdExp26 = it_ft26
+						kermeta.language.behavior.Expression s_lbdExp154 = it_ft154
 								.next();
 
 						//BIle:func
-						kermeta.language.behavior.Expression e_lbdExp24 = s_lbdExp26;
+						kermeta.language.behavior.Expression e_lbdExp152 = s_lbdExp154;
 
-						result = kermeta.standard.helper.StringWrapper.plus(
-								result, e_lbdExp24.createBehaviorJava(context));
+						result = kermeta.standard.helper.StringWrapper
+								.plus(result, e_lbdExp152
+										.createBehaviorJava(context));
 						//EIle:func
 
 						//EIle:func
@@ -420,10 +422,10 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case BehaviorPackage.RESCUE__BODY:
-			return getBody();
 		case BehaviorPackage.RESCUE__EXCEPTION_NAME:
 			return getExceptionName();
+		case BehaviorPackage.RESCUE__BODY:
+			return getBody();
 		case BehaviorPackage.RESCUE__EXCEPTION_TYPE:
 			if (resolve)
 				return getExceptionType();
@@ -441,12 +443,12 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+		case BehaviorPackage.RESCUE__EXCEPTION_NAME:
+			setExceptionName((String) newValue);
+			return;
 		case BehaviorPackage.RESCUE__BODY:
 			getBody().clear();
 			getBody().addAll((Collection<? extends Expression>) newValue);
-			return;
-		case BehaviorPackage.RESCUE__EXCEPTION_NAME:
-			setExceptionName((String) newValue);
 			return;
 		case BehaviorPackage.RESCUE__EXCEPTION_TYPE:
 			setExceptionType((TypeReference) newValue);
@@ -463,11 +465,11 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case BehaviorPackage.RESCUE__BODY:
-			getBody().clear();
-			return;
 		case BehaviorPackage.RESCUE__EXCEPTION_NAME:
 			setExceptionName(EXCEPTION_NAME_EDEFAULT);
+			return;
+		case BehaviorPackage.RESCUE__BODY:
+			getBody().clear();
 			return;
 		case BehaviorPackage.RESCUE__EXCEPTION_TYPE:
 			setExceptionType((TypeReference) null);
@@ -484,11 +486,11 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case BehaviorPackage.RESCUE__BODY:
-			return body != null && !body.isEmpty();
 		case BehaviorPackage.RESCUE__EXCEPTION_NAME:
 			return EXCEPTION_NAME_EDEFAULT == null ? exceptionName != null
 					: !EXCEPTION_NAME_EDEFAULT.equals(exceptionName);
+		case BehaviorPackage.RESCUE__BODY:
+			return body != null && !body.isEmpty();
 		case BehaviorPackage.RESCUE__EXCEPTION_TYPE:
 			return exceptionType != null;
 		}

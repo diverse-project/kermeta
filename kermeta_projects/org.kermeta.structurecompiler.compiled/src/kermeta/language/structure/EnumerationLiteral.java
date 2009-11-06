@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -25,9 +25,9 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getEnumerationLiteral()
- * @model annotation="kermeta ecore='true'"
+ * @model annotation="kermeta documentation='/**\r\n *\r\n \052/'"
+ *        annotation="kermeta ecore='true'"
  *        annotation="kermeta documentation='Item definition for enumeration'"
- *        annotation="kermeta documentation='/**\r\n *\r\n \052/'"
  * @generated
  */
 public interface EnumerationLiteral extends Traceability<EEnumLiteral>,

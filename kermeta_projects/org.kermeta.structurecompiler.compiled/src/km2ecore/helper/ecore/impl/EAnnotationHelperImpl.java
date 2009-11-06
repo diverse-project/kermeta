@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -55,12 +55,12 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 	 */
 	public void addAnnotationPropGetter(EModelElement eModelElement, String body) {
 
-		java.lang.Boolean idIfCond_1169 = false;
-		idIfCond_1169 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1175 = false;
+		idIfCond_1175 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(eModelElement));
 
-		if (idIfCond_1169) {
+		if (idIfCond_1175) {
 
 			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EAnnotation> convertAsOrderedSet(
@@ -102,85 +102,85 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 
 		//BIft:exists
 
-		java.lang.Boolean result_ft268 = null;
+		java.lang.Boolean result_ft266 = null;
 
-		java.lang.Boolean test_ft268 = false;
+		java.lang.Boolean test_ft266 = false;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EAnnotation> it_ft268 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EAnnotation> it_ft266 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EAnnotation> convertAsOrderedSet(
 							eModelElement.getEAnnotations()).iterator();
-			java.lang.Boolean idLoopCond_1170 = false;
-			while (!idLoopCond_1170) {
-				idLoopCond_1170 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft268.isOff(),
+			java.lang.Boolean idLoopCond_1176 = false;
+			while (!idLoopCond_1176) {
+				idLoopCond_1176 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft266.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(test_ft268, false));
-				if (idLoopCond_1170) {
+								.isNotEqualSwitcher(test_ft266, false));
+				if (idLoopCond_1176) {
 				} else {
 
-					java.lang.Boolean result_lambda_ft268 = null;
+					java.lang.Boolean result_lambda_ft266 = null;
 					//BIle:func
-					ecore.EAnnotation a_lbdExp268 = it_ft268.next();
+					ecore.EAnnotation a_lbdExp266 = it_ft266.next();
 
 					//BIft:exists
 
-					java.lang.Boolean result_ft269 = null;
+					java.lang.Boolean result_ft267 = null;
 
-					java.lang.Boolean test_ft269 = false;
+					java.lang.Boolean test_ft267 = false;
 
 					{
 
-						kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft269 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft267 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<ecore.EStringToStringMapEntry> convertAsOrderedSet(
-										a_lbdExp268.getDetails()).iterator();
-						java.lang.Boolean idLoopCond_1171 = false;
-						while (!idLoopCond_1171) {
-							idLoopCond_1171 = kermeta.standard.helper.BooleanWrapper
+										a_lbdExp266.getDetails()).iterator();
+						java.lang.Boolean idLoopCond_1177 = false;
+						while (!idLoopCond_1177) {
+							idLoopCond_1177 = kermeta.standard.helper.BooleanWrapper
 									.or(
-											it_ft269.isOff(),
+											it_ft267.isOff(),
 											org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isNotEqualSwitcher(
-															test_ft269, false));
-							if (idLoopCond_1171) {
+															test_ft267, false));
+							if (idLoopCond_1177) {
 							} else {
 
-								java.lang.Boolean result_lambda_ft269 = null;
+								java.lang.Boolean result_lambda_ft267 = null;
 								//BIle:func
-								ecore.EStringToStringMapEntry d_lbdExp269 = it_ft269
+								ecore.EStringToStringMapEntry d_lbdExp267 = it_ft267
 										.next();
 
-								result_lambda_ft269 = kermeta.standard.helper.StringWrapper
-										.equals(d_lbdExp269.getKey(), "body");
+								result_lambda_ft267 = kermeta.standard.helper.StringWrapper
+										.equals(d_lbdExp267.getKey(), "body");
 								//EIle:func
 
-								test_ft269 = kermeta.standard.helper.BooleanWrapper
-										.or(test_ft269, result_lambda_ft269);
+								test_ft267 = kermeta.standard.helper.BooleanWrapper
+										.or(test_ft267, result_lambda_ft267);
 							}
 						}
 					}
 
-					result_ft269 = test_ft269;
+					result_ft267 = test_ft267;
 					//EIft:exists
-					result_lambda_ft268 = result = kermeta.standard.helper.BooleanWrapper
+					result_lambda_ft266 = result = kermeta.standard.helper.BooleanWrapper
 							.and(
 									kermeta.standard.helper.StringWrapper
-											.equals(a_lbdExp268.getSource(),
+											.equals(a_lbdExp266.getSource(),
 													"http://www.eclipse.org/emf/2002/GenModel"),
-									result_ft269);
+									result_ft267);
 					//EIle:func
 
-					test_ft268 = kermeta.standard.helper.BooleanWrapper.or(
-							test_ft268, result_lambda_ft268);
+					test_ft266 = kermeta.standard.helper.BooleanWrapper.or(
+							test_ft266, result_lambda_ft266);
 				}
 			}
 		}
 
-		result_ft268 = test_ft268;
+		result_ft266 = test_ft266;
 
 		//CE
-		result = result_ft268;
+		result = result_ft266;
 		//EIft:exists
 
 		return result;
@@ -219,60 +219,60 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 
 		//BIft:exists
 
-		java.lang.Boolean result_ft270 = null;
+		java.lang.Boolean result_ft268 = null;
 
-		java.lang.Boolean test_ft270 = false;
+		java.lang.Boolean test_ft268 = false;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EAnnotation> it_ft270 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EAnnotation> it_ft268 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EAnnotation> convertAsOrderedSet(
 							eModelElement.getEAnnotations()).iterator();
-			java.lang.Boolean idLoopCond_1172 = false;
-			while (!idLoopCond_1172) {
-				idLoopCond_1172 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft270.isOff(),
+			java.lang.Boolean idLoopCond_1178 = false;
+			while (!idLoopCond_1178) {
+				idLoopCond_1178 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft268.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(test_ft270, false));
-				if (idLoopCond_1172) {
+								.isNotEqualSwitcher(test_ft268, false));
+				if (idLoopCond_1178) {
 				} else {
 
-					java.lang.Boolean result_lambda_ft270 = null;
+					java.lang.Boolean result_lambda_ft268 = null;
 					//BIle:func
-					ecore.EAnnotation a_lbdExp270 = it_ft270.next();
+					ecore.EAnnotation a_lbdExp268 = it_ft268.next();
 
 					//BIft:exists
 
-					java.lang.Boolean result_ft271 = null;
+					java.lang.Boolean result_ft269 = null;
 
-					java.lang.Boolean test_ft271 = false;
+					java.lang.Boolean test_ft269 = false;
 
 					{
 
-						kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft271 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft269 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<ecore.EStringToStringMapEntry> convertAsOrderedSet(
-										a_lbdExp270.getDetails()).iterator();
-						java.lang.Boolean idLoopCond_1173 = false;
-						while (!idLoopCond_1173) {
-							idLoopCond_1173 = kermeta.standard.helper.BooleanWrapper
+										a_lbdExp268.getDetails()).iterator();
+						java.lang.Boolean idLoopCond_1179 = false;
+						while (!idLoopCond_1179) {
+							idLoopCond_1179 = kermeta.standard.helper.BooleanWrapper
 									.or(
-											it_ft271.isOff(),
+											it_ft269.isOff(),
 											org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isNotEqualSwitcher(
-															test_ft271, false));
-							if (idLoopCond_1173) {
+															test_ft269, false));
+							if (idLoopCond_1179) {
 							} else {
 
-								java.lang.Boolean result_lambda_ft271 = null;
+								java.lang.Boolean result_lambda_ft269 = null;
 								//BIle:func
-								ecore.EStringToStringMapEntry d_lbdExp271 = it_ft271
+								ecore.EStringToStringMapEntry d_lbdExp269 = it_ft269
 										.next();
 
-								result_lambda_ft271 = kermeta.standard.helper.BooleanWrapper
+								result_lambda_ft269 = kermeta.standard.helper.BooleanWrapper
 										.and(
 												kermeta.standard.helper.StringWrapper
 														.equals(
-																d_lbdExp271
+																d_lbdExp269
 																		.getKey(),
 																kermeta.standard.helper.StringWrapper
 																		.toString(km2ecore.helper.ecore.KermetaEAnnotationKey
@@ -280,42 +280,42 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 																						"ecore")
 																				.getName())),
 												kermeta.standard.helper.StringWrapper
-														.equals(d_lbdExp271
+														.equals(d_lbdExp269
 																.getValue(),
 																"true"));
 								//EIle:func
 
-								test_ft271 = kermeta.standard.helper.BooleanWrapper
-										.or(test_ft271, result_lambda_ft271);
+								test_ft269 = kermeta.standard.helper.BooleanWrapper
+										.or(test_ft269, result_lambda_ft269);
 							}
 						}
 					}
 
-					result_ft271 = test_ft271;
+					result_ft269 = test_ft269;
 					//EIft:exists
-					result_lambda_ft270 = result = kermeta.standard.helper.BooleanWrapper
+					result_lambda_ft268 = result = kermeta.standard.helper.BooleanWrapper
 							.and(
 									kermeta.standard.helper.StringWrapper
 											.equals(
-													a_lbdExp270.getSource(),
+													a_lbdExp268.getSource(),
 													kermeta.standard.helper.StringWrapper
 															.toString(km2ecore.helper.ecore.KermetaEAnnotationSource
 																	.getByName(
 																			"kermeta")
 																	.getName())),
-									result_ft271);
+									result_ft269);
 					//EIle:func
 
-					test_ft270 = kermeta.standard.helper.BooleanWrapper.or(
-							test_ft270, result_lambda_ft270);
+					test_ft268 = kermeta.standard.helper.BooleanWrapper.or(
+							test_ft268, result_lambda_ft268);
 				}
 			}
 		}
 
-		result_ft270 = test_ft270;
+		result_ft268 = test_ft268;
 
 		//CE
-		result = result_ft270;
+		result = result_ft268;
 		//EIft:exists
 
 		return result;
@@ -330,35 +330,35 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 	public void addAnnotationGenModelImpl(EModelElement eModelElement,
 			String body) {
 
-		java.lang.Boolean idIfCond_1174 = false;
+		java.lang.Boolean idIfCond_1180 = false;
 		//BIft:andThen
 
-		java.lang.Boolean result_ft272 = null;
+		java.lang.Boolean result_ft270 = null;
 
-		java.lang.Boolean idIfCond_1175 = false;
-		idIfCond_1175 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1181 = false;
+		idIfCond_1181 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(eModelElement));
 
-		if (idIfCond_1175) {
+		if (idIfCond_1181) {
 
 			//BIle:right
-			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp272 = null;
+			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp270 = null;
 
-			result_ft272 = kermeta.standard.helper.BooleanWrapper.not(this
+			result_ft270 = kermeta.standard.helper.BooleanWrapper.not(this
 					.existsAnnotationGenModelImpl(eModelElement));
 			//EIle:right
 
 		} else {
 
-			result_ft272 = false;
+			result_ft270 = false;
 		}
 
 		//CEC
-		idIfCond_1174 = result_ft272;
+		idIfCond_1180 = result_ft270;
 		//EIft:andThen
 
-		if (idIfCond_1174) {
+		if (idIfCond_1180) {
 
 			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EAnnotation> convertAsOrderedSet(
@@ -375,23 +375,6 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAnnotation createKermetaEAnnotation(String key, String value) {
-
-		ecore.EAnnotation result = null;
-
-		result = this.create(kermeta.standard.helper.StringWrapper
-				.toString(km2ecore.helper.ecore.KermetaEAnnotationSource
-						.getByName("kermeta").getName()), key, value);
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAnnotation getKermetaEAnnotation(
 			kermeta.language.structure.Object obj) {
 
@@ -399,20 +382,20 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 
 		result = null;
 
-		java.lang.Boolean idIfCond_1176 = false;
-		idIfCond_1176 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1182 = false;
+		idIfCond_1182 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.containerSwitcher(obj)));
 
-		if (idIfCond_1176) {
+		if (idIfCond_1182) {
 
 			kermeta.language.structure.Property ecoreMEProp = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.containerSwitcher(obj).getPropertyValue(
 							"ecoreModelElement");
 
-			java.lang.Boolean idIfCond_1177 = false;
-			idIfCond_1177 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_1183 = false;
+			idIfCond_1183 = kermeta.standard.helper.BooleanWrapper
 					.and(
 							kermeta.standard.helper.BooleanWrapper
 									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -425,19 +408,19 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 																	.containerSwitcher(obj),
 															ecoreMEProp))));
 
-			if (idIfCond_1177) {
+			if (idIfCond_1183) {
 
 				//BIft:detect
 
-				ecore.EAnnotation result_ft273 = null;
+				ecore.EAnnotation result_ft271 = null;
 
-				ecore.EAnnotation elem_ft273 = null;
+				ecore.EAnnotation elem_ft271 = null;
 
-				result_ft273 = null;
+				result_ft271 = null;
 
 				{
 
-					kermeta.standard.Iterator<ecore.EAnnotation> it_ft273 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					kermeta.standard.Iterator<ecore.EAnnotation> it_ft271 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<ecore.EAnnotation> convertAsOrderedSet(
 									((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.asTypeSwitcher(
@@ -451,26 +434,26 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 															.getMetaClass(
 																	"ecore.EModelElement")))
 											.getEAnnotations()).iterator();
-					java.lang.Boolean idLoopCond_1178 = false;
-					while (!idLoopCond_1178) {
-						idLoopCond_1178 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idLoopCond_1184 = false;
+					while (!idLoopCond_1184) {
+						idLoopCond_1184 = kermeta.standard.helper.BooleanWrapper
 								.or(
-										it_ft273.isOff(),
+										it_ft271.isOff(),
 										org.kermeta.compil.runtime.helper.language.ObjectUtil
 												.isNotEqualSwitcher(
-														result_ft273, null));
-						if (idLoopCond_1178) {
+														result_ft271, null));
+						if (idLoopCond_1184) {
 						} else {
 
-							elem_ft273 = it_ft273.next();
+							elem_ft271 = it_ft271.next();
 
-							java.lang.Boolean idIfCond_1179 = false;
+							java.lang.Boolean idIfCond_1185 = false;
 							//BIle:detector
-							ecore.EAnnotation t_lbdExp273 = elem_ft273;
+							ecore.EAnnotation t_lbdExp271 = elem_ft271;
 
-							idIfCond_1179 = kermeta.standard.helper.StringWrapper
+							idIfCond_1185 = kermeta.standard.helper.StringWrapper
 									.equals(
-											t_lbdExp273.getSource(),
+											t_lbdExp271.getSource(),
 											kermeta.standard.helper.StringWrapper
 													.toString(km2ecore.helper.ecore.KermetaEAnnotationSource
 															.getByName(
@@ -478,9 +461,9 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 															.getName()));
 							//EIle:detector
 
-							if (idIfCond_1179) {
+							if (idIfCond_1185) {
 
-								result_ft273 = elem_ft273;
+								result_ft271 = elem_ft271;
 							}
 
 						}
@@ -488,14 +471,14 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 				}
 
 				//CE
-				result = result_ft273;
+				result = result_ft271;
 				//EIft:detect
 
-				java.lang.Boolean idIfCond_1180 = false;
-				idIfCond_1180 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_1186 = false;
+				idIfCond_1186 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(result);
 
-				if (idIfCond_1180) {
+				if (idIfCond_1186) {
 
 					result = this.getEmptyKermetaEAnnotation();
 				}
@@ -508,6 +491,23 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 		}
 
 		result = this.getEmptyKermetaEAnnotation();
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAnnotation createKermetaEAnnotation(String key, String value) {
+
+		ecore.EAnnotation result = null;
+
+		result = this.create(kermeta.standard.helper.StringWrapper
+				.toString(km2ecore.helper.ecore.KermetaEAnnotationSource
+						.getByName("kermeta").getName()), key, value);
 
 		return result;
 
@@ -536,29 +536,6 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void addAnnotationPropSetter(EModelElement eModelElement, String body) {
-
-		java.lang.Boolean idIfCond_1181 = false;
-		idIfCond_1181 = kermeta.standard.helper.BooleanWrapper
-				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.isVoidSwitcher(eModelElement));
-
-		if (idIfCond_1181) {
-
-			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<ecore.EAnnotation> convertAsOrderedSet(
-							eModelElement.getEAnnotations()).add(
-							this.create("kompiledderivedProp.setter", "body",
-									body));
-		}
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAnnotation getEmptyKermetaEAnnotation() {
 
 		ecore.EAnnotation result = null;
@@ -573,6 +550,29 @@ public class EAnnotationHelperImpl extends ObjectImpl implements
 		result = annotation;
 
 		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void addAnnotationPropSetter(EModelElement eModelElement, String body) {
+
+		java.lang.Boolean idIfCond_1187 = false;
+		idIfCond_1187 = kermeta.standard.helper.BooleanWrapper
+				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.isVoidSwitcher(eModelElement));
+
+		if (idIfCond_1187) {
+
+			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					.<ecore.EAnnotation> convertAsOrderedSet(
+							eModelElement.getEAnnotations()).add(
+							this.create("kompiledderivedProp.setter", "body",
+									body));
+		}
 
 	}
 

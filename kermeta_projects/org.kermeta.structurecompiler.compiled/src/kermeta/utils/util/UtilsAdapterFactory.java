@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -80,13 +80,13 @@ public class UtilsAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected UtilsSwitch<Adapter> modelSwitch = new UtilsSwitch<Adapter>() {
 		@Override
-		public Adapter caseStringBuffer(kermeta.utils.StringBuffer object) {
-			return createStringBufferAdapter();
+		public <K, V> Adapter caseHashtable(Hashtable<K, V> object) {
+			return createHashtableAdapter();
 		}
 
 		@Override
-		public <K, V> Adapter caseHashtable(Hashtable<K, V> object) {
-			return createHashtableAdapter();
+		public Adapter caseStringBuffer(kermeta.utils.StringBuffer object) {
+			return createStringBufferAdapter();
 		}
 
 		@Override
@@ -139,20 +139,6 @@ public class UtilsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.utils.StringBuffer <em>String Buffer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.utils.StringBuffer
-	 * @generated
-	 */
-	public Adapter createStringBufferAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.utils.Hashtable <em>Hashtable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -163,6 +149,20 @@ public class UtilsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createHashtableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.utils.StringBuffer <em>String Buffer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.utils.StringBuffer
+	 * @generated
+	 */
+	public Adapter createStringBufferAdapter() {
 		return null;
 	}
 

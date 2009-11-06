@@ -2,7 +2,7 @@
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * 
- * Generating with Kermeta <http://www.kermeta.org>
+ * Generated with Kermeta <http://www.kermeta.org>
  *
  * $Id$
  */
@@ -70,30 +70,31 @@ public abstract class AbstractFallibleImpl extends ObjectImpl implements
 		{
 
 			java.lang.Integer i = 0;
-			java.lang.Boolean idLoopCond_691 = false;
-			while (!idLoopCond_691) {
-				idLoopCond_691 = kermeta.standard.helper.IntegerWrapper.equals(
-						i, kermeta.standard.helper.StringWrapper.size(s));
-				if (idLoopCond_691) {
+			java.lang.Boolean idLoopCond_1053 = false;
+			while (!idLoopCond_1053) {
+				idLoopCond_1053 = kermeta.standard.helper.IntegerWrapper
+						.equals(i, kermeta.standard.helper.StringWrapper
+								.size(s));
+				if (idLoopCond_1053) {
 				} else {
 
 					java.lang.String c = kermeta.standard.helper.CharacterWrapper
 							.toString(kermeta.standard.helper.StringWrapper
 									.elementAt(s, i));
 
-					java.lang.Boolean idIfCond_692 = false;
-					idIfCond_692 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_1054 = false;
+					idIfCond_1054 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(
 									kermeta.standard.helper.StringWrapper
 											.indexOf(" \n\t", c), 0);
 
-					if (idIfCond_692) {
+					if (idIfCond_1054) {
 
-						java.lang.Boolean idIfCond_693 = false;
-						idIfCond_693 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_1055 = false;
+						idIfCond_1055 = kermeta.standard.helper.BooleanWrapper
 								.not(white);
 
-						if (idIfCond_693) {
+						if (idIfCond_1055) {
 
 							white = true;
 
@@ -106,10 +107,10 @@ public abstract class AbstractFallibleImpl extends ObjectImpl implements
 						result = kermeta.standard.helper.StringWrapper.plus(
 								result, c);
 
-						java.lang.Boolean idIfCond_694 = false;
-						idIfCond_694 = white;
+						java.lang.Boolean idIfCond_1056 = false;
+						idIfCond_1056 = white;
 
-						if (idIfCond_694) {
+						if (idIfCond_1056) {
 
 							white = false;
 						}
