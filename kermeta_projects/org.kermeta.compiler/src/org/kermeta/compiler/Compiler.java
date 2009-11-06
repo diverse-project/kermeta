@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
@@ -37,6 +38,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.compiler.common.CompilerProperties;
 import org.kermeta.compiler.common.KCompilerConstants;
@@ -119,6 +122,9 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	 */
 	public void run() throws IOException {
 
+		monitor.beginTask("Generate plugin from ecore:", 100);
+		
+		monitor.subTask("Generating genmodel stub");
 		// Generate the stub of the genmodel
 		this.run(arguments);
 
@@ -142,6 +148,8 @@ public class Compiler extends org.kermeta.compiler.Generator {
 				}
 			}
 	
+			monitor.worked(5);
+			monitor.subTask("Fixing genmodel");
 			if (genModel != null) {
 				// Resolve prefix settings for each GenPackage, multipleEditorPages, ...
 				GenModelUtil.ePackageFixerAll(genModel);
@@ -163,6 +171,8 @@ public class Compiler extends org.kermeta.compiler.Generator {
 				e.printStackTrace();
 			}
 	
+			monitor.worked(5);
+			monitor.subTask("Deleting existing plugin");
 			// Set arguments for generating plugins => model + edit, but not editor and tests
 			String[] args = new String[2];
 			args[0] = "-model";
@@ -174,24 +184,36 @@ public class Compiler extends org.kermeta.compiler.Generator {
 			ResourceHelper.deleteIProject(compiledPluginId, true);
 			
 			//Step 2: Generate the plugin
+			monitor.worked(5);
+			monitor.subTask("Generating EMF java from ecore");
 			this.run(args);
 			
 			// Set the persistence mapping maps
             ConfigurationCreator.createConfiguration(genModel, this.getCompilationContext());
 			
 			// Step 3: Generate the content of the simk file
+            monitor.worked(20);
+			monitor.subTask("Generating java helpers from Simk");
 			compileHelpers();
 			
 			// Unzip externs if nedded
+            monitor.worked(20);
+			monitor.subTask("Unzipping externs");
 			unzipExterns();
 			
+
+
+            monitor.worked(5);
+			monitor.subTask("Fixing Manifest and build properties");
 			fixManifestMF();
 			fixBuildProperties();
 		
 		} else {
+
+			monitor.done();
 			throw new IOException("IOException Compiler - The compilation fails: none ecore file was found");
 		}
-
+		monitor.done();
 	}
 	
 	private void fixManifestMF() {
@@ -299,8 +321,9 @@ public class Compiler extends org.kermeta.compiler.Generator {
 
 	/**
 	 * Unzip the externs specified by the user in the "compiler properties file"
+	 * @throws Exception 
 	 */
-	private void unzipExterns() {
+	private void unzipExterns()  {
 		
 		String unzipExterns = compilerProperties.getProperty(CompilerProperties.UNZIP_EXTERNS);
 		
@@ -316,11 +339,21 @@ public class Compiler extends org.kermeta.compiler.Generator {
 				
 				java.net.URL zip_url = null;
 				try {
-					zip_url = new java.net.URL(pathzip_pathdest[0]);
+					String path = pathzip_pathdest[0];
+					if ( pathzip_pathdest[0].startsWith("platform:/") ) {
+						IFile ifile = ResourceHelper.getIFile(pathzip_pathdest[0]);
+						path = "file:/"+ifile.getLocation().toString();
+	    			} 
+					zip_url = new java.net.URL(path);
 				} catch (MalformedURLException e) {
 					e.printStackTrace();
 				}
-
+				if(pathzip_pathdest.length < 2){
+					String message = "Invalid unzip_extern declaration; typicall declaration is <first-zip-location>;<first-zip-deploymentfolder>,<second-zip-location>;<second-zip-deploymentfolder>,...";
+					Error e = new Error(message);
+					CompilerPlugin.logErrorMessage(message, e);
+					throw e; 
+				}
 				IPath destination_folder_location = project.getFullPath().append("/" + pathzip_pathdest[1]);
 				UnzipFile.unzipFile(zip_url, destination_folder_location);
 			
@@ -458,7 +491,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	 * Launch the generation of the Java Source from the Simk file
 	 */
 	private void compileHelpers() {
-		GenerateHelperAction compileHelperAction = new GenerateHelperAction(this.monitor);
+		GenerateHelperAction compileHelperAction = new GenerateHelperAction(new SubProgressMonitor(this.monitor, 10));
 		
 		String kmFilePath = ecorefile.getFullPath().removeFileExtension().addFileExtension("km").toString();
 		

@@ -12,11 +12,17 @@
 
 package org.kermeta.compiler.internal;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.kermeta.log4j.util.LogConfigurationHelper;
+
+import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 
 public class GenModelUtil {
 	
@@ -50,8 +56,9 @@ public class GenModelUtil {
 	public static void ePackageFixerAll(GenModel genModel) {
 		for ( GenPackage _genPackage : genModel.getAllGenPackagesWithClassifiers() ) {
 			prefixFixer(_genPackage);
-			multipleEditorPagesFixer(_genPackage);
+			multipleEditorPagesFixer(_genPackage);			
 		}
+		multipleEqualsIgnoreCasePackageFixer(genModel);
 	}
 	
 	/**
@@ -100,6 +107,47 @@ public class GenModelUtil {
 		genPackage.setMultipleEditorPages(false);
 	}
 	
+	/**
+	 * If several packages use a similar name (ie. equalsIgnoreCase returns true)
+	 * then some of them must be renamed
+	 * @param genPackage
+	 * @param genModel
+	 */
+	private static void multipleEqualsIgnoreCasePackageFixer(GenModel genModel) {
+		boolean firstOccurence = true;
+		HashMap<String,List<GenPackage>> hm = new HashMap<String,List<GenPackage>>();
+		
+		// build hash map that doesn't take into account the case of the qualified name
+		for ( GenPackage genPackage : genModel.getAllGenPackagesWithClassifiers() ) {
+			String caseInsensitiveQualifiedName = EcoreHelper.getQualifiedName(genPackage.getEcorePackage()).toLowerCase();
+			if(!hm.containsKey(caseInsensitiveQualifiedName)){
+				//add an entry
+				hm.put(caseInsensitiveQualifiedName, new ArrayList<GenPackage>());
+			}
+			hm.get(caseInsensitiveQualifiedName).add(genPackage);			
+		}
+		// for each conflicting entry, apply a renaming rule
+		for(String key : hm.keySet()){
+			List<GenPackage> listGenPackage = hm.get(key);
+			if(listGenPackage.size() > 1){
+				int renameNumber = 1;
+				boolean hasSkippedOne = false;
+				for(GenPackage genPackage : listGenPackage){
+					if(EcoreHelper.getQualifiedName(genPackage.getEcorePackage()).equals("ecore")){
+						// this one must not be renamed, we should rather rename the other ones
+						hasSkippedOne = true;
+					}
+					else{
+						if(hasSkippedOne || renameNumber < listGenPackage.size()){
+							genPackage.setBasePackage("renamed"+(renameNumber));
+							genPackage.setPrefix("Renamed"+(renameNumber)+genPackage.getPrefix());	
+						}
+					}					
+					renameNumber++;	
+				}
+			}
+		}		
+	}
 }
 
 
