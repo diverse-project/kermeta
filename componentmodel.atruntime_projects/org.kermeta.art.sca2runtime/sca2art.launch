@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.kermeta.debug.runConfiguration">
-<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS" value="platform:/resource/eu.ict_diva.studies/CAS/architecture/CAS_instance.composite platform:/resource/eu.ict_diva.studies/CAS/architecture/CAS_architecture.art"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS" value="platform:/resource/org.kermeta.art.sca2runtime/model/tutorial_instance_diagram1.composite platform:/resource/org.kermeta.art.sca2runtime/model/diagram.art"/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_CLASSQNAME" value="root_package::Main"/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_FILENAME" value="\org.kermeta.art.sca2runtime\src\kermeta\test.kmt"/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_OPERATIONNAME" value="main"/>

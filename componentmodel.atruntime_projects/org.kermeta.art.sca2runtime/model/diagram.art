@@ -2,18 +2,28 @@
 <art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:implem="http://art/implem" xmlns:instance="http://art/instance" xmlns:type="http://art/type">
   <root name="tutorial_type_diagram">
     <subComponent xsi:type="instance:PrimitiveInstance" name="ClientImpl_1" type="//@types.0">
+      <attribute xsi:type="instance:ValuedAttribute" value="value1" attribute="//@types.0/@attribute.0"/>
       <binding serverInstance="//@root/@subComponent.2" id="ServerImpl_1" client="//@types.0/@port.0" server="//@types.1/@port.0"/>
       <binding serverInstance="//@root/@subComponent.3" id="ServerImpl_2" client="//@types.0/@port.1" server="//@types.1/@port.0"/>
       <implem xsi:type="implem:OSGiComponent" implementingClass="tutorial.diva.impl.client.ClientImpl"/>
     </subComponent>
     <subComponent xsi:type="instance:PrimitiveInstance" name="ClientImpl_2" type="//@types.0">
+      <attribute xsi:type="instance:ValuedAttribute" value="value2" attribute="//@types.0/@attribute.0"/>
       <binding serverInstance="//@root/@subComponent.2" id="ServerImpl_1" client="//@types.0/@port.0" server="//@types.1/@port.0"/>
       <implem xsi:type="implem:OSGiComponent" implementingClass="tutorial.diva.impl.client.ClientImpl"/>
     </subComponent>
     <subComponent xsi:type="instance:PrimitiveInstance" name="ServerImpl_1" type="//@types.1">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:OtherEntry" value="value1" key="key1"/>
+        <entries xsi:type="instance:OtherEntry" value="value2" key="key2"/>
+      </attribute>
       <implem xsi:type="implem:OSGiComponent" implementingClass="tutorial.diva.impl.serveur.HelloWorldImpl1"/>
     </subComponent>
     <subComponent xsi:type="instance:PrimitiveInstance" name="ServerImpl_2" type="//@types.1">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:OtherEntry" value="value1'" key="key1"/>
+        <entries xsi:type="instance:OtherEntry" value="value2'" key="key2"/>
+      </attribute>
       <implem xsi:type="implem:OSGiComponent" implementingClass="tutorial.diva.impl.serveur.HelloWorldImpl2"/>
     </subComponent>
   </root>
@@ -22,9 +32,11 @@
   <types xsi:type="type:PrimitiveType" name="Client">
     <port name="defaultHelloWorld" lower="1" upper="-1" isOptional="false" service="//@services.0" role="client"/>
     <port name="otherHelloWorlds" lower="1" upper="-1" isOptional="false" service="//@services.0" role="client"/>
+    <attribute xsi:type="type:BasicAttribute" name="Att1"/>
   </types>
   <types xsi:type="type:PrimitiveType" name="Server">
     <port name="helloWorld" lower="0" upper="1" service="//@services.0" role="server"/>
     <port name="voiceHelloWorld" lower="1" upper="-1" isOptional="false" service="//@services.1" role="client"/>
+    <attribute xsi:type="type:Dictionary" name="properties"/>
   </types>
 </art:System>

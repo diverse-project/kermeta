@@ -9,6 +9,7 @@
     <sca:reference multiplicity="1..1" name="otherHelloWorlds">
       <sca:interface.java interface="tutorial.diva.HelloWorld"/>
     </sca:reference>
+    <sca:property name="Att1">value1</sca:property>
   </sca:component>
   <sca:component constrainingType="Client" name="ClientImpl_2">
     <sca:implementation.java class="tutorial.diva.impl.client.ClientImpl"/>
@@ -19,6 +20,7 @@
     <sca:reference multiplicity="1..1" name="otherHelloWorlds">
       <sca:interface.java interface="tutorial.diva.HelloWorld"/>
     </sca:reference>
+    <sca:property name="Att1">value2</sca:property>
   </sca:component>
   <sca:component constrainingType="Server" name="ServerImpl_1">
     <sca:implementation.java class="tutorial.diva.impl.serveur.HelloWorldImpl1"/>
@@ -29,6 +31,7 @@
     <sca:reference name="voiceHelloWorld">
       <sca:interface.java interface="tutorial.diva.VoiceHelloWorld"/>
     </sca:reference>
+    <sca:property name="properties">key1:value1;key2:value2</sca:property>
   </sca:component>
   <sca:component constrainingType="Server" name="ServerImpl_2">
     <sca:implementation.java class="tutorial.diva.impl.serveur.HelloWorldImpl2"/>
@@ -39,6 +42,7 @@
     <sca:reference name="voiceHelloWorld">
       <sca:interface.java interface="tutorial.diva.VoiceHelloWorld"/>
     </sca:reference>
+    <sca:property name="properties">key1:value1';key2:value2'</sca:property>
   </sca:component>
   <sca:wire source="ClientImpl_1/defaultHelloWorld" target="ServerImpl_1/helloWorld"/>
   <sca:wire source="ClientImpl_2/defaultHelloWorld" target="ServerImpl_1/helloWorld"/>

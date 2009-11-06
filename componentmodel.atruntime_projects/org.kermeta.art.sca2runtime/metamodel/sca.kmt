@@ -55,11 +55,26 @@ aspect class SCAtoART{
 			and t.port.select{p | p.role == "client"}.size ==  cpt.~reference.size
 		}
 		
+		stdio.errorln(cpt.name+"::"+type.toString)
+		
 		if type != void then
 			if not (type.name == cpt.~property.detect{p | p.name == "Type"}.~value /*cpt.constrainingType.toString*/) then
 				var e : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
 				e.message := "Error: two similar component types with different names: "+type.name+" VS "+cpt.constrainingType.toString 
-				raise e 
+				raise e
+			else//update the type if needed
+				 cpt.~property.select{p | p.name != "Type" and not type.~attribute.exists{a| p.name == a.name}}
+				 	.each{ p | 
+						if(p.name == "properties") then
+							var dictDecl : Dictionary init Dictionary.new
+							dictDecl.name := "properties"
+							type.~attribute.add(dictDecl)
+						else
+							var attDecl : BasicAttribute init BasicAttribute.new
+							attDecl.name := p.name
+							type.~attribute.add(attDecl)
+						end				 	
+				 	}
 			end
 		else
 			type := PrimitiveType.new
@@ -109,6 +124,23 @@ aspect class SCAtoART{
 				
 				r.artPort := port
 			}
+			
+			cpt.~property.each{p | 
+				stdio.errorln(cpt.name+"::"+p.name)
+			}
+				
+			cpt.~property.select{p | p.name != "Type"}.each{p |
+				if(p.name == "properties") then
+					var dictDecl : Dictionary init Dictionary.new
+					dictDecl.name := "properties"
+					type.~attribute.add(dictDecl)
+				else
+					var attDecl : BasicAttribute init BasicAttribute.new
+					attDecl.name := p.name
+					type.~attribute.add(attDecl)
+				end
+			}
+				
 			artTypes.add(type)
 		end
 		
@@ -146,7 +178,7 @@ aspect class Composite
 		artSystem.root := artComposite
 		artComposite.name := self.name
 		self.component.each{c | 
-			//stdio.writeln(c.name+": "+c.implementation.asType(JavaImplementation).~class)
+			stdio.errorln(self.name+"::"+c.name)
 			c.visit(sca2art, artSystem)
 			artComposite.subComponent.add(c.artComponent)
 		}
@@ -160,6 +192,8 @@ aspect class Component
 	
 	operation visit(sca2art : SCAtoART, artSystem : System) is
 	do
+		stdio.errorln("visit "+self.name)
+	
 	/*	stdio.writeln("visit Component")
 		stdio.writeln("  artComponent.name: "+self.name)
 		stdio.writeln("  artComponent: "+self.toString)
@@ -171,8 +205,34 @@ aspect class Component
 		implem.implementingClass := self.implementation.asType(JavaImplementation).~class
 		artComponent.implem := implem
 		
-		artComponent.type := sca2art.getType(self)
-		artSystem.types.add(sca2art.getType(self))
+		var type : PrimitiveType init sca2art.getType(self)
+		artComponent.type := type
+		artSystem.types.add(type)
+		
+		
+		self.~property.select{p | p.name != "Type"}.each{p |
+					if(p.name == "properties") then
+						var dictDecl : Dictionary init self.artComponent.type.~attribute.select{a | a.name == "properties"}.one.asType(Dictionary)
+						
+						var dictVal : DictionaryValuedAttribute init DictionaryValuedAttribute.new
+						dictVal.~attribute := dictDecl
+						
+						p.~value.split(";").each{couple |
+							var entry : OtherEntry init OtherEntry.new
+							entry.key := couple.split(":").elementAt(0)
+							entry.~value :=  couple.split(":").elementAt(1)
+							dictVal.entries.add(entry)
+						}
+						self.artComponent.~attribute.add(dictVal)
+					else
+						var attDecl : BasicAttribute init self.artComponent.type.~attribute.select{a | a.name == p.name}.one.asType(BasicAttribute)
+						
+						var attVal : ValuedAttribute init ValuedAttribute.new
+						attVal.~attribute := attDecl
+						attVal.~value := p.~value
+						self.artComponent.~attribute.add(attVal)
+					end
+				}
 		
 	/*	stdio.writeln("  artComponent.type: "+artComponent.type.toString)
 		stdio.writeln("  artComponent: "+artComponent.toString)
