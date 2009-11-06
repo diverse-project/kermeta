@@ -417,6 +417,11 @@ class BasicPrettyPrinter inherits
 		result.append( ")")
 	end
 	
+	/* this method isn't strictly necessary, but the avoid the bug #8876 */
+	method visitCallValue(node : CallValue, context : Integer) : String is do
+		result := void
+	end
+	
 	method visitCallVariable(node : CallVariable, context : Integer) : String is do
 		result := node.name
 		if (node.parameters.size> 0) then
