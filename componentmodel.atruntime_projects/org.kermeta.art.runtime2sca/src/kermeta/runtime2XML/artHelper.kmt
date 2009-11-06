@@ -1,0 +1,39 @@
+/* $Id:$ 
+ * Creation : September 29, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package art;
+
+
+require "http://art"
+
+
+
+package instance{
+	aspect class DictionaryValuedAttribute
+	{
+		operation prettyPrint() : String is
+		do
+			var res : String init ""
+			self.entries.each{e|
+				if(e.isKindOf(DefaultEntry)) then
+					res := res + e.asType(DefaultEntry).key.key
+					res := res + ":"
+					res := res + e.asType(DefaultEntry).~value
+				else
+					res := res + e.asType(OtherEntry).key
+					res := res + ":"
+					res := res + e.asType(OtherEntry).~value
+				end
+				res := res + ";"
+			}
+			res := res.substring(0,res.size-1)
+			result := res
+		end
+	}
+}

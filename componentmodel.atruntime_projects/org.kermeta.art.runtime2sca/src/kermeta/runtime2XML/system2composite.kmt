@@ -1,6 +1,7 @@
 package sca;
 require kermeta
 require "./metamodel@runtime.kmt"
+require "./artHelper.kmt"
 using kermeta::standard
 using kermeta::utils
 using art
@@ -37,13 +38,21 @@ _res.append(p.service.name)
 _res.append("\"/>\n\t\t </sca:reference>\n")
 }
 _res.append("")
-/*sub.~attribute.each{a | 
+sub.~attribute.select{a | a.isKindOf(ValuedAttribute)}.each{a | 
 _res.append("\t\t<sca:property name=\"")
-_res.append(a.~value.split(":").elementAt(0).substring(3,a.~value.split(": ").elementAt(0).size))
+_res.append(a.asType(ValuedAttribute).~attribute.name)
 _res.append("\">")
-_res.append(a.~value.split(": ").elementAt(1))
+_res.append(a.asType(ValuedAttribute).~value)
 _res.append("</sca:property>\n")
-}*/
+}
+_res.append("")
+sub.~attribute.select{a | a.isKindOf(DictionaryValuedAttribute)}.each{a | 
+_res.append("\t\t<sca:property name=\"")
+_res.append(a.asType(DictionaryValuedAttribute).~attribute.name)
+_res.append("\">")
+_res.append(a.asType(DictionaryValuedAttribute).prettyPrint)
+_res.append("</sca:property>\n")
+}
 _res.append("\t</sca:component>\n")
 }
 _res.append("")

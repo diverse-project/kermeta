@@ -1,6 +1,6 @@
 <%@ket
 package="sca"
-require="./metamodel@runtime.kmt"
+require="./metamodel@runtime.kmt ./artHelper.kmt"
 using="art art::instance art::type art::implem"
 class="SCA"
 parameters="system:System"
@@ -21,8 +21,11 @@ parameters="system:System"
 		 	<sca:interface.java interface="<%=p.service.name%>"/>
 		 </sca:reference>
 	<%}%>
-	<%sub.~attribute.each{a | %>
-		<sca:property name="<%=a.~value.split(":").elementAt(0).substring(3,a.~value.split(": ").elementAt(0).size)%>"><%=a.~value.split(": ").elementAt(1)%></sca:property>
+	<%sub.~attribute.select{a | a.isKindOf(ValuedAttribute)}.each{a | %>
+		<sca:property name="<%=a.asType(ValuedAttribute).~attribute.name%>"><%=a.asType(ValuedAttribute).~value%></sca:property>
+	<%}%>
+	<%sub.~attribute.select{a | a.isKindOf(DictionaryValuedAttribute)}.each{a | %>
+		<sca:property name="<%=a.asType(DictionaryValuedAttribute).~attribute.name%>"><%=a.asType(DictionaryValuedAttribute).prettyPrint%></sca:property>
 	<%}%>
 	</sca:component>
 <%}%>
