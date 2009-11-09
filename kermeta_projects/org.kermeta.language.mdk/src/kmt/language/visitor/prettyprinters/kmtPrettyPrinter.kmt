@@ -572,7 +572,8 @@ class BasicPrettyPrinter inherits
 			var next : AbstractType init it.next
 			var cnext : ConcreteType
 			//cnext ?= next
-			result.append(self.accept(cnext, context))
+			// DVK, asType added because of a bug in the compiler !?
+			result.append(self.accept(cnext.asType(Object), context))
 			if (it.hasNext) then
 				result.append(sep)
 			end
@@ -592,7 +593,8 @@ class BasicPrettyPrinter inherits
 		until it.isOff
 		loop
 			var next : BExpression init it.next
-			result.append(self.accept(next, context))
+			// DVK, asType added because of a bug in the compiler !?
+			result.append(self.accept(next.asType(Object), context))
 			if (it.hasNext) then
 				result.append(sep) 
 			end
