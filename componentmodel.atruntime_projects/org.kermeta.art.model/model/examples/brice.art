@@ -1,0 +1,136 @@
+system BriceEstUnGoret;
+root composite instance CASApplication : notifier.calendar.telephony.addressDB #ON 
+{
+	primitive instance Calendar : tutorial.diva.cas.calendar #ON 
+		implementation OSGiComponent <implementingClass : "cas.impl.Calendar">
+	{
+		bind notifier to DrivingNotifier::notifier (id = "notifier")
+	}
+	primitive instance ForwardTelephony : tutorial.diva.cas.telephony #ON 
+		implementation OSGiComponent <implementingClass : "cas.impl.ForwardTelephony">
+	{
+		bind addressDB to AddressDataBase::addressDB (id = "addressDB")
+		bind notifier to DrivingNotifier::notifier (id = "notifier")
+	}
+	primitive instance SkypeTelephony : tutorial.diva.cas.telephony #ON 
+		implementation OSGiComponent <implementingClass : "cas.impl.SkypeTelephony">
+	{
+		bind addressDB to AddressDataBase::addressDB (id = "addressDB")
+		bind notifier to DrivingNotifier::notifier (id = "notifier")
+	}
+	primitive instance AddressDataBase : tutorial.diva.cas.addressDB #ON 
+		implementation OSGiComponent <implementingClass : "cas.impl.AddressDB">
+	{
+	}
+	primitive instance DrivingNotifier : tutorial.diva.cas.notifier #ON 
+		implementation OSGiComponent <implementingClass : "cas.impl.DrivingNotifier">
+	{
+		bind rankingStrategies to LowBandwidthRankingStrategy::rankingStrategies (id = "rankingStrategies0")
+		bind channel to VoiceChannel::channel (id = "channel")
+	}
+	primitive instance VoiceChannel : tutorial.diva.cas.channel #ON 
+		implementation OSGiComponent <implementingClass : "cas.impl.VoiceChannel">
+	{
+		bind ui to ReducedUserInterface::ui (id = "ui")
+	}
+	primitive instance ReducedUserInterface : tutorial.diva.cas.ui #ON 
+		implementation OSGiComponent <implementingClass : "cas.impl.ReducedUI">
+	{
+	}
+	primitive instance LowBandwidthRankingStrategy : tutorial.diva.cas.ranker #ON 
+		implementation OSGiComponent <implementingClass : "cas.impl.Ranker">
+	{
+	}
+	delegate calendar to Calendar::calendar (id = "calendar")
+	delegate notifier to DrivingNotifier::notifier (id = "notifier")
+	delegate telephony to ForwardTelephony::telephony (id = "telephonyForward")
+	delegate telephony to SkypeTelephony::telephony (id = "telephonySkype")
+	delegate addressDB to AddressDataBase::addressDB (id = "addressDB")
+}
+
+functional service tutorial.diva.cas.IRankingStrategy {
+	operation getRelevantEntries(in  arg0 : java.util.List, in  arg1 : org.diva.runtime.cas.interfaces.IUserDescription, in arg2 : org.diva.runtime.cas.interfaces.UserContext)
+	operation getRelevantEntriesRecursive(in arg0 : java.util.List, in arg1 : org.diva.runtime.cas.interfaces.IUserDescription, in arg2 : org.diva.runtime.cas.interfaces.UserContext)
+	operation rankEvent(in arg0 : org.diva.runtime.cas.interfaces.IEvent)
+	operation rankEvent(in arg0 : java.lang.String)
+}
+functional service tutorial.diva.cas.IChannel {
+	operation encapsulate(in arg0 : java.lang.String)
+}
+functional service tutorial.diva.cas.INotifier {
+	operation notifyUser(in arg0 : java.lang.String, in arg1 : java.lang.String)
+}
+functional service tutorial.diva.cas.ICalendar {
+	operation getNotifier()
+	operation addAppointment(in arg0 : org.diva.runtime.cas.interfaces.items.IAppointment)
+	operation addAppointments(in arg0 : java.util.List)
+	operation checkAvailability(in arg0 : org.diva.runtime.cas.interfaces.items.IAppointment)
+	operation getAppointments(in arg0 : java.util.List, in arg1 : java.util.Date, in arg2 : java.util.Date)
+	operation getAppointments(in arg0 : java.util.List)
+	operation getAllAppointments()
+	operation findFreeSlots(in arg0 : java.util.List, in arg1 : java.lang.String, in arg2 : java.lang.String, in arg3 : java.lang.String, in arg4 : java.lang.String)
+	operation setNotifier(in arg0 : org.diva.runtime.cas.interfaces.INotifier)
+}
+functional service tutorial.diva.cas.IAddressDB {
+	operation addAddress(in arg0 : org.diva.runtime.cas.interfaces.items.IAddress)
+	operation searchAdressesInStandardsFields(in arg0 : java.lang.String)
+	operation searchAdressesByPhonenumber(in arg0 : java.lang.String)
+}
+functional service tutorial.diva.cas.IUserInterface {
+	operation display(in arg0 : java.lang.String)
+	operation readInput()
+}
+functional service tutorial.diva.cas.ITelephony {
+	operation send(in arg0 : java.lang.String, in arg1 : java.lang.String)
+}
+type tutorial.diva.cas.notifier 
+{
+	provided port notifier : tutorial.diva.cas.INotifier [1..1]
+	required port channel : tutorial.diva.cas.IChannel [0..1]
+	required port rankingStrategies : tutorial.diva.cas.IRankingStrategy [0..-1]
+}
+type tutorial.diva.cas.channel 
+{
+	provided port channel : tutorial.diva.cas.IChannel [1..1]
+	required port ui : tutorial.diva.cas.IUserInterface [0..1]
+}
+type tutorial.diva.cas.telephony 
+{
+	provided port telephony : tutorial.diva.cas.ITelephony [1..1]
+	required port addressDB : tutorial.diva.cas.IAddressDB [1..1]
+	required port notifier : tutorial.diva.cas.INotifier [0..1]
+}
+type tutorial.diva.cas.calendar 
+{
+	provided port calendar : tutorial.diva.cas.ICalendar [1..1]
+	required port notifier : tutorial.diva.cas.INotifier [0..1]
+}
+type tutorial.diva.cas.addressDB 
+{
+	provided port addressDB : tutorial.diva.cas.IAddressDB [1..-1]
+}
+type tutorial.diva.cas.ui 
+{
+	provided port ui : tutorial.diva.cas.IUserInterface [1..-1]
+}
+compositetype notifier.calendar.telephony.addressDB 
+{
+	provided port notifier : tutorial.diva.cas.INotifier [0..1]
+	provided port calendar : tutorial.diva.cas.ICalendar [1..1]
+	provided port telephony : tutorial.diva.cas.ITelephony [0..-1]
+	provided port addressDB : tutorial.diva.cas.IAddressDB [1..1]
+}
+type tutorial.diva.cas.ranker 
+{
+	provided port rankingStrategies : tutorial.diva.cas.IRankingStrategy [0..-1]
+}
+
+datatype java.util.List;
+datatype org.diva.runtime.cas.interfaces.IUserDescription;
+datatype org.diva.runtime.cas.interfaces.UserContext;
+datatype java.lang.String;
+datatype org.diva.runtime.cas.interfaces.IEvent;
+datatype org.diva.runtime.cas.interfaces.items.IAppointment;
+datatype java.util.Date;
+datatype org.diva.runtime.cas.interfaces.INotifier;
+datatype org.diva.runtime.cas.interfaces.items.IAddress;

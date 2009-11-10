@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  *
  * @see art.implem.ImplemPackage#getPortImplementation()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface PortImplementation extends EObject {

@@ -35,7 +35,7 @@ public interface TypedElement extends ModelElement {
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(DataType)
 	 * @see art.ArtPackage#getTypedElement_Type()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	DataType getType();

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.art.model/src"
+    modelPluginID="org.kermeta.art.model" modelName="Art" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>art.ecore</foreignModel>
+  <genPackages prefix="Art" disposableProviderFactory="true" ecorePackage="art.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="art.ecore#//InstanceState">
+      <genEnumLiterals ecoreEnumLiteral="art.ecore#//InstanceState/OFF"/>
+      <genEnumLiterals ecoreEnumLiteral="art.ecore#//InstanceState/ON"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="art.ecore#//PortRole">
+      <genEnumLiterals ecoreEnumLiteral="art.ecore#//PortRole/client"/>
+      <genEnumLiterals ecoreEnumLiteral="art.ecore#//PortRole/server"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="art.ecore#//String"/>
+    <genDataTypes ecoreDataType="art.ecore#//Boolean"/>
+    <genDataTypes ecoreDataType="art.ecore#//Integer"/>
+    <genClasses image="false" ecoreClass="art.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art.ecore#//ModelElement"/>
+    <genClasses ecoreClass="art.ecore#//System">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//System/root"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//System/services"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//System/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//System/dataTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//System/groups"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//DataType"/>
+    <genClasses image="false" ecoreClass="art.ecore#//ComponentInstance">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//ComponentInstance/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//ComponentInstance/state"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference art.ecore#//ComponentInstance/superComponent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentInstance/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentInstance/binding"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentInstance/implem"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//ComponentInstance/groups"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//PrimitiveInstance"/>
+    <genClasses ecoreClass="art.ecore#//CompositeInstance">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//CompositeInstance/subComponent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//CompositeInstance/delegation"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art.ecore#//Binding">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Binding/serverInstance"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//Binding/id"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//TransmissionBinding">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//TransmissionBinding/client"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//TransmissionBinding/server"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//DelegationBinding">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//DelegationBinding/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//DelegationBinding/exported"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art.ecore#//AttributeInstance"/>
+    <genClasses ecoreClass="art.ecore#//ValuedAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//ValuedAttribute/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//ValuedAttribute/attribute"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//DictionaryValuedAttribute">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//DictionaryValuedAttribute/entries"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//DictionaryValuedAttribute/attribute"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art.ecore#//Entry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//Entry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//DefaultEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//DefaultEntry/key"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//OtherEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//OtherEntry/key"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art.ecore#//ComponentType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/port"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/attribute"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/groups"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/implem"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//PrimitiveType"/>
+    <genClasses ecoreClass="art.ecore#//CompositeType"/>
+    <genClasses image="false" ecoreClass="art.ecore#//Service">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//Service/operation"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//Operation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//Operation/input"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//Operation/output"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//Parameter"/>
+    <genClasses ecoreClass="art.ecore#//FunctionalService"/>
+    <genClasses ecoreClass="art.ecore#//ControlService"/>
+    <genClasses ecoreClass="art.ecore#//Port">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//Port/isOptional"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Port/service"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//Port/role"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//Port/implem"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art.ecore#//ComponentImplementation"/>
+    <genClasses ecoreClass="art.ecore#//FractalComponent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//FractalComponent/controllerDesc"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//FractalComponent/contentDesc"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//OSGiComponent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//OSGiComponent/implementingClass"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//PortImplementation"/>
+    <genClasses ecoreClass="art.ecore#//OSGiPort">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//OSGiPort/serviceId"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art.ecore#//Group"/>
+    <genClasses ecoreClass="art.ecore#//TypeGroup">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//TypeGroup/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//TypeGroup/subGroups"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//InstanceGroup">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//InstanceGroup/instances"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//InstanceGroup/subGroups"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art.ecore#//TypeImplementation"/>
+    <genClasses ecoreClass="art.ecore#//OSGiType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//OSGiType/generateInstanceBundle"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art.ecore#//Attribute"/>
+    <genClasses ecoreClass="art.ecore#//BasicAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//BasicAttribute/defaultValue"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//Dictionary">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Dictionary/valueType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//Dictionary/keys"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//DictionaryDefaultValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//DictionaryDefaultValue/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//DictionaryDefaultValue/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art.ecore#//TypedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//TypedElement/type"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="art.ecore#//CardinalityElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//CardinalityElement/lower"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//CardinalityElement/upper"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

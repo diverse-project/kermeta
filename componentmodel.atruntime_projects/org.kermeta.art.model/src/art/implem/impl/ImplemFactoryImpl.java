@@ -62,7 +62,6 @@ public class ImplemFactoryImpl extends EFactoryImpl implements ImplemFactory {
 		switch (eClass.getClassifierID()) {
 			case ImplemPackage.FRACTAL_COMPONENT: return createFractalComponent();
 			case ImplemPackage.OS_GI_COMPONENT: return createOSGiComponent();
-			case ImplemPackage.PORT_IMPLEMENTATION: return createPortImplementation();
 			case ImplemPackage.OS_GI_PORT: return createOSGiPort();
 			case ImplemPackage.OS_GI_TYPE: return createOSGiType();
 			default:
@@ -88,16 +87,6 @@ public class ImplemFactoryImpl extends EFactoryImpl implements ImplemFactory {
 	public OSGiComponent createOSGiComponent() {
 		OSGiComponentImpl osGiComponent = new OSGiComponentImpl();
 		return osGiComponent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PortImplementation createPortImplementation() {
-		PortImplementationImpl portImplementation = new PortImplementationImpl();
-		return portImplementation;
 	}
 
 	/**

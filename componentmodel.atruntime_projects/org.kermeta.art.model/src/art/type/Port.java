@@ -32,7 +32,7 @@ import art.implem.PortImplementation;
 public interface Port extends CardinalityElement {
 	/**
 	 * Returns the value of the '<em><b>Is Optional</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Is Optional</em>' attribute isn't clear,
@@ -42,7 +42,7 @@ public interface Port extends CardinalityElement {
 	 * @return the value of the '<em>Is Optional</em>' attribute.
 	 * @see #setIsOptional(Boolean)
 	 * @see art.type.TypePackage#getPort_IsOptional()
-	 * @model default="true" dataType="art.Boolean"
+	 * @model default="false" dataType="art.Boolean"
 	 * @generated
 	 */
 	Boolean getIsOptional();

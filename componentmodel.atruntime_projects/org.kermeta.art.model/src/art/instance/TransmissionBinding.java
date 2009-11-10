@@ -37,7 +37,7 @@ public interface TransmissionBinding extends Binding {
 	 * @return the value of the '<em>Client</em>' reference.
 	 * @see #setClient(Port)
 	 * @see art.instance.InstancePackage#getTransmissionBinding_Client()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	Port getClient();
@@ -63,7 +63,7 @@ public interface TransmissionBinding extends Binding {
 	 * @return the value of the '<em>Server</em>' reference.
 	 * @see #setServer(Port)
 	 * @see art.instance.InstancePackage#getTransmissionBinding_Server()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	Port getServer();

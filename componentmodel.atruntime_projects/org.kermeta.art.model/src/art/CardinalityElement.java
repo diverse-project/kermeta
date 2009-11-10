@@ -36,7 +36,7 @@ public interface CardinalityElement extends ModelElement {
 	 * @return the value of the '<em>Lower</em>' attribute.
 	 * @see #setLower(Integer)
 	 * @see art.ArtPackage#getCardinalityElement_Lower()
-	 * @model dataType="art.Integer"
+	 * @model dataType="art.Integer" required="true"
 	 * @generated
 	 */
 	Integer getLower();
@@ -62,7 +62,7 @@ public interface CardinalityElement extends ModelElement {
 	 * @return the value of the '<em>Upper</em>' attribute.
 	 * @see #setUpper(Integer)
 	 * @see art.ArtPackage#getCardinalityElement_Upper()
-	 * @model dataType="art.Integer"
+	 * @model dataType="art.Integer" required="true"
 	 * @generated
 	 */
 	Integer getUpper();

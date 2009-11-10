@@ -47,7 +47,7 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_OPTIONAL_EDEFAULT = Boolean.TRUE;
+	protected static final Boolean IS_OPTIONAL_EDEFAULT = Boolean.FALSE;
 
 	/**
 	 * The cached value of the '{@link #getIsOptional() <em>Is Optional</em>}' attribute.

@@ -1,0 +1,148 @@
+system GregEstUnGoret;
+root composite instance Architecture : ArchitectureType #ON 
+{
+	primitive instance FakeSwitch1 : org.entimid.fakeStuff.devices.FakeSimpleSwitch #ON 
+		implementation OSGiComponent <implementingClass : "org.entimid.fakeStuff.devices.FakeSimpleSwitch">
+	{
+		properties := [ org.entimid.fakeStuff.devices.fakeSimpleSwitch.offBtText -> "Eteindre" ], [ org.entimid.fakeStuff.devices.fakeSimpleSwitch.onBtText -> "Allumer" ]
+		bind outputPorts to parallelizer1::ACTIVATE (id = "ON")
+		bind outputPorts to FakeLight1::OFF (id = "OFF")
+	}
+	primitive instance FakeLight1 : org.entimid.fakeStuff.devices.FakeSimpleLight #ON 
+		implementation OSGiComponent <implementingClass : "org.entimid.fakeStuff.devices.FakeSimpleLight">
+	{
+		properties := [ org.entimid.fakeStuff.devices.fakeSimpleLight.id -> "fl1" ], [ org.entimid.fakeStuff.devices.fakeSimpleLight.color -> "200,0,0" ]
+	}
+	primitive instance timer1 : org.entimid.framework.tools.Timer #ON 
+		implementation OSGiComponent <implementingClass : "org.entimif.framework.tools.Timer">
+	{
+		properties := [ org.entimid.framework.tools.timer.time_out -> "2000" ]
+		bind outputPorts to parallelizer2::ACTIVATE (id = "TIME_OUT")
+	}
+	primitive instance parallelizer1 : org.entimid.framework.tools.Parallelizer #ON 
+		implementation OSGiComponent <implementingClass : "org.entimid.framework.tools.Parallelizer">
+	{
+		bind outputPorts to FakeLight1::ON (id = "p1")
+		bind outputPorts to timer1::RESTART (id = "p2")
+	}
+	primitive instance ddGw1 : org.entimid.x2d.devices.TYDOM_360 #ON 
+		implementation OSGiComponent <implementingClass : "org.entimid.x2d.devices.TYDOM_360">
+	{
+		properties := [ org.entimid.x2d.devices.tydom_360.id -> "ddgw1" ], [ org.entimid.x2d.devices.tydom_360.serialPortName -> "/dev/tty.usbmodemfa211" ]
+	}
+	primitive instance FakeLight3 : org.entimid.fakeStuff.devices.FakeSimpleLight #ON 
+		implementation OSGiComponent <implementingClass : "org.entimid.fakeStuff.devices.FakeSimpleLight">
+	{
+		properties := [ org.entimid.fakeStuff.devices.fakeSimpleLight.id -> "fl1" ], [ org.entimid.fakeStuff.devices.fakeSimpleLight.color -> "200,0,0" ]
+	}
+	primitive instance parallelizer2 : org.entimid.framework.tools.Parallelizer #ON 
+		implementation OSGiComponent <implementingClass : "org.entimid.framework.tools.Parallelizer">
+	{
+		bind outputPorts to ty510_1::ON (id = "p1")
+		bind outputPorts to timer2::RESTART (id = "p2")
+		bind outputPorts to FakeLight1::OFF (id = "p3")
+	}
+	primitive instance parallelizer3 : org.entimid.framework.tools.Parallelizer #ON 
+		implementation OSGiComponent <implementingClass : "org.entimid.framework.tools.Parallelizer">
+	{
+		bind outputPorts to FakeLight3::ON (id = "p1")
+		bind outputPorts to timer3::RESTART (id = "p2")
+		bind outputPorts to ty510_1::OFF (id = "p3")
+	}
+	primitive instance timer2 : org.entimid.framework.tools.Timer #ON 
+		implementation OSGiComponent <implementingClass : "org.entimif.framework.tools.Timer">
+	{
+		properties := [ org.entimid.framework.tools.timer.time_out -> "2000" ]
+		bind outputPorts to parallelizer3::ACTIVATE (id = "TIME_OUT")
+	}
+	primitive instance timer3 : org.entimid.framework.tools.Timer #ON 
+		implementation OSGiComponent <implementingClass : "org.entimif.framework.tools.Timer">
+	{
+		properties := [ org.entimid.framework.tools.timer.time_out -> "2000" ]
+		bind outputPorts to FakeLight3::OFF (id = "TIME_OUT")
+	}
+	primitive instance ty510_1 : org.entimid.x2d.devices.TYXIA_510 #ON 
+		implementation OSGiComponent <implementingClass : "org.entimid.x2d.devices.TYXIA_510">
+	{
+		properties := [ org.entimid.x2d.devices.tyxia_510.id -> "ty510_1" ]
+	}
+}
+functional service org.entimid.framework.componentmodel.InputPort {
+}
+functional service org.entimid.framework.componentmodel.OutputPort {
+}
+
+compositetype ArchitectureType {}
+
+type org.entimid.framework.tools.Timer 
+	implementation OSGiType<generateInstanceBundle:false>
+	groups : EnTiMid
+{
+	provided port START : org.entimid.framework.componentmodel.InputPort [1..-1]
+	provided port STOP : org.entimid.framework.componentmodel.InputPort [1..-1]
+	provided port RESTART : org.entimid.framework.componentmodel.InputPort [1..-1]
+	required port outputPorts : org.entimid.framework.componentmodel.OutputPort [1..-1]
+	attribute properties :[String -> String] default {
+		[ "org.entimid.framework.tools.timer.time_out" -> "2000" ]
+	}
+}
+type org.entimid.fakeStuff.devices.FakeSimpleSwitch 
+	groups : FakeStuff
+{
+	required port outputPorts : org.entimid.framework.componentmodel.OutputPort [0..-1]
+	attribute properties :[String -> String] default {
+		[ "org.entimid.fakeStuff.devices.fakeSimpleSwitch.onBtText" -> "" ]
+		[ "org.entimid.fakeStuff.devices.fakeSimpleSwitch.offBtText"  ]
+	}
+}
+type org.entimid.fakeStuff.devices.FakeSimpleLight 
+	groups : FakeStuff
+{
+	provided port ON : org.entimid.framework.componentmodel.InputPort [1..1]
+	provided port OFF : org.entimid.framework.componentmodel.InputPort [1..1]
+	attribute properties :[String -> String] default {
+		[ "org.entimid.fakeStuff.devices.fakeSimpleLight.id" -> "" ]
+		[ "org.entimid.fakeStuff.devices.fakeSimpleLight.color" -> "" ]
+	}
+}
+type org.entimid.framework.tools.Parallelizer 
+	implementation OSGiType<generateInstanceBundle:false>
+	groups : EnTiMid
+{
+	required port outputPorts : org.entimid.framework.componentmodel.OutputPort [1..-1]
+	provided port ACTIVATE : org.entimid.framework.componentmodel.InputPort [1..1]
+}
+type org.entimid.x2d.devices.TYDOM_360 
+	implementation OSGiType<generateInstanceBundle:true>
+	groups : DeltaDore
+{
+	provided port SEND : org.entimid.framework.componentmodel.InputPort [0..-1]
+	attribute properties :[String -> String] default {
+		[ "org.entimid.x2d.devices.tydom_360.serialPortName"  ]
+		[ "org.entimid.x2d.devices.tydom_360.id"  ]
+	}
+}
+type org.entimid.x2d.devices.TYXIA_510 
+	implementation OSGiType<generateInstanceBundle:true>
+	groups : DeltaDore
+{
+	provided port ON : org.entimid.framework.componentmodel.InputPort [0..-1]
+	provided port OFF : org.entimid.framework.componentmodel.InputPort [0..-1]
+	attribute properties :[String -> String] default {
+		[ "org.entimid.x2d.devices.tyxia_510.id" -> "" ]
+	}
+}
+datatype String;
+datatype Color;
+datatype Integer;
+typegroup Constructeurs {
+	typegroup FakeStuff {
+		types : org.entimid.fakeStuff.devices.FakeSimpleLight, org.entimid.fakeStuff.devices.FakeSimpleSwitch
+	}
+	typegroup DeltaDore {
+		types : org.entimid.x2d.devices.TYDOM_360, org.entimid.x2d.devices.TYXIA_510
+	}
+	typegroup EnTiMid {
+		types : org.entimid.framework.tools.Parallelizer, org.entimid.framework.tools.Timer
+	}
+}

@@ -55,7 +55,7 @@ public interface DictionaryValuedAttribute extends AttributeInstance {
 	 * @return the value of the '<em>Attribute</em>' reference.
 	 * @see #setAttribute(Dictionary)
 	 * @see art.instance.InstancePackage#getDictionaryValuedAttribute_Attribute()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	Dictionary getAttribute();

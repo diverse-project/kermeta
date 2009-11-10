@@ -37,7 +37,7 @@ public interface ValuedAttribute extends AttributeInstance {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see art.instance.InstancePackage#getValuedAttribute_Value()
-	 * @model dataType="art.String"
+	 * @model dataType="art.String" required="true"
 	 * @generated
 	 */
 	String getValue();
@@ -63,7 +63,7 @@ public interface ValuedAttribute extends AttributeInstance {
 	 * @return the value of the '<em>Attribute</em>' reference.
 	 * @see #setAttribute(BasicAttribute)
 	 * @see art.instance.InstancePackage#getValuedAttribute_Attribute()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	BasicAttribute getAttribute();

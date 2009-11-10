@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public class PortImplementationImpl extends EObjectImpl implements PortImplementation {
+public abstract class PortImplementationImpl extends EObjectImpl implements PortImplementation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -36,7 +36,7 @@ public interface FractalComponent extends ComponentImplementation {
 	 * @return the value of the '<em>Controller Desc</em>' attribute.
 	 * @see #setControllerDesc(String)
 	 * @see art.implem.ImplemPackage#getFractalComponent_ControllerDesc()
-	 * @model dataType="art.String"
+	 * @model dataType="art.String" required="true"
 	 * @generated
 	 */
 	String getControllerDesc();
@@ -62,7 +62,7 @@ public interface FractalComponent extends ComponentImplementation {
 	 * @return the value of the '<em>Content Desc</em>' attribute.
 	 * @see #setContentDesc(String)
 	 * @see art.implem.ImplemPackage#getFractalComponent_ContentDesc()
-	 * @model dataType="art.String"
+	 * @model dataType="art.String" required="true"
 	 * @generated
 	 */
 	String getContentDesc();
