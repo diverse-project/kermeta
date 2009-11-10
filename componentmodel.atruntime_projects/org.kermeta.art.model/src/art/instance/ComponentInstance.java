@@ -39,6 +39,12 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface ComponentInstance extends ModelElement {
+	
+	/**
+	 * @generated NOT
+	 */
+	public String getQualifiedName();
+	
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
