@@ -12,8 +12,9 @@ public class ArtTokenResolverFactory implements art.resource.art.IArtTokenResolv
 		registerTokenResolver("STRING_LITERAL", new art.resource.art.analysis.ArtSTRING_LITERALTokenResolver());
 		registerTokenResolver("T_INSTANCE_STATE", new art.resource.art.analysis.ArtT_INSTANCE_STATETokenResolver());
 		registerTokenResolver("T_PORT_KIND", new art.resource.art.analysis.ArtT_PORT_KINDTokenResolver());
+		registerTokenResolver("T_IMPLEM", new art.resource.art.analysis.ArtT_IMPLEMTokenResolver());
 		registerTokenResolver("T_OPTIONAL", new art.resource.art.analysis.ArtT_OPTIONALTokenResolver());
-		registerTokenResolver("INTEGER", new art.resource.art.analysis.ArtINTEGERTokenResolver());
+		registerTokenResolver("MULTIPLICITY", new art.resource.art.analysis.ArtMULTIPLICITYTokenResolver());
 		registerTokenResolver("TEXT", new art.resource.art.analysis.ArtTEXTTokenResolver());
 	}
 	

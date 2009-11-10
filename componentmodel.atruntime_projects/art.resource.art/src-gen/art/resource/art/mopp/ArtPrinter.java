@@ -477,19 +477,6 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 			out.print(sWriter.toString());
 			printCountingMap.putAll(printCountingMap1);
 		}
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		sWriter = new java.io.StringWriter();
-		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-		print_art_instance_PrimitiveInstance_1(element, localtab, out1, printCountingMap1);
-		if (printCountingMap.equals(printCountingMap1)) {
-			out1.close();
-		} else {
-			out1.flush();
-			out1.close();
-			out.print(sWriter.toString());
-			printCountingMap.putAll(printCountingMap1);
-		}
 		//////////////DEFINITION PART BEGINS (LineBreak):
 		out.println();
 		out.print(localtab);
@@ -501,7 +488,7 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
 			printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-			print_art_instance_PrimitiveInstance_2(element, localtab, out1, printCountingMap1);
+			print_art_instance_PrimitiveInstance_1(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
 				out1.close();
@@ -541,90 +528,14 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 	}
 	public void print_art_instance_PrimitiveInstance_1(art.instance.PrimitiveInstance element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		java.lang.String localtab = outertab;
-		int count;
-		boolean iterate = true;
-		java.io.StringWriter sWriter = null;
-		java.io.PrintWriter out1 = null;
-		java.util.HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = null;
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print("groups");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(":");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
-		count = printCountingMap.get("groups");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(art.instance.InstancePackage.PRIMITIVE_INSTANCE__GROUPS));
-			java.util.List<?> list = (java.util.List<?>) o;
-			int index = list.size() - count;
-			if (index >= 0) {
-				o = list.get(index);
-			} else {
-				o = null;
-			}
-			if (o != null) {
-				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentInstanceGroupsReferenceResolver().deResolve((art.group.InstanceGroup) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.instance.InstancePackage.PRIMITIVE_INSTANCE__GROUPS)), element.eClass().getEStructuralFeature(art.instance.InstancePackage.PRIMITIVE_INSTANCE__GROUPS), element));
-			}
-			printCountingMap.put("groups", count - 1);
-		}
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		iterate = true;
-		while (iterate) {
-			sWriter = new java.io.StringWriter();
-			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-			print_art_instance_PrimitiveInstance_1_0(element, localtab, out1, printCountingMap1);
-			if (printCountingMap.equals(printCountingMap1)) {
-				iterate = false;
-				out1.close();
-			} else {
-				out1.flush();
-				out1.close();
-				out.print(sWriter.toString());
-				printCountingMap.putAll(printCountingMap1);
-			}
-		}
-	}
-	public void print_art_instance_PrimitiveInstance_1_0(art.instance.PrimitiveInstance element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		int count;
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(",");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
-		count = printCountingMap.get("groups");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(art.instance.InstancePackage.PRIMITIVE_INSTANCE__GROUPS));
-			java.util.List<?> list = (java.util.List<?>) o;
-			int index = list.size() - count;
-			if (index >= 0) {
-				o = list.get(index);
-			} else {
-				o = null;
-			}
-			if (o != null) {
-				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentInstanceGroupsReferenceResolver().deResolve((art.group.InstanceGroup) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.instance.InstancePackage.PRIMITIVE_INSTANCE__GROUPS)), element.eClass().getEStructuralFeature(art.instance.InstancePackage.PRIMITIVE_INSTANCE__GROUPS), element));
-			}
-			printCountingMap.put("groups", count - 1);
-		}
-	}
-	public void print_art_instance_PrimitiveInstance_2(art.instance.PrimitiveInstance element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
 		//////////////DEFINITION PART BEGINS (LineBreak):
 		localtab += "	";
 		out.println();
 		out.print(localtab);
 		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		print_art_instance_PrimitiveInstance_2_0(element, localtab, out, printCountingMap);
+		print_art_instance_PrimitiveInstance_1_0(element, localtab, out, printCountingMap);
 	}
-	public void print_art_instance_PrimitiveInstance_2_0(art.instance.PrimitiveInstance element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_art_instance_PrimitiveInstance_1_0(art.instance.PrimitiveInstance element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		java.lang.String localtab = outertab;
 		int count;
 		int alt = -1;
@@ -769,19 +680,6 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 			out.print(sWriter.toString());
 			printCountingMap.putAll(printCountingMap1);
 		}
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		sWriter = new java.io.StringWriter();
-		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-		print_art_instance_CompositeInstance_1(element, localtab, out1, printCountingMap1);
-		if (printCountingMap.equals(printCountingMap1)) {
-			out1.close();
-		} else {
-			out1.flush();
-			out1.close();
-			out.print(sWriter.toString());
-			printCountingMap.putAll(printCountingMap1);
-		}
 		//////////////DEFINITION PART BEGINS (LineBreak):
 		out.println();
 		out.print(localtab);
@@ -793,7 +691,7 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
 			printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-			print_art_instance_CompositeInstance_2(element, localtab, out1, printCountingMap1);
+			print_art_instance_CompositeInstance_1(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
 				out1.close();
@@ -833,90 +731,14 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 	}
 	public void print_art_instance_CompositeInstance_1(art.instance.CompositeInstance element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		java.lang.String localtab = outertab;
-		int count;
-		boolean iterate = true;
-		java.io.StringWriter sWriter = null;
-		java.io.PrintWriter out1 = null;
-		java.util.HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = null;
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print("groups");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(":");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
-		count = printCountingMap.get("groups");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(art.instance.InstancePackage.COMPOSITE_INSTANCE__GROUPS));
-			java.util.List<?> list = (java.util.List<?>) o;
-			int index = list.size() - count;
-			if (index >= 0) {
-				o = list.get(index);
-			} else {
-				o = null;
-			}
-			if (o != null) {
-				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentInstanceGroupsReferenceResolver().deResolve((art.group.InstanceGroup) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.instance.InstancePackage.COMPOSITE_INSTANCE__GROUPS)), element.eClass().getEStructuralFeature(art.instance.InstancePackage.COMPOSITE_INSTANCE__GROUPS), element));
-			}
-			printCountingMap.put("groups", count - 1);
-		}
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		iterate = true;
-		while (iterate) {
-			sWriter = new java.io.StringWriter();
-			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-			print_art_instance_CompositeInstance_1_0(element, localtab, out1, printCountingMap1);
-			if (printCountingMap.equals(printCountingMap1)) {
-				iterate = false;
-				out1.close();
-			} else {
-				out1.flush();
-				out1.close();
-				out.print(sWriter.toString());
-				printCountingMap.putAll(printCountingMap1);
-			}
-		}
-	}
-	public void print_art_instance_CompositeInstance_1_0(art.instance.CompositeInstance element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		int count;
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(",");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
-		count = printCountingMap.get("groups");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(art.instance.InstancePackage.COMPOSITE_INSTANCE__GROUPS));
-			java.util.List<?> list = (java.util.List<?>) o;
-			int index = list.size() - count;
-			if (index >= 0) {
-				o = list.get(index);
-			} else {
-				o = null;
-			}
-			if (o != null) {
-				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentInstanceGroupsReferenceResolver().deResolve((art.group.InstanceGroup) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.instance.InstancePackage.COMPOSITE_INSTANCE__GROUPS)), element.eClass().getEStructuralFeature(art.instance.InstancePackage.COMPOSITE_INSTANCE__GROUPS), element));
-			}
-			printCountingMap.put("groups", count - 1);
-		}
-	}
-	public void print_art_instance_CompositeInstance_2(art.instance.CompositeInstance element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
 		//////////////DEFINITION PART BEGINS (LineBreak):
 		localtab += "	";
 		out.println();
 		out.print(localtab);
 		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		print_art_instance_CompositeInstance_2_0(element, localtab, out, printCountingMap);
+		print_art_instance_CompositeInstance_1_0(element, localtab, out, printCountingMap);
 	}
-	public void print_art_instance_CompositeInstance_2_0(art.instance.CompositeInstance element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_art_instance_CompositeInstance_1_0(art.instance.CompositeInstance element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		java.lang.String localtab = outertab;
 		int count;
 		int alt = -1;
@@ -1518,19 +1340,6 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 			out.print(sWriter.toString());
 			printCountingMap.putAll(printCountingMap1);
 		}
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		sWriter = new java.io.StringWriter();
-		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-		print_art_type_PrimitiveType_1(element, localtab, out1, printCountingMap1);
-		if (printCountingMap.equals(printCountingMap1)) {
-			out1.close();
-		} else {
-			out1.flush();
-			out1.close();
-			out.print(sWriter.toString());
-			printCountingMap.putAll(printCountingMap1);
-		}
 		//////////////DEFINITION PART BEGINS (LineBreak):
 		out.println();
 		out.print(localtab);
@@ -1542,7 +1351,7 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
 			printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-			print_art_type_PrimitiveType_2(element, localtab, out1, printCountingMap1);
+			print_art_type_PrimitiveType_1(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
 				out1.close();
@@ -1581,86 +1390,6 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 		}
 	}
 	public void print_art_type_PrimitiveType_1(art.type.PrimitiveType element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
-		int count;
-		boolean iterate = true;
-		java.io.StringWriter sWriter = null;
-		java.io.PrintWriter out1 = null;
-		java.util.HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = null;
-		//////////////DEFINITION PART BEGINS (LineBreak):
-		localtab += "	";
-		out.println();
-		out.print(localtab);
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print("groups");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(":");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
-		count = printCountingMap.get("groups");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.PRIMITIVE_TYPE__GROUPS));
-			java.util.List<?> list = (java.util.List<?>) o;
-			int index = list.size() - count;
-			if (index >= 0) {
-				o = list.get(index);
-			} else {
-				o = null;
-			}
-			if (o != null) {
-				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentTypeGroupsReferenceResolver().deResolve((art.group.TypeGroup) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.type.TypePackage.PRIMITIVE_TYPE__GROUPS)), element.eClass().getEStructuralFeature(art.type.TypePackage.PRIMITIVE_TYPE__GROUPS), element));
-			}
-			printCountingMap.put("groups", count - 1);
-		}
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		iterate = true;
-		while (iterate) {
-			sWriter = new java.io.StringWriter();
-			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-			print_art_type_PrimitiveType_1_0(element, localtab, out1, printCountingMap1);
-			if (printCountingMap.equals(printCountingMap1)) {
-				iterate = false;
-				out1.close();
-			} else {
-				out1.flush();
-				out1.close();
-				out.print(sWriter.toString());
-				printCountingMap.putAll(printCountingMap1);
-			}
-		}
-	}
-	public void print_art_type_PrimitiveType_1_0(art.type.PrimitiveType element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		int count;
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(",");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
-		count = printCountingMap.get("groups");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.PRIMITIVE_TYPE__GROUPS));
-			java.util.List<?> list = (java.util.List<?>) o;
-			int index = list.size() - count;
-			if (index >= 0) {
-				o = list.get(index);
-			} else {
-				o = null;
-			}
-			if (o != null) {
-				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentTypeGroupsReferenceResolver().deResolve((art.group.TypeGroup) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.type.TypePackage.PRIMITIVE_TYPE__GROUPS)), element.eClass().getEStructuralFeature(art.type.TypePackage.PRIMITIVE_TYPE__GROUPS), element));
-			}
-			printCountingMap.put("groups", count - 1);
-		}
-	}
-	public void print_art_type_PrimitiveType_2(art.type.PrimitiveType element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		java.lang.String localtab = outertab;
 		int count;
 		int alt = -1;
@@ -1761,19 +1490,6 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 			out.print(sWriter.toString());
 			printCountingMap.putAll(printCountingMap1);
 		}
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		sWriter = new java.io.StringWriter();
-		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-		print_art_type_CompositeType_1(element, localtab, out1, printCountingMap1);
-		if (printCountingMap.equals(printCountingMap1)) {
-			out1.close();
-		} else {
-			out1.flush();
-			out1.close();
-			out.print(sWriter.toString());
-			printCountingMap.putAll(printCountingMap1);
-		}
 		//////////////DEFINITION PART BEGINS (LineBreak):
 		out.println();
 		out.print(localtab);
@@ -1785,7 +1501,7 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
 			printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-			print_art_type_CompositeType_2(element, localtab, out1, printCountingMap1);
+			print_art_type_CompositeType_1(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
 				out1.close();
@@ -1824,86 +1540,6 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 		}
 	}
 	public void print_art_type_CompositeType_1(art.type.CompositeType element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
-		int count;
-		boolean iterate = true;
-		java.io.StringWriter sWriter = null;
-		java.io.PrintWriter out1 = null;
-		java.util.HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = null;
-		//////////////DEFINITION PART BEGINS (LineBreak):
-		localtab += "	";
-		out.println();
-		out.print(localtab);
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print("groups");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(":");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
-		count = printCountingMap.get("groups");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.COMPOSITE_TYPE__GROUPS));
-			java.util.List<?> list = (java.util.List<?>) o;
-			int index = list.size() - count;
-			if (index >= 0) {
-				o = list.get(index);
-			} else {
-				o = null;
-			}
-			if (o != null) {
-				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentTypeGroupsReferenceResolver().deResolve((art.group.TypeGroup) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.type.TypePackage.COMPOSITE_TYPE__GROUPS)), element.eClass().getEStructuralFeature(art.type.TypePackage.COMPOSITE_TYPE__GROUPS), element));
-			}
-			printCountingMap.put("groups", count - 1);
-		}
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		iterate = true;
-		while (iterate) {
-			sWriter = new java.io.StringWriter();
-			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-			print_art_type_CompositeType_1_0(element, localtab, out1, printCountingMap1);
-			if (printCountingMap.equals(printCountingMap1)) {
-				iterate = false;
-				out1.close();
-			} else {
-				out1.flush();
-				out1.close();
-				out.print(sWriter.toString());
-				printCountingMap.putAll(printCountingMap1);
-			}
-		}
-	}
-	public void print_art_type_CompositeType_1_0(art.type.CompositeType element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		int count;
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(",");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
-		count = printCountingMap.get("groups");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.COMPOSITE_TYPE__GROUPS));
-			java.util.List<?> list = (java.util.List<?>) o;
-			int index = list.size() - count;
-			if (index >= 0) {
-				o = list.get(index);
-			} else {
-				o = null;
-			}
-			if (o != null) {
-				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentTypeGroupsReferenceResolver().deResolve((art.group.TypeGroup) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.type.TypePackage.COMPOSITE_TYPE__GROUPS)), element.eClass().getEStructuralFeature(art.type.TypePackage.COMPOSITE_TYPE__GROUPS), element));
-			}
-			printCountingMap.put("groups", count - 1);
-		}
-	}
-	public void print_art_type_CompositeType_2(art.type.CompositeType element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		java.lang.String localtab = outertab;
 		int count;
 		int alt = -1;
@@ -2023,130 +1659,125 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 		}
 		//////////////DEFINITION PART BEGINS (CsString):
 		out.print(")");
+		//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+		print_art_type_Operation_2(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+		//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			print_art_type_Operation_3(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
 	}
 	public void print_art_type_Operation_0(art.type.Operation element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		java.lang.String localtab = outertab;
 		int count;
-		int alt = -1;
-		alt=0;
-		int matches=		matchCount(printCountingMap, java.util.Arrays.asList(		"input"		));
-		int tempMatchCount;
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"output"		));
-		if (tempMatchCount > matches) {
-			alt = 1;
-			matches = tempMatchCount;
-		}
-		switch(alt) {
-			case 1:			{
-				//////////////DEFINITION PART BEGINS (CsString):
-				out.print("out");
-				//////////////DEFINITION PART BEGINS (WhiteSpaces):
-				out.print(" ");
-				//////////////DEFINITION PART BEGINS (Containment):
-				count = printCountingMap.get("output");
-				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.OPERATION__OUTPUT));
-					java.util.List<?> list = (java.util.List<?>) o;
-					int index = list.size() - count;
-					if (index >= 0) {
-						o = list.get(index);
-					} else {
-						o = null;
-					}
-					if (o != null) {
-						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-					}
-					printCountingMap.put("output", count - 1);
-				}
+		//////////////DEFINITION PART BEGINS (Containment):
+		count = printCountingMap.get("input");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.OPERATION__INPUT));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
 			}
-			break;
-			default:			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("in");
-			//////////////DEFINITION PART BEGINS (WhiteSpaces):
-			out.print(" ");
-			//////////////DEFINITION PART BEGINS (Containment):
-			count = printCountingMap.get("input");
-			if (count > 0) {
-				Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.OPERATION__INPUT));
-				java.util.List<?> list = (java.util.List<?>) o;
-				int index = list.size() - count;
-				if (index >= 0) {
-					o = list.get(index);
-				} else {
-					o = null;
-				}
-				if (o != null) {
-					doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-				}
-				printCountingMap.put("input", count - 1);
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
+			printCountingMap.put("input", count - 1);
 		}
 	}
 	public void print_art_type_Operation_1(art.type.Operation element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		java.lang.String localtab = outertab;
+		int count;
 		//////////////DEFINITION PART BEGINS (CsString):
 		out.print(",");
 		//////////////DEFINITION PART BEGINS (WhiteSpaces):
 		out.print(" ");
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		print_art_type_Operation_1_0(element, localtab, out, printCountingMap);
+		//////////////DEFINITION PART BEGINS (Containment):
+		count = printCountingMap.get("input");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.OPERATION__INPUT));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("input", count - 1);
+		}
 	}
-	public void print_art_type_Operation_1_0(art.type.Operation element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_art_type_Operation_2(art.type.Operation element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		java.lang.String localtab = outertab;
 		int count;
-		int alt = -1;
-		alt=0;
-		int matches=		matchCount(printCountingMap, java.util.Arrays.asList(		"input"		));
-		int tempMatchCount;
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"output"		));
-		if (tempMatchCount > matches) {
-			alt = 1;
-			matches = tempMatchCount;
+		//////////////DEFINITION PART BEGINS (CsString):
+		out.print(":");
+		//////////////DEFINITION PART BEGINS (Containment):
+		count = printCountingMap.get("output");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.OPERATION__OUTPUT));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("output", count - 1);
 		}
-		switch(alt) {
-			case 1:			{
-				//////////////DEFINITION PART BEGINS (CsString):
-				out.print("out");
-				//////////////DEFINITION PART BEGINS (WhiteSpaces):
-				out.print(" ");
-				//////////////DEFINITION PART BEGINS (Containment):
-				count = printCountingMap.get("output");
-				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.OPERATION__OUTPUT));
-					java.util.List<?> list = (java.util.List<?>) o;
-					int index = list.size() - count;
-					if (index >= 0) {
-						o = list.get(index);
-					} else {
-						o = null;
-					}
-					if (o != null) {
-						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-					}
-					printCountingMap.put("output", count - 1);
-				}
+	}
+	public void print_art_type_Operation_3(art.type.Operation element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+		java.lang.String localtab = outertab;
+		int count;
+		//////////////DEFINITION PART BEGINS (CsString):
+		out.print(",");
+		//////////////DEFINITION PART BEGINS (WhiteSpaces):
+		out.print(" ");
+		//////////////DEFINITION PART BEGINS (Containment):
+		count = printCountingMap.get("output");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.OPERATION__OUTPUT));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
 			}
-			break;
-			default:			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("in");
-			//////////////DEFINITION PART BEGINS (WhiteSpaces):
-			out.print(" ");
-			//////////////DEFINITION PART BEGINS (Containment):
-			count = printCountingMap.get("input");
-			if (count > 0) {
-				Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.OPERATION__INPUT));
-				java.util.List<?> list = (java.util.List<?>) o;
-				int index = list.size() - count;
-				if (index >= 0) {
-					o = list.get(index);
-				} else {
-					o = null;
-				}
-				if (o != null) {
-					doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-				}
-				printCountingMap.put("input", count - 1);
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
+			printCountingMap.put("output", count - 1);
 		}
 	}
 	
@@ -2160,23 +1791,6 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 		// print collected hidden tokens
 		int count;
 		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
-		count = printCountingMap.get("name");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__NAME));
-			if (o != null) {
-				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__NAME), element));
-			}
-			printCountingMap.put("name", count - 1);
-		}
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(":");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
 		count = printCountingMap.get("type");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__TYPE));
@@ -2186,6 +1800,19 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getTypedElementTypeReferenceResolver().deResolve((art.DataType) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__TYPE)), element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__TYPE), element));
 			}
 			printCountingMap.put("type", count - 1);
+		}
+		//////////////DEFINITION PART BEGINS (WhiteSpaces):
+		out.print(" ");
+		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
+		count = printCountingMap.get("name");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__NAME));
+			if (o != null) {
+				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__NAME), element));
+			}
+			printCountingMap.put("name", count - 1);
 		}
 	}
 	
@@ -2445,7 +2072,7 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.PORT__LOWER));
 			if (o != null) {
-				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("MULTIPLICITY");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(art.type.TypePackage.PORT__LOWER), element));
 			}
@@ -2458,7 +2085,7 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(art.type.TypePackage.PORT__UPPER));
 			if (o != null) {
-				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("MULTIPLICITY");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(art.type.TypePackage.PORT__UPPER), element));
 			}
@@ -2587,12 +2214,6 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 		//////////////DEFINITION PART BEGINS (WhiteSpaces):
 		out.print(" ");
 		//////////////DEFINITION PART BEGINS (CsString):
-		out.print("<");
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print("implementingClass");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (CsString):
 		out.print(":");
 		//////////////DEFINITION PART BEGINS (WhiteSpaces):
 		out.print(" ");
@@ -2607,8 +2228,6 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 			}
 			printCountingMap.put("implementingClass", count - 1);
 		}
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(">");
 	}
 	
 	public void print_art_implem_OSGiPort(art.implem.OSGiPort element, java.lang.String outertab, java.io.PrintWriter out) {
@@ -2620,12 +2239,6 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 		int count;
 		//////////////DEFINITION PART BEGINS (CsString):
 		out.print("OSGiPort");
-		//////////////DEFINITION PART BEGINS (WhiteSpaces):
-		out.print(" ");
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print("<");
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print("serviceId");
 		//////////////DEFINITION PART BEGINS (WhiteSpaces):
 		out.print(" ");
 		//////////////DEFINITION PART BEGINS (CsString):
@@ -2643,8 +2256,6 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 			}
 			printCountingMap.put("serviceId", count - 1);
 		}
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(">");
 	}
 	
 	public void print_art_group_TypeGroup(art.group.TypeGroup element, java.lang.String outertab, java.io.PrintWriter out) {
@@ -3006,27 +2617,17 @@ public class ArtPrinter implements art.resource.art.IArtTextPrinter {
 		printCountingMap.put("generateInstanceBundle", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print("OSGiType");
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print("<");
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print("generateInstanceBundle");
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(":");
-		//////////////DEFINITION PART BEGINS (PlaceholderUsingDefaultToken):
+		//////////////DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken):
 		count = printCountingMap.get("generateInstanceBundle");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(art.implem.ImplemPackage.OS_GI_TYPE__GENERATE_INSTANCE_BUNDLE));
 			if (o != null) {
-				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				art.resource.art.IArtTokenResolver resolver = tokenResolverFactory.createTokenResolver("T_IMPLEM");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((java.lang.Object) o, element.eClass().getEStructuralFeature(art.implem.ImplemPackage.OS_GI_TYPE__GENERATE_INSTANCE_BUNDLE), element));
 			}
 			printCountingMap.put("generateInstanceBundle", count - 1);
 		}
-		//////////////DEFINITION PART BEGINS (CsString):
-		out.print(">");
 	}
 	
 	public void print_art_type_BasicAttribute(art.type.BasicAttribute element, java.lang.String outertab, java.io.PrintWriter out) {

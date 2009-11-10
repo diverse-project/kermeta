@@ -113,6 +113,9 @@ public class ArtTokenStyleInformationProvider {
 		if ("implementation".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x00, 0x55, 0xbb}, true, false, false, false);
 		}
+		if ("T_IMPLEM".equals(tokenName)) {
+			return new TokenStyleImpl(new int[] {0x00, 0x55, 0xbb}, true, false, false, false);
+		}
 		if ("OSGiComponent".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x00, 0x55, 0xbb}, false, false, false, false);
 		}

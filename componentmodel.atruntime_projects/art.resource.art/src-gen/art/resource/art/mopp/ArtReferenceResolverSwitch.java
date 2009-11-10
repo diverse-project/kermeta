@@ -3,7 +3,6 @@ package art.resource.art.mopp;
 public class ArtReferenceResolverSwitch implements art.resource.art.IArtReferenceResolverSwitch {
 	
 	protected art.resource.art.analysis.ComponentInstanceTypeReferenceResolver componentInstanceTypeReferenceResolver = new art.resource.art.analysis.ComponentInstanceTypeReferenceResolver();
-	protected art.resource.art.analysis.ComponentInstanceGroupsReferenceResolver componentInstanceGroupsReferenceResolver = new art.resource.art.analysis.ComponentInstanceGroupsReferenceResolver();
 	protected art.resource.art.analysis.TransmissionBindingClientReferenceResolver transmissionBindingClientReferenceResolver = new art.resource.art.analysis.TransmissionBindingClientReferenceResolver();
 	protected art.resource.art.analysis.BindingServerInstanceReferenceResolver bindingServerInstanceReferenceResolver = new art.resource.art.analysis.BindingServerInstanceReferenceResolver();
 	protected art.resource.art.analysis.TransmissionBindingServerReferenceResolver transmissionBindingServerReferenceResolver = new art.resource.art.analysis.TransmissionBindingServerReferenceResolver();
@@ -12,7 +11,6 @@ public class ArtReferenceResolverSwitch implements art.resource.art.IArtReferenc
 	protected art.resource.art.analysis.ValuedAttributeAttributeReferenceResolver valuedAttributeAttributeReferenceResolver = new art.resource.art.analysis.ValuedAttributeAttributeReferenceResolver();
 	protected art.resource.art.analysis.DictionaryValuedAttributeAttributeReferenceResolver dictionaryValuedAttributeAttributeReferenceResolver = new art.resource.art.analysis.DictionaryValuedAttributeAttributeReferenceResolver();
 	protected art.resource.art.analysis.DefaultEntryKeyReferenceResolver defaultEntryKeyReferenceResolver = new art.resource.art.analysis.DefaultEntryKeyReferenceResolver();
-	protected art.resource.art.analysis.ComponentTypeGroupsReferenceResolver componentTypeGroupsReferenceResolver = new art.resource.art.analysis.ComponentTypeGroupsReferenceResolver();
 	protected art.resource.art.analysis.TypedElementTypeReferenceResolver typedElementTypeReferenceResolver = new art.resource.art.analysis.TypedElementTypeReferenceResolver();
 	protected art.resource.art.analysis.PortServiceReferenceResolver portServiceReferenceResolver = new art.resource.art.analysis.PortServiceReferenceResolver();
 	protected art.resource.art.analysis.TypeGroupTypesReferenceResolver typeGroupTypesReferenceResolver = new art.resource.art.analysis.TypeGroupTypesReferenceResolver();
@@ -21,10 +19,6 @@ public class ArtReferenceResolverSwitch implements art.resource.art.IArtReferenc
 	
 	public art.resource.art.analysis.ComponentInstanceTypeReferenceResolver getComponentInstanceTypeReferenceResolver() {
 		return componentInstanceTypeReferenceResolver;
-	}
-	
-	public art.resource.art.analysis.ComponentInstanceGroupsReferenceResolver getComponentInstanceGroupsReferenceResolver() {
-		return componentInstanceGroupsReferenceResolver;
 	}
 	
 	public art.resource.art.analysis.TransmissionBindingClientReferenceResolver getTransmissionBindingClientReferenceResolver() {
@@ -59,10 +53,6 @@ public class ArtReferenceResolverSwitch implements art.resource.art.IArtReferenc
 		return defaultEntryKeyReferenceResolver;
 	}
 	
-	public art.resource.art.analysis.ComponentTypeGroupsReferenceResolver getComponentTypeGroupsReferenceResolver() {
-		return componentTypeGroupsReferenceResolver;
-	}
-	
 	public art.resource.art.analysis.TypedElementTypeReferenceResolver getTypedElementTypeReferenceResolver() {
 		return typedElementTypeReferenceResolver;
 	}
@@ -85,7 +75,6 @@ public class ArtReferenceResolverSwitch implements art.resource.art.IArtReferenc
 	
 	public void setOptions(java.util.Map<?, ?> options) {
 		componentInstanceTypeReferenceResolver.setOptions(options);
-		componentInstanceGroupsReferenceResolver.setOptions(options);
 		transmissionBindingClientReferenceResolver.setOptions(options);
 		bindingServerInstanceReferenceResolver.setOptions(options);
 		transmissionBindingServerReferenceResolver.setOptions(options);
@@ -94,7 +83,6 @@ public class ArtReferenceResolverSwitch implements art.resource.art.IArtReferenc
 		valuedAttributeAttributeReferenceResolver.setOptions(options);
 		dictionaryValuedAttributeAttributeReferenceResolver.setOptions(options);
 		defaultEntryKeyReferenceResolver.setOptions(options);
-		componentTypeGroupsReferenceResolver.setOptions(options);
 		typedElementTypeReferenceResolver.setOptions(options);
 		portServiceReferenceResolver.setOptions(options);
 		typeGroupTypesReferenceResolver.setOptions(options);
@@ -108,13 +96,6 @@ public class ArtReferenceResolverSwitch implements art.resource.art.IArtReferenc
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature("type");
 			if (feature instanceof org.eclipse.emf.ecore.EReference) {
 				componentInstanceTypeReferenceResolver.resolve(identifier, (art.instance.ComponentInstance) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
-			}
-		}
-		if (art.instance.InstancePackage.eINSTANCE.getComponentInstance().isInstance(container)) {
-			ArtFuzzyResolveResult<art.group.InstanceGroup> frr = new ArtFuzzyResolveResult<art.group.InstanceGroup>(result);
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature("groups");
-			if (feature instanceof org.eclipse.emf.ecore.EReference) {
-				componentInstanceGroupsReferenceResolver.resolve(identifier, (art.instance.ComponentInstance) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
 		if (art.instance.InstancePackage.eINSTANCE.getTransmissionBinding().isInstance(container)) {
@@ -171,13 +152,6 @@ public class ArtReferenceResolverSwitch implements art.resource.art.IArtReferenc
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature("key");
 			if (feature instanceof org.eclipse.emf.ecore.EReference) {
 				defaultEntryKeyReferenceResolver.resolve(identifier, (art.instance.DefaultEntry) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
-			}
-		}
-		if (art.type.TypePackage.eINSTANCE.getComponentType().isInstance(container)) {
-			ArtFuzzyResolveResult<art.group.TypeGroup> frr = new ArtFuzzyResolveResult<art.group.TypeGroup>(result);
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature("groups");
-			if (feature instanceof org.eclipse.emf.ecore.EReference) {
-				componentTypeGroupsReferenceResolver.resolve(identifier, (art.type.ComponentType) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
 		if (art.ArtPackage.eINSTANCE.getTypedElement().isInstance(container)) {

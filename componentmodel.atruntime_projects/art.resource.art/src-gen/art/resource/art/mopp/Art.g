@@ -890,142 +890,14 @@ parse_art_instance_PrimitiveInstance returns [art.instance.PrimitiveInstance ele
 		
 	)?	
 	{
-		// expected element before STAR or QUESTIONMARK or PLUS
-	}
-	(
-		{
-			// expected element is a Compound
-		}
-		(
-			{
-				// expected element is a CsString
-			}
-			a8 = 'groups' {
-				if (element == null) {
-					element = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken)a8, element);
-			}
-			
-			{
-				// expected element is a CsString
-			}
-			a9 = ':' {
-				if (element == null) {
-					element = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken)a9, element);
-			}
-			
-			{
-				// expected element is a Terminal
-			}
-			(
-				a10 = TEXT				
-				{
-					if (terminateParsing) {
-						throw new art.resource.art.mopp.ArtTerminateParsingException();
-					}
-					if (element == null) {
-						element = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
-					}
-					if (a10 != null) {
-						art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
-						tokenResolver.setOptions(getOptions());
-						art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-						tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(art.instance.InstancePackage.PRIMITIVE_INSTANCE__GROUPS), result);
-						java.lang.Object resolvedObject = result.getResolvedToken();
-						if (resolvedObject == null) {
-							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a10).getLine(), ((org.antlr.runtime.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a10).getStartIndex(), ((org.antlr.runtime.CommonToken) a10).getStopIndex());
-						}
-						String resolved = (String) resolvedObject;
-						art.group.InstanceGroup proxy = art.group.GroupFactory.eINSTANCE.createInstanceGroup();
-						collectHiddenTokens(element);
-						registerContextDependentProxy(new art.resource.art.mopp.ArtContextDependentURIFragmentFactory<art.instance.ComponentInstance, art.group.InstanceGroup>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentInstanceGroupsReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.instance.InstancePackage.PRIMITIVE_INSTANCE__GROUPS), resolved, proxy);
-						if (proxy != null) {
-							addObjectToList(element, art.instance.InstancePackage.PRIMITIVE_INSTANCE__GROUPS, proxy);
-						}
-						collectHiddenTokens(element);
-						copyLocalizationInfos((CommonToken) a10, element);
-						copyLocalizationInfos((CommonToken) a10, proxy);
-					}
-				}
-			)
-			
-			{
-				// expected element before STAR or QUESTIONMARK or PLUS
-			}
-			(
-				{
-					// expected element is a Compound
-				}
-				(
-					{
-						// expected element is a CsString
-					}
-					a11 = ',' {
-						if (element == null) {
-							element = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
-						}
-						collectHiddenTokens(element);
-						copyLocalizationInfos((CommonToken)a11, element);
-					}
-					
-					{
-						// expected element is a Terminal
-					}
-					(
-						a12 = TEXT						
-						{
-							if (terminateParsing) {
-								throw new art.resource.art.mopp.ArtTerminateParsingException();
-							}
-							if (element == null) {
-								element = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
-							}
-							if (a12 != null) {
-								art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
-								tokenResolver.setOptions(getOptions());
-								art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(art.instance.InstancePackage.PRIMITIVE_INSTANCE__GROUPS), result);
-								java.lang.Object resolvedObject = result.getResolvedToken();
-								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a12).getLine(), ((org.antlr.runtime.CommonToken) a12).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a12).getStartIndex(), ((org.antlr.runtime.CommonToken) a12).getStopIndex());
-								}
-								String resolved = (String) resolvedObject;
-								art.group.InstanceGroup proxy = art.group.GroupFactory.eINSTANCE.createInstanceGroup();
-								collectHiddenTokens(element);
-								registerContextDependentProxy(new art.resource.art.mopp.ArtContextDependentURIFragmentFactory<art.instance.ComponentInstance, art.group.InstanceGroup>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentInstanceGroupsReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.instance.InstancePackage.PRIMITIVE_INSTANCE__GROUPS), resolved, proxy);
-								if (proxy != null) {
-									addObjectToList(element, art.instance.InstancePackage.PRIMITIVE_INSTANCE__GROUPS, proxy);
-								}
-								collectHiddenTokens(element);
-								copyLocalizationInfos((CommonToken) a12, element);
-								copyLocalizationInfos((CommonToken) a12, proxy);
-							}
-						}
-					)
-					
-				)
-				
-			)*			{
-				// expected element after STAR or PLUS
-			}
-			
-		)
-		
-	)?	
-	{
 		// expected element is a CsString
 	}
-	a13 = '{' {
+	a8 = '{' {
 		if (element == null) {
 			element = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a13, element);
+		copyLocalizationInfos((CommonToken)a8, element);
 	}
 	
 	{
@@ -1044,19 +916,19 @@ parse_art_instance_PrimitiveInstance returns [art.instance.PrimitiveInstance ele
 					// expected element is a Terminal
 				}
 				(
-					a14_0 = parse_art_instance_AttributeInstance					{
+					a9_0 = parse_art_instance_AttributeInstance					{
 						if (terminateParsing) {
 							throw new art.resource.art.mopp.ArtTerminateParsingException();
 						}
 						if (element == null) {
 							element = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
 						}
-						if (a14_0 != null) {
-							if (a14_0 != null) {
-								addObjectToList(element, art.instance.InstancePackage.PRIMITIVE_INSTANCE__ATTRIBUTE, a14_0);
+						if (a9_0 != null) {
+							if (a9_0 != null) {
+								addObjectToList(element, art.instance.InstancePackage.PRIMITIVE_INSTANCE__ATTRIBUTE, a9_0);
 							}
 							collectHiddenTokens(element);
-							copyLocalizationInfos(a14_0, element); 						}
+							copyLocalizationInfos(a9_0, element); 						}
 					}
 				)
 				
@@ -1065,19 +937,19 @@ parse_art_instance_PrimitiveInstance returns [art.instance.PrimitiveInstance ele
 					// expected element is a Terminal
 				}
 				(
-					a15_0 = parse_art_instance_TransmissionBinding					{
+					a10_0 = parse_art_instance_TransmissionBinding					{
 						if (terminateParsing) {
 							throw new art.resource.art.mopp.ArtTerminateParsingException();
 						}
 						if (element == null) {
 							element = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
 						}
-						if (a15_0 != null) {
-							if (a15_0 != null) {
-								addObjectToList(element, art.instance.InstancePackage.PRIMITIVE_INSTANCE__BINDING, a15_0);
+						if (a10_0 != null) {
+							if (a10_0 != null) {
+								addObjectToList(element, art.instance.InstancePackage.PRIMITIVE_INSTANCE__BINDING, a10_0);
 							}
 							collectHiddenTokens(element);
-							copyLocalizationInfos(a15_0, element); 						}
+							copyLocalizationInfos(a10_0, element); 						}
 					}
 				)
 				
@@ -1092,12 +964,12 @@ parse_art_instance_PrimitiveInstance returns [art.instance.PrimitiveInstance ele
 	{
 		// expected element is a CsString
 	}
-	a16 = '}' {
+	a11 = '}' {
 		if (element == null) {
 			element = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a16, element);
+		copyLocalizationInfos((CommonToken)a11, element);
 	}
 	
 ;
@@ -1279,142 +1151,14 @@ parse_art_instance_CompositeInstance returns [art.instance.CompositeInstance ele
 		
 	)?	
 	{
-		// expected element before STAR or QUESTIONMARK or PLUS
-	}
-	(
-		{
-			// expected element is a Compound
-		}
-		(
-			{
-				// expected element is a CsString
-			}
-			a8 = 'groups' {
-				if (element == null) {
-					element = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken)a8, element);
-			}
-			
-			{
-				// expected element is a CsString
-			}
-			a9 = ':' {
-				if (element == null) {
-					element = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken)a9, element);
-			}
-			
-			{
-				// expected element is a Terminal
-			}
-			(
-				a10 = TEXT				
-				{
-					if (terminateParsing) {
-						throw new art.resource.art.mopp.ArtTerminateParsingException();
-					}
-					if (element == null) {
-						element = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
-					}
-					if (a10 != null) {
-						art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
-						tokenResolver.setOptions(getOptions());
-						art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-						tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(art.instance.InstancePackage.COMPOSITE_INSTANCE__GROUPS), result);
-						java.lang.Object resolvedObject = result.getResolvedToken();
-						if (resolvedObject == null) {
-							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a10).getLine(), ((org.antlr.runtime.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a10).getStartIndex(), ((org.antlr.runtime.CommonToken) a10).getStopIndex());
-						}
-						String resolved = (String) resolvedObject;
-						art.group.InstanceGroup proxy = art.group.GroupFactory.eINSTANCE.createInstanceGroup();
-						collectHiddenTokens(element);
-						registerContextDependentProxy(new art.resource.art.mopp.ArtContextDependentURIFragmentFactory<art.instance.ComponentInstance, art.group.InstanceGroup>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentInstanceGroupsReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.instance.InstancePackage.COMPOSITE_INSTANCE__GROUPS), resolved, proxy);
-						if (proxy != null) {
-							addObjectToList(element, art.instance.InstancePackage.COMPOSITE_INSTANCE__GROUPS, proxy);
-						}
-						collectHiddenTokens(element);
-						copyLocalizationInfos((CommonToken) a10, element);
-						copyLocalizationInfos((CommonToken) a10, proxy);
-					}
-				}
-			)
-			
-			{
-				// expected element before STAR or QUESTIONMARK or PLUS
-			}
-			(
-				{
-					// expected element is a Compound
-				}
-				(
-					{
-						// expected element is a CsString
-					}
-					a11 = ',' {
-						if (element == null) {
-							element = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
-						}
-						collectHiddenTokens(element);
-						copyLocalizationInfos((CommonToken)a11, element);
-					}
-					
-					{
-						// expected element is a Terminal
-					}
-					(
-						a12 = TEXT						
-						{
-							if (terminateParsing) {
-								throw new art.resource.art.mopp.ArtTerminateParsingException();
-							}
-							if (element == null) {
-								element = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
-							}
-							if (a12 != null) {
-								art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
-								tokenResolver.setOptions(getOptions());
-								art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(art.instance.InstancePackage.COMPOSITE_INSTANCE__GROUPS), result);
-								java.lang.Object resolvedObject = result.getResolvedToken();
-								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a12).getLine(), ((org.antlr.runtime.CommonToken) a12).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a12).getStartIndex(), ((org.antlr.runtime.CommonToken) a12).getStopIndex());
-								}
-								String resolved = (String) resolvedObject;
-								art.group.InstanceGroup proxy = art.group.GroupFactory.eINSTANCE.createInstanceGroup();
-								collectHiddenTokens(element);
-								registerContextDependentProxy(new art.resource.art.mopp.ArtContextDependentURIFragmentFactory<art.instance.ComponentInstance, art.group.InstanceGroup>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentInstanceGroupsReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.instance.InstancePackage.COMPOSITE_INSTANCE__GROUPS), resolved, proxy);
-								if (proxy != null) {
-									addObjectToList(element, art.instance.InstancePackage.COMPOSITE_INSTANCE__GROUPS, proxy);
-								}
-								collectHiddenTokens(element);
-								copyLocalizationInfos((CommonToken) a12, element);
-								copyLocalizationInfos((CommonToken) a12, proxy);
-							}
-						}
-					)
-					
-				)
-				
-			)*			{
-				// expected element after STAR or PLUS
-			}
-			
-		)
-		
-	)?	
-	{
 		// expected element is a CsString
 	}
-	a13 = '{' {
+	a8 = '{' {
 		if (element == null) {
 			element = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a13, element);
+		copyLocalizationInfos((CommonToken)a8, element);
 	}
 	
 	{
@@ -1433,19 +1177,19 @@ parse_art_instance_CompositeInstance returns [art.instance.CompositeInstance ele
 					// expected element is a Terminal
 				}
 				(
-					a14_0 = parse_art_instance_AttributeInstance					{
+					a9_0 = parse_art_instance_AttributeInstance					{
 						if (terminateParsing) {
 							throw new art.resource.art.mopp.ArtTerminateParsingException();
 						}
 						if (element == null) {
 							element = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
 						}
-						if (a14_0 != null) {
-							if (a14_0 != null) {
-								addObjectToList(element, art.instance.InstancePackage.COMPOSITE_INSTANCE__ATTRIBUTE, a14_0);
+						if (a9_0 != null) {
+							if (a9_0 != null) {
+								addObjectToList(element, art.instance.InstancePackage.COMPOSITE_INSTANCE__ATTRIBUTE, a9_0);
 							}
 							collectHiddenTokens(element);
-							copyLocalizationInfos(a14_0, element); 						}
+							copyLocalizationInfos(a9_0, element); 						}
 					}
 				)
 				
@@ -1454,19 +1198,19 @@ parse_art_instance_CompositeInstance returns [art.instance.CompositeInstance ele
 					// expected element is a Terminal
 				}
 				(
-					a15_0 = parse_art_instance_TransmissionBinding					{
+					a10_0 = parse_art_instance_TransmissionBinding					{
 						if (terminateParsing) {
 							throw new art.resource.art.mopp.ArtTerminateParsingException();
 						}
 						if (element == null) {
 							element = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
 						}
-						if (a15_0 != null) {
-							if (a15_0 != null) {
-								addObjectToList(element, art.instance.InstancePackage.COMPOSITE_INSTANCE__BINDING, a15_0);
+						if (a10_0 != null) {
+							if (a10_0 != null) {
+								addObjectToList(element, art.instance.InstancePackage.COMPOSITE_INSTANCE__BINDING, a10_0);
 							}
 							collectHiddenTokens(element);
-							copyLocalizationInfos(a15_0, element); 						}
+							copyLocalizationInfos(a10_0, element); 						}
 					}
 				)
 				
@@ -1475,19 +1219,19 @@ parse_art_instance_CompositeInstance returns [art.instance.CompositeInstance ele
 					// expected element is a Terminal
 				}
 				(
-					a16_0 = parse_art_instance_ComponentInstance					{
+					a11_0 = parse_art_instance_ComponentInstance					{
 						if (terminateParsing) {
 							throw new art.resource.art.mopp.ArtTerminateParsingException();
 						}
 						if (element == null) {
 							element = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
 						}
-						if (a16_0 != null) {
-							if (a16_0 != null) {
-								addObjectToList(element, art.instance.InstancePackage.COMPOSITE_INSTANCE__SUB_COMPONENT, a16_0);
+						if (a11_0 != null) {
+							if (a11_0 != null) {
+								addObjectToList(element, art.instance.InstancePackage.COMPOSITE_INSTANCE__SUB_COMPONENT, a11_0);
 							}
 							collectHiddenTokens(element);
-							copyLocalizationInfos(a16_0, element); 						}
+							copyLocalizationInfos(a11_0, element); 						}
 					}
 				)
 				
@@ -1496,19 +1240,19 @@ parse_art_instance_CompositeInstance returns [art.instance.CompositeInstance ele
 					// expected element is a Terminal
 				}
 				(
-					a17_0 = parse_art_instance_DelegationBinding					{
+					a12_0 = parse_art_instance_DelegationBinding					{
 						if (terminateParsing) {
 							throw new art.resource.art.mopp.ArtTerminateParsingException();
 						}
 						if (element == null) {
 							element = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
 						}
-						if (a17_0 != null) {
-							if (a17_0 != null) {
-								addObjectToList(element, art.instance.InstancePackage.COMPOSITE_INSTANCE__DELEGATION, a17_0);
+						if (a12_0 != null) {
+							if (a12_0 != null) {
+								addObjectToList(element, art.instance.InstancePackage.COMPOSITE_INSTANCE__DELEGATION, a12_0);
 							}
 							collectHiddenTokens(element);
-							copyLocalizationInfos(a17_0, element); 						}
+							copyLocalizationInfos(a12_0, element); 						}
 					}
 				)
 				
@@ -1523,12 +1267,12 @@ parse_art_instance_CompositeInstance returns [art.instance.CompositeInstance ele
 	{
 		// expected element is a CsString
 	}
-	a18 = '}' {
+	a13 = '}' {
 		if (element == null) {
 			element = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a18, element);
+		copyLocalizationInfos((CommonToken)a13, element);
 	}
 	
 ;
@@ -2499,142 +2243,14 @@ parse_art_type_PrimitiveType returns [art.type.PrimitiveType element = null]
 		
 	)?	
 	{
-		// expected element before STAR or QUESTIONMARK or PLUS
-	}
-	(
-		{
-			// expected element is a Compound
-		}
-		(
-			{
-				// expected element is a CsString
-			}
-			a4 = 'groups' {
-				if (element == null) {
-					element = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken)a4, element);
-			}
-			
-			{
-				// expected element is a CsString
-			}
-			a5 = ':' {
-				if (element == null) {
-					element = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken)a5, element);
-			}
-			
-			{
-				// expected element is a Terminal
-			}
-			(
-				a6 = TEXT				
-				{
-					if (terminateParsing) {
-						throw new art.resource.art.mopp.ArtTerminateParsingException();
-					}
-					if (element == null) {
-						element = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
-					}
-					if (a6 != null) {
-						art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
-						tokenResolver.setOptions(getOptions());
-						art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-						tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(art.type.TypePackage.PRIMITIVE_TYPE__GROUPS), result);
-						java.lang.Object resolvedObject = result.getResolvedToken();
-						if (resolvedObject == null) {
-							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a6).getLine(), ((org.antlr.runtime.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a6).getStartIndex(), ((org.antlr.runtime.CommonToken) a6).getStopIndex());
-						}
-						String resolved = (String) resolvedObject;
-						art.group.TypeGroup proxy = art.group.GroupFactory.eINSTANCE.createTypeGroup();
-						collectHiddenTokens(element);
-						registerContextDependentProxy(new art.resource.art.mopp.ArtContextDependentURIFragmentFactory<art.type.ComponentType, art.group.TypeGroup>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentTypeGroupsReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.type.TypePackage.PRIMITIVE_TYPE__GROUPS), resolved, proxy);
-						if (proxy != null) {
-							addObjectToList(element, art.type.TypePackage.PRIMITIVE_TYPE__GROUPS, proxy);
-						}
-						collectHiddenTokens(element);
-						copyLocalizationInfos((CommonToken) a6, element);
-						copyLocalizationInfos((CommonToken) a6, proxy);
-					}
-				}
-			)
-			
-			{
-				// expected element before STAR or QUESTIONMARK or PLUS
-			}
-			(
-				{
-					// expected element is a Compound
-				}
-				(
-					{
-						// expected element is a CsString
-					}
-					a7 = ',' {
-						if (element == null) {
-							element = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
-						}
-						collectHiddenTokens(element);
-						copyLocalizationInfos((CommonToken)a7, element);
-					}
-					
-					{
-						// expected element is a Terminal
-					}
-					(
-						a8 = TEXT						
-						{
-							if (terminateParsing) {
-								throw new art.resource.art.mopp.ArtTerminateParsingException();
-							}
-							if (element == null) {
-								element = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
-							}
-							if (a8 != null) {
-								art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
-								tokenResolver.setOptions(getOptions());
-								art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(art.type.TypePackage.PRIMITIVE_TYPE__GROUPS), result);
-								java.lang.Object resolvedObject = result.getResolvedToken();
-								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a8).getLine(), ((org.antlr.runtime.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a8).getStartIndex(), ((org.antlr.runtime.CommonToken) a8).getStopIndex());
-								}
-								String resolved = (String) resolvedObject;
-								art.group.TypeGroup proxy = art.group.GroupFactory.eINSTANCE.createTypeGroup();
-								collectHiddenTokens(element);
-								registerContextDependentProxy(new art.resource.art.mopp.ArtContextDependentURIFragmentFactory<art.type.ComponentType, art.group.TypeGroup>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentTypeGroupsReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.type.TypePackage.PRIMITIVE_TYPE__GROUPS), resolved, proxy);
-								if (proxy != null) {
-									addObjectToList(element, art.type.TypePackage.PRIMITIVE_TYPE__GROUPS, proxy);
-								}
-								collectHiddenTokens(element);
-								copyLocalizationInfos((CommonToken) a8, element);
-								copyLocalizationInfos((CommonToken) a8, proxy);
-							}
-						}
-					)
-					
-				)
-				
-			)*			{
-				// expected element after STAR or PLUS
-			}
-			
-		)
-		
-	)?	
-	{
 		// expected element is a CsString
 	}
-	a9 = '{' {
+	a4 = '{' {
 		if (element == null) {
 			element = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a9, element);
+		copyLocalizationInfos((CommonToken)a4, element);
 	}
 	
 	{
@@ -2649,19 +2265,19 @@ parse_art_type_PrimitiveType returns [art.type.PrimitiveType element = null]
 				// expected element is a Terminal
 			}
 			(
-				a10_0 = parse_art_type_Port				{
+				a5_0 = parse_art_type_Port				{
 					if (terminateParsing) {
 						throw new art.resource.art.mopp.ArtTerminateParsingException();
 					}
 					if (element == null) {
 						element = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
 					}
-					if (a10_0 != null) {
-						if (a10_0 != null) {
-							addObjectToList(element, art.type.TypePackage.PRIMITIVE_TYPE__PORT, a10_0);
+					if (a5_0 != null) {
+						if (a5_0 != null) {
+							addObjectToList(element, art.type.TypePackage.PRIMITIVE_TYPE__PORT, a5_0);
 						}
 						collectHiddenTokens(element);
-						copyLocalizationInfos(a10_0, element); 					}
+						copyLocalizationInfos(a5_0, element); 					}
 				}
 			)
 			
@@ -2670,19 +2286,19 @@ parse_art_type_PrimitiveType returns [art.type.PrimitiveType element = null]
 				// expected element is a Terminal
 			}
 			(
-				a11_0 = parse_art_type_Attribute				{
+				a6_0 = parse_art_type_Attribute				{
 					if (terminateParsing) {
 						throw new art.resource.art.mopp.ArtTerminateParsingException();
 					}
 					if (element == null) {
 						element = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
 					}
-					if (a11_0 != null) {
-						if (a11_0 != null) {
-							addObjectToList(element, art.type.TypePackage.PRIMITIVE_TYPE__ATTRIBUTE, a11_0);
+					if (a6_0 != null) {
+						if (a6_0 != null) {
+							addObjectToList(element, art.type.TypePackage.PRIMITIVE_TYPE__ATTRIBUTE, a6_0);
 						}
 						collectHiddenTokens(element);
-						copyLocalizationInfos(a11_0, element); 					}
+						copyLocalizationInfos(a6_0, element); 					}
 				}
 			)
 			
@@ -2695,12 +2311,12 @@ parse_art_type_PrimitiveType returns [art.type.PrimitiveType element = null]
 	{
 		// expected element is a CsString
 	}
-	a12 = '}' {
+	a7 = '}' {
 		if (element == null) {
 			element = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a12, element);
+		copyLocalizationInfos((CommonToken)a7, element);
 	}
 	
 ;
@@ -2794,142 +2410,14 @@ parse_art_type_CompositeType returns [art.type.CompositeType element = null]
 		
 	)?	
 	{
-		// expected element before STAR or QUESTIONMARK or PLUS
-	}
-	(
-		{
-			// expected element is a Compound
-		}
-		(
-			{
-				// expected element is a CsString
-			}
-			a4 = 'groups' {
-				if (element == null) {
-					element = art.type.TypeFactory.eINSTANCE.createCompositeType();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken)a4, element);
-			}
-			
-			{
-				// expected element is a CsString
-			}
-			a5 = ':' {
-				if (element == null) {
-					element = art.type.TypeFactory.eINSTANCE.createCompositeType();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken)a5, element);
-			}
-			
-			{
-				// expected element is a Terminal
-			}
-			(
-				a6 = TEXT				
-				{
-					if (terminateParsing) {
-						throw new art.resource.art.mopp.ArtTerminateParsingException();
-					}
-					if (element == null) {
-						element = art.type.TypeFactory.eINSTANCE.createCompositeType();
-					}
-					if (a6 != null) {
-						art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
-						tokenResolver.setOptions(getOptions());
-						art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-						tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(art.type.TypePackage.COMPOSITE_TYPE__GROUPS), result);
-						java.lang.Object resolvedObject = result.getResolvedToken();
-						if (resolvedObject == null) {
-							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a6).getLine(), ((org.antlr.runtime.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a6).getStartIndex(), ((org.antlr.runtime.CommonToken) a6).getStopIndex());
-						}
-						String resolved = (String) resolvedObject;
-						art.group.TypeGroup proxy = art.group.GroupFactory.eINSTANCE.createTypeGroup();
-						collectHiddenTokens(element);
-						registerContextDependentProxy(new art.resource.art.mopp.ArtContextDependentURIFragmentFactory<art.type.ComponentType, art.group.TypeGroup>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentTypeGroupsReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.type.TypePackage.COMPOSITE_TYPE__GROUPS), resolved, proxy);
-						if (proxy != null) {
-							addObjectToList(element, art.type.TypePackage.COMPOSITE_TYPE__GROUPS, proxy);
-						}
-						collectHiddenTokens(element);
-						copyLocalizationInfos((CommonToken) a6, element);
-						copyLocalizationInfos((CommonToken) a6, proxy);
-					}
-				}
-			)
-			
-			{
-				// expected element before STAR or QUESTIONMARK or PLUS
-			}
-			(
-				{
-					// expected element is a Compound
-				}
-				(
-					{
-						// expected element is a CsString
-					}
-					a7 = ',' {
-						if (element == null) {
-							element = art.type.TypeFactory.eINSTANCE.createCompositeType();
-						}
-						collectHiddenTokens(element);
-						copyLocalizationInfos((CommonToken)a7, element);
-					}
-					
-					{
-						// expected element is a Terminal
-					}
-					(
-						a8 = TEXT						
-						{
-							if (terminateParsing) {
-								throw new art.resource.art.mopp.ArtTerminateParsingException();
-							}
-							if (element == null) {
-								element = art.type.TypeFactory.eINSTANCE.createCompositeType();
-							}
-							if (a8 != null) {
-								art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
-								tokenResolver.setOptions(getOptions());
-								art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-								tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(art.type.TypePackage.COMPOSITE_TYPE__GROUPS), result);
-								java.lang.Object resolvedObject = result.getResolvedToken();
-								if (resolvedObject == null) {
-									addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a8).getLine(), ((org.antlr.runtime.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a8).getStartIndex(), ((org.antlr.runtime.CommonToken) a8).getStopIndex());
-								}
-								String resolved = (String) resolvedObject;
-								art.group.TypeGroup proxy = art.group.GroupFactory.eINSTANCE.createTypeGroup();
-								collectHiddenTokens(element);
-								registerContextDependentProxy(new art.resource.art.mopp.ArtContextDependentURIFragmentFactory<art.type.ComponentType, art.group.TypeGroup>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getComponentTypeGroupsReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(art.type.TypePackage.COMPOSITE_TYPE__GROUPS), resolved, proxy);
-								if (proxy != null) {
-									addObjectToList(element, art.type.TypePackage.COMPOSITE_TYPE__GROUPS, proxy);
-								}
-								collectHiddenTokens(element);
-								copyLocalizationInfos((CommonToken) a8, element);
-								copyLocalizationInfos((CommonToken) a8, proxy);
-							}
-						}
-					)
-					
-				)
-				
-			)*			{
-				// expected element after STAR or PLUS
-			}
-			
-		)
-		
-	)?	
-	{
 		// expected element is a CsString
 	}
-	a9 = '{' {
+	a4 = '{' {
 		if (element == null) {
 			element = art.type.TypeFactory.eINSTANCE.createCompositeType();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a9, element);
+		copyLocalizationInfos((CommonToken)a4, element);
 	}
 	
 	{
@@ -2944,19 +2432,19 @@ parse_art_type_CompositeType returns [art.type.CompositeType element = null]
 				// expected element is a Terminal
 			}
 			(
-				a10_0 = parse_art_type_Port				{
+				a5_0 = parse_art_type_Port				{
 					if (terminateParsing) {
 						throw new art.resource.art.mopp.ArtTerminateParsingException();
 					}
 					if (element == null) {
 						element = art.type.TypeFactory.eINSTANCE.createCompositeType();
 					}
-					if (a10_0 != null) {
-						if (a10_0 != null) {
-							addObjectToList(element, art.type.TypePackage.COMPOSITE_TYPE__PORT, a10_0);
+					if (a5_0 != null) {
+						if (a5_0 != null) {
+							addObjectToList(element, art.type.TypePackage.COMPOSITE_TYPE__PORT, a5_0);
 						}
 						collectHiddenTokens(element);
-						copyLocalizationInfos(a10_0, element); 					}
+						copyLocalizationInfos(a5_0, element); 					}
 				}
 			)
 			
@@ -2965,19 +2453,19 @@ parse_art_type_CompositeType returns [art.type.CompositeType element = null]
 				// expected element is a Terminal
 			}
 			(
-				a11_0 = parse_art_type_Attribute				{
+				a6_0 = parse_art_type_Attribute				{
 					if (terminateParsing) {
 						throw new art.resource.art.mopp.ArtTerminateParsingException();
 					}
 					if (element == null) {
 						element = art.type.TypeFactory.eINSTANCE.createCompositeType();
 					}
-					if (a11_0 != null) {
-						if (a11_0 != null) {
-							addObjectToList(element, art.type.TypePackage.COMPOSITE_TYPE__ATTRIBUTE, a11_0);
+					if (a6_0 != null) {
+						if (a6_0 != null) {
+							addObjectToList(element, art.type.TypePackage.COMPOSITE_TYPE__ATTRIBUTE, a6_0);
 						}
 						collectHiddenTokens(element);
-						copyLocalizationInfos(a11_0, element); 					}
+						copyLocalizationInfos(a6_0, element); 					}
 				}
 			)
 			
@@ -2990,12 +2478,12 @@ parse_art_type_CompositeType returns [art.type.CompositeType element = null]
 	{
 		// expected element is a CsString
 	}
-	a12 = '}' {
+	a7 = '}' {
 		if (element == null) {
 			element = art.type.TypeFactory.eINSTANCE.createCompositeType();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a12, element);
+		copyLocalizationInfos((CommonToken)a7, element);
 	}
 	
 ;
@@ -3066,65 +2554,22 @@ parse_art_type_Operation returns [art.type.Operation element = null]
 		}
 		(
 			{
-				// expected element is a CsString
-			}
-			a3 = 'in' {
-				if (element == null) {
-					element = art.type.TypeFactory.eINSTANCE.createOperation();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken)a3, element);
-			}
-			
-			{
 				// expected element is a Terminal
 			}
 			(
-				a4_0 = parse_art_type_Parameter				{
+				a3_0 = parse_art_type_Parameter				{
 					if (terminateParsing) {
 						throw new art.resource.art.mopp.ArtTerminateParsingException();
 					}
 					if (element == null) {
 						element = art.type.TypeFactory.eINSTANCE.createOperation();
 					}
-					if (a4_0 != null) {
-						if (a4_0 != null) {
-							addObjectToList(element, art.type.TypePackage.OPERATION__INPUT, a4_0);
+					if (a3_0 != null) {
+						if (a3_0 != null) {
+							addObjectToList(element, art.type.TypePackage.OPERATION__INPUT, a3_0);
 						}
 						collectHiddenTokens(element);
-						copyLocalizationInfos(a4_0, element); 					}
-				}
-			)
-			
-			
-			|			{
-				// expected element is a CsString
-			}
-			a5 = 'out' {
-				if (element == null) {
-					element = art.type.TypeFactory.eINSTANCE.createOperation();
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken)a5, element);
-			}
-			
-			{
-				// expected element is a Terminal
-			}
-			(
-				a6_0 = parse_art_type_Parameter				{
-					if (terminateParsing) {
-						throw new art.resource.art.mopp.ArtTerminateParsingException();
-					}
-					if (element == null) {
-						element = art.type.TypeFactory.eINSTANCE.createOperation();
-					}
-					if (a6_0 != null) {
-						if (a6_0 != null) {
-							addObjectToList(element, art.type.TypePackage.OPERATION__OUTPUT, a6_0);
-						}
-						collectHiddenTokens(element);
-						copyLocalizationInfos(a6_0, element); 					}
+						copyLocalizationInfos(a3_0, element); 					}
 				}
 			)
 			
@@ -3142,81 +2587,32 @@ parse_art_type_Operation returns [art.type.Operation element = null]
 			{
 				// expected element is a CsString
 			}
-			a7 = ',' {
+			a4 = ',' {
 				if (element == null) {
 					element = art.type.TypeFactory.eINSTANCE.createOperation();
 				}
 				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken)a7, element);
+				copyLocalizationInfos((CommonToken)a4, element);
 			}
 			
 			{
-				// expected element is a Compound
+				// expected element is a Terminal
 			}
 			(
-				{
-					// expected element is a CsString
-				}
-				a8 = 'in' {
+				a5_0 = parse_art_type_Parameter				{
+					if (terminateParsing) {
+						throw new art.resource.art.mopp.ArtTerminateParsingException();
+					}
 					if (element == null) {
 						element = art.type.TypeFactory.eINSTANCE.createOperation();
 					}
-					collectHiddenTokens(element);
-					copyLocalizationInfos((CommonToken)a8, element);
-				}
-				
-				{
-					// expected element is a Terminal
-				}
-				(
-					a9_0 = parse_art_type_Parameter					{
-						if (terminateParsing) {
-							throw new art.resource.art.mopp.ArtTerminateParsingException();
+					if (a5_0 != null) {
+						if (a5_0 != null) {
+							addObjectToList(element, art.type.TypePackage.OPERATION__INPUT, a5_0);
 						}
-						if (element == null) {
-							element = art.type.TypeFactory.eINSTANCE.createOperation();
-						}
-						if (a9_0 != null) {
-							if (a9_0 != null) {
-								addObjectToList(element, art.type.TypePackage.OPERATION__INPUT, a9_0);
-							}
-							collectHiddenTokens(element);
-							copyLocalizationInfos(a9_0, element); 						}
-					}
-				)
-				
-				
-				|				{
-					// expected element is a CsString
+						collectHiddenTokens(element);
+						copyLocalizationInfos(a5_0, element); 					}
 				}
-				a10 = 'out' {
-					if (element == null) {
-						element = art.type.TypeFactory.eINSTANCE.createOperation();
-					}
-					collectHiddenTokens(element);
-					copyLocalizationInfos((CommonToken)a10, element);
-				}
-				
-				{
-					// expected element is a Terminal
-				}
-				(
-					a11_0 = parse_art_type_Parameter					{
-						if (terminateParsing) {
-							throw new art.resource.art.mopp.ArtTerminateParsingException();
-						}
-						if (element == null) {
-							element = art.type.TypeFactory.eINSTANCE.createOperation();
-						}
-						if (a11_0 != null) {
-							if (a11_0 != null) {
-								addObjectToList(element, art.type.TypePackage.OPERATION__OUTPUT, a11_0);
-							}
-							collectHiddenTokens(element);
-							copyLocalizationInfos(a11_0, element); 						}
-					}
-				)
-				
 			)
 			
 		)
@@ -3228,12 +2624,99 @@ parse_art_type_Operation returns [art.type.Operation element = null]
 	{
 		// expected element is a CsString
 	}
-	a12 = ')' {
+	a6 = ')' {
 		if (element == null) {
 			element = art.type.TypeFactory.eINSTANCE.createOperation();
 		}
 		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a12, element);
+		copyLocalizationInfos((CommonToken)a6, element);
+	}
+	
+	{
+		// expected element before STAR or QUESTIONMARK or PLUS
+	}
+	(
+		{
+			// expected element is a Compound
+		}
+		(
+			{
+				// expected element is a CsString
+			}
+			a7 = ':' {
+				if (element == null) {
+					element = art.type.TypeFactory.eINSTANCE.createOperation();
+				}
+				collectHiddenTokens(element);
+				copyLocalizationInfos((CommonToken)a7, element);
+			}
+			
+			{
+				// expected element is a Terminal
+			}
+			(
+				a8_0 = parse_art_type_Parameter				{
+					if (terminateParsing) {
+						throw new art.resource.art.mopp.ArtTerminateParsingException();
+					}
+					if (element == null) {
+						element = art.type.TypeFactory.eINSTANCE.createOperation();
+					}
+					if (a8_0 != null) {
+						if (a8_0 != null) {
+							addObjectToList(element, art.type.TypePackage.OPERATION__OUTPUT, a8_0);
+						}
+						collectHiddenTokens(element);
+						copyLocalizationInfos(a8_0, element); 					}
+				}
+			)
+			
+		)
+		
+	)?	
+	{
+		// expected element before STAR or QUESTIONMARK or PLUS
+	}
+	(
+		{
+			// expected element is a Compound
+		}
+		(
+			{
+				// expected element is a CsString
+			}
+			a9 = ',' {
+				if (element == null) {
+					element = art.type.TypeFactory.eINSTANCE.createOperation();
+				}
+				collectHiddenTokens(element);
+				copyLocalizationInfos((CommonToken)a9, element);
+			}
+			
+			{
+				// expected element is a Terminal
+			}
+			(
+				a10_0 = parse_art_type_Parameter				{
+					if (terminateParsing) {
+						throw new art.resource.art.mopp.ArtTerminateParsingException();
+					}
+					if (element == null) {
+						element = art.type.TypeFactory.eINSTANCE.createOperation();
+					}
+					if (a10_0 != null) {
+						if (a10_0 != null) {
+							addObjectToList(element, art.type.TypePackage.OPERATION__OUTPUT, a10_0);
+						}
+						collectHiddenTokens(element);
+						copyLocalizationInfos(a10_0, element); 					}
+				}
+			)
+			
+		)
+		
+	)*	{
+		// expected element after STAR or PLUS
 	}
 	
 ;
@@ -3258,52 +2741,10 @@ parse_art_type_Parameter returns [art.type.Parameter element = null]
 				art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__NAME), result);
+				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__TYPE), result);
 				java.lang.Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
 					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a0).getLine(), ((org.antlr.runtime.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a0).getStartIndex(), ((org.antlr.runtime.CommonToken) a0).getStopIndex());
-				}
-				java.lang.String resolved = (java.lang.String)resolvedObject;
-				if (resolved != null) {
-					element.eSet(element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__NAME), resolved);
-				}
-				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken) a0, element);
-			}
-		}
-	)
-	
-	{
-		// expected element is a CsString
-	}
-	a1 = ':' {
-		if (element == null) {
-			element = art.type.TypeFactory.eINSTANCE.createParameter();
-		}
-		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a1, element);
-	}
-	
-	{
-		// expected element is a Terminal
-	}
-	(
-		a2 = TEXT		
-		{
-			if (terminateParsing) {
-				throw new art.resource.art.mopp.ArtTerminateParsingException();
-			}
-			if (element == null) {
-				element = art.type.TypeFactory.eINSTANCE.createParameter();
-			}
-			if (a2 != null) {
-				art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
-				tokenResolver.setOptions(getOptions());
-				art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__TYPE), result);
-				java.lang.Object resolvedObject = result.getResolvedToken();
-				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a2).getLine(), ((org.antlr.runtime.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a2).getStartIndex(), ((org.antlr.runtime.CommonToken) a2).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				art.DataType proxy = art.ArtFactory.eINSTANCE.createDataType();
@@ -3313,8 +2754,39 @@ parse_art_type_Parameter returns [art.type.Parameter element = null]
 					element.eSet(element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__TYPE), proxy);
 				}
 				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken) a2, element);
-				copyLocalizationInfos((CommonToken) a2, proxy);
+				copyLocalizationInfos((CommonToken) a0, element);
+				copyLocalizationInfos((CommonToken) a0, proxy);
+			}
+		}
+	)
+	
+	{
+		// expected element is a Terminal
+	}
+	(
+		a1 = TEXT		
+		{
+			if (terminateParsing) {
+				throw new art.resource.art.mopp.ArtTerminateParsingException();
+			}
+			if (element == null) {
+				element = art.type.TypeFactory.eINSTANCE.createParameter();
+			}
+			if (a1 != null) {
+				art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
+				tokenResolver.setOptions(getOptions());
+				art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
+				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__NAME), result);
+				java.lang.Object resolvedObject = result.getResolvedToken();
+				if (resolvedObject == null) {
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a1).getLine(), ((org.antlr.runtime.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a1).getStartIndex(), ((org.antlr.runtime.CommonToken) a1).getStopIndex());
+				}
+				java.lang.String resolved = (java.lang.String)resolvedObject;
+				if (resolved != null) {
+					element.eSet(element.eClass().getEStructuralFeature(art.type.TypePackage.PARAMETER__NAME), resolved);
+				}
+				collectHiddenTokens(element);
+				copyLocalizationInfos((CommonToken) a1, element);
 			}
 		}
 	)
@@ -3731,7 +3203,7 @@ parse_art_type_Port returns [art.type.Port element = null]
 		// expected element is a Terminal
 	}
 	(
-		a7 = INTEGER		
+		a7 = MULTIPLICITY		
 		{
 			if (terminateParsing) {
 				throw new art.resource.art.mopp.ArtTerminateParsingException();
@@ -3740,7 +3212,7 @@ parse_art_type_Port returns [art.type.Port element = null]
 				element = art.type.TypeFactory.eINSTANCE.createPort();
 			}
 			if (a7 != null) {
-				art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("MULTIPLICITY");
 				tokenResolver.setOptions(getOptions());
 				art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(art.type.TypePackage.PORT__LOWER), result);
@@ -3773,7 +3245,7 @@ parse_art_type_Port returns [art.type.Port element = null]
 		// expected element is a Terminal
 	}
 	(
-		a9 = INTEGER		
+		a9 = MULTIPLICITY		
 		{
 			if (terminateParsing) {
 				throw new art.resource.art.mopp.ArtTerminateParsingException();
@@ -3782,7 +3254,7 @@ parse_art_type_Port returns [art.type.Port element = null]
 				element = art.type.TypeFactory.eINSTANCE.createPort();
 			}
 			if (a9 != null) {
-				art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("MULTIPLICITY");
 				tokenResolver.setOptions(getOptions());
 				art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a9.getText(), element.eClass().getEStructuralFeature(art.type.TypePackage.PORT__UPPER), result);
@@ -4018,7 +3490,7 @@ parse_art_implem_OSGiComponent returns [art.implem.OSGiComponent element = null]
 	{
 		// expected element is a CsString
 	}
-	a1 = '<' {
+	a1 = ':' {
 		if (element == null) {
 			element = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
 		}
@@ -4027,32 +3499,10 @@ parse_art_implem_OSGiComponent returns [art.implem.OSGiComponent element = null]
 	}
 	
 	{
-		// expected element is a CsString
-	}
-	a2 = 'implementingClass' {
-		if (element == null) {
-			element = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
-		}
-		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a2, element);
-	}
-	
-	{
-		// expected element is a CsString
-	}
-	a3 = ':' {
-		if (element == null) {
-			element = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
-		}
-		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a3, element);
-	}
-	
-	{
 		// expected element is a Terminal
 	}
 	(
-		a4 = STRING_LITERAL		
+		a2 = STRING_LITERAL		
 		{
 			if (terminateParsing) {
 				throw new art.resource.art.mopp.ArtTerminateParsingException();
@@ -4060,35 +3510,24 @@ parse_art_implem_OSGiComponent returns [art.implem.OSGiComponent element = null]
 			if (element == null) {
 				element = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
 			}
-			if (a4 != null) {
+			if (a2 != null) {
 				art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("STRING_LITERAL");
 				tokenResolver.setOptions(getOptions());
 				art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(art.implem.ImplemPackage.OS_GI_COMPONENT__IMPLEMENTING_CLASS), result);
+				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(art.implem.ImplemPackage.OS_GI_COMPONENT__IMPLEMENTING_CLASS), result);
 				java.lang.Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a4).getLine(), ((org.antlr.runtime.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a4).getStartIndex(), ((org.antlr.runtime.CommonToken) a4).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a2).getLine(), ((org.antlr.runtime.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a2).getStartIndex(), ((org.antlr.runtime.CommonToken) a2).getStopIndex());
 				}
 				java.lang.String resolved = (java.lang.String)resolvedObject;
 				if (resolved != null) {
 					element.eSet(element.eClass().getEStructuralFeature(art.implem.ImplemPackage.OS_GI_COMPONENT__IMPLEMENTING_CLASS), resolved);
 				}
 				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken) a4, element);
+				copyLocalizationInfos((CommonToken) a2, element);
 			}
 		}
 	)
-	
-	{
-		// expected element is a CsString
-	}
-	a5 = '>' {
-		if (element == null) {
-			element = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
-		}
-		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a5, element);
-	}
 	
 ;
 
@@ -4110,7 +3549,7 @@ parse_art_implem_OSGiPort returns [art.implem.OSGiPort element = null]
 	{
 		// expected element is a CsString
 	}
-	a1 = '<' {
+	a1 = ':' {
 		if (element == null) {
 			element = art.implem.ImplemFactory.eINSTANCE.createOSGiPort();
 		}
@@ -4119,32 +3558,10 @@ parse_art_implem_OSGiPort returns [art.implem.OSGiPort element = null]
 	}
 	
 	{
-		// expected element is a CsString
-	}
-	a2 = 'serviceId' {
-		if (element == null) {
-			element = art.implem.ImplemFactory.eINSTANCE.createOSGiPort();
-		}
-		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a2, element);
-	}
-	
-	{
-		// expected element is a CsString
-	}
-	a3 = ':' {
-		if (element == null) {
-			element = art.implem.ImplemFactory.eINSTANCE.createOSGiPort();
-		}
-		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a3, element);
-	}
-	
-	{
 		// expected element is a Terminal
 	}
 	(
-		a4 = STRING_LITERAL		
+		a2 = STRING_LITERAL		
 		{
 			if (terminateParsing) {
 				throw new art.resource.art.mopp.ArtTerminateParsingException();
@@ -4152,35 +3569,24 @@ parse_art_implem_OSGiPort returns [art.implem.OSGiPort element = null]
 			if (element == null) {
 				element = art.implem.ImplemFactory.eINSTANCE.createOSGiPort();
 			}
-			if (a4 != null) {
+			if (a2 != null) {
 				art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("STRING_LITERAL");
 				tokenResolver.setOptions(getOptions());
 				art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(art.implem.ImplemPackage.OS_GI_PORT__SERVICE_ID), result);
+				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(art.implem.ImplemPackage.OS_GI_PORT__SERVICE_ID), result);
 				java.lang.Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a4).getLine(), ((org.antlr.runtime.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a4).getStartIndex(), ((org.antlr.runtime.CommonToken) a4).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a2).getLine(), ((org.antlr.runtime.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a2).getStartIndex(), ((org.antlr.runtime.CommonToken) a2).getStopIndex());
 				}
 				java.lang.String resolved = (java.lang.String)resolvedObject;
 				if (resolved != null) {
 					element.eSet(element.eClass().getEStructuralFeature(art.implem.ImplemPackage.OS_GI_PORT__SERVICE_ID), resolved);
 				}
 				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken) a4, element);
+				copyLocalizationInfos((CommonToken) a2, element);
 			}
 		}
 	)
-	
-	{
-		// expected element is a CsString
-	}
-	a5 = '>' {
-		if (element == null) {
-			element = art.implem.ImplemFactory.eINSTANCE.createOSGiPort();
-		}
-		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a5, element);
-	}
 	
 ;
 
@@ -4653,54 +4059,10 @@ parse_art_implem_OSGiType returns [art.implem.OSGiType element = null]
 }
 :
 	{
-		// expected element is a CsString
-	}
-	a0 = 'OSGiType' {
-		if (element == null) {
-			element = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
-		}
-		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a0, element);
-	}
-	
-	{
-		// expected element is a CsString
-	}
-	a1 = '<' {
-		if (element == null) {
-			element = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
-		}
-		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a1, element);
-	}
-	
-	{
-		// expected element is a CsString
-	}
-	a2 = 'generateInstanceBundle' {
-		if (element == null) {
-			element = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
-		}
-		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a2, element);
-	}
-	
-	{
-		// expected element is a CsString
-	}
-	a3 = ':' {
-		if (element == null) {
-			element = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
-		}
-		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a3, element);
-	}
-	
-	{
 		// expected element is a Terminal
 	}
 	(
-		a4 = TEXT		
+		a0 = T_IMPLEM		
 		{
 			if (terminateParsing) {
 				throw new art.resource.art.mopp.ArtTerminateParsingException();
@@ -4708,35 +4070,24 @@ parse_art_implem_OSGiType returns [art.implem.OSGiType element = null]
 			if (element == null) {
 				element = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
 			}
-			if (a4 != null) {
-				art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
+			if (a0 != null) {
+				art.resource.art.IArtTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("T_IMPLEM");
 				tokenResolver.setOptions(getOptions());
 				art.resource.art.IArtTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(art.implem.ImplemPackage.OS_GI_TYPE__GENERATE_INSTANCE_BUNDLE), result);
+				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(art.implem.ImplemPackage.OS_GI_TYPE__GENERATE_INSTANCE_BUNDLE), result);
 				java.lang.Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a4).getLine(), ((org.antlr.runtime.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a4).getStartIndex(), ((org.antlr.runtime.CommonToken) a4).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime.CommonToken) a0).getLine(), ((org.antlr.runtime.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime.CommonToken) a0).getStartIndex(), ((org.antlr.runtime.CommonToken) a0).getStopIndex());
 				}
 				java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
 				if (resolved != null) {
 					element.eSet(element.eClass().getEStructuralFeature(art.implem.ImplemPackage.OS_GI_TYPE__GENERATE_INSTANCE_BUNDLE), resolved);
 				}
 				collectHiddenTokens(element);
-				copyLocalizationInfos((CommonToken) a4, element);
+				copyLocalizationInfos((CommonToken) a0, element);
 			}
 		}
 	)
-	
-	{
-		// expected element is a CsString
-	}
-	a5 = '>' {
-		if (element == null) {
-			element = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
-		}
-		collectHiddenTokens(element);
-		copyLocalizationInfos((CommonToken)a5, element);
-	}
 	
 ;
 
@@ -5317,6 +4668,8 @@ T_INSTANCE_STATE:
 	'#ON'|'#OFF';
 T_PORT_KIND:
 	'provided'|'required';
+T_IMPLEM:
+	'bundle'|'memory';
 T_OPTIONAL:
 	'optional';
 WHITESPACE:
@@ -5327,8 +4680,8 @@ LINEBREAKS:
 	('\r\n'|'\r'|'\n')
 	{ _channel = 99; }
 ;
-INTEGER:
-	('-'? ('0'..'9')+ )
+MULTIPLICITY:
+	( ('*') | (('0'..'9')+) )
 ;
 TEXT:
 	('A'..'Z' | 'a'..'z' | '_' )('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )* ('.'('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+)*;
