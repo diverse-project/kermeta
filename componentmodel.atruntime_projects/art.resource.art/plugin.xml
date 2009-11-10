@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="art.resource.art.mopp.ArtMetaInformation" id="art.resource.art.mopp.ArtMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="art.resource.art.ui.ArtEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="art" icon="icons/editor_icon.gif" id="art.resource.art.ui.ArtEditor" name="EMFText art Editor">
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="art.resource.art.ui.ArtPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Art Text Editor" id="art.resource.art.ui.ArtPreferencePage" class="art.resource.art.ui.ArtPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="art.resource.art.ui.ArtSyntaxColoringPreferencePage" class="art.resource.art.ui.ArtSyntaxColoringPreferencePage" category="art.resource.art.ui.ArtPreferencePage">
+		</page>
+		<page name="Brackets" id="art.resource.art.ui.ArtBracketPreferencePage" class="art.resource.art.ui.ArtBracketPreferencePage" category="art.resource.art.ui.ArtPreferencePage">
+		</page>
+		<page name="Occurrence" id="art.resource.art.ui.ArtOccurrencePreferencePage" class="art.resource.art.ui.ArtOccurrencePreferencePage" category="art.resource.art.ui.ArtPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="art.resource.art.ui.ArtNewFileWizard" id="art.resource.art.ui.ArtNewFileWizard" name="EMFText .art file">
+		</wizard>
+	</extension>
+	
+	<extension id="art.resource.art.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension-point id="art.resource.art.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="art.resource.art.mopp.ArtResourceFactoryDelegator" type="art">
+		</parser>
+	</extension>
+	
+	<extension-point id="art.resource.art.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
+	
+</plugin>

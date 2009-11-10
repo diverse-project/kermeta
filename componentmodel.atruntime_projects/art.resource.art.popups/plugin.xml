@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="art.resource.art.popups.contribution1"
+            nameFilter="*.xmi"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               label="ART"
+               path="additions"
+               id="art.resource.art.popups.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="XMI to ART"
+               class="art.resource.art.popups.popup.actions.XMI2ART"
+               menubarPath="art.resource.art.popups.menu1/group1"
+               enablesFor="1"
+               id="art.resource.art.popups.popup.actions.XMI2ART">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="art.resource.art.popups.contribution1"
+            nameFilter="*.art"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="art.resource.art.popups.menu2"
+               label="ART"
+               path="additions">
+            <separator
+                  name="group2">
+            </separator>
+         </menu>
+         <action
+               class="art.resource.art.popups.popup.actions.ART2XMI"
+               enablesFor="1"
+               id="art.resource.art.popups.popup.actions.ART2XMI"
+               label="ART 2 XMI"
+               menubarPath="art.resource.art.popups.menu2/group2">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
