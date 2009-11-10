@@ -19,6 +19,8 @@ TOKENS{
 		DEFINE T_INSTANCE_STATE $'#ON'|'#OFF'$;
 		DEFINE T_PORT_KIND $'provided'|'required'$;
 		
+		DEFINE T_IMPLEM $'bundle'|'memory'$;
+		
 		DEFINE T_OPTIONAL $'optional'$;
 		
 		//DEFINE QUALIFIED_NAME $('A'..'Z'|'a'..'z'|'_')('A'..'Z'|'a'..'z'|'_'|'-'|'0'..'9')*('.'('A'..'Z'|'a'..'z'|'_'|'-'|'0'..'9')+)*$;
@@ -26,7 +28,7 @@ TOKENS{
 		DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 		DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 		
-		DEFINE INTEGER $('-'? ('0'..'9')+ )$;
+		DEFINE MULTIPLICITY $( ('*') | (('0'..'9')+) )$;
 		
 		//DEFINE TEXT $('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+$;
 		DEFINE TEXT $('A'..'Z' | 'a'..'z' | '_' )('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )* ('.'('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+)*$;
@@ -70,6 +72,7 @@ TOKENSTYLES {
 	
 	 
 	"implementation" COLOR #0055bb , BOLD;
+	"T_IMPLEM" COLOR #0055bb , BOLD;
 	"OSGiComponent" COLOR #0055bb;
 	"implementingClass" COLOR #0055bb, ITALIC;
 	"OSGiType" COLOR #0055bb;
@@ -107,9 +110,9 @@ RULES {
 		
 		DataType::= "datatype" #1 name[] ";"  ;
 		
-		Instance.PrimitiveInstance::= "primitive" #1 "instance"  #1 name[] #1 ":" #1 type[] #1 state[T_INSTANCE_STATE] #1 (!1 "implementation"  #1 implem)?  ( "groups" #1 ":" #1 groups[] ("," #1 groups[])* )? !0 "{" ( !1 (attribute | binding) )* !0 "}"  ;
+		Instance.PrimitiveInstance::= "primitive" #1 "instance"  #1 name[] #1 ":" #1 type[] #1 state[T_INSTANCE_STATE] #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding) )* !0 "}"  ;
 		
-		Instance.CompositeInstance::= "composite" #1 "instance"  #1 name[] #1 ":" #1 type[] #1 state[T_INSTANCE_STATE] #1 (!1 "implementation"  #1 implem)?  ( "groups" #1 ":" #1 groups[] ("," #1 groups[])* )? !0 "{" ( !1 (attribute | binding | subComponent | delegation) )* !0 "}"  ;
+		Instance.CompositeInstance::= "composite" #1 "instance"  #1 name[] #1 ":" #1 type[] #1 state[T_INSTANCE_STATE] #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding | subComponent | delegation) )* !0 "}"  ;
 		
 		Instance.TransmissionBinding::= "bind" #1 client[] #1 "to" #1 serverInstance[] "::" server[] ( #1 "(" "id" #1 "=" #1 id[STRING_LITERAL] ")"  )? ;
 		
@@ -123,31 +126,33 @@ RULES {
 		
 		Instance.OtherEntry::=   "[" #1 key[STRING_LITERAL] #1 "->" #1 value[STRING_LITERAL] #1 "]" ;
 		
-		Type.PrimitiveType::= "type" #1 name[] #1 (!1 "implementation"  #1 implem)?  ( !1 "groups" #1 ":" #1 groups[] ("," #1 groups[])* )? !0 "{" ( port | attribute )* !0 "}"  ;
+		Type.PrimitiveType::= "type" #1 name[] #1 (!1 "implementation"  #1 implem)? !0 "{" ( port | attribute )* !0 "}"  ;
 		
-		Type.CompositeType::= "compositetype" #1 name[] #1 (!1 "implementation"  #1 implem)?  ( !1 "groups" #1 ":" #1 groups[] ("," #1 groups[])* )? !0 "{" ( port | attribute )* !0 "}"  ;
+		Type.CompositeType::= "compositetype" #1 name[] #1 (!1 "implementation"  #1 implem)? !0 "{" ( port | attribute )* !0 "}"  ;
 		
-		Type.Operation::= !1 "operation" #1 name[] "(" ("in" #1 input | "out" #1 output)? ( "," #1 ("in" #1 input | "out" #1 output) )* ")"  ;
+		//Type.Operation::= !1 "operation" #1 name[] "(" ("in" #1 input | "out" #1 output)? ( "," #1 ("in" #1 input | "out" #1 output) )* ")"  ;
 		
-		Type.Parameter::= name[] #1 ":" #1 type[] ;
+		Type.Operation::= !1 "operation" #1 name[] "(" (input)? ( "," #1 input )* ")" (":" output)? ( "," #1 output )* ;
+		
+		Type.Parameter::= type[] #1 name[];
 		
 		Type.FunctionalService::= "functional" #1 "service" #1 name[] #1 "{" ( operation )* !0 "}"  ;
 		
 		Type.ControlService::= "control" #1 "service" #1 name[] #1 "{" ( operation )* !0 "}"  ;
 		
-		Type.Port::= !1 role[T_PORT_KIND] (isOptional[T_OPTIONAL])? #1 "port" #1 name[] #1 ":" #1 service[] #1 "[" lower[INTEGER] ".." upper[INTEGER] "]" (!1 "implementation"  #1 implem)? ;
+		Type.Port::= !1 role[T_PORT_KIND] (isOptional[T_OPTIONAL])? #1 "port" #1 name[] #1 ":" #1 service[] #1 "[" lower[MULTIPLICITY] ".." upper[MULTIPLICITY] "]" (!1 "implementation"  #1 implem)? ;
 		
 		Implem.FractalComponent::= "FractalComponent" #1 "<" "controllerDesc" #1 ":" #1 controllerDesc[STRING_LITERAL] #1 "contentDesc" #1 ":" #1 contentDesc[STRING_LITERAL]  ">"  ;
 		
-		Implem.OSGiComponent::= "OSGiComponent" #1 "<"  "implementingClass"  #1 ":" #1 implementingClass[STRING_LITERAL]   ">"  ;
+		Implem.OSGiComponent::= "OSGiComponent" #1 ":" #1 implementingClass[STRING_LITERAL] ;
 		
-		Implem.OSGiPort::= "OSGiPort" #1 "<" "serviceId" #1 ":" #1 serviceId[STRING_LITERAL] ">"  ; 
+		Implem.OSGiPort::= "OSGiPort" #1 ":" #1 serviceId[STRING_LITERAL] ; 
 		
 		Group.TypeGroup::= "typegroup" #1 name[] #1 "{" ( !1 "types" #1 ":" #1 types[] ("," #1 types[])* )?  ( !1 subGroups)* !0 "}"  ;
 		
 		Group.InstanceGroup::= "instancegroup" #1 name[] #1 "{" ( !1 "instances" #1 ":" #1 instances[] ("," #1 instances[])* )?  (!1 subGroups)* !0 "}"  ;
 		
-		Implem.OSGiType::= "OSGiType" "<" "generateInstanceBundle" ":" generateInstanceBundle[] ">"  ;
+		Implem.OSGiType::= generateInstanceBundle[T_IMPLEM]  ;
 		
 		Type.BasicAttribute::= !1 "attribute" #1 name[] #1 ":" #1 type[] ( #1 "default"  #1 defaultValue[STRING_LITERAL] )? ;
 		
