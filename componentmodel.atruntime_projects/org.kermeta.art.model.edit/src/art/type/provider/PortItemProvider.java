@@ -235,11 +235,6 @@ public class PortItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypePackage.Literals.PORT__IMPLEM,
-				 ImplemFactory.eINSTANCE.createPortImplementation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypePackage.Literals.PORT__IMPLEM,
 				 ImplemFactory.eINSTANCE.createOSGiPort()));
 	}
 
