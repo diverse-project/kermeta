@@ -5,9 +5,10 @@
          id="ket"
          point="org.eclipse.ui.popupMenus">
       <objectContribution
-            objectClass="org.eclipse.core.resources.IFile"
+            adaptable="true"
+            id="fr.irisa.triskell.kermeta.ket.contribution"
             nameFilter="*.ket"
-            id="fr.irisa.triskell.kermeta.ket.contribution">
+            objectClass="org.eclipse.core.resources.IFile">
          <menu
                label="Kermeta"
                path="additions"
