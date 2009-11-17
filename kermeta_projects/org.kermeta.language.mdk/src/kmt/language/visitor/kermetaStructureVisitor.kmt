@@ -295,7 +295,7 @@ aspect class Filter inherits KMStructureVisitable
 		end
 }
 
-aspect abstract class Require inherits KMStructureVisitable
+aspect class Require inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -306,7 +306,7 @@ aspect abstract class Require inherits KMStructureVisitable
 		end
 }
 
-aspect abstract class Using inherits KMStructureVisitable
+aspect class Using inherits KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -574,5 +574,5 @@ package visitor {
 	
 	}
 
-} // enf of packahe visitor
+} // enf of package visitor
 
