@@ -8,7 +8,7 @@
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.common_2.5.0.v200906151043.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore_2.5.0.v200906151043.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore.xmi_2.5.0.v200906151043.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/fr.irisa.triskell.kermeta.scala.framework"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/LoadSaveKm"/>
+	<classpathentry kind="lib" path="lib/frameworkCompiled.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
