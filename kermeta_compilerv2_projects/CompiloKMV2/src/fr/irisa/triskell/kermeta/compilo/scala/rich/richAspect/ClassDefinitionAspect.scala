@@ -24,7 +24,7 @@ trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect wi
 					//res.append(" extends "+Util.traitname)
 	  			//TODO extends a superClassAspect		  
 			} else {
-				var i:int  = 0;
+				var i:Integer  = 0;
 				this.getSuperType.foreach(superC => {
 					if (i==0) {
 						res.append(" extends ")
@@ -56,7 +56,7 @@ trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect wi
 					//res.append(" extends "+Util.traitname)
 	  			//TODO extends a superClassAspect
 			}else{
-				var i:int  = 0;
+				var i:Integer  = 0;
 				this.getSuperType.foreach(superC => {
 					if (i==0) {
 						res.append(" extends ")
