@@ -55,23 +55,24 @@ trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect wi
 					//res.append(" extends "+Util.traitname)
 	  			//TODO extends a superClassAspect
 			}else{
-				var i = 0;
+				res.append(" extends org.eclipse.emf.ecore.impl.EObjectImpl ")
+//				var i = 0;
 				this.getSuperType.foreach(superC => {
-					if (i==0) {
-						res.append(" extends ")
+//					if (i==0) {
+/*						res.append(" extends ")
 						var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
 						res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
 						res.append(".")
 						res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
-					}else{
+*///					}else{
 						res.append(" with ")
 						var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
 						res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
 						res.append(".")
 						res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
 								//returnedString =returnedString + ", " +superC.getName; 
-					}
-					i=i+1
+//					}
+//					i=i+1
 				})
 				res append " with "+frameworkGeneratedPackageName + "."+implicitConvTraitName
 			}
