@@ -92,7 +92,7 @@ trait EcoreRichAspectImplicit {
     implicit def rich (xs : VariableDecl) = xs.asInstanceOf[VariableDeclAspect]
     implicit def rich (xs : VariableDeclAspect) = xs.asInstanceOf[VariableDecl]
     
-    implicit def rich (xs : CallExpression) = {println(xs.getClass.toString); xs.asInstanceOf[CallExpressionAspect]}
+    implicit def rich (xs : CallExpression) = {xs.asInstanceOf[CallExpressionAspect]}
     implicit def rich (xs : CallExpressionAspect) = xs.asInstanceOf[CallExpression]
     
     //implicit def rich (xs : EmptyExpression) = (xs.asInstanceOf[EmptyExpression])

@@ -62,7 +62,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 	}  
 
 	def visit(par : ClassDefinition){
-		if(actualPackage == "org.eclipse.emf.ecore"  ) { //TODO REMOVE DEBUG MODE
+	//	if(actualPackage == "org.eclipse.emf.ecore"  ) { //TODO REMOVE DEBUG MODE
 			 
 			var packageName : StringBuilder= new StringBuilder
 			packageName.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[Package].getQualifiedName))
@@ -73,7 +73,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 			implicitDef append " implicit def richAspect(v : "+ packageName.toString+par.getName()+"Aspect) = v.asInstanceOf["+ packageName.toString+"Rich"+par.getName+"]\n"
 			
 			factoryDefClass append " override def create"+par.getName()+" : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+par.getName())+" = { new "+ packageName.toString+"Rich"+par.getName+" }\n"
-		}
+	//}
 	}
 	
 	def close {

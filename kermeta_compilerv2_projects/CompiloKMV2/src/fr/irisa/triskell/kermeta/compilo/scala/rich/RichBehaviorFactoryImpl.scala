@@ -27,7 +27,7 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 
 	override def createCallFeature() : CallFeature =  {
 		var v =new CallFeatureImpl() with CallFeatureAspect
-		println(v.getClass)
+		
 		v
 	}
 

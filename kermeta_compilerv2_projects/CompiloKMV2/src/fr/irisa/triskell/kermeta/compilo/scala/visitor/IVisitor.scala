@@ -12,5 +12,5 @@ trait IVisitor {
 	
 	def visit(par : ClassDefinition)
  
-} 
+}  
   

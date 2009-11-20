@@ -15,6 +15,8 @@ object Util  {
     } 
    
    def generateFile(repName : String,fileName : String,content : String){
+	    
+		//println(Util.outputFolder + java.io.File.separator + repName)
 	   	var f : java.io.File = new java.io.File(Util.outputFolder + java.io.File.separator + repName.replace(".", java.io.File.separator) )
 		if(!f.exists()) f.mkdirs
 		var f1 : java.io.File = new java.io.File(Util.outputFolder + java.io.File.separator + repName.replace(".", java.io.File.separator) + java.io.File.separator + fileName + ".scala")

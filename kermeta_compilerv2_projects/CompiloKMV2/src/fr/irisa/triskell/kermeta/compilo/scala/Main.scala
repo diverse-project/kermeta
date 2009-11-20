@@ -19,10 +19,10 @@ object Main extends EcoreRichAspectImplicit {
 	  var t: LoadModelHelper = new LoadModelHelper()  ;
 	  BehaviorPackage.eINSTANCE.setEFactoryInstance(new fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl());
 	  StructurePackage.eINSTANCE.setEFactoryInstance(new fr.irisa.triskell.kermeta.compilo.scala.rich.RichStructureFactoryImpl());
-		 
-	     
-	//var v : ModelingUnit = t.loadKM("FlatShort.km");  
-	var v : ModelingUnit = t.loadKM("tp1.km");  
+		  
+	      
+	//var v : ModelingUnit = t.loadKM("tp1.km");  
+	var v : ModelingUnit = t.loadKM("../compilerv2_test/helloWorld/HelloWorld.km");  
 	
   	//var res = new StringBuilder
   	var visitorAspect = new ScalaAspectVisitor

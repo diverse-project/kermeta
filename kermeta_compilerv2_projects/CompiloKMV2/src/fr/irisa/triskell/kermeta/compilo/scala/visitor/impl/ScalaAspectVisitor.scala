@@ -10,7 +10,7 @@ import scala.collection.JavaConversions._
 
 
 class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
-	
+	 
 	var actualPackage : String = _
 	
 	def visit(par : ModelingUnit){
@@ -21,18 +21,19 @@ class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 	def visit(par : Package){ 
 		  
 		actualPackage = par.getQualifiedName()
-		par.getOwnedTypeDefinition filter(p => p.isInstanceOf[ClassDefinition]) foreach(p=> p.asInstanceOf[ClassDefinition].accept(this))
-		par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage
-
+		if (!actualPackage.startsWith("kermeta")){
+			par.getOwnedTypeDefinition filter(p => p.isInstanceOf[ClassDefinition]) foreach(p=> p.asInstanceOf[ClassDefinition].accept(this))
+			par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage
+		}
 	}
  
 	def visit(par : ClassDefinition){
-		if(actualPackage == "ecore"  ) { //TODO REMOVE DEBUG MODE	
+		
 			var res : StringBuilder = new StringBuilder
-			res.append("package "+kermeta.utils.TypeEquivalence.packageEquivelence.get(actualPackage)+"\n")
+			res.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage)+"\n")
 			par.generateScalaCode(res)
-			Util.generateFile(kermeta.utils.TypeEquivalence.packageEquivelence.get(actualPackage), par.getName, res.toString())
-		} 
+			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage), par.getName, res.toString())
+		 
 	}
 
 }

@@ -12,7 +12,7 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
  
 	override def createObject() = {
 		var v =new ObjectImpl with ObjectAspect
-		println(v.getClass)
+		
 		v
 	}
 
@@ -32,7 +32,7 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 	//TODO
 	override def createType() : Type = {
 		var v = new TypeImpl() with ObjectAspect
-		println(v.getClass)
+		
 		v
 	}
 	
@@ -79,7 +79,7 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 	
 	override def createPackage()  = {
 		var v =new PackageImpl() with PackageAspect
-		println(v.getClass)
+		
 		v
 	}
 
@@ -132,21 +132,21 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 	//TODO
 	override def createConstraint() : Constraint = {
 		var v =new ConstraintImpl() with ObjectAspect
-		println(v.getClass)
+		
 		v
 	}
 
 	//TODO
 	override def createModelTypeVariable() : ModelTypeVariable = {
 		var v= new ModelTypeVariableImpl() with ObjectAspect
-		println(v.getClass)
+		
 		v
 	}
 
 	//TODO
 	override def createVirtualType() : VirtualType = {
 		var v = new VirtualTypeImpl() with ObjectAspect
-			println(v.getClass)
+			
 		v
 	}
 	
