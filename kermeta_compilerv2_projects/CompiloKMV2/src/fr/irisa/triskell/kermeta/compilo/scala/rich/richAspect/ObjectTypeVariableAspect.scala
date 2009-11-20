@@ -18,3 +18,4 @@ def generateVisitor(tabsString 	: String) : String = {
 		 return this.getName;
 	}*/
 }
+ 

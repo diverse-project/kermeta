@@ -15,7 +15,7 @@ trait PackageAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisi
 		if(this.getName() != "ecore"){ //TODO REMOVE DEBUG MODE
 			Console.println("Skip package "+this.getName)
 			return
-		}
+		} 
 		
 		if(Util.hasEcoreTag(this)){
 			Console.println("//TODO GEN ECORE")

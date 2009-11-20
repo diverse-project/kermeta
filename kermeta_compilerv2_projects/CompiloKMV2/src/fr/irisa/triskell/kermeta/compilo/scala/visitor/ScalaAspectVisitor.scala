@@ -15,8 +15,8 @@ class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 	
 	def visit(par : ModelingUnit){
 		par.getPackages().foreach(p => p.accept(this) ) 		
-
-	} 
+ 
+	}     
 	  
 	def visit(par : Package){ 
 		  
@@ -25,7 +25,7 @@ class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 		par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage
 
 	}
-
+ 
 	def visit(par : ClassDefinition){
 		if(actualPackage == "ecore"  ) { //TODO REMOVE DEBUG MODE	
 			var res : StringBuilder = new StringBuilder

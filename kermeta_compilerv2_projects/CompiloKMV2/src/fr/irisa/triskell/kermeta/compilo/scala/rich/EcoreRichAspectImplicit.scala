@@ -4,7 +4,7 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
- 
+  
 trait EcoreRichAspectImplicit {
 	 
     implicit def rich (xs : ModelingUnit) = xs.asInstanceOf[ModelingUnitAspect]
@@ -17,7 +17,7 @@ trait EcoreRichAspectImplicit {
     implicit def rich (xs : ClassDefinitionAspect) = xs.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.ClassDefinition]
     implicit def rich (xs : Block) = (xs.asInstanceOf[BlockAspect]) 
     implicit def rich (xs : BlockAspect) = (xs.asInstanceOf[Block]) 
-    
+      
     
     //implicit def rich (xs : ClassDefinition) = xs.asInstanceOf[ClassDefinition]
     //implicit def rich (xs : VirtualType) = xs.asInstanceOf[VirtualType]

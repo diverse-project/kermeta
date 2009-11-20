@@ -12,7 +12,7 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 	override def createConditional() : Conditional =  {
 			new ConditionalImpl() with ConditionalAspect
 	}
-
+ 
 	override def createLambdaExpression() : LambdaExpression = {
 		new LambdaExpressionImpl() with LambdaExpressionAspect
 	} 

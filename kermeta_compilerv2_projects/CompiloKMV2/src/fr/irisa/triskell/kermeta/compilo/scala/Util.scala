@@ -12,7 +12,7 @@ object Util  {
 	    
    def hasEcoreTag(obj : Object) : Boolean = {
 	   obj.getOwnedTags.exists(e=> "ecore".equals(e.asInstanceOf[Tag].getName()))
-    }
+    } 
    
    def generateFile(repName : String,fileName : String,content : String){
 	   	var f : java.io.File = new java.io.File(Util.outputFolder + java.io.File.separator + repName.replace(".", java.io.File.separator) )
@@ -23,6 +23,6 @@ object Util  {
 	   	writer.println(content) 
     	writer.flush
     	writer.close
-    	output.close
+    	output.close 
    }
 }

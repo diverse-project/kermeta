@@ -13,8 +13,8 @@ trait OperationAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append("\n"+"   def ")
 		res.append(this.getName())
-		res.append("(")
-		var i:Integer  = 0;
+		res.append("(") 
+		var i:int  = 0;
 		this.getOwnedParameter.foreach(par => {
 			if (i==0) { 
 				res.append(par.getName()+" : ")

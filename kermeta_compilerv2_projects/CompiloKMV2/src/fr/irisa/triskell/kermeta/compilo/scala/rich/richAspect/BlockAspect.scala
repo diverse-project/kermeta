@@ -20,3 +20,4 @@ trait BlockAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	}
 	
 }
+  

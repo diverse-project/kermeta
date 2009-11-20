@@ -11,5 +11,6 @@ trait IVisitor {
 	def visit(par : Package)
 	
 	def visit(par : ClassDefinition)
-
-}
+ 
+} 
+  

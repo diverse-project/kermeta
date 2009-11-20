@@ -18,3 +18,4 @@ override def generateScalaCode(res : StringBuilder) = {
 		 return this.getType.generateVisitor(tabsString);
 	} */
 }
+ 

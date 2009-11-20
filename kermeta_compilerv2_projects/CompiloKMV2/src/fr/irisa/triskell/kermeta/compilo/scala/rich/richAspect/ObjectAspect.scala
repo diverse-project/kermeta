@@ -17,7 +17,7 @@ trait ObjectAspect extends EcoreRichAspectImplicit {
 	}  */
   def createInherithanceTree()  = {  
 		
-    }  
+    }   
   
   //def getMainSuperClass():ArrayList[ClassDefinition] ={return null;}
   

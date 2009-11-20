@@ -15,7 +15,7 @@ override def generateScalaCode(res : StringBuilder) : Unit = {
 		 res.append(this.getOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName)).first.getValue)
 	 }
 }
-	/*
+	/* 
  def generateVisitor(tabsString 	: String) : String = { 
 		if (Util.hasEcoreTag(this)){
 		  return this.getOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName)).first.getValue

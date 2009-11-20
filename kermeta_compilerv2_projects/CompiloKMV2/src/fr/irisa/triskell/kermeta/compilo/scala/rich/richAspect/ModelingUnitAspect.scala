@@ -15,7 +15,7 @@ trait ModelingUnitAspect extends EcoreRichAspectImplicit with ObjectAspect with 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		//this.getPackages().foreach(p => p.generateScalaCode(res) ) 
 	}*/
-	
+	 
 	def accept(visitor : IVisitor){
 		visitor.visit(this);
 	}

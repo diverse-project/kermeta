@@ -15,9 +15,9 @@ trait AssignmentAspect extends EcoreRichAspectImplicit with ObjectAspect {
 			this.getTarget().generateScalaCode(res)
 			res.append("=")
 			this.getValue().generateScalaCode(res)
-		} else {
+		} else { 
 			this.getTarget().generateScalaCode(res)
-			res.append("=")
+			res.append("=") 
 			var targetClass : String =""
     		if (this.getTarget.getStaticType.isInstanceOf[NamedElement])
     			 targetClass = this.getTarget.getStaticType.asInstanceOf[NamedElement].getName
@@ -28,5 +28,5 @@ trait AssignmentAspect extends EcoreRichAspectImplicit with ObjectAspect {
 			this.getValue().generateScalaCode(res)
 			res append ".asInstanceOf["+targetClass+"]"
 		}
-	}
+	} 
 }

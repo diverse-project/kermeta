@@ -23,7 +23,7 @@ override def generateScalaCode(res : StringBuilder) : Unit = {
 	}else {
 		 generateAttribute(res)
 	}
-}
+} 
 	  
 def generateAttribute(res : StringBuilder) : Unit ={
 	res.append("var ")

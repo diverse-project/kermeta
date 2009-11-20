@@ -15,7 +15,7 @@ override def generateScalaCode(res : StringBuilder) = {
 	res.append("import ")
 	res.append(this.getQualifiedName().replaceAll("::","."))
 	res.append("._\n")
-}
+} 
 	/*
  override def generateVisitor(tabsString 	: String) : String = { 
 		 	Util.usings = Util.usings + "import "+ this.getQualifiedName.replaceAll("::",".") +  "._\n";

@@ -8,4 +8,5 @@ trait GlobalConfiguration {
 	var factoryName : String = "RichFactory"
 	//var legacyFactoryName : String = "t.EcoreFactoryImpl"
 
-}
+} 
+ 

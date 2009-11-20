@@ -8,21 +8,25 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._ 
 import fr.irisa.triskell.kermeta.compilo.scala.loader._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
-  
+
 object Main extends EcoreRichAspectImplicit {
   def main(args : Array[String]) : Unit = {
 		  println("toto")
-	  
-	  var t: LoadModelHelper = new LoadModelHelper()  ;
-	
 	   
+		  
+		  
+	  var t: LoadModelHelper = new LoadModelHelper()  ;
+	  BehaviorPackage.eINSTANCE.setEFactoryInstance(new fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl());
+	  StructurePackage.eINSTANCE.setEFactoryInstance(new fr.irisa.triskell.kermeta.compilo.scala.rich.RichStructureFactoryImpl());
+		 
+	     
 	//var v : ModelingUnit = t.loadKM("FlatShort.km");  
 	var v : ModelingUnit = t.loadKM("tp1.km");  
 	
   	//var res = new StringBuilder
   	var visitorAspect = new ScalaAspectVisitor
-  	v.accept(visitorAspect)
-  	
+  	v.accept(visitorAspect) 
+  	 
   	var visitorImplicitFactory : ScalaFactoryAndImplicitVisitor = new ScalaFactoryAndImplicitVisitor
   	visitorImplicitFactory.init
   	v.accept(visitorImplicitFactory)

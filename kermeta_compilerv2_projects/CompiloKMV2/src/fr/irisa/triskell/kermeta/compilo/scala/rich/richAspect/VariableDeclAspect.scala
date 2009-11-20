@@ -18,7 +18,7 @@ override def generateScalaCode(res : StringBuilder) = {
 	res.append(" = ")
 	if (this.getInitialization !=  null){
 		this.getInitialization().generateScalaCode(res)
-	}else{
+	}else{ 
 		res.append("_")
 	}
 }
