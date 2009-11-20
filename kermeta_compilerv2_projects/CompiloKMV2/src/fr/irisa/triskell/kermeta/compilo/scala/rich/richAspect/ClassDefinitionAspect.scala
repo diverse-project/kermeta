@@ -10,9 +10,9 @@ import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
 trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisitable with GlobalConfiguration {
 	
-	def accept(visitor : IVisitor){
+	def accept(visitor : IVisitor){ 
 		visitor.visit(this) 
-	}	
+	}	 
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		if (Util.hasEcoreTag(this)){

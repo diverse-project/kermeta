@@ -11,7 +11,7 @@ import java.util._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
 trait ModelingUnitAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisitable {
-	/*
+	/* 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		//this.getPackages().foreach(p => p.generateScalaCode(res) ) 
 	}*/

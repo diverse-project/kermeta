@@ -11,7 +11,7 @@ import java.util._
 trait BlockAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		res.append("{\n")
+		res.append("{\n") 
 		this.getStatement().foreach(exp => {
 			exp.generateScalaCode(res)
 			res.append("\n")

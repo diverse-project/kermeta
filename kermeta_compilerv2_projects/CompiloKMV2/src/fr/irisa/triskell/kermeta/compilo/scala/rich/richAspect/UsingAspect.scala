@@ -9,7 +9,7 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait UsingAspect extends EcoreRichAspectImplicit with ObjectAspect {
-	
+	 
 override def generateScalaCode(res : StringBuilder) = {
 	res.append("\n")
 	res.append("import ")

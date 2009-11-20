@@ -12,7 +12,7 @@ trait TypeVariableBindingAspect extends EcoreRichAspectImplicit with ObjectAspec
 	
 override def generateScalaCode(res : StringBuilder) = {
 	this.getType().generateScalaCode(res)
-}		
+}		 
 	/*
  override def generateVisitor(tabsString 	: String) : String = { 
 		 return this.getType.generateVisitor(tabsString);

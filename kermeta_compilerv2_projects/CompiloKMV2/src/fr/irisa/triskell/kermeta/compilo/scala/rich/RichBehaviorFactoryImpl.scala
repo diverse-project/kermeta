@@ -26,7 +26,9 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 	}
 
 	override def createCallFeature() : CallFeature =  {
-		new CallFeatureImpl() with CallFeatureAspect
+		var v =new CallFeatureImpl() with CallFeatureAspect
+		println(v.getClass)
+		v
 	}
 
 	//TODO
@@ -36,7 +38,7 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 
 	override def createRaise() : Raise = {
 		new RaiseImpl() with RaiseAspect
-	}
+	} 
 
 	//TODO
 	override def createRescue() : Rescue = {
