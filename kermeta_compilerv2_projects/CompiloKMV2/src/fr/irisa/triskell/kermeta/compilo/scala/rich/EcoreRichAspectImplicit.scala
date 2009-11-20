@@ -35,9 +35,9 @@ trait EcoreRichAspectImplicit {
     //implicit def rich (xs : Parameter) = xs.asInstanceOf[ParameterAspect]
     //implicit def rich (xs : ParameterAspect) = xs.asInstanceOf[Parameter]
     
-    //implicit def rich (xs : Enumeration) = xs.asInstanceOf[EnumerationAspect]
-    //implicit def rich (xs : EnumerationAspect) = xs.asInstanceOf[Enumeration]
-    
+    implicit def rich (xs : Enumeration) = xs.asInstanceOf[EnumerationAspect]
+    implicit def rich (xs : EnumerationAspect) = xs.asInstanceOf[Enumeration]
+     
     implicit def rich (xs : Property) = xs.asInstanceOf[PropertyAspect]
     implicit def rich (xs : PropertyAspect) = xs.asInstanceOf[Property]
     implicit def rich (xs : TypeReference) = xs.asInstanceOf[TypeReferenceAspect]
@@ -126,7 +126,7 @@ trait EcoreRichAspectImplicit {
     
     implicit def rich (xs : EnumerationLiteral) = xs.asInstanceOf[EnumerationLiteralAspect]
     implicit def rich (xs : EnumerationLiteralAspect) = xs.asInstanceOf[EnumerationLiteral]
-    
+      
     //implicit def rich (xs : Constraint) = (xs.asInstanceOf[Constraint])
     //implicit def rich (xs : TypeDefinitionContainer) = (xs.asInstanceOf[TypeDefinitionContainer])
     //implicit def rich (xs : ParameterizedType) = (xs.asInstanceOf[ParameterizedType])

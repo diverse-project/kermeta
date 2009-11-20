@@ -112,7 +112,7 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 
 	//TODO
 	override def createEnumeration() : Enumeration = {
-		new EnumerationImpl() with ObjectAspect
+		new EnumerationImpl() with EnumerationAspect
 	}
 
 	//TODO

@@ -10,7 +10,11 @@ import java.util._
 
 trait ClassAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
-
+	override def generateScalaCode(res : StringBuilder) : Unit = {
+		println("pass par la")	
+		res.append(this.getTypeDefinition().asInstanceOf[ClassDefinition].getName )
+		
+	}
 	/*
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		

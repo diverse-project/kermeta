@@ -22,8 +22,8 @@ object Main extends EcoreRichAspectImplicit {
 		  
 	      
 	//var v : ModelingUnit = t.loadKM("tp1.km");  
-	var v : ModelingUnit = t.loadKM("../compilerv2_test/helloWorld/HelloWorld.km");  
-	
+	//var v : ModelingUnit = t.loadKM("../compilerv2_test/helloWorld/HelloWorld.km");  
+	var v : ModelingUnit = t.loadKM("../compilerv2_test/testAssignement/testAssignement2.km")
   	//var res = new StringBuilder
   	var visitorAspect = new ScalaAspectVisitor
   	v.accept(visitorAspect)

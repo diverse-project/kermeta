@@ -23,6 +23,8 @@ class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 		actualPackage = par.getQualifiedName()
 		if (!actualPackage.startsWith("kermeta")){
 			par.getOwnedTypeDefinition filter(p => p.isInstanceOf[ClassDefinition]) foreach(p=> p.asInstanceOf[ClassDefinition].accept(this))
+			par.getOwnedTypeDefinition filter(p => p.isInstanceOf[Enumeration]) foreach(p=> p.asInstanceOf[Enumeration].generateEnum())
+			
 			par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage
 		}
 	}
