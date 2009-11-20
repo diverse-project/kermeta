@@ -22,6 +22,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.internal.InternalKpmManager;
 
+/**
+ * This builder is trigerred on save in project that have the KPMBuilder command
+ */
 public class KpmProjectBuilder extends IncrementalProjectBuilder {
 
 	static final public String ID = "fr.irisa.triskell.kermeta.kpm.kpmBuilder";
@@ -72,7 +75,7 @@ public class KpmProjectBuilder extends IncrementalProjectBuilder {
 	 * @throws CoreException 
 	 */
 	private void incrementalBuild(IResourceDelta delta, IProgressMonitor monitor) throws CoreException {
-		DeltaVisitor v = new DeltaVisitor(InternalKpmManager.getDefault().getKpm(), monitor);
+		KpmBuilderDeltaVisitor v = new KpmBuilderDeltaVisitor(InternalKpmManager.getDefault().getKpm(), monitor);
 		delta.accept(v);
 	}
 	

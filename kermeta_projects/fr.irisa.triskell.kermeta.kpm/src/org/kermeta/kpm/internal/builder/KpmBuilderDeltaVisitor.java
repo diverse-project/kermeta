@@ -29,10 +29,12 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
  * 
  * The visit is monitored so at any time the process can be cancelled.
  * 
+ * It is trigerred on Building Projects having the KpmBuilder command
+ * 
  * @author paco
  *
  */
-public class DeltaVisitor extends UnitCreator implements IResourceDeltaVisitor {
+public class KpmBuilderDeltaVisitor extends UnitCreator implements IResourceDeltaVisitor {
 
 	/**
 	 * The monitor used for visiting the delta.
@@ -43,7 +45,7 @@ public class DeltaVisitor extends UnitCreator implements IResourceDeltaVisitor {
 	 * 
 	 * @param monitor
 	 */
-	public DeltaVisitor(KPM kpm, IProgressMonitor monitor) {
+	public KpmBuilderDeltaVisitor(KPM kpm, IProgressMonitor monitor) {
 		super(kpm);
 		_monitor = monitor;
 	}
@@ -82,7 +84,9 @@ public class DeltaVisitor extends UnitCreator implements IResourceDeltaVisitor {
 	 * @param resource The resource corresponding to a unit to be created.
 	 */
 	private void handleAdd(IResource resource) {
-		createUnit(resource, true);
+		Unit unit = createUnit(resource, true);
+		if ( unit != null )
+			EventDispatcher.sendEvent(unit, "update", null, _monitor);
 	}
 	
 	/**

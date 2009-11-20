@@ -98,7 +98,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener,
 					}
 				} else if ( delta.getKind() == IResourceDelta.REMOVED ) {
 					// Project deletion, let's remove any units coming from that project.
-					DeltaVisitor v = new DeltaVisitor(InternalKpmManager.getDefault().getKpm(), monitor);
+					KpmBuilderDeltaVisitor v = new KpmBuilderDeltaVisitor(InternalKpmManager.getDefault().getKpm(), monitor);
 					delta.accept(v);
 				} 
 				return Status.OK_STATUS;
