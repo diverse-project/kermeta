@@ -23,8 +23,10 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.kermeta.kpm.internal.builder.KpmProjectBuilder;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
+import fr.irisa.triskell.eclipse.resources.ProjectBuilderHelper;
 import fr.irisa.triskell.kermeta.resources.KermetaNature;
 
 public class NewKermetaProjectWizard extends Wizard implements INewWizard {
@@ -48,6 +50,7 @@ public class NewKermetaProjectWizard extends Wizard implements INewWizard {
 					 project.create(monitor);
 					 project.open(monitor);
 					 NatureHelper.addNatureToProject(project, KermetaNature.ID);
+					 ProjectBuilderHelper.addBuilderToProject(project, KpmProjectBuilder.ID);
 					 if ( page.createFolders() ) {
 						 
 						 createFolder(project, page.getSrcFolder(), monitor);

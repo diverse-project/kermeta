@@ -23,8 +23,10 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.kermeta.kpm.internal.builder.KpmProjectBuilder;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
+import fr.irisa.triskell.eclipse.resources.ProjectBuilderHelper;
 import fr.irisa.triskell.kermeta.resources.KermetaNature;
 
 public class ToggleNatureAction implements IObjectActionDelegate {
@@ -89,11 +91,13 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 
 				if ( ! project.hasNature(KermetaNature.ID) ) {
 					NatureHelper.addNatureToProject(project, KermetaNature.ID);
+					ProjectBuilderHelper.addBuilderToProject(project, KpmProjectBuilder.ID);
 			    	/*KPMResourceVisitor visitor = new KPMResourceVisitor(kermetaProject);
 			    	project.accept(visitor);
 			    	kermetaProject.save();*/
 			    } else {
 					NatureHelper.removeNatureFromProject(project, KermetaNature.ID);
+					ProjectBuilderHelper.removeBuilderFromProject(project, KpmProjectBuilder.ID);
 				}
 
 		      }
