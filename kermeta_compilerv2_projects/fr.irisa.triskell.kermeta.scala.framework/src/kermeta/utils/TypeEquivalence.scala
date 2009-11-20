@@ -3,7 +3,7 @@ package kermeta.utils
 object TypeEquivalence {
 	
 	
-	
+	 
 	var packageEquivelence :  java.util.HashMap[String,String] ={
 		var pack1 : java.util.HashMap[String,String]= new java.util.HashMap[String,String]();
 		pack1.put("ecore","org.eclipse.emf.ecore");

@@ -1,6 +1,8 @@
-package fr.irisa.triskell.kermeta.framework.io
+package kermeta.io
 
-object FileIO {
+
+
+class FileIO {
 	
 	def writeTextFile(filename : String, text : String) : Unit = {
 		

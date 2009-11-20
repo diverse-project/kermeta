@@ -3,7 +3,7 @@ package fr.irisa.triskell.kermeta.scala.framework.language.structure
 import org.eclipse.emf.ecore._
 import org.eclipse.emf.ecore.impl._
 
-trait ObjectAspect extends EObject {
+trait ObjectAspect extends org.eclipse.emf.ecore.impl.EObjectImpl with EObject {
 	
 	def getMetaClass = this.eClass()
 	def classDefinition = this

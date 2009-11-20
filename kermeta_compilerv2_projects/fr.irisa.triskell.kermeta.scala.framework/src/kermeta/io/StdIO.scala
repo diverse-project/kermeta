@@ -1,6 +1,8 @@
-package fr.irisa.triskell.kermeta.framework.io
+package kermeta.io
 
-object StdIO {
+object stdio extends StdIO
+
+class StdIO {
 	
 	def write(obj : AnyRef) : Unit = {
 		Console.print(obj)

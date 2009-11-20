@@ -3,7 +3,7 @@ package test
 import kermeta.standard.JavaConversions._
 import java.util._
 //import scala.collection.JavaConversions._
-     
+      
 class Test{}
   
 object Test {
