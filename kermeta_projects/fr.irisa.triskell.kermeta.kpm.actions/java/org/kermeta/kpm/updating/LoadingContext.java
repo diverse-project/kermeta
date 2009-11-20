@@ -64,19 +64,25 @@ public class LoadingContext implements IAction {
 			 * 
 			 */
 			for ( Unit u : l ) {
+				IFile file = null;
+				KermetaUnit newValue = null;
 				try {
 					LoaderPlugin.getDefault().load(u.getName(), args);
-					IFile file = ResourceHelper.getIFile( u.getName() );
-					KermetaUnit newValue = IOPlugin.getDefault().getKermetaUnit( u.getName() );
-					KermetaUnitHost.getInstance().updateValue(file, newValue);	
-
+					file = ResourceHelper.getIFile( u.getName() );
+					newValue = IOPlugin.getDefault().getKermetaUnit( u.getName() );
 				} catch (URIMalformedException e) {
 					KPMActions.log.warn("Exception while loading " + u.getName(),e);
 				} catch (NotRegisteredURIException e) {
 					KPMActions.log.warn("Exception while loading " + u.getName(),e);
-				} catch (IdNotFoundException e) {
-					KPMActions.log.warn("Exception while loading " + u.getName(),e);
 				}
+				try {
+						if(file != null && newValue != null)
+						KermetaUnitHost.getInstance().updateValue(file, newValue);	
+				} catch (IdNotFoundException e) {
+					// we don't care if there is nobody interested by an update on this resource
+					//	KPMActions.log.warn("Exception while loading " + u.getName(),e);
+				}
+				
 			}
 			
 			/*
