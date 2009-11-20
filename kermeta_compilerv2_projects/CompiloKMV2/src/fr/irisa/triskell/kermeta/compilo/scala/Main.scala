@@ -8,6 +8,7 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._ 
 import fr.irisa.triskell.kermeta.compilo.scala.loader._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
+import fr.irisa.triskell.kermeta.compilo.scala.visitor.impl._
 
 object Main extends EcoreRichAspectImplicit {
   def main(args : Array[String]) : Unit = {
@@ -25,7 +26,7 @@ object Main extends EcoreRichAspectImplicit {
 	
   	//var res = new StringBuilder
   	var visitorAspect = new ScalaAspectVisitor
-  	v.accept(visitorAspect) 
+  	v.accept(visitorAspect)
   	 
   	var visitorImplicitFactory : ScalaFactoryAndImplicitVisitor = new ScalaFactoryAndImplicitVisitor
   	visitorImplicitFactory.init

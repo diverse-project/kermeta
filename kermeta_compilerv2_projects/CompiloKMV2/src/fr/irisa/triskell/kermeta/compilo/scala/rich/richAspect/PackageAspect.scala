@@ -29,7 +29,7 @@ trait PackageAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisi
 		}
 	}*/
 	
-	def accept(visitor : IVisitor){
+	override def accept(visitor : IVisitor){
 		visitor.visit(this)
 	}	  
 

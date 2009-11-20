@@ -6,7 +6,6 @@ import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
-import java.util._
 
 trait OperationAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
@@ -14,7 +13,7 @@ trait OperationAspect extends EcoreRichAspectImplicit with ObjectAspect {
 		res.append("\n"+"   def ")
 		res.append(this.getName())
 		res.append("(") 
-		var i:Integer  = 0;
+		var i = 0;
 		this.getOwnedParameter.foreach(par => {
 			if (i==0) { 
 				res.append(par.getName()+" : ")
@@ -25,7 +24,7 @@ trait OperationAspect extends EcoreRichAspectImplicit with ObjectAspect {
 				res.append(" : ")
 				par.getType.generateScalaCode(res)
 			}
-			i=i+1
+			i=i + 1
 		})
 		res.append(")")
 		if (this.getBody!= null){

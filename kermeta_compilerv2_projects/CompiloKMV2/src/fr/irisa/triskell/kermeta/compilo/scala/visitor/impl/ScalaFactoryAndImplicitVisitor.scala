@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.compilo.scala.visitor
+package fr.irisa.triskell.kermeta.compilo.scala.visitor.impl
 
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
 import scala.collection.JavaConversions._

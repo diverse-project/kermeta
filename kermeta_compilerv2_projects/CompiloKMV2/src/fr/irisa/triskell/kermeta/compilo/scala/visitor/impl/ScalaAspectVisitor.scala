@@ -1,20 +1,20 @@
-package fr.irisa.triskell.kermeta.compilo.scala.visitor
-
+package fr.irisa.triskell.kermeta.compilo.scala.visitor.impl
 
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
 import fr.irisa.triskell.kermeta.compilo.scala._
-
+import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import scala.collection.JavaConversions._
+
 
 class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 	
 	var actualPackage : String = _
 	
 	def visit(par : ModelingUnit){
-		par.getPackages().foreach(p => p.accept(this) ) 		
+		par.getPackages().foreach(p => p.accept(this))		
  
 	}     
 	  

@@ -10,16 +10,6 @@ import java.util._
 
 
 trait ObjectAspect extends EcoreRichAspectImplicit {
-	
-	/*
-  def generateVisitor(tabsString 	: String) : String = { 
-		 return "//TODOObject"
-	}  */
-  def createInherithanceTree()  = {  
-		
-    }   
-  
-  //def getMainSuperClass():ArrayList[ClassDefinition] ={return null;}
   
   def generateScalaCode(res : StringBuilder) : Unit = {	
 	  res.append("/*TODO GenScalaCode*/")

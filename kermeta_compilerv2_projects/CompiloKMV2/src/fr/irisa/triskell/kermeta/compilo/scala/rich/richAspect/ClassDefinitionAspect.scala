@@ -6,7 +6,6 @@ import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
-import java.util._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
 trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisitable with GlobalConfiguration {
@@ -24,7 +23,7 @@ trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect wi
 					//res.append(" extends "+Util.traitname)
 	  			//TODO extends a superClassAspect		  
 			} else {
-				var i:Integer  = 0;
+				var i = 0;
 				this.getSuperType.foreach(superC => {
 					if (i==0) {
 						res.append(" extends ")
@@ -40,7 +39,7 @@ trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect wi
 						res.append(".")
 						res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
 					}
-					i=i+1;
+					i=i+1
 				})
 				res append " with "+frameworkGeneratedPackageName + "."+implicitConvTraitName
 				}
@@ -56,7 +55,7 @@ trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect wi
 					//res.append(" extends "+Util.traitname)
 	  			//TODO extends a superClassAspect
 			}else{
-				var i:Integer  = 0;
+				var i = 0;
 				this.getSuperType.foreach(superC => {
 					if (i==0) {
 						res.append(" extends ")
@@ -72,7 +71,7 @@ trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect wi
 						res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
 								//returnedString =returnedString + ", " +superC.getName; 
 					}
-					i=i+1;
+					i=i+1
 				})
 				res append " with "+frameworkGeneratedPackageName + "."+implicitConvTraitName
 			}
