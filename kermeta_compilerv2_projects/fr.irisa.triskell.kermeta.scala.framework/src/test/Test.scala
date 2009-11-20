@@ -4,7 +4,9 @@ import kermeta.standard.JavaConversions._
 import java.util._
 //import scala.collection.JavaConversions._
       
-class Test{}
+class Test{
+	var a :String=_
+	}
   
 object Test {
   def main(args : Array[String]) : Unit = {
@@ -22,6 +24,8 @@ object Test {
 		//t.asInstanceOf[JListWrapper[Int]].reject{e=> e>3}.map{e => println(e)}  	 
 		t.reject{e=> e>3}.map{e => println(e)}
 	  	
+		
+		
   }
   
 }
