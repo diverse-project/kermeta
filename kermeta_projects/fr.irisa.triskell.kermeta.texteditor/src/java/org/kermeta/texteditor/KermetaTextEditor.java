@@ -178,10 +178,14 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
     	return null;
     }
 	    
-    private Unit unit = null;
+    private Unit kpmUnit = null;
     
     private boolean initializeUnit() {
-   		unit = KpmManager.getDefault().getUnit( getFile() );
+   		kpmUnit = KpmManager.getDefault().getUnit( getFile() );
+   		if(kpmUnit == null ){
+   			// the file wasn't know/managed by kpm, add it
+   			KpmManager.getDefault().addUnit(getFile());
+   		}
 		return true;
     }
     
@@ -203,13 +207,14 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
 			initializeUnit();	
 			KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit( file );
 			if ( kermetaUnit != null ) {
+				// the unit was already loaded in the main store
 				KermetaUnitHost.getInstance().declareInterest(this, file);
 				updateValue( kermetaUnit );
 			} else {
 				KermetaUnitHost.getInstance().declareInterest(this, file);
-				if(unit != null){									
-					unit.setLastTimeModified( new Date(0) );
-					EventDispatcher.sendEvent(unit, "update", null, monitor);
+				if(kpmUnit != null){									
+					kpmUnit.setLastTimeModified( new Date(0) );
+					EventDispatcher.sendEvent(kpmUnit, "update", null, monitor);
 				}
 				else{
 					TexteditorPlugin.internalLog.warn("Weird, the unit "+file.getName()+ " is still not managed by kpm, (DVK note: should we fix that ?)");
