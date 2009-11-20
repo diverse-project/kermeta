@@ -31,8 +31,16 @@ class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 		
 			var res : StringBuilder = new StringBuilder
 			res.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage)+"\n")
+			res.append("import kermeta.io._\n")			
+			res.append("import kermeta.standard._\n")
+			res.append("import  kermeta.standard.JavaConversions._\n")
 			par.generateScalaCode(res)
-			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage), par.getName, res.toString())
+			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage), par.getName+"Aspect", res.toString())
+			
+			var res1 : StringBuilder = new StringBuilder
+			res1.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage)+"\n")
+			res1.append("class " + par.getName + " extends org.eclipse.emf.ecore.impl.EObjectImpl")
+			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage), par.getName, res1.toString())
 		 
 	}
 
