@@ -35,12 +35,15 @@ import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.internal.builder.Initializor;
 import org.kermeta.kpm.internal.builder.KPMRules;
 import org.kermeta.kpm.internal.builder.ProjectVisitor;
-import org.kermeta.kpm.internal.builder.ResourceChangeListener;
+import org.kermeta.kpm.internal.builder.UnitCreator;
+import org.kermeta.kpm.internal.builder.WorkspaceResourceChangeListener;
+import org.kermeta.kpm.preferences.KPMPreferenceHelper;
 
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.string.EscapeChars;
 
 public class InternalKpmManager {
 
@@ -90,8 +93,9 @@ public class InternalKpmManager {
 			initializeKpm();
 			initializeRules();
 			initializeExtensionElements();
-			initializeProjects();
-			ResourcesPlugin.getWorkspace().addResourceChangeListener( new ResourceChangeListener() );
+			// DVK do not add kpmBuilder automatically
+			//initializeProjects();			
+			// ResourcesPlugin.getWorkspace().addResourceChangeListener( new WorkspaceResourceChangeListener() );
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -184,6 +188,17 @@ public class InternalKpmManager {
 	 */
 	public Unit getUnit(IResource resource) {
 		return getUnit( "platform:/resource" + resource.getFullPath().toString() );
+	}
+	
+	
+	/**
+	 * 
+	 * @param resource
+	 * @return
+	 */
+	public Unit addUnit(IResource resource) {
+		UnitCreator uc = new UnitCreator(_kpm);
+		return uc.createUnit(resource, true );
 	}
 	
 	/**

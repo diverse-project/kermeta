@@ -19,8 +19,6 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -32,11 +30,11 @@ import org.kermeta.kpm.internal.InternalKpmManager;
 /**
  * This class is used to handle project create/deletion only.
  * Its responsibilities is to add/remove the necessary unit to the kpm model.
- * 
+ * It is triggered by the Workspace 
  * @author paco
  *
  */
-public class ResourceChangeListener implements IResourceChangeListener, IResourceDeltaVisitor {
+public class WorkspaceResourceChangeListener implements IResourceChangeListener, IResourceDeltaVisitor {
 
 	/**		A flag indicating the nature of the change for the project being processed.		*/
 	private int _projectChangeKind;

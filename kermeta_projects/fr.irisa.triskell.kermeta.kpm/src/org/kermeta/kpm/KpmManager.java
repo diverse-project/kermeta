@@ -77,6 +77,15 @@ public class KpmManager {
 	 * @param resource
 	 * @return
 	 */
+	public Unit addUnit(IResource resource) {
+		return _manager.addUnit(resource);
+	}
+	
+	/**
+	 * 
+	 * @param resource
+	 * @return
+	 */
 	public Unit getUnit(IResource resource) {
 		return _manager.getUnit(resource);
 	}

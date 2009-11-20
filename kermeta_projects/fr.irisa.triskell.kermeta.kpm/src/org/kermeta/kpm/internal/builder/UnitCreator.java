@@ -32,7 +32,7 @@ import fr.irisa.triskell.string.EscapeChars;
  * @author paco
  *
  */
-abstract public class UnitCreator {
+public class UnitCreator {
 
 	/**
 	 * The KPM model used to store units and to be saved.
@@ -69,10 +69,14 @@ abstract public class UnitCreator {
 	 * If a save is required, save the KPM model.
 	 * @param name The name of the unit to be created.
 	 * @param save Flag to indicate if a save is needed.
-	 * @return The created unit.
+	 * @return The created unit or an existing one.
 	 */
 	private Unit createUnit(String name, boolean save) {
-		Unit unit = KpmFactory.eINSTANCE.createUnit();
+		
+		Unit unit = _kpm.getUnit(name);
+		if (unit != null)
+			return unit;
+		unit = KpmFactory.eINSTANCE.createUnit();
 		unit.setName( name );
 		unit.setLastTimeModified( _date );
 		_kpm.getUnits().add(unit);
@@ -87,17 +91,21 @@ abstract public class UnitCreator {
 	 * @param name The name of the unit to be created.
 	 * @return The created unit.
 	 */
-	protected Unit createUnit(String name) {
+	public Unit createUnit(String name) {
 		return createUnit(name, true);
 	}
 	
 	/**
 	 * Create a unit timestamped and add it to the KPM model.
+	 * Create unit only for Resource with associated rule
 	 * @param resource The resource to be created as a unit.
-	 * @return The created unit.
+	 * @return The created unit or an existing one
 	 */
-	protected Unit createUnit(IResource resource, boolean save) {
+	public Unit createUnit(IResource resource, boolean save) {
 		IFile file = null;
+		Unit unit = _kpm.getUnit("platform:/resource" + resource.getFullPath().toString());
+		if (unit != null)
+			return unit;
 		
 		//Code to filter the *.java and *.class files
 		if ( resource instanceof IFile ) {
@@ -108,9 +116,9 @@ abstract public class UnitCreator {
 					return null;
 			}			
 		}
-		
-		Unit unit = createUnit( "platform:/resource" + resource.getFullPath().toString(), false );
+				
 		if ( file != null && file.getFileExtension() != null && file.getFileExtension().equals("kmt") ) {
+			unit = createUnit( "platform:/resource" + resource.getFullPath().toString(), false );
 			unit.getRules().add( KPMRules.UPDATE_KMT_RULE );
 		}
 		
