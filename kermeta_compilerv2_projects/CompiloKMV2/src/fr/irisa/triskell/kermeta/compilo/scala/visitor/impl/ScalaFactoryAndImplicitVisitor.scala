@@ -39,7 +39,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 		
   		par.getPackages().foreach(p => p.accept(this) ) 		
 	}
-	 
+	  
 	def visit(par : Package){
 		actualPackage = kermeta.utils.TypeEquivalence.packageEquivelence.get(par.getQualifiedName())
 		if (actualPackage == null)

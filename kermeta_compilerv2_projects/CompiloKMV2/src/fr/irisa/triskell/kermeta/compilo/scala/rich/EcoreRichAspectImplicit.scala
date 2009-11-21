@@ -6,7 +6,7 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
   
 trait EcoreRichAspectImplicit {
-	 
+	
     implicit def rich (xs : ModelingUnit) = xs.asInstanceOf[ModelingUnitAspect]
     implicit def rich (xs : ModelingUnitAspect) = xs.asInstanceOf[ModelingUnit]
     implicit def rich (xs : Package) = xs.asInstanceOf[PackageAspect]
@@ -17,13 +17,13 @@ trait EcoreRichAspectImplicit {
     implicit def rich (xs : ClassDefinitionAspect) = xs.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.ClassDefinition]
     implicit def rich (xs : Block) = (xs.asInstanceOf[BlockAspect]) 
     implicit def rich (xs : BlockAspect) = (xs.asInstanceOf[Block]) 
-      
-    
+       
+     
     //implicit def rich (xs : ClassDefinition) = xs.asInstanceOf[ClassDefinition]
     //implicit def rich (xs : VirtualType) = xs.asInstanceOf[VirtualType]
     implicit def rich (xs : PrimitiveType) = xs.asInstanceOf[PrimitiveTypeAspect]
     implicit def rich (xs : PrimitiveTypeAspect) = xs.asInstanceOf[PrimitiveType]
-    
+     
     implicit def rich (xs : CallResult) = xs.asInstanceOf[CallResultAspect]
     implicit def rich (xs : CallResultAspect) = xs.asInstanceOf[CallResult] 
     
@@ -42,7 +42,7 @@ trait EcoreRichAspectImplicit {
     implicit def rich (xs : PropertyAspect) = xs.asInstanceOf[Property]
     implicit def rich (xs : TypeReference) = xs.asInstanceOf[TypeReferenceAspect]
     implicit def rich (xs : TypeReferenceAspect) = xs.asInstanceOf[TypeReference]
-    
+   
     implicit def rich (xs : Operation) = xs.asInstanceOf[OperationAspect]
     implicit def rich (xs : OperationAspect) = xs.asInstanceOf[Operation]
     
@@ -76,7 +76,7 @@ trait EcoreRichAspectImplicit {
     
     implicit def rich (xs : IntegerLiteral) = xs.asInstanceOf[IntegerLiteralAspect]
     implicit def rich (xs : IntegerLiteralAspect) = xs.asInstanceOf[IntegerLiteral]
-    
+   
     
     //implicit def rich (xs : ModelType) = (xs.asInstanceOf[ModelType])
     
@@ -123,7 +123,7 @@ trait EcoreRichAspectImplicit {
     
     implicit def rich (xs : fr.irisa.triskell.kermeta.language.structure.Object) = xs.asInstanceOf[ObjectAspect]
     implicit def rich (xs : ObjectAspect) = xs.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object]
-    
+ 
     implicit def rich (xs : EnumerationLiteral) = xs.asInstanceOf[EnumerationLiteralAspect]
     implicit def rich (xs : EnumerationLiteralAspect) = xs.asInstanceOf[EnumerationLiteral]
       

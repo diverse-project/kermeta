@@ -9,7 +9,7 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait TypeVariableBindingAspect extends EcoreRichAspectImplicit with ObjectAspect {
-	
+	 
 override def generateScalaCode(res : StringBuilder) = {
 	this.getType().generateScalaCode(res)
 }		 

@@ -9,11 +9,11 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
  
 trait AssignmentAspect extends EcoreRichAspectImplicit with ObjectAspect {
-	
+	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		if (!this.isIsCast()){
 			this.getTarget().generateScalaCode(res)
-			res.append("=")
+			res.append(" = ")
 			this.getValue().generateScalaCode(res)
 		} else { 
 			this.getTarget().generateScalaCode(res)

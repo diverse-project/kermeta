@@ -11,7 +11,9 @@ import java.util._
 trait CallVariableAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
+		
 		res.append(this.getName())
+		
 	}
 	/*
 def generateVisitor(tabsString 	: String) : String = { 

@@ -10,7 +10,7 @@ import java.util._
 
 
 trait ObjectAspect extends EcoreRichAspectImplicit {
-  
+   
   def generateScalaCode(res : StringBuilder) : Unit = {	
 	  res.append("/*TODO GenScalaCode "+ this.getClass +" */")
   }

@@ -1,7 +1,7 @@
 package fr.irisa.triskell.kermeta.compilo.scala
 
 trait GlobalConfiguration {
-	  
+	   
 	var frameworkGeneratedPackageName : String = "fr.irisa.triskell.scala.generated.fw"
 	var implicitConvTraitName : String = "ImplicitConversion"
 	var viewDefTraitName : String = "ViewType"

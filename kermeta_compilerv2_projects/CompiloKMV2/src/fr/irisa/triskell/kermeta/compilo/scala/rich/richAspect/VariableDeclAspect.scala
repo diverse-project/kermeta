@@ -9,7 +9,7 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait VariableDeclAspect extends EcoreRichAspectImplicit with ObjectAspect {
-	
+	 
 override def generateScalaCode(res : StringBuilder) = {
 	res.append("var ")
 	res.append(this.getIdentifier)

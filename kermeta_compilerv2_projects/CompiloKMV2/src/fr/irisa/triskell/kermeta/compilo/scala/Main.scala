@@ -14,7 +14,7 @@ object Main extends EcoreRichAspectImplicit {
   def main(args : Array[String]) : Unit = {
 		  println("toto")
 	   
-		  
+		   
 		  
 	  var t: LoadModelHelper = new LoadModelHelper()  ;
 	  BehaviorPackage.eINSTANCE.setEFactoryInstance(new fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl());

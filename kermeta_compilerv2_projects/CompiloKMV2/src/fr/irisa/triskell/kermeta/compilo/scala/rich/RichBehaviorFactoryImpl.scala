@@ -48,7 +48,7 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 	override def createBlock() : Block = {
 		new BlockImpl() with BlockAspect
 	}
-
+ 
 	override def createCallVariable() : CallVariable = {
 		new CallVariableImpl() with CallExpressionAspect with CallVariableAspect
 	}

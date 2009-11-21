@@ -9,7 +9,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
 
 class RichStructureFactoryImpl extends StructureFactoryImpl {
- 
+  
 	override def createObject() = {
 		var v =new ObjectImpl with ObjectAspect
 		

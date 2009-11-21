@@ -9,13 +9,16 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait CallFeatureAspect extends EcoreRichAspectImplicit with CallExpressionAspect {
-	
+
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		if ("new".equals(this.getName)){
-			res append " "+this.getName()+" "
 			if (this.getTarget!=null){
-				this.getTarget().generateScalaCode(res)
-				res append "()"
+				var ty : TypeDefinition =this.getTarget.asInstanceOf[TypeLiteral].getTyperef().getType().asInstanceOf[ParameterizedType].getTypeDefinition()
+				res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
+				res.append(".RichFactory.create")
+				res.append(ty.getName())
+				//this.getTarget().generateScalaCode(res)
+//				res append "()"
 			} 
 		} else {
 			if (this.getTarget!=null){
@@ -23,9 +26,11 @@ trait CallFeatureAspect extends EcoreRichAspectImplicit with CallExpressionAspec
 				res append "."
 			}
 			if (this.getStaticProperty!=null){
-				res append "get"+this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size) +"()"
-			} else {
-				res append this.getName
+				//res append "get"+this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size) +"()"
+				res.append(Util.scalaPrefix+this.getName)
+			} else {  
+				println("pass encore par la " + this.getName)
+				res.append(kermeta.utils.TypeEquivalence.getMethodEquivalence("String", this.getName))
 			}
 			if (this.getStaticOperation!=null){
          	  res append "(" 

@@ -1,4 +1,4 @@
- package fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect
+package fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect
 
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
 import scala.collection.JavaConversions._

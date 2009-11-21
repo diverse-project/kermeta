@@ -10,7 +10,7 @@ import java.util._
 
 
 trait TypeLiteralAspect extends EcoreRichAspectImplicit with ObjectAspect {
-	
+	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		if (this.getTyperef.getType.isInstanceOf[ParameterizedType]){ 
 				if (Util.hasEcoreTag(this.getTyperef.getType.asInstanceOf[ParameterizedType].getTypeDefinition)){ 

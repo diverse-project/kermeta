@@ -8,7 +8,7 @@ trait IVisitor {
 	
 	def visit(par : ModelingUnit)
 	 
-	def visit(par : Package)
+	def visit(par : Package) 
 	
 	def visit(par : ClassDefinition)
  

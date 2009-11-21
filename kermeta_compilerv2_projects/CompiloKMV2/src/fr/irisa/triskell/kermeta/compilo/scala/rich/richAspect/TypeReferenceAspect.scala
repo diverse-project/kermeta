@@ -9,7 +9,7 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait TypeReferenceAspect extends EcoreRichAspectImplicit with ObjectAspect {
-	 
+	  
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append(this.getName)
 

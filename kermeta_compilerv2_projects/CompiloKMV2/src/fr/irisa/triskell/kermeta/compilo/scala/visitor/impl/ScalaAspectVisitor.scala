@@ -10,7 +10,7 @@ import scala.collection.JavaConversions._
 
 
 class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
-	 
+	   
 	var actualPackage : String = _
 	
 	def visit(par : ModelingUnit){
