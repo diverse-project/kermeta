@@ -22,7 +22,7 @@ import fr.irisa.triskell.kermeta.KmPackage;
 import org.eclipse.emf.ecore._;
 import java.lang.String
 
-abstract class Resource  extends java.util.HashSet[Object] with collectionTraits{
+abstract class Resource  extends java.util.HashSet[Object]{
 	var dependentResources:Resource=null;
 	var contents:Object=null;
 	var repository:Repository=null;
@@ -46,7 +46,7 @@ abstract class Repository  extends Object{
 	def getResource(uri : String) :Resource={return null}
 }
 
-class EMFRepository  extends Repository with collectionTraits  {
+class EMFRepository  extends Repository  {
 	var useInterpreterInternalResources:Boolean=true;
 	var ignoreLoadErrorUnknownMetaclass:Boolean=true;
 	var ignoreAllLoadErrors:Boolean=true;
@@ -59,7 +59,7 @@ class EMFRepository  extends Repository with collectionTraits  {
 }
 
 
-class EMFResource  extends Resource  with collectionTraits{
+class EMFResource  extends Resource  {
 	override def remove(instance : Object)={super.remove(instance)}
 	override  def save()={}
 	override def saveWithNewURI(new_uri : String)={ uri = new_uri 
