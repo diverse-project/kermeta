@@ -12,8 +12,7 @@ import fr.irisa.triskell.kermeta.compilo.scala.visitor.impl._
 
 object Main extends EcoreRichAspectImplicit {
   def main(args : Array[String]) : Unit = {
-		  println("toto")
-	   
+		  
 		   
 		  
 	  var t: LoadModelHelper = new LoadModelHelper()  ;
@@ -23,7 +22,8 @@ object Main extends EcoreRichAspectImplicit {
 	      
 	//var v : ModelingUnit = t.loadKM("tp1.km");  
 	//var v : ModelingUnit = t.loadKM("../compilerv2_test/helloWorld/HelloWorld.km");  
-	var v : ModelingUnit = t.loadKM("../compilerv2_test/testAssignement/testAssignement2.km")
+//	var v : ModelingUnit = t.loadKM("../compilerv2_test/testAssignement/testAssignement2.km")
+	var v : ModelingUnit = t.loadKM("../compilerv2_test/testAssignement/testAssignement.km") 
   	//var res = new StringBuilder
   	var visitorAspect = new ScalaAspectVisitor
   	v.accept(visitorAspect)
@@ -32,7 +32,8 @@ object Main extends EcoreRichAspectImplicit {
   	visitorImplicitFactory.init
   	v.accept(visitorImplicitFactory)
   	visitorImplicitFactory.close
-  	
+  	println("DONE")
+	   
     //v.generateScalaCode(res)
     //Console.println(res.toString())
   }

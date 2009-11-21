@@ -19,7 +19,7 @@ override def generateScalaCode(res : StringBuilder) = {
 	if (this.getInitialization !=  null){
 		this.getInitialization().generateScalaCode(res)
 	}else{ 
-		res.append("_")
+		res.append("null")
 	}
 }
 }
