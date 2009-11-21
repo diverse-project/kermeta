@@ -1,25 +1,27 @@
 package kermeta.standard;
 //import fr.irisa.triskell.kermeta.language.structure._
-import fr.irisa.triskell.kermeta._
 //import fr.irisa.triskell.kermeta.language._
 import scala._
 //import fr.irisa.triskell.kermeta.language.behavior._
 
-   
-
-trait collectionTraits{
-	
+    
+object PrimitiveConversion{
+	implicit def string2kermeta(x: String) = new RichString(x)	
+	implicit def boolean2kermeta(x: Boolean) = new RichBoolean(x)	
+//	implicit def integer2kermeta(x: Integer) = new RichInteger(x)	
+	implicit def integer2kermeta(x: Int) = new RichInteger(x)	
+	implicit def real2kermeta(x: Double) = new RichReal(x)	
+	implicit def character2kermeta(x: Char) = new RichCharacter(x)	
+	implicit def toInt(in:Integer) = new RichInteger(in.intValue)
 }  
-
   
-  
-class Void  extends Object  with collectionTraits //with fr.irisa.triskell.kermeta.scala.framework.emf.aspects.KermetaObjectAspect  
+class Void  extends Object //with fr.irisa.triskell.kermeta.scala.framework.emf.aspects.KermetaObjectAspect  
 {
 	 def isVoid() :Boolean={return true;}
 	 override def toString() :java.lang.String={return  "<void>";}
 }
  
-class RichValueType[G]  extends Object with collectionTraits {}
+class RichValueType[G]  extends Object {}
 
 abstract class Comparable[G]  extends Object {
 	def isLower(other : G) :Boolean={  true}
@@ -54,27 +56,36 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
 }
 abstract class RichNumeric[G]  extends Comparable[G]{}
 
-class RichInteger(value: Int)  extends RichNumeric[Int] with collectionTraits{
+class RichInteger(value: Int)  extends RichNumeric[Int] {
 	override def isLower(other : Int) :Boolean={true}
-	def plus(other : Int) :Int={0}
+	def plus(other : Int) :Int={value+other}
+	def plus(other : Integer) :Int={value+other.intValue}
 	def mult(other : Int) :Int={value*other}
+	def mult(other : Integer) :Int={value*other.intValue}
+	def minus(other : Integer) :Int={return value-other.intValue}
 	def minus(other : Int) :Int={return value-other}
 	//def equals(other : Object) :Boolean={return value==other.asInstanceOf[Int]}
-	def mod(other : Int) :Int={return value+other}
+	def mod(other : Int) :Int={return 0}
+	def mod(other : Integer) :Int={return 0}
 	def div(other : Int) :Int={return value/other}
+	def div(other : Integer) :Int={return value/(other.intValue)}
 	def toReal() :Double={return 0.0}
 	override def compareTo(other : Int) :Int={return 0}
+	def compareTo(other : Integer) :Int={return 0} 
 	override def isGreater(other : Int) :Boolean={return true}
+	def isGreater(other : Integer) :Boolean={return true}
 	override def isGreaterOrEqual(other : Int) :Boolean={return true}
-	def uminus() :Integer={return value * (-1);}
+	def isGreaterOrEqual(other : Integer) :Boolean={return true}
+	def uminus() :Int={return value * (-1);}
 	//def times(body : Integer=>Unit) :{}
 	override def toString() :java.lang.String={return ""+value}
 	override def isLowerOrEqual(other : Int) :Boolean={return true}
+	def isLowerOrEqual(other : Integer) :Boolean={return true}
 	def toInt() : Int = {return value}
 }
 
 
-class RichReal (value: Double) extends RichNumeric[Double]  with collectionTraits{
+class RichReal (value: Double) extends RichNumeric[Double] {
 	def plus(other : Double) :Double={return value+other.toDouble}
 	def mult(other : Double) :Double={return value*other.toDouble}
 	def minus(other : Double) :Double={return value-other.toDouble}
@@ -88,11 +99,11 @@ class RichReal (value: Double) extends RichNumeric[Double]  with collectionTrait
     def toDouble() : Double = {return value}
 }
 
-class RichCharacter(value:Char)  extends RichValueType  with collectionTraits{
+class RichCharacter(value:Char)  extends RichValueType {
 	def compareTo(other : Object) :Int={0}
 	override def toString() :java.lang.String={return ""+value}
 }
-class RichString(value: java.lang.String)  extends RichValueType  with collectionTraits{
+class RichString(value: java.lang.String)  extends RichValueType {
 	def append(other : String)={}
 	def plus(other : String) :java.lang.String={return value + other}
 	//def equals(other : Object) :Boolean={return value.equals(other)}
@@ -111,7 +122,7 @@ class RichString(value: java.lang.String)  extends RichValueType  with collectio
 	override def toString() :java.lang.String={value.toString}
 	//def split(delimiter : String) :Sequence[String]={return value.split(delimiter)}
 } 
-class RichUnknownJavaObject  extends Object  with collectionTraits{
+class RichUnknownJavaObject  extends Object {
 	override def toString() :java.lang.String={return "toString of  UnknownJavaObject not implemented yet";
 	  }
 }

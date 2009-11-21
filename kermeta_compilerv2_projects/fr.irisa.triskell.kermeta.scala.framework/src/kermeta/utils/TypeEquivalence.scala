@@ -50,10 +50,10 @@ object TypeEquivalence {
 		Collection.put("count", "countElement");
 		methodEquivalence.put("kermeta.standard.Collection", Collection);
 		methodEquivalence 
-		var Str : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
-		Str.put("plus", "+");
-		methodEquivalence.put("String", Str);
-		methodEquivalence 
+		//var Str : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
+		//Str.put("plus", "+");
+		//methodEquivalence.put("String", Str);
+		//methodEquivalence 
 
 	};
 	 
