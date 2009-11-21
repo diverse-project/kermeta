@@ -47,11 +47,25 @@ object TypeEquivalence {
 		methodEquivalence.put("kermeta.utils.Stack", Stack);
 		
 		var Collection : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
-		Stack.put("count", "countElement");
+		Collection.put("count", "countElement");
 		methodEquivalence.put("kermeta.standard.Collection", Collection);
 		methodEquivalence 
+		var Str : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
+		Str.put("plus", "+");
+		methodEquivalence.put("String", Str);
+		methodEquivalence 
+
 	};
 	 
+	def getMethodEquivalence(className:String,methodName:String):String={
+		var res :String = null
+		var map :java.util.HashMap[String,String] = methodEquivalence.get(className)
+		if (map !=null) 
+			res =  map.get(methodName)
+		if (res ==null) 
+			res =methodName		
+		return res 
+	}
 	
 	
 }
