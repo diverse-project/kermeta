@@ -1,0 +1,21 @@
+/* $Id:$ 
+ * Creation : November 20, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "p1::Main"
+@mainOperation "main"
+
+
+package p1;
+
+
+require kermeta
+class Main
+{
+	operation main() : Void is do 
+		stdio.writeln("Bonjour Kermeta")
+	end
+}
