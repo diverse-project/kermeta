@@ -14,8 +14,8 @@ override def generateScalaCode(res : StringBuilder) : Unit = {
 	res.append("\"")
 	res.append(this.getValue.replaceAll("\n","\\\\n").replaceAll("\t","\\\\t"))
 	res.append("\"")
-}
-	
+} 
+	 
 /*
 override def generateVisitor(tabsString 	: String) : String = { 
 		 return "\"" + this.getValue.replaceAll("\n","\\\\n").replaceAll("\t","\\\\t") + "\"";

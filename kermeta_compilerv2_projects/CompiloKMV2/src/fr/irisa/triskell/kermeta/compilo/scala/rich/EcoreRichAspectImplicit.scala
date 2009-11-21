@@ -58,9 +58,11 @@ trait EcoreRichAspectImplicit {
     
     implicit def rich (xs : StringLiteral) = xs.asInstanceOf[StringLiteralAspect]
     implicit def rich (xs : StringLiteralAspect) = xs.asInstanceOf[StringLiteral]
+     
     
-    
-    //implicit def rich (xs : VoidLiteral) = (xs.asInstanceOf[VoidLiteral])
+    implicit def rich (xs : VoidLiteral) = (xs.asInstanceOf[VoidLiteralAspect])
+    implicit def rich (xs : VoidLiteralAspect) = (xs.asInstanceOf[VoidLiteral])
+
     //implicit def rich (xs : MultiplicityElement) = (xs.asInstanceOf[MultiplicityElement])
     //implicit def rich (xs : TypeVariable) = (xs.asInstanceOf[TypeVariable])
     
@@ -130,7 +132,9 @@ trait EcoreRichAspectImplicit {
     //implicit def rich (xs : Constraint) = (xs.asInstanceOf[Constraint])
     //implicit def rich (xs : TypeDefinitionContainer) = (xs.asInstanceOf[TypeDefinitionContainer])
     //implicit def rich (xs : ParameterizedType) = (xs.asInstanceOf[ParameterizedType])
-    //implicit def rich (xs : VoidType) = (xs.asInstanceOf[VoidType])
+    implicit def rich (xs : VoidType) = (xs.asInstanceOf[VoidTypeAspect])
+    implicit def rich (xs : VoidTypeAspect) = (xs.asInstanceOf[VoidType])
+
     //implicit def rich (xs : TypeDefinition) = (xs.asInstanceOf[TypeDefinition])
     //implicit def rich (xs : Expression) = (xs.asInstanceOf[Expression])
     

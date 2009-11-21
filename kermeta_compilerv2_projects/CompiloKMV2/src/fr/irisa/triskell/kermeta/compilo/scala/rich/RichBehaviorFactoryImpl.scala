@@ -78,11 +78,11 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 	}
 
 	override def createTypeLiteral() : TypeLiteral = {
-		new TypeLiteralImpl() with TypeLiteralAspect
+		new TypeLiteralImpl() with TypeLiteralAspect 
 	}
 
 	override def createVoidLiteral() :VoidLiteral = {
-		new VoidLiteralImpl() with ObjectAspect
+		new VoidLiteralImpl() with VoidLiteralAspect
 	}
 
 	override def createAssignment() :Assignment = {

@@ -89,9 +89,9 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 	}
 
 	override def createVoidType() : VoidType = {
-		new VoidTypeImpl() with ObjectAspect
+		new VoidTypeImpl() with VoidTypeAspect
 	}
-
+ 
 	//TODO
 	override def createRequire() : Require = {
 		new RequireImpl() with ObjectAspect

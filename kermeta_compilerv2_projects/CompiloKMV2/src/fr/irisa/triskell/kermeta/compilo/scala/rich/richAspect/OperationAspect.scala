@@ -26,10 +26,18 @@ trait OperationAspect extends EcoreRichAspectImplicit with ObjectAspect {
 			}
 			i=i + 1
 		})
-		res.append(")")
+		res.append("):")
+		
+		this.getType.generateScalaCode(res)
+		
 		if (this.getBody!= null){
-			res.append(" = ")
+			res.append(" = {\n\t")
+			res.append("var result : ")
+			this.getType.generateScalaCode(res)
+			res.append(" = null;\n")
+			
 			this.getBody().generateScalaCode(res)
+			res.append(" return result\n}\n")
 			//res.append("}/*End_"+this.getName()+"*/\n")
 		}
 	}

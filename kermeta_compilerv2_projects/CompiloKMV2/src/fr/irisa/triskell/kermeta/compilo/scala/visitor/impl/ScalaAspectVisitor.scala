@@ -36,6 +36,8 @@ class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 			res.append("import kermeta.io._\n")			
 			res.append("import kermeta.standard._\n")
 			res.append("import  kermeta.standard.JavaConversions._\n")
+			res.append("import kermeta.standard.PrimitiveConversion._\n")
+			
 			par.generateScalaCode(res)
 			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage), par.getName+"Aspect", res.toString())
 			

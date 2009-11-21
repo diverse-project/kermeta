@@ -1,5 +1,5 @@
 package fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect
-
+ 
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
 import scala.collection.JavaConversions._
 import fr.irisa.triskell.kermeta.compilo.scala._
@@ -11,9 +11,17 @@ import java.util._
 trait PrimitiveTypeAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
 override def generateScalaCode(res : StringBuilder) : Unit = {
-	 if (Util.hasEcoreTag(this)){
+	println("pass par primitive type " + this.getName) 
+	if (Util.hasEcoreTag(this)){
 		 res.append(this.getOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName)).first.getValue)
+	 }else{
+		 if (this.getInstanceType !=null){
+			 this.getInstanceType.generateScalaCode(res)
+		 }
+		 else
+			 res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName)+"."+this.getName())
 	 }
+	
 }
 	/* 
  def generateVisitor(tabsString 	: String) : String = { 
