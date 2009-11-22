@@ -13,9 +13,9 @@ trait LoopAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		this.getInitialization().generateScalaCode(res)
 		res.append("\n")
-		res.append("while (")
+		res.append("while (!(")
 		this.getStopCondition().generateScalaCode(res)
-		res.append(")\n")
+		res.append("))\n")
 		this.getBody().generateScalaCode(res)
 	}
 	/*

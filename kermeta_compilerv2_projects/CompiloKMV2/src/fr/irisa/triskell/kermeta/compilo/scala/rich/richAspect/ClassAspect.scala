@@ -11,9 +11,14 @@ import java.util._
 trait ClassAspect extends EcoreRichAspectImplicit with ObjectAspect {
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		var s : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName + "."+this.getTypeDefinition().asInstanceOf[ClassDefinition].getName 
-		println(s)
-		res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(s))
+		var pack : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName 
+		var s : String = pack + "."+this.getTypeDefinition().asInstanceOf[ClassDefinition].getName 
+		//println(s)
+//		if (Util.currentPackage.equals(pack))
+//				res.append(this.getTypeDefinition().asInstanceOf[ClassDefinition].getName )
+//		else
+			res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(s))
+
 		
 	}
 	/*
