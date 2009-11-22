@@ -58,8 +58,8 @@ object JavaConversions {
   import scala.reflect.ClassManifest
 
     trait KermetaCollection[A] extends scala.collection.mutable.Buffer[A]{
-	def reject(rejector: A => scala.Boolean) :Sequence[A]={  
-	 	  return this.filterNot{e=> var l: Boolean = rejector(e) ;println(l); l}
+	def reject(rejector: A => scala.Boolean) :java.util.List[A]={  
+	 	  return this.filterNot{e=> var l: Boolean = rejector(e) ; l}
 	}
 	def countElement(element : A) :Int={
 		return this.count{e => e.equals(element)}; 
@@ -83,9 +83,9 @@ object JavaConversions {
 	/*TODO*/def addAll(elts : Collection[A])={//println("addAll")
                                            elts.foreach(e=> elements.toList)} 
 	/*TODO*/def includesAll(elements : Collection[A]) :Boolean={return true}
-	def select(selector : A=> scala.Boolean) :Sequence[A]={return this.filter{e=> selector(e)}}
+	def select(selector : A=> scala.Boolean) :java.util.List[A]={return this.filter{e=> selector(e)}}
 	override def size() :Int={return this.length}
-	def each(func : A=> Unit) ={elements.foreach(e=> func(e))}
+	def each(func : A=> Unit):Unit ={elements.foreach(e=> func(e))}
 	/*TODO*///def collect(collector : A=> Unit) :Sequence[A]={return null}
 	def asSet() :java.util.List[A] = {
 		var res : java.util.List[A] = new java.util.ArrayList[A];
@@ -137,6 +137,11 @@ object JavaConversions {
     case JListWrapper(wrapped) => wrapped
     case _ => new MutableBufferWrapper(b)
   }
+    implicit def asList[A](b : mutable.Buffer[A]) : ju.List[A] = b match {
+    case JListWrapper(wrapped) => wrapped
+    case _ => new MutableBufferWrapper1(b)
+  }
+
   
   implicit def asSet[A](s : mutable.Set[A])(implicit m : ClassManifest[A]) : ju.Set[A] = s match {
     case JSetWrapper(wrapped) => wrapped
@@ -233,6 +238,15 @@ object JavaConversions {
     	underlying.append(elem) ; true }
     override def remove(i : Int) = underlying.remove(i)
   }
+  case class MutableBufferWrapper1[A](underlying : mutable.Buffer[A]) extends ju.AbstractList[A] {
+    def size = underlying.length
+    def get(i : Int) = underlying(i)
+    override def set(i : Int, elem: A) = { val p = underlying(i) ; underlying(i) = elem ; p }
+    override def add(elem : A) = { println("toto") 
+    	underlying.append(elem) ; true }
+    override def remove(i : Int) = underlying.remove(i)
+  }
+
   
   case class JListWrapper[A](val underlying : ju.List[A]) extends mutable.Buffer[A] with KermetaCollection[A]{
     def length = underlying.size

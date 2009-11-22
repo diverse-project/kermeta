@@ -72,7 +72,7 @@ class RichInteger(value: Int)  extends RichNumeric[Int] {
 	def toReal() :Double={return 0.0}
 	override def compareTo(other : Int) :Int={return 0}
 	def compareTo(other : Integer) :Int={return 0} 
-	override def isGreater(other : Int) :Boolean={return true}
+	override def isGreater(other : Int) :Boolean={return value>other}
 	def isGreater(other : Integer) :Boolean={return true}
 	override def isGreaterOrEqual(other : Int) :Boolean={return true}
 	def isGreaterOrEqual(other : Integer) :Boolean={return true}

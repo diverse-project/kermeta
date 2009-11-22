@@ -23,6 +23,7 @@ object TypeEquivalence {
 		typeEquivelence.put("org.eclipse.emf.ecore.EStringToStringMapEntry","java.util.Map$Entry[String,String]")
 		typeEquivelence.put("kermeta.utils.Stack", " java.util.Stack");
 		typeEquivelence.put("kermeta.standard.Collection", "java.util.List");
+		typeEquivelence.put("kermeta.standard.Set", "java.util.List");
 		typeEquivelence.put("kermeta.standard.String", "java.lang.String");
 		typeEquivelence.put("kermeta.standard.Integer", "java.lang.Integer");
 		typeEquivelence.put("kermeta.standard.Real", "java.lang.Double");
