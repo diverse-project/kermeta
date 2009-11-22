@@ -64,7 +64,9 @@ class RichInteger(value: Int)  extends RichNumeric[Int] {
 	def mult(other : Integer) :Int={value*other.intValue}
 	def minus(other : Integer) :Int={return value-other.intValue}
 	def minus(other : Int) :Int={return value-other}
-	//def equals(other : Object) :Boolean={return value==other.asInstanceOf[Int]}
+	override def equals(other : Any) :Boolean={println("equals"); if (other.isInstanceOf[Int]) return value==other.asInstanceOf[Int]; if (other.isInstanceOf[Integer]) return value==other.asInstanceOf[Integer].intValue;else false}
+	def equals(other : Int) :Boolean={println("equals");value==other}
+	def equals(other : Integer) :Boolean={println("equals");value == other.intValue}
 	def mod(other : Int) :Int={return 0}
 	def mod(other : Integer) :Int={return 0}
 	def div(other : Int) :Int={return value/other}
