@@ -11,9 +11,11 @@ import java.util._
 trait LambdaExpressionAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
+		res.append("{")
 		this.getParameters().foreach(e=> e.generateScalaCode(res))
 		res.append("=>")
 		this.getBody().generateScalaCode(res)
+		res.append("}")
 	}
 	/*
 def generateVisitor(tabsString 	: String) : String = { 

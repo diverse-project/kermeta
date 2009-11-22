@@ -14,7 +14,7 @@ override def generateScalaCode(res : StringBuilder) = {
 	res.append("var ")
 	res.append(this.getIdentifier)
 	res.append(" : ")
-	this.getType().generateScalaCode(res)
+	this.getType().generateScalaCode(res) 
 	res.append(" = ")
 	if (this.getInitialization !=  null){
 		this.getInitialization().generateScalaCode(res)

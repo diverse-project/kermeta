@@ -11,8 +11,8 @@ import java.util._
 trait TypeReferenceAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	  
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		res.append(this.getName)
-
+		//res.append(this.getName)
+			this.getType().generateScalaCode(res)
 		if(this.getType.isInstanceOf[ParameterizedType])
 		{
 			if(this.getType().asInstanceOf[ParameterizedType].getTypeParamBinding.size>0){

@@ -11,8 +11,9 @@ import java.util._
 trait ClassAspect extends EcoreRichAspectImplicit with ObjectAspect {
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		//println("pass par la")	
-		res.append(this.getTypeDefinition().asInstanceOf[ClassDefinition].getName )
+		var s : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName + "."+this.getTypeDefinition().asInstanceOf[ClassDefinition].getName 
+		println(s)
+		res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(s))
 		
 	}
 	/*

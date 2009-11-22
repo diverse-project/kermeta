@@ -17,6 +17,14 @@ trait CallFeatureAspect extends EcoreRichAspectImplicit with CallExpressionAspec
 				res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
 				res.append(".RichFactory.create")
 				res.append(ty.getName())
+				var ty1 : ParameterizedType = this.getTarget.asInstanceOf[TypeLiteral].getTyperef().getType().asInstanceOf[ParameterizedType]
+				var i = 0;
+				if (ty1.getTypeParamBinding().size > 0){
+					res.append("[")	
+					ty1.getTypeParamBinding().foreach{e=> if (i>0) res.append(",")	; e.getType().generateScalaCode(res);i=i+1}
+					res.append("]")	
+					
+				}
 				//this.getTarget().generateScalaCode(res)
 //				res append "()"
 			} 
