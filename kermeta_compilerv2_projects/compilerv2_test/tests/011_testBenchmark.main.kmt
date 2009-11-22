@@ -1,0 +1,40 @@
+@mainClass "testBenchmark::Test_benchmark"
+@mainOperation "testBench"
+
+package testBenchmark;
+
+require kermeta
+
+class Test_benchmark {
+
+    operation testBench() : kermeta::standard::Integer is do
+ 		var v1 : kermeta::standard::Integer init 0
+ 		var nbIter : kermeta::standard::Integer init 1000
+		var str : kermeta::standard::String
+		var truc : Truc
+		
+		//str := stdio.read("Press enter")
+		truc := Truc.new
+		truc.machin := 0
+		from var i : kermeta::standard::Integer init 0
+		until i == nbIter
+		loop
+			v1 := operation_asg(v1)
+			i := i + 1
+			truc.machin := truc.machin + 1
+		end
+        stdio.writeln(v1.toString())
+		result := v1
+    end
+
+    operation operation_asg(in : kermeta::standard::Integer) : kermeta::standard::Integer is do
+        result := in + 1
+    end
+
+
+}
+
+class Truc
+{
+	attribute machin : kermeta::standard::Integer
+}
