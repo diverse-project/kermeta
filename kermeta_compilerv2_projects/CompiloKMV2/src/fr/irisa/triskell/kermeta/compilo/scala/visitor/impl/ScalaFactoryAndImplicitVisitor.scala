@@ -1,12 +1,12 @@
 package fr.irisa.triskell.kermeta.compilo.scala.visitor.impl
 
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
 import scala.collection.JavaConversions._
 import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
-import java.util._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
 
@@ -41,7 +41,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 	}
 	  
 	def visit(par : Package){
-		actualPackage = kermeta.utils.TypeEquivalence.packageEquivelence.get(par.getQualifiedName())
+		actualPackage = kermeta.utils.TypeEquivalence.packageEquivelence.get(par.asInstanceOf[Package].getQualifiedName())
 		if (actualPackage == null)
 			actualPackage=par.getQualifiedName()
 		
@@ -58,7 +58,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 			//viewDef append "trait "+viewDefTraitName+"{\n" 
 			
 			factoryDefClass.clear
-			par.getOwnedTypeDefinition filter(p => p.isInstanceOf[ClassDefinition]) foreach(p=> p.asInstanceOf[ClassDefinition].accept(this))
+			par.getOwnedTypeDefinition filter(p => p.isInstanceOf[ClassDefinition]) foreach(p=> p.asInstanceOf[ClassDefinitionAspect].accept(this))
 			factoryDef.append(factoryDefClass.toString())
 			//viewDef append "}\n"
 			factoryDef append "}\n"
@@ -76,7 +76,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 	//	if(actualPackage == "org.eclipse.emf.ecore"  ) { //TODO REMOVE DEBUG MODE
 			 
 			var packageName : StringBuilder= new StringBuilder
-			packageName.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[Package].getQualifiedName))
+			packageName.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[PackageAspect].getQualifiedName))
 			packageName.append(".")
 			
 			viewDef.append(" class Rich"+par.getName()+" extends "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + par.getName())+" with "+packageName.toString +par.getName+"Aspect \n")

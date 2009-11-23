@@ -3,6 +3,7 @@ package fr.irisa.triskell.kermeta.compilo.scala.rich
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
+import fr.irisa.triskell.kermeta.compilo.scala.rich._
 import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
   
 trait EcoreRichAspectImplicit {
@@ -38,7 +39,7 @@ trait EcoreRichAspectImplicit {
      
     implicit def rich (xs : Property) = xs.asInstanceOf[PropertyView]
     //implicit def rich (xs : PropertyAspect) = xs.asInstanceOf[Property]
-    implicit def rich (xs : TypeReference) = xs.asInstanceOf[TypeReferenceView]
+    implicit def rich (xs : fr.irisa.triskell.kermeta.language.behavior.TypeReference) = xs.asInstanceOf[TypeReferenceView]
     //implicit def rich (xs : TypeReferenceAspect) = xs.asInstanceOf[TypeReference]
    
     implicit def rich (xs : Operation) = xs.asInstanceOf[OperationView]
@@ -120,7 +121,7 @@ trait EcoreRichAspectImplicit {
     implicit def rich (xs : Conditional) = xs.asInstanceOf[ConditionalView]
     //implicit def rich (xs : ConditionalAspect) = xs.asInstanceOf[Conditional]
     
-    implicit def rich (xs : fr.irisa.triskell.kermeta.language.structure.Object) = xs.asInstanceOf[ObjectView]
+    
     //implicit def rich (xs : ObjectAspect) = xs.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object]
  
     implicit def rich (xs : EnumerationLiteral) = xs.asInstanceOf[EnumerationLiteralView]
@@ -133,13 +134,13 @@ trait EcoreRichAspectImplicit {
     //implicit def rich (xs : VoidTypeAspect) = (xs.asInstanceOf[VoidType])
 
     //implicit def rich (xs : TypeDefinition) = (xs.asInstanceOf[TypeDefinition])
-    implicit def rich (xs : fr.irisa.triskell.kermeta.language.behavior.Expression) = (xs.asInstanceOf[ExpressionView])
+    //implicit def rich (xs : fr.irisa.triskell.kermeta.language.behavior.Expression) = (xs.asInstanceOf[ExpressionView])
     
     implicit def rich (xs : TypeVariableBinding) = xs.asInstanceOf[TypeVariableBindingView]
     
     //implicit def rich (xs : TypeVariableBindingAspect) = xs.asInstanceOf[TypeVariableBinding]
     
-    implicit def rich (xs : Type) = (xs.asInstanceOf[TypeView]) 
+    //implicit def rich (xs : Type) = (xs.asInstanceOf[TypeView]) 
     //implicit def rich (xs : NamedElement) = (xs.asInstanceOf[NamedElement])
     //implicit def rich (xs : Rescue) = (xs.asInstanceOf[Rescue])
     //implicit def rich (xs : Require) = (xs.asInstanceOf[Require])
@@ -154,6 +155,10 @@ trait EcoreRichAspectImplicit {
     implicit def rich (xs : LambdaParameter) = xs.asInstanceOf[LambdaParameterView]
     //implicit def rich (xs : LambdaParameterAspect) = xs.asInstanceOf[LambdaParameter]
     
-    //implicit def rich (xs : Model) = (xs.asInstanceOf[Model])
     
+    
+    implicit def rich (xs : PackageAspect) = xs.asInstanceOf[PackageView]
+    implicit def rich (xs : ModelingUnitAspect) = xs.asInstanceOf[ModelingUnitView]
+    implicit def rich (xs : ClassDefinitionAspect) = xs.asInstanceOf[ClassDefinitionView]
+    implicit def rich (xs : fr.irisa.triskell.kermeta.language.structure.Object) = xs.asInstanceOf[ObjectView]
 }

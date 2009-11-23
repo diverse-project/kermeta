@@ -11,7 +11,7 @@ import java.util._
 
 trait ObjectAspect extends GenerateScalaCodeAspect {
    
-  override def generateScalaCode(res : StringBuilder) : Unit = {	
+  override def generateScalaCode(res : StringBuilder) : Unit = {
 	  res.append("/*TODO GenScalaCode "+ this.getClass +" */")
   }
 }

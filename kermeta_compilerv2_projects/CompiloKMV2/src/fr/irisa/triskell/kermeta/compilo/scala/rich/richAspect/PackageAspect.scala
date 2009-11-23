@@ -11,7 +11,6 @@ import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
 trait PackageAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisitable {
 	
-	implicit def rich (xs : PackageAspect) = xs.asInstanceOf[Package]
 	
 	/*
 	override def generateScalaCode(res : StringBuilder) : Unit = {
@@ -32,10 +31,12 @@ trait PackageAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisi
 		}
 	}*/
 	
+	
+	
 	override def accept(visitor : IVisitor){
 		visitor.visit(this)
 	}	  
-
+	
 	def getQualifiedName():String ={
 		var res : String="" 
         if (this.getNestingPackage !=null){

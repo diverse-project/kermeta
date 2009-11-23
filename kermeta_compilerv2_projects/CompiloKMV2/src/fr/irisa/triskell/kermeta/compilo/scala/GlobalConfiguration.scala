@@ -10,6 +10,5 @@ object GlobalConfiguration {
 	final var scalaPrefix : String = "Scala"
 		
 	//var legacyFactoryName : String = "t.EcoreFactoryImpl"
-
 } 
  

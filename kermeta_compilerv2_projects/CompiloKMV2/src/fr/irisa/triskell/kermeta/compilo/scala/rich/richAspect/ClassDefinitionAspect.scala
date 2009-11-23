@@ -10,9 +10,7 @@ import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
 trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisitable {
 	
-	implicit def rich (xs : ClassDefinitionAspect) = xs.asInstanceOf[ClassDefinition]
-	
-	def accept(visitor : IVisitor){ 
+	override def accept(visitor : IVisitor){ 
 		visitor.visit(this) 
 	}	 
 	

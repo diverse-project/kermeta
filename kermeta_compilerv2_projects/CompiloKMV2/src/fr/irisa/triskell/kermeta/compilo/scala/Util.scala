@@ -21,6 +21,6 @@ object Util  {
 	   	writer.println(content) 
     	writer.flush
     	writer.close
-    	output.close 
+    	output.close
    }
 }

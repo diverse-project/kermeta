@@ -10,16 +10,16 @@ import java.util._
 
 trait EnumerationAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
-	implicit def rich (xs : EnumerationAspect) = xs.asInstanceOf[fr.irisa.triskell.kermeta.language.behavior.Expression]
+	implicit def rich (xs : EnumerationAspect) = xs.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Enumeration]
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName)+"."+this.getName()+"."+this.getName())
+		res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName()+"."+this.getName())
 	}
 	
 	def generateEnum():Unit = {
 		
 		var res : StringBuilder = new StringBuilder
-		res.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName)+"\n")
+		res.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"\n")
 		res.append("import kermeta.io._\n")			
 			res.append("import kermeta.standard._\n")
 			res.append("import  kermeta.standard.JavaConversions._\n")

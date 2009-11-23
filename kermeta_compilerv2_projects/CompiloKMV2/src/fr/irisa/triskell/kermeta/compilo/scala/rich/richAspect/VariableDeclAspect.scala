@@ -12,16 +12,17 @@ trait VariableDeclAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
 	implicit def rich (xs : VariableDeclAspect) = xs.asInstanceOf[VariableDecl]
 	 
-override def generateScalaCode(res : StringBuilder) = {
-	res.append("var ")
-	res.append(this.getIdentifier)
-	res.append(" : ")
-	this.getType().generateScalaCode(res)
-	res.append(" = ")
-	if (this.getInitialization !=  null){
-		this.getInitialization().generateScalaCode(res)
-	}else{ 
+
+	override def generateScalaCode(res : StringBuilder) = {
+		res.append("var ")
+		res.append(this.getIdentifier)
+		res.append(" : ")
+		this.getType().asInstanceOf[GenerateScalaCodeAspect].generateScalaCode(res)
+		res.append(" = ")
+		if (this.getInitialization !=  null){	
+			this.getInitialization().asInstanceOf[GenerateScalaCodeAspect].generateScalaCode(res)
+		}else{ 
 		res.append("null")
+		}
 	}
-}
 }

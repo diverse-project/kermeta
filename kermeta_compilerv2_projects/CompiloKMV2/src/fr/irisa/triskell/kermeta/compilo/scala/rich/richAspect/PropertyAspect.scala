@@ -107,10 +107,10 @@ def generateAttribute(res : StringBuilder) : Unit ={
 				//TODO gestion des SETs
 				res.append("java.util.List[")        
 			}
-			this.getType().generateScalaCode(res)
+			this.getType().asInstanceOf[GenerateScalaCodeAspect].generateScalaCode(res)
 			res.append("]")
 	} else {
-		this.getType().generateScalaCode(res) 
+		this.getType().asInstanceOf[GenerateScalaCodeAspect].generateScalaCode(res) 
 	}
 	
 	

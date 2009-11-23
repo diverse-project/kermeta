@@ -7,11 +7,12 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
+import fr.irisa.triskell.kermeta.compilo.scala.rich._
 
 class RichStructureFactoryImpl extends StructureFactoryImpl {
   
 	override def createObject() = {
-		new ObjectImpl with ObjectAspect
+		new ObjectView
 	}
 
 	//TODO
@@ -20,29 +21,29 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 	}
 
 	override def createOperation() : Operation = {
-		new OperationImpl() with OperationAspect
+		new OperationView
 	}
 
 	override def createProperty() : Property = {
-		new PropertyImpl() with PropertyAspect
+		new PropertyView
 	}
 
 	//TODO
 	override def createType() : Type = {
-		new TypeImpl() with ObjectAspect
+		new TypeImpl with ObjectAspect
 
 	}
 	
 	override def createEnumerationLiteral() : EnumerationLiteral = {
-		new EnumerationLiteralImpl() with EnumerationLiteralAspect
+		new EnumerationLiteralView
 	}
 
 	override def createTypeVariableBinding() : TypeVariableBinding = {
-		new TypeVariableBindingImpl() with TypeVariableBindingAspect
+		new TypeVariableBindingView
 	}
 
 	override def createClass() = {
-		new ClassImpl() with ClassAspect
+		new ClassView
 	}
 
 	//TODO
@@ -55,12 +56,12 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 	}
 
 	override def createObjectTypeVariable() : ObjectTypeVariable = {
-		new ObjectTypeVariableImpl() with ObjectTypeVariableAspect
+		new ObjectTypeVariableView
 	}
 
 	//TODO
 	override def createClassDefinition() : ClassDefinition = {
-		new ClassDefinitionImpl() with ClassDefinitionAspect
+		new ClassDefinitionView
 	}
 
 	//TODO
@@ -75,16 +76,16 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 
 	
 	override def createPackage()  = {
-		new PackageImpl() with PackageAspect
+		new PackageView
 	}
 
 	//TODO
 	override def createTypeDefinition() : TypeDefinition = {
 		new TypeDefinitionImpl() with ObjectAspect
 	}
-
+	
 	override def createVoidType() : VoidType = {
-		new VoidTypeImpl() with VoidTypeAspect
+		new VoidTypeView
 	}
  
 	//TODO
@@ -93,11 +94,11 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 	}
 
 	override def createUsing() : Using = {
-		new UsingImpl() with UsingAspect
+		new UsingView
 	}
 
 	override def createModelingUnit() : ModelingUnit = {
-		new ModelingUnitImpl() with ModelingUnitAspect
+		new ModelingUnitView()
 	}
 
 	//TODO
@@ -107,7 +108,7 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 
 	//TODO
 	override def createEnumeration() : Enumeration = {
-		new EnumerationImpl() with EnumerationAspect
+		new EnumerationView
 	}
 
 	//TODO
@@ -116,7 +117,7 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 	}
 
 	override def createPrimitiveType() : PrimitiveType = {
-		new PrimitiveTypeImpl() with PrimitiveTypeAspect
+		new PrimitiveTypeView
 	}
 
 	//TODO
@@ -133,12 +134,12 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 	override def createModelTypeVariable() : ModelTypeVariable = {
 		new ModelTypeVariableImpl() with ObjectAspect
 	}
-
-	//TODO
-	override def createVirtualType() : VirtualType = {
-		new VirtualTypeImpl() with ObjectAspect
-	}
-	
-	
-
+//
+//	//TODO
+//	override def createVirtualType() : VirtualType = {
+//		new VirtualTypeImpl
+//	}
+//	
+//	
+//
 }

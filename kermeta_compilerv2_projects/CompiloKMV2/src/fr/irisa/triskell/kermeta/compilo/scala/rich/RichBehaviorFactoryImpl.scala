@@ -10,23 +10,23 @@ import fr.irisa.triskell.kermeta.language.structure._
 class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
  
 	override def createConditional() : Conditional =  {
-		new ConditionalImpl() with ConditionalAspect
+		new ConditionalView
 	}
  
 	override def createLambdaExpression() : LambdaExpression = {
-		new LambdaExpressionImpl() with LambdaExpressionAspect
+		new LambdaExpressionView
 	} 
 
 	override def createLambdaParameter() : LambdaParameter = {
-		new LambdaParameterImpl() with LambdaParameterAspect
+		new LambdaParameterView
 	}
 
 	override def createTypeReference() : TypeReference = {
-		new TypeReferenceImpl() with TypeReferenceAspect
+		new TypeReferenceView
 	}
 
 	override def createCallFeature() : CallFeature =  {
-		new CallFeatureImpl() with CallFeatureAspect
+		new CallFeatureView
 	}
 
 	//TODO
@@ -35,7 +35,7 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 	}
 
 	override def createRaise() : Raise = {
-		new RaiseImpl() with RaiseAspect
+		new RaiseView
 	} 
 
 	//TODO
@@ -44,7 +44,7 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 	}
 
 	override def createBlock() : Block = {
-		new BlockImpl() with BlockAspect
+		new BlockView
 	}
  
 	override def createCallVariable() : CallVariable = {
@@ -96,11 +96,11 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 	}
 
 	override def createLoop() : Loop = {
-		new LoopImpl() with LoopAspect
+		new LoopView
 	}
 
 	override def createSelfExpression() : SelfExpression = {
-		new SelfExpressionImpl() with SelfExpressionAspect
+		new SelfExpressionView
 	}
 
 	
