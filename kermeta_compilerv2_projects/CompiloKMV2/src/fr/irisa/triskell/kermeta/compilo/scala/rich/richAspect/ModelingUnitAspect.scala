@@ -17,7 +17,7 @@ trait ModelingUnitAspect extends EcoreRichAspectImplicit with ObjectAspect with 
 	}*/ 
 	 
 	override def accept(visitor : IVisitor){
-		visitor.visit(this);
+		visitor.visit(this)
 	}
 	
 	/*

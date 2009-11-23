@@ -11,7 +11,6 @@ object Util  {
    var outputFolder : String = "../outputScala/src"
 	
    var scalaPrefix : String = "Scala"
-   var currentPackage : String = ""
 	
    def hasEcoreTag(obj : Object) : Boolean = {
 	   obj.getOwnedTags.exists(e=> "ecore".equals(e.asInstanceOf[Tag].getName()))
