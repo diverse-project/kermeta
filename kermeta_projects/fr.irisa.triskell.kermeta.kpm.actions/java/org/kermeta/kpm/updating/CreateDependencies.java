@@ -9,6 +9,7 @@
 */
 package org.kermeta.kpm.updating;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +52,11 @@ public class CreateDependencies implements IAction {
 					}
 				}
 			}
-						
+			try {
+				unit.eResource().save(null);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 			
 		} catch(Exception e){
 			if(l == null)
 				KPMPlugin.logErrorMessage("Error getting 'context' in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);

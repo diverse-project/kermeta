@@ -61,11 +61,19 @@ public class RemoveDependencies implements IAction {
 					 * 
 					 */
 					for ( Dependency d : entriesToRemove ) {
-						d.getFrom().getDependents().remove(d);
-						d.getTo().getMasters().remove(d);
+						d.getFrom().getMasters().remove(d);
+						d.getTo().getDependents().remove(d);
+						//d.setFrom(null);
+						//d.setTo(null);
 					}
 				}
 			}
+		/*	do not need to save now, will be saved during the CreateDependencies
+		 	try {
+				unit.eResource().save(null);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} */						
 			
 		} catch(Exception e){
 			if(l == null)
@@ -80,5 +88,6 @@ public class RemoveDependencies implements IAction {
 		}
 
 	}
-
+	
+		
 }
