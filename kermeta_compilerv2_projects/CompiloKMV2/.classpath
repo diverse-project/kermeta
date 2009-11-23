@@ -4,12 +4,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="ch.epfl.lamp.sdt.launching.SCALA_CONTAINER"/>
 	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/Kermeta_model.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.emf_2.5.0.v200906151043.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.emf.common_2.5.0.v200906151043.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore_2.5.0.v200906151043.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore.xmi_2.5.0.v200906151043.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/fr.irisa.triskell.kermeta.scala.framework"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/LoadSaveKm"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
