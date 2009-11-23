@@ -10,11 +10,13 @@ import java.util._
 
 trait PrimitiveTypeAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
-override def generateScalaCode(res : StringBuilder) : Unit = {
-	println("pass par primitive type " + this.getName) 
-	if (Util.hasEcoreTag(this)){
-		 res.append(this.getOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName)).first.getValue)
-	 }else{
+	implicit def rich (xs : PrimitiveTypeAspect) = xs.asInstanceOf[PrimitiveType]
+
+	override def generateScalaCode(res : StringBuilder) : Unit = {
+		println("pass par primitive type " + this.getName) 
+		if (Util.hasEcoreTag(this)){
+			res.append(this.getOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName)).first.getValue)
+		}else{
 		 if (this.getInstanceType !=null){
 			 this.getInstanceType.generateScalaCode(res)
 		 }

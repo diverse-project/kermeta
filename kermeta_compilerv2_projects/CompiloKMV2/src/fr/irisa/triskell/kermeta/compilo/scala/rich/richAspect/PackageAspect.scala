@@ -10,6 +10,9 @@ import java.util._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
 trait PackageAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisitable {
+	
+	implicit def rich (xs : PackageAspect) = xs.asInstanceOf[Package]
+	
 	/*
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		if(this.getName() != "ecore"){ //TODO REMOVE DEBUG MODE

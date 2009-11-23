@@ -10,11 +10,9 @@ import java.util._
 
 trait IntegerLiteralAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
+	implicit def rich (xs : IntegerLiteralAspect) = xs.asInstanceOf[IntegerLiteral]
+	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append(this.getValue().toString)
 	}
-	/*
-def generateVisitor(tabsString 	: String) : String = { 
-		 return this.getValue.toString;
-	}*/
 }

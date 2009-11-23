@@ -10,6 +10,8 @@ import java.util._
 
 trait PropertyAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
+	implicit def rich (xs : PropertyAspect) = xs.asInstanceOf[Property]
+	
 override def generateScalaCode(res : StringBuilder) : Unit = {
 	if (Util.hasEcoreTag(this.getOwningClass)){
 		 	if (Util.hasEcoreTag(this)){
@@ -71,7 +73,7 @@ def generateAttribute(res : StringBuilder) : Unit ={
 	}
 
 	def generateScalGet(res : StringBuilder) : Unit ={
-		res.append("def "+Util.scalaPrefix)
+		res.append("def "+GlobalConfiguration.scalaPrefix)
 		res.append(this.getName+"")
 		res.append(" : ")
 		getListorType(res)
@@ -88,7 +90,7 @@ def generateAttribute(res : StringBuilder) : Unit ={
 	res.append("\n")
 	}
 	def generateScalSet(res : StringBuilder) : Unit ={
-		res.append("def "+Util.scalaPrefix)
+		res.append("def "+GlobalConfiguration.scalaPrefix)
 		res.append(this.getName+"_=(")
 		res.append("arg : ")
 		getListorType(res)

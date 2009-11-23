@@ -10,12 +10,10 @@ import java.util._
 
 trait EnumerationLiteralAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
+	implicit def rich (xs : EnumerationLiteralAspect) = xs.asInstanceOf[EnumerationLiteral]
+	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		println("pass par enumeration literal")
 		res.append(this.getName())
 	} 
-	/*
-def generateVisitor(tabsString 	: String) : String = { 
-		 return this.getName;
-	} */
 }

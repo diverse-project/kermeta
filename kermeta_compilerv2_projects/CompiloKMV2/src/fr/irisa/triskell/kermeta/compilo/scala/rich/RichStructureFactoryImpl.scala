@@ -11,9 +11,7 @@ import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
 class RichStructureFactoryImpl extends StructureFactoryImpl {
   
 	override def createObject() = {
-		var v =new ObjectImpl with ObjectAspect
-		
-		v
+		new ObjectImpl with ObjectAspect
 	}
 
 	//TODO
@@ -31,9 +29,8 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 
 	//TODO
 	override def createType() : Type = {
-		var v = new TypeImpl() with ObjectAspect
-		
-		v
+		new TypeImpl() with ObjectAspect
+
 	}
 	
 	override def createEnumerationLiteral() : EnumerationLiteral = {
@@ -78,9 +75,7 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 
 	
 	override def createPackage()  = {
-		var v =new PackageImpl() with PackageAspect
-		
-		v
+		new PackageImpl() with PackageAspect
 	}
 
 	//TODO
@@ -131,23 +126,17 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 	
 	//TODO
 	override def createConstraint() : Constraint = {
-		var v =new ConstraintImpl() with ObjectAspect
-		
-		v
+		new ConstraintImpl() with ObjectAspect
 	}
 
 	//TODO
 	override def createModelTypeVariable() : ModelTypeVariable = {
-		var v= new ModelTypeVariableImpl() with ObjectAspect
-		
-		v
+		new ModelTypeVariableImpl() with ObjectAspect
 	}
 
 	//TODO
 	override def createVirtualType() : VirtualType = {
-		var v = new VirtualTypeImpl() with ObjectAspect
-			
-		v
+		new VirtualTypeImpl() with ObjectAspect
 	}
 	
 	

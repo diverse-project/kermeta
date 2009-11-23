@@ -1,0 +1,48 @@
+package fr.irisa.triskell.kermeta.compilo.scala.rich
+
+import fr.irisa.triskell.kermeta.language._
+import fr.irisa.triskell.kermeta.language.structure._ 
+import fr.irisa.triskell.kermeta.language.behavior._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
+
+
+class AssignementView extends Assignment with GenerateScalaCodeAspect
+class ModelingUnitView extends ModelingUnit with GenerateScalaCodeAspect
+class PackageView extends Package with GenerateScalaCodeAspect
+class ClassView extends fr.irisa.triskell.kermeta.language.structure.Class with GenerateScalaCodeAspect
+class ClassDefinitionView extends ClassDefinition with GenerateScalaCodeAspect
+class BlockView extends Block with GenerateScalaCodeAspect
+class PrimitiveTypeView extends PrimitiveType with GenerateScalaCodeAspect
+class CallResultView extends CallResult with GenerateScalaCodeAspect
+class ObjectTypeVariableView extends ObjectTypeVariable with GenerateScalaCodeAspect
+class EnumerationView extends Enumeration with GenerateScalaCodeAspect
+class PropertyView extends Property with GenerateScalaCodeAspect
+class TypeReferenceView extends TypeReference with GenerateScalaCodeAspect
+class OperationView extends Operation with GenerateScalaCodeAspect
+class TypeLiteralView extends TypeLiteral with GenerateScalaCodeAspect
+class BooleanLiteralView extends BooleanLiteral with GenerateScalaCodeAspect
+class CallValueView extends CallValue with GenerateScalaCodeAspect
+class StringLiteralView extends StringLiteral with GenerateScalaCodeAspect
+class VoidLiteralView extends VoidLiteral with GenerateScalaCodeAspect
+class CallSuperOperationView extends CallSuperOperation with GenerateScalaCodeAspect
+class CallVariableView extends CallVariable with GenerateScalaCodeAspect
+class CallFeatureView extends CallFeature with GenerateScalaCodeAspect
+class IntegerLiteralView extends IntegerLiteral with GenerateScalaCodeAspect
+class DataTypeView extends DataType with GenerateScalaCodeAspect
+class SelfExpressionView extends SelfExpression with GenerateScalaCodeAspect
+class VariableDeclView extends VariableDecl with GenerateScalaCodeAspect
+class CallExpressionView extends CallExpression with GenerateScalaCodeAspect
+class LambdaExpressionView extends LambdaExpression with GenerateScalaCodeAspect
+class RaiseView extends Raise with GenerateScalaCodeAspect
+class LoopView extends Loop with GenerateScalaCodeAspect
+class ConditionalView extends Conditional with GenerateScalaCodeAspect
+class ObjectView extends fr.irisa.triskell.kermeta.language.structure.Object with GenerateScalaCodeAspect
+class EnumerationLiteralView extends EnumerationLiteral with GenerateScalaCodeAspect
+class VoidTypeView extends VoidType with GenerateScalaCodeAspect
+class TypeVariableBindingView extends TypeVariableBinding with GenerateScalaCodeAspect
+class UsingView extends Using with GenerateScalaCodeAspect
+class LambdaParameterView extends LambdaParameter with GenerateScalaCodeAspect
+class ExpressionView extends Expression with GenerateScalaCodeAspect
+class TypeView extends Type with GenerateScalaCodeAspect
+
+

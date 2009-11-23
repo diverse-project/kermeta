@@ -9,6 +9,8 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait LoopAspect extends EcoreRichAspectImplicit with ObjectAspect {
+	
+	implicit def rich (xs : LoopAspect) = xs.asInstanceOf[Loop]
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		this.getInitialization().generateScalaCode(res)
@@ -18,11 +20,4 @@ trait LoopAspect extends EcoreRichAspectImplicit with ObjectAspect {
 		res.append("))\n")
 		this.getBody().generateScalaCode(res)
 	}
-	/*
- def generateVisitor(tabsString 	: String) : String = { 
-		 var returnString : String  =this.getInitialization().generateVisitor(tabsString) + "\n"; 
-		returnString = returnString +"while (" +this.getStopCondition.generateVisitor(tabsString) + ")"+"\n"
-		returnString = returnString +this.getBody.generateVisitor(tabsString)
-		return returnString;
-	}*/
 }

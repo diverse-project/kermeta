@@ -10,6 +10,8 @@ import java.util._
 
 trait CallExpressionAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	  
+	implicit def rich (xs : CallExpressionAspect) = xs.asInstanceOf[CallExpression]
+	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append(".")
 		res.append(this.getName())

@@ -9,12 +9,11 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait BooleanLiteralAspect extends EcoreRichAspectImplicit with ObjectAspect {
+	
+	implicit def rich (xs : BooleanLiteralAspect) = xs.asInstanceOf[BooleanLiteral]
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 			res.append(this.isValue());
 	} 
-	/*
-override def generateVisitor(tabsString 	: String) : String = { 
-		 return this.isValue().toString;
-	}*/
+
 }

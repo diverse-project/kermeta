@@ -10,15 +10,12 @@ import java.util._
 
 trait StringLiteralAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
-override def generateScalaCode(res : StringBuilder) : Unit = {
-	res.append("\"")
-	res.append(this.getValue.replaceAll("\n","\\\\n").replaceAll("\t","\\\\t"))
-	res.append("\"")
-} 
-	 
-/*
-override def generateVisitor(tabsString 	: String) : String = { 
-		 return "\"" + this.getValue.replaceAll("\n","\\\\n").replaceAll("\t","\\\\t") + "\"";
-	}  
-}*/
+	implicit def rich (xs : StringLiteralAspect) = xs.asInstanceOf[StringLiteral]
+
+	override def generateScalaCode(res : StringBuilder) : Unit = {	
+		res.append("\"")
+		res.append(this.getValue.replaceAll("\n","\\\\n").replaceAll("\t","\\\\t"))
+		res.append("\"")
+	} 
+
 }

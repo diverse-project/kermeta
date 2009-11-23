@@ -9,6 +9,8 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait CallValueAspect extends EcoreRichAspectImplicit with ObjectAspect {
+	
+	implicit def rich (xs : CallValueAspect) = xs.asInstanceOf[CallValue]
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append(this.getName())

@@ -10,8 +10,9 @@ import java.util._
 
 trait EnumerationAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
+	implicit def rich (xs : EnumerationAspect) = xs.asInstanceOf[fr.irisa.triskell.kermeta.language.behavior.Expression]
+	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		//println("passe par enum")
 		res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName)+"."+this.getName()+"."+this.getName())
 	}
 	
@@ -19,13 +20,12 @@ trait EnumerationAspect extends EcoreRichAspectImplicit with ObjectAspect {
 		
 		var res : StringBuilder = new StringBuilder
 		res.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName)+"\n")
-			res.append("import kermeta.io._\n")			
+		res.append("import kermeta.io._\n")			
 			res.append("import kermeta.standard._\n")
 			res.append("import  kermeta.standard.JavaConversions._\n")
-				
-		res append "object "+this.getName()+" extends Enumeration {\n"+
-			"type "+this.getName()+" = Value\n"+
-			"val "
+			res append "object "+this.getName()+" extends Enumeration {\n"
+			res append "type "+this.getName()+" = Value\n"
+			res append "val "
 			var i =0
 			this.getOwnedLiteral().foreach{e=> 
 			if (i!=0) res.append(",")	
@@ -35,8 +35,4 @@ trait EnumerationAspect extends EcoreRichAspectImplicit with ObjectAspect {
 			res append " = Value\n"+"}"
 			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName), this.getName, res.toString())			
 	}
-	/*
-def generateVisitor(tabsString 	: String) : String = { 
-		 return this.getName;
-	} */
 }

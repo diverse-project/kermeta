@@ -10,7 +10,7 @@ import java.util._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
 
-class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplicit with GlobalConfiguration {
+class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplicit {
 	
 	var viewDef : StringBuilder = _
 	var implicitDef : StringBuilder = _
@@ -20,8 +20,8 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 		viewDef = new StringBuilder
 		implicitDef = new StringBuilder
 		
-		implicitDef append "package "+frameworkGeneratedPackageName+"\n"
-		implicitDef append "trait "+implicitConvTraitName+" {\n"
+		implicitDef append "package "+GlobalConfiguration.frameworkGeneratedPackageName+"\n"
+		implicitDef append "trait "+GlobalConfiguration.implicitConvTraitName+" {\n"
 		factoryDefClass = new StringBuilder
 	}
 	  
@@ -49,10 +49,10 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 			var factoryDef : StringBuilder =  new StringBuilder
 		
 			factoryDef append "package "+actualPackage+"\n"
-			factoryDef append "object "+factoryName + " extends "
+			factoryDef append "object "+GlobalConfiguration.factoryName + " extends "
 			if (par.getOwnedTypeDefinition.filter{e=> Util.hasEcoreTag(par)}.size>0)
 				factoryDef append actualPackage+"."+ par.getName+"FactoryImpl with" 
-			factoryDef append " "+frameworkGeneratedPackageName + "."+implicitConvTraitName
+			factoryDef append " "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 			factoryDef append "{\n"
 			viewDef append "package "+actualPackage+"\n"
 			//viewDef append "trait "+viewDefTraitName+"{\n" 
@@ -62,8 +62,8 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 			factoryDef.append(factoryDefClass.toString())
 			//viewDef append "}\n"
 			factoryDef append "}\n"
-			Util.generateFile(actualPackage, factoryName, factoryDef.toString())
-			Util.generateFile(actualPackage, viewDefTraitName, viewDef.toString())
+			Util.generateFile(actualPackage, GlobalConfiguration.factoryName, factoryDef.toString())
+			Util.generateFile(actualPackage, GlobalConfiguration.viewDefTraitName, viewDef.toString())
 			viewDef.clear
 			factoryDef.clear
 			par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage
@@ -92,7 +92,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 	def close {
 		
 		implicitDef append "}\n"
-		Util.generateFile(frameworkGeneratedPackageName, implicitConvTraitName, implicitDef.toString())
+		Util.generateFile(GlobalConfiguration.frameworkGeneratedPackageName, GlobalConfiguration.implicitConvTraitName, implicitDef.toString())
 	} 
 	
 }

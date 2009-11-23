@@ -7,8 +7,10 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
- 
+
 trait AssignmentAspect extends EcoreRichAspectImplicit with ObjectAspect {
+	
+	implicit def rich (xs : AssignmentAspect) = xs.asInstanceOf[Assignment]
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		if (!this.isIsCast()){

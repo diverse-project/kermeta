@@ -10,6 +10,8 @@ import java.util._
 
 trait LambdaExpressionAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
+	implicit def rich (xs : LambdaExpressionAspect) = xs.asInstanceOf[LambdaExpression]
+	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append("{")
 		this.getParameters().foreach(e=> e.generateScalaCode(res))
@@ -17,15 +19,4 @@ trait LambdaExpressionAspect extends EcoreRichAspectImplicit with ObjectAspect {
 		this.getBody().generateScalaCode(res)
 		res.append("}")
 	}
-	/*
-def generateVisitor(tabsString 	: String) : String = { 
-		 
-			var returnType :String = ""//"(";
-			this.getParameters.foreach(e=>returnType = returnType + e.generateVisitor(tabsString) )
-			returnType = returnType +"=>"
-   			returnType = returnType + this.getBody().generateVisitor(tabsString);
-//			returnType = returnType + ")";
-
-			return returnType;
-	}  */
 }

@@ -10,7 +10,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
  
 	override def createConditional() : Conditional =  {
-			new ConditionalImpl() with ConditionalAspect
+		new ConditionalImpl() with ConditionalAspect
 	}
  
 	override def createLambdaExpression() : LambdaExpression = {
@@ -26,9 +26,7 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 	}
 
 	override def createCallFeature() : CallFeature =  {
-		var v =new CallFeatureImpl() with CallFeatureAspect
-		
-		v
+		new CallFeatureImpl() with CallFeatureAspect
 	}
 
 	//TODO

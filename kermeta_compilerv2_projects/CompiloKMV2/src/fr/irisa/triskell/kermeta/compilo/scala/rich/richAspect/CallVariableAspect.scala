@@ -9,20 +9,11 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait CallVariableAspect extends EcoreRichAspectImplicit with ObjectAspect {
+	
+	implicit def rich (xs : CallVariableAspect) = xs.asInstanceOf[CallVariable]
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		
 		res.append(this.getName())
-		
 	}
-	/*
-def generateVisitor(tabsString 	: String) : String = { 
-				  var returnString : String = "";
-		 returnString = returnString+ this.getName
-		 
-//			returnString = returnString+value.getParameters.foreach(par=> par.generateVisitor(tabsString))	
-//    	 returnString = returnString+ ")"
-    	 return returnString;
 
-	}  */
 }

@@ -10,11 +10,9 @@ import java.util._
 
 trait LambdaParameterAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
+	implicit def rich (xs : LambdaParameterAspect) = xs.asInstanceOf[LambdaParameter]
+	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append(this.getName())
 	}
-	/*
-def generateVisitor(tabsString 	: String) : String = { 
-		 return this.getName;
-	} */
 }

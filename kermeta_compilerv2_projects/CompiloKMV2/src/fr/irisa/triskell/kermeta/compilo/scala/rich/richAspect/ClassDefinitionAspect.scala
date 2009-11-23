@@ -8,7 +8,9 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
-trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisitable with GlobalConfiguration {
+trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisitable {
+	
+	implicit def rich (xs : ClassDefinitionAspect) = xs.asInstanceOf[ClassDefinition]
 	
 	def accept(visitor : IVisitor){ 
 		visitor.visit(this) 
@@ -41,7 +43,7 @@ trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect wi
 					}
 					i=i+1
 				})
-				res append " with "+frameworkGeneratedPackageName + "."+implicitConvTraitName
+				res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 				}
 				res.append("{\n")
 				this.getOwnedAttribute filter(a=> !Util.hasEcoreTag(a)) foreach(a=> a.generateScalaCode(res))
@@ -74,7 +76,7 @@ trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect wi
 //					}
 //					i=i+1
 				})
-				res append " with "+frameworkGeneratedPackageName + "."+implicitConvTraitName
+				res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 			}
   				res.append("{\n")
 				this.getOwnedAttribute filter(a=> !Util.hasEcoreTag(a)) foreach(a=> a.generateScalaCode(res))

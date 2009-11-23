@@ -6,9 +6,10 @@ import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
-import java.util._
 
 trait BlockAspect extends EcoreRichAspectImplicit with ObjectAspect {
+	
+	implicit def rich (xs : BlockAspect) = xs.asInstanceOf[Block]
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append("{\n") 

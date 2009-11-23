@@ -10,14 +10,12 @@ import java.util._
 
 trait DataTypeAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
+	implicit def rich (xs : DataTypeAspect) = xs.asInstanceOf[DataType]
+	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append(this.eContainer().asInstanceOf[Package].getQualifiedName)
 		res.append(".")
 		res.append(this.getName())
 	}
-	/*
-	
-	def generateVisitor(tabsString 	: String) : String = { 
-		 return this.eContainer.asInstanceOf[Package].getQualifiedName + "."+ this.getName;
-	}*/
+
 }

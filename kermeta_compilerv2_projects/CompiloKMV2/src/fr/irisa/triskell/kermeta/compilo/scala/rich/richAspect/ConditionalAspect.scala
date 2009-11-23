@@ -9,6 +9,8 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait ConditionalAspect extends EcoreRichAspectImplicit with ObjectAspect {
+	
+	implicit def rich (xs : ConditionalAspect) = xs.asInstanceOf[Conditional]
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append("if (")
@@ -19,15 +21,5 @@ trait ConditionalAspect extends EcoreRichAspectImplicit with ObjectAspect {
 			this.getElseBody().generateScalaCode(res)
 		}
 	}
-/*	
-def generateVisitor(tabsString 	: String) : String = { 
-		 var returnString : String = "if (";
-		 returnString = returnString+ this.getCondition.generateVisitor(tabsString)
-		 returnString = returnString+")"
-		 returnString = returnString+ this.getThenBody.generateVisitor(tabsString)
-		 if (this.getElseBody!=null){returnString = returnString+"else"
-		 returnString = returnString+ this.getElseBody.generateVisitor(tabsString)
-		 }
-    	 return returnString;
-	} */
+
 }
