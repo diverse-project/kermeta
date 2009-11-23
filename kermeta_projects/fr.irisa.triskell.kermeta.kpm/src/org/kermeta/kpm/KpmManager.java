@@ -14,9 +14,11 @@ package org.kermeta.kpm;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.kermeta.kpm.internal.InternalKpmManager;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
@@ -77,8 +79,19 @@ public class KpmManager {
 	 * @param resource
 	 * @return
 	 */
-	public Unit addUnit(IResource resource) {
-		return _manager.addUnit(resource);
+	public Unit conditionalAddUnit(IResource resource) {
+		return _manager.conditionalAddUnit(resource);
+	}
+	
+	/**
+	 * 
+	 * @param resource
+	 * @return
+	 */
+	public Unit conditionalAddUnit(String resourceName) {
+		IResource resource;
+		resource = ResourceHelper.getIFile(resourceName);
+		return _manager.conditionalAddUnit(resource);
 	}
 	
 	/**

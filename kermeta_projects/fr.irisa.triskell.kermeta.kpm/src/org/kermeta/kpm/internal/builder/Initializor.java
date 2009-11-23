@@ -122,15 +122,15 @@ public class Initializor extends UnitCreator implements IResourceVisitor {
 		switch( resource.getType() ) {
 		
 		case IResource.PROJECT :
-			createUnit(resource, false);
+			conditionalGetOrCreateUnit(resource, false);
 			break;
 			
 		case IResource.FOLDER :
-			createUnit(resource, false);
+			conditionalGetOrCreateUnit(resource, false);
 			break;
 			
 		case IResource.FILE :
-			createUnit(resource, false);
+			conditionalGetOrCreateUnit(resource, false);
 			break;
 		
 		}

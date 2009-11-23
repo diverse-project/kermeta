@@ -84,7 +84,7 @@ public class KpmBuilderDeltaVisitor extends UnitCreator implements IResourceDelt
 	 * @param resource The resource corresponding to a unit to be created.
 	 */
 	private void handleAdd(IResource resource) {
-		Unit unit = createUnit(resource, true);
+		Unit unit = conditionalGetOrCreateUnit(resource, true);
 		if ( unit != null )
 			EventDispatcher.sendEvent(unit, "update", null, _monitor);
 	}

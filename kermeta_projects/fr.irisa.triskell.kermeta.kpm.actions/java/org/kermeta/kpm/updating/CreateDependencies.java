@@ -44,9 +44,9 @@ public class CreateDependencies implements IAction {
 				if ( kermetaUnit != null && ! kermetaUnit.isFramework() ) {
 					for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) ) {
 						if ( ! importedUnit.isFramework() ) {
-							// The uri can be something like http://**, then there is no unit for that.
-							Unit dependent = KpmManager.getDefault().getUnit( importedUnit.getUri() );
-							if ( dependent != null )
+							
+							Unit dependent = KpmManager.getDefault().conditionalAddUnit( importedUnit.getUri() );							
+							if ( dependent != null ) // still null, The uri can be something like http://**, then there is no unit for that.
 								dependent.beDependentOf(master, "require");
 						}
 					}

@@ -94,14 +94,15 @@ public class UnitCreator {
 	public Unit createUnit(String name) {
 		return createUnit(name, true);
 	}
+		
 	
 	/**
-	 * Create a unit timestamped and add it to the KPM model.
+	 * Get or Create a unit for the resource, timestamp it and add it to the KPM model.
 	 * Create unit only for Resource with associated rule
 	 * @param resource The resource to be created as a unit.
 	 * @return The created unit or an existing one
 	 */
-	public Unit createUnit(IResource resource, boolean save) {
+	public Unit conditionalGetOrCreateUnit(IResource resource, boolean save) {
 		IFile file = null;
 		Unit unit = _kpm.getUnit("platform:/resource" + resource.getFullPath().toString());
 		if (unit != null)

@@ -196,9 +196,9 @@ public class InternalKpmManager {
 	 * @param resource
 	 * @return
 	 */
-	public Unit addUnit(IResource resource) {
+	public Unit conditionalAddUnit(IResource resource) {
 		UnitCreator uc = new UnitCreator(_kpm);
-		return uc.createUnit(resource, true );
+		return uc.conditionalGetOrCreateUnit(resource, true );
 	}
 	
 	/**
