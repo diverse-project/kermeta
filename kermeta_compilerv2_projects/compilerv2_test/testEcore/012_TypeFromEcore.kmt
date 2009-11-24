@@ -1,0 +1,40 @@
+/* $Id:$ 
+ * Creation : October 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "test1::Main"
+@mainOperation "main"
+
+
+package test1;
+
+
+require kermeta
+require "platform:/resource/Test/src/kermeta/test1/A.ecore"
+
+using kermeta::standard
+using kermeta::persistence
+class Main
+{
+	operation main() : Void is do 
+		var a : A init A.new
+		a.test
+		
+	end
+}
+
+aspect class A{
+	
+	
+	attribute  toto : String
+	
+	operation test() : Void is do
+	self.toto := "toto"
+		stdio.writeln(self.name + " " + self.toto ) 
+	end
+	
+	
+}
