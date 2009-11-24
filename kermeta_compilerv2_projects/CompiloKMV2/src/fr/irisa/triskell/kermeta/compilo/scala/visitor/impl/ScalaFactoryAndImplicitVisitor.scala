@@ -9,9 +9,9 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
-
+ 
 class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplicit {
-	
+	 
 	var viewDef : StringBuilder = _
 	var implicitDef : StringBuilder = _
 	var actualPackage : String = _
@@ -51,7 +51,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 			factoryDef append "package "+actualPackage+"\n"
 			factoryDef append "object "+GlobalConfiguration.factoryName + " extends "
 			if (par.getOwnedTypeDefinition.filter{e=> Util.hasEcoreTag(par)}.size>0)
-				factoryDef append actualPackage+"."+ par.getName+"FactoryImpl with" 
+				factoryDef append actualPackage+"."+ par.getName.substring(0,1).toUpperCase + par.getName.substring(1,par.getName.size)+"Factory with" 
 			factoryDef append " "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 			factoryDef append "{\n"
 			viewDef append "package "+actualPackage+"\n"
