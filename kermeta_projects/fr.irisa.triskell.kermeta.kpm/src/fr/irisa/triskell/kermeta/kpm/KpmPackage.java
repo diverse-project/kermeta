@@ -23,6 +23,9 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * return true if the unit was found and removed
+ * <!-- end-model-doc -->
  * @see fr.irisa.triskell.kermeta.kpm.KpmFactory
  * @model kind="package"
  * @generated

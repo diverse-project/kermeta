@@ -937,7 +937,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		op = addEOperation(kpmEClass, this.getEvent(), "getEvent", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kpmEClass, null, "removeUnit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(kpmEClass, ecorePackage.getEBoolean(), "removeUnit", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kpmEClass, this.getUnit(), "getUnit", 0, 1, IS_UNIQUE, IS_ORDERED);

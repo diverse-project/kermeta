@@ -219,7 +219,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void removeUnit(String name) {
+	public boolean removeUnit(String name) {
 		Unit unitToRemove = getUnit(name);
 		if ( unitToRemove != null ) {
 			// First remove all dependencies of that unit from the kpm model.
@@ -229,7 +229,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				d.getUserUnit().getUsedUsages().remove(d);
 			// Finally remove the unit from the kpm model.
 			getUnits().remove( unitToRemove );
+			return true;
 		}
+		return false;
 	}
 
 	/**

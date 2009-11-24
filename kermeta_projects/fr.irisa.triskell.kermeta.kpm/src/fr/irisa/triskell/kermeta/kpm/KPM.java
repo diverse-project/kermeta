@@ -117,7 +117,7 @@ public interface KPM extends EObject {
 	 * @model
 	 * @generated
 	 */
-	void removeUnit(String name);
+	boolean removeUnit(String name);
 
 	/**
 	 * <!-- begin-user-doc -->

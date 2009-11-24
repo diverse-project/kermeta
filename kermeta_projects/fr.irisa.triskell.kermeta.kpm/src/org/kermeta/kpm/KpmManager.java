@@ -12,10 +12,14 @@
 
 package org.kermeta.kpm;
 
+import java.io.IOException;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.jobs.ILock;
+import org.eclipse.core.runtime.jobs.Job;
 import org.kermeta.kpm.internal.InternalKpmManager;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -153,6 +157,20 @@ public class KpmManager {
 		
 		return _manager.getKpm();
 	}
+	
+	synchronized public void save(){
+		try {
+			_manager.getKpm().eResource().save(null);
+		} catch (IOException e) {
+			KPMPlugin.logErrorMessage("Failed to save kpm file " + _manager.getKpm().eResource().getURI().toFileString(), e);
+		}
+	}
+	
+	private static ILock kpmlock = Job.getJobManager().newLock();
+	public ILock getKPMLock(){
+		return kpmlock;
+	}
+	
 }
 
 

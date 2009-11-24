@@ -93,9 +93,8 @@ public class InternalKpmManager {
 			initializeKpm();
 			initializeRules();
 			initializeExtensionElements();
-			// DVK do not add kpmBuilder automatically
 			//initializeProjects();			
-			// ResourcesPlugin.getWorkspace().addResourceChangeListener( new WorkspaceResourceChangeListener() );
+			ResourcesPlugin.getWorkspace().addResourceChangeListener( new WorkspaceResourceChangeListener() );
 		} catch (CoreException e) {
 			KPMPlugin.logErrorMessage("Failed to initialize", e);
 		}
@@ -286,6 +285,7 @@ public class InternalKpmManager {
 		}
 		
 	}
+	
 	
 	
 	// TEST PURPOSE //

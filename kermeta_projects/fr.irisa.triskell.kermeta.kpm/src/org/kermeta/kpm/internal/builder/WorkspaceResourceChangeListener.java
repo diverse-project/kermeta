@@ -8,6 +8,7 @@
 * ----------------------------------------------------------------------------
 * Creation date : 20 mai 08
 * Authors : paco
+* 			Didier Vojtisek
 */
 
 package org.kermeta.kpm.internal.builder;
@@ -23,67 +24,110 @@ import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.kermeta.kpm.EventDispatcher;
 import org.kermeta.kpm.KPMPlugin;
+import org.kermeta.kpm.KpmManager;
 import org.kermeta.kpm.internal.InternalKpmManager;
 
+import fr.irisa.triskell.eclipse.resources.ProjectBuilderHelper;
+import fr.irisa.triskell.kermeta.kpm.Unit;
+
 /**
- * This class is used to handle project create/deletion only.
- * Its responsibilities is to add/remove the necessary unit to the kpm model.
- * It is triggered by the Workspace 
- * @author paco
- *
+ * This class is used to handle Workspace level events
+ * It must do has less as possible concrete work, it should only trigger action so the real work is done in a separate job
+ * Projects and resources in projects that have the kpm builder action are handled separately (in KpmBuilderDeltaVisitor)
+ * The role of this changelistener is to make sure that if we have some editor interested in the modified files, they will be triggered
+ * additionnaly, it will update the kpm file in order to 
  */
 public class WorkspaceResourceChangeListener implements IResourceChangeListener, IResourceDeltaVisitor {
 
-	/**		A flag indicating the nature of the change for the project being processed.		*/
-	private int _projectChangeKind;
+	protected boolean needKpmSave = false;
+	
 	
 	public void resourceChanged(IResourceChangeEvent event) {
-		try {
-			// Visiting the delta.
-			if ( event.getDelta() != null )
-				event.getDelta().accept(this);
-		} catch (CoreException e) {
-			KPMPlugin.logErrorMessage("Failed to process event delta", e);
+
+		// Visiting the delta so every changes in the delta will be processed.
+		if ( event.getDelta() != null ){
+			final IResourceChangeEvent ev = event;
+			final WorkspaceResourceChangeListener visitor = this;
+			WorkspaceJob job = new WorkspaceJob("KPM inspecting changes of " + event.getDelta().getResource().getName()) {
+				@Override
+				public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException { 
+					try {	
+						KpmManager.getDefault().getKPMLock().acquire();
+						ev.getDelta().accept(visitor);
+
+						if(needKpmSave){
+							KpmManager.getDefault().save();
+							needKpmSave = false;
+						}
+					} catch (CoreException e) {
+						KPMPlugin.logErrorMessage("Failed to process event delta", e);
+					}
+					finally {
+						KpmManager.getDefault().getKPMLock().release();
+					}
+					return Status.OK_STATUS;
+				}
+
+			};
+			//job.setRule(delta.getResource().getProject());
+			job.schedule();
 		}
+
+
 	}
 
 	public boolean visit(IResourceDelta delta) throws CoreException {
 		// Flag stating whether to continue the visit or not.
-		boolean goOn = true;
-		
-		switch( delta.getResource().getType() ) {
-		
+		boolean processResourceChildren = true;
+		switch( delta.getResource().getType() ) {		
 		// Only handling project changes.
 		case IResource.PROJECT :
 			handleProject(delta);
 			IProject project = (IProject) delta.getResource();
-			goOn = project.isOpen();
+			processResourceChildren = project.isOpen();
 			break;
 
 		case IResource.FILE :
-			handleFile( (IFile) delta.getResource() );
-			goOn = false;
+			handleFile( delta );
+			processResourceChildren = false;
 			break;
 			
 		case IResource.FOLDER :
-			goOn = false;
+			// nothing to do with folder
+			processResourceChildren = true;
 			break;
 			
 		default :
 			break;
 		}
-		return goOn;
+		return processResourceChildren;
 	}
 	
 	/**
 	 * Add or remove units coming from a project.
 	 * @param delta
+	 * @returns true if we should continue to process the project children in the delta
 	 */
-	private void handleProject(final IResourceDelta delta) {
-		_projectChangeKind = delta.getKind();	
-		WorkspaceJob job = new WorkspaceJob("KPM inspecting changes of " + delta.getResource().getName()) {
+	private boolean handleProject(final IResourceDelta delta) {
+		switch( delta.getKind() ) {
+		case IResourceDelta.ADDED :
+			// nothing to do
+			break;
+		case IResourceDelta.REMOVED :
+			// TODO must remove all related entries in kpm file
+			break;
+		default :
+			// TODO what is the event for closing/opening a project ?
+			break;
+		}
+		return true;
+	}
+		//_projectChangeKind = delta.getKind();	
+	/*	WorkspaceJob job = new WorkspaceJob("KPM inspecting changes of " + delta.getResource().getName()) {
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 				if ( delta.getKind() == IResourceDelta.ADDED ) {
@@ -114,15 +158,54 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener,
 		//job.setRule(delta.getResource()); 
 		//job.setRule(delta.getResource().getProject());
 		job.schedule();
+		return true;
+	}
+	*/
+	private void handleFile(final IResourceDelta delta) throws CoreException {
+		// handle only files that are not in a project with kpmBuilder action
+		IProject project = delta.getResource().getProject();
+		if(!ProjectBuilderHelper.doesProjectHaveBuilder(project, KpmProjectBuilder.ID)){
+			String name = "platform:/resource" + delta.getResource().getFullPath().toString();
+			Unit kpmUnit = KpmManager.getDefault().getKpm().getUnit(name);
+			
+			switch( delta.getKind() ) {
+			case IResourceDelta.ADDED :
+				// there is no way that this resource is known by an existing kpm file, so ignore the addition
+				break;
+			case IResourceDelta.REMOVED :
+				// must remove entries in kpm file				
+				needKpmSave = needKpmSave || InternalKpmManager.getDefault().getKpm().removeUnit(name);
+				break;			
+			case IResourceDelta.CHANGED :
+				// if this file was used by another that is declared in kpm or if an editor is listening it, then send an event to compile it
+				int flags = delta.getFlags();
+				// get only changes that affect the content of the file (otherwise markers changes will generate an infinite loop
+			    if (((flags & IResourceDelta.CONTENT) != 0) ||
+			    		((flags & IResourceDelta.REPLACED) != 0))	{			            
+			    	if(kpmUnit != null)
+						EventDispatcher.sendEvent(kpmUnit, "update", null, new NullProgressMonitor());
+			    }
+			    //else {
+			    //	System.out.println("--> ignored change");
+			    //}
+
+				break;
+			default :
+				// TODO what is the event for closing/opening a project ?
+				if(kpmUnit != null)
+					delta.getKind();
+				break;
+			}
+		}
 	}
 	
-	/**
+	/* *
 	 * When the .project file is modified, we cannot be sure that the KPM builder is still present.
 	 * So to be sure, we call the ProjectVisitor to add a new builder if necessary.
 	 * @param file
 	 * @throws CoreException 
 	 */
-	private void handleFile(final IFile file) throws CoreException {
+/*	private void handleFile(final IFile file) throws CoreException {
 		// Do not handle the change of the .project file if the project is being removed.
 		if ( file.getFileExtension().equals("project") && _projectChangeKind != IResourceDelta.REMOVED ) {
 			// Do it in a job because it will provoke a change in the workspace.
@@ -138,7 +221,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener,
 			//job.setRule(file.getProject()); 
 			job.schedule();
 		}
-	}
+	} */
 
 }
 
