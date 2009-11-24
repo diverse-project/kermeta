@@ -13,9 +13,11 @@ trait PrimitiveTypeAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	implicit def rich (xs : PrimitiveTypeAspect) = xs.asInstanceOf[PrimitiveType]
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		println("pass par primitive type " + this.getName) 
 		if (Util.hasEcoreTag(this)){
-			res.append(this.getOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName)).first.getValue)
+			println("pass par primitive type " + this.getName) 
+			var t = this.getOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName)).first.getValue;
+			res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
+			
 		}else{
 		 if (this.getInstanceType !=null){
 			 this.getInstanceType.generateScalaCode(res)
