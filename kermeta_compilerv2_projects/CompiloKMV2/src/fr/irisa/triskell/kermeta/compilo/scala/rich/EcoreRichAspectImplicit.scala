@@ -161,4 +161,8 @@ trait EcoreRichAspectImplicit {
     implicit def rich (xs : ModelingUnitAspect) = xs.asInstanceOf[ModelingUnit]
     implicit def rich (xs : ClassDefinitionAspect) = xs.asInstanceOf[ClassDefinition]
     implicit def rich (xs : fr.irisa.triskell.kermeta.language.structure.Object) = xs.asInstanceOf[ObjectAspect]
+
+	implicit def rich (xs : AssignmentAspect) = xs.asInstanceOf[Assignment]
+	implicit def rich (xs : BlockAspect) = xs.asInstanceOf[Block]
+	
 }

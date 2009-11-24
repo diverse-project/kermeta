@@ -19,15 +19,28 @@ class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 	  
 	def visit(par : Package){ 
 		actualPackage = par.getQualifiedName
-		//Util.currentPackage = actualPackage
 		if (!actualPackage.startsWith("kermeta")){
-			par.getOwnedTypeDefinition filter(p => p.isInstanceOf[ClassDefinition]) foreach(p=> p.asInstanceOf[ClassDefinition].accept(this))
-			par.getOwnedTypeDefinition filter(p => p.isInstanceOf[Enumeration]) foreach(p=> p.asInstanceOf[EnumerationAspect].generateEnum())
-			
+
+			var subTask = new ScalaAspectPackageVisitorRunnable(par,actualPackage)
+			Util.threadExecutor.execute(subTask)
 			par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage
 		}
 	}
  
+	def visit(par : ClassDefinition){Console.println("multithread error")}
+	
+}
+
+class ScalaAspectPackageVisitorRunnable(par : Package,actualPackage : String) extends Runnable with IVisitor with EcoreRichAspectImplicit  {
+	def run() = {
+			par.getOwnedTypeDefinition filter(p => p.isInstanceOf[ClassDefinition]) foreach(p=> p.asInstanceOf[ClassDefinition].accept(this))
+			par.getOwnedTypeDefinition filter(p => p.isInstanceOf[Enumeration]) foreach(p=> p.asInstanceOf[EnumerationAspect].generateEnum())
+	}
+	
+	def visit(par : ModelingUnit){Console.println("multithread error")}
+	 
+	def visit(par : Package){Console.println("multithread error")}
+	
 	def visit(par : ClassDefinition){
 			var res : StringBuilder = new StringBuilder
 			res.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage)+"\n")
@@ -37,12 +50,10 @@ class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 			res.append("import kermeta.standard.PrimitiveConversion._\n")
 			par.generateScalaCode(res)
 			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage), par.getName+"Aspect", res.toString())
-			
 			var res1 : StringBuilder = new StringBuilder
 			res1.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage)+"\n")
 			res1.append("class " + par.getName + " extends org.eclipse.emf.ecore.impl.EObjectImpl")
 			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage), par.getName, res1.toString())
-		 
 	}
-
+	
 }

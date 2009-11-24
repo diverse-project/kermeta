@@ -9,8 +9,6 @@ import fr.irisa.triskell.kermeta.language.behavior._
 
 trait BlockAspect extends EcoreRichAspectImplicit with ObjectAspect {
 	
-	implicit def rich (xs : BlockAspect) = xs.asInstanceOf[Block]
-	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append("{\n") 
 		this.getStatement().foreach(exp => {

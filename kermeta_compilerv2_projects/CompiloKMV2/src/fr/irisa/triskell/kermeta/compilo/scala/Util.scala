@@ -5,6 +5,8 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 import scala.collection.JavaConversions._
+import java.util.concurrent.Executors
+import java.util.concurrent.ExecutorService
  
 object Util  {
 	
@@ -23,4 +25,7 @@ object Util  {
     	writer.close
     	output.close
    }
+   
+   var threadExecutor : ExecutorService = Executors.newCachedThreadPool()
+   
 }
