@@ -117,7 +117,7 @@ public class OutImpl extends EObjectImpl implements Out {
 	 * @generated
 	 */
 	public Rule getRule() {
-		if (eContainerFeatureID != KpmPackage.OUT__RULE) return null;
+		if (eContainerFeatureID() != KpmPackage.OUT__RULE) return null;
 		return (Rule)eContainer();
 	}
 
@@ -137,7 +137,7 @@ public class OutImpl extends EObjectImpl implements Out {
 	 * @generated
 	 */
 	public void setRule(Rule newRule) {
-		if (newRule != eInternalContainer() || (eContainerFeatureID != KpmPackage.OUT__RULE && newRule != null)) {
+		if (newRule != eInternalContainer() || (eContainerFeatureID() != KpmPackage.OUT__RULE && newRule != null)) {
 			if (EcoreUtil.isAncestor(this, newRule))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -245,7 +245,7 @@ public class OutImpl extends EObjectImpl implements Out {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case KpmPackage.OUT__RULE:
 				return eInternalContainer().eInverseRemove(this, KpmPackage.RULE__OUTS, Rule.class, msgs);
 		}
@@ -263,7 +263,7 @@ public class OutImpl extends EObjectImpl implements Out {
 			case KpmPackage.OUT__RULE:
 				return getRule();
 			case KpmPackage.OUT__INDEPENDANT:
-				return isIndependant() ? Boolean.TRUE : Boolean.FALSE;
+				return isIndependant();
 			case KpmPackage.OUT__PARAMETERS:
 				return getParameters();
 			case KpmPackage.OUT__EXTENSION_POINT:
@@ -285,7 +285,7 @@ public class OutImpl extends EObjectImpl implements Out {
 				setRule((Rule)newValue);
 				return;
 			case KpmPackage.OUT__INDEPENDANT:
-				setIndependant(((Boolean)newValue).booleanValue());
+				setIndependant((Boolean)newValue);
 				return;
 			case KpmPackage.OUT__PARAMETERS:
 				getParameters().clear();
