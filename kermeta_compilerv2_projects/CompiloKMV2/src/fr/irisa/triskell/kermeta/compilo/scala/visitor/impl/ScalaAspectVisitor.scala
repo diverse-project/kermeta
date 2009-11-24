@@ -19,8 +19,8 @@ class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 	  
 	def visit(par : Package){ 
 		actualPackage = par.getQualifiedName
+		Console.println("pack name "+actualPackage)
 		if (!actualPackage.startsWith("kermeta")){
-
 			var subTask = new ScalaAspectPackageVisitorRunnable(par,actualPackage)
 			Util.threadExecutor.execute(subTask)
 			par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage

@@ -18,14 +18,14 @@ object Main extends EcoreRichAspectImplicit {
 		  
 	      
 	//var v : ModelingUnit = t.loadKM("tp1.km");  
-	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/000HelloWorld.km");  
-	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/001testAssignement2.km")
+	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/000HelloWorld.km");  
+//	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/001testAssignement2.km")
 	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/001testAssignement.km") 
- // 	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/002_testArithm.main.km") 
-//  	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/003_testOpCall.main.km")
+  	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/002_testArithm.main.km") 
+//	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/003_testOpCall.main.km")
 //  	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/004_testOpOpCall.main.km")
   	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/005_testOpPkgCall.main.km")
-  	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/006_testClosure.km")
+ 	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/006_testClosure.km")
   	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/010_testLoop.main.km")
   //	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/011_testBenchmark.main.km")
   	//var res = new StringBuilder
@@ -41,7 +41,7 @@ object Main extends EcoreRichAspectImplicit {
     //v.generateScalaCode(res)
     //Console.println(res.toString())
 	   
-	   Util.threadExecutor.shutdown()
+	Util.threadExecutor.shutdown()
 	   
   }
 }
