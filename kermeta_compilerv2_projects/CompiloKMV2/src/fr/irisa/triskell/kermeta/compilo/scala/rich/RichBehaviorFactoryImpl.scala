@@ -8,7 +8,7 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 
 class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
- 
+   
 	override def createConditional() : Conditional =  {
 		new ConditionalView
 	}

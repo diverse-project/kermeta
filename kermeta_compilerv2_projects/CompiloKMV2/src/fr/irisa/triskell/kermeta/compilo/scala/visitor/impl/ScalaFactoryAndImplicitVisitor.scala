@@ -51,7 +51,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 			factoryDef append "package "+actualPackage+"\n"
 			factoryDef append "object "+GlobalConfiguration.factoryName + " extends "
 			if (par.getOwnedTypeDefinition.filter{e=> Util.hasEcoreTag(par)}.size>0)
-				factoryDef append actualPackage+"."+ par.getName.substring(0,1).toUpperCase + par.getName.substring(1,par.getName.size)+"Factory with" 
+				factoryDef append actualPackage+".impl."+ par.getName.substring(0,1).toUpperCase + par.getName.substring(1,par.getName.size)+"FactoryImpl with" 
 			factoryDef append " "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 			factoryDef append "{\n"
 			viewDef append "package "+actualPackage+"\n"
@@ -79,13 +79,18 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 			packageName.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[PackageAspect].getQualifiedName))
 			packageName.append(".")
 			
-			viewDef.append(" class Rich"+par.getName()+" extends "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + par.getName())+" with "+packageName.toString +par.getName+"Aspect \n")
+			if (Util.hasEcoreTag(par)){
+				viewDef.append(" class Rich"+par.getName()+" extends "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"impl." + par.getName()+"Impl")+" with "+packageName.toString +par.getName+"Aspect \n")
+			}else{
+				viewDef.append(" class Rich"+par.getName()+" extends "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + par.getName())+" with "+packageName.toString +par.getName+"Aspect \n")
+			}
 			implicitDef append " implicit def richAspect(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+par.getName())+") = v.asInstanceOf["+ packageName.toString+ "Rich"+par.getName+"]\n" 
 			implicitDef append " implicit def richAspect(v : "+ packageName.toString+par.getName()+"Aspect) = v.asInstanceOf["+ packageName.toString+"Rich"+par.getName+"]\n"
-			if (Util.hasEcoreTag(par))
-				factoryDefClass append " override"
-			factoryDefClass append " def create"+par.getName()+" : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+par.getName())+" = { new "+ packageName.toString+"Rich"+par.getName+" }\n"
-			
+			if (!par.isIsAbstract()){
+				if (Util.hasEcoreTag(par))
+					factoryDefClass append " override"
+				factoryDefClass append " def create"+par.getName()+" : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+par.getName())+" = { new "+ packageName.toString+"Rich"+par.getName+" }\n"
+			}
 	//}
 	}
 	

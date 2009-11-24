@@ -10,7 +10,7 @@ import fr.irisa.triskell.kermeta.language.structure.impl._
 import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.language.behavior.impl._
 
-
+ 
 class AssignementView extends AssignmentImpl with AssignmentAspect
 class ModelingUnitView extends ModelingUnitImpl with ModelingUnitAspect
 class PackageView extends PackageImpl with PackageAspect

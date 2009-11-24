@@ -1,6 +1,6 @@
 package fr.irisa.triskell.kermeta.compilo.scala
 
-object GlobalConfiguration {
+object GlobalConfiguration { 
 	   
 	final var frameworkGeneratedPackageName : String = "fr.irisa.triskell.scala.generated.fw"
 	final var implicitConvTraitName : String = "ImplicitConversion"
