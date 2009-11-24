@@ -1,8 +1,6 @@
 package kermeta.io
 
-object stdio extends StdIO
-
-class StdIO {
+class StdIOClass {
 	
 	def write(obj : AnyRef) : Unit = {
 		Console.print(obj)
@@ -29,8 +27,9 @@ class StdIO {
     	var entree:java.io.BufferedReader =new java.io.BufferedReader(lecteur);
     	ligne_lue=entree.readLine();
     	return ligne_lue;
- 
-	
 	}
 
 }
+
+object stdio extends StdIOClass
+
