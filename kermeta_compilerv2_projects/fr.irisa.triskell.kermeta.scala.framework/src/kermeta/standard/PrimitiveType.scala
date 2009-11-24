@@ -8,6 +8,8 @@ import scala._
 object PrimitiveConversion{
 	implicit def string2kermeta(x: String) = new RichString(x)	
 	implicit def boolean2kermeta(x: Boolean) = new RichBoolean(x)	
+	implicit def boolean2kermeta(x: java.lang.Boolean) :Boolean= x.booleanValue()	
+
 //	implicit def integer2kermeta(x: Integer) = new RichInteger(x)	
 	implicit def integer2kermeta(x: Int) = new RichInteger(x)	
 	implicit def real2kermeta(x: Double) = new RichReal(x)	

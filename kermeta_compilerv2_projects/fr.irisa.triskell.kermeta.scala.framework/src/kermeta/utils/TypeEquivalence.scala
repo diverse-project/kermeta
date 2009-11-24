@@ -25,11 +25,12 @@ object TypeEquivalence {
 		typeEquivelence.put("kermeta.standard.Collection", "java.util.List");
 		typeEquivelence.put("kermeta.standard.Set", "java.util.List");
 		typeEquivelence.put("kermeta.standard.String", "java.lang.String");
-		typeEquivelence.put("kermeta.standard.Integer", "java.lang.Integer");
+		typeEquivelence.put("kermeta.standard.Integer", "Int");
 		typeEquivelence.put("kermeta.standard.Real", "java.lang.Double");
 		typeEquivelence.put("kermeta.standard.Character", "java.lang.Character");
-		typeEquivelence.put("int", "java.lang.Integer");
-		typeEquivelence.put("boolean", "java.lang.Boolean");
+		typeEquivelence.put("int", "Int");
+		typeEquivelence.put("boolean", "Boolean");
+		typeEquivelence.put("java.lang.Class","java.lang.Class[_]")
 		typeEquivelence;
 		};
 		

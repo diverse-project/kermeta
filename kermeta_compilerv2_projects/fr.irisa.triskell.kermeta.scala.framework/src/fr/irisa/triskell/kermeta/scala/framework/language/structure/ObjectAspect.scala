@@ -20,10 +20,10 @@ trait ObjectAspect extends  EObject {
 	def unset(prop : EStructuralFeature) = this.eUnset(prop)
 	def oid : Integer = this.hashCode() /*TODO*/
 	override def toString : String = "["+this.eClass().getName()+":"+oid.toString()+"]"
-	def isFrozen : Boolean = false /*TODO*/
+	//def isFrozen : Boolean  /*TODO*/
 	def isVoid : Boolean = false
 	def hashcode : Int = this.hashCode()   
-	def freeze ={} /*TODO*/
+	//def freeze  /*TODO*/
 	//def asType(t : EClass) = this.asInstanceOf[t.getName]
 	//def isInstanceOf(t : EClass) = this.isInstanceOf(t.getMetaClass().getName)
 	
