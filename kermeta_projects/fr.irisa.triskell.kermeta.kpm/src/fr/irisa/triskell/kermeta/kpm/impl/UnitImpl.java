@@ -17,16 +17,18 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.Usage;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,8 +41,8 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getRules <em>Rules</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getLastTimeModified <em>Last Time Modified</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getMasters <em>Masters</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getDependents <em>Dependents</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getUsedUsages <em>Used Usages</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getUsedBy <em>Used By</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,24 +110,24 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	protected Date lastTimeModified = LAST_TIME_MODIFIED_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getMasters() <em>Masters</em>}' containment reference list.
+	 * The cached value of the '{@link #getUsedUsages() <em>Used Usages</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMasters()
+	 * @see #getUsedUsages()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Dependency> masters;
+	protected EList<Usage> usedUsages;
 
 	/**
-	 * The cached value of the '{@link #getDependents() <em>Dependents</em>}' reference list.
+	 * The cached value of the '{@link #getUsedBy() <em>Used By</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDependents()
+	 * @see #getUsedBy()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Dependency> dependents;
+	protected EList<Usage> usedBy;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -245,11 +247,11 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Dependency> getMasters() {
-		if (masters == null) {
-			masters = new EObjectContainmentEList<Dependency>(Dependency.class, this, KpmPackage.UNIT__MASTERS);
+	public EList<Usage> getUsedUsages() {
+		if (usedUsages == null) {
+			usedUsages = new EObjectContainmentWithInverseEList<Usage>(Usage.class, this, KpmPackage.UNIT__USED_USAGES, KpmPackage.USAGE__USER_UNIT);
 		}
-		return masters;
+		return usedUsages;
 	}
 
 	/**
@@ -257,11 +259,11 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Dependency> getDependents() {
-		if (dependents == null) {
-			dependents = new EObjectResolvingEList<Dependency>(Dependency.class, this, KpmPackage.UNIT__DEPENDENTS);
+	public EList<Usage> getUsedBy() {
+		if (usedBy == null) {
+			usedBy = new EObjectWithInverseResolvingEList<Usage>(Usage.class, this, KpmPackage.UNIT__USED_BY, KpmPackage.USAGE__USED_UNIT);
 		}
-		return dependents;
+		return usedBy;
 	}
 
 	/**
@@ -281,31 +283,34 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void addMaster(Dependency d) {
-		for ( Dependency current : getMasters() ) {
-			if ( current.getFrom() == d.getFrom() 
-					&& current.getTo() == d.getTo() 
+	public void addUsedBy(Usage d) {
+		for ( Usage current : getUsedBy() ) {
+			if ( current.getUsedUnit() == d.getUsedUnit() 
+					&& current.getUserUnit() == d.getUserUnit() 
 					&& current.getType().equals(d.getType()) )
 				return;
 		}
-		getMasters().add(d);
+		getUsedBy().add(d);
 	}
+	
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void addDependent(Dependency d) {
-		for ( Dependency current : getDependents() ) {
-			if ( current.getFrom() == d.getFrom() 
-					&& current.getTo() == d.getTo() 
+	public void addUsedUsage(Usage d) {
+		for ( Usage current : getUsedUsages() ) {
+			if ( current.getUsedUnit() == d.getUsedUnit() 
+					&& current.getUserUnit() == d.getUserUnit() 
 					&& current.getType().equals(d.getType()) )
 				return;
 		}
-		getDependents().add(d);
+		getUsedUsages().add(d);
 	}
 
+	
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -313,12 +318,17 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 */
 	public void beDependentOf(Unit master, String type) {
 		assert(master != null);
-		Dependency d = KpmFactory.eINSTANCE.createDependency();
+		for ( Usage current : getUsedUsages() ) {
+			if ( current.getUsedUnit() == master 
+					&& current.getUserUnit() == master 
+					&& current.getType().equals(getType()) )
+				return;
+		}
+		
+		Usage d = KpmFactory.eINSTANCE.createUsage();
 		d.setType(type);
-		d.setFrom(this);
-		d.setTo(master);
-		addMaster(d);
-		master.addDependent(d);
+		d.setUserUnit(this);
+		d.setUsedUnit(master);
 	}
 
 	/**
@@ -326,14 +336,38 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void beMasterOf(Unit dependent, String type) {
+	public void beUsedBy(Unit dependent, String type) {
 		assert(dependent != null);
-		Dependency d = KpmFactory.eINSTANCE.createDependency();
+		for ( Usage current : getUsedBy() ) {
+			if ( current.getUsedUnit() == dependent 
+					&& current.getUserUnit() == dependent 
+					&& current.getType().equals(getType()) )
+				return;
+		}
+		
+		Usage d = KpmFactory.eINSTANCE.createUsage();
 		d.setType(type);
-		d.setFrom(dependent);
-		d.setTo(this);
-		addDependent(d);
-		dependent.addMaster(d);	
+		d.setUserUnit(dependent);
+		d.setUsedUnit(this);	
+	}
+
+	
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case KpmPackage.UNIT__USED_USAGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUsedUsages()).basicAdd(otherEnd, msgs);
+			case KpmPackage.UNIT__USED_BY:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUsedBy()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -359,8 +393,10 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KpmPackage.UNIT__MASTERS:
-				return ((InternalEList<?>)getMasters()).basicRemove(otherEnd, msgs);
+			case KpmPackage.UNIT__USED_USAGES:
+				return ((InternalEList<?>)getUsedUsages()).basicRemove(otherEnd, msgs);
+			case KpmPackage.UNIT__USED_BY:
+				return ((InternalEList<?>)getUsedBy()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -382,10 +418,10 @@ public class UnitImpl extends EObjectImpl implements Unit {
 				return getName();
 			case KpmPackage.UNIT__LAST_TIME_MODIFIED:
 				return getLastTimeModified();
-			case KpmPackage.UNIT__MASTERS:
-				return getMasters();
-			case KpmPackage.UNIT__DEPENDENTS:
-				return getDependents();
+			case KpmPackage.UNIT__USED_USAGES:
+				return getUsedUsages();
+			case KpmPackage.UNIT__USED_BY:
+				return getUsedBy();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -412,13 +448,13 @@ public class UnitImpl extends EObjectImpl implements Unit {
 			case KpmPackage.UNIT__LAST_TIME_MODIFIED:
 				setLastTimeModified((Date)newValue);
 				return;
-			case KpmPackage.UNIT__MASTERS:
-				getMasters().clear();
-				getMasters().addAll((Collection<? extends Dependency>)newValue);
+			case KpmPackage.UNIT__USED_USAGES:
+				getUsedUsages().clear();
+				getUsedUsages().addAll((Collection<? extends Usage>)newValue);
 				return;
-			case KpmPackage.UNIT__DEPENDENTS:
-				getDependents().clear();
-				getDependents().addAll((Collection<? extends Dependency>)newValue);
+			case KpmPackage.UNIT__USED_BY:
+				getUsedBy().clear();
+				getUsedBy().addAll((Collection<? extends Usage>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -444,11 +480,11 @@ public class UnitImpl extends EObjectImpl implements Unit {
 			case KpmPackage.UNIT__LAST_TIME_MODIFIED:
 				setLastTimeModified(LAST_TIME_MODIFIED_EDEFAULT);
 				return;
-			case KpmPackage.UNIT__MASTERS:
-				getMasters().clear();
+			case KpmPackage.UNIT__USED_USAGES:
+				getUsedUsages().clear();
 				return;
-			case KpmPackage.UNIT__DEPENDENTS:
-				getDependents().clear();
+			case KpmPackage.UNIT__USED_BY:
+				getUsedBy().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -470,10 +506,10 @@ public class UnitImpl extends EObjectImpl implements Unit {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case KpmPackage.UNIT__LAST_TIME_MODIFIED:
 				return LAST_TIME_MODIFIED_EDEFAULT == null ? lastTimeModified != null : !LAST_TIME_MODIFIED_EDEFAULT.equals(lastTimeModified);
-			case KpmPackage.UNIT__MASTERS:
-				return masters != null && !masters.isEmpty();
-			case KpmPackage.UNIT__DEPENDENTS:
-				return dependents != null && !dependents.isEmpty();
+			case KpmPackage.UNIT__USED_USAGES:
+				return usedUsages != null && !usedUsages.isEmpty();
+			case KpmPackage.UNIT__USED_BY:
+				return usedBy != null && !usedBy.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

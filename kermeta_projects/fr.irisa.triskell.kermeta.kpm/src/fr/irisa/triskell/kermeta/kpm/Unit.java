@@ -23,8 +23,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getRules <em>Rules</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getName <em>Name</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getLastTimeModified <em>Last Time Modified</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getMasters <em>Masters</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependents <em>Dependents</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getUsedUsages <em>Used Usages</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getUsedBy <em>Used By</em>}</li>
  * </ul>
  * </p>
  *
@@ -128,36 +128,40 @@ public interface Unit extends EObject {
 	void setLastTimeModified(Date value);
 
 	/**
-	 * Returns the value of the '<em><b>Masters</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
+	 * Returns the value of the '<em><b>Used Usages</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Usage}.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.Usage#getUserUnit <em>User Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Masters</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Used Usages</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Masters</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Masters()
-	 * @model containment="true"
+	 * @return the value of the '<em>Used Usages</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_UsedUsages()
+	 * @see fr.irisa.triskell.kermeta.kpm.Usage#getUserUnit
+	 * @model opposite="userUnit" containment="true"
 	 * @generated
 	 */
-	EList<Dependency> getMasters();
+	EList<Usage> getUsedUsages();
 
 	/**
-	 * Returns the value of the '<em><b>Dependents</b></em>' reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
+	 * Returns the value of the '<em><b>Used By</b></em>' reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Usage}.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.Usage#getUsedUnit <em>Used Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dependents</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Used By</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dependents</em>' reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Dependents()
-	 * @model
+	 * @return the value of the '<em>Used By</em>' reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_UsedBy()
+	 * @see fr.irisa.triskell.kermeta.kpm.Usage#getUsedUnit
+	 * @model opposite="usedUnit"
 	 * @generated
 	 */
-	EList<Dependency> getDependents();
+	EList<Usage> getUsedBy();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -170,18 +174,24 @@ public interface Unit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * add a Usage for this Unit, but only if there is no equivalent Usage already there
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
-	void addMaster(Dependency d);
+	void addUsedBy(Usage d);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This Unit use a new Usage, however do not add it if it is already there
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
-	void addDependent(Dependency d);
+	void addUsedUsage(Usage d);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -197,6 +207,6 @@ public interface Unit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	void beMasterOf(Unit dependent, String type);
+	void beUsedBy(Unit dependent, String type);
 
 } // Unit

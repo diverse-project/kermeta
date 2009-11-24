@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EClass;
 
-import fr.irisa.triskell.kermeta.kpm.Dependency;
+import fr.irisa.triskell.kermeta.kpm.Usage;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
 import fr.irisa.triskell.kermeta.ui.UiFactory;
@@ -55,11 +55,11 @@ public class FileDependencyTreeItemImpl extends TreeItemImpl implements FileDepe
 		if ( getChildren().size() == 0 ) {
 			
 			Unit unit = (Unit) getValue();
-			Iterator<Dependency> iterator = unit.getDependents().iterator();
+			Iterator<Usage> iterator = unit.getUsedUsages().iterator();
 			while ( iterator.hasNext() ) {
-				Dependency currentDependency = iterator.next();
+				Usage currentDependency = iterator.next();
 				FileDependencyTreeItem item = UiFactory.eINSTANCE.createFileDependencyTreeItem();
-				item.setValue( currentDependency.getFrom() );
+				item.setValue( currentDependency.getUsedUnit() );
 				item.setParent(this);
 				getChildren().add( item );
 			}

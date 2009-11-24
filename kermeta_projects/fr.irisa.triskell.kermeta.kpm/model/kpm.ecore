@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kpm"
@@ -93,17 +93,23 @@
     <eOperations name="equals" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     </eOperations>
-    <eOperations name="addMaster">
-      <eParameters name="d" eType="#//Dependency"/>
+    <eOperations name="addUsedBy">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="add a Usage for this Unit, but only if there is no equivalent Usage already there"/>
+      </eAnnotations>
+      <eParameters name="d" eType="#//Usage"/>
     </eOperations>
-    <eOperations name="addDependent">
-      <eParameters name="d" eType="#//Dependency"/>
+    <eOperations name="addUsedUsage">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This Unit use a new Usage, however do not add it if it is already there"/>
+      </eAnnotations>
+      <eParameters name="d" eType="#//Usage"/>
     </eOperations>
     <eOperations name="beDependentOf">
       <eParameters name="master" eType="#//Unit"/>
       <eParameters name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="beMasterOf">
+    <eOperations name="beUsedBy">
       <eParameters name="dependent" eType="#//Unit"/>
       <eParameters name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
@@ -112,16 +118,18 @@
         eType="#//Rule"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastTimeModified" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="masters" upperBound="-1"
-        eType="#//Dependency" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dependents" upperBound="-1"
-        eType="#//Dependency"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usedUsages" upperBound="-1"
+        eType="#//Usage" containment="true" eOpposite="#//Usage/userUnit"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usedBy" upperBound="-1"
+        eType="#//Usage" eOpposite="#//Usage/usedUnit"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExistFilter" eSuperTypes="#//Filter"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Dependency">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//Unit"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//Unit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Usage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usedUnit" lowerBound="1"
+        eType="#//Unit" eOpposite="#//Unit/usedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userUnit" lowerBound="1"
+        eType="#//Unit" eOpposite="#//Unit/usedUsages"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="List" instanceClassName="java.util.List"/>

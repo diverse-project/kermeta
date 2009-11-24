@@ -155,12 +155,12 @@ public class KPMTest extends TestCase {
 	 */
 	public void testRemoveUnit__String() {
 		assertTrue( fixture.getUnits().size() == 4 );
-		assertTrue( fixture.getUnit("unit1").getMasters().size() == 2 );
-		assertTrue( fixture.getUnit("unit4").getDependents().size() == 2 );
+		assertTrue( fixture.getUnit("unit1").getUsedBy().size() == 2 );
+		assertTrue( fixture.getUnit("unit4").getUsedUsages().size() == 2 );
 		fixture.removeUnit("unit2");
 		assertTrue( fixture.getUnits().size() == 3 );
-		assertTrue( fixture.getUnit("unit1").getMasters().size() == 1 );
-		assertTrue( fixture.getUnit("unit4").getDependents().size() == 1 );
+		assertTrue( fixture.getUnit("unit1").getUsedBy().size() == 1 );
+		assertTrue( fixture.getUnit("unit4").getUsedUsages().size() == 1 );
 	}
 
 	/**

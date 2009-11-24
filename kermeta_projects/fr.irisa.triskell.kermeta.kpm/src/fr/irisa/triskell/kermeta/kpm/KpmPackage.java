@@ -61,16 +61,6 @@ public interface KpmPackage extends EPackage {
 	KpmPackage eINSTANCE = fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl <em>Dependency</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDependency()
-	 * @generated
-	 */
-	int DEPENDENCY = 17;
-
-	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl <em>Out</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -628,22 +618,22 @@ public interface KpmPackage extends EPackage {
 	int UNIT__LAST_TIME_MODIFIED = 3;
 
 	/**
-	 * The feature id for the '<em><b>Masters</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Used Usages</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT__MASTERS = 4;
+	int UNIT__USED_USAGES = 4;
 
 	/**
-	 * The feature id for the '<em><b>Dependents</b></em>' reference list.
+	 * The feature id for the '<em><b>Used By</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT__DEPENDENTS = 5;
+	int UNIT__USED_BY = 5;
 
 	/**
 	 * The number of structural features of the '<em>Unit</em>' class.
@@ -664,22 +654,32 @@ public interface KpmPackage extends EPackage {
 	int EXIST_FILTER_FEATURE_COUNT = FILTER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' reference.
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.UsageImpl <em>Usage</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.UsageImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getUsage()
 	 * @generated
-	 * @ordered
 	 */
-	int DEPENDENCY__FROM = 0;
+	int USAGE = 17;
 
 	/**
-	 * The feature id for the '<em><b>To</b></em>' reference.
+	 * The feature id for the '<em><b>Used Unit</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY__TO = 1;
+	int USAGE__USED_UNIT = 0;
+
+	/**
+	 * The feature id for the '<em><b>User Unit</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USAGE__USER_UNIT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -688,16 +688,16 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY__TYPE = 2;
+	int USAGE__TYPE = 2;
 
 	/**
-	 * The number of structural features of the '<em>Dependency</em>' class.
+	 * The number of structural features of the '<em>Usage</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY_FEATURE_COUNT = 3;
+	int USAGE_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -766,49 +766,6 @@ public interface KpmPackage extends EPackage {
 	 */
 	int LIST = 20;
 
-
-	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Dependency <em>Dependency</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Dependency</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Dependency
-	 * @generated
-	 */
-	EClass getDependency();
-
-	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Dependency#getType()
-	 * @see #getDependency()
-	 * @generated
-	 */
-	EAttribute getDependency_Type();
-
-	/**
-	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getFrom <em>From</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>From</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Dependency#getFrom()
-	 * @see #getDependency()
-	 * @generated
-	 */
-	EReference getDependency_From();
-
-	/**
-	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getTo <em>To</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>To</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Dependency#getTo()
-	 * @see #getDependency()
-	 * @generated
-	 */
-	EReference getDependency_To();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Parameter <em>Parameter</em>}'.
@@ -1278,26 +1235,26 @@ public interface KpmPackage extends EPackage {
 	EAttribute getUnit_LastTimeModified();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.Unit#getMasters <em>Masters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.Unit#getUsedUsages <em>Used Usages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Masters</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getMasters()
+	 * @return the meta object for the containment reference list '<em>Used Usages</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getUsedUsages()
 	 * @see #getUnit()
 	 * @generated
 	 */
-	EReference getUnit_Masters();
+	EReference getUnit_UsedUsages();
 
 	/**
-	 * Returns the meta object for the reference list '{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependents <em>Dependents</em>}'.
+	 * Returns the meta object for the reference list '{@link fr.irisa.triskell.kermeta.kpm.Unit#getUsedBy <em>Used By</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Dependents</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getDependents()
+	 * @return the meta object for the reference list '<em>Used By</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getUsedBy()
 	 * @see #getUnit()
 	 * @generated
 	 */
-	EReference getUnit_Dependents();
+	EReference getUnit_UsedBy();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.ExistFilter <em>Exist Filter</em>}'.
@@ -1308,6 +1265,49 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getExistFilter();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Usage <em>Usage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Usage</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Usage
+	 * @generated
+	 */
+	EClass getUsage();
+
+	/**
+	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.Usage#getUsedUnit <em>Used Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Used Unit</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Usage#getUsedUnit()
+	 * @see #getUsage()
+	 * @generated
+	 */
+	EReference getUsage_UsedUnit();
+
+	/**
+	 * Returns the meta object for the container reference '{@link fr.irisa.triskell.kermeta.kpm.Usage#getUserUnit <em>User Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>User Unit</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Usage#getUserUnit()
+	 * @see #getUsage()
+	 * @generated
+	 */
+	EReference getUsage_UserUnit();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Usage#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Usage#getType()
+	 * @see #getUsage()
+	 * @generated
+	 */
+	EAttribute getUsage_Type();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.core.runtime.IProgressMonitor <em>IProgress Monitor</em>}'.
@@ -1353,40 +1353,6 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals  {
-		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl <em>Dependency</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDependency()
-		 * @generated
-		 */
-		EClass DEPENDENCY = eINSTANCE.getDependency();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEPENDENCY__TYPE = eINSTANCE.getDependency_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>From</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEPENDENCY__FROM = eINSTANCE.getDependency_From();
-
-		/**
-		 * The meta object literal for the '<em><b>To</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEPENDENCY__TO = eINSTANCE.getDependency_To();
-
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ParameterImpl <em>Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -1775,20 +1741,20 @@ public interface KpmPackage extends EPackage {
 		EAttribute UNIT__LAST_TIME_MODIFIED = eINSTANCE.getUnit_LastTimeModified();
 
 		/**
-		 * The meta object literal for the '<em><b>Masters</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Used Usages</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference UNIT__MASTERS = eINSTANCE.getUnit_Masters();
+		EReference UNIT__USED_USAGES = eINSTANCE.getUnit_UsedUsages();
 
 		/**
-		 * The meta object literal for the '<em><b>Dependents</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Used By</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference UNIT__DEPENDENTS = eINSTANCE.getUnit_Dependents();
+		EReference UNIT__USED_BY = eINSTANCE.getUnit_UsedBy();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ExistFilterImpl <em>Exist Filter</em>}' class.
@@ -1799,6 +1765,40 @@ public interface KpmPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EXIST_FILTER = eINSTANCE.getExistFilter();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.UsageImpl <em>Usage</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.UsageImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getUsage()
+		 * @generated
+		 */
+		EClass USAGE = eINSTANCE.getUsage();
+
+		/**
+		 * The meta object literal for the '<em><b>Used Unit</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference USAGE__USED_UNIT = eINSTANCE.getUsage_UsedUnit();
+
+		/**
+		 * The meta object literal for the '<em><b>User Unit</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference USAGE__USER_UNIT = eINSTANCE.getUsage_UserUnit();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute USAGE__TYPE = eINSTANCE.getUsage_Type();
 
 		/**
 		 * The meta object literal for the '<em>IProgress Monitor</em>' data type.

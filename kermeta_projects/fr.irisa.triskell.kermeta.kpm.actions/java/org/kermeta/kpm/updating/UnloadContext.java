@@ -22,7 +22,7 @@ import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.kpm.IAction;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.kpm.Dependency;
+import fr.irisa.triskell.kermeta.kpm.Usage;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
@@ -78,9 +78,9 @@ public class UnloadContext implements IAction {
 	private void getUnitsToUnload(Unit currentUnit, List<Unit> l, String type) {
 		if ( ! l.contains(currentUnit) ) {
 			l.add(currentUnit);
-			for ( Dependency d : currentUnit.getMasters() )
+			for ( Usage d : currentUnit.getUsedBy() )
 				if ( d.getType().equals(type) )
-					getUnitsToUnload(d.getTo(), l, type);
+					getUnitsToUnload(d.getUserUnit(), l, type);
 		}
 	}
 

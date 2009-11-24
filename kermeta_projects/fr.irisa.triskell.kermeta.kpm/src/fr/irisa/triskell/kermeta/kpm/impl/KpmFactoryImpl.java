@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import fr.irisa.triskell.kermeta.kpm.ANDExpression;
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.FilterExpression;
@@ -92,7 +91,7 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 			case KpmPackage.KPM: return createKPM();
 			case KpmPackage.UNIT: return createUnit();
 			case KpmPackage.EXIST_FILTER: return createExistFilter();
-			case KpmPackage.DEPENDENCY: return createDependency();
+			case KpmPackage.USAGE: return createUsage();
 			case KpmPackage.PARAMETER: return createParameter();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -131,16 +130,6 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Dependency createDependency() {
-		DependencyImpl dependency = new DependencyImpl();
-		return dependency;
 	}
 
 	/**
@@ -281,6 +270,16 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	public ExistFilter createExistFilter() {
 		ExistFilterImpl existFilter = new ExistFilterImpl();
 		return existFilter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Usage createUsage() {
+		UsageImpl usage = new UsageImpl();
+		return usage;
 	}
 
 	/**

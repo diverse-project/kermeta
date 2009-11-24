@@ -76,29 +76,6 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Dependency} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DependencyItemProvider dependencyItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDependencyAdapter() {
-		if (dependencyItemProvider == null) {
-			dependencyItemProvider = new DependencyItemProvider(this);
-		}
-
-		return dependencyItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Parameter} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -421,6 +398,29 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Usage} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UsageItemProvider usageItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Usage}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUsageAdapter() {
+		if (usageItemProvider == null) {
+			usageItemProvider = new UsageItemProvider(this);
+		}
+
+		return usageItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -470,7 +470,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -532,7 +532,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 		if (kpmItemProvider != null) kpmItemProvider.dispose();
 		if (unitItemProvider != null) unitItemProvider.dispose();
 		if (existFilterItemProvider != null) existFilterItemProvider.dispose();
-		if (dependencyItemProvider != null) dependencyItemProvider.dispose();
+		if (usageItemProvider != null) usageItemProvider.dispose();
 		if (parameterItemProvider != null) parameterItemProvider.dispose();
 	}
 

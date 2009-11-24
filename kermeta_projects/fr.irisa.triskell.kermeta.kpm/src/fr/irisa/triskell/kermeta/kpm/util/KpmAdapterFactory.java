@@ -13,7 +13,6 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.kpm.ANDExpression;
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.Expression;
@@ -158,8 +157,8 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 				return createExistFilterAdapter();
 			}
 			@Override
-			public Adapter caseDependency(Dependency object) {
-				return createDependencyAdapter();
+			public Adapter caseUsage(Usage object) {
+				return createUsageAdapter();
 			}
 			@Override
 			public Adapter caseParameter(Parameter object) {
@@ -184,20 +183,6 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Dependency <em>Dependency</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.kpm.Dependency
-	 * @generated
-	 */
-	public Adapter createDependencyAdapter() {
-		return null;
-	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Parameter <em>Parameter</em>}'.
@@ -448,6 +433,20 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExistFilterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Usage <em>Usage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.Usage
+	 * @generated
+	 */
+	public Adapter createUsageAdapter() {
 		return null;
 	}
 

@@ -8,6 +8,7 @@ package fr.irisa.triskell.kermeta.kpm.presentation;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -71,6 +72,24 @@ import fr.irisa.triskell.kermeta.kpm.provider.KpmEditPlugin;
  * @generated
  */
 public class KpmModelWizard extends Wizard implements INewWizard {
+	/**
+	 * The supported extensions for created files.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final List<String> FILE_EXTENSIONS =
+		Collections.unmodifiableList(Arrays.asList(KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameExtensions").split("\\s*,\\s*")));
+
+	/**
+	 * A formatted list of supported file extensions, suitable for display.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String FORMATTED_FILE_EXTENSIONS =
+		KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
+
 	/**
 	 * This caches an instance of the model package.
 	 * <!-- begin-user-doc -->
@@ -291,21 +310,15 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 		@Override
 		protected boolean validatePage() {
 			if (super.validatePage()) {
-				// Make sure the file ends in ".kpm".
-				//
-				String requiredExt = KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameExtension");
-				String enteredExt = new Path(getFileName()).getFileExtension();
-				if (enteredExt == null || !enteredExt.equals(requiredExt)) {
-					setErrorMessage(KpmEditorPlugin.INSTANCE.getString("_WARN_FilenameExtension", new Object [] { requiredExt }));
+				String extension = new Path(getFileName()).getFileExtension();
+				if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
+					String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension";
+					setErrorMessage(KpmEditorPlugin.INSTANCE.getString(key, new Object [] { FORMATTED_FILE_EXTENSIONS }));
 					return false;
 				}
-				else {
-					return true;
-				}
+				return true;
 			}
-			else {
-				return false;
-			}
+			return false;
 		}
 
 		/**
@@ -539,7 +552,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 		newFileCreationPage = new KpmModelWizardNewFileCreationPage("Whatever", selection);
 		newFileCreationPage.setTitle(KpmEditorPlugin.INSTANCE.getString("_UI_KpmModelWizard_label"));
 		newFileCreationPage.setDescription(KpmEditorPlugin.INSTANCE.getString("_UI_KpmModelWizard_description"));
-		newFileCreationPage.setFileName(KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameDefaultBase") + "." + KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameExtension"));
+		newFileCreationPage.setFileName(KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -566,7 +579,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 					// Make up a unique new name here.
 					//
 					String defaultModelBaseFilename = KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameDefaultBase");
-					String defaultModelFilenameExtension = KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameExtension");
+					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
 						modelFilename = defaultModelBaseFilename + i + "." + defaultModelFilenameExtension;

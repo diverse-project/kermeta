@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.Filter;
@@ -28,6 +27,7 @@ import fr.irisa.triskell.kermeta.kpm.NameFilter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.Usage;
 
 /**
  * <!-- begin-user-doc -->
@@ -223,10 +223,10 @@ public class KPMImpl extends EObjectImpl implements KPM {
 		Unit unitToRemove = getUnit(name);
 		if ( unitToRemove != null ) {
 			// First remove all dependencies of that unit from the kpm model.
-			for ( Dependency d : unitToRemove.getDependents() )
-				d.getFrom().getMasters().remove(d);
-			for ( Dependency d : unitToRemove.getMasters() )
-				d.getTo().getDependents().remove(d);
+			for ( Usage d : unitToRemove.getUsedUsages() )
+				d.getUsedUnit().getUsedBy().remove(d);
+			for ( Usage d : unitToRemove.getUsedBy() )
+				d.getUserUnit().getUsedUsages().remove(d);
 			// Finally remove the unit from the kpm model.
 			getUnits().remove( unitToRemove );
 		}

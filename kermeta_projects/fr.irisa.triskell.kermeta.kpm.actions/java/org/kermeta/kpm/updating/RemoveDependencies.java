@@ -19,9 +19,9 @@ import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.kpm.IAction;
 import org.kermeta.kpm.KPMPlugin;
 
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.Usage;
 
 
 public class RemoveDependencies implements IAction {
@@ -49,8 +49,8 @@ public class RemoveDependencies implements IAction {
 					 * 
 					 * 
 					 */
-					List<Dependency> entriesToRemove = new ArrayList<Dependency> ();
-					for ( Dependency d : unit.getDependents() )
+					List<Usage> entriesToRemove = new ArrayList<Usage> ();
+					for ( Usage d : unit.getUsedUsages() )
 						if ( d.getType().equals("require") )
 							entriesToRemove.add(d);
 						
@@ -60,11 +60,9 @@ public class RemoveDependencies implements IAction {
 					 * 
 					 * 
 					 */
-					for ( Dependency d : entriesToRemove ) {
-						d.getFrom().getMasters().remove(d);
-						d.getTo().getDependents().remove(d);
-						//d.setFrom(null);
-						//d.setTo(null);
+					for ( Usage usage : entriesToRemove ) {
+						usage.setUsedUnit(null);
+						usage.setUserUnit(null);
 					}
 				}
 			}

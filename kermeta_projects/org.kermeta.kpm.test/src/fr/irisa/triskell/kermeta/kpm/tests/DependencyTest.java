@@ -6,7 +6,7 @@
  */
 package fr.irisa.triskell.kermeta.kpm.tests;
 
-import fr.irisa.triskell.kermeta.kpm.Dependency;
+import fr.irisa.triskell.kermeta.kpm.Usage;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 
 import junit.framework.TestCase;
@@ -27,7 +27,7 @@ public class DependencyTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Dependency fixture = null;
+	protected Usage fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -54,7 +54,7 @@ public class DependencyTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void setFixture(Dependency fixture) {
+	protected void setFixture(Usage fixture) {
 		this.fixture = fixture;
 	}
 
@@ -64,7 +64,7 @@ public class DependencyTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Dependency getFixture() {
+	protected Usage getFixture() {
 		return fixture;
 	}
 
@@ -76,7 +76,7 @@ public class DependencyTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(KpmFactory.eINSTANCE.createDependency());
+		setFixture(KpmFactory.eINSTANCE.createUsage());
 	}
 
 	/**

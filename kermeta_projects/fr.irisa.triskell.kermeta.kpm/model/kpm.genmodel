@@ -10,56 +10,30 @@
     <genDataTypes ecoreDataType="kpm.ecore#//IProgressMonitor"/>
     <genDataTypes ecoreDataType="kpm.ecore#//List"/>
     <genClasses ecoreClass="kpm.ecore#//Rule">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//Rule/in"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Rule/event"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//Rule/outs"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Rule/name"/>
-      <genOperations ecoreOperation="kpm.ecore#//Rule/process">
-        <genParameters ecoreParameter="kpm.ecore#//Rule/process/unit"/>
-        <genParameters ecoreParameter="kpm.ecore#//Rule/process/synchrone"/>
-        <genParameters ecoreParameter="kpm.ecore#//Rule/process/args"/>
-        <genParameters ecoreParameter="kpm.ecore#//Rule/process/monitor"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//Rule/setEvent">
-        <genParameters ecoreParameter="kpm.ecore#//Rule/setEvent/name"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//Rule/findOut">
-        <genParameters ecoreParameter="kpm.ecore#//Rule/findOut/actionId"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//Rule/removeOut">
-        <genParameters ecoreParameter="kpm.ecore#//Rule/removeOut/actionId"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="kpm.ecore#//In">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kpm.ecore#//In/rule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//Rule/precondition"/>
     </genClasses>
     <genClasses ecoreClass="kpm.ecore#//Out">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kpm.ecore#//Out/rule"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Out/independant"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//Out/parameters"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Out/extensionPoint"/>
-      <genOperations ecoreOperation="kpm.ecore#//Out/process">
-        <genParameters ecoreParameter="kpm.ecore#//Out/process/unit"/>
-        <genParameters ecoreParameter="kpm.ecore#//Out/process/monitor"/>
-        <genParameters ecoreParameter="kpm.ecore#//Out/process/args"/>
-      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="kpm.ecore#//Filter">
       <genOperations ecoreOperation="kpm.ecore#//Filter/matches">
         <genParameters ecoreParameter="kpm.ecore#//Filter/matches/unit"/>
       </genOperations>
     </genClasses>
-    <genClasses image="false" ecoreClass="kpm.ecore#//Expression"/>
+    <genClasses image="false" ecoreClass="kpm.ecore#//Expression">
+      <genOperations ecoreOperation="kpm.ecore#//Expression/evaluateIn">
+        <genParameters ecoreParameter="kpm.ecore#//Expression/evaluateIn/unit"/>
+      </genOperations>
+    </genClasses>
     <genClasses image="false" ecoreClass="kpm.ecore#//NestedExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//NestedExpression/expression"/>
-      <genOperations ecoreOperation="kpm.ecore#//NestedExpression/evaluateIn">
-        <genParameters ecoreParameter="kpm.ecore#//NestedExpression/evaluateIn/unit"/>
-        <genParameters ecoreParameter="kpm.ecore#//NestedExpression/evaluateIn/value"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//NestedExpression/evaluateOut">
-        <genParameters ecoreParameter="kpm.ecore#//NestedExpression/evaluateOut/unit"/>
-        <genParameters ecoreParameter="kpm.ecore#//NestedExpression/evaluateOut/value"/>
-      </genOperations>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//NestedExpression/right"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//NestedExpression/left"/>
     </genClasses>
     <genClasses ecoreClass="kpm.ecore#//ORExpression"/>
     <genClasses ecoreClass="kpm.ecore#//ANDExpression"/>
@@ -67,16 +41,10 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//FilterExpression/filter"/>
     </genClasses>
     <genClasses ecoreClass="kpm.ecore#//TypeFilter">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//TypeFilter/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//TypeFilter/javaClassName"/>
     </genClasses>
     <genClasses ecoreClass="kpm.ecore#//NameFilter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//NameFilter/regex"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="kpm.ecore#//AbstractEntity">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//AbstractEntity/expression"/>
-      <genOperations ecoreOperation="kpm.ecore#//AbstractEntity/evaluate">
-        <genParameters ecoreParameter="kpm.ecore#//AbstractEntity/evaluate/unit"/>
-      </genOperations>
     </genClasses>
     <genClasses ecoreClass="kpm.ecore#//Type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Type/value"/>
@@ -91,42 +59,24 @@
         <genParameters ecoreParameter="kpm.ecore#//Event/equals.1/event"/>
       </genOperations>
     </genClasses>
-    <genClasses image="false" ecoreClass="kpm.ecore#//SimpleExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//SimpleExpression/subExpression"/>
-      <genOperations ecoreOperation="kpm.ecore#//SimpleExpression/evaluateIn">
-        <genParameters ecoreParameter="kpm.ecore#//SimpleExpression/evaluateIn/unit"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//SimpleExpression/evaluateOut">
-        <genParameters ecoreParameter="kpm.ecore#//SimpleExpression/evaluateOut/unit"/>
-      </genOperations>
-    </genClasses>
+    <genClasses image="false" ecoreClass="kpm.ecore#//SimpleExpression"/>
     <genClasses ecoreClass="kpm.ecore#//KPM">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/filters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/types"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/rules"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/events"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/units"/>
-      <genOperations ecoreOperation="kpm.ecore#//KPM/findEvent">
-        <genParameters ecoreParameter="kpm.ecore#//KPM/findEvent/name"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//KPM/createNameFilter">
-        <genParameters ecoreParameter="kpm.ecore#//KPM/createNameFilter/regex"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//KPM/findNameFilter">
-        <genParameters ecoreParameter="kpm.ecore#//KPM/findNameFilter/regex"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//KPM/getExistFilter"/>
-      <genOperations ecoreOperation="kpm.ecore#//KPM/findRule">
-        <genParameters ecoreParameter="kpm.ecore#//KPM/findRule/name"/>
-      </genOperations>
       <genOperations ecoreOperation="kpm.ecore#//KPM/getEvent">
         <genParameters ecoreParameter="kpm.ecore#//KPM/getEvent/name"/>
       </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//KPM/findUnit">
-        <genParameters ecoreParameter="kpm.ecore#//KPM/findUnit/name"/>
-      </genOperations>
       <genOperations ecoreOperation="kpm.ecore#//KPM/removeUnit">
         <genParameters ecoreParameter="kpm.ecore#//KPM/removeUnit/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/getUnit">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/getUnit/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/getRule">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/getRule/name"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="kpm.ecore#//Unit">
@@ -134,54 +84,36 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Unit/rules"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Unit/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Unit/lastTimeModified"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//Unit/masters"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Unit/dependents"/>
-      <genOperations ecoreOperation="kpm.ecore#//Unit/changed"/>
-      <genOperations ecoreOperation="kpm.ecore#//Unit/receiveEvent">
-        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveEvent/event"/>
-        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveEvent/synchrone"/>
-        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveEvent/args"/>
-        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveEvent/monitor"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//Unit/hasRuleNamed">
-        <genParameters ecoreParameter="kpm.ecore#//Unit/hasRuleNamed/name"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//Unit/receiveSynchroneEvent">
-        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveSynchroneEvent/event"/>
-        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveSynchroneEvent/args"/>
-        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveSynchroneEvent/monitor"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//Unit/receiveAsynchroneEvent">
-        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveAsynchroneEvent/event"/>
-        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveAsynchroneEvent/args"/>
-        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveAsynchroneEvent/monitor"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//Unit/beDependentOf">
-        <genParameters ecoreParameter="kpm.ecore#//Unit/beDependentOf/unit"/>
-        <genParameters ecoreParameter="kpm.ecore#//Unit/beDependentOf/dependency"/>
-      </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//Unit/findRule">
-        <genParameters ecoreParameter="kpm.ecore#//Unit/findRule/name"/>
-      </genOperations>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//Unit/usedUsages"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Unit/usedBy"/>
       <genOperations ecoreOperation="kpm.ecore#//Unit/equals">
         <genParameters ecoreParameter="kpm.ecore#//Unit/equals/value"/>
       </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//Unit/addMaster">
-        <genParameters ecoreParameter="kpm.ecore#//Unit/addMaster/d"/>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/addUsedBy">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/addUsedBy/d"/>
       </genOperations>
-      <genOperations ecoreOperation="kpm.ecore#//Unit/addDependent">
-        <genParameters ecoreParameter="kpm.ecore#//Unit/addDependent/d"/>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/addUsedUsage">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/addUsedUsage/d"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/beDependentOf">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/beDependentOf/master"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/beDependentOf/type"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/beUsedBy">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/beUsedBy/dependent"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/beUsedBy/type"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="kpm.ecore#//ExistFilter"/>
-    <genClasses ecoreClass="kpm.ecore#//Dependency">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Dependency/from"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Dependency/to"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute kpm.ecore#//Dependency/type"/>
+    <genClasses ecoreClass="kpm.ecore#//Usage">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Usage/usedUnit"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kpm.ecore#//Usage/userUnit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Usage/type"/>
     </genClasses>
     <genClasses ecoreClass="kpm.ecore#//Parameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Parameter/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Parameter/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Parameter/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -132,15 +132,4 @@ public class ORExpressionItemProvider
 		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return KpmEditPlugin.INSTANCE;
-	}
-
 }

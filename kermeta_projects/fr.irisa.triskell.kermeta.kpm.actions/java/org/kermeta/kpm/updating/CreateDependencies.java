@@ -47,7 +47,7 @@ public class CreateDependencies implements IAction {
 							
 							Unit dependent = KpmManager.getDefault().conditionalAddUnit( importedUnit.getUri() );							
 							if ( dependent != null ) // still null, The uri can be something like http://**, then there is no unit for that.
-								dependent.beDependentOf(master, "require");
+								master.beDependentOf(dependent, "require");
 						}
 					}
 				}

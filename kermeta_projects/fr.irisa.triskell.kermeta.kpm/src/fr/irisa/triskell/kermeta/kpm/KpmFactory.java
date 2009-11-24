@@ -26,15 +26,6 @@ public interface KpmFactory extends EFactory {
 	KpmFactory eINSTANCE = fr.irisa.triskell.kermeta.kpm.impl.KpmFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Dependency</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Dependency</em>'.
-	 * @generated
-	 */
-	Dependency createDependency();
-
-	/**
 	 * Returns a new object of class '<em>Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -159,6 +150,15 @@ public interface KpmFactory extends EFactory {
 	 * @generated
 	 */
 	ExistFilter createExistFilter();
+
+	/**
+	 * Returns a new object of class '<em>Usage</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Usage</em>'.
+	 * @generated
+	 */
+	Usage createUsage();
 
 	/**
 	 * Returns the package supported by this factory.

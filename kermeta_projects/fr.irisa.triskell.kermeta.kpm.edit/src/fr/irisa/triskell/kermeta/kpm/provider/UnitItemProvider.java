@@ -68,7 +68,7 @@ public class UnitItemProvider
 			addRulesPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addLastTimeModifiedPropertyDescriptor(object);
-			addDependentsPropertyDescriptor(object);
+			addUsedByPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -162,19 +162,19 @@ public class UnitItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Dependents feature.
+	 * This adds a property descriptor for the Used By feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDependentsPropertyDescriptor(Object object) {
+	protected void addUsedByPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Unit_dependents_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Unit_dependents_feature", "_UI_Unit_type"),
-				 KpmPackage.Literals.UNIT__DEPENDENTS,
+				 getString("_UI_Unit_usedBy_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Unit_usedBy_feature", "_UI_Unit_type"),
+				 KpmPackage.Literals.UNIT__USED_BY,
 				 true,
 				 false,
 				 true,
@@ -195,7 +195,7 @@ public class UnitItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(KpmPackage.Literals.UNIT__MASTERS);
+			childrenFeatures.add(KpmPackage.Literals.UNIT__USED_USAGES);
 		}
 		return childrenFeatures;
 	}
@@ -255,7 +255,7 @@ public class UnitItemProvider
 			case KpmPackage.UNIT__LAST_TIME_MODIFIED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case KpmPackage.UNIT__MASTERS:
+			case KpmPackage.UNIT__USED_USAGES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -275,8 +275,8 @@ public class UnitItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KpmPackage.Literals.UNIT__MASTERS,
-				 KpmFactory.eINSTANCE.createDependency()));
+				(KpmPackage.Literals.UNIT__USED_USAGES,
+				 KpmFactory.eINSTANCE.createUsage()));
 	}
 
 	/**

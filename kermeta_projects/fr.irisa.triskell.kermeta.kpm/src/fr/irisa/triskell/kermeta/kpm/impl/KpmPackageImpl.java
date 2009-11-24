@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import fr.irisa.triskell.kermeta.kpm.ANDExpression;
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.Expression;
@@ -37,6 +36,7 @@ import fr.irisa.triskell.kermeta.kpm.SimpleExpression;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.TypeFilter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.Usage;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,13 +45,6 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
  * @generated
  */
 public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dependencyEClass = null;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -183,6 +176,13 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass usageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType iProgressMonitorEDataType = null;
 
 	/**
@@ -251,42 +251,6 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(KpmPackage.eNS_URI, theKpmPackage);
 		return theKpmPackage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getDependency() {
-		return dependencyEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getDependency_Type() {
-		return (EAttribute)dependencyEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDependency_From() {
-		return (EReference)dependencyEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDependency_To() {
-		return (EReference)dependencyEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -690,7 +654,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getUnit_Masters() {
+	public EReference getUnit_UsedUsages() {
 		return (EReference)unitEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -699,7 +663,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getUnit_Dependents() {
+	public EReference getUnit_UsedBy() {
 		return (EReference)unitEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -710,6 +674,42 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 */
 	public EClass getExistFilter() {
 		return existFilterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUsage() {
+		return usageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUsage_UsedUnit() {
+		return (EReference)usageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUsage_UserUnit() {
+		return (EReference)usageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUsage_Type() {
+		return (EAttribute)usageEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -813,15 +813,15 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		createEReference(unitEClass, UNIT__RULES);
 		createEAttribute(unitEClass, UNIT__NAME);
 		createEAttribute(unitEClass, UNIT__LAST_TIME_MODIFIED);
-		createEReference(unitEClass, UNIT__MASTERS);
-		createEReference(unitEClass, UNIT__DEPENDENTS);
+		createEReference(unitEClass, UNIT__USED_USAGES);
+		createEReference(unitEClass, UNIT__USED_BY);
 
 		existFilterEClass = createEClass(EXIST_FILTER);
 
-		dependencyEClass = createEClass(DEPENDENCY);
-		createEReference(dependencyEClass, DEPENDENCY__FROM);
-		createEReference(dependencyEClass, DEPENDENCY__TO);
-		createEAttribute(dependencyEClass, DEPENDENCY__TYPE);
+		usageEClass = createEClass(USAGE);
+		createEReference(usageEClass, USAGE__USED_UNIT);
+		createEReference(usageEClass, USAGE__USER_UNIT);
+		createEAttribute(usageEClass, USAGE__TYPE);
 
 		parameterEClass = createEClass(PARAMETER);
 		createEAttribute(parameterEClass, PARAMETER__TYPE);
@@ -951,32 +951,32 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		initEReference(getUnit_Rules(), this.getRule(), null, "rules", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUnit_Name(), ecorePackage.getEString(), "name", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUnit_LastTimeModified(), ecorePackage.getEDate(), "lastTimeModified", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUnit_Masters(), this.getDependency(), null, "masters", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUnit_Dependents(), this.getDependency(), null, "dependents", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnit_UsedUsages(), this.getUsage(), this.getUsage_UserUnit(), "usedUsages", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnit_UsedBy(), this.getUsage(), this.getUsage_UsedUnit(), "usedBy", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(unitEClass, ecorePackage.getEBoolean(), "equals", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEJavaObject(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(unitEClass, null, "addMaster", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getDependency(), "d", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(unitEClass, null, "addUsedBy", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getUsage(), "d", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(unitEClass, null, "addDependent", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getDependency(), "d", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(unitEClass, null, "addUsedUsage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getUsage(), "d", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(unitEClass, null, "beDependentOf", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getUnit(), "master", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(unitEClass, null, "beMasterOf", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(unitEClass, null, "beUsedBy", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getUnit(), "dependent", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(existFilterEClass, ExistFilter.class, "ExistFilter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(dependencyEClass, Dependency.class, "Dependency", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDependency_From(), this.getUnit(), null, "from", null, 1, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDependency_To(), this.getUnit(), null, "to", null, 1, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDependency_Type(), ecorePackage.getEString(), "type", null, 1, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(usageEClass, Usage.class, "Usage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUsage_UsedUnit(), this.getUnit(), this.getUnit_UsedBy(), "usedUnit", null, 1, 1, Usage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUsage_UserUnit(), this.getUnit(), this.getUnit_UsedUsages(), "userUnit", null, 1, 1, Usage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUsage_Type(), ecorePackage.getEString(), "type", null, 1, 1, Usage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParameter_Type(), ecorePackage.getEString(), "type", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

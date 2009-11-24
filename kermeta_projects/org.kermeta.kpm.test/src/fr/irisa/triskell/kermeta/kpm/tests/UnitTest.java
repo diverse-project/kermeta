@@ -6,7 +6,7 @@
  */
 package fr.irisa.triskell.kermeta.kpm.tests;
 
-import fr.irisa.triskell.kermeta.kpm.Dependency;
+import fr.irisa.triskell.kermeta.kpm.Usage;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
@@ -129,27 +129,27 @@ public class UnitTest extends TestCase {
 		from.setName("from");
 		Unit to = fixture;
 		
-		Dependency d1 = KpmFactory.eINSTANCE.createDependency();
+		Usage d1 = KpmFactory.eINSTANCE.createUsage();
 		d1.setType("require");
-		d1.setFrom(from);
-		d1.setTo(to);
-		to.addMaster(d1);
+		d1.setUsedUnit(from);
+		d1.setUserUnit(to);
+		to.addUsedBy(d1);
 
-		assertTrue( to.getMasters().size() == 1 );
+		assertTrue( to.getUsedBy().size() == 1 );
 		
-		if ( to.getMasters().size() == 1 ) {
-			assertTrue( to.getMasters().get(0).getFrom() == from );
-			assertTrue( to.getMasters().get(0).getTo() == to );
-			assertTrue( to.getMasters().get(0).getType().equals("require") );
+		if ( to.getUsedBy().size() == 1 ) {
+			assertTrue( to.getUsedBy().get(0).getUsedUnit() == from );
+			assertTrue( to.getUsedBy().get(0).getUserUnit() == to );
+			assertTrue( to.getUsedBy().get(0).getType().equals("require") );
 		}
 		
-		Dependency d2 = KpmFactory.eINSTANCE.createDependency();
+		Usage d2 = KpmFactory.eINSTANCE.createUsage();
 		d2.setType("require");
-		d2.setFrom(from);
-		d2.setTo(to);
-		to.addMaster(d2);
+		d2.setUsedUnit(from);
+		d2.setUserUnit(to);
+		to.addUsedBy(d2);
 
-		assertTrue( to.getMasters().size() == 1 );
+		assertTrue( to.getUsedBy().size() == 1 );
 
 	}
 
@@ -165,27 +165,27 @@ public class UnitTest extends TestCase {
 		from.setName("from");
 		Unit to = fixture;
 		
-		Dependency d1 = KpmFactory.eINSTANCE.createDependency();
+		Usage d1 = KpmFactory.eINSTANCE.createUsage();
 		d1.setType("require");
-		d1.setFrom(from);
-		d1.setTo(to);
-		to.addDependent(d1);
+		d1.setUsedUnit(from);
+		d1.setUserUnit(to);
+		to.addUsedUsage(d1);
 
-		assertTrue( to.getDependents().size() == 1 );
+		assertTrue( to.getUsedUsages().size() == 1 );
 		
-		if ( to.getMasters().size() == 1 ) {
-			assertTrue( to.getDependents().get(0).getFrom() == from );
-			assertTrue( to.getDependents().get(0).getTo() == to );
-			assertTrue( to.getDependents().get(0).getType().equals("require") );
+		if ( to.getUsedBy().size() == 1 ) {
+			assertTrue( to.getUsedUsages().get(0).getUsedUnit() == from );
+			assertTrue( to.getUsedUsages().get(0).getUserUnit() == to );
+			assertTrue( to.getUsedUsages().get(0).getType().equals("require") );
 		}
 		
-		Dependency d2 = KpmFactory.eINSTANCE.createDependency();
+		Usage d2 = KpmFactory.eINSTANCE.createUsage();
 		d2.setType("require");
-		d2.setFrom(from);
-		d2.setTo(to);
-		to.addDependent(d2);
+		d2.setUsedUnit(from);
+		d2.setUserUnit(to);
+		to.addUsedUsage(d2);
 
-		assertTrue( to.getDependents().size() == 1 );
+		assertTrue( to.getUsedUsages().size() == 1 );
 	}
 
 	/**
@@ -199,17 +199,17 @@ public class UnitTest extends TestCase {
 		Unit master = KpmFactory.eINSTANCE.createUnit();
 		master.setName("master");
 		fixture.beDependentOf(master, "require");
-		assertTrue( fixture.getMasters().size() == 1 );
-		assertTrue( master.getDependents().size() == 1 );
+		assertTrue( fixture.getUsedBy().size() == 1 );
+		assertTrue( master.getUsedUsages().size() == 1 );
 	
-		if ( fixture.getMasters().size() == 1 ) {
-			assertTrue( fixture.getMasters().get(0).getFrom() == fixture );
-			assertTrue( fixture.getMasters().get(0).getTo() == master );
+		if ( fixture.getUsedBy().size() == 1 ) {
+			assertTrue( fixture.getUsedBy().get(0).getUsedUnit() == fixture );
+			assertTrue( fixture.getUsedBy().get(0).getUserUnit() == master );
 		}
 		
-		if ( master.getDependents().size() == 1 ) {
-			assertTrue( master.getDependents().get(0).getFrom() == fixture );
-			assertTrue( master.getDependents().get(0).getTo() == master );
+		if ( master.getUsedUsages().size() == 1 ) {
+			assertTrue( master.getUsedUsages().get(0).getUsedUnit() == fixture );
+			assertTrue( master.getUsedUsages().get(0).getUserUnit() == master );
 		}
 	}
 
@@ -223,18 +223,18 @@ public class UnitTest extends TestCase {
 	public void testBeMasterOf__Unit_String() {
 		Unit dependent = KpmFactory.eINSTANCE.createUnit();
 		dependent.setName("dependent");
-		fixture.beMasterOf(dependent, "require");
-		assertTrue( fixture.getDependents().size() == 1 );
-		assertTrue( dependent.getMasters().size() == 1 );
+		fixture.beUsedBy(dependent, "require");
+		assertTrue( fixture.getUsedUsages().size() == 1 );
+		assertTrue( dependent.getUsedBy().size() == 1 );
 		
-		if ( fixture.getMasters().size() == 1 ) {
-			assertTrue( fixture.getMasters().get(0).getFrom() == dependent );
-			assertTrue( fixture.getMasters().get(0).getTo() == fixture );
+		if ( fixture.getUsedBy().size() == 1 ) {
+			assertTrue( fixture.getUsedBy().get(0).getUsedUnit() == dependent );
+			assertTrue( fixture.getUsedBy().get(0).getUserUnit() == fixture );
 		}
 		
-		if ( dependent.getDependents().size() == 1 ) {
-			assertTrue( dependent.getDependents().get(0).getFrom() == dependent );
-			assertTrue( dependent.getDependents().get(0).getTo() == fixture );
+		if ( dependent.getUsedUsages().size() == 1 ) {
+			assertTrue( dependent.getUsedUsages().get(0).getUsedUnit() == dependent );
+			assertTrue( dependent.getUsedUsages().get(0).getUserUnit() == fixture );
 		}
 	}
 
