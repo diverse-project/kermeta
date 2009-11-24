@@ -184,7 +184,7 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
    		kpmUnit = KpmManager.getDefault().getUnit( getFile() );
    		if(kpmUnit == null ){
    			// the file wasn't know/managed by kpm, add it
-   			KpmManager.getDefault().addUnit(getFile());
+   			KpmManager.getDefault().conditionalAddUnit(getFile());
    		}
 		return true;
     }
@@ -212,11 +212,13 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
 				updateValue( kermetaUnit );
 			} else {
 				KermetaUnitHost.getInstance().declareInterest(this, file);
+				if(kpmUnit == null) initializeUnit(); // initialize so we are sure to send an event for obtaining the outline
 				if(kpmUnit != null){									
 					kpmUnit.setLastTimeModified( new Date(0) );
 					EventDispatcher.sendEvent(kpmUnit, "update", null, monitor);
 				}
 				else{
+					// should never happen again, now
 					TexteditorPlugin.internalLog.warn("Weird, the unit "+file.getName()+ " is still not managed by kpm, (DVK note: should we fix that ?)");
 				}
 			}
