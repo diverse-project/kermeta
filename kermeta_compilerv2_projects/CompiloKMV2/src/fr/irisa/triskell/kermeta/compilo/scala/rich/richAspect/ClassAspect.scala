@@ -14,6 +14,7 @@ trait ClassAspect extends EcoreRichAspectImplicit with TypeVariableBindingAspect
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		var pack : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName 
+		pack=kermeta.utils.TypeEquivalence.getPackageEquivalence(pack);
 		var s : String = pack + "."+this.getTypeDefinition().asInstanceOf[ClassDefinition].getName 
 		//println(s)
 //		if (Util.currentPackage.equals(pack))
