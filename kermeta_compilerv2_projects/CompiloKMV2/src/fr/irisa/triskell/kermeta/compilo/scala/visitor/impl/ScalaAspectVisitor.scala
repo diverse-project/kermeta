@@ -23,7 +23,7 @@ class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 		if (!actualPackage.startsWith("kermeta")){
 			var subTask = new ScalaAspectPackageVisitorRunnable(par,actualPackage)
 			Util.threadExecutor.execute(subTask)
-			par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage
+ 			par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage
 		}
 	}
  
@@ -50,10 +50,13 @@ class ScalaAspectPackageVisitorRunnable(par : Package,actualPackage : String) ex
 			res.append("import kermeta.standard.PrimitiveConversion._\n")
 			par.generateScalaCode(res)
 			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage), par.getName+"Aspect", res.toString())
-			var res1 : StringBuilder = new StringBuilder
-			res1.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage)+"\n")
-			res1.append("class " + par.getName + " extends org.eclipse.emf.ecore.impl.EObjectImpl")
-			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage), par.getName, res1.toString())
+			if (!Util.hasEcoreTag(par)){
+
+				var res1 : StringBuilder = new StringBuilder
+				res1.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage)+"\n")
+				res1.append("class " + par.getName + " extends org.eclipse.emf.ecore.impl.EObjectImpl")
+				Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage), par.getName, res1.toString())
+			}
 	}
 	
 }
