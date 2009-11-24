@@ -42,20 +42,31 @@ class ScalaAspectPackageVisitorRunnable(par : Package,actualPackage : String) ex
 	def visit(par : Package){Console.println("multithread error")}
 	
 	def visit(par : ClassDefinition){
+		
+		var genpackageName : StringBuilder= new StringBuilder
+			var packageName : StringBuilder= new StringBuilder
+			
+			genpackageName.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[PackageAspect].getQualifiedName))
+			if (Util.hasEcoreTag(par.eContainer().asInstanceOf[Package])){
+				genpackageName.append("ScalaAspect")
+			}
+			packageName.append(genpackageName.toString)
+			packageName.append(".")
+			
 			var res : StringBuilder = new StringBuilder
-			res.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage)+"\n")
+			res.append("package "+genpackageName+"\n")
 			res.append("import kermeta.io._\n")			
 			res.append("import kermeta.standard._\n")
 			res.append("import  kermeta.standard.JavaConversions._\n")
 			res.append("import kermeta.standard.PrimitiveConversion._\n")
 			par.generateScalaCode(res)
-			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage), par.getName+"Aspect", res.toString())
+			Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())
 			if (!Util.hasEcoreTag(par)){
 
 				var res1 : StringBuilder = new StringBuilder
-				res1.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage)+"\n")
+				res1.append("package "+genpackageName+"\n")
 				res1.append("class " + par.getName + " extends org.eclipse.emf.ecore.impl.EObjectImpl")
-				Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(actualPackage), par.getName, res1.toString())
+				Util.generateFile(genpackageName.toString, par.getName, res1.toString())
 			}
 	}
 	

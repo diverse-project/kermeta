@@ -29,6 +29,12 @@ trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect wi
 						res.append(" extends ")
 						var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
 						res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
+						
+						if (Util.hasEcoreTag(ty.eContainer.asInstanceOf[Package]) && !ty.eContainer.asInstanceOf[Package].getQualifiedName().equals("language.structure")){
+							println(ty.eContainer.asInstanceOf[Package].getQualifiedName())	
+							res.append("ScalaAspect")
+								
+						}
 						res.append(".")
 						res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
 						res.append("Aspect")
