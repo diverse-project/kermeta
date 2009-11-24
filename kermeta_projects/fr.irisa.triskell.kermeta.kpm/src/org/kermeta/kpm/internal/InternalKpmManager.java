@@ -97,7 +97,7 @@ public class InternalKpmManager {
 			//initializeProjects();			
 			// ResourcesPlugin.getWorkspace().addResourceChangeListener( new WorkspaceResourceChangeListener() );
 		} catch (CoreException e) {
-			e.printStackTrace();
+			KPMPlugin.logErrorMessage("Failed to initialize", e);
 		}
 	}
 	
@@ -123,6 +123,7 @@ public class InternalKpmManager {
 			r.load(null);
 			_kpm = (KPM) r.getContents().get(0);
 		} catch (IOException e) {
+			KPMPlugin.logWarningMessage("Failed to load existing kpm file, will re-initilize it", e);
 			_kpm = KpmFactory.eINSTANCE.createKPM();
 			r.getContents().add(_kpm);
 			Initializor i = new Initializor(_kpm, true);
@@ -130,7 +131,7 @@ public class InternalKpmManager {
 			try {
 				r.save(null);
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				KPMPlugin.logErrorMessage("Failed to re-initilize kpm file", e1);
 			}
 		}
 	}

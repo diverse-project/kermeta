@@ -17,6 +17,7 @@ import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.preferences.KPMPreferenceHelper;
 
 import fr.irisa.triskell.kermeta.kpm.KPM;
@@ -60,7 +61,7 @@ public class UnitCreator {
 		try {
 			_kpm.eResource().save(null);
 		} catch (IOException e) {
-			e.printStackTrace();
+			KPMPlugin.logErrorMessage("Failed to save resource " + _kpm.eResource().getURI().toFileString(), e);
 		}
 	}
 	

@@ -45,7 +45,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener,
 			if ( event.getDelta() != null )
 				event.getDelta().accept(this);
 		} catch (CoreException e) {
-			e.printStackTrace();
+			KPMPlugin.logErrorMessage("Failed to process event delta", e);
 		}
 	}
 

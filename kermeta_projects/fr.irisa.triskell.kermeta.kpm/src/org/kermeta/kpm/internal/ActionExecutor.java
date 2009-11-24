@@ -62,7 +62,7 @@ public class ActionExecutor {
 				}
 				
 			} catch (CoreException exception) {
-				exception.printStackTrace();
+				KPMPlugin.logErrorMessage("Failed to execute action " +  out.getRule().getName(), exception);
 			} catch (Exception e) {
 				String message = "KPM Error when processing the action " + extensionAction + " on " + unit.getName();
 				Status status = new Status(IStatus.ERROR, KPMPlugin.PLUGIN_ID, message, e);
