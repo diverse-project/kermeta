@@ -20,7 +20,7 @@ object TypeEquivalence {
 	
 	var typeEquivelence :  java.util.HashMap[String,String] = {typeEquivelence = new java.util.HashMap[String,String]()
 		typeEquivelence.put("kermeta.utils.Hashtable", "java.util.HashMap");
-		typeEquivelence.put("org.eclipse.emf.ecore.EStringToStringMapEntry","java.util.Map$Entry[String,String]")
+		typeEquivelence.put("org.eclipse.emf.ecore.EStringToStringMapEntry","java.util.Map.Entry[String,String]")
 		typeEquivelence.put("kermeta.utils.Stack", " java.util.Stack");
 		typeEquivelence.put("kermeta.standard.Collection", "java.util.List");
 		typeEquivelence.put("kermeta.standard.Set", "java.util.List");
@@ -28,6 +28,8 @@ object TypeEquivalence {
 		typeEquivelence.put("kermeta.standard.Integer", "java.lang.Integer");
 		typeEquivelence.put("kermeta.standard.Real", "java.lang.Double");
 		typeEquivelence.put("kermeta.standard.Character", "java.lang.Character");
+		typeEquivelence.put("int", "java.lang.Integer");
+		typeEquivelence.put("boolean", "java.lang.Boolean");
 		typeEquivelence;
 		};
 		
