@@ -44,7 +44,7 @@ trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect wi
 				res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 				}
 				res.append("{\n")
-				this.getOwnedAttribute filter(a=> !Util.hasEcoreTag(a)) foreach(a=> a.generateScalaCode(res))
+				this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))
 				this.getOwnedOperation filter(op=> !Util.hasEcoreTag(op)) foreach(op=> op.generateScalaCode(res))
 				res.append("}\n")
   		}else{
@@ -78,7 +78,7 @@ trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect wi
 			}
   				res.append("{\n")
 
-				this.getOwnedAttribute filter(a=> !Util.hasEcoreTag(a)) foreach(a=> a.generateScalaCode(res))
+				this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))
 				this.getOwnedOperation filter(op=> !Util.hasEcoreTag(op)) foreach(op=> op.generateScalaCode(res))
 				
 	    		res.append("}\n")
