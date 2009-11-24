@@ -34,7 +34,7 @@ public class EventDispatcher {
 	 */
 	static public void sendEvent(Unit unit, String eventName, Map<String, Object> arguments, IProgressMonitor monitor) {
 		assert(unit != null);
-		KPM kpm = (KPM) unit.eContainer();
+		KPM kpm = (KPM) unit.eContainer().eContainer();
 		Event event = kpm.getEvent(eventName);
 		if ( event != null )
 			sendEvent(unit, event, arguments, monitor);

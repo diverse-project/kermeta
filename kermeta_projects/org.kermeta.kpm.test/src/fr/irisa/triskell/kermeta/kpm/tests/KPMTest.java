@@ -11,6 +11,7 @@ import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.UnitGroup;
 
 import junit.framework.TestCase;
 
@@ -91,20 +92,23 @@ public class KPMTest extends TestCase {
 		KPM kpm = KpmFactory.eINSTANCE.createKPM();
 		
 		Unit u1 = KpmFactory.eINSTANCE.createUnit();
+		UnitGroup ug1 = KpmFactory.eINSTANCE.createUnitGroup();
+		ug1.setName("");
+		kpm.getUnitGroups().add(ug1);
 		u1.setName( "unit1" );
-		kpm.getUnits().add(u1);
+		ug1.getUnits().add(u1);
 
 		Unit u2 = KpmFactory.eINSTANCE.createUnit();
 		u2.setName( "unit2" );
-		kpm.getUnits().add(u2);
+		ug1.getUnits().add(u2);
 		
 		Unit u3 = KpmFactory.eINSTANCE.createUnit();
 		u3.setName( "unit3" );
-		kpm.getUnits().add(u3);
+		ug1.getUnits().add(u3);
 		
 		Unit u4 = KpmFactory.eINSTANCE.createUnit();
 		u4.setName( "unit4" );
-		kpm.getUnits().add(u4);
+		ug1.getUnits().add(u4);
 		
 		u3.beDependentOf(u4, "require");
 		u2.beDependentOf(u4, "require");
@@ -154,11 +158,11 @@ public class KPMTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testRemoveUnit__String() {
-		assertTrue( fixture.getUnits().size() == 4 );
+		assertTrue( fixture.getGroup("").getUnits().size() == 4 );
 		assertTrue( fixture.getUnit("unit1").getUsedBy().size() == 2 );
 		assertTrue( fixture.getUnit("unit4").getUsedUsages().size() == 2 );
 		fixture.removeUnit("unit2");
-		assertTrue( fixture.getUnits().size() == 3 );
+		assertTrue( fixture.getGroup("").getUnits().size() == 3 );
 		assertTrue( fixture.getUnit("unit1").getUsedBy().size() == 1 );
 		assertTrue( fixture.getUnit("unit4").getUsedUsages().size() == 1 );
 	}

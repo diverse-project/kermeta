@@ -23,6 +23,7 @@ import org.kermeta.kpm.preferences.KPMPreferenceHelper;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.UnitGroup;
 import fr.irisa.triskell.string.EscapeChars;
 
 /**
@@ -72,18 +73,32 @@ public class UnitCreator {
 	 * @param save Flag to indicate if a save is needed.
 	 * @return The created unit or an existing one.
 	 */
-	private Unit createUnit(String name, boolean save) {
+	private Unit getOrCreateUnit(String groupName, String name, boolean save) {
 		
 		Unit unit = _kpm.getUnit(name);
 		if (unit != null)
 			return unit;
+		
 		unit = KpmFactory.eINSTANCE.createUnit();
 		unit.setName( name );
 		unit.setLastTimeModified( _date );
-		_kpm.getUnits().add(unit);
+		getOrCreateGroup(groupName, false).getUnits().add(unit);
 		if ( save )
 			save();
 		return unit;
+	}
+	
+	private UnitGroup getOrCreateGroup(String name, boolean save) {
+		
+		UnitGroup unitGroup = _kpm.getGroup(name);
+		if (unitGroup != null)
+			return unitGroup;
+		unitGroup = KpmFactory.eINSTANCE.createUnitGroup();
+		unitGroup.setName( name );
+		_kpm.getUnitGroups().add(unitGroup);
+		if ( save )
+			save();
+		return unitGroup;
 	}
 		
 	/**
@@ -93,7 +108,9 @@ public class UnitCreator {
 	 * @return The created unit.
 	 */
 	public Unit createUnit(String name) {
-		return createUnit(name, true);
+		UnitGroup unitGroup = _kpm.getGroupForUnit(name);
+		
+		return getOrCreateUnit(unitGroup.getName(), name, true);
 	}
 		
 	
@@ -120,7 +137,8 @@ public class UnitCreator {
 		}
 				
 		if ( file != null && file.getFileExtension() != null && file.getFileExtension().equals("kmt") ) {
-			unit = createUnit( "platform:/resource" + resource.getFullPath().toString(), false );
+			unit = getOrCreateUnit( "platform:/resource" +resource.getProject().getFullPath().toString(),
+						"platform:/resource" + resource.getFullPath().toString(), false );
 			unit.getRules().add( KPMRules.UPDATE_KMT_RULE );
 		}
 		

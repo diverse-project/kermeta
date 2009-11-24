@@ -94,11 +94,11 @@ public class DependencyTest extends WorkbenchTest {
 		Unit semanticsUnit = KpmManager.getDefault().getUnit( semantics );
 		Unit fsmUnit = KpmManager.getDefault().getUnit( fsm );
 		
-		Assert.assertTrue( constraintsUnit.getMasters().size() == 3 );
-		Assert.assertTrue( semanticsUnit.getMasters().size() == 3 );
-		Assert.assertTrue( fsmUnit.getDependents().size() == 2 );
-		Assert.assertTrue( fsmUnit.getMasters().size() == 2 );
-		Assert.assertTrue( launcherUnit.getDependents().size() == 4 );
+		Assert.assertTrue( constraintsUnit.getUsedBy().size() == 3 );
+		Assert.assertTrue( semanticsUnit.getUsedBy().size() == 3 );
+		Assert.assertTrue( fsmUnit.getUsedUsages().size() == 2 );
+		Assert.assertTrue( fsmUnit.getUsedBy().size() == 2 );
+		Assert.assertTrue( launcherUnit.getUsedUsages().size() == 4 );
 	}
 
 	@Test

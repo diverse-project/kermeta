@@ -27,6 +27,7 @@ import fr.irisa.triskell.kermeta.kpm.NameFilter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.UnitGroup;
 import fr.irisa.triskell.kermeta.kpm.Usage;
 
 /**
@@ -40,7 +41,7 @@ import fr.irisa.triskell.kermeta.kpm.Usage;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getRules <em>Rules</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getEvents <em>Events</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getUnits <em>Units</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getUnitGroups <em>Unit Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -88,14 +89,14 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	protected EList<Event> events;
 
 	/**
-	 * The cached value of the '{@link #getUnits() <em>Units</em>}' containment reference list.
+	 * The cached value of the '{@link #getUnitGroups() <em>Unit Groups</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUnits()
+	 * @see #getUnitGroups()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Unit> units;
+	protected EList<UnitGroup> unitGroups;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -145,11 +146,11 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Unit> getUnits() {
-		if (units == null) {
-			units = new EObjectContainmentEList<Unit>(Unit.class, this, KpmPackage.KPM__UNITS);
+	public EList<UnitGroup> getUnitGroups() {
+		if (unitGroups == null) {
+			unitGroups = new EObjectContainmentEList<UnitGroup>(UnitGroup.class, this, KpmPackage.KPM__UNIT_GROUPS);
 		}
-		return units;
+		return unitGroups;
 	}
 
 	/**
@@ -228,7 +229,14 @@ public class KPMImpl extends EObjectImpl implements KPM {
 			for ( Usage d : unitToRemove.getUsedBy() )
 				d.getUserUnit().getUsedUsages().remove(d);
 			// Finally remove the unit from the kpm model.
-			getUnits().remove( unitToRemove );
+			UnitGroup unitGroup = getGroupForUnit(name);
+			// if(unitGroup == null) // cannot happen because we have already done that a few line before 
+			//	return false;
+			unitGroup.getUnits().remove( unitToRemove );
+			// if this group is now empty, remove it too
+			if(unitGroup.getUnits().size() == 0){
+				getUnitGroups().remove(unitGroup);
+			}
 			return true;
 		}
 		return false;
@@ -240,7 +248,10 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated NOT
 	 */
 	public Unit getUnit(String name) {
-		for ( Unit u : getUnits() )
+		UnitGroup unitGroup = getGroupForUnit(name);
+		if(unitGroup == null) 
+			return null;
+		for ( Unit u : unitGroup.getUnits() )
 			if ( u.getName().equals(name) )
 				return u;
 		return null;
@@ -249,12 +260,39 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOt
+	 * @generated NOT
 	 */
 	public Rule getRule(String name) {
 		for ( Rule r : getRules() )
 			if ( r.getName().equals(name) )
 				return r;
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public UnitGroup getGroup(String groupName) {		
+		for ( UnitGroup u : getUnitGroups() )
+			if ( u.getName().equals(groupName) )
+				return u;
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public UnitGroup getGroupForUnit(String unitName) {
+		for ( UnitGroup u : getUnitGroups() )
+			if ( unitName.startsWith(u.getName()) ){
+				String verifUnitName = unitName.substring(u.getName().length());
+				if(verifUnitName.startsWith("/"))
+					return u;
+			}
 		return null;
 	}
 
@@ -286,8 +324,8 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__EVENTS:
 				return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
-			case KpmPackage.KPM__UNITS:
-				return ((InternalEList<?>)getUnits()).basicRemove(otherEnd, msgs);
+			case KpmPackage.KPM__UNIT_GROUPS:
+				return ((InternalEList<?>)getUnitGroups()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -308,8 +346,8 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				return getRules();
 			case KpmPackage.KPM__EVENTS:
 				return getEvents();
-			case KpmPackage.KPM__UNITS:
-				return getUnits();
+			case KpmPackage.KPM__UNIT_GROUPS:
+				return getUnitGroups();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -339,9 +377,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				getEvents().clear();
 				getEvents().addAll((Collection<? extends Event>)newValue);
 				return;
-			case KpmPackage.KPM__UNITS:
-				getUnits().clear();
-				getUnits().addAll((Collection<? extends Unit>)newValue);
+			case KpmPackage.KPM__UNIT_GROUPS:
+				getUnitGroups().clear();
+				getUnitGroups().addAll((Collection<? extends UnitGroup>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -367,8 +405,8 @@ public class KPMImpl extends EObjectImpl implements KPM {
 			case KpmPackage.KPM__EVENTS:
 				getEvents().clear();
 				return;
-			case KpmPackage.KPM__UNITS:
-				getUnits().clear();
+			case KpmPackage.KPM__UNIT_GROUPS:
+				getUnitGroups().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -390,8 +428,8 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				return rules != null && !rules.isEmpty();
 			case KpmPackage.KPM__EVENTS:
 				return events != null && !events.isEmpty();
-			case KpmPackage.KPM__UNITS:
-				return units != null && !units.isEmpty();
+			case KpmPackage.KPM__UNIT_GROUPS:
+				return unitGroups != null && !unitGroups.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -93,6 +93,7 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 			case KpmPackage.EXIST_FILTER: return createExistFilter();
 			case KpmPackage.USAGE: return createUsage();
 			case KpmPackage.PARAMETER: return createParameter();
+			case KpmPackage.UNIT_GROUP: return createUnitGroup();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -140,6 +141,16 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	public Parameter createParameter() {
 		ParameterImpl parameter = new ParameterImpl();
 		return parameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnitGroup createUnitGroup() {
+		UnitGroupImpl unitGroup = new UnitGroupImpl();
+		return unitGroup;
 	}
 
 	/**

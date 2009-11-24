@@ -35,6 +35,15 @@ public interface KpmFactory extends EFactory {
 	Parameter createParameter();
 
 	/**
+	 * Returns a new object of class '<em>Unit Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unit Group</em>'.
+	 * @generated
+	 */
+	UnitGroup createUnitGroup();
+
+	/**
 	 * Returns a new object of class '<em>Out</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

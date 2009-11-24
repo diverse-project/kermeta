@@ -233,6 +233,12 @@ public class KpmSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case KpmPackage.UNIT_GROUP: {
+				UnitGroup unitGroup = (UnitGroup)theEObject;
+				T result = caseUnitGroup(unitGroup);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -249,6 +255,21 @@ public class KpmSwitch<T> {
 	 * @generated
 	 */
 	public T caseParameter(Parameter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unit Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unit Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnitGroup(UnitGroup object) {
 		return null;
 	}
 

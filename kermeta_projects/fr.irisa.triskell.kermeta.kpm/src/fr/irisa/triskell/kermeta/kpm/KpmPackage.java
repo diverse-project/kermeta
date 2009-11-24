@@ -567,13 +567,13 @@ public interface KpmPackage extends EPackage {
 	int KPM__EVENTS = 3;
 
 	/**
-	 * The feature id for the '<em><b>Units</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Unit Groups</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KPM__UNITS = 4;
+	int KPM__UNIT_GROUPS = 4;
 
 	/**
 	 * The number of structural features of the '<em>KPM</em>' class.
@@ -749,6 +749,43 @@ public interface KpmPackage extends EPackage {
 	int PARAMETER_FEATURE_COUNT = 3;
 
 	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.UnitGroupImpl <em>Unit Group</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.UnitGroupImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getUnitGroup()
+	 * @generated
+	 */
+	int UNIT_GROUP = 19;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT_GROUP__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Units</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT_GROUP__UNITS = 1;
+
+	/**
+	 * The number of structural features of the '<em>Unit Group</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT_GROUP_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -756,7 +793,7 @@ public interface KpmPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 19;
+	int IPROGRESS_MONITOR = 20;
 
 
 	/**
@@ -767,7 +804,7 @@ public interface KpmPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 20;
+	int LIST = 21;
 
 
 	/**
@@ -812,6 +849,38 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getParameter_Name();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.UnitGroup <em>Unit Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unit Group</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.UnitGroup
+	 * @generated
+	 */
+	EClass getUnitGroup();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.UnitGroup#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.UnitGroup#getName()
+	 * @see #getUnitGroup()
+	 * @generated
+	 */
+	EAttribute getUnitGroup_Name();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.UnitGroup#getUnits <em>Units</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Units</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.UnitGroup#getUnits()
+	 * @see #getUnitGroup()
+	 * @generated
+	 */
+	EReference getUnitGroup_Units();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Out <em>Out</em>}'.
@@ -1119,15 +1188,15 @@ public interface KpmPackage extends EPackage {
 	EReference getKPM_Events();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.KPM#getUnits <em>Units</em>}'.
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.KPM#getUnitGroups <em>Unit Groups</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Units</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.KPM#getUnits()
+	 * @return the meta object for the containment reference list '<em>Unit Groups</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.KPM#getUnitGroups()
 	 * @see #getKPM()
 	 * @generated
 	 */
-	EReference getKPM_Units();
+	EReference getKPM_UnitGroups();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Rule <em>Rule</em>}'.
@@ -1391,6 +1460,32 @@ public interface KpmPackage extends EPackage {
 		EAttribute PARAMETER__NAME = eINSTANCE.getParameter_Name();
 
 		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.UnitGroupImpl <em>Unit Group</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.UnitGroupImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getUnitGroup()
+		 * @generated
+		 */
+		EClass UNIT_GROUP = eINSTANCE.getUnitGroup();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNIT_GROUP__NAME = eINSTANCE.getUnitGroup_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Units</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNIT_GROUP__UNITS = eINSTANCE.getUnitGroup_Units();
+
+		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl <em>Out</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1652,12 +1747,12 @@ public interface KpmPackage extends EPackage {
 		EReference KPM__EVENTS = eINSTANCE.getKPM_Events();
 
 		/**
-		 * The meta object literal for the '<em><b>Units</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Unit Groups</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KPM__UNITS = eINSTANCE.getKPM_Units();
+		EReference KPM__UNIT_GROUPS = eINSTANCE.getKPM_UnitGroups();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.RuleImpl <em>Rule</em>}' class.

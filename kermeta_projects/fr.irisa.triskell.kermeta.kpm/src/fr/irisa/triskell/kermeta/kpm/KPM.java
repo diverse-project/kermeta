@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getTypes <em>Types</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getRules <em>Rules</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getEvents <em>Events</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getUnits <em>Units</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getUnitGroups <em>Unit Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,20 +96,20 @@ public interface KPM extends EObject {
 	EList<Event> getEvents();
 
 	/**
-	 * Returns the value of the '<em><b>Units</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Unit}.
+	 * Returns the value of the '<em><b>Unit Groups</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.UnitGroup}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Units</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Unit Groups</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Units</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Units()
+	 * @return the value of the '<em>Unit Groups</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_UnitGroups()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Unit> getUnits();
+	EList<UnitGroup> getUnitGroups();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -134,6 +134,22 @@ public interface KPM extends EObject {
 	 * @generated
 	 */
 	Rule getRule(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	UnitGroup getGroup(String groupName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	UnitGroup getGroupForUnit(String unitName);
 
 	/**
 	 * <!-- begin-user-doc -->

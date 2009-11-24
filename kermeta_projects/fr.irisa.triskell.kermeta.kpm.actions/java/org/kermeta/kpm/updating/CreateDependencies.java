@@ -52,11 +52,7 @@ public class CreateDependencies implements IAction {
 					}
 				}
 			}
-			try {
-				unit.eResource().save(null);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} 			
+			KpmManager.getDefault().save(); 			
 		} catch(Exception e){
 			if(l == null)
 				KPMPlugin.logErrorMessage("Error getting 'context' in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);

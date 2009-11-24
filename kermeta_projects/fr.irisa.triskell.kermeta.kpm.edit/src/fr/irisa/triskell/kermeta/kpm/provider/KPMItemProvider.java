@@ -85,7 +85,7 @@ public class KPMItemProvider
 			childrenFeatures.add(KpmPackage.Literals.KPM__TYPES);
 			childrenFeatures.add(KpmPackage.Literals.KPM__RULES);
 			childrenFeatures.add(KpmPackage.Literals.KPM__EVENTS);
-			childrenFeatures.add(KpmPackage.Literals.KPM__UNITS);
+			childrenFeatures.add(KpmPackage.Literals.KPM__UNIT_GROUPS);
 		}
 		return childrenFeatures;
 	}
@@ -141,7 +141,7 @@ public class KPMItemProvider
 			case KpmPackage.KPM__TYPES:
 			case KpmPackage.KPM__RULES:
 			case KpmPackage.KPM__EVENTS:
-			case KpmPackage.KPM__UNITS:
+			case KpmPackage.KPM__UNIT_GROUPS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -191,8 +191,8 @@ public class KPMItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KpmPackage.Literals.KPM__UNITS,
-				 KpmFactory.eINSTANCE.createUnit()));
+				(KpmPackage.Literals.KPM__UNIT_GROUPS,
+				 KpmFactory.eINSTANCE.createUnitGroup()));
 	}
 
 	/**

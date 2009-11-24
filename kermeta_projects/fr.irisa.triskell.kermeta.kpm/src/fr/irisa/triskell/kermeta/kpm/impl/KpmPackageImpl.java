@@ -36,6 +36,7 @@ import fr.irisa.triskell.kermeta.kpm.SimpleExpression;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.TypeFilter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.UnitGroup;
 import fr.irisa.triskell.kermeta.kpm.Usage;
 
 /**
@@ -51,6 +52,13 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * @generated
 	 */
 	private EClass parameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unitGroupEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -287,6 +295,33 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 */
 	public EAttribute getParameter_Name() {
 		return (EAttribute)parameterEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnitGroup() {
+		return unitGroupEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUnitGroup_Name() {
+		return (EAttribute)unitGroupEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnitGroup_Units() {
+		return (EReference)unitGroupEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -555,7 +590,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKPM_Units() {
+	public EReference getKPM_UnitGroups() {
 		return (EReference)kpmEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -806,7 +841,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		createEReference(kpmEClass, KPM__TYPES);
 		createEReference(kpmEClass, KPM__RULES);
 		createEReference(kpmEClass, KPM__EVENTS);
-		createEReference(kpmEClass, KPM__UNITS);
+		createEReference(kpmEClass, KPM__UNIT_GROUPS);
 
 		unitEClass = createEClass(UNIT);
 		createEReference(unitEClass, UNIT__TYPE);
@@ -827,6 +862,10 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		createEAttribute(parameterEClass, PARAMETER__TYPE);
 		createEAttribute(parameterEClass, PARAMETER__VALUE);
 		createEAttribute(parameterEClass, PARAMETER__NAME);
+
+		unitGroupEClass = createEClass(UNIT_GROUP);
+		createEAttribute(unitGroupEClass, UNIT_GROUP__NAME);
+		createEReference(unitGroupEClass, UNIT_GROUP__UNITS);
 
 		// Create data types
 		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
@@ -932,7 +971,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		initEReference(getKPM_Types(), this.getType(), null, "types", null, 0, -1, fr.irisa.triskell.kermeta.kpm.KPM.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKPM_Rules(), this.getRule(), null, "rules", null, 0, -1, fr.irisa.triskell.kermeta.kpm.KPM.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKPM_Events(), this.getEvent(), null, "events", null, 0, -1, fr.irisa.triskell.kermeta.kpm.KPM.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKPM_Units(), this.getUnit(), null, "units", null, 0, -1, fr.irisa.triskell.kermeta.kpm.KPM.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKPM_UnitGroups(), this.getUnitGroup(), null, "unitGroups", null, 0, -1, fr.irisa.triskell.kermeta.kpm.KPM.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(kpmEClass, this.getEvent(), "getEvent", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -945,6 +984,12 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 
 		op = addEOperation(kpmEClass, this.getRule(), "getRule", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(kpmEClass, this.getUnitGroup(), "getGroup", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "groupName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(kpmEClass, this.getUnitGroup(), "getGroupForUnit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "unitName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(unitEClass, Unit.class, "Unit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUnit_Type(), this.getType(), null, "type", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -982,6 +1027,10 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		initEAttribute(getParameter_Type(), ecorePackage.getEString(), "type", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameter_Value(), ecorePackage.getEString(), "value", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameter_Name(), ecorePackage.getEString(), "name", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(unitGroupEClass, UnitGroup.class, "UnitGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUnitGroup_Name(), ecorePackage.getEString(), "name", null, 0, 1, UnitGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnitGroup_Units(), this.getUnit(), null, "units", null, 0, -1, UnitGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

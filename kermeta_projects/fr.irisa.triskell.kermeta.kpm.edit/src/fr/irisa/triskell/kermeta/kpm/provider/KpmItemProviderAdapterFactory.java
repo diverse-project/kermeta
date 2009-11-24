@@ -99,6 +99,29 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.UnitGroup} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnitGroupItemProvider unitGroupItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.UnitGroup}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnitGroupAdapter() {
+		if (unitGroupItemProvider == null) {
+			unitGroupItemProvider = new UnitGroupItemProvider(this);
+		}
+
+		return unitGroupItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Out} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -534,6 +557,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 		if (existFilterItemProvider != null) existFilterItemProvider.dispose();
 		if (usageItemProvider != null) usageItemProvider.dispose();
 		if (parameterItemProvider != null) parameterItemProvider.dispose();
+		if (unitGroupItemProvider != null) unitGroupItemProvider.dispose();
 	}
 
 }

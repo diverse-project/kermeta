@@ -65,7 +65,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/types"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/rules"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/events"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/units"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/unitGroups"/>
       <genOperations ecoreOperation="kpm.ecore#//KPM/getEvent">
         <genParameters ecoreParameter="kpm.ecore#//KPM/getEvent/name"/>
       </genOperations>
@@ -77,6 +77,12 @@
       </genOperations>
       <genOperations ecoreOperation="kpm.ecore#//KPM/getRule">
         <genParameters ecoreParameter="kpm.ecore#//KPM/getRule/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/getGroup">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/getGroup/groupName"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/getGroupForUnit">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/getGroupForUnit/unitName"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="kpm.ecore#//Unit">
@@ -114,6 +120,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Parameter/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Parameter/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Parameter/name"/>
+    </genClasses>
+    <genClasses ecoreClass="kpm.ecore#//UnitGroup">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//UnitGroup/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//UnitGroup/units"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
