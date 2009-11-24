@@ -8,7 +8,6 @@ object GlobalConfiguration {
 	final var factoryName : String = "RichFactory"
 	final var outputFolder : String = "../outputScala/src"
 	final var scalaPrefix : String = "Scala"
-		
 	//var legacyFactoryName : String = "t.EcoreFactoryImpl"
 } 
  
