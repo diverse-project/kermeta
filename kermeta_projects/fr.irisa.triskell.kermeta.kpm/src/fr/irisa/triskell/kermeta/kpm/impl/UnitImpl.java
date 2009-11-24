@@ -320,8 +320,8 @@ public class UnitImpl extends EObjectImpl implements Unit {
 		assert(master != null);
 		for ( Usage current : getUsedUsages() ) {
 			if ( current.getUsedUnit() == master 
-					&& current.getUserUnit() == master 
-					&& current.getType().equals(getType()) )
+					&& current.getUserUnit() == this 
+					&& current.getType().equals(type) )
 				return;
 		}
 		
@@ -340,8 +340,8 @@ public class UnitImpl extends EObjectImpl implements Unit {
 		assert(dependent != null);
 		for ( Usage current : getUsedBy() ) {
 			if ( current.getUsedUnit() == dependent 
-					&& current.getUserUnit() == dependent 
-					&& current.getType().equals(getType()) )
+					&& current.getUserUnit() == this 
+					&& current.getType().equals(type) )
 				return;
 		}
 		
