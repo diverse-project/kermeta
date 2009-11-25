@@ -24,8 +24,16 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 		implicitDef append "trait "+GlobalConfiguration.implicitConvTraitName+" {\n"
 		factoryDefClass = new StringBuilder
 	}
-	  
+	 var packages : java.util.List[Package] = _
+	
+	 def addPackage(packs : java.util.List[Package]):Unit={
+		 packs.foreach({e=> if (Util.hasEcoreTag(e)) packages.add(e); addPackage(e.getNestedPackage())})
+	 }
+	 
 	def visit(par : ModelingUnit){
+		packages = new java.util.ArrayList[Package]()
+		addPackage(par.getPackages());
+		                                        
 		var mainClass : String = par.getTag().filter{e=> "mainClass".equals(e.getName)}.first.getValue
 		var mainOperation : String = par.getTag().filter{e=> "mainOperation".equals(e.getName)}.first.getValue
 		var packageName :String= mainClass.substring(0,mainClass.lastIndexOf("::")).replace("::", ".")
@@ -34,7 +42,11 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 		var res = "package runner \n" +
 		"object MainRunner  extends fr.irisa.triskell.scala.generated.fw.ImplicitConversion{\n" +
 		"def main(args : Array[String]) : Unit = {\n\t" +
-		packageName+"ScalaAspect.RichFactory.create"+ className+"."+mainOperation +"\n}\n}"; 
+		packageName
+		
+		if (packages.filter{e=> e.getQualifiedName().equals(packageName+"."+className)}.size==0)
+			res=res+"ScalaAspect."
+		res=res+"RichFactory.create"+ className+"."+mainOperation +"\n}\n}"; 
 		Util.generateFile("runner", "MainRunner", res.toString())
 		
   		par.getPackages().foreach(p => p.accept(this) ) 		

@@ -26,12 +26,15 @@ object Main extends EcoreRichAspectImplicit {
 //  	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/003_testOpCall.main.km")
 //  	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/004_testOpOpCall.main.km")
   	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/005_testOpPkgCall.main.km")
-  	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/006_testClosure.km")
+  	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/006_testClosure.km")
   	
   	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/010_testLoop.main.km")
   	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/011_testBenchmark.main.km")
-  	var v : ModelingUnit = t.loadKM("../compilerv2_test/testEcore/012_TypeFromEcore.km")
+  	//var v : ModelingUnit = t.loadKM("../compilerv2_test/testEcore/012_TypeFromEcore.km")
   	//var res = new StringBuilder
+  	
+  	
+  	
   	var visitorAspect = new ScalaAspectVisitor
   	v.accept(visitorAspect)
   	 
