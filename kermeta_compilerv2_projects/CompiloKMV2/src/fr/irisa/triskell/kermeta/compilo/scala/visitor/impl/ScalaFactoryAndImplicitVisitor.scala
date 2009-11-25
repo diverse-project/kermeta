@@ -19,7 +19,6 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 	def init { 
 		viewDef = new StringBuilder
 		implicitDef = new StringBuilder
-		
 		implicitDef append "package "+GlobalConfiguration.frameworkGeneratedPackageName+"\n"
 		implicitDef append "trait "+GlobalConfiguration.implicitConvTraitName+" {\n"
 		factoryDefClass = new StringBuilder
@@ -126,7 +125,6 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 	}
 	
 	def close {
-		
 		implicitDef append "}\n"
 		Util.generateFile(GlobalConfiguration.frameworkGeneratedPackageName, GlobalConfiguration.implicitConvTraitName, implicitDef.toString())
 	} 

@@ -12,5 +12,10 @@ trait IVisitor {
 	
 	def visit(par : ClassDefinition)
  
+	def init()
+	
+	def close()
+	
+	
 }  
   

@@ -1,3 +1,11 @@
+/* Main.scala
+ * Creation date: November 25, 2009
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Olivier BARAIS <barais@irisa.fr>
+ *			Francois FOUQUET <ffouquet@irisa.fr>
+ */
+
 package fr.irisa.triskell.kermeta.compilo.scala
   
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
@@ -12,10 +20,10 @@ import fr.irisa.triskell.kermeta.compilo.scala.visitor.impl._
 object Main extends EcoreRichAspectImplicit {
   def main(args : Array[String]) : Unit = {
 	 
-	  var t: LoadModelHelper = new LoadModelHelper()  ;
+	 // var t: LoadModelHelper = new LoadModelHelper()  ;
 	  
-	   BehaviorPackage.eINSTANCE.setEFactoryInstance(new RichBehaviorFactoryImpl())
-	  StructurePackage.eINSTANCE.setEFactoryInstance(new RichStructureFactoryImpl())
+	//  BehaviorPackage.eINSTANCE.setEFactoryInstance(new RichBehaviorFactoryImpl())
+	//  StructurePackage.eINSTANCE.setEFactoryInstance(new RichStructureFactoryImpl())
 		  
 	      
 	//var v : ModelingUnit = t.loadKM("tp1.km");  
@@ -30,25 +38,21 @@ object Main extends EcoreRichAspectImplicit {
   	
   	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/010_testLoop.main.km")
   	//var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/011_testBenchmark.main.km")
-  	var v : ModelingUnit = t.loadKM("../compilerv2_test/testEcore/012_TypeFromEcore.km")
+  	//var v : ModelingUnit = t.loadKM("../compilerv2_test/testEcore/012_TypeFromEcore.km")
+  	//var v : ModelingUnit = t.loadKM("../compilerv2_test/testEcore/013_LoadEcore.km")
   	//var res = new StringBuilder
-  	
-  	
-  	
+  	/*
   	var visitorAspect = new ScalaAspectVisitor
-  	v.accept(visitorAspect)
-  	 
-  	var visitorImplicitFactory : ScalaFactoryAndImplicitVisitor = new ScalaFactoryAndImplicitVisitor
-  	
-  	visitorImplicitFactory.init
-  	v.accept(visitorImplicitFactory)
-  	visitorImplicitFactory.close
+  	VisitorAsyncUtility.runAfter(v,visitorAspect)
+  	var visitorImplicitFactory = new ScalaFactoryAndImplicitVisitor
+  	VisitorAsyncUtility.runAfter(v,visitorImplicitFactory)
   	println("DONE")
-	   
-    //v.generateScalaCode(res)
-    //Console.println(res.toString())
 	     
 	Util.threadExecutor.shutdown()
-	     
+	    */ 
+	  
+	  var compilo = new Compiler
+	  compilo.compile("../compilerv2_test/tests/000HelloWorld.km")
+	  
   }
 }
