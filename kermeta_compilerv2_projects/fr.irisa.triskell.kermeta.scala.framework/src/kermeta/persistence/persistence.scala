@@ -1,5 +1,5 @@
 package kermeta.persistence
-
+ 
 import kermeta.standard._
 import java.io.File; 
 import java.io.IOException;
@@ -24,7 +24,7 @@ import java.lang.String
 
 abstract class Resource  extends java.util.HashSet[Object]{
 	var dependentResources:Resource=null;
-	var contents:Object=null;
+	var contents:java.util.List[Object]=null;
 	var repository:Repository=null;
 	var metaModelURI:String="";
 	var isReadOnly:Boolean=false;
@@ -35,6 +35,11 @@ abstract class Resource  extends java.util.HashSet[Object]{
 	def load() 
 	def instances() :Resource={return this}
 	def normalizedUri() :String={return metaModelURI}
+	def Scalacontents_=(arg : java.util.List[Object])={contents = arg}
+	def Scalacontents:  java.util.List[Object]={contents}
+		
+	
+	
 } 
  
 
