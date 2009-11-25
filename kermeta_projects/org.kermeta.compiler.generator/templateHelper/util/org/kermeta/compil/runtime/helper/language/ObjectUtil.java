@@ -728,14 +728,37 @@ public class ObjectUtil {
 	}
 	
 	public static java.lang.Boolean isNotEqualSwitcher(java.lang.Object self, java.lang.Object o) {
-		if( self instanceof kermeta.language.structure.Object && o instanceof kermeta.language.structure.Object) {
+		if( self instanceof kermeta.language.structure.Object && o instanceof kermeta.language.structure.Object) {			
 			return ((kermeta.language.structure.Object) self).isNotEqual((kermeta.language.structure.Object)o);
-		} else {
-			return isNotEqual(self, o);
 		}
+		else {
+			return isNotEqual(getBaseValue(self), getBaseValue(o));
+		}
+		
 	}
 	
+	/**
+	 * 
+	 * @return the baseValue of the object if available or the original object if this isn't a value type
+	 */
+	public static java.lang.Object getBaseValue(java.lang.Object object){
+		if( object instanceof kermeta.standard.String) 
+			return ((kermeta.standard.String) object).getValue();
+		else if( object instanceof kermeta.standard.Boolean  ) 
+			return StringUtil.toBoolean(((kermeta.standard.Boolean) object).getValue());
+		else if( object instanceof kermeta.standard.Integer) 
+			return StringUtil.toInteger(((kermeta.standard.Integer) object).getValue());
+		else if( object instanceof kermeta.standard.Real) 
+			return StringUtil.toReal(((kermeta.standard.Real) object).getValue());
+		else if( object instanceof kermeta.standard.Character) 
+			return ((kermeta.standard.Character) object).getValue();
+		else
+			return object;
+			
+	}
+		
 	public static java.lang.Boolean isNotEqual(kermeta.language.structure.Object self, java.lang.Object o) {
+		
 		if(self==null || o==null) {
 			return self != o;
 		} else if( (self instanceof kermeta.language.structure.Class) && o instanceof kermeta.language.structure.Class ) {
@@ -745,6 +768,8 @@ public class ObjectUtil {
 			return !self.equals(o);
 		}
 	}
+	
+	
 	
 	public static java.lang.Boolean isNotEqual(java.lang.Object self, java.lang.Object o) {
 		if(self==null || o==null) {
