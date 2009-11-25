@@ -44,9 +44,9 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplic
 		"def main(args : Array[String]) : Unit = {\n\t" +
 		packageName
 		
-		if (packages.filter{e=> e.getQualifiedName().equals(packageName+"."+className)}.size==0)
-			res=res+"ScalaAspect."
-		res=res+"RichFactory.create"+ className+"."+mainOperation +"\n}\n}"; 
+		if (packages.filter{e=> e.getQualifiedName().equals(packageName+"."+className)}.size==1)
+			res=res+"ScalaAspect"
+		res=res+".RichFactory.create"+ className+"."+mainOperation +"\n}\n}"; 
 		Util.generateFile("runner", "MainRunner", res.toString())
 		
   		par.getPackages().foreach(p => p.accept(this) ) 		
