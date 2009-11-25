@@ -10,36 +10,45 @@ import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import scala.collection.JavaConversions._
 
 class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
-	   
-	var actualPackage : String = _
 	
 	def visit(par : ModelingUnit){
 		par.getPackages().foreach(p => p.accept(this))		
 	}     
 	  
 	def visit(par : Package){ 
-		actualPackage = par.getQualifiedName
+		var actualPackage = par.getQualifiedName
 		Console.println("pack name "+actualPackage)
 		if (!actualPackage.startsWith("kermeta")){
-			var subTask = new ScalaAspectPackageVisitorRunnable(par,actualPackage)
-			Util.threadExecutor.execute(subTask)
+			var subTask = new ScalaAspectPackageVisitorRunnable
+			VisitorAsyncUtility.runAfter(par,subTask)
+			
+			//Util.threadExecutor.execute(subTask)
  			par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage
+ 			
+ 			
+ 			
 		}
 	}
  
 	def visit(par : ClassDefinition){Console.println("multithread error")}
 	
+	def init(){}
+	
+	def close(){}
+	
 }
 
-class ScalaAspectPackageVisitorRunnable(par : Package,actualPackage : String) extends Runnable with IVisitor with EcoreRichAspectImplicit  {
-	def run() = {
-			par.getOwnedTypeDefinition filter(p => p.isInstanceOf[ClassDefinition]) foreach(p=> p.asInstanceOf[ClassDefinition].accept(this))
-			par.getOwnedTypeDefinition filter(p => p.isInstanceOf[Enumeration]) foreach(p=> p.asInstanceOf[EnumerationAspect].generateEnum())
-	}
-	
+class ScalaAspectPackageVisitorRunnable extends IVisitor with EcoreRichAspectImplicit  {
+
 	def visit(par : ModelingUnit){Console.println("multithread error")}
-	 
-	def visit(par : Package){Console.println("multithread error")}
+	
+	var actualPackage : String = ""
+	
+	def visit(par : Package){
+		actualPackage = par.getQualifiedName
+		par.getOwnedTypeDefinition filter(p => p.isInstanceOf[ClassDefinition]) foreach(p=> p.asInstanceOf[ClassDefinition].accept(this))
+		par.getOwnedTypeDefinition filter(p => p.isInstanceOf[Enumeration]) foreach(p=> p.asInstanceOf[EnumerationAspect].generateEnum())
+	}
 	
 	def visit(par : ClassDefinition){
 		
@@ -69,5 +78,9 @@ class ScalaAspectPackageVisitorRunnable(par : Package,actualPackage : String) ex
 				Util.generateFile(genpackageName.toString, par.getName, res1.toString())
 			}
 	}
+	
+	def init(){}
+	
+	def close(){}
 	
 }
