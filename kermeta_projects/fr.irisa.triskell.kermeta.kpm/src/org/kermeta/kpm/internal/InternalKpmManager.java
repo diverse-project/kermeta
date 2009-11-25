@@ -121,7 +121,7 @@ public class InternalKpmManager {
 		try {
 			r.load(null);
 			_kpm = (KPM) r.getContents().get(0);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			KPMPlugin.logWarningMessage("Failed to load existing kpm file, will re-initilize it", e);
 			_kpm = KpmFactory.eINSTANCE.createKPM();
 			r.getContents().add(_kpm);
@@ -129,7 +129,7 @@ public class InternalKpmManager {
 			ResourcesPlugin.getWorkspace().getRoot().accept(i);
 			try {
 				r.save(null);
-			} catch (IOException e1) {
+			} catch (Exception e1) {
 				KPMPlugin.logErrorMessage("Failed to re-initilize kpm file", e1);
 			}
 		}
