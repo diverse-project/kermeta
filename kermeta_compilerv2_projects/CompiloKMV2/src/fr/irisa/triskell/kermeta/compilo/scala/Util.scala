@@ -58,7 +58,7 @@ object Util  {
 				if(subF.isDirectory){
 					cleanFolder(subF)
 				} else {
-					println(subF.delete)
+					subF.delete
 				}
 			}
 			f.delete()

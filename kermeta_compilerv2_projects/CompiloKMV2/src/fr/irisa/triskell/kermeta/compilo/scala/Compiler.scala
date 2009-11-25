@@ -17,26 +17,26 @@ class Compiler extends EcoreRichAspectImplicit {
 		
 		Util.cleanFolder(GlobalConfiguration.outputFolder)
 	
-//		var t: LoadModelHelper = new LoadModelHelper()  ;
-//		BehaviorPackage.eINSTANCE.setEFactoryInstance(new RichBehaviorFactoryImpl())
-//		StructurePackage.eINSTANCE.setEFactoryInstance(new RichStructureFactoryImpl())
-//		
-//		var v : ModelingUnit = t.loadKM(url) /* Load KM Model */
-//	  	var midTime= System.currentTimeMillis() - startTime
-//		println("Loading process complete in "+(midTime)+" millisecondes ")
-//		
-//		var visitorAspect = new ScalaAspectVisitor
-//		var futur = VisitorAsyncUtility.runAfterCallback(v,visitorAspect) 
-//  	
-//		var visitorImplicitFactory = new ScalaFactoryAndImplicitVisitor
-//		VisitorAsyncUtility.runAfter(v,visitorImplicitFactory)
-//  	
-//		futur.get /* Waiting for ScalaAspectVisitor finish submit subtask before close pool ()  */ 
-//		Util.threadExecutor.shutdown /* Send ended signal to pool */
-//		Util.threadExecutor.awaitTermination(600,TimeUnit.SECONDS) /* Waiting for all tasks finished */
-//		
-//		var endTime= System.currentTimeMillis() - startTime
-//		println("Compilation process complete in "+(endTime)+" millisecondes ")
+		var t: LoadModelHelper = new LoadModelHelper()  ;
+		BehaviorPackage.eINSTANCE.setEFactoryInstance(new RichBehaviorFactoryImpl())
+		StructurePackage.eINSTANCE.setEFactoryInstance(new RichStructureFactoryImpl())
+		
+		var v : ModelingUnit = t.loadKM(url) /* Load KM Model */
+	  	var midTime= System.currentTimeMillis() - startTime
+		println("Loading process complete in "+(midTime)+" millisecondes ")
+		
+		var visitorAspect = new ScalaAspectVisitor
+		var futur = VisitorAsyncUtility.runAfterCallback(v,visitorAspect) 
+  	
+		var visitorImplicitFactory = new ScalaFactoryAndImplicitVisitor
+		VisitorAsyncUtility.runAfter(v,visitorImplicitFactory)
+  	
+		futur.get /* Waiting for ScalaAspectVisitor finish submit subtask before close pool ()  */ 
+		Util.threadExecutor.shutdown /* Send ended signal to pool */
+		Util.threadExecutor.awaitTermination(600,TimeUnit.SECONDS) /* Waiting for all tasks finished */
+		
+		var endTime= System.currentTimeMillis() - startTime
+		println("Compilation process complete in "+(endTime)+" millisecondes ")
 	}
 
 }
