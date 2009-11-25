@@ -8,10 +8,9 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-
-trait ObjectAspect extends GenerateScalaCodeAspect {
+trait ObjectAspect {
      
-  override def generateScalaCode(res : StringBuilder) : Unit = {
+  def generateScalaCode(res : StringBuilder) : Unit = {
 	  res.append("/*TODO GenScalaCode "+ this.getClass +" */")
   }
 }
