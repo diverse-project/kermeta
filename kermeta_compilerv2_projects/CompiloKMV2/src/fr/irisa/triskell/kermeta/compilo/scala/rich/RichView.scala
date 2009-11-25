@@ -14,7 +14,7 @@ import fr.irisa.triskell.kermeta.language.behavior.impl._
 class AssignementView extends AssignmentImpl with AssignmentAspect
 class ModelingUnitView extends ModelingUnitImpl with ModelingUnitAspect
 class PackageView extends PackageImpl with PackageAspect
-class ClassView extends fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl with ClassAspect
+class ClassView extends fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl with ClassAspect with TypeVariableBindingAspect
 class ClassDefinitionView extends ClassDefinitionImpl with ClassDefinitionAspect
 class BlockView extends BlockImpl with BlockAspect
 class PrimitiveTypeView extends PrimitiveTypeImpl with PrimitiveTypeAspect
