@@ -17,10 +17,10 @@ trait VariableDeclAspect extends EcoreRichAspectImplicit with ObjectAspect {
 		res.append("var ")
 		res.append(this.getIdentifier)
 		res.append(" : ")
-		this.getType().asInstanceOf[GenerateScalaCodeAspect].generateScalaCode(res)
+		this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
 		res.append(" = ")
 		if (this.getInitialization !=  null){	
-			this.getInitialization().asInstanceOf[GenerateScalaCodeAspect].generateScalaCode(res)
+			this.getInitialization().asInstanceOf[ObjectAspect].generateScalaCode(res)
 		}else{ 
 		res.append("null")
 		}
