@@ -66,7 +66,7 @@ aspect class Object
 						// A collection that does not respect the defined bounds raises an exception.
 						if ( p.upper != -1 and c.size() > p.upper ) then
 							var e : ConstraintViolatedInv init ConstraintViolatedInv.new
-							e.message := "Inv lower bound of " + cd.name + "." + p.name + " violated on " + self.toString
+							e.message := "Inv upper bound of " + cd.name + "." + p.name + " violated on " + self.toString
 							raise e
 						end
 						if ( c.size() < p.lower ) then
