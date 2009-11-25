@@ -53,7 +53,6 @@ object Util  {
 		if(f.exists()){
 			var children  = f.list
 			for (i <- 0 until children.length){
-				println(children(i))
 				var subF = new java.io.File(f+java.io.File.separator+children(i))
 				if(subF.isDirectory){
 					cleanFolder(subF)
