@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.kpm.KPMPlugin;
+import org.kermeta.kpm.KpmManager;
 import org.kermeta.kpm.internal.InternalKpmManager;
 
 /**
@@ -77,6 +78,9 @@ public class KpmProjectBuilder extends IncrementalProjectBuilder {
 	private void incrementalBuild(IResourceDelta delta, IProgressMonitor monitor) throws CoreException {
 		KpmBuilderDeltaVisitor v = new KpmBuilderDeltaVisitor(InternalKpmManager.getDefault().getKpm(), monitor);
 		delta.accept(v);
+		if(v.needKPMSave){
+			KpmManager.getDefault().save();
+		}
 	}
 	
 }

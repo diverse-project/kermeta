@@ -42,6 +42,11 @@ public class KpmBuilderDeltaVisitor extends UnitCreator implements IResourceDelt
 	private IProgressMonitor _monitor;
 	
 	/**
+	 * will be set to treu if an action in the visit requires that the kpm model must be saved
+	 */
+	public boolean needKPMSave = false;
+	
+	/**
 	 * 
 	 * @param monitor
 	 */
@@ -95,7 +100,7 @@ public class KpmBuilderDeltaVisitor extends UnitCreator implements IResourceDelt
 	 */
 	private void handleRemove(IResource resource) {
 		String name = "platform:/resource" + resource.getFullPath().toString();
-		_kpm.removeUnit(name);
+		needKPMSave = needKPMSave || _kpm.removeUnit(name);
 	}
 	
 }
