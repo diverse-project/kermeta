@@ -53,7 +53,9 @@ object Main {
 	  
 	  var compilo = new Compiler
 	  //compilo.compile("../compilerv2_test/tests/010_testLoop.main.km")
-	  compilo.compile("../compilerv2_test/tests/006_testClosure.km")
+	  //compilo.compile("../compilerv2_test/tests/006_testClosure.km")
+	  //compilo.compile("../compilerv2_test/testEcore/012_TypeFromEcore.km")
+	  compilo.compile("../compilerv2_test/testEcore/013_LoadEcore.km")
 	  
   }
 }

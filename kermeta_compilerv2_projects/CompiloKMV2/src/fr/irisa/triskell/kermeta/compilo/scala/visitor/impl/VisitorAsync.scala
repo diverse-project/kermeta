@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.compilo.scala.visitor.impl
+ package fr.irisa.triskell.kermeta.compilo.scala.visitor.impl
 
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import fr.irisa.triskell.kermeta.compilo.scala._
