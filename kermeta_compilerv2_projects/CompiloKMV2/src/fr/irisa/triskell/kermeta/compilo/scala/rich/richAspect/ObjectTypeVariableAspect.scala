@@ -8,7 +8,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait ObjectTypeVariableAspect extends EcoreRichAspectImplicit with ObjectAspect {
+trait ObjectTypeVariableAspect extends RichAspectImplicit with ObjectAspect {
 	
 	implicit def rich (xs : ObjectTypeVariableAspect) = xs.asInstanceOf[ObjectTypeVariable]
 	

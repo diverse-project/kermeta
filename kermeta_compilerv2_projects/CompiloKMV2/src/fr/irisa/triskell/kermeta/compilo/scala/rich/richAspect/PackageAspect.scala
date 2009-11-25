@@ -9,7 +9,7 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
-trait PackageAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisitable {
+trait PackageAspect extends RichAspectImplicit with ObjectAspect with IVisitable {
 	
 	
 	/*

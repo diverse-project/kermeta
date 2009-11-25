@@ -8,9 +8,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait UsingAspect extends EcoreRichAspectImplicit with ObjectAspect {
-	
-	implicit def rich (xs : UsingAspect) = xs.asInstanceOf[Using]
+trait UsingAspect extends RichAspectImplicit with ObjectAspect {
 	                                                         
 	override def generateScalaCode(res : StringBuilder) = {
 		res.append("\n")
@@ -18,5 +16,6 @@ trait UsingAspect extends EcoreRichAspectImplicit with ObjectAspect {
 		res.append(this.getQualifiedName().replaceAll("::","."))
 		res.append("._\n")
 	} 
+	
 
 }

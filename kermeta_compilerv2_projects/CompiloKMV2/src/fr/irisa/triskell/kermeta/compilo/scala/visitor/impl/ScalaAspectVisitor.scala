@@ -9,7 +9,7 @@ import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import scala.collection.JavaConversions._
 
-class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
+class ScalaAspectVisitor extends IVisitor with RichAspectImplicit {
 	
 	def visit(par : ModelingUnit){
 		par.getPackages().foreach(p => p.accept(this))		
@@ -17,16 +17,10 @@ class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 	  
 	def visit(par : Package){ 
 		var actualPackage = par.getQualifiedName
-		Console.println("pack name "+actualPackage)
 		if (!actualPackage.startsWith("kermeta")){
 			var subTask = new ScalaAspectPackageVisitorRunnable
 			VisitorAsyncUtility.runAfter(par,subTask)
-			
-			//Util.threadExecutor.execute(subTask)
  			par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage
- 			
- 			
- 			
 		}
 	}
  
@@ -38,7 +32,7 @@ class ScalaAspectVisitor extends IVisitor with EcoreRichAspectImplicit {
 	
 }
 
-class ScalaAspectPackageVisitorRunnable extends IVisitor with EcoreRichAspectImplicit  {
+class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit  {
 
 	def visit(par : ModelingUnit){Console.println("multithread error")}
 	
@@ -52,7 +46,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with EcoreRichAspectImp
 	
 	def visit(par : ClassDefinition){
 		
-		var genpackageName : StringBuilder= new StringBuilder
+			var genpackageName : StringBuilder= new StringBuilder
 			var packageName : StringBuilder= new StringBuilder
 			
 			genpackageName.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[PackageAspect].getQualifiedName))
@@ -71,7 +65,6 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with EcoreRichAspectImp
 			par.generateScalaCode(res)
 			Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())
 			if (!Util.hasEcoreTag(par)){
-
 				var res1 : StringBuilder = new StringBuilder
 				res1.append("package "+genpackageName+"\n")
 				res1.append("class " + par.getName + " extends org.eclipse.emf.ecore.impl.EObjectImpl")

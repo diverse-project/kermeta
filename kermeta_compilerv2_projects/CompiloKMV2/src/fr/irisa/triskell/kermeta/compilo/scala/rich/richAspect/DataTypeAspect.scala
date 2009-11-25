@@ -8,9 +8,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait DataTypeAspect extends EcoreRichAspectImplicit with ObjectAspect {
-	
-	implicit def rich (xs : DataTypeAspect) = xs.asInstanceOf[DataType]
+trait DataTypeAspect extends RichAspectImplicit with ObjectAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append(this.eContainer().asInstanceOf[Package].getQualifiedName)

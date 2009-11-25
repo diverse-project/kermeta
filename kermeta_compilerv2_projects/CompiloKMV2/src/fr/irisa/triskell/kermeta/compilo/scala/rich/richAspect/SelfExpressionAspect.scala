@@ -8,7 +8,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait SelfExpressionAspect extends EcoreRichAspectImplicit with ObjectAspect {
+trait SelfExpressionAspect extends RichAspectImplicit with ObjectAspect {
 	
 override def generateScalaCode(res : StringBuilder) : Unit = {
 	res.append("this")

@@ -9,34 +9,39 @@ import fr.irisa.triskell.kermeta.compilo.scala.loader._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor.impl._
 import java.util.concurrent.TimeUnit
+import org.slf4j.{Logger,LoggerFactory}
 
-class Compiler extends EcoreRichAspectImplicit {
+class Compiler extends RichAspectImplicit {
+	
+	val log = LoggerFactory.getLogger(this.getClass())
 	
 	def compile(url : String){
-		var startTime = System.currentTimeMillis /* Init time */
-		
+		log.info("Cleaning Output Step")
 		Util.cleanFolder(GlobalConfiguration.outputFolder)
-	
+		/* Init Factory Step */
 		var t: LoadModelHelper = new LoadModelHelper()  ;
 		BehaviorPackage.eINSTANCE.setEFactoryInstance(new RichBehaviorFactoryImpl())
 		StructurePackage.eINSTANCE.setEFactoryInstance(new RichStructureFactoryImpl())
-		
+		/* Loading Model KM Step */
+		var startTime = System.currentTimeMillis
 		var v : ModelingUnit = t.loadKM(url) /* Load KM Model */
 	  	var midTime= System.currentTimeMillis() - startTime
-		println("Loading process complete in "+(midTime)+" millisecondes ")
-		
+	  	log.info("Loading KM model step complete in "+(midTime)+" millisecondes ")
+		startTime = System.currentTimeMillis
+		/* Target Model Aspect Generation */
 		var visitorAspect = new ScalaAspectVisitor
 		var futur = VisitorAsyncUtility.runAfterCallback(v,visitorAspect) 
-  	
+		/* Utility Files & Factory Generation */
 		var visitorImplicitFactory = new ScalaFactoryAndImplicitVisitor
 		VisitorAsyncUtility.runAfter(v,visitorImplicitFactory)
   	
+		/* Synchronisation Step */
 		futur.get /* Waiting for ScalaAspectVisitor finish submit subtask before close pool ()  */ 
 		Util.threadExecutor.shutdown /* Send ended signal to pool */
 		Util.threadExecutor.awaitTermination(600,TimeUnit.SECONDS) /* Waiting for all tasks finished */
-		
+		/* End step */
 		var endTime= System.currentTimeMillis() - startTime
-		println("Compilation process complete in "+(endTime)+" millisecondes ")
+		log.info("Compilation step complete in "+(endTime)+" millisecondes ")
 	}
 
 }

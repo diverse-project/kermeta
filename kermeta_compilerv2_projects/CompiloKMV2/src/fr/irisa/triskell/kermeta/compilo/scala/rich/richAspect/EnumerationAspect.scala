@@ -8,9 +8,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait EnumerationAspect extends EcoreRichAspectImplicit with ObjectAspect {
-	
-	implicit def rich (xs : EnumerationAspect) = xs.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Enumeration]
+trait EnumerationAspect extends RichAspectImplicit with ObjectAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName()+"."+this.getName())

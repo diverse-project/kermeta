@@ -10,7 +10,7 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
  
-class ScalaFactoryAndImplicitVisitor extends IVisitor with EcoreRichAspectImplicit {
+class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 	 
 	var viewDef : StringBuilder = _
 	var implicitDef : StringBuilder = _

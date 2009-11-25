@@ -9,6 +9,7 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait ObjectAspect {
+	
      
   def generateScalaCode(res : StringBuilder) : Unit = {
 	  res.append("/*TODO GenScalaCode "+ this.getClass +" */")

@@ -8,7 +8,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
-trait ModelingUnitAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisitable {
+trait ModelingUnitAspect extends RichAspectImplicit with ObjectAspect with IVisitable {
 	 
 	 def accept(visitor : IVisitor){
 		visitor.visit(this)

@@ -8,9 +8,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait ClassAspect extends EcoreRichAspectImplicit with TypeVariableBindingAspect with ObjectAspect {
-	
-	implicit def rich (xs : ClassAspect) = xs.asInstanceOf[Class]
+trait ClassAspect extends RichAspectImplicit with TypeVariableBindingAspect with ObjectAspect {
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		var pack : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName 

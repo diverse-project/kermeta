@@ -8,9 +8,8 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait CallSuperOperationAspect extends EcoreRichAspectImplicit with ObjectAspect {
+trait CallSuperOperationAspect extends RichAspectImplicit with ObjectAspect {
 	
-	implicit def rich (xs : CallSuperOperationAspect) = xs.asInstanceOf[CallSuperOperation]
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append("super.(")

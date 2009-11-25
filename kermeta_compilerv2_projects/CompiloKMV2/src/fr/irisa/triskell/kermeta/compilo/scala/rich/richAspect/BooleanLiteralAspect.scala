@@ -8,9 +8,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait BooleanLiteralAspect extends EcoreRichAspectImplicit with ObjectAspect {
-	
-	implicit def rich (xs : BooleanLiteralAspect) = xs.asInstanceOf[BooleanLiteral]
+trait BooleanLiteralAspect extends RichAspectImplicit with ObjectAspect {
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 			res.append(this.isValue());

@@ -8,12 +8,12 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait RaiseAspect extends EcoreRichAspectImplicit with ObjectAspect {
+trait RaiseAspect extends RichAspectImplicit with ObjectAspect {
 	
 	implicit def rich (xs : RaiseAspect) = xs.asInstanceOf[Raise]
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {	
-		res.append("throw")	
+		res.append("throw ")	
 		this.getExpression().generateScalaCode(res)
 	}
 	

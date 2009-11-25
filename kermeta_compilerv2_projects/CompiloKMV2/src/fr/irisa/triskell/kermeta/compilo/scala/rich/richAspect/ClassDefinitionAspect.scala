@@ -8,7 +8,8 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
-trait ClassDefinitionAspect extends EcoreRichAspectImplicit with ObjectAspect with IVisitable {
+trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IVisitable {
+	
 	
 	override def accept(visitor : IVisitor){ 
 		visitor.visit(this) 

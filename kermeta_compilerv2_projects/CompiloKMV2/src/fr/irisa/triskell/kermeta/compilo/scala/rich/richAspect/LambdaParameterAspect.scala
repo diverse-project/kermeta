@@ -8,7 +8,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait LambdaParameterAspect extends EcoreRichAspectImplicit with ObjectAspect {
+trait LambdaParameterAspect extends RichAspectImplicit with ObjectAspect {
 	
 	implicit def rich (xs : LambdaParameterAspect) = xs.asInstanceOf[LambdaParameter]
 	

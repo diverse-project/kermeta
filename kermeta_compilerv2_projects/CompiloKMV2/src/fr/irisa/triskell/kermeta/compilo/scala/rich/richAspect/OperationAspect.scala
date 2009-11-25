@@ -7,7 +7,7 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 
-trait OperationAspect extends EcoreRichAspectImplicit with ObjectAspect {
+trait OperationAspect extends RichAspectImplicit with ObjectAspect {
 	
 	implicit def rich (xs : OperationAspect) = xs.asInstanceOf[Operation]
 	

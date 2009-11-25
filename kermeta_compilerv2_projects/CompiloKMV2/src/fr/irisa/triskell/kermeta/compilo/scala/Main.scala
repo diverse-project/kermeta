@@ -17,7 +17,7 @@ import fr.irisa.triskell.kermeta.compilo.scala.loader._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor.impl._
 
-object Main extends EcoreRichAspectImplicit {
+object Main {
   def main(args : Array[String]) : Unit = {
 	 
 	 // var t: LoadModelHelper = new LoadModelHelper()  ;
@@ -52,7 +52,7 @@ object Main extends EcoreRichAspectImplicit {
 	    */ 
 	  
 	  var compilo = new Compiler
-	  compilo.compile("../compilerv2_test/tests/000HelloWorld.km")
+	  compilo.compile("../compilerv2_test/tests/010_testLoop.main.km")
 	  
   }
 }

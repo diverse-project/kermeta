@@ -8,9 +8,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait CallFeatureAspect extends EcoreRichAspectImplicit with CallExpressionAspect {
-	
-	implicit def rich (xs : CallFeatureAspect) = xs.asInstanceOf[CallFeature]
+trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect {
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		if ("new".equals(this.getName)){

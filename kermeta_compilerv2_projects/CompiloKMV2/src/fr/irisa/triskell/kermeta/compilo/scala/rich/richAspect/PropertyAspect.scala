@@ -8,9 +8,8 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait PropertyAspect extends EcoreRichAspectImplicit with ObjectAspect {
+trait PropertyAspect extends RichAspectImplicit with ObjectAspect {
 	
-	implicit def rich (xs : PropertyAspect) = xs.asInstanceOf[Property]
 	
 override def generateScalaCode(res : StringBuilder) : Unit = {
 	if (Util.hasEcoreTag(this.getOwningClass)){
