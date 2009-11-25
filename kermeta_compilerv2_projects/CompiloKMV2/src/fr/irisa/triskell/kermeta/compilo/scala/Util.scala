@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutorService
  
 object Util  {
 
+	
 	/**
 	 * Check if a model element has an Ecore Tag
 	 * @param obj model element to test

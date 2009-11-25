@@ -14,6 +14,7 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect {
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append("\n"+"   def ")
 		res.append(this.getName())
+		/* Default constructor declaration */
 		res.append("(") 
 		var i = 0;
 		this.getOwnedParameter.foreach(par => {
@@ -29,50 +30,21 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect {
 			i=i + 1
 		})
 		res.append("):")
-		
+		/* Return Type Declaration */
 		this.getType.generateScalaCode(res)
-		
 		if (this.getBody!= null){
-			res.append(" = {\n\t")
+			res.append(" = {\n")
 			res.append("var result : ")
-			this.getType.generateScalaCode(res)
-			res.append(" = null;\n")
+			//this.getType.generateScalaCode(res)
+			res append "Any"
+			res.append(" = null; \n")
 			
 			this.getBody().generateScalaCode(res)
-			res.append(" return result\n}\n")
+			res append " return result.asInstanceOf["
+			this.getType.generateScalaCode(res)
+			res append "]\n}\n"
 			//res.append("}/*End_"+this.getName()+"*/\n")
 		}
 	}
 	
-	//	override def generateVisitor(tabsString 	: String) : String = { 
-	//	 	 var returnString : String = "def "+ this.getName + "(";
-     		
-    // 	var i:int  = 0;
-     	/*
-		this.getOwnedParameter.foreach(par => 
-     		{
-						if (i==0) {
-							returnString =returnString + par.getName +" : "+ par.getType.generateVisitor(tabsString) 
-						}else{
-							returnString =returnString +", "+ par.getName +" : "+ par.getType.generateVisitor(tabsString)  
-						}
-						i=i+1;
-					}
-				)
-				*/
-     		
-       /*
-     		returnString = returnString + ") :";// + value.getType().getClass + " ";
-			returnString = returnString + this.getType().generateVisitor(tabsString) 
-    		returnString = returnString + "={"; 
-			if (this.getBody!= null){
-			  returnString = returnString +"var result : "+ this.getType().generateVisitor(tabsString)+"=null;\n"
-    		returnString = returnString + this.getBody.generateVisitor(tabsString) 
-    		returnString = returnString +"\nreturn result;\n"
-			}
-			returnString = returnString +"}\n"
-			*/
-	//		return returnString;
-  
-	//}
 }

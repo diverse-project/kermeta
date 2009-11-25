@@ -16,6 +16,5 @@ trait IVisitor {
 	
 	def close()
 	
-	
 }  
   

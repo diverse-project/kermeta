@@ -10,6 +10,7 @@ package fr.irisa.triskell.kermeta.compilo.scala
 
 object GlobalConfiguration { 
 	   
+	
 	/* Package Target For Generated Trait */
 	final var frameworkGeneratedPackageName : String = "fr.irisa.triskell.scala.generated.fw"
 	

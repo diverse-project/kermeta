@@ -11,28 +11,6 @@ import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
 trait PackageAspect extends RichAspectImplicit with ObjectAspect with IVisitable {
 	
-	
-	/*
-	override def generateScalaCode(res : StringBuilder) : Unit = {
-		if(this.getName() != "ecore"){ //TODO REMOVE DEBUG MODE
-			Console.println("Skip package "+this.getName)
-			return
-		} 
-		
-		if(Util.hasEcoreTag(this)){
-			Console.println("//TODO GEN ECORE")
-			//generateFromEcore(res)
-		} else {
-			if("kermeta".equals(getQualifiedName())||"kermeta.standard".equals(getQualifiedName())||"kermeta.io".equals(getQualifiedName())||"kermeta.persistence".equals(getQualifiedName())||"kermeta.utils".equals(getQualifiedName())){
-				Console.println("//TODO GEN KM FW")
-			} else {
-				generateFromKM(res)
-			}
-		}
-	}*/
-	
-	
-	
 	override def accept(visitor : IVisitor){
 		visitor.visit(this)
 	}	  
