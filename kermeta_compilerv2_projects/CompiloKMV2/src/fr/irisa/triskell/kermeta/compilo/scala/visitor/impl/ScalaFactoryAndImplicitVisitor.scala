@@ -89,6 +89,8 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 			actualPackage=actualPackage+"ScalaAspect"
 		
 		if (!actualPackage.startsWith("kermeta")){
+			//if (!(actualPackage.startsWith("kermeta.io")||actualPackage.startsWith("kermeta.standard")||actualPackage.startsWith("kermeta.exceptions")||actualPackage.startsWith("kermeta.ecore"))){
+		
 			var factoryDef : StringBuilder =  new StringBuilder
 		
 			factoryDef append "package "+actualPackage+"\n"
