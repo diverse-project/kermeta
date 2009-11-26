@@ -19,6 +19,8 @@ object GlobalConfiguration {
 	final var factoryName : String = "RichFactory"
 	final var outputFolder : String = "../outputScala/src"
 	final var scalaPrefix : String = "Scala"
-		
+	final 	var workspaceURI : String = "/home/barais/workspaces/kermetaCompilerRuntime2/"
+	final var pluginURI : String = "/home/barais/workspaces/kermetaCompilerRuntime2/"
+
 } 
  

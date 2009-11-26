@@ -16,6 +16,21 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 	var implicitDef : StringBuilder = _
 	var actualPackage : String = _
 	var factoryDefClass : StringBuilder =_
+	def initForEcorePackage(parentpack : String,packNam:String):String={
+		var res : StringBuilder = new StringBuilder
+		var packNameUpper :String = packNam.substring(0,1).toUpperCase + packNam.substring(1,packNam.size)
+		var packName :String = null
+		if("".equals(parentpack)){
+			packName=packNam
+		}else{
+			packName=parentpack+"."+packNam
+		}
+		packName= kermeta.utils.TypeEquivalence.getPackageEquivalence(packName)
+		res.append("kermeta.persistence.EcorePackages.getPacks().put("+packName+"."+packNameUpper+"Package.eINSTANCE.getNsURI,"+packName+".impl."+packNameUpper+"PackageImpl.init())\n");
+		res.append(""+ packName +  "." + packNameUpper + "Package.eINSTANCE.setEFactoryInstance(" + packName + "ScalaAspect.RichFactory)\n " )
+		res.toString
+	}
+	
 	def init { 
 		viewDef = new StringBuilder
 		implicitDef = new StringBuilder
@@ -38,16 +53,29 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 		var packageName :String= mainClass.substring(0,mainClass.lastIndexOf("::")).replace("::", ".")
 		var className :String=mainClass.substring(mainClass.lastIndexOf("::")+2).replace("::", ".")
 		//TODO gérer le cas des package venant d'ecore
-		var res = "package runner \n" +
+		var res :StringBuilder= new StringBuilder
+		res.append("package runner \n" +
 		"object MainRunner  extends fr.irisa.triskell.scala.generated.fw.ImplicitConversion{\n" +
-		"def main(args : Array[String]) : Unit = {\n\t" +
-		packageName
+		"def main(args : Array[String]) : Unit = {\n\t" )
+		res.append("kermeta.persistence.EcorePackages.workspaceURI = \"" + GlobalConfiguration.workspaceURI + "\"\n")
+		res.append("kermeta.persistence.EcorePackages.pluginURI = \"" + GlobalConfiguration.pluginURI+ "\"\n")
+		packages.foreach{e=> if (!(e.getQualifiedName.startsWith("kermeta")|| e.getQualifiedName.startsWith("language")))
+			{if (e.getNestingPackage() == null){
+				res.append(
+				initForEcorePackage("", e.getName()))
+				}
+			else{
+				res.append(
+						initForEcorePackage(e.getNestingPackage().getQualifiedName(), e.getName()))}
+			}
+		}
+		res.append(packageName)
 		
 		if (packages.filter{e=>  e.getQualifiedName().equals(packageName)}.size==1)
 			{
-			res=res+"ScalaAspect"
+			res.append("ScalaAspect")
 			}
-		res=res+".RichFactory.create"+ className+"."+mainOperation +"\n}\n}"; 
+		res.append(".RichFactory.create"+ className+"."+mainOperation +"\n}\n}") 
 		Util.generateFile("runner", "MainRunner", res.toString())
 		
   		par.getPackages().foreach(p => p.accept(this) ) 		
