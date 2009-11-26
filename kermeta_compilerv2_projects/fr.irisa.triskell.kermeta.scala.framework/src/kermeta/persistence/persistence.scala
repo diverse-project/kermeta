@@ -22,21 +22,21 @@ import fr.irisa.triskell.kermeta.KmPackage;
 import org.eclipse.emf.ecore._;
 import java.lang.String
 
-abstract class Resource  extends java.util.HashSet[Object]{
+abstract class Resource  extends java.util.ArrayList[EObject]{
 	var dependentResources:Resource=null;
-	var contents:java.util.List[Object]=null;
+	//var contents:java.util.List[Object]=null;
 	var repository:Repository=null;
 	var metaModelURI:String="";
 	var isReadOnly:Boolean=false;
 	var uri:String="";
-	def save() 
-	def saveWithNewURI(new_uri : String) 
+	def save()  
+	def saveWithNewURI(new_uri : String)  
 	def findDanglingModelElements() :Set[Object]={return null}
 	def load() 
 	def instances() :Resource={return this}
 	def normalizedUri() :String={return metaModelURI}
-	def Scalacontents_=(arg : java.util.List[Object])={contents = arg}
-	def Scalacontents:  java.util.List[Object]={contents}
+	def Scalacontents_=(arg : java.util.List[EObject])={this.clear; this.addAll( arg)}
+	def Scalacontents:  java.util.List[EObject]={this}
 		
 	
 	
@@ -48,7 +48,7 @@ abstract class Repository  extends Object{
 	def createResource(uri : String, mm_uri : String) :Resource
 	def normalizeUri(uri : String) :String={return uri}
 	def findDanglingModelElements() :Set[Object]={return null}
-	def getResource(uri : String) :Resource={return null}
+	def getResource(uri : String) :Resource
 }
 
 class EMFRepository  extends Repository  {
@@ -61,11 +61,45 @@ class EMFRepository  extends Repository  {
                                                               res.uri = uri
                                                               return res}
 	def registerEcoreFile(mm_uri : String)={mm_uri}
+	def getResource(uri : String) :Resource={
+		var res : EMFResource = new EMFResource()  
+        //res.metaModelURI = mm_uri
+        res.uri = uri
+        return res
+		
+	}
+
 }
 
 
 class EMFResource  extends Resource  {
-	override def remove(instance : Object)={super.remove(instance)}
+		
+		var rs:ResourceSetImpl = new ResourceSetImpl(); 
+		
+		EcorePackageImpl.init();
+		var f:Resource.Factory.Registry = rs.getResourceFactoryRegistry();
+		var m :java.util.Map[String,Object]  = f.getExtensionToFactoryMap();
+		m.put("*",new XMIResourceFactoryImpl());
+		/*m.put("*",
+				new EcoreResourceFactoryImpl() {
+					@Override
+					public Resource createResource(URI uri) {
+						XMIResourceImpl resource = (XMIResourceImpl) super
+								.createResource(uri);
+						resource.getDefaultLoadOptions().put(
+								XMLResource.OPTION_RECORD_UNKNOWN_FEATURE,
+								Boolean.TRUE);
+						return resource;
+					}
+				});
+*/
+		
+		//rs.getPackageRegistry().put(/*pack.getNsURI()*/"", pack);
+		rs.getPackageRegistry().putAll(EcorePackages.getPacks())
+	
+
+    
+	//override def remove(instance : Object)={super.remove(instance)}
 	override  def save()={}
 	override def saveWithNewURI(new_uri : String)={ uri = new_uri 
 		this.save
@@ -73,21 +107,26 @@ class EMFResource  extends Resource  {
 	def saveAndValidateWithEMF() :Boolean={save() 
                                         return true}
 	def load(){
-	var rs :ResourceSet = new ResourceSetImpl(); 
-		var f :Resource.Factory.Registry = rs.getResourceFactoryRegistry();
-		var m : Map[java.lang.String,Object]  = f.getExtensionToFactoryMap();
-		m.put("km",new XMIResourceFactoryImpl());  
-		m.put("ecore",new XMIResourceFactoryImpl());
-		rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE); 
-		rs.getPackageRegistry().put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE); 
 		
-		var uri1 :URI = URI.createFileURI(uri);
+		var uri1 :URI = URI.createFileURI(uri.replace("platform:/resource/",EcorePackages.workspaceURI).replace("platform:/plugin/",EcorePackages.pluginURI ));
 		var resource :org.eclipse.emf.ecore.resource.Resource  = rs.getResource(uri1, true);
 		if (resource.isLoaded() && resource.getContents().size() > 0) {
 			this.addAll(resource.getContents());
 		} 
 		
 	}
+}
+
+object EcorePackages{
+	private var packs : java.util.HashMap[String,EPackage]= new java.util.HashMap[String,EPackage]()
+	
+	def getPacks() : java.util.HashMap[String,EPackage] = {
+		packs
+	}
+	var workspaceURI : String = _
+	var pluginURI : String = _
+
+	
 }
 /*
 
