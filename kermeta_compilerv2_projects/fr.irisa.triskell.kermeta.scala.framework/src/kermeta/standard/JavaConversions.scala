@@ -64,20 +64,25 @@ object JavaConversions {
 	def countElement(element : A) :Int={
 		return this.count{e => e.equals(element)}; 
 	}  
-	/*TODO*/def excludes(element : A) :scala.Boolean={return true;}
+	//TODO
+	def excludes(element : A) :scala.Boolean={return true;}
 	def one() :A={iterator.next}
-	/*TODO*/def containsAll(elts : Collection[A]) :scala.Boolean={ true}
-	/*TODO*/def sum() :A={return elements.next}
-	//def contains(element : A) :Boolean={return elements.has(element)}
-	//def add(element : A)={elements.add(element)}
+	//TODO
+	def containsAll(elts : Collection[A]) :scala.Boolean={ true}
+	//TODO
+	def sum() :A={return elements.next}
 	def includes(element : A) :Boolean={return this.contains(element)}
-	/*TODO*/def excludesAll(elements : Collection[A]) :Boolean={/*TODO*/return true}
+	//TODO
+	def excludesAll(elements : Collection[A]) :Boolean={/*TODO*/return true}
 	def isUnique(collector : A) :Boolean={return this.countElement(collector)==1}
 	def any() :A={return elements.next}
-	def empty() :Boolean={return elements.toList.isEmpty}
+	//TODO
+	def empty() :Boolean={return this.length==0}
+	//TODO
 	def forAllCpl(f : A,A:A=>Boolean) :Boolean={return true}
+	//TODO
 	def existsCpl(f : A,A:A=>Boolean) :Boolean={return true}
-	def isNotEmpty() :Boolean={return !elements.toList.isEmpty}
+	def isNotEmpty() :Boolean={return !(this.length==0)}
 	def detect(detector : A=> Boolean) :A={return elements.filter(e=> detector(e)).next}
 	override def iterator() :Iterator[A]={return elements}
 	/*TODO*/def addAll(elts : Collection[A])={//println("addAll")

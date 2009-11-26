@@ -26,11 +26,11 @@ class Void  extends Object //with fr.irisa.triskell.kermeta.scala.framework.emf.
 class RichValueType[G]  extends Object {}
 
 abstract class Comparable[G]  extends Object {
-	def isLower(other : G) :Boolean={  true}
-	def isGreaterOrEqual(other : G) :Boolean={true}
+	def isLower(other : G) :Boolean
+	def isGreaterOrEqual(other : G) :Boolean
 	def compareTo(other : G) :Int
-	def isLowerOrEqual(other : G) :Boolean={true}
-	def isGreater(other : G) :Boolean={true}
+	def isLowerOrEqual(other : G) :Boolean
+	def isGreater(other : G) :Boolean
 	}
 	abstract class Summable[G]  extends Object {
 	def plus(other : G) :G
@@ -40,10 +40,10 @@ class RichNotComparableException  extends Exception  {}
 
 class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
 	def not() :Boolean={return !value}
-	def xor(other : Boolean) :Boolean={true}
+	def xor(other : Boolean) :Boolean={(value || other) && !(value && other)}
 	//override def equals(other : Object) :Boolean={return true}
-	def or(other : Boolean) :Boolean={true} 
-	def nand(other : Boolean) :Boolean={true}
+	def or(other : Boolean) :Boolean={value || other} 
+	def nand(other : Boolean) :Boolean={!(value && other)}
 	def implies(other : Boolean) :Boolean={true}
 	override def toString() :java.lang.String={
 	    if (value){
@@ -59,32 +59,37 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
 abstract class RichNumeric[G]  extends Comparable[G]{}
 
 class RichInteger(value: Int)  extends RichNumeric[Int] {
-	override def isLower(other : Int) :Boolean={true}
+	override def isLower(other : Int) :Boolean={value<other}
 	def plus(other : Int) :Int={value+other}
 	def plus(other : Integer) :Int={value+other.intValue}
 	def mult(other : Int) :Int={value*other}
 	def mult(other : Integer) :Int={value*other.intValue}
 	def minus(other : Integer) :Int={return value-other.intValue}
 	def minus(other : Int) :Int={return value-other}
-	override def equals(other : Any) :Boolean={println("equals"); if (other.isInstanceOf[Int]) return value==other.asInstanceOf[Int]; if (other.isInstanceOf[Integer]) return value==other.asInstanceOf[Integer].intValue;else false}
-	def equals(other : Int) :Boolean={println("equals");value==other}
-	def equals(other : Integer) :Boolean={println("equals");value == other.intValue}
+	override def equals(other : Any) :Boolean={if (other.isInstanceOf[Int]) return value==other.asInstanceOf[Int]; if (other.isInstanceOf[Integer]) return value==other.asInstanceOf[Integer].intValue;else false}
+	def equals(other : Int) :Boolean={value==other}
+	def equals(other : Integer) :Boolean={value == other.intValue}
+	//TODO
 	def mod(other : Int) :Int={return 0}
+	//TODO
 	def mod(other : Integer) :Int={return 0}
 	def div(other : Int) :Int={return value/other}
 	def div(other : Integer) :Int={return value/(other.intValue)}
-	def toReal() :Double={return 0.0}
+	def toReal() :Double={return value}
+	//TODO
 	override def compareTo(other : Int) :Int={return 0}
+	//TODO
 	def compareTo(other : Integer) :Int={return 0} 
 	override def isGreater(other : Int) :Boolean={return value>other}
-	def isGreater(other : Integer) :Boolean={return true}
-	override def isGreaterOrEqual(other : Int) :Boolean={return true}
-	def isGreaterOrEqual(other : Integer) :Boolean={return true}
+	def isGreater(other : Integer) :Boolean={return value>other.intValue}
+	override def isGreaterOrEqual(other : Int) :Boolean={value>=other}
+	def isGreaterOrEqual(other : Integer) :Boolean={return value>=other.intValue}
 	def uminus() :Int={return value * (-1);}
+	//TODO
 	//def times(body : Integer=>Unit) :{}
 	override def toString() :java.lang.String={return ""+value}
-	override def isLowerOrEqual(other : Int) :Boolean={return true}
-	def isLowerOrEqual(other : Integer) :Boolean={return true}
+	override def isLowerOrEqual(other : Int) :Boolean={return  value<=other}
+	def isLowerOrEqual(other : Integer) :Boolean={return  value<=other.intValue}
 	def toInt() : Int = {return value}
 }
 
@@ -96,21 +101,27 @@ class RichReal (value: Double) extends RichNumeric[Double] {
 	def toInteger() :Int={var v : Int = value.intValue
 	                          return v}
 	def uminus() :Double={return -1 * value}
-	//def equals(other : Object) :Boolean={return true}
 	def div(other : Double) :Double={return value+other.toDouble}
+	//TODO
 	override def compareTo(other : Double) :Int={return 0}
 	override def toString() :java.lang.String={return ""+value}
     def toDouble() : Double = {return value}
+    def isLower(other : Double) :Boolean={ value<other }
+	def isGreaterOrEqual(other : Double) :Boolean={ value>=other }
+	def isLowerOrEqual(other : Double) :Boolean={ value<=other }
+	def isGreater(other : Double) :Boolean={ value>other }
+
 }
 
 class RichCharacter(value:Char)  extends RichValueType {
+	//TODO
 	def compareTo(other : Object) :Int={0}
 	override def toString() :java.lang.String={return ""+value}
 }
 class RichString(value: java.lang.String)  extends RichValueType {
+	//TODO
 	def append(other : String)={}
 	def plus(other : String) :java.lang.String={return value + other}
-	//def equals(other : Object) :Boolean={return value.equals(other)}
 	def toReal() :Double={return java.lang.Double.parseDouble(value)}
 	def toBoolean() :Boolean={return java.lang.Boolean.parseBoolean(value)}
 	def contains(str1 : String) :Boolean={return value.contains(str1)}
@@ -124,7 +135,11 @@ class RichString(value: java.lang.String)  extends RichValueType {
 	def toLowerCase() :java.lang.String={return value.toLowerCase()}
 	def substring(startIndex : Int, endIndex : Int) :java.lang.String={return value.substring(startIndex,endIndex)}
 	override def toString() :java.lang.String={value.toString}
-	//def split(delimiter : String) :Sequence[String]={return value.split(delimiter)}
+	def split(delimiter : String) :java.util.List[String]={
+			var list: java.util.List[String] = new java.util.ArrayList[String]()
+			value.split(delimiter).foreach{e=>list.add(e)}
+			return list;
+	}
 } 
 class RichUnknownJavaObject  extends Object {
 	override def toString() :java.lang.String={return "toString of  UnknownJavaObject not implemented yet";
