@@ -1,0 +1,116 @@
+@mainClass "testPackageTestExceptions::TestExceptions"
+@mainOperation "testmain_operation"
+
+package testPackageTestExceptions;
+
+require kermeta
+
+using kermeta::standard
+ 
+ class A
+ {
+  	operation opA1 (b : Boolean) is do
+ 		if (b) then
+ 			raise "exceptionA"
+ 		else raise 27
+ 		end
+ 	end
+
+ 	operation opA2(b1 : Boolean,b2 : Boolean) is do
+ 		if b1 then do
+ 			opA1(b2)
+ 			rescue (s : String)
+ 			 stdio.write(s)
+ 			 stdio.writeln(" rescued")
+ 			 end
+ 		else do
+ 			opA1(b2)
+ 			rescue (i : Integer)
+ 			 stdio.write(i.toString)
+ 			 stdio.writeln(" propagated")
+ 			 raise i
+ 			 end
+ 		end
+ 	end
+ }
+ 
+class B
+{
+ 	operation opB(a : A,b1 : Boolean,b2 : Boolean) is do
+ 		if (b1) then do
+ 			a.opA1(b2)
+ 			rescue (s : String)
+ 			 stdio.write(s)
+ 			 stdio.writeln(" rescued")
+ 			 end
+ 		else do
+ 			a.opA1(b2)
+ 			rescue (i : Integer)
+ 			 stdio.write(i.toString)
+ 			 stdio.writeln(" propagated")
+ 			 raise i
+ 			 end
+ 		end
+ 		rescue (s : String)
+ 			 stdio.write(s)
+ 			 stdio.writeln(" rescued")
+ 	end
+}
+
+class TestExceptions inherits kermeta::kunit::TestCase
+{    
+     operation testmain_operation() is do
+     	var a : A
+     	var b : B
+     	
+     	a := A.new
+     	b := B.new
+     	
+     	do
+     		a.opA1(true)
+     		assert(false)
+     		rescue (s:String)
+     			assert(true)
+     	end
+     	do
+     		a.opA1(false)
+     		assert(false)
+     		rescue (i:Integer)
+     			assert(true)
+     	end
+     	a.opA2(true,true)
+     	do
+     		a.opA2(true,false)
+     		assert(false)
+     		rescue (i:Integer)
+     			assert(true)
+     	end
+     	do
+     		a.opA2(false,true)
+     		assert(false)
+     		rescue (s:String)
+     			assert(true)
+     	end
+     	do
+      		a.opA2(false,false)
+      		assert(false)
+      		rescue(i:Integer)
+      			assert(true)
+      	end
+      	b.opB(a,true,true)
+      	b.opB(a,false,true)
+      	do
+	      	b.opB(a,true,false)
+	      	assert(false)
+	      	rescue(i:Integer)
+	      		assert(true)
+	    end
+     	do
+	      	b.opB(a,false,false)
+	      	assert(false)
+	      	rescue(i:Integer)
+	      		assert(true)
+	    end
+     end
+     
+}    
