@@ -35,14 +35,16 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect {
 		if (this.getBody!= null){
 			res.append(" = {\n")
 			res.append("var result : ")
-			//this.getType.generateScalaCode(res)
-			res append "Any"
-			res.append(" = null; \n")
+			this.getType.generateScalaCode(res)
+			//res append "Any"
+			res.append(" = null.asInstanceOf[")
+			this.getType.generateScalaCode(res)
+			res.append("]; \n")
 			
 			this.getBody().generateScalaCode(res)
-			res append " return result.asInstanceOf["
-			this.getType.generateScalaCode(res)
-			res append "]\n}\n"
+			res append " return result\n}\n"
+			//this.getType.generateScalaCode(res)
+			//res append "]\n}\n"
 			//res.append("}/*End_"+this.getName()+"*/\n")
 		}
 	}
