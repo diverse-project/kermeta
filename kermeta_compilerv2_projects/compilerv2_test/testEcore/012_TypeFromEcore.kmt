@@ -21,6 +21,7 @@ class Main
 {
 	operation main() : Void is do 
 		var a : A init A.new
+		a.name := "Bonjour"
 		a.test
 		
 	end
@@ -33,7 +34,7 @@ aspect class A{
 	
 	operation test() : Void is do
 	self.toto := "toto"
-		stdio.writeln(self.name + " " + self.toto ) 
+		stdio.writeln(""+self.name + " " + self.toto ) 
 	end
 	
 	

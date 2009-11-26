@@ -43,24 +43,47 @@
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/String"/>
             </value>
           </statement>
-          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/language/structure/Object/checkInvariants/@containedType.0"
-              name="checkInvariants" staticOperation="#//@packages.1/language/structure/Object/checkInvariants">
-            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.0/@type/@containedType.0"
-                name="v"/>
-          </statement>
-          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0">
-            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/superMain2/superstr2/@containedType.0"
-                name="superstr2" staticProperty="#//@packages.0/superMain2/superstr2">
+          <statement xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.1/language/structure/Object/checkInvariants/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/language/structure/Object/checkInvariants/@containedType.0"
+                name="checkInvariants" staticOperation="#//@packages.1/language/structure/Object/checkInvariants">
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.0/@type/@containedType.0"
                   name="v"/>
-            </target>
-            <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
-                value="supertiti1"/>
-          </statement>
-          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/language/structure/Object/checkInvariants/@containedType.0"
-              name="checkInvariants" staticOperation="#//@packages.1/language/structure/Object/checkInvariants">
-            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.0/@type/@containedType.0"
-                name="v"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/superMain2/superstr2/@containedType.0"
+                  name="superstr2" staticProperty="#//@packages.0/superMain2/superstr2">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.0/@type/@containedType.0"
+                    name="v"/>
+              </target>
+              <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
+                  value="supertiti1"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/language/structure/Object/checkInvariants/@containedType.0"
+                name="checkInvariants" staticOperation="#//@packages.1/language/structure/Object/checkInvariants">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.0/@type/@containedType.0"
+                  name="v"/>
+            </statement>
+            <rescueBlock exceptionName="e">
+              <body xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
+                  name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@containedType.0/@containedType.0"
+                    right="#//@packages.1/io/StdIO/writeln/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
+                    value="contraintes violÃ©es"/>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
+                    name="stdio">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/io/StdIO"/>
+                </target>
+              </body>
+              <exceptionType name="Exception" type="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@exceptionType/@containedType.0"
+                  isOrdered="true" upper="1">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/exceptions/Exception"/>
+              </exceptionType>
+            </rescueBlock>
           </statement>
         </body>
       </ownedOperation>
@@ -87,10 +110,8 @@
               <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                   value="Inv superMain2Inv : "/>
             </parameters>
-            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
-                name="stdio">
-              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/io/StdIO"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
+                name="stdio"/>
           </statement>
           <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/String/equals/@containedType.0"
               name="equals" staticOperation="#//@packages.1/standard/String/equals">
@@ -13200,7 +13221,7 @@
                   </containedType>
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                       value="Resource load failed!"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                       name="stdio"/>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.1/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.1/@type/@containedType.0"
@@ -13302,7 +13323,7 @@
                     <parameters xsi:type="kermeta_language_behavior:StringLiteral"
                         staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                         value="DVK ! another resource of the same repository was containing this element"/>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                         name="stdio"/>
                   </statement>
                   <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/Set/remove/@containedType.0"
@@ -24329,7 +24350,7 @@
               </containedType>
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                   value="&#xA;---------------------------------------------  TEST RESULTS-----------------------------------------------&#xA;"/>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.1/standard/Collection/each/@containedType.0">
@@ -24344,7 +24365,7 @@
                   </containedType>
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                       value="&#xA;Failures: "/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                       name="stdio"/>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/Collection/each/@containedType.0"
@@ -24399,7 +24420,7 @@
                               value="&#xA;   "/>
                         </parameters>
                         <target xsi:type="kermeta_language_behavior:CallVariable"
-                            staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+                            staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                             name="stdio"/>
                       </statement>
                     </body>
@@ -24443,7 +24464,7 @@
                   </containedType>
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                       value="&#xA;Errors: "/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                       name="stdio"/>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/Collection/each/@containedType.0"
@@ -24498,7 +24519,7 @@
                               value="&#xA;   "/>
                         </parameters>
                         <target xsi:type="kermeta_language_behavior:CallVariable"
-                            staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+                            staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                             name="stdio"/>
                       </statement>
                     </body>
@@ -24542,7 +24563,7 @@
                   </containedType>
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                       value="&#xA;Errors from setUp or tearDown : "/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                       name="stdio"/>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/standard/Collection/each/@containedType.0"
@@ -24597,7 +24618,7 @@
                               value="&#xA;   "/>
                         </parameters>
                         <target xsi:type="kermeta_language_behavior:CallVariable"
-                            staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+                            staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                             name="stdio"/>
                       </statement>
                     </body>
@@ -24637,7 +24658,7 @@
               </containedType>
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                   value="&#xA; Summary: "/>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
@@ -24665,7 +24686,7 @@
                 <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                     value="   Number of launched tests : "/>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
@@ -24700,7 +24721,7 @@
                 <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                     value="   Number of failures : "/>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
@@ -24735,7 +24756,7 @@
                 <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                     value="   Number of errors : "/>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
@@ -24770,7 +24791,7 @@
                 <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                     value="   Number of errors in setUp or tearDown: "/>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
@@ -24781,7 +24802,7 @@
               </containedType>
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Main/main/@body/@statement.1/@value/@containedType.0"
                   value="&#xA;-------------------------------------------------------------------------------------------------------------------------------&#xA;"/>
-              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/superMain2/superMain2Inv/@body/@statement.0/@target/@containedType.0"
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@rescueBlock.0/@body.0/@target/@containedType.0"
                   name="stdio"/>
             </statement>
           </body>

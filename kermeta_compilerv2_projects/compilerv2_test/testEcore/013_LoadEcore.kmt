@@ -22,7 +22,7 @@ class Main
 	operation main() : Void is do 
  		 var repository : EMFRepository init EMFRepository.new
 		 var resource : EMFResource 
- 		resource ?= repository.getResource("platform:/resource/Test/src/kermeta/test1/A.xmi")//, "platform:/resource/KermetaCompilerTestCase/src/test1/A.ecore")
+ 		resource ?= repository.getResource("platform:/resource/compilerv2_test/testEcore/A.xmi")//, "platform:/resource/KermetaCompilerTestCase/src/test1/A.ecore")
  		resource.load
  		var a : A 
  		a?= resource.contents.one
