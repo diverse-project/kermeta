@@ -1,6 +1,6 @@
 package kermeta.kunit
 
-trait TestCase  extends junit.framework.TestCase{
+//trait TestCase  extends junit.framework.TestCase{
  
 //	var testCase : junit.framework.TestCase;
 //	
@@ -266,4 +266,4 @@ trait TestCase  extends junit.framework.TestCase{
 //		fName= name;
 //	}
 	
-}
+//}

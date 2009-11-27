@@ -3,10 +3,11 @@ package fr.irisa.triskell.kermeta.scala.framework.language.structure
 import org.eclipse.emf.ecore._
 import org.eclipse.emf.ecore.impl._
 
-trait ObjectAspect extends  EObject {
+trait ObjectAspect extends EObject {
 	
-	def getMetaClass = this.eClass()
-	def classDefinition = this
+	def getMetaClass() = this.eClass()
+	def classDefinition = this.asInstanceOf[EClass]
+	def ScalaclassDefinition = classDefinition
 	def typedefinition = this
 	def container = this.eContainer()
 	def checkInvariants = { /*TODO*/ }
@@ -21,7 +22,7 @@ trait ObjectAspect extends  EObject {
 	def oid : Integer = this.hashCode() /*TODO*/
 	override def toString : String = "["+this.eClass().getName()+":"+oid.toString()+"]"
 	//def isFrozen : Boolean  /*TODO*/
-	def isVoid : Boolean = false
+	def isVoid() : Boolean = false
 	def hashcode : Int = this.hashCode()   
 	//def freeze  /*TODO*/
 	//def asType(t : EClass) = this.asInstanceOf[t.getName]

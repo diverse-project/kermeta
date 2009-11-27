@@ -57,6 +57,12 @@ object TypeEquivalence {
 		var Collection : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		Collection.put("count", "countElement");
 		methodEquivalence.put("kermeta.standard.Collection", Collection);
+		
+		var ClassDefinition : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
+		ClassDefinition.put("allAttribute", "eAllAttributes")
+		methodEquivalence.put("fr.irisa.triskell.kermeta.scala.framework.language.structure.ClassDefinition", ClassDefinition);
+		
+		
 		methodEquivalence 
 		//var Str : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		//Str.put("plus", "+");
