@@ -54,16 +54,14 @@ aspect class Object
 	operation getViolatedConstraints() : kermeta::exceptions::ConstraintsDiagnostic is do
 	
 		// init result
-		var contraintes : ConstraintsDiagnostic init kermeta::exceptions::ConstraintsDiagnostic.new.initialize
+		var contraintes : ConstraintsDiagnostic init ConstraintsDiagnostic.new.initialize
 		
 		var cd : ClassDefinition 
 		cd := self.getMetaClass().classDefinition
 		
-		//stdio.writeln("getViolatedConstraints >> Class def : " + cd.name )
+		//stdio.writeln("    >> getViolatedConstraints, Class def : " + cd.name )
 		
 		if ( not cd.isVoid ) then
-			
-			//cd.allAttribute.each{a | stdio.writeln(" listing attributes : " + a.name)}
 			
 			// Checking properties
 			cd.allAttribute.each{ prop |
@@ -98,7 +96,6 @@ aspect class Object
 								else
 									false
 								end } 
-							/*if self.get(prop).isInstanceOf(Collection<Object>)*/
 							then
 						
 								var subObjInstances : kermeta::standard::Collection<Object>
@@ -117,7 +114,6 @@ aspect class Object
 			
 			// Checking invariants
 			cd.~inv.each{invariant |
-				//stdio.writeln("Checking invariant : " + invariant.name)
 				do
 					checkInvariant(invariant)
 					rescue (e : ConstraintViolatedInv) 
@@ -128,6 +124,7 @@ aspect class Object
 		end
 	
 		result := contraintes
+		
 	end
 
 	/**
@@ -136,9 +133,10 @@ aspect class Object
 	 */
 	operation checkInvariant(invariant : Constraint) : Void is do 
 	
+		// workaround for bug 8911
+		var minusOne : Integer init -1
+	
 		var cd : ClassDefinition init self.getMetaClass.classDefinition
-		
-		//stdio.writeln("	Checking property " + invariant.name + " on " + cd.name)
 		
 		// If the invariant is a PropertyConstraint, check the multiplicities
 		if (invariant.isKindOf(PropertyConstraint))
@@ -151,10 +149,8 @@ aspect class Object
 			then
 				var coll : Collection<Object> init v.asType(Collection<Object>)
 				
-				//stdio.writeln("		lower " + prop.lower.toString + " - size of the collection " + coll.size.toString + " - upper " + prop.upper.toString )
-				
 				// A collection that does not respect the defined bounds raises an exception.
-				if ( prop.upper != -1 and coll.size() > prop.upper ) then
+				if ( prop.upper != minusOne and coll.size() > prop.upper ) then
 					var e : ConstraintViolatedInv init ConstraintViolatedInv.new
 					e.constraintAppliedTo := self
 					e.message := "Invariant upper bound of " + cd.name + "_" + prop.name + "_" + prop.type.toString + " violated on " + self.toString
@@ -176,15 +172,15 @@ aspect class Object
 					e.message := "Invariant lower bound of " + cd.name + "_" + prop.name + "_" + prop.type.toString + " violated on " + self.toString
 					e.failedConstraint := invariant
 					raise e
-					//violatedConstraints.add(e)
 				end					
 			end
 			
 		
 		else // This is a Class invariant
 			do
+				// extern call
 				@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariant(this, invariant)"
-				extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariant(self, invariant.asType(Object))
+				extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariant(self, invariant)
 			end	
 		end
 

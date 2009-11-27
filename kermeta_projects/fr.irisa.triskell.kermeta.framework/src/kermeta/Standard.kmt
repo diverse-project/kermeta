@@ -35,9 +35,13 @@ require "io/file_io.kmt"
 
 require "exceptions/exceptions.kmt"
 
+require "exceptions/constraint_exceptions.kmt"
+
 require "language/dynamic_expression.kmt"
 
 require "persistence/resource.kmt"
+
+require "persistence/persistence_aspect.kmt"
 
 require "standard/java.kmt"
 

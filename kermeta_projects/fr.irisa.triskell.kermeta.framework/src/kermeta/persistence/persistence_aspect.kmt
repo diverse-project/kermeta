@@ -17,33 +17,22 @@ aspect class EMFResource {
 
 	operation mark(message : String) is do
 		
-		// stdio.writeln("Marking file " + self.uri + " with message : " + message)
 		// extern call
 		do
-			@compiledJavaExtern "fr.irisa.triskell.kermeta.runtime.io.MarkerTest.markFile(self.uri, message)"
-			extern fr::irisa::triskell::kermeta::runtime::io::MarkerTest.markFile(self.uri, message)
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.MarkerHelper.markFile(this.getUri(), message)"
+			extern fr::irisa::triskell::kermeta::runtime::MarkerHelper.markFile(self.uri, message)
 		end	
 		
 	end
 	
 	operation clean() is do
 	
-		// stdio.writeln("Cleaning file " + self.uri)
 		// extern call
 		do
-			@compiledJavaExtern "fr.irisa.triskell.kermeta.runtime.io.MarkerTest.markFile(self.uri, message)"
-			extern fr::irisa::triskell::kermeta::runtime::io::MarkerTest.cleanFile(self.uri)
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.MarkerHelper.cleanFile(this.getUri())"
+			extern fr::irisa::triskell::kermeta::runtime::MarkerHelper.cleanFile(self.uri)
 		end
+		
 	end
 }
 
-
-/*
-
-class Main
-{
-	operation main() : Void is do 
-		// TODO: implement 'main' operation
-	end
-}
-*/

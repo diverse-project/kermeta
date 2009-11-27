@@ -10,9 +10,6 @@ package kermeta::exceptions;
 
 
 require "../Standard.kmt"
-//require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/visitor/prettyprinters/kmtPrettyPrinter.kmt"
-
-//require "../persistence/persistence_aspect.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -34,7 +31,8 @@ class ConstraintsDiagnostic
 	end
 	
 	/* Prints the content */
-	/* operation prettyPrint() : Void is do
+	operation prettyPrint() : Void is do
+		
 		//stdio.writeln("Number of violated constraints : " + setConstraints.size.toString)
 	
 		//Clean the markers on the associated resources
@@ -42,10 +40,11 @@ class ConstraintsDiagnostic
 					  .asSet
 					  .each{resource|resource.clean}
 					  
-	
+		//Add a marker for each violated constraints 
 		setConstraints.each{c|
-			//stdio.writeln("exceptions_aspect : " + c.message + " /exceptions_aspect" +c.failedConstraint.body.toString)
-			c.constraintAppliedTo.containingResource.asType(EMFResource).mark(c.message)
+			var resource : EMFResource init c.constraintAppliedTo.containingResource().asType(EMFResource)
+			stdio.writeln(c.message + " in file " + resource.uri)
+			resource.mark(c.message)
 		}
-	end */
+	end
 }
