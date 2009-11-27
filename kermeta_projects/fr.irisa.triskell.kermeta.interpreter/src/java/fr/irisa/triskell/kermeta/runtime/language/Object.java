@@ -108,6 +108,7 @@ public class Object {
 	     
 	     java.lang.String message = "";
 	     List<Constraint> invariants = KermetaModelHelper.ClassDefinition.getAllInvariants( classDef );
+	     
 	     for (Constraint c : invariants ) {
 	    	 if ( ! checkConstraint(c.getBody(), classDef, self) ) {
 	    		 RuntimeMemory memory = self.getFactory().getMemory();
@@ -154,7 +155,7 @@ public class Object {
 		Constraint inv = (Constraint) invariant.getKCoreObject();
 	     
 		java.lang.String message = "";
-		if ( checkConstraint(inv.getBody(), classDef, self)) {
+		if ( ! checkConstraint(inv.getBody(), classDef, self)) {
 			RuntimeMemory memory = self.getFactory().getMemory();
 			message += "Invariant " + inv.getName() + " of class " + classDef.getName() + " violated";
 			KermetaRaisedException kre = KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
@@ -227,6 +228,7 @@ public class Object {
 	}
 	
 	protected static boolean checkConstraint(Expression exp, ClassDefinition classDef, RuntimeObject obj) {
+		
 		DynamicExpressionUnit deu = new DynamicExpressionUnit(exp);
 		ExpressionInterpreter interp = obj.getFactory().getMemory().getInterpreter().getBasicInterpreter();
 		ExpressionCallFrame ecf = new ExpressionCallFrame(interp.getInterpreterContext(), deu, obj, true);
