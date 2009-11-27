@@ -9,14 +9,11 @@ import fr.irisa.triskell.kermeta.compilo.scala.loader._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor.impl._
 import java.util.concurrent.TimeUnit
-import org.slf4j.{Logger,LoggerFactory}
 
-class Compiler extends RichAspectImplicit {
-	
-	val log = LoggerFactory.getLogger(this.getClass())
+class Compiler extends RichAspectImplicit with LogAspect {
 	
 	def compile(url : String){
-		log.info("Cleaning Output Step")
+		log.debug("Cleaning Output Step")
 		Util.cleanFolder(GlobalConfiguration.outputFolder)
 		/* Init Factory Step */
 		var t: LoadModelHelper = new LoadModelHelper()  ;

@@ -19,6 +19,8 @@ import fr.irisa.triskell.kermeta.compilo.scala.visitor.impl._
 
 object Main {
   def main(args : Array[String]) : Unit = {
+	  
+	  System.setProperty("fr.irisa.triskell", "5")
 	 
 	 // var t: LoadModelHelper = new LoadModelHelper()  ;
 	  
@@ -53,7 +55,8 @@ object Main {
 	   
 	  var compilo = new Compiler
 	  //compilo.compile("../compilerv2_test/tests/010_testLoop.main.km")
-	  compilo.compile("../compilerv2_test/tests/006_testClosure.km")
+	  //compilo.compile("../compilerv2_test/tests/006_testClosure.km")
+	  compilo.compile("../compilerv2_test/testReflection/kermeta/reflection.km")
 	  //compilo.compile("../compilerv2_test/testEcore/012_TypeFromEcore.km")
 	  //compilo.compile("../compilerv2_test/testEcore/013_LoadEcore.km")
 	  //compilo.compile("../compilerv2_test/tests/013_testString.main.km"); 

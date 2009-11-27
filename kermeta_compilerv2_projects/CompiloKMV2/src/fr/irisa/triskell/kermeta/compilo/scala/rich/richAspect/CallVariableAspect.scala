@@ -8,10 +8,11 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait CallVariableAspect extends RichAspectImplicit with ObjectAspect {
+trait CallVariableAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		res.append(this.getName())
+		log.debug("CallVariable Generation {}",this.getName())
+		res.append(Util.protectScalaKeyword(this.getName()))
 	}
 
 }

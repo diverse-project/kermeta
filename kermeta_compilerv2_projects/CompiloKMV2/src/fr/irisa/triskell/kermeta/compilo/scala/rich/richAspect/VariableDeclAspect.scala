@@ -13,12 +13,12 @@ trait VariableDeclAspect extends RichAspectImplicit with ObjectAspect {
 	
 	override def generateScalaCode(res : StringBuilder) = {
 		res.append("var ")
-		res.append(this.getIdentifier)
+		res.append(Util.protectScalaKeyword(this.getIdentifier))
 		res.append(" : ")
 		this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
 		res.append(" = ")
 		if (this.getInitialization !=  null){	
-			this.getInitialization().asInstanceOf[ObjectAspect].generateScalaCode(res)
+			this.getInitialization().generateScalaCode(res)
 		}else{ 
 			res.append("null")
 		}

@@ -8,7 +8,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait PropertyAspect extends RichAspectImplicit with ObjectAspect {
+trait PropertyAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 	
 	
 override def generateScalaCode(res : StringBuilder) : Unit = {
@@ -39,7 +39,7 @@ override def generateScalaCode(res : StringBuilder) : Unit = {
 	  
 def generateAttribute(res : StringBuilder) : Unit ={
 	res.append("var ")
-	res.append(this.getName())
+	res.append(Util.protectScalaKeyword(this.getName()))
 	res.append(" : ")
 	if (this.getUpper>1){
 			if (this.isIsOrdered){
@@ -65,7 +65,7 @@ def generateAttribute(res : StringBuilder) : Unit ={
 	res.append(this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size) + "()")
 	res.append(" : ")
 	getListorType(res)
-	res.append("={this." + this.getName + "}")
+	res.append("={this." + Util.protectScalaKeyword(this.getName()) + "}")
 
 	
 	res.append("\n")
@@ -95,7 +95,7 @@ def generateAttribute(res : StringBuilder) : Unit ={
 			res.append("def set")
 			res.append(this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size)+"(arg:")
 			getListorType(res)
-			res.append(")={ this." + this.getName + " = arg}")
+			res.append(")={ this." + Util.protectScalaKeyword(this.getName()) + " = arg}")
 			res.append("\n")
 		}
 	}

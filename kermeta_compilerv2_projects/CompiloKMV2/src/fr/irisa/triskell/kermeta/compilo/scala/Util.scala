@@ -16,9 +16,7 @@ import scala.collection.JavaConversions._
 import java.util.concurrent.Executors
 import java.util.concurrent.ExecutorService
  
-object Util  {
-
-	
+object Util extends LogAspect  {
 	/**
 	 * Check if a model element has an Ecore Tag
 	 * @param obj model element to test
@@ -63,9 +61,20 @@ object Util  {
 			}
 			f.delete()
 		} else {
-			println("Cleaning : folder not exist")
+			log.debug("Cleaning : folder : {} ,not exist",f.getName())
 		}
 	}
+	
+	var keywords = scala.List("implicit","match","requires","type","var","abtrsact","do","finally","import","object","throw","val","case","else","for","lazy","override","return","trait","catch","extends","forSome","match","package","sealed","try","while","class","false","if","new","private","super","true","with","def","final","implicit","null","protected","this","yield","_",":","=","=>","<-","<:","<%",">:","#","@")
+	def protectScalaKeyword(value : String) : String = {
+		var returnString : String = value
+		if(keywords.exists(p => p.equals(value))){
+			returnString = "`"+value+"`"
+			log.debug("Reserved Scala Keyword : {}, backquote protection : ",value)
+		} 
+		returnString
+	}
+	
    
    /**
     * Global Compiler Thread Executor 

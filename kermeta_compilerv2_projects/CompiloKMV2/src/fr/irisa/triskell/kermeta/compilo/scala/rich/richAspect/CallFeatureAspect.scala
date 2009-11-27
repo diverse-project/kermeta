@@ -8,10 +8,11 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect {
+trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect with LogAspect {
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		if ("new".equals(this.getName)){
+		log.debug("CallFeature Generation {}",this.getName())
+		if ("new".equals(this.getName)){ /* Cas Constructeur */
 			if (this.getTarget!=null){
 				var ty : TypeDefinition =this.getTarget.asInstanceOf[TypeLiteral].getTyperef().getType().asInstanceOf[ParameterizedType].getTypeDefinition()
 				res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
@@ -27,20 +28,22 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect {
 					res.append("]")	
 					
 				}
-				//this.getTarget().generateScalaCode(res)
-//				res append "()"
 			} 
-		} else {
+		} else { /* Cas Nominal */
 			if (this.getTarget!=null){
 				this.getTarget().generateScalaCode(res)
 				res append "."
 			}
+			/* GENERATE CALL */
 			if (this.getStaticProperty!=null){
+				var TargetType : StringBuilder = new StringBuilder
+				this.getTarget().getStaticType().generateScalaCode(TargetType)
 				//res append "get"+this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size) +"()"
-				res.append(GlobalConfiguration.scalaPrefix+this.getName)
-			} else {  
-				println("pass encore par la " + this.getName)
-				res.append(kermeta.utils.TypeEquivalence.getMethodEquivalence("String", this.getName))
+				res.append(GlobalConfiguration.scalaPrefix+kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName))
+			} else {
+				var subs : StringBuilder = new StringBuilder
+				this.getTarget().getStaticType().generateScalaCode(subs)
+				res.append(kermeta.utils.TypeEquivalence.getMethodEquivalence(subs.toString(), this.getName))
 			}
 			if (this.getStaticOperation!=null){
          	  res append "(" 
@@ -59,58 +62,4 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect {
 		}
 	}
 	
-	
-	/*
-override def generateVisitor(tabsString 	: String) : String = { 
-				  var returnString : String = "";
-		
-      if ("new".equals(this.getName))
-    		  {
-    	  		returnString = returnString+ " "+this.getName + " "
-         		 if (this.getTarget!=null)
-         			 returnString = returnString+this.getTarget.generateVisitor(tabsString)
-         			 returnString = returnString+ " ()"
-    		  }
-        else{
-        		var point : String  ="" 
-        		if (this.getTarget!=null){
-         			 	returnString = returnString+ this.getTarget.generateVisitor(tabsString)+"."
-        		}
-          
-          if (this.getStaticProperty!=null){
-         	returnString = returnString+point + "get"+this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size) +"()"
-         	  
-         	}else{
-         	returnString = returnString+point + this.getName
-          }
-         	
-         	
-          
-          	
-         	if (this.getStaticOperation!=null){
-         	  returnString = returnString+"("
-         	  
-         	}
-          
-         	returnString = returnString+point
-         	Util.concreteClass.push(true)
-        	Util.concreteClass.pop()	
-        	var i : Int = 1
-         	this.getParameters.foreach(e=> {returnString = returnString+e.generateVisitor(tabsString); 
-                                           if (i< this.getParameters.size()){
-                                             returnString = returnString+", ";
-                                           }
-                                           i=i+1;})
-          	
-         	if (this.getStaticOperation!=null){
-         	  returnString = returnString+")"
-         	  
-         	}
-
-          
-          }//value
-//			returnString = returnString+value.getParameters.foreach(par=> par.generateVisitor(tabsString))	
-//    	 returnString = returnString+ ")"
-    	 return returnString;
-	}  */
 }

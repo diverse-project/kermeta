@@ -12,7 +12,7 @@ trait CallExpressionAspect extends RichAspectImplicit with ObjectAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append(".")
-		res.append(this.getName())
+		res.append(Util.protectScalaKeyword(this.getName()))
 		res.append("(")
 		this.getParameters().foreach(par=> par.generateScalaCode(res))
 		res.append(")")
