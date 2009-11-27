@@ -892,6 +892,69 @@ public class ObjectUtil {
 		
 	}
 	
+	public static void checkInvariant(kermeta.language.structure.Object self,
+			  kermeta.language.structure.Object invariant) {
+
+		kermeta.language.structure.ClassDefinition self_cd = (kermeta.language.structure.ClassDefinition) ObjectUtil.getMetaClass(self).getTypeDefinition();
+		ClassDefinition invariant_cd = (kermeta.language.structure.ClassDefinition) ObjectUtil.getMetaClass(invariant).getTypeDefinition();
+
+		String  class_name = ((kermeta.language.structure.Package) self_cd.eContainer()).qualifiedName().replace("::", ".")
+		+ ".helper."
+		 + self_cd.getName()
+		+ "Invariant";
+		
+		try {
+			java.lang.Class<?> current_class = ObjectUtil.class.getClassLoader().loadClass(class_name);
+			
+			for(Method method : current_class.getDeclaredMethods()) {
+				if(self==null) {
+					System.out.println("NULL !!!");
+				}
+				
+				//System.out.println(" method : " + method.getName());
+				
+				java.lang.Boolean check_result = (java.lang.Boolean) method.invoke(current_class, new Object[] {self});
+				
+				if( !check_result ) {
+					//System.out.println("The invariant " + method.getName().replace("checkInvariant_", "") + " on " + ObjectUtil.toString(self) + " is KO");
+					
+					java.lang.String message = "";
+					message += "Invariant " + method.getName().replace("checkInvariant_", "") + " of class " + self_cd.getName() + " violated";
+					
+					//ConstraintViolatedException cve = new ConstraintViolatedExceptionImpl();
+					ConstraintViolatedInv cve = ExceptionsFactory.eINSTANCE.createConstraintViolatedInv();
+					
+					cve.setMessage(message);
+					cve.setConstraintAppliedTo(self);
+					cve.setFailedConstraint((kermeta.language.structure.Constraint)invariant);
+					
+					throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(cve);
+					//throw cve;
+					
+					
+				} else {
+					//System.out.println("The invariant " + method.getName().replace("checkInvariant_", "") + " on " + ObjectUtil.toString(self) + " is OK");
+				}
+			
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
+	
 	private static List<String> checkInvariant(kermeta.language.structure.Object self, kermeta.language.structure.ClassDefinition current_cd, List<String> results) {
 		
 		String  class_name = ((kermeta.language.structure.Package) current_cd.eContainer()).qualifiedName().replace("::", ".")
