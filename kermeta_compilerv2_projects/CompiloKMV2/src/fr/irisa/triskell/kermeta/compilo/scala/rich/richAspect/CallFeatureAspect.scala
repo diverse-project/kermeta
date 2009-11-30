@@ -38,6 +38,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 			if (this.getStaticProperty!=null){
 				var TargetType : StringBuilder = new StringBuilder
 				this.getTarget().getStaticType().generateScalaCode(TargetType)
+				println ("passe par là 2 " + this.getName())
 				//res append "get"+this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size) +"()"
 				res.append(GlobalConfiguration.scalaPrefix+kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName))
 			} else {

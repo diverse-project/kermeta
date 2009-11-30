@@ -13,10 +13,14 @@ trait TypeLiteralAspect extends RichAspectImplicit with ObjectAspect {
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		if (this.getTyperef.getType.isInstanceOf[ParameterizedType]){
-				if (Util.hasEcoreTag(this.getTyperef.getType.asInstanceOf[ParameterizedType].getTypeDefinition)){ 
-			res.append(this.getTyperef.getType.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].eContainer.asInstanceOf[Package].getQualifiedName)
-			res.append(".km")
-   		}}
+			if (Util.hasEcoreTag(this.getTyperef.getType.asInstanceOf[ParameterizedType].getTypeDefinition)){ 
+				res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(
+						this.getTyperef.getType.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].eContainer.asInstanceOf[Package].getQualifiedName))
+								res.append(".")
+
+			}
+		}
+
 		res.append(this.getTyperef.getName)
 	}
 

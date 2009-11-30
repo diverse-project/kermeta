@@ -69,7 +69,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 						initForEcorePackage(e.getNestingPackage().getQualifiedName(), e.getName()))}
 			}
 		}
-		res.append(packageName)
+		res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(packageName))
 		
 		if (packages.filter{e=>  e.getQualifiedName().equals(packageName)}.size==1)
 			{
