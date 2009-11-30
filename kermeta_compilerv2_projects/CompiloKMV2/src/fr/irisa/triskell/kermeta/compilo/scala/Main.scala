@@ -17,10 +17,32 @@ import fr.irisa.triskell.kermeta.compilo.scala.loader._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor.impl._
 
-object Main {
+object Main extends LogAspect {
   def main(args : Array[String]) : Unit = {
 	  
-	  System.setProperty("fr.irisa.triskell", "5")
+	  var inputFile : String = ""
+	 	  
+	 	  for(a <- args){
+	 	 	  log.debug("Param : "+a)
+	 	  }
+	  
+
+	  for (i <- 0 until args.length) args(i).replaceAll("\"", "").trim() match {
+	 	  case "-help" | "-h" => println("Usage: scala Main [-help|-input INPUTFILE]")
+	 	  case "-input" | "-i" => { 
+	 	 	  var nextI : Int = i + 1
+	 	 	  if(nextI < args.length){ 
+	 	 	 	  inputFile = args(nextI).replaceAll("\"", "").trim()
+	 	 	 	  log.debug("Input File : {}",inputFile)
+	 	 	  } else {
+	 	 	 	  log.warn("Parameter Error")
+	 	 	  }
+	 	  }
+	 	  case _ =>
+	   }
+	  
+	  
+	 // System.setProperty("fr.irisa.triskell", "5")
 	 
 	 // var t: LoadModelHelper = new LoadModelHelper()  ;
 	  
@@ -54,10 +76,17 @@ object Main {
 	    */ 
 	   
 	  var compilo = new Compiler
+	  
+	  //inputFile = "../compilerv2_test/testReflection/kermeta/reflection.km"
+	  
 	  //compilo.compile("../compilerv2_test/tests/010_testLoop.main.km")
 
 	  //compilo.compile("../compilerv2_test/tests/006_testClosure.km")
-	  compilo.compile("../compilerv2_test/testReflection/kermeta/reflection.km")
+	  if(inputFile != ""){
+		  compilo.compile(inputFile)
+	  } else {
+	 	  log.warn("No Input File Found ! ")
+	  }
 
 	  //compilo.compile("../compilerv2_test/testEcore/012_TypeFromEcore.km")
 	  //compilo.compile("../compilerv2_test/testEcore/013_LoadEcore.km")

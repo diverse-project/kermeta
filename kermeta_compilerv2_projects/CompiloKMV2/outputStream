@@ -1,0 +1,221 @@
+0    [main] DEBUG fr.irisa.triskell.kermeta.compilo.scala.Compiler  - Cleaning Output Step
+2039 [main] INFO  fr.irisa.triskell.kermeta.compilo.scala.Compiler  - Loading KM model step complete in 1517 millisecondes 
+2129 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation new
+2129 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation createResource
+2129 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation rep
+2131 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation uri
+2132 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation add
+2132 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation res
+2132 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation root
+2132 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation save
+2132 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation res
+2132 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation detect
+2132 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation eAnnotations
+2132 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation aModelElement
+2133 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation equals
+2133 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation source
+2133 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation annot
+2134 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation source
+2134 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation isVoid
+2134 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation theAnnotation
+2134 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation theAnnotation
+2134 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation new
+2134 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation source
+2134 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation theAnnotation
+2134 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation source
+2134 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation add
+2134 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation eAnnotations
+2134 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation aModelElement
+2135 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation theAnnotation
+2135 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation new
+2135 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation key
+2135 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation detail
+2135 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation detailKey
+2135 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation value
+2135 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation detail
+2135 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation detailValue
+2135 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation add
+2135 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation details
+2135 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation theAnnotation
+2136 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation detail
+2136 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation new
+2136 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation getResource
+2136 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation rep
+2136 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation uri
+2136 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation load
+2136 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation res
+2136 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation one
+2136 [pool-1-thread-4] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation res
+ecore
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+ecore
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+ecore
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+2145 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation each
+2145 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation select
+2145 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation select
+2145 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation allAttribute
+2145 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation classDefinition
+2145 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation getMetaClass
+2145 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation not
+2145 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation isDerived
+2145 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation p
+2145 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation equals
+2145 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation name
+2145 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation p
+2146 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation writeln
+2146 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation stdio
+2146 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation plus
+2146 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation name
+2146 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation p
+2146 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation set
+2146 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation p
+2146 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation each
+2146 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation select
+2146 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation allAttribute
+2146 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation classDefinition
+2146 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation getMetaClass
+2147 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation not
+2147 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation isDerived
+2147 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation p
+2147 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation writeln
+2147 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation stdio
+2147 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation plus
+2147 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation plus
+2147 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation plus
+2147 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation name
+2147 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation p
+2147 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation toString
+2147 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation get
+2148 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation p
+ecore
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EJavaClass
+pass par primitive type EJavaClass
+pass par primitive type EJavaObject
+pass par primitive type EJavaObject
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+ecore
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+ecore
+ecore
+pass par primitive type EInt
+pass par primitive type EInt
+pass par primitive type EInt
+pass par primitive type EEnumerator
+pass par primitive type EEnumerator
+pass par primitive type EEnumerator
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+ecore
+ecore
+ecore
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+ecore
+ecore
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+ecore
+ecore
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+ecore
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EJavaObject
+pass par primitive type EJavaObject
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+ecore
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EInt
+pass par primitive type EInt
+pass par primitive type EInt
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EBoolean
+pass par primitive type EInt
+pass par primitive type EInt
+pass par primitive type EInt
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+pass par primitive type EString
+ecore
+ecore
+2165 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation loadModel
+2165 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation new
+2165 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation c
+2165 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation one
+2165 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation select
+2165 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation eClassifiers
+2165 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation p
+2165 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation isKindOf
+2165 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation c
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation writeln
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation stdio
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation name
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation c
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation testGetReflection
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation c
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation testSetReflection
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation c
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation saveModel
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation new
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation p
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation writeln
+2166 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation stdio
+2167 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.CallFeatureView  - CallFeature Generation name
+2167 [pool-1-thread-2] DEBUG fr.irisa.triskell.kermeta.compilo.scala.rich.RichBehaviorFactoryImpl$$anon$2  - CallVariable Generation c
+2168 [main] INFO  fr.irisa.triskell.kermeta.compilo.scala.Compiler  - Compilation step complete in 127 millisecondes 

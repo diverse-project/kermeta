@@ -54,9 +54,11 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 		var className :String=mainClass.substring(mainClass.lastIndexOf("::")+2).replace("::", ".")
 		//TODO gérer le cas des package venant d'ecore
 		var res :StringBuilder= new StringBuilder
-		res.append("package runner \n" +
-		"object MainRunner  extends fr.irisa.triskell.scala.generated.fw.ImplicitConversion{\n" +
+		res.append("package runner \n")
+		res.append("import java.io.PrintStream\n")
+		res.append("object MainRunner  extends fr.irisa.triskell.scala.generated.fw.ImplicitConversion{\n" +
 		"def main(args : Array[String]) : Unit = {\n\t" )
+		res.append("System.setOut(new PrintStream(\"outputStream\"));\n")
 		res.append("kermeta.persistence.EcorePackages.workspaceURI = \"" + GlobalConfiguration.workspaceURI + "\"\n")
 		res.append("kermeta.persistence.EcorePackages.pluginURI = \"" + GlobalConfiguration.pluginURI+ "\"\n")
 		packages.foreach{e=> if (!(e.getQualifiedName.startsWith("kermeta")|| e.getQualifiedName.startsWith("language")))
