@@ -17,7 +17,7 @@ object GlobalConfiguration {
 	final var implicitConvTraitName : String = "ImplicitConversion"
 	final var viewDefTraitName : String = "ViewType"
 	final var factoryName : String = "RichFactory"
-	final var outputFolder : String = "../outputScala/src"
+	final var outputFolder : String = "../fr.irisa.triskell.kermeta.scala.compilo.output/src"
 	final var scalaPrefix : String = "Scala"
 	final var workspaceURI : String = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/"
 	//final var workspaceURI : String = "/home/barais/workspaces/kermetaCompilerRuntime2/"

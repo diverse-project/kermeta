@@ -91,7 +91,7 @@ object Main extends LogAspect {
 	  //compilo.compile("../compilerv2_test/testEcore/012_TypeFromEcore.km")
 	  //compilo.compile("../compilerv2_test/testEcore/013_LoadEcore.km")
 	  //compilo.compile("../compilerv2_test/tests/013_testString.main.km"); 
-	  compilo.compile("../compilerv2_test/testReflection/kermeta/reflection.km")
+	  //compilo.compile("../compilerv2_test/testReflection/kermeta/reflection.km")
 	  
   }
 }
