@@ -24,9 +24,35 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>fr.irisa.triskell</groupId>
+			<artifactId>kermeta.compilo.scala</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+
+			<exclusions>
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.jms</groupId>
+					<artifactId>jms</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions>
+
+		</dependency>
 	</dependencies>
 	<properties>
-  	<maven.compile.source>1.6</maven.compile.source>
+		<maven.compile.source>1.6</maven.compile.source>
 		<maven.compile.target>1.6</maven.compile.target>
 	</properties>
 </project>
