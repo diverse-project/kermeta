@@ -28,10 +28,11 @@ public class TestCompiloCases extends TestCase {
 		compilingCommand.append("\"-i|"+tescase+".km\"");
 		System.out.println("Maven Task Compiling  = "+compilingCommand.toString());
 		ExternRunner.launch(compilingCommand.toString());
+		
 		/* Step 2 Compiled Software */
 		StringBuilder runningCommand = new StringBuilder();
 		runningCommand.append("mvn clean scala:compile scala:run -B ");
-		runningCommand.append("--file "+baseDirectory+"outputScala/pom.xml");
+		runningCommand.append("--file "+baseDirectory+"fr.irisa.triskell.kermeta.scala.compilo.output/pom.xml");
 		System.out.println("Maven Task Executing = "+runningCommand.toString());
 		ExternRunner.launch(runningCommand.toString());
 	
@@ -49,17 +50,22 @@ public class TestCompiloCases extends TestCase {
 		}
 	}
 	
+	
+	
 	@Test
 	public void test000() {
-		process(baseDirectory+"compilerv2_test/tests/000HelloWorld");
+		process(this.getClass().getResource("/tests").getPath()+"/000HelloWorld");
 	}
+	
 	@Test
 	public void test001() {
-		process(baseDirectory+"compilerv2_test/tests/001testAssignement");
+		process(this.getClass().getResource("/tests").getPath()+"/001testAssignement");
+		//process(baseDirectory+"fr.irisa.triskell.kermeta.scala.compilo.test/tests/001testAssignement");
 	}
 	@Test
 	public void test001_2() {
-		process(baseDirectory+"compilerv2_test/tests/001testAssignement2");
+		process(this.getClass().getResource("/tests").getPath()+"/001testAssignement2");
+		//process(baseDirectory+"fr.irisa.triskell.kermeta.scala.compilo.test/tests/001testAssignement2");
 	}	
 	
 	
