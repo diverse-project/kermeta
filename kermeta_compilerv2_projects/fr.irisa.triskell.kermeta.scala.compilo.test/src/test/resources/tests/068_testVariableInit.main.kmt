@@ -1,0 +1,82 @@
+/* $Id: 068_testVariableInit.main.kmt,v 1.3 2008-02-20 17:29:48 dvojtise Exp $
+ * Creation date: August 23, 2007
+ * License:	EPL
+ * Copyright:
+ * Authors:
+ *     Didier Vojtisek
+ */
+@mainClass "testVariableInit::TestVariableInitialization"
+@mainOperation "main"
+
+package testVariableInit;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::kunit
+
+
+/**
+ * checks various use of the variable init
+ */
+class TestVariableInitialization inherits kermeta::kunit::TestCase {
+
+	operation main() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(TestVariableInitialization)
+		tr.printTestResult
+	end
+	
+	operation testSimpleInit() : Boolean is do
+		var aA0 : A init B.new		
+		assert(aA0.initialized.isVoid)
+		aA0.initialize
+		assert(not aA0.initialized.isVoid)
+		assert(aA0.isInitialized)
+		
+		var aA1 : A init B.new.initialize
+		assert(not aA1.initialized.isVoid)
+		assert(aA1.isInitialized)
+		
+		
+		var aB0 : B init B.new
+		assert(aB0.initialized.isVoid)
+		aB0.initialize
+		assert(not aB0.initialized.isVoid)
+		assert(aB0.isInitialized)
+		
+		// var aB1 : B init B.new.initialize //  not legal since the init doesn't accept ?=
+		// assert(not aB1.initialized.isVoid)
+		result := void
+	end
+}
+
+abstract class A {
+	attribute initialized : kermeta::standard::Boolean 
+	operation initialize() : A is abstract
+	
+	operation isInitialized() : kermeta::standard::Boolean is do
+		result := not initialized.isVoid
+	end
+}
+
+class B inherits A {
+	attribute initialized2 : kermeta::standard::Boolean 
+	
+	method initialize() : A is do
+		initialized := true
+		initialized2 := true
+		result := self
+	end
+	operation initialize2() : B is do
+		initialized := true
+		initialized2 := true
+		result := self
+	end
+	
+	method isInitialized() : kermeta::standard::Boolean is do
+		result := (not initialized.isVoid) and (not initialized2.isVoid) 
+	end
+}
+

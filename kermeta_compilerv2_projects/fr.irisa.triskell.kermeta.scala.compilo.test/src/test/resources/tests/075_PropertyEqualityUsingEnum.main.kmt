@@ -1,0 +1,88 @@
+/* $Id: 075_PropertyEqualityUsingEnum.main.kmt,v 1.1 2008-06-03 13:40:54 cfaucher Exp $ 
+ * Creation : June 3, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ *
+ * For the moment, we are testing only the Attribute that remains the Reference and Property
+ *
+ */
+@mainClass "PropertyEqualityUsingEnum::Main"
+@mainOperation "main"
+
+package PropertyEqualityUsingEnum;
+
+require kermeta
+
+using kermeta::kunit
+
+class A {
+	attribute enumTest : EnumTest[0..*]
+}
+
+enumeration EnumTest {
+	a;
+	b;
+	c;
+}
+
+class Main inherits TestCase
+{
+	operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+	
+	operation testCase1() : Void is do
+		//1rst case
+		var a1 : A init A.new
+		a1.enumTest.add(EnumTest.a)
+	
+		var a2 : A init A.new
+		a2.enumTest.add(EnumTest.a)
+		
+		assert(a1.enumTest == a2.enumTest)
+	end
+	
+	operation testCase2() : Void is do
+		//2nd case
+		var a3 : A init A.new
+		a3.enumTest.add(EnumTest.a)
+		a3.enumTest.add(EnumTest.b)
+		
+		var a4 : A init A.new
+		a4.enumTest.add(EnumTest.a)
+		a4.enumTest.add(EnumTest.b)
+		
+		assert(a3.enumTest == a4.enumTest)
+	end
+		
+	operation testCase3() : Void is do
+		//3rd case
+		var a5 : A init A.new
+		a5.enumTest.add(EnumTest.a)
+		a5.enumTest.add(EnumTest.b)
+		
+		var a6 : A init A.new
+		a6.enumTest.add(EnumTest.a)
+		a6.enumTest.add(EnumTest.c)
+		
+		assertFalse(a5.enumTest == a6.enumTest)
+	end
+		
+	operation testCase4() : Void is do
+		//4th case
+		var a7 : A init A.new
+		a7.enumTest.add(EnumTest.a)
+		a7.enumTest.add(EnumTest.b)
+		
+		var a8 : A init A.new
+		a8.enumTest.add(EnumTest.c)
+		a8.enumTest.add(EnumTest.b)
+		
+		assertFalse(a7.enumTest == a8.enumTest)
+	end
+
+}

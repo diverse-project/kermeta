@@ -1,0 +1,31 @@
+ hop  7
+ hop  7
+hello 0
+hello 1
+hello 2
+5040
+7
+testOutsideScopeAttribute   7
+tototestLambdaWithoutParam
+
+---------------------------------------------  TEST RESULTS-----------------------------------------------
+
+
+Failures: 
+
+   TestLambda.testLambdaWithoutParam3() assertion number 1 failed: function f not called !
+stack trace:
+<void>
+
+   TestLambda.testLambdaWithoutParam2() assertion number 1 failed: function f() not called !
+stack trace:
+<void>
+
+ Summary: 
+   Number of launched tests : 24
+   Number of failures : 2
+   Number of errors : 0
+   Number of errors in setUp or tearDown: 0
+
+-------------------------------------------------------------------------------------------------------------------------------
+
