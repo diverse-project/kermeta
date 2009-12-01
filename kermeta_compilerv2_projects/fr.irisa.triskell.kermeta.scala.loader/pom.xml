@@ -11,6 +11,12 @@
 			<name>Irisa Tipimouss Nexus ThirdParty</name>
 			<url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/thirdparty</url>
 		</repository>
+		
+		<repository>
+			<id>triskellPublic</id>
+			<url>http://tipimouss.irisa.fr:8081/nexus/content/groups/public</url>
+		</repository>
+		
 	</repositories>
 
 
@@ -64,5 +70,12 @@
 		<dependencies>
 		</dependencies>
 	</dependencyManagement>
+
+<distributionManagement>
+  <snapshotRepository>
+    <id>nexus</id>
+    <url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/snapshots</url>
+  </snapshotRepository>
+</distributionManagement>
 
 </project>
