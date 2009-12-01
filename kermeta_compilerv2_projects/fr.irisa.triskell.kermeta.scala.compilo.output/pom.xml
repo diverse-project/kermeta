@@ -102,8 +102,8 @@
 			<groupId>fr.irisa.triskell</groupId>
 			<artifactId>kermeta.scala.genmodel</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>/Users/ffouquet/Desktop/GenModelPoc.jar</systemPath>
+			<scope>compile</scope>
+			<!-- <systemPath>/Users/ffouquet/Desktop/GenModelPoc.jar</systemPath> -->
 		</dependency>
 	</dependencies>
 
