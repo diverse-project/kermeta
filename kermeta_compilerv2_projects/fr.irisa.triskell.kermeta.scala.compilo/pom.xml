@@ -18,6 +18,10 @@
 			<name>Scala-tools Maven2 Repository</name>
 			<url>http://scala-tools.org/repo-releases</url>
 		</repository>
+		<repository>
+			<id>triskellPublic</id>
+			<url>http://tipimouss.irisa.fr:8081/nexus/content/groups/public</url>
+		</repository>
 
 
 	</repositories>
@@ -145,5 +149,12 @@
 		</dependency>
 	</dependencies>
 
+
+<distributionManagement>
+  <snapshotRepository>
+    <id>nexus</id>
+    <url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/snapshots</url>
+  </snapshotRepository>
+</distributionManagement>
 
 </project>
