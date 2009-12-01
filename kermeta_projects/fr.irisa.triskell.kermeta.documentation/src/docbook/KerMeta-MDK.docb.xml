@@ -158,6 +158,12 @@
           			This file offers some operations to calculate elapsed time.
         		</listitem>
       		</varlistentry>
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/utils/Properties.kmt"</filename></emphasis></term>
+        		<listitem>
+          			This file offers an operation to get properties as a Hashtable<String, String> from a Properties file.
+        		</listitem>
+      		</varlistentry>
 		</variablelist>
     </section>
   </chapter>
