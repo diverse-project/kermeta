@@ -4,6 +4,22 @@
 	<groupId>fr.irisa.triskell</groupId>
 	<artifactId>kermtea.scala.compilo.test</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
+	<repositories>
+		<repository>
+			<id>thirdparty</id>
+			<name>Irisa Tipimouss Nexus ThirdParty</name>
+			<url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/thirdparty</url>
+		</repository>
+		
+		<repository>
+			<id>triskellPublic</id>
+			<url>http://tipimouss.irisa.fr:8081/nexus/content/groups/public</url>
+		</repository>
+		
+	</repositories>
+	
+	
 	<build>
 		<plugins>
 			<plugin>
