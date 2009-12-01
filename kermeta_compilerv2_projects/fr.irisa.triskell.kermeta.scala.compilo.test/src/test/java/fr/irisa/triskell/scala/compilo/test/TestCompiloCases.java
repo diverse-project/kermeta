@@ -32,6 +32,10 @@ public class TestCompiloCases extends TestCase {
 		compilo.compile(testcase+".km");
 		
 		/* Step 2 Compiled Software */
+		File f = new File("outputStream");
+		if(f != null){
+			f.delete();
+		}
 		StringBuilder runningCommand = new StringBuilder();
 		runningCommand.append("mvn clean scala:compile scala:run -B ");
 		runningCommand.append("--file "+basePATH+"fr.irisa.triskell.kermeta.scala.compilo.output/pom.xml");
@@ -46,11 +50,13 @@ public class TestCompiloCases extends TestCase {
 			assertTrue(false);
 		}		
 		
-		File f = new File("outputStream");
+		f = new File("outputStream");
 		if(f != null){
 			f.delete();
 		}
 	}
+	
+	
 	
 	@Test
 	public void test000HelloWorld() {
@@ -80,10 +86,11 @@ public class TestCompiloCases extends TestCase {
 	public void test004_testOpOpCall() {
 		process(this.getClass().getResource("/tests").getPath()+"/004_testOpOpCall.main");
 	}
-	@Test
-	public void test005_testOpPkgCall() {
-		process(this.getClass().getResource("/tests").getPath()+"/005_testOpPkgCall.main");
-	}	
+	
+	 @Test
+	 public void test005_testOpPkgCall() {
+	 process(this.getClass().getResource("/tests").getPath()+"/005_testOpPkgCall.main");
+	 }	
 	
 	@Test
 	public void test006_testClosure() {
@@ -98,6 +105,61 @@ public class TestCompiloCases extends TestCase {
 	@Test
 	public void test011_testBenchmark() {
 		process(this.getClass().getResource("/tests").getPath()+"/011_testBenchmark.main");
+	}	
+
+	@Test
+	public void test013_testString() {
+		process(this.getClass().getResource("/tests").getPath()+"/013_testString.main");
+	}	
+	
+	@Test
+	public void test015_testAttributes() {
+		process(this.getClass().getResource("/tests").getPath()+"/015_testAttributes.main");
+	}	
+	
+	@Test
+	public void test016_testParametricClasses() {
+		process(this.getClass().getResource("/tests").getPath()+"/016_testParametricClasses.main");
+	}		
+
+	@Test
+	public void test017_testSuperFeaturesCalls() {
+		process(this.getClass().getResource("/tests").getPath()+"/017_testSuperFeaturesCalls.main");
+	}
+	
+	@Test
+	public void test018_testExceptions() {
+		process(this.getClass().getResource("/tests").getPath()+"/018_testExceptions.main");
+	}	
+	
+	@Test
+	public void test025simpleInvariant() {
+		process(this.getClass().getResource("/tests").getPath()+"/025simpleInvariant");
+	}
+	
+	@Test
+	public void test037_testLambda() {
+		process(this.getClass().getResource("/tests").getPath()+"/037_testLambda.main");
+	}	
+	
+	@Test
+	public void test068_testVariableInit() {
+		process(this.getClass().getResource("/tests").getPath()+"/068_testVariableInit.main");
+	}	
+	
+	@Test
+	public void test075_PropertyEqualityUsingEnum() {
+		process(this.getClass().getResource("/tests").getPath()+"/075_PropertyEqualityUsingEnum.main");
+	}
+	
+	@Test
+	public void test078_testAddVoidInReflectiveCollection() {
+		process(this.getClass().getResource("/tests").getPath()+"/078_testAddVoidInReflectiveCollection.main");
+	}
+	
+	@Test
+	public void test079_testIntegerComparison() {
+		process(this.getClass().getResource("/tests").getPath()+"/079_testIntegerComparison");
 	}	
 	
 	
