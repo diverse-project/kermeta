@@ -7,13 +7,21 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 
-trait AssignmentAspect extends RichAspectImplicit with ObjectAspect {
+trait AssignmentAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
+		log.debug("Assignment Generation")
+		
 		if (!this.isIsCast()){
 			this.getTarget().generateScalaCode(res)
 			res.append(" = ")
 			this.getValue().generateScalaCode(res)
+			
+			if(this.getValue().isInstanceOf[VoidLiteral]){
+				res.append(".asInstanceOf[")
+				this.getTarget.getStaticType.generateScalaCode(res)
+				res.append("]")
+			}
 		} else { 
 			this.getTarget().generateScalaCode(res)
 			res.append("=") 

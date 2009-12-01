@@ -42,9 +42,13 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 				//res append "get"+this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size) +"()"
 				res.append(GlobalConfiguration.scalaPrefix+kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName))
 			} else {
-				var subs : StringBuilder = new StringBuilder
-				this.getTarget().getStaticType().generateScalaCode(subs)
-				res.append(kermeta.utils.TypeEquivalence.getMethodEquivalence(subs.toString(), this.getName))
+				if(this.getTarget() != null){
+					var subs : StringBuilder = new StringBuilder
+					this.getTarget().getStaticType().generateScalaCode(subs)
+					res.append(kermeta.utils.TypeEquivalence.getMethodEquivalence(subs.toString(), this.getName))
+				} else {
+					res append this.getName()
+				}
 			}
 			if (this.getStaticOperation!=null){
          	  res append "(" 
