@@ -79,6 +79,6 @@ object Util extends LogAspect  {
    /**
     * Global Compiler Thread Executor 
     */
-   var threadExecutor : ExecutorService = Executors.newCachedThreadPool()
+   var threadExecutor : ExecutorService = null
    
 }

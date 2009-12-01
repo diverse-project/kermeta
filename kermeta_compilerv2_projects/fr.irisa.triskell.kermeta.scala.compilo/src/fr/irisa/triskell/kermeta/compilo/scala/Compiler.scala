@@ -9,6 +9,8 @@ import fr.irisa.triskell.kermeta.compilo.scala.loader._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor.impl._
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.Executors
+import java.util.concurrent.ExecutorService
 
 class Compiler extends RichAspectImplicit with LogAspect {
 	
@@ -19,6 +21,8 @@ class Compiler extends RichAspectImplicit with LogAspect {
 		var t: LoadModelHelper = new LoadModelHelper()  ;
 		BehaviorPackage.eINSTANCE.setEFactoryInstance(new RichBehaviorFactoryImpl())
 		StructurePackage.eINSTANCE.setEFactoryInstance(new RichStructureFactoryImpl())
+		Util.threadExecutor = Executors.newCachedThreadPool()
+		
 		/* Loading Model KM Step */
 		var startTime = System.currentTimeMillis
 		var v : ModelingUnit = t.loadKM(url) /* Load KM Model */
