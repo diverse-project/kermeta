@@ -91,6 +91,8 @@ class RichInteger(value: Int)  extends RichNumeric[Int] {
 	override def isLowerOrEqual(other : Int) :Boolean={return  value<=other}
 	def isLowerOrEqual(other : Integer) :Boolean={return  value<=other.intValue}
 	def toInt() : Int = {return value}
+	
+	def times(func : Int => Unit):Unit ={ for(i <- 0 until value){func(i)} }
 }
 
 
@@ -140,6 +142,7 @@ class RichString(value: java.lang.String)  extends RichValueType {
 			value.split(delimiter).foreach{e=>list.add(e)}
 			return list;
 	}
+
 } 
 class RichUnknownJavaObject  extends Object {
 	override def toString() :java.lang.String={return "toString of  UnknownJavaObject not implemented yet";
