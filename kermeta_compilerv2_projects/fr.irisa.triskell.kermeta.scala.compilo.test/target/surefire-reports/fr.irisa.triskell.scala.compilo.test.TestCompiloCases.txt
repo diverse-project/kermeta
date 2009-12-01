@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: fr.irisa.triskell.scala.compilo.test.TestCompiloCases
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 46.001 sec
