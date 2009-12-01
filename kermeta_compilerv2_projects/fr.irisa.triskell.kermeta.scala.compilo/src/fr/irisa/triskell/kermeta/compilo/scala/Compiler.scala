@@ -18,7 +18,7 @@ class Compiler extends RichAspectImplicit with LogAspect {
 		log.debug("Cleaning Output Step")
 		Util.cleanFolder(GlobalConfiguration.outputFolder)
 		/* Init Factory Step */
-		var t: LoadModelHelper = new LoadModelHelper()  ;
+		var t: LoadModelHelper = new LoadModelHelper()
 		BehaviorPackage.eINSTANCE.setEFactoryInstance(new RichBehaviorFactoryImpl())
 		StructurePackage.eINSTANCE.setEFactoryInstance(new RichStructureFactoryImpl())
 		Util.threadExecutor = Executors.newCachedThreadPool()
