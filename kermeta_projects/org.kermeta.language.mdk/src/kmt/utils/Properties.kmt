@@ -1,0 +1,29 @@
+/* $Id:$ 
+ * Creation : November 23, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cyril.faucher@gmail.com>
+ *
+ * Description:
+ 			Properties file support
+ *
+ */
+
+package kermeta::utils;
+
+require kermeta
+
+using kermeta::standard
+
+aspect class Properties {
+	
+	/**
+	 * Get the properties like a Hashtable<String, String>: keys are the keys from the property file
+	 */
+	operation getProperties(properties_file_path : String) : Hashtable<String, String> is do
+		result := Hashtable<String, String>.new()
+		@compiledJavaExtern "org.kermeta.language.mdk.externs.properties.Properties.getProperties(properties_file_path)"
+		result ?= extern org::kermeta::language::mdk::externs::properties::Properties.getProperties(self, properties_file_path)
+	end
+}
