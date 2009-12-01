@@ -53,19 +53,52 @@ public class TestCompiloCases extends TestCase {
 	}
 	
 	@Test
-	public void test000() {
+	public void test000HelloWorld() {
 		process(this.getClass().getResource("/tests").getPath()+"/000HelloWorld");
 	}
 	
 	@Test
-	public void test001() {
+	public void test001testAssignement() {
 		process(this.getClass().getResource("/tests").getPath()+"/001testAssignement");
 	}
 	
 	@Test
-	public void test001_2() {
+	public void test001testAssignement2() {
 		process(this.getClass().getResource("/tests").getPath()+"/001testAssignement2");
 	}
+
+	@Test
+	public void test002_testArithm() {
+		process(this.getClass().getResource("/tests").getPath()+"/002_testArithm.main");
+	}
+
+	@Test
+	public void test003_testOpCall() {
+		process(this.getClass().getResource("/tests").getPath()+"/003_testOpCall.main");
+	}
+	@Test
+	public void test004_testOpOpCall() {
+		process(this.getClass().getResource("/tests").getPath()+"/004_testOpOpCall.main");
+	}
+	@Test
+	public void test005_testOpPkgCall() {
+		process(this.getClass().getResource("/tests").getPath()+"/005_testOpPkgCall.main");
+	}	
+	
+	@Test
+	public void test006_testClosure() {
+		process(this.getClass().getResource("/tests").getPath()+"/006_testClosure");
+	}
+	
+	@Test
+	public void test010_testLoop() {
+		process(this.getClass().getResource("/tests").getPath()+"/010_testLoop.main");
+	}
+	
+	@Test
+	public void test011_testBenchmark() {
+		process(this.getClass().getResource("/tests").getPath()+"/011_testBenchmark.main");
+	}	
 	
 	
 }
