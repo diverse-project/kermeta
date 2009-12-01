@@ -16,6 +16,7 @@ import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
   
 trait RichAspectImplicit {
 	
+	
 	implicit def rich (xs : Assignment) = xs.asInstanceOf[AssignmentAspect]
     implicit def rich (xs : ModelingUnit) = xs.asInstanceOf[ModelingUnitAspect]
     implicit def rich (xs : Package) = xs.asInstanceOf[PackageAspect]
@@ -52,7 +53,11 @@ trait RichAspectImplicit {
     implicit def rich (xs : Using) = xs.asInstanceOf[UsingAspect]
     implicit def rich (xs : LambdaParameter) = xs.asInstanceOf[LambdaParameterAspect]
     implicit def rich (xs : fr.irisa.triskell.kermeta.language.structure.Object) = xs.asInstanceOf[ObjectAspect]
+	implicit def rich (xs : FunctionType) = xs.asInstanceOf[FunctionTypeAspect]
+	implicit def rich (xs : ProductType) = xs.asInstanceOf[ProductTypeAspect]
 
+	
+	
 	implicit def rich (xs : PackageAspect) = xs.asInstanceOf[Package]
     implicit def rich (xs : ModelingUnitAspect) = xs.asInstanceOf[ModelingUnit]
     implicit def rich (xs : ClassDefinitionAspect) = xs.asInstanceOf[ClassDefinition]
@@ -75,4 +80,8 @@ trait RichAspectImplicit {
 	implicit def rich (xs : TypeVariableBindingAspect) = xs.asInstanceOf[TypeVariableBinding]
 	implicit def rich (xs : StringLiteralAspect) = xs.asInstanceOf[StringLiteral]
 	implicit def rich (xs : PropertyAspect) = xs.asInstanceOf[Property]
+	implicit def rich (xs : FunctionTypeAspect) = xs.asInstanceOf[FunctionType]
+	implicit def rich (xs : ProductTypeAspect) = xs.asInstanceOf[ProductType]
+	implicit def rich (xs : LambdaExpressionAspect) = xs.asInstanceOf[LambdaExpression]
+	
 }

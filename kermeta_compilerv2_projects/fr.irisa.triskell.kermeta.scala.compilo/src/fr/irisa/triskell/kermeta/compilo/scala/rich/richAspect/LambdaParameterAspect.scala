@@ -14,5 +14,9 @@ trait LambdaParameterAspect extends RichAspectImplicit with ObjectAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append(this.getName())
+		if(this.getType() != null) {
+			res.append(" : ")
+			this.getType().generateScalaCode(res)
+		}
 	}
 }

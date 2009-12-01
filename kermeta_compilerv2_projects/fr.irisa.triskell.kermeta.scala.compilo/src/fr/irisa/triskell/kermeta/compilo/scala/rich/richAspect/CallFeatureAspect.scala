@@ -36,11 +36,13 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 			}
 			/* GENERATE CALL */
 			if (this.getStaticProperty!=null){
-				var TargetType : StringBuilder = new StringBuilder
-				this.getTarget().getStaticType().generateScalaCode(TargetType)
-				println ("passe par là 2 " + this.getName())
-				//res append "get"+this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size) +"()"
-				res.append(GlobalConfiguration.scalaPrefix+kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName))
+				if(this.getTarget() != null){
+					var TargetType : StringBuilder = new StringBuilder
+					this.getTarget().getStaticType().generateScalaCode(TargetType)
+					res.append(GlobalConfiguration.scalaPrefix+kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName))
+				} else {
+					res.append(this.getName())
+				}
 			} else {
 				if(this.getTarget() != null){
 					var subs : StringBuilder = new StringBuilder

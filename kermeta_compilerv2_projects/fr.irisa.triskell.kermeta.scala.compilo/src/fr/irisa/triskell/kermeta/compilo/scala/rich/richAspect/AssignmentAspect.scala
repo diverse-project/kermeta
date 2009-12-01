@@ -11,35 +11,30 @@ trait AssignmentAspect extends RichAspectImplicit with ObjectAspect with LogAspe
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		log.debug("Assignment Generation")
+		this.getTarget().generateScalaCode(res)
+		res.append(" = ")
+		this.getValue().generateScalaCode(res)
 		
+		/* Step looking for a cast */
+		var targetClass : StringBuilder = new StringBuilder
 		if (!this.isIsCast()){
-			this.getTarget().generateScalaCode(res)
-			res.append(" = ")
-			this.getValue().generateScalaCode(res)
-			
 			if(this.getValue().isInstanceOf[VoidLiteral]){
-				res.append(".asInstanceOf[")
-				this.getTarget.getStaticType.generateScalaCode(res)
-				res.append("]")
+				this.getTarget.getStaticType.generateScalaCode(targetClass)
 			}
 		} else { 
-			this.getTarget().generateScalaCode(res)
-			res.append("=") 
-			var targetClass : String =""
-    		 if (this.getTarget.getStaticType.isInstanceOf[Class]){
-    			 var tmp :StringBuilder=new StringBuilder 
-    			 this.getTarget.getStaticType.generateScalaCode(tmp)
-    			 targetClass = tmp.toString
-    			 //targetClass = this.getTarget.getStaticType.asInstanceOf[Class].getTypeDefinition.getName
+    		if (this.getTarget.getStaticType.isInstanceOf[Class]){
+    			this.getTarget.getStaticType.generateScalaCode(targetClass)
+    		 } else {
+            	 if (this.getTarget.getStaticType.isInstanceOf[NamedElement]){
+            		 targetClass.append(this.getTarget.getStaticType.asInstanceOf[NamedElement].getName)
+            	 } else {
+            		 log.debug("TODO Assignment with Cast")
+            	 }
     		 }
-             else if (this.getTarget.getStaticType.isInstanceOf[NamedElement])
-    			 targetClass = this.getTarget.getStaticType.asInstanceOf[NamedElement].getName
-             
-    			 else
-            	 targetClass = "//TODO Assignement with cast"	
-			this.getValue().generateScalaCode(res)
-			res append ".asInstanceOf["+targetClass+"]"
-		
+		}
+		/* Generate Cast if found */
+		if(!targetClass.toString.equals("")){
+			res append ".asInstanceOf["+targetClass.toString+"]"
 		}
 	} 
 }

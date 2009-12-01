@@ -30,8 +30,7 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 
 	//TODO
 	override def createType() : Type = {
-		new TypeImpl with ObjectAspect
-
+		new TypeView
 	}
 	
 	override def createEnumerationLiteral() : EnumerationLiteral = {
@@ -66,15 +65,14 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 
 	//TODO
 	override def createFunctionType() : FunctionType = {
-		new FunctionTypeImpl() with ObjectAspect
+		new FunctionTypeView
 	}
 
 	//TODO
 	override def createProductType() : ProductType = {
-		new ProductTypeImpl() with ObjectAspect
+		new ProductTypeView
 	}
 
-	
 	override def createPackage()  = {
 		new PackageView
 	}

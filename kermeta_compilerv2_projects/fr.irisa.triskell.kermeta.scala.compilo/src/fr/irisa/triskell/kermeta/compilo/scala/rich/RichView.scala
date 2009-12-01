@@ -48,6 +48,10 @@ class TypeVariableBindingView extends TypeVariableBindingImpl with TypeVariableB
 class UsingView extends UsingImpl with UsingAspect
 class LambdaParameterView extends LambdaParameterImpl with LambdaParameterAspect
 //class ExpressionView extends ExpressionImpl with ObjectAspect
-//class TypeView extends TypeImpl with ObjectAspect
+class TypeView extends TypeImpl with TypeAspect
+class ProductTypeView extends ProductTypeImpl with ProductTypeAspect
+class FunctionTypeView extends FunctionTypeImpl with FunctionTypeAspect
+class TypeDefinitionView extends TypeDefinitionImpl with TypeDefinitionAspect
+
 
 

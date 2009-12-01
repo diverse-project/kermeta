@@ -12,7 +12,7 @@ trait StringLiteralAspect extends RichAspectImplicit with ObjectAspect {
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {	
 		res.append("\"")
-		res.append(this.getValue.replaceAll("\n","\\\\n").replaceAll("\t","\\\\t"))
+		res.append(this.getValue.replaceAll("\n","\\\\n").replaceAll("\t","\\\\t").replace("\"","\\\"") )
 		res.append("\"")
 	} 
 

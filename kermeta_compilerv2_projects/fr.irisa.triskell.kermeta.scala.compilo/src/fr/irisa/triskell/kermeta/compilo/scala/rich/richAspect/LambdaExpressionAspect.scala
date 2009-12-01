@@ -10,11 +10,19 @@ import java.util._
 
 trait LambdaExpressionAspect extends RichAspectImplicit with ObjectAspect {
 	
-	implicit def rich (xs : LambdaExpressionAspect) = xs.asInstanceOf[LambdaExpression]
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append("{")
-		this.getParameters().foreach(e=> e.generateScalaCode(res))
+		var i = 0
+		res append ("(")
+		this.getParameters().foreach({e=>
+			if(i != 0){
+				res.append(" , ")
+			}
+			 e.generateScalaCode(res)
+			i = i + 1
+			})
+		res append (")")
 		res.append("=>")
 		this.getBody().generateScalaCode(res)
 		res.append("}")

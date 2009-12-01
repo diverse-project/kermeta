@@ -14,4 +14,5 @@ trait ObjectAspect {
   def generateScalaCode(res : StringBuilder) : Unit = {
 	  res.append("/*TODO GenScalaCode "+ this.getClass +" */")
   }
+  
 }
