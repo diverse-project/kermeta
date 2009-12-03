@@ -23,7 +23,9 @@ class Void  extends Object //with fr.irisa.triskell.kermeta.scala.framework.emf.
 	 override def toString() :java.lang.String={return  "<void>";}
 }
  
-class RichValueType[G]  extends Object {}
+class RichValueType[G]  extends Object {
+		def isNotEqual(other : Any) :Boolean = this.equals(other)
+}
 
 abstract class Comparable[G]  extends Object {
 	def isLower(other : G) :Boolean
@@ -39,6 +41,9 @@ class RichNotComparableException  extends Exception  {}
 
 
 class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
+		
+	def isVoid() :Boolean={return null.asInstanceOf[Boolean].equals(value)}
+
 	def not() :Boolean={return !value}
 	def xor(other : Boolean) :Boolean={(value || other) && !(value && other)}
 	//override def equals(other : Object) :Boolean={return true}
@@ -59,6 +64,7 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
 abstract class RichNumeric[G]  extends Comparable[G]{}
 
 class RichInteger(value: Int)  extends RichNumeric[Int] {
+	def isVoid() :Boolean={return null.asInstanceOf[Int].equals(value)}
 	override def isLower(other : Int) :Boolean={value<other}
 	def plus(other : Int) :Int={value+other}
 	def plus(other : Integer) :Int={value+other.intValue}
@@ -97,6 +103,7 @@ class RichInteger(value: Int)  extends RichNumeric[Int] {
 
 
 class RichReal (value: Double) extends RichNumeric[Double] {
+	def isVoid() :Boolean={return null.asInstanceOf[Double].equals(value)}
 	def plus(other : Double) :Double={return value+other.toDouble}
 	def mult(other : Double) :Double={return value*other.toDouble}
 	def minus(other : Double) :Double={return value-other.toDouble}
@@ -117,11 +124,13 @@ class RichReal (value: Double) extends RichNumeric[Double] {
 
 class RichCharacter(value:Char)  extends RichValueType {
 	//TODO
+	def isVoid() :Boolean={return null.asInstanceOf[Char].equals(value)}
 	def compareTo(other : Object) :Int={0}
 	override def toString() :java.lang.String={return ""+value}
 }
 class RichString(value: java.lang.String)  extends RichValueType {
 	//TODO
+	def isVoid() :Boolean={return null.asInstanceOf[String].equals(value)}
 	def append(other : String)={}
 	def plus(other : String) :java.lang.String={return value + other}
 	def toReal() :Double={return java.lang.Double.parseDouble(value)}
@@ -130,7 +139,7 @@ class RichString(value: java.lang.String)  extends RichValueType {
 	def compareTo(other : String) :Int={return value.compareTo(other)}
 	def indexOf(str : String) :Int={return value.indexOf(str)}
 	def elementAt(index : Int) :Char={return value.charAt(index)}
-	def size() :Int={return value.length}
+	//def size() :Int={return value.length}
 	def replace(str1 : String, str2 : String) :java.lang.String={return value.replace(str1,str2)}
 	def toUpperCase() :java.lang.String={return value.toUpperCase()}
 	def toInteger() :Int={return java.lang.Integer.parseInt(value)}
@@ -142,7 +151,6 @@ class RichString(value: java.lang.String)  extends RichValueType {
 			value.split(delimiter).foreach{e=>list.add(e)}
 			return list;
 	}
-
 } 
 class RichUnknownJavaObject  extends Object {
 	override def toString() :java.lang.String={return "toString of  UnknownJavaObject not implemented yet";
