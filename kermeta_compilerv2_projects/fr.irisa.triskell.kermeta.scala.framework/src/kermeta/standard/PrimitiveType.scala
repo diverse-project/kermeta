@@ -145,7 +145,7 @@ class RichString(value: java.lang.String)  extends RichValueType {
 	def compareTo(other : String) :Int={return value.compareTo(other)}
 	def indexOf(str : String) :Int={return value.indexOf(str)}
 	def elementAt(index : Int) :Char={return value.charAt(index)}
-	//def size() :Int={return value.length}
+	def ksize() :Int={return value.length}
 	def replace(str1 : String, str2 : String) :java.lang.String={return value.replace(str1,str2)}
 	def toUpperCase() :java.lang.String={return value.toUpperCase()}
 	def toInteger() :Int={return java.lang.Integer.parseInt(value)}

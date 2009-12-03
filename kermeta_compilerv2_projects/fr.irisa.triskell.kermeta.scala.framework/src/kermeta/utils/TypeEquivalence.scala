@@ -64,11 +64,11 @@ object TypeEquivalence {
 		methodEquivalence.put("fr.irisa.triskell.kermeta.scala.framework.language.structure.ClassDefinition", ClassDefinition);
 		
 		
-		methodEquivalence 
-		//var Str : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
-		//Str.put("plus", "+");
-		//methodEquivalence.put("String", Str);
 		//methodEquivalence 
+		var Str : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
+		Str.put("size", "ksize");
+		methodEquivalence.put("kermeta.standard.String", Str);
+		methodEquivalence 
 
 	};
 	 
