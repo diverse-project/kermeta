@@ -36,6 +36,7 @@ abstract class Comparable[G]  extends Object {
 	}
 	abstract class Summable[G]  extends Object {
 	def plus(other : G) :G
+	def isNotEqual(other : Any) :Boolean = this.equals(other)
 }
 class RichNotComparableException  extends Exception  {}
 
