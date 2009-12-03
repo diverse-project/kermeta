@@ -41,7 +41,8 @@ def generateAttribute(res : StringBuilder) : Unit ={
 	res.append("var ")
 	res.append(Util.protectScalaKeyword(this.getName()))
 	res.append(" : ")
-	if (this.getUpper>1){
+	
+	if (this.getUpper>1||this.getUpper == -1){
 			if (this.isIsOrdered){
 				res.append("java.util.List[")
 			}else{
