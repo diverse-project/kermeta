@@ -58,7 +58,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 				}
 			}
 			if (this.getStaticOperation!=null ){
-         	 if (!this.getName.equals("size") ) 
+         	 //if (!this.getName.equals("size") ) 
 				res append "(" 
          	
 			var i : Int = 1
@@ -70,7 +70,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
                 i=i+1
             })
          	//if (this.getStaticOperation!=null  && this.getParameters.size >0){
-         	      if (!this.getName.equals("size") ) 
+         	      //if (!this.getName.equals("size") ) 
          	           		 res append ")"
          	}			
 		}
