@@ -12,7 +12,11 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect {
 	implicit def rich (xs : OperationAspect) = xs.asInstanceOf[Operation]
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		res.append("\n"+"   def ")
+		res.append("\n   ")
+		if (this.getSuperOperation()!=null){
+			res.append(" override")
+		}
+		res.append(" def ")
 		res.append(this.getName())
 		/* Default constructor declaration */
 		res.append("(") 
