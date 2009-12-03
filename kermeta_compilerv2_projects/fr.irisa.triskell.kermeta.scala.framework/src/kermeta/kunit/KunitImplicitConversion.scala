@@ -14,7 +14,11 @@ trait KunitImplicitConversion {
  implicit def richAspect(v : kermeta.kunit.FailureAspect) = v.asInstanceOf[kermeta.kunit.RichFailure]
  implicit def richAspect(v : kermeta.kunit.Error) = v.asInstanceOf[kermeta.kunit.RichError]
  implicit def richAspect(v : kermeta.kunit.ErrorAspect) = v.asInstanceOf[kermeta.kunit.RichError]
- implicit def richAspect(v : kermeta.kunit.Test) = v.asInstanceOf[kermeta.kunit.RichTest]
+ implicit def richAspect1(v : kermeta.kunit.Test) = { v match {
+	 case (ys : TestSuite) => 	  ys.asInstanceOf[kermeta.kunit.RichTestSuite]
+	 case (ys : Test) =>  ys.asInstanceOf[kermeta.kunit.RichTest]	 
+ 	}
+ }
  implicit def richAspect(v : kermeta.kunit.TestAspect) = v.asInstanceOf[kermeta.kunit.RichTest]
  implicit def richAspect(v : kermeta.kunit.TestSuite) = v.asInstanceOf[kermeta.kunit.RichTestSuite]
  implicit def richAspect(v : kermeta.kunit.TestSuiteAspect) = v.asInstanceOf[kermeta.kunit.RichTestSuite]
@@ -45,7 +49,11 @@ object KunitConversions{
  implicit def richAspect(v : kermeta.kunit.FailureAspect) = v.asInstanceOf[kermeta.kunit.RichFailure]
  implicit def richAspect(v : kermeta.kunit.Error) = v.asInstanceOf[kermeta.kunit.RichError]
  implicit def richAspect(v : kermeta.kunit.ErrorAspect) = v.asInstanceOf[kermeta.kunit.RichError]
- implicit def richAspect(v : kermeta.kunit.Test) = v.asInstanceOf[kermeta.kunit.RichTest]
+ implicit def richAspect(v : kermeta.kunit.Test) = { v match {
+	 case (ys : TestSuite) => 	  ys.asInstanceOf[kermeta.kunit.RichTestSuite]
+	 case (ys : Test) =>  ys.asInstanceOf[kermeta.kunit.RichTest]
+ 	}
+ }
  implicit def richAspect(v : kermeta.kunit.TestAspect) = v.asInstanceOf[kermeta.kunit.RichTest]
  implicit def richAspect(v : kermeta.kunit.TestSuite) = v.asInstanceOf[kermeta.kunit.RichTestSuite]
  implicit def richAspect(v : kermeta.kunit.TestSuiteAspect) = v.asInstanceOf[kermeta.kunit.RichTestSuite]

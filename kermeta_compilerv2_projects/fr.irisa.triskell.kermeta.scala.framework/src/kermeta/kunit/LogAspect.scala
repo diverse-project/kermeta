@@ -4,14 +4,14 @@ import kermeta.standard._
 import  kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
 trait LogAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with fr.irisa.triskell.kermeta.scala.framework.language.structure.Object with KunitImplicitConversion{
-var failures : java.util.List[kermeta.kunit.Failure]= _
+var failures : java.util.List[kermeta.kunit.Failure]= new java.util.ArrayList[kermeta.kunit.Failure]
 def getFailures() : java.util.List[kermeta.kunit.Failure]={this.failures}
 def setFailures(arg:java.util.List[kermeta.kunit.Failure])={ this.failures = arg}
 def Scalafailures : java.util.List[kermeta.kunit.Failure]={this.getFailures()}
 def Scalafailures_=(arg : java.util.List[kermeta.kunit.Failure])={this.getFailures().clear
 this.getFailures().addAll(arg) 
 }
-var errors : java.util.List[kermeta.kunit.Error]= _
+var errors : java.util.List[kermeta.kunit.Error]= new java.util.ArrayList[kermeta.kunit.Error]
 def getErrors() : java.util.List[kermeta.kunit.Error]={this.errors}
 def setErrors(arg:java.util.List[kermeta.kunit.Error])={ this.errors = arg}
 def Scalaerrors : java.util.List[kermeta.kunit.Error]={this.getErrors()}
@@ -23,7 +23,7 @@ def getRuntests() : Int={this.runtests}
 def setRuntests(arg:Int)={ this.runtests = arg}
 def Scalaruntests : Int={this.getRuntests()}
 def Scalaruntests_=(arg : Int)={this.setRuntests(arg)}
-var harnessErrors : java.util.List[kermeta.kunit.Error]= _
+var harnessErrors : java.util.List[kermeta.kunit.Error]= new java.util.ArrayList[kermeta.kunit.Error]
 def getHarnessErrors() : java.util.List[kermeta.kunit.Error]={this.harnessErrors}
 def setHarnessErrors(arg:java.util.List[kermeta.kunit.Error])={ this.harnessErrors = arg}
 def ScalaharnessErrors : java.util.List[kermeta.kunit.Error]={this.getHarnessErrors()}
