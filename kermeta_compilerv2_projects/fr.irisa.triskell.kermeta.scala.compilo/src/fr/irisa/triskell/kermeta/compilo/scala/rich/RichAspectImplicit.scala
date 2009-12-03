@@ -16,7 +16,6 @@ import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
   
 trait RichAspectImplicit {
 	
-	
 	implicit def rich (xs : Assignment) = xs.asInstanceOf[AssignmentAspect]
     implicit def rich (xs : ModelingUnit) = xs.asInstanceOf[ModelingUnitAspect]
     implicit def rich (xs : Package) = xs.asInstanceOf[PackageAspect]

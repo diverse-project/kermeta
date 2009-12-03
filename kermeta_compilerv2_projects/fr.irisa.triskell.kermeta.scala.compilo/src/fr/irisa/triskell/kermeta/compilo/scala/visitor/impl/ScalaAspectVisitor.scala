@@ -9,7 +9,7 @@ import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import scala.collection.JavaConversions._
 
-class ScalaAspectVisitor extends IVisitor with RichAspectImplicit {
+class ScalaAspectVisitor extends IVisitor with RichAspectImplicit with LogAspect {
 	
 	def visit(par : ModelingUnit){
 		par.getPackages().foreach(p => p.accept(this))		
@@ -34,7 +34,7 @@ class ScalaAspectVisitor extends IVisitor with RichAspectImplicit {
 	
 }
 
-class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit  {
+class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit with LogAspect  {
 
 	def visit(par : ModelingUnit){Console.println("multithread error")}
 	
@@ -70,7 +70,14 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 			if (!Util.hasEcoreTag(par)){
 				var res1 : StringBuilder = new StringBuilder
 				res1.append("package "+genpackageName+"\n")
-				res1.append("class " + par.getName + " extends org.eclipse.emf.ecore.impl.EObjectImpl with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect")
+				var superQualifiedName : String = "org.eclipse.emf.ecore.impl.EObjectImpl"	
+				if(!par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo.equals("language.structure.Object")){
+					//log.debug("SuperTypefound="+ par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
+					superQualifiedName = par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo
+					//log.debug("Super Parent Found "+par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
+					log.debug("SuperTypefound="+ superQualifiedName)
+				} 
+				res1.append("class " + par.getName + " extends "+superQualifiedName+" with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect")
 				Util.generateFile(genpackageName.toString, par.getName, res1.toString())
 			}
 	}

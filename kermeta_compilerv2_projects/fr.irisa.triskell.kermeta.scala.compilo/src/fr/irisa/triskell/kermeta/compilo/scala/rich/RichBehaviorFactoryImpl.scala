@@ -28,6 +28,7 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 	override def createCallFeature() : CallFeature =  {
 		new CallFeatureView
 	}
+	
 
 	//TODO
 	override def createEmptyExpression() : EmptyExpression = {

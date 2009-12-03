@@ -21,7 +21,7 @@ class Compiler extends RichAspectImplicit with LogAspect {
 		var t: LoadModelHelper = new LoadModelHelper()
 		BehaviorPackage.eINSTANCE.setEFactoryInstance(new RichBehaviorFactoryImpl())
 		StructurePackage.eINSTANCE.setEFactoryInstance(new RichStructureFactoryImpl())
-		Util.threadExecutor = Executors.newCachedThreadPool()
+		Util.threadExecutor = Executors.newCachedThreadPool() /* Init new Thread Pool */
 		
 		/* Loading Model KM Step */
 		var startTime = System.currentTimeMillis
