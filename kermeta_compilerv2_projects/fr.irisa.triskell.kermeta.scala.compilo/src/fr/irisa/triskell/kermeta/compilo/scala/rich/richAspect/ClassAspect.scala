@@ -22,6 +22,12 @@ trait ClassAspect extends RichAspectImplicit with TypeVariableBindingAspect with
 
 		
 	}
+	
+	override def getQualifiedNameCompilo():String ={
+		return this.getTypeDefinition().getQualifiedNameCompilo();
+	   
+	}
+ 	
 	/*
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		
