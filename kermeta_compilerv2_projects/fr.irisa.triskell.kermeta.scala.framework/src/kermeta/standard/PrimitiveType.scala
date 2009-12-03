@@ -24,7 +24,7 @@ class Void  extends Object //with fr.irisa.triskell.kermeta.scala.framework.emf.
 }
  
 class RichValueType[G]  extends Object {
-		def isNotEqual(other : Any) :Boolean = this.equals(other)
+		def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
 }
 
 abstract class Comparable[G]  extends Object {
@@ -36,7 +36,7 @@ abstract class Comparable[G]  extends Object {
 	}
 	abstract class Summable[G]  extends Object {
 	def plus(other : G) :G
-	def isNotEqual(other : Any) :Boolean = {this.equals(other) }
+	def isNotEqual(other : Any) :Boolean = {!this.equals(other) }
 }
 class RichNotComparableException  extends Exception  {}
 
@@ -100,7 +100,7 @@ class RichInteger(value: Int)  extends RichNumeric[Int] {
 	def toInt() : Int = {return value}
 	
 	def times(func : Int => Unit):Unit ={ for(i <- 0 until value){func(i)} }
-	def isNotEqual(other : Any) :Boolean = {this.equals(other)}
+	def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
 	
 	//def isNotEqual(other : Any) :Boolean = this.equals(other)
 	
@@ -124,7 +124,7 @@ class RichReal (value: Double) extends RichNumeric[Double] {
 	def isGreaterOrEqual(other : Double) :Boolean={ value>=other }
 	def isLowerOrEqual(other : Double) :Boolean={ value<=other }
 	def isGreater(other : Double) :Boolean={ value>other }
-	def isNotEqual(other : Any) :Boolean = {this.equals(other)}
+	def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
 
 }
 
