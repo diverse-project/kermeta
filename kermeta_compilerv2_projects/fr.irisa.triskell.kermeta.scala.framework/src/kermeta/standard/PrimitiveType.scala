@@ -36,7 +36,7 @@ abstract class Comparable[G]  extends Object {
 	}
 	abstract class Summable[G]  extends Object {
 	def plus(other : G) :G
-	def isNotEqual(other : Any) :Boolean = this.equals(other)
+	def isNotEqual(other : Any) :Boolean = {this.equals(other) }
 }
 class RichNotComparableException  extends Exception  {}
 
@@ -100,6 +100,10 @@ class RichInteger(value: Int)  extends RichNumeric[Int] {
 	def toInt() : Int = {return value}
 	
 	def times(func : Int => Unit):Unit ={ for(i <- 0 until value){func(i)} }
+	def isNotEqual(other : Any) :Boolean = {this.equals(other)}
+	
+	//def isNotEqual(other : Any) :Boolean = this.equals(other)
+	
 }
 
 
@@ -120,6 +124,7 @@ class RichReal (value: Double) extends RichNumeric[Double] {
 	def isGreaterOrEqual(other : Double) :Boolean={ value>=other }
 	def isLowerOrEqual(other : Double) :Boolean={ value<=other }
 	def isGreater(other : Double) :Boolean={ value>other }
+	def isNotEqual(other : Any) :Boolean = {this.equals(other)}
 
 }
 
@@ -132,7 +137,7 @@ class RichCharacter(value:Char)  extends RichValueType {
 class RichString(value: java.lang.String)  extends RichValueType {
 	//TODO
 	def isVoid() :Boolean={return null.asInstanceOf[String].equals(value)}
-	//def append(other : String)={}
+	def append(other : String):String={return value + other}
 	def plus(other : String) :java.lang.String={return value + other}
 	def toReal() :Double={return java.lang.Double.parseDouble(value)}
 	def toBoolean() :Boolean={return java.lang.Boolean.parseBoolean(value)}
