@@ -132,7 +132,7 @@ class RichCharacter(value:Char)  extends RichValueType {
 class RichString(value: java.lang.String)  extends RichValueType {
 	//TODO
 	def isVoid() :Boolean={return null.asInstanceOf[String].equals(value)}
-	def append(other : String)={}
+	//def append(other : String)={}
 	def plus(other : String) :java.lang.String={return value + other}
 	def toReal() :Double={return java.lang.Double.parseDouble(value)}
 	def toBoolean() :Boolean={return java.lang.Boolean.parseBoolean(value)}
