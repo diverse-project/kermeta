@@ -48,6 +48,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 					}
 					i=i+1
 				})
+				res append " with "+ fr.irisa.triskell.kermeta.scala.framework.language.structure.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
 				res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 				}
 				res.append("{\n")
@@ -77,6 +78,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 						res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
 						res.append(".")
 						res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
+						res.append("Aspect")
 								//returnedString =returnedString + ", " +superC.getName; 
 //					}
 //					i=i+1
@@ -92,7 +94,11 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 	  	}
 	}
 	
-
+	
+	override def getQualifiedNameCompilo():String ={
+		return this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName();
+	  
+	}
  	
 	
 }

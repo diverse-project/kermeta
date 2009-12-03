@@ -18,11 +18,11 @@ class ScalaAspectVisitor extends IVisitor with RichAspectImplicit {
 	def visit(par : Package){ 
 		var actualPackage = par.getQualifiedName
 		//if (!(actualPackage.startsWith("kermeta.io")||actualPackage.startsWith("kermeta.standard")||actualPackage.startsWith("kermeta.exceptions")||actualPackage.startsWith("kermeta.ecore"))){
-		if (!actualPackage.startsWith("kermeta")){
-			
+		//if (!actualPackage.startsWith("kermeta.") || actualPackage.startsWith("kermeta.kunit")){
+		if (!actualPackage.startsWith("kermeta.") ){
 			var subTask = new ScalaAspectPackageVisitorRunnable
 			VisitorAsyncUtility.runAfter(par,subTask)
- 			par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage
+ 			par.getNestedPackage.foreach(p=> {p.accept(this)})
 		}
 	}
  
@@ -64,12 +64,13 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 			res.append("import kermeta.standard._\n")
 			res.append("import  kermeta.standard.JavaConversions._\n")
 			res.append("import kermeta.standard.PrimitiveConversion._\n")
+			res.append("import kermeta.kunit.KunitConversions._\n")
 			par.generateScalaCode(res)
 			Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())
 			if (!Util.hasEcoreTag(par)){
 				var res1 : StringBuilder = new StringBuilder
 				res1.append("package "+genpackageName+"\n")
-				res1.append("class " + par.getName + " extends org.eclipse.emf.ecore.impl.EObjectImpl")
+				res1.append("class " + par.getName + " extends org.eclipse.emf.ecore.impl.EObjectImpl with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect")
 				Util.generateFile(genpackageName.toString, par.getName, res1.toString())
 			}
 	}

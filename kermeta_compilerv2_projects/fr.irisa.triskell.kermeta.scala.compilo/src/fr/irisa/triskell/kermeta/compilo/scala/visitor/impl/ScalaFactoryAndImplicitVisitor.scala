@@ -90,8 +90,9 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 		if (Util.hasEcoreTag(par))
 			actualPackage=actualPackage+"ScalaAspect"
 		
-		if (!actualPackage.startsWith("kermeta")){
-			//if (!(actualPackage.startsWith("kermeta.io")||actualPackage.startsWith("kermeta.standard")||actualPackage.startsWith("kermeta.exceptions")||actualPackage.startsWith("kermeta.ecore"))){
+			if (!actualPackage.startsWith("kermeta.")){
+			//if (!actualPackage.startsWith("kermeta.") || actualPackage.startsWith("kermeta.kunit")){
+					//if (!(actualPackage.startsWith("kermeta.io")||actualPackage.startsWith("kermeta.standard")||actualPackage.startsWith("kermeta.exceptions")||actualPackage.startsWith("kermeta.ecore"))){
 		
 			var factoryDef : StringBuilder =  new StringBuilder
 		

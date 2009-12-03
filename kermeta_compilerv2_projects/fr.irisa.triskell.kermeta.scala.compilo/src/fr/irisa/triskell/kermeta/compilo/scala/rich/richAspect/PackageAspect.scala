@@ -15,6 +15,8 @@ trait PackageAspect extends RichAspectImplicit with ObjectAspect with IVisitable
 		visitor.visit(this)
 	}	  
 	
+	override def getQualifiedNameCompilo():String =getQualifiedName()
+	
 	def getQualifiedName():String ={
 		var res : String="" 
         if (this.getNestingPackage !=null){
