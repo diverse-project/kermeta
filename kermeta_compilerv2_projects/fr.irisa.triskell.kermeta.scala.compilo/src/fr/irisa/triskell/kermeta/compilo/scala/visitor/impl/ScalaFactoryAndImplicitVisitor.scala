@@ -134,7 +134,13 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 			}
 			genpackageName.append(".")
 			
+			if (par.isIsAbstract())
+				viewDef.append( " abstract")
+				
+				
+			
 			if (Util.hasEcoreTag(par)){
+				
 				viewDef.append(" class Rich"+par.getName()+" extends "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+"impl." + par.getName()+"Impl")+" with "+packageName.toString +"."+par.getName+"Aspect \n")
 				implicitDef append " implicit def richAspect(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName())+") = v.asInstanceOf["+ packageName.toString+"."+ "Rich"+par.getName+"]\n" 
 				implicitDef append " implicit def richAspect(v : "+ packageName.toString+"."+par.getName()+"Aspect) = v.asInstanceOf["+ packageName.toString+".Rich"+par.getName+"]\n"
