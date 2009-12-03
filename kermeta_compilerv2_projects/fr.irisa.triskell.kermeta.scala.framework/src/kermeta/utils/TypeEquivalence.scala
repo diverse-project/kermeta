@@ -68,6 +68,7 @@ object TypeEquivalence {
 		var Str : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		Str.put("size", "ksize");
 		methodEquivalence.put("kermeta.standard.String", Str);
+		methodEquivalence.put("String", Str);
 		methodEquivalence 
 
 	};
