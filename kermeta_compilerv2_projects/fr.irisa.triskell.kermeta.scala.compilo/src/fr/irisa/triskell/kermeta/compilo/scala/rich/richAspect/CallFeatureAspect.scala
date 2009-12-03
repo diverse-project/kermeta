@@ -59,7 +59,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 			}
 			if (this.getStaticOperation!=null && this.getParameters.size >0){
          	  res append "(" 
-         	}
+         	
 			var i : Int = 1
          	this.getParameters.foreach(e=> {
          		e.generateScalaCode(res)
@@ -68,7 +68,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
                 }
                 i=i+1
             })
-         	if (this.getStaticOperation!=null  && this.getParameters.size >0){
+         	//if (this.getStaticOperation!=null  && this.getParameters.size >0){
          	  res append ")"
          	}			
 		}
