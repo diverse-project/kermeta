@@ -62,7 +62,16 @@ def generateAttribute(res : StringBuilder) : Unit ={
 	}
 
 	def generateGet(res : StringBuilder) : Unit ={
-	res.append("def get")
+	res.append("def ")
+	var s: StringBuilder = new StringBuilder
+	this.getType().asInstanceOf[ObjectAspect].generateScalaCode(s)
+	if (s.toString.equals("Boolean")){
+			res.append("is")
+	}else
+	{
+		res.append("get")
+	}
+		
 	res.append(this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size) + "()")
 	res.append(" : ")
 	getListorType(res)
