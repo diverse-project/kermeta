@@ -69,11 +69,13 @@ object TypeEquivalence {
 		Str.put("size", "ksize");
 		methodEquivalence.put("kermeta.standard.String", Str);
 		methodEquivalence.put("String", Str);
+		methodEquivalence.put("java.lang.String", Str);
 		methodEquivalence 
 
 	};
 	 
 	def getMethodEquivalence(className:String,methodName:String):String={
+		println(className + "."+methodName)
 		var res :String = null
 		var map :java.util.HashMap[String,String] = methodEquivalence.get(className)
 		if (map !=null) 
