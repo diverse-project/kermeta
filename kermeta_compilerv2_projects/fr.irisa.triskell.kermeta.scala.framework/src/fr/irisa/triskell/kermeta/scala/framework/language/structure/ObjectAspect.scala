@@ -28,4 +28,5 @@ trait ObjectAspect extends EObject {
 	//def asType(t : EClass) = this.asInstanceOf[t.getName]
 	//def isInstanceOf(t : EClass) = this.isInstanceOf(t.getMetaClass().getName)
 	
+	
 }

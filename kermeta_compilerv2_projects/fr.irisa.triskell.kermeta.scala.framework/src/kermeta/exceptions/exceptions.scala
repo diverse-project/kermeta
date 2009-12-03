@@ -3,70 +3,99 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta._
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.behavior._
-class Exception extends java.lang.Throwable{
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore._
+
+import kermeta.standard.JavaConversions._
+import kermeta.standard.PrimitiveConversion._
+
+
+trait Exception extends java.lang.Throwable with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect{
 var message:String=null;
 var nestedException:Exception=null; 
 var stackTrace:String=null;
-} 
-class RuntimeError{
+
+   def eClass():EClass =null
+   def eResource():Resource =null
+   def eContainer():EObject =null
+   def eContainingFeature():EStructuralFeature =null
+   def eContainmentFeature():EReference =null
+   override def eContents():EList[EObject] =null;
+   override def eAllContents():TreeIterator[EObject] =null;
+   def eIsProxy():Boolean =false;
+   override def eCrossReferences():EList[EObject] =null;
+   def eGet(feature:EStructuralFeature ) : Object=null;
+   def eGet(feature:EStructuralFeature , resolve:Boolean ):Object =null;
+   def eSet(feature:EStructuralFeature , newValue:Any   ) :Unit =null;
+   def eIsSet(feature:EStructuralFeature ) : Boolean = false;
+   override def eUnset( feature:EStructuralFeature) : Unit = null;
+   override def eAdapters(): EList[org.eclipse.emf.common.notify.Adapter] =null;
+   def eDeliver():Boolean =true;
+   def eSetDeliver(deliver:Boolean):Unit=null;
+   def eNotify( notification:org.eclipse.emf.common.notify.Notification):Unit=null;
+}  
+trait RuntimeError extends Exception{
 var expression:Expression=null;
 }
-class CallOnVoidTarget{
+trait CallOnVoidTarget extends Exception{
 }
-class TypeCastError{
+trait TypeCastError extends Exception{
 }
-class NotImplementedException extends java.lang.Throwable{
+trait NotImplementedException extends Exception{
 }
-class UpperBoundReachedError{
+trait UpperBoundReachedError extends Exception{
 }
-class AbstractClassInstantiationError{
+trait AbstractClassInstantiationError extends Exception{
 }
-class IncompatibleTypeError{
+trait IncompatibleTypeError extends Exception{
 }
-class DivisionByZero{
+trait DivisionByZero extends Exception{
 }
-class OverflowError{
+trait OverflowError extends Exception{
 }
-class VoidOperandError{
+trait VoidOperandError extends Exception{
 }
-class StringIndexOutOfBound{
+trait StringIndexOutOfBound extends Exception{
 }
-class StringFormatException{
+trait StringFormatException extends Exception{
 }
-class IndexOutOfBound{
+trait IndexOutOfBound extends Exception{
 }
-class EmptyCollection{
+trait EmptyCollection extends Exception{
 }
-class IteratorIsOff{
+trait IteratorIsOff extends Exception{
 }
-class IOException{
+trait IOException extends Exception{
 }
-class FileNotFoundException{
+trait FileNotFoundException extends Exception{
 }
-class ConstraintViolatedException{
+trait ConstraintViolatedException extends Exception{
 var constraintAppliedTo:Object = None.get;
 var failedConstraint:Constraint= None.get;
 }
-class ConstraintViolatedPre{
+trait ConstraintViolatedPre extends Exception{
 }
-class ConstraintViolatedPost{
+trait ConstraintViolatedPost extends Exception{
 }
-class ConstraintViolatedInv{
+trait ConstraintViolatedInv extends Exception{
 }
-class ResourceLoadException{
+trait ResourceLoadException extends Exception{
 }
-class ResourceSaveException{
+trait ResourceSaveException extends Exception{
 var failedWhileSaving:Object= None.get; 
 }
-class ResourceMixedLevelsException{
+trait ResourceMixedLevelsException extends Exception{
 }
-class ResourceCreateException{
+trait ResourceCreateException extends Exception{
 }
-class ResourceUnconformityException{
+trait ResourceUnconformityException extends Exception{
 }
-class UnregisteredMetamodelException{
+trait UnregisteredMetamodelException extends Exception{
 }
-class DynamicExpressionException{
+trait DynamicExpressionException extends Exception{
 }
 
 

@@ -10,7 +10,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EcorePackageImpl;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -77,7 +76,7 @@ class EMFResource  extends Resource  {
 		var rs:ResourceSetImpl = new ResourceSetImpl(); 
 		
 		EcorePackageImpl.init();
-		var f:Resource.Factory.Registry = rs.getResourceFactoryRegistry();
+		var f:org.eclipse.emf.ecore.resource.Resource.Factory.Registry = rs.getResourceFactoryRegistry();
 		var m :java.util.Map[String,Object]  = f.getExtensionToFactoryMap();
 		m.put("*",new XMIResourceFactoryImpl());
 		/*m.put("*",
