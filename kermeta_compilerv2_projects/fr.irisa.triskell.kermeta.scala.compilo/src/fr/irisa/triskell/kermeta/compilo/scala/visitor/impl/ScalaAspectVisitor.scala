@@ -70,14 +70,19 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 			if (!Util.hasEcoreTag(par)){
 				var res1 : StringBuilder = new StringBuilder
 				res1.append("package "+genpackageName+"\n")
-				var superQualifiedName : String = "org.eclipse.emf.ecore.impl.EObjectImpl"	
+				res1.append("trait ")
+				res1.append(par.getName())	
 				if(!par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo.equals("language.structure.Object")){
 					//log.debug("SuperTypefound="+ par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
-					superQualifiedName = par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo
-					//log.debug("Super Parent Found "+par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
-					log.debug("SuperTypefound="+ superQualifiedName)
+					var listSuperTypes = par.getSuperType()
+					var i = 0
+					for(a <- listSuperTypes){
+						if(i == 0) { res1.append(" extends ") } else { res1.append(" with ") } 
+						res1.append(a.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
+						i = i + 1
+					}
 				} 
-				res1.append("class " + par.getName + " extends "+superQualifiedName+" with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect")
+				//res1.append("trait " + par.getName + " extends "+superQualifiedName+" with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect")
 				Util.generateFile(genpackageName.toString, par.getName, res1.toString())
 			}
 	}
