@@ -3,6 +3,7 @@ import kermeta.io._
 import kermeta.standard._
 import  kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
+
 trait TestCaseAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with kermeta.kunit.TestAspect with kermeta.kunit.FallibleAspect with KunitImplicitConversion{
 var __testMethodName : java.lang.String= _ 
 def get__testMethodName() : java.lang.String={this.__testMethodName}
