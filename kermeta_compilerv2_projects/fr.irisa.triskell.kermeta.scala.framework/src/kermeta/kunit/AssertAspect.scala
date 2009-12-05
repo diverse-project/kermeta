@@ -3,7 +3,7 @@ import kermeta.io._
 import kermeta.standard._
 import  kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
-trait AssertAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with kermeta.kunit.AbstractFallibleAspect with KunitImplicitConversion{
+trait AssertAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with kermeta.kunit.AbstractFallibleAspect  with KunitImplicitConversion{
 
    def assertTrue(condition : Boolean):Void = {
 var result : Void = null.asInstanceOf[Void]; 

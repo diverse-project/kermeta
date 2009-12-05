@@ -239,8 +239,7 @@ object JavaConversions {
     def size = underlying.length
     def get(i : Int) = underlying(i)
     override def set(i : Int, elem: A) = { val p = underlying(i) ; underlying(i) = elem ; p }
-    override def add(elem : A) = { println("toto") 
-    	underlying.append(elem) ; true }
+    override def add(elem : A) = {  underlying.append(elem) ; true }
     override def remove(i : Int) = underlying.remove(i)
   }
   case class MutableBufferWrapper1[A](underlying : mutable.Buffer[A]) extends ju.AbstractList[A] {

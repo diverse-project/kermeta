@@ -1,6 +1,6 @@
 package kermeta.kunit
 object RichFactory extends  KunitImplicitConversion{
- def createMain : kermeta.kunit.Main = { new kermeta.kunit.RichMain }
+// def createMain : kermeta.kunit.Main = { new kermeta.kunit.RichMain }
  def createInvalidTestCaseNameException : kermeta.kunit.InvalidTestCaseNameException = { new kermeta.kunit.RichInvalidTestCaseNameException }
  def createInvalidParameterException : kermeta.kunit.InvalidParameterException = { new kermeta.kunit.RichInvalidParameterException }
  def createLog : kermeta.kunit.Log = { new kermeta.kunit.RichLog }
@@ -9,6 +9,5 @@ object RichFactory extends  KunitImplicitConversion{
  def createTestSuite : kermeta.kunit.TestSuite = { new kermeta.kunit.RichTestSuite }
  def createTestRunner : kermeta.kunit.TestRunner = { new kermeta.kunit.RichTestRunner }
  def createAssertionFailedError : kermeta.kunit.AssertionFailedError = { new kermeta.kunit.RichAssertionFailedError }
- def createAssert : kermeta.kunit.Assert = { new kermeta.kunit.RichAssert }
-}
+ def createAssert : kermeta.kunit.Assert = { new kermeta.kunit.RichAssert }}
 

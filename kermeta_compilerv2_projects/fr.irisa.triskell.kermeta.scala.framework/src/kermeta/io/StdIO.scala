@@ -12,7 +12,7 @@ class StdIOClass {
 	
 	def error(obj : AnyRef) : Unit = {
 		Console.print(obj)
-	}
+	} 
 	
 	def writeln(obj : AnyRef) : Unit = {
 		Console.println(obj)

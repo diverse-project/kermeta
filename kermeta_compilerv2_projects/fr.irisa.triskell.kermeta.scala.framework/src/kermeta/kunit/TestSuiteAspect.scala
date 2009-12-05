@@ -17,7 +17,7 @@ var result : kermeta.kunit.TestSuite = null.asInstanceOf[kermeta.kunit.TestSuite
 {
 	//TODO
 	var tear : java.lang.reflect.Method =null
-	tear = testCaseClass.getDeclaredMethods().filter{e=> e.getName().startsWith("tearDown")}.first
+	//tear = testCaseClass.getDeclaredMethods().filter{e=> e.getName().startsWith("tearDown")}.first
 	var const : java.lang.reflect.Constructor[_] = testCaseClass.getConstructors().first
 	
 	testCaseClass.getDeclaredMethods().filter{e=> e.getName().startsWith("test")}.foreach{e1 => 
@@ -26,6 +26,7 @@ var result : kermeta.kunit.TestSuite = null.asInstanceOf[kermeta.kunit.TestSuite
 	
 	
 	var testcase : TestCase = const.newInstance().asInstanceOf[TestCase];
+	//testcase.set__testObject(testcase)
 	testcase.__tesMethod=e1;
 	testcase.__tearDownMethod=tear;
 	testcase.__testMethodName= e1.getName();	

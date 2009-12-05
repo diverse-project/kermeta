@@ -10,6 +10,9 @@ def set__testMethodName(arg:java.lang.String)={ this.__testMethodName = arg}
 def Scala__testMethodName : java.lang.String={this.get__testMethodName()}
 def Scala__testMethodName_=(arg : java.lang.String)={this.set__testMethodName(arg)} 
 
+
+//var __testObject : java.lang.Object= this
+//def set__testObject(arg:java.lang.Object)={ this.__testObject = arg}
 var __tesMethod : java.lang.reflect.Method= _ 
 var __tearDownMethod : java.lang.reflect.Method= _ 
 
@@ -87,25 +90,26 @@ result = this.getMetaClass().getName.plus(".").plus(getTestMethodName()).plus("(
 var result : kermeta.standard.Void = null.asInstanceOf[kermeta.standard.Void]; 
  //TODO
    try{
-	   //TODO ce n'est pas this
 	   this.__tesMethod.invoke(this)
 	      if (this.__tearDownMethod != null){
 			 try{		
-				  this.__tearDownMethod.invoke(this )
+				  this.__tearDownMethod.invoke(this)
 				  }catch {case e : kermeta.exceptions.Exception => this.getLog().addTestError(this,  e)
 			   }
 
 		   }
-	   	
-	   	//	tearDown
-					//rescue (e : exceptions::Exception)
-					//	getLog.addTearDownError(self, e)
-					//end
-	   
-	   
    }catch {
 	   case e : AssertionFailedError => this.getLog().addFailure(this,  e.message + "\nstack trace:\n" +  e.stackTrace)
 	   case e : kermeta.exceptions.Exception => this.getLog().addTestError(this,  e)
+	   case e : java.lang.reflect.InvocationTargetException => {
+	  	   if (e.getCause().isInstanceOf[AssertionFailedError])
+	  	  	   this.getLog().addFailure(this,  e.getCause().asInstanceOf[AssertionFailedError].message + "\nstack trace:\n" +  e.getCause().asInstanceOf[AssertionFailedError].stackTrace)
+	  	   else if(e.getCause().isInstanceOf[kermeta.exceptions.Exception])
+	  	  	   this.getLog().addTestError(this,  e.getCause.asInstanceOf[kermeta.exceptions.Exception])
+	  	   else
+	  	  	   e.printStackTrace()
+	  	   //println(e.getCause)
+	   }
    }
       
    
