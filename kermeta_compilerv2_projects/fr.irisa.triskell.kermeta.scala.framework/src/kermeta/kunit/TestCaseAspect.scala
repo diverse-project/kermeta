@@ -3,13 +3,15 @@ import kermeta.io._
 import kermeta.standard._
 import  kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
-
 trait TestCaseAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with kermeta.kunit.TestAspect with kermeta.kunit.FallibleAspect with KunitImplicitConversion{
 var __testMethodName : java.lang.String= _ 
 def get__testMethodName() : java.lang.String={this.__testMethodName}
 def set__testMethodName(arg:java.lang.String)={ this.__testMethodName = arg}
 def Scala__testMethodName : java.lang.String={this.get__testMethodName()}
 def Scala__testMethodName_=(arg : java.lang.String)={this.set__testMethodName(arg)} 
+
+var __tesMethod : java.lang.reflect.Method= _ 
+var __tearDownMethod : java.lang.reflect.Method= _ 
 
    def setUp():Void = {
 var result : Void = null.asInstanceOf[Void]; 
@@ -83,7 +85,33 @@ result = this.getMetaClass().getName.plus(".").plus(getTestMethodName()).plus("(
 
    def run():kermeta.standard.Void = {
 var result : kermeta.standard.Void = null.asInstanceOf[kermeta.standard.Void]; 
+ //TODO
+   try{
+	   //TODO ce n'est pas this
+	   this.__tesMethod.invoke(this)
+	      if (this.__tearDownMethod != null){
+			 try{		
+				  this.__tearDownMethod.invoke(this )
+				  }catch {case e : kermeta.exceptions.Exception => this.getLog().addTestError(this,  e)
+			   }
+
+		   }
+	   	
+	   	//	tearDown
+					//rescue (e : exceptions::Exception)
+					//	getLog.addTearDownError(self, e)
+					//end
+	   
+	   
+   }catch {
+	   case e : AssertionFailedError => this.getLog().addFailure(this,  e.message + "\nstack trace:\n" +  e.stackTrace)
+	   case e : kermeta.exceptions.Exception => this.getLog().addTestError(this,  e)
+   }
+      
+   
  
+
+  
  return result
 }
 
