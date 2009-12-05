@@ -15,7 +15,22 @@ this.getTests().addAll(arg)
    def addAllTestCasesFrom(testCaseClass : java.lang.Class[_]):kermeta.kunit.TestSuite = {
 var result : kermeta.kunit.TestSuite = null.asInstanceOf[kermeta.kunit.TestSuite]; 
 {
-//TODO
+	//TODO
+	var tear : java.lang.reflect.Method =null
+	tear = testCaseClass.getDeclaredMethods().filter{e=> e.getName().startsWith("tearDown")}.first
+	var const : java.lang.reflect.Constructor[_] = testCaseClass.getConstructors().first
+	
+	testCaseClass.getDeclaredMethods().filter{e=> e.getName().startsWith("test")}.foreach{e1 => 
+	
+	
+	
+	
+	var testcase : TestCase = const.newInstance().asInstanceOf[TestCase];
+	testcase.__tesMethod=e1;
+	testcase.__tearDownMethod=tear;
+	testcase.__testMethodName= e1.getName();	
+	this.getTests().add(testcase)	
+}
 
 result = this
 }
@@ -28,6 +43,7 @@ var result : kermeta.standard.Void = null.asInstanceOf[kermeta.standard.Void];
 tests.each({t=>{
 t.setLog(log)
 t.run()
+log.runtests = log.runtests+1
 }
 })
 }

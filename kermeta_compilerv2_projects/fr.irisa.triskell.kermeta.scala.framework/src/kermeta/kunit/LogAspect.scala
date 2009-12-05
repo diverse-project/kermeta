@@ -18,7 +18,7 @@ def Scalaerrors : java.util.List[kermeta.kunit.Error]={this.getErrors()}
 def Scalaerrors_=(arg : java.util.List[kermeta.kunit.Error])={this.getErrors().clear
 this.getErrors().addAll(arg)
 }
-var runtests : Int= _
+var runtests : Int= 0
 def getRuntests() : Int={this.runtests}
 def setRuntests(arg:Int)={ this.runtests = arg}
 def Scalaruntests : Int={this.getRuntests()}
