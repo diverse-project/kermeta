@@ -62,12 +62,16 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 				res append "(" 
          	
 			var i : Int = 1
-         	this.getParameters.foreach(e=> {
-         		//java.lang.Class.forName("testLambda.TestLambda")
+         	
+			//Gestion de kunit
+			this.getParameters.foreach(e=> {
          		if (this.getName.equals("run") && e.isInstanceOf[TypeLiteral])
          		{
          			res append "java.lang.Class.forName(\"" 
-         			e.generateScalaCode(res)
+         			var className :StringBuilder = new StringBuilder
+         			e.generateScalaCode(className)
+         			className.insert(className.lastIndexOf(".")+1,"Rich")
+         			res.append(className.toString())
          			res append "\")"
          		}
          		else 	//println ("type " + e.getClass)
