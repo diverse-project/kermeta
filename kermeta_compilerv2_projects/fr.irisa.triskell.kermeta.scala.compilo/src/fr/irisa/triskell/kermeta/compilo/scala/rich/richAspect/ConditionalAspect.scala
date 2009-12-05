@@ -16,6 +16,7 @@ trait ConditionalAspect extends RichAspectImplicit with ObjectAspect {
 		res.append(")")
 		this.getThenBody().generateScalaCode(res)
 		if(this.getElseBody()!=null){
+			res.append("else \n")
 			this.getElseBody().generateScalaCode(res)
 		}
 	}

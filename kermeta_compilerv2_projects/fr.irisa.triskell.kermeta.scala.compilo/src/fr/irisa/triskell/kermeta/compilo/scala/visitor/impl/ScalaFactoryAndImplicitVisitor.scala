@@ -147,7 +147,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 			}else{
 				viewDef.append(" class Rich"+par.getName()+" extends org.eclipse.emf.ecore.impl.EObjectImpl with "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+" with "+packageName.toString +"."+par.getName+"Aspect \n")
 				implicitDef append " implicit def richAspect(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"."+par.getName())+") = v.asInstanceOf["+ packageName.toString+"."+par.getName+"Aspect]\n" 
-				implicitDef append " implicit def richAspect(v : "+ packageName.toString+"."+par.getName()+"Aspect) = v.asInstanceOf["+ packageName.toString+".Rich"+par.getName+"]\n"
+				implicitDef append " implicit def richAspect(v : "+ packageName.toString+"."+par.getName()+"Aspect) = v.asInstanceOf["+ packageName.toString+"."+par.getName+"]\n"
 
 			}			
 			

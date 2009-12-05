@@ -77,8 +77,9 @@ object Main extends LogAspect {
 	   
 	  var compilo = new Compiler
 	  
-	  //inputFile = "../compilerv2_test/testReflection/kermeta/reflection.km"
-	  
+	 // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/068_testVariableInit.main.km"
+	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/037_testLambda.main.km"
+	//inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/0012_kunit.km"
 	  //compilo.compile("../compilerv2_test/tests/010_testLoop.main.km")
 
 	  //compilo.compile("../compilerv2_test/tests/006_testClosure.km")
