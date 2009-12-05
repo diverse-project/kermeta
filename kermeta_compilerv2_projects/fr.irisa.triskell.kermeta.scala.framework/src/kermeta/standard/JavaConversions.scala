@@ -247,7 +247,7 @@ object JavaConversions {
     def size = underlying.length
     def get(i : Int) = underlying(i)
     override def set(i : Int, elem: A) = { val p = underlying(i) ; underlying(i) = elem ; p }
-    override def add(elem : A) = { println("toto") 
+    override def add(elem : A) = { 
     	underlying.append(elem) ; true }
     override def remove(i : Int) = underlying.remove(i)
   }
@@ -263,8 +263,7 @@ object JavaConversions {
     def +=(elem : A): this.type = { underlying.add(elem); this }
     def insertAll(i : Int, elems : Traversable[A]) = { val ins = underlying.subList(0, i) ;  elems.foreach(ins.add(_)) }
     def remove(i : Int) = underlying.remove(i)
-    def clear = {println("passe par la")
-    	underlying.clear}    
+    def clear = {	underlying.clear}    
     def result = this
     
     

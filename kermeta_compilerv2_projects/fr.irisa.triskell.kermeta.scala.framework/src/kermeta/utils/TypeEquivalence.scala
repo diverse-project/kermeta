@@ -75,7 +75,6 @@ object TypeEquivalence {
 	};
 	 
 	def getMethodEquivalence(className:String,methodName:String):String={
-		println(className + "."+methodName)
 		var res :String = null
 		var map :java.util.HashMap[String,String] = methodEquivalence.get(className)
 		if (map !=null) 
