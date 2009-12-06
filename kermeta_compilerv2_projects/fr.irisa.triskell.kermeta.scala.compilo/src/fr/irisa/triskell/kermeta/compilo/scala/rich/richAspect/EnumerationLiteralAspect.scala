@@ -11,7 +11,6 @@ import java.util._
 trait EnumerationLiteralAspect extends RichAspectImplicit with ObjectAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		println("pass par enumeration literal")
 		res.append(this.getName())
 	} 
 }

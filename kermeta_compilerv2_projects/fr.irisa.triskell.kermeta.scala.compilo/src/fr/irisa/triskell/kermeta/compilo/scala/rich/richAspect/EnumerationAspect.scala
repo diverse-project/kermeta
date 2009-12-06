@@ -33,4 +33,10 @@ trait EnumerationAspect extends RichAspectImplicit with ObjectAspect {
 			res append " = Value\n"+"}"
 			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName), this.getName, res.toString())			
 	}
+	
+	override def getQualifiedNameCompilo():String ={
+		return this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName();
+	  
+	}
+
 }
