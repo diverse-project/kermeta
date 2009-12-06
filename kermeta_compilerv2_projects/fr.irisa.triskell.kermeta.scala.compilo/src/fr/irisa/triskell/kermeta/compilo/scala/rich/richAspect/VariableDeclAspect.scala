@@ -19,10 +19,12 @@ trait VariableDeclAspect extends RichAspectImplicit with ObjectAspect {
 		res.append(" = ")
 		if (this.getInitialization !=  null){	
 			this.getInitialization().generateScalaCode(res)
+			res.append(";")
+
 		}else{ 
 			res.append("null.asInstanceOf[")
 			this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
-			res.append("]")
+			res.append("];")
 		}
 	}
 }
