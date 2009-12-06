@@ -92,6 +92,12 @@ object JavaConversions {
 	override def size() :Int={return this.length}
 	def each(func : A=> Unit):Unit ={elements.foreach(e=> func(e))}
 	/*TODO*///def collect(collector : A=> Unit) :Sequence[A]={return null}
+	def elementAt(arg:Int):A={
+		return this.get(arg)
+	}
+	def getMetaClass():String={
+		return this.getClass().toString();
+	}
 	def asSet() :java.util.List[A] = {
 		var res : java.util.List[A] = new java.util.ArrayList[A];
 		this.each{e=> res.add(e)}

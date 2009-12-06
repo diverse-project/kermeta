@@ -28,6 +28,7 @@ object TypeEquivalence {
 		typeEquivelence.put("kermeta.utils.Stack", " java.util.Stack");
 		typeEquivelence.put("kermeta.standard.Collection", "java.util.List");
 		typeEquivelence.put("kermeta.standard.Set", "java.util.List");
+		typeEquivelence.put("kermeta.standard.Sequence", "java.util.List");
 		typeEquivelence.put("kermeta.standard.String", "java.lang.String");
 		typeEquivelence.put("kermeta.standard.Integer", "Int");
 		typeEquivelence.put("kermeta.standard.Real", "java.lang.Double");
