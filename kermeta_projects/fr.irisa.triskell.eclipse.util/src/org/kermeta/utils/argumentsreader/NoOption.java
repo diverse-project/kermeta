@@ -2,7 +2,7 @@
  * Created on 11 mai 2004
  *
  */
-package fr.irisa.triskell.utils.argumentsreader;
+package org.kermeta.utils.argumentsreader;
 
 /** This is a special option (with no name) that memorize the arguments that are not 
     involved with a known option.

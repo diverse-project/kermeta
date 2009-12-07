@@ -2,7 +2,7 @@
  * Created on 6 mai 2004
  *
  */
-package fr.irisa.triskell.utils.argumentsreader;
+package org.kermeta.utils.argumentsreader;
 
 /**
  * @author edrezen

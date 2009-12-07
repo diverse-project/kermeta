@@ -2,7 +2,7 @@
  * Created on 11 mai 2004
  *
  */
-package fr.irisa.triskell.utils.argumentsreader;
+package org.kermeta.utils.argumentsreader;
 
 import java.io.PrintStream;
 import java.util.Iterator;

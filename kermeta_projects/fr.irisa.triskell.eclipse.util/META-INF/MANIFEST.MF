@@ -26,7 +26,8 @@ Export-Package: fr.irisa.triskell.eclipse.console,
  org.kermeta.customidentity,
  org.kermeta.ecore.internal.model.helper;x-internal:=true,
  org.kermeta.ecore.model.helper,
- org.kermeta.jface.preference
+ org.kermeta.jface.preference,
+ org.kermeta.utils.argumentsreader
 Bundle-Vendor: IRISA/INRIA
 Bundle-ClassPath: .
 Bundle-Activator: fr.irisa.triskell.eclipse.plugin.Activator
