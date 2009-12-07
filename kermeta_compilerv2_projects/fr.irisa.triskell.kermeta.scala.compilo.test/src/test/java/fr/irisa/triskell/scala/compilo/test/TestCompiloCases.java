@@ -189,5 +189,19 @@ public class TestCompiloCases extends TestCase {
 		process(this.getClass().getResource("/tests").getPath()
 				+ "/079_testIntegerComparison");
 	}
+	
+	@Test
+	public void test012_testTypeFromEcore() {
+		process(this.getClass().getResource("/testEcore").getPath()
+				+ "/012_TypeFromEcore");
+	}
+	
+	@Test
+	public void test013_testLoadFromEcore() {
+		process(this.getClass().getResource("/testEcore").getPath()
+				+ "/013_LoadEcore");
+	}
+
+
 
 }
