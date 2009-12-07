@@ -26519,7 +26519,7 @@
                 <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.1/persistence/Repository/getResource/@ownedParameter.0/@containedType.0"/>
               </containedType>
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.1/interpreter/DynamicExpression/execute/@body/@statement.0/@thenBody/@statement.1/@value/@containedType.0"
-                  value="platform:/resource/compilerv2_test/testEcore/A.xmi"/>
+                  value="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/A.xmi"/>
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.2/Main/main/@body/@statement.0/@type/@containedType.0"
                   name="repository"/>
             </value>
