@@ -21,9 +21,9 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 			res.append(this.getName())
 			res.append("Aspect") 
 			
-  			if (this.getSuperType.size == 1 && "Object".equals(this.getSuperType.first.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getName) && !Util.hasEcoreTag(this.getSuperType.first.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition])){
-					//res.append(" extends "+Util.traitname)
-	  			//TODO extends a superClassAspect		  
+  			if (this.getSuperType.size == 1 && "Object".equals(this.getSuperType.first.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getName) ){
+				res append " extends "+ fr.irisa.triskell.kermeta.scala.framework.language.structure.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
+				res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 			} else {
 				var i = 0;
 				this.getSuperType.foreach(superC => {

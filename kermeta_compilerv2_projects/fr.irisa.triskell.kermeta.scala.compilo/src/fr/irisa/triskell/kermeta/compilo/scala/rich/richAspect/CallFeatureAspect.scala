@@ -27,7 +27,6 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 						res.append("[")	
 						ty1.getTypeParamBinding().foreach{e=> if (i>0) res.append(",")	; e.getType().generateScalaCode(res);i=i+1}
 						res.append("]")	
-						
 					}
 				}else{
 					this.getTarget.asInstanceOf[ObjectAspect].generateScalaCode(res)
@@ -43,8 +42,8 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 				if(this.getTarget() != null){
 					var TargetType : StringBuilder = new StringBuilder
 					this.getTarget().getStaticType().generateScalaCode(TargetType)
-					res.append(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString(), this.getName))
-					//res.append(GlobalConfiguration.scalaPrefix+kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName))
+					//res.append(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString(), this.getName))
+					res.append(GlobalConfiguration.scalaPrefix+kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName))
 				} else {
 					res append this.getName()
 				}
