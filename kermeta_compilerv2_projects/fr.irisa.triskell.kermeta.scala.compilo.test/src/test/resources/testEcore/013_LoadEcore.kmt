@@ -13,7 +13,7 @@ package test1;
 
 
 require kermeta
-require "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/resources/testEcore/A.ecore"
+require "platform:/resource/Test/src/kermeta/test1/A.ecore"
 
 using kermeta::standard
 using kermeta::persistence
@@ -22,7 +22,7 @@ class Main
 	operation main() : Void is do 
  		 var repository : EMFRepository init EMFRepository.new
 		 var resource : EMFResource 
- 		resource ?= repository.getResource("platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/resources/testEcore/A.xmi")//, "platform:/resource/KermetaCompilerTestCase/src/test1/A.ecore")
+ 		resource ?= repository.getResource("platform:/resource/compilerv2_test/testEcore/A.xmi")//, "platform:/resource/KermetaCompilerTestCase/src/test1/A.ecore")
  		resource.load
  		var a : A 
  		a?= resource.contents.one
