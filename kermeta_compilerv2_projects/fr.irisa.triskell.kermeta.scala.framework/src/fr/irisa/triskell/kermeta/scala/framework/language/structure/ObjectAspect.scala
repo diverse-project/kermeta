@@ -10,8 +10,8 @@ trait ObjectAspect extends EObject {
 	def ScalaclassDefinition = classDefinition
 	def typedefinition = this
 	def container = this.eContainer()
-	def checkInvariants = { /*TODO*/ }
-	def checkAllInvariants = { /*TODO*/ }
+	def checkInvariants() = { /*TODO*/ }
+	def checkAllInvariants() = { /*TODO*/ }
 	override def equals(o : Any) : Boolean = this.equals(o) /*TODO*/ 
 	def isNotEqual(o : Any) : Boolean = !equals(o)
 	def isKindOf(cl : EClass) : Boolean = this.eClass().equals(cl)
