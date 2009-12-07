@@ -13,12 +13,9 @@ trait RescueAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 		log.debug("Rescue Generation ")
 		res.append("case "+this.getExceptionName()+":")
 		this.getExceptionType.generateScalaCode(res)
-		res.append(" => ")
-		this.getBody().foreach(b => b.generateScalaCode(res))
-		res.append("\n")
-		
-		
-		
+		res.append(" => {")
+		this.getBody().foreach(b => {b.generateScalaCode(res);res.append("\n")})
+		res.append("}\n")
 	}
 
 }
