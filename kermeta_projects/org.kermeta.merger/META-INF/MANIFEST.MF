@@ -12,7 +12,8 @@ Require-Bundle: fr.irisa.triskell.kermeta.io,
  org.eclipse.gymnast.runtime.core,
  org.kermeta.io.loader,
  fr.irisa.triskell.traceability.model,
- org.kermeta.log4j.util
+ org.kermeta.log4j.util,
+ fr.irisa.triskell.eclipse.util
 Export-Package: org.kermeta.merger
 Bundle-Vendor: IRISA/INRIA
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
