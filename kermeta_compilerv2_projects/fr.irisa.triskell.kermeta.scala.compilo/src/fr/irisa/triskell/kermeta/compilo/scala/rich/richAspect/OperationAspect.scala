@@ -7,11 +7,12 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 
-trait OperationAspect extends RichAspectImplicit with ObjectAspect {
+trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 	
 	implicit def rich (xs : OperationAspect) = xs.asInstanceOf[Operation]
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
+		log.debug("Generate Method {}",this.getName)
 		res.append("\n   ")
 		if (this.getSuperOperation()!=null){
 			res.append(" override")

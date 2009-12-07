@@ -41,8 +41,9 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 
 	//TODO
 	override def createRescue() : Rescue = {
-		new RescueImpl() with ObjectAspect
+		new RescueView
 	}
+	
 
 	override def createBlock() : Block = {
 		new BlockView

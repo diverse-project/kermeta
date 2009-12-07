@@ -52,6 +52,10 @@ class TypeView extends TypeImpl with TypeAspect
 class ProductTypeView extends ProductTypeImpl with ProductTypeAspect
 class FunctionTypeView extends FunctionTypeImpl with FunctionTypeAspect
 class TypeDefinitionView extends TypeDefinitionImpl with TypeDefinitionAspect
+class ConstraintView extends ConstraintImpl with ConstraintAspect
+class RescueView extends RescueImpl with RescueAspect
+
+
 
 
 

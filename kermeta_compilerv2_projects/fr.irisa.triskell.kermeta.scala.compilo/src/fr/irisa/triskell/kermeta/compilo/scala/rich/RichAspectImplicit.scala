@@ -54,6 +54,8 @@ trait RichAspectImplicit {
     implicit def rich (xs : fr.irisa.triskell.kermeta.language.structure.Object) = xs.asInstanceOf[ObjectAspect]
 	implicit def rich (xs : FunctionType) = xs.asInstanceOf[FunctionTypeAspect]
 	implicit def rich (xs : ProductType) = xs.asInstanceOf[ProductTypeAspect]
+	implicit def rich (xs : Constraint) = xs.asInstanceOf[ConstraintAspect]
+	implicit def rich (xs : Rescue) = xs.asInstanceOf[RescueAspect]
 
 	
 	
@@ -82,5 +84,6 @@ trait RichAspectImplicit {
 	implicit def rich (xs : FunctionTypeAspect) = xs.asInstanceOf[FunctionType]
 	implicit def rich (xs : ProductTypeAspect) = xs.asInstanceOf[ProductType]
 	implicit def rich (xs : LambdaExpressionAspect) = xs.asInstanceOf[LambdaExpression]
-	
+	implicit def rich (xs : ConstraintAspect) = xs.asInstanceOf[Constraint]
+	implicit def rich (xs : RescueAspect) = xs.asInstanceOf[Rescue]
 }

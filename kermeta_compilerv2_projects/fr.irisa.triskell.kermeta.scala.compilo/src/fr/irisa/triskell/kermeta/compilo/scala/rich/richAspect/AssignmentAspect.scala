@@ -36,5 +36,6 @@ trait AssignmentAspect extends RichAspectImplicit with ObjectAspect with LogAspe
 		if(!targetClass.toString.equals("")){
 			res append ".asInstanceOf["+targetClass.toString+"]"
 		}
+		res.append(";")
 	} 
 }

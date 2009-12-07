@@ -125,7 +125,7 @@ class RichStructureFactoryImpl extends StructureFactoryImpl {
 	
 	//TODO
 	override def createConstraint() : Constraint = {
-		new ConstraintImpl() with ObjectAspect
+		new ConstraintView
 	}
 
 	//TODO
