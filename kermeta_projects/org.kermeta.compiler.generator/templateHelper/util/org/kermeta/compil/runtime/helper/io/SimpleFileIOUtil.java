@@ -90,16 +90,18 @@ public class SimpleFileIOUtil {
             out.close();
             
             // Refresh the content of the folder that contains the created file
-            try {
-            	IPath wsLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation();
-            	String wsRelativeFilename = filename.replaceAll("\\\\", "/").replaceFirst(wsLocation.toString(), "platform:/resource");
-            	IFile savedFile = ResourceHelper.getIFile(wsRelativeFilename, false);	
-            	if(savedFile != null)
-            		savedFile.getParent().refreshLocal(IFile.DEPTH_INFINITE, new NullProgressMonitor());
-			} catch (CoreException e1) {
-				// doesn't care if it doesn't work, this probably mean that this is outside of the workspace 
-				//e1.printStackTrace();
-			}
+            if(Platform.isRunning()) {
+	            try {
+	            	IPath wsLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+	            	String wsRelativeFilename = filename.replaceAll("\\\\", "/").replaceFirst(wsLocation.toString(), "platform:/resource");
+	            	IFile savedFile = ResourceHelper.getIFile(wsRelativeFilename, false);	
+	            	if(savedFile != null)
+	            		savedFile.getParent().refreshLocal(IFile.DEPTH_INFINITE, new NullProgressMonitor());
+				} catch (CoreException e1) {
+					// doesn't care if it doesn't work, this probably mean that this is outside of the workspace 
+					//e1.printStackTrace();
+				}
+            }
         }
         catch(IOException e) {
         	e.printStackTrace();
