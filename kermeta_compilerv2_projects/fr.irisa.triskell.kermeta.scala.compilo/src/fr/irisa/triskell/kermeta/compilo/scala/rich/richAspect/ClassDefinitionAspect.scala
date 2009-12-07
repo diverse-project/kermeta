@@ -94,7 +94,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 				this.getInv() foreach(a=> a.generateScalaCode(res))
 				
 				/* Generate checkInvariants */
-				res.append("override def checkInvariants(){\n")
+				res.append("\n override def checkInvariants(){\n")
 				this.getInv() foreach(a=> {
 					res.append("if(!"+a.getName()+"){throw kermeta.exceptions.RichFactory.createConstraintViolatedInvException }\n")
 				})
