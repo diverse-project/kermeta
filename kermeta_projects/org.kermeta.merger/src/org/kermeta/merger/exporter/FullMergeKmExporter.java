@@ -83,10 +83,31 @@ public class FullMergeKmExporter {
     public int nbOptionErrors=0;
     
 
-
+    
+    /**
+     * @param inputFile
+     * @param outputFile
+     * @param frameworkFile
+     * @param unifiedPlatformRoot
+     * @param kconfLocation
+     */
+    public FullMergeKmExporter(String inputFile, String outputFile, String frameworkFile, String unifiedPlatformRoot, String kconfLocation) {
+    	kermetaStandardURI = frameworkFile;
+    	initPlatformMapping(unifiedPlatformRoot);
+    	initKconf(kconfLocation);
+    	this.inputFileName = inputFile;
+    	this.outputFileName = outputFile;
+    	
+    }
+    
+    
+    
 	/**
 	 * Constructor to be used when run on the command line
 	 * It also set the input and output file
+	 * @param args
+	 */
+	/**
 	 * @param args
 	 */
 	public FullMergeKmExporter(String[] args) {
@@ -148,9 +169,7 @@ public class FullMergeKmExporter {
 			{
 				String platformMapping = it.next().toString();
 				System.out.println("\t" + platformMapping);
-				ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI(platformMapping));
-				ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI(platformMapping));
-			   // internalLog.debug ("\t" + platformMapping);
+				initPlatformMapping(platformMapping);
 			}
 		}
 		if (checkOption.Saw ("-kconf"))
@@ -161,7 +180,7 @@ public class FullMergeKmExporter {
 			{
 				String kconfMapping = it.next().toString();
 				System.out.println("\t" + kconfMapping);
-				ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("kconf:/loader/"), URI.createURI(kconfMapping));
+				initKconf(kconfMapping);
 			}
 		}
 		
@@ -304,5 +323,13 @@ public class FullMergeKmExporter {
 	private boolean isInitialized() {
 		return initialized;
 	}
+	
+	protected void initPlatformMapping(String unifiedPlatformRoot){
+		ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI(unifiedPlatformRoot));
+		ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI(unifiedPlatformRoot));
+    }
+    protected void initKconf(String kconfLocation){
+		ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("kconf:/loader/"), URI.createURI(kconfLocation));    	
+    }
 
 }
