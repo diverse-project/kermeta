@@ -27,7 +27,7 @@ public class FileUtility {
 						
 					}
 				} else {
-					throw new Exception("Content Not Equals "+traceLine+" | "+ouputLine);
+					throw new Exception("Content Not Equals, trace:"+traceLine+" | found:"+ouputLine);
 				}
 			}
 		}
