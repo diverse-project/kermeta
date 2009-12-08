@@ -29,6 +29,14 @@ using kermeta::kunit
  		result := y
  	end
  	
+ 	/** Create an instance of a type variable */
+	operation callNewOnTypeParameter() : T is do
+		result := T.new 
+	end
+	/** Clone an instance of a type variable */
+	operation callCloneOnTypeParameter(param : T) : T is do
+		result := T.clone(param)
+	end
  }
 
 class TestParametricClass inherits kermeta::kunit::TestCase
@@ -82,6 +90,20 @@ class TestParametricClass inherits kermeta::kunit::TestCase
      	assert(P2.get_y()==3)
      end
      
+    operation test_callNewOnTypeParameter() is do
+     	var P1 : ParamClass<Integer,String>
+     	P1 := ParamClass<Integer,String>.new
+     	P1.callNewOnTypeParameter()
+     end
+     
+     /** Clone an instance of a type variable */
+	operation test_callCloneOnTypeParameter() : Void is do
+		var P1 : ParamClass<String,String>
+     	P1 := ParamClass<String,String>.new
+		var s2 : String
+		s2 := P1.callCloneOnTypeParameter("bla")
+		assert("bla" == s2)
+	end
      
      
 }    
