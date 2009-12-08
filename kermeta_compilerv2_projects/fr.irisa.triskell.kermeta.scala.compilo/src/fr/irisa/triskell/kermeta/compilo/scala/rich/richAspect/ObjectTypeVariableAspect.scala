@@ -13,10 +13,13 @@ trait ObjectTypeVariableAspect extends RichAspectImplicit with ObjectAspect {
 	implicit def rich (xs : ObjectTypeVariableAspect) = xs.asInstanceOf[ObjectTypeVariable]
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		println("passe par la")
 		res.append(this.getName())	
-		
 	}
+	override def getQualifiedNameCompilo():String ={
+		return this.getName();
+	  
+	}
+
 
 }
  

@@ -20,6 +20,8 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 			res.append("trait ")
 			res.append(this.getName())
 			res.append("Aspect") 
+			this.generateParamerterClass(res)
+			
 			
   			if (this.getSuperType.size == 1 && "Object".equals(this.getSuperType.first.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getName) ){
 				res append " extends "+ fr.irisa.triskell.kermeta.scala.framework.language.structure.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
@@ -61,6 +63,8 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 			res.append("trait ")
 			res.append(this.getName())
 			res.append("Aspect")
+			this.generateParamerterClass(res)
+
 	  		if (this.getSuperType.size == 0){
 					//res.append(" extends "+Util.traitname)
 	  			//TODO extends a superClassAspect
@@ -114,8 +118,25 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 	
 	
 	override def getQualifiedNameCompilo():String ={
-		return this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName();
+		return kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName());
 	  
+	}
+	
+	def generateParamerterClass(res1:StringBuilder) = {
+						if (this.getTypeParameter().size()>0){
+					var i = 0
+					res1.append("[")
+					this.getTypeParameter().foreach{param =>
+						if (i>0)
+							res1.append(",")
+						println(param.getClass)
+						res1.append(param.getQualifiedNameCompilo())
+						i=i+1
+					}
+					res1.append("]")
+					
+				}
+
 	}
  	
 	

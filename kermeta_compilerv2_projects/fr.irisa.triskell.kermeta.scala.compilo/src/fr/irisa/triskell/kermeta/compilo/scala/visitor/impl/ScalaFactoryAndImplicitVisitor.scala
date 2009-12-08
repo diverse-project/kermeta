@@ -139,25 +139,27 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 				
 				
 			
+			var param : StringBuilder = new StringBuilder
+			par.generateParamerterClass(param);			
 			if (Util.hasEcoreTag(par)){
 				
 				viewDef.append(" class Rich"+par.getName()+" extends "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+"impl." + par.getName()+"Impl")+" with "+packageName.toString +"."+par.getName+"Aspect \n")
 				implicitDef append " implicit def richAspect(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName())+") = v.asInstanceOf["+ packageName.toString+"."+ par.getName+"Aspect]\n" 
 				implicitDef append " implicit def richAspect(v : "+ packageName.toString+"."+par.getName()+"Aspect) = v.asInstanceOf["+ packageName.toString+".Rich"+par.getName+"]\n"
 			}else{
-				viewDef.append(" class Rich"+par.getName()+" extends org.eclipse.emf.ecore.impl.EObjectImpl with "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+" with "+packageName.toString +"."+par.getName+"Aspect \n")
-				implicitDef append " implicit def richAspect(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"."+par.getName())+") = v.asInstanceOf["+ packageName.toString+"."+par.getName+"Aspect]\n" 
-				implicitDef append " implicit def richAspect(v : "+ packageName.toString+"."+par.getName()+"Aspect) = v.asInstanceOf["+ packageName.toString+"."+par.getName+"]\n"
+				viewDef.append(" class Rich"+par.getName()+ param.toString +" extends org.eclipse.emf.ecore.impl.EObjectImpl with "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+ param.toString +" with "+packageName.toString +"."+par.getName+"Aspect" + param.toString +" \n")
+				implicitDef append " implicit def richAspect" + param.toString + "(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"."+par.getName())+ param.toString +") = v.asInstanceOf["+ packageName.toString+"."+par.getName+"Aspect"+ param.toString +"]\n" 
+				implicitDef append " implicit def richAspect" + param.toString +"(v : "+ packageName.toString+"."+par.getName()+"Aspect" + param.toString +") = v.asInstanceOf["+ packageName.toString+"."+par.getName+ param.toString +"]\n"
 
 			}			
 			
 			if (!par.isIsAbstract()){
 				if (Util.hasEcoreTag(par)){
 					factoryDefClass append " override"
-					factoryDefClass append " def create"+par.getName()+" : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName())+" = { new "+ packageName.toString+".Rich"+par.getName+" }\n"
+					factoryDefClass append " def create"+par.getName()+ param.toString +" : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName())+param.toString+" = { new "+ packageName.toString+".Rich"+par.getName + param.toString +" }\n"
 				}
 				else{
-					factoryDefClass append " def create"+par.getName()+" : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"."+par.getName())+" = { new "+ packageName.toString+".Rich"+par.getName+" }\n"
+					factoryDefClass append " def create"+par.getName()+ param.toString +" : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"."+par.getName())+param.toString+" = { new "+ packageName.toString+".Rich"+par.getName+ param.toString +" }\n"
 				}
 			}
 	//}

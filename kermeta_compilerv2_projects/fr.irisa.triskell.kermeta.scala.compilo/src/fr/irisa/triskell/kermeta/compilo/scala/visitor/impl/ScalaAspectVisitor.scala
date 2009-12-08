@@ -72,6 +72,8 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 				res1.append("package "+genpackageName+"\n")
 				res1.append("trait ")
 				res1.append(par.getName())	
+				
+				par.generateParamerterClass(res1);
 				if(!par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo.equals("language.structure.Object")){
 					//log.debug("SuperTypefound="+ par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
 					var listSuperTypes = par.getSuperType()
