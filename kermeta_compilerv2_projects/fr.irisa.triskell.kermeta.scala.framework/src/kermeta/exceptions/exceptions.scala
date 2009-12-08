@@ -18,9 +18,9 @@ var message:String=null;
 var nestedException:Exception=null; 
 var stackTrace:String=null;
 def Scalamessage : java.lang.String={return this.message}
-def Scalamessage_=(arg : Exception)={nestedException  = arg}
+def Scalamessage_=(arg : java.lang.String)={message  = arg}
 def ScalanestedException : Exception={return this.nestedException }
-def ScalanestedException_=(arg : java.lang.String)={message = arg}
+def ScalanestedException_=(arg : Exception)={nestedException = arg}
 def ScalastackTrace : java.lang.String={return this.stackTrace }
 def ScalastackTrace_=(arg : java.lang.String)={stackTrace  = arg}
 
