@@ -338,11 +338,11 @@ abstract public class SaverOrLoader {
 		try {
 			String creationMethodName = "getByName";
 			Method method = str_pack_Class.getMethod(creationMethodName, java.lang.String.class);
-			Enumerator targetObject = (Enumerator) method.invoke(str_pack_Class, new Object[] {sourceObject.getLiteral()});
+			Enumerator targetObject = (Enumerator) method.invoke(str_pack_Class, new Object[] {sourceObject.getName()});
 			return targetObject;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("createInstance(EEnumLiteral sourceObject, String metamodelURI): " + sourceObject.eContainer() + " - "+ sourceObject.getLiteral() + " - " + str_enum);
+			System.err.println("createInstance(EEnumLiteral sourceObject, String metamodelURI): " + sourceObject.eContainer() + " - "+ sourceObject.getName() + " - " + str_enum);
 		}
 		
 		return null;
