@@ -18,6 +18,20 @@
           upper="1" isComposite="true"/>
       <ownedAttribute name="x" type="#//@packages.0/ParamClass/T" isOrdered="true"
           upper="1" isComposite="true"/>
+      <ownedOperation name="set_x" type="#//@packages.0/ParamClass/set_x/@containedType.0"
+          upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
+        <ownedParameter name="elt" type="#//@packages.0/ParamClass/T" isOrdered="true"
+            upper="1"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ParamClass/T">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ParamClass/T">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ParamClass/T"
+                name="x" staticProperty="#//@packages.0/ParamClass/x"/>
+            <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ParamClass/T"
+                name="elt"/>
+          </statement>
+        </body>
+      </ownedOperation>
       <ownedOperation tag="#//@packages.0/ParamClass/callCloneOnTypeParameter/@ownedTags.0"
           name="callCloneOnTypeParameter" type="#//@packages.0/ParamClass/T" isOrdered="true"
           upper="1">
@@ -41,20 +55,6 @@
                 <typeref name="T" type="#//@packages.0/ParamClass/T" upper="1"/>
               </target>
             </value>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="set_x" type="#//@packages.0/ParamClass/set_x/@containedType.0"
-          upper="1">
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
-        <ownedParameter name="elt" type="#//@packages.0/ParamClass/T" isOrdered="true"
-            upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ParamClass/T">
-          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ParamClass/T">
-            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ParamClass/T"
-                name="x" staticProperty="#//@packages.0/ParamClass/x"/>
-            <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ParamClass/T"
-                name="elt"/>
           </statement>
         </body>
       </ownedOperation>
@@ -640,62 +640,24 @@
               <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.1/kunit/Fallible/assert/@ownedParameter.0/@containedType.0"/>
             </containedType>
             <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/language/structure/Boolean/@containedType.0"
-                name="isInstance" staticOperation="#//@packages.1/language/structure/Type/isInstance">
+                name="isInstanceOf" staticOperation="#//@packages.1/language/structure/Object/isInstanceOf">
               <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/TestParametricClass/test2/@body/@statement.1/@parameters.0/@containedType.0/@containedType.0"
                   right="#//@packages.1/language/structure/Boolean/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.1/language/structure/Type/isInstance/@ownedParameter.0/@containedType.0"/>
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.1/language/structure/Object/isInstanceOf/@ownedParameter.0/@containedType.0"/>
               </containedType>
-              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TestParametricClass/test2/@body/@statement.0/@type/@containedType.0"
-                  name="l"/>
-              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/ParamClass/callCloneOnTypeParameter/@body/@statement.0/@value/@target/@containedType.0">
-                <typeref name="Collection" type="#//@packages.0/TestParametricClass/test2/@body/@statement.1/@parameters.0/@target/@typeref/@containedType.0"
+              <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/ParamClass/callCloneOnTypeParameter/@body/@statement.0/@value/@target/@containedType.0">
+                <typeref name="Collection" type="#//@packages.0/TestParametricClass/test2/@body/@statement.1/@parameters.0/@parameters.0/@typeref/@containedType.0"
                     upper="1">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Collection">
                     <typeParamBinding variable="#//@packages.1/standard/Collection/G"
-                        type="#//@packages.0/TestParametricClass/test2/@body/@statement.1/@parameters.0/@target/@typeref/@containedType.0/@typeParamBinding.0/@containedType.0">
+                        type="#//@packages.0/TestParametricClass/test2/@body/@statement.1/@parameters.0/@parameters.0/@typeref/@containedType.0/@typeParamBinding.0/@containedType.0">
                       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/String"/>
                     </typeParamBinding>
                   </containedType>
                 </typeref>
-              </target>
-            </parameters>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="test3" type="#//@packages.0/TestParametricClass/test3/@containedType.0"
-          upper="1">
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
-        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.1/kunit/Fallible/assert/@containedType.0">
-          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/kunit/Fallible/assert/@containedType.0"
-              name="assert" staticOperation="#//@packages.1/kunit/Fallible/assert">
-            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/TestParametricClass/test3/@body/@statement.0/@containedType.0/@containedType.0"
-                right="#//@packages.1/kunit/Fallible/assert/@containedType.0">
-              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.1/kunit/Fallible/assert/@ownedParameter.0/@containedType.0"/>
-            </containedType>
-            <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/language/structure/Boolean/@containedType.0"
-                name="isInstance" staticOperation="#//@packages.1/language/structure/Type/isInstance">
-              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/TestParametricClass/test3/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
-                  right="#//@packages.1/language/structure/Boolean/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.1/language/structure/Type/isInstance/@ownedParameter.0/@containedType.0"/>
-              </containedType>
-              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TestParametricClass/test3/@body/@statement.0/@parameters.0/@parameters.0/@containedType.0"
-                  name="names" staticProperty="#//@packages.0/TestParametricClass/names">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/OrderedSet">
-                  <typeParamBinding variable="#//@packages.1/standard/OrderedSet/G"
-                      type="#//@packages.0/TestParametricClass/names/@containedType.0"/>
-                </containedType>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/ParamClass/callCloneOnTypeParameter/@body/@statement.0/@value/@target/@containedType.0">
-                <typeref name="Collection" type="#//@packages.0/TestParametricClass/test3/@body/@statement.0/@parameters.0/@target/@typeref/@containedType.0"
-                    upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Collection">
-                    <typeParamBinding variable="#//@packages.1/standard/Collection/G"
-                        type="#//@packages.0/TestParametricClass/test3/@body/@statement.0/@parameters.0/@target/@typeref/@containedType.0/@typeParamBinding.0/@containedType.0">
-                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/String"/>
-                    </typeParamBinding>
-                  </containedType>
-                </typeref>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TestParametricClass/test2/@body/@statement.0/@type/@containedType.0"
+                  name="l"/>
             </parameters>
           </statement>
         </body>
@@ -739,6 +701,44 @@
               name="printTestResult" staticOperation="#//@packages.1/kunit/TestRunner/printTestResult">
             <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/TestParametricClass/main/@body/@statement.0/@type/@containedType.0"
                 name="tr"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="test3" type="#//@packages.0/TestParametricClass/test3/@containedType.0"
+          upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.1/kunit/Fallible/assert/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/kunit/Fallible/assert/@containedType.0"
+              name="assert" staticOperation="#//@packages.1/kunit/Fallible/assert">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/TestParametricClass/test3/@body/@statement.0/@containedType.0/@containedType.0"
+                right="#//@packages.1/kunit/Fallible/assert/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.1/kunit/Fallible/assert/@ownedParameter.0/@containedType.0"/>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.1/language/structure/Boolean/@containedType.0"
+                name="isInstanceOf" staticOperation="#//@packages.1/language/structure/Object/isInstanceOf">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/TestParametricClass/test3/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                  right="#//@packages.1/language/structure/Boolean/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.1/language/structure/Object/isInstanceOf/@ownedParameter.0/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/ParamClass/callCloneOnTypeParameter/@body/@statement.0/@value/@target/@containedType.0">
+                <typeref name="Collection" type="#//@packages.0/TestParametricClass/test3/@body/@statement.0/@parameters.0/@parameters.0/@typeref/@containedType.0"
+                    upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Collection">
+                    <typeParamBinding variable="#//@packages.1/standard/Collection/G"
+                        type="#//@packages.0/TestParametricClass/test3/@body/@statement.0/@parameters.0/@parameters.0/@typeref/@containedType.0/@typeParamBinding.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/String"/>
+                    </typeParamBinding>
+                  </containedType>
+                </typeref>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/TestParametricClass/test3/@body/@statement.0/@parameters.0/@target/@containedType.0"
+                  name="names" staticProperty="#//@packages.0/TestParametricClass/names">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/OrderedSet">
+                  <typeParamBinding variable="#//@packages.1/standard/OrderedSet/G"
+                      type="#//@packages.0/TestParametricClass/names/@containedType.0"/>
+                </containedType>
+              </target>
+            </parameters>
           </statement>
         </body>
       </ownedOperation>
