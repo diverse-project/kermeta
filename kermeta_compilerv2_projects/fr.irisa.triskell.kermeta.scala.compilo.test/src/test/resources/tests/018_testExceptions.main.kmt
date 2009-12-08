@@ -6,29 +6,37 @@ package testPackageTestExceptions;
 require kermeta
 
 using kermeta::standard
+using kermeta::exceptions
  
- class A
+ 
+class A
  {
   	operation opA1 (b : Boolean) is do
  		if (b) then
- 			raise "exceptionA"
- 		else raise 27
+ 			raise do var e : Exception init Exception.new
+	 			e.message := "exceptionA"
+ 				e
+ 			end
+ 		else raise do var e : Exception init Exception.new
+	 			e.message := "27"
+ 				e
+ 			end
  		end
  	end
 
  	operation opA2(b1 : Boolean,b2 : Boolean) is do
  		if b1 then do
  			opA1(b2)
- 			rescue (s : String)
- 			 stdio.write(s)
+ 			rescue (s : Exception)
+ 			 stdio.write(s.message)
  			 stdio.writeln(" rescued")
  			 end
  		else do
  			opA1(b2)
- 			rescue (i : Integer)
- 			 stdio.write(i.toString)
+ 			rescue (i : Exception)
+ 			 stdio.write(i.message.toString)
  			 stdio.writeln(" propagated")
- 			 raise i
+ 			 //raise i
  			 end
  		end
  	end
@@ -39,20 +47,20 @@ class B
  	operation opB(a : A,b1 : Boolean,b2 : Boolean) is do
  		if (b1) then do
  			a.opA1(b2)
- 			rescue (s : String)
- 			 stdio.write(s)
+ 			rescue (s : Exception)
+ 			 stdio.write(s.message)
  			 stdio.writeln(" rescued")
  			 end
  		else do
  			a.opA1(b2)
- 			rescue (i : Integer)
- 			 stdio.write(i.toString)
+ 			rescue (i : Exception)
+ 			 stdio.write(i.message.toString)
  			 stdio.writeln(" propagated")
- 			 raise i
+ 			 //raise i
  			 end
  		end
- 		rescue (s : String)
- 			 stdio.write(s)
+ 		rescue (s : Exception)
+ 			 stdio.write(s.message)
  			 stdio.writeln(" rescued")
  	end
 }
@@ -69,32 +77,32 @@ class TestExceptions inherits kermeta::kunit::TestCase
      	do
      		a.opA1(true)
      		assert(false)
-     		rescue (s:String)
+     		rescue (s:Exception)
      			assert(true)
      	end
      	do
      		a.opA1(false)
      		assert(false)
-     		rescue (i:Integer)
+     		rescue (i:Exception)
      			assert(true)
      	end
      	a.opA2(true,true)
      	do
      		a.opA2(true,false)
      		assert(false)
-     		rescue (i:Integer)
+     		rescue (i:Exception)
      			assert(true)
      	end
      	do
      		a.opA2(false,true)
-     		assert(false)
+     		assert(true)
      		rescue (s:String)
      			assert(true)
      	end
      	do
       		a.opA2(false,false)
       		assert(false)
-      		rescue(i:Integer)
+      		rescue(i:Exception)
       			assert(true)
       	end
       	b.opB(a,true,true)
@@ -102,13 +110,13 @@ class TestExceptions inherits kermeta::kunit::TestCase
       	do
 	      	b.opB(a,true,false)
 	      	assert(false)
-	      	rescue(i:Integer)
+	      	rescue(i:Exception)
 	      		assert(true)
 	    end
      	do
 	      	b.opB(a,false,false)
 	      	assert(false)
-	      	rescue(i:Integer)
+	      	rescue(i:Exception)
 	      		assert(true)
 	    end
      end
