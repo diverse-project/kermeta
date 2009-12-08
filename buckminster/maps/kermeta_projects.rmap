@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rmap
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.eclipse.org/buckminster/RMap-1.0"
+	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0"
+	xmlns:mp="http://www.eclipse.org/buckminster/MavenProvider-1.0"
+	xmlns:pp="http://www.eclipse.org/buckminster/PDEMapProvider-1.0">
+	<!-- Place your RMAP content here -->
+	<searchPath name="kermeta_projects">
+    <provider
+     readerType="svn"
+     componentTypes="eclipse.feature,osgi.bundle,buckminster"
+     source="true"
+     mutable="true">
+      <uri
+       format="https://scm.gforge.inria.fr/svn/kermeta/trunk/kermeta_projects/{0}">
+        <bc:propertyRef key="buckminster.component" />
+      </uri>
+    </provider>
+  </searchPath>
+  <searchPath name="devsupport_projects">
+    <provider
+     readerType="svn"
+     componentTypes="eclipse.feature,osgi.bundle,buckminster"
+     source="true"
+     mutable="true">
+      <uri
+       format="https://scm.gforge.inria.fr/svn/kermeta/trunk/devsupport_projects/{0}">
+        <bc:propertyRef key="buckminster.component" />
+      </uri>
+    </provider>
+  </searchPath>
+  <searchPath name="registration_projects">
+    <provider
+     readerType="svn"
+     componentTypes="eclipse.feature,osgi.bundle,buckminster"
+     source="true"
+     mutable="true">
+      <uri
+       format="https://scm.gforge.inria.fr/svn/kermeta/trunk/registration_projects/{0}">
+        <bc:propertyRef key="buckminster.component" />
+      </uri>
+    </provider>
+  </searchPath>
+  <searchPath name="emfatic_projects">
+    <provider
+     readerType="svn"
+     componentTypes="eclipse.feature,osgi.bundle,buckminster"
+     source="true"
+     mutable="true">
+      <uri
+       format="https://scm.gforge.inria.fr/svn/kermeta/trunk/emfatic_projects/{0}">
+        <bc:propertyRef key="buckminster.component" />
+      </uri>
+    </provider>
+  </searchPath>
+  <searchPath name="traceability_projects">
+    <provider
+     readerType="svn"
+     componentTypes="eclipse.feature,osgi.bundle,buckminster"
+     source="true"
+     mutable="true">
+      <uri
+       format="https://scm.gforge.inria.fr/svn/kermeta/trunk/Traceability_projects/{0}">
+        <bc:propertyRef key="buckminster.component" />
+      </uri>
+    </provider>
+  </searchPath>
+  <searchPath name="log4j_projects">
+    <provider
+     readerType="svn"
+     componentTypes="eclipse.feature,osgi.bundle,buckminster"
+     source="true"
+     mutable="true">
+      <uri
+       format="https://scm.gforge.inria.fr/svn/kermeta/trunk/log4j_projects/{0}">
+        <bc:propertyRef key="buckminster.component" />
+      </uri>
+    </provider>
+  </searchPath>
+  <searchPath name="eclipse_galileo">
+  	<provider readerType="eclipse.import"
+		componentTypes="osgi.bundle,eclipse.feature"
+		mutable="false"
+		source="false">
+		<uri format="http://download.eclipse.org/releases/galileo?importType=binary"/>
+	</provider>
+  </searchPath>
+
+  <locator searchPathRef="log4j_projects" pattern="^org\.kermeta\.log4j\..*" />
+  <locator searchPathRef="traceability_projects" pattern="^fr\.irisa\.triskell\.traceability\..*" />
+  <locator searchPathRef="kermeta_projects" pattern="^org\.kermeta\..*" />
+  <locator searchPathRef="kermeta_projects" pattern="^fr\.irisa\.triskell\..*" />
+  <locator searchPathRef="devsupport_projects" pattern="^org\.antlr\..*" />
+  <locator searchPathRef="registration_projects" pattern="^org\.eclipse\.emf\.ecoretools\..*" />
+  <locator searchPathRef="emfatic_projects" pattern="^org\.eclipse\.gymnast\..*" />
+  <locator searchPathRef="eclipse_galileo" pattern="^org\.eclipse\..*" />
+  <locator searchPathRef="eclipse_galileo" pattern="^org\.apache\.log4j" />
+  
+  <!-- <redirect href="http://www.eclipse.org/buckminster/samples/rmaps/dogfood2.rmap" pattern=".*"/> -->
+</rmap>
+
