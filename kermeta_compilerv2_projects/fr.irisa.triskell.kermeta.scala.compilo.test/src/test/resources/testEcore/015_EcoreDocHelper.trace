@@ -1,0 +1,3 @@
+	A :
+	    attr name : EString
+	    op   getQualifiedName() : EString
