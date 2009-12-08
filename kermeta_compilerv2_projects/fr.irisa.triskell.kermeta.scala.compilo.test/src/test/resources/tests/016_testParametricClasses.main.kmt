@@ -48,11 +48,11 @@ class TestParametricClass inherits kermeta::kunit::TestCase
 	operation test2() is do
 		var l : Collection<String> init Bag<String>.new
 		// check sub-typing poliy
-		assert(Collection<String>.isInstance(l))
+		assert(l.isInstanceOf(Collection<String>))
 	end
 
 	operation test3() is do
-		assert(Collection<String>.isInstance(names))
+		assert(names.isInstanceOf(Collection<String>))
 	end
 
 	operation main() is do
