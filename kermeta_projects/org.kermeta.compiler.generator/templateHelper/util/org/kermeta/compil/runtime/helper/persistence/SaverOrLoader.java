@@ -342,7 +342,7 @@ abstract public class SaverOrLoader {
 			return targetObject;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("createInstance(EEnumLiteral sourceObject, String metamodelURI): " + sourceObject.eContainer() + " - "+ sourceObject.getLiteral() + " - " + str_enum);
+			System.err.println("createInstance(EEnumLiteral sourceObject, String metamodelURI): " + sourceObject.eContainer() + " - "+ sourceObject.getName() + " - " + str_enum);
 		}
 		
 		return null;
