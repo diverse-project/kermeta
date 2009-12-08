@@ -141,6 +141,13 @@ public class TestCompiloCases extends TestCase {
 		process(this.getClass().getResource("/tests").getPath()
 				+ "/016_testParametricClasses.main");
 	}
+	
+	@Test
+	public void test016bis_testParametricClassesWithNewAndClone() {
+		process(this.getClass().getResource("/tests").getPath()
+				+ "/016bis_testParametricClasses.main");
+	}
+
 
 	@Test
 	public void test017_testSuperFeaturesCalls() {
@@ -202,6 +209,32 @@ public class TestCompiloCases extends TestCase {
 				+ "/013_LoadEcore");
 	}
 
+	@Test
+	public void test014_testLoadKM() {
+		process(this.getClass().getResource("/testEcore").getPath()
+				+ "/014_LoadKM");
+	}
 
+
+	@Test
+	public void test015_testFlatShortEcore() {
+		process(this.getClass().getResource("/testEcore").getPath()
+				+ "/015_EcoreDocHelper");
+	}
+
+	@Test
+	public void test016_LoadEcoreWithAspectAndInheritance() {
+		process(this.getClass().getResource("/testEcore").getPath()
+				+ "/016_testEcoreAspectWithInheritance");
+	}
+
+
+	@Test
+	public void test017_OverrideEcoreOperation() {
+		process(this.getClass().getResource("/testEcore").getPath()
+				+ "/017_OverrideEcoreOperation");
+	}
+
+	
 
 }
