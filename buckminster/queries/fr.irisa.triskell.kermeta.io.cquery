@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0" resourceMap="file:/E:/eclipse3.5_1.3.2/eclipse/workspace_head/testbuckminster/kermeta_projects.rmap">
+<cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0" resourceMap="https://gforge.inria.fr/plugins/scmsvn/viewcvs.php/*checkout*/trunk/buckminster/maps/kermeta_projects.rmap?root=kermeta">
     <cq:rootRequest name="fr.irisa.triskell.kermeta.io" componentType="osgi.bundle"/>
 </cq:componentQuery>
