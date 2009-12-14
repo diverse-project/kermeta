@@ -182,6 +182,11 @@ public class ComponentTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(TypePackage.Literals.COMPONENT_TYPE__PORT,
+				 TypeFactory.eINSTANCE.createPortCollection()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(TypePackage.Literals.COMPONENT_TYPE__ATTRIBUTE,
 				 TypeFactory.eINSTANCE.createBasicAttribute()));
 

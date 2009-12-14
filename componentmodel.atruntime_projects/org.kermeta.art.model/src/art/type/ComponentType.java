@@ -36,7 +36,7 @@ import org.eclipse.emf.common.util.EList;
 public interface ComponentType extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Port</b></em>' containment reference list.
-	 * The list contents are of type {@link art.type.Port}.
+	 * The list contents are of type {@link art.type.AbstractPort}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Port</em>' containment reference list isn't clear,
@@ -48,7 +48,7 @@ public interface ComponentType extends ModelElement {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Port> getPort();
+	EList<AbstractPort> getPort();
 
 	/**
 	 * Returns the value of the '<em><b>Attribute</b></em>' containment reference list.

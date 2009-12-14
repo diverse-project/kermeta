@@ -13,6 +13,7 @@ import art.impl.ModelElementImpl;
 
 import art.implem.TypeImplementation;
 
+import art.type.AbstractPort;
 import art.type.Attribute;
 import art.type.ComponentType;
 import art.type.Port;
@@ -59,7 +60,7 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Port> port;
+	protected EList<AbstractPort> port;
 
 	/**
 	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference list.
@@ -115,9 +116,9 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Port> getPort() {
+	public EList<AbstractPort> getPort() {
 		if (port == null) {
-			port = new EObjectContainmentEList<Port>(Port.class, this, TypePackage.COMPONENT_TYPE__PORT);
+			port = new EObjectContainmentEList<AbstractPort>(AbstractPort.class, this, TypePackage.COMPONENT_TYPE__PORT);
 		}
 		return port;
 	}
@@ -255,7 +256,7 @@ public abstract class ComponentTypeImpl extends ModelElementImpl implements Comp
 		switch (featureID) {
 			case TypePackage.COMPONENT_TYPE__PORT:
 				getPort().clear();
-				getPort().addAll((Collection<? extends Port>)newValue);
+				getPort().addAll((Collection<? extends AbstractPort>)newValue);
 				return;
 			case TypePackage.COMPONENT_TYPE__ATTRIBUTE:
 				getAttribute().clear();
