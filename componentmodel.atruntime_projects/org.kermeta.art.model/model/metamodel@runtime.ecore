@@ -67,15 +67,15 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TransmissionBinding" eSuperTypes="#//instance/Binding">
       <eStructuralFeatures xsi:type="ecore:EReference" name="client" lowerBound="1"
-          eType="#//type/Port"/>
+          eType="#//type/AbstractPort"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="server" lowerBound="1"
-          eType="#//type/Port"/>
+          eType="#//type/AbstractPort"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DelegationBinding" eSuperTypes="#//instance/Binding">
       <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-          eType="#//type/Port"/>
+          eType="#//type/AbstractPort"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="exported" lowerBound="1"
-          eType="#//type/Port"/>
+          eType="#//type/AbstractPort"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AttributeInstance" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute" eSuperTypes="#//instance/AttributeInstance">
@@ -127,9 +127,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="FunctionalService" eSuperTypes="#//type/Service"/>
     <eClassifiers xsi:type="ecore:EClass" name="ControlService" eSuperTypes="#//type/Service"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//CardinalityElement">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="#//Boolean"
-          defaultValueLiteral="false"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractPort" abstract="true" eSuperTypes="#//NamedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1"
           eType="#//type/Service"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" lowerBound="1"
@@ -137,6 +135,15 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="implem" eType="#//implem/PortImplementation"
           containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//CardinalityElement #//type/AbstractPort">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="#//Boolean"
+          defaultValueLiteral="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PortCollection" eSuperTypes="#//type/AbstractPort">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ids" lowerBound="1" upperBound="-1"
+          eType="#//type/PortId" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PortId"/>
     <eClassifiers xsi:type="ecore:EEnum" name="PortRole">
       <eLiterals name="client"/>
       <eLiterals name="server" value="1"/>
@@ -169,10 +176,6 @@
           eType="#//String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PortImplementation" abstract="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="OSGiPort" eSuperTypes="#//implem/PortImplementation">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceId" lowerBound="1"
-          eType="#//String"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TypeImplementation" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="OSGiType" eSuperTypes="#//implem/TypeImplementation">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="generateInstanceBundle"

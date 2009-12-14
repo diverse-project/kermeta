@@ -3,11 +3,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.kermeta.art.model; singleton:=true
 Bundle-Version: 1.1.1
-Bundle-Vendor: %providerName
+Bundle-Vendor: INRIA
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: art,
  art.group,
+ art.group.impl,
  art.group.util,
  art.impl,
  art.implem,

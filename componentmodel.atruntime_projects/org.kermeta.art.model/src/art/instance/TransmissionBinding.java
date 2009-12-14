@@ -6,6 +6,7 @@
  */
 package art.instance;
 
+import art.type.AbstractPort;
 import art.type.Port;
 
 /**
@@ -35,12 +36,12 @@ public interface TransmissionBinding extends Binding {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Client</em>' reference.
-	 * @see #setClient(Port)
+	 * @see #setClient(AbstractPort)
 	 * @see art.instance.InstancePackage#getTransmissionBinding_Client()
 	 * @model required="true"
 	 * @generated
 	 */
-	Port getClient();
+	AbstractPort getClient();
 
 	/**
 	 * Sets the value of the '{@link art.instance.TransmissionBinding#getClient <em>Client</em>}' reference.
@@ -50,7 +51,7 @@ public interface TransmissionBinding extends Binding {
 	 * @see #getClient()
 	 * @generated
 	 */
-	void setClient(Port value);
+	void setClient(AbstractPort value);
 
 	/**
 	 * Returns the value of the '<em><b>Server</b></em>' reference.
@@ -61,12 +62,12 @@ public interface TransmissionBinding extends Binding {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Server</em>' reference.
-	 * @see #setServer(Port)
+	 * @see #setServer(AbstractPort)
 	 * @see art.instance.InstancePackage#getTransmissionBinding_Server()
 	 * @model required="true"
 	 * @generated
 	 */
-	Port getServer();
+	AbstractPort getServer();
 
 	/**
 	 * Sets the value of the '{@link art.instance.TransmissionBinding#getServer <em>Server</em>}' reference.
@@ -76,6 +77,6 @@ public interface TransmissionBinding extends Binding {
 	 * @see #getServer()
 	 * @generated
 	 */
-	void setServer(Port value);
+	void setServer(AbstractPort value);
 
 } // TransmissionBinding

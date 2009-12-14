@@ -44,15 +44,6 @@ public interface ImplemFactory extends EFactory {
 	OSGiComponent createOSGiComponent();
 
 	/**
-	 * Returns a new object of class '<em>OS Gi Port</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>OS Gi Port</em>'.
-	 * @generated
-	 */
-	OSGiPort createOSGiPort();
-
-	/**
 	 * Returns a new object of class '<em>OS Gi Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

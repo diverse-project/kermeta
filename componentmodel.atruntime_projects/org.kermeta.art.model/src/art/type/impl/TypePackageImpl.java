@@ -22,6 +22,7 @@ import art.instance.InstancePackage;
 
 import art.instance.impl.InstancePackageImpl;
 
+import art.type.AbstractPort;
 import art.type.Attribute;
 import art.type.BasicAttribute;
 import art.type.ComponentType;
@@ -33,6 +34,8 @@ import art.type.FunctionalService;
 import art.type.Operation;
 import art.type.Parameter;
 import art.type.Port;
+import art.type.PortCollection;
+import art.type.PortId;
 import art.type.PortRole;
 import art.type.PrimitiveType;
 import art.type.Service;
@@ -115,7 +118,28 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass abstractPortEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass portEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass portCollectionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass portIdEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -367,6 +391,42 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAbstractPort() {
+		return abstractPortEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractPort_Service() {
+		return (EReference)abstractPortEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAbstractPort_Role() {
+		return (EAttribute)abstractPortEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractPort_Implem() {
+		return (EReference)abstractPortEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPort() {
 		return portEClass;
 	}
@@ -385,8 +445,8 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPort_Service() {
-		return (EReference)portEClass.getEStructuralFeatures().get(1);
+	public EClass getPortCollection() {
+		return portCollectionEClass;
 	}
 
 	/**
@@ -394,8 +454,8 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPort_Role() {
-		return (EAttribute)portEClass.getEStructuralFeatures().get(2);
+	public EReference getPortCollection_Ids() {
+		return (EReference)portCollectionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -403,8 +463,8 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPort_Implem() {
-		return (EReference)portEClass.getEStructuralFeatures().get(3);
+	public EClass getPortId() {
+		return portIdEClass;
 	}
 
 	/**
@@ -548,11 +608,18 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 
 		controlServiceEClass = createEClass(CONTROL_SERVICE);
 
+		abstractPortEClass = createEClass(ABSTRACT_PORT);
+		createEReference(abstractPortEClass, ABSTRACT_PORT__SERVICE);
+		createEAttribute(abstractPortEClass, ABSTRACT_PORT__ROLE);
+		createEReference(abstractPortEClass, ABSTRACT_PORT__IMPLEM);
+
 		portEClass = createEClass(PORT);
 		createEAttribute(portEClass, PORT__IS_OPTIONAL);
-		createEReference(portEClass, PORT__SERVICE);
-		createEAttribute(portEClass, PORT__ROLE);
-		createEReference(portEClass, PORT__IMPLEM);
+
+		portCollectionEClass = createEClass(PORT_COLLECTION);
+		createEReference(portCollectionEClass, PORT_COLLECTION__IDS);
+
+		portIdEClass = createEClass(PORT_ID);
 
 		attributeEClass = createEClass(ATTRIBUTE);
 
@@ -612,7 +679,10 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		parameterEClass.getESuperTypes().add(theArtPackage.getTypedElement());
 		functionalServiceEClass.getESuperTypes().add(this.getService());
 		controlServiceEClass.getESuperTypes().add(this.getService());
+		abstractPortEClass.getESuperTypes().add(theArtPackage.getNamedElement());
 		portEClass.getESuperTypes().add(theArtPackage.getCardinalityElement());
+		portEClass.getESuperTypes().add(this.getAbstractPort());
+		portCollectionEClass.getESuperTypes().add(this.getAbstractPort());
 		attributeEClass.getESuperTypes().add(theArtPackage.getTypedElement());
 		basicAttributeEClass.getESuperTypes().add(this.getAttribute());
 		dictionaryEClass.getESuperTypes().add(this.getAttribute());
@@ -641,11 +711,18 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 
 		initEClass(controlServiceEClass, ControlService.class, "ControlService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(abstractPortEClass, AbstractPort.class, "AbstractPort", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAbstractPort_Service(), this.getService(), null, "service", null, 1, 1, AbstractPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractPort_Role(), theArtPackage.getString(), "role", null, 1, 1, AbstractPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractPort_Implem(), theImplemPackage.getPortImplementation(), null, "implem", null, 0, 1, AbstractPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(portEClass, Port.class, "Port", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPort_IsOptional(), theArtPackage.getBoolean(), "isOptional", "false", 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPort_Service(), this.getService(), null, "service", null, 1, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPort_Role(), theArtPackage.getString(), "role", null, 1, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPort_Implem(), theImplemPackage.getPortImplementation(), null, "implem", null, 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(portCollectionEClass, PortCollection.class, "PortCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPortCollection_Ids(), this.getPortId(), null, "ids", null, 1, -1, PortCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(portIdEClass, PortId.class, "PortId", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -162,34 +162,6 @@ public interface ImplemPackage extends EPackage {
 	int PORT_IMPLEMENTATION_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link art.implem.impl.OSGiPortImpl <em>OS Gi Port</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see art.implem.impl.OSGiPortImpl
-	 * @see art.implem.impl.ImplemPackageImpl#getOSGiPort()
-	 * @generated
-	 */
-	int OS_GI_PORT = 4;
-
-	/**
-	 * The feature id for the '<em><b>Service Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OS_GI_PORT__SERVICE_ID = PORT_IMPLEMENTATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>OS Gi Port</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OS_GI_PORT_FEATURE_COUNT = PORT_IMPLEMENTATION_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link art.implem.impl.TypeImplementationImpl <em>Type Implementation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -197,7 +169,7 @@ public interface ImplemPackage extends EPackage {
 	 * @see art.implem.impl.ImplemPackageImpl#getTypeImplementation()
 	 * @generated
 	 */
-	int TYPE_IMPLEMENTATION = 5;
+	int TYPE_IMPLEMENTATION = 4;
 
 	/**
 	 * The number of structural features of the '<em>Type Implementation</em>' class.
@@ -216,7 +188,7 @@ public interface ImplemPackage extends EPackage {
 	 * @see art.implem.impl.ImplemPackageImpl#getOSGiType()
 	 * @generated
 	 */
-	int OS_GI_TYPE = 6;
+	int OS_GI_TYPE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Generate Instance Bundle</b></em>' attribute.
@@ -309,27 +281,6 @@ public interface ImplemPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getPortImplementation();
-
-	/**
-	 * Returns the meta object for class '{@link art.implem.OSGiPort <em>OS Gi Port</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>OS Gi Port</em>'.
-	 * @see art.implem.OSGiPort
-	 * @generated
-	 */
-	EClass getOSGiPort();
-
-	/**
-	 * Returns the meta object for the attribute '{@link art.implem.OSGiPort#getServiceId <em>Service Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Service Id</em>'.
-	 * @see art.implem.OSGiPort#getServiceId()
-	 * @see #getOSGiPort()
-	 * @generated
-	 */
-	EAttribute getOSGiPort_ServiceId();
 
 	/**
 	 * Returns the meta object for class '{@link art.implem.TypeImplementation <em>Type Implementation</em>}'.
@@ -447,24 +398,6 @@ public interface ImplemPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PORT_IMPLEMENTATION = eINSTANCE.getPortImplementation();
-
-		/**
-		 * The meta object literal for the '{@link art.implem.impl.OSGiPortImpl <em>OS Gi Port</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see art.implem.impl.OSGiPortImpl
-		 * @see art.implem.impl.ImplemPackageImpl#getOSGiPort()
-		 * @generated
-		 */
-		EClass OS_GI_PORT = eINSTANCE.getOSGiPort();
-
-		/**
-		 * The meta object literal for the '<em><b>Service Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OS_GI_PORT__SERVICE_ID = eINSTANCE.getOSGiPort_ServiceId();
 
 		/**
 		 * The meta object literal for the '{@link art.implem.impl.TypeImplementationImpl <em>Type Implementation</em>}' class.

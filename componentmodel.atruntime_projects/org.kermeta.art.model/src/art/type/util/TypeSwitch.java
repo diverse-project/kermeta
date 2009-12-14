@@ -161,12 +161,34 @@ public class TypeSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TypePackage.ABSTRACT_PORT: {
+				AbstractPort abstractPort = (AbstractPort)theEObject;
+				T result = caseAbstractPort(abstractPort);
+				if (result == null) result = caseNamedElement(abstractPort);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case TypePackage.PORT: {
 				Port port = (Port)theEObject;
 				T result = casePort(port);
 				if (result == null) result = caseCardinalityElement(port);
+				if (result == null) result = caseAbstractPort(port);
 				if (result == null) result = caseModelElement(port);
 				if (result == null) result = caseNamedElement(port);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypePackage.PORT_COLLECTION: {
+				PortCollection portCollection = (PortCollection)theEObject;
+				T result = casePortCollection(portCollection);
+				if (result == null) result = caseAbstractPort(portCollection);
+				if (result == null) result = caseNamedElement(portCollection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypePackage.PORT_ID: {
+				PortId portId = (PortId)theEObject;
+				T result = casePortId(portId);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -330,6 +352,21 @@ public class TypeSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Port</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Port</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractPort(AbstractPort object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Port</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -341,6 +378,36 @@ public class TypeSwitch<T> {
 	 * @generated
 	 */
 	public T casePort(Port object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Port Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Port Collection</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePortCollection(PortCollection object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Port Id</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Port Id</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePortId(PortId object) {
 		return null;
 	}
 

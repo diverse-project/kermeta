@@ -89,6 +89,24 @@ public interface TypeFactory extends EFactory {
 	Port createPort();
 
 	/**
+	 * Returns a new object of class '<em>Port Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Port Collection</em>'.
+	 * @generated
+	 */
+	PortCollection createPortCollection();
+
+	/**
+	 * Returns a new object of class '<em>Port Id</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Port Id</em>'.
+	 * @generated
+	 */
+	PortId createPortId();
+
+	/**
 	 * Returns a new object of class '<em>Basic Attribute</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

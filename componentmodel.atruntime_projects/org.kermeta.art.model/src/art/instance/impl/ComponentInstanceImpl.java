@@ -355,12 +355,12 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetSuperComponent((CompositeInstance)otherEnd, msgs);
-		case InstancePackage.COMPONENT_INSTANCE__GROUPS:
-			return ((InternalEList<InternalEObject>)(InternalEList<?>)getGroups()).basicAdd(otherEnd, msgs);
+			case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetSuperComponent((CompositeInstance)otherEnd, msgs);
+			case InstancePackage.COMPONENT_INSTANCE__GROUPS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGroups()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -373,16 +373,16 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
-			return basicSetSuperComponent(null, msgs);
-		case InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE:
-			return ((InternalEList<?>)getAttribute()).basicRemove(otherEnd, msgs);
-		case InstancePackage.COMPONENT_INSTANCE__BINDING:
-			return ((InternalEList<?>)getBinding()).basicRemove(otherEnd, msgs);
-		case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
-			return basicSetImplem(null, msgs);
-		case InstancePackage.COMPONENT_INSTANCE__GROUPS:
-			return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
+			case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
+				return basicSetSuperComponent(null, msgs);
+			case InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE:
+				return ((InternalEList<?>)getAttribute()).basicRemove(otherEnd, msgs);
+			case InstancePackage.COMPONENT_INSTANCE__BINDING:
+				return ((InternalEList<?>)getBinding()).basicRemove(otherEnd, msgs);
+			case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
+				return basicSetImplem(null, msgs);
+			case InstancePackage.COMPONENT_INSTANCE__GROUPS:
+				return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -395,8 +395,8 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-		case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
-			return eInternalContainer().eInverseRemove(this, InstancePackage.COMPOSITE_INSTANCE__SUB_COMPONENT, CompositeInstance.class, msgs);
+			case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
+				return eInternalContainer().eInverseRemove(this, InstancePackage.COMPOSITE_INSTANCE__SUB_COMPONENT, CompositeInstance.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -409,21 +409,21 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case InstancePackage.COMPONENT_INSTANCE__TYPE:
-			if (resolve) return getType();
-			return basicGetType();
-		case InstancePackage.COMPONENT_INSTANCE__STATE:
-			return getState();
-		case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
-			return getSuperComponent();
-		case InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE:
-			return getAttribute();
-		case InstancePackage.COMPONENT_INSTANCE__BINDING:
-			return getBinding();
-		case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
-			return getImplem();
-		case InstancePackage.COMPONENT_INSTANCE__GROUPS:
-			return getGroups();
+			case InstancePackage.COMPONENT_INSTANCE__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
+			case InstancePackage.COMPONENT_INSTANCE__STATE:
+				return getState();
+			case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
+				return getSuperComponent();
+			case InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE:
+				return getAttribute();
+			case InstancePackage.COMPONENT_INSTANCE__BINDING:
+				return getBinding();
+			case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
+				return getImplem();
+			case InstancePackage.COMPONENT_INSTANCE__GROUPS:
+				return getGroups();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -437,30 +437,30 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case InstancePackage.COMPONENT_INSTANCE__TYPE:
-			setType((ComponentType)newValue);
-			return;
-		case InstancePackage.COMPONENT_INSTANCE__STATE:
-			setState((String)newValue);
-			return;
-		case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
-			setSuperComponent((CompositeInstance)newValue);
-			return;
-		case InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE:
-			getAttribute().clear();
-			getAttribute().addAll((Collection<? extends AttributeInstance>)newValue);
-			return;
-		case InstancePackage.COMPONENT_INSTANCE__BINDING:
-			getBinding().clear();
-			getBinding().addAll((Collection<? extends TransmissionBinding>)newValue);
-			return;
-		case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
-			setImplem((ComponentImplementation)newValue);
-			return;
-		case InstancePackage.COMPONENT_INSTANCE__GROUPS:
-			getGroups().clear();
-			getGroups().addAll((Collection<? extends InstanceGroup>)newValue);
-			return;
+			case InstancePackage.COMPONENT_INSTANCE__TYPE:
+				setType((ComponentType)newValue);
+				return;
+			case InstancePackage.COMPONENT_INSTANCE__STATE:
+				setState((String)newValue);
+				return;
+			case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
+				setSuperComponent((CompositeInstance)newValue);
+				return;
+			case InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE:
+				getAttribute().clear();
+				getAttribute().addAll((Collection<? extends AttributeInstance>)newValue);
+				return;
+			case InstancePackage.COMPONENT_INSTANCE__BINDING:
+				getBinding().clear();
+				getBinding().addAll((Collection<? extends TransmissionBinding>)newValue);
+				return;
+			case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
+				setImplem((ComponentImplementation)newValue);
+				return;
+			case InstancePackage.COMPONENT_INSTANCE__GROUPS:
+				getGroups().clear();
+				getGroups().addAll((Collection<? extends InstanceGroup>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -473,27 +473,27 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case InstancePackage.COMPONENT_INSTANCE__TYPE:
-			setType((ComponentType)null);
-			return;
-		case InstancePackage.COMPONENT_INSTANCE__STATE:
-			setState(STATE_EDEFAULT);
-			return;
-		case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
-			setSuperComponent((CompositeInstance)null);
-			return;
-		case InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE:
-			getAttribute().clear();
-			return;
-		case InstancePackage.COMPONENT_INSTANCE__BINDING:
-			getBinding().clear();
-			return;
-		case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
-			setImplem((ComponentImplementation)null);
-			return;
-		case InstancePackage.COMPONENT_INSTANCE__GROUPS:
-			getGroups().clear();
-			return;
+			case InstancePackage.COMPONENT_INSTANCE__TYPE:
+				setType((ComponentType)null);
+				return;
+			case InstancePackage.COMPONENT_INSTANCE__STATE:
+				setState(STATE_EDEFAULT);
+				return;
+			case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
+				setSuperComponent((CompositeInstance)null);
+				return;
+			case InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE:
+				getAttribute().clear();
+				return;
+			case InstancePackage.COMPONENT_INSTANCE__BINDING:
+				getBinding().clear();
+				return;
+			case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
+				setImplem((ComponentImplementation)null);
+				return;
+			case InstancePackage.COMPONENT_INSTANCE__GROUPS:
+				getGroups().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -506,20 +506,20 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case InstancePackage.COMPONENT_INSTANCE__TYPE:
-			return type != null;
-		case InstancePackage.COMPONENT_INSTANCE__STATE:
-			return STATE_EDEFAULT == null ? state != null : !STATE_EDEFAULT.equals(state);
-		case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
-			return getSuperComponent() != null;
-		case InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE:
-			return attribute != null && !attribute.isEmpty();
-		case InstancePackage.COMPONENT_INSTANCE__BINDING:
-			return binding != null && !binding.isEmpty();
-		case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
-			return implem != null;
-		case InstancePackage.COMPONENT_INSTANCE__GROUPS:
-			return groups != null && !groups.isEmpty();
+			case InstancePackage.COMPONENT_INSTANCE__TYPE:
+				return type != null;
+			case InstancePackage.COMPONENT_INSTANCE__STATE:
+				return STATE_EDEFAULT == null ? state != null : !STATE_EDEFAULT.equals(state);
+			case InstancePackage.COMPONENT_INSTANCE__SUPER_COMPONENT:
+				return getSuperComponent() != null;
+			case InstancePackage.COMPONENT_INSTANCE__ATTRIBUTE:
+				return attribute != null && !attribute.isEmpty();
+			case InstancePackage.COMPONENT_INSTANCE__BINDING:
+				return binding != null && !binding.isEmpty();
+			case InstancePackage.COMPONENT_INSTANCE__IMPLEM:
+				return implem != null;
+			case InstancePackage.COMPONENT_INSTANCE__GROUPS:
+				return groups != null && !groups.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

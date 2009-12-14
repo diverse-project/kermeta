@@ -109,8 +109,20 @@ public class TypeAdapterFactory extends AdapterFactoryImpl {
 				return createControlServiceAdapter();
 			}
 			@Override
+			public Adapter caseAbstractPort(AbstractPort object) {
+				return createAbstractPortAdapter();
+			}
+			@Override
 			public Adapter casePort(Port object) {
 				return createPortAdapter();
+			}
+			@Override
+			public Adapter casePortCollection(PortCollection object) {
+				return createPortCollectionAdapter();
+			}
+			@Override
+			public Adapter casePortId(PortId object) {
+				return createPortIdAdapter();
 			}
 			@Override
 			public Adapter caseAttribute(Attribute object) {
@@ -277,6 +289,20 @@ public class TypeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link art.type.AbstractPort <em>Abstract Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.type.AbstractPort
+	 * @generated
+	 */
+	public Adapter createAbstractPortAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link art.type.Port <em>Port</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -287,6 +313,34 @@ public class TypeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPortAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.type.PortCollection <em>Port Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.type.PortCollection
+	 * @generated
+	 */
+	public Adapter createPortCollectionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art.type.PortId <em>Port Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art.type.PortId
+	 * @generated
+	 */
+	public Adapter createPortIdAdapter() {
 		return null;
 	}
 

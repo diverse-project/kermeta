@@ -6,12 +6,11 @@
  */
 package art.type.impl;
 
-import art.impl.CardinalityElementImpl;
+import art.impl.NamedElementImpl;
 
 import art.implem.PortImplementation;
 
 import art.type.AbstractPort;
-import art.type.Port;
 import art.type.Service;
 import art.type.TypePackage;
 
@@ -25,21 +24,20 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Port</b></em>'.
+ * An implementation of the model object '<em><b>Abstract Port</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link art.type.impl.PortImpl#getService <em>Service</em>}</li>
- *   <li>{@link art.type.impl.PortImpl#getRole <em>Role</em>}</li>
- *   <li>{@link art.type.impl.PortImpl#getImplem <em>Implem</em>}</li>
- *   <li>{@link art.type.impl.PortImpl#getIsOptional <em>Is Optional</em>}</li>
+ *   <li>{@link art.type.impl.AbstractPortImpl#getService <em>Service</em>}</li>
+ *   <li>{@link art.type.impl.AbstractPortImpl#getRole <em>Role</em>}</li>
+ *   <li>{@link art.type.impl.AbstractPortImpl#getImplem <em>Implem</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PortImpl extends CardinalityElementImpl implements Port {
+public abstract class AbstractPortImpl extends NamedElementImpl implements AbstractPort {
 	/**
 	 * The cached value of the '{@link #getService() <em>Service</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -81,31 +79,11 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	protected PortImplementation implem;
 
 	/**
-	 * The default value of the '{@link #getIsOptional() <em>Is Optional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsOptional()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Boolean IS_OPTIONAL_EDEFAULT = Boolean.FALSE;
-
-	/**
-	 * The cached value of the '{@link #getIsOptional() <em>Is Optional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsOptional()
-	 * @generated
-	 * @ordered
-	 */
-	protected Boolean isOptional = IS_OPTIONAL_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PortImpl() {
+	protected AbstractPortImpl() {
 		super();
 	}
 
@@ -116,28 +94,7 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TypePackage.Literals.PORT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Boolean getIsOptional() {
-		return isOptional;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsOptional(Boolean newIsOptional) {
-		Boolean oldIsOptional = isOptional;
-		isOptional = newIsOptional;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypePackage.PORT__IS_OPTIONAL, oldIsOptional, isOptional));
+		return TypePackage.Literals.ABSTRACT_PORT;
 	}
 
 	/**
@@ -151,7 +108,7 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 			service = (Service)eResolveProxy(oldService);
 			if (service != oldService) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypePackage.PORT__SERVICE, oldService, service));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypePackage.ABSTRACT_PORT__SERVICE, oldService, service));
 			}
 		}
 		return service;
@@ -175,7 +132,7 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 		Service oldService = service;
 		service = newService;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypePackage.PORT__SERVICE, oldService, service));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypePackage.ABSTRACT_PORT__SERVICE, oldService, service));
 	}
 
 	/**
@@ -196,7 +153,7 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 		String oldRole = role;
 		role = newRole;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypePackage.PORT__ROLE, oldRole, role));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypePackage.ABSTRACT_PORT__ROLE, oldRole, role));
 	}
 
 	/**
@@ -217,7 +174,7 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 		PortImplementation oldImplem = implem;
 		implem = newImplem;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypePackage.PORT__IMPLEM, oldImplem, newImplem);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypePackage.ABSTRACT_PORT__IMPLEM, oldImplem, newImplem);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -232,14 +189,14 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 		if (newImplem != implem) {
 			NotificationChain msgs = null;
 			if (implem != null)
-				msgs = ((InternalEObject)implem).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypePackage.PORT__IMPLEM, null, msgs);
+				msgs = ((InternalEObject)implem).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypePackage.ABSTRACT_PORT__IMPLEM, null, msgs);
 			if (newImplem != null)
-				msgs = ((InternalEObject)newImplem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypePackage.PORT__IMPLEM, null, msgs);
+				msgs = ((InternalEObject)newImplem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypePackage.ABSTRACT_PORT__IMPLEM, null, msgs);
 			msgs = basicSetImplem(newImplem, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypePackage.PORT__IMPLEM, newImplem, newImplem));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypePackage.ABSTRACT_PORT__IMPLEM, newImplem, newImplem));
 	}
 
 	/**
@@ -250,7 +207,7 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypePackage.PORT__IMPLEM:
+			case TypePackage.ABSTRACT_PORT__IMPLEM:
 				return basicSetImplem(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -264,15 +221,13 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypePackage.PORT__SERVICE:
+			case TypePackage.ABSTRACT_PORT__SERVICE:
 				if (resolve) return getService();
 				return basicGetService();
-			case TypePackage.PORT__ROLE:
+			case TypePackage.ABSTRACT_PORT__ROLE:
 				return getRole();
-			case TypePackage.PORT__IMPLEM:
+			case TypePackage.ABSTRACT_PORT__IMPLEM:
 				return getImplem();
-			case TypePackage.PORT__IS_OPTIONAL:
-				return getIsOptional();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -285,17 +240,14 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypePackage.PORT__SERVICE:
+			case TypePackage.ABSTRACT_PORT__SERVICE:
 				setService((Service)newValue);
 				return;
-			case TypePackage.PORT__ROLE:
+			case TypePackage.ABSTRACT_PORT__ROLE:
 				setRole((String)newValue);
 				return;
-			case TypePackage.PORT__IMPLEM:
+			case TypePackage.ABSTRACT_PORT__IMPLEM:
 				setImplem((PortImplementation)newValue);
-				return;
-			case TypePackage.PORT__IS_OPTIONAL:
-				setIsOptional((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -309,17 +261,14 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypePackage.PORT__SERVICE:
+			case TypePackage.ABSTRACT_PORT__SERVICE:
 				setService((Service)null);
 				return;
-			case TypePackage.PORT__ROLE:
+			case TypePackage.ABSTRACT_PORT__ROLE:
 				setRole(ROLE_EDEFAULT);
 				return;
-			case TypePackage.PORT__IMPLEM:
+			case TypePackage.ABSTRACT_PORT__IMPLEM:
 				setImplem((PortImplementation)null);
-				return;
-			case TypePackage.PORT__IS_OPTIONAL:
-				setIsOptional(IS_OPTIONAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -333,52 +282,14 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypePackage.PORT__SERVICE:
+			case TypePackage.ABSTRACT_PORT__SERVICE:
 				return service != null;
-			case TypePackage.PORT__ROLE:
+			case TypePackage.ABSTRACT_PORT__ROLE:
 				return ROLE_EDEFAULT == null ? role != null : !ROLE_EDEFAULT.equals(role);
-			case TypePackage.PORT__IMPLEM:
+			case TypePackage.ABSTRACT_PORT__IMPLEM:
 				return implem != null;
-			case TypePackage.PORT__IS_OPTIONAL:
-				return IS_OPTIONAL_EDEFAULT == null ? isOptional != null : !IS_OPTIONAL_EDEFAULT.equals(isOptional);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == AbstractPort.class) {
-			switch (derivedFeatureID) {
-				case TypePackage.PORT__SERVICE: return TypePackage.ABSTRACT_PORT__SERVICE;
-				case TypePackage.PORT__ROLE: return TypePackage.ABSTRACT_PORT__ROLE;
-				case TypePackage.PORT__IMPLEM: return TypePackage.ABSTRACT_PORT__IMPLEM;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == AbstractPort.class) {
-			switch (baseFeatureID) {
-				case TypePackage.ABSTRACT_PORT__SERVICE: return TypePackage.PORT__SERVICE;
-				case TypePackage.ABSTRACT_PORT__ROLE: return TypePackage.PORT__ROLE;
-				case TypePackage.ABSTRACT_PORT__IMPLEM: return TypePackage.PORT__IMPLEM;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -393,10 +304,8 @@ public class PortImpl extends CardinalityElementImpl implements Port {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (role: ");
 		result.append(role);
-		result.append(", isOptional: ");
-		result.append(isOptional);
 		result.append(')');
 		return result.toString();
 	}
 
-} //PortImpl
+} //AbstractPortImpl

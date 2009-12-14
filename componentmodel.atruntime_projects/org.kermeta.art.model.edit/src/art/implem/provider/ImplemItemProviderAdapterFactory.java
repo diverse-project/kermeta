@@ -122,29 +122,6 @@ public class ImplemItemProviderAdapterFactory extends ImplemAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link art.implem.OSGiPort} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected OSGiPortItemProvider osGiPortItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link art.implem.OSGiPort}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createOSGiPortAdapter() {
-		if (osGiPortItemProvider == null) {
-			osGiPortItemProvider = new OSGiPortItemProvider(this);
-		}
-
-		return osGiPortItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link art.implem.OSGiType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -268,7 +245,6 @@ public class ImplemItemProviderAdapterFactory extends ImplemAdapterFactory imple
 	public void dispose() {
 		if (fractalComponentItemProvider != null) fractalComponentItemProvider.dispose();
 		if (osGiComponentItemProvider != null) osGiComponentItemProvider.dispose();
-		if (osGiPortItemProvider != null) osGiPortItemProvider.dispose();
 		if (osGiTypeItemProvider != null) osGiTypeItemProvider.dispose();
 	}
 

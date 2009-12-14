@@ -6,6 +6,7 @@
  */
 package art.instance;
 
+import art.type.AbstractPort;
 import art.type.Port;
 
 /**
@@ -35,12 +36,12 @@ public interface DelegationBinding extends Binding {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source</em>' reference.
-	 * @see #setSource(Port)
+	 * @see #setSource(AbstractPort)
 	 * @see art.instance.InstancePackage#getDelegationBinding_Source()
 	 * @model required="true"
 	 * @generated
 	 */
-	Port getSource();
+	AbstractPort getSource();
 
 	/**
 	 * Sets the value of the '{@link art.instance.DelegationBinding#getSource <em>Source</em>}' reference.
@@ -50,7 +51,7 @@ public interface DelegationBinding extends Binding {
 	 * @see #getSource()
 	 * @generated
 	 */
-	void setSource(Port value);
+	void setSource(AbstractPort value);
 
 	/**
 	 * Returns the value of the '<em><b>Exported</b></em>' reference.
@@ -61,12 +62,12 @@ public interface DelegationBinding extends Binding {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Exported</em>' reference.
-	 * @see #setExported(Port)
+	 * @see #setExported(AbstractPort)
 	 * @see art.instance.InstancePackage#getDelegationBinding_Exported()
 	 * @model required="true"
 	 * @generated
 	 */
-	Port getExported();
+	AbstractPort getExported();
 
 	/**
 	 * Sets the value of the '{@link art.instance.DelegationBinding#getExported <em>Exported</em>}' reference.
@@ -76,6 +77,6 @@ public interface DelegationBinding extends Binding {
 	 * @see #getExported()
 	 * @generated
 	 */
-	void setExported(Port value);
+	void setExported(AbstractPort value);
 
 } // DelegationBinding

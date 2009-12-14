@@ -7,12 +7,10 @@
 package art.type.provider;
 
 
-import art.implem.ImplemFactory;
-
-import art.provider.CardinalityElementItemProvider;
 import art.provider.MetamodelruntimeEditPlugin;
+import art.provider.NamedElementItemProvider;
 
-import art.type.Port;
+import art.type.AbstractPort;
 import art.type.TypePackage;
 
 import java.util.Collection;
@@ -36,13 +34,13 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link art.type.Port} object.
+ * This is the item provider adapter for a {@link art.type.AbstractPort} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class PortItemProvider
-	extends CardinalityElementItemProvider
+public class AbstractPortItemProvider
+	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -55,7 +53,7 @@ public class PortItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PortItemProvider(AdapterFactory adapterFactory) {
+	public AbstractPortItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -72,31 +70,8 @@ public class PortItemProvider
 
 			addServicePropertyDescriptor(object);
 			addRolePropertyDescriptor(object);
-			addIsOptionalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Is Optional feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIsOptionalPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Port_isOptional_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Port_isOptional_feature", "_UI_Port_type"),
-				 TypePackage.Literals.PORT__IS_OPTIONAL,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -174,17 +149,6 @@ public class PortItemProvider
 	}
 
 	/**
-	 * This returns Port.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Port"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -192,10 +156,10 @@ public class PortItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Port)object).getName();
+		String label = ((AbstractPort)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Port_type") :
-			getString("_UI_Port_type") + " " + label;
+			getString("_UI_AbstractPort_type") :
+			getString("_UI_AbstractPort_type") + " " + label;
 	}
 
 	/**
@@ -209,12 +173,11 @@ public class PortItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Port.class)) {
-			case TypePackage.PORT__ROLE:
-			case TypePackage.PORT__IS_OPTIONAL:
+		switch (notification.getFeatureID(AbstractPort.class)) {
+			case TypePackage.ABSTRACT_PORT__ROLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case TypePackage.PORT__IMPLEM:
+			case TypePackage.ABSTRACT_PORT__IMPLEM:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}

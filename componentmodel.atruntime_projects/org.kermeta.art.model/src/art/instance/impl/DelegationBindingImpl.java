@@ -9,6 +9,7 @@ package art.instance.impl;
 import art.instance.DelegationBinding;
 import art.instance.InstancePackage;
 
+import art.type.AbstractPort;
 import art.type.Port;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -41,7 +42,7 @@ public class DelegationBindingImpl extends BindingImpl implements DelegationBind
 	 * @generated
 	 * @ordered
 	 */
-	protected Port source;
+	protected AbstractPort source;
 
 	/**
 	 * The cached value of the '{@link #getExported() <em>Exported</em>}' reference.
@@ -51,7 +52,7 @@ public class DelegationBindingImpl extends BindingImpl implements DelegationBind
 	 * @generated
 	 * @ordered
 	 */
-	protected Port exported;
+	protected AbstractPort exported;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -77,10 +78,10 @@ public class DelegationBindingImpl extends BindingImpl implements DelegationBind
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Port getSource() {
+	public AbstractPort getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
-			source = (Port)eResolveProxy(oldSource);
+			source = (AbstractPort)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, InstancePackage.DELEGATION_BINDING__SOURCE, oldSource, source));
@@ -94,7 +95,7 @@ public class DelegationBindingImpl extends BindingImpl implements DelegationBind
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Port basicGetSource() {
+	public AbstractPort basicGetSource() {
 		return source;
 	}
 
@@ -103,8 +104,8 @@ public class DelegationBindingImpl extends BindingImpl implements DelegationBind
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSource(Port newSource) {
-		Port oldSource = source;
+	public void setSource(AbstractPort newSource) {
+		AbstractPort oldSource = source;
 		source = newSource;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, InstancePackage.DELEGATION_BINDING__SOURCE, oldSource, source));
@@ -115,10 +116,10 @@ public class DelegationBindingImpl extends BindingImpl implements DelegationBind
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Port getExported() {
+	public AbstractPort getExported() {
 		if (exported != null && exported.eIsProxy()) {
 			InternalEObject oldExported = (InternalEObject)exported;
-			exported = (Port)eResolveProxy(oldExported);
+			exported = (AbstractPort)eResolveProxy(oldExported);
 			if (exported != oldExported) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, InstancePackage.DELEGATION_BINDING__EXPORTED, oldExported, exported));
@@ -132,7 +133,7 @@ public class DelegationBindingImpl extends BindingImpl implements DelegationBind
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Port basicGetExported() {
+	public AbstractPort basicGetExported() {
 		return exported;
 	}
 
@@ -141,8 +142,8 @@ public class DelegationBindingImpl extends BindingImpl implements DelegationBind
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExported(Port newExported) {
-		Port oldExported = exported;
+	public void setExported(AbstractPort newExported) {
+		AbstractPort oldExported = exported;
 		exported = newExported;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, InstancePackage.DELEGATION_BINDING__EXPORTED, oldExported, exported));
@@ -175,10 +176,10 @@ public class DelegationBindingImpl extends BindingImpl implements DelegationBind
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case InstancePackage.DELEGATION_BINDING__SOURCE:
-				setSource((Port)newValue);
+				setSource((AbstractPort)newValue);
 				return;
 			case InstancePackage.DELEGATION_BINDING__EXPORTED:
-				setExported((Port)newValue);
+				setExported((AbstractPort)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -193,10 +194,10 @@ public class DelegationBindingImpl extends BindingImpl implements DelegationBind
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case InstancePackage.DELEGATION_BINDING__SOURCE:
-				setSource((Port)null);
+				setSource((AbstractPort)null);
 				return;
 			case InstancePackage.DELEGATION_BINDING__EXPORTED:
-				setExported((Port)null);
+				setExported((AbstractPort)null);
 				return;
 		}
 		super.eUnset(featureID);

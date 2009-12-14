@@ -37,5 +37,12 @@
        class = "art.implem.ImplemPackage"
        genModel = "model/metamodel@runtime.genmodel" /> 
   </extension>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package
+           class="art.group.GroupPackage"
+           genModel="model/metamodel@runtime.genmodel"
+           uri="http://art/group">
+    </package>
+  </extension>
   
 </plugin>

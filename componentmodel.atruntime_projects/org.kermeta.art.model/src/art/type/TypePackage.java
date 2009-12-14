@@ -449,6 +449,61 @@ public interface TypePackage extends EPackage {
 	int CONTROL_SERVICE_FEATURE_COUNT = SERVICE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link art.type.impl.AbstractPortImpl <em>Abstract Port</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.type.impl.AbstractPortImpl
+	 * @see art.type.impl.TypePackageImpl#getAbstractPort()
+	 * @generated
+	 */
+	int ABSTRACT_PORT = 8;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORT__NAME = ArtPackage.NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Service</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORT__SERVICE = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORT__ROLE = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Implem</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORT__IMPLEM = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Port</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORT_FEATURE_COUNT = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link art.type.impl.PortImpl <em>Port</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -456,7 +511,7 @@ public interface TypePackage extends EPackage {
 	 * @see art.type.impl.TypePackageImpl#getPort()
 	 * @generated
 	 */
-	int PORT = 8;
+	int PORT = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -486,22 +541,13 @@ public interface TypePackage extends EPackage {
 	int PORT__UPPER = ArtPackage.CARDINALITY_ELEMENT__UPPER;
 
 	/**
-	 * The feature id for the '<em><b>Is Optional</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORT__IS_OPTIONAL = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Service</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__SERVICE = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 1;
+	int PORT__SERVICE = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Role</b></em>' attribute.
@@ -510,7 +556,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__ROLE = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 2;
+	int PORT__ROLE = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Implem</b></em>' containment reference.
@@ -519,7 +565,16 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__IMPLEM = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 3;
+	int PORT__IMPLEM = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Is Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT__IS_OPTIONAL = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Port</em>' class.
@@ -531,6 +586,89 @@ public interface TypePackage extends EPackage {
 	int PORT_FEATURE_COUNT = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The meta object id for the '{@link art.type.impl.PortCollectionImpl <em>Port Collection</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.type.impl.PortCollectionImpl
+	 * @see art.type.impl.TypePackageImpl#getPortCollection()
+	 * @generated
+	 */
+	int PORT_COLLECTION = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_COLLECTION__NAME = ABSTRACT_PORT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Service</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_COLLECTION__SERVICE = ABSTRACT_PORT__SERVICE;
+
+	/**
+	 * The feature id for the '<em><b>Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_COLLECTION__ROLE = ABSTRACT_PORT__ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Implem</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_COLLECTION__IMPLEM = ABSTRACT_PORT__IMPLEM;
+
+	/**
+	 * The feature id for the '<em><b>Ids</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_COLLECTION__IDS = ABSTRACT_PORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Port Collection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_COLLECTION_FEATURE_COUNT = ABSTRACT_PORT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link art.type.impl.PortIdImpl <em>Port Id</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.type.impl.PortIdImpl
+	 * @see art.type.impl.TypePackageImpl#getPortId()
+	 * @generated
+	 */
+	int PORT_ID = 11;
+
+	/**
+	 * The number of structural features of the '<em>Port Id</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_ID_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link art.type.impl.AttributeImpl <em>Attribute</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -538,7 +676,7 @@ public interface TypePackage extends EPackage {
 	 * @see art.type.impl.TypePackageImpl#getAttribute()
 	 * @generated
 	 */
-	int ATTRIBUTE = 9;
+	int ATTRIBUTE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -575,7 +713,7 @@ public interface TypePackage extends EPackage {
 	 * @see art.type.impl.TypePackageImpl#getBasicAttribute()
 	 * @generated
 	 */
-	int BASIC_ATTRIBUTE = 10;
+	int BASIC_ATTRIBUTE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -621,7 +759,7 @@ public interface TypePackage extends EPackage {
 	 * @see art.type.impl.TypePackageImpl#getDictionary()
 	 * @generated
 	 */
-	int DICTIONARY = 11;
+	int DICTIONARY = 14;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -676,7 +814,7 @@ public interface TypePackage extends EPackage {
 	 * @see art.type.impl.TypePackageImpl#getDictionaryDefaultValue()
 	 * @generated
 	 */
-	int DICTIONARY_DEFAULT_VALUE = 12;
+	int DICTIONARY_DEFAULT_VALUE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -713,7 +851,7 @@ public interface TypePackage extends EPackage {
 	 * @see art.type.impl.TypePackageImpl#getPortRole()
 	 * @generated
 	 */
-	int PORT_ROLE = 13;
+	int PORT_ROLE = 16;
 
 
 	/**
@@ -874,6 +1012,49 @@ public interface TypePackage extends EPackage {
 	EClass getControlService();
 
 	/**
+	 * Returns the meta object for class '{@link art.type.AbstractPort <em>Abstract Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Port</em>'.
+	 * @see art.type.AbstractPort
+	 * @generated
+	 */
+	EClass getAbstractPort();
+
+	/**
+	 * Returns the meta object for the reference '{@link art.type.AbstractPort#getService <em>Service</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Service</em>'.
+	 * @see art.type.AbstractPort#getService()
+	 * @see #getAbstractPort()
+	 * @generated
+	 */
+	EReference getAbstractPort_Service();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.type.AbstractPort#getRole <em>Role</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Role</em>'.
+	 * @see art.type.AbstractPort#getRole()
+	 * @see #getAbstractPort()
+	 * @generated
+	 */
+	EAttribute getAbstractPort_Role();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link art.type.AbstractPort#getImplem <em>Implem</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Implem</em>'.
+	 * @see art.type.AbstractPort#getImplem()
+	 * @see #getAbstractPort()
+	 * @generated
+	 */
+	EReference getAbstractPort_Implem();
+
+	/**
 	 * Returns the meta object for class '{@link art.type.Port <em>Port</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -895,37 +1076,35 @@ public interface TypePackage extends EPackage {
 	EAttribute getPort_IsOptional();
 
 	/**
-	 * Returns the meta object for the reference '{@link art.type.Port#getService <em>Service</em>}'.
+	 * Returns the meta object for class '{@link art.type.PortCollection <em>Port Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Service</em>'.
-	 * @see art.type.Port#getService()
-	 * @see #getPort()
+	 * @return the meta object for class '<em>Port Collection</em>'.
+	 * @see art.type.PortCollection
 	 * @generated
 	 */
-	EReference getPort_Service();
+	EClass getPortCollection();
 
 	/**
-	 * Returns the meta object for the attribute '{@link art.type.Port#getRole <em>Role</em>}'.
+	 * Returns the meta object for the containment reference list '{@link art.type.PortCollection#getIds <em>Ids</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Role</em>'.
-	 * @see art.type.Port#getRole()
-	 * @see #getPort()
+	 * @return the meta object for the containment reference list '<em>Ids</em>'.
+	 * @see art.type.PortCollection#getIds()
+	 * @see #getPortCollection()
 	 * @generated
 	 */
-	EAttribute getPort_Role();
+	EReference getPortCollection_Ids();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link art.type.Port#getImplem <em>Implem</em>}'.
+	 * Returns the meta object for class '{@link art.type.PortId <em>Port Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Implem</em>'.
-	 * @see art.type.Port#getImplem()
-	 * @see #getPort()
+	 * @return the meta object for class '<em>Port Id</em>'.
+	 * @see art.type.PortId
 	 * @generated
 	 */
-	EReference getPort_Implem();
+	EClass getPortId();
 
 	/**
 	 * Returns the meta object for class '{@link art.type.Attribute <em>Attribute</em>}'.
@@ -1191,6 +1370,40 @@ public interface TypePackage extends EPackage {
 		EClass CONTROL_SERVICE = eINSTANCE.getControlService();
 
 		/**
+		 * The meta object literal for the '{@link art.type.impl.AbstractPortImpl <em>Abstract Port</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.type.impl.AbstractPortImpl
+		 * @see art.type.impl.TypePackageImpl#getAbstractPort()
+		 * @generated
+		 */
+		EClass ABSTRACT_PORT = eINSTANCE.getAbstractPort();
+
+		/**
+		 * The meta object literal for the '<em><b>Service</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_PORT__SERVICE = eINSTANCE.getAbstractPort_Service();
+
+		/**
+		 * The meta object literal for the '<em><b>Role</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_PORT__ROLE = eINSTANCE.getAbstractPort_Role();
+
+		/**
+		 * The meta object literal for the '<em><b>Implem</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_PORT__IMPLEM = eINSTANCE.getAbstractPort_Implem();
+
+		/**
 		 * The meta object literal for the '{@link art.type.impl.PortImpl <em>Port</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1209,28 +1422,32 @@ public interface TypePackage extends EPackage {
 		EAttribute PORT__IS_OPTIONAL = eINSTANCE.getPort_IsOptional();
 
 		/**
-		 * The meta object literal for the '<em><b>Service</b></em>' reference feature.
+		 * The meta object literal for the '{@link art.type.impl.PortCollectionImpl <em>Port Collection</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see art.type.impl.PortCollectionImpl
+		 * @see art.type.impl.TypePackageImpl#getPortCollection()
 		 * @generated
 		 */
-		EReference PORT__SERVICE = eINSTANCE.getPort_Service();
+		EClass PORT_COLLECTION = eINSTANCE.getPortCollection();
 
 		/**
-		 * The meta object literal for the '<em><b>Role</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Ids</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PORT__ROLE = eINSTANCE.getPort_Role();
+		EReference PORT_COLLECTION__IDS = eINSTANCE.getPortCollection_Ids();
 
 		/**
-		 * The meta object literal for the '<em><b>Implem</b></em>' containment reference feature.
+		 * The meta object literal for the '{@link art.type.impl.PortIdImpl <em>Port Id</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see art.type.impl.PortIdImpl
+		 * @see art.type.impl.TypePackageImpl#getPortId()
 		 * @generated
 		 */
-		EReference PORT__IMPLEM = eINSTANCE.getPort_Implem();
+		EClass PORT_ID = eINSTANCE.getPortId();
 
 		/**
 		 * The meta object literal for the '{@link art.type.impl.AttributeImpl <em>Attribute</em>}' class.

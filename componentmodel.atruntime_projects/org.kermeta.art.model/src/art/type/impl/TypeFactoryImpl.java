@@ -68,6 +68,8 @@ public class TypeFactoryImpl extends EFactoryImpl implements TypeFactory {
 			case TypePackage.FUNCTIONAL_SERVICE: return createFunctionalService();
 			case TypePackage.CONTROL_SERVICE: return createControlService();
 			case TypePackage.PORT: return createPort();
+			case TypePackage.PORT_COLLECTION: return createPortCollection();
+			case TypePackage.PORT_ID: return createPortId();
 			case TypePackage.BASIC_ATTRIBUTE: return createBasicAttribute();
 			case TypePackage.DICTIONARY: return createDictionary();
 			case TypePackage.DICTIONARY_DEFAULT_VALUE: return createDictionaryDefaultValue();
@@ -174,6 +176,26 @@ public class TypeFactoryImpl extends EFactoryImpl implements TypeFactory {
 	public Port createPort() {
 		PortImpl port = new PortImpl();
 		return port;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PortCollection createPortCollection() {
+		PortCollectionImpl portCollection = new PortCollectionImpl();
+		return portCollection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PortId createPortId() {
+		PortIdImpl portId = new PortIdImpl();
+		return portId;
 	}
 
 	/**

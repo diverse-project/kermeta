@@ -78,13 +78,6 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass osGiPortEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass typeImplementationEClass = null;
 
 	/**
@@ -237,24 +230,6 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getOSGiPort() {
-		return osGiPortEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getOSGiPort_ServiceId() {
-		return (EAttribute)osGiPortEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getTypeImplementation() {
 		return typeImplementationEClass;
 	}
@@ -316,9 +291,6 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 
 		portImplementationEClass = createEClass(PORT_IMPLEMENTATION);
 
-		osGiPortEClass = createEClass(OS_GI_PORT);
-		createEAttribute(osGiPortEClass, OS_GI_PORT__SERVICE_ID);
-
 		typeImplementationEClass = createEClass(TYPE_IMPLEMENTATION);
 
 		osGiTypeEClass = createEClass(OS_GI_TYPE);
@@ -358,7 +330,6 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 		// Add supertypes to classes
 		fractalComponentEClass.getESuperTypes().add(this.getComponentImplementation());
 		osGiComponentEClass.getESuperTypes().add(this.getComponentImplementation());
-		osGiPortEClass.getESuperTypes().add(this.getPortImplementation());
 		osGiTypeEClass.getESuperTypes().add(this.getTypeImplementation());
 
 		// Initialize classes and features; add operations and parameters
@@ -372,9 +343,6 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 		initEAttribute(getOSGiComponent_ImplementingClass(), theArtPackage.getString(), "implementingClass", null, 1, 1, OSGiComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portImplementationEClass, PortImplementation.class, "PortImplementation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(osGiPortEClass, OSGiPort.class, "OSGiPort", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOSGiPort_ServiceId(), theArtPackage.getString(), "serviceId", null, 1, 1, OSGiPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeImplementationEClass, TypeImplementation.class, "TypeImplementation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

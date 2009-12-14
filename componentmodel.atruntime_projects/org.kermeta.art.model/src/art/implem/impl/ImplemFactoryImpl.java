@@ -62,7 +62,6 @@ public class ImplemFactoryImpl extends EFactoryImpl implements ImplemFactory {
 		switch (eClass.getClassifierID()) {
 			case ImplemPackage.FRACTAL_COMPONENT: return createFractalComponent();
 			case ImplemPackage.OS_GI_COMPONENT: return createOSGiComponent();
-			case ImplemPackage.OS_GI_PORT: return createOSGiPort();
 			case ImplemPackage.OS_GI_TYPE: return createOSGiType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -87,16 +86,6 @@ public class ImplemFactoryImpl extends EFactoryImpl implements ImplemFactory {
 	public OSGiComponent createOSGiComponent() {
 		OSGiComponentImpl osGiComponent = new OSGiComponentImpl();
 		return osGiComponent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OSGiPort createOSGiPort() {
-		OSGiPortImpl osGiPort = new OSGiPortImpl();
-		return osGiPort;
 	}
 
 	/**

@@ -9,6 +9,7 @@ package art.instance.impl;
 import art.instance.InstancePackage;
 import art.instance.TransmissionBinding;
 
+import art.type.AbstractPort;
 import art.type.Port;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -41,7 +42,7 @@ public class TransmissionBindingImpl extends BindingImpl implements Transmission
 	 * @generated
 	 * @ordered
 	 */
-	protected Port client;
+	protected AbstractPort client;
 
 	/**
 	 * The cached value of the '{@link #getServer() <em>Server</em>}' reference.
@@ -51,7 +52,7 @@ public class TransmissionBindingImpl extends BindingImpl implements Transmission
 	 * @generated
 	 * @ordered
 	 */
-	protected Port server;
+	protected AbstractPort server;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -77,10 +78,10 @@ public class TransmissionBindingImpl extends BindingImpl implements Transmission
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Port getClient() {
+	public AbstractPort getClient() {
 		if (client != null && client.eIsProxy()) {
 			InternalEObject oldClient = (InternalEObject)client;
-			client = (Port)eResolveProxy(oldClient);
+			client = (AbstractPort)eResolveProxy(oldClient);
 			if (client != oldClient) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, InstancePackage.TRANSMISSION_BINDING__CLIENT, oldClient, client));
@@ -94,7 +95,7 @@ public class TransmissionBindingImpl extends BindingImpl implements Transmission
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Port basicGetClient() {
+	public AbstractPort basicGetClient() {
 		return client;
 	}
 
@@ -103,8 +104,8 @@ public class TransmissionBindingImpl extends BindingImpl implements Transmission
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setClient(Port newClient) {
-		Port oldClient = client;
+	public void setClient(AbstractPort newClient) {
+		AbstractPort oldClient = client;
 		client = newClient;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, InstancePackage.TRANSMISSION_BINDING__CLIENT, oldClient, client));
@@ -115,10 +116,10 @@ public class TransmissionBindingImpl extends BindingImpl implements Transmission
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Port getServer() {
+	public AbstractPort getServer() {
 		if (server != null && server.eIsProxy()) {
 			InternalEObject oldServer = (InternalEObject)server;
-			server = (Port)eResolveProxy(oldServer);
+			server = (AbstractPort)eResolveProxy(oldServer);
 			if (server != oldServer) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, InstancePackage.TRANSMISSION_BINDING__SERVER, oldServer, server));
@@ -132,7 +133,7 @@ public class TransmissionBindingImpl extends BindingImpl implements Transmission
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Port basicGetServer() {
+	public AbstractPort basicGetServer() {
 		return server;
 	}
 
@@ -141,8 +142,8 @@ public class TransmissionBindingImpl extends BindingImpl implements Transmission
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setServer(Port newServer) {
-		Port oldServer = server;
+	public void setServer(AbstractPort newServer) {
+		AbstractPort oldServer = server;
 		server = newServer;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, InstancePackage.TRANSMISSION_BINDING__SERVER, oldServer, server));
@@ -175,10 +176,10 @@ public class TransmissionBindingImpl extends BindingImpl implements Transmission
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case InstancePackage.TRANSMISSION_BINDING__CLIENT:
-				setClient((Port)newValue);
+				setClient((AbstractPort)newValue);
 				return;
 			case InstancePackage.TRANSMISSION_BINDING__SERVER:
-				setServer((Port)newValue);
+				setServer((AbstractPort)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -193,10 +194,10 @@ public class TransmissionBindingImpl extends BindingImpl implements Transmission
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case InstancePackage.TRANSMISSION_BINDING__CLIENT:
-				setClient((Port)null);
+				setClient((AbstractPort)null);
 				return;
 			case InstancePackage.TRANSMISSION_BINDING__SERVER:
-				setServer((Port)null);
+				setServer((AbstractPort)null);
 				return;
 		}
 		super.eUnset(featureID);

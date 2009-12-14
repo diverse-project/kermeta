@@ -237,6 +237,52 @@ public class TypeItemProviderAdapterFactory extends TypeAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link art.type.PortCollection} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PortCollectionItemProvider portCollectionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link art.type.PortCollection}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPortCollectionAdapter() {
+		if (portCollectionItemProvider == null) {
+			portCollectionItemProvider = new PortCollectionItemProvider(this);
+		}
+
+		return portCollectionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link art.type.PortId} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PortIdItemProvider portIdItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link art.type.PortId}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPortIdAdapter() {
+		if (portIdItemProvider == null) {
+			portIdItemProvider = new PortIdItemProvider(this);
+		}
+
+		return portIdItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link art.type.BasicAttribute} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -411,6 +457,8 @@ public class TypeItemProviderAdapterFactory extends TypeAdapterFactory implement
 		if (functionalServiceItemProvider != null) functionalServiceItemProvider.dispose();
 		if (controlServiceItemProvider != null) controlServiceItemProvider.dispose();
 		if (portItemProvider != null) portItemProvider.dispose();
+		if (portCollectionItemProvider != null) portCollectionItemProvider.dispose();
+		if (portIdItemProvider != null) portIdItemProvider.dispose();
 		if (basicAttributeItemProvider != null) basicAttributeItemProvider.dispose();
 		if (dictionaryItemProvider != null) dictionaryItemProvider.dispose();
 		if (dictionaryDefaultValueItemProvider != null) dictionaryDefaultValueItemProvider.dispose();
