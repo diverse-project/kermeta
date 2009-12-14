@@ -9,6 +9,8 @@ package art.type.provider;
 
 import art.provider.MetamodelruntimeEditPlugin;
 
+import art.provider.NamedElementItemProvider;
+import art.type.PortId;
 import java.util.Collection;
 import java.util.List;
 
@@ -32,7 +34,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
  * @generated
  */
 public class PortIdItemProvider
-	extends ItemProviderAdapter
+	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -83,7 +85,10 @@ public class PortIdItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_PortId_type");
+		String label = ((PortId)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_PortId_type") :
+			getString("_UI_PortId_type") + " " + label;
 	}
 
 	/**

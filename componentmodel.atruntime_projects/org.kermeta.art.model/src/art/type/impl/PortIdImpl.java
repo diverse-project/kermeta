@@ -6,6 +6,7 @@
  */
 package art.type.impl;
 
+import art.impl.NamedElementImpl;
 import art.type.PortId;
 import art.type.TypePackage;
 
@@ -22,7 +23,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public class PortIdImpl extends EObjectImpl implements PortId {
+public class PortIdImpl extends NamedElementImpl implements PortId {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

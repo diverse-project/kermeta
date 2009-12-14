@@ -6,6 +6,7 @@
  */
 package art.type;
 
+import art.NamedElement;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -18,5 +19,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface PortId extends EObject {
+public interface PortId extends NamedElement {
 } // PortId

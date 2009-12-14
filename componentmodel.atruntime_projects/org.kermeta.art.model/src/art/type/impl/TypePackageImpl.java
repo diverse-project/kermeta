@@ -683,6 +683,7 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		portEClass.getESuperTypes().add(theArtPackage.getCardinalityElement());
 		portEClass.getESuperTypes().add(this.getAbstractPort());
 		portCollectionEClass.getESuperTypes().add(this.getAbstractPort());
+		portIdEClass.getESuperTypes().add(theArtPackage.getNamedElement());
 		attributeEClass.getESuperTypes().add(theArtPackage.getTypedElement());
 		basicAttributeEClass.getESuperTypes().add(this.getAttribute());
 		dictionaryEClass.getESuperTypes().add(this.getAttribute());

@@ -143,7 +143,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="ids" lowerBound="1" upperBound="-1"
           eType="#//type/PortId" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="PortId"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PortId" eSuperTypes="#//NamedElement"/>
     <eClassifiers xsi:type="ecore:EEnum" name="PortRole">
       <eLiterals name="client"/>
       <eLiterals name="server" value="1"/>
