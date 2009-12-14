@@ -28,6 +28,7 @@ trait KunitImplicitConversion {
  implicit def Aspect(v : kermeta.kunit.AssertAspect) = v.asInstanceOf[kermeta.kunit.Assert]
 }
 
+
 object KunitConversions{
  implicit def Aspect(v : kermeta.kunit.InvalidTestCaseNameException) = v.asInstanceOf[kermeta.kunit.InvalidTestCaseNameExceptionAspect]
  implicit def Aspect(v : kermeta.kunit.InvalidTestCaseNameExceptionAspect) = v.asInstanceOf[kermeta.kunit.InvalidTestCaseNameException]

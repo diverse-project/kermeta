@@ -2,6 +2,9 @@ package fr.irisa.triskell.kermeta.scala.framework.language.structure
 
 trait Contracted
 {
+		
+	
+	/*
 	class AssertionFailed extends Error
  
 	type Conds=List[()=>Boolean]
@@ -22,5 +25,5 @@ trait Contracted
  
 	def require(test: =>Boolean)=Contract((()=>test)::Nil,Nil)
  
-	def ensure(test: =>Boolean)=Contract(Nil,(()=>test)::Nil)
+	def ensure(test: =>Boolean)=Contract(Nil,(()=>test)::Nil)*/
 }
