@@ -11,7 +11,7 @@ trait ConstraintAspect extends RichAspectImplicit with ObjectAspect with LogAspe
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		log.debug("Generate Constraint {}",this.getName)
-		res.append("def "+this.getName+" : Boolean = {\n")
+		res.append("{\n")
 		this.getBody().generateScalaCode(res)
 		res.append("}\n")
 	}

@@ -101,16 +101,30 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 
 				this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))
 				this.getOwnedOperation filter(op=> !Util.hasEcoreTag(op)) foreach(op=> op.generateScalaCode(res))
-				this.getInv() foreach(a=> a.generateScalaCode(res))
 				
-				/* Generate checkInvariants */
-				res.append("\n override def checkInvariants(){\n")
-				this.getInv() foreach(a=> {
-					res.append("if(!"+a.getName()+"){throw kermeta.exceptions.RichFactory.createConstraintViolatedInvException }\n")
-				})
-				
-				res.append("}\n")
-				/* End checkInvariants Generation  */
+				/* Generate Invariants Collection Init */
+				if(this.getInv().size() > 0){
+					res.append("override def getInvariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap( ")
+					var i = 0
+					this.getInv() foreach(a => {
+						if(i != 0) res.append(",")
+						res.append("(")
+						res.append("\""+a.getName+"\" -> (()=>")
+						a.generateScalaCode(res)
+						res.append("))")
+						i = i + 1
+					})
+					res.append(" )")
+					
+					/* Generate checkInvariants */
+					res.append("\n override def checkInvariants(){\n")
+					res.append("checkParamInvariants(getInvariants)\n")
+					res.append("checkParamInvariants(super.getInvariants)\n")
+					res.append("}\n")
+					/* End checkInvariants Generation  */
+					
+				}
+
 				
 	    		res.append("}\n")
 	  	}
