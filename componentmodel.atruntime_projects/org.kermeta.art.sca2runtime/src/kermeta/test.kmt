@@ -65,7 +65,7 @@ class Main
     	result := composite
 	end
 	
-	operation saveARTModel(system : System, modelUri : String) is
+	operation saveARTModel(system : System, modelUri : String) : Void is
 	do
 		stdio.writeln("Saving ART model to "+modelUri)
     	var repository:EMFRepository init EMFRepository.new
