@@ -15,8 +15,6 @@ require "http://art"
 
 using kermeta::standard
 
-using art::group
-
 package instance{
 
 	aspect class Binding
@@ -58,7 +56,7 @@ package instance{
 	{
 		inv mandatoryClientPortBound  is 
 		do
-			self.type.port.select{p | not p.isOptional and p.role == "client"}
+			self.type.port.select{p | not p.asType(Port).isOptional and p.role == "client"}
 				.forAll{p |
 					self.binding.exists{b | 
 						b.client == p
@@ -125,7 +123,7 @@ package instance{
 	{
 		inv completeDelegationBindings is 
 		do
-			self.type.port.select{p | not p.isOptional}.forAll{p |
+			self.type.port.select{p | not p.asType(Port).isOptional}.forAll{p |
 				self.delegation.exists{b |
 					self.subComponent.exists{sub |
 						b.exported == p 

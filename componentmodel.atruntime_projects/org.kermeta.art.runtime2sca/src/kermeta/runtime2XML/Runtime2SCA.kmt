@@ -28,8 +28,8 @@ class Main
 {
 	@main ""
 	operation main() : Void is do
-		var modelURI : String init "platform:/resource/org.kermeta.art.Runtime2SCA/src/kermeta/runtime2XML/Test4Ter.art"
-		var file : String init "platform:/resource/org.kermeta.art.Runtime2SCA/src/kermeta/runtime2XML/Test4Ter.composite"
+		var modelURI : String init "platform:/resource/CrisisManagement/3_FirePlanner_DefaultNotification_FireDepartment.art"
+		var file : String init "C:/DiVAStudio/DiVAStudio_1.0.0/workspace/CrisisManagement/3_FirePlanner_DefaultNotification_FireDepartment.composite"
 		
 	 	mainWithParameter(modelURI, file)
 	end
@@ -49,7 +49,7 @@ class Main
 	
 	operation loadModel(repository : EMFRepository, model : String) : System is
 	do
-		var resource : Resource init repository.createResource(model, "platform:/plugin/org.kermeta.art.model/model/metamodel@runtime.ecore"/*"http://art"*/)
+		var resource : Resource init repository.createResource(model, "http://art")
 		resource.load
 		result ?= resource.instances.one	
 	end

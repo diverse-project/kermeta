@@ -20,11 +20,11 @@
   <services xsi:type="type:FunctionalService" name="tutorial.diva.HelloWorld"/>
   <services xsi:type="type:FunctionalService" name="tutorial.diva.VoiceHelloWorld"/>
   <types xsi:type="type:PrimitiveType" name="Client">
-    <port name="defaultHelloWorld" lower="1" upper="-1" isOptional="false" service="//@services.0" role="client"/>
-    <port name="otherHelloWorlds" lower="1" upper="-1" isOptional="false" service="//@services.0" role="client"/>
+    <port xsi:type="type:Port" name="defaultHelloWorld" lower="1" upper="-1" isOptional="false" service="//@services.0" role="client"/>
+    <port xsi:type="type:Port" name="otherHelloWorlds" lower="1" upper="-1" isOptional="false" service="//@services.0" role="client"/>
   </types>
   <types xsi:type="type:PrimitiveType" name="Server">
-    <port name="helloWorld" lower="0" upper="1" service="//@services.0" role="server"/>
-    <port name="voiceHelloWorld" lower="1" upper="-1" isOptional="false" service="//@services.1" role="client"/>
+    <port xsi:type="type:Port" name="helloWorld" lower="0" upper="1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="voiceHelloWorld" lower="1" upper="-1" isOptional="false" service="//@services.1" role="client"/>
   </types>
 </art:System>
