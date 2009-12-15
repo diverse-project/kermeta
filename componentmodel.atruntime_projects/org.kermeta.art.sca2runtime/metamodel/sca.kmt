@@ -103,7 +103,7 @@ aspect class SCAtoART{
 				port.service := getService(r.interface.asType(JavaInterface))
 				
 				if r.multiplicity == void then
-					//stdio.errorln("SCA multiplicities are not loaded... To be fixed by Didier ;-)")
+					stdio.errorln("SCA multiplicities are not loaded...")
 				end
 				if r.multiplicity == Multiplicity._01 or  r.multiplicity == Multiplicity._0N then
 					port.lower := 0
@@ -279,7 +279,7 @@ aspect class JavaInterface
 {
 	reference artService : art::type::Service [1..1]
 	
-	operation visit(sca2art : SCAtoART, artSystem : System) is
+	operation visit(sca2art : SCAtoART, artSystem : System) : Void is
 	do
 		//stdio.writeln("JavaInterface: "+self.toString)
 		artService := art::type::FunctionalService.new
