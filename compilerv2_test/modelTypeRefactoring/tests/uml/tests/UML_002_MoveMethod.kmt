@@ -22,7 +22,7 @@ class Main
 		// initialization 
 		var rep : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
 		var res : kermeta::persistence::EMFResource
-		res ?= rep.getResource("platform:/resource/org.kermeta.class_refactoring.tests/uml/models/lan_simulation2.uml")
+		res ?= rep.getResource("platform:/resource/compilerv2_test/modelTypeRefactoring/tests/uml/models/lan_simulation2.uml")
 		var model : uml::Model
 		model ?= res.one
 		
@@ -66,7 +66,7 @@ class Main
 		// we save the refactored UML model
 		var outputRep : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
 		var outputRes : kermeta::persistence::EMFResource
-		outputRes ?= outputRep.createResource("platform:/resource/org.kermeta.class_refactoring.tests/uml/models/lan_simulation2_moveMethod_refactored.uml",
+		outputRes ?= outputRep.createResource("platform:/resource/compilerv2_test/modelTypeRefactoring/tests/uml/models/lan_simulation2_moveMethod_refactored.uml",
 										"http://www.eclipse.org/uml2/2.1.0/UML")
 		outputRes.add(model)
 		outputRes.save
