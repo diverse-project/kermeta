@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="ASCII"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
+  <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="lan_simulation">
+    <packagedElement xmi:type="uml:DataType" xmi:id="_OdOYUMtVEd2vUYM4NP00Sg" name="String"/>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_kKvQ0MtZEd2vUYM4NP00Sg" name="Integer"/>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_DpMw4MtcEd2vUYM4NP00Sg" name="Vector"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_t3ajwMtUEd2vUYM4NP00Sg" name="nodes">
+      <packagedElement xmi:type="uml:Class" xmi:id="_v7YmoMtUEd2vUYM4NP00Sg" name="Node">
+        <ownedAttribute xmi:id="_eMjX8MtVEd2vUYM4NP00Sg" name="_name" visibility="protected" type="_OdOYUMtVEd2vUYM4NP00Sg"/>
+        <ownedAttribute xmi:id="_jyKVkMtVEd2vUYM4NP00Sg" name="_nextNode" visibility="private" type="_v7YmoMtUEd2vUYM4NP00Sg"/>
+        <ownedOperation xmi:id="_AfpqMMtVEd2vUYM4NP00Sg" name="Node" visibility="public">
+          <ownedParameter xmi:id="_I0gcUMtVEd2vUYM4NP00Sg" name="name" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_Sxm-oMtVEd2vUYM4NP00Sg" name="Node" visibility="public">
+          <ownedParameter xmi:id="_U0IQAMtVEd2vUYM4NP00Sg" name="name" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+          <ownedParameter xmi:id="_Wyn9AMtVEd2vUYM4NP00Sg" name="nextNode" visibility="public" type="_v7YmoMtUEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_5az5AMtVEd2vUYM4NP00Sg" name="getNextNode" visibility="public">
+          <ownedParameter xmi:id="_8BHM4MtVEd2vUYM4NP00Sg" name="return" visibility="public" type="_v7YmoMtUEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_88VfAMtVEd2vUYM4NP00Sg" name="setNextNode" visibility="public">
+          <ownedParameter xmi:id="_-1A34MtVEd2vUYM4NP00Sg" name="nextNode" visibility="public" type="_v7YmoMtUEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_BsmJAMtWEd2vUYM4NP00Sg" name="accept" visibility="public">
+          <ownedParameter xmi:id="_DHSlYMtWEd2vUYM4NP00Sg" name="p" visibility="public" type="_bm1dcMtWEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_gkg4YMtWEd2vUYM4NP00Sg" name="send" visibility="protected">
+          <ownedParameter xmi:id="_hlbi0MtWEd2vUYM4NP00Sg" name="p" visibility="public" type="_bm1dcMtWEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_v0XfcN5qEd2Pj5Knq94tpg" name="getName" visibility="public">
+          <ownedParameter xmi:id="_NQV1QN5rEd2Pj5Knq94tpg" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_yOppwMtUEd2vUYM4NP00Sg" name="Printserver">
+        <generalization xmi:id="_3xSy8MtUEd2vUYM4NP00Sg" isSubstitutable="false" general="_v7YmoMtUEd2vUYM4NP00Sg"/>
+        <ownedAttribute xmi:id="_tHROUMtWEd2vUYM4NP00Sg" name="lastDocument" visibility="public" type="_6jVx4MtWEd2vUYM4NP00Sg"/>
+        <ownedOperation xmi:id="_TMljEMtYEd2vUYM4NP00Sg" name="Printserver" visibility="public">
+          <ownedParameter xmi:id="_U03IcMtYEd2vUYM4NP00Sg" name="name" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+          <ownedParameter xmi:id="_VEWV8MtYEd2vUYM4NP00Sg" name="nextNode" visibility="public" type="_v7YmoMtUEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_Nt8JEMtYEd2vUYM4NP00Sg" name="Printserver" visibility="public">
+          <ownedParameter xmi:id="_RkMo8MtYEd2vUYM4NP00Sg" name="name" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_PI7V0MtXEd2vUYM4NP00Sg" name="setLastDocument" visibility="protected">
+          <ownedParameter xmi:id="_Q7bOMMtXEd2vUYM4NP00Sg" name="lastDocument" visibility="public" type="_6jVx4MtWEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_WrK_QMtXEd2vUYM4NP00Sg" name="getLastDocument" visibility="protected">
+          <ownedParameter xmi:id="_hbK-IMtXEd2vUYM4NP00Sg" name="return" visibility="public" type="_6jVx4MtWEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_kPijMMtXEd2vUYM4NP00Sg" name="print" visibility="public"/>
+        <ownedOperation xmi:id="_mXCbMMtXEd2vUYM4NP00Sg" name="accept" visibility="public">
+          <ownedParameter xmi:id="_nnR7EMtXEd2vUYM4NP00Sg" name="p" visibility="public" type="_bm1dcMtWEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_qdf9cMtbEd2vUYM4NP00Sg" name="formatDocument" visibility="public">
+          <ownedParameter xmi:id="_sLa30MtbEd2vUYM4NP00Sg" name="return" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_043NQMtUEd2vUYM4NP00Sg" name="Workstation">
+        <generalization xmi:id="_4eYicMtUEd2vUYM4NP00Sg" isSubstitutable="false" general="_v7YmoMtUEd2vUYM4NP00Sg"/>
+        <ownedOperation xmi:id="_1imJ8MtYEd2vUYM4NP00Sg" name="Workstation" visibility="public">
+          <ownedParameter xmi:id="_3PJLUMtYEd2vUYM4NP00Sg" name="name" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_4kw6cMtYEd2vUYM4NP00Sg" name="Workstation" visibility="public">
+          <ownedParameter xmi:id="_5t6T0MtYEd2vUYM4NP00Sg" name="name" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+          <ownedParameter xmi:id="_53cqUMtYEd2vUYM4NP00Sg" name="nextNode" visibility="public" type="_v7YmoMtUEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_-TbtcMtYEd2vUYM4NP00Sg" name="setPacketOriginator" visibility="private">
+          <ownedParameter xmi:id="_B3Tc0MtZEd2vUYM4NP00Sg" name="p" visibility="public" type="_bm1dcMtWEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_GCkjYMtZEd2vUYM4NP00Sg" name="originate" visibility="public">
+          <ownedParameter xmi:id="_HxHI0MtZEd2vUYM4NP00Sg" name="p" visibility="public" type="_bm1dcMtWEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_KO5Z4MtZEd2vUYM4NP00Sg" name="accept" visibility="public">
+          <ownedParameter xmi:id="_LafqUMtZEd2vUYM4NP00Sg" name="p" visibility="public" type="_bm1dcMtWEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_RkIpcMtWEd2vUYM4NP00Sg" name="packets">
+      <packagedElement xmi:type="uml:Class" xmi:id="_bm1dcMtWEd2vUYM4NP00Sg" name="Packet">
+        <ownedAttribute xmi:id="_Uqi5YMtZEd2vUYM4NP00Sg" name="_document" visibility="private" type="_6jVx4MtWEd2vUYM4NP00Sg"/>
+        <ownedAttribute xmi:id="_XUSi0MtZEd2vUYM4NP00Sg" name="_content" visibility="private" type="_OdOYUMtVEd2vUYM4NP00Sg"/>
+        <ownedAttribute xmi:id="_ZI8XUMtZEd2vUYM4NP00Sg" name="_originator" visibility="private" type="_v7YmoMtUEd2vUYM4NP00Sg"/>
+        <ownedAttribute xmi:id="_gBT9UMtZEd2vUYM4NP00Sg" name="_destination" visibility="private" type="_v7YmoMtUEd2vUYM4NP00Sg"/>
+        <ownedAttribute xmi:id="_mpM3UMtZEd2vUYM4NP00Sg" name="_jumps" visibility="private" type="_kKvQ0MtZEd2vUYM4NP00Sg"/>
+        <ownedOperation xmi:id="_p434UMtZEd2vUYM4NP00Sg" name="Packet" visibility="public">
+          <ownedParameter xmi:id="_rvHBMMtZEd2vUYM4NP00Sg" name="document" visibility="public" type="_6jVx4MtWEd2vUYM4NP00Sg" effect="create"/>
+          <ownedParameter xmi:id="_rz6osMtZEd2vUYM4NP00Sg" name="dest" visibility="public" type="_v7YmoMtUEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_UaywsMtaEd2vUYM4NP00Sg" name="Packet" visibility="public">
+          <ownedParameter xmi:id="_V434QMtaEd2vUYM4NP00Sg" name="content" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+          <ownedParameter xmi:id="_WDOHEMtaEd2vUYM4NP00Sg" name="dest" visibility="public" type="_v7YmoMtUEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_bDIWoMtaEd2vUYM4NP00Sg" name="getDocument" visibility="public">
+          <ownedParameter xmi:id="_dY4tEMtaEd2vUYM4NP00Sg" name="return" visibility="public" type="_6jVx4MtWEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_fWebIMtaEd2vUYM4NP00Sg" name="setDocument" visibility="public">
+          <ownedParameter xmi:id="_hQ6ukMtaEd2vUYM4NP00Sg" name="document" visibility="public" type="_6jVx4MtWEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_jyXXoMtaEd2vUYM4NP00Sg" name="setContent" visibility="public">
+          <ownedParameter xmi:id="_kviKgMtaEd2vUYM4NP00Sg" name="content" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_m-rioMtaEd2vUYM4NP00Sg" name="getContent" visibility="public">
+          <ownedParameter xmi:id="_q3iDgMtaEd2vUYM4NP00Sg" name="return" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_tU3ooMtaEd2vUYM4NP00Sg" name="getOriginator" visibility="public">
+          <ownedParameter xmi:id="_wIXrAMtaEd2vUYM4NP00Sg" name="return" visibility="public" type="_v7YmoMtUEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_x369EMtaEd2vUYM4NP00Sg" name="setOriginator" visibility="public">
+          <ownedParameter xmi:id="_0jucAMtaEd2vUYM4NP00Sg" name="orig" visibility="public" type="_v7YmoMtUEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_3JI_EMtaEd2vUYM4NP00Sg" name="getDestination" visibility="public">
+          <ownedParameter xmi:id="_4tmbcMtaEd2vUYM4NP00Sg" name="return" visibility="public" type="_v7YmoMtUEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_6FliEMtaEd2vUYM4NP00Sg" name="setDestination" visibility="public">
+          <ownedParameter xmi:id="_78IM8MtaEd2vUYM4NP00Sg" name="dest" visibility="public" type="_v7YmoMtUEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_97LTkMtaEd2vUYM4NP00Sg" name="setJumps" visibility="public">
+          <ownedParameter xmi:id="__Kp-cMtaEd2vUYM4NP00Sg" name="_jumps" visibility="public" type="_kKvQ0MtZEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_Bl21kMtbEd2vUYM4NP00Sg" name="getJumps" visibility="public">
+          <ownedParameter xmi:id="_DBxZ8MtbEd2vUYM4NP00Sg" name="return" visibility="public" type="_kKvQ0MtZEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_Fr6sAMtbEd2vUYM4NP00Sg" name="incrementJumps" visibility="public">
+          <ownedParameter xmi:id="_H6RZ8MtbEd2vUYM4NP00Sg" name="node" visibility="public" type="_v7YmoMtUEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_282MUMtWEd2vUYM4NP00Sg" name="files">
+      <packagedElement xmi:type="uml:Class" xmi:id="_6jVx4MtWEd2vUYM4NP00Sg" name="Document">
+        <ownedAttribute xmi:id="_SL73AMtbEd2vUYM4NP00Sg" name="_content" visibility="protected" type="_OdOYUMtVEd2vUYM4NP00Sg"/>
+        <ownedAttribute xmi:id="_UBqCgMtbEd2vUYM4NP00Sg" name="_name" visibility="protected" type="_OdOYUMtVEd2vUYM4NP00Sg"/>
+        <ownedOperation xmi:id="_WryGcMtbEd2vUYM4NP00Sg" name="Document" visibility="public">
+          <ownedParameter xmi:id="_XyMU4MtbEd2vUYM4NP00Sg" name="content" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+          <ownedParameter xmi:id="_YBTH4MtbEd2vUYM4NP00Sg" name="name" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_cfGv8MtbEd2vUYM4NP00Sg" name="getContent" visibility="public">
+          <ownedParameter xmi:id="_dsAA4MtbEd2vUYM4NP00Sg" name="return" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_epMo8MtbEd2vUYM4NP00Sg" name="setContent" visibility="public">
+          <ownedParameter xmi:id="_f4YY4MtbEd2vUYM4NP00Sg" name="content" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_l7vCcMtbEd2vUYM4NP00Sg" name="toString" visibility="public">
+          <ownedParameter xmi:id="_ngRXUMtbEd2vUYM4NP00Sg" name="return" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_thaaYMtbEd2vUYM4NP00Sg" name="setName" visibility="public">
+          <ownedParameter xmi:id="_vHQW0MtbEd2vUYM4NP00Sg" name="name" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_w8rnYMtbEd2vUYM4NP00Sg" name="getName" visibility="public">
+          <ownedParameter xmi:id="_yDs50MtbEd2vUYM4NP00Sg" name="return" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_O_DwAOosEd6mZJZC7Mx4vw" name="delegate_method">
+          <ownedParameter xmi:id="_O_DwAeosEd6mZJZC7Mx4vw" name="return"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_-tdB4MtWEd2vUYM4NP00Sg" name="Figure"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Bgvo4MtXEd2vUYM4NP00Sg" name="ASCIIDocument">
+        <generalization xmi:id="_N0c6g8w5Ed2VUIJaefd5Rg" isSubstitutable="false" general="_6jVx4MtWEd2vUYM4NP00Sg"/>
+        <ownedOperation xmi:id="_mGwxQMtcEd2vUYM4NP00Sg" name="ASCIIDocument" visibility="public">
+          <ownedParameter xmi:id="_oEZioMtcEd2vUYM4NP00Sg" name="contents" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+          <ownedParameter xmi:id="_oOPbIMtcEd2vUYM4NP00Sg" name="name" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_Ib2yIMtdEd2vUYM4NP00Sg" name="includeFigure" visibility="protected">
+          <ownedParameter xmi:id="_KFvhEMtdEd2vUYM4NP00Sg" name="f" visibility="public" type="_-tdB4MtWEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_N6WbIMtdEd2vUYM4NP00Sg" name="toString" visibility="public">
+          <ownedParameter xmi:id="_PRt2sMtdEd2vUYM4NP00Sg" name="return" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ElCgUMtXEd2vUYM4NP00Sg" name="PostcriptDocument">
+        <generalization xmi:id="_I7_5g8tXEd2vUYM4NP00Sg" isSubstitutable="false" general="_6jVx4MtWEd2vUYM4NP00Sg"/>
+        <ownedAttribute xmi:id="_AulZ4MtcEd2vUYM4NP00Sg" name="_figures" visibility="private" type="_DpMw4MtcEd2vUYM4NP00Sg"/>
+        <ownedOperation xmi:id="_x5rlsMtcEd2vUYM4NP00Sg" name="PostcriptDocument" visibility="public">
+          <ownedParameter xmi:id="_1jb6oMtcEd2vUYM4NP00Sg" name="contents" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+          <ownedParameter xmi:id="_3rgaYMtcEd2vUYM4NP00Sg" name="name" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_NSLdUMtcEd2vUYM4NP00Sg" name="includeFigure" visibility="protected">
+          <ownedParameter xmi:id="_PYcmQMtcEd2vUYM4NP00Sg" name="f" visibility="public" type="_-tdB4MtWEd2vUYM4NP00Sg" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_V6Km0MtcEd2vUYM4NP00Sg" name="getFigures" visibility="protected">
+          <ownedParameter xmi:id="_XZg5sMtcEd2vUYM4NP00Sg" name="return" visibility="public" type="_DpMw4MtcEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_c1pyQMtcEd2vUYM4NP00Sg" name="toString" visibility="public">
+          <ownedParameter xmi:id="_eDxLMMtcEd2vUYM4NP00Sg" name="return" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" direction="return" effect="create"/>
+        </ownedOperation>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ghLSgDHKEd60eobLow2NyQ" name="PrintServer">
+      <generalization xmi:id="_6Rk5BTHLEd60eobLow2NyQ" isSubstitutable="false" general="_0wkHgDHLEd60eobLow2NyQ"/>
+      <ownedAttribute xmi:id="_kQ8I0DHKEd60eobLow2NyQ" name="name" visibility="private" type="_OdOYUMtVEd2vUYM4NP00Sg"/>
+      <ownedAttribute xmi:id="_wITYYjHKEd60eobLow2NyQ" name="nextNode" visibility="private" type="_ghLSgDHKEd60eobLow2NyQ"/>
+      <ownedOperation xmi:id="_365K8DHKEd60eobLow2NyQ" name="PrintServer" visibility="public">
+        <ownedParameter xmi:id="_-oMwcDHKEd60eobLow2NyQ" name="s" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_FzvxIjHLEd60eobLow2NyQ" name="PrintServer" visibility="public">
+        <ownedParameter xmi:id="_IpGNoDHLEd60eobLow2NyQ" name="s" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+        <ownedParameter xmi:id="_K0H6wDHLEd60eobLow2NyQ" name="n" visibility="public" type="_ghLSgDHKEd60eobLow2NyQ" effect="create"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_Edf6cjHMEd60eobLow2NyQ" name="accept" visibility="public">
+        <ownedParameter xmi:id="_HQm7QDHMEd60eobLow2NyQ" name="p" visibility="public" type="_YVIouDHLEd60eobLow2NyQ" effect="create"/>
+        <ownedParameter xmi:id="_LE_L0DHMEd60eobLow2NyQ" name="Parameter1" visibility="public" type="_dBIBSDHMEd60eobLow2NyQ" direction="return" effect="create"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_ipSjoDHMEd60eobLow2NyQ" name="bill" visibility="public">
+        <ownedParameter xmi:id="_plMl0DHMEd60eobLow2NyQ" name="p" visibility="public" type="_YVIouDHLEd60eobLow2NyQ" effect="create"/>
+        <ownedParameter xmi:id="_rPb6EDHMEd60eobLow2NyQ" name="Parameter1" visibility="public" type="_dBIBSDHMEd60eobLow2NyQ" direction="return" effect="create"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_jrJpQjHMEd60eobLow2NyQ" name="print" visibility="public">
+        <ownedParameter xmi:id="_tfreYDHMEd60eobLow2NyQ" name="p" visibility="public" type="_bm1dcMtWEd2vUYM4NP00Sg" effect="create"/>
+        <ownedParameter xmi:id="_w9Q_kDHMEd60eobLow2NyQ" name="Parameter1" visibility="public" type="_dBIBSDHMEd60eobLow2NyQ" direction="return" effect="create"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_rzL6YjJbEd60eobLow2NyQ" name="send" visibility="protected">
+        <ownedParameter xmi:id="_tCwr4DJbEd60eobLow2NyQ" name="p" visibility="public" type="_YVIouDHLEd60eobLow2NyQ" effect="create"/>
+        <ownedParameter xmi:id="_uw4akDJbEd60eobLow2NyQ" name="Parameter1" visibility="public" type="_dBIBSDHMEd60eobLow2NyQ" direction="return" effect="create"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_YVIouDHLEd60eobLow2NyQ" name="Packet">
+      <ownedAttribute xmi:id="_hTbZYjHLEd60eobLow2NyQ" name="address" visibility="private" type="_ghLSgDHKEd60eobLow2NyQ"/>
+      <ownedAttribute xmi:id="_llwKMjHLEd60eobLow2NyQ" name="contents" visibility="private" type="_OdOYUMtVEd2vUYM4NP00Sg"/>
+      <ownedAttribute xmi:id="_qh9lgjHLEd60eobLow2NyQ" name="originator" visibility="private" type="_ghLSgDHKEd60eobLow2NyQ"/>
+      <ownedOperation xmi:id="_twCrEjHLEd60eobLow2NyQ" name="Packet" visibility="public">
+        <ownedParameter xmi:id="_vMIOkDHLEd60eobLow2NyQ" name="c" visibility="public" type="_OdOYUMtVEd2vUYM4NP00Sg" effect="create"/>
+        <ownedParameter xmi:id="_xnZXIDHLEd60eobLow2NyQ" name="a" visibility="public" type="_ghLSgDHKEd60eobLow2NyQ" effect="create"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_0wkHgDHLEd60eobLow2NyQ" name="Node"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_7v5RIDHLEd60eobLow2NyQ" name="Workstation">
+      <generalization xmi:id="_A1MXBDHMEd60eobLow2NyQ" isSubstitutable="false" general="_0wkHgDHLEd60eobLow2NyQ"/>
+      <ownedOperation xmi:id="_hrcbUjHMEd60eobLow2NyQ" name="bill" visibility="public">
+        <ownedParameter xmi:id="_lbDgoDHMEd60eobLow2NyQ" name="p" visibility="public" type="_YVIouDHLEd60eobLow2NyQ" effect="create"/>
+        <ownedParameter xmi:id="_nzpIoDHMEd60eobLow2NyQ" name="Parameter1" visibility="public" type="_dBIBSDHMEd60eobLow2NyQ" direction="return" effect="create"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_dBIBSDHMEd60eobLow2NyQ" name="Void"/>
+  </packagedElement>
+</uml:Model>
