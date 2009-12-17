@@ -111,8 +111,8 @@ class EMFResource  extends Resource  {
 	def load(){
 		
 		var uri1 :URI = URI.createFileURI(uri.replace("platform:/resource/",EcorePackages.workspaceURI).replace("platform:/plugin/",EcorePackages.pluginURI ));
-		var resource :org.eclipse.emf.ecore.resource.Resource  = rs.createResource(uri1);
-		resource.load(new java.util.HashMap)
+		var resource :org.eclipse.emf.ecore.resource.Resource  = rs.getResource(uri1,true);
+		//resource.load(new java.util.HashMap)
 		if (resource.isLoaded() && resource.getContents().size() > 0) {
 			this.addAll(resource.getContents());
 		} 

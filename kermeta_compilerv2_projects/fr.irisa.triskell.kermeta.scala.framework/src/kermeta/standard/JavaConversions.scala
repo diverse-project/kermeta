@@ -90,7 +90,7 @@ object JavaConversions {
 	/*TODO*/def includesAll(elements : Collection[A]) :Boolean={return true}
 	def select(selector : A=> scala.Boolean) :java.util.List[A]={return this.filter{e=> selector(e)}}
 	override def size() :Int={return this.length}
-	def each(func : A=> Unit):Unit ={if (elements!=null) elements.foreach(e=> func(e))}
+	def each(func : A=> Unit):Unit ={if (elements!=null && elements.length >0) elements.foreach(e=> func(e))}
 	/*TODO*///def collect(collector : A=> Unit) :Sequence[A]={return null}
 	def elementAt(arg:Int):A={
 		return this.get(arg)

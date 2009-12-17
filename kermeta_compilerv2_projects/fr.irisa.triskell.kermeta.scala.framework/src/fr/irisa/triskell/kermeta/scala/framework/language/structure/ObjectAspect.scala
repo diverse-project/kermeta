@@ -11,7 +11,7 @@ trait ObjectAspect extends EObject with Contracted {
 	def ScalaclassDefinition = classDefinition
 	def typedefinition = this
 	def container = this.eContainer()
-	override def equals(o : Any) : Boolean = this.equals(o) /*TODO*/ 
+	override def equals(o : Any) : Boolean = o == this /*TODO*/ 
 	def isNotEqual(o : Any) : Boolean = !equals(o)
 	def isKindOf(cl : EClass) : Boolean = this.eClass().equals(cl)
 	def get(prop : EStructuralFeature) = this.eGet(prop)
