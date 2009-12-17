@@ -108,8 +108,8 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 			case "isEqual" => {generateTarget(res);res.append(" == ");generateParam(res)}
 			case "run" if(this.getTarget != null) => generateKUnitCase(res)
 			case "asType" => generateAsType(res)
-			case "isKindOf" => {generateTarget(res);res.append("isInstanceOf");generateTypeParam(res)}
-			case "asKindOf" => {generateTarget(res);res.append("asInstanceOf");generateTypeParam(res)}
+			case "isKindOf" => {generateTarget(res);res.append(".isInstanceOf");generateTypeParam(res)}
+			case "asKindOf" => {generateTarget(res);res.append(".asInstanceOf");generateTypeParam(res)}
 			case "new" => generateNew(res)
 			case _ if(this.getTarget != null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateTarget(res);res.append(".");generateOperationCall(res);generateParam(res)}
 			case _ if(this.getTarget == null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateName(res);generateParam(res) }
