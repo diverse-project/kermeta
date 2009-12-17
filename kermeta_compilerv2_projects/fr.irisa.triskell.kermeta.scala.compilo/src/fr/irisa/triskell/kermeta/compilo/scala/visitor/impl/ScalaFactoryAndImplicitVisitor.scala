@@ -26,8 +26,21 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 			packName=parentpack+"."+packNam
 		}
 		packName= kermeta.utils.TypeEquivalence.getPackageEquivalence(packName)
-		res.append("kermeta.persistence.EcorePackages.getPacks().put("+packName+"."+packNameUpper+"Package.eINSTANCE.getNsURI,"+packName+".impl."+packNameUpper+"PackageImpl.init())\n");
-		res.append(""+ packName +  "." + packNameUpper + "Package.eINSTANCE.setEFactoryInstance(" + packName + "ScalaAspect.RichFactory)\n " )
+		var impName = packName+".impl."+packNameUpper+"PackageImpl"
+		res.append("{\tvar c : java.lang.reflect.Constructor[_] = classOf["+impName+"].getDeclaredConstructors.first\n")
+		res.append("\tc.setAccessible(true);\n")
+	    res.append("\tvar pack : "+ impName + " =  c.newInstance().asInstanceOf["+ impName + "]\n")
+		res.append("\tpack.setEFactoryInstance(" + packName + "ScalaAspect.RichFactory)\n " )
+		res.append("\tvar f : java.lang.reflect.Field = classOf[org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
+	    res.append("\tf.setAccessible(true)\n")
+	    res.append("\tf.set(pack, "+ packName + "ScalaAspect.RichFactory)\n")
+		res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put("+packName + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
+		res.append("\tkermeta.persistence.EcorePackages.getPacks().put("+packName + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
+		res.append("\t"+impName +".init\n}\n")
+		
+		
+		//res.append("kermeta.persistence.EcorePackages.getPacks().put("+packName+"."+packNameUpper+"Package.eINSTANCE.getNsURI,"+packName+".impl."+packNameUpper+"PackageImpl.init())\n");
+		//res.append(""+ packName +  "." + packNameUpper + "Package.eINSTANCE.setEFactoryInstance(" + packName + "ScalaAspect.RichFactory)\n " )
 		res.toString
 	}
 	
@@ -60,7 +73,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 		"def main(args : Array[String]) : Unit = {\n\t" )
 		res.append("System.setOut(new PrintStream(\"outputStream\"));\n")
 		res.append("kermeta.persistence.EcorePackages.workspaceURI = \"" + GlobalConfiguration.workspaceURI + "\"\n")
-		res.append("kermeta.persistence.EcorePackages.pluginURI = \"" + GlobalConfiguration.pluginURI+ "\"\n")
+		res.append("kermeta.persistence.EcorePackages.pluginURI = \"" + GlobalConfiguration.pluginURI+ "\";\n")
 		packages.foreach{e=> if (!(e.getQualifiedName.startsWith("kermeta")|| e.getQualifiedName.startsWith("language")))
 			{if (e.getNestingPackage() == null){
 				res.append(
