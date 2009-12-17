@@ -34,7 +34,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		res.append("\tpack.setEFactoryInstance(" + packName + "ScalaAspect.RichFactory)\n " )
 		res.append("\tvar f : java.lang.reflect.Field = classOf[org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
 	    res.append("\tf.setAccessible(true)\n")
-	    if(packName.equals("ecore")){
+	    if(packName.equals("org.eclipse.emf.ecore")){
 	    	res.append("\tf.set(pack, "+ packName + "ScalaAspect.RichFactory)\n")
 	    } 
 		res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put("+packName + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
