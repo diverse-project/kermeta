@@ -105,6 +105,11 @@
 			<scope>compile</scope>
 			<!-- <systemPath>/Users/ffouquet/Desktop/GenModelPoc.jar</systemPath> -->
 		</dependency>
+		<dependency>
+			<groupId>fr.irisa.triskell</groupId>
+			<artifactId>kermeta.compilo.test.genmodel.test16ecore</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 
 </project>
