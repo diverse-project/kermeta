@@ -37,10 +37,6 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit {
 		res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put("+packName + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
 		res.append("\tkermeta.persistence.EcorePackages.getPacks().put("+packName + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
 		res.append("\t"+impName +".init\n}\n")
-		
-		
-		//res.append("kermeta.persistence.EcorePackages.getPacks().put("+packName+"."+packNameUpper+"Package.eINSTANCE.getNsURI,"+packName+".impl."+packNameUpper+"PackageImpl.init())\n");
-		//res.append(""+ packName +  "." + packNameUpper + "Package.eINSTANCE.setEFactoryInstance(" + packName + "ScalaAspect.RichFactory)\n " )
 		res.toString
 	}
 	
