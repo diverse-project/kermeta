@@ -81,8 +81,10 @@ class EMFResource  extends Resource  {
 		var m :java.util.Map[String,Object]  = f.getExtensionToFactoryMap();
 		//f.get
 		
-		//m.put("*",new XMIResourceFactoryImpl());
 		m.put("ecore",new EcoreResourceFactoryImpl());
+		m.put("*",new XMIResourceFactoryImpl());
+		
+		//m.put("*",new EcoreResourceFactoryImpl());
 		
 		/*m.put("*",
 				new EcoreResourceFactoryImpl() {

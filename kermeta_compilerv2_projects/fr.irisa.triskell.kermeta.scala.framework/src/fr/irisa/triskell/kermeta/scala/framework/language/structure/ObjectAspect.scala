@@ -28,10 +28,8 @@ trait ObjectAspect extends EObject with Contracted {
 	//def isInstanceOf(t : EClass) = this.isInstanceOf(t.getMetaClass().getName)
 	
 	
-	
 	/* Contracted */
 	type Condition = () => Boolean
-	def getInvariants : scala.collection.immutable.HashMap[String,Condition] = null
 	def checkParamInvariants(inv : scala.collection.immutable.HashMap[String,Condition]) = {
 		if(inv !=  null ){
 			for(cond <- inv){
@@ -43,8 +41,10 @@ trait ObjectAspect extends EObject with Contracted {
 			}
 		}
 	}
+	/* Default Method Overloaded in by each class definition */
 	def checkInvariants() = { 
-		checkParamInvariants(getInvariants)
+		val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap[String,Condition]()
+		checkParamInvariants(invariants)
 	}
 	def checkAllInvariants() = { /*TODO*/ println("todo checkAllInvariant") }	
 	
