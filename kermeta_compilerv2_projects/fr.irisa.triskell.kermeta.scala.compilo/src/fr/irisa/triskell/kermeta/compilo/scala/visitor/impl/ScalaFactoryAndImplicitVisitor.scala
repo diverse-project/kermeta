@@ -16,6 +16,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 	var implicitDef : StringBuilder = _
 	var actualPackage : String = _
 	var factoryDefClass : StringBuilder =_
+	
 	def initForEcorePackage(parentpack : String,packNam:String):String={
 		var res : StringBuilder = new StringBuilder
 		var packNameUpper :String = packNam.substring(0,1).toUpperCase + packNam.substring(1,packNam.size)
@@ -33,7 +34,9 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		res.append("\tpack.setEFactoryInstance(" + packName + "ScalaAspect.RichFactory)\n " )
 		res.append("\tvar f : java.lang.reflect.Field = classOf[org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
 	    res.append("\tf.setAccessible(true)\n")
-	    res.append("\tf.set(pack, "+ packName + "ScalaAspect.RichFactory)\n")
+	    if(packName.equals("ecore")){
+	    	res.append("\tf.set(pack, "+ packName + "ScalaAspect.RichFactory)\n")
+	    } 
 		res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put("+packName + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
 		res.append("\tkermeta.persistence.EcorePackages.getPacks().put("+packName + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
 		res.append("\t"+impName +".init\n}\n")
@@ -70,7 +73,8 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		res.append("System.setOut(new PrintStream(\"outputStream\"));\n")
 		res.append("kermeta.persistence.EcorePackages.workspaceURI = \"" + GlobalConfiguration.workspaceURI + "\"\n")
 		res.append("kermeta.persistence.EcorePackages.pluginURI = \"" + GlobalConfiguration.pluginURI+ "\";\n")
-		packages.foreach{e=> if (!(e.getQualifiedName.startsWith("kermeta")|| e.getQualifiedName.startsWith("language")))
+		
+		packages.sort((a,b)->{true}).foreach{e=> if (!(e.getQualifiedName.startsWith("kermeta")|| e.getQualifiedName.startsWith("language")))
 			{if (e.getNestingPackage() == null){
 				res.append(
 				initForEcorePackage("", e.getName()))
