@@ -110,7 +110,7 @@ def generateAttribute(res : StringBuilder) : Unit ={
 		}
 	}
 	def generateScalSet(res : StringBuilder,prefix:String) : Unit ={
-		if (!this.isIsReadOnly()){
+		if (!this.isIsReadOnly()&& !this.isIsDerived()){
 		res.append("def "+GlobalConfiguration.scalaPrefix)
 		res.append(this.getName+"_=(")
 		res.append("arg : ")

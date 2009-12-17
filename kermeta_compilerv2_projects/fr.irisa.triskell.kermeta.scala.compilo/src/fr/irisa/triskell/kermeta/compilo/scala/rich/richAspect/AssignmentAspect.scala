@@ -11,6 +11,9 @@ trait AssignmentAspect extends RichAspectImplicit with ObjectAspect with LogAspe
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		log.debug("Assignment Generation")
+		if (this.isIsCast()){
+			res append "try{\n"
+		}
 		this.getTarget().generateScalaCode(res)
 		res.append(" = ")
 		this.getValue().generateScalaCode(res)
@@ -37,5 +40,10 @@ trait AssignmentAspect extends RichAspectImplicit with ObjectAspect with LogAspe
 			res append ".asInstanceOf["+targetClass.toString+"]"
 		}
 		res.append(";")
+		if (this.isIsCast()){
+			res append "\n}catch { case e:ClassCastException => {}}\n"
+
+		}
+
 	} 
 }

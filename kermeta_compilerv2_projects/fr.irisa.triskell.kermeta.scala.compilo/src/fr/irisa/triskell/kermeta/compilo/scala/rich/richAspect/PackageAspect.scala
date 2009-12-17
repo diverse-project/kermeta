@@ -15,7 +15,7 @@ trait PackageAspect extends RichAspectImplicit with ObjectAspect with IVisitable
 		visitor.visit(this)
 	}	  
 	
-	override def getQualifiedNameCompilo():String =getQualifiedName()
+	override def getQualifiedNameCompilo():String ={kermeta.utils.TypeEquivalence.getPackageEquivalence(getQualifiedName())}
 	
 	def getQualifiedName():String ={
 		var res : String="" 
