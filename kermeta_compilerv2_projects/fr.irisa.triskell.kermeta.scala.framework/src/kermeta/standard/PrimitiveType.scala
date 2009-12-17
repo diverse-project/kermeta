@@ -2,6 +2,7 @@ package kermeta.standard;
 //import fr.irisa.triskell.kermeta.language.structure._
 //import fr.irisa.triskell.kermeta.language._
 import scala._
+//import scala.collection.JavaConversions._
 //import fr.irisa.triskell.kermeta.language.behavior._
 
     
@@ -11,13 +12,49 @@ object PrimitiveConversion{
 	implicit def boolean2kermeta(x: java.lang.Boolean) :Boolean= x.booleanValue()	
 	implicit def iterator2kermeta(x: java.util.Iterator[_])= new RichIterator(x)
 
-//	implicit def integer2kermeta(x: Integer) = new RichInteger(x)	
+	implicit def class2kermetaclass(x: Class[_]) = new RichClass(x)	
+	implicit def field2kermetaclass(x: java.lang.reflect.Field) = new RichField(x)	
+	implicit def field2kermetaclass(x: org.eclipse.emf.ecore.EStructuralFeature) = new RichAttribute(x)	
+	
 	implicit def integer2kermeta(x: Int) = new RichInteger(x)	
 	implicit def real2kermeta(x: Double) = new RichReal(x)	
 	implicit def character2kermeta(x: Char) = new RichCharacter(x)	
 	implicit def toInt(in:Integer) = new RichInteger(in.intValue)
 }  
   
+class RichClass(e:Class[_]){
+	def ScalaclassDefinition():Class[_]={
+		
+		return e;
+	}
+	def ScalaeAllAttributes():java.util.List[java.lang.reflect.Field]={
+		var v : java.util.List[java.lang.reflect.Field] = new java.util.ArrayList[java.lang.reflect.Field] 
+		
+		 e.getDeclaredFields.foreach{e=>v.add(e)}
+		return v;
+	}
+}
+
+class RichField(e:java.lang.reflect.Field){
+	def ScalaisDerived():Boolean={
+		return false;
+	}
+	def Scalaname():String={
+			return e.getName;
+	}
+	
+}
+
+class RichAttribute(e:org.eclipse.emf.ecore.EStructuralFeature){
+	def ScalaisDerived():Boolean={
+		return false;
+	}
+	def Scalaname():String={
+			return e.getName;
+	}
+	
+}
+
 class Void  extends Object //with fr.irisa.triskell.kermeta.scala.framework.emf.aspects.KermetaObjectAspect  
 {
 	 def isVoid() :Boolean={return true;}
