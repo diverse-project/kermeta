@@ -87,18 +87,19 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 	
 	def generateKUnitCase(res : StringBuilder){
 		this.getTarget().generateScalaCode(res)
-		res append "."
+		res append ".run("
 		this.getParameters.foreach(e=> {
 			//if(e.isInstanceOf[TypeLiteral]){
-				res append "classOf(" 
+				res append "classOf[" 
          		var className :StringBuilder = new StringBuilder
          		e.generateScalaCode(className)
          		className.insert(className.lastIndexOf(".")+1,"Rich")
          		res.append(className.toString())
-         		res append ")"
+         		res append "]"
          		if(!this.getParameters.last.equals(e)) { res append ", " }
 			//}
 		})
+		res append ")"
 	}
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
