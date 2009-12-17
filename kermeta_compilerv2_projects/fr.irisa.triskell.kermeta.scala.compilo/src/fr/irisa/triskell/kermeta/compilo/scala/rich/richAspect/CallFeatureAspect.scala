@@ -9,75 +9,13 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect with LogAspect {
-
-	override def generateScalaCode(res : StringBuilder) : Unit = {
-		log.debug("CallFeature Generation {}",this.getName())
-		if ("new".equals(this.getName)){ /* Cas Constructeur */
-			 generateNew(res)
-		} else if("asType".equals(this.getName)){
-				this.getTarget().generateScalaCode(res)
-				res append ".asInstanceOf["
-			this.getParameters.foreach(e=> {
-         			e.generateScalaCode(res)
-			})
-			res append "]"
-				
-		}
-		else { /* Cas Nominal */
-			if (this.getTarget!=null){
-				this.getTarget().generateScalaCode(res)
-				res append "."
-			}
-			/* GENERATE CALL */
-			if (this.getStaticProperty!=null){
-				if(this.getTarget() != null){
-					var TargetType : StringBuilder = new StringBuilder
-					this.getTarget().getStaticType().generateScalaCode(TargetType)
-					//res.append(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString(), this.getName))
-					res.append(GlobalConfiguration.scalaPrefix+kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName))
-				} else {
-					res append this.getName()
-				}
-			} else {
-				if(this.getTarget() != null){
-					var subs : StringBuilder = new StringBuilder
-					this.getTarget().getStaticType().generateScalaCode(subs)
-					res.append(kermeta.utils.TypeEquivalence.getMethodEquivalence(subs.toString(), this.getName))
-				} else {
-					res append this.getName()
-				}
-			}
-			if (this.getStaticOperation!=null ){
-         	 //if (!this.getName.equals("size") ) 
-				res append "(" 
-         	
-			var i : Int = 1
-         	
-			//Gestion de kunit
-			this.getParameters.foreach(e=> {
-         		if (this.getName.equals("run") && e.isInstanceOf[TypeLiteral])
-         		{
-         			res append "java.lang.Class.forName(\"" 
-         			var className :StringBuilder = new StringBuilder
-         			e.generateScalaCode(className)
-         			className.insert(className.lastIndexOf(".")+1,"Rich")
-         			res.append(className.toString())
-         			res append "\")"
-         		}
-         		else 	//println ("type " + e.getClass)
-         			e.generateScalaCode(res)
-                if (i< this.getParameters.size()){
-                	res append ", "
-                }
-                i=i+1
-            })
-         	//if (this.getStaticOperation!=null  && this.getParameters.size >0){
-         	      //if (!this.getName.equals("size") ) 
-         	           		 res append ")"
-         	}			
-		}
-	}
 	
+	def generateAsType(res : StringBuilder){
+		this.getTarget().generateScalaCode(res)
+		res append ".asInstanceOf["
+		this.getParameters.foreach(e=> {e.generateScalaCode(res)})
+		res append "]"
+	}
 	def generateNew(res : StringBuilder) = {
 		if (this.getTarget!=null){
 				if (this.getTarget.isInstanceOf[TypeLiteral]){
@@ -103,6 +41,70 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 					this.getTarget.asInstanceOf[ObjectAspect].generateScalaCode(res)
 				}
 			}
+	}
+	
+	def generateIsNotEquals(res : StringBuilder){
+		//TODO
+	}
+
+	
+	def generateTarget(res : StringBuilder){
+		this.getTarget().generateScalaCode(res)
+	}
+	def generateParam(res : StringBuilder){
+		res append "(" 
+		this.getParameters.foreach(e=> {
+			e.generateScalaCode(res)
+			if(!this.getParameters.last.equals(e)) { res append ", " }
+		})
+		res append ")"
+	}
+	def generatePropertyCall(res : StringBuilder){
+		var TargetType : StringBuilder = new StringBuilder
+		this.getTarget().getStaticType().generateScalaCode(TargetType)
+		res.append(GlobalConfiguration.scalaPrefix+kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName))
+		
+	}
+	def generateOperationCall(res : StringBuilder){
+		var TargetType : StringBuilder = new StringBuilder
+		this.getTarget().getStaticType().generateScalaCode(TargetType)
+		res.append(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName))
+	}
+	
+	def generateName(res : StringBuilder){
+		res append this.getName()
+	}
+	
+	def generateKUnitCase(res : StringBuilder){
+		this.getTarget().generateScalaCode(res)
+		res append "."
+		this.getParameters.foreach(e=> {
+			//if(e.isInstanceOf[TypeLiteral]){
+				res append "classOf(" 
+         		var className :StringBuilder = new StringBuilder
+         		e.generateScalaCode(className)
+         		className.insert(className.lastIndexOf(".")+1,"Rich")
+         		res.append(className.toString())
+         		res append ")"
+         		if(!this.getParameters.last.equals(e)) { res append ", " }
+			//}
+		})
+	}
+
+	override def generateScalaCode(res : StringBuilder) : Unit = {
+		log.debug("CallFeature={}",this.getName())
+		this.getName match {
+			case "isNotEqual" => {generateTarget(res);res.append(" != ");generateParam(res)}
+			case "isEqual" => {generateTarget(res);res.append(" == ");generateParam(res)}
+			case "run" if(this.getTarget != null) => generateKUnitCase(res)
+			case "asType" => generateAsType(res)
+			case "new" => generateNew(res)
+			case _ if(this.getTarget != null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateTarget(res);res.append(".");generateOperationCall(res);generateParam(res)}
+			case _ if(this.getTarget == null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateName(res);generateParam(res) }
+			case _ if(this.getTarget != null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generatePropertyCall(res) }
+			case _ if(this.getTarget == null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generateName(res) }		
+			case _ => log.debug("!!! Uncatch case ")
+		}	
 	}
 	
 	

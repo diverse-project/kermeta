@@ -14,6 +14,7 @@ trait AssignmentAspect extends RichAspectImplicit with ObjectAspect with LogAspe
 		if (this.isIsCast()){
 			res append "try{\n"
 		}
+		
 		this.getTarget().generateScalaCode(res)
 		res.append(" = ")
 		this.getValue().generateScalaCode(res)

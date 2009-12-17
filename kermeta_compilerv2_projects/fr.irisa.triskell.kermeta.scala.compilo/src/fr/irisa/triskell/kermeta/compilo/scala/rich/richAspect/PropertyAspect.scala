@@ -11,6 +11,7 @@ import java.util._
 trait PropertyAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 	
 	
+	
 override def generateScalaCode(res : StringBuilder) : Unit = {
 	if (Util.hasEcoreTag(this.getOwningClass)){
 		 	if (Util.hasEcoreTag(this)){

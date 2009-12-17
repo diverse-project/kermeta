@@ -52,6 +52,7 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
 			//res append "]\n}\n"
 			//res.append("}/*End_"+this.getName()+"*/\n")
 		}
+		
 	}
 	
 }

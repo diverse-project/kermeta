@@ -24,6 +24,7 @@ trait TypeLiteralAspect extends RichAspectImplicit with ObjectAspect {
 		println("toto " +this.getTyperef().getType.getQualifiedNameCompilo())
 		res.append(this.getTyperef().getType.getQualifiedNameCompilo())
 	}
+	
 
 }
  

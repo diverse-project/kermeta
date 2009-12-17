@@ -102,9 +102,11 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 				this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))
 				this.getOwnedOperation filter(op=> !Util.hasEcoreTag(op)) foreach(op=> op.generateScalaCode(res))
 				
-				/* Generate Invariants Collection Init */
+				/* Generate Invariants */
 				if(this.getInv().size() > 0){
-					res.append("override def getInvariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap( ")
+					/* Generate checkInvariants */
+					res.append("override def checkInvariants(){\n")
+					res.append("val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap( ")
 					var i = 0
 					this.getInv() foreach(a => {
 						if(i != 0) res.append(",")
@@ -114,15 +116,19 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 						res.append("))")
 						i = i + 1
 					})
-					res.append(" )")
-					
-					/* Generate checkInvariants */
-					res.append("\n override def checkInvariants(){\n")
-					res.append("checkParamInvariants(getInvariants)\n")
-					res.append("checkParamInvariants(super.getInvariants)\n")
+					res.append(" )\n")
+					res.append("checkParamInvariants(invariants)\n")
+					this.getSuperType.foreach(superC => {
+						res.append("super[")
+						res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
+						res.append("Aspect].checkInvariants\n")
+					})
+					//res.append("checkParamInvariants(super.getInvariants)\n")
 					res.append("}\n")
 					/* End checkInvariants Generation  */
 					
+
+
 				}
 
 				
@@ -135,6 +141,8 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 		return kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName());
 	  
 	}
+	
+	
 	
 	def generateParamerterClass(res1:StringBuilder) = {
 						if (this.getTypeParameter().size()>0){

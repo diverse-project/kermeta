@@ -51,7 +51,10 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 			var genpackageName : StringBuilder= new StringBuilder
 			var packageName : StringBuilder= new StringBuilder
 			
-			genpackageName.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[PackageAspect].getQualifiedName))
+			genpackageName.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[PackageAspect].getQualifiedNameCompilo))
+			
+			log.debug("AspectVisitor ClassDef Gen | {} | {}",genpackageName.toString,par.eContainer.asInstanceOf[PackageAspect].getQualifiedNameCompilo)
+			
 			if (Util.hasEcoreTag(par.eContainer().asInstanceOf[Package])){
 				genpackageName.append("ScalaAspect")
 			}
@@ -74,7 +77,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 				res1.append(par.getName())	
 				
 				par.generateParamerterClass(res1);
-				if(!par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo.equals("language.structure.Object")){
+				if(!par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo.equals("kermeta.language.structure.Object")){
 					//log.debug("SuperTypefound="+ par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
 					var listSuperTypes = par.getSuperType()
 					var i = 0
