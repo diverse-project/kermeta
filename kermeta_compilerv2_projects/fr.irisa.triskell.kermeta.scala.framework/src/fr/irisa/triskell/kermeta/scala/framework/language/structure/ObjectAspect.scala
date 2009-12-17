@@ -22,10 +22,12 @@ trait ObjectAspect extends EObject with Contracted {
 	override def toString : String = super.toString()//"["+this.eClass().getName()+":"+oid.toString()+"]"
 	//def isFrozen : Boolean  /*TODO*/
 	def isVoid() : Boolean = false
-	def hashcode : Int = this.hashCode()   
+	def hashcode : Int = this.hashCode() 
+	def getKerMetaClass(): Class[_] =this.getClass
 	//def freeze  /*TODO*/
 	//def asType(t : EClass) = this.asInstanceOf[t.getName]
 	//def isInstanceOf(t : EClass) = this.isInstanceOf(t.getMetaClass().getName)
+	
 	
 	
 	/* Contracted */
