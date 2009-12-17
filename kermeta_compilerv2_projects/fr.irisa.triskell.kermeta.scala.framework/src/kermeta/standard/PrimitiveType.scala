@@ -9,6 +9,7 @@ object PrimitiveConversion{
 	implicit def string2kermeta(x: String) = new RichString(x)	
 	implicit def boolean2kermeta(x: Boolean) = new RichBoolean(x)	
 	implicit def boolean2kermeta(x: java.lang.Boolean) :Boolean= x.booleanValue()	
+	implicit def iterator2kermeta(x: java.util.Iterator[_])= new RichIterator(x)
 
 //	implicit def integer2kermeta(x: Integer) = new RichInteger(x)	
 	implicit def integer2kermeta(x: Int) = new RichInteger(x)	
@@ -39,6 +40,10 @@ abstract class Comparable[G]  extends Object {
 	def isNotEqual(other : Any) :Boolean = {!this.equals(other) }
 }
 class RichNotComparableException  extends Exception  {}
+
+class RichIterator (value: java.util.Iterator[_]) extends RichValueType[Boolean] {
+	def isOff():Boolean = {return !value.hasNext()}	
+}
 
 
 class RichBoolean (value: Boolean) extends RichValueType[Boolean] {

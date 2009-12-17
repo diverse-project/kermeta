@@ -75,10 +75,15 @@ class EMFResource  extends Resource  {
 		
 		var rs:ResourceSetImpl = new ResourceSetImpl(); 
 		
-		EcorePackageImpl.init();
+		//EcorePackageImpl.init();
 		var f:org.eclipse.emf.ecore.resource.Resource.Factory.Registry = rs.getResourceFactoryRegistry();
+		
 		var m :java.util.Map[String,Object]  = f.getExtensionToFactoryMap();
-		m.put("*",new XMIResourceFactoryImpl());
+		//f.get
+		
+		//m.put("*",new XMIResourceFactoryImpl());
+		m.put("ecore",new EcoreResourceFactoryImpl());
+		
 		/*m.put("*",
 				new EcoreResourceFactoryImpl() {
 					@Override
@@ -95,8 +100,6 @@ class EMFResource  extends Resource  {
 		
 		//rs.getPackageRegistry().put(/*pack.getNsURI()*/"", pack);
 		rs.getPackageRegistry().putAll(EcorePackages.getPacks())
-	
-
     
 	//override def remove(instance : Object)={super.remove(instance)}
 	override  def save()={}
@@ -108,7 +111,8 @@ class EMFResource  extends Resource  {
 	def load(){
 		
 		var uri1 :URI = URI.createFileURI(uri.replace("platform:/resource/",EcorePackages.workspaceURI).replace("platform:/plugin/",EcorePackages.pluginURI ));
-		var resource :org.eclipse.emf.ecore.resource.Resource  = rs.getResource(uri1, true);
+		var resource :org.eclipse.emf.ecore.resource.Resource  = rs.createResource(uri1);
+		resource.load(new java.util.HashMap)
 		if (resource.isLoaded() && resource.getContents().size() > 0) {
 			this.addAll(resource.getContents());
 		} 

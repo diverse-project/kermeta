@@ -26,6 +26,7 @@ object TypeEquivalence {
 		typeEquivelence.put("kermeta.utils.Hashtable", "java.util.HashMap");
 		typeEquivelence.put("org.eclipse.emf.ecore.EStringToStringMapEntry","java.util.Map.Entry[String,String]")
 		typeEquivelence.put("kermeta.utils.Stack", " java.util.Stack");
+		typeEquivelence.put("kermeta.standard.Iterator", "java.util.Iterator");
 		typeEquivelence.put("kermeta.standard.Collection", "java.util.List");
 		typeEquivelence.put("kermeta.standard.Set", "java.util.List");
 		typeEquivelence.put("kermeta.standard.Sequence", "java.util.List");
