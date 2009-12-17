@@ -73,8 +73,21 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		res.append("System.setOut(new PrintStream(\"outputStream\"));\n")
 		res.append("kermeta.persistence.EcorePackages.workspaceURI = \"" + GlobalConfiguration.workspaceURI + "\"\n")
 		res.append("kermeta.persistence.EcorePackages.pluginURI = \"" + GlobalConfiguration.pluginURI+ "\";\n")
-		
-		packages.sort((a,b)->{true}).foreach{e=> if (!(e.getQualifiedName.startsWith("kermeta")|| e.getQualifiedName.startsWith("language")))
+		java.util.Collections.sort(packages, new java.util.Comparator[Package]{
+			def compare(o1:Package , o2:Package):Int={
+				if ("ecore".equals(o1.getName))
+					return -1;
+				else if ("ecore".equals(o2.getName))
+					return 1;
+				else
+					return 0;
+				
+			};
+			def equals(obj:Object):Boolean =false; 
+		}
+				
+		);
+		packages.foreach{e=> if (!(e.getQualifiedName.startsWith("kermeta")|| e.getQualifiedName.startsWith("language")))
 			{if (e.getNestingPackage() == null){
 				res.append(
 				initForEcorePackage("", e.getName()))
