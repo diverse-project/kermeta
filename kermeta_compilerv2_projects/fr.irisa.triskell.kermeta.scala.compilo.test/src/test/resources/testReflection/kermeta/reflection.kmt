@@ -24,13 +24,13 @@ using kermeta::language
 class Main
 {
 	operation main() : Void is do 
-		var p : EPackage init EcoreUtil.new.loadModel("../metamodel/metamodel.ecore")
+		var p : EPackage init EcoreUtil.new.loadModel("platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/metamodel/metamodel.ecore")
 		var c : EClass
 		c ?= p.eClassifiers.select{c|c.isKindOf(EClass)}.one
 		stdio.writeln(c.name)
 		c.testGetReflection()
 		c.testSetReflection()
-		EcoreUtil.new.saveModel(p,"../metamodel/metamodel_modified.ecore")
+		EcoreUtil.new.saveModel(p,"platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/metamodel/metamodel_modified.ecore")
 		stdio.writeln(c.name)
 	end
 	
