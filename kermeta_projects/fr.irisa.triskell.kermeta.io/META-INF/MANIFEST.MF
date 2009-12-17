@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta IO Plugin
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.io;singleton:=true
-Bundle-Version: 1.3.2
+Bundle-Version: 1.3.2.qualifier
 Bundle-ClassPath: .
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,

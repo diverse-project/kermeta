@@ -66,11 +66,13 @@ aspect class Object
 						// A collection that does not respect the defined bounds raises an exception.
 						if ( p.upper != -1 and c.size() > p.upper ) then
 							var e : ConstraintViolatedInv init ConstraintViolatedInv.new
+							e.constraintAppliedTo := self
 							e.message := "Inv upper bound of " + cd.name + "." + p.name + " violated on " + self.toString
 							raise e
 						end
 						if ( c.size() < p.lower ) then
 							var e : ConstraintViolatedInv init ConstraintViolatedInv.new
+							e.constraintAppliedTo := self
 							e.message := "Inv lower bound of " + cd.name + "." + p.name + " violated on " + self.toString
 							raise e
 						end
@@ -78,6 +80,7 @@ aspect class Object
 						// A required property that is void raises an exception.
 						if ( p.lower == 1 and v.isVoid ) then
 							var e : ConstraintViolatedInv init ConstraintViolatedInv.new
+							e.constraintAppliedTo := self
 							e.message := "Inv lower bound of " + cd.name + "." + p.name + " violated on " + self.toString
 							raise e
 						end
