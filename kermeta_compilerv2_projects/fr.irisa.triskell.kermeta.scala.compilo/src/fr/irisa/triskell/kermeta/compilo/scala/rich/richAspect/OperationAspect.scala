@@ -14,7 +14,7 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		log.debug("Generate Method {}",this.getName)
 		res.append("\n   ")
-		if (this.getSuperOperation()!=null){
+		if (this.getSuperOperation()!=null || (Util.hasEcoreTag(this) && this.getBody !=null)){
 			res.append(" override")
 		}
 		res.append(" def ")
