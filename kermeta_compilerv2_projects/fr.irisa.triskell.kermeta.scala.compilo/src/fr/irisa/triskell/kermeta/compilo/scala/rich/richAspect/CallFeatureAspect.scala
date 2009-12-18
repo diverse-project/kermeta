@@ -82,6 +82,9 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 	}
 	
 	def generateName(res : StringBuilder){
+		res.append(this.getName())
+	}
+	def generatePropertyName(res : StringBuilder){
 		res.append(GlobalConfiguration.scalaPrefix + this.getName())
 	}
 	
@@ -117,7 +120,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 			case _ if(this.getTarget != null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateTarget(res);res.append(".");generateOperationCall(res);generateParam(res)}
 			case _ if(this.getTarget == null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateName(res);generateParam(res) }
 			case _ if(this.getTarget != null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generatePropertyCall(res) }
-			case _ if(this.getTarget == null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generateName(res) }		
+			case _ if(this.getTarget == null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generatePropertyName(res) }		
 			case _ => log.debug("!!! Uncatch case ")
 		}	
 	}
