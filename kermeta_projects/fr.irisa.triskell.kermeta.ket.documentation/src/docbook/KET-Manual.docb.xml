@@ -133,7 +133,7 @@ This is the reference manual for anybody who want to use KET.</para>
             <para><emphasis role="strong">operation (o)</emphasis> - name of the main operation</para>
         </listitem>
         <listitem>
-            <para><emphasis role="strong">ismethod (o)</emphasis> - true if the main operation is a redefinition of an existing operation</para>
+            <para><emphasis role="strong">isMethod (o)</emphasis> - true if the main operation is a redefinition of an existing operation</para>
         </listitem>
         <listitem>
             <para><emphasis role="strong">parameters (m)</emphasis> - parameters of the <literal>generate(...)</literal> method. Those parameters can be used in KET tags to acquire data from outside the generator</para>
@@ -145,7 +145,7 @@ require="my_require other_require"
 using="package1 package2"
 isAspectClass="false"
 class="example"
-ismethod="false"
+isMethod="false"
 operation="generate"
 parameters=""
 %&gt;</programlisting>
