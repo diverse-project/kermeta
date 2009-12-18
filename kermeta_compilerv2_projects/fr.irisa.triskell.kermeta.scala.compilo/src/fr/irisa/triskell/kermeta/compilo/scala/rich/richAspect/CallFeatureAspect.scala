@@ -82,7 +82,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 	}
 	
 	def generateName(res : StringBuilder){
-		res append this.getName()
+		res.append(GlobalConfiguration.scalaPrefix + this.getName())
 	}
 	
 	def generateKUnitCase(res : StringBuilder){

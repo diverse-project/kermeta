@@ -24,11 +24,12 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
 		var i = 0;
 		this.getOwnedParameter.foreach(par => {
 			if (i==0) { 
-				res.append(par.getName()+" : ")
+				res.append(Util.protectScalaKeyword(par.getName()))
+				res.append(" : ")
 				par.getType.generateScalaCode(res)
 			}else{
 				res.append(", ")
-				res.append(par.getName())
+				res.append(Util.protectScalaKeyword(par.getName()))
 				res.append(" : ")
 				par.getType.generateScalaCode(res)
 			}
