@@ -13,8 +13,8 @@ package root_package;
 
 
 require kermeta
-require "platform:/resource/TransfoMetadomoArt/metaArt/metamodel@runtime.ecore"
-require "platform:/resource/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metaArt/metamodel@runtime.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore"
 
 using kermeta::io
 using kermeta::persistence
@@ -373,7 +373,7 @@ class Main
 	
 	operation loadMetaDomoModel( modelUri : String) : Resource is do
 		var repository : EMFRepository init EMFRepository.new
-		var resource : Resource init repository.createResource(modelUri, "platform:/resource/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore")
+		var resource : Resource init repository.createResource(modelUri, "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore")
 		resource.load
 		result := resource
 	end
@@ -381,7 +381,7 @@ class Main
 	
 	operation saveArtModel( sys : System, uri : String) is do
 	    var repository : EMFRepository init EMFRepository.new
-	    var resource : Resource init repository.createResource(uri , "platform:/resource/TransfoMetadomoArt/metaArt/metamodel@runtime.ecore")
+	    var resource : Resource init repository.createResource(uri , "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metaArt/metamodel@runtime.ecore")
 	    resource.instances.add(sys)
 	   /* var report : Set<DanglingDiagnostic>
 	 	report := repository.findDanglingModelElements()

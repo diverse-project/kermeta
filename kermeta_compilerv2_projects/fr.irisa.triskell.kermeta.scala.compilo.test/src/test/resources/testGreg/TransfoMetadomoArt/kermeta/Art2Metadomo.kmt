@@ -13,8 +13,8 @@ package root_package;
 
 
 require kermeta
-require "platform:/resource/TransfoMetadomoArt/metaArt/metamodel@runtime.ecore"
-require "platform:/resource/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metaArt/metamodel@runtime.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore"
 
 using kermeta::io
 using kermeta::persistence
@@ -369,7 +369,7 @@ class Main
 	
 	operation loadArtModel( modelUri : String) : Resource is do
 		var repository : EMFRepository init EMFRepository.new
-		var resource : Resource init repository.createResource(modelUri, "platform:/resource/TransfoMetadomoArt/metaArt/metamodel@runtime.ecore")
+		var resource : Resource init repository.createResource(modelUri, "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metaArt/metamodel@runtime.ecore")
 		resource.load
 		result := resource
 	end
@@ -377,14 +377,14 @@ class Main
 	
 	operation saveMetaDomoCatalog( catalog : CatalogRoot, uri : String) is do
 	    var repository : EMFRepository init EMFRepository.new
-	    var resource : Resource init repository.createResource(uri , "platform:/resource/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore")
+	    var resource : Resource init repository.createResource(uri , "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore")
 	    resource.instances.add(catalog)
 	    resource.save
     end
 	
 	operation saveMetaDomoApplication( application : DomoApplication, uri : String) is do
 	    var repository : EMFRepository init EMFRepository.new
-	    var resource : Resource init repository.createResource(uri , "platform:/resource/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore")
+	    var resource : Resource init repository.createResource(uri , "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore")
 	    resource.instances.add(application)
 	    resource.save
     end
@@ -396,8 +396,8 @@ class Main
 		var catalog : CatalogRoot init CatalogRoot.new
 		var artModel : art::System
 		
-    	stdio.writeln("Loading resource: " + "platform:/resource/TransfoMetadomoArt/inputModel/Model_0.art")
-    	var resource : Resource init loadArtModel("platform:/resource/TransfoMetadomoArt/inputModel/Model_0.art")
+    	stdio.writeln("Loading resource: " + "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/inputModel/Model_0.art")
+    	var resource : Resource init loadArtModel("platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/inputModel/Model_0.art")
     	artModel ?= resource.contents.one
 
 		stdio.writeln("Initializing Catalog Model")
@@ -419,10 +419,10 @@ class Main
 		addGroups(artModel, catalog)
 		
 		stdio.writeln("Saving Catalogo")
-		saveMetaDomoCatalog(catalog, "platform:/resource/TransfoMetadomoArt/outputModel/catalog.metadomo")
+		saveMetaDomoCatalog(catalog, "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/outputModel/catalog.metadomo")
  
  		stdio.writeln("Saving Application")
-		saveMetaDomoApplication(application, "platform:/resource/TransfoMetadomoArt/outputModel/application.metadomo")
+		saveMetaDomoApplication(application, "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/outputModel/application.metadomo")
  
  		stdio.writeln("Rock&Roll")
 		
