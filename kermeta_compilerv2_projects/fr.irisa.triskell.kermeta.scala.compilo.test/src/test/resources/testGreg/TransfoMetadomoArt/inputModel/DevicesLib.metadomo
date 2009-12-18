@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaDomo:CatalogRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:MetaDomo="MetaDomo" xsi:schemaLocation="MetaDomo ../metadomo/MetaDomoRennes.ecore">
+  <hasFUCatalog FUCatalogName="Devices">
+    <hasCategory CategoryName="EnTiMid"/>
+    <hasCategory CategoryName="FakeStuff" padre="//@hasFUCatalog/@hasCategory.2" fudefinitios="//@hasFUCatalog/@hasFUDefinition.0 //@hasFUCatalog/@hasFUDefinition.1"/>
+    <hasCategory subCategory="//@hasFUCatalog/@hasCategory.1" CategoryName="OSGiComponent"/>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="FakeSimpleLight" cataloguedIn="//@hasFUCatalog/@hasCategory.1" FUDefRef="org.entimid.fakeStuff.devices.FakeSimpleLight">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.2">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries value="255,0,0" key="org.entimid.fakeStuff.devices.fakeSimpleLight.color"/>
+          <entries value="" key="org.entimid.fakeStuff.devices.fakeSimpleLight.id"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="ON" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="OFF" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="FakeSimpleSwitch" cataloguedIn="//@hasFUCatalog/@hasCategory.1" FUDefRef="org.entimid.fakeStuff.devices.FakeSimpleSwitch">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.2">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries value="ON" key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.onBtText"/>
+          <entries value="OFF" key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.offBtText"/>
+          <entries value="false" key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.visible"/>
+        </defaultValues>
+      </hasParameter>
+      <hasParameter ParameterDName="onActionParameters" parameterTypes="//@hasDataType.2"/>
+      <hasParameter ParameterDName="offActionParameters" parameterTypes="//@hasDataType.2"/>
+      <hasService serviceName="ON" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="OFF" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+    </hasFUDefinition>
+  </hasFUCatalog>
+  <hasSCatalog>
+    <hasServiceDef ServiceDefName="Port"/>
+  </hasSCatalog>
+  <hasDataType xsi:type="MetaDomo:StringType"/>
+  <hasDataType xsi:type="MetaDomo:BooleanType"/>
+  <hasDataType xsi:type="MetaDomo:Dictionary"/>
+</MetaDomo:CatalogRoot>

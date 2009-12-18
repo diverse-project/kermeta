@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:group="http://art/group" xmlns:implem="http://art/implem" xmlns:instance="http://art/instance" xmlns:type="http://art/type" name="EnTiMid">
+  <root name="Architecture" type="//@types.0" state="ON">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="player" type="//@types.7" state="ON">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.media.mp3.player.MP3Player"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="pb" type="//@types.5" state="ON">
+      <binding serverInstance="//@root/@subComponent.8" id="p1" client="//@types.5/@port.0" server="//@types.15/@port.1"/>
+      <binding serverInstance="//@root/@subComponent.17" id="p2" client="//@types.5/@port.0" server="//@types.24/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.framework.tools.Parallelizer"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="contextInformer1" type="//@types.3" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="org/entimid/context/inf/in" key="//@types.3/@attribute.0/@keys.0"/>
+      </attribute>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.framework.tools.EventPublisher"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="contextInformer2" type="//@types.3" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="org/entimid/context/inf/out" key="//@types.3/@attribute.0/@keys.0"/>
+      </attribute>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.framework.tools.EventPublisher"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="contextInformer5" type="//@types.3" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="org/entimid/context/etat/alite" key="//@types.3/@attribute.0/@keys.0"/>
+      </attribute>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.framework.tools.EventPublisher"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="contextInformer6" type="//@types.3" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="org/entimid/context/etat/normal" key="//@types.3/@attribute.0/@keys.0"/>
+      </attribute>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.framework.tools.EventPublisher"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="mirror" type="//@types.16" state="ON">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.nabaztag.devices.Mirror"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="lapinInf1" type="//@types.17" state="ON">
+      <attribute xsi:type="instance:ValuedAttribute" value="436391944" attribute="//@types.17/@attribute.0"/>
+      <binding serverInstance="//@root/@subComponent.2" id="ON" client="//@types.17/@port.0" server="//@types.3/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.3" id="OFF" client="//@types.17/@port.0" server="//@types.3/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.nabaztag.devices.Nanoztag"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="tootwi" type="//@types.15" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="0013D38469BA" key="//@types.15/@attribute.0/@keys.0"/>
+        <entries xsi:type="instance:DefaultEntry" value="1237107579" key="//@types.15/@attribute.0/@keys.1"/>
+      </attribute>
+      <binding serverInstance="//@root/@subComponent.0" id="REALIZED" client="//@types.15/@port.0" server="//@types.7/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.nabaztag.devices.Nabaztag"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="ddGw" type="//@types.13" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="ddgw1" key="//@types.13/@attribute.0/@keys.1"/>
+        <entries xsi:type="instance:DefaultEntry" value="/dev/ttyACM0" key="//@types.13/@attribute.0/@keys.0"/>
+      </attribute>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.x2d.devices.TYDOM_360"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="d0833" type="//@types.12" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="160848" key="//@types.8/@attribute.0/@keys.0"/>
+      </attribute>
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.12/@attribute.1">
+        <entries xsi:type="instance:OtherEntry" value="Une fuite d'eau a ete detectee dans la cuisine. Veuillez faire le necessaire pour reparer." key="org.entimid.nabaztag.tts.text"/>
+      </attribute>
+      <binding serverInstance="//@root/@subComponent.8" id="ON" client="//@types.12/@port.0" server="//@types.15/@port.1"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.x2d.devices.DFX"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="tel1touche" type="//@types.9" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="164723" key="//@types.8/@attribute.0/@keys.0"/>
+      </attribute>
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.9/@attribute.1">
+        <entries xsi:type="instance:OtherEntry" value="Votre demande d'assistance a bien ete prise en compte. Un permanent va prendre contact avec vous." key="org.entimid.nabaztag.tts.text"/>
+        <entries xsi:type="instance:OtherEntry" value="Grand-mere: J'ai besoin d'aide." key="MESSAGE"/>
+      </attribute>
+      <binding serverInstance="//@root/@subComponent.1" id="PUSH" client="//@types.9/@port.0" server="//@types.5/@port.1"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.x2d.devices.T1T"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="eibip1" type="//@types.18" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="192.168.1.100" key="//@types.18/@attribute.0/@keys.1"/>
+        <entries xsi:type="instance:DefaultEntry" value="192.168.1.107" key="//@types.18/@attribute.0/@keys.0"/>
+      </attribute>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.knx.devices.GwEibIp148"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="contextInformer3" type="//@types.3" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="org/entimid/context/meteo/jour" key="//@types.3/@attribute.0/@keys.0"/>
+      </attribute>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.framework.tools.EventPublisher"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="contextInformer4" type="//@types.3" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="org/entimid/context/meteo/nuit" key="//@types.3/@attribute.0/@keys.0"/>
+      </attribute>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.framework.tools.EventPublisher"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="stationM" type="//@types.21" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="0/0/2" key="//@types.21/@attribute.0/@keys.0"/>
+      </attribute>
+      <binding serverInstance="//@root/@subComponent.13" id="JOUR" client="//@types.21/@port.0" server="//@types.3/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.14" id="NUIT" client="//@types.21/@port.0" server="//@types.3/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.knx.devices.MeteoStation"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="ta4_1" type="//@types.19" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="0/6/0" key="//@types.19/@attribute.0/@keys.0"/>
+        <entries xsi:type="instance:DefaultEntry" value="0/6/1" key="//@types.19/@attribute.0/@keys.1"/>
+        <entries xsi:type="instance:DefaultEntry" value="0/6/2" key="//@types.19/@attribute.0/@keys.2"/>
+        <entries xsi:type="instance:DefaultEntry" value="0/6/3" key="//@types.19/@attribute.0/@keys.3"/>
+      </attribute>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.knx.devices.TA4"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="cleSms" type="//@types.24" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="0000" key="//@types.24/@attribute.0/@keys.0"/>
+        <entries xsi:type="instance:DefaultEntry" value="0613674348" key="//@types.24/@attribute.0/@keys.1"/>
+        <entries xsi:type="instance:DefaultEntry" value="Message d'alerte par defaut :: Probleme chez grand-mere" key="//@types.24/@attribute.0/@keys.2"/>
+        <entries xsi:type="instance:DefaultEntry" value="/dev/ttyHS0" key="//@types.24/@attribute.0/@keys.3"/>
+      </attribute>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.orange.sms.device.Icon225"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="org.entimid.framework.componentmodel.InputPort"/>
+  <services xsi:type="type:FunctionalService" name="org.entimid.framework.componentmodel.OutputPort"/>
+  <types xsi:type="type:CompositeType" name="ArchitectureType"/>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.fakeStuff.devices.FakeSimpleSwitch" groups="//@groups.0/@subGroups.0 //@groups.0/@subGroups.0">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="ON"/>
+      <ids name="OFF"/>
+    </port>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.onBtText" value=""/>
+      <keys key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.offBtText"/>
+    </attribute>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.fakeStuff.devices.FakeSimpleLight" groups="//@groups.0/@subGroups.0 //@groups.0/@subGroups.0">
+    <port xsi:type="type:Port" name="ON" lower="1" upper="1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="OFF" lower="1" upper="1" service="//@services.0" role="server"/>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.fakeStuff.devices.fakeSimpleLight.id" value=""/>
+      <keys key="org.entimid.fakeStuff.devices.fakeSimpleLight.color" value=""/>
+    </attribute>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.framework.tools.EventPublisher">
+    <port xsi:type="type:Port" name="SEND" lower="1" upper="-1" service="//@services.0" role="server"/>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.framework.tools.eventPublisher.address"/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType" generateInstanceBundle="false"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.framework.tools.EventListener">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="REALIZED"/>
+    </port>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.framework.tools.eventListener.address"/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType" generateInstanceBundle="false"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.framework.tools.Parallelizer" groups="//@groups.0/@subGroups.2 //@groups.0/@subGroups.2">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="p0"/>
+      <ids name="p1"/>
+      <ids name="p2"/>
+      <ids name="p3"/>
+      <ids name="p4"/>
+      <ids name="p5"/>
+      <ids name="p6"/>
+      <ids name="p7"/>
+      <ids name="p8"/>
+      <ids name="p9"/>
+    </port>
+    <port xsi:type="type:Port" name="ACTIVATE" lower="1" upper="1" service="//@services.0" role="server"/>
+    <implem xsi:type="implem:OSGiType" generateInstanceBundle="false"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.framework.tools.Timer" groups="//@groups.0/@subGroups.2 //@groups.0/@subGroups.2">
+    <port xsi:type="type:Port" name="START" lower="1" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="STOP" lower="1" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="RESTART" lower="1" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="TIME_OUT"/>
+    </port>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.framework.tools.timer.time_out" value="2000"/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType" generateInstanceBundle="false"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.media.mp3.player.MP3Player">
+    <port xsi:type="type:Port" name="PLAY" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <implem xsi:type="implem:OSGiType" generateInstanceBundle="false"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.x2d.devices.MiniCox">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="OPENED"/>
+      <ids name="CLOSED"/>
+    </port>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.x2d.devices.id"/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.x2d.devices.T1T">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="PUSH"/>
+    </port>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.x2d.devices.id"/>
+    </attribute>
+    <attribute xsi:type="type:Dictionary" name="pushActionParameters" type="//@dataTypes.0" valueType="//@dataTypes.0"/>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.x2d.devices.T4T">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="M1.PUSH"/>
+      <ids name="M2.PUSH"/>
+      <ids name="M3.PUSH"/>
+      <ids name="M4.PUSH"/>
+    </port>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.x2d.devices.id"/>
+    </attribute>
+    <attribute xsi:type="type:Dictionary" name="m1ActionParameters" type="//@dataTypes.0" valueType="//@dataTypes.0"/>
+    <attribute xsi:type="type:Dictionary" name="m2ActionParameters" type="//@dataTypes.0" valueType="//@dataTypes.0"/>
+    <attribute xsi:type="type:Dictionary" name="m3ActionParameters" type="//@dataTypes.0" valueType="//@dataTypes.0"/>
+    <attribute xsi:type="type:Dictionary" name="m4ActionParameters" type="//@dataTypes.0" valueType="//@dataTypes.0"/>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.x2d.devices.TYXIA_421">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client"/>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.x2d.devices.id"/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.x2d.devices.DFX">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="ON"/>
+      <ids name="OFF"/>
+    </port>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.x2d.devices.id"/>
+    </attribute>
+    <attribute xsi:type="type:Dictionary" name="leakActionParameters" type="//@dataTypes.0" valueType="//@dataTypes.0"/>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.x2d.devices.TYDOM_360" groups="//@groups.0/@subGroups.1 //@groups.0/@subGroups.1">
+    <port xsi:type="type:Port" name="SEND" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.x2d.devices.tydom_360.serialPortName"/>
+      <keys key="org.entimid.x2d.devices.tydom_360.id"/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.x2d.devices.TYXIA_510" groups="//@groups.0/@subGroups.1 //@groups.0/@subGroups.1">
+    <port xsi:type="type:Port" name="ON" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="OFF" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.x2d.devices.id"/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.nabaztag.devices.Nabaztag">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="REALIZED"/>
+    </port>
+    <port xsi:type="type:Port" name="PLAY" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="GENERATE" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.nabaztag.id" value=""/>
+      <keys key="org.entimid.nabaztag.token" value=""/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.nabaztag.devices.Mirror"/>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.nabaztag.devices.Nanoztag">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="ON"/>
+      <ids name="OFF"/>
+    </port>
+    <attribute xsi:type="type:BasicAttribute" name="Id" type="//@dataTypes.0"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.knx.devices.GwEibIp148">
+    <port xsi:type="type:Port" name="SEND" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.kxn.gw.ip.local"/>
+      <keys key="org.entimid.kxn.gw.ip.gw"/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.knx.devices.TA4">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="M1.PUSH"/>
+      <ids name="M2.PUSH"/>
+      <ids name="M3.PUSH"/>
+      <ids name="M4.PUSH"/>
+    </port>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.knx.devices.TA4.m1.group"/>
+      <keys key="org.entimid.knx.devices.TA4.m2.group"/>
+      <keys key="org.entimid.knx.devices.TA4.m3.group"/>
+      <keys key="org.entimid.knx.devices.TA4.m4.group"/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.knx.devices.RMG4S">
+    <port xsi:type="type:Port" name="M1.ON" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="M1.OFF" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="M2.ON" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="M2.OFF" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="M3.ON" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="M3.OFF" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="M4.ON" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="M4.OFF" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.knx.devices.RMG4S.m1.actionGroup"/>
+      <keys key="org.entimid.knx.devices.RMG4S.m2.actionGroup"/>
+      <keys key="org.entimid.knx.devices.RMG4S.m3.actionGroup"/>
+      <keys key="org.entimid.knx.devices.RMG4S.m4.actionGroup"/>
+      <keys key="org.entimid.knx.devices.RMG4S.m1.infoGroup"/>
+      <keys key="org.entimid.knx.devices.RMG4S.m2.infoGroup"/>
+      <keys key="org.entimid.knx.devices.RMG4S.m3.infoGroup"/>
+      <keys key="org.entimid.knx.devices.RMG4S.m4.infoGroup"/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.knx.devices.MeteoStation">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="JOUR"/>
+      <ids name="NUIT"/>
+    </port>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.knx.devices.MeteoStation.light.group"/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.ui.inf.cmp.InfPanel">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="ALITE"/>
+      <ids name="NORMAL"/>
+      <ids name="ALERTE"/>
+    </port>
+    <port xsi:type="type:Port" name="CHUTE" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <implem xsi:type="implem:OSGiType" generateInstanceBundle="false"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.chutte">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client"/>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.orange.sms.device.Icon225">
+    <port xsi:type="type:Port" name="SEND" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.orange.sms.pin"/>
+      <keys key="org.entimid.orange.sms.number"/>
+      <keys key="org.entimid.orange.sms.text"/>
+      <keys key="org.entimid.orange.sms.serialPort"/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <dataTypes name="String"/>
+  <dataTypes name="Color"/>
+  <dataTypes name="Integer"/>
+  <groups xsi:type="group:TypeGroup" name="Constructeurs">
+    <subGroups name="FakeStuff" types="//@types.2 //@types.1 //@types.1 //@types.2"/>
+    <subGroups name="DeltaDore" types="//@types.13 //@types.14 //@types.13 //@types.14"/>
+    <subGroups name="EnTiMid" types="//@types.5 //@types.6 //@types.6 //@types.5"/>
+  </groups>
+</art:System>

@@ -1,0 +1,393 @@
+/* $Id:$ 
+ * Creation : December 1, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            gnain
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+require "platform:/resource/TransfoMetadomoArt/metaArt/metamodel@runtime.ecore"
+require "platform:/resource/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore"
+
+using kermeta::io
+using kermeta::persistence
+using kermeta::standard
+
+using ecore
+using MetaDomo
+using art
+
+
+class Main
+{
+
+	operation initArtModel(sys : System) : Void is do
+	
+		addArtServices(sys)
+		addArtDataType(sys)
+	
+	end
+
+	operation addArtDataType(sys : System) : Void is do
+	
+		var artDataTypeString : art::DataType init art::DataType.new
+		artDataTypeString.name := "String"
+		sys.dataTypes.add(artDataTypeString)
+				
+		var artDataTypeInteger : art::DataType init art::DataType.new
+		artDataTypeInteger.name := "Integer"
+		sys.dataTypes.add(artDataTypeInteger)
+		
+		var artDataTypeBoolean : art::DataType init art::DataType.new
+		artDataTypeBoolean.name := "Boolean"
+		sys.dataTypes.add(artDataTypeBoolean)
+		
+		/*
+		var artDataTypeDictionary : art::DataType init art::DataType.new
+		artDataTypeDictionary.name := "Dictionary"
+		sys.dataTypes.add(artDataTypeDictionary)
+		*/
+	end
+	
+	operation addArtServices(sys : System) : Void is do
+	
+		var inputPortService : art::type::FunctionalService init art::type::FunctionalService.new
+		inputPortService.name := "org.entimid.framework.componentmodel.InputPort"
+		
+		var outputPortService : art::type::FunctionalService init art::type::FunctionalService.new
+		outputPortService.name := "org.entimid.framework.componentmodel.OutputPort"
+		
+		sys.services.add(inputPortService)
+		sys.services.add(outputPortService)
+		
+	end
+
+	operation addComponentType(sys : System, fuDef : StandardFUnitDefinition) : Void is do
+	
+		if ( sys.types.select{p|p.name.equals(fuDef.FUDefRef)}.isEmpty() ) then
+	
+		stdio.writeln("Adding component type: " + fuDef.FUDefRef )
+	
+		//Creation of the new Type
+		var type : art::type::PrimitiveType init art::type::PrimitiveType.new
+		
+		//Naming the type
+		type.name := fuDef.FUDefRef
+		
+		//Setting parameters
+		if( not fuDef.hasParameter.isEmpty() ) then
+					
+			//Completing parameters
+			fuDef.hasParameter.each{param|
+	
+				var attr : art::type::Attribute
+				
+				if( param.parameterTypes.isInstanceOf(Dictionary) ) then
+					
+					//creatoon of the dictionary
+					attr := art::type::Dictionary.new
+					var dict : art::type::Dictionary
+					dict ?= attr
+					
+					dict.name := param.ParameterDName
+					dict.type := sys.dataTypes.select{d|d.name.equals("String")}.one
+					dict.valueType := sys.dataTypes.select{d|d.name.equals("String")}.one
+					
+					// adding default values in the dictionary
+					if( not param.defaultValues.isVoid() ) then
+					
+						var defDictAttr : DictionaryValueAttribute 
+						defDictAttr ?= param.defaultValues
+						defDictAttr.entries.each{ entry |
+							var artEntry : art::type::DictionaryDefaultValue init art::type::DictionaryDefaultValue.new 
+							artEntry.key := entry.key
+							artEntry.~value := entry.~value
+							
+							dict.keys.add(artEntry)
+						}					
+						
+						
+					end
+					
+				else
+				
+					//Adding simple attributes ad default values
+					attr := art::type::BasicAttribute.new
+					var bAttr : art::type::BasicAttribute
+					bAttr ?= attr
+					
+					bAttr.name := param.ParameterDName
+					if( param.parameterTypes.isInstanceOf(StringType) ) then
+						bAttr.type := sys.dataTypes.select{d|d.name.equals("String")}.one
+						
+						if( not param.defaultValues.isVoid() ) then
+							
+							var stringDefaultValue : StringValue 
+							stringDefaultValue ?= param.defaultValues
+							bAttr.defaultValue := stringDefaultValue.valueS
+							
+						end
+						
+					end
+					if( param.parameterTypes.isInstanceOf(NumberType) ) then
+						bAttr.type := sys.dataTypes.select{d|d.name.equals("Integer")}.one
+						if( not param.defaultValues.isVoid() ) then
+							
+							var numberDefaultValue : NumberValue 
+							numberDefaultValue ?= param.defaultValues
+							bAttr.defaultValue := numberDefaultValue.valueN.toString()
+							
+						end
+					end
+					if( param.parameterTypes.isInstanceOf(BooleanType) ) then
+						bAttr.type := sys.dataTypes.select{d|d.name.equals("Boolean")}.one
+						if( not param.defaultValues.isVoid() ) then
+							
+							var booleanDefaultValue : BooleanValue 
+							booleanDefaultValue ?= param.defaultValues
+							bAttr.defaultValue := booleanDefaultValue.toString()
+							
+						end
+					end
+					
+				end
+		
+				type.~attribute.add(attr)
+			}
+			
+		end
+		
+		//Adding ports
+		//Setting parameters
+		if( not fuDef.hasService.isEmpty() ) then
+		
+			fuDef.hasService.each{service|
+				if( service.serviceType.equals(ServiceType.Implemented) ) then
+					//InputPort
+					var ip : art::type::Port init art::type::Port.new
+					ip.name := service.serviceName
+					ip.role := "server"
+					ip.service := sys.services.select{d|d.name.contains("InputPort")}.one
+					ip.upper := -1
+					ip.lower := 0
+					type.port.add(ip)
+					
+				else
+					//OutputPort
+					if( type.port.select{p|p.name.equals("outputPorts")}.isEmpty() ) then
+					
+						var portCollection : art::type::PortCollection init art::type::PortCollection.new
+						portCollection.name := "outputPorts"
+						portCollection.role := "client"
+						portCollection.service := sys.services.select{d|d.name.contains("OutputPort")}.one
+						type.port.add(portCollection)
+					
+					end
+						
+						var portCollection : art::type::PortCollection
+						portCollection ?= type.port.select{p|p.name.equals("outputPorts")}.one
+						
+						var op : art::type::PortId init art::type::PortId.new
+						op.name := service.serviceName
+												
+						portCollection.ids.add(op)
+					
+				end				
+			}
+			
+		end
+		
+		//OSGi Type behavior
+		var impl : art::implem::OSGiType init art::implem::OSGiType.new
+		if( fuDef.cataloguedIn.padre.CategoryName.contains("OSGi") ) then
+			impl.generateInstanceBundle := true
+		else
+			impl.generateInstanceBundle := false
+		end
+		type.implem := impl
+		
+		sys.types.add(type)
+		
+		end
+	
+	end
+
+
+	
+
+
+	operation addComponentInstance( sys : System, fuInst : StandardFUnitInstance) : Void is do
+	
+		if( sys.root.isVoid() ) then
+			sys.root := art::instance::CompositeInstance.new
+		end
+		
+		stdio.writeln("Adding component instance: " + fuInst.FUInstanceName )
+		
+		var cmpInst : art::instance::PrimitiveInstance init art::instance::PrimitiveInstance.new
+		
+		cmpInst.name := fuInst.FUInstanceName
+		cmpInst.type := sys.types.select{d|d.name.contains(fuInst.isInstance.FUDefRef)}.one
+		cmpInst.state := "ON"
+		
+		//OSGi Behavior
+		if( fuInst.isInstance.cataloguedIn.padre.CategoryName.contains("OSGi") ) then
+			var impl : art::implem::OSGiComponent init art::implem::OSGiComponent.new
+			impl.implementingClass := fuInst.FUInstanceRef
+			cmpInst.implem := impl
+		end
+		
+		//properties
+		fuInst.hasParamInstan.each{ paramInstance |
+		
+			//If parameter instance of a Dictionary
+			if( paramInstance.hasParameterValue.isInstanceOf(DictionaryValueAttribute) ) then
+				
+				//Create a new ArtDictionary and link it to the dictionary of the type
+				var artDico : art::instance::DictionaryValuedAttribute init art::instance::DictionaryValuedAttribute.new
+				artDico.~attribute ?= sys.types.select{d|d.name.contains(fuInst.isInstance.FUDefRef)}.one
+										.~attribute.select{ att | 
+											att.isInstanceOf(art::type::Dictionary) 
+											and 
+											att.name.equals(paramInstance.instanceOfParameter.ParameterDName)}.one
+				var domoDico : DictionaryValueAttribute
+				domoDico ?= paramInstance.hasParameterValue
+				
+				//For each entry
+				domoDico.entries.each{ entryDomo |
+				
+					if( not entryDomo.default.isVoid() ) then
+						var defaultEntryArt : art::instance::DefaultEntry init art::instance::DefaultEntry.new
+						defaultEntryArt.key := artDico.~attribute.keys.select{e|
+							e.key.equals(entryDomo.key)
+						}.one
+						defaultEntryArt.~value := entryDomo.~value
+						artDico.entries.add(defaultEntryArt)
+					else
+						var otherEntryArt : art::instance::OtherEntry init art::instance::OtherEntry.new
+						otherEntryArt.key := entryDomo.key
+						otherEntryArt.~value := entryDomo.~value
+						artDico.entries.add(otherEntryArt)
+					end
+				}
+				cmpInst.~attribute.add(artDico)
+				
+			else
+				//	paramInstance.hasParameterValue.
+			end
+			
+			
+		}
+	
+		sys.root.subComponent.add(cmpInst)
+	end
+
+
+	operation main(metadomoModel : String) : Void is do 
+		
+		var application : DomoApplication
+
+    	stdio.writeln("Loading resource: " + metadomoModel)//"platform:/resource/TransfoMetadomoArt/inputModel/MyApp1.metadomo")
+    	var resource : Resource init loadMetaDomoModel(metadomoModel)//"platform:/resource/TransfoMetadomoArt/inputModel/MyApp1.metadomo")
+    	application ?= resource.contents.one
+
+		stdio.writeln("Initializing ArtSystemModel")
+    	var artSystem : System init System.new
+		initArtModel(artSystem)
+	
+		stdio.writeln("Discovering FunctionalUnitInstances")
+		application.hasFUnitInstance.each{inst|
+			var funitInstance : StandardFUnitInstance
+			funitInstance ?= inst
+			var funitDef : StandardFUnitDefinition
+					
+			funitDef := funitInstance.isInstance
+						
+			stdio.writeln("InstanceOf " + funitDef.FUDefName)
+			
+			addComponentType(artSystem, funitDef)
+			addComponentInstance(artSystem, funitInstance)
+			
+		}
+		
+		stdio.writeln("Adding functional links")
+		application.hasFUnitLink.each{ link |
+			 var binding : art::instance::TransmissionBinding init art::instance::TransmissionBinding.new
+			 
+			 var server : art::instance::ComponentInstance
+			 server := artSystem.root.subComponent
+			 	.select{c|c.name.equals(link.FUtarget.asType(FUnitInstance).FUInstanceName)}
+			 	.one
+			 
+			 var client : art::instance::ComponentInstance
+			 client := artSystem.root.subComponent
+			 	.select{c|c.name.equals(link.FUsource.asType(FUnitInstance).FUInstanceName)}
+			 	.one
+			 
+			 binding.serverInstance := server
+			 binding.server := server.type.port.select{p|p.name.equals(link.target.serviceName)}.one
+			 binding.client := client.type.port.select{p|p.name.equals("outputPorts")}.one
+			 binding.id := link.source.serviceName
+			 
+			 client.binding.add(binding)
+			 
+		}
+
+		stdio.writeln("Saving ArtModel")
+		
+		var saveLocationSequence : Sequence<String>
+		saveLocationSequence := metadomoModel.split("/")
+		
+		stdio.writeln("ModelLoaded At:")
+		saveLocationSequence.each{ part | stdio.writeln(part)}
+		
+		var saveLocation : String init String.new
+		
+		from var it : Integer init 0
+		 until it > saveLocationSequence.size() - 3
+         loop
+            saveLocation.append(saveLocationSequence.at(it))
+            saveLocation.append("/")
+            it := it + 1
+         end 
+		
+		stdio.writeln("ModelSaved At:")
+		saveLocation.append("outputModel/")
+		saveLocation.append(saveLocationSequence.last.split("\\.").first)
+		saveLocation.append(".art")
+		stdio.writeln(saveLocation)
+		saveArtModel(artSystem, saveLocation)
+ 
+ 
+ 		stdio.writeln("Rock&Roll")
+
+	end
+	
+	
+	operation loadMetaDomoModel( modelUri : String) : Resource is do
+		var repository : EMFRepository init EMFRepository.new
+		var resource : Resource init repository.createResource(modelUri, "platform:/resource/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore")
+		resource.load
+		result := resource
+	end
+	
+	
+	operation saveArtModel( sys : System, uri : String) is do
+	    var repository : EMFRepository init EMFRepository.new
+	    var resource : Resource init repository.createResource(uri , "platform:/resource/TransfoMetadomoArt/metaArt/metamodel@runtime.ecore")
+	    resource.instances.add(sys)
+	   /* var report : Set<DanglingDiagnostic>
+	 	report := repository.findDanglingModelElements()
+	 	report.each{ diag | stdio.writeln(diag.toString ) }
+	    */
+	    resource.save
+    end
+	
+}

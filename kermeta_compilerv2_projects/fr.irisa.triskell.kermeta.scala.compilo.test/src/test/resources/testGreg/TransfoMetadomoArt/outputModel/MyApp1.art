@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:implem="http://art/implem" xmlns:instance="http://art/instance" xmlns:type="http://art/type">
+  <root>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="sw1" type="//@types.0" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.0/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="Allumer" key="//@types.0/@attribute.0/@keys.0"/>
+        <entries xsi:type="instance:DefaultEntry" value="Eteindre" key="//@types.0/@attribute.0/@keys.1"/>
+        <entries xsi:type="instance:OtherEntry" value="LIGHT" key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.controlType"/>
+        <entries xsi:type="instance:DefaultEntry" value="true" key="//@types.0/@attribute.0/@keys.2"/>
+      </attribute>
+      <binding serverInstance="//@root/@subComponent.1" id="ON" client="//@types.0/@port.0" server="//@types.1/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.1" id="OFF" client="//@types.0/@port.0" server="//@types.1/@port.1"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.fakeStuff.devices.FakeSimpleSwitch"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="light1" type="//@types.1" state="ON">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.1/@attribute.0">
+        <entries xsi:type="instance:DefaultEntry" value="200,0,200" key="//@types.1/@attribute.0/@keys.0"/>
+        <entries xsi:type="instance:DefaultEntry" value="fl1" key="//@types.1/@attribute.0/@keys.1"/>
+      </attribute>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.entimid.fakeStuff.devices.FakeSimpleLight"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="org.entimid.framework.componentmodel.InputPort"/>
+  <services xsi:type="type:FunctionalService" name="org.entimid.framework.componentmodel.OutputPort"/>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.fakeStuff.devices.FakeSimpleSwitch">
+    <port xsi:type="type:PortCollection" name="outputPorts" service="//@services.1" role="client">
+      <ids name="ON"/>
+      <ids name="OFF"/>
+    </port>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.onBtText" value="ON"/>
+      <keys key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.offBtText" value="OFF"/>
+      <keys key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.visible" value="false"/>
+    </attribute>
+    <attribute xsi:type="type:Dictionary" name="onActionParameters" type="//@dataTypes.0" valueType="//@dataTypes.0"/>
+    <attribute xsi:type="type:Dictionary" name="offActionParameters" type="//@dataTypes.0" valueType="//@dataTypes.0"/>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="org.entimid.fakeStuff.devices.FakeSimpleLight">
+    <port xsi:type="type:Port" name="ON" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="OFF" lower="0" upper="-1" service="//@services.0" role="server"/>
+    <attribute xsi:type="type:Dictionary" name="properties" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="org.entimid.fakeStuff.devices.fakeSimpleLight.color" value="255,0,0"/>
+      <keys key="org.entimid.fakeStuff.devices.fakeSimpleLight.id" value=""/>
+    </attribute>
+    <implem xsi:type="implem:OSGiType"/>
+  </types>
+  <dataTypes name="String"/>
+  <dataTypes name="Integer"/>
+  <dataTypes name="Boolean"/>
+</art:System>

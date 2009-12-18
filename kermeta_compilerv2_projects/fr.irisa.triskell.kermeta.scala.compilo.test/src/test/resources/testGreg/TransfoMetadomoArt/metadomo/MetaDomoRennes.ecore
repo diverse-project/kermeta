@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="MetaDomo"
+    nsURI="MetaDomo" nsPrefix="MetaDomo">
+  <eClassifiers xsi:type="ecore:EClass" name="DomoApplication">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasFUnitInstance" upperBound="-1"
+        eType="#//FUnitAbstract" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasFUnitLink" upperBound="-1"
+        eType="#//FUnitLink" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasRoom" eType="#//Room"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FUnitCatalog">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasCategory" lowerBound="1"
+        upperBound="-1" eType="#//Category" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FUCatalogName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasFUDefinition" upperBound="-1"
+        eType="#//FUnitDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Category">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subCategory" upperBound="-1"
+        eType="#//Category" eOpposite="#//Category/padre"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="CategoryName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="CategoryDes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="padre" eType="#//Category"
+        eOpposite="#//Category/subCategory"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fudefinitios" upperBound="-1"
+        eType="#//FUnitDefinition" eOpposite="#//FUnitDefinition/cataloguedIn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Service">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isServiceInstanceOf" lowerBound="1"
+        eType="#//ServiceDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceType" eType="#//ServiceType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FUnitDefinition" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasParameter" upperBound="-1"
+        eType="#//ParameterDef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasService" upperBound="-1"
+        eType="#//Service" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FUDefName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FUDefDesc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cataloguedIn" lowerBound="1"
+        eType="#//Category" eOpposite="#//Category/fudefinitios"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="icon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FUDefRef" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Argument">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="argumentTypes" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ArgumentName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ArgumentDes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FUnitAbstract" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="locatedIn" eType="#//Room"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FUnitLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Service"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Service"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FUsource" lowerBound="1"
+        eType="#//FUnitAbstract"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FUtarget" lowerBound="1"
+        eType="#//FUnitAbstract"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FULinkName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canal" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StandardFUnitDefinition" eSuperTypes="#//FUnitDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomFUnitDefinition" eSuperTypes="#//FUnitDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasBehaviour" upperBound="-1"
+        eType="#//Behaviour" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Behaviour"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterDef">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ParameterDName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterTypes" lowerBound="1"
+        eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultValues" eType="#//Value"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Scene" eSuperTypes="#//FUnitAbstract">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasStep" upperBound="-1"
+        eType="#//SceneStep" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sceneName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sceneDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isInstanceOfScene" eType="#//SceneDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SceneStep">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stepId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stepDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FUnitStep" lowerBound="1"
+        upperBound="-1" eType="#//FUnitInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceStep" lowerBound="1"
+        eType="#//Service"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasArgValue" lowerBound="1"
+        eType="#//SceneStepArg" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceCatalog">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasServiceDef" upperBound="-1"
+        eType="#//ServiceDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ServiceDefName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ServiceDerDescription"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasArgument" eType="#//Argument"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ServiceType">
+    <eLiterals name="Required"/>
+    <eLiterals name="Implemented" value="1" literal="Implemented"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FUnitInstance" abstract="true" eSuperTypes="#//FUnitAbstract">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FUInstanceName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasParamInstan" upperBound="-1"
+        eType="#//ParameterInstance" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FUInstanceDes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FUInstanceRef" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasParameterValue" lowerBound="1"
+        eType="#//Value" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceOfParameter" lowerBound="1"
+        eType="#//ParameterDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true">
+    <eOperations name="getValue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringType" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumberType" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumType" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasItems" lowerBound="1"
+        upperBound="-1" eType="#//Item" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralSel" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Item"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enum" eType="#//EnumType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Item" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nameELiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumberValue" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanType" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueB" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CatalogRoot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasFUCatalog" eType="#//FUnitCatalog"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasSCatalog" eType="#//ServiceCatalog"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasDataType" upperBound="-1"
+        eType="#//Type" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StandardFUnitInstance" eSuperTypes="#//FUnitInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isInstance" lowerBound="1"
+        eType="#//StandardFUnitDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomFUnitInstance" eSuperTypes="#//FUnitInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isInstanceOfC" lowerBound="1"
+        eType="#//CustomFUnitDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasBehaviourI" eType="#//BehaviourInstance"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BehaviourInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="istanceOfBehaviour" lowerBound="1"
+        eType="#//Behaviour"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SceneDefinition" eSuperTypes="#//FUnitDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SceneStepArg">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isArg" eType="#//Argument"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasSceneValue" lowerBound="1"
+        eType="#//Value" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Room">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasSubRoom" eType="#//Room"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idRoom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasPosition" eType="#//Position"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Position">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasFUInstance" eType="#//FUnitInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dictionary" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DictionaryValueAttribute" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+        eType="#//Entry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="default" lowerBound="1"
+        eType="#//Entry"/>
+  </eClassifiers>
+</ecore:EPackage>
