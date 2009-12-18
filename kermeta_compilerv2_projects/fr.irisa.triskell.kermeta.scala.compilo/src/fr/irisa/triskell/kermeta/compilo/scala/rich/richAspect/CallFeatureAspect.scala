@@ -121,6 +121,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 			case _ if(this.getTarget == null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateName(res);generateParam(res) }
 			case _ if(this.getTarget != null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generatePropertyCall(res) }
 			case _ if(this.getTarget == null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generatePropertyName(res) }		
+			case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generateName(res) }
 			case _ => log.debug("!!! Uncatch case ")
 		}	
 	}
