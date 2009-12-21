@@ -86,4 +86,7 @@ trait RichAspectImplicit {
 	implicit def rich (xs : LambdaExpressionAspect) = xs.asInstanceOf[LambdaExpression]
 	implicit def rich (xs : ConstraintAspect) = xs.asInstanceOf[Constraint]
 	implicit def rich (xs : RescueAspect) = xs.asInstanceOf[Rescue]
+	implicit def rich (xs : LoopAspect) = xs.asInstanceOf[Loop]
+	implicit def rich (xs : RaiseAspect) = xs.asInstanceOf[Raise]
+	implicit def rich (xs : TypeLiteralAspect) = xs.asInstanceOf[TypeLiteral]
 }
