@@ -10,10 +10,9 @@ import java.util._
 
 trait SelfExpressionAspect extends RichAspectImplicit with ObjectAspect {
 	
-override def generateScalaCode(res : StringBuilder) : Unit = {
-	res.append("this")
-}
-	
+	override def generateScalaCode(res : StringBuilder) : Unit = {
+		res.append("this")
+	}
 
 }
  

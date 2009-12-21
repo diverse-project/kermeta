@@ -10,8 +10,8 @@ import java.util._
 
 trait VoidLiteralAspect extends RichAspectImplicit with ObjectAspect {
 	
-override def generateScalaCode(res : StringBuilder) : Unit = {
-		res.append("null");
-}
+	override def generateScalaCode(res : StringBuilder) : Unit = {
+		res.append("null")
+	}
 	
 }

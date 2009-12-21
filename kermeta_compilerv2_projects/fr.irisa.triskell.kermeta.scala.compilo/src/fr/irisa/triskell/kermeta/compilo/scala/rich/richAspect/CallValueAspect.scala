@@ -11,7 +11,7 @@ import java.util._
 trait CallValueAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		log.debug("CallValue Generation {}",this.getName())
+		log.debug("CallValue={}",this.getName())
 		res.append(Util.protectScalaKeyword(this.getName()))
 		res.append("(")
 		this.getParameters().foreach(par => par.generateScalaCode(res))

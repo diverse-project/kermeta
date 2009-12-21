@@ -17,5 +17,4 @@ trait UsingAspect extends RichAspectImplicit with ObjectAspect {
 		res.append("._\n")
 	} 
 	
-
 }

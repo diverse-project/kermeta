@@ -8,7 +8,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait ClassAspect extends RichAspectImplicit with TypeVariableBindingAspect with ObjectAspect {
+trait ClassAspect extends RichAspectImplicit with TypeVariableBindingAspect with ObjectAspect with LogAspect {
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		var pack : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName 
@@ -20,12 +20,42 @@ trait ClassAspect extends RichAspectImplicit with TypeVariableBindingAspect with
 //		else
 			res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(s))
 
+		/*
+		log.debug("Class={}",this.getName)
+		this.getTypeParamBinding.foreach({e=>
+			log.debug("ClassBinding={}",e.getType)
+			log.debug("ClassBinding={}",e.getQualifiedNameCompilo)
+			log.debug("ClassBinding={}",e)
+		})
 		
+		this.getTypeDefinition.asInstanceOf[ClassDefinition].getTypeParameter.foreach(e=>{
+			log.debug("ClassGeneric={}{}",e.getName,e.toString)
+		})
+		log.debug("ClassType={}",this.getTypeDefinition.asInstanceOf[ClassDefinition].getQualifiedNameCompilo)
+		*/
+		
+		//GEN GENERIC PARAM
+		/*
+		if(this.getTypeDefinition.asInstanceOf[ClassDefinition].getTypeParameter.size > 0){
+			res.append("[")
+			var i = 0
+			this.getTypeDefinition.asInstanceOf[ClassDefinition].getTypeParameter.foreach(e=>{
+				if(this.getTypeParamBinding.size > 0){
+					if(this.getTypeParamBinding.get(i).getQualifiedNameCompilo.equals("")){
+						res.append("_")
+					} else {
+						res.append(e.getQualifiedNameCompilo)
+					}
+				}
+				if(!this.getTypeDefinition.asInstanceOf[ClassDefinition].getTypeParameter.last.equals(e)) res.append(" , ")
+				i = i + 1
+			})
+			res.append("]")			
+		}*/
 	}
 	
 	override def getQualifiedNameCompilo():String ={
 		return this.getTypeDefinition().getQualifiedNameCompilo();
-	   
 	}
  	
 	/*

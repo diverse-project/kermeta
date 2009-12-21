@@ -13,7 +13,6 @@ trait CallSuperOperationAspect extends RichAspectImplicit with ObjectAspect with
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		log.debug("CallSuperOperation Generation {},{}",this.getName())
-		
 		/* SEARCH FOR CONTAINER OPERATION */
 		var actualEObject : EObject = this
 		while(!actualEObject.eClass().getName().equals("Operation")){

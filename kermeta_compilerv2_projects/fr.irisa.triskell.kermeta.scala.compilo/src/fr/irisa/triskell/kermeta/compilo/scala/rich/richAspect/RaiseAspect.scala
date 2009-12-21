@@ -10,8 +10,6 @@ import java.util._
 
 trait RaiseAspect extends RichAspectImplicit with ObjectAspect {
 	
-	implicit def rich (xs : RaiseAspect) = xs.asInstanceOf[Raise]
-	
 	override def generateScalaCode(res : StringBuilder) : Unit = {	
 		res.append("throw ")	
 		this.getExpression().generateScalaCode(res)

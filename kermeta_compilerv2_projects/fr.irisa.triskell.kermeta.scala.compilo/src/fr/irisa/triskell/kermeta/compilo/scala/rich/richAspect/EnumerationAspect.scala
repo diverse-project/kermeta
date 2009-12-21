@@ -20,7 +20,7 @@ trait EnumerationAspect extends RichAspectImplicit with ObjectAspect {
 		res.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"\n")
 		res.append("import kermeta.io._\n")			
 			res.append("import kermeta.standard._\n")
-			res.append("import  kermeta.standard.JavaConversions._\n")
+			res.append("import kermeta.standard.JavaConversions._\n")
 			res append "object "+this.getName()+" extends Enumeration {\n"
 			res append "type "+this.getName()+" = Value\n"
 			res append "val "

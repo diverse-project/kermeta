@@ -8,8 +8,6 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 
 trait TypeLiteralAspect extends RichAspectImplicit with ObjectAspect {
-	
-	implicit def rich (xs : TypeLiteralAspect) = xs.asInstanceOf[TypeLiteral]
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		/*if (this.getTyperef.getType.isInstanceOf[ParameterizedType]){
@@ -20,6 +18,7 @@ trait TypeLiteralAspect extends RichAspectImplicit with ObjectAspect {
 
 			}
 		}*/
+		
 		
 		println("toto " +this.getTyperef().getType.getQualifiedNameCompilo())
 		res.append(this.getTyperef().getType.getQualifiedNameCompilo())

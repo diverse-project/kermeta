@@ -15,7 +15,6 @@ trait ObjectAspect {
 	  res.append("/*TODO GenScalaCode "+ this.getClass +" */")
   }
   
-  def getQualifiedNameCompilo():String ={return ""
-		 
-  }
+  def getQualifiedNameCompilo():String ={return ""}
+  
 }

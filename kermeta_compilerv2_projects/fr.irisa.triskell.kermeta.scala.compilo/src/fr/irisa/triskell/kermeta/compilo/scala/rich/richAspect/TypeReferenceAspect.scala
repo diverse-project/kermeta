@@ -14,7 +14,7 @@ trait TypeReferenceAspect extends RichAspectImplicit with ObjectAspect {
 	  
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		//res.append(this.getName)
-			this.getType().generateScalaCode(res)
+		this.getType().generateScalaCode(res)
 		if(this.getType.isInstanceOf[ParameterizedType])
 		{
 			if(this.getType().asInstanceOf[ParameterizedType].getTypeParamBinding.size>0){

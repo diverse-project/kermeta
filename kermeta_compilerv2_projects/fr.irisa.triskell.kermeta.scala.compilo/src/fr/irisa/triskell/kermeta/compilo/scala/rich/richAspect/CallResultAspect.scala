@@ -13,8 +13,5 @@ trait CallResultAspect extends RichAspectImplicit with ObjectAspect{
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append("result")
 	}
-	/*
-def generateVisitor(tabsString 	: String) : String = { 
-		 return "result";
-	}*/
+
 }

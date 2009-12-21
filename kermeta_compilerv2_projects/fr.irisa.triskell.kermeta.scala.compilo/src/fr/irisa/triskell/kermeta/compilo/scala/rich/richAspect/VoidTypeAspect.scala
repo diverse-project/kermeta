@@ -9,9 +9,9 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait VoidTypeAspect extends RichAspectImplicit with ObjectAspect {
-	
-override def generateScalaCode(res : StringBuilder) : Unit = {
+
+	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append("Void")
-}
+	}
 
 }

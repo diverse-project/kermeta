@@ -8,15 +8,37 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait PrimitiveTypeAspect extends RichAspectImplicit with ObjectAspect {
+trait PrimitiveTypeAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 	
 	implicit def rich (xs : PrimitiveTypeAspect) = xs.asInstanceOf[PrimitiveType]
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
+		
+		log.debug("PrimitiveType="+this.getName+"|"+Util.hasEcoreTag(this)+"|"+kermeta.utils.TypeEquivalence.getTypeEquivalence(this.getName))
 		if (Util.hasEcoreTag(this)){
-			println("pass par primitive type " + this.getName) 
 			var t = this.getOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName)).first.getValue;
 			res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
+			log.debug("PrimitiveTypeComplement="+kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
+			
+			
+			/* Check Generique Param */
+			try{
+				var c = java.lang.Class.forName(kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
+				if(c.getTypeParameters.size > 0){
+					res.append("[")
+					for(i <- 0 until c.getTypeParameters.length ){
+						res.append("_")
+						if(i < c.getTypeParameters.length -1){
+							res.append(",")
+						}
+					}
+					res.append("]")
+				}
+			
+			
+			} catch {
+				case _ => 
+			}
 			
 		}else{
 		 if (this.getInstanceType !=null){
@@ -24,14 +46,9 @@ trait PrimitiveTypeAspect extends RichAspectImplicit with ObjectAspect {
 		 }
 		 else
 			 res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName)+"."+this.getName())
-	 }
-	
-}
-	/* 
- def generateVisitor(tabsString 	: String) : String = { 
-		if (Util.hasEcoreTag(this)){
-		  return this.getOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName)).first.getValue
-		}  
-		return this.getName;
-	}*/
+		}
+
+		
+	}
+
 }

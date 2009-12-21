@@ -15,9 +15,9 @@ trait ObjectTypeVariableAspect extends RichAspectImplicit with ObjectAspect {
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res.append(this.getName())	
 	}
+	
 	override def getQualifiedNameCompilo():String ={
-		return this.getName();
-	  
+		return this.getName();  
 	}
 
 

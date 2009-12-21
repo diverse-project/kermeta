@@ -9,8 +9,6 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
 trait LoopAspect extends RichAspectImplicit with ObjectAspect {
-	
-	implicit def rich (xs : LoopAspect) = xs.asInstanceOf[Loop]
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		this.getInitialization().generateScalaCode(res)
