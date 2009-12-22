@@ -89,4 +89,5 @@ trait RichAspectImplicit {
 	implicit def rich (xs : LoopAspect) = xs.asInstanceOf[Loop]
 	implicit def rich (xs : RaiseAspect) = xs.asInstanceOf[Raise]
 	implicit def rich (xs : TypeLiteralAspect) = xs.asInstanceOf[TypeLiteral]
+	implicit def rich (xs : ObjectTypeVariableAspect) = xs.asInstanceOf[ObjectTypeVariable]
 }
