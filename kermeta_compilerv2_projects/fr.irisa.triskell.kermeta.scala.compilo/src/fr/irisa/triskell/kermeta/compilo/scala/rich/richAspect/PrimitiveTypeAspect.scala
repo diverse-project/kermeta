@@ -18,16 +18,14 @@ trait PrimitiveTypeAspect extends RichAspectImplicit with ObjectAspect with LogA
 		if (Util.hasEcoreTag(this)){
 			var t = this.getOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName)).first.getValue;
 			res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
-			log.debug("PrimitiveTypeComplement="+kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
-			
-			
+			log.debug("PrimitiveTypeComplement="+kermeta.utils.TypeEquivalence.getTypeEquivalence(t))	
 			/* Check Generique Param */
 			try{
 				var c = java.lang.Class.forName(kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
 				if(c.getTypeParameters.size > 0){
 					res.append("[")
 					for(i <- 0 until c.getTypeParameters.length ){
-						res.append("_")
+						res.append("org.eclipse.emf.ecore.EObject")
 						if(i < c.getTypeParameters.length -1){
 							res.append(",")
 						}

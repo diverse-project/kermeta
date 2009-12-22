@@ -10,7 +10,7 @@ import fr.irisa.triskell.kermeta.language.behavior._
 trait RescueAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		log.debug("Rescue Generation ")
+		log.debug("Rescue")
 		res.append("case "+this.getExceptionName()+":")
 		this.getExceptionType.generateScalaCode(res)
 		res.append(" => {")

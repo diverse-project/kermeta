@@ -12,7 +12,7 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
 	implicit def rich (xs : OperationAspect) = xs.asInstanceOf[Operation]
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		log.debug("Generate Method {}",this.getName)
+		log.debug("Operation={}",this.getName)
 		res.append("\n   ")
 		if (this.getSuperOperation()!=null || (Util.hasEcoreTag(this) && this.getBody !=null)){
 			res.append(" override")

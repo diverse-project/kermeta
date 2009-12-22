@@ -43,11 +43,6 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 			}
 	}
 	
-	def generateIsNotEquals(res : StringBuilder){
-		//TODO
-	}
-
-	
 	def generateTarget(res : StringBuilder){
 		this.getTarget().generateScalaCode(res)
 	}

@@ -12,15 +12,10 @@ trait BlockAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		log.debug("BlockAspect Generation ")
-		var template = new StringTemplate("try {\n $body$ } catch {\n $catchBody$ }\n")
+		var template = new StringTemplate("try {\n $body$ \n} catch {\n $catchBody$ }\n")
 		var body,catchBody = new StringBuilder
-		//BODY GEN
-		this.getStatement().foreach(exp => {
-			exp.generateScalaCode(body)
-			body.append("\n")
-		})
-		//CATCH GEN
-		this.getRescueBlock().foreach(b => { b.generateScalaCode(catchBody) })
+		Util.generateScalaCodeEach(body,this.getStatement(),"\n") //BODY GEN
+		this.getRescueBlock().foreach(b => { b.generateScalaCode(catchBody) }) //CATCH GEN
 		//RESULT GEN
 		if(this.getRescueBlock().size() > 0){
 			template.setAttribute("body", body.toString)

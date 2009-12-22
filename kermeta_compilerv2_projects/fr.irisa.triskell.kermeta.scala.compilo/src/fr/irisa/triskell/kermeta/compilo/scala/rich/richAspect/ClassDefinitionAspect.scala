@@ -10,7 +10,6 @@ import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
 trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IVisitable {
 	
-	
 	override def accept(visitor : IVisitor){ 
 		visitor.visit(this) 
 	}	 
@@ -128,12 +127,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 					//res.append("checkParamInvariants(super.getInvariants)\n")
 					res.append("}\n")
 					/* End checkInvariants Generation  */
-					
-
-
 				}
-
-				
 	    		res.append("}\n")
 	  	}
 	}
@@ -143,8 +137,6 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 		return kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName());
 	  
 	}
-	
-	
 	
 	def generateParamerterClass(res1:StringBuilder) = {
 						if (this.getTypeParameter().size()>0){
@@ -158,9 +150,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 						i=i+1
 					}
 					res1.append("]")
-					
 				}
-
 	}
  	
 	
