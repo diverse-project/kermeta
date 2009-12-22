@@ -41,7 +41,7 @@ class PropertyConstraint inherits Constraint {
 	 * The property that is checked by this constraint
 	 * Typically, it will check the lower and upper bounds
 	 */
-	attribute ~property : Property 
+	reference ~property : Property 
 }
 
 aspect class Object
@@ -84,7 +84,7 @@ aspect class Object
 					end		
 			
 					// Recursivity
-					if ( prop.isComposite /*and not prop.isDerived*/) 
+					if ( prop.isComposite and not prop.isDerived) 
 					then
 						if not self.get(prop).isVoid() 
 						then
