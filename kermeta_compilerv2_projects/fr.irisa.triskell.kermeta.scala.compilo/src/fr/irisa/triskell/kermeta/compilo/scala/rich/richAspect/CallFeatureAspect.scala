@@ -10,12 +10,6 @@ import java.util._
 
 trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect with LogAspect {
 	
-	def generateAsType(res : StringBuilder){
-		this.getTarget().generateScalaCode(res)
-		res append ".asInstanceOf["
-		this.getParameters.foreach(e=> {e.generateScalaCode(res)})
-		res append "]"
-	}
 	def generateNew(res : StringBuilder) = {
 		if (this.getTarget!=null){
 				if (this.getTarget.isInstanceOf[TypeLiteral]){
@@ -28,10 +22,11 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 						res.append(".RichFactory.create")
 						res.append(ty.getName())
 						var ty1 : ParameterizedType = this.getTarget.asInstanceOf[TypeLiteral].getTyperef().getType().asInstanceOf[ParameterizedType]
-						var i = 0;
+						//var i = 0;
 						if (ty1.getTypeParamBinding().size > 0){
 							res.append("[")	
-							ty1.getTypeParamBinding().foreach{e=> if (i>0) res.append(",")	; e.getType().generateScalaCode(res);i=i+1}
+							Util.generateScalaCodeEach(res,ty1.getTypeParamBinding(),",")
+							//ty1.getTypeParamBinding().foreach{e=> if (i>0) res.append(",")	; e.getType().generateScalaCode(res);i=i+1}
 							res.append("]")	
 						}
 					}else{//TODO gérer l'initialisation des types paramétrés
@@ -46,23 +41,11 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 	def generateTarget(res : StringBuilder){
 		this.getTarget().generateScalaCode(res)
 	}
-	def generateParam(res : StringBuilder){
-		res append "(" 
-		this.getParameters.foreach(e=> {
-			e.generateScalaCode(res)
-			if(!this.getParameters.last.equals(e)) { res append ", " }
-		})
-		res append ")"
+	def generateParam(res : StringBuilder,openS : String,closeS : String){
+		res append openS 
+		Util.generateScalaCodeEach(res,this.getParameters,", ")
+		res append closeS
 	}
-	def generateTypeParam(res : StringBuilder){
-		res append "[" 
-		this.getParameters.foreach(e=> {
-			e.generateScalaCode(res)
-			if(!this.getParameters.last.equals(e)) { res append ", " }
-		})
-		res append "]"
-	}
-	
 	
 	def generatePropertyCall(res : StringBuilder){
 		var TargetType : StringBuilder = new StringBuilder
@@ -86,16 +69,16 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 	def generateKUnitCase(res : StringBuilder){
 		this.getTarget().generateScalaCode(res)
 		res append ".run("
+		var i = 0
 		this.getParameters.foreach(e=> {
-			//if(e.isInstanceOf[TypeLiteral]){
-				res append "classOf[" 
-         		var className :StringBuilder = new StringBuilder
-         		e.generateScalaCode(className)
-         		className.insert(className.lastIndexOf(".")+1,"Rich")
-         		res.append(className.toString())
-         		res append "]"
-         		if(!this.getParameters.last.equals(e)) { res append ", " }
-			//}
+			if(i != 0) { res append ", " }
+			res append "classOf[" 
+         	var className :StringBuilder = new StringBuilder
+         	e.generateScalaCode(className)
+         	className.insert(className.lastIndexOf(".")+1,"Rich")
+         	res.append(className.toString())
+         	res append "]"
+			i = i + 1
 		})
 		res append ")"
 	}
@@ -104,16 +87,16 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 		log.debug("CallFeature={}",this.getName())
 		this.getName match {
 			case "toString" => { res.append("(");generateTarget(res);res.append("+\"\")")  }
-			case "isNotEqual" => {generateTarget(res);res.append(" != ");generateParam(res)}
-			case "isEqual" => {generateTarget(res);res.append(" == ");generateParam(res)}
+			case "isNotEqual" => {generateTarget(res);res.append(" != ");generateParam(res,"(",")")}
+			case "isEqual" => {generateTarget(res);res.append(" == ");generateParam(res,"(",")")}
 			case "run" if(this.getTarget != null) => generateKUnitCase(res)
-			case "asType" => generateAsType(res)
-			case "isKindOf" => {generateTarget(res);res.append(".isInstanceOf");generateTypeParam(res)}
-			case "asKindOf" => {generateTarget(res);res.append(".asInstanceOf");generateTypeParam(res)}
-			case "isInstanceOf" => {generateTarget(res);res.append(".isInstanceOf");generateTypeParam(res)}
+			case "asType" => {generateTarget(res);res.append(".asInstanceOf");generateParam(res,"[","]")}
+			case "isKindOf" => {generateTarget(res);res.append(".isInstanceOf");generateParam(res,"[","]")}
+			case "asKindOf" => {generateTarget(res);res.append(".asInstanceOf");generateParam(res,"[","]")}
+			case "isInstanceOf" => {generateTarget(res);res.append(".isInstanceOf");generateParam(res,"[","]")}
 			case "new" => generateNew(res)
-			case _ if(this.getTarget != null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateTarget(res);res.append(".");generateOperationCall(res);generateParam(res)}
-			case _ if(this.getTarget == null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateName(res);generateParam(res) }
+			case _ if(this.getTarget != null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateTarget(res);res.append(".");generateOperationCall(res);generateParam(res,"(",")")}
+			case _ if(this.getTarget == null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateName(res);generateParam(res,"(",")") }
 			case _ if(this.getTarget != null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generatePropertyCall(res) }
 			case _ if(this.getTarget == null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generatePropertyName(res) }		
 			case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generateName(res) }
