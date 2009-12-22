@@ -18,10 +18,23 @@ trait TypeLiteralAspect extends RichAspectImplicit with ObjectAspect {
 
 			}
 		}*/
-		
-		
-		println("toto " +this.getTyperef().getType.getQualifiedNameCompilo())
 		res.append(this.getTyperef().getType.getQualifiedNameCompilo())
+		/* Check Generique Param */
+			try{
+				var c = java.lang.Class.forName(this.getTyperef().getType.getQualifiedNameCompilo())
+				if(c.getTypeParameters.size > 0){
+					res.append("[")
+					for(i <- 0 until c.getTypeParameters.length ){
+						res.append("_")
+						if(i < c.getTypeParameters.length -1){
+							res.append(",")
+						}
+					}
+					res.append("]")
+				}
+			} catch {
+				case _ => 
+			}
 	}
 	
 

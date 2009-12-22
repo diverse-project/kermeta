@@ -1,5 +1,6 @@
 package fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect
 
+import org.antlr.stringtemplate.StringTemplate
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
 import scala.collection.JavaConversions._
 import fr.irisa.triskell.kermeta.compilo.scala._
@@ -11,19 +12,24 @@ trait BlockAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		log.debug("BlockAspect Generation ")
-		
-		if(this.getRescueBlock().size() > 0){ res.append("try ") }  
-		res.append("{\n") 
+		var template = new StringTemplate("try {\n $body$ } catch {\n $catchBody$ }\n")
+		var body,catchBody = new StringBuilder
+		//BODY GEN
 		this.getStatement().foreach(exp => {
-			exp.generateScalaCode(res)
-			res.append("\n")
+			exp.generateScalaCode(body)
+			body.append("\n")
 		})
-		res.append("}\n")
+		//CATCH GEN
+		this.getRescueBlock().foreach(b => { b.generateScalaCode(catchBody) })
+		//RESULT GEN
 		if(this.getRescueBlock().size() > 0){
-			res.append(" catch {\n")
-			this.getRescueBlock().foreach(b => { b.generateScalaCode(res) })
-			res.append("}\n")
+			template.setAttribute("body", body.toString)
+			template.setAttribute("catchBody", catchBody)
+			res.append(template.toString)
+		} else {
+			res.append("{\n"+body.toString+"}\n")
 		}
+
 	}
 	
 }
