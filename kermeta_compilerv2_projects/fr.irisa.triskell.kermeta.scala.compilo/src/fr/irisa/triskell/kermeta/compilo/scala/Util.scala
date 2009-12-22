@@ -15,8 +15,9 @@ import java.util._
 import scala.collection.JavaConversions._
 import java.util.concurrent.Executors
 import java.util.concurrent.ExecutorService
- 
-object Util extends LogAspect  {
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit
+
+object Util extends LogAspect with RichAspectImplicit  {
 	/**
 	 * Check if a model element has an Ecore Tag
 	 * @param obj model element to test
@@ -65,7 +66,7 @@ object Util extends LogAspect  {
 		}
 	}
 	
-	var keywords = scala.List("implicit","match","requires","type","var","abtrsact","do","finally","import","object","throw","val","case","else","for","lazy","override","return","trait","catch","extends","forSome","match","package","sealed","try","while","class","false","if","new","private","super","true","with","def","final","implicit","null","protected","this","yield","_",":","=","=>","<-","<:","<%",">:","#","@")
+	var keywords = scala.List("implicit","match","requires","type","var","abstract","do","finally","import","object","throw","val","case","else","for","lazy","override","return","trait","catch","extends","forSome","match","package","sealed","try","while","class","false","if","new","private","super","true","with","def","final","implicit","null","protected","this","yield","_",":","=","=>","<-","<:","<%",">:","#","@")
 	def protectScalaKeyword(value : String) : String = {
 		var returnString : String = value
 		if(keywords.exists(p => p.equals(value))){
@@ -80,5 +81,13 @@ object Util extends LogAspect  {
     * Global Compiler Thread Executor 
     */
    var threadExecutor : ExecutorService = null
+   
+   
+   def generateScalaCodeEach[A <: Object](res : StringBuilder,list : org.eclipse.emf.common.util.EList[A],sep : String){
+	  for(i <- 0 until list.size){
+	 	  if(i != 0) {res.append(sep) }
+	 	  list.get(i).generateScalaCode(res)
+	  }
+   }
    
 }
