@@ -252,6 +252,22 @@ abstract class Collection<G>
 	end
 	
 	/**
+	 * Runs function func on each element of the Collection
+	 * the index can be used in the function, it represents the rank in the collection, start on 0
+	 * example : 
+	 * aCollection.indexedEach { e, index | \/* do something with each element e of this collection *\/ }
+	 */
+	operation indexedEach(func : <[G , Integer] -> Object>) : Void is do
+		var index : Integer init 0 
+		from var it : Iterator<G> init self.iterator
+		until it.isOff
+		loop
+			func(it.next, index)
+			index := index+1
+		end
+	end
+	
+	/**
 	 * Returns a Boolean stating whether no element of the Collection invalidates
 	 * the condition specified by function func
 	 * example : 
