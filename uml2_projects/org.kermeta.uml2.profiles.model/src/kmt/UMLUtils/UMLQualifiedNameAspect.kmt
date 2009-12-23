@@ -12,8 +12,8 @@ package uml;
 require kermeta
 
 
-require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
-require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
 
 using kermeta::standard
 

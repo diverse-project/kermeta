@@ -12,8 +12,9 @@ package profiledResourceHelper;
 
 
 require kermeta
-require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
-require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "../profileHelpers/StereotypeInstanceHelper.kmt"
 //require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
 //require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
 
@@ -23,11 +24,15 @@ using kermeta::standard
 
 using ecore
 using uml
+using uml::profileHelpers
 
 /**
  * This class is an helper for resources containing an UML model with profiles
  * It provides several operations that will search for stereotypes in the resource 
  * this is needed because of the special implementation of stereotypes and profiles in UML2
+ * Performance note : this is quite inefficient because it needs to read all the resource stereotypes to be able to
+ *   do its job, its is better to use UMLStereotypeHelper and aspectize the profile to enable the opposite navigation
+ *   which is much faster
  */
 class ProfilesHelper {
 	
@@ -67,10 +72,11 @@ class ProfilesHelper {
 	operation getStereotypesFor( object : Object ) : Set <Object> is do
 	
 		var stereotypes : Set <Object> init Set <Object>.new
+		var stereotypeHelper : StereotypeInstanceHelper init StereotypeInstanceHelper.new
 	 
 		stereotypeInstances.each { instance |
 						
-			var base_Object : Object init getBase(instance)
+			var base_Object : Object init stereotypeHelper.getBase(instance)
 			if ( (base_Object != void) and (base_Object.equals(object) ) ) then
 				stereotypes.add( instance )
 		 	//else
@@ -83,78 +89,7 @@ class ProfilesHelper {
 	end
 		
 	
-	/**
-	 * Gets the property with the given name for the given object.
-	 */	
-	operation getProperty( name : String, object : Object ) : kermeta::language::structure::Property is do
 	
-		var classDefinition : kermeta::language::structure::ClassDefinition 
-		classDefinition ?= object.getMetaClass.typeDefinition
-		result := classDefinition.allAttribute.detect { o | o.name.equals( name ) }
-	
-	end
-	/**
-	 * tells weither this object has a base_ property.
-	 */	
-	operation hasBaseProperty( object : Object ) : Boolean is do
-	
-		var classDefinition : kermeta::language::structure::ClassDefinition 
-		classDefinition ?= object.getMetaClass.typeDefinition
-		result := classDefinition.allAttribute.exists { o | if o.name.size >=5 then o.name.substring(0,5).equals("base_")
-														 else false
-														 end
-													}
-	
-	end	
-	
-	/**
-	 * return the base_ value associated to the stereotype
-	 */
-	operation getBase(object : Object) : uml::Element is do
-		result := void // default result value
-		var classDefinition : kermeta::language::structure::ClassDefinition 
-		classDefinition ?= object.getMetaClass.typeDefinition
-		classDefinition.allAttribute.select { o | 
-				if o.name.size >=5 then o.name.substring(0,5).equals("base_")
-				else 
-					false
-				end
-			}.each{att | 
-					var base_value : Object init object.get(att)
-					if not base_value.isVoid then
-						result ?= base_value
-					end
-				}		
-	end
-	
-	/**
-	 * determine if the object is an UML stereotype (ie. it declares a base_ to an uml element
-	 */
-	operation isStereotype(object : Object) : kermeta::standard::Boolean is do
-		result := false
-		var metaclassName : String init object.getMetaClass.name
-		var classDefinition : kermeta::language::structure::ClassDefinition 
-		classDefinition ?= object.getMetaClass.typeDefinition
-		if not classDefinition.isVoid then
-			if classDefinition.allAttribute.exists{ att |
-					var  propType : kermeta::language::structure::Class
-					propType ?= att.type
-					//stdio.writeln("   " + att.name + "  matches " +propType.classDefinition.name + "?")
-					if not propType.isVoid then 
-						if att.name.equals("base_" +propType.classDefinition.name) then 
-							true
-						else
-							false
-						end
-					else
-						false
-					end
-		 		} then
-		 		result := true
-		 	end
-		end	
-		//stdio.writeln("  isStereotype returns "+ result.toString)
-	end
 			
 	/**
 	 * Fills the internal set 'stereotypes'
@@ -180,11 +115,12 @@ class ProfilesHelper {
 	
 	
 	operation getStereotypeInstances() is do
-		if not modelResource.isVoid() then
+		if not modelResource.isVoid() then			
+			var stereotypeHelper : StereotypeInstanceHelper init StereotypeInstanceHelper.new
 			stereotypeInstances.addAll( 
 				modelResource.instances.select{ instance | 										
 					not instance.isInstanceOf(uml::Element) 
-					and ( hasBaseProperty(instance)
+					and ( stereotypeHelper.hasBaseProperty(instance)
 					
 							/* getProperty( "base_Class", instance ) != void
 						or getProperty( "base_Package", instance ) != void

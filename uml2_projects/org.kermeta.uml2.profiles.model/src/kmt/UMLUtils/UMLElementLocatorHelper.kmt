@@ -13,10 +13,10 @@ package UMLUtils;
 
 
 require kermeta
-require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
-require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
 require "UMLQualifiedNameAspect.kmt"
-require "../profiledResourceHelper/ProfiledResourceHelper.kmt"
+require "../profileHelpers/StereotypeInstanceHelper.kmt"
 
 class UMLElementLocatorHelper
 {
@@ -25,15 +25,20 @@ class UMLElementLocatorHelper
 		namedElem ?= elem
 		if namedElem.isVoid then
 			result := elem.toString
-			var ph : profiledResourceHelper::ProfilesHelper init profiledResourceHelper::ProfilesHelper.new
-			ph.initialize(elem.containingResource,elem.containingResource) 
-			if ph.isStereotype(elem) then
+			var sih : uml::profileHelpers::StereotypeInstanceHelper init uml::profileHelpers::StereotypeInstanceHelper.new 
+			if sih.isStereotype(elem) then
 				var base_value : uml::Element
-				base_value := ph.getBase(elem)
+				base_value := sih.getBase(elem)
+				result := result + " stereotype on "
 				if not base_value.isVoid then
 					// complement the result string
-					result := result + " stereotype on " + getLocationString(base_value)
+					result := result + getLocationString(base_value)
+				else 
+					result := result + "[base not found]"
+				
 				end
+			else
+				result := result + "[not a stereotype]"
 			end
 		else
 			result := namedElem.getQualifiedName
