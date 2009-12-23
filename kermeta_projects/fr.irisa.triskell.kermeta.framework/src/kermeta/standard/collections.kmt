@@ -253,16 +253,21 @@ abstract class Collection<G>
 	
 	/**
 	 * Runs function func on each element of the Collection
-	 * the index can be used in the function, it represents the rank in the collection, start on 0
+	 * the eachContext contains some information about the each process that can be used in the function, 
+	 *  for example the index represents the rank in the collection, start on 0
+	 *  or boolean to indicates weither we are processing the first and/or the last element of the collection
+	 *  note that this rank is relative to the processing order. this processing order is ensured only for sequence and ordered set
+	 *
 	 * example : 
-	 * aCollection.indexedEach { e, index | \/* do something with each element e of this collection *\/ }
+	 * aCollection.indexedEach { e, eachContext | \/* do something with each element e of this collection *\/ }
 	 */
-	operation indexedEach(func : <[G , Integer] -> Object>) : Void is do
+	operation indexedEach(func : <[G , EachContext] -> Object>) : Void is do
 		var index : Integer init 0 
 		from var it : Iterator<G> init self.iterator
 		until it.isOff
 		loop
-			func(it.next, index)
+			var context : EachContext init EachContext.new.initialize(index, index == 0, index == size-1)
+			func(it.next, context)
 			index := index+1
 		end
 	end
@@ -415,6 +420,20 @@ abstract class Collection<G>
 	end
 }
 
+/**
+ * context used in the indexedEach of Collection
+ */
+class EachContext {
+	attribute index : Integer
+	attribute isFirst : Boolean
+	attribute isLast : Boolean
+	operation initialize(i : Integer, first : Boolean, last : Boolean) : EachContext is do
+		index := i
+		isFirst := first
+		isLast := last
+		result := self
+	end
+}
 
 /**
  * A Set is a non-ordered collection that contains distinct elements
