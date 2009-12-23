@@ -14,5 +14,13 @@ public class KExceptionFactory {
 				o,
 				null);
 	}
+	public static void raiseRuntimeError(Object o, String message, ExpressionInterpreter interpreter, Throwable javaCause) {
+        throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+        		message,
+				interpreter,
+				interpreter.memory,
+				o,
+				javaCause);
+	}
 	
 }
