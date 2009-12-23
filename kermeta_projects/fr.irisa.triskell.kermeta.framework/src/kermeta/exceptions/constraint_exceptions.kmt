@@ -17,11 +17,11 @@ using kermeta::persistence
 
 class ConstraintsDiagnostic 
 {
-	attribute setConstraints : Set<ConstraintViolatedInv>
+	attribute setConstraints : Bag<ConstraintViolatedInv>
 	
 	/* Initialize */
 	operation initialize() : ConstraintsDiagnostic is do
-		setConstraints := Set<ConstraintViolatedInv>.new
+		setConstraints := Bag<ConstraintViolatedInv>.new
 		result := self
 	end
 	

@@ -20,7 +20,6 @@
 
 
 package kermeta::language::structure;
-
 require "../Standard.kmt"
 require "../exceptions/constraint_exceptions.kmt"
 
@@ -46,7 +45,6 @@ class PropertyConstraint inherits Constraint {
 
 aspect class Object
 {
-
 	/**
 	 * Checks all the invariants for this object and return a complete diagnostic.
 	 * This also includes the structural constraints associated to the properties.
@@ -55,7 +53,7 @@ aspect class Object
 	
 		// init result
 		var contraintes : ConstraintsDiagnostic init ConstraintsDiagnostic.new.initialize
-		
+		stdio.writeln("        " + self.toString +".getViolatedConstraints()")
 		var cd : ClassDefinition 
 		cd := self.getMetaClass().classDefinition
 		
@@ -84,12 +82,15 @@ aspect class Object
 					end		
 			
 					// Recursivity
-					if ( prop.isComposite and not prop.isDerived) 
+					if ( prop.isComposite ) 
 					then
-						if not self.get(prop).isVoid() 
+					    var propValue : Object init self.get(prop)
+					    // need to ignore ValueType and EnumerationLiteral for performance sake
+					    var mustIgnoreType : Boolean init kermeta::standard::ValueType.isSuperTypeOf(prop.type) 					    	
+						if not propValue.isVoid() and not mustIgnoreType
 						then
 							
-							if self.get(prop).getMetaClass.typeDefinition.asType(ClassDefinition).allSuperTypes.exists{ t |
+							if propValue.getMetaClass.typeDefinition.asType(ClassDefinition).allSuperTypes.exists{ t |
 								if t.isInstanceOf(ParameterizedType) 
 								then
 									t.asType(ParameterizedType).typeDefinition.qualifiedName=="kermeta::standard::Collection"
@@ -99,11 +100,21 @@ aspect class Object
 							then
 						
 								var subObjInstances : kermeta::standard::Collection<Object>
-								subObjInstances ?= self.get(prop)
-								subObjInstances.each { aSubObjInstances | aSubObjInstances.getViolatedConstraints
-																			.setConstraints. each{v|contraintes.add(v)} }
+								subObjInstances ?= propValue
+								subObjInstances.each { aSubObjInstance |
+									if not aSubObjInstance.isInstanceOf(kermeta::language::structure::EnumerationLiteral) then 
+										aSubObjInstance.getViolatedConstraints
+																			.setConstraints. each{v|
+																				stdio.writeln("    " + v.message)
+																				contraintes.add(v)}
+									end 
+									}
 							else
-								self.get(prop).getViolatedConstraints.setConstraints.each{v|contraintes.add(v)}
+								if not propValue.isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
+									propValue.getViolatedConstraints.setConstraints.each{v|
+										stdio.writeln("    " + v.message)																				
+										contraintes.add(v)}
+								end
 							end
 						end
 					end
@@ -117,6 +128,7 @@ aspect class Object
 				do
 					checkInvariant(invariant)
 					rescue (e : ConstraintViolatedInv) 
+					    stdio.writeln("    " + e.message)
 						contraintes.add(e)
 				end
 			}
@@ -133,6 +145,7 @@ aspect class Object
 	 */
 	operation checkInvariant(invariant : Constraint) : Void is do 
 	
+	    
 		// workaround for bug 8911
 		var minusOne : Integer init -1
 	
@@ -144,20 +157,11 @@ aspect class Object
 			// retrieve property
 			var prop : Property init invariant.asType(PropertyConstraint).~property		
 			var v : Object init self.get(prop)
-					
-			if ( (not v.isVoid).andThen{f| v.isInstanceOf(Collection<Object>)} )
-			then
-				var coll : Collection<Object> init v.asType(Collection<Object>)
-				
-				// A collection that does not respect the defined bounds raises an exception.
-				if ( prop.upper != minusOne and coll.size() > prop.upper ) then
-					var e : ConstraintViolatedInv init ConstraintViolatedInv.new
-					e.constraintAppliedTo := self
-					e.message := "Invariant upper bound of " + cd.name + "_" + prop.name + "_" + prop.type.toString + " violated on " + self.toString
-					e.failedConstraint := invariant
-					raise e
-				end
-				if ( coll.size() < prop.lower ) then
+			
+			
+			if 	v.isVoid then
+				// A required property that is void raises an exception.
+				if prop.lower == 1 then
 					var e : ConstraintViolatedInv init ConstraintViolatedInv.new
 					e.constraintAppliedTo := self
 					e.message := "Invariant lower bound of " + cd.name + "_" + prop.name + "_" + prop.type.toString + " violated on " + self.toString
@@ -165,15 +169,28 @@ aspect class Object
 					raise e
 				end
 			else
-			// A required property that is void raises an exception.
-				if ( prop.lower == 1 and v.isVoid ) then
-					var e : ConstraintViolatedInv init ConstraintViolatedInv.new
-					e.constraintAppliedTo := self
-					e.message := "Invariant lower bound of " + cd.name + "_" + prop.name + "_" + prop.type.toString + " violated on " + self.toString
-					e.failedConstraint := invariant
-					raise e
-				end					
-			end
+				// not void
+				// if this is a collection
+				if v.isInstanceOf(Collection<Object>) then
+					var coll : Collection<Object> init v.asType(Collection<Object>)
+				
+					// A collection that does not respect the defined bounds raises an exception.
+					if ( prop.upper != minusOne and coll.size() > prop.upper ) then
+						var e : ConstraintViolatedInv init ConstraintViolatedInv.new
+						e.constraintAppliedTo := self
+						e.message := "Invariant upper bound of " + cd.name + "_" + prop.name + "_" + prop.type.toString + " violated on " + self.toString
+						e.failedConstraint := invariant
+						raise e
+					end
+					if ( coll.size() < prop.lower ) then
+						var e : ConstraintViolatedInv init ConstraintViolatedInv.new
+						e.constraintAppliedTo := self
+						e.message := "Invariant lower bound of " + cd.name + "_" + prop.name + "_" + prop.type.toString + " violated on " + self.toString
+						e.failedConstraint := invariant
+						raise e
+					end
+				end
+			end				
 			
 		
 		else // This is a Class invariant

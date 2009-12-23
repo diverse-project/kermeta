@@ -666,6 +666,7 @@ class String inherits ValueType, Comparable, Summable<String>
 	
 	/**
 	 * Return of an ordered set of the splitted string
+	 * Note that the delimiter is a regular expression (as the split operation in java) 
 	 */
 	operation split(delimiter : String) : Sequence<String> is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.split(self, delimiter)
