@@ -105,6 +105,12 @@
         		</simpara></listitem>
       		</varlistentry>  
       		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EPackageHelper.kmt"</filename></emphasis></term>
+        		<listitem><simpara>       			
+					This file contains some helper operations for manipulating EPackage. Ex: obtaining the root package, obtaining the qualified name of the package, .... 
+        		</simpara></listitem>
+      		</varlistentry>
+      		<varlistentry>
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/Patterns4Ecore.kmt"</filename></emphasis></term>
         		<listitem> <simpara>      			
 					This file contains a transformation class that allows to transform your Ecore model and 

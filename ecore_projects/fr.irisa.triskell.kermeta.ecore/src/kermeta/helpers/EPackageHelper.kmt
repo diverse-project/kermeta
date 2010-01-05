@@ -1,0 +1,38 @@
+/* $Id:$ 
+ * Creation : January 5, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+
+package ecore;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::standard
+
+aspect class EPackage
+{
+	/** retreives the qualified name of a Package */
+	operation getQualifiedName(delimiter : String) : String is do
+	    if (self.eSuperPackage != void) then
+			result := self.eSuperPackage.getQualifiedName(delimiter) + delimiter + self.name			
+		else
+			result := self.name
+		end
+	end
+	
+	/** returns the topmost container EPackage or self*/
+	operation getRootPackage() : EPackage is do
+	    if (self.eSuperPackage != void) then
+			result := self.eSuperPackage.getRootPackage()			
+		else
+			result := self
+		end
+	end
+}
