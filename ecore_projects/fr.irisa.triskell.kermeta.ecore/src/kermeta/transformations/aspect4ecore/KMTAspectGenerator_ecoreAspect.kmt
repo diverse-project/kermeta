@@ -1,0 +1,62 @@
+/* $Id:$ 
+ * Creation : December 23, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "ecore::EPackage"
+@mainOperation "generateKMTAspect"
+
+
+package ecore;
+
+
+require kermeta
+require "../../helpers/EcoreHelper.kmt"
+require "KMTAspectGenerator.kmt"
+
+using kermeta::standard
+using kermeta::utils
+
+aspect class EPackage
+{
+	operation generateKMTAspect(context : transformations::aspect4ecore::KMTAspectGeneratorContext) : Void is do
+		// navigate through  the package hierarchy
+		self.eSubpackages.each{ p | p.generateKMTAspect(context)}
+		self.eClassifiers.each{ c | c.generateKMTAspect(context)}
+	end
+}
+
+aspect class EClassifier
+{
+	/**
+	 * Generate the KMT file for the given classifier
+	 */
+	operation generateKMTAspect(context : transformations::aspect4ecore::KMTAspectGeneratorContext) : Void is do 
+		
+		var buf : StringBuffer init StringBuffer.new
+		stdio.writeln("nb fragment = "+context.classTemplate.split(context.classnameKeyword).size.toString)
+		// TODO replace this code with the new indexedEach
+		/* context.classTemplate.split(context.classnameKeyword).indexedEach{fragment, indexcontext |
+			buf.append(fragment)
+			if indexcontext.isLast then 
+				buf.append(self.name)
+			end
+		} */
+		from var it : Iterator<String> init context.classTemplate.split(context.classnameKeyword).iterator
+		until it.isOff
+		loop
+			var fragment : String init it.next
+			buf.append(fragment)
+			if not it.isOff then
+				buf.append(self.name)
+			end
+		end
+		
+		var fileIO : kermeta::io::FileIO init kermeta::io::FileIO.new		
+		var fileName : String init context.baseLocation +"/"+ context.filePrefix + self.name + context.filePostfix + ".kmt"
+		stdio.writeln("Writing " + fileName +"...")
+		fileIO.writeTextFile(fileName, buf.toString )
+	end
+}

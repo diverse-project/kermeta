@@ -1,0 +1,87 @@
+/* $Id:$ 
+ * Creation : December 23, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "transformations::aspect4ecore::KMTAspectGenerator"
+@mainOperation "main"
+
+
+package transformations::aspect4ecore;
+
+
+require kermeta
+require "../../helpers/EcoreHelper.kmt"
+require "KMTAspectGenerator_ecoreAspect.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::utils
+
+class KMTAspectGenerator
+{
+	operation main(	inputFile : String, 
+					baseLocation : String,
+					classTemplate : String,
+					filePrefix : String,
+					filePostfix : String) : Void is do 
+		var helper : EcoreHelpers::EcoreHelper
+	
+		helper := EcoreHelpers::EcoreHelper.new
+		helper.initialize()
+		
+		var model : Sequence <ecore::EPackage> init helper.loadEcoreModel(EMFRepository.new, inputFile)
+		var context : KMTAspectGeneratorContext 
+		context := KMTAspectGeneratorContext.new.initialize(baseLocation, classTemplate, filePrefix, filePostfix )
+		model.each{p |
+			p.generateKMTAspect(context) 
+		}
+	end
+	
+	operation defaultMain(	inputFile : String, baseLocation : String) : Void is do
+	    var classTemplate : StringBuffer init StringBuffer.new
+	    classTemplate.append("package PACKAGEQUALIFIEDNAME;\n")
+	    classTemplate.append("\n")
+	    classTemplate.append("require kermeta\n")
+	    classTemplate.append("require \"ECORENSURI\"\n")
+	    classTemplate.append("// require \"ECOREFILENAME\"\n")
+	    classTemplate.append("\n")
+	    classTemplate.append("using kermeta::standard\n")
+	    classTemplate.append("\n")
+	    classTemplate.append("aspect class CLASSNAME {\n")
+	    classTemplate.append("   operation generate() : String is do\n")
+	    classTemplate.append("      result:=\"\"\n")
+	    classTemplate.append("   end\n")
+	    classTemplate.append("}")
+		main(inputFile, baseLocation, classTemplate.toString,"","")
+	end
+}
+
+class KMTAspectGeneratorContext
+{
+	attribute baseLocation : String
+	attribute classTemplate : String
+	attribute filePrefix : String
+	attribute filePostfix : String
+	attribute classnameKeyword : String
+	attribute packageQualifiednameKeyword : String
+	attribute ecoreNsURIKeyword : String
+	attribute ecoreFilenameKeyword : String
+	
+	operation initialize(	baseLocation : String,
+							classTemplate : String,
+							filePrefix : String,
+							filePostfix : String ) : KMTAspectGeneratorContext is do
+		self.baseLocation := baseLocation
+		self.classTemplate := classTemplate
+		self.filePrefix := filePrefix
+		self.filePostfix := filePostfix
+		self.classnameKeyword := "CLASSNAME"
+		self.packageQualifiednameKeyword := "PACKAGEQUALIFIEDNAME"
+		self.ecoreNsURIKeyword := "ECORENSURI"
+		self.ecoreFilenameKeyword := "ECOREFILENAME"
+		result := self
+	end
+}
