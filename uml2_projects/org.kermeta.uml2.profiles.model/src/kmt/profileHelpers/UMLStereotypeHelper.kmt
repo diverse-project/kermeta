@@ -36,6 +36,17 @@ aspect class Action
 }
 
 /**
+ * Aspect adding navigation to activityPartitionStereotypes
+ */
+aspect class ActivityPartition
+{
+	/**
+	 * List of the stereotypes applied to this ActivityPartition
+	 */
+	reference activityPartitionStereotypes : ActivityPartitionStereotype[0..*]#base_ActivityPartition
+}
+
+/**
  * Aspect adding navigation to classifierStereotypes
  */
 aspect class Behavior
@@ -147,6 +158,16 @@ package profile {
 		 * if != void, this stereotype is applied to this base_Action
 		 */
 		reference base_Action : uml::Action#actionStereotypes
+	}
+	
+	/**
+	 * Stereotype that can be applied on an ActivityPartition
+	 */
+	class ActivityPartitionStereotype inherits StereotypeInstance {
+		/**
+		 * if != void, this stereotype is applied to this base_ActivityPartition
+		 */
+		reference base_ActivityPartition : uml::ActivityPartition#activityPartitionStereotypes
 	}
 	
 	/**
