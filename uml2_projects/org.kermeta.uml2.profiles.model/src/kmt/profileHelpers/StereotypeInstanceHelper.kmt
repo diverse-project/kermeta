@@ -82,25 +82,25 @@ class StereotypeInstanceHelper {
 					var  propType : kermeta::language::structure::Class
 					propType ?= att.type
 					if not propType.isVoid then 
-						stdio.writeln("   " + att.name + "  matches " +propType.classDefinition.name + "?")
+						//stdio.writeln("   " + att.name + "  matches " +propType.classDefinition.name + "?")
 						if att.name.equals("base_" +propType.classDefinition.name) then 
 							true
 						else
 							false
 						end
 					else
-						stdio.writeln("   " + att.name + "  isn't a Class")
+						//stdio.writeln("   " + att.name + "  isn't a Class")
 						false
 					end
 		 		} then
 		 		result := true
-			else
-				stdio.writeln("  isStereotype : classDefinition.allAttribute.size=" + classDefinition.allAttribute.size.toString + " classDefinition.name=" + classDefinition.name)
+			// else
+			//	stdio.writeln("  isStereotype : classDefinition.allAttribute.size=" + classDefinition.allAttribute.size.toString + " classDefinition.name=" + classDefinition.name)
 		 	end
-		else
-			stdio.writeln("  isStereotype : no classDefinition !")
+		// else
+		//	stdio.writeln("  isStereotype : no classDefinition !")
 		end	
-		stdio.writeln("  isStereotype returns "+ result.toString)
+		// stdio.writeln("  isStereotype returns "+ result.toString)
 	end
 			
 

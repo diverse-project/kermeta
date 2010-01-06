@@ -80,6 +80,17 @@ aspect class ConnectableElement
 }
 
 /**
+ * Aspect adding navigation to connectableElementStereotypes
+ */
+aspect class Constraint
+{
+	/**
+	 * List of the stereotypes applied to this Constraint
+	 */
+	reference constraintStereotypes : ConstraintStereotype[0..*]#base_Constraint
+}
+
+/**
  * Aspect adding navigation to namedElementStereotypes
  */
 aspect class Message
@@ -176,6 +187,16 @@ package profile {
 		 * if != void, this stereotype is applied to this base_ConnectableElement
 		 */
 		reference base_ConnectableElement : uml::ConnectableElement#connectableElementStereotypes
+	}
+	
+	/**
+	 * Stereotype that can be applied on a Constraint
+	 */
+	class ConstraintStereotype inherits StereotypeInstance {
+		/**
+		 * if != void, this stereotype is applied to this base_ConnectableElement
+		 */
+		reference base_Constraint : uml::Constraint#constraintStereotypes
 	}
 	
 	
