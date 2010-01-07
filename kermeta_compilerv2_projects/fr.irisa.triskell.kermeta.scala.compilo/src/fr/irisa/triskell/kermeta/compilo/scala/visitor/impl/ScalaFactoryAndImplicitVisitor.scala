@@ -27,7 +27,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 			packName=parentpack+"."+packNam
 		}
 		packName= kermeta.utils.TypeEquivalence.getPackageEquivalence(packName)
-		var impName = packName+".impl."+packNameUpper+"PackageImpl"
+		var impName = packName+ Util.getImplPackageSuffix(packName)+packNameUpper+"PackageImpl"
 		res.append("{\tvar c : java.lang.reflect.Constructor[_] = classOf["+impName+"].getDeclaredConstructors.first\n")
 		res.append("\tc.setAccessible(true);\n")
 	    res.append("\tvar pack : "+ impName + " =  c.newInstance().asInstanceOf["+ impName + "]\n")
@@ -126,7 +126,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 			
 			factoryDef append "object "+GlobalConfiguration.factoryName + " extends "
 			if (par.getOwnedTypeDefinition.filter{e=> Util.hasEcoreTag(par)}.size>0)
-				factoryDef append  kermeta.utils.TypeEquivalence.getPackageEquivalence(par.asInstanceOf[Package].getQualifiedName())+".impl."+ par.getName.substring(0,1).toUpperCase + par.getName.substring(1,par.getName.size)+"FactoryImpl with" 
+				factoryDef append  kermeta.utils.TypeEquivalence.getPackageEquivalence(par.asInstanceOf[Package].getQualifiedName())+Util.getImplPackageSuffix(actualPackage)+ par.getName.substring(0,1).toUpperCase + par.getName.substring(1,par.getName.size)+"FactoryImpl with" 
 			factoryDef append " "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 			factoryDef append "{\n"
 			viewDef append "package "+actualPackage+"\n"
@@ -168,9 +168,10 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 			var param : StringBuilder = new StringBuilder
 			par.generateParamerterClass(param);			
 			if (Util.hasEcoreTag(par)){				
-				viewDef.append(" class Rich"+par.getName()+" extends "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+"impl." + par.getName()+"Impl")+" with "+packageName.toString +"."+par.getName+"Aspect \n")
+				var  implName:String = Util.getImplPackageSuffix(packageName.toString)
+				viewDef.append(" class Rich"+par.getName()+" extends "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+implName.substring(1,implName.size) + par.getName()+"Impl")+" with "+packageName.toString +"."+par.getName+"Aspect \n")
 				implicitDef append " implicit def richAspect(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName())+") = v.asInstanceOf["+ packageName.toString+"."+ par.getName+"Aspect]\n" 
-				implicitDef append " implicit def richAspect(v : "+ packageName.toString+"."+par.getName()+"Aspect) = v.asInstanceOf["+ par.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo+ ".impl." + par.getName+"Impl]\n"
+				implicitDef append " implicit def richAspect(v : "+ packageName.toString+"."+par.getName()+"Aspect) = v.asInstanceOf["+ par.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo+ Util.getImplPackageSuffix(packageName.toString) + par.getName+"Impl]\n"
 			}else{
 				viewDef.append(" class Rich"+par.getName()+ param.toString +" extends org.eclipse.emf.ecore.impl.EObjectImpl with "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+ param.toString +" with "+packageName.toString +"."+par.getName+"Aspect" + param.toString +" \n")
 				implicitDef append " implicit def richAspect" + param.toString + "(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"."+par.getName())+ param.toString +") = v.asInstanceOf["+ packageName.toString+"."+par.getName+"Aspect"+ param.toString +"]\n" 
