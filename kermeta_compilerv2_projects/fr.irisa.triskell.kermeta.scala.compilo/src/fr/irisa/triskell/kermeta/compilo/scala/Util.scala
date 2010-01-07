@@ -76,6 +76,15 @@ object Util extends LogAspect with RichAspectImplicit  {
 		returnString
 	}
 	
+	
+	def getImplPackageSuffix(packName:String):String={
+		if ("org.eclipse.uml2.uml".equals(packName) || "uml".equals(packName.toString) || "org.eclipse.uml2.umlScalaAspect".equals(packName.toString))
+			return ".internal.impl."
+		else 
+		{	println("toto "+ packName)
+			return ".impl."
+		}
+	}
    
    /**
     * Global Compiler Thread Executor 
