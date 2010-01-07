@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/HelloWorld/000HelloWorld.kmt" lineBeginAt="16" charBeginAt="191" lineEndAt="16" charEndAt="277"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="000HelloWorld.km#//@packages.0/Main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/HelloWorld/000HelloWorld.kmt" lineBeginAt="18" charBeginAt="205" lineEndAt="18" charEndAt="275"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="000HelloWorld.km#//@packages.0/Main/main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/HelloWorld/000HelloWorld.kmt" lineBeginAt="18" charBeginAt="224" lineEndAt="18" charEndAt="228"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="000HelloWorld.km#//@packages.0/Main/main/@containedType.0"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.2"/>
+</traceability:TraceModel>

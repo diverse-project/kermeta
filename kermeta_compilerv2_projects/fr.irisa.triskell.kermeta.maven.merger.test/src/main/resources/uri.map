@@ -1,0 +1,21 @@
+# $Id: uri.map,v 1.17 2008-09-25 08:18:46 dvojtise Exp $
+#
+#"platform:/plugin/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.1.1/eclipse/plugins/fr.irisa.triskell.kermeta_0.1.1/"
+
+#"platform:/plugin/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.2/eclipse/workspace/fr.irisa.triskell.kermeta/"
+#"platform:/resource/"								"file:/C:/eclipse3.2/eclipse/workspace/"
+
+# This is the values that are correct for daily build
+# You probably have to change it to match your configuration
+# but, please do not commit them it into the CVS
+#"platform:/plugin/"		"file:/home/paco/Desktop/KermetaCVS/"
+#"platform:/resource/"		"file:/home/paco/Desktop/KermetaCVS/"
+#"platform:/plugin/"		"/home/paco/Desktop/KermetaCVS/"
+#"platform:/resource/"		"/home/paco/Desktop/KermetaCVS/"
+#"platform:/plugin/"			"file://tmp/kermeta_build/src/plugins/"
+#"platform:/resource/"		"file://tmp/kermeta_build/src/plugins/"
+"platform:/plugin/"		"file:/C:/eclipse3.4/eclipse/workspace_head/"
+"platform:/resource/"		"file:/C:/eclipse3.4/eclipse/workspace_head/"
+"kconf:/loader/"			"file:/C:/eclipse3.4/eclipse/workspace_head/org.kermeta.io.loader/instances/"
+
+
