@@ -1,0 +1,69 @@
+//$Id: 012_testPrePost_PostFailed2.main.kmt,v 1.3 2008-07-31 16:11:44 dvojtise Exp $
+@mainClass "prepost_PostFailed2::Main"
+@mainOperation "main"
+
+
+package prepost_PostFailed2;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::exceptions
+using kermeta::kunit
+
+
+class Main inherits MainParent, TestCase
+{
+	reference b : Boolean
+	reference strMain : Boolean
+	
+	operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+    end	
+	
+    operation test0() : Void is
+     do
+        str := "truc"
+        strParent := "trucParent"
+        b := true	
+ 		strMain := true
+  		
+       		truc("truc")   
+           	assert(false)
+        	rescue (err : ConstraintViolatedPost)
+        		stdio.writeln(err.toString)
+        		stdio.writeln(err.message)
+        		assert(true)       
+     end
+     
+     method truc(param : String)
+     pre lapre is b
+     post lapost is do strMain end
+     post lapost2 is do strParent@pre == "trucParent" and str == param end
+     is
+     do   	
+        stdio.writeln("test")
+        str := param
+        b := false
+
+ 		// to make the execution fail:
+ 		strMain := false
+     end
+     
+}
+
+class MainParent
+{
+	reference strParent : String 
+	reference str : String
+	
+	operation truc(param : String)
+	pre lapreparent1 is do str == "truc" end
+	post lapostparent1 is do strParent == "trucParent"  and str == "truc" end
+	is
+		abstract
+	
+}
+

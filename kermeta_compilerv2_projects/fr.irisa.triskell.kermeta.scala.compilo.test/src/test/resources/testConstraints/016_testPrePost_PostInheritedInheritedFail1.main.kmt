@@ -1,0 +1,85 @@
+// $Id: 016_testPrePost_PostInheritedInheritedFail1.main.kmt,v 1.3 2008-07-31 16:11:44 dvojtise Exp $
+@mainClass "prepost_PostInheritedInheritedFailed1::Main"
+@mainOperation "main"
+
+
+package prepost_PostInheritedInheritedFailed1;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::exceptions
+using kermeta::kunit
+
+
+class Main inherits MainParent, TestCase
+{
+	reference b : Boolean
+	reference strMain : Boolean
+	
+	operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+    end			
+	
+    operation test0() : Void is
+     do
+        str := "truc"
+        strParent := "trucParent"
+        strParentParent := "trucParentParent"
+        b := true	
+ 		strMain := true
+ 
+        truc("truc")       
+ 
+ 		// to make the execution fail:
+        b := true	
+ 		strParent := "not trucParent"
+ 		truc("truc")
+           	assert(false)
+        	rescue (err : ConstraintViolatedPost)
+        		stdio.writeln(err.toString)
+        		stdio.writeln(err.message)
+        		assert(true)   		
+     end
+     
+     method truc(param : String)
+     pre lapre is b
+     post lapost is do strMain end
+     post lapost2 is do strParent@pre == "trucParent" and str == param end
+     is
+     do   	
+        stdio.writeln("test")
+        str := param
+        b := false
+
+     end
+     
+}
+
+class MainParent  inherits MainParentParent 
+{
+	reference strParent : String 
+	
+	method truc(param : String)
+	pre lapreparent1 is do str == "truc" end
+	post lapostparent1 is do strParent == "trucParent"  and str == "truc" end
+	is
+		abstract
+	
+}
+
+class MainParentParent
+{
+	reference strParentParent : String 
+	reference str : String
+	
+	operation truc(param : String)
+	pre lapreparentparent1 is do str == "truc" end
+	post lapostparentparent1 is do strParentParent == "trucParentParent"  and str == "truc" end
+	is
+		abstract
+	
+}
+
