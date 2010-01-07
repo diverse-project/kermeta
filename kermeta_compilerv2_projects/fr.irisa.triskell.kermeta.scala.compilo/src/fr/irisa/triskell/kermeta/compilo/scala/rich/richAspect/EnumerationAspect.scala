@@ -27,7 +27,7 @@ trait EnumerationAspect extends RichAspectImplicit with ObjectAspect {
 			var i =0
 			this.getOwnedLiteral().foreach{e=> 
 			if (i!=0) res.append(",")	
-				res.append(e.getName())
+				res.append(Util.protectScalaKeyword(e.getName()))
 				i=i+1
 			}
 			res append " = Value\n"+"}"
