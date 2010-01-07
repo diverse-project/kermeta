@@ -15,7 +15,8 @@ import java.util._
 import scala.collection.JavaConversions._
 import java.util.concurrent.Executors
 import java.util.concurrent.ExecutorService
-import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit
+import fr.irisa.triskell.kermeta.compilo.scala.rich._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
 
 object Util extends LogAspect with RichAspectImplicit  {
 	/**
@@ -92,11 +93,18 @@ object Util extends LogAspect with RichAspectImplicit  {
    var threadExecutor : ExecutorService = null
    
    
-   def generateScalaCodeEach[A <: Object](res : StringBuilder,list : org.eclipse.emf.common.util.EList[A],sep : String){
+   def generateScalaCodeEach[A <: Object](res : StringBuilder,list : Iterable[A],sep : String){
+	   implicit def rich (xs : Iterable[A]) = new RichIterable(list)
+	   list.foreachCtx((e,ctx) => {
+	 	  if(!ctx.isFirst) {res.append(sep) }
+	 	  e.asInstanceOf[ObjectAspect].generateScalaCode(res)
+	   })
+	     //TODO CAS INTERESSANT POUR LES FONCTIONS ANONYM
+	   /*
 	  for(i <- 0 until list.size){
 	 	  if(i != 0) {res.append(sep) }
 	 	  list.get(i).generateScalaCode(res)
-	  }
+	  }*/
    }
    
 }
