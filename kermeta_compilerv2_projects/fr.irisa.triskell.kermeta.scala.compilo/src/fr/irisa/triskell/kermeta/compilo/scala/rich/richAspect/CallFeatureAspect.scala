@@ -10,6 +10,7 @@ import java.util._
 
 trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect with LogAspect {
 	
+	
 	def generateNew(res : StringBuilder) = {
 		if (this.getTarget!=null){
 				if (this.getTarget.isInstanceOf[TypeLiteral]){
