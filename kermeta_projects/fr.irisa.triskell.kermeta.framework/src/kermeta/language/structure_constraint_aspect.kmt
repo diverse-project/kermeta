@@ -40,7 +40,56 @@ class PropertyConstraint inherits Constraint {
 	 * The property that is checked by this constraint
 	 * Typically, it will check the lower and upper bounds
 	 */
-	reference ~property : Property 
+	reference ~property : Property#propertyConstraint
+}
+
+aspect class Property {
+    /** special constraint that apply to this Property
+     * Used by the getViolatedConstraints
+     */
+	attribute propertyConstraint : PropertyConstraint#~property
+	attribute getViolatedConstraintsMustDrillDownCache : Boolean
+	operation getViolatedConstraintsMustDrillDown() : Boolean is do
+		if getViolatedConstraintsMustDrillDownCache.isVoid then
+			getViolatedConstraintsMustDrillDownCache := not kermeta::standard::ValueType.isSuperTypeOf(self.type)
+		end
+		result := getViolatedConstraintsMustDrillDownCache
+	end
+}
+
+aspect class ClassDefinition {
+
+	/**
+	 * Data structure for getCachedAllAttribute
+	 */
+	reference _allAttributeCache : Set<Property>
+	/**
+	 * returns a cached version of the derived property allAttribute
+	 * It is intended to be used to optimize access on the reflexivity, 
+	 * do not use this cache if you are modifying the ClassDefinition
+	 */
+	operation getCachedAllAttribute() : Set<Property> is do
+		if _allAttributeCache.isVoid then
+			_allAttributeCache := allAttribute
+		end
+		result := _allAttributeCache
+	end
+	
+	/**
+	 * Data structure for getCachedAllSuperTypes
+	 */
+	reference _allSuperTypesCache : Set<Type>
+	/**
+	 * returns a cached version of the derived property allSuperTypes
+	 * It is intended to be used to optimize access on the reflexivity, 
+	 * do not use this cache if you are modifying the ClassDefinition
+	 */
+	operation getCachedAllSuperTypes() : Set<Type> is do
+		if _allSuperTypesCache.isVoid then
+			_allSuperTypesCache := allSuperTypes
+		end
+		result := _allSuperTypesCache
+	end
 }
 
 aspect class Object
@@ -61,19 +110,36 @@ aspect class Object
 		
 		if ( not cd.isVoid ) then
 			
-			// Checking properties
-			cd.allAttribute.each{ prop |
+			// Checking invariants
+			cd.~inv.each{invariant |
+				do
+					checkInvariant(invariant)
+					rescue (e : ConstraintViolatedInv) 
+					    stdio.writeln("    " + e.message)
+						contraintes.add(e)
+				end
+			}
+			
+			
+			// Checking properties and drill down into the contained objects
+			cd.getCachedAllAttribute.each{ prop |
 				
 				//stdio.writeln("  checking " + prop.name + ", composite " + prop.isComposite.toString )			
 				if not prop.tag.exists{t| t.name == "ecore.isTransient"} and
 				   not prop.isDerived
 				then
 					// build a constraint with the property
-					var constraint : PropertyConstraint init PropertyConstraint.new
-					constraint.name := cd.name + "_" + prop.name + "_" + prop.type.toString()
-					//constraint.invOwner := cd // ajout pour les markers
-					constraint.~property := prop
-					
+					var constraint : PropertyConstraint init prop.propertyConstraint
+					if constraint.isVoid then
+						constraint := PropertyConstraint.new
+						if prop.type.isInstanceOf(ParameterizedType) then
+							constraint.name := cd.name + "_" + prop.name + "_" + prop.type.asType(ParameterizedType).typeDefinition.name
+						else
+							constraint.name := cd.name + "_" + prop.name + "_" + prop.type.toString
+						end
+						//constraint.invOwner := cd // ajout pour les markers
+						constraint.~property := prop
+					end
 					do
 						checkInvariant(constraint)
 						rescue (e : ConstraintViolatedInv)
@@ -82,23 +148,21 @@ aspect class Object
 					end		
 			
 					// Recursivity
-					if ( prop.isComposite ) 
+					if ( prop.isComposite and prop.getViolatedConstraintsMustDrillDown) 
 					then
 					    var propValue : Object init self.get(prop)
-					    // need to ignore ValueType and EnumerationLiteral for performance sake
-					    var mustIgnoreType : Boolean init kermeta::standard::ValueType.isSuperTypeOf(prop.type) 					    	
-						if not propValue.isVoid() and not mustIgnoreType
+					    // need to ignore ValueType and EnumerationLiteral for performance sake 					    	
+						if not propValue.isVoid() 
 						then
 							
-							if propValue.getMetaClass.typeDefinition.asType(ClassDefinition).allSuperTypes.exists{ t |
-								if t.isInstanceOf(ParameterizedType) 
-								then
-									t.asType(ParameterizedType).typeDefinition.qualifiedName=="kermeta::standard::Collection"
-								else
-									false
-								end } 
+							if prop.upper.equals(1)
 							then
-						
+								if not propValue.isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
+									propValue.getViolatedConstraints.setConstraints.each{v|
+										stdio.writeln("    " + v.message)																				
+										contraintes.add(v)}
+								end							
+							else
 								var subObjInstances : kermeta::standard::Collection<Object>
 								subObjInstances ?= propValue
 								subObjInstances.each { aSubObjInstance |
@@ -109,12 +173,6 @@ aspect class Object
 																				contraintes.add(v)}
 									end 
 									}
-							else
-								if not propValue.isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
-									propValue.getViolatedConstraints.setConstraints.each{v|
-										stdio.writeln("    " + v.message)																				
-										contraintes.add(v)}
-								end
 							end
 						end
 					end
@@ -123,15 +181,7 @@ aspect class Object
 				
 			}
 			
-			// Checking invariants
-			cd.~inv.each{invariant |
-				do
-					checkInvariant(invariant)
-					rescue (e : ConstraintViolatedInv) 
-					    stdio.writeln("    " + e.message)
-						contraintes.add(e)
-				end
-			}
+			
 			
 		end
 	
@@ -198,10 +248,18 @@ aspect class Object
 				// extern call
 				@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariant(this, invariant)"
 				extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariant(self, invariant)
+			rescue (error : RuntimeError)
+				// encapsulate the error in a ConstraintViolatedInv
+				var e : ConstraintViolatedInv init ConstraintViolatedInv.new
+				e.constraintAppliedTo := self
+				e.message := "Invariant violated on " + self.toString + "runtime error (probably due to another failed constraint or an error in the code of the constraint)"
+				e.failedConstraint := invariant
+				e.nestedException := error
+				raise e
 			end	
 		end
 
 
 	end
-
 }
+
