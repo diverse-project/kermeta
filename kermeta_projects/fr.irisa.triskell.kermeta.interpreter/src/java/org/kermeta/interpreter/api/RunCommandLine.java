@@ -22,7 +22,7 @@ import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.core.helper.JarHelper;
 import org.kermeta.io.plugin.IOPlugin;
 
@@ -166,7 +166,7 @@ public class RunCommandLine {
 			if (it.hasNext())
 			{
 				File file = new File(it.next().toString());
-				URIConverterImpl.URI_MAP.putAll(URIMapUtil.readMapFile(file));
+				ExtensibleURIConverterImpl.URI_MAP.putAll(URIMapUtil.readMapFile(file));
 			    internalLog.debug ("\t" + file.getName());
 			}
 		}	    
@@ -177,8 +177,8 @@ public class RunCommandLine {
 			if (it.hasNext())
 			{
 				String platformMapping = it.next().toString();
-				URIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI(platformMapping));
-				URIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI(platformMapping));
+				ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI(platformMapping));
+				ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI(platformMapping));
 			    internalLog.debug ("\t" + platformMapping);
 			}
 		}
@@ -188,17 +188,17 @@ public class RunCommandLine {
 	    	URL jarURL = JarHelper.locateContainerJar(RunCommandLine.class);
 	    	if(jarURL != null && jarURL.toString().endsWith(".jar")){
 		    	String platformPluginLocation = "jar:" + jarURL.toExternalForm() + "!/";
-				URIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI(platformPluginLocation));
+		    	ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI(platformPluginLocation));
 				internalLog.debug ("\tplatform:/plugin/ -> " + platformPluginLocation);
 				File currentDir = new File (".");			     
 				try {
-					URIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI("file:/" + currentDir.getCanonicalPath()+"/"));
+					ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI("file:/" + currentDir.getCanonicalPath()+"/"));
 					internalLog.debug ("\tplatform:/resource/ -> " + "file:/" + currentDir.getCanonicalPath()+"/");
 				} catch (IOException e) {
 					internalLog.error("cannot set map for platform:/resource/", e );
 				}
 		    	String kconfLocation = "jar:" + jarURL.toExternalForm() + "!/instances/";
-				URIConverterImpl.URI_MAP.put(URI.createURI("kconf:/loader/"), URI.createURI(kconfLocation));
+		    	ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("kconf:/loader/"), URI.createURI(kconfLocation));
 				internalLog.debug ("\tkconf:/loader/ -> " + kconfLocation);
 	    	}
 	    	else{
