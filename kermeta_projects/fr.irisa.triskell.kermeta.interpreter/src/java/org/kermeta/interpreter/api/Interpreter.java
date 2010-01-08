@@ -360,6 +360,7 @@ public class Interpreter {
 	}
 	
 	public RuntimeObject launch() throws InitializationError {
+		long time = System.currentTimeMillis();
 		try {
 			if ( _kermetaUnit.isErroneous() )
 				throw new InitializationError(_kermetaUnit);			
@@ -377,6 +378,8 @@ public class Interpreter {
 		} finally {
 			releaseResources();
 		}
+		time = System.currentTimeMillis() - time;
+		InterpreterPlugin.internalLog.debug("    Execution time (ms)       : " + time);
 		return null;
 	}
 	
