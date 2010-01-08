@@ -133,15 +133,17 @@ public class FullMergeKmExporter {
 			if (it.hasNext())
 			{
 			    kermetaStandardURI = it.next().toString();	
-				System.out.println("\t" + kermetaStandardURI);		    
+				System.out.println("\t" + kermetaStandardURI);
+				ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/"), URI.createURI(kermetaStandardURI.replaceAll("framework.km", "")));
 			}
 		}
 	    else{
 	    	// use current jar framework
 	    	URL jarURL = JarHelper.locateContainerJar(this.getClass());
 	    	if(jarURL != null && jarURL.toString().endsWith(".jar")){
-	    		System.out.println(" option -K NOT seen. Using default : " + jarURL.toExternalForm());
-		    	kermetaStandardURI = "jar:" + jarURL.toExternalForm() + "!/src/kermeta/framework.km";
+	    		kermetaStandardURI = "jar:" + jarURL.toExternalForm() + "!/src/kermeta/framework.km";
+	    		System.out.println(" option -K NOT seen. Using default : " + kermetaStandardURI);
+	    		ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/"), URI.createURI(kermetaStandardURI.replaceAll("framework.km", "")));
 	    	}
 	    	else{
 	    		System.err.println("NOT able to set location of framework.km, you must either use the -K option or use the standalone version of this tool (must be in a jar)");
@@ -201,9 +203,6 @@ public class FullMergeKmExporter {
 					e.printStackTrace();
 					initialized = false;
 				}
-		    	String kconfLocation = "jar:" + jarURL.toExternalForm() + "!/instances/";
-		    	ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("kconf:/loader/"), URI.createURI(kconfLocation));
-		    	System.out.println ("\tkconf:/loader/ -> " + kconfLocation);
 	    	}
 	    	else{
 
