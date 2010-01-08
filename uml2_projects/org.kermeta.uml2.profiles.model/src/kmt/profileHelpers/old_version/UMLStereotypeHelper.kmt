@@ -1,0 +1,280 @@
+/* $Id:$ 
+ * Creation : July 6, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package uml;
+
+
+require kermeta
+require "http://www.eclipse.org/uml2/3.0.0/UML"
+
+/**
+ * Aspect adding navigation to abstractionStereotypes
+ */
+aspect class Abstraction
+{
+	/**
+	 * List of the stereotypes applied to this Action
+	 */
+	reference abstractionStereotypes : AbstractionStereotype[0..*]#base_Abstraction
+}
+
+/**
+ * Aspect adding navigation to actionStereotypes
+ */
+aspect class Action
+{
+	/**
+	 * List of the stereotypes applied to this Action
+	 */
+	reference actionStereotypes : ActionStereotype[0..*]#base_Action
+}
+
+/**
+ * Aspect adding navigation to activityPartitionStereotypes
+ */
+ aspect class ActivityPartition
+ {
+	/**
+	 * List of the stereotypes applied to this ActivityPartition
+	 */
+	reference activityPartitionStereotypes : ActivityPartitionStereotype[0..*]#base_ActivityPartition
+}
+
+/**
+ * Aspect adding navigation to classifierStereotypes
+ */
+aspect class Behavior
+{
+	/**
+	 * List of the stereotypes applied to this Behavior
+	 */
+	reference behaviorStereotypes : BehaviorStereotype[0..*]#base_Behavior
+}
+
+/**
+ * Aspect adding navigation to classifierStereotypes
+ */
+aspect class Classifier
+{
+	/**
+	 * List of the stereotypes applied to this Classifier
+	 */
+	reference classifierStereotypes : ClassifierStereotype[0..*]#base_Classifier
+}
+
+/**
+ * Aspect adding navigation to classStereotypes
+ */
+aspect class Class
+{
+	/**
+	 * List of the stereotypes applied to this Class
+	 */
+	reference classStereotypes : ClassStereotype[0..*]#base_Class
+}
+
+/**
+ * Aspect adding navigation to connectableElementStereotypes
+ */
+aspect class ConnectableElement
+{
+	/**
+	 * List of the stereotypes applied to this ConnectableElement
+	 */
+	reference connectableElementStereotypes : ConnectableElementStereotype[0..*]#base_ConnectableElement
+}
+
+/**
+ * Aspect adding navigation to connectableElementStereotypes
+ */
+aspect class Constraint
+{
+	/**
+	 * List of the stereotypes applied to this Constraint
+	 */
+	reference constraintStereotypes : ConstraintStereotype[0..*]#base_Constraint
+}
+
+/**
+ * Aspect adding navigation to namedElementStereotypes
+ */
+aspect class Message
+{
+	/**
+	 * List of the stereotypes applied to this Message
+	 */
+	reference messageStereotypes : MessageStereotype[0..*]#base_Message
+}
+
+/**
+ * Aspect adding navigation to namedElementStereotypes
+ */
+aspect class NamedElement
+{
+	/**
+	 * List of the stereotypes applied to this NamedElement
+	 */
+	reference namedElementStereotypes : NamedElementStereotype[0..*]#base_NamedElement
+}
+
+/**
+ * Aspect adding navigation to packageStereotypes
+ */
+aspect class Package
+{
+	/**
+	 * List of the stereotypes applied to this Package
+	 */
+	reference packageStereotypes : PackageStereotype[0..*]#base_Package
+}
+
+
+
+/**
+ * in order to be able to use the stereotype helper, the stereotypes must inherit of one of these classes
+ */ 
+package profile {
+	/**
+	 * Stereotype that can be applied on an Abstraction
+	 */
+	class AbstractionStereotype inherits StereotypeInstance {
+		/**
+		 * if != void, this stereotype is applied to this base_Abstraction
+		 */
+		reference base_Abstraction : uml::Abstraction#abstractionStereotypes
+	}
+	
+	/**
+	 * Stereotype that can be applied on an Action
+	 */
+	class ActionStereotype inherits StereotypeInstance {
+		/**
+		 * if != void, this stereotype is applied to this base_Action
+		 */
+		reference base_Action : uml::Action#actionStereotypes
+	}
+	
+	/**
+	 * Stereotype that can be applied on an ActivityPartition
+	 */
+	class ActivityPartitionStereotype inherits StereotypeInstance {
+		/**
+		 * if != void, this stereotype is applied to this base_ActivityPartition
+		 */
+		reference base_ActivityPartition : uml::ActivityPartition#activityPartitionStereotypes
+	}
+	
+	/**
+	 * Stereotype that can be applied on a Behavior
+	 */
+	class BehaviorStereotype inherits StereotypeInstance {
+		/**
+		 * if != void, this stereotype is applied to this base_Behavior
+		 */
+		reference base_Behavior : uml::Behavior#behaviorStereotypes
+	}
+	
+	/**
+	 * Stereotype that can be applied on a Classifier
+	 */
+	class ClassifierStereotype inherits StereotypeInstance {
+		/**
+		 * if != void, this stereotype is applied to this base_Classifier
+		 */
+		reference base_Classifier : uml::Classifier#classifierStereotypes
+	}
+	
+	/**
+	 * Stereotype that can be applied on a Class
+	 */
+	class ClassStereotype inherits StereotypeInstance {
+		/**
+		 * if != void, this stereotype is applied to this base_Class
+		 */
+		reference base_Class : uml::Class#classStereotypes
+	}
+	
+	/**
+	 * Stereotype that can be applied on a ConnectableElement
+	 */
+	class ConnectableElementStereotype inherits StereotypeInstance {
+		/**
+		 * if != void, this stereotype is applied to this base_ConnectableElement
+		 */
+		reference base_ConnectableElement : uml::ConnectableElement#connectableElementStereotypes
+	}
+	
+	/**
+	 * Stereotype that can be applied on a Constraint
+	 */
+	class ConstraintStereotype inherits StereotypeInstance {
+		/**
+		 * if != void, this stereotype is applied to this base_ConnectableElement
+		 */
+		reference base_Constraint : uml::Constraint#constraintStereotypes
+	}
+	
+	
+	/**
+	 * Stereotype that can be applied on a Message
+	 */
+	class MessageStereotype inherits StereotypeInstance {
+		/**
+		 * if != void, this stereotype is applied to this base_Message
+		 */
+		reference base_Message : uml::Message#messageStereotypes
+	}
+	
+	/**
+	 * Stereotype that can be applied on a NamedElement
+	 */
+	class NamedElementStereotype inherits StereotypeInstance{
+		/**
+		 * if != void, this stereotype is applied to this base_Classifier
+		 */
+		reference base_NamedElement : uml::NamedElement#namedElementStereotypes
+	}
+	
+	/**
+	 * Stereotype that can be applied on a Package
+	 */
+	class PackageStereotype inherits StereotypeInstance{
+		/**
+		 * if != void, this stereotype is applied to this base_Package
+		 */
+		reference base_Package : uml::Package#packageStereotypes
+	}
+	
+	/**
+	 * 
+	 */
+	abstract class StereotypeInstance {
+		/**
+		 * return the base_ value associated to the stereotype
+		 * return void if this not a sterotype
+		 */
+		operation getStereotypeBase() : uml::Element is do
+			result := void // default result value
+			var classDefinition : kermeta::language::structure::ClassDefinition 
+			classDefinition ?= self.getMetaClass.typeDefinition
+			classDefinition.allAttribute.select { o | 
+					if o.name.size >=5 then o.name.substring(0,5).equals("base_")
+					else 
+						false
+					end
+				}.each{att | 
+						var base_value : kermeta::standard::Object init self.get(att)
+						if not base_value.isVoid then
+							result ?= base_value
+						end
+					}		
+		end
+	}
+	
+}
