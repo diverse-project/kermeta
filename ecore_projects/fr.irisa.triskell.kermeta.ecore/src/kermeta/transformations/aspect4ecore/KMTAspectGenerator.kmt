@@ -34,7 +34,11 @@ class KMTAspectGenerator
 		
 		var model : Sequence <ecore::EPackage> init helper.loadEcoreModel(EMFRepository.new, inputFile)
 		var context : KMTAspectGeneratorContext 
-		context := KMTAspectGeneratorContext.new.initialize(baseLocation, classTemplate, filePrefix, filePostfix )
+		context := KMTAspectGeneratorContext.new.initialize(baseLocation, 
+															classTemplate, 
+															filePrefix, 
+															filePostfix,
+		 													inputFile )
 		model.each{p |
 			p.generateKMTAspect(context) 
 		}
@@ -69,15 +73,19 @@ class KMTAspectGeneratorContext
 	attribute packageQualifiednameKeyword : String
 	attribute ecoreNsURIKeyword : String
 	attribute ecoreFilenameKeyword : String
+	attribute inputEcoreFile : String
 	
 	operation initialize(	baseLocation : String,
 							classTemplate : String,
 							filePrefix : String,
-							filePostfix : String ) : KMTAspectGeneratorContext is do
+							filePostfix : String,
+						    inputEcoreFile : String 
+							) : KMTAspectGeneratorContext is do
 		self.baseLocation := baseLocation
 		self.classTemplate := classTemplate
 		self.filePrefix := filePrefix
 		self.filePostfix := filePostfix
+		self.inputEcoreFile := inputEcoreFile
 		self.classnameKeyword := "CLASSNAME"
 		self.packageQualifiednameKeyword := "PACKAGEQUALIFIEDNAME"
 		self.ecoreNsURIKeyword := "ECORENSURI"

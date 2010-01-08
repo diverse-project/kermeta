@@ -14,6 +14,8 @@ package ecore;
 
 require kermeta
 require "../../helpers/EcoreHelper.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/standard/StringUtils.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EPackageHelper.kmt"
 require "KMTAspectGenerator.kmt"
 
 using kermeta::standard
@@ -35,28 +37,27 @@ aspect class EClassifier
 	 */
 	operation generateKMTAspect(context : transformations::aspect4ecore::KMTAspectGeneratorContext) : Void is do 
 		
-		var buf : StringBuffer init StringBuffer.new
-		stdio.writeln("nb fragment = "+context.classTemplate.split(context.classnameKeyword).size.toString)
-		// TODO replace this code with the new indexedEach
-		/* context.classTemplate.split(context.classnameKeyword).indexedEach{fragment, indexcontext |
-			buf.append(fragment)
-			if indexcontext.isLast then 
-				buf.append(self.name)
-			end
-		} */
-		from var it : Iterator<String> init context.classTemplate.split(context.classnameKeyword).iterator
-		until it.isOff
-		loop
-			var fragment : String init it.next
-			buf.append(fragment)
-			if not it.isOff then
-				buf.append(self.name)
-			end
-		end
+		var fileContent : String
+		
+		// replace classnameKeyword
+		fileContent := context.classTemplate.replaceKeyword(context.classnameKeyword, self.name )
+		
+		// replace ecoreNsURIKeyword
+		fileContent := fileContent.replaceKeyword(context.ecoreNsURIKeyword, self.ePackage.getRootPackage.nsURI )
+		
+		// replace ecoreFilenameKeyword
+		fileContent := fileContent.replaceKeyword(context.ecoreFilenameKeyword, context.inputEcoreFile )
+		
+		// replace packageQualifiednameKeyword
+		fileContent := fileContent.replaceKeyword(context.packageQualifiednameKeyword, 
+								self.ePackage.getQualifiedName("::") )
+		
+		
+		
 		
 		var fileIO : kermeta::io::FileIO init kermeta::io::FileIO.new		
 		var fileName : String init context.baseLocation +"/"+ context.filePrefix + self.name + context.filePostfix + ".kmt"
 		stdio.writeln("Writing " + fileName +"...")
-		fileIO.writeTextFile(fileName, buf.toString )
+		fileIO.writeTextFile(fileName, fileContent )
 	end
 }
