@@ -1,0 +1,118 @@
+/* $Id:$ 
+ * Creation : December 23, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "transformations::ecoreprofileaspectgenerator::EcoreProfileAspectGenerator"
+@mainOperation "main"
+
+
+package transformations::ecoreprofileaspectgenerator;
+
+
+require kermeta
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "EcoreProfileAspectGenerator_ecoreAspect.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::utils
+
+class EcoreProfileAspectGenerator
+{
+	operation main(	inputFile : String, 
+					baseLocation : String,
+					classTemplate : String,
+					filePrefix : String,
+					filePostfix : String) : Void is do 
+		var helper : EcoreHelpers::EcoreHelper
+	
+		helper := EcoreHelpers::EcoreHelper.new
+		helper.initialize()
+		
+		var model : Sequence <ecore::EPackage> init helper.loadEcoreModel(EMFRepository.new, inputFile)
+		var context :  EcoreProfileAspectGeneratorContext 
+		context := EcoreProfileAspectGeneratorContext.new.initialize(baseLocation, 
+															classTemplate, 
+															classTemplate,
+															filePrefix, 
+															filePostfix,
+		 													inputFile )
+		model.each{p |
+			p.generateEcoreProfileAspect(context) 
+		}
+		var fileIO : kermeta::io::FileIO init kermeta::io::FileIO.new
+		var allAspectsfileName : String init 
+				context.baseLocation +"/"+ context.filePrefix + model.one.name +"StereotypesHelper"+ context.filePostfix + ".kmt"
+			
+		stdio.writeln("Writing " + allAspectsfileName +"...")
+		var buf : StringBuffer init StringBuffer.new
+		buf.append(context.stereotypeclassHeaderTemplate)
+		buf.append("package "+model.one.name+";\n\n")
+	    buf.append("require kermeta\n")
+	    context.aspectFiles.each{ file |
+	    	buf.append("require \"" + file+"\"\n")
+	    }
+		fileIO.writeTextFile(allAspectsfileName,  buf.toString)
+			
+	end
+	
+	operation defaultMain(	inputFile : String, baseLocation : String) : Void is do
+	    var stereotypeclassHeaderTemplate : StringBuffer init StringBuffer.new
+	    stereotypeclassHeaderTemplate.append("/* $Id:$ \n")
+	    stereotypeclassHeaderTemplate.append(" * Licence  : EPL \n")
+		stereotypeclassHeaderTemplate.append(" * Copyright: \n")
+ 		stereotypeclassHeaderTemplate.append(" * Authors  :  \n")
+		stereotypeclassHeaderTemplate.append(" *             \n")
+	    stereotypeclassHeaderTemplate.append(" */\n")
+	    /* stereotypeclassHeaderTemplate.append("require kermeta\n")
+	    stereotypeclassHeaderTemplate.append("require \"ECORENSURI\"\n")
+	    stereotypeclassHeaderTemplate.append("// require \"ECOREFILENAME\"\n")
+	    stereotypeclassHeaderTemplate.append("\n")
+	    stereotypeclassHeaderTemplate.append("using kermeta::standard\n")
+	    stereotypeclassHeaderTemplate.append("\n")
+	    stereotypeclassHeaderTemplate.append("aspect class CLASSNAME {\n")
+	    stereotypeclassHeaderTemplate.append("   operation generate() : String is do\n")
+	    stereotypeclassHeaderTemplate.append("      result:=\"\"\n")
+	    stereotypeclassHeaderTemplate.append("   end\n")
+	    stereotypeclassHeaderTemplate.append("}") */
+		main(inputFile, baseLocation, stereotypeclassHeaderTemplate.toString,"","")
+	end
+}
+
+class  EcoreProfileAspectGeneratorContext
+{
+	attribute baseLocation : String
+	attribute stereotypeclassHeaderTemplate : String
+	attribute umlclassTemplate : String
+	attribute filePrefix : String
+	attribute filePostfix : String
+	attribute classnameKeyword : String
+	attribute packageQualifiednameKeyword : String
+	attribute ecoreNsURIKeyword : String
+	attribute ecoreFilenameKeyword : String
+	attribute inputEcoreFile : String
+	attribute aspectFiles : String[0..*]
+	
+	operation initialize(	baseLocation : String,
+							stereotypeclassHeaderTemplate : String,
+							umlclassTemplate : String,
+							filePrefix : String,
+							filePostfix : String,
+						    inputEcoreFile : String 
+							) :  EcoreProfileAspectGeneratorContext is do
+		self.baseLocation := baseLocation
+		self.stereotypeclassHeaderTemplate := stereotypeclassHeaderTemplate
+		self.umlclassTemplate := umlclassTemplate
+		self.filePrefix := filePrefix
+		self.filePostfix := filePostfix
+		self.inputEcoreFile := inputEcoreFile
+		self.classnameKeyword := "CLASSNAME"
+		self.packageQualifiednameKeyword := "PACKAGEQUALIFIEDNAME"
+		self.ecoreNsURIKeyword := "ECORENSURI"
+		self.ecoreFilenameKeyword := "ECOREFILENAME"
+		result := self
+	end
+}

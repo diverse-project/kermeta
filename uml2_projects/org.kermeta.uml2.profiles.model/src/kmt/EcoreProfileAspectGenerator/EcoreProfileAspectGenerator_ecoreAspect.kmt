@@ -1,0 +1,125 @@
+/* $Id:$ 
+ * Creation : December 23, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+package ecore;
+
+
+require kermeta
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/standard/StringUtils.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EPackageHelper.kmt"
+require "EcoreProfileAspectGenerator.kmt"
+
+using kermeta::standard
+using kermeta::utils
+
+
+aspect class EModelElement {
+	operation generateEcoreProfileAspect(context : transformations::ecoreprofileaspectgenerator::EcoreProfileAspectGeneratorContext) : Void is do		
+	end
+}
+aspect class EPackage
+{
+	method generateEcoreProfileAspect(context : transformations::ecoreprofileaspectgenerator::EcoreProfileAspectGeneratorContext) : Void is do
+		// navigate through  the package hierarchy
+		self.eSubpackages.each{ p | p.generateEcoreProfileAspect(context)}
+		self.eClassifiers.each{ c | c.generateEcoreProfileAspect(context)}
+	end
+}
+
+aspect class EClass
+{
+	/**
+	 * Generate the KMT file for the given class
+	 */
+	method generateEcoreProfileAspect(context : transformations::ecoreprofileaspectgenerator::EcoreProfileAspectGeneratorContext) : Void is do
+	    var basesEReferences : Sequence<EReference> init getBaseEReferences  
+		// is this class a stereotype that need code generation
+		if not basesEReferences.isEmpty then
+			// generate file for Stereotype Aspect
+			var fileIO : kermeta::io::FileIO init kermeta::io::FileIO.new
+			var staspectfileName : String init 
+				context.baseLocation +"/"+self.ePackage.getRootPackage.name+"StereotypesHelperAspects/"+ context.filePrefix + self.name +"_StereotypeAspect"+ context.filePostfix + ".kmt"
+			var umlaspectfileName : String init 
+				context.baseLocation +"/"+self.ePackage.getRootPackage.name+"StereotypesHelperAspects/"+ context.filePrefix + self.name +"_UMLAspect"+ context.filePostfix + ".kmt"
+			
+			stdio.writeln("Writing " + staspectfileName +"...")
+			fileIO.writeTextFile(staspectfileName, generatesContentForStereotypeAspectFile(context, umlaspectfileName) )
+			context.aspectFiles.add(staspectfileName)
+		
+			// generate file for UML aspect for stereotype
+			stdio.writeln("Writing " + umlaspectfileName +"...")
+			fileIO.writeTextFile(umlaspectfileName, generatesContentForUMLAspectFile(context, staspectfileName) )
+			context.aspectFiles.add(umlaspectfileName)
+		end
+		
+	end
+	
+	operation generatesContentForStereotypeAspectFile(context : transformations::ecoreprofileaspectgenerator::EcoreProfileAspectGeneratorContext,
+											umlaspectfileName : String) : String is do
+		var buf : StringBuffer init StringBuffer.new 
+		buf.append(context.stereotypeclassHeaderTemplate)
+		buf.append("package "+ self.ePackage.getQualifiedName("::") +";\n\n")
+	    buf.append("require kermeta\n")
+	    buf.append("require \"" + umlaspectfileName+"\"\n")
+	    buf.append("require \"" + context.inputEcoreFile+"\"\n")
+	    buf.append("//require \"" + self.ePackage.getRootPackage.nsURI+"\"\n")
+	    buf.append("\n")
+	    buf.append("using kermeta::standard\n")
+	    buf.append("aspect class "+self.name+"{\n")
+	    getBaseEReferences.each{ref |
+	    	buf.append("   /**\n")
+			buf.append("    * if != void, this stereotype is applied to this base_"+ref.eType.name+"\n")
+			buf.append("    */\n")
+			buf.append("    reference base_"+ref.eType.name+" : uml::"+ref.eType.name+"#stereotypes_"+self.name+"\n")
+			//reference base_Action : uml::Action#gaAcqStepStereotypes
+		}
+	    buf.append("}\n")
+		result := buf.toString
+	end
+	operation generatesContentForUMLAspectFile(context : transformations::ecoreprofileaspectgenerator::EcoreProfileAspectGeneratorContext,
+												staspectfileName : String) : String is do
+		var buf : StringBuffer init StringBuffer.new 
+		buf.append(context.stereotypeclassHeaderTemplate)
+		buf.append("package uml;\n\n")
+	    buf.append("require kermeta\n")
+	    buf.append("require \"" + staspectfileName+"\"\n")
+	    buf.append("require \"platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/profileHelpers/UMLStereotypeHelper.kmt\"\n")
+	    buf.append("require \"http://www.eclipse.org/uml2/3.0.0/UML\" \n" )
+	    buf.append("\n")
+	    buf.append("using kermeta::standard\n")
+	    getBaseEReferences.each{ref |
+	    	buf.append("aspect class "+ref.eType.name+"{\n")
+	    	buf.append("   /**\n")
+			buf.append("    * List of the "+self.name+" stereotypes applied to this "+ref.eType.name+"\n")
+			buf.append("    * this is an internal back link to the Stereotypes used by the operation getStereotypesByOppositeAspect()\n")
+			buf.append("    */\n")
+			buf.append("    reference stereotypes_"+self.name+" : "+
+								self.ePackage.getQualifiedName("::")+"::"+self.name+"[0..*]#base_"+ref.eType.name+"\n")
+			//reference abstractionStereotypes : AbstractionStereotype[0..*]#base_Abstraction
+	    	buf.append("}\n")
+		}
+		result := buf.toString
+	end
+	/**
+	 * returns the EReferences that represent a link to UML
+	 */
+	operation getBaseEReferences() : Sequence<EReference> is do
+		result := eReferences.select{ref |
+			if not ref.eType.isVoid then 
+				if ref.name.equals("base_" +ref.eType.name) then 
+					true
+				else
+					false
+				end
+			else
+				false
+			end 
+		}
+	end
+}
