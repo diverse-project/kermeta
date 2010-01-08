@@ -46,6 +46,7 @@ public class RuntimeMemory {
 	public RuntimeObject stdioINSTANCE;
 	
 	protected KermetaUnit unit;
+    protected long time = System.currentTimeMillis();
 
 	private RuntimeMemoryLoader memoryLoader;
 	
@@ -73,6 +74,8 @@ public class RuntimeMemory {
     protected void finalize() throws Throwable {
         super.finalize();
         InterpreterPlugin.internalLog.debug("FINALIZE RuntimeMemory ...");
+        time = System.currentTimeMillis() - time;
+		InterpreterPlugin.internalLog.debug("    RuntimeMerory up time (ms) : " + time);
     }
     /**
      * remove as much ref as possible for helping garbage collector
