@@ -796,7 +796,7 @@ public class EMF2Runtime {
 		
 		// get the opposite RuntimeObject
 		RuntimeObject rOppositeObject =  rObject.getProperties().get(kprop.getName());
-		
+		if (rOppositeObject==  null ) return;
 		// get the runtimeobject for the opposite property
 		RuntimeObject rOppositeProperty =  unit.getRuntimeMemory().getRuntimeObjectForFObject(kprop.getOpposite());
 		
