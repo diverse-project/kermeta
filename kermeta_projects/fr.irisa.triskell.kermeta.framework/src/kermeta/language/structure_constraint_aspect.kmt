@@ -102,7 +102,7 @@ aspect class Object
 	
 		// init result
 		var contraintes : ConstraintsDiagnostic init ConstraintsDiagnostic.new.initialize
-		stdio.writeln("        " + self.toString +".getViolatedConstraints()")
+		// stdio.writeln("        " + self.toString +".getViolatedConstraints()")
 		var cd : ClassDefinition 
 		cd := self.getMetaClass().classDefinition
 		
