@@ -21,19 +21,19 @@ using kermeta::standard
 class Math
 {
 	operation sin(a : Real) : Real is do 
-		result ?= extern org::kermeta::language::mdk::math::Math.sin(a)
+		result ?= extern org::kermeta::language::mdk::externs::math::Math.sin(a)
 	end
 	operation cos(a : Real) : Real is do 
-		result ?= extern org::kermeta::language::mdk::math::Math.cos(a)
+		result ?= extern org::kermeta::language::mdk::externs::math::Math.cos(a)
 	end
 	operation pi() : Real is do
-		result ?= extern org::kermeta::language::mdk::math::Math.pi(self)
+		result ?= extern org::kermeta::language::mdk::externs::math::Math.pi(self)
 	end
 	
 	operation toDegrees(a : Real) : Real is do 
-		result ?= extern org::kermeta::language::mdk::math::Math.toDegrees(a)
+		result ?= extern org::kermeta::language::mdk::externs::math::Math.toDegrees(a)
 	end
 	operation toRadians(a : Real) : Real is do 
-		result ?= extern org::kermeta::language::mdk::math::Math.toRadians(a)
+		result ?= extern org::kermeta::language::mdk::externs::math::Math.toRadians(a)
 	end
 }
