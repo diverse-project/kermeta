@@ -15,6 +15,7 @@ package ecore;
 require kermeta
 require "../../helpers/EcoreHelper.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/standard/StringUtils.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/utils/Time.kmt"
 require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EPackageHelper.kmt"
 require "KMTAspectGenerator.kmt"
 
@@ -52,12 +53,15 @@ aspect class EClassifier
 		fileContent := fileContent.replaceKeyword(context.packageQualifiednameKeyword, 
 								self.ePackage.getQualifiedName("::") )
 		
+		// replace dateKeyword
+		fileContent := fileContent.replaceKeyword(context.dateKeyword,  Time.new.getCurrentDateTimeAsString("yyyy-MM-dd"))
 		
 		
 		
 		var fileIO : kermeta::io::FileIO init kermeta::io::FileIO.new		
-		var fileName : String init context.baseLocation +"/"+ context.filePrefix + self.name + context.filePostfix + ".kmt"
+		var fileName : String init context.baseLocation +"/"+self.ePackage.getQualifiedName("/")+"/"+ context.filePrefix + self.name + context.filePostfix + ".kmt"
 		stdio.writeln("Writing " + fileName +"...")
 		fileIO.writeTextFile(fileName, fileContent )
+		context.aspectFiles.add(fileName)
 	end
 }

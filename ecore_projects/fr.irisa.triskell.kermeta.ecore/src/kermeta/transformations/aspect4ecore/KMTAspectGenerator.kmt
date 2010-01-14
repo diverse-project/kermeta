@@ -27,6 +27,7 @@ class KMTAspectGenerator
 					classTemplate : String,
 					filePrefix : String,
 					filePostfix : String) : Void is do 
+		stdio.writeln("cretaing aspect for "+inputFile)
 		var helper : EcoreHelpers::EcoreHelper
 	
 		helper := EcoreHelpers::EcoreHelper.new
@@ -42,21 +43,50 @@ class KMTAspectGenerator
 		model.each{p |
 			p.generateKMTAspect(context) 
 		}
+		
+		var fileIO : kermeta::io::FileIO init kermeta::io::FileIO.new
+		var allAspectsfileName : String init 
+				context.baseLocation +"/"+ context.filePrefix + model.one.name +"Aspects"+ context.filePostfix + ".kmt"
+		
+		var buf : StringBuffer init StringBuffer.new
+		buf.append("/* $Id:$\n") 
+		buf.append(" * Creation : "+Time.new.getCurrentDateTimeAsString("yyyy-MM-dd")+"\n") 
+		buf.append(" * Licence  : EPL \n") 
+		buf.append(" * Copyright: IRISA/INRIA\n") 
+		buf.append(" * Authors  : \n") 
+		buf.append(" *            \n") 
+		buf.append(" */\n")
+		buf.append("package "+model.one.name+";\n\n")
+	    buf.append("require kermeta\n")
+	    context.aspectFiles.each{ file |
+	    	buf.append("require \"" + file+"\"\n")
+	    }
+		fileIO.writeTextFile(allAspectsfileName,  buf.toString)
 	end
 	
 	operation defaultMain(	inputFile : String, baseLocation : String) : Void is do
 	    var classTemplate : StringBuffer init StringBuffer.new
+	    classTemplate.append("/* $Id:$\n") 
+		classTemplate.append(" * Creation : TODAYDATE\n") 
+		classTemplate.append(" * Licence  : EPL \n") 
+		classTemplate.append(" * Copyright: IRISA/INRIA\n") 
+		classTemplate.append(" * Authors  : \n") 
+		classTemplate.append(" *            \n") 
+		classTemplate.append(" */\n")
 	    classTemplate.append("package PACKAGEQUALIFIEDNAME;\n")
 	    classTemplate.append("\n")
 	    classTemplate.append("require kermeta\n")
-	    classTemplate.append("require \"ECORENSURI\"\n")
+	    classTemplate.append("// require \"ECORENSURI\"\n")
 	    classTemplate.append("// require \"ECOREFILENAME\"\n")
+	    classTemplate.append("require \"platform:/lookup/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/ScalaCompilerContext.kmt\"\n")
 	    classTemplate.append("\n")
 	    classTemplate.append("using kermeta::standard\n")
+	    classTemplate.append("using kermeta::utils\n")
+	    classTemplate.append("using scalacompiler\n")
 	    classTemplate.append("\n")
 	    classTemplate.append("aspect class CLASSNAME {\n")
-	    classTemplate.append("   operation generate() : String is do\n")
-	    classTemplate.append("      result:=\"\"\n")
+	    classTemplate.append("   operation generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)  is do\n")
+	    classTemplate.append("      // TO DO\n")
 	    classTemplate.append("   end\n")
 	    classTemplate.append("}")
 		main(inputFile, baseLocation, classTemplate.toString,"","")
@@ -73,7 +103,12 @@ class KMTAspectGeneratorContext
 	attribute packageQualifiednameKeyword : String
 	attribute ecoreNsURIKeyword : String
 	attribute ecoreFilenameKeyword : String
+	attribute dateKeyword : String
 	attribute inputEcoreFile : String
+	/**
+	 * List of the generated aspect files
+	 */
+	attribute aspectFiles : String[0..*]
 	
 	operation initialize(	baseLocation : String,
 							classTemplate : String,
@@ -88,6 +123,7 @@ class KMTAspectGeneratorContext
 		self.inputEcoreFile := inputEcoreFile
 		self.classnameKeyword := "CLASSNAME"
 		self.packageQualifiednameKeyword := "PACKAGEQUALIFIEDNAME"
+		self.dateKeyword := "TODAYDATE"
 		self.ecoreNsURIKeyword := "ECORENSURI"
 		self.ecoreFilenameKeyword := "ECOREFILENAME"
 		result := self
