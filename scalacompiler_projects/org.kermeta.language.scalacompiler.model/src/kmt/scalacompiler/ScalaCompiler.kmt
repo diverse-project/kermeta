@@ -1,0 +1,22 @@
+/* $Id:$ 
+ * Creation : January 14, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "scalacompiler::ScalaCompiler"
+@mainOperation "main"
+
+
+package scalacompiler;
+
+
+require kermeta
+require "kermetaAspects.kmt"
+class ScalaCompiler
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}
