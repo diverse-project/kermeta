@@ -15,7 +15,7 @@
 	</target>
 	
 	<target name="compile" depends="">	
-		<ant antfile="get_kermeta_standalone_build.xml" target="all"></ant>
+		<ant antfile="build_scripts/get_kermeta_standalone_build.xml" target="all"></ant>
 <!-- <mkdir dir="${eclipse.workspace.dir}"/>
 		<java jar="${equinox.jar}"
 		           fork="true"
