@@ -19,11 +19,11 @@
 	<path id="interpreter.class.path">
 			
 			<!-- <pathelement location="${env.WORKSPACE}/fr.irisa.triskel.kermeta.standalone/dist/all_in_one_jar/kermeta_standalone_full.jar" /> -->
-			<fileset dir="${env.WORKSPACE}/fr.irisa.triskel.kermeta.standalone/dist/no_thirdparty_in_main_jar">
+			<fileset dir="./fr.irisa.triskel.kermeta.standalone/dist/no_thirdparty_in_main_jar">
 				<include name="**/*.jar" />
 				<exclude name="**/junit.jar"/> <!-- need to remove junit3 -->
 			</fileset>
-			<fileset dir="${env.WORKSPACE}/lib">
+			<fileset dir="./lib">
 				<include name="**/*.jar" />				
 			</fileset> 
 		</path>
