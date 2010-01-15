@@ -13,28 +13,31 @@
 	
 	<property name="src" location="${env.WORKSPACE}/plugins/org.kermeta.language.scalacompiler.test/src/main/java"/>
 	<property name="test.src" location="${env.WORKSPACE}/plugins/org.kermeta.language.scalacompiler.test/src/test/java"/>
-	
+	<property name="report.dir" location="${env.WORKSPACE}/reports" />
+		
 	
 	<path id="interpreter.class.path">
 			
-			<pathelement location="${env.WORKSPACE}/fr.irisa.triskel.kermeta.standalone/dist/all_in_one_jar/kermeta_standalone_full.jar" />
-		    <fileset dir="${env.WORKSPACE}/lib">
+			<!-- <pathelement location="${env.WORKSPACE}/fr.irisa.triskel.kermeta.standalone/dist/all_in_one_jar/kermeta_standalone_full.jar" /> -->
+			<fileset dir="${env.WORKSPACE}/fr.irisa.triskel.kermeta.standalone/dist/no_thirdparty_in_main_jar">
 				<include name="**/*.jar" />
+				<exclude name="**/junit.jar"/> <!-- need to remove junit3 -->
+			</fileset>
+			<fileset dir="${env.WORKSPACE}/lib">
+				<include name="**/*.jar" />				
 			</fileset> 
 		</path>
 	
 	<target name="all">
-		<antcall target="compile_java"></antcall>
+		<antcall target="test"></antcall>
 	</target>
 	
 	<target name="get_kermeta_standalone" depends="">	
 		<ant antfile="build_scripts/get_kermeta_standalone_build.xml" target="all"></ant>	
 	</target>
 	
-	<target name="compile_java" depends="get_kermeta_standalone">
+	<target name="compile_java" depends="get_kermeta_standalone"> 
 		<mkdir dir="${build.bin}" />
-		<echo>${eclipse.home}</echo>
-		<echo>${kermeta.interpreter.jar}</echo>
 		<!-- <javac srcdir="${src}:${test.src}" destdir="${build.bin}" debug="true"> -->
 		<javac srcdir="${test.src}" destdir="${build.bin}" debug="true"> 
 			<classpath>
@@ -43,4 +46,35 @@
 			</classpath>
 		</javac>
 	</target>
+	<target name="test" description="run compiler tests" depends="compile_java"> 
+			<mkdir dir="${report.dir}" />
+			<mkdir dir="${report.dir}/html" />
+			
+			<junit printsummary="yes" haltonfailure="no" showoutput="yes" fork="yes">
+				<jvmarg value="-Xms40m" />
+				<jvmarg value="-Xmx512m" />
+				<!--<classpath location="${instrumented.dir}" />-->
+				<classpath>
+					<pathelement location="${build.bin}" />
+					<path refid="interpreter.class.path" /> 
+				</classpath>
+				
+
+				<formatter type="plain" />
+				<test name="org.kermeta.language.scalacompiler.test.checktrace.interpreted.TestInterpretedScalaCompilerTraceExecution" haltonfailure="no" todir="${report.dir}" outfile="TEST-interpreter-result">
+					<formatter type="xml" />
+				</test>
+				<!-- <test name="kermeta_interpreter.emf_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-emf-result">
+					<formatter type="xml" /> 
+				</test> this test is run separately -->
+				
+			</junit>			
+			<echo>Generate intermediate report</echo>
+			<junitreport todir="${report.dir}">
+				<fileset dir="${report.dir}">
+					<include name="TEST-*.xml" />
+				</fileset>
+				<report format="frames" todir="${report.dir}/html" />
+			</junitreport>
+		</target>
 </project>
