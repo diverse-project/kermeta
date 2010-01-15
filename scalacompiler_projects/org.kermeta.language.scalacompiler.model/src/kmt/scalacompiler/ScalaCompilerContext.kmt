@@ -13,7 +13,7 @@ package scalacompiler;
 require kermeta
 class ScalaCompilerContext
 {
-	operation main() : Void is do 
-		// TODO: implement 'main' operation
+	operation initialize() : ScalaCompilerContext is do 		
+		result := self
 	end
 }

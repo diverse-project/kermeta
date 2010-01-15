@@ -16,10 +16,28 @@ require kermeta
 require "kermetaAspects.kmt"
 
 using kermeta::standard
+using kermeta::persistence
+using kermeta::language::structure
+using kermeta::utils
 
+/**
+ * Scala compiler, this class takes a km model and generates the scala code that will work on top of an EMF platform
+ */
 class ScalaCompiler
 {
-	operation compile(inputKMFile : String) : Void is do 
+	operation compile(inputKMFile : String, outputLocation : String) : Void is do 
 		stdio.writeln("Compiling to Scala " + inputKMFile +"...")
+		var context : ScalaCompilerContext init ScalaCompilerContext.new.initialize()
+		var modelingUnits :  Sequence<ModelingUnit> init loadModel(inputKMFile)		
+		modelingUnits.each{ modelingUnit |
+			modelingUnit.generateScala(context, StringBuffer.new)
+		}
+		stdio.writeln("Done")
+	end
+	operation loadModel(inputKMFile : String) : Sequence<ModelingUnit> is do
+		var repository : Repository init EMFRepository.new
+		var resource : Resource init repository.getResource(inputKMFile)
+		result := Sequence<ModelingUnit>.new
+		resource.each{ modelingUnit | result.add(modelingUnit.asType(ModelingUnit))}
 	end
 }
