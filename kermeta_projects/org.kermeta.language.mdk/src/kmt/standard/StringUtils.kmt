@@ -78,5 +78,25 @@ aspect class String
 		end
 	end
 	
+	/**
+	 * Creates a new String by finding and replacing all occurences of the given keyword in the string	 
+	 */
+	operation replaceKeyword(keyword : String, replacement : String) : String is do
+		var buf : StringBuffer init StringBuffer.new
+		if self.startsWith(keyword) then 
+			buf.append(replacement)
+		end
+		self.split(keyword).indexedEach{fragment, indexcontext |
+			buf.append(fragment)
+			if not indexcontext.isLast then 
+				buf.append(replacement)
+			end
+		}
+		if self.endsWith(keyword) then 
+			buf.append(replacement)
+		end 
+		result := buf.toString
+	end
+	
 
 }
