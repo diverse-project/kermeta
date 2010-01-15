@@ -30,13 +30,28 @@ aspect class EPackage
 		self.eClassifiers.each{ c | c.generateKMTAspect(context)}
 	end
 }
-
-aspect class EClassifier
+aspect class EClassifier {
+	/**
+	 * Generate the KMT file for the given classifier
+	 */
+	operation generateKMTAspect(context : transformations::aspect4ecore::KMTAspectGeneratorContext) : Void is do
+		// Do nothing on EClassifier 
+	end
+}
+aspect class EDataType {
+	/**
+	 * Generate the KMT file for the given classifier
+	 */
+	method generateKMTAspect(context : transformations::aspect4ecore::KMTAspectGeneratorContext) : Void is do
+		// Do nothing on EDataType 
+	end
+}
+aspect class EClass
 {
 	/**
 	 * Generate the KMT file for the given classifier
 	 */
-	operation generateKMTAspect(context : transformations::aspect4ecore::KMTAspectGeneratorContext) : Void is do 
+	method generateKMTAspect(context : transformations::aspect4ecore::KMTAspectGeneratorContext) : Void is do 
 		
 		var fileContent : String
 		
@@ -56,12 +71,59 @@ aspect class EClassifier
 		// replace dateKeyword
 		fileContent := fileContent.replaceKeyword(context.dateKeyword,  Time.new.getCurrentDateTimeAsString("yyyy-MM-dd"))
 		
+		// replace additionalRequireKeyword		
+		var additionalRequire : StringBuffer init StringBuffer.new
+		self.eSuperTypes.each{superClass |
+			additionalRequire.append("require \"")
+			additionalRequire.append(superClass.getAspectFileName(context))
+			additionalRequire.append("\"\n") 
+		}
+		fileContent := fileContent.replaceKeyword(context.additionalRequireKeyword,  additionalRequire.toString)
+		
+		// replace additionalRequireKeyword and additionalInherits
+		var additionalInherits : StringBuffer init StringBuffer.new
+		self.eSuperTypes.indexedEach{superClass, eachContext |
+			if eachContext.isFirst then
+				additionalInherits.append("inherits ")
+			end
+			if superClass.ePackage != ePackage then 
+				additionalInherits.append(superClass.ePackage.getQualifiedName("::") + "::")
+			end
+			additionalInherits.append(superClass.name)
+			if not eachContext.isLast then
+				additionalInherits.append(", ") 
+			end
+		}
+		fileContent := fileContent.replaceKeyword(context.additionalInheritsKeyword,  additionalInherits.toString)
+		
+		// replace operationOrMethodKeyword
+		var operationOrMethodString : String 
+		if self.eSuperTypes.isEmpty() then
+			operationOrMethodString := "operation"
+		else
+			operationOrMethodString := "method"
+		end 
+		fileContent := fileContent.replaceKeyword(context.operationOrMethodKeyword,  operationOrMethodString)
+		
+		// replace additionalFromKeyword
+		var additionalFromString : String 
+		if self.eSuperTypes.size > 1 then
+			additionalFromString := "\n     from " +  self.eSuperTypes.one.ePackage.getQualifiedName("::") + "::" + self.eSuperTypes.one.name + "\n   "
+		else
+			additionalFromString := ""
+		end 
+		fileContent := fileContent.replaceKeyword(context.additionalFromKeyword,  additionalFromString)
+		
 		
 		
 		var fileIO : kermeta::io::FileIO init kermeta::io::FileIO.new		
-		var fileName : String init context.baseLocation +"/"+self.ePackage.getQualifiedName("/")+"/"+ context.filePrefix + self.name + context.filePostfix + ".kmt"
+		var fileName : String init getAspectFileName(context)
 		stdio.writeln("Writing " + fileName +"...")
 		fileIO.writeTextFile(fileName, fileContent )
 		context.aspectFiles.add(fileName)
+	end
+	
+	operation getAspectFileName(context : transformations::aspect4ecore::KMTAspectGeneratorContext) : String is do
+		result := context.baseLocation +"/"+self.ePackage.getQualifiedName("/")+"/"+ context.filePrefix + self.name + context.filePostfix + ".kmt"		
 	end
 }

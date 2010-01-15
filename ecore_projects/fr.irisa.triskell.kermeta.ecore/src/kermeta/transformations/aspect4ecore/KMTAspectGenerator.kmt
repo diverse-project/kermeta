@@ -20,7 +20,7 @@ using kermeta::standard
 using kermeta::persistence
 using kermeta::utils
 
-class KMTAspectGenerator
+class KMTAspectGenerator 
 {
 	operation main(	inputFile : String, 
 					baseLocation : String,
@@ -79,13 +79,17 @@ class KMTAspectGenerator
 	    classTemplate.append("// require \"ECORENSURI\"\n")
 	    classTemplate.append("// require \"ECOREFILENAME\"\n")
 	    classTemplate.append("require \"platform:/lookup/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/ScalaCompilerContext.kmt\"\n")
+	    classTemplate.append("ADDITIONALREQUIRE\n")
 	    classTemplate.append("\n")
 	    classTemplate.append("using kermeta::standard\n")
 	    classTemplate.append("using kermeta::utils\n")
 	    classTemplate.append("using scalacompiler\n")
 	    classTemplate.append("\n")
-	    classTemplate.append("aspect class CLASSNAME {\n")
-	    classTemplate.append("   operation generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)  is do\n")
+	    classTemplate.append("aspect class CLASSNAME ADDITIONALINHERITS{\n")
+	    classTemplate.append("   /**\n")
+	    classTemplate.append("    * Generate Scala code\n")
+	    classTemplate.append("    */\n")
+	    classTemplate.append("   OPERATIONORMETHOD generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer) ADDITIONALFROM  is do\n")
 	    classTemplate.append("      // TO DO\n")
 	    classTemplate.append("   end\n")
 	    classTemplate.append("}")
@@ -104,6 +108,10 @@ class KMTAspectGeneratorContext
 	attribute ecoreNsURIKeyword : String
 	attribute ecoreFilenameKeyword : String
 	attribute dateKeyword : String
+	attribute operationOrMethodKeyword : String
+	attribute additionalRequireKeyword : String
+	attribute additionalInheritsKeyword : String
+	attribute additionalFromKeyword : String
 	attribute inputEcoreFile : String
 	/**
 	 * List of the generated aspect files
@@ -126,6 +134,10 @@ class KMTAspectGeneratorContext
 		self.dateKeyword := "TODAYDATE"
 		self.ecoreNsURIKeyword := "ECORENSURI"
 		self.ecoreFilenameKeyword := "ECOREFILENAME"
+		self.operationOrMethodKeyword := "OPERATIONORMETHOD"
+		self.additionalRequireKeyword := "ADDITIONALREQUIRE"
+		self.additionalInheritsKeyword := "ADDITIONALINHERITS"
+		self.additionalFromKeyword := "ADDITIONALFROM"
 		result := self
 	end
 }
