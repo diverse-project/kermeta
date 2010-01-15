@@ -1,4 +1,4 @@
-<project name="compile_antlr2" default="compile">
+<project name="compile_antlr2" default="all">
 	<!-- configuration properties -->		
 	<!-- project configuration -->
 	<property environment="env"/>
