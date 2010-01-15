@@ -20,8 +20,8 @@
 		description="Get a  standaolone version of Kermeta">
 		<!-- TODO in the future get the lastest succesful build of the standalone kermeta -->
 	    <!-- current hack : get a copy from the disk -->	    
-	    <!-- <untar compression="gzip" src="/local/tool_cache/kermeta_standalone/standalone.tgz" dest="${kermeta.standalone.dir}"/> -->
-    	<untar compression="gzip" src="${kermeta.standalone.file}" dest="${kermeta.standalone.dir}"/>
+	    <untar compression="gzip" src="/local/tool_cache/kermeta_standalone/standalone.tgz" dest="${kermeta.standalone.dir}"/> 
+    	<!--<untar compression="gzip" src="${kermeta.standalone.file}" dest="${kermeta.standalone.dir}"/>-->
         <!--  <antcall target="check.expand.divastudio_base.zip"/> --> 
 	   
     </target>
