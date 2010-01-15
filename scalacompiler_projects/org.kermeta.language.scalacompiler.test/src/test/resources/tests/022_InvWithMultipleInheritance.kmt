@@ -1,0 +1,91 @@
+/* $Id:$ 
+ * Creation : December 14, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "test::resources::tests::Main"
+@mainOperation "main"
+
+
+package test::resources::tests;
+
+
+
+require kermeta
+using kermeta::standard
+class Main
+{
+	operation main() : Void is do 
+		var d:D init D.new
+		stdio.writeln(d.getName + " " + d.getForName)
+		d.checkInvariants()
+	end
+}
+
+
+class A{
+
+	inv toto is do
+		stdio.writeln("A")
+		true
+	end 
+
+	operation getName():String is do
+		result := "A"	
+	end
+	operation getForName():String is do
+		result := "A"	
+	end
+
+}
+
+class C inherits A{
+
+	inv titi is do
+		stdio.writeln("C")
+		true
+	end 
+
+
+	method getName():String is do
+		result := super() + "C"	
+	end
+	method getForName():String is do
+		result := super() + "C"	
+	end
+
+}
+class B inherits A{
+
+	inv tutu is do
+		stdio.writeln("B")
+		true
+	end 
+	
+	method getName():String is do
+		result := super() + "B"	
+	end
+	method getForName():String is do
+		result := super() + "B"	
+	end
+
+}
+class D inherits C,B{
+
+	
+	inv tata is do
+		stdio.writeln("D")
+		true
+	end 
+	
+	
+	method getName():String from B is do
+		result := super() + "D"	
+	end
+	method getForName():String from C is do
+		result := super() + "D"	
+	end
+
+}

@@ -1,0 +1,52 @@
+/* $Id:$ 
+ * Creation : October 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "ecorewithaspectandInherithance::Main"
+@mainOperation "main"
+
+
+package ecorewithaspectandInherithance;
+
+
+require kermeta
+require "MM.ecore"
+
+using kermeta::standard
+using kermeta::persistence
+class Main
+{
+	operation main() : Void is do 
+
+ var repository : EMFRepository init EMFRepository.new
+		 var resource : EMFResource 
+ 		resource ?= repository.getResource("platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/B.xmi")
+ 		resource.load
+ 		var b : B 
+ 		b?= resource.contents.one
+ 		b.baraspect := 3
+ 		b.fooaspect := "titi"
+ 		stdio.writeln(b.fooaspect)
+ 		b.test
+	end
+}
+
+aspect class A{
+	attribute fooaspect : String
+
+}
+
+aspect class B{
+	attribute baraspect : Integer
+		operation test() : Void is do
+		self.fooaspect := "fooaspect"
+		self.baraspect := 2
+		stdio.writeln(self.fooaspect + " " + self.foo + " "+ self.baraspect.toString + " " + self.bar.toString) 
+	end
+	
+
+}
+

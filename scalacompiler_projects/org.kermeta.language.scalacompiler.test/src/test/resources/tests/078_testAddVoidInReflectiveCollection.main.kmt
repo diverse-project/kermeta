@@ -1,0 +1,65 @@
+@mainClass "test::TestAddVoidInReflectiveCollection"
+@mainOperation "main"
+
+package test;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::kunit
+
+class A
+{
+    reference reflectiveSeq: seq Integer[0..*]
+    //reference reflectiveSeq: Integer[0..*] // same as above
+    
+    reference reflectiveCollection: bag Integer[0..*]
+}
+
+class TestAddVoidInReflectiveCollection inherits TestCase
+{
+	 operation main() : Void is do
+          var runner : TestRunner init TestRunner.new()
+          runner.run(TestAddVoidInReflectiveCollection)
+          runner.printTestResult()
+    end
+    /**
+     * It is forbidden to add void in a referene or an attribute with multiplicity > 1
+     */
+    operation testAddVoidInReflectiveSequence() is
+    do
+        var a: A init A.new()
+        do
+        	a.reflectiveSeq.add(void)
+        	fail("testAddVoidInReflectiveSequence didn't raise an exception when adding a Void")
+        rescue (err : kermeta::exceptions::VoidOperandError)
+        	stdio.writeln("testAddVoidInReflectiveSequence successfully raised an exception"+err.toString)
+        end
+    end
+    
+     /**
+     * It is forbidden to add void in a referene or an attribute with multiplicity > 1
+     */
+    operation testAddVoidInReflectiveCollection() is
+    do
+        var a: A init A.new()
+        do
+        	a.reflectiveCollection.add(void)
+        	stdio.writeln(a.reflectiveCollection.getMetaClass.toString)
+        	fail("testAddVoidInReflectiveCollection didn't raise an exception when adding a Void")
+        rescue (err : kermeta::exceptions::VoidOperandError)
+        	stdio.writeln("testAddVoidInReflectiveCollection successfully raised an exception"+err.toString)
+        end
+    end
+
+   /**
+	* in "normal" sequence we are allowed to add void
+	*/
+    operation testAddVoidInNormalSequence() is
+    do
+        var sequence : Sequence<Integer> init Sequence<Integer>.new
+        sequence.add(void)
+        assert(sequence.elementAt(0).isVoid)
+    end
+}
+

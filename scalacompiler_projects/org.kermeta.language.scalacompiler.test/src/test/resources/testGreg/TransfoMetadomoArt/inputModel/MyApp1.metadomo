@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaDomo:DomoApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:MetaDomo="MetaDomo">
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="sw1" FUInstanceDes="" FUInstanceRef="org.entimid.fakeStuff.devices.FakeSimpleSwitch">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="Allumer" key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.onBtText">
+          <default href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.1/@hasParameter.0/@defaultValues/@entries.0"/>
+        </entries>
+        <entries value="Eteindre" key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.offBtText">
+          <default href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.1/@hasParameter.0/@defaultValues/@entries.1"/>
+        </entries>
+        <entries value="LIGHT" key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.controlType"/>
+        <entries value="true" key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.visible">
+          <default href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.1/@hasParameter.0/@defaultValues/@entries.2"/>
+        </entries>
+      </hasParameterValue>
+      <instanceOfParameter href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.1/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.1"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="light1" FUInstanceRef="org.entimid.fakeStuff.devices.FakeSimpleLight">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="200,0,200" key="org.entimid.fakeStuff.devices.fakeSimpleLight.color">
+          <default href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.0/@hasParameter.0/@defaultValues/@entries.0"/>
+        </entries>
+        <entries value="fl1" key="org.entimid.fakeStuff.devices.fakeSimpleLight.id">
+          <default href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.0/@hasParameter.0/@defaultValues/@entries.1"/>
+        </entries>
+      </hasParameterValue>
+      <instanceOfParameter href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.0/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.0"/>
+  </hasFUnitInstance>
+  <hasFUnitLink FUsource="//@hasFUnitInstance.0" FUtarget="//@hasFUnitInstance.1">
+    <source href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.1/@hasService.0"/>
+    <target href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.0/@hasService.0"/>
+  </hasFUnitLink>
+  <hasFUnitLink FUsource="//@hasFUnitInstance.0" FUtarget="//@hasFUnitInstance.1">
+    <source href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.1/@hasService.1"/>
+    <target href="DevicesLib.metadomo#//@hasFUCatalog/@hasFUDefinition.0/@hasService.1"/>
+  </hasFUnitLink>
+</MetaDomo:DomoApplication>

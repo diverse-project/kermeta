@@ -1,0 +1,37 @@
+/* $Id:$ 
+ * Creation : October 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "test1::Main"
+@mainOperation "main"
+
+
+package test1;
+
+
+require kermeta
+require "014_AspectOnKM.kmt"
+using kermeta::standard
+using kermeta::persistence
+using kermeta::language::structure
+
+
+class Main
+{
+	operation main() : Void is do 
+ 		 var repository : EMFRepository init EMFRepository.new
+		 var resource : EMFResource 
+		stdio.writeln("load km") 	
+ 		resource ?= repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/013_LoadEcore.km","http://www.kermeta.org/kermeta/1_2_0//kermeta")
+ 		resource.load
+ 		var a : ModelingUnit
+ 		a?= resource.one
+ 		a.toto
+ 		stdio.writeln(a.packages.first.name)
+		
+	end
+}
+

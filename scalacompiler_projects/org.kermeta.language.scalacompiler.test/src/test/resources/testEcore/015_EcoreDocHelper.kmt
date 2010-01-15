@@ -1,0 +1,135 @@
+/* $Id: EcoreDocHelper.kmt,v 1.4 2008-09-05 14:42:21 dvojtise Exp $
+ * File : EcoreDocHelper.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Sep 08, 2005
+ * Authors : 
+ *  Didier Vojtisek <dvojtise@irisa.fr>
+ *  Damien Pollet   <dpollet@irisa.fr>
+ * 
+ */
+@mainClass "EcoreHelpers::Main"
+@mainOperation "main"
+
+package EcoreHelpers;
+
+
+require kermeta
+require "ecore_behavior.kmt"
+
+using ecore
+using kermeta::standard
+using kermeta::persistence
+
+
+class Main{
+operation main() : Void is do 
+ 		var repository : EMFRepository init EMFRepository.new
+		var resource : EMFResource 
+		resource ?= repository.getResource("platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/A.ecore")
+		resource.load
+ 		var pack : EPackage 
+ 		pack?= resource.contents.one
+ 		var help : EcoreDocHelper init EcoreDocHelper.new
+ 		pack.eClassifiers.each{e| stdio.writeln(help.flatShort(e.asType(EClass),"\t"))}
+ 		
+	end
+
+}
+/** provides some helper functions on Ecore that will produce some documentation */
+class EcoreDocHelper 
+{		
+	/******************************************************************************
+	 * category : ecore::EClass
+	 * name     : flat 
+	 * purpose  : return a string corresponding to the flattening of inheritance graph
+	 * in       : aClass  : the Class we want to flatten
+	 *			: tabsString : a tab string to add at the begining of each new line
+	 * out      : the string 
+	 * remark   : could have been written using the method each 
+	 ******************************************************************************/
+	operation flat ( aClass : ecore::EClass, tabsString 	: String) : String
+	is do	
+		var aParentClass  	: EClass
+		//var it 				: Iterator<EClass>
+		var returnedString  : String
+		var nameString  : String
+		
+		returnedString := tabsString + aClass.name + " :"
+		
+		from var it : Iterator<EClass> init aClass.eSuperTypes.iterator
+		until it.isOff
+		loop
+			returnedString := returnedString + "\n" +flat(it.next, tabsString + "   ") 
+		end
+		// we return the result
+		result := returnedString
+	end
+	
+	/******************************************************************************
+	 * category : eore::EClass
+	 * name     : short 
+	 * purpose  : return a string giving feature name and visibility of the class
+	 * in       : aClass  : the Class we want to flatten
+	 *			: tabsString : a tab string to add at the begining of each new line
+	 * out      : the string 
+	 * remark   : 
+	 ******************************************************************************/
+	operation short  (aClass  	: EClass, tabsString 	: String	) : String
+	is do		
+		var returnedString  : String
+		
+		returnedString := tabsString + aClass.name + " :"
+		aClass.eStructuralFeatures.each{ p | 
+			var s : EAttribute		s ?= p
+			var r : EReference		r ?= p
+			if r != void then 
+				returnedString := returnedString + "\n" + tabsString + "    ref  " + r.name.toString
+				returnedString := returnedString + " : " + r.eType.name + "[" + r.lowerBound.toString + ".." + r.upperBound.toString +"]"
+				if r.eOpposite != void then 
+					returnedString := returnedString + " opposite of " + r.eOpposite.name
+				end
+			else
+				returnedString := returnedString + "\n" + tabsString + "    attr " + s.name.toString
+				returnedString := returnedString + " : " + s.eType.name
+			end
+		}
+		//Print Operations
+		aClass.eOperations.each{ o | 
+			returnedString := returnedString + "\n" + tabsString + "    op   " + o.name + "("
+			o.eParameters.each{ p | 
+				returnedString := returnedString + p.name + " : " + p.eType.name + " "
+			}
+			returnedString := returnedString + ")"
+			if o.eType != void then
+				returnedString := returnedString + " : " + o.eType.name
+			end
+		}
+		
+		result := returnedString
+	end
+	/******************************************************************************
+	 * category : EClass
+	 * name     : flatShort
+	 * purpose  : return a string corresponding to the flattening of inheritance graph and shows
+	 *			  the features of each classes
+	 * in       : aClass  : the Class we want to flatten
+	 *			: tabsString : a tab string to add at the begining of each new line
+	 * out      : the string 
+	 * remark   : 
+	 ******************************************************************************/
+	operation flatShort  (aClass  	: EClass, tabsString 	: String) : String
+	is do			
+		var returnedString  : String init ""
+		returnedString := returnedString + short(aClass,tabsString)
+		
+		aClass.eSuperTypes.each{ eSuperClass | 
+            if eSuperClass != void then
+        		returnedString := returnedString + "\n" + flatShort(eSuperClass, tabsString + "   ")
+        	end
+        }        
+		// we return the result
+		result := returnedString
+	end
+}

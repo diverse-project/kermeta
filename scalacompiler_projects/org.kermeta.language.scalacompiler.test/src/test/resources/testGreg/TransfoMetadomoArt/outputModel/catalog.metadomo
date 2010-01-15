@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="ASCII"?>
+<MetaDomo:CatalogRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:MetaDomo="MetaDomo">
+  <hasFUCatalog>
+    <hasCategory CategoryName="FakeStuff" padre="//@hasFUCatalog/@hasCategory.3" fudefinitios="//@hasFUCatalog/@hasFUDefinition.0 //@hasFUCatalog/@hasFUDefinition.1"/>
+    <hasCategory CategoryName="DeltaDore" padre="//@hasFUCatalog/@hasCategory.3" fudefinitios="//@hasFUCatalog/@hasFUDefinition.12 //@hasFUCatalog/@hasFUDefinition.13"/>
+    <hasCategory CategoryName="EnTiMid" padre="//@hasFUCatalog/@hasCategory.3" fudefinitios="//@hasFUCatalog/@hasFUDefinition.5 //@hasFUCatalog/@hasFUDefinition.4"/>
+    <hasCategory subCategory="//@hasFUCatalog/@hasCategory.0 //@hasFUCatalog/@hasCategory.1 //@hasFUCatalog/@hasCategory.2" CategoryName="Constructeurs"/>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.fakeStuff.devices.FakeSimpleSwitch" cataloguedIn="//@hasFUCatalog/@hasCategory.0" FUDefRef="org.entimid.fakeStuff.devices.FakeSimpleSwitch">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries value="" key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.onBtText"/>
+          <entries key="org.entimid.fakeStuff.devices.fakeSimpleSwitch.offBtText"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="ON" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="OFF" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.fakeStuff.devices.FakeSimpleLight" cataloguedIn="//@hasFUCatalog/@hasCategory.0" FUDefRef="org.entimid.fakeStuff.devices.FakeSimpleLight">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries value="" key="org.entimid.fakeStuff.devices.fakeSimpleLight.id"/>
+          <entries value="" key="org.entimid.fakeStuff.devices.fakeSimpleLight.color"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="ON" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="OFF" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.framework.tools.EventPublisher" FUDefRef="org.entimid.framework.tools.EventPublisher">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.framework.tools.eventPublisher.address"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="SEND" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.framework.tools.EventListener" FUDefRef="org.entimid.framework.tools.EventListener">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.framework.tools.eventListener.address"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="REALIZED" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.framework.tools.Parallelizer" cataloguedIn="//@hasFUCatalog/@hasCategory.2" FUDefRef="org.entimid.framework.tools.Parallelizer">
+      <hasService serviceName="p0" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="p1" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="p2" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="p3" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="p4" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="p5" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="p6" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="p7" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="p8" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="p9" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="ACTIVATE" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.framework.tools.Timer" cataloguedIn="//@hasFUCatalog/@hasCategory.2" FUDefRef="org.entimid.framework.tools.Timer">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries value="2000" key="org.entimid.framework.tools.timer.time_out"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="START" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="STOP" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="RESTART" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="TIME_OUT" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.media.mp3.player.MP3Player" FUDefRef="org.entimid.media.mp3.player.MP3Player">
+      <hasService serviceName="PLAY" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.x2d.devices.MiniCox" FUDefRef="org.entimid.x2d.devices.MiniCox">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.x2d.devices.id"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="OPENED" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="CLOSED" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.x2d.devices.T1T" FUDefRef="org.entimid.x2d.devices.T1T">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.x2d.devices.id"/>
+        </defaultValues>
+      </hasParameter>
+      <hasParameter ParameterDName="pushActionParameters" parameterTypes="//@hasDataType.3"/>
+      <hasService serviceName="PUSH" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.x2d.devices.T4T" FUDefRef="org.entimid.x2d.devices.T4T">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.x2d.devices.id"/>
+        </defaultValues>
+      </hasParameter>
+      <hasParameter ParameterDName="m1ActionParameters" parameterTypes="//@hasDataType.3"/>
+      <hasParameter ParameterDName="m2ActionParameters" parameterTypes="//@hasDataType.3"/>
+      <hasParameter ParameterDName="m3ActionParameters" parameterTypes="//@hasDataType.3"/>
+      <hasParameter ParameterDName="m4ActionParameters" parameterTypes="//@hasDataType.3"/>
+      <hasService serviceName="M1.PUSH" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="M2.PUSH" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="M3.PUSH" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="M4.PUSH" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.x2d.devices.TYXIA_421" FUDefRef="org.entimid.x2d.devices.TYXIA_421">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.x2d.devices.id"/>
+        </defaultValues>
+      </hasParameter>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.x2d.devices.DFX" FUDefRef="org.entimid.x2d.devices.DFX">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.x2d.devices.id"/>
+        </defaultValues>
+      </hasParameter>
+      <hasParameter ParameterDName="leakActionParameters" parameterTypes="//@hasDataType.3"/>
+      <hasService serviceName="ON" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="OFF" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.x2d.devices.TYDOM_360" cataloguedIn="//@hasFUCatalog/@hasCategory.1" FUDefRef="org.entimid.x2d.devices.TYDOM_360">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.x2d.devices.tydom_360.serialPortName"/>
+          <entries key="org.entimid.x2d.devices.tydom_360.id"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="SEND" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.x2d.devices.TYXIA_510" cataloguedIn="//@hasFUCatalog/@hasCategory.1" FUDefRef="org.entimid.x2d.devices.TYXIA_510">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.x2d.devices.id"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="ON" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="OFF" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.nabaztag.devices.Nabaztag" FUDefRef="org.entimid.nabaztag.devices.Nabaztag">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries value="" key="org.entimid.nabaztag.id"/>
+          <entries value="" key="org.entimid.nabaztag.token"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="REALIZED" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="PLAY" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="GENERATE" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.nabaztag.devices.Mirror" FUDefRef="org.entimid.nabaztag.devices.Mirror"/>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.nabaztag.devices.Nanoztag" FUDefRef="org.entimid.nabaztag.devices.Nanoztag">
+      <hasParameter ParameterDName="Id" parameterTypes="//@hasDataType.0"/>
+      <hasService serviceName="ON" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="OFF" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.knx.devices.GwEibIp148" FUDefRef="org.entimid.knx.devices.GwEibIp148">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.kxn.gw.ip.local"/>
+          <entries key="org.entimid.kxn.gw.ip.gw"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="SEND" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.knx.devices.TA4" FUDefRef="org.entimid.knx.devices.TA4">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.knx.devices.TA4.m1.group"/>
+          <entries key="org.entimid.knx.devices.TA4.m2.group"/>
+          <entries key="org.entimid.knx.devices.TA4.m3.group"/>
+          <entries key="org.entimid.knx.devices.TA4.m4.group"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="M1.PUSH" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="M2.PUSH" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="M3.PUSH" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="M4.PUSH" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.knx.devices.RMG4S" FUDefRef="org.entimid.knx.devices.RMG4S">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.knx.devices.RMG4S.m1.actionGroup"/>
+          <entries key="org.entimid.knx.devices.RMG4S.m2.actionGroup"/>
+          <entries key="org.entimid.knx.devices.RMG4S.m3.actionGroup"/>
+          <entries key="org.entimid.knx.devices.RMG4S.m4.actionGroup"/>
+          <entries key="org.entimid.knx.devices.RMG4S.m1.infoGroup"/>
+          <entries key="org.entimid.knx.devices.RMG4S.m2.infoGroup"/>
+          <entries key="org.entimid.knx.devices.RMG4S.m3.infoGroup"/>
+          <entries key="org.entimid.knx.devices.RMG4S.m4.infoGroup"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="M1.ON" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="M1.OFF" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="M2.ON" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="M2.OFF" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="M3.ON" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="M3.OFF" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="M4.ON" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+      <hasService serviceName="M4.OFF" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.knx.devices.MeteoStation" FUDefRef="org.entimid.knx.devices.MeteoStation">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.knx.devices.MeteoStation.light.group"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="JOUR" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="NUIT" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.ui.inf.cmp.InfPanel" FUDefRef="org.entimid.ui.inf.cmp.InfPanel">
+      <hasService serviceName="ALITE" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="NORMAL" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="ALERTE" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0"/>
+      <hasService serviceName="CHUTE" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+    </hasFUDefinition>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.chutte" FUDefRef="org.entimid.chutte"/>
+    <hasFUDefinition xsi:type="MetaDomo:StandardFUnitDefinition" FUDefName="org.entimid.orange.sms.device.Icon225" FUDefRef="org.entimid.orange.sms.device.Icon225">
+      <hasParameter ParameterDName="properties" parameterTypes="//@hasDataType.3">
+        <defaultValues xsi:type="MetaDomo:DictionaryValueAttribute">
+          <entries key="org.entimid.orange.sms.pin"/>
+          <entries key="org.entimid.orange.sms.number"/>
+          <entries key="org.entimid.orange.sms.text"/>
+          <entries key="org.entimid.orange.sms.serialPort"/>
+        </defaultValues>
+      </hasParameter>
+      <hasService serviceName="SEND" isServiceInstanceOf="//@hasSCatalog/@hasServiceDef.0" serviceType="Implemented"/>
+    </hasFUDefinition>
+  </hasFUCatalog>
+  <hasSCatalog>
+    <hasServiceDef ServiceDefName="Port"/>
+  </hasSCatalog>
+  <hasDataType xsi:type="MetaDomo:StringType"/>
+  <hasDataType xsi:type="MetaDomo:NumberType"/>
+  <hasDataType xsi:type="MetaDomo:BooleanType"/>
+  <hasDataType xsi:type="MetaDomo:Dictionary"/>
+</MetaDomo:CatalogRoot>

@@ -1,0 +1,17 @@
+Class
+get on abstract : false
+get on eStructuralFeatures : [kermeta::language::ReflectiveSequence:6051]
+get on eOperations : [kermeta::language::ReflectiveSequence:6050]
+get on interface : false
+get on eSuperTypes : [kermeta::language::ReflectiveSequence:6049]
+get on eGenericSuperTypes : [kermeta::language::ReflectiveSequence:6052]
+get on instanceClassName : <void>
+get on ePackage : [ecore::EPackage:6025]
+get on eTypeParameters : [kermeta::language::ReflectiveSequence:6048]
+get on instanceTypeName : <void>
+get on name : Class
+get on eAnnotations : [kermeta::language::ReflectiveSequence:6046]
+get on tag : [kermeta::language::ReflectiveSequence:6966]
+get on ownedTags : [kermeta::language::ReflectiveSequence:6987]
+set on name
+Classe

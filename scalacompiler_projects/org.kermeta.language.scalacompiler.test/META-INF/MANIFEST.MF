@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: scalacompiler Test
+Bundle-SymbolicName: org.kermeta.language.scalacompiler.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.kermeta.language.scalacompiler.test.Activator
+Bundle-Vendor: IRISA/INRIA
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.junit4,
+ fr.irisa.triskell.kermeta.interpreter,
+ org.kermeta.io.loader
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

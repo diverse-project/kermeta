@@ -1,0 +1,25 @@
+@mainClass "testOpOpCall::Test_opopcall"
+@mainOperation "operation1"
+
+package testOpOpCall;
+
+require kermeta
+// Call of an operation from another class inside an operation
+class Test_opopcall {
+
+    attribute e : kermeta::standard::Integer
+
+    operation operation1() : kermeta::standard::Integer is do
+        result := Test_opcalled.new.operation_asg()
+        stdio.writeln(result.toString)
+    end
+
+
+}
+
+class Test_opcalled {
+    
+    operation operation_asg(): kermeta::standard::Integer is do
+        result := 5
+    end
+}

@@ -1,0 +1,430 @@
+/* $Id:$ 
+ * Creation : December 11, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            gnain
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metaArt/metamodel@runtime.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore"
+
+using kermeta::io
+using kermeta::persistence
+//using kermeta::standard
+
+using ecore
+using MetaDomo
+using art
+
+
+class Main
+{
+
+	operation initCatalog(catalog : CatalogRoot) : Void is do 
+		
+		//Adding DataTypes
+		catalog.hasDataType.add(StringType.new)
+		catalog.hasDataType.add(NumberType.new)
+		catalog.hasDataType.add(BooleanType.new)
+		catalog.hasDataType.add(Dictionary.new)
+	
+		//Adding Services		
+		var servCatalog : ServiceCatalog init ServiceCatalog.new
+		
+		var serv : ServiceDefinition init ServiceDefinition.new
+		serv.ServiceDefName := "Port"
+		
+		servCatalog.hasServiceDef.add(serv)
+		
+		catalog.hasSCatalog := servCatalog
+		
+		//Adding FUCatalog
+		catalog.hasFUCatalog := FUnitCatalog.new
+		
+	end
+
+
+	operation createFUnits( artModel : art::System, catalog : CatalogRoot) : Void is do
+		
+		artModel.types.each{ type |
+			
+			if( not type.name.contains("ArchitectureType") ) then
+				
+				//New FunctionalUnit
+				var fu : StandardFUnitDefinition init StandardFUnitDefinition.new
+				fu.FUDefName := type.name
+				fu.FUDefRef := type.name
+								
+				//Adding Parameters
+				if( not type.~attribute.isEmpty() ) then
+				
+					type.~attribute.each{ att | 
+					
+						var catParam : ParameterDef init ParameterDef.new
+						
+						catParam.ParameterDName := att.name
+						
+						//Typing Parameter
+						if( att.isInstanceOf(art::type::Dictionary) ) then
+							catParam.parameterTypes := catalog.hasDataType.select{t|t.isInstanceOf(Dictionary)}.one
+							
+							var da : art::type::Dictionary
+							da ?= att
+												
+							//AddingDefaultValues
+							if( not da.keys.isEmpty() ) then
+								
+								var dva : DictionaryValueAttribute init DictionaryValueAttribute.new
+								
+								da.keys.each{ de |
+									var entry : Entry init Entry.new
+									entry.key := de.key
+									entry.~value := de.~value
+									dva.entries.add(entry)
+								}
+								
+								catParam.defaultValues := dva
+									
+							end
+						end
+					
+						if( att.isInstanceOf(art::type::BasicAttribute) ) then
+						
+							var ba : art::type::BasicAttribute
+							ba ?= att
+						
+							if( att.type.name.equals("String") ) then
+								catParam.parameterTypes := catalog.hasDataType.select{t|t.isInstanceOf(StringType)}.one
+								//AddingDefaultValues
+								if( not ba.defaultValue.isVoid() ) then
+									var dv : StringValue init StringValue.new
+									dv.valueS := ba.defaultValue
+									catParam.defaultValues := dv
+								end
+							end
+							
+							if( att.type.name.equals("Boolean") ) then
+								catParam.parameterTypes := catalog.hasDataType.select{t|t.isInstanceOf(BooleanType)}.one
+								//AddingDefaultValues
+								if( not ba.defaultValue.isVoid() ) then
+									var dv : BooleanValue init BooleanValue.new
+									dv.valueB := ba.defaultValue.toBoolean()
+									catParam.defaultValues := dv
+								end
+							end
+							
+							if( att.type.name.equals("Integer") ) then
+								catParam.parameterTypes := catalog.hasDataType.select{t|t.isInstanceOf(NumberType)}.one
+								//AddingDefaultValues
+								if( not ba.defaultValue.isVoid() ) then
+									var dv : NumberValue init NumberValue.new
+									dv.valueN := ba.defaultValue.toInteger()
+									catParam.defaultValues := dv
+								end			
+							end
+						end	
+						fu.hasParameter.add(catParam)
+					}
+				end
+				
+				
+				//adding ports
+				if( not type.port.isEmpty() ) then
+					
+					type.port.each{ port |	
+						
+						if( port.name.equals("outputPorts") ) then
+							var portCol : art::type::PortCollection
+							portCol ?= port
+							
+							portCol.ids.each{ id |
+								var service : Service init Service.new
+								service.isServiceInstanceOf := catalog.hasSCatalog.hasServiceDef.select{s|s.ServiceDefName.equals("Port")}.one
+								service.serviceName := id.name
+								service.serviceType := ServiceType.Required
+								fu.hasService.add(service)
+							}
+						else
+							var service : Service init Service.new
+							service.isServiceInstanceOf := catalog.hasSCatalog.hasServiceDef.select{s|s.ServiceDefName.equals("Port")}.one
+							service.serviceName := port.name
+							service.serviceType := ServiceType.Implemented
+							fu.hasService.add(service)
+						end
+						
+						
+					}			
+				
+				end			
+			
+				catalog.hasFUCatalog.hasFUDefinition.add(fu)
+			end
+		}
+		
+	end
+		
+	operation createApplicationInstances(artModel : art::System, application : DomoApplication, catalog : CatalogRoot)	 : Void is do
+		
+		artModel.root.subComponent.each{ subComp |
+			
+			var fuInst : StandardFUnitInstance init StandardFUnitInstance.new
+			
+			fuInst.FUInstanceName := subComp.name
+			fuInst.isInstance ?= catalog.hasFUCatalog.hasFUDefinition.select{fDef|
+					fDef.FUDefRef.equals(subComp.type.name)}.one
+			
+			if( not subComp.~attribute.isEmpty() ) then
+			
+				subComp.~attribute.each{ att | 
+					
+						var instParam : ParameterInstance init ParameterInstance.new
+						
+						//Typing Parameter
+						if( att.isInstanceOf(art::instance::DictionaryValuedAttribute) ) then
+							
+							var da : art::instance::DictionaryValuedAttribute
+							da ?= att
+							
+							instParam.instanceOfParameter := fuInst.isInstance.hasParameter.select{param|
+									param.ParameterDName.equals(da.~attribute.name)}.one
+												
+							//Adding Values
+							if( not da.entries.isEmpty() ) then
+								
+								var dva : DictionaryValueAttribute init DictionaryValueAttribute.new
+								
+								da.entries.each{ de |
+									
+									if( de.isInstanceOf(art::instance::DefaultEntry) ) then
+										var defEntry : art::instance::DefaultEntry
+										defEntry ?= de
+									
+										var entry : Entry init Entry.new
+										entry.key := defEntry.key.key
+										if( defEntry.~value.isVoid() ) then
+											entry.~value := defEntry.key.~value
+										else
+											entry.~value := defEntry.~value	
+										end
+										dva.entries.add(entry)
+									else
+										var otherEntry : art::instance::OtherEntry
+										otherEntry ?= de
+									
+										var entry : Entry init Entry.new
+										entry.key := otherEntry.key
+										entry.~value := otherEntry.~value
+										dva.entries.add(entry)
+									end
+									
+								}
+								
+								instParam.hasParameterValue := dva
+									
+							end
+						end
+						
+					
+						if( att.isInstanceOf(art::instance::ValuedAttribute) ) then
+						
+							var ba : art::instance::ValuedAttribute
+							ba ?= att
+						
+							instParam.instanceOfParameter := fuInst.isInstance.hasParameter.select{param|
+									param.ParameterDName.equals(ba.~attribute.name)}.one
+						
+							if( ba.~attribute.type.name.equals("String") ) then
+								
+								//AddingDefaultValues
+								var dv : StringValue init StringValue.new
+								if( not ba.~value.isVoid() ) then
+									dv.valueS := ba.~value
+								else
+									if( not ba.~attribute.isVoid() ) then
+										dv.valueS := ba.~attribute.defaultValue
+									end
+								end
+								instParam.hasParameterValue := dv
+							end
+							
+							if( ba.~attribute.type.name.equals("Boolean") ) then
+								
+								//AddingDefaultValues
+								
+								var dv : BooleanValue init BooleanValue.new
+								if( not ba.~value.isVoid() ) then
+									dv.valueB := ba.~value.toBoolean()
+								else
+									if( not ba.~attribute.isVoid() ) then
+										dv.valueB := ba.~attribute.defaultValue.toBoolean()
+									end
+								end
+								instParam.hasParameterValue := dv
+								
+							end
+							
+							if( ba.~attribute.type.name.equals("Integer") ) then
+								
+								//AddingDefaultValues
+								var dv : NumberValue init NumberValue.new
+								if( not ba.~value.isVoid() ) then
+									dv.valueN := ba.~value.toInteger()
+								else
+									if( not ba.~attribute.isVoid() ) then
+										dv.valueN := ba.~attribute.defaultValue.toInteger()
+									end
+								end
+								instParam.hasParameterValue := dv
+								
+											
+							end
+						end	
+						fuInst.hasParamInstan.add(instParam)
+					}
+					
+			end
+			
+			application.hasFUnitInstance.add(fuInst)
+		}
+			
+	end
+
+	operation translateCategory( artGpe : art::group::TypeGroup,  catalog : CatalogRoot) : Category is do
+	
+		var newCat : Category init Category.new
+		newCat.CategoryName := artGpe.name
+		if( not artGpe.subGroups.isVoid() ) then
+			artGpe.subGroups.each{ sub |
+				var subCat : Category
+				subCat := translateCategory(sub, catalog)
+				subCat.padre := newCat
+				newCat.subCategory.add(subCat)
+				
+			}
+		end
+		catalog.hasFUCatalog.hasCategory.add(newCat)
+		result := newCat		
+	
+	end
+
+	operation createCategories( artModel : art::System, catalog : CatalogRoot) : Void is do
+	
+		artModel.groups.select{ g | g.isInstanceOf(art::group::TypeGroup) }.each{ group |
+			var typeGpe : art::group::TypeGroup
+			typeGpe ?= group
+			translateCategory(typeGpe, catalog)
+		}
+	
+	
+	end
+
+	operation setGroupType( group : art::group::TypeGroup, catalog : CatalogRoot ) : Void is do
+	
+		if( not group.types.isEmpty() ) then
+			group.types.each{type|
+				catalog.hasFUCatalog.hasFUDefinition.select{fuDef|fuDef.FUDefRef.equals(type.name)}.one.cataloguedIn :=
+					catalog.hasFUCatalog.hasCategory.select{cat | cat.CategoryName.equals(group.name)}.one
+			}
+		end
+		
+		group.subGroups.each{sg | setGroupType(sg, catalog)}
+	
+	end
+
+	operation addGroups ( artModel : art::System, catalog : CatalogRoot) : Void is do
+		
+		artModel.groups.each{g|
+			if( g.isInstanceOf(art::group::TypeGroup) ) then
+				setGroupType(g.asType(art::group::TypeGroup), catalog)		
+			end
+		}
+			
+	end
+	
+	operation createApplicationBindings(artModel : art::System, application : DomoApplication, catalog : CatalogRoot)	 : Void is do
+		
+		artModel.root.subComponent.each{ subComp |
+			subComp.binding.each{binding|
+				var fLink : FUnitLink init FUnitLink.new
+				
+				fLink.FUsource := application.hasFUnitInstance.select{f|f.asType(StandardFUnitInstance).FUInstanceName.equals(subComp.name)}.one
+				fLink.source := fLink.FUsource.asType(StandardFUnitInstance).isInstance.hasService.select{s|s.serviceName.equals(binding.id)}.one
+				
+				fLink.FUtarget := application.hasFUnitInstance.select{f|f.asType(StandardFUnitInstance).FUInstanceName.equals(binding.asType(art::instance::TransmissionBinding).serverInstance.name)}.one
+				fLink.target := fLink.FUtarget.asType(StandardFUnitInstance).isInstance.hasService.select{s|s.serviceName.equals(binding.asType(art::instance::TransmissionBinding).server.name)}.one
+				
+				application.hasFUnitLink.add(fLink)
+			}
+		}
+			
+	end
+	
+	operation loadArtModel( modelUri : String) : Resource is do
+		var repository : EMFRepository init EMFRepository.new
+		var resource : Resource init repository.createResource(modelUri, "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metaArt/metamodel@runtime.ecore")
+		resource.load
+		result := resource
+	end
+	
+	
+	operation saveMetaDomoCatalog( catalog : CatalogRoot, uri : String) is do
+	    var repository : EMFRepository init EMFRepository.new
+	    var resource : Resource init repository.createResource(uri , "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore")
+	    resource.instances.add(catalog)
+	    resource.save
+    end
+	
+	operation saveMetaDomoApplication( application : DomoApplication, uri : String) is do
+	    var repository : EMFRepository init EMFRepository.new
+	    var resource : Resource init repository.createResource(uri , "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/metadomo/MetaDomoRennes.ecore")
+	    resource.instances.add(application)
+	    resource.save
+    end
+
+
+	operation main() : Void is do 
+		
+		var application : DomoApplication init DomoApplication.new
+		var catalog : CatalogRoot init CatalogRoot.new
+		var artModel : art::System
+		
+    	stdio.writeln("Loading resource: " + "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/inputModel/Model_0.art")
+    	var resource : Resource init loadArtModel("platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/inputModel/Model_0.art")
+    	artModel ?= resource.contents.one
+
+		stdio.writeln("Initializing Catalog Model")
+    	initCatalog(catalog)
+    	
+    	stdio.writeln("Create Catalog categories")
+		createCategories(artModel, catalog)
+		
+		stdio.writeln("Create FU Definitions")
+		createFUnits(artModel, catalog)		
+		
+		stdio.writeln("Create Instances")
+		createApplicationInstances(artModel, application, catalog)	
+		
+		stdio.writeln("Create Bindings")
+		createApplicationBindings(artModel, application, catalog)	
+		
+		stdio.writeln("Set Group Types")
+		addGroups(artModel, catalog)
+		
+		stdio.writeln("Saving Catalogo")
+		saveMetaDomoCatalog(catalog, "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/outputModel/catalog.metadomo")
+ 
+ 		stdio.writeln("Saving Application")
+		saveMetaDomoApplication(application, "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testGreg/TransfoMetadomoArt/outputModel/application.metadomo")
+ 
+ 		stdio.writeln("Rock&Roll")
+		
+	end
+}

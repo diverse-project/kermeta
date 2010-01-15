@@ -1,0 +1,27 @@
+/* $Id:$ 
+ * Creation : October 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "test1::Main"
+@mainOperation "main"
+
+
+package kermeta::language::structure;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::language::structure
+
+aspect class ModelingUnit
+{
+	operation toto() : Void is do 
+ 		stdio.writeln("ca marche")		
+	end
+}
+

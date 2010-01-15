@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="ASCII"?>
+<MetaDomo:DomoApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:MetaDomo="MetaDomo">
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="player">
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.6"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="pb">
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.4"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="contextInformer1">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="org/entimid/context/inf/in" key="org.entimid.framework.tools.eventPublisher.address"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="contextInformer2">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="org/entimid/context/inf/out" key="org.entimid.framework.tools.eventPublisher.address"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="contextInformer5">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="org/entimid/context/etat/alite" key="org.entimid.framework.tools.eventPublisher.address"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="contextInformer6">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="org/entimid/context/etat/normal" key="org.entimid.framework.tools.eventPublisher.address"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="mirror">
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.15"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="lapinInf1">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:StringValue" valueS="436391944"/>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.16/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.16"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="tootwi">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="0013D38469BA" key="org.entimid.nabaztag.id"/>
+        <entries value="1237107579" key="org.entimid.nabaztag.token"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.14/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.14"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="ddGw">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="ddgw1" key="org.entimid.x2d.devices.tydom_360.id"/>
+        <entries value="/dev/ttyACM0" key="org.entimid.x2d.devices.tydom_360.serialPortName"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.12/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.12"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="d0833">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="160848" key="org.entimid.x2d.devices.id"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.11/@hasParameter.0"/>
+    </hasParamInstan>
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="Une fuite d'eau a ete detectee dans la cuisine. Veuillez faire le necessaire pour reparer." key="org.entimid.nabaztag.tts.text"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.11/@hasParameter.1"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.11"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="tel1touche">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="164723" key="org.entimid.x2d.devices.id"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.8/@hasParameter.0"/>
+    </hasParamInstan>
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="Votre demande d'assistance a bien ete prise en compte. Un permanent va prendre contact avec vous." key="org.entimid.nabaztag.tts.text"/>
+        <entries value="Grand-mere: J'ai besoin d'aide." key="MESSAGE"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.8/@hasParameter.1"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.8"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="eibip1">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="192.168.1.100" key="org.entimid.kxn.gw.ip.gw"/>
+        <entries value="192.168.1.107" key="org.entimid.kxn.gw.ip.local"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.17/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.17"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="contextInformer3">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="org/entimid/context/meteo/jour" key="org.entimid.framework.tools.eventPublisher.address"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="contextInformer4">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="org/entimid/context/meteo/nuit" key="org.entimid.framework.tools.eventPublisher.address"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="stationM">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="0/0/2" key="org.entimid.knx.devices.MeteoStation.light.group"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.20/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.20"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="ta4_1">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="0/6/0" key="org.entimid.knx.devices.TA4.m1.group"/>
+        <entries value="0/6/1" key="org.entimid.knx.devices.TA4.m2.group"/>
+        <entries value="0/6/2" key="org.entimid.knx.devices.TA4.m3.group"/>
+        <entries value="0/6/3" key="org.entimid.knx.devices.TA4.m4.group"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.18/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.18"/>
+  </hasFUnitInstance>
+  <hasFUnitInstance xsi:type="MetaDomo:StandardFUnitInstance" FUInstanceName="cleSms">
+    <hasParamInstan>
+      <hasParameterValue xsi:type="MetaDomo:DictionaryValueAttribute">
+        <entries value="0000" key="org.entimid.orange.sms.pin"/>
+        <entries value="0613674348" key="org.entimid.orange.sms.number"/>
+        <entries value="Message d'alerte par defaut :: Probleme chez grand-mere" key="org.entimid.orange.sms.text"/>
+        <entries value="/dev/ttyHS0" key="org.entimid.orange.sms.serialPort"/>
+      </hasParameterValue>
+      <instanceOfParameter href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.23/@hasParameter.0"/>
+    </hasParamInstan>
+    <isInstance href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.23"/>
+  </hasFUnitInstance>
+  <hasFUnitLink FUsource="//@hasFUnitInstance.1" FUtarget="//@hasFUnitInstance.8">
+    <source href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.4/@hasService.1"/>
+    <target href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.14/@hasService.1"/>
+  </hasFUnitLink>
+  <hasFUnitLink FUsource="//@hasFUnitInstance.1" FUtarget="//@hasFUnitInstance.17">
+    <source href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.4/@hasService.2"/>
+    <target href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.23/@hasService.0"/>
+  </hasFUnitLink>
+  <hasFUnitLink FUsource="//@hasFUnitInstance.7" FUtarget="//@hasFUnitInstance.2">
+    <source href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.16/@hasService.0"/>
+    <target href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2/@hasService.0"/>
+  </hasFUnitLink>
+  <hasFUnitLink FUsource="//@hasFUnitInstance.7" FUtarget="//@hasFUnitInstance.3">
+    <source href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.16/@hasService.1"/>
+    <target href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2/@hasService.0"/>
+  </hasFUnitLink>
+  <hasFUnitLink FUsource="//@hasFUnitInstance.8" FUtarget="//@hasFUnitInstance.0">
+    <source href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.14/@hasService.0"/>
+    <target href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.6/@hasService.0"/>
+  </hasFUnitLink>
+  <hasFUnitLink FUsource="//@hasFUnitInstance.10" FUtarget="//@hasFUnitInstance.8">
+    <source href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.11/@hasService.0"/>
+    <target href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.14/@hasService.1"/>
+  </hasFUnitLink>
+  <hasFUnitLink FUsource="//@hasFUnitInstance.11" FUtarget="//@hasFUnitInstance.1">
+    <source href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.8/@hasService.0"/>
+    <target href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.4/@hasService.10"/>
+  </hasFUnitLink>
+  <hasFUnitLink FUsource="//@hasFUnitInstance.15" FUtarget="//@hasFUnitInstance.13">
+    <source href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.20/@hasService.0"/>
+    <target href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2/@hasService.0"/>
+  </hasFUnitLink>
+  <hasFUnitLink FUsource="//@hasFUnitInstance.15" FUtarget="//@hasFUnitInstance.14">
+    <source href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.20/@hasService.1"/>
+    <target href="catalog.metadomo#//@hasFUCatalog/@hasFUDefinition.2/@hasService.0"/>
+  </hasFUnitLink>
+</MetaDomo:DomoApplication>
