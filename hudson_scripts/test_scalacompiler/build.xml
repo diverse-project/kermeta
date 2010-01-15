@@ -11,8 +11,8 @@
 	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
 	<property name="build.bin" location="${env.WORKSPACE}/plugins/org.kermeta.language.scalacompiler.test/target/classes/"/>
 	
-	<property name="src" location="${env.WORKSPACE}/plugins/org.kermeta.language.scalacompiler.test/src/main/java"/>
-	<property name="test.src" location="${env.WORKSPACE}/plugins/org.kermeta.language.scalacompiler.test/src/test/java"/>
+	<property name="src" location="./plugins/org.kermeta.language.scalacompiler.test/src/main/java"/>
+	<property name="test.src" location="./plugins/org.kermeta.language.scalacompiler.test/src/test/java"/>
 	<property name="report.dir" location="${env.WORKSPACE}/reports" />
 		
 	
