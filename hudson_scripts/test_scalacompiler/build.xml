@@ -9,7 +9,7 @@
 	<property name="equinox.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.launcher_1.0.200.v20090520.jar"/>
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
 	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
-	<property name="build.bin" location="${env.WORKSPACE}/plugins/org.kermeta.language.scalacompiler.test/target/classes/"/>
+	<property name="build.bin" location="./plugins/org.kermeta.language.scalacompiler.test/target/classes/"/>
 	
 	<property name="src" location="./plugins/org.kermeta.language.scalacompiler.test/src/main/java"/>
 	<property name="test.src" location="./plugins/org.kermeta.language.scalacompiler.test/src/test/java"/>
