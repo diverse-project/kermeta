@@ -1,0 +1,41 @@
+<project name="compile_antlr2" default="compile">
+	<!-- configuration properties -->		
+	<!-- project configuration -->
+	<property environment="env"/>
+
+	<property name="env.WORKSPACE" location="E:/hudson/home/jobs/compile_divastudio/workspace"/>
+	<property name="eclipse.base.dir" location="${env.WORKSPACE}/eclipsebase"/>			
+	<property name="eclipse.home" location="${eclipse.base.dir}/eclipse"/>
+	<property name="equinox.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.launcher_1.0.200.v20090520.jar"/>
+	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
+	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
+	
+	<target name="all" depends="compile">
+		
+	</target>
+	
+	<target name="compile" depends="">	
+		<ant antfile="get_kermeta_standalone_build.xml" target="all"></ant>
+<!-- <mkdir dir="${eclipse.workspace.dir}"/>
+		<java jar="${equinox.jar}"
+		           fork="true"
+		           failonerror="true"
+		           maxmemory="128m"
+		           >
+			<arg value="-application"/>
+			<arg value="org.eclipse.ant.core.antRunner"/>
+			<arg value="-buildfile"/>
+-->
+			<!--<arg value="${env.WORKSPACE}/build.xml"/>-->
+<!--			<arg value="${eclipse.home}/plugins/org.eclipse.pde.build_3.5.0.v20090527-1800/scripts/build.xml"/>
+			<arg value="-data"/>
+			<arg value="${eclipse.workspace.dir}"/>
+			<arg value="-Dbuilder=${env.WORKSPACE}/divastudio/divastudio_build_process/automation/compile_studio/eclipse_build_scripts"/>
+-->			<!--<arg value="-Dcomponent=traceability"/>-->
+			<!--<arg value="-Dpde.build.scripts=${eclipse.home}/plugins/org.eclipse.pde.build_3.4.1.R34x_v20080805/scripts"/>-->
+			<!--<arg value="-Dbase=${eclipse.home}"/>-->
+<!--		</java>
+-->	
+
+	</target>
+</project>

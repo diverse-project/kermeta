@@ -1,0 +1,69 @@
+<!-- $Id: deploy_build.xml 8749 2009-10-07 08:39:58Z dvojtise $ -->
+<project name="get_kermeta_standalone" default="all" basedir=".">
+        
+    <description>
+        Get the DiVA studio base from its official location
+    </description>
+
+	<property name="env.WORKSPACE" location="c:/Temp/testgetbase"/>
+	<property name="kermeta.standalone.dir" location="${env.WORKSPACE}/kermetastandalone"/>	
+	<property name="kermeta.standalone.downloaded.zip" location="${env.WORKSPACE}/kermetastandalone.tmp/kermetastandalone.zip"/>
+	<property name="kermeta.standalone.url" value="http://divastudio.gforge.inria.fr/bundle/latest_build/kermetastandalone.zip"/>
+	
+	<path id="ant-extensions">
+	    <fileset dir="${basedir}/ant-extensions" includes="**/*.jar" />
+	    <pathelement path="${basedir}/ant-extensions" />
+	  </path>
+	
+    <target name="all" depends=""
+		description="Get a  standaolone version of Kermeta">
+		<!-- TODO in the future get the lastest succesful build of the standalone kermeta -->
+	    <!-- current hack : get a copy from the disk -->	    
+	    <untar compression="gzip" src="/local/tool_cache/kermeta_standalone/standalone.tgz" dest="${kermeta.standalone.dir}"/>
+	
+        <!--  <antcall target="check.expand.divastudio_base.zip"/> --> 
+	   
+    </target>
+	
+	<!-- TODO get the base from an adress on the web -->
+<!--	
+	<target name="get.base.zip">
+		<mkdir dir="${env.WORKSPACE}/divabase.tmp/"/>
+		<get src="${divastudio.base.url}" 
+					dest="${diva.base.downloaded.zip}"
+					usetimestamp="true"/>
+	</target>
+	<target name="check.expand.divastudio_base.zip">
+	    <condition property="tmp:docbook.available" value="true">
+	        <and>
+	        <available file="${diva.base.dir}/eclipse" type="dir" />
+	        <uptodate srcfile="${diva.base.downloaded.zip}" 
+	        		  targetfile="${diva.base.dir}/divastudiobase.zip.tstamp" />
+	        </and>
+	    </condition>
+	    <antcall target="expand.divastudio_base.zip" />
+	</target>
+	<target name="expand.divastudio_base.zip" >
+		<echo>
+	    #####################################################
+        UNPACKING OR UPGRADING DIVASTUDIO BASE
+	    #####################################################
+	    </echo>
+		<delete  dir="${diva.base.dir}"/>
+		<mkdir  dir="${diva.base.dir}"/>
+		<unzip dest="${diva.base.dir}"
+			src="${diva.base.downloaded.zip}">
+		</unzip>    
+	    <taskdef name="LastModifiedMillis" classname="LastModifiedMillis">
+	        <classpath refid="ant-extensions" />
+	    </taskdef>
+
+		<LastModifiedMillis file="${diva.base.downloaded.zip}" property="millis" />
+		<touch file="${diva.base.dir}/divastudiobase.zip.tstamp" millis="${millis}" />
+    </target>
+	
+	<target name="clean.base" >
+		<delete  dir="${diva.base.dir}"/>
+    </target>
+-->	
+</project>
