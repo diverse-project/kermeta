@@ -6,7 +6,7 @@
  *            dvojtise
  */
 @mainClass "scalacompiler::ScalaCompiler"
-@mainOperation "main"
+@mainOperation "compile"
 
 
 package scalacompiler;
@@ -14,9 +14,12 @@ package scalacompiler;
 
 require kermeta
 require "kermetaAspects.kmt"
+
+using kermeta::standard
+
 class ScalaCompiler
 {
-	operation main() : Void is do 
-		// TODO: implement 'main' operation
+	operation compile(inputKMFile : String) : Void is do 
+		stdio.writeln("Compiling to Scala " + inputKMFile +"...")
 	end
 }

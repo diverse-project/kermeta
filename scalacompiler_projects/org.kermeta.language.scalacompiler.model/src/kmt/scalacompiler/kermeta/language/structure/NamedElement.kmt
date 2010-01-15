@@ -1,5 +1,5 @@
 /* $Id:$
- * Creation : 2010-01-14
+ * Creation : 2010-01-15
  * Licence  : EPL 
  * Copyright: IRISA/INRIA
  * Authors  : 
@@ -11,13 +11,18 @@ require kermeta
 // require "http://www.kermeta.org/kermeta/1_2_0//kermeta"
 // require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
 require "platform:/lookup/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/ScalaCompilerContext.kmt"
+require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Object.kmt"
+
 
 using kermeta::standard
 using kermeta::utils
 using scalacompiler
 
-aspect class NamedElement {
-   operation generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)  is do
+aspect class NamedElement inherits Object{
+   /**
+    * Generate Scala code
+    */
+   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
       // TO DO
    end
 }

@@ -1,5 +1,5 @@
 /* $Id:$
- * Creation : 2010-01-14
+ * Creation : 2010-01-15
  * Licence  : EPL 
  * Copyright: IRISA/INRIA
  * Authors  : 
@@ -34,8 +34,6 @@ require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/sca
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/behavior/Loop.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/behavior/SelfExpression.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/behavior/VariableDecl.kmt"
-require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/String.kmt"
-require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Boolean.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Operation.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Property.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Type.kmt"
@@ -43,7 +41,6 @@ require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/sca
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/EnumerationLiteral.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/TypeVariableBinding.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Object.kmt"
-require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Integer.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/MultiplicityElement.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/TypeDefinition.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Class.kmt"
@@ -54,12 +51,9 @@ require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/sca
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Parameter.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/PrimitiveType.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/TypedElement.kmt"
-require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/UnlimitedNatural.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Tag.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Constraint.kmt"
-require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/ConstraintLanguage.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/ClassDefinition.kmt"
-require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/ConstraintType.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/GenericTypeDefinition.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/ParameterizedType.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/TypeVariable.kmt"
@@ -76,7 +70,4 @@ require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/sca
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/FunctionType.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/VoidType.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/TypeDefinitionContainer.kmt"
-require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/DummyClass.kmt"
-require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/DummyClass.kmt"
-
 
