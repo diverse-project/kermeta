@@ -3,39 +3,44 @@
 	<!-- project configuration -->
 	<property environment="env"/>
 
-	<property name="env.WORKSPACE" location="E:/hudson/home/jobs/compile_divastudio/workspace"/>
+	<property name="env.WORKSPACE" location="."/>
 	<property name="eclipse.base.dir" location="${env.WORKSPACE}/eclipsebase"/>			
 	<property name="eclipse.home" location="${eclipse.base.dir}/eclipse"/>
 	<property name="equinox.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.launcher_1.0.200.v20090520.jar"/>
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
 	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
+	<property name="build.bin" location="${env.WORKSPACE}/plugins/org.kermeta.language.scalacompiler.test/target/classes/"/>
 	
-	<target name="all" depends="compile">
-		
+	<property name="src" location="${env.WORKSPACE}/plugins/org.kermeta.language.scalacompiler.test/src/main/java"/>
+	<property name="test.src" location="${env.WORKSPACE}/plugins/org.kermeta.language.scalacompiler.test/src/test/java"/>
+	
+	
+	<path id="interpreter.class.path">
+			
+			<pathelement location="${env.WORKSPACE}/fr.irisa.triskel.kermeta.standalone/dist/all_in_one_jar/kermeta_standalone_full.jar" />
+		    <fileset dir="${env.WORKSPACE}/lib">
+				<include name="**/*.jar" />
+			</fileset> 
+		</path>
+	
+	<target name="all">
+		<antcall target="compile_java"></antcall>
 	</target>
 	
-	<target name="compile" depends="">	
-		<ant antfile="build_scripts/get_kermeta_standalone_build.xml" target="all"></ant>
-<!-- <mkdir dir="${eclipse.workspace.dir}"/>
-		<java jar="${equinox.jar}"
-		           fork="true"
-		           failonerror="true"
-		           maxmemory="128m"
-		           >
-			<arg value="-application"/>
-			<arg value="org.eclipse.ant.core.antRunner"/>
-			<arg value="-buildfile"/>
--->
-			<!--<arg value="${env.WORKSPACE}/build.xml"/>-->
-<!--			<arg value="${eclipse.home}/plugins/org.eclipse.pde.build_3.5.0.v20090527-1800/scripts/build.xml"/>
-			<arg value="-data"/>
-			<arg value="${eclipse.workspace.dir}"/>
-			<arg value="-Dbuilder=${env.WORKSPACE}/divastudio/divastudio_build_process/automation/compile_studio/eclipse_build_scripts"/>
--->			<!--<arg value="-Dcomponent=traceability"/>-->
-			<!--<arg value="-Dpde.build.scripts=${eclipse.home}/plugins/org.eclipse.pde.build_3.4.1.R34x_v20080805/scripts"/>-->
-			<!--<arg value="-Dbase=${eclipse.home}"/>-->
-<!--		</java>
--->	
-
+	<target name="get_kermeta_standalone" depends="">	
+		<ant antfile="build_scripts/get_kermeta_standalone_build.xml" target="all"></ant>	
+	</target>
+	
+	<target name="compile_java" depends="get_kermeta_standalone">
+		<mkdir dir="${build.bin}" />
+		<echo>${eclipse.home}</echo>
+		<echo>${kermeta.interpreter.jar}</echo>
+		<!-- <javac srcdir="${src}:${test.src}" destdir="${build.bin}" debug="true"> -->
+		<javac srcdir="${test.src}" destdir="${build.bin}" debug="true"> 
+			<classpath>
+				<!--<pathelement path="${MTLcompiler.path}/bin"/>-->
+				<path refid="interpreter.class.path" />
+			</classpath>
+		</javac>
 	</target>
 </project>
