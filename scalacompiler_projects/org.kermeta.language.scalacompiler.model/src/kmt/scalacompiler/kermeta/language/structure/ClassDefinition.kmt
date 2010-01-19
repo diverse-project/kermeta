@@ -27,6 +27,49 @@ aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer{
      from kermeta::language::structure::GenericTypeDefinition
      is do
       self.context := context
+      var par : ClassDefinition init self
+      
+     		var genpackageName : StringBuffer init StringBuffer.new
+			var packageName : StringBuffer init StringBuffer.new
+			
+			/*genpackageName.append(context.getPackageEquivalence(par.container.asType(Package).getQualifiedNameCompilo))
+
+			if (Util.hasEcoreTag(par.eContainer().asInstanceOf[Package])){
+				genpackageName.append("ScalaAspect")
+			}
+			packageName.append(genpackageName.toString)
+			packageName.append(".")
+			
+			var res : StringBuilder = new StringBuilder
+			res.append("package "+genpackageName+"\n")
+			res.append("import kermeta.io._\n")			
+			res.append("import kermeta.standard._\n")
+			res.append("import  kermeta.standard.JavaConversions._\n")
+			res.append("import kermeta.standard.PrimitiveConversion._\n")
+			res.append("import kermeta.kunit.KunitConversions._\n")
+			par.generateScalaCode(res)
+			Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())
+			if (!Util.hasEcoreTag(par)){
+				var res1 : StringBuilder = new StringBuilder
+				res1.append("package "+genpackageName+"\n")
+				res1.append("trait ")
+				res1.append(par.getName())	
+				
+				par.generateParamerterClass(res1);
+				if(!par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo.equals("kermeta.language.structure.Object")){
+					//log.debug("SuperTypefound="+ par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
+					var listSuperTypes = par.getSuperType()
+					var i = 0
+					for(a <- listSuperTypes){
+						if(i == 0) { res1.append(" extends ") } else { res1.append(" with ") } 
+						res1.append(a.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
+						i = i + 1
+					}
+				} 
+				//res1.append("trait " + par.getName + " extends "+superQualifiedName+" with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect")
+				Util.generateFile(genpackageName.toString, par.getName, res1.toString())
+			}
+      */
 	   	
    end
     

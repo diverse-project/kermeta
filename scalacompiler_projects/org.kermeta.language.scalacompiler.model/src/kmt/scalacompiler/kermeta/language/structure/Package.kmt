@@ -14,6 +14,7 @@ require "platform:/lookup/org.kermeta.language.scalacompiler.model/src/kmt/scala
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/NamedElement.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/TypeDefinitionContainer.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/ClassDefinition.kmt"
+require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Enumeration.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/standard/standard.kmt"
 
 
@@ -28,10 +29,14 @@ aspect class Package inherits NamedElement, TypeDefinitionContainer{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer) 
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer) 
      from kermeta::language::structure::NamedElement
      is do
-      // TO DO
+      	var par : Package init self 
+      	context.actualPackage := par.qualifiedName
+		par.ownedTypeDefinition.select{p |  p.isInstanceOf(ClassDefinition)}.each{p | p.asType(ClassDefinition).generateScala(context,res)}
+		par.ownedTypeDefinition.select{p | p.isInstanceOf(Enumeration)}.each{p | p.asType(Enumeration).generateEnum(context)}
+       
    end
    	operation pass1(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer,ctxtp1 : ScalaCompilerContextPass1):Void is do
 	   	var par : Package init self 

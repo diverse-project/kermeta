@@ -22,7 +22,35 @@ aspect class Enumeration inherits DataType{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+    
+    
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+     	res.append(context.getPackageEquivalence(self.container.asType(Package).qualifiedName)+"."+self.name+"."+self.name)
+
    end
+   
+   	
+	operation generateEnum(context : ScalaCompilerContext):Void is do
+		
+		var res : StringBuffer init StringBuffer.new
+		res.append("package "+context.getPackageEquivalence(self.container.asType(Package).qualifiedName)+"\n")
+		res.append("import kermeta.io._\n")			
+			res.append("import kermeta.standard._\n")
+			res.append("import kermeta.standard.JavaConversions._\n")
+			res.append("object "+self.name+" extends Enumeration {\n")
+			res.append("type "+self.name+" = Value\n")
+			res.append("val ")
+			var i :Integer init 0
+			self.ownedLiteral().each{e| 
+			if (i!=0) then res.append(",")	end
+				res.append(context.protectScalaKeyword(e.name))
+				i:=i+1
+			}
+			res.append(" = Value\n"+"}")
+			context.generateFile(context.getPackageEquivalence(self.container.asType(Package).qualifiedName), self.name, res.toString())	
+	end
+	
+	method getQualifiedNameCompilo():String is do
+		result := self.container.asType(Object).getQualifiedNameCompilo() + "."+ self.name	  
+	end
 }

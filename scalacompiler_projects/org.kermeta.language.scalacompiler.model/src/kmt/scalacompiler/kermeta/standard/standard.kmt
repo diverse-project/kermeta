@@ -26,13 +26,3 @@ aspect class String
 	end
 }
 
-aspect class Collection<G>
-{
-	operation sort(s:String):OrderedSet<G> is do
-		
-		
-		result := OrderedSet<G>.new
-	
-	end
-	
-}

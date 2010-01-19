@@ -23,9 +23,11 @@ aspect class DataType inherits Type, TypeDefinition{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer) 
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer) 
      from kermeta::language::structure::Type
      is do
-      // TO DO
+      	res.append(self.container.asType(Package).qualifiedName)
+		res.append(".")
+		res.append(self.name)
    end
 }
