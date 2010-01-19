@@ -14,7 +14,9 @@ package scalacompiler;
 
 require kermeta
 require "kermetaAspects.kmt"
+require "ScalaCompilerContext.kmt"
 
+ 
 using kermeta::standard
 using kermeta::persistence
 using kermeta::language::structure
@@ -23,6 +25,10 @@ using kermeta::utils
 /**
  * Scala compiler, this class takes a km model and generates the scala code that will work on top of an EMF platform
  */
+ 
+ 
+ //inputKMFile : platform:/resource/org.kermeta.language.scalacompiler.test/src/test/resources/tests/000HelloWorld.km
+
 class ScalaCompiler
 {
 	operation compile(inputKMFile : String, outputLocation : String) : Void is do 
