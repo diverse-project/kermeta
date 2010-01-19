@@ -1,0 +1,18 @@
+<%@ket
+package="scalacompiler"
+require="kermeta"
+using="kermeta::standard kermeta::utils kermeta::standard scalacompiler"
+isAspectClass="false"
+class="MainRunnerTemplate"
+ismethod="false"operation="generate"
+parameters="mainClass:String mainOperation:String workspaceURI:String pluginURI:String"
+%>
+package runner 
+import java.io.PrintStream
+object MainRunner  extends fr.irisa.triskell.scala.generated.fw.ImplicitConversion{
+def main(args : Array[String]) : Unit = {
+	System.setOut(new PrintStream("outputStream"));
+kermeta.persistence.EcorePackages.workspaceURI = "<%=workspaceURI%>"
+kermeta.persistence.EcorePackages.pluginURI = "<%=pluginURI%>"
+
+

@@ -24,4 +24,7 @@ aspect class Object {
    operation generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
       // TO DO
    end
+   
+  operation getQualifiedNameCompilo():String  is abstract 
+	
 }

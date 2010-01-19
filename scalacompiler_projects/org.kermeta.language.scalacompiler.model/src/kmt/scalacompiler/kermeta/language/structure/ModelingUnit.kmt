@@ -12,6 +12,8 @@ require kermeta
 // require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
 require "platform:/lookup/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/ScalaCompilerContext.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Object.kmt"
+require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/standard/standard.kmt"
+require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Package.kmt"
 
 
 using kermeta::standard
@@ -22,7 +24,107 @@ aspect class ModelingUnit inherits Object{
    /**
     * Generate Scala code
     */
+   
+   reference context : ScalaCompilerContext
+   
    method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+      self.context := context
+      
+      
    end
+   
+   	operation initForEcorePackage(parentpack : String,packNam:String):String is do
+		var res : StringBuffer init StringBuffer.new
+		var packNameUpper :String 
+		packNameUpper:= packNam.substring(0,1).toUpperCase + packNam.substring(1,packNam.size)
+		var packName :String init void
+		if("".equals(parentpack)) then
+			packName:=packNam
+		else
+			packName:=parentpack+"."+packNam
+		end  
+		packName:= context.getPackageEquivalence(packName)
+		var impName :String  init packName+ context.getImplPackageSuffix(packName)+packNameUpper+"PackageImpl"
+		res.append("{\tvar c : java.lang.reflect.Constructor[_] = classOf["+impName+"].getDeclaredConstructors.first\n")
+		res.append("\tc.setAccessible(true);\n")
+	    res.append("\tvar pack : "+ impName + " =  c.newInstance().asInstanceOf["+ impName + "]\n")
+		res.append("\tpack.setEFactoryInstance(" + packName + "ScalaAspect.RichFactory)\n " )
+		res.append("\tvar f : java.lang.reflect.Field = classOf[org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
+	    res.append("\tf.setAccessible(true)\n")
+	    if(packName.equals("org.eclipse.emf.ecore")) then 
+	    	res.append("\tf.set(pack, "+ packName + "ScalaAspect.RichFactory)\n")
+	    end
+		res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put("+packName + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
+		res.append("\tkermeta.persistence.EcorePackages.getPacks().put("+packName + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
+		res.append("\t"+impName +".init\n}\n")
+		result :=res.toString
+	end
+   
+	
+	reference cachpackages : Package[0..*] 
+	
+	operation addPackage(packs : OrderedSet<Package>):Void is do
+		 packs.each{e| if (context.hasEcoreTag(e)) then 
+				 cachpackages.add(e)
+				 addPackage(e.nestedPackage)
+			end
+		 }
+	end
+	
+	reference ctxtp1 : ScalaCompilerContextPass1
+	 
+	operation pass1(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer,ctxtp1 : ScalaCompilerContextPass1) : Void is do
+		self.ctxtp1 := ctxtp1
+		self.context := context
+      	var par : ModelingUnit init self
+		cachpackages.clear //:= Sequence<Package>.new
+		addPackage(par.packages)
+		var mainClass : String init par.tag.select{e | "mainClass".equals(e.name)}.first.~value
+		var mainOperation : String init par.tag().select{e| "mainOperation".equals(e.name)}.first.~value
+		var packageName :String init mainClass.substring(0,mainClass.lastIndexOf("::")).replace("::", ".")
+		var className :String init mainClass.substring(mainClass.lastIndexOf("::")+2,mainClass.size).replace("::", ".")
+		//TODO gérer le cas des package venant d'ecore
+		var res :StringBuffer init StringBuffer.new
+		res.append("package runner \n")
+		res.append("import java.io.PrintStream\n")
+		res.append("object MainRunner  extends fr.irisa.triskell.scala.generated.fw.ImplicitConversion{\n" +
+		"def main(args : Array[String]) : Unit = {\n\t" )
+		res.append("System.setOut(new PrintStream(\"outputStream\"));\n")
+		res.append("kermeta.persistence.EcorePackages.workspaceURI = \"" + context.GlobalConfiguration.workspaceURI + "\"\n")
+		res.append("kermeta.persistence.EcorePackages.pluginURI = \"" + context.GlobalConfiguration.pluginURI+ "\";\n")
+		//packages.re
+		var ecore:Package init cachpackages.detect{e|e.name.equals("ecore")}
+		cachpackages.remove(ecore)
+		cachpackages.addAt(0,ecore)
+		
+		cachpackages.each{e| 
+			if ( not (e.qualifiedName.startWith("kermeta") or e.qualifiedName.startWith("language"))) then
+				if (e.nestingPackage == void) then
+					res.append(initForEcorePackage("", e.name))
+				else 
+					res.append(
+						initForEcorePackage(e.nestingPackage.qualifiedName, e.name))
+				end
+			end
+		}
+		res.append(context.getPackageEquivalence(packageName))
+		
+		if (cachpackages.select{e|  e.qualifiedName.equals(packageName)}.size==1) then
+			res.append("ScalaAspect")
+		end
+		res.append(".RichFactory.create"+ className+"."+mainOperation +"\n}\n}") 
+		context.generateFile("runner", "MainRunner", res.toString())
+		
+  		par.packages.each{p | p.pass1(context,res,ctxtp1) } 		
+	end
+	  
+
+	
+	operation close():Void is do 
+		self.ctxtp1.implicitDef.append("}\n")
+		context.generateFile(context.GlobalConfiguration.frameworkGeneratedPackageName, context.GlobalConfiguration.implicitConvTraitName, self.ctxtp1.implicitDef.toString())
+	end
+   
+   
+   
 }
