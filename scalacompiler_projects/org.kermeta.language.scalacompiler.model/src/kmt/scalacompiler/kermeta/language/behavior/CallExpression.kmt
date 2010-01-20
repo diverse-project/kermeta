@@ -22,7 +22,11 @@ aspect class CallExpression inherits Expression{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
-   end
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+		res.append(".")
+		res.append(context.protectScalaKeyword(self.name))
+		res.append("(")
+		self.parameters.each{par| par.generateScala(context,res)}
+		res.append(")")   
+	end
 }

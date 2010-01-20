@@ -22,7 +22,7 @@ aspect class BooleanLiteral inherits Literal{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+      res.append(self.~value.toString)
    end
 }

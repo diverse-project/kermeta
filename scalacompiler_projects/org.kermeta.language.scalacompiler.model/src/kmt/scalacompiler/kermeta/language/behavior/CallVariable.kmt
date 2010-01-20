@@ -22,7 +22,13 @@ aspect class CallVariable inherits CallExpression{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+      res.append(context.protectScalaKeyword(self.name))
+		if(self.parameters != void and self.parameters.size > 0) then
+			res.append("(")
+			context.generateScalaCodeEach(res,self.parameters,",",context)
+			res.append(")")
+		end
+      
    end
 }

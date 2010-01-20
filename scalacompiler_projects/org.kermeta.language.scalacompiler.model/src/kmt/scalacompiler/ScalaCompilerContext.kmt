@@ -12,6 +12,9 @@ package scalacompiler;
  
 require kermeta
 
+require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Object.kmt"
+
+
 using kermeta::language::structure
 using kermeta::standard
 using kermeta::utils
@@ -277,6 +280,15 @@ class ScalaCompilerContext
 	   	end
 	   }
     end
+      
+    operation generateScalaCodeEach<G>(res : StringBuffer,list : Collection<G>,sep : String, context: ScalaCompilerContext ) : Void is do
+		var i: Integer init 0
+		list.each{e | 
+	 	  if( i!=0) then res.append(sep) end
+	 	  e.asType(Object).generateScala(context,res)
+	 	  i:= i+1
+	   }
 	
+	end
 	
 }
