@@ -22,7 +22,11 @@ aspect class Rescue inherits kermeta::language::structure::Object{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+		res.append("case "+self.exceptionName+":")
+		self.exceptionType.generateScala(context,res)
+		res.append(" => {")
+		self.body.each{b | b.generateScala(context,res) res.append("\n")}
+		res.append("}\n")
    end
 }

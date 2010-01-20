@@ -22,7 +22,10 @@ aspect class Using inherits Object{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+		res.append("\n")
+		res.append("import ")
+		res.append(self.qualifiedName.replace("::","."))
+		res.append("._\n") 
    end
 }

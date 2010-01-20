@@ -22,7 +22,8 @@ aspect class Raise inherits Expression{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+		res.append("throw ")	
+		self.expression.generateScala(context,res)
    end
 }

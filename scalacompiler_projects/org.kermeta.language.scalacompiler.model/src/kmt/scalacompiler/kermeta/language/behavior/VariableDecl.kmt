@@ -12,7 +12,7 @@ require kermeta
 // require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
 require "platform:/lookup/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/ScalaCompilerContext.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/behavior/Expression.kmt"
-
+require "templates/variableDeclTemplate.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -22,7 +22,16 @@ aspect class VariableDecl inherits Expression{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+		var template :template::VariableDeclTemplate init template::VariableDeclTemplate.new
+		var typeVal : StringBuffer init StringBuffer.new
+		var initVal : StringBuffer init StringBuffer.new
+		self.type.asType(Object).generateScala(context,typeVal)
+		if(self.initialization !=  void) then
+			self.initialization.generateScala(context,initVal)
+		else 
+			initVal.append("null.asInstanceOf["+typeVal.toString+"]")
+		end
+		res.append(template.generate(context.protectScalaKeyword(self.identifier), typeVal.toString ,initVal.toString))
    end
 }
