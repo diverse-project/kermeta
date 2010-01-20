@@ -12,6 +12,8 @@ require kermeta
 // require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
 require "platform:/lookup/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/ScalaCompilerContext.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/ParameterizedType.kmt"
+require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Object.kmt"
+require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Package.kmt"
 
 
 using kermeta::standard
@@ -22,7 +24,15 @@ aspect class Class inherits ParameterizedType{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+		var pack : String init self.typeDefinition.container.asType(Package).getQualifiedName 
+		pack:=context.getPackageEquivalence(pack)
+		var s : String init pack + "."+self.typeDefinition.asType(ClassDefinition).name 
+		res.append(context.getTypeEquivalence(s))
    end
+   
+    method getQualifiedNameCompilo(context : ScalaCompilerContext):String  is do
+		result := self.typeDefinition.getQualifiedNameCompilo(context)
+	end
+   
 }
