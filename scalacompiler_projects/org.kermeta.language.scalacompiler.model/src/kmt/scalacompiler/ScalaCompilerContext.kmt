@@ -168,7 +168,7 @@ class ScalaCompilerContext
 		keywords .add("@")
 
  
-		var frameworkDefaultAspect : Hashtable<String,String> init Hashtable<String,String>.new
+		frameworkDefaultAspect := Hashtable<String,String>.new
 		frameworkDefaultAspect.put("ClassDefinition","ClassDefinitionAspect")
 				
 	end

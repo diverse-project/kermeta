@@ -29,7 +29,7 @@ aspect class ModelingUnit inherits Object{
    
    method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
       self.context := context
-      
+      self.packages.each{p|p.generateScala(context,buffer)}
       
    end
    
@@ -94,8 +94,10 @@ aspect class ModelingUnit inherits Object{
 		res.append("kermeta.persistence.EcorePackages.pluginURI = \"" + context.GlobalConfiguration.pluginURI+ "\";\n")
 		//packages.re
 		var ecore:Package init cachpackages.detect{e|e.name.equals("ecore")}
-		//cachpackages.remove(ecore)
-		//cachpackages.addAt(0,ecore)
+		if (ecore != void) then
+			cachpackages.remove(ecore)
+			cachpackages.addAt(0,ecore)
+		end
 		stdio.writeln(cachpackages.size.toString)
 		
 		cachpackages.each{e| 

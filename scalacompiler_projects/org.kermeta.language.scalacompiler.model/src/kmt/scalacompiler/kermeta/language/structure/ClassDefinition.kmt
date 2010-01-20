@@ -35,7 +35,7 @@ aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer{
      		var genpackageName : StringBuffer init StringBuffer.new
 			var packageName : StringBuffer init StringBuffer.new
 			
-			genpackageName.append(context.getPackageEquivalence(par.container.asType(Package).getQualifiedNameCompilo))
+			genpackageName.append(context.getPackageEquivalence(par.container.asType(Package).getQualifiedNameCompilo(context)))
 
 			if (context.hasEcoreTag(par.container.asType(Package))) then
 				genpackageName.append("ScalaAspect")
@@ -59,13 +59,13 @@ aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer{
 				res1.append(par.name)	
 				
 				par.generateParamerterClass(res1)
-				if( not par.superType.first.asType(Class).typeDefinition.getQualifiedNameCompilo.equals("kermeta.language.structure.Object")) then
+				if( not par.superType.first.asType(Class).typeDefinition.getQualifiedNameCompilo(context).equals("kermeta.language.structure.Object")) then
 					//log.debug("SuperTypefound="+ par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
 					var listSuperTypes : OrderedSet<Type> init par.superType
 					var i : Integer  init 0
 					listSuperTypes.each{a|
 						if(i == 0) then res1.append(" extends ")  else  res1.append(" with ") end 
-						res1.append(a.asType(Class).typeDefinition.getQualifiedNameCompilo)
+						res1.append(a.asType(Class).typeDefinition.getQualifiedNameCompilo(context))
 						i := i + 1
 					}
 				end
@@ -106,7 +106,7 @@ aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer{
 				var  implName:String init context.getImplPackageSuffix(packageName.toString)
 				ctxtp1.viewDef.append(" class Rich"+par.name+" extends "+ context.getTypeEquivalence(genpackageName.toString+implName.substring(1,implName.size) + par.name+"Impl")+" with "+packageName.toString +"."+par.name+"Aspect \n")
 				ctxtp1.implicitDef.append(" implicit def richAspect(v : "+ context.getTypeEquivalence(genpackageName.toString+par.name)+") = v.asInstanceOf["+ packageName.toString+"."+ par.name+"Aspect]\n" )
-				ctxtp1.implicitDef.append(" implicit def richAspect(v : "+ packageName.toString+"."+par.name+"Aspect) = v.asInstanceOf["+ par.container.asType(Object).getQualifiedNameCompilo+ context.getImplPackageSuffix(packageName.toString) + par.name+"Impl]\n")
+				ctxtp1.implicitDef.append(" implicit def richAspect(v : "+ packageName.toString+"."+par.name+"Aspect) = v.asInstanceOf["+ par.container.asType(Object).getQualifiedNameCompilo(context)+ context.getImplPackageSuffix(packageName.toString) + par.name+"Impl]\n")
 			else
 				ctxtp1.viewDef.append(" class Rich"+par.name+ param.toString +" extends org.eclipse.emf.ecore.impl.EObjectImpl with "+ context.getTypeEquivalence(packageName.toString +"."+ par.name)+ param.toString +" with "+packageName.toString +"."+par.name+"Aspect" + param.toString +" \n")
 				ctxtp1.implicitDef.append(" implicit def richAspect" + param.toString + "(v : "+ context.getTypeEquivalence(packageName.toString+"."+par.name)+ param.toString +") = v.asInstanceOf["+ packageName.toString+"."+par.name+"Aspect"+ param.toString +"]\n") 
@@ -125,8 +125,9 @@ aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer{
 	//}
 	end
 	
-	method getQualifiedNameCompilo():String  is do
-		result :=context.getTypeEquivalence(self.container.asType(Object).getQualifiedNameCompilo() + "."+ self.name)
+	method getQualifiedNameCompilo(context : ScalaCompilerContext):String  is do
+		//stdio.writeln(self.name + " " +self.container.toString + " " +context.toString)
+		result :=context.getTypeEquivalence(self.container.asType(Object).getQualifiedNameCompilo(context) + "."+ self.name)
 	end
 	
 	operation generateParamerterClass(res1:StringBuffer) :Void is do
@@ -137,7 +138,7 @@ aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer{
 						if (i>0) then
 							res1.append(",")
 						end
-						res1.append(param.getQualifiedNameCompilo())
+						res1.append(param.getQualifiedNameCompilo(context))
 						i:=i+1
 					}
 					res1.append("]")
@@ -155,7 +156,7 @@ aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer{
 			
 			
   			if (self.superType.size == 1 and "Object".equals(self.superType.first.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).name) ) then
-				res.append(" extends "+ context.getDefaultAspect(self.getQualifiedNameCompilo()))
+				res.append(" extends "+ context.getDefaultAspect(self.getQualifiedNameCompilo(context)))
 				res.append(" with "+context.GlobalConfiguration.frameworkGeneratedPackageName + "."+context.GlobalConfiguration.implicitConvTraitName)
 			 else 
 				var i :Integer init 0
@@ -183,10 +184,10 @@ aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer{
 					i:=i+1
 				}
 				
-				res.append(" with "+ context.getDefaultAspect(self.getQualifiedNameCompilo()))
+				res.append(" with "+ context.getDefaultAspect(self.getQualifiedNameCompilo(context)))
 				res.append(" with "+context.GlobalConfiguration.frameworkGeneratedPackageName + "."+context.GlobalConfiguration.implicitConvTraitName)
 				end
-				res.append(" with "+self.getQualifiedNameCompilo)
+				res.append(" with "+self.getQualifiedNameCompilo(context))
 				
 				res.append("{\n")
 				self.ownedAttribute.each{a| a.generateScala(context,res)}

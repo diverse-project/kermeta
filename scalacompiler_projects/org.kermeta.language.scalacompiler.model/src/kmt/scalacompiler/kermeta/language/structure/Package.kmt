@@ -36,10 +36,13 @@ aspect class Package inherits NamedElement, TypeDefinitionContainer{
      is do
       	self.context := context
       	var par : Package init self 
+      	
       	context.actualPackage := par.getQualifiedName
+		if (not context.actualPackage.startWith("kermeta") ) then
+		
 		par.ownedTypeDefinition.select{p |  p.isInstanceOf(ClassDefinition)}.each{p | p.asType(ClassDefinition).generateScala(context,res)}
 		par.ownedTypeDefinition.select{p | p.isInstanceOf(Enumeration)}.each{p | p.asType(Enumeration).generateEnum(context)}
-       
+       end
    end
    	operation pass1(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer,ctxtp1 : ScalaCompilerContextPass1):Void is do
       	self.context := context
@@ -83,7 +86,7 @@ aspect class Package inherits NamedElement, TypeDefinitionContainer{
 		
 	end
    
-   	method getQualifiedNameCompilo():String is do result := context.getPackageEquivalence(self.getQualifiedName()) end
+   	method getQualifiedNameCompilo(context : ScalaCompilerContext):String is do result := context.getPackageEquivalence(self.getQualifiedName()) end
    
    
    operation getQualifiedName():String  is do

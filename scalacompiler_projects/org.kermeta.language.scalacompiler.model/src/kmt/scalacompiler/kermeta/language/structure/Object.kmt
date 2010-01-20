@@ -25,6 +25,6 @@ aspect class Object {
       // TO DO
    end
    
-  operation getQualifiedNameCompilo():String  is abstract 
+  operation getQualifiedNameCompilo(context : ScalaCompilerContext):String  is abstract 
 	
 }

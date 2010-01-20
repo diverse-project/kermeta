@@ -50,7 +50,7 @@ aspect class Enumeration inherits DataType{
 			context.generateFile(context.getPackageEquivalence(self.container.asType(Package).qualifiedName), self.name, res.toString())	
 	end
 	
-	method getQualifiedNameCompilo():String is do
-		result := self.container.asType(Object).getQualifiedNameCompilo() + "."+ self.name	  
+	method getQualifiedNameCompilo(context : ScalaCompilerContext):String is do
+		result := self.container.asType(Object).getQualifiedNameCompilo(context) + "."+ self.name	  
 	end
 }
