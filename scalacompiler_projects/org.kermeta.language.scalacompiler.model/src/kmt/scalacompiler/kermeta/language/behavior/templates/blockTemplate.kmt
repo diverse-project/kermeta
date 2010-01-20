@@ -1,0 +1,15 @@
+package template;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class BlockTemplate{
+operation generate(body:String, catchBody:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\ntry {\n ")
+_res.append(body)
+_res.append(" \n} catch {\n ")
+_res.append(catchBody)
+_res.append(" }\n")
+result := _res.toString
+end
+}

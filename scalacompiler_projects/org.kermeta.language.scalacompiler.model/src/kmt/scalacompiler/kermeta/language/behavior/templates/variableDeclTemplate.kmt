@@ -1,0 +1,17 @@
+package template;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class VariableDeclTemplate{
+operation generate(ident:String, type:String, initialize:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\nvar ")
+_res.append(ident)
+_res.append(" : ")
+_res.append(type)
+_res.append(" = ")
+_res.append(initialize)
+_res.append(";")
+result := _res.toString
+end
+}
