@@ -24,12 +24,13 @@ class ScalaCompilerContextPass1{
 	reference factoryDefClass : StringBuffer
    
    
-   	operation initialize(frameworkGeneratedPackageName :String, implicitConvTraitName: String):Void is do 
+   	operation initialize(frameworkGeneratedPackageName :String, implicitConvTraitName: String):ScalaCompilerContextPass1 is do 
 		viewDef := StringBuffer.new
 		implicitDef := StringBuffer.new
 		implicitDef.append("package "+frameworkGeneratedPackageName+"\n")
 		implicitDef.append("trait "+implicitConvTraitName+" {\n")
 		factoryDefClass := StringBuffer.new
+		result:= self
 	end
 
 
@@ -165,7 +166,11 @@ class ScalaCompilerContext
 		keywords .add(">:")
 		keywords .add("#")
 		keywords .add("@")
-		
+
+ 
+		var frameworkDefaultAspect : Hashtable<String,String> init Hashtable<String,String>.new
+		frameworkDefaultAspect.put("ClassDefinition","ClassDefinitionAspect")
+				
 	end
 	
 	reference packageEquivelence :  Hashtable<String,String>
@@ -180,6 +185,17 @@ class ScalaCompilerContext
 	
 	reference typeEquivelence :  Hashtable<String,String>
 	
+	reference frameworkDefaultAspect :  Hashtable<String,String> 
+	
+	operation getDefaultAspect(key:String):String is do
+		var res :String init frameworkDefaultAspect.getValue(key)
+		if (res ==void) then 
+			res := "fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect"
+		end
+		result := res 
+	end
+		
+		
 		
 	operation getTypeEquivalence(key:String):String is do 
 		var res :String init typeEquivelence.getValue(key)
@@ -217,7 +233,8 @@ class ScalaCompilerContext
     * @param content Target file content
     */
 	operation generateFile(repName : String,fileName : String,content : String) : Void is do
-	
+		stdio.writeln("generate File  "+ fileName +" in " + repName)
+		stdio.writeln(content)
 	end
 	   
    
@@ -246,7 +263,7 @@ class ScalaCompilerContext
    
 	
 	operation cleanFolder(repName : String):Void is do
-		//TODO
+		stdio.writeln("clean Folder " + repName)
 	end
 	
 	

@@ -22,7 +22,7 @@ aspect class String
 	end
 	
 	operation lastIndexOf(s:String):Integer is do
-		result ?= extern kermeta::standard::String.lastIndexOf(s)
+		result ?= extern kermeta::standard::String.lastIndexOf(self,s)
 	end
 }
 

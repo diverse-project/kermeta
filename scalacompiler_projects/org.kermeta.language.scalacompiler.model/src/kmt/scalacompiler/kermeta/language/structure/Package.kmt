@@ -26,23 +26,27 @@ aspect class Package inherits NamedElement, TypeDefinitionContainer{
 
 
  
+	reference context : ScalaCompilerContext
+ 
    /**
     * Generate Scala code
     */
    method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer) 
      from kermeta::language::structure::NamedElement
      is do
+      	self.context := context
       	var par : Package init self 
-      	context.actualPackage := par.qualifiedName
+      	context.actualPackage := par.getQualifiedName
 		par.ownedTypeDefinition.select{p |  p.isInstanceOf(ClassDefinition)}.each{p | p.asType(ClassDefinition).generateScala(context,res)}
 		par.ownedTypeDefinition.select{p | p.isInstanceOf(Enumeration)}.each{p | p.asType(Enumeration).generateEnum(context)}
        
    end
    	operation pass1(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer,ctxtp1 : ScalaCompilerContextPass1):Void is do
+      	self.context := context
 	   	var par : Package init self 
-		context.actualPackage := context.packageEquivelence.getValue(par.asType(Package).qualifiedName)
-		if (context.actualPackage != void) then
-			context.actualPackage:=par.qualifiedName
+		context.actualPackage := context.packageEquivelence.getValue(par.asType(Package).getQualifiedName)
+		if (context.actualPackage == void) then
+			context.actualPackage:=par.getQualifiedName
 		end
 		if (context.hasEcoreTag(par)) then 
 			context.actualPackage:=context.actualPackage+"ScalaAspect"
@@ -57,7 +61,7 @@ aspect class Package inherits NamedElement, TypeDefinitionContainer{
 			
 			factoryDef.append ("object "+context.GlobalConfiguration.factoryName + " extends ")
 			if (par.ownedTypeDefinition.select{e| context.hasEcoreTag(par)}.size>0) then
-				factoryDef.append(context.getPackageEquivalence(par.asType(Package).qualifiedName)+context.getImplPackageSuffix(context.actualPackage)+ par.name.substring(0,1).toUpperCase + par.name.substring(1,par.name.size)+"FactoryImpl with") 
+				factoryDef.append(context.getPackageEquivalence(par.asType(Package).getQualifiedName)+context.getImplPackageSuffix(context.actualPackage)+ par.name.substring(0,1).toUpperCase + par.name.substring(1,par.name.size)+"FactoryImpl with") 
 			end				
 			factoryDef.append(" "+context.GlobalConfiguration.frameworkGeneratedPackageName + "."+context.GlobalConfiguration.implicitConvTraitName)
 			factoryDef.append("{\n")
@@ -77,6 +81,18 @@ aspect class Package inherits NamedElement, TypeDefinitionContainer{
 			
 		end
 		
+	end
+   
+   	method getQualifiedNameCompilo():String is do result := context.getPackageEquivalence(self.getQualifiedName()) end
+   
+   
+   operation getQualifiedName():String  is do
+		var res : String init "" 
+        if (self.nestingPackage !=void) then
+            res := self.nestingPackage.getQualifiedName +"."
+        end
+        res := res + self.name
+        result:= res
 	end
    
    

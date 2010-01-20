@@ -13,6 +13,9 @@ require kermeta
 require "platform:/lookup/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/ScalaCompilerContext.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/GenericTypeDefinition.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/TypeContainer.kmt"
+require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Operation.kmt"
+require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Property.kmt"
+require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Package.kmt"
 
 
 using kermeta::standard
@@ -23,7 +26,7 @@ aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer) 
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer) 
      from kermeta::language::structure::GenericTypeDefinition
      is do
       self.context := context
@@ -32,44 +35,44 @@ aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer{
      		var genpackageName : StringBuffer init StringBuffer.new
 			var packageName : StringBuffer init StringBuffer.new
 			
-			/*genpackageName.append(context.getPackageEquivalence(par.container.asType(Package).getQualifiedNameCompilo))
+			genpackageName.append(context.getPackageEquivalence(par.container.asType(Package).getQualifiedNameCompilo))
 
-			if (Util.hasEcoreTag(par.eContainer().asInstanceOf[Package])){
+			if (context.hasEcoreTag(par.container.asType(Package))) then
 				genpackageName.append("ScalaAspect")
-			}
+			end
 			packageName.append(genpackageName.toString)
 			packageName.append(".")
 			
-			var res : StringBuilder = new StringBuilder
-			res.append("package "+genpackageName+"\n")
+			var res : StringBuffer init StringBuffer.new
+			res.append("package "+genpackageName.toString+"\n")
 			res.append("import kermeta.io._\n")			
 			res.append("import kermeta.standard._\n")
 			res.append("import  kermeta.standard.JavaConversions._\n")
 			res.append("import kermeta.standard.PrimitiveConversion._\n")
 			res.append("import kermeta.kunit.KunitConversions._\n")
-			par.generateScalaCode(res)
-			Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())
-			if (!Util.hasEcoreTag(par)){
-				var res1 : StringBuilder = new StringBuilder
-				res1.append("package "+genpackageName+"\n")
+			par.generateScalaCode2(context,res)
+			context.generateFile(genpackageName.toString, par.name+"Aspect", res.toString())
+			if ( not context.hasEcoreTag(par)) then
+				var res1 : StringBuffer init StringBuffer.new
+				res1.append("package "+genpackageName.toString+"\n")
 				res1.append("trait ")
-				res1.append(par.getName())	
+				res1.append(par.name)	
 				
-				par.generateParamerterClass(res1);
-				if(!par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo.equals("kermeta.language.structure.Object")){
+				par.generateParamerterClass(res1)
+				if( not par.superType.first.asType(Class).typeDefinition.getQualifiedNameCompilo.equals("kermeta.language.structure.Object")) then
 					//log.debug("SuperTypefound="+ par.getSuperType().first.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
-					var listSuperTypes = par.getSuperType()
-					var i = 0
-					for(a <- listSuperTypes){
-						if(i == 0) { res1.append(" extends ") } else { res1.append(" with ") } 
-						res1.append(a.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
-						i = i + 1
+					var listSuperTypes : OrderedSet<Type> init par.superType
+					var i : Integer  init 0
+					listSuperTypes.each{a|
+						if(i == 0) then res1.append(" extends ")  else  res1.append(" with ") end 
+						res1.append(a.asType(Class).typeDefinition.getQualifiedNameCompilo)
+						i := i + 1
 					}
-				} 
+				end
 				//res1.append("trait " + par.getName + " extends "+superQualifiedName+" with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect")
-				Util.generateFile(genpackageName.toString, par.getName, res1.toString())
-			}
-      */
+				context.generateFile(genpackageName.toString, par.name, res1.toString())
+			end
+      
 	   	
    end
     
@@ -85,7 +88,7 @@ aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer{
 			var packageName : StringBuffer init  StringBuffer.new
 			
 			
-			genpackageName.append(context.getPackageEquivalence(par.container.asType(Package).qualifiedName))
+			genpackageName.append(context.getPackageEquivalence(par.container.asType(Package).getQualifiedName))
 			packageName.append(genpackageName.toString)
 			if (context.hasEcoreTag(par.container.asType(Package))) then
 				packageName.append("ScalaAspect")
@@ -139,6 +142,126 @@ aspect class ClassDefinition inherits GenericTypeDefinition, TypeContainer{
 					}
 					res1.append("]")
 				end
+	end
+   
+   
+   operation generateScalaCode2(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer) : Void is do
+	
+   		if (context.hasEcoreTag(self)) then
+			res.append("trait ")
+			res.append(self.name)
+			res.append("Aspect") 
+			self.generateParamerterClass(res)
+			
+			
+  			if (self.superType.size == 1 and "Object".equals(self.superType.first.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).name) ) then
+				res.append(" extends "+ context.getDefaultAspect(self.getQualifiedNameCompilo()))
+				res.append(" with "+context.GlobalConfiguration.frameworkGeneratedPackageName + "."+context.GlobalConfiguration.implicitConvTraitName)
+			 else 
+				var i :Integer init 0
+				self.superType.each{superC | 
+					if (i==0) then
+						res.append(" extends ")
+						var ty : GenericTypeDefinition init superC.asType(Class).typeDefinition
+						res.append(context.getPackageEquivalence(ty.container.asType(Package).qualifiedName))
+						
+						if (context.hasEcoreTag(ty.container.asType(Package)) and  not ty.container.asType(Package).qualifiedName().equals("language.structure")) then
+							//println(ty.eContainer.asInstanceOf[Package].getQualifiedName())	
+							res.append("ScalaAspect")
+								
+						end
+						res.append(".")
+						res.append(superC.asType(Class).typeDefinition.name)
+						res.append("Aspect")
+					else
+						res.append(" with ")
+						var ty : GenericTypeDefinition init superC.asType(Class).typeDefinition
+						res.append(context.getPackageEquivalence(ty.container.asType(Package).qualifiedName))
+						res.append(".")
+						res.append(superC.asType(Class).typeDefinition.name)
+					end
+					i:=i+1
+				}
+				
+				res.append(" with "+ context.getDefaultAspect(self.getQualifiedNameCompilo()))
+				res.append(" with "+context.GlobalConfiguration.frameworkGeneratedPackageName + "."+context.GlobalConfiguration.implicitConvTraitName)
+				end
+				res.append(" with "+self.getQualifiedNameCompilo)
+				
+				res.append("{\n")
+				self.ownedAttribute.each{a| a.generateScala(context,res)}
+				self.ownedOperation.select{op| not context.hasEcoreTag(op) or op.body !=void}.each{op| op.generateScala(context,res)}
+				res.append("}\n")
+  		else
+			res.append("trait ")
+			res.append(self.name)
+			res.append("Aspect")
+			self.generateParamerterClass(res)
+
+	  		if (self.superType.size == 0) then
+					//res.append(" extends "+Util.traitname)
+	  			//TODO extends a superClassAspect
+			else
+				//res.append(" extends org.eclipse.emf.ecore.impl.EObjectImpl ")
+				res.append(" ")
+				
+				var i : Integer init 0
+				self.superType.each{superC |
+					if (i==0) then
+						res.append(" extends ")
+					else 
+						res.append(" with ")
+					end
+/*						res.append(" extends ")
+						var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
+						res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
+						res.append(".")
+						res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
+*///					}else{
+						//res.append(" with ")
+						var ty : GenericTypeDefinition init superC.asType(Class).typeDefinition
+						res.append(context.getPackageEquivalence(ty.container.asType(Package).qualifiedName))
+						res.append(".")
+						res.append(superC.asType(Class).typeDefinition.name)
+						res.append("Aspect")
+								//returnedString =returnedString + ", " +superC.getName; 
+//					}
+				i:=i+1
+				}
+				res.append(" with "+context.GlobalConfiguration.frameworkGeneratedPackageName + "."+context.GlobalConfiguration.implicitConvTraitName)
+			end
+  				res.append("{\n")
+
+				self.ownedAttribute.each{a| a.generateScala(context,res)}
+				self.ownedOperation.select{op|  not context.hasEcoreTag(op)}.each{op| op.generateScala(context,res)}
+				
+				/* Generate Invariants */
+				if(self.~inv.size > 0) then
+					/* Generate checkInvariants */
+					res.append("override def checkInvariants(){\n")
+					res.append("val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap( ")
+					var i :Integer init  0
+					self.~inv.each{a | 
+						if(i != 0) then res.append(",") end
+						res.append("(")
+						res.append("\""+a.name+"\" -> (()=>")
+						a.generateScala(context,res)
+						res.append("))")
+						i := i + 1
+					}
+					res.append(" )\n")
+					res.append("checkParamInvariants(invariants)\n")
+					self.superType.each{superC |
+						res.append("super[")
+						res.append(superC.asType(Class).typeDefinition.name)
+						res.append("Aspect].checkInvariants\n")
+					}
+					//res.append("checkParamInvariants(super.getInvariants)\n")
+					res.append("}\n")
+					/* End checkInvariants Generation  */
+				end
+	    		res.append("}\n")
+	  	end
 	end
    
    

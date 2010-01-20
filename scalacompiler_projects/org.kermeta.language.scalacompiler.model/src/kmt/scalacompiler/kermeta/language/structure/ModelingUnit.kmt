@@ -94,22 +94,23 @@ aspect class ModelingUnit inherits Object{
 		res.append("kermeta.persistence.EcorePackages.pluginURI = \"" + context.GlobalConfiguration.pluginURI+ "\";\n")
 		//packages.re
 		var ecore:Package init cachpackages.detect{e|e.name.equals("ecore")}
-		cachpackages.remove(ecore)
-		cachpackages.addAt(0,ecore)
+		//cachpackages.remove(ecore)
+		//cachpackages.addAt(0,ecore)
+		stdio.writeln(cachpackages.size.toString)
 		
 		cachpackages.each{e| 
-			if ( not (e.qualifiedName.startWith("kermeta") or e.qualifiedName.startWith("language"))) then
+			if ( not (e.getQualifiedName.startWith("kermeta") or e. getQualifiedName.startWith("language"))) then
 				if (e.nestingPackage == void) then
 					res.append(initForEcorePackage("", e.name))
 				else 
 					res.append(
-						initForEcorePackage(e.nestingPackage.qualifiedName, e.name))
+						initForEcorePackage(e.nestingPackage. getQualifiedName, e.name))
 				end
 			end
 		}
 		res.append(context.getPackageEquivalence(packageName))
 		
-		if (cachpackages.select{e|  e.qualifiedName.equals(packageName)}.size==1) then
+		if (cachpackages.select{e|  e.getQualifiedName.equals(packageName)}.size==1) then
 			res.append("ScalaAspect")
 		end
 		res.append(".RichFactory.create"+ className+"."+mainOperation +"\n}\n}") 
