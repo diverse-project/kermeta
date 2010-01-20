@@ -12,6 +12,7 @@ require kermeta
 // require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
 require "platform:/lookup/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/ScalaCompilerContext.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/MultiplicityElement.kmt"
+require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Type.kmt"
 
 
 using kermeta::standard
@@ -22,7 +23,45 @@ aspect class Operation inherits MultiplicityElement{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+   		var par: Operation init self
+		res.append("\n   ")
+		if (self.superOperation!=void or  (context.hasEcoreTag(self) and self.body !=void)) then 
+			res.append(" override")
+		end
+		res.append(" def ")
+		res.append(self.name)
+		/* Default constructor declaration */
+		res.append("(") 
+		var i : Integer init 0
+		self.ownedParameter.each{par | 
+			if (i==0) then
+				res.append(context.protectScalaKeyword(par.name))
+				res.append(" : ")
+				par.type.generateScala(context,res)
+			else
+				res.append(", ")
+				res.append(context.protectScalaKeyword(par.name))
+				res.append(" : ")
+				par.type.generateScala(context,res)
+			end
+			i:=i + 1
+		}
+		res.append("):")
+		/* Return Type Declaration */
+		self.type.generateScala(context,res)
+		if (self.body!= void) then
+			res.append(" = {\n")
+			res.append("var result : ")
+			self.type.generateScala(context,res)
+			//res append "Any"
+			res.append(" = null.asInstanceOf[")
+			self.type.generateScala(context,res)
+			res.append("]; \n")
+			
+			self.body.generateScala(context,res)
+			res.append(" return result\n}\n")
+		end
+
    end
 }
