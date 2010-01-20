@@ -6,6 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.kermeta.language.scalacompiler.model.Activator
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ fr.irisa.triskell.kermeta.interpreter;bundle-version="1.3.2"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
