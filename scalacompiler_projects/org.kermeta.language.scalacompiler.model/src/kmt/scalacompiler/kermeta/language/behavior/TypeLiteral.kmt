@@ -22,7 +22,7 @@ aspect class TypeLiteral inherits Literal{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+      res.append("/*TypeLiteral*/")
    end
 }
