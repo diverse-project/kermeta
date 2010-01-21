@@ -42,12 +42,17 @@ class ScalaCompilerContextPass1{
 
 class GlobalConfigurationClass {
 		/* Package Target For Generated Trait */
+	reference outputFolder :String
+	operation initialize() : GlobalConfigurationClass is do 		
+		outputFolder := "../"+outputProject+"/src"
+		result:= self
+	end
+	
 	operation frameworkGeneratedPackageName() : String  is do result :=  "fr.irisa.triskell.scala.generated.fw" end
 	operation implicitConvTraitName() : String  is do result :=   "ImplicitConversion" end
 	operation viewDefTraitName() : String  is do result :=   "ViewType" end
 	operation factoryName() : String  is do result :=  "RichFactory" end
 	operation outputProject() : String  is do result := "fr.irisa.triskell.kermeta.scala.compilo.output" end
-	operation outputFolder() : String  is do result :=   "../"+outputProject+"/src" end
 	operation scalaPrefix() : String  is do result :=   "Scala" end
 	//final var workspaceURI : String = "/local/hudson_kermeta/jobs/KermetaCompilerV2_TestCase/workspace/"
 	operation workspaceURI() : String  is do result :=  "/home/barais/workspaces/kermetaCompilerRuntime2/" end
@@ -61,7 +66,7 @@ class ScalaCompilerContext
 	reference actualPackage : String 
 	
 	operation initialize() : ScalaCompilerContext is do 		
-		GlobalConfiguration := GlobalConfigurationClass.new
+		GlobalConfiguration := GlobalConfigurationClass.new.initialize
 		result := self
 		packageEquivelence := Hashtable<String,String>.new
 		packageEquivelence.put("ecore","org.eclipse.emf.ecore")
@@ -237,7 +242,9 @@ class ScalaCompilerContext
     */
 	operation generateFile(repName : String,fileName : String,content : String) : Void is do
 		stdio.writeln("generate File  "+ fileName +" in " + repName)
-		stdio.writeln(content)
+		//stdio.writeln(content)
+		extern kermeta::standard::File.generateFile(repName,fileName,content,GlobalConfiguration.outputFolder)
+		
 	end
 	   
    
@@ -266,7 +273,7 @@ class ScalaCompilerContext
    
 	
 	operation cleanFolder(repName : String):Void is do
-		stdio.writeln("clean Folder " + repName)
+		extern kermeta::standard::File.cleanFolder(repName)
 	end
 	
 	

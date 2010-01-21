@@ -32,15 +32,17 @@ using kermeta::utils
 class ScalaCompiler
 {
 	operation compile(inputKMFile : String, outputLocation : String) : Void is do 
-		stdio.writeln("Compiling to Scala " + inputKMFile +"...")
+		stdio.writeln("Compiling to Scala " + inputKMFile +"... output is : " + outputLocation )
 		var context : ScalaCompilerContext init ScalaCompilerContext.new.initialize()
-		var contextp1 : ScalaCompilerContextPass1 init ScalaCompilerContextPass1.new.initialize(context.GlobalConfiguration.frameworkGeneratedPackageName, context.GlobalConfiguration.implicitConvTraitName)
+		context.GlobalConfiguration.outputFolder := outputLocation+"/src"
 		
+		stdio.writeln("Cleaning : " + outputLocation +"/src")
+		context.cleanFolder(outputLocation+"/src")
+		var contextp1 : ScalaCompilerContextPass1 init ScalaCompilerContextPass1.new.initialize(context.GlobalConfiguration.frameworkGeneratedPackageName, context.GlobalConfiguration.implicitConvTraitName)
 		var modelingUnits :  Sequence<ModelingUnit> init loadModel(inputKMFile)		
 		modelingUnits.each{ modelingUnit |
 			modelingUnit.pass1(context, StringBuffer.new,contextp1)
 		}
-		
 		modelingUnits.each{ modelingUnit |
 			modelingUnit.generateScala(context, StringBuffer.new)
 		}
