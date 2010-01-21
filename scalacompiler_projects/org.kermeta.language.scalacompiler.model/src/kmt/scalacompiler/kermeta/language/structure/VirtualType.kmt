@@ -23,6 +23,6 @@ aspect class VirtualType inherits ObjectTypeVariable{
     * Generate Scala code
     */
    method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
-      res.append("/*Virtual Type*/")
+      res.append("/*VirtualType*/")
    end
 }

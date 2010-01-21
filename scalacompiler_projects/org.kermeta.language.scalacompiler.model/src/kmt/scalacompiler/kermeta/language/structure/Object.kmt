@@ -21,8 +21,8 @@ aspect class Object {
    /**
     * Generate Scala code
     */
-   operation generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+   operation generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+      res.append("/*Object*/")
    end
    
   operation getQualifiedNameCompilo(context : ScalaCompilerContext):String  is abstract 
