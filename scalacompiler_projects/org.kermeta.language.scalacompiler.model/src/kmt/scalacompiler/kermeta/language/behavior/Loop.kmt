@@ -22,7 +22,12 @@ aspect class Loop inherits Expression{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+		self.initialization.generateScala(context,res)
+		res.append("\n")
+		res.append("while (!(")
+		self.stopCondition().generateScala(context,res)
+		res.append("))\n")
+		self.body.generateScala(context,res)
    end
 }

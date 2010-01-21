@@ -13,6 +13,7 @@ require kermeta
 require "platform:/lookup/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/ScalaCompilerContext.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/DataType.kmt"
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/TypeContainer.kmt"
+require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Package.kmt"
 
 
 using kermeta::standard
@@ -23,9 +24,40 @@ aspect class PrimitiveType inherits DataType, TypeContainer{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer) 
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer) 
      from kermeta::language::structure::DataType
      is do
-      // TO DO
+		if (context.hasEcoreTag(self)) then
+			var t :String init self.ownedTags.select{e| "ecore.EDataType_instanceClassName".equals(e.name)}.first.~value
+			res.append(context.getTypeEquivalence(t))
+			/* Check Generique Param */
+			/*try{
+				var c = java.lang.Class.forName(kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
+				if(c.getTypeParameters.size > 0){
+					res.append("[")
+					for(i <- 0 until c.getTypeParameters.length ){
+						res.append("org.eclipse.emf.ecore.EObject")
+						if(i < c.getTypeParameters.length -1){
+							res.append(",")
+						}
+					}
+					res.append("]")
+				}
+			
+			
+			} catch {
+				case _ => 
+			}
+		*/	
+		else
+		 if (self.instanceType !=void) then
+			 self.instanceType.generateScala(context,res)
+		 
+		 else
+			 res.append(context.getPackageEquivalence(self.container.asType(Package).getQualifiedName)+"."+self.name)
+		end
+
+	end
+
    end
 }

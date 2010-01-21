@@ -17,12 +17,31 @@ require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/sca
 using kermeta::standard
 using kermeta::utils
 using scalacompiler
+using kermeta::language::structure
 
 aspect class CallSuperOperation inherits CallExpression{
    /**
     * Generate Scala code
     */
-   method generateScala(context : ScalaCompilerContext, buffer : kermeta::utils::StringBuffer)   is do
-      // TO DO
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+		var actualEObject : Object 
+		from 
+			actualEObject:= self 
+		until ( not actualEObject.getMetaClass().name.equals("Operation")) 
+		loop
+			actualEObject := actualEObject.container()
+		end
+		var actualOperation : Operation init  actualEObject.asType(Operation)
+		/* Out EObject Iinstance of Operaiton */
+		
+		var superClassFromName :String init actualOperation.superOperation.owningClass.name
+		
+		res.append("super["+superClassFromName+"Aspect]")
+		res.append("."+actualOperation.name)
+		res.append("(")
+		self.parameters.each{par | par.generateScala(context,res)}
+		res.append(")")
+	
+
    end
 }
