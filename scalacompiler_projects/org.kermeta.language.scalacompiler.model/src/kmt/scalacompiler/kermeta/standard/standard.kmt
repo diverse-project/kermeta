@@ -10,6 +10,7 @@
 package kermeta::standard;
 
 
+
 require kermeta
 aspect class String
 {

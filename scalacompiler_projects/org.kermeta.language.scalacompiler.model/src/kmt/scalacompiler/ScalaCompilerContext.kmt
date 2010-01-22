@@ -15,6 +15,7 @@ require kermeta
 require "platform:/resource/org.kermeta.language.scalacompiler.model/src/kmt/scalacompiler/kermeta/language/structure/Object.kmt"
 
 
+
 using kermeta::language::structure
 using kermeta::standard
 using kermeta::utils
@@ -35,8 +36,6 @@ class ScalaCompilerContextPass1{
 		factoryDefClass := StringBuffer.new
 		result:= self
 	end
-
-
 }
 
 
@@ -293,6 +292,9 @@ class ScalaCompilerContext
 		list.each{e | 
 	 	  if( i!=0) then res.append(sep) end
 	 	  e.asType(Object).generateScala(context,res)
+	 	  
+	 	  
+	 	  
 	 	  i:= i+1
 	   }
 	

@@ -12,6 +12,7 @@ package kermeta::utils;
 
 require kermeta
 
+
 using kermeta::standard
 aspect class StringBuffer
 {
