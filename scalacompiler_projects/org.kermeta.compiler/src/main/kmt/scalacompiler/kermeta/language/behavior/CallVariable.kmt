@@ -1,0 +1,34 @@
+/* $Id:$
+ * Creation : 2010-01-15
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            
+ */
+package kermeta::language::behavior;
+
+require kermeta
+// require "http://www.kermeta.org/kermeta/1_2_0//kermeta"
+// require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
+require "../../../ScalaCompilerContext.kmt"
+require "CallExpression.kmt"
+
+
+using kermeta::standard
+using kermeta::utils
+using scalacompiler
+
+aspect class CallVariable inherits CallExpression{
+   /**
+    * Generate Scala code
+    */
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+      res.append(context.protectScalaKeyword(self.name))
+		if(self.parameters != void and self.parameters.size > 0) then
+			res.append("(")
+			context.generateScalaCodeEach(res,self.parameters,",",context)
+			res.append(")")
+		end
+      
+   end
+}

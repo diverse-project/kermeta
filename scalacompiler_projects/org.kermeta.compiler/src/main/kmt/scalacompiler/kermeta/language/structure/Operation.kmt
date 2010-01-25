@@ -1,0 +1,67 @@
+/* $Id:$
+ * Creation : 2010-01-15
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            
+ */
+package kermeta::language::structure;
+
+require kermeta
+// require "http://www.kermeta.org/kermeta/1_2_0//kermeta"
+// require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
+require "../../../ScalaCompilerContext.kmt"
+require "MultiplicityElement.kmt"
+require "Type.kmt"
+
+
+using kermeta::standard
+using kermeta::utils
+using scalacompiler
+
+aspect class Operation inherits MultiplicityElement{
+   /**
+    * Generate Scala code
+    */
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+   		var par: Operation init self
+		res.append("\n   ")
+		if (self.superOperation!=void or  (context.hasEcoreTag(self) and self.body !=void)) then 
+			res.append(" override")
+		end
+		res.append(" def ")
+		res.append(self.name)
+		/* Default constructor declaration */
+		res.append("(") 
+		var i : Integer init 0
+		self.ownedParameter.each{par | 
+			if (i==0) then
+				res.append(context.protectScalaKeyword(par.name))
+				res.append(" : ")
+				par.type.generateScala(context,res)
+			else
+				res.append(", ")
+				res.append(context.protectScalaKeyword(par.name))
+				res.append(" : ")
+				par.type.generateScala(context,res)
+			end
+			i:=i + 1
+		}
+		res.append("):")
+		/* Return Type Declaration */
+		self.type.generateScala(context,res)
+		if (self.body!= void) then
+			res.append(" = {\n")
+			res.append("var result : ")
+			self.type.generateScala(context,res)
+			//res append "Any"
+			res.append(" = null.asInstanceOf[")
+			self.type.generateScala(context,res)
+			res.append("]; \n")
+			
+			self.body.generateScala(context,res)
+			res.append("\n return result\n}\n")
+		end
+
+   end
+}

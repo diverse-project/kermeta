@@ -1,0 +1,146 @@
+/* $Id:$
+ * Creation : 2010-01-15
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            
+ */
+package kermeta::language::behavior;
+
+require kermeta
+// require "http://www.kermeta.org/kermeta/1_2_0//kermeta"
+// require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
+require "../../../ScalaCompilerContext.kmt"
+require "CallExpression.kmt"
+require "../../../kermeta/standard/standard.kmt"
+require "../../../kermeta/standard/utils.kmt"
+
+using kermeta::standard
+using kermeta::utils 
+using scalacompiler
+using kermeta::language::structure
+
+aspect class CallFeature inherits CallExpression{
+   
+   operation generateTarget(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer) is do
+		self.target.generateScala(context,res)
+   end
+	
+   operation generateParam(context : ScalaCompilerContext,res : kermeta::utils::StringBuffer,openS : String,closeS : String) is do
+		res.append(openS)
+		var i : Integer init 0
+		self.parameters().each{p|
+			if(i!=0) then res.append(", ") end
+			p.generateScala(context,res)
+			i:=i+1
+		}
+		res.append(closeS)
+   end
+   	
+   operation generatePropertyCall(context : ScalaCompilerContext,res : kermeta::utils::StringBuffer) is do
+		var TargetType : StringBuffer init StringBuffer.new
+		self.target.staticType.generateScala(context,TargetType)
+		res.append(context.GlobalConfiguration.scalaPrefix+context.getMethodEquivalence(TargetType.toString, self.name))
+		
+   end
+   
+   operation generateOperationCall(context : ScalaCompilerContext,res : kermeta::utils::StringBuffer) is do
+		var TargetType : StringBuffer init StringBuffer.new
+		self.target.staticType.generateScala(context,TargetType)
+		res.append(context.getMethodEquivalence(TargetType.toString(), self.name))
+   end
+   
+   	operation generateName(res : kermeta::utils::StringBuffer) is do
+		res.append(self.name)
+	end
+	
+	operation generatePropertyName(context : ScalaCompilerContext,res : kermeta::utils::StringBuffer) is do
+		res.append(context.GlobalConfiguration.scalaPrefix() + self.name)
+	end
+	
+	operation generateKUnitCase(context : ScalaCompilerContext , res : StringBuffer) is do
+		self.target.generateScala(context,res)
+		res.append(".run(")
+		var i : Integer init 0
+		self.parameters.each {e |
+			if(i!=0) then res.append(", ") end
+			res.append("classOf[") 
+         	var className :StringBuffer init StringBuffer.new
+         	e.generateScala(context,className)
+         	
+         	
+         	//TODO ECRIRE EQUIVALENT KERMETA
+         	
+         	res.append(className.insert(className.toString.lastIndexOf(".")+1,"Rich"))
+         	res.append("]")
+			i:=i+1
+		}
+		res.append(")")
+	end
+	
+	
+	operation generateNew(context : ScalaCompilerContext , res : StringBuffer) is do
+		if (self.target!=void) then
+				if (self.target.isInstanceOf(TypeLiteral)) then
+					if (self.target.asType(TypeLiteral).typeref.type.isInstanceOf(ParameterizedType)) then
+				
+						var ty : TypeDefinition init self.target.asType(TypeLiteral).typeref.type.asType(ParameterizedType).typeDefinition
+						res.append(context.getPackageEquivalence(ty.container.asType(Package).getQualifiedNameCompilo(context)))
+						if (context.hasEcoreTag(ty.container.asType(Package))) then
+							res.append("ScalaAspect")
+						end
+						res.append(".RichFactory.create")
+						res.append(ty.name)
+						var ty1 : ParameterizedType init self.target.asType(TypeLiteral).typeref.type.asType(ParameterizedType)
+						//var i = 0;
+						if (ty1.typeParamBinding.size > 0) then
+							res.append("[")	
+							var i : Integer init 0
+							ty1.typeParamBinding.each{t|
+								if(i!=0) then res.append(", ") end
+								t.generateScala(context,res)
+								i:=i+1
+							}
+							//ty1.getTypeParamBinding().foreach{e=> if (i>0) res.append(",")	; e.getType().generateScalaCode(res);i=i+1}
+							res.append("]")	
+						end
+					else 
+						res.append("null.asInstanceOf[" + self.target.asType(TypeLiteral).typeref.type.getQualifiedNameCompilo(context) + "]")
+					end
+				else
+					self.target.generateScala(context,res)
+				end
+			end
+	end
+	
+	
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer) is do
+		//log.debug("CallFeature={}",this.name)
+		
+		if( self.name.equals("toString") or self.name.equals("isNotEqual") or self.name.equals("isEqual") or self.name.equals("run") or self.name.equals("asType") or self.name.equals("isKindOf") or self.name.equals("asKindOf") or self.name.equals("isInstanceOf") or self.name.equals("new") ) 
+		then 
+		
+		if(self.name.equals("toString")) then res.append("(") generateTarget(context,res) res.append("+\"\")") end
+		if(self.name.equals("isNotEqual")) then generateTarget(context,res) res.append(" != ") generateParam(context,res,"(",")") end
+		if(self.name.equals("isEqual")) then generateTarget(context,res) res.append(" == ") generateParam(context,res,"(",")") end
+		if(self.name.equals("run")) then generateKUnitCase(context,res) end
+		if(self.name.equals("asType")) then generateTarget(context,res) res.append(".asInstanceOf") generateParam(context,res,"[","]") end
+		if(self.name.equals("isKindOf")) then generateTarget(context,res) res.append(".isInstanceOf") generateParam(context,res,"[","]") end
+		if(self.name.equals("asKindOf")) then generateTarget(context,res) res.append(".asInstanceOf") generateParam(context,res,"[","]") end
+		if(self.name.equals("isInstanceOf")) then generateTarget(context,res) res.append(".isInstanceOf") generateParam(context,res,"[","]") end 
+		if(self.name.equals("new")) then generateNew(context,res) end
+		
+		else
+		
+		if(self.target != void and self.staticOperation !=void and self.staticProperty==void ) then generateTarget(context,res) res.append(".") generateOperationCall(context,res) generateParam(context,res,"(",")") end
+		if(self.target == void and self.staticOperation !=void and self.staticProperty==void ) then generateName(res) generateParam(context,res,"(",")") end
+		if(self.target != void and self.staticProperty  !=void and self.staticOperation==void) then generateTarget(context,res) res.append(".") generatePropertyCall(context,res) end
+		if(self.target == void and self.staticProperty  !=void and self.staticOperation==void) then generatePropertyName(context,res) end
+		if(self.target != void and self.staticProperty  ==void and self.staticOperation==void) then generateTarget(context,res) res.append(".") generateName(res) end
+		
+		end
+	
+	end
+	
+   
+}

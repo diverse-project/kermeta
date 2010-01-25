@@ -1,0 +1,102 @@
+/* $Id:$
+ * Creation : 2010-01-15
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            
+ */
+package kermeta::language::structure;
+
+require kermeta
+// require "http://www.kermeta.org/kermeta/1_2_0//kermeta"
+// require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
+require "../../../ScalaCompilerContext.kmt"
+require "NamedElement.kmt"
+require "TypeDefinitionContainer.kmt"
+require "ClassDefinition.kmt"
+require "Enumeration.kmt"
+require "../../../kermeta/standard/standard.kmt"
+
+
+using kermeta::standard
+using kermeta::utils
+using scalacompiler
+
+aspect class Package inherits NamedElement, TypeDefinitionContainer{
+
+
+ 
+	reference context : ScalaCompilerContext
+ 
+   /**
+    * Generate Scala code
+    */
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer) 
+     from kermeta::language::structure::NamedElement
+     is do
+      	self.context := context
+      	var par : Package init self 
+      	
+      	context.actualPackage := par.getQualifiedName
+		if (not context.actualPackage.startWith("kermeta") ) then
+		
+		par.ownedTypeDefinition.select{p |  p.isInstanceOf(ClassDefinition)}.each{p | p.asType(ClassDefinition).generateScala(context,res)}
+		par.ownedTypeDefinition.select{p | p.isInstanceOf(Enumeration)}.each{p | p.asType(Enumeration).generateEnum(context)}
+       end
+   end
+   	operation pass1(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer,ctxtp1 : ScalaCompilerContextPass1):Void is do
+      	self.context := context
+	   	var par : Package init self 
+		context.actualPackage := context.packageEquivelence.getValue(par.asType(Package).getQualifiedName)
+		if (context.actualPackage == void) then
+			context.actualPackage:=par.getQualifiedName
+		end
+		if (context.hasEcoreTag(par)) then 
+			context.actualPackage:=context.actualPackage+"ScalaAspect"
+		end		
+		if ( not context.actualPackage.startWith("kermeta")) then 
+			//if (!actualPackage.startsWith("kermeta.") || actualPackage.startsWith("kermeta.kunit")){
+					//if (!(actualPackage.startsWith("kermeta.io")||actualPackage.startsWith("kermeta.standard")||actualPackage.startsWith("kermeta.exceptions")||actualPackage.startsWith("kermeta.ecore"))){
+		
+			var factoryDef : StringBuffer init  StringBuffer.new
+		
+			factoryDef.append("package "+context.actualPackage+"\n")
+			
+			factoryDef.append ("object "+context.GlobalConfiguration.factoryName + " extends ")
+			if (par.ownedTypeDefinition.select{e| context.hasEcoreTag(par)}.size>0) then
+				factoryDef.append(context.getPackageEquivalence(par.asType(Package).getQualifiedName)+context.getImplPackageSuffix(context.actualPackage)+ par.name.substring(0,1).toUpperCase + par.name.substring(1,par.name.size)+"FactoryImpl with") 
+			end				
+			factoryDef.append(" "+context.GlobalConfiguration.frameworkGeneratedPackageName + "."+context.GlobalConfiguration.implicitConvTraitName)
+			factoryDef.append("{\n")
+			ctxtp1.viewDef.append("package "+context.actualPackage+"\n")
+			//viewDef append "trait "+viewDefTraitName+"{\n" 
+			 
+			ctxtp1.factoryDefClass := StringBuffer.new 
+			par.ownedTypeDefinition.select{p | p.isInstanceOf(ClassDefinition)}.each{p| p.asType(ClassDefinition).pass1(context,res,ctxtp1)}
+			factoryDef.append(ctxtp1.factoryDefClass.toString())
+			//viewDef append "}\n"
+			factoryDef.append("}\n")
+			context.generateFile(context.actualPackage, context.GlobalConfiguration.factoryName, factoryDef.toString())
+			context.generateFile(context.actualPackage, context.GlobalConfiguration.viewDefTraitName, ctxtp1.viewDef.toString())
+			ctxtp1.viewDef := StringBuffer.new
+			factoryDef :=  StringBuffer.new
+			par.nestedPackage.each{p| p.pass1(context,res,ctxtp1)} // Go futher in subpackage
+			
+		end
+		
+	end
+   
+   	method getQualifiedNameCompilo(context : ScalaCompilerContext):String is do result := context.getPackageEquivalence(self.getQualifiedName()) end
+   
+   
+   operation getQualifiedName():String  is do
+		var res : String init "" 
+        if (self.nestingPackage !=void) then
+            res := self.nestingPackage.getQualifiedName +"."
+        end
+        res := res + self.name
+        result:= res
+	end
+   
+   
+}

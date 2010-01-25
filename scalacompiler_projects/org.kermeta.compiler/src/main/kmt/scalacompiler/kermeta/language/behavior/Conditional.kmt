@@ -1,0 +1,35 @@
+/* $Id:$
+ * Creation : 2010-01-15
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            
+ */
+package kermeta::language::behavior;
+
+require kermeta
+// require "http://www.kermeta.org/kermeta/1_2_0//kermeta"
+// require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
+require "../../../ScalaCompilerContext.kmt"
+require "Expression.kmt"
+
+
+using kermeta::standard
+using kermeta::utils
+using scalacompiler
+
+aspect class Conditional inherits Expression{
+   /**
+    * Generate Scala code
+    */
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+		res.append("if (")
+		self.condition.generateScala(context,res)
+		res.append(")")
+		self.thenBody.generateScala(context,res)
+		if(self.elseBody!=  void ) then
+			res.append("else \n")
+			self.elseBody.generateScala(context,res)
+		end
+   end
+}

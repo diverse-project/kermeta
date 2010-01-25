@@ -1,0 +1,11 @@
+<%@ket
+package="template"
+require=""
+using=""
+isAspectClass="false"
+class="VariableDeclTemplate"
+ismethod="false"operation="generate"
+parameters="ident:String, type:String, initialize:String"
+%>
+
+var <%=ident%> : <%=type%> = <%=initialize%>;

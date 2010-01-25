@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<loader:EcoreLoader xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:loader="http://www.kermeta.org/Loader" xsi:schemaLocation="http://www.kermeta.org/Loader ../model/Loader.ecore">
+  <steps name="_STRUCTURE_LOADING_" propagate="true">
+    <steps name="_LOAD_RESOURCE_">
+      <action class="org.kermeta.io.loader.ecore.LoadResource"/>
+    </steps>
+    <steps name="_STRUCTURE_LOADING_PASS_">
+      <action class="org.kermeta.io.loader.ecore.LoadingStructurePass"/>
+    </steps>
+    <steps name="_RESOLVE_REQUIRE_PASS_">
+      <action class="org.kermeta.io.loader.core.RequireResolver"/>
+    </steps>
+  </steps>
+  <steps name="_IMPORT_KERMETA_UNIT_PASS_" propagate="true">
+    <steps name="_REPORT_USING_ERROR_">
+      <action class="org.kermeta.io.loader.core.ReportUsingError"/>
+    </steps>
+    <action class="org.kermeta.io.loader.core.ImportKermetaUnitPass"/>
+  </steps>
+  <steps name="_LOADING_ASPECTS_" propagate="true">
+    <action class="org.kermeta.io.loader.core.ConstructAspects"/>
+  </steps>
+  <steps name="_TYPE_SETTING_" propagate="true">
+    <action class="org.kermeta.io.loader.ecore.SetTypesPass"/>
+  </steps>
+  <steps name="_OPERATION_LOADING_" propagate="true">
+    <action class="org.kermeta.io.loader.ecore.LoadBodiesAndSetOppositesPass"/>
+  </steps>
+  <steps name="_QUICK_FIX_" propagate="true">
+    <action class="org.kermeta.io.loader.ecore.ApplyQuickFixPass"/>
+  </steps>
+  <steps name="_FINALIZE_LOADING_" propagate="true">
+    <action class="org.kermeta.io.loader.core.FinalizeLoading"/>
+  </steps>
+</loader:EcoreLoader>

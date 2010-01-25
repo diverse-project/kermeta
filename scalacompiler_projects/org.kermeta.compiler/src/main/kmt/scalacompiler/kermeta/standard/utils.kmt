@@ -1,0 +1,25 @@
+/* $Id:$ 
+ * Creation : January 19, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+
+ 
+package kermeta::utils;
+
+
+require kermeta
+
+using kermeta::standard
+aspect class StringBuffer
+{
+	operation insert(pos:Integer,s1:String):String is do
+		var s:String 
+		s?= extern kermeta::standard::String.insert(self.toString,s1,pos)
+		
+		result:=s
+	end
+	
+}

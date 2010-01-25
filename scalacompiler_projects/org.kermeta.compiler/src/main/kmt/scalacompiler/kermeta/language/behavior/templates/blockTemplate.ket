@@ -1,0 +1,11 @@
+<%@ket
+package="template"
+require=""
+using=""
+isAspectClass="false"
+class="BlockTemplate"
+ismethod="false"operation="generate"
+parameters="body:String, catchBody:String"
+%>
+
+try {\n <%=body%> \n} catch {\n <%=catchBody%> }\n

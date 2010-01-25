@@ -1,0 +1,23 @@
+ReflectiveCollection
+
+---------------------------------------------  TEST RESULTS-----------------------------------------------
+
+
+Failures: 
+
+   TestAddVoidInReflectiveCollection.testAddVoidInReflectiveSequence() explicit failure: testAddVoidInReflectiveSequence didn't raise an exception when adding a Void
+stack trace:
+<void>
+
+   TestAddVoidInReflectiveCollection.testAddVoidInReflectiveCollection() explicit failure: testAddVoidInReflectiveCollection didn't raise an exception when adding a Void
+stack trace:
+<void>
+
+ Summary: 
+   Number of launched tests : 3
+   Number of failures : 2
+   Number of errors : 0
+   Number of errors in setUp or tearDown: 0
+
+-------------------------------------------------------------------------------------------------------------------------------
+

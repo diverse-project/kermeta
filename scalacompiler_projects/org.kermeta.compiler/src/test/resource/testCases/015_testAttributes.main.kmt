@@ -1,0 +1,81 @@
+@mainClass "testAttributes::MyObjectsCreation"
+@mainOperation "createMyObjects"
+package testAttributes;
+
+require kermeta
+
+// Creation of an object
+class MyObjectOne {
+
+	attribute attr1 : kermeta::standard::Integer
+	reference objects2 : MyObjectTwo[*]
+
+	operation set_attr1(arg0 : kermeta::standard::Integer) : Void is do
+	
+		attr1 := arg0
+	end
+	
+	operation add_object2(arg0 : MyObjectTwo) : Void is do
+
+		objects2.add(arg0)
+	end
+
+	operation remove_object2(arg0 : MyObjectTwo) : Void is do
+
+		objects2.remove(arg0)
+	end
+
+}
+
+class MyObjectTwo {
+
+	attribute attr1 : kermeta::standard::Integer
+
+	operation set_attr1(arg0 : kermeta::standard::Integer) : Void is do
+	
+		attr1 := arg0
+	end	
+
+}
+
+class MyObjectsCreation inherits kermeta::kunit::TestCase {
+
+	operation testcreateMyObjects() : Void is do
+		/*
+		var o2_1 : MyObjectTwo
+		var o2_2 : MyObjectTwo
+		var o2_3 : MyObjectTwo
+		*/
+		var o1   : MyObjectOne init MyObjectOne.new
+		/*
+		o2_1 := MyObjectTwo.new
+		o2_2 := MyObjectTwo.new
+		o2_3 := MyObjectTwo.new
+		o2_1.set_attr1(1)
+		o2_2.set_attr1(2)
+		o2_3.set_attr1(3)
+		o1 := MyObjectOne.new
+		*/
+		o1.set_attr1(1)
+        
+        assert(o1.attr1==1)
+		
+		o1.set_attr1(5)
+        
+        assert(o1.attr1==5)
+       
+		/* MANY TYPE ERRORS
+		o1.add(o2_1)		
+		o1.add(o2_2)		
+		o1.add(o2_3)		
+		assert(o1.objects2.size == 3)
+		assert(o1.objects(2).get(0).attr1==1)
+		assert(o1.objects(2).get(1).attr1==2)
+		assert(o1.objects(2).get(2).attr1==2)
+        o1.objets1.remove(o2_2)
+		assert(o1.objects2.size == 2)
+		assert(o1.objects(2).get(0).attr1==1)
+		assert(o1.objects(2).get(1).attr1==3)
+		*/
+	end
+}

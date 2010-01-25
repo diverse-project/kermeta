@@ -1,0 +1,159 @@
+/* $Id:$
+ * Creation : 2010-01-15
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            
+ */
+package kermeta::language::structure;
+
+require kermeta
+// require "http://www.kermeta.org/kermeta/1_2_0//kermeta"
+// require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
+require "../../../ScalaCompilerContext.kmt"
+require "MultiplicityElement.kmt"
+
+
+using kermeta::standard
+using kermeta::utils
+using scalacompiler
+
+aspect class Property inherits MultiplicityElement{
+   /**
+    * Generate Scala code
+    */
+   reference context : ScalaCompilerContext
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+	self.context := context
+	if (context.hasEcoreTag(self.owningClass)) then
+		 	if (context.hasEcoreTag(self)) then
+		 		generateScalGet(res,"")
+		 		generateScalSet(res,"")
+		 	else 	
+		 		generateAttribute(res)
+		 		generateGet(res,"Ker")
+		 		generateSet(res,"Ker")
+		 		generateScalGet(res,"Ker")
+		 		generateScalSet(res,"Ker")
+
+		 		//TODO générer getter et setter si property ajouté par un ecore
+		 	end
+	else 
+		 generateAttribute(res)
+		 generateGet(res,"Ker")
+		 generateSet(res,"Ker")
+		 generateScalGet(res,"Ker")
+		 generateScalSet(res,"Ker")
+
+	end
+end 
+	  
+operation generateAttribute(res : StringBuffer) is do 
+	res.append("var ")
+	res.append(context.protectScalaKeyword(self.name))
+	res.append(" : ")
+	
+	if (self.upper>1 or self.upper == -1) then
+			if (self.isOrdered) then
+				res.append("java.util.List[")
+			else
+				res.append("java.util.List[")        
+			end
+			self.type.generateScala(context,res)
+			res.append("] = new java.util.ArrayList[")
+			self.type.generateScala(context,res)
+			res.append("]")
+
+	else 
+		self.type.generateScala(context,res) 
+		res.append("= _")
+	end
+	res.append("\n")
+	end
+
+	operation generateGet(res : StringBuffer,prefix:String) is do 
+	res.append("def ")
+	var s: StringBuffer init StringBuffer.new
+	self.type.asType(Object).generateScala(context,s)
+	if (s.toString.equals("Boolean")) then
+			res.append(prefix+"is")
+	else
+		res.append(prefix+"get")
+	end
+		
+	res.append(self.name.substring(0,1).toUpperCase + self.name.substring(1,self.name.size) + "()")
+	res.append(" : ")
+	getListorType(res)
+	res.append("={this." + context.protectScalaKeyword(self.name) + "}")
+
+	
+	res.append("\n")
+	end
+
+	
+	
+	operation generateScalGet(res : StringBuffer,prefix:String) :Void is do
+		res.append("def "+context.GlobalConfiguration.scalaPrefix)
+		res.append(self.name+"")
+		res.append(" : ")
+		getListorType(res)
+		var s: StringBuffer init StringBuffer.new
+		self.type.asType(Object).generateScala(context,s)
+		res.append("={this.")
+		if (s.toString.equals("Boolean")) then
+			res.append(prefix+"is")
+		else
+			res.append(prefix+"get")
+		end
+		res.append( self.name.substring(0,1).toUpperCase + self.name.substring(1,self.name.size) + "()" + "}")		
+		res.append("\n")
+	end
+
+	
+	operation generateSet(res : StringBuffer,prefix:String) :Void is do
+		if (not self.isReadOnly) then
+			res.append("def "+prefix+"set")
+			res.append(self.name.substring(0,1).toUpperCase + self.name.substring(1,self.name.size)+"(arg:")
+			getListorType(res)
+			res.append(")={ this." + context.protectScalaKeyword(self.name) + " = arg}")
+			res.append("\n")
+		end
+	end
+	
+	operation generateScalSet(res : StringBuffer,prefix:String) : Void is do
+		if ( not self.isReadOnly and   not self.isDerived()) then
+		res.append("def "+context.GlobalConfiguration.scalaPrefix)
+		res.append(self.name+"_=(")
+		res.append("arg : ")
+		getListorType(res)
+		//res.append(")={this.set" + this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size) + "(arg)" + "}")		
+			if (self.upper>1 or self.upper == -1) then
+				res.append(")={this."+prefix+"get" + self.name.substring(0,1).toUpperCase + self.name.substring(1,self.name.size) + "().clear\n")
+				res.append("this."+prefix+"get" + self.name.substring(0,1).toUpperCase + self.name.substring(1,self.name.size) + "().addAll(arg)\n")
+				res.append("}")		
+			else	
+				res.append( ")={this."+prefix+"set" + self.name.substring(0,1).toUpperCase + self.name.substring(1,self.name.size) + "(arg)" + "}")		
+			end
+		res.append("\n")
+		
+		end
+	end
+
+	
+	operation getListorType(res:StringBuffer):Void is do
+	if (self.upper>1 or self.upper == -1) then
+			if (self.isOrdered) then
+				res.append("java.util.List[")
+			else
+				//TODO gestion des SETs
+				res.append("java.util.List[")        
+			end
+			self.type.asType(Object).generateScala(context,res)
+			res.append("]")
+	else 
+		self.type.asType(Object).generateScala(context,res) 
+	end
+	
+	
+	end
+}

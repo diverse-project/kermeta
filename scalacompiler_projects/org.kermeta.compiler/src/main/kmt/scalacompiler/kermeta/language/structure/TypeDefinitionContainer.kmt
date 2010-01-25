@@ -1,0 +1,28 @@
+/* $Id:$
+ * Creation : 2010-01-15
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            
+ */
+package kermeta::language::structure;
+
+require kermeta
+// require "http://www.kermeta.org/kermeta/1_2_0//kermeta"
+// require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
+require "../../../ScalaCompilerContext.kmt"
+require "NamedElement.kmt"
+
+
+using kermeta::standard
+using kermeta::utils
+using scalacompiler
+
+aspect class TypeDefinitionContainer inherits NamedElement{
+   /**
+    * Generate Scala code
+    */
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+      res.append("/*TypeDefinitionContainer*/")
+   end
+}

@@ -1,0 +1,28 @@
+/* $Id:$ 
+ * Creation : January 19, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+
+
+package kermeta::standard;
+ 
+
+require kermeta
+aspect class String
+{
+	operation startWith(s:String):Boolean is do
+		if (self.size< s.size) then 
+			result := false
+		else
+			result:= self.substring(0,s.size()).equals(s)
+		end	
+	end
+	
+	operation lastIndexOf(s:String):Integer is do
+		result ?= extern kermeta::standard::String.lastIndexOf(self,s)
+	end
+}
+

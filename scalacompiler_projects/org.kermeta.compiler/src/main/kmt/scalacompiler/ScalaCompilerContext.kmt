@@ -1,0 +1,304 @@
+/* $Id:$ 
+ * Creation : January 14, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package scalacompiler;
+
+ 
+require kermeta
+
+require "kermeta/language/structure/Object.kmt"
+ 
+
+using kermeta::language::structure
+using kermeta::standard
+using kermeta::utils
+
+
+class ScalaCompilerContextPass1{
+
+    reference viewDef : StringBuffer 
+	reference implicitDef : StringBuffer 
+	reference factoryDefClass : StringBuffer
+   
+   
+   	operation initialize(frameworkGeneratedPackageName :String, implicitConvTraitName: String):ScalaCompilerContextPass1 is do 
+		viewDef := StringBuffer.new
+		implicitDef := StringBuffer.new
+		implicitDef.append("package "+frameworkGeneratedPackageName+"\n")
+		implicitDef.append("trait "+implicitConvTraitName+" {\n")
+		factoryDefClass := StringBuffer.new
+		result:= self
+	end
+
+
+}
+
+
+class GlobalConfigurationClass {
+		/* Package Target For Generated Trait */
+	reference outputFolder :String
+	operation initialize() : GlobalConfigurationClass is do 		
+		outputFolder := "../"+outputProject+"/src"
+		result:= self
+	end
+	
+	operation frameworkGeneratedPackageName() : String  is do result :=  "fr.irisa.triskell.scala.generated.fw" end
+	operation implicitConvTraitName() : String  is do result :=   "ImplicitConversion" end
+	operation viewDefTraitName() : String  is do result :=   "ViewType" end
+	operation factoryName() : String  is do result :=  "RichFactory" end
+	operation outputProject() : String  is do result := "fr.irisa.triskell.kermeta.scala.compilo.output" end
+	operation scalaPrefix() : String  is do result :=   "Scala" end
+	//final var workspaceURI : String = "/local/hudson_kermeta/jobs/KermetaCompilerV2_TestCase/workspace/"
+	operation workspaceURI() : String  is do result :=  "/home/barais/workspaces/kermetaCompilerRuntime2/" end
+	operation pluginURI() : String  is do result :=  "/local/hudson_kermeta/jobs/KermetaCompilerV2_TestCase/workspace/" end
+}
+
+class ScalaCompilerContext
+{
+
+	reference GlobalConfiguration:GlobalConfigurationClass
+	reference actualPackage : String 
+	
+	operation initialize() : ScalaCompilerContext is do 		
+		GlobalConfiguration := GlobalConfigurationClass.new.initialize
+		result := self
+		packageEquivelence := Hashtable<String,String>.new
+		packageEquivelence.put("ecore","org.eclipse.emf.ecore")
+		packageEquivelence.put("uml","org.eclipse.uml2.uml")
+		packageEquivelence.put("fr.irisa.triskell.kermeta.language.structure","fr.irisa.triskell.kermeta.scala.framework.language.structure")
+		//packageEquivelence.put("kermeta.language.structure","fr.irisa.triskell.kermeta.scala.framework.language.structure")
+		//pack1.put("language.structure","fr.irisa.triskell.kermeta.scala.framework.language.structure")
+		//packageEquivelence.put("kermeta.language.behavior", "fr.irisa.triskell.kermeta.language.behavior")
+		packageEquivelence.put("kermeta::language::behavior", "fr.irisa.triskell.kermeta.language.behavior")
+		packageEquivelence.put("kermeta::language::structure","fr.irisa.triskell.kermeta.scala.framework.language.structure")
+		
+		
+		typeEquivelence := Hashtable<String,String>.new
+		typeEquivelence.put("kermeta.utils.Hashtable", "java.util.HashMap")
+		typeEquivelence.put("org.eclipse.emf.ecore.EStringToStringMapEntry","java.util.Map.Entry[String,String]")
+		typeEquivelence.put("kermeta.utils.Stack", " java.util.Stack")
+		typeEquivelence.put("kermeta.standard.Iterator", "java.util.Iterator")
+		typeEquivelence.put("kermeta.standard.Collection", "java.util.List")
+		typeEquivelence.put("kermeta.standard.Set", "java.util.List")
+		typeEquivelence.put("kermeta.standard.Sequence", "java.util.List")
+		typeEquivelence.put("kermeta.standard.Bag", "java.util.List")
+		typeEquivelence.put("kermeta.standard.String", "java.lang.String")
+		typeEquivelence.put("kermeta.standard.Integer", "Int")
+		typeEquivelence.put("kermeta.standard.Real", "java.lang.Double")
+		typeEquivelence.put("kermeta.standard.Character", "java.lang.Character")
+		typeEquivelence.put("int", "Int")
+		typeEquivelence.put("boolean", "Boolean")
+		typeEquivelence.put("kermeta.standard.Boolean", "Boolean")
+		typeEquivelence.put("java.lang.Class","java.lang.Class[_]")
+		
+		
+		methodEquivalence := Hashtable<String,Hashtable<String,String>>.new
+		var Hash : Hashtable<String,String> init Hashtable<String,String>.new
+		Hash.put("getValue", "get")
+//		Hashtable.put("getValue", "get");
+		methodEquivalence.put("kermeta.utils.Hashtable", Hash)
+		
+		var Stack : Hashtable<String,String> init Hashtable<String,String>.new
+		Stack.put("peek", "peek")
+		methodEquivalence.put("kermeta.utils.Stack", Stack)
+		
+		var Collection : Hashtable<String,String> init Hashtable<String,String>.new
+		Collection.put("count", "countElement")
+		methodEquivalence.put("kermeta.standard.Collection", Collection)
+		
+		var ClassDefinition : Hashtable<String,String> init Hashtable<String,String>.new
+		ClassDefinition.put("allAttribute", "eAllAttributes")
+		methodEquivalence.put("fr.irisa.triskell.kermeta.scala.framework.language.structure.ClassDefinition", ClassDefinition)
+		
+		
+		//methodEquivalence 
+		var Str : Hashtable<String,String> init Hashtable<String,String>.new
+		Str.put("size", "ksize")
+		methodEquivalence.put("kermeta.standard.String", Str)
+		methodEquivalence.put("String", Str)
+		methodEquivalence.put("java.lang.String", Str)
+		
+		
+		keywords .add("implicit")
+		keywords .add("match")
+		keywords .add("requires")
+		keywords .add("type")
+		keywords .add("var")
+		keywords .add("abstract")
+		keywords .add("do")
+		keywords .add("finally")
+		keywords .add("import")
+		keywords .add("object")
+		keywords .add("throw")
+		keywords .add("val")
+		keywords .add("case")
+		keywords .add("else")
+		keywords .add("for")
+		keywords .add("lazy")
+		keywords .add("override")
+		keywords .add("return")
+		keywords .add("trait")
+		keywords .add("catch")
+		keywords .add("extends")
+		keywords .add("forSome")
+		keywords .add("match")
+		keywords .add("package")
+		keywords .add("sealed")
+		keywords .add("try")
+		keywords .add("while")
+		keywords .add("class")
+		keywords .add("false")
+		keywords .add("if")
+		keywords .add("new")
+		keywords .add("private")
+		keywords .add("super")
+		keywords .add("true")
+		keywords .add("with")
+		keywords .add("def")
+		keywords .add("final")
+		keywords .add("implicit")
+		keywords .add("null")
+		keywords .add("protected")
+		keywords .add("this")
+		keywords .add("yield")
+		keywords .add("_")
+		keywords .add(":")
+		keywords .add("=")
+		keywords .add("=>")
+		keywords .add("<-")
+		keywords .add("<:")
+		keywords .add("<%")
+		keywords .add(">:")
+		keywords .add("#")
+		keywords .add("@")
+
+ 
+		frameworkDefaultAspect := Hashtable<String,String>.new
+		frameworkDefaultAspect.put("ClassDefinition","ClassDefinitionAspect")
+				
+	end
+	
+	reference packageEquivelence :  Hashtable<String,String>
+		
+	operation getPackageEquivalence(key:String):String is do
+		var res :String init packageEquivelence.getValue(key)
+		if (res.isVoid) then
+			res := key
+		end
+		result := res 
+	end
+	
+	reference typeEquivelence :  Hashtable<String,String>
+	
+	reference frameworkDefaultAspect :  Hashtable<String,String> 
+	
+	operation getDefaultAspect(key:String):String is do
+		var res :String init frameworkDefaultAspect.getValue(key)
+		if (res ==void) then 
+			res := "fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect"
+		end
+		result := res 
+	end
+		
+		
+		
+	operation getTypeEquivalence(key:String):String is do 
+		var res :String init typeEquivelence.getValue(key)
+		if (res ==void) then 
+			res := key
+		end
+		result := res 
+	end
+
+	reference methodEquivalence :  Hashtable<String,Hashtable<String,String>>
+	
+	operation getMethodEquivalence(className:String,methodName:String):String is do
+		var res :String 
+		var map :Hashtable<String,String> init methodEquivalence.getValue(className)
+		if (map !=void) then 
+			res :=  map.getValue(methodName)
+		end
+		if (res ==void) then 
+			res :=methodName		
+		end
+		result :=res 
+	end
+	
+	
+	/**
+	 * Check if a model element has an Ecore Tag
+	 * @param obj model element to test
+	 * @return true if ecore tag is found
+	 */
+   
+   /**
+    * Utility method, generate src file
+    * @param repName Target directory name, sub directory separated by .
+    * @param fileName Target file name
+    * @param content Target file content
+    */
+	operation generateFile(repName : String,fileName : String,content : String) : Void is do
+		stdio.writeln("generate File  "+ fileName +" in " + repName)
+		//stdio.writeln(content)
+		extern kermeta::standard::File.generateFile(repName,fileName,content,GlobalConfiguration.outputFolder)
+		
+	end
+	   
+   
+   
+   
+	
+	reference keywords :String[0..*] 
+	
+	operation protectScalaKeyword(val : String) : String is do
+		var returnString : String init val
+		if(keywords.exists{p | p.equals(val)}) then
+			returnString := "`"+val+"`"
+			//log.debug("Reserved Scala Keyword : {}, backquote protection : ",value)
+		end 
+		result :=returnString
+	end 
+	
+	 
+	operation getImplPackageSuffix(packName:String):String is do
+		if ("org.eclipse.uml2.uml".equals(packName) or "uml".equals(packName.toString) or "org.eclipse.uml2.umlScalaAspect".equals(packName.toString)) then
+			result :=  ".internal.impl."
+		else 
+			result :=  ".impl."
+		end
+	end
+   
+	
+	operation cleanFolder(repName : String):Void is do
+		extern kermeta::standard::File.cleanFolder(repName)
+	end
+	
+	
+	operation hasEcoreTag(obj : Object) : Boolean is do
+	  result := obj.ownedTags.exists{e | var tag : Tag
+	   tag ?= e
+	   if (tag != void) then 
+	   	"ecore".equals(tag.name())
+	   	else
+	   	 false
+	   	end
+	   }
+    end
+      
+    operation generateScalaCodeEach<G>(res : StringBuffer,list : Collection<G>,sep : String, context: scalacompiler::ScalaCompilerContext ) : Void is do
+		var i: Integer init 0
+		list.each{e | 
+	 	  if( i!=0) then res.append(sep) end
+	 	  e.asType(Object).generateScala(context,res)
+	 	  i:= i+1
+	   }
+	
+	end
+	
+}

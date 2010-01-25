@@ -1,0 +1,48 @@
+/* $Id:$
+ * Creation : 2010-01-15
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            
+ */
+package kermeta::language::behavior;
+
+require kermeta
+// require "http://www.kermeta.org/kermeta/1_2_0//kermeta"
+// require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
+require "../../../ScalaCompilerContext.kmt"
+require "Expression.kmt"
+require "templates/blockTemplate.kmt"
+
+
+using kermeta::standard
+using kermeta::utils
+using scalacompiler
+
+aspect class Block inherits Expression{
+   /**
+    * Generate Scala code
+    */
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+      	var template : template::BlockTemplate init template::BlockTemplate.new
+		var body :StringBuffer init StringBuffer.new
+		var catchBody :StringBuffer init StringBuffer.new
+		
+		//context.generateScalaCodeEach(body,self.statement,"\n") //BODY GEN
+		var i: Integer init 0
+		self.statement.each{e | 
+	 	  if( i!=0) then body.append("\n") end
+	 	  e.asType(Object).generateScala(context,body)
+	 	  i:= i+1
+	   }
+    
+		
+		self.rescueBlock.each{b | b.generateScala(context,catchBody) } //CATCH GEN
+		//RESULT GEN
+		if(self.rescueBlock.size > 0) then
+			res.append(template.generate(body.toString, catchBody.toString))
+		 else 
+			res.append("{\n"+body.toString+"}\n")
+		end
+   end
+}

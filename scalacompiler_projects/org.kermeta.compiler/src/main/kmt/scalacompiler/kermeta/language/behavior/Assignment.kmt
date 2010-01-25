@@ -1,0 +1,60 @@
+/* $Id:$
+ * Creation : 2010-01-15
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            
+ */
+package kermeta::language::behavior;
+
+require kermeta
+// require "http://www.kermeta.org/kermeta/1_2_0//kermeta"
+// require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
+require "../../../ScalaCompilerContext.kmt"
+require "Expression.kmt"
+
+
+using kermeta::standard
+using kermeta::utils
+using scalacompiler
+using kermeta::language::structure
+aspect class Assignment inherits Expression{
+   /**
+    * Generate Scala code
+    */
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+		if (self.isCast) then
+			res.append("try{\n")
+		end
+		
+		self.target.generateScala(context,res)
+		res.append(" = ")
+		self.~value.generateScala(context,res)
+		
+		/* Step looking for a cast */
+		var targetClass : StringBuffer init StringBuffer.new
+		if ( not self.isCast) then
+			if( self.~value.isInstanceOf(VoidLiteral)) then 
+				self.target.staticType.generateScala(context,targetClass)
+			end
+		else  
+    		if (self.target.staticType.isInstanceOf(Class)) then
+    			self.target.staticType.generateScala(context,targetClass)
+    		 else 
+            	 if (self.target.staticType.isInstanceOf(NamedElement)) then
+            		 targetClass.append(self.target.staticType.asType(NamedElement).name)
+            	 else 
+            		 res.append("/*TODO Assignment with Cast*/")
+            	 end
+    		 end
+		end
+		/* Generate Cast if found */
+		if( not targetClass.toString.equals("")) then
+			res.append(".asInstanceOf["+targetClass.toString+"]")
+		end
+		res.append(";")
+		if (self.isCast) then
+			res.append("\n}catch { case e:ClassCastException => {}}\n")
+		end
+   end
+}

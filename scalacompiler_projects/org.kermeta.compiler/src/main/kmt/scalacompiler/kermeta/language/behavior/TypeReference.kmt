@@ -1,0 +1,43 @@
+/* $Id:$
+ * Creation : 2010-01-15
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            
+ */
+package kermeta::language::behavior;
+
+require kermeta
+// require "http://www.kermeta.org/kermeta/1_2_0//kermeta"
+// require "platform:/plugin/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore"
+require "../../../ScalaCompilerContext.kmt"
+require "../structure/MultiplicityElement.kmt"
+
+
+using kermeta::standard
+using kermeta::utils
+using scalacompiler
+using kermeta::language::structure
+
+aspect class TypeReference inherits kermeta::language::structure::MultiplicityElement{
+   /**
+    * Generate Scala code
+    */
+   method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+		self.type.generateScala(context,res)
+		if(self.type.isInstanceOf(ParameterizedType)) then
+			if(self.type.asType(ParameterizedType).typeParamBinding.size>0) then
+				var i : Integer init 1
+	         	res.append("[")
+	         	self.type.asType(ParameterizedType).typeParamBinding.each{e| 
+         			e.generateScala(context,res)
+                    if (i< self.type.asType(ParameterizedType).typeParamBinding.size) then
+                    		res.append(", ")
+                    end
+                    i:=i+1
+                    }
+                    res.append("]")
+         	end
+		end
+   end
+}

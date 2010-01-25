@@ -1,0 +1,58 @@
+/* $Id:$ 
+ * Creation : January 14, 2010
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "scalacompiler::ScalaCompiler"
+@mainOperation "compile"
+
+
+package scalacompiler;
+
+ 
+require kermeta
+require "kermetaAspects.kmt"
+require "ScalaCompilerContext.kmt"
+
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::language::structure
+using kermeta::utils
+
+/**
+ * Scala compiler, this class takes a km model and generates the scala code that will work on top of an EMF platform
+ */
+ 
+ 
+ //inputKMFile : platform:/resource/org.kermeta.language.scalacompiler.test/src/test/resources/tests/000HelloWorld.km
+
+class ScalaCompiler
+{
+	operation compile(inputKMFile : String, outputLocation : String) : Void is do 
+		stdio.writeln("Compiling to Scala " + inputKMFile +"... output is : " + outputLocation )
+		var context : ScalaCompilerContext init ScalaCompilerContext.new.initialize()
+		context.GlobalConfiguration.outputFolder := outputLocation+"/src"
+		
+		stdio.writeln("Cleaning : " + outputLocation +"/src")
+		context.cleanFolder(outputLocation+"/src")
+		var contextp1 : ScalaCompilerContextPass1 init ScalaCompilerContextPass1.new.initialize(context.GlobalConfiguration.frameworkGeneratedPackageName, context.GlobalConfiguration.implicitConvTraitName)
+		var modelingUnits :  Sequence<ModelingUnit> init loadModel(inputKMFile)		
+		modelingUnits.each{ modelingUnit |
+			modelingUnit.pass1(context, StringBuffer.new,contextp1)
+		}
+		modelingUnits.each{ modelingUnit |
+			modelingUnit.generateScala(context, StringBuffer.new)
+			modelingUnit.close()
+		}
+		stdio.writeln("Done")
+	end
+	operation loadModel(inputKMFile : String) : Sequence<ModelingUnit> is do
+		var repository : Repository init EMFRepository.new
+		var resource : Resource init repository.getResource(inputKMFile)
+		result := Sequence<ModelingUnit>.new
+		resource.each{ modelingUnit | result.add(modelingUnit.asType(ModelingUnit))}
+	end
+}
