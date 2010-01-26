@@ -1,0 +1,56 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "pkgConditional2VarOpOp310::Conditional2VarOpOp310"
+@mainOperation "main"
+
+
+package pkgConditional2VarOpOp310;
+
+
+require kermeta
+using kermeta::standard
+
+class Conditional2VarOpOp310
+{
+	operation opTrue() : Boolean is do
+		result := true
+	end
+	
+	operation opFalse() : Boolean is do
+		result := false
+	end
+
+
+
+	operation main() : Void is do
+		if(opTrue() and opTrue()) then
+			stdio.writeln("a=trueAndb=True=success")
+		else
+			stdio.writeln("a=trueAndb=True=fail")
+		end
+		
+		if(opTrue() and opFalse()) then
+			stdio.writeln("a=trueAndb=false=fail")
+		else
+			stdio.writeln("a=trueAndb=false=success")			
+		end
+		
+		if(opFalse() and opFalse()) then
+			stdio.writeln("a=falseAndb=false=fail")
+		else
+			stdio.writeln("a=falseAndb=false=success")
+		end
+		
+		if(opFalse() and opTrue()) then
+			stdio.writeln("a=falseAndb=true=fail")
+		else
+			stdio.writeln("a=falseAndb=true=success")
+		end
+	end
+}
+
