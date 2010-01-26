@@ -20,8 +20,8 @@ public abstract class TestCaseRunnerSetup extends TestCase {
 		String basePATH = this.getClass().getResource("/").getPath();
 		String kmPATH = basePATH+testcase;
 		System.out.println("TestCase Process Begin on : " + kmPATH);
-	
-	
+
+
 		try {
 			// Step 1 : creation URI.map
 			DataOutputStream dos = new DataOutputStream(new FileOutputStream(basePATH + "/uri.map", true));
@@ -37,13 +37,15 @@ public abstract class TestCaseRunnerSetup extends TestCase {
 			
 			// Step 3 : Run Scala Compiler on OutputDir
 			StringBuilder runningCommand = new StringBuilder();
+			//TODO modififer pour windows
+			//runningCommand.append("C:\\maven\\apache-maven-2.2.1\\bin\\mvn.bat clean scala:compile scala:run -B ");
 			runningCommand.append("mvn clean scala:compile scala:run -B ");
 			runningCommand.append("--file " + basePATH+"/outputScala/pom.xml");
 			System.out.println("Maven Task Executing = "
 					+ runningCommand.toString());
 			
 			ExternRunner.launch(runningCommand.toString());
-	
+			
 			try {
 				FileUtility.compareFiles("outputStream", kmPATH.replace(".km",".trace"));
 				assertTrue(true);
@@ -58,5 +60,5 @@ public abstract class TestCaseRunnerSetup extends TestCase {
 		} 
 
 	}
-
+	
 }
