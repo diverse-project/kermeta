@@ -139,12 +139,12 @@ public class TestCaseRunner extends TestCase {
 		// System.out.println(this.getClass().getResource("/testCases"));
 		process("testCases/004_testOpOpCall.main.km");
 	}		
-
+/*
 	@Test
 	public void test006testClosure() {
 		// System.out.println(this.getClass().getResource("/testCases"));
 		process("testCases/006_testClosure.km");
-	}
+	}*/
 	
 	
 }
