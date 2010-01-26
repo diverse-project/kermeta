@@ -39,6 +39,7 @@ aspect class Package inherits NamedElement, TypeDefinitionContainer{
       	
       	context.actualPackage := par.getQualifiedName
 		if (not context.actualPackage.startWith("kermeta") ) then
+ 		par.nestedPackage.each{p| p.generateScala(context, res)}
 		
 		par.ownedTypeDefinition.select{p |  p.isInstanceOf(ClassDefinition)}.each{p | p.asType(ClassDefinition).generateScala(context,res)}
 		par.ownedTypeDefinition.select{p | p.isInstanceOf(Enumeration)}.each{p | p.asType(Enumeration).generateEnum(context)}
