@@ -18,21 +18,25 @@ override def generateScalaCode(res : StringBuilder) : Unit = {
 		 		generateScalGet(res,"")
 		 		generateScalSet(res,"")
 		 	}else {	
-		 		generateAttribute(res)
-		 		generateGet(res,"Ker")
-		 		generateSet(res,"Ker")
+		 		if (!Util.hasCompilerIgnoreTag(this)){ 
+			 		generateAttribute(res)
+			 		generateGet(res,"Ker")
+			 		generateSet(res,"Ker")
+		 		}
 		 		generateScalGet(res,"Ker")
-		 		generateScalSet(res,"Ker")
-
+			 	generateScalSet(res,"Ker")
+			 		
 		 		//TODO générer getter et setter si property ajouté par un ecore
 		 	}
 //		 		value.getGetterBody
 //		 		value.getSetterBody
 	}else {
-		 generateAttribute(res)
-		 generateGet(res,"Ker")
-		 generateSet(res,"Ker")
-		 generateScalGet(res,"Ker")
+		if (!Util.hasCompilerIgnoreTag(this)){ 
+			 	generateAttribute(res)
+			 	generateGet(res,"Ker")
+			 	generateSet(res,"Ker")
+		}
+		generateScalGet(res,"Ker")
 		 generateScalSet(res,"Ker")
 
 	}

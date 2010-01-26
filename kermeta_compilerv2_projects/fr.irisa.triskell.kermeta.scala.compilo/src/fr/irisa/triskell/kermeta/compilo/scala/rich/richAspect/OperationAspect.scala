@@ -12,48 +12,49 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
 	implicit def rich (xs : OperationAspect) = xs.asInstanceOf[Operation]
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		log.debug("Operation={}",this.getName)
-		res.append("\n   ")
-		if (this.getSuperOperation()!=null || (Util.hasEcoreTag(this) && this.getBody !=null)){
-			res.append(" override")
-		}
-		res.append(" def ")
-		res.append(this.getName())
-		/* Default constructor declaration */
-		res.append("(") 
-		var i = 0;
-		this.getOwnedParameter.foreach(par => {
-			if (i==0) { 
-				res.append(Util.protectScalaKeyword(par.getName()))
-				res.append(" : ")
-				par.getType.generateScalaCode(res)
-			}else{
-				res.append(", ")
-				res.append(Util.protectScalaKeyword(par.getName()))
-				res.append(" : ")
-				par.getType.generateScalaCode(res)
+		if (!Util.hasCompilerIgnoreTag(this)){ 
+				log.debug("Operation={}",this.getName)
+			res.append("\n   ")
+			if (this.getSuperOperation()!=null || (Util.hasEcoreTag(this) && this.getBody !=null)){
+				res.append(" override")
 			}
-			i=i + 1
-		})
-		res.append("):")
-		/* Return Type Declaration */
-		this.getType.generateScalaCode(res)
-		if (this.getBody!= null){
-			res.append(" = {\n")
-			res.append("var result : ")
+			res.append(" def ")
+			res.append(this.getName())
+			/* Default constructor declaration */
+			res.append("(") 
+			var i = 0;
+			this.getOwnedParameter.foreach(par => {
+				if (i==0) { 
+					res.append(Util.protectScalaKeyword(par.getName()))
+					res.append(" : ")
+					par.getType.generateScalaCode(res)
+				}else{
+					res.append(", ")
+					res.append(Util.protectScalaKeyword(par.getName()))
+					res.append(" : ")
+					par.getType.generateScalaCode(res)
+				}
+				i=i + 1
+			})
+			res.append("):")
+			/* Return Type Declaration */
 			this.getType.generateScalaCode(res)
-			//res append "Any"
-			res.append(" = null.asInstanceOf[")
-			this.getType.generateScalaCode(res)
-			res.append("]; \n")
-			
-			this.getBody().generateScalaCode(res)
-			res append " return result\n}\n"
-			//this.getType.generateScalaCode(res)
-			//res append "]\n}\n"
-			//res.append("}/*End_"+this.getName()+"*/\n")
+			if (this.getBody!= null){
+				res.append(" = {\n")
+				res.append("var result : ")
+				this.getType.generateScalaCode(res)
+				//res append "Any"
+				res.append(" = null.asInstanceOf[")
+				this.getType.generateScalaCode(res)
+				res.append("]; \n")
+				
+				this.getBody().generateScalaCode(res)
+				res append " return result\n}\n"
+				//this.getType.generateScalaCode(res)
+				//res append "]\n}\n"
+				//res.append("}/*End_"+this.getName()+"*/\n")
+			}
 		}
-		
 	}
 	
 }

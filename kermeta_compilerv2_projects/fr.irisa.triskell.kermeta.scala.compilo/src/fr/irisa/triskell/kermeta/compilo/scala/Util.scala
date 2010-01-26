@@ -26,7 +26,7 @@ object Util extends LogAspect with RichAspectImplicit  {
 	 */
 	def hasEcoreTag(obj : Object) : Boolean = {
 	   obj.getOwnedTags.exists(e=> "ecore".equals(e.asInstanceOf[Tag].getName()))
-    } 
+    }  
 		/**
 	 * Check if a model element has an 
 	 * @param obj model element to test
