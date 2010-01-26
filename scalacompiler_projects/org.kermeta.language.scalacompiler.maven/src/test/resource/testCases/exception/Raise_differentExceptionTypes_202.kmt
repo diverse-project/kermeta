@@ -15,10 +15,17 @@ package p1;
 require kermeta
 class Main
 {
-	operation main() : Void is do 
-		var e : kermeta::exceptions::Exception init kermeta::exceptions::CallOnVoidTarget.new 
-		raise e
-		rescue(e : kermeta::exceptions::FileNotFoundException)
-		stdio.writeln("FileNotFoundException should not be caught")
+	operation main() : Void is do
+		do 
+			do 
+				var e : kermeta::exceptions::Exception init kermeta::exceptions::NotImplementedException.new 
+				stdio.writeln("NotImplementedException should not be caught in embedded block")
+				raise e
+				rescue(e : kermeta::exceptions::FileNotFoundException)
+				stdio.writeln("FileNotFoundException was caught")
+			end
+			rescue(e : kermeta::exceptions::NotImplementedException)
+			stdio.writeln("NotImplementedException was caught in embedding block")
+		end
 	end
 }
