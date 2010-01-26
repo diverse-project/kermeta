@@ -28162,7 +28162,7 @@
       <ownedOperation name="main" type="#//@packages.1/NestedIf/main/@containedType.0"
           isOrdered="true" upper="1">
         <containedType xsi:type="kermeta_language_structure:VoidType"/>
-        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/structure/ClassDefinition/allSuperTypes/@body/@statement.3/@containedType.0">
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/io/StdIO/writeln/@containedType.0">
           <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/io/StdIO/writeln/@containedType.0">
             <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/io/StdIO/writeln/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/io/StdIO/writeln/@containedType.0"
@@ -28286,6 +28286,161 @@
               </statement>
             </elseBody>
             <condition xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/language/structure/Object/isVoid/@body/@statement.0/@value/@containedType.0"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/io/StdIO/writeln/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/io/StdIO/writeln/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.0/@type/@containedType.0"
+                  identifier="i">
+                <initialization xsi:type="kermeta_language_behavior:IntegerLiteral"
+                    staticType="#//@packages.0/language/structure/Object/checkInvariant/@body/@statement.0/@initialization/@target/@containedType.0"/>
+                <type name="Integer" type="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.0/@type/@containedType.0"
+                    isOrdered="true" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/standard/Integer"/>
+                </type>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/io/StdIO/writeln/@containedType.0"
+                  name="writeln" staticOperation="#//@packages.0/io/StdIO/writeln">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.1/@containedType.0/@containedType.0"
+                    right="#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/standard/String/plus/@containedType.0"
+                    name="plus" staticOperation="#//@packages.0/standard/String/plus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0"
+                      right="#//@packages.0/standard/String/plus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/standard/Integer/toString/@containedType.0"
+                      name="toString" staticOperation="#//@packages.0/standard/Integer/toString">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.0/@type/@containedType.0"
+                        name="i"/>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/language/structure/Object/checkInvariant/@body/@statement.2/@thenBody/@statement.2/@thenBody/@statement.0/@thenBody/@statement.2/@value/@target/@target/@target/@target/@target/@target/@target/@containedType.0"
+                      value="i = "/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Object/getViolatedConstraints/@body/@statement.3/@thenBody/@statement.0/@parameters.0/@body/@rescueBlock.0/@body.0/@target/@containedType.0"
+                    name="stdio"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/io/StdIO/writeln/@containedType.0">
+                <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/standard/Integer/plus/@containedType.0">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.0/@type/@containedType.0"
+                        name="i"/>
+                    <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/standard/Integer/plus/@containedType.0"
+                        name="plus" staticOperation="#//@packages.0/standard/Integer/plus">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.2/@thenBody/@statement.0/@value/@containedType.0/@containedType.0"
+                          right="#//@packages.0/standard/Integer/plus/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="#//@packages.0/standard/Integer/plus/@ownedParameter.0/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                          staticType="#//@packages.0/language/structure/Object/checkInvariant/@body/@statement.0/@initialization/@target/@containedType.0"
+                          value="1"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.0/@type/@containedType.0"
+                          name="i"/>
+                    </value>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/io/StdIO/writeln/@containedType.0"
+                      name="writeln" staticOperation="#//@packages.0/io/StdIO/writeln">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.2/@thenBody/@statement.1/@containedType.0/@containedType.0"
+                        right="#//@packages.0/io/StdIO/writeln/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/standard/String/plus/@containedType.0"
+                        name="plus" staticOperation="#//@packages.0/standard/String/plus">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.2/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0"
+                          right="#//@packages.0/standard/String/plus/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="#//@packages.0/standard/Integer/toString/@containedType.0"
+                          name="toString" staticOperation="#//@packages.0/standard/Integer/toString">
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.0/@type/@containedType.0"
+                            name="i"/>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/language/structure/Object/checkInvariant/@body/@statement.2/@thenBody/@statement.2/@thenBody/@statement.0/@thenBody/@statement.2/@value/@target/@target/@target/@target/@target/@target/@target/@containedType.0"
+                          value="i = "/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Object/getViolatedConstraints/@body/@statement.3/@thenBody/@statement.0/@parameters.0/@body/@rescueBlock.0/@body.0/@target/@containedType.0"
+                        name="stdio"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/io/StdIO/writeln/@containedType.0">
+                    <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/io/StdIO/writeln/@containedType.0">
+                      <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/standard/Integer/plus/@containedType.0">
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.0/@type/@containedType.0"
+                            name="i"/>
+                        <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/standard/Integer/plus/@containedType.0"
+                            name="plus" staticOperation="#//@packages.0/standard/Integer/plus">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.2/@thenBody/@statement.2/@thenBody/@statement.0/@value/@containedType.0/@containedType.0"
+                              right="#//@packages.0/standard/Integer/plus/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="#//@packages.0/standard/Integer/plus/@ownedParameter.0/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                              staticType="#//@packages.0/language/structure/Object/checkInvariant/@body/@statement.0/@initialization/@target/@containedType.0"
+                              value="1"/>
+                          <target xsi:type="kermeta_language_behavior:CallVariable"
+                              staticType="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.0/@type/@containedType.0"
+                              name="i"/>
+                        </value>
+                      </statement>
+                      <statement xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="#//@packages.0/io/StdIO/writeln/@containedType.0"
+                          name="writeln" staticOperation="#//@packages.0/io/StdIO/writeln">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.2/@thenBody/@statement.2/@thenBody/@statement.1/@containedType.0/@containedType.0"
+                            right="#//@packages.0/io/StdIO/writeln/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                            staticType="#//@packages.0/standard/String/plus/@containedType.0"
+                            name="plus" staticOperation="#//@packages.0/standard/String/plus">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.2/@thenBody/@statement.2/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0"
+                              right="#//@packages.0/standard/String/plus/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="#//@packages.0/standard/Integer/toString/@containedType.0"
+                              name="toString" staticOperation="#//@packages.0/standard/Integer/toString">
+                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                staticType="#//@packages.1/NestedIf/main/@body/@statement.2/@thenBody/@statement.0/@type/@containedType.0"
+                                name="i"/>
+                          </parameters>
+                          <target xsi:type="kermeta_language_behavior:StringLiteral"
+                              staticType="#//@packages.0/language/structure/Object/checkInvariant/@body/@statement.2/@thenBody/@statement.2/@thenBody/@statement.0/@thenBody/@statement.2/@value/@target/@target/@target/@target/@target/@target/@target/@containedType.0"
+                              value="i = "/>
+                        </parameters>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/language/structure/Object/getViolatedConstraints/@body/@statement.3/@thenBody/@statement.0/@parameters.0/@body/@rescueBlock.0/@body.0/@target/@containedType.0"
+                            name="stdio"/>
+                      </statement>
+                    </thenBody>
+                    <condition xsi:type="kermeta_language_behavior:BooleanLiteral"
+                        staticType="#//@packages.0/language/structure/Object/isVoid/@body/@statement.0/@value/@containedType.0"
+                        value="true"/>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/language/structure/Object/isVoid/@body/@statement.0/@value/@containedType.0"
+                    value="true"/>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/language/structure/Object/isVoid/@body/@statement.0/@value/@containedType.0"
+                value="true"/>
           </statement>
         </body>
       </ownedOperation>

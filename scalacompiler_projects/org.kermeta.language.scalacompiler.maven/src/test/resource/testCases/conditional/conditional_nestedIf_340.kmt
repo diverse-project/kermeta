@@ -42,6 +42,23 @@ class NestedIf
 					stdio.writeln("if(false)if(false)if(false) : success")
 				end
 			end
-		end		
+		end
+		
+		
+		
+		if(true) then
+			var i : Integer init 0
+			stdio.writeln("i = " + i.toString)
+			if(true) then 
+				i := i+1
+				stdio.writeln("i = " + i.toString)
+				if(true) then
+					i := i+1
+					stdio.writeln("i = " + i.toString)
+				end
+			end
+		end
+		
+				
 	end
 }

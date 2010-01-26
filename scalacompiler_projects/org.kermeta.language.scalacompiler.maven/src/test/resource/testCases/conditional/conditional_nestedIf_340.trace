@@ -4,3 +4,6 @@ if(true)if(true)if(true) : success
 if(false) : success
 if(false)if(false) : success
 if(false)if(false)if(false) : success
+i = 0
+i = 1
+i = 2
