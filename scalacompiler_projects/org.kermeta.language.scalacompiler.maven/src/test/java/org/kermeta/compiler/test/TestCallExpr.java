@@ -53,6 +53,28 @@ public class TestCallExpr extends TestCaseRunnerPlatformDependant {
 		process("testCases/CallExpressions/Assignment_cast_classe_410.km");
 	}
 	
+	/*
+	@Test
+	public void testAssignment_cast_int_error_411(){
+		process("testCases/Assignment_cast_int_error_411.km");
+	}
+	
+	@Test
+	public void testAssignment_cast_bool_error_412(){
+		process("testCases/Assignment_cast_bool_error_412.km");
+	}
+	
+	@Test
+	public void testAssignment_cast_string_error_413(){
+		process("testCases/Assignment_cast_string_error_413.km");
+	}
+	*/
+	
+	@Test
+	public void testAssignment_cast_classe_error_414(){
+		process("testCases/Assignment_cast_classe_error_414.km");
+	}
+	
 	@Test
 	public void testCallSuperOperation_no_params_451(){
 		process("testCases/CallExpressions/CallSuperOperation_no_params_451.km");
