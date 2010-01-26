@@ -1,0 +1,45 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "test::resource::testCases::LoadSaveKm::LoadKm"
+@mainOperation "LoadKmTest"
+
+
+package test::resource::testCases::LoadSaveKm;
+
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::language::structure
+using kermeta::utils
+
+
+class LoadKm
+{
+	operation LoadKmTest() : Void is do 
+		stdio.writeln("Loadind KM")
+		self.loadModel("000HelloWorld.km").each{e| e.packages.each{e|
+		 stdio.writeln(e.name)}}
+		stdio.writeln("End of Loading KM")
+		
+  
+	end
+	
+	operation loadModel(inputKMFile : String) : Sequence<ModelingUnit> is do
+		var repository : Repository init EMFRepository.new
+		var resource : Resource init repository.getResource(inputKMFile)
+		result := Sequence<ModelingUnit>.new
+		resource.each{ modelingUnit | result.add(modelingUnit.asType(ModelingUnit))}
+		
+	end
+
+
+}
+
