@@ -25,6 +25,7 @@ aspect class Object {
       res.append("/*Object*/")
    end
    
-  operation getQualifiedNameCompilo(context : ScalaCompilerContext):String  is abstract 
-	
+  operation getQualifiedNameCompilo(context : ScalaCompilerContext):String  is do
+     result := self.toString
+  end
 }

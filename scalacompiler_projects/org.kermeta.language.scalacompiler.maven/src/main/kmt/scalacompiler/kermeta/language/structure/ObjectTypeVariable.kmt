@@ -25,4 +25,9 @@ aspect class ObjectTypeVariable inherits TypeVariable{
    method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
       res.append("/*ObjectTypeVariable*/")
    end
+   
+	method getQualifiedNameCompilo(context : ScalaCompilerContext):String  is do
+		//stdio.writeln(self.name + " " +self.container.toString + " " +context.toString)
+		result :=context.getTypeEquivalence(self.container.asType(Object).getQualifiedNameCompilo(context) + "."+ self.name)
+	end
 }
