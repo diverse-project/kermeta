@@ -1,0 +1,29 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mclavreu
+ */
+@mainClass "p1::Main"
+@mainOperation "main"
+
+
+package p1;
+
+
+require kermeta
+
+class Main
+{
+	operation main() : Void is do
+		var a : A init A.new
+		a.toto
+	end
+}
+
+class A{
+	operation toto() is do
+		stdio.writeln("CallFeature on different class")
+	end
+}
