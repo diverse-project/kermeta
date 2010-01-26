@@ -158,6 +158,7 @@ class IteratorIsOff inherits Exception {}
 class IOException inherits Exception {}
 
 /** the file has not be found on the underlying system */
+@CompilerIgnore "true"
 class FileNotFoundException inherits IOException {}
 
 /* ****************************************************************************
