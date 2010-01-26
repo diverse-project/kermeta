@@ -103,6 +103,10 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
 	    }
 	def and(other : Boolean) :Boolean={value && other}
 	def toBoolean() : Boolean = {value}
+	def andThen(func : Boolean => Boolean):Unit ={ if (value) {return func;}else return false; }
+	def orElse(func : Boolean => Boolean):Unit ={ if (!value) {return func;}else return true; }
+
+	
 }
 abstract class RichNumeric[G]  extends Comparable[G]{}
 
