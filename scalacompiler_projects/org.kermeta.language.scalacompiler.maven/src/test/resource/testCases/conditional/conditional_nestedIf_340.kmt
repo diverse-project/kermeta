@@ -1,0 +1,47 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            bmorin
+ */
+@mainClass "p1NestedIf::NestedIf"
+@mainOperation "main"
+
+
+package p1NestedIf;
+
+
+require kermeta
+using kermeta::standard
+
+class NestedIf
+{
+	operation main() : Void is do 
+		if(true) then
+			stdio.writeln("if(true) : success")
+			if(true) then 
+				stdio.writeln("if(true)if(true) : success")
+				if(true) then
+					stdio.writeln("if(true)if(true)if(true) : success")
+				end
+			end
+		end
+		
+		if(false) then
+		
+		else
+			stdio.writeln("if(false) : success")
+			if(false) then
+			
+			else
+				stdio.writeln("if(false)if(false) : success")
+				if(false) then
+				
+				else
+					stdio.writeln("if(false)if(false)if(false) : success")
+				end
+			end
+		end		
+	end
+}
