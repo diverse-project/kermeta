@@ -1,4 +1,3 @@
-import fr.irisa.triskell.kermeta.language.structureScalaAspect.ObjectAspect;
 package fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect
 
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
