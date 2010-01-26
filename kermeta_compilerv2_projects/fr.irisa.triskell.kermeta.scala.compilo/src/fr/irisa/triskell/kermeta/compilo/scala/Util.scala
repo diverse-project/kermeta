@@ -1,4 +1,3 @@
-import fr.irisa.triskell.kermeta.language.structureScalaAspect.ObjectAspect;
 /* Util.scala
  * Creation date: November 25, 2009
  * License: EPL
@@ -6,7 +5,7 @@ import fr.irisa.triskell.kermeta.language.structureScalaAspect.ObjectAspect;
  * Authors: Olivier BARAIS <barais@irisa.fr>
  *			Francois FOUQUET <ffouquet@irisa.fr>
  */
-
+ 
 package fr.irisa.triskell.kermeta.compilo.scala
 
 import fr.irisa.triskell.kermeta.language._
