@@ -1,0 +1,23 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+class Main
+{
+	operation main() : Void is do 
+		var a : kermeta::standard::Integer
+		a := -0
+		stdio.writeln("Assignment value = "+a.toString)
+	end
+}
