@@ -10,7 +10,7 @@ public class AllTests {
 
 		suite.addTestSuite(TestCaseRunner.class);
 		suite.addTestSuite(ExceptionTestCases.class);
-
+		suite.addTestSuite(TestCallExpr.class);
 		return suite;
 	}
 
