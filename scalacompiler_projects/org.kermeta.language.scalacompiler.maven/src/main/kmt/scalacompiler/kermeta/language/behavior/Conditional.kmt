@@ -23,6 +23,11 @@ aspect class Conditional inherits Expression{
     * Generate Scala code
     */
    method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
+   // FIXME: see test conditional_asignment_330.kmt: var s : String init if(false) then "if(true):success" end
+   // To manage such an instruction, the following Scala code must be generated:
+   // var s : java.lang.String  = if (false){ "if(true):success"} else { null.asInstanceOf[java.lang.String] }
+   // It means that when no "else" statement exists and it concerns a VariableDecl, an Scala "else" statement must be
+   // generated.
 		res.append("if (")
 		self.condition.generateScala(context,res)
 		res.append(")")
