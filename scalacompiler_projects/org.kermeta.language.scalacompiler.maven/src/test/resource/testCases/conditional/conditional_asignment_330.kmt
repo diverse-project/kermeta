@@ -1,0 +1,24 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            bmorin
+ */
+@mainClass "p1ConditionalAssignment::ConditionalAssignment"
+@mainOperation "main"
+
+
+package p1ConditionalAssignment;
+
+
+require kermeta
+using kermeta::standard
+
+class ConditionalAssignment
+{
+	operation main() : Void is do 
+		stdio.writeln(if(true) then "if(true):success" else "if(true):fail" end)
+		stdio.writeln(if(false) then "if(false):fail" else "if(false):success" end)		
+	end
+}
