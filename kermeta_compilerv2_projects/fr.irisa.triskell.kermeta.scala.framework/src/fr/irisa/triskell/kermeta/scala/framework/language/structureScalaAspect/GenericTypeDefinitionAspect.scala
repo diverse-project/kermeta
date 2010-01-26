@@ -1,0 +1,13 @@
+package fr.irisa.triskell.kermeta.scala.framework.language.structureScalaAspect
+import kermeta.io._
+import kermeta.standard._
+import  kermeta.standard.JavaConversions._
+import kermeta.standard.PrimitiveConversion._
+import kermeta.kunit.KunitConversions._
+trait GenericTypeDefinitionAspect extends fr.irisa.triskell.kermeta.scala.framework.language.structureScalaAspect.TypeDefinitionAspect with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect with fr.irisa.triskell.scala.generated.fw.ImplicitConversion with fr.irisa.triskell.kermeta.scala.framework.language.structure.GenericTypeDefinition{
+def ScalatypeParameter : java.util.List[fr.irisa.triskell.kermeta.scala.framework.language.structure.TypeVariable]={this.getTypeParameter()}
+def ScalatypeParameter_=(arg : java.util.List[fr.irisa.triskell.kermeta.scala.framework.language.structure.TypeVariable])={this.getTypeParameter().clear
+this.getTypeParameter().addAll(arg)
+}
+}
+
