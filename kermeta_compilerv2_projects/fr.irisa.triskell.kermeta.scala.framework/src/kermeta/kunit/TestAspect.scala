@@ -3,7 +3,7 @@ import kermeta.io._
 import kermeta.standard._
 import  kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
-trait TestAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect with KunitImplicitConversion{
+trait TestAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with fr.irisa.triskell.kermeta.language.structureScalaAspect.ObjectAspect with KunitImplicitConversion{
 var log : kermeta.kunit.Log= _
 def getLog() : kermeta.kunit.Log={this.log}
 

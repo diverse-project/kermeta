@@ -8,9 +8,12 @@ object TypeEquivalence {
 		var pack1 : java.util.HashMap[String,String]= new java.util.HashMap[String,String]();
 		pack1.put("ecore","org.eclipse.emf.ecore");
 		pack1.put("uml","org.eclipse.uml2.uml");
-		pack1.put("fr.irisa.triskell.kermeta.language.structure","fr.irisa.triskell.kermeta.scala.framework.language.structure")
-		pack1.put("kermeta.language.structure","fr.irisa.triskell.kermeta.scala.framework.language.structure")
-		//pack1.put("language.structure","fr.irisa.triskell.kermeta.scala.framework.language.structure")
+		//pack1.put("fr.irisa.triskell.kermeta.language.structure","fr.irisa.triskell.kermeta.language.structure")
+		pack1.put("kermeta","fr.irisa.triskell.kermeta")
+		pack1.put("kermeta.language","fr.irisa.triskell.kermeta.language")
+				
+		pack1.put("kermeta.language.structure","fr.irisa.triskell.kermeta.language.structure")
+		//pack1.put("language.structure","fr.irisa.triskell.kermeta.language.structure")
 		pack1.put("kermeta.language.behavior", "fr.irisa.triskell.kermeta.language.behavior")
 		//pack1.put("kermeta.kunit","junit.framework")
 		pack1;

@@ -3,7 +3,7 @@ import kermeta.io._
 import kermeta.standard._
 import  kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
-trait ErrorAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect  with KunitImplicitConversion{
+trait ErrorAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with fr.irisa.triskell.kermeta.language.structureScalaAspect.ObjectAspect  with KunitImplicitConversion{
 var error : kermeta.kunit.Fallible= _
 def getError() : kermeta.kunit.Fallible={this.error}
 def setError(arg:kermeta.kunit.Fallible)={ this.error = arg}
