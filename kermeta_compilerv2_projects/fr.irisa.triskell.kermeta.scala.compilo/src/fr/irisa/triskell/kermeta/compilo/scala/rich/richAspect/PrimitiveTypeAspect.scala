@@ -1,3 +1,5 @@
+import fr.irisa.triskell.kermeta.language.structureScalaAspect.ObjectAspect;
+import fr.irisa.triskell.kermeta.language.structureScalaAspect.PrimitiveTypeAspect;
 package fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect
 
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
@@ -16,7 +18,13 @@ trait PrimitiveTypeAspect extends RichAspectImplicit with ObjectAspect with LogA
 		
 		log.debug("PrimitiveType="+this.getName+"|"+Util.hasEcoreTag(this)+"|"+kermeta.utils.TypeEquivalence.getTypeEquivalence(this.getName))
 		if (Util.hasEcoreTag(this)){
-			var t = this.getOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName)).first.getValue;
+			var t1 = this.getOwnedTags.filter(e=> "ecore.EDataType_instanceClassName".equals(e.getName))
+			var t =
+			if (t1 != null && t1.size>0){
+				t1.first.getValue;
+			}else{
+				"java.lang.Object"
+			}
 			res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
 			log.debug("PrimitiveTypeComplement="+kermeta.utils.TypeEquivalence.getTypeEquivalence(t))	
 			/* Check Generique Param */

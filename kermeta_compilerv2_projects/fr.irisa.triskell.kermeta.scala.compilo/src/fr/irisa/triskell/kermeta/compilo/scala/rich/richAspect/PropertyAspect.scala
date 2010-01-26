@@ -82,6 +82,8 @@ def generateAttribute(res : StringBuilder) : Unit ={
 	res.append("\n")
 	}
 
+	
+	
 	def generateScalGet(res : StringBuilder,prefix:String) : Unit ={
 		res.append("def "+GlobalConfiguration.scalaPrefix)
 		res.append(this.getName+"")

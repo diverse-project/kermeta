@@ -1,3 +1,4 @@
+import fr.irisa.triskell.kermeta.language.structureScalaAspect.ObjectAspect;
 package fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect
 
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
@@ -40,7 +41,11 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 	}
 	
 	def generateTarget(res : StringBuilder){
-		this.getTarget().generateScalaCode(res)
+		if (this.getTarget()!=null){
+			this.getTarget().generateScalaCode(res)
+		}else{
+			println("//TODODODODO " + this.getName);
+		}
 	}
 	def generateParam(res : StringBuilder,openS : String,closeS : String){
 		res append openS 
