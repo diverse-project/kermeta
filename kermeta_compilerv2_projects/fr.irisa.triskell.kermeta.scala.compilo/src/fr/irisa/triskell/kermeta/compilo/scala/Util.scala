@@ -1,3 +1,4 @@
+import fr.irisa.triskell.kermeta.language.structureScalaAspect.ObjectAspect;
 /* Util.scala
  * Creation date: November 25, 2009
  * License: EPL
@@ -27,6 +28,15 @@ object Util extends LogAspect with RichAspectImplicit  {
 	def hasEcoreTag(obj : Object) : Boolean = {
 	   obj.getOwnedTags.exists(e=> "ecore".equals(e.asInstanceOf[Tag].getName()))
     } 
+		/**
+	 * Check if a model element has an 
+	 * @param obj model element to test
+	 * @return true if CompilerIgnore tag is found
+	 */
+	def hasCompilerIgnoreTag(obj : Object) : Boolean = {
+	   obj.getOwnedTags.exists(e=> "CompilerIgnore".equals(e.asInstanceOf[Tag].getName()))
+    } 
+
    
    /**
     * Utility method, generate src file
