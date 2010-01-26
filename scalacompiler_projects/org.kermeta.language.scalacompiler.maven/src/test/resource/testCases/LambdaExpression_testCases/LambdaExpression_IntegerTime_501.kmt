@@ -1,0 +1,23 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            juancadavid
+ */
+@mainClass "kmt_testCase::Main"
+@mainOperation "main"
+
+
+package kmt_testCase;
+
+
+require kermeta
+
+class Main
+{
+	operation main() : Void is do 
+		var i : kermeta::standard::Integer init 10
+		i.times{ i2 | stdio.writeln(i2.toString) }
+	end
+}
