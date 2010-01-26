@@ -1,0 +1,23 @@
+/* $Id:$ 
+ * Creation : November 20, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            haja mahmoud nguyen
+ */
+@mainClass "p1::Main"
+@mainOperation "main"
+
+
+package p1;
+
+
+require kermeta
+class Main
+{
+	operation main() : Void is do 
+		do
+		stdio.writeln("Block executed succesfully")
+		end
+	end
+}
