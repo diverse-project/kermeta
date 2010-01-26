@@ -1,0 +1,23 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mclavreu
+ */
+@mainClass "p1::Main"
+@mainOperation "main"
+
+
+package p1;
+
+
+require kermeta
+class Main
+{
+	operation main() : Void is do
+		var a : kermeta::standard::String init ""
+		a := a.plus("S").plus("c").plus("a").plus("l").plus("a")
+		stdio.writeln("Test plus call on strings ="+a)
+	end
+}
