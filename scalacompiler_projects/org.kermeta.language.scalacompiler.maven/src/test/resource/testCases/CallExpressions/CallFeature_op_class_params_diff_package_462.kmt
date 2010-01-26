@@ -1,0 +1,23 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mclavreu
+ */
+@mainClass "p1::Main"
+@mainOperation "main"
+
+
+package p2;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.language.scalacompiler.maven/src/test/resource/testCases/CallFeature_op_class_params_461.kmt"
+class Main
+{
+	operation main() : Void is do
+		var a : p1::A init p1::A.new
+		a.toto("gg")
+	end
+}
