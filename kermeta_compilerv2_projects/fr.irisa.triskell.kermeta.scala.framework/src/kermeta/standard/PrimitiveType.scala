@@ -103,8 +103,8 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
 	    }
 	def and(other : Boolean) :Boolean={value && other}
 	def toBoolean() : Boolean = {value}
-	def andThen(func : Boolean => Boolean):Unit ={ if (value) {return func;}else return false; }
-	def orElse(func : Boolean => Boolean):Unit ={ if (!value) {return func;}else return true; }
+	def andThen(func : Boolean => Boolean):Boolean ={ if (value) {return func(value) }else return false; }
+	def orElse(func : Boolean => Boolean):Boolean ={ if (!value) {return func(value)}else return true; }
 
 	
 }
