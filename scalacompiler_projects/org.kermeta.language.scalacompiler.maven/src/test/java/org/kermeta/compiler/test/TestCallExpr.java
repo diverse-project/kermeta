@@ -9,6 +9,7 @@ import org.junit.Test;
 
 public class TestCallExpr extends TestCaseRunnerPlatformDependant {
 
+	
 	@Test
 	public void testAssignment_int_401(){
 		process("testCases/Assignment_int_401.km");
@@ -37,6 +38,27 @@ public class TestCallExpr extends TestCaseRunnerPlatformDependant {
 	@Test
 	public void testAssignment_minuszero_406(){
 		process("testCases/Assignment_minuszero_406.km");
+	}
+
+	@Test
+	public void testAssignment_cast_int_407(){
+		process("testCases/Assignment_cast_int_407.km");
+	}
+	
+	
+	@Test
+	public void testAssignment_cast_bool_408(){
+		process("testCases/Assignment_cast_bool_408.km");
+	}
+	
+	
+	@Test
+	public void testAssignment_cast_string_409(){
+		process("testCases/Assignment_cast_string_409.km");
+	}
+	@Test
+	public void testAssignment_cast_classe_410(){
+		process("testCases/Assignment_cast_classe_410.km");
 	}
 	
 	@Test
@@ -73,4 +95,5 @@ public class TestCallExpr extends TestCaseRunnerPlatformDependant {
 	public void testCallResult_Object_457(){
 		process("testCases/CallResult_Object_457.km");
 	}
+	
 }
