@@ -1,0 +1,113 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            bmorin
+ */
+@mainClass "p1::ConditionalUnary"
+@mainOperation "main"
+
+
+package p1;
+
+
+require kermeta
+using kermeta::standard
+
+class ConditionalUnary
+{
+	operation returnTrue() : Boolean is
+	do
+		result := true
+	end
+	
+	operation returnFalse() : Boolean is
+	do
+		result := false
+	end
+
+	operation main() : Void is do 
+		
+		if(true) then
+			stdio.writeln("if(true) = success")
+		else
+			stdio.writeln("if(true) = fail")
+		end
+
+		if(false) then
+			stdio.writeln("if(false) = fail")
+		else
+			stdio.writeln("if(false) = success")
+		end
+		
+
+		if(not true) then
+			stdio.writeln("if(not true) = fail")
+		else
+			stdio.writeln("if(not true) = sucess")
+		end
+
+		if(not false) then
+			stdio.writeln("if(not false) = success")
+		else
+			stdio.writeln("if(not false) = fail")
+		end
+
+
+		
+		var trueBool : Boolean init true
+		if(trueBool) then
+			stdio.writeln("if(trueBool) = success")
+		else
+			stdio.writeln("if(trueBool) = fail")
+		end
+
+		var falseBool : Boolean init false
+		if(falseBool) then
+			stdio.writeln("if(falseBool) = fail")
+		else
+			stdio.writeln("if(falseBool) = success")
+		end
+		
+		if(not trueBool) then
+			stdio.writeln("if(not trueBool) = fail")
+		else
+			stdio.writeln("if(not trueBool) = success")
+		end
+		
+		if(not falseBool) then
+			stdio.writeln("if(not falseBool) = success")
+		else
+			stdio.writeln("if(not falseBool) = fail")
+		end
+		
+		
+		if(returnTrue) then
+			stdio.writeln("if(returnTrue) = success")
+		else
+			stdio.writeln("if(returnTrue) = fail")
+		end
+		
+		if(not returnTrue) then
+			stdio.writeln("if(not returnTrue) = fail")
+		else
+			stdio.writeln("if(not returnTrue) = success")
+		end
+		
+		
+		if(returnFalse) then
+			stdio.writeln("if(returnFalse) = fail")
+		else
+			stdio.writeln("if(returnFalse) = success")
+		end
+		
+		if(not returnFalse) then
+			stdio.writeln("if(not returnFalse) = success")
+		else
+			stdio.writeln("if(not returnFalse) = fail")
+		end
+
+		
+	end
+}

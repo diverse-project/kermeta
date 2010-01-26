@@ -1,0 +1,12 @@
+if(true) = success
+if(false) = success
+if(not true) = sucess
+if(not false) = success
+if(trueBool) = success
+if(falseBool) = success
+if(not trueBool) = success
+if(not falseBool) = success
+if(returnTrue) = success
+if(not returnTrue) = success
+if(returnFalse) = success
+if(not returnFalse) = success
