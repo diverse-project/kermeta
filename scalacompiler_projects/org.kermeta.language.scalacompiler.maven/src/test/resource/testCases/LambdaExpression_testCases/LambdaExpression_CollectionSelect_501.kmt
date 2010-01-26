@@ -1,0 +1,34 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            juancadavid
+ */
+@mainClass "kmt_testCase::Main"
+@mainOperation "main"
+
+
+package kmt_testCase;
+
+
+require kermeta
+
+class Main
+{
+	attribute words : kermeta::standard::String [0..*]
+	attribute newwords : kermeta::standard::String [0..*]
+	
+	operation main() : Void is do 
+		words.add("hello")
+		words.add("world")
+		words.add("I")
+		words.add("hope")
+		words.add("this")
+		words.add("works")
+		newwords.addAll( words.select{ n | n == "hope" })
+		newwords.each{ n1 | stdio.writeln(n1.toString) }
+		
+		
+	end
+}
