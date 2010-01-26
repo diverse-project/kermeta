@@ -16,8 +16,11 @@ require kermeta
 class Main
 {
 	operation main() : Void is do 
+	
+	//liste cas tests
+	// - types primitifs
 		var ~result : kermeta::standard::Integer
         ~result := 4
-        stdio.writeln(~result.toString)        
+        stdio.writeln(~result.toString)
 	end
 }
