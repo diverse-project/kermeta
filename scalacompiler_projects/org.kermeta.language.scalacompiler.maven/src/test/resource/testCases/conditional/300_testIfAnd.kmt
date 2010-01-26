@@ -23,7 +23,6 @@ class Main
 			stdio.writeln("trueAndTrue=success")
 		end
 		
-		
 		if(true.andThen{b | true}) then
 			stdio.writeln("trueAndThenTrue=success")
 		end
