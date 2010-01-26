@@ -4,7 +4,7 @@ package kermeta.standard;
 import scala._
 //import scala.collection.JavaConversions._
 //import fr.irisa.triskell.kermeta.language.behavior._
-
+ 
     
 object PrimitiveConversion{
 	implicit def string2kermeta(x: String) = new RichString(x)	

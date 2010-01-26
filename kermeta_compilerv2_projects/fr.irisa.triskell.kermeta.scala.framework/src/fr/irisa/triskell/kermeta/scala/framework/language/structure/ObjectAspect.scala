@@ -5,7 +5,7 @@ import org.eclipse.emf.ecore.impl._
 import kermeta.exceptions._
 
 trait ObjectAspect extends EObject with Contracted {
-	
+	 
 	def getMetaClass() = this.eClass()
 	def classDefinition = this.asInstanceOf[EClass]
 	def ScalaclassDefinition = classDefinition
@@ -23,7 +23,7 @@ trait ObjectAspect extends EObject with Contracted {
 	//def isFrozen : Boolean  /*TODO*/
 	def isVoid() : Boolean = false
 	def hashcode : Int = this.hashCode() 
-	def getKerMetaClass(): Class[_] =this.getClass
+	def getKerMetaClass(): java.lang.Class[_] =this.getClass
 	//def freeze  /*TODO*/
 	//def asType(t : EClass) = this.asInstanceOf[t.getName]
 	//def isInstanceOf(t : EClass) = this.isInstanceOf(t.getMetaClass().getName)
