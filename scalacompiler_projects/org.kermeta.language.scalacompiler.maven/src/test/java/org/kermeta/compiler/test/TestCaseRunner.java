@@ -109,7 +109,7 @@ public class TestCaseRunner extends TestCase {
 		// System.out.println(this.getClass().getResource("/testCases"));
 		process("testCases/000HelloWorld.km");
 	}
-/*	
+	
 	@Test
 	public void test001testAssignement() {
 		// System.out.println(this.getClass().getResource("/testCases"));
@@ -144,7 +144,7 @@ public class TestCaseRunner extends TestCase {
 	public void test006testClosure() {
 		// System.out.println(this.getClass().getResource("/testCases"));
 		process("testCases/006_testClosure.km");
-	}*/
+	}
 	
 	
 }
