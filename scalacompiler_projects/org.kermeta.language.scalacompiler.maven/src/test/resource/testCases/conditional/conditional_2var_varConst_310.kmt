@@ -1,0 +1,51 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "p1::Conditional2VarVarConst"
+@mainOperation "main"
+
+
+package p1;
+
+
+require kermeta
+using kermeta::standard
+
+class Conditional2VarVarConst
+{
+	operation main() : Void is do 
+		var a : Boolean
+		
+		a := true
+	
+		if(a and true) then
+			stdio.writeln("a=trueAndTrue=success")
+		else
+			stdio.writeln("a=trueAndTrue=fail")
+		end
+		
+		if(a and false) then
+			stdio.writeln("a=trueAndFalse=fail")
+		else
+			stdio.writeln("a=trueAndFalse=success")			
+		end
+		
+		a := false
+		
+		if(a and false) then
+			stdio.writeln("a=falseAndFalse=fail")
+		else
+			stdio.writeln("a=falseAndFalse=success")
+		end
+		
+		if(a and true) then
+			stdio.writeln("a=falseAndTrue=fail")
+		else
+			stdio.writeln("a=falseAndTrue=success")
+		end
+	end
+}

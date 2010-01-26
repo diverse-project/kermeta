@@ -1,0 +1,8 @@
+trueAndb=True=success
+trueAndThenb=True=success
+trueAndb=False=success
+trueAndThenb=False=success
+falseAndb=False=success
+falseAndThenb=False=success
+falseAndb=True=success
+falseAndThenb=True=success
