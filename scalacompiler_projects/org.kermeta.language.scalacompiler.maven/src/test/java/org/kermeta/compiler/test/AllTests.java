@@ -12,7 +12,8 @@ public class AllTests {
 		suite.addTestSuite(ExceptionTestCases.class);
 		suite.addTestSuite(TestCallExpr.class);
 		suite.addTestSuite(TestConditionalExpr.class);
-		suite.addTestSuite(TestGenericity.class);
+		suite.addTestSuite(TestVariableDecl.class);
+		suite.addTestSuite(TestLambdaExpression.class);
 		return suite;
 	}
 
