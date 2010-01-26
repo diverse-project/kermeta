@@ -53,7 +53,9 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 	 var packages : java.util.List[Package] = _
 	
 	 def addPackage(packs : java.util.List[Package]):Unit={
-		 packs.foreach({e=> if (Util.hasEcoreTag(e)) packages.add(e); addPackage(e.getNestedPackage())})
+		 packs.foreach({e=> if (Util.hasEcoreTag(e)) 
+			 packages.add(e); 
+		 addPackage(e.getNestedPackage())})
 	 }
 	 
 	def visit(par : ModelingUnit){
@@ -87,8 +89,9 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		}
 				
 		);
-		packages.foreach{e=> if (!(e.getQualifiedName.startsWith("kermeta")|| e.getQualifiedName.startsWith("language")))
-			{if (e.getNestingPackage() == null){
+		packages.foreach{e=> //if (!(e.getQualifiedName.startsWith("kermeta")|| e.getQualifiedName.startsWith("language")))
+			//{
+				if (e.getNestingPackage() == null){
 				res.append(
 				initForEcorePackage("", e.getName()))
 				}
@@ -96,7 +99,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 				res.append(
 						initForEcorePackage(e.getNestingPackage().getQualifiedName(), e.getName()))}
 			}
-		}
+		//}
 		res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(packageName))
 		
 		if (packages.filter{e=>  e.getQualifiedName().equals(packageName)}.size==1)
@@ -116,7 +119,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		if (Util.hasEcoreTag(par))
 			actualPackage=actualPackage+"ScalaAspect"
 		
-			if (!actualPackage.startsWith("kermeta")){
+			//if (!actualPackage.startsWith("kermeta")){
 			//if (!actualPackage.startsWith("kermeta.") || actualPackage.startsWith("kermeta.kunit")){
 					//if (!(actualPackage.startsWith("kermeta.io")||actualPackage.startsWith("kermeta.standard")||actualPackage.startsWith("kermeta.exceptions")||actualPackage.startsWith("kermeta.ecore"))){
 		
@@ -143,7 +146,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 			factoryDef.clear
 			par.getNestedPackage.foreach(p=> {p.accept(this)}) // Go futher in subpackage
 			
-		}
+		//}
 		
 	}  
 

@@ -19,11 +19,11 @@ class ScalaAspectVisitor extends IVisitor with RichAspectImplicit with LogAspect
 		var actualPackage = par.getQualifiedName
 		//if (!(actualPackage.startsWith("kermeta.io")||actualPackage.startsWith("kermeta.standard")||actualPackage.startsWith("kermeta.exceptions")||actualPackage.startsWith("kermeta.ecore"))){
 		//if (!actualPackage.startsWith("kermeta.") || actualPackage.startsWith("kermeta.kunit")){
-		if (!actualPackage.startsWith("kermeta") ){
+		//if (!actualPackage.startsWith("kermeta") ){
 			var subTask = new ScalaAspectPackageVisitorRunnable
 			VisitorAsyncUtility.runAfter(par,subTask)
  			par.getNestedPackage.foreach(p=> {p.accept(this)})
-		}
+		//}
 	}
  
 	def visit(par : ClassDefinition){Console.println("multithread error")}
@@ -42,6 +42,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 	
 	def visit(par : Package){
 		actualPackage = par.getQualifiedName
+		
 		par.getOwnedTypeDefinition filter(p => p.isInstanceOf[ClassDefinition]) foreach(p=> p.asInstanceOf[ClassDefinition].accept(this))
 		par.getOwnedTypeDefinition filter(p => p.isInstanceOf[Enumeration]) foreach(p=> p.asInstanceOf[EnumerationAspect].generateEnum())
 	}
@@ -70,6 +71,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 			res.append("import kermeta.kunit.KunitConversions._\n")
 			par.generateScalaCode(res)
 			Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())
+			System.err.println(par.getName+"Aspect")
 			if (!Util.hasEcoreTag(par)){
 				var res1 : StringBuilder = new StringBuilder
 				res1.append("package "+genpackageName+"\n")
