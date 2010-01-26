@@ -1,0 +1,39 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mclavreu
+ */
+@mainClass "p1::Main"
+@mainOperation "main"
+
+
+package p1;
+
+
+require kermeta
+class Main
+{
+	attribute a : A
+	operation main() : Void is do
+		a := A.new.initialize()
+		stdio.writeln("Test multi attributes of value = "+a.b.s)
+	end
+}
+
+class A {
+	attribute b : B
+	operation initialize() : A is do
+		b := B.new.initialize()
+		result := self
+	end
+}
+
+class B {
+	attribute s : kermeta::standard::String
+	operation initialize() : B is do
+		s := "i am a B"
+		result := self
+	end
+}
