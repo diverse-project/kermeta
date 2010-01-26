@@ -21,7 +21,12 @@ trait PrimitiveTypeAspect extends RichAspectImplicit with ObjectAspect with LogA
 			if (t1 != null && t1.size>0){
 				t1.first.getValue;
 			}else{
-				"java.lang.Object"
+				this.getName match {
+					case "String" => "java.lang.String"
+					case "Boolean" => "Boolean"
+					case "Integer" => "Int"
+					case _ => "java.lang.Object"
+				}
 			}
 			res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(t))
 			log.debug("PrimitiveTypeComplement="+kermeta.utils.TypeEquivalence.getTypeEquivalence(t))	

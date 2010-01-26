@@ -92,7 +92,7 @@ def generateAttribute(res : StringBuilder) : Unit ={
 		var s: StringBuilder = new StringBuilder
 		this.getType().asInstanceOf[ObjectAspect].generateScalaCode(s)
 		res.append("={this.")
-		if (s.toString.equals("Boolean")){
+		if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")){
 			res.append(prefix+"is")
 		}else
 		{
