@@ -102,13 +102,13 @@ public class TestCallExpr extends TestCaseRunnerPlatformDependant {
 	}
 
 	@Test
-	public void testCallFeature_self_operation_464(){
-		process("testCases/CallFeature_self_operation_464.km");
+	public void testCallFeature_self_operation_465(){
+		process("testCases/CallFeature_self_operation_465.km");
 	}
 	
 	@Test
-	public void testCallFeature_obj_operation_operation_465(){
-		process("testCases/CallFeature_obj_operation_operation_465.km");
+	public void testCallFeature_obj_operation_operation_466(){
+		process("testCases/CallFeature_obj_operation_operation_466.km");
 	}
 	
 }
