@@ -152,4 +152,9 @@ public class TestCaseRunner extends TestCase {
 		process("testCases/Assignment_int_401.km");
 	}
 	
+	@Test
+	public void testIntegerLiteral_writeln_100(){
+		process("testCases/IntegerLiteral_writeln_100.km");
+	}
+	
 }
