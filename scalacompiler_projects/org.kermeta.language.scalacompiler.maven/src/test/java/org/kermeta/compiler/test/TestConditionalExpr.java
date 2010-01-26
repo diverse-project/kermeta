@@ -73,4 +73,9 @@ public class TestConditionalExpr extends TestCaseRunnerSetup {
 	public void testLoop_352(){
 		process("testCases/conditional/loop_352_SemiColumnBefore.km");
 	}
+	
+	@Test
+	public void testParenthesis_360(){
+		process("testCases/conditional/conditional_parenthesis_360.km");
+	}
 }
