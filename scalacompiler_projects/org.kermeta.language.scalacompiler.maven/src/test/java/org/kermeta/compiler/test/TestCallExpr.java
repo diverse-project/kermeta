@@ -91,4 +91,24 @@ public class TestCallExpr extends TestCaseRunnerPlatformDependant {
 		process("testCases/CallResult_Object_457.km");
 	}
 	
+	@Test
+	public void testCallFeature_new_458(){
+		process("testCases/CallFeature_new_458.km");
+	}
+	
+	@Test
+	public void testCallFeature_self_param_459(){
+		process("testCases/CallFeature_self_param_459.km");
+	}
+
+	@Test
+	public void testCallFeature_self_operation_464(){
+		process("testCases/CallFeature_self_operation_464.km");
+	}
+	
+	@Test
+	public void testCallFeature_obj_operation_operation_465(){
+		process("testCases/CallFeature_obj_operation_operation_465.km");
+	}
+	
 }
