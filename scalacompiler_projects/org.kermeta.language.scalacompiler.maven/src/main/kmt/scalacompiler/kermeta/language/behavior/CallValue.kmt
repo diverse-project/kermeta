@@ -23,6 +23,9 @@ aspect class CallValue inherits CallExpression{
     * Generate Scala code
     */
    method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
-      res.append("/*CallValue*/")
+		res.append(context.protectScalaKeyword(self.name))
+		res.append("(")
+		self.parameters.each{par | par.generateScala(context,res)}
+		res.append(")")
    end
 }
