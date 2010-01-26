@@ -42,6 +42,9 @@ aspect class Block inherits Expression{
 		if(self.rescueBlock.size > 0) then
 			res.append(template.generate(body.toString, catchBody.toString))
 		 else 
+		 	if self.container.isInstanceOf(Block) then
+		 	 res.append(";\n")
+		 	end
 			res.append("{\n"+body.toString+"}\n")
 		end
    end
