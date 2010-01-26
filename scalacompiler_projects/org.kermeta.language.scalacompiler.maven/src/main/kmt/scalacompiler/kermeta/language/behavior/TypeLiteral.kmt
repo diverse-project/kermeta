@@ -23,6 +23,25 @@ aspect class TypeLiteral inherits Literal{
     * Generate Scala code
     */
    method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
-      res.append("/*TypeLiteral*/")
+   
+		res.append(self.typeref.type.getQualifiedNameCompilo(context))
+		/* Check Generique Param */
+		var c : Integer
+		c ?= extern kermeta::language::structure::TypeLiteral.getTypeParametersSize(self.typeref.type.getQualifiedNameCompilo(context))
+		if(c > 0) then
+			res.append("[")
+			from
+				var i : Integer init 0
+			until
+				i >= c
+			loop
+				res.append("_")
+				if(i < c-1) then
+					res.append(",")
+				end
+				res.append("]")
+			end
+		end
+      //res.append("/*TypeLiteral*/")
    end
 }
