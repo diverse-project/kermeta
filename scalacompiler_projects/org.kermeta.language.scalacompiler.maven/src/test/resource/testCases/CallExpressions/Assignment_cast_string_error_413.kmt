@@ -1,0 +1,26 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+class Main
+{
+	operation main() : Void is do 
+		var a : kermeta::standard::String
+		var obj : kermeta::language::structure::Object init kermeta::language::structure::Object.new
+		
+		a ?= obj
+		
+		stdio.writeln("Assignment value = "+a)
+	end
+}

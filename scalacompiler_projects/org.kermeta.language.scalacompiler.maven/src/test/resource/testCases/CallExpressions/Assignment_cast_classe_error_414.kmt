@@ -1,0 +1,40 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+
+class A {
+
+}
+
+class B inherits A {}
+
+
+class Main
+{
+	operation main() : Void is do 
+
+		var a : A init A.new
+		var b : B		
+		b ?= a 
+		
+		if b == void
+		then
+			stdio.writeln("b is void")
+		else
+			stdio.writeln("b is not void")
+		end
+		
+	end
+}
