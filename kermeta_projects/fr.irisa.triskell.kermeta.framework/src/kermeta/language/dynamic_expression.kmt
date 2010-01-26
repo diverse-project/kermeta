@@ -26,6 +26,7 @@ using kermeta::language::structure
  *   de.execute(void, params)
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/dynamic_expression_view.png"/>
  */
+@CompilerIgnore "true"
 class DynamicExpression
 {
 	/**
@@ -125,6 +126,7 @@ class DynamicExpression
 /**
  * Kermeta language error in a code written in Kermeta
  */
+@CompilerIgnore "true"
 abstract class KermetaError {
 	/**
 	 * Error message
@@ -136,10 +138,12 @@ abstract class KermetaError {
 /**
  * Kermeta error for parsing problems
  */
+@CompilerIgnore "true"
 class ParseError inherits KermetaError {}
 
 
 /**
  * Type errors in a code written in Kermeta
  */
+@CompilerIgnore "true"
 class TypeError inherits KermetaError {}

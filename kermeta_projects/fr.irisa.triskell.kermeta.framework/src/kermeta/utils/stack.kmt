@@ -22,6 +22,7 @@ using kermeta::standard
  * An implementation of stack
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png"/>
  */
+@CompilerIgnore "true"
 class Stack<G> inherits Sequence<G>
 {
 	/**

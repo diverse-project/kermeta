@@ -42,6 +42,7 @@ using kermeta::standard
  *   - The object to remove is attached to an object in the collection -> "dependency-violation" exception?
 
  */
+ @CompilerIgnore "true"
 abstract class Resource inherits kermeta::standard::Set<Object>
 {
 	/**
@@ -217,6 +218,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
  * User is not supposed to directly create it. Otherwise it will not be correctly initialized
  * You must To create one 
  */
+@CompilerIgnore "true"
 class EMFResource inherits Resource
 {	
 	 
@@ -320,6 +322,7 @@ class EMFResource inherits Resource
 
  * NOT IMPLEMENTED
  *
+@CompilerIgnore "true"
 class KMResource inherits Resource
 {
 
@@ -349,6 +352,7 @@ class KMResource inherits Resource
  * and methods to create or get a resource given an URI.
  * A repository cannot contain 2 resources which points to the same file (ie. that have the same normalizedURI)
  */
+@CompilerIgnore "true"
 abstract class Repository
 {
 	/**
@@ -498,6 +502,7 @@ abstract class Repository
  * class used to gather the information required to make a user friendly report about a dangling element
  * (see. findDanglingModelElements())
  */
+@CompilerIgnore "true"
 class DanglingDiagnostic {
 	/**
 	 * Element that is not contained by a resource in the repository  
@@ -522,6 +527,7 @@ class DanglingDiagnostic {
 /**
  * Repository that stores and manages resources that come from EMF
  */
+@CompilerIgnore "true"
 class EMFRepository inherits Repository
 {	
 	
@@ -594,6 +600,7 @@ class EMFRepository inherits Repository
 
  * Repository that stores and manages XMI files representing Kermeta models
  *
+@CompilerIgnore "true"
 class KMRepository inherits Repository
 {
 

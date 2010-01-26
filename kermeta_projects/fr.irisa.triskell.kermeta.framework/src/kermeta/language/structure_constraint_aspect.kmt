@@ -98,7 +98,8 @@ aspect class Object
 	 * Checks all the invariants for this object and return a complete diagnostic.
 	 * This also includes the structural constraints associated to the properties.
 	 */
-	operation getViolatedConstraints() : kermeta::exceptions::ConstraintsDiagnostic is do
+	 @CompilerIgnore "true"
+	 	operation getViolatedConstraints() : kermeta::exceptions::ConstraintsDiagnostic is do
 	
 		// init result
 		var contraintes : ConstraintsDiagnostic init ConstraintsDiagnostic.new.initialize
@@ -193,6 +194,7 @@ aspect class Object
 	 * Checks a constraint invariant defined for the metaclass of the Object
 	 * You can use PropertyConstraint for checking structural constraints associated to a property
 	 */
+	 @CompilerIgnore "true"
 	operation checkInvariant(invariant : Constraint) : Void is do 
 	
 	    

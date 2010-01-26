@@ -15,6 +15,7 @@ using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
 
+@CompilerIgnore "true"
 class ConstraintsDiagnostic 
 {
 	attribute setConstraints : Bag<ConstraintViolatedInv>

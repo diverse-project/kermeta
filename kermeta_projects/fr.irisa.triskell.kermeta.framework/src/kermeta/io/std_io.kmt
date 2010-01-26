@@ -22,6 +22,7 @@ using kermeta::language::structure
  * An implementation of StdIO : standard input/output
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png"/>
  */
+@CompilerIgnore "true"
 class StdIO
 {
 	/**

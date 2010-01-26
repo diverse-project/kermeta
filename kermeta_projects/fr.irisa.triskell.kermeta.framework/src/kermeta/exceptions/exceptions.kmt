@@ -32,6 +32,7 @@ using kermeta::utils
  * Generic exceptions
  * The main class from which all the exception inherit
  */
+@CompilerIgnore "true"
 class Exception
 {
 
@@ -53,6 +54,7 @@ class Exception
  * ****************************************************************************/ 
 
 /** Exception for interpreter exceptions */
+@CompilerIgnore "true"
 class RuntimeError inherits Exception {
 	
 	/** The code that raised the exception */
@@ -60,23 +62,27 @@ class RuntimeError inherits Exception {
 }
 
 /** Occurs when a feature is called on void */
+@CompilerIgnore "true"
 class CallOnVoidTarget inherits RuntimeError {}
 
 /**
  * Occurs when a cast (Object::asType operation) fails
  */
+@CompilerIgnore "true"
 class TypeCastError inherits RuntimeError {}
 
 /**
  * Use this exception when you want to forbid the access to an unimplemented operation 
  * and invite to implement it
  */
+@CompilerIgnore "true"
 class NotImplementedException inherits RuntimeError {}
 
 /** 
  * Use this exception when user tries to add an element to a property which type is collection
  * which has an upper bound != -1 ( ie *)
  */
+@CompilerIgnore "true"
 class UpperBoundReachedError inherits RuntimeError {}
 
 /**
@@ -84,12 +90,14 @@ class UpperBoundReachedError inherits RuntimeError {}
  * case where this happens is when instantiating a type variable, whose bound type turns
  * out to be abstract.
  */
+@CompilerIgnore "true"
 class AbstractClassInstantiationError inherits RuntimeError {}
 
 /**
  * Raised by the Object::set operation if the type of the 
  * Object to set has an incompatible type.
  */
+@CompilerIgnore "true"
 class IncompatibleTypeError inherits RuntimeError {}
 
 /* ****************************************************************************
@@ -100,44 +108,53 @@ class IncompatibleTypeError inherits RuntimeError {}
  * Arithmetic errors
  */
 /** well-known attempt to divide with a zero valued divider */
+@CompilerIgnore "true"
 class DivisionByZero inherits Exception {}
 
 /** the figure oversteps the capacity of the numeric variable */
+@CompilerIgnore "true"
 class OverflowError inherits Exception {}
 
 /** one of the required operands is void */
+@CompilerIgnore "true"
 class VoidOperandError inherits Exception {}
  
 /*
  * String errors
  */
 /** the data overstep the size of the string variable */
+@CompilerIgnore "true"
 class StringIndexOutOfBound inherits Exception {}
 
 /**
  * to be written #########################################
  */
+@CompilerIgnore "true"
 class StringFormatException inherits Exception {}
   
 /*
  * Collection related errors
  */  
 /** Occurs when trying to access out of bounds elements */
+@CompilerIgnore "true"
 class IndexOutOfBound inherits Exception {}
 
 /** Occurs when trying to access element on an empty collection */
+@CompilerIgnore "true"
 class EmptyCollection inherits Exception {}
 
 /**
  * Occurs when calling next() operation while iterator is already
  * positioned on the last element of a collection
  */
+@CompilerIgnore "true"
 class IteratorIsOff inherits Exception {}
 
 /*
  * File Related Errors
  */
 /** an interaction with the underlying system failed */
+@CompilerIgnore "true"
 class IOException inherits Exception {}
 
 /** the file has not be found on the underlying system */
@@ -148,6 +165,7 @@ class FileNotFoundException inherits IOException {}
  * ****************************************************************************/ 
 
 /** Common super class for all ConstraintVioloated exceptions */
+@CompilerIgnore "true"
 class ConstraintViolatedException inherits Exception {
 
 	/** Object on which the constraint was applied to
@@ -161,12 +179,15 @@ class ConstraintViolatedException inherits Exception {
 }
 
 /** The pre-condition is not satisfied */
+@CompilerIgnore "true"
 class ConstraintViolatedPre inherits ConstraintViolatedException {}
 
 /** The post-condition is not satisfied */
+@CompilerIgnore "true"
 class ConstraintViolatedPost inherits ConstraintViolatedException {}
 
 /** An invariant isn't satisfied on a given Object */
+@CompilerIgnore "true"
 class ConstraintViolatedInv inherits ConstraintViolatedException {}
 
 
@@ -175,9 +196,11 @@ class ConstraintViolatedInv inherits ConstraintViolatedException {}
  * ****************************************************************************/
 
 /** Occurs when Resource loading fails for some reasons */
+@CompilerIgnore "true"
 class ResourceLoadException inherits Exception { }
 
 /** Occurs when Resource saving fails for some reasons */
+@CompilerIgnore "true"
 class ResourceSaveException inherits Exception {
 	/** Object on which the the saved failed
 	 * One can rescue the exception and analyse the structure next to this object, 
@@ -188,17 +211,21 @@ class ResourceSaveException inherits Exception {
 
 /** Occurs when Resource saving fails because an object refers to an element which 
  * belongs to the Definition of the currently running program */
+@CompilerIgnore "true"
 class ResourceMixedLevelsException inherits ResourceSaveException { }
 
 /** Occurs when trying to crate a Resource already existing in the Repository */
+@CompilerIgnore "true"
 class ResourceCreateException inherits Exception { }
 
 /** Raised when user tries to add an object that is not conform to the metamodel */
+@CompilerIgnore "true"
 class ResourceUnconformityException inherits Exception { }
 
 /** Raised when a resource cannot be loaded or saved because the URI used for 
  * the  metamodel is not registered
  */
+@CompilerIgnore "true"
 class UnregisteredMetamodelException inherits Exception { }
 
 /* ****************************************************************************
@@ -208,4 +235,5 @@ class UnregisteredMetamodelException inherits Exception { }
 /**
  * to be written #########################################
  */
+@CompilerIgnore "true"
 class DynamicExpressionException inherits Exception { }

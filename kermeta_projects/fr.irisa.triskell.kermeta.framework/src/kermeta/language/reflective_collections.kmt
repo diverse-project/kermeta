@@ -23,6 +23,7 @@ using kermeta::standard
  * of attributes that have an upper multiplicity > 1 in a class. It indeed handles
  * the update of opposite property if such an attribute has got one.
  */
+@CompilerIgnore "true"
 class ReflectiveCollection<G> inherits Set<G>
 {
 	/**
@@ -55,6 +56,7 @@ class ReflectiveCollection<G> inherits Set<G>
 /**
  * ReflectiveSequence is an ordered ReflectiveCollection.
  */
+@CompilerIgnore "true"
 class ReflectiveSequence<G> inherits OrderedSet<G>, ReflectiveCollection<G> {
 
 	/**

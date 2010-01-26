@@ -17,6 +17,7 @@ using kermeta::exceptions
   * <b>the only actions possible on these objects are : assignment and passing them as parameter</b>
   * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png"/>
   */
+@CompilerIgnore "true"
 class UnknownJavaObject {
  
  	/**

@@ -13,6 +13,7 @@ require kermeta
 
 using kermeta::standard
 
+@CompilerIgnore "true"
 aspect class EMFResource {
 
 	operation mark(message : String) is do

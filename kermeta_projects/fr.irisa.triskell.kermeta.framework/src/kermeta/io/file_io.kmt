@@ -24,6 +24,7 @@ using kermeta::exceptions
  * Implementation of simple helpers to read ans write text files
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png"/>
  */
+@CompilerIgnore "true"
 class FileIO
 {
 	/**

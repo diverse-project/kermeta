@@ -26,6 +26,8 @@ using kermeta::standard
  * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png"/>
  */
+
+@CompilerIgnore "true"
 class Hashtable<K, V>
 {
 	/**
