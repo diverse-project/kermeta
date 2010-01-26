@@ -1,0 +1,25 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            juancadavid
+ */
+@mainClass "kmt_testCase::Main"
+@mainOperation "main"
+
+
+package kmt_testCase;
+
+
+require kermeta
+
+class Main
+{
+	operation main() : Void is do 
+		var s : kermeta::standard::Set<kermeta::standard::String> init kermeta::standard::Set<kermeta::standard::String>.new
+		s.add("hello")
+		s.add("moto")
+		s.each{ s2 | stdio.writeln(s2) }
+	end
+}
