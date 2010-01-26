@@ -4,8 +4,11 @@ import org.eclipse.emf.ecore._
 import org.eclipse.emf.ecore.impl._
 import kermeta.exceptions._
 
-trait ObjectAspect extends EObject with Contracted {
-	 
+trait ObjectAspect extends EObject  with Contracted {
+	
+	 def getOwnedTags():org.eclipse.emf.common.util.EList[fr.irisa.triskell.kermeta.language.structure.Tag]=null;
+	 def getTag():org.eclipse.emf.common.util.EList[fr.irisa.triskell.kermeta.language.structure.Tag]=null;
+
 	def getMetaClass() = this.eClass()
 	def classDefinition = this.asInstanceOf[EClass]
 	def ScalaclassDefinition = classDefinition
@@ -27,6 +30,16 @@ trait ObjectAspect extends EObject with Contracted {
 	//def freeze  /*TODO*/
 	//def asType(t : EClass) = this.asInstanceOf[t.getName]
 	//def isInstanceOf(t : EClass) = this.isInstanceOf(t.getMetaClass().getName)
+	
+	def Scalatag : java.util.List[fr.irisa.triskell.kermeta.language.structure.Tag]={this.getTag()}
+	def Scalatag_=(arg : java.util.List[fr.irisa.triskell.kermeta.language.structure.Tag])={this.getTag().clear
+		this.getTag().addAll(arg)
+	}
+	def ScalaownedTags : java.util.List[fr.irisa.triskell.kermeta.language.structure.Tag]={this.getOwnedTags()}
+	def ScalaownedTags_=(arg : java.util.List[fr.irisa.triskell.kermeta.language.structure.Tag])={this.getOwnedTags().clear
+		this.getOwnedTags().addAll(arg)
+	}
+	
 	
 	
 	/* Contracted */

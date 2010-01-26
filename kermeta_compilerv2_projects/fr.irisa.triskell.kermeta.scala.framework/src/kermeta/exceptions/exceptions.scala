@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore._
 
 import kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
-
+ 
 
 trait Exception extends java.lang.Throwable with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect{
 var message:String=null;
@@ -23,8 +23,8 @@ def ScalanestedException : Exception={return this.nestedException }
 def ScalanestedException_=(arg : Exception)={nestedException = arg}
 def ScalastackTrace : java.lang.String={return this.stackTrace }
 def ScalastackTrace_=(arg : java.lang.String)={stackTrace  = arg}
-
-
+	
+	
    def eClass():EClass =null
    def eResource():Resource =null
    def eContainer():EObject =null
@@ -43,6 +43,7 @@ def ScalastackTrace_=(arg : java.lang.String)={stackTrace  = arg}
    def eDeliver():Boolean =true;
    def eSetDeliver(deliver:Boolean):Unit=null;
    def eNotify( notification:org.eclipse.emf.common.notify.Notification):Unit=null;
+   
 }  
 trait RuntimeError extends Exception{
 var expression:Expression=null;
