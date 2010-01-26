@@ -1,0 +1,23 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mclavreu
+ */
+@mainClass "p1::Main"
+@mainOperation "main"
+
+
+package p1;
+
+
+require kermeta
+class Main
+{
+	attribute a : kermeta::standard::String
+	operation main() : Void is do
+		a := "toto"
+		stdio.writeln("Test attribute same class of type String and of value ="+a)
+	end
+}
