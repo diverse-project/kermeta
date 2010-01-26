@@ -19,6 +19,11 @@ class ConditionalAssignment
 {
 	operation main() : Void is do 
 		stdio.writeln(if(true) then "if(true):success" else "if(true):fail" end)
-		stdio.writeln(if(false) then "if(false):fail" else "if(false):success" end)		
+		stdio.writeln(if(false) then "if(false):fail" else "if(false):success" end)
+		
+		var s : String init if(false) then "if(true):success" end
+		if(s == void) then
+			stdio.writeln("if(false) no else : success")
+		end		
 	end
 }

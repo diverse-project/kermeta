@@ -1,2 +1,3 @@
 if(true):success
 if(false):success
+if(false) no else : success
