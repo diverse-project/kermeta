@@ -11,11 +11,14 @@ import java.util._
 trait LoopAspect extends RichAspectImplicit with ObjectAspect {
 	 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
+		res.append(";\n{")
 		this.getInitialization().generateScalaCode(res)
 		res.append("\n")
 		res.append("while (!(")
 		this.getStopCondition().generateScalaCode(res)
 		res.append("))\n")
 		this.getBody().generateScalaCode(res)
+		res.append("}")
+
 	}
 }

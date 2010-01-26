@@ -11,7 +11,9 @@ import fr.irisa.triskell.kermeta.language.behavior._
 trait BlockAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
+
 		log.debug("BlockAspect Generation ")
+		res.append(";\n")
 		var template = new StringTemplate("try {\n $body$ \n} catch {\n $catchBody$ }\n")
 		var body,catchBody = new StringBuilder
 		Util.generateScalaCodeEach(body,this.getStatement(),"\n") //BODY GEN
