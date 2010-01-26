@@ -13,7 +13,7 @@ package p2;
 
 
 require kermeta
-require "platform:/resource/org.kermeta.language.scalacompiler.maven/src/test/resource/testCases/CallFeature_op_class_params_461.kmt"
+require "platform:/resource/org.kermeta.language.scalacompiler.maven/src/test/resource/testCases/CallExpressions/CallFeature_op_class_params_461.kmt"
 class Main
 {
 	operation main() : Void is do
