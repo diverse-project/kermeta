@@ -24,14 +24,14 @@ aspect class CallSuperOperation inherits CallExpression{
     * Generate Scala code
     */
    method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer)   is do
-		var actualEObject : Object 
+		var actualEObject : Object
 		from 
-			actualEObject:= self 
-		until ( not actualEObject.getMetaClass().name.equals("Operation")) 
+			actualEObject:= self
+		until ( actualEObject.getMetaClass().name.equals("Operation")) 
 		loop
 			actualEObject := actualEObject.container()
 		end
-		var actualOperation : Operation init  actualEObject.asType(Operation)
+		var actualOperation : Operation init actualEObject.asType(Operation)
 		/* Out EObject Iinstance of Operaiton */
 		
 		var superClassFromName :String init actualOperation.superOperation.owningClass.name
