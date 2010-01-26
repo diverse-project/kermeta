@@ -147,6 +147,9 @@ public class TestCaseRunner extends TestCase {
 	}
 	
 	
-	
+	@Test
+	public void testAssignment_new_401(){
+		process("testCases/Assignment_int_401.km");
+	}
 	
 }
