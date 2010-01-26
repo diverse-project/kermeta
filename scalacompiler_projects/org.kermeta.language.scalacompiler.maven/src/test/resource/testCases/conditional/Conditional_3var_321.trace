@@ -1,0 +1,36 @@
+Values Only
+if( false and ( false or false ) ) : success
+if( false and ( false or true ) ) : success
+if( false and ( true or false ) ) : success
+if( false and ( true or true ) ) : success
+if( true and ( false or false ) ) : success
+if( true and ( false or true ) ) : success
+if( true and ( true or false ) ) : success
+if( true and ( true or true ) ) : success
+Values Only With Assignement
+if( false and ( false or false ) ) : success
+if( false and ( false or false ) ) : success
+if( false and ( true or false ) ) : success
+if( false and ( false or false ) ) : success
+if( true and ( false or false ) ) : success
+if( true and ( false or true ) ) : success
+if( true and ( true or false ) ) : success
+if( true and ( true or true ) ) : success
+Vars Only
+if( false and ( false or false ) ) : success
+if( false and ( true or false ) ) : success
+if( false and ( true or false ) ) : success
+if( false and ( true or false ) ) : success
+if( true and ( false or false ) ) : success
+if( true and ( false or true ) ) : success
+if( true and ( true or false ) ) : success
+if( true and ( true or true ) ) : success
+Vars Only With Assignement
+if( false and ( false or false ) ) : success
+if( false and ( false or false ) ) : success
+if( false and ( true or false ) ) : success
+if( false and ( false or false ) ) : success
+if( true and ( false or false ) ) : success
+if( true and ( false or true ) ) : success
+if( true and ( true or false ) ) : success
+if( true and ( true or true ) ) : success

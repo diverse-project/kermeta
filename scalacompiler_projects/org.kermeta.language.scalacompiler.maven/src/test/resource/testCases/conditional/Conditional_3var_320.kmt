@@ -1,0 +1,362 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            gnain
+ */
+@mainClass "p1Cond3var320::Conditional_3var"
+@mainOperation "main"
+
+
+package p1Cond3var320;
+
+
+require kermeta
+
+using kermeta::standard
+
+//Test of expressions patern: (( a & b) | c )
+/*
+a	b	c	Value Case
+0	0	0	0		0
+0	0	1	1		1
+0	1	0	0		2
+0	1	1	1		3
+1	0	0	0		4
+1	0	1	1		5
+1	1	0	1		6
+1	1	1	1		7
+*/
+class Conditional_3var
+{
+
+	operation valuesOnly() : Void is do
+		
+		stdio.writeln("Values Only")
+		
+		//Case 0
+		if( (false and false) or false ) then			
+			stdio.writeln("if( (false and false) or false ) : fail")
+		else
+			stdio.writeln("if( (false and false) or false ) : success")
+		end
+		
+		//Case 1
+		if( (false and false) or true ) then			
+			stdio.writeln("if( (false and false) or true ) : success")
+		else
+			stdio.writeln("if( (false and false) or true ) : fail")
+		end
+		
+		//Case 2
+		if( (false and true) or false ) then			
+			stdio.writeln("if( (false and true) or false ) : fail")
+		else
+			stdio.writeln("if( (false and true) or false ) : success")
+		end
+		
+		//Case 3
+		if( (false and true) or true ) then			
+			stdio.writeln("if( (false and true) or true ) : success")
+		else
+			stdio.writeln("if( (false and true) or true ) : fail")
+		end
+		
+		//Case 4
+		if( (true and false) or false ) then			
+			stdio.writeln("if( (true and false) or false ) : fail")
+		else
+			stdio.writeln("if( (true and false) or false ) : success")
+		end
+		
+		//Case 5
+		if( (true and false) or true ) then			
+			stdio.writeln("if( (true and false) or true ) : success")
+		else
+			stdio.writeln("if( (true and false) or true ) : fail")
+		end
+		
+		//Case 6
+		if( (true and true) or false ) then			
+			stdio.writeln("if( (true and true) or false ) : success")
+		else
+			stdio.writeln("if( (true and true) or false ) : fail")
+		end
+		
+		//Case 7
+		if( (true and true) or true ) then			
+			stdio.writeln("if( (true and true) or true ) : success")
+		else
+			stdio.writeln("if( (true and true) or true ) : fail")
+		end
+	end
+
+	operation valuesOnlyWithAssignement() : Void is do
+		
+		var d : Boolean
+		
+		stdio.writeln("Values Only With Assignement")
+		
+		//Case 0
+		d := (false and false) or false
+		if( d ) then			
+			stdio.writeln("if( (false and false) or false ) : fail")
+		else
+			stdio.writeln("if( (false and false) or false ) : success")
+		end
+		
+		//Case 1
+		d := (false and false) or true 
+		if( d ) then			
+			stdio.writeln("if( (false and false) or true ) : success")
+		else
+			stdio.writeln("if( (false and false) or true ) : fail")
+		end
+		
+		//Case 2
+		d := (false and true) or false 
+		if( d ) then			
+			stdio.writeln("if( (false and true) or false ) : fail")
+		else
+			stdio.writeln("if( (false and true) or false ) : success")
+		end
+		
+		//Case 3
+		d := (false and true) or true 
+		if( d ) then		
+			stdio.writeln("if( (false and true) or true ) : success")
+		else
+			stdio.writeln("if( (false and true) or true ) : fail")
+		end
+		
+		//Case 4
+		d := (true and false) or false 
+		if( d ) then			
+			stdio.writeln("if( (true and false) or false ) : fail")
+		else
+			stdio.writeln("if( (true and false) or false ) : success")
+		end
+		
+		//Case 5
+		d := (true and false) or true 
+		if( d ) then			
+			stdio.writeln("if( (true and false) or true ) : success")
+		else
+			stdio.writeln("if( (true and false) or true ) : fail")
+		end
+		
+		//Case 6
+		d := (true and true) or false 
+		if( d ) then			
+			stdio.writeln("if( (true and true) or false ) : success")
+		else
+			stdio.writeln("if( (true and true) or false ) : fail")
+		end
+		
+		//Case 7
+		d := (true and true) or true 
+		if( d ) then			
+			stdio.writeln("if( (true and true) or true ) : success")
+		else
+			stdio.writeln("if( (true and true) or true ) : fail")
+		end
+	end
+
+	operation varsOnly() : Void is do
+		var a : Boolean
+		var b : Boolean
+		var c : Boolean
+		
+		stdio.writeln("Vars Only")
+		
+		//Case 0
+		a := false
+		b := false
+		c := false
+		if( (a and b) or c) then
+			stdio.writeln("if( (false and false) or false ) : fail")
+		else
+			stdio.writeln("if( (false and false) or false ) : success")
+		end
+		
+		//Case 1
+		a := false
+		b := false
+		c := true
+		if( (a and b) or c) then
+			stdio.writeln("if( (false and false) or true ) : success")
+		else
+			stdio.writeln("if( (false and false) or true ) : fail")
+		end
+		
+		//Case 2
+		a := false
+		b := true
+		c := false
+		if( (a and b) or c) then
+			stdio.writeln("if( (false and true) or false ) : fail")
+		else
+			stdio.writeln("if( (false and true) or false ) : success")
+		end
+		
+		//Case 3
+		a := false
+		b := true
+		c := true
+		if( (a and b) or c) then
+			stdio.writeln("if( (false and true) or true ) : success")
+		else
+			stdio.writeln("if( (false and true) or true ) : fail")
+		end
+		
+		//Case 4
+		a := true
+		b := false
+		c := false
+		if( (a and b) or c) then
+			stdio.writeln("if( (true and false) or false ) : fail")
+		else
+			stdio.writeln("if( (true and false) or false ) : success")
+		end
+		
+		//Case 5
+		a := true
+		b := false
+		c := true
+		if( (a and b) or c) then
+			stdio.writeln("if( (true and false) or true ) : success")
+		else
+			stdio.writeln("if( (true and false) or true ) : fail")
+		end
+		
+		//Case 6
+		a := true
+		b := true
+		c := false
+		if( (a and b) or c) then
+			stdio.writeln("if( (true and true) or false ) : success")
+		else
+			stdio.writeln("if( (true and true) or false ) : fail")
+		end
+		
+		//Case 7
+		a := true
+		b := true
+		c := true
+		if( (a and b) or c) then
+			stdio.writeln("if( (true and true) or true ) : success")
+		else
+			stdio.writeln("if( (true and true) or true ) : fail")
+		end
+	end
+
+	operation varsOnlyWithAssignement() : Void is do
+		var a : Boolean
+		var b : Boolean
+		var c : Boolean
+		var d : Boolean
+		
+		stdio.writeln("Vars Only With Assignement")
+		
+		//Case 0
+		a := false
+		b := false
+		c := false
+		d :=  (a and b) or c
+		if( d ) then
+			stdio.writeln("if( (false and false) or false ) : fail")
+		else
+			stdio.writeln("if( (false and false) or false ) : success")
+		end
+		
+		//Case 1
+		a := false
+		b := false
+		c := true
+		d :=  (a and b) or c
+		if( d ) then
+			stdio.writeln("if( (false and false) or true ) : success")
+		else
+			stdio.writeln("if( (false and false) or true ) : fail")
+		end
+		
+		//Case 2
+		a := false
+		b := true
+		c := false
+		d :=  (a and b) or c
+		if( d ) then
+			stdio.writeln("if( (false and true) or false ) : fail")
+		else
+			stdio.writeln("if( (false and true) or false ) : success")
+		end
+		
+		//Case 3
+		a := false
+		b := true
+		c := true
+		d :=  (a and b) or c
+		if( d ) then
+			stdio.writeln("if( (false and true) or true ) : success")
+		else
+			stdio.writeln("if( (false and true) or true ) : fail")
+		end
+		
+		//Case 4
+		a := true
+		b := false
+		c := false
+		d :=  (a and b) or c
+		if( d ) then
+			stdio.writeln("if( (true and false) or false ) : fail")
+		else
+			stdio.writeln("if( (true and false) or false ) : success")
+		end
+		
+		//Case 5
+		a := true
+		b := false
+		c := true
+		d :=  (a and b) or c
+		if( d ) then
+			stdio.writeln("if( (true and false) or true ) : success")
+		else
+			stdio.writeln("if( (true and false) or true ) : fail")
+		end
+		
+		//Case 6
+		a := true
+		b := true
+		c := false
+		d :=  (a and b) or c
+		if( d ) then
+			stdio.writeln("if( (true and true) or false ) : success")
+		else
+			stdio.writeln("if( (true and true) or false ) : fail")
+		end
+		
+		//Case 7
+		a := true
+		b := true
+		c := true
+		d :=  (a and b) or c
+		if( d ) then
+			stdio.writeln("if( (true and true) or true ) : success")
+		else
+			stdio.writeln("if( (true and true) or true ) : fail")
+		end
+	end
+
+	operation main() : Void is do 
+		
+		valuesOnly()
+		valuesOnlyWithAssignement()
+		
+		varsOnly()
+		varsOnlyWithAssignement()
+		
+		
+		
+	end
+}

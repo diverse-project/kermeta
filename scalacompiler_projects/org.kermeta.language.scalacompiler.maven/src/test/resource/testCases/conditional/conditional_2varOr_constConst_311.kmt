@@ -1,0 +1,71 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "p1Conditional2VarConstConst::Conditional2VarConstConst"
+@mainOperation "main"
+
+
+package p1Conditional2VarConstConst;
+
+
+require kermeta
+class Conditional2VarConstConst
+{
+	operation main() : Void is do 
+		if(true or true) then
+			stdio.writeln("trueOrTrue=success")
+		else
+			stdio.writeln("trueOrTrue=fail")
+		end
+		
+		if(true or false) then
+			stdio.writeln("trueOrFalse=success")
+		else
+			stdio.writeln("trueOrFalse=fail")			
+		end
+		
+		if(false or false) then
+			stdio.writeln("falseOrFalse=fail")
+		else
+			stdio.writeln("falseOrFalse=success")
+		end
+		
+		if(false or true) then
+			stdio.writeln("falseOrTrue=success")
+		else
+			stdio.writeln("falseOrTrue=fail")
+		end
+		
+		
+		
+		if(true.orElse{b | true}) then
+			stdio.writeln("trueOrTrue=success")
+		else
+			stdio.writeln("trueOrTrue=fail")
+		end
+
+		if(true.orElse{ b | false}) then
+			stdio.writeln("trueOrFalse=success")
+		else
+			stdio.writeln("trueOrFalse=fail")			
+		end
+		
+		if(false.orElse{b | false}) then
+			stdio.writeln("falseOrFalse=fail")
+		else
+			stdio.writeln("falseOrFalse=success")
+		end
+		
+		if(false.orElse{ b | true}) then
+			stdio.writeln("falseOrTrue=success")
+		else
+			stdio.writeln("falseOrTrue=fail")
+		end
+
+		
+	end
+}
