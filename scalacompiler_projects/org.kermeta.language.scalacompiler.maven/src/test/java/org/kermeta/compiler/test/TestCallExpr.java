@@ -1,10 +1,5 @@
 package org.kermeta.compiler.test;
 
-import java.io.DataOutputStream;
-import java.io.FileOutputStream;
-
-import junit.framework.TestCase;
-
 import org.junit.Test;
 
 public class TestCallExpr extends TestCaseRunnerPlatformDependant {
