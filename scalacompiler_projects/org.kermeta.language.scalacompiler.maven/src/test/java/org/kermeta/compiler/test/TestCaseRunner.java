@@ -145,16 +145,25 @@ public class TestCaseRunner extends TestCase {
 		// System.out.println(this.getClass().getResource("/testCases"));
 		process("testCases/006_testClosure.km");
 	}
-	
-	
+
 	@Test
 	public void testAssignment_new_401(){
 		process("testCases/Assignment_int_401.km");
 	}
 	
 	@Test
+	public void testCallSuperOperation_no_params_451(){
+		process("testCases/CallSuperOperation_no_params_451.km");
+	}
+	
+	@Test
+	public void testCallSuperOperation_one_param_452(){
+		process("testCases/CallSuperOperation_one_param_452.km");
+	}
+
+	@Test
 	public void testIntegerLiteral_writeln_100(){
 		process("testCases/IntegerLiteral_writeln_100.km");
 	}
-	
+
 }
