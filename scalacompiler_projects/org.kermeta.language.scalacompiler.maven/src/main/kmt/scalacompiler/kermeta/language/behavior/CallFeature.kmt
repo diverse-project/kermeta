@@ -117,12 +117,13 @@ aspect class CallFeature inherits CallExpression{
    method generateScala(context : ScalaCompilerContext, res : kermeta::utils::StringBuffer) is do
 		//log.debug("CallFeature={}",this.name)
 		
-		if( self.name.equals("toString") or self.name.equals("isNotEqual") or self.name.equals("isEqual") or self.name.equals("run") or self.name.equals("asType") or self.name.equals("isKindOf") or self.name.equals("asKindOf") or self.name.equals("isInstanceOf") or self.name.equals("new") ) 
+		if( self.name.equals("toString") or self.name.equals("isNotEqual") or self.name.equals("isEqual") or self.name.equals("run") or self.name.equals("asType") or self.name.equals("isKindOf") or self.name.equals("asKindOf") or self.name.equals("isInstanceOf") or self.name.equals("new") or self.name.equals("isVoid") ) 
 		then 
 		
 		if(self.name.equals("toString")) then res.append("(") generateTarget(context,res) res.append("+\"\")") end
 		if(self.name.equals("isNotEqual")) then generateTarget(context,res) res.append(" != ") generateParam(context,res,"(",")") end
 		if(self.name.equals("isEqual")) then generateTarget(context,res) res.append(" == ") generateParam(context,res,"(",")") end
+		if(self.name.equals("isVoid")) then res.append("(") generateTarget(context,res) res.append(" == null ) ")  end
 		if(self.name.equals("run")) then generateKUnitCase(context,res) end
 		if(self.name.equals("asType")) then generateTarget(context,res) res.append(".asInstanceOf") generateParam(context,res,"[","]") end
 		if(self.name.equals("isKindOf")) then generateTarget(context,res) res.append(".isInstanceOf") generateParam(context,res,"[","]") end
