@@ -1,0 +1,56 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "pkgSemiColBefore::SemiColBefore"
+@mainOperation "main"
+
+
+package pkgSemiColBefore;
+
+
+require kermeta
+using kermeta::standard
+
+
+class SemiColBefore
+{
+	operation main() : Void is do 
+		var j : Integer
+	
+		from var i : Integer init 0
+		until i==2
+		loop
+			stdio.writeln("loop++=" + i.toString())
+			i := i+1
+		end		
+		
+		j := 1
+		
+		from var i : Integer init 0
+		until i==2
+		loop
+			stdio.writeln("loop++=" + i.toString())
+			i := i+1
+		end		
+		
+		do
+		end
+		
+		from var i : Integer init 0
+		until i==2
+		loop
+			from var k : Integer init 0
+			until k==2
+			loop
+				k := k+1
+				stdio.writeln("loop=" + k.toString())
+			end
+			i := i+1
+		end		
+		
+	end
+}
