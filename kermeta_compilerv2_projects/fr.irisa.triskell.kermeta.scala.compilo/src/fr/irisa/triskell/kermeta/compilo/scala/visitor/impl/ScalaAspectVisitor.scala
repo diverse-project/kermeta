@@ -48,7 +48,8 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 	}
 	
 	def visit(par : ClassDefinition){
-		
+		if (!Util.hasCompilerIgnoreTag(par)){ 
+
 			var genpackageName : StringBuilder= new StringBuilder
 			var packageName : StringBuilder= new StringBuilder
 			
@@ -92,6 +93,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 				//res1.append("trait " + par.getName + " extends "+superQualifiedName+" with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect")
 				Util.generateFile(genpackageName.toString, par.getName, res1.toString())
 			}
+		}
 	}
 	
 	def init(){}
