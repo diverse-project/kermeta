@@ -3,7 +3,7 @@ import kermeta.io._
 import kermeta.standard._
 import  kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
-trait LogAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with fr.irisa.triskell.kermeta.language.structureScalaAspect.ObjectAspect with KunitImplicitConversion{
+trait LogAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect with KunitImplicitConversion{
 var failures : java.util.List[kermeta.kunit.Failure]= new java.util.ArrayList[kermeta.kunit.Failure]
 def getFailures() : java.util.List[kermeta.kunit.Failure]={this.failures}
 def setFailures(arg:java.util.List[kermeta.kunit.Failure])={ this.failures = arg}

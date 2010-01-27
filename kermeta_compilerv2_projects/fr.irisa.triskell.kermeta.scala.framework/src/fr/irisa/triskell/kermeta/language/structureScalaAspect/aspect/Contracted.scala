@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.language.structureScalaAspect
+package fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect
 
 trait Contracted
 {

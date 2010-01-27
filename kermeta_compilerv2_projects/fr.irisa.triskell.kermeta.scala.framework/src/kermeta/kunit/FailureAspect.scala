@@ -3,7 +3,7 @@ import kermeta.io._
 import kermeta.standard._
 import  kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
-trait FailureAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with fr.irisa.triskell.kermeta.language.structureScalaAspect.ObjectAspect with KunitImplicitConversion{
+trait FailureAspect extends org.eclipse.emf.ecore.impl.EObjectImpl  with fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect with KunitImplicitConversion{
 var message : java.lang.String= _
 def getMessage() : java.lang.String={this.message}
 def setMessage(arg:java.lang.String)={ this.message = arg}

@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.language.structureScalaAspect
+package fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect
 
 import org.eclipse.emf.ecore._
 import org.eclipse.emf.ecore.impl._

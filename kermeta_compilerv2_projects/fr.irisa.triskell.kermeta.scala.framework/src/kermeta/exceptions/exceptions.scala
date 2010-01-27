@@ -13,7 +13,7 @@ import kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
  
 
-trait Exception extends java.lang.Throwable with fr.irisa.triskell.kermeta.language.structureScalaAspect.ObjectAspect{
+trait Exception extends java.lang.Throwable with fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect{
 var message:String=null;
 var nestedException:Exception=null; 
 var stackTrace:String=null;
