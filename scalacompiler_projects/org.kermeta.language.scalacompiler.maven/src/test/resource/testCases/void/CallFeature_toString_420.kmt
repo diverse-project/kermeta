@@ -1,0 +1,22 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+@mainClass "p1::Main"
+@mainOperation "main"
+
+
+package p1;
+
+
+require kermeta
+class Main
+{
+	operation main() : Void is do 
+		var a : kermeta::standard::Boolean
+		stdio.writeln("Call toString on void value = "+a.toString)	
+	end
+}
