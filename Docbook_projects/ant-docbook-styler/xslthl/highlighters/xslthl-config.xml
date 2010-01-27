@@ -43,5 +43,6 @@ Michiel Hendriks <elmuerte at users.sourceforge.net>
 	<highlighter id="perl" file="perl-hl.xml" />	
 	<highlighter id="javascript" file="javascript-hl.xml" />
 	<highlighter id="kermeta" file="kermeta-hl.xml" />
+	<highlighter id="ket" file="ket-hl.xml" />
 	<namespace prefix="xslthl" uri="http://xslthl.sf.net" />
 </xslthl-config>
