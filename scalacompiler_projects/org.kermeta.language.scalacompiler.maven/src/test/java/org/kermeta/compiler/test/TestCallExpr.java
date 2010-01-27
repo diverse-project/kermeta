@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class TestCallExpr extends TestCaseRunnerPlatformDependant {
 
-	@Test
+/*	@Test
 	public void testAssignment_int_401(){
 		process("testCases/CallExpressions/Assignment_int_401.km");
 	}
@@ -52,7 +52,7 @@ public class TestCallExpr extends TestCaseRunnerPlatformDependant {
 	public void testAssignment_cast_classe_410(){
 		process("testCases/CallExpressions/Assignment_cast_classe_410.km");
 	}
-	
+*/	
 	/*
 	@Test
 	public void testAssignment_cast_int_error_411(){
@@ -70,7 +70,7 @@ public class TestCallExpr extends TestCaseRunnerPlatformDependant {
 	}
 	*/
 	
-	@Test
+/*@Test
 	public void testAssignment_cast_classe_error_414(){
 		process("testCases/CallExpressions/Assignment_cast_classe_error_414.km");
 	}
@@ -89,9 +89,25 @@ public class TestCallExpr extends TestCaseRunnerPlatformDependant {
 	@Test
 	public void testAssignment_string_complex_417(){
 		process("testCases/CallExpressions/Assignment_string_complex_417.km");
-	}	
+	}
+*/
+	// void
+	/*@Test
+	public void testCallFeature_toString_420(){
+		process("testCases/void/CallFeature_toString_420.km");
+	}
 	
 	@Test
+	public void testCallFeature_toString_421(){
+		process("testCases/void/CallFeature_isVoid_on_void_421.km");
+	}
+	*/
+	@Test
+	public void testCallFeature_isInstanceOf_on_void_422(){
+		process("testCases/void/CallFeature_isInstanceOf_on_void_422.km");
+	}
+	
+/*	@Test
 	public void testCallSuperOperation_no_params_451(){
 		process("testCases/CallExpressions/CallSuperOperation_no_params_451.km");
 	}
@@ -110,13 +126,13 @@ public class TestCallExpr extends TestCaseRunnerPlatformDependant {
 	public void testCallResult_int_454(){
 		process("testCases/CallExpressions/CallResult_int_454.km");
 	}
-	
+*/	
 	/*@Test
 	public void testCallValue_internal_op_455(){
 		process("testCases/CallValue_internal_op_455.km");
 	}*/
 	
-	@Test
+/*	@Test
 	public void testCallResult_String_456(){
 		process("testCases/CallExpressions/CallResult_String_456.km");
 	}
@@ -180,4 +196,5 @@ public class TestCallExpr extends TestCaseRunnerPlatformDependant {
 	public void testCallFeature_plus_468(){
 		process("testCases/CallExpressions/CallFeature_plus_468.km");
 	}
+*/
 }
