@@ -11,7 +11,7 @@ object FrameworkAspectUtil {
 	def getDefaultAspect(key:String):String={
 		var res :String = frameworkDefaultAspect.get(key)
 		if (res ==null) 
-			res = "fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect"
+			res = "fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect"
 		return res 
 	}	
 

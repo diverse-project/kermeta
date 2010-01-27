@@ -34,7 +34,12 @@ object Test {
 	  println(v.toString)
 	var i : Int = 0;
 	 kermeta.io.stdio.writeln("loop1++=".plus((i+"")))
-	;
+	 
+	 {
+		 {
+			 
+		 }
+	 }
 	 
   }
   
