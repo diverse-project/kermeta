@@ -12,7 +12,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 	
 	override def accept(visitor : IVisitor){ 
 		visitor.visit(this) 
-	}	 
+	}	  
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		if (Util.hasEcoreTag(this)){
@@ -22,8 +22,8 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 			this.generateParamerterClass(res)
 			
 			
-  			if (this.getSuperType.size == 1 && "Object".equals(this.getSuperType.first.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getName) ){
-				res append " extends "+ fr.irisa.triskell.kermeta.scala.framework.language.structure.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
+  			if (this.getSuperType.size == 0){//1 && "Object".equals(this.getSuperType.first.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getName) ){
+				res append " extends "+ fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
 				res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 			} else {
 				var i = 0;
@@ -51,7 +51,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 					i=i+1
 				})
 				
-				res append " with "+ fr.irisa.triskell.kermeta.scala.framework.language.structure.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
+				res append " with "+ fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
 				res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 				}
 				res append " with "+this.getQualifiedNameCompilo
