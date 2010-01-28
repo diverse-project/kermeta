@@ -16,9 +16,10 @@ trait EnumerationAspect extends RichAspectImplicit with ObjectAspect {
 	
 	def generateEnum():Unit = {
 		
-		var res : StringBuilder = new StringBuilder
-		res.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"\n")
-		res.append("import kermeta.io._\n")			
+		if (!Util.hasEcoreTag(this)){
+			var res : StringBuilder = new StringBuilder
+			res.append("package "+kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"\n")
+			res.append("import kermeta.io._\n")			
 			res.append("import kermeta.standard._\n")
 			res.append("import kermeta.standard.JavaConversions._\n")
 			res append "object "+this.getName()+" extends Enumeration {\n"
@@ -32,6 +33,8 @@ trait EnumerationAspect extends RichAspectImplicit with ObjectAspect {
 			}
 			res append " = Value\n"+"}"
 			Util.generateFile(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName), this.getName, res.toString())			
+		}
+
 	}
 	
 	override def getQualifiedNameCompilo():String ={

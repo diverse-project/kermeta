@@ -7,7 +7,7 @@
  */
  
 package fr.irisa.triskell.kermeta.compilo.scala
-
+ 
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._

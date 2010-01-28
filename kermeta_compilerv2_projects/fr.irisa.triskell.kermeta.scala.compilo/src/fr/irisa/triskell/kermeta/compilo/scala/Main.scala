@@ -73,18 +73,27 @@ object Main extends LogAspect {
   	println("DONE")
 	     
 	Util.threadExecutor.shutdown()
-	    */ 
+	    */   
 	   
 	  var compilo = new Compiler
 	  
 	 // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/068_testVariableInit.main.km"
-	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/037_testLambda.main.km"
-	//inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/0012_kunit.km"
+//	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/037_testLambda.main.km"
+//	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/078_testAddVoidInReflectiveCollection.main.km"
+	 //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
+    // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/012_TypeFromEcore.km"
+  // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/015_EcoreDocHelper.km"
+   //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
+//	    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/kermeta/001_LoadUML.km"
+	    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LoadSaveKm/0001LoadAndSaveKm.km"
+   //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.km"
+//   inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.km"
+   //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/0012_kunit.km"
 	  //compilo.compile("../compilerv2_test/tests/010_testLoop.main.km")
-
+	  //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/017_OverrideEcoreOperation.km"
 	  //compilo.compile("../compilerv2_test/tests/006_testClosure.km")
 	  if(inputFile != ""){
-		  compilo.compile(inputFile)
+		  compilo.compile(inputFile) 
 	  } else {
 	 	  log.warn("No Input File Found ! ")
 	  }

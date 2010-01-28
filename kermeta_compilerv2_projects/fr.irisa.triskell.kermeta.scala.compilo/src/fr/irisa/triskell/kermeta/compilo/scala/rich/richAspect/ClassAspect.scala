@@ -8,50 +8,60 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 
-trait ClassAspect extends RichAspectImplicit with TypeVariableBindingAspect with ObjectAspect with LogAspect {
+trait ClassAspect extends RichAspectImplicit with TypeAspect with ObjectAspect with LogAspect {
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		var pack : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName 
+		/*var pack : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName 
 		pack=kermeta.utils.TypeEquivalence.getPackageEquivalence(pack);
 		var s : String = pack + "."+this.getTypeDefinition().asInstanceOf[ClassDefinition].getName 
 		//println(s)
 //		if (Util.currentPackage.equals(pack))
 //				res.append(this.getTypeDefinition().asInstanceOf[ClassDefinition].getName )
 //		else
-			res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(s))
+			res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(s))*/
 
-		/*
-		log.debug("Class={}",this.getName)
-		this.getTypeParamBinding.foreach({e=>
-			log.debug("ClassBinding={}",e.getType)
-			log.debug("ClassBinding={}",e.getQualifiedNameCompilo)
-			log.debug("ClassBinding={}",e)
-		})
-		
-		this.getTypeDefinition.asInstanceOf[ClassDefinition].getTypeParameter.foreach(e=>{
-			log.debug("ClassGeneric={}{}",e.getName,e.toString)
-		})
-		log.debug("ClassType={}",this.getTypeDefinition.asInstanceOf[ClassDefinition].getQualifiedNameCompilo)
-		*/
-		
-		//GEN GENERIC PARAM
-		/*
-		if(this.getTypeDefinition.asInstanceOf[ClassDefinition].getTypeParameter.size > 0){
-			res.append("[")
-			var i = 0
-			this.getTypeDefinition.asInstanceOf[ClassDefinition].getTypeParameter.foreach(e=>{
-				if(this.getTypeParamBinding.size > 0){
-					if(this.getTypeParamBinding.get(i).getQualifiedNameCompilo.equals("")){
-						res.append("_")
-					} else {
-						res.append(e.getQualifiedNameCompilo)
+			res.append(this.getQualifiedNameCompilo())
+		/* Check Generique Param */
+			
+			if (this.getTypeParamBinding.size()>0){
+				
+			
+				var i : Int = 1
+         	res.append("[")
+         	this.getTypeParamBinding.foreach(e=> {
+         			e.generateScalaCode(res)
+                    if (i< this.getTypeParamBinding.size()){
+                    		res.append(", ")
+                    }
+                    i=i+1;
+                    })
+                    res.append("]")
+         	
+					//TODO
+		}
+		else{
+	
+			
+			
+				
+				try{
+					var c = java.lang.Class.forName(this.getQualifiedNameCompilo())
+					System.err.println( "toto " + this.getQualifiedNameCompilo() + " " +c  )
+					if(c.getTypeParameters.size > 0){
+						res.append("[")
+						for(i <- 0 until c.getTypeParameters.length ){
+							res.append("_")
+							if(i < c.getTypeParameters.length -1){
+								res.append(",")
+							}
+						}
+						res.append("]")
 					}
+				} catch {
+					case _ => 
 				}
-				if(!this.getTypeDefinition.asInstanceOf[ClassDefinition].getTypeParameter.last.equals(e)) res.append(" , ")
-				i = i + 1
-			})
-			res.append("]")			
-		}*/
+			}			
+
 	}
 	
 	override def getQualifiedNameCompilo():String ={
