@@ -118,7 +118,8 @@ object JavaConversions {
 		this.each{e=> res.add(e)}
 		return res
 	}
-	   
+	//TODO
+	def isVoid() :Boolean= {this==null}
   }
   
 
