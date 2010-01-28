@@ -248,7 +248,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_lw6rUQn2Ed-D88joOLQdjA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mwstUAn2Ed-D88joOLQdjA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="task.ecore#//UnaryOperation/connection"/>
+        <element xmi:type="ecore:EEnumLiteral" href="task.ecore#//UnaryOperation/finiteInteraction"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mwstUQn2Ed-D88joOLQdjA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_g5qBcAn2Ed-D88joOLQdjA"/>
@@ -257,7 +257,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_g5ozUQn2Ed-D88joOLQdjA" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EEnum" href="task.ecore#//UnaryOperation"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g5ozUgn2Ed-D88joOLQdjA" x="53" y="160" width="136" height="95"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g5ozUgn2Ed-D88joOLQdjA" x="53" y="160" width="136" height="101"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_hW_scgnwEd-D88joOLQdjA"/>
   <element xmi:type="ecore:EPackage" href="task.ecore#/"/>

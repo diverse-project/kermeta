@@ -121,43 +121,81 @@
         name="EnablingFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="EnablingFigure"/>
+          name="EnablingFigure"
+          outline="false"
+          fill="false"
+          lineWidth="0"/>
     </descriptors>
     <descriptors
         name="DesactivationFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="DesactivationFigure"/>
+          name="DesactivationFigure"
+          outline="false"
+          fill="false"
+          lineWidth="0"/>
     </descriptors>
     <descriptors
         name="EnablingWithInformationFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="EnablingWithInformationFigure"/>
+          name="EnablingWithInformationFigure"
+          outline="false"
+          fill="false"
+          lineWidth="0"/>
     </descriptors>
     <descriptors
         name="InterleavingFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="InterleavingFigure"/>
+          name="InterleavingFigure"
+          outline="false"
+          fill="false"
+          lineWidth="0"/>
     </descriptors>
     <descriptors
         name="SynchronizationFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="SynchronizationFigure"/>
+          name="SynchronizationFigure"
+          outline="false"
+          fill="false"
+          lineWidth="0"/>
     </descriptors>
     <descriptors
-        name="FiniteIterationFigure">
+        name="EnablingFigureLabelDesc">
       <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="FiniteIterationFigure"/>
+          xsi:type="gmfgraph:Label"
+          name="EnablingLabel"
+          text=">>"/>
     </descriptors>
     <descriptors
-        name="RecursionFigure">
+        name="InterleavingFigureLabelDesc">
       <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="RecursionFigure"/>
+          xsi:type="gmfgraph:Label"
+          name="InterleavingLabel"
+          text="|||"/>
+    </descriptors>
+    <descriptors
+        name="SynchroFigureLabelDesc">
+      <actualFigure
+          xsi:type="gmfgraph:Label"
+          name="SynchroLabel"
+          text="|[]|"/>
+    </descriptors>
+    <descriptors
+        name="EnablingInfoFigureLabelDesc">
+      <actualFigure
+          xsi:type="gmfgraph:Label"
+          name="EnablingInfoLabel"
+          text="[]>>"/>
+    </descriptors>
+    <descriptors
+        name="DesactivFigureLabelDesc">
+      <actualFigure
+          xsi:type="gmfgraph:Label"
+          name="DesactivLabel"
+          text="[>"/>
     </descriptors>
   </figures>
   <nodes
@@ -187,12 +225,6 @@
   <connections
       name="Synchronization"
       figure="SynchronizationFigure"/>
-  <connections
-      name="FiniteIteration"
-      figure="FiniteIterationFigure"/>
-  <connections
-      name="Recursion"
-      figure="RecursionFigure"/>
   <labels
       name="UserName"
       figure="UserFigure"
@@ -213,4 +245,44 @@
       figure="ApplicationFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+  <labels
+      name="EnablingLabel"
+      figure="EnablingFigureLabelDesc"
+      elementIcon="false">
+    <facets
+        xsi:type="gmfgraph:AlignmentFacet"
+        alignment="CENTER"/>
+  </labels>
+  <labels
+      name="InterleavingLabel"
+      figure="InterleavingFigureLabelDesc"
+      elementIcon="false">
+    <facets
+        xsi:type="gmfgraph:AlignmentFacet"
+        alignment="CENTER"/>
+  </labels>
+  <labels
+      name="synchroLabel"
+      figure="SynchroFigureLabelDesc"
+      elementIcon="false">
+    <facets
+        xsi:type="gmfgraph:AlignmentFacet"
+        alignment="CENTER"/>
+  </labels>
+  <labels
+      name="EnablingInfoLabel"
+      figure="EnablingInfoFigureLabelDesc"
+      elementIcon="false">
+    <facets
+        xsi:type="gmfgraph:AlignmentFacet"
+        alignment="CENTER"/>
+  </labels>
+  <labels
+      name="desactivLabel"
+      figure="DesactivFigureLabelDesc"
+      elementIcon="false">
+    <facets
+        xsi:type="gmfgraph:AlignmentFacet"
+        alignment="CENTER"/>
+  </labels>
 </gmfgraph:Canvas>

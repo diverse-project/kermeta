@@ -7,7 +7,8 @@
       title="Tasks modelling">
     <tools
         xsi:type="gmftool:ToolGroup"
-        title="Tasks">
+        title="Tasks"
+        collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
           title="Abstract"
@@ -27,7 +28,8 @@
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"
-        title="Operations">
+        title="Operations"
+        collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
           title="Interleaving"/>
@@ -43,12 +45,6 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="Desactivation"/>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Finite Iteration"/>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Recursion"/>
     </tools>
   </palette>
 </gmftool:ToolRegistry>
