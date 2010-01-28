@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmftool:ToolRegistry xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <palette
+      title="Tasks modelling">
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Tasks">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Abstract"
+          description="Creates an abstract task"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="User"
+          description="Creates a user task"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Interaction"
+          description="Creates an interaction task"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Application"
+          description="Creates an application task"/>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Operations">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Interleaving"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Synchronisation"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Enabling"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Enabling With Info."/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Desactivation"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Finite Iteration"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Recursion"/>
+    </tools>
+  </palette>
+</gmftool:ToolRegistry>

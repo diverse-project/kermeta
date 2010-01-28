@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.ki.task.model/src/"
+    modelPluginID="org.kermeta.ki.task.model" modelName="Task" copyrightFields="false">
+  <genPackages prefix="Task" basePackage="org.kermeta.ki" disposableProviderFactory="true"
+      ecorePackage="task.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="task.ecore#//UnaryOperation">
+      <genEnumLiterals ecoreEnumLiteral="task.ecore#//UnaryOperation/iterative"/>
+      <genEnumLiterals ecoreEnumLiteral="task.ecore#//UnaryOperation/optional"/>
+      <genEnumLiterals ecoreEnumLiteral="task.ecore#//UnaryOperation/connection"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="task.ecore#//Task">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute task.ecore#//Task/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute task.ecore#//Task/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference task.ecore#//Task/subtasks"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute task.ecore#//Task/operation"/>
+    </genClasses>
+    <genClasses ecoreClass="task.ecore#//User"/>
+    <genClasses ecoreClass="task.ecore#//Abstract"/>
+    <genClasses ecoreClass="task.ecore#//Interaction"/>
+    <genClasses ecoreClass="task.ecore#//Application"/>
+    <genClasses image="false" ecoreClass="task.ecore#//Operator">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference task.ecore#//Operator/src"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference task.ecore#//Operator/target"/>
+    </genClasses>
+    <genClasses ecoreClass="task.ecore#//TaskModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference task.ecore#//TaskModel/operations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference task.ecore#//TaskModel/tasks"/>
+    </genClasses>
+    <genClasses ecoreClass="task.ecore#//Enabling"/>
+    <genClasses ecoreClass="task.ecore#//desactivation"/>
+    <genClasses ecoreClass="task.ecore#//EnablingWithInformation"/>
+    <genClasses ecoreClass="task.ecore#//Interleaving"/>
+    <genClasses ecoreClass="task.ecore#//Synchronization"/>
+    <genClasses ecoreClass="task.ecore#//FiniteIteration"/>
+    <genClasses ecoreClass="task.ecore#//Recursion"/>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="task"
+    nsURI="http://task" nsPrefix="task">
+  <eClassifiers xsi:type="ecore:EClass" name="Task" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subtasks" upperBound="-1"
+        eType="#//Task" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="#//UnaryOperation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="User" eSuperTypes="#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Abstract" eSuperTypes="#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Interaction" eSuperTypes="#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Application" eSuperTypes="#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Operator" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="src" lowerBound="1" eType="#//Task"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Task"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TaskModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
+        eType="#//Operator" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" upperBound="-1"
+        eType="#//Task" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Enabling" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="desactivation" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnablingWithInformation" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Interleaving" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Synchronization" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FiniteIteration" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Recursion" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="UnaryOperation">
+    <eLiterals name="iterative"/>
+    <eLiterals name="optional" value="1"/>
+    <eLiterals name="connection" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>
