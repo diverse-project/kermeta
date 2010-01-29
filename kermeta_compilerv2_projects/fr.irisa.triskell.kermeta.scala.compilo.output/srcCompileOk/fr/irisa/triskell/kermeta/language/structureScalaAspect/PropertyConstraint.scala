@@ -1,0 +1,2 @@
+package fr.irisa.triskell.kermeta.language.structureScalaAspect
+trait PropertyConstraint extends fr.irisa.triskell.kermeta.language.structureScalaAspect.ConstraintAspect

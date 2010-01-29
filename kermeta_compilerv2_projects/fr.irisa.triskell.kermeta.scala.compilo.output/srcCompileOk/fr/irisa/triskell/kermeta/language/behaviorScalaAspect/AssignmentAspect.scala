@@ -1,0 +1,15 @@
+package fr.irisa.triskell.kermeta.language.behaviorScalaAspect
+import kermeta.io._
+import kermeta.standard._
+import  kermeta.standard.JavaConversions._
+import kermeta.standard.PrimitiveConversion._
+import kermeta.kunit.KunitConversions._
+trait AssignmentAspect extends fr.irisa.triskell.kermeta.language.behaviorScalaAspect.ExpressionAspect with fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect with fr.irisa.triskell.scala.generated.fw.ImplicitConversion with fr.irisa.triskell.kermeta.language.behavior.Assignment{
+def Scalavalue : fr.irisa.triskell.kermeta.language.behavior.Expression={this.getValue()}
+def Scalavalue_=(arg : fr.irisa.triskell.kermeta.language.behavior.Expression)={this.setValue(arg)}
+def Scalatarget : fr.irisa.triskell.kermeta.language.behavior.CallExpression={this.getTarget()}
+def Scalatarget_=(arg : fr.irisa.triskell.kermeta.language.behavior.CallExpression)={this.setTarget(arg)}
+def ScalaisCast : Boolean={this.isIsCast()}
+def ScalaisCast_=(arg : Boolean)={this.setIsCast(arg)}
+}
+
