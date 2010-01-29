@@ -22,9 +22,10 @@ override def generateScalaCode(res : StringBuilder) : Unit = {
 			 		generateAttribute(res)
 			 		generateGet(res,"Ker")
 			 		generateSet(res,"Ker")
+			 		generateScalGet(res,"Ker")
+			 		generateScalSet(res,"Ker")
 		 		}
-		 		generateScalGet(res,"Ker")
-			 	generateScalSet(res,"Ker")
+		 		
 			 		
 		 		//TODO générer getter et setter si property ajouté par un ecore
 		 	}
@@ -35,9 +36,10 @@ override def generateScalaCode(res : StringBuilder) : Unit = {
 			 	generateAttribute(res)
 			 	generateGet(res,"Ker")
 			 	generateSet(res,"Ker")
+			 	generateScalGet(res,"Ker")
+			 	generateScalSet(res,"Ker")
 		}
-		generateScalGet(res,"Ker")
-		 generateScalSet(res,"Ker")
+		
 
 	}
 } 
