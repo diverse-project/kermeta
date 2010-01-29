@@ -16,6 +16,7 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.compilo.scala.loader._  
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor.impl._
+import fr.irisa.triskell.embedded._
 
 object Main extends LogAspect {
   def main(args : Array[String]) : Unit = {
@@ -77,15 +78,15 @@ object Main extends LogAspect {
 	   
 	  var compilo = new Compiler
 	  
-	 // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/068_testVariableInit.main.km"
-//	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/037_testLambda.main.km"
+//	  inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/068_testVariableInit.main.km"
+	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/037_testLambda.main.km"
 //	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/078_testAddVoidInReflectiveCollection.main.km"
 	 //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
     // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/012_TypeFromEcore.km"
   // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/015_EcoreDocHelper.km"
    //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
 //	    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/kermeta/001_LoadUML.km"
-	    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LoadSaveKm/0001LoadAndSaveKm.km"
+	//    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LoadSaveKm/0001LoadAndSaveKm.km"
    //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.km"
 //   inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.km"
    //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/0012_kunit.km"
@@ -98,10 +99,13 @@ object Main extends LogAspect {
 	 	  log.warn("No Input File Found ! ")
 	  }
 
-	  //compilo.compile("../compilerv2_test/testEcore/012_TypeFromEcore.km")
-	  //compilo.compile("../compilerv2_test/testEcore/013_LoadEcore.km")
-	  //compilo.compile("../compilerv2_test/tests/013_testString.main.km"); 
-	  //compilo.compile("../compilerv2_test/testReflection/kermeta/reflection.km")
+	   
+	   /* Scalac compilation step */
+	   println("Compilation result = "+EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,List(System.getProperty("java.class.path"))))
 	  
+	   /* Scala runner */
+	   EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner")
+	   
+	   
   }
 }
