@@ -597,12 +597,14 @@ aspect class Type
 	 * Returns a copy of passed Object built by recursively copying attribute
 	 * properties, and referencing original reference properties values
 	 */
+	 @CompilerIgnore "true"
 	operation clone (objectToClone : Object) : Object is abstract
 
 	/**
 	 * Returns a copy of passed Object built by recursively copying values of
 	 * all properties, no matter the property kind
 	 */
+	 @CompilerIgnore "true"
 	operation deepClone (objectToClone : Object) : Object is abstract
 
 	/**
