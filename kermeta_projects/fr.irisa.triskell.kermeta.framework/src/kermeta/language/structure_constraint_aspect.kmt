@@ -49,6 +49,9 @@ aspect class Property {
      */
 	attribute propertyConstraint : PropertyConstraint#~property
 	attribute getViolatedConstraintsMustDrillDownCache : Boolean
+
+
+	@CompilerIgnore "true"
 	operation getViolatedConstraintsMustDrillDown() : Boolean is do
 		if getViolatedConstraintsMustDrillDownCache.isVoid then
 			getViolatedConstraintsMustDrillDownCache := not kermeta::standard::ValueType.isSuperTypeOf(self.type)

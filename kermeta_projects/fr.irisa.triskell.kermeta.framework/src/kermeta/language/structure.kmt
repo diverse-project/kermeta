@@ -395,6 +395,7 @@ aspect class Class
 	/**
 	 * Returns the ClassDefinition for this class
 	 */
+	@CompilerIgnore "true"
 	property readonly classDefinition : ClassDefinition
 		getter is do
 			result ?= typeDefinition
@@ -440,6 +441,7 @@ aspect class Class
 	 *  Note : throws an exception if this class has no classDefinition
 	 *  or if the classDefinition is not well constructed.
 	 */
+	@CompilerIgnore "true"
 	method toString() : String is do
 		result := self.typeDefinition.name
 	end
@@ -635,7 +637,7 @@ aspect class Type
 	end
 }
 
-aspect class NamedElement
+aspect abstract class NamedElement
 {
 	/**
 	 * Returns the qualified name of this named element. Qualified name is 
@@ -687,3 +689,4 @@ aspect class FunctionType {
 	 */
 	inv resultType_must_not_be_a_ProductType is not right.isKindOf(ProductType)
 }
+
