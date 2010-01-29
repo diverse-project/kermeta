@@ -187,7 +187,11 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 					implicitDef append " implicit def richAspect(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName())+") = v.asInstanceOf["+ packageName.toString+"."+ par.getName+"Aspect]\n" 
 					implicitDef append " implicit def richAspect(v : "+ packageName.toString+"."+par.getName()+"Aspect) = v.asInstanceOf["+ par.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo+ Util.getImplPackageSuffix(packageName.toString) + par.getName+"Impl]\n"
 				}else{
-					viewDef.append(" class Rich"+par.getName()+ param.toString +" extends fr.irisa.triskell.kermeta.language.structure.impl.ObjectImpl with "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+ param.toString +" with "+packageName.toString +"."+par.getName+"Aspect" + param.toString +" \n")
+					var cd = getEcoreSuperClass(par)
+					
+					//cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo +".impl." + cd.getName +"Impl
+					
+					viewDef.append(" class Rich"+par.getName()+ param.toString +" extends "+cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo +".impl." + cd.getName +"Impl with "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+ param.toString +" with "+packageName.toString +"."+par.getName+"Aspect" + param.toString +" \n")
 					implicitDef append " implicit def richAspect" + param.toString + "(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"."+par.getName())+ param.toString +") = v.asInstanceOf["+ packageName.toString+"."+par.getName+"Aspect"+ param.toString +"]\n" 
 					implicitDef append " implicit def richAspect" + param.toString +"(v : "+ packageName.toString+"."+par.getName()+"Aspect" + param.toString +") = v.asInstanceOf["+ packageName.toString+"."+par.getName+ param.toString +"]\n"
 	
@@ -203,6 +207,27 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 					}
 				}
 			}
+	}
+	
+	def getEcoreSuperClass(c:ClassDefinition):ClassDefinition={
+		c.getSuperType.foreach(e=> 
+		
+		{
+		//println("taratata" + e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
+		if (Util.hasEcoreTag(e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition])) 
+			{
+			//println("torototo" + e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
+			return e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition]
+			}
+		}
+		)
+		c.getSuperType.foreach(e=>  
+			return getEcoreSuperClass(e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition]) 
+			)
+		
+		
+		
+		return null;
 	}
 	
 	def close {
