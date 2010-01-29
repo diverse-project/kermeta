@@ -95,7 +95,17 @@ object Util extends LogAspect with RichAspectImplicit  {
 			return ".impl."
 		}
 	}
-   
+
+	def getPackagePrefix(packName:String):String={
+		if ("Kermeta".equals(packName) || "uml".equals(packName.toString) || "org.eclipse.uml2.umlScalaAspect".equals(packName.toString))
+			return "Km"
+		else 
+		{	
+			return packName
+		}
+	}
+
+	
    /**
     * Global Compiler Thread Executor 
     */
