@@ -256,6 +256,8 @@
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
+      <creationConstraints
+          sourceEnd="//@expressionProviders/@providers.0/@expressions.0"/>
     </links>
     <links
         visualID="4002"
@@ -305,6 +307,8 @@
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
+      <creationConstraints
+          sourceEnd="//@expressionProviders/@providers.0/@expressions.1"/>
     </links>
     <links
         visualID="4003"
@@ -354,6 +358,8 @@
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
+      <creationConstraints
+          sourceEnd="//@expressionProviders/@providers.0/@expressions.2"/>
     </links>
     <links
         visualID="4004"
@@ -403,6 +409,8 @@
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
+      <creationConstraints
+          sourceEnd="//@expressionProviders/@providers.0/@expressions.3"/>
     </links>
     <links
         visualID="4005"
@@ -452,12 +460,13 @@
         <modelFacet
             parser="//@labelParsers/@implementations.1"/>
       </labels>
+      <creationConstraints
+          sourceEnd="//@expressionProviders/@providers.0/@expressions.4"/>
     </links>
     <links
-        visualID="4007"
+        visualID="4006"
         editPartClassName="TaskSubtasksEditPart"
         itemSemanticEditPolicyClassName="TaskSubtasksItemSemanticEditPolicy"
-        notationViewFactoryClassName="TaskSubtasksViewFactory"
         createCommandClassName="TaskSubtasksCreateCommand"
         reorientCommandClassName="TaskSubtasksReorientCommand">
       <diagramRunTimeClass
@@ -473,7 +482,7 @@
             href="task.genmodel#//task/Task/subtasks"/>
       </modelFacet>
       <creationConstraints
-          sourceEnd="//@expressionProviders/@providers.0/@expressions.0"/>
+          sourceEnd="//@expressionProviders/@providers.0/@expressions.5"/>
     </links>
     <palette>
       <groups
@@ -1208,6 +1217,21 @@
   <expressionProviders>
     <providers
         xsi:type="gmfgen:GenExpressionInterpreter">
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self &lt;> oppositeEnd"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self &lt;> oppositeEnd"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self &lt;> oppositeEnd"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self &lt;> oppositeEnd"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self &lt;> oppositeEnd"/>
       <expressions
           xsi:type="gmfgen:GenConstraint"
           body="self &lt;> oppositeEnd"/>

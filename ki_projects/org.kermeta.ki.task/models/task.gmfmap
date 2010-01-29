@@ -114,6 +114,10 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="task.ecore#//Operator/target"/>
+    <creationConstraints>
+      <sourceEnd
+          body="self &lt;> oppositeEnd"/>
+    </creationConstraints>
   </links>
   <links>
     <domainMetaElement
@@ -136,6 +140,10 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="task.ecore#//Operator/target"/>
+    <creationConstraints>
+      <sourceEnd
+          body="self &lt;> oppositeEnd"/>
+    </creationConstraints>
   </links>
   <links>
     <domainMetaElement
@@ -158,6 +166,10 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="task.ecore#//Operator/target"/>
+    <creationConstraints>
+      <sourceEnd
+          body="self &lt;> oppositeEnd"/>
+    </creationConstraints>
   </links>
   <links>
     <domainMetaElement
@@ -180,6 +192,10 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="task.ecore#//Operator/target"/>
+    <creationConstraints>
+      <sourceEnd
+          body="self &lt;> oppositeEnd"/>
+    </creationConstraints>
   </links>
   <links>
     <domainMetaElement
@@ -202,6 +218,10 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="task.ecore#//Operator/target"/>
+    <creationConstraints>
+      <sourceEnd
+          body="self &lt;> oppositeEnd"/>
+    </creationConstraints>
   </links>
   <links>
     <tool
