@@ -16,11 +16,5 @@ Export-Package:
  org.kermeta.log4j.util,
  org.kermeta.log4j.util.plugin,
  org.kermeta.log4j.util.preferences
-Bundle-ClassPath: .,
- lib/thirdparty/commons-logging-1.1.1/commons-logging-1.1.1-javadoc.jar,
- lib/thirdparty/commons-logging-1.1.1/commons-logging-1.1.1-sources.jar,
- lib/thirdparty/commons-logging-1.1.1/commons-logging-1.1.1.jar,
- lib/thirdparty/commons-logging-1.1.1/commons-logging-adapters-1.1.1.jar,
- lib/thirdparty/commons-logging-1.1.1/commons-logging-api-1.1.1.jar,
- lib/thirdparty/commons-logging-1.1.1/commons-logging-tests.jar
+Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
