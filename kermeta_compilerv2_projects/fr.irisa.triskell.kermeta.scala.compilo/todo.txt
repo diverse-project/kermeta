@@ -1,5 +1,26 @@
-Classe supplémentaire dont la super classe est une classe ecore doit dans le ViewType ne pas surcharget ObjectImpl
-Supprimer les view et factory quand que des classes qui ont l'annotation @CompilerIgnore
-Refaire le runner avec les bon paramètre,
-Rajouter dans le runner la gestion du suffixe.
-Gérer les property avec body.
+# ok : Rajouter le cas manquant pour scala upper
+
+#1 .Classe supplémentaire dont la super classe est une classe ecore doit dans le ViewType ne pas surcharget ObjectImpl
+#ok : 2. Supprimer les view et factory quand que des classes qui ont l'annotation @CompilerIgnore
+#ok 3. Refaire le runner avec les bon paramètre,
+#ok 4. Rajouter dans le runner la gestion du suffixe.
+
+# ok 5. trait LoadKmAspect  extends fr.irisa.triskell.kermeta.language.structure.ObjectAspect should extends fr.irisa.triskell.kermeta.language.structureScalaAspect.ObjectAspect
+	/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo.output/src/fr/irisa/triskell/kermeta/language/structureScalaAspect/PropertyConstraintAspect.scala:7: error: type ConstraintAspect is not a member of package fr.irisa.triskell.kermeta.language.structure
+	[INFO] trait PropertyConstraintAspect  extends fr.irisa.triskell.kermeta.language.structure.ConstraintAspect with fr.irisa.triskell.scala.generated.fw.ImplicitConversion{
+[ERROR] /home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo.output/src/fr/irisa/triskell/kermeta/language/structureScalaAspect/PropertyAspect.scala:33: error: type PropertyConstraint is not a member of package fr.irisa.triskell.kermeta.language.structure
+[INFO] var propertyConstraint : fr.irisa.triskell.kermeta.language.structure.PropertyConstraint= _
+
+	
+#ok 6. /home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo.output/src/runner/MainRunner.scala:49: error: type mismatch;
+[INFO]  found   : fr.irisa.triskell.kermetaScalaAspect.RichFactory.type (with underlying type object fr.irisa.triskell.kermetaScalaAspect.RichFactory)
+[INFO]  required: org.eclipse.emf.ecore.EFactory
+[INFO] 	pack.setEFactoryInstance(fr.irisa.triskell.kermetaScalaAspect.RichFactory)
+	
+
+#ok 7. 	 fr.irisa.triskell.kermeta.language.structure.ConstraintType.ConstraintType =>  fr.irisa.triskell.kermeta.language.structure.ConstraintType
+dans getqualifiedNameCompilo des enum séparé le cas des enums ecore.
+
+8. Gérer les property avec body.
+9. Gérer les isVoid.
+10. Implanter toutes les méthodes du Framework
