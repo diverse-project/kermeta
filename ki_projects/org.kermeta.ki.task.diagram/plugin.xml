@@ -42,13 +42,18 @@
    <extension point="org.eclipse.ui.newWizards" id="creation-wizard">
       <?gmfgen generated="true"?>
   	  <wizard
-  	     name="%newWizardName"
-  	     icon="icons/obj16/TaskDiagramFile.gif"
-  	     category="org.eclipse.ui.Examples"
-  	     class="org.kermeta.ki.task.diagram.part.TaskCreationWizard"
-  	     id="org.kermeta.ki.task.diagram.part.TaskCreationWizardID">
+           category="org.kermeta.ki"
+           class="org.kermeta.ki.task.diagram.part.TaskCreationWizard"
+           icon="icons/obj16/TaskDiagramFile.gif"
+           id="org.kermeta.ki.task.diagram.part.TaskCreationWizardID"
+           name="Task Diagram Editor"
+           project="false">
   	  	 <description>%newWizardDesc</description>  
       </wizard>
+     <category
+           id="org.kermeta.ki"
+           name="Ki">
+     </category>
    </extension>
 
    <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">

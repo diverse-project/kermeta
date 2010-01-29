@@ -16,13 +16,17 @@
             name="%_UI_Wizard_category"/>
       <wizard
             id="org.kermeta.ki.task.presentation.TaskModelWizardID"
-            name="%_UI_TaskModelWizard_label"
+            name="Task Model Editor"
             class="org.kermeta.ki.task.presentation.TaskModelWizard"
-            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            category="org.kermeta.ki"
             icon="icons/full/obj16/TaskModelFile.gif">
          <description>%_UI_TaskModelWizard_description</description>
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
+      <category
+            id="org.kermeta.ki"
+            name="Ki">
+      </category>
    </extension>
 
    <extension point="org.eclipse.ui.editors">
