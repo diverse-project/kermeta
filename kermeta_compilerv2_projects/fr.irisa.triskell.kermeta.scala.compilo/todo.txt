@@ -2,4 +2,4 @@ Classe supplémentaire dont la super classe est une classe ecore doit dans le Vi
 Supprimer les view et factory quand que des classes qui ont l'annotation @CompilerIgnore
 Refaire le runner avec les bon paramètre,
 Rajouter dans le runner la gestion du suffixe.
-
+Gérer les property avec body.
