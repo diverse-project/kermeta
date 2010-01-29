@@ -18,12 +18,26 @@
             vertical="true"
             minorAlignment="CENTER"/>
         <children
-            xsi:type="gmfgraph:SVGFigure"
-            name="user"
-            documentURI="platform:/plugin/org.kermeta.ki.task/resources/user.svg">
-          <preferredSize
-              dx="100"
-              dy="100"/>
+            xsi:type="gmfgraph:Rectangle"
+            name="recuserUnary"
+            outline="false"
+            fill="false"
+            lineWidth="0">
+          <layout
+              xsi:type="gmfgraph:FlowLayout"
+              forceSingleLine="true"/>
+          <children
+              xsi:type="gmfgraph:SVGFigure"
+              name="user"
+              documentURI="platform:/plugin/org.kermeta.ki.task/resources/user.svg">
+            <preferredSize
+                dx="90"
+                dy="100"/>
+          </children>
+          <children
+              xsi:type="gmfgraph:Label"
+              name="UnaryOpLabelUser"
+              text=" "/>
         </children>
         <children
             xsi:type="gmfgraph:Label"
@@ -32,6 +46,9 @@
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
+      <accessors
+          accessor="getFigureUnaryOpLabelUser"
+          figure="//@figures.0/@descriptors.0/@actualFigure/@children.0/@children.1"/>
     </descriptors>
     <descriptors
         name="AbstractFigure">
@@ -46,12 +63,26 @@
             vertical="true"
             minorAlignment="CENTER"/>
         <children
-            xsi:type="gmfgraph:SVGFigure"
-            name="cloud"
-            documentURI="platform:/plugin/org.kermeta.ki.task/resources/cloud.svg">
-          <preferredSize
-              dx="100"
-              dy="75"/>
+            xsi:type="gmfgraph:Rectangle"
+            name="recCloudUnary"
+            outline="false"
+            fill="false"
+            lineWidth="0">
+          <layout
+              xsi:type="gmfgraph:FlowLayout"
+              forceSingleLine="true"/>
+          <children
+              xsi:type="gmfgraph:SVGFigure"
+              name="cloud"
+              documentURI="platform:/plugin/org.kermeta.ki.task/resources/cloud.svg">
+            <preferredSize
+                dx="100"
+                dy="75"/>
+          </children>
+          <children
+              xsi:type="gmfgraph:Label"
+              name="UnaryOpLabelAbs"
+              text=" "/>
         </children>
         <children
             xsi:type="gmfgraph:Label"
@@ -60,6 +91,9 @@
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
+      <accessors
+          accessor="getFigureUnaryOpLabelAbs"
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.0/@children.1"/>
     </descriptors>
     <descriptors
         name="InteractionFigure">
@@ -74,12 +108,26 @@
             vertical="true"
             minorAlignment="CENTER"/>
         <children
-            xsi:type="gmfgraph:SVGFigure"
-            name="interaction"
-            documentURI="platform:/plugin/org.kermeta.ki.task/resources/interaction.svg">
-          <preferredSize
-              dx="100"
-              dy="100"/>
+            xsi:type="gmfgraph:Rectangle"
+            name="recInterUnary"
+            outline="false"
+            fill="false"
+            lineWidth="0">
+          <layout
+              xsi:type="gmfgraph:FlowLayout"
+              forceSingleLine="true"/>
+          <children
+              xsi:type="gmfgraph:SVGFigure"
+              name="interaction"
+              documentURI="platform:/plugin/org.kermeta.ki.task/resources/interaction.svg">
+            <preferredSize
+                dx="100"
+                dy="100"/>
+          </children>
+          <children
+              xsi:type="gmfgraph:Label"
+              name="UnaryOpLabelInter"
+              text=" "/>
         </children>
         <children
             xsi:type="gmfgraph:Label"
@@ -88,6 +136,9 @@
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.2/@actualFigure/@children.1"/>
+      <accessors
+          accessor="getFigureUnaryOpLabelInter"
+          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0/@children.1"/>
     </descriptors>
     <descriptors
         name="ApplicationFigure">
@@ -102,12 +153,26 @@
             vertical="true"
             minorAlignment="CENTER"/>
         <children
-            xsi:type="gmfgraph:SVGFigure"
-            name="application"
-            documentURI="platform:/plugin/org.kermeta.ki.task/resources/computer.svg">
-          <preferredSize
-              dx="100"
-              dy="100"/>
+            xsi:type="gmfgraph:Rectangle"
+            name="recAppliUnary"
+            outline="false"
+            fill="false"
+            lineWidth="0">
+          <layout
+              xsi:type="gmfgraph:FlowLayout"
+              forceSingleLine="true"/>
+          <children
+              xsi:type="gmfgraph:SVGFigure"
+              name="application"
+              documentURI="platform:/plugin/org.kermeta.ki.task/resources/computer.svg">
+            <preferredSize
+                dx="100"
+                dy="100"/>
+          </children>
+          <children
+              xsi:type="gmfgraph:Label"
+              name="UnaryOpLabelAppli"
+              text=" "/>
         </children>
         <children
             xsi:type="gmfgraph:Label"
@@ -116,6 +181,9 @@
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.3/@actualFigure/@children.1"/>
+      <accessors
+          accessor="getFigureUnaryOpLabelAppli"
+          figure="//@figures.0/@descriptors.3/@actualFigure/@children.0/@children.1"/>
     </descriptors>
     <descriptors
         name="EnablingFigure">
@@ -293,4 +361,24 @@
         xsi:type="gmfgraph:AlignmentFacet"
         alignment="CENTER"/>
   </labels>
+  <labels
+      name="UnaryOpDiagLabelUser"
+      figure="UserFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.0/@accessors.1"/>
+  <labels
+      name="UnaryOpDiagLabelAppli"
+      figure="ApplicationFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.3/@accessors.1"/>
+  <labels
+      name="UnaryOpDiagLabelInter"
+      figure="InteractionFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.2/@accessors.1"/>
+  <labels
+      name="UnaryOpDiagLabelAbs"
+      figure="AbstractFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.1/@accessors.1"/>
 </gmfgraph:Canvas>

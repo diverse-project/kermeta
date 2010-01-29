@@ -33,8 +33,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="FiniteIteration" eSuperTypes="#//Operator"/>
   <eClassifiers xsi:type="ecore:EClass" name="Recursion" eSuperTypes="#//Operator"/>
   <eClassifiers xsi:type="ecore:EEnum" name="UnaryOperation">
-    <eLiterals name="iterative"/>
-    <eLiterals name="optional" value="1"/>
-    <eLiterals name="finiteInteraction" value="2"/>
+    <eLiterals name="recursive" value="3" literal=" "/>
+    <eLiterals name="iteration" literal="*"/>
+    <eLiterals name="optional" value="1" literal="?"/>
+    <eLiterals name="finiteInteraction" value="2" literal="(n)"/>
   </eClassifiers>
 </ecore:EPackage>

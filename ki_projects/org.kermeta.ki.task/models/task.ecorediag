@@ -239,8 +239,12 @@
   <children xmi:type="notation:Node" xmi:id="_g5ozUAn2Ed-D88joOLQdjA" type="1005">
     <children xmi:type="notation:Node" xmi:id="_g5paYAn2Ed-D88joOLQdjA" type="4010"/>
     <children xmi:type="notation:Node" xmi:id="_g5paYQn2Ed-D88joOLQdjA" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_xRpVMAy3Ed-Oi8MXHCAy5A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="task.ecore#//UnaryOperation/recursive"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xRpVMQy3Ed-Oi8MXHCAy5A"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_kxOv8An2Ed-D88joOLQdjA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="task.ecore#//UnaryOperation/iterative"/>
+        <element xmi:type="ecore:EEnumLiteral" href="task.ecore#//UnaryOperation/iteration"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_kxOv8Qn2Ed-D88joOLQdjA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_lw6rUAn2Ed-D88joOLQdjA" type="2006">
@@ -257,7 +261,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_g5ozUQn2Ed-D88joOLQdjA" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EEnum" href="task.ecore#//UnaryOperation"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g5ozUgn2Ed-D88joOLQdjA" x="53" y="160" width="136" height="101"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_g5ozUgn2Ed-D88joOLQdjA" x="53" y="160" width="142" height="113"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_hW_scgnwEd-D88joOLQdjA"/>
   <element xmi:type="ecore:EPackage" href="task.ecore#/"/>

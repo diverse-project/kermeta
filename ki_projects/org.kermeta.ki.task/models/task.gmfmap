@@ -20,6 +20,14 @@
         <editableFeatures
             href="task.ecore#//Task/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="task.gmfgraph#UnaryOpDiagLabelUser"/>
+        <features
+            href="task.ecore#//Task/operation"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="task.gmftool#//@palette/@tools.0/@tools.1"/>
@@ -41,6 +49,14 @@
             href="task.ecore#//Task/name"/>
         <editableFeatures
             href="task.ecore#//Task/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="task.gmfgraph#UnaryOpDiagLabelInter"/>
+        <features
+            href="task.ecore#//Task/operation"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -64,6 +80,14 @@
         <editableFeatures
             href="task.ecore#//Task/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="task.gmfgraph#UnaryOpDiagLabelAppli"/>
+        <features
+            href="task.ecore#//Task/operation"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="task.gmftool#//@palette/@tools.0/@tools.3"/>
@@ -85,6 +109,14 @@
             href="task.ecore#//Task/name"/>
         <editableFeatures
             href="task.ecore#//Task/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="task.gmfgraph#UnaryOpDiagLabelAbs"/>
+        <features
+            href="task.ecore#//Task/operation"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

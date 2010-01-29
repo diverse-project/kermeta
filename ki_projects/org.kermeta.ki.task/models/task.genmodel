@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.ki.task.model/src/"
-    modelPluginID="org.kermeta.ki.task.model" modelName="Task" copyrightFields="false">
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Arnaud Blouin - INRIA, Centre Rennes, Triskell Team, France"
+    modelDirectory="/org.kermeta.ki.task.model/src/" modelPluginID="org.kermeta.ki.task.model"
+    modelName="Task" complianceLevel="5.0" language="">
   <genPackages prefix="Task" basePackage="org.kermeta.ki" disposableProviderFactory="true"
       ecorePackage="task.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="task.ecore#//UnaryOperation">
-      <genEnumLiterals ecoreEnumLiteral="task.ecore#//UnaryOperation/iterative"/>
+      <genEnumLiterals ecoreEnumLiteral="task.ecore#//UnaryOperation/recursive"/>
+      <genEnumLiterals ecoreEnumLiteral="task.ecore#//UnaryOperation/iteration"/>
       <genEnumLiterals ecoreEnumLiteral="task.ecore#//UnaryOperation/optional"/>
-      <genEnumLiterals ecoreEnumLiteral="task.ecore#//UnaryOperation/connection"/>
+      <genEnumLiterals ecoreEnumLiteral="task.ecore#//UnaryOperation/finiteInteraction"/>
     </genEnums>
     <genClasses image="false" ecoreClass="task.ecore#//Task">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute task.ecore#//Task/name"/>
