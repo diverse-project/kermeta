@@ -662,7 +662,10 @@
           kind="RulersAndGrid"/>
     </preferencePages>
   </diagram>
-  <plugin>
+  <plugin
+      name="Ki Task Plugin"
+      provider="Arnaud Blouin, INRIA - IRISA"
+      version="1.0.0">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
   </plugin>

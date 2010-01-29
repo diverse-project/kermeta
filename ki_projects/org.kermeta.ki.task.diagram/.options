@@ -1,0 +1,7 @@
+# Tracing options for the org.kermeta.ki.task.diagram plug-in
+
+# Common issues
+org.kermeta.ki.task.diagram/debug=false
+
+# Visual IDs
+org.kermeta.ki.task.diagram/debug/visualID=false
