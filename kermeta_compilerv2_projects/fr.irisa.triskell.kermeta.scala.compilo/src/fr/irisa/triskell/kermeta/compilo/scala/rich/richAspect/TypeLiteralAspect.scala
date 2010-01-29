@@ -22,7 +22,6 @@ trait TypeLiteralAspect extends RichAspectImplicit with ObjectAspect {
 		/* Check Generique Param */
 			try{
 				var c = java.lang.Class.forName(this.getTyperef().getType.getQualifiedNameCompilo())
-				System.err.println( "toto " + this.getTyperef().getType.getQualifiedNameCompilo() + " " +c  )
 				
 				if(c.getTypeParameters.size > 0){
 					res.append("[")

@@ -25,7 +25,8 @@ trait PrimitiveTypeAspect extends RichAspectImplicit with ObjectAspect with LogA
 					case "String" => "java.lang.String"
 					case "Boolean" => "Boolean"
 					case "Integer" => "Int"
-					case _ => "java.lang.Object"
+					case "UnlimitedNatural" => "Int"					
+					case _ => {println("default "+ this.getName); "java.lang.Object"}
 				}
 			}
 			res.append(kermeta.utils.TypeEquivalence.getTypeEquivalence(t))

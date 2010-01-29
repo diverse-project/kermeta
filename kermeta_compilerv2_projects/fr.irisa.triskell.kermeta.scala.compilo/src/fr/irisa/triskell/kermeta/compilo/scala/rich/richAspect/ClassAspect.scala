@@ -46,7 +46,6 @@ trait ClassAspect extends RichAspectImplicit with TypeAspect with ObjectAspect w
 				
 				try{
 					var c = java.lang.Class.forName(this.getQualifiedNameCompilo())
-					System.err.println( "toto " + this.getQualifiedNameCompilo() + " " +c  )
 					if(c.getTypeParameters.size > 0){
 						res.append("[")
 						for(i <- 0 until c.getTypeParameters.length ){

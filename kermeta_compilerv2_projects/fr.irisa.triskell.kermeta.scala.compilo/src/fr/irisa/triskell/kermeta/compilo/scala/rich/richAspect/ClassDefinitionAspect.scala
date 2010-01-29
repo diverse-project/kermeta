@@ -33,8 +33,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 						var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
 						res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
 						
-						if (Util.hasEcoreTag(ty.eContainer.asInstanceOf[Package]) && !ty.eContainer.asInstanceOf[Package].getQualifiedName().equals("language.structure")){
-							println(ty.eContainer.asInstanceOf[Package].getQualifiedName())	
+						if (Util.hasEcoreTag(ty.eContainer.asInstanceOf[Package]) ){
 							res.append("ScalaAspect")
 								
 						}
@@ -89,6 +88,9 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 						//res.append(" with ")
 						var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
 						res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
+						if (Util.hasEcoreTag(ty))
+							res.append("ScalaAspect")
+								
 						res.append(".")
 						res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
 						res.append("Aspect")
@@ -134,8 +136,10 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 	
 	
 	override def getQualifiedNameCompilo():String ={
-		return kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName());
-	  
+		if (!Util.hasEcoreTag(this)  && !Util.hasEcoreTag(this.eContainer().asInstanceOf[Object]) || (Util.hasEcoreTag(this) && Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])))
+			return kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName());
+		else
+			return kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "ScalaAspect."+ this.getName());
 	}
 	
 	def generateParamerterClass(res1:StringBuilder) = {
@@ -145,7 +149,6 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 					this.getTypeParameter().foreach{param =>
 						if (i>0)
 							res1.append(",")
-						println(param.getClass)
 						res1.append(param.getQualifiedNameCompilo())
 						i=i+1
 					}

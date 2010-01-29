@@ -59,7 +59,6 @@ def generateAttribute(res : StringBuilder) : Unit ={
 			res.append("]")
 
 	} else {
-		System.err.println("titi" + this.getType().toString)
 		this.getType().generateScalaCode(res) 
 		res.append("= _")
 
