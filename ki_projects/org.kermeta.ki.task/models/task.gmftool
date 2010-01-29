@@ -12,23 +12,68 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="Abstract"
-          description="Creates an abstract task"/>
+          description="Creates an abstract task">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/cloud16x16.png"
+            bundle="org.kermeta.ki.task"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/cloud32x32.png"
+            bundle="org.kermeta.ki.task"/>
+      </tools>
       <tools
           xsi:type="gmftool:CreationTool"
           title="User"
-          description="Creates a user task"/>
+          description="Creates a user task">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/user16x16.png"
+            bundle="org.kermeta.ki.task"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/user32x32.png"
+            bundle="org.kermeta.ki.task"/>
+      </tools>
       <tools
           xsi:type="gmftool:CreationTool"
           title="Interaction"
-          description="Creates an interaction task"/>
+          description="Creates an interaction task">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/interaction16x16.png"
+            bundle="org.kermeta.ki.task"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/interaction32x32.png"
+            bundle="org.kermeta.ki.task"/>
+      </tools>
       <tools
           xsi:type="gmftool:CreationTool"
           title="Application"
-          description="Creates an application task"/>
+          description="Creates an application task">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/computer16x16.png"
+            bundle="org.kermeta.ki.task"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/computer32x32.png"
+            bundle="org.kermeta.ki.task"/>
+      </tools>
       <tools
           xsi:type="gmftool:CreationTool"
           title="Subtask"
-          description="Links a task and one of its subtask"/>
+          description="Links a task and one of its subtask">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/sub16x16.png"
+            bundle="org.kermeta.ki.task"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/sub32x32.png"
+            bundle="org.kermeta.ki.task"/>
+      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"
@@ -36,19 +81,64 @@
         collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Interleaving"/>
+          title="Interleaving">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/interleaving16x16.png"
+            bundle="org.kermeta.ki.task"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/interleaving32x32.png"
+            bundle="org.kermeta.ki.task"/>
+      </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Synchronisation"/>
+          title="Synchronisation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/synchro16x16.png"
+            bundle="org.kermeta.ki.task"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/synchro32x32.png"
+            bundle="org.kermeta.ki.task"/>
+      </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Enabling"/>
+          title="Enabling">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/enabling16x16.png"
+            bundle="org.kermeta.ki.task"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/enabling32x32.png"
+            bundle="org.kermeta.ki.task"/>
+      </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Enabling With Info."/>
+          title="Enabling With Info.">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/enablingInfo16x16.png"
+            bundle="org.kermeta.ki.task"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/enablingInfo32x32.png"
+            bundle="org.kermeta.ki.task"/>
+      </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Desactivation"/>
+          title="Desactivation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/desactiv16x16.png"
+            bundle="org.kermeta.ki.task"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="resources/desactiv32x32.png"
+            bundle="org.kermeta.ki.task"/>
+      </tools>
     </tools>
   </palette>
 </gmftool:ToolRegistry>

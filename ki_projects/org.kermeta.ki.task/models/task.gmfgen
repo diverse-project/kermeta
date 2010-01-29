@@ -133,7 +133,7 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="5006"
+          visualID="5004"
           editPartClassName="InteractionOperationEditPart"
           itemSemanticEditPolicyClassName="InteractionOperationItemSemanticEditPolicy"
           notationViewFactoryClassName="InteractionOperationViewFactory"
@@ -179,7 +179,7 @@
             href="task.genmodel#//task/TaskModel/tasks"/>
       </modelFacet>
       <labels
-          visualID="5004"
+          visualID="5005"
           editPartClassName="ApplicationNameEditPart"
           itemSemanticEditPolicyClassName="ApplicationNameItemSemanticEditPolicy"
           notationViewFactoryClassName="ApplicationNameViewFactory">
@@ -199,7 +199,7 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="5007"
+          visualID="5006"
           editPartClassName="ApplicationOperationEditPart"
           itemSemanticEditPolicyClassName="ApplicationOperationItemSemanticEditPolicy"
           notationViewFactoryClassName="ApplicationOperationViewFactory"
@@ -245,7 +245,7 @@
             href="task.genmodel#//task/TaskModel/tasks"/>
       </modelFacet>
       <labels
-          visualID="5005"
+          visualID="5007"
           editPartClassName="AbstractNameEditPart"
           itemSemanticEditPolicyClassName="AbstractNameItemSemanticEditPolicy"
           notationViewFactoryClassName="AbstractNameViewFactory">
@@ -569,26 +569,36 @@
             xsi:type="gmfgen:ToolEntry"
             title="Abstract"
             description="Creates an abstract task"
+            largeIconPath="/org.kermeta.ki.task/resources/cloud32x32.png"
+            smallIconPath="/org.kermeta.ki.task/resources/cloud16x16.png"
             genNodes="//@diagram/@topLevelNodes.3"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="User"
             description="Creates a user task"
+            largeIconPath="/org.kermeta.ki.task/resources/user32x32.png"
+            smallIconPath="/org.kermeta.ki.task/resources/user16x16.png"
             genNodes="//@diagram/@topLevelNodes.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Interaction"
             description="Creates an interaction task"
+            largeIconPath="/org.kermeta.ki.task/resources/interaction32x32.png"
+            smallIconPath="/org.kermeta.ki.task/resources/interaction16x16.png"
             genNodes="//@diagram/@topLevelNodes.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Application"
             description="Creates an application task"
+            largeIconPath="/org.kermeta.ki.task/resources/computer32x32.png"
+            smallIconPath="/org.kermeta.ki.task/resources/computer16x16.png"
             genNodes="//@diagram/@topLevelNodes.2"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Subtask"
             description="Links a task and one of its subtask"
+            largeIconPath="/org.kermeta.ki.task/resources/sub32x32.png"
+            smallIconPath="/org.kermeta.ki.task/resources/sub16x16.png"
             genLinks="//@diagram/@links.5"/>
       </groups>
       <groups
@@ -597,22 +607,32 @@
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Interleaving"
+            largeIconPath="/org.kermeta.ki.task/resources/interleaving32x32.png"
+            smallIconPath="/org.kermeta.ki.task/resources/interleaving16x16.png"
             genLinks="//@diagram/@links.2"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Synchronisation"
+            largeIconPath="/org.kermeta.ki.task/resources/synchro32x32.png"
+            smallIconPath="/org.kermeta.ki.task/resources/synchro16x16.png"
             genLinks="//@diagram/@links.3"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Enabling"
+            largeIconPath="/org.kermeta.ki.task/resources/enabling32x32.png"
+            smallIconPath="/org.kermeta.ki.task/resources/enabling16x16.png"
             genLinks="//@diagram/@links.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Enabling With Info."
+            largeIconPath="/org.kermeta.ki.task/resources/enablingInfo32x32.png"
+            smallIconPath="/org.kermeta.ki.task/resources/enablingInfo16x16.png"
             genLinks="//@diagram/@links.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Desactivation"
+            largeIconPath="/org.kermeta.ki.task/resources/desactiv32x32.png"
+            smallIconPath="/org.kermeta.ki.task/resources/desactiv16x16.png"
             genLinks="//@diagram/@links.4"/>
       </groups>
     </palette>
