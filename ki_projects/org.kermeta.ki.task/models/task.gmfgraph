@@ -197,6 +197,11 @@
           name="DesactivLabel"
           text="[>"/>
     </descriptors>
+    <descriptors
+        name="SubTaskFigureDesc">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"/>
+    </descriptors>
   </figures>
   <nodes
       name="User"
@@ -225,6 +230,9 @@
   <connections
       name="Synchronization"
       figure="SynchronizationFigure"/>
+  <connections
+      name="SubTaskConn"
+      figure="SubTaskFigureDesc"/>
   <labels
       name="UserName"
       figure="UserFigure"

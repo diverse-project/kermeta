@@ -25,6 +25,10 @@
           xsi:type="gmftool:CreationTool"
           title="Application"
           description="Creates an application task"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Subtask"
+          description="Links a task and one of its subtask"/>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

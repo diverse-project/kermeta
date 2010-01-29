@@ -203,6 +203,20 @@
         xsi:type="ecore:EReference"
         href="task.ecore#//Operator/target"/>
   </links>
+  <links>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="task.gmftool#//@palette/@tools.0/@tools.4"/>
+    <diagramLink
+        href="task.gmfgraph#SubTaskConn"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="task.ecore#//Task/subtasks"/>
+    <creationConstraints>
+      <sourceEnd
+          body="self &lt;> oppositeEnd"/>
+    </creationConstraints>
+  </links>
   <diagram>
     <diagramCanvas
         href="task.gmfgraph#TaskCanvas"/>
