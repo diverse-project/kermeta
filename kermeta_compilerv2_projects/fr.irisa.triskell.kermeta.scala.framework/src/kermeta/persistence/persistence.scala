@@ -64,6 +64,7 @@ class EMFRepository  extends Repository  {
 		var res : EMFResource = new EMFResource()  
         //res.metaModelURI = mm_uri
         res.uri = uri
+        
         return res
 		
 	}
@@ -112,7 +113,7 @@ class EMFResource  extends Resource  {
                                         return true}
 	def load(){
 		
-		var uri1 :URI = URI.createFileURI(uri.replace("platform:/resource/",EcorePackages.workspaceURI).replace("platform:/plugin/",EcorePackages.pluginURI ));
+		var uri1 :URI = URI.createFileURI(uri)//.replace("platform:/resource/",EcorePackages.workspaceURI).replace("platform:/plugin/",EcorePackages.pluginURI ));
 		var resource :org.eclipse.emf.ecore.resource.Resource  = rs.getResource(uri1,true);
 		//resource.load(new java.util.HashMap)
 		if (resource.isLoaded() && resource.getContents().size() > 0) {
