@@ -103,65 +103,65 @@
 	  		<para>Currently, the MDK provides the following files :</para>
       		<varlistentry>
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/visitor/kermetaVisitor.kmt"</filename></emphasis></term>
-        		<listitem>
-          			This file adds a visitor to Kermeta metamodel. It helps you traverse a Kermeta model.
+        		<listitem><para>
+          			This file adds a visitor to Kermeta metamodel. It helps you traverse a Kermeta model.</para>
         		</listitem>
       		</varlistentry> 
       		<varlistentry>
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/helpers/AllHelpers.kmt"</filename></emphasis></term>
-        		<listitem>
-          			This file adds various helper operations to the Metaclasses of Kermeta.
-          			<tip>If you are interested in only a subset of those helpers, you can directly require the corresponding files in the <filename>helpers</filename> directory of the plugin.</tip>
+        		<listitem><para>
+          			This file adds various helper operations to the Metaclasses of Kermeta.</para>
+          			<tip><para>If you are interested in only a subset of those helpers, you can directly require the corresponding files in the <filename>helpers</filename> directory of the plugin.</para></tip>
         		</listitem>
       		</varlistentry>
       		<varlistentry>
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/helpers/structure/AllStructureHelpers.kmt"</filename></emphasis></term>
-        		<listitem>
-          			Same as <filename>AllHelpers.kmt</filename> except that it provides only helpers on classes of the structure package.
+        		<listitem><para>
+          			Same as <filename>AllHelpers.kmt</filename> except that it provides only helpers on classes of the structure package.</para>
         		</listitem>
       		</varlistentry> 
       		
       		<varlistentry>
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/extension/SingletonSupport.kmt"</filename></emphasis></term>
-        		<listitem>
-          			This files adds a support for getting a kind of singleton in Kermeta.
+        		<listitem><para>
+          			This files adds a support for getting a kind of singleton in Kermeta.</para>
         		</listitem>
       		</varlistentry>
       		<varlistentry>
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/math/Math.kmt"</filename></emphasis></term>
-        		<listitem>
-          			Provides a kermeta::Math class that offers some of the classical operation like sin, cos, pi, toDegrees, toRadians, etc
+        		<listitem><para>
+          			Provides a kermeta::Math class that offers some of the classical operation like sin, cos, pi, toDegrees, toRadians, etc</para>
         		</listitem>
       		</varlistentry>
       		<varlistentry>
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/visitor/prettyprinters/kmtPrettyPrinter.kmt"</filename></emphasis></term>
-        		<listitem>
-          			This file adds a KMT prettyprinter visitor to Kermeta metamodel. It provides a String output of the kmt surface syntax for your km models.
+        		<listitem><para>
+          			This file adds a KMT prettyprinter visitor to Kermeta metamodel. It provides a String output of the kmt surface syntax for your km models.</para>
         		</listitem>
       		</varlistentry>
       		<varlistentry>
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/standard/StringUtils.kmt"</filename></emphasis></term>
-        		<listitem>
-          			This file adds some String manipulation operations to String. for example trim(), startsWith(), endsWiths(), etc
+        		<listitem><para>
+          			This file adds some String manipulation operations to String. for example trim(), startsWith(), endsWiths(), etc</para>
         		</listitem>
       		</varlistentry>
       		
       		<varlistentry>
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/utils/Random.kmt"</filename></emphasis></term>
-        		<listitem>
-          			This file offers some operations to get random elements. (Currently, random numbers, but can/should be extended) 
+        		<listitem><para>
+          			This file offers some operations to get random elements. (Currently, random numbers, but can/should be extended) </para>
         		</listitem>
       		</varlistentry>
       		<varlistentry>
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/utils/Date.kmt"</filename></emphasis></term>
-        		<listitem>
-          			This file offers some operations to calculate elapsed time.
+        		<listitem><para>
+          			This file offers some operations to calculate elapsed time.</para>
         		</listitem>
       		</varlistentry>
       		<varlistentry>
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/utils/Properties.kmt"</filename></emphasis></term>
-        		<listitem>
-          			This file offers an operation to get properties as a Hashtable<String, String> from a Properties file.
+        		<listitem><para>
+          			This file offers an operation to get properties as a Hashtable&lt;String, String&gt; from a Properties file.</para>
         		</listitem>
       		</varlistentry>
 		</variablelist>
@@ -233,14 +233,14 @@ anOperation.containedType.add(aClass)
       	<para>
       	Obviously, you can load any km file you want. 
       	</para>
-      	<note>If you want to point to a definition that is in a kmt (textual) or
-      	in an ecore file, you'll need to convert it into a km file first.
+      	<note><para>If you want to point to a definition that is in a kmt (textual) or
+      	in an ecore file, you'll need to convert it into a km file first.</para>
       	</note>
     </section>
     <section>
       	<title>Sample use of the kmt prettyprinter : prettyprinting a failed Constraint </title>
-      	<note>The base of this prettyprinter was written before the introduction of aspect in Kermeta. For a better design, 
-      	we would have now weaved the prettyprint operation rather than weaved a visitor.
+      	<note><para>The base of this prettyprinter was written before the introduction of aspect in Kermeta. For a better design, 
+      	we would have now weaved the prettyprint operation rather than weaved a visitor.</para>
       	</note>
       	<para>Here is a sample use of this printer (prettyprints the body of a failed invariant). Its main class is <literal>kermeta::utils::BasicPrettyPrinter</literal>
       	</para>
@@ -269,7 +269,7 @@ anOperation.containedType.add(aClass)
 		    stdio.errorln(myError.stackTrace)
 		end   
       	</programlisting>
-      	<warning>Do not forget to initialize the BasicPrettyPrinter !
+      	<warning><para>Do not forget to initialize the BasicPrettyPrinter !</para>
       	</warning>
     </section>
   </chapter>
