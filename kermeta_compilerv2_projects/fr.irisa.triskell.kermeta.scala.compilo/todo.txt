@@ -1,0 +1,5 @@
+Classe supplémentaire dont la super classe est une classe ecore doit dans le ViewType ne pas surcharget ObjectImpl
+Supprimer les view et factory quand que des classes qui ont l'annotation @CompilerIgnore
+Refaire le runner avec les bon paramètre,
+Rajouter dans le runner la gestion du suffixe.
+
