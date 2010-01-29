@@ -40,8 +40,8 @@ public class CompileFramework {
 		IOPlugin ioPlugin = IOPlugin.getDefault();
     	
     	KermetaUnit kermetaUnit = null;
-//    	kermetaUnit = LoaderPlugin.getDefault().load("platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt", null);
-    	kermetaUnit = LoaderPlugin.getDefault().getFramework();
+    	//kermetaUnit = LoaderPlugin.getDefault().load("platform:/resource/fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt", null);
+   	kermetaUnit = LoaderPlugin.getDefault().getFramework();
     	
     	kermetaUnit.setFramework(false);
     	for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) )
@@ -64,9 +64,14 @@ public class CompileFramework {
 
         	System.out.println("Merging and Saving...");
         	Merger merger = new Merger();
+        	
         	Set<KermetaUnit> l = new HashSet<KermetaUnit>();
         	l.add(kermetaUnit);
         	l.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) );
+        	System.err.println(l.size());
+        	for (KermetaUnit u : l){
+        		System.err.println(u.getUri());
+        	}
         	KermetaUnit mergedUnit = merger.process(l, "platform:/resource/fr.irisa.triskell.kermeta.framework/dist/framework.km", true, false);
         	System.out.println("Mergin and Saving done");
         	//System.out.println("SAVING IN KM...");
