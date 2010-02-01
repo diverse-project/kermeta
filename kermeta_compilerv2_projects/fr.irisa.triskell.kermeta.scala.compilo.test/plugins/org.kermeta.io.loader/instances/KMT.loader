@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ASCII"?>
+<loader:KMTLoader xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:loader="http://www.kermeta.org/Loader" xsi:schemaLocation="http://www.kermeta.org/Loader ../model/Loader.ecore">
+  <steps name="_STRUCTURE_LOADING_" propagate="true">
+    <steps name="_AST_LOADING_">
+      <action class="org.kermeta.io.loader.kmt.LoadAST"/>
+    </steps>
+    <steps name="_STRUCTURE_LOADING_PASS_">
+      <action class="org.kermeta.io.loader.kmt.KMTLoadingStructurePass"/>
+    </steps>
+    <steps name="_RESOLVE_REQUIRE_PASS_">
+      <action class="org.kermeta.io.loader.core.RequireResolver"/>
+    </steps>
+  </steps>
+  <steps name="_IMPORT_KERMETA_UNIT_PASS_" propagate="true">
+    <steps name="_REPORT_USING_ERROR_">
+      <action class="org.kermeta.io.loader.core.ReportUsingError"/>
+    </steps>
+    <action class="org.kermeta.io.loader.core.ImportKermetaUnitPass"/>
+  </steps>
+  <steps name="_LOADING_ASPECTS_" propagate="true">
+    <action class="org.kermeta.io.loader.core.ConstructAspects"/>
+  </steps>
+  <steps name="_ADD_CONTENT_TO_MODEL_TYPE_" propagate="true">
+    <action class="org.kermeta.io.loader.kmt.AddContentToModelType"/>
+  </steps>
+  <steps name="_TYPE_SETTING_" propagate="true">
+    <action class="org.kermeta.io.loader.kmt.SetTypesPass"/>
+  </steps>
+  <steps name="Setting Super Types" propagate="true">
+    <action class="org.kermeta.io.loader.kmt.SetSuperTypesPass"/>
+  </steps>
+  <steps name="_OPERATION_LOADING_" propagate="true">
+    <action class="org.kermeta.io.loader.kmt.LoadBodiesAndSetOpposites"/>
+  </steps>
+  <steps name="_ADD_ANNOTATIONS_" propagate="true">
+    <action class="org.kermeta.io.loader.kmt.AddAnnotations"/>
+  </steps>
+  <steps name="_FINALIZE_LOADING_" propagate="true">
+    <steps name="_DELETE_AST_NODES_" propagate="true">
+      <action class="org.kermeta.io.loader.kmt.DeleteASTNodes"/>
+    </steps>
+    <action class="org.kermeta.io.loader.core.FinalizeLoading"/>
+  </steps>
+</loader:KMTLoader>

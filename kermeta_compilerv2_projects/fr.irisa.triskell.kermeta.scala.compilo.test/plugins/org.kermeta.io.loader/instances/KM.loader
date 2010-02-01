@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<loader:KMLoader xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:loader="http://www.kermeta.org/Loader" xsi:schemaLocation="http://www.kermeta.org/Loader ../model/Loader.ecore">
+  <steps name="_STRUCTURE_LOADING_">
+    <action class="org.kermeta.io.loader.km.Load"/>
+  </steps>
+  <steps name="_FINALIZE_LOADING_" propagate="true">
+    <action class="org.kermeta.io.loader.core.FinalizeLoading"/>
+  </steps>
+</loader:KMLoader>
