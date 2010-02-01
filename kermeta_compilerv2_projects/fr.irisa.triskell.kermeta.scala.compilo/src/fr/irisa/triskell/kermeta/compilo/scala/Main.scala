@@ -79,7 +79,7 @@ object Main extends LogAspect {
 	  var compilo = new Compiler
 	  
 //	  inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/068_testVariableInit.main.km"
-	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/037_testLambda.main.km"
+	// inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/037_testLambda.main.km"
 //	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/078_testAddVoidInReflectiveCollection.main.km"
 	 //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
     // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/012_TypeFromEcore.km"
@@ -91,20 +91,27 @@ object Main extends LogAspect {
 //   inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.km"
    //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/0012_kunit.km"
 	  //compilo.compile("../compilerv2_test/tests/010_testLoop.main.km")
-	  //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/017_OverrideEcoreOperation.km"
-	  //compilo.compile("../compilerv2_test/tests/006_testClosure.km")
+	  
+	  
+	  inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LoadSaveKm/0001LoadAndSaveKm.km"
+	  
 	  if(inputFile != ""){
+	 	  log.info("KM compilation begin on "+inputFile)
 		  compilo.compile(inputFile) 
 	  } else {
 	 	  log.warn("No Input File Found ! ")
 	  }
 
-	   
+	  log.info("Scala compilation step")
 	   /* Scalac compilation step */
-	   println("Compilation result = "+EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,List(System.getProperty("java.class.path"))))
+	   var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,List(System.getProperty("java.class.path")))
+	   log.info("Scala compilation result = "+compilationResult)
 	  
 	   /* Scala runner */
-	   EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner")
+	   if(compilationResult == 0){
+		   EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner")
+	   }
+	   
 	   
 	   
   }

@@ -39,6 +39,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 			}
 	}
 	
+	
 	def generateTarget(res : StringBuilder){
 		if (this.getTarget()!=null){
 			this.getTarget().generateScalaCode(res)
