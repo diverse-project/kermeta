@@ -1,10 +1,15 @@
 package fr.irisa.triskell.embedded
 
+import fr.irisa.triskell.kermeta.compilo.scala.LogAspect
 import java.io.File;
 
-object EmbettedScalaCompiler {
+object EmbettedScalaCompiler extends LogAspect {
 	
 	def compile(srcPATH : String, outputPATH : String, cleanOutput : Boolean, jars : List[String]) : Int = {
+		
+		var startTime = System.currentTimeMillis
+		log.info("Scala compilation step begin")
+		
 		/* Cleaning step */
 		if(cleanOutput){
 			InternalCompilerHelper.deleteDirRecursive(new File(outputPATH))
@@ -21,6 +26,10 @@ object EmbettedScalaCompiler {
 		
 		/* Compilation step */
 		scala.tools.nsc.Main.process(compilParams.toArray)
+		
+		var endTime= System.currentTimeMillis() - startTime
+		log.info("Scala compilation step complete in "+(endTime)+" millisecondes ")
+		
 		return if (scala.tools.nsc.Main.reporter.hasErrors) 1 else 0
 	}
 	
