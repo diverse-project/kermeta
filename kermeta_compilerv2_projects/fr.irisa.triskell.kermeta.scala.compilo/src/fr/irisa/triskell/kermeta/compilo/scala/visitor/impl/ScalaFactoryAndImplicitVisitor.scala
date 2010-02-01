@@ -27,7 +27,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 			packName=parentpack+"."+packNam
 		}
 		packName= kermeta.utils.TypeEquivalence.getPackageEquivalence(packName)
-		var impName = packName+ Util.getImplPackageSuffix(packName)+packNameUpper+"PackageImpl"
+		var impName = packName+ Util.getImplPackageSuffix(packName)+Util.getPackagePrefix(packNameUpper)+"PackageImpl"
 		if (packName.equals("org.eclipse.emf.ecore")){
 			res.append("\n{\n\tvar c : java.lang.reflect.Constructor[_] = classOf["+impName+"].getDeclaredConstructors.first\n")
 			res.append("\tc.setAccessible(true);\n")
@@ -139,7 +139,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 				
 				factoryDef append "object "+GlobalConfiguration.factoryName + " extends "
 				if (par.getOwnedTypeDefinition.filter{e=> Util.hasEcoreTag(par)}.size>0)
-					factoryDef append  kermeta.utils.TypeEquivalence.getPackageEquivalence(par.asInstanceOf[Package].getQualifiedName())+Util.getImplPackageSuffix(actualPackage)+ par.getName.substring(0,1).toUpperCase + par.getName.substring(1,par.getName.size)+"FactoryImpl with" 
+					factoryDef append  kermeta.utils.TypeEquivalence.getPackageEquivalence(par.asInstanceOf[Package].getQualifiedName())+Util.getImplPackageSuffix(actualPackage)+ Util.getPackagePrefix(par.getName.substring(0,1).toUpperCase + par.getName.substring(1,par.getName.size))+"FactoryImpl with" 
 				factoryDef append " "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 				factoryDef append "{\n"
 				viewDef append "package "+actualPackage+"\n"
@@ -183,14 +183,18 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 				par.generateParamerterClass(param);			
 				if (Util.hasEcoreTag(par)){				
 					var  implName:String = Util.getImplPackageSuffix(packageName.toString)
-					viewDef.append(" class Rich"+par.getName()+" extends "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+implName.substring(1,implName.size) + par.getName()+"Impl")+" with "+packageName.toString +"."+par.getName+"Aspect \n")
+					viewDef.append(" class Rich"+par.getName()+" extends "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+implName.substring(1,implName.size) + par.getName()+"Impl")+" with "+packageName.toString +"."+par.getName+"Aspect ")
+					if (!par.eContainer.asInstanceOf[NamedElement].getQualifiedNameCompilo.contains("kermeta")){//!IsObjectClassChildren(par)){
+						viewDef.append("with " + "fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation") 
+					}
+					
+					viewDef.append("\n")
 					implicitDef append " implicit def richAspect(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName())+") = v.asInstanceOf["+ packageName.toString+"."+ par.getName+"Aspect]\n" 
 					implicitDef append " implicit def richAspect(v : "+ packageName.toString+"."+par.getName()+"Aspect) = v.asInstanceOf["+ par.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo+ Util.getImplPackageSuffix(packageName.toString) + par.getName+"Impl]\n"
 				}else{
 					var cd = getEcoreSuperClass(par)
 					
 					//cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo +".impl." + cd.getName +"Impl
-					
 					viewDef.append(" class Rich"+par.getName()+ param.toString +" extends "+cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo +".impl." + cd.getName +"Impl with "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+ param.toString +" with "+packageName.toString +"."+par.getName+"Aspect" + param.toString +" \n")
 					implicitDef append " implicit def richAspect" + param.toString + "(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"."+par.getName())+ param.toString +") = v.asInstanceOf["+ packageName.toString+"."+par.getName+"Aspect"+ param.toString +"]\n" 
 					implicitDef append " implicit def richAspect" + param.toString +"(v : "+ packageName.toString+"."+par.getName()+"Aspect" + param.toString +") = v.asInstanceOf["+ packageName.toString+"."+par.getName+ param.toString +"]\n"
@@ -229,6 +233,28 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		
 		return null;
 	}
+	
+		def IsObjectClassChildren(c:ClassDefinition):Boolean={
+		c.getSuperType.foreach(e=> 
+		
+		{
+		//println("taratata" + e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
+		if ("Object".equals(e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName))
+		{
+			//println("torototo" + e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
+			return true
+			}
+		}
+		)
+		c.getSuperType.foreach(e=>  
+			return IsObjectClassChildren(e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition]) 
+			)
+		
+		
+		
+		return false;
+	}
+
 	
 	def close {
 		implicitDef append "}\n"
