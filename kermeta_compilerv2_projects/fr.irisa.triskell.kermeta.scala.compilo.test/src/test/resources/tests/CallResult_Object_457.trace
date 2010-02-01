@@ -1,0 +1,2 @@
+define result as new Class
+result := 2

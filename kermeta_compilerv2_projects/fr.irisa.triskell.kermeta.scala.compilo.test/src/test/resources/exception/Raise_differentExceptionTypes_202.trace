@@ -1,0 +1,7 @@
+kermeta exception : [kermeta::exceptions::CallOnVoidTarget : 6328]
+fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException: kermeta exception : [kermeta::exceptions::CallOnVoidTarget : 6328]
+Trace: 
+    file 'platform:/resource/org.kermeta.language.scalacompiler.maven/src/test/resource/testCases/exception/Raise_differentExceptionTypes_202.kmt', line 20 ( raise e )
+
+    file 'platform:/resource/org.kermeta.language.scalacompiler.maven/src/test/resource/testCases/exception/Raise_differentExceptionTypes_202.kmt', line 18, in '[p1::Main : 6325].main' ( operation main() : Void is (...) )
+------------END OF STACK TRACE------------

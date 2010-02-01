@@ -1,0 +1,33 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mclavreu
+ */
+@mainClass "p1::Main"
+@mainOperation "main"
+
+
+package p1;
+
+
+require kermeta
+
+class A {
+	attribute ai : kermeta::standard::Integer
+ 	
+ 	operation getAi() : kermeta::standard::String is do
+ 		result := "2"
+ 		stdio.writeln("define result as String")
+ 	end
+}
+
+class Main
+{
+	operation main() : Void is do
+		var a : A init A.new
+		a.ai := 2
+		stdio.writeln("result := " + a.getAi)
+	end
+}

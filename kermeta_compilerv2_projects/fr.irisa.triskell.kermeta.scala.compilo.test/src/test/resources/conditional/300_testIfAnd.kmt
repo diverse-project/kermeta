@@ -1,0 +1,30 @@
+/* $Id:$ 
+ * Creation : January 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainOperation "main"
+
+
+package p1;
+
+
+require kermeta
+class Main
+{
+	operation main() : Void is do
+		if(true) then
+			stdio.writeln("true=success")
+		end
+		
+		if(true and true) then
+			stdio.writeln("trueAndTrue=success")
+		end
+		
+		if(true.andThen{b | true}) then
+			stdio.writeln("trueAndThenTrue=success")
+		end
+	end
+}
