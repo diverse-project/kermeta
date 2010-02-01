@@ -9,7 +9,7 @@ object InternalCompilerHelper {
 	def listFile(f : File) : List[String] = {
 		var result = List[String]()
 		if (f.isDirectory()) {
-			for(subf <- f.listFiles){
+			for(subf <- f.listFiles){ 
 				result = result ++ listFile(subf)
 			}
 		} else {
