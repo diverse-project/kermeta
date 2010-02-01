@@ -76,7 +76,7 @@ object Util extends LogAspect with RichAspectImplicit  {
 		}
 	}
 	
-	var keywords = scala.List("implicit","match","requires","type","var","abstract","do","finally","import","object","throw","val","case","else","for","lazy","override","return","trait","catch","extends","forSome","match","package","sealed","try","while","class","false","if","new","private","super","true","with","def","final","implicit","null","protected","this","yield","_",":","=","=>","<-","<:","<%",">:","#","@")
+	val keywords = scala.List("implicit","match","requires","type","var","abstract","do","finally","import","object","throw","val","case","else","for","lazy","override","return","trait","catch","extends","forSome","match","package","sealed","try","while","class","false","if","new","private","super","true","with","def","final","implicit","null","protected","this","yield","_",":","=","=>","<-","<:","<%",">:","#","@")
 	def protectScalaKeyword(value : String) : String = {
 		var returnString : String = value
 		if(keywords.exists(p => p.equals(value))){
@@ -84,8 +84,8 @@ object Util extends LogAspect with RichAspectImplicit  {
 			log.debug("Reserved Scala Keyword : {}, backquote protection : ",value)
 		} 
 		returnString
-	}
-	
+	} 
+	 
 	
 	def getImplPackageSuffix(packName:String):String={
 		if ("org.eclipse.uml2.uml".equals(packName) || "uml".equals(packName.toString) || "org.eclipse.uml2.umlScalaAspect".equals(packName.toString))
@@ -98,8 +98,12 @@ object Util extends LogAspect with RichAspectImplicit  {
 
 	def getPackagePrefix(packName:String):String={
 		if ("Kermeta".equals(packName) || "uml".equals(packName.toString) || "org.eclipse.uml2.umlScalaAspect".equals(packName.toString))
+		{	
 			return "Km"
-		else 
+		}else if ("Uml".equals(packName) || "Uml".equals(packName.toString) || "org.eclipse.uml2.umlScalaAspect".equals(packName.toString))
+		{
+			return "UML"
+		}else 
 		{	
 			return packName
 		}
