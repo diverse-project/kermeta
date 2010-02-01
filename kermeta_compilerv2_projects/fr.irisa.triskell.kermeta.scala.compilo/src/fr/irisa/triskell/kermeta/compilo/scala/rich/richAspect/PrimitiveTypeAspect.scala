@@ -23,7 +23,7 @@ trait PrimitiveTypeAspect extends RichAspectImplicit with ObjectAspect with LogA
 			}else{
 				this.getName match {
 					case "String" => "java.lang.String"
-					case "Boolean" => "Boolean"
+					case "Boolean" => "java.lang.Boolean"
 					case "Integer" => "Int"
 					case "UnlimitedNatural" => "Int"					
 					case _ => {println("default "+ this.getName); "java.lang.Object"}
