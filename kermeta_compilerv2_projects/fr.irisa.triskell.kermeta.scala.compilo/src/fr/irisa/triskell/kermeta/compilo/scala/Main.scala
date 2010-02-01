@@ -93,7 +93,7 @@ object Main extends LogAspect {
 	  //compilo.compile("../compilerv2_test/tests/010_testLoop.main.km")
 	  
 	  
-	  inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LoadSaveKm/0001LoadAndSaveKm.km"
+	  inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/000HelloWorld.km"
 	  
 	  if(inputFile != ""){
 	 	  log.info("KM compilation begin on "+inputFile)
@@ -102,10 +102,8 @@ object Main extends LogAspect {
 	 	  log.warn("No Input File Found ! ")
 	  }
 
-	  log.info("Scala compilation step")
 	   /* Scalac compilation step */
 	   var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,List(System.getProperty("java.class.path")))
-	   log.info("Scala compilation result = "+compilationResult)
 	  
 	   /* Scala runner */
 	   if(compilationResult == 0){
