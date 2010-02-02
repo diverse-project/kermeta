@@ -112,6 +112,14 @@ _res.append("")
 end
 _res.append("")
 }
+_res.append("<!-- export the bean on the service registry -->\n")
+cpt.type.port.select{ p | p.role == "server"}.each{ p | 
+_res.append("<service ref=\"")
+_res.append(cpt.name)
+_res.append("\" interface=\"")
+_res.append(p.service.name)
+_res.append("\">\n\t<service-properties>\n\t\t<!-- info not available in ART -->\n\t</service-properties>\n</service>\n\n")
+}
 _res.append("</blueprint>")
 result := _res.toString
 end

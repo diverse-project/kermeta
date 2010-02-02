@@ -56,5 +56,14 @@ parameters="cpt : art::instance::PrimitiveInstance"
 <reference id="<%=cpt.name%>_<%=p.name%>" interface="<%=p.service.name%>" filter="(name=<%=cpt.binding.detect{b | b.client == p}.serverInstance.name%>)" />
 		<%end%>
 	<%end%>
-<%}%>		
+<%}%>
+<!-- export the bean on the service registry -->
+<%cpt.type.port.select{ p | p.role == "server"}.each{ p | %>
+<service ref="<%=cpt.name%>" interface="<%=p.service.name%>">
+	<service-properties>
+		<!-- info not available in ART -->
+	</service-properties>
+</service>
+
+<%}%>
 </blueprint>
