@@ -11,9 +11,6 @@
 <plugin>
 
    <extension point="org.eclipse.ui.newWizards">
-      <category
-            id="org.eclipse.emf.ecore.Wizard.category.ID"
-            name="%_UI_Wizard_category"/>
       <wizard
             id="org.kermeta.ki.task.presentation.TaskModelWizardID"
             name="Task Model Editor"

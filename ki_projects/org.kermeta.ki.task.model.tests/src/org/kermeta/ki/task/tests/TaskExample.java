@@ -9,8 +9,6 @@ package org.kermeta.ki.task.tests;
 import java.io.File;
 import java.io.IOException;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 

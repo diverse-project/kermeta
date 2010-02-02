@@ -21,7 +21,6 @@ import org.kermeta.ki.task.diagram.edit.parts.InteractionNameEditPart;
 import org.kermeta.ki.task.diagram.edit.parts.InteractionOperationEditPart;
 import org.kermeta.ki.task.diagram.edit.parts.UserNameEditPart;
 import org.kermeta.ki.task.diagram.edit.parts.UserOperationEditPart;
-import org.kermeta.ki.task.diagram.edit.parts.WrappingLabelEditPart;
 import org.kermeta.ki.task.diagram.parsers.MessageFormatParser;
 import org.kermeta.ki.task.diagram.part.TaskVisualIDRegistry;
 

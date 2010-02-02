@@ -65,7 +65,6 @@ import org.kermeta.ki.task.diagram.edit.parts.TaskSubtasksEditPart;
 import org.kermeta.ki.task.diagram.edit.parts.UserEditPart;
 import org.kermeta.ki.task.diagram.edit.parts.UserNameEditPart;
 import org.kermeta.ki.task.diagram.edit.parts.UserOperationEditPart;
-import org.kermeta.ki.task.diagram.edit.parts.WrappingLabelEditPart;
 import org.kermeta.ki.task.diagram.part.TaskVisualIDRegistry;
 
 /**
