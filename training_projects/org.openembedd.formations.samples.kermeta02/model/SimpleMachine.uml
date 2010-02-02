@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="idModel" name="SimpleMachineModel">
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="idModel" name="SimpleMachineModel">
   <packagedElement xmi:type="uml:Package" xmi:id="idPackage" name="SimpleMachinePackage">
     <packagedElement xmi:type="uml:StateMachine" xmi:id="idStateMachine" name="SimpleMachineStateMachine">
       <region xmi:id="idRegion" name="MainRegion">
