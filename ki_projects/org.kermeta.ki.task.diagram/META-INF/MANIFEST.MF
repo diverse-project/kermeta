@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Ki Task Diagram
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.kermeta.ki.task.diagram; singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Bundle-ClassPath: .
 Bundle-Activator: org.kermeta.ki.task.diagram.part.TaskDiagramEditorPlugin
 Bundle-Vendor: Triskell Team, INRIA, France
@@ -37,6 +37,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.ki.task.model.edit;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport,
  org.eclipse.gmf.runtime.lite.svg;bundle-version="1.0.0",
- org.eclipse.ocl.ecore;visibility:=reexport
+ org.eclipse.ocl.ecore;bundle-version="1.3.0"
 Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -49,7 +49,7 @@ public interface TaskPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://task";
+	String eNS_URI = "http://www.kermeta.org/ki/task";
 
 	/**
 	 * The package namespace name.

@@ -39,7 +39,7 @@ public class TaskFactoryImpl extends EFactoryImpl implements TaskFactory {
 	 */
 	public static TaskFactory init() {
 		try {
-			TaskFactory theTaskFactory = (TaskFactory)EPackage.Registry.INSTANCE.getEFactory("http://task"); 
+			TaskFactory theTaskFactory = (TaskFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/ki/task"); 
 			if (theTaskFactory != null) {
 				return theTaskFactory;
 			}

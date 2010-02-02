@@ -275,7 +275,7 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://task">
+      <metamodel nsURI="http://www.kermeta.org/ki/task">
          <metamodelType
                id="org.kermeta.ki.task.diagram.TaskModel_1000"
                name="%metatype.name.TaskModel_1000"
@@ -285,7 +285,7 @@
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://task">
+      <metamodel nsURI="http://www.kermeta.org/ki/task">
          <metamodelType
                id="org.kermeta.ki.task.diagram.User_2001"
                name="%metatype.name.User_2001"
@@ -295,7 +295,7 @@
             <param name="semanticHint" value="2001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://task">
+      <metamodel nsURI="http://www.kermeta.org/ki/task">
          <metamodelType
                id="org.kermeta.ki.task.diagram.Interaction_2002"
                name="%metatype.name.Interaction_2002"
@@ -305,7 +305,7 @@
             <param name="semanticHint" value="2002"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://task">
+      <metamodel nsURI="http://www.kermeta.org/ki/task">
          <metamodelType
                id="org.kermeta.ki.task.diagram.Application_2003"
                name="%metatype.name.Application_2003"
@@ -315,7 +315,7 @@
             <param name="semanticHint" value="2003"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://task">
+      <metamodel nsURI="http://www.kermeta.org/ki/task">
          <metamodelType
                id="org.kermeta.ki.task.diagram.Abstract_2004"
                name="%metatype.name.Abstract_2004"
@@ -325,7 +325,7 @@
             <param name="semanticHint" value="2004"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://task">
+      <metamodel nsURI="http://www.kermeta.org/ki/task">
          <metamodelType
                id="org.kermeta.ki.task.diagram.Enabling_4001"
                name="%metatype.name.Enabling_4001"
@@ -335,7 +335,7 @@
             <param name="semanticHint" value="4001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://task">
+      <metamodel nsURI="http://www.kermeta.org/ki/task">
          <metamodelType
                id="org.kermeta.ki.task.diagram.EnablingWithInformation_4002"
                name="%metatype.name.EnablingWithInformation_4002"
@@ -345,7 +345,7 @@
             <param name="semanticHint" value="4002"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://task">
+      <metamodel nsURI="http://www.kermeta.org/ki/task">
          <metamodelType
                id="org.kermeta.ki.task.diagram.Interleaving_4003"
                name="%metatype.name.Interleaving_4003"
@@ -355,7 +355,7 @@
             <param name="semanticHint" value="4003"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://task">
+      <metamodel nsURI="http://www.kermeta.org/ki/task">
          <metamodelType
                id="org.kermeta.ki.task.diagram.Synchronization_4004"
                name="%metatype.name.Synchronization_4004"
@@ -365,7 +365,7 @@
             <param name="semanticHint" value="4004"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://task">
+      <metamodel nsURI="http://www.kermeta.org/ki/task">
          <metamodelType
                id="org.kermeta.ki.task.diagram.Desactivation_4005"
                name="%metatype.name.Desactivation_4005"
@@ -375,7 +375,7 @@
             <param name="semanticHint" value="4005"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://task">
+      <metamodel nsURI="http://www.kermeta.org/ki/task">
          <specializationType
                id="org.kermeta.ki.task.diagram.TaskSubtasks_4006"
                name="%metatype.name.TaskSubtasks_4006"

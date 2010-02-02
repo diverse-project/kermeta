@@ -112,15 +112,15 @@ public class ApplicationEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
+		if (childEditPart instanceof ApplicationOperationEditPart) {
+			((ApplicationOperationEditPart) childEditPart)
+					.setLabel(getPrimaryShape().getFigureUnaryOpLabelAppli());
+			return true;
+		}
 		if (childEditPart instanceof ApplicationNameEditPart) {
 			((ApplicationNameEditPart) childEditPart)
 					.setLabel(getPrimaryShape()
 							.getFigureApplicationNameFigure());
-			return true;
-		}
-		if (childEditPart instanceof ApplicationOperationEditPart) {
-			((ApplicationOperationEditPart) childEditPart)
-					.setLabel(getPrimaryShape().getFigureUnaryOpLabelAppli());
 			return true;
 		}
 		return false;
@@ -130,10 +130,10 @@ public class ApplicationEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean removeFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof ApplicationNameEditPart) {
+		if (childEditPart instanceof ApplicationOperationEditPart) {
 			return true;
 		}
-		if (childEditPart instanceof ApplicationOperationEditPart) {
+		if (childEditPart instanceof ApplicationNameEditPart) {
 			return true;
 		}
 		return false;

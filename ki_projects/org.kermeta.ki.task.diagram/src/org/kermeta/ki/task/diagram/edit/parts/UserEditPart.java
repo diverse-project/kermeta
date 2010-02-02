@@ -112,14 +112,14 @@ public class UserEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof UserOperationEditPart) {
-			((UserOperationEditPart) childEditPart).setLabel(getPrimaryShape()
-					.getFigureUnaryOpLabelUser());
-			return true;
-		}
 		if (childEditPart instanceof UserNameEditPart) {
 			((UserNameEditPart) childEditPart).setLabel(getPrimaryShape()
 					.getFigureUserNameFigure());
+			return true;
+		}
+		if (childEditPart instanceof UserOperationEditPart) {
+			((UserOperationEditPart) childEditPart).setLabel(getPrimaryShape()
+					.getFigureUnaryOpLabelUser());
 			return true;
 		}
 		return false;
@@ -129,10 +129,10 @@ public class UserEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean removeFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof UserOperationEditPart) {
+		if (childEditPart instanceof UserNameEditPart) {
 			return true;
 		}
-		if (childEditPart instanceof UserNameEditPart) {
+		if (childEditPart instanceof UserOperationEditPart) {
 			return true;
 		}
 		return false;

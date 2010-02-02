@@ -12,8 +12,8 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://org.kermeta.ki.task"
-            class="org.kermeta.ki.task.taskPackage"
+            uri="http://www.kermeta.org/ki/task"
+            class="org.kermeta.ki.task.TaskPackage"
             genModel="model/task.genmodel"/>
    </extension>
 

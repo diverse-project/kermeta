@@ -2,12 +2,15 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ki Task
 Bundle-SymbolicName: org.kermeta.ki.task;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Bundle-ClassPath: .
 Bundle-Vendor: Triskell Team, INRIA, France
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.kermeta.ki.task.model;bundle-version="1.0.1",
+ org.kermeta.ki.task.model.edit;bundle-version="1.0.1",
+ org.kermeta.ki.task.model.editor;bundle-version="1.0.1"
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

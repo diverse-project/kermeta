@@ -103,37 +103,37 @@ public class TaskNavigatorLabelProvider extends LabelProvider implements
 		switch (TaskVisualIDRegistry.getVisualID(view)) {
 		case TaskModelEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Diagram?http://task?TaskModel", TaskElementTypes.TaskModel_1000); //$NON-NLS-1$
+					"Navigator?Diagram?http://www.kermeta.org/ki/task?TaskModel", TaskElementTypes.TaskModel_1000); //$NON-NLS-1$
 		case UserEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://task?User", TaskElementTypes.User_2001); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://www.kermeta.org/ki/task?User", TaskElementTypes.User_2001); //$NON-NLS-1$
 		case InteractionEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://task?Interaction", TaskElementTypes.Interaction_2002); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://www.kermeta.org/ki/task?Interaction", TaskElementTypes.Interaction_2002); //$NON-NLS-1$
 		case ApplicationEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://task?Application", TaskElementTypes.Application_2003); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://www.kermeta.org/ki/task?Application", TaskElementTypes.Application_2003); //$NON-NLS-1$
 		case AbstractEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://task?Abstract", TaskElementTypes.Abstract_2004); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://www.kermeta.org/ki/task?Abstract", TaskElementTypes.Abstract_2004); //$NON-NLS-1$
 		case EnablingEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://task?Enabling", TaskElementTypes.Enabling_4001); //$NON-NLS-1$
+					"Navigator?Link?http://www.kermeta.org/ki/task?Enabling", TaskElementTypes.Enabling_4001); //$NON-NLS-1$
 		case EnablingWithInformationEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://task?EnablingWithInformation", TaskElementTypes.EnablingWithInformation_4002); //$NON-NLS-1$
+					"Navigator?Link?http://www.kermeta.org/ki/task?EnablingWithInformation", TaskElementTypes.EnablingWithInformation_4002); //$NON-NLS-1$
 		case Interleaving2EditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://task?Interleaving", TaskElementTypes.Interleaving_4003); //$NON-NLS-1$
+					"Navigator?Link?http://www.kermeta.org/ki/task?Interleaving", TaskElementTypes.Interleaving_4003); //$NON-NLS-1$
 		case InterleavingEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://task?Synchronization", TaskElementTypes.Synchronization_4004); //$NON-NLS-1$
+					"Navigator?Link?http://www.kermeta.org/ki/task?Synchronization", TaskElementTypes.Synchronization_4004); //$NON-NLS-1$
 		case DesactivationEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://task?desactivation", TaskElementTypes.Desactivation_4005); //$NON-NLS-1$
+					"Navigator?Link?http://www.kermeta.org/ki/task?desactivation", TaskElementTypes.Desactivation_4005); //$NON-NLS-1$
 		case TaskSubtasksEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://task?Task?subtasks", TaskElementTypes.TaskSubtasks_4006); //$NON-NLS-1$
+					"Navigator?Link?http://www.kermeta.org/ki/task?Task?subtasks", TaskElementTypes.TaskSubtasks_4006); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}

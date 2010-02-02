@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ki Task Model
 Bundle-SymbolicName: org.kermeta.ki.task.model;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Bundle-ClassPath: .
 Bundle-Vendor: Triskell Team, INRIA, France
 Bundle-Localization: plugin
