@@ -1,0 +1,73 @@
+/* $Id:$ 
+ * Creation : February 1, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+@mainClass "uml::Launcher"
+@mainOperation "launch"
+
+
+package uml;
+
+
+require kermeta
+
+require "Uml2FsmPass1.kmt"
+require "Uml2FsmPass2.kmt"
+
+using kermeta::persistence
+
+class Launcher
+{
+	operation launch(modelFile : String) : Void is do 
+		
+		//var modelFile : String init "platform:/resource/org.openembedd.formations.samples.kermeta02/model/SimpleMachine.uml"
+		
+		// loading the model
+		var rep : EMFRepository init EMFRepository.new
+		//rep.registerEcoreFile("http://www.kermeta.org/fsm")
+		var res : Resource init rep.getResource(modelFile)
+		var model : uml::Model
+		model ?= res.one
+		
+		stdio.writeln(model.name)
+		
+		// pass 1
+		model.uml2fsmPass1
+
+		stdio.writeln("Pass 1 done")
+		
+		// pass 2
+		model.uml2fsmPass2
+		
+		stdio.writeln("Pass 2 done")
+		
+		// retrieve FSM
+		//var myFSM : fsm::FSM init model.packagedElement.one.packagedElement.one.output
+		
+		var myPackage : uml::Package init model.packagedElement.one.asType(uml::Package)
+		var myStateMachine : uml::StateMachine init myPackage.packagedElement.one .asType(uml::StateMachine)
+		
+		var myFSM : fsm::FSM init myStateMachine.output
+		
+		
+		myFSM.ownedState.each{state | 
+			stdio.writeln("State : " + state.name)
+			state.outgoingTransition.each{outT | stdio.writeln("  outT : " + outT.input + "/" + outT.output)}
+
+		}
+		//stdio.writeln(myFSM.name)
+		
+		// saving the model
+		
+		var outputRep : EMFRepository init EMFRepository.new
+		var outputRes : EMFResource
+		
+		outputRes ?= outputRep.createResource("platform:/resource/org.openembedd.formations.samples.kermeta02/model/TransformedFSM.fsm",
+					"http://www.kermeta.org/fsm")
+		outputRes.add(myFSM)
+		outputRes.save
+	end
+}
