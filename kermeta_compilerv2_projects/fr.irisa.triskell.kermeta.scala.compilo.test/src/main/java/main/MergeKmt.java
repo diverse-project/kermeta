@@ -126,9 +126,10 @@ public class MergeKmt {
 				KermetaUnit mergedUnit = merger
 						.process(
 								l,
-								"platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test" +s.substring(0,s.length()-1),
+								"platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/" +s.substring(0,s.length()-1),
 								true, true);
-				System.out.println("Mergin and Saving done");
+				
+				System.out.println("Mergin and Saving done for " +"platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/" +s.substring(0,s.length()-1));
 			}
 		}
 
