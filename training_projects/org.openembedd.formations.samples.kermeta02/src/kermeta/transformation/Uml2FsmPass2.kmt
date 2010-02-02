@@ -73,4 +73,15 @@ aspect class Vertex {
 
 aspect class Transition {
 	// nothing to do as in FSM transitions are links
+	reference fsmTransition : fsm::Transition
+	//reference outModel : fsm::FSM
+	method uml2fsmPass2() is do
+		
+		fsmTransition.target := self.target.output
+		fsmTransition.source := self.source.output
+		fsmTransition.input := self.name
+		fsmTransition.output := "to state " + self.target.name		
+		fsmTransition.source.outgoingTransition.add(fsmTransition)
+	
+	end
 }

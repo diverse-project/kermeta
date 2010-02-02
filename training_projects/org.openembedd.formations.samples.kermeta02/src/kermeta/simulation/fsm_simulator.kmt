@@ -56,9 +56,12 @@ aspect class FSM
 }
 
 class Simulator {
-	operation main(modelFile : String) : Void is do
+/*modelFile : String*/
+	operation main() : Void is do
+	
+	//stdio.writeln("loading " + modelFile)
 		var rep : EMFRepository init EMFRepository.new
-		var res : Resource init rep.getResource(modelFile)
+		var res : Resource init rep.getResource(/*modelFile*/"platform:/resource/org.openembedd.formations.samples.kermeta02/model/TransformedFSM.fsm")
 		var model : FSM
 		model ?= res.one
 		model.currentState := model.initialState

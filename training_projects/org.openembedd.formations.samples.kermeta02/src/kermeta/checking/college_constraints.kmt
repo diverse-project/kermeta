@@ -12,6 +12,8 @@ package CollegeMM;
 require kermeta
 require "platform:/resource/org.openembedd.formations.samples.kermeta02/metamodel/CollegeMM.ecore"
 
+using kermeta::standard
+
 aspect class Lesson {
 	inv lessonHasTeacher is do
 		self.teacher != void
@@ -27,15 +29,30 @@ aspect class Lesson {
 	end
 }
 
+
 class Verification
 {
-	operation main() : Void is do 
-		var rep : kermeta::persistence::Repository init kermeta::persistence::EMFRepository.new
-		var res : kermeta::persistence::Resource init rep.getResource(
-			"platform:/resource/org.openembedd.formations.samples.kermeta02/model/MyCollege.xmi")
+	operation main(modelFile : String) : Void is do 
+		var rep : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+		
+		rep.registerEcoreFile("platform:/resource/org.openembedd.formations.samples.kermeta02/metamodel/CollegeMM.ecore")
+		
+		var res : kermeta::persistence::Resource init rep.getResource(modelFile)
+//			"platform:/resource/org.openembedd.formations.samples.kermeta02/model/MyCollege.xmi")
 //			"platform:/resource/org.openembedd.formations.samples.kermeta02/model/NotAGoodCollege.xmi")
 		var model : CollegeMM::College
 		model ?= res.one
-		model.checkAllInvariants
+		
+		stdio.writeln("Debug Begin check")
+		var cd : kermeta::exceptions::ConstraintsDiagnostic init model.getViolatedConstraints
+		//model.checkAllInvariants
+		stdio.writeln("Debug end check")
+		
+		if cd.setConstraints.isEmpty() then
+			stdio.writeln("getViolatedConstraints OK")
+		else
+			cd.prettyPrint
+		end
+		
 	end
 }
