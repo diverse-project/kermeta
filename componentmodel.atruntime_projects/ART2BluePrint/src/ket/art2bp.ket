@@ -42,7 +42,7 @@ parameters="cpt : art::instance::PrimitiveInstance"
 		<!-- Bindings -->
 		<%cpt.type.port.each{p | %>
 			<%if cpt.binding.exists{b | b.client == p} then%>
-			<property name="<%=p.name%> ref="<%=cpt.name%>_<%=p.name%>" />
+			<property name="<%=p.name%>" ref="<%=cpt.name%>_<%=p.name%>" />
 			<%end%>
 		<%}%>		
 	</bean>

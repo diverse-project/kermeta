@@ -62,7 +62,7 @@ _res.append("")
 if cpt.binding.exists{b | b.client == p} then
 _res.append("\t\t\t<property name=\"")
 _res.append(p.name)
-_res.append(" ref=\"")
+_res.append("\" ref=\"")
 _res.append(cpt.name)
 _res.append("_")
 _res.append(p.name)
