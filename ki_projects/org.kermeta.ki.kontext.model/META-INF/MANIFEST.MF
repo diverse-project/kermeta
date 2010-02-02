@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kontext Model
+Bundle-SymbolicName: org.kermeta.ki.kontext.model;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: Triskell Team, INRIA Rennes, France
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: kontext,
+ kontext.impl,
+ kontext.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.kermeta.ki.task.model;bundle-version="1.0.1"
+Bundle-ActivationPolicy: lazy

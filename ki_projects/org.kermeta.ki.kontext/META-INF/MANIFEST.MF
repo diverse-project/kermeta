@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kontext
+Bundle-SymbolicName: org.kermeta.ki.kontext
+Bundle-Version: 1.0.0
+Bundle-Vendor: Triskell Team, INRIA Rennes, France
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

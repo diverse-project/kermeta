@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <wizard
+            id="kontext.presentation.KontextModelWizardID"
+            name="Kontext Model Editor"
+            class="kontext.presentation.KontextModelWizard"
+            category="org.kermeta.ki"
+            icon="icons/full/obj16/KontextModelFile.gif">
+         <description>%_UI_KontextModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+      <category
+            id="org.kermeta.ki"
+            name="Ki">
+      </category>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="kontext.presentation.KontextEditorID"
+            name="%_UI_KontextEditor_label"
+            icon="icons/full/obj16/KontextModelFile.gif"
+            extensions="kontext"
+            class="kontext.presentation.KontextEditor"
+            contributorClass="kontext.presentation.KontextActionBarContributor">
+      </editor>
+   </extension>
+
+
+
+</plugin>
