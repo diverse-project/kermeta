@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:implem="http://art/implem" xmlns:instance="http://art/instance" xmlns:type="http://art/type">
+  <root>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="instance1.1" type="//@types.0">
+      <attribute xsi:type="instance:ValuedAttribute" value="value1" attribute="//@types.0/@attribute.0"/>
+      <attribute xsi:type="instance:ValuedAttribute" value="value2" attribute="//@types.0/@attribute.1"/>
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.0/@attribute.2">
+        <entries xsi:type="instance:DefaultEntry" value="divaValue1" key="//@types.0/@attribute.2/@keys.0"/>
+        <entries xsi:type="instance:OtherEntry" value="dicoValue2" key="otherEntry"/>
+      </attribute>
+      <binding serverInstance="//@root/@subComponent.1" id="binding1" client="//@types.0/@port.0" server="//@types.1/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.2" id="binding2" client="//@types.0/@port.1" server="//@types.1/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.3" id="binding3" client="//@types.0/@port.1" server="//@types.1/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.art.toto"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="instance2.1" type="//@types.1">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.art.titi1"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="instance2.2" type="//@types.1">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.art.titi2"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="instance2.3" type="//@types.1">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="org.art.titi3"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="service1"/>
+  <types xsi:type="type:PrimitiveType" name="type1">
+    <port xsi:type="type:Port" name="type1.port1" lower="1" upper="1" service="//@services.0" role="client"/>
+    <port xsi:type="type:Port" name="type1.port2" lower="0" upper="-1" service="//@services.0" role="client" isOptional="true"/>
+    <attribute xsi:type="type:BasicAttribute" name="attribute1" type="//@dataTypes.0"/>
+    <attribute xsi:type="type:BasicAttribute" name="attribute2" type="//@dataTypes.0"/>
+    <attribute xsi:type="type:Dictionary" name="dico1" type="//@dataTypes.0" valueType="//@dataTypes.0">
+      <keys key="defaultEntry1" value="defaultValue1"/>
+      <keys key="defaultEntry2" value="defaultValue2"/>
+    </attribute>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="type2">
+    <port xsi:type="type:Port" name="type2.port1" lower="1" upper="1" service="//@services.0" role="server"/>
+  </types>
+  <dataTypes name="datatype1"/>
+</art:System>

@@ -1,0 +1,118 @@
+package art2bp;
+require kermeta
+require "http://art"
+using kermeta::standard
+using kermeta::utils
+using art
+using art::instance
+using art::type
+using art::implem
+class XMLGenerator{
+operation generate(cpt : art::instance::PrimitiveInstance):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->\n<blueprint xmlns=\"http://www.osgi.org/xmlns/blueprint/v1.0.0\"\n\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n\txsi:schemaLocation=\"\n    http://www.osgi.org/xmlns/blueprint/v1.0.0 \n    http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd\">\n\n\t<!-- create the bean -->\n\t<bean id=\"")
+_res.append(cpt.name)
+_res.append("\" class=\"")
+_res.append(cpt.implem.asType(OSGiComponent).implementingClass)
+_res.append("\" init-method=\"start\" destroy-method=\"stop\">\n\t\t<!-- Attributes -->\n")
+cpt.~attribute.each{ a | 
+_res.append("")
+if a.isKindOf(ValuedAttribute) then 
+_res.append("\t\t\t<property name=\"")
+_res.append(a.asType(ValuedAttribute).~attribute.name)
+_res.append("\" value=\"")
+_res.append(a.asType(ValuedAttribute).~value)
+_res.append("\" />\n")
+else
+_res.append("\t\t\t<property name=\"")
+_res.append(a.asType(DictionaryValuedAttribute).~attribute.name)
+_res.append("\">\n\t\t\t\t<props>\n")
+a.asType(DictionaryValuedAttribute).entries.each{e | 
+_res.append("")
+if e.isKindOf(DefaultEntry) then
+_res.append("\t\t\t\t\t<prop key=\"")
+_res.append(e.asType(DefaultEntry).key.key)
+_res.append("\">")
+_res.append(e.asType(DefaultEntry).~value)
+_res.append("</prop>\n")
+else
+_res.append("\t\t\t\t\t<prop key=\"")
+_res.append(e.asType(OtherEntry).key)
+_res.append("\">")
+_res.append(e.asType(OtherEntry).~value)
+_res.append("</prop>\n")
+end
+_res.append("")
+}
+_res.append("")
+a.asType(DictionaryValuedAttribute).~attribute.keys.select{ k | not a.asType(DictionaryValuedAttribute).entries.exists{e | e.isKindOf(DefaultEntry).andThen{b | e.asType(DefaultEntry).key == k}}}.each{k | 
+_res.append("\t\t\t\t\t<prop key=\"")
+_res.append(k.key)
+_res.append("\">")
+_res.append(k.~value)
+_res.append("</prop>\n")
+}
+_res.append("\t\t\t\t</props>\n\t\t\t</property>\n")
+end
+_res.append("")
+}
+_res.append("\t\t\n\t\t<!-- Bindings -->\n")
+cpt.type.port.each{p | 
+_res.append("")
+if cpt.binding.exists{b | b.client == p} then
+_res.append("\t\t\t<property name=\"")
+_res.append(p.name)
+_res.append(" ref=\"")
+_res.append(cpt.name)
+_res.append("_")
+_res.append(p.name)
+_res.append("\" />\n")
+end
+_res.append("")
+}
+_res.append("\t</bean>\n\n")
+cpt.type.port.each{p | 
+_res.append("")
+if cpt.binding.exists{b | b.client == p} then
+_res.append("")
+if p.asType(Port).upper>1 or p.asType(Port).upper==-1 then
+_res.append("")
+var severalServers : Boolean init cpt.binding.select{b | b.client == p}.size>1
+_res.append("<reference-list id=\"")
+_res.append(cpt.name)
+_res.append("_")
+_res.append(p.name)
+_res.append("\" interface=\"")
+_res.append(p.service.name)
+_res.append("\" filter=\"")
+if severalServers then
+_res.append("(|")
+end
+cpt.binding.select{b | b.client == p}.each{b |
+_res.append("(name=")
+_res.append(b.serverInstance.name)
+_res.append(")")
+}
+if severalServers then
+_res.append(")")
+end
+_res.append("\" />\t\t\n")
+else
+_res.append("<reference id=\"")
+_res.append(cpt.name)
+_res.append("_")
+_res.append(p.name)
+_res.append("\" interface=\"")
+_res.append(p.service.name)
+_res.append("\" filter=\"(name=")
+_res.append(cpt.binding.detect{b | b.client == p}.serverInstance.name)
+_res.append(")\" />\n")
+end
+_res.append("")
+end
+_res.append("")
+}
+_res.append("</blueprint>")
+result := _res.toString
+end
+}

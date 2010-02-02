@@ -1,0 +1,60 @@
+<%@ket
+package="art2bp"
+require="http://art"
+using="art art::instance art::type art::implem"
+isAspectClass="false"
+class="XMLGenerator"
+ismethod="false"operation="generate"
+parameters="cpt : art::instance::PrimitiveInstance"
+%>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+    http://www.osgi.org/xmlns/blueprint/v1.0.0 
+    http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+	<!-- create the bean -->
+	<bean id="<%=cpt.name%>" class="<%=cpt.implem.asType(OSGiComponent).implementingClass%>" init-method="start" destroy-method="stop">
+		<!-- Attributes -->
+		<%cpt.~attribute.each{ a | %>
+			<%if a.isKindOf(ValuedAttribute) then %>
+			<property name="<%=a.asType(ValuedAttribute).~attribute.name%>" value="<%=a.asType(ValuedAttribute).~value%>" />
+			<%else%>
+			<property name="<%=a.asType(DictionaryValuedAttribute).~attribute.name%>">
+				<props>
+					<%a.asType(DictionaryValuedAttribute).entries.each{e | %>
+						<%if e.isKindOf(DefaultEntry) then%>
+					<prop key="<%=e.asType(DefaultEntry).key.key%>"><%=e.asType(DefaultEntry).~value%></prop>
+						<%else%>
+					<prop key="<%=e.asType(OtherEntry).key%>"><%=e.asType(OtherEntry).~value%></prop>
+						<%end%>
+					<%}%>
+					<%a.asType(DictionaryValuedAttribute).~attribute.keys.select{ k | not a.asType(DictionaryValuedAttribute).entries.exists{e | e.isKindOf(DefaultEntry).andThen{b | e.asType(DefaultEntry).key == k}}}.each{k | %>
+					<prop key="<%=k.key%>"><%=k.~value%></prop>
+					<%}%>
+				</props>
+			</property>
+			<%end%>
+		<%}%>
+		
+		<!-- Bindings -->
+		<%cpt.type.port.each{p | %>
+			<%if cpt.binding.exists{b | b.client == p} then%>
+			<property name="<%=p.name%> ref="<%=cpt.name%>_<%=p.name%>" />
+			<%end%>
+		<%}%>		
+	</bean>
+
+<%cpt.type.port.each{p | %>
+	<%if cpt.binding.exists{b | b.client == p} then%>
+		<%if p.asType(Port).upper>1 or p.asType(Port).upper==-1 then%>
+			<%var severalServers : Boolean init cpt.binding.select{b | b.client == p}.size>1%>
+<reference-list id="<%=cpt.name%>_<%=p.name%>" interface="<%=p.service.name%>" filter="<%if severalServers then%>(|<%end%><%cpt.binding.select{b | b.client == p}.each{b |%>(name=<%=b.serverInstance.name%>)<%}%><%if severalServers then%>)<%end%>" />		
+		<%else%>
+<reference id="<%=cpt.name%>_<%=p.name%>" interface="<%=p.service.name%>" filter="(name=<%=cpt.binding.detect{b | b.client == p}.serverInstance.name%>)" />
+		<%end%>
+	<%end%>
+<%}%>		
+</blueprint>
