@@ -27,7 +27,8 @@ class Launcher
 		
 		// loading the model
 		var rep : EMFRepository init EMFRepository.new
-		//rep.registerEcoreFile("http://www.kermeta.org/fsm")
+		rep.registerEcoreFile("platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore")
+		rep.registerEcoreFile("platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore")
 		var res : Resource init rep.getResource(modelFile)
 		var model : uml::Model
 		model ?= res.one
@@ -36,32 +37,28 @@ class Launcher
 		
 		// pass 1
 		model.uml2fsmPass1
-
 		stdio.writeln("Pass 1 done")
 		
 		// pass 2
 		model.uml2fsmPass2
-		
 		stdio.writeln("Pass 2 done")
 		
 		// retrieve FSM
-		//var myFSM : fsm::FSM init model.packagedElement.one.packagedElement.one.output
-		
 		var myPackage : uml::Package init model.packagedElement.one.asType(uml::Package)
 		var myStateMachine : uml::StateMachine init myPackage.packagedElement.one .asType(uml::StateMachine)
 		
 		var myFSM : fsm::FSM init myStateMachine.output
 		
 		
+		/*
 		myFSM.ownedState.each{state | 
 			stdio.writeln("State : " + state.name)
 			state.outgoingTransition.each{outT | stdio.writeln("  outT : " + outT.input + "/" + outT.output)}
 
 		}
-		//stdio.writeln(myFSM.name)
+		*/
 		
 		// saving the model
-		
 		var outputRep : EMFRepository init EMFRepository.new
 		var outputRes : EMFResource
 		

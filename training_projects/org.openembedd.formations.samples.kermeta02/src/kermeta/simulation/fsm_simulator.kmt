@@ -57,12 +57,12 @@ aspect class FSM
 
 class Simulator {
 /*modelFile : String*/
-	operation main() : Void is do
+	operation main(modelFile : String) : Void is do
 	
 	//stdio.writeln("loading " + modelFile)
 		var rep : EMFRepository init EMFRepository.new
-		rep.registerEcoreFile("platform:/resource/org.openembedd.formations.samples.kermeta02/metamodel/fsm.ecore")
-		var res : Resource init rep.getResource(/*modelFile*/"platform:/resource/org.openembedd.formations.samples.kermeta02/model/MyFSM.fsm")
+		rep.registerEcoreFile("platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore")
+		var res : Resource init rep.getResource(modelFile)
 		var model : FSM
 		model ?= res.one
 		model.currentState := model.initialState

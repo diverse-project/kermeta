@@ -56,7 +56,6 @@ aspect class Vertex {
 aspect class Transition {
 	reference fsmTransition : fsm::Transition
 	method uml2fsmPass1() is do
-		stdio.writeln("applying pass 1 to class Transition")
 		fsmTransition := fsm::Transition.new
 	end
 }
