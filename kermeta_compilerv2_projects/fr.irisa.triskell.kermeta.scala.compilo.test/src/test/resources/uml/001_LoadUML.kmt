@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Creation : October 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "uml::Main"
+@mainOperation "main"
+
+
+package uml;
+
+
+require kermeta
+require "http://www.eclipse.org/uml2/3.0.0/UML"
+ 
+using kermeta::standard
+using kermeta::persistence
+class Main
+
+{
+	operation main() : Void is do 
+ 		 var repository : EMFRepository init EMFRepository.new
+		 var resource : EMFResource 
+ 		resource ?= repository.getResource("platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/models/vehicules.uml")
+		resource.load
+ 		var a : Model
+ 		a?= resource.contents.one
+ 		a.packagedElement.select{p| p.isInstanceOf(Package)}.each{p|
+			stdio.writeln(p.asType(Package).name)
+		}
+		
+	end
+}
+
