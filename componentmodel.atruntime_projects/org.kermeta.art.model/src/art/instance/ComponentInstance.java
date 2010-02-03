@@ -46,6 +46,11 @@ public interface ComponentInstance extends ModelElement {
 	public String getQualifiedName();
 	
 	/**
+	 * @generated NOT
+	 */
+	public boolean isCycling();
+	
+	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>

@@ -26,6 +26,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -78,6 +79,33 @@ public abstract class ComponentInstanceImpl extends ModelElementImpl implements 
 		return qName;
 	}
 
+	/**
+	 * @generated NOT
+	 */
+	public boolean isCycling(){
+		boolean isCycling = false;
+		
+		EList<ComponentInstance> servers = new BasicEList<ComponentInstance>();
+		for(TransmissionBinding b : this.getBinding()){
+			servers.add(b.getServerInstance());
+		}
+		
+		int prevSize = 0;
+		while(!(isCycling || prevSize == servers.size())){
+			prevSize = servers.size();
+			EList<ComponentInstance> tempServers = new BasicEList<ComponentInstance>();
+			for(ComponentInstance c : servers){
+				for(TransmissionBinding b : c.getBinding()){
+					tempServers.add(b.getServerInstance());
+				}
+			}
+			servers.addAll(tempServers);
+			isCycling = servers.contains(this);
+		}
+		
+		return isCycling;
+	}
+	
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
