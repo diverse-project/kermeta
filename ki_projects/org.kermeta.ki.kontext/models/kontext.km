@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/ Ecore.km#/ task.km#/">
+  <packages name="kontext" uri="http://www.kermeta.org/ki/kontext">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ContextToTask"
+        superType="#//@packages.0/ContextToTask/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="constraints" type="#//@packages.0/ContextToTask/constraints/@containedType.0"
+          isOrdered="true" upper="-1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/ContextToTaskConstraint"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ContextToTaskConstraint"
+        superType="#//@packages.0/ContextToTaskConstraint/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="exp" type="#//@packages.0/ContextToTaskConstraint/exp/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Expression"/>
+      </ownedAttribute>
+      <ownedAttribute name="name" type="Ecore.km#//@packages.0/EString" isOrdered="true"
+          upper="1" isComposite="true"/>
+      <ownedAttribute name="classes" type="#//@packages.0/ContextToTaskConstraint/classes/@containedType.0"
+          isOrdered="true" lower="1" upper="-1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition Ecore.km#//@packages.0/EClass"/>
+      </ownedAttribute>
+      <ownedAttribute name="tasks" type="#//@packages.0/ContextToTaskConstraint/tasks/@containedType.0"
+          isOrdered="true" lower="1" upper="-1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition task.km#//@packages.0/Task"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Expression"
+        superType="#//@packages.0/Expression/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="text" type="Ecore.km#//@packages.0/EString" isOrdered="true"
+          upper="1" isComposite="true"/>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <requires uri="http://www.eclipse.org/emf/2002/Ecore"/>
+  <requires uri="http://www.kermeta.org/ki/task"/>
+  <usings qualifiedName="kontext"/>
+</kermeta_language_structure:ModelingUnit>

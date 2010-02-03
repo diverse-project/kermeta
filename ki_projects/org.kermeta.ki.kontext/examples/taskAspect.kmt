@@ -1,0 +1,26 @@
+@uri "http://www.kermeta.org/ki/taskAspect"
+package taskAspect;
+
+require "kermeta"
+require "http://www.eclipse.org/emf/2002/Ecore"
+class TaskAspectModel
+{
+	attribute trunks : Task[0..*]
+
+	attribute aspects : TaskAspect[0..*]
+
+}
+class Task
+{
+	attribute name : ecore::EString
+
+	attribute subTasks : Task[0..*]
+
+}
+class TaskAspect
+{
+	attribute subAspects : TaskAspect[0..*]
+
+	attribute tasks : Task[0..*]
+
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<taskAspect:TaskAspectModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:taskAspect="http://www.kermeta.org/ki/taskAspect">
+  <trunks name="G&#xe9;rer Maison"/>
+  <aspects>
+    <tasks name="G&#xe9;rer Lumi&#xe8;re">
+      <subTasks name="S&#xe9;lectionner Pi&#xe8;ce"/>
+      <subTasks name="S&#xe9;lectionner Lampe"/>
+      <subTasks name="G&#xe9;rer Lampe">
+        <subTasks name="Allumer Lampe"/>
+        <subTasks name="Eteindre Lampe"/>
+      </subTasks>
+    </tasks>
+  </aspects>
+  <aspects>
+    <tasks name="G&#xe9;rer Temp&#xe9;rature"/>
+  </aspects>
+  <aspects>
+    <tasks name="G&#xe9;rer Personnes"/>
+  </aspects>
+</taskAspect:TaskAspectModel>

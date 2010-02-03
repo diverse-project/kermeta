@@ -1,0 +1,164 @@
+/* $Id:$ 
+ * Creation : February 2, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "org::kermeta::ki::kontext::Main"
+@mainOperation "main"
+
+
+package org::kermeta::ki::kontext;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.task/models/task.ecore"
+require "platform:/resource/org.kermeta.ki.kontext/models/kontext.ecore"
+require "platform:/resource/org.kermeta.ki.kontext/examples/taskAspect.ecore"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using task
+using kontext
+using taskAspect
+
+
+
+class AspectsGenerator {
+
+	attribute tasksContrained : taskAspect::Task[0..*]
+	
+
+	operation displayAspects(taskModel : TaskModel, contextModel : ContextToTask) : TaskAspectModel is do
+		setTasksConstrained(contextModel)
+		result := TaskAspectModel.new
+		
+		var roots : Collection<task::Task> init taskModel.tasks.select{ 
+				t1 | not taskModel.tasks.exists{t2 | not t1.equals(t2) and t2.subtasks.exists{t3 | t3.equals(t1)}}
+		}
+		
+		roots.each { t |
+			var taskConstrained : taskAspect::Task init tasksContrained.detect{t2 | t2.name.equals(t.name)}
+			var asp : TaskAspect
+			
+			if(taskConstrained==void) then
+				taskConstrained := taskAspect::Task.new
+				taskConstrained.name := t.name
+				result.trunks.add(taskConstrained)
+			else
+				asp := TaskAspect.new
+				asp.tasks.add(taskConstrained)
+				result.aspects.add(asp)
+			end
+			
+			scan(t, asp, taskConstrained, contextModel, result)
+		}
+	end
+	
+	
+	operation scan(parentTask : Task, parentAspect : TaskAspect, parentKontextTask : taskAspect::Task, 
+				contextModel : ContextToTask, taskAspectModel : TaskAspectModel) is do
+		parentTask.subtasks.each{t |
+			var myAspect : TaskAspect
+			var taskConstrained : taskAspect::Task init tasksContrained.detect{t2 | t2.name.equals(t.name)}
+			
+			if(taskConstrained==void) then
+				myAspect := parentAspect
+				taskConstrained := taskAspect::Task.new
+				taskConstrained.name := t.name
+				parentKontextTask.subTasks.add(taskConstrained)
+			else
+				myAspect := TaskAspect.new
+				myAspect.tasks.add(taskConstrained)
+				
+				if(parentAspect==void) then
+					taskAspectModel.aspects.add(myAspect)
+				else
+					parentAspect.subAspects.add(myAspect)
+				end
+			end
+			
+			scan(t, myAspect, taskConstrained, contextModel, taskAspectModel)
+		}
+	end
+	
+	
+	
+    operation setTasksConstrained(contextModel : ContextToTask) is do
+    	contextModel.constraints.each{ c | 
+    			c.tasks.each{ ct |
+    			var task : taskAspect::Task init taskAspect::Task.new
+    			task.name := ct.name
+    			tasksContrained.add(task)
+    			}
+    	}
+   end
+}
+
+
+
+
+class Main {
+
+	operation main() is do
+		var taskModel    : TaskModel init loadTaskModel
+		var contextModel : ContextToTask init loadContextModel
+		var aspectsGen   : AspectsGenerator init AspectsGenerator.new
+		var outputModel : TaskAspectModel init aspectsGen.displayAspects(taskModel, contextModel)
+		
+		var repository : EMFRepository init EMFRepository.new repository.registerEcoreFile("platform:/resource/org.kermeta.ki.kontext/examples/taskAspect.ecore")
+        var resource : Resource init repository.createResource("platform:/resource/org.kermeta.ki.kontext/examples/outputAspects.xmi",
+	        							 					 	"platform:/resource/org.kermeta.ki.kontext/examples/taskAspect.ecore")
+	        							 					 	
+		resource.instances.add(outputModel)
+	 	resource.save()
+       
+       rescue (e : kermeta::exceptions::ResourceLoadException)
+           metamodelRegistration(e)
+	end
+	
+	
+   operation metamodelRegistration(e : kermeta::exceptions::ResourceLoadException) is do
+            stdio.writeln("Problem when loading the model. ENSURE YOU HAVE REGISTERED THE METAMODELS !\n"
+                     +"You can find additional information about thise sample on Kermeta web site : http://kermeta.org/examples")
+            raise e
+   end
+   
+	
+	operation loadContextModel() : ContextToTask is do
+   		var repository : EMFRepository init EMFRepository.new
+   		repository.registerEcoreFile("platform:/resource/org.kermeta.ki.kontext/models/kontext.ecore")             
+   		var resource : Resource init repository.createResource("platform:/resource/org.kermeta.ki.kontext/examples/mapping.kontext",
+																"platform:/resource/org.kermeta.ki.kontext/models/kontext.ecore")
+       	resource.load()
+		
+		from var it : Iterator<Object> init resource.instances.iterator
+		until it.isOff
+		loop
+			var next : Object init it.next
+			if(ContextToTask.isInstance(next)) then                 
+				result ?= next
+			end
+		end
+	end
+	
+	
+	
+	operation loadTaskModel() : TaskModel is do
+   		var repository : EMFRepository init EMFRepository.new
+   		repository.registerEcoreFile("platform:/resource/org.kermeta.ki.task/models/task.ecore")             
+   		var resource : Resource init repository.createResource("platform:/resource/org.kermeta.ki.kontext/examples/default.task",
+																"platform:/resource/org.kermeta.ki.task/models/task.ecore")
+       	resource.load()
+		
+		from var it : Iterator<Object> init resource.instances.iterator
+		until it.isOff
+		loop
+			var next : Object init it.next
+			if(TaskModel.isInstance(next)) then                 
+				result ?= next
+			end
+		end
+	end
+}

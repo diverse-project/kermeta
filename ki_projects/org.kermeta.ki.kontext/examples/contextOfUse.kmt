@@ -1,0 +1,128 @@
+/* $Id:$ 
+ * Creation : January 25, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+//@mainClass "model::Main"
+//@mainOperation "main"
+
+
+package contextOfUse;
+
+
+require kermeta
+using kermeta::standard
+
+
+abstract class User {
+}
+
+
+class GrandMa inherits User{
+}
+
+
+class Nurse inherits User {
+}
+
+
+
+class House {
+	attribute places : set Place[0..*]
+	
+	
+	operation addPlace(place : Place) : Void is do
+		places.add(place)
+	end
+	
+	operation removePlace(place : Place) : Void is do
+		places.remove(place)
+	end
+	
+	operation getPlaces() : set Place[0..*] is do
+		result := places
+	end
+}
+
+
+
+
+class Place {
+	attribute name : String
+	attribute lights : set Light[0..*]
+	attribute heaters : set Heater[0..*]
+	
+	
+	operation addLight(light : Light) : Void is do
+		lights.add(light)
+	end
+	
+	operation removeLight(light : Light) : Void is do
+		lights.remove(light)
+	end
+	
+	operation getLights() : set Light[0..*] is do
+		result := lights
+	end
+	
+	operation addHeater(heater : Heater) : Void is do
+		heaters.add(heater)
+	end
+	
+	operation removeHeater(heater : Heater) : Void is do
+		heaters.remove(heater)
+	end
+	
+	operation getHeaters() : set Heater[0..*] is do
+		result := heaters
+	end
+	
+	operation getName() : String is do
+		result := name
+	end
+
+	operation setName(newName : String) : Void is do
+		name := newName
+	end
+}
+
+
+
+class Heater {
+	attribute temperature : Integer
+	
+	
+	operation setTemperature(temp : Integer) : Void is do
+		if(temp>0) then
+			temperature := temp
+		end
+	end
+	
+	operation getTemperature() : Integer is do
+		result := temperature
+	end
+}
+
+
+
+class Light {
+	attribute turnedOn : Boolean
+	
+	
+	operation isSwitchedOn() : Boolean is do
+		result := turnedOn
+	end
+	
+	operation switchOn() : Void is do
+		turnedOn := true
+	end
+	
+	operation switchOff() : Void is do
+		turnedOn := false
+	end
+}
+
+
+
+

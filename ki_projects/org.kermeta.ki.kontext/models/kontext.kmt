@@ -1,0 +1,27 @@
+@uri "http://www.kermeta.org/ki/kontext"
+package kontext;
+
+require "kermeta"
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "http://www.kermeta.org/ki/task"
+class ContextToTask
+{
+	attribute constraints : ContextToTaskConstraint[0..*]
+
+}
+class ContextToTaskConstraint
+{
+	attribute exp : Expression
+
+	attribute name : ecore::EString
+
+	reference classes : ecore::EClass[1..*]
+
+	reference tasks : task::Task[1..*]
+
+}
+class Expression
+{
+	attribute text : ecore::EString
+
+}

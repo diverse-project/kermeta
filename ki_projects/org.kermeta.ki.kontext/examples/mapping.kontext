@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kontext:ContextToTask xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kontext="http://www.kermeta.org/ki/kontext" xmlns:task="http://www.kermeta.org/ki/task">
+  <constraints name="NoLight">
+    <exp text="|places.lights|&lt;1"/>
+    <classes href="contextOfUse.ecore#/1/House"/>
+    <tasks xsi:type="task:Abstract" href="default.task#//@tasks.1"/>
+  </constraints>
+  <constraints name="NoHeater">
+    <exp text="|places.heaters|&lt;1"/>
+    <classes href="contextOfUse.ecore#/1/House"/>
+    <tasks xsi:type="task:Abstract" href="default.task#//@tasks.2"/>
+  </constraints>
+  <constraints name="GrandmaCannotManagePeople">
+    <classes href="contextOfUse.ecore#/1/GrandMa"/>
+    <tasks xsi:type="task:Abstract" href="default.task#//@tasks.3"/>
+  </constraints>
+</kontext:ContextToTask>

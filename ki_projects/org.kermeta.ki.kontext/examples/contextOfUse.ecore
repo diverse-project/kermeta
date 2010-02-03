@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="contextOfUse|kermeta::standard|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="contextOfUse" nsURI="platform:/resource/test/contextOfUse.ecore#/"
+      nsPrefix="contextOfUse">
+    <eClassifiers xsi:type="ecore:EClass" name="User" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="GrandMa" eSuperTypes="#/1/User"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Nurse" eSuperTypes="#/1/User"/>
+    <eClassifiers xsi:type="ecore:EClass" name="House">
+      <eOperations name="addPlace">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;places.add(place)&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="place" eType="#/1/Place"/>
+      </eOperations>
+      <eOperations name="removePlace">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;places.remove(place)&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="place" eType="#/1/Place"/>
+      </eOperations>
+      <eOperations name="getPlaces" ordered="false" upperBound="-1" eType="#/1/Place">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := places&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="places" ordered="false"
+          upperBound="-1" eType="#/1/Place" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Place">
+      <eOperations name="addLight">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;lights.add(light)&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="light" eType="#/1/Light"/>
+      </eOperations>
+      <eOperations name="removeLight">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;lights.remove(light)&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="light" eType="#/1/Light"/>
+      </eOperations>
+      <eOperations name="getLights" ordered="false" upperBound="-1" eType="#/1/Light">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := lights&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="addHeater">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;heaters.add(heater)&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="heater" eType="#/1/Heater"/>
+      </eOperations>
+      <eOperations name="removeHeater">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;heaters.remove(heater)&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="heater" eType="#/1/Heater"/>
+      </eOperations>
+      <eOperations name="getHeaters" ordered="false" upperBound="-1" eType="#/1/Heater">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := heaters&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="getName" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/standard/String">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := name&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="setName">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;name := newName&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="newName" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/standard/String"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#/1/String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lights" ordered="false"
+          upperBound="-1" eType="#/1/Light" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="heaters" ordered="false"
+          upperBound="-1" eType="#/1/Heater" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Heater">
+      <eOperations name="setTemperature">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;if ((temp) > (0)) then&#xA;&#x9;&#x9;temperature := temp&#xA;&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="temp" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/standard/Integer"/>
+      </eOperations>
+      <eOperations name="getTemperature" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/standard/Integer">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := temperature&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="temperature" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/standard/Integer"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Light">
+      <eOperations name="isSwitchedOn" eType="#/1/Boolean">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := turnedOn&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="switchOn">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;turnedOn := true&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="switchOff">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;turnedOn := false&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="turnedOn" eType="#/1/Boolean">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

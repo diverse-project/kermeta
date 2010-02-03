@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<task:TaskModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.kermeta.org/ki/task">
+  <operations xsi:type="task:Interleaving" src="//@tasks.1" target="//@tasks.2"/>
+  <operations xsi:type="task:Interleaving" src="//@tasks.2" target="//@tasks.3"/>
+  <operations xsi:type="task:EnablingWithInformation" src="//@tasks.4" target="//@tasks.5"/>
+  <operations xsi:type="task:EnablingWithInformation" src="//@tasks.5" target="//@tasks.6"/>
+  <operations xsi:type="task:Interleaving" src="//@tasks.7" target="//@tasks.8"/>
+  <tasks xsi:type="task:Abstract" name="Gérer Maison" subtasks="//@tasks.1 //@tasks.2 //@tasks.3"/>
+  <tasks xsi:type="task:Abstract" name="Gérer Lumière" subtasks="//@tasks.4 //@tasks.5 //@tasks.6"/>
+  <tasks xsi:type="task:Abstract" name="Gérer Température"/>
+  <tasks xsi:type="task:Abstract" name="Gérer Personnes"/>
+  <tasks xsi:type="task:User" name="Sélectionner Pièce"/>
+  <tasks xsi:type="task:User" name="Sélectionner Lampe"/>
+  <tasks xsi:type="task:Abstract" name="Gérer Lampe" subtasks="//@tasks.7 //@tasks.8"/>
+  <tasks xsi:type="task:User" name="Allumer Lampe"/>
+  <tasks xsi:type="task:User" name="Eteindre Lampe"/>
+</task:TaskModel>

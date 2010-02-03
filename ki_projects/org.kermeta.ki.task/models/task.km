@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/ Ecore.km#/">
+  <packages name="task" uri="http://www.kermeta.org/ki/task">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Task"
+        isAbstract="true" superType="#//@packages.0/Task/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="name" type="Ecore.km#//@packages.0/EString" isOrdered="true"
+          upper="1" isComposite="true"/>
+      <ownedAttribute name="description" type="Ecore.km#//@packages.0/EString" isOrdered="true"
+          upper="1" isComposite="true"/>
+      <ownedAttribute name="subtasks" type="#//@packages.0/Task/subtasks/@containedType.0"
+          isOrdered="true" upper="-1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Task"/>
+      </ownedAttribute>
+      <ownedAttribute name="operation" type="#//@packages.0/UnaryOperation" isOrdered="true"
+          upper="1" isComposite="true"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:Enumeration" name="UnaryOperation">
+      <ownedLiteral name="recursive"/>
+      <ownedLiteral name="iteration"/>
+      <ownedLiteral name="optional"/>
+      <ownedLiteral name="finiteInteraction"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="User"
+        superType="#//@packages.0/User/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Task"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Abstract"
+        superType="#//@packages.0/Abstract/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Task"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Interaction"
+        superType="#//@packages.0/Interaction/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Task"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Application"
+        superType="#//@packages.0/Application/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Task"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Operator"
+        isAbstract="true" superType="#//@packages.0/Operator/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="src" type="#//@packages.0/Operator/src/@containedType.0"
+          isOrdered="true" lower="1" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Task"/>
+      </ownedAttribute>
+      <ownedAttribute name="target" type="#//@packages.0/Operator/target/@containedType.0"
+          isOrdered="true" lower="1" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Task"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TaskModel"
+        superType="#//@packages.0/TaskModel/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="operations" type="#//@packages.0/TaskModel/operations/@containedType.0"
+          isOrdered="true" upper="-1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Operator"/>
+      </ownedAttribute>
+      <ownedAttribute name="tasks" type="#//@packages.0/TaskModel/tasks/@containedType.0"
+          isOrdered="true" upper="-1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Task"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Enabling"
+        superType="#//@packages.0/Enabling/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Operator"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="desactivation"
+        superType="#//@packages.0/desactivation/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Operator"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EnablingWithInformation"
+        superType="#//@packages.0/EnablingWithInformation/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Operator"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Interleaving"
+        superType="#//@packages.0/Interleaving/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Operator"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Synchronization"
+        superType="#//@packages.0/Synchronization/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Operator"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="FiniteIteration"
+        superType="#//@packages.0/FiniteIteration/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Operator"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Recursion"
+        superType="#//@packages.0/Recursion/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Operator"/>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <requires uri="http://www.eclipse.org/emf/2002/Ecore"/>
+  <usings qualifiedName="task"/>
+</kermeta_language_structure:ModelingUnit>

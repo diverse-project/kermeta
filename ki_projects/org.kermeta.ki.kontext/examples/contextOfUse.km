@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <packages name="contextOfUse">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="User"
+        isAbstract="true" superType="#//@packages.0/User/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="GrandMa"
+        superType="#//@packages.0/GrandMa/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/User"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Nurse"
+        superType="#//@packages.0/Nurse/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/User"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="House"
+        superType="#//@packages.0/House/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="places" type="#//@packages.0/House/places/@containedType.0"
+          upper="-1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Place"/>
+      </ownedAttribute>
+      <ownedOperation name="addPlace" type="#//@packages.0/House/addPlace/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="place" type="#//@packages.0/House/addPlace/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Place"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0"
+              name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/House/addPlace/@body/@statement.0/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/House/places/@containedType.0"/>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/House/addPlace/@ownedParameter.0/@containedType.0"
+                name="place"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/House/addPlace/@body/@statement.0/@target/@containedType.0"
+                name="places" staticProperty="#//@packages.0/House/places">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="#//@packages.0/House/places/@containedType.0"/>
+              </containedType>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="removePlace" type="#//@packages.0/House/removePlace/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="place" type="#//@packages.0/House/removePlace/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Place"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/remove/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/remove/@containedType.0"
+              name="remove" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/remove">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/House/removePlace/@body/@statement.0/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/remove/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/House/places/@containedType.0"/>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/House/removePlace/@ownedParameter.0/@containedType.0"
+                name="place"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/House/removePlace/@body/@statement.0/@target/@containedType.0"
+                name="places" staticProperty="#//@packages.0/House/places">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="#//@packages.0/House/places/@containedType.0"/>
+              </containedType>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="getPlaces" type="#//@packages.0/House/getPlaces/@containedType.0"
+          upper="-1">
+        <ownedTags name="EMF_renameAs" value="getPlacesEMF_renameAs"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Place"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/House/getPlaces/@body/@statement.0/@value/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/House/getPlaces/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/House/getPlaces/@body/@statement.0/@target/@containedType.0"
+                name="result">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="#//@packages.0/House/places/@containedType.0"/>
+              </containedType>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/House/getPlaces/@body/@statement.0/@value/@containedType.0"
+                name="places" staticProperty="#//@packages.0/House/places">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="#//@packages.0/House/places/@containedType.0"/>
+              </containedType>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Place"
+        superType="#//@packages.0/Place/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="name" type="#//@packages.0/Place/name/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+      </ownedAttribute>
+      <ownedAttribute name="lights" type="#//@packages.0/Place/lights/@containedType.0"
+          upper="-1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Light"/>
+      </ownedAttribute>
+      <ownedAttribute name="heaters" type="#//@packages.0/Place/heaters/@containedType.0"
+          upper="-1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Heater"/>
+      </ownedAttribute>
+      <ownedOperation name="addLight" type="#//@packages.0/Place/addLight/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="light" type="#//@packages.0/Place/addLight/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Light"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0"
+              name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Place/addLight/@body/@statement.0/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/Place/lights/@containedType.0"/>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Place/addLight/@ownedParameter.0/@containedType.0"
+                name="light"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Place/addLight/@body/@statement.0/@target/@containedType.0"
+                name="lights" staticProperty="#//@packages.0/Place/lights">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="#//@packages.0/Place/lights/@containedType.0"/>
+              </containedType>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="removeLight" type="#//@packages.0/Place/removeLight/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="light" type="#//@packages.0/Place/removeLight/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Light"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/remove/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/remove/@containedType.0"
+              name="remove" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/remove">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Place/removeLight/@body/@statement.0/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/remove/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/Place/lights/@containedType.0"/>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Place/removeLight/@ownedParameter.0/@containedType.0"
+                name="light"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Place/removeLight/@body/@statement.0/@target/@containedType.0"
+                name="lights" staticProperty="#//@packages.0/Place/lights">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="#//@packages.0/Place/lights/@containedType.0"/>
+              </containedType>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="getLights" type="#//@packages.0/Place/getLights/@containedType.0"
+          upper="-1">
+        <ownedTags name="EMF_renameAs" value="getLightsEMF_renameAs"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Light"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Place/getLights/@body/@statement.0/@value/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Place/getLights/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Place/getLights/@body/@statement.0/@target/@containedType.0"
+                name="result">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="#//@packages.0/Place/lights/@containedType.0"/>
+              </containedType>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Place/getLights/@body/@statement.0/@value/@containedType.0"
+                name="lights" staticProperty="#//@packages.0/Place/lights">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="#//@packages.0/Place/lights/@containedType.0"/>
+              </containedType>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="addHeater" type="#//@packages.0/Place/addHeater/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="heater" type="#//@packages.0/Place/addHeater/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Heater"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0"
+              name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Place/addHeater/@body/@statement.0/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/add/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/Place/heaters/@containedType.0"/>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Place/addHeater/@ownedParameter.0/@containedType.0"
+                name="heater"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Place/addHeater/@body/@statement.0/@target/@containedType.0"
+                name="heaters" staticProperty="#//@packages.0/Place/heaters">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="#//@packages.0/Place/heaters/@containedType.0"/>
+              </containedType>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="removeHeater" type="#//@packages.0/Place/removeHeater/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="heater" type="#//@packages.0/Place/removeHeater/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Heater"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/remove/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/remove/@containedType.0"
+              name="remove" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/remove">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Place/removeHeater/@body/@statement.0/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/remove/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/Place/heaters/@containedType.0"/>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Place/removeHeater/@ownedParameter.0/@containedType.0"
+                name="heater"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Place/removeHeater/@body/@statement.0/@target/@containedType.0"
+                name="heaters" staticProperty="#//@packages.0/Place/heaters">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="#//@packages.0/Place/heaters/@containedType.0"/>
+              </containedType>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="getHeaters" type="#//@packages.0/Place/getHeaters/@containedType.0"
+          upper="-1">
+        <ownedTags name="EMF_renameAs" value="getHeatersEMF_renameAs"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Heater"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Place/getHeaters/@body/@statement.0/@value/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Place/getHeaters/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Place/getHeaters/@body/@statement.0/@target/@containedType.0"
+                name="result">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="#//@packages.0/Place/heaters/@containedType.0"/>
+              </containedType>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Place/getHeaters/@body/@statement.0/@value/@containedType.0"
+                name="heaters" staticProperty="#//@packages.0/Place/heaters">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Set/G"
+                    type="#//@packages.0/Place/heaters/@containedType.0"/>
+              </containedType>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="getName" type="#//@packages.0/Place/getName/@containedType.0"
+          isOrdered="true" upper="1">
+        <ownedTags name="EMF_renameAs" value="getNameEMF_renameAs"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Place/name/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Place/name/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Place/getName/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Place/name/@containedType.0"
+                name="name" staticProperty="#//@packages.0/Place/name"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="setName" type="#//@packages.0/Place/setName/@containedType.0"
+          isOrdered="true" upper="1">
+        <ownedTags name="EMF_renameAs" value="setNameEMF_renameAs"/>
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="newName" type="#//@packages.0/Place/setName/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Place/setName/@ownedParameter.0/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Place/setName/@ownedParameter.0/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Place/name/@containedType.0"
+                name="name" staticProperty="#//@packages.0/Place/name"/>
+            <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Place/setName/@ownedParameter.0/@containedType.0"
+                name="newName"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Heater"
+        superType="#//@packages.0/Heater/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="temperature" type="#//@packages.0/Heater/temperature/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+      </ownedAttribute>
+      <ownedOperation name="setTemperature" type="#//@packages.0/Heater/setTemperature/@containedType.0"
+          isOrdered="true" upper="1">
+        <ownedTags name="EMF_renameAs" value="setTemperatureEMF_renameAs"/>
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <ownedParameter name="temp" type="#//@packages.0/Heater/setTemperature/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Heater/setTemperature/@ownedParameter.0/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/Heater/setTemperature/@ownedParameter.0/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Heater/setTemperature/@ownedParameter.0/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Heater/setTemperature/@ownedParameter.0/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Heater/temperature/@containedType.0"
+                    name="temperature" staticProperty="#//@packages.0/Heater/temperature"/>
+                <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Heater/setTemperature/@ownedParameter.0/@containedType.0"
+                    name="temp"/>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreater/@containedType.0"
+                name="isGreater" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreater">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Heater/setTemperature/@body/@statement.0/@condition/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreater/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/Heater/setTemperature/@body/@statement.0/@condition/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Heater/setTemperature/@ownedParameter.0/@containedType.0"
+                  name="temp"/>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="getTemperature" type="#//@packages.0/Heater/getTemperature/@containedType.0"
+          isOrdered="true" upper="1">
+        <ownedTags name="EMF_renameAs" value="getTemperatureEMF_renameAs"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Heater/temperature/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Heater/temperature/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Heater/getTemperature/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Heater/temperature/@containedType.0"
+                name="temperature" staticProperty="#//@packages.0/Heater/temperature"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Light"
+        superType="#//@packages.0/Light/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="turnedOn" type="#//@packages.0/Light/turnedOn/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+      </ownedAttribute>
+      <ownedOperation name="isSwitchedOn" type="#//@packages.0/Light/isSwitchedOn/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Light/turnedOn/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Light/turnedOn/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Light/isSwitchedOn/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Light/turnedOn/@containedType.0"
+                name="turnedOn" staticProperty="#//@packages.0/Light/turnedOn"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="switchOn" type="#//@packages.0/Light/switchOn/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Light/switchOn/@body/@statement.0/@value/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Light/switchOn/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Light/turnedOn/@containedType.0"
+                name="turnedOn" staticProperty="#//@packages.0/Light/turnedOn"/>
+            <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/Light/switchOn/@body/@statement.0/@value/@containedType.0"
+                value="true">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="switchOff" type="#//@packages.0/Light/switchOff/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Light/switchOn/@body/@statement.0/@value/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Light/switchOn/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Light/turnedOn/@containedType.0"
+                name="turnedOn" staticProperty="#//@packages.0/Light/turnedOn"/>
+            <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/Light/switchOn/@body/@statement.0/@value/@containedType.0"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="contextOfUse"/>
+  <usings qualifiedName="kermeta::standard"/>
+</kermeta_language_structure:ModelingUnit>
