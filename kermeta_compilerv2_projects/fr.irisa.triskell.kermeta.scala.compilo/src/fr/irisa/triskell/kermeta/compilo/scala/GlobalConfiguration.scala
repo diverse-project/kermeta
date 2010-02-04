@@ -21,14 +21,11 @@ object GlobalConfiguration {
 	final var outputFolder : String = "../"+outputProject+"/src"
 	final var outputBinFolder : String = "../"+outputProject+"/bin"
 	final var scalaPrefix : String = "Scala"
+	final var scalaAspectPrefix : String = "ScalaAspect"
 	final var workspaceURI : String = "/local/hudson_kermeta/jobs/KermetaCompilerV2_TestCase/workspace/"
 	//final var workspaceURI : String = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/"
 	final var pluginURI : String = "/local/hudson_kermeta/jobs/KermetaCompilerV2_TestCase/workspace/"
 	//final var pluginURI : String = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/"
-		
-		
-		
-		
 		
 
 } 

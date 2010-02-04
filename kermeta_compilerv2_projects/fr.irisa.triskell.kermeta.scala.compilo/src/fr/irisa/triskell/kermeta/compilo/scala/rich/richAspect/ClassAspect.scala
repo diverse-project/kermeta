@@ -64,7 +64,7 @@ trait ClassAspect extends RichAspectImplicit with TypeAspect with ObjectAspect w
 	}
 	
 	override def getQualifiedNameCompilo():String ={
-		return this.getTypeDefinition().getQualifiedNameCompilo();
+		return Util.protectScalaKeyword(this.getTypeDefinition().getQualifiedNameCompilo())
 	}
  	
 	/*

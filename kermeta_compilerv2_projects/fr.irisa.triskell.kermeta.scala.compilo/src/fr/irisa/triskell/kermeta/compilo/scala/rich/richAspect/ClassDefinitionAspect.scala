@@ -31,21 +31,24 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 					if (i==0) {
 						res.append(" extends ")
 						var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
-						res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
 						
+						
+						var packName = kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName)
 						if (Util.hasEcoreTag(ty.eContainer.asInstanceOf[Package]) ){
-							res.append("ScalaAspect")
-								
+							packName = packName+"ScalaAspect"
 						}
+						res.append(Util.protectScalaKeyword(packName))
+						
+						
 						res.append(".")
 						res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
 						res.append("Aspect")
 					}else{
 						res.append(" with ")
 						var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
-						res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
+						res.append(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName)))
 						res.append(".")
-						res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
+						res.append(Util.protectScalaKeyword(superC.asInstanceOf[Class].getTypeDefinition.getName))
 					}
 					i=i+1
 				})
@@ -53,7 +56,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 				res append " with "+ fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
 				res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 				}
-				res append " with "+this.getQualifiedNameCompilo
+				res append " with "+Util.protectScalaKeyword(this.getQualifiedNameCompilo)
 				
 				res.append("{\n")
 				this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))

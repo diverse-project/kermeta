@@ -8,7 +8,6 @@ object EmbettedScalaCompiler extends LogAspect {
 	def compile(srcPATH : String, outputPATH : String, cleanOutput : Boolean, jars : List[String]) : Int = {
 		
 		var startTime = System.currentTimeMillis
-		log.info("Scala compilation step begin")
 		
 		/* Cleaning step */
 		if(cleanOutput){
@@ -19,10 +18,12 @@ object EmbettedScalaCompiler extends LogAspect {
 		var listSrcFiles = InternalCompilerHelper.listFile(new File(srcPATH))
 		/* Build class path */
 		
+		log.info("Scala compilation step begin on "+listSrcFiles.size+" files")
+		
 		var classpath : StringBuilder = new StringBuilder("."+File.pathSeparator)
 		for(path <- jars) { classpath.append(path+File.pathSeparator) }
 		
-		var compilParams = List("-d",outputPATH,"-classpath",classpath.toString) ++ listSrcFiles
+		var compilParams = List("-optimise","-d",outputPATH,"-classpath",classpath.toString) ++ listSrcFiles
 		
 		/* Compilation step */
 		scala.tools.nsc.Main.process(compilParams.toArray)

@@ -10,8 +10,6 @@ import java.util._
 
 trait TypeReferenceAspect extends RichAspectImplicit with ObjectAspect {
 	
-	implicit def rich (xs : TypeReferenceAspect) = xs.asInstanceOf[TypeReference]
-	  
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		//res.append(this.getName)
 		this.getType().generateScalaCode(res)

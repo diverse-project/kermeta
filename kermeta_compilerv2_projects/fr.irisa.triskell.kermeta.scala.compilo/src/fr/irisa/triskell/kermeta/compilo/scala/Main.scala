@@ -79,13 +79,13 @@ object Main extends LogAspect {
 	  var compilo = new Compiler
 	  
 //	  inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/068_testVariableInit.main.km"
-	// inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/037_testLambda.main.km"
+	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/037_testLambda.main.km"
 //	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/078_testAddVoidInReflectiveCollection.main.km"
 	 //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
     // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/012_TypeFromEcore.km"
   // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/015_EcoreDocHelper.km"
    //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
-//	    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/kermeta/001_LoadUML.km"
+	//    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/kermeta/001_LoadUML.km"
 	//    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LoadSaveKm/0001LoadAndSaveKm.km"
    //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.km"
 //   inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.km"
@@ -93,8 +93,10 @@ object Main extends LogAspect {
 	  //compilo.compile("../compilerv2_test/tests/010_testLoop.main.km")
 	  
 	  
-	  inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/000HelloWorld.km"
 	  
+		 
+		// inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/ART2BluePrint/src/main.km"
+		 
 	  if(inputFile != ""){
 	 	  log.info("KM compilation begin on "+inputFile)
 		  compilo.compile(inputFile) 
