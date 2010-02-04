@@ -1,0 +1,109 @@
+/* $Id:$ 
+ * Creation : February 3, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "kermeta::ki::malai::action::Action"
+
+
+package kermeta::ki::malai::action;
+
+
+require kermeta
+
+using kermeta::standard
+
+
+abstract class Action {
+	@desc "Defines if the action is done."
+	attribute done : Boolean
+	
+	@desc "Defines if the action has started."
+	attribute started : Boolean
+	
+	
+	operation initialize() : Void is do
+		done := false
+		started := false
+	end
+	
+	
+	 @desc "Executes the action. Should be overridden by sub-class to define stuffs to execute."
+	 @return "True if the execution is successful. False otherwise."
+	 operation doIt() : Boolean is do
+		if(canDo()) then
+			started := true
+			result := true
+			
+			doActionBody()
+			
+			//for(ActionHandler handler : ActionsRegistry.REGISTRY.handlers)
+			//	handler.onActionExecuted(this);
+		else 
+			result := false
+		end
+	end
+	
+	
+	operation isRegisterable() : Boolean is do
+		result := false
+	end
+	
+	
+	@return "True if the action can be executed."
+	operation canDo() : Boolean is do
+		result := false
+	end
+	
+	
+	@return "True if the execution of the action had effects on the target."
+	operation hadEffect() : Boolean is do
+		result := false
+	end
+	
+	
+	
+	@desc "Defines if the given action can cancel the calling action."
+	@return "True if the given action cancels the calling action."
+	@data "action The action to test."
+	operation cancelledBy(action : Action) : Boolean is do
+		result := false
+	end
+
+
+	@desc "Sets the action to 'done'."
+	operation setDone() is do
+		done := true
+	end
+	
+	
+	
+	@return "True if the action is done."
+	operation isDone() : Boolean is do
+		result := done
+	end
+	
+	
+	@desc "Aborts the action."
+	operation abort() : Void is do
+		done()
+	end
+
+
+	@return "True if the action has already started."
+	operation isStarted() : Boolean is do
+		result := started
+	end
+
+
+	@desc "Defines if the action has started or not."
+	@data "started The new value of isStarted."
+	operation setStarted(started : Boolean) : Void is do
+		self.started := started
+	end
+	
+	operation doActionBody() is do
+	end
+}

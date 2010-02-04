@@ -1,0 +1,116 @@
+/* $Id:$ 
+ * Creation : February 4, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "kermeta::ki::malai::undo::UndoCollector"
+
+
+package kermeta::ki::malai::undo;
+
+
+require kermeta
+require "Undoable.kmt"
+require "UndoHandler.kmt"
+require "../utils/Stack.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::utils
+
+
+class UndoCollector
+{
+	@desc "Contains the undoable actions."
+	attribute undoStack : Stack<Undoable>
+	
+	@desc "Contains the redoable actions."
+	attribute redoStack : Stack<Undoable>
+	
+	@desc "The maximal number of undo."
+	attribute max : Integer
+	
+	@desc "The handlers that handles the collector."
+	reference handlers : Sequence<UndoHandler>
+	
+	operation initialise() : Void is do
+		max := 50
+	end
+
+	
+	@desc "Notifies the handlers that something has changed."
+	operation notifyHandlers() : Void is do
+		handlers.each{ handler | handler.updateUndo() }
+	end
+	
+
+	@desc "Removes all the actions of the collector."
+	operation clear() : Void is do
+		undoStack.clear()
+		redoStack.clear()
+		notifyHandlers()
+	end
+	
+	
+	@desc "Adds an undoable element to the collector."
+	@data "elt The undoable element to add."
+	operation add(elt : Undoable) : Void is do
+		if(elt!=void and max>0) then
+			if(undoStack.size()==max) then
+				undoStack.elements.removeAt(0)
+			end
+			
+			undoStack.push(elt)
+			redoStack.clear() /* The redoable actions must be removed. */
+			notifyHandlers()
+		end
+	end
+	
+	
+	@desc "Undoes the last action."
+	operation undo() : Void is do
+		if not undoStack.isEmpty then
+			var action : Undoable init undoStack.pop()
+			action.undo()
+			redoStack.push(action)
+			notifyHandlers()
+		end
+	end
+	
+	
+	
+	@desc "Redoes the last action. "
+	operation redo() : Void is do
+		if not redoStack.isEmpty then
+			var action : Undoable init redoStack.pop()
+			action.redo()
+			undoStack.push(action)
+			notifyHandlers()
+		end
+	end
+	
+	
+	@return "The last undoable action name."
+	operation getLastUndoMessage() : String is do
+		result := if not undoStack.isEmpty then undoStack.peek().getUndoName() end
+	end
+	
+	
+	@return "The last redoable action name."
+	operation getLastRedoMessage() : String is do
+		result := if not redoStack.isEmpty then redoStack.peek().getUndoName() end
+	end
+		
+
+	@return "The last undoable action."
+	operation getLastUndo() : Undoable is do
+		result := if not undoStack.isEmpty then undoStack.peek() end
+	end
+	
+	
+	@return "The last redoable action."
+	operation getLastRedo() : Undoable is do
+		result := if not redoStack.isEmpty then redoStack.peek() end
+	end
+}

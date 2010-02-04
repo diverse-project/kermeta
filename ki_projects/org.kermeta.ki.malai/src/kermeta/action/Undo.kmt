@@ -1,0 +1,47 @@
+/* $Id:$ 
+ * Creation : February 4, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "kermeta::ki::malai::action::Undo"
+
+
+package kermeta::ki::malai::action;
+
+
+require kermeta
+require "Action.kmt"
+require "../undo/UndoCollector.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::undo
+
+
+class Undo inherits Action
+{
+	reference undoCollector : UndoCollector
+	
+	
+	method canDo() : Boolean is do
+		result := not undoCollector.getLastUndo().isVoid
+	end
+
+
+
+	method cancelledBy(action : Action) : Boolean is do
+		result := false
+	end
+
+
+	method hadEffect() : Boolean is do
+		result := isDone()
+	end
+
+
+	method doActionBody() : Void is do
+		undoCollector.undo()
+		done()
+	end
+}

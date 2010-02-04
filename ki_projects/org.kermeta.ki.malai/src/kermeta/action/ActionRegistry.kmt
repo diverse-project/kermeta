@@ -1,0 +1,143 @@
+/* $Id:$ 
+ * Creation : February 4, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "kermeta::ki::malai::action::ActionRegistry"
+
+
+package kermeta::ki::malai::action;
+
+
+require kermeta
+require "Action.kmt"
+require "ActionHandler.kmt"
+require "../undo/UndoCollector.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::undo
+
+
+class ActionRegistry {
+	@desc "The saved actions."
+	attribute actions : Sequence<Action>
+
+	@desc "The actions handlers."
+	reference handlers : Sequence<ActionHandler>
+	
+	reference undoCollector : UndoCollector
+	
+	
+	
+	@desc "Adds an action to the register."
+	@data "action The action to add."
+	operation addAction(action : Action) : Void
+		pre correctAction is do
+			action!=void and actions.contains(action)
+		end
+		
+	is do
+		cancelActions(action)
+		actions.add(action)
+		notifyHandlersOnAdd(action)
+			
+		if(action.isInstanceOf(Undoable)) then
+			undoCollector.add(action.asType(Undoable))
+		end
+	end
+	
+	
+	
+	operation removeAction(action : Action) : Void
+		pre ActionNotVoid is do
+			action!=void
+		end
+		
+	is do
+		actions.remove(action)
+		notifyHandlersOnCancel(action)
+		//TODO must remove action that depends of 'action' too.
+	end
+	
+	
+	
+	
+	@desc "Removes actions from the register using a given action."
+	@data "action The action that may cancels others."
+	operation cancelActions(action : Action) : Void
+		pre ActionNotVoid is do
+			action!=void
+		end
+		
+	is do
+		var size : Integer init actions.size
+		
+		from var i : Integer init 0
+		until i>=size
+		loop
+			if(actions.elementAt(i).cancelledBy(action)) then
+				notifyHandlersOnCancel(actions.removeAt(i))
+			end
+		end
+	end
+	
+	
+	
+	operation abortAction(action : Action) : Void
+		pre ActionNotVoid is do
+			action!=void
+		end
+	is do
+		action.abort()
+		actions.remove(action)
+		notifyHandlersOnAbort(action)
+	end
+	
+	
+	@data "clazz The reference class."
+	@return "The first action of the same kind of the given action."
+	operation getAction<T : Action>(action : T) : Action is do
+		result := actions.detect{ action2 | action2.isKindOf(T) }
+	end
+
+
+	
+	@desc "Notifies handlers that a event on actions occurred."
+	@data "action The concerned action."
+	operation notifyHandlersOnAdd(action : Action) : Void
+		pre ActionNotVoid is do
+			action!=void
+		end
+		
+	is do
+		handlers.each { handler | handler.onActionAdded(action) }
+	end
+	
+	
+	
+	@desc "Notifies handlers that a event on actions occurred."
+	@data "action The concerned action."
+	operation notifyHandlersOnCancel(action : Action) : Void
+		pre ActionNotVoid is do
+			action!=void
+		end
+		
+	is do
+		handlers.each { handler | handler.onActionCancelled(action) }
+	end
+	
+	
+	
+	@desc "Notifies handlers that a event on actions occurred."
+	@data "action The concerned action."
+	operation notifyHandlersOnAbort(action : Action) : Void
+		pre ActionNotVoid is do
+			action!=void
+		end
+		
+	is do
+		handlers.each { handler | handler.onActionAborted(action) }
+	end
+}

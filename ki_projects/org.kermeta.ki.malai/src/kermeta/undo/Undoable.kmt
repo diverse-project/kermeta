@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Creation : February 4, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "kermeta::ki::malai::undo::Undoable"
+
+
+package kermeta::ki::malai::undo;
+
+
+require kermeta
+
+using kermeta::standard
+
+
+@desc "Defines an interface for undoable objects."
+abstract class Undoable
+{
+	@desc "Cancels the action."
+	operation undo() : Void is do
+	end
+	
+	
+	@desc "Redoes the cancelled action."
+	operation redo() : Void is do
+	end
+
+	
+	@return "The name of the undo action."
+	operation getUndoName() : String is do
+		result := ""
+	end
+}
