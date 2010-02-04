@@ -30,6 +30,7 @@ object TypeEquivalence {
 		typeEquivelence.put("kermeta.utils.Hashtable", "java.util.HashMap");
 		typeEquivelence.put("org.eclipse.emf.ecore.EStringToStringMapEntry","java.util.Map.Entry[String,String]")
 		typeEquivelence.put("kermeta.utils.Stack", " java.util.Stack");
+		typeEquivelence.put("kermeta.utils.StringBuffer", "scala.StringBuilder");
 		typeEquivelence.put("kermeta.standard.Iterator", "java.util.Iterator");
 		typeEquivelence.put("kermeta.standard.Collection", "java.util.List");
 		typeEquivelence.put("kermeta.standard.Set", "java.util.List");
@@ -41,7 +42,7 @@ object TypeEquivalence {
 		typeEquivelence.put("kermeta.standard.Character", "java.lang.Character");
 		typeEquivelence.put("int", "Int");
 		typeEquivelence.put("boolean", "java.lang.Boolean");
-		typeEquivelence.put("kermeta.standard.Boolean", "java.util.Boolean");
+		typeEquivelence.put("kermeta.standard.Boolean", "java.lang.Boolean");
 		typeEquivelence.put("java.lang.Class","java.lang.Class[_]")
 		typeEquivelence;
 		};
