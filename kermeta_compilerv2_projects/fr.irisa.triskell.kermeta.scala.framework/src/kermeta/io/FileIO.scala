@@ -2,7 +2,7 @@ package kermeta.io
 
 
 
-class FileIOClass {
+class FileIO {
 	
 	def writeTextFile(filename : String, text : String) : Unit = {
 		
@@ -18,4 +18,4 @@ class FileIOClass {
 
 }
 
-object fileio extends FileIOClass
+//object fileio extends FileIOClass
