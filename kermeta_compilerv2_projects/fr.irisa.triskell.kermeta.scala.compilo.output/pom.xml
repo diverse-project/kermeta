@@ -45,10 +45,14 @@
 							<mainClass>runner.MainRunner</mainClass>
 							<!-- jvmArgs are optional -->
 							<jvmArgs>
-								<jvmArg>-Xmx256m</jvmArg>
+								<jvmArg>-Xmx512m</jvmArg>
 							</jvmArgs>
 						</launcher>
 					</launchers>
+					<jvmArgs>
+							<jvmArg>-Xmx1024m</jvmArg>
+				</jvmArgs>
+					
 				</configuration>
 			</plugin>
 		</plugins>
@@ -109,6 +113,19 @@
 			<groupId>fr.irisa.triskell</groupId>
 			<artifactId>kermeta.compilo.test.genmodel.test16ecore</artifactId>
 			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kermeta</groupId>
+			<artifactId>art.model</artifactId>
+			<version>1.0.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>fr.irisa.triskell</groupId>
+			<artifactId>kermeta.scala.framework</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
