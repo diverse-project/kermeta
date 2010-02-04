@@ -40,8 +40,8 @@ object TypeEquivalence {
 		typeEquivelence.put("kermeta.standard.Real", "java.lang.Double");
 		typeEquivelence.put("kermeta.standard.Character", "java.lang.Character");
 		typeEquivelence.put("int", "Int");
-		typeEquivelence.put("boolean", "Boolean");
-		typeEquivelence.put("kermeta.standard.Boolean", "Boolean");
+		typeEquivelence.put("boolean", "java.lang.Boolean");
+		typeEquivelence.put("kermeta.standard.Boolean", "java.util.Boolean");
 		typeEquivelence.put("java.lang.Class","java.lang.Class[_]")
 		typeEquivelence;
 		};
