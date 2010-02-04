@@ -59,6 +59,12 @@ trait PrimitiveTypeAspect extends RichAspectImplicit with ObjectAspect with LogA
 		}
 
 		
+		
 	}
+	
+	override def getQualifiedNameCompilo():String ={
+			return kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName());		
+	}
+
 
 }

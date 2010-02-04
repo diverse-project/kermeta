@@ -102,21 +102,34 @@ def generateAttribute(res : StringBuilder) : Unit ={
 			return 
 		}
 		
+		
+		
 		res.append("def "+GlobalConfiguration.scalaPrefix)
 		res.append(this.getName+"")
 		res.append(" : ")
 		getListorType(res)
-				res.append("={this.")
+		res.append("={this.")
+				
 		if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")){
-			res.append(prefix+"is")
-		}else
+			if (this.getType().isInstanceOf[PrimitiveType] && !"java.lang.Boolean".equals(this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo))
+			{
+				res.append(prefix+"get")
+			}else{
+				res.append(prefix+"is")
+			}
+		}
+		else
 		{
 			res.append(prefix+"get")
 		}
+		
+		
+		
 		//Cas des collections uml
 		if ((this.getUpper>1 ||this.getUpper == -1) && "uml".equals(this.eContainer.eContainer.asInstanceOf[NamedElement].getName)){
 			currentname = getUmlExtension
 		}
+		
 		res.append( currentname.substring(0,1).toUpperCase() + currentname.substring(1,currentname.length) + "()" + "}")		
 		res.append("\n")
 	}
