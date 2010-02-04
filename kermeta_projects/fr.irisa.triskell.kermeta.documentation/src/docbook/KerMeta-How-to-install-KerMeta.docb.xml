@@ -6,7 +6,7 @@
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
     <author>
-      <firstname>Didier Vojtisek, François Tanguy</firstname>
+      <firstname>Didier Vojtisek, François Tanguy, Marie Gouyette</firstname>
     </author>
 
     <title>Kermeta tutorial</title>
@@ -58,28 +58,24 @@
 
     <title>Preface</title>
 
-    <para><emphasis role="strong">Kermeta is a Domain Specific Language
+    <para>Kermeta is a Domain Specific Language
     dedicated to metamodel engineering. It fills the gap let by MOF which
     defines only the structure of meta-models, by adding a way to specify
     static semantic (similar to OCL) and dynamic semantic (using operational
-    semantic in the operation of the metamodel). </emphasis> <emphasis
-    role="strong"> <emphasis role="strong">Kermeta uses the object-oriented
-    paradigm like Java or Eiffel.</emphasis> </emphasis> <emphasis
-    role="strong"> This document presents various aspects of the language,
+    semantic in the operation of the metamodel). Kermeta uses the object-oriented
+    paradigm like Java or Eiffel
+    This document presents various aspects of the language,
     including the textual syntax, the metamodel (which can be viewed as the
     abstract syntax) and some more advanced features typically included in its
-    framework. </emphasis></para>
+    framework. </para>
 
     <important>
-      <emphasis role="strong">Kermeta is an evolving software and d</emphasis>
-
-      <emphasis role="strong">
-        <emphasis role="strong">espite that we put a lot of attention to this
+    <para>
+     Kermeta is an evolving software and despite that we put a lot of attention to this
         document, it may contain errors (more likely in the code samples). If
         you find any error or have some information that improves this
         document, please send it to us using the bug tracker in the
-        forge:</emphasis>
-      </emphasis>
+        forge:
 
       <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
         <emphasis role="strong">
@@ -96,13 +92,8 @@
         </emphasis>
       </emphasis>
 
-      <emphasis role="strong">
-        <emphasis role="strong">
-          <emphasis role="strong">or using the user mailing list
-          (kermeta-users@lists.gforge.inria.fr)</emphasis>
-        </emphasis>
-      </emphasis>
-
+     or using the user mailing list
+          (kermeta-users@lists.gforge.inria.fr)
       <emphasis role="strong">
         <emphasis role="strong">
           <emphasis role="strong" />
@@ -110,16 +101,19 @@
       </emphasis>
 
       Last check: v1.2.0
+      </para>
     </important>
 
     <tip>
+    <para>
       The most update version of this document is available online : 
 
       <ulink type=""
       url="http://www.kermeta.org/">http://www.kermeta.org/documents</ulink>
 
-       .
+       . </para>
     </tip>
+ 
   </preface>
 
   <chapter>
@@ -133,7 +127,7 @@
         the latest version of Java.</para>
       </listitem>
       <listitem>
-        <para>Eclipse must be installed. We currently use Eclipse 3.4.1 (Ganymede). You can get Eclipse from <ulink
+        <para>Eclipse must be installed. We currently use Eclipse 3.5.0 (Galileo). You can get Eclipse from <ulink
         url="http://www.eclipse.org/downloads/">http://www.eclipse.org/downloads/</ulink>.
         </para>
         <para>In this tutorial, your Eclipse installation is supposed to be relatively minimal, so
@@ -168,10 +162,12 @@
     </figure>
 
 	<tip>
+	<para>
 		If (like me) you have many versions of eclipse with various configurations, 
 		you may consider create your workspace directly in the eclipse folder. You'll be able to 
 		easily move or remove a complete eclipse without the risk of corrupting eclipse .metadata
 		with various configurations.
+		</para>
 	</tip>
     <para>On every launch, you will be prompted for the workspace
     location. For now, we just click "OK" to open the main window of Eclipse using 
@@ -213,26 +209,25 @@
       
 
           <para>In the main menu of Eclipse, select  <emphasis>Help &gt;&gt;
-          Software Updates </emphasis>. A dialog
-          box appears. Select the tab <emphasis>Available Software</emphasis>.</para>
+          Install New Software </emphasis>. A dialog
+          box appears. </para>
 
           <figure>
-            <title></title>
+            <title> Dialog box to install new software</title>
 
             <mediaobject>
               <imageobject>
-                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/software_updates_and_add-ons_available_software1.png" />
+                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/install_available_software.png" />
               </imageobject>
             </mediaobject>
           </figure>
 
 
 		<para>Now, you need to tell Eclipse where to look for Kermeta features. So you click on
-		<emphasis>Add Site...</emphasis> and enter the following location : <emphasis>http://www.kermeta.org/update</emphasis></para>
+		<emphasis>Add Site...</emphasis>  and fill it like in the following picture. </para>
 	
 		<figure>
-            <title></title>
-
+            <title> Add site dialog window</title>
             <mediaobject>
               <imageobject>
                 <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/add_site_kermeta.png" />
@@ -240,46 +235,26 @@
             </mediaobject>
           </figure>
 	
-		<para>In order to enable Kermeta Graphical editors, you also need to use Topcased Update site.
-		Click <emphasis>Manage Sites...</emphasis> then select the topcased update site for your 
-		version of Eclipse. In our case, eclipse 3.4.
-		</para>
-         
+		<para>Then select the Kermeta update site in the scroll menu and select everything from Kermeta site like shown below. </para>
         <figure>
-        	<title></title>
+            <title> Select Kermeta feature</title>
 
             <mediaobject>
               <imageobject>
-                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/available_software_sites_1.png" />
-              </imageobject>
-            </mediaobject>
-		</figure>
-	
-          
-        <para>We can now select the feature we want to install.
-		</para>
-		<para>To be simple, select everything from Kermeta site, select 
-		the UML editor from Topcased site and the EPF RichText feature from Topcased site
-		</para>
-        <figure>
-            <title></title>
-
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/feature_selection.png" />
+                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/available_software_kermeta.png" />
               </imageobject>
             </mediaobject>
         </figure> 
           
           
-        <para>Then click on <emphasis>Install</emphasis>.</para>
-        <para>You'll be asked to review and confirm your choice.</para>
+        <para>Then click on <emphasis>Next </emphasis>.</para>
+        <para>The next dialog shows the review.</para>
 		<figure>
             <title></title>
 
             <mediaobject>
               <imageobject>
-                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/review_and_confirm.png" />
+                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/review.png" />
               </imageobject>
             </mediaobject>
         </figure>
@@ -372,6 +347,11 @@
       			In the main menu of Eclipse &gt; Windows &gt;&gt; Show view &gt;&gt;  Other... then select the Error Log view in the General folder. 
       		</para>
       	</section>
+	</chapter>
+	
+	<chapter>
+	<title> Conclusion</title>
+	<para> Now, you have installed Kermeta into Eclipse. It 's time to use it!</para>
 	</chapter>
 
       

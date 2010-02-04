@@ -269,7 +269,7 @@
   	 
   	 <section> 
   	 <title> Domain Gen Model  </title>
-  	 <para> In the Domain Gen Model case click on Select. A wizard appears to choose the name of the .genmodel file.
+  	 <para> In the Domain Gen Model case click on Select.The following wizard appears to choose the name of the .genmodel file.
   	   
   	   <figure>
       <title> Choose name for the genmodel file</title>

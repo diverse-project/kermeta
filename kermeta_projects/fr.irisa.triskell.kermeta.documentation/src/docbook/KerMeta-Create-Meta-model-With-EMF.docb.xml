@@ -84,29 +84,15 @@
         forge:
 
       <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
-        <emphasis role="strong">
-          <emphasis role="strong">
             <emphasis
             role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
-          </emphasis>
-        </emphasis>
       </ulink>
-
-      <emphasis role="strong">
-        <emphasis role="strong">
-          <emphasis role="strong" />
-        </emphasis>
-      </emphasis>
-
+      
          or using the developer mailing list
           (kermeta-developers@lists.gforge.inria.fr)
        
 
-      <emphasis role="strong">
-        <emphasis role="strong">
-          <emphasis role="strong" />
-        </emphasis>
-      </emphasis>
+      
 
       Last check: v0.3.1
      </para></important>
@@ -125,14 +111,14 @@
 <chapter>
     <title> Create a meta-model for Kermeta programs</title>
     <para>
-      <emphasis role="strong">For simplicity sake, the different steps (meta-model, model creation, as well as model handling through Kermeta) introduced in the scope of this tutorial are illustrated by means of the finite state machines classical example.</emphasis>
+      For simplicity sake, the different steps (meta-model, model creation, as well as model handling through Kermeta) introduced in the scope of this tutorial are illustrated by means of the finite state machines classical example.
     </para>
     <section>
       <title>Editing a new meta-model with the EMF sample editor</title>
       <orderedlist continuation="restarts" numeration="arabic">
         <listitem>
           <para>
-            <emphasis role="strong">Create a new simple project (for instance </emphasis>
+           Create a new simple project (for instance 
             <emphasis role="strong">
               <emphasis>MyFirstEMFSamples</emphasis>
             </emphasis>
@@ -140,7 +126,7 @@
           </para>
         </listitem>
         <listitem>
-          <para><emphasis role="strong">Select in the tool bar menu (on top of Eclipse window)</emphasis><emphasis role="strong"><emphasis role="strong">File </emphasis></emphasis><emphasis role="strong">&gt; New &gt; </emphasis><emphasis role="strong">O</emphasis><emphasis role="strong">ther &gt; Example EMF Creation Wizards </emphasis>folder<emphasis role="strong"> &gt; Ecore Model</emphasis></para>
+          <para>Select in the tool bar menu (on top of Eclipse window)<emphasis role="strong"><emphasis role="strong">File </emphasis></emphasis><emphasis role="strong">&gt; New &gt; </emphasis><emphasis role="strong">Other</emphasis><emphasis role="strong"> &gt; Eclipse Modeling Framework </emphasis>folder<emphasis role="strong"> &gt; Ecore Model</emphasis></para>
           <figure id="refIllustration0">
             <title>Selection of the model object (root element)</title>
             <mediaobject>
@@ -152,6 +138,7 @@
           <para/>
         </listitem>
         <listitem>
+        <para>Enter a name for the meta-model file (e.g. <emphasis>fsm.ecore</emphasis>), then click on <emphasis role="strong">Next</emphasis> button.</para>
         <figure id="refIllustration1">
         <title> Choose a name for your new ecore model </title>
           <mediaobject>
@@ -159,9 +146,7 @@
               <imagedata fileref="KerMeta-Create-Meta-model-With-EMF_figures/name_ecore_model.png"  /> <!--  width="10.022cm" depth="11.299cm" --> 
             </imageobject>
           </mediaobject>
-          </figure>
-          <para>Enter a name for the meta-model file (e.g. <emphasis>fsm.ecore</emphasis>), then click on <emphasis role="strong">Next</emphasis> button.</para>
-          <para role="lineBreak"/>
+          </figure> 
         </listitem>
         <listitem>
           <para>Choose <emphasis role="strong">EPackage</emphasis> as the Model Object (i.e. the root of the meta-model), and click on the <emphasis role="strong">Finish</emphasis> button.</para>
@@ -177,12 +162,6 @@
         </listitem>
         <listitem>
           <para>If Omondo is installed, the meta-model can be edited by means of the Omondo graphical editor. However, this tutorial focuses on the creation of meta-models using the <emphasis role="strong">Sample Ecore Editor</emphasis>. In case the Omondo editor is set as the default editor, the sample Ecore editor can be opened (after having closed the Omondo editor) by right-clicking onto the Ecore file and selecting <emphasis role="strong">Open with &gt; Sample Ecore Editor</emphasis>.</para>
-          <para/>
-        </listitem>
-        <listitem>
-          <para>If the <emphasis role="strong">Properties</emphasis> view is not visible at the bottom (or left, or right) part of the Eclipse window, open it using the tool bar menu.<emphasis role="strong">Window &gt; Show View &gt; Other &gt; General </emphasis>folder<emphasis role="strong"> &gt; Properties</emphasis>;</para>
-        </listitem>
-        <listitem>
           <figure id="refIllustration2">
             <title>New empty ecore model</title>
             <mediaobject>
@@ -193,6 +172,9 @@
             </mediaobject>
           </figure>
           <para/>
+        </listitem>
+        <listitem>
+          <para>If the <emphasis role="strong">Properties</emphasis> view is not visible at the bottom (or left, or right) part of the Eclipse window, open it using the tool bar menu.<emphasis role="strong">Window &gt; Show View &gt; Other &gt; General </emphasis>folder<emphasis role="strong"> &gt; Properties</emphasis>;</para>
           <figure id="refIllustration3">
             <title>How to show properties view</title>
             <mediaobject>
@@ -201,7 +183,6 @@
               </imageobject>
             </mediaobject>
           </figure>
-          <para/>
         </listitem>
         <listitem>
           <para>Two properties of the created EPackage (which is initially displayed as <emphasis>null</emphasis>) have to be set through the <emphasis role="strong">Properties</emphasis> tab:</para>
@@ -231,14 +212,6 @@
    <!-- <orderedlist continuation="continues" numeration="arabic"> -->   
         <listitem>
           <para>At this stage, it is now possible to add children to the created root (which is <emphasis>fsm</emphasis> EPackage in the considered example). This could be achieved by right-clicking on the class and choosing the <emphasis role="strong">New child</emphasis> item. In the scope of the FSM example, three classes are added, one of them (the class <emphasis>Fsm</emphasis>) being considered as the “root class” (this should not be not mandatory, but allows a better EMF working):</para>
-          <figure id="refIllustration5">
-            <title>New child on EPackage root node</title>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="KerMeta-Create-Meta-model-With-EMF_figures/new_child_epackage.png"  /> <!-- width="10.733cm" depth="11.288cm"  -->
-              </imageobject>
-            </mediaobject>
-          </figure>
           <para/>
        <!--  </listitem>  -->
   <!--    </orderedlist> 
@@ -255,6 +228,14 @@
               <para>a <emphasis>State</emphasis> class (idem as for previous classes).</para>
             </listitem>
        </orderedlist>
+       <figure id="refIllustration5">
+            <title>New child on EPackage root node</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KerMeta-Create-Meta-model-With-EMF_figures/new_child_epackage.png"  /> <!-- width="10.733cm" depth="11.288cm"  -->
+              </imageobject>
+            </mediaobject>
+          </figure>
         </listitem>
      <!--  </orderedlist>
       <orderedlist continuation="continues" numeration="arabic"> -->  
@@ -264,7 +245,7 @@
    <!--    </orderedlist>
       <orderedlist continuation="continues" numeration="arabic">  -->
         <listitem>
-          <para>Still through the <emphasis role="strong">Properties</emphasis> tab, the <emphasis role="strong">EContainment</emphasis> property will have to be set to <emphasis>true</emphasis> for each reference which intended to contain instances. In the scope of the automaton example, the <emphasis>transition</emphasis> and <emphasis>state</emphasis> references of the <emphasis>Fsm</emphasis> class are defined as containment reference. By this mean, it will be possible to create, in an EMF model of it, a collection of transitions and states. Refer to the EMF model creation step (section <link linkend="create_model">3</link>, p.<link linkend="create_model">11</link>) for further details.</para>
+          <para>Still through the <emphasis role="strong">Properties</emphasis> tab, the <emphasis role="strong">EContainment</emphasis> property will have to be set to <emphasis>true</emphasis> for each reference which intended to contain instances. In the scope of the automaton example, the <emphasis>transition</emphasis> and <emphasis>state</emphasis> references of the <emphasis>Fsm</emphasis> class are defined as containment reference. By this mean, it will be possible to create, in an EMF model of it, a collection of transitions and states. </para>
           <figure id="refIllustration6">
             <title>Setting the properties of an EReference</title>
             <mediaobject>
@@ -286,10 +267,12 @@
     </section>
     <section>
       <title>
-        <emphasis role="strong">Resulting meta-model</emphasis>
+       Resulting meta-model
       </title>
+      <section> 
+      <title> Meta-model with EMF sample editor</title>
       <para>
-        <emphasis role="strong">At this stage of the tutorial, the designed meta-model should look like the following meta-model:</emphasis>
+       At this stage of the tutorial, the designed meta-model should look like the following meta-model:
       </para>
       <figure id="refIllustration7">
         <title>A simple FSM meta-model</title>
@@ -300,7 +283,10 @@
         </mediaobject>
       </figure>
       <para/>
+      </section>
       
+      <section>
+      <title> Meta-model with Ecore Tools </title>
        <para>You can also edit these ecore file using a diagram editor. For example, the ecore tools project provides a class diagram editor that works on top of ecore files. 
       The diagram informations (ie. shape and position of the classes on the sheet) are stored in a separated file : *.ecorediag</para>
       
@@ -314,6 +300,7 @@
       </mediaobject>
     </figure> 
     </section>
+    </section>
     <section>
       <title>EMF meta-model creation tips</title>
       <para>Creating a good meta-model is sometime difficult due to limitations of the used tools. For a better experience in using EMF tools and Kermeta, it is advised to respect the following rules:</para>
@@ -326,10 +313,10 @@
     </section>
     <section>
       <title>
-        <emphasis role="strong">External documentation</emphasis>
+       External documentation
       </title>
       <para>
-        <emphasis role="strong">Additional documentation on EMF can be found at the following links:</emphasis>
+       Additional documentation on EMF can be found at the following links:
       </para>
       <orderedlist continuation="restarts">
         <listitem>
@@ -340,28 +327,28 @@
         <listitem>
           <para>
             <ulink url="http://www.eclipse.org/articles/Article-Using%20EMF/using-emf.html" type="">
-              <emphasis role="strong">http://www.eclipse.org/articles/Article-Using%20EMF/using-emf.html</emphasis>
+             http://www.eclipse.org/articles/Article-Using%20EMF/using-emf.html
             </ulink>
           </para>
           <para>
-            <emphasis role="strong"/>
+            
           </para>
         </listitem>
       </orderedlist>
       <para>
-        <emphasis role="strong">More generally, most of EMF documentation can be found onto the Eclipse website.</emphasis>
+        More generally, most of EMF documentation can be found onto the Eclipse website.
       </para>
     </section>
     <section>
       <title>
-        <emphasis role="strong">Alternative ways to create a meta-model</emphasis>
+        Alternative ways to create a meta-model
       </title>
       <para>
-        <emphasis role="strong">EMF tools are not the only way to create Ecore meta-models. Any tool that can manipulate Ecore can do the same. Here is a small list of tools that can be used to create your meta-model:</emphasis>
+        EMF tools are not the only way to create Ecore meta-models. Any tool that can manipulate Ecore can do the same. Here is a small list of tools that can be used to create your meta-model:
       </para>
       <orderedlist continuation="restarts">
         <listitem>
-          <para><emphasis role="strong">Omondo / Eclipse UML has a nice graphical editor for Ecore models. It even enables to directly generate the EMF editor </emphasis>from this tool.</para>
+          <para>Omondo / Eclipse UML has a nice graphical editor for Ecore models. It even enables to directly generate the EMF editor from this tool.</para>
         </listitem>
         <listitem>
           <para>

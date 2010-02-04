@@ -130,7 +130,7 @@
 
     <para>This tutorial gives an overview of many concepts 
     used through KerMeta project creation. Following this tutorial should give you the knowledge : 
-    to create a meta model,run configurations, add pre and post conditions and add behaviour on it. To cover all this features, we decided to start from an existing example. 
+    to create a meta model, run configurations, add pre and post conditions and add behaviour on it. To cover all this features, we decided to start from an existing example. 
     Because it is a complete KerMeta project, you should use it as  a reference guide.
      This example is about the finite state machine which acronym is FSM. 
      Firstly, a section explains how to load files of the example in your Eclipse workspace. 
@@ -256,10 +256,7 @@
       </mediaobject>
     </figure>
 
-    <para>This simple state machine can be modeled and executed easily in
-    Kermeta. See the following meta-model presented in a class diagram syntax.
-    You can retrieve this metamodel named fsmStatic.ecore into
-     fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsmStatic.ecore
+    <para>This simple state machine can be modeled and executed easily in Kermeta. See the following meta-model presented in a class diagram syntax. You can retrieve this metamodel named fsmStatic.ecore into fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsmStatic.ecore
     </para>
 
     <figure>
@@ -303,7 +300,7 @@
        <para>To start with, create a new general project and use the reflexive EMF editor to create the meta model like shown in the tutorial
         <ulink type=""
       url="../KerMeta-Create-Meta-model-With-EMF/index.html">"How to create an EMF meta model?"</ulink>
-    .</para> 
+    . You can retrieve this tutorial into <emphasis role= "strong"> org.kermeta.fsm.emf. </emphasis> </para> 
        <para></para>
        <para>At this stage of the tutorial, you should have the following metamodel: </para>
        
@@ -312,7 +309,7 @@
 
        <mediaobject>
          <imageobject>
-           <imagedata fileref="KerMeta-The-FSM-tutorial_figures/fsm_metamodel2.png" />
+           <imagedata fileref="KerMeta-The-FSM-tutorial_figures/resulting_emf_metamodel.png" />
          </imageobject>
        </mediaobject>
       </figure>   
@@ -373,10 +370,10 @@
                 <para><emphasis role="strong"><emphasis role="strong">File </emphasis></emphasis><emphasis role="strong">&gt; New &gt; </emphasis><emphasis role="strong">O</emphasis><emphasis role="strong">ther &gt; Eclipse Modeling Framework </emphasis>folder<emphasis role="strong"> &gt; EMF Models</emphasis>;</para>
               </listitem>
               <listitem>
-                <para>Choose a name for your genmodel (<emphasis>fsm.genmodel</emphasis> is ok);</para>
+                <para>Choose a name for your genmodel (<emphasis>fsmStatic.genmodel</emphasis> is ok);</para>
               </listitem>
               <listitem>
-                <para>Select <emphasis role="strong">Load from an EMF core model</emphasis> button, and find the meta-model file (<emphasis>fsm.ecore</emphasis>);</para>
+                <para>Select <emphasis role="strong">Load from an EMF core model</emphasis> button, and find the meta-model file (<emphasis>fsmStatic.ecore</emphasis>);</para>
               </listitem>
               <listitem>
                 <para>Select the unique package <emphasis>fsm</emphasis>.</para>
@@ -389,18 +386,11 @@
             <para>In order to avoid weird behaviour (particularly if the current project was not set as a “Java project”) the model directory of the genmodel needs to be changed in the <emphasis role="strong">Properties</emphasis> tab of the genmodel. For this purpose, change the property called <emphasis role="strong">Model Directory</emphasis> (in the Model folder), to <emphasis>/MyFirstEMFSamples.model/src</emphasis>, so that the EMF source code is generated in a new empty project that will exclusively contain this source code.</para>
           </listitem>
           <listitem>
-            <para>Right-click on the root node of the <emphasis>fsm.genmodel</emphasis>, and choose the <emphasis role="strong">Generate all</emphasis> item.</para>
+            <para>Right-click on the root node of the <emphasis>fsmStatic.genmodel</emphasis>, and choose the <emphasis role="strong">Generate all</emphasis> item.</para>
           </listitem>
         </orderedlist> 
         <para> You can customize this EMF editor following the section  <link linkend="CustomizeEMF_Editor"> Customize the generated EMF editor</link>   . </para>
          </section>
-         
-        
-         
-         
-        
-          
-         
          
          <section>
         <title>Use the editor</title>
@@ -462,7 +452,7 @@
       url="http://www.topcased.org/"> Topcased</ulink> 
        to create graphical editors for model instances. The tutorial  <ulink type=""
       url="../KerMeta-Create-FSM-Graphical-Editor-With-GMF/index.html"> How to create a FSM graphical editor with GMF? </ulink>
-      explains the creation of an GMF editor with a very simple FSM metamodel.
+      explains the creation of an GMF editor with a very simple FSM metamodel. You can retrieve the result of this tutorial and the gmf models into org.kermeta.fsm.gmf.
       </para>
         </section>
         
@@ -472,7 +462,7 @@
 
       <chapter>
         <title> Model manipulation in Kermeta </title>
-        <para>Firstly, we present to you how to create a KerMeta file Then loading a first Kermeta program can be achieved by just copying the code provided in the following sections, following carefully the suggested instructions. Readers who want to directly load their own models should directly go to the section 5.3.5 <!--  -->  and copy the given template.</para>
+        <para>Firstly, we present to you how to create a KerMeta file. Then loading a first Kermeta program can be achieved by just copying the code provided in the following sections, following carefully the suggested instructions. Readers who want to directly load their own models should directly go to the section <link linkend="completeKermetaProgramTemplate"> A template for a complete Kermeta program </link>  and copy the given template.</para>
         <section> 
           <title> Preparing a Kermeta program </title>
           <section>
@@ -516,7 +506,7 @@
     written in KerMeta language. So you can edit this file to add some
     classes, attributes and so on using the KerMeta language (read <ulink
     type=""
-    url="http://www.kermeta.org/documents/manual/">http://www.kermeta.org/documents/manual/</ulink>
+    url="http://www.kermeta.org/documents/manual/"> Kermeta Manual</ulink>
     for more details on KerMeta language).</para>
 
     <para></para>
@@ -583,7 +573,8 @@
            
          <section>  
          <title> Serialization</title>
-         <para> The serialization permits to save and load models thanks to the persistence library.</para>
+         <para> The serialization permits to save and load models thanks to the persistence library. For this section look at the file serialisation.kmt into org.kermeta.fsm.serialisation/kermeta. 
+         You can create a new Kermeta project (File -> New -> New Kermeta Project into the Kermeta perspective) and name it sampleSerialisation, copy the file fsmStatic.ecore into metamodel folder. </para>
            <section>
           	<title>The persistence library</title>
         	<para>The persistence library is inspired from the resource manager of EMF models. There is a repository (called <emphasis>EMFRepository</emphasis>), that is aimed at containing a set of resources (the <emphasis>EMFResources</emphasis>). Each resource contains a reference called <emphasis>instances</emphasis>, that contains all the root classes of the loaded model (there is usually only have one root class). So, the procedure of creation of a resource that will handle EMF models is the following (code example is provided in next sections):</para>
@@ -615,7 +606,7 @@
          <emphasis role="strong">package</emphasis> fsm_package;
 
          <emphasis role="strong">require</emphasis> kermeta
-         <emphasis role="strong">require</emphasis> "../metamodels/fsm.ecore"
+         <emphasis role="strong">require</emphasis>  "../../metamodel/fsmStatic.ecore"
          <co id="load.emfmodel.metamodelfsm.co" linkends="load.emfmodel.metamodelfsm.callout"/>
          
          <emphasis role="strong">using</emphasis> kermeta::persistence 
@@ -629,7 +620,7 @@
          <emphasis>// Create the repository, then the resource</emphasis>
          <emphasis role="strong">var</emphasis> repository : EMFRepository <emphasis role="strong">init</emphasis> EMFRepository.new
          <emphasis role="strong">var</emphasis> resource : EMFResource 
-         resource ?= repository.createResource("../models/Fsm_dyn_sample1.xmi", "../metamodels/fsm.ecore")
+         resource ?= repository.createResource("platform:/resource/org.kermeta.fsm.serialisation/model/Fsm_dyn_sample1.xmi", "platform:/resource/org.kermeta.fsm.serialisation/metamodel/fsmStatic.ecore")
          <co id="load.emfmodel.createResource.co" linkends="load.emfmodel.createResource.callout"/>
          resource.load
 
@@ -637,8 +628,10 @@
  fsm1 ?= resource.one
  <co id="load.emfmodel.resource.co" linkends="load.emfmodel.resource.callout"/>
  <emphasis>// Check that the fsm was correctly loaded</emphasis>
- fsm1.state.each { s | stdio.writeln("-&gt; "+s.name) }
- fsm1.transition.each { t | stdio.writeln( t.source.name+ " -- " +t.target.name ) }
+fsm1.ownedState.each { s | stdio.writeln("-> "+s.name) 
+ 		  s.outgoingTransition.each { ti | stdio.writeln( s.name +" in :" + ti.input + " " + ti.output)}
+ 		 s.incomingTransition.each { to | stdio.writeln( s.name +" out :" + to.input + " " + to.output )}
+ 		}
 <emphasis role="strong">end</emphasis>
          </programlisting>
          <para>
@@ -664,7 +657,7 @@
          
          <tip>
          <title>Browse through the resource</title>
-         <para> You can use resource.each if you want to browse through the resource.</para>
+         <para> You can use <emphasis role= "strong">resource.each  </emphasis> if you want to browse through the resource.</para>
          </tip>
          
          <!--  <warning>
@@ -682,13 +675,13 @@
          
           </section>
          
-         
-       
     <section>
       <title>Modify and save an EMF model with Kermeta</title>
       <para>At this stage, it should be interesting to be able to modify a previously loaded model using Kermeta before saving it. The procedure is very simple: do your manipulation as if your loaded FSM model is a Kermeta model (which is, in effect, the case!), and then, simply call a save method on the handling resource. For this purpose, the following code can be added at the end of the <emphasis>main</emphasis> operation defined in the above section:</para>
       <programlisting><emphasis role="strong">var</emphasis> newstate : fsm::State <emphasis role="strong">init</emphasis> fsm::State.new
-newstate.name := "s_new"fsm1.state.add(newstate)
+		newstate.name := "s_new" 
+		fsm1.ownedState.add(newstate) 
+		newstate.owningFSM := fsm1
 <emphasis>// save fsm1 </emphasis>
 resource.save()</programlisting>
       <para>It is also possible to save the modified model in a new file instead of overwriting the initial one by using the <literal>saveWithNewURI()</literal> method. To this end, just replace the last line of above code (<literal>resource.save()</literal>) by the following one:</para>
@@ -697,7 +690,7 @@ resource.save()</programlisting>
     
     <section>
     <title>Create a model in Kermeta, and save it as an EMF model</title>
-      <para>Saving a programmatically generated model requires to use a new specific instruction that addq the created <emphasis>Fsm</emphasis> root class to the destination resource. The following code chunk creates a simple EMF model with 2 states (named “foo”, and “bar”), and 2 transitions. Saving it then consists in adding the root class (i.e. the model object) stored in the variable <literal>fsm2</literal> into the resource instances.</para>
+      <para>Saving a programmatically generated model requires to use a new specific instruction that add the created <emphasis>Fsm</emphasis> root class to the destination resource. The following code chunk creates a simple EMF model with 2 states (named “foo”, and “bar”), and 2 transitions. Saving it then consists in adding the root class (i.e. the model object) stored in the variable <literal>fsm2</literal> into the resource instances.</para>
       <programlisting><emphasis role="strong">var</emphasis> another_resource : EMFResource
 another_resource ?= repository.createResource(
        "../models/Fsm_scratch_sample.xmi",
@@ -733,7 +726,7 @@ another_resource.save()</programlisting>
      
     </section> 
     
-    <section>
+    <section id="completeKermetaProgramTemplate">
      <title>A template for a complete Kermeta program<phrase id="template"/></title>
       <para>The following short code sample provides a comprehensive code template (replace the <emphasis>&lt;words&gt;</emphasis>) for model loading. Note here that the term <emphasis>model object</emphasis> is appropriate (better than <emphasis>root class</emphasis>!): loading a model consists in getting the root class, from which, thanks to the containment property (see section, all the contained instances can be accessed.</para>
       <programlisting>@mainClass "fsm_package::Main"
@@ -844,7 +837,7 @@ another_resource.save()</programlisting>
       : one with constraints checking and one without. A constraints checking
       execution checks every pre/post condition statements of your KerMeta
       program. If one of this pre/post conditions are violated, an exception
-      is raised and the program is aborted. A none constraints checking
+      is raised and the program is aborted. An example of contraints checking execution is avalaible on the section <link linkend="ConstraintCheckingSample"> Constraints checking execution sample </link>. A none constraints checking
       execution does not check the pre/post condition statements of your
       KerMeta program. </para>
     </section>
@@ -944,7 +937,7 @@ another_resource.save()</programlisting>
     
    </section>
    
-   <section> 
+   <section id="ConstraintCheckingSample"> 
     <title>Constraints checking execution sample</title>
 
     <para>Have a look at the "step" method in the "State" class in the
@@ -1108,7 +1101,7 @@ post notVoidOutput is
     If you want to serialize a new element to the meta model you need to add it into.</para>
     </warning>
     
-    <para> Have a look on the Kermeta file fsm_Operationnal_Semantics.kmt in the folder kermeta/semantics. 
+    <para> Have a look on the Kermeta file fsm_Operationnal_Semantics.kmt in the folder kermeta/semantics of fr.irisa.triskell.kermeta.samples.fsm.demo. 
     You can add several aspects in the same file. So, this code is structured like this : 
      </para>
      
@@ -1354,7 +1347,7 @@ end</programlisting>
   
   <chapter>
   <title> Check model </title>
- <para>This class permit to check all the invariants from the meta model thanks to the method checkAllInvariants.
+ <para>Look at the file checkInvariants.kmt in fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/checkInvariants.kmt . This class permit to check all the invariants from the meta model thanks to the method checkAllInvariants.
   </para>
  <programlisting>
  class InvariantChecker
