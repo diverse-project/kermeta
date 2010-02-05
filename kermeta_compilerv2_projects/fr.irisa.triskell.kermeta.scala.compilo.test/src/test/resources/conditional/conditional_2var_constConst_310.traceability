@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <traces sourceReferences="//@references.16" targetReferences="//@references.17" description="//@messages.8"/>
+  <traces sourceReferences="//@references.18" targetReferences="//@references.19" description="//@messages.9"/>
+  <traces sourceReferences="//@references.20" targetReferences="//@references.21" description="//@messages.10"/>
+  <traces sourceReferences="//@references.22" targetReferences="//@references.23" description="//@messages.11"/>
+  <traces sourceReferences="//@references.24" targetReferences="//@references.25" description="//@messages.12"/>
+  <traces sourceReferences="//@references.26" targetReferences="//@references.27" description="//@messages.13"/>
+  <traces sourceReferences="//@references.28" targetReferences="//@references.29" description="//@messages.14"/>
+  <traces sourceReferences="//@references.30" targetReferences="//@references.31" description="//@messages.15"/>
+  <traces sourceReferences="//@references.32" targetReferences="//@references.33" description="//@messages.16"/>
+  <traces sourceReferences="//@references.34" targetReferences="//@references.35" description="//@messages.17"/>
+  <traces sourceReferences="//@references.36" targetReferences="//@references.37" description="//@messages.18"/>
+  <traces sourceReferences="//@references.38" targetReferences="//@references.39" description="//@messages.19"/>
+  <traces sourceReferences="//@references.40" targetReferences="//@references.41" description="//@messages.20"/>
+  <traces sourceReferences="//@references.42" targetReferences="//@references.43" description="//@messages.21"/>
+  <traces sourceReferences="//@references.44" targetReferences="//@references.45" description="//@messages.22"/>
+  <traces sourceReferences="//@references.46" targetReferences="//@references.47" description="//@messages.23"/>
+  <traces sourceReferences="//@references.48" targetReferences="//@references.49" description="//@messages.24"/>
+  <traces sourceReferences="//@references.50" targetReferences="//@references.51" description="//@messages.25"/>
+  <traces sourceReferences="//@references.52" targetReferences="//@references.53" description="//@messages.26"/>
+  <traces sourceReferences="//@references.54" targetReferences="//@references.55" description="//@messages.27"/>
+  <traces sourceReferences="//@references.56" targetReferences="//@references.57" description="//@messages.28"/>
+  <traces sourceReferences="//@references.58" targetReferences="//@references.59" description="//@messages.29"/>
+  <traces sourceReferences="//@references.60" targetReferences="//@references.61" description="//@messages.30"/>
+  <traces sourceReferences="//@references.62" targetReferences="//@references.63" description="//@messages.31"/>
+  <traces sourceReferences="//@references.64" targetReferences="//@references.65" description="//@messages.32"/>
+  <traces sourceReferences="//@references.66" targetReferences="//@references.67" description="//@messages.33"/>
+  <traces sourceReferences="//@references.68" targetReferences="//@references.69" description="//@messages.34"/>
+  <traces sourceReferences="//@references.70" targetReferences="//@references.71" description="//@messages.35"/>
+  <traces sourceReferences="//@references.72" targetReferences="//@references.73" description="//@messages.36"/>
+  <traces sourceReferences="//@references.74" targetReferences="//@references.75" description="//@messages.37"/>
+  <traces sourceReferences="//@references.76" targetReferences="//@references.77" description="//@messages.38"/>
+  <traces sourceReferences="//@references.78" targetReferences="//@references.79" description="//@messages.39"/>
+  <traces sourceReferences="//@references.80" targetReferences="//@references.81" description="//@messages.40"/>
+  <traces sourceReferences="//@references.82" targetReferences="//@references.83" description="//@messages.41"/>
+  <traces sourceReferences="//@references.84" targetReferences="//@references.85" description="//@messages.42"/>
+  <traces sourceReferences="//@references.86" targetReferences="//@references.87" description="//@messages.43"/>
+  <traces sourceReferences="//@references.88" targetReferences="//@references.89" description="//@messages.44"/>
+  <traces sourceReferences="//@references.90" targetReferences="//@references.91" description="//@messages.45"/>
+  <traces sourceReferences="//@references.92" targetReferences="//@references.93" description="//@messages.46"/>
+  <traces sourceReferences="//@references.94" targetReferences="//@references.95" description="//@messages.47"/>
+  <traces sourceReferences="//@references.96" targetReferences="//@references.97" description="//@messages.48"/>
+  <traces sourceReferences="//@references.98" targetReferences="//@references.99" description="//@messages.49"/>
+  <traces sourceReferences="//@references.100" targetReferences="//@references.101" description="//@messages.50"/>
+  <traces sourceReferences="//@references.102" targetReferences="//@references.103" description="//@messages.51"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="16" charBeginAt="212" lineEndAt="16" charEndAt="768"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="18" charBeginAt="247" lineEndAt="18" charEndAt="766"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="18" charBeginAt="266" lineEndAt="18" charEndAt="270"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="19" charBeginAt="292" lineEndAt="19" charEndAt="296"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.0/@condition/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="19" charBeginAt="283" lineEndAt="19" charEndAt="287"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.0/@condition/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="19" charBeginAt="288" lineEndAt="19" charEndAt="291"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.0/@condition"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="22" charBeginAt="367" lineEndAt="22" charEndAt="385"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.0/@elseBody/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="22" charBeginAt="353" lineEndAt="22" charEndAt="358"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.0/@elseBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="22" charBeginAt="358" lineEndAt="22" charEndAt="386"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.0/@elseBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="22" charBeginAt="353" lineEndAt="22" charEndAt="386"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.0/@elseBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="20" charBeginAt="320" lineEndAt="20" charEndAt="341"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.0/@thenBody/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="20" charBeginAt="306" lineEndAt="20" charEndAt="311"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.0/@thenBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="20" charBeginAt="311" lineEndAt="20" charEndAt="342"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.0/@thenBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="20" charBeginAt="306" lineEndAt="20" charEndAt="342"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.0/@thenBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="19" charBeginAt="280" lineEndAt="19" charEndAt="392"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="25" charBeginAt="410" lineEndAt="25" charEndAt="415"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.1/@condition/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="25" charBeginAt="401" lineEndAt="25" charEndAt="405"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.1/@condition/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="25" charBeginAt="406" lineEndAt="25" charEndAt="409"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.1/@condition"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="28" charBeginAt="484" lineEndAt="28" charEndAt="506"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.1/@elseBody/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="28" charBeginAt="470" lineEndAt="28" charEndAt="475"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.1/@elseBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="28" charBeginAt="475" lineEndAt="28" charEndAt="507"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.1/@elseBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="28" charBeginAt="470" lineEndAt="28" charEndAt="507"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.1/@elseBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="26" charBeginAt="439" lineEndAt="26" charEndAt="458"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.1/@thenBody/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="26" charBeginAt="425" lineEndAt="26" charEndAt="430"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.1/@thenBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="26" charBeginAt="430" lineEndAt="26" charEndAt="459"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.1/@thenBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="26" charBeginAt="425" lineEndAt="26" charEndAt="459"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.1/@thenBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="25" charBeginAt="398" lineEndAt="25" charEndAt="516"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="31" charBeginAt="535" lineEndAt="31" charEndAt="540"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.2/@condition/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="31" charBeginAt="525" lineEndAt="31" charEndAt="530"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.2/@condition/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="31" charBeginAt="531" lineEndAt="31" charEndAt="534"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.2/@condition"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="34" charBeginAt="610" lineEndAt="34" charEndAt="633"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.2/@elseBody/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="34" charBeginAt="596" lineEndAt="34" charEndAt="601"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.2/@elseBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="34" charBeginAt="601" lineEndAt="34" charEndAt="634"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.2/@elseBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="34" charBeginAt="596" lineEndAt="34" charEndAt="634"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.2/@elseBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="32" charBeginAt="564" lineEndAt="32" charEndAt="584"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.2/@thenBody/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="32" charBeginAt="550" lineEndAt="32" charEndAt="555"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.2/@thenBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="32" charBeginAt="555" lineEndAt="32" charEndAt="585"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.2/@thenBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="32" charBeginAt="550" lineEndAt="32" charEndAt="585"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.2/@thenBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="31" charBeginAt="522" lineEndAt="31" charEndAt="640"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="37" charBeginAt="659" lineEndAt="37" charEndAt="663"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.3/@condition/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="37" charBeginAt="649" lineEndAt="37" charEndAt="654"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.3/@condition/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="37" charBeginAt="655" lineEndAt="37" charEndAt="658"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.3/@condition"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="40" charBeginAt="732" lineEndAt="40" charEndAt="754"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.3/@elseBody/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="40" charBeginAt="718" lineEndAt="40" charEndAt="723"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.43">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.3/@elseBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="40" charBeginAt="723" lineEndAt="40" charEndAt="755"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.44">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.3/@elseBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="40" charBeginAt="718" lineEndAt="40" charEndAt="755"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.45">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.3/@elseBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="38" charBeginAt="687" lineEndAt="38" charEndAt="706"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.46">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.3/@thenBody/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="38" charBeginAt="673" lineEndAt="38" charEndAt="678"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.47">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.3/@thenBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="38" charBeginAt="678" lineEndAt="38" charEndAt="707"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.48">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.3/@thenBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="38" charBeginAt="673" lineEndAt="38" charEndAt="707"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.49">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.3/@thenBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="37" charBeginAt="646" lineEndAt="37" charEndAt="761"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.50">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body/@statement.3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/conditional/conditional_2var_constConst_310.kmt" lineBeginAt="18" charBeginAt="274" lineEndAt="18" charEndAt="766"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.51">
+    <refObject href="conditional_2var_constConst_310.km#//@packages.0/Conditional2VarConstConst/main/@body"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" traces="//@traces.7"/>
+  <messages language="english" type="Mapping" traces="//@traces.8"/>
+  <messages language="english" type="Mapping" traces="//@traces.9"/>
+  <messages language="english" type="Mapping" traces="//@traces.10"/>
+  <messages language="english" type="Mapping" traces="//@traces.11"/>
+  <messages language="english" type="Mapping" traces="//@traces.12"/>
+  <messages language="english" type="Mapping" traces="//@traces.13"/>
+  <messages language="english" type="Mapping" traces="//@traces.14"/>
+  <messages language="english" type="Mapping" traces="//@traces.15"/>
+  <messages language="english" type="Mapping" traces="//@traces.16"/>
+  <messages language="english" type="Mapping" traces="//@traces.17"/>
+  <messages language="english" type="Mapping" traces="//@traces.18"/>
+  <messages language="english" type="Mapping" traces="//@traces.19"/>
+  <messages language="english" type="Mapping" traces="//@traces.20"/>
+  <messages language="english" type="Mapping" traces="//@traces.21"/>
+  <messages language="english" type="Mapping" traces="//@traces.22"/>
+  <messages language="english" type="Mapping" traces="//@traces.23"/>
+  <messages language="english" type="Mapping" traces="//@traces.24"/>
+  <messages language="english" type="Mapping" traces="//@traces.25"/>
+  <messages language="english" type="Mapping" traces="//@traces.26"/>
+  <messages language="english" type="Mapping" traces="//@traces.27"/>
+  <messages language="english" type="Mapping" traces="//@traces.28"/>
+  <messages language="english" type="Mapping" traces="//@traces.29"/>
+  <messages language="english" type="Mapping" traces="//@traces.30"/>
+  <messages language="english" type="Mapping" traces="//@traces.31"/>
+  <messages language="english" type="Mapping" traces="//@traces.32"/>
+  <messages language="english" type="Mapping" traces="//@traces.33"/>
+  <messages language="english" type="Mapping" traces="//@traces.34"/>
+  <messages language="english" type="Mapping" traces="//@traces.35"/>
+  <messages language="english" type="Mapping" traces="//@traces.36"/>
+  <messages language="english" type="Mapping" traces="//@traces.37"/>
+  <messages language="english" type="Mapping" traces="//@traces.38"/>
+  <messages language="english" type="Mapping" traces="//@traces.39"/>
+  <messages language="english" type="Mapping" traces="//@traces.40"/>
+  <messages language="english" type="Mapping" traces="//@traces.41"/>
+  <messages language="english" type="Mapping" traces="//@traces.42"/>
+  <messages language="english" type="Mapping" traces="//@traces.43"/>
+  <messages language="english" type="Mapping" traces="//@traces.44"/>
+  <messages language="english" type="Mapping" traces="//@traces.45"/>
+  <messages language="english" type="Mapping" traces="//@traces.46"/>
+  <messages language="english" type="Mapping" traces="//@traces.47"/>
+  <messages language="english" type="Mapping" traces="//@traces.48"/>
+  <messages language="english" type="Mapping" traces="//@traces.49"/>
+  <messages language="english" type="Mapping" traces="//@traces.50"/>
+  <messages language="english" type="Mapping" traces="//@traces.51"/>
+</traceability:TraceModel>
