@@ -167,21 +167,15 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.eclipse</groupId>
-			<artifactId>uml2.uml</artifactId>
-			<version>3.0.1-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.output/lib/org.eclipse.uml2.uml_3.0.1.v200908281330.jar</systemPath>
+			<artifactId>uml2</artifactId>
+			<version>3.0.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.eclipse</groupId>
 			<artifactId>uml2.common</artifactId>
-			<version>3.0.1-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>/Applications/eclipse/eclipse35-GMF/plugins/org.eclipse.uml2.common_1.5.0.v200905041045.jar</systemPath>
+			<version>1.5.0</version>
 		</dependency>
 
 
