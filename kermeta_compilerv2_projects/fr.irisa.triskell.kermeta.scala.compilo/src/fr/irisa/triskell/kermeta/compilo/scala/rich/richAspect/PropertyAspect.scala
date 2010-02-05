@@ -110,9 +110,19 @@ def generateAttribute(res : StringBuilder) : Unit ={
 		getListorType(res)
 		res.append("={this.")
 				
+		
 		if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")){
-			if (this.getType().isInstanceOf[PrimitiveType] && !"java.lang.Boolean".equals(this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo))
+			if (this.getType().isInstanceOf[PrimitiveType] 
+			&& !( 
+			
+			"fr.irisa.triskell.kermeta.language.structure.Boolean".equals(this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo) ||
+			"org.eclipse.emf.ecore.EBoolean".equals(this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo)
+				)
+			)
 			{
+				
+				
+				log.info("ECHO TYPE "+s+" "+this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo)
 				res.append(prefix+"get")
 			}else{
 				res.append(prefix+"is")

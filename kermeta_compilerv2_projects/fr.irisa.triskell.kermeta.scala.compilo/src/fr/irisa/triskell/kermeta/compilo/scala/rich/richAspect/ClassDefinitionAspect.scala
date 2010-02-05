@@ -30,7 +30,11 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 				this.getSuperType.foreach(superC => {
 					if (i==0) {
 						res.append(" extends ")
-						var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
+					} else {
+						res.append(" with ")
+					}
+					
+					var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
 						
 						
 						var packName = kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName)
@@ -43,13 +47,13 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 						res.append(".")
 						res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
 						res.append("Aspect")
-					}else{
+					/*}else{
 						res.append(" with ")
 						var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
 						res.append(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName)))
 						res.append(".")
 						res.append(Util.protectScalaKeyword(superC.asInstanceOf[Class].getTypeDefinition.getName))
-					}
+					}*/
 					i=i+1
 				})
 				
