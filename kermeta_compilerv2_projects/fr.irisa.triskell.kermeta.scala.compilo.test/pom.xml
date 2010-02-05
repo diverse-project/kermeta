@@ -66,6 +66,13 @@
 			</exclusions>
 
 		</dependency>
+		<dependency>
+			<groupId>fr.irisa.triskell</groupId>
+			<artifactId>kermeta-all</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>/local/hudson_kermeta/jobs/KermetaCompilerV2_TestCase/workspace/fr.irisa.triskell.kermeta.scala.compilo.test/lib/kermeta_standalone_full.jar</systemPath>
+		</dependency>
 	</dependencies>
 	<properties>
 		<maven.compile.source>1.6</maven.compile.source>
