@@ -408,22 +408,22 @@ public class TestCompiloCases extends TestCase {
 	}
 	@Test
 	public void testreflection() {
-		process(this.getClass().getResource("/kermeta").getPath()
+		process(this.getClass().getResource("/testReflection/kermeta").getPath()
 				+ "/reflection");
 	}
 	@Test
 	public void testEcoreUtil() {
-		process(this.getClass().getResource("/helpers").getPath()
+		process(this.getClass().getResource("/testReflection/kermeta/helpers").getPath()
 				+ "/EcoreUtil");
 	}
 	@Test
 	public void testArt2Metadomo() {
-		process(this.getClass().getResource("/kermeta").getPath()
+		process(this.getClass().getResource("/testGreg/TransfoMetadomoArt/kermeta").getPath()
 				+ "/Art2Metadomo");
 	}
 	@Test
 	public void testMetadomo2Art() {
-		process(this.getClass().getResource("/kermeta").getPath()
+		process(this.getClass().getResource("/testGreg/TransfoMetadomoArt/kermeta").getPath()
 				+ "/Metadomo2Art");
 	}
 }
