@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://art/pattern/art"
+            class="pattern.art.ArtPackage"
+            genModel="model/metamodel@runtimePattern.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://art/pattern/art/instance"
+            class="pattern.art.instance.InstancePackage"
+            genModel="model/metamodel@runtimePattern.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://art/pattern/art/type"
+            class="pattern.art.type.TypePackage"
+            genModel="model/metamodel@runtimePattern.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://art/pattern/art/implem"
+            class="pattern.art.implem.ImplemPackage"
+            genModel="model/metamodel@runtimePattern.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://art/pattern/art/group"
+            class="pattern.art.group.GroupPackage"
+            genModel="model/metamodel@runtimePattern.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
+            class="patternframework.PatternframeworkPackage"
+            genModel="model/metamodel@runtimePattern.genmodel"/>
+   </extension>
+
+</plugin>

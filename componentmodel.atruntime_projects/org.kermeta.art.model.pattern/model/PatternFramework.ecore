@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="patternframework"
+    nsURI="platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
+    nsPrefix="patternframework">
+  <eClassifiers xsi:type="ecore:EClass" name="ModelPattern">
+    <eOperations name="getRole" eType="#//PObject">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xD;&#xA;&#x9;var rol : patternframework::PRole init pattern.roles.detect{r | r.name.equals(roleName)}&#xD;&#xA;&#x9;result := if rol.isVoid.~not then&#xD;&#xA;&#x9;&#x9;rol.player&#xD;&#xA;&#xD;&#xA;&#x9;else&#xD;&#xA;&#x9;&#x9;void&#xD;&#xA;&#xD;&#xA;&#x9;end&#xD;&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="roleName" eType="#//PLabel"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="#//PModel"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" eType="#//PConstraint"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureIdentifier" upperBound="-1"
+        eType="#//PLabel">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="falsepositivepatterns"
+        upperBound="-1" eType="#//PModel" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" upperBound="-1"
+        eType="#//PObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
+        eType="#//PRole" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PConstraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="#//PExpression">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="#//PConstraintLanguage">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="PExpression" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="PLabel" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="PConstraintLanguage">
+    <eLiterals name="kermeta" value="1" literal="kermeta"/>
+    <eLiterals name="ocl" value="2" literal="ocl"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PRole">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//PLabel">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="player" lowerBound="1"
+        eType="#//PObject"/>
+  </eClassifiers>
+</ecore:EPackage>
