@@ -3,46 +3,28 @@
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <book lang="en-US">
   <?ooogenerator OpenOffice.org/2.0$Linux OpenOffice.org_project/680m1$Build-8990?>
-
-  <?oooversion ?>
-
+  <?oooversion?>
   <bookinfo>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-
     <author>
       <firstname> Marie Gouyette</firstname>
-
-      <firstname></firstname>
+      <firstname/>
     </author>
-
     <title>Kermeta tutorial</title>
-
     <date>2006-09-25T10:35:34</date>
-    
-
     <keywordset>
       <keyword>Kermeta</keyword>
-
       <keyword>metamodeling</keyword>
-
       <keyword>language</keyword>
     </keywordset>
-
     <subtitle> How to create a FSM graphical editor with GMF? </subtitle>
-
     <bibliomisc>Licence EPL</bibliomisc>
-
     <date>19/07/2006</date>
-
     <abstract>
-      <para> This tutorial shows how to create a GMF editor for Fsm models.
-      
-     </para>
+      <para> This tutorial shows how to create a GMF editor for Fsm models. </para>
     </abstract>
-
     <publisher>
       <publishername>INRIA</publishername>
-
       <address>
         <state>France</state>
         <otheraddr>
@@ -50,540 +32,506 @@
         </otheraddr>
       </address>
     </publisher>
-
     <confgroup>
       <conftitle>title</conftitle>
-
       <confnum>Reference</confnum>
-
       <confsponsor>sponsor</confsponsor>
     </confgroup>
   </bookinfo>
-
   <preface>
     <?print-orientation portrait?>
-
     <title>Preface</title>
-
-    <para>Kermeta is a Domain Specific Language
-    dedicated to metamodel engineering. It fills the gap let by MOF which
-    defines only the structure of meta-models, by adding a way to specify
-    static semantic (similar to OCL) and dynamic semantic (using operational
-    semantic in the operation of the metamodel). Kermeta uses the object-oriented
-    paradigm like Java or Eiffel.
-     This document presents various aspects of the language,
-    including the textual syntax, the metamodel (which can be viewed as the
-    abstract syntax) and some more advanced features typically included in its
-    framework.</para>
-
-    <important> <para>
-     Kermeta is an evolving software and despite that we put a lot of attention to this
-        document, it may contain errors (more likely in the code samples). If
-        you find any error or have some information that improves this
-        document, please send it to us using the bug tracker in the
-        forge:
-
-      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+    <para>Kermeta is a Domain Specific Language dedicated to metamodel engineering. It fills the gap
+      let by MOF which defines only the structure of meta-models, by adding a way to specify static
+      semantic (similar to OCL) and dynamic semantic (using operational semantic in the operation of
+      the metamodel). Kermeta uses the object-oriented paradigm like Java or Eiffel. This document
+      presents various aspects of the language, including the textual syntax, the metamodel (which
+      can be viewed as the abstract syntax) and some more advanced features typically included in
+      its framework.</para>
+    <important>
+      <para> Kermeta is an evolving software and despite that we put a lot of attention to this
+        document, it may contain errors (more likely in the code samples). If you find any error or
+        have some information that improves this document, please send it to us using the bug
+        tracker in the forge: <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+          <emphasis role="strong">
+            <emphasis role="strong">
+              <emphasis role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+            </emphasis>
+          </emphasis>
+        </ulink>
         <emphasis role="strong">
           <emphasis role="strong">
-            <emphasis
-            role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+            <emphasis role="strong"/>
           </emphasis>
-        </emphasis>
-      </ulink>
-
-      <emphasis role="strong">
-        <emphasis role="strong">
-          <emphasis role="strong" />
-        </emphasis>
-      </emphasis>
-
-         or using the developer mailing list
-          (kermeta-developers@lists.gforge.inria.fr)
-       
-
-      <emphasis role="strong">
-        <emphasis role="strong">
-          <emphasis role="strong" />
-        </emphasis>
-      </emphasis>
-
-      Last check: v0.3.1
-     </para></important>
-
-    <tip><para>
-       The most update version of this document is available on line from 
-
-      <ulink type=""
-      url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
-
-       . 
-    </para></tip>
-   
-  </preface>
-
-<chapter>
-  <title> Introduction </title>
-  <para>
-  This tutorial presents how create a GMF Editor for the FSM metamodel.
-  GMF (Graphical Modelling Framework) is an Eclipse framework that permits to create a specific graphical editor of models conform to a meta model following the MVC architecture (Model View Controller).
-  It is based on the Framework EMF  (Eclipse Modelling Framework)in charge of domain model and on the Framework GEF ( Graphical Editing Framework) charged on the controllers.
-  
-  For more informations about GMF please refers to the following links : 
-  </para>
-  <para>
-  	 <orderedlist continuation="restarts">
-  	 <listitem>
-  	   <para>  <ulink url="http://www.eclipse.org/modeling/gmf/"> http://www.eclipse.org/modeling/gmf/</ulink> (Eclipse GMF Project) </para>	   
-  	 </listitem>
-  	 
-  	 	 <listitem>
-  	   <para>  <ulink url="http://wiki.eclipse.org/index.php/GMF_Tutorial">http://wiki.eclipse.org/index.php/GMF_Tutorial</ulink> </para>	   
-  	 </listitem>
-  	 
-  	  <listitem>
-  	   <para>  <ulink url="http://wiki.eclipse.org/index.php/GMF_Tutorial_BPMN"> http://wiki.eclipse.org/index.php/GMF_Tutorial_BPMN</ulink> </para>	   
-  	 </listitem>
-  	 
-  	  <listitem>
-  	   <para>  <ulink url="http://www.ibm.com/developerworks/opensource/library/os-ecl-gmf/"> http://www.ibm.com/developerworks/opensource/library/os-ecl-gmf/ </ulink> (Quickly getting started) </para>	   
-  	 </listitem>	   
-      </orderedlist> 
-  </para>
-  </chapter>
-  
-  <chapter>
-  <title> Getting started with GMF</title>
-  <para>  In this tutorial,we suppose that GMF is already installed into Eclipse. We will copy and use the ecore metamodel fsmStatic.ecore stored into fr.irisa.triskell.samples.fsm.demo/metamodels/.</para>
-  <section> 
-  <title> Mechanisms of GMF </title>
-  <para> GMF uses six files to create a generated graphical editor for instances of a given metamode like shown in the following DashBoard ( all the steps are finished).
-  For more information about DashBoard View please refer to the section <link linkend="create_new_GMF_project"> Create a new GMF project</link>.
-   <figure>
-      <title> GMF process</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/dashboard_finished.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    As you can see, the generation of a GMF graphical editor contains six steps :
-     <orderedlist continuation="restarts">
-  	 <listitem>
-  	   <para> <emphasis role="strong"> Domain model : </emphasis> the metamodel we want to use to create the graphical editor.
-  	   For this metamodel, you have the choice between several kinds of metamodels : Annotated Java code , Ecore model, Rose class model, UML model or XML Schema). 
-  	   In this tutorial we will use the ecore metamodel of FSM.
-  	    </para>	   
-  	 </listitem>
-  	 
-  	  <listitem>
-  	   <para> <emphasis role="strong"> Domain Gen Model (.genmodel) : </emphasis> this file is used to generate the domain model code with EMF (it is the EMF file genModel)
-  	    </para>	   
-  	 </listitem>
-  	 
-  	 <listitem>
-  	   <para> <emphasis role="strong"> Graphical Def Model (.gmfgraph) : </emphasis>  this file is used to define the graphical elements for your domain model
-  	    </para>	   
-  	 </listitem>
-  	 
-  	 <listitem>
-  	   <para> <emphasis role="strong"> Tooling Def Model (.gmftool) : </emphasis>  this file is used to define the palette of tools that you can use in the graphical editor.
-  	    </para>	   
-  	 </listitem>
-  	 
-  	 <listitem>
-  	   <para> <emphasis role="strong"> Mapping Model (.gmfmap) : </emphasis>  this file links the domain model, the graphical model (.gmfgraph) and the tooling model (.gmftool).
-  	    </para>	   
-  	 </listitem>
-  	 
-  	  <listitem>
-  	   <para> <emphasis role="strong"> Diagram Editor Gen Model (.gmfgen) : </emphasis>  this final file us used to generate the GMF graphical editor in addition to the EMF code generated by the .genmodel file.
-  	    </para>	   
-  	 </listitem>	
-      </orderedlist> 
-      
-      <tip> 
-      <para> You can generate two kind of graphical editor with GMF : a plugin graphical editor integrated with Eclipse or as an RCP (Rich Client Platform) application which consists in an autonomous application.
-      To generate a RCP application, just click into RCP on the DashBoard. In this tutorial we will create a GMF editor as an Eclipse plugin.  </para>
-      </tip>
-   </para>
-  </section>
-  
-  <section id="create_new_GMF_project">
-   <title> Create a new GMF project</title>
-   <para> To start with, right click on New->Other-> Graphical Modeling Framework -> New GMF Project. 
-  
-    <figure>
-      <title> Create a new GMF project</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/New_GMF_Project.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    Then, you can give to it the name FSM_GMF_Editor like shown below.
-     <figure>
-      <title> Give a name to the new GMF project</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/Name_GMF_Project.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    Select the DashBoard view, it will be useful to use GMF. This dashboard resumes all the necessary steps to create an editor with GMF.
-     <figure>
-      <title> Show Dashboard view</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/Show_DashBoard.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
+        </emphasis> or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr)
+          <emphasis role="strong">
+          <emphasis role="strong">
+            <emphasis role="strong"/>
+          </emphasis>
+        </emphasis> Last check: v0.3.1 </para>
+    </important>
     <tip>
-    <para> You can also add this view by Window->Show view-> Other-> General -> GMF DashBoard.</para>
+      <para> The most update version of this document is available on line from <ulink type=""
+          url="http://www.kermeta.org/">http://www.kermeta.org</ulink> . </para>
     </tip>
-    At the beginning, the DashBoard looks like this :
-    <figure>
-      <title> DashBoard at the beginning</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/GMF_DashBoard.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    Now, we will follow all the steps presented into the last section.
-   </para>
-  </section>
-  
-  <section>
-  <title> Generation Process</title>
-  <para> This section details more all the steps. To start with, copy the file fsmStatic.ecore stored into 
-  fr.irisa.triskell.kermeta.samples.fsm.demo/models/fsmStatic.ecore into FSM_GMF_Editor/model. </para>
-  
-  	<section>
-  	<title> Domain model </title> 
-  	<para> In the case Domain model click on Select and choose the fsmStatic.ecore from FSM_GMF_Editor.
-  	  Then, click on the Derive at the left to create the EMF GenModel.</para>
-  	 </section>
-  	 
-  	 <section> 
-  	 <title> Domain Gen Model  </title>
-  	 <para> In the Domain Gen Model case click on Select.The following wizard appears to choose the name of the .genmodel file.
-  	   
-  	   <figure>
-      <title> Choose name for the genmodel file</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/create_genModel.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-     Click on Next. In the following wizard select ecore model.
-     
-       <figure>
-      <title> Select ecore model</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/Select_Model_Importer.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-    Click on Next. For the next wizard do not forget to click on load.
-     <figure>
-      <title> Load ecore model</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/genModel_Load_ecore.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    Then click on Next and Finish.
-    The file fsmStatic.genmodel appears on the project and the DashBoard.
-    Open it and click on the arrow near FSMStatic. Right click on Fsm -> Generate All. It generates the EMF Java code for the domain model.
-  	 </para>
-  	 <para>  For the next steps you can choose between begin with Graphical Def Model or Tooling Def Model.
-    We start with Graphical Def Model.</para>
-  	 </section>
-  	 
-  	 <section> 
-  	 <title> Graphical Definition Model </title>
-  	 <para> Click in Derive at the top of the Domain Model case.
-  	 Like for GenModel you can select the name.
-  	 Then, select the root metaclass of your metamodel, in your case FSM.
-  	  <figure>
-      <title> </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/genModel_Load_ecore.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-    In this tutorial we want simply to create a graphical editor for States with their name and Transition.
-    Select the elements like in the following figure : 
-    <figure>
-      <title> Select elements from domain </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/graphicalDefinition_gmfgraph.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-    The resulted file fsmStatic.gmfgraph looks like this : 
-    <figure>
-      <title> fsmStatic.gmfgraph at the beginning</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsmStatic_gmfgraph_begin.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-    Now, we want to do changes on fsmStatic.gmfgraph file. To start with we want to replace the state rectangle by a rounded state rectangle.
-    Start with suppress the Rectangle State figure ( Right click on it -> Delete).  Click on FigureDescriptor StateFigure -> New Child -> Rounded Rectangle.
-    Then click on the created Rectangle and use the Properties view to edit its name as StateFigure.
-    
-    <tip> 
-    <para> If you do not see the Properties View go to Window-> Show View -> General -> Properties.</para>
-    </tip>
-    
-     <figure>
-      <title> Edit Rounded Rectangle 's name</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/change_to_Rounded_Rectangle.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    Then right click on Rounded Rectangle StateFigure and choose Flow Layout. 
-    Then right click again and choose Label. Add its name StateFigureLabel in the Properties View.
-    
-     <figure>
-      <title> Edit Label 's name</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/add_StateFigureLabel.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    A Diagram Label StateName appears on the gmfgraph file.
-    Now, Click on the Child Access and set its figure property to Label StateFigureLabel.
-    Then right click on Child Access and choose Refresh.
-    You can add a foreground on your Rounded Rectangle. For this right click on Rounded Rectangle StateFigure -> Foreground Color Constant Color and edit the value to blue.
+  </preface>
+  <chapter>
+    <title> Introduction </title>
+    <para> This tutorial presents how create a GMF Editor for the FSM metamodel. GMF (Graphical
+      Modelling Framework) is an Eclipse framework that permits to create a specific graphical
+      editor of models conform to a meta model following the MVC architecture (Model View
+      Controller). It is based on the Framework EMF (Eclipse Modelling Framework)in charge of domain
+      model and on the Framework GEF ( Graphical Editing Framework) charged on the controllers. For
+      more informations about GMF please refers to the following links : </para>
+    <para>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <para>
+            <ulink url="http://www.eclipse.org/modeling/gmf/">
+              http://www.eclipse.org/modeling/gmf/</ulink> (Eclipse GMF Project) </para>
+        </listitem>
+        <listitem>
+          <para>
+            <ulink url="http://wiki.eclipse.org/index.php/GMF_Tutorial"
+              >http://wiki.eclipse.org/index.php/GMF_Tutorial</ulink>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <ulink url="http://wiki.eclipse.org/index.php/GMF_Tutorial_BPMN">
+              http://wiki.eclipse.org/index.php/GMF_Tutorial_BPMN</ulink>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <ulink url="http://www.ibm.com/developerworks/opensource/library/os-ecl-gmf/">
+              http://www.ibm.com/developerworks/opensource/library/os-ecl-gmf/ </ulink> (Quickly
+            getting started) </para>
+        </listitem>
+      </orderedlist>
     </para>
-    
-    <para> Then we want to customize the connection and add an open arrow on its end. Start with adding a PolylineDecoration (right click on PolylineConnection TransitionFigure -> New Child -> Polyline Decoration).
-    Name it targetDecoration.
-    We need to add three Template Point to draw the arrow. Right click on Polyline Target targetDecoration -> New Child -> Template Point (at the bottom of the contextual menu) to add one of them. 
-    Then edit them respectively to (-1,1), (0,0) and (-1,1). Now edit Polyline Connection TransitionFigure and set targetDecoration with Polyline Decoration targetDecoration.
-    
-     <figure>
-      <title> Set Target Decoration</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/set_polyline_decoration.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    The file  fsmStatic.gmfgraph should look like this :
-     <figure>
-      <title> Set Target Decoration</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsmStatic_gmfgraph_final.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-     Now, we create the tooling model.
-    </para>
-  	 </section>
-  	 
-  	 <section> 
-  	 <title> Tooling Definition Model</title>
-  	 <para> Click on Derive at the bottom of the Domain model case.
-  	 Like for the graphical model choose the file name and the root metaclass (FSM).
-  	 In this palette we want only to use State and Transition, so select the elements like in the following figure :
-  	 
-  	  <figure>
-      <title> Tooling definition </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/gmftool_tooling_definition.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-    The file fsmStatic.gmftool looks like this : 
-     <figure>
-      <title> fsmStatic.gmftool </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/gmftool_file.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    This images can be customized. For more informations please refer to the GMF documentation.
-  	  </para>
-  	 </section>
-  	 
-  	 <section>
-  	 <title> Mapping Model</title>
-  	 <para> The mapping model (.gmfmap) permits to link .genmodel, .gmfgraph and .gmftool files.
-  	 In the DashBoard click on Combine. Like for Graphical and Tooling model choose a name and select the root metaclass (FSM).
-  	 We want to have a very simple editor with simply State and one Transition connector.
-  	 So, in the last wizard, remove owningFSM and incomingTransition  in order to obtain the following wizard: 
-  	 <figure>
-      <title> wizard creation .gmfmap </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/finish_create_gmfmap_model.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-    The fsmStatic.gmfmap looks like this
-    <figure>
-      <title> fsmStatic.gmfmap </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/gmfmap_file_begin.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-    <warning> 
-    <para> Do not forget to check if Diagram Node (or Diagram Link) and Tool properties of Node Mapping or Link Mapping have the good values.
-    <figure>
-      <title> Node and tool </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/mapping_node_tool.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-     </para>
-    </warning>
-    
-    On this file we need to add a Feature Label mapping to manage the name label of the state.
-    Right click on Node mapping State -> New Child -> Feature Label Mapping. Edit the diagram label with Diagram Label StateName.
-    You have also to edit Features to display and Features to edit thanks to the Following wizard : 
-    <figure>
-      <title> Select feature and add it </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/gmfmap_feature_display.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-    <figure>
-      <title> Add diagram label into Feature Mapping </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/set_featureLabelMapping.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-    
-    Now, the file fsmStatic.gmfmap looks like this : 
-    <figure>
-      <title> fsmStatic.gmfmap  </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/gmfmap_file_finish.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-  	 </para>
-  	 </section>
-  	 
-  	 <section>
-  	 <title> Diagram Editor Gen Model </title>
-  	 <para> Click on Transform and the file fsmStatic.gmfgen is created.
-  	 The file fsmStatic.gmfgen looks like : 
-  	 
-  	  <figure>
-      <title> fsmStatic.gmfmap  </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsmStatic_gmfgen.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    Then click on generate diagram editor. 
-    Your project should be like this : 
-    
-     <figure>
-      <title> fsmStatic.gmfmap  </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/project_in_final.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-  	  </para>
-  	 </section>
-  	 
-  	 So, we have generated the graphical editor for FSM. The next section explains how to test it.
-  </section>
-  
-  <section>
-  <title> Use the generated editor</title>
-  <para> To test the generated editor right click on FSM_GMF_Editor.diagram -> Run as -> Eclipse application. 
-   It opens a new Eclipse instance (runtime) where the tested plugin is added. Create a new General Project in this new Eclipse named testFSMEditor.
-   Right click on it -> New -> Example -> FsmStatic Diagam 
-   <figure>
-      <title> Create FsmStatic Diagram model </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/create_fsmStatic_model_in_runtime.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    We choose to call our files test.fsm and test.fsm_diagram
-   In this generated editor the model is stored into two files : 
-   <orderedlist continuation="restarts">
-  	 <listitem>
-  	   <para> test.fsm : store information on domain model
-  	    </para>	   
-  	 </listitem>
-  	 
-  	  <listitem>
-  	   <para> test.fsm_diagram : store graphical informations
-  	    </para>	   
-  	 </listitem>
-  	 </orderedlist>
-  	 Open the test.fsm_diagram and use the palette. 
-  	 You can have a result like this : 
-  	 <figure>
-      <title> Create FsmStatic Diagram model </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/test_editor_eclipse_runtime.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-  	 
-   </para>
-  </section>
-  
-  <para> We have created a very simple GMF Editor for FSM models. It can be extended. For more informations please refer to the GMF documentation.</para>
   </chapter>
-  
-  
-  
-
-
- 
-
-  
-  
+  <chapter>
+    <title> Getting started with GMF</title>
+    <para> In this tutorial,we suppose that GMF is already installed into Eclipse. We will copy and
+      use the ecore metamodel fsmStatic.ecore stored into
+      fr.irisa.triskell.samples.fsm.demo/metamodels/.</para>
+    <section>
+      <title> Mechanisms of GMF </title>
+      <para> GMF uses six files to create a generated graphical editor for instances of a given
+        metamode like shown in the following DashBoard ( all the steps are finished). For more
+        information about DashBoard View please refer to the section <link
+          linkend="create_new_GMF_project"> Create a new GMF project</link>. <figure>
+          <title> GMF process</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata
+                fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/dashboard_finished.png"
+              />
+            </imageobject>
+          </mediaobject>
+        </figure> As you can see, the generation of a GMF graphical editor contains six steps :
+          <orderedlist continuation="restarts">
+          <listitem>
+            <para>
+              <emphasis role="strong"> Domain model : </emphasis> the metamodel we want to use to
+              create the graphical editor. For this metamodel, you have the choice between several
+              kinds of metamodels : Annotated Java code , Ecore model, Rose class model, UML model
+              or XML Schema). In this tutorial we will use the ecore metamodel of FSM. </para>
+          </listitem>
+          <listitem>
+            <para>
+              <emphasis role="strong"> Domain Gen Model (.genmodel) : </emphasis> this file is used
+              to generate the domain model code with EMF (it is the EMF file genModel) </para>
+          </listitem>
+          <listitem>
+            <para>
+              <emphasis role="strong"> Graphical Def Model (.gmfgraph) : </emphasis> this file is
+              used to define the graphical elements for your domain model </para>
+          </listitem>
+          <listitem>
+            <para>
+              <emphasis role="strong"> Tooling Def Model (.gmftool) : </emphasis> this file is used
+              to define the palette of tools that you can use in the graphical editor. </para>
+          </listitem>
+          <listitem>
+            <para>
+              <emphasis role="strong"> Mapping Model (.gmfmap) : </emphasis> this file links the
+              domain model, the graphical model (.gmfgraph) and the tooling model (.gmftool).
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <emphasis role="strong"> Diagram Editor Gen Model (.gmfgen) : </emphasis> this final
+              file us used to generate the GMF graphical editor in addition to the EMF code
+              generated by the .genmodel file. </para>
+          </listitem>
+        </orderedlist>
+        <tip>
+          <para> You can generate two kind of graphical editor with GMF : a plugin graphical editor
+            integrated with Eclipse or as an RCP (Rich Client Platform) application which consists
+            in an autonomous application. To generate a RCP application, just click into RCP on the
+            DashBoard. In this tutorial we will create a GMF editor as an Eclipse plugin. </para>
+        </tip>
+      </para>
+    </section>
+    <section id="create_new_GMF_project">
+      <title> Create a new GMF project</title>
+      <para> To start with, click on File-> New->Other-> Graphical Modeling Framework -> New GMF
+        Project. <figure>
+          <title> Create a new GMF project</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata
+                fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/New_GMF_Project.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure> Then, you can give to it the name FSM_GMF_Editor like shown below. <figure>
+          <title> Give a name to the new GMF project</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata
+                fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/Name_GMF_Project.png"
+              />
+            </imageobject>
+          </mediaobject>
+        </figure> Select the DashBoard view, it will be useful to use GMF. This dashboard resumes
+        all the necessary steps to create an editor with GMF. <figure>
+          <title> Show Dashboard view</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata
+                fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/Show_DashBoard.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <tip>
+          <para> You can also add this view by selecting the org.kermeta.fsm.gmf in the Package
+            Explorer View and then click on Window->Show view-> Other-> General -> GMF
+            DashBoard.</para>
+        </tip> At the beginning, the DashBoard looks like this : <figure>
+          <title> DashBoard at the beginning</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata
+                fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/GMF_DashBoard.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure> Now, we will follow all the steps presented into the last section. </para>
+    </section>
+    <section>
+      <title> Generation Process</title>
+      <para> This section details more all the steps. To start with, copy the file fsmStatic.ecore
+        stored into fr.irisa.triskell.kermeta.samples.fsm.demo/models/fsmStatic.ecore into
+        org.kermeta.fsm.gmf/model. In all this section we use the Dashboard view.</para>
+      <section>
+        <title> Domain model </title>
+        <para> On the DashBoard view, in the case Domain model click on Select and choose the
+          fsmStatic.ecore from org.kermeta.fsm.gmf. Then, click on the Derive at the left to create
+          the EMF GenModel.</para>
+      </section>
+      <section>
+        <title> Domain Gen Model </title>
+        <para> The following wizard appears to choose the name of the .genmodel file. (You can make
+          appears it clicking on Select in the Domain Gen Model Case).<figure>
+            <title> Choose name for the genmodel file</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/create_genModel.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> Click on Next. In the following wizard select ecore model. <figure>
+            <title> Select ecore model</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/Select_Model_Importer.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> Click on Next. For the next wizard do not forget to click on load. <figure>
+            <title> Load ecore model</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/genModel_Load_ecore.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> Then click on Next and Finish. The file fsmStatic.genmodel appears on the
+          project and the DashBoard. Open it and click on the arrow near FSMStatic. Right click on
+          Fsm -> Generate All. It generates the EMF Java code for the domain model. <figure>
+            <title> Generate EMF Java code</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/genModel_file.png"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+        </para>
+        <para> For the next steps you can choose between begin with Graphical Def Model or Tooling
+          Def Model. We start with Graphical Def Model.</para>
+      </section>
+      <section>
+        <title> Graphical Definition Model </title>
+        <para> Click in Derive at the top of the Domain Model case. Like for GenModel you can select
+          the name. Then, select the root metaclass of your metamodel, in your case FSM. <figure>
+            <title> </title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/select_diagram_element.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> In this tutorial we want simply to create a graphical editor for States with
+          their name and Transition. Select the elements like in the following figure : <figure>
+            <title> Select elements from domain </title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/graphicalDefinition_gmfgraph.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> The resulted file fsmStatic.gmfgraph looks like this : <figure>
+            <title> fsmStatic.gmfgraph at the beginning</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsmStatic_gmfgraph_begin.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> Now, we want to do changes on fsmStatic.gmfgraph file. To start with we want to
+          replace the state rectangle by a rounded state rectangle. Start with suppress the
+          Rectangle State figure ( Right click on it -> Delete). Click on FigureDescriptor
+          StateFigure -> New Child -> Rounded Rectangle. Then click on the created Rectangle and use
+          the Properties view to edit its name as StateFigure. <tip>
+            <para> If you do not see the Properties View go to Window-> Show View -> General ->
+              Properties.</para>
+          </tip>
+          <figure>
+            <title> Edit Rounded Rectangle 's name</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/change_to_Rounded_Rectangle.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> Then right click on Rounded Rectangle StateFigure and choose Flow Layout. Then
+          right click again and choose Label. Add its name StateFigureLabel in the Properties View. <figure>
+            <title> Edit Label 's name</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/add_StateFigureLabel.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> A Diagram Label StateName appears on the gmfgraph file. Now, Click on the Child
+          Access and set its figure property to Label StateFigureLabel. Then right click on Child
+          Access and choose Refresh. You can add a foreground on your Rounded Rectangle. For this
+          right click on Rounded Rectangle StateFigure -> Foreground Color Constant Color and edit
+          the value to blue. The file fsmStatic.gmfgraph should look like this : <figure>
+            <title> Rounded rectangle</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsm_static_gmfgraph_rounded.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure>
+        </para>
+        <para> Then we want to customize the connection and add an open arrow on its end. Start with
+          adding a PolylineDecoration (right click on PolylineConnection TransitionFigure -> New
+          Child -> Polyline Decoration). Name it targetDecoration. We need to add three Template
+          Point to draw the arrow. Right click on Polyline Target targetDecoration -> New Child ->
+          Template Point (at the bottom of the contextual menu) to add one of them. Then edit them
+          respectively to (-1,1), (0,0) and (-1,-1). Now edit Polyline Connection TransitionFigure
+          and set targetDecoration with Polyline Decoration targetDecoration. The file
+          fsmStatic.gmfgraph should look like this : <figure>
+            <title> Set Target Decoration</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsmStatic_gmfgraph_final.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> Now, we create the tooling model. </para>
+      </section>
+      <section>
+        <title> Tooling Definition Model</title>
+        <para> Click on Derive at the bottom of the Domain model case. Like for the graphical model
+          choose the file name and the root metaclass (FSM). In this palette we want only to use
+          State and Transition, so select the elements like in the following figure : <figure>
+            <title> Tooling definition </title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/gmftool_tooling_definition.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> The file fsmStatic.gmftool looks like this : <figure>
+            <title> fsmStatic.gmftool </title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/gmftool_file.png"/>
+              </imageobject>
+            </mediaobject>
+          </figure> This images can be customized. For more informations please refer to the GMF
+          documentation. </para>
+      </section>
+      <section>
+        <title> Mapping Model</title>
+        <para> The mapping model (.gmfmap) permits to link .genmodel, .gmfgraph and .gmftool files.
+          In the DashBoard click on Combine. Like for Graphical and Tooling model choose a name and
+          select the root metaclass (FSM). We want to have a very simple editor with simply State
+          and one Transition connector. So, in the last wizard, remove owningFSM and
+          incomingTransition in order to obtain the following wizard: <figure>
+            <title> wizard creation .gmfmap </title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/finish_create_gmfmap_model.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> The fsmStatic.gmfmap looks like this <figure>
+            <title> fsmStatic.gmfmap </title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/gmfmap_file_begin.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <warning>
+            <para> Do not forget to check if Diagram Node (or Diagram Link) and Tool properties of
+              Node Mapping or Link Mapping have the good values. <figure>
+                <title> Node and tool </title>
+                <mediaobject>
+                  <imageobject>
+                    <imagedata
+                      fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/mapping_node_tool.png"
+                    />
+                  </imageobject>
+                </mediaobject>
+              </figure>
+            </para>
+          </warning> On this file we need to add a Feature Label mapping to manage the name label of
+          the state. Right click on Node mapping State -> New Child -> Feature Label Mapping. Edit
+          the diagram label with Diagram Label StateName. You have also to edit Features to display
+          and Features to edit thanks to the Following wizard : <figure>
+            <title> Select feature and add it </title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/gmfmap_feature_display.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <figure>
+            <title> Add diagram label into Feature Mapping </title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/set_featureLabelMapping.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure>Then, edit the LinkMapping Transition like in the following image : <figure>
+            <title> Edit the LinkMapping Transition</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/link_mappingTransition.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> Now, the file fsmStatic.gmfmap looks like this : <figure>
+            <title> fsmStatic.gmfmap </title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/gmfmap_file_finish.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure>
+        </para>
+      </section>
+      <section>
+        <title> Diagram Editor Gen Model </title>
+        <para> Click on Transform and the file fsmStatic.gmfgen is created. The file
+          fsmStatic.gmfgen looks like : <figure>
+            <title> fsmStatic.gmfmap </title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsmStatic_gmfgen.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> Then click on generate diagram editor. Your project should be like this : <figure>
+            <title> fsmStatic.gmfmap </title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/project_in_final.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure> So, we have generated the graphical editor for FSM. The next section explains
+          how to test it. </para>
+      </section>
+    </section>
+    <section>
+      <title> Use the generated editor</title>
+      <para> To test the generated editor right click on org.kermeta.fsm.gmf.diagram -> Run as ->
+        Eclipse application. It opens a new Eclipse instance (runtime) where the tested plugin is
+        added. Create a new General Project in this new Eclipse named testFSMEditor. Right click on
+        it -> New -> Example -> FsmStatic Diagam <figure>
+          <title> Create FsmStatic Diagram model </title>
+          <mediaobject>
+            <imageobject>
+              <imagedata
+                fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/create_fsmStatic_model_in_runtime.png"
+              />
+            </imageobject>
+          </mediaobject>
+        </figure> We choose to call our files test.fsm and test.fsm_diagram In this generated editor
+        the model is stored into two files : <orderedlist continuation="restarts">
+          <listitem>
+            <para> test.fsm : store information on domain model </para>
+          </listitem>
+          <listitem>
+            <para> test.fsm_diagram : store graphical informations </para>
+          </listitem>
+        </orderedlist> Open the test.fsm_diagram and use the palette. You can have a result like
+        this : <figure>
+          <title> Create FsmStatic Diagram model </title>
+          <mediaobject>
+            <imageobject>
+              <imagedata
+                fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/test_editor_eclipse_runtime.png"
+              />
+            </imageobject>
+          </mediaobject>
+        </figure>
+      </para>
+      <para> We have created a very simple GMF Editor for FSM models. It can be extended. For more
+        informations please refer to the GMF documentation.</para>
+    </section>
+  </chapter>
 </book>
