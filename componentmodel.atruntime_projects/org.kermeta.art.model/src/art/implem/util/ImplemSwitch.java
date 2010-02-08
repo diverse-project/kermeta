@@ -107,12 +107,6 @@ public class ImplemSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImplemPackage.PORT_IMPLEMENTATION: {
-				PortImplementation portImplementation = (PortImplementation)theEObject;
-				T result = casePortImplementation(portImplementation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ImplemPackage.TYPE_IMPLEMENTATION: {
 				TypeImplementation typeImplementation = (TypeImplementation)theEObject;
 				T result = caseTypeImplementation(typeImplementation);
@@ -172,21 +166,6 @@ public class ImplemSwitch<T> {
 	 * @generated
 	 */
 	public T caseOSGiComponent(OSGiComponent object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Port Implementation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Port Implementation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePortImplementation(PortImplementation object) {
 		return null;
 	}
 

@@ -71,13 +71,6 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass portImplementationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass typeImplementationEClass = null;
 
 	/**
@@ -221,15 +214,6 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getPortImplementation() {
-		return portImplementationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getTypeImplementation() {
 		return typeImplementationEClass;
 	}
@@ -289,8 +273,6 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 		osGiComponentEClass = createEClass(OS_GI_COMPONENT);
 		createEAttribute(osGiComponentEClass, OS_GI_COMPONENT__IMPLEMENTING_CLASS);
 
-		portImplementationEClass = createEClass(PORT_IMPLEMENTATION);
-
 		typeImplementationEClass = createEClass(TYPE_IMPLEMENTATION);
 
 		osGiTypeEClass = createEClass(OS_GI_TYPE);
@@ -341,8 +323,6 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 
 		initEClass(osGiComponentEClass, OSGiComponent.class, "OSGiComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOSGiComponent_ImplementingClass(), theArtPackage.getString(), "implementingClass", null, 1, 1, OSGiComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(portImplementationEClass, PortImplementation.class, "PortImplementation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(typeImplementationEClass, TypeImplementation.class, "TypeImplementation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

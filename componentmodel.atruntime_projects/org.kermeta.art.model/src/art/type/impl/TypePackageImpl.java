@@ -418,15 +418,6 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractPort_Implem() {
-		return (EReference)abstractPortEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getPort() {
 		return portEClass;
 	}
@@ -611,7 +602,6 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		abstractPortEClass = createEClass(ABSTRACT_PORT);
 		createEReference(abstractPortEClass, ABSTRACT_PORT__SERVICE);
 		createEAttribute(abstractPortEClass, ABSTRACT_PORT__ROLE);
-		createEReference(abstractPortEClass, ABSTRACT_PORT__IMPLEM);
 
 		portEClass = createEClass(PORT);
 		createEAttribute(portEClass, PORT__IS_OPTIONAL);
@@ -715,7 +705,6 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		initEClass(abstractPortEClass, AbstractPort.class, "AbstractPort", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractPort_Service(), this.getService(), null, "service", null, 1, 1, AbstractPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractPort_Role(), theArtPackage.getString(), "role", null, 1, 1, AbstractPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractPort_Implem(), theImplemPackage.getPortImplementation(), null, "implem", null, 0, 1, AbstractPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portEClass, Port.class, "Port", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPort_IsOptional(), theArtPackage.getBoolean(), "isOptional", "false", 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

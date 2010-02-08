@@ -140,13 +140,13 @@ RULES {
 		
 		Type.ControlService::= "control" #1 "service" #1 name[] #1 "{" ( operation )* !0 "}"  ;
 		
-		Type.Port::= !1 role[T_PORT_KIND] (isOptional[T_OPTIONAL])? #1 "port" #1 name[] #1 ":" #1 service[] #1 "[" lower[MULTIPLICITY] ".." upper[MULTIPLICITY] "]" (!1 "implementation"  #1 implem)? ;
+		Type.Port::= !1 role[T_PORT_KIND] (isOptional[T_OPTIONAL])? #1 "port" #1 name[] #1 ":" #1 service[] #1 "[" lower[MULTIPLICITY] ".." upper[MULTIPLICITY] "]" ;
 		
 		Implem.FractalComponent::= "FractalComponent" #1 "<" "controllerDesc" #1 ":" #1 controllerDesc[STRING_LITERAL] #1 "contentDesc" #1 ":" #1 contentDesc[STRING_LITERAL]  ">"  ;
 		
 		Implem.OSGiComponent::= "OSGiComponent" #1 ":" #1 implementingClass[STRING_LITERAL] ;
 		
-		Implem.OSGiPort::= "OSGiPort" #1 ":" #1 serviceId[STRING_LITERAL] ; 
+		//Implem.OSGiPort::= "OSGiPort" #1 ":" #1 serviceId[STRING_LITERAL] ; 
 		
 		Group.TypeGroup::= "typegroup" #1 name[] #1 "{" ( !1 "types" #1 ":" #1 types[] ("," #1 types[])* )?  ( !1 subGroups)* !0 "}"  ;
 		
@@ -159,5 +159,9 @@ RULES {
 		Type.Dictionary::= !1 "attribute" #1 name[] #1 ":" "[" type[] #1 "->" #1 valueType[] "]"  ( #1 "default" #1 "{" keys* !0 "}" )?  ;
 		
 		Type.DictionaryDefaultValue::= !1 "[" #1 key[STRING_LITERAL] #1 ("->" #1 value[STRING_LITERAL] )? #1 "]" ;
+		
+		Type.PortId ::= name[];
+		
+		Type.PortCollection::= !1 role[T_PORT_KIND] #1 "port" #1 name[] #1 ":" #1 service[] #1 "{" ids ("," #1 ids)* "}" ;
 		
 }

@@ -143,25 +143,6 @@ public interface ImplemPackage extends EPackage {
 	int OS_GI_COMPONENT_FEATURE_COUNT = COMPONENT_IMPLEMENTATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link art.implem.impl.PortImplementationImpl <em>Port Implementation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see art.implem.impl.PortImplementationImpl
-	 * @see art.implem.impl.ImplemPackageImpl#getPortImplementation()
-	 * @generated
-	 */
-	int PORT_IMPLEMENTATION = 3;
-
-	/**
-	 * The number of structural features of the '<em>Port Implementation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORT_IMPLEMENTATION_FEATURE_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link art.implem.impl.TypeImplementationImpl <em>Type Implementation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -169,7 +150,7 @@ public interface ImplemPackage extends EPackage {
 	 * @see art.implem.impl.ImplemPackageImpl#getTypeImplementation()
 	 * @generated
 	 */
-	int TYPE_IMPLEMENTATION = 4;
+	int TYPE_IMPLEMENTATION = 3;
 
 	/**
 	 * The number of structural features of the '<em>Type Implementation</em>' class.
@@ -188,7 +169,7 @@ public interface ImplemPackage extends EPackage {
 	 * @see art.implem.impl.ImplemPackageImpl#getOSGiType()
 	 * @generated
 	 */
-	int OS_GI_TYPE = 5;
+	int OS_GI_TYPE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Generate Instance Bundle</b></em>' attribute.
@@ -271,16 +252,6 @@ public interface ImplemPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getOSGiComponent_ImplementingClass();
-
-	/**
-	 * Returns the meta object for class '{@link art.implem.PortImplementation <em>Port Implementation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Port Implementation</em>'.
-	 * @see art.implem.PortImplementation
-	 * @generated
-	 */
-	EClass getPortImplementation();
 
 	/**
 	 * Returns the meta object for class '{@link art.implem.TypeImplementation <em>Type Implementation</em>}'.
@@ -388,16 +359,6 @@ public interface ImplemPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OS_GI_COMPONENT__IMPLEMENTING_CLASS = eINSTANCE.getOSGiComponent_ImplementingClass();
-
-		/**
-		 * The meta object literal for the '{@link art.implem.impl.PortImplementationImpl <em>Port Implementation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see art.implem.impl.PortImplementationImpl
-		 * @see art.implem.impl.ImplemPackageImpl#getPortImplementation()
-		 * @generated
-		 */
-		EClass PORT_IMPLEMENTATION = eINSTANCE.getPortImplementation();
 
 		/**
 		 * The meta object literal for the '{@link art.implem.impl.TypeImplementationImpl <em>Type Implementation</em>}' class.

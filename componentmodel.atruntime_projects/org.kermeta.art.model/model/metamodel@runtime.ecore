@@ -132,8 +132,6 @@
           eType="#//type/Service"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" lowerBound="1"
           eType="#//String"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="implem" eType="#//implem/PortImplementation"
-          containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//CardinalityElement #//type/AbstractPort">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="#//Boolean"
@@ -175,7 +173,6 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementingClass" lowerBound="1"
           eType="#//String"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="PortImplementation" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypeImplementation" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="OSGiType" eSuperTypes="#//implem/TypeImplementation">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="generateInstanceBundle"

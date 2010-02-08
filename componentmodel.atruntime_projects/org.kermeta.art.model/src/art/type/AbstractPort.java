@@ -20,7 +20,6 @@ import art.implem.PortImplementation;
  * <ul>
  *   <li>{@link art.type.AbstractPort#getService <em>Service</em>}</li>
  *   <li>{@link art.type.AbstractPort#getRole <em>Role</em>}</li>
- *   <li>{@link art.type.AbstractPort#getImplem <em>Implem</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,31 +79,5 @@ public interface AbstractPort extends NamedElement {
 	 * @generated
 	 */
 	void setRole(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Implem</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Implem</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Implem</em>' containment reference.
-	 * @see #setImplem(PortImplementation)
-	 * @see art.type.TypePackage#getAbstractPort_Implem()
-	 * @model containment="true"
-	 * @generated
-	 */
-	PortImplementation getImplem();
-
-	/**
-	 * Sets the value of the '{@link art.type.AbstractPort#getImplem <em>Implem</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Implem</em>' containment reference.
-	 * @see #getImplem()
-	 * @generated
-	 */
-	void setImplem(PortImplementation value);
 
 } // AbstractPort

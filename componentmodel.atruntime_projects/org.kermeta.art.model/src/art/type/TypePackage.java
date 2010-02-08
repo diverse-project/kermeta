@@ -486,22 +486,13 @@ public interface TypePackage extends EPackage {
 	int ABSTRACT_PORT__ROLE = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Implem</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_PORT__IMPLEM = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Abstract Port</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PORT_FEATURE_COUNT = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int ABSTRACT_PORT_FEATURE_COUNT = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link art.type.impl.PortImpl <em>Port</em>}' class.
@@ -559,22 +550,13 @@ public interface TypePackage extends EPackage {
 	int PORT__ROLE = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Implem</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORT__IMPLEM = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Is Optional</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__IS_OPTIONAL = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 3;
+	int PORT__IS_OPTIONAL = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Port</em>' class.
@@ -583,7 +565,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_FEATURE_COUNT = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 4;
+	int PORT_FEATURE_COUNT = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link art.type.impl.PortCollectionImpl <em>Port Collection</em>}' class.
@@ -621,15 +603,6 @@ public interface TypePackage extends EPackage {
 	 * @ordered
 	 */
 	int PORT_COLLECTION__ROLE = ABSTRACT_PORT__ROLE;
-
-	/**
-	 * The feature id for the '<em><b>Implem</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORT_COLLECTION__IMPLEM = ABSTRACT_PORT__IMPLEM;
 
 	/**
 	 * The feature id for the '<em><b>Ids</b></em>' containment reference list.
@@ -1053,17 +1026,6 @@ public interface TypePackage extends EPackage {
 	EAttribute getAbstractPort_Role();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link art.type.AbstractPort#getImplem <em>Implem</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Implem</em>'.
-	 * @see art.type.AbstractPort#getImplem()
-	 * @see #getAbstractPort()
-	 * @generated
-	 */
-	EReference getAbstractPort_Implem();
-
-	/**
 	 * Returns the meta object for class '{@link art.type.Port <em>Port</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1403,14 +1365,6 @@ public interface TypePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ABSTRACT_PORT__ROLE = eINSTANCE.getAbstractPort_Role();
-
-		/**
-		 * The meta object literal for the '<em><b>Implem</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ABSTRACT_PORT__IMPLEM = eINSTANCE.getAbstractPort_Implem();
 
 		/**
 		 * The meta object literal for the '{@link art.type.impl.PortImpl <em>Port</em>}' class.

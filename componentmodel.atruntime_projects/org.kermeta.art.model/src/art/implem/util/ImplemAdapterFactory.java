@@ -84,10 +84,6 @@ public class ImplemAdapterFactory extends AdapterFactoryImpl {
 				return createOSGiComponentAdapter();
 			}
 			@Override
-			public Adapter casePortImplementation(PortImplementation object) {
-				return createPortImplementationAdapter();
-			}
-			@Override
 			public Adapter caseTypeImplementation(TypeImplementation object) {
 				return createTypeImplementationAdapter();
 			}
@@ -154,20 +150,6 @@ public class ImplemAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOSGiComponentAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link art.implem.PortImplementation <em>Port Implementation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see art.implem.PortImplementation
-	 * @generated
-	 */
-	public Adapter createPortImplementationAdapter() {
 		return null;
 	}
 
