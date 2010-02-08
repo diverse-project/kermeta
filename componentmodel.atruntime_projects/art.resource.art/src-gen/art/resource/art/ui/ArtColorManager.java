@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 // A class for RGB-based color objects.

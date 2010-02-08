@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 // A hyperlink detector returns hyperlink if the token, where the mouse cursor

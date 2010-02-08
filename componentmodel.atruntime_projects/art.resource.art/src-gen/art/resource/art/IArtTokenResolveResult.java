@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art;
 
 // Implementations of this interface are used store the result of

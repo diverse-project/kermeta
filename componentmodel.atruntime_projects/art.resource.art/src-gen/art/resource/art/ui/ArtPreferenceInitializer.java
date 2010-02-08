@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 // Class used to initialize default preference values.

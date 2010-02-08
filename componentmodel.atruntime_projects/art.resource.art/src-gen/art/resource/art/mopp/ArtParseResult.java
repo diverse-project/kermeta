@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.mopp;
 
 public class ArtParseResult implements art.resource.art.IArtParseResult {

@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.mopp;
 
 // The DummyEObject is used to build a stack of dummy objects when descending

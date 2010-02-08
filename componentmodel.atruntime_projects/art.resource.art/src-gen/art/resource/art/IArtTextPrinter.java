@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art;
 
 // Converts a tree of <code>org.eclipse.emf.ecore.EObject</code>s into a plain text.

@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 // A manager class for the highlighting of occurrences and brackets.
@@ -174,7 +180,9 @@ public class ArtHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 					textWidget.setStyleRange(styleRange);
 				}
 				if (category.equals(art.resource.art.ui.ArtPositionCategory.PROXY.toString())) {
-					if (styleRange == null)					return;
+					if (styleRange == null) {
+						return;
+					}
 					styleRange.start = tmpPosition.offset;
 					textWidget.setStyleRange(styleRange);
 				}
@@ -182,7 +190,9 @@ public class ArtHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 					styleRange = getStyleRangeAtPosition(tmpPosition);
 					styleRange.borderStyle = org.eclipse.swt.SWT.BORDER_SOLID;
 					styleRange.borderColor = bracketColor;
-					if (styleRange.foreground == null)					styleRange.foreground = black;
+					if (styleRange.foreground == null) {
+						styleRange.foreground = black;
+					}
 					textWidget.setStyleRange(styleRange);
 				}
 			}

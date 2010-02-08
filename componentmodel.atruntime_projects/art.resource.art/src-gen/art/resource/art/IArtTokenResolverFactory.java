@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art;
 
 // A TokenResolverFactory creates TokenResolvers for a given token name.

@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.mopp;
 
 public class ArtMetaInformation implements art.resource.art.IArtMetaInformation {
@@ -68,6 +74,18 @@ public class ArtMetaInformation implements art.resource.art.IArtMetaInformation 
 	
 	public org.eclipse.jface.text.rules.ITokenScanner createTokenScanner(art.resource.art.ui.ArtColorManager colorManager) {
 		return new art.resource.art.ui.ArtTokenScanner(colorManager);
+	}
+	
+	public org.eclipse.emf.ecore.resource.Resource.Factory createResourceFactory() {
+		return new art.resource.art.mopp.ArtResourceFactory();
+	}
+	
+	public art.resource.art.mopp.ArtNewFileContentProvider getNewFileContentProvider() {
+		return new art.resource.art.mopp.ArtNewFileContentProvider();
+	}
+	
+	public art.resource.art.mopp.ArtCodeCompletionHelper createCodeCompletionHelper() {
+		return new art.resource.art.mopp.ArtCodeCompletionHelper();
 	}
 	
 }

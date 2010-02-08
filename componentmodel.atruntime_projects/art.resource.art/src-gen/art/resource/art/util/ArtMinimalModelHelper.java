@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.util;
 
 // A helper class that is able to create minimal model instances for Ecore

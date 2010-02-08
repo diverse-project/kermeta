@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 // Helper class to add markers to test files based on EMF's <code>org.eclipse.emf.ecore.resource.Resource.org.eclipse.emf.ecore.resource.Resource.Diagnostic</code>.

@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.mopp;
 
 // A factory for ContextDependentURIFragments. Given a feasible reference resolver,

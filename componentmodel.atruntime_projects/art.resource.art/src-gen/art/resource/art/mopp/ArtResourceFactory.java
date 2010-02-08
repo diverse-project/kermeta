@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.mopp;
 
 public class ArtResourceFactory implements org.eclipse.emf.ecore.resource.Resource.Factory {

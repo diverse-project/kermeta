@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art;
 
 // Basic Interface to directly manipulate parsed tokens and convert them into the attribute type in the meta model.

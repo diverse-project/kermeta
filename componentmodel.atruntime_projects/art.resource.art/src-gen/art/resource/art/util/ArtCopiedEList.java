@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.util;
 
 public class ArtCopiedEList<E> implements org.eclipse.emf.common.util.EList<E> {

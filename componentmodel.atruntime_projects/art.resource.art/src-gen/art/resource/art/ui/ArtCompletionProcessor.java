@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 public class ArtCompletionProcessor implements org.eclipse.jface.text.contentassist.IContentAssistProcessor {
@@ -14,15 +20,16 @@ public class ArtCompletionProcessor implements org.eclipse.jface.text.contentass
 		art.resource.art.IArtTextResource textResource = (art.resource.art.IArtTextResource) resource;
 		String content = viewer.getDocument().get();
 		art.resource.art.mopp.ArtCodeCompletionHelper helper = new art.resource.art.mopp.ArtCodeCompletionHelper();
-		java.util.Collection<String> proposals = helper.computeCompletionProposals(textResource.getMetaInformation(), content, offset);
+		art.resource.art.mopp.ArtCompletionProposal[] proposals = helper.computeCompletionProposals(textResource, content, offset);
 		
-		org.eclipse.jface.text.contentassist.ICompletionProposal[] result = new org.eclipse.jface.text.contentassist.ICompletionProposal[proposals.size()];
+		org.eclipse.jface.text.contentassist.ICompletionProposal[] result = new org.eclipse.jface.text.contentassist.ICompletionProposal[proposals.length];
 		int i = 0;
-		for (String proposal : proposals) {
-			org.eclipse.jface.text.contentassist.IContextInformation info = new org.eclipse.jface.text.contentassist.ContextInformation(proposal, proposal);
-			String contentBefore = content.substring(0, offset);
-			String insertString = art.resource.art.util.ArtStringUtil.getMissingTail(contentBefore, proposal);
-			result[i++] = new org.eclipse.jface.text.contentassist.CompletionProposal(insertString, offset, 0, insertString.length(), null, proposal, info, proposal);
+		for (art.resource.art.mopp.ArtCompletionProposal proposal : proposals) {
+			String proposalString = proposal.getInsertString();
+			String prefix = proposal.getPrefix();
+			org.eclipse.jface.text.contentassist.IContextInformation info = new org.eclipse.jface.text.contentassist.ContextInformation(proposalString, proposalString);
+			int begin = offset - prefix.length();
+			result[i++] = new org.eclipse.jface.text.contentassist.CompletionProposal(proposalString, begin, prefix.length(), proposalString.length(), null, proposalString, info, proposalString);
 		}
 		return result;
 	}

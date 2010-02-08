@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 // This custom implementation of a TreeViewer expands the tree
@@ -16,6 +22,10 @@ public class ArtOutlinePageTreeViewer extends org.eclipse.jface.viewers.TreeView
 			super.setSelection(selection, reveal);
 			suppressNotifications = false;
 		}
+	}
+	
+	protected void handleInvalidSelection(org.eclipse.jface.viewers.ISelection selection, org.eclipse.jface.viewers.ISelection newSelection) {
+		//this may not fire a selection changed event to avoid cyclic events between editor and outline
 	}
 	
 	public void refresh(Object element, boolean updateLabels) {

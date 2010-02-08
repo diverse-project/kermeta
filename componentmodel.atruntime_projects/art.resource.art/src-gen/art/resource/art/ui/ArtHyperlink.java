@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 // A hyperlink for the proxy elements in source code.
@@ -46,12 +52,8 @@ public class ArtHyperlink implements org.eclipse.jface.text.hyperlink.IHyperlink
 			org.eclipse.ui.IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
 			try {
 				org.eclipse.ui.IEditorPart activeEditor = page.getActiveEditor();
-				if (isSupported(file.getFileExtension())) {
-					page.openEditor(new org.eclipse.ui.part.FileEditorInput(file), activeEditor.getSite().getId());
-				} else {
-					org.eclipse.ui.IEditorDescriptor desc = workbench.getEditorRegistry().getDefaultEditor(file.getName());
-					page.openEditor(new org.eclipse.ui.part.FileEditorInput(file), desc.getId());
-				}
+				org.eclipse.ui.IEditorDescriptor desc = workbench.getEditorRegistry().getDefaultEditor(file.getName());
+				page.openEditor(new org.eclipse.ui.part.FileEditorInput(file), desc.getId());
 				org.eclipse.ui.IEditorPart editorPart = activeEditor;
 				if (editorPart instanceof art.resource.art.ui.ArtEditor) {
 					art.resource.art.ui.ArtEditor emftEditor = (art.resource.art.ui.ArtEditor) editorPart;
@@ -61,10 +63,6 @@ public class ArtHyperlink implements org.eclipse.jface.text.hyperlink.IHyperlink
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	private boolean isSupported(String fileExtension) {
-		return true;
 	}
 	
 	private org.eclipse.core.resources.IFile getIFileFromResource() {

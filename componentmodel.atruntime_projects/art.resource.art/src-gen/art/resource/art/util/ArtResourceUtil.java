@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.util;
 
 // Class ResourceUtil can be used to perform common tasks on resources,

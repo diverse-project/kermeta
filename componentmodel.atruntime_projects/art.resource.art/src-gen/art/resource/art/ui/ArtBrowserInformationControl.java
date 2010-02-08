@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 // Displays HTML information in a {@link org.eclipse.swt.browser.org.eclipse.swt.browser.Browser} widget.

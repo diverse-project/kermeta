@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 public class ArtNewFileWizard extends org.eclipse.jface.wizard.Wizard implements org.eclipse.ui.INewWizard {
@@ -124,7 +130,7 @@ public class ArtNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 	
 	// We will initialize file contents with a sample text.
 	private java.io.InputStream openContentStream() {
-		return new java.io.ByteArrayInputStream(getExampleContent().getBytes());
+		return new java.io.ByteArrayInputStream(new art.resource.art.mopp.ArtMetaInformation().getNewFileContentProvider().getNewFileContent(newName).getBytes());
 	}
 	
 	private void throwCoreException(String message) throws org.eclipse.core.runtime.CoreException {
@@ -139,31 +145,6 @@ public class ArtNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 		this.selection = selection;
 	}
 	
-	protected String getExampleContent(org.eclipse.emf.ecore.EClass[] startClasses, org.eclipse.emf.ecore.EClass[] allClassesWithSyntax) {
-		String content = "";
-		for (org.eclipse.emf.ecore.EClass next : startClasses) {
-			content = getExampleContent(next, allClassesWithSyntax);
-			if (content.trim().length() > 0) {
-				break;
-			}
-		}
-		return content;
-	}
-	
-	private String getExampleContent(org.eclipse.emf.ecore.EClass eClass, org.eclipse.emf.ecore.EClass[] allClassesWithSyntax) {
-		// create a minimal model
-		org.eclipse.emf.ecore.EObject root = new art.resource.art.util.ArtMinimalModelHelper().getMinimalModel(eClass, allClassesWithSyntax, newName);
-		// use printer to get text for model
-		java.io.ByteArrayOutputStream buffer = new java.io.ByteArrayOutputStream();
-		art.resource.art.IArtTextPrinter printer = getPrinter(buffer);
-		try {
-			printer.print(root);
-		} catch (java.io.IOException e) {
-			art.resource.art.mopp.ArtPlugin.logError("java.lang.Exception while generating example content.", e);
-		}
-		return buffer.toString();
-	}
-	
 	public java.lang.String getFileExtension() {
 		return new art.resource.art.mopp.ArtMetaInformation().getSyntaxName();
 	}
@@ -172,13 +153,4 @@ public class ArtNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 		return new art.resource.art.mopp.ArtMetaInformation();
 	}
 	
-	public java.lang.String getExampleContent() {
-		return getExampleContent(new org.eclipse.emf.ecore.EClass[] {
-			art.ArtPackage.eINSTANCE.getSystem(),
-		}, getMetaInformation().getClassesWithSyntax());
-	}
-	
-	public art.resource.art.IArtTextPrinter getPrinter(java.io.OutputStream outputStream) {
-		return new art.resource.art.mopp.ArtPrinter(outputStream, new art.resource.art.mopp.ArtResource());
-	}
 }

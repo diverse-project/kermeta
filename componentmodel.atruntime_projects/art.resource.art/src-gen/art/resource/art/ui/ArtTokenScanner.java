@@ -1,7 +1,13 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 // An adapter from the Eclipse <code>org.eclipse.jface.text.rules.ITokenScanner</code> interface
-// to the EMFText <code>ITextLexer</code> interface.
+// to the generated lexer.
 //
 public class ArtTokenScanner implements org.eclipse.jface.text.rules.ITokenScanner {
 	

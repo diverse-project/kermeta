@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 // Preference page for configuring syntax coloring.
@@ -464,10 +470,11 @@ public class ArtSyntaxColoringPreferencePage extends org.eclipse.jface.preferenc
 			HighlightingColorListItem item = new HighlightingColorListItem(languageId, tokenName);
 			terminals.add(item);
 		}
+		java.util.Collections.sort(terminals);
 		content.put(languageId, terminals);
 		
 		setPreferenceStore(art.resource.art.mopp.ArtPlugin.getDefault().getPreferenceStore());
-		setDescription("Define the syntax coloring for registered textual syntaxes.");
+		setDescription("Configure syntax coloring for ." + languageId + " files.");
 	}
 	
 	public void init(org.eclipse.ui.IWorkbench workbench) {

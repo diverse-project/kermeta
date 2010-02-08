@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.analysis;
 
 // A default implementation for token resolvers. It tries to resolve lexems using Java methods.

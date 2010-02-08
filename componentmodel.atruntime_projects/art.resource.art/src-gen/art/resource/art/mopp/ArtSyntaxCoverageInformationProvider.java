@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.mopp;
 
 public class ArtSyntaxCoverageInformationProvider {
@@ -23,13 +29,14 @@ public class ArtSyntaxCoverageInformationProvider {
 			art.type.TypePackage.eINSTANCE.getPort(),
 			art.implem.ImplemPackage.eINSTANCE.getFractalComponent(),
 			art.implem.ImplemPackage.eINSTANCE.getOSGiComponent(),
-			art.implem.ImplemPackage.eINSTANCE.getOSGiPort(),
 			art.group.GroupPackage.eINSTANCE.getTypeGroup(),
 			art.group.GroupPackage.eINSTANCE.getInstanceGroup(),
 			art.implem.ImplemPackage.eINSTANCE.getOSGiType(),
 			art.type.TypePackage.eINSTANCE.getBasicAttribute(),
 			art.type.TypePackage.eINSTANCE.getDictionary(),
 			art.type.TypePackage.eINSTANCE.getDictionaryDefaultValue(),
+			art.type.TypePackage.eINSTANCE.getPortId(),
+			art.type.TypePackage.eINSTANCE.getPortCollection(),
 		};
 	}
 	

@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.mopp;
 
 // A basic implementation of IResolveResult interface
@@ -41,7 +47,7 @@ public class ArtReferenceResolveResult<ReferenceType> implements art.resource.ar
 	}
 	
 	public void addMapping(String identifier, ReferenceType target) {
-		if (resolveFuzzy && target == null) {
+		if (!resolveFuzzy && target == null) {
 			throw new IllegalArgumentException("Mapping references to null is only allowed for fuzzy resolution.");
 		}
 		addMapping(identifier, target, null);

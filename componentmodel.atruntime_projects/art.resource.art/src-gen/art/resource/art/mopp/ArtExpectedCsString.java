@@ -1,21 +1,19 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.mopp;
 
-// A representation for a range in a document where a CsString (e.g.,
-// a keyword) is expected.
+// A representation for a range in a document where a keyword (i.e.,
+// a static string) is expected.
 public class ArtExpectedCsString extends art.resource.art.mopp.ArtAbstractExpectedElement {
+	
 	private String value;
 	
 	public ArtExpectedCsString(String value) {
-		this("0", value);
-	}
-	
-	public ArtExpectedCsString(String scopeID, String value) {
-		super(scopeID, false);
-		this.value = value;
-	}
-	
-	public ArtExpectedCsString(String scopeID, boolean discardFollowingExpectations, String value) {
-		super(scopeID, discardFollowingExpectations);
+		super();
 		this.value = value;
 	}
 	
@@ -23,8 +21,12 @@ public class ArtExpectedCsString extends art.resource.art.mopp.ArtAbstractExpect
 		return value;
 	}
 	
+	public String getTokenName() {
+		return "'" + value + "'";
+	}
+	
 	public String toString() {
-		return super.toString() + " CsString \"" + value + "\"";
+		return "CsString \"" + value + "\"";
 	}
 	
 	public boolean equals(Object o) {
@@ -33,4 +35,5 @@ public class ArtExpectedCsString extends art.resource.art.mopp.ArtAbstractExpect
 		}
 		return false;
 	}
+	
 }

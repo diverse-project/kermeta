@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 // This class finds the positions to highlight and adds them to the document.
@@ -20,7 +26,7 @@ public class ArtOccurrence {
 	//            the source viewer for the text
 	// @param tokenScanner
 	//            the token scanner helps to find the searched tokens
-	///
+	//
 	public ArtOccurrence(art.resource.art.IArtTextResource textResource, org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer, art.resource.art.ui.ArtTokenScanner tokenScanner) {
 		this.textResource = textResource;
 		this.projectionViewer = sourceViewer;
@@ -101,6 +107,9 @@ public class ArtOccurrence {
 	// @param bracketSet
 	//            the set of brackets which have to be ignored.
 	public void handleOccurrenceHighlighting(art.resource.art.ui.ArtBracketSet bracketSet) {
+		if (textResource == null) {
+			return;
+		}
 		org.eclipse.swt.custom.StyledText textWidget = projectionViewer.getTextWidget();
 		int caretOffset = textWidget.getCaretOffset();
 		caretOffset = projectionViewer.widgetOffset2ModelOffset(caretOffset);

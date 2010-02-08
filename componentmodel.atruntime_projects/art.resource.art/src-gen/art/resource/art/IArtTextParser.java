@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art;
 
 // A text parser parses a text into a tree of <code>EObject</code>s.
@@ -21,7 +27,7 @@ public interface IArtTextParser extends art.resource.art.IArtConfigurable {
 	// position.
 	//
 	// The class 'type' is used as start symbol.
-	public java.util.List<art.resource.art.IArtExpectedElement> parseToExpectedElements(org.eclipse.emf.ecore.EClass type);
+	public java.util.List<art.resource.art.mopp.ArtExpectedTerminal> parseToExpectedElements(org.eclipse.emf.ecore.EClass type, art.resource.art.IArtTextResource dummyResource);
 	
 	// Signals the parse to terminates the parsing as soon as possible.
 	public void terminate();

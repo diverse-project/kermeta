@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.ui;
 
 // This manager adds new projection annotations for the code folding and deletes
@@ -5,35 +11,6 @@ package art.resource.art.ui;
 // states. It provides the ability to restore the toggle states between Eclipse
 // sessions and after closing, opening as well.
 public class ArtCodeFoldingManager {
-	
-	private static final String VERIFY_KEY = "verify_key";
-	private static final String ANNOTATION = "ANNOTATION";
-	private static final String IS_COLLAPSED = "IS_COLLAPED";
-	private static final String OFFSET = "OFFSET";
-	private static final String LENGTH = "LENGTH";
-	private static final String MODEL = "MODEL";
-	protected java.util.List<org.eclipse.jface.text.source.projection.ProjectionAnnotation> oldAnnotations = new java.util.ArrayList<org.eclipse.jface.text.source.projection.ProjectionAnnotation>();
-	protected java.util.Map<org.eclipse.jface.text.source.projection.ProjectionAnnotation, org.eclipse.jface.text.Position> additions = new java.util.HashMap<org.eclipse.jface.text.source.projection.ProjectionAnnotation, org.eclipse.jface.text.Position>();
-	protected org.eclipse.jface.text.source.projection.ProjectionAnnotationModel projectionAnnotationModel;
-	protected org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer;
-	protected art.resource.art.ui.ArtEditor editor;
-	
-	// Creates a code folding manager to handle the
-	// <code>org.eclipse.jface.text.source.projection.ProjectionAnnotation</code>.
-	//
-	// @param sourceViewer
-	//            the source viewer to calculate the element lines
-	public ArtCodeFoldingManager(org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer,art.resource.art.ui.ArtEditor textEditor) {
-		this.projectionAnnotationModel = sourceViewer.getProjectionAnnotationModel();
-		this.sourceViewer = sourceViewer;
-		this.editor = textEditor;
-		addCloseListener(textEditor);
-		try {
-			restoreCodeFoldingStateFromFile(editor.getResource().getURI().toString());
-		} catch (java.lang.Exception e) {
-			calculatePositions();
-		}
-	}
 	
 	private class FoldingUpdateListener implements art.resource.art.IArtBackgroundParsingListener {
 		public void parsingCompleted(org.eclipse.emf.ecore.resource.Resource resource) {
@@ -67,7 +44,9 @@ public class ArtCodeFoldingManager {
 					return;
 				}
 				String uri = editorResource.getURI().toString();
-				if (uri.equals(this.editor.getResource().getURI().toString())) {
+				org.eclipse.emf.ecore.resource.Resource thisEditorResource = this.editor.getResource();
+				org.eclipse.emf.common.util.URI thisEditorResourceURI = thisEditorResource.getURI();
+				if (uri.equals(thisEditorResourceURI.toString())) {
 					saveCodeFoldingStateFile(uri);
 					editor.getSite().getPage().removePartListener(this);
 				}
@@ -89,6 +68,35 @@ public class ArtCodeFoldingManager {
 		public void partVisible(org.eclipse.ui.IWorkbenchPartReference partRef) {
 		}
 		
+	}
+	
+	private static final String VERIFY_KEY = "verify_key";
+	private static final String ANNOTATION = "ANNOTATION";
+	private static final String IS_COLLAPSED = "IS_COLLAPSED";
+	private static final String OFFSET = "OFFSET";
+	private static final String LENGTH = "LENGTH";
+	private static final String MODEL = "MODEL";
+	protected java.util.List<org.eclipse.jface.text.source.projection.ProjectionAnnotation> oldAnnotations = new java.util.ArrayList<org.eclipse.jface.text.source.projection.ProjectionAnnotation>();
+	protected java.util.Map<org.eclipse.jface.text.source.projection.ProjectionAnnotation, org.eclipse.jface.text.Position> additions = new java.util.HashMap<org.eclipse.jface.text.source.projection.ProjectionAnnotation, org.eclipse.jface.text.Position>();
+	protected org.eclipse.jface.text.source.projection.ProjectionAnnotationModel projectionAnnotationModel;
+	protected org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer;
+	protected art.resource.art.ui.ArtEditor editor;
+	
+	// Creates a code folding manager to handle the
+	// <code>org.eclipse.jface.text.source.projection.ProjectionAnnotation</code>.
+	//
+	// @param sourceViewer
+	//            the source viewer to calculate the element lines
+	public ArtCodeFoldingManager(org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer,art.resource.art.ui.ArtEditor textEditor) {
+		this.projectionAnnotationModel = sourceViewer.getProjectionAnnotationModel();
+		this.sourceViewer = sourceViewer;
+		this.editor = textEditor;
+		addCloseListener(textEditor);
+		try {
+			restoreCodeFoldingStateFromFile(editor.getResource().getURI().toString());
+		} catch (java.lang.Exception e) {
+			calculatePositions();
+		}
 	}
 	
 	private void addCloseListener(final art.resource.art.ui.ArtEditor editor) {
@@ -217,7 +225,8 @@ public class ArtCodeFoldingManager {
 		}
 		// postset collapse state to prevent wrong displaying folding code.
 		for (org.eclipse.jface.text.source.projection.ProjectionAnnotation annotation : collapsedStates.keySet()) {
-			if (collapsedStates.get(annotation)) {
+			Boolean isCollapsed = collapsedStates.get(annotation);
+			if (isCollapsed != null && isCollapsed.booleanValue()) {
 				projectionAnnotationModel.collapse(annotation);
 			}
 		}
@@ -291,7 +300,7 @@ public class ArtCodeFoldingManager {
 			md = java.security.MessageDigest.getInstance("MD5");
 			encryptMsg = md.digest(text.getBytes());
 		} catch (java.security.NoSuchAlgorithmException e) {
-			System.out.println("No Such Algorithm java.lang.Exception!");
+			art.resource.art.mopp.ArtPlugin.logError("NoSuchAlgorithmException while creating MD5 checksum.", e);
 		}
 		String swap = "";
 		String byteStr = "";

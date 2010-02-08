@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.mopp;
 
 public class ArtResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl implements art.resource.art.IArtTextResource {

@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art;
 
 // An interface for factories to create instances of art.resource.art.IArtContextDependentURIFragment.

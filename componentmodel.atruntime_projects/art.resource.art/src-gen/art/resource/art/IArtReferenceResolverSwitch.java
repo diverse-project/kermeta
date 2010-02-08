@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art;
 
 // An IReferenceResolverSwitch is a object that holds references to multiple
@@ -10,5 +16,5 @@ public interface IArtReferenceResolverSwitch extends art.resource.art.IArtConfig
 	// @param container The object that contains the reference.
 	// @param reference The reference that points to the target of the reference.
 	// @param result an object to store the result of the resolve operation.
-	public void resolveFuzzy(String identifier, org.eclipse.emf.ecore.EObject container, int position, art.resource.art.IArtReferenceResolveResult<org.eclipse.emf.ecore.EObject> result);
+	public void resolveFuzzy(String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, art.resource.art.IArtReferenceResolveResult<org.eclipse.emf.ecore.EObject> result);
 }

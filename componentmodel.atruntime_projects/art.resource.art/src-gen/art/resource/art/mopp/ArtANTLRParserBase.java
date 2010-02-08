@@ -1,3 +1,9 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package art.resource.art.mopp;
 
 public abstract class ArtANTLRParserBase extends org.antlr.runtime.Parser implements art.resource.art.IArtTextParser {
