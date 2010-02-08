@@ -42,7 +42,7 @@
     <?print-orientation portrait?>
     <title>Preface</title>
     <para>Kermeta is a Domain Specific Language dedicated to metamodel engineering. It fills the gap
-      let by MOF which defines only the structure of meta-models, by adding a way to specify static
+      let by MOF which defines only the structure of metamodels, by adding a way to specify static
       semantic (similar to OCL) and dynamic semantic (using operational semantic in the operation of
       the metamodel). Kermeta uses the object-oriented paradigm like Java or Eiffel. This document
       presents various aspects of the language, including the textual syntax, the metamodel (which
@@ -71,7 +71,8 @@
       <title>Editing a new meta-model with the EMF sample editor</title>
       <orderedlist continuation="restarts" numeration="arabic">
         <listitem>
-          <para> Create a new simple project (for instance <emphasis role="strong">
+          <para> Create a new General project if no project is ever created (for instance <emphasis
+              role="strong">
               <emphasis>MyFirstEMFSamples</emphasis>
             </emphasis>
             <emphasis role="strong">).</emphasis>
@@ -93,7 +94,6 @@
               </imageobject>
             </mediaobject>
           </figure>
-          <para/>
         </listitem>
         <listitem>
           <para>Enter a name for the meta-model file (e.g. <emphasis>fsm.ecore</emphasis>), then
@@ -200,10 +200,7 @@
             of them (the class <emphasis>Fsm</emphasis>) being considered as the “root class” (this
             should not be not mandatory, but allows a better EMF working):</para>
           <para/>
-          <!--  </listitem>  -->
-          <!--    </orderedlist> 
-      <orderedlist continuation="restarts"> 
-        <listitem> -->
+          <!-- -->
           <orderedlist continuation="restarts">
             <listitem>
               <para>a <emphasis>Fsm</emphasis> class, for which the <emphasis role="strong"
@@ -229,20 +226,32 @@
             </mediaobject>
           </figure>
         </listitem>
-        <!--  </orderedlist>
-      <orderedlist continuation="continues" numeration="arabic"> -->
+        <!-- -->
+        <listitem>
+          <para>To add a new DataType, right click on thge fsm EPackage -> EData Type and set its
+            name as String and its Instance Type Name as java.lang.String. <figure
+              id="refIllustration5_1">
+              <title>New child on EPackage root node</title>
+              <mediaobject>
+                <imageobject>
+                  <imagedata
+                    fileref="KerMeta-Create-Meta-model-With-EMF_figures/add_datatype_string.png"/>
+                  <!-- width="10.733cm" depth="11.288cm"  -->
+                </imageobject>
+              </mediaobject>
+            </figure>
+          </para>
+        </listitem>
         <listitem>
           <para>Adding operations, attributes, or references to the newly created classes is
             achieved in the same way classes have been added to the root EPackage, i.e. using
               <emphasis role="strong">New child</emphasis> on each created element.</para>
         </listitem>
-        <!--    </orderedlist>
-      <orderedlist continuation="continues" numeration="arabic">  -->
         <listitem>
           <para>Still through the <emphasis role="strong">Properties</emphasis> tab, the <emphasis
               role="strong">EContainment</emphasis> property will have to be set to
               <emphasis>true</emphasis> for each reference which intended to contain instances. In
-            the scope of the automaton example, the  <emphasis>state</emphasis> reference of the
+            the scope of the automaton example, the <emphasis>state</emphasis> reference of the
               <emphasis>Fsm</emphasis> class are defined as containment reference, and also the
             outgoingTransition reference in the State metaclass. By this mean, it will be possible
             to create, in an EMF model of it, a collection of transitions and states. </para>
@@ -275,7 +284,7 @@
     <section>
       <title> Resulting meta-model </title>
       <section>
-        <title> Meta-model with EMF sample editor</title>
+        <title> Metamodel with EMF sample editor</title>
         <para> At this stage of the tutorial, the designed meta-model should look like the following
           meta-model: </para>
         <figure id="refIllustration7">
@@ -310,9 +319,8 @@
       <title>EMF meta-model creation tips</title>
       <para>Creating a good meta-model is sometime difficult due to limitations of the used tools.
         For a better experience in using EMF tools and Kermeta, it is advised to respect the
-        following rules:</para>
-      <!--   <orderedlist continuation="restarts">
-        <listitem> -->
+        following rule:</para>
+      <!--  -->
       <para>Create an element that will contain directly or indirectly all the other elements. The
         reflexive editor and the editor generated by EMF allow to create only one root element and
         then, from this element, create contained elements.</para>
@@ -320,8 +328,7 @@
         The editors correctly display models from meta-models that do not follow this rule if you
         are able to create such models by another mean. Kermeta is <emphasis role="strong"
           >not</emphasis> affected by this constraint.</para>
-      <!--   </listitem>
-      </orderedlist>  -->
+      <!--   -->
     </section>
     <section>
       <title> External documentation </title>
