@@ -77,12 +77,19 @@
   </preface>
   <chapter>
     <title> Introduction </title>
-    <para> This tutorial presents how create a GMF Editor for the FSM metamodel. GMF (Graphical
+    <para> This tutorial presents how create a GMF Editor for the FSM metamodel. </para>
+    <important>
+      <para> This tutorial consitutes only an example that illustrate the global fsm example. For more informations and tutorials about GMF please refer to the GMF documentation and its tutorials. </para>
+    </important>
+      
+     <para> GMF (Graphical
       Modelling Framework) is an Eclipse framework that permits to create a specific graphical
       editor of models conform to a meta model following the MVC architecture (Model View
-      Controller). It is based on the Framework EMF (Eclipse Modelling Framework)in charge of domain
-      model and on the Framework GEF ( Graphical Editing Framework) charged on the controllers. For
-      more informations about GMF please refers to the following links : </para>
+      Controller).  It is based on the Framework EMF (Eclipse Modelling Framework)in charge of domain
+      model and on the Framework GEF ( Graphical Editing Framework) charged on the controllers. 
+      On this tutorial we use EMF 2.5.0 and GMF 2.2.1. For
+      more informations about GMF please refers to the following links :  </para>
+    <para/>
     <para>
       <orderedlist continuation="restarts">
         <listitem>
@@ -93,14 +100,13 @@
         <listitem>
           <para>
             <ulink url="http://wiki.eclipse.org/index.php/GMF_Tutorial"
-              >http://wiki.eclipse.org/index.php/GMF_Tutorial</ulink>
-          </para>
+              >http://wiki.eclipse.org/index.php/GMF_Tutorial</ulink> A tutorial about GMF</para>
         </listitem>
         <listitem>
           <para>
             <ulink url="http://wiki.eclipse.org/index.php/GMF_Tutorial_BPMN">
-              http://wiki.eclipse.org/index.php/GMF_Tutorial_BPMN</ulink>
-          </para>
+              http://wiki.eclipse.org/index.php/GMF_Tutorial_BPMN</ulink> Another tutorial about
+            GMF</para>
         </listitem>
         <listitem>
           <para>
@@ -530,7 +536,7 @@
           </mediaobject>
         </figure>
       </para>
-      <para> We have created a very simple GMF Editor for FSM models. It can be extended. For more
+      <para> We have created a very little graphical editor to illustrate the FSM example. For more
         informations please refer to the GMF documentation.</para>
     </section>
   </chapter>

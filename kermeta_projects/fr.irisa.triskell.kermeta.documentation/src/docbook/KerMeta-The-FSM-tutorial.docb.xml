@@ -79,14 +79,19 @@
   <chapter>
     <title>Introduction</title>
     <para>This tutorial gives an overview of many concepts used through KerMeta project creation.
-      Following this tutorial should give you the knowledge : to create a meta model, run
-      configurations, add pre and post conditions and add behaviour on it. To cover all this
-      features, we decided to start from an existing example. Because it is a complete KerMeta
-      project, you should use it as a reference guide. This example is about the finite state
-      machine which acronym is FSM. Firstly, a section explains how to load files of the example in
-      your Eclipse workspace. The next section is dedicated to the finite state machine we want to
-      model. You will have access to every files. Then we present the features presented above.
-    </para>
+      You can retrieve all the steps defined in the Manual Process to build a DSL on which you can
+      iterate in order to progress in your development. Following this tutorial should give you the
+      knowledge : to create a meta model, run configurations, add pre and post conditions and add
+      behaviour on it. To cover all this features, we decided to start from an existing example.
+      Because it is a complete KerMeta project, you should use it as a reference guide. This example
+      is about the finite state machine which acronym is FSM. Firstly, a section explains how to
+      load files of the example in your Eclipse workspace. The next section is dedicated to the
+      finite state machine we want to model. You will have access to every files. Then we present
+      the features presented above. Moreover, we present here examples of graphical editors but this
+      step comes only when the metamodel is stabilized. In this tutorial we will have access to the
+      base project in order to follow it (cf section <link linkend="InstallFSMProject">Install FSM
+        project</link>) . You can have also have access of the solution of this tutorial ( cf
+      section ) </para>
   </chapter>
   <chapter>
     <title>Installation</title>
@@ -94,9 +99,8 @@
       <title> Prerequisites</title>
       <caution>
         <para>KerMeta must be installed (FSM tutorial is only available in this case). If not,
-          please read the "<ulink type=""
-            url="../KerMeta-How-to-install-KerMetaInGalileo/index.html">How to install
-            KerMeta</ulink>" tutorial.</para>
+          please read the "<ulink type="" url="../KerMeta-How-to-install-KerMeta/index.html">How to
+            install KerMeta</ulink>" tutorial.</para>
       </caution>
       <section>
         <title>Required knowledge<phrase id="knowledge"/></title>
@@ -112,7 +116,7 @@
         </orderedlist>
       </section>
     </section>
-    <section>
+    <section id="InstallFSMProject">
       <title> Install FSM project</title>
       <para>We start from the main Eclipse window.</para>
       <figure>
@@ -147,8 +151,13 @@
           </imageobject>
         </mediaobject>
       </figure>
-      <para> Now, you have the reference project and you can follow the tutorial.The next chapter
-        presents the metamodel used in this tutorial. </para>
+      <para> </para>
+      <section>
+        <title>Install the tutorial 's solution </title>
+        <para>If you are very pressed the solutions are available into : </para>
+        <para> Now, you have the reference project and you can follow the tutorial.The next chapter
+          presents the metamodel used in this tutorial.</para>
+      </section>
     </section>
   </chapter>
   <chapter>
@@ -478,41 +487,41 @@
         <title> Load an EMF model with Kermeta </title>
         <para>The following code sample load a previously created FSM model: <example>
             <title> Load an EMF model with Kermeta </title>
-            <programlisting>
+            <programlisting language="kermeta">
          @mainClass "fsm_package::Main"
          @mainOperation "main"
 
-        <emphasis role="bold"> package</emphasis> fsm_package;
+        package fsm_package;
 
-         <emphasis role="strong">require</emphasis> kermeta
-         <emphasis role="strong">require</emphasis>  "../../metamodel/fsmStatic.ecore"
+        require kermeta
+         require  "../../metamodel/fsmStatic.ecore"
          <co id="load.emfmodel.metamodelfsm.co" linkends="load.emfmodel.metamodelfsm.callout"/>
          
-         <emphasis role="strong">using</emphasis> kermeta::persistence 
+        using kermeta::persistence 
            <co id="load.emfmodel.using.persistence.co" linkends="load.emfmodel.using.persistence.callout"/>
            
-         <emphasis role="strong">using</emphasis> kermeta::standard
-         <emphasis role="bold">class</emphasis> Main
+         using kermeta::standard
+         class Main
          {
-         <emphasis role="strong">operation</emphasis> main() : Void <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis> 
-         <emphasis>// Input fsm</emphasis>
-          <emphasis role="bold">var</emphasis> fsm1 : fsm::FSM
-         <emphasis>// Create the repository, then the resource</emphasis>
-         <emphasis role="strong">var</emphasis> repository : EMFRepository <emphasis role="strong">init</emphasis> EMFRepository.new
-         <emphasis role="strong">var</emphasis> resource : EMFResource 
+         operation main() : Void is do
+        // Input fsm
+        var fsm1 : fsm::FSM
+        // Create the repository, then the resource
+         var repository : EMFRepository init EMFRepository.new
+         var resource : EMFResource 
          resource ?= repository.createResource("platform:/resource/org.kermeta.fsm.serialisation/model/Fsm_dyn_sample1.xmi", "platform:/resource/org.kermeta.fsm.serialisation/metamodel/fsmStatic.ecore")
          <co id="load.emfmodel.createResource.co" linkends="load.emfmodel.createResource.callout"/>
          resource.load
 
- <emphasis>// Load the fsm (we get the instance)</emphasis> 
+// Load the fsm (we get the instance)
  fsm1 ?= resource.one
  <co id="load.emfmodel.resource.co" linkends="load.emfmodel.resource.callout"/>
- <emphasis>// Check that the fsm was correctly loaded</emphasis>
+// Check that the fsm was correctly loaded
 fsm1.ownedState.each { s | stdio.writeln("-> "+s.name) 
  		  s.outgoingTransition.each { ti | stdio.writeln( s.name +" in :" + ti.input + " " + ti.output)}
  		 s.incomingTransition.each { to | stdio.writeln( s.name +" out :" + to.input + " " + to.output )}
  		}
-<emphasis role="strong">end</emphasis>
+end
  }      </programlisting>
             <para>
               <calloutlist>
@@ -553,17 +562,17 @@ fsm1.ownedState.each { s | stdio.writeln("-> "+s.name)
           simply call a save method on the handling resource. For this purpose, the following code
           can be added at the end of the <emphasis>main</emphasis> operation defined in the above
           section:</para>
-        <programlisting><emphasis role="strong">var</emphasis> newstate : fsm::State <emphasis role="strong">init</emphasis> fsm::State.new
+        <programlisting language="kermeta">var newstate : fsm::State init fsm::State.new
 		newstate.name := "s_new" 
 		fsm1.ownedState.add(newstate) 
 		newstate.owningFSM := fsm1
-<emphasis>// save fsm1 </emphasis>
+// save fsm1 
 resource.save()</programlisting>
         <para>It is also possible to save the modified model in a new file instead of overwriting
           the initial one by using the <literal>saveWithNewURI()</literal> method. To this end, just
           replace the last line of above code (<literal>resource.save()</literal>) by the following
           one:</para>
-        <programlisting>resource.saveWithNewURI("platform:/resource/org.kermeta.fsm.serialisation/model/modified_dyn_sample1.xmi")</programlisting>
+        <programlisting language="kermeta">resource.saveWithNewURI("platform:/resource/org.kermeta.fsm.serialisation/model/modified_dyn_sample1.xmi")</programlisting>
       </section>
       <section>
         <title>Create a model in Kermeta, and save it as an EMF model</title>
@@ -572,15 +581,15 @@ resource.save()</programlisting>
           following code chunk creates a simple EMF model with 2 states (named “foo”, and “bar”),
           and 2 transitions. Saving it then consists in adding the root class (i.e. the model
           object) stored in the variable <literal>fsm2</literal> into the resource instances.</para>
-        <programlisting>var another_resource : EMFResource
+        <programlisting language="kermeta">var another_resource : EMFResource
 		another_resource ?= repository.createResource(
        "platform:/resource/org.kermeta.fsm.serialisation/model/Fsm_scratch_sample.xmi",
        "platform:/resource/org.kermeta.fsm.serialisation/metamodel/fsmStatic.ecore")
-		<emphasis role="bold">var</emphasis> fsm2 : fsm::FSM init fsm::FSM.new
-		<emphasis role="bold">var</emphasis> s0 : fsm::State init fsm::State.new
-		<emphasis role="bold">var</emphasis> s1 : fsm::State init fsm::State.new
-		<emphasis role="bold">var</emphasis> t01 : fsm::Transition init fsm::Transition.new
-		<emphasis role="bold">var</emphasis> t11 : fsm::Transition init fsm::Transition.new
+		var fsm2 : fsm::FSM init fsm::FSM.new
+		var s0 : fsm::State init fsm::State.new
+		var s1 : fsm::State init fsm::State.new
+		var t01 : fsm::Transition init fsm::Transition.new
+		var t11 : fsm::Transition init fsm::Transition.new
 		s0.name := "foo"
 		s1.name := "bar"
 		t01.source := s0
@@ -617,34 +626,34 @@ resource.save()</programlisting>
             class</emphasis>!): loading a model consists in getting the root class, from which,
           thanks to the containment property (see section, all the contained instances can be
           accessed.</para>
-        <programlisting>@mainClass "fsm_package::Main"
+        <programlisting language="kermeta">@mainClass "fsm_package::Main"
 @mainOperation "main"
-<emphasis role="strong">package</emphasis> fsm_package;
-<emphasis role="strong">require</emphasis> kermeta 
-<emphasis role="strong">require</emphasis> "&lt;relative_path_of_the_metamodel&gt;" // NOTE : same as param of createResource
+package fsm_package;
+require kermeta 
+require> "&lt;relative_path_of_the_metamodel&gt;" // NOTE : same as param of createResource
 
-<emphasis role="strong">using</emphasis> kermeta::persistence
-<emphasis role="strong">using</emphasis> kermeta::standard
-<emphasis role="strong">class</emphasis> Main
+using kermeta::persistence
+using kermeta::standard
+class Main
 {
- <emphasis role="strong">operation</emphasis> main() : Void is do 
-      /<emphasis>/ Variable for your input EMF model</emphasis>
-      <emphasis role="strong">var</emphasis> &lt;my_model_object&gt; : &lt;type_of_my_model&gt;
-      <emphasis>// Create the repository, then the resource</emphasis>
-      <emphasis role="strong">var</emphasis> &lt;my_rep&gt; : EMFRepository <emphasis role="strong">init</emphasis> EMFRepository.new 
-      <emphasis role="strong">var</emphasis> &lt;my_resource&gt; : EMFResource 
+ operation main() : Void is do 
+      // Variable for your input EMF model
+      var &lt;my_model_object&gt; : &lt;type_of_my_model&gt;
+      // Create the repository, then the resource
+       role="strong">var &lt;my_rep&gt; : EMFRepository init EMFRepository.new 
+      var &lt;my_resource&gt; : EMFResource 
       &lt;my_resource&gt; ?= repository.createResource(
       "&lt;relative_path_of_my_model_to_load&gt;",
       "&lt;relative_path_of_the_metamodel&gt;")
       &lt;my_resource&gt;.load
-      <emphasis>// Load the emf model - get the root class </emphasis>
+     // Load the emf model - get the root class 
       &lt;my_model_object&gt; ?= resource.one
-     <emphasis>// You can now browse your model through its attributes/references </emphasis>
+     // You can now browse your model through its attributes/references 
       &lt;my_model_object&gt;.&lt;an_attribute_of_it&gt;.each { o | 
          stdio.writeln("-&gt; "+o.toString) } )
-     <emphasis>// Save your model in another file</emphasis>
+    // Save your model in another file
       &lt;my_resource&gt;.saveWithNewUri("&lt;relative_path_of_a_file_where_to_save_model&gt;")
- <emphasis role="strong">end</emphasis>
+ end
 }
 </programlisting>
       </section>
@@ -661,13 +670,69 @@ resource.save()</programlisting>
       </section>
     </section>
   </chapter>
+  <chapter>
+    <title> Check model </title>
+    <para>Check all the invariants for a model can be useful if you use a model provided by a third
+      party or resulting from a transformation, it permits to check well-formed rules. For more
+      informations about it, plesa refer to the Model Checking Manual. Look at the file
+      checkInvariants.kmt in fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/checkInvariants.kmt
+      . This class permits to check all the invariants from the meta model thanks to the method
+      checkAllInvariants.
+      <programlisting language="kermeta">
+    class InvariantChecker
+    {
+    operation main(input_automaton : String) : Void is do 
+    var rep : EMFRepository init EMFRepository.new
+    var theFSM : FSM init AutomatonHelper.new.loadEMFAutomaton(rep, input_automaton, "http://www.kermeta.org/fsm")
+    
+    // Uncomment to check the invariant properties : WFR
+    // To check all contained elements by "theFSM"
+    stdio.writeln("> call of the checkAllInvariants method")
+    theFSM.checkAllInvariants
+    // To check only the states that are contained in "theFSM"
+    stdio.writeln("> call of the checkInvariants method")
+    end
+    }
+    </programlisting>
+      Look at the Run Configuration FSM check invariant. If you run it you should obtain the
+      following trace : <figure id="refIllustration9_1">
+        <title>Fsm_scratch_sample view</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="Kermeta-The-FSM-tutorial_figures/fsm_check_invariant_trace_ok.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure></para>
+    <para>Now, we will study the case of an error which violate an invariant. Look at the file
+      FSMConstraints.kmt into fr.triskell.kermeta.fsm.demo/kermeta/constraints/FSMConstraints.kmt .
+      You will see the following invariant </para>
+    <programlisting language="kermeta"> aspect class State{ inv invariant1 is do self.outgoingTransition.forAll{ tr1 | self.outgoingTransition.forAll{ tr2 | tr2.input.equals(tr1.input).equals(tr1.equals(tr2))}} end } </programlisting>
+    <para>It means that several outgoing transitions from a state cannot have the same input. Right
+      click on the FSM Check Invariant -> Duplicate and change the new configuration's name into FSM
+      Check Invariant Error. Change the Operation Arguments to
+      platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/models/samplerunErrorInvariant.fsm
+      and click on Apply and Run. Like invariant is violated, Kermeta raises an exception. So, you
+      should obtain the following trace : <figure id="refIllustration9_2">
+        <title>Invariant error 's trace</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="Kermeta-The-FSM-tutorial_figures/error_invariant.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </para>
+    <para> Now you know how to check models. The next section explains how you can improve kermeta
+      programs adding on them Design by contract which consist in adding pre and post
+      condtions.</para>
+  </chapter>
   <chapter id="Contract">
-    <title>Contract</title>
-    <para> By contract, we mean add pre or post condition to our ecore model in order to add
-      constraints on the Fsm's execution. Firstly, we present how to run configurations to
-      parametrize this pre or post conditions. Then we present examples of pre and post conditions.
-      In this section we study the example available in <emphasis role="bold"
-        >fr.irisa.kemeta.samples.fsm.demo</emphasis>.</para>
+    <title>Design by contract</title>
+    <para> By Design by contract, we mean add pre or post condition to our ecore model in order to
+      add constraints on the Fsm's execution. It permits to use good practices into kermeta
+      development. You can retrieve the Design by Contract concepts languages like Eiffel. Firstly,
+      we present how to run configurations to parametrize this pre or post conditions. Then we
+      present examples of pre and post conditions. In this section we study the example available in
+        <emphasis role="bold">fr.irisa.kemeta.samples.fsm.demo</emphasis>.</para>
     <section id="RunConfiguration">
       <title>Run configurations</title>
       <para/>
@@ -676,18 +741,22 @@ resource.save()</programlisting>
         <para>We want to execute an FSM model. To do that we must call the "run" operation of the
           "FSM" class. We are going to do that thanks to a KerMeta script. This script will : load
           an instance of the FSM meta model stored in a file call the run operation of these
-          instance. To launch a script, the interpreter must know the entry point of the program.
-          That is the roles of these two statements : </para>
-        <itemizedlist>
-          <listitem>
-            <para>@mainClass which stands for the main class,</para>
-          </listitem>
-        </itemizedlist>
-        <itemizedlist>
-          <listitem>
-            <para>@mainOperation which stands for the main operation of the main class.</para>
-          </listitem>
-        </itemizedlist>
+          instance. </para>
+        <tip>
+          <para> To launch a script, the interpreter must know the entry point of the program. It
+            can "ask" it to the user thanks to an Eclipse window. Another way might be to add the
+            following statements into your kermeta code : </para>
+          <itemizedlist>
+            <listitem>
+              <para>@mainClass which stands for the main class,</para>
+            </listitem>
+          </itemizedlist>
+          <itemizedlist>
+            <listitem>
+              <para>@mainOperation which stands for the main operation of the main class.</para>
+            </listitem>
+          </itemizedlist>
+        </tip>
         <para>In the FSM example ( <emphasis role="bold"
             >fr.irisa.triskell.kermeta.samples.fsm.demo</emphasis>) , those scripts are in the
           "launcher" directory. Look at "minimization.kmt" script. Here the interpreter knows that
@@ -781,7 +850,7 @@ resource.save()</programlisting>
                 >fr.triskell.kermeta.samples.fsm.demo/kermeta/semantics/ </emphasis> which defines
               the fsm 's behaviour ( cf section <link linkend="Behaviour">Behaviour </link> ) </para>
             <para>The following code shows the bahaviour of the step operation : </para>
-            <programlisting>aspect class State {
+            <programlisting language="kermeta">aspect class State {
 	
 		reference combination : Set&lt;State>
 	
@@ -812,7 +881,7 @@ resource.save()</programlisting>
             <para>FSMConstraints.kmt from <emphasis role="bold"
                 >fr.triskell.kermeta.samples.fsm.demo/kermeta/constraints/ </emphasis> which defines
               an invariant and pre and post conditions. </para>
-            <programlisting>aspect class State{ 
+            <programlisting language="kermeta">aspect class State{ 
 inv invariant1 is
 do
 self.outgoingTransition.forAll{ tr1 | self.outgoingTransition.forAll{ tr2 | tr2.input.equals(tr1.input).equals(tr1.equals(tr2))}}
@@ -848,7 +917,7 @@ operation step(c : String) :String
           violation of the pre condition. You should obtain the following trace into the console
           :</para>
         <para>
-          <programlisting>State : s1
+          <programlisting language="kermeta">State : s1
   Transition : s1-(c/NC)->s2
 State : s2
   Transition : s2-(x/y)->s2
@@ -867,7 +936,7 @@ pre pre2 of operation step of class State violated</programlisting>
           because the result will be an empty string. You should obtain the following trace into the
           console :</para>
         <para>
-          <programlisting>State : s1
+          <programlisting language="kermeta">State : s1
   Transition : s1-(c/NC)->s2
 State : s2
   Transition : s2-(x/y)->s2
@@ -928,7 +997,7 @@ post post3 of operation step of class State violated</programlisting>
       <para>
         <example>
           <title> Aspect in Kermeta</title>
-          <programlisting>require kermeta
+          <programlisting language="kermeta">require kermeta
      require "http://www.kermeta.org/fsm"
        <co id="add.behavior.require.co" linkends="add.behavior.require.callout"/>
        
@@ -984,7 +1053,7 @@ post post3 of operation step of class State violated</programlisting>
       <para>
         <example>
           <title> Structuration of the fsm_Operationnal_Semantics.kmt file</title>
-          <programlisting> 
+          <programlisting language="kermeta"> 
      package fsm;
 
 	require kermeta
@@ -1089,7 +1158,7 @@ post post3 of operation step of class State violated</programlisting>
         <para>process a step</para>
         <para>catch exceptions if there are some and exit the program displaying the error.</para>
         <para>Here is the code of the operation :</para>
-        <programlisting>operation run() :  Void raises FSMException is do  
+        <programlisting language="kermeta">operation run() :  Void raises FSMException is do  
 		// reset if there is no current state
 		if self.currentState == void then self.currentState := self.initialState end
 		self
@@ -1150,7 +1219,7 @@ post post3 of operation step of class State violated</programlisting>
         <para>If there is more than one raise a NonDeterminism exception.</para>
         <para>3 – If there is only one transition, call its fire operation and return its
           result.</para>
-        <programlisting>// Go to the next state
+        <programlisting language="kermeta">// Go to the next state
 	operation step(c : String) : String raises FSMException
 	is do
 		// Get the valid transitions
@@ -1170,7 +1239,7 @@ post post3 of operation step of class State violated</programlisting>
         <para>Behavior :</para>
         <para>1 – change the current state of the FSM</para>
         <para>2 – return the produced string</para>
-        <programlisting>// Fire the transition
+        <programlisting language="kermeta">// Fire the transition
 	operation fire() : String is do
 		// update FSM current state
 		source.owningFSM.currentState := target
@@ -1218,35 +1287,6 @@ post post3 of operation step of class State violated</programlisting>
     </section>
   </chapter>
   <chapter>
-    <title> Check model </title>
-    <para>Look at the file checkInvariants.kmt in
-      fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/checkInvariants.kmt . This class permit to
-      check all the invariants from the meta model thanks to the method checkAllInvariants. </para>
-    <programlisting>
- class InvariantChecker
-{
-    operation main(input_automaton : String) : Void is do 
-        var rep : EMFRepository init EMFRepository.new
-        var theFSM : FSM init AutomatonHelper.new.loadEMFAutomaton(rep, input_automaton, "http://www.kermeta.org/fsm")
-        
-        // Uncomment to check the invariant properties : WFR
-        // To check all contained elements by "theFSM"
-        stdio.writeln("> call of the checkAllInvariants method")
-        theFSM.checkAllInvariants
-        // To check only the states that are contained in "theFSM"
-        stdio.writeln("> call of the checkInvariants method")
-        Main.new.checkWFR(theFSM)
-	end
-}
-</programlisting>
-    <para>Look at the Run Configuration FSM check invariant. If you run it you should obtain the
-      following trace : </para>
-    <para><inlinegraphic fileref="Kermeta-The-FSM-tutorial_figures/fsm_check_invariant_trace_ok.png"
-      /></para>
-    <para>Now you know how to check models. The next section explains how to do model
-      transformation.</para>
-  </chapter>
-  <chapter>
     <title> Model Transformation</title>
     <para> The files minimization.kmt and determinization.kmt from<emphasis role="bold">
         fr.irisa.triskell.kermeta.samples.fsm.demo/launcher</emphasis> are examples of
@@ -1278,7 +1318,7 @@ post post3 of operation step of class State violated</programlisting>
       <tip>
         <title> Add custom code</title>
         <para> To keep your customized code for each generation you need to add
-          <programlisting language="Java"> 
+          <programlisting language="java"> 
          /**
 	       * 
 	       * @generated NOT
@@ -1307,7 +1347,7 @@ post post3 of operation step of class State violated</programlisting>
         <para> In this example we want just to add the String "FSM type:" before the display text.
           Open the file FSMItemProvider.java in the plugin fsmEditor.edit and the package
           fsm.provider. Change the method getText() to
-          <programlisting language="Java">
+          <programlisting language="java">
          /**
 	       * This returns the label text for the adapted class.
 	       * <!-- begin-user-doc -->

@@ -172,10 +172,9 @@
             <listitem>
               <para>its <emphasis role="strong">Ns URI</emphasis>: the namespace URI of the Ecore
                 model is mandatory to allow Kermeta being able to correctly load its potential
-                instances, as well as for the Dynamic creation of instances tool (see section <link
-                  linkend="emf_dynamic">3.1</link> p.<link linkend="emf_dynamic">11</link>). It is
-                strongly recommended to set an absolute Eclipse URI (this kind of URI is actually
-                relative to your Eclipse project), e.g.
+                instances, as well as for the Dynamic creation of instances tool. It is strongly
+                recommended to set an absolute Eclipse URI (this kind of URI is actually relative to
+                your Eclipse project), e.g.
                   <emphasis>platform:/resource/MyFirstEMFSamples/metamodels/fsm.ecore</emphasis></para>
               <figure id="Illustration4">
                 <title> ecore file into Eclipse</title>
@@ -300,11 +299,11 @@
         <para/>
       </section>
       <section>
-        <title> Meta-model with Ecore Tools </title>
-        <para>You can also edit these ecore file using a diagram editor. For example, the ecore
-          tools project provides a class diagram editor that works on top of ecore files. The
-          diagram informations (ie. shape and position of the classes on the sheet) are stored in a
-          separated file : *.ecorediag</para>
+        <title> Metamodel with Ecore Tools Diagram Editor</title>
+        <para>You can also edit these ecore file using a diagram editor from Eclipse Ecore Tools
+          Project. For example, the ecore tools project provides a class diagram editor that works
+          on top of ecore files. The diagram informations (ie. shape and position of the classes on
+          the sheet) are stored in a separated file : *.ecorediag</para>
         <figure>
           <title>Sample use of Ecore tool diagram editor on top of an ecore file</title>
           <mediaobject>
@@ -392,6 +391,22 @@
   </chapter>
   <chapter>
     <title> Conclusion</title>
-    <para>Now, you know how to create an ecore meta-model and you can use it with Kermeta. </para>
+    <para>This tutorial gives you the basis to create an EMF metamodel. It may be useful to use it
+      with Kermeta for : <orderedlist>
+        <listitem>
+          <para>Creating model instances conform to an ecore metamodel ( cf the tutorial<ulink
+              url="../KerMeta-The-FSM-tutorial/index.html"> FSM Example </ulink> chapter 4 : Editor)
+            ;</para>
+        </listitem>
+        <listitem>
+          <para>Thanks to the Kermeta key word <emphasis role="bold"> require</emphasis> you  can
+            load the ecore metaclasses and use it into a Kermeta program;</para>
+        </listitem>
+        <listitem>
+          <para>Kermeta use EMF to save and load programmaticaly a model  ( cf the tutorial<ulink
+              url="../KerMeta-The-FSM-tutorial/index.html"> FSM Example </ulink> chapter 5 : Model
+            manipulation in Kermeta)</para>
+        </listitem>
+      </orderedlist></para>
   </chapter>
 </book>
