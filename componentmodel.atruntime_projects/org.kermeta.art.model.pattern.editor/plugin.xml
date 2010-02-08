@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="pattern.art.presentation.ArtModelWizardID"
+            name="%_UI_ArtModelWizard_label"
+            class="pattern.art.presentation.ArtModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ArtModelFile.gif">
+         <description>%_UI_ArtModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="pattern.art.presentation.ArtEditorID"
+            name="%_UI_ArtEditor_label"
+            icon="icons/full/obj16/ArtModelFile.gif"
+            extensions="art"
+            class="pattern.art.presentation.ArtEditor"
+            contributorClass="pattern.art.presentation.ArtActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="pattern.art.instance.presentation.InstanceModelWizardID"
+            name="%_UI_InstanceModelWizard_label"
+            class="pattern.art.instance.presentation.InstanceModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/InstanceModelFile.gif">
+         <description>%_UI_InstanceModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="pattern.art.instance.presentation.InstanceEditorID"
+            name="%_UI_InstanceEditor_label"
+            icon="icons/full/obj16/InstanceModelFile.gif"
+            extensions="instance"
+            class="pattern.art.instance.presentation.InstanceEditor"
+            contributorClass="pattern.art.instance.presentation.InstanceActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="pattern.art.type.presentation.TypeModelWizardID"
+            name="%_UI_TypeModelWizard_label"
+            class="pattern.art.type.presentation.TypeModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/TypeModelFile.gif">
+         <description>%_UI_TypeModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="pattern.art.type.presentation.TypeEditorID"
+            name="%_UI_TypeEditor_label"
+            icon="icons/full/obj16/TypeModelFile.gif"
+            extensions="type"
+            class="pattern.art.type.presentation.TypeEditor"
+            contributorClass="pattern.art.type.presentation.TypeActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="pattern.art.implem.presentation.ImplemModelWizardID"
+            name="%_UI_ImplemModelWizard_label"
+            class="pattern.art.implem.presentation.ImplemModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ImplemModelFile.gif">
+         <description>%_UI_ImplemModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="pattern.art.implem.presentation.ImplemEditorID"
+            name="%_UI_ImplemEditor_label"
+            icon="icons/full/obj16/ImplemModelFile.gif"
+            extensions="implem"
+            class="pattern.art.implem.presentation.ImplemEditor"
+            contributorClass="pattern.art.implem.presentation.ImplemActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="pattern.art.group.presentation.GroupModelWizardID"
+            name="%_UI_GroupModelWizard_label"
+            class="pattern.art.group.presentation.GroupModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/GroupModelFile.gif">
+         <description>%_UI_GroupModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="pattern.art.group.presentation.GroupEditorID"
+            name="%_UI_GroupEditor_label"
+            icon="icons/full/obj16/GroupModelFile.gif"
+            extensions="group"
+            class="pattern.art.group.presentation.GroupEditor"
+            contributorClass="pattern.art.group.presentation.GroupActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="patternframework.presentation.PatternframeworkModelWizardID"
+            name="%_UI_PatternframeworkModelWizard_label"
+            class="patternframework.presentation.PatternframeworkModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/PatternframeworkModelFile.gif">
+         <description>%_UI_PatternframeworkModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="patternframework.presentation.PatternframeworkEditorID"
+            name="%_UI_PatternframeworkEditor_label"
+            icon="icons/full/obj16/PatternframeworkModelFile.gif"
+            extensions="patternframework"
+            class="patternframework.presentation.PatternframeworkEditor"
+            contributorClass="patternframework.presentation.PatternframeworkActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
