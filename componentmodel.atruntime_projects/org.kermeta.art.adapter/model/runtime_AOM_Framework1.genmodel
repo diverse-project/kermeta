@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.art.adapter/src"
+    modelPluginID="org.kermeta.art.adapter" modelName="Runtime_AOM_Framework1" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.genmodel#//pattern ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.genmodel#//patternframework">
+  <foreignModel>runtime_AOM_Framework1.ecore</foreignModel>
+  <genPackages prefix="Org" disposableProviderFactory="true" ecorePackage="runtime_AOM_Framework1.ecore#/">
+    <nestedGenPackages prefix="Smartadapters" disposableProviderFactory="true" ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters">
+      <nestedGenPackages prefix="Core" disposableProviderFactory="true" ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters/core">
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="runtime_AOM_Framework1.ecore#//smartadapters/core/uniqueType">
+          <genEnumLiterals ecoreEnumLiteral="runtime_AOM_Framework1.ecore#//smartadapters/core/uniqueType/unique"/>
+          <genEnumLiterals ecoreEnumLiteral="runtime_AOM_Framework1.ecore#//smartadapters/core/uniqueType/non_unique"/>
+          <genEnumLiterals ecoreEnumLiteral="runtime_AOM_Framework1.ecore#//smartadapters/core/uniqueType/onDemand"/>
+        </genEnums>
+        <genClasses ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/Adapter">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/Adapter/aspect"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/Adapter/adapt"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/Adapter/name"/>
+        </genClasses>
+        <genClasses ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/Aspect">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/Aspect/template"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/Aspect/structure"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/Aspect/persistent"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/Adaptation">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/Adaptation/adapter"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/cloneAdaptation">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/cloneAdaptation/isUnique"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/createAdaptation">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/createAdaptation/isUnique"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/setAdaptation"/>
+        <genClasses image="false" ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/unsetAdaptation"/>
+        <genClasses ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/makeUnique">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/makeUnique/element"/>
+        </genClasses>
+        <nestedGenPackages prefix="Adaptations" disposableProviderFactory="true" ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations">
+          <genClasses ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeSystem">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeSystem/SystemToSet"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeSystem/refroot"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeSystem/refservices"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeSystem/reftypes"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeSystem/refdataTypes"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeSystem/refname"/>
+          </genClasses>
+          <genClasses ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceComponentInstance">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceComponentInstance/ComponentInstanceToSet"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceComponentInstance/reftype"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceComponentInstance/refstate"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceComponentInstance/refsuperComponent"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceComponentInstance/refattribute"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceComponentInstance/refbinding"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceComponentInstance/refcontrollerDesc"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceComponentInstance/refcontentDesc"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceComponentInstance/refname"/>
+          </genClasses>
+          <genClasses ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstancePrimitiveInstance">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstancePrimitiveInstance/PrimitiveInstanceToSet"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstancePrimitiveInstance/reftype"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstancePrimitiveInstance/refstate"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstancePrimitiveInstance/refsuperComponent"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstancePrimitiveInstance/refattribute"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstancePrimitiveInstance/refbinding"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstancePrimitiveInstance/refcontrollerDesc"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstancePrimitiveInstance/refcontentDesc"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstancePrimitiveInstance/refname"/>
+          </genClasses>
+          <genClasses ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceCompositeInstance">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceCompositeInstance/CompositeInstanceToSet"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceCompositeInstance/refsubComponent"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceCompositeInstance/refdelegation"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceCompositeInstance/reftype"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceCompositeInstance/refstate"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceCompositeInstance/refsuperComponent"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceCompositeInstance/refattribute"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceCompositeInstance/refbinding"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceCompositeInstance/refcontrollerDesc"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceCompositeInstance/refcontentDesc"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceCompositeInstance/refname"/>
+          </genClasses>
+          <genClasses ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceTransmissionBinding">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceTransmissionBinding/TransmissionBindingToSet"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceTransmissionBinding/refclient"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceTransmissionBinding/refserver"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceTransmissionBinding/refserverInstance"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeinstanceTransmissionBinding/refId"/>
+          </genClasses>
+        </nestedGenPackages>
+      </nestedGenPackages>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

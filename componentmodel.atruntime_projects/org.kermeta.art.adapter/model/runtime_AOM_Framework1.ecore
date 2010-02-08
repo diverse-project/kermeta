@@ -12,19 +12,20 @@
             eType="#//smartadapters/core/Aspect" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="adapt" upperBound="-1"
             eType="#//smartadapters/core/Adaptation" containment="true" eOpposite="#//smartadapters/core/Adaptation/adapter"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Aspect">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//ModelPattern"
+        <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/PatternFramework.ecore#//ModelPattern"
             containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="structure" lowerBound="1"
-            eType="ecore:EClass ../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PModel" containment="true"/>
+            eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/PatternFramework.ecore#//PModel"
+            containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="persistent" upperBound="-1"
-            eType="ecore:EClass ../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+            eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/PatternFramework.ecore#//PObject">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;   persistent refers to aspectual PObject that must not be&#xD;&#xA;   cloned between two bindings&#xD;&#xA;   TODO : contraints...&#xD;&#xA;   */"/>
           </eAnnotations>
@@ -55,7 +56,7 @@
           eSuperTypes="#//smartadapters/core/Adaptation"/>
       <eClassifiers xsi:type="ecore:EClass" name="makeUnique" eSuperTypes="#//smartadapters/core/Adaptation">
         <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
-            eType="ecore:EClass ../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
+            eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/PatternFramework.ecore#//PObject"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EEnum" name="uniqueType">
         <eLiterals name="unique" literal="unique"/>
@@ -65,15 +66,15 @@
       <eSubpackages name="adaptations" nsURI="http://SmartAdapters4ART/smartadapters/core/adaptations"
           nsPrefix="adaptations">
         <eClassifiers xsi:type="ecore:EClass" name="SetruntimeSystem" eSuperTypes="#//smartadapters/core/setAdaptation">
-          <eStructuralFeatures xsi:type="ecore:EReference" name="SystemToSet" eType="ecore:EClass metamodel@runtimePattern.ecore#//art/System"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refroot" eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/CompositeInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="SystemToSet" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/System"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refroot" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/CompositeInstance"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refservices" upperBound="-1"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/type/Service"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/type/Service"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="reftypes" upperBound="-1"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refdataTypes" upperBound="-1"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/DataType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/DataType"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -82,31 +83,31 @@
         <eClassifiers xsi:type="ecore:EClass" name="SetruntimeinstanceComponentInstance"
             eSuperTypes="#//smartadapters/core/setAdaptation">
           <eStructuralFeatures xsi:type="ecore:EReference" name="ComponentInstanceToSet"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refsuperComponent"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/CompositeInstance"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/CompositeInstance"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refattribute" upperBound="-1"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refbinding" upperBound="-1"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontrollerDesc"
-              eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+              eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontentDesc" eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontentDesc" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -115,31 +116,31 @@
         <eClassifiers xsi:type="ecore:EClass" name="SetruntimeinstancePrimitiveInstance"
             eSuperTypes="#//smartadapters/core/setAdaptation">
           <eStructuralFeatures xsi:type="ecore:EReference" name="PrimitiveInstanceToSet"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/PrimitiveInstance"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/PrimitiveInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refsuperComponent"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/CompositeInstance"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/CompositeInstance"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refattribute" upperBound="-1"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refbinding" upperBound="-1"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontrollerDesc"
-              eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+              eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontentDesc" eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontentDesc" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -148,35 +149,35 @@
         <eClassifiers xsi:type="ecore:EClass" name="SetruntimeinstanceCompositeInstance"
             eSuperTypes="#//smartadapters/core/setAdaptation">
           <eStructuralFeatures xsi:type="ecore:EReference" name="CompositeInstanceToSet"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/CompositeInstance"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/CompositeInstance"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refsubComponent"
-              upperBound="-1" eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
+              upperBound="-1" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refdelegation" upperBound="-1"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/DelegationBinding"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/DelegationBinding"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refsuperComponent"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/CompositeInstance"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/CompositeInstance"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refattribute" upperBound="-1"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refbinding" upperBound="-1"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontrollerDesc"
-              eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+              eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontentDesc" eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontentDesc" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType metamodel@runtimePattern.ecore#//art/String">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -185,11 +186,11 @@
         <eClassifiers xsi:type="ecore:EClass" name="SetruntimeinstanceTransmissionBinding"
             eSuperTypes="#//smartadapters/core/setAdaptation">
           <eStructuralFeatures xsi:type="ecore:EReference" name="TransmissionBindingToSet"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refclient" eType="ecore:EClass metamodel@runtimePattern.ecore#//art/type/Port"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refserver" eType="ecore:EClass metamodel@runtimePattern.ecore#//art/type/Port"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refclient" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refserver" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/type/Port"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refserverInstance"
-              eType="ecore:EClass metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
+              eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         </eClassifiers>
       </eSubpackages>
