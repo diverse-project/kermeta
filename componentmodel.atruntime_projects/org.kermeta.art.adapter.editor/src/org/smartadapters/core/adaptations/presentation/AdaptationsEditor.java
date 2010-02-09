@@ -163,7 +163,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import org.smartadapters.core.presentation.Runtime_AOM_Framework1EditorPlugin;
 
-import org.smartadapters.core.provider.CoreItemProviderAdapterFactory;
+import org.smartadapters.core.provider.SmartAdapters4DiVAItemProviderAdapterFactory;
 
 import pattern.art.group.provider.GroupItemProviderAdapterFactory;
 
@@ -171,7 +171,7 @@ import pattern.art.implem.provider.ImplemItemProviderAdapterFactory;
 
 import pattern.art.instance.provider.InstanceItemProviderAdapterFactory;
 
-import pattern.art.provider.ArtItemProviderAdapterFactory;
+import pattern.art.provider.ArtPatternItemProviderAdapterFactory;
 
 import pattern.art.type.provider.TypeItemProviderAdapterFactory;
 
@@ -710,9 +710,9 @@ public class AdaptationsEditor
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new CoreItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new SmartAdapters4DiVAItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new AdaptationsItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ArtItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ArtPatternItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new InstanceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new TypeItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ImplemItemProviderAdapterFactory());

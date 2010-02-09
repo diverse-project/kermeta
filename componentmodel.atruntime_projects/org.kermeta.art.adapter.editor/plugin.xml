@@ -15,40 +15,25 @@
             id="org.eclipse.emf.ecore.Wizard.category.ID"
             name="%_UI_Wizard_category"/>
       <wizard
-            id="org.smartadapters.core.presentation.CoreModelWizardID"
-            name="%_UI_CoreModelWizard_label"
-            class="org.smartadapters.core.presentation.CoreModelWizard"
+            id="org.smartadapters.core.presentation.SmartAdapters4DiVAModelWizardID"
+            name="%_UI_SmartAdapters4DiVAModelWizard_label"
+            class="org.smartadapters.core.presentation.SmartAdapters4DiVAModelWizard"
             category="org.eclipse.emf.ecore.Wizard.category.ID"
-            icon="icons/full/obj16/CoreModelFile.gif">
-         <description>%_UI_CoreModelWizard_description</description>
+            icon="icons/full/obj16/SmartAdapters4DiVAModelFile.gif">
+         <description>%_UI_SmartAdapters4DiVAModelWizard_description</description>
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
    </extension>
 
    <extension point="org.eclipse.ui.editors">
       <editor
-            id="org.smartadapters.core.presentation.CoreEditorID"
-            name="%_UI_CoreEditor_label"
-            icon="icons/full/obj16/CoreModelFile.gif"
-            extensions="core"
-            class="org.smartadapters.core.presentation.CoreEditor"
-            contributorClass="org.smartadapters.core.presentation.CoreActionBarContributor">
+            id="org.smartadapters.core.presentation.SmartAdapters4DiVAEditorID"
+            name="%_UI_SmartAdapters4DiVAEditor_label"
+            icon="icons/full/obj16/SmartAdapters4DiVAModelFile.gif"
+            extensions="smART"
+            class="org.smartadapters.core.presentation.SmartAdapters4DiVAEditor"
+            contributorClass="org.smartadapters.core.presentation.SmartAdapters4DiVAActionBarContributor">
       </editor>
-   </extension>
-
-   <extension point="org.eclipse.ui.newWizards">
-      <category
-            id="org.eclipse.emf.ecore.Wizard.category.ID"
-            name="%_UI_Wizard_category"/>
-      <wizard
-            id="org.smartadapters.core.adaptations.presentation.AdaptationsModelWizardID"
-            name="%_UI_AdaptationsModelWizard_label"
-            class="org.smartadapters.core.adaptations.presentation.AdaptationsModelWizard"
-            category="org.eclipse.emf.ecore.Wizard.category.ID"
-            icon="icons/full/obj16/AdaptationsModelFile.gif">
-         <description>%_UI_AdaptationsModelWizard_description</description>
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
    </extension>
 
    <extension point="org.eclipse.ui.editors">

@@ -44,12 +44,12 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
 /**
- * This is the action bar contributor for the Core model editor.
+ * This is the action bar contributor for the SmartAdapters4DiVA model editor.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class CoreActionBarContributor
+public class SmartAdapters4DiVAActionBarContributor
 	extends EditingDomainActionBarContributor
 	implements ISelectionChangedListener {
 	/**
@@ -152,7 +152,7 @@ public class CoreActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CoreActionBarContributor() {
+	public SmartAdapters4DiVAActionBarContributor() {
 		super(ADDITIONS_LAST_STYLE);
 		loadResourceAction = new LoadResourceAction();
 		validateAction = new ValidateAction();
@@ -167,8 +167,8 @@ public class CoreActionBarContributor
 	 */
 	@Override
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
-		toolBarManager.add(new Separator("core-settings"));
-		toolBarManager.add(new Separator("core-additions"));
+		toolBarManager.add(new Separator("smartadapters4diva-settings"));
+		toolBarManager.add(new Separator("smartadapters4diva-additions"));
 	}
 
 	/**
@@ -182,7 +182,7 @@ public class CoreActionBarContributor
 	public void contributeToMenu(IMenuManager menuManager) {
 		super.contributeToMenu(menuManager);
 
-		IMenuManager submenuManager = new MenuManager(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_CoreEditor_menu"), "org.smartadapters.coreMenuID");
+		IMenuManager submenuManager = new MenuManager(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_SmartAdapters4DiVAEditor_menu"), "org.smartadapters.coreMenuID");
 		menuManager.insertAfter("additions", submenuManager);
 		submenuManager.add(new Separator("settings"));
 		submenuManager.add(new Separator("actions"));

@@ -157,7 +157,7 @@ import org.eclipse.emf.edit.ui.util.EditUIUtil;
 
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
-import org.smartadapters.core.provider.CoreItemProviderAdapterFactory;
+import org.smartadapters.core.provider.SmartAdapters4DiVAItemProviderAdapterFactory;
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
@@ -169,7 +169,7 @@ import pattern.art.implem.provider.ImplemItemProviderAdapterFactory;
 
 import pattern.art.instance.provider.InstanceItemProviderAdapterFactory;
 
-import pattern.art.provider.ArtItemProviderAdapterFactory;
+import pattern.art.provider.ArtPatternItemProviderAdapterFactory;
 
 import pattern.art.type.provider.TypeItemProviderAdapterFactory;
 
@@ -177,12 +177,12 @@ import patternframework.provider.PatternframeworkItemProviderAdapterFactory;
 
 
 /**
- * This is an example of a Core model editor.
+ * This is an example of a SmartAdapters4DiVA model editor.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class CoreEditor
+public class SmartAdapters4DiVAEditor
 	extends MultiPageEditorPart
 	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	/**
@@ -344,18 +344,18 @@ public class CoreEditor
 			public void partActivated(IWorkbenchPart p) {
 				if (p instanceof ContentOutline) {
 					if (((ContentOutline)p).getCurrentPage() == contentOutlinePage) {
-						getActionBarContributor().setActiveEditor(CoreEditor.this);
+						getActionBarContributor().setActiveEditor(SmartAdapters4DiVAEditor.this);
 
 						setCurrentViewer(contentOutlineViewer);
 					}
 				}
 				else if (p instanceof PropertySheet) {
 					if (((PropertySheet)p).getCurrentPage() == propertySheetPage) {
-						getActionBarContributor().setActiveEditor(CoreEditor.this);
+						getActionBarContributor().setActiveEditor(SmartAdapters4DiVAEditor.this);
 						handleActivate();
 					}
 				}
-				else if (p == CoreEditor.this) {
+				else if (p == SmartAdapters4DiVAEditor.this) {
 					handleActivate();
 				}
 			}
@@ -518,7 +518,7 @@ public class CoreEditor
 								 public void run() {
 									 removedResources.addAll(visitor.getRemovedResources());
 									 if (!isDirty()) {
-										 getSite().getPage().closeEditor(CoreEditor.this, false);
+										 getSite().getPage().closeEditor(SmartAdapters4DiVAEditor.this, false);
 									 }
 								 }
 							 });
@@ -529,7 +529,7 @@ public class CoreEditor
 							(new Runnable() {
 								 public void run() {
 									 changedResources.addAll(visitor.getChangedResources());
-									 if (getSite().getPage().getActiveEditor() == CoreEditor.this) {
+									 if (getSite().getPage().getActiveEditor() == SmartAdapters4DiVAEditor.this) {
 										 handleActivate();
 									 }
 								 }
@@ -561,7 +561,7 @@ public class CoreEditor
 
 		if (!removedResources.isEmpty()) {
 			if (handleDirtyConflict()) {
-				getSite().getPage().closeEditor(CoreEditor.this, false);
+				getSite().getPage().closeEditor(SmartAdapters4DiVAEditor.this, false);
 			}
 			else {
 				removedResources.clear();
@@ -691,7 +691,7 @@ public class CoreEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CoreEditor() {
+	public SmartAdapters4DiVAEditor() {
 		super();
 		initializeEditingDomain();
 	}
@@ -708,9 +708,9 @@ public class CoreEditor
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new CoreItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new SmartAdapters4DiVAItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new AdaptationsItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ArtItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ArtPatternItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new InstanceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new TypeItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ImplemItemProviderAdapterFactory());
@@ -1029,7 +1029,7 @@ public class CoreEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), CoreEditor.this) {
+					new ViewerPane(getSite().getPage(), SmartAdapters4DiVAEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
@@ -1063,7 +1063,7 @@ public class CoreEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), CoreEditor.this) {
+					new ViewerPane(getSite().getPage(), SmartAdapters4DiVAEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
@@ -1092,7 +1092,7 @@ public class CoreEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), CoreEditor.this) {
+					new ViewerPane(getSite().getPage(), SmartAdapters4DiVAEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							return new ListViewer(composite);
@@ -1117,7 +1117,7 @@ public class CoreEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), CoreEditor.this) {
+					new ViewerPane(getSite().getPage(), SmartAdapters4DiVAEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							return new TreeViewer(composite);
@@ -1144,7 +1144,7 @@ public class CoreEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), CoreEditor.this) {
+					new ViewerPane(getSite().getPage(), SmartAdapters4DiVAEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							return new TableViewer(composite);
@@ -1187,7 +1187,7 @@ public class CoreEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), CoreEditor.this) {
+					new ViewerPane(getSite().getPage(), SmartAdapters4DiVAEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							return new TreeViewer(composite);
@@ -1408,8 +1408,8 @@ public class CoreEditor
 				new ExtendedPropertySheetPage(editingDomain) {
 					@Override
 					public void setSelectionToViewer(List<?> selection) {
-						CoreEditor.this.setSelectionToViewer(selection);
-						CoreEditor.this.setFocus();
+						SmartAdapters4DiVAEditor.this.setSelectionToViewer(selection);
+						SmartAdapters4DiVAEditor.this.setFocus();
 					}
 
 					@Override
