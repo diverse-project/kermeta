@@ -9,7 +9,7 @@ import scala._
 object PrimitiveConversion{
 	implicit def string2kermeta(x: String) = new RichString(x)	
 	implicit def boolean2kermeta(x: Boolean) = new RichBoolean(x)	
-	implicit def boolean2kermeta(x: java.lang.Boolean) :Boolean= x.booleanValue()	
+	implicit def boolean2kermeta(x: java.lang.Boolean) : Boolean = x.booleanValue()
 	implicit def iterator2kermeta(x: java.util.Iterator[_])= new RichIterator(x)
 
 	implicit def class2kermetaclass(x: Class[_]) = new RichClass(x)	
