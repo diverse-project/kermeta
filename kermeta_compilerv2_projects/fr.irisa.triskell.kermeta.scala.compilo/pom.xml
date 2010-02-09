@@ -90,11 +90,6 @@
 		</dependency>
 		<dependency>
 			<groupId>fr.irisa.triskell</groupId>
-			<artifactId>kermeta.scala.framework</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>fr.irisa.triskell</groupId>
 			<artifactId>kermeta.scala.loader</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -176,6 +171,12 @@
 			<groupId>org.eclipse</groupId>
 			<artifactId>uml2.common</artifactId>
 			<version>1.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.irisa.triskell</groupId>
+			<artifactId>kermeta.scala.framework</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 
 

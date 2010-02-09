@@ -76,6 +76,14 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		var mainOperation : String = par.getTag().filter{e=> "mainOperation".equals(e.getName)}.first.getValue
 		var packageName :String= mainClass.substring(0,mainClass.lastIndexOf("::")).replace("::", ".")
 		var className :String=mainClass.substring(mainClass.lastIndexOf("::")+2).replace("::", ".")
+		
+		
+		
+		var mainClassDef = par.eAllContents.filter{e=>e.isInstanceOf[ClassDefinition] }.filter(e=> e.asInstanceOf[ClassDefinition].getName.equals(className) ).toList.first
+		var mainOperationSize = mainClassDef.asInstanceOf[ClassDefinition].getOwnedOperation.filter{e=>e.getName.equals(mainOperation)}.first.asInstanceOf[Operation].getOwnedParameter.size
+		
+
+		
 		//TODO gérer le cas des package venant d'ecore
 		var res :StringBuilder= new StringBuilder
 		res.append("package runner \n")
@@ -116,7 +124,18 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 			{
 			res.append("ScalaAspect")
 			}
-		res.append(".RichFactory.create"+ className+"."+mainOperation +"\n}\n}") 
+		res.append(".RichFactory.create"+ className+"."+mainOperation ) 
+		
+		res.append("(")
+		for(i <- 0 until mainOperationSize){
+			if(i != 0){ res.append(" , ")}
+			res.append("args("+i+")")
+		}
+		res.append(")")
+		
+		res.append("\n}\n}")
+		
+		
 		Util.generateFile("runner", "MainRunner", res.toString())
 		
   		par.getPackages().foreach(p => p.accept(this) ) 		

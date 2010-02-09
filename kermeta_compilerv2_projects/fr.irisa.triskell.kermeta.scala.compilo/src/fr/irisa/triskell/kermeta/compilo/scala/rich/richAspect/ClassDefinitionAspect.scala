@@ -63,6 +63,9 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 				res append " with "+Util.protectScalaKeyword(this.getQualifiedNameCompilo)
 				
 				res.append("{\n")
+				
+				
+				
 				this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))
 				this.getOwnedOperation filter(op=> !Util.hasEcoreTag(op) || op.getBody !=null) foreach(op=> op.generateScalaCode(res))
 				res.append("}\n")

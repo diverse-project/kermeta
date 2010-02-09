@@ -22,6 +22,8 @@ object Main extends LogAspect {
   def main(args : Array[String]) : Unit = {
 	  
 	  var inputFile : String = ""
+	  var runnerParams = List[String]()
+	  var useFSC = false
 	 	  
 	 	  for(a <- args){
 	 	 	  log.debug("Param : "+a)
@@ -29,7 +31,7 @@ object Main extends LogAspect {
 	  
 
 	  for (i <- 0 until args.length) args(i).replaceAll("\"", "").trim() match {
-	 	  case "-help" | "-h" => println("Usage: scala Main [-help|-input INPUTFILE]")
+	 	  case "-help" | "-h" => println("Usage: scala Main [-help|-input INPUTFILE|-runp param1,param2|-fsc]")
 	 	  case "-input" | "-i" => { 
 	 	 	  var nextI : Int = i + 1
 	 	 	  if(nextI < args.length){ 
@@ -39,6 +41,16 @@ object Main extends LogAspect {
 	 	 	 	  log.warn("Parameter Error")
 	 	 	  }
 	 	  }
+	 	  case "-runp" => {
+	 	 	  var nextI : Int = i + 1
+	 	 	  if(nextI < args.length){ 
+	 	 	 	  runnerParams =  args(nextI).split(",").toList
+	 	 	 	  log.debug("Runner Param : {}",args(nextI))
+	 	 	  } else {
+	 	 	 	  log.warn("Parameter Error")
+	 	 	  }
+	 	  }
+	 	  case "-fsc" => { useFSC = true }
 	 	  case _ =>
 	   }
 	  
@@ -95,7 +107,9 @@ object Main extends LogAspect {
 	  
 	  
 		 
-	 // inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/ART2BluePrint/src/main.km"
+	 //inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/ART2BluePrint/src/main.km"
+	  
+	  //inputFile = "/Users/ffouquet/Documents/DEV/workspaces/pruner/MetamodelPruner/src/kermeta/metamodelPruner.km"
 		 
 	  if(inputFile != ""){
 	 	  log.info("KM compilation begin on "+inputFile)
@@ -105,11 +119,11 @@ object Main extends LogAspect {
 	  }
 
 	   /* Scalac compilation step */
-	   var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,List(System.getProperty("java.class.path")))
-	  
+	   var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,List(System.getProperty("java.class.path")),useFSC)
+	   
 	   /* Scala runner */
 	   if(compilationResult == 0){
-		   EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner")
+		   EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
 	   }
 	   
 	   

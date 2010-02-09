@@ -12,7 +12,7 @@ trait LambdaExpressionAspect extends RichAspectImplicit with ObjectAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		res append ("{(")
-		Util.generateScalaCodeEach(res,this.getParameters(),",")
+		Util.generateProtectedScalaCodeEach(res,this.getParameters(),",")
 		res append (")=>")
 		this.getBody().generateScalaCode(res)
 		res.append("}")
