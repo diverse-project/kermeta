@@ -635,13 +635,22 @@ public interface TypePackage extends EPackage {
 	int PORT_ID = 11;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_ID__NAME = ArtPatternPackage.NAMED_ELEMENT__NAME;
+
+	/**
 	 * The number of structural features of the '<em>Port Id</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_ID_FEATURE_COUNT = PatternframeworkPackage.POBJECT_FEATURE_COUNT + 0;
+	int PORT_ID_FEATURE_COUNT = ArtPatternPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link pattern.art.type.impl.AttributeImpl <em>Attribute</em>}' class.

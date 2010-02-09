@@ -6,6 +6,7 @@
  */
 package pattern.art.type;
 
+import pattern.art.NamedElement;
 import patternframework.PObject;
 
 /**
@@ -18,5 +19,5 @@ import patternframework.PObject;
  * @model
  * @generated
  */
-public interface PortId extends PObject {
+public interface PortId extends NamedElement {
 } // PortId

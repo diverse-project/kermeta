@@ -24,6 +24,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import pattern.art.provider.MetamodelruntimePatternEditPlugin;
 
+import pattern.art.provider.NamedElementItemProvider;
+import pattern.art.type.PortId;
 import patternframework.provider.PObjectItemProvider;
 
 /**
@@ -33,7 +35,7 @@ import patternframework.provider.PObjectItemProvider;
  * @generated
  */
 public class PortIdItemProvider
-	extends PObjectItemProvider
+	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -84,7 +86,10 @@ public class PortIdItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_PortId_type");
+		String label = ((PortId)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_PortId_type") :
+			getString("_UI_PortId_type") + " " + label;
 	}
 
 	/**

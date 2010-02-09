@@ -202,6 +202,7 @@ public class TypeSwitch<T> {
 			case TypePackage.PORT_ID: {
 				PortId portId = (PortId)theEObject;
 				T result = casePortId(portId);
+				if (result == null) result = caseNamedElement(portId);
 				if (result == null) result = casePObject(portId);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
