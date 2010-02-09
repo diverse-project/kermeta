@@ -1,0 +1,19 @@
+package ecore;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class Header{
+operation generate(uriecore:String, packagename:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\n/* $Id:$ \n * Creation : February 9, 2010\n * Licence  : EPL \n * Copyright:\n * Authors  : \n *            barais\n */\n@mainClass \"")
+_res.append(packagename)
+_res.append("::Main\"\n@mainOperation \"main\"\n\n\npackage ")
+_res.append(packagename)
+_res.append(";\n\n\nrequire kermeta\nrequire \"")
+_res.append(uriecore)
+_res.append("\"\nrequire \"s1.kmt\"\n\nusing kermeta::standard\nusing kermeta::persistence\n\nclass Main {\n\t\n\toperation main(uri:String) : Void is do\n\t\tvar ctx : Context init Context.new\n\t\tctx.res := kermeta::utils::StringBuffer.new\n\t\tctx.cache := kermeta::utils::Hashtable<Object,String>.new\t\t\n\t\t\n\t\tvar rep : EMFRepository  init EMFRepository.new\n\t\tvar res : EMFResource \n\t\tres ?= rep.createResource(uri, \"")
+_res.append(uriecore)
+_res.append("\")\n\t\tres.load\n\t\tvar s : System \n\t\ts?= res.one()\n\t\ts.pass1create(ctx)\n\t\ts.pass2set(ctx)\n\t\tstdio.writeln(ctx.res.toString) \n\tend\n}\nclass Context{\n\treference res : kermeta::utils::StringBuffer\n\treference cache : kermeta::utils::Hashtable<Object,String>\n\treference lastgenerateName : String\n\t\n\toperation getGenerateName():String is do\n\t\tif (i.isVoid) then i:= 0 end\n\t\tresult :=\"s\"+ i.toString()\n\t\tlastgenerateName := result\n\t\ti:=i+1\n\tend\n\treference i : Integer\t\n}\n\n")
+result := _res.toString
+end
+}

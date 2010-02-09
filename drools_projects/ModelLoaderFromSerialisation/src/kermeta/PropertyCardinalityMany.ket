@@ -1,0 +1,15 @@
+<%@ket
+package="ecore"
+require=""
+using=""
+isAspectClass="false"
+class="PropertyTemplateMany"
+ismethod="false"operation="generateMany"
+parameters="PropertyNameUpper:String,PropertyName:String,str:Boolean"
+%> 
+
+	self.<%=PropertyName%>.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"<%=PropertyNameUpper%>"+"().add(<%if str then%> <%="\\\""%><%end%>"+c.toString+"<%if str then%> <%="\\\""%><%end%>);\n")	
+	}	
+
+

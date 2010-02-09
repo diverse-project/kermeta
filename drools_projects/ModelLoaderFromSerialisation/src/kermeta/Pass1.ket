@@ -1,0 +1,13 @@
+<%@ket
+package="ecore"
+require=""
+using=""
+isAspectClass="false"
+class="Pass1Template"
+ismethod="false"operation="generate"
+parameters="classQualifiedName:String, packName:String, className:String, packNameUpper:String"
+%>
+
+	var na : String init ctx.getGenerateName
+ 	ctx.res.append("<%=classQualifiedName%>" +" "+ na +  " = <%=packName%>.<%=packNameUpper%>Factory.eInstance.create<%=className%>();\n")
+	ctx.cache.put(self,na)	

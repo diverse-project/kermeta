@@ -1,0 +1,12 @@
+<%@ket
+package="ecore"
+require=""
+using=""
+isAspectClass="false"
+class="ReferenceTemplate"
+ismethod="false"operation="generateOne"
+parameters="PropertyNameUpper:String,PropertyName:String"
+%>
+	if (not self.<%=PropertyName%>.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"<%=PropertyNameUpper%>"+"("+ctx.cache.getValue(self.<%=PropertyName%>)+");\n")	
+	end

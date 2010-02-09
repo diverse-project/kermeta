@@ -1,0 +1,15 @@
+package ecore;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+aspect class ReferenceTemplateMany{
+operation generateMany(PropertyNameUpper:String,PropertyName:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\n\tself.")
+_res.append(PropertyName)
+_res.append(".each{c|\n\tctx.res.append(ctx.cache.getValue(self) + \".get\"+\"")
+_res.append(PropertyNameUpper)
+_res.append("\"+\"().add(\"+ctx.cache.getValue(c)+\");\n\")\t\n\t}\t\n\n\n")
+result := _res.toString
+end
+}

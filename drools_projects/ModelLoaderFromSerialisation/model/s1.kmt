@@ -1,0 +1,170 @@
+
+/* $Id:$ 
+ * Creation : February 9, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "ecore::Main"
+@mainOperation "main"
+
+
+package patternframework;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
+require "s0.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using pattern
+
+aspect class ModelPattern {
+operation  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.res.append("patternframework.ModelPattern" +" "+ na +  " = patternframework.PatternframeworkFactory.eInstance.createModelPattern();
+")
+	ctx.cache.put(self,na)	
+
+if not self.pattern.isVoid then
+
+	self.pattern.pass1create(ctx)
+end
+
+if not self.constraints.isVoid then
+
+	self.constraints.pass1create(ctx)
+end
+
+if self.falsepositivepatterns.size >0 then
+
+	self.falsepositivepatterns.each{c|c.pass1create(ctx)}
+end
+end 
+operation  pass2set(ctx:Context):Void is do 
+ 	
+	self.featureIdentifier.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"FeatureIdentifier"+"().add( \""+c.toString+" \");
+")	
+	}	
+
+
+	if (not self.pattern.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pattern"+"("+ctx.cache.getValue(self.pattern)+");
+")	
+	end
+	if (not self.constraints.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Constraints"+"("+ctx.cache.getValue(self.constraints)+");
+")	
+	end
+
+	self.falsepositivepatterns.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Falsepositivepatterns"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if not self.pattern.isVoid then
+
+	self.pattern.pass2set(ctx)
+end
+
+if not self.constraints.isVoid then
+
+	self.constraints.pass2set(ctx)
+end
+
+if self.falsepositivepatterns.size >0 then
+
+	self.falsepositivepatterns.each{c|c.pass2set(ctx)}
+end
+end 
+ }
+aspect class PModel {
+operation  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.res.append("patternframework.PModel" +" "+ na +  " = patternframework.PatternframeworkFactory.eInstance.createPModel();
+")
+	ctx.cache.put(self,na)	
+
+if self.roles.size >0 then
+
+	self.roles.each{c|c.pass1create(ctx)}
+end
+end 
+operation  pass2set(ctx:Context):Void is do 
+ 	
+	self.content.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Content"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.roles.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Roles"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if self.roles.size >0 then
+
+	self.roles.each{c|c.pass2set(ctx)}
+end
+end 
+ }
+aspect class PObject {
+operation  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.res.append("patternframework.PObject" +" "+ na +  " = patternframework.PatternframeworkFactory.eInstance.createPObject();
+")
+	ctx.cache.put(self,na)	
+end 
+operation  pass2set(ctx:Context):Void is do 
+ 	end 
+ }
+aspect class PConstraint {
+operation  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.res.append("patternframework.PConstraint" +" "+ na +  " = patternframework.PatternframeworkFactory.eInstance.createPConstraint();
+")
+	ctx.cache.put(self,na)	
+end 
+operation  pass2set(ctx:Context):Void is do 
+ 		if (not self.expression.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Expression"+"(\""+self.expression.toString+"\");
+")	
+	end
+	if (not self.language.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Language"+"("+self.language.toString+");
+")	
+	end
+end 
+ }
+aspect class PRole {
+operation  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.res.append("patternframework.PRole" +" "+ na +  " = patternframework.PatternframeworkFactory.eInstance.createPRole();
+")
+	ctx.cache.put(self,na)	
+end 
+operation  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+	if (not self.player.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Player"+"("+ctx.cache.getValue(self.player)+");
+")	
+	end
+end 
+ }

@@ -1,0 +1,272 @@
+/* $Id:$ 
+ * Creation : February 9, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "ecore::Main"
+@mainOperation "main"
+
+
+package ecore;
+
+
+require kermeta
+//require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
+  
+require "Header.kmt"  
+require "HeaderLink.kmt"  
+require "Pass1.kmt" 
+require "PropertyCardinalityOne.kmt" 
+require "PropertyCardinalityMany.kmt" 
+require "ReferenceCardinalityMany.kmt" 
+require "ReferenceCardinalityOne.kmt" 
+
+
+
+using kermeta::standard
+using kermeta::persistence
+using ecore
+class Main {
+	
+	operation main() : Void is do
+		var uriecore : String init "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
+	
+		var ctx : Context init Context.new
+		ctx.res := kermeta::utils::StringBuffer.new
+		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
+		ctx.pass1template := Pass1Template.new
+		ctx.propertytemplate := PropertyTemplate.new
+		ctx.propertytemplatemany := PropertyTemplateMany.new
+		ctx.referencetemplate := ReferenceTemplate.new
+		ctx.referencetemplatemany := ReferenceTemplateMany.new
+		
+		var rep : EMFRepository  init EMFRepository.new
+		var res : EMFResource 
+		res ?= rep.getResource(uriecore)
+		res.load
+		var root : EPackage
+		
+		root ?= res.one
+			
+		var h : Header init Header.new 			
+		ctx.res.append(h.generate(uriecore,root.name))	
+		root.eSubpackages.each{p| p.toGenerate(ctx)}
+		root.eClassifiers.each{c| c.toGenerate(ctx)}			
+		var f : kermeta::io::FileIO		init 	kermeta::io::FileIO.new
+		var fileName : String init ctx.getGenerateName
+		f.writeTextFile("/model/"+fileName+".kmt",ctx.res.toString)
+		ctx.res := kermeta::utils::StringBuffer.new
+			
+		
+		
+		
+		res.dependentResources.each{res|
+		res.each{e|
+		root ?= e
+			
+			var hl : HeaderLink init HeaderLink.new 			
+			ctx.res.append(hl.generate(uriecore,root.name))	
+			root.eSubpackages.each{p| p.toGenerate(ctx)}
+			root.eClassifiers.each{c| c.toGenerate(ctx)}			
+			f :=	kermeta::io::FileIO.new
+			fileName := ctx.getGenerateName
+			f.writeTextFile("/model/"+fileName+".kmt",ctx.res.toString)
+			ctx.res := kermeta::utils::StringBuffer.new
+			
+		}
+		
+		
+		
+		}
+		
+				
+		//root.toGenerate(ctx)		
+		
+			
+			stdio.writeln(ctx.res.toString)		 
+	end
+	
+	
+
+}
+class Context{
+	reference pass1template : Pass1Template
+	reference propertytemplate : PropertyTemplate
+	reference propertytemplatemany : PropertyTemplateMany
+	reference referencetemplate : ReferenceTemplate  
+	reference referencetemplatemany : ReferenceTemplateMany  
+	
+	reference res : kermeta::utils::StringBuffer
+	reference cache : kermeta::utils::Hashtable<Object,String>
+	operation getGenerateName():String is do
+		if (i.isVoid) then i:= 0 end
+		result :="s"+ i.toString()
+		i:=i+1
+	end
+	reference i : Integer	
+}
+
+
+aspect class EPackage{
+		
+	method toGenerate(ctx:Context) : Void is do 
+		ctx.res.append("package " + self.name + " {\n")
+		self.eSubpackages.each{p| p.toGenerate(ctx)}
+		self.eClassifiers.each{c| c.toGenerate(ctx)}			
+		ctx.res.append("}\n")		
+	end
+	
+	method getQualifiedNameGen(): String is do
+		result:=""
+		if (not self.eSuperPackage.isVoid) then
+			result := self.eSuperPackage.getQualifiedNameGen() + "."
+		end
+		result :=result + self.name		
+	end
+	
+
+}
+
+aspect class EClass{
+		
+	method toGenerate(ctx:Context) : Void is do 
+		ctx.res.append("aspect class " + self.name + " {\n")
+		
+		if (self.eSuperTypes.size == 0) then
+			ctx.res.append("operation  ")
+		else
+			ctx.res.append("method  ")
+		end 
+		
+		ctx.res.append("pass1create(ctx:Context):Void")
+		if (self.eSuperTypes.size>1) then
+			ctx.res.append(" from " + self.eSuperTypes.one.name) 
+		end
+		ctx.res.append(" is do \n \t")
+		if (not self.~abstract) then
+			//classQualifiedName:String, packNameUpper:String, className:String	
+			var packNameUpper : String init self.ePackage.name.substring(0,1).toUpperCase + self.ePackage.name.substring(1,self.ePackage.name.size)
+			ctx.res.append(ctx.pass1template.generate(self.getQualifiedNameGen.replace("pattern.",""),self.ePackage.getQualifiedNameGen().replace("pattern.",""), self.name , packNameUpper))
+			self.eAllReferences().each{a|a.generateTraverse(ctx,"pass1create")}
+			
+			
+		end
+		ctx.res.append("end \n")
+		
+		if (self.eSuperTypes.size == 0) then
+			ctx.res.append("operation  ")
+		else
+			ctx.res.append("method  ")
+		end 
+		
+		ctx.res.append("pass2set(ctx:Context):Void")
+		if (self.eSuperTypes.size>1) then
+			ctx.res.append(" from " + self.eSuperTypes.one.name) 
+		end
+		ctx.res.append(" is do \n \t")
+		if (not self.~abstract) then
+			self.eAllAttributes().each{a|a.toGenerate(ctx)}
+			self.eAllReferences().each{a|a.toGenerate(ctx)}
+			self.eAllReferences().each{a|a.generateTraverse(ctx,"pass2set")}
+			
+		end
+		
+		
+		
+		ctx.res.append("end \n }\n")
+		
+		
+		
+		
+	end
+	
+	method getQualifiedNameGen(): String is do
+		result := self.ePackage.getQualifiedNameGen() + "." +self.name
+			
+	end
+}  
+
+
+
+aspect class EAttribute{
+		
+	method toGenerate(ctx:Context) : Void is do 
+		var propertyUpper : String init self.name.substring(0,1).toUpperCase + self.name.substring(1,self.name.size)
+		if (self.many) then
+			//ropertyNameUpper:String,PropertyName:String,str:Boolean
+			
+			ctx.res.append(ctx.propertytemplatemany.generateMany(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"),isString(self.eType)))
+		else
+			ctx.res.append(ctx.propertytemplate.generateOne(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"),isString(self.eType))  )
+		end
+		
+	end
+	
+	
+	operation isString(type : EClassifier ):Boolean is do
+		var t  : EDataType 
+		t?=type
+		if (t.isVoid) then
+			result:=false
+		else
+			result := t.name.equals("EString") or t.instanceClassName.equals("java.lang.String")
+		end		
+	end
+	
+	
+
+}
+
+aspect class EReference{
+		
+	method toGenerate(ctx:Context) : Void is do 
+		var propertyUpper : String init self.name.substring(0,1).toUpperCase + self.name.substring(1,self.name.size)
+		if (self.many) then
+			//ropertyNameUpper:String,PropertyName:String,str:Boolean
+			ctx.res.append(ctx.referencetemplatemany.generateMany(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")))
+		else
+			ctx.res.append(ctx.referencetemplate.generateOne(propertyUpper,self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute"))  )
+		end
+		 
+		
+	end
+ 
+ 
+ 	operation generateTraverse(ctx:Context,methodName:String):Void is do
+		if (self.containment) then
+			if (self.many) then
+				ctx.res.append("\nif self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".size >0 then\n")
+				ctx.res.append("\n\t"+ "self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".each{c|c."+methodName+"(ctx)}\n")
+				ctx.res.append("end\n")
+			else
+				ctx.res.append("\nif not self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+".isVoid then\n")
+				ctx.res.append("\n\t"+ "self."+ self.name.replace("value","~value").replace("operation","~operation").replace("attribute","~attribute")+"."+methodName+"(ctx)\n")			
+				ctx.res.append("end\n")
+			end
+			
+		end
+			
+	end
+	
+ 
+	
+
+} 
+
+
+
+aspect class EObject{
+		
+	operation toGenerate(ctx:Context) : Void is do 
+		
+		
+	end
+	
+	operation getQualifiedNameGen(): String is do
+		result :=""	
+	end
+ 	
+}

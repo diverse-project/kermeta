@@ -1,0 +1,25 @@
+package ecore;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class PropertyTemplateMany{
+operation generateMany(PropertyNameUpper:String,PropertyName:String,str:Boolean):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\n\tself.")
+_res.append(PropertyName)
+_res.append(".each{c|\n\tctx.res.append(ctx.cache.getValue(self) + \".get\"+\"")
+_res.append(PropertyNameUpper)
+_res.append("\"+\"().add(")
+if str then
+_res.append(" ")
+_res.append("\\\"")
+end
+_res.append("\"+c.toString+\"")
+if str then
+_res.append(" ")
+_res.append("\\\"")
+end
+_res.append(");\n\")\t\n\t}\t\n\n\n")
+result := _res.toString
+end
+}

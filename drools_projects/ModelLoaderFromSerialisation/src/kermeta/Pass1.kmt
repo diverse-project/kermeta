@@ -1,0 +1,19 @@
+package ecore;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class Pass1Template{
+operation generate(classQualifiedName:String, packName:String, className:String, packNameUpper:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\n\tvar na : String init ctx.getGenerateName\n \tctx.res.append(\"")
+_res.append(classQualifiedName)
+_res.append("\" +\" \"+ na +  \" = ")
+_res.append(packName)
+_res.append(".")
+_res.append(packNameUpper)
+_res.append("Factory.eInstance.create")
+_res.append(className)
+_res.append("();\n\")\n\tctx.cache.put(self,na)\t\n")
+result := _res.toString
+end
+}

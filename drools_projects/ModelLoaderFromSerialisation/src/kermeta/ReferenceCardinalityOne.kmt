@@ -1,0 +1,17 @@
+package ecore;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class ReferenceTemplate{
+operation generateOne(PropertyNameUpper:String,PropertyName:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\tif (not self.")
+_res.append(PropertyName)
+_res.append(".isVoid()) then\n\t\tctx.res.append(ctx.cache.getValue(self) + \".set\"+\"")
+_res.append(PropertyNameUpper)
+_res.append("\"+\"(\"+ctx.cache.getValue(self.")
+_res.append(PropertyName)
+_res.append(")+\");\n\")\t\n\tend\n")
+result := _res.toString
+end
+}

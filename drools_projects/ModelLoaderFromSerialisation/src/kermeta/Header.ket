@@ -1,0 +1,63 @@
+<%@ket
+package="ecore"
+require=""
+using=""
+isAspectClass="false"
+class="Header"
+ismethod="false" operation="generate"
+parameters="uriecore:String, packagename:String"
+%>
+
+/* $Id:$ 
+ * Creation : February 9, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "<%=packagename%>::Main"
+@mainOperation "main"
+
+
+package <%=packagename%>;
+
+
+require kermeta
+require "<%=uriecore%>"
+require "s1.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+
+class Main {
+	
+	operation main(uri:String) : Void is do
+		var ctx : Context init Context.new
+		ctx.res := kermeta::utils::StringBuffer.new
+		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
+		
+		var rep : EMFRepository  init EMFRepository.new
+		var res : EMFResource 
+		res ?= rep.createResource(uri, "<%=uriecore%>")
+		res.load
+		var s : System 
+		s?= res.one()
+		s.pass1create(ctx)
+		s.pass2set(ctx)
+		stdio.writeln(ctx.res.toString) 
+	end
+}
+class Context{
+	reference res : kermeta::utils::StringBuffer
+	reference cache : kermeta::utils::Hashtable<Object,String>
+	reference lastgenerateName : String
+	
+	operation getGenerateName():String is do
+		if (i.isVoid) then i:= 0 end
+		result :="s"+ i.toString()
+		lastgenerateName := result
+		i:=i+1
+	end
+	reference i : Integer	
+}
+

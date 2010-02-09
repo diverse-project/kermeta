@@ -1,0 +1,32 @@
+<%@ket
+package="ecore"
+require=""
+using=""
+isAspectClass="false"
+class="HeaderLink"
+ismethod="false" operation="generate"
+parameters="uriecore:String, packagename:String"
+%>
+
+/* $Id:$ 
+ * Creation : February 9, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "ecore::Main"
+@mainOperation "main"
+
+
+package <%=packagename%>;
+
+
+require kermeta
+require "<%=uriecore%>"
+require "s0.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using pattern
+
