@@ -1,6 +1,6 @@
 SYNTAXDEF core
-FOR <http://SmartAdapters4ART/smartadapters/core>
-START Adapter,org.smartadapters.core.adaptations.SetruntimeSystem,org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance,org.smartadapters.core.adaptations.SetruntimeinstancePrimitiveInstance,org.smartadapters.core.adaptations.SetruntimeinstanceCompositeInstance,org.smartadapters.core.adaptations.SetruntimeinstanceTransmissionBinding,pattern.art.NamedElement,pattern.art.ModelElement,pattern.art.TypedElement,pattern.art.CardinalityElement,pattern.art.instance.Binding,pattern.art.type.ComponentType,pattern.art.type.PrimitiveType,pattern.art.type.CompositeType,pattern.art.type.Service,pattern.art.type.FunctionalService,pattern.art.type.ControlService,pattern.art.implem.ComponentImplementation,pattern.art.implem.FractalComponent,pattern.art.implem.OSGiComponent,pattern.art.implem.TypeImplementation,pattern.art.implem.OSGiType,pattern.art.group.Group,pattern.art.group.TypeGroup,pattern.art.group.InstanceGroup,patternframework.ModelPattern,patternframework.PObject
+FOR <http://SmartAdapters4ART/smartadapters/core> 
+START Adapter,org.smartadapters.core.adaptations.SetruntimeSystem,org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance,org.smartadapters.core.adaptations.SetruntimeinstancePrimitiveInstance,org.smartadapters.core.adaptations.SetruntimeinstanceCompositeInstance,org.smartadapters.core.adaptations.SetruntimeinstanceTransmissionBinding,pattern.art.NamedElement,pattern.art.ModelElement,pattern.art.TypedElement,pattern.art.CardinalityElement,pattern.art.instance.Binding,pattern.art.type.ComponentType,pattern.art.type.PrimitiveType,pattern.art.type.CompositeType,pattern.art.type.Service,pattern.art.type.FunctionalService,pattern.art.type.ControlService,pattern.art.implem.ComponentImplementation,pattern.art.implem.FractalComponent,pattern.art.implem.OSGiComponent,pattern.art.implem.TypeImplementation,pattern.art.implem.OSGiType,patternframework.ModelPattern
 
 IMPORTS{
 	org.smartadapters.core.adaptations:<http://SmartAdapters4ART/smartadapters/core/adaptations>
@@ -86,7 +86,6 @@ TOKENSTYLES {
 	"implementingClass" COLOR #0055bb, ITALIC;
 	"OSGiType" COLOR #0055bb;
 	"generateInstanceBundle" COLOR #0055bb , ITALIC;
-	"OSGiPort" COLOR #0055bb;
 	"serviceId" COLOR #0055bb , ITALIC;
 	
 	"groups" COLOR #444444, BOLD;
@@ -103,35 +102,30 @@ TOKENSTYLES {
 	"default" COLOR #A22000, BOLD;
 	"T_OPTIONAL" COLOR #A22000, BOLD;
 	
-	"datatype" COLOR #0055bb, BOLD;
-	
-
-	
-	
-	
-	
-	
+	"datatype" COLOR #0055bb, BOLD;	
 }
 
 RULES{
 	
-	Adapter::= "Adapter"  "{" ( "aspect"  ":" aspect | "adapt"  ":" adapt | "name"  ":" name['"','"']  )* "}"  ;
+	Adapter::= "Adapter"  "{" ( aspect | "protocol"  ":" adapt | "name"  ":" name['"','"']  )* "}"  ;
 	
-	Aspect::= "Aspect"  "{" ( "template"  ":" template | "structure"  ":" structure | "persistent"  ":" persistent[] )* "}"  ;
+	Aspect::= ( "pointcut"  "{" template "}" | "advice"  "{" structure "}" | "unique elements"  ":" persistent[] )* "}"  ;
 	
 	makeUnique::= "makeUnique"  "{" ( "adapter"  ":" adapter[]| "element"  ":" element[] )* "}"  ;
 	
-	org.smartadapters.core.adaptations.SetruntimeSystem::= "SetruntimeSystem"  "{" ( "adapter"  ":" adapter[]| "SystemToSet"  ":" SystemToSet[]| "refroot"  ":" refroot[]| "refservices"  ":" refservices[]| "reftypes"  ":" reftypes[]| "refdataTypes"  ":" refdataTypes[]| "refname"  ":" refname['"','"']  )* "}"  ;
+	org.smartadapters.core.adaptations.SetruntimeSystem::= "set system" SystemToSet[] "{" ( "set root"  ":" refroot[]| "add services"  ":" refservices[]| "add types"  ":" reftypes[]| "add dataTypes"  ":" refdataTypes[]  )* "}"  ;
 	
-	org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance::= "SetruntimeinstanceComponentInstance"  "{" ( "adapter"  ":" adapter[]| "ComponentInstanceToSet"  ":" ComponentInstanceToSet[]| "reftype"  ":" reftype[]| "refstate"  ":" refstate['"','"'] | "refsuperComponent"  ":" refsuperComponent[]| "refattribute"  ":" refattribute[]| "refbinding"  ":" refbinding[]| "refcontrollerDesc"  ":" refcontrollerDesc['"','"'] | "refcontentDesc"  ":" refcontentDesc['"','"'] | "refname"  ":" refname['"','"']  )* "}"  ;
+	org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance::= "set component" ComponentInstanceToSet[] "{" ( "set type"  ":" reftype[]| "set state"  ":" refstate['"','"'] | "set superComponent"  ":" refsuperComponent[]| "add attribute"  ":" refattribute[]| "add binding"  ":" refbinding[]| "set name"  ":" refname['"','"']  )* "}"  ;
 	
-	org.smartadapters.core.adaptations.SetruntimeinstancePrimitiveInstance::= "SetruntimeinstancePrimitiveInstance"  "{" ( "adapter"  ":" adapter[]| "PrimitiveInstanceToSet"  ":" PrimitiveInstanceToSet[]| "reftype"  ":" reftype[]| "refstate"  ":" refstate['"','"'] | "refsuperComponent"  ":" refsuperComponent[]| "refattribute"  ":" refattribute[]| "refbinding"  ":" refbinding[]| "refcontrollerDesc"  ":" refcontrollerDesc['"','"'] | "refcontentDesc"  ":" refcontentDesc['"','"'] | "refname"  ":" refname['"','"']  )* "}"  ;
+	org.smartadapters.core.adaptations.SetruntimeinstancePrimitiveInstance::= "set primitive component" PrimitiveInstanceToSet[] "{" ( "set type"  ":" reftype[]| "set state"  ":" refstate['"','"'] | "set superComponent"  ":" refsuperComponent[]| "add attribute"  ":" refattribute[]| "add binding"  ":" refbinding[]| "set name"  ":" refname['"','"']  )* "}"  ;
 	
-	org.smartadapters.core.adaptations.SetruntimeinstanceCompositeInstance::= "SetruntimeinstanceCompositeInstance"  "{" ( "adapter"  ":" adapter[]| "CompositeInstanceToSet"  ":" CompositeInstanceToSet[]| "refsubComponent"  ":" refsubComponent[]| "refdelegation"  ":" refdelegation[]| "reftype"  ":" reftype[]| "refstate"  ":" refstate['"','"'] | "refsuperComponent"  ":" refsuperComponent[]| "refattribute"  ":" refattribute[]| "refbinding"  ":" refbinding[]| "refcontrollerDesc"  ":" refcontrollerDesc['"','"'] | "refcontentDesc"  ":" refcontentDesc['"','"'] | "refname"  ":" refname['"','"']  )* "}"  ;
+	org.smartadapters.core.adaptations.SetruntimeinstanceCompositeInstance::= "set composite component" CompositeInstanceToSet[] "{" ( "add subComponent"  ":" refsubComponent[]| "add delegation"  ":" refdelegation[]| "set state"  ":" refstate['"','"'] | "set superComponent"  ":" refsuperComponent[]| "add attribute"  ":" refattribute[]| "add binding"  ":" refbinding[]| "set name"  ":" refname['"','"']  )* "}"  ;
 	
-	org.smartadapters.core.adaptations.SetruntimeinstanceTransmissionBinding::= "SetruntimeinstanceTransmissionBinding"  "{" ( "adapter"  ":" adapter[]| "TransmissionBindingToSet"  ":" TransmissionBindingToSet[]| "refclient"  ":" refclient[]| "refserver"  ":" refserver[]| "refserverInstance"  ":" refserverInstance[]| "refId"  ":" refId['"','"']  )* "}"  ;
+	org.smartadapters.core.adaptations.SetruntimeinstanceTransmissionBinding::= "set binding" TransmissionBindingToSet[] "{" ( "set required port "  ":" refclient[]| "ref provided port"  ":" refserver[]| "set server component"  ":" refserverInstance[]| "set id"  ":" refId['"','"']  )* "}"  ;
 	
-pattern.art.DataType::= "datatype" #1 name[] ";"  ;
+		pattern.art.System::= "system" #1 name[] ";" !0 "root" #1 root ( !0 (services | types | dataTypes ) )* ;
+		
+		pattern.art.DataType::= "datatype" #1 name[] ";"  ;
 		
 		pattern.art.Instance.PrimitiveInstance::= "primitive" #1 "instance"  #1 name[] #1 ":" #1 type[] #1 state[T_INSTANCE_STATE] #1 (!1 "implementation"  #1 implem)? !0 "{" ( !1 (attribute | binding) )* !0 "}"  ;
 		
@@ -171,9 +165,9 @@ pattern.art.DataType::= "datatype" #1 name[] ";"  ;
 		
 		//Implem.OSGiPort::= "OSGiPort" #1 ":" #1 serviceId[STRING_LITERAL] ; 
 		
-		pattern.art.Group.TypeGroup::= "typegroup" #1 name[] #1 "{" ( !1 "types" #1 ":" #1 types[] ("," #1 types[])* )?  ( !1 subGroups)* !0 "}"  ;
+		//pattern.art.Group.TypeGroup::= "typegroup" #1 name[] #1 "{" ( !1 "types" #1 ":" #1 types[] ("," #1 types[])* )?  ( !1 subGroups)* !0 "}"  ;
 		
-		pattern.art.Group.InstanceGroup::= "instancegroup" #1 name[] #1 "{" ( !1 "instances" #1 ":" #1 instances[] ("," #1 instances[])* )?  (!1 subGroups)* !0 "}"  ;
+		//pattern.art.Group.InstanceGroup::= "instancegroup" #1 name[] #1 "{" ( !1 "instances" #1 ":" #1 instances[] ("," #1 instances[])* )?  (!1 subGroups)* !0 "}"  ;
 		
 		pattern.art.Implem.OSGiType::= generateInstanceBundle[T_IMPLEM]  ;
 		
@@ -191,7 +185,7 @@ pattern.art.DataType::= "datatype" #1 name[] ";"  ;
 	
 	patternframework.PModel::= "PModel"  "{" ( "content"  ":" content[]| "roles"  ":" roles  )* "}"  ;
 	
-	patternframework.PObject::= "PObject"  "{"  "}"  ;
+	//patternframework.PObject::= "PObject"  "{"  "}"  ;
 	
 	patternframework.PConstraint::= "PConstraint"  "{" ( "expression"  ":" expression['"','"'] | "language"  ":" language[] )* "}"  ;
 	
