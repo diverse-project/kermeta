@@ -1,14 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.kermeta.art.model.editor; singleton:=true
-Bundle-Version: 1.1.1
+Bundle-SymbolicName: org.kermeta.art.model.editor;singleton:=true
+Bundle-Version: 1.0.0
 Bundle-ClassPath: .
 Bundle-Activator: art.presentation.MetamodelruntimeEditorPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: art.instance.presentation,
+Export-Package: art.group.presentation,
+ art.implem.presentation,
+ art.instance.presentation,
  art.presentation,
  art.type.presentation
 Require-Bundle: org.eclipse.core.runtime,

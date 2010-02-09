@@ -10,146 +10,74 @@
 
 <plugin>
 
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="art.presentation.ArtModelWizardID"
+            name="%_UI_ArtModelWizard_label"
+            class="art.presentation.ArtModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ArtModelFile.gif">
+         <description>%_UI_ArtModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
 
-  <extension
-    point = "org.eclipse.ui.newWizards">
-    <category
-      id = "org.eclipse.emf.ecore.Wizard.category.ID"
-      name="%_UI_Wizard_category">
-    </category>
-    <wizard
-      id = "art.presentation.ArtModelWizardID"
-      name = "%_UI_ArtModelWizard_label"
-      class = "art.presentation.ArtModelWizard"
-      category = "org.eclipse.emf.ecore.Wizard.category.ID"
-      icon = "icons/full/obj16/ArtModelFile.gif">
-      <description>%_UI_ArtModelWizard_description</description>
-      <selection class = "org.eclipse.core.resources.IResource" />
-    </wizard>
-  </extension>
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="art.presentation.ArtEditorID"
+            name="%_UI_ArtEditor_label"
+            icon="icons/full/obj16/ArtModelFile.gif"
+            extensions="art"
+            class="art.presentation.ArtEditor"
+            contributorClass="art.presentation.ArtActionBarContributor">
+      </editor>
+   </extension>
 
-  <extension point = "org.eclipse.ui.editors">
-    <editor
-        id = "art.presentation.ArtEditorID"
-        name = "%_UI_ArtEditor_label"
-        icon = "icons/full/obj16/ArtModelFile.gif"
-        extensions = "art"
-        class = "art.presentation.ArtEditor" 
-        contributorClass="art.presentation.ArtActionBarContributor" >
-    </editor>
-  </extension>    
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="art.instance.presentation.InstanceEditorID"
+            name="%_UI_InstanceEditor_label"
+            icon="icons/full/obj16/InstanceModelFile.gif"
+            extensions="instance"
+            class="art.instance.presentation.InstanceEditor"
+            contributorClass="art.instance.presentation.InstanceActionBarContributor">
+      </editor>
+   </extension>
 
-  <extension
-    point = "org.eclipse.ui.newWizards">
-    <category
-      id = "org.eclipse.emf.ecore.Wizard.category.ID"
-      name="%_UI_Wizard_category">
-    </category>
-    <wizard
-      id = "art.instance.presentation.InstanceModelWizardID"
-      name = "%_UI_InstanceModelWizard_label"
-      class = "art.instance.presentation.InstanceModelWizard"
-      category = "org.eclipse.emf.ecore.Wizard.category.ID"
-      icon = "icons/full/obj16/InstanceModelFile.gif">
-      <description>%_UI_InstanceModelWizard_description</description>
-      <selection class = "org.eclipse.core.resources.IResource" />
-    </wizard>
-  </extension>
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="art.type.presentation.TypeEditorID"
+            name="%_UI_TypeEditor_label"
+            icon="icons/full/obj16/TypeModelFile.gif"
+            extensions="type"
+            class="art.type.presentation.TypeEditor"
+            contributorClass="art.type.presentation.TypeActionBarContributor">
+      </editor>
+   </extension>
 
-  <extension point = "org.eclipse.ui.editors">
-    <editor
-        id = "art.instance.presentation.InstanceEditorID"
-        name = "%_UI_InstanceEditor_label"
-        icon = "icons/full/obj16/InstanceModelFile.gif"
-        extensions = "instance"
-        class = "art.instance.presentation.InstanceEditor" 
-        contributorClass="art.instance.presentation.InstanceActionBarContributor" >
-    </editor>
-  </extension>    
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="art.implem.presentation.ImplemEditorID"
+            name="%_UI_ImplemEditor_label"
+            icon="icons/full/obj16/ImplemModelFile.gif"
+            extensions="implem"
+            class="art.implem.presentation.ImplemEditor"
+            contributorClass="art.implem.presentation.ImplemActionBarContributor">
+      </editor>
+   </extension>
 
-  <extension
-    point = "org.eclipse.ui.newWizards">
-    <category
-      id = "org.eclipse.emf.ecore.Wizard.category.ID"
-      name="%_UI_Wizard_category">
-    </category>
-    <wizard
-      id = "art.type.presentation.TypeModelWizardID"
-      name = "%_UI_TypeModelWizard_label"
-      class = "art.type.presentation.TypeModelWizard"
-      category = "org.eclipse.emf.ecore.Wizard.category.ID"
-      icon = "icons/full/obj16/TypeModelFile.gif">
-      <description>%_UI_TypeModelWizard_description</description>
-      <selection class = "org.eclipse.core.resources.IResource" />
-    </wizard>
-  </extension>
-
-  <extension point = "org.eclipse.ui.editors">
-    <editor
-        id = "art.type.presentation.TypeEditorID"
-        name = "%_UI_TypeEditor_label"
-        icon = "icons/full/obj16/TypeModelFile.gif"
-        extensions = "type"
-        class = "art.type.presentation.TypeEditor" 
-        contributorClass="art.type.presentation.TypeActionBarContributor" >
-    </editor>
-  </extension>   
-  
-  <extension
-    point = "org.eclipse.ui.newWizards">
-    <category
-      id = "org.eclipse.emf.ecore.Wizard.category.ID"
-      name="%_UI_Wizard_category">
-    </category>
-    <wizard
-      id = "art.implem.presentation.ImplemModelWizardID"
-      name = "%_UI_TypeModelWizard_label"
-      class = "art.implem.presentation.ImplemModelWizard"
-      category = "org.eclipse.emf.ecore.Wizard.category.ID"
-      icon = "icons/full/obj16/ImplemModelFile.gif">
-      <description>%_UI_ImplemModelWizard_description</description>
-      <selection class = "org.eclipse.core.resources.IResource" />
-    </wizard>
-  </extension>
-
-  <extension point = "org.eclipse.ui.editors">
-    <editor
-        id = "art.implem.presentation.ImplemEditorID"
-        name = "%_UI_TypeEditor_label"
-        icon = "icons/full/obj16/ImplemModelFile.gif"
-        extensions = "implem"
-        class = "art.implem.presentation.ImplemEditor" 
-        contributorClass="art.implem.presentation.ImplemActionBarContributor" >
-    </editor>
-  </extension>
-  
-
-  <extension
-    point = "org.eclipse.ui.newWizards">
-    <category
-      id = "org.eclipse.emf.ecore.Wizard.category.ID"
-      name="%_UI_Wizard_category">
-    </category>
-    <wizard
-      id = "art.group.presentation.groupModelWizardID"
-      name = "%_UI_TypeModelWizard_label"
-      class = "art.group.presentation.groupModelWizard"
-      category = "org.eclipse.emf.ecore.Wizard.category.ID"
-      icon = "icons/full/obj16/GroupModelFile.gif">
-      <description>%_UI_GroupModelWizard_description</description>
-      <selection class = "org.eclipse.core.resources.IResource" />
-    </wizard>
-  </extension>
-
-  <extension point = "org.eclipse.ui.editors">
-    <editor
-        id = "art.group.presentation.GroupEditorID"
-        name = "%_UI_GroupEditor_label"
-        icon = "icons/full/obj16/GroupModelFile.gif"
-        extensions = "group"
-        class = "art.group.presentation.GroupEditor" 
-        contributorClass="art.group.presentation.GroupActionBarContributor" >
-    </editor>
-  </extension>
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="art.group.presentation.GroupEditorID"
+            name="%_UI_GroupEditor_label"
+            icon="icons/full/obj16/GroupModelFile.gif"
+            extensions="group"
+            class="art.group.presentation.GroupEditor"
+            contributorClass="art.group.presentation.GroupActionBarContributor">
+      </editor>
+   </extension>
 
 </plugin>
