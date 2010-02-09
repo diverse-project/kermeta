@@ -25,7 +25,7 @@ import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import pattern.art.util.ArtAdapterFactory;
+import pattern.art.util.ArtPatternAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -36,7 +36,7 @@ import pattern.art.util.ArtAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ArtItemProviderAdapterFactory extends ArtAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class ArtPatternItemProviderAdapterFactory extends ArtPatternAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public class ArtItemProviderAdapterFactory extends ArtAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArtItemProviderAdapterFactory() {
+	public ArtPatternItemProviderAdapterFactory() {
 		supportedTypes.add(IEditingDomainItemProvider.class);
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);

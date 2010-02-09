@@ -23,7 +23,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import pattern.art.ArtPackage;
+import pattern.art.ArtPatternPackage;
 import pattern.art.CardinalityElement;
 
 /**
@@ -80,7 +80,7 @@ public class CardinalityElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_CardinalityElement_lower_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_CardinalityElement_lower_feature", "_UI_CardinalityElement_type"),
-				 ArtPackage.Literals.CARDINALITY_ELEMENT__LOWER,
+				 ArtPatternPackage.Literals.CARDINALITY_ELEMENT__LOWER,
 				 true,
 				 false,
 				 false,
@@ -102,7 +102,7 @@ public class CardinalityElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_CardinalityElement_upper_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_CardinalityElement_upper_feature", "_UI_CardinalityElement_type"),
-				 ArtPackage.Literals.CARDINALITY_ELEMENT__UPPER,
+				 ArtPatternPackage.Literals.CARDINALITY_ELEMENT__UPPER,
 				 true,
 				 false,
 				 false,
@@ -148,8 +148,8 @@ public class CardinalityElementItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(CardinalityElement.class)) {
-			case ArtPackage.CARDINALITY_ELEMENT__LOWER:
-			case ArtPackage.CARDINALITY_ELEMENT__UPPER:
+			case ArtPatternPackage.CARDINALITY_ELEMENT__LOWER:
+			case ArtPatternPackage.CARDINALITY_ELEMENT__UPPER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
