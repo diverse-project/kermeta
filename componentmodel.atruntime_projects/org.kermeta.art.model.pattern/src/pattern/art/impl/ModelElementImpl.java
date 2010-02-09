@@ -8,7 +8,7 @@ package pattern.art.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import pattern.art.ArtPackage;
+import pattern.art.ArtPatternPackage;
 import pattern.art.ModelElement;
 
 /**
@@ -37,7 +37,7 @@ public class ModelElementImpl extends NamedElementImpl implements ModelElement {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ArtPackage.Literals.MODEL_ELEMENT;
+		return ArtPatternPackage.Literals.MODEL_ELEMENT;
 	}
 
 } //ModelElementImpl

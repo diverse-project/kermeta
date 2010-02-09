@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import pattern.art.ArtPackage;
+import pattern.art.ArtPatternPackage;
 
 import pattern.art.group.Group;
 import pattern.art.group.GroupFactory;
@@ -20,7 +20,7 @@ import pattern.art.group.GroupPackage;
 import pattern.art.group.InstanceGroup;
 import pattern.art.group.TypeGroup;
 
-import pattern.art.impl.ArtPackageImpl;
+import pattern.art.impl.ArtPatternPackageImpl;
 
 import pattern.art.implem.ImplemPackage;
 
@@ -113,7 +113,7 @@ public class GroupPackageImpl extends EPackageImpl implements GroupPackage {
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		ArtPackageImpl theArtPackage = (ArtPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) instanceof ArtPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) : ArtPackage.eINSTANCE);
+		ArtPatternPackageImpl theArtPatternPackage = (ArtPatternPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI) instanceof ArtPatternPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI) : ArtPatternPackage.eINSTANCE);
 		InstancePackageImpl theInstancePackage = (InstancePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI) instanceof InstancePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI) : InstancePackage.eINSTANCE);
 		TypePackageImpl theTypePackage = (TypePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI) instanceof TypePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI) : TypePackage.eINSTANCE);
 		ImplemPackageImpl theImplemPackage = (ImplemPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI) instanceof ImplemPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI) : ImplemPackage.eINSTANCE);
@@ -121,7 +121,7 @@ public class GroupPackageImpl extends EPackageImpl implements GroupPackage {
 
 		// Create package meta-data objects
 		theGroupPackage.createPackageContents();
-		theArtPackage.createPackageContents();
+		theArtPatternPackage.createPackageContents();
 		theInstancePackage.createPackageContents();
 		theTypePackage.createPackageContents();
 		theImplemPackage.createPackageContents();
@@ -129,7 +129,7 @@ public class GroupPackageImpl extends EPackageImpl implements GroupPackage {
 
 		// Initialize created meta-data
 		theGroupPackage.initializePackageContents();
-		theArtPackage.initializePackageContents();
+		theArtPatternPackage.initializePackageContents();
 		theInstancePackage.initializePackageContents();
 		theTypePackage.initializePackageContents();
 		theImplemPackage.initializePackageContents();
@@ -270,7 +270,7 @@ public class GroupPackageImpl extends EPackageImpl implements GroupPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		ArtPackage theArtPackage = (ArtPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI);
+		ArtPatternPackage theArtPatternPackage = (ArtPatternPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI);
 		TypePackage theTypePackage = (TypePackage)EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI);
 		InstancePackage theInstancePackage = (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
 
@@ -279,7 +279,7 @@ public class GroupPackageImpl extends EPackageImpl implements GroupPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		groupEClass.getESuperTypes().add(theArtPackage.getNamedElement());
+		groupEClass.getESuperTypes().add(theArtPatternPackage.getNamedElement());
 		typeGroupEClass.getESuperTypes().add(this.getGroup());
 		instanceGroupEClass.getESuperTypes().add(this.getGroup());
 

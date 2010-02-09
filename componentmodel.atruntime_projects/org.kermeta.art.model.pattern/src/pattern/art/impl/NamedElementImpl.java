@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import pattern.art.ArtPackage;
+import pattern.art.ArtPatternPackage;
 import pattern.art.NamedElement;
 
 import patternframework.impl.PObjectImpl;
@@ -67,7 +67,7 @@ public class NamedElementImpl extends PObjectImpl implements NamedElement {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ArtPackage.Literals.NAMED_ELEMENT;
+		return ArtPatternPackage.Literals.NAMED_ELEMENT;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class NamedElementImpl extends PObjectImpl implements NamedElement {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ArtPackage.NAMED_ELEMENT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ArtPatternPackage.NAMED_ELEMENT__NAME, oldName, name));
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class NamedElementImpl extends PObjectImpl implements NamedElement {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ArtPackage.NAMED_ELEMENT__NAME:
+			case ArtPatternPackage.NAMED_ELEMENT__NAME:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -113,7 +113,7 @@ public class NamedElementImpl extends PObjectImpl implements NamedElement {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ArtPackage.NAMED_ELEMENT__NAME:
+			case ArtPatternPackage.NAMED_ELEMENT__NAME:
 				setName((String)newValue);
 				return;
 		}
@@ -128,7 +128,7 @@ public class NamedElementImpl extends PObjectImpl implements NamedElement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ArtPackage.NAMED_ELEMENT__NAME:
+			case ArtPatternPackage.NAMED_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -143,7 +143,7 @@ public class NamedElementImpl extends PObjectImpl implements NamedElement {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ArtPackage.NAMED_ELEMENT__NAME:
+			case ArtPatternPackage.NAMED_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

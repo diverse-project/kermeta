@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
-import pattern.art.ArtPackage;
+import pattern.art.ArtPatternPackage;
 
 import patternframework.PatternframeworkPackage;
 
@@ -81,7 +81,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__NAME = ArtPackage.MODEL_ELEMENT__NAME;
+	int COMPONENT_INSTANCE__NAME = ArtPatternPackage.MODEL_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -90,7 +90,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__TYPE = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int COMPONENT_INSTANCE__TYPE = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -99,7 +99,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__STATE = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int COMPONENT_INSTANCE__STATE = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Super Component</b></em>' container reference.
@@ -108,7 +108,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__SUPER_COMPONENT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int COMPONENT_INSTANCE__SUPER_COMPONENT = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Attribute</b></em>' containment reference list.
@@ -117,7 +117,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__ATTRIBUTE = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int COMPONENT_INSTANCE__ATTRIBUTE = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Binding</b></em>' containment reference list.
@@ -126,7 +126,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__BINDING = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int COMPONENT_INSTANCE__BINDING = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Implem</b></em>' containment reference.
@@ -135,7 +135,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__IMPLEM = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 5;
+	int COMPONENT_INSTANCE__IMPLEM = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Groups</b></em>' reference list.
@@ -144,7 +144,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__GROUPS = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 6;
+	int COMPONENT_INSTANCE__GROUPS = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Component Instance</em>' class.
@@ -153,7 +153,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE_FEATURE_COUNT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 7;
+	int COMPONENT_INSTANCE_FEATURE_COUNT = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link pattern.art.instance.impl.PrimitiveInstanceImpl <em>Primitive Instance</em>}' class.

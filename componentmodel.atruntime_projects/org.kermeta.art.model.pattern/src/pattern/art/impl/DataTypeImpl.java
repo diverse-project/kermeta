@@ -8,7 +8,7 @@ package pattern.art.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import pattern.art.ArtPackage;
+import pattern.art.ArtPatternPackage;
 import pattern.art.DataType;
 
 /**
@@ -37,7 +37,7 @@ public class DataTypeImpl extends ModelElementImpl implements DataType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ArtPackage.Literals.DATA_TYPE;
+		return ArtPatternPackage.Literals.DATA_TYPE;
 	}
 
 } //DataTypeImpl

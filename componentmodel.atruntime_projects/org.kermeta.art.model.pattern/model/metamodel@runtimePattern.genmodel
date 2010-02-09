@@ -5,8 +5,10 @@
     modelPluginID="org.kermeta.art.model.pattern" modelName="Metamodel@runtimePattern"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
   <foreignModel>metamodel@runtimePattern.ecore</foreignModel>
-  <genPackages prefix="Pattern" disposableProviderFactory="true" ecorePackage="metamodel@runtimePattern.ecore#/">
-    <nestedGenPackages prefix="Art" disposableProviderFactory="true" ecorePackage="metamodel@runtimePattern.ecore#//art">
+  <genPackages prefix="Pattern" disposableProviderFactory="true" generateModelWizard="false"
+      ecorePackage="metamodel@runtimePattern.ecore#/">
+    <nestedGenPackages prefix="ArtPattern" disposableProviderFactory="true" fileExtensions="artP"
+        ecorePackage="metamodel@runtimePattern.ecore#//art">
       <genDataTypes ecoreDataType="metamodel@runtimePattern.ecore#//art/String"/>
       <genDataTypes ecoreDataType="metamodel@runtimePattern.ecore#//art/Boolean"/>
       <genDataTypes ecoreDataType="metamodel@runtimePattern.ecore#//art/Integer"/>
@@ -30,7 +32,8 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtimePattern.ecore#//art/CardinalityElement/lower"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtimePattern.ecore#//art/CardinalityElement/upper"/>
       </genClasses>
-      <nestedGenPackages prefix="Instance" disposableProviderFactory="true" ecorePackage="metamodel@runtimePattern.ecore#//art/instance">
+      <nestedGenPackages prefix="Instance" disposableProviderFactory="true" generateModelWizard="false"
+          ecorePackage="metamodel@runtimePattern.ecore#//art/instance">
         <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel@runtimePattern.ecore#//art/instance/InstanceState">
           <genEnumLiterals ecoreEnumLiteral="metamodel@runtimePattern.ecore#//art/instance/InstanceState/OFF"/>
           <genEnumLiterals ecoreEnumLiteral="metamodel@runtimePattern.ecore#//art/instance/InstanceState/ON"/>
@@ -90,7 +93,8 @@
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtimePattern.ecore#//art/instance/OtherEntry/key"/>
         </genClasses>
       </nestedGenPackages>
-      <nestedGenPackages prefix="Type" disposableProviderFactory="true" ecorePackage="metamodel@runtimePattern.ecore#//art/type">
+      <nestedGenPackages prefix="Type" disposableProviderFactory="true" generateModelWizard="false"
+          ecorePackage="metamodel@runtimePattern.ecore#//art/type">
         <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel@runtimePattern.ecore#//art/type/PortRole">
           <genEnumLiterals ecoreEnumLiteral="metamodel@runtimePattern.ecore#//art/type/PortRole/client"/>
           <genEnumLiterals ecoreEnumLiteral="metamodel@runtimePattern.ecore#//art/type/PortRole/server"/>
@@ -140,7 +144,8 @@
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtimePattern.ecore#//art/type/DictionaryDefaultValue/value"/>
         </genClasses>
       </nestedGenPackages>
-      <nestedGenPackages prefix="Implem" disposableProviderFactory="true" ecorePackage="metamodel@runtimePattern.ecore#//art/implem">
+      <nestedGenPackages prefix="Implem" disposableProviderFactory="true" generateModelWizard="false"
+          ecorePackage="metamodel@runtimePattern.ecore#//art/implem">
         <genClasses ecoreClass="metamodel@runtimePattern.ecore#//art/implem/ComponentImplementation"/>
         <genClasses ecoreClass="metamodel@runtimePattern.ecore#//art/implem/FractalComponent">
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtimePattern.ecore#//art/implem/FractalComponent/controllerDesc"/>
@@ -154,7 +159,8 @@
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtimePattern.ecore#//art/implem/OSGiType/generateInstanceBundle"/>
         </genClasses>
       </nestedGenPackages>
-      <nestedGenPackages prefix="Group" disposableProviderFactory="true" ecorePackage="metamodel@runtimePattern.ecore#//art/group">
+      <nestedGenPackages prefix="Group" disposableProviderFactory="true" generateModelWizard="false"
+          ecorePackage="metamodel@runtimePattern.ecore#//art/group">
         <genClasses ecoreClass="metamodel@runtimePattern.ecore#//art/group/Group"/>
         <genClasses ecoreClass="metamodel@runtimePattern.ecore#//art/group/TypeGroup">
           <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -169,7 +175,8 @@
       </nestedGenPackages>
     </nestedGenPackages>
   </genPackages>
-  <genPackages prefix="Patternframework" disposableProviderFactory="true" ecorePackage="PatternFramework.ecore#/">
+  <genPackages prefix="Patternframework" disposableProviderFactory="true" generateModelWizard="false"
+      ecorePackage="PatternFramework.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="PatternFramework.ecore#//PConstraintLanguage">
       <genEnumLiterals ecoreEnumLiteral="PatternFramework.ecore#//PConstraintLanguage/kermeta"/>
       <genEnumLiterals ecoreEnumLiteral="PatternFramework.ecore#//PConstraintLanguage/ocl"/>
