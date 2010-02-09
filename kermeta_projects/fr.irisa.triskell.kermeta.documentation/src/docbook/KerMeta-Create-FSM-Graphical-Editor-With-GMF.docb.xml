@@ -79,16 +79,16 @@
     <title> Introduction </title>
     <para> This tutorial presents how create a GMF Editor for the FSM metamodel. </para>
     <important>
-      <para> This tutorial consitutes only an example that illustrate the global fsm example. For more informations and tutorials about GMF please refer to the GMF documentation and its tutorials. </para>
+      <para> This tutorial consitutes only an example that illustrate the global fsm example. For
+        more informations and tutorials about GMF please refer to the GMF documentation and its
+        tutorials. </para>
     </important>
-      
-     <para> GMF (Graphical
-      Modelling Framework) is an Eclipse framework that permits to create a specific graphical
-      editor of models conform to a meta model following the MVC architecture (Model View
-      Controller).  It is based on the Framework EMF (Eclipse Modelling Framework)in charge of domain
-      model and on the Framework GEF ( Graphical Editing Framework) charged on the controllers. 
-      On this tutorial we use EMF 2.5.0 and GMF 2.2.1. For
-      more informations about GMF please refers to the following links :  </para>
+    <para> GMF (Graphical Modelling Framework) is an Eclipse framework that permits to create a
+      specific graphical editor of models conform to a meta model following the MVC architecture
+      (Model View Controller). It is based on the Framework EMF (Eclipse Modelling Framework)in
+      charge of domain model and on the Framework GEF ( Graphical Editing Framework) charged on the
+      controllers. On this tutorial we use EMF 2.5.0 and GMF 2.2.1. For more informations about GMF
+      please refers to the following links : </para>
     <para/>
     <para>
       <orderedlist continuation="restarts">
@@ -120,8 +120,28 @@
   <chapter>
     <title> Getting started with GMF</title>
     <para> In this tutorial,we suppose that GMF is already installed into Eclipse. We will copy and
-      use the ecore metamodel fsmStatic.ecore stored into
-      fr.irisa.triskell.samples.fsm.demo/metamodels/.</para>
+      use the ecore metamodel fsm.ecore stored into
+      fr.irisa.triskell.samples.fsm.demoAspect/metamodels/ after creating a new general project. The
+      solution of this tutorial is available clicking on File -> New -> Example -> Kermeta Samples
+      -> FSM Solutions. So, you can retrieve the following plugins : <orderedlist>
+        <listitem>
+          <para>fr.irisa.triskell.kermeta.samples.fsm.gmf</para>
+        </listitem>
+        <listitem>
+          <para>fr.irisa.triskell.kermeta.samples.fsm.gmf.edit</para>
+        </listitem>
+        <listitem>
+          <para>fr.irisa.triskell.kermeta.samples.fsm.gmf.editor</para>
+        </listitem>
+        <listitem>
+          <para>fr.irisa.triskell.kermeta.samples.fsm.gmf.diagram</para>
+        </listitem>
+        <listitem>
+          <para>fr.irisa.triskell.kermeta.samples.fsm.gmf.tests</para>
+          <para>Even if these plugins do not have the same name as the plugins you will created it
+            is the same diagram editor</para>
+        </listitem>
+      </orderedlist></para>
     <section>
       <title> Mechanisms of GMF </title>
       <para> GMF uses six files to create a generated graphical editor for instances of a given
@@ -192,7 +212,7 @@
                 fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/New_GMF_Project.png"/>
             </imageobject>
           </mediaobject>
-        </figure> Then, you can give to it the name FSM_GMF_Editor like shown below. <figure>
+        </figure> Then, you can give to it the name org.kermeta.fsm.gmf like shown below. <figure>
           <title> Give a name to the new GMF project</title>
           <mediaobject>
             <imageobject>
@@ -202,7 +222,8 @@
             </imageobject>
           </mediaobject>
         </figure> Select the DashBoard view, it will be useful to use GMF. This dashboard resumes
-        all the necessary steps to create an editor with GMF. <figure>
+        all the necessary steps to create an editor with GMF and you can navigate between these
+        steps with it. <figure>
           <title> Show Dashboard view</title>
           <mediaobject>
             <imageobject>
@@ -227,14 +248,14 @@
     </section>
     <section>
       <title> Generation Process</title>
-      <para> This section details more all the steps. To start with, copy the file fsmStatic.ecore
-        stored into fr.irisa.triskell.kermeta.samples.fsm.demo/models/fsmStatic.ecore into
+      <para> This section details more all the steps. To start with, copy the file fsm.ecore stored
+        into fr.irisa.triskell.kermeta.samples.fsm.demoAspects/metamodels/fsm.ecore into
         org.kermeta.fsm.gmf/model. In all this section we use the Dashboard view.</para>
       <section>
         <title> Domain model </title>
         <para> On the DashBoard view, in the case Domain model click on Select and choose the
-          fsmStatic.ecore from org.kermeta.fsm.gmf. Then, click on the Derive at the left to create
-          the EMF GenModel.</para>
+          fsm.ecore from org.kermeta.fsm.gmf. Then, click on the Derive at the left to create the
+          EMF GenModel.</para>
       </section>
       <section>
         <title> Domain Gen Model </title>

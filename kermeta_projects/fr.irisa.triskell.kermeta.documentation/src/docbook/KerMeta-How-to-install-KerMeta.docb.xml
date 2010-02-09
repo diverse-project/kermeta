@@ -4,38 +4,26 @@
 <book lang="en-US">
   <bookinfo>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-
     <author>
       <firstname>Didier Vojtisek, François Tanguy, Marie Gouyette</firstname>
     </author>
-
     <title>Kermeta tutorial</title>
-
     <date>$Date$</date>
-
     <keywordset>
       <keyword>Kermeta</keyword>
-
       <keyword>metamodeling</keyword>
-
       <keyword>language</keyword>
       <keyword>tutorial</keyword>
       <keyword>install</keyword>
     </keywordset>
-
     <subtitle>How to install Kermeta</subtitle>
-
     <bibliomisc>Licence EPL</bibliomisc>
-
-
     <abstract>
-      <para>This tutorial is part of a serie of tutorials that explain step by step one of the aspect of Kermeta. 
-      This one shows how to install Kermeta workbench.</para>
+      <para>This tutorial is part of a serie of tutorials that explain step by step one of the
+        aspect of Kermeta. This one shows how to install Kermeta workbench.</para>
     </abstract>
-
     <publisher>
       <publishername>INRIA</publishername>
-
       <address>
         <state>France</state>
         <otheraddr>
@@ -43,316 +31,245 @@
         </otheraddr>
       </address>
     </publisher>
-
     <confgroup>
       <conftitle>title</conftitle>
-
       <confnum>Reference</confnum>
-
       <confsponsor>sponsor</confsponsor>
     </confgroup>
   </bookinfo>
-
   <preface>
     <?print-orientation portrait?>
-
     <title>Preface</title>
-
-    <para>Kermeta is a Domain Specific Language
-    dedicated to metamodel engineering. It fills the gap let by MOF which
-    defines only the structure of meta-models, by adding a way to specify
-    static semantic (similar to OCL) and dynamic semantic (using operational
-    semantic in the operation of the metamodel). Kermeta uses the object-oriented
-    paradigm like Java or Eiffel
-    This document presents various aspects of the language,
-    including the textual syntax, the metamodel (which can be viewed as the
-    abstract syntax) and some more advanced features typically included in its
-    framework. </para>
-
+    <para>Kermeta is a Domain Specific Language dedicated to metamodel engineering. It fills the gap
+      let by MOF which defines only the structure of meta-models, by adding a way to specify static
+      semantic (similar to OCL) and dynamic semantic (using operational semantic in the operation of
+      the metamodel). Kermeta uses the object-oriented paradigm like Java or Eiffel This document
+      presents various aspects of the language, including the textual syntax, the metamodel (which
+      can be viewed as the abstract syntax) and some more advanced features typically included in
+      its framework. </para>
     <important>
-    <para>
-     Kermeta is an evolving software and despite that we put a lot of attention to this
-        document, it may contain errors (more likely in the code samples). If
-        you find any error or have some information that improves this
-        document, please send it to us using the bug tracker in the
-        forge:
-
-      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+      <para> Kermeta is an evolving software and despite that we put a lot of attention to this
+        document, it may contain errors (more likely in the code samples). If you find any error or
+        have some information that improves this document, please send it to us using the bug
+        tracker in the forge: <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+          <emphasis role="strong">
+            <emphasis role="strong">
+              <emphasis role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+            </emphasis>
+          </emphasis>
+        </ulink>
         <emphasis role="strong">
           <emphasis role="strong">
-            <emphasis
-            role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+            <emphasis role="strong"/>
           </emphasis>
-        </emphasis>
-      </ulink>
-
-      <emphasis role="strong">
-        <emphasis role="strong">
-          <emphasis role="strong" />
-        </emphasis>
-      </emphasis>
-
-     or using the user mailing list
-          (kermeta-users@lists.gforge.inria.fr)
-      <emphasis role="strong">
-        <emphasis role="strong">
-          <emphasis role="strong" />
-        </emphasis>
-      </emphasis>
-
-      Last check: v1.2.0
-      </para>
+        </emphasis> or using the user mailing list (kermeta-users@lists.gforge.inria.fr) <emphasis
+          role="strong">
+          <emphasis role="strong">
+            <emphasis role="strong"/>
+          </emphasis>
+        </emphasis> Last check: v1.2.0 </para>
     </important>
-
     <tip>
-    <para>
-      The most update version of this document is available online : 
-
-      <ulink type=""
-      url="http://www.kermeta.org/">http://www.kermeta.org/documents</ulink>
-
-       . </para>
+      <para> The most update version of this document is available online : <ulink type=""
+          url="http://www.kermeta.org/">http://www.kermeta.org/documents</ulink> . </para>
     </tip>
- 
   </preface>
-
   <chapter>
     <title>Prerequisites</title>
-
     <itemizedlist>
       <listitem>
-        <para>Your operating system must use the 1.5 or above version of Java.
-        If not, please visit the Java web page (<ulink
-        url="http://java.sun.com">http://java.sun.com/</ulink>) and install
-        the latest version of Java.</para>
+        <para>Your operating system must use the 1.5 or above version of Java. If not, please visit
+          the Java web page (<ulink url="http://java.sun.com">http://java.sun.com/</ulink>) and
+          install the latest version of Java.</para>
       </listitem>
       <listitem>
-        <para>Eclipse must be installed. We currently use Eclipse 3.5.0 (Galileo). You can get Eclipse from <ulink
-        url="http://www.eclipse.org/downloads/">http://www.eclipse.org/downloads/</ulink>.
-        </para>
+        <para>Eclipse must be installed. We currently use Eclipse 3.5.0 (Galileo). You can get
+          Eclipse from <ulink url="http://www.eclipse.org/downloads/"
+            >http://www.eclipse.org/downloads/</ulink>. </para>
         <para>In this tutorial, your Eclipse installation is supposed to be relatively minimal, so
-        you should download the <emphasis role="strong">Eclipse classic</emphasis> version of 
-        Eclipse which is a good base for development with Kermeta.
-        This tutorial will cover every necessary step to get Kermeta working with
-        Eclipse.</para>
+          you should download the <emphasis role="strong">Eclipse classic</emphasis> version of
+          Eclipse which is a good base for development with Kermeta. This tutorial will cover every
+          necessary step to get Kermeta working with Eclipse.</para>
         <para>Some additional installation instructions are available here : <ulink
-        url="http://www.eclipse.org/documentation/">http://www.eclipse.org/documentation/</ulink>
-        .</para>
+            url="http://www.eclipse.org/documentation/"
+            >http://www.eclipse.org/documentation/</ulink> .</para>
       </listitem>
     </itemizedlist>
   </chapter>
-
   <chapter>
     <title>The first Eclipse start</title>
-
-    <para>When you start Eclipse for the first time, you will be asked for a
-    workspace location. This is the directory used by Eclipse to store the
-    projects you will create in the future. The image below is the dialog box
-    you should see. By default, Eclipse proposes to create a workspace
-    directory named "workspace" in your home directory.</para>
-
+    <para>When you start Eclipse for the first time, you will be asked for a workspace location.
+      This is the directory used by Eclipse to store the projects you will create in the future. The
+      image below is the dialog box you should see. By default, Eclipse proposes to create a
+      workspace directory named "workspace" in your home directory.</para>
     <figure>
-      <title></title>
-
+      <title/>
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/first_eclipse_start.png" />
+          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/first_eclipse_start.png"/>
         </imageobject>
       </mediaobject>
     </figure>
-
-	<tip>
-	<para>
-		If (like me) you have many versions of eclipse with various configurations, 
-		you may consider create your workspace directly in the eclipse folder. You'll be able to 
-		easily move or remove a complete eclipse without the risk of corrupting eclipse .metadata
-		with various configurations.
-		</para>
-	</tip>
-    <para>On every launch, you will be prompted for the workspace
-    location. For now, we just click "OK" to open the main window of Eclipse using 
-    the workspace you've created.
-    You should see a window like the one below.</para>
-
+    <tip>
+      <para> If (like me) you have many versions of eclipse with various configurations, you may
+        consider create your workspace directly in the eclipse folder. You'll be able to easily move
+        or remove a complete eclipse without the risk of corrupting eclipse .metadata with various
+        configurations. </para>
+    </tip>
+    <para>On every launch, you will be prompted for the workspace location. For now, we just click
+      "OK" to open the main window of Eclipse using the workspace you've created. You should see a
+      window like the one below.</para>
     <figure>
-      <title></title>
-
+      <title/>
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/first_time_main_window.png" />
+          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/first_time_main_window.png"/>
         </imageobject>
       </mediaobject>
     </figure>
-
-    <para>You can close the "Welcome" tab. Now
-    your window looks like this one :</para>
-
+    <para>You can close the "Welcome" tab. Now your window looks like this one :</para>
     <figure>
-      <title></title>
-
+      <title/>
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/main_window.png" />
+          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/main_window.png"/>
         </imageobject>
       </mediaobject>
     </figure>
-
     <para>Now, let's proceed to the Kermeta installation.</para>
   </chapter>
-
   <chapter>
     <title>Kermeta Installation</title>
-
-      <para>Kermeta installation use the installer built in Eclipse.
-      </para>
-      
-      
-
-          <para>In the main menu of Eclipse, select  <emphasis>Help &gt;&gt;
-          Install New Software </emphasis>. A dialog
-          box appears. </para>
-
-          <figure>
-            <title> Dialog box to install new software</title>
-
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/install_available_software.png" />
-              </imageobject>
-            </mediaobject>
-          </figure>
-
-
-		<para>Now, you need to tell Eclipse where to look for Kermeta features. So you click on
-		<emphasis>Add Site...</emphasis>  and fill it like in the following picture. </para>
-	
-		<figure>
-            <title> Add site dialog window</title>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/add_site_kermeta.png" />
-              </imageobject>
-            </mediaobject>
-          </figure>
-	
-		<para>Then select the Kermeta update site in the scroll menu and select everything from Kermeta site like shown below. </para>
-        <figure>
-            <title> Select Kermeta feature</title>
-
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/available_software_kermeta.png" />
-              </imageobject>
-            </mediaobject>
-        </figure> 
-          
-          
-        <para>Then click on <emphasis>Next </emphasis>.</para>
-        <para>The next dialog shows the review.</para>
-		<figure>
-            <title></title>
-
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/review.png" />
-              </imageobject>
-            </mediaobject>
-        </figure>
-        
-        <para>You must accept the term of the licenses agreement and click finish.</para>
-		<figure>
-            <title></title>
-
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/review_licenses.png" />
-              </imageobject>
-            </mediaobject>
-        </figure>
-        
-        
-        <para>Finally, you must reboot Eclipse to take
-              changes in account. Do it by clicking on "Yes".</para>
-
-		<figure>
-                <title></title>
-
-                <mediaobject>
-                  <imageobject>
-                    <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/reboot.png" />
-                  </imageobject>
-                </mediaobject>
-        </figure>
-
-		<para>Once rebooted, you can check your version of Kermeta in the
-          main menu of Eclipse &gt; Help &gt;&gt; About Eclipse SDK. You should see
-          Kermeta logo. clicking on it must display its version and build date</para>
-
-          <figure>
-            <title></title>
-
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/about_eclipse.png" />
-              </imageobject>
-            </mediaobject>
-          </figure>
-  	</chapter>
-  	<chapter>
-  		<title>Diagnosing a Kermeta installation</title>
-          <para>If you suspect your installation to be incorrect (for example, because you started
-          from another version of Eclipse, or because you have already some plugins 
-          installed in your eclipse), this chapter list some way to help you diagnose 
-          your Kermeta installation.
-          </para>
-        <section id="sec_plugin_registry_diagnostic.link">
-      		<title
-      			id="sec_plugin_registry_diagnostic.title.link">Plugin Registry diagnostic</title>
-          	<para>Since Eclipse 3.4, the Plugin Registry view allows to diagnose the installed plugins.</para>
-          	<para>In the main menu of Eclipse &gt; Windows &gt;&gt; Show view &gt;&gt;  Other... then select the Plug-in Registry view in the PDE Runtime folder.</para>
-          	
-
-			<figure>
-            	<title></title>
-            	<mediaobject>
-              		<imageobject>
-                	<imagedata fileref="KerMeta-How-to-install-KerMeta_figures/plugin_registry_show_view.png" />
-              		</imageobject>
-            	</mediaobject>
-          	</figure>  
-          	<para>Then you must enable the advanced options. (small triangle on the top rigth corner of the view)</para>
-			<figure>
-            	<title></title>
-            	<mediaobject>
-              		<imageobject>
-                	<imagedata fileref="KerMeta-How-to-install-KerMeta_figures/plugin_registry_show_advanced_options.png" />
-              		</imageobject>
-            	</mediaobject>
-          	</figure>         	
-          	<para>Now, you can right click on the plugins and diagnose them. Typically, if it requires another plugin that cannot be run, it will tell you. If this other plugin is in the list, diagnose it until you find the origin of your problem...</para>
-			<figure>
-            	<title></title>
-            	<mediaobject>
-              		<imageobject>
-                	<imagedata fileref="KerMeta-How-to-install-KerMeta_figures/plugin_registry_diagnose.png" />
-              		</imageobject>
-            	</mediaobject>
-          	</figure> 
-    	</section>
-    	<section id="sec_error_log_diagnostic.link">
-      		<title
-      			id="sec_error_log_diagnostic.title.link">Read the Error log</title>
-      		<para>
-      			If the Plugin registry didn't show you the error, you may additionnaly have a look in the Error Log view.
-      			In the main menu of Eclipse &gt; Windows &gt;&gt; Show view &gt;&gt;  Other... then select the Error Log view in the General folder. 
-      		</para>
-      	</section>
-	</chapter>
-	
-	<chapter>
-	<title> Conclusion</title>
-	<para> Now, you have installed Kermeta into Eclipse. It 's time to use it!</para>
-	</chapter>
-
-      
+    <para>Kermeta installation use the installer built in Eclipse. </para>
+    <para>In the main menu of Eclipse, select <emphasis>Help &gt;&gt; Install New Software
+      </emphasis>. A dialog box appears. </para>
+    <figure>
+      <title> Dialog box to install new software</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/install_available_software.png"
+          />
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>Now, you need to tell Eclipse where to look for Kermeta features. So you click on
+        <emphasis>Add Site...</emphasis> and fill it like in the following picture. </para>
+    <figure>
+      <title> Add site dialog window</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/add_site_kermeta.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>Cick on OK. Then  select the Kermeta update site in the scroll menu and select everything
+      from Kermeta site like shown below. </para>
+    <figure>
+      <title> Select Kermeta feature</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/available_software_kermeta.png"
+          />
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>Then click on <emphasis>Next </emphasis>.</para>
+    <para>The next dialog shows the install Details. Click on <emphasis role="bold">
+      Next</emphasis></para>
+    <figure>
+      <title/>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/review.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>You must accept the term of the licenses agreement and click on  finish.</para>
+    <figure>
+      <title/>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/review_licenses.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>Finally, after the installation,  you must reboot Eclipse to take changes in account. Do
+      it by clicking on "Yes".</para>
+    <figure>
+      <title/>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/reboot.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>Once rebooted, you can check your version of Kermeta in the main menu of Eclipse &gt; Help
+      &gt;&gt; About Eclipse SDK. You should see Kermeta logo. Clicking on it must display its
+      version and build date</para>
+    <figure>
+      <title/>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/about_eclipse.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </chapter>
+  <chapter>
+    <title>Diagnosing a Kermeta installation</title>
+    <para>If you suspect your installation to be incorrect (for example, because you started from
+      another version of Eclipse, or because you have already some plugins installed in your
+      eclipse), this chapter list some way to help you diagnose your Kermeta installation. </para>
+    <section id="sec_plugin_registry_diagnostic.link">
+      <title id="sec_plugin_registry_diagnostic.title.link">Plugin Registry diagnostic</title>
+      <para>Since Eclipse 3.4, the Plugin Registry view allows to diagnose the installed
+        plugins.</para>
+      <para>In the main menu of Eclipse &gt; Windows &gt;&gt; Show view &gt;&gt; Other... then
+        select the Plug-in Registry view in the Plug-in Development folder.</para>
+      <figure>
+        <title/>
+        <mediaobject>
+          <imageobject>
+            <imagedata
+              fileref="KerMeta-How-to-install-KerMeta_figures/plugin_registry_show_view.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para>Then you must enable the advanced options. (small triangle on the top rigth corner of
+        the view)</para>
+      <figure>
+        <title/>
+        <mediaobject>
+          <imageobject>
+            <imagedata
+              fileref="KerMeta-How-to-install-KerMeta_figures/plugin_registry_show_advanced_options.png"
+            />
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para>Now, you can right click on the plugins and diagnose them. In this tutorial we diagnose
+        the plugin fr.irisa.triskell.kermeta.graphicaleditor. Typically, if it requires another
+        plugin that cannot be run, it will tell you. If this other plugin is in the list, diagnose
+        it until you find the origin of your problem...</para>
+      <figure>
+        <title/>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/plugin_registry_diagnose.png"
+            />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+    <section id="sec_error_log_diagnostic.link">
+      <title id="sec_error_log_diagnostic.title.link">Read the Error log</title>
+      <para> If the Plugin registry didn't show you the error, you may additionnaly have a look in
+        the Error Log view. In the main menu of Eclipse &gt; Windows &gt;&gt; Show view &gt;&gt;
+        Other... then select the Error Log view in the General folder. </para>
+    </section>
+  </chapter>
+  <chapter>
+    <title> Conclusion</title>
+    <para> Now, you have installed Kermeta into Eclipse. It 's time to use it!</para>
+  </chapter>
 </book>
