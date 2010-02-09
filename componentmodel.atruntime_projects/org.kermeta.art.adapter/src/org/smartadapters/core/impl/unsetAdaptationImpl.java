@@ -8,7 +8,7 @@ package org.smartadapters.core.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.smartadapters.core.CorePackage;
+import org.smartadapters.core.SmartAdapters4DiVAPackage;
 import org.smartadapters.core.unsetAdaptation;
 
 /**
@@ -37,7 +37,7 @@ public abstract class unsetAdaptationImpl extends AdaptationImpl implements unse
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CorePackage.Literals.UNSET_ADAPTATION;
+		return SmartAdapters4DiVAPackage.Literals.UNSET_ADAPTATION;
 	}
 
 } //unsetAdaptationImpl

@@ -13,17 +13,17 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see org.smartadapters.core.CorePackage
+ * @see org.smartadapters.core.SmartAdapters4DiVAPackage
  * @generated
  */
-public interface CoreFactory extends EFactory {
+public interface SmartAdapters4DiVAFactory extends EFactory {
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	CoreFactory eINSTANCE = org.smartadapters.core.impl.CoreFactoryImpl.init();
+	SmartAdapters4DiVAFactory eINSTANCE = org.smartadapters.core.impl.SmartAdapters4DiVAFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Adapter</em>'.
@@ -59,6 +59,6 @@ public interface CoreFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	CorePackage getCorePackage();
+	SmartAdapters4DiVAPackage getSmartAdapters4DiVAPackage();
 
-} //CoreFactory
+} //SmartAdapters4DiVAFactory

@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see org.smartadapters.core.CorePackage#getAdaptation()
+ * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getAdaptation()
  * @model abstract="true"
  * @generated
  */
@@ -36,7 +36,7 @@ public interface Adaptation extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Adapter</em>' container reference.
 	 * @see #setAdapter(Adapter)
-	 * @see org.smartadapters.core.CorePackage#getAdaptation_Adapter()
+	 * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getAdaptation_Adapter()
 	 * @see org.smartadapters.core.Adapter#getAdapt
 	 * @model opposite="adapt" required="true" transient="false"
 	 * @generated

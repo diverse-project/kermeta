@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.smartadapters.core.CorePackage;
+import org.smartadapters.core.SmartAdapters4DiVAPackage;
 import org.smartadapters.core.createAdaptation;
 import org.smartadapters.core.uniqueType;
 
@@ -66,7 +66,7 @@ public abstract class createAdaptationImpl extends AdaptationImpl implements cre
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CorePackage.Literals.CREATE_ADAPTATION;
+		return SmartAdapters4DiVAPackage.Literals.CREATE_ADAPTATION;
 	}
 
 	/**
@@ -87,7 +87,7 @@ public abstract class createAdaptationImpl extends AdaptationImpl implements cre
 		uniqueType oldIsUnique = isUnique;
 		isUnique = newIsUnique == null ? IS_UNIQUE_EDEFAULT : newIsUnique;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.CREATE_ADAPTATION__IS_UNIQUE, oldIsUnique, isUnique));
+			eNotify(new ENotificationImpl(this, Notification.SET, SmartAdapters4DiVAPackage.CREATE_ADAPTATION__IS_UNIQUE, oldIsUnique, isUnique));
 	}
 
 	/**
@@ -98,7 +98,7 @@ public abstract class createAdaptationImpl extends AdaptationImpl implements cre
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.CREATE_ADAPTATION__IS_UNIQUE:
+			case SmartAdapters4DiVAPackage.CREATE_ADAPTATION__IS_UNIQUE:
 				return getIsUnique();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -112,7 +112,7 @@ public abstract class createAdaptationImpl extends AdaptationImpl implements cre
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.CREATE_ADAPTATION__IS_UNIQUE:
+			case SmartAdapters4DiVAPackage.CREATE_ADAPTATION__IS_UNIQUE:
 				setIsUnique((uniqueType)newValue);
 				return;
 		}
@@ -127,7 +127,7 @@ public abstract class createAdaptationImpl extends AdaptationImpl implements cre
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.CREATE_ADAPTATION__IS_UNIQUE:
+			case SmartAdapters4DiVAPackage.CREATE_ADAPTATION__IS_UNIQUE:
 				setIsUnique(IS_UNIQUE_EDEFAULT);
 				return;
 		}
@@ -142,7 +142,7 @@ public abstract class createAdaptationImpl extends AdaptationImpl implements cre
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.CREATE_ADAPTATION__IS_UNIQUE:
+			case SmartAdapters4DiVAPackage.CREATE_ADAPTATION__IS_UNIQUE:
 				return isUnique != IS_UNIQUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

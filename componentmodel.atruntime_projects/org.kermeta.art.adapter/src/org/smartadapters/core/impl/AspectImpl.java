@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.smartadapters.core.Aspect;
-import org.smartadapters.core.CorePackage;
+import org.smartadapters.core.SmartAdapters4DiVAPackage;
 
 import patternframework.ModelPattern;
 import patternframework.PModel;
@@ -90,7 +90,7 @@ public class AspectImpl extends EObjectImpl implements Aspect {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CorePackage.Literals.ASPECT;
+		return SmartAdapters4DiVAPackage.Literals.ASPECT;
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class AspectImpl extends EObjectImpl implements Aspect {
 		ModelPattern oldTemplate = template;
 		template = newTemplate;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CorePackage.ASPECT__TEMPLATE, oldTemplate, newTemplate);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SmartAdapters4DiVAPackage.ASPECT__TEMPLATE, oldTemplate, newTemplate);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -126,14 +126,14 @@ public class AspectImpl extends EObjectImpl implements Aspect {
 		if (newTemplate != template) {
 			NotificationChain msgs = null;
 			if (template != null)
-				msgs = ((InternalEObject)template).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CorePackage.ASPECT__TEMPLATE, null, msgs);
+				msgs = ((InternalEObject)template).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SmartAdapters4DiVAPackage.ASPECT__TEMPLATE, null, msgs);
 			if (newTemplate != null)
-				msgs = ((InternalEObject)newTemplate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CorePackage.ASPECT__TEMPLATE, null, msgs);
+				msgs = ((InternalEObject)newTemplate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SmartAdapters4DiVAPackage.ASPECT__TEMPLATE, null, msgs);
 			msgs = basicSetTemplate(newTemplate, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ASPECT__TEMPLATE, newTemplate, newTemplate));
+			eNotify(new ENotificationImpl(this, Notification.SET, SmartAdapters4DiVAPackage.ASPECT__TEMPLATE, newTemplate, newTemplate));
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class AspectImpl extends EObjectImpl implements Aspect {
 		PModel oldStructure = structure;
 		structure = newStructure;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CorePackage.ASPECT__STRUCTURE, oldStructure, newStructure);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SmartAdapters4DiVAPackage.ASPECT__STRUCTURE, oldStructure, newStructure);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -169,14 +169,14 @@ public class AspectImpl extends EObjectImpl implements Aspect {
 		if (newStructure != structure) {
 			NotificationChain msgs = null;
 			if (structure != null)
-				msgs = ((InternalEObject)structure).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CorePackage.ASPECT__STRUCTURE, null, msgs);
+				msgs = ((InternalEObject)structure).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SmartAdapters4DiVAPackage.ASPECT__STRUCTURE, null, msgs);
 			if (newStructure != null)
-				msgs = ((InternalEObject)newStructure).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CorePackage.ASPECT__STRUCTURE, null, msgs);
+				msgs = ((InternalEObject)newStructure).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SmartAdapters4DiVAPackage.ASPECT__STRUCTURE, null, msgs);
 			msgs = basicSetStructure(newStructure, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ASPECT__STRUCTURE, newStructure, newStructure));
+			eNotify(new ENotificationImpl(this, Notification.SET, SmartAdapters4DiVAPackage.ASPECT__STRUCTURE, newStructure, newStructure));
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class AspectImpl extends EObjectImpl implements Aspect {
 	 */
 	public EList<PObject> getPersistent() {
 		if (persistent == null) {
-			persistent = new EObjectResolvingEList<PObject>(PObject.class, this, CorePackage.ASPECT__PERSISTENT);
+			persistent = new EObjectResolvingEList<PObject>(PObject.class, this, SmartAdapters4DiVAPackage.ASPECT__PERSISTENT);
 		}
 		return persistent;
 	}
@@ -199,9 +199,9 @@ public class AspectImpl extends EObjectImpl implements Aspect {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePackage.ASPECT__TEMPLATE:
+			case SmartAdapters4DiVAPackage.ASPECT__TEMPLATE:
 				return basicSetTemplate(null, msgs);
-			case CorePackage.ASPECT__STRUCTURE:
+			case SmartAdapters4DiVAPackage.ASPECT__STRUCTURE:
 				return basicSetStructure(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -215,11 +215,11 @@ public class AspectImpl extends EObjectImpl implements Aspect {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.ASPECT__TEMPLATE:
+			case SmartAdapters4DiVAPackage.ASPECT__TEMPLATE:
 				return getTemplate();
-			case CorePackage.ASPECT__STRUCTURE:
+			case SmartAdapters4DiVAPackage.ASPECT__STRUCTURE:
 				return getStructure();
-			case CorePackage.ASPECT__PERSISTENT:
+			case SmartAdapters4DiVAPackage.ASPECT__PERSISTENT:
 				return getPersistent();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -234,13 +234,13 @@ public class AspectImpl extends EObjectImpl implements Aspect {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.ASPECT__TEMPLATE:
+			case SmartAdapters4DiVAPackage.ASPECT__TEMPLATE:
 				setTemplate((ModelPattern)newValue);
 				return;
-			case CorePackage.ASPECT__STRUCTURE:
+			case SmartAdapters4DiVAPackage.ASPECT__STRUCTURE:
 				setStructure((PModel)newValue);
 				return;
-			case CorePackage.ASPECT__PERSISTENT:
+			case SmartAdapters4DiVAPackage.ASPECT__PERSISTENT:
 				getPersistent().clear();
 				getPersistent().addAll((Collection<? extends PObject>)newValue);
 				return;
@@ -256,13 +256,13 @@ public class AspectImpl extends EObjectImpl implements Aspect {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.ASPECT__TEMPLATE:
+			case SmartAdapters4DiVAPackage.ASPECT__TEMPLATE:
 				setTemplate((ModelPattern)null);
 				return;
-			case CorePackage.ASPECT__STRUCTURE:
+			case SmartAdapters4DiVAPackage.ASPECT__STRUCTURE:
 				setStructure((PModel)null);
 				return;
-			case CorePackage.ASPECT__PERSISTENT:
+			case SmartAdapters4DiVAPackage.ASPECT__PERSISTENT:
 				getPersistent().clear();
 				return;
 		}
@@ -277,11 +277,11 @@ public class AspectImpl extends EObjectImpl implements Aspect {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.ASPECT__TEMPLATE:
+			case SmartAdapters4DiVAPackage.ASPECT__TEMPLATE:
 				return template != null;
-			case CorePackage.ASPECT__STRUCTURE:
+			case SmartAdapters4DiVAPackage.ASPECT__STRUCTURE:
 				return structure != null;
-			case CorePackage.ASPECT__PERSISTENT:
+			case SmartAdapters4DiVAPackage.ASPECT__PERSISTENT:
 				return persistent != null && !persistent.isEmpty();
 		}
 		return super.eIsSet(featureID);

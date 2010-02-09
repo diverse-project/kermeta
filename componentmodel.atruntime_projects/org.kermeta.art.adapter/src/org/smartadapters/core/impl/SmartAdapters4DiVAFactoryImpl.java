@@ -23,24 +23,24 @@ import org.smartadapters.core.*;
  * <!-- end-user-doc -->
  * @generated
  */
-public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
+public class SmartAdapters4DiVAFactoryImpl extends EFactoryImpl implements SmartAdapters4DiVAFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static CoreFactory init() {
+	public static SmartAdapters4DiVAFactory init() {
 		try {
-			CoreFactory theCoreFactory = (CoreFactory)EPackage.Registry.INSTANCE.getEFactory("http://SmartAdapters4ART/smartadapters/core"); 
-			if (theCoreFactory != null) {
-				return theCoreFactory;
+			SmartAdapters4DiVAFactory theSmartAdapters4DiVAFactory = (SmartAdapters4DiVAFactory)EPackage.Registry.INSTANCE.getEFactory("http://SmartAdapters4ART/smartadapters/core"); 
+			if (theSmartAdapters4DiVAFactory != null) {
+				return theSmartAdapters4DiVAFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new CoreFactoryImpl();
+		return new SmartAdapters4DiVAFactoryImpl();
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CoreFactoryImpl() {
+	public SmartAdapters4DiVAFactoryImpl() {
 		super();
 	}
 
@@ -61,9 +61,9 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CorePackage.ADAPTER: return createAdapter();
-			case CorePackage.ASPECT: return createAspect();
-			case CorePackage.MAKE_UNIQUE: return createmakeUnique();
+			case SmartAdapters4DiVAPackage.ADAPTER: return createAdapter();
+			case SmartAdapters4DiVAPackage.ASPECT: return createAspect();
+			case SmartAdapters4DiVAPackage.MAKE_UNIQUE: return createmakeUnique();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -77,7 +77,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case CorePackage.UNIQUE_TYPE:
+			case SmartAdapters4DiVAPackage.UNIQUE_TYPE:
 				return createuniqueTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -92,7 +92,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case CorePackage.UNIQUE_TYPE:
+			case SmartAdapters4DiVAPackage.UNIQUE_TYPE:
 				return convertuniqueTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -154,8 +154,8 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CorePackage getCorePackage() {
-		return (CorePackage)getEPackage();
+	public SmartAdapters4DiVAPackage getSmartAdapters4DiVAPackage() {
+		return (SmartAdapters4DiVAPackage)getEPackage();
 	}
 
 	/**
@@ -165,8 +165,8 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * @generated
 	 */
 	@Deprecated
-	public static CorePackage getPackage() {
-		return CorePackage.eINSTANCE;
+	public static SmartAdapters4DiVAPackage getPackage() {
+		return SmartAdapters4DiVAPackage.eINSTANCE;
 	}
 
-} //CoreFactoryImpl
+} //SmartAdapters4DiVAFactoryImpl

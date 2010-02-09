@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.smartadapters.core.Adaptation;
 import org.smartadapters.core.Adapter;
-import org.smartadapters.core.CorePackage;
+import org.smartadapters.core.SmartAdapters4DiVAPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,7 +51,7 @@ public abstract class AdaptationImpl extends EObjectImpl implements Adaptation {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CorePackage.Literals.ADAPTATION;
+		return SmartAdapters4DiVAPackage.Literals.ADAPTATION;
 	}
 
 	/**
@@ -60,7 +60,7 @@ public abstract class AdaptationImpl extends EObjectImpl implements Adaptation {
 	 * @generated
 	 */
 	public Adapter getAdapter() {
-		if (eContainerFeatureID() != CorePackage.ADAPTATION__ADAPTER) return null;
+		if (eContainerFeatureID() != SmartAdapters4DiVAPackage.ADAPTATION__ADAPTER) return null;
 		return (Adapter)eContainer();
 	}
 
@@ -70,7 +70,7 @@ public abstract class AdaptationImpl extends EObjectImpl implements Adaptation {
 	 * @generated
 	 */
 	public NotificationChain basicSetAdapter(Adapter newAdapter, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newAdapter, CorePackage.ADAPTATION__ADAPTER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newAdapter, SmartAdapters4DiVAPackage.ADAPTATION__ADAPTER, msgs);
 		return msgs;
 	}
 
@@ -80,19 +80,19 @@ public abstract class AdaptationImpl extends EObjectImpl implements Adaptation {
 	 * @generated
 	 */
 	public void setAdapter(Adapter newAdapter) {
-		if (newAdapter != eInternalContainer() || (eContainerFeatureID() != CorePackage.ADAPTATION__ADAPTER && newAdapter != null)) {
+		if (newAdapter != eInternalContainer() || (eContainerFeatureID() != SmartAdapters4DiVAPackage.ADAPTATION__ADAPTER && newAdapter != null)) {
 			if (EcoreUtil.isAncestor(this, newAdapter))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newAdapter != null)
-				msgs = ((InternalEObject)newAdapter).eInverseAdd(this, CorePackage.ADAPTER__ADAPT, Adapter.class, msgs);
+				msgs = ((InternalEObject)newAdapter).eInverseAdd(this, SmartAdapters4DiVAPackage.ADAPTER__ADAPT, Adapter.class, msgs);
 			msgs = basicSetAdapter(newAdapter, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ADAPTATION__ADAPTER, newAdapter, newAdapter));
+			eNotify(new ENotificationImpl(this, Notification.SET, SmartAdapters4DiVAPackage.ADAPTATION__ADAPTER, newAdapter, newAdapter));
 	}
 
 	/**
@@ -103,7 +103,7 @@ public abstract class AdaptationImpl extends EObjectImpl implements Adaptation {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePackage.ADAPTATION__ADAPTER:
+			case SmartAdapters4DiVAPackage.ADAPTATION__ADAPTER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetAdapter((Adapter)otherEnd, msgs);
@@ -119,7 +119,7 @@ public abstract class AdaptationImpl extends EObjectImpl implements Adaptation {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePackage.ADAPTATION__ADAPTER:
+			case SmartAdapters4DiVAPackage.ADAPTATION__ADAPTER:
 				return basicSetAdapter(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -133,8 +133,8 @@ public abstract class AdaptationImpl extends EObjectImpl implements Adaptation {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case CorePackage.ADAPTATION__ADAPTER:
-				return eInternalContainer().eInverseRemove(this, CorePackage.ADAPTER__ADAPT, Adapter.class, msgs);
+			case SmartAdapters4DiVAPackage.ADAPTATION__ADAPTER:
+				return eInternalContainer().eInverseRemove(this, SmartAdapters4DiVAPackage.ADAPTER__ADAPT, Adapter.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -147,7 +147,7 @@ public abstract class AdaptationImpl extends EObjectImpl implements Adaptation {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.ADAPTATION__ADAPTER:
+			case SmartAdapters4DiVAPackage.ADAPTATION__ADAPTER:
 				return getAdapter();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -161,7 +161,7 @@ public abstract class AdaptationImpl extends EObjectImpl implements Adaptation {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.ADAPTATION__ADAPTER:
+			case SmartAdapters4DiVAPackage.ADAPTATION__ADAPTER:
 				setAdapter((Adapter)newValue);
 				return;
 		}
@@ -176,7 +176,7 @@ public abstract class AdaptationImpl extends EObjectImpl implements Adaptation {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.ADAPTATION__ADAPTER:
+			case SmartAdapters4DiVAPackage.ADAPTATION__ADAPTER:
 				setAdapter((Adapter)null);
 				return;
 		}
@@ -191,7 +191,7 @@ public abstract class AdaptationImpl extends EObjectImpl implements Adaptation {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.ADAPTATION__ADAPTER:
+			case SmartAdapters4DiVAPackage.ADAPTATION__ADAPTER:
 				return getAdapter() != null;
 		}
 		return super.eIsSet(featureID);

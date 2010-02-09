@@ -23,11 +23,11 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see org.smartadapters.core.CoreFactory
+ * @see org.smartadapters.core.SmartAdapters4DiVAFactory
  * @model kind="package"
  * @generated
  */
-public interface CorePackage extends EPackage {
+public interface SmartAdapters4DiVAPackage extends EPackage {
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -58,14 +58,14 @@ public interface CorePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	CorePackage eINSTANCE = org.smartadapters.core.impl.CorePackageImpl.init();
+	SmartAdapters4DiVAPackage eINSTANCE = org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link org.smartadapters.core.impl.AdapterImpl <em>Adapter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.smartadapters.core.impl.AdapterImpl
-	 * @see org.smartadapters.core.impl.CorePackageImpl#getAdapter()
+	 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getAdapter()
 	 * @generated
 	 */
 	int ADAPTER = 0;
@@ -111,7 +111,7 @@ public interface CorePackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.smartadapters.core.impl.AspectImpl
-	 * @see org.smartadapters.core.impl.CorePackageImpl#getAspect()
+	 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getAspect()
 	 * @generated
 	 */
 	int ASPECT = 1;
@@ -157,7 +157,7 @@ public interface CorePackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.smartadapters.core.impl.AdaptationImpl
-	 * @see org.smartadapters.core.impl.CorePackageImpl#getAdaptation()
+	 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getAdaptation()
 	 * @generated
 	 */
 	int ADAPTATION = 2;
@@ -185,7 +185,7 @@ public interface CorePackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.smartadapters.core.impl.cloneAdaptationImpl
-	 * @see org.smartadapters.core.impl.CorePackageImpl#getcloneAdaptation()
+	 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getcloneAdaptation()
 	 * @generated
 	 */
 	int CLONE_ADAPTATION = 3;
@@ -222,7 +222,7 @@ public interface CorePackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.smartadapters.core.impl.createAdaptationImpl
-	 * @see org.smartadapters.core.impl.CorePackageImpl#getcreateAdaptation()
+	 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getcreateAdaptation()
 	 * @generated
 	 */
 	int CREATE_ADAPTATION = 4;
@@ -259,7 +259,7 @@ public interface CorePackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.smartadapters.core.impl.setAdaptationImpl
-	 * @see org.smartadapters.core.impl.CorePackageImpl#getsetAdaptation()
+	 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getsetAdaptation()
 	 * @generated
 	 */
 	int SET_ADAPTATION = 5;
@@ -287,7 +287,7 @@ public interface CorePackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.smartadapters.core.impl.unsetAdaptationImpl
-	 * @see org.smartadapters.core.impl.CorePackageImpl#getunsetAdaptation()
+	 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getunsetAdaptation()
 	 * @generated
 	 */
 	int UNSET_ADAPTATION = 6;
@@ -315,7 +315,7 @@ public interface CorePackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.smartadapters.core.impl.makeUniqueImpl
-	 * @see org.smartadapters.core.impl.CorePackageImpl#getmakeUnique()
+	 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getmakeUnique()
 	 * @generated
 	 */
 	int MAKE_UNIQUE = 7;
@@ -352,7 +352,7 @@ public interface CorePackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.smartadapters.core.uniqueType
-	 * @see org.smartadapters.core.impl.CorePackageImpl#getuniqueType()
+	 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getuniqueType()
 	 * @generated
 	 */
 	int UNIQUE_TYPE = 8;
@@ -565,7 +565,7 @@ public interface CorePackage extends EPackage {
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	CoreFactory getCoreFactory();
+	SmartAdapters4DiVAFactory getSmartAdapters4DiVAFactory();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -585,7 +585,7 @@ public interface CorePackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.smartadapters.core.impl.AdapterImpl
-		 * @see org.smartadapters.core.impl.CorePackageImpl#getAdapter()
+		 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getAdapter()
 		 * @generated
 		 */
 		EClass ADAPTER = eINSTANCE.getAdapter();
@@ -619,7 +619,7 @@ public interface CorePackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.smartadapters.core.impl.AspectImpl
-		 * @see org.smartadapters.core.impl.CorePackageImpl#getAspect()
+		 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getAspect()
 		 * @generated
 		 */
 		EClass ASPECT = eINSTANCE.getAspect();
@@ -653,7 +653,7 @@ public interface CorePackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.smartadapters.core.impl.AdaptationImpl
-		 * @see org.smartadapters.core.impl.CorePackageImpl#getAdaptation()
+		 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getAdaptation()
 		 * @generated
 		 */
 		EClass ADAPTATION = eINSTANCE.getAdaptation();
@@ -671,7 +671,7 @@ public interface CorePackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.smartadapters.core.impl.cloneAdaptationImpl
-		 * @see org.smartadapters.core.impl.CorePackageImpl#getcloneAdaptation()
+		 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getcloneAdaptation()
 		 * @generated
 		 */
 		EClass CLONE_ADAPTATION = eINSTANCE.getcloneAdaptation();
@@ -689,7 +689,7 @@ public interface CorePackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.smartadapters.core.impl.createAdaptationImpl
-		 * @see org.smartadapters.core.impl.CorePackageImpl#getcreateAdaptation()
+		 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getcreateAdaptation()
 		 * @generated
 		 */
 		EClass CREATE_ADAPTATION = eINSTANCE.getcreateAdaptation();
@@ -707,7 +707,7 @@ public interface CorePackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.smartadapters.core.impl.setAdaptationImpl
-		 * @see org.smartadapters.core.impl.CorePackageImpl#getsetAdaptation()
+		 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getsetAdaptation()
 		 * @generated
 		 */
 		EClass SET_ADAPTATION = eINSTANCE.getsetAdaptation();
@@ -717,7 +717,7 @@ public interface CorePackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.smartadapters.core.impl.unsetAdaptationImpl
-		 * @see org.smartadapters.core.impl.CorePackageImpl#getunsetAdaptation()
+		 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getunsetAdaptation()
 		 * @generated
 		 */
 		EClass UNSET_ADAPTATION = eINSTANCE.getunsetAdaptation();
@@ -727,7 +727,7 @@ public interface CorePackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.smartadapters.core.impl.makeUniqueImpl
-		 * @see org.smartadapters.core.impl.CorePackageImpl#getmakeUnique()
+		 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getmakeUnique()
 		 * @generated
 		 */
 		EClass MAKE_UNIQUE = eINSTANCE.getmakeUnique();
@@ -745,11 +745,11 @@ public interface CorePackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see org.smartadapters.core.uniqueType
-		 * @see org.smartadapters.core.impl.CorePackageImpl#getuniqueType()
+		 * @see org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl#getuniqueType()
 		 * @generated
 		 */
 		EEnum UNIQUE_TYPE = eINSTANCE.getuniqueType();
 
 	}
 
-} //CorePackage
+} //SmartAdapters4DiVAPackage

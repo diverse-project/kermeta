@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.smartadapters.core.CorePackage;
+import org.smartadapters.core.SmartAdapters4DiVAPackage;
 import org.smartadapters.core.makeUnique;
 
 import patternframework.PObject;
@@ -58,7 +58,7 @@ public class makeUniqueImpl extends AdaptationImpl implements makeUnique {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CorePackage.Literals.MAKE_UNIQUE;
+		return SmartAdapters4DiVAPackage.Literals.MAKE_UNIQUE;
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class makeUniqueImpl extends AdaptationImpl implements makeUnique {
 			element = (PObject)eResolveProxy(oldElement);
 			if (element != oldElement) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.MAKE_UNIQUE__ELEMENT, oldElement, element));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SmartAdapters4DiVAPackage.MAKE_UNIQUE__ELEMENT, oldElement, element));
 			}
 		}
 		return element;
@@ -96,7 +96,7 @@ public class makeUniqueImpl extends AdaptationImpl implements makeUnique {
 		PObject oldElement = element;
 		element = newElement;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.MAKE_UNIQUE__ELEMENT, oldElement, element));
+			eNotify(new ENotificationImpl(this, Notification.SET, SmartAdapters4DiVAPackage.MAKE_UNIQUE__ELEMENT, oldElement, element));
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class makeUniqueImpl extends AdaptationImpl implements makeUnique {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.MAKE_UNIQUE__ELEMENT:
+			case SmartAdapters4DiVAPackage.MAKE_UNIQUE__ELEMENT:
 				if (resolve) return getElement();
 				return basicGetElement();
 		}
@@ -122,7 +122,7 @@ public class makeUniqueImpl extends AdaptationImpl implements makeUnique {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.MAKE_UNIQUE__ELEMENT:
+			case SmartAdapters4DiVAPackage.MAKE_UNIQUE__ELEMENT:
 				setElement((PObject)newValue);
 				return;
 		}
@@ -137,7 +137,7 @@ public class makeUniqueImpl extends AdaptationImpl implements makeUnique {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.MAKE_UNIQUE__ELEMENT:
+			case SmartAdapters4DiVAPackage.MAKE_UNIQUE__ELEMENT:
 				setElement((PObject)null);
 				return;
 		}
@@ -152,7 +152,7 @@ public class makeUniqueImpl extends AdaptationImpl implements makeUnique {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.MAKE_UNIQUE__ELEMENT:
+			case SmartAdapters4DiVAPackage.MAKE_UNIQUE__ELEMENT:
 				return element != null;
 		}
 		return super.eIsSet(featureID);

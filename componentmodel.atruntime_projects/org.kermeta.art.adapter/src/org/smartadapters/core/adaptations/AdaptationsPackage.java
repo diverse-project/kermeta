@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
-import org.smartadapters.core.CorePackage;
+import org.smartadapters.core.SmartAdapters4DiVAPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,7 +78,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIME_SYSTEM__ADAPTER = CorePackage.SET_ADAPTATION__ADAPTER;
+	int SETRUNTIME_SYSTEM__ADAPTER = SmartAdapters4DiVAPackage.SET_ADAPTATION__ADAPTER;
 
 	/**
 	 * The feature id for the '<em><b>System To Set</b></em>' reference.
@@ -87,7 +87,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIME_SYSTEM__SYSTEM_TO_SET = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 0;
+	int SETRUNTIME_SYSTEM__SYSTEM_TO_SET = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Refroot</b></em>' reference.
@@ -96,7 +96,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIME_SYSTEM__REFROOT = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 1;
+	int SETRUNTIME_SYSTEM__REFROOT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Refservices</b></em>' reference list.
@@ -105,7 +105,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIME_SYSTEM__REFSERVICES = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 2;
+	int SETRUNTIME_SYSTEM__REFSERVICES = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Reftypes</b></em>' reference list.
@@ -114,7 +114,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIME_SYSTEM__REFTYPES = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 3;
+	int SETRUNTIME_SYSTEM__REFTYPES = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Refdata Types</b></em>' reference list.
@@ -123,7 +123,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIME_SYSTEM__REFDATA_TYPES = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 4;
+	int SETRUNTIME_SYSTEM__REFDATA_TYPES = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Refname</b></em>' attribute.
@@ -132,7 +132,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIME_SYSTEM__REFNAME = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 5;
+	int SETRUNTIME_SYSTEM__REFNAME = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Setruntime System</em>' class.
@@ -141,7 +141,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIME_SYSTEM_FEATURE_COUNT = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 6;
+	int SETRUNTIME_SYSTEM_FEATURE_COUNT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.smartadapters.core.adaptations.impl.SetruntimeinstanceComponentInstanceImpl <em>Setruntimeinstance Component Instance</em>}' class.
@@ -160,7 +160,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__ADAPTER = CorePackage.SET_ADAPTATION__ADAPTER;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__ADAPTER = SmartAdapters4DiVAPackage.SET_ADAPTATION__ADAPTER;
 
 	/**
 	 * The feature id for the '<em><b>Component Instance To Set</b></em>' reference.
@@ -169,7 +169,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__COMPONENT_INSTANCE_TO_SET = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 0;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__COMPONENT_INSTANCE_TO_SET = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Reftype</b></em>' reference.
@@ -178,7 +178,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFTYPE = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 1;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFTYPE = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Refstate</b></em>' attribute.
@@ -187,7 +187,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFSTATE = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 2;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFSTATE = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Refsuper Component</b></em>' reference.
@@ -196,7 +196,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFSUPER_COMPONENT = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 3;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFSUPER_COMPONENT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Refattribute</b></em>' reference list.
@@ -205,7 +205,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFATTRIBUTE = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 4;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFATTRIBUTE = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Refbinding</b></em>' reference list.
@@ -214,7 +214,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFBINDING = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 5;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFBINDING = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Refcontroller Desc</b></em>' attribute.
@@ -223,7 +223,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFCONTROLLER_DESC = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 6;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFCONTROLLER_DESC = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Refcontent Desc</b></em>' attribute.
@@ -232,7 +232,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFCONTENT_DESC = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 7;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFCONTENT_DESC = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Refname</b></em>' attribute.
@@ -241,7 +241,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFNAME = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 8;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFNAME = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Setruntimeinstance Component Instance</em>' class.
@@ -250,7 +250,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE_FEATURE_COUNT = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 9;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE_FEATURE_COUNT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.smartadapters.core.adaptations.impl.SetruntimeinstancePrimitiveInstanceImpl <em>Setruntimeinstance Primitive Instance</em>}' class.
@@ -269,7 +269,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__ADAPTER = CorePackage.SET_ADAPTATION__ADAPTER;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__ADAPTER = SmartAdapters4DiVAPackage.SET_ADAPTATION__ADAPTER;
 
 	/**
 	 * The feature id for the '<em><b>Primitive Instance To Set</b></em>' reference.
@@ -278,7 +278,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__PRIMITIVE_INSTANCE_TO_SET = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 0;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__PRIMITIVE_INSTANCE_TO_SET = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Reftype</b></em>' reference.
@@ -287,7 +287,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFTYPE = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 1;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFTYPE = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Refstate</b></em>' attribute.
@@ -296,7 +296,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFSTATE = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 2;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFSTATE = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Refsuper Component</b></em>' reference.
@@ -305,7 +305,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFSUPER_COMPONENT = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 3;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFSUPER_COMPONENT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Refattribute</b></em>' reference list.
@@ -314,7 +314,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFATTRIBUTE = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 4;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFATTRIBUTE = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Refbinding</b></em>' reference list.
@@ -323,7 +323,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFBINDING = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 5;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFBINDING = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Refcontroller Desc</b></em>' attribute.
@@ -332,7 +332,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTROLLER_DESC = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 6;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTROLLER_DESC = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Refcontent Desc</b></em>' attribute.
@@ -341,7 +341,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTENT_DESC = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 7;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTENT_DESC = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Refname</b></em>' attribute.
@@ -350,7 +350,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFNAME = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 8;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFNAME = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Setruntimeinstance Primitive Instance</em>' class.
@@ -359,7 +359,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE_FEATURE_COUNT = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 9;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE_FEATURE_COUNT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.smartadapters.core.adaptations.impl.SetruntimeinstanceCompositeInstanceImpl <em>Setruntimeinstance Composite Instance</em>}' class.
@@ -378,7 +378,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__ADAPTER = CorePackage.SET_ADAPTATION__ADAPTER;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__ADAPTER = SmartAdapters4DiVAPackage.SET_ADAPTATION__ADAPTER;
 
 	/**
 	 * The feature id for the '<em><b>Composite Instance To Set</b></em>' reference.
@@ -387,7 +387,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__COMPOSITE_INSTANCE_TO_SET = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 0;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__COMPOSITE_INSTANCE_TO_SET = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Refsub Component</b></em>' reference list.
@@ -396,7 +396,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFSUB_COMPONENT = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 1;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFSUB_COMPONENT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Refdelegation</b></em>' reference list.
@@ -405,7 +405,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFDELEGATION = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 2;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFDELEGATION = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Reftype</b></em>' reference.
@@ -414,7 +414,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFTYPE = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 3;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFTYPE = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Refstate</b></em>' attribute.
@@ -423,7 +423,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFSTATE = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 4;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFSTATE = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Refsuper Component</b></em>' reference.
@@ -432,7 +432,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFSUPER_COMPONENT = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 5;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFSUPER_COMPONENT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Refattribute</b></em>' reference list.
@@ -441,7 +441,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFATTRIBUTE = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 6;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFATTRIBUTE = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Refbinding</b></em>' reference list.
@@ -450,7 +450,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFBINDING = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 7;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFBINDING = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Refcontroller Desc</b></em>' attribute.
@@ -459,7 +459,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTROLLER_DESC = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 8;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTROLLER_DESC = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Refcontent Desc</b></em>' attribute.
@@ -468,7 +468,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTENT_DESC = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 9;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTENT_DESC = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Refname</b></em>' attribute.
@@ -477,7 +477,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFNAME = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 10;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFNAME = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Setruntimeinstance Composite Instance</em>' class.
@@ -486,7 +486,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE_FEATURE_COUNT = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 11;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE_FEATURE_COUNT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.smartadapters.core.adaptations.impl.SetruntimeinstanceTransmissionBindingImpl <em>Setruntimeinstance Transmission Binding</em>}' class.
@@ -505,7 +505,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__ADAPTER = CorePackage.SET_ADAPTATION__ADAPTER;
+	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__ADAPTER = SmartAdapters4DiVAPackage.SET_ADAPTATION__ADAPTER;
 
 	/**
 	 * The feature id for the '<em><b>Transmission Binding To Set</b></em>' reference.
@@ -514,7 +514,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__TRANSMISSION_BINDING_TO_SET = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 0;
+	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__TRANSMISSION_BINDING_TO_SET = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Refclient</b></em>' reference.
@@ -523,7 +523,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFCLIENT = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 1;
+	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFCLIENT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Refserver</b></em>' reference.
@@ -532,7 +532,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFSERVER = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 2;
+	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFSERVER = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Refserver Instance</b></em>' reference.
@@ -541,7 +541,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFSERVER_INSTANCE = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 3;
+	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFSERVER_INSTANCE = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Ref Id</b></em>' attribute.
@@ -550,7 +550,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REF_ID = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 4;
+	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REF_ID = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Setruntimeinstance Transmission Binding</em>' class.
@@ -559,7 +559,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING_FEATURE_COUNT = CorePackage.SET_ADAPTATION_FEATURE_COUNT + 5;
+	int SETRUNTIMEINSTANCE_TRANSMISSION_BINDING_FEATURE_COUNT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 5;
 
 
 	/**

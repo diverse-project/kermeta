@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.smartadapters.core.CorePackage;
+import org.smartadapters.core.SmartAdapters4DiVAPackage;
 
 import org.smartadapters.core.adaptations.AdaptationsFactory;
 import org.smartadapters.core.adaptations.AdaptationsPackage;
@@ -23,9 +23,9 @@ import org.smartadapters.core.adaptations.SetruntimeinstanceCompositeInstance;
 import org.smartadapters.core.adaptations.SetruntimeinstancePrimitiveInstance;
 import org.smartadapters.core.adaptations.SetruntimeinstanceTransmissionBinding;
 
-import org.smartadapters.core.impl.CorePackageImpl;
+import org.smartadapters.core.impl.SmartAdapters4DiVAPackageImpl;
 
-import pattern.art.ArtPackage;
+import pattern.art.ArtPatternPackage;
 
 import pattern.art.instance.InstancePackage;
 
@@ -122,19 +122,19 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 		isInited = true;
 
 		// Initialize simple dependencies
-		ArtPackage.eINSTANCE.eClass();
+		ArtPatternPackage.eINSTANCE.eClass();
 		PatternframeworkPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
-		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) : CorePackage.eINSTANCE);
+		SmartAdapters4DiVAPackageImpl theSmartAdapters4DiVAPackage = (SmartAdapters4DiVAPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SmartAdapters4DiVAPackage.eNS_URI) instanceof SmartAdapters4DiVAPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SmartAdapters4DiVAPackage.eNS_URI) : SmartAdapters4DiVAPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theAdaptationsPackage.createPackageContents();
-		theCorePackage.createPackageContents();
+		theSmartAdapters4DiVAPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theAdaptationsPackage.initializePackageContents();
-		theCorePackage.initializePackageContents();
+		theSmartAdapters4DiVAPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theAdaptationsPackage.freeze();
@@ -653,8 +653,8 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		CorePackage theCorePackage = (CorePackage)EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
-		ArtPackage theArtPackage = (ArtPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI);
+		SmartAdapters4DiVAPackage theSmartAdapters4DiVAPackage = (SmartAdapters4DiVAPackage)EPackage.Registry.INSTANCE.getEPackage(SmartAdapters4DiVAPackage.eNS_URI);
+		ArtPatternPackage theArtPatternPackage = (ArtPatternPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI);
 		InstancePackage theInstancePackage = (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
 		TypePackage theTypePackage = (TypePackage)EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI);
 
@@ -663,55 +663,55 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		setruntimeSystemEClass.getESuperTypes().add(theCorePackage.getsetAdaptation());
-		setruntimeinstanceComponentInstanceEClass.getESuperTypes().add(theCorePackage.getsetAdaptation());
-		setruntimeinstancePrimitiveInstanceEClass.getESuperTypes().add(theCorePackage.getsetAdaptation());
-		setruntimeinstanceCompositeInstanceEClass.getESuperTypes().add(theCorePackage.getsetAdaptation());
-		setruntimeinstanceTransmissionBindingEClass.getESuperTypes().add(theCorePackage.getsetAdaptation());
+		setruntimeSystemEClass.getESuperTypes().add(theSmartAdapters4DiVAPackage.getsetAdaptation());
+		setruntimeinstanceComponentInstanceEClass.getESuperTypes().add(theSmartAdapters4DiVAPackage.getsetAdaptation());
+		setruntimeinstancePrimitiveInstanceEClass.getESuperTypes().add(theSmartAdapters4DiVAPackage.getsetAdaptation());
+		setruntimeinstanceCompositeInstanceEClass.getESuperTypes().add(theSmartAdapters4DiVAPackage.getsetAdaptation());
+		setruntimeinstanceTransmissionBindingEClass.getESuperTypes().add(theSmartAdapters4DiVAPackage.getsetAdaptation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(setruntimeSystemEClass, SetruntimeSystem.class, "SetruntimeSystem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSetruntimeSystem_SystemToSet(), theArtPackage.getSystem(), null, "SystemToSet", null, 0, 1, SetruntimeSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSetruntimeSystem_SystemToSet(), theArtPatternPackage.getSystem(), null, "SystemToSet", null, 0, 1, SetruntimeSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeSystem_Refroot(), theInstancePackage.getCompositeInstance(), null, "refroot", null, 0, 1, SetruntimeSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeSystem_Refservices(), theTypePackage.getService(), null, "refservices", null, 0, -1, SetruntimeSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeSystem_Reftypes(), theTypePackage.getComponentType(), null, "reftypes", null, 0, -1, SetruntimeSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSetruntimeSystem_RefdataTypes(), theArtPackage.getDataType(), null, "refdataTypes", null, 0, -1, SetruntimeSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeSystem_Refname(), theArtPackage.getString(), "refname", null, 0, 1, SetruntimeSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSetruntimeSystem_RefdataTypes(), theArtPatternPackage.getDataType(), null, "refdataTypes", null, 0, -1, SetruntimeSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeSystem_Refname(), theArtPatternPackage.getString(), "refname", null, 0, 1, SetruntimeSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(setruntimeinstanceComponentInstanceEClass, SetruntimeinstanceComponentInstance.class, "SetruntimeinstanceComponentInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSetruntimeinstanceComponentInstance_ComponentInstanceToSet(), theInstancePackage.getComponentInstance(), null, "ComponentInstanceToSet", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceComponentInstance_Reftype(), theTypePackage.getComponentType(), null, "reftype", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceComponentInstance_Refstate(), theArtPackage.getString(), "refstate", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstanceComponentInstance_Refstate(), theArtPatternPackage.getString(), "refstate", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceComponentInstance_RefsuperComponent(), theInstancePackage.getCompositeInstance(), null, "refsuperComponent", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceComponentInstance_Refattribute(), theInstancePackage.getValuedAttribute(), null, "refattribute", null, 0, -1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceComponentInstance_Refbinding(), theInstancePackage.getTransmissionBinding(), null, "refbinding", null, 0, -1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceComponentInstance_RefcontrollerDesc(), theArtPackage.getString(), "refcontrollerDesc", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceComponentInstance_RefcontentDesc(), theArtPackage.getString(), "refcontentDesc", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceComponentInstance_Refname(), theArtPackage.getString(), "refname", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstanceComponentInstance_RefcontrollerDesc(), theArtPatternPackage.getString(), "refcontrollerDesc", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstanceComponentInstance_RefcontentDesc(), theArtPatternPackage.getString(), "refcontentDesc", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstanceComponentInstance_Refname(), theArtPatternPackage.getString(), "refname", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(setruntimeinstancePrimitiveInstanceEClass, SetruntimeinstancePrimitiveInstance.class, "SetruntimeinstancePrimitiveInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSetruntimeinstancePrimitiveInstance_PrimitiveInstanceToSet(), theInstancePackage.getPrimitiveInstance(), null, "PrimitiveInstanceToSet", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstancePrimitiveInstance_Reftype(), theTypePackage.getComponentType(), null, "reftype", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstancePrimitiveInstance_Refstate(), theArtPackage.getString(), "refstate", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstancePrimitiveInstance_Refstate(), theArtPatternPackage.getString(), "refstate", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstancePrimitiveInstance_RefsuperComponent(), theInstancePackage.getCompositeInstance(), null, "refsuperComponent", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstancePrimitiveInstance_Refattribute(), theInstancePackage.getValuedAttribute(), null, "refattribute", null, 0, -1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstancePrimitiveInstance_Refbinding(), theInstancePackage.getTransmissionBinding(), null, "refbinding", null, 0, -1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstancePrimitiveInstance_RefcontrollerDesc(), theArtPackage.getString(), "refcontrollerDesc", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstancePrimitiveInstance_RefcontentDesc(), theArtPackage.getString(), "refcontentDesc", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstancePrimitiveInstance_Refname(), theArtPackage.getString(), "refname", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstancePrimitiveInstance_RefcontrollerDesc(), theArtPatternPackage.getString(), "refcontrollerDesc", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstancePrimitiveInstance_RefcontentDesc(), theArtPatternPackage.getString(), "refcontentDesc", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstancePrimitiveInstance_Refname(), theArtPatternPackage.getString(), "refname", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(setruntimeinstanceCompositeInstanceEClass, SetruntimeinstanceCompositeInstance.class, "SetruntimeinstanceCompositeInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSetruntimeinstanceCompositeInstance_CompositeInstanceToSet(), theInstancePackage.getCompositeInstance(), null, "CompositeInstanceToSet", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceCompositeInstance_RefsubComponent(), theInstancePackage.getComponentInstance(), null, "refsubComponent", null, 0, -1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceCompositeInstance_Refdelegation(), theInstancePackage.getDelegationBinding(), null, "refdelegation", null, 0, -1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceCompositeInstance_Reftype(), theTypePackage.getComponentType(), null, "reftype", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceCompositeInstance_Refstate(), theArtPackage.getString(), "refstate", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstanceCompositeInstance_Refstate(), theArtPatternPackage.getString(), "refstate", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceCompositeInstance_RefsuperComponent(), theInstancePackage.getCompositeInstance(), null, "refsuperComponent", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceCompositeInstance_Refattribute(), theInstancePackage.getValuedAttribute(), null, "refattribute", null, 0, -1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceCompositeInstance_Refbinding(), theInstancePackage.getTransmissionBinding(), null, "refbinding", null, 0, -1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceCompositeInstance_RefcontrollerDesc(), theArtPackage.getString(), "refcontrollerDesc", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceCompositeInstance_RefcontentDesc(), theArtPackage.getString(), "refcontentDesc", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceCompositeInstance_Refname(), theArtPackage.getString(), "refname", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstanceCompositeInstance_RefcontrollerDesc(), theArtPatternPackage.getString(), "refcontrollerDesc", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstanceCompositeInstance_RefcontentDesc(), theArtPatternPackage.getString(), "refcontentDesc", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstanceCompositeInstance_Refname(), theArtPatternPackage.getString(), "refname", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(setruntimeinstanceTransmissionBindingEClass, SetruntimeinstanceTransmissionBinding.class, "SetruntimeinstanceTransmissionBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSetruntimeinstanceTransmissionBinding_TransmissionBindingToSet(), theInstancePackage.getTransmissionBinding(), null, "TransmissionBindingToSet", null, 0, 1, SetruntimeinstanceTransmissionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

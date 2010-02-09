@@ -13,7 +13,7 @@ package org.smartadapters.core;
  * <!-- end-user-doc -->
  *
  *
- * @see org.smartadapters.core.CorePackage#getunsetAdaptation()
+ * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getunsetAdaptation()
  * @model abstract="true"
  * @generated
  */

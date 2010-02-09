@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see org.smartadapters.core.CorePackage#getAdapter()
+ * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getAdapter()
  * @model
  * @generated
  */
@@ -39,7 +39,7 @@ public interface Adapter extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Aspect</em>' containment reference.
 	 * @see #setAspect(Aspect)
-	 * @see org.smartadapters.core.CorePackage#getAdapter_Aspect()
+	 * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getAdapter_Aspect()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
@@ -66,7 +66,7 @@ public interface Adapter extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Adapt</em>' containment reference list.
-	 * @see org.smartadapters.core.CorePackage#getAdapter_Adapt()
+	 * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getAdapter_Adapt()
 	 * @see org.smartadapters.core.Adaptation#getAdapter
 	 * @model opposite="adapter" containment="true"
 	 * @generated
@@ -83,7 +83,7 @@ public interface Adapter extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.smartadapters.core.CorePackage#getAdapter_Name()
+	 * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getAdapter_Name()
 	 * @model dataType="pattern.art.String"
 	 *        annotation="kermeta isComposite='true'"
 	 * @generated

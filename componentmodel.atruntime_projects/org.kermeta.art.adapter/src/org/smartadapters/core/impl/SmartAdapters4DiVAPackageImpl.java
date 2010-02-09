@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.smartadapters.core.Adaptation;
 import org.smartadapters.core.Adapter;
 import org.smartadapters.core.Aspect;
-import org.smartadapters.core.CoreFactory;
-import org.smartadapters.core.CorePackage;
+import org.smartadapters.core.SmartAdapters4DiVAFactory;
+import org.smartadapters.core.SmartAdapters4DiVAPackage;
 
 import org.smartadapters.core.adaptations.AdaptationsPackage;
 
@@ -31,7 +31,7 @@ import org.smartadapters.core.setAdaptation;
 import org.smartadapters.core.uniqueType;
 import org.smartadapters.core.unsetAdaptation;
 
-import pattern.art.ArtPackage;
+import pattern.art.ArtPatternPackage;
 
 import patternframework.PatternframeworkPackage;
 
@@ -41,7 +41,7 @@ import patternframework.PatternframeworkPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class CorePackageImpl extends EPackageImpl implements CorePackage {
+public class SmartAdapters4DiVAPackageImpl extends EPackageImpl implements SmartAdapters4DiVAPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,12 +116,12 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.smartadapters.core.CorePackage#eNS_URI
+	 * @see org.smartadapters.core.SmartAdapters4DiVAPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private CorePackageImpl() {
-		super(eNS_URI, CoreFactory.eINSTANCE);
+	private SmartAdapters4DiVAPackageImpl() {
+		super(eNS_URI, SmartAdapters4DiVAFactory.eINSTANCE);
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
-	 * <p>This method is used to initialize {@link CorePackage#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link SmartAdapters4DiVAPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -143,36 +143,36 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static CorePackage init() {
-		if (isInited) return (CorePackage)EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
+	public static SmartAdapters4DiVAPackage init() {
+		if (isInited) return (SmartAdapters4DiVAPackage)EPackage.Registry.INSTANCE.getEPackage(SmartAdapters4DiVAPackage.eNS_URI);
 
 		// Obtain or create and register package
-		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new CorePackageImpl());
+		SmartAdapters4DiVAPackageImpl theSmartAdapters4DiVAPackage = (SmartAdapters4DiVAPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SmartAdapters4DiVAPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SmartAdapters4DiVAPackageImpl());
 
 		isInited = true;
 
 		// Initialize simple dependencies
-		ArtPackage.eINSTANCE.eClass();
+		ArtPatternPackage.eINSTANCE.eClass();
 		PatternframeworkPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
 		AdaptationsPackageImpl theAdaptationsPackage = (AdaptationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AdaptationsPackage.eNS_URI) instanceof AdaptationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AdaptationsPackage.eNS_URI) : AdaptationsPackage.eINSTANCE);
 
 		// Create package meta-data objects
-		theCorePackage.createPackageContents();
+		theSmartAdapters4DiVAPackage.createPackageContents();
 		theAdaptationsPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theCorePackage.initializePackageContents();
+		theSmartAdapters4DiVAPackage.initializePackageContents();
 		theAdaptationsPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theCorePackage.freeze();
+		theSmartAdapters4DiVAPackage.freeze();
 
   
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(CorePackage.eNS_URI, theCorePackage);
-		return theCorePackage;
+		EPackage.Registry.INSTANCE.put(SmartAdapters4DiVAPackage.eNS_URI, theSmartAdapters4DiVAPackage);
+		return theSmartAdapters4DiVAPackage;
 	}
 
 	/**
@@ -351,8 +351,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CoreFactory getCoreFactory() {
-		return (CoreFactory)getEFactoryInstance();
+	public SmartAdapters4DiVAFactory getSmartAdapters4DiVAFactory() {
+		return (SmartAdapters4DiVAFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -429,7 +429,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		// Obtain other dependent packages
 		AdaptationsPackage theAdaptationsPackage = (AdaptationsPackage)EPackage.Registry.INSTANCE.getEPackage(AdaptationsPackage.eNS_URI);
-		ArtPackage theArtPackage = (ArtPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI);
+		ArtPatternPackage theArtPatternPackage = (ArtPatternPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI);
 		PatternframeworkPackage thePatternframeworkPackage = (PatternframeworkPackage)EPackage.Registry.INSTANCE.getEPackage(PatternframeworkPackage.eNS_URI);
 
 		// Add subpackages
@@ -450,7 +450,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(adapterEClass, Adapter.class, "Adapter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAdapter_Aspect(), this.getAspect(), null, "aspect", null, 1, 1, Adapter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAdapter_Adapt(), this.getAdaptation(), this.getAdaptation_Adapter(), "adapt", null, 0, -1, Adapter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAdapter_Name(), theArtPackage.getString(), "name", null, 0, 1, Adapter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAdapter_Name(), theArtPatternPackage.getString(), "name", null, 0, 1, Adapter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(aspectEClass, Aspect.class, "Aspect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAspect_Template(), thePatternframeworkPackage.getModelPattern(), null, "template", null, 0, 1, Aspect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -521,4 +521,4 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		   });
 	}
 
-} //CorePackageImpl
+} //SmartAdapters4DiVAPackageImpl

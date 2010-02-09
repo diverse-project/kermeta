@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.smartadapters.core.Adaptation;
 import org.smartadapters.core.Adapter;
 import org.smartadapters.core.Aspect;
-import org.smartadapters.core.CorePackage;
+import org.smartadapters.core.SmartAdapters4DiVAPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -99,7 +99,7 @@ public class AdapterImpl extends EObjectImpl implements Adapter {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CorePackage.Literals.ADAPTER;
+		return SmartAdapters4DiVAPackage.Literals.ADAPTER;
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class AdapterImpl extends EObjectImpl implements Adapter {
 		Aspect oldAspect = aspect;
 		aspect = newAspect;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CorePackage.ADAPTER__ASPECT, oldAspect, newAspect);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SmartAdapters4DiVAPackage.ADAPTER__ASPECT, oldAspect, newAspect);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -135,14 +135,14 @@ public class AdapterImpl extends EObjectImpl implements Adapter {
 		if (newAspect != aspect) {
 			NotificationChain msgs = null;
 			if (aspect != null)
-				msgs = ((InternalEObject)aspect).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CorePackage.ADAPTER__ASPECT, null, msgs);
+				msgs = ((InternalEObject)aspect).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SmartAdapters4DiVAPackage.ADAPTER__ASPECT, null, msgs);
 			if (newAspect != null)
-				msgs = ((InternalEObject)newAspect).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CorePackage.ADAPTER__ASPECT, null, msgs);
+				msgs = ((InternalEObject)newAspect).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SmartAdapters4DiVAPackage.ADAPTER__ASPECT, null, msgs);
 			msgs = basicSetAspect(newAspect, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ADAPTER__ASPECT, newAspect, newAspect));
+			eNotify(new ENotificationImpl(this, Notification.SET, SmartAdapters4DiVAPackage.ADAPTER__ASPECT, newAspect, newAspect));
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class AdapterImpl extends EObjectImpl implements Adapter {
 	 */
 	public EList<Adaptation> getAdapt() {
 		if (adapt == null) {
-			adapt = new EObjectContainmentWithInverseEList<Adaptation>(Adaptation.class, this, CorePackage.ADAPTER__ADAPT, CorePackage.ADAPTATION__ADAPTER);
+			adapt = new EObjectContainmentWithInverseEList<Adaptation>(Adaptation.class, this, SmartAdapters4DiVAPackage.ADAPTER__ADAPT, SmartAdapters4DiVAPackage.ADAPTATION__ADAPTER);
 		}
 		return adapt;
 	}
@@ -175,7 +175,7 @@ public class AdapterImpl extends EObjectImpl implements Adapter {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ADAPTER__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, SmartAdapters4DiVAPackage.ADAPTER__NAME, oldName, name));
 	}
 
 	/**
@@ -187,7 +187,7 @@ public class AdapterImpl extends EObjectImpl implements Adapter {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePackage.ADAPTER__ADAPT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ADAPT:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAdapt()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -201,9 +201,9 @@ public class AdapterImpl extends EObjectImpl implements Adapter {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePackage.ADAPTER__ASPECT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ASPECT:
 				return basicSetAspect(null, msgs);
-			case CorePackage.ADAPTER__ADAPT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ADAPT:
 				return ((InternalEList<?>)getAdapt()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -217,11 +217,11 @@ public class AdapterImpl extends EObjectImpl implements Adapter {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.ADAPTER__ASPECT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ASPECT:
 				return getAspect();
-			case CorePackage.ADAPTER__ADAPT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ADAPT:
 				return getAdapt();
-			case CorePackage.ADAPTER__NAME:
+			case SmartAdapters4DiVAPackage.ADAPTER__NAME:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -236,14 +236,14 @@ public class AdapterImpl extends EObjectImpl implements Adapter {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.ADAPTER__ASPECT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ASPECT:
 				setAspect((Aspect)newValue);
 				return;
-			case CorePackage.ADAPTER__ADAPT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ADAPT:
 				getAdapt().clear();
 				getAdapt().addAll((Collection<? extends Adaptation>)newValue);
 				return;
-			case CorePackage.ADAPTER__NAME:
+			case SmartAdapters4DiVAPackage.ADAPTER__NAME:
 				setName((String)newValue);
 				return;
 		}
@@ -258,13 +258,13 @@ public class AdapterImpl extends EObjectImpl implements Adapter {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.ADAPTER__ASPECT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ASPECT:
 				setAspect((Aspect)null);
 				return;
-			case CorePackage.ADAPTER__ADAPT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ADAPT:
 				getAdapt().clear();
 				return;
-			case CorePackage.ADAPTER__NAME:
+			case SmartAdapters4DiVAPackage.ADAPTER__NAME:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -279,11 +279,11 @@ public class AdapterImpl extends EObjectImpl implements Adapter {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.ADAPTER__ASPECT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ASPECT:
 				return aspect != null;
-			case CorePackage.ADAPTER__ADAPT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ADAPT:
 				return adapt != null && !adapt.isEmpty();
-			case CorePackage.ADAPTER__NAME:
+			case SmartAdapters4DiVAPackage.ADAPTER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
