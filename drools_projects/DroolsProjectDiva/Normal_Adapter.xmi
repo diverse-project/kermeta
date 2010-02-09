@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ASCII"?>
+<core:Adapter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adaptations="http://SmartAdapters4ART/smartadapters/core/adaptations" xmlns:core="http://SmartAdapters4ART/smartadapters/core" xsi:schemaLocation="http://SmartAdapters4ART/smartadapters/core/adaptations runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations http://SmartAdapters4ART/smartadapters/core runtime_AOM_Framework1.ecore#//smartadapters/core">
+  <aspect>
+    <template>
+      <pattern>
+        <content href="Normal_Pointcut.xmi#/"/>
+        <content href="Normal_Pointcut.xmi#//@root"/>
+        <content href="Normal_Pointcut.xmi#//@services.0"/>
+        <content href="Normal_Pointcut.xmi#//@types.0"/>
+        <content href="Normal_Pointcut.xmi#//@root/@subComponent.0"/>
+        <content href="Normal_Pointcut.xmi#//@types.0/@port.0"/>
+        <roles name="systemRole">
+          <player href="Normal_Pointcut.xmi#/"/>
+        </roles>
+        <roles name="rootRole">
+          <player href="Normal_Pointcut.xmi#//@root"/>
+        </roles>
+        <roles name="loggerClientRole">
+          <player href="Normal_Pointcut.xmi#//@root/@subComponent.0"/>
+        </roles>
+        <roles name="loggerClientPortRole">
+          <player href="Normal_Pointcut.xmi#//@types.0/@port.0"/>
+        </roles>
+      </pattern>
+    </template>
+    <structure>
+      <content href="Normal_Advice.xmi#/"/>
+      <content href="Normal_Advice.xmi#//@root"/>
+      <content href="Normal_Advice.xmi#//@services.0"/>
+      <content href="Normal_Advice.xmi#//@types.0"/>
+      <content href="Normal_Advice.xmi#//@root/@subComponent.0"/>
+      <content href="Normal_Advice.xmi#//@root/@subComponent.1"/>
+      <content href="Normal_Advice.xmi#//@types.0/@port.0"/>
+      <content href="Normal_Advice.xmi#//@root/@subComponent.1/@binding.0"/>
+      <content href="Normal_Advice.xmi#//@root/@subComponent.1/@binding.1"/>
+      <content href="Normal_Advice.xmi#//@root/@subComponent.0/@implem"/>
+    </structure>
+    <persistent href="Normal_Advice.xmi#//@root/@subComponent.0"/>
+    <persistent href="Normal_Advice.xmi#//@root/@subComponent.0/@implem"/>
+    <persistent href="Normal_Advice.xmi#//@types.0"/>
+    <persistent href="Normal_Advice.xmi#//@services.0"/>
+    <persistent href="Normal_Advice.xmi#//@types.0/@port.0"/>
+  </aspect>
+  <adapt xsi:type="adaptations:SetruntimeSystem">
+    <SystemToSet href="Normal_Pointcut.xmi#/"/>
+    <refservices href="Normal_Advice.xmi#//@services.0"/>
+    <reftypes href="Normal_Advice.xmi#//@types.0"/>
+    <refdataTypes href="Normal_Advice.xmi#//@dataTypes.0"/>
+    <refdataTypes href="Normal_Advice.xmi#//@dataTypes.1"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">
+    <CompositeInstanceToSet href="Normal_Pointcut.xmi#//@root"/>
+    <refsubComponent href="Normal_Advice.xmi#//@root/@subComponent.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="Normal_Advice.xmi#//@root/@subComponent.1/@binding.0"/>
+    <refclient href="Normal_Pointcut.xmi#//@types.0/@port.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstancePrimitiveInstance">
+    <PrimitiveInstanceToSet href="Normal_Pointcut.xmi#//@root/@subComponent.0"/>
+    <refbinding href="Normal_Advice.xmi#//@root/@subComponent.1/@binding.0"/>
+  </adapt>
+</core:Adapter>

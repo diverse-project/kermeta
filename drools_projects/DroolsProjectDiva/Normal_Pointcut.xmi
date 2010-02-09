@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:implem="http://art/pattern/art/implem" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type" xsi:schemaLocation="http://art/pattern/art metamodel@runtimePattern.ecore#//art http://art/pattern/art/implem metamodel@runtimePattern.ecore#//art/implem http://art/pattern/art/instance metamodel@runtimePattern.ecore#//art/instance http://art/pattern/art/type metamodel@runtimePattern.ecore#//art/type">  <root>
+    <subComponent xsi:type="instance:PrimitiveInstance" type="//@types.0"/>
+  </root>
+  <services xsi:type="type:FunctionalService" name="org.slf4j.Logger"/>
+  <types xsi:type="type:PrimitiveType">
+    <port xsi:type="type:Port" lower="1" upper="1" service="//@services.0" role="client"/>
+  </types>
+</art:System>

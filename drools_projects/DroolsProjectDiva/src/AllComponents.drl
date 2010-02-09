@@ -1,0 +1,17 @@
+global java.util.List list;
+
+rule "Has a port"
+
+when
+    $s : art.type.Service(name == "org.slf4j.Logger") 
+   	$p : art.type.Port(role == "client", service== $s) 
+    $a : art.type.ComponentType(port contains $p) 
+   	$i :art.instance.ComponentInstance(type == $a)    
+then
+	java.util.HashMap m = new java.util.HashMap();
+	m.put("s", $s);
+	m.put("p", $p);
+	m.put("a", $a);
+	m.put("i", $i);
+	list.add(m);	
+end

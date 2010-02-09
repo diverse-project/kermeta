@@ -1,0 +1,19 @@
+global java.util.List list;
+
+rule "Has a port"
+
+when
+    $s1 : art.type.Service(name == "eu.diva.tis.api.messaging.Channel") 
+    $s2 : art.type.Service(name == "eu.diva.tis.api.messaging.OrganizationCallback") 
+   	$p1 : art.type.Port(role == "client", service== $s1) 
+    $p2 : art.type.Port(role == "server", service== $s2) 
+    $a1 : art.type.ComponentType(port contains $p1) 
+   	$a2 : art.type.ComponentType(port contains $p2) 
+   	$i1 :art.instance.ComponentInstance(type == $a1)
+   	$i2 :art.instance.ComponentInstance(type == $a2)    
+then
+	java.util.HashMap m = new java.util.HashMap();
+	m.put("i1", $i1);
+	m.put("i2", $i2);
+	list.add(m);	
+end
