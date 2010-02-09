@@ -169,7 +169,7 @@ import pattern.art.instance.provider.InstanceItemProviderAdapterFactory;
 
 import pattern.art.presentation.MetamodelruntimePatternEditorPlugin;
 
-import pattern.art.provider.ArtItemProviderAdapterFactory;
+import pattern.art.provider.ArtPatternItemProviderAdapterFactory;
 
 import pattern.art.type.provider.TypeItemProviderAdapterFactory;
 
@@ -706,7 +706,7 @@ public class PatternframeworkEditor
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ArtItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ArtPatternItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new InstanceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new TypeItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ImplemItemProviderAdapterFactory());
