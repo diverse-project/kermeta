@@ -72,7 +72,6 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 			res.append("import kermeta.kunit.KunitConversions._\n")
 			par.generateScalaCode(res)
 			Util.generateFile(genpackageName.toString, par.getName+"Aspect", res.toString())
-			System.err.println(par.getName+"Aspect")
 			if (!Util.hasEcoreTag(par)){
 				var res1 : StringBuilder = new StringBuilder
 				res1.append("package "+genpackageName+"\n")

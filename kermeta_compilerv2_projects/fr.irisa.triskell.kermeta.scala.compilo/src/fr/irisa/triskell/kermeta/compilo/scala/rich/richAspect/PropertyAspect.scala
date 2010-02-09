@@ -168,12 +168,8 @@ def generateAttribute(res : StringBuilder) : Unit ={
 			else if (currentname.endsWith("ex")){
 				currentname =currentname.substring(0, currentname.size -2) + "ices"								
 			}
-			
-			//coveredBy
-			//data
 			else{
-				currentname =currentname + "s"
-				
+				currentname =currentname + "s"				
 			}
 			return currentname
 
