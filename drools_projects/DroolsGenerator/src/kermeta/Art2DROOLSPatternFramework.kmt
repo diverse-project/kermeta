@@ -1,0 +1,108 @@
+/* $Id:$ 
+ * Creation : February 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */ 
+@mainClass "patternframework::Main"
+@mainOperation "main"
+
+
+package patternframework;
+
+
+require kermeta
+
+
+
+require "platform:/resource/org.kermeta.art.adapter/model/runtime_AOM_Framework1.ecore"
+require "Art2DROOLS.kmt"
+
+
+
+using kermeta::standard
+using kermeta::persistence
+using org::smartadapters::core
+class Main {
+	
+	operation main() : Void is do
+		var ctx : Context init Context.new
+		ctx.res := kermeta::utils::StringBuffer.new
+		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
+		
+		var rep : EMFRepository  init EMFRepository.new
+		var res : EMFResource 
+		res ?= rep.createResource("../../model/LoggingAdapter.smART", "platform:/resource/org.kermeta.art.adapter/model/runtime_AOM_Framework1.ecore")
+		res.load
+		var root : Adapter
+		root ?= res.one()
+		 
+		root.~aspect.template.pattern.toDrools(ctx)
+		stdio.writeln(ctx.res.toString)
+	end
+	
+	
+
+}
+class Context{
+	reference res : kermeta::utils::StringBuffer
+	reference cache : kermeta::utils::Hashtable<Object,String>
+	operation getGenerateName():String is do
+		if (i.isVoid) then i:= 0 end
+		result :="s"+ i.toString()
+		i:=i+1
+	end
+	reference i : Integer	
+}
+
+aspect class ModelPattern
+{
+	operation toDrools(ctx:Context) : Void is do 
+		self.pattern.toDrools(ctx)
+		
+	end
+	
+	
+}
+ 
+aspect class PModel
+{
+	operation toDrools(ctx:Context) : Void is do 
+	var name:String init "RulesName"
+	
+	ctx.res.append("global java.util.List list;\n")
+	ctx.res.append("rule \""+ name + "\"\n")
+
+	ctx.res.append("\t when \n")
+		self.content.each{p|
+			p.toDrools(ctx)
+		}
+		
+		ctx.res.append("then\n \t java.util.HashMap m = new java.util.HashMap();\n")
+		self.roles.each{p|
+			p.toDrools(ctx)
+		}
+		ctx.res.append("\t list.add(m);\n end\n")		
+	end
+}
+
+
+aspect class PRole
+{
+	operation toDrools(ctx:Context) : Void is do 
+		ctx.res.append("m.put(\"")
+		ctx.res.append(self.name)
+		ctx.res.append("\",$")
+		ctx.res.append(ctx.cache.getValue(self.player))
+		ctx.res.append(");\n")						
+	end
+}
+
+aspect class PObject
+{
+	operation toDrools(ctx:Context) : Void is do 
+			ctx.res.append("TODO " +self.getMetaClass.toString)
+	end
+}
+
