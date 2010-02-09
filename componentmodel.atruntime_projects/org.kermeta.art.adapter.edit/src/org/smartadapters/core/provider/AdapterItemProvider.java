@@ -29,8 +29,8 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.smartadapters.core.Adapter;
-import org.smartadapters.core.CoreFactory;
-import org.smartadapters.core.CorePackage;
+import org.smartadapters.core.SmartAdapters4DiVAFactory;
+import org.smartadapters.core.SmartAdapters4DiVAPackage;
 
 import org.smartadapters.core.adaptations.AdaptationsFactory;
 
@@ -87,7 +87,7 @@ public class AdapterItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Adapter_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Adapter_name_feature", "_UI_Adapter_type"),
-				 CorePackage.Literals.ADAPTER__NAME,
+				 SmartAdapters4DiVAPackage.Literals.ADAPTER__NAME,
 				 true,
 				 false,
 				 false,
@@ -108,8 +108,8 @@ public class AdapterItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(CorePackage.Literals.ADAPTER__ASPECT);
-			childrenFeatures.add(CorePackage.Literals.ADAPTER__ADAPT);
+			childrenFeatures.add(SmartAdapters4DiVAPackage.Literals.ADAPTER__ASPECT);
+			childrenFeatures.add(SmartAdapters4DiVAPackage.Literals.ADAPTER__ADAPT);
 		}
 		return childrenFeatures;
 	}
@@ -164,11 +164,11 @@ public class AdapterItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Adapter.class)) {
-			case CorePackage.ADAPTER__NAME:
+			case SmartAdapters4DiVAPackage.ADAPTER__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case CorePackage.ADAPTER__ASPECT:
-			case CorePackage.ADAPTER__ADAPT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ASPECT:
+			case SmartAdapters4DiVAPackage.ADAPTER__ADAPT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -188,37 +188,37 @@ public class AdapterItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.ADAPTER__ASPECT,
-				 CoreFactory.eINSTANCE.createAspect()));
+				(SmartAdapters4DiVAPackage.Literals.ADAPTER__ASPECT,
+				 SmartAdapters4DiVAFactory.eINSTANCE.createAspect()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.ADAPTER__ADAPT,
-				 CoreFactory.eINSTANCE.createmakeUnique()));
+				(SmartAdapters4DiVAPackage.Literals.ADAPTER__ADAPT,
+				 SmartAdapters4DiVAFactory.eINSTANCE.createmakeUnique()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.ADAPTER__ADAPT,
+				(SmartAdapters4DiVAPackage.Literals.ADAPTER__ADAPT,
 				 AdaptationsFactory.eINSTANCE.createSetruntimeSystem()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.ADAPTER__ADAPT,
+				(SmartAdapters4DiVAPackage.Literals.ADAPTER__ADAPT,
 				 AdaptationsFactory.eINSTANCE.createSetruntimeinstanceComponentInstance()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.ADAPTER__ADAPT,
+				(SmartAdapters4DiVAPackage.Literals.ADAPTER__ADAPT,
 				 AdaptationsFactory.eINSTANCE.createSetruntimeinstancePrimitiveInstance()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.ADAPTER__ADAPT,
+				(SmartAdapters4DiVAPackage.Literals.ADAPTER__ADAPT,
 				 AdaptationsFactory.eINSTANCE.createSetruntimeinstanceCompositeInstance()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.ADAPTER__ADAPT,
+				(SmartAdapters4DiVAPackage.Literals.ADAPTER__ADAPT,
 				 AdaptationsFactory.eINSTANCE.createSetruntimeinstanceTransmissionBinding()));
 	}
 
