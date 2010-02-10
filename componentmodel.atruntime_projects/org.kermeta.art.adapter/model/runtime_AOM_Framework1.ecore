@@ -158,7 +158,7 @@
           <eStructuralFeatures xsi:type="ecore:EReference" name="refserver" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/type/Port"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refserverInstance"
               eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refId" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String"/>
         </eClassifiers>
       </eSubpackages>
     </eSubpackages>
