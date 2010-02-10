@@ -652,7 +652,7 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 		initEReference(getSetruntimeinstanceTransmissionBinding_Refclient(), theTypePackage.getPort(), null, "refclient", null, 0, 1, SetruntimeinstanceTransmissionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceTransmissionBinding_Refserver(), theTypePackage.getPort(), null, "refserver", null, 0, 1, SetruntimeinstanceTransmissionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceTransmissionBinding_RefserverInstance(), theInstancePackage.getComponentInstance(), null, "refserverInstance", null, 0, 1, SetruntimeinstanceTransmissionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceTransmissionBinding_RefId(), ecorePackage.getEString(), "refId", null, 0, 1, SetruntimeinstanceTransmissionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetruntimeinstanceTransmissionBinding_RefId(), theArtPatternPackage.getString(), "refId", null, 0, 1, SetruntimeinstanceTransmissionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create annotations
 		// kermeta

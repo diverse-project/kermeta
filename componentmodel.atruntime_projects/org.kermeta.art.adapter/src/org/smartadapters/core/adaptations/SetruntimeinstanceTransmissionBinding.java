@@ -149,7 +149,7 @@ public interface SetruntimeinstanceTransmissionBinding extends setAdaptation {
 	 * @return the value of the '<em>Ref Id</em>' attribute.
 	 * @see #setRefId(String)
 	 * @see org.smartadapters.core.adaptations.AdaptationsPackage#getSetruntimeinstanceTransmissionBinding_RefId()
-	 * @model
+	 * @model dataType="pattern.art.String"
 	 * @generated
 	 */
 	String getRefId();
