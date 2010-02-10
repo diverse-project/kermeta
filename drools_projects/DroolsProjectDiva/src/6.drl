@@ -23,44 +23,44 @@ m.put("callbackServerPortRole",$s7);
 	 list.add(m);
  art.System s0 = art.ArtFactory.eINSTANCE.createSystem();
 art.instance.CompositeInstance s1 = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
-art.instance.PrimitiveInstance s2 = null;
+art.instance.PrimitiveInstance s2 = (art.instance.PrimitiveInstance) uniqueobjects.get("s2");
 if (uniqueobjects.get("s2")==null){
 s2 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
 uniqueobjects.put("s2",s2);
 }
-art.instance.TransmissionBinding s3 = null;
+art.instance.TransmissionBinding s3 = (art.instance.TransmissionBinding) uniqueobjects.get("s3");
 if (uniqueobjects.get("s3")==null){
 s3 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
 uniqueobjects.put("s3",s3);
 }
 art.instance.TransmissionBinding s4 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
-art.implem.OSGiComponent s5 = null;
+art.implem.OSGiComponent s5 = (art.implem.OSGiComponent) uniqueobjects.get("s5");
 if (uniqueobjects.get("s5")==null){
 s5 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
 uniqueobjects.put("s5",s5);
 }
-art.instance.PrimitiveInstance s6 = null;
+art.instance.PrimitiveInstance s6 = (art.instance.PrimitiveInstance) uniqueobjects.get("s6");
 if (uniqueobjects.get("s6")==null){
 s6 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
 uniqueobjects.put("s6",s6);
 }
-art.instance.TransmissionBinding s7 = null;
+art.instance.TransmissionBinding s7 = (art.instance.TransmissionBinding) uniqueobjects.get("s7");
 if (uniqueobjects.get("s7")==null){
 s7 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
 uniqueobjects.put("s7",s7);
 }
 art.instance.TransmissionBinding s8 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
-art.implem.OSGiComponent s9 = null;
+art.implem.OSGiComponent s9 = (art.implem.OSGiComponent) uniqueobjects.get("s9");
 if (uniqueobjects.get("s9")==null){
 s9 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
 uniqueobjects.put("s9",s9);
 }
-art.instance.PrimitiveInstance s10 = null;
+art.instance.PrimitiveInstance s10 = (art.instance.PrimitiveInstance) uniqueobjects.get("s10");
 if (uniqueobjects.get("s10")==null){
 s10 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
 uniqueobjects.put("s10",s10);
 }
-art.implem.OSGiComponent s11 = null;
+art.implem.OSGiComponent s11 = (art.implem.OSGiComponent) uniqueobjects.get("s11");
 if (uniqueobjects.get("s11")==null){
 s11 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
 uniqueobjects.put("s11",s11);
@@ -68,47 +68,47 @@ uniqueobjects.put("s11",s11);
 art.instance.PrimitiveInstance s12 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
 art.instance.TransmissionBinding s13 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
 art.instance.TransmissionBinding s14 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
-art.type.FunctionalService s15 = null;
+art.type.FunctionalService s15 = (art.type.FunctionalService) uniqueobjects.get("s15");
 if (uniqueobjects.get("s15")==null){
 s15 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
 uniqueobjects.put("s15",s15);
 }
-art.type.FunctionalService s16 = null;
+art.type.FunctionalService s16 = (art.type.FunctionalService) uniqueobjects.get("s16");
 if (uniqueobjects.get("s16")==null){
 s16 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
 uniqueobjects.put("s16",s16);
 }
-art.type.FunctionalService s17 = null;
+art.type.FunctionalService s17 = (art.type.FunctionalService) uniqueobjects.get("s17");
 if (uniqueobjects.get("s17")==null){
 s17 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
 uniqueobjects.put("s17",s17);
 }
-art.type.PrimitiveType s18 = null;
+art.type.PrimitiveType s18 = (art.type.PrimitiveType) uniqueobjects.get("s18");
 if (uniqueobjects.get("s18")==null){
 s18 = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
 uniqueobjects.put("s18",s18);
 }
-art.type.Port s19 = null;
+art.type.Port s19 = (art.type.Port) uniqueobjects.get("s19");
 if (uniqueobjects.get("s19")==null){
 s19 = art.type.TypeFactory.eINSTANCE.createPort();
 uniqueobjects.put("s19",s19);
 }
-art.type.Port s20 = null;
+art.type.Port s20 = (art.type.Port) uniqueobjects.get("s20");
 if (uniqueobjects.get("s20")==null){
 s20 = art.type.TypeFactory.eINSTANCE.createPort();
 uniqueobjects.put("s20",s20);
 }
-art.type.Port s21 = null;
+art.type.Port s21 = (art.type.Port) uniqueobjects.get("s21");
 if (uniqueobjects.get("s21")==null){
 s21 = art.type.TypeFactory.eINSTANCE.createPort();
 uniqueobjects.put("s21",s21);
 }
-art.type.PrimitiveType s22 = null;
+art.type.PrimitiveType s22 = (art.type.PrimitiveType) uniqueobjects.get("s22");
 if (uniqueobjects.get("s22")==null){
 s22 = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
 uniqueobjects.put("s22",s22);
 }
-art.type.Port s23 = null;
+art.type.Port s23 = (art.type.Port) uniqueobjects.get("s23");
 if (uniqueobjects.get("s23")==null){
 s23 = art.type.TypeFactory.eINSTANCE.createPort();
 uniqueobjects.put("s23",s23);

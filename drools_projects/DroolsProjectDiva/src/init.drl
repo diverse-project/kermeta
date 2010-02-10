@@ -1,0 +1,7 @@
+
+rule "All components that have a port Log"
+when
+    eval(true)
+then    
+end
+

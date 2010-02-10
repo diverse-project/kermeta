@@ -24,45 +24,67 @@ import art.instance.ComponentInstance;
 public class Test {
 
 	
-	private static System s;
 	private org.eclipse.emf.ecore.resource.Resource resource;
 	private KnowledgeBase kbase;
+	private long start;
+	private long end;
 
 
 	public static void main(String[] args) {
 		
 		Test t = new Test();
-		s = t.loadArtModel("/home/barais/workspaces/divaDrools/DroolsGenerator/base/thales.base.art");
-		long start = java.lang.System.currentTimeMillis();
-		t.init();
-		t.process("1.drl");
-		t.process("2.drl");
-		t.process("3.drl");
-		t.process("4.drl");
-		t.process("5.drl");
-		t.process("6.drl");
-		long end = java.lang.System.currentTimeMillis();
+		t.run();
+	}
+	
+	public void run(){
+		this.loadArtModel("/home/barais/workspaces/divaDrools/DroolsGenerator/base/thales.base.art");
+		this.init();
+		start = java.lang.System.currentTimeMillis();
+		this.process("1.drl");
+		this.process("2.drl");
+		this.process("3.drl");
+		this.process("4.drl");
+		this.process("5.drl");
+		this.process("6.drl");
+		end = java.lang.System.currentTimeMillis();
 		java.lang.System.err.println("Execution time was "+(end-start)+" ms.");
 		
-		t.saveArtModel("/home/barais/workspaces/divaDrools/DroolsGenerator/base/thales.base1.art",t.resource);
-		
+		this.saveArtModel("/home/barais/workspaces/divaDrools/DroolsGenerator/base/thales.base1.art",this.resource);
+
 	}
 	
 	void init(){
 		
 		kbase = KnowledgeBaseFactory.newKnowledgeBase();
-	}
-	
-	void process(String drl){
-		KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		kbuilder.add( ResourceFactory.newClassPathResource( drl, getClass() ),
+		
+		kbuilder.add( ResourceFactory.newClassPathResource( "init.drl", getClass() ),
 		              ResourceType.DRL );
+		
 		if ( kbuilder.hasErrors() ) {
 			java.lang.System.err.println( kbuilder.getErrors().toString() );
 		}
 		kbase.getKnowledgePackages().clear();
 		kbase.addKnowledgePackages( kbuilder.getKnowledgePackages() );
+		StatelessKnowledgeSession ksession = kbase.newStatelessKnowledgeSession();
+		ksession.execute("");
+		
+		
+	}
+	
+	void process(String drl){
+		//KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		
+		kbuilder.add( ResourceFactory.newClassPathResource( drl, getClass() ),
+		              ResourceType.DRL );
+		
+		if ( kbuilder.hasErrors() ) {
+			java.lang.System.err.println( kbuilder.getErrors().toString() );
+		}
+		kbase.getKnowledgePackages().clear();
+		kbase.addKnowledgePackages( kbuilder.getKnowledgePackages() );
+		
 		
 		
 		StatelessKnowledgeSession ksession = kbase.newStatelessKnowledgeSession();
@@ -71,19 +93,6 @@ public class Test {
 		ksession.setGlobal("list", globalList);
 		java.util.Map uniqueobjects = new java.util.HashMap( );
 		ksession.setGlobal("uniqueobjects", uniqueobjects);
-		
-		
-		
-		
-		
-
-		/*List<EObject> allcontents = new ArrayList<EObject>();
-		Iterator<EObject> objs = s.eResource().getAllContents();
-		java.lang.System.err.println(s.eResource().getAllContents().getClass());
-		while(objs.hasNext()){
-			allcontents.add(objs.next());
-			
-		}*/
 		
 		ksession.execute(new TreeIterable<EObject>(resource.getAllContents()));
 		java.lang.System.err.println("Nombre de résultat trouvé "  + globalList.size());
