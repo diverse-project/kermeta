@@ -9,7 +9,8 @@ import scala._
 object PrimitiveConversion{
 	implicit def string2kermeta(x: String) = new RichString(x)	
 	implicit def boolean2kermeta(x: Boolean) = new RichBoolean(x)	
-	implicit def boolean2kermeta(x: java.lang.Boolean) : Boolean = x.booleanValue()
+	implicit def boolean2javaboolean(x: java.lang.Boolean) : Boolean = x.booleanValue()
+	implicit def javaboolean2kermeta(x: java.lang.Boolean) = new RichJavaBoolean(x)
 	implicit def iterator2kermeta(x: java.util.Iterator[_])= new RichIterator(x)
 
 	implicit def class2kermetaclass(x: Class[_]) = new RichClass(x)	
@@ -108,6 +109,34 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
 
 	
 }
+
+class RichJavaBoolean (value: java.lang.Boolean) extends RichValueType[Boolean] {
+		
+	def isVoid() :Boolean={return null.asInstanceOf[Boolean].equals(value)}
+
+	def not() :Boolean={return !value.booleanValue}
+	def xor(other : Boolean) :Boolean={(value.booleanValue || other) && !(value.booleanValue && other)}
+	//override def equals(other : Object) :Boolean={return true}
+	def or(other : Boolean) :Boolean={value.booleanValue || other} 
+	def nand(other : Boolean) :Boolean={!(value.booleanValue && other)}
+	def implies(other : Boolean) :Boolean={true}
+	override def toString() :java.lang.String={
+	    if (value.booleanValue){
+	    	return "true";
+	    }
+	    else{ 
+	     return "false";
+	    }
+	    }
+	def and(other : Boolean) :Boolean={value.booleanValue && other}
+	def toBoolean() : Boolean = {value.booleanValue}
+	def andThen(func : Boolean => Boolean):Boolean ={ if (value.booleanValue) {return func(value.booleanValue) }else return false; }
+	def orElse(func : Boolean => Boolean):Boolean ={ if (!value.booleanValue) {return func(value.booleanValue)}else return true; }
+
+	
+}
+
+
 abstract class RichNumeric[G]  extends Comparable[G]{}
 
 class RichInteger(value: Int)  extends RichNumeric[Int] {

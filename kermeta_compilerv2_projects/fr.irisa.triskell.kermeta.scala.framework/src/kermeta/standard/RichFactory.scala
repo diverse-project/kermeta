@@ -7,8 +7,9 @@ object RichFactory {
  def createString : String = { new String }
  def createDouble : Double = { 0.0 }
  def createInteger : Int = { 0 }
- def createBoolean : Boolean = { true }
+ def createBoolean : java.lang.Boolean = { true }
  def createCharacter : Char = { return ' ' }
+ def isVoid(o:Any) : java.lang.Boolean = { return o==null }
 }
 
  
