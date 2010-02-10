@@ -100,6 +100,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 			case "isKindOf" => {generateTarget(res);res.append(".isInstanceOf");generateParam(res,"[","]")}
 			case "asKindOf" => {generateTarget(res);res.append(".asInstanceOf");generateParam(res,"[","]")}
 			case "isInstanceOf" => {generateTarget(res);res.append(".isInstanceOf");generateParam(res,"[","]")}
+			case "isVoid" => {res.append("kermeta.standard.RichFactory.isVoid("); generateTarget(res);res.append(")");}
 			case "new" => generateNew(res)
 			case _ if(this.getTarget != null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateTarget(res);res.append(".");generateOperationCall(res);generateParam(res,"(",")")}
 			case _ if(this.getTarget == null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateName(res);generateParam(res,"(",")") }
