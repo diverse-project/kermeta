@@ -217,31 +217,13 @@ public interface AdaptationsPackage extends EPackage {
 	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFBINDING = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Refcontroller Desc</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFCONTROLLER_DESC = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Refcontent Desc</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFCONTENT_DESC = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 7;
-
-	/**
 	 * The feature id for the '<em><b>Refname</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFNAME = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 8;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFNAME = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Setruntimeinstance Component Instance</em>' class.
@@ -250,7 +232,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE_FEATURE_COUNT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 9;
+	int SETRUNTIMEINSTANCE_COMPONENT_INSTANCE_FEATURE_COUNT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.smartadapters.core.adaptations.impl.SetruntimeinstancePrimitiveInstanceImpl <em>Setruntimeinstance Primitive Instance</em>}' class.
@@ -326,31 +308,13 @@ public interface AdaptationsPackage extends EPackage {
 	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFBINDING = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Refcontroller Desc</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTROLLER_DESC = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Refcontent Desc</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTENT_DESC = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 7;
-
-	/**
 	 * The feature id for the '<em><b>Refname</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFNAME = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 8;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFNAME = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Setruntimeinstance Primitive Instance</em>' class.
@@ -359,7 +323,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE_FEATURE_COUNT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 9;
+	int SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE_FEATURE_COUNT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.smartadapters.core.adaptations.impl.SetruntimeinstanceCompositeInstanceImpl <em>Setruntimeinstance Composite Instance</em>}' class.
@@ -453,31 +417,13 @@ public interface AdaptationsPackage extends EPackage {
 	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFBINDING = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Refcontroller Desc</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTROLLER_DESC = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Refcontent Desc</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTENT_DESC = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 9;
-
-	/**
 	 * The feature id for the '<em><b>Refname</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFNAME = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 10;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFNAME = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Setruntimeinstance Composite Instance</em>' class.
@@ -486,7 +432,7 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE_FEATURE_COUNT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 11;
+	int SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE_FEATURE_COUNT = SmartAdapters4DiVAPackage.SET_ADAPTATION_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.smartadapters.core.adaptations.impl.SetruntimeinstanceTransmissionBindingImpl <em>Setruntimeinstance Transmission Binding</em>}' class.
@@ -715,28 +661,6 @@ public interface AdaptationsPackage extends EPackage {
 	EReference getSetruntimeinstanceComponentInstance_Refbinding();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefcontrollerDesc <em>Refcontroller Desc</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Refcontroller Desc</em>'.
-	 * @see org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefcontrollerDesc()
-	 * @see #getSetruntimeinstanceComponentInstance()
-	 * @generated
-	 */
-	EAttribute getSetruntimeinstanceComponentInstance_RefcontrollerDesc();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefcontentDesc <em>Refcontent Desc</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Refcontent Desc</em>'.
-	 * @see org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefcontentDesc()
-	 * @see #getSetruntimeinstanceComponentInstance()
-	 * @generated
-	 */
-	EAttribute getSetruntimeinstanceComponentInstance_RefcontentDesc();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefname <em>Refname</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -822,28 +746,6 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSetruntimeinstancePrimitiveInstance_Refbinding();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.smartadapters.core.adaptations.SetruntimeinstancePrimitiveInstance#getRefcontrollerDesc <em>Refcontroller Desc</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Refcontroller Desc</em>'.
-	 * @see org.smartadapters.core.adaptations.SetruntimeinstancePrimitiveInstance#getRefcontrollerDesc()
-	 * @see #getSetruntimeinstancePrimitiveInstance()
-	 * @generated
-	 */
-	EAttribute getSetruntimeinstancePrimitiveInstance_RefcontrollerDesc();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.smartadapters.core.adaptations.SetruntimeinstancePrimitiveInstance#getRefcontentDesc <em>Refcontent Desc</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Refcontent Desc</em>'.
-	 * @see org.smartadapters.core.adaptations.SetruntimeinstancePrimitiveInstance#getRefcontentDesc()
-	 * @see #getSetruntimeinstancePrimitiveInstance()
-	 * @generated
-	 */
-	EAttribute getSetruntimeinstancePrimitiveInstance_RefcontentDesc();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.smartadapters.core.adaptations.SetruntimeinstancePrimitiveInstance#getRefname <em>Refname</em>}'.
@@ -953,28 +855,6 @@ public interface AdaptationsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSetruntimeinstanceCompositeInstance_Refbinding();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.smartadapters.core.adaptations.SetruntimeinstanceCompositeInstance#getRefcontrollerDesc <em>Refcontroller Desc</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Refcontroller Desc</em>'.
-	 * @see org.smartadapters.core.adaptations.SetruntimeinstanceCompositeInstance#getRefcontrollerDesc()
-	 * @see #getSetruntimeinstanceCompositeInstance()
-	 * @generated
-	 */
-	EAttribute getSetruntimeinstanceCompositeInstance_RefcontrollerDesc();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.smartadapters.core.adaptations.SetruntimeinstanceCompositeInstance#getRefcontentDesc <em>Refcontent Desc</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Refcontent Desc</em>'.
-	 * @see org.smartadapters.core.adaptations.SetruntimeinstanceCompositeInstance#getRefcontentDesc()
-	 * @see #getSetruntimeinstanceCompositeInstance()
-	 * @generated
-	 */
-	EAttribute getSetruntimeinstanceCompositeInstance_RefcontentDesc();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.smartadapters.core.adaptations.SetruntimeinstanceCompositeInstance#getRefname <em>Refname</em>}'.
@@ -1191,22 +1071,6 @@ public interface AdaptationsPackage extends EPackage {
 		EReference SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFBINDING = eINSTANCE.getSetruntimeinstanceComponentInstance_Refbinding();
 
 		/**
-		 * The meta object literal for the '<em><b>Refcontroller Desc</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFCONTROLLER_DESC = eINSTANCE.getSetruntimeinstanceComponentInstance_RefcontrollerDesc();
-
-		/**
-		 * The meta object literal for the '<em><b>Refcontent Desc</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFCONTENT_DESC = eINSTANCE.getSetruntimeinstanceComponentInstance_RefcontentDesc();
-
-		/**
 		 * The meta object literal for the '<em><b>Refname</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1271,22 +1135,6 @@ public interface AdaptationsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFBINDING = eINSTANCE.getSetruntimeinstancePrimitiveInstance_Refbinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Refcontroller Desc</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTROLLER_DESC = eINSTANCE.getSetruntimeinstancePrimitiveInstance_RefcontrollerDesc();
-
-		/**
-		 * The meta object literal for the '<em><b>Refcontent Desc</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTENT_DESC = eINSTANCE.getSetruntimeinstancePrimitiveInstance_RefcontentDesc();
 
 		/**
 		 * The meta object literal for the '<em><b>Refname</b></em>' attribute feature.
@@ -1369,22 +1217,6 @@ public interface AdaptationsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFBINDING = eINSTANCE.getSetruntimeinstanceCompositeInstance_Refbinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Refcontroller Desc</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTROLLER_DESC = eINSTANCE.getSetruntimeinstanceCompositeInstance_RefcontrollerDesc();
-
-		/**
-		 * The meta object literal for the '<em><b>Refcontent Desc</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTENT_DESC = eINSTANCE.getSetruntimeinstanceCompositeInstance_RefcontentDesc();
 
 		/**
 		 * The meta object literal for the '<em><b>Refname</b></em>' attribute feature.

@@ -31,8 +31,6 @@ import pattern.art.type.ComponentType;
  *   <li>{@link org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefsuperComponent <em>Refsuper Component</em>}</li>
  *   <li>{@link org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefattribute <em>Refattribute</em>}</li>
  *   <li>{@link org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefbinding <em>Refbinding</em>}</li>
- *   <li>{@link org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefcontrollerDesc <em>Refcontroller Desc</em>}</li>
- *   <li>{@link org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefcontentDesc <em>Refcontent Desc</em>}</li>
  *   <li>{@link org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefname <em>Refname</em>}</li>
  * </ul>
  * </p>
@@ -178,60 +176,6 @@ public interface SetruntimeinstanceComponentInstance extends setAdaptation {
 	 * @generated
 	 */
 	EList<TransmissionBinding> getRefbinding();
-
-	/**
-	 * Returns the value of the '<em><b>Refcontroller Desc</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Refcontroller Desc</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Refcontroller Desc</em>' attribute.
-	 * @see #setRefcontrollerDesc(String)
-	 * @see org.smartadapters.core.adaptations.AdaptationsPackage#getSetruntimeinstanceComponentInstance_RefcontrollerDesc()
-	 * @model dataType="pattern.art.String"
-	 *        annotation="kermeta isComposite='false'"
-	 * @generated
-	 */
-	String getRefcontrollerDesc();
-
-	/**
-	 * Sets the value of the '{@link org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefcontrollerDesc <em>Refcontroller Desc</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Refcontroller Desc</em>' attribute.
-	 * @see #getRefcontrollerDesc()
-	 * @generated
-	 */
-	void setRefcontrollerDesc(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Refcontent Desc</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Refcontent Desc</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Refcontent Desc</em>' attribute.
-	 * @see #setRefcontentDesc(String)
-	 * @see org.smartadapters.core.adaptations.AdaptationsPackage#getSetruntimeinstanceComponentInstance_RefcontentDesc()
-	 * @model dataType="pattern.art.String"
-	 *        annotation="kermeta isComposite='false'"
-	 * @generated
-	 */
-	String getRefcontentDesc();
-
-	/**
-	 * Sets the value of the '{@link org.smartadapters.core.adaptations.SetruntimeinstanceComponentInstance#getRefcontentDesc <em>Refcontent Desc</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Refcontent Desc</em>' attribute.
-	 * @see #getRefcontentDesc()
-	 * @generated
-	 */
-	void setRefcontentDesc(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Refname</b></em>' attribute.

@@ -47,8 +47,6 @@ import pattern.art.type.ComponentType;
  *   <li>{@link org.smartadapters.core.adaptations.impl.SetruntimeinstanceCompositeInstanceImpl#getRefsuperComponent <em>Refsuper Component</em>}</li>
  *   <li>{@link org.smartadapters.core.adaptations.impl.SetruntimeinstanceCompositeInstanceImpl#getRefattribute <em>Refattribute</em>}</li>
  *   <li>{@link org.smartadapters.core.adaptations.impl.SetruntimeinstanceCompositeInstanceImpl#getRefbinding <em>Refbinding</em>}</li>
- *   <li>{@link org.smartadapters.core.adaptations.impl.SetruntimeinstanceCompositeInstanceImpl#getRefcontrollerDesc <em>Refcontroller Desc</em>}</li>
- *   <li>{@link org.smartadapters.core.adaptations.impl.SetruntimeinstanceCompositeInstanceImpl#getRefcontentDesc <em>Refcontent Desc</em>}</li>
  *   <li>{@link org.smartadapters.core.adaptations.impl.SetruntimeinstanceCompositeInstanceImpl#getRefname <em>Refname</em>}</li>
  * </ul>
  * </p>
@@ -145,46 +143,6 @@ public class SetruntimeinstanceCompositeInstanceImpl extends setAdaptationImpl i
 	 * @ordered
 	 */
 	protected EList<TransmissionBinding> refbinding;
-
-	/**
-	 * The default value of the '{@link #getRefcontrollerDesc() <em>Refcontroller Desc</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRefcontrollerDesc()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String REFCONTROLLER_DESC_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getRefcontrollerDesc() <em>Refcontroller Desc</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRefcontrollerDesc()
-	 * @generated
-	 * @ordered
-	 */
-	protected String refcontrollerDesc = REFCONTROLLER_DESC_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getRefcontentDesc() <em>Refcontent Desc</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRefcontentDesc()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String REFCONTENT_DESC_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getRefcontentDesc() <em>Refcontent Desc</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRefcontentDesc()
-	 * @generated
-	 * @ordered
-	 */
-	protected String refcontentDesc = REFCONTENT_DESC_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getRefname() <em>Refname</em>}' attribute.
@@ -413,48 +371,6 @@ public class SetruntimeinstanceCompositeInstanceImpl extends setAdaptationImpl i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getRefcontrollerDesc() {
-		return refcontrollerDesc;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRefcontrollerDesc(String newRefcontrollerDesc) {
-		String oldRefcontrollerDesc = refcontrollerDesc;
-		refcontrollerDesc = newRefcontrollerDesc;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTROLLER_DESC, oldRefcontrollerDesc, refcontrollerDesc));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getRefcontentDesc() {
-		return refcontentDesc;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRefcontentDesc(String newRefcontentDesc) {
-		String oldRefcontentDesc = refcontentDesc;
-		refcontentDesc = newRefcontentDesc;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTENT_DESC, oldRefcontentDesc, refcontentDesc));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getRefname() {
 		return refname;
 	}
@@ -498,10 +414,6 @@ public class SetruntimeinstanceCompositeInstanceImpl extends setAdaptationImpl i
 				return getRefattribute();
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFBINDING:
 				return getRefbinding();
-			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTROLLER_DESC:
-				return getRefcontrollerDesc();
-			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTENT_DESC:
-				return getRefcontentDesc();
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFNAME:
 				return getRefname();
 		}
@@ -545,12 +457,6 @@ public class SetruntimeinstanceCompositeInstanceImpl extends setAdaptationImpl i
 				getRefbinding().clear();
 				getRefbinding().addAll((Collection<? extends TransmissionBinding>)newValue);
 				return;
-			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTROLLER_DESC:
-				setRefcontrollerDesc((String)newValue);
-				return;
-			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTENT_DESC:
-				setRefcontentDesc((String)newValue);
-				return;
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFNAME:
 				setRefname((String)newValue);
 				return;
@@ -590,12 +496,6 @@ public class SetruntimeinstanceCompositeInstanceImpl extends setAdaptationImpl i
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFBINDING:
 				getRefbinding().clear();
 				return;
-			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTROLLER_DESC:
-				setRefcontrollerDesc(REFCONTROLLER_DESC_EDEFAULT);
-				return;
-			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTENT_DESC:
-				setRefcontentDesc(REFCONTENT_DESC_EDEFAULT);
-				return;
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFNAME:
 				setRefname(REFNAME_EDEFAULT);
 				return;
@@ -627,10 +527,6 @@ public class SetruntimeinstanceCompositeInstanceImpl extends setAdaptationImpl i
 				return refattribute != null && !refattribute.isEmpty();
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFBINDING:
 				return refbinding != null && !refbinding.isEmpty();
-			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTROLLER_DESC:
-				return REFCONTROLLER_DESC_EDEFAULT == null ? refcontrollerDesc != null : !REFCONTROLLER_DESC_EDEFAULT.equals(refcontrollerDesc);
-			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTENT_DESC:
-				return REFCONTENT_DESC_EDEFAULT == null ? refcontentDesc != null : !REFCONTENT_DESC_EDEFAULT.equals(refcontentDesc);
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFNAME:
 				return REFNAME_EDEFAULT == null ? refname != null : !REFNAME_EDEFAULT.equals(refname);
 		}
@@ -649,10 +545,6 @@ public class SetruntimeinstanceCompositeInstanceImpl extends setAdaptationImpl i
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (refstate: ");
 		result.append(refstate);
-		result.append(", refcontrollerDesc: ");
-		result.append(refcontrollerDesc);
-		result.append(", refcontentDesc: ");
-		result.append(refcontentDesc);
 		result.append(", refname: ");
 		result.append(refname);
 		result.append(')');

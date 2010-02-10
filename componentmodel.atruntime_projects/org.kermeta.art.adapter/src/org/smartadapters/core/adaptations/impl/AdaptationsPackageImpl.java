@@ -276,26 +276,8 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSetruntimeinstanceComponentInstance_RefcontrollerDesc() {
-		return (EAttribute)setruntimeinstanceComponentInstanceEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSetruntimeinstanceComponentInstance_RefcontentDesc() {
-		return (EAttribute)setruntimeinstanceComponentInstanceEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getSetruntimeinstanceComponentInstance_Refname() {
-		return (EAttribute)setruntimeinstanceComponentInstanceEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)setruntimeinstanceComponentInstanceEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -366,26 +348,8 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSetruntimeinstancePrimitiveInstance_RefcontrollerDesc() {
-		return (EAttribute)setruntimeinstancePrimitiveInstanceEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSetruntimeinstancePrimitiveInstance_RefcontentDesc() {
-		return (EAttribute)setruntimeinstancePrimitiveInstanceEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getSetruntimeinstancePrimitiveInstance_Refname() {
-		return (EAttribute)setruntimeinstancePrimitiveInstanceEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)setruntimeinstancePrimitiveInstanceEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -474,26 +438,8 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSetruntimeinstanceCompositeInstance_RefcontrollerDesc() {
-		return (EAttribute)setruntimeinstanceCompositeInstanceEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSetruntimeinstanceCompositeInstance_RefcontentDesc() {
-		return (EAttribute)setruntimeinstanceCompositeInstanceEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getSetruntimeinstanceCompositeInstance_Refname() {
-		return (EAttribute)setruntimeinstanceCompositeInstanceEClass.getEStructuralFeatures().get(10);
+		return (EAttribute)setruntimeinstanceCompositeInstanceEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -593,8 +539,6 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 		createEReference(setruntimeinstanceComponentInstanceEClass, SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFSUPER_COMPONENT);
 		createEReference(setruntimeinstanceComponentInstanceEClass, SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFATTRIBUTE);
 		createEReference(setruntimeinstanceComponentInstanceEClass, SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFBINDING);
-		createEAttribute(setruntimeinstanceComponentInstanceEClass, SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFCONTROLLER_DESC);
-		createEAttribute(setruntimeinstanceComponentInstanceEClass, SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFCONTENT_DESC);
 		createEAttribute(setruntimeinstanceComponentInstanceEClass, SETRUNTIMEINSTANCE_COMPONENT_INSTANCE__REFNAME);
 
 		setruntimeinstancePrimitiveInstanceEClass = createEClass(SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE);
@@ -604,8 +548,6 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 		createEReference(setruntimeinstancePrimitiveInstanceEClass, SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFSUPER_COMPONENT);
 		createEReference(setruntimeinstancePrimitiveInstanceEClass, SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFATTRIBUTE);
 		createEReference(setruntimeinstancePrimitiveInstanceEClass, SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFBINDING);
-		createEAttribute(setruntimeinstancePrimitiveInstanceEClass, SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTROLLER_DESC);
-		createEAttribute(setruntimeinstancePrimitiveInstanceEClass, SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTENT_DESC);
 		createEAttribute(setruntimeinstancePrimitiveInstanceEClass, SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFNAME);
 
 		setruntimeinstanceCompositeInstanceEClass = createEClass(SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE);
@@ -617,8 +559,6 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 		createEReference(setruntimeinstanceCompositeInstanceEClass, SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFSUPER_COMPONENT);
 		createEReference(setruntimeinstanceCompositeInstanceEClass, SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFATTRIBUTE);
 		createEReference(setruntimeinstanceCompositeInstanceEClass, SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFBINDING);
-		createEAttribute(setruntimeinstanceCompositeInstanceEClass, SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTROLLER_DESC);
-		createEAttribute(setruntimeinstanceCompositeInstanceEClass, SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFCONTENT_DESC);
 		createEAttribute(setruntimeinstanceCompositeInstanceEClass, SETRUNTIMEINSTANCE_COMPOSITE_INSTANCE__REFNAME);
 
 		setruntimeinstanceTransmissionBindingEClass = createEClass(SETRUNTIMEINSTANCE_TRANSMISSION_BINDING);
@@ -685,8 +625,6 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 		initEReference(getSetruntimeinstanceComponentInstance_RefsuperComponent(), theInstancePackage.getCompositeInstance(), null, "refsuperComponent", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceComponentInstance_Refattribute(), theInstancePackage.getValuedAttribute(), null, "refattribute", null, 0, -1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceComponentInstance_Refbinding(), theInstancePackage.getTransmissionBinding(), null, "refbinding", null, 0, -1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceComponentInstance_RefcontrollerDesc(), theArtPatternPackage.getString(), "refcontrollerDesc", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceComponentInstance_RefcontentDesc(), theArtPatternPackage.getString(), "refcontentDesc", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSetruntimeinstanceComponentInstance_Refname(), theArtPatternPackage.getString(), "refname", null, 0, 1, SetruntimeinstanceComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(setruntimeinstancePrimitiveInstanceEClass, SetruntimeinstancePrimitiveInstance.class, "SetruntimeinstancePrimitiveInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -696,8 +634,6 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 		initEReference(getSetruntimeinstancePrimitiveInstance_RefsuperComponent(), theInstancePackage.getCompositeInstance(), null, "refsuperComponent", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstancePrimitiveInstance_Refattribute(), theInstancePackage.getValuedAttribute(), null, "refattribute", null, 0, -1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstancePrimitiveInstance_Refbinding(), theInstancePackage.getTransmissionBinding(), null, "refbinding", null, 0, -1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstancePrimitiveInstance_RefcontrollerDesc(), theArtPatternPackage.getString(), "refcontrollerDesc", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstancePrimitiveInstance_RefcontentDesc(), theArtPatternPackage.getString(), "refcontentDesc", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSetruntimeinstancePrimitiveInstance_Refname(), theArtPatternPackage.getString(), "refname", null, 0, 1, SetruntimeinstancePrimitiveInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(setruntimeinstanceCompositeInstanceEClass, SetruntimeinstanceCompositeInstance.class, "SetruntimeinstanceCompositeInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -709,8 +645,6 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 		initEReference(getSetruntimeinstanceCompositeInstance_RefsuperComponent(), theInstancePackage.getCompositeInstance(), null, "refsuperComponent", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceCompositeInstance_Refattribute(), theInstancePackage.getValuedAttribute(), null, "refattribute", null, 0, -1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetruntimeinstanceCompositeInstance_Refbinding(), theInstancePackage.getTransmissionBinding(), null, "refbinding", null, 0, -1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceCompositeInstance_RefcontrollerDesc(), theArtPatternPackage.getString(), "refcontrollerDesc", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetruntimeinstanceCompositeInstance_RefcontentDesc(), theArtPatternPackage.getString(), "refcontentDesc", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSetruntimeinstanceCompositeInstance_Refname(), theArtPatternPackage.getString(), "refname", null, 0, 1, SetruntimeinstanceCompositeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(setruntimeinstanceTransmissionBindingEClass, SetruntimeinstanceTransmissionBinding.class, "SetruntimeinstanceTransmissionBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -746,18 +680,6 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 			 "isComposite", "false"
 		   });		
 		addAnnotation
-		  (getSetruntimeinstanceComponentInstance_RefcontrollerDesc(), 
-		   source, 
-		   new String[] {
-			 "isComposite", "false"
-		   });		
-		addAnnotation
-		  (getSetruntimeinstanceComponentInstance_RefcontentDesc(), 
-		   source, 
-		   new String[] {
-			 "isComposite", "false"
-		   });		
-		addAnnotation
 		  (getSetruntimeinstanceComponentInstance_Refname(), 
 		   source, 
 		   new String[] {
@@ -770,18 +692,6 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 			 "isComposite", "false"
 		   });		
 		addAnnotation
-		  (getSetruntimeinstancePrimitiveInstance_RefcontrollerDesc(), 
-		   source, 
-		   new String[] {
-			 "isComposite", "false"
-		   });		
-		addAnnotation
-		  (getSetruntimeinstancePrimitiveInstance_RefcontentDesc(), 
-		   source, 
-		   new String[] {
-			 "isComposite", "false"
-		   });		
-		addAnnotation
 		  (getSetruntimeinstancePrimitiveInstance_Refname(), 
 		   source, 
 		   new String[] {
@@ -789,18 +699,6 @@ public class AdaptationsPackageImpl extends EPackageImpl implements AdaptationsP
 		   });		
 		addAnnotation
 		  (getSetruntimeinstanceCompositeInstance_Refstate(), 
-		   source, 
-		   new String[] {
-			 "isComposite", "false"
-		   });		
-		addAnnotation
-		  (getSetruntimeinstanceCompositeInstance_RefcontrollerDesc(), 
-		   source, 
-		   new String[] {
-			 "isComposite", "false"
-		   });		
-		addAnnotation
-		  (getSetruntimeinstanceCompositeInstance_RefcontentDesc(), 
 		   source, 
 		   new String[] {
 			 "isComposite", "false"

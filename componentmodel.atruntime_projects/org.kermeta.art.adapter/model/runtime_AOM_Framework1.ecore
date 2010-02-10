@@ -96,17 +96,6 @@
               eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refbinding" upperBound="-1"
               eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontrollerDesc"
-              eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontentDesc" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
@@ -129,17 +118,6 @@
               eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refbinding" upperBound="-1"
               eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontrollerDesc"
-              eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontentDesc" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
@@ -166,17 +144,6 @@
               eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/ValuedAttribute"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refbinding" upperBound="-1"
               eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontrollerDesc"
-              eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refcontentDesc" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
-            <eAnnotations source="kermeta">
-              <details key="isComposite" value="false"/>
-            </eAnnotations>
-          </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>

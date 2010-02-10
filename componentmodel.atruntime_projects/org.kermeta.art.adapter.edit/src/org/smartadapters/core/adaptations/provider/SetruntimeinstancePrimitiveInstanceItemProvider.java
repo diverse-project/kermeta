@@ -72,8 +72,6 @@ public class SetruntimeinstancePrimitiveInstanceItemProvider
 			addRefsuperComponentPropertyDescriptor(object);
 			addRefattributePropertyDescriptor(object);
 			addRefbindingPropertyDescriptor(object);
-			addRefcontrollerDescPropertyDescriptor(object);
-			addRefcontentDescPropertyDescriptor(object);
 			addRefnamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -212,50 +210,6 @@ public class SetruntimeinstancePrimitiveInstanceItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Refcontroller Desc feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addRefcontrollerDescPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SetruntimeinstancePrimitiveInstance_refcontrollerDesc_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SetruntimeinstancePrimitiveInstance_refcontrollerDesc_feature", "_UI_SetruntimeinstancePrimitiveInstance_type"),
-				 AdaptationsPackage.Literals.SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTROLLER_DESC,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Refcontent Desc feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addRefcontentDescPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SetruntimeinstancePrimitiveInstance_refcontentDesc_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SetruntimeinstancePrimitiveInstance_refcontentDesc_feature", "_UI_SetruntimeinstancePrimitiveInstance_type"),
-				 AdaptationsPackage.Literals.SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTENT_DESC,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Refname feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -315,8 +269,6 @@ public class SetruntimeinstancePrimitiveInstanceItemProvider
 
 		switch (notification.getFeatureID(SetruntimeinstancePrimitiveInstance.class)) {
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFSTATE:
-			case AdaptationsPackage.SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTROLLER_DESC:
-			case AdaptationsPackage.SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFCONTENT_DESC:
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_PRIMITIVE_INSTANCE__REFNAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
