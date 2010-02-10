@@ -81,17 +81,18 @@
     <para>This tutorial gives an overview of many concepts used through KerMeta project creation.
       You can retrieve all the steps defined in the Manual Process to build a DSL on which you can
       iterate in order to progress in your development. Following this tutorial should give you the
-      knowledge : to create a meta model, run configurations, add pre and post conditions and add
-      behaviour on it. To cover all this features, we decided to start from an existing example.
-      Because it is a complete KerMeta project, you should use it as a reference guide. This example
-      is about the finite state machine which acronym is FSM. Firstly, a section explains how to
-      load files of the example in your Eclipse workspace. The next section is dedicated to the
-      finite state machine we want to model. You will have access to every files. Then we present
-      the features presented above. Moreover, we present here examples of graphical editors but this
-      step comes only when the metamodel is stabilized. In this tutorial we will have access to the
-      base project in order to follow it (cf section <link linkend="InstallFSMProject">Install FSM
-        project</link>) . You can have also have access of the solution of this tutorial ( cf
-      section ) </para>
+      knowledge : to create a meta model, check its invariants, run configurations, add pre and post
+      conditions and add behaviour on it. To cover all this features, we decided to start from an
+      existing example. Because it is a complete KerMeta project, you should use it as a reference
+      guide. This example is about the finite state machine which acronym is FSM. Firstly, a section
+      explains how to load files of the example in your Eclipse workspace. The next section is
+      dedicated to the finite state machine we want to model. You will have access to every files.
+      Then we present the features presented above. Moreover, we present here examples of graphical
+      editors but this step comes only when the metamodel is stabilized. In this tutorial we will
+      have access to the base project in order to follow it (cf section <link
+        linkend="InstallFSMTutorial">Install FSM project</link>) . You can have also have access of
+      the solution of this tutorial ( cf section <link linkend="InstallTutorialSolution">Install the
+        tutorial 's solution</link> ) </para>
   </chapter>
   <chapter>
     <title>Installation</title>
@@ -118,44 +119,47 @@
     </section>
     <section id="InstallFSMProject">
       <title> Install FSM project</title>
-      <para>We start from the main Eclipse window.</para>
-      <figure>
-        <title> Eclipse window</title>
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="KerMeta-The-FSM-tutorial_figures/main_window.png" width="20.00cm"
-              depth="18.02cm"/>
-          </imageobject>
-        </mediaobject>
-      </figure>
-      <para>Select : "File" &gt; "New"&gt;&gt; "Example..."&gt;&gt;&gt; A window appears. You are
-        asked to choose a wizard for project creation. At the bottom of the list, you will find
-        "Kermeta samples" item. Browse it and select "FSM Demo". The "Finish" button has been
-        enabled. Click on it.</para>
-      <figure>
-        <title> Wizard for selection</title>
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="KerMeta-The-FSM-tutorial_figures/wizard_selection.png"/>
-          </imageobject>
-        </mediaobject>
-      </figure>
-      <para>Thanks to the wizard creation project, a project named
-        "fr.irisa.triskell.kermeta.samples.fsm.demo" appeared on the left side of Eclipse.</para>
-      <figure>
-        <title> View of the example project</title>
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="KerMeta-The-FSM-tutorial_figures/main_window_fsm_loaded.png"
-              width="20.00cm" depth="18.02cm"/>
-          </imageobject>
-        </mediaobject>
-      </figure>
-      <para> </para>
-      <section>
+      <section id="InstallFSMTutorial">
+        <title> Install FSM tutorial </title>
+        <para>We start from the main Eclipse window.</para>
+        <figure>
+          <title> Eclipse window</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-The-FSM-tutorial_figures/main_window.png" width="20.00cm"
+                depth="18.02cm"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para>Select : "File" &gt; "New"&gt;&gt; "Example..."&gt;&gt;&gt; A window appears. You are
+          asked to choose a wizard for project creation. At the bottom of the list, you will find
+          "Kermeta samples" item. Browse it and select "FSM Tutorial Demo". The "Finish" button has
+          been enabled. Click on it.</para>
+        <figure>
+          <title> Wizard for selection</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-The-FSM-tutorial_figures/wizard_selection.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para>Thanks to the wizard creation project, a project named
+          "fr.irisa.triskell.kermeta.samples.fsm.demoAspect" appeared on the left side of
+          Eclipse.</para>
+        <figure>
+          <title> View of the example project</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-The-FSM-tutorial_figures/main_window_fsm_loaded.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para> </para>
+      </section>
+      <section id="InstallTutorialSolution">
         <title>Install the tutorial 's solution </title>
-        <para>If you are very pressed the solutions are available into Kermeta Samples -> FSM
-          Solutions.</para>
+        <para>If you are very pressed the solutions are available into File -> New -> Example ->
+          Kermeta Samples -> FSM Solutions.</para>
         <para> Now, you have the reference project and you can follow the tutorial.The next chapter
           presents the metamodel used in this tutorial.</para>
       </section>
@@ -181,8 +185,7 @@
       </figure>
       <para>This simple state machine can be modeled and executed easily in Kermeta. See the
         following meta-model presented in a class diagram syntax. You can retrieve this metamodel
-        named fsmStatic.ecore into
-        fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsmStatic.ecore </para>
+        named fsm.ecore into fr.irisa.triskell.kermeta.samples.fsm.demoAspect/metamodels/fsm.ecore </para>
       <figure>
         <title> FSM metamodel</title>
         <mediaobject>
@@ -202,13 +205,13 @@
           model?""</ulink> and use the EMF Sample reflexive editor to create a metamodel like in the
         following figure into the folder model. Otherwise, you can simply copy the file
         fsmStatic.ecore from <emphasis role="bold"
-          >fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsm.ecore</emphasis> to<emphasis
-          role="bold"> org.kermeta.fsm.emf/model</emphasis> folder.</para>
+          >fr.irisa.triskell.kermeta.samples.fsm.demoAspect/metamodels/fsm.ecore</emphasis>
+          to<emphasis role="bold"> org.kermeta.fsm.emf/model</emphasis> folder.</para>
       <para/>
       <para>
         <tip>
           <para> An FSM EMF editor is ever deployed into the Kermeta Eclipse. It is available in
-            File-> New -> Other -> Kermeta -> FSM Samples -> FSM Model. </para>
+            File-> New -> Other -> Kermeta -> FSM Samples -> Fsm Model. </para>
         </tip>
       </para>
       <para>At this stage of the tutorial, you should have the following metamodel: </para>
@@ -220,7 +223,7 @@
           </imageobject>
         </mediaobject>
       </figure>
-      <para> Then you can use this metamodel to create instances od models conform to it.</para>
+      <para> Then you can use this metamodel to create instances of models conform to it.</para>
     </section>
   </chapter>
   <chapter>
@@ -231,11 +234,13 @@
       <para> Like shown in the Process tutorial create a dynamic instance is an easy way to create
         an instance of a metamodel during the first development phases. To do so : <orderedlist>
           <listitem>
-            <para>Open the fsm.ecore file with the Sample Ecore Model Editor (Right click on the
-              file -> Open with -> Other -> Sample Ecore Model Editor) </para>
+            <para>Create a new folder dynamic_instance in org.eclipse.fsm.emf .Open the fsm.ecore
+              file with the Sample Ecore Model Editor (Right click on the file -> Open with -> Other
+              -> Sample Ecore Model Editor) </para>
           </listitem>
           <listitem>
-            <para>Right click on the FSM metaclass -> Create Dynamic Instance </para>
+            <para>Right click on the FSM metaclass -> Create Dynamic Instance and select the folder
+              dynamic_instance.</para>
           </listitem>
         </orderedlist></para>
       <figure id="refIllustration8">
@@ -244,6 +249,17 @@
           <imageobject>
             <imagedata fileref="KerMeta-The-FSM-tutorial_figures/create_dynamic_instance.png"
               width="9.528cm" depth="5.136cm"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para>Name your instance fsm.xmi and open it with the sample reflexive Ecore Model Editor. You
+        can add two State st1 and st2 on the FSM class and then a transition a that produce b
+        between st1 and st2 like in the following image : </para>
+      <figure id="refIllustration8_1">
+        <title> Example of dynamic instance</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-The-FSM-tutorial_figures/example_dynamic_instance.png"/>
           </imageobject>
         </mediaobject>
       </figure>
@@ -261,8 +277,9 @@
         <para>This is the most ergonomic – but longest – way to create an instance of a meta-model.
           This method is here presented in its main lines:<orderedlist>
             <listitem>
-              <para>Create a new project and a new ecore metamodel ( cf section <link
-                  linkend="CreateFsmMetamodel">Create the fsm meta-model </link> )</para>
+              <para>Create a new project and a new ecore metamodel ( this step was ever made in the
+                section <link linkend="CreateFsmMetamodel">Create the fsm meta-model </link>
+                )</para>
             </listitem>
             <listitem>
               <para>Once the meta-model is created, it is possible to create a model for model
@@ -275,12 +292,14 @@
                         role="strong"> &gt; EMF Generator Model</emphasis>;</para>
                   </listitem>
                   <listitem>
-                    <para>Choose a name for your genmodel (<emphasis>fsm.genmodel</emphasis> is
-                      ok);</para>
+                    <para>Choose a name for your genmodel ( you can name
+                        it<emphasis>fsm.genmodel</emphasis> ) and Select Ecore model in the
+                      following wizard;</para>
                   </listitem>
                   <listitem>
-                    <para>Select <emphasis role="strong">Load from an EMF core model</emphasis>
-                      button, and find the meta-model file (<emphasis>fsm.ecore</emphasis>);</para>
+                    <para>Select <emphasis role="strong">Browse workspace</emphasis> button, and
+                      find the meta-model file (<emphasis>fsm.ecore</emphasis> into <emphasis
+                        role="italic">or.kermeta.fsm.emf/model)</emphasis>;</para>
                   </listitem>
                   <listitem>
                     <para>Select the unique package <emphasis>fsm</emphasis> and click on
@@ -296,6 +315,15 @@
                         <emphasis>/org.kermeta.fsm.emf.model/src</emphasis>, so that the EMF source
                       code is generated in a new empty project that will exclusively contain this
                       source code.</para>
+                    <figure>
+                      <title> Model Directory Property</title>
+                      <mediaobject>
+                        <imageobject>
+                          <imagedata
+                            fileref="Kermeta-The-FSM-Tutorial_figures/check_model_directory.png"/>
+                        </imageobject>
+                      </mediaobject>
+                    </figure>
                   </listitem>
                   <listitem>
                     <para>Right-click on the root node of the <emphasis>fsm.genmodel</emphasis>, and
@@ -304,7 +332,8 @@
                 </orderedlist></para>
             </listitem>
           </orderedlist></para>
-        <para>You should obtain the following plugins : </para>
+        <para>You should obtain the following plugins (if we not consider the folder
+          dynamic_instance which is not linked with the EMF editor creation) : </para>
         <para>
           <figure>
             <title>Plugins Generated with EMF</title>
@@ -324,7 +353,8 @@
           launched through the tool bar menu:</para>
         <orderedlist continuation="restarts" numeration="arabic">
           <listitem>
-            <para>In Eclipse Galileo (3.5) select Run->Run As -> Eclipse Application</para>
+            <para>In Eclipse Galileo (3.5), right click on org.kermeta.fsm.emf.editor and select
+              Run->Run As -> Eclipse Application</para>
           </listitem>
           <listitem>
             <para>Once the new eclipse application is launched, create a new General project (e.g.
@@ -335,7 +365,8 @@
           </listitem>
           <listitem>
             <para>To add elements to your model just right click on the FSM container and add new
-              Child or new Sibling like in metamodels 's creation steps;</para>
+              Child or new Sibling like in metamodels 's creation steps (cf fsm.xmi example in the
+              section <link linkend="create_model"> Dynamic Instances </link> ;</para>
           </listitem>
         </orderedlist>
         <para>
@@ -384,14 +415,14 @@
         for a complete Kermeta program </link> and copy the given template. </para>
     <para> You can start with opening the Kermeta perspective with Window->Open Perspective -> Other
       -> Kermeta and create a new Kermeta project (File -> New -> New Kermeta Project into the
-      Kermeta perspective). Name it org.kermeta.sampleSerialisation, copy the file fsmStatic.ecore
-      into metamodel folder. </para>
+      Kermeta perspective). Name it org.kermeta.fsm.serialisation, copy the file fsm.ecore into
+      metamodel folder. </para>
     <section>
       <title> Preparing a Kermeta program </title>
       <section>
         <title> Create a new KerMeta file</title>
-        <para>We want to add a new kermetéa file into the folder kermeta into
-          org.kermeta.sample.serialisation.</para>
+        <para>We want to add a new kermeta file into the folder kermeta into
+          org.kermeta.fsm.serialisation/src.</para>
         <para>
           <tip>
             <para> This sample is available in the FSM Solutions in the project
@@ -449,14 +480,14 @@
     </section>
     <section id="PackageRegistry_Presentation">
       <title> Package registry</title>
-      <para> If you want to save a model whatever you want into the workspace it is usefull to
-        register its metamodel into the EMF Package Registry. Indeed, if the meta-model is not
-        registered into the EMF Package Registry, a relative path is used to link the instance file
-        with its meta-model. So we need to register this meta model into the EMF Package Registry.
-        There is two ways to do that, deploying an EMF plugin like in the section <link
-          linkend="treeViewEditor"> Tree view editor </link> which add permanently the meta model to
-        the Eclipse's EMF Package Registry or register dynamically the meta model on it thanks to
-        the menu EPackages registration -> Register EPackages into repository.</para>
+      <para> If you want to save a model conform to a particular metamodel whatever you want into
+        the workspace it is usefull to register its metamodel into the EMF Package Registry. Indeed,
+        if the meta-model is not registered into the EMF Package Registry, a relative path is used
+        to link the instance file with its meta-model. So we need to register this meta model into
+        the EMF Package Registry. There is two ways to do that, deploying an EMF plugin like in the
+        section <link linkend="treeViewEditor"> Tree view editor </link> which add permanently the
+        meta model to the Eclipse's EMF Package Registry or register dynamically the meta model on
+        it thanks to the menu EPackages registration -> Register EPackages into repository.</para>
       <warning>
         <title> Dynamical EMF Registration is not permanent</title>
         <para> You need to register again the meta models for each new instance of Eclipse. </para>
@@ -488,15 +519,44 @@
           </imageobject>
         </mediaobject>
       </figure>
-      <para/>
+      <para>Then click on the followings icons : </para>
+      <figure id="refIllustration82">
+        <title> Kermeta icon</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-The-FSM-tutorial_figures/kermeta_corbeille.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <figure id="refIllustration83">
+        <title>Reload icon</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-The-FSM-tutorial_figures/kermeta_reload.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
     </section>
     <section>
       <title> Serialisation</title>
-      <para> The serialization permits to save and load models thanks to the persistence library.
-        For this section look at the file serialisation.kmt into
-        org.kermeta.fsm.serialisation/kermeta. </para>
+      <para> The serialisation permits to save and load models thanks to the persistence library.
+        For this three following sections copy and paste on your new file Serialisation.kmt or look
+        at the file serialisation.kmt into
+        gr.irisa.triskell.kermeta.sample.fsm.serialisation/kermeta. Create a new dynamic instance
+        for FSM named <emphasis role="bold"> Fsm_dyn_sample1.xmi</emphasis> like in the section
+          <link linkend="create_model"> Dynamic instances </link> . Add on it two states st1 et st2,
+        one transition t1 with st1 as source and st2 as target and t2 with t2 as source and t1 as
+        target. This xmi file should look like this : </para>
+      <figure id="refIllustration84">
+        <title>Fsm_dyn_sample1.xmi </title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-The-FSM-tutorial_figures/model_Fsm_dyn_sample1.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
       <section>
-        <title> Load an EMF model with Kermeta </title>
+        <title>Load an EMF model with Kermeta </title>
         <para>The following code sample load a previously created FSM model: <example>
             <title> Load an EMF model with Kermeta </title>
             <programlisting language="kermeta">
@@ -506,7 +566,7 @@
         package fsm_package;
 
         require kermeta
-         require  "../../metamodel/fsmStatic.ecore"
+         require  "../../metamodel/fsm.ecore"
          <co id="load.emfmodel.metamodelfsm.co" linkends="load.emfmodel.metamodelfsm.callout"/>
          
         using kermeta::persistence 
@@ -521,7 +581,7 @@
         // Create the repository, then the resource
          var repository : EMFRepository init EMFRepository.new
          var resource : EMFResource 
-         resource ?= repository.createResource("platform:/resource/org.kermeta.fsm.serialisation/model/Fsm_dyn_sample1.xmi", "platform:/resource/org.kermeta.fsm.serialisation/metamodel/fsmStatic.ecore")
+         resource ?= repository.createResource("platform:/resource/org.kermeta.fsm.serialisation/model/Fsm_dyn_sample1.xmi", "platform:/resource/org.kermeta.fsm.serialisation/metamodel/fsm.ecore")
          <co id="load.emfmodel.createResource.co" linkends="load.emfmodel.createResource.callout"/>
          resource.load
 
@@ -530,8 +590,8 @@
  <co id="load.emfmodel.resource.co" linkends="load.emfmodel.resource.callout"/>
 // Check that the fsm was correctly loaded
 fsm1.ownedState.each { s | stdio.writeln("-> "+s.name) 
- 		  s.outgoingTransition.each { ti | stdio.writeln( s.name +" in :" + ti.input + " " + ti.output)}
- 		 s.incomingTransition.each { to | stdio.writeln( s.name +" out :" + to.input + " " + to.output )}
+ 		  s.outgoingTransition.each { ti | stdio.writeln( "outgoing : " + " source " + ti.source.name  + " target " + ti.target.name + " input : " + ti.input +  " output :  " + ti.output)}
+ 		 s.incomingTransition.each { to | stdio.writeln( "incoming :  " + " source " + to.source.name  + " target " + to.target.name +" input : " + to.input +  " output : " + to.output )}
  		}
 end
  }      </programlisting>
@@ -563,8 +623,15 @@ end
                 </callout>
               </calloutlist>
             </para>
-          </example>
-        </para>
+          </example> You should obtain the following trace : </para>
+        <figure id="refIllustration85">
+          <title>Fsm_dyn_sample1.xmi content </title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-The-FSM-tutorial_figures/fsm_model_elements.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
       </section>
       <section>
         <title>Modify and save an EMF model with Kermeta</title>
@@ -580,6 +647,7 @@ end
 		newstate.owningFSM := fsm1
 // save fsm1 
 resource.save()</programlisting>
+        <para>A new state s_new appears on the file Fsm_dyn_sample1.xmi.</para>
         <para>It is also possible to save the modified model in a new file instead of overwriting
           the initial one by using the <literal>saveWithNewURI()</literal> method. To this end, just
           replace the last line of above code (<literal>resource.save()</literal>) by the following
@@ -596,7 +664,7 @@ resource.save()</programlisting>
         <programlisting language="kermeta">var another_resource : EMFResource
 		another_resource ?= repository.createResource(
        "platform:/resource/org.kermeta.fsm.serialisation/model/Fsm_scratch_sample.xmi",
-       "platform:/resource/org.kermeta.fsm.serialisation/metamodel/fsmStatic.ecore")
+       "platform:/resource/org.kermeta.fsm.serialisation/metamodel/fsm.ecore")
 		var fsm2 : fsm::FSM init fsm::FSM.new
 		var s0 : fsm::State init fsm::State.new
 		var s1 : fsm::State init fsm::State.new
@@ -609,9 +677,7 @@ resource.save()</programlisting>
 		t11.source := s1
 		t11.target := s1
 		fsm2.ownedState.add(s0)
-		s0.owningFSM := fsm2
 		fsm2.ownedState.add(s1)
-		s1.owningFSM := fsm2
 		s0.outgoingTransition.add(t01)
 		s1.outgoingTransition.add(t11)
 		// save the from-scratch model!
@@ -700,7 +766,6 @@ class Main
     var rep : EMFRepository init EMFRepository.new
     var theFSM : FSM init AutomatonHelper.new.loadEMFAutomaton(rep, input_automaton, "http://www.kermeta.org/fsm")
     
-    // Uncomment to check the invariant properties : WFR
     // To check all contained elements by "theFSM"
     stdio.writeln("> call of the checkAllInvariants method")
     theFSM.checkAllInvariants
@@ -723,11 +788,9 @@ class Main
       You will see the following invariant </para>
     <programlisting language="kermeta"> aspect class State{ inv invariant1 is do self.outgoingTransition.forAll{ tr1 | self.outgoingTransition.forAll{ tr2 | tr2.input.equals(tr1.input).equals(tr1.equals(tr2))}} end } </programlisting>
     <para>It means that several outgoing transitions from a state cannot have the same input. Right
-      click on the FSM Check Invariant -> Duplicate and change the new configuration's name into FSM
-      Check Invariant Error. Change the Operation Arguments to
-      platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/models/samplerunErrorInvariant.fsm
-      and click on Apply and Run. Like invariant is violated, Kermeta raises an exception. So, you
-      should obtain the following trace : <figure id="refIllustration9_2">
+      click on Aspect checj invariantsError and click on Apply and Run. This fsm model have two
+      transitions with the same input. Like invariant is violated, Kermeta raises an exception. So,
+      you should obtain the following trace : <figure id="refIllustration9_2">
         <title>Invariant error 's trace</title>
         <mediaobject>
           <imageobject>
@@ -1271,33 +1334,19 @@ post post3 of operation step of class State violated</programlisting>
           fileref="Kermeta-The-FSM-tutorial_figures/samplerun_fsm_file.png"/></para>
       <para>In this example, you use the transition c to go to s1 to s2 and produce the string v .
         the behaviour can be produced thanks to the operations run(), step() and fire() defined in
-        the last section. To run this behaviour we start by creating a new run configurations like
-        show in the section Run configurations.. Create a new Run Configuration as a Kermeta
-        Application and fill the information like below : </para>
-      <orderedlist>
-        <listitem>
-          <para><emphasis role="bold">Kermeta project</emphasis>
-            fr.irisa.triskell.kermeta.samples.fsm.demo</para>
-        </listitem>
-        <listitem>
-          <para><emphasis role="bold">Program File Location :</emphasis>
-            \fr.irisa.triskell.kermeta.samples.fsm.demo\launcher\fsmLauncher.kmt</para>
-        </listitem>
-        <listitem>
-          <para><emphasis role="bold">Class qualified name : </emphasis> fsm::Main</para>
-        </listitem>
-        <listitem>
-          <para><emphasis role="bold">Operation name</emphasis> : mainloadFSM</para>
-        </listitem>
-        <listitem>
-          <para><emphasis role="bold">Operation Arguments </emphasis>:
-            platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/models/samplerun.fsm</para>
-          <para>Next, click on Apply and Run. </para>
-          <para>You should obtain the following trace : </para>
-          <para><inlinegraphic
-              fileref="Kermeta-The-FSM-tutorial_figures/result_example_behaviour.png"/></para>
-        </listitem>
-      </orderedlist>
+        the last section. To run this behaviour right click on <emphasis role="italic"> FSM Aspect
+          Behaviour</emphasis> -> Run as -> FSM Aspect Behaviour.</para>
+      <para>You should obtain the following trace : </para>
+      <para>
+        <figure>
+          <title> Example of behaviour execution</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="Kermeta-The-FSM-tutorial_figures/result_example_behaviour.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+      </para>
       <para>You can continue the behaviour of finite state machine if you want.</para>
     </section>
   </chapter>
@@ -1328,8 +1377,20 @@ post post3 of operation step of class State violated</programlisting>
       the Logo sample. </para>
     <section id="CustomizeEMF_Editor">
       <title> Customize the generated EMF editor</title>
-      <para> Generated code can be modified for customization. In this tutorial we change some icons
-        and the text presentation. </para>
+      <para> Generated code can be modified for customization. An EMF editor for FSM models is ever
+        deployed into Eclipse Kermeta. Retrieve the plugin code source with File -> Import ->
+        Plug-in Development -> Plug-ins and Fragments and click two times on Next. Then choose the
+        following plugins : </para>
+      <figure>
+        <title> Import EMF and Topcased FSM Editor deployed plugins</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-The-FSM-tutorial_figures/import_plugins.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para>The plugin .model, .edit and .editor correspond to the fsm EMF editor whereas the
+        .graphicalEditor represents the Topcased editor.</para>
       <tip>
         <title> Add custom code</title>
         <para> To keep your customized code for each generation you need to add
@@ -1343,9 +1404,10 @@ post post3 of operation step of class State violated</programlisting>
       </tip>
       <section>
         <title> Change the editor's icons</title>
-        <para> The generation make appear three new plugins : fsmEditor.edit, fsmEditor.editor and
-          fsmEditor.tests. To change an icon you need only to replace the icon from
-          fsmEditor.edit/icons/full/obj16 to another with the same name and the same extension. </para>
+        <para> To change an icon you need only to replace the icon from
+          fr.triskell.kermeta.samples.fsm.edit/icons/full/obj16 to another with the same name and
+          the same extension. It is the case on this deployed plugin. The following image presents
+          this plugin, the .gif images have been changed from the initial EMF generation.</para>
         <figure>
           <title> Customize icons</title>
           <mediaobject>
@@ -1354,32 +1416,67 @@ post post3 of operation step of class State violated</programlisting>
             </imageobject>
           </mediaobject>
         </figure>
+        <para>Respectively the icons FSM.gif, State.gif and Transition.gif look like this : </para>
+        <figure>
+          <title> FSM icon</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-The-FSM-tutorial_figures/FSM.gif"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <figure>
+          <title> State icon</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-The-FSM-tutorial_figures/State.gif"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <figure>
+          <title> Transition icon</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-The-FSM-tutorial_figures/Transition.gif"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <note>
+          <para>Like GMF use EMF icons for the palette you can customize the palette icons by this
+            way.</para>
+        </note>
         <para> You will see the change when you will use the generated editor like in the following
           section.</para>
       </section>
       <section>
         <title> Change text presentation</title>
-        <para> In this example we want just to add the String "FSM type:" before the display text.
-          Open the file FSMItemProvider.java in the plugin fsmEditor.edit and the package
-          fsm.provider. Change the method getText() to
-          <programlisting language="java">
-         /**
-	       * This returns the label text for the adapted class.
-	       * <!-- begin-user-doc -->
-	       * <!-- end-user-doc -->
-	       * @generated NOT
-	       */
-	    @Override
-	    public String getText(Object object) {
-		   return "FSM type : " +  getString("_UI_FSM_type");
+        <para>The following method comes from  FSMItemProvider in the package
+          fr.triskell.kermeta.samples.fsm.provider in the project
+          fr.irisa.triskell.kermeta.samples.fsm.model.edit. It permits to disply thr initial state
+          or if it is missing or if the final state is missing.</para>
+        <para><programlisting language="java">
+        /**
+	 * This returns the label text for the adapted class.
+	 * &lt;!-- begin-user-doc -->
+	 * &lt;!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getText(Object object) {
+		
+		String initialState = " [an initial state is required]";
+		if(object instanceof FSM &amp;&amp; ((FSM) object).getInitialState()!=null) {
+			initialState = " [initial state = " + ((FSM) object).getInitialState().getName() + "]";
+		}
+		String finalState = " - [at least one final state is required]";
+		if(object instanceof FSM &amp;&amp; ((FSM) object).getFinalState().size()>0) {
+			finalState = "";
+		}
+		return getString("_UI_FSM_type") + initialState + finalState;
 	}
          </programlisting>
           . </para>
         <para/>
-        <note>
-          <para>Like GMF use EMF icons for the palette you can customize the palette icons by this
-            way.</para>
-        </note>
+        
       </section>
     </section>
   </chapter>
