@@ -7,7 +7,9 @@ operation generate(classQualifiedName:String, packName:String, className:String,
 var _res: StringBuffer init StringBuffer.new
 _res.append("\n\tvar na : String init ctx.getGenerateName\n \tctx.cache.put(self,na)\t\n\tif self.ownedTags.exists{tag | \"unique\".equals(tag.name)} then\n\t\tctx.res.append(\"")
 _res.append(classQualifiedName)
-_res.append("\" +\" \"+ na +  \" = null;\n\")\n\t\tctx.res.append(\"if (uniqueobjects.get(\\\"\"+na+\"\\\")==null){\n\"  )\n\t\tctx.res.append(na +  \" = ")
+_res.append("\" +\" \"+ na +  \" = (")
+_res.append(classQualifiedName)
+_res.append(") uniqueobjects.get(\\\"\"+na+\"\\\");\n\")\n\t\tctx.res.append(\"if (uniqueobjects.get(\\\"\"+na+\"\\\")==null){\n\"  )\n\t\tctx.res.append(na +  \" = ")
 _res.append(packName)
 _res.append(".")
 _res.append(packNameUpper)

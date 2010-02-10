@@ -66,7 +66,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.instance.ComponentInstance" +" "+ na +  " = null;
+		ctx.res.append("art.instance.ComponentInstance" +" "+ na +  " = (art.instance.ComponentInstance) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -178,7 +178,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.instance.PrimitiveInstance" +" "+ na +  " = null;
+		ctx.res.append("art.instance.PrimitiveInstance" +" "+ na +  " = (art.instance.PrimitiveInstance) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -290,7 +290,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.instance.CompositeInstance" +" "+ na +  " = null;
+		ctx.res.append("art.instance.CompositeInstance" +" "+ na +  " = (art.instance.CompositeInstance) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -440,7 +440,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.instance.Binding" +" "+ na +  " = null;
+		ctx.res.append("art.instance.Binding" +" "+ na +  " = (art.instance.Binding) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -477,7 +477,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.instance.TransmissionBinding" +" "+ na +  " = null;
+		ctx.res.append("art.instance.TransmissionBinding" +" "+ na +  " = (art.instance.TransmissionBinding) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -526,7 +526,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.instance.DelegationBinding" +" "+ na +  " = null;
+		ctx.res.append("art.instance.DelegationBinding" +" "+ na +  " = (art.instance.DelegationBinding) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -575,7 +575,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.instance.AttributeInstance" +" "+ na +  " = null;
+		ctx.res.append("art.instance.AttributeInstance" +" "+ na +  " = (art.instance.AttributeInstance) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -600,7 +600,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.instance.ValuedAttribute" +" "+ na +  " = null;
+		ctx.res.append("art.instance.ValuedAttribute" +" "+ na +  " = (art.instance.ValuedAttribute) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -637,7 +637,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.instance.DictionaryValuedAttribute" +" "+ na +  " = null;
+		ctx.res.append("art.instance.DictionaryValuedAttribute" +" "+ na +  " = (art.instance.DictionaryValuedAttribute) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -687,7 +687,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.instance.Entry" +" "+ na +  " = null;
+		ctx.res.append("art.instance.Entry" +" "+ na +  " = (art.instance.Entry) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -718,7 +718,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.instance.DefaultEntry" +" "+ na +  " = null;
+		ctx.res.append("art.instance.DefaultEntry" +" "+ na +  " = (art.instance.DefaultEntry) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -755,7 +755,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.instance.OtherEntry" +" "+ na +  " = null;
+		ctx.res.append("art.instance.OtherEntry" +" "+ na +  " = (art.instance.OtherEntry) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -794,7 +794,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.ComponentType" +" "+ na +  " = null;
+		ctx.res.append("art.type.ComponentType" +" "+ na +  " = (art.type.ComponentType) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -888,7 +888,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.PrimitiveType" +" "+ na +  " = null;
+		ctx.res.append("art.type.PrimitiveType" +" "+ na +  " = (art.type.PrimitiveType) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -982,7 +982,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.CompositeType" +" "+ na +  " = null;
+		ctx.res.append("art.type.CompositeType" +" "+ na +  " = (art.type.CompositeType) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1076,7 +1076,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.Service" +" "+ na +  " = null;
+		ctx.res.append("art.type.Service" +" "+ na +  " = (art.type.Service) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1126,7 +1126,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.Operation" +" "+ na +  " = null;
+		ctx.res.append("art.type.Operation" +" "+ na +  " = (art.type.Operation) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1195,7 +1195,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.Parameter" +" "+ na +  " = null;
+		ctx.res.append("art.type.Parameter" +" "+ na +  " = (art.type.Parameter) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1232,7 +1232,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.FunctionalService" +" "+ na +  " = null;
+		ctx.res.append("art.type.FunctionalService" +" "+ na +  " = (art.type.FunctionalService) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1282,7 +1282,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.ControlService" +" "+ na +  " = null;
+		ctx.res.append("art.type.ControlService" +" "+ na +  " = (art.type.ControlService) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1332,7 +1332,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.AbstractPort" +" "+ na +  " = null;
+		ctx.res.append("art.type.AbstractPort" +" "+ na +  " = (art.type.AbstractPort) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1375,7 +1375,7 @@ method  pass1create(ctx:Context):Void from CardinalityElement is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.Port" +" "+ na +  " = null;
+		ctx.res.append("art.type.Port" +" "+ na +  " = (art.type.Port) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1436,7 +1436,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.PortCollection" +" "+ na +  " = null;
+		ctx.res.append("art.type.PortCollection" +" "+ na +  " = (art.type.PortCollection) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1498,7 +1498,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.PortId" +" "+ na +  " = null;
+		ctx.res.append("art.type.PortId" +" "+ na +  " = (art.type.PortId) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1523,7 +1523,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.Attribute" +" "+ na +  " = null;
+		ctx.res.append("art.type.Attribute" +" "+ na +  " = (art.type.Attribute) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1560,7 +1560,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.BasicAttribute" +" "+ na +  " = null;
+		ctx.res.append("art.type.BasicAttribute" +" "+ na +  " = (art.type.BasicAttribute) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1603,7 +1603,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.Dictionary" +" "+ na +  " = null;
+		ctx.res.append("art.type.Dictionary" +" "+ na +  " = (art.type.Dictionary) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1665,7 +1665,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.type.DictionaryDefaultValue" +" "+ na +  " = null;
+		ctx.res.append("art.type.DictionaryDefaultValue" +" "+ na +  " = (art.type.DictionaryDefaultValue) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1704,7 +1704,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.implem.ComponentImplementation" +" "+ na +  " = null;
+		ctx.res.append("art.implem.ComponentImplementation" +" "+ na +  " = (art.implem.ComponentImplementation) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1729,7 +1729,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.implem.FractalComponent" +" "+ na +  " = null;
+		ctx.res.append("art.implem.FractalComponent" +" "+ na +  " = (art.implem.FractalComponent) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1766,7 +1766,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.implem.OSGiComponent" +" "+ na +  " = null;
+		ctx.res.append("art.implem.OSGiComponent" +" "+ na +  " = (art.implem.OSGiComponent) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1797,7 +1797,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.implem.TypeImplementation" +" "+ na +  " = null;
+		ctx.res.append("art.implem.TypeImplementation" +" "+ na +  " = (art.implem.TypeImplementation) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1822,7 +1822,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.implem.OSGiType" +" "+ na +  " = null;
+		ctx.res.append("art.implem.OSGiType" +" "+ na +  " = (art.implem.OSGiType) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1855,7 +1855,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.group.Group" +" "+ na +  " = null;
+		ctx.res.append("art.group.Group" +" "+ na +  " = (art.group.Group) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1886,7 +1886,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.group.TypeGroup" +" "+ na +  " = null;
+		ctx.res.append("art.group.TypeGroup" +" "+ na +  " = (art.group.TypeGroup) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -1945,7 +1945,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.group.InstanceGroup" +" "+ na +  " = null;
+		ctx.res.append("art.group.InstanceGroup" +" "+ na +  " = (art.group.InstanceGroup) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -2005,7 +2005,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.NamedElement" +" "+ na +  " = null;
+		ctx.res.append("art.NamedElement" +" "+ na +  " = (art.NamedElement) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -2036,7 +2036,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.ModelElement" +" "+ na +  " = null;
+		ctx.res.append("art.ModelElement" +" "+ na +  " = (art.ModelElement) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -2067,7 +2067,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.System" +" "+ na +  " = null;
+		ctx.res.append("art.System" +" "+ na +  " = (art.System) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -2190,7 +2190,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.DataType" +" "+ na +  " = null;
+		ctx.res.append("art.DataType" +" "+ na +  " = (art.DataType) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -2221,7 +2221,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.TypedElement" +" "+ na +  " = null;
+		ctx.res.append("art.TypedElement" +" "+ na +  " = (art.TypedElement) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -2258,7 +2258,7 @@ method  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("art.CardinalityElement" +" "+ na +  " = null;
+		ctx.res.append("art.CardinalityElement" +" "+ na +  " = (art.CardinalityElement) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )

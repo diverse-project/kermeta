@@ -27,7 +27,7 @@ operation  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("patternframework.ModelPattern" +" "+ na +  " = null;
+		ctx.res.append("patternframework.ModelPattern" +" "+ na +  " = (patternframework.ModelPattern) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -113,7 +113,7 @@ operation  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("patternframework.PModel" +" "+ na +  " = null;
+		ctx.res.append("patternframework.PModel" +" "+ na +  " = (patternframework.PModel) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -166,7 +166,7 @@ operation  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("patternframework.PObject" +" "+ na +  " = null;
+		ctx.res.append("patternframework.PObject" +" "+ na +  " = (patternframework.PObject) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -191,7 +191,7 @@ operation  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("patternframework.PConstraint" +" "+ na +  " = null;
+		ctx.res.append("patternframework.PConstraint" +" "+ na +  " = (patternframework.PConstraint) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
@@ -228,7 +228,7 @@ operation  pass1create(ctx:Context):Void is do
 	var na : String init ctx.getGenerateName
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
-		ctx.res.append("patternframework.PRole" +" "+ na +  " = null;
+		ctx.res.append("patternframework.PRole" +" "+ na +  " = (patternframework.PRole) uniqueobjects.get(\""+na+"\");
 ")
 		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
 "  )
