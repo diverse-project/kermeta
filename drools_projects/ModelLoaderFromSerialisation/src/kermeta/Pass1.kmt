@@ -5,15 +5,23 @@ using kermeta::utils
 class Pass1Template{
 operation generate(classQualifiedName:String, packName:String, className:String, packNameUpper:String):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("\n\tvar na : String init ctx.getGenerateName\n \tctx.res.append(\"")
+_res.append("\n\tvar na : String init ctx.getGenerateName\n \tctx.cache.put(self,na)\t\n\tif self.ownedTags.exists{tag | \"unique\".equals(tag.name)} then\n\t\tctx.res.append(\"")
+_res.append(classQualifiedName)
+_res.append("\" +\" \"+ na +  \" = null;\n\")\n\t\tctx.res.append(\"if (uniqueobjects.get(\\\"\"+na+\"\\\")==null){\n\"  )\n\t\tctx.res.append(na +  \" = ")
+_res.append(packName)
+_res.append(".")
+_res.append(packNameUpper)
+_res.append("Factory.eINSTANCE.create")
+_res.append(className)
+_res.append("();\n\")\n\t\tctx.res.append(\"uniqueobjects.put(\\\"\"+na+\"\\\",\"+ na+\");\n\")\n\t\tctx.res.append(\"}\n\"  )\n\t\t\n\telse\n\t\tctx.res.append(\"")
 _res.append(classQualifiedName)
 _res.append("\" +\" \"+ na +  \" = ")
 _res.append(packName)
 _res.append(".")
 _res.append(packNameUpper)
-_res.append("Factory.eInstance.create")
+_res.append("Factory.eINSTANCE.create")
 _res.append(className)
-_res.append("();\n\")\n\tctx.cache.put(self,na)\t\n")
+_res.append("();\n\")\n\tend\n\t")
 result := _res.toString
 end
 }

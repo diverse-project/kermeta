@@ -25,10 +25,24 @@ aspect class ModelPattern {
 operation  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
- 	ctx.res.append("patternframework.ModelPattern" +" "+ na +  " = patternframework.PatternframeworkFactory.eInstance.createModelPattern();
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("patternframework.ModelPattern" +" "+ na +  " = null;
 ")
-	ctx.cache.put(self,na)	
-
+		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
+"  )
+		ctx.res.append(na +  " = patternframework.PatternframeworkFactory.eINSTANCE.createModelPattern();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("patternframework.ModelPattern" +" "+ na +  " = patternframework.PatternframeworkFactory.eINSTANCE.createModelPattern();
+")
+	end
+	
 if not self.pattern.isVoid then
 
 	self.pattern.pass1create(ctx)
@@ -47,23 +61,32 @@ end
 operation  pass2set(ctx:Context):Void is do 
  	
 	self.featureIdentifier.each{c|
-	ctx.res.append(ctx.cache.getValue(self) + ".get"+"FeatureIdentifier"+"().add( \""+c.toString+" \");
+	ctx.res.append("if (" + ctx.cache.getValue(self) + " != null){")
+		ctx.res.append(ctx.cache.getValue(self) + ".get"+"FeatureIdentifier"+"().add( \""+c.toString+" \");
 ")	
+	ctx.res.append("}" )
+	
 	}	
 
 
 	if (not self.pattern.isVoid()) then
+	ctx.res.append("if (" + ctx.cache.getValue(self) + " != null && " + ctx.cache.getValue(self.pattern) + "!=null){" )
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Pattern"+"("+ctx.cache.getValue(self.pattern)+");
 ")	
+	ctx.res.append("}")
 	end
 	if (not self.constraints.isVoid()) then
+	ctx.res.append("if (" + ctx.cache.getValue(self) + " != null && " + ctx.cache.getValue(self.constraints) + "!=null){" )
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Constraints"+"("+ctx.cache.getValue(self.constraints)+");
 ")	
+	ctx.res.append("}")
 	end
 
 	self.falsepositivepatterns.each{c|
+	ctx.res.append("if (" + ctx.cache.getValue(self) + " != null && " + ctx.cache.getValue(c) + "!=null){" )
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Falsepositivepatterns"+"().add("+ctx.cache.getValue(c)+");
 ")	
+	ctx.res.append("}")
 	}	
 
 
@@ -88,10 +111,24 @@ aspect class PModel {
 operation  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
- 	ctx.res.append("patternframework.PModel" +" "+ na +  " = patternframework.PatternframeworkFactory.eInstance.createPModel();
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("patternframework.PModel" +" "+ na +  " = null;
 ")
-	ctx.cache.put(self,na)	
-
+		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
+"  )
+		ctx.res.append(na +  " = patternframework.PatternframeworkFactory.eINSTANCE.createPModel();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("patternframework.PModel" +" "+ na +  " = patternframework.PatternframeworkFactory.eINSTANCE.createPModel();
+")
+	end
+	
 if self.roles.size >0 then
 
 	self.roles.each{c|c.pass1create(ctx)}
@@ -100,15 +137,19 @@ end
 operation  pass2set(ctx:Context):Void is do 
  	
 	self.content.each{c|
+	ctx.res.append("if (" + ctx.cache.getValue(self) + " != null && " + ctx.cache.getValue(c) + "!=null){" )
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Content"+"().add("+ctx.cache.getValue(c)+");
 ")	
+	ctx.res.append("}")
 	}	
 
 
 
 	self.roles.each{c|
+	ctx.res.append("if (" + ctx.cache.getValue(self) + " != null && " + ctx.cache.getValue(c) + "!=null){" )
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Roles"+"().add("+ctx.cache.getValue(c)+");
 ")	
+	ctx.res.append("}")
 	}	
 
 
@@ -123,10 +164,24 @@ aspect class PObject {
 operation  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
- 	ctx.res.append("patternframework.PObject" +" "+ na +  " = patternframework.PatternframeworkFactory.eInstance.createPObject();
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("patternframework.PObject" +" "+ na +  " = null;
 ")
-	ctx.cache.put(self,na)	
-end 
+		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
+"  )
+		ctx.res.append(na +  " = patternframework.PatternframeworkFactory.eINSTANCE.createPObject();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("patternframework.PObject" +" "+ na +  " = patternframework.PatternframeworkFactory.eINSTANCE.createPObject();
+")
+	end
+	end 
 operation  pass2set(ctx:Context):Void is do 
  	end 
  }
@@ -134,18 +189,36 @@ aspect class PConstraint {
 operation  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
- 	ctx.res.append("patternframework.PConstraint" +" "+ na +  " = patternframework.PatternframeworkFactory.eInstance.createPConstraint();
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("patternframework.PConstraint" +" "+ na +  " = null;
 ")
-	ctx.cache.put(self,na)	
-end 
+		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
+"  )
+		ctx.res.append(na +  " = patternframework.PatternframeworkFactory.eINSTANCE.createPConstraint();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("patternframework.PConstraint" +" "+ na +  " = patternframework.PatternframeworkFactory.eINSTANCE.createPConstraint();
+")
+	end
+	end 
 operation  pass2set(ctx:Context):Void is do 
  		if (not self.expression.isVoid()) then
+		ctx.res.append("if (" + ctx.cache.getValue(self) + " != null){" )
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Expression"+"(\""+self.expression.toString+"\");
 ")	
+		ctx.res.append("}")
 	end
 	if (not self.language.isVoid()) then
+		ctx.res.append("if (" + ctx.cache.getValue(self) + " != null){" )
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Language"+"("+self.language.toString+");
 ")	
+		ctx.res.append("}")
 	end
 end 
  }
@@ -153,18 +226,36 @@ aspect class PRole {
 operation  pass1create(ctx:Context):Void is do 
  	
 	var na : String init ctx.getGenerateName
- 	ctx.res.append("patternframework.PRole" +" "+ na +  " = patternframework.PatternframeworkFactory.eInstance.createPRole();
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("patternframework.PRole" +" "+ na +  " = null;
 ")
-	ctx.cache.put(self,na)	
-end 
+		ctx.res.append("if (uniqueobjects.get(\""+na+"\")==null){
+"  )
+		ctx.res.append(na +  " = patternframework.PatternframeworkFactory.eINSTANCE.createPRole();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("patternframework.PRole" +" "+ na +  " = patternframework.PatternframeworkFactory.eINSTANCE.createPRole();
+")
+	end
+	end 
 operation  pass2set(ctx:Context):Void is do 
  		if (not self.name.isVoid()) then
+		ctx.res.append("if (" + ctx.cache.getValue(self) + " != null){" )
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
 ")	
+		ctx.res.append("}")
 	end
 	if (not self.player.isVoid()) then
+	ctx.res.append("if (" + ctx.cache.getValue(self) + " != null && " + ctx.cache.getValue(self.player) + "!=null){" )
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Player"+"("+ctx.cache.getValue(self.player)+");
 ")	
+	ctx.res.append("}")
 	end
 end 
  }

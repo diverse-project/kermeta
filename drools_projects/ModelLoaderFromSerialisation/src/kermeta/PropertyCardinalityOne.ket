@@ -8,5 +8,7 @@ ismethod="false"operation="generateOne"
 parameters="PropertyNameUpper:String,PropertyName:String,str:Boolean"
 %>
 	if (not self.<%=PropertyName%>.isVoid()) then
+		ctx.res.append("if (" + ctx.cache.getValue(self) + " != null){" )
 		ctx.res.append(ctx.cache.getValue(self) + ".set"+"<%=PropertyNameUpper%>"+"(<%if str then%><%="\\\""%><%end%>"+self.<%=PropertyName%>.toString+"<%if str then%><%="\\\""%><%end%>);\n")	
+		ctx.res.append("}")
 	end

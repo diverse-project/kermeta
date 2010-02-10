@@ -9,5 +9,15 @@ parameters="classQualifiedName:String, packName:String, className:String, packNa
 %>
 
 	var na : String init ctx.getGenerateName
- 	ctx.res.append("<%=classQualifiedName%>" +" "+ na +  " = <%=packName%>.<%=packNameUpper%>Factory.eInstance.create<%=className%>();\n")
-	ctx.cache.put(self,na)	
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("<%=classQualifiedName%>" +" "+ na +  " = null;\n")
+		ctx.res.append("if (uniqueobjects.get(\\""+na+"\\")==null){\n"  )
+		ctx.res.append(na +  " = <%=packName%>.<%=packNameUpper%>Factory.eINSTANCE.create<%=className%>();\n")
+		ctx.res.append("uniqueobjects.put(\\""+na+"\\","+ na+");\n")
+		ctx.res.append("}\n"  )
+		
+	else
+		ctx.res.append("<%=classQualifiedName%>" +" "+ na +  " = <%=packName%>.<%=packNameUpper%>Factory.eINSTANCE.create<%=className%>();\n")
+	end
+	

@@ -9,7 +9,9 @@ parameters="PropertyNameUpper:String,PropertyName:String"
 %>
 
 	self.<%=PropertyName%>.each{c|
+	ctx.res.append("if (" + ctx.cache.getValue(self) + " != null && " + ctx.cache.getValue(c) + "!=null){" )
 	ctx.res.append(ctx.cache.getValue(self) + ".get"+"<%=PropertyNameUpper%>"+"().add("+ctx.cache.getValue(c)+");\n")	
+	ctx.res.append("}")
 	}	
 
 

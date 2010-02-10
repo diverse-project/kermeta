@@ -30,12 +30,18 @@ using kermeta::standard
 using kermeta::persistence
 
 class Main {
-	
-	operation main(uri:String) : Void is do
+
+	operation initialize():Context is do
 		var ctx : Context init Context.new
 		ctx.res := kermeta::utils::StringBuffer.new
 		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
-		
+		result:=ctx		
+	end
+	
+	
+	
+	operation main(uri:String) : Void is do
+		var ctx : Context init self.initialize()
 		var rep : EMFRepository  init EMFRepository.new
 		var res : EMFResource 
 		res ?= rep.createResource(uri, "<%=uriecore%>")
