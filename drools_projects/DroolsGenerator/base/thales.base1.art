@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:implem="http://art/implem" xmlns:instance="http://art/instance" xmlns:type="http://art/type">
+  <root name="ThalesCaseStudy">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="ContextManager" type="//@types.0">
+      <binding serverInstance="//@root/@subComponent.2" id="DefaultLogger" client="//@types.0/@port.3" server="//@types.2/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.context.manager.ContextManager"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="ThinkingTool" type="//@types.1">
+      <binding serverInstance="//@root/@subComponent.0" id="ContextManager" client="//@types.1/@port.5" server="//@types.0/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.4" id="com" client="//@types.1/@port.4" server="//@types.4/@port.2"/>
+      <binding serverInstance="//@root/@subComponent.4" id="task" client="//@types.1/@port.3" server="//@types.4/@port.1"/>
+      <binding serverInstance="//@root/@subComponent.4" id="res" client="//@types.1/@port.2" server="//@types.4/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.5" id="com" client="//@types.1/@port.4" server="//@types.5/@port.2"/>
+      <binding serverInstance="//@root/@subComponent.5" id="task" client="//@types.1/@port.3" server="//@types.5/@port.1"/>
+      <binding serverInstance="//@root/@subComponent.5" id="res" client="//@types.1/@port.2" server="//@types.5/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.thinkingtool.ThinkingTool"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="DefaultLogger" type="//@types.2">
+      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.2/@attribute.0">
+        <entries xsi:type="instance:OtherEntry" value="3" key="diva"/>
+      </attribute>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.log.DefaultLogger"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="FireDeployer" type="//@types.3">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.context.sensor.FireDeployer"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="FirePlanner" type="//@types.4">
+      <binding id="EmergencyNotificationStrategy" client="//@types.4/@port.4"/>
+      <binding id="fireSoapChannel" client="//@types.4/@port.3"/>
+      <binding id="fireSmtpChannel" client="//@types.4/@port.3"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.thinkingtool.planner.FirePlanner"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="TacticalPicturePlanner" type="//@types.5">
+      <binding serverInstance="//@root/@subComponent.6" id="EmergencyNotificationStrategy" client="//@types.5/@port.4" server="//@types.6/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.7" id="fireSoapChannel" client="//@types.5/@port.3" server="//@types.7/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.8" id="fireSmtpChannel" client="//@types.5/@port.3" server="//@types.7/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.thinkingtool.planner.TacticalPicturePlanner"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="EmergencyNotificationStrategy" type="//@types.6">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.thinkingtool.notification.EmergencyNotification"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="FireSOAPChannel" type="//@types.7">
+      <binding serverInstance="//@root/@subComponent.9" id="soap2filter" client="//@types.7/@port.2" server="//@types.8/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.1" id="soap2cb" client="//@types.7/@port.1" server="//@types.1/@port.1"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.messaging.channel.FireSOAPChannel"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="FireSMTPChannel" type="//@types.7" state="">
+      <binding serverInstance="//@root/@subComponent.9" id="smtp2filter" client="//@types.7/@port.2" server="//@types.8/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.1" id="smtp2cb" client="//@types.7/@port.1" server="//@types.1/@port.1"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.messaging.channel.FireSMTPChannel"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="FireDeptFilter" type="//@types.8">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.messaging.filter.FireDepartmentFilter"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="org.ow2.wildcat.Context"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.wildcat.osgi.IQueryAdder"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.wildcat.osgi.IAttributeAttacher"/>
+  <services xsi:type="type:FunctionalService" name="org.slf4j.Logger"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.ThinkingTool"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.OrganizationCallback"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.ResourcePlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.TaskPlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.CommunicationPlanner"/>
+  <services xsi:type="type:FunctionalService" name="org.slf4j.Logger"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.context.SensorDeployer"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.ResourcePlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.TaskPlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.CommunicationPlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.Channel"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.NotificationStrategy"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.ResourcePlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.TaskPlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.CommunicationPlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.Channel"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.NotificationStrategy"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.NotificationStrategy"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.Channel"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.DataFilter"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.OrganizationCallback"/>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.context.manager">
+    <port xsi:type="type:Port" name="context" lower="1" upper="1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="queries" lower="0" upper="-1" service="//@services.1" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="attributes" lower="0" upper="-1" service="//@services.2" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="logger" lower="1" upper="1" service="//@services.3" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.thinkingtool">
+    <port xsi:type="type:Port" name="thinkingtool" lower="1" upper="1" service="//@services.4" role="server"/>
+    <port xsi:type="type:Port" name="orgCallback" lower="1" upper="1" service="//@services.5" role="server"/>
+    <port xsi:type="type:Port" name="resourcePlanners" lower="0" upper="-1" service="//@services.6" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="taskPlanners" lower="0" upper="-1" service="//@services.7" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="communicationPlanners" lower="0" upper="-1" service="//@services.8" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="context" lower="1" upper="1" service="//@services.0" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.log">
+    <port xsi:type="type:Port" name="logger" lower="1" upper="1" service="//@services.9" role="server"/>
+    <attribute xsi:type="type:Dictionary" name="appenders" type="//@dataTypes.1" valueType="//@dataTypes.0"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.context.sensor.deployer">
+    <port xsi:type="type:Port" name="deployer" lower="1" upper="1" service="//@services.10" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.thinkingtool.planner">
+    <port xsi:type="type:Port" name="res" lower="1" upper="1" service="//@services.11" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="task" lower="1" upper="1" service="//@services.12" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="com" lower="1" upper="1" service="//@services.13" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="channel" lower="0" upper="-1" service="//@services.14" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="strategy" lower="1" upper="1" service="//@services.15" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.thinkingtool.planner">
+    <port xsi:type="type:Port" name="res" lower="1" upper="1" service="//@services.16" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="task" lower="1" upper="1" service="//@services.17" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="com" lower="1" upper="1" service="//@services.18" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="channel" lower="0" upper="-1" service="//@services.19" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="strategy" lower="1" upper="1" service="//@services.20" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.thinkingtool.notification">
+    <port xsi:type="type:Port" name="strategy" lower="1" upper="1" service="//@services.21" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.messaging.channel">
+    <port xsi:type="type:Port" name="channel" lower="1" upper="1" service="//@services.22" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="orgCallback" lower="1" upper="1" service="//@services.24" role="client"/>
+    <port xsi:type="type:Port" name="filter" lower="1" upper="1" service="//@services.23" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.messaging.filter">
+    <port xsi:type="type:Port" name="filterImpl" lower="1" upper="1" service="//@services.23" role="server" isOptional="true"/>
+  </types>
+  <dataTypes name="Integer"/>
+  <dataTypes name="String"/>
+</art:System>

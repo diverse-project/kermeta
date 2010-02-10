@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type">
+  <root>
+    <subComponent xsi:type="instance:PrimitiveInstance" type="//@types.0"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" type="//@types.1"/>
+  </root>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.Channel"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.OrganizationCallback"/>
+  <types xsi:type="type:PrimitiveType">
+    <port xsi:type="type:Port" service="//@services.0" role="client" isOptional="true"/>
+  </types>
+  <types xsi:type="type:PrimitiveType">
+    <port xsi:type="type:Port" service="//@services.1" role="server" isOptional="true"/>
+  </types>
+</art:System>

@@ -91,7 +91,9 @@ package instance{
 						if (i>0) then ctx.res.append(",") end
 						var j : Integer init 0
 						self.subComponent.each{s| if (j>0) then ctx.res.append(",") end
-						ctx.res.append("subComponent contains $" + ctx.cache.getValue(s))}
+						ctx.res.append("subComponent contains $" + ctx.cache.getValue(s))
+						j:=j+1
+						}
 						i:=i+1
 					end
 				ctx.res.append(")\n")
@@ -223,6 +225,10 @@ package type{
 			ctx.res.append(": art.type.Port(")
 			if (not self.name.isVoid) then
 				ctx.res.append("name == \"" + self.name + "\"")
+				i:=i+1
+			end
+			if (not self.role.isVoid) then
+				ctx.res.append("role == \"" + self.role + "\"")
 				i:=i+1
 			end
 			if (not self.service.isVoid) then

@@ -1,0 +1,77 @@
+global java.util.List list;
+global java.util.Map uniqueobjects;
+rule "RulesName"
+	 when 
+$s2: art.type.Service(name == "eu.diva.tis.api.thinkingtool.NotificationStrategy")
+$s3: art.type.Port(role == "client",service == $s2)
+$s4: art.type.PrimitiveType(port contains $s3)
+$s5: art.instance.PrimitiveInstance(type == $s4)
+$s1: art.instance.CompositeInstance(subComponent contains $s5)
+$s0: art.System(root == $s1)
+then
+ 	 java.util.HashMap m = new java.util.HashMap();
+m.put("systemRole",$s0);
+m.put("rootRole",$s1);
+m.put("strategyClientRole",$s5);
+m.put("strategyClientPortRole",$s3);
+	 list.add(m);
+ art.System s0 = art.ArtFactory.eINSTANCE.createSystem();
+art.instance.CompositeInstance s1 = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
+art.instance.PrimitiveInstance s2 = null;
+if (uniqueobjects.get("s2")==null){
+s2 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+uniqueobjects.put("s2",s2);
+}
+art.implem.OSGiComponent s3 = null;
+if (uniqueobjects.get("s3")==null){
+s3 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+uniqueobjects.put("s3",s3);
+}
+art.instance.PrimitiveInstance s4 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+art.instance.TransmissionBinding s5 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+art.type.FunctionalService s6 = null;
+if (uniqueobjects.get("s6")==null){
+s6 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+uniqueobjects.put("s6",s6);
+}
+art.type.PrimitiveType s7 = null;
+if (uniqueobjects.get("s7")==null){
+s7 = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+uniqueobjects.put("s7",s7);
+}
+art.type.Port s8 = null;
+if (uniqueobjects.get("s8")==null){
+s8 = art.type.TypeFactory.eINSTANCE.createPort();
+uniqueobjects.put("s8",s8);
+}
+if (s0 != null && s1!=null){s0.setRoot(s1);
+}if (s0 != null && s6!=null){s0.getServices().add(s6);
+}if (s0 != null && s7!=null){s0.getTypes().add(s7);
+}if (s1 != null && s2!=null){s1.getSubComponent().add(s2);
+}if (s1 != null && s4!=null){s1.getSubComponent().add(s4);
+}if (s2 != null){s2.setName("EmergencyNotificationStrategy");
+}if (s2 != null && s7!=null){s2.setType(s7);
+}if (s2 != null && s1!=null){s2.setSuperComponent(s1);
+}if (s2 != null && s3!=null){s2.setImplem(s3);
+}if (s3 != null){s3.setImplementingClass("eu.diva.tis.thinkingtool.notification.EmergencyNotification");
+}if (s4 != null){s4.setName("FakeNotificationClient");
+}if (s4 != null && s1!=null){s4.setSuperComponent(s1);
+}if (s4 != null && s5!=null){s4.getBinding().add(s5);
+}if (s5 != null){s5.setId("EmergencyNotificationStrategy");
+}if (s5 != null && s8!=null){s5.setServer(s8);
+}if (s5 != null && s2!=null){s5.setServerInstance(s2);
+}if (s6 != null){s6.setName("eu.diva.tis.api.thinkingtool.NotificationStrategy");
+}if (s7 != null){s7.setName("eu.diva.tis.thinkingtool.notification");
+}if (s7 != null && s8!=null){s7.getPort().add(s8);
+}if (s8 != null){s8.setIsOptional(false);
+}if (s8 != null){s8.setLower(1);
+}if (s8 != null){s8.setUpper(1);
+}if (s8 != null){s8.setRole("server");
+}if (s8 != null){s8.setName("strategy");
+}if (s8 != null && s6!=null){s8.setService(s6);
+}$s0.getServices().add((art.type.Service)  uniqueobjects.get("s6"));
+$s0.getTypes().add((art.type.ComponentType)  uniqueobjects.get("s7"));
+$s1.getSubComponent().add((art.instance.ComponentInstance)  uniqueobjects.get("s2"));
+s5.setClient($s3);
+$s5.getBinding().add(s5);
+end

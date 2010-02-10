@@ -9,7 +9,7 @@
 @mainOperation "main"
 
 
-package patternframework;
+package patternframework; 
 
 
 require kermeta
@@ -18,30 +18,106 @@ require kermeta
 
 require "platform:/resource/org.kermeta.art.adapter/model/runtime_AOM_Framework1.ecore"
 require "Art2DROOLS.kmt"
-
-
+require "platform:/resource//ModelLoaderFromSerialisation/model/s0.kmt"
+require "adaptationsGenerator.kmt"
 
 using kermeta::standard
+using kermeta::language::structure
 using kermeta::persistence
 using org::smartadapters::core
 class Main {
 	
 	operation main() : Void is do
-		var ctx : Context init Context.new
+		
+		// ../../../DroolsGenerator/v2/01_LoggingAdapter.smART
+		// ../../../DroolsGenerator/v2/02_Strategy.smART
+		// ../../../DroolsGenerator/v2/03_FirePlanner.smART
+		// ../../../DroolsGenerator/v2/04_TPPlanner.smART
+		// ../../../DroolsGenerator/v2/05_Notification.smART
+		// ../../../DroolsGenerator/v2/06_Organization.smART
+		
+		self.process("../../../DroolsGenerator/v2/01_LoggingAdapter.smART","drl/1.drl")
+		self.process("../../../DroolsGenerator/v2/02_Strategy.smART","drl/2.drl")
+		self.process("../../../DroolsGenerator/v2/03_FirePlanner.smART","drl/3.drl")
+		self.process("../../../DroolsGenerator/v2/04_TPPlanner.smART","drl/4.drl")
+		self.process("../../../DroolsGenerator/v2/05_Notification.smART","drl/5.drl")
+		self.process("../../../DroolsGenerator/v2/06_Organization.smART","drl/6.drl")
+		
+		
+		
+		//f.writeTextFile("drl/1.drl",ctx.res.toString)
+		//f.writeTextFile("drl/2.drl",ctx.res.toString)
+		//f.writeTextFile("drl/3.drl",ctx.res.toString)
+		//f.writeTextFile("drl/4.drl",ctx.res.toString)
+		//f.writeTextFile("drl/5.drl",ctx.res.toString)
+		//f.writeTextFile("drl/6.drl",ctx.res.toString)
+		
+		
+				
+		
+	end
+	
+	
+	operation process(smarturl:String,drl:String):Void is do
+	
+	var ctx : Context init Context.new
 		ctx.res := kermeta::utils::StringBuffer.new
 		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
 		
 		var rep : EMFRepository  init EMFRepository.new
 		var res : EMFResource 
-		res ?= rep.createResource("../../model/LoggingAdapter.smART", "platform:/resource/org.kermeta.art.adapter/model/runtime_AOM_Framework1.ecore")
+		
+		
+		res ?= rep.createResource(smarturl, "platform:/resource/org.kermeta.art.adapter/model/runtime_AOM_Framework1.ecore")
 		res.load
 		var root : Adapter
 		root ?= res.one()
 		 
+		root.~aspect.persistent.each{o| var t : Tag init Tag.new 
+			t.name:="unique"
+			t.~value:="true"	
+			o.ownedTags.add(t)
+		}
+		 
+		var name:String init "RulesName"
+		
+		ctx.res.append("global java.util.List list;\n")
+		ctx.res.append("global java.util.Map uniqueobjects;\n")
+		
+		ctx.res.append("rule \""+ name + "\"\n")
+						 
+		 
 		root.~aspect.template.pattern.toDrools(ctx)
+		var mai :pattern::Main init pattern::Main.new
+		var ctxadvice :pattern::Context 
+		ctxadvice := mai.initialize()
+ 		
+		root.~aspect.structure.content.one.pass1create(ctxadvice)
+		root.~aspect.structure.content.one.pass2set(ctxadvice)
+		ctx.res.append(ctxadvice.res.toString)
+		
+		var ctxadaptation : org::smartadapters::core::adaptations::Context init org::smartadapters::core::adaptations::Context.new
+		ctxadaptation.res := kermeta::utils::StringBuffer.new
+		ctxadaptation.cache := kermeta::utils::Hashtable<Object,String>.new		
+		
+		ctx.cache.keys().each{key| ctxadaptation.cache.put(key,"$"+ctx.cache.getValue(key))}
+		ctxadvice.cache.keys().each{key| ctxadaptation.cache.put(key,ctxadvice.cache.getValue(key))}
+		root.adapt.each{a| a.toDrools(ctxadaptation)} 
+		
+		ctx.res.append(ctxadaptation.res.toString)
+		ctx.res.append("end")
 		stdio.writeln(ctx.res.toString)
-	end
+		
+		var f : kermeta::io::FileIO init kermeta::io::FileIO.new
+		//f.writeTextFile("drl/1.drl",ctx.res.toString)
+		f.writeTextFile(drl,ctx.res.toString)
+		//f.writeTextFile("drl/3.drl",ctx.res.toString)
+		//f.writeTextFile("drl/4.drl",ctx.res.toString)
+		//f.writeTextFile("drl/5.drl",ctx.res.toString)
+		//f.writeTextFile("drl/6.drl",ctx.res.toString)
+		
 	
+	end
 	
 
 }
@@ -69,10 +145,6 @@ aspect class ModelPattern
 aspect class PModel
 {
 	operation toDrools(ctx:Context) : Void is do 
-	var name:String init "RulesName"
-	
-	ctx.res.append("global java.util.List list;\n")
-	ctx.res.append("rule \""+ name + "\"\n")
 
 	ctx.res.append("\t when \n")
 		self.content.each{p|
@@ -83,7 +155,8 @@ aspect class PModel
 		self.roles.each{p|
 			p.toDrools(ctx)
 		}
-		ctx.res.append("\t list.add(m);\n end\n")		
+		ctx.res.append("\t list.add(m);\n ")
+		//end\n")		
 	end
 }
 

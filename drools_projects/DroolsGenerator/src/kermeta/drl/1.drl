@@ -1,0 +1,97 @@
+global java.util.List list;
+global java.util.Map uniqueobjects;
+rule "RulesName"
+	 when 
+$s2: art.type.Service(name == "org.slf4j.Logger")
+$s3: art.type.Port(role == "client",service == $s2)
+$s4: art.type.PrimitiveType(port contains $s3)
+$s5: art.instance.PrimitiveInstance(type == $s4)
+$s1: art.instance.CompositeInstance(subComponent contains $s5)
+$s0: art.System(root == $s1)
+then
+ 	 java.util.HashMap m = new java.util.HashMap();
+m.put("systemRole",$s0);
+m.put("rootRole",$s1);
+m.put("loggerClientRole",$s5);
+m.put("loggerClientPortRole",$s3);
+	 list.add(m);
+ art.System s0 = art.ArtFactory.eINSTANCE.createSystem();
+art.instance.CompositeInstance s1 = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
+art.instance.PrimitiveInstance s2 = null;
+if (uniqueobjects.get("s2")==null){
+s2 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+uniqueobjects.put("s2",s2);
+}
+art.instance.DictionaryValuedAttribute s3 = art.instance.InstanceFactory.eINSTANCE.createDictionaryValuedAttribute();
+art.instance.OtherEntry s4 = art.instance.InstanceFactory.eINSTANCE.createOtherEntry();
+art.implem.OSGiComponent s5 = null;
+if (uniqueobjects.get("s5")==null){
+s5 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+uniqueobjects.put("s5",s5);
+}
+art.instance.PrimitiveInstance s6 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+art.instance.TransmissionBinding s7 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+art.type.FunctionalService s8 = null;
+if (uniqueobjects.get("s8")==null){
+s8 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+uniqueobjects.put("s8",s8);
+}
+art.type.PrimitiveType s9 = null;
+if (uniqueobjects.get("s9")==null){
+s9 = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+uniqueobjects.put("s9",s9);
+}
+art.type.Port s10 = null;
+if (uniqueobjects.get("s10")==null){
+s10 = art.type.TypeFactory.eINSTANCE.createPort();
+uniqueobjects.put("s10",s10);
+}
+art.type.Dictionary s11 = art.type.TypeFactory.eINSTANCE.createDictionary();
+art.DataType s12 = art.ArtFactory.eINSTANCE.createDataType();
+art.DataType s13 = art.ArtFactory.eINSTANCE.createDataType();
+if (s0 != null && s1!=null){s0.setRoot(s1);
+}if (s0 != null && s8!=null){s0.getServices().add(s8);
+}if (s0 != null && s9!=null){s0.getTypes().add(s9);
+}if (s0 != null && s12!=null){s0.getDataTypes().add(s12);
+}if (s0 != null && s13!=null){s0.getDataTypes().add(s13);
+}if (s1 != null && s2!=null){s1.getSubComponent().add(s2);
+}if (s1 != null && s6!=null){s1.getSubComponent().add(s6);
+}if (s2 != null){s2.setName("DefaultLogger");
+}if (s2 != null && s9!=null){s2.setType(s9);
+}if (s2 != null && s1!=null){s2.setSuperComponent(s1);
+}if (s2 != null && s3!=null){s2.getAttribute().add(s3);
+}if (s2 != null && s5!=null){s2.setImplem(s5);
+}if (s3 != null && s4!=null){s3.getEntries().add(s4);
+}if (s3 != null && s11!=null){s3.setAttribute(s11);
+}if (s4 != null){s4.setKey("diva");
+}if (s4 != null){s4.setValue("3");
+}if (s5 != null){s5.setImplementingClass("eu.diva.tis.log.DefaultLogger");
+}if (s6 != null){s6.setName("FakeLoggerClient");
+}if (s6 != null && s1!=null){s6.setSuperComponent(s1);
+}if (s6 != null && s7!=null){s6.getBinding().add(s7);
+}if (s7 != null){s7.setId("DefaultLogger");
+}if (s7 != null && s10!=null){s7.setServer(s10);
+}if (s7 != null && s2!=null){s7.setServerInstance(s2);
+}if (s8 != null){s8.setName("org.slf4j.Logger");
+}if (s9 != null){s9.setName("eu.diva.tis.log");
+}if (s9 != null && s10!=null){s9.getPort().add(s10);
+}if (s9 != null && s11!=null){s9.getAttribute().add(s11);
+}if (s10 != null){s10.setIsOptional(false);
+}if (s10 != null){s10.setLower(1);
+}if (s10 != null){s10.setUpper(1);
+}if (s10 != null){s10.setRole("server");
+}if (s10 != null){s10.setName("logger");
+}if (s10 != null && s8!=null){s10.setService(s8);
+}if (s11 != null){s11.setName("appenders");
+}if (s11 != null && s12!=null){s11.setValueType(s12);
+}if (s11 != null && s13!=null){s11.setType(s13);
+}if (s12 != null){s12.setName("Integer");
+}if (s13 != null){s13.setName("String");
+}$s0.getServices().add((art.type.Service)  uniqueobjects.get("s8"));
+$s0.getTypes().add((art.type.ComponentType)  uniqueobjects.get("s9"));
+$s0.getDataTypes().add(s12);
+$s0.getDataTypes().add(s13);
+$s1.getSubComponent().add((art.instance.ComponentInstance)  uniqueobjects.get("s2"));
+s7.setClient($s3);
+$s5.getBinding().add(s7);
+end

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:implem="http://art/implem" xmlns:instance="http://art/instance" xmlns:type="http://art/type">
+  <root name="ThalesCaseStudy">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="ContextManager" type="//@types.0">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.context.manager.ContextManager"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="ThinkingTool" type="//@types.1">
+      <binding serverInstance="//@root/@subComponent.0" id="ContextManager" client="//@types.1/@port.5" server="//@types.0/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.thinkingtool.ThinkingTool"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="org.ow2.wildcat.Context"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.wildcat.osgi.IQueryAdder"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.wildcat.osgi.IAttributeAttacher"/>
+  <services xsi:type="type:FunctionalService" name="org.slf4j.Logger"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.ThinkingTool"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.OrganizationCallback"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.ResourcePlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.TaskPlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.CommunicationPlanner"/>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.context.manager">
+    <port xsi:type="type:Port" name="context" lower="1" upper="1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="queries" lower="0" upper="-1" service="//@services.1" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="attributes" lower="0" upper="-1" service="//@services.2" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="logger" lower="1" upper="1" service="//@services.3" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.thinkingtool">
+    <port xsi:type="type:Port" name="thinkingtool" lower="1" upper="1" service="//@services.4" role="server"/>
+    <port xsi:type="type:Port" name="orgCallback" lower="1" upper="1" service="//@services.5" role="server"/>
+    <port xsi:type="type:Port" name="resourcePlanners" lower="0" upper="-1" service="//@services.6" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="taskPlanners" lower="0" upper="-1" service="//@services.7" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="communicationPlanners" lower="0" upper="-1" service="//@services.8" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="context" lower="1" upper="1" service="//@services.0" role="client"/>
+  </types>
+</art:System>

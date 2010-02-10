@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:Adapter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adaptations="http://SmartAdapters4ART/smartadapters/core/adaptations" xmlns:core="http://SmartAdapters4ART/smartadapters/core">
+  <aspect>
+    <template>
+      <pattern>
+        <content href="06_OrganizationPointcut.artP#/"/>
+        <roles name="SystemRole">
+          <player href="06_OrganizationPointcut.artP#/"/>
+        </roles>
+        <roles name="rootRole">
+          <player href="06_OrganizationPointcut.artP#//@root"/>
+        </roles>
+        <roles name="channelClientRole">
+          <player href="06_OrganizationPointcut.artP#//@root/@subComponent.0"/>
+        </roles>
+        <roles name="channelClientPortRole">
+          <player href="06_OrganizationPointcut.artP#//@types.0/@port.0"/>
+        </roles>
+        <roles name="callbackServerRole">
+          <player href="06_OrganizationPointcut.artP#//@root/@subComponent.1"/>
+        </roles>
+        <roles name="callbackServerPortRole">
+          <player href="06_OrganizationPointcut.artP#//@types.1/@port.0"/>
+        </roles>
+      </pattern>
+    </template>
+    <structure>
+      <content href="06_OrganizationAdvice.artP#/"/>
+    </structure>
+    <persistent href="06_OrganizationAdvice.artP#//@root/@subComponent.0"/>
+    <persistent href="06_OrganizationAdvice.artP#//@root/@subComponent.1"/>
+    <persistent href="06_OrganizationAdvice.artP#//@root/@subComponent.2"/>
+    <persistent href="06_OrganizationAdvice.artP#//@root/@subComponent.0/@implem"/>
+    <persistent href="06_OrganizationAdvice.artP#//@root/@subComponent.1/@implem"/>
+    <persistent href="06_OrganizationAdvice.artP#//@root/@subComponent.2/@implem"/>
+    <persistent href="06_OrganizationAdvice.artP#//@types.0"/>
+    <persistent href="06_OrganizationAdvice.artP#//@types.1"/>
+    <persistent href="06_OrganizationAdvice.artP#//@types.0/@port.0"/>
+    <persistent href="06_OrganizationAdvice.artP#//@types.0/@port.1"/>
+    <persistent href="06_OrganizationAdvice.artP#//@types.0/@port.2"/>
+    <persistent href="06_OrganizationAdvice.artP#//@types.1/@port.0"/>
+    <persistent href="06_OrganizationAdvice.artP#//@root/@subComponent.0/@binding.0"/>
+    <persistent href="06_OrganizationAdvice.artP#//@root/@subComponent.1/@binding.0"/>
+    <persistent href="06_OrganizationAdvice.artP#//@services.0"/>
+    <persistent href="06_OrganizationAdvice.artP#//@services.1"/>
+    <persistent href="06_OrganizationAdvice.artP#//@services.2"/>
+  </aspect>
+  <adapt xsi:type="adaptations:SetruntimeSystem">
+    <SystemToSet href="06_OrganizationPointcut.artP#/"/>
+    <refservices href="06_OrganizationAdvice.artP#//@services.0"/>
+    <refservices href="06_OrganizationAdvice.artP#//@services.1"/>
+    <refservices href="06_OrganizationAdvice.artP#//@services.2"/>
+    <reftypes href="06_OrganizationAdvice.artP#//@types.0"/>
+    <reftypes href="06_OrganizationAdvice.artP#//@types.1"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">
+    <CompositeInstanceToSet href="06_OrganizationPointcut.artP#//@root"/>
+    <refsubComponent href="06_OrganizationAdvice.artP#//@root/@subComponent.0"/>
+    <refsubComponent href="06_OrganizationAdvice.artP#//@root/@subComponent.1"/>
+    <refsubComponent href="06_OrganizationAdvice.artP#//@root/@subComponent.2"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="06_OrganizationAdvice.artP#//@root/@subComponent.3/@binding.0"/>
+    <refclient href="06_OrganizationPointcut.artP#//@types.0/@port.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="06_OrganizationAdvice.artP#//@root/@subComponent.3/@binding.1"/>
+    <refclient href="06_OrganizationPointcut.artP#//@types.0/@port.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="06_OrganizationAdvice.artP#//@root/@subComponent.0/@binding.1"/>
+    <refserver href="06_OrganizationPointcut.artP#//@types.1/@port.0"/>
+    <refserverInstance href="06_OrganizationPointcut.artP#//@root/@subComponent.1"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="06_OrganizationAdvice.artP#//@root/@subComponent.1/@binding.1"/>
+    <refserver href="06_OrganizationPointcut.artP#//@types.1/@port.0"/>
+    <refserverInstance href="06_OrganizationPointcut.artP#//@root/@subComponent.1"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstancePrimitiveInstance">
+    <PrimitiveInstanceToSet href="06_OrganizationPointcut.artP#//@root/@subComponent.0"/>
+    <refbinding href="06_OrganizationAdvice.artP#//@root/@subComponent.3/@binding.0"/>
+    <refbinding href="06_OrganizationAdvice.artP#//@root/@subComponent.3/@binding.1"/>
+  </adapt>
+</core:Adapter>

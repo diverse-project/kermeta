@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:implem="http://art/pattern/art/implem" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type">
+  <root>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="EmergencyNotificationStrategy" type="//@types.0">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.thinkingtool.notification.EmergencyNotification"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="FakeNotificationClient">
+      <binding serverInstance="//@root/@subComponent.0" id="EmergencyNotificationStrategy" server="//@types.0/@port.0"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.NotificationStrategy"/>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.thinkingtool.notification">
+    <port xsi:type="type:Port" name="strategy" lower="1" upper="1" service="//@services.0" role="server"/>
+  </types>
+</art:System>

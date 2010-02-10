@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:implem="http://art/pattern/art/implem" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type">
+  <root>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="FireDeployer" type="//@types.0">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.context.sensor.FireDeployer"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.context.SensorDeployer"/>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.context.sensor.deployer">
+    <port xsi:type="type:Port" name="deployer" lower="1" upper="1" service="//@services.0" role="server"/>
+  </types>
+</art:System>

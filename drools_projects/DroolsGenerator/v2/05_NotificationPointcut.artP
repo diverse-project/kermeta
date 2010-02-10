@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type">
+  <root>
+    <subComponent xsi:type="instance:PrimitiveInstance" type="//@types.0"/>
+  </root>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.NotificationStrategy"/>
+  <types xsi:type="type:PrimitiveType">
+    <port xsi:type="type:Port" lower="1" upper="1" service="//@services.0" role="client"/>
+  </types>
+</art:System>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:implem="http://art/pattern/art/implem" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type">
+  <root>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="FirePlanner" type="//@types.0">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.thinkingtool.planner.FirePlanner"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="fake">
+      <binding serverInstance="//@root/@subComponent.0" id="com" server="//@types.0/@port.2"/>
+      <binding serverInstance="//@root/@subComponent.0" id="task" server="//@types.0/@port.1"/>
+      <binding serverInstance="//@root/@subComponent.0" id="res" server="//@types.0/@port.0"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.ResourcePlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.TaskPlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.CommunicationPlanner"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.Channel"/>
+  <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.NotificationStrategy"/>
+  <types xsi:type="type:PrimitiveType" name="eu.diva.tis.thinkingtool.planner">
+    <port xsi:type="type:Port" name="res" lower="1" upper="1" service="//@services.0" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="task" lower="1" upper="1" service="//@services.1" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="com" lower="1" upper="1" service="//@services.2" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="channel" lower="0" upper="-1" service="//@services.3" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" name="strategy" lower="1" upper="1" service="//@services.4" role="client"/>
+  </types>
+</art:System>

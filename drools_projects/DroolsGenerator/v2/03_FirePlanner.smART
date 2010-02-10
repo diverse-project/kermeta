@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:Adapter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adaptations="http://SmartAdapters4ART/smartadapters/core/adaptations" xmlns:core="http://SmartAdapters4ART/smartadapters/core">
+  <aspect>
+    <template>
+      <pattern>
+        <content href="03_FirePlannerPointcut.artP#/"/>
+        <roles name="systemRole">
+          <player href="03_FirePlannerPointcut.artP#/"/>
+        </roles>
+        <roles name="rootRole">
+          <player href="03_FirePlannerPointcut.artP#//@root"/>
+        </roles>
+        <roles name="resRole">
+          <player href="03_FirePlannerPointcut.artP#//@types.0/@port.0"/>
+        </roles>
+        <roles name="taskRole">
+          <player href="03_FirePlannerPointcut.artP#//@types.0/@port.1"/>
+        </roles>
+        <roles name="comRole">
+          <player href="03_FirePlannerPointcut.artP#//@types.0/@port.2"/>
+        </roles>
+        <roles name="clientRole">
+          <player href="03_FirePlannerPointcut.artP#//@root/@subComponent.0"/>
+        </roles>
+      </pattern>
+    </template>
+    <structure>
+      <content href="03_FirePlannerAdvice.artP#/"/>
+    </structure>
+    <persistent href="03_FirePlannerAdvice.artP#//@services.0"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@services.1"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@services.2"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@services.3"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@services.4"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@types.0"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@types.0/@port.0"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@types.0/@port.1"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@types.0/@port.2"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@types.0/@port.3"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@types.0/@port.4"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@root/@subComponent.0"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@root/@subComponent.0/@implem"/>
+  </aspect>
+  <adapt xsi:type="adaptations:SetruntimeSystem">
+    <SystemToSet href="03_FirePlannerPointcut.artP#/"/>
+    <refservices href="03_FirePlannerAdvice.artP#//@services.0"/>
+    <refservices href="03_FirePlannerAdvice.artP#//@services.1"/>
+    <refservices href="03_FirePlannerAdvice.artP#//@services.2"/>
+    <refservices href="03_FirePlannerAdvice.artP#//@services.3"/>
+    <refservices href="03_FirePlannerAdvice.artP#//@services.4"/>
+    <reftypes href="03_FirePlannerAdvice.artP#//@types.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">
+    <CompositeInstanceToSet href="03_FirePlannerPointcut.artP#//@root"/>
+    <refsubComponent href="03_FirePlannerAdvice.artP#//@root/@subComponent.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="03_FirePlannerAdvice.artP#//@root/@subComponent.1/@binding.2"/>
+    <refclient href="03_FirePlannerPointcut.artP#//@types.0/@port.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="03_FirePlannerAdvice.artP#//@root/@subComponent.1/@binding.1"/>
+    <refclient href="03_FirePlannerPointcut.artP#//@types.0/@port.1"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="03_FirePlannerAdvice.artP#//@root/@subComponent.1/@binding.0"/>
+    <refclient href="03_FirePlannerPointcut.artP#//@types.0/@port.2"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstancePrimitiveInstance">
+    <PrimitiveInstanceToSet href="03_FirePlannerPointcut.artP#//@root/@subComponent.0"/>
+    <refbinding href="03_FirePlannerAdvice.artP#//@root/@subComponent.1/@binding.0"/>
+    <refbinding href="03_FirePlannerAdvice.artP#//@root/@subComponent.1/@binding.1"/>
+    <refbinding href="03_FirePlannerAdvice.artP#//@root/@subComponent.1/@binding.2"/>
+  </adapt>
+</core:Adapter>
