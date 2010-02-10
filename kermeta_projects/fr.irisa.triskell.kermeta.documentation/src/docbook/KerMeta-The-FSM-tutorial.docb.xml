@@ -154,7 +154,8 @@
       <para> </para>
       <section>
         <title>Install the tutorial 's solution </title>
-        <para>If you are very pressed the solutions are available into : </para>
+        <para>If you are very pressed the solutions are available into Kermeta Samples -> FSM
+          Solutions.</para>
         <para> Now, you have the reference project and you can follow the tutorial.The next chapter
           presents the metamodel used in this tutorial.</para>
       </section>
@@ -201,9 +202,15 @@
           model?""</ulink> and use the EMF Sample reflexive editor to create a metamodel like in the
         following figure into the folder model. Otherwise, you can simply copy the file
         fsmStatic.ecore from <emphasis role="bold"
-          >fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsmStatic.ecore</emphasis>
-          to<emphasis role="bold"> org.kermeta.fsm.emf/model</emphasis> folder.</para>
+          >fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsm.ecore</emphasis> to<emphasis
+          role="bold"> org.kermeta.fsm.emf/model</emphasis> folder.</para>
       <para/>
+      <para>
+        <tip>
+          <para> An FSM EMF editor is ever deployed into the Kermeta Eclipse. It is available in
+            File-> New -> Other -> Kermeta -> FSM Samples -> FSM Model. </para>
+        </tip>
+      </para>
       <para>At this stage of the tutorial, you should have the following metamodel: </para>
       <figure>
         <title> A simple fsm metamodel</title>
@@ -224,8 +231,8 @@
       <para> Like shown in the Process tutorial create a dynamic instance is an easy way to create
         an instance of a metamodel during the first development phases. To do so : <orderedlist>
           <listitem>
-            <para>Open the fsmStatic.ecore file with the Sample Ecore Model Editor (Right click on
-              the file -> Open with -> Other -> Sample Ecore Model Editor) </para>
+            <para>Open the fsm.ecore file with the Sample Ecore Model Editor (Right click on the
+              file -> Open with -> Other -> Sample Ecore Model Editor) </para>
           </listitem>
           <listitem>
             <para>Right click on the FSM metaclass -> Create Dynamic Instance </para>
@@ -268,13 +275,12 @@
                         role="strong"> &gt; EMF Generator Model</emphasis>;</para>
                   </listitem>
                   <listitem>
-                    <para>Choose a name for your genmodel (<emphasis>fsmStatic.genmodel</emphasis>
-                      is ok);</para>
+                    <para>Choose a name for your genmodel (<emphasis>fsm.genmodel</emphasis> is
+                      ok);</para>
                   </listitem>
                   <listitem>
                     <para>Select <emphasis role="strong">Load from an EMF core model</emphasis>
-                      button, and find the meta-model file
-                      (<emphasis>fsmStatic.ecore</emphasis>);</para>
+                      button, and find the meta-model file (<emphasis>fsm.ecore</emphasis>);</para>
                   </listitem>
                   <listitem>
                     <para>Select the unique package <emphasis>fsm</emphasis> and click on
@@ -285,16 +291,15 @@
                       not set as a “Java project”) the model directory of the genmodel needs to be
                       changed in the <emphasis role="strong">Properties</emphasis> tab of the
                       genmodel. For this purpose, click on the root node of the
-                        <emphasis>fsmStatic.genmodel</emphasis> and check that the property called
+                        <emphasis>fsm.genmodel</emphasis> and check that the property called
                         <emphasis role="strong">Model Directory</emphasis> (in the Model folder) is
                         <emphasis>/org.kermeta.fsm.emf.model/src</emphasis>, so that the EMF source
                       code is generated in a new empty project that will exclusively contain this
                       source code.</para>
                   </listitem>
                   <listitem>
-                    <para>Right-click on the root node of the
-                        <emphasis>fsmStatic.genmodel</emphasis>, and choose the <emphasis
-                        role="strong">Generate all</emphasis> item.</para>
+                    <para>Right-click on the root node of the <emphasis>fsm.genmodel</emphasis>, and
+                      choose the <emphasis role="strong">Generate all</emphasis> item.</para>
                   </listitem>
                 </orderedlist></para>
             </listitem>
@@ -359,12 +364,13 @@
       <title> Graphical editors</title>
       <para> EMF metamodels can be used with tools like <ulink
           url="http://www.eclipse.org/modeling/gmf/"> GMF (Graphical Modelling Framework)</ulink> or
-          <ulink type="" url="http://www.topcased.org/"> Topcased</ulink> to create graphical
-        editors for model instances. The tutorial <ulink type=""
+          <ulink type="" url="http://www.topcased.org/"> Topcased</ulink> (the FSM Diagram from
+        Kermeta -> Samples FSM is created with Topcased) to create graphical editors for model
+        instances. The tutorial <ulink type=""
           url="../KerMeta-Create-FSM-Graphical-Editor-With-GMF/index.html"> How to create a FSM
           graphical editor with GMF? </ulink> explains the creation of an GMF editor with a very
         simple FSM metamodel. You can retrieve the result of this tutorial and the gmf models into
-        org.kermeta.fsm.gmf. </para>
+        fr.irisa.triskell..kermeta.samples.fsm.gmf. </para>
       <para> You know how to create a model conform to the Fsm metamodel. The next chapter explains
         how to manipulate models with Kermeta. </para>
     </section>
@@ -386,6 +392,12 @@
         <title> Create a new KerMeta file</title>
         <para>We want to add a new kermetéa file into the folder kermeta into
           org.kermeta.sample.serialisation.</para>
+        <para>
+          <tip>
+            <para> This sample is available in the FSM Solutions in the project
+              fr.irisa.triskell.kermeta.samples.fsm.serialisation </para>
+          </tip>
+        </para>
         <para>To do this, select in the main menu of Eclipse</para>
         <para>"File" &gt; "New" ->"New Kermeta File"</para>
         <para>This action opens the following window.</para>
@@ -667,6 +679,8 @@ class Main
               retrieve all the resources). </para>
           </warning> If your models have no dependancy between them, you can save them into several
           EMFRepository. </para>
+        <para>In the following chapters, we will study the sample
+          fr.irisa.triskell.kermeta.samples.fsm.demoAspect.</para>
       </section>
     </section>
   </chapter>
@@ -675,8 +689,9 @@ class Main
     <para>Check all the invariants for a model can be useful if you use a model provided by a third
       party or resulting from a transformation, it permits to check well-formed rules. For more
       informations about it, plesa refer to the Model Checking Manual. Look at the file
-      checkInvariants.kmt in fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/checkInvariants.kmt
-      . This class permits to check all the invariants from the meta model thanks to the method
+      checkInvariants.kmt in
+      fr.irisa.triskell.kermeta.samples.fsm.demoAspect/launcher/checkInvariants.kmt . This class
+      permits to check all the invariants from the meta model thanks to the method
       checkAllInvariants.
       <programlisting language="kermeta">
     class InvariantChecker
@@ -732,7 +747,7 @@ class Main
       development. You can retrieve the Design by Contract concepts languages like Eiffel. Firstly,
       we present how to run configurations to parametrize this pre or post conditions. Then we
       present examples of pre and post conditions. In this section we study the example available in
-        <emphasis role="bold">fr.irisa.kemeta.samples.fsm.demo</emphasis>.</para>
+        <emphasis role="bold">fr.irisa.kemeta.samples.fsm.demoAspect</emphasis>.</para>
     <section id="RunConfiguration">
       <title>Run configurations</title>
       <para/>
@@ -758,7 +773,7 @@ class Main
           </itemizedlist>
         </tip>
         <para>In the FSM example ( <emphasis role="bold"
-            >fr.irisa.triskell.kermeta.samples.fsm.demo</emphasis>) , those scripts are in the
+            >fr.irisa.triskell.kermeta.samples.fsm.demoAspect</emphasis>) , those scripts are in the
           "launcher" directory. Look at "minimization.kmt" script. Here the interpreter knows that
           entry point of the program is the operation "main" in the "Minimization" class.</para>
         <figure>
@@ -792,17 +807,17 @@ class Main
       <section>
         <title>Execution with parameter(s)</title>
         <para>Now if you have a look at the three others scripts (checkInvariants, determinization
-          and fsmLauncher) into <emphasis role="bold">fr.triskell.kermeta.samples.fsm.demo/launcher
-          </emphasis> you will notice that the main operation of the main class takes one argument.
-          Let's focus on "fsmLauncher.kmt" launcher. The main operation takes one parameter which is
-          the name of the file containing the FSM model. It loads the model, prints it and runs it.
-          If you try the running method above, an exception is raised because the parameterized file
-          does not exist. Indeed we did not specify any filename to the program. So, you cannot use
-          the method above to run those kind of script. That is the reason why we are going to use
-          run configurations. Then right click on "fsmLauncher.kmt" file and select "Run As" and
-          "Run Configurations...". A window appears like the one below. Select the run configuration
-          named "loaderFSM" and look at the different options. Have a special look at the file
-          parameters : </para>
+          and fsmLauncher) into <emphasis role="bold"
+            >fr.triskell.kermeta.samples.fsm.demoAspect/launcher </emphasis> you will notice that
+          the main operation of the main class takes one argument. Let's focus on "fsmLauncher.kmt"
+          launcher. The main operation takes one parameter which is the name of the file containing
+          the FSM model. It loads the model, prints it and runs it. If you try the running method
+          above, an exception is raised because the parameterized file does not exist. Indeed we did
+          not specify any filename to the program. So, you cannot use the method above to run those
+          kind of script. That is the reason why we are going to use run configurations. Then right
+          click on "fsmLauncher.kmt" file and select "Run As" and "Run Configurations...". A window
+          appears like the one below. Select the run configuration named "loaderFSM" and look at the
+          different options. Have a special look at the file parameters : </para>
         <itemizedlist>
           <listitem>
             <para>"Location of your program file", here this is "fsmLauncher.kmt" filename relative

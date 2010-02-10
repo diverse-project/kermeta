@@ -288,8 +288,8 @@
               </imageobject>
             </mediaobject>
           </figure> Then click on Next and Finish. The file fsmStatic.genmodel appears on the
-          project and the DashBoard. Open it and click on the arrow near FSMStatic. Right click on
-          Fsm -> Generate All. It generates the EMF Java code for the domain model. <figure>
+          project and the DashBoard. Open it and click on the arrow near Fsm. Right click on Fsm ->
+          Generate All. It generates the EMF Java code for the domain model. <figure>
             <title> Generate EMF Java code</title>
             <mediaobject>
               <imageobject>
@@ -324,16 +324,16 @@
                 />
               </imageobject>
             </mediaobject>
-          </figure> The resulted file fsmStatic.gmfgraph looks like this : <figure>
+          </figure> The resulted file fsm.gmfgraph looks like this : <figure>
             <title> fsmStatic.gmfgraph at the beginning</title>
             <mediaobject>
               <imageobject>
                 <imagedata
-                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsmStatic_gmfgraph_begin.png"
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsm_gmfgraph_begin.png"
                 />
               </imageobject>
             </mediaobject>
-          </figure> Now, we want to do changes on fsmStatic.gmfgraph file. To start with we want to
+          </figure> Now, we want to do changes on fsm.gmfgraph file. To start with we want to
           replace the state rectangle by a rounded state rectangle. Start with suppress the
           Rectangle State figure ( Right click on it -> Delete). Click on FigureDescriptor
           StateFigure -> New Child -> Rounded Rectangle. Then click on the created Rectangle and use
@@ -361,15 +361,16 @@
               </imageobject>
             </mediaobject>
           </figure> A Diagram Label StateName appears on the gmfgraph file. Now, Click on the Child
-          Access and set its figure property to Label StateFigureLabel. Then right click on Child
-          Access and choose Refresh. You can add a foreground on your Rounded Rectangle. For this
-          right click on Rounded Rectangle StateFigure -> Foreground Color Constant Color and edit
-          the value to blue. The file fsmStatic.gmfgraph should look like this : <figure>
+          Access of the Rounded Rectangle and set its figure property to Label StateFigureLabel.
+          Then right click on Child Access and choose Refresh. You can add a foreground on your
+          Rounded Rectangle. For this right click on Rounded Rectangle StateFigure -> Foreground
+          Color Constant Color and edit the value to blue. The file fsm.gmfgraph should look like
+          this : <figure>
             <title> Rounded rectangle</title>
             <mediaobject>
               <imageobject>
                 <imagedata
-                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsm_static_gmfgraph_rounded.png"
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsm__gmfgraph_rounded.png"
                 />
               </imageobject>
             </mediaobject>
@@ -379,15 +380,15 @@
           adding a PolylineDecoration (right click on PolylineConnection TransitionFigure -> New
           Child -> Polyline Decoration). Name it targetDecoration. We need to add three Template
           Point to draw the arrow. Right click on Polyline Target targetDecoration -> New Child ->
-          Template Point (at the bottom of the contextual menu) to add one of them. Then edit them
-          respectively to (-1,1), (0,0) and (-1,-1). Now edit Polyline Connection TransitionFigure
-          and set targetDecoration with Polyline Decoration targetDecoration. The file
-          fsmStatic.gmfgraph should look like this : <figure>
+          Template Point (at the bottom of the contextual menu , use the arrow at the bottom to see
+          all this menu) to add one of them. Then edit them respectively to (-1,1), (0,0) and
+          (-1,-1). Now edit Polyline Connection TransitionFigure and set targetDecoration with
+          Polyline Decoration targetDecoration. The file fsm.gmfgraph should look like this : <figure>
             <title> Set Target Decoration</title>
             <mediaobject>
               <imageobject>
                 <imagedata
-                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsmStatic_gmfgraph_final.png"
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsm_gmfgraph_final.png"
                 />
               </imageobject>
             </mediaobject>
@@ -406,7 +407,7 @@
                 />
               </imageobject>
             </mediaobject>
-          </figure> The file fsmStatic.gmftool looks like this : <figure>
+          </figure> The file fsm.gmftool looks like this : <figure>
             <title> fsmStatic.gmftool </title>
             <mediaobject>
               <imageobject>
@@ -414,7 +415,7 @@
                   fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/gmftool_file.png"/>
               </imageobject>
             </mediaobject>
-          </figure> This images can be customized. For more informations please refer to the GMF
+          </figure> These images can be customized. For more informations please refer to the GMF
           documentation. </para>
       </section>
       <section>
@@ -432,7 +433,7 @@
                 />
               </imageobject>
             </mediaobject>
-          </figure> The fsmStatic.gmfmap looks like this <figure>
+          </figure> The fsm.gmfmap looks like this <figure>
             <title> fsmStatic.gmfmap </title>
             <mediaobject>
               <imageobject>
@@ -486,8 +487,8 @@
                 />
               </imageobject>
             </mediaobject>
-          </figure> Now, the file fsmStatic.gmfmap looks like this : <figure>
-            <title> fsmStatic.gmfmap </title>
+          </figure> Now, the file fsm.gmfmap looks like this : <figure>
+            <title> fsm.gmfmap </title>
             <mediaobject>
               <imageobject>
                 <imagedata
@@ -500,14 +501,13 @@
       </section>
       <section>
         <title> Diagram Editor Gen Model </title>
-        <para> Click on Transform and the file fsmStatic.gmfgen is created. The file
-          fsmStatic.gmfgen looks like : <figure>
+        <para> Click on Transform (at the right of the case mapping model) and the file fsm.gmfgen
+          is created. It looks like : <figure>
             <title> fsmStatic.gmfmap </title>
             <mediaobject>
               <imageobject>
                 <imagedata
-                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsmStatic_gmfgen.png"
-                />
+                  fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/fsm_gmfgen.png"/>
               </imageobject>
             </mediaobject>
           </figure> Then click on generate diagram editor. Your project should be like this : <figure>
@@ -533,7 +533,7 @@
           <mediaobject>
             <imageobject>
               <imagedata
-                fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/create_fsmStatic_model_in_runtime.png"
+                fileref="KerMeta-Create-FSM-Graphical-Editor-With-GMF_figures/create_fsm_model_in_runtime.png"
               />
             </imageobject>
           </mediaobject>
