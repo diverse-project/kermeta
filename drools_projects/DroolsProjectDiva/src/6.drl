@@ -1,0 +1,217 @@
+global java.util.List list;
+global java.util.Map uniqueobjects;
+rule "RulesName"
+	 when 
+$s2: art.type.Service(name == "eu.diva.tis.api.messaging.Channel")
+$s3: art.type.Port(role == "client",service == $s2)
+$s4: art.type.PrimitiveType(port contains $s3)
+$s5: art.instance.PrimitiveInstance(type == $s4)
+$s6: art.type.Service(name == "eu.diva.tis.api.messaging.OrganizationCallback")
+$s7: art.type.Port(role == "server",service == $s6)
+$s8: art.type.PrimitiveType(port contains $s7)
+$s9: art.instance.PrimitiveInstance(type == $s8)
+$s1: art.instance.CompositeInstance(subComponent contains $s5,subComponent contains $s9)
+$s0: art.System(root == $s1)
+then
+ 	 java.util.HashMap m = new java.util.HashMap();
+m.put("SystemRole",$s0);
+m.put("rootRole",$s1);
+m.put("channelClientRole",$s5);
+m.put("channelClientPortRole",$s3);
+m.put("callbackServerRole",$s9);
+m.put("callbackServerPortRole",$s7);
+	 list.add(m);
+ art.System s0 = art.ArtFactory.eINSTANCE.createSystem();
+art.instance.CompositeInstance s1 = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
+art.instance.PrimitiveInstance s2 = null;
+if (uniqueobjects.get("s2")==null){
+s2 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+uniqueobjects.put("s2",s2);
+}
+art.instance.TransmissionBinding s3 = null;
+if (uniqueobjects.get("s3")==null){
+s3 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+uniqueobjects.put("s3",s3);
+}
+art.instance.TransmissionBinding s4 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+art.implem.OSGiComponent s5 = null;
+if (uniqueobjects.get("s5")==null){
+s5 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+uniqueobjects.put("s5",s5);
+}
+art.instance.PrimitiveInstance s6 = null;
+if (uniqueobjects.get("s6")==null){
+s6 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+uniqueobjects.put("s6",s6);
+}
+art.instance.TransmissionBinding s7 = null;
+if (uniqueobjects.get("s7")==null){
+s7 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+uniqueobjects.put("s7",s7);
+}
+art.instance.TransmissionBinding s8 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+art.implem.OSGiComponent s9 = null;
+if (uniqueobjects.get("s9")==null){
+s9 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+uniqueobjects.put("s9",s9);
+}
+art.instance.PrimitiveInstance s10 = null;
+if (uniqueobjects.get("s10")==null){
+s10 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+uniqueobjects.put("s10",s10);
+}
+art.implem.OSGiComponent s11 = null;
+if (uniqueobjects.get("s11")==null){
+s11 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+uniqueobjects.put("s11",s11);
+}
+art.instance.PrimitiveInstance s12 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+art.instance.TransmissionBinding s13 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+art.instance.TransmissionBinding s14 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+art.type.FunctionalService s15 = null;
+if (uniqueobjects.get("s15")==null){
+s15 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+uniqueobjects.put("s15",s15);
+}
+art.type.FunctionalService s16 = null;
+if (uniqueobjects.get("s16")==null){
+s16 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+uniqueobjects.put("s16",s16);
+}
+art.type.FunctionalService s17 = null;
+if (uniqueobjects.get("s17")==null){
+s17 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+uniqueobjects.put("s17",s17);
+}
+art.type.PrimitiveType s18 = null;
+if (uniqueobjects.get("s18")==null){
+s18 = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+uniqueobjects.put("s18",s18);
+}
+art.type.Port s19 = null;
+if (uniqueobjects.get("s19")==null){
+s19 = art.type.TypeFactory.eINSTANCE.createPort();
+uniqueobjects.put("s19",s19);
+}
+art.type.Port s20 = null;
+if (uniqueobjects.get("s20")==null){
+s20 = art.type.TypeFactory.eINSTANCE.createPort();
+uniqueobjects.put("s20",s20);
+}
+art.type.Port s21 = null;
+if (uniqueobjects.get("s21")==null){
+s21 = art.type.TypeFactory.eINSTANCE.createPort();
+uniqueobjects.put("s21",s21);
+}
+art.type.PrimitiveType s22 = null;
+if (uniqueobjects.get("s22")==null){
+s22 = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+uniqueobjects.put("s22",s22);
+}
+art.type.Port s23 = null;
+if (uniqueobjects.get("s23")==null){
+s23 = art.type.TypeFactory.eINSTANCE.createPort();
+uniqueobjects.put("s23",s23);
+}
+if (s0 != null && s1!=null){s0.setRoot(s1);
+}if (s0 != null && s15!=null){s0.getServices().add(s15);
+}if (s0 != null && s16!=null){s0.getServices().add(s16);
+}if (s0 != null && s17!=null){s0.getServices().add(s17);
+}if (s0 != null && s18!=null){s0.getTypes().add(s18);
+}if (s0 != null && s22!=null){s0.getTypes().add(s22);
+}if (s1 != null && s2!=null){s1.getSubComponent().add(s2);
+}if (s1 != null && s6!=null){s1.getSubComponent().add(s6);
+}if (s1 != null && s10!=null){s1.getSubComponent().add(s10);
+}if (s1 != null && s12!=null){s1.getSubComponent().add(s12);
+}if (s2 != null){s2.setName("FireSOAPChannel");
+}if (s2 != null && s18!=null){s2.setType(s18);
+}if (s2 != null && s1!=null){s2.setSuperComponent(s1);
+}if (s2 != null && s3!=null){s2.getBinding().add(s3);
+}if (s2 != null && s4!=null){s2.getBinding().add(s4);
+}if (s2 != null && s5!=null){s2.setImplem(s5);
+}if (s3 != null){s3.setId("soap2filter");
+}if (s3 != null && s21!=null){s3.setClient(s21);
+}if (s3 != null && s23!=null){s3.setServer(s23);
+}if (s3 != null && s10!=null){s3.setServerInstance(s10);
+}if (s4 != null){s4.setId("soap2cb");
+}if (s4 != null && s20!=null){s4.setClient(s20);
+}if (s5 != null){s5.setImplementingClass("eu.diva.tis.messaging.channel.FireSOAPChannel");
+}if (s6 != null){s6.setState("");
+}if (s6 != null){s6.setName("FireSMTPChannel");
+}if (s6 != null && s18!=null){s6.setType(s18);
+}if (s6 != null && s1!=null){s6.setSuperComponent(s1);
+}if (s6 != null && s7!=null){s6.getBinding().add(s7);
+}if (s6 != null && s8!=null){s6.getBinding().add(s8);
+}if (s6 != null && s9!=null){s6.setImplem(s9);
+}if (s7 != null){s7.setId("smtp2filter");
+}if (s7 != null && s21!=null){s7.setClient(s21);
+}if (s7 != null && s23!=null){s7.setServer(s23);
+}if (s7 != null && s10!=null){s7.setServerInstance(s10);
+}if (s8 != null){s8.setId("smtp2cb");
+}if (s8 != null && s20!=null){s8.setClient(s20);
+}if (s9 != null){s9.setImplementingClass("eu.diva.tis.messaging.channel.FireSMTPChannel");
+}if (s10 != null){s10.setName("FireDeptFilter");
+}if (s10 != null && s22!=null){s10.setType(s22);
+}if (s10 != null && s1!=null){s10.setSuperComponent(s1);
+}if (s10 != null && s11!=null){s10.setImplem(s11);
+}if (s11 != null){s11.setImplementingClass("eu.diva.tis.messaging.filter.FireDepartmentFilter");
+}if (s12 != null){s12.setName("FakeChannelClient");
+}if (s12 != null && s1!=null){s12.setSuperComponent(s1);
+}if (s12 != null && s13!=null){s12.getBinding().add(s13);
+}if (s12 != null && s14!=null){s12.getBinding().add(s14);
+}if (s13 != null){s13.setId("fireSoapChannel");
+}if (s13 != null && s19!=null){s13.setServer(s19);
+}if (s13 != null && s2!=null){s13.setServerInstance(s2);
+}if (s14 != null){s14.setId("fireSmtpChannel");
+}if (s14 != null && s19!=null){s14.setServer(s19);
+}if (s14 != null && s6!=null){s14.setServerInstance(s6);
+}if (s15 != null){s15.setName("eu.diva.tis.api.messaging.Channel");
+}if (s16 != null){s16.setName("eu.diva.tis.api.messaging.DataFilter");
+}if (s17 != null){s17.setName("eu.diva.tis.api.messaging.OrganizationCallback");
+}if (s18 != null){s18.setName("eu.diva.tis.messaging.channel");
+}if (s18 != null && s19!=null){s18.getPort().add(s19);
+}if (s18 != null && s20!=null){s18.getPort().add(s20);
+}if (s18 != null && s21!=null){s18.getPort().add(s21);
+}if (s19 != null){s19.setIsOptional(true);
+}if (s19 != null){s19.setLower(1);
+}if (s19 != null){s19.setUpper(1);
+}if (s19 != null){s19.setRole("server");
+}if (s19 != null){s19.setName("channel");
+}if (s19 != null && s15!=null){s19.setService(s15);
+}if (s20 != null){s20.setIsOptional(false);
+}if (s20 != null){s20.setLower(1);
+}if (s20 != null){s20.setUpper(1);
+}if (s20 != null){s20.setRole("client");
+}if (s20 != null){s20.setName("orgCallback");
+}if (s20 != null && s17!=null){s20.setService(s17);
+}if (s21 != null){s21.setIsOptional(false);
+}if (s21 != null){s21.setLower(1);
+}if (s21 != null){s21.setUpper(1);
+}if (s21 != null){s21.setRole("client");
+}if (s21 != null){s21.setName("filter");
+}if (s21 != null && s16!=null){s21.setService(s16);
+}if (s22 != null){s22.setName("eu.diva.tis.messaging.filter");
+}if (s22 != null && s23!=null){s22.getPort().add(s23);
+}if (s23 != null){s23.setIsOptional(true);
+}if (s23 != null){s23.setLower(1);
+}if (s23 != null){s23.setUpper(1);
+}if (s23 != null){s23.setRole("server");
+}if (s23 != null){s23.setName("filterImpl");
+}if (s23 != null && s16!=null){s23.setService(s16);
+}$s0.getServices().add((art.type.Service)  uniqueobjects.get("s15"));
+$s0.getServices().add((art.type.Service)  uniqueobjects.get("s16"));
+$s0.getServices().add((art.type.Service)  uniqueobjects.get("s17"));
+$s0.getTypes().add((art.type.ComponentType)  uniqueobjects.get("s18"));
+$s0.getTypes().add((art.type.ComponentType)  uniqueobjects.get("s22"));
+$s1.getSubComponent().add((art.instance.ComponentInstance)  uniqueobjects.get("s2"));
+$s1.getSubComponent().add((art.instance.ComponentInstance)  uniqueobjects.get("s6"));
+$s1.getSubComponent().add((art.instance.ComponentInstance)  uniqueobjects.get("s10"));
+s13.setClient($s3);
+s14.setClient($s3);
+s4.setServer($s7);
+s4.setServerInstance($s9);
+s8.setServer($s7);
+s8.setServerInstance($s9);
+$s5.getBinding().add(s13);
+$s5.getBinding().add(s14);
+end
