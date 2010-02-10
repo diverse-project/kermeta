@@ -25,9 +25,9 @@
       <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.context.sensor.FireDeployer"/>
     </subComponent>
     <subComponent xsi:type="instance:PrimitiveInstance" name="FirePlanner" type="//@types.4">
-      <binding id="EmergencyNotificationStrategy" client="//@types.4/@port.4"/>
-      <binding id="fireSoapChannel" client="//@types.4/@port.3"/>
-      <binding id="fireSmtpChannel" client="//@types.4/@port.3"/>
+      <binding serverInstance="//@root/@subComponent.6" id="EmergencyNotificationStrategy" client="//@types.4/@port.4" server="//@types.6/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.7" id="fireSoapChannel" client="//@types.4/@port.3" server="//@types.7/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.8" id="fireSmtpChannel" client="//@types.4/@port.3" server="//@types.7/@port.0"/>
       <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.thinkingtool.planner.FirePlanner"/>
     </subComponent>
     <subComponent xsi:type="instance:PrimitiveInstance" name="TacticalPicturePlanner" type="//@types.5">
@@ -42,10 +42,12 @@
     <subComponent xsi:type="instance:PrimitiveInstance" name="FireSOAPChannel" type="//@types.7">
       <binding serverInstance="//@root/@subComponent.9" id="soap2filter" client="//@types.7/@port.2" server="//@types.8/@port.0"/>
       <binding serverInstance="//@root/@subComponent.1" id="soap2cb" client="//@types.7/@port.1" server="//@types.1/@port.1"/>
+      <binding serverInstance="//@root/@subComponent.1" id="soap2cb" client="//@types.7/@port.1" server="//@types.1/@port.1"/>
       <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.messaging.channel.FireSOAPChannel"/>
     </subComponent>
     <subComponent xsi:type="instance:PrimitiveInstance" name="FireSMTPChannel" type="//@types.7" state="">
       <binding serverInstance="//@root/@subComponent.9" id="smtp2filter" client="//@types.7/@port.2" server="//@types.8/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.1" id="smtp2cb" client="//@types.7/@port.1" server="//@types.1/@port.1"/>
       <binding serverInstance="//@root/@subComponent.1" id="smtp2cb" client="//@types.7/@port.1" server="//@types.1/@port.1"/>
       <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.messaging.channel.FireSMTPChannel"/>
     </subComponent>
