@@ -17,29 +17,29 @@ m.put("strategyClientPortRole",$s3);
 	 list.add(m);
  art.System s0 = art.ArtFactory.eINSTANCE.createSystem();
 art.instance.CompositeInstance s1 = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
-art.instance.PrimitiveInstance s2 = null;
+art.instance.PrimitiveInstance s2 = (art.instance.PrimitiveInstance) uniqueobjects.get("s2");
 if (uniqueobjects.get("s2")==null){
 s2 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
 uniqueobjects.put("s2",s2);
 }
-art.implem.OSGiComponent s3 = null;
+art.implem.OSGiComponent s3 = (art.implem.OSGiComponent) uniqueobjects.get("s3");
 if (uniqueobjects.get("s3")==null){
 s3 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
 uniqueobjects.put("s3",s3);
 }
 art.instance.PrimitiveInstance s4 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
 art.instance.TransmissionBinding s5 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
-art.type.FunctionalService s6 = null;
+art.type.FunctionalService s6 = (art.type.FunctionalService) uniqueobjects.get("s6");
 if (uniqueobjects.get("s6")==null){
 s6 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
 uniqueobjects.put("s6",s6);
 }
-art.type.PrimitiveType s7 = null;
+art.type.PrimitiveType s7 = (art.type.PrimitiveType) uniqueobjects.get("s7");
 if (uniqueobjects.get("s7")==null){
 s7 = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
 uniqueobjects.put("s7",s7);
 }
-art.type.Port s8 = null;
+art.type.Port s8 = (art.type.Port) uniqueobjects.get("s8");
 if (uniqueobjects.get("s8")==null){
 s8 = art.type.TypeFactory.eINSTANCE.createPort();
 uniqueobjects.put("s8",s8);
