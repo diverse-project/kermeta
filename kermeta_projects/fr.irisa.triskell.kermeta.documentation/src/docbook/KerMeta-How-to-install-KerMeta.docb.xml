@@ -103,7 +103,7 @@
       image below is the dialog box you should see. By default, Eclipse proposes to create a
       workspace directory named "workspace" in your home directory.</para>
     <figure>
-      <title/>
+      <title>Select a workspace location</title>
       <mediaobject>
         <imageobject>
           <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/first_eclipse_start.png"/>
@@ -120,7 +120,7 @@
       "OK" to open the main window of Eclipse using the workspace you've created. You should see a
       window like the one below.</para>
     <figure>
-      <title/>
+      <title>Eclipse Welcome window</title>
       <mediaobject>
         <imageobject>
           <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/first_time_main_window.png"/>
@@ -129,7 +129,7 @@
     </figure>
     <para>You can close the "Welcome" tab. Now your window looks like this one :</para>
     <figure>
-      <title/>
+      <title>Main Eclipse window</title>
       <mediaobject>
         <imageobject>
           <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/main_window.png"/>
@@ -162,7 +162,7 @@
         </imageobject>
       </mediaobject>
     </figure>
-    <para>Cick on OK. Then  select the Kermeta update site in the scroll menu and select everything
+    <para>Cick on OK. Then select the Kermeta update site in the scroll menu and select everything
       from Kermeta site like shown below. </para>
     <figure>
       <title> Select Kermeta feature</title>
@@ -175,28 +175,28 @@
     </figure>
     <para>Then click on <emphasis>Next </emphasis>.</para>
     <para>The next dialog shows the install Details. Click on <emphasis role="bold">
-      Next</emphasis></para>
+      Next</emphasis>.</para>
     <figure>
-      <title/>
+      <title>Installation details </title>
       <mediaobject>
         <imageobject>
           <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/review.png"/>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>You must accept the term of the licenses agreement and click on  finish.</para>
+    <para>You must accept the term of the licenses agreement and click on finish.</para>
     <figure>
-      <title/>
+      <title>Licence agreement window</title>
       <mediaobject>
         <imageobject>
           <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/review_licenses.png"/>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>Finally, after the installation,  you must reboot Eclipse to take changes in account. Do
-      it by clicking on "Yes".</para>
+    <para>Finally, after the installation, you must reboot Eclipse to take changes in account. Do it
+      by clicking on "Yes".</para>
     <figure>
-      <title/>
+      <title>Reboot Eclipse Dialog Window</title>
       <mediaobject>
         <imageobject>
           <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/reboot.png"/>
@@ -207,7 +207,7 @@
       &gt;&gt; About Eclipse SDK. You should see Kermeta logo. Clicking on it must display its
       version and build date</para>
     <figure>
-      <title/>
+      <title>About Eclipse Window</title>
       <mediaobject>
         <imageobject>
           <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/about_eclipse.png"/>
@@ -227,7 +227,7 @@
       <para>In the main menu of Eclipse &gt; Windows &gt;&gt; Show view &gt;&gt; Other... then
         select the Plug-in Registry view in the Plug-in Development folder.</para>
       <figure>
-        <title/>
+        <title>Select Plug-in Registry View</title>
         <mediaobject>
           <imageobject>
             <imagedata
@@ -238,7 +238,7 @@
       <para>Then you must enable the advanced options. (small triangle on the top rigth corner of
         the view)</para>
       <figure>
-        <title/>
+        <title>Plug-in Registry view</title>
         <mediaobject>
           <imageobject>
             <imagedata
@@ -252,7 +252,7 @@
         plugin that cannot be run, it will tell you. If this other plugin is in the list, diagnose
         it until you find the origin of your problem...</para>
       <figure>
-        <title/>
+        <title>Diagnose plugin</title>
         <mediaobject>
           <imageobject>
             <imagedata fileref="KerMeta-How-to-install-KerMeta_figures/plugin_registry_diagnose.png"
