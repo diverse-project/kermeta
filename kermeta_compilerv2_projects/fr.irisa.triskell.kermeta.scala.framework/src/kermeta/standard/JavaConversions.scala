@@ -58,6 +58,12 @@ object JavaConversions {
   import scala.reflect.ClassManifest
 
     trait KermetaCollection[A] extends scala.collection.mutable.Buffer[A]{
+	
+	def asSetType[B]() :java.util.List[B]={  
+	 	var res : java.util.List[B] = new java.util.ArrayList[B];
+		this.each{e=> res.add(e.asInstanceOf[B])}
+		return res
+	}  
 	def reject(rejector: A => scala.Boolean) :java.util.List[A]={  
 	 	  return this.filterNot{e=> var l: Boolean = rejector(e) ; l}
 	}
@@ -157,9 +163,15 @@ object JavaConversions {
   
   implicit def asSet[A](s : mutable.Set[A])(implicit m : ClassManifest[A]) : ju.Set[A] = s match {
     case JSetWrapper(wrapped) => wrapped
+    case _ => new MutableSetWrapper1(s)(m)
+  }
+
+  implicit def asSet[A](s : KermetaSet[A])(implicit m : ClassManifest[A]) : ju.Set[A] = s match {
+    case JSetWrapper(wrapped) => wrapped
     case _ => new MutableSetWrapper(s)(m)
   }
 
+  
   implicit def asMap[A, B](m : mutable.Map[A, B])(implicit ma : ClassManifest[A]) : ju.Map[A, B] = m match {
     case JMapWrapper(wrapped) => wrapped
     case _ => new MutableMapWrapper(m)(ma)
@@ -276,8 +288,13 @@ object JavaConversions {
  
   }
   
-  case class MutableSetWrapper[A](underlying : mutable.Set[A])(m : ClassManifest[A]) extends ju.AbstractSet[A] {
+  
+  
+  case class MutableSetWrapper1[A](underlying : mutable.Set[A])(m : ClassManifest[A]) extends ju.AbstractSet[A]{
     self =>
+    
+
+    
     def size = underlying.size
     override def add(elem: A) = { val sz = underlying.size ; underlying += elem ; sz < underlying.size }
     override def remove(elem : AnyRef) = {
@@ -300,9 +317,105 @@ object JavaConversions {
     }
 
   }
+
+  case class MutableSetWrapper[A](underlying : KermetaSet[A])(m : ClassManifest[A]) extends ju.AbstractSet[A]{
+    self =>
+    
+
+    
+    def size = underlying.size
+    override def add(elem: A) = { val sz = underlying.size ; underlying += elem ; sz < underlying.size }
+    override def remove(elem : AnyRef) = {
+      m.erasure.isInstance(elem) && {
+        val sz = underlying.size
+        underlying -= elem.asInstanceOf[A]
+        sz > underlying.size
+      }
+    }
+    def iterator = new ju.Iterator[A] {
+      val ui = underlying.iterator
+      var prev : Option[A] = None
+      
+      def hasNext = ui.hasNext
+      def next = { val e = ui.next ; prev = Some(e) ; e }
+      def remove = prev match {
+        case Some(e) => self.remove(e.asInstanceOf[AnyRef]) ; prev = None
+        case _ => throw new IllegalStateException("next must be called at least once before remove")
+      }
+    }
+
+  }
+
   
-  case class JSetWrapper[A](underlying : ju.Set[A]) extends mutable.Set[A] with mutable.SetLike[A, JSetWrapper[A]] {
-    override def size = underlying.size
+  
+  trait KermetaSet[A] extends mutable.Set[A]{
+    def reject(rejector: A => scala.Boolean) :java.util.List[A]={  
+	 	var res : java.util.List[A] = new java.util.ArrayList[A];
+		this.filterNot{e=> var l: Boolean = rejector(e) ; l}.foreach{e=> res.add(e)}
+		return res
+ 	}
+	def countElement(element : A) :Int={
+		return this.count{e => e.equals(element)}; 
+	}  
+	//TODO
+	def excludes(element : A) :scala.Boolean={return true;}
+	def one() :A={iterator.next}
+	//TODO
+	def containsAll(elts : Collection[A]) :scala.Boolean={ true}
+	//TODO
+	def sum() :A={return elements.next}
+	def includes(element : A) :Boolean={return this.contains(element)}
+	//TODO
+	def excludesAll(elements : Collection[A]) :Boolean={/*TODO*/return true}
+	def isUnique(collector : A) :Boolean={return this.countElement(collector)==1}
+	def any() :A={return elements.next}
+	//TODO
+	//TODO
+	def forAllCpl(f : A,A:A=>Boolean) :Boolean={return true}
+	//TODO
+	def existsCpl(f : A,A:A=>Boolean) :Boolean={return true}
+	def isNotEmpty() :Boolean={return !(this.size==0)}
+	def detect(detector : A=> Boolean) :A={return elements.filter(e=> detector(e)).next}
+	/*TODO*/def addAll(elts : Collection[A])={//println("addAll")
+                                           elts.foreach(e=> elements.toList)} 
+	/*TODO*/def includesAll(elements : Collection[A]) :Boolean={return true}
+	def select(selector : A=> scala.Boolean) :java.util.List[A]={
+		var res : java.util.List[A] = new java.util.ArrayList[A];
+		 this.filter(e=> selector(e)).foreach(e => res.add(e))
+		return res}
+	def each(func : A=> Unit):Unit ={if (elements!=null && elements.length >0) elements.foreach(e=> func(e))}
+	/*TODO*///def collect(collector : A=> Unit) :Sequence[A]={return null}
+	def getMetaClass():String={
+		return this.getClass().toString();
+	}
+	def asSet() :java.util.List[A] = {
+		var res : java.util.List[A] = new java.util.ArrayList[A];
+		this.each{e=> res.add(e)}
+		return res
+	}
+	def asOrderedSet() :java.util.List[A] = {
+		var res : java.util.List[A] = new java.util.ArrayList[A];
+		this.each{e=> res.add(e)}
+		return res
+	}
+	def asBag() :java.util.List[A] = {
+		var res : java.util.List[A] = new java.util.ArrayList[A];
+		this.each{e=> res.add(e)}
+		return res
+	}
+	def asSequence() :java.util.List[A] = {
+		var res : java.util.List[A] = new java.util.ArrayList[A];
+		this.each{e=> res.add(e)}
+		return res
+	}
+	//TODO
+	def isVoid() :Boolean= {this==null}
+	  
+  }
+  
+  case class JSetWrapper[A](underlying : ju.Set[A]) extends KermetaSet[A] with mutable.SetLike[A, JSetWrapper[A]]{
+
+	override def size = underlying.size
 
     def iterator = underlying.iterator
   
@@ -317,6 +430,7 @@ object JavaConversions {
     override def clear = underlying.clear
 
     override def empty = JSetWrapper(new ju.HashSet[A])
+   
   }
   
   case class MutableMapWrapper[A, B](underlying : mutable.Map[A, B])(m : ClassManifest[A]) extends ju.AbstractMap[A, B] {

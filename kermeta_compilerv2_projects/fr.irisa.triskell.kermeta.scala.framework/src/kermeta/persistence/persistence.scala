@@ -73,54 +73,56 @@ class EMFRepository  extends Repository  {
 
 
 class EMFResource  extends Resource  {
-		
-		var rs:ResourceSetImpl = new ResourceSetImpl(); 
-		
-		//EcorePackageImpl.init();
-		var f:org.eclipse.emf.ecore.resource.Resource.Factory.Registry = rs.getResourceFactoryRegistry();
-		
-		var m :java.util.Map[String,Object]  = f.getExtensionToFactoryMap();
-		//f.get
-		
-		m.put("ecore",new EcoreResourceFactoryImpl());
-		m.put("*",new XMIResourceFactoryImpl());
-		
-		//m.put("*",new EcoreResourceFactoryImpl());
-		
-		/*m.put("*",
-				new EcoreResourceFactoryImpl() {
-					@Override
-					public Resource createResource(URI uri) {
-						XMIResourceImpl resource = (XMIResourceImpl) super
-								.createResource(uri);
-						resource.getDefaultLoadOptions().put(
-								XMLResource.OPTION_RECORD_UNKNOWN_FEATURE,
-								Boolean.TRUE);
-						return resource;
-					}
-				});
-*/
-		
-		//rs.getPackageRegistry().put(/*pack.getNsURI()*/"", pack);
-		rs.getPackageRegistry().putAll(EcorePackages.getPacks())
-    
-	//override def remove(instance : Object)={super.remove(instance)}
-	override  def save()={}
-	override def saveWithNewURI(new_uri : String)={ uri = new_uri 
-		this.save
-	}
-	def saveAndValidateWithEMF() :Boolean={save() 
-                                        return true}
-	def load(){
-		
-		var uri1 :URI = URI.createURI(uri)//.replace("platform:/resource/",EcorePackages.workspaceURI).replace("platform:/plugin/",EcorePackages.pluginURI ));
-		var resource :org.eclipse.emf.ecore.resource.Resource  = rs.getResource(uri1,true);
-		//resource.load(new java.util.HashMap)
-		if (resource.isLoaded() && resource.getContents().size() > 0) {
-			this.addAll(resource.getContents());
-		} 
-		
-	}
+			
+			var rs:ResourceSetImpl = new ResourceSetImpl(); 
+			
+			//EcorePackageImpl.init();
+			var f:org.eclipse.emf.ecore.resource.Resource.Factory.Registry = rs.getResourceFactoryRegistry();
+			
+			var m :java.util.Map[String,Object]  = f.getExtensionToFactoryMap();
+			//f.get
+			
+			m.put("ecore",new EcoreResourceFactoryImpl());
+			m.put("*",new XMIResourceFactoryImpl());
+			
+			//m.put("*",new EcoreResourceFactoryImpl());
+			
+			/*m.put("*",
+					new EcoreResourceFactoryImpl() {
+						@Override
+						public Resource createResource(URI uri) {
+							XMIResourceImpl resource = (XMIResourceImpl) super
+									.createResource(uri);
+							resource.getDefaultLoadOptions().put(
+									XMLResource.OPTION_RECORD_UNKNOWN_FEATURE,
+									Boolean.TRUE);
+							return resource;
+						}
+					});
+	*/
+			
+			//rs.getPackageRegistry().put(/*pack.getNsURI()*/"", pack);
+			rs.getPackageRegistry().putAll(EcorePackages.getPacks())
+			
+			
+	    
+		//override def remove(instance : Object)={super.remove(instance)}
+		override  def save()={}
+		override def saveWithNewURI(new_uri : String)={ uri = new_uri 
+			this.save
+		}
+		def saveAndValidateWithEMF() :Boolean={save() 
+	                                        return true}
+		def load(){
+			
+			var uri1 :URI = URI.createURI(uri)//.replace("platform:/resource/",EcorePackages.workspaceURI).replace("platform:/plugin/",EcorePackages.pluginURI ));
+			var resource :org.eclipse.emf.ecore.resource.Resource  = rs.getResource(uri1,true);
+			//resource.load(new java.util.HashMap)
+			if (resource.isLoaded() && resource.getContents().size() > 0) {
+				this.addAll(resource.getContents());
+			} 
+			
+		}
 }
 
 object EcorePackages{

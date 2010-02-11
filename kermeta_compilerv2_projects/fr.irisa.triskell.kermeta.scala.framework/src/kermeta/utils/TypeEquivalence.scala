@@ -31,6 +31,7 @@ object TypeEquivalence {
 		typeEquivelence.put("org.eclipse.emf.ecore.EStringToStringMapEntry","java.util.Map.Entry[String,String]")
 		typeEquivelence.put("kermeta.utils.Stack", " java.util.Stack");
 		typeEquivelence.put("kermeta.utils.StringBuffer", "scala.StringBuilder");
+		typeEquivelence.put("kermeta.utils.Hashtable", "java.util.HashMap");
 		typeEquivelence.put("kermeta.standard.Iterator", "java.util.Iterator");
 		typeEquivelence.put("kermeta.standard.Collection", "java.util.List");
 		typeEquivelence.put("kermeta.standard.Set", "java.util.List");
@@ -54,10 +55,11 @@ object TypeEquivalence {
 		return res 
 	}
 	var methodEquivalence :  java.util.HashMap[String,java.util.HashMap[String,String]] = {methodEquivalence = new java.util.HashMap[String,java.util.HashMap[String,String]]()
-			var Hashtable : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
-			                                                                         Hashtable.put("getValue", "get");
-//		Hashtable.put("getValue", "get");
-		methodEquivalence.put("kermeta.utils.Hashtable", Hashtable);
+		var Hashtable : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
+		Hashtable.put("getValue", "get");
+		Hashtable.put("keys", "keySet");
+		//Hashtable.put("getValue", "get");
+		methodEquivalence.put("java.util.HashMap", Hashtable);
 		
 		var Stack : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		Stack.put("peek", "peek");
@@ -82,8 +84,12 @@ object TypeEquivalence {
 
 	};
 	 
-	def getMethodEquivalence(className:String,methodName:String):String={
+	def getMethodEquivalence(classN:String,methodName:String):String={
+		var className :String = classN
+		//println("getMethodEquivalence " + className + " " + methodName )
 		var res :String = null
+		if (className.contains("["))
+			 className = className.substring(0,className.indexOf("["))
 		var map :java.util.HashMap[String,String] = methodEquivalence.get(className)
 		if (map !=null) 
 			res =  map.get(methodName)

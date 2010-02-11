@@ -4,7 +4,7 @@ package kermeta.standard;
 import scala._
 //import scala.collection.JavaConversions._
 //import fr.irisa.triskell.kermeta.language.behavior._
- 
+
     
 object PrimitiveConversion{
 	implicit def string2kermeta(x: String) = new RichString(x)	
@@ -56,14 +56,13 @@ class RichAttribute(e:org.eclipse.emf.ecore.EStructuralFeature){
 	
 }
 
-class Void  extends Object //with fr.irisa.triskell.kermeta.scala.framework.emf.aspects.KermetaObjectAspect  
+class Void  extends Object with EObjectImplForPrimitive //with fr.irisa.triskell.kermeta.scala.framework.emf.aspects.KermetaObjectAspect  
 {
-	 def isVoid() :Boolean={return true;}
 	 override def toString() :java.lang.String={return  "<void>";}
 }
  
-class RichValueType[G]  extends Object {
-		def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
+class RichValueType[G]  extends Object with EObjectImplForPrimitive{
+		//def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
 }
 
 abstract class Comparable[G]  extends Object {
@@ -75,7 +74,7 @@ abstract class Comparable[G]  extends Object {
 	}
 	abstract class Summable[G]  extends Object {
 	def plus(other : G) :G
-	def isNotEqual(other : Any) :Boolean = {!this.equals(other) }
+	//def isNotEqual(other : Any) :Boolean = {!this.equals(other) }
 }
 class RichNotComparableException  extends Exception  {}
 
@@ -86,7 +85,6 @@ class RichIterator (value: java.util.Iterator[_]) extends RichValueType[Boolean]
 
 class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
 		
-	def isVoid() :Boolean={return null.asInstanceOf[Boolean].equals(value)}
 
 	def not() :Boolean={return !value}
 	def xor(other : Boolean) :Boolean={(value || other) && !(value && other)}
@@ -112,7 +110,6 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
 
 class RichJavaBoolean (value: java.lang.Boolean) extends RichValueType[Boolean] {
 		
-	def isVoid() :Boolean={return null.asInstanceOf[Boolean].equals(value)}
 
 	def not() :Boolean={return !value.booleanValue}
 	def xor(other : Boolean) :Boolean={(value.booleanValue || other) && !(value.booleanValue && other)}
@@ -182,8 +179,7 @@ class RichInteger(value: Int)  extends RichNumeric[Int] {
 }
 
 
-class RichReal (value: Double) extends RichNumeric[Double] {
-	def isVoid() :Boolean={return null.asInstanceOf[Double].equals(value)}
+class RichReal (value: Double) extends RichNumeric[Double] with EObjectImplForPrimitive{
 	def plus(other : Double) :Double={return value+other.toDouble}
 	def mult(other : Double) :Double={return value*other.toDouble}
 	def minus(other : Double) :Double={return value-other.toDouble}
@@ -199,19 +195,42 @@ class RichReal (value: Double) extends RichNumeric[Double] {
 	def isGreaterOrEqual(other : Double) :Boolean={ value>=other }
 	def isLowerOrEqual(other : Double) :Boolean={ value<=other }
 	def isGreater(other : Double) :Boolean={ value>other }
-	def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
 
 }
 
-class RichCharacter(value:Char)  extends RichValueType {
+class RichCharacter(value:Char)  extends RichValueType with EObjectImplForPrimitive{
 	//TODO
-	def isVoid() :Boolean={return null.asInstanceOf[Char].equals(value)}
 	def compareTo(other : Object) :Int={0}
 	override def toString() :java.lang.String={return ""+value}
 }
-class RichString(value: java.lang.String)  extends RichValueType {
+
+trait EObjectImplForPrimitive extends fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation with fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect{
+		def eUnset(feature: org.eclipse.emf.ecore.EStructuralFeature)={}
+	def eIsSet(feature: org.eclipse.emf.ecore.EStructuralFeature):Boolean = true
+	def eSet(feature: org.eclipse.emf.ecore.EStructuralFeature,x:Any):Unit={}
+	def eGet(feature: org.eclipse.emf.ecore.EStructuralFeature,resolv: Boolean):java.lang.Object={null}
+	def eGet(feature: org.eclipse.emf.ecore.EStructuralFeature):java.lang.Object={null}
+	def eCrossReferences():  org.eclipse.emf.common.util.EList[org.eclipse.emf.ecore.EObject] = null
+	def eIsProxy():Boolean = false
+	def eAllContents(): org.eclipse.emf.common.util.TreeIterator[org.eclipse.emf.ecore.EObject] =null
+	def eContents():  org.eclipse.emf.common.util.EList[org.eclipse.emf.ecore.EObject] = null
+	def eContainmentFeature():org.eclipse.emf.ecore.EReference =null;
+	def eContainingFeature():   org.eclipse.emf.ecore.EStructuralFeature =null
+	def eContainer() : org.eclipse.emf.ecore.EObject =null
+	def eResource() :   org.eclipse.emf.ecore.resource.Resource =null;
+	def eClass() : org.eclipse.emf.ecore.EClass = null;
+	   override def eAdapters(): org.eclipse.emf.common.util.EList[org.eclipse.emf.common.notify.Adapter] =null;
+	   def eDeliver():Boolean =true;
+	   def eSetDeliver(deliver:Boolean):Unit=null;
+	   def eNotify( notification:org.eclipse.emf.common.notify.Notification):Unit=null;
+
+}
+
+class RichString(value: java.lang.String)  extends RichValueType with EObjectImplForPrimitive{
 	//TODO
-	def isVoid() :Boolean={return null.asInstanceOf[String].equals(value)}
+
+	
+	
 	def append(other : String):String={return value + other}
 	def plus(other : String) :java.lang.String={return value + other}
 	def toReal() :Double={return java.lang.Double.parseDouble(value)}
