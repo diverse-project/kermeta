@@ -96,22 +96,13 @@ public interface FsmPackage extends EPackage {
 	int FSM__INITIAL_STATE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Current State</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FSM__CURRENT_STATE = 2;
-
-	/**
 	 * The feature id for the '<em><b>Final State</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FSM__FINAL_STATE = 3;
+	int FSM__FINAL_STATE = 2;
 
 	/**
 	 * The number of structural features of the '<em>FSM</em>' class.
@@ -120,7 +111,7 @@ public interface FsmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FSM_FEATURE_COUNT = 4;
+	int FSM_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.StateImpl <em>State</em>}' class.
@@ -233,80 +224,23 @@ public interface FsmPackage extends EPackage {
 	int TRANSITION_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.FSMExceptionImpl <em>FSM Exception</em>}' class.
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.testImpl <em>test</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FSMExceptionImpl
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getFSMException()
+	 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.testImpl
+	 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#gettest()
 	 * @generated
 	 */
-	int FSM_EXCEPTION = 3;
+	int TEST = 3;
 
 	/**
-	 * The number of structural features of the '<em>FSM Exception</em>' class.
+	 * The number of structural features of the '<em>test</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FSM_EXCEPTION_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.NonDeterminismImpl <em>Non Determinism</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.NonDeterminismImpl
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getNonDeterminism()
-	 * @generated
-	 */
-	int NON_DETERMINISM = 4;
-
-	/**
-	 * The number of structural features of the '<em>Non Determinism</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NON_DETERMINISM_FEATURE_COUNT = FSM_EXCEPTION_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.NoTransitionImpl <em>No Transition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.NoTransitionImpl
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getNoTransition()
-	 * @generated
-	 */
-	int NO_TRANSITION = 5;
-
-	/**
-	 * The number of structural features of the '<em>No Transition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NO_TRANSITION_FEATURE_COUNT = FSM_EXCEPTION_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.NoInitialStateExceptionImpl <em>No Initial State Exception</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.NoInitialStateExceptionImpl
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getNoInitialStateException()
-	 * @generated
-	 */
-	int NO_INITIAL_STATE_EXCEPTION = 6;
-
-	/**
-	 * The number of structural features of the '<em>No Initial State Exception</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NO_INITIAL_STATE_EXCEPTION_FEATURE_COUNT = FSM_EXCEPTION_FEATURE_COUNT + 0;
+	int TEST_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -316,7 +250,7 @@ public interface FsmPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 7;
+	int STRING = 4;
 
 
 	/**
@@ -350,17 +284,6 @@ public interface FsmPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFSM_InitialState();
-
-	/**
-	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.samples.fsm.FSM#getCurrentState <em>Current State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Current State</em>'.
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.FSM#getCurrentState()
-	 * @see #getFSM()
-	 * @generated
-	 */
-	EReference getFSM_CurrentState();
 
 	/**
 	 * Returns the meta object for the reference list '{@link fr.irisa.triskell.kermeta.samples.fsm.FSM#getFinalState <em>Final State</em>}'.
@@ -482,44 +405,14 @@ public interface FsmPackage extends EPackage {
 	EAttribute getTransition_Output();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.samples.fsm.FSMException <em>FSM Exception</em>}'.
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.samples.fsm.test <em>test</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>FSM Exception</em>'.
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.FSMException
+	 * @return the meta object for class '<em>test</em>'.
+	 * @see fr.irisa.triskell.kermeta.samples.fsm.test
 	 * @generated
 	 */
-	EClass getFSMException();
-
-	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.samples.fsm.NonDeterminism <em>Non Determinism</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Non Determinism</em>'.
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.NonDeterminism
-	 * @generated
-	 */
-	EClass getNonDeterminism();
-
-	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.samples.fsm.NoTransition <em>No Transition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>No Transition</em>'.
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.NoTransition
-	 * @generated
-	 */
-	EClass getNoTransition();
-
-	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.samples.fsm.NoInitialStateException <em>No Initial State Exception</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>No Initial State Exception</em>'.
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.NoInitialStateException
-	 * @generated
-	 */
-	EClass getNoInitialStateException();
+	EClass gettest();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
@@ -579,14 +472,6 @@ public interface FsmPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FSM__INITIAL_STATE = eINSTANCE.getFSM_InitialState();
-
-		/**
-		 * The meta object literal for the '<em><b>Current State</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FSM__CURRENT_STATE = eINSTANCE.getFSM_CurrentState();
 
 		/**
 		 * The meta object literal for the '<em><b>Final State</b></em>' reference list feature.
@@ -681,44 +566,14 @@ public interface FsmPackage extends EPackage {
 		EAttribute TRANSITION__OUTPUT = eINSTANCE.getTransition_Output();
 
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.FSMExceptionImpl <em>FSM Exception</em>}' class.
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.testImpl <em>test</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FSMExceptionImpl
-		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getFSMException()
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.testImpl
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#gettest()
 		 * @generated
 		 */
-		EClass FSM_EXCEPTION = eINSTANCE.getFSMException();
-
-		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.NonDeterminismImpl <em>Non Determinism</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.NonDeterminismImpl
-		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getNonDeterminism()
-		 * @generated
-		 */
-		EClass NON_DETERMINISM = eINSTANCE.getNonDeterminism();
-
-		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.NoTransitionImpl <em>No Transition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.NoTransitionImpl
-		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getNoTransition()
-		 * @generated
-		 */
-		EClass NO_TRANSITION = eINSTANCE.getNoTransition();
-
-		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.NoInitialStateExceptionImpl <em>No Initial State Exception</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.NoInitialStateExceptionImpl
-		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getNoInitialStateException()
-		 * @generated
-		 */
-		EClass NO_INITIAL_STATE_EXCEPTION = eINSTANCE.getNoInitialStateException();
+		EClass TEST = eINSTANCE.gettest();
 
 		/**
 		 * The meta object literal for the '<em>String</em>' data type.

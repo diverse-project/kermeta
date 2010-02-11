@@ -143,12 +143,4 @@ public interface Transition extends EObject {
 	 */
 	void setOutput(String value);
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.samples.fsm.String"
-	 * @generated
-	 */
-	String fire();
-
 } // Transition

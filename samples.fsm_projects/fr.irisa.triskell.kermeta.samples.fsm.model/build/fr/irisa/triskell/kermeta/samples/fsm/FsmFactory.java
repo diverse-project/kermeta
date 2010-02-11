@@ -60,40 +60,13 @@ public interface FsmFactory extends EFactory {
 	Transition createTransition();
 
 	/**
-	 * Returns a new object of class '<em>FSM Exception</em>'.
+	 * Returns a new object of class '<em>test</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>FSM Exception</em>'.
+	 * @return a new object of class '<em>test</em>'.
 	 * @generated
 	 */
-	FSMException createFSMException();
-
-	/**
-	 * Returns a new object of class '<em>Non Determinism</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Non Determinism</em>'.
-	 * @generated
-	 */
-	NonDeterminism createNonDeterminism();
-
-	/**
-	 * Returns a new object of class '<em>No Transition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>No Transition</em>'.
-	 * @generated
-	 */
-	NoTransition createNoTransition();
-
-	/**
-	 * Returns a new object of class '<em>No Initial State Exception</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>No Initial State Exception</em>'.
-	 * @generated
-	 */
-	NoInitialStateException createNoInitialStateException();
+	test createtest();
 
 	/**
 	 * Returns the package supported by this factory.

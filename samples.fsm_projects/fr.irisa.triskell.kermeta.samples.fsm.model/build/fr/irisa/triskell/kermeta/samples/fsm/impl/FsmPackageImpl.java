@@ -15,6 +15,7 @@ import fr.irisa.triskell.kermeta.samples.fsm.NonDeterminism;
 import fr.irisa.triskell.kermeta.samples.fsm.State;
 import fr.irisa.triskell.kermeta.samples.fsm.Transition;
 
+import fr.irisa.triskell.kermeta.samples.fsm.test;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -65,28 +66,7 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass fsmExceptionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass nonDeterminismEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass noTransitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass noInitialStateExceptionEClass = null;
+	private EClass testEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,20 +102,10 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link FsmPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -147,7 +117,7 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 		if (isInited) return (FsmPackage)EPackage.Registry.INSTANCE.getEPackage(FsmPackage.eNS_URI);
 
 		// Obtain or create and register package
-		FsmPackageImpl theFsmPackage = (FsmPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof FsmPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new FsmPackageImpl());
+		FsmPackageImpl theFsmPackage = (FsmPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FsmPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FsmPackageImpl());
 
 		isInited = true;
 
@@ -160,6 +130,9 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 		// Mark meta-data to indicate it can't be changed
 		theFsmPackage.freeze();
 
+  
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(FsmPackage.eNS_URI, theFsmPackage);
 		return theFsmPackage;
 	}
 
@@ -195,17 +168,8 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFSM_CurrentState() {
-		return (EReference)fsmEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getFSM_FinalState() {
-		return (EReference)fsmEClass.getEStructuralFeatures().get(3);
+		return (EReference)fsmEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -303,35 +267,8 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFSMException() {
-		return fsmExceptionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNonDeterminism() {
-		return nonDeterminismEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNoTransition() {
-		return noTransitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNoInitialStateException() {
-		return noInitialStateExceptionEClass;
+	public EClass gettest() {
+		return testEClass;
 	}
 
 	/**
@@ -374,7 +311,6 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 		fsmEClass = createEClass(FSM);
 		createEReference(fsmEClass, FSM__OWNED_STATE);
 		createEReference(fsmEClass, FSM__INITIAL_STATE);
-		createEReference(fsmEClass, FSM__CURRENT_STATE);
 		createEReference(fsmEClass, FSM__FINAL_STATE);
 
 		stateEClass = createEClass(STATE);
@@ -389,13 +325,7 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 		createEAttribute(transitionEClass, TRANSITION__INPUT);
 		createEAttribute(transitionEClass, TRANSITION__OUTPUT);
 
-		fsmExceptionEClass = createEClass(FSM_EXCEPTION);
-
-		nonDeterminismEClass = createEClass(NON_DETERMINISM);
-
-		noTransitionEClass = createEClass(NO_TRANSITION);
-
-		noInitialStateExceptionEClass = createEClass(NO_INITIAL_STATE_EXCEPTION);
+		testEClass = createEClass(TEST);
 
 		// Create data types
 		stringEDataType = createEDataType(STRING);
@@ -429,20 +359,12 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		nonDeterminismEClass.getESuperTypes().add(this.getFSMException());
-		noTransitionEClass.getESuperTypes().add(this.getFSMException());
-		noInitialStateExceptionEClass.getESuperTypes().add(this.getFSMException());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(fsmEClass, fr.irisa.triskell.kermeta.samples.fsm.FSM.class, "FSM", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFSM_OwnedState(), this.getState(), this.getState_OwningFSM(), "ownedState", null, 0, -1, fr.irisa.triskell.kermeta.samples.fsm.FSM.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFSM_InitialState(), this.getState(), null, "initialState", null, 1, 1, fr.irisa.triskell.kermeta.samples.fsm.FSM.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFSM_CurrentState(), this.getState(), null, "currentState", null, 0, 1, fr.irisa.triskell.kermeta.samples.fsm.FSM.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFSM_FinalState(), this.getState(), null, "finalState", null, 1, -1, fr.irisa.triskell.kermeta.samples.fsm.FSM.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(fsmEClass, null, "run", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(fsmEClass, null, "reset", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getState_OwningFSM(), this.getFSM(), this.getFSM_OwnedState(), "owningFSM", null, 1, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -450,24 +372,13 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 		initEReference(getState_OutgoingTransition(), this.getTransition(), this.getTransition_Source(), "outgoingTransition", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getState_IncomingTransition(), this.getTransition(), this.getTransition_Target(), "incomingTransition", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(stateEClass, this.getString(), "step", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getString(), "c", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransition_Source(), this.getState(), this.getState_OutgoingTransition(), "source", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_Target(), this.getState(), this.getState_IncomingTransition(), "target", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransition_Input(), this.getString(), "input", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransition_Output(), this.getString(), "output", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(transitionEClass, this.getString(), "fire", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(fsmExceptionEClass, FSMException.class, "FSMException", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(nonDeterminismEClass, NonDeterminism.class, "NonDeterminism", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(noTransitionEClass, NoTransition.class, "NoTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(noInitialStateExceptionEClass, NoInitialStateException.class, "NoInitialStateException", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(testEClass, test.class, "test", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize data types
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

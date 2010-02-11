@@ -71,7 +71,7 @@ public class FsmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -91,20 +91,8 @@ public class FsmAdapterFactory extends AdapterFactoryImpl {
 				return createTransitionAdapter();
 			}
 			@Override
-			public Adapter caseFSMException(FSMException object) {
-				return createFSMExceptionAdapter();
-			}
-			@Override
-			public Adapter caseNonDeterminism(NonDeterminism object) {
-				return createNonDeterminismAdapter();
-			}
-			@Override
-			public Adapter caseNoTransition(NoTransition object) {
-				return createNoTransitionAdapter();
-			}
-			@Override
-			public Adapter caseNoInitialStateException(NoInitialStateException object) {
-				return createNoInitialStateExceptionAdapter();
+			public Adapter casetest(test object) {
+				return createtestAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -169,58 +157,16 @@ public class FsmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.samples.fsm.FSMException <em>FSM Exception</em>}'.
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.samples.fsm.test <em>test</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.FSMException
+	 * @see fr.irisa.triskell.kermeta.samples.fsm.test
 	 * @generated
 	 */
-	public Adapter createFSMExceptionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.samples.fsm.NonDeterminism <em>Non Determinism</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.NonDeterminism
-	 * @generated
-	 */
-	public Adapter createNonDeterminismAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.samples.fsm.NoTransition <em>No Transition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.NoTransition
-	 * @generated
-	 */
-	public Adapter createNoTransitionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.samples.fsm.NoInitialStateException <em>No Initial State Exception</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.NoInitialStateException
-	 * @generated
-	 */
-	public Adapter createNoInitialStateExceptionAdapter() {
+	public Adapter createtestAdapter() {
 		return null;
 	}
 

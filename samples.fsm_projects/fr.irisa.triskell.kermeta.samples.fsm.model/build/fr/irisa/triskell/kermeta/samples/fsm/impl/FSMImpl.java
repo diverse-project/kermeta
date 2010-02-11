@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.samples.fsm.impl.FSMImpl#getOwnedState <em>Owned State</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.samples.fsm.impl.FSMImpl#getInitialState <em>Initial State</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.samples.fsm.impl.FSMImpl#getCurrentState <em>Current State</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.samples.fsm.impl.FSMImpl#getFinalState <em>Final State</em>}</li>
  * </ul>
  * </p>
@@ -70,16 +69,6 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * @ordered
 	 */
 	protected State initialState;
-
-	/**
-	 * The cached value of the '{@link #getCurrentState() <em>Current State</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCurrentState()
-	 * @generated
-	 * @ordered
-	 */
-	protected State currentState;
 
 	/**
 	 * The cached value of the '{@link #getFinalState() <em>Final State</em>}' reference list.
@@ -165,71 +154,11 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public State getCurrentState() {
-		if (currentState != null && currentState.eIsProxy()) {
-			InternalEObject oldCurrentState = (InternalEObject)currentState;
-			currentState = (State)eResolveProxy(oldCurrentState);
-			if (currentState != oldCurrentState) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FsmPackage.FSM__CURRENT_STATE, oldCurrentState, currentState));
-			}
-		}
-		return currentState;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public State basicGetCurrentState() {
-		return currentState;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCurrentState(State newCurrentState) {
-		State oldCurrentState = currentState;
-		currentState = newCurrentState;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FsmPackage.FSM__CURRENT_STATE, oldCurrentState, currentState));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<State> getFinalState() {
 		if (finalState == null) {
 			finalState = new EObjectResolvingEList<State>(State.class, this, FsmPackage.FSM__FINAL_STATE);
 		}
 		return finalState;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void run() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void reset() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -274,9 +203,6 @@ public class FSMImpl extends EObjectImpl implements FSM {
 			case FsmPackage.FSM__INITIAL_STATE:
 				if (resolve) return getInitialState();
 				return basicGetInitialState();
-			case FsmPackage.FSM__CURRENT_STATE:
-				if (resolve) return getCurrentState();
-				return basicGetCurrentState();
 			case FsmPackage.FSM__FINAL_STATE:
 				return getFinalState();
 		}
@@ -298,9 +224,6 @@ public class FSMImpl extends EObjectImpl implements FSM {
 				return;
 			case FsmPackage.FSM__INITIAL_STATE:
 				setInitialState((State)newValue);
-				return;
-			case FsmPackage.FSM__CURRENT_STATE:
-				setCurrentState((State)newValue);
 				return;
 			case FsmPackage.FSM__FINAL_STATE:
 				getFinalState().clear();
@@ -324,9 +247,6 @@ public class FSMImpl extends EObjectImpl implements FSM {
 			case FsmPackage.FSM__INITIAL_STATE:
 				setInitialState((State)null);
 				return;
-			case FsmPackage.FSM__CURRENT_STATE:
-				setCurrentState((State)null);
-				return;
 			case FsmPackage.FSM__FINAL_STATE:
 				getFinalState().clear();
 				return;
@@ -346,8 +266,6 @@ public class FSMImpl extends EObjectImpl implements FSM {
 				return ownedState != null && !ownedState.isEmpty();
 			case FsmPackage.FSM__INITIAL_STATE:
 				return initialState != null;
-			case FsmPackage.FSM__CURRENT_STATE:
-				return currentState != null;
 			case FsmPackage.FSM__FINAL_STATE:
 				return finalState != null && !finalState.isEmpty();
 		}

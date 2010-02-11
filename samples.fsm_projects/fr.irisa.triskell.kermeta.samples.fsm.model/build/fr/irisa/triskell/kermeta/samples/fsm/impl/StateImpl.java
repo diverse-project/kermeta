@@ -118,7 +118,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * @generated
 	 */
 	public FSM getOwningFSM() {
-		if (eContainerFeatureID != FsmPackage.STATE__OWNING_FSM) return null;
+		if (eContainerFeatureID() != FsmPackage.STATE__OWNING_FSM) return null;
 		return (FSM)eContainer();
 	}
 
@@ -128,7 +128,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * @generated
 	 */
 	public FSM basicGetOwningFSM() {
-		if (eContainerFeatureID != FsmPackage.STATE__OWNING_FSM) return null;
+		if (eContainerFeatureID() != FsmPackage.STATE__OWNING_FSM) return null;
 		return (FSM)eInternalContainer();
 	}
 
@@ -148,7 +148,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * @generated
 	 */
 	public void setOwningFSM(FSM newOwningFSM) {
-		if (newOwningFSM != eInternalContainer() || (eContainerFeatureID != FsmPackage.STATE__OWNING_FSM && newOwningFSM != null)) {
+		if (newOwningFSM != eInternalContainer() || (eContainerFeatureID() != FsmPackage.STATE__OWNING_FSM && newOwningFSM != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningFSM))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -213,17 +213,6 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String step(String c) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -265,7 +254,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case FsmPackage.STATE__OWNING_FSM:
 				return eInternalContainer().eInverseRemove(this, FsmPackage.FSM__OWNED_STATE, FSM.class, msgs);
 		}

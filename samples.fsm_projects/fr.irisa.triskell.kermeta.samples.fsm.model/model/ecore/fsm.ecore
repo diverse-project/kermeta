@@ -4,20 +4,14 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fsm"
     nsURI="http://www.kermeta.org/fsm" nsPrefix="fsm">
   <eClassifiers xsi:type="ecore:EClass" name="FSM">
-    <eOperations name="run"/>
-    <eOperations name="reset"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedState" upperBound="-1"
         eType="#//State" containment="true" eOpposite="#//State/owningFSM"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialState" lowerBound="1"
         eType="#//State"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="currentState" eType="#//State"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="finalState" lowerBound="1"
         upperBound="-1" eType="#//State"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State">
-    <eOperations name="step" eType="#//String">
-      <eParameters name="c" eType="#//String"/>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningFSM" lowerBound="1"
         eType="#//FSM" eOpposite="#//FSM/ownedState"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
@@ -27,7 +21,6 @@
         eType="#//Transition" eOpposite="#//Transition/target"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
-    <eOperations name="fire" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//State" eOpposite="#//State/outgoingTransition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
@@ -35,9 +28,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" eType="#//String"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FSMException"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NonDeterminism" eSuperTypes="#//FSMException"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NoTransition" eSuperTypes="#//FSMException"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NoInitialStateException" eSuperTypes="#//FSMException"/>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="test"/>
 </ecore:EPackage>

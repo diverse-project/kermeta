@@ -127,12 +127,4 @@ public interface State extends EObject {
 	 */
 	EList<Transition> getIncomingTransition();
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.samples.fsm.String" cDataType="fr.irisa.triskell.kermeta.samples.fsm.String"
-	 * @generated
-	 */
-	String step(String c);
-
 } // State

@@ -120,7 +120,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	public State getSource() {
-		if (eContainerFeatureID != FsmPackage.TRANSITION__SOURCE) return null;
+		if (eContainerFeatureID() != FsmPackage.TRANSITION__SOURCE) return null;
 		return (State)eContainer();
 	}
 
@@ -130,7 +130,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	public State basicGetSource() {
-		if (eContainerFeatureID != FsmPackage.TRANSITION__SOURCE) return null;
+		if (eContainerFeatureID() != FsmPackage.TRANSITION__SOURCE) return null;
 		return (State)eInternalContainer();
 	}
 
@@ -150,7 +150,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	public void setSource(State newSource) {
-		if (newSource != eInternalContainer() || (eContainerFeatureID != FsmPackage.TRANSITION__SOURCE && newSource != null)) {
+		if (newSource != eInternalContainer() || (eContainerFeatureID() != FsmPackage.TRANSITION__SOURCE && newSource != null)) {
 			if (EcoreUtil.isAncestor(this, newSource))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -272,17 +272,6 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String fire() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -321,7 +310,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case FsmPackage.TRANSITION__SOURCE:
 				return eInternalContainer().eInverseRemove(this, FsmPackage.STATE__OUTGOING_TRANSITION, State.class, msgs);
 		}

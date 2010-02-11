@@ -14,28 +14,18 @@
       <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference fsm.ecore#//FSM/initialState"/>
       <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference fsm.ecore#//FSM/currentState"/>
       <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference fsm.ecore#//FSM/finalState"/>
-      <genOperations ecoreOperation="fsm.ecore#//FSM/run"/>
-      <genOperations ecoreOperation="fsm.ecore#//FSM/reset"/>
     </genClasses>
     <genClasses ecoreClass="fsm.ecore#//State">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fsm.ecore#//State/owningFSM"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsm.ecore#//State/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fsm.ecore#//State/outgoingTransition"/>
       <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference fsm.ecore#//State/incomingTransition"/>
-      <genOperations ecoreOperation="fsm.ecore#//State/step">
-        <genParameters ecoreParameter="fsm.ecore#//State/step/c"/>
-      </genOperations>
     </genClasses>
     <genClasses ecoreClass="fsm.ecore#//Transition">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fsm.ecore#//Transition/source"/>
       <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference fsm.ecore#//Transition/target"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsm.ecore#//Transition/input"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsm.ecore#//Transition/output"/>
-      <genOperations ecoreOperation="fsm.ecore#//Transition/fire"/>
     </genClasses>
-    <genClasses ecoreClass="fsm.ecore#//FSMException"/>
-    <genClasses ecoreClass="fsm.ecore#//NonDeterminism"/>
-    <genClasses ecoreClass="fsm.ecore#//NoTransition"/>
-    <genClasses ecoreClass="fsm.ecore#//NoInitialStateException"/>
   </genPackages>
 </genmodel:GenModel>

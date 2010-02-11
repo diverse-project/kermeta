@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.samples.fsm.FSM#getOwnedState <em>Owned State</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.samples.fsm.FSM#getInitialState <em>Initial State</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.samples.fsm.FSM#getCurrentState <em>Current State</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.samples.fsm.FSM#getFinalState <em>Final State</em>}</li>
  * </ul>
  * </p>
@@ -82,32 +81,6 @@ public interface FSM extends EObject {
 	void setInitialState(State value);
 
 	/**
-	 * Returns the value of the '<em><b>Current State</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Current State</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Current State</em>' reference.
-	 * @see #setCurrentState(State)
-	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getFSM_CurrentState()
-	 * @model
-	 * @generated
-	 */
-	State getCurrentState();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.samples.fsm.FSM#getCurrentState <em>Current State</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Current State</em>' reference.
-	 * @see #getCurrentState()
-	 * @generated
-	 */
-	void setCurrentState(State value);
-
-	/**
 	 * Returns the value of the '<em><b>Final State</b></em>' reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.samples.fsm.State}.
 	 * <!-- begin-user-doc -->
@@ -122,21 +95,5 @@ public interface FSM extends EObject {
 	 * @generated
 	 */
 	EList<State> getFinalState();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void run();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void reset();
 
 } // FSM

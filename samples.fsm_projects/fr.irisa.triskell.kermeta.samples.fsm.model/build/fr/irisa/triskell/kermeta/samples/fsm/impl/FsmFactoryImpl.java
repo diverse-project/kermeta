@@ -71,10 +71,7 @@ public class FsmFactoryImpl extends EFactoryImpl implements FsmFactory {
 			case FsmPackage.FSM: return createFSM();
 			case FsmPackage.STATE: return createState();
 			case FsmPackage.TRANSITION: return createTransition();
-			case FsmPackage.FSM_EXCEPTION: return createFSMException();
-			case FsmPackage.NON_DETERMINISM: return createNonDeterminism();
-			case FsmPackage.NO_TRANSITION: return createNoTransition();
-			case FsmPackage.NO_INITIAL_STATE_EXCEPTION: return createNoInitialStateException();
+			case FsmPackage.TEST: return createtest();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -145,39 +142,9 @@ public class FsmFactoryImpl extends EFactoryImpl implements FsmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FSMException createFSMException() {
-		FSMExceptionImpl fsmException = new FSMExceptionImpl();
-		return fsmException;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NonDeterminism createNonDeterminism() {
-		NonDeterminismImpl nonDeterminism = new NonDeterminismImpl();
-		return nonDeterminism;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NoTransition createNoTransition() {
-		NoTransitionImpl noTransition = new NoTransitionImpl();
-		return noTransition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NoInitialStateException createNoInitialStateException() {
-		NoInitialStateExceptionImpl noInitialStateException = new NoInitialStateExceptionImpl();
-		return noInitialStateException;
+	public test createtest() {
+		testImpl test = new testImpl();
+		return test;
 	}
 
 	/**

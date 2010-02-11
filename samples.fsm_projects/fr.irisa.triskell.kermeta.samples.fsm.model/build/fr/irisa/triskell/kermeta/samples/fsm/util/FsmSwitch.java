@@ -112,30 +112,9 @@ public class FsmSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FsmPackage.FSM_EXCEPTION: {
-				FSMException fsmException = (FSMException)theEObject;
-				T result = caseFSMException(fsmException);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case FsmPackage.NON_DETERMINISM: {
-				NonDeterminism nonDeterminism = (NonDeterminism)theEObject;
-				T result = caseNonDeterminism(nonDeterminism);
-				if (result == null) result = caseFSMException(nonDeterminism);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case FsmPackage.NO_TRANSITION: {
-				NoTransition noTransition = (NoTransition)theEObject;
-				T result = caseNoTransition(noTransition);
-				if (result == null) result = caseFSMException(noTransition);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case FsmPackage.NO_INITIAL_STATE_EXCEPTION: {
-				NoInitialStateException noInitialStateException = (NoInitialStateException)theEObject;
-				T result = caseNoInitialStateException(noInitialStateException);
-				if (result == null) result = caseFSMException(noInitialStateException);
+			case FsmPackage.TEST: {
+				test test = (test)theEObject;
+				T result = casetest(test);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -189,62 +168,17 @@ public class FsmSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>FSM Exception</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>test</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>FSM Exception</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>test</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFSMException(FSMException object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Non Determinism</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Non Determinism</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNonDeterminism(NonDeterminism object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>No Transition</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>No Transition</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNoTransition(NoTransition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>No Initial State Exception</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>No Initial State Exception</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNoInitialStateException(NoInitialStateException object) {
+	public T casetest(test object) {
 		return null;
 	}
 
