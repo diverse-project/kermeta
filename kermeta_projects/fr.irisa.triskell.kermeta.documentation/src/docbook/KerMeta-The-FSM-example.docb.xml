@@ -21,7 +21,7 @@
     <date>19/07/2006</date>
     <abstract>
       <para>This tutorial is part of a serie of tutorials that explain step by step the process
-        explained in the Processes to build a DSL document (cf hyperlien). In this case, it rely on
+        explained in the  <ulink type="" url=""> Manual Process to build a DSL </ulink>. In this case, it rely on
         the classical Finite State Machine example. </para>
     </abstract>
     <publisher>
@@ -79,20 +79,19 @@
   <chapter>
     <title>Introduction</title>
     <para>This tutorial gives an overview of many concepts used through KerMeta project creation.
-      You can retrieve all the steps defined in the Manual Process to build a DSL on which you can
-      iterate in order to progress in your development. Following this tutorial should give you the
-      knowledge : to create a meta model, check its invariants, run configurations, add pre and post
-      conditions and add behaviour on it. To cover all this features, we decided to start from an
-      existing example. Because it is a complete KerMeta project, you should use it as a reference
-      guide. This example is about the finite state machine which acronym is FSM. Firstly, a section
-      explains how to load files of the example in your Eclipse workspace. The next section is
-      dedicated to the finite state machine we want to model. You will have access to every files.
-      Then we present the features presented above. Moreover, we present here examples of graphical
-      editors but this step comes only when the metamodel is stabilized. In this tutorial we will
-      have access to the base project in order to follow it (cf section <link
-        linkend="InstallFSMTutorial">Install FSM project</link>) . You can have also have access of
-      the solution of this tutorial ( cf section <link linkend="InstallTutorialSolution">Install the
-        tutorial 's solution</link> ) </para>
+      You can retrieve all the steps defined in the <ulink type="" url=""> Manual Process to build a DSL </ulink> on which you can iterate in order to progress in your development. Following this
+      tutorial should give you the knowledge : to create a meta model, check its invariants, run
+      configurations, add pre and post conditions and add behaviour on it. To cover all this
+      features, we decided to start from an existing example. Because it is a complete KerMeta
+      project, you should use it as a reference guide. This example is about the finite state
+      machine which acronym is FSM. Firstly, a section explains how to load files of the example in
+      your Eclipse workspace. The next section is dedicated to the finite state machine we want to
+      model. You will have access to every files. Then we present the features presented above.
+      Moreover, we present here examples of graphical editors but this step comes only when the
+      metamodel is stabilized. In this tutorial we will have access to the base project in order to
+      follow it (cf section <link linkend="InstallFSMTutorial">Install FSM project</link>) . You can
+      have also have access of the solution of this tutorial ( cf section <link
+        linkend="InstallTutorialSolution">Install the tutorial 's solution</link> ) </para>
   </chapter>
   <chapter>
     <title>Installation</title>
@@ -1450,7 +1449,7 @@ post post3 of operation step of class State violated</programlisting>
       </section>
       <section>
         <title> Change text presentation</title>
-        <para>The following method comes from  FSMItemProvider in the package
+        <para>The following method comes from FSMItemProvider in the package
           fr.triskell.kermeta.samples.fsm.provider in the project
           fr.irisa.triskell.kermeta.samples.fsm.model.edit. It permits to disply thr initial state
           or if it is missing or if the final state is missing.</para>
@@ -1476,7 +1475,6 @@ post post3 of operation step of class State violated</programlisting>
          </programlisting>
           . </para>
         <para/>
-        
       </section>
     </section>
   </chapter>
