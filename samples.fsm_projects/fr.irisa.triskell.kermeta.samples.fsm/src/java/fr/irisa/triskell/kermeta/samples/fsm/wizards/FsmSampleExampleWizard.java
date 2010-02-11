@@ -25,7 +25,7 @@ public class FsmSampleExampleWizard
 		// We need the statements example to be unzipped along with the
 		// EMF library example model, edit and editor examples
 		List<ProjectDescriptor> projects = new ArrayList<ProjectDescriptor>(1);
-		projects.add(new ProjectDescriptor(FsmPlugin.PROJECT_NAME, "zips/fr.irisa.triskell.kermeta.samples.fsm.demo.zip", "fr.irisa.triskell.kermeta.samples.fsm.demo"));
+		//projects.add(new ProjectDescriptor(FsmPlugin.PROJECT_NAME, "zips/fr.irisa.triskell.kermeta.samples.fsm.demo.zip", "fr.irisa.triskell.kermeta.samples.fsm.demo"));
 		projects.add(new ProjectDescriptor(FsmPlugin.PROJECT_NAME, "zips/fr.irisa.triskell.kermeta.samples.fsm.demoAspect.zip", "fr.irisa.triskell.kermeta.samples.fsm.demoAspect"));
 		return projects;
 	}

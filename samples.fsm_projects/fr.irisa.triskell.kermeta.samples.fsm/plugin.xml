@@ -2,6 +2,8 @@
 <?eclipse version="3.0"?>
 <plugin>
    <extension
+         id="id1"
+         name="Wizard1"
          point="org.eclipse.ui.newWizards">
       <category
             id="fr.irisa.triskell.kermeta.samples.category"
@@ -15,8 +17,28 @@
             hasPages="false"
             icon="icons/FSM.gif"
             id="fr.irisa.triskell.kermeta.samples.fsm.wizard"
-            name="FSM Demo"
+            name="FSM tutorial Demo"
             preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
+   </extension>
+   <extension
+         id="id2"
+         name="Wizard2"
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/fr.irisa.triskell.kermeta.samples.category"
+            class="fr.irisa.triskell.kermeta.samples.fsm.wizards.FsmSampleExampleWizardSolutions"
+            finalPerspective="kermetaPerspective"
+            hasPages="false"
+            icon="icons/FSM.gif"
+            id="fr.irisa.triskell.kermeta.samples.fsm.wizard2"
+            name="FSM Solutions">
+      </wizard>
+      <category
+            id="fr.irisa.triskell.kermeta.samples.fsm.category2"
+            name="Kermeta FSM solutions"
+            parentCategory="org.eclipse.ui.Examples">
+      </category>
    </extension>
 
 </plugin>
