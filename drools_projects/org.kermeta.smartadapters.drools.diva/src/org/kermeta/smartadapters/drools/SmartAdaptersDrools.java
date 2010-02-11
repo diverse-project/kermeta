@@ -91,6 +91,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 	private JPanel     bottom;
 
 
+	private String baseModelURI;
 	private String dsplFile;
 	private String droolsRepository;
 	private String aspectsRepository;
@@ -303,12 +304,21 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 		else {
 			System.err.println("Cannot find the aspect models repository. Plese check the aspects.repository property in your launch configuration.");
 		}
+		
+		String baseModel = System.getProperty("model.base");
+		File baseModelFile = null;
+		if(baseModel != null){
+			baseModelFile = new File(baseModel);
+			baseModelURI = "file://"+baseModelFile.getAbsolutePath();
+		}
+		else {
+			System.err.println("Cannot find the base model. Plese check the model.base property in your launch configuration.");
+		}
 	}
 
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -349,21 +359,20 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 						}
 					}	
 				}
+				
+				loadArtModel(baseModelURI);
+				start = java.lang.System.currentTimeMillis();
 				for(String drl : droolsAspectsToWeave){
 					this.process(drl);
 				}
+				end = java.lang.System.currentTimeMillis();
+				java.lang.System.err.println("Weaving time was "+(end-start)+" ms for "+droolsAspectsToWeave.size()+" aspects");
+				link.reconfigureInMemory((art.System)resource.getContents().get(0));
 			}
-			
-			//reuse the existing drl file if it exists
-			//otherwise, generate the drl file associated to the the aspect
-			
 		}
 		else{
 			System.err.println("Cannot find the best configuration");
 		}
-
-
-		//apply the aspects in the right weaving order
 	}
 
 	/**
@@ -493,7 +502,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 			text = text.replace("\\", "/");
 
 			boolean simpleInterface = false;
-			String contextFile = "file://" + text;
+			String contextFile = (text.startsWith("file:")) ? text : "file://" + text;
 			String confURI = getBestConfiguration(dsplFile, contextFile, simpleInterface);
 
 			produceConfiguration(confURI.replace("file://", ""));
