@@ -3,93 +3,30 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fsm"
     nsURI="http://www.kermeta.org/fsm" nsPrefix="fsm">
-  <eAnnotations source="http://www.topcased.org/uuid">
-    <details key="uuid" value="11498652633810"/>
-  </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="FSM">
-    <eAnnotations source="http://www.topcased.org/uuid">
-      <details key="uuid" value="11498652634011"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedState" upperBound="-1"
-        eType="#//State" containment="true" eOpposite="#//State/owningFSM">
-      <eAnnotations source="http://www.topcased.org/uuid">
-        <details key="uuid" value="11491501338094"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        eType="#//State" containment="true" eOpposite="#//State/owningFSM"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialState" lowerBound="1"
-        eType="#//State">
-      <eAnnotations source="http://www.topcased.org/uuid">
-        <details key="uuid" value="11491501338095"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        eType="#//State"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="finalState" lowerBound="1"
-        upperBound="-1" eType="#//State">
-      <eAnnotations source="http://www.topcased.org/uuid">
-        <details key="uuid" value="11491501338097"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        upperBound="-1" eType="#//State"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State">
-    <eAnnotations source="http://www.topcased.org/uuid">
-      <details key="uuid" value="114986526340111"/>
-    </eAnnotations>
-    <eOperations name="step" eType="#//String">
-      <eParameters name="c" eType="#//String"/>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningFSM" lowerBound="1"
-        eType="#//FSM" eOpposite="#//FSM/ownedState">
-      <eAnnotations source="http://www.topcased.org/uuid">
-        <details key="uuid" value="114915013380911"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String">
-      <eAnnotations source="http://www.topcased.org/uuid">
-        <details key="uuid" value="114915013382412"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        eType="#//FSM" eOpposite="#//FSM/ownedState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransition" upperBound="-1"
-        eType="#//Transition" containment="true" eOpposite="#//Transition/source">
-      <eAnnotations source="http://www.topcased.org/uuid">
-        <details key="uuid" value="114915013382413"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        eType="#//Transition" containment="true" eOpposite="#//Transition/source"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransition" upperBound="-1"
-        eType="#//Transition" eOpposite="#//Transition/target">
-      <eAnnotations source="http://www.topcased.org/uuid">
-        <details key="uuid" value="114915013382414"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        eType="#//Transition" eOpposite="#//Transition/target"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
-    <eAnnotations source="http://www.topcased.org/uuid">
-      <details key="uuid" value="114986526340124"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        eType="#//State" eOpposite="#//State/outgoingTransition">
-      <eAnnotations source="http://www.topcased.org/uuid">
-        <details key="uuid" value="114915013382417"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        eType="#//State" eOpposite="#//State/outgoingTransition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        eType="#//State" eOpposite="#//State/incomingTransition">
-      <eAnnotations source="http://www.topcased.org/uuid">
-        <details key="uuid" value="114915013382418"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="#//String">
-      <eAnnotations source="http://www.topcased.org/uuid">
-        <details key="uuid" value="114915013382419"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" eType="#//String">
-      <eAnnotations source="http://www.topcased.org/uuid">
-        <details key="uuid" value="114915013382420"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        eType="#//State" eOpposite="#//State/incomingTransition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" eType="#//String"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String">
-    <eAnnotations source="http://www.topcased.org/uuid">
-      <details key="uuid" value="114915013384025"/>
-    </eAnnotations>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
 </ecore:EPackage>
