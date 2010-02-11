@@ -47,4 +47,13 @@ Import-Package: arf,
  service.arf.model,
  service.arf.question,
  service.arf.reasoner
+Bundle-ClassPath: lib/antlr-runtime-3.1.1.jar,
+ lib/core-3.4.2.v_883_R34x.jar,
+ lib/drools-api-5.0.1.jar,
+ lib/drools-compiler-5.0.1.jar,
+ lib/drools-core-5.0.1.jar,
+ lib/mvel2-2.0.10.jar,
+ .
+Export-Package: factory.weaver,
+ org.kermeta.smartadapters.drools
  
