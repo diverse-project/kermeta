@@ -25,5 +25,17 @@ trait PackageAspect extends RichAspectImplicit with ObjectAspect with IVisitable
         res = res + this.getName
         return res
 	}
+	
+	def getQualifiedNameKermeta():String ={
+		var res : String="" 
+        if (this.getNestingPackage !=null){
+            res = this.getNestingPackage.getQualifiedName +"::"
+        }
+        res = res + this.getName
+        return res
+	}
 
+
+	
+	
 }

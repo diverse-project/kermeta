@@ -79,7 +79,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		
 		
 		
-		var mainClassDef = par.eAllContents.filter{e=>e.isInstanceOf[ClassDefinition] }.filter(e=> e.asInstanceOf[ClassDefinition].getName.equals(className) ).toList.first
+		var mainClassDef = par.eAllContents.filter{e=>e.isInstanceOf[ClassDefinition] }.filter(e=> e.asInstanceOf[ClassDefinitionAspect].getQualifiedNameKermeta.equals(mainClass) ).toList.first
 		var mainOperationSize = mainClassDef.asInstanceOf[ClassDefinition].getOwnedOperation.filter{e=>e.getName.equals(mainOperation)}.first.asInstanceOf[Operation].getOwnedParameter.size
 		
 
@@ -88,8 +88,9 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		var res :StringBuilder= new StringBuilder
 		res.append("package runner \n")
 		res.append("import java.io.PrintStream\n")
-		res.append("object MainRunner  extends fr.irisa.triskell.scala.generated.fw.ImplicitConversion{\n" +
-		"def main(args : Array[String]) : Unit = {\n\t" )
+		res.append("object MainRunner  extends fr.irisa.triskell.scala.generated.fw.ImplicitConversion{\n") 
+		//res.append("def main(args : Array[String]) : Unit = {\n\t" )
+		res.append("def init() : Unit = {\n\t" )
 		res.append("System.setOut(new PrintStream(\"outputStream\"));\n")
 		res.append("kermeta.persistence.EcorePackages.workspaceURI = \"" + GlobalConfiguration.workspaceURI + "\"\n")
 		res.append("kermeta.persistence.EcorePackages.pluginURI = \"" + GlobalConfiguration.pluginURI+ "\";\n")
@@ -108,7 +109,9 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 				
 		);
 		packages.foreach(e=> //if (!(e.getQualifiedName.startsWith("kermeta")|| e.getQualifiedName.startsWith("language")))
-			if (!(e.getOwnedTypeDefinition.size()==0 || e.getOwnedTypeDefinition.filter(t=> t.isInstanceOf[ClassDefinition]).forall(t=> Util.hasCompilerIgnoreTag(t)) )){
+			if (!(e.getOwnedTypeDefinition.size()==0 ||
+					e.getOwnedTypeDefinition.filter(t=> t.isInstanceOf[ClassDefinition]).filter(t=> Util.hasEcoreTag(t)).size==0	|| 
+					e.getOwnedTypeDefinition.filter(t=> t.isInstanceOf[ClassDefinition]).forall(t=> Util.hasCompilerIgnoreTag(t)) )){
 				if (e.getNestingPackage() == null){
 					res.append(
 					initForEcorePackage("", e.getName()))
@@ -118,6 +121,10 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 						initForEcorePackage(e.getNestingPackage().getQualifiedName(), e.getName()))}
 			}
 		)
+		
+		res.append("}\n def main(args : Array[String]) : Unit = {\n\t init() \n\t" )
+
+		
 		res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(packageName))
 		
 		if (packages.filter{e=>  e.getQualifiedName().equals(packageName)}.size==1)
@@ -157,8 +164,11 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 				factoryDef append "package "+actualPackage+"\n"
 				
 				factoryDef append "object "+GlobalConfiguration.factoryName + " extends "
-				if (par.getOwnedTypeDefinition.filter{e=> Util.hasEcoreTag(par)}.size>0)
-					factoryDef append  Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.asInstanceOf[Package].getQualifiedName())+Util.getImplPackageSuffix(actualPackage)+ Util.getPackagePrefix(par.getName.substring(0,1).toUpperCase + par.getName.substring(1,par.getName.size))+"FactoryImpl with")
+				//e.getOwnedTypeDefinition.filter(t=> t.isInstanceOf[ClassDefinition]).filter(t=> Util.hasEcoreTag(t)).size==0
+				println("package "+ par.getName + " " +par.getOwnedTypeDefinition.size )
+				if (par.getOwnedTypeDefinition.size!= 0 &&  par.getOwnedTypeDefinition.filter(t=> t.isInstanceOf[ClassDefinition]).filter(e=> Util.hasEcoreTag(e)).size>0){
+					factoryDef.append (Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.asInstanceOf[Package].getQualifiedName())+Util.getImplPackageSuffix(actualPackage)+ Util.getPackagePrefix(par.getName.substring(0,1).toUpperCase + par.getName.substring(1,par.getName.size))+"FactoryImpl with"))
+				}
 				factoryDef append " "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
 				factoryDef append "{\n"
 				viewDef append "package "+actualPackage+"\n"

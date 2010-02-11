@@ -151,6 +151,11 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 		else
 			return kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "ScalaAspect."+ this.getName());
 	}
+
+	def getQualifiedNameKermeta():String ={
+		this.eContainer().asInstanceOf[PackageAspect].getQualifiedNameKermeta() + "::"+ this.getName();
+	}
+
 	
 	def generateParamerterClass(res1:StringBuilder) = {
 						if (this.getTypeParameter().size()>0){
