@@ -1331,7 +1331,7 @@ post post3 of operation step of class State violated</programlisting>
         samplerun.fsm stored into <emphasis role="bold"
           >fr.irisa.triskell.kermeta.samples.fsm.demo/models/samplerun.fsm</emphasis>. The following
         image presents the file samplerun.fsm.<inlinegraphic
-          fileref="Kermeta-The-FSM-tutorial_figures/samplerun_fsm_file.png"/></para>
+          fileref="Kermeta-The-FSM-example_figures/samplerun_fsm_file.png"/></para>
       <para>In this example, you use the transition c to go to s1 to s2 and produce the string v .
         the behaviour can be produced thanks to the operations run(), step() and fire() defined in
         the last section. To run this behaviour right click on <emphasis role="italic"> FSM Aspect

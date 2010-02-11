@@ -325,7 +325,7 @@
               </imageobject>
             </mediaobject>
           </figure> The resulted file fsm.gmfgraph looks like this : <figure>
-            <title> fsmStatic.gmfgraph at the beginning</title>
+            <title> fsm.gmfgraph at the beginning</title>
             <mediaobject>
               <imageobject>
                 <imagedata
@@ -529,7 +529,7 @@
         Eclipse application. It opens a new Eclipse instance (runtime) where the tested plugin is
         added. Create a new General Project in this new Eclipse named testFSMEditor. Right click on
         it -> New -> Example -> FsmStatic Diagam <figure>
-          <title> Create FsmStatic Diagram model </title>
+          <title> Create Fsm Diagram model </title>
           <mediaobject>
             <imageobject>
               <imagedata
@@ -547,7 +547,7 @@
           </listitem>
         </orderedlist> Open the test.fsm_diagram and use the palette. You can have a result like
         this : <figure>
-          <title> Create FsmStatic Diagram model </title>
+          <title> Edit Fsm Diagram model </title>
           <mediaobject>
             <imageobject>
               <imagedata

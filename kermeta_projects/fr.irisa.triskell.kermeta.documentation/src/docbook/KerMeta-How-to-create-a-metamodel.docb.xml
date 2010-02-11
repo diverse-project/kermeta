@@ -1,48 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
-"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <book lang="en-US">
+  <?ooogenerator OpenOffice.org/2.0$Linux OpenOffice.org_project/680m1$Build-8990?>
+  <?oooversion?>
   <bookinfo>
-  	<mediaobject>  
-		<imageobject>
-	   		<imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/KermetaLogo.png" format="PNG"/>
-		</imageobject>	  
-	</mediaobject>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-
     <author>
-      <firstname>François Tanguy, Didier Vojtisek</firstname>
-
-      <firstname></firstname>
+      <firstname>François Tanguy, Didier Vojtisek, Zoé Drey, Marie Gouyette</firstname>
+      <firstname/>
     </author>
-
     <title>Kermeta tutorial</title>
-
-    <date>2006-10-27T16:24:23</date>
-
+    <date>2006-09-25T10:35:34</date>
     <keywordset>
       <keyword>Kermeta</keyword>
-
       <keyword>metamodeling</keyword>
-
       <keyword>language</keyword>
     </keywordset>
-
-    <subtitle>How to create a metamodel</subtitle>
-
+    <subtitle> How to create an EMF meta model? </subtitle>
     <bibliomisc>Licence EPL</bibliomisc>
-
-    <date>19/11/2006</date>
-
+    <date>19/07/2006</date>
     <abstract>
-      <para>This tutorial is part of a serie of tutorials that explain step by step one of the aspect of Kermeta. 
-      This one will explain you how to a metamodel to be used by kermeta. However, 
-      there are many ways to create them, this tutorial will present some of them.</para>
+      <para> This tutorial show how to create an EMF model for the FSM example. </para>
     </abstract>
-
     <publisher>
       <publishername>INRIA</publishername>
-
       <address>
         <state>France</state>
         <otheraddr>
@@ -50,375 +32,381 @@
         </otheraddr>
       </address>
     </publisher>
-
     <confgroup>
       <conftitle>title</conftitle>
-
       <confnum>Reference</confnum>
-
       <confsponsor>sponsor</confsponsor>
     </confgroup>
   </bookinfo>
-
   <preface>
     <?print-orientation portrait?>
-
     <title>Preface</title>
-
-    <para><emphasis role="strong">Kermeta is a Domain Specific Language
-    dedicated to metamodel engineering. It fills the gap let by MOF which
-    defines only the structure of meta-models, by adding a way to specify
-    static semantic (similar to OCL) and dynamic semantic (using operational
-    semantic in the operation of the metamodel). </emphasis> <emphasis
-    role="strong"> <emphasis role="strong">Kermeta uses the object-oriented
-    paradigm like Java or Eiffel.</emphasis> </emphasis> <emphasis
-    role="strong"> This document presents various aspects of the language,
-    including the textual syntax, the metamodel (which can be viewed as the
-    abstract syntax) and some more advanced features typically included in its
-    framework. </emphasis></para>
-
+    <para>Kermeta is a Domain Specific Language dedicated to metamodel engineering. It fills the gap
+      let by MOF which defines only the structure of metamodels, by adding a way to specify static
+      semantic (similar to OCL) and dynamic semantic (using operational semantic in the operation of
+      the metamodel). Kermeta uses the object-oriented paradigm like Java or Eiffel. This document
+      presents various aspects of the language, including the textual syntax, the metamodel (which
+      can be viewed as the abstract syntax) and some more advanced features typically included in
+      its framework.</para>
     <important>
-      <emphasis role="strong">Kermeta is an evolving software and d</emphasis>
-
-      <emphasis role="strong">
-        <emphasis role="strong">espite that we put a lot of attention to this
-        document, it may contain errors (more likely in the code samples). If
-        you find any error or have some information that improves this
-        document, please send it to us using the bug tracker in the
-        forge:</emphasis>
-      </emphasis>
-
-      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
-        <emphasis role="strong">
-          <emphasis role="strong">
-            <emphasis
-            role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
-          </emphasis>
-        </emphasis>
-      </ulink>
-
-      <emphasis role="strong">
-        <emphasis role="strong">
-          <emphasis role="strong" />
-        </emphasis>
-      </emphasis>
-
-      <emphasis role="strong">
-        <emphasis role="strong">
-          <emphasis role="strong">or using the kermeta user mailing list
-          (kermeta-users@lists.gforge.inria.fr)</emphasis>
-        </emphasis>
-      </emphasis>
-
-      <emphasis role="strong">
-        <emphasis role="strong">
-          <emphasis role="strong" />
-        </emphasis>
-      </emphasis>
-
-      Last check: v1.3.2
+      <para> Kermeta is an evolving software and despite that we put a lot of attention to this
+        document, it may contain errors (more likely in the code samples). If you find any error or
+        have some information that improves this document, please send it to us using the bug
+        tracker in the forge: <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+          <emphasis role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+        </ulink> or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last
+        check: v0.3.1 </para>
     </important>
-
     <tip>
-      The most update version of this document is available on line from 
-
-      <ulink type=""
-      url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
-
-       .
+      <para> The most update version of this document is available on line from <ulink type=""
+          url="http://www.kermeta.org/">http://www.kermeta.org</ulink> . </para>
     </tip>
   </preface>
-
   <chapter>
-    <title>Prerequisites</title>
-
-    <para>No particular background is necessary to read this tutorial.</para>
-
-    <important>
-      KerMeta must be installed. If not, please refer to "<ulink type=""
-      url="../KerMeta-How-to-install-KerMeta/">How to install KerMeta</ulink>" tutorial.
-    </important>
+    <title> Create a meta-model for Kermeta programs</title>
+    <para> For simplicity sake, the different steps (meta-model, model creation, as well as model
+      handling through Kermeta) introduced in the scope of this tutorial are illustrated by means of
+      the finite state machines classical example. </para>
+    <section>
+      <title>Editing a new meta-model with the EMF sample editor</title>
+      <orderedlist continuation="restarts" numeration="arabic">
+        <listitem>
+          <para> Create a new General project if no project is ever created (for instance <emphasis
+              role="strong">
+              <emphasis>MyFirstEMFSamples</emphasis>
+            </emphasis>
+            <emphasis role="strong">).</emphasis>
+          </para>
+        </listitem>
+        <listitem>
+          <para>Select in the tool bar menu (on top of Eclipse window)<emphasis role="strong"
+                ><emphasis role="strong">File </emphasis></emphasis><emphasis role="strong">&gt; New
+              &gt; </emphasis><emphasis role="strong">Other</emphasis><emphasis role="strong"> &gt;
+              Eclipse Modeling Framework </emphasis>folder<emphasis role="strong"> &gt; Ecore
+              Model</emphasis></para>
+          <figure id="refIllustration0">
+            <title>Selection of the model object (root element)</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-How-to-create-a-metamodel_figures/select_ecore_model.png"/>
+                <!--  width="15.998cm" depth="15.262cm" -->
+              </imageobject>
+            </mediaobject>
+          </figure>
+        </listitem>
+        <listitem>
+          <para>Enter a name for the meta-model file (e.g. <emphasis>fsm.ecore</emphasis>), then
+            click on <emphasis role="strong">Next</emphasis> button.</para>
+          <figure id="refIllustration1">
+            <title> Choose a name for your new ecore model </title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/name_ecore_model.png"/>
+                <!--  width="10.022cm" depth="11.299cm" -->
+              </imageobject>
+            </mediaobject>
+          </figure>
+        </listitem>
+        <listitem>
+          <para>Choose <emphasis role="strong">EPackage</emphasis> as the Model Object (i.e. the
+            root of the meta-model), and click on the <emphasis role="strong">Finish</emphasis>
+            button.</para>
+          <figure id="refIllustration11">
+            <title>Selection of the model object (root element)</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/select_epackage.png"/>
+                <!-- width="15.998cm" depth="7.393cm" -->
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <para/>
+        </listitem>
+        <listitem>
+          <para>If Omondo is installed, the meta-model can be edited by means of the Omondo
+            graphical editor. However, this tutorial focuses on the creation of meta-models using
+            the <emphasis role="strong">Sample Ecore Editor</emphasis>. In case the Omondo editor is
+            set as the default editor, the sample Ecore editor can be opened (after having closed
+            the Omondo editor) by right-clicking onto the Ecore file and selecting <emphasis
+              role="strong">Open with &gt; Sample Ecore Editor</emphasis>.</para>
+          <figure id="refIllustration2">
+            <title>New empty ecore model</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/new_ecore_model.png"/>
+                <!--  <imagedata fileref="KerMeta-Create-Meta-model-With-EMF_figures/new_ecore_model.png"     width="18.998cm" depth="15.18cm"  /> -->
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <para/>
+        </listitem>
+        <listitem>
+          <para>If the <emphasis role="strong">Properties</emphasis> view is not visible at the
+            bottom (or left, or right) part of the Eclipse window, open it using the tool bar
+              menu.<emphasis role="strong">Window &gt; Show View &gt; Other &gt; General
+              </emphasis>folder<emphasis role="strong"> &gt; Properties</emphasis>;</para>
+          <figure id="refIllustration3">
+            <title>How to show properties view</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/show_properties.png"/>
+                <!--  width="11.711cm" depth="8.304cm" -->
+              </imageobject>
+            </mediaobject>
+          </figure>
+        </listitem>
+        <listitem>
+          <para>Two properties of the created EPackage (which is initially displayed as
+              <emphasis>null</emphasis>) have to be set through the <emphasis role="strong"
+              >Properties</emphasis> tab:</para>
+          <!-- </listitem>  -->
+          <!-- </orderedlist>
+      <orderedlist continuation="restarts"> -->
+          <!--   <listitem> -->
+          <orderedlist continuation="restarts">
+            <listitem>
+              <para>its <emphasis role="strong">Name</emphasis>: <emphasis>fsm,</emphasis> for
+                example;</para>
+            </listitem>
+            <listitem>
+              <para>its <emphasis role="strong">Ns URI</emphasis>: the namespace URI of the Ecore
+                model is mandatory to allow Kermeta being able to correctly load its potential
+                instances, as well as for the Dynamic creation of instances tool. It is strongly
+                recommended to set an absolute Eclipse URI (this kind of URI is actually relative to
+                your Eclipse project), e.g.
+                  <emphasis>platform:/resource/MyFirstEMFSamples/metamodels/fsm.ecore</emphasis></para>
+              <figure id="Illustration4">
+                <title> ecore file into Eclipse</title>
+                <mediaobject>
+                  <imageobject>
+                    <imagedata
+                      fileref="KerMeta-How-to-create-a-metamodel_figures/complete_view_ecore.png"/>
+                  </imageobject>
+                </mediaobject>
+              </figure>
+              <para/>
+            </listitem>
+          </orderedlist>
+        </listitem>
+        <!--  </orderedlist>  -->
+        <!-- <orderedlist continuation="continues" numeration="arabic"> -->
+        <listitem>
+          <para>At this stage, it is now possible to add children to the created root (which is
+              <emphasis>fsm</emphasis> EPackage in the considered example). This could be achieved
+            by right-clicking on the class and choosing the <emphasis role="strong">New
+              child</emphasis> item. In the scope of the FSM example, three classes are added, one
+            of them (the class <emphasis>Fsm</emphasis>) being considered as the “root class” (this
+            should not be not mandatory, but allows a better EMF working):</para>
+          <para/>
+          <!-- -->
+          <orderedlist continuation="restarts">
+            <listitem>
+              <para>a <emphasis>Fsm</emphasis> class, for which the <emphasis role="strong"
+                  >Name</emphasis> attribute (in the properties view) has to be set (other
+                properties do not need to be considered at this stage);</para>
+            </listitem>
+            <listitem>
+              <para>a <emphasis>Transition</emphasis> class (idem as for the
+                  <emphasis>Fsm</emphasis> class);</para>
+            </listitem>
+            <listitem>
+              <para>a <emphasis>State</emphasis> class (idem as for previous classes).</para>
+            </listitem>
+          </orderedlist>
+          <figure id="refIllustration5">
+            <title>New child on EPackage root node</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata
+                  fileref="KerMeta-How-to-create-a-metamodel_figures/new_child_epackage.png"/>
+                <!-- width="10.733cm" depth="11.288cm"  -->
+              </imageobject>
+            </mediaobject>
+          </figure>
+        </listitem>
+        <!-- -->
+        <listitem>
+          <para>To add a new DataType, right click on thge fsm EPackage -> EData Type and set its
+            name as String and its Instance Type Name as java.lang.String. <figure
+              id="refIllustration5_1">
+              <title>New child on EPackage root node</title>
+              <mediaobject>
+                <imageobject>
+                  <imagedata
+                    fileref="KerMeta-How-to-create-a-metamodel_figures/add_datatype_string.png"/>
+                  <!-- width="10.733cm" depth="11.288cm"  -->
+                </imageobject>
+              </mediaobject>
+            </figure>
+          </para>
+        </listitem>
+        <listitem>
+          <para>Adding operations, attributes, or references to the newly created classes is
+            achieved in the same way classes have been added to the root EPackage, i.e. using
+              <emphasis role="strong">New child</emphasis> on each created element.</para>
+        </listitem>
+        <listitem>
+          <para>Still through the <emphasis role="strong">Properties</emphasis> tab, the <emphasis
+              role="strong">EContainment</emphasis> property will have to be set to
+              <emphasis>true</emphasis> for each reference which intended to contain instances. In
+            the scope of the automaton example, the <emphasis>state</emphasis> reference of the
+              <emphasis>Fsm</emphasis> class are defined as containment reference, and also the
+            outgoingTransition reference in the State metaclass. By this mean, it will be possible
+            to create, in an EMF model of it, a collection of transitions and states. </para>
+          <figure id="refIllustration6">
+            <title>Setting the properties of an EReference</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/class_properties.png"
+                />
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <para/>
+        </listitem>
+        <listitem>
+          <para>Setting properties, such as the upper and lower bounds, the type (<emphasis
+              role="strong">EType</emphasis>), of the attributes, operations, and references is
+            achieved through the <emphasis role="strong">Properties</emphasis> view. The main
+            properties to consider are: ESuperType, EType, Name, Upper Bound, Lower Bound,
+            Containment (for the diamond-ed associations), Ordered, Unique, and EOpposite (opposite
+            property). For simplicity purpose, other properties can be ignored in the scope of this
+            tutorial.</para>
+          <para>Lower and upper bound properties: 0, 1, -1 (stands for *) are allowed.</para>
+        </listitem>
+        <listitem>
+          <para>Do not forget to save the created meta-model.</para>
+        </listitem>
+      </orderedlist>
+    </section>
+    <section>
+      <title> Resulting meta-model </title>
+      <section>
+        <title> Metamodel with EMF sample editor</title>
+        <para> At this stage of the tutorial, the designed meta-model should look like the following
+          meta-model: </para>
+        <figure id="refIllustration7">
+          <title>A simple FSM meta-model</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata
+                fileref="KerMeta-How-to-create-a-metamodel_figures/resulting_emf_metamodel.png"
+                width="10.209cm" depth="6.379cm"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para/>
+      </section>
+      <section>
+        <title> Metamodel with Ecore Tools Diagram Editor</title>
+        <para>You can also edit these ecore file using a diagram editor from Eclipse Ecore Tools
+          Project. For example, the ecore tools project provides a class diagram editor that works
+          on top of ecore files. The diagram informations (ie. shape and position of the classes on
+          the sheet) are stored in a separated file : *.ecorediag</para>
+        <figure>
+          <title>Sample use of Ecore tool diagram editor on top of an ecore file</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/ecorediag_sample.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+      </section>
+    </section>
+    <section>
+      <title>EMF meta-model creation tips</title>
+      <para>Creating a good meta-model is sometime difficult due to limitations of the used tools.
+        For a better experience in using EMF tools and Kermeta, it is advised to respect the
+        following rule:</para>
+      <!--  -->
+      <para>Create an element that will contain directly or indirectly all the other elements. The
+        reflexive editor and the editor generated by EMF allow to create only one root element and
+        then, from this element, create contained elements.</para>
+      <para role="lineBreak">This problem occurs only for model element creation from the editors.
+        The editors correctly display models from meta-models that do not follow this rule if you
+        are able to create such models by another mean. Kermeta is <emphasis role="strong"
+          >not</emphasis> affected by this constraint.</para>
+      <!--   -->
+    </section>
+    <section>
+      <title> External documentation </title>
+      <para> Additional documentation on EMF can be found at the following links: </para>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <para>
+            <ulink
+              url="http://eclipse.org/emf/docs.php?doc=docs/tutorials/1.1/xlibmod/xlibmod_emf1.1.html"
+              type=""
+              >http://eclipse.org/emf/docs.php?doc=docs/tutorials/1.1/xlibmod/xlibmod_emf1.1.html</ulink>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <ulink url="http://www.eclipse.org/articles/Article-Using%20EMF/using-emf.html" type="">
+              http://www.eclipse.org/articles/Article-Using%20EMF/using-emf.html </ulink>
+          </para>
+          <para> </para>
+        </listitem>
+      </orderedlist>
+      <para> More generally, most of EMF documentation can be found onto the Eclipse website.
+      </para>
+    </section>
+    <section>
+      <title> Alternative ways to create a meta-model </title>
+      <para> EMF tools are not the only way to create Ecore meta-models. Any tool that can
+        manipulate Ecore can do the same. Here is a small list of tools that can be used to create
+        your meta-model: </para>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <para>Omondo / Eclipse UML has a nice graphical editor for Ecore models. It even enables
+            to directly generate the EMF editor from this tool.</para>
+        </listitem>
+        <listitem>
+          <para>
+            <emphasis role="strong">Kermeta allows users to specify meta-models by means of the
+              Kermeta syntax and then translate them into Ecore using the Kermeta2Ecore
+              function.</emphasis>
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        <emphasis role="strong"/>
+      </para>
+      <figure id="refIllustration8">
+        <title>Generate Ecore meta-model from Kermeta</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata
+              fileref="KerMeta-How-to-create-a-metamodel_figures/kermeta_generate_ecore.png"/>
+            <!-- width="9.383cm" depth="11.031cm" -->
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para/>
+      <para>The Ecore import/export function and the Omondo editor can be used in order to
+        graphically display the Kermeta classes of a model. It will act as a basic manual roundtrip
+        editor.</para>
+    </section>
   </chapter>
-
   <chapter>
-    <title>Introduction</title>
-
-    <para>There are two ways to create a the structure of a meta model. The first one is
-    to use Kermeta textual syntax and creating a ".kmt" file. using this approach you will 
-    have the sensation of "programming" your metamodel. The second one is to
-    create an Ecore file using the tools proposed by EMF. (for example the EMF reflexive editor, 
-    or the ecore diagram editor from ecorre tools project).
-    </para>
-    <para>You'll then be able to transform the ecore files to kmt files and vice versa as needed.</para>
-    
-    
-
-    <para>This tutorial should help you in manipulating the Ecore and KerMeta
-    files. It gives an overview on how to create meta models and how to
-    transform them.</para>
-
-    <para>Start by creating a new general empty project in Eclipse.</para>
+    <title> Conclusion</title>
+    <para>This tutorial gives you the basis to create an EMF metamodel. It may be useful to use it
+      with Kermeta for : <orderedlist>
+        <listitem>
+          <para>Creating model instances conform to an ecore metamodel ( cf the tutorial<ulink
+              url="../KerMeta-The-FSM-example/index.html"> FSM Example </ulink> chapter 4 : Editor)
+            ;</para>
+        </listitem>
+        <listitem>
+          <para>Thanks to the Kermeta key word <emphasis role="bold"> require</emphasis> you  can
+            load the ecore metaclasses and use it into a Kermeta program;</para>
+        </listitem>
+        <listitem>
+          <para>Kermeta use EMF to save and load programmaticaly a model  ( cf the tutorial<ulink
+              url="../KerMeta-The-FSM-example/index.html"> FSM Example </ulink> chapter 5 : Model
+            manipulation in Kermeta)</para>
+        </listitem>
+      </orderedlist></para>
   </chapter>
-
-  <chapter>
-    <title>A meta model using Kermeta textual syntax</title>
-
-    <para>Select in the main menu of Eclipse</para>
-
-    <para>"File" &gt; "New" &gt;&gt; "Other..."</para>
-
-    <para>This action opens the following window.</para>
-
-    <figure>
-      <title></title>
-
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/kmt-from-scratch.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <para>Select "New Kermeta file" and press "Next &gt;".</para>
-
-    <figure>
-      <title></title>
-
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/kmt-file.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <para>Give a name (MyMetamodel.kmt for instance) to the new file, select a
-    location (The default one is good for us) and leave Main class and Main
-    operation blank for the moment. It will be used later to run models. Click
-    on "Finish".</para>
-
-    <para>Now your main window should look like the one above. The file is
-    written in KerMeta language. So you can edit this file to add some
-    classes, attributes and so on using the KerMeta language (read <ulink
-    type=""
-    url="http://www.kermeta.org/documents/manual/">http://www.kermeta.org/documents/manual/</ulink>
-    for more details on KerMeta language).</para>
-
-    <para></para>
-
-    <figure>
-      <title></title>
-
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/kmt-blank-file.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-  </chapter>
-
-  <chapter>
-    <title>A meta model from an Ecore file</title>
-
-    <para>To create an Ecore file, go in the main menu of Eclipse select :</para>
-
-    <para>"File" &gt; "New" &gt; "Other..."</para>
-
-    <figure>
-      <title></title>
-
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/ecore-file.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <para>Select "Ecore model" wizard and click "Next &gt;". Select a location
-    and a name for the file. Call it "AnOtherMetamodel.ecore" for example.
-    Click on "Finish".</para>
-
-    <para>Your main window now looks like this :</para>
-
-    <figure>
-      <title></title>
-
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/ecore-blank-file.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <para>You can edit this meta model. If you do not know how to do that,
-    please have a look in section about the Ecore editor (page 26) in the following link :</para>
-
-    <para><ulink type=""
-    url="http://www.eclipsecon.org/2005/presentations/EclipseCon2005_Tutorial28.pdf">http://www.eclipsecon.org/2005/presentations/EclipseCon2005_Tutorial28.pdf</ulink></para>
-
-    <important>
-      You must at least fill in the name, ns prefix and ns URI of the package.
-    </important>
-
-    <figure>
-      <title></title>
-
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/ecore-package.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-    
-    <para>You can also edit these ecore file using a diagram editor. For example, the ecore tools project provides a class diagram
-    editor that works on top of ecore files. The diagram informations (ie. shape and position of the classes on the sheet) are stored in
-    a separated file : <literal>*.ecorediag</literal></para>
-    <figure>
-      <title>Sample use of Ecore tool diagram editor on top of an ecore file</title>
-
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/ecorediag_sample.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <para>Let say that you edited this meta model and now you want to add
-    some behaviors. You have now two possibilities :</para>
-    <itemizedlist>
-        <listitem>
-          <para><emphasis role="strong">Use kermeta aspects</emphasis></para>
-          <para>You can directly require the ecore file and then using the <literal>aspect</literal> keyword 
-          you can create a class that will extend the definition imported from the ecore file. 
-          Since the addition of aspect in kermeta (v1.0.0), this is usually the recommended way to add behavior.</para>
-        </listitem>
-        <listitem>
-          <para><emphasis role="strong">Transform your ecore file into a KMT text file</emphasis> and then directly add the expected behavior in it.</para>
-          <para>This is the old way to achieve that, you simply have to transform your ecore file to and from the textual syntax (ie. kmt file) so 
-          yopu'll be able to add new operations, atributes, ... and define their behavior using the textual syntax.</para>
-        </listitem>
-
-        
-    </itemizedlist>
-    <para>
-    You'll find more details and tip and tricks about adding behavior to a metamodel in the "How to add behavior to a metamodel" tutorial :
-    <ulink type=""
-    url="http://www.kermeta.org/documents/tutorials/tut-add_behavior/">http://www.kermeta.org/documents/tutorials/tut-add_behavior/</ulink>
-    </para>
-
-    
-  </chapter>
-
-  <chapter>
-    <title>Transformations of KerMeta meta models</title>
-
-    <para>Several transformations are available. This will allow you to choose the representation of your meta
-    model from one format to another. For example, if you prefer coding, then you will
-    probably prefer the kmt format (KerMeta text). Otherwise you will design
-    with the reflexive editor and the km files (serialized files).</para>
-
-    <para>So transformations give you the ability to adapt the meta model to
-    your preferred point of view : coding view or graphical view.</para>
-    
-    <variablelist>
-      <title>List of formats related to metamodels</title>
-
-      <varlistentry>
-        <term><emphasis role="strong">*.ecore</emphasis></term>
-
-        <listitem>
-          <para>This is the format from EMF metamodel: it contains only the structural part of the metamodel. It is used as a reference for the serialisation of models.
-          Other information may be stored as EAnnotations (but in this case they are specific to a tool.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><emphasis role="strong">*.kmt</emphasis></term>
-
-        <listitem>
-          <para>This is the textual form of kermeta metamodels.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><emphasis role="strong">*.km</emphasis></term>
-
-        <listitem>
-          <para>This is the model form (ie. XMI) of kermeta metamodels. Ie.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><emphasis role="strong">*.ecorediag</emphasis></term>
-        <listitem>
-          <para>This is the class diagram information on top of a ecore model. (ie. position , shape, ... information in the diagram)</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><emphasis role="strong">*.kmdi</emphasis></term>
-        <listitem>
-          <para>This is the class diagram information on top of a km model. (ie. position , shape, ... information in the diagram)</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><emphasis role="strong">*.uml</emphasis></term>
-        <listitem>
-          <para>For uml models. There are some ways to transform part of it into ecore or kermeta (class diagram part and stereotype definiton part)</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><emphasis role="strong">*.ocl</emphasis></term>
-        <listitem>
-          <para>For OCL constraints in a textual format. OCL invariants can be transformed into Kermeta invariants.</para>          
-        </listitem>
-      </varlistentry>
-	</variablelist>
-	
-	<para>Yopu can usually relate/transform these formats using a right click on the input file. More information about the options
-	provided by these transformation is provided in the UserInteface guide. <ulink type=""
-    url="http://www.kermeta.org/documents/ui_user_guide/">http://www.kermeta.org/documents/ui_user_guide/</ulink>
-    </para>
-	<variablelist>
-      <title>List of available transformations (not exhaustive)</title>
-
-      <varlistentry>
-        <term><emphasis role="strong">ecore to km</emphasis></term>
-        <listitem>
-          <para>Transform an ecore model into a km model.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><emphasis role="strong">ecore to kmt</emphasis></term>
-        <listitem>
-          <para>Transform an ecore model into a kmt text file.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><emphasis role="strong">km to ecore</emphasis></term>
-        <listitem>
-          <para>Transform a km model into an ecore model. Kermeta specific information are stored into EAnnotations (see Kermeta reference manual). Roundtrip is supported</para>
-        </listitem>
-      </varlistentry> 
-      <varlistentry>
-        <term><emphasis role="strong">kmt to ecore</emphasis></term>
-        <listitem>
-          <para>Transform a kmt text file into an ecore model. Kermeta specific information are stored into EAnnotations (see Kermeta reference manual). Roundtrip is supported</para>
-        </listitem>
-      </varlistentry> 
-      <varlistentry>
-        <term><emphasis role="strong">uml class to ecore</emphasis></term>
-        <listitem>
-          <para>Transform the uml classes into ecore classes. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><emphasis role="strong">uml profile to ecore</emphasis></term>
-        <listitem>
-          <para>Transform the profile definitions into ecore classes to be used for loading uml model using such stereotypes. </para>
-        </listitem>
-      </varlistentry>  
-      <varlistentry>
-        <term><emphasis role="strong">ocl to kermeta</emphasis></term>
-        <listitem>
-          <para>Transform the ocl invariants into kermeta invariants. </para>
-        </listitem>
-      </varlistentry>    
-	</variablelist>
-    </chapter>
 </book>
