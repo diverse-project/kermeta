@@ -1,8 +1,0 @@
-#Tue Feb 09 22:51:19 CET 2010
-eclipse.preferences.version=1
-gmf_dashboard/domainGenerationModel=platform\:/resource/fr.irisa.triskell.kermeta.samples.fsm.gmf/model/fsm.genmodel
-gmf_dashboard/domainModel=platform\:/resource/fr.irisa.triskell.kermeta.samples.fsm.gmf/model/fsm.ecore
-gmf_dashboard/generationModel=platform\:/resource/fr.irisa.triskell.kermeta.samples.fsm.gmf/model/fsm.gmfgen
-gmf_dashboard/graphicalDefinitionModel=platform\:/resource/fr.irisa.triskell.kermeta.samples.fsm.gmf/model/fsm.gmfgraph
-gmf_dashboard/mappingModel=platform\:/resource/fr.irisa.triskell.kermeta.samples.fsm.gmf/model/fsm.gmfmap
-gmf_dashboard/toolingDefinitionModel=platform\:/resource/fr.irisa.triskell.kermeta.samples.fsm.gmf/model/fsm.gmftool
