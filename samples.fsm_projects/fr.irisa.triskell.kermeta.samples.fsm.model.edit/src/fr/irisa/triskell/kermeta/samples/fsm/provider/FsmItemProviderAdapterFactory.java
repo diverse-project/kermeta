@@ -151,97 +151,7 @@ public class FsmItemProviderAdapterFactory extends FsmAdapterFactory implements 
 		return transitionItemProvider;
 	}
 
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.samples.fsm.FSMException} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FSMExceptionItemProvider fsmExceptionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.samples.fsm.FSMException}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFSMExceptionAdapter() {
-		if (fsmExceptionItemProvider == null) {
-			fsmExceptionItemProvider = new FSMExceptionItemProvider(this);
-		}
-
-		return fsmExceptionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.samples.fsm.NonDeterminism} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected NonDeterminismItemProvider nonDeterminismItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.samples.fsm.NonDeterminism}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createNonDeterminismAdapter() {
-		if (nonDeterminismItemProvider == null) {
-			nonDeterminismItemProvider = new NonDeterminismItemProvider(this);
-		}
-
-		return nonDeterminismItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.samples.fsm.NoTransition} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected NoTransitionItemProvider noTransitionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.samples.fsm.NoTransition}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createNoTransitionAdapter() {
-		if (noTransitionItemProvider == null) {
-			noTransitionItemProvider = new NoTransitionItemProvider(this);
-		}
-
-		return noTransitionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.samples.fsm.NoInitialStateException} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected NoInitialStateExceptionItemProvider noInitialStateExceptionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.samples.fsm.NoInitialStateException}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createNoInitialStateExceptionAdapter() {
-		if (noInitialStateExceptionItemProvider == null) {
-			noInitialStateExceptionItemProvider = new NoInitialStateExceptionItemProvider(this);
-		}
-
-		return noInitialStateExceptionItemProvider;
-	}
+	
 
 	/**
 	 * This returns the root adapter factory that contains this factory.
@@ -293,7 +203,7 @@ public class FsmItemProviderAdapterFactory extends FsmAdapterFactory implements 
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -345,10 +255,6 @@ public class FsmItemProviderAdapterFactory extends FsmAdapterFactory implements 
 		if (fsmItemProvider != null) fsmItemProvider.dispose();
 		if (stateItemProvider != null) stateItemProvider.dispose();
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
-		if (fsmExceptionItemProvider != null) fsmExceptionItemProvider.dispose();
-		if (nonDeterminismItemProvider != null) nonDeterminismItemProvider.dispose();
-		if (noTransitionItemProvider != null) noTransitionItemProvider.dispose();
-		if (noInitialStateExceptionItemProvider != null) noInitialStateExceptionItemProvider.dispose();
 	}
 
 }
