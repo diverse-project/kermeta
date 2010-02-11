@@ -26,7 +26,7 @@ using kermeta::language::structure
 using kermeta::persistence
 using org::smartadapters::core
 class Main {
-	
+	 
 	operation main() : Void is do
 		
 		// ../../../DroolsGenerator/v2/01_LoggingAdapter.smART

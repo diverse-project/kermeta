@@ -5,8 +5,6 @@
  * Authors  : 
  *            barais
  */
-@mainClass "root_package::Main"
-@mainOperation "main"
 
 
 package org::smartadapters::core;
@@ -16,7 +14,7 @@ require "platform:/resource/org.kermeta.art.adapter/model/runtime_AOM_Framework1
 require kermeta
 using kermeta::standard
 
-aspect class Adaptation{
+aspect abstract class Adaptation{
 	operation toDrools(ctx:adaptations::Context) : Void is do 
 
 	end
