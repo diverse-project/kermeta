@@ -5,7 +5,7 @@ using kermeta::utils
 class HeaderLink{
 operation generate(uriecore:String, packagename:String):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("\n/* $Id:$ \n * Creation : February 9, 2010\n * Licence  : EPL \n * Copyright:\n * Authors  : \n *            barais\n */\n@mainClass \"ecore::Main\"\n@mainOperation \"main\"\n\n\npackage ")
+_res.append("\n/* $Id:$ \n * Creation : February 9, 2010\n * Licence  : EPL \n * Copyright:\n * Authors  : \n *            barais\n */\n\n\npackage ")
 _res.append(packagename)
 _res.append(";\n\n\nrequire kermeta\nrequire \"")
 _res.append(uriecore)

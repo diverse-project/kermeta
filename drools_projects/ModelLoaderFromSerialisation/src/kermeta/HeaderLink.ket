@@ -15,8 +15,6 @@ parameters="uriecore:String, packagename:String"
  * Authors  : 
  *            barais
  */
-@mainClass "ecore::Main"
-@mainOperation "main"
 
 
 package <%=packagename%>;

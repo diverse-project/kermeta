@@ -6,8 +6,6 @@
  * Authors  : 
  *            barais
  */
-@mainClass "pattern::Main"
-@mainOperation "main"
 
 
 package pattern;

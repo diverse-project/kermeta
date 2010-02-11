@@ -6,8 +6,6 @@
  * Authors  : 
  *            barais
  */
-@mainClass "ecore::Main"
-@mainOperation "main"
 
 
 package patternframework;
