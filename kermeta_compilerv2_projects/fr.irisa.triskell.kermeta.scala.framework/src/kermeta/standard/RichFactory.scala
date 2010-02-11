@@ -9,7 +9,12 @@ object RichFactory {
  def createInteger : Int = { 0 }
  def createBoolean : java.lang.Boolean = { true }
  def createCharacter : Char = { return ' ' }
- def isVoid(o:Any) : java.lang.Boolean = { return o==null }
+ def isVoid(o:Any) : java.lang.Boolean = { var res: Boolean = o==null 
+	if (!res && o.isInstanceOf[EObjectImplForPrimitive]){
+		res = o.asInstanceOf[EObjectImplForPrimitive].isVoid
+	}
+	return res;
+ }
 }
 
  

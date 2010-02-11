@@ -56,6 +56,8 @@ class RichAttribute(e:org.eclipse.emf.ecore.EStructuralFeature){
 	
 }
 
+
+
 class Void  extends Object with EObjectImplForPrimitive //with fr.irisa.triskell.kermeta.scala.framework.emf.aspects.KermetaObjectAspect  
 {
 	 override def toString() :java.lang.String={return  "<void>";}
@@ -84,8 +86,9 @@ class RichIterator (value: java.util.Iterator[_]) extends RichValueType[Boolean]
 
 
 class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
-		
-
+			
+	override def isVoid():Boolean = value ==null;  
+	
 	def not() :Boolean={return !value}
 	def xor(other : Boolean) :Boolean={(value || other) && !(value && other)}
 	//override def equals(other : Object) :Boolean={return true}
@@ -110,7 +113,8 @@ class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
 
 class RichJavaBoolean (value: java.lang.Boolean) extends RichValueType[Boolean] {
 		
-
+	override  def isVoid():Boolean = value ==null;  
+	
 	def not() :Boolean={return !value.booleanValue}
 	def xor(other : Boolean) :Boolean={(value.booleanValue || other) && !(value.booleanValue && other)}
 	//override def equals(other : Object) :Boolean={return true}
@@ -136,8 +140,8 @@ class RichJavaBoolean (value: java.lang.Boolean) extends RichValueType[Boolean] 
 
 abstract class RichNumeric[G]  extends Comparable[G]{}
 
-class RichInteger(value: Int)  extends RichNumeric[Int] {
-	def isVoid() :Boolean={return null.asInstanceOf[Int].equals(value)}
+class RichInteger(value: Int)  extends RichNumeric[Int] with EObjectImplForPrimitive{
+	override  def isVoid():Boolean = value ==null;  
 	override def isLower(other : Int) :Boolean={value<other}
 	def plus(other : Int) :Int={value+other}
 	def plus(other : Integer) :Int={value+other.intValue}
@@ -172,7 +176,7 @@ class RichInteger(value: Int)  extends RichNumeric[Int] {
 	def toInt() : Int = {return value}
 	
 	def times(func : Int => Unit):Unit ={ for(i <- 0 until value){func(i)} }
-	def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
+	override def isNotEqual(other : Any) :Boolean = {!this.equals(other)}
 	
 	//def isNotEqual(other : Any) :Boolean = this.equals(other)
 	
@@ -195,6 +199,8 @@ class RichReal (value: Double) extends RichNumeric[Double] with EObjectImplForPr
 	def isGreaterOrEqual(other : Double) :Boolean={ value>=other }
 	def isLowerOrEqual(other : Double) :Boolean={ value<=other }
 	def isGreater(other : Double) :Boolean={ value>other }
+	override def isVoid():Boolean = value ==null;  
+	
 
 }
 
@@ -202,6 +208,8 @@ class RichCharacter(value:Char)  extends RichValueType with EObjectImplForPrimit
 	//TODO
 	def compareTo(other : Object) :Int={0}
 	override def toString() :java.lang.String={return ""+value}
+	override  def isVoid():Boolean = value ==null;  
+	
 }
 
 trait EObjectImplForPrimitive extends fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation with fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect{
@@ -223,6 +231,8 @@ trait EObjectImplForPrimitive extends fr.irisa.triskell.kermeta.language.structu
 	   def eDeliver():Boolean =true;
 	   def eSetDeliver(deliver:Boolean):Unit=null;
 	   def eNotify( notification:org.eclipse.emf.common.notify.Notification):Unit=null;
+	   override  def isVoid():Boolean;  
+	   
 
 }
 
@@ -245,12 +255,14 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
 	def toInteger() :Int={return java.lang.Integer.parseInt(value)}
 	def toLowerCase() :java.lang.String={return value.toLowerCase()}
 	def substring(startIndex : Int, endIndex : Int) :java.lang.String={return value.substring(startIndex,endIndex)}
-	override def toString() :java.lang.String={value.toString}
+	override def toString() :java.lang.String={if (value != null) {return value.toString} else { println("RichString is null");return null}}
 	def split(delimiter : String) :java.util.List[String]={
 			var list: java.util.List[String] = new java.util.ArrayList[String]()
 			value.split(delimiter).foreach{e=>list.add(e)}
 			return list;
 	}
+	override def isVoid():Boolean = value ==null;  
+	   
 } 
 class RichUnknownJavaObject  extends Object {
 	override def toString() :java.lang.String={return "toString of  UnknownJavaObject not implemented yet";
