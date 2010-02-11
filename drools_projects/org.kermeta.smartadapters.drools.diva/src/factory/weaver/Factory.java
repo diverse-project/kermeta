@@ -2,7 +2,6 @@ package factory.weaver;
 
 import org.kermeta.smartadapters.drools.SmartAdaptersDrools;
 
-import eu.diva.divastudio.services.runtime.CausalLink;
 import eu.diva.divastudio.services.runtime.IWeaver;
 
 public class Factory implements eu.diva.factoryinstdiva.Factory<IWeaver>{
