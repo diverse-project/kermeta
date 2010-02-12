@@ -1,0 +1,269 @@
+/* $Id:$ 
+ * Creation : February 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+
+package kermeta::ki::malai::examples;
+
+
+require kermeta
+require "../presentation/AbstractPresentation.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::presentation
+
+class ModelCanvas inherits AbstractPresentation {
+	attribute shapes : Shape[0..*]
+
+	reference selection : Shape[0..*]	
+
+	attribute shapeTmp : Shape
+	
+	
+	operation addShape(sh : Shape) : Void is do
+		if(sh!=void) then
+			shapes.add(sh)
+		end
+	end
+}
+
+
+
+class Color {
+	attribute r : Integer
+	
+	attribute g : Integer
+	
+	attribute b : Integer
+}
+
+
+
+class Rectangle inherits Shape {
+	operation initialise() : Void is do
+		2.times{ i |
+			var pt1 : Point init Point.new
+			var pt2 : Point init Point.new
+			
+			pt1.x := i.toReal
+			pt2.x := i.toReal
+			pt1.y := 0.toReal
+			pt2.y := 1.toReal
+			points.add(pt1)
+			points.add(pt2)
+		}
+	end
+}
+
+
+class Ellipse inherits Shape {
+	operation initialise() : Void is do
+		2.times{ i |
+			var pt1 : Point init Point.new
+			var pt2 : Point init Point.new
+			
+			pt1.x := i.toReal
+			pt2.x := i.toReal
+			pt1.y := 0.toReal
+			pt2.y := 1.toReal
+			points.add(pt1)
+			points.add(pt2)
+		}
+	end
+}
+
+
+class Polygon inherits Shape {
+	attribute open : Boolean
+}
+
+
+abstract class Shape {
+	attribute thickness : Real
+	
+	attribute colourBord : Color
+	
+	attribute colourFill : Color
+	
+	attribute rotationAngle : Real
+	
+	attribute points : Point[0..*]
+	
+	
+	
+	operation move(tx : Real, ty : Real) : Void is do
+		points.each { pt | 
+			pt.x := pt.x + tx
+			pt.y := pt.y + ty
+		}
+	end
+	
+	
+	operation getTopLeftPoint() : Point is do
+		result := Point.new
+		
+		result.x := getMinX()
+		result.y := getMinY()
+	end
+	
+	
+	operation getBottomRightPoint() : Point is do
+		result := Point.new
+		
+		result.x := getMaxX()
+		result.y := getMaxY()
+	end
+	
+	
+	
+	operation setRight(x : Real) : Void is do
+		var tl : Point init getTopLeftPoint()
+		
+		if(x!=tl.x) then
+			var br : Point init getBottomRightPoint()
+			var percent : Real init (x-tl.x)/(br.x-tl.x)
+
+			points.each{ pt |
+				if(pt.x!=tl.x) then
+					if(pt.x==br.x) then
+					     pt.x := x
+					else pt.x := tl.x+(pt.x-tl.x)*percent
+					end
+				end
+			}			
+		end
+	end
+	
+	
+	
+	operation setLeft(x : Real) : Void is do
+		var br : Point init getBottomRightPoint()
+
+		if(x!=br.x) then
+			var tl : Point init getTopLeftPoint()
+			var percent : Real init (br.x-x)/(br.x-tl.x)
+			
+			points.each{ pt |
+				if(pt.x!=br.x) then
+					if(pt.x!=tl.x) then
+						pt.x := x
+					else
+						pt.x := br.x+(pt.x-br.x)*percent
+					end
+				end
+			}
+		end
+	end
+	
+	
+	operation setBottom(y : Real) : Void is do
+		var tl : Point init getTopLeftPoint()
+		
+		if(y!=tl.y) then
+			var br : Point init getBottomRightPoint()
+			var percent : Real init (y-tl.y)/(br.y-tl.y)
+			
+			points.each{ pt |
+				if(pt.y!=tl.y) then
+					if(pt.y!=br.y) then
+						pt.y := y
+					else
+						pt.y := tl.y+(pt.y-tl.y)*percent
+					end
+				end
+			}
+		end
+	end
+
+	
+	
+	operation setTop(y : Real) : Void is do
+		var br : Point init getBottomRightPoint()
+		
+		if(y!=br.y) then
+			var tl : Point init getTopLeftPoint()
+			var percent : Real init (br.y-y)/(br.y-tl.y)
+			
+			points.each{ pt |
+				if(pt.y!=br.y) then
+					if(pt.y==tl.y) then
+						pt.y := y
+					else 
+						pt.y := br.y+(pt.y-br.y)*percent
+					end
+				end
+			}
+		end
+	end
+	
+	
+	
+	operation getWidth() : Real is do
+		result := getMaxX() - getMinX()
+	end
+	
+	
+	operation getHeight() : Real is do
+		result := getMaxY() - getMinY()
+	end
+	
+	
+	
+	operation getMinX() : Real is do
+		result := "10000000".toReal
+		
+		points.each { pt |
+			if(pt.x<result) then result := pt.x end
+		}
+	end
+	
+	
+	operation getMinY() : Real is do 
+		result := "10000000".toReal
+		
+		points.each { pt |
+			if(pt.y<result) then result := pt.y end
+		}
+	end
+	
+	
+	operation getMaxX() : Real is do
+		result := "-10000000".toReal
+		
+		points.each { pt |
+			if(pt.x>result) then result := pt.x end
+		}
+	end
+	
+	
+	operation getMaxY() : Real is do
+		result := "-10000000".toReal
+		
+		points.each { pt |
+			if(pt.y>result) then result := pt.y end
+		}
+	end
+}
+
+
+
+
+
+class Point {
+	attribute x : Real
+	
+	attribute y : Real
+	
+	
+	operation setPoint(pt : Point) : Void is do
+		if(pt!=void) then
+			self.x := pt.x
+			self.y := pt.y
+		end
+	end
+}
+
+

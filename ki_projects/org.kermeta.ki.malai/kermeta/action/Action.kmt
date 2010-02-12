@@ -47,30 +47,22 @@ abstract class Action {
 	end
 	
 	
-	operation isRegisterable() : Boolean is do
-		result := false
-	end
+	operation isRegisterable() : Boolean is abstract
 	
 	
 	@return "True if the action can be executed."
-	operation canDo() : Boolean is do
-		result := false
-	end
+	operation canDo() : Boolean is abstract
 	
 	
 	@return "True if the execution of the action had effects on the target."
-	operation hadEffect() : Boolean is do
-		result := false
-	end
+	operation hadEffect() : Boolean is abstract
 	
 	
 	
 	@desc "Defines if the given action can cancel the calling action."
 	@return "True if the given action cancels the calling action."
 	@data "action The action to test."
-	operation cancelledBy(action : Action) : Boolean is do
-		result := false
-	end
+	operation cancelledBy<T : Action>(action : T) : Boolean is abstract
 
 
 	@desc "Sets the action to 'done'."

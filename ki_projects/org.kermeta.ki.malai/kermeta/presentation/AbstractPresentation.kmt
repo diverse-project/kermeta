@@ -1,0 +1,17 @@
+/* $Id:$ 
+ * Creation : February 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+
+package kermeta::ki::malai::presentation;
+
+
+require kermeta
+
+
+abstract class AbstractPresentation
+{
+}

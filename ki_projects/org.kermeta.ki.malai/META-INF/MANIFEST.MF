@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Malai
+Bundle-SymbolicName: org.kermeta.ki.malai
+Bundle-Version: 1.0.0.qualifier
+Export-Package: org.kermeta.ki.malai.examples.canvas,
+ org.kermeta.ki.malai.examples.canvas.concPres,
+ org.kermeta.ki.malai.examples.canvas.ui
+Require-Bundle: fr.irisa.triskell.kermeta.interpreter;bundle-version="1.3.2"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

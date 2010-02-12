@@ -1,0 +1,53 @@
+/* $Id:$ 
+ * Creation : February 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "kermeta::ki::malai::examples::Main"
+@mainOperation "main"
+
+
+package kermeta::ki::malai::examples;
+
+
+require kermeta
+require "ActivePresentation.kmt"
+require "Actions.kmt"
+
+
+class Main
+{
+	operation main() : Void is do
+		var cui : CanvasUIWrapper init CanvasUIWrapper.new
+		var model : ActiveModelCanvas init ActiveModelCanvas.new
+		
+		var rec : Rectangle init Rectangle.new
+	/*	var rec : Rectangle init Rectangle.new
+		var ell : Ellipse init Ellipse.new
+		var action : ActionSelect init ActionSelect.new
+		
+		
+		rec.initialise()
+		ell.initialise()
+		
+		model.shapes.add(rec)
+		model.shapes.add(ell)
+
+		action.canvas := model
+		action.selection.add(rec)
+		
+		action.doIt()*/
+		model.addShape(rec)
+		
+		extern org::kermeta::ki::malai::examples::canvas::CanvasExample.initialize(cui)
+	end
+}
+
+
+
+class CanvasUIWrapper {
+
+}
+

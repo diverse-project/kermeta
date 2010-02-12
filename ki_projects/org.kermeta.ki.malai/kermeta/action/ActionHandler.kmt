@@ -26,23 +26,19 @@ abstract class ActionHandler
 
 	@desc "This method is called when an event on action occurred."
 	@data "action The concerned action."
-	operation onActionAdded(action : Action) is do
-	end
+	operation onActionAdded(action : Action) is abstract
 	
 	@desc "This method is called when an event on action occurred."
 	@data "action The concerned action."
-	operation onActionAborted(action : Action) is do
-	end
+	operation onActionAborted(action : Action) is abstract
 	
 	
 	@desc "This method is called when an event on action occurred."
 	@data "action The concerned action."
-	operation onActionCancelled(action : Action) is do
-	end
+	operation onActionCancelled(action : Action) is abstract
 	
 	
 	@desc "Called when an action is executed."
 	@data "action The executed action."
-	operation onActionExecuted(action : Action) is do
-	end
+	operation onActionExecuted(action : Action) is abstract
 }

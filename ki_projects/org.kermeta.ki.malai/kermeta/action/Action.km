@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" tag="#//@ownedTags.0"
+    referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <ownedTags name="mainClass" value="kermeta::ki::malai::action::Action" object="#/"/>
+  <packages name="kermeta">
+    <nestedPackage name="ki">
+      <nestedPackage name="malai">
+        <nestedPackage name="action">
+          <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+              name="Action" isAbstract="true" superType="#//@packages.0/ki/malai/action/Action/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+            <ownedAttribute tag="#//@packages.0/ki/malai/action/Action/done/@ownedTags.0"
+                name="done" type="#//@packages.0/ki/malai/action/Action/done/@containedType.0"
+                isOrdered="true" upper="1" isComposite="true">
+              <ownedTags name="desc" value="Defines if the action is done." object="#//@packages.0/ki/malai/action/Action/done"/>
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+            </ownedAttribute>
+            <ownedAttribute tag="#//@packages.0/ki/malai/action/Action/started/@ownedTags.0"
+                name="started" type="#//@packages.0/ki/malai/action/Action/started/@containedType.0"
+                isOrdered="true" upper="1" isComposite="true">
+              <ownedTags name="desc" value="Defines if the action has started." object="#//@packages.0/ki/malai/action/Action/started"/>
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+            </ownedAttribute>
+            <ownedOperation name="initialize" type="#//@packages.0/ki/malai/action/Action/initialize/@containedType.0"
+                isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:VoidType"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ki/malai/action/Action/done/@containedType.0"
+                      name="done" staticProperty="#//@packages.0/ki/malai/action/Action/done"/>
+                  <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+                  </value>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ki/malai/action/Action/started/@containedType.0"
+                      name="started" staticProperty="#//@packages.0/ki/malai/action/Action/started"/>
+                  <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0"/>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation tag="#//@packages.0/ki/malai/action/Action/doIt/@ownedTags.0 #//@packages.0/ki/malai/action/Action/doIt/@ownedTags.1"
+                name="doIt" type="#//@packages.0/ki/malai/action/Action/doIt/@containedType.0"
+                isOrdered="true" upper="1">
+              <ownedTags name="desc" value="Executes the action. Should be overridden by sub-class to define stuffs to execute."
+                  object="#//@packages.0/ki/malai/action/Action/doIt"/>
+              <ownedTags name="return" value="True if the execution is successful. False otherwise."
+                  object="#//@packages.0/ki/malai/action/Action/doIt"/>
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/doActionBody/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ki/malai/action/Action/started/@containedType.0"
+                          name="started" staticProperty="#//@packages.0/ki/malai/action/Action/started"/>
+                      <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0"
+                          value="true"/>
+                    </statement>
+                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ki/malai/action/Action/doIt/@containedType.0"
+                          name="result"/>
+                      <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0"
+                          value="true"/>
+                    </statement>
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ki/malai/action/Action/doActionBody/@containedType.0"
+                        name="doActionBody" staticOperation="#//@packages.0/ki/malai/action/Action/doActionBody"/>
+                  </thenBody>
+                  <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ki/malai/action/Action/doIt/@containedType.0"
+                          name="result"/>
+                      <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0"/>
+                    </statement>
+                  </elseBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ki/malai/action/Action/canDo/@containedType.0"
+                      name="canDo" staticOperation="#//@packages.0/ki/malai/action/Action/canDo"/>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation name="isRegisterable" type="#//@packages.0/ki/malai/action/Action/isRegisterable/@containedType.0"
+                isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ki/malai/action/Action/isRegisterable/@containedType.0"
+                      name="result"/>
+                  <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0"/>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation tag="#//@packages.0/ki/malai/action/Action/canDo/@ownedTags.0"
+                name="canDo" type="#//@packages.0/ki/malai/action/Action/canDo/@containedType.0"
+                isOrdered="true" upper="1">
+              <ownedTags name="return" value="True if the action can be executed."
+                  object="#//@packages.0/ki/malai/action/Action/canDo"/>
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ki/malai/action/Action/canDo/@containedType.0"
+                      name="result"/>
+                  <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0"/>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation tag="#//@packages.0/ki/malai/action/Action/hadEffect/@ownedTags.0"
+                name="hadEffect" type="#//@packages.0/ki/malai/action/Action/hadEffect/@containedType.0"
+                isOrdered="true" upper="1">
+              <ownedTags name="return" value="True if the execution of the action had effects on the target."
+                  object="#//@packages.0/ki/malai/action/Action/hadEffect"/>
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ki/malai/action/Action/hadEffect/@containedType.0"
+                      name="result"/>
+                  <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0"/>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation tag="#//@packages.0/ki/malai/action/Action/cancelledBy/@ownedTags.0 #//@packages.0/ki/malai/action/Action/cancelledBy/@ownedTags.1 #//@packages.0/ki/malai/action/Action/cancelledBy/@ownedTags.2"
+                name="cancelledBy" type="#//@packages.0/ki/malai/action/Action/cancelledBy/@containedType.0"
+                isOrdered="true" upper="1">
+              <ownedTags name="desc" value="Defines if the given action can cancel the calling action."
+                  object="#//@packages.0/ki/malai/action/Action/cancelledBy"/>
+              <ownedTags name="return" value="True if the given action cancels the calling action."
+                  object="#//@packages.0/ki/malai/action/Action/cancelledBy"/>
+              <ownedTags name="data" value="action The action to test." object="#//@packages.0/ki/malai/action/Action/cancelledBy"/>
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+              <ownedParameter name="action" type="#//@packages.0/ki/malai/action/Action/cancelledBy/@ownedParameter.0/@containedType.0"
+                  isOrdered="true" upper="1">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/ki/malai/action/Action"/>
+              </ownedParameter>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ki/malai/action/Action/cancelledBy/@containedType.0"
+                      name="result"/>
+                  <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0"/>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation tag="#//@packages.0/ki/malai/action/Action/setDone/@ownedTags.0"
+                name="setDone" type="#//@packages.0/ki/malai/action/Action/setDone/@containedType.0"
+                upper="1">
+              <ownedTags name="desc" value="Sets the action to 'done'." object="#//@packages.0/ki/malai/action/Action/setDone"/>
+              <ownedTags name="EMF_renameAs" value="setDoneEMF_renameAs"/>
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ki/malai/action/Action/done/@containedType.0"
+                      name="done" staticProperty="#//@packages.0/ki/malai/action/Action/done"/>
+                  <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/ki/malai/action/Action/initialize/@body/@statement.0/@value/@containedType.0"
+                      value="true"/>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation tag="#//@packages.0/ki/malai/action/Action/isDone/@ownedTags.0"
+                name="isDone" type="#//@packages.0/ki/malai/action/Action/isDone/@containedType.0"
+                isOrdered="true" upper="1">
+              <ownedTags name="return" value="True if the action is done." object="#//@packages.0/ki/malai/action/Action/isDone"/>
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/done/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/done/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ki/malai/action/Action/isDone/@containedType.0"
+                      name="result"/>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ki/malai/action/Action/done/@containedType.0"
+                      name="done" staticProperty="#//@packages.0/ki/malai/action/Action/done"/>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation tag="#//@packages.0/ki/malai/action/Action/abort/@ownedTags.0"
+                name="abort" type="#//@packages.0/ki/malai/action/Action/abort/@containedType.0"
+                isOrdered="true" upper="1">
+              <ownedTags name="desc" value="Aborts the action." object="#//@packages.0/ki/malai/action/Action/abort"/>
+              <containedType xsi:type="kermeta_language_structure:VoidType"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/done/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ki/malai/action/Action/done/@containedType.0"
+                    name="done" staticProperty="#//@packages.0/ki/malai/action/Action/done"/>
+              </body>
+            </ownedOperation>
+            <ownedOperation tag="#//@packages.0/ki/malai/action/Action/isStarted/@ownedTags.0"
+                name="isStarted" type="#//@packages.0/ki/malai/action/Action/isStarted/@containedType.0"
+                isOrdered="true" upper="1">
+              <ownedTags name="return" value="True if the action has already started."
+                  object="#//@packages.0/ki/malai/action/Action/isStarted"/>
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/started/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/started/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ki/malai/action/Action/isStarted/@containedType.0"
+                      name="result"/>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ki/malai/action/Action/started/@containedType.0"
+                      name="started" staticProperty="#//@packages.0/ki/malai/action/Action/started"/>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation tag="#//@packages.0/ki/malai/action/Action/setStarted/@ownedTags.0 #//@packages.0/ki/malai/action/Action/setStarted/@ownedTags.1"
+                name="setStarted" type="#//@packages.0/ki/malai/action/Action/setStarted/@containedType.0"
+                isOrdered="true" upper="1">
+              <ownedTags name="desc" value="Defines if the action has started or not."
+                  object="#//@packages.0/ki/malai/action/Action/setStarted"/>
+              <ownedTags name="data" value="started The new value of isStarted." object="#//@packages.0/ki/malai/action/Action/setStarted"/>
+              <ownedTags name="EMF_renameAs" value="setStartedEMF_renameAs"/>
+              <containedType xsi:type="kermeta_language_structure:VoidType"/>
+              <ownedParameter name="started" type="#//@packages.0/ki/malai/action/Action/setStarted/@ownedParameter.0/@containedType.0"
+                  isOrdered="true" upper="1">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean"/>
+              </ownedParameter>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/setStarted/@ownedParameter.0/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ki/malai/action/Action/setStarted/@ownedParameter.0/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ki/malai/action/Action/started/@containedType.0"
+                      name="started" staticProperty="#//@packages.0/ki/malai/action/Action/started">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/ki/malai/action/Action/setStarted/@body/@statement.0/@target/@target/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/ki/malai/action/Action"/>
+                    </target>
+                  </target>
+                  <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ki/malai/action/Action/setStarted/@ownedParameter.0/@containedType.0"
+                      name="started"/>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation name="doActionBody" type="#//@packages.0/ki/malai/action/Action/doActionBody/@containedType.0"
+                upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ki/malai/action/Action/doActionBody/@body/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
+              </body>
+            </ownedOperation>
+          </ownedTypeDefinition>
+        </nestedPackage>
+      </nestedPackage>
+    </nestedPackage>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="kermeta::ki::malai::action"/>
+  <usings qualifiedName="kermeta::standard"/>
+</kermeta_language_structure:ModelingUnit>

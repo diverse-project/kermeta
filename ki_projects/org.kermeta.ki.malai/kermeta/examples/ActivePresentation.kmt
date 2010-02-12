@@ -1,0 +1,25 @@
+/* $Id:$ 
+ * Creation : February 9, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+
+package kermeta::ki::malai::examples;
+
+
+require kermeta
+require "AbstractPresentation.kmt"
+
+using kermeta::standard
+
+
+class ActiveModelCanvas inherits ModelCanvas
+{
+	method addShape(sh : Shape) : Void is do
+		super(sh)
+		
+		stdio.writeln("added")
+	end
+}

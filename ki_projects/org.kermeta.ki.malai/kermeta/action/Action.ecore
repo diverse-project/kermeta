@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="kermeta::ki::malai::action|kermeta::standard|"/>
+  </ecore:EAnnotation>
+  <ecore:EAnnotation source="kermeta">
+    <details key="mainClass" value="kermeta::ki::malai::action::Action"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="kermeta" nsURI="platform:/resource/org.kermeta.ki.malai/src/kermeta/action/Action.ecore#/"
+      nsPrefix="kermeta">
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+    <eSubpackages name="ki" nsURI="platform:/resource/org.kermeta.ki.malai/src/kermeta/action/Action.ecore#/kermeta/ki"
+        nsPrefix="ki">
+      <eSubpackages name="malai" nsURI="platform:/resource/org.kermeta.ki.malai/src/kermeta/action/Action.ecore#/kermeta/ki/malai"
+          nsPrefix="malai">
+        <eSubpackages name="action" nsURI="platform:/resource/org.kermeta.ki.malai/src/kermeta/action/Action.ecore#/kermeta/ki/malai/action"
+            nsPrefix="action">
+          <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true">
+            <eOperations name="initialize">
+              <eAnnotations source="kermeta">
+                <details key="body" value="do&#xA;&#x9;done := false&#xA;&#x9;started := false&#xA;end"/>
+              </eAnnotations>
+            </eOperations>
+            <eOperations name="doIt" eType="#/2/Boolean">
+              <eAnnotations source="kermeta">
+                <details key="body" value="do&#xA;&#x9;if canDo then&#xA;&#x9;&#x9;started := true&#xA;&#x9;&#x9;result := true&#xA;&#x9;&#x9;doActionBody&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := false&#xA;&#xA;&#x9;end&#xA;end"/>
+                <details key="desc" value="Executes the action. Should be overridden by sub-class to define stuffs to execute."/>
+                <details key="return" value="True if the execution is successful. False otherwise."/>
+              </eAnnotations>
+            </eOperations>
+            <eOperations name="isRegisterable" eType="#/2/Boolean">
+              <eAnnotations source="kermeta">
+                <details key="body" value="do&#xA;&#x9;result := false&#xA;end"/>
+              </eAnnotations>
+            </eOperations>
+            <eOperations name="canDo" eType="#/2/Boolean">
+              <eAnnotations source="kermeta">
+                <details key="body" value="do&#xA;&#x9;result := false&#xA;end"/>
+                <details key="return" value="True if the action can be executed."/>
+              </eAnnotations>
+            </eOperations>
+            <eOperations name="hadEffect" eType="#/2/Boolean">
+              <eAnnotations source="kermeta">
+                <details key="body" value="do&#xA;&#x9;result := false&#xA;end"/>
+                <details key="return" value="True if the execution of the action had effects on the target."/>
+              </eAnnotations>
+            </eOperations>
+            <eOperations name="cancelledBy" eType="#/2/Boolean">
+              <eAnnotations source="kermeta">
+                <details key="body" value="do&#xA;&#x9;result := false&#xA;end"/>
+                <details key="desc" value="Defines if the given action can cancel the calling action."/>
+                <details key="return" value="True if the given action cancels the calling action."/>
+                <details key="data" value="action The action to test."/>
+              </eAnnotations>
+              <eParameters name="action" eType="#/2/ki/malai/action/Action"/>
+            </eOperations>
+            <eOperations name="setDone" ordered="false">
+              <eAnnotations source="kermeta">
+                <details key="body" value="do&#xA;&#x9;done := true&#xA;end"/>
+                <details key="desc" value="Sets the action to 'done'."/>
+              </eAnnotations>
+            </eOperations>
+            <eOperations name="isDone" eType="#/2/Boolean">
+              <eAnnotations source="kermeta">
+                <details key="body" value="do&#xA;&#x9;result := done&#xA;end"/>
+                <details key="return" value="True if the action is done."/>
+              </eAnnotations>
+            </eOperations>
+            <eOperations name="abort">
+              <eAnnotations source="kermeta">
+                <details key="body" value="do&#xA;&#x9;done&#xA;end"/>
+                <details key="desc" value="Aborts the action."/>
+              </eAnnotations>
+            </eOperations>
+            <eOperations name="isStarted" eType="#/2/Boolean">
+              <eAnnotations source="kermeta">
+                <details key="body" value="do&#xA;&#x9;result := started&#xA;end"/>
+                <details key="return" value="True if the action has already started."/>
+              </eAnnotations>
+            </eOperations>
+            <eOperations name="setStarted">
+              <eAnnotations source="kermeta">
+                <details key="body" value="do&#xA;&#x9;self.started := started&#xA;end"/>
+                <details key="desc" value="Defines if the action has started or not."/>
+                <details key="data" value="started The new value of isStarted."/>
+              </eAnnotations>
+              <eParameters name="started" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            </eOperations>
+            <eOperations name="doActionBody" ordered="false">
+              <eAnnotations source="kermeta">
+                <details key="body" value="do&#xA;end"/>
+              </eAnnotations>
+            </eOperations>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="done" eType="#/2/Boolean">
+              <eAnnotations source="kermeta">
+                <details key="isComposite" value="true"/>
+                <details key="desc" value="Defines if the action is done."/>
+              </eAnnotations>
+            </eStructuralFeatures>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="started" eType="#/2/Boolean">
+              <eAnnotations source="kermeta">
+                <details key="isComposite" value="true"/>
+                <details key="desc" value="Defines if the action has started."/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+        </eSubpackages>
+      </eSubpackages>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

@@ -20,17 +20,13 @@ using kermeta::standard
 abstract class Undoable
 {
 	@desc "Cancels the action."
-	operation undo() : Void is do
-	end
+	operation undo() : Void is abstract
 	
 	
 	@desc "Redoes the cancelled action."
-	operation redo() : Void is do
-	end
+	operation redo() : Void is abstract
 
 	
 	@return "The name of the undo action."
-	operation getUndoName() : String is do
-		result := ""
-	end
+	operation getUndoName() : String is abstract
 }

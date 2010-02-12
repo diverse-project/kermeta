@@ -18,6 +18,5 @@ require kermeta
 class UndoHandler
 {
 	@desc "pdates the elements that are concerned by the collector: menu items, buttons,..."
-	operation updateUndo() : Void is do
-	end
+	operation updateUndo() : Void is abstract
 }
