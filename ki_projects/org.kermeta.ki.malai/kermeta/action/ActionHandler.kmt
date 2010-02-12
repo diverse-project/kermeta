@@ -18,27 +18,25 @@ require "Action.kmt"
 using kermeta::standard
 
 
-@desc "This abstract class allows to create a bridge between an action and an"
-@desc "object that want to be aware about events on actions (such as creation or"
-@desc "deletion of an action)."
+/** This abstract class allows to create a bridge between an action and an
+	object that want to be aware about events on actions (such as creation or deletion of an action). */
 abstract class ActionHandler
 {
-
-	@desc "This method is called when an event on action occurred."
-	@data "action The concerned action."
+	/** This method is called when an event on action occurred.
+	'action': The concerned action. */
 	operation onActionAdded(action : Action) is abstract
 	
-	@desc "This method is called when an event on action occurred."
-	@data "action The concerned action."
+	/** This method is called when an event on action occurred.
+	'action': The concerned action. */
 	operation onActionAborted(action : Action) is abstract
 	
 	
-	@desc "This method is called when an event on action occurred."
-	@data "action The concerned action."
+	/** This method is called when an event on action occurred.
+	'action': The concerned action. */
 	operation onActionCancelled(action : Action) is abstract
 	
 	
-	@desc "Called when an action is executed."
-	@data "action The executed action."
+	/** Called when an action is executed.
+	'action': The executed action. */
 	operation onActionExecuted(action : Action) is abstract
 }

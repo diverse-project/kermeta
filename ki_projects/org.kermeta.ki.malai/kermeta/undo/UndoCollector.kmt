@@ -22,16 +22,16 @@ using kermeta::ki::malai::utils
 
 class UndoCollector
 {
-	@desc "Contains the undoable actions."
+	/** Contains the undoable actions. */
 	attribute undoStack : Stack<Undoable>
 	
-	@desc "Contains the redoable actions."
+	/** Contains the redoable actions. */
 	attribute redoStack : Stack<Undoable>
 	
-	@desc "The maximal number of undo."
+	/** The maximal number of undo. */
 	attribute max : Integer
 	
-	@desc "The handlers that handles the collector."
+	/** The handlers that handles the collector. */
 	reference handlers : Sequence<UndoHandler>
 	
 	operation initialise() : Void is do
@@ -39,13 +39,13 @@ class UndoCollector
 	end
 
 	
-	@desc "Notifies the handlers that something has changed."
+	/** Notifies the handlers that something has changed. */
 	operation notifyHandlers() : Void is do
 		handlers.each{ handler | handler.updateUndo() }
 	end
 	
 
-	@desc "Removes all the actions of the collector."
+	/** Removes all the actions of the collector. */
 	operation clear() : Void is do
 		undoStack.clear()
 		redoStack.clear()
@@ -53,8 +53,8 @@ class UndoCollector
 	end
 	
 	
-	@desc "Adds an undoable element to the collector."
-	@data "elt The undoable element to add."
+	/** Adds an undoable element to the collector.
+		'elt': The undoable element to add. */
 	operation add(elt : Undoable) : Void is do
 		if(elt!=void and max>0) then
 			if(undoStack.size()==max) then
@@ -68,7 +68,7 @@ class UndoCollector
 	end
 	
 	
-	@desc "Undoes the last action."
+	/** Undoes the last action. */
 	operation undo() : Void is do
 		if not undoStack.isEmpty then
 			var action : Undoable init undoStack.pop()
@@ -80,7 +80,7 @@ class UndoCollector
 	
 	
 	
-	@desc "Redoes the last action. "
+	/** Redoes the last action. */
 	operation redo() : Void is do
 		if not redoStack.isEmpty then
 			var action : Undoable init redoStack.pop()
@@ -91,25 +91,25 @@ class UndoCollector
 	end
 	
 	
-	@return "The last undoable action name."
+	/** The last undoable action name. */
 	operation getLastUndoMessage() : String is do
 		result := if not undoStack.isEmpty then undoStack.peek().getUndoName() end
 	end
 	
 	
-	@return "The last redoable action name."
+	/** The last redoable action name. */
 	operation getLastRedoMessage() : String is do
 		result := if not redoStack.isEmpty then redoStack.peek().getUndoName() end
 	end
 		
 
-	@return "The last undoable action."
+	/** The last undoable action. */
 	operation getLastUndo() : Undoable is do
 		result := if not undoStack.isEmpty then undoStack.peek() end
 	end
 	
 	
-	@return "The last redoable action."
+	/** The last redoable action. */
 	operation getLastRedo() : Undoable is do
 		result := if not redoStack.isEmpty then redoStack.peek() end
 	end

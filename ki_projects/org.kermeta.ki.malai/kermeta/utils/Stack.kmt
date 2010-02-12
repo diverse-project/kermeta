@@ -16,21 +16,21 @@ require kermeta
 using kermeta::standard
 
 
-@desc "This class implements a stack based on the Sequence collection."
+/** This class implements a stack based on the Sequence collection. */
 class Stack<T>
 {
-	@desc "The sequence that contains the elements of the stack."
+	/** The sequence that contains the elements of the stack. */
 	attribute elements : Sequence<T>
 	
 	
-	@desc "Pushes the given object into the stack."
-	@data "object: the object to push into the stack"
+	/** Pushes the given object into the stack.
+		'object': the object to push into the stack */
 	operation push(object : T) : Void is do
 		elements.add(object)
 	end
 	
-	@desc "Remove the object at the top of the stack and returns it."
-	@return "The removed object or void if the stack is empty."
+	/** Remove the object at the top of the stack and returns it.
+		Returns the removed object or void if the stack is empty. */
 	operation pop() : T is do
 		if not isEmpty then
 			result := elements.elementAt(elements.size-1)
@@ -39,14 +39,13 @@ class Stack<T>
 	end
 	
 	
-	@desc "Returns the object at the top of the stack"
-	@return "The object at the top of the stack or void if the stack is empty"
+	/** Returns the object at the top of the stack or void if the stack is empty */
 	operation peek() : T is do
 		result := if not isEmpty  then elements.elementAt(elements.size-1) end
 	end
 	
 	
-	@desc "Removes all the objects of the stack."
+	/** Removes all the objects of the stack. */
 	operation clear() : Void is do
 		var size : Integer init elements.size
 		
@@ -54,14 +53,14 @@ class Stack<T>
 	end
 	
 	
-	@return "the size of the stack"
+	/** the size of the stack */
 	operation size() : Integer is do
 		result := elements.size
 	end
 	
 	
 	
-	@desc "Checks if the stack is empty."
+	/** Checks if the stack is empty. */
 	operation isEmpty() : Boolean is do
 		result := elements.size==0
 	end

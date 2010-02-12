@@ -13,10 +13,10 @@ package kermeta::ki::malai::undo;
 
 require kermeta
 
-@desc "This handler must help objet that want to be aware of"
-@desc "undone/redone event (for instance, to update some widgets)."
+/** This handler must help objet that want to be aware of
+	undone/redone event (for instance, to update some widgets). */
 class UndoHandler
 {
-	@desc "pdates the elements that are concerned by the collector: menu items, buttons,..."
+	/** Updates the elements that are concerned by the collector: menu items, buttons,... */
 	operation updateUndo() : Void is abstract
 }

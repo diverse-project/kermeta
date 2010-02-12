@@ -16,17 +16,17 @@ require kermeta
 using kermeta::standard
 
 
-@desc "Defines an interface for undoable objects."
+/** Defines an interface for undoable objects. */
 abstract class Undoable
 {
-	@desc "Cancels the action."
+	/** Cancels the action. */
 	operation undo() : Void is abstract
 	
 	
-	@desc "Redoes the cancelled action."
+	/** Redoes the cancelled action. */
 	operation redo() : Void is abstract
 
 	
-	@return "The name of the undo action."
+	/** The name of the undo action. */
 	operation getUndoName() : String is abstract
 }

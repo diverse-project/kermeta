@@ -17,10 +17,10 @@ using kermeta::standard
 
 
 abstract class Action {
-	@desc "Defines if the action is done."
+	/** Defines if the action is done. */
 	attribute done : Boolean
 	
-	@desc "Defines if the action has started."
+	/** Defines if the action has started. */
 	attribute started : Boolean
 	
 	
@@ -30,8 +30,8 @@ abstract class Action {
 	end
 	
 	
-	 @desc "Executes the action. Should be overridden by sub-class to define stuffs to execute."
-	 @return "True if the execution is successful. False otherwise."
+	 /** Executes the action. Should be overridden by sub-class to define stuffs to execute.
+	 	Returns true if the execution is successful. False otherwise. */
 	 operation doIt() : Boolean is do
 		if(canDo()) then
 			started := true
@@ -50,48 +50,48 @@ abstract class Action {
 	operation isRegisterable() : Boolean is abstract
 	
 	
-	@return "True if the action can be executed."
+	/** True if the action can be executed. */
 	operation canDo() : Boolean is abstract
 	
 	
-	@return "True if the execution of the action had effects on the target."
+	/** True if the execution of the action had effects on the target. */
 	operation hadEffect() : Boolean is abstract
 	
 	
 	
-	@desc "Defines if the given action can cancel the calling action."
-	@return "True if the given action cancels the calling action."
-	@data "action The action to test."
+	/** Defines if the given action can cancel the calling action.
+		Returns true if the given action cancels the calling action.
+		'action': The action to test. */
 	operation cancelledBy<T : Action>(action : T) : Boolean is abstract
 
 
-	@desc "Sets the action to 'done'."
+	/** Sets the action to 'done'. */
 	operation setDone() is do
 		done := true
 	end
 	
 	
 	
-	@return "True if the action is done."
+	/** True if the action is done. */
 	operation isDone() : Boolean is do
 		result := done
 	end
 	
 	
-	@desc "Aborts the action."
+	/** Aborts the action. */
 	operation abort() : Void is do
 		done()
 	end
 
 
-	@return "True if the action has already started."
+	/** Returns true if the action has already started. */
 	operation isStarted() : Boolean is do
 		result := started
 	end
 
 
-	@desc "Defines if the action has started or not."
-	@data "started The new value of isStarted."
+	/** Defines if the action has started or not.
+	 	'started': the new value of isStarted. */
 	operation setStarted(started : Boolean) : Void is do
 		self.started := started
 	end

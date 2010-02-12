@@ -21,18 +21,18 @@ using kermeta::ki::malai::undo
 
 
 class ActionRegistry {
-	@desc "The saved actions."
+	/** The saved actions. */
 	attribute actions : Sequence<Action>
 
-	@desc "The actions handlers."
+	/** The actions handlers. */
 	reference handlers : Sequence<ActionHandler>
 	
 	reference undoCollector : UndoCollector
 	
 	
 	
-	@desc "Adds an action to the register."
-	@data "action The action to add."
+	/** Adds an action to the register.
+		'action': The action to add. */
 	operation addAction(action : Action) : Void
 		pre correctAction is do
 			action!=void and actions.contains(action)
@@ -64,8 +64,8 @@ class ActionRegistry {
 	
 	
 	
-	@desc "Removes actions from the register using a given action."
-	@data "action The action that may cancels others."
+	/** Removes actions from the register using a given action.
+		'action': The action that may cancels others. */
 	operation cancelActions(action : Action) : Void
 		pre ActionNotVoid is do
 			action!=void
@@ -96,16 +96,16 @@ class ActionRegistry {
 	end
 	
 	
-	@data "clazz The reference class."
-	@return "The first action of the same kind of the given action."
+	/** 'clazz': The reference class.
+		Returns the first action of the same kind of the given action. */
 	operation getAction<T : Action>(action : T) : Action is do
 		result := actions.detect{ action2 | action2.isKindOf(T) }
 	end
 
 
 	
-	@desc "Notifies handlers that a event on actions occurred."
-	@data "action The concerned action."
+	/** Notifies handlers that a event on actions occurred.
+		'action': The concerned action. */
 	operation notifyHandlersOnAdd(action : Action) : Void
 		pre ActionNotVoid is do
 			action!=void
@@ -117,8 +117,8 @@ class ActionRegistry {
 	
 	
 	
-	@desc "Notifies handlers that a event on actions occurred."
-	@data "action The concerned action."
+	/** Notifies handlers that a event on actions occurred.
+		'action': The concerned action. */
 	operation notifyHandlersOnCancel(action : Action) : Void
 		pre ActionNotVoid is do
 			action!=void
@@ -130,8 +130,8 @@ class ActionRegistry {
 	
 	
 	
-	@desc "Notifies handlers that a event on actions occurred."
-	@data "action The concerned action."
+	/** Notifies handlers that a event on actions occurred.
+		'action': The concerned action. */
 	operation notifyHandlersOnAbort(action : Action) : Void
 		pre ActionNotVoid is do
 			action!=void
