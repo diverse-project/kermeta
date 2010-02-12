@@ -1,0 +1,85 @@
+/* $Id:$ 
+ * Creation : February 4, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mgouyett
+ */
+@mainClass "fsm_package::Main"
+@mainOperation "main"
+
+
+package fsm_package;
+
+
+require kermeta
+require "../../metamodel/fsm.ecore"
+
+using kermeta::persistence 
+using kermeta::standard
+         
+
+
+class Main
+{
+	operation main() : Void is do 
+		 // Input fsm
+         var fsm1 : fsm::FSM
+         // Create the repository, then the resource
+         var repository : EMFRepository init EMFRepository.new
+         var resource : EMFResource 
+         resource ?= repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.serialisation/model/Fsm_dyn_sample1.xmi", "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.serialisation/metamodel/fsm.ecore")
+         resource.load
+
+ 		// Load the fsm (we get the instance) 
+ 		fsm1 ?= resource.one
+ 
+ 		// Check that the fsm was correctly loaded
+ 		fsm1.ownedState.each { s | stdio.writeln("-> "+s.name) 
+ 		  s.outgoingTransition.each { ti | stdio.writeln( "outgoing : " + " source " + ti.source.name  + " target " + ti.target.name + " input : " + ti.input +  " output :  " + ti.output)}
+ 		 s.incomingTransition.each { to | stdio.writeln( "incoming :  " + " source " + to.source.name  + " target " + to.target.name +" input : " + to.input +  " output : " + to.output )}
+ 		}
+
+ 		
+ 		// Modify and save EMF model with Kermeta
+ 		var newstate : fsm::State init fsm::State.new
+		newstate.name := "s_new"
+		fsm1.ownedState.add(newstate)
+		newstate.owningFSM := fsm1 
+		// save fsm1 
+		resource.save()
+	
+		// Save into another metamodel
+		resource.saveWithNewURI("platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.serialisation/model/modified_dyn_sample1.xmi")
+		
+		// Create a new model from scratch
+         	var another_resource : EMFResource
+		another_resource ?= repository.createResource(
+       "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.serialisation/model/Fsm_scratch_sample.xmi",
+       "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.serialisation/metamodel/fsm.ecore")
+		var fsm2 : fsm::FSM init fsm::FSM.new
+		var s0 : fsm::State init fsm::State.new
+		var s1 : fsm::State init fsm::State.new
+		var t01 : fsm::Transition init fsm::Transition.new
+		var t11 : fsm::Transition init fsm::Transition.new
+		s0.name := "foo"
+		s1.name := "bar"
+		t01.source := s0
+		t01.target := s1
+		t11.source := s1
+		t11.target := s1
+		fsm2.ownedState.add(s0)
+		s0.owningFSM := fsm2
+		fsm2.ownedState.add(s1)
+		s1.owningFSM := fsm2
+		s0.outgoingTransition.add(t01)
+		s1.outgoingTransition.add(t11)
+		// save the from-scratch model!
+		another_resource.add(fsm2)
+		another_resource.save()  
+		
+		
+ 		
+end
+
+}
