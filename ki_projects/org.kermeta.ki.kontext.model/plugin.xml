@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.kermeta.org/ki/kontext"
-            class="kontext.KontextPackage"/>
+            class="org.kermeta.ki.kontext.KontextPackage"/>
    </extension>
 
 </plugin>

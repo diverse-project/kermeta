@@ -78,7 +78,7 @@
         </eAnnotations>
         <eParameters name="newName" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/standard/String"/>
       </eOperations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#/1/String">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
         <eAnnotations source="kermeta">
           <details key="isComposite" value="true"/>
         </eAnnotations>
@@ -104,7 +104,7 @@
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Light">
-      <eOperations name="isSwitchedOn" eType="#/1/Boolean">
+      <eOperations name="isSwitchedOn">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;result := turnedOn&#xA;end"/>
         </eAnnotations>
@@ -119,15 +119,12 @@
           <details key="body" value="do&#xA;&#x9;turnedOn := false&#xA;end"/>
         </eAnnotations>
       </eOperations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="turnedOn" eType="#/1/Boolean">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="turnedOn">
         <eAnnotations source="kermeta">
           <details key="isComposite" value="true"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
-    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
-    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource"/>
 </xmi:XMI>

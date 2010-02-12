@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="INRIA - Triskell Team"
+    modelDirectory="/org.kermeta.ki.kontext.model/src" editDirectory="/org.kermeta.ki.kontext.edit/src"
+    editorDirectory="/org.kermeta.ki.kontext.editor/src" modelPluginID="org.kermeta.ki.kontext.model"
+    modelName="Kontext" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    editPluginID="org.kermeta.ki.kontext.edit" editorPluginID="org.kermeta.ki.kontext.editor">
+  <foreignModel>kontext.ecore</foreignModel>
+  <genPackages prefix="Kontext" basePackage="org.kermeta.ki" disposableProviderFactory="true"
+      ecorePackage="kontext.ecore#/">
+    <genClasses ecoreClass="kontext.ecore#//ContextToTask">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kontext.ecore#//ContextToTask/constraints"/>
+    </genClasses>
+    <genClasses ecoreClass="kontext.ecore#//ContextToTaskConstraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kontext.ecore#//ContextToTaskConstraint/exp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kontext.ecore#//ContextToTaskConstraint/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kontext.ecore#//ContextToTaskConstraint/classes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kontext.ecore#//ContextToTaskConstraint/tasks"/>
+    </genClasses>
+    <genClasses ecoreClass="kontext.ecore#//Expression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kontext.ecore#//Expression/text"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Task" ecorePackage="http://www.kermeta.org/ki/task#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="http://www.kermeta.org/ki/task#//UnaryOperation">
+      <genEnumLiterals ecoreEnumLiteral="http://www.kermeta.org/ki/task#//UnaryOperation/recursive"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.kermeta.org/ki/task#//UnaryOperation/iteration"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.kermeta.org/ki/task#//UnaryOperation/optional"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.kermeta.org/ki/task#//UnaryOperation/finiteInteraction"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="http://www.kermeta.org/ki/task#//Task">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.kermeta.org/ki/task#//Task/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.kermeta.org/ki/task#//Task/description"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.kermeta.org/ki/task#//Task/subtasks"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.kermeta.org/ki/task#//Task/operation"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.kermeta.org/ki/task#//User"/>
+    <genClasses ecoreClass="http://www.kermeta.org/ki/task#//Abstract"/>
+    <genClasses ecoreClass="http://www.kermeta.org/ki/task#//Interaction"/>
+    <genClasses ecoreClass="http://www.kermeta.org/ki/task#//Application"/>
+    <genClasses image="false" ecoreClass="http://www.kermeta.org/ki/task#//Operator">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.kermeta.org/ki/task#//Operator/src"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.kermeta.org/ki/task#//Operator/target"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.kermeta.org/ki/task#//TaskModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.kermeta.org/ki/task#//TaskModel/operations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.kermeta.org/ki/task#//TaskModel/tasks"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.kermeta.org/ki/task#//Enabling"/>
+    <genClasses ecoreClass="http://www.kermeta.org/ki/task#//desactivation"/>
+    <genClasses ecoreClass="http://www.kermeta.org/ki/task#//EnablingWithInformation"/>
+    <genClasses ecoreClass="http://www.kermeta.org/ki/task#//Interleaving"/>
+    <genClasses ecoreClass="http://www.kermeta.org/ki/task#//Synchronization"/>
+    <genClasses ecoreClass="http://www.kermeta.org/ki/task#//FiniteIteration"/>
+    <genClasses ecoreClass="http://www.kermeta.org/ki/task#//Recursion"/>
+  </genPackages>
+</genmodel:GenModel>
