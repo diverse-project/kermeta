@@ -1,7 +1,0 @@
-# Tracing options for the fr.irisa.triskell.kermeta.samples.fsm.gmf.diagram plug-in
-
-# Common issues
-fr.irisa.triskell.kermeta.samples.fsm.gmf.diagram/debug=false
-
-# Visual IDs
-fr.irisa.triskell.kermeta.samples.fsm.gmf.diagram/debug/visualID=false
