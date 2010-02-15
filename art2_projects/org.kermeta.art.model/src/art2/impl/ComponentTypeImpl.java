@@ -9,6 +9,8 @@ package art2.impl;
 import art2.Art2Package;
 import art2.ComponentType;
 import art2.DictionaryType;
+import art2.ExtraFonctionalProperty;
+import art2.IntegrationPattern;
 import art2.PortType;
 import art2.PortTypeRef;
 
@@ -37,9 +39,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link art2.impl.ComponentTypeImpl#getHostedPortTypes <em>Hosted Port Types</em>}</li>
  *   <li>{@link art2.impl.ComponentTypeImpl#getDictionary <em>Dictionary</em>}</li>
- *   <li>{@link art2.impl.ComponentTypeImpl#getRequirePortTypes <em>Require Port Types</em>}</li>
  *   <li>{@link art2.impl.ComponentTypeImpl#getBean <em>Bean</em>}</li>
- *   <li>{@link art2.impl.ComponentTypeImpl#getPortTypeRefs <em>Port Type Refs</em>}</li>
+ *   <li>{@link art2.impl.ComponentTypeImpl#getNeededPortTypes <em>Needed Port Types</em>}</li>
+ *   <li>{@link art2.impl.ComponentTypeImpl#getIntegrationPatterns <em>Integration Patterns</em>}</li>
+ *   <li>{@link art2.impl.ComponentTypeImpl#getExtraFonctionalProperties <em>Extra Fonctional Properties</em>}</li>
+ *   <li>{@link art2.impl.ComponentTypeImpl#getOfferedPortTypes <em>Offered Port Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,16 +71,6 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 	protected DictionaryType dictionary;
 
 	/**
-	 * The cached value of the '{@link #getRequirePortTypes() <em>Require Port Types</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRequirePortTypes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<PortType> requirePortTypes;
-
-	/**
 	 * The default value of the '{@link #getBean() <em>Bean</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -97,14 +91,44 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 	protected String bean = BEAN_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getPortTypeRefs() <em>Port Type Refs</em>}' containment reference list.
+	 * The cached value of the '{@link #getNeededPortTypes() <em>Needed Port Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPortTypeRefs()
+	 * @see #getNeededPortTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PortTypeRef> portTypeRefs;
+	protected EList<PortTypeRef> neededPortTypes;
+
+	/**
+	 * The cached value of the '{@link #getIntegrationPatterns() <em>Integration Patterns</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIntegrationPatterns()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<IntegrationPattern> integrationPatterns;
+
+	/**
+	 * The cached value of the '{@link #getExtraFonctionalProperties() <em>Extra Fonctional Properties</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtraFonctionalProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExtraFonctionalProperty extraFonctionalProperties;
+
+	/**
+	 * The cached value of the '{@link #getOfferedPortTypes() <em>Offered Port Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOfferedPortTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PortTypeRef> offeredPortTypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -185,18 +209,6 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<PortType> getRequirePortTypes() {
-		if (requirePortTypes == null) {
-			requirePortTypes = new EObjectResolvingEList<PortType>(PortType.class, this, Art2Package.COMPONENT_TYPE__REQUIRE_PORT_TYPES);
-		}
-		return requirePortTypes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getBean() {
 		return bean;
 	}
@@ -218,11 +230,78 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<PortTypeRef> getPortTypeRefs() {
-		if (portTypeRefs == null) {
-			portTypeRefs = new EObjectContainmentEList<PortTypeRef>(PortTypeRef.class, this, Art2Package.COMPONENT_TYPE__PORT_TYPE_REFS);
+	public EList<PortTypeRef> getNeededPortTypes() {
+		if (neededPortTypes == null) {
+			neededPortTypes = new EObjectContainmentEList<PortTypeRef>(PortTypeRef.class, this, Art2Package.COMPONENT_TYPE__NEEDED_PORT_TYPES);
 		}
-		return portTypeRefs;
+		return neededPortTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<IntegrationPattern> getIntegrationPatterns() {
+		if (integrationPatterns == null) {
+			integrationPatterns = new EObjectContainmentEList<IntegrationPattern>(IntegrationPattern.class, this, Art2Package.COMPONENT_TYPE__INTEGRATION_PATTERNS);
+		}
+		return integrationPatterns;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExtraFonctionalProperty getExtraFonctionalProperties() {
+		return extraFonctionalProperties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExtraFonctionalProperties(ExtraFonctionalProperty newExtraFonctionalProperties, NotificationChain msgs) {
+		ExtraFonctionalProperty oldExtraFonctionalProperties = extraFonctionalProperties;
+		extraFonctionalProperties = newExtraFonctionalProperties;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Art2Package.COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES, oldExtraFonctionalProperties, newExtraFonctionalProperties);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtraFonctionalProperties(ExtraFonctionalProperty newExtraFonctionalProperties) {
+		if (newExtraFonctionalProperties != extraFonctionalProperties) {
+			NotificationChain msgs = null;
+			if (extraFonctionalProperties != null)
+				msgs = ((InternalEObject)extraFonctionalProperties).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Art2Package.COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES, null, msgs);
+			if (newExtraFonctionalProperties != null)
+				msgs = ((InternalEObject)newExtraFonctionalProperties).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Art2Package.COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES, null, msgs);
+			msgs = basicSetExtraFonctionalProperties(newExtraFonctionalProperties, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES, newExtraFonctionalProperties, newExtraFonctionalProperties));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<PortTypeRef> getOfferedPortTypes() {
+		if (offeredPortTypes == null) {
+			offeredPortTypes = new EObjectContainmentEList<PortTypeRef>(PortTypeRef.class, this, Art2Package.COMPONENT_TYPE__OFFERED_PORT_TYPES);
+		}
+		return offeredPortTypes;
 	}
 
 	/**
@@ -237,8 +316,14 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 				return ((InternalEList<?>)getHostedPortTypes()).basicRemove(otherEnd, msgs);
 			case Art2Package.COMPONENT_TYPE__DICTIONARY:
 				return basicSetDictionary(null, msgs);
-			case Art2Package.COMPONENT_TYPE__PORT_TYPE_REFS:
-				return ((InternalEList<?>)getPortTypeRefs()).basicRemove(otherEnd, msgs);
+			case Art2Package.COMPONENT_TYPE__NEEDED_PORT_TYPES:
+				return ((InternalEList<?>)getNeededPortTypes()).basicRemove(otherEnd, msgs);
+			case Art2Package.COMPONENT_TYPE__INTEGRATION_PATTERNS:
+				return ((InternalEList<?>)getIntegrationPatterns()).basicRemove(otherEnd, msgs);
+			case Art2Package.COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES:
+				return basicSetExtraFonctionalProperties(null, msgs);
+			case Art2Package.COMPONENT_TYPE__OFFERED_PORT_TYPES:
+				return ((InternalEList<?>)getOfferedPortTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -255,12 +340,16 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 				return getHostedPortTypes();
 			case Art2Package.COMPONENT_TYPE__DICTIONARY:
 				return getDictionary();
-			case Art2Package.COMPONENT_TYPE__REQUIRE_PORT_TYPES:
-				return getRequirePortTypes();
 			case Art2Package.COMPONENT_TYPE__BEAN:
 				return getBean();
-			case Art2Package.COMPONENT_TYPE__PORT_TYPE_REFS:
-				return getPortTypeRefs();
+			case Art2Package.COMPONENT_TYPE__NEEDED_PORT_TYPES:
+				return getNeededPortTypes();
+			case Art2Package.COMPONENT_TYPE__INTEGRATION_PATTERNS:
+				return getIntegrationPatterns();
+			case Art2Package.COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES:
+				return getExtraFonctionalProperties();
+			case Art2Package.COMPONENT_TYPE__OFFERED_PORT_TYPES:
+				return getOfferedPortTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -281,16 +370,23 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 			case Art2Package.COMPONENT_TYPE__DICTIONARY:
 				setDictionary((DictionaryType)newValue);
 				return;
-			case Art2Package.COMPONENT_TYPE__REQUIRE_PORT_TYPES:
-				getRequirePortTypes().clear();
-				getRequirePortTypes().addAll((Collection<? extends PortType>)newValue);
-				return;
 			case Art2Package.COMPONENT_TYPE__BEAN:
 				setBean((String)newValue);
 				return;
-			case Art2Package.COMPONENT_TYPE__PORT_TYPE_REFS:
-				getPortTypeRefs().clear();
-				getPortTypeRefs().addAll((Collection<? extends PortTypeRef>)newValue);
+			case Art2Package.COMPONENT_TYPE__NEEDED_PORT_TYPES:
+				getNeededPortTypes().clear();
+				getNeededPortTypes().addAll((Collection<? extends PortTypeRef>)newValue);
+				return;
+			case Art2Package.COMPONENT_TYPE__INTEGRATION_PATTERNS:
+				getIntegrationPatterns().clear();
+				getIntegrationPatterns().addAll((Collection<? extends IntegrationPattern>)newValue);
+				return;
+			case Art2Package.COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES:
+				setExtraFonctionalProperties((ExtraFonctionalProperty)newValue);
+				return;
+			case Art2Package.COMPONENT_TYPE__OFFERED_PORT_TYPES:
+				getOfferedPortTypes().clear();
+				getOfferedPortTypes().addAll((Collection<? extends PortTypeRef>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -310,14 +406,20 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 			case Art2Package.COMPONENT_TYPE__DICTIONARY:
 				setDictionary((DictionaryType)null);
 				return;
-			case Art2Package.COMPONENT_TYPE__REQUIRE_PORT_TYPES:
-				getRequirePortTypes().clear();
-				return;
 			case Art2Package.COMPONENT_TYPE__BEAN:
 				setBean(BEAN_EDEFAULT);
 				return;
-			case Art2Package.COMPONENT_TYPE__PORT_TYPE_REFS:
-				getPortTypeRefs().clear();
+			case Art2Package.COMPONENT_TYPE__NEEDED_PORT_TYPES:
+				getNeededPortTypes().clear();
+				return;
+			case Art2Package.COMPONENT_TYPE__INTEGRATION_PATTERNS:
+				getIntegrationPatterns().clear();
+				return;
+			case Art2Package.COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES:
+				setExtraFonctionalProperties((ExtraFonctionalProperty)null);
+				return;
+			case Art2Package.COMPONENT_TYPE__OFFERED_PORT_TYPES:
+				getOfferedPortTypes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -335,12 +437,16 @@ public class ComponentTypeImpl extends DeployUnitImpl implements ComponentType {
 				return hostedPortTypes != null && !hostedPortTypes.isEmpty();
 			case Art2Package.COMPONENT_TYPE__DICTIONARY:
 				return dictionary != null;
-			case Art2Package.COMPONENT_TYPE__REQUIRE_PORT_TYPES:
-				return requirePortTypes != null && !requirePortTypes.isEmpty();
 			case Art2Package.COMPONENT_TYPE__BEAN:
 				return BEAN_EDEFAULT == null ? bean != null : !BEAN_EDEFAULT.equals(bean);
-			case Art2Package.COMPONENT_TYPE__PORT_TYPE_REFS:
-				return portTypeRefs != null && !portTypeRefs.isEmpty();
+			case Art2Package.COMPONENT_TYPE__NEEDED_PORT_TYPES:
+				return neededPortTypes != null && !neededPortTypes.isEmpty();
+			case Art2Package.COMPONENT_TYPE__INTEGRATION_PATTERNS:
+				return integrationPatterns != null && !integrationPatterns.isEmpty();
+			case Art2Package.COMPONENT_TYPE__EXTRA_FONCTIONAL_PROPERTIES:
+				return extraFonctionalProperties != null;
+			case Art2Package.COMPONENT_TYPE__OFFERED_PORT_TYPES:
+				return offeredPortTypes != null && !offeredPortTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

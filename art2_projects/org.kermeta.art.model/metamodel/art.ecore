@@ -26,7 +26,7 @@
         eType="#//IntegrationPattern" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extraFonctionalProperties"
         eType="#//ExtraFonctionalProperty" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="hostedPortTypes" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="offeredPortTypes" upperBound="-1"
         eType="#//PortTypeRef" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainerNode" eSuperTypes="#//NamedElement">
@@ -66,9 +66,7 @@
         eType="#//Namespace" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Namespace"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractPortImpl" abstract="true" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" eType="#//PortServiceImpl"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractPortImpl" abstract="true" eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractDataType" abstract="true" eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="PortServiceImpl" eSuperTypes="#//AbstractPortImpl"/>
   <eClassifiers xsi:type="ecore:EClass" name="PortActorImpl" eSuperTypes="#//AbstractPortImpl"/>

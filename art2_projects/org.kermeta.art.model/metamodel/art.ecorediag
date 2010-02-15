@@ -1298,10 +1298,10 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_fswvMBoKEd-HfrMIg4mTXw" type="3002" source="_0X26sBoJEd-HfrMIg4mTXw" target="_arY1kBSwEd-73KFIGyb0mA">
     <children xmi:type="notation:Node" xmi:id="_fswvNBoKEd-HfrMIg4mTXw" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_fswvNRoKEd-HfrMIg4mTXw" x="-10" y="-10"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_fswvNRoKEd-HfrMIg4mTXw" x="-182" y="17"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_fswvNhoKEd-HfrMIg4mTXw" type="4012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_fswvNxoKEd-HfrMIg4mTXw" x="10" y="10"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_fswvNxoKEd-HfrMIg4mTXw" x="-169" y="7"/>
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_fswvMRoKEd-HfrMIg4mTXw" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_fswvMhoKEd-HfrMIg4mTXw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
@@ -1312,16 +1312,16 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_mTaTEBoKEd-HfrMIg4mTXw" type="3002" source="_J_WnkBoKEd-HfrMIg4mTXw" target="_arY1kBSwEd-73KFIGyb0mA">
     <children xmi:type="notation:Node" xmi:id="_mTaTFBoKEd-HfrMIg4mTXw" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_mTaTFRoKEd-HfrMIg4mTXw" x="-15" y="-2"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_mTaTFRoKEd-HfrMIg4mTXw" x="-231" y="-15"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_mTaTFhoKEd-HfrMIg4mTXw" type="4012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_mTaTFxoKEd-HfrMIg4mTXw" x="10" y="10"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_mTaTFxoKEd-HfrMIg4mTXw" x="-190" y="-12"/>
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_mTaTERoKEd-HfrMIg4mTXw" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_mTaTEhoKEd-HfrMIg4mTXw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="art.ecore#//ExtraFonctionalProperty/portTypes"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mTaTExoKEd-HfrMIg4mTXw" points="[0, 11, 396, -157]$[0, 67, 396, -101]$[0, 95, 396, -73]$[-389, 167, 7, -1]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mTcIQBoKEd-HfrMIg4mTXw" id="(0.04411764705882353,0.7380952380952381)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mTaTExoKEd-HfrMIg4mTXw" points="[6, 15, 543, -169]$[18, 43, 555, -141]$[-530, 182, 7, -2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mTcIQBoKEd-HfrMIg4mTXw" id="(0.8235294117647058,0.6428571428571429)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mTcIQRoKEd-HfrMIg4mTXw" id="(0.9313725490196079,0.23809523809523808)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_7bNMMBoKEd-HfrMIg4mTXw" type="3002" source="_6tcSQBI-Ed-iRdVrp0MkwA" target="_arY1kBSwEd-73KFIGyb0mA">
@@ -1333,7 +1333,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_7bNMMRoKEd-HfrMIg4mTXw" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_7bNMMhoKEd-HfrMIg4mTXw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="art.ecore#//ComponentType/hostedPortTypes.1"/>
+    <element xmi:type="ecore:EReference" href="art.ecore#//ComponentType/offeredPortTypes"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_7bNMMxoKEd-HfrMIg4mTXw" points="[0, 24, -96, -97]$[0, 121, -96, 0]$[78, 121, -18, 0]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_7bSrwBoKEd-HfrMIg4mTXw" id="(0.18627450980392157,0.6190476190476191)"/>
   </edges>

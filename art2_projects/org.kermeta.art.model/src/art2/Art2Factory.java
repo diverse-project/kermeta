@@ -269,6 +269,24 @@ public interface Art2Factory extends EFactory {
 	DataType createDataType();
 
 	/**
+	 * Returns a new object of class '<em>Integration Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Integration Pattern</em>'.
+	 * @generated
+	 */
+	IntegrationPattern createIntegrationPattern();
+
+	/**
+	 * Returns a new object of class '<em>Extra Fonctional Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Extra Fonctional Property</em>'.
+	 * @generated
+	 */
+	ExtraFonctionalProperty createExtraFonctionalProperty();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

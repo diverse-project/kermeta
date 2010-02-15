@@ -17,10 +17,15 @@ TOKENSTYLES{
 	"requirePorts" COLOR #7F0055, BOLD;
 	"namespace" COLOR #7F0055, BOLD;
 	"ComponentType" COLOR #7F0055, BOLD;
+	"groupName" COLOR #7F0055, BOLD;
+	"unitName" COLOR #7F0055, BOLD;
+	"version" COLOR #7F0055, BOLD;
 	"hostedPortTypes" COLOR #7F0055, BOLD;
-	"requirePortTypes" COLOR #7F0055, BOLD;
 	"bean" COLOR #7F0055, BOLD;
-	"portTypeRefs" COLOR #7F0055, BOLD;
+	"neededPortTypes" COLOR #7F0055, BOLD;
+	"integrationPatterns" COLOR #7F0055, BOLD;
+	"extraFonctionalProperties" COLOR #7F0055, BOLD;
+	"offeredPortTypes" COLOR #7F0055, BOLD;
 	"ContainerNode" COLOR #7F0055, BOLD;
 	"components" COLOR #7F0055, BOLD;
 	"componentTypes" COLOR #7F0055, BOLD;
@@ -35,11 +40,11 @@ TOKENSTYLES{
 	"interface" COLOR #7F0055, BOLD;
 	"Port" COLOR #7F0055, BOLD;
 	"portType" COLOR #7F0055, BOLD;
+	"portTypeRef" COLOR #7F0055, BOLD;
 	"Namespace" COLOR #7F0055, BOLD;
 	"childs" COLOR #7F0055, BOLD;
 	"parent" COLOR #7F0055, BOLD;
 	"PortServiceImpl" COLOR #7F0055, BOLD;
-	"EReference0" COLOR #7F0055, BOLD;
 	"PortActorImpl" COLOR #7F0055, BOLD;
 	"PortMessageImpl" COLOR #7F0055, BOLD;
 	"Dictionary" COLOR #7F0055, BOLD;
@@ -76,13 +81,16 @@ TOKENSTYLES{
 	"subComponentTypes" COLOR #7F0055, BOLD;
 	"NamedElement" COLOR #7F0055, BOLD;
 	"DataType" COLOR #7F0055, BOLD;
+	"IntegrationPattern" COLOR #7F0055, BOLD;
+	"portTypes" COLOR #7F0055, BOLD;
+	"ExtraFonctionalProperty" COLOR #7F0055, BOLD;
 }
 
 RULES{
 	
 	ComponentInstance::= "ComponentInstance"  "{" ( "name"  ":" name['"','"'] | "componentType"  ":" componentType[]| "hostedPorts"  ":" hostedPorts | "dictionary"  ":" dictionary | "requirePorts"  ":" requirePorts | "namespace"  ":" namespace[] )* "}"  ;
 	
-	ComponentType::= "ComponentType"  "{" ( "name"  ":" name['"','"'] | "hostedPortTypes"  ":" hostedPortTypes | "dictionary"  ":" dictionary | "requirePortTypes"  ":" requirePortTypes[]| "bean"  ":" bean['"','"'] | "portTypeRefs"  ":" portTypeRefs  )* "}"  ;
+	ComponentType::= "ComponentType"  "{" ( "name"  ":" name['"','"'] | "groupName"  ":" groupName['"','"'] | "unitName"  ":" unitName['"','"'] | "version"  ":" version['"','"'] | "hostedPortTypes"  ":" hostedPortTypes | "dictionary"  ":" dictionary | "bean"  ":" bean['"','"'] | "neededPortTypes"  ":" neededPortTypes | "integrationPatterns"  ":" integrationPatterns | "extraFonctionalProperties"  ":" extraFonctionalProperties | "offeredPortTypes"  ":" offeredPortTypes  )* "}"  ;
 	
 	ContainerNode::= "ContainerNode"  "{" ( "name"  ":" name['"','"'] | "components"  ":" components | "componentTypes"  ":" componentTypes[]| "bindings"  ":" bindings  )* "}"  ;
 	
@@ -90,15 +98,15 @@ RULES{
 	
 	PortType::=synchrone[]? "PortType"  "{" ( "name"  ":" name['"','"'] | "impl"  ":" impl[]| "interface"  ":" interface  )* "}"  ;
 	
-	Port::= "Port"  "{" ( "name"  ":" name['"','"'] | "portType"  ":" portType[] )* "}"  ;
+	Port::= "Port"  "{" ( "name"  ":" name['"','"'] | "portType"  ":" portType[]| "portTypeRef"  ":" portTypeRef[] )* "}"  ;
 	
 	Namespace::= "Namespace"  "{" ( "name"  ":" name['"','"'] | "childs"  ":" childs | "parent"  ":" parent[] )* "}"  ;
 	
-	PortServiceImpl::= "PortServiceImpl"  "{" ( "name"  ":" name['"','"'] | "EReference0"  ":" EReference0[] )* "}"  ;
+	PortServiceImpl::= "PortServiceImpl"  "{" ( "name"  ":" name['"','"']  )* "}"  ;
 	
-	PortActorImpl::= "PortActorImpl"  "{" ( "name"  ":" name['"','"'] | "EReference0"  ":" EReference0[] )* "}"  ;
+	PortActorImpl::= "PortActorImpl"  "{" ( "name"  ":" name['"','"']  )* "}"  ;
 	
-	PortMessageImpl::= "PortMessageImpl"  "{" ( "name"  ":" name['"','"'] | "EReference0"  ":" EReference0[] )* "}"  ;
+	PortMessageImpl::= "PortMessageImpl"  "{" ( "name"  ":" name['"','"']  )* "}"  ;
 	
 	Dictionary::= "Dictionary"  "{" ( "values"  ":" values  )* "}"  ;
 	
@@ -110,7 +118,7 @@ RULES{
 	
 	Binding::= "Binding"  "{" ( "ports"  ":" ports[]| "output"  ":" output[] )* "}"  ;
 	
-	CompositeType::= "CompositeType"  "{" ( "name"  ":" name['"','"'] | "hostedPortTypes"  ":" hostedPortTypes | "dictionary"  ":" dictionary | "requirePortTypes"  ":" requirePortTypes[]| "bean"  ":" bean['"','"'] | "portTypeRefs"  ":" portTypeRefs | "childs"  ":" childs | "childPortTypes"  ":" childPortTypes | "wires"  ":" wires[] )* "}"  ;
+	CompositeType::= "CompositeType"  "{" ( "name"  ":" name['"','"'] | "groupName"  ":" groupName['"','"'] | "unitName"  ":" unitName['"','"'] | "version"  ":" version['"','"'] | "hostedPortTypes"  ":" hostedPortTypes | "dictionary"  ":" dictionary | "bean"  ":" bean['"','"'] | "neededPortTypes"  ":" neededPortTypes | "integrationPatterns"  ":" integrationPatterns | "extraFonctionalProperties"  ":" extraFonctionalProperties | "offeredPortTypes"  ":" offeredPortTypes | "childs"  ":" childs | "childPortTypes"  ":" childPortTypes | "wires"  ":" wires[] )* "}"  ;
 	
 	PortTypeRef::= "PortTypeRef"  "{" ( "name"  ":" name['"','"'] | "ref"  ":" ref[] )* "}"  ;
 	
@@ -128,10 +136,14 @@ RULES{
 	
 	Repository::= "Repository"  "{" ( "name"  ":" name['"','"'] | "units"  ":" units[]| "url"  ":" url['"','"']  )* "}"  ;
 	
-	ComponentTypeLibrary::= "ComponentTypeLibrary"  "{" ( "name"  ":" name['"','"'] | "subComponentTypes"  ":" subComponentTypes  )* "}"  ;
+	ComponentTypeLibrary::= "ComponentTypeLibrary"  "{" ( "name"  ":" name['"','"'] | "groupName"  ":" groupName['"','"'] | "unitName"  ":" unitName['"','"'] | "version"  ":" version['"','"'] | "subComponentTypes"  ":" subComponentTypes  )* "}"  ;
 	
 	NamedElement::= "NamedElement"  "{" ( "name"  ":" name['"','"']  )* "}"  ;
 	
 	DataType::= "DataType"  "{" ( "name"  ":" name['"','"']  )* "}"  ;
+	
+	IntegrationPattern::= "IntegrationPattern"  "{" ( "name"  ":" name['"','"'] | "extraFonctionalProperties"  ":" extraFonctionalProperties | "portTypes"  ":" portTypes[] )* "}"  ;
+	
+	ExtraFonctionalProperty::= "ExtraFonctionalProperty"  "{" ( "portTypes"  ":" portTypes[] )* "}"  ;
 	
 }

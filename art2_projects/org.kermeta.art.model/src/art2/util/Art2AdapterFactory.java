@@ -192,6 +192,14 @@ public class Art2AdapterFactory extends AdapterFactoryImpl {
 				return createDataTypeAdapter();
 			}
 			@Override
+			public Adapter caseIntegrationPattern(IntegrationPattern object) {
+				return createIntegrationPatternAdapter();
+			}
+			@Override
+			public Adapter caseExtraFonctionalProperty(ExtraFonctionalProperty object) {
+				return createExtraFonctionalPropertyAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -628,6 +636,34 @@ public class Art2AdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDataTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art2.IntegrationPattern <em>Integration Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art2.IntegrationPattern
+	 * @generated
+	 */
+	public Adapter createIntegrationPatternAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link art2.ExtraFonctionalProperty <em>Extra Fonctional Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see art2.ExtraFonctionalProperty
+	 * @generated
+	 */
+	public Adapter createExtraFonctionalPropertyAdapter() {
 		return null;
 	}
 

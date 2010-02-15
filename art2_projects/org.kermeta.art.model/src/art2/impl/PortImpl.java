@@ -10,6 +10,7 @@ import art2.Art2Package;
 import art2.Port;
 import art2.PortType;
 
+import art2.PortTypeRef;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -25,6 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link art2.impl.PortImpl#getPortType <em>Port Type</em>}</li>
+ *   <li>{@link art2.impl.PortImpl#getPortTypeRef <em>Port Type Ref</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,6 +42,16 @@ public class PortImpl extends NamedElementImpl implements Port {
 	 * @ordered
 	 */
 	protected PortType portType;
+
+	/**
+	 * The cached value of the '{@link #getPortTypeRef() <em>Port Type Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPortTypeRef()
+	 * @generated
+	 * @ordered
+	 */
+	protected PortTypeRef portTypeRef;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,12 +115,53 @@ public class PortImpl extends NamedElementImpl implements Port {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public PortTypeRef getPortTypeRef() {
+		if (portTypeRef != null && portTypeRef.eIsProxy()) {
+			InternalEObject oldPortTypeRef = (InternalEObject)portTypeRef;
+			portTypeRef = (PortTypeRef)eResolveProxy(oldPortTypeRef);
+			if (portTypeRef != oldPortTypeRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Art2Package.PORT__PORT_TYPE_REF, oldPortTypeRef, portTypeRef));
+			}
+		}
+		return portTypeRef;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PortTypeRef basicGetPortTypeRef() {
+		return portTypeRef;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPortTypeRef(PortTypeRef newPortTypeRef) {
+		PortTypeRef oldPortTypeRef = portTypeRef;
+		portTypeRef = newPortTypeRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.PORT__PORT_TYPE_REF, oldPortTypeRef, portTypeRef));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case Art2Package.PORT__PORT_TYPE:
 				if (resolve) return getPortType();
 				return basicGetPortType();
+			case Art2Package.PORT__PORT_TYPE_REF:
+				if (resolve) return getPortTypeRef();
+				return basicGetPortTypeRef();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -123,6 +176,9 @@ public class PortImpl extends NamedElementImpl implements Port {
 		switch (featureID) {
 			case Art2Package.PORT__PORT_TYPE:
 				setPortType((PortType)newValue);
+				return;
+			case Art2Package.PORT__PORT_TYPE_REF:
+				setPortTypeRef((PortTypeRef)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -139,6 +195,9 @@ public class PortImpl extends NamedElementImpl implements Port {
 			case Art2Package.PORT__PORT_TYPE:
 				setPortType((PortType)null);
 				return;
+			case Art2Package.PORT__PORT_TYPE_REF:
+				setPortTypeRef((PortTypeRef)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -153,6 +212,8 @@ public class PortImpl extends NamedElementImpl implements Port {
 		switch (featureID) {
 			case Art2Package.PORT__PORT_TYPE:
 				return portType != null;
+			case Art2Package.PORT__PORT_TYPE_REF:
+				return portTypeRef != null;
 		}
 		return super.eIsSet(featureID);
 	}

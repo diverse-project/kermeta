@@ -16,9 +16,11 @@
     <genClasses ecoreClass="art.ecore#//ComponentType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/hostedPortTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/dictionary"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/requirePortTypes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//ComponentType/bean"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/portTypeRefs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/neededPortTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/integrationPatterns"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/extraFonctionalProperties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentType/offeredPortTypes"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//ContainerNode">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerNode/components"/>
@@ -39,14 +41,13 @@
     </genClasses>
     <genClasses ecoreClass="art.ecore#//Port">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Port/portType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Port/portTypeRef"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//Namespace">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//Namespace/childs"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Namespace/parent"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="art.ecore#//AbstractPortImpl">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//AbstractPortImpl/EReference0"/>
-    </genClasses>
+    <genClasses image="false" ecoreClass="art.ecore#//AbstractPortImpl"/>
     <genClasses image="false" ecoreClass="art.ecore#//AbstractDataType"/>
     <genClasses ecoreClass="art.ecore#//PortServiceImpl"/>
     <genClasses ecoreClass="art.ecore#//PortActorImpl"/>
@@ -98,7 +99,11 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Repository/units"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//Repository/url"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="art.ecore#//DeployUnit"/>
+    <genClasses image="false" ecoreClass="art.ecore#//DeployUnit">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//DeployUnit/groupName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//DeployUnit/unitName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//DeployUnit/version"/>
+    </genClasses>
     <genClasses ecoreClass="art.ecore#//ComponentTypeLibrary">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ComponentTypeLibrary/subComponentTypes"/>
     </genClasses>
@@ -106,5 +111,12 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//NamedElement/name"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//DataType"/>
+    <genClasses ecoreClass="art.ecore#//IntegrationPattern">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//IntegrationPattern/extraFonctionalProperties"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//IntegrationPattern/portTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//ExtraFonctionalProperty">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//ExtraFonctionalProperty/portTypes"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
