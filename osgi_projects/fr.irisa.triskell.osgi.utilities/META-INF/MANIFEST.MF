@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Triskell - OSGi Utilities
+Bundle-SymbolicName: fr.irisa.triskell.osgi.utilities
+Bundle-Version: 1.0.0.qualifier
+Export-Package: fr.irisa.triskell.osgi.utilities
+Import-Package: org.osgi.framework
+Bundle-ClassPath: .
