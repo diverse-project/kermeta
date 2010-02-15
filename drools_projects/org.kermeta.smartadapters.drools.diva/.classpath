@@ -3,16 +3,20 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="lib" path="lib/antlr-runtime-3.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/core-3.4.2.v_883_R34x.jar"/>
-	<classpathentry kind="lib" path="lib/drools-api-5.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/drools-compiler-5.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/drools-core-5.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/com.springsource.org.drools-4.0.7.jar"/>
+	<classpathentry kind="lib" path="lib/com.springsource.org.drools.compiler-4.0.7.jar"/>
+	<classpathentry kind="lib" path="lib/com.springsource.org.drools.jsr94-4.0.7.jar"/>
+	<classpathentry kind="lib" path="lib/da-launcher-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/com.springsource.com.thoughtworks.xstream-1.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/com.springsource.javax.rules-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/com.springsource.javax.xml.stream-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/com.springsource.jxl-2.6.6.jar"/>
+	<classpathentry kind="lib" path="lib/com.springsource.org.codehaus.janino-2.5.15.jar"/>
+	<classpathentry kind="lib" path="lib/com.springsource.org.drools.decisiontable-4.0.7.jar"/>
+	<classpathentry kind="lib" path="lib/com.springsource.org.mvel-1.3.5.jar"/>
+	<classpathentry kind="lib" path="lib/com.springsource.org.xmlpull-1.1.4.c.jar"/>
 	<classpathentry kind="lib" path="lib/mvel2-2.0.10.jar"/>
-	<classpathentry kind="lib" path="/diva.model.osgi/lib/fr.irisa.triskell.eclipse.util_1.3.0.200907101757.jar"/>
-	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.eclipse.emf.common_2.5.0.v200906151043.jar"/>
-	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.eclipse.emf.ecore_2.5.0.v200906151043.jar"/>
-	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.eclipse.emf.ecore.xmi_2.5.0.v200906151043.jar"/>
-	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.kermeta.art.model_1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/org.apache.servicemix.bundles.jdt-core-3.2.3_1.jar"/>
+	<classpathentry kind="lib" path="lib/org.osgi.compendium-4.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

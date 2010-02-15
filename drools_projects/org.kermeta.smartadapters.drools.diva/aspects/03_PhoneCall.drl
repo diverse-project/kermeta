@@ -1,0 +1,171 @@
+global java.util.List list;
+global java.util.Map uniqueobjects;
+rule "RulesName"
+	 when 
+$s2: art.type.Service(name == "tutorial.diva.cas.IAddressDB")
+$s3: art.type.Port(name == "addressDB",role == "server",service == $s2)
+$s4: art.type.PrimitiveType(name == "tutorial.diva.cas.addressDB",port contains $s3)
+$s5: art.instance.PrimitiveInstance(name == "AddressDataBase",type == $s4)
+$s6: art.type.Service(name == "tutorial.diva.cas.IUserInterface")
+$s7: art.type.Port(name == "ui",role == "client",service == $s6)
+$s8: art.type.PrimitiveType(name == "tutorial.diva.cas.channel",port contains $s7)
+$s9: art.instance.PrimitiveInstance(type == $s8)
+$s10: art.type.Service(name == "tutorial.diva.cas.INotifier")
+$s11: art.type.Port(name == "notifier",role == "server",service == $s10)
+$s12: art.type.PrimitiveType(name == "tutorial.diva.cas.notifier",port contains $s11)
+$s13: art.instance.PrimitiveInstance(type == $s12)
+$s1: art.instance.CompositeInstance(name == "CAS application",subComponent contains $s5,subComponent contains $s9,subComponent contains $s13)
+$s0: art.System(root == $s1)
+then
+ 	 java.util.HashMap m = new java.util.HashMap();
+m.put("theSystem",$s0);
+m.put("theRootComponent",$s1);
+m.put("anyChannel",$s9);
+m.put("anyUIrequiredPort",$s11);
+m.put("anyNotifier",$s13);
+m.put("theAddessDBProvidedPort",$s3);
+m.put("theAddressDBComponent",$s5);
+	 list.add(m);
+ art.System s0 = art.ArtFactory.eINSTANCE.createSystem();
+art.instance.CompositeInstance s1 = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
+art.instance.PrimitiveInstance s2 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+art.instance.TransmissionBinding s3 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+art.instance.PrimitiveInstance s4 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+art.implem.OSGiComponent s5 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+art.instance.PrimitiveInstance s6 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+art.instance.TransmissionBinding s7 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+art.instance.TransmissionBinding s8 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+art.implem.OSGiComponent s9 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+art.type.FunctionalService s10 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+art.type.Operation s11 = art.type.TypeFactory.eINSTANCE.createOperation();
+art.type.Parameter s12 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.Parameter s13 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.FunctionalService s14 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+art.type.Operation s15 = art.type.TypeFactory.eINSTANCE.createOperation();
+art.type.Parameter s16 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.Operation s17 = art.type.TypeFactory.eINSTANCE.createOperation();
+art.type.FunctionalService s18 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+art.type.Operation s19 = art.type.TypeFactory.eINSTANCE.createOperation();
+art.type.Parameter s20 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.Operation s21 = art.type.TypeFactory.eINSTANCE.createOperation();
+art.type.FunctionalService s22 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+art.type.Operation s23 = art.type.TypeFactory.eINSTANCE.createOperation();
+art.type.Parameter s24 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.Operation s25 = art.type.TypeFactory.eINSTANCE.createOperation();
+art.type.FunctionalService s26 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+art.type.PrimitiveType s27 = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+art.type.Port s28 = art.type.TypeFactory.eINSTANCE.createPort();
+art.type.PrimitiveType s29 = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+art.type.Port s30 = art.type.TypeFactory.eINSTANCE.createPort();
+art.type.Port s31 = art.type.TypeFactory.eINSTANCE.createPort();
+art.type.Port s32 = art.type.TypeFactory.eINSTANCE.createPort();
+if (s0 != null && s1!=null){s0.setRoot(s1);
+}if (s0 != null && s10!=null){s0.getServices().add(s10);
+}if (s0 != null && s14!=null){s0.getServices().add(s14);
+}if (s0 != null && s18!=null){s0.getServices().add(s18);
+}if (s0 != null && s22!=null){s0.getServices().add(s22);
+}if (s0 != null && s26!=null){s0.getServices().add(s26);
+}if (s0 != null && s27!=null){s0.getTypes().add(s27);
+}if (s0 != null && s29!=null){s0.getTypes().add(s29);
+}if (s1 != null && s2!=null){s1.getSubComponent().add(s2);
+}if (s1 != null && s4!=null){s1.getSubComponent().add(s4);
+}if (s1 != null && s6!=null){s1.getSubComponent().add(s6);
+}if (s2 != null){s2.setName("_Any Channel");
+}if (s2 != null && s1!=null){s2.setSuperComponent(s1);
+}if (s2 != null && s3!=null){s2.getBinding().add(s3);
+}if (s3 != null){s3.setId("ui");
+}if (s3 != null && s28!=null){s3.setServer(s28);
+}if (s3 != null && s4!=null){s3.setServerInstance(s4);
+}if (s4 != null){s4.setState("ON");
+}if (s4 != null){s4.setName("ReducedUserInterface");
+}if (s4 != null && s27!=null){s4.setType(s27);
+}if (s4 != null && s1!=null){s4.setSuperComponent(s1);
+}if (s4 != null && s5!=null){s4.setImplem(s5);
+}if (s5 != null){s5.setImplementingClass("cas.impl.ReducedUI");
+}if (s6 != null){s6.setState("ON");
+}if (s6 != null){s6.setName("SkypeTelephony");
+}if (s6 != null && s29!=null){s6.setType(s29);
+}if (s6 != null && s1!=null){s6.setSuperComponent(s1);
+}if (s6 != null && s7!=null){s6.getBinding().add(s7);
+}if (s6 != null && s8!=null){s6.getBinding().add(s8);
+}if (s6 != null && s9!=null){s6.setImplem(s9);
+}if (s7 != null){s7.setId("notifier");
+}if (s8 != null){s8.setId("addressDB");
+}if (s9 != null){s9.setImplementingClass("cas.impl.SkypeTelephony");
+}if (s10 != null){s10.setName("tutorial.diva.cas.IChannel");
+}if (s10 != null && s11!=null){s10.getOperation().add(s11);
+}if (s11 != null){s11.setName("encapsulate");
+}if (s11 != null && s12!=null){s11.getInput().add(s12);
+}if (s11 != null && s13!=null){s11.getInput().add(s13);
+}if (s12 != null){s12.setName("java.lang.String arg0");
+}if (s13 != null){s13.setName("java.lang.String arg1");
+}if (s14 != null){s14.setName("tutorial.diva.cas.IUserInterface");
+}if (s14 != null && s15!=null){s14.getOperation().add(s15);
+}if (s14 != null && s17!=null){s14.getOperation().add(s17);
+}if (s15 != null){s15.setName("display");
+}if (s15 != null && s16!=null){s15.getInput().add(s16);
+}if (s16 != null){s16.setName("java.lang.String arg0");
+}if (s17 != null){s17.setName("readInput");
+}if (s18 != null){s18.setName("tutorial.diva.cas.ITelephony");
+}if (s18 != null && s19!=null){s18.getOperation().add(s19);
+}if (s18 != null && s21!=null){s18.getOperation().add(s21);
+}if (s19 != null){s19.setName("display");
+}if (s19 != null && s20!=null){s19.getInput().add(s20);
+}if (s20 != null){s20.setName("java.lang.String arg0");
+}if (s21 != null){s21.setName("readInput");
+}if (s22 != null){s22.setName("tutorial.diva.cas.IAddressDB");
+}if (s22 != null && s23!=null){s22.getOperation().add(s23);
+}if (s22 != null && s25!=null){s22.getOperation().add(s25);
+}if (s23 != null){s23.setName("display");
+}if (s23 != null && s24!=null){s23.getInput().add(s24);
+}if (s24 != null){s24.setName("java.lang.String arg0");
+}if (s25 != null){s25.setName("readInput");
+}if (s26 != null){s26.setName("tutorial.diva.cas.INotifier");
+}if (s27 != null){s27.setName("tutorial.diva.cas.ui");
+}if (s27 != null && s28!=null){s27.getPort().add(s28);
+}if (s28 != null){s28.setIsOptional(false);
+}if (s28 != null){s28.setLower(1);
+}if (s28 != null){s28.setUpper(-1);
+}if (s28 != null){s28.setRole("server");
+}if (s28 != null){s28.setName("ui");
+}if (s28 != null && s14!=null){s28.setService(s14);
+}if (s29 != null){s29.setName("tutorial.diva.cas.telephony");
+}if (s29 != null && s30!=null){s29.getPort().add(s30);
+}if (s29 != null && s31!=null){s29.getPort().add(s31);
+}if (s29 != null && s32!=null){s29.getPort().add(s32);
+}if (s30 != null){s30.setIsOptional(false);
+}if (s30 != null){s30.setLower(1);
+}if (s30 != null){s30.setUpper(1);
+}if (s30 != null){s30.setRole("server");
+}if (s30 != null){s30.setName("telephony");
+}if (s30 != null && s18!=null){s30.setService(s18);
+}if (s31 != null){s31.setIsOptional(false);
+}if (s31 != null){s31.setLower(1);
+}if (s31 != null){s31.setUpper(1);
+}if (s31 != null){s31.setRole("client");
+}if (s31 != null){s31.setName("addressDB");
+}if (s31 != null && s22!=null){s31.setService(s22);
+}if (s32 != null){s32.setIsOptional(false);
+}if (s32 != null){s32.setLower(0);
+}if (s32 != null){s32.setUpper(1);
+}if (s32 != null){s32.setRole("client");
+}if (s32 != null){s32.setName("notifier");
+}if (s32 != null && s26!=null){s32.setService(s26);
+}$s0.getServices().add(s10);
+$s0.getServices().add(s26);
+$s0.getServices().add(s22);
+$s0.getServices().add(s18);
+$s0.getServices().add(s14);
+$s0.getTypes().add(s27);
+$s0.getTypes().add(s29);
+$s1.getSubComponent().add(s4);
+$s1.getSubComponent().add(s6);
+$s9.getBinding().add(s3);
+s3.setClient($s7);
+s8.setClient(s31);
+s8.setServer($s3);
+s8.setServerInstance($s5);
+s7.setClient(s32);
+s7.setServer($s11);
+s7.setServerInstance($s13);
+end

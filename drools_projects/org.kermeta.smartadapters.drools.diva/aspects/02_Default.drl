@@ -1,0 +1,95 @@
+global java.util.List list;
+global java.util.Map uniqueobjects;
+rule "RulesName"
+	 when 
+$s2: art.type.Service(name == "tutorial.diva.cas.IRankingStrategy")
+$s3: art.type.Port(name == "rankingStrategies",role == "client",service == $s2)
+$s4: art.type.PrimitiveType(name == "tutorial.diva.cas.notifier",port contains $s3)
+$s5: art.instance.PrimitiveInstance(type == $s4)
+$s1: art.instance.CompositeInstance(name == "CAS application",subComponent contains $s5)
+$s0: art.System(root == $s1)
+then
+ 	 java.util.HashMap m = new java.util.HashMap();
+m.put("theSystem",$s0);
+m.put("theRootComponent",$s1);
+m.put("anyNotifierComponent",$s5);
+m.put("anyRequiredNotifierPort",$s3);
+	 list.add(m);
+ art.System s0 = art.ArtFactory.eINSTANCE.createSystem();
+art.instance.CompositeInstance s1 = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
+art.instance.PrimitiveInstance s2 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+art.instance.TransmissionBinding s3 = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+art.instance.PrimitiveInstance s4 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
+art.implem.OSGiComponent s5 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+art.type.FunctionalService s6 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+art.type.Operation s7 = art.type.TypeFactory.eINSTANCE.createOperation();
+art.type.Parameter s8 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.Parameter s9 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.Parameter s10 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.Operation s11 = art.type.TypeFactory.eINSTANCE.createOperation();
+art.type.Parameter s12 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.Parameter s13 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.Parameter s14 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.Operation s15 = art.type.TypeFactory.eINSTANCE.createOperation();
+art.type.Parameter s16 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.Operation s17 = art.type.TypeFactory.eINSTANCE.createOperation();
+art.type.Parameter s18 = art.type.TypeFactory.eINSTANCE.createParameter();
+art.type.PrimitiveType s19 = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+art.type.Port s20 = art.type.TypeFactory.eINSTANCE.createPort();
+if (s0 != null && s1!=null){s0.setRoot(s1);
+}if (s0 != null && s6!=null){s0.getServices().add(s6);
+}if (s0 != null && s19!=null){s0.getTypes().add(s19);
+}if (s1 != null && s2!=null){s1.getSubComponent().add(s2);
+}if (s1 != null && s4!=null){s1.getSubComponent().add(s4);
+}if (s2 != null){s2.setState("");
+}if (s2 != null){s2.setName("_Any Notifier");
+}if (s2 != null && s1!=null){s2.setSuperComponent(s1);
+}if (s2 != null && s3!=null){s2.getBinding().add(s3);
+}if (s3 != null){s3.setId("rankingStrategiesLowBW");
+}if (s3 != null && s20!=null){s3.setServer(s20);
+}if (s3 != null && s4!=null){s3.setServerInstance(s4);
+}if (s4 != null){s4.setState("ON");
+}if (s4 != null){s4.setName("LowBandwidthRankingStrategy");
+}if (s4 != null && s19!=null){s4.setType(s19);
+}if (s4 != null && s1!=null){s4.setSuperComponent(s1);
+}if (s4 != null && s5!=null){s4.setImplem(s5);
+}if (s5 != null){s5.setImplementingClass("cas.impl.Ranker");
+}if (s6 != null){s6.setName("tutorial.diva.cas.IRankingStrategy");
+}if (s6 != null && s7!=null){s6.getOperation().add(s7);
+}if (s6 != null && s11!=null){s6.getOperation().add(s11);
+}if (s6 != null && s15!=null){s6.getOperation().add(s15);
+}if (s6 != null && s17!=null){s6.getOperation().add(s17);
+}if (s7 != null){s7.setName("getRelevantEntries");
+}if (s7 != null && s8!=null){s7.getInput().add(s8);
+}if (s7 != null && s9!=null){s7.getInput().add(s9);
+}if (s7 != null && s10!=null){s7.getInput().add(s10);
+}if (s8 != null){s8.setName("java.util.List arg0");
+}if (s9 != null){s9.setName("org.diva.runtime.cas.interfaces.IUserDescription arg1");
+}if (s10 != null){s10.setName("org.diva.runtime.cas.interfaces.UserContext arg2");
+}if (s11 != null){s11.setName("getRelevantEntriesRecursive");
+}if (s11 != null && s12!=null){s11.getInput().add(s12);
+}if (s11 != null && s13!=null){s11.getInput().add(s13);
+}if (s11 != null && s14!=null){s11.getInput().add(s14);
+}if (s12 != null){s12.setName("java.util.List arg0");
+}if (s13 != null){s13.setName("org.diva.runtime.cas.interfaces.IUserDescription arg1");
+}if (s14 != null){s14.setName("org.diva.runtime.cas.interfaces.UserContext arg2");
+}if (s15 != null){s15.setName("rankEvent");
+}if (s15 != null && s16!=null){s15.getInput().add(s16);
+}if (s16 != null){s16.setName("org.diva.runtime.cas.interfaces.IEvent arg0");
+}if (s17 != null){s17.setName("rankEvent");
+}if (s17 != null && s18!=null){s17.getInput().add(s18);
+}if (s18 != null){s18.setName("java.lang.String arg0");
+}if (s19 != null){s19.setName("tutorial.diva.cas.ranker");
+}if (s19 != null && s20!=null){s19.getPort().add(s20);
+}if (s20 != null){s20.setIsOptional(false);
+}if (s20 != null){s20.setLower(0);
+}if (s20 != null){s20.setUpper(-1);
+}if (s20 != null){s20.setRole("server");
+}if (s20 != null){s20.setName("rankingStrategies");
+}if (s20 != null && s6!=null){s20.setService(s6);
+}$s0.getServices().add(s6);
+$s0.getTypes().add(s19);
+$s1.getSubComponent().add(s4);
+$s5.getBinding().add(s3);
+s3.setClient($s3);
+end

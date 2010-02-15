@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,13 +21,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.drools.KnowledgeBase;
-import org.drools.KnowledgeBaseFactory;
-import org.drools.builder.KnowledgeBuilder;
-import org.drools.builder.KnowledgeBuilderFactory;
-import org.drools.builder.ResourceType;
-import org.drools.io.ResourceFactory;
-import org.drools.runtime.StatelessKnowledgeSession;
+import org.drools.StatelessSession;
+import org.drools.rule.builder.dialect.java.KnowledgeHelperFixer;
+import org.drools.spi.KnowledgeHelper;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -36,7 +34,9 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.kermeta.smartadapters.drools.utils.AspectComparator;
 import org.kermeta.smartadapters.drools.utils.TreeIterable;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 import service.arf.ARF;
@@ -59,13 +59,10 @@ import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 
 public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionListener, KeyListener{
 
-
 	private org.eclipse.emf.ecore.resource.Resource resource;
-	private KnowledgeBase kbase;
+	//private KnowledgeBase kbase;
 	private long start;
 	private long end;
-
-
 
 	CausalLink link;
 	IReasoning reasoner;
@@ -91,43 +88,38 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 	private JPanel     bottom;
 
 
+	private Bundle factoryBundle;
+	
 	private String baseModelURI;
 	private String dsplFile;
 	private String droolsRepository;
 	private String aspectsRepository;
+	private String configurationsRepository;
 	private List<String> droolsFiles = new LinkedList<String>();
 	private List<String> aspectsFiles = new LinkedList<String>();
+	private List<String> configsFiles = new LinkedList<String>();
+	
+	
+	private RuleCreator ruleCreator;
 
-
-	/*	public static void main(String[] args) {
-
-		SmartAdaptersDrools t = new SmartAdaptersDrools();
-		t.run();
+	public SmartAdaptersDrools(){
+		ruleCreator = new RuleCreator();
+		droolsFiles = new LinkedList<String>();
+		aspectsFiles = new LinkedList<String>();
+		configsFiles = new LinkedList<String>();
 	}
-
-	public void run(){
-		this.loadArtModel("file:/C:/NOSAVE/workspaces/divaStudio/DroolsGenerator/base/thales.base.art");
-		this.init();
-		start = java.lang.System.currentTimeMillis();
-		this.process("1.drl");
-		this.process("2.drl");
-		this.process("3.drl");
-		this.process("4.drl");
-		this.process("5.drl");
-		this.process("6.drl");
-		end = java.lang.System.currentTimeMillis();
-		java.lang.System.err.println("Execution time was "+(end-start)+" ms.");
-
-		this.saveArtModel("file:/C:/NOSAVE/workspaces/divaStudio/DroolsGenerator/base/thales.base1.art",this.resource);
-
-	}
-	 */	
+	
 	void init(){
 
-		kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		
+		
+		System.out.println(factoryBundle.getEntry("/init/init.drl").getPath());
+		process("classpath:"+factoryBundle.getEntry("init/init.drl").getPath().substring(1));
+		
+		/*kbase = KnowledgeBaseFactory.newKnowledgeBase();
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-
-		kbuilder.add( ResourceFactory.newClassPathResource( "init.drl", getClass() ),
+		
+		kbuilder.add( ResourceFactory.newClassPathResource(factoryBundle.getEntry("/init/init.drl").getFile(), this.getClass() ),
 				ResourceType.DRL );
 
 		if ( kbuilder.hasErrors() ) {
@@ -137,36 +129,55 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 		kbase.addKnowledgePackages( kbuilder.getKnowledgePackages() );
 		StatelessKnowledgeSession ksession = kbase.newStatelessKnowledgeSession();
 		ksession.execute("");
-
+*/
 
 	}
 
 	void process(String drl){
+		
+		StatelessSession session;
+		try {
+			session = ruleCreator.createRule(/*factoryBundle.getBundleContext()*/context, drl);
+			java.util.List<HashMap<String,EObject>> globalList = new java.util.ArrayList<HashMap<String,EObject>>( );
+			session.setGlobal("list", globalList);
+			java.util.Map<?,?> uniqueobjects = new java.util.HashMap();
+			session.setGlobal("uniqueobjects", uniqueobjects);
+			session.execute(new TreeIterable<EObject>(resource.getAllContents()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+/*		
 		//KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+	
 
-		kbuilder.add( ResourceFactory.newClassPathResource( drl, getClass() ),
-				ResourceType.DRL );
-
+		System.out.println("entry = /aspects/"+drl);
+		
+		kbuilder.add(ResourceFactory.newFileResource(drl), ResourceType.DRL);
+		
+		//kbuilder.add( ResourceFactory.newFileResource(drl), ResourceType.DRL);
+		
 		if ( kbuilder.hasErrors() ) {
 			java.lang.System.err.println( kbuilder.getErrors().toString() );
 		}
 		kbase.getKnowledgePackages().clear();
 		kbase.addKnowledgePackages( kbuilder.getKnowledgePackages() );
 
-
-
 		StatelessKnowledgeSession ksession = kbase.newStatelessKnowledgeSession();
-
+	
 		java.util.List<HashMap<String,EObject>> globalList = new java.util.ArrayList<HashMap<String,EObject>>( );
 		ksession.setGlobal("list", globalList);
 		java.util.Map<?,?> uniqueobjects = new java.util.HashMap();
 		ksession.setGlobal("uniqueobjects", uniqueobjects);
 
 		ksession.execute(new TreeIterable<EObject>(resource.getAllContents()));
-		java.lang.System.err.println("Nombre de résultat trouvé "  + globalList.size());	
-	}
 
+		java.lang.System.err.println("Number of Join Points: "  + globalList.size());	}
+*/
+}
 
 	art.System loadArtModel(String uri){
 		ResourceSetImpl rs = new ResourceSetImpl(); 
@@ -248,7 +259,17 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 
 	@Override
 	public void start() {
+		
+		for(Bundle b : context.getBundles()){
+			if ("org.kermeta.smartadapters.drools.diva".equals(b.getSymbolicName())){
+				factoryBundle = b;
+				break;
+			}
+		}
+		
+		initClassLoader();
 		initConfig();
+		initConfigurations();
 		initDroolsFiles();
 		initAspectFiles();
 		init();
@@ -256,63 +277,103 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 		layoutComponents();
 	}
 
+	private void initClassLoader() {
+	/*	
+		compositeClassLoader = new DroolsOSGiCompositeClassLoader(new BundleProxyClassLoader(context.getBundle()));
+		compositeClassLoader.addClassLoader(new BundleProxyClassLoader(factoryBundle));
+	*/	
+		//compositeClassLoader.addClassLoader(Thread.currentThread().getContextClassLoader());
+		//compositeClassLoader.addClassLoader(factoryBundle.getClass().getClassLoader());
+		//compositeClassLoader.addClassLoader(new BundleProxyClassLoader(factoryBundle));
+	}
+
+	private void initConfigurations() {
+		System.out.println("initConfigurations "+configurationsRepository);
+		File configsFiles = new File(configurationsRepository);
+		System.out.println("configsFiles "+configsFiles.getAbsolutePath());
+		if(configsFiles.listFiles() != null){
+			for(File f : configsFiles.listFiles()){
+				System.out.println("f = "+f.getAbsolutePath());
+				if(f.getAbsolutePath().endsWith(".art")){
+					this.configsFiles.add(f.getAbsolutePath());
+				}
+			}	
+		}
+	}	
+
 	private void initAspectFiles() {
 		File aspectsFiles = new File(aspectsRepository);
-		for(File f : aspectsFiles.listFiles()){
-			if(f.getAbsolutePath().endsWith(".smART")){
-				this.aspectsFiles.add(f.getAbsolutePath());
-			}
-		}	
+		if(aspectsFiles.listFiles() != null){
+			for(File f : aspectsFiles.listFiles()){
+				if(f.getAbsolutePath().endsWith(".smART")){
+					this.aspectsFiles.add(f.getAbsolutePath());
+				}
+			}	
+		}
 	}
 
 	private void initDroolsFiles() {
 		File droolsFiles = new File(droolsRepository);
-		for(File f : droolsFiles.listFiles()){
-			if(f.getAbsolutePath().endsWith(".drl")){
-				this.droolsFiles.add(f.getAbsolutePath());
+		if(droolsFiles.listFiles() != null){
+			for(File f : droolsFiles.listFiles()){
+				if(f.getAbsolutePath().endsWith(".drl")){
+					this.droolsFiles.add(f.getAbsolutePath());
+				}
 			}
 		}
 	}
 
 	private void initConfig(){
-		String divaModel = System.getProperty("diva.model");
-		File divaFile = null;
-		if(divaModel != null){
-			divaFile = new File(divaModel);
-			dsplFile = "file://" + divaFile.getAbsolutePath();
+		String property = System.getProperty("diva.model");
+		File file = null;
+		if(property != null){
+			file = new File(property);
+			dsplFile = "file://" + file.getAbsolutePath();
 		}
 		else {
-			System.err.println("Cannot find the DiVA model. Plese check the diva.model property in your launch configuration.");
+			System.err.println("Cannot find the DiVA model. Please check the diva.model property in your launch configuration.");
 		}
 
-		String droolsRep = System.getProperty("aspects.drools.repository");
-		File droolsFile = null;
-		if(droolsRep != null){
-			droolsFile = new File(droolsRep);
-			droolsRepository = "file://"+droolsFile.getAbsolutePath();
+		property = System.getProperty("aspects.drools.repository");
+		System.out.println("property aspects.drools.repository= "+property);
+		if(property != null){
+			file = new File(property);
+			System.out.println("file = "+file.getAbsolutePath());
+			droolsRepository = file.getAbsolutePath();
 		}
 		else {
-			System.err.println("Cannot find the Drools repository (containing the compiled aspect). Plese check the aspects.drools.repository property in your launch configuration.");
+			System.err.println("Cannot find the Drools repository (containing the compiled aspect). Please check the aspects.drools.repository property in your launch configuration.");
 		}
 
-		String aspectsRep = System.getProperty("aspects.repository");
-		File aspectsFile = null;
-		if(aspectsRep != null){
-			aspectsFile = new File(droolsRep);
-			aspectsRepository = "file://"+aspectsFile.getAbsolutePath();
+		property = System.getProperty("aspects.repository");
+		if(property != null){
+			file = new File(property);
+			aspectsRepository = "file://"+file.getAbsolutePath();
 		}
 		else {
-			System.err.println("Cannot find the aspect models repository. Plese check the aspects.repository property in your launch configuration.");
+			System.err.println("Cannot find the aspect models repository. Please check the aspects.repository property in your launch configuration.");
 		}
-		
-		String baseModel = System.getProperty("model.base");
-		File baseModelFile = null;
-		if(baseModel != null){
-			baseModelFile = new File(baseModel);
-			baseModelURI = "file://"+baseModelFile.getAbsolutePath();
+
+		property = System.getProperty("model.base");
+		System.out.println("property model.base= "+property);
+		if(property != null){
+			file = new File(property);
+			System.out.println("file = "+file.getAbsolutePath());
+			baseModelURI = "file://"+file.getAbsolutePath();
 		}
 		else {
-			System.err.println("Cannot find the base model. Plese check the model.base property in your launch configuration.");
+			System.err.println("Cannot find the base model. Please check the model.base property in your launch configuration.");
+		}
+
+		property = System.getProperty("configurations.folder");
+		System.out.println("property = "+property);
+		if(property != null){
+			file = new File(property);
+			System.out.println("file = "+file.getAbsolutePath());
+			configurationsRepository = file.getAbsolutePath();
+		}
+		else {
+			System.err.println("Cannot find the configurations repository. Please check the configurations.folder property in your launch configuration.");
 		}
 	}
 
@@ -338,32 +399,74 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 			}
 		}
 
-		
-		//TODO: replace by a sorted collection, so that aspects will be automatically ordered according to their priorities
-		List<String> droolsAspectsToWeave = new LinkedList<String>();
+		SortedSet<String> droolsAspectsToWeave = new TreeSet<String>(new AspectComparator());
 		if (bestConf != null) {
-			for(Aspect a : bestConf.getAspect()){
-				boolean existsDrools = false;
-				for(String drl : droolsFiles){
-					if (drl.contains(a.getName().replace(" ", ""))){
-						droolsAspectsToWeave.add(drl);
-						existsDrools = true;
+
+			boolean existsConfig = false;
+
+
+			List<String> aspectNames = new LinkedList<String>();
+			for (Aspect a : bestConf.getAspect()) {
+				aspectNames.add(a.getName().replace(" ", ""));
+			}
+
+			/*
+			 * We find the pre-generated architectural model which (only) contains a
+			 * sub-set of the variant selected in the configuration
+			 */
+			for (String file : configsFiles) {
+				file = file.replace("\\","/");
+
+				String name = file.substring(file.lastIndexOf("/")+1, file.length()).split(".art")[0];
+				//String name = file.split("/")[1].split(".art")[0];
+				List<String> aspects = new LinkedList<String>();
+
+				for (String s : name.split("_")) {
+					System.err.println(s);
+					aspects.add(s);
+				}
+
+				if (aspectNames.containsAll(aspects)) {
+					link.reconfigureByModelURI(file);
+					existsConfig = true;
+					break;
+				}
+			}
+
+
+
+
+			if(!existsConfig) {
+
+
+				for(Aspect a : bestConf.getAspect()){
+
+					boolean existsDrools = false;
+					System.out.println("droolsFiles.size = "+droolsFiles.size());
+					for(String drl : droolsFiles){
+						System.out.println("drl = "+drl);
+						System.out.println("aspect = "+a.getName().replace(" ", ""));
+						if (drl.contains(a.getName().replace(" ", ""))){
+							droolsAspectsToWeave.add(drl);
+							System.out.println("addind Drools aspect += "+drl);
+							existsDrools = true;
+						}
+					}
+
+					if(!existsDrools){
+						for(String aspect : aspectsFiles){
+							if (aspect.contains(a.getName().replace(" ", ""))){
+								String droolsAspect = generateDrools(aspect);
+								droolsAspectsToWeave.add(droolsAspect);
+							}
+						}	
 					}
 				}
-				
-				if(!existsDrools){
-					for(String aspect : aspectsFiles){
-						if (aspect.contains(a.getName().replace(" ", ""))){
-							String droolsAspect = generateDrools(aspect);
-							droolsAspectsToWeave.add(droolsAspect);
-						}
-					}	
-				}
-				
 				loadArtModel(baseModelURI);
 				start = java.lang.System.currentTimeMillis();
 				for(String drl : droolsAspectsToWeave){
-					this.process(drl);
+					File drlFile = new File(drl);
+					this.process(drlFile.getAbsolutePath());
 				}
 				end = java.lang.System.currentTimeMillis();
 				java.lang.System.err.println("Weaving time was "+(end-start)+" ms for "+droolsAspectsToWeave.size()+" aspects");

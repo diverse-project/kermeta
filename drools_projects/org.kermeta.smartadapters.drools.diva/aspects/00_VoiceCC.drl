@@ -1,0 +1,7 @@
+
+rule "Init"
+when
+    eval(true)
+then    
+end
+
