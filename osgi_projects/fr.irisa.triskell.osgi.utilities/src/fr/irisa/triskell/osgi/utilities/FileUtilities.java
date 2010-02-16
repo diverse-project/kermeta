@@ -14,11 +14,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import org.apache.log4j.Logger;
 import org.osgi.framework.BundleContext;
 
 
 public abstract class FileUtilities {
 
+	private static Logger logger = Logger.getLogger(FileUtilities.class.getName());
+	
 	/**
 	 * Convert any strange path to an absolute one. Download files if needed. Works in the system temp directory.
 	 * @param path The path to convert.
@@ -26,13 +29,15 @@ public abstract class FileUtilities {
 	 */
 	public static String anyStrangePathToAbsolute(BundleContext context, String path) {
 		String pathTemp = path;
+		logger.debug("PathToSolve: " + path);
 
 		try {
 
 			if(pathTemp.startsWith("initial@reference")) {
 
 				//Case on Equinox or felix when file is installed manually from console.
-
+				logger.debug("Starts with initial@reference");
+				
 				String installArea = context.getProperty("osgi.install.area").replace("file:", "");
 
 				//on windows, the last ':' is after the root. On unix the last ':' is after 'file'
@@ -46,11 +51,11 @@ public abstract class FileUtilities {
 					pathTemp = pathTemp.substring(0, pathTemp.length()-1);
 
 			} else if(pathTemp.startsWith("file:")) {
-
+				logger.debug("Starts with file:");
 				return pathTemp.substring(5);
 
 			} else if(pathTemp.startsWith("http:")) {
-
+				logger.debug("Starts with http:");
 				String fileName = pathTemp.substring(pathTemp.lastIndexOf("/")+1, pathTemp.length());
 				File icon = FileUtilities.getTempFile(fileName);
 				if(icon == null) {
@@ -72,7 +77,7 @@ public abstract class FileUtilities {
 				//OBR: 'obr://eu.ict_diva.tutorial.services/1250843674906'
 				//MAVEN: 'mvn:eu.ict_diva/tutorial.services/1.2.3'
 
-				System.out.println("pathTemp: " + pathTemp);
+				logger.debug("Starts with obr: or mvn:");
 				
 				String defaultDataFileAbsLoc = context.getDataFile("").getAbsolutePath();
 				
@@ -101,7 +106,7 @@ public abstract class FileUtilities {
 								String bundleLocation = new BufferedReader(new FileReader(bundleLocationFile)).readLine();
 								if(bundleLocation.equals(pathTemp)) {
 									bundleWorkingDir = f.getAbsolutePath() + File.separator + "version" + version + File.separator + "bundle.jar";
-									System.out.println("jarFile: " + bundleWorkingDir);
+									logger.debug("jarFileLocation:" + bundleWorkingDir);
 									return bundleWorkingDir;
 								}
 							}
@@ -110,22 +115,20 @@ public abstract class FileUtilities {
 					}
 				}
 				
-				System.out.println("bundleWorkingDir: " + bundleWorkingDir);
+				logger.debug("bundleWorkingDir: " + bundleWorkingDir);
 
 				return bundleWorkingDir;
 			} else {
-				System.err.println("Path not solved (path: " + path + ")");
+				logger.error("Path not solved (path: " + path + ")");
 			}
 
 			if(pathTemp.contains(":")&&pathTemp.startsWith("/"))
 				pathTemp = pathTemp.substring(1);
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("FileNotFound", e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IOException", e);
 		}
 
 		return pathTemp;
@@ -190,7 +193,7 @@ public abstract class FileUtilities {
 		{
 			tmpDirUri = new URI("file:///" + path);
 		} else {
-			System.err.println("Unknown scheme : " + tmpDirUri.getScheme());
+			logger.error("Unknown scheme : " + tmpDirUri.getScheme());
 		}
 
 		tmpDirUri.normalize();
@@ -220,7 +223,6 @@ public abstract class FileUtilities {
 			f.mkdirs();
 
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -294,17 +296,18 @@ public abstract class FileUtilities {
 	public static File getTempFile(String fileName) {
 
 		File f = null;
-
+		String tmpDir = null;
+		URI uri = null;
 		try {
 
 
-			String tmpDir = unifyPath(System.getProperty("java.io.tmpdir"));
+			tmpDir = unifyPath(System.getProperty("java.io.tmpdir"));
 			if(!tmpDir.endsWith("/"))
 				tmpDir += "/" + fileName;
 			else
 				tmpDir += fileName;
-
-			f = new File(getUriFromPath(tmpDir));
+			uri = getUriFromPath(tmpDir);
+			f = new File(uri);
 			if(f.exists())
 				return f;
 			else
@@ -312,7 +315,7 @@ public abstract class FileUtilities {
 
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Not correct URI:" + uri.toString(), e);
 		}
 		return null;
 	}
@@ -352,8 +355,7 @@ public abstract class FileUtilities {
 				f3.createNewFile();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IOException", e);
 		}
 		return f3;
 	}
