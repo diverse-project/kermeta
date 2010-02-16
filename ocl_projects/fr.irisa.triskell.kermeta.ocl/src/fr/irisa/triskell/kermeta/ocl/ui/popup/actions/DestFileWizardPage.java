@@ -64,7 +64,6 @@ import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.internal.ide.dialogs.CreateLinkedResourceGroup;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
 
-import fr.irisa.triskell.eclipse.filters.ExtensionViewerFilter;
 import fr.irisa.triskell.eclipse.filters.FilteredResourceSelectionDialog;
 import fr.irisa.triskell.kermeta.ocl.Activator;
 import fr.irisa.triskell.kermeta.ocl.OptionManager;
@@ -224,11 +223,6 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		ecoreSelectGrp.setFont(parent.getFont());
 		ecoreSelectGrp.setText("Metamodel selection:");
 	
-		ComboViewer stsFilesRegistered = new ComboViewer(ecoreSelectGrp, SWT.BORDER);
-		ExtensionViewerFilter ecoreViewerFilter = new ExtensionViewerFilter("ecore");
-		stsFilesRegistered.addFilter(ecoreViewerFilter);
-		System.err.println("Tryinig to add the filter ...");
-
 		//		sMdlLbl = new Label(sMdlSelectGrp, SWT.NULL);
 		Label ecoreLbl = new Label(topLevel, SWT.LEFT);
 		ecoreLbl.setText("Ecore meta-model: ");
