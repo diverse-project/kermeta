@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="lib/antlr-runtime-3.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/core-3.4.2.v_883_R34x.jar"/>
+	<classpathentry kind="lib" path="lib/drools-api-5.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/drools-compiler-5.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/drools-core-5.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/mvel2-2.0.10.jar"/>
+	<classpathentry kind="lib" path="lib/fr.irisa.triskell.eclipse.util_1.3.0.200907101757.jar"/>
+	<classpathentry kind="lib" path="lib/jaxp-api.jar"/>
+	<classpathentry kind="lib" path="lib/jaxp-ri.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.common_2.5.0.v200906151043.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore_2.5.0.v200906151043.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore.xmi_2.5.0.v200906151043.jar"/>
+	<classpathentry kind="lib" path="lib/org.kermeta.art.model_1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/sax2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
