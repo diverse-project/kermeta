@@ -341,11 +341,11 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 
 	public String ppCRSeparatedNode(EList expressions) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		int expNb = expressions.size();
 		for(int i=0; i<expNb; i++) {
 			if((i==0) && (alreadyPrefixed) && (!prefix.equals(prefixTab))) {
-				result += this.accept((EObject)expressions.get(i)) + "\n";
+				result.append(this.accept((EObject)expressions.get(i)) + "\n");
 			}
 			else if((i==0) && (!alreadyPrefixed)) {
 				alreadyPrefixed = true;
@@ -353,7 +353,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				String temp = (String) this.accept(o);
 				if ( o instanceof ModelType )
 					temp = MODEL_TYPE_KW + " " + temp;
-				result += getPrefix() + temp + "\n";
+				result.append(getPrefix() + temp + "\n");
 			}
 			else {
 				alreadyPrefixed = true;
@@ -361,12 +361,12 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				String temp = (String) this.accept(o);
 				if ( o instanceof ModelType )
 					temp = MODEL_TYPE_KW + " " + temp;
-				result += getPrefix() + temp + "\n";
+				result.append(getPrefix() + temp + "\n");
 			}
 		}
 
 		if(expNb > 0) alreadyPrefixed = false;
-		return result;
+		return result.toString();
 	}
 	
 	/**
@@ -387,14 +387,14 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	public String ppComaSeparatedNodes(EList expressions) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		Iterator it = expressions.iterator();
 		while(it.hasNext()) {
 			EObject o = (EObject)it.next();
-			result += this.accept(o);
-			if (it.hasNext()) result +=  ", ";
+			result.append(this.accept(o));
+			if (it.hasNext()) result.append(", ");
 		}
-		return result;
+		return result.toString();
 	}
 	
 	
@@ -418,27 +418,27 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	public Object visitModelType(ModelType node) {
 		String qname = NamedElementHelper.getMangledQualifiedName(node);
 		String name = KMTHelper.getMangledIdentifier(node.getName());
-		String result = ppTypeName(qname, name);
+		StringBuffer result = new StringBuffer(ppTypeName(qname, name));
 //		if (node.getTypeParamBinding().size() > 0) {
 //			result += "<" + ppComaSeparatedNodes(node.getTypeParamBinding()) + ">";
 //		}
 
 		if ( MODE == DEFINITION_MODE ) {
-			result += "\n" + getPrefix() + "{\n";
+			result.append( "\n" + getPrefix() + "{\n");
 			pushPrefix();
 	
 			Iterator<TypeDefinition> included = node.getIncludedTypeDefinition().iterator();
 			while (included.hasNext()) {
 				TypeDefinition tdef = included.next();
-				result += NamedElementHelper.getMangledQualifiedName(tdef);
+				result.append( NamedElementHelper.getMangledQualifiedName(tdef));
 				if (included.hasNext()) {
-					result += ", ";
+					result.append(", ");
 				}
 			}
 			popPrefix();
-			result += getPrefix() + "}\n";
+			result.append( getPrefix() + "}\n");
 		}
-		return result;
+		return result.toString();
 	}
 	
 	/**
@@ -451,22 +451,22 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * the type (identified by qname) belongs to current root package
 	 */
 	protected String ppTypeName(String qname, String name) {
-		String result = "";
-		if (qname.equals(current_pname + "::" + name)) result += name;
+		StringBuffer result = new StringBuffer();
+		if (qname.equals(current_pname + "::" + name)) result.append(name);
 		else {
 			for(int i=0; i<usings.size(); i++) {
 				if (qname.equals(usings.get(i) + "::" + name)) {
-					result += name;
+					result.append(name);
 					break;
 				}
 			}
 			if (qname.startsWith(root_pname+"::"))
 			{
-				result += qname.substring(root_pname.length() + 2);
+				result.append(qname.substring(root_pname.length() + 2));
 			}
 		}
-		if (result.equals("")) result += qname;
-		return result;
+		if (result.equals("")) result.append(qname);
+		return result.toString();
 	}
 	
 	/**
@@ -564,23 +564,23 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	public String ppTypeVariableDeclaration(EList<TypeVariable> tparams) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		Iterator<TypeVariable> it = tparams.iterator();
 		while (it.hasNext()) {
 			TypeVariable node = it.next();
-			result += KMTHelper.getMangledIdentifier(node.getName());
-			if (node.getSupertype() != null) result += " : " + this.accept(node.getSupertype());
-			if (it.hasNext()) result +=  ", ";
+			result.append(KMTHelper.getMangledIdentifier(node.getName()));
+			if (node.getSupertype() != null) result.append(" : " + this.accept(node.getSupertype()));
+			if (it.hasNext()) result.append(", ");
 		}
-		return result;
+		return result.toString();
 	}
 	
 	
 	public String ppTags(fr.irisa.triskell.kermeta.language.structure.Object node) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		Iterator <Tag> iterator = node.getTag().iterator();
 		while ( iterator.hasNext() ) {
-			result += accept( iterator.next() ) + "\n";
+			result.append( accept( iterator.next() ) + "\n");
 		}
 		/*iterator = node.getOwnedTag().iterator();
 		while ( iterator.hasNext() ) {
@@ -588,30 +588,30 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}*/
 		if ( (node.getTag().size() > 0) /*|| (node.getOwnedTag().size() > 0)*/ )
 			alreadyPrefixed = false;
-		return result;
+		return result.toString();
 	}
 	
 	
 	
 	/** Prettyprint the annotations */
 	public String ppTags(EList<Tag> tagList) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 	    
 		int tagNb = tagList.size();
 		for(int i=0; i<tagNb; i++) {
 			if((i==0) && (alreadyPrefixed)) {
-				result += this.accept(tagList.get(i)) + "\n";
+				result.append(this.accept(tagList.get(i)) + "\n");
 			}
 			else if((i==0) && (!alreadyPrefixed)) {
 				alreadyPrefixed = true;
-				result += getPrefix() + this.accept(tagList.get(i)) + "\n";
+				result.append(getPrefix() + this.accept(tagList.get(i)) + "\n");
 			}
 			else {
-				result += getPrefix() + this.accept(tagList.get(i)) + "\n";
+				result.append(getPrefix() + this.accept(tagList.get(i)) + "\n");
 			}
 		}
 		if(tagNb > 0) alreadyPrefixed = false;
-	    return result;
+	    return result.toString();
 	}
 	
 	/**
@@ -993,7 +993,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.StringLiteral)
 	 */
 	public Object visitStringLiteral(StringLiteral node) {
-		String value = "\"";
+		StringBuffer value = new StringBuffer("\"");
 		/*
 		 * 
 		 * We must be carefull about special characters.
@@ -1004,28 +1004,28 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			char c = node.getValue().charAt(i);
 			switch (c) {
 			case '\n' :
-				value += "\\n";
+				value.append("\\n");
 				break;
 			case '"' :
-				value += "\\\"";
+				value.append("\\\"");
 				break;
 			case '\t' :
-				value += "\\t";
+				value.append("\\t");
 				break;
 			case '\r' :
-				value += "\\r";
+				value.append("\\r");
 				break;
 			case '\\' :
-				value += "\\\\";
+				value.append("\\\\");
 				break;
 			default :
-				value += c;
+				value.append( c);
 				break;
 			}
 		}
 		
-		value += "\"";
-		return value;	
+		value.append( "\"");
+		return value.toString();	
 //		return "\"" + node.getValue().replace("\"", "\\\"") +"\"";
 	}
 	/**
