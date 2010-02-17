@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="/org.kermeta.osgi.bundleFactory/lib/osgi.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/eu.ict_diva.divastudio.services"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/eu.ict_diva.osgi.component.framework"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/eu.ict_diva.runtime.causallink"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/eu.ict_diva.runtime.causallink.osgi"/>
+	<classpathentry kind="lib" path="/diva.model.osgi/lib/diva.model.jar"/>
+	<classpathentry kind="lib" path="/diva.model.osgi/lib/fr.irisa.triskell.eclipse.util_1.3.0.200907101757.jar"/>
+	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.eclipse.emf.common_2.5.0.v200906151043.jar"/>
+	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.eclipse.emf.ecore_2.5.0.v200906151043.jar"/>
+	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.eclipse.emf.ecore.xmi_2.5.0.v200906151043.jar"/>
+	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.kermeta.art.model_1.1.1.jar"/>
+	<classpathentry kind="lib" path="/diva.model.osgi/lib/org.osgi.compendium-4.1.0.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/de.pure.diva.arf.component"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/de.pure.diva.arf.core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/de.pure.diva.arf.reasoner.runtime"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/de.pure.diva.arf.service"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
