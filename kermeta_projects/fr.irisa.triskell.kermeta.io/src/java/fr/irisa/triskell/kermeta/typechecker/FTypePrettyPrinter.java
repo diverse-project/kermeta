@@ -69,23 +69,23 @@ public class FTypePrettyPrinter extends KermetaOptimizedVisitor {
 	
 	//public Object visit(ProductType arg0) {
     public Object visitProductType(ProductType arg0) {
-		String result = "[";
+		StringBuffer result = new StringBuffer("[");
 	    for(int i=0; i<arg0.getType().size(); i++) {
-	        result += this.accept((fr.irisa.triskell.kermeta.language.structure.Type)arg0.getType().get(i));
-	        if (i != arg0.getType().size()-1) result += ", ";
+	        result.append(this.accept((fr.irisa.triskell.kermeta.language.structure.Type)arg0.getType().get(i)));
+	        if (i != arg0.getType().size()-1) result.append(", ");
 		}
-	    result += "]";
-	    return result;
+	    result.append("]");
+	    return result.toString();
 	}
 	
 	
     //public Object visit(ObjectTypeVariable arg0) {
     public Object visitObjectTypeVariable(ObjectTypeVariable arg0) {
-		String result = arg0.getName();
+		StringBuffer result = new StringBuffer(arg0.getName());
 		if (arg0.getSupertype() != null) {
-		    result += " : " + this.accept(arg0.getSupertype());
+		    result.append(" : " + this.accept(arg0.getSupertype()));
 		}
-		return result;
+		return result.toString();
 	}
 	
     public Object visitModelTypeVariable(ModelTypeVariable arg0) {
@@ -108,18 +108,18 @@ public class FTypePrettyPrinter extends KermetaOptimizedVisitor {
     }
     
     public Object visitVirtualType(VirtualType arg0) {
-    	String result = ((ModelTypeVariable) arg0.getModelType()).getName() + "::" + arg0.getName();
-    	result += " [virtual of " + NamedElementHelper.getMangledQualifiedName(arg0.getClassDefinition());
+    	StringBuffer result = new StringBuffer(((ModelTypeVariable) arg0.getModelType()).getName() + "::" + arg0.getName());
+    	result.append(" [virtual of " + NamedElementHelper.getMangledQualifiedName(arg0.getClassDefinition()));
     	if (!arg0.getTypeParamBinding().isEmpty()) {
-    		result += "<";
+    		result.append("<");
 	        for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
-		        result += this.accept(((TypeVariableBinding)arg0.getTypeParamBinding().get(i)).getType());
-		        if (i != arg0.getTypeParamBinding().size()-1) result += ", ";
+		        result.append(this.accept(((TypeVariableBinding)arg0.getTypeParamBinding().get(i)).getType()));
+		        if (i != arg0.getTypeParamBinding().size()-1) result.append(", ");
 			}
-	        result += ">";
+	        result.append(">");
     	}
-    	result += "]";
-    	return result;
+    	result.append("]");
+    	return result.toString();
     }
     
 	//public Object visit(VoidType arg0) {
