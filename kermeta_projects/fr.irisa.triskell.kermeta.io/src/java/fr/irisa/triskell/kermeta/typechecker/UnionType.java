@@ -251,13 +251,13 @@ public class UnionType extends Type {
 	}
 	
 	public String toString() {
-		String result = "Union( ";
+		StringBuffer result = new StringBuffer("Union( ");
 		for(int i=0; i<types.size();i++) {
 			Type t = (Type)types.get(i);
-			result += t.toString();
-			if (i != types.size()-1) result += ", ";
+			result.append(t.toString());
+			if (i != types.size()-1) result.append(", ");
 		}
-		result += " )";
-		return result;
+		result.append(" )");
+		return result.toString();
 	}
 }

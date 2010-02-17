@@ -17,7 +17,6 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -27,14 +26,16 @@ import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.UniqueEList;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
@@ -44,11 +45,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-
-import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.log4j.util.LogConfigurationHelper;
-import org.kermeta.model.KermetaModelHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ModelTypeHelper;
 
 //import com.sun.net.ssl.internal.ssl.Debug;
@@ -831,18 +827,18 @@ public class TypeMatchChecker {
 		}
 
 		public String toString() {
-			String result = "";
+			StringBuffer result = new StringBuffer();
 			if (premises.size() == 1) {
-				result += premises.toArray()[0].toString();
+				result.append(premises.toArray()[0].toString());
 			} else {
-				result += "( ";
+				result.append("( ");
 				for (Binding b : premises) {
-					result += b.toString() + ", ";
+					result.append(b.toString() + ", ");
 				}
-				result += " )";
+				result.append(" )");
 			}
-			result += " --> " + getConclusion().toString();
-			return result;
+			result.append(" --> " + getConclusion());
+			return result.toString();
 		}
 	}
 
