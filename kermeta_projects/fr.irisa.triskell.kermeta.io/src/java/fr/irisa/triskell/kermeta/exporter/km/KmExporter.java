@@ -220,11 +220,12 @@ public class KmExporter {
 	 * @return
 	 */
 	private URI getTraceURI(Resource resource) {
-		String s = "file:/";
+		StringBuffer s = new StringBuffer();
+		s.append("file:/");
 		for ( int i=0; i<resource.getURI().segmentCount()-1; i++ )
-			s += resource.getURI().segment(i) + "/";
-		s += resource.getURI().lastSegment().replaceAll("\\..+", ".traceability");
-		return URI.createURI(s);
+			s.append(resource.getURI().segment(i) + "/");
+		s .append(resource.getURI().lastSegment().replaceAll("\\..+", ".traceability"));
+		return URI.createURI(s.toString());
 	}
 	
 }

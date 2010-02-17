@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;
 import org.kermeta.io.KermetaUnit;
@@ -201,16 +200,16 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		    		
 		    		
 		    		if( node.getETypeParameters()!=null && node.getETypeParameters().size()>0 ) {
-		    			String str_etp = "";
+		    			StringBuffer str_etp = new StringBuffer();
 		    			int i=0;
 			    		for( ETypeParameter etp : node.getETypeParameters() ) {
 			    			if( i!=0 ) {
-			    				str_etp += " , ";
+			    				str_etp.append(" , ");
 			    			}
-			    			str_etp += etp.getName();
+			    			str_etp.append(etp.getName());
 			    			i++;
 			    		}
-			    		Tag t2 = KermetaModelHelper.Tag.create("ecore.EDataType_eTypeParameters", str_etp);
+			    		Tag t2 = KermetaModelHelper.Tag.create("ecore.EDataType_eTypeParameters", str_etp.toString());
 		    			currentPrimitiveType.getOwnedTags().add(t2);
 		    		}
 		    	}

@@ -90,14 +90,14 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	 * @return a String corresponding to the QualifiedID node.
 	 */
 	protected String qualifiedIDAsString(QualifiedID node) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		ASTNode[] ids = node.getChildren();
 		for(int i=0; i<ids.length; i++) {
 			if (ids[i].getTypeName().equals("QidSeparator")) continue;
-			result += getTextForID((KermetaTokenNode)ids[i]);
-			if (i != ids.length-1) result += "::";
+			result.append(getTextForID((KermetaTokenNode)ids[i]));
+			if (i != ids.length-1) result.append("::");
 		}
-		return result;
+		return result.toString();
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 		    return result;
 		}*/
 		if (qualifiedName.indexOf("::")>=0) {
-			String name = qualifiedName.substring(qualifiedName.lastIndexOf("::") + 2);
+			// String name = qualifiedName.substring(qualifiedName.lastIndexOf("::") + 2);
 			String parent_name = qualifiedName.substring(0, qualifiedName.lastIndexOf("::"));
 			Package parent = getOrCreatePackage(parent_name, node);
 			result = builder.addInternalPackage(qualifiedName);
