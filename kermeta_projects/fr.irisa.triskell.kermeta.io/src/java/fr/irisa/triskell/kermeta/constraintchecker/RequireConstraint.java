@@ -138,7 +138,7 @@ public class RequireConstraint {
 						} else {
 							message += " with the same qualified name are imported from several files : \n";
 						}
-						String units = "";
+						StringBuffer units = new StringBuffer();
 						Set<KermetaUnit> unitsProcessed = new HashSet<KermetaUnit>(); 
 						Set<Require> requiresErroneous = new HashSet<Require>();
 						// used to count the number of definition that comes from a file, it ignores definitions coming from unit that correspond to registered EPackage
@@ -146,7 +146,7 @@ public class RequireConstraint {
 						for ( TypeDefinition tdef : typeDefinitions ) {
 							KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(tdef);
 							if ( ! unitsProcessed.contains(unit) && (unit != kermetaUnit) ) {
-								units += unit.getUri() + "\n";
+								units.append(unit.getUri() + "\n");
 								requiresErroneous.addAll( getIndirectRequire(kermetaUnit, unit) );
 								//requiresErroneous.add( getRequire( unit) );
 								if(!EMFRegistryHelper.isRegistered(unit.getUri())) 

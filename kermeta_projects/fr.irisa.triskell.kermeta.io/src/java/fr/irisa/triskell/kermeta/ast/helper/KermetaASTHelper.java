@@ -80,14 +80,14 @@ public class KermetaASTHelper {
 	 * @return a String corresponding to the QualifiedID node.
 	 */
 	static public String qualifiedIDAsString(QualifiedID node) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		ASTNode[] ids = node.getChildren();
 		for(int i=0; i<ids.length; i++) {
 			if (ids[i].getTypeName().equals("QidSeparator")) continue;
-			result += getTextForID((KermetaTokenNode)ids[i]);
-			if (i != ids.length-1) result += "::";
+			result.append(getTextForID((KermetaTokenNode)ids[i]));
+			if (i != ids.length-1) result.append("::");
 		}
-		return result;
+		return result.toString();
 	}
 	
 	static public String getTextForID(KermetaTokenNode node) {
@@ -173,18 +173,18 @@ public class KermetaASTHelper {
 	 * @return a String corresponding to the QualifiedID node.
 	 */
 	static public String unprotectedIDAsString(KwOrNamedQualifiedID node) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		ASTNode[] ids = node.getChildren();
 		for(int i=0; i<ids.length; i++) {
 			if (ids[i].getTypeName().equals("QidSeparator")) continue;
 			if(ids[i] instanceof QualifiedID){ 
-				result += qualifiedIDAsString((QualifiedID)ids[i]);
+				result.append(qualifiedIDAsString((QualifiedID)ids[i]));
 			}
 			else{
-				result += getTextForID((KermetaTokenNode)ids[i]);
-				if (i != ids.length-1) result += "::";
+				result.append(getTextForID((KermetaTokenNode)ids[i]));
+				if (i != ids.length-1) result.append("::");
 			}
 		}
-		return result;
+		return result.toString();
 	}
 }

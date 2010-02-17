@@ -119,10 +119,10 @@ public class KM2EcorePass1 extends KM2Ecore {
 		 * Creating the text of the annotation.
 		 * 
 		 */
-		String requiresSource = "";
+		StringBuffer requiresSource = new StringBuffer();
 		Iterator <Require> itOnRequires = node.getRequires().iterator();
 		while ( itOnRequires.hasNext() )
-			requiresSource += itOnRequires.next().getUri() + "|";
+			requiresSource.append(itOnRequires.next().getUri() + "|");
 
 		String usingsSource = "";
 		Iterator <Using> itOnUsings = node.getUsings().iterator();
@@ -137,7 +137,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 		EAnnotation annotation = EcoreModelHelper.EAnnotation.create( "ModelingUnit" );
 		
 		if ( ! requiresSource.equals("") )
-			EcoreModelHelper.EAnnotation.addDetails(annotation, "require", requiresSource);
+			EcoreModelHelper.EAnnotation.addDetails(annotation, "require", requiresSource.toString());
 		
 		if ( ! usingsSource.equals("") )
 			EcoreModelHelper.EAnnotation.addDetails(annotation, "using", usingsSource);
