@@ -124,10 +124,10 @@ public class KM2EcorePass1 extends KM2Ecore {
 		while ( itOnRequires.hasNext() )
 			requiresSource.append(itOnRequires.next().getUri() + "|");
 
-		String usingsSource = "";
+		StringBuffer usingsSource = new StringBuffer();
 		Iterator <Using> itOnUsings = node.getUsings().iterator();
 		while ( itOnUsings.hasNext() )
-			usingsSource += itOnUsings.next().getQualifiedName() + "|";
+			usingsSource.append(itOnUsings.next().getQualifiedName() + "|");
 		
 		/*
 		 * 
@@ -136,11 +136,11 @@ public class KM2EcorePass1 extends KM2Ecore {
 		 */
 		EAnnotation annotation = EcoreModelHelper.EAnnotation.create( "ModelingUnit" );
 		
-		if ( ! requiresSource.equals("") )
+		if ( requiresSource.length() !=0 )
 			EcoreModelHelper.EAnnotation.addDetails(annotation, "require", requiresSource.toString());
 		
-		if ( ! usingsSource.equals("") )
-			EcoreModelHelper.EAnnotation.addDetails(annotation, "using", usingsSource);
+		if ( usingsSource.length() !=0 )
+			EcoreModelHelper.EAnnotation.addDetails(annotation, "using", usingsSource.toString());
 		
 		return annotation;
 	}	

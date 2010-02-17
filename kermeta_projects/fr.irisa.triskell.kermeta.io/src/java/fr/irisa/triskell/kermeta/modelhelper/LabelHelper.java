@@ -25,43 +25,43 @@ public class LabelHelper {
 	 */
 	static public String getExtendedLabel(Operation operation) {
 		
-		String text = "";
+		StringBuffer text = new StringBuffer();
 		
 		if (operation.getName() != null	&& !"".equals(operation.getName())) {
-			text = operation.getName();
+			text.append(operation.getName());
 		} else {
-			text = "null";
+			text.append("null");
 		}
 		Boolean first = true;
 		// The type parameters
 		if (operation.getTypeParameter().size() > 0) {
-			text += "<";
+			text.append("<");
 			for (TypeVariable var : operation.getTypeParameter()) {
 				if (first)
 					first = false;
 				else
-					text += ",";
-				text += getLabelForTypeVariable(var);
+					text.append(",");
+				text.append(getLabelForTypeVariable(var));
 			}
-			text += ">";
+			text.append(">");
 		}
 		// Now the parameters
-		text += "(";
+		text.append("(");
 		first = true;
 		for (Parameter param : operation.getOwnedParameter()) {
 			if (first)
 				first = false;
 			else
-				text += ", ";
-			text += /*param.getName()	+ ":" +*/ TypeHelper.getLabelForType(param.getType());
+				text.append(", ");
+			text.append(TypeHelper.getLabelForType(param.getType()));
 		}
-		text += ")";
+		text.append(")");
 		// The return type
 		if (operation.getType() != null) {
-			text += " : " + TypeHelper.getLabelForType(operation.getType());
+			text.append(" : " + TypeHelper.getLabelForType(operation.getType()));
 		}
 		
-		return text;
+		return text.toString();
 	}
 	
 	/**
