@@ -465,7 +465,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result.append(qname.substring(root_pname.length() + 2));
 			}
 		}
-		if (result.equals("")) result.append(qname);
+		if (result.length() ==0) result.append(qname);
 		return result.toString();
 	}
 	
