@@ -205,41 +205,41 @@ public class TypeHelper {
 	 * @return
 	 */
 	 static public String getLabelForType(Type type) {
-		String type_name = "";
+		StringBuffer type_name = new StringBuffer();
 		if (type instanceof Class){
-			type_name = ((Class) type).getTypeDefinition().getName();
+			type_name.append(((Class) type).getTypeDefinition().getName());
 			//String type_name2 = KMTHelper.getQualifiedName(((Class)type).getTypeDefinition());
 		}
 		else if (type instanceof TypeVariable){
-			type_name = ((TypeVariable)type).getName();
+			type_name.append(((TypeVariable)type).getName());
 		}
 		else if (type instanceof FunctionType) {
-			type_name = "<" + getLabelForType(((FunctionType) type).getLeft()) + "->" +getLabelForType(((FunctionType) type).getRight())+ ">";
+			type_name.append("<" + getLabelForType(((FunctionType) type).getLeft()) + "->" +getLabelForType(((FunctionType) type).getRight())+ ">");
 		}
 		else if (type instanceof ProductType) {
-			type_name = "[";
+			type_name.append("[");
 			boolean first_pt = true;
 			for(Object pt_type : ((ProductType) type).getType()) {
 				if(first_pt) {
 					first_pt = false;
 				} else {
-					type_name += ",";
+					type_name.append(",");
 				}
-				type_name += getLabelForType((Type) pt_type);
+				type_name.append(getLabelForType((Type) pt_type));
 			}
-			type_name += "]";	
+			type_name.append("]");	
 		}
 		else if (type instanceof DataType)
-			type_name = ((DataType) type).getName();
+			type_name.append(((DataType) type).getName());
 		else if (type instanceof VoidType)
-			type_name = "Void";
+			type_name.append("Void");
 		else {
-			type_name = type == null ? "<Null>" : type.toString();
+			type_name.append(type == null ? "<Null>" : type.toString());
 			// throw new Error("FTYPE : Not implemented error :
 			// createTypeForTypeDefinition -- Enumeration type is not handled
 			// yet. (" + type + ")");
 		}
 		// FIXME : getName return sometimes null, which is unconsistent
-		return (type_name != null) ? type_name : "<Unset>";
+		return (type_name.length() != 0) ? type_name.toString() : "<Unset>";
 	}
 }

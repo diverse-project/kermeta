@@ -44,16 +44,17 @@ public class FTypePrettyPrinter extends KermetaOptimizedVisitor {
     //public Object visit(FClass arg0) {
     public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class arg0) {
         //String result = arg0.getFClassDefinition().getFName();
-        String result = NamedElementHelper.getMangledQualifiedName(arg0.getTypeDefinition());
+        StringBuffer result = new StringBuffer();
+        result.append(NamedElementHelper.getMangledQualifiedName(arg0.getTypeDefinition()));
         if (arg0.getTypeParamBinding().size() > 0) {
-            result += "<";
+            result.append("<");
 	        for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
-		        result += this.accept(((TypeVariableBinding)arg0.getTypeParamBinding().get(i)).getType());
-		        if (i != arg0.getTypeParamBinding().size()-1) result += ", ";
+		        result.append(this.accept(((TypeVariableBinding)arg0.getTypeParamBinding().get(i)).getType()));
+		        if (i != arg0.getTypeParamBinding().size()-1) result.append(", ");
 			}
-	        result += ">";
+	        result.append(">");
         }
-        return result;
+        return result.toString();
 	}
 	
 	//public Object visit(Enumeration arg0) {

@@ -64,9 +64,9 @@ public class KMTHelper {
 	 * @return
 	 */
 	public static String join(Collection<String> l, String delimiter) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		for (String s : l) {
-			result += s + delimiter;
+			result.append(s + delimiter);
 		}
 		return result.substring(0, result.length() - delimiter.length());
 	}
