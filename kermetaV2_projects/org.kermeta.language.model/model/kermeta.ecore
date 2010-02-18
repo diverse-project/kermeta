@@ -429,7 +429,7 @@
           </eAnnotations>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" upperBound="-1"
-            eType="#//language/structure/TypeVariable">
+            eType="#//language/structure/TypeVariableDefinition">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="TypeParameters of the Operation"/>
           </eAnnotations>
@@ -514,6 +514,8 @@
             <details key="documentation" value="Owning TypeContainer, if any"/>
           </eAnnotations>
         </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinition" lowerBound="1"
+            eType="#//language/structure/TypeDefinition"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true" eSuperTypes="#//language/structure/Object">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -542,7 +544,7 @@
           <details key="documentation" value="Definition of a binding between a TypeVariable and a Type"/>
         </eAnnotations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
-            eType="#//language/structure/TypeVariable">
+            eType="#//language/structure/TypeVariableDefinition">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="TypeVariable"/>
           </eAnnotations>
@@ -670,22 +672,10 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//language/structure/NamedElement #//language/structure/TypeDefinitionContainer">
+      <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//language/structure/NamedElement #//language/structure/TypeDefinitionContainer #//language/structure/PackageContainer">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Package in kermeta. Each kermeta model must have a root package. "/>
         </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="nestedPackage" upperBound="-1"
-            eType="#//language/structure/Package" containment="true" eOpposite="#//language/structure/Package/nestingPackage">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Nested Packages contained by the Package"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="nestingPackage" eType="#//language/structure/Package"
-            transient="true" eOpposite="#//language/structure/Package/nestedPackage">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Owning Package, if any"/>
-          </eAnnotations>
-        </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//language/structure/String">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Uri of the Package"/>
@@ -843,7 +833,7 @@
           <details key="documentation" value="Abstracts the definition of generic type definitions (i.e. type definitions that&#xA;can be parameterized), namely, for ClassDefinition and ModelTypeDefinition."/>
         </eAnnotations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" upperBound="-1"
-            eType="#//language/structure/TypeVariable" containment="true">
+            eType="#//language/structure/TypeVariableDefinition" containment="true">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Type variables defined for the GenericTypeDefinition"/>
           </eAnnotations>
@@ -866,14 +856,9 @@
             <details key="documentation" value="Bindings between type variables and provided types "/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinition" lowerBound="1"
-            eType="#//language/structure/GenericTypeDefinition">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="Definition of the Type"/>
-          </eAnnotations>
-        </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" abstract="true" eSuperTypes="#//language/structure/TypeContainer #//language/structure/Type #//language/structure/NamedElement">
+      <eClassifiers xsi:type="ecore:EClass" name="TypeVariableDefinition" abstract="true"
+          eSuperTypes="#//language/structure/TypeContainer #//language/structure/NamedElement">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Definition of a type variable for generic types :  &#xA;in class definition &lt;pre>class AClass&lt;X,Y> {}&lt;/pre>, X and Y are type variables."/>
         </eAnnotations>
@@ -883,12 +868,12 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable" eSuperTypes="#//language/structure/TypeVariable">
+      <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable" eSuperTypes="#//language/structure/TypeVariableDefinition">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="To be written"/>
         </eAnnotations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="#//language/structure/Type #//language/structure/TypeDefinition">
+      <eClassifiers xsi:type="ecore:EClass" name="ModelDefinition" eSuperTypes="#//language/structure/TypeDefinition #//language/structure/PackageContainer">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Type of a model, consisting of a set of included type definitions"/>
         </eAnnotations>
@@ -899,41 +884,7 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ModelTypeVariable" eSuperTypes="#//language/structure/TypeVariable">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="To be written"/>
-        </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="virtualType" upperBound="-1"
-            eType="#//language/structure/VirtualType" containment="true" eOpposite="#//language/structure/VirtualType/modelType">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="To be written"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="VirtualType" eSuperTypes="#//language/structure/ObjectTypeVariable">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="To be written"/>
-        </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="classDefinition" lowerBound="1"
-            eType="#//language/structure/ClassDefinition">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="To be written"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="modelType" lowerBound="1"
-            eType="#//language/structure/ModelTypeVariable" eOpposite="#//language/structure/ModelTypeVariable/virtualType">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="To be written"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" upperBound="-1"
-            eType="#//language/structure/TypeVariableBinding" containment="true">
-          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-            <details key="documentation" value="To be written"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//language/structure/Object">
+      <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//language/structure/Object #//language/structure/Type">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Is the holder of a set of model elements (Object) that are compatible with the ModelType that has &#xA;instantiated this Model."/>
         </eAnnotations>
@@ -1041,7 +992,7 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="VoidType" eSuperTypes="#//language/structure/Type">
+      <eClassifiers xsi:type="ecore:EClass" name="VoidType" eSuperTypes="#//language/structure/DataType">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Class definition for the &lt;pre>Void&lt;/pre> type"/>
         </eAnnotations>
@@ -1057,6 +1008,10 @@
             <details key="documentation" value="Contained TypeDefinitions"/>
           </eAnnotations>
         </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PackageContainer">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPackages" upperBound="-1"
+            eType="#//language/structure/Package" containment="true"/>
       </eClassifiers>
     </eSubpackages>
   </eSubpackages>
