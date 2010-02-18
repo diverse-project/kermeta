@@ -60,17 +60,17 @@ public class Load extends KMLoadingAction {
 	private URI getTraceURI(Resource resource) {
 		URI resourceURI = resource.getURI();
 		if ( resourceURI.isPlatformPlugin() ) {
-			String s = "";
+			StringBuffer s = new StringBuffer();
 			for ( int i=1; i<resource.getURI().segmentCount()-1; i++ )
-				s += resource.getURI().segment(i) + "/";
-			s += resource.getURI().lastSegment().replaceAll("\\..+", ".traceability");
-			return URI.createPlatformPluginURI(s, false);
+				s.append(resource.getURI().segment(i) + "/");
+			s.append(resource.getURI().lastSegment().replaceAll("\\..+", ".traceability"));
+			return URI.createPlatformPluginURI(s.toString(), false);
 		} else if ( resourceURI.isPlatformResource() ) {
-			String s = "";
+			StringBuffer s = new StringBuffer();
 			for ( int i=1; i<resource.getURI().segmentCount()-1; i++ )
-				s += resource.getURI().segment(i) + "/";
-			s += resource.getURI().lastSegment().replaceAll("\\..+", ".traceability");
-			return URI.createPlatformResourceURI(s, false);
+				s.append(resource.getURI().segment(i) + "/");
+			s.append(resource.getURI().lastSegment().replaceAll("\\..+", ".traceability"));
+			return URI.createPlatformResourceURI(s.toString(), false);
 		}
 		return null;
 	}
