@@ -230,6 +230,7 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
 		super.dispose();
 		// We are not interested in that file anymore.
 		KermetaUnitHost.getInstance().undeclareInterest(this, getFile());
+		kermetaUnit =  null;
 	}
 	
 	public void updateValue(Object newValue) {
