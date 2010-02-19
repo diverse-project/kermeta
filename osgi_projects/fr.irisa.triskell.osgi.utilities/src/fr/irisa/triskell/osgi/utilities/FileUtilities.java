@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
 import org.osgi.framework.BundleContext;
 
 
-public class FileUtilities {
+public final class FileUtilities {
 
 	private FileUtilities(){};
 
@@ -53,11 +53,10 @@ public class FileUtilities {
 
 	/**
 	 * Converts a "http:" path into an absolute path.
-	 * @param context The BundleContext
 	 * @param path The path to solve.
 	 * @return The absolute path.
 	 */
-	private static String solveHttpPath(BundleContext context, String path) {
+	private static String solveHttpPath(String path) {
 		String pathTemp = path;
 
 		logger.debug("Starts with http:");
@@ -81,6 +80,55 @@ public class FileUtilities {
 
 	}
 
+	private static String tryToSolveBundle(File f, String pathTemp, String bundleWorkingDir) {
+		File bundleLocationFile = null;
+		String version = "0.0";
+		FileReader fr = null;
+		try {
+			for(File f2 : f.listFiles()) {
+				if(f2.getName().equals("bundle.location")) { //felix-cache/bundleY/bundle.location
+					bundleLocationFile = f2;
+				} else if(f2.getName().equals("refresh.counter")) {//felix-cache/bundleY/refresh.counter
+					fr = new  FileReader(f2);
+					char vers = (char)fr.read();
+					version = vers + ".0";
+					if(fr != null) {
+						fr.close();
+					}
+				}
+			}
+
+			if (bundleLocationFile != null) {
+				fr = new FileReader(bundleLocationFile);
+				String bundleLocation = new BufferedReader(fr).readLine();
+				if(fr != null) {
+					fr.close();
+				}
+				if(bundleLocation.equals(pathTemp)) {
+					bundleWorkingDir = f.getAbsolutePath() + File.separator + "version" + version + File.separator + "bundle.jar";
+					logger.debug("jarFileLocation:" + bundleWorkingDir);
+					return bundleWorkingDir;
+				} else {
+					return null;
+				}
+			}
+		} catch (FileNotFoundException e) {
+			logger.error("FileNotFound", e);
+		} catch (IOException e) {
+			logger.error("IOException", e);
+		} finally {
+			if( fr != null) {
+				try {
+					fr.close();
+				} catch (IOException e) {
+					logger.error("IOException", e);
+				}
+			}
+		}
+
+		return null;
+	}
+
 	private static String solveObrOrMvnPath(BundleContext context, String path) {
 		String pathTemp = path;
 		//OBR: 'obr://eu.ict_diva.tutorial.services/1250843674906'
@@ -94,43 +142,16 @@ public class FileUtilities {
 		String bundleWorkingDir = defaultDataFileAbsLoc.substring(0,defaultDataFileAbsLoc.lastIndexOf(File.separator));
 
 		File cache = new File(bundleWorkingDir + File.separator + ".." + File.separator);//felix-cache
-		try {
-			for(File f : cache.listFiles()) {
-				if(f.isDirectory() && f.getName().startsWith("bundle")) { //felix-cache/bundleY
 
-					File bundleLocationFile = null;
-					String version = "0.0";
-
-					for(File f2 : f.listFiles()) {
-						if(f2.getName().equals("bundle.location")) { //felix-cache/bundleY/bundle.location
-							bundleLocationFile = f2;
-						} else if(f2.getName().equals("refresh.counter")) {//felix-cache/bundleY/refresh.counter
-							FileReader fr = new  FileReader(f2);
-							char vers = (char)fr.read();
-							version = vers + ".0";
-							if(fr != null) {
-								fr.close();
-							}
-						}
-					}
-
-					if (bundleLocationFile != null) {
-						String bundleLocation = new BufferedReader(new FileReader(bundleLocationFile)).readLine();
-						if(bundleLocation.equals(pathTemp)) {
-							bundleWorkingDir = f.getAbsolutePath() + File.separator + "version" + version + File.separator + "bundle.jar";
-							logger.debug("jarFileLocation:" + bundleWorkingDir);
-							return bundleWorkingDir;
-						}
-					}
-
+		for(File f : cache.listFiles()) {
+			if(f.isDirectory() && f.getName().startsWith("bundle")) { //felix-cache/bundleY
+				String solved = tryToSolveBundle(f, pathTemp, bundleWorkingDir);
+				if(solved != null) {
+					return solved;
 				}
-
 			}
-		} catch (FileNotFoundException e) {
-			logger.error("FileNotFound", e);
-		} catch (IOException e) {
-			logger.error("IOException", e);
 		}
+
 
 		logger.debug("bundleWorkingDir: " + bundleWorkingDir);
 
@@ -165,7 +186,7 @@ public class FileUtilities {
 
 		} else if(pathTemp.startsWith("http:")) {
 
-			pathTemp = solveHttpPath(context, path);
+			pathTemp = solveHttpPath(path);
 
 		} else if(pathTemp.startsWith("obr:") || pathTemp.startsWith("mvn:")) {
 
@@ -306,9 +327,13 @@ public class FileUtilities {
 
 			f = new File(getUriFromPath(tmpDir));
 			if(f.exists()) {
-				f.delete();
+				if(!f.delete()) {
+					logger.error("delete() returned false on file:" + f.getAbsolutePath()+ " Please have a check on permissions.");
+				}
 			}
-			f.createNewFile();
+			if(!f.createNewFile()) {
+				logger.error("createNewFile() returned falseon file:" + f.getAbsolutePath()+ " Please have a check on permissions.");
+			}
 			f.deleteOnExit();
 
 		} catch (URISyntaxException e) {
@@ -372,7 +397,7 @@ public class FileUtilities {
 
 		} catch (URISyntaxException e) {
 
-			logger.error("Not correct URI:" + (uri!=null?uri.toString():""), e);
+			logger.error("Not correct URI.", e);
 		}
 		return null;
 	}
@@ -387,7 +412,9 @@ public class FileUtilities {
 
 		f3 = ctx.getDataFile(dirName);
 		if(!f3.exists()) {
-			f3.mkdirs();
+			if(!f3.mkdirs()) {
+				logger.error("mkdirs() returned false. Check for authorizations to write in:" + f3.getAbsolutePath());
+			}
 		}
 
 		return f3;
@@ -410,7 +437,9 @@ public class FileUtilities {
 
 			f3 = ctx.getDataFile(fileName);
 			if(!f3.exists()) {
-				f3.createNewFile();
+				if(!f3.createNewFile()) {
+					logger.error("createNewFile() returned falseon file:" + f3.getAbsolutePath()+ " Please have a check on permissions.");
+				}
 			}
 
 		} catch (IOException e) {
