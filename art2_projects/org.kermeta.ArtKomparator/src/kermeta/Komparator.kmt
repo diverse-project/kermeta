@@ -97,7 +97,7 @@ class Komparator
 			var similarComponentType : ComponentType init void
 			//SEARCH SIMILAR COMPONENT TYPE IN UPDATE MODEL
 			updateNode.componentTypes.each{ uct | 
-				if(uct.equals(rct)) then similarComponentType := uct end
+				if(uct.isEquals(rct)) then similarComponentType := uct end
 			}
 			if(similarComponentType == void)
 			then
@@ -109,7 +109,7 @@ class Komparator
 		updateNode.componentTypes.each{ uct |
 			var similarComponentType : ComponentType init void
 			runtimeNode.componentTypes.each{ rct | 
-				if(rct.equals(uct)) then similarComponentType := uct end
+				if(rct.isEquals(uct)) then similarComponentType := uct end
 			}
 			if(similarComponentType == void)
 			then
@@ -123,7 +123,7 @@ class Komparator
 			var similarComponent : ComponentInstance init void
 			//SEARCH SIMILAR COMPONENT IN UPDATE MODEL
 			updateNode.components.each{ uc | 
-				if(uc.equals(rc)) then similarComponent := uc end
+				if(uc.isEquals(rc)) then similarComponent := uc end
 			}
 			if(similarComponent == void)
 			then
@@ -143,7 +143,7 @@ class Komparator
 		updateNode.components.each{ uc |
 			var similarComponent : ComponentInstance init void
 			runtimeNode.components.each{ rc | 
-				if(rc.equals(uc)) then similarComponent := uc end
+				if(rc.isEquals(uc)) then similarComponent := uc end
 			}
 			if(similarComponent == void)
 			then

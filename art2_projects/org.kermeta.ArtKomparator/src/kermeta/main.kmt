@@ -29,19 +29,39 @@ class Main
 		var nodeName : String init "duke.irisa.fr"
 	
 		var model : String init "file:/Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi"
+		var model2 : String init "file:/Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample2.xmi"
+		var model3 : String init "file:/Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample3.xmi"
+		
 		var mySystem : art2::ContainerRoot init loadART2Model(model)
+		var mySystem2 : art2::ContainerRoot init loadART2Model(model2)
+		var mySystem3 : art2::ContainerRoot init loadART2Model(model3)
+		
 		var factory : OSGiCommandFactory init OSGiCommandFactory.new
 		var komparator : Komparator init Komparator.new
-		
-		var commandSet : Set<Command> init komparator.kompare(void,mySystem,nodeName,factory)
 		
 		var contextCommand : CommandContext init CommandContext.new
 		contextCommand.runtimePATH := "///Users/ffouquet/Servers/apache-felix-karaf-1.2.0/deploy"
 		
+		stdio.writeln("TEST INIT")
+		var commandSet : Set<Command> init komparator.kompare(void,mySystem,nodeName,factory)
 		stdio.writeln("Try to execute "+commandSet.size().toString)
 		commandSet.each{c |
 			c.execute(contextCommand)
 		}
+		
+		stdio.writeln("TEST CHANGE BINDING")
+		var commandSet2 : Set<Command> init komparator.kompare(mySystem,mySystem2,nodeName,factory)
+		stdio.writeln("Try to execute "+commandSet2.size().toString)
+		commandSet2.each{c |
+			c.execute(contextCommand)
+		}
+		
+		stdio.writeln("TEST CHANGE ComponentInstance")
+		var commandSet3 : Set<Command> init komparator.kompare(mySystem2,mySystem3,nodeName,factory)
+		stdio.writeln("Try to execute "+commandSet.size().toString)
+		commandSet3.each{c |
+			c.execute(contextCommand)
+		}		
 		
 		
 		//mySystem.componentTypes.each{e | stdio.writeln("CPT "+e.name) }

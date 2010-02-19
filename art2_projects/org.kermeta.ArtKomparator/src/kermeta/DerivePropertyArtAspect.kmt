@@ -26,7 +26,7 @@ aspect class ComponentInstance {
 		//TEST COLLECTION REQUIRE PORT
 		if(ct.requirePorts.size == self.requirePorts.size)
 		then
-			result := not(requirePorts.forAll{p| ct.requirePorts.exists{ p2 | p2.equals(p) } })
+			result := not(requirePorts.forAll{p| ct.requirePorts.exists{ p2 | p2.isEquals(p) } })
 		else
 			result := true		
 		end
@@ -36,7 +36,7 @@ aspect class ComponentInstance {
 		then
 			if (ct.hostedPorts.size == self.hostedPorts.size )
 			then
-				result := not(hostedPorts.forAll{p| ct.hostedPorts.exists{ p2 | p2.equals(p) } })
+				result := not(hostedPorts.forAll{p| ct.hostedPorts.exists{ p2 | p2.isEquals(p) } })
 			else
 				result := true
 			end
@@ -50,7 +50,7 @@ aspect class ComponentInstance {
 			self.container.asType(ContainerNode).bindings.each{b|
 				b.ports.each{p|
 					self.requirePorts.each{np|
-						if(np.equals(p)) then neededBindingRuntime.add(b) end
+						if(np.isEquals(p)) then neededBindingRuntime.add(b) end
 					}
 				}
 			}
@@ -59,7 +59,7 @@ aspect class ComponentInstance {
 			ct.container.asType(ContainerNode).bindings.each{b|
 				b.ports.each{p|
 					self.requirePorts.each{np|
-						if(np.equals(p)) then neededBindingRuntime.add(b) end
+						if(np.isEquals(p)) then neededBindingRuntime.add(b) end
 					}
 				}
 			}
@@ -70,7 +70,7 @@ aspect class ComponentInstance {
 				neededBindingRuntime.each{b|
 					var subResult : Boolean init false
 					neededBindingUpdate.each{b2|
-						if(b.equals(b2)) then subResult := true end
+						if(b.isEquals(b2)) then subResult := true end
 					}
 					if(not(subResult)) then result := true end
 				}
@@ -95,7 +95,7 @@ aspect class Binding {
 		self.ports.each{p|
 			var subResult : Boolean init false
 			ct.ports.each{p2|
-				if(p.equals(p2)) then subResult := true end
+				if(p.isEquals(p2)) then subResult := true end
 			}
 			if(not(subResult)) then result := false end
 		}
