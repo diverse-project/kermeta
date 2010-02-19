@@ -1,0 +1,55 @@
+/* $Id:$ 
+ * Creation : February 5, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ffouquet
+ */
+
+package org::kermeta::art::deployer;
+
+require kermeta
+require "platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
+
+using kermeta::language::structure
+
+class CommandContext
+{
+	attribute runtimePATH : String 
+}
+
+
+/* Abstract Command */
+abstract class Command
+{
+	operation execute(ctx : CommandContext): Void is abstract
+}
+
+/* Abstract ComponentTypeCommand */
+abstract class ComponentTypeCommand inherits Command
+{
+	reference contextComponentType : art2::ComponentType
+	operation setContext(ct : art2::ComponentType) is do
+		contextComponentType := ct	
+	end
+}
+
+/* Abstract ComponentTypeCommand */
+abstract class ComponentInstanceCommand inherits Command
+{
+	reference contextComponentInstance : art2::ComponentInstance
+	operation setContext(ci : art2::ComponentInstance) is do
+		contextComponentInstance := ci
+	end
+}
+
+/* Abstract Command Factory */
+abstract class AbtractCommandFactory
+{
+	operation createCommandAddComponentType(ct : art2::ComponentType) : Command is abstract
+	operation createCommandRemoveComponentType(ct : art2::ComponentType) : Command is abstract
+	operation createCommandAddComponentInstance(c : art2::ComponentInstance) : Command is abstract
+	operation createCommandRemoveComponentInstance(c : art2::ComponentInstance) : Command is abstract
+	operation createCommandUpdateComponentInstance(c : art2::ComponentInstance) : Command is abstract
+}
+

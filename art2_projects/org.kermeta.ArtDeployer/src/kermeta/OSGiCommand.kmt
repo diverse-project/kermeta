@@ -1,0 +1,110 @@
+/* $Id:$ 
+ * Creation : February 5, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ffouquet
+ */
+
+package org::kermeta::art::deployer;
+
+require kermeta
+require "AbstractArtDeployCommand.kmt"
+require "platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
+require "templates/karaf_feature_template.kmt"
+require "templates/blueprint_component_template.kmt"
+using kermeta::io
+using kermeta::standard
+
+using org::kermeta::art::generator
+
+class OSGiCommandFactory inherits AbtractCommandFactory
+{
+	method createCommandAddComponentType(ct : art2::ComponentType) : Command is do 
+		var cmd : ComponentTypeCommand init AddComponentType.new
+		cmd.setContext(ct)
+		result:= cmd
+	end
+	method createCommandRemoveComponentType(ct : art2::ComponentType) : Command is do 
+		var cmd : ComponentTypeCommand init RemoveComponentType.new
+		cmd.setContext(ct)
+		result:= cmd
+	end
+	method createCommandAddComponentInstance(ci : art2::ComponentInstance) : Command is do 
+		var cmd : ComponentInstanceCommand init AddComponentInstance.new
+		cmd.setContext(ci)
+		result:= cmd 
+	end
+	method createCommandRemoveComponentInstance(ci : art2::ComponentInstance) : Command is do 
+		var cmd : ComponentInstanceCommand init RemoveComponentInstance.new
+		cmd.setContext(ci)
+		result:= cmd
+	end
+	method createCommandUpdateComponentInstance(ci : art2::ComponentInstance) : Command is do 
+		var cmd : ComponentInstanceCommand init UpdateComponentInstance.new
+		cmd.setContext(ci)
+		result:= cmd 
+	end
+}
+
+class AddComponentType inherits ComponentTypeCommand
+{
+	method execute(ctx : CommandContext) is do 
+		//GENERATE & DEPLOY A FEATURE LOADING A JAR FROM MAVEN
+		var generator : FeatureGenerator init FeatureGenerator.new
+		stdio.writeln("Generate "+self.contextComponentType.name+" Feature to "+ctx.runtimePATH)
+		var fileIO : FileIO init FileIO.new 
+		var xml : String init generator.generate(contextComponentType.asType(art2::DeployUnit))
+		var url : String init "file:"+ctx.runtimePATH+"/feature_"+contextComponentType.name+".xml"
+		fileIO.writeTextFile(url,xml)
+	end
+}
+
+class RemoveComponentType inherits ComponentTypeCommand
+{
+	method execute(ctx : CommandContext) is do 
+	//UNDEPLOY A FEATURE LOADING A JAR FROM MAVEN
+		var fileIO : FileIO init FileIO.new 
+		var url : String init "file:"+ctx.runtimePATH+"/feature_"+contextComponentType.name+".xml"
+		fileIO.writeTextFile(url,"")
+	end
+}
+
+class AddComponentInstance inherits ComponentInstanceCommand
+{
+	method execute(ctx : CommandContext) is do 
+	//GENERATE & DEPLOY A BLUEPRINT INSTANCE
+		var generator : BluePrintGenerator init BluePrintGenerator.new
+		stdio.writeln("Generate "+self.contextComponentInstance.name+" BluePrintComponent to "+ctx.runtimePATH)
+		var fileIO : FileIO init FileIO.new 
+		var xml : String init generator.generate(contextComponentInstance)
+		var url : String init "file:"+ctx.runtimePATH+"/component_"+contextComponentInstance.name+".xml"
+		fileIO.writeTextFile(url,xml)
+	end
+}
+
+class RemoveComponentInstance inherits ComponentInstanceCommand
+{
+	method execute(ctx : CommandContext) is do 
+	//UNDEPLOY A BLUEPRINT INSTANCE
+		var fileIO : FileIO init FileIO.new 
+		var url : String init "file:"+ctx.runtimePATH+"/component_"+contextComponentInstance.name+".xml"
+		fileIO.writeTextFile(url,"")
+	end
+}
+
+class UpdateComponentInstance inherits ComponentInstanceCommand
+{
+	method execute(ctx : CommandContext) is do
+	//UPDATE AN ALREADY DEPLOY BLUEPRINT INSTANCE
+		var generator : BluePrintGenerator init BluePrintGenerator.new
+		stdio.writeln("Generate "+self.contextComponentInstance.name+" BluePrintComponent to "+ctx.runtimePATH)
+		var fileIO : FileIO init FileIO.new 
+		var xml : String init generator.generate(contextComponentInstance)
+		var url : String init "file:"+ctx.runtimePATH+"/component_"+contextComponentInstance.name+".xml"
+		fileIO.writeTextFile(url,xml)
+	end
+}
+
+
+

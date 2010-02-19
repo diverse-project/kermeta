@@ -1,0 +1,16 @@
+<%@ket
+package="org::kermeta::art::generator"
+require="platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
+using=""
+isAspectClass="false"
+class="FeatureGenerator"
+ismethod="false"operation="generate"
+parameters="cpt : art2::DeployUnit"
+%>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->
+<features>
+<feature name="<%=cpt.name%>" version="<%=cpt.version%>"> 
+	<bundle>mvn:<%=cpt.groupName%>/<%=cpt.unitName%>/<%=cpt.version%></bundle> 
+</feature>
+</features>

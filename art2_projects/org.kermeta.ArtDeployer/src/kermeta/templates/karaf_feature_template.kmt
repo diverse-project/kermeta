@@ -1,0 +1,22 @@
+package org::kermeta::art::generator;
+require kermeta
+require "platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
+using kermeta::standard
+using kermeta::utils
+class FeatureGenerator{
+operation generate(cpt : art2::DeployUnit):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->\n<features>\n<feature name=\"")
+_res.append(cpt.name)
+_res.append("\" version=\"")
+_res.append(cpt.version)
+_res.append("\"> \n\t<bundle>mvn:")
+_res.append(cpt.groupName)
+_res.append("/")
+_res.append(cpt.unitName)
+_res.append("/")
+_res.append(cpt.version)
+_res.append("</bundle> \n</feature>\n</features>")
+result := _res.toString
+end
+}
