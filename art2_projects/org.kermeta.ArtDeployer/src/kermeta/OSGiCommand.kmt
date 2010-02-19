@@ -65,6 +65,7 @@ class RemoveComponentType inherits ComponentTypeCommand
 	method execute(ctx : CommandContext) is do 
 	//UNDEPLOY A FEATURE LOADING A JAR FROM MAVEN
 		var fileIO : FileIO init FileIO.new 
+		stdio.writeln("Undeploy "+self.contextComponentType.name+" Feature to "+ctx.runtimePATH)
 		var url : String init "file:"+ctx.runtimePATH+"/feature_"+contextComponentType.name+".xml"
 		fileIO.writeTextFile(url,"")
 	end
@@ -88,6 +89,7 @@ class RemoveComponentInstance inherits ComponentInstanceCommand
 	method execute(ctx : CommandContext) is do 
 	//UNDEPLOY A BLUEPRINT INSTANCE
 		var fileIO : FileIO init FileIO.new 
+		stdio.writeln("Undeploy "+contextComponentInstance.name+" ComponentInstance to "+ctx.runtimePATH)
 		var url : String init "file:"+ctx.runtimePATH+"/component_"+contextComponentInstance.name+".xml"
 		fileIO.writeTextFile(url,"")
 	end
@@ -98,7 +100,7 @@ class UpdateComponentInstance inherits ComponentInstanceCommand
 	method execute(ctx : CommandContext) is do
 	//UPDATE AN ALREADY DEPLOY BLUEPRINT INSTANCE
 		var generator : BluePrintGenerator init BluePrintGenerator.new
-		stdio.writeln("Generate "+self.contextComponentInstance.name+" BluePrintComponent to "+ctx.runtimePATH)
+		stdio.writeln("GenerateUpdate "+self.contextComponentInstance.name+" BluePrintComponent to "+ctx.runtimePATH)
 		var fileIO : FileIO init FileIO.new 
 		var xml : String init generator.generate(contextComponentInstance)
 		var url : String init "file:"+ctx.runtimePATH+"/component_"+contextComponentInstance.name+".xml"
