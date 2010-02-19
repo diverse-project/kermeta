@@ -1,0 +1,61 @@
+/* $Id:$ 
+ * Creation : February 12, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ffouquet
+ */
+@mainClass "org::kermeta::artKomparator::Main"
+@mainOperation "main"
+
+
+package org::kermeta::artKomparator;
+
+require kermeta
+require "platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
+require "platform:/resource/org.kermeta.ArtDeployer/src/kermeta/OSGiCommand.kmt"
+require "Komparator.kmt"
+using kermeta::persistence
+using kermeta::standard
+using kermeta::io
+using org::kermeta::art::deployer
+using org::kermeta::komparator
+
+class Main
+{
+	operation main() : Void is do 
+	
+		stdio.writeln("INIT DEF")
+		var nodeName : String init "duke.irisa.fr"
+	
+		var model : String init "file:/Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi"
+		var mySystem : art2::ContainerRoot init loadART2Model(model)
+		var factory : OSGiCommandFactory init OSGiCommandFactory.new
+		var komparator : Komparator init Komparator.new
+		
+		var commandSet : Set<Command> init komparator.kompare(void,mySystem,nodeName,factory)
+		
+		var contextCommand : CommandContext init CommandContext.new
+		contextCommand.runtimePATH := "///Users/ffouquet/Servers/apache-felix-karaf-1.2.0/deploy"
+		
+		stdio.writeln("Try to execute "+commandSet.size().toString)
+		commandSet.each{c |
+			c.execute(contextCommand)
+		}
+		
+		
+		//mySystem.componentTypes.each{e | stdio.writeln("CPT "+e.name) }
+		
+		//mySystem.nodes.each{n | stdio.writeln("NDE "+n.name) n.components.each{c | stdio.writeln("cp"+c.name)  }}
+		
+		
+	end
+	
+	operation loadART2Model(model : String) : art2::ContainerRoot is
+	do
+		var res : Resource init EMFRepository.new.createResource(model, "platform:/resource/org.kermeta.art.model/metamodel/art.ecore")
+		res.load
+		result := res.one.asType(art2::ContainerRoot)	
+	end
+	
+}

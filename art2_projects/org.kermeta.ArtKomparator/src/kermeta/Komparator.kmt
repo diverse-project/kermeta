@@ -1,0 +1,139 @@
+/* $Id:$ 
+ * Creation : February 4, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ffouquet
+ */
+@mainClass "org::kermeta::komparator::Komparator"
+@mainOperation "kompare"
+
+
+package org::kermeta::komparator;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
+require "platform:/resource/org.kermeta.ArtDeployer/src/kermeta/AbstractArtDeployCommand.kmt"
+
+using kermeta::persistence
+using kermeta::standard
+using kermeta::io
+using art2
+using org::kermeta::art::deployer
+
+class Komparator
+{
+	operation kompare(runtimeModel : art2::ContainerRoot, updateModel : art2::ContainerRoot , deployNodeName : String , factory : org::kermeta::art::deployer::AbtractCommandFactory) : OrderedSet<org::kermeta::art::deployer::Command>  is do 
+	
+		result := OrderedSet<org::kermeta::art::deployer::Command>.new
+
+		
+		if(runtimeModel.isVoid)
+		then 
+			//INIT NODE
+			if(updateModel.isVoid)
+				then stdio.writeln("Both model void , nothing to do")
+			else
+			updateModel.nodes.each{node|
+				if(node.name.equals(deployNodeName)) 
+				then 
+					result.addAll(initNode(node,factory))
+				end
+			}
+			end
+		else
+			//PERFORM DIF
+					//STEP 0 - FOUND the NODE
+			//var actualRuntimeNode : art2::ContainerNode init void
+		end
+		/*
+		runtimeModel.nodes.each{node|
+			if(node.name.equals(deployNodeName)) 
+			then 
+				actualRuntimeNode := node
+			end
+		}
+		
+		STEP 1 - CHECK IF ACTUAL NODE IS PRESENT IN UPDATE MODEL
+		var actualUpdateNode : art2::ContainerNode init void
+		updateModel.nodes.each{node|
+			if(node.name.equals(deployNodeName)) 
+			then 
+				actualUpdateNode := node
+			end
+		}
+		if(actualUpdateNode == void)
+		then 
+			//TODO STOP NODE
+		end 
+		
+		//STEP 2 - ComponentType
+		//ADD / REMOVE COMPONENT TYPE
+		
+		//TODO
+		
+		STEP 2 - Component Add/Remove
+		runtimeModel.nodes.each{c|
+			stdio.writeln("Process Node "+c.name)
+			
+			
+			
+			
+			
+		
+		}
+		*/
+
+	end
+	
+	operation isContain(ct : art2::ComponentType,targetNode : art2::ContainerNode) : Boolean is do
+		result := false
+		/*
+		targetNode.componentTypes.each{eachct|
+			if(eachct.name.equals(ct.name)) 
+			then 
+				result := false
+			end
+		}*/
+	end
+	
+	operation containByName(n : NamedElement , s : Set<ComponentType> ) : Boolean is do 
+		result:= false
+		s.each{ e |
+			if(n.name.equals(e.name))
+			then result := true end
+		}
+	end
+	
+	operation initNode(node : ContainerNode,factory : AbtractCommandFactory) : OrderedSet<org::kermeta::art::deployer::Command> is do
+		result := OrderedSet<org::kermeta::art::deployer::Command>.new
+		stdio.writeln("DEBUG : INIT NODE : "+node.name)
+		
+		var alreadyDeployComponentType : Set<ComponentType> init Set<ComponentType>.new
+		
+		node.components.each{c|
+			var ct : ComponentType init c.componentType
+			if(not(containByName(ct,alreadyDeployComponentType)))
+			then 
+				stdio.writeln("DEBUG : PROCESS "+ct.name)
+				alreadyDeployComponentType.add(ct)
+				result.add(factory.createCommandAddComponentType(ct))
+			end	
+		}
+		
+		node.components.each{c|
+			result.add(factory.createCommandAddComponentInstance(c))
+		}
+		
+		
+	end
+	
+	
+}
+
+
+
+
+
+

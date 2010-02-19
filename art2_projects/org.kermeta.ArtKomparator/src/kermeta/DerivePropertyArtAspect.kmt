@@ -1,0 +1,70 @@
+/* $Id:$ 
+ * Creation : February 18, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ffouquet
+ */
+
+package art2;
+
+require kermeta
+require "platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
+
+using art2
+using kermeta::standard
+
+aspect class ComponentInstance {
+
+	operation isEquals(ct : ComponentInstance) : Boolean is do
+		if(ct.name == self.name) then result := true else result := false end
+	end
+	
+	operation isUpdated(ct : ComponentInstance) : Boolean is do
+		result := false
+		
+		//TEST COLLECTION REQUIRE PORT
+		if(ct.requirePorts.size == self.requirePorts.size)
+		then
+			result := not(requirePorts.forAll{p| ct.requirePorts.exists{ p2 | p2.equals(p) } })
+		else
+			result := true		
+		end
+		
+		//TEST COLLECTION HOSTED PORT
+		if(not(result))
+		then
+			if (ct.hostedPorts.size == self.hostedPorts.size )
+			then
+				result := not(hostedPorts.forAll{p| ct.hostedPorts.exists{ p2 | p2.equals(p) } })
+			else
+				result := true
+			end
+		end
+		
+		//TEST COLLECTION BINDINGS
+		if(not(result))
+		then
+			
+		end
+		
+		
+		
+		
+		
+	end	
+	
+
+}
+
+aspect class ComponentType {
+	operation isEquals(ct : ComponentType) : Boolean is do
+		if(ct.name == self.name) then result := true else result := false end
+	end
+}
+
+
+aspect class ContainerNode {
+	
+}
+
