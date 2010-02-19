@@ -45,16 +45,61 @@ aspect class ComponentInstance {
 		//TEST COLLECTION BINDINGS
 		if(not(result))
 		then
+			//ckeck all bindings from runtime node where neededPorts used
+			var neededBindingRuntime : OrderedSet<Binding> init OrderedSet<Binding>.new
+			self.container.asType(ContainerNode).bindings.each{b|
+				b.ports.each{p|
+					self.requirePorts.each{np|
+						if(np.equals(p)) then neededBindingRuntime.add(b) end
+					}
+				}
+			}
+			//check all bindings from update node where neededPorts used
+			var neededBindingUpdate : OrderedSet<Binding> init OrderedSet<Binding>.new
+			ct.container.asType(ContainerNode).bindings.each{b|
+				b.ports.each{p|
+					self.requirePorts.each{np|
+						if(np.equals(p)) then neededBindingRuntime.add(b) end
+					}
+				}
+			}
 			
+			if (ct.hostedPorts.size == self.hostedPorts.size )
+			then
+				//every runtime needed binding is contain in update needed binding
+				neededBindingRuntime.each{b|
+					var subResult : Boolean init false
+					neededBindingUpdate.each{b2|
+						if(b.equals(b2)) then subResult := true end
+					}
+					if(not(subResult)) then result := true end
+				}
+			else
+				result := true
+			end
 		end
-		
-		
-		
-		
-		
 	end	
 	
 
+}
+
+aspect class Port {
+	operation isEquals(ct : Port) : Boolean is do
+		if(ct.name == self.name) then result := true else result := false end
+	end
+}
+
+aspect class Binding {
+	operation isEquals(ct : Binding) : Boolean is do
+		result := true
+		self.ports.each{p|
+			var subResult : Boolean init false
+			ct.ports.each{p2|
+				if(p.equals(p2)) then subResult := true end
+			}
+			if(not(subResult)) then result := false end
+		}
+	end
 }
 
 aspect class ComponentType {
@@ -63,8 +108,9 @@ aspect class ComponentType {
 	end
 }
 
-
 aspect class ContainerNode {
-	
+	operation isEquals(ct : ContainerNode) : Boolean is do
+		if(ct.name == self.name) then result := true else result := false end
+	end	
 }
 
