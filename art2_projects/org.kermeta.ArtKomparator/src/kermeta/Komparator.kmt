@@ -15,6 +15,7 @@ package org::kermeta::komparator;
 require kermeta
 require "platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
 require "platform:/resource/org.kermeta.ArtDeployer/src/kermeta/AbstractArtDeployCommand.kmt"
+require "DerivePropertyArtAspect.kmt"
 
 using kermeta::persistence
 using kermeta::standard
@@ -31,9 +32,9 @@ class Komparator
 		
 		if(runtimeModel.isVoid)
 		then 
-			//INIT NODE
+			//VOID MODEL USE CASE
 			if(updateModel.isVoid)
-				then stdio.writeln("Both model void , nothing to do")
+				then stdio.writeln("KOMPARATOR INFO : Both input model are void , nothing to do")
 			else
 			updateModel.nodes.each{node|
 				if(node.name.equals(deployNodeName)) 
@@ -43,67 +44,23 @@ class Komparator
 			}
 			end
 		else
-			//PERFORM DIF
-					//STEP 0 - FOUND the NODE
-			//var actualRuntimeNode : art2::ContainerNode init void
+			//STEP 0 - FOUND LOCAL NODE
+			var actualRuntimeLocalNodes : Sequence<art2::ContainerNode> init runtimeModel.nodes.select{c| c.name.equals(deployNodeName) } 
+			var actualUpdateLocalNodes : Sequence<art2::ContainerNode> init updateModel.nodes.select{c| c.name.equals(deployNodeName) }
+			
+			if( (actualRuntimeLocalNodes.size == 0) and (actualUpdateLocalNodes.size > 0))
+			then 
+				//STOP ALL PREVIOUS THINGS RUNNING ON NODE
+				//TODO
+				//INIT NODE
+				result.addAll(initNode(actualUpdateLocalNodes.first,factory))
+			end
+			if( (actualRuntimeLocalNodes.size > 0) and (actualUpdateLocalNodes.size > 0))
+			then
+				//PERFORM DIF
+				result.addAll(updateNode(actualRuntimeLocalNodes.first,actualUpdateLocalNodes.first,factory))
+			end
 		end
-		/*
-		runtimeModel.nodes.each{node|
-			if(node.name.equals(deployNodeName)) 
-			then 
-				actualRuntimeNode := node
-			end
-		}
-		
-		STEP 1 - CHECK IF ACTUAL NODE IS PRESENT IN UPDATE MODEL
-		var actualUpdateNode : art2::ContainerNode init void
-		updateModel.nodes.each{node|
-			if(node.name.equals(deployNodeName)) 
-			then 
-				actualUpdateNode := node
-			end
-		}
-		if(actualUpdateNode == void)
-		then 
-			//TODO STOP NODE
-		end 
-		
-		//STEP 2 - ComponentType
-		//ADD / REMOVE COMPONENT TYPE
-		
-		//TODO
-		
-		STEP 2 - Component Add/Remove
-		runtimeModel.nodes.each{c|
-			stdio.writeln("Process Node "+c.name)
-			
-			
-			
-			
-			
-		
-		}
-		*/
-
-	end
-	
-	operation isContain(ct : art2::ComponentType,targetNode : art2::ContainerNode) : Boolean is do
-		result := false
-		/*
-		targetNode.componentTypes.each{eachct|
-			if(eachct.name.equals(ct.name)) 
-			then 
-				result := false
-			end
-		}*/
-	end
-	
-	operation containByName(n : NamedElement , s : Set<ComponentType> ) : Boolean is do 
-		result:= false
-		s.each{ e |
-			if(n.name.equals(e.name))
-			then result := true end
-		}
 	end
 	
 	operation initNode(node : ContainerNode,factory : AbtractCommandFactory) : OrderedSet<org::kermeta::art::deployer::Command> is do
@@ -114,7 +71,7 @@ class Komparator
 		
 		node.components.each{c|
 			var ct : ComponentType init c.componentType
-			if(not(containByName(ct,alreadyDeployComponentType)))
+			if(not(node.containByName(ct,alreadyDeployComponentType)))
 			then 
 				stdio.writeln("DEBUG : PROCESS "+ct.name)
 				alreadyDeployComponentType.add(ct)
@@ -125,6 +82,76 @@ class Komparator
 		node.components.each{c|
 			result.add(factory.createCommandAddComponentInstance(c))
 		}
+	end
+	
+	operation updateNode(runtimeNode : ContainerNode, updateNode : ContainerNode, factory : AbtractCommandFactory) : OrderedSet<org::kermeta::art::deployer::Command> is do
+		result := OrderedSet<org::kermeta::art::deployer::Command>.new
+		stdio.writeln("DEBUG : UPDATE NODE : "+updateNode.name)
+		
+		
+		var runtimeComponentType : Set<ComponentType> init Set<ComponentType>.new
+		var alreadyTestedUpdateComponentType : Set<ComponentType> init Set<ComponentType>.new
+		
+		//COMPONENT TYPE STEP
+		runtimeNode.componentTypes.each{ rct |
+			var similarComponentType : ComponentType init void
+			//SEARCH SIMILAR COMPONENT TYPE IN UPDATE MODEL
+			updateNode.componentTypes.each{ uct | 
+				if(uct.equals(rct)) then similarComponentType := uct end
+			}
+			if(similarComponentType == void)
+			then
+				//NOT FOUND , UNDEPLOY COMPONENT TYPE
+				result.add(factory.createCommandRemoveComponentType(rct))
+			end
+		}
+		
+		updateNode.componentTypes.each{ uct |
+			var similarComponentType : ComponentType init void
+			runtimeNode.componentTypes.each{ rct | 
+				if(rct.equals(uct)) then similarComponentType := uct end
+			}
+			if(similarComponentType == void)
+			then
+				//NOT FOUDN DEPLOY COMPONENT TYPE
+				result.add(factory.createCommandAddComponentType(uct))
+			end
+		}
+		
+		//COMPONENT INSTANCE STEP
+		runtimeNode.components.each{ rc |
+			var similarComponent : ComponentInstance init void
+			//SEARCH SIMILAR COMPONENT IN UPDATE MODEL
+			updateNode.components.each{ uc | 
+				if(uc.equals(rc)) then similarComponent := uc end
+			}
+			if(similarComponent == void)
+			then
+				//NOT FOUND , UNDEPLOY COMPONENT
+				result.add(factory.createCommandRemoveComponentInstance(rc))
+			else
+				//UPDATE COMPONENT INSTANCE
+				if(rc.isUpdated(similarComponent))
+				then
+					result.add(factory.createCommandUpdateComponentInstance(similarComponent))
+				else
+					//DO NOTHING
+				end
+			end
+		}
+		
+		updateNode.components.each{ uc |
+			var similarComponent : ComponentInstance init void
+			runtimeNode.components.each{ rc | 
+				if(rc.equals(uc)) then similarComponent := uc end
+			}
+			if(similarComponent == void)
+			then
+				//NOT FOUDN DEPLOY COMPONENT TYPE
+				result.add(factory.createCommandAddComponentInstance(uc))
+			end
+		}		
+
 		
 		
 	end

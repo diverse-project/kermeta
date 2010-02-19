@@ -112,5 +112,26 @@ aspect class ContainerNode {
 	operation isEquals(ct : ContainerNode) : Boolean is do
 		if(ct.name == self.name) then result := true else result := false end
 	end	
+	
+	property componentTypes : ComponentType[0..*] getter is do
+		var alreadyDeployComponentType : OrderedSet<ComponentType> init OrderedSet<ComponentType>.new
+		self.components.each{c|
+			var ct : ComponentType init c.componentType
+			if(not(containByName(ct,alreadyDeployComponentType)))
+			then 
+				alreadyDeployComponentType.add(ct)
+			end	
+		}
+		result := alreadyDeployComponentType
+	end
+	
+	operation containByName(n : NamedElement , s : Set<ComponentType> ) : Boolean is do 
+		result:= false
+		s.each{ e |
+			if(n.name.equals(e.name))
+			then result := true end
+		}
+	end
+	
 }
 
