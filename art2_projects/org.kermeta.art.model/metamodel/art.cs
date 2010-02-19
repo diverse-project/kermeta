@@ -28,10 +28,10 @@ TOKENSTYLES{
 	"offeredPortTypes" COLOR #7F0055, BOLD;
 	"ContainerNode" COLOR #7F0055, BOLD;
 	"components" COLOR #7F0055, BOLD;
-	"componentTypes" COLOR #7F0055, BOLD;
 	"bindings" COLOR #7F0055, BOLD;
 	"ContainerRoot" COLOR #7F0055, BOLD;
 	"nodes" COLOR #7F0055, BOLD;
+	"componentTypes" COLOR #7F0055, BOLD;
 	"repositories" COLOR #7F0055, BOLD;
 	"dataTypes" COLOR #7F0055, BOLD;
 	"availablePortImpl" COLOR #7F0055, BOLD;
@@ -39,7 +39,6 @@ TOKENSTYLES{
 	"impl" COLOR #7F0055, BOLD;
 	"interface" COLOR #7F0055, BOLD;
 	"Port" COLOR #7F0055, BOLD;
-	"portType" COLOR #7F0055, BOLD;
 	"portTypeRef" COLOR #7F0055, BOLD;
 	"Namespace" COLOR #7F0055, BOLD;
 	"childs" COLOR #7F0055, BOLD;
@@ -54,12 +53,10 @@ TOKENSTYLES{
 	"defaultValues" COLOR #7F0055, BOLD;
 	"DictionaryAttribute" COLOR #7F0055, BOLD;
 	"datatype" COLOR #7F0055, BOLD;
-	"type" COLOR #7F0055, BOLD;
 	"DictionaryValue" COLOR #7F0055, BOLD;
 	"attribute" COLOR #7F0055, BOLD;
 	"Binding" COLOR #7F0055, BOLD;
 	"ports" COLOR #7F0055, BOLD;
-	"output" COLOR #7F0055, BOLD;
 	"CompositeType" COLOR #7F0055, BOLD;
 	"childPortTypes" COLOR #7F0055, BOLD;
 	"wires" COLOR #7F0055, BOLD;
@@ -84,6 +81,8 @@ TOKENSTYLES{
 	"IntegrationPattern" COLOR #7F0055, BOLD;
 	"portTypes" COLOR #7F0055, BOLD;
 	"ExtraFonctionalProperty" COLOR #7F0055, BOLD;
+	"OSGiScrDataType" COLOR #7F0055, BOLD;
+	"interfaceImpl" COLOR #7F0055, BOLD;
 }
 
 RULES{
@@ -92,13 +91,13 @@ RULES{
 	
 	ComponentType::= "ComponentType"  "{" ( "name"  ":" name['"','"'] | "groupName"  ":" groupName['"','"'] | "unitName"  ":" unitName['"','"'] | "version"  ":" version['"','"'] | "hostedPortTypes"  ":" hostedPortTypes | "dictionary"  ":" dictionary | "bean"  ":" bean['"','"'] | "neededPortTypes"  ":" neededPortTypes | "integrationPatterns"  ":" integrationPatterns | "extraFonctionalProperties"  ":" extraFonctionalProperties | "offeredPortTypes"  ":" offeredPortTypes  )* "}"  ;
 	
-	ContainerNode::= "ContainerNode"  "{" ( "name"  ":" name['"','"'] | "components"  ":" components | "componentTypes"  ":" componentTypes[]| "bindings"  ":" bindings  )* "}"  ;
+	ContainerNode::= "ContainerNode"  "{" ( "name"  ":" name['"','"'] | "components"  ":" components | "bindings"  ":" bindings  )* "}"  ;
 	
 	ContainerRoot::= "ContainerRoot"  "{" ( "nodes"  ":" nodes | "componentTypes"  ":" componentTypes | "repositories"  ":" repositories | "dataTypes"  ":" dataTypes | "availablePortImpl"  ":" availablePortImpl  )* "}"  ;
 	
-	PortType::=synchrone[]? "PortType"  "{" ( "name"  ":" name['"','"'] | "impl"  ":" impl[]| "interface"  ":" interface  )* "}"  ;
+	PortType::=synchrone[]? "PortType"  "{" ( "name"  ":" name['"','"'] | "impl"  ":" impl[]| "interface"  ":" interface | "bean"  ":" bean['"','"']  )* "}"  ;
 	
-	Port::= "Port"  "{" ( "name"  ":" name['"','"'] | "portType"  ":" portType[]| "portTypeRef"  ":" portTypeRef[] )* "}"  ;
+	Port::= "Port"  "{" ( "name"  ":" name['"','"'] | "portTypeRef"  ":" portTypeRef[] )* "}"  ;
 	
 	Namespace::= "Namespace"  "{" ( "name"  ":" name['"','"'] | "childs"  ":" childs | "parent"  ":" parent[] )* "}"  ;
 	
@@ -112,11 +111,11 @@ RULES{
 	
 	DictionaryType::= "DictionaryType"  "{" ( "attributes"  ":" attributes | "defaultValues"  ":" defaultValues  )* "}"  ;
 	
-	DictionaryAttribute::=optional[]? "DictionaryAttribute"  "{" ( "name"  ":" name['"','"'] | "datatype"  ":" datatype[]| "type"  ":" type[] )* "}"  ;
+	DictionaryAttribute::=optional[]? "DictionaryAttribute"  "{" ( "name"  ":" name['"','"'] | "datatype"  ":" datatype[] )* "}"  ;
 	
 	DictionaryValue::= "DictionaryValue"  "{" ( "attribute"  ":" attribute[] )* "}"  ;
 	
-	Binding::= "Binding"  "{" ( "ports"  ":" ports[]| "output"  ":" output[] )* "}"  ;
+	Binding::= "Binding"  "{" ( "ports"  ":" ports[] )* "}"  ;
 	
 	CompositeType::= "CompositeType"  "{" ( "name"  ":" name['"','"'] | "groupName"  ":" groupName['"','"'] | "unitName"  ":" unitName['"','"'] | "version"  ":" version['"','"'] | "hostedPortTypes"  ":" hostedPortTypes | "dictionary"  ":" dictionary | "bean"  ":" bean['"','"'] | "neededPortTypes"  ":" neededPortTypes | "integrationPatterns"  ":" integrationPatterns | "extraFonctionalProperties"  ":" extraFonctionalProperties | "offeredPortTypes"  ":" offeredPortTypes | "childs"  ":" childs | "childPortTypes"  ":" childPortTypes | "wires"  ":" wires[] )* "}"  ;
 	
@@ -128,7 +127,7 @@ RULES{
 	
 	Operation::= "Operation"  "{" ( "name"  ":" name['"','"'] | "parameters"  ":" parameters | "returnType"  ":" returnType[] )* "}"  ;
 	
-	Parameter::= "Parameter"  "{" ( "name"  ":" name['"','"'] | "datatype"  ":" datatype[]| "type"  ":" type[] )* "}"  ;
+	Parameter::= "Parameter"  "{" ( "name"  ":" name['"','"'] | "datatype"  ":" datatype[] )* "}"  ;
 	
 	TypedElement::= "TypedElement"  "{" ( "name"  ":" name['"','"'] | "datatype"  ":" datatype[] )* "}"  ;
 	
@@ -145,5 +144,7 @@ RULES{
 	IntegrationPattern::= "IntegrationPattern"  "{" ( "name"  ":" name['"','"'] | "extraFonctionalProperties"  ":" extraFonctionalProperties | "portTypes"  ":" portTypes[] )* "}"  ;
 	
 	ExtraFonctionalProperty::= "ExtraFonctionalProperty"  "{" ( "portTypes"  ":" portTypes[] )* "}"  ;
+	
+	OSGiScrDataType::= "OSGiScrDataType"  "{" ( "name"  ":" name['"','"'] | "operations"  ":" operations | "interfaceImpl"  ":" interfaceImpl['"','"']  )* "}"  ;
 	
 }

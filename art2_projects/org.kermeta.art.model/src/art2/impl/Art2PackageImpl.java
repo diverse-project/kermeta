@@ -28,6 +28,7 @@ import art2.IntegrationPattern;
 import art2.MessageDataType;
 import art2.NamedElement;
 import art2.Namespace;
+import art2.OSGiScrDataType;
 import art2.Operation;
 import art2.Parameter;
 import art2.Port;
@@ -280,6 +281,13 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	private EClass extraFonctionalPropertyEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass osGiScrDataTypeEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -489,17 +497,8 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainerNode_ComponentTypes() {
-		return (EReference)containerNodeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getContainerNode_Bindings() {
-		return (EReference)containerNodeEClass.getEStructuralFeatures().get(2);
+		return (EReference)containerNodeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -597,6 +596,15 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPortType_Bean() {
+		return (EAttribute)portTypeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPort() {
 		return portEClass;
 	}
@@ -606,17 +614,8 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPort_PortType() {
-		return (EReference)portEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getPort_PortTypeRef() {
-		return (EReference)portEClass.getEStructuralFeatures().get(1);
+		return (EReference)portEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -750,17 +749,8 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDictionaryAttribute_Type() {
-		return (EReference)dictionaryAttributeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getDictionaryAttribute_Optional() {
-		return (EAttribute)dictionaryAttributeEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)dictionaryAttributeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -797,15 +787,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 */
 	public EReference getBinding_Ports() {
 		return (EReference)bindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBinding_Output() {
-		return (EReference)bindingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -932,15 +913,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 */
 	public EClass getParameter() {
 		return parameterEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getParameter_Type() {
-		return (EReference)parameterEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1128,6 +1100,24 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getOSGiScrDataType() {
+		return osGiScrDataTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOSGiScrDataType_InterfaceImpl() {
+		return (EAttribute)osGiScrDataTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Art2Factory getArt2Factory() {
 		return (Art2Factory)getEFactoryInstance();
 	}
@@ -1169,7 +1159,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 
 		containerNodeEClass = createEClass(CONTAINER_NODE);
 		createEReference(containerNodeEClass, CONTAINER_NODE__COMPONENTS);
-		createEReference(containerNodeEClass, CONTAINER_NODE__COMPONENT_TYPES);
 		createEReference(containerNodeEClass, CONTAINER_NODE__BINDINGS);
 
 		containerRootEClass = createEClass(CONTAINER_ROOT);
@@ -1183,9 +1172,9 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEReference(portTypeEClass, PORT_TYPE__IMPL);
 		createEReference(portTypeEClass, PORT_TYPE__INTERFACE);
 		createEAttribute(portTypeEClass, PORT_TYPE__SYNCHRONE);
+		createEAttribute(portTypeEClass, PORT_TYPE__BEAN);
 
 		portEClass = createEClass(PORT);
-		createEReference(portEClass, PORT__PORT_TYPE);
 		createEReference(portEClass, PORT__PORT_TYPE_REF);
 
 		namespaceEClass = createEClass(NAMESPACE);
@@ -1210,7 +1199,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEReference(dictionaryTypeEClass, DICTIONARY_TYPE__DEFAULT_VALUES);
 
 		dictionaryAttributeEClass = createEClass(DICTIONARY_ATTRIBUTE);
-		createEReference(dictionaryAttributeEClass, DICTIONARY_ATTRIBUTE__TYPE);
 		createEAttribute(dictionaryAttributeEClass, DICTIONARY_ATTRIBUTE__OPTIONAL);
 
 		dictionaryValueEClass = createEClass(DICTIONARY_VALUE);
@@ -1218,7 +1206,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 
 		bindingEClass = createEClass(BINDING);
 		createEReference(bindingEClass, BINDING__PORTS);
-		createEReference(bindingEClass, BINDING__OUTPUT);
 
 		compositeTypeEClass = createEClass(COMPOSITE_TYPE);
 		createEReference(compositeTypeEClass, COMPOSITE_TYPE__CHILDS);
@@ -1239,7 +1226,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		createEReference(operationEClass, OPERATION__RETURN_TYPE);
 
 		parameterEClass = createEClass(PARAMETER);
-		createEReference(parameterEClass, PARAMETER__TYPE);
 
 		typedElementEClass = createEClass(TYPED_ELEMENT);
 		createEReference(typedElementEClass, TYPED_ELEMENT__DATATYPE);
@@ -1269,6 +1255,9 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 
 		extraFonctionalPropertyEClass = createEClass(EXTRA_FONCTIONAL_PROPERTY);
 		createEReference(extraFonctionalPropertyEClass, EXTRA_FONCTIONAL_PROPERTY__PORT_TYPES);
+
+		osGiScrDataTypeEClass = createEClass(OS_GI_SCR_DATA_TYPE);
+		createEAttribute(osGiScrDataTypeEClass, OS_GI_SCR_DATA_TYPE__INTERFACE_IMPL);
 	}
 
 	/**
@@ -1324,6 +1313,7 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		componentTypeLibraryEClass.getESuperTypes().add(this.getDeployUnit());
 		dataTypeEClass.getESuperTypes().add(this.getNamedElement());
 		integrationPatternEClass.getESuperTypes().add(this.getNamedElement());
+		osGiScrDataTypeEClass.getESuperTypes().add(this.getServiceDataType());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(componentInstanceEClass, ComponentInstance.class, "ComponentInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1344,7 +1334,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 
 		initEClass(containerNodeEClass, ContainerNode.class, "ContainerNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContainerNode_Components(), this.getComponentInstance(), null, "components", null, 0, -1, ContainerNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerNode_ComponentTypes(), this.getComponentType(), null, "componentTypes", null, 0, -1, ContainerNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainerNode_Bindings(), this.getBinding(), null, "bindings", null, 0, -1, ContainerNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(containerRootEClass, ContainerRoot.class, "ContainerRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1358,9 +1347,9 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEReference(getPortType_Impl(), this.getAbstractPortImpl(), null, "impl", null, 1, 1, PortType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPortType_Interface(), this.getAbstractDataType(), null, "interface", null, 1, 1, PortType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPortType_Synchrone(), ecorePackage.getEBoolean(), "synchrone", null, 0, 1, PortType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPortType_Bean(), ecorePackage.getEString(), "bean", null, 0, 1, PortType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portEClass, Port.class, "Port", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPort_PortType(), this.getPortType(), null, "portType", null, 1, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPort_PortTypeRef(), this.getPortTypeRef(), null, "portTypeRef", null, 1, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(namespaceEClass, Namespace.class, "Namespace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1385,7 +1374,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEReference(getDictionaryType_DefaultValues(), this.getDictionaryValue(), null, "defaultValues", null, 0, -1, DictionaryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dictionaryAttributeEClass, DictionaryAttribute.class, "DictionaryAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDictionaryAttribute_Type(), this.getTypedElement(), null, "type", null, 1, 1, DictionaryAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDictionaryAttribute_Optional(), ecorePackage.getEBoolean(), "optional", null, 0, 1, DictionaryAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dictionaryValueEClass, DictionaryValue.class, "DictionaryValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1393,7 +1381,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 
 		initEClass(bindingEClass, Binding.class, "Binding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBinding_Ports(), this.getPort(), null, "ports", null, 2, 2, Binding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBinding_Output(), this.getPort(), null, "output", null, 0, 1, Binding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(compositeTypeEClass, CompositeType.class, "CompositeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeType_Childs(), this.getComponentType(), null, "childs", null, 0, -1, CompositeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1414,7 +1401,6 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 		initEReference(getOperation_ReturnType(), this.getTypedElement(), null, "returnType", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getParameter_Type(), this.getTypedElement(), null, "type", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typedElementEClass, TypedElement.class, "TypedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypedElement_Datatype(), this.getDataType(), null, "datatype", null, 1, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1444,6 +1430,9 @@ public class Art2PackageImpl extends EPackageImpl implements Art2Package {
 
 		initEClass(extraFonctionalPropertyEClass, ExtraFonctionalProperty.class, "ExtraFonctionalProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExtraFonctionalProperty_PortTypes(), this.getPortTypeRef(), null, "portTypes", null, 0, -1, ExtraFonctionalProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(osGiScrDataTypeEClass, OSGiScrDataType.class, "OSGiScrDataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOSGiScrDataType_InterfaceImpl(), ecorePackage.getEString(), "interfaceImpl", null, 0, 1, OSGiScrDataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

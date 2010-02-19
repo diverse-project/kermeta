@@ -32,8 +32,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="ContainerNode" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
         eType="#//ComponentInstance" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
-        eType="#//ComponentType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
         eType="#//Binding" containment="true"/>
   </eClassifiers>
@@ -54,10 +52,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="interface" lowerBound="1"
         eType="#//AbstractDataType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="synchrone" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="portType" lowerBound="1"
-        eType="#//PortType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="portTypeRef" lowerBound="1"
         eType="#//PortTypeRef"/>
   </eClassifiers>
@@ -82,7 +79,6 @@
         eType="#//DictionaryValue" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DictionaryAttribute" eSuperTypes="#//TypedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//TypedElement"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DictionaryValue">
@@ -92,7 +88,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Binding">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ports" lowerBound="2" upperBound="2"
         eType="#//Port"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="output" eType="#//Port"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CompositeType" eSuperTypes="#//ComponentType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="childs" upperBound="-1"
@@ -117,9 +112,7 @@
         eType="#//Parameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//TypedElement"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypedElement #//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//TypedElement"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypedElement #//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="datatype" lowerBound="1"
         eType="#//DataType"/>
@@ -152,5 +145,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="ExtraFonctionalProperty">
     <eStructuralFeatures xsi:type="ecore:EReference" name="portTypes" upperBound="-1"
         eType="#//PortTypeRef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OSGiScrDataType" eSuperTypes="#//ServiceDataType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfaceImpl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

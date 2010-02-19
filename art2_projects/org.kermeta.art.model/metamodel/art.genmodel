@@ -24,7 +24,6 @@
     </genClasses>
     <genClasses ecoreClass="art.ecore#//ContainerNode">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerNode/components"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//ContainerNode/componentTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//ContainerNode/bindings"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//ContainerRoot">
@@ -38,9 +37,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//PortType/impl"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//PortType/interface"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//PortType/synchrone"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//PortType/bean"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//Port">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Port/portType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Port/portTypeRef"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//Namespace">
@@ -60,7 +59,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//DictionaryType/defaultValues"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//DictionaryAttribute">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//DictionaryAttribute/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//DictionaryAttribute/optional"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//DictionaryValue">
@@ -68,7 +66,6 @@
     </genClasses>
     <genClasses ecoreClass="art.ecore#//Binding">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Binding/ports"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Binding/output"/>
     </genClasses>
     <genClasses ecoreClass="art.ecore#//CompositeType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//CompositeType/childs"/>
@@ -88,9 +85,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference art.ecore#//Operation/parameters"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Operation/returnType"/>
     </genClasses>
-    <genClasses ecoreClass="art.ecore#//Parameter">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//Parameter/type"/>
-    </genClasses>
+    <genClasses ecoreClass="art.ecore#//Parameter"/>
     <genClasses ecoreClass="art.ecore#//TypedElement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//TypedElement/datatype"/>
     </genClasses>
@@ -117,6 +112,9 @@
     </genClasses>
     <genClasses ecoreClass="art.ecore#//ExtraFonctionalProperty">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference art.ecore#//ExtraFonctionalProperty/portTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="art.ecore#//OSGiScrDataType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute art.ecore#//OSGiScrDataType/interfaceImpl"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

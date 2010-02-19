@@ -314,6 +314,15 @@ public class Art2Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Art2Package.OS_GI_SCR_DATA_TYPE: {
+				OSGiScrDataType osGiScrDataType = (OSGiScrDataType)theEObject;
+				T result = caseOSGiScrDataType(osGiScrDataType);
+				if (result == null) result = caseServiceDataType(osGiScrDataType);
+				if (result == null) result = caseAbstractDataType(osGiScrDataType);
+				if (result == null) result = caseNamedElement(osGiScrDataType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -795,6 +804,21 @@ public class Art2Switch<T> {
 	 * @generated
 	 */
 	public T caseExtraFonctionalProperty(ExtraFonctionalProperty object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>OS Gi Scr Data Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>OS Gi Scr Data Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOSGiScrDataType(OSGiScrDataType object) {
 		return null;
 	}
 

@@ -7,56 +7,54 @@
 package art2.impl;
 
 import art2.Art2Package;
-import art2.DictionaryAttribute;
-import art2.TypedElement;
+import art2.OSGiScrDataType;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Dictionary Attribute</b></em>'.
+ * An implementation of the model object '<em><b>OS Gi Scr Data Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link art2.impl.DictionaryAttributeImpl#isOptional <em>Optional</em>}</li>
+ *   <li>{@link art2.impl.OSGiScrDataTypeImpl#getInterfaceImpl <em>Interface Impl</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class DictionaryAttributeImpl extends TypedElementImpl implements DictionaryAttribute {
+public class OSGiScrDataTypeImpl extends ServiceDataTypeImpl implements OSGiScrDataType {
 	/**
-	 * The default value of the '{@link #isOptional() <em>Optional</em>}' attribute.
+	 * The default value of the '{@link #getInterfaceImpl() <em>Interface Impl</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isOptional()
+	 * @see #getInterfaceImpl()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean OPTIONAL_EDEFAULT = false;
+	protected static final String INTERFACE_IMPL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #isOptional() <em>Optional</em>}' attribute.
+	 * The cached value of the '{@link #getInterfaceImpl() <em>Interface Impl</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isOptional()
+	 * @see #getInterfaceImpl()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean optional = OPTIONAL_EDEFAULT;
+	protected String interfaceImpl = INTERFACE_IMPL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DictionaryAttributeImpl() {
+	protected OSGiScrDataTypeImpl() {
 		super();
 	}
 
@@ -67,7 +65,7 @@ public class DictionaryAttributeImpl extends TypedElementImpl implements Diction
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return Art2Package.Literals.DICTIONARY_ATTRIBUTE;
+		return Art2Package.Literals.OS_GI_SCR_DATA_TYPE;
 	}
 
 	/**
@@ -75,8 +73,8 @@ public class DictionaryAttributeImpl extends TypedElementImpl implements Diction
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isOptional() {
-		return optional;
+	public String getInterfaceImpl() {
+		return interfaceImpl;
 	}
 
 	/**
@@ -84,11 +82,11 @@ public class DictionaryAttributeImpl extends TypedElementImpl implements Diction
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOptional(boolean newOptional) {
-		boolean oldOptional = optional;
-		optional = newOptional;
+	public void setInterfaceImpl(String newInterfaceImpl) {
+		String oldInterfaceImpl = interfaceImpl;
+		interfaceImpl = newInterfaceImpl;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.DICTIONARY_ATTRIBUTE__OPTIONAL, oldOptional, optional));
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.OS_GI_SCR_DATA_TYPE__INTERFACE_IMPL, oldInterfaceImpl, interfaceImpl));
 	}
 
 	/**
@@ -99,8 +97,8 @@ public class DictionaryAttributeImpl extends TypedElementImpl implements Diction
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Art2Package.DICTIONARY_ATTRIBUTE__OPTIONAL:
-				return isOptional();
+			case Art2Package.OS_GI_SCR_DATA_TYPE__INTERFACE_IMPL:
+				return getInterfaceImpl();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -113,8 +111,8 @@ public class DictionaryAttributeImpl extends TypedElementImpl implements Diction
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Art2Package.DICTIONARY_ATTRIBUTE__OPTIONAL:
-				setOptional((Boolean)newValue);
+			case Art2Package.OS_GI_SCR_DATA_TYPE__INTERFACE_IMPL:
+				setInterfaceImpl((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,8 +126,8 @@ public class DictionaryAttributeImpl extends TypedElementImpl implements Diction
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Art2Package.DICTIONARY_ATTRIBUTE__OPTIONAL:
-				setOptional(OPTIONAL_EDEFAULT);
+			case Art2Package.OS_GI_SCR_DATA_TYPE__INTERFACE_IMPL:
+				setInterfaceImpl(INTERFACE_IMPL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -143,8 +141,8 @@ public class DictionaryAttributeImpl extends TypedElementImpl implements Diction
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Art2Package.DICTIONARY_ATTRIBUTE__OPTIONAL:
-				return optional != OPTIONAL_EDEFAULT;
+			case Art2Package.OS_GI_SCR_DATA_TYPE__INTERFACE_IMPL:
+				return INTERFACE_IMPL_EDEFAULT == null ? interfaceImpl != null : !INTERFACE_IMPL_EDEFAULT.equals(interfaceImpl);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -159,10 +157,10 @@ public class DictionaryAttributeImpl extends TypedElementImpl implements Diction
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (optional: ");
-		result.append(optional);
+		result.append(" (interfaceImpl: ");
+		result.append(interfaceImpl);
 		result.append(')');
 		return result.toString();
 	}
 
-} //DictionaryAttributeImpl
+} //OSGiScrDataTypeImpl

@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link art2.impl.PortTypeImpl#getImpl <em>Impl</em>}</li>
  *   <li>{@link art2.impl.PortTypeImpl#getInterface <em>Interface</em>}</li>
  *   <li>{@link art2.impl.PortTypeImpl#isSynchrone <em>Synchrone</em>}</li>
+ *   <li>{@link art2.impl.PortTypeImpl#getBean <em>Bean</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,6 +75,26 @@ public class PortTypeImpl extends NamedElementImpl implements PortType {
 	 * @ordered
 	 */
 	protected boolean synchrone = SYNCHRONE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getBean() <em>Bean</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBean()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String BEAN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getBean() <em>Bean</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBean()
+	 * @generated
+	 * @ordered
+	 */
+	protected String bean = BEAN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -201,6 +222,27 @@ public class PortTypeImpl extends NamedElementImpl implements PortType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getBean() {
+		return bean;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBean(String newBean) {
+		String oldBean = bean;
+		bean = newBean;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Art2Package.PORT_TYPE__BEAN, oldBean, bean));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -225,6 +267,8 @@ public class PortTypeImpl extends NamedElementImpl implements PortType {
 				return getInterface();
 			case Art2Package.PORT_TYPE__SYNCHRONE:
 				return isSynchrone();
+			case Art2Package.PORT_TYPE__BEAN:
+				return getBean();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -245,6 +289,9 @@ public class PortTypeImpl extends NamedElementImpl implements PortType {
 				return;
 			case Art2Package.PORT_TYPE__SYNCHRONE:
 				setSynchrone((Boolean)newValue);
+				return;
+			case Art2Package.PORT_TYPE__BEAN:
+				setBean((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -267,6 +314,9 @@ public class PortTypeImpl extends NamedElementImpl implements PortType {
 			case Art2Package.PORT_TYPE__SYNCHRONE:
 				setSynchrone(SYNCHRONE_EDEFAULT);
 				return;
+			case Art2Package.PORT_TYPE__BEAN:
+				setBean(BEAN_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -285,6 +335,8 @@ public class PortTypeImpl extends NamedElementImpl implements PortType {
 				return interface_ != null;
 			case Art2Package.PORT_TYPE__SYNCHRONE:
 				return synchrone != SYNCHRONE_EDEFAULT;
+			case Art2Package.PORT_TYPE__BEAN:
+				return BEAN_EDEFAULT == null ? bean != null : !BEAN_EDEFAULT.equals(bean);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -301,6 +353,8 @@ public class PortTypeImpl extends NamedElementImpl implements PortType {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (synchrone: ");
 		result.append(synchrone);
+		result.append(", bean: ");
+		result.append(bean);
 		result.append(')');
 		return result.toString();
 	}

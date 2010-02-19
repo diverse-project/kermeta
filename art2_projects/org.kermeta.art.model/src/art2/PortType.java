@@ -18,6 +18,7 @@ package art2;
  *   <li>{@link art2.PortType#getImpl <em>Impl</em>}</li>
  *   <li>{@link art2.PortType#getInterface <em>Interface</em>}</li>
  *   <li>{@link art2.PortType#isSynchrone <em>Synchrone</em>}</li>
+ *   <li>{@link art2.PortType#getBean <em>Bean</em>}</li>
  * </ul>
  * </p>
  *
@@ -103,5 +104,31 @@ public interface PortType extends NamedElement {
 	 * @generated
 	 */
 	void setSynchrone(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Bean</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bean</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Bean</em>' attribute.
+	 * @see #setBean(String)
+	 * @see art2.Art2Package#getPortType_Bean()
+	 * @model
+	 * @generated
+	 */
+	String getBean();
+
+	/**
+	 * Sets the value of the '{@link art2.PortType#getBean <em>Bean</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bean</em>' attribute.
+	 * @see #getBean()
+	 * @generated
+	 */
+	void setBean(String value);
 
 } // PortType

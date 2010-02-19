@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link art2.Binding#getPorts <em>Ports</em>}</li>
- *   <li>{@link art2.Binding#getOutput <em>Output</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,31 +42,5 @@ public interface Binding extends EObject {
 	 * @generated
 	 */
 	EList<Port> getPorts();
-
-	/**
-	 * Returns the value of the '<em><b>Output</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Output</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Output</em>' reference.
-	 * @see #setOutput(Port)
-	 * @see art2.Art2Package#getBinding_Output()
-	 * @model
-	 * @generated
-	 */
-	Port getOutput();
-
-	/**
-	 * Sets the value of the '{@link art2.Binding#getOutput <em>Output</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Output</em>' reference.
-	 * @see #getOutput()
-	 * @generated
-	 */
-	void setOutput(Port value);
 
 } // Binding

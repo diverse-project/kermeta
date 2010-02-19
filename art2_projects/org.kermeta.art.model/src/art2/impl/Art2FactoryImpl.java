@@ -89,6 +89,7 @@ public class Art2FactoryImpl extends EFactoryImpl implements Art2Factory {
 			case Art2Package.DATA_TYPE: return createDataType();
 			case Art2Package.INTEGRATION_PATTERN: return createIntegrationPattern();
 			case Art2Package.EXTRA_FONCTIONAL_PROPERTY: return createExtraFonctionalProperty();
+			case Art2Package.OS_GI_SCR_DATA_TYPE: return createOSGiScrDataType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -382,6 +383,16 @@ public class Art2FactoryImpl extends EFactoryImpl implements Art2Factory {
 	public ExtraFonctionalProperty createExtraFonctionalProperty() {
 		ExtraFonctionalPropertyImpl extraFonctionalProperty = new ExtraFonctionalPropertyImpl();
 		return extraFonctionalProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OSGiScrDataType createOSGiScrDataType() {
+		OSGiScrDataTypeImpl osGiScrDataType = new OSGiScrDataTypeImpl();
+		return osGiScrDataType;
 	}
 
 	/**

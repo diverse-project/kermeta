@@ -362,22 +362,13 @@ public interface Art2Package extends EPackage {
 	int CONTAINER_NODE__COMPONENTS = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Component Types</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTAINER_NODE__COMPONENT_TYPES = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_NODE__BINDINGS = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int CONTAINER_NODE__BINDINGS = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Container Node</em>' class.
@@ -386,7 +377,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_NODE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int CONTAINER_NODE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link art2.impl.ContainerRootImpl <em>Container Root</em>}' class.
@@ -499,13 +490,22 @@ public interface Art2Package extends EPackage {
 	int PORT_TYPE__SYNCHRONE = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Bean</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_TYPE__BEAN = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Port Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int PORT_TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link art2.impl.PortImpl <em>Port</em>}' class.
@@ -527,22 +527,13 @@ public interface Art2Package extends EPackage {
 	int PORT__NAME = NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Port Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PORT__PORT_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Port Type Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__PORT_TYPE_REF = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int PORT__PORT_TYPE_REF = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Port</em>' class.
@@ -551,7 +542,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int PORT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link art2.impl.NamespaceImpl <em>Namespace</em>}' class.
@@ -870,22 +861,13 @@ public interface Art2Package extends EPackage {
 	int DICTIONARY_ATTRIBUTE__DATATYPE = TYPED_ELEMENT__DATATYPE;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_ATTRIBUTE__TYPE = TYPED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_ATTRIBUTE__OPTIONAL = TYPED_ELEMENT_FEATURE_COUNT + 1;
+	int DICTIONARY_ATTRIBUTE__OPTIONAL = TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Dictionary Attribute</em>' class.
@@ -894,7 +876,7 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_ATTRIBUTE_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 2;
+	int DICTIONARY_ATTRIBUTE_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link art2.impl.DictionaryValueImpl <em>Dictionary Value</em>}' class.
@@ -944,22 +926,13 @@ public interface Art2Package extends EPackage {
 	int BINDING__PORTS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Output</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BINDING__OUTPUT = 1;
-
-	/**
 	 * The number of structural features of the '<em>Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_FEATURE_COUNT = 2;
+	int BINDING_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link art2.impl.CompositeTypeImpl <em>Composite Type</em>}' class.
@@ -1283,22 +1256,13 @@ public interface Art2Package extends EPackage {
 	int PARAMETER__DATATYPE = TYPED_ELEMENT__DATATYPE;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__TYPE = TYPED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 1;
+	int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link art2.impl.MessageDataTypeImpl <em>Message Data Type</em>}' class.
@@ -1543,6 +1507,53 @@ public interface Art2Package extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link art2.impl.OSGiScrDataTypeImpl <em>OS Gi Scr Data Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art2.impl.OSGiScrDataTypeImpl
+	 * @see art2.impl.Art2PackageImpl#getOSGiScrDataType()
+	 * @generated
+	 */
+	int OS_GI_SCR_DATA_TYPE = 32;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_SCR_DATA_TYPE__NAME = SERVICE_DATA_TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_SCR_DATA_TYPE__OPERATIONS = SERVICE_DATA_TYPE__OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Interface Impl</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_SCR_DATA_TYPE__INTERFACE_IMPL = SERVICE_DATA_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>OS Gi Scr Data Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_SCR_DATA_TYPE_FEATURE_COUNT = SERVICE_DATA_TYPE_FEATURE_COUNT + 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link art2.ComponentInstance <em>Component Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1716,17 +1727,6 @@ public interface Art2Package extends EPackage {
 	EReference getContainerNode_Components();
 
 	/**
-	 * Returns the meta object for the reference list '{@link art2.ContainerNode#getComponentTypes <em>Component Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Component Types</em>'.
-	 * @see art2.ContainerNode#getComponentTypes()
-	 * @see #getContainerNode()
-	 * @generated
-	 */
-	EReference getContainerNode_ComponentTypes();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link art2.ContainerNode#getBindings <em>Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1846,6 +1846,17 @@ public interface Art2Package extends EPackage {
 	EAttribute getPortType_Synchrone();
 
 	/**
+	 * Returns the meta object for the attribute '{@link art2.PortType#getBean <em>Bean</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bean</em>'.
+	 * @see art2.PortType#getBean()
+	 * @see #getPortType()
+	 * @generated
+	 */
+	EAttribute getPortType_Bean();
+
+	/**
 	 * Returns the meta object for class '{@link art2.Port <em>Port</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1854,17 +1865,6 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 */
 	EClass getPort();
-
-	/**
-	 * Returns the meta object for the reference '{@link art2.Port#getPortType <em>Port Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Port Type</em>'.
-	 * @see art2.Port#getPortType()
-	 * @see #getPort()
-	 * @generated
-	 */
-	EReference getPort_PortType();
 
 	/**
 	 * Returns the meta object for the reference '{@link art2.Port#getPortTypeRef <em>Port Type Ref</em>}'.
@@ -2023,17 +2023,6 @@ public interface Art2Package extends EPackage {
 	EClass getDictionaryAttribute();
 
 	/**
-	 * Returns the meta object for the reference '{@link art2.DictionaryAttribute#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see art2.DictionaryAttribute#getType()
-	 * @see #getDictionaryAttribute()
-	 * @generated
-	 */
-	EReference getDictionaryAttribute_Type();
-
-	/**
 	 * Returns the meta object for the attribute '{@link art2.DictionaryAttribute#isOptional <em>Optional</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2085,17 +2074,6 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 */
 	EReference getBinding_Ports();
-
-	/**
-	 * Returns the meta object for the reference '{@link art2.Binding#getOutput <em>Output</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Output</em>'.
-	 * @see art2.Binding#getOutput()
-	 * @see #getBinding()
-	 * @generated
-	 */
-	EReference getBinding_Output();
 
 	/**
 	 * Returns the meta object for class '{@link art2.CompositeType <em>Composite Type</em>}'.
@@ -2244,17 +2222,6 @@ public interface Art2Package extends EPackage {
 	 * @generated
 	 */
 	EClass getParameter();
-
-	/**
-	 * Returns the meta object for the reference '{@link art2.Parameter#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see art2.Parameter#getType()
-	 * @see #getParameter()
-	 * @generated
-	 */
-	EReference getParameter_Type();
 
 	/**
 	 * Returns the meta object for class '{@link art2.TypedElement <em>Typed Element</em>}'.
@@ -2468,6 +2435,27 @@ public interface Art2Package extends EPackage {
 	EReference getExtraFonctionalProperty_PortTypes();
 
 	/**
+	 * Returns the meta object for class '{@link art2.OSGiScrDataType <em>OS Gi Scr Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>OS Gi Scr Data Type</em>'.
+	 * @see art2.OSGiScrDataType
+	 * @generated
+	 */
+	EClass getOSGiScrDataType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art2.OSGiScrDataType#getInterfaceImpl <em>Interface Impl</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Interface Impl</em>'.
+	 * @see art2.OSGiScrDataType#getInterfaceImpl()
+	 * @see #getOSGiScrDataType()
+	 * @generated
+	 */
+	EAttribute getOSGiScrDataType_InterfaceImpl();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2624,14 +2612,6 @@ public interface Art2Package extends EPackage {
 		EReference CONTAINER_NODE__COMPONENTS = eINSTANCE.getContainerNode_Components();
 
 		/**
-		 * The meta object literal for the '<em><b>Component Types</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONTAINER_NODE__COMPONENT_TYPES = eINSTANCE.getContainerNode_ComponentTypes();
-
-		/**
 		 * The meta object literal for the '<em><b>Bindings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2724,6 +2704,14 @@ public interface Art2Package extends EPackage {
 		EAttribute PORT_TYPE__SYNCHRONE = eINSTANCE.getPortType_Synchrone();
 
 		/**
+		 * The meta object literal for the '<em><b>Bean</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PORT_TYPE__BEAN = eINSTANCE.getPortType_Bean();
+
+		/**
 		 * The meta object literal for the '{@link art2.impl.PortImpl <em>Port</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2732,14 +2720,6 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EClass PORT = eINSTANCE.getPort();
-
-		/**
-		 * The meta object literal for the '<em><b>Port Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PORT__PORT_TYPE = eINSTANCE.getPort_PortType();
 
 		/**
 		 * The meta object literal for the '<em><b>Port Type Ref</b></em>' reference feature.
@@ -2880,14 +2860,6 @@ public interface Art2Package extends EPackage {
 		EClass DICTIONARY_ATTRIBUTE = eINSTANCE.getDictionaryAttribute();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DICTIONARY_ATTRIBUTE__TYPE = eINSTANCE.getDictionaryAttribute_Type();
-
-		/**
 		 * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2930,14 +2902,6 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EReference BINDING__PORTS = eINSTANCE.getBinding_Ports();
-
-		/**
-		 * The meta object literal for the '<em><b>Output</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BINDING__OUTPUT = eINSTANCE.getBinding_Output();
 
 		/**
 		 * The meta object literal for the '{@link art2.impl.CompositeTypeImpl <em>Composite Type</em>}' class.
@@ -3062,14 +3026,6 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EClass PARAMETER = eINSTANCE.getParameter();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARAMETER__TYPE = eINSTANCE.getParameter_Type();
 
 		/**
 		 * The meta object literal for the '{@link art2.impl.TypedElementImpl <em>Typed Element</em>}' class.
@@ -3248,6 +3204,24 @@ public interface Art2Package extends EPackage {
 		 * @generated
 		 */
 		EReference EXTRA_FONCTIONAL_PROPERTY__PORT_TYPES = eINSTANCE.getExtraFonctionalProperty_PortTypes();
+
+		/**
+		 * The meta object literal for the '{@link art2.impl.OSGiScrDataTypeImpl <em>OS Gi Scr Data Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art2.impl.OSGiScrDataTypeImpl
+		 * @see art2.impl.Art2PackageImpl#getOSGiScrDataType()
+		 * @generated
+		 */
+		EClass OS_GI_SCR_DATA_TYPE = eINSTANCE.getOSGiScrDataType();
+
+		/**
+		 * The meta object literal for the '<em><b>Interface Impl</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OS_GI_SCR_DATA_TYPE__INTERFACE_IMPL = eINSTANCE.getOSGiScrDataType_InterfaceImpl();
 
 	}
 
