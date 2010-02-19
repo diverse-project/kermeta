@@ -18,12 +18,135 @@ import org.apache.log4j.Logger;
 import org.osgi.framework.BundleContext;
 
 
-public abstract class FileUtilities {
+public class FileUtilities {
+
+	private FileUtilities(){};
 
 	private static Logger logger = Logger.getLogger(FileUtilities.class.getName());
-	
+
 	/**
-	 * Convert any strange path to an absolute one. Download files if needed. Works in the system temp directory.
+	 * Converts a "initial@refrence:" path into an absolute path.
+	 * @param context The BundleContext
+	 * @param path The path to solve.
+	 * @return The absolute path.
+	 */
+	private static String solveInitialAtReferencePath(BundleContext context, String path) {
+		String pathTemp = path;
+		//Case on Equinox or felix when file is installed manually from console.
+		logger.debug("Starts with initial@reference");
+
+		String installArea = context.getProperty("osgi.install.area").replace("file:", "");
+
+		//on windows, the last ':' is after the root. On unix the last ':' is after 'file'
+		if(pathTemp.lastIndexOf(':') != 22) {
+			pathTemp = pathTemp.replace("initial@reference:file:", "");
+		} else {
+			pathTemp = pathTemp.replace("initial@reference:file:", unifyPath(installArea));
+		}
+
+		//Removes the '/' at the end on the path
+		if(pathTemp.endsWith("/")) {
+			pathTemp = pathTemp.substring(0, pathTemp.length()-1);
+		}
+		return pathTemp;
+	}
+
+	/**
+	 * Converts a "http:" path into an absolute path.
+	 * @param context The BundleContext
+	 * @param path The path to solve.
+	 * @return The absolute path.
+	 */
+	private static String solveHttpPath(BundleContext context, String path) {
+		String pathTemp = path;
+
+		logger.debug("Starts with http:");
+		String fileName = pathTemp.substring(pathTemp.lastIndexOf("/")+1, pathTemp.length());
+		File localFile = FileUtilities.getTempFile(fileName);
+		if(localFile == null) {
+			localFile = createTempFile(fileName);
+			URL url;
+			try {
+				url = new URL(pathTemp);
+				url.openConnection();
+				copyFile(url.openStream(), new FileOutputStream(localFile));
+			} catch( MalformedURLException e) {
+				logger.error("MalformedUrlException", e);
+			} catch (IOException e) {
+				logger.error("IOException", e);
+			}
+		}
+
+		return localFile.getAbsolutePath();		
+
+	}
+
+	private static String solveObrOrMvnPath(BundleContext context, String path) {
+		String pathTemp = path;
+		//OBR: 'obr://eu.ict_diva.tutorial.services/1250843674906'
+		//MAVEN: 'mvn:eu.ict_diva/tutorial.services/1.2.3'
+
+		logger.debug("Starts with obr: or mvn:");
+
+		String defaultDataFileAbsLoc = context.getDataFile("").getAbsolutePath();
+
+		//felix-cache/bundleX
+		String bundleWorkingDir = defaultDataFileAbsLoc.substring(0,defaultDataFileAbsLoc.lastIndexOf(File.separator));
+
+		File cache = new File(bundleWorkingDir + File.separator + ".." + File.separator);//felix-cache
+		try {
+			for(File f : cache.listFiles()) {
+				if(f.isDirectory() && f.getName().startsWith("bundle")) { //felix-cache/bundleY
+
+					File bundleLocationFile = null;
+					String version = "0.0";
+
+					for(File f2 : f.listFiles()) {
+						if(f2.getName().equals("bundle.location")) { //felix-cache/bundleY/bundle.location
+							bundleLocationFile = f2;
+						} else if(f2.getName().equals("refresh.counter")) {//felix-cache/bundleY/refresh.counter
+							FileReader fr = new  FileReader(f2);
+							char vers = (char)fr.read();
+							version = vers + ".0";
+							if(fr != null) {
+								fr.close();
+							}
+						}
+					}
+
+					if (bundleLocationFile != null) {
+						String bundleLocation = new BufferedReader(new FileReader(bundleLocationFile)).readLine();
+						if(bundleLocation.equals(pathTemp)) {
+							bundleWorkingDir = f.getAbsolutePath() + File.separator + "version" + version + File.separator + "bundle.jar";
+							logger.debug("jarFileLocation:" + bundleWorkingDir);
+							return bundleWorkingDir;
+						}
+					}
+
+				}
+
+			}
+		} catch (FileNotFoundException e) {
+			logger.error("FileNotFound", e);
+		} catch (IOException e) {
+			logger.error("IOException", e);
+		}
+
+		logger.debug("bundleWorkingDir: " + bundleWorkingDir);
+
+		return bundleWorkingDir;
+	}
+
+	/**
+	 * Convert any strange path to an absolute one. Download files if needed. Works in the system temp directory.<br/>
+	 * This method is able to solve folowing paths:<br/>
+	 * <ul>
+	 * <li>initial@reference:
+	 * <li>http:
+	 * <li>mvn:
+	 * <li>obr:
+	 * <li>file: 
+	 * </ul>
 	 * @param path The path to convert.
 	 * @return An absolute path to the element.
 	 */
@@ -31,104 +154,29 @@ public abstract class FileUtilities {
 		String pathTemp = path;
 		logger.debug("PathToSolve: " + path);
 
-		try {
 
-			if(pathTemp.startsWith("initial@reference")) {
+		if(pathTemp.startsWith("initial@reference")) {
 
-				//Case on Equinox or felix when file is installed manually from console.
-				logger.debug("Starts with initial@reference");
-				
-				String installArea = context.getProperty("osgi.install.area").replace("file:", "");
+			pathTemp = solveInitialAtReferencePath(context, pathTemp);
 
-				//on windows, the last ':' is after the root. On unix the last ':' is after 'file'
-				if(pathTemp.lastIndexOf(':') != 22) {
-					pathTemp = pathTemp.replace("initial@reference:file:", "");
-				} else {
-					pathTemp = pathTemp.replace("initial@reference:file:", unifyPath(installArea));
-				}
+		} else if(pathTemp.startsWith("file:")) {
+			logger.debug("Starts with file:");
+			pathTemp = pathTemp.substring(5);
 
-				if(pathTemp.endsWith("/"))
-					pathTemp = pathTemp.substring(0, pathTemp.length()-1);
+		} else if(pathTemp.startsWith("http:")) {
 
-			} else if(pathTemp.startsWith("file:")) {
-				logger.debug("Starts with file:");
-				return pathTemp.substring(5);
+			pathTemp = solveHttpPath(context, path);
 
-			} else if(pathTemp.startsWith("http:")) {
-				logger.debug("Starts with http:");
-				String fileName = pathTemp.substring(pathTemp.lastIndexOf("/")+1, pathTemp.length());
-				File icon = FileUtilities.getTempFile(fileName);
-				if(icon == null) {
-					icon = createTempFile(fileName);
-					URL url;
-					try {
-						url = new URL(pathTemp);
-						url.openConnection();
-						copyFile(url.openStream(), new FileOutputStream(icon));
-						url = null;
-					} catch( MalformedURLException e) {
-						e.printStackTrace();
-					}
-				}
+		} else if(pathTemp.startsWith("obr:") || pathTemp.startsWith("mvn:")) {
 
-				return icon.getAbsolutePath();
+			pathTemp = solveObrOrMvnPath(context, pathTemp);
 
-			} else if(pathTemp.startsWith("obr:") || pathTemp.startsWith("mvn:")) {
-				//OBR: 'obr://eu.ict_diva.tutorial.services/1250843674906'
-				//MAVEN: 'mvn:eu.ict_diva/tutorial.services/1.2.3'
+		} else {
+			logger.error("Path not solved (path: " + path + ")");
+		}
 
-				logger.debug("Starts with obr: or mvn:");
-				
-				String defaultDataFileAbsLoc = context.getDataFile("").getAbsolutePath();
-				
-				//felix-cache/bundleX
-				String bundleWorkingDir = defaultDataFileAbsLoc.substring(0,defaultDataFileAbsLoc.lastIndexOf(File.separator));
-				
-				File cache = new File(bundleWorkingDir + File.separator + ".." + File.separator);//felix-cache
-				
-				for(File f : cache.listFiles()) {
-					if(f.isDirectory()) { //felix-cache/bundleY
-						if(f.getName().startsWith("bundle")) {
-							
-							File bundleLocationFile = null;
-							String version = "0.0";
-							
-							for(File f2 : f.listFiles()) {
-								if(f2.getName().equals("bundle.location")) { //felix-cache/bundleY/bundle.location
-									bundleLocationFile = f2;
-								} else if(f2.getName().equals("refresh.counter")) {//felix-cache/bundleY/refresh.counter
-									char vers = (char)new FileReader(f2).read();
-									version = vers + ".0";
-								}
-							}
-							
-							if (bundleLocationFile != null) {
-								String bundleLocation = new BufferedReader(new FileReader(bundleLocationFile)).readLine();
-								if(bundleLocation.equals(pathTemp)) {
-									bundleWorkingDir = f.getAbsolutePath() + File.separator + "version" + version + File.separator + "bundle.jar";
-									logger.debug("jarFileLocation:" + bundleWorkingDir);
-									return bundleWorkingDir;
-								}
-							}
-								
-						}
-					}
-				}
-				
-				logger.debug("bundleWorkingDir: " + bundleWorkingDir);
-
-				return bundleWorkingDir;
-			} else {
-				logger.error("Path not solved (path: " + path + ")");
-			}
-
-			if(pathTemp.contains(":")&&pathTemp.startsWith("/"))
-				pathTemp = pathTemp.substring(1);
-
-		} catch (FileNotFoundException e) {
-			logger.error("FileNotFound", e);
-		} catch (IOException e) {
-			logger.error("IOException", e);
+		if(pathTemp.contains(":")&&pathTemp.startsWith("/")) {
+			pathTemp = pathTemp.substring(1);
 		}
 
 		return pathTemp;
@@ -164,13 +212,15 @@ public abstract class FileUtilities {
 				fos.write(buf, 0, i);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Exception", e);
 			return false;
 		} finally {
-			if (fis != null)
+			if (fis != null) {
 				fis.close();
-			if (fos != null)
+			}
+			if (fos != null) {
 				fos.close();
+			}
 		}
 		return true;
 	}
@@ -214,16 +264,21 @@ public abstract class FileUtilities {
 		try {
 
 			String tmpDir = unifyPath(System.getProperty("java.io.tmpdir"));
-			if(!tmpDir.endsWith("/"))
-				tmpDir += "/" + dirName;
-			else
-				tmpDir += dirName;
+			String dirToCreate = null;
+			if(!tmpDir.endsWith("/")) {
+				dirToCreate = tmpDir + "/" + dirName;
+			} else {
+				dirToCreate = tmpDir + dirName;
+			}
 
-			f = new File(getUriFromPath(tmpDir));
-			f.mkdirs();
+			f = new File(getUriFromPath(dirToCreate));
+			if(!f.mkdirs()) {
+				logger.error("mkdirs() returned false. Check for authorizations to write in:" + tmpDir);
+				return null;
+			}
 
 		} catch (URISyntaxException e) {
-			e.printStackTrace();
+			logger.error("URISyntaxException", e);
 		}
 
 		return f;
@@ -243,23 +298,23 @@ public abstract class FileUtilities {
 
 
 			String tmpDir = unifyPath(System.getProperty("java.io.tmpdir"));
-			if(!tmpDir.endsWith("/"))
+			if(!tmpDir.endsWith("/")) {
 				tmpDir += "/" + fileName;
-			else
+			} else {
 				tmpDir += fileName;
+			}
 
 			f = new File(getUriFromPath(tmpDir));
-			if(f.exists())
+			if(f.exists()) {
 				f.delete();
+			}
 			f.createNewFile();
 			f.deleteOnExit();
 
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("URISyntaxException", e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IOException", e);
 		}
 
 		return f;
@@ -302,20 +357,22 @@ public abstract class FileUtilities {
 
 
 			tmpDir = unifyPath(System.getProperty("java.io.tmpdir"));
-			if(!tmpDir.endsWith("/"))
+			if(!tmpDir.endsWith("/")) {
 				tmpDir += "/" + fileName;
-			else
+			} else {
 				tmpDir += fileName;
+			}
 			uri = getUriFromPath(tmpDir);
 			f = new File(uri);
-			if(f.exists())
+			if(f.exists()) {
 				return f;
-			else
+			} else {
 				return null;
+			}
 
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			logger.error("Not correct URI:" + uri.toString(), e);
+
+			logger.error("Not correct URI:" + (uri!=null?uri.toString():""), e);
 		}
 		return null;
 	}
@@ -329,8 +386,9 @@ public abstract class FileUtilities {
 		File f3 = null;
 
 		f3 = ctx.getDataFile(dirName);
-		if(!f3.exists())
+		if(!f3.exists()) {
 			f3.mkdirs();
+		}
 
 		return f3;
 	}
@@ -351,8 +409,9 @@ public abstract class FileUtilities {
 		try {	
 
 			f3 = ctx.getDataFile(fileName);
-			if(!f3.exists())
+			if(!f3.exists()) {
 				f3.createNewFile();
+			}
 
 		} catch (IOException e) {
 			logger.error("IOException", e);
@@ -394,8 +453,9 @@ public abstract class FileUtilities {
 
 		File f3 = null;
 		f3 = ctx.getDataFile(fileName);
-		if(!f3.exists())
+		if(!f3.exists()) {
 			return null;
+		}
 		return f3;
 	}
 
