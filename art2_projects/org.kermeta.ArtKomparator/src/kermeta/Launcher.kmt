@@ -1,0 +1,84 @@
+/* $Id:$ 
+ * Creation : February 12, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ffouquet
+ */
+@mainClass "org::kermeta::artKomparator::Launcher"
+@mainOperation "launchFromURL"
+
+
+package org::kermeta::artKomparator;
+
+require kermeta
+require "platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
+require "platform:/resource/org.kermeta.ArtDeployer/src/kermeta/OSGiCommand.kmt"
+require "Komparator.kmt"
+using kermeta::persistence
+using kermeta::standard
+using kermeta::io
+using org::kermeta::art::deployer
+using org::kermeta::komparator
+
+class Launcher
+{
+
+	attribute actualRuntimeModel : art2::ContainerRoot 
+	
+	operation launchFromURL(newModelUrl : String) : Void is do
+		var model : art2::ContainerRoot init loadART2Model(newModelUrl)
+		launchFromModel(model)
+	end
+
+	operation launchFromModel(newModel : art2::ContainerRoot) : Void is do 
+	
+		var nodeName : String init "duke.irisa.fr"
+	
+		var model : String init "file:/Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi"
+		var model2 : String init "file:/Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample2.xmi"
+		var model3 : String init "file:/Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample3.xmi"
+		
+		var mySystem : art2::ContainerRoot init loadART2Model(model)
+		var mySystem2 : art2::ContainerRoot init loadART2Model(model2)
+		var mySystem3 : art2::ContainerRoot init loadART2Model(model3)
+		
+		var factory : OSGiCommandFactory init OSGiCommandFactory.new
+		var komparator : Komparator init Komparator.new
+		
+		var contextCommand : CommandContext init CommandContext.new
+		contextCommand.runtimePATH := "///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy"
+		
+		stdio.writeln("TEST INIT")
+		var commandSet : Set<Command> init komparator.kompare(void,mySystem,nodeName,factory)
+		stdio.writeln("Try to execute "+commandSet.size().toString)
+		commandSet.each{c |
+			c.execute(contextCommand)
+		}
+
+		stdio.writeln("TEST CHANGE BINDING")
+		var commandSet2 : Set<Command> init komparator.kompare(mySystem,mySystem2,nodeName,factory)
+		stdio.writeln("Try to execute "+commandSet2.size().toString)
+		commandSet2.each{c |
+			c.execute(contextCommand)
+		}
+		
+		
+		stdio.writeln("TEST CHANGE ComponentInstance")
+		var commandSet3 : Set<Command> init komparator.kompare(mySystem2,mySystem3,nodeName,factory)
+		stdio.writeln("Try to execute "+commandSet3.size().toString)
+		commandSet3.each{c |
+			c.execute(contextCommand)
+		}		
+		
+
+	end
+	
+	operation loadART2Model(model : String) : art2::ContainerRoot is
+	do
+		var res : Resource init EMFRepository.new.createResource(model, "platform:/resource/org.kermeta.art.model/metamodel/art.ecore")
+		res.load
+		result := res.one.asType(art2::ContainerRoot)	
+	end
+	
+}
