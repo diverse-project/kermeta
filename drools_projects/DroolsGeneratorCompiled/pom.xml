@@ -91,33 +91,6 @@
 		</dependency>
 		<dependency>
 			<groupId>fr.irisa.triskell</groupId>
-			<artifactId>kermeta.scala.loader</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>fr.irisa.triskell</groupId>
-			<artifactId>kermeta.scala.genmodel</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo.output/lib/test1.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>fr.irisa.triskell</groupId>
-			<artifactId>uml</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo.output/lib/org.eclipse.uml2.uml_3.0.1.v200908281330.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>fr.irisa.triskell</groupId>
-			<artifactId>uml-util</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>/opt/galileo/eclipse/plugins/org.eclipse.uml2.common_1.5.0.v200905041045.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>fr.irisa.triskell</groupId>
 			<artifactId>art-adapter</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>system</scope>
