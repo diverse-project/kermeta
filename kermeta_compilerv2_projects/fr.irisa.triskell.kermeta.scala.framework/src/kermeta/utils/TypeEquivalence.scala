@@ -26,6 +26,7 @@ object TypeEquivalence {
 		return res 
 	}
 	
+	
 	var typeEquivelence :  java.util.HashMap[String,String] = {typeEquivelence = new java.util.HashMap[String,String]()
 		typeEquivelence.put("kermeta.utils.Hashtable", "java.util.HashMap");
 		typeEquivelence.put("org.eclipse.emf.ecore.EStringToStringMapEntry","java.util.Map.Entry[String,String]")
@@ -35,6 +36,7 @@ object TypeEquivalence {
 		typeEquivelence.put("kermeta.standard.Iterator", "java.util.Iterator");
 		typeEquivelence.put("kermeta.standard.Collection", "java.util.List");
 		typeEquivelence.put("kermeta.standard.Set", "java.util.List");
+		typeEquivelence.put("kermeta.standard.OrderedSet", "java.util.List");
 		typeEquivelence.put("kermeta.standard.Sequence", "java.util.List");
 		typeEquivelence.put("kermeta.standard.Bag", "java.util.List");
 		typeEquivelence.put("kermeta.standard.String", "java.lang.String");
@@ -80,6 +82,9 @@ object TypeEquivalence {
 		methodEquivalence.put("kermeta.standard.String", Str);
 		methodEquivalence.put("String", Str);
 		methodEquivalence.put("java.lang.String", Str);
+		
+		
+		
 		methodEquivalence 
 
 	};

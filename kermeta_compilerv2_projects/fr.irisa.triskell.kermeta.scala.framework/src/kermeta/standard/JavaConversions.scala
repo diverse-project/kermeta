@@ -48,6 +48,8 @@ object JavaConversions {
   
    class RichKermetaList[A] ( value : ju.List[A]) {
 	  
+	  def first() = value.get(0)
+	  
 	 
 	
 	def asSetType[B]() :java.util.List[B]={  
@@ -97,7 +99,7 @@ object JavaConversions {
 	
 	def existsCpl(f : A,A:A=>Boolean) :Boolean={return true}
 	def isNotEmpty() :java.lang.Boolean={return !(value.size==0)}
-	def detect(detector : A=> Boolean) :A={return this.select(e=> detector(e)).one}
+	def detect(detector : A=> Boolean) :A={return this.select(e=> detector(e)).get(0)}
 	//def iterator() :java.laIterator[A]={return value.iterator}
 	/*TODO*/def includesAll(elements : Collection[A]) :Boolean={return true}
 	def select(selector : A=> scala.Boolean) :java.util.List[A]={
@@ -190,7 +192,7 @@ object JavaConversions {
 	
 	def existsCpl(f : A,A:A=>Boolean) :Boolean={return true}
 	def isNotEmpty() :java.lang.Boolean={return !(value.size==0)}
-	def detect(detector : A=> Boolean) :A={return this.select(e=> detector(e)).one}
+	def detect(detector : A=> Boolean) :A={return this.select(e=> detector(e)).get(0)}
 	//def iterator() :java.laIterator[A]={return value.iterator}
 	/*TODO*/def includesAll(elements : Collection[A]) :Boolean={return true}
 	def select(selector : A=> scala.Boolean) :java.util.List[A]={
