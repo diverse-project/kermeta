@@ -92,6 +92,8 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		log.debug("CallFeature={}",this.getName())
 		this.getName match {
+			case "and" =>  { res.append("(");generateTarget(res);res.append(").and");generateParam(res,"(",")"); }
+			case "isVoid" => { res.append("(");generateTarget(res);res.append("==null)")  }
 			case "toString" => { res.append("(");generateTarget(res);res.append("+\"\")")  }
 			case "isNotEqual" => {generateTarget(res);res.append(" != ");generateParam(res,"(",")")}
 			case "isEqual" => {generateTarget(res);res.append(" == ");generateParam(res,"(",")")}
