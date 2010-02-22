@@ -14,10 +14,9 @@ package kermeta::ki::malai::undo;
 require kermeta
 require "Undoable.kmt"
 require "UndoHandler.kmt"
-require "../utils/Stack.kmt"
 
 using kermeta::standard
-using kermeta::ki::malai::utils
+using kermeta::utils
 
 
 class UndoCollector
@@ -58,7 +57,7 @@ class UndoCollector
 	operation add(elt : Undoable) : Void is do
 		if(elt!=void and max>0) then
 			if(undoStack.size()==max) then
-				undoStack.elements.removeAt(0)
+				undoStack.removeAt(0)
 			end
 			
 			undoStack.push(elt)
