@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Export-Package: art2.util;uses:="org.eclipse.emf.ecore,org.eclipse.emf
+ .common.notify,art2,org.eclipse.emf.common.notify.impl,org.eclipse.em
+ f.common.util",art2;uses:="org.eclipse.emf.ecore,org.eclipse.emf.comm
+ on.util"
+Private-Package: art2.impl
+Built-By: ffouquet
+Tool: Bnd-0.0.311
+Bundle-Name: ART2 :: MODEL
+Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 1.0.0
+Build-Jdk: 1.6.0_17
+Bnd-LastModified: 1266844909765
+Bundle-ManifestVersion: 2
+Import-Package: art2,art2.util,org.eclipse.emf.common.notify,org.eclip
+ se.emf.common.notify.impl,org.eclipse.emf.common.util,org.eclipse.emf
+ .ecore,org.eclipse.emf.ecore.impl,org.eclipse.emf.ecore.plugin,org.ec
+ lipse.emf.ecore.resource,org.eclipse.emf.ecore.util
+Bundle-SymbolicName: org.kermeta.art2.model
+
