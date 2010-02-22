@@ -61,121 +61,17 @@ public class TestCompiloCases extends TestCase {
 		if (f != null) {
 			f.delete();
 		}
-	}	@Test
-	public void test014_testPrePost_PostInheritedFailed1main() {
-		process(this.getClass().getResource("/testConstraints").getPath()
-				+ "/014_testPrePost_PostInheritedFailed1.main");
-	}
-	@Test
-	public void test019_testPrePost_PreFailedmain() {
-		process(this.getClass().getResource("/testConstraints").getPath()
-				+ "/019_testPrePost_PreFailed.main");
-	}
-	@Test
-	public void test012_testPrePost_PostFailed2main() {
-		process(this.getClass().getResource("/testConstraints").getPath()
-				+ "/012_testPrePost_PostFailed2.main");
-	}
-	@Test
-	public void test011_testPrePost_PostFailed1main() {
-		process(this.getClass().getResource("/testConstraints").getPath()
-				+ "/011_testPrePost_PostFailed1.main");
-	}
-	@Test
-	public void test018_testPrePost_PostInheritedInheritedPass1main() {
-		process(this.getClass().getResource("/testConstraints").getPath()
-				+ "/018_testPrePost_PostInheritedInheritedPass1.main");
-	}
-	@Test
-	public void test020_testPrePost_PreInheritedFailed1main() {
-		process(this.getClass().getResource("/testConstraints").getPath()
-				+ "/020_testPrePost_PreInheritedFailed1.main");
-	}
-	@Test
-	public void test017_testPrePost_PostInheritedInheritedFail2main() {
-		process(this.getClass().getResource("/testConstraints").getPath()
-				+ "/017_testPrePost_PostInheritedInheritedFail2.main");
-	}
-	@Test
-	public void test015_testPrePost_PostInheritedFailed2main() {
-		process(this.getClass().getResource("/testConstraints").getPath()
-				+ "/015_testPrePost_PostInheritedFailed2.main");
-	}
-	@Test
-	public void test013_testPrePost_PostFailed3main() {
-		process(this.getClass().getResource("/testConstraints").getPath()
-				+ "/013_testPrePost_PostFailed3.main");
-	}
-	@Test
-	public void test016_testPrePost_PostInheritedInheritedFail1main() {
-		process(this.getClass().getResource("/testConstraints").getPath()
-				+ "/016_testPrePost_PostInheritedInheritedFail1.main");
-	}
-	@Test
-	public void test022_testPrePost_PreInheritedInheritedFailed1main() {
-		process(this.getClass().getResource("/testConstraints").getPath()
-				+ "/022_testPrePost_PreInheritedInheritedFailed1.main");
-	}
-	@Test
-	public void test021_testPrePost_PreInheritedFailed2main() {
-		process(this.getClass().getResource("/testConstraints").getPath()
-				+ "/021_testPrePost_PreInheritedFailed2.main");
-	}
-	@Test
-	public void testLambdaExpression_plus1_501() {
-		process(this.getClass().getResource("/LambdaExpression_testCases").getPath()
-				+ "/LambdaExpression_plus1_501");
-	}
-	@Test
-	public void testLambdaExpression_IntegerTime_501() {
-		process(this.getClass().getResource("/LambdaExpression_testCases").getPath()
-				+ "/LambdaExpression_IntegerTime_501");
-	}
-	@Test
-	public void testLambdaExpression_CollectionEach_501() {
-		process(this.getClass().getResource("/LambdaExpression_testCases").getPath()
-				+ "/LambdaExpression_CollectionEach_501");
-	}
-	@Test
-	public void testLambdaExpression_plus1_502() {
-		process(this.getClass().getResource("/LambdaExpression_testCases").getPath()
-				+ "/LambdaExpression_plus1_502");
-	}
-	@Test
-	public void test068_testVariableInitmain() {
-		process(this.getClass().getResource("/tests").getPath()
-				+ "/068_testVariableInit.main");
-	}
-	@Test
-	public void test003_testOpCallmain() {
-		process(this.getClass().getResource("/tests").getPath()
-				+ "/003_testOpCall.main");
-	}
-	@Test
-	public void test013_testStringmain() {
-		process(this.getClass().getResource("/tests").getPath()
-				+ "/013_testString.main");
-	}
-	@Test
-	public void test010_testLoopmain() {
-		process(this.getClass().getResource("/tests").getPath()
-				+ "/010_testLoop.main");
-	}
-	@Test
-	public void test002_testArithmmain() {
-		process(this.getClass().getResource("/tests").getPath()
-				+ "/002_testArithm.main");
-	}
-	@Test
-	public void test078_testAddVoidInReflectiveCollectionmain() {
-		process(this.getClass().getResource("/tests").getPath()
-				+ "/078_testAddVoidInReflectiveCollection.main");
-	}
+	}	
+	
+
 	@Test
 	public void test015_testAttributesmain() {
 		process(this.getClass().getResource("/tests").getPath()
 				+ "/015_testAttributes.main");
 	}
+	
+	/*
+	
 	@Test
 	public void testAssignment_int_401() {
 		process(this.getClass().getResource("/tests").getPath()
@@ -425,5 +321,5 @@ public class TestCompiloCases extends TestCase {
 	public void testMetadomo2Art() {
 		process(this.getClass().getResource("/testGreg/TransfoMetadomoArt/kermeta").getPath()
 				+ "/Metadomo2Art");
-	}
+	}*/
 }
