@@ -23,8 +23,9 @@ using org::kermeta::komparator
 
 class Launcher
 {
-
 	attribute actualRuntimeModel : art2::ContainerRoot 
+	attribute nodeName : String
+	attribute hotdeployPATH : String
 	
 	operation launchFromURL(newModelUrl : String) : Void is do
 		var model : art2::ContainerRoot init loadART2Model(newModelUrl)
@@ -33,44 +34,25 @@ class Launcher
 
 	operation launchFromModel(newModel : art2::ContainerRoot) : Void is do 
 	
-		var nodeName : String init "duke.irisa.fr"
+		if(nodeName != void and hotdeployPATH != void)
+		then
 	
-		var model : String init "file:/Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi"
-		var model2 : String init "file:/Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample2.xmi"
-		var model3 : String init "file:/Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample3.xmi"
-		
-		var mySystem : art2::ContainerRoot init loadART2Model(model)
-		var mySystem2 : art2::ContainerRoot init loadART2Model(model2)
-		var mySystem3 : art2::ContainerRoot init loadART2Model(model3)
-		
+	
+		//var nodeName : String init "duke.irisa.fr"
+
 		var factory : OSGiCommandFactory init OSGiCommandFactory.new
 		var komparator : Komparator init Komparator.new
 		
 		var contextCommand : CommandContext init CommandContext.new
-		contextCommand.runtimePATH := "///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy"
+		//contextCommand.runtimePATH := "///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy"
+		contextCommand.runtimePATH := hotdeployPATH
 		
-		stdio.writeln("TEST INIT")
-		var commandSet : Set<Command> init komparator.kompare(void,mySystem,nodeName,factory)
-		stdio.writeln("Try to execute "+commandSet.size().toString)
+		var commandSet : Set<Command> init komparator.kompare(actualRuntimeModel,newModel, self.nodeName,factory)
 		commandSet.each{c |
 			c.execute(contextCommand)
 		}
-
-		stdio.writeln("TEST CHANGE BINDING")
-		var commandSet2 : Set<Command> init komparator.kompare(mySystem,mySystem2,nodeName,factory)
-		stdio.writeln("Try to execute "+commandSet2.size().toString)
-		commandSet2.each{c |
-			c.execute(contextCommand)
-		}
 		
-		
-		stdio.writeln("TEST CHANGE ComponentInstance")
-		var commandSet3 : Set<Command> init komparator.kompare(mySystem2,mySystem3,nodeName,factory)
-		stdio.writeln("Try to execute "+commandSet3.size().toString)
-		commandSet3.each{c |
-			c.execute(contextCommand)
-		}		
-		
+		end
 
 	end
 	

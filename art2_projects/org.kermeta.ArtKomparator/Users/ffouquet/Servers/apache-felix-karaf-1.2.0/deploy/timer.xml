@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->
-<feature name="timer" version="null"> 
-	<bundle>mvn:null/null/null</bundle> 
-</feature>

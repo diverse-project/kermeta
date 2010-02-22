@@ -5,9 +5,6 @@
  * Authors  : 
  *            ffouquet
  */
-@mainClass "org::kermeta::komparator::Komparator"
-@mainOperation "kompare"
-
 
 package org::kermeta::komparator;
 
@@ -45,20 +42,20 @@ class Komparator
 			end
 		else
 			//STEP 0 - FOUND LOCAL NODE
-			var actualRuntimeLocalNodes : Sequence<art2::ContainerNode> init runtimeModel.nodes.select{c| c.name.equals(deployNodeName) } 
-			var actualUpdateLocalNodes : Sequence<art2::ContainerNode> init updateModel.nodes.select{c| c.name.equals(deployNodeName) }
+			var actualRuntimeLocalNode : ContainerNode init runtimeModel.nodes.detect{c| c.name.equals(deployNodeName) } 
+			var actualUpdateLocalNode : ContainerNode init updateModel.nodes.detect{c| c.name.equals(deployNodeName) }
 			
-			if( (actualRuntimeLocalNodes.size == 0) and (actualUpdateLocalNodes.size > 0))
+			if( (actualRuntimeLocalNode == void) and (actualUpdateLocalNode != void))
 			then 
 				//STOP ALL PREVIOUS THINGS RUNNING ON NODE
 				//TODO
 				//INIT NODE
-				result.addAll(initNode(actualUpdateLocalNodes.first,factory))
+				result.addAll(initNode(actualUpdateLocalNode,factory))
 			end
-			if( (actualRuntimeLocalNodes.size > 0) and (actualUpdateLocalNodes.size > 0))
+			if( (actualRuntimeLocalNode!=void) and (actualUpdateLocalNode!= void))
 			then
 				//PERFORM DIF
-				result.addAll(updateNode(actualRuntimeLocalNodes.first,actualUpdateLocalNodes.first,factory))
+				result.addAll(updateNode(actualRuntimeLocalNode,actualUpdateLocalNode,factory))
 			end
 		end
 	end
@@ -71,7 +68,7 @@ class Komparator
 		
 		node.components.each{c|
 			var ct : ComponentType init c.componentType
-			if(not(node.containByName(ct,alreadyDeployComponentType)))
+			if(not(alreadyDeployComponentType.exists{ e | ct.name.equals(e.name) } ))
 			then 
 				stdio.writeln("DEBUG : PROCESS "+ct.name)
 				alreadyDeployComponentType.add(ct)
@@ -88,74 +85,44 @@ class Komparator
 		result := OrderedSet<org::kermeta::art::deployer::Command>.new
 		stdio.writeln("DEBUG : UPDATE NODE : "+updateNode.name)
 		
-		
 		var runtimeComponentType : Set<ComponentType> init Set<ComponentType>.new
 		var alreadyTestedUpdateComponentType : Set<ComponentType> init Set<ComponentType>.new
 		
 		//COMPONENT TYPE STEP
 		runtimeNode.componentTypes.each{ rct |
-			var similarComponentType : ComponentType init void
 			//SEARCH SIMILAR COMPONENT TYPE IN UPDATE MODEL
-			updateNode.componentTypes.each{ uct | 
-				if(uct.isEquals(rct)) then similarComponentType := uct end
-			}
+			var similarComponentType : ComponentType init updateNode.componentTypes.detect{uct| uct.isEquals(rct) }
 			if(similarComponentType == void)
-			then
-				//NOT FOUND , UNDEPLOY COMPONENT TYPE
-				result.add(factory.createCommandRemoveComponentType(rct))
+			then result.add(factory.createCommandRemoveComponentType(rct))
 			end
 		}
 		
 		updateNode.componentTypes.each{ uct |
-			var similarComponentType : ComponentType init void
-			runtimeNode.componentTypes.each{ rct | 
-				if(rct.isEquals(uct)) then similarComponentType := uct end
-			}
+			var similarComponentType : ComponentType init runtimeNode.componentTypes.detect{rct| rct.isEquals(uct) }
 			if(similarComponentType == void)
-			then
-				//NOT FOUDN DEPLOY COMPONENT TYPE
-				result.add(factory.createCommandAddComponentType(uct))
+			then result.add(factory.createCommandAddComponentType(uct))
 			end
 		}
 		
 		//COMPONENT INSTANCE STEP
 		runtimeNode.components.each{ rc |
-			var similarComponent : ComponentInstance init void
-			//SEARCH SIMILAR COMPONENT IN UPDATE MODEL
-			updateNode.components.each{ uc | 
-				if(uc.isEquals(rc)) then similarComponent := uc end
-			}
+			var similarComponent : ComponentInstance init updateNode.components.detect{uc| uc.isEquals(rc) }
 			if(similarComponent == void)
-			then
-				//NOT FOUND , UNDEPLOY COMPONENT
-				result.add(factory.createCommandRemoveComponentInstance(rc))
-			else
-				//UPDATE COMPONENT INSTANCE
+			then result.add(factory.createCommandRemoveComponentInstance(rc))
+			else 
 				if(rc.isUpdated(similarComponent))
-				then
-					result.add(factory.createCommandUpdateComponentInstance(similarComponent))
-				else
-					//DO NOTHING
+				then result.add(factory.createCommandUpdateComponentInstance(similarComponent))
 				end
 			end
 		}
 		
 		updateNode.components.each{ uc |
-			var similarComponent : ComponentInstance init void
-			runtimeNode.components.each{ rc | 
-				if(rc.isEquals(uc)) then similarComponent := uc end
-			}
+			var similarComponent : ComponentInstance init runtimeNode.components.detect{rc| rc.isEquals(uc) }
 			if(similarComponent == void)
-			then
-				//NOT FOUDN DEPLOY COMPONENT TYPE
-				result.add(factory.createCommandAddComponentInstance(uc))
+			then result.add(factory.createCommandAddComponentInstance(uc))
 			end
 		}		
-
-		
-		
 	end
-	
 	
 }
 

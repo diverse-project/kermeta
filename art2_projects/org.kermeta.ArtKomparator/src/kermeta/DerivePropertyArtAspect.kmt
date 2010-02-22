@@ -42,6 +42,8 @@ aspect class ComponentInstance {
 			end
 		end
 		
+		
+		
 		//TEST COLLECTION BINDINGS
 		if(not(result))
 		then
@@ -59,20 +61,17 @@ aspect class ComponentInstance {
 			ct.container.asType(ContainerNode).bindings.each{b|
 				b.ports.each{p|
 					self.requirePorts.each{np|
-						if(np.isEquals(p)) then neededBindingRuntime.add(b) end
+						if(np.isEquals(p)) then neededBindingUpdate.add(b) end
 					}
 				}
 			}
 			
-			if (ct.hostedPorts.size == self.hostedPorts.size )
+			if (neededBindingRuntime.size == neededBindingUpdate.size )
 			then
 				//every runtime needed binding is contain in update needed binding
 				neededBindingRuntime.each{b|
-					var subResult : Boolean init false
-					neededBindingUpdate.each{b2|
-						if(b.isEquals(b2)) then subResult := true end
-					}
-					if(not(subResult)) then result := true end
+					if not(neededBindingUpdate.exists{ b2 | b.isEquals(b2) })
+					then result := true end
 				}
 			else
 				result := true
@@ -93,11 +92,7 @@ aspect class Binding {
 	operation isEquals(ct : Binding) : Boolean is do
 		result := true
 		self.ports.each{p|
-			var subResult : Boolean init false
-			ct.ports.each{p2|
-				if(p.isEquals(p2)) then subResult := true end
-			}
-			if(not(subResult)) then result := false end
+			if(not(ct.ports.exists{ p2 | p.isEquals(p2) })) then result := false end
 		}
 	end
 }
@@ -116,21 +111,11 @@ aspect class ContainerNode {
 	property componentTypes : ComponentType[0..*] getter is do
 		var alreadyDeployComponentType : OrderedSet<ComponentType> init OrderedSet<ComponentType>.new
 		self.components.each{c|
-			var ct : ComponentType init c.componentType
-			if(not(containByName(ct,alreadyDeployComponentType)))
-			then 
-				alreadyDeployComponentType.add(ct)
+			if(not(alreadyDeployComponentType.exists{ e | c.componentType.name.equals(e.name) } ))
+			then alreadyDeployComponentType.add(c.componentType)
 			end	
 		}
 		result := alreadyDeployComponentType
-	end
-	
-	operation containByName(n : NamedElement , s : Set<ComponentType> ) : Boolean is do 
-		result:= false
-		s.each{ e |
-			if(n.name.equals(e.name))
-			then result := true end
-		}
 	end
 	
 }
