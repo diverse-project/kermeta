@@ -1,0 +1,97 @@
+/*
+ * Creation : February 19, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+package org::kermeta::ki::kontext;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.task/models/task.km"
+require "platform:/resource/org.kermeta.ki.kontext/src/kermeta/taskContexter/TaskConstraint.kmt"
+
+
+using kermeta::standard
+using task
+using kermeta::persistence
+
+
+class TaskContexter
+{
+	operation contextualise(uriTaskModel : String, cou : ContextOfUse, taskConstraintModel : TaskConstraintModel) : TaskModel is do
+		result := getTaskModel(uriTaskModel) // Tasks loaded from the given URI
+		var tasksConstrainted : OrderedSet<Task> init OrderedSet<Task>.new 	// All the tasks constrainted
+		var roots : Collection<Task> init result.tasks.select{ 	// The root tasks
+				t1 | not result.tasks.exists{t2 | not t1.equals(t2) and t2.subtasks.exists{t3 | t3.equals(t1)}}
+		}
+		
+		taskConstraintModel.constraints.each{c | tasksConstrainted.addAll(c.tasks) }
+
+		roots.each { t |
+			var constrainted : Boolean init tasksConstrainted.exists{t2 | t2.name.equals(t.name)}
+			
+			if(constrainted) then // Since t is the target of a constraint, we test if the constraint is respected or not.
+			// If respected, t will not be added to the targetted model.
+				constrainted := taskConstraintModel.constraints.exists{ c | c.tasks.exists{t2 | t.name==t2.name} and c.isRespected(cou) }
+			end
+			
+			if(constrainted) then
+				result.tasks.remove(t)// Should never occur since it means that no action are possible.
+			else
+				scan(t, cou, taskConstraintModel, tasksConstrainted, result) // We scan t's children.
+			end
+		}
+	end
+	
+	
+	operation scan(parentTask : Task, cou : ContextOfUse, taskConstraintModel : TaskConstraintModel, 
+					tasksConstrainted : Collection<Task>, taskModel : TaskModel) is do
+		parentTask.subtasks.each{t |
+			var constrainted : Boolean init tasksConstrainted.exists{t2 | t2.name.equals(t.name)}
+			
+			if(constrainted) then // Since t is the target of a constraint, we test if the constraint is respected or not.
+			// If respected, t will not be added to the targetted model.
+				constrainted := taskConstraintModel.constraints.exists{ c | c.tasks.exists{t2 | t.name==t2.name} and c.isRespected(cou) }
+			end
+
+			if(constrainted) then stdio.writeln(t.name)
+				parentTask.subtasks.remove(t) // The task is removed from its parent.
+				taskModel.tasks.remove(t) // The task is removed from the root container
+				// Relations that use this task must be removed too.
+				taskModel.operations.each{op | if(op.src==t or op.target==t) then taskModel.operations.remove(op) end }
+			else
+				scan(t, cou, taskConstraintModel, tasksConstrainted, taskModel) // We scan t's children.
+			end
+		}
+	end
+	
+	
+	
+	operation saveTaskModel(uri : String, outputModel : TaskModel) : Void is do
+		var repository : EMFRepository init EMFRepository.new
+		repository.registerEcoreFile("platform:/resource/org.kermeta.ki.task/models/task.ecore")
+        var resource : Resource init repository.createResource(uri, "platform:/resource/org.kermeta.ki.task/models/task.ecore")
+		resource.instances.add(outputModel)
+	 	resource.save()
+	end
+	
+	
+	
+	operation getTaskModel(uriTaskModel : String) : TaskModel is do
+		var uriTaskMM : String init "platform:/resource/org.kermeta.ki.task/models/task.ecore"
+   		var repository : EMFRepository init EMFRepository.new
+   		repository.registerEcoreFile(uriTaskMM)          
+   		var resource : Resource init repository.createResource(uriTaskModel, uriTaskMM)
+       	resource.load()
+		
+		from var it : Iterator<Object> init resource.instances.iterator
+		until it.isOff
+		loop
+			var next : Object init it.next
+			if(TaskModel.isInstance(next)) then                 
+				result ?= next
+			end
+		end
+	end
+}

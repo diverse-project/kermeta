@@ -2,7 +2,7 @@
 package kontext;
 
 require "kermeta"
-require "http://www.kermeta.org/ki/task"
+require "platform:/resource/org.kermeta.ki.task/models/task.km"
 
 
 class ContextToTask
@@ -28,5 +28,4 @@ class ContextToTaskConstraint
 class Expression
 {
 	attribute text : ecore::EString
-
 }

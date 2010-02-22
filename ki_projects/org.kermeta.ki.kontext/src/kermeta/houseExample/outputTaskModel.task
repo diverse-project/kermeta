@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<task:TaskModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.kermeta.org/ki/task">
+  <operations xsi:type="task:EnablingWithInformation" src="//@tasks.2" target="//@tasks.3"/>
+  <operations xsi:type="task:EnablingWithInformation" src="//@tasks.3" target="//@tasks.4"/>
+  <operations xsi:type="task:Interleaving" src="//@tasks.5" target="//@tasks.6"/>
+  <tasks xsi:type="task:Abstract" name="Gerer Maison" subtasks="//@tasks.1"/>
+  <tasks xsi:type="task:Abstract" name="Gerer Lumiere" subtasks="//@tasks.2 //@tasks.3 //@tasks.4"/>
+  <tasks xsi:type="task:User" name="Selectionner Piece"/>
+  <tasks xsi:type="task:User" name="Selectionner Lampe"/>
+  <tasks xsi:type="task:Abstract" name="Gerer Lampe" subtasks="//@tasks.5 //@tasks.6"/>
+  <tasks xsi:type="task:User" name="Allumer Lampe"/>
+  <tasks xsi:type="task:User" name="Eteindre Lampe"/>
+</task:TaskModel>

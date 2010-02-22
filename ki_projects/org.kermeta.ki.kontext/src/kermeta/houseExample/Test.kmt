@@ -1,0 +1,88 @@
+/* $Id:$ 
+ * Creation : February 19, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+@mainClass "org::kermeta::ki::kontext::Main"
+@mainOperation "main"
+
+
+package org::kermeta::ki::kontext;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.task/models/task.km"
+require "platform:/resource/org.kermeta.ki.kontext/src/kermeta/houseExample/HouseContextOfUse.kmt"
+require "platform:/resource/org.kermeta.ki.kontext/src/kermeta/houseExample/HouseTaskConstraint.kmt"
+require "platform:/resource/org.kermeta.ki.kontext/src/kermeta/taskContexter/TaskContexter.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using task
+using org::kermeta::ki::kontext::house
+using org::kermeta::ki::kontext
+
+
+class Main
+{
+	operation main() : Void is do
+		var taskModel    : TaskModel init loadTaskModel
+		var couInstance : ContextOfUse init getContextInstance1
+		var taskConstraints : HouseTaskConstraintModel init HouseTaskConstraintModel.new
+		var taskContexter : TaskContexter init TaskContexter.new
+		var taskModelReduced : TaskModel
+		
+		taskConstraints.initialise(taskModel)
+		taskModelReduced := taskContexter.contextualise("platform:/resource/org.kermeta.ki.kontext/src/kermeta/houseExample/default.task", couInstance, taskConstraints)
+		taskContexter.saveTaskModel("platform:/resource/org.kermeta.ki.kontext/src/kermeta/houseExample/outputTaskModel.task", taskModelReduced)
+	end
+
+
+
+	operation getContextInstance1() : ContextOfUse is do
+		var house : House init House.new
+		var hall : Place init Place.new
+		var bathroom : Place init Place.new
+		
+		hall.lights.add(Light.new)
+		hall.lights.add(Light.new)
+		bathroom.lights.add(Light.new)
+		
+		house.places.add(hall)
+		house.places.add(bathroom)
+
+		result := ContextOfUse.new
+		result.user := GrandMa.new
+		result.platform := Workstation.new
+		result.env := house
+	end
+
+	
+	
+	
+   operation metamodelRegistration(e : kermeta::exceptions::ResourceLoadException) is do
+            stdio.writeln("Problem when loading the model. ENSURE YOU HAVE REGISTERED THE METAMODELS !\n"
+                     +"You can find additional information about thise sample on Kermeta web site : http://kermeta.org/examples")
+            raise e
+   end
+   
+	
+	
+	operation loadTaskModel() : TaskModel is do
+   		var repository : EMFRepository init EMFRepository.new
+   		repository.registerEcoreFile("platform:/resource/org.kermeta.ki.task/models/task.ecore")             
+   		var resource : Resource init repository.createResource("platform:/resource/org.kermeta.ki.kontext/src/kermeta/houseExample/default.task",
+																"platform:/resource/org.kermeta.ki.task/models/task.ecore")
+       	resource.load()
+		
+		from var it : Iterator<Object> init resource.instances.iterator
+		until it.isOff
+		loop
+			var next : Object init it.next
+			if(TaskModel.isInstance(next)) then                 
+				result ?= next
+			end
+		end
+	end
+}

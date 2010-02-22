@@ -4,31 +4,22 @@
  * Copyright:
  * Authors  : Arnaud Blouin
  */
-//@mainClass "model::Main"
-//@mainOperation "main"
+@mainClass "org::kermeta::ki::kontext::house::House"
 
 
-package contextOfUse;
+package org::kermeta::ki::kontext::house;
 
 
 require kermeta
+require "platform:/resource/org.kermeta.ki.kontext/src/kermeta/taskContexter/ContextOfUse.kmt"
+
 using kermeta::standard
+using org::kermeta::ki::kontext
 
 
-abstract class User {
-}
+/******************** Env *************************/
 
-
-class GrandMa inherits User{
-}
-
-
-class Nurse inherits User {
-}
-
-
-
-class House {
+class House inherits Environment {
 	attribute places : set Place[0..*]
 	
 	
@@ -124,5 +115,80 @@ class Light {
 }
 
 
+
+
+
+/******************** EP *************************/
+abstract class HID {
+}
+
+
+class Gyroscope inherits HID {
+}
+
+
+class TacticleScreen inherits HID {
+}
+
+
+class Keyboard inherits HID {
+}
+
+
+class Mouse inherits HID {
+}
+
+
+
+
+@keyboard "high"
+@mouse "high"
+abstract class Computer inherits Platform {
+}
+
+
+
+@space "high"
+@cpu "high"
+@usability "high"
+class NetBook inherits Computer {
+}
+
+
+
+
+@space "medium"
+@cpu "low"
+@usability "high"
+class Workstation inherits Computer {
+}
+
+
+
+@bimanual "high"
+@hand "high"
+@space "high"
+@cpu "medium"
+class IPhone inherits Platform {
+}
+
+
+
+
+
+/******************** User *************************/
+
+@efficiency "high"
+@functionnality "high"
+@usability "medium"
+class GrandMa inherits User {
+}
+
+
+@efficiency "medium"
+@functionnality "medium"
+@usability "high"
+class Nurse inherits User {
+}
 
 

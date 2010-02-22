@@ -1,0 +1,45 @@
+/* $Id:$ 
+ * Creation : February 19, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "org::kermeta::ki::kontext::TaskConstraintModel"
+
+
+package org::kermeta::ki::kontext;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.kontext/src/kermeta/taskContexter/ContextOfUse.kmt"
+require "platform:/resource/org.kermeta.ki.task/models/task.km"
+
+using kermeta::standard
+using task
+
+
+
+abstract class TaskConstraintModel {
+	attribute constraints : Constraint[0..*]
+}
+
+
+abstract class Constraint {
+	reference tasks : Task[1..*]
+
+	operation isRespected(cou : ContextOfUse) : Boolean is abstract
+	
+	
+	operation lookForTask(name : String, collecTasks : Collection<Task>) : Task is do
+		if(name==void or collecTasks==void) then result := void
+		else
+			result := collecTasks.detect{t | t.name==name  }
+
+			if(result.isVoid) then
+				result := collecTasks.detect{t | not (t := lookForTask(name, t.subtasks)).isVoid }
+			end
+		end
+	end
+}
+
+

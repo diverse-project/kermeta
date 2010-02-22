@@ -1,0 +1,34 @@
+/* $Id:$ 
+ * Creation : February 19, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "org::kermeta::ki::kontext::ContextOfUse"
+
+
+package org::kermeta::ki::kontext;
+
+
+require kermeta
+
+
+class ContextOfUse {
+	attribute env : Environment
+	attribute platform : Platform
+	attribute user : User
+}
+
+
+
+abstract class Environment {
+}
+
+
+abstract class Platform {
+}
+
+
+abstract class User{
+}
