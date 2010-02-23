@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->
-<features>
-<feature name="hello" version="0.0.1-SNAPSHOT"> 
-	<bundle>mvn:fr.irisa.triskell.osgi/componentType.hello/0.0.1-SNAPSHOT</bundle> 
-</feature>
-</features>
