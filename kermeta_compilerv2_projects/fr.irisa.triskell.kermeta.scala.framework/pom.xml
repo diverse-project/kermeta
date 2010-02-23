@@ -60,7 +60,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Export-Package>fr.irisa.triskell.kermeta.language.structureScalaAspect.*,kermeta.*,fr.irisa.triskell.scala.generated.fw</Export-Package>
+						<Export-Package>fr.irisa.triskell.kermeta.language.structureScalaAspect.*,kermeta.*</Export-Package>
 						<Private-Package></Private-Package>
 						<Bundle-Activator></Bundle-Activator>
 						<Import-Package>org.osgi.framework, scala, scala.runtime,*;resolution:=optional</Import-Package>
