@@ -5,6 +5,10 @@ import java.io._
 class FileIO {
 	
 	def writeTextFile(filename : String, text : String) : Unit = {
+		if(filename.startsWith("file:")){
+			filename.replaceFirst("file:", "")
+		}
+		
 		var repname = new File(filename.substring(0, filename.lastIndexOf("/")))
 		if(!repname.exists()){ repname.mkdirs }
 		val fw = new FileWriter(new File(filename),false)
