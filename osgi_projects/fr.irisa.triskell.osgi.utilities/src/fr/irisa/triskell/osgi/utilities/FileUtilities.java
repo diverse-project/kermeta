@@ -275,6 +275,7 @@ public final class FileUtilities {
 
 	/**
 	 * Creates a temporary directory in the temporary directory given by the platform.
+	 * If the directory already exists, the old directory is first deleted, and a new one is created
 	 * @param dirName the name of the directory to create
 	 * @return the directory File
 	 */
@@ -293,8 +294,15 @@ public final class FileUtilities {
 			}
 
 			f = new File(getUriFromPath(dirToCreate));
+			
+			if(f.exists()) {
+				if(!f.delete()) {
+					logger.error("delete() returned false in createTempDir() on file:" + f.getAbsolutePath()+ " Please have a check on permissions.");
+				}
+			}
+			
 			if(!f.mkdirs()) {
-				logger.error("mkdirs() returned false. Check for authorizations to write in:" + tmpDir);
+				logger.error("mkdirs() returned false for createTempDir(). Check for authorizations to write :" + f.getAbsolutePath());
 				return null;
 			}
 
@@ -328,11 +336,11 @@ public final class FileUtilities {
 			f = new File(getUriFromPath(tmpDir));
 			if(f.exists()) {
 				if(!f.delete()) {
-					logger.error("delete() returned false on file:" + f.getAbsolutePath()+ " Please have a check on permissions.");
+					logger.error("delete() returned false in createTempFile() on file:" + f.getAbsolutePath()+ " Please have a check on permissions.");
 				}
 			}
 			if(!f.createNewFile()) {
-				logger.error("createNewFile() returned falseon file:" + f.getAbsolutePath()+ " Please have a check on permissions.");
+				logger.error("createNewFile() returned false in createTempFile() for file:" + f.getAbsolutePath()+ " Please have a check on permissions.");
 			}
 			f.deleteOnExit();
 
@@ -397,7 +405,7 @@ public final class FileUtilities {
 
 		} catch (URISyntaxException e) {
 
-			logger.error("Not correct URI.", e);
+			logger.error("Not correct URI for the getTempFile()", e);
 		}
 		return null;
 	}
@@ -413,7 +421,7 @@ public final class FileUtilities {
 		f3 = ctx.getDataFile(dirName);
 		if(!f3.exists()) {
 			if(!f3.mkdirs()) {
-				logger.error("mkdirs() returned false. Check for authorizations to write in:" + f3.getAbsolutePath());
+				logger.error("mkdirs() returned false for createPersistentDir(). Check for authorizations to write in:" + f3.getAbsolutePath());
 			}
 		}
 
@@ -438,7 +446,7 @@ public final class FileUtilities {
 			f3 = ctx.getDataFile(fileName);
 			if(!f3.exists()) {
 				if(!f3.createNewFile()) {
-					logger.error("createNewFile() returned falseon file:" + f3.getAbsolutePath()+ " Please have a check on permissions.");
+					logger.error("createNewFile() returned false for createPersistentFile() on file:" + f3.getAbsolutePath()+ " Please have a check on permissions.");
 				}
 			}
 
