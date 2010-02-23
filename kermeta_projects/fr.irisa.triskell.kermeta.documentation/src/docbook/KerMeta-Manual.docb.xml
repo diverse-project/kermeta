@@ -2773,37 +2773,75 @@ myCol1.add(50)
         linkend="section_lambda_expression.link" />). These ones are very
         useful for model navigation.</para>
 
-        <para><emphasis role="strong">Example 1:</emphasis> closure
-        definitions for collection manipulation in Kermeta</para>
-
-        <programlisting>aCollection.<emphasis role="strong">each</emphasis> { e | 
-    <emphasis>/* do something with each element e of this collection */</emphasis>
+		<section>
+			<title>Function <emphasis>each</emphasis></title>
+			<para>TODO</para>
+	        <programlisting>aCollection.<emphasis role="strong">each</emphasis> { e | 
+	    <emphasis>/* do something with each element e of this collection */</emphasis>
 }
-</programlisting>
+			</programlisting>
+		</section>
 
-        <programlisting>aBoolean := aCollection.<emphasis role="strong">forAll</emphasis> { e | <emphasis>/* put here a condition */</emphasis>
-} <emphasis>// return true if the condition is true for all elements in the collection.</emphasis></programlisting>
+		<section>
+			<title>Function <emphasis>forAll</emphasis></title>
+			<para>TODO</para>
+	        <programlisting>aBoolean := aCollection.<emphasis role="strong">forAll</emphasis> { e | <emphasis>/* put here a condition */</emphasis>
+	} <emphasis>// return true if the condition is true for all elements in the collection.</emphasis></programlisting>
+		</section>
+		
+		<section>
+			<title>Function <emphasis>select</emphasis></title>
+			<para>TODO</para>
+	        <programlisting>aCollection2 := aCollection.<emphasis role="strong">select</emphasis> { e | 
+	     <emphasis>/* put here a condition that returns true for elements that must be included in the resulting Collection */</emphasis>
+	}
+			</programlisting>
+		</section>
 
-        <programlisting>aCollection2 := aCollection.<emphasis role="strong">select</emphasis> { e | 
-     <emphasis>/* put here a condition that returns true for elements that must  be included in the resulting Collection */</emphasis>
-}
-</programlisting>
+		<section>
+			<title>Function <emphasis>reject</emphasis></title>
+			<para>TODO</para>
+	        <programlisting>aCollection2 := aCollection.<emphasis role="strong">reject</emphasis> { e | 
+	     <emphasis>/* put here a condition that returns true for elements that must be exclude in the resulting Collection */</emphasis>
+	}
+			</programlisting>
+		</section>
 
-        <programlisting>aCollection2 := aCollection.<emphasis role="strong">reject</emphasis> { e | 
-     <emphasis>/* put here a condition that returns true for elements that must  be exclude in the resulting Collection */</emphasis>
-}
-</programlisting>
+		<section>
+			<title>Function <emphasis>collect</emphasis></title>
+			<para>TODO</para>
+			<programlisting><emphasis> // return a new collection which size is the same as in the original </emphasis>
+			<emphasis> // collection, and which element type is the type of the result of the expression.</emphasis>
+			aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e | 
+			     <emphasis>/* put here an expression, for example e.name */</emphasis>
+			}
+			</programlisting>
+		</section>
+		
+		<section>
+			<title>Function <emphasis>detect</emphasis></title>
+			<para>TODO</para>
+        	<programlisting>anObject := aCollection.<emphasis role="strong">detect</emphasis> { e | <emphasis>/* a condition */</emphasis>} // returns an element (usually the first) that fulfills the condition.</programlisting>
+		</section>
 
-<programlisting><emphasis> // return a new collection which size is the same as in the original </emphasis>
-<emphasis> // collection, and which element type is the type of the result of the expression.</emphasis>
-aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e | 
-     <emphasis>/* put here an expression, for example e.name */</emphasis>
-} 
-</programlisting>
-
-        <programlisting>anObject := aCollection.<emphasis role="strong">detect</emphasis> { e | <emphasis>/* a condition */</emphasis>} // returns an element (usually the first) that fulfill the condition.</programlisting>
-
-        <programlisting>aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | <emphasis>/* a condition */</emphasis>} // returns true if at least one element fulfill the condition.</programlisting>
+		<section>
+			<title>Function <emphasis>exists</emphasis></title>
+			<para>Function <emphasis>exists</emphasis> returns <emphasis>true</emphasis> if at least one element fulfills the last boolean 
+			expression defined into the block. For instance:</para>
+			<programlisting>aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | <emphasis>/* a condition */</emphasis>} // returns true if at least one element fulfills the condition.</programlisting>
+			<para>If several boolean condition are defined into the block of function <emphasis>exists</emphasis>, the last condition is used for the test.
+			For instance, the following function exists returns true at the first iteration:</para>
+			<programlisting>aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | false true }</programlisting>
+			<para>Instructions can be defined into the block of function <emphasis>exists</emphasis>. For instance, the following code displays the current object at each iteration:</para>
+			<programlisting>aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e |
+				stdio.writeln(e.toString)
+				<emphasis>/* a condition */</emphasis>
+			}
+			</programlisting>
+			<para>If no boolean expression is defined, value <emphasis>Void</emphasis> is returned, as illstrated in the following example. Such a use of function <emphasis>exists</emphasis> is not adviced
+			since it corresponds to the use of function <emphasis>each</emphasis>.</para>
+			<programlisting>aBoolean := aCollection.<emphasis role="strong">exists</emphasis> { e | stdio.writeln(e.toString) }<emphasis>/* The value of aBoolean is <emphasis>Void</emphasis> */</emphasis></programlisting>
+		</section>
       </section>
     </section>
 
