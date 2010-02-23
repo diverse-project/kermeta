@@ -97,13 +97,13 @@ object Main extends LogAspect {
     // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/012_TypeFromEcore.km"
   // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/015_EcoreDocHelper.km"
    //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
-<<<<<<< .mine
+
 	//    inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/001_LoadUML.km"
-=======
+
 //	    inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/001_LoadUML.km"
 	    	
-	    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Art2DroolsMatcher/Art2DROOLSPatternFramework.km"
->>>>>>> .r10131
+	//    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Art2DroolsMatcher/Art2DROOLSPatternFramework.km"
+
 	//    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LoadSaveKm/0001LoadAndSaveKm.km"
    //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.km"
 //   inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.km"
@@ -130,17 +130,16 @@ object Main extends LogAspect {
 	  }
 
 	   /* Scalac compilation step */
-<<<<<<< .mine
 	   var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,EmbettedScalaCompiler.getActualClasspath,useFSC)
-=======
+
 	   var classpath : java.util.List[String] = new java.util.ArrayList[String]
 	   classpath.addAll(List(System.getProperty("java.class.path")))
 	  // classpath ++ "" 
-	   classpath.add("/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo/outputclasspathAdditionalLib/org.kermeta.art.adapter_1.0.0.jar")
-	   classpath.add("/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo/outputclasspathAdditionalLib/org.kermeta.art.model_1.1.1.jar")
-	   classpath.add("/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo/outputclasspathAdditionalLib/org.kermeta.art.model.pattern_1.0.0.jar")
-	   var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath.toList,useFSC)
->>>>>>> .r10131
+	 //  classpath.add("/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo/outputclasspathAdditionalLib/org.kermeta.art.adapter_1.0.0.jar")
+	  // classpath.add("/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo/outputclasspathAdditionalLib/org.kermeta.art.model_1.1.1.jar")
+	 //  classpath.add("/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo/outputclasspathAdditionalLib/org.kermeta.art.model.pattern_1.0.0.jar")
+	//   var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath.toList,useFSC)
+
 	   
 	   /* Scala runner */
 	   if(compilationResult == 0){
