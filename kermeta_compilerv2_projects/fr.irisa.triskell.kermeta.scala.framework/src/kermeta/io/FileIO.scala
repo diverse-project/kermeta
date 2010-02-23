@@ -4,10 +4,14 @@ import java.io._
 
 class FileIO {
 	
-	def writeTextFile(filename : String, text : String) : Unit = {
-		if(filename.startsWith("file:")){
-			filename.replaceFirst("file:", "")
+	def writeTextFile(file : String, text : String) : Unit = {
+		var filename = ""
+		if(file.startsWith("file:")){
+			filename = file.replaceFirst("file:", "")
+		} else {
+			filename = file
 		}
+		println("WriteTxt="+filename)
 		
 		var repname = new File(filename.substring(0, filename.lastIndexOf("/")))
 		if(!repname.exists()){ repname.mkdirs }
@@ -16,7 +20,15 @@ class FileIO {
 		finally{ fw.close }
 	}
 	
-	def writeTextFileWithEncoding(filename : String, text : String, encoding : String ) : Unit = {
+	def writeTextFileWithEncoding(file : String, text : String, encoding : String ) : Unit = {
+				var filename = ""
+		if(file.startsWith("file:")){
+			filename = file.replaceFirst("file:", "")
+		} else {
+			filename = file
+		}
+		println("WriteTxt="+filename)
+		
 		var repname = new File(filename.substring(0, filename.lastIndexOf("/")))
 		if(!repname.exists()){ repname.mkdirs }
 		val fw = new PrintWriter(new File(filename),encoding)
@@ -24,7 +36,7 @@ class FileIO {
 		finally{ fw.close }
 	}
 	
-	def readTextFile(filename : String) : String = {
+	def readTextFile(filename : String) : String = {		
 		var res = new StringBuilder
 		val br = new BufferedReader(new FileReader(new File(filename)))
 		try{ while(br.ready) res.append(br.readLine) }
