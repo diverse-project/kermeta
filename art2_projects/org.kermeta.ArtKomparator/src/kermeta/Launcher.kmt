@@ -34,23 +34,29 @@ class Launcher
 
 	operation launchFromModel(newModel : art2::ContainerRoot) : Void is do 
 	
+	//self.nodeName := "duke.irisa.fr"
+	//hotdeployPATH := "///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy"
+	
+	//newModel := "/Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi"
+	
+	
 		if(nodeName != void and hotdeployPATH != void)
 		then
 	
-	
-		//var nodeName : String init "duke.irisa.fr"
+
 
 		var factory : OSGiCommandFactory init OSGiCommandFactory.new
 		var komparator : Komparator init Komparator.new
 		
 		var contextCommand : CommandContext init CommandContext.new
-		//contextCommand.runtimePATH := "///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy"
 		contextCommand.runtimePATH := hotdeployPATH
 		
 		var commandSet : Set<Command> init komparator.kompare(actualRuntimeModel,newModel, self.nodeName,factory)
 		commandSet.each{c |
 			c.execute(contextCommand)
 		}
+		
+		actualRuntimeModel := newModel
 		
 		end
 
