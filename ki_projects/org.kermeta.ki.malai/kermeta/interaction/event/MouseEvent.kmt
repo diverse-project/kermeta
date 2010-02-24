@@ -1,0 +1,48 @@
+/*
+ * Creation : February 24, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::interaction::event;
+
+
+require kermeta
+require "InputEvent.kmt"
+
+using kermeta::standard
+
+
+
+class MouseEvent inherits InputEvent
+{
+	operation getButton() : Integer is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::MouseEventWrapper.getButton(self)
+	end
+	
+	
+	
+	operation getClickCount() : Integer is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::MouseEventWrapper.getClickCount(self)
+	end
+	
+	
+	
+	operation getX() : Integer is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::MouseEventWrapper.getX(self)
+	end
+	
+	
+	
+	operation getY() : Integer is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::MouseEventWrapper.getY(self)
+	end
+	
+	
+	
+	operation paramString() : String is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::MouseEventWrapper.paramString(self)
+	end
+}

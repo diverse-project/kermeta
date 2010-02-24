@@ -1,0 +1,29 @@
+/*
+ * Creation : February 24, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::interaction::event;
+
+
+require kermeta
+require "AWTEvent.kmt"
+
+using kermeta::standard
+
+
+abstract class InputEvent inherits AWTEvent
+{
+	operation getModifiers() : Integer is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::InputEventWrapper.getModifiers(self)
+	end
+	
+	
+	
+	operation getModifiersEx() : Integer is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::InputEventWrapper.getModifiersEx(self)
+	end
+}

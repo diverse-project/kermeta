@@ -1,0 +1,41 @@
+/*
+ * Creation : February 24, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::interaction::event;
+
+
+require kermeta
+require "MouseEvent.kmt"
+
+using kermeta::standard
+
+
+class MouseWheelEvent inherits MouseEvent
+{
+	operation getScrollAmount() : Integer is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::MouseWheelEventWrapper.getScrollAmount(self)
+	end
+	
+	
+	
+	operation getScrollType() : Integer is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::MouseWheelEventWrapper.getScrollType(self)
+	end
+	
+	
+	
+	operation getUnitsToScroll() : Integer is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::MouseWheelEventWrapper.getUnitsToScroll(self)
+	end
+	
+	
+	
+	operation getWheelRotation() : Integer is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::MouseWheelEventWrapper.getWheelRotation(self)
+	end
+}

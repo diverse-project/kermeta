@@ -1,0 +1,60 @@
+/* $Id:$ 
+ * Creation : February 24, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::interaction::event;
+
+
+require kermeta
+require "../../dispatcher/Dispatcher.kmt"
+require "Event.kmt"
+
+using kermeta::ki::malai::dispatcher
+using kermeta::standard
+
+
+
+class EventManager inherits Dispatchable
+{
+	operation initialise() : Void is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.initialise(self)
+	end
+	
+
+	method isWaiting() : Boolean is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.isWaiting(self)
+	end
+	
+	
+	
+	method run() : Void is do
+		var event : Event
+		
+		event ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.getTopEvent(self)
+		
+		if(event.isVoid) then
+			stdio.writeln("event is void")
+		else
+			var existStr : String
+			existStr ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.getExitEventString(self)
+			
+			if(event.getName.equals(existStr)) then
+				var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+				ex.message := existStr
+				raise ex
+			else
+				process(event)
+			end
+		end
+	end
+	
+	
+	
+	operation process(event : Event) : Void is do
+		stdio.writeln(event.getName)
+	end
+}

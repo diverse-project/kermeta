@@ -6,6 +6,12 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class CanvasExample {
 
+	public static void main(String[] args) {
+		CanvasIS is = new CanvasIS();
+		
+		is.setVisible(true);
+	}
+	
 	
 	public static RuntimeObject initialize(RuntimeObject self) {
 		CanvasIS is = new CanvasIS();

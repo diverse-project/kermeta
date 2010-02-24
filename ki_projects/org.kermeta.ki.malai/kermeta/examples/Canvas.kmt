@@ -15,33 +15,28 @@ package kermeta::ki::malai::examples;
 require kermeta
 require "ActivePresentation.kmt"
 require "Actions.kmt"
+require "../interaction/event/EventManager.kmt"
+require "../dispatcher/Dispatcher.kmt"
+
+using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::dispatcher
+
 
 
 class Main
 {
 	operation main() : Void is do
 		var cui : CanvasUIWrapper init CanvasUIWrapper.new
-		var model : ActiveModelCanvas init ActiveModelCanvas.new
 		
-		var rec : Rectangle init Rectangle.new
-	/*	var rec : Rectangle init Rectangle.new
-		var ell : Ellipse init Ellipse.new
-		var action : ActionSelect init ActionSelect.new
-		
-		
-		rec.initialise()
-		ell.initialise()
-		
-		model.shapes.add(rec)
-		model.shapes.add(ell)
-
-		action.canvas := model
-		action.selection.add(rec)
-		
-		action.doIt()*/
-		model.addShape(rec)
 		
 		extern org::kermeta::ki::malai::examples::canvas::CanvasExample.initialize(cui)
+		
+		var eventManager : EventManager init EventManager.new
+		var dispatcher : ListDisptacher init ListDisptacher.new
+		
+		eventManager.initialise
+		dispatcher.components.add(eventManager)
+		dispatcher.run
 	end
 }
 

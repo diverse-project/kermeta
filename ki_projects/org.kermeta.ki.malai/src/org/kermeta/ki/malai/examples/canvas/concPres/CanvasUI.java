@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
+
 
 
 public class CanvasUI extends JPanel {
@@ -26,6 +28,8 @@ public class CanvasUI extends JPanel {
 		shapesUI  = new ArrayList<ShapeUI>();
 		setPreferredSize(new Dimension(900, 500));
 		setFocusable(true);
+		
+		EventManagerWrapper.MANAGER.attachTo(this);
 	}
 
 

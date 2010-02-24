@@ -1,11 +1,14 @@
 package org.kermeta.ki.malai.examples.canvas.ui ; 
 
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 import org.kermeta.ki.malai.examples.canvas.concPres.CanvasUI;
+import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 
 public class CanvasIS extends JFrame { 
 	private static final long serialVersionUID = 1l ; 
@@ -27,6 +30,12 @@ public class CanvasIS extends JFrame {
 		setLocation(200, 100);
 		pack();
 		canvas.requestFocus();
+		
+     	addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowClosing(WindowEvent e) {
+						EventManagerWrapper.MANAGER.onExitEvent();
+                    }});  
 	} 
 } 
 

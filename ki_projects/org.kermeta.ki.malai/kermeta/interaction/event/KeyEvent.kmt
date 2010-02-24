@@ -1,0 +1,35 @@
+/*
+ * Creation : February 24, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::interaction::event;
+
+
+require kermeta
+require "InputEvent.kmt"
+
+using kermeta::standard
+
+
+class KeyEvent inherits InputEvent
+{
+	operation getKeyCode() : Integer is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::KeyEventWrapper.getKeyCode(self)
+	end
+	
+	
+	
+	operation getKeyLocation() : Integer is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::KeyEventWrapper.getKeyLocation(self)
+	end
+	
+	
+	
+	operation getKeyChar() : String is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::KeyEventWrapper.getKeyChar(self)
+	end
+}
