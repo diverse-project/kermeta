@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.kermeta.art2</groupId>
+	<artifactId>art2.runtime</artifactId>
+	<packaging>bundle</packaging>
+	<name>ART2 :: Runtime</name>
+	<version>0.4.0-SNAPSHOT</version>
+	<repositories>
+		<repository>
+			<id>scala-tools.org</id>
+			<name>Scala-tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-snapshots</url>
+		</repository>
+		<repository>
+			<id>triskellPublic</id>
+			<url>http://tipimouss.irisa.fr:8081/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>org.kermeta.art2</groupId>
+			<artifactId>art2.kompare</artifactId>
+			<version>1.2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>2.8.0-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src/main/scala</sourceDirectory>
+		<plugins>
+
+
+
+			<plugin>
+				<groupId>org.scala-tools</groupId>
+				<artifactId>maven-scala-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-ClassPath>.</Bundle-ClassPath>
+						<Import-Package>fr.irisa.triskell.kermeta.util,kermeta.*,fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect,
+						fr.irisa.triskell.kermeta,
+						scala.*,!org.eclipse.emf.ecoreScalaAspect,art2.*,org.eclipse.emf.*,org.kermeta.log4j.util;resolution:=optional, org.w3c.dom, org.xml.sax, org.xml.sax.ext, org.xml.sax.helpers, sun.misc;resolution:=optional,org.osgi.framework.*,org.apache.commons.logging,javax.*,org.eclipse.core.*;resolution:=optional</Import-Package>
+						<Private-Package>!kermeta.*,!fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect,
+						!fr.irisa.triskell.kermeta,!fr.irisa.triskell.kermeta.dev,!fr.irisa.triskell.kermeta.visitor,!fr.irisa.triskell.kermeta.validation,!fr.irisa.triskell.kermeta.util,!fr.irisa.triskell.kermeta.model.plugin,!fr.irisa.triskell.kermeta.util,
+						!scala.*,org.eclipse.emf.ecoreScalaAspect,!org.eclipse.emf.*,!art2.*,org.kermeta.art2.runtime.impl,*</Private-Package>
+						<!--<DynamicImport-Package>*</DynamicImport-Package>-->
+						<Export-Package>org.kermeta.art2.runtime</Export-Package>
+						
+					</instructions>
+				</configuration>
+			</plugin>
+
+
+		</plugins>
+	</build>
+	
+	
+		<distributionManagement>
+		<snapshotRepository>
+			<id>nexus</id>
+			<url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
+</project>
