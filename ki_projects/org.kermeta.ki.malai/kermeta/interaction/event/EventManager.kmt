@@ -20,8 +20,10 @@ using kermeta::standard
 
 class EventManager inherits Dispatchable
 {
-	operation initialise() : Void is do
-		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.initialise(self)
+	operation initialise(dispatcher : AbstractDispatcher) : Void is do
+		self.dispatcher := dispatcher
+	
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.initialise(self, dispatcher)
 	end
 	
 
@@ -29,11 +31,6 @@ class EventManager inherits Dispatchable
 		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.isWaiting(self)
 	end
 	
-	
-	
-	method sleep() : Void is do
-		extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.sleep(self)
-	end
 	
 	
 	

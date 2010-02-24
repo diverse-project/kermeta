@@ -18,6 +18,18 @@ abstract class AbstractDispatcher
 	attribute running : Boolean
 	
 	
+	operation initialise() : Void is do
+		extern org::kermeta::ki::malai::dispatcherWrapper::DispatcherWrapper.initialise(self)
+	end
+	
+
+	
+	operation waitForEvent() : Void is do
+		extern org::kermeta::ki::malai::dispatcherWrapper::DispatcherWrapper.waitForEvent(self)
+	end
+	
+	
+	
 	operation run() : Void is abstract
 }
 
@@ -26,11 +38,11 @@ abstract class AbstractDispatcher
 
 abstract class Dispatchable
 {
+	reference dispatcher : AbstractDispatcher
+
 	operation isWaiting() : Boolean is abstract
 	
 	operation run() : Void is abstract
-	
-	operation sleep() : Void is abstract
 }
 
 
@@ -45,8 +57,12 @@ class SingleDisptacher inherits AbstractDispatcher
 		until not running
 		loop
 			do
-				if(component.isWaiting) then component.run() end
-				component.sleep()
+				waitForEvent
+				
+				from true
+				until not component.isWaiting
+				loop component.run()
+				end
 			rescue(ex : kermeta::exceptions::Exception) running := false end
 		end
 	end
@@ -64,10 +80,19 @@ class ListDisptacher inherits AbstractDispatcher
 		until not running
 		loop
 			do
-				components.each{c| 
-					if(c.isWaiting) then c.run() end
-					c.sleep()
-				}
+				waitForEvent
+				
+				from var stop : Boolean init false
+				until stop
+				loop
+					stop := true
+					components.each{c| 
+						if(c.isWaiting) then 
+							c.run()
+							stop := false
+						end
+					}
+				end
 			rescue(ex : kermeta::exceptions::Exception) running := false end
 		end
 	end

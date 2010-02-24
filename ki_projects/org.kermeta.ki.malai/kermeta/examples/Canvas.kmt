@@ -33,8 +33,10 @@ class Main
 		
 		var eventManager : EventManager init EventManager.new
 		var dispatcher : SingleDisptacher init SingleDisptacher.new
+
+		dispatcher.initialise
+		eventManager.initialise(dispatcher)
 		
-		eventManager.initialise
 		dispatcher.component := eventManager
 		dispatcher.run
 	end
