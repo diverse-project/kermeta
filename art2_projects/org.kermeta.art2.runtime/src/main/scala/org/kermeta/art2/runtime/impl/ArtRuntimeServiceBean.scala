@@ -66,6 +66,10 @@ class ArtRuntimeServiceBean extends ArtRuntimeService {
 		actualLaunch = org.kermeta.artKomparator.RichFactory.createLauncher.asInstanceOf[LauncherAspect]
 		actualLaunch.KersetNodeName(dictionary.getProperty("node.name"))
 		actualLaunch.KersetHotdeployPATH(dictionary.getProperty("deploy.path"))//"/Users/ffouquet/Servers/apache-felix-karaf-1.2.0/deploy")
+		
+		println("INIT ART RUNTIME")
+		println("deploy path "+dictionary.getProperty("deploy.path"))
+		println("node name "+dictionary.getProperty("node.name"))
 
 	}//fin init
 	
