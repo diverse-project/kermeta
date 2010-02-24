@@ -74,9 +74,12 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	}
 	
 	
-	public static RuntimeObject mySleep(RuntimeObject self) {
+	public static RuntimeObject sleep(RuntimeObject self) {
 		try {
-			Thread.sleep(20);
+			int size = MANAGER.events.size();
+			int sleep =  size==0 ? 20 : (20/size);
+			
+			Thread.sleep(sleep);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

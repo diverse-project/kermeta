@@ -29,8 +29,28 @@ abstract class Dispatchable
 	operation isWaiting() : Boolean is abstract
 	
 	operation run() : Void is abstract
+	
+	operation sleep() : Void is abstract
 }
 
+
+
+class SingleDisptacher inherits AbstractDispatcher 
+{
+	reference component : Dispatchable
+	
+	
+	method run() : Void is do
+		from running := true
+		until not running
+		loop
+			do
+				if(component.isWaiting) then component.run() end
+				component.sleep()
+			rescue(ex : kermeta::exceptions::Exception) running := false end
+		end
+	end
+}
 
 
 
@@ -42,15 +62,13 @@ class ListDisptacher inherits AbstractDispatcher
 	method run() : Void is do
 		from running := true
 		until not running
-	//	from var i : Integer init 0
-	//	until i>=10
 		loop
 			do
-				components.each{c| if(c.isWaiting) then c.run() end }
-				extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.mySleep(self)
-		//		i := i+1
+				components.each{c| 
+					if(c.isWaiting) then c.run() end
+					c.sleep()
+				}
 			rescue(ex : kermeta::exceptions::Exception) running := false end
 		end
 	end
 }
-

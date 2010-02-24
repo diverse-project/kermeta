@@ -31,6 +31,12 @@ class EventManager inherits Dispatchable
 	
 	
 	
+	method sleep() : Void is do
+		extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.sleep(self)
+	end
+	
+	
+	
 	method run() : Void is do
 		var event : Event
 		
