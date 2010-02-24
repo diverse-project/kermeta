@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -52,34 +53,8 @@ import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 
 public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionListener, KeyListener{
 
+	private static Logger logger = Logger.getLogger(SmartAdaptersDrools.class.getName());
 	
-	/*	public static void main(String[] args){
-
-
-		String artURI = args[0];//"file:/C:/NOSAVE/workspaces/divaStudio/DroolsGenerator/v2/CAS/base/baseModel.art";
-		String wovenArtURI = args[1];//"file:/C:/NOSAVE/workspaces/divaStudio/DroolsGenerator/v2/CAS/base/wovenModel.art";
-
-		SmartAdaptersDrools sad = new SmartAdaptersDrools();
-		sad.init();
-
-
-		System.out.println("Loading base model...");
-		sad.loadArtModel(artURI);
-		System.out.println("Done!");
-		System.out.println();
-
-		for(int i = 2; i<args.length ;i++){
-			System.out.println("Processing aspect "+(i-1));
-			sad.process(args[i]);
-			System.out.println("Done!");
-		}		
-
-		System.out.println();
-		System.out.println("Saving woven model...");
-		sad.saveArtModel(wovenArtURI, sad.resource);
-		System.out.println("Done!");
-	}
-	 */
 	private org.eclipse.emf.ecore.resource.Resource resource;
 	private long start;
 
@@ -214,9 +189,9 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 	}
 
 	private void initConfigurations() {
-		System.out.println("initConfigurations "+configurationsRepository);
+		//System.out.println("initConfigurations "+configurationsRepository);
 		File configsFiles = new File(configurationsRepository);
-		System.out.println("configsFiles "+configsFiles.getAbsolutePath());
+		//System.out.println("configsFiles "+configsFiles.getAbsolutePath());
 		if(configsFiles.listFiles() != null){
 			for(File f : configsFiles.listFiles()){
 				//System.out.println("f = "+f.getAbsolutePath());
@@ -257,29 +232,29 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 			dsplFile = "file://" + file.getAbsolutePath();
 		}
 		else {
-			System.err.println("Cannot find the DiVA model. Please check the diva.model property in your launch configuration.");
+			logger.warn("Cannot find the DiVA model. Please check the diva.model property in your launch configuration.");
 		}
 
 		property = System.getProperty("smartadapters");
-		System.out.println("property smartadapters= "+property);
+		//System.out.println("property smartadapters= "+property);
 		if(property != null){
 			file = new File(property);
-			System.out.println("file = "+file.getAbsolutePath());
+			//System.out.println("file = "+file.getAbsolutePath());
 			smartAdapters = file.getAbsolutePath();
 		}
 		else {
-			System.err.println("Cannot find the Drools repository (containing the compiled aspect). Please check the aspects.drools.repository property in your launch configuration.");
+			logger.warn("Cannot find the Drools repository (containing the compiled aspect). Please check the aspects.drools.repository property in your launch configuration.");
 		}
 		
 		property = System.getProperty("aspects.drools.repository");
-		System.out.println("property aspects.drools.repository= "+property);
+		//System.out.println("property aspects.drools.repository= "+property);
 		if(property != null){
 			file = new File(property);
-			System.out.println("file = "+file.getAbsolutePath());
+			//System.out.println("file = "+file.getAbsolutePath());
 			droolsRepository = file.getAbsolutePath();
 		}
 		else {
-			System.err.println("Cannot find the Drools repository (containing the compiled aspect). Please check the aspects.drools.repository property in your launch configuration.");
+			logger.warn("Cannot find the Drools repository (containing the compiled aspect). Please check the aspects.drools.repository property in your launch configuration.");
 		}
 
 		property = System.getProperty("aspects.repository");
@@ -288,29 +263,29 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 			aspectsRepository = "file://"+file.getAbsolutePath();
 		}
 		else {
-			System.err.println("Cannot find the aspect models repository. Please check the aspects.repository property in your launch configuration.");
+			logger.warn("Cannot find the aspect models repository. Please check the aspects.repository property in your launch configuration.");
 		}
 
 		property = System.getProperty("model.base");
-		System.out.println("property model.base= "+property);
+		//System.out.println("property model.base= "+property);
 		if(property != null){
 			file = new File(property);
 			System.out.println("file = "+file.getAbsolutePath());
 			baseModelURI = "file://"+file.getAbsolutePath();
 		}
 		else {
-			System.err.println("Cannot find the base model. Please check the model.base property in your launch configuration.");
+			logger.warn("Cannot find the base model. Please check the model.base property in your launch configuration.");
 		}
 
 		property = System.getProperty("configurations.folder");
-		System.out.println("property = "+property);
+		//System.out.println("property = "+property);
 		if(property != null){
 			file = new File(property);
 			System.out.println("file = "+file.getAbsolutePath());
 			configurationsRepository = file.getAbsolutePath();
 		}
 		else {
-			System.err.println("Cannot find the configurations repository. Please check the configurations.folder property in your launch configuration.");
+			logger.warn("Cannot find the configurations repository. Please check the configurations.folder property in your launch configuration.");
 		}
 	}
 
@@ -359,7 +334,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 				List<String> aspects = new LinkedList<String>();
 
 				for (String s : name.split("_")) {
-					System.err.println(s);
+					//logger.warn(s);
 					aspects.add(s);
 				}
 
@@ -377,13 +352,13 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 
 				for(Aspect a : bestConf.getAspect()){
 					boolean existsDrools = false;
-					System.out.println("droolsFiles.size = "+droolsFiles.size());
+					//System.out.println("droolsFiles.size = "+droolsFiles.size());
 					for(String drl : droolsFiles){
-						System.out.println("drl = "+drl);
-						System.out.println("aspect = "+a.getName().replace(" ", ""));
+						//System.out.println("drl = "+drl);
+						//System.out.println("aspect = "+a.getName().replace(" ", ""));
 						if (drl.contains(a.getName().replace(" ", ""))){
 							droolsAspectsToWeave.add(drl);
-							System.out.println("addind Drools aspect += "+drl);
+							//System.out.println("addind Drools aspect += "+drl);
 							existsDrools = true;
 						}
 					}
@@ -405,8 +380,8 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 					cmd += " "+drlFile.getAbsolutePath();
 				}
 
-				System.out.println("Weaving...");
-				System.out.println(cmd);
+				logger.info("Weaving...");
+				//System.out.println(cmd);
 				Process process;
 				start = System.currentTimeMillis();
 				try {
@@ -418,16 +393,16 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				System.out.println("Weaving "+droolsAspectsToWeave.size()+" aspects in "+(System.currentTimeMillis()-start)+" ms (including Drools initialization ~2s)");
+				logger.info("Weaving "+droolsAspectsToWeave.size()+" aspects in "+(System.currentTimeMillis()-start)+" ms (including Drools initialization ~2s)");
 				
 
-				System.out.println("link.reconfigureByModelURI("+baseModelURI.replace(".art", "_woven.art")+")");
+				//System.out.println("link.reconfigureByModelURI("+baseModelURI.replace(".art", "_woven.art")+")");
 				link.reconfigureByModelURI(baseModelURI.replace(".art", "_woven.art").replace("file://", ""));
 				//link.reconfigureInMemory((art.System)resource.getContents().get(0));
 			}
 		}
 		else{
-			System.err.println("Cannot find the best configuration");
+			logger.warn("Cannot find the best configuration");
 		}
 	}
 
@@ -447,7 +422,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 	public SuitableConfigurations loadConfModel(String modelURI) {
 		SuitableConfigurations confs;
 
-		System.out.println("Loading Suitable Configurations by URI: " + modelURI);
+		//System.out.println("Loading Suitable Configurations by URI: " + modelURI);
 
 		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 		Map<String, Object> m = reg.getExtensionToFactoryMap();
@@ -470,7 +445,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 
 		Resource res = rs.getResource(ecoreFileURI, true);
 		confs = (SuitableConfigurations) res.getContents().get(0);
-		System.out.println("Suitable Configurations loaded from URI: " + confs);
+		//System.out.println("Suitable Configurations loaded from URI: " + confs);
 
 		return confs;
 	}
@@ -560,7 +535,14 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 
 			boolean simpleInterface = false;
 			String contextFile = (text.startsWith("file:")) ? text : "file://" + text;
+			
+			long start = System.currentTimeMillis();
+			
+			logger.info("Reasoning...");
+			
 			String confURI = getBestConfiguration(dsplFile, contextFile, simpleInterface);
+			
+			logger.info("Reasoning time: "+(System.currentTimeMillis()-start)+" ms");
 
 			produceConfiguration(confURI.replace("file://", ""));
 		}

@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="lib" path="/org.kermeta.osgi.bundleFactory/lib/osgi.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/eu.ict_diva.divastudio.services"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/eu.ict_diva.osgi.component.framework"/>
@@ -19,5 +18,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/de.pure.diva.arf.core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/de.pure.diva.arf.reasoner.runtime"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/de.pure.diva.arf.service"/>
+	<classpathentry kind="lib" path="/diva.model.osgi/lib/log4j-1.2.14.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
