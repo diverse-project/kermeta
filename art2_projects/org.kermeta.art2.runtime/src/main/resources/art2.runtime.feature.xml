@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features>
-<repository>mvn:org.apache.servicemix.nmr/apache-servicemix-nmr/1.0.0/xml/features</repository>
-
 
 <feature name="scala.runtime" version="2.8.0">
-	<bundle>mvn:scala/scala.library/2.8.0</bundle>
+	<bundle>mvn:org.scala-lang-osgi/scala-library/2.8.0-SNAPSHOT</bundle>
 </feature>
 
 <feature name="emf" version="3.5.0">
@@ -26,6 +24,7 @@
 	<bundle>mvn:org.kermeta.art2/art2.model</bundle> 
 	<bundle>mvn:org.kermeta.art2/art2.kompare</bundle>
 	<bundle>mvn:org.kermeta.art2/art2.runtime</bundle>
+	<bundle>mvn:org.kermeta.art2/art2.runtime.gui</bundle>
 </feature>
 
 </features>
