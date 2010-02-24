@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ext="http://geronimo.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0"
   xsi:schemaLocation="
-    http://www.osgi.org/xmlns/blueprint/v1.0.0 
-    http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+    http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+<!-- Bean to allow the $[karaf.base] property to be correctly resolved -->
+    <ext:property-placeholder placeholder-prefix="$[" placeholder-suffix="]"/>
 
   <!-- create the bean -->
   <bean id="artRuntime" class="org.kermeta.art2.runtime.impl.ArtRuntimeServiceBean" init-method="init">
   	<property name="dictionary">
   		<props>
-  			<prop key="node.name">duke.irisa.fr</prop>
-  			<prop key="deploy.path">/Users/ffouquet/Servers/apache-felix-karaf-1.2.0/deploy</prop>
+  			<prop key="node.name" value="duke.irisa.fr" />
+  			<prop key="deploy.path" value="$[karaf.base]/deploy" />
   		</props>
   	</property>
   </bean>           
