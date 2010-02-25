@@ -13,66 +13,86 @@ require kermeta
 using kermeta::standard
 
 
+/**
+	Defines an abstract dispatcher. A dispatcher says processes to run when possible.
+*/
 abstract class AbstractDispatcher
 {
+	/** Defines if the distpacher is dispatching */
 	attribute running : Boolean
 	
 	
+	/** Initialises the dispatcher. */
 	operation initialise() : Void is do
+		/* A Java DispatcherWrapper is associated, using setUserData, to the kermeta AbstractDispatcher. */
 		extern org::kermeta::ki::malai::dispatcherWrapper::DispatcherWrapper.initialise(self)
 	end
 	
 
-	
+	/** Waits for an event to said processes to run. */
 	operation waitForEvent() : Void is do
+		/* The associated Java DispatcherWrapper is put in wait until a process launch a notify on the DispatcherWrapper. */
 		extern org::kermeta::ki::malai::dispatcherWrapper::DispatcherWrapper.waitForEvent(self)
 	end
 	
 	
-	
+	/** Launches the dispatcher. */
 	operation run() : Void is abstract
 }
 
 
 
-
+/**
+	Defines a process that a dispatcher can launch.
+*/
 abstract class Dispatchable
 {
+	/** The corresponding dispatcher. */
 	reference dispatcher : AbstractDispatcher
-
+	
+	/** Defines if the process waits for the dispatcher to execute a job. */
 	operation isWaiting() : Boolean is abstract
 	
+	/** launches the process to execute its job. */
 	operation run() : Void is abstract
 }
 
 
-
+/**
+	Defines a dispatcher that contains only a single process.
+*/
 class SingleDisptacher inherits AbstractDispatcher 
 {
-	reference component : Dispatchable
+	/** The process managed by the dispatcher. */
+	reference process : Dispatchable
 	
+
 	
 	method run() : Void is do
 		from running := true
 		until not running
 		loop
 			do
-				waitForEvent
-				
+				waitForEvent // Waiting for a process to execute.
+				// At this step, a process notify the disptacher.
 				from true
-				until not component.isWaiting
-				loop component.run()
+				until not process.isWaiting // The process is executed until it has no more job to do.
+				loop process.run()
 				end
+			// If an exception occurs, the dispatcher stopped.
 			rescue(ex : kermeta::exceptions::Exception) running := false end
 		end
 	end
 }
 
 
-
+/**
+	Defines a dispatcher that manages several processes.
+*/
 class ListDisptacher inherits AbstractDispatcher
 {
-	reference components : Dispatchable[0..*]
+	/** The processes managed by the dispatcher. */
+	reference processes : Dispatchable[0..*]
 	
 	
 	method run() : Void is do
@@ -80,19 +100,20 @@ class ListDisptacher inherits AbstractDispatcher
 		until not running
 		loop
 			do
-				waitForEvent
-				
+				waitForEvent // Waiting for a process to execute.
+				// At this step, a process notify the disptacher.
 				from var stop : Boolean init false
-				until stop
+				until stop // All processes are executed until they have no more job to do.
 				loop
 					stop := true
-					components.each{c| 
+					processes.each{c| 
 						if(c.isWaiting) then 
 							c.run()
-							stop := false
+							stop := false // If at least one process has a job to do, we continue the loop.
 						end
 					}
 				end
+			// If an exception occurs, the dispatcher stopped.
 			rescue(ex : kermeta::exceptions::Exception) running := false end
 		end
 	end

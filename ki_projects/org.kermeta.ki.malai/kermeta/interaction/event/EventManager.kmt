@@ -17,12 +17,17 @@ using kermeta::ki::malai::dispatcher
 using kermeta::standard
 
 
-
+/**
+	This class is Dispatchable: an EventManager can be managed by a disptacher.
+	The goal of this class is to map a Java EventManagerWrapper, that gathers
+	Java event, to Kermeta.
+*/
 class EventManager inherits Dispatchable
 {
+	/** Initialises the EventManager. */
 	operation initialise(dispatcher : AbstractDispatcher) : Void is do
 		self.dispatcher := dispatcher
-	
+		// The EventManager is mapped to an corresponding Java EventManagerWrapper and therefore to a Java DisptacherWrapper.
 		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.initialise(self, dispatcher)
 	end
 	
@@ -36,27 +41,31 @@ class EventManager inherits Dispatchable
 	
 	method run() : Void is do
 		var event : Event
-		
+		// We get the event to process.
 		event ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.getTopEvent(self)
 		
 		if(event.isVoid) then
 			stdio.writeln("event is void")
 		else
 			var existStr : String
-			existStr ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventManagerWrapper.getExitEventString(self)
+			// We get the string corresponding to an EXIT event.
+			existStr ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventWrapper.getExitEventString(self)
 			
 			if(event.getName.equals(existStr)) then
+				// We launch an exception to stop the program.
 				var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
 				ex.message := existStr
 				raise ex
 			else
-				process(event)
+				process(event)// The event is processed.
 			end
 		end
 	end
 	
 	
-	
+	/**
+		Processes the event produces by the Java UI and transfered to Kermeta.
+	*/
 	operation process(event : Event) : Void is do
 		stdio.writeln(event.getName)
 	end

@@ -15,12 +15,14 @@ require "AWTEvent.kmt"
 using kermeta::standard
 
 
+/**
+	Defines a class corresponding to the Java InputEvent.
+*/
 abstract class InputEvent inherits AWTEvent
 {
 	operation getModifiers() : Integer is do
 		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::InputEventWrapper.getModifiers(self)
 	end
-	
 	
 	
 	operation getModifiersEx() : Integer is do

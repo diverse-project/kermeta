@@ -15,6 +15,9 @@ require "MouseEvent.kmt"
 using kermeta::standard
 
 
+/**
+	Defines a class that corresponds to the Java MouseWheelEvent class.
+*/
 class MouseWheelEvent inherits MouseEvent
 {
 	operation getScrollAmount() : Integer is do

@@ -37,7 +37,7 @@ class Main
 		dispatcher.initialise
 		eventManager.initialise(dispatcher)
 		
-		dispatcher.component := eventManager
+		dispatcher.process := eventManager
 		dispatcher.run
 	end
 }

@@ -15,6 +15,9 @@ require "AWTEvent.kmt"
 using kermeta::standard
 
 
+/**
+	Defines a class that corresponds to the Java ActionEvent class.
+*/
 class ActionEvent inherits AWTEvent
 {
 	operation getModifiers() : Integer is do

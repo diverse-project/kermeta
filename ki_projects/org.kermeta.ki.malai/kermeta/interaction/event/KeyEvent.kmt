@@ -14,7 +14,9 @@ require "InputEvent.kmt"
 
 using kermeta::standard
 
-
+/**
+	Defines a class that corresponds to the Java KeyEvent class.
+*/
 class KeyEvent inherits InputEvent
 {
 	operation getKeyCode() : Integer is do

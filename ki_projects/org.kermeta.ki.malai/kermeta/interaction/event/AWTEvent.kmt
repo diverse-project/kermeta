@@ -12,6 +12,9 @@ package kermeta::ki::malai::interaction::event;
 require kermeta
 
 
+/**
+	Defines a class corresponding to the Java AWTEvent.
+*/
 abstract class AWTEvent
 {
 }

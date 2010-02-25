@@ -15,7 +15,9 @@ require "InputEvent.kmt"
 using kermeta::standard
 
 
-
+/**
+	Defines a class that corresponds to the Java MouseEvent class.
+*/
 class MouseEvent inherits InputEvent
 {
 	operation getButton() : Integer is do
