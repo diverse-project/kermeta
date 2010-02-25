@@ -16,13 +16,13 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtPackage;
 
 import pattern.art.group.GroupPackage;
 
 import pattern.art.group.impl.GroupPackageImpl;
 
-import pattern.art.impl.ArtPatternPackageImpl;
+import pattern.art.impl.ArtPackageImpl;
 
 import pattern.art.implem.ImplemPackage;
 
@@ -155,7 +155,7 @@ public class PatternframeworkPackageImpl extends EPackageImpl implements Pattern
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		ArtPatternPackageImpl theArtPatternPackage = (ArtPatternPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI) instanceof ArtPatternPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI) : ArtPatternPackage.eINSTANCE);
+		ArtPackageImpl theArtPackage = (ArtPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) instanceof ArtPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) : ArtPackage.eINSTANCE);
 		InstancePackageImpl theInstancePackage = (InstancePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI) instanceof InstancePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI) : InstancePackage.eINSTANCE);
 		TypePackageImpl theTypePackage = (TypePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI) instanceof TypePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI) : TypePackage.eINSTANCE);
 		ImplemPackageImpl theImplemPackage = (ImplemPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI) instanceof ImplemPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI) : ImplemPackage.eINSTANCE);
@@ -163,7 +163,7 @@ public class PatternframeworkPackageImpl extends EPackageImpl implements Pattern
 
 		// Create package meta-data objects
 		thePatternframeworkPackage.createPackageContents();
-		theArtPatternPackage.createPackageContents();
+		theArtPackage.createPackageContents();
 		theInstancePackage.createPackageContents();
 		theTypePackage.createPackageContents();
 		theImplemPackage.createPackageContents();
@@ -171,7 +171,7 @@ public class PatternframeworkPackageImpl extends EPackageImpl implements Pattern
 
 		// Initialize created meta-data
 		thePatternframeworkPackage.initializePackageContents();
-		theArtPatternPackage.initializePackageContents();
+		theArtPackage.initializePackageContents();
 		theInstancePackage.initializePackageContents();
 		theTypePackage.initializePackageContents();
 		theImplemPackage.initializePackageContents();

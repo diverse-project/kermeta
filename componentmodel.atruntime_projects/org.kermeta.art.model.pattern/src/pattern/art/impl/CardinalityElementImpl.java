@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtPackage;
 import pattern.art.CardinalityElement;
 
 /**
@@ -86,7 +86,7 @@ public class CardinalityElementImpl extends ModelElementImpl implements Cardinal
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ArtPatternPackage.Literals.CARDINALITY_ELEMENT;
+		return ArtPackage.Literals.CARDINALITY_ELEMENT;
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class CardinalityElementImpl extends ModelElementImpl implements Cardinal
 		Integer oldLower = lower;
 		lower = newLower;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ArtPatternPackage.CARDINALITY_ELEMENT__LOWER, oldLower, lower));
+			eNotify(new ENotificationImpl(this, Notification.SET, ArtPackage.CARDINALITY_ELEMENT__LOWER, oldLower, lower));
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class CardinalityElementImpl extends ModelElementImpl implements Cardinal
 		Integer oldUpper = upper;
 		upper = newUpper;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ArtPatternPackage.CARDINALITY_ELEMENT__UPPER, oldUpper, upper));
+			eNotify(new ENotificationImpl(this, Notification.SET, ArtPackage.CARDINALITY_ELEMENT__UPPER, oldUpper, upper));
 	}
 
 	/**
@@ -139,9 +139,9 @@ public class CardinalityElementImpl extends ModelElementImpl implements Cardinal
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ArtPatternPackage.CARDINALITY_ELEMENT__LOWER:
+			case ArtPackage.CARDINALITY_ELEMENT__LOWER:
 				return getLower();
-			case ArtPatternPackage.CARDINALITY_ELEMENT__UPPER:
+			case ArtPackage.CARDINALITY_ELEMENT__UPPER:
 				return getUpper();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -155,10 +155,10 @@ public class CardinalityElementImpl extends ModelElementImpl implements Cardinal
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ArtPatternPackage.CARDINALITY_ELEMENT__LOWER:
+			case ArtPackage.CARDINALITY_ELEMENT__LOWER:
 				setLower((Integer)newValue);
 				return;
-			case ArtPatternPackage.CARDINALITY_ELEMENT__UPPER:
+			case ArtPackage.CARDINALITY_ELEMENT__UPPER:
 				setUpper((Integer)newValue);
 				return;
 		}
@@ -173,10 +173,10 @@ public class CardinalityElementImpl extends ModelElementImpl implements Cardinal
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ArtPatternPackage.CARDINALITY_ELEMENT__LOWER:
+			case ArtPackage.CARDINALITY_ELEMENT__LOWER:
 				setLower(LOWER_EDEFAULT);
 				return;
-			case ArtPatternPackage.CARDINALITY_ELEMENT__UPPER:
+			case ArtPackage.CARDINALITY_ELEMENT__UPPER:
 				setUpper(UPPER_EDEFAULT);
 				return;
 		}
@@ -191,9 +191,9 @@ public class CardinalityElementImpl extends ModelElementImpl implements Cardinal
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ArtPatternPackage.CARDINALITY_ELEMENT__LOWER:
+			case ArtPackage.CARDINALITY_ELEMENT__LOWER:
 				return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT.equals(lower);
-			case ArtPatternPackage.CARDINALITY_ELEMENT__UPPER:
+			case ArtPackage.CARDINALITY_ELEMENT__UPPER:
 				return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT.equals(upper);
 		}
 		return super.eIsSet(featureID);

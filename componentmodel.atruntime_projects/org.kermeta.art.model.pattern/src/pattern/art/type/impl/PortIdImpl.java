@@ -9,10 +9,9 @@ package pattern.art.type.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import pattern.art.impl.NamedElementImpl;
+
 import pattern.art.type.PortId;
 import pattern.art.type.TypePackage;
-
-import patternframework.impl.PObjectImpl;
 
 /**
  * <!-- begin-user-doc -->

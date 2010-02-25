@@ -12,13 +12,13 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtPackage;
 
 import pattern.art.group.GroupPackage;
 
 import pattern.art.group.impl.GroupPackageImpl;
 
-import pattern.art.impl.ArtPatternPackageImpl;
+import pattern.art.impl.ArtPackageImpl;
 
 import pattern.art.implem.ComponentImplementation;
 import pattern.art.implem.FractalComponent;
@@ -129,7 +129,7 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		ArtPatternPackageImpl theArtPatternPackage = (ArtPatternPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI) instanceof ArtPatternPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI) : ArtPatternPackage.eINSTANCE);
+		ArtPackageImpl theArtPackage = (ArtPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) instanceof ArtPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) : ArtPackage.eINSTANCE);
 		InstancePackageImpl theInstancePackage = (InstancePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI) instanceof InstancePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI) : InstancePackage.eINSTANCE);
 		TypePackageImpl theTypePackage = (TypePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI) instanceof TypePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TypePackage.eNS_URI) : TypePackage.eINSTANCE);
 		GroupPackageImpl theGroupPackage = (GroupPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI) instanceof GroupPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI) : GroupPackage.eINSTANCE);
@@ -137,7 +137,7 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 
 		// Create package meta-data objects
 		theImplemPackage.createPackageContents();
-		theArtPatternPackage.createPackageContents();
+		theArtPackage.createPackageContents();
 		theInstancePackage.createPackageContents();
 		theTypePackage.createPackageContents();
 		theGroupPackage.createPackageContents();
@@ -145,7 +145,7 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 
 		// Initialize created meta-data
 		theImplemPackage.initializePackageContents();
-		theArtPatternPackage.initializePackageContents();
+		theArtPackage.initializePackageContents();
 		theInstancePackage.initializePackageContents();
 		theTypePackage.initializePackageContents();
 		theGroupPackage.initializePackageContents();
@@ -309,7 +309,7 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 
 		// Obtain other dependent packages
 		PatternframeworkPackage thePatternframeworkPackage = (PatternframeworkPackage)EPackage.Registry.INSTANCE.getEPackage(PatternframeworkPackage.eNS_URI);
-		ArtPatternPackage theArtPatternPackage = (ArtPatternPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI);
+		ArtPackage theArtPackage = (ArtPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -326,16 +326,16 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 		initEClass(componentImplementationEClass, ComponentImplementation.class, "ComponentImplementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(fractalComponentEClass, FractalComponent.class, "FractalComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFractalComponent_ControllerDesc(), theArtPatternPackage.getString(), "controllerDesc", null, 0, 1, FractalComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFractalComponent_ContentDesc(), theArtPatternPackage.getString(), "contentDesc", null, 0, 1, FractalComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFractalComponent_ControllerDesc(), theArtPackage.getString(), "controllerDesc", null, 0, 1, FractalComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFractalComponent_ContentDesc(), theArtPackage.getString(), "contentDesc", null, 0, 1, FractalComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(osGiComponentEClass, OSGiComponent.class, "OSGiComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOSGiComponent_ImplementingClass(), theArtPatternPackage.getString(), "implementingClass", null, 0, 1, OSGiComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOSGiComponent_ImplementingClass(), theArtPackage.getString(), "implementingClass", null, 0, 1, OSGiComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeImplementationEClass, TypeImplementation.class, "TypeImplementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(osGiTypeEClass, OSGiType.class, "OSGiType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOSGiType_GenerateInstanceBundle(), theArtPatternPackage.getBoolean(), "generateInstanceBundle", "true", 0, 1, OSGiType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOSGiType_GenerateInstanceBundle(), theArtPackage.getBoolean(), "generateInstanceBundle", "true", 0, 1, OSGiType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } //ImplemPackageImpl

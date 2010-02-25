@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtPackage;
 import pattern.art.DataType;
 import pattern.art.TypedElement;
 
@@ -57,7 +57,7 @@ public class TypedElementImpl extends ModelElementImpl implements TypedElement {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ArtPatternPackage.Literals.TYPED_ELEMENT;
+		return ArtPackage.Literals.TYPED_ELEMENT;
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class TypedElementImpl extends ModelElementImpl implements TypedElement {
 			type = (DataType)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArtPatternPackage.TYPED_ELEMENT__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArtPackage.TYPED_ELEMENT__TYPE, oldType, type));
 			}
 		}
 		return type;
@@ -95,7 +95,7 @@ public class TypedElementImpl extends ModelElementImpl implements TypedElement {
 		DataType oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ArtPatternPackage.TYPED_ELEMENT__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, ArtPackage.TYPED_ELEMENT__TYPE, oldType, type));
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class TypedElementImpl extends ModelElementImpl implements TypedElement {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ArtPatternPackage.TYPED_ELEMENT__TYPE:
+			case ArtPackage.TYPED_ELEMENT__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
 		}
@@ -121,7 +121,7 @@ public class TypedElementImpl extends ModelElementImpl implements TypedElement {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ArtPatternPackage.TYPED_ELEMENT__TYPE:
+			case ArtPackage.TYPED_ELEMENT__TYPE:
 				setType((DataType)newValue);
 				return;
 		}
@@ -136,7 +136,7 @@ public class TypedElementImpl extends ModelElementImpl implements TypedElement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ArtPatternPackage.TYPED_ELEMENT__TYPE:
+			case ArtPackage.TYPED_ELEMENT__TYPE:
 				setType((DataType)null);
 				return;
 		}
@@ -151,7 +151,7 @@ public class TypedElementImpl extends ModelElementImpl implements TypedElement {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ArtPatternPackage.TYPED_ELEMENT__TYPE:
+			case ArtPackage.TYPED_ELEMENT__TYPE:
 				return type != null;
 		}
 		return super.eIsSet(featureID);

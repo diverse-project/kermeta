@@ -11,7 +11,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtPackage;
 import pattern.art.CardinalityElement;
 import pattern.art.DataType;
 import pattern.art.ModelElement;
@@ -30,17 +30,17 @@ import patternframework.PObject;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see pattern.art.ArtPatternPackage
+ * @see pattern.art.ArtPackage
  * @generated
  */
-public class ArtPatternSwitch<T> {
+public class ArtSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static ArtPatternPackage modelPackage;
+	protected static ArtPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -48,9 +48,9 @@ public class ArtPatternSwitch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArtPatternSwitch() {
+	public ArtSwitch() {
 		if (modelPackage == null) {
-			modelPackage = ArtPatternPackage.eINSTANCE;
+			modelPackage = ArtPackage.eINSTANCE;
 		}
 	}
 
@@ -94,14 +94,14 @@ public class ArtPatternSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ArtPatternPackage.NAMED_ELEMENT: {
+			case ArtPackage.NAMED_ELEMENT: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
 				if (result == null) result = casePObject(namedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ArtPatternPackage.MODEL_ELEMENT: {
+			case ArtPackage.MODEL_ELEMENT: {
 				ModelElement modelElement = (ModelElement)theEObject;
 				T result = caseModelElement(modelElement);
 				if (result == null) result = caseNamedElement(modelElement);
@@ -109,7 +109,7 @@ public class ArtPatternSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ArtPatternPackage.SYSTEM: {
+			case ArtPackage.SYSTEM: {
 				pattern.art.System system = (pattern.art.System)theEObject;
 				T result = caseSystem(system);
 				if (result == null) result = caseModelElement(system);
@@ -118,7 +118,7 @@ public class ArtPatternSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ArtPatternPackage.DATA_TYPE: {
+			case ArtPackage.DATA_TYPE: {
 				DataType dataType = (DataType)theEObject;
 				T result = caseDataType(dataType);
 				if (result == null) result = caseModelElement(dataType);
@@ -127,7 +127,7 @@ public class ArtPatternSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ArtPatternPackage.TYPED_ELEMENT: {
+			case ArtPackage.TYPED_ELEMENT: {
 				TypedElement typedElement = (TypedElement)theEObject;
 				T result = caseTypedElement(typedElement);
 				if (result == null) result = caseModelElement(typedElement);
@@ -136,7 +136,7 @@ public class ArtPatternSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ArtPatternPackage.CARDINALITY_ELEMENT: {
+			case ArtPackage.CARDINALITY_ELEMENT: {
 				CardinalityElement cardinalityElement = (CardinalityElement)theEObject;
 				T result = caseCardinalityElement(cardinalityElement);
 				if (result == null) result = caseModelElement(cardinalityElement);
@@ -269,4 +269,4 @@ public class ArtPatternSwitch<T> {
 		return null;
 	}
 
-} //ArtPatternSwitch
+} //ArtSwitch

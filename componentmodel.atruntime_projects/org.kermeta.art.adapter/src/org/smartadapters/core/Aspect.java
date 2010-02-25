@@ -28,7 +28,7 @@ import patternframework.PObject;
  * </ul>
  * </p>
  *
- * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getAspect()
+ * @see org.smartadapters.core.CorePackage#getAspect()
  * @model
  * @generated
  */
@@ -43,7 +43,7 @@ public interface Aspect extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Template</em>' containment reference.
 	 * @see #setTemplate(ModelPattern)
-	 * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getAspect_Template()
+	 * @see org.smartadapters.core.CorePackage#getAspect_Template()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -69,7 +69,7 @@ public interface Aspect extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Structure</em>' containment reference.
 	 * @see #setStructure(PModel)
-	 * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getAspect_Structure()
+	 * @see org.smartadapters.core.CorePackage#getAspect_Structure()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
@@ -95,7 +95,7 @@ public interface Aspect extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Persistent</em>' reference list.
-	 * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getAspect_Persistent()
+	 * @see org.smartadapters.core.CorePackage#getAspect_Persistent()
 	 * @model annotation="kermeta documentation='/**\r\n   persistent refers to aspectual PObject that must not be\r\n   cloned between two bindings\r\n   TODO : contraints...\r\n   \052/'"
 	 * @generated
 	 */

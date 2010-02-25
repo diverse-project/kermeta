@@ -20,7 +20,7 @@ import patternframework.PObject;
  * </ul>
  * </p>
  *
- * @see pattern.art.ArtPatternPackage#getNamedElement()
+ * @see pattern.art.ArtPackage#getNamedElement()
  * @model
  * @generated
  */
@@ -35,7 +35,7 @@ public interface NamedElement extends PObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see pattern.art.ArtPatternPackage#getNamedElement_Name()
+	 * @see pattern.art.ArtPackage#getNamedElement_Name()
 	 * @model dataType="pattern.art.String"
 	 * @generated
 	 */

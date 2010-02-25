@@ -20,17 +20,17 @@ import org.smartadapters.core.*;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.smartadapters.core.SmartAdapters4DiVAPackage
+ * @see org.smartadapters.core.CorePackage
  * @generated
  */
-public class SmartAdapters4DiVAAdapterFactory extends AdapterFactoryImpl {
+public class CoreAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static SmartAdapters4DiVAPackage modelPackage;
+	protected static CorePackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -38,9 +38,9 @@ public class SmartAdapters4DiVAAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SmartAdapters4DiVAAdapterFactory() {
+	public CoreAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = SmartAdapters4DiVAPackage.eINSTANCE;
+			modelPackage = CorePackage.eINSTANCE;
 		}
 	}
 
@@ -69,8 +69,8 @@ public class SmartAdapters4DiVAAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SmartAdapters4DiVASwitch<Adapter> modelSwitch =
-		new SmartAdapters4DiVASwitch<Adapter>() {
+	protected CoreSwitch<Adapter> modelSwitch =
+		new CoreSwitch<Adapter>() {
 			@Override
 			public Adapter caseAdapter(org.smartadapters.core.Adapter object) {
 				return createAdapterAdapter();
@@ -247,4 +247,4 @@ public class SmartAdapters4DiVAAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //SmartAdapters4DiVAAdapterFactory
+} //CoreAdapterFactory

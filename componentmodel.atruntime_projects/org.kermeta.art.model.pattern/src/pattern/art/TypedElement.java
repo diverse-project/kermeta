@@ -19,7 +19,7 @@ package pattern.art;
  * </ul>
  * </p>
  *
- * @see pattern.art.ArtPatternPackage#getTypedElement()
+ * @see pattern.art.ArtPackage#getTypedElement()
  * @model
  * @generated
  */
@@ -34,7 +34,7 @@ public interface TypedElement extends ModelElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(DataType)
-	 * @see pattern.art.ArtPatternPackage#getTypedElement_Type()
+	 * @see pattern.art.ArtPackage#getTypedElement_Type()
 	 * @model
 	 * @generated
 	 */

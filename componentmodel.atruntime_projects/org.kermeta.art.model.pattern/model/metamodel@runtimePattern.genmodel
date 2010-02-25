@@ -7,7 +7,7 @@
   <foreignModel>metamodel@runtimePattern.ecore</foreignModel>
   <genPackages prefix="Pattern" disposableProviderFactory="true" generateModelWizard="false"
       ecorePackage="metamodel@runtimePattern.ecore#/">
-    <nestedGenPackages prefix="ArtPattern" disposableProviderFactory="true" fileExtensions="artP"
+    <nestedGenPackages prefix="Art" disposableProviderFactory="true" fileExtensions="artP"
         ecorePackage="metamodel@runtimePattern.ecore#//art">
       <genDataTypes ecoreDataType="metamodel@runtimePattern.ecore#//art/String"/>
       <genDataTypes ecoreDataType="metamodel@runtimePattern.ecore#//art/Boolean"/>

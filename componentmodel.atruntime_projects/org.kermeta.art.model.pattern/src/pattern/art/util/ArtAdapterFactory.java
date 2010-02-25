@@ -13,7 +13,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtPackage;
 import pattern.art.CardinalityElement;
 import pattern.art.DataType;
 import pattern.art.ModelElement;
@@ -27,17 +27,17 @@ import patternframework.PObject;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see pattern.art.ArtPatternPackage
+ * @see pattern.art.ArtPackage
  * @generated
  */
-public class ArtPatternAdapterFactory extends AdapterFactoryImpl {
+public class ArtAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static ArtPatternPackage modelPackage;
+	protected static ArtPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -45,9 +45,9 @@ public class ArtPatternAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArtPatternAdapterFactory() {
+	public ArtAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = ArtPatternPackage.eINSTANCE;
+			modelPackage = ArtPackage.eINSTANCE;
 		}
 	}
 
@@ -76,8 +76,8 @@ public class ArtPatternAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ArtPatternSwitch<Adapter> modelSwitch =
-		new ArtPatternSwitch<Adapter>() {
+	protected ArtSwitch<Adapter> modelSwitch =
+		new ArtSwitch<Adapter>() {
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
@@ -236,4 +236,4 @@ public class ArtPatternAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //ArtPatternAdapterFactory
+} //ArtAdapterFactory

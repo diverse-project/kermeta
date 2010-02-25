@@ -25,11 +25,11 @@ import patternframework.PatternframeworkPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see pattern.art.ArtPatternFactory
+ * @see pattern.art.ArtFactory
  * @model kind="package"
  * @generated
  */
-public interface ArtPatternPackage extends EPackage {
+public interface ArtPackage extends EPackage {
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -60,14 +60,14 @@ public interface ArtPatternPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ArtPatternPackage eINSTANCE = pattern.art.impl.ArtPatternPackageImpl.init();
+	ArtPackage eINSTANCE = pattern.art.impl.ArtPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link pattern.art.impl.NamedElementImpl <em>Named Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see pattern.art.impl.NamedElementImpl
-	 * @see pattern.art.impl.ArtPatternPackageImpl#getNamedElement()
+	 * @see pattern.art.impl.ArtPackageImpl#getNamedElement()
 	 * @generated
 	 */
 	int NAMED_ELEMENT = 0;
@@ -95,7 +95,7 @@ public interface ArtPatternPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see pattern.art.impl.ModelElementImpl
-	 * @see pattern.art.impl.ArtPatternPackageImpl#getModelElement()
+	 * @see pattern.art.impl.ArtPackageImpl#getModelElement()
 	 * @generated
 	 */
 	int MODEL_ELEMENT = 1;
@@ -123,7 +123,7 @@ public interface ArtPatternPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see pattern.art.impl.SystemImpl
-	 * @see pattern.art.impl.ArtPatternPackageImpl#getSystem()
+	 * @see pattern.art.impl.ArtPackageImpl#getSystem()
 	 * @generated
 	 */
 	int SYSTEM = 2;
@@ -196,7 +196,7 @@ public interface ArtPatternPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see pattern.art.impl.DataTypeImpl
-	 * @see pattern.art.impl.ArtPatternPackageImpl#getDataType()
+	 * @see pattern.art.impl.ArtPackageImpl#getDataType()
 	 * @generated
 	 */
 	int DATA_TYPE = 3;
@@ -224,7 +224,7 @@ public interface ArtPatternPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see pattern.art.impl.TypedElementImpl
-	 * @see pattern.art.impl.ArtPatternPackageImpl#getTypedElement()
+	 * @see pattern.art.impl.ArtPackageImpl#getTypedElement()
 	 * @generated
 	 */
 	int TYPED_ELEMENT = 4;
@@ -261,7 +261,7 @@ public interface ArtPatternPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see pattern.art.impl.CardinalityElementImpl
-	 * @see pattern.art.impl.ArtPatternPackageImpl#getCardinalityElement()
+	 * @see pattern.art.impl.ArtPackageImpl#getCardinalityElement()
 	 * @generated
 	 */
 	int CARDINALITY_ELEMENT = 5;
@@ -307,7 +307,7 @@ public interface ArtPatternPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see java.lang.String
-	 * @see pattern.art.impl.ArtPatternPackageImpl#getString()
+	 * @see pattern.art.impl.ArtPackageImpl#getString()
 	 * @generated
 	 */
 	int STRING = 6;
@@ -317,7 +317,7 @@ public interface ArtPatternPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see java.lang.Boolean
-	 * @see pattern.art.impl.ArtPatternPackageImpl#getBoolean()
+	 * @see pattern.art.impl.ArtPackageImpl#getBoolean()
 	 * @generated
 	 */
 	int BOOLEAN = 7;
@@ -327,7 +327,7 @@ public interface ArtPatternPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see java.lang.Integer
-	 * @see pattern.art.impl.ArtPatternPackageImpl#getInteger()
+	 * @see pattern.art.impl.ArtPackageImpl#getInteger()
 	 * @generated
 	 */
 	int INTEGER = 8;
@@ -532,7 +532,7 @@ public interface ArtPatternPackage extends EPackage {
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	ArtPatternFactory getArtPatternFactory();
+	ArtFactory getArtFactory();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -552,7 +552,7 @@ public interface ArtPatternPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see pattern.art.impl.NamedElementImpl
-		 * @see pattern.art.impl.ArtPatternPackageImpl#getNamedElement()
+		 * @see pattern.art.impl.ArtPackageImpl#getNamedElement()
 		 * @generated
 		 */
 		EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
@@ -570,7 +570,7 @@ public interface ArtPatternPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see pattern.art.impl.ModelElementImpl
-		 * @see pattern.art.impl.ArtPatternPackageImpl#getModelElement()
+		 * @see pattern.art.impl.ArtPackageImpl#getModelElement()
 		 * @generated
 		 */
 		EClass MODEL_ELEMENT = eINSTANCE.getModelElement();
@@ -580,7 +580,7 @@ public interface ArtPatternPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see pattern.art.impl.SystemImpl
-		 * @see pattern.art.impl.ArtPatternPackageImpl#getSystem()
+		 * @see pattern.art.impl.ArtPackageImpl#getSystem()
 		 * @generated
 		 */
 		EClass SYSTEM = eINSTANCE.getSystem();
@@ -630,7 +630,7 @@ public interface ArtPatternPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see pattern.art.impl.DataTypeImpl
-		 * @see pattern.art.impl.ArtPatternPackageImpl#getDataType()
+		 * @see pattern.art.impl.ArtPackageImpl#getDataType()
 		 * @generated
 		 */
 		EClass DATA_TYPE = eINSTANCE.getDataType();
@@ -640,7 +640,7 @@ public interface ArtPatternPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see pattern.art.impl.TypedElementImpl
-		 * @see pattern.art.impl.ArtPatternPackageImpl#getTypedElement()
+		 * @see pattern.art.impl.ArtPackageImpl#getTypedElement()
 		 * @generated
 		 */
 		EClass TYPED_ELEMENT = eINSTANCE.getTypedElement();
@@ -658,7 +658,7 @@ public interface ArtPatternPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see pattern.art.impl.CardinalityElementImpl
-		 * @see pattern.art.impl.ArtPatternPackageImpl#getCardinalityElement()
+		 * @see pattern.art.impl.ArtPackageImpl#getCardinalityElement()
 		 * @generated
 		 */
 		EClass CARDINALITY_ELEMENT = eINSTANCE.getCardinalityElement();
@@ -684,7 +684,7 @@ public interface ArtPatternPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see java.lang.String
-		 * @see pattern.art.impl.ArtPatternPackageImpl#getString()
+		 * @see pattern.art.impl.ArtPackageImpl#getString()
 		 * @generated
 		 */
 		EDataType STRING = eINSTANCE.getString();
@@ -694,7 +694,7 @@ public interface ArtPatternPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see java.lang.Boolean
-		 * @see pattern.art.impl.ArtPatternPackageImpl#getBoolean()
+		 * @see pattern.art.impl.ArtPackageImpl#getBoolean()
 		 * @generated
 		 */
 		EDataType BOOLEAN = eINSTANCE.getBoolean();
@@ -704,11 +704,11 @@ public interface ArtPatternPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see java.lang.Integer
-		 * @see pattern.art.impl.ArtPatternPackageImpl#getInteger()
+		 * @see pattern.art.impl.ArtPackageImpl#getInteger()
 		 * @generated
 		 */
 		EDataType INTEGER = eINSTANCE.getInteger();
 
 	}
 
-} //ArtPatternPackage
+} //ArtPackage

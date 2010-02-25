@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import pattern.art.ArtPatternFactory;
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtFactory;
+import pattern.art.ArtPackage;
 import pattern.art.CardinalityElement;
 import pattern.art.DataType;
 import pattern.art.ModelElement;
@@ -48,7 +48,7 @@ import patternframework.impl.PatternframeworkPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ArtPatternPackageImpl extends EPackageImpl implements ArtPatternPackage {
+public class ArtPackageImpl extends EPackageImpl implements ArtPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -123,12 +123,12 @@ public class ArtPatternPackageImpl extends EPackageImpl implements ArtPatternPac
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see pattern.art.ArtPatternPackage#eNS_URI
+	 * @see pattern.art.ArtPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private ArtPatternPackageImpl() {
-		super(eNS_URI, ArtPatternFactory.eINSTANCE);
+	private ArtPackageImpl() {
+		super(eNS_URI, ArtFactory.eINSTANCE);
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class ArtPatternPackageImpl extends EPackageImpl implements ArtPatternPac
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
-	 * <p>This method is used to initialize {@link ArtPatternPackage#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link ArtPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -150,11 +150,11 @@ public class ArtPatternPackageImpl extends EPackageImpl implements ArtPatternPac
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static ArtPatternPackage init() {
-		if (isInited) return (ArtPatternPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI);
+	public static ArtPackage init() {
+		if (isInited) return (ArtPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ArtPatternPackageImpl theArtPatternPackage = (ArtPatternPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ArtPatternPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ArtPatternPackageImpl());
+		ArtPackageImpl theArtPackage = (ArtPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ArtPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ArtPackageImpl());
 
 		isInited = true;
 
@@ -166,7 +166,7 @@ public class ArtPatternPackageImpl extends EPackageImpl implements ArtPatternPac
 		PatternframeworkPackageImpl thePatternframeworkPackage = (PatternframeworkPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(PatternframeworkPackage.eNS_URI) instanceof PatternframeworkPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(PatternframeworkPackage.eNS_URI) : PatternframeworkPackage.eINSTANCE);
 
 		// Create package meta-data objects
-		theArtPatternPackage.createPackageContents();
+		theArtPackage.createPackageContents();
 		theInstancePackage.createPackageContents();
 		theTypePackage.createPackageContents();
 		theImplemPackage.createPackageContents();
@@ -174,7 +174,7 @@ public class ArtPatternPackageImpl extends EPackageImpl implements ArtPatternPac
 		thePatternframeworkPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theArtPatternPackage.initializePackageContents();
+		theArtPackage.initializePackageContents();
 		theInstancePackage.initializePackageContents();
 		theTypePackage.initializePackageContents();
 		theImplemPackage.initializePackageContents();
@@ -182,12 +182,12 @@ public class ArtPatternPackageImpl extends EPackageImpl implements ArtPatternPac
 		thePatternframeworkPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theArtPatternPackage.freeze();
+		theArtPackage.freeze();
 
   
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(ArtPatternPackage.eNS_URI, theArtPatternPackage);
-		return theArtPatternPackage;
+		EPackage.Registry.INSTANCE.put(ArtPackage.eNS_URI, theArtPackage);
+		return theArtPackage;
 	}
 
 	/**
@@ -357,8 +357,8 @@ public class ArtPatternPackageImpl extends EPackageImpl implements ArtPatternPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArtPatternFactory getArtPatternFactory() {
-		return (ArtPatternFactory)getEFactoryInstance();
+	public ArtFactory getArtFactory() {
+		return (ArtFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -486,4 +486,4 @@ public class ArtPatternPackageImpl extends EPackageImpl implements ArtPatternPac
 		createResource(eNS_URI);
 	}
 
-} //ArtPatternPackageImpl
+} //ArtPackageImpl

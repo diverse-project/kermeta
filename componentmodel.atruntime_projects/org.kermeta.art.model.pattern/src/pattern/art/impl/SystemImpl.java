@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtPackage;
 import pattern.art.DataType;
 
 import pattern.art.group.Group;
@@ -115,7 +115,7 @@ public class SystemImpl extends ModelElementImpl implements pattern.art.System {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ArtPatternPackage.Literals.SYSTEM;
+		return ArtPackage.Literals.SYSTEM;
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class SystemImpl extends ModelElementImpl implements pattern.art.System {
 		CompositeInstance oldRoot = root;
 		root = newRoot;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ArtPatternPackage.SYSTEM__ROOT, oldRoot, newRoot);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ArtPackage.SYSTEM__ROOT, oldRoot, newRoot);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -151,14 +151,14 @@ public class SystemImpl extends ModelElementImpl implements pattern.art.System {
 		if (newRoot != root) {
 			NotificationChain msgs = null;
 			if (root != null)
-				msgs = ((InternalEObject)root).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ArtPatternPackage.SYSTEM__ROOT, null, msgs);
+				msgs = ((InternalEObject)root).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ArtPackage.SYSTEM__ROOT, null, msgs);
 			if (newRoot != null)
-				msgs = ((InternalEObject)newRoot).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ArtPatternPackage.SYSTEM__ROOT, null, msgs);
+				msgs = ((InternalEObject)newRoot).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ArtPackage.SYSTEM__ROOT, null, msgs);
 			msgs = basicSetRoot(newRoot, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ArtPatternPackage.SYSTEM__ROOT, newRoot, newRoot));
+			eNotify(new ENotificationImpl(this, Notification.SET, ArtPackage.SYSTEM__ROOT, newRoot, newRoot));
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class SystemImpl extends ModelElementImpl implements pattern.art.System {
 	 */
 	public EList<Service> getServices() {
 		if (services == null) {
-			services = new EObjectContainmentEList<Service>(Service.class, this, ArtPatternPackage.SYSTEM__SERVICES);
+			services = new EObjectContainmentEList<Service>(Service.class, this, ArtPackage.SYSTEM__SERVICES);
 		}
 		return services;
 	}
@@ -180,7 +180,7 @@ public class SystemImpl extends ModelElementImpl implements pattern.art.System {
 	 */
 	public EList<ComponentType> getTypes() {
 		if (types == null) {
-			types = new EObjectContainmentEList<ComponentType>(ComponentType.class, this, ArtPatternPackage.SYSTEM__TYPES);
+			types = new EObjectContainmentEList<ComponentType>(ComponentType.class, this, ArtPackage.SYSTEM__TYPES);
 		}
 		return types;
 	}
@@ -192,7 +192,7 @@ public class SystemImpl extends ModelElementImpl implements pattern.art.System {
 	 */
 	public EList<DataType> getDataTypes() {
 		if (dataTypes == null) {
-			dataTypes = new EObjectContainmentEList<DataType>(DataType.class, this, ArtPatternPackage.SYSTEM__DATA_TYPES);
+			dataTypes = new EObjectContainmentEList<DataType>(DataType.class, this, ArtPackage.SYSTEM__DATA_TYPES);
 		}
 		return dataTypes;
 	}
@@ -204,7 +204,7 @@ public class SystemImpl extends ModelElementImpl implements pattern.art.System {
 	 */
 	public EList<Group> getGroups() {
 		if (groups == null) {
-			groups = new EObjectContainmentEList<Group>(Group.class, this, ArtPatternPackage.SYSTEM__GROUPS);
+			groups = new EObjectContainmentEList<Group>(Group.class, this, ArtPackage.SYSTEM__GROUPS);
 		}
 		return groups;
 	}
@@ -217,15 +217,15 @@ public class SystemImpl extends ModelElementImpl implements pattern.art.System {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ArtPatternPackage.SYSTEM__ROOT:
+			case ArtPackage.SYSTEM__ROOT:
 				return basicSetRoot(null, msgs);
-			case ArtPatternPackage.SYSTEM__SERVICES:
+			case ArtPackage.SYSTEM__SERVICES:
 				return ((InternalEList<?>)getServices()).basicRemove(otherEnd, msgs);
-			case ArtPatternPackage.SYSTEM__TYPES:
+			case ArtPackage.SYSTEM__TYPES:
 				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
-			case ArtPatternPackage.SYSTEM__DATA_TYPES:
+			case ArtPackage.SYSTEM__DATA_TYPES:
 				return ((InternalEList<?>)getDataTypes()).basicRemove(otherEnd, msgs);
-			case ArtPatternPackage.SYSTEM__GROUPS:
+			case ArtPackage.SYSTEM__GROUPS:
 				return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -239,15 +239,15 @@ public class SystemImpl extends ModelElementImpl implements pattern.art.System {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ArtPatternPackage.SYSTEM__ROOT:
+			case ArtPackage.SYSTEM__ROOT:
 				return getRoot();
-			case ArtPatternPackage.SYSTEM__SERVICES:
+			case ArtPackage.SYSTEM__SERVICES:
 				return getServices();
-			case ArtPatternPackage.SYSTEM__TYPES:
+			case ArtPackage.SYSTEM__TYPES:
 				return getTypes();
-			case ArtPatternPackage.SYSTEM__DATA_TYPES:
+			case ArtPackage.SYSTEM__DATA_TYPES:
 				return getDataTypes();
-			case ArtPatternPackage.SYSTEM__GROUPS:
+			case ArtPackage.SYSTEM__GROUPS:
 				return getGroups();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -262,22 +262,22 @@ public class SystemImpl extends ModelElementImpl implements pattern.art.System {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ArtPatternPackage.SYSTEM__ROOT:
+			case ArtPackage.SYSTEM__ROOT:
 				setRoot((CompositeInstance)newValue);
 				return;
-			case ArtPatternPackage.SYSTEM__SERVICES:
+			case ArtPackage.SYSTEM__SERVICES:
 				getServices().clear();
 				getServices().addAll((Collection<? extends Service>)newValue);
 				return;
-			case ArtPatternPackage.SYSTEM__TYPES:
+			case ArtPackage.SYSTEM__TYPES:
 				getTypes().clear();
 				getTypes().addAll((Collection<? extends ComponentType>)newValue);
 				return;
-			case ArtPatternPackage.SYSTEM__DATA_TYPES:
+			case ArtPackage.SYSTEM__DATA_TYPES:
 				getDataTypes().clear();
 				getDataTypes().addAll((Collection<? extends DataType>)newValue);
 				return;
-			case ArtPatternPackage.SYSTEM__GROUPS:
+			case ArtPackage.SYSTEM__GROUPS:
 				getGroups().clear();
 				getGroups().addAll((Collection<? extends Group>)newValue);
 				return;
@@ -293,19 +293,19 @@ public class SystemImpl extends ModelElementImpl implements pattern.art.System {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ArtPatternPackage.SYSTEM__ROOT:
+			case ArtPackage.SYSTEM__ROOT:
 				setRoot((CompositeInstance)null);
 				return;
-			case ArtPatternPackage.SYSTEM__SERVICES:
+			case ArtPackage.SYSTEM__SERVICES:
 				getServices().clear();
 				return;
-			case ArtPatternPackage.SYSTEM__TYPES:
+			case ArtPackage.SYSTEM__TYPES:
 				getTypes().clear();
 				return;
-			case ArtPatternPackage.SYSTEM__DATA_TYPES:
+			case ArtPackage.SYSTEM__DATA_TYPES:
 				getDataTypes().clear();
 				return;
-			case ArtPatternPackage.SYSTEM__GROUPS:
+			case ArtPackage.SYSTEM__GROUPS:
 				getGroups().clear();
 				return;
 		}
@@ -320,15 +320,15 @@ public class SystemImpl extends ModelElementImpl implements pattern.art.System {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ArtPatternPackage.SYSTEM__ROOT:
+			case ArtPackage.SYSTEM__ROOT:
 				return root != null;
-			case ArtPatternPackage.SYSTEM__SERVICES:
+			case ArtPackage.SYSTEM__SERVICES:
 				return services != null && !services.isEmpty();
-			case ArtPatternPackage.SYSTEM__TYPES:
+			case ArtPackage.SYSTEM__TYPES:
 				return types != null && !types.isEmpty();
-			case ArtPatternPackage.SYSTEM__DATA_TYPES:
+			case ArtPackage.SYSTEM__DATA_TYPES:
 				return dataTypes != null && !dataTypes.isEmpty();
-			case ArtPatternPackage.SYSTEM__GROUPS:
+			case ArtPackage.SYSTEM__GROUPS:
 				return groups != null && !groups.isEmpty();
 		}
 		return super.eIsSet(featureID);

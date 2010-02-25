@@ -23,24 +23,24 @@ import org.smartadapters.core.*;
  * <!-- end-user-doc -->
  * @generated
  */
-public class SmartAdapters4DiVAFactoryImpl extends EFactoryImpl implements SmartAdapters4DiVAFactory {
+public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static SmartAdapters4DiVAFactory init() {
+	public static CoreFactory init() {
 		try {
-			SmartAdapters4DiVAFactory theSmartAdapters4DiVAFactory = (SmartAdapters4DiVAFactory)EPackage.Registry.INSTANCE.getEFactory("http://SmartAdapters4ART/smartadapters/core"); 
-			if (theSmartAdapters4DiVAFactory != null) {
-				return theSmartAdapters4DiVAFactory;
+			CoreFactory theCoreFactory = (CoreFactory)EPackage.Registry.INSTANCE.getEFactory("http://SmartAdapters4ART/smartadapters/core"); 
+			if (theCoreFactory != null) {
+				return theCoreFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new SmartAdapters4DiVAFactoryImpl();
+		return new CoreFactoryImpl();
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class SmartAdapters4DiVAFactoryImpl extends EFactoryImpl implements Smart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SmartAdapters4DiVAFactoryImpl() {
+	public CoreFactoryImpl() {
 		super();
 	}
 
@@ -61,9 +61,9 @@ public class SmartAdapters4DiVAFactoryImpl extends EFactoryImpl implements Smart
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case SmartAdapters4DiVAPackage.ADAPTER: return createAdapter();
-			case SmartAdapters4DiVAPackage.ASPECT: return createAspect();
-			case SmartAdapters4DiVAPackage.MAKE_UNIQUE: return createmakeUnique();
+			case CorePackage.ADAPTER: return createAdapter();
+			case CorePackage.ASPECT: return createAspect();
+			case CorePackage.MAKE_UNIQUE: return createmakeUnique();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -77,7 +77,7 @@ public class SmartAdapters4DiVAFactoryImpl extends EFactoryImpl implements Smart
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case SmartAdapters4DiVAPackage.UNIQUE_TYPE:
+			case CorePackage.UNIQUE_TYPE:
 				return createuniqueTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -92,7 +92,7 @@ public class SmartAdapters4DiVAFactoryImpl extends EFactoryImpl implements Smart
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case SmartAdapters4DiVAPackage.UNIQUE_TYPE:
+			case CorePackage.UNIQUE_TYPE:
 				return convertuniqueTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -154,8 +154,8 @@ public class SmartAdapters4DiVAFactoryImpl extends EFactoryImpl implements Smart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SmartAdapters4DiVAPackage getSmartAdapters4DiVAPackage() {
-		return (SmartAdapters4DiVAPackage)getEPackage();
+	public CorePackage getCorePackage() {
+		return (CorePackage)getEPackage();
 	}
 
 	/**
@@ -165,8 +165,8 @@ public class SmartAdapters4DiVAFactoryImpl extends EFactoryImpl implements Smart
 	 * @generated
 	 */
 	@Deprecated
-	public static SmartAdapters4DiVAPackage getPackage() {
-		return SmartAdapters4DiVAPackage.eINSTANCE;
+	public static CorePackage getPackage() {
+		return CorePackage.eINSTANCE;
 	}
 
-} //SmartAdapters4DiVAFactoryImpl
+} //CoreFactoryImpl

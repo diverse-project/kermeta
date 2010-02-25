@@ -13,17 +13,17 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see pattern.art.ArtPatternPackage
+ * @see pattern.art.ArtPackage
  * @generated
  */
-public interface ArtPatternFactory extends EFactory {
+public interface ArtFactory extends EFactory {
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ArtPatternFactory eINSTANCE = pattern.art.impl.ArtPatternFactoryImpl.init();
+	ArtFactory eINSTANCE = pattern.art.impl.ArtFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Named Element</em>'.
@@ -86,6 +86,6 @@ public interface ArtPatternFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	ArtPatternPackage getArtPatternPackage();
+	ArtPackage getArtPackage();
 
-} //ArtPatternFactory
+} //ArtFactory

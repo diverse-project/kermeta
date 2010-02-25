@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import pattern.art.ArtPatternFactory;
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtFactory;
+import pattern.art.ArtPackage;
 import pattern.art.CardinalityElement;
 import pattern.art.DataType;
 import pattern.art.ModelElement;
@@ -29,24 +29,24 @@ import pattern.art.TypedElement;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ArtPatternFactoryImpl extends EFactoryImpl implements ArtPatternFactory {
+public class ArtFactoryImpl extends EFactoryImpl implements ArtFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static ArtPatternFactory init() {
+	public static ArtFactory init() {
 		try {
-			ArtPatternFactory theArtPatternFactory = (ArtPatternFactory)EPackage.Registry.INSTANCE.getEFactory("http://art/pattern/art"); 
-			if (theArtPatternFactory != null) {
-				return theArtPatternFactory;
+			ArtFactory theArtFactory = (ArtFactory)EPackage.Registry.INSTANCE.getEFactory("http://art/pattern/art"); 
+			if (theArtFactory != null) {
+				return theArtFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new ArtPatternFactoryImpl();
+		return new ArtFactoryImpl();
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class ArtPatternFactoryImpl extends EFactoryImpl implements ArtPatternFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArtPatternFactoryImpl() {
+	public ArtFactoryImpl() {
 		super();
 	}
 
@@ -67,12 +67,12 @@ public class ArtPatternFactoryImpl extends EFactoryImpl implements ArtPatternFac
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ArtPatternPackage.NAMED_ELEMENT: return createNamedElement();
-			case ArtPatternPackage.MODEL_ELEMENT: return createModelElement();
-			case ArtPatternPackage.SYSTEM: return createSystem();
-			case ArtPatternPackage.DATA_TYPE: return createDataType();
-			case ArtPatternPackage.TYPED_ELEMENT: return createTypedElement();
-			case ArtPatternPackage.CARDINALITY_ELEMENT: return createCardinalityElement();
+			case ArtPackage.NAMED_ELEMENT: return createNamedElement();
+			case ArtPackage.MODEL_ELEMENT: return createModelElement();
+			case ArtPackage.SYSTEM: return createSystem();
+			case ArtPackage.DATA_TYPE: return createDataType();
+			case ArtPackage.TYPED_ELEMENT: return createTypedElement();
+			case ArtPackage.CARDINALITY_ELEMENT: return createCardinalityElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -86,11 +86,11 @@ public class ArtPatternFactoryImpl extends EFactoryImpl implements ArtPatternFac
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case ArtPatternPackage.STRING:
+			case ArtPackage.STRING:
 				return createStringFromString(eDataType, initialValue);
-			case ArtPatternPackage.BOOLEAN:
+			case ArtPackage.BOOLEAN:
 				return createBooleanFromString(eDataType, initialValue);
-			case ArtPatternPackage.INTEGER:
+			case ArtPackage.INTEGER:
 				return createIntegerFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -105,11 +105,11 @@ public class ArtPatternFactoryImpl extends EFactoryImpl implements ArtPatternFac
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case ArtPatternPackage.STRING:
+			case ArtPackage.STRING:
 				return convertStringToString(eDataType, instanceValue);
-			case ArtPatternPackage.BOOLEAN:
+			case ArtPackage.BOOLEAN:
 				return convertBooleanToString(eDataType, instanceValue);
-			case ArtPatternPackage.INTEGER:
+			case ArtPackage.INTEGER:
 				return convertIntegerToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -235,8 +235,8 @@ public class ArtPatternFactoryImpl extends EFactoryImpl implements ArtPatternFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArtPatternPackage getArtPatternPackage() {
-		return (ArtPatternPackage)getEPackage();
+	public ArtPackage getArtPackage() {
+		return (ArtPackage)getEPackage();
 	}
 
 	/**
@@ -246,8 +246,8 @@ public class ArtPatternFactoryImpl extends EFactoryImpl implements ArtPatternFac
 	 * @generated
 	 */
 	@Deprecated
-	public static ArtPatternPackage getPackage() {
-		return ArtPatternPackage.eINSTANCE;
+	public static ArtPackage getPackage() {
+		return ArtPackage.eINSTANCE;
 	}
 
-} //ArtPatternFactoryImpl
+} //ArtFactoryImpl

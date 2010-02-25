@@ -31,7 +31,7 @@ import pattern.art.type.Service;
  * </ul>
  * </p>
  *
- * @see pattern.art.ArtPatternPackage#getSystem()
+ * @see pattern.art.ArtPackage#getSystem()
  * @model
  * @generated
  */
@@ -46,7 +46,7 @@ public interface System extends ModelElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Root</em>' containment reference.
 	 * @see #setRoot(CompositeInstance)
-	 * @see pattern.art.ArtPatternPackage#getSystem_Root()
+	 * @see pattern.art.ArtPackage#getSystem_Root()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -72,7 +72,7 @@ public interface System extends ModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Services</em>' containment reference list.
-	 * @see pattern.art.ArtPatternPackage#getSystem_Services()
+	 * @see pattern.art.ArtPackage#getSystem_Services()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -88,7 +88,7 @@ public interface System extends ModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Types</em>' containment reference list.
-	 * @see pattern.art.ArtPatternPackage#getSystem_Types()
+	 * @see pattern.art.ArtPackage#getSystem_Types()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -104,7 +104,7 @@ public interface System extends ModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Data Types</em>' containment reference list.
-	 * @see pattern.art.ArtPatternPackage#getSystem_DataTypes()
+	 * @see pattern.art.ArtPackage#getSystem_DataTypes()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -120,7 +120,7 @@ public interface System extends ModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Groups</em>' containment reference list.
-	 * @see pattern.art.ArtPatternPackage#getSystem_Groups()
+	 * @see pattern.art.ArtPackage#getSystem_Groups()
 	 * @model containment="true"
 	 * @generated
 	 */

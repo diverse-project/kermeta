@@ -20,7 +20,7 @@ package pattern.art;
  * </ul>
  * </p>
  *
- * @see pattern.art.ArtPatternPackage#getCardinalityElement()
+ * @see pattern.art.ArtPackage#getCardinalityElement()
  * @model
  * @generated
  */
@@ -35,7 +35,7 @@ public interface CardinalityElement extends ModelElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Lower</em>' attribute.
 	 * @see #setLower(Integer)
-	 * @see pattern.art.ArtPatternPackage#getCardinalityElement_Lower()
+	 * @see pattern.art.ArtPackage#getCardinalityElement_Lower()
 	 * @model dataType="pattern.art.Integer"
 	 * @generated
 	 */
@@ -61,7 +61,7 @@ public interface CardinalityElement extends ModelElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Upper</em>' attribute.
 	 * @see #setUpper(Integer)
-	 * @see pattern.art.ArtPatternPackage#getCardinalityElement_Upper()
+	 * @see pattern.art.ArtPackage#getCardinalityElement_Upper()
 	 * @model dataType="pattern.art.Integer"
 	 * @generated
 	 */

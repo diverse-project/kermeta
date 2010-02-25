@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtPackage;
 
 import patternframework.PatternframeworkPackage;
 
@@ -81,7 +81,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__NAME = ArtPatternPackage.MODEL_ELEMENT__NAME;
+	int COMPONENT_TYPE__NAME = ArtPackage.MODEL_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Port</b></em>' containment reference list.
@@ -90,7 +90,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__PORT = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int COMPONENT_TYPE__PORT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Attribute</b></em>' containment reference list.
@@ -99,7 +99,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__ATTRIBUTE = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int COMPONENT_TYPE__ATTRIBUTE = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Groups</b></em>' reference list.
@@ -108,7 +108,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__GROUPS = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int COMPONENT_TYPE__GROUPS = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Implem</b></em>' containment reference.
@@ -117,7 +117,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__IMPLEM = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int COMPONENT_TYPE__IMPLEM = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Component Type</em>' class.
@@ -126,7 +126,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE_FEATURE_COUNT = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int COMPONENT_TYPE_FEATURE_COUNT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link pattern.art.type.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
@@ -273,7 +273,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE__NAME = ArtPatternPackage.MODEL_ELEMENT__NAME;
+	int SERVICE__NAME = ArtPackage.MODEL_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' containment reference list.
@@ -282,7 +282,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE__OPERATION = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int SERVICE__OPERATION = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Service</em>' class.
@@ -291,7 +291,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_FEATURE_COUNT = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int SERVICE_FEATURE_COUNT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link pattern.art.type.impl.OperationImpl <em>Operation</em>}' class.
@@ -310,7 +310,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__NAME = ArtPatternPackage.MODEL_ELEMENT__NAME;
+	int OPERATION__NAME = ArtPackage.MODEL_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Input</b></em>' containment reference list.
@@ -319,7 +319,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__INPUT = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int OPERATION__INPUT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Output</b></em>' containment reference list.
@@ -328,7 +328,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__OUTPUT = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int OPERATION__OUTPUT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
@@ -337,7 +337,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = ArtPatternPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int OPERATION_FEATURE_COUNT = ArtPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link pattern.art.type.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -356,7 +356,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER__NAME = ArtPatternPackage.TYPED_ELEMENT__NAME;
+	int PARAMETER__NAME = ArtPackage.TYPED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -365,7 +365,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER__TYPE = ArtPatternPackage.TYPED_ELEMENT__TYPE;
+	int PARAMETER__TYPE = ArtPackage.TYPED_ELEMENT__TYPE;
 
 	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
@@ -374,7 +374,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_FEATURE_COUNT = ArtPatternPackage.TYPED_ELEMENT_FEATURE_COUNT + 0;
+	int PARAMETER_FEATURE_COUNT = ArtPackage.TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link pattern.art.type.impl.FunctionalServiceImpl <em>Functional Service</em>}' class.
@@ -467,7 +467,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PORT__NAME = ArtPatternPackage.NAMED_ELEMENT__NAME;
+	int ABSTRACT_PORT__NAME = ArtPackage.NAMED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Service</b></em>' reference.
@@ -476,7 +476,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PORT__SERVICE = ArtPatternPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int ABSTRACT_PORT__SERVICE = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Role</b></em>' attribute.
@@ -485,7 +485,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PORT__ROLE = ArtPatternPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int ABSTRACT_PORT__ROLE = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Port</em>' class.
@@ -494,7 +494,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PORT_FEATURE_COUNT = ArtPatternPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int ABSTRACT_PORT_FEATURE_COUNT = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link pattern.art.type.impl.PortImpl <em>Port</em>}' class.
@@ -513,7 +513,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__NAME = ArtPatternPackage.CARDINALITY_ELEMENT__NAME;
+	int PORT__NAME = ArtPackage.CARDINALITY_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Lower</b></em>' attribute.
@@ -522,7 +522,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__LOWER = ArtPatternPackage.CARDINALITY_ELEMENT__LOWER;
+	int PORT__LOWER = ArtPackage.CARDINALITY_ELEMENT__LOWER;
 
 	/**
 	 * The feature id for the '<em><b>Upper</b></em>' attribute.
@@ -531,7 +531,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__UPPER = ArtPatternPackage.CARDINALITY_ELEMENT__UPPER;
+	int PORT__UPPER = ArtPackage.CARDINALITY_ELEMENT__UPPER;
 
 	/**
 	 * The feature id for the '<em><b>Service</b></em>' reference.
@@ -540,7 +540,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__SERVICE = ArtPatternPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 0;
+	int PORT__SERVICE = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Role</b></em>' attribute.
@@ -549,7 +549,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__ROLE = ArtPatternPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 1;
+	int PORT__ROLE = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Is Optional</b></em>' attribute.
@@ -558,7 +558,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT__IS_OPTIONAL = ArtPatternPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 2;
+	int PORT__IS_OPTIONAL = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Port</em>' class.
@@ -567,7 +567,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_FEATURE_COUNT = ArtPatternPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 3;
+	int PORT_FEATURE_COUNT = ArtPackage.CARDINALITY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link pattern.art.type.impl.PortCollectionImpl <em>Port Collection</em>}' class.
@@ -641,7 +641,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_ID__NAME = ArtPatternPackage.NAMED_ELEMENT__NAME;
+	int PORT_ID__NAME = ArtPackage.NAMED_ELEMENT__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Port Id</em>' class.
@@ -650,7 +650,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_ID_FEATURE_COUNT = ArtPatternPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int PORT_ID_FEATURE_COUNT = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link pattern.art.type.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -669,7 +669,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__NAME = ArtPatternPackage.TYPED_ELEMENT__NAME;
+	int ATTRIBUTE__NAME = ArtPackage.TYPED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -678,7 +678,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__TYPE = ArtPatternPackage.TYPED_ELEMENT__TYPE;
+	int ATTRIBUTE__TYPE = ArtPackage.TYPED_ELEMENT__TYPE;
 
 	/**
 	 * The number of structural features of the '<em>Attribute</em>' class.
@@ -687,7 +687,7 @@ public interface TypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_FEATURE_COUNT = ArtPatternPackage.TYPED_ELEMENT_FEATURE_COUNT + 0;
+	int ATTRIBUTE_FEATURE_COUNT = ArtPackage.TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link pattern.art.type.impl.BasicAttributeImpl <em>Basic Attribute</em>}' class.

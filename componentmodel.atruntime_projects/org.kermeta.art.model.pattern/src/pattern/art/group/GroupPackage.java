@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -77,7 +77,7 @@ public interface GroupPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GROUP__NAME = ArtPatternPackage.NAMED_ELEMENT__NAME;
+	int GROUP__NAME = ArtPackage.NAMED_ELEMENT__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Group</em>' class.
@@ -86,7 +86,7 @@ public interface GroupPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GROUP_FEATURE_COUNT = ArtPatternPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int GROUP_FEATURE_COUNT = ArtPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link pattern.art.group.impl.TypeGroupImpl <em>Type Group</em>}' class.

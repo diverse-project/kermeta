@@ -13,7 +13,7 @@ package pattern.art;
  * <!-- end-user-doc -->
  *
  *
- * @see pattern.art.ArtPatternPackage#getModelElement()
+ * @see pattern.art.ArtPackage#getModelElement()
  * @model
  * @generated
  */

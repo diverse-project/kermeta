@@ -14,13 +14,13 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtPackage;
 
 import pattern.art.group.GroupPackage;
 
 import pattern.art.group.impl.GroupPackageImpl;
 
-import pattern.art.impl.ArtPatternPackageImpl;
+import pattern.art.impl.ArtPackageImpl;
 
 import pattern.art.implem.ImplemPackage;
 
@@ -227,7 +227,7 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		ArtPatternPackageImpl theArtPatternPackage = (ArtPatternPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI) instanceof ArtPatternPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI) : ArtPatternPackage.eINSTANCE);
+		ArtPackageImpl theArtPackage = (ArtPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) instanceof ArtPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI) : ArtPackage.eINSTANCE);
 		InstancePackageImpl theInstancePackage = (InstancePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI) instanceof InstancePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI) : InstancePackage.eINSTANCE);
 		ImplemPackageImpl theImplemPackage = (ImplemPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI) instanceof ImplemPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI) : ImplemPackage.eINSTANCE);
 		GroupPackageImpl theGroupPackage = (GroupPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI) instanceof GroupPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI) : GroupPackage.eINSTANCE);
@@ -235,7 +235,7 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 
 		// Create package meta-data objects
 		theTypePackage.createPackageContents();
-		theArtPatternPackage.createPackageContents();
+		theArtPackage.createPackageContents();
 		theInstancePackage.createPackageContents();
 		theImplemPackage.createPackageContents();
 		theGroupPackage.createPackageContents();
@@ -243,7 +243,7 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 
 		// Initialize created meta-data
 		theTypePackage.initializePackageContents();
-		theArtPatternPackage.initializePackageContents();
+		theArtPackage.initializePackageContents();
 		theInstancePackage.initializePackageContents();
 		theImplemPackage.initializePackageContents();
 		theGroupPackage.initializePackageContents();
@@ -659,7 +659,7 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		ArtPatternPackage theArtPatternPackage = (ArtPatternPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPatternPackage.eNS_URI);
+		ArtPackage theArtPackage = (ArtPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI);
 		GroupPackage theGroupPackage = (GroupPackage)EPackage.Registry.INSTANCE.getEPackage(GroupPackage.eNS_URI);
 		ImplemPackage theImplemPackage = (ImplemPackage)EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI);
 		PatternframeworkPackage thePatternframeworkPackage = (PatternframeworkPackage)EPackage.Registry.INSTANCE.getEPackage(PatternframeworkPackage.eNS_URI);
@@ -669,20 +669,20 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		componentTypeEClass.getESuperTypes().add(theArtPatternPackage.getModelElement());
+		componentTypeEClass.getESuperTypes().add(theArtPackage.getModelElement());
 		primitiveTypeEClass.getESuperTypes().add(this.getComponentType());
 		compositeTypeEClass.getESuperTypes().add(this.getComponentType());
-		serviceEClass.getESuperTypes().add(theArtPatternPackage.getModelElement());
-		operationEClass.getESuperTypes().add(theArtPatternPackage.getModelElement());
-		parameterEClass.getESuperTypes().add(theArtPatternPackage.getTypedElement());
+		serviceEClass.getESuperTypes().add(theArtPackage.getModelElement());
+		operationEClass.getESuperTypes().add(theArtPackage.getModelElement());
+		parameterEClass.getESuperTypes().add(theArtPackage.getTypedElement());
 		functionalServiceEClass.getESuperTypes().add(this.getService());
 		controlServiceEClass.getESuperTypes().add(this.getService());
-		abstractPortEClass.getESuperTypes().add(theArtPatternPackage.getNamedElement());
-		portEClass.getESuperTypes().add(theArtPatternPackage.getCardinalityElement());
+		abstractPortEClass.getESuperTypes().add(theArtPackage.getNamedElement());
+		portEClass.getESuperTypes().add(theArtPackage.getCardinalityElement());
 		portEClass.getESuperTypes().add(this.getAbstractPort());
 		portCollectionEClass.getESuperTypes().add(this.getAbstractPort());
-		portIdEClass.getESuperTypes().add(theArtPatternPackage.getNamedElement());
-		attributeEClass.getESuperTypes().add(theArtPatternPackage.getTypedElement());
+		portIdEClass.getESuperTypes().add(theArtPackage.getNamedElement());
+		attributeEClass.getESuperTypes().add(theArtPackage.getTypedElement());
 		basicAttributeEClass.getESuperTypes().add(this.getAttribute());
 		dictionaryEClass.getESuperTypes().add(this.getAttribute());
 		dictionaryDefaultValueEClass.getESuperTypes().add(thePatternframeworkPackage.getPObject());
@@ -713,10 +713,10 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 
 		initEClass(abstractPortEClass, AbstractPort.class, "AbstractPort", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractPort_Service(), this.getService(), null, "service", null, 0, 1, AbstractPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractPort_Role(), theArtPatternPackage.getString(), "role", null, 0, 1, AbstractPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractPort_Role(), theArtPackage.getString(), "role", null, 0, 1, AbstractPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portEClass, Port.class, "Port", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPort_IsOptional(), theArtPatternPackage.getBoolean(), "isOptional", "false", 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPort_IsOptional(), theArtPackage.getBoolean(), "isOptional", "false", 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portCollectionEClass, PortCollection.class, "PortCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPortCollection_Ids(), this.getPortId(), null, "ids", null, 0, -1, PortCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -726,15 +726,15 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(basicAttributeEClass, BasicAttribute.class, "BasicAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBasicAttribute_DefaultValue(), theArtPatternPackage.getString(), "defaultValue", null, 0, 1, BasicAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBasicAttribute_DefaultValue(), theArtPackage.getString(), "defaultValue", null, 0, 1, BasicAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dictionaryEClass, Dictionary.class, "Dictionary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDictionary_ValueType(), theArtPatternPackage.getDataType(), null, "valueType", null, 0, 1, Dictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDictionary_ValueType(), theArtPackage.getDataType(), null, "valueType", null, 0, 1, Dictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDictionary_Keys(), this.getDictionaryDefaultValue(), null, "keys", null, 0, -1, Dictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dictionaryDefaultValueEClass, DictionaryDefaultValue.class, "DictionaryDefaultValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDictionaryDefaultValue_Key(), theArtPatternPackage.getString(), "key", null, 0, 1, DictionaryDefaultValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDictionaryDefaultValue_Value(), theArtPatternPackage.getString(), "value", null, 0, 1, DictionaryDefaultValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDictionaryDefaultValue_Key(), theArtPackage.getString(), "key", null, 0, 1, DictionaryDefaultValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDictionaryDefaultValue_Value(), theArtPackage.getString(), "value", null, 0, 1, DictionaryDefaultValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(portRoleEEnum, PortRole.class, "PortRole");

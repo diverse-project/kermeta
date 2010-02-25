@@ -7,7 +7,6 @@
 package pattern.art.type;
 
 import pattern.art.NamedElement;
-import patternframework.PObject;
 
 /**
  * <!-- begin-user-doc -->

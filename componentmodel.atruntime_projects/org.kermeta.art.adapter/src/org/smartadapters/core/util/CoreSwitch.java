@@ -23,17 +23,17 @@ import org.smartadapters.core.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.smartadapters.core.SmartAdapters4DiVAPackage
+ * @see org.smartadapters.core.CorePackage
  * @generated
  */
-public class SmartAdapters4DiVASwitch<T> {
+public class CoreSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static SmartAdapters4DiVAPackage modelPackage;
+	protected static CorePackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -41,9 +41,9 @@ public class SmartAdapters4DiVASwitch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SmartAdapters4DiVASwitch() {
+	public CoreSwitch() {
 		if (modelPackage == null) {
-			modelPackage = SmartAdapters4DiVAPackage.eINSTANCE;
+			modelPackage = CorePackage.eINSTANCE;
 		}
 	}
 
@@ -87,53 +87,53 @@ public class SmartAdapters4DiVASwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case SmartAdapters4DiVAPackage.ADAPTER: {
+			case CorePackage.ADAPTER: {
 				Adapter adapter = (Adapter)theEObject;
 				T result = caseAdapter(adapter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SmartAdapters4DiVAPackage.ASPECT: {
+			case CorePackage.ASPECT: {
 				Aspect aspect = (Aspect)theEObject;
 				T result = caseAspect(aspect);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SmartAdapters4DiVAPackage.ADAPTATION: {
+			case CorePackage.ADAPTATION: {
 				Adaptation adaptation = (Adaptation)theEObject;
 				T result = caseAdaptation(adaptation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SmartAdapters4DiVAPackage.CLONE_ADAPTATION: {
+			case CorePackage.CLONE_ADAPTATION: {
 				cloneAdaptation cloneAdaptation = (cloneAdaptation)theEObject;
 				T result = casecloneAdaptation(cloneAdaptation);
 				if (result == null) result = caseAdaptation(cloneAdaptation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SmartAdapters4DiVAPackage.CREATE_ADAPTATION: {
+			case CorePackage.CREATE_ADAPTATION: {
 				createAdaptation createAdaptation = (createAdaptation)theEObject;
 				T result = casecreateAdaptation(createAdaptation);
 				if (result == null) result = caseAdaptation(createAdaptation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SmartAdapters4DiVAPackage.SET_ADAPTATION: {
+			case CorePackage.SET_ADAPTATION: {
 				setAdaptation setAdaptation = (setAdaptation)theEObject;
 				T result = casesetAdaptation(setAdaptation);
 				if (result == null) result = caseAdaptation(setAdaptation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SmartAdapters4DiVAPackage.UNSET_ADAPTATION: {
+			case CorePackage.UNSET_ADAPTATION: {
 				unsetAdaptation unsetAdaptation = (unsetAdaptation)theEObject;
 				T result = caseunsetAdaptation(unsetAdaptation);
 				if (result == null) result = caseAdaptation(unsetAdaptation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SmartAdapters4DiVAPackage.MAKE_UNIQUE: {
+			case CorePackage.MAKE_UNIQUE: {
 				makeUnique makeUnique = (makeUnique)theEObject;
 				T result = casemakeUnique(makeUnique);
 				if (result == null) result = caseAdaptation(makeUnique);
@@ -279,4 +279,4 @@ public class SmartAdapters4DiVASwitch<T> {
 		return null;
 	}
 
-} //SmartAdapters4DiVASwitch
+} //CoreSwitch
