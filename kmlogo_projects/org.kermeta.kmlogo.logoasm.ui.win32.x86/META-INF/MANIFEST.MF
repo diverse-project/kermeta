@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Windows Fragment
+Bundle-SymbolicName: org.kermeta.kmlogo.logoasm.ui.win32.x86
+Bundle-Version: 1.3.2.qualifier
+Bundle-Vendor: INRIA Bretagne Atlantique
+Fragment-Host: org.kermeta.kmlogo.logoasm.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Eclipse-PlatformFilter: (osgi.os=win32)
+Require-Bundle: org.openembedd.launchexec;bundle-version="1.0.0"

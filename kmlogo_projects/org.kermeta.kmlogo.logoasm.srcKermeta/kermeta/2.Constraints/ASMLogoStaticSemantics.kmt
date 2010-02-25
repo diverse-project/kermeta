@@ -1,0 +1,23 @@
+package kmLogo::ASM;
+require kermeta
+require "http://www.kermeta.org/kmLogo"
+
+aspect class ProcDeclaration{
+	/**
+	 * No two formal parameters of a procedure may have the same name
+	 */
+	inv unique_names_for_formal_arguments is
+	do
+		args.forAll{ a1 | args.forAll{ a2 | 
+			a1.name.equals(a2.name).implies(a1.equals(a2))}}
+	end
+}
+
+aspect class ProcCall{	
+	/** 
+	 * A procedure is called with the same number of arguments as specified in its declaration
+	 */
+	inv same_number_of_formals_and_actuals is do 
+		actualArgs.size == declaration.args.size
+	end 
+}

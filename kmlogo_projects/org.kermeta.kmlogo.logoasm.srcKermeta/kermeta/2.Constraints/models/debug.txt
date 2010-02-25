@@ -1,0 +1,2 @@
+Loading carre_faulty1.xmi
+Writing carre_faulty1.txt

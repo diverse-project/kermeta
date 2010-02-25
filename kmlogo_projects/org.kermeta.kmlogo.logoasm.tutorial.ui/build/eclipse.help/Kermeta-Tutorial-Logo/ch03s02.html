@@ -1,0 +1,145 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>3.2.&nbsp;Metamodel Ecore with Kermeta</title><link rel="stylesheet" href="css/docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><meta name="keywords" content="Kermeta, metamodeling, language, kmLogo"><link rel="home" href="index.html" title="Logo Tutorial : Building kmLogo DSL using Kermeta"><link rel="up" href="ch03.html" title="Chapter&nbsp;3.&nbsp;Define the metamodel"><link rel="prev" href="ch03.html" title="Chapter&nbsp;3.&nbsp;Define the metamodel"><link rel="next" href="ch04.html" title="Chapter&nbsp;4.&nbsp;Editor"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2.&nbsp;Metamodel Ecore with Kermeta</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03.html">Prev</a>&nbsp;</td><th width="60%" align="center">Chapter&nbsp;3.&nbsp;Define the metamodel</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch04.html">Next</a></td></tr></table><hr></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="section_metamodel_with_kermeta.link"></a>3.2.&nbsp;Metamodel Ecore with Kermeta</h2></div></div></div><p>Many ecore tools allow you to create your metamodel. Kermeta allows you to do it in a
+        "programmatical" way. Analyse the content of the listing below and see what does it stand
+        for : </p><pre class="programlisting">
+@uri "http://www.kermeta.org/kmLogo"
+package kmLogo;
+
+require "kermeta"
+alias Integer : kermeta::standard::Integer;
+alias Boolean : kermeta::standard::Boolean;
+alias String : kermeta::standard::String;
+package ASM
+{
+	abstract class Instruction
+	{
+	}
+	abstract class Primitive inherits Instruction
+	{
+	}
+	class Back inherits Primitive
+	{
+		attribute steps : Expression[1..1]
+
+	}
+	class Forward inherits Primitive
+	{
+		attribute steps : Expression[1..1]
+
+	}
+	class Left inherits Primitive
+	{
+		attribute angle : Expression
+
+	}
+	class Right inherits Primitive
+	{
+		attribute angle : Expression
+
+	}
+	class PenDown inherits Primitive
+	{
+	}
+	class PenUp inherits Primitive
+	{
+	}
+	class Clear inherits Primitive
+	{
+	}
+	abstract class Expression inherits Instruction
+	{
+	}
+	abstract class BinaryExp inherits Expression
+	{
+		attribute lhs : Expression[1..1]
+
+		attribute rhs : Expression[1..1]
+
+	}
+	class Constant inherits Expression
+	{
+		attribute integerValue : Integer
+
+	}
+	class ProcCall inherits Expression
+	{
+		attribute actualArgs : Expression[0..*]
+
+		reference declaration : ProcDeclaration[1..1]#procCall
+
+	}
+	class ProcDeclaration inherits Instruction
+	{
+		attribute name : String
+
+		attribute args : Parameter[0..*]
+
+		attribute block : Block
+
+		reference procCall : ProcCall[0..*]#declaration
+
+	}
+	class Block inherits Instruction
+	{
+		attribute instructions : Instruction[0..*]
+
+	}
+	class If inherits ControlStructure
+	{
+		attribute thenPart : Block[1..1]
+
+		attribute elsePart : Block
+
+	}
+	class ControlStructure inherits Instruction
+	{
+		attribute condition : Expression
+
+	}
+	class Repeat inherits ControlStructure
+	{
+		attribute block : Block[1..1]
+
+	}
+	class While inherits ControlStructure
+	{
+		attribute block : Block[1..1]
+
+	}
+	class Parameter
+	{
+		attribute name : String
+
+	}
+	class ParameterCall inherits Expression
+	{
+		reference parameter : Parameter[1..1]
+
+	}
+	class Plus inherits BinaryExp
+	{
+	}
+	class Minus inherits BinaryExp
+	{
+	}
+	class Mult inherits BinaryExp
+	{
+	}
+	class Div inherits BinaryExp
+	{
+	}
+	class Equals inherits BinaryExp
+	{
+	}
+	class Greater inherits BinaryExp
+	{
+	}
+	class Lower inherits BinaryExp
+	{
+	}
+}
+</pre><p>Inside <span class="bold"><strong>org.kermeta.kmlogo.logoasm.model/model</strong></span>, create a
+        new folder <span class="bold"><strong>srcKermeta</strong></span>.</p><p>Inside this newly created folder, create a new Kermeta file (.<span class="bold"><strong>kmt</strong></span>) and program the listing above inside (to save time, after analysing the
+        listing above, you may copy/paste to replace the generated code). </p><p>After saving, right-click on it and choose <span class="bold"><strong>Kermeta &gt; Generate
+          Ecore</strong></span>. </p><p>You should retrieve our logo language's .ecore representation that we saw before.</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch04.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;3.&nbsp;Define the metamodel&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;4.&nbsp;Editor</td></tr></table></div></body></html>

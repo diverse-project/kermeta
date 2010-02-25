@@ -1,0 +1,65 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Chapter&nbsp;6.&nbsp;Contract</title><link rel="stylesheet" href="css/docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><meta name="keywords" content="Kermeta, metamodeling, language, kmLogo"><link rel="home" href="index.html" title="Logo Tutorial : Building kmLogo DSL using Kermeta"><link rel="up" href="index.html" title="Logo Tutorial : Building kmLogo DSL using Kermeta"><link rel="prev" href="ch05.html" title="Chapter&nbsp;5.&nbsp;Model manipulation in Kermeta"><link rel="next" href="ch07.html" title="Chapter&nbsp;7.&nbsp;Behaviour"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;6.&nbsp;Contract</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch07.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a name="chapter_contract.title.link"></a>Chapter&nbsp;6.&nbsp;Contract<span></span><a name="chapter_contract"></a></h2></div></div></div><p>Let's now add some <span class="bold"><strong>static semantic</strong></span> to our metamodel i.e.
+      add missing pre/post-conditions to our .ecore in order to express the contraints specified in
+      the metamodel.</p><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="section_static_semantics.link"></a>6.1.&nbsp;Static semantics<span></span></h2></div></div></div><p>For this step we are going to add two contracts to our metamodel:</p><div class="itemizedlist"><ul type="disc"><li><p>"no two formal parameters of a procedure may have the same name";</p></li><li><p>"each procedure call provide the same number of arguments as specified in its
+              declaration".</p></li></ul></div><p>In OCL you will have the listing below to express it : </p><pre class="programlisting">
+package kmLogo::ASM
+
+context ProcCall 
+inv apropriate_number_of_actual_parameters :
+	actualArgs-&gt;size() = declaration.args-&gt;size()
+	
+context ProcDeclaration 
+inv unique_names_for_formal_arguments :
+		args-&gt;forAll ( a1 | args-&gt;forAll ( a2 | a1.name = a2.name implies a1 = a2 ))
+
+endpackage
+</pre></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="section_kermeta_implementation.link"></a>6.2.&nbsp;Implementation in
+        Kermeta<span></span></h2></div></div></div><p>Kermeta offers same mechanism as OCL to navigate inside the elements. Through aspect
+        weaving, Kermeta allow to reopen a class and weave an aspect inside in order to add this
+        pre/post conditions. Let's implement the example above in Kermeta :</p><div class="procedure"><ol type="1"><li><p>Create a new plug-in project <span class="bold"><strong>org.kermeta.kmlogo.logoasm.srcKermeta</strong></span> (set all by default, hit next and
+            finish). </p><p>Create a folder <span class="bold"><strong>kermeta</strong></span> inside. This is the folder
+            where we are going to put all kermeta sources for this tutorial.</p></li><li><p>Inside the folder <span class="bold"><strong>kermeta</strong></span>, create a folder
+              <span class="bold"><strong>2.Constraints</strong></span>.</p><p>Inside the folder <span class="bold"><strong>2.Constraints</strong></span>, create a new
+            kermeta file <span class="bold"><strong>ASMLogoStaticSemantics.kmt</strong></span> to reopen the
+            ProcDeclaration class and weave invariants as aspects into it following the listing
+            below (you may copy/paste it if you've already analysed it first): </p><pre class="programlisting"> 
+package kmLogo::ASM;
+require kermeta
+require "http://www.kermeta.org/kmLogo"
+
+aspect class ProcDeclaration{
+	/**
+	 * No two formal parameters of a procedure may have the same name
+	 */
+	inv unique_names_for_formal_arguments is
+	do
+		args.forAll{ a1 | args.forAll{ a2 | 
+			a1.name.equals(a2.name).implies(a1.equals(a2))}}
+	end
+}
+
+aspect class ProcCall{	
+	/** 
+	 * A procedure is called with the same number of arguments as specified in its declaration
+	 */
+	inv same_number_of_formals_and_actuals is do 
+		actualArgs.size == declaration.args.size
+	end 
+}
+</pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="gfx/admonitions/note.gif"></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>If you get errors on "http://www.kermeta.org/kmLogo", check your package
+              registration. you may hit the <span class="bold"><strong>check this file</strong></span> button
+              (on Kermeta's perspective toolbar) to refresh.</p></td></tr></table></div></li><li><p>After saving it, let's see the results. </p><p>To do so go back to the project <span class="bold"><strong>org.kermeta.kmlogo.logoasm.tutorial</strong></span> for a while.</p><p>Copy the folders: </p><div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><strong>org.kermeta.kmlogo.logoasm.tutorial/parts/2.constracts/models</strong></span> which
+                  contains the models conform to our metamodel ecore;</p></li><li><p><span class="bold"><strong>org.kermeta.kmlogo.logoasm.tutorial/parts/2.constracts/tests</strong></span> which
+                  contains the main operation for testing the constraints on these models.</p></li></ul></div><p>Paste these folders and its content into <span class="bold"><strong>org.kermeta.kmlogo.logoasm.srcKermeta/kermeta/2.Constraints</strong></span>.</p></li><li><p>Open the file <span class="bold"><strong>tests/CheckModels.kmt</strong></span> and analyse its
+            purpose.</p><p>It loads the models inside the models folder and require the kermeta file that we've
+            created before.</p></li><li><p>Let's now run our first Kermeta application : Right-click on the file <span class="bold"><strong>CheckModels.kmt</strong></span> and choose <span class="bold"><strong>Run as &gt; Run
+              as Kermeta application</strong></span>. </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="gfx/admonitions/note.gif"></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>If you get errors, again, check that you did not forget to register you ecore.
+                Maybe it is necessary to clean all the projects or launch the kermeta cleaner (trash
+                bin with kermeta icon on your toolbar) or hit the kermeta validator ("check this
+                file" button in Kermeta perspective toolbar)</p></td></tr></table></div><p>On your console view, you should view the result below (you can review the models to
+            see its conformance to the ecore ) : </p><div class="figure"><a name="d0e827"></a><div class="figure-contents"><div class="mediaobject"><img src="Kermeta-Tutorial-Logo_figures/KermetaOutput.png" alt="Kermeta application checkModels output"></div></div><p class="title"><b>Figure&nbsp;6.1.&nbsp;Kermeta application checkModels output</b></p></div><br class="figure-break"></li></ol></div><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Important]" src="gfx/admonitions/important.gif"></td><th align="left">Important</th></tr><tr><td align="left" valign="top"><p><span class="bold"><strong>Remember</strong></span> : To check the constraints in Kermeta, you
+          should call the method <span class="bold"><strong>checkAllInvariants()</strong></span> on root
+          element of the model (here the one from <span class="bold"><strong>models/carre.logoasm</strong></span>)</p></td></tr></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch07.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;5.&nbsp;Model manipulation in
+      Kermeta&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;7.&nbsp;Behaviour</td></tr></table></div></body></html>

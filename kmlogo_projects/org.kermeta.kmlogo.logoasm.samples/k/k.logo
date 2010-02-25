@@ -1,0 +1,23 @@
+
+TO k :scale
+	PENDOWN
+	FORWARD *(30, :scale)
+	PENUP
+	BACK *(10, :scale)
+	RIGHT 45 
+	FORWARD *(14, :scale)
+	PENDOWN
+	BACK *(14, :scale)
+	PENUP
+	RIGHT 90
+	FORWARD *(14, :scale)
+	PENDOWN
+	BACK *(14, :scale)
+	PENUP
+	RIGHT 45 
+	FORWARD *(20, :scale)
+	LEFT 180
+END
+
+CLEAR
+$k(4)

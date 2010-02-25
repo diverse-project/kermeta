@@ -1,0 +1,25 @@
+
+
+TO koch :level :width
+	IFELSE <(:level, 1) [ FORWARD :width ]
+	 [
+		$koch( +(:level,-1), /(:width, 3))
+		LEFT 60
+		$koch( +(:level,-1), /(:width, 3))
+		RIGHT 120
+		$koch( +(:level,-1), /(:width, 3))
+		LEFT 60
+	]
+END
+
+TO snowflake :level :width
+	REPEAT 3 [
+		RIGHT 120
+		$koch(:level,:width)
+	]
+END
+CLEAR
+PENDOWN
+$snowflake(2,64)
+PENUP
+

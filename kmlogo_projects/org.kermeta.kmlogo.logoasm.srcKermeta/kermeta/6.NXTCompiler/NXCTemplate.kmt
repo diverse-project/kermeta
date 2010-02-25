@@ -1,0 +1,116 @@
+package kmLogo;
+require kermeta
+//require "../1.MetaModel/ASMLogo.ecore"
+require "http://www.kermeta.org/kmLogo"
+using kermeta::standard
+using kermeta::utils
+class NXCCodeGenerator{
+operation generate(subs : String[*], nxc : String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\n/**
+ * This is the implementation of a LOGO Turtle for NXT
+ * Author : Franck FLEUREY
+ * License : GPL
+ *
+ * The robot is supposed to have two wheels controlled 
+ * by two separate motors. The distance between the two
+ * wheels is D and the diameter of the wheel is d.
+ * For this implementation to work D/d must be an integer.
+ * A third motor controls a pen up and down. The Pen should
+ * touch the paper right in the middle of the two wheels.
+ *
+ */
+
+#include \"NXCDefs.h\"
+
+// Corresponds to D/d
+//#define ANGLE_FACTOR 18
+#define ANGLE_FACTOR 9
+
+// The Motors connections
+#define PEN_MOTOR OUT_A
+#define RIGHT_MOTOR OUT_B
+#define LEFT_MOTOR OUT_C
+#define MOVE_MOTORS OUT_BC
+
+// define step length in wheel rotation (degree)
+#define STEP 20
+
+// define the angle of which the pen motor has to move
+#define PEN_ANGLE 45
+
+// The motor speed to use (not two fast to avoid drifting)
+#define SPEED 50
+
+/**
+ * The Robot will move straight forward for d steps
+ */
+sub forward(int d)
+{
+ int angle = d * STEP;
+ ResetTachoCount(MOVE_MOTORS);
+ 
+ if (d>0) {
+  OnFwd(LEFT_MOTOR, SPEED);
+  OnFwd(RIGHT_MOTOR, SPEED);
+  Wait(d * STEP);
+ }
+ else {
+  OnRev(LEFT_MOTOR, SPEED);
+  OnRev(RIGHT_MOTOR, SPEED);
+  Wait(-d * STEP);
+ }
+ Off(MOVE_MOTORS);
+}
+
+/**
+ * The Robot will turn by n degree around the pen (hopefully)
+ */
+sub turn(int n)
+{
+ ResetTachoCount(MOVE_MOTORS);
+ 
+ if (n>0) {
+  OnFwd(LEFT_MOTOR, SPEED);
+  OnRev(RIGHT_MOTOR, SPEED);
+  Wait(n*ANGLE_FACTOR);
+ }
+ else {
+  OnRev(LEFT_MOTOR, SPEED);
+  OnFwd(RIGHT_MOTOR, SPEED);
+  Wait((-n)*ANGLE_FACTOR);
+ }
+ Off(MOVE_MOTORS);
+}
+
+/**
+ * The Pen goes up
+ */
+sub penUp()
+{
+ RotateMotor(PEN_MOTOR, SPEED, -PEN_ANGLE);
+ // SetSensorType(IN_1, IN_TYPE_LIGHT_INACTIVE);
+}
+
+/**
+ * The Pen goes down
+ */
+sub penDown()
+{
+ RotateMotor(PEN_MOTOR, SPEED, PEN_ANGLE);
+ // SetSensorType(IN_1, IN_TYPE_LIGHT_ACTIVE);
+}
+/************************************************************/
+/*  END OF THE API, THE COMPILED CODE GOES BELOW THIS LINE  */
+/************************************************************/
+")
+ subs.each{ s | 
+_res.append(s)
+_res.append("\n")
+}
+_res.append("\ntask main()\n")
+_res.append(nxc)
+_res.append("\n\n\t\t\n")
+result := _res.toString
+end
+}

@@ -1,0 +1,33 @@
+/* $Id: Math.kmt,v 1.2 2008-05-29 12:09:40 vmahe Exp $
+ * Creation date: May 30, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+package Math;
+
+
+require kermeta
+
+using kermeta::standard
+class Math
+{
+	operation sin(a : Real) : Real is do 
+		result ?= extern org::kermeta::kmLogo::wrapper::Math.sin(a)
+	end
+	operation cos(a : Real) : Real is do 
+		result ?= extern org::kermeta::kmLogo::wrapper::Math.cos(a)
+	end
+	operation pi() : Real is do
+		result ?= extern org::kermeta::kmLogo::wrapper::Math.pi(self)
+	end
+	
+	operation toDegrees(a : Real) : Real is do 
+		result ?= extern org::kermeta::kmLogo::wrapper::Math.toDegrees(a)
+	end
+	operation toRadians(a : Real) : Real is do 
+		result ?= extern org::kermeta::kmLogo::wrapper::Math.toRadians(a)
+	end
+}

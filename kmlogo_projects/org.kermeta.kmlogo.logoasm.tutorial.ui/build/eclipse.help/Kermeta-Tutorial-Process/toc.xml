@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<toc label="Kermeta Tutorial : Processes to build a DSL" topic="build/eclipse.help/Kermeta-Tutorial-Process/index.html">
+   <topic label="Preface" href="build/eclipse.help/Kermeta-Tutorial-Process/pr01.html"/>
+   <topic label="Introduction" href="build/eclipse.help/Kermeta-Tutorial-Process/ch01.html"/>
+   <topic label="Define abstract&#xA;            syntax" href="build/eclipse.help/Kermeta-Tutorial-Process/ch02.html">
+      <topic label="Terminology and format used in this tutorial" href="build/eclipse.help/Kermeta-Tutorial-Process/ch02.html#d0e139"/>
+      <topic label="Define the metamodel" href="build/eclipse.help/Kermeta-Tutorial-Process/ch02s02.html"/>
+   </topic>
+   <topic label="Define the editor" href="build/eclipse.help/Kermeta-Tutorial-Process/ch03.html">
+      <topic label="Dynamic instance" href="build/eclipse.help/Kermeta-Tutorial-Process/ch03.html#sec_dynamic_instance.link"/>
+      <topic label="Tree-view editor" href="build/eclipse.help/Kermeta-Tutorial-Process/ch03s02.html"/>
+      <topic label="Textual editor" href="build/eclipse.help/Kermeta-Tutorial-Process/ch03s03.html"/>
+      <topic label="GMF editor" href="build/eclipse.help/Kermeta-Tutorial-Process/ch03s04.html"/>
+   </topic>
+   <topic label="Model manipulation in&#xA;            Kermeta" href="build/eclipse.help/Kermeta-Tutorial-Process/ch04.html">
+      <topic label="Serialisation" href="build/eclipse.help/Kermeta-Tutorial-Process/ch04.html#sec_serialisation.link"/>
+      <topic label="Package registry" href="build/eclipse.help/Kermeta-Tutorial-Process/ch04s02.html"/>
+   </topic>
+   <topic label="Contracts" href="build/eclipse.help/Kermeta-Tutorial-Process/ch05.html"/>
+   <topic label="Behaviour" href="build/eclipse.help/Kermeta-Tutorial-Process/ch06.html"/>
+   <topic label="Model transformation -&#xA;            Compilation" href="build/eclipse.help/Kermeta-Tutorial-Process/ch07.html"/>
+   <topic label="UI improvements" href="build/eclipse.help/Kermeta-Tutorial-Process/ch08.html"/>
+   <topic label="Conclusion" href="build/eclipse.help/Kermeta-Tutorial-Process/ch09.html"/>
+</toc>

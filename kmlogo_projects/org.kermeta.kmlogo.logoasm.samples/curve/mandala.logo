@@ -1,0 +1,20 @@
+
+
+TO n_eck :ne :size
+	REPEAT :ne [
+		RIGHT /(360, :ne) 
+		FORWARD :size
+	]
+END
+
+TO mn_eck :ne :size
+	REPEAT :ne [
+		RIGHT /(360, :ne) 
+		$n_eck(:ne,:size)
+	]
+END
+CLEAR
+PENDOWN
+$mn_eck(36,20)
+PENUP
+

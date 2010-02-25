@@ -1,0 +1,90 @@
+package kmLogo;
+
+require kermeta
+
+require "VMLogo.ecore"
+require "../3.JavaInterfaces/Math.kmt"
+require "TurtleControler.kmt"
+require "MoveListener.kmt"
+
+using kermeta::standard
+using kermeta::utils
+
+/**
+ * Implementation of the Logo Virtual Machine
+ */
+package VM {
+
+	aspect class Turtle
+	{
+	
+		attribute math : Math::Math 
+		reference moveListener : kmLogo::listener::TurtleMoveListener[0..*]
+
+		operation reset() is do
+			math := Math::Math.new
+			position := Point.new
+			position.x := 0.toReal
+			position.y := 0.toReal
+			heading := 0
+			penUp := true
+			drawings.clear
+		end
+				
+		operation setPenUp(b : Boolean) is do
+			penUp := b
+		end
+		
+		operation rotate(angle : Integer)  is do
+			heading := (heading + angle).mod(360)
+			moveListener.each{l | l.turtleHasRotated() }
+		end
+	
+		operation move(dx : Real, dy : Real)  is do
+			var newPos : Point init position.getDelta(dx,dy)
+			var trace : Segment 
+			if penUp then
+				stdio.writeln("Turtle move to "+ newPos.toString)
+			else
+				stdio.writeln("Turtle trace to "+ newPos.toString)
+				trace := Segment.new
+				trace.make(position,newPos)
+				drawings.add(trace)
+			end
+			position := newPos
+			moveListener.each{l | l.turtleHasMoved(trace) }
+		end
+			
+		operation forward(steps : Integer)  is do
+		    var radian : Real init math.toRadians(heading.toReal) 
+			move(scale(steps,math.sin(radian)), scale(steps,math.cos(radian)))
+		end
+	   
+	   /**
+		* scale the "steps" by factor
+		*/
+		operation scale(steps : Integer, factor : Real) : Real is do
+			result := steps.toReal * factor
+		end
+	}
+	
+	aspect class Point
+	{
+		operation getDelta(dx : Real, dy : Real) : Point is do
+			result := Point.new
+			result.x := x + dx
+			result.y := y + dy			
+		end
+		method toString() : String is do
+			result := "[" + x.toInteger.toString + "," + y.toInteger.toString + "]"
+		end
+	}
+	
+	aspect class Segment
+	{
+		operation make (orig : Point, dest : Point) is do
+			origin := orig
+			destination := dest
+		end
+	}
+}

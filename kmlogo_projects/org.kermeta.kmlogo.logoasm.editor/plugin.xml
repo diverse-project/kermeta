@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.0 2010-02-11 10:19:42 hrambelo Exp $
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.presentation.ASMModelWizardID"
+            name="%_UI_ASMModelWizard_label"
+            class="org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.presentation.ASMModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ASMModelFile.gif">
+         <description>%_UI_ASMModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.presentation.ASMEditorID"
+            name="%_UI_ASMEditor_label"
+            icon="icons/full/obj16/ASMModelFile.gif"
+            extensions="logoasm"
+            class="org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.presentation.ASMEditor"
+            contributorClass="org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.presentation.ASMActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

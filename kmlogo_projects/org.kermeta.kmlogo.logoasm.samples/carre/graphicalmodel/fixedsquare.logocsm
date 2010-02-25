@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<logoCSM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:logoCSM="http://openembedd.org/logoCSM">
+  <instructions xsi:type="logoCSM:ProcDeclaration" name="fixed_size_square" procCall="//@instructions.1">
+    <block>
+      <instructions xsi:type="logoCSM:PenDown" next="//@instructions.0/@block/@instructions.1"/>
+      <instructions xsi:type="logoCSM:Repeat" next="//@instructions.0/@block/@instructions.2" previous="//@instructions.0/@block/@instructions.0">
+        <condition xsi:type="logoCSM:Constant" integerValue="4"/>
+        <block>
+          <instructions xsi:type="logoCSM:Forward" next="//@instructions.0/@block/@instructions.1/@block/@instructions.1">
+            <steps xsi:type="logoCSM:Constant" integerValue="50"/>
+          </instructions>
+          <instructions xsi:type="logoCSM:Right" previous="//@instructions.0/@block/@instructions.1/@block/@instructions.0">
+            <angle xsi:type="logoCSM:Constant" integerValue="90"/>
+          </instructions>
+        </block>
+      </instructions>
+      <instructions xsi:type="logoCSM:PenUp" previous="//@instructions.0/@block/@instructions.1"/>
+    </block>
+  </instructions>
+  <instructions xsi:type="logoCSM:ProcCall" declaration="//@instructions.0"/>
+</logoCSM:Block>

@@ -1,0 +1,136 @@
+@uri "http://www.kermeta.org/kmLogo"
+package kmLogo;
+
+require "kermeta"
+alias Integer : kermeta::standard::Integer;
+alias Boolean : kermeta::standard::Boolean;
+alias String : kermeta::standard::String;
+package ASM
+{
+	abstract class Instruction
+	{
+	}
+	abstract class Primitive inherits Instruction
+	{
+	}
+	class Back inherits Primitive
+	{
+		attribute steps : Expression[1..1]
+
+	}
+	class Forward inherits Primitive
+	{
+		attribute steps : Expression[1..1]
+
+	}
+	class Left inherits Primitive
+	{
+		attribute angle : Expression
+
+	}
+	class Right inherits Primitive
+	{
+		attribute angle : Expression
+
+	}
+	class PenDown inherits Primitive
+	{
+	}
+	class PenUp inherits Primitive
+	{
+	}
+	class Clear inherits Primitive
+	{
+	}
+	abstract class Expression inherits Instruction
+	{
+	}
+	abstract class BinaryExp inherits Expression
+	{
+		attribute lhs : Expression[1..1]
+
+		attribute rhs : Expression[1..1]
+
+	}
+	class Constant inherits Expression
+	{
+		attribute integerValue : Integer
+
+	}
+	class ProcCall inherits Expression
+	{
+		attribute actualArgs : Expression[0..*]
+
+		reference declaration : ProcDeclaration[1..1]#procCall
+
+	}
+	class ProcDeclaration inherits Instruction
+	{
+		attribute name : String
+
+		attribute args : Parameter[0..*]
+
+		attribute block : Block
+
+		reference procCall : ProcCall[0..*]#declaration
+
+	}
+	class Block inherits Instruction
+	{
+		attribute instructions : Instruction[0..*]
+
+	}
+	class If inherits ControlStructure
+	{
+		attribute thenPart : Block[1..1]
+
+		attribute elsePart : Block
+
+	}
+	class ControlStructure inherits Instruction
+	{
+		attribute condition : Expression
+
+	}
+	class Repeat inherits ControlStructure
+	{
+		attribute block : Block[1..1]
+
+	}
+	class While inherits ControlStructure
+	{
+		attribute block : Block[1..1]
+
+	}
+	class Parameter
+	{
+		attribute name : String
+
+	}
+	class ParameterCall inherits Expression
+	{
+		reference parameter : Parameter[1..1]
+
+	}
+	class Plus inherits BinaryExp
+	{
+	}
+	class Minus inherits BinaryExp
+	{
+	}
+	class Mult inherits BinaryExp
+	{
+	}
+	class Div inherits BinaryExp
+	{
+	}
+	class Equals inherits BinaryExp
+	{
+	}
+	class Greater inherits BinaryExp
+	{
+	}
+	class Lower inherits BinaryExp
+	{
+	}
+}

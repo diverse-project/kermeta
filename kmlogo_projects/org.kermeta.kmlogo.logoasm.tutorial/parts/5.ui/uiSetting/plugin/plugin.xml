@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.logoasm"
+            id="org.kermeta.kmlogo.logoasm.ui.contribution1">
+         <menu
+               label="Logo"
+               path="additions"
+               id="org.kermeta.kmlogo.logoasm.ui.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Run Logo Simulator"
+               class="org.kermeta.kmlogo.logoasm.ui.popup.actions.RunLogo"
+               menubarPath="org.kermeta.kmlogo.logoasm.ui.menu1/group1"
+               enablesFor="1"
+               id="org.kermeta.kmlogo.logoasm.ui.newAction">
+         </action>
+         <action
+               class="org.kermeta.kmlogo.logoasm.ui.popup.actions.CompileLogoNXC"
+               id="org.kermeta.kmlogo.logoasm.ui.action1"
+               label="Generate NXC code"
+               menubarPath="org.kermeta.kmlogo.logoasm.ui.menu1/group1"/>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.xmi"
+            id="org.kermeta.kmlogo.logoasm.ui.contribution1">
+         <menu
+               label="Logo"
+               path="additions"
+               id="org.kermeta.kmlogo.logoasm.ui.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Run Logo Simulator"
+               class="org.kermeta.kmlogo.logoasm.ui.popup.actions.RunLogo"
+               menubarPath="org.kermeta.kmlogo.logoasm.ui.menu1/group1"
+               enablesFor="1"
+               id="org.kermeta.kmlogo.logoasm.ui.newAction">
+         </action>
+         <action
+               class="org.kermeta.kmlogo.logoasm.ui.popup.actions.CompileLogoNXC"
+               id="org.kermeta.kmlogo.logoasm.ui.action1"
+               label="Generate NXC code"
+               menubarPath="org.kermeta.kmlogo.logoasm.ui.menu1/group1"/>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.nxc"
+            id="org.kermeta.kmlogo.logoasm.ui.contribution2">
+         <menu
+               label="Logo"
+               path="additions"
+               id="org.kermeta.kmlogo.logoasm.ui.menu2">
+            <separator
+                  name="group2">
+            </separator>
+         </menu>
+         <action
+               label="Compile to NXT Binary (*.rxe)"
+               class="org.kermeta.kmlogo.logoasm.ui.popup.actions.NXC2RXE"
+               menubarPath="org.kermeta.kmlogo.logoasm.ui.menu2/group2"
+               enablesFor="1"
+               id="org.kermeta.kmlogo.logoasm.ui.newAction2">
+         </action>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.rxe"
+            id="org.kermeta.kmlogo.logoasm.ui.contribution3">
+         <menu
+               label="Logo"
+               path="additions"
+               id="org.kermeta.kmlogo.logoasm.ui.menu3">
+            <separator
+                  name="group3">
+            </separator>
+         </menu>
+         <action
+               class="org.kermeta.kmlogo.logoasm.ui.popup.actions.UploadRXE"
+               enablesFor="1"
+               icon="icons/bluetooth.png"
+               id="org.kermeta.kmlogo.logoasm.ui.newAction3"
+               label="Upload file to the NXT brick"
+               menubarPath="org.kermeta.kmlogo.logoasm.ui.menu3/group3">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="org.kermeta.kmlogo.logoasm.ui.contribution1"
+            nameFilter="*.logo"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.kermeta.kmlogo.logoasm.ui.menu1"
+               label="Logo"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="org.kermeta.kmlogo.logoasm.ui.popup.actions.ConvertToLogoasm"
+               enablesFor="1"
+               id="org.kermeta.kmlogo.logoasm.ui.newAction"
+               label="logo 2 logoasm"
+               menubarPath="org.kermeta.kmlogo.logoasm.ui.menu1/group1">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="org.kermeta.kmlogo.logoasm.ui.contribution1"
+            nameFilter="*.logoasm"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.kermeta.kmlogo.logoasm.ui.menu1"
+               label="Logo"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="org.kermeta.kmlogo.logoasm.ui.popup.actions.ConvertToLogo"
+               enablesFor="1"
+               id="org.kermeta.kmlogo.logoasm.ui.newAction"
+               label="Logoasm 2 logo"
+               menubarPath="org.kermeta.kmlogo.logoasm.ui.menu1/group1">
+         </action>
+      </objectContribution>
+   </extension>
+<extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="fr.irisa.triskell.kermeta.samples.category"
+            name="Kermeta samples"
+            parentCategory="org.eclipse.ui.Examples"/>
+      <wizard
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/fr.irisa.triskell.kermeta.samples.category"
+            class="org.kermeta.kmlogo.logoasm.ui.tools.wizards.KmLogoExampleWizard"
+            finalPerspective="kermetaPerspective"
+            hasPages="false"
+            icon="icons/newkermetafile.png"
+            id="org.kermeta.kmlogo.samples.wizard"
+            name="Km Logo samples"
+            preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
+   </extension>
+</plugin>

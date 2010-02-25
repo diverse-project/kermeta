@@ -1,0 +1,45 @@
+/* $Id: CheckModels.kmt,v 1.2 2008-05-29 12:09:41 vmahe Exp $
+ * Creation date: May 4, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "kmLogo::ASM::CheckModels"
+@mainOperation "check"
+
+package kmLogo::ASM;
+
+require "../ASMLogoStaticSemantics.kmt"
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using kermeta::io
+
+class CheckModels
+{
+	operation check() : Void is do 
+		checkProgram("carre.logoasm")
+		checkProgram("carre_faulty1.logoasm")
+		checkProgram("carre_faulty2.logoasm")
+	end
+	
+	operation checkProgram(prg : String) is do
+		do
+			var program : Instruction init 
+				loadProgram("platform:/resource/org.kermeta.kmlogo.logoasm.srcKermeta/kermeta/2.Constraints/models/" + prg)
+			program.checkAllInvariants()
+			stdio.writeln("Program " + prg + " seems ok. ")
+		rescue (e : kermeta::exceptions::Exception)
+			stdio.writeln("Error in program "+ prg +" : " + e.message)
+		end
+	end
+	
+	operation loadProgram(uri : String) : Instruction is do
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.getResource(uri)
+        result ?= resource.instances.one  
+	end
+}

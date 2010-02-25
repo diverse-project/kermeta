@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="kmLogo|kmLogo::ASM|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="kmLogo" nsURI="http://www.kermeta.org/kmLogo" nsPrefix="kmLogo">
+    <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Object">
+      <eAnnotations source="kermeta">
+        <details key="alias" value="kermeta::standard::Integer"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean">
+      <eAnnotations source="kermeta">
+        <details key="alias" value="kermeta::standard::Boolean"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String">
+      <eAnnotations source="kermeta">
+        <details key="alias" value="kermeta::standard::String"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+    <eSubpackages name="ASM" nsURI="platform:/resource/org.kermeta.kmlogo.logoasm.model/srcKermeta/file.ecore#/kmLogo/ASM"
+        nsPrefix="ASM">
+      <eClassifiers xsi:type="ecore:EClass" name="Instruction" abstract="true"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Primitive" abstract="true" eSuperTypes="#/1/ASM/Instruction"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Back" eSuperTypes="#/1/ASM/Primitive">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="steps" lowerBound="1"
+            eType="#/1/ASM/Expression" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Forward" eSuperTypes="#/1/ASM/Primitive">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="steps" lowerBound="1"
+            eType="#/1/ASM/Expression" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Left" eSuperTypes="#/1/ASM/Primitive">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="angle" eType="#/1/ASM/Expression"
+            containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Right" eSuperTypes="#/1/ASM/Primitive">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="angle" eType="#/1/ASM/Expression"
+            containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PenDown" eSuperTypes="#/1/ASM/Primitive"/>
+      <eClassifiers xsi:type="ecore:EClass" name="PenUp" eSuperTypes="#/1/ASM/Primitive"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Clear" eSuperTypes="#/1/ASM/Primitive"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#/1/ASM/Instruction"/>
+      <eClassifiers xsi:type="ecore:EClass" name="BinaryExp" abstract="true" eSuperTypes="#/1/ASM/Expression">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" lowerBound="1"
+            eType="#/1/ASM/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="rhs" lowerBound="1"
+            eType="#/1/ASM/Expression" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#/1/ASM/Expression">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerValue" eType="#/1/Integer">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ProcCall" eSuperTypes="#/1/ASM/Expression">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="actualArgs" upperBound="-1"
+            eType="#/1/ASM/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" lowerBound="1"
+            eType="#/1/ASM/ProcDeclaration" eOpposite="#/1/ASM/ProcDeclaration/procCall"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ProcDeclaration" eSuperTypes="#/1/ASM/Instruction">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#/1/String">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="args" upperBound="-1"
+            eType="#/1/ASM/Parameter" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#/1/ASM/Block"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="procCall" upperBound="-1"
+            eType="#/1/ASM/ProcCall" eOpposite="#/1/ASM/ProcCall/declaration"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#/1/ASM/Instruction">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
+            eType="#/1/ASM/Instruction" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="If" eSuperTypes="#/1/ASM/ControlStructure">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="thenPart" lowerBound="1"
+            eType="#/1/ASM/Block" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="elsePart" eType="#/1/ASM/Block"
+            containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ControlStructure" eSuperTypes="#/1/ASM/Instruction">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#/1/ASM/Expression"
+            containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Repeat" eSuperTypes="#/1/ASM/ControlStructure">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1"
+            eType="#/1/ASM/Block" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="While" eSuperTypes="#/1/ASM/ControlStructure">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1"
+            eType="#/1/ASM/Block" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#/1/String">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ParameterCall" eSuperTypes="#/1/ASM/Expression">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+            eType="#/1/ASM/Parameter"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="#/1/ASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#/1/ASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Mult" eSuperTypes="#/1/ASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Div" eSuperTypes="#/1/ASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Equals" eSuperTypes="#/1/ASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Greater" eSuperTypes="#/1/ASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Lower" eSuperTypes="#/1/ASM/BinaryExp"/>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

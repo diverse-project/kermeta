@@ -1,0 +1,49 @@
+/* $Id: testVM.kmt,v 1.2 2008-05-29 12:09:37 vmahe Exp $
+ * Creation date: May 4, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "kmLogo::VM::TestVM"
+@mainOperation "main"
+
+
+package kmLogo::VM;
+
+require kermeta
+require "../LogoVMSemantics.kmt"
+
+
+class TestVM
+{
+
+	reference turtle : Turtle
+
+	operation main() : Void is do 
+		// Create a Turtle
+		turtle := Turtle.new()
+		turtle.reset
+		
+		// lower the pen
+		turtle.setPenUp(false)
+		
+		// Draw a square
+		turtle.rotate(90)
+		turtle.forward(50)
+		turtle.rotate(90)
+		turtle.forward(50)
+		turtle.rotate(90)
+		turtle.forward(50)
+		turtle.rotate(90)
+		turtle.forward(50)
+		
+		turtle.setPenUp(true)
+		
+		// Instanciate a GUI to check the result
+		var gui : kmLogo::controler::TurtleControler init kmLogo::controler::TurtleControler.new
+		gui.initialize(turtle)
+		gui.modelChanged()
+		
+		
+	end
+}

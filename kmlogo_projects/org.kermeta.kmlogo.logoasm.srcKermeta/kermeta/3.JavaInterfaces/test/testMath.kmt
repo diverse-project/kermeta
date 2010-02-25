@@ -1,0 +1,26 @@
+/* $Id: testMath.kmt,v 1.2 2008-05-29 12:09:46 vmahe Exp $
+ * Creation date: May 30, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+require "../Math.kmt"
+
+class Main
+{
+	operation main() : Void is do 
+		var math : Math::Math init Math::Math.new
+		var input : kermeta::standard::Real init "0".toReal
+		
+		stdio.writeln("sin(0) = " + math.sin(input).toString)
+		stdio.writeln("cos(0) = " + math.cos(input).toString)
+	end
+}

@@ -1,0 +1,71 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>7.4.&nbsp;Operational semantics extra</title><link rel="stylesheet" href="css/docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><meta name="keywords" content="Kermeta, metamodeling, language, kmLogo"><link rel="home" href="index.html" title="Logo Tutorial : Building kmLogo DSL using Kermeta"><link rel="up" href="ch07.html" title="Chapter&nbsp;7.&nbsp;Behaviour"><link rel="prev" href="ch07s03.html" title="7.3.&nbsp;Virtual machine"><link rel="next" href="ch08.html" title="Chapter&nbsp;8.&nbsp;Model transformation - Compilation"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.4.&nbsp;Operational semantics extra</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch07s03.html">Prev</a>&nbsp;</td><th width="60%" align="center">Chapter&nbsp;7.&nbsp;Behaviour</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch08.html">Next</a></td></tr></table><hr></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e1069"></a>7.4.&nbsp;Operational semantics extra<span></span></h2></div></div></div><p>In this step, we will see how some extra feature has been implemented in the operational
+        sematics. It will explain how to call some java code to implement extra features.</p><div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a name="section_call_javaMath.link"></a>7.4.1.&nbsp;Call to java.Math</h3></div></div></div><p>This step will show you how a call to java may workaround some missing feature in
+          Kermeta. It will explain how how to call java.lang.Math from Kermeta. This is useful since
+          the Kermeta doesn't provides sin, cos, tan operator by default. This may also be useful in
+          case of major performance issue for a specific task.</p><div class="procedure"><ol type="1"><li><p>Open <span class="bold"><strong>org.kermeta.kmlogo.logoasm.srcKermeta/kermeta/3.JavaInterfaces/Math.kmt</strong></span>
+              which is the Kermeta wrapper. It defines the operations as seen by a kermeta code. The
+              calls to java are done using the <span class="bold"><strong>extern</strong></span> keyword. It
+              will call the static java operation with the given qualified name.</p></li><li><p>Then, open the file <span class="bold"><strong>src/org.kermeta.kmlogo.wrapper/Math.java</strong></span> the Java wrapper. It defines
+              the static operations that the interpreter can call. All parameters must be of type
+              RuntimeObject. This class is in charge of:</p><div class="itemizedlist"><ul type="disc"><li><p>translating the RuntimeObject to and from classical java object (here
+                    java.lang.Real);</p></li><li><p>calling the appropriate java code </p></li></ul></div><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="gfx/admonitions/tip.gif"></td><th align="left">Tip</th></tr><tr><td align="left" valign="top"><p>Remember that the objects in java side must implement a RuntimeObject in order
+                to be manipulated with Kermeta. This is why all static method contains Runtimeobject
+                parameters which is the Kermeta object kept in memory at runtime, and at last, must
+                return a RuntimeObject. </p><p>Also notice that the conversion to java types is done by the <span class="bold"><strong>TYPE.create()</strong></span> method.</p></td></tr></table></div></li><li><p>So in order to use these wrapper, simply <span class="bold"><strong>import</strong></span>
+              the Math.kmt file where you need it (here in <span class="bold"><strong>LogoVMSemantics.kmt</strong></span>). And use it as a normal kermeta class. Since both
+              java code is contained by the same plugin, there is no need of classpath declaration.
+              If you need to use java code from another plugin, make sure that your plugin has a
+              dependency to it. </p></li><li><p>To test this section, open the kermeta file <span class="bold"><strong>3.JavaInterfaces/test/testMath.kmt</strong></span> which contains the main operation to
+              launch the java wrapper. Observe how a main class is defined in Kermeta and the use of
+              Math.kmt.</p><p>Right-click on <span class="bold"><strong>testMath.kmt</strong></span> and choose <span class="bold"><strong>Run &gt; Run as Kermeta Application</strong></span>, you should obtain the
+              results illustrated below :</p><div class="figure"><a name="d0e1134"></a><div class="figure-contents"><div class="mediaobject"><img src="Kermeta-Tutorial-Logo_figures/KermetaCallJava.png" alt="Call to java Math results"></div></div><p class="title"><b>Figure&nbsp;7.3.&nbsp;Call to java Math results</b></p></div><p><br class="figure-break"></p></li></ol></div></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a name="section_implementing_graphical_output.link"></a>7.4.2.&nbsp;Implementing a graphical
+          output<span></span></h3></div></div></div><p>This section will guide you through the code of the implementation of a graphical
+          interface for the logo turtle. It is similiar to the call to Java.Math previously
+          seen.</p><div class="procedure"><ol type="1"><li><p>Open the file <span class="bold"><strong>org.kermeta.kmlogo.logoasm.srcKermeta/kermeta/3.JavaInterfaces/TurtleGUI.kmt</strong></span>.
+              Like the java call that we have previously seen, it correspond to the kermeta wrapper.
+              It defines the classes as seen by kermeta programs. For this application, it provides
+              operations like drawLine, drawTurtle or clearDrawing. Note that it need an
+              "initialize" operation in order to correctly create the object. </p></li><li><p>Then open the file<span class="bold"><strong>org.kermeta.kmlogo.logoasm.srcKermeta/src/org.kermeta.kmlogo.wrapper/TurtleGUIWrapper.java</strong></span>.
+              It defines the static operations that the interpreter can call. All parameters must be
+              of type RuntimeObject. This class is in charge of :</p><div class="itemizedlist"><ul type="disc"><li><p>translating the RuntimeObject to and from classical java object;</p></li><li><p>calling the appropriate java code. The associated java object (here a
+                    ITurtleGUI) is stored into the UserData of the RuntimeObject. </p></li></ul></div><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="gfx/admonitions/tip.gif"></td><th align="left">Tip</th></tr><tr><td align="left" valign="top"><p>Again, remember that the objects in java side must implement a RuntimeObject in
+                order to be manipulated with Kermeta. This is why all static method contains
+                Runtimeobject parameters which is the Kermeta object kept in memory at runtime, and
+                at last, must return a RuntimeObject. </p><p>Also notice that the <span class="bold"><strong>initialize()</strong></span> method allow
+                the "conversion" into java side i.e.: it creates a java object from the given name
+                so as to represent the GUI (turtleGUI). Then it sets this object inside the
+                RuntimeObject by the method <span class="bold"><strong>setUserData()</strong></span> to store
+                it for later re-use which is done with <span class="bold"><strong>getUserData()</strong></span>. The conversion to java types is done by the <span class="bold"><strong>TYPE.getValue()</strong></span> method in this direction. </p><p>So if you want to implement yours, be sure that all your java object are not
+                external to the Kermeta (RuntimeObject) domain, otherwise you must implement an
+                internal controller to set up the glue (i.e.: the mapping).</p></td></tr></table></div></li><li><p>Then, the extra step here is implementing the graphical user interface. This is
+              done by the classes in <span class="bold"><strong>org.kermeta.kmlogo.logoasm.srcKermeta/src/org.kermeta.kmlogo.gui/</strong></span>. In
+              order to allow some extensibility, it has been splitted in 2, an interface <span class="bold"><strong>ITurtleGUI</strong></span> and a simple concrete AWT implementation <span class="bold"><strong>TurtleSimpleAWTGUI</strong></span>.</p></li><li><p>The last step before testing is to provide a simple controler that ask to the GUI
+              to update the graphical view of a given Turtle. This is done by the file: <span class="bold"><strong>4.VirtualMachine/TurtleControler.kmt</strong></span> which implement
+                <span class="bold"><strong>4.VirtualMachine/MoveListener.kmt</strong></span> (merely a turtle
+              movement listener).</p></li><li><p>After succesfully testing the call to Java.Math, let's now test the virtual
+              machine that we saw in section 7.3. To do so, open <span class="bold"><strong>4.VirtualMachine/tests/testVM.kmt</strong></span>. This file will initiate a turtle and
+              draw a square using the kermeta wrappers and the java wrappers that we saw before
+              (look at the required files define at the beginning of the kmt to see the interaction
+              between the files). Right-click on this file an <span class="bold"><strong>run it as a
+                Kermeta application</strong></span> to see the graphical representation illustred below
+              (notice by the way the console output that illustrate the impact of the GUI as
+              mentioned in the step 2 of section 7.3): </p><div class="figure"><a name="d0e1215"></a><div class="figure-contents"><div class="mediaobject"><img src="Kermeta-Tutorial-Logo_figures/KermetaLogoOutput.png" alt="VM testing output"></div></div><p class="title"><b>Figure&nbsp;7.4.&nbsp;VM testing output</b></p></div><p><br class="figure-break"></p></li><li><p>Open <span class="bold"><strong>org.kermeta.kmlogo.logoasm.srcKermeta/5.Simulator/
+                LogoSimulator.kmt</strong></span>. This class provides an execute operation. This
+              operation allows to load a model that conforms to the ASMLogo.ecore and start the
+              evaluation of the logo instructions. Finally, it asks to the controler to update the
+              graphical view. This is the main entry and the loader for a logo model
+              instance.</p><p>Now that we are sure that the VM is working correctly, let's test the interpreter
+              that we have set up. To do so, open the file <span class="bold"><strong>5.Simulator/tests/carre.kmt</strong></span>. It will instanciate a simulator, load a
+              model from <span class="bold"><strong>1.Models/carre.logoasm</strong></span> and execute the
+              interpreter. Right-click the file and<span class="bold"><strong> run as kermeta
+                application</strong></span>, you should obtain the same illustration as before. </p></li><li><p>Let's have another test. Remember the "dots.xmi" that you created before inside
+                <span class="bold"><strong>org.kermeta.kmlogo.logoasm.model/model</strong></span> (if not a
+              copy is available at "org.kermeta.kmlogo.logoasm.tutorial/parts/1.metamodel/model").
+              Move it to the folder <span class="bold"><strong>org.kermeta.kmlogo.logoasm.srcKermeta/kermeta/1.Models/</strong></span>. Open it and
+              save it as <span class="bold"><strong>dots.logoasm</strong></span> so as to convert it as a
+              model instance understandable by our interpreter. Now, open the file <span class="bold"><strong>5.Simulator/tests/dots.kmt</strong></span> and see that it calls the model
+              we've just renamed. Run it as a Kermeta application to see the results (you can test
+              the other models (*.logoasm) in the folder <span class="bold"><strong>1.Model</strong></span>).</p></li></ol></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch07s03.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch08.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">7.3.&nbsp;Virtual machine&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;8.&nbsp;Model transformation -
+        Compilation</td></tr></table></div></body></html>

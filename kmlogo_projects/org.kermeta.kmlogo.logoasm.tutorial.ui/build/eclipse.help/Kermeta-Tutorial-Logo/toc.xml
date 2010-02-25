@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<toc label="Logo Tutorial : Building kmLogo DSL using Kermeta" topic="build/eclipse.help/Kermeta-Tutorial-Logo/index.html">
+   <topic label="Preface" href="build/eclipse.help/Kermeta-Tutorial-Logo/pr01.html"/>
+   <topic label="Introduction" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch01.html"/>
+   <topic label="Installation" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch02.html">
+      <topic label="Prerequisites" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch02.html#section_prerequisted.link"/>
+      <topic label="Install logo projects" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch02s02.html"/>
+   </topic>
+   <topic label="Define the metamodel" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch03.html">
+      <topic label="From Ecore to genenerated&#xA;        code" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch03.html#section_from_ecore_to_generated_code.link"/>
+      <topic label="Metamodel Ecore with Kermeta" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch03s02.html"/>
+   </topic>
+   <topic label="Editor" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch04.html">
+      <topic label="Dynamic instance" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch04.html#section_dynamic_instance.link"/>
+      <topic label="Tree view editor" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch04s02.html"/>
+      <topic label="Textual editor" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch04s03.html"/>
+      <topic label="GMF editor" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch04s04.html"/>
+   </topic>
+   <topic label="Model manipulation in&#xA;      Kermeta" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch05.html">
+      <topic label="Package registry" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch05.html#section_package_registry.link"/>
+      <topic label="Serialisation" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch05s02.html"/>
+   </topic>
+   <topic label="Contract" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch06.html">
+      <topic label="Static semantics" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch06.html#section_static_semantics.link"/>
+      <topic label="Implementation in&#xA;        Kermeta" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch06s02.html"/>
+   </topic>
+   <topic label="Behaviour" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch07.html">
+      <topic label="Preparation of the environnement" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch07.html#d0e853"/>
+      <topic label="Dynamic semantic" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch07s02.html"/>
+      <topic label="Virtual machine" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch07s03.html"/>
+      <topic label="Operational semantics extra" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch07s04.html">
+         <topic label="Call to java.Math" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch07s04.html#section_call_javaMath.link"/>
+         <topic label="Implementing a graphical&#xA;          output" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch07s04.html#section_implementing_graphical_output.link"/>
+      </topic>
+   </topic>
+   <topic label="Model transformation -&#xA;        Compilation" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch08.html"/>
+   <topic label="UI improvements" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch09.html">
+      <topic label="GUI deployment setup" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch09.html#section_gui_deployement.link"/>
+   </topic>
+   <topic label="Using the deployed DSL&#xA;      environment" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch10.html"/>
+   <topic label="Conclusion" href="build/eclipse.help/Kermeta-Tutorial-Logo/ch11.html"/>
+</toc>
