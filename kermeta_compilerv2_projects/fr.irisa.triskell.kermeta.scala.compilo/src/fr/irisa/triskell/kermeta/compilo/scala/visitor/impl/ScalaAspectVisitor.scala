@@ -14,7 +14,8 @@ class ScalaAspectVisitor extends IVisitor with RichAspectImplicit with LogAspect
 	def visit(par : ModelingUnit){
 		par.getPackages().foreach(p => p.accept(this))		
 	}     
-	  
+
+  
 	def visit(par : Package){ 
 		var actualPackage = par.getQualifiedName
 		//if (!(actualPackage.startsWith("kermeta.io")||actualPackage.startsWith("kermeta.standard")||actualPackage.startsWith("kermeta.exceptions")||actualPackage.startsWith("kermeta.ecore"))){

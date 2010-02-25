@@ -11,7 +11,8 @@ import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
 
 class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit with LogAspect {
- 
+
+  
 	var viewDef : StringBuilder = _
 	var implicitDef : StringBuilder = _
 	var actualPackage : String = _

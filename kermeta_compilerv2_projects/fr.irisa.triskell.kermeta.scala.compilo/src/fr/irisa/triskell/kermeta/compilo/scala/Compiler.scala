@@ -31,6 +31,7 @@ class Compiler extends RichAspectImplicit with LogAspect {
 		startTime = System.currentTimeMillis
 		/* Target Model Aspect Generation */
 		var visitorAspect = new ScalaAspectVisitor
+                
 		var futur = VisitorAsyncUtility.runAfterCallback(v,visitorAspect) 
 		/* Utility Files & Factory Generation */
 		var visitorImplicitFactory = new ScalaFactoryAndImplicitVisitor

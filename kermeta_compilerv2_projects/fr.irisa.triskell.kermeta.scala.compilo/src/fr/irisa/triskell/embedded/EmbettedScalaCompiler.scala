@@ -11,7 +11,7 @@ object EmbettedScalaCompiler extends LogAspect {
 	def compile(srcPATH : String, outputPATH : String, cleanOutput : Boolean, jars : List[String], fsc : Boolean) : Int = {
 		
 		var startTime = System.currentTimeMillis
-		var compîlationResult = 0
+		var compilationResult = 0
 		
 		/* Cleaning step */
 		if(cleanOutput){
@@ -34,13 +34,13 @@ object EmbettedScalaCompiler extends LogAspect {
 			try scala.tools.nsc.CompileClient.main0(compilParams.toArray) catch { case e : Exception => compîlationResult = 1 }
 		} else {
 			scala.tools.nsc.Main.process(compilParams.toArray)
-			compîlationResult = if (scala.tools.nsc.Main.reporter.hasErrors) 1 else 0
+			compilationResult = if (scala.tools.nsc.Main.reporter.hasErrors) 1 else 0
 		}
 		
 		var endTime= System.currentTimeMillis() - startTime
 		log.info("Scala compilation step complete in "+(endTime)+" millisecondes ")
 		
-		return compîlationResult
+		return compilationResult
 	}
 	
 

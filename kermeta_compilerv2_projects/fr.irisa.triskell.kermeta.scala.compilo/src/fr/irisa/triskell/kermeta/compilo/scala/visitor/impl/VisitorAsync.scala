@@ -5,7 +5,8 @@ import fr.irisa.triskell.kermeta.compilo.scala._
 import java.util.concurrent.Future
 
 class VisitorAsync extends IVisitorAsync {
-	
+
+  
 	var initValue : IVisitable = _
 	var visitorValue : IVisitor = _
 	
