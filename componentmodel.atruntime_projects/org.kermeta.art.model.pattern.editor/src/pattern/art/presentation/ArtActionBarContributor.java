@@ -44,12 +44,12 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
 /**
- * This is the action bar contributor for the ArtPattern model editor.
+ * This is the action bar contributor for the Art model editor.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ArtPatternActionBarContributor
+public class ArtActionBarContributor
 	extends EditingDomainActionBarContributor
 	implements ISelectionChangedListener {
 	/**
@@ -152,7 +152,7 @@ public class ArtPatternActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArtPatternActionBarContributor() {
+	public ArtActionBarContributor() {
 		super(ADDITIONS_LAST_STYLE);
 		loadResourceAction = new LoadResourceAction();
 		validateAction = new ValidateAction();
@@ -167,8 +167,8 @@ public class ArtPatternActionBarContributor
 	 */
 	@Override
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
-		toolBarManager.add(new Separator("artpattern-settings"));
-		toolBarManager.add(new Separator("artpattern-additions"));
+		toolBarManager.add(new Separator("art-settings"));
+		toolBarManager.add(new Separator("art-additions"));
 	}
 
 	/**
@@ -182,7 +182,7 @@ public class ArtPatternActionBarContributor
 	public void contributeToMenu(IMenuManager menuManager) {
 		super.contributeToMenu(menuManager);
 
-		IMenuManager submenuManager = new MenuManager(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtPatternEditor_menu"), "pattern.artMenuID");
+		IMenuManager submenuManager = new MenuManager(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtEditor_menu"), "pattern.artMenuID");
 		menuManager.insertAfter("additions", submenuManager);
 		submenuManager.add(new Separator("settings"));
 		submenuManager.add(new Separator("actions"));

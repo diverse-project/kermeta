@@ -73,8 +73,8 @@ import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ISetSelectionTarget;
 
-import pattern.art.ArtPatternFactory;
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtFactory;
+import pattern.art.ArtPackage;
 import pattern.art.provider.MetamodelruntimePatternEditPlugin;
 
 
@@ -95,7 +95,7 @@ import org.eclipse.ui.PartInitException;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ArtPatternModelWizard extends Wizard implements INewWizard {
+public class ArtModelWizard extends Wizard implements INewWizard {
 	/**
 	 * The supported extensions for created files.
 	 * <!-- begin-user-doc -->
@@ -103,7 +103,7 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public static final List<String> FILE_EXTENSIONS =
-		Collections.unmodifiableList(Arrays.asList(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtPatternEditorFilenameExtensions").split("\\s*,\\s*")));
+		Collections.unmodifiableList(Arrays.asList(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtEditorFilenameExtensions").split("\\s*,\\s*")));
 
 	/**
 	 * A formatted list of supported file extensions, suitable for display.
@@ -112,7 +112,7 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public static final String FORMATTED_FILE_EXTENSIONS =
-		MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtPatternEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
+		MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
 
 	/**
 	 * This caches an instance of the model package.
@@ -120,7 +120,7 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ArtPatternPackage artPatternPackage = ArtPatternPackage.eINSTANCE;
+	protected ArtPackage artPackage = ArtPackage.eINSTANCE;
 
 	/**
 	 * This caches an instance of the model factory.
@@ -128,7 +128,7 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ArtPatternFactory artPatternFactory = artPatternPackage.getArtPatternFactory();
+	protected ArtFactory artFactory = artPackage.getArtFactory();
 
 	/**
 	 * This is the file creation page.
@@ -136,7 +136,7 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ArtPatternModelWizardNewFileCreationPage newFileCreationPage;
+	protected ArtModelWizardNewFileCreationPage newFileCreationPage;
 
 	/**
 	 * This is the initial object creation page.
@@ -144,7 +144,7 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ArtPatternModelWizardInitialObjectCreationPage initialObjectCreationPage;
+	protected ArtModelWizardInitialObjectCreationPage initialObjectCreationPage;
 
 	/**
 	 * Remember the selection during initialization for populating the default container.
@@ -180,7 +180,7 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 		this.workbench = workbench;
 		this.selection = selection;
 		setWindowTitle(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_Wizard_label"));
-		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(MetamodelruntimePatternEditorPlugin.INSTANCE.getImage("full/wizban/NewArtPattern")));
+		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(MetamodelruntimePatternEditorPlugin.INSTANCE.getImage("full/wizban/NewArt")));
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 	protected Collection<String> getInitialObjectNames() {
 		if (initialObjectNames == null) {
 			initialObjectNames = new ArrayList<String>();
-			for (EClassifier eClassifier : artPatternPackage.getEClassifiers()) {
+			for (EClassifier eClassifier : artPackage.getEClassifiers()) {
 				if (eClassifier instanceof EClass) {
 					EClass eClass = (EClass)eClassifier;
 					if (!eClass.isAbstract()) {
@@ -212,8 +212,8 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	protected EObject createInitialModel() {
-		EClass eClass = (EClass)artPatternPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
-		EObject rootObject = artPatternFactory.create(eClass);
+		EClass eClass = (EClass)artPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
+		EObject rootObject = artFactory.create(eClass);
 		return rootObject;
 	}
 
@@ -314,14 +314,14 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public class ArtPatternModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
+	public class ArtModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
 		/**
 		 * Pass in the selection.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public ArtPatternModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
+		public ArtModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
 			super(pageId, selection);
 		}
 
@@ -361,7 +361,7 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public class ArtPatternModelWizardInitialObjectCreationPage extends WizardPage {
+	public class ArtModelWizardInitialObjectCreationPage extends WizardPage {
 		/**
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -389,7 +389,7 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public ArtPatternModelWizardInitialObjectCreationPage(String pageId) {
+		public ArtModelWizardInitialObjectCreationPage(String pageId) {
 			super(pageId);
 		}
 
@@ -399,7 +399,8 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public void createControl(Composite parent) {
-			Composite composite = new Composite(parent, SWT.NONE); {
+			Composite composite = new Composite(parent, SWT.NONE);
+			{
 				GridLayout layout = new GridLayout();
 				layout.numColumns = 1;
 				layout.verticalSpacing = 12;
@@ -573,10 +574,10 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 	public void addPages() {
 		// Create a page, set the title, and the initial model file name.
 		//
-		newFileCreationPage = new ArtPatternModelWizardNewFileCreationPage("Whatever", selection);
-		newFileCreationPage.setTitle(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtPatternModelWizard_label"));
-		newFileCreationPage.setDescription(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtPatternModelWizard_description"));
-		newFileCreationPage.setFileName(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtPatternEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
+		newFileCreationPage = new ArtModelWizardNewFileCreationPage("Whatever", selection);
+		newFileCreationPage.setTitle(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtModelWizard_label"));
+		newFileCreationPage.setDescription(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtModelWizard_description"));
+		newFileCreationPage.setFileName(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -602,7 +603,7 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 
 					// Make up a unique new name here.
 					//
-					String defaultModelBaseFilename = MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtPatternEditorFilenameDefaultBase");
+					String defaultModelBaseFilename = MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtEditorFilenameDefaultBase");
 					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
@@ -612,8 +613,8 @@ public class ArtPatternModelWizard extends Wizard implements INewWizard {
 				}
 			}
 		}
-		initialObjectCreationPage = new ArtPatternModelWizardInitialObjectCreationPage("Whatever2");
-		initialObjectCreationPage.setTitle(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtPatternModelWizard_label"));
+		initialObjectCreationPage = new ArtModelWizardInitialObjectCreationPage("Whatever2");
+		initialObjectCreationPage.setTitle(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_ArtModelWizard_label"));
 		initialObjectCreationPage.setDescription(MetamodelruntimePatternEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
 		addPage(initialObjectCreationPage);
 	}

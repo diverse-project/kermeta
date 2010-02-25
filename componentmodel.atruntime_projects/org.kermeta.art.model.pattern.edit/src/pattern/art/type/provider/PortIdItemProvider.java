@@ -23,10 +23,9 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import pattern.art.provider.MetamodelruntimePatternEditPlugin;
-
 import pattern.art.provider.NamedElementItemProvider;
+
 import pattern.art.type.PortId;
-import patternframework.provider.PObjectItemProvider;
 
 /**
  * This is the item provider adapter for a {@link pattern.art.type.PortId} object.

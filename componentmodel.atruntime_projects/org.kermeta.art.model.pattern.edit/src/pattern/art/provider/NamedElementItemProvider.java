@@ -25,7 +25,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtPackage;
 import pattern.art.NamedElement;
 
 import patternframework.provider.PObjectItemProvider;
@@ -83,7 +83,7 @@ public class NamedElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_NamedElement_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
-				 ArtPatternPackage.Literals.NAMED_ELEMENT__NAME,
+				 ArtPackage.Literals.NAMED_ELEMENT__NAME,
 				 true,
 				 false,
 				 false,
@@ -129,7 +129,7 @@ public class NamedElementItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(NamedElement.class)) {
-			case ArtPatternPackage.NAMED_ELEMENT__NAME:
+			case ArtPackage.NAMED_ELEMENT__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

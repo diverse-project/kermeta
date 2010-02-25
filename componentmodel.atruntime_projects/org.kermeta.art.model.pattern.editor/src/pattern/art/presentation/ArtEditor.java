@@ -157,7 +157,7 @@ import org.eclipse.emf.edit.ui.util.EditUIUtil;
 
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
-import pattern.art.provider.ArtPatternItemProviderAdapterFactory;
+import pattern.art.provider.ArtItemProviderAdapterFactory;
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
@@ -173,12 +173,12 @@ import patternframework.provider.PatternframeworkItemProviderAdapterFactory;
 
 
 /**
- * This is an example of a ArtPattern model editor.
+ * This is an example of a Art model editor.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ArtPatternEditor
+public class ArtEditor
 	extends MultiPageEditorPart
 	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	/**
@@ -340,18 +340,18 @@ public class ArtPatternEditor
 			public void partActivated(IWorkbenchPart p) {
 				if (p instanceof ContentOutline) {
 					if (((ContentOutline)p).getCurrentPage() == contentOutlinePage) {
-						getActionBarContributor().setActiveEditor(ArtPatternEditor.this);
+						getActionBarContributor().setActiveEditor(ArtEditor.this);
 
 						setCurrentViewer(contentOutlineViewer);
 					}
 				}
 				else if (p instanceof PropertySheet) {
 					if (((PropertySheet)p).getCurrentPage() == propertySheetPage) {
-						getActionBarContributor().setActiveEditor(ArtPatternEditor.this);
+						getActionBarContributor().setActiveEditor(ArtEditor.this);
 						handleActivate();
 					}
 				}
-				else if (p == ArtPatternEditor.this) {
+				else if (p == ArtEditor.this) {
 					handleActivate();
 				}
 			}
@@ -514,7 +514,7 @@ public class ArtPatternEditor
 								 public void run() {
 									 removedResources.addAll(visitor.getRemovedResources());
 									 if (!isDirty()) {
-										 getSite().getPage().closeEditor(ArtPatternEditor.this, false);
+										 getSite().getPage().closeEditor(ArtEditor.this, false);
 									 }
 								 }
 							 });
@@ -525,7 +525,7 @@ public class ArtPatternEditor
 							(new Runnable() {
 								 public void run() {
 									 changedResources.addAll(visitor.getChangedResources());
-									 if (getSite().getPage().getActiveEditor() == ArtPatternEditor.this) {
+									 if (getSite().getPage().getActiveEditor() == ArtEditor.this) {
 										 handleActivate();
 									 }
 								 }
@@ -557,7 +557,7 @@ public class ArtPatternEditor
 
 		if (!removedResources.isEmpty()) {
 			if (handleDirtyConflict()) {
-				getSite().getPage().closeEditor(ArtPatternEditor.this, false);
+				getSite().getPage().closeEditor(ArtEditor.this, false);
 			}
 			else {
 				removedResources.clear();
@@ -687,7 +687,7 @@ public class ArtPatternEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArtPatternEditor() {
+	public ArtEditor() {
 		super();
 		initializeEditingDomain();
 	}
@@ -704,7 +704,7 @@ public class ArtPatternEditor
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ArtPatternItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ArtItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new InstanceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new TypeItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ImplemItemProviderAdapterFactory());
@@ -1023,7 +1023,7 @@ public class ArtPatternEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), ArtPatternEditor.this) {
+					new ViewerPane(getSite().getPage(), ArtEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
@@ -1057,7 +1057,7 @@ public class ArtPatternEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), ArtPatternEditor.this) {
+					new ViewerPane(getSite().getPage(), ArtEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
@@ -1086,7 +1086,7 @@ public class ArtPatternEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), ArtPatternEditor.this) {
+					new ViewerPane(getSite().getPage(), ArtEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							return new ListViewer(composite);
@@ -1111,7 +1111,7 @@ public class ArtPatternEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), ArtPatternEditor.this) {
+					new ViewerPane(getSite().getPage(), ArtEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							return new TreeViewer(composite);
@@ -1138,7 +1138,7 @@ public class ArtPatternEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), ArtPatternEditor.this) {
+					new ViewerPane(getSite().getPage(), ArtEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							return new TableViewer(composite);
@@ -1181,7 +1181,7 @@ public class ArtPatternEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), ArtPatternEditor.this) {
+					new ViewerPane(getSite().getPage(), ArtEditor.this) {
 						@Override
 						public Viewer createViewer(Composite composite) {
 							return new TreeViewer(composite);
@@ -1402,8 +1402,8 @@ public class ArtPatternEditor
 				new ExtendedPropertySheetPage(editingDomain) {
 					@Override
 					public void setSelectionToViewer(List<?> selection) {
-						ArtPatternEditor.this.setSelectionToViewer(selection);
-						ArtPatternEditor.this.setFocus();
+						ArtEditor.this.setSelectionToViewer(selection);
+						ArtEditor.this.setFocus();
 					}
 
 					@Override

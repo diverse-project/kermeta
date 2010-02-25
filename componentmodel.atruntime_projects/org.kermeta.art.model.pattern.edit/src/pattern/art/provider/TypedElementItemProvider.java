@@ -21,7 +21,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtPackage;
 import pattern.art.TypedElement;
 
 /**
@@ -77,7 +77,7 @@ public class TypedElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_TypedElement_type_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TypedElement_type_feature", "_UI_TypedElement_type"),
-				 ArtPatternPackage.Literals.TYPED_ELEMENT__TYPE,
+				 ArtPackage.Literals.TYPED_ELEMENT__TYPE,
 				 true,
 				 false,
 				 true,

@@ -23,8 +23,8 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import pattern.art.ArtPatternFactory;
-import pattern.art.ArtPatternPackage;
+import pattern.art.ArtFactory;
+import pattern.art.ArtPackage;
 
 import pattern.art.group.GroupFactory;
 
@@ -83,11 +83,11 @@ public class SystemItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ArtPatternPackage.Literals.SYSTEM__ROOT);
-			childrenFeatures.add(ArtPatternPackage.Literals.SYSTEM__SERVICES);
-			childrenFeatures.add(ArtPatternPackage.Literals.SYSTEM__TYPES);
-			childrenFeatures.add(ArtPatternPackage.Literals.SYSTEM__DATA_TYPES);
-			childrenFeatures.add(ArtPatternPackage.Literals.SYSTEM__GROUPS);
+			childrenFeatures.add(ArtPackage.Literals.SYSTEM__ROOT);
+			childrenFeatures.add(ArtPackage.Literals.SYSTEM__SERVICES);
+			childrenFeatures.add(ArtPackage.Literals.SYSTEM__TYPES);
+			childrenFeatures.add(ArtPackage.Literals.SYSTEM__DATA_TYPES);
+			childrenFeatures.add(ArtPackage.Literals.SYSTEM__GROUPS);
 		}
 		return childrenFeatures;
 	}
@@ -142,11 +142,11 @@ public class SystemItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(pattern.art.System.class)) {
-			case ArtPatternPackage.SYSTEM__ROOT:
-			case ArtPatternPackage.SYSTEM__SERVICES:
-			case ArtPatternPackage.SYSTEM__TYPES:
-			case ArtPatternPackage.SYSTEM__DATA_TYPES:
-			case ArtPatternPackage.SYSTEM__GROUPS:
+			case ArtPackage.SYSTEM__ROOT:
+			case ArtPackage.SYSTEM__SERVICES:
+			case ArtPackage.SYSTEM__TYPES:
+			case ArtPackage.SYSTEM__DATA_TYPES:
+			case ArtPackage.SYSTEM__GROUPS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -166,57 +166,57 @@ public class SystemItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArtPatternPackage.Literals.SYSTEM__ROOT,
+				(ArtPackage.Literals.SYSTEM__ROOT,
 				 InstanceFactory.eINSTANCE.createCompositeInstance()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArtPatternPackage.Literals.SYSTEM__SERVICES,
+				(ArtPackage.Literals.SYSTEM__SERVICES,
 				 TypeFactory.eINSTANCE.createService()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArtPatternPackage.Literals.SYSTEM__SERVICES,
+				(ArtPackage.Literals.SYSTEM__SERVICES,
 				 TypeFactory.eINSTANCE.createFunctionalService()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArtPatternPackage.Literals.SYSTEM__SERVICES,
+				(ArtPackage.Literals.SYSTEM__SERVICES,
 				 TypeFactory.eINSTANCE.createControlService()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArtPatternPackage.Literals.SYSTEM__TYPES,
+				(ArtPackage.Literals.SYSTEM__TYPES,
 				 TypeFactory.eINSTANCE.createComponentType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArtPatternPackage.Literals.SYSTEM__TYPES,
+				(ArtPackage.Literals.SYSTEM__TYPES,
 				 TypeFactory.eINSTANCE.createPrimitiveType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArtPatternPackage.Literals.SYSTEM__TYPES,
+				(ArtPackage.Literals.SYSTEM__TYPES,
 				 TypeFactory.eINSTANCE.createCompositeType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArtPatternPackage.Literals.SYSTEM__DATA_TYPES,
-				 ArtPatternFactory.eINSTANCE.createDataType()));
+				(ArtPackage.Literals.SYSTEM__DATA_TYPES,
+				 ArtFactory.eINSTANCE.createDataType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArtPatternPackage.Literals.SYSTEM__GROUPS,
+				(ArtPackage.Literals.SYSTEM__GROUPS,
 				 GroupFactory.eINSTANCE.createGroup()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArtPatternPackage.Literals.SYSTEM__GROUPS,
+				(ArtPackage.Literals.SYSTEM__GROUPS,
 				 GroupFactory.eINSTANCE.createTypeGroup()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArtPatternPackage.Literals.SYSTEM__GROUPS,
+				(ArtPackage.Literals.SYSTEM__GROUPS,
 				 GroupFactory.eINSTANCE.createInstanceGroup()));
 	}
 
