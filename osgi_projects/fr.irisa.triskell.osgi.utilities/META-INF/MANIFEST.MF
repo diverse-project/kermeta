@@ -4,5 +4,6 @@ Bundle-Name: Triskell - OSGi Utilities
 Bundle-SymbolicName: fr.irisa.triskell.osgi.utilities
 Bundle-Version: 1.0.0.qualifier
 Export-Package: fr.irisa.triskell.osgi.utilities
-Import-Package: org.osgi.framework
+Import-Package: org.apache.log4j,
+ org.osgi.framework
 Bundle-ClassPath: .
