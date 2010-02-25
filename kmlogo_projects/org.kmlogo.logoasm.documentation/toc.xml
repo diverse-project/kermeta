@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Build DSL with Kermeta">
+	<topic label="Main Process"  href="build/eclipse.help/Kermeta-Tutorial-Process/index.html"> 
+		<link toc="build/eclipse.help/Kermeta-Tutorial-Process/toc.xml"/>
+	</topic>
+	<topic label="FSM Tutorial example">
+		
+	</topic>
+	<topic label="Logo Tutorial example" href="build/eclipse.help/Kermeta-Tutorial-Logo/index.html"> 
+		<link toc="build/eclipse.help/Kermeta-Tutorial-Logo/toc.xml"/>
+	</topic>
+</toc>
