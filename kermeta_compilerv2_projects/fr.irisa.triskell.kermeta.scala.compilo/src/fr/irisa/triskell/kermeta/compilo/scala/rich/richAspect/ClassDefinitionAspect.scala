@@ -1,8 +1,9 @@
 package fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect
 
-import fr.irisa.triskell.kermeta.compilo.scala.rich.ClassView
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
 import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.impl.EObjectImpl
 import scala.collection.JavaConversions._
 import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.language._
@@ -152,12 +153,21 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
     }
   }
 
+
+  
   def getAllInvariants() : EList[Constraint] =  {
     var result = this.getInv
     println(this.getSuperType.size)
     this.getSuperType.foreach{st =>
       st match {
-        case cd:Class => result.addAll(cd.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getAllInvariants)
+        case cd:Class => {
+
+            //TODO OPTIMISE WITH FLATTEN
+            if(result.forall({inv => { true }})){
+              result.addAll(cd.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getAllInvariants)
+            }
+            
+        }
         case _ => println(st)
       }
     }
