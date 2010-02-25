@@ -103,7 +103,7 @@ object Main extends LogAspect {
 
 	//    inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/001_LoadUML.km"
 
-//	    inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/001_LoadUML.km"
+	    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/001_LoadUML.km"
 	    	
 	//    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Art2DroolsMatcher/Art2DROOLSPatternFramework.km"
 
@@ -128,7 +128,7 @@ object Main extends LogAspect {
 
     //inputFile = "/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/025simpleInvariant.km"
 
-    inputFile = "/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/022_InvWithMultipleInheritance.km"
+    //inputFile = "/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/022_InvWithMultipleInheritance.km"
 
 
 	  if(inputFile != ""){
@@ -138,11 +138,17 @@ object Main extends LogAspect {
 	 	  log.warn("No Input File Found ! ")
 	  }
 
-	   /* Scalac compilation step */
-	   var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,EmbettedScalaCompiler.getActualClasspath,useFSC)
 
-	   var classpath : java.util.List[String] = new java.util.ArrayList[String]
-	   classpath.addAll(List(System.getProperty("java.class.path")))
+    var classpath = EmbettedScalaCompiler.getActualClasspath
+
+    classpath = classpath ++ List("/opt/galileo/eclipse/plugins/org.eclipse.uml2.uml_3.0.1.v200908281330.jar")
+	   //classpath.addAll(List(System.getProperty("java.class.path")))
+           System.out.println("classpath = " + classpath)
+           //classpath.add("/opt/galileo/eclipse/plugins/org.eclipse.uml2.uml_3.0.1.v200908281330.jar")
+	   /* Scalac compilation step */
+	   var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
+
+
 	  // classpath ++ "" 
 	 //  classpath.add("/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo/outputclasspathAdditionalLib/org.kermeta.art.adapter_1.0.0.jar")
 	  // classpath.add("/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo/outputclasspathAdditionalLib/org.kermeta.art.model_1.1.1.jar")

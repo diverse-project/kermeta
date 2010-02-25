@@ -1,6 +1,8 @@
 package fr.irisa.triskell.embedded
 
-import java.io.File;
+
+
+import java.io.File
 
 object InternalCompilerHelper {
 	
@@ -31,7 +33,7 @@ object InternalCompilerHelper {
 	}
 	
 	
-	
+  
 	
 	
 	

@@ -26,7 +26,7 @@ object GlobalConfiguration {
 	//final var workspaceURI : String = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/"
 	final var pluginURI : String = "/local/hudson_kermeta/jobs/KermetaCompilerV2_TestCase/workspace/"
 	//final var pluginURI : String = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/"
-		
+        final var withRich : Boolean = false
 
 } 
  

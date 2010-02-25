@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService
 class Compiler extends RichAspectImplicit with LogAspect {
 	
 	def compile(url : String){
-		log.debug("Cleaning Output Step")
+		log.debug("Cleaning Output Step")  
 		Util.cleanFolder(GlobalConfiguration.outputFolder)
 		/* Init Factory Step */
 		var t: LoadModelHelper = new LoadModelHelper()
