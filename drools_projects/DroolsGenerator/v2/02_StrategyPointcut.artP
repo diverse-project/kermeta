@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type">
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:art="http://art/pattern/art">
   <root/>
 </art:System>

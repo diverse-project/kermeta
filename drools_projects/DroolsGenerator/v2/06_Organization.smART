@@ -44,12 +44,18 @@
     <persistent href="06_OrganizationAdvice.artP#//@services.0"/>
     <persistent href="06_OrganizationAdvice.artP#//@services.1"/>
     <persistent href="06_OrganizationAdvice.artP#//@services.2"/>
+    <persistent href="06_OrganizationAdvice.artP#//@types.0/@port.3"/>
+    <persistent href="06_OrganizationAdvice.artP#//@types.1/@port.1"/>
+    <persistent href="06_OrganizationAdvice.artP#//@services.3"/>
+    <persistent href="06_OrganizationAdvice.artP#//@root/@subComponent.1/@binding.1"/>
+    <persistent href="06_OrganizationAdvice.artP#//@root/@subComponent.0/@binding.1"/>
   </aspect>
   <adapt xsi:type="adaptations:SetruntimeSystem">
     <SystemToSet href="06_OrganizationPointcut.artP#/"/>
     <refservices href="06_OrganizationAdvice.artP#//@services.0"/>
     <refservices href="06_OrganizationAdvice.artP#//@services.1"/>
     <refservices href="06_OrganizationAdvice.artP#//@services.2"/>
+    <refservices href="06_OrganizationAdvice.artP#//@services.3"/>
     <reftypes href="06_OrganizationAdvice.artP#//@types.0"/>
     <reftypes href="06_OrganizationAdvice.artP#//@types.1"/>
   </adapt>

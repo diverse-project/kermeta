@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:implem="http://art/pattern/art/implem" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type">
+  <root>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="_Any Notifier" state="">
+      <binding serverInstance="//@root/@subComponent.1" id="rankingStrategiesLowBW" server="//@types.0/@port.0"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="LowBandwidthRankingStrategy" type="//@types.0" state="ON">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.Ranker"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IRankingStrategy">
+    <operation name="getRelevantEntries">
+      <input name="java.util.List arg0"/>
+      <input name="org.diva.runtime.cas.interfaces.IUserDescription arg1"/>
+      <input name="org.diva.runtime.cas.interfaces.UserContext arg2"/>
+    </operation>
+    <operation name="getRelevantEntriesRecursive">
+      <input name="java.util.List arg0"/>
+      <input name="org.diva.runtime.cas.interfaces.IUserDescription arg1"/>
+      <input name="org.diva.runtime.cas.interfaces.UserContext arg2"/>
+    </operation>
+    <operation name="rankEvent">
+      <input name="org.diva.runtime.cas.interfaces.IEvent arg0"/>
+    </operation>
+    <operation name="rankEvent">
+      <input name="java.lang.String arg0"/>
+    </operation>
+  </services>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.ranker">
+    <port xsi:type="type:Port" name="rankingStrategies" lower="0" upper="-1" service="//@services.0" role="server"/>
+  </types>
+</art:System>

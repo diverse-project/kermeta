@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:Adapter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adaptations="http://SmartAdapters4ART/smartadapters/core/adaptations" xmlns:core="http://SmartAdapters4ART/smartadapters/core">
+  <aspect>
+    <template>
+      <pattern>
+        <content href="03_smartPhonePointcut.artP#/"/>
+        <roles name="theSystem">
+          <player href="03_smartPhonePointcut.artP#/"/>
+        </roles>
+        <roles name="theRootComponent">
+          <player href="03_smartPhonePointcut.artP#//@root"/>
+        </roles>
+        <roles name="anyChannel">
+          <player href="03_smartPhonePointcut.artP#//@root/@subComponent.1"/>
+        </roles>
+        <roles name="anyUIrequiredPort">
+          <player href="03_smartPhonePointcut.artP#//@types.2/@port.0"/>
+        </roles>
+        <roles name="anyNotifier">
+          <player href="03_smartPhonePointcut.artP#//@root/@subComponent.2"/>
+        </roles>
+        <roles name="theAddessDBProvidedPort">
+          <player href="03_smartPhonePointcut.artP#//@types.0/@port.0"/>
+        </roles>
+        <roles name="theAddressDBComponent">
+          <player href="03_smartPhonePointcut.artP#//@root/@subComponent.0"/>
+        </roles>
+      </pattern>
+    </template>
+    <structure>
+      <content href="03_smartPhoneAdvice.artP#/"/>
+    </structure>
+  </aspect>
+  <adapt xsi:type="adaptations:SetruntimeSystem">
+    <SystemToSet href="03_smartPhonePointcut.artP#/"/>
+    <refservices href="03_smartPhoneAdvice.artP#//@services.0"/>
+    <refservices href="03_smartPhoneAdvice.artP#//@services.4"/>
+    <refservices href="03_smartPhoneAdvice.artP#//@services.3"/>
+    <refservices href="03_smartPhoneAdvice.artP#//@services.2"/>
+    <refservices href="03_smartPhoneAdvice.artP#//@services.1"/>
+    <reftypes href="03_smartPhoneAdvice.artP#//@types.0"/>
+    <reftypes href="03_smartPhoneAdvice.artP#//@types.1"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">
+    <CompositeInstanceToSet href="03_smartPhonePointcut.artP#//@root"/>
+    <refsubComponent href="03_smartPhoneAdvice.artP#//@root/@subComponent.1"/>
+    <refsubComponent href="03_smartPhoneAdvice.artP#//@root/@subComponent.2"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstancePrimitiveInstance">
+    <PrimitiveInstanceToSet href="03_smartPhonePointcut.artP#//@root/@subComponent.1"/>
+    <refbinding href="03_smartPhoneAdvice.artP#//@root/@subComponent.0/@binding.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="03_smartPhoneAdvice.artP#//@root/@subComponent.0/@binding.0"/>
+    <refclient href="03_smartPhonePointcut.artP#//@types.1/@port.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="03_smartPhoneAdvice.artP#//@root/@subComponent.2/@binding.1"/>
+    <refclient href="03_smartPhoneAdvice.artP#//@types.1/@port.1"/>
+    <refserver href="03_smartPhonePointcut.artP#//@types.0/@port.0"/>
+    <refserverInstance href="03_smartPhonePointcut.artP#//@root/@subComponent.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="03_smartPhoneAdvice.artP#//@root/@subComponent.2/@binding.0"/>
+    <refclient href="03_smartPhoneAdvice.artP#//@types.1/@port.2"/>
+    <refserver href="03_smartPhonePointcut.artP#//@types.2/@port.0"/>
+    <refserverInstance href="03_smartPhonePointcut.artP#//@root/@subComponent.2"/>
+  </adapt>
+</core:Adapter>

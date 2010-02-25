@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type">
+  <root name="CAS application">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="AddressDataBase" type="//@types.0"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" type="//@types.1"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" type="//@types.2"/>
+  </root>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.INotifier"/>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IAddressDB"/>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IUserInterface"/>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.addressDB">
+    <port xsi:type="type:Port" name="addressDB" service="//@services.1" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.channel">
+    <port xsi:type="type:Port" name="ui" service="//@services.2" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.notifier">
+    <port xsi:type="type:Port" name="notifier" service="//@services.0" role="server"/>
+  </types>
+</art:System>

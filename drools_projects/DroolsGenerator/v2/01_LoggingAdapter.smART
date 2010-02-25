@@ -31,8 +31,6 @@
     <SystemToSet href="01_LoggingPointcut.artP#/"/>
     <refservices href="01_LoggingAdvice.artP#//@services.0"/>
     <reftypes href="01_LoggingAdvice.artP#//@types.0"/>
-    <refdataTypes href="01_LoggingAdvice.artP#//@dataTypes.0"/>
-    <refdataTypes href="01_LoggingAdvice.artP#//@dataTypes.1"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">
     <CompositeInstanceToSet href="01_LoggingPointcut.artP#//@root"/>

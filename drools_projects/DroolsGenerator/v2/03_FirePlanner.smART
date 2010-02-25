@@ -40,6 +40,8 @@
     <persistent href="03_FirePlannerAdvice.artP#//@types.0/@port.4"/>
     <persistent href="03_FirePlannerAdvice.artP#//@root/@subComponent.0"/>
     <persistent href="03_FirePlannerAdvice.artP#//@root/@subComponent.0/@implem"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@types.0/@port.5"/>
+    <persistent href="03_FirePlannerAdvice.artP#//@services.5"/>
   </aspect>
   <adapt xsi:type="adaptations:SetruntimeSystem">
     <SystemToSet href="03_FirePlannerPointcut.artP#/"/>
@@ -48,6 +50,7 @@
     <refservices href="03_FirePlannerAdvice.artP#//@services.2"/>
     <refservices href="03_FirePlannerAdvice.artP#//@services.3"/>
     <refservices href="03_FirePlannerAdvice.artP#//@services.4"/>
+    <refservices href="03_FirePlannerAdvice.artP#//@services.5"/>
     <reftypes href="03_FirePlannerAdvice.artP#//@types.0"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">

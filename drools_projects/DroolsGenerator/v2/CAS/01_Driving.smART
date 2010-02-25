@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:Adapter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adaptations="http://SmartAdapters4ART/smartadapters/core/adaptations" xmlns:core="http://SmartAdapters4ART/smartadapters/core">
+  <aspect>
+    <template>
+      <pattern>
+        <content href="01_DrivingPointcut.artP#/"/>
+        <roles name="anySystem">
+          <player href="01_DrivingPointcut.artP#/"/>
+        </roles>
+        <roles name="theRootComponent">
+          <player href="01_DrivingPointcut.artP#//@root"/>
+        </roles>
+        <roles name="theCalendarComponent">
+          <player href="01_DrivingPointcut.artP#//@root/@subComponent.0"/>
+        </roles>
+        <roles name="theCalendarNotifierClientPort">
+          <player href="01_DrivingPointcut.artP#//@types.0/@port.0"/>
+        </roles>
+        <roles name="theAddressDBComponent">
+          <player href="01_DrivingPointcut.artP#//@root/@subComponent.1"/>
+        </roles>
+        <roles name="theAddressDBProvidedPort">
+          <player href="01_DrivingPointcut.artP#//@types.1/@port.0"/>
+        </roles>
+      </pattern>
+      <featureIdentifier>name</featureIdentifier>
+    </template>
+    <structure>
+      <content href="01_DrivingAdvice.artP#/"/>
+    </structure>
+  </aspect>
+  <adapt xsi:type="adaptations:SetruntimeSystem">
+    <SystemToSet href="01_DrivingPointcut.artP#/"/>
+    <refservices href="01_DrivingAdvice.artP#//@services.4"/>
+    <refservices href="01_DrivingAdvice.artP#//@services.3"/>
+    <refservices href="01_DrivingAdvice.artP#//@services.1"/>
+    <refservices href="01_DrivingAdvice.artP#//@services.2"/>
+    <refservices href="01_DrivingAdvice.artP#//@services.5"/>
+    <refservices href="01_DrivingAdvice.artP#//@services.0"/>
+    <refservices href="01_DrivingAdvice.artP#//@services.6"/>
+    <reftypes href="01_DrivingAdvice.artP#//@types.2"/>
+    <reftypes href="01_DrivingAdvice.artP#//@types.1"/>
+    <reftypes href="01_DrivingAdvice.artP#//@types.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">
+    <CompositeInstanceToSet href="01_DrivingPointcut.artP#//@root"/>
+    <refsubComponent href="01_DrivingAdvice.artP#//@root/@subComponent.0"/>
+    <refsubComponent href="01_DrivingAdvice.artP#//@root/@subComponent.1"/>
+    <refsubComponent href="01_DrivingAdvice.artP#//@root/@subComponent.2"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstancePrimitiveInstance">
+    <PrimitiveInstanceToSet href="01_DrivingPointcut.artP#//@root/@subComponent.0"/>
+    <refbinding href="01_DrivingAdvice.artP#//@root/@subComponent.3/@binding.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="01_DrivingAdvice.artP#//@root/@subComponent.3/@binding.0"/>
+    <refclient href="01_DrivingPointcut.artP#//@types.0/@port.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="01_DrivingAdvice.artP#//@root/@subComponent.2/@binding.1"/>
+    <refserver href="01_DrivingPointcut.artP#//@types.1/@port.0"/>
+    <refserverInstance href="01_DrivingPointcut.artP#//@root/@subComponent.1"/>
+  </adapt>
+</core:Adapter>

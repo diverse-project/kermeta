@@ -9,7 +9,9 @@
     </subComponent>
   </root>
   <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.NotificationStrategy"/>
+  <services xsi:type="type:FunctionalService" name="org.slf4j.Logger"/>
   <types xsi:type="type:PrimitiveType" name="eu.diva.tis.thinkingtool.notification">
     <port xsi:type="type:Port" name="strategy" lower="1" upper="1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="logger" lower="1" upper="1" service="//@services.1" role="client"/>
   </types>
 </art:System>

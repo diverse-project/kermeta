@@ -22,12 +22,15 @@
   <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.Channel"/>
   <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.DataFilter"/>
   <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.OrganizationCallback"/>
+  <services xsi:type="type:FunctionalService" name="org.slf4j.Logger"/>
   <types xsi:type="type:PrimitiveType" name="eu.diva.tis.messaging.channel">
     <port xsi:type="type:Port" name="channel" lower="1" upper="1" service="//@services.0" role="server" isOptional="true"/>
     <port xsi:type="type:Port" name="orgCallback" lower="1" upper="1" service="//@services.2" role="client"/>
     <port xsi:type="type:Port" name="filter" lower="1" upper="1" service="//@services.1" role="client"/>
+    <port xsi:type="type:Port" name="logger" lower="1" upper="1" service="//@services.3" role="client"/>
   </types>
   <types xsi:type="type:PrimitiveType" name="eu.diva.tis.messaging.filter">
     <port xsi:type="type:Port" name="filterImpl" lower="1" upper="1" service="//@services.1" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="logger" lower="1" upper="1" service="//@services.3" role="client"/>
   </types>
 </art:System>

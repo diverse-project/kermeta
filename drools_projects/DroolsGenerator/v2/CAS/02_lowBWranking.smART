@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:Adapter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adaptations="http://SmartAdapters4ART/smartadapters/core/adaptations" xmlns:core="http://SmartAdapters4ART/smartadapters/core">
+  <aspect>
+    <template>
+      <pattern>
+        <content href="02_lowBWrankingPointcut.artP#/"/>
+        <roles name="theSystem">
+          <player href="02_lowBWrankingPointcut.artP#/"/>
+        </roles>
+        <roles name="theRootComponent">
+          <player href="02_lowBWrankingPointcut.artP#//@root"/>
+        </roles>
+        <roles name="anyNotifierComponent">
+          <player href="02_lowBWrankingPointcut.artP#//@root/@subComponent.0"/>
+        </roles>
+        <roles name="anyRequiredNotifierPort">
+          <player href="02_lowBWrankingPointcut.artP#//@types.0/@port.0"/>
+        </roles>
+      </pattern>
+    </template>
+    <structure>
+      <content href="02_lowBWrankingAdvice.artP#/"/>
+    </structure>
+  </aspect>
+  <adapt xsi:type="adaptations:SetruntimeSystem">
+    <SystemToSet href="02_lowBWrankingPointcut.artP#/"/>
+    <refservices href="02_lowBWrankingAdvice.artP#//@services.0"/>
+    <reftypes href="02_lowBWrankingAdvice.artP#//@types.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">
+    <CompositeInstanceToSet href="02_lowBWrankingPointcut.artP#//@root"/>
+    <refsubComponent href="02_lowBWrankingAdvice.artP#//@root/@subComponent.1"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstancePrimitiveInstance">
+    <PrimitiveInstanceToSet href="02_lowBWrankingPointcut.artP#//@root/@subComponent.0"/>
+    <refbinding href="02_lowBWrankingAdvice.artP#//@root/@subComponent.0/@binding.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
+    <TransmissionBindingToSet href="02_lowBWrankingAdvice.artP#//@root/@subComponent.0/@binding.0"/>
+    <refclient href="02_lowBWrankingPointcut.artP#//@types.0/@port.0"/>
+  </adapt>
+</core:Adapter>

@@ -15,11 +15,13 @@
   <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.CommunicationPlanner"/>
   <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.messaging.Channel"/>
   <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.NotificationStrategy"/>
+  <services xsi:type="type:FunctionalService" name="org.slf4j.Logger"/>
   <types xsi:type="type:PrimitiveType" name="eu.diva.tis.thinkingtool.planner">
-    <port xsi:type="type:Port" name="res" lower="1" upper="1" isOptional="true" service="//@services.0" role="server"/>
-    <port xsi:type="type:Port" name="task" lower="1" upper="1" isOptional="true" service="//@services.1" role="server"/>
-    <port xsi:type="type:Port" name="com" lower="1" upper="1" isOptional="true" service="//@services.2" role="server"/>
-    <port xsi:type="type:Port" name="channel" lower="0" upper="-1" isOptional="true" service="//@services.3" role="client"/>
+    <port xsi:type="type:Port" name="res" lower="1" upper="1" service="//@services.0" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="task" lower="1" upper="1" service="//@services.1" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="com" lower="1" upper="1" service="//@services.2" role="server" isOptional="true"/>
+    <port xsi:type="type:Port" name="channel" lower="0" upper="-1" service="//@services.3" role="client" isOptional="true"/>
     <port xsi:type="type:Port" name="strategy" lower="1" upper="1" service="//@services.4" role="client"/>
+    <port xsi:type="type:Port" name="logger" lower="1" upper="1" service="//@services.5" role="client"/>
   </types>
 </art:System>

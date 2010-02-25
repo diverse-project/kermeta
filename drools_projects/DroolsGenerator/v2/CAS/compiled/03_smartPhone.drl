@@ -1,0 +1,47 @@
+global java.util.List list;
+global java.util.Map uniqueobjects;
+rule "RulesName"
+	 when 
+$s2: art.type.Service(name == "tutorial.diva.cas.IAddressDB")
+$s3: art.type.Port(name == "addressDB",role == "server",service == $s2)
+$s4: art.type.PrimitiveType(name == "tutorial.diva.cas.addressDB",port contains $s3)
+$s5: art.instance.PrimitiveInstance(name == "AddressDataBase",type == $s4)
+$s6: art.type.Service(name == "tutorial.diva.cas.IUserInterface")
+$s7: art.type.Port(name == "ui",role == "client",service == $s6)
+$s8: art.type.PrimitiveType(name == "tutorial.diva.cas.channel",port contains $s7)
+$s9: art.instance.PrimitiveInstance(type == $s8)
+$s10: art.type.Service(name == "tutorial.diva.cas.INotifier")
+$s11: art.type.Port(name == "notifier",role == "server",service == $s10)
+$s12: art.type.PrimitiveType(name == "tutorial.diva.cas.notifier",port contains $s11)
+$s13: art.instance.PrimitiveInstance(type == $s12)
+$s1: art.instance.CompositeInstance(name == "CAS application",subComponent contains $s5,subComponent contains $s9,subComponent contains $s13)
+$s0: art.System(root == $s1)
+then
+ 	 java.util.HashMap m = new java.util.HashMap();
+m.put("theSystem",$s0);
+m.put("theRootComponent",$s1);
+m.put("anyChannel",$s9);
+m.put("anyUIrequiredPort",$s11);
+m.put("anyNotifier",$s13);
+m.put("theAddessDBProvidedPort",$s3);
+m.put("theAddressDBComponent",$s5);
+	 list.add(m);
+ art.System s0 = art.ArtFactory.eINSTANCE.createSystem();
+$s0.getServices().add(null);
+$s0.getServices().add(null);
+$s0.getServices().add(null);
+$s0.getServices().add(null);
+$s0.getServices().add(null);
+$s0.getTypes().add(null);
+$s0.getTypes().add(null);
+$s1.getSubComponent().add(null);
+$s1.getSubComponent().add(null);
+$s9.getBinding().add(null);
+null.setClient($s7);
+null.setClient(null);
+null.setServer($s3);
+null.setServerInstance($s5);
+null.setClient(null);
+null.setServer($s11);
+null.setServerInstance($s13);
+end

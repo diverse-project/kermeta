@@ -6,7 +6,9 @@
     </subComponent>
   </root>
   <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.context.SensorDeployer"/>
+  <services xsi:type="type:FunctionalService" name="org.slf4j.Logger"/>
   <types xsi:type="type:PrimitiveType" name="eu.diva.tis.context.sensor.deployer">
     <port xsi:type="type:Port" name="deployer" lower="1" upper="1" service="//@services.0" role="server"/>
+    <port xsi:type="type:Port" name="logger" lower="1" upper="1" service="//@services.1" role="client"/>
   </types>
 </art:System>

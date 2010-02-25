@@ -40,6 +40,8 @@
     <persistent href="04_TPPlannerAdvice.artP#//@types.0/@port.4"/>
     <persistent href="04_TPPlannerAdvice.artP#//@root/@subComponent.0"/>
     <persistent href="04_TPPlannerAdvice.artP#//@root/@subComponent.0/@implem"/>
+    <persistent href="04_TPPlannerAdvice.artP#//@types.0/@port.5"/>
+    <persistent href="04_TPPlannerAdvice.artP#//@services.5"/>
   </aspect>
   <adapt xsi:type="adaptations:SetruntimeSystem">
     <SystemToSet href="04_TPPlannerPointcut.artP#/"/>
@@ -48,6 +50,7 @@
     <refservices href="04_TPPlannerAdvice.artP#//@services.2"/>
     <refservices href="04_TPPlannerAdvice.artP#//@services.3"/>
     <refservices href="04_TPPlannerAdvice.artP#//@services.4"/>
+    <refservices href="04_TPPlannerAdvice.artP#//@services.5"/>
     <reftypes href="04_TPPlannerAdvice.artP#//@types.0"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">

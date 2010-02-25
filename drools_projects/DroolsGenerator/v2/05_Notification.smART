@@ -26,10 +26,13 @@
     <persistent href="05_NotificationAdvice.artP#//@types.0"/>
     <persistent href="05_NotificationAdvice.artP#//@services.0"/>
     <persistent href="05_NotificationAdvice.artP#//@types.0/@port.0"/>
+    <persistent href="05_NotificationAdvice.artP#//@types.0/@port.1"/>
+    <persistent href="05_NotificationAdvice.artP#//@services.1"/>
   </aspect>
   <adapt xsi:type="adaptations:SetruntimeSystem">
     <SystemToSet href="05_NotificationPointcut.artP#/"/>
     <refservices href="05_NotificationAdvice.artP#//@services.0"/>
+    <refservices href="05_NotificationAdvice.artP#//@services.1"/>
     <reftypes href="05_NotificationAdvice.artP#//@types.0"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceCompositeInstance">

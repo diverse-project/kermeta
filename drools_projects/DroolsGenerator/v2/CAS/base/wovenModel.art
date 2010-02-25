@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:implem="http://art/implem" xmlns:instance="http://art/instance" xmlns:type="http://art/type" name="CAS System">
+  <root name="CAS application" state="ON">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="AddressDataBase" type="//@types.0" state="ON">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.AddressDB"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Calendar" type="//@types.1" state="ON">
+      <binding serverInstance="//@root/@subComponent.2" id="notifier" client="//@types.1/@port.1" server="//@types.3/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.Calendar"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="DrivingNotifier" type="//@types.3" state="ON">
+      <binding serverInstance="//@root/@subComponent.3" id="channel" client="//@types.3/@port.1" server="//@types.4/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.5" id="rankingStrategiesLowBW" client="//@types.3/@port.2" server="//@types.5/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.DrivingNotifier"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="VoiceChannel" type="//@types.4" state="ON">
+      <binding serverInstance="//@root/@subComponent.6" id="ui" client="//@types.4/@port.1" server="//@types.6/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.VoiceChannel"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="ForwardTelephony" type="//@types.2" state="ON">
+      <binding serverInstance="//@root/@subComponent.2" id="notifier" client="//@types.2/@port.2" server="//@types.3/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.0" id="addressDB" client="//@types.2/@port.1" server="//@types.0/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.ForwardTelephony"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="LowBandwidthRankingStrategy" type="//@types.5" state="ON">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.Ranker"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="ReducedUserInterface" type="//@types.6" state="ON">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.ReducedUI"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="SkypeTelephony" type="//@types.7" state="ON">
+      <binding serverInstance="//@root/@subComponent.2" id="notifier" client="//@types.7/@port.2" server="//@types.3/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.0" id="addressDB" client="//@types.7/@port.1" server="//@types.0/@port.0"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.SkypeTelephony"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.INotifier"/>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.ICalendar"/>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IAddressDB"/>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.ITelephony"/>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IAddressDB">
+    <operation name="addAddress">
+      <input name="org.diva.runtime.cas.interfaces.items.IAddress arg0"/>
+    </operation>
+    <operation name="searchAdressesInStandardsFields">
+      <input name="java.lang.String arg0"/>
+    </operation>
+    <operation name="searchAdressesByPhonenumber">
+      <input name="java.lang.String arg0"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.ICalendar">
+    <operation name="addAppointment">
+      <input name="java.lang.String arg0"/>
+      <input name="java.lang.String arg1"/>
+      <input name="java.lang.String arg2"/>
+    </operation>
+    <operation name="removeAppointment">
+      <input name="java.lang.String arg0"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IChannel">
+    <operation name="encapsulate">
+      <input name="java.lang.String arg0"/>
+      <input name="java.lang.String arg1"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.INotifier">
+    <operation name="notifyUser">
+      <input name="java.lang.String arg0"/>
+      <input name="java.lang.String arg1"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IUserInterface">
+    <operation name="display">
+      <input name="java.lang.String arg0"/>
+    </operation>
+    <operation name="readInput"/>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IRankingStrategy">
+    <operation name="getRelevantEntries">
+      <input name="java.util.List arg0"/>
+      <input name="org.diva.runtime.cas.interfaces.IUserDescription arg1"/>
+      <input name="org.diva.runtime.cas.interfaces.UserContext arg2"/>
+    </operation>
+    <operation name="getRelevantEntriesRecursive">
+      <input name="java.util.List arg0"/>
+      <input name="org.diva.runtime.cas.interfaces.IUserDescription arg1"/>
+      <input name="org.diva.runtime.cas.interfaces.UserContext arg2"/>
+    </operation>
+    <operation name="rankEvent">
+      <input name="org.diva.runtime.cas.interfaces.IEvent arg0"/>
+    </operation>
+    <operation name="rankEvent">
+      <input name="java.lang.String arg0"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.ITelephony">
+    <operation name="send">
+      <input name="java.lang.String arg0"/>
+      <input name="java.lang.String arg1"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IRankingStrategy">
+    <operation name="getRelevantEntries">
+      <input name="java.util.List arg0"/>
+      <input name="org.diva.runtime.cas.interfaces.IUserDescription arg1"/>
+      <input name="org.diva.runtime.cas.interfaces.UserContext arg2"/>
+    </operation>
+    <operation name="getRelevantEntriesRecursive">
+      <input name="java.util.List arg0"/>
+      <input name="org.diva.runtime.cas.interfaces.IUserDescription arg1"/>
+      <input name="org.diva.runtime.cas.interfaces.UserContext arg2"/>
+    </operation>
+    <operation name="rankEvent">
+      <input name="org.diva.runtime.cas.interfaces.IEvent arg0"/>
+    </operation>
+    <operation name="rankEvent">
+      <input name="java.lang.String arg0"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IChannel">
+    <operation name="encapsulate">
+      <input name="java.lang.String arg0"/>
+      <input name="java.lang.String arg1"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.INotifier"/>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IAddressDB">
+    <operation name="display">
+      <input name="java.lang.String arg0"/>
+    </operation>
+    <operation name="readInput"/>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.ITelephony">
+    <operation name="display">
+      <input name="java.lang.String arg0"/>
+    </operation>
+    <operation name="readInput"/>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IUserInterface">
+    <operation name="display">
+      <input name="java.lang.String arg0"/>
+    </operation>
+    <operation name="readInput"/>
+  </services>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.addressDB">
+    <port xsi:type="type:Port" name="addressDB" lower="1" upper="-1" service="//@services.2" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.calendar">
+    <port xsi:type="type:Port" name="calendar" lower="1" upper="1" service="//@services.1" role="server"/>
+    <port xsi:type="type:Port" name="notifier" lower="0" upper="1" service="//@services.0" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.telephony">
+    <port xsi:type="type:Port" name="telephony" lower="1" upper="1" service="//@services.10" role="server"/>
+    <port xsi:type="type:Port" name="addressDB" lower="1" upper="1" service="//@services.4" role="client"/>
+    <port xsi:type="type:Port" name="notifier" lower="0" upper="1" service="//@services.7" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.notifier">
+    <port xsi:type="type:Port" name="notifier" lower="1" upper="1" service="//@services.7" role="server"/>
+    <port xsi:type="type:Port" name="channel" lower="0" upper="1" service="//@services.6" role="client"/>
+    <port xsi:type="type:Port" name="rankingStrategies" lower="0" upper="-1" service="//@services.9" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.channel">
+    <port xsi:type="type:Port" name="channel" lower="1" upper="1" service="//@services.6" role="server"/>
+    <port xsi:type="type:Port" name="ui" lower="0" upper="1" service="//@services.8" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.ranker">
+    <port xsi:type="type:Port" name="rankingStrategies" lower="0" upper="-1" service="//@services.11" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.ui">
+    <port xsi:type="type:Port" name="ui" lower="1" upper="-1" service="//@services.16" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.telephony">
+    <port xsi:type="type:Port" name="telephony" lower="1" upper="1" service="//@services.15" role="server"/>
+    <port xsi:type="type:Port" name="addressDB" lower="1" upper="1" service="//@services.14" role="client"/>
+    <port xsi:type="type:Port" name="notifier" lower="0" upper="1" service="//@services.13" role="client"/>
+  </types>
+</art:System>

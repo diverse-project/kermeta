@@ -7,8 +7,8 @@
   <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.TaskPlanner"/>
   <services xsi:type="type:FunctionalService" name="eu.diva.tis.api.thinkingtool.CommunicationPlanner"/>
   <types xsi:type="type:PrimitiveType">
-    <port xsi:type="type:Port" isOptional="true" service="//@services.0" role="client"/>
-    <port xsi:type="type:Port" isOptional="true" service="//@services.1" role="client"/>
-    <port xsi:type="type:Port" isOptional="true" service="//@services.2" role="client"/>
+    <port xsi:type="type:Port" service="//@services.0" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" service="//@services.1" role="client" isOptional="true"/>
+    <port xsi:type="type:Port" service="//@services.2" role="client" isOptional="true"/>
   </types>
 </art:System>

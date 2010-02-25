@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:implem="http://art/implem" xmlns:instance="http://art/instance" xmlns:type="http://art/type" name="CAS System">
+  <root name="CAS application" state="ON">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="AddressDataBase" type="//@types.0" state="ON">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.AddressDB"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Calendar" type="//@types.1" state="ON">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.Calendar"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.INotifier"/>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.ICalendar"/>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IAddressDB"/>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.ITelephony"/>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.addressDB">
+    <port xsi:type="type:Port" name="addressDB" lower="1" upper="-1" service="//@services.2" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.calendar">
+    <port xsi:type="type:Port" name="calendar" lower="1" upper="1" service="//@services.1" role="server"/>
+    <port xsi:type="type:Port" name="notifier" lower="0" upper="1" service="//@services.0" role="client"/>
+  </types>
+</art:System>

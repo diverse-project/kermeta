@@ -4,9 +4,6 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:implem="http://art/pattern/art/implem" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type">
   <root>
     <subComponent xsi:type="instance:PrimitiveInstance" name="DefaultLogger" type="//@types.0">
-      <attribute xsi:type="instance:DictionaryValuedAttribute" attribute="//@types.0/@attribute.0">
-        <entries xsi:type="instance:OtherEntry" value="3" key="diva"/>
-      </attribute>
       <implem xsi:type="implem:OSGiComponent" implementingClass="eu.diva.tis.log.DefaultLogger"/>
     </subComponent>
     <subComponent xsi:type="instance:PrimitiveInstance" name="FakeLoggerClient">
@@ -16,8 +13,5 @@
   <services xsi:type="type:FunctionalService" name="org.slf4j.Logger"/>
   <types xsi:type="type:PrimitiveType" name="eu.diva.tis.log">
     <port xsi:type="type:Port" name="logger" lower="1" upper="1" service="//@services.0" role="server"/>
-    <attribute xsi:type="type:Dictionary" name="appenders" type="//@dataTypes.1" valueType="//@dataTypes.0"/>
   </types>
-  <dataTypes name="Integer"/>
-  <dataTypes name="String"/>
 </art:System>

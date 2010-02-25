@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:implem="http://art/pattern/art/implem" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type">
+  <root>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="_Any Channel">
+      <binding serverInstance="//@root/@subComponent.1" id="ui" server="//@types.0/@port.0"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="ReducedUserInterface" type="//@types.0" state="ON">
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.ReducedUI"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="SkypeTelephony" type="//@types.1" state="ON">
+      <binding id="notifier"/>
+      <binding id="addressDB"/>
+      <implem xsi:type="implem:OSGiComponent" implementingClass="cas.impl.SkypeTelephony"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IChannel">
+    <operation name="encapsulate">
+      <input name="java.lang.String arg0"/>
+      <input name="java.lang.String arg1"/>
+    </operation>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IUserInterface">
+    <operation name="display">
+      <input name="java.lang.String arg0"/>
+    </operation>
+    <operation name="readInput"/>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.ITelephony">
+    <operation name="display">
+      <input name="java.lang.String arg0"/>
+    </operation>
+    <operation name="readInput"/>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.IAddressDB">
+    <operation name="display">
+      <input name="java.lang.String arg0"/>
+    </operation>
+    <operation name="readInput"/>
+  </services>
+  <services xsi:type="type:FunctionalService" name="tutorial.diva.cas.INotifier"/>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.ui">
+    <port xsi:type="type:Port" name="ui" lower="1" upper="-1" service="//@services.1" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="tutorial.diva.cas.telephony">
+    <port xsi:type="type:Port" name="telephony" lower="1" upper="1" service="//@services.2" role="server"/>
+    <port xsi:type="type:Port" name="addressDB" lower="1" upper="1" service="//@services.3" role="client"/>
+    <port xsi:type="type:Port" name="notifier" lower="0" upper="1" service="//@services.4" role="client"/>
+  </types>
+</art:System>
