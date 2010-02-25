@@ -20,19 +20,26 @@ public class CanvasUI extends JPanel {
 
 	protected ArrayList<ShapeUI> shapesUI;
 	
+	protected EventManagerWrapper eventManager;
 	
 	
-	public CanvasUI() {
+
+	public CanvasUI(EventManagerWrapper emw) {
 		super();
 		
+		eventManager = emw;
 		shapesUI  = new ArrayList<ShapeUI>();
 		setPreferredSize(new Dimension(900, 500));
 		setFocusable(true);
 		
-		EventManagerWrapper.MANAGER.attachTo(this);
+		eventManager.attachTo(this);
 	}
 
 
+	public EventManagerWrapper getEventManager() {
+		return eventManager;
+	}
+	
 	
 	public ShapeUI getViewAt(Point2D point) {
 		if(point==null)

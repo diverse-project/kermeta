@@ -37,10 +37,6 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 //	
 //	public static final int ID_KB 	 = 1;
 	
-	/** The EventManager singleton. */
-	public static final EventManagerWrapper MANAGER = new EventManagerWrapper();
-	
-	
 //	protected Vector<EventHandler> handlers;
 	
 	
@@ -64,8 +60,9 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	 * @return The Kermeta EventManager.
 	 */
 	public static RuntimeObject initialise(RuntimeObject self, RuntimeObject dispatcherRo) {
-		MANAGER.dispatcher = (DispatcherWrapper) dispatcherRo.getUserData();
-		self.setUserData(MANAGER);
+		EventManagerWrapper emw = new EventManagerWrapper();
+		emw.dispatcher 			= (DispatcherWrapper) dispatcherRo.getUserData();
+		self.setUserData(emw);
 		
 		return self;
 	}
@@ -92,9 +89,10 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	 */
 	public static RuntimeObject getTopEvent(RuntimeObject self) {
 		// An instance of the Kermeta class Event is created.
+		EventManagerWrapper emw = (EventManagerWrapper) self.getUserData();
 		RuntimeObject ro = self.getFactory().createObjectFromClassName("kermeta::ki::malai::interaction::event::Event");
 		// The next Java Event is encapsulating into the Kermeta Event.
-		ro.setUserData(MANAGER.getTopEvent());
+		ro.setUserData(emw.getTopEvent());
 		
 		return ro;
 	}

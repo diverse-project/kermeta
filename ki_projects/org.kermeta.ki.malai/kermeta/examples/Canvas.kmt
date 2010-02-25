@@ -27,17 +27,15 @@ class Main
 {
 	operation main() : Void is do
 		var cui : CanvasUIWrapper init CanvasUIWrapper.new
-		
-		
-		extern org::kermeta::ki::malai::examples::canvas::CanvasExample.initialize(cui)
-		
 		var eventManager : EventManager init EventManager.new
-		var dispatcher : SingleDisptacher init SingleDisptacher.new
-
+		var dispatcher : ListDisptacher init ListDisptacher.new
+		
 		dispatcher.initialise
 		eventManager.initialise(dispatcher)
+		dispatcher.processes.add(eventManager)
 		
-		dispatcher.process := eventManager
+		extern org::kermeta::ki::malai::examples::canvas::CanvasExample.initialize(cui, eventManager)
+		
 		dispatcher.run
 	end
 }
