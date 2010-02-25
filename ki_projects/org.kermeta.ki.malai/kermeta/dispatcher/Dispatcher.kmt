@@ -89,7 +89,7 @@ class SingleDisptacher inherits AbstractDispatcher
 /**
 	Defines a dispatcher that manages several processes.
 */
-class ListDisptacher inherits AbstractDispatcher
+class ListDispatcher inherits AbstractDispatcher
 {
 	/** The processes managed by the dispatcher. */
 	reference processes : Dispatchable[0..*]

@@ -28,7 +28,7 @@ class Main
 	operation main() : Void is do
 		var cui : CanvasUIWrapper init CanvasUIWrapper.new
 		var eventManager : EventManager init EventManager.new
-		var dispatcher : ListDisptacher init ListDisptacher.new
+		var dispatcher : ListDispatcher init ListDispatcher.new
 		
 		dispatcher.initialise
 		eventManager.initialise(dispatcher)
