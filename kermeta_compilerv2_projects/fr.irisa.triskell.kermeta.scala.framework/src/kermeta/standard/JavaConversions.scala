@@ -99,7 +99,10 @@ object JavaConversions {
 	
 	def existsCpl(f : A,A:A=>Boolean) :Boolean={return true}
 	def isNotEmpty() :java.lang.Boolean={return !(value.size==0)}
-	def detect(detector : A=> Boolean) :A={return this.select(e=> detector(e)).get(0)}
+	def detect(detector : A=> Boolean) :A={
+		val res = this.select(e=> detector(e))
+		if(res != null && res.size>0) { return res.get(0)} else { return null.asInstanceOf[A] }
+	}
 	//def iterator() :java.laIterator[A]={return value.iterator}
 	/*TODO*/def includesAll(elements : Collection[A]) :Boolean={return true}
 	def select(selector : A=> scala.Boolean) :java.util.List[A]={
@@ -192,7 +195,10 @@ object JavaConversions {
 	
 	def existsCpl(f : A,A:A=>Boolean) :Boolean={return true}
 	def isNotEmpty() :java.lang.Boolean={return !(value.size==0)}
-	def detect(detector : A=> Boolean) :A={return this.select(e=> detector(e)).get(0)}
+	def detect(detector : A=> Boolean) :A={
+		val res = this.select(e=> detector(e))
+		if(res != null && res.size>0) { return res.get(0)} else { return null.asInstanceOf[A] }
+	}
 	//def iterator() :java.laIterator[A]={return value.iterator}
 	/*TODO*/def includesAll(elements : Collection[A]) :Boolean={return true}
 	def select(selector : A=> scala.Boolean) :java.util.List[A]={
