@@ -21,7 +21,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.smartadapters.core.SmartAdapters4DiVAPackage;
+import org.smartadapters.core.CorePackage;
 
 /**
  * This is the item provider adapter for a {@link org.smartadapters.core.makeUnique} object.
@@ -76,7 +76,7 @@ public class makeUniqueItemProvider
 				 getResourceLocator(),
 				 getString("_UI_makeUnique_element_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_makeUnique_element_feature", "_UI_makeUnique_type"),
-				 SmartAdapters4DiVAPackage.Literals.MAKE_UNIQUE__ELEMENT,
+				 CorePackage.Literals.MAKE_UNIQUE__ELEMENT,
 				 true,
 				 false,
 				 true,

@@ -23,7 +23,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.smartadapters.core.SmartAdapters4DiVAPackage;
+import org.smartadapters.core.CorePackage;
 import org.smartadapters.core.cloneAdaptation;
 import org.smartadapters.core.uniqueType;
 
@@ -80,7 +80,7 @@ public class cloneAdaptationItemProvider
 				 getResourceLocator(),
 				 getString("_UI_cloneAdaptation_isUnique_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_cloneAdaptation_isUnique_feature", "_UI_cloneAdaptation_type"),
-				 SmartAdapters4DiVAPackage.Literals.CLONE_ADAPTATION__IS_UNIQUE,
+				 CorePackage.Literals.CLONE_ADAPTATION__IS_UNIQUE,
 				 true,
 				 false,
 				 false,
@@ -116,7 +116,7 @@ public class cloneAdaptationItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(cloneAdaptation.class)) {
-			case SmartAdapters4DiVAPackage.CLONE_ADAPTATION__IS_UNIQUE:
+			case CorePackage.CLONE_ADAPTATION__IS_UNIQUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

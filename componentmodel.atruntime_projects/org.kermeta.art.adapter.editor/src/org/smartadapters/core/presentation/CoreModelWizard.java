@@ -73,8 +73,8 @@ import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ISetSelectionTarget;
 
-import org.smartadapters.core.SmartAdapters4DiVAFactory;
-import org.smartadapters.core.SmartAdapters4DiVAPackage;
+import org.smartadapters.core.CoreFactory;
+import org.smartadapters.core.CorePackage;
 import org.smartadapters.core.provider.Runtime_AOM_Framework1EditPlugin;
 
 
@@ -95,7 +95,7 @@ import org.eclipse.ui.PartInitException;
  * <!-- end-user-doc -->
  * @generated
  */
-public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard {
+public class CoreModelWizard extends Wizard implements INewWizard {
 	/**
 	 * The supported extensions for created files.
 	 * <!-- begin-user-doc -->
@@ -103,7 +103,7 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 	 * @generated
 	 */
 	public static final List<String> FILE_EXTENSIONS =
-		Collections.unmodifiableList(Arrays.asList(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_SmartAdapters4DiVAEditorFilenameExtensions").split("\\s*,\\s*")));
+		Collections.unmodifiableList(Arrays.asList(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_CoreEditorFilenameExtensions").split("\\s*,\\s*")));
 
 	/**
 	 * A formatted list of supported file extensions, suitable for display.
@@ -112,7 +112,7 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 	 * @generated
 	 */
 	public static final String FORMATTED_FILE_EXTENSIONS =
-		Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_SmartAdapters4DiVAEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
+		Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_CoreEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
 
 	/**
 	 * This caches an instance of the model package.
@@ -120,7 +120,7 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SmartAdapters4DiVAPackage smartAdapters4DiVAPackage = SmartAdapters4DiVAPackage.eINSTANCE;
+	protected CorePackage corePackage = CorePackage.eINSTANCE;
 
 	/**
 	 * This caches an instance of the model factory.
@@ -128,7 +128,7 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SmartAdapters4DiVAFactory smartAdapters4DiVAFactory = smartAdapters4DiVAPackage.getSmartAdapters4DiVAFactory();
+	protected CoreFactory coreFactory = corePackage.getCoreFactory();
 
 	/**
 	 * This is the file creation page.
@@ -136,7 +136,7 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SmartAdapters4DiVAModelWizardNewFileCreationPage newFileCreationPage;
+	protected CoreModelWizardNewFileCreationPage newFileCreationPage;
 
 	/**
 	 * This is the initial object creation page.
@@ -144,7 +144,7 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SmartAdapters4DiVAModelWizardInitialObjectCreationPage initialObjectCreationPage;
+	protected CoreModelWizardInitialObjectCreationPage initialObjectCreationPage;
 
 	/**
 	 * Remember the selection during initialization for populating the default container.
@@ -180,7 +180,7 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 		this.workbench = workbench;
 		this.selection = selection;
 		setWindowTitle(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_Wizard_label"));
-		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getImage("full/wizban/NewSmartAdapters4DiVA")));
+		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getImage("full/wizban/NewCore")));
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 	protected Collection<String> getInitialObjectNames() {
 		if (initialObjectNames == null) {
 			initialObjectNames = new ArrayList<String>();
-			for (EClassifier eClassifier : smartAdapters4DiVAPackage.getEClassifiers()) {
+			for (EClassifier eClassifier : corePackage.getEClassifiers()) {
 				if (eClassifier instanceof EClass) {
 					EClass eClass = (EClass)eClassifier;
 					if (!eClass.isAbstract()) {
@@ -212,8 +212,8 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 	 * @generated
 	 */
 	protected EObject createInitialModel() {
-		EClass eClass = (EClass)smartAdapters4DiVAPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
-		EObject rootObject = smartAdapters4DiVAFactory.create(eClass);
+		EClass eClass = (EClass)corePackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
+		EObject rootObject = coreFactory.create(eClass);
 		return rootObject;
 	}
 
@@ -314,14 +314,14 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public class SmartAdapters4DiVAModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
+	public class CoreModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
 		/**
 		 * Pass in the selection.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public SmartAdapters4DiVAModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
+		public CoreModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
 			super(pageId, selection);
 		}
 
@@ -361,7 +361,7 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public class SmartAdapters4DiVAModelWizardInitialObjectCreationPage extends WizardPage {
+	public class CoreModelWizardInitialObjectCreationPage extends WizardPage {
 		/**
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -389,7 +389,7 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public SmartAdapters4DiVAModelWizardInitialObjectCreationPage(String pageId) {
+		public CoreModelWizardInitialObjectCreationPage(String pageId) {
 			super(pageId);
 		}
 
@@ -399,7 +399,8 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 		 * @generated
 		 */
 		public void createControl(Composite parent) {
-			Composite composite = new Composite(parent, SWT.NONE); {
+			Composite composite = new Composite(parent, SWT.NONE);
+			{
 				GridLayout layout = new GridLayout();
 				layout.numColumns = 1;
 				layout.verticalSpacing = 12;
@@ -573,10 +574,10 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 	public void addPages() {
 		// Create a page, set the title, and the initial model file name.
 		//
-		newFileCreationPage = new SmartAdapters4DiVAModelWizardNewFileCreationPage("Whatever", selection);
-		newFileCreationPage.setTitle(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_SmartAdapters4DiVAModelWizard_label"));
-		newFileCreationPage.setDescription(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_SmartAdapters4DiVAModelWizard_description"));
-		newFileCreationPage.setFileName(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_SmartAdapters4DiVAEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
+		newFileCreationPage = new CoreModelWizardNewFileCreationPage("Whatever", selection);
+		newFileCreationPage.setTitle(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_CoreModelWizard_label"));
+		newFileCreationPage.setDescription(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_CoreModelWizard_description"));
+		newFileCreationPage.setFileName(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_CoreEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -602,7 +603,7 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 
 					// Make up a unique new name here.
 					//
-					String defaultModelBaseFilename = Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_SmartAdapters4DiVAEditorFilenameDefaultBase");
+					String defaultModelBaseFilename = Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_CoreEditorFilenameDefaultBase");
 					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
@@ -612,8 +613,8 @@ public class SmartAdapters4DiVAModelWizard extends Wizard implements INewWizard 
 				}
 			}
 		}
-		initialObjectCreationPage = new SmartAdapters4DiVAModelWizardInitialObjectCreationPage("Whatever2");
-		initialObjectCreationPage.setTitle(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_SmartAdapters4DiVAModelWizard_label"));
+		initialObjectCreationPage = new CoreModelWizardInitialObjectCreationPage("Whatever2");
+		initialObjectCreationPage.setTitle(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_CoreModelWizard_label"));
 		initialObjectCreationPage.setDescription(Runtime_AOM_Framework1EditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
 		addPage(initialObjectCreationPage);
 	}

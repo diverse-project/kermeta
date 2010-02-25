@@ -28,7 +28,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.smartadapters.core.Aspect;
-import org.smartadapters.core.SmartAdapters4DiVAPackage;
+import org.smartadapters.core.CorePackage;
 
 import patternframework.PatternframeworkFactory;
 
@@ -85,7 +85,7 @@ public class AspectItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Aspect_persistent_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Aspect_persistent_feature", "_UI_Aspect_type"),
-				 SmartAdapters4DiVAPackage.Literals.ASPECT__PERSISTENT,
+				 CorePackage.Literals.ASPECT__PERSISTENT,
 				 true,
 				 false,
 				 true,
@@ -106,8 +106,8 @@ public class AspectItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SmartAdapters4DiVAPackage.Literals.ASPECT__TEMPLATE);
-			childrenFeatures.add(SmartAdapters4DiVAPackage.Literals.ASPECT__STRUCTURE);
+			childrenFeatures.add(CorePackage.Literals.ASPECT__TEMPLATE);
+			childrenFeatures.add(CorePackage.Literals.ASPECT__STRUCTURE);
 		}
 		return childrenFeatures;
 	}
@@ -159,8 +159,8 @@ public class AspectItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Aspect.class)) {
-			case SmartAdapters4DiVAPackage.ASPECT__TEMPLATE:
-			case SmartAdapters4DiVAPackage.ASPECT__STRUCTURE:
+			case CorePackage.ASPECT__TEMPLATE:
+			case CorePackage.ASPECT__STRUCTURE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -180,12 +180,12 @@ public class AspectItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SmartAdapters4DiVAPackage.Literals.ASPECT__TEMPLATE,
+				(CorePackage.Literals.ASPECT__TEMPLATE,
 				 PatternframeworkFactory.eINSTANCE.createModelPattern()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SmartAdapters4DiVAPackage.Literals.ASPECT__STRUCTURE,
+				(CorePackage.Literals.ASPECT__STRUCTURE,
 				 PatternframeworkFactory.eINSTANCE.createPModel()));
 	}
 

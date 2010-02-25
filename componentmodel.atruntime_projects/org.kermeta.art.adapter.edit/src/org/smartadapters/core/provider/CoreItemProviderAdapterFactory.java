@@ -25,7 +25,7 @@ import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.smartadapters.core.util.SmartAdapters4DiVAAdapterFactory;
+import org.smartadapters.core.util.CoreAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -36,7 +36,7 @@ import org.smartadapters.core.util.SmartAdapters4DiVAAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class SmartAdapters4DiVAItemProviderAdapterFactory extends SmartAdapters4DiVAAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public class SmartAdapters4DiVAItemProviderAdapterFactory extends SmartAdapters4
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SmartAdapters4DiVAItemProviderAdapterFactory() {
+	public CoreItemProviderAdapterFactory() {
 		supportedTypes.add(IEditingDomainItemProvider.class);
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
