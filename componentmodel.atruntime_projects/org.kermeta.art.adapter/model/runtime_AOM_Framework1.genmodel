@@ -5,12 +5,9 @@
     modelPluginID="org.kermeta.art.adapter" modelName="Runtime_AOM_Framework1" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.genmodel#//pattern ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.genmodel#//patternframework">
   <foreignModel>runtime_AOM_Framework1.ecore</foreignModel>
-  <genPackages prefix="Org" disposableProviderFactory="true" generateModelWizard="false"
-      ecorePackage="runtime_AOM_Framework1.ecore#/">
-    <nestedGenPackages prefix="Smartadapters" disposableProviderFactory="true" generateModelWizard="false"
-        fileExtensions="smART" ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters">
-      <nestedGenPackages prefix="Core" disposableProviderFactory="true" fileExtensions="smART"
-          ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters/core">
+  <genPackages prefix="Org" disposableProviderFactory="true" ecorePackage="runtime_AOM_Framework1.ecore#/">
+    <nestedGenPackages prefix="Smartadapters" disposableProviderFactory="true" ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters">
+      <nestedGenPackages prefix="Core" disposableProviderFactory="true" ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters/core">
         <genEnums typeSafeEnumCompatible="false" ecoreEnum="runtime_AOM_Framework1.ecore#//smartadapters/core/uniqueType">
           <genEnumLiterals ecoreEnumLiteral="runtime_AOM_Framework1.ecore#//smartadapters/core/uniqueType/unique"/>
           <genEnumLiterals ecoreEnumLiteral="runtime_AOM_Framework1.ecore#//smartadapters/core/uniqueType/non_unique"/>
@@ -42,8 +39,7 @@
           <genFeatures notify="false" createChild="false" propertySortChoices="true"
               ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/makeUnique/element"/>
         </genClasses>
-        <nestedGenPackages prefix="Adaptations" disposableProviderFactory="true" generateModelWizard="false"
-            ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations">
+        <nestedGenPackages prefix="Adaptations" disposableProviderFactory="true" ecorePackage="runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations">
           <genClasses ecoreClass="runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeSystem">
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
                 ecoreFeature="ecore:EReference runtime_AOM_Framework1.ecore#//smartadapters/core/adaptations/SetruntimeSystem/SystemToSet"/>

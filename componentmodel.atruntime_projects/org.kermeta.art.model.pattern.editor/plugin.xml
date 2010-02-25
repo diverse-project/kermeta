@@ -17,7 +17,7 @@
       <wizard
             id="pattern.art.presentation.ArtPatternModelWizardID"
             name="%_UI_ArtPatternModelWizard_label"
-            class="pattern.art.presentation.ArtPatternModelWizard"
+            class="pattern.art.presentation.ArtModelWizard"
             category="org.eclipse.emf.ecore.Wizard.category.ID"
             icon="icons/full/obj16/ArtPatternModelFile.gif">
          <description>%_UI_ArtPatternModelWizard_description</description>
@@ -31,8 +31,8 @@
             name="%_UI_ArtPatternEditor_label"
             icon="icons/full/obj16/ArtPatternModelFile.gif"
             extensions="artP"
-            class="pattern.art.presentation.ArtPatternEditor"
-            contributorClass="pattern.art.presentation.ArtPatternActionBarContributor">
+            class="pattern.art.presentation.ArtEditor"
+            contributorClass="pattern.art.presentation.ArtActionBarContributor">
       </editor>
    </extension>
 

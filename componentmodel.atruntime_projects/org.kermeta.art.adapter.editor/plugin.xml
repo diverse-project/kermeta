@@ -17,7 +17,7 @@
       <wizard
             id="org.smartadapters.core.presentation.SmartAdapters4DiVAModelWizardID"
             name="%_UI_SmartAdapters4DiVAModelWizard_label"
-            class="org.smartadapters.core.presentation.SmartAdapters4DiVAModelWizard"
+            class="org.smartadapters.core.presentation.CoreModelWizard"
             category="org.eclipse.emf.ecore.Wizard.category.ID"
             icon="icons/full/obj16/SmartAdapters4DiVAModelFile.gif">
          <description>%_UI_SmartAdapters4DiVAModelWizard_description</description>
@@ -31,8 +31,8 @@
             name="%_UI_SmartAdapters4DiVAEditor_label"
             icon="icons/full/obj16/SmartAdapters4DiVAModelFile.gif"
             extensions="smART"
-            class="org.smartadapters.core.presentation.SmartAdapters4DiVAEditor"
-            contributorClass="org.smartadapters.core.presentation.SmartAdapters4DiVAActionBarContributor">
+            class="org.smartadapters.core.presentation.CoreEditor"
+            contributorClass="org.smartadapters.core.presentation.CoreActionBarContributor">
       </editor>
    </extension>
 

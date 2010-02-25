@@ -19,7 +19,7 @@ package org.smartadapters.core;
  * </ul>
  * </p>
  *
- * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getcreateAdaptation()
+ * @see org.smartadapters.core.CorePackage#getcreateAdaptation()
  * @model abstract="true"
  * @generated
  */
@@ -36,7 +36,7 @@ public interface createAdaptation extends Adaptation {
 	 * @return the value of the '<em>Is Unique</em>' attribute.
 	 * @see org.smartadapters.core.uniqueType
 	 * @see #setIsUnique(uniqueType)
-	 * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getcreateAdaptation_IsUnique()
+	 * @see org.smartadapters.core.CorePackage#getcreateAdaptation_IsUnique()
 	 * @model annotation="kermeta isComposite='true'"
 	 * @generated
 	 */

@@ -20,7 +20,7 @@ import patternframework.PObject;
  * </ul>
  * </p>
  *
- * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getmakeUnique()
+ * @see org.smartadapters.core.CorePackage#getmakeUnique()
  * @model
  * @generated
  */
@@ -35,7 +35,7 @@ public interface makeUnique extends Adaptation {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Element</em>' reference.
 	 * @see #setElement(PObject)
-	 * @see org.smartadapters.core.SmartAdapters4DiVAPackage#getmakeUnique_Element()
+	 * @see org.smartadapters.core.CorePackage#getmakeUnique_Element()
 	 * @model required="true"
 	 * @generated
 	 */

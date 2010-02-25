@@ -8,7 +8,7 @@ package org.smartadapters.core.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.smartadapters.core.SmartAdapters4DiVAPackage;
+import org.smartadapters.core.CorePackage;
 import org.smartadapters.core.setAdaptation;
 
 /**
@@ -37,7 +37,7 @@ public abstract class setAdaptationImpl extends AdaptationImpl implements setAda
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SmartAdapters4DiVAPackage.Literals.SET_ADAPTATION;
+		return CorePackage.Literals.SET_ADAPTATION;
 	}
 
 } //setAdaptationImpl
