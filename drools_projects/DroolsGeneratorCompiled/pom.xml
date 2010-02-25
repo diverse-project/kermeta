@@ -1,9 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>fr.irisa.triskell</groupId>
-  <artifactId>kermeta.compilo.output</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <description>kermeta.compilo.output</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fr.irisa.triskell</groupId>
+	<artifactId>kermeta.compiled.DroolsGenerator</artifactId>
+	<packaging>bundle</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>kermeta.compiled.DroolsGenerator</description>
 	<repositories>
 		<repository>
 			<id>thirdparty</id>
@@ -27,31 +29,15 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<!-- <testSourceDirectory>src/test/scala</testSourceDirectory> -->
-		<plugins>
-			<plugin>
-				<groupId>org.scala-tools</groupId>
-				<artifactId>maven-scala-plugin</artifactId>
-				<configuration>
-					<argLine>-Xmx1024m</argLine>
-					<launchers>
-						<launcher>
-							<id>runner.MainRunner</id>
-							<mainClass>runner.MainRunner</mainClass>
-							<!-- jvmArgs are optional -->
-							<jvmArgs>
-								<jvmArg>-Xmx1024m</jvmArg>
-							</jvmArgs>
-						</launcher>
-					</launchers>
-				</configuration>
-			</plugin>
-		</plugins>
 
-	</build>
 	<dependencies>
+		<dependency>
+			<groupId>fr.irisa.triskell</groupId>
+			<artifactId>droolsCompiledScala</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo.output/target/kermeta.compilo.output-0.0.1-SNAPSHOT.jar</systemPath>
+		</dependency>
 		<dependency>
 			<groupId>org.scala-lang</groupId>
 			<artifactId>scala-library</artifactId>
@@ -101,7 +87,7 @@
 			<artifactId>art-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>system</scope>
-			<systemPath>/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo/outputclasspathAdditionalLib/org.kermeta.art.model_1.1.1.jar</systemPath>
+			<systemPath>/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo/outputclasspathAdditionalLib/org.kermeta.art.model_1.0.0.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>fr.irisa.triskell</groupId>
@@ -111,6 +97,55 @@
 			<systemPath>/home/barais/workspaces/kermetaCompilerRuntime2/fr.irisa.triskell.kermeta.scala.compilo/outputclasspathAdditionalLib/org.kermeta.art.model.pattern_1.0.0.jar</systemPath>
 		</dependency>
 	</dependencies>
+
 	
 	
+
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.scala-tools</groupId>
+				<artifactId>maven-scala-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+
+				<configuration>
+
+					<instructions>
+						<Bundle-ClassPath>.</Bundle-ClassPath>
+
+						<Import-Package>
+						*
+						</Import-Package>
+
+						<Private-Package>
+							!bin.*,*
+						</Private-Package>
+						<!--<DynamicImport-Package>*</DynamicImport-Package>-->
+						<Export-Package></Export-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<distributionManagement>
+
+		<snapshotRepository>
+			<id>nexus</id>
+
+			<url>
+				http://tipimouss.irisa.fr:8081/nexus/content/repositories/snapshots
+			</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 </project>
