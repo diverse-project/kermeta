@@ -1,0 +1,105 @@
+/*
+ * Creation : February 22, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::interaction;
+
+
+require kermeta
+require "StateMachine.kmt"
+require "InteractionHandler.kmt"
+require "../picking/Picker.kmt"
+require "../picking/Pickable.kmt"
+
+using kermeta::ki::malai::picking
+using kermeta::standard
+
+
+abstract class Interaction inherits StateMachine
+{
+	reference handlers : InteractionHandler[0..*]
+	
+	reference picker : Picker
+	
+	reference pickable : Pickable
+	
+	
+/*	method initialise(pickable : Pickable, picker : Picker) : Void is do
+		self.pickable := pickable
+		self.picker	  := picker
+		
+	//	self.eventManager.handlers.add(self) //TODO
+	end
+*/
+	
+	method matches(obj : Object) : Boolean is do
+		result := if(obj.isVoid) then false 
+				else if(picker.isVoid) 
+					then pickable==obj else picker==obj or picker.contains(obj)
+					end 
+				end
+	end
+	
+
+	/**
+	 * Notifies handlers that the interaction starts.
+	 */
+	operation notifyHandlersOnStart() : Void is do
+		do
+			handlers.each{handler | handler.interactionStarts(self)}
+		rescue(ex : kermeta::exceptions::Exception)
+			notifyHandlersOnAborting()
+			raise ex
+		end
+	end
+	
+
+	
+	/**
+	 * Notifies handlers that the interaction updates.
+	 */
+	operation notifyHandlersOnUpdate() : Void is do
+		do
+			handlers.each{handler | handler.interactionUpdates(self)}
+		rescue(ex : kermeta::exceptions::Exception)
+			notifyHandlersOnAborting()
+			raise ex
+		end
+	end
+	
+	
+	
+	/**
+	 * Notifies handlers that the interaction stops.
+	 */
+	operation notifyHandlersOnStop() : Void is do
+		do
+			handlers.each{handler | handler.interactionStops(self)}
+		rescue(ex : kermeta::exceptions::Exception)
+			notifyHandlersOnAborting()
+			raise ex
+		end
+	end
+	
+	
+	
+	/**
+	 * Notifies handlers that the interaction stops.
+	 */
+	operation notifyHandlersOnAborting() : Void is do
+		handlers.each{handler | handler.interactionAborts(self)}
+	end
+
+	
+	
+//	operation getPickableAt(point : Point2D) : Pickable is do
+		//if(picker.isVoid) then //TODO
+//			result := pickable.isVoid or pickable.contains(new Point((int)point.getX(), (int)point.getY())) ? null : pickable;
+		
+//		result := if(picker.isVoid) then void else picker.getPickableAt(point) end
+//	end
+}

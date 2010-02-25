@@ -1,0 +1,33 @@
+/*
+ * Creation : February 23, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::interaction;
+
+
+require kermeta
+
+using kermeta::standard
+
+
+abstract class EventHandler {
+	operation onPressure(button : Integer, px : Real, py : Real, idHID : Integer) : Void is abstract
+	
+	operation onRelease(button : Integer, px : Real, py : Real, idHID : Integer) : Void is abstract
+	
+	operation onMove(button : Integer, px : Real, py : Real, pressed : Boolean, idHID : Integer) : Void is abstract
+	
+	operation onKeyPressure(key : Integer, idHID : Integer) : Void is abstract
+	
+	operation onKeyRelease(key : Integer, idHID : Integer) : Void is abstract
+	
+	operation onButtonPressed(buttonName : String) : Void is abstract
+	
+	operation onTextChanged(textCompName : String, TextValue : String) : Void is abstract
+	
+	operation matches(object : Object) : Boolean is abstract
+}

@@ -1,0 +1,115 @@
+/*
+ * Creation : February 23, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+package kermeta::ki::malai::interaction;
+
+
+require kermeta
+require "StateMachine.kmt"
+require "Interaction.kmt"
+require "transition/Transition.kmt"
+
+using kermeta::standard
+
+
+abstract class State
+{
+	attribute name : String
+	
+	attribute transitions : Transition[0..*]
+	
+	reference stateMachine : StateMachine
+	
+	
+	operation initialise(name : String) : Void is do
+		self.name := name
+	end
+	
+	
+	
+	/**
+	 * Throws an exception when the state machine must stop. 
+	 */
+	operation onIngoing() : Void is do end
+	
+	
+	/**
+	 * Throws an exception when the state machine must stop.
+	 */
+	operation onOutgoing() : Void is do end
+	
+	
+	
+	operation addTransition(trans : Transition) : Void is do
+		if(trans!=void) then
+			transitions.add(trans)
+		end
+	end
+
+
+	method toString() : String is do
+		result := super + "[" + name + ", "
+		
+		transitions.each{t | result := result + t.toString + ", " }
+		
+		result := result + "]"
+	end
+}
+
+
+
+
+
+
+
+class IntermediaryState inherits State {
+	method onIngoing() : Void is do
+		if(stateMachine.isKindOf(Interaction)) then
+			stateMachine.asType(Interaction).notifyHandlersOnUpdate()
+		end
+	end
+}
+
+
+
+
+
+class AbortingState inherits State {
+	method onIngoing() : Void is do
+		if(stateMachine.isKindOf(Interaction)) then
+			stateMachine.asType(Interaction).notifyHandlersOnAborting()
+		end
+		stateMachine.reinit()
+	end
+}
+
+
+
+
+class InitState inherits State {
+	method initialise(name : String) : Void is do
+		super("Init")
+	end
+	
+	
+	method onOutgoing() : Void is do
+		if(stateMachine.isKindOf(Interaction)) then
+			stateMachine.asType(Interaction).notifyHandlersOnStart()
+		end
+	end
+}
+
+
+
+class TerminalState inherits State {
+	method onIngoing() : Void is do
+		if(stateMachine.isKindOf(Interaction)) then
+			stateMachine.asType(Interaction).notifyHandlersOnStop()
+		end
+		stateMachine.reinit()
+	end
+}

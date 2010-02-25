@@ -1,0 +1,29 @@
+/*
+ * Creation : February 23, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::picking;
+
+
+require kermeta
+require "Pickable.kmt"
+require "../graphics/Point.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::graphics
+
+
+abstract class Picker
+{
+	operation getPickableAt(px : Real, py : Real) : Pickable is abstract
+	
+	operation getPickerAt(px : Real, py : Real) : Picker is abstract
+	
+	operation getRelativePoint(px : Real, py : Real, obj : Object) : Point is abstract
+	
+	operation contains(obj : Object) : Boolean is abstract
+}

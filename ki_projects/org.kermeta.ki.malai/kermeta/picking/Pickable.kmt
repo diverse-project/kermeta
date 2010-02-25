@@ -1,0 +1,21 @@
+/*
+ * Creation : February 23, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::picking;
+
+
+require kermeta
+
+using kermeta::standard
+
+
+
+abstract class Pickable
+{
+	operation contains(px : Real, py : Real) : Boolean is abstract
+}

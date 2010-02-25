@@ -1,0 +1,26 @@
+/*
+ * Creation : February 22, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::interaction;
+
+
+require kermeta
+require "./Interaction.kmt"
+
+
+
+abstract class InteractionHandler
+{
+	operation interactionStarts(ai : Interaction) : Void is abstract
+
+	operation interactionUpdates(ai : Interaction) : Void is abstract
+
+	operation interactionStops(ai : Interaction) : Void is abstract
+
+	operation interactionAborts(ai : Interaction) : Void is abstract
+}

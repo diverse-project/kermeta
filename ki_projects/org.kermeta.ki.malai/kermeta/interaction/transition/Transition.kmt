@@ -1,0 +1,177 @@
+/*
+ * Creation : February 22, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+package kermeta::ki::malai::interaction;
+
+
+require kermeta
+require "../State.kmt"
+
+using kermeta::standard
+
+
+abstract class Transition
+{
+	reference inputState : State
+	
+	reference outputState : State
+	
+	
+	operation initialise(inputState : State, outputState : State) : Void is do
+		if(inputState.isVoid or outputState.isVoid) then raise kermeta::exceptions::Exception.new end
+		
+		if(inputState.isKindOf(AbortingState) or inputState.isKindOf(TerminalState)) then
+			var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			ex.message := "Input state cannot be an ending nor an aborting state."
+			raise ex
+		end
+		
+		if(outputState.isKindOf(InitState)) then
+			var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			ex.message := "Onput state cannot be an init state."
+			raise ex
+		end
+		
+		self.inputState  := inputState
+		self.outputState := outputState
+		
+		self.inputState.transitions.add(self)
+	end
+	
+	
+	operation action() : Void is do end
+
+	
+	operation isGuardRespected() : Boolean is do
+		result := true
+	end
+	
+	
+//	operation update(e : EventObject) : Void is abstract//TODO
+
+
+	method toString() : String is do
+		result := super + "[" + inputState.name + ">>" + outputState.name + "]"
+	end
+}
+
+
+
+
+
+
+
+class ButtonPressedTransition inherits Transition {
+
+	reference buttonName : String
+	
+}
+
+
+
+class KeyPressureTransition inherits KeyboardTransition {
+}
+
+
+
+
+class KeyReleaseTransition inherits KeyboardTransition {
+}
+
+
+
+class MoveTransition inherits PointingDeviceTransition {
+	attribute pressed : Boolean
+	
+	method initialise(inputState : State, outputState : State) : Void is do
+		super(inputState, outputState)
+		
+		pressed := false
+	end
+}
+
+
+
+
+abstract class PointingDeviceTransition inherits Transition {
+	attribute px : Real
+	
+	attribute py : Real
+	
+	attribute button : Integer
+	
+	
+	
+	method initialise(inputState : State, outputState : State) : Void is do
+		super(inputState, outputState)
+
+		px := 0.toReal
+		py := 0.toReal
+		button := -1
+	end
+
+	
+	//TODO
+/*	public void update(EventObject e) {
+		if(e!=null && e instanceof MouseEvent) {
+			MouseEvent me = (MouseEvent) e;
+			point  = me.getPoint();
+			button = me.getButton();
+		}
+	}
+*/	
+}
+
+
+
+class PressureTransition inherits PointingDeviceTransition {
+}
+
+
+
+
+class ReleaseTransition inherits PointingDeviceTransition {
+}
+
+
+
+
+class TextChangedTransition inherits Transition {
+	attribute textCompName : String
+	
+	attribute text : String
+	
+	//TODO
+/*	public void update(EventObject e) {
+		if(e!=null && e instanceof ActionEvent && e.getSource() instanceof JTextComponent) {
+			textComp = (JTextComponent) e.getSource();
+			text     = textComp.getText();
+		}
+	}
+*/
+}
+
+
+
+
+
+abstract class KeyboardTransition inherits Transition {
+	attribute key : Integer
+	
+	method initialise(inputState : State, outputState : State) : Void is do
+		super(inputState, outputState)
+		
+		key := -1
+	end
+	
+	//TODO
+/*	public void update(EventObject e) {
+		if(e!=null && e instanceof KeyEvent)
+			key = ((KeyEvent)e).getKeyCode();
+	}
+*/
+}

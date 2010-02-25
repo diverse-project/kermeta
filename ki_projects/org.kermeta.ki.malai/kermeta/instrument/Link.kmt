@@ -1,0 +1,164 @@
+/* $Id:$ 
+ * Creation : February 22, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::instrument;
+
+
+require kermeta
+require "./Instrument.kmt"
+require "../interaction/InteractionHandler.kmt"
+require "../action/Action.kmt"
+require "../action/ActionRegistry.kmt"
+require "../interaction/Interaction.kmt"
+require "../undo/Undoable.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::action
+using kermeta::ki::malai::interaction
+using kermeta::ki::malai::undo
+
+
+
+abstract class Link inherits InteractionHandler
+{
+	/** The source interaction. */
+	attribute interaction : Interaction
+	
+	/** The target action. */
+	attribute action : Action
+	
+	/** The instrument that contains the link. */
+	attribute instrument : Instrument
+	
+	/** Specifies if the action must be execute or update
+	 * on each evolution of the interaction. */
+	attribute execute : Boolean
+	
+	
+
+	
+	/**
+	 * Initialises a link. This constructor must initialise the interaction.
+	 * @param instrument The instrument that contains the link.
+	 * @param exec Specifies if the action must be execute or update on each evolution of the interaction.
+	 */
+	operation initialise(instrument : Instrument, execute : Boolean) : Void is do
+		self.instrument := instrument
+		self.execute    := execute
+	end
+
+
+
+	/**
+	 * Initialises the action of the link. If the attribute 'action' is
+	 * not null, nothing will be done.
+	 * @throws DependencyUnfulfilledException Occurs when the 'necessity' relation between
+	 * the concerned classes is not respected.
+	 */
+	operation createAction() : Void is abstract
+	
+	
+	/**
+	 * Updates the current action.
+	 */
+	operation updateAction() : Void is abstract
+		
+		
+	/**
+	 * @return True if the condition of the link is respected.
+	 */
+	operation isConditionRespected() : Boolean is abstract
+	
+	
+	operation setActivated(activated : Boolean) : Void is do
+		interaction.setActivated(activated)
+	end
+	
+	
+	
+	method interactionUpdates(inter : Interaction) : Void is do
+		if(action!=void and inter==interaction) then
+			if(isConditionRespected) then
+				updateAction
+				
+    			if(execute and action.canDo) then action.doIt end
+    			
+				interimFeedback
+			else
+				action.abort
+				action := void
+			end
+		end
+	end
+	
+	
+	method interactionStops(inter : Interaction) : Void is do
+		if(action!=void and interaction==inter) then
+			if(isConditionRespected) then
+    			if(not execute) then updateAction end
+    			if(action.doIt) then action.done end
+    
+    			if(action.hadEffect) then
+    				if(action.isRegisterable) then
+    					 instrument.actionRegistry.addAction(action)
+    				else instrument.actionRegistry.cancelActions(action)
+    				end
+    			end
+    			
+    			action := void
+			else
+				action.abort()
+				action := void
+			end
+			instrument.interimFeedback
+		end
+	end
+	
+	
+	method interactionStarts(inter : Interaction) : Void is do
+		if(action.isVoid and inter==interaction and instrument.activated) then
+			if(isConditionRespected) then
+				do createAction
+				rescue (e : kermeta::exceptions::Exception) end
+				interimFeedback
+			else
+				var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+				ex.message := "MustAbortStateMachineException"
+				raise ex 
+			end
+		end
+	end
+	
+	
+	method interactionAborts(inter : Interaction) : Void is do
+		if(action!=void and inter==interaction) then
+			action.abort()
+			
+			if(execute) then
+				if(action.isKindOf(Undoable)) then
+					action.asType(Undoable).undo()
+				else
+					var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+					ex.message := "MustAbortStateMachineException: " + action.toString
+					raise ex
+				end
+			end
+			
+			action := void
+			instrument.interimFeedback()
+		end
+	end
+	
+	
+	
+	/**
+	 * Defines the interim feedback of the link. If overridden, the interim
+	 * feedback of its instrument should be define too.
+	 */
+	operation interimFeedback() : Void is do end
+}

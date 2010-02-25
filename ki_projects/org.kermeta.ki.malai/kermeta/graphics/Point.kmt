@@ -1,0 +1,27 @@
+/*
+ * Creation : February 23, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::graphics;
+
+
+require kermeta
+
+using kermeta::standard
+
+class Point
+{
+	attribute px : Real
+	
+	attribute py : Real
+	
+	
+	operation initialise(x : Real, y : Real) : Void is do
+		px := x
+		py := y
+	end
+}
