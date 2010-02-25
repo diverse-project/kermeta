@@ -28,6 +28,9 @@ object Main extends LogAspect {
 	 	  for(a <- args){
 	 	 	  log.debug("Param : "+a)
 	 	  }
+
+
+    
 	  
 
 	  for (i <- 0 until args.length) args(i).replaceAll("\"", "").trim() match {
