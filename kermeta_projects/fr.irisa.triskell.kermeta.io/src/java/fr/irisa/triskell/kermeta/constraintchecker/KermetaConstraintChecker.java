@@ -239,7 +239,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	    		addWarning("An object is assigned to itself.", expression);
 	    }
 	    
-		return genericVisitChildren(expression);
+		return super.visitAssignment(expression);
 	}
 	
 	
