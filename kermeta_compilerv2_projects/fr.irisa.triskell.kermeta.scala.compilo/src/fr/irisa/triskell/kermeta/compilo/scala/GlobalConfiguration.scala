@@ -8,25 +8,44 @@
 
 package fr.irisa.triskell.kermeta.compilo.scala
 
-object GlobalConfiguration { 
-	   
-	
-	/* Package Target For Generated Trait */
-	final var frameworkGeneratedPackageName : String = "fr.irisa.triskell.scala.generated.fw"
-	
-	final var implicitConvTraitName : String = "ImplicitConversion"
-	final var viewDefTraitName : String = "ViewType"
-	final var factoryName : String = "RichFactory"
-	final var outputProject : String = "fr.irisa.triskell.kermeta.scala.compilo.output"
-	final var outputFolder : String = "../"+outputProject+"/src"
-	final var outputBinFolder : String = "../"+outputProject+"/bin"
-	final var scalaPrefix : String = "Scala"
-	final var scalaAspectPrefix : String = "ScalaAspect"
-	final var workspaceURI : String = "/local/hudson_kermeta/jobs/KermetaCompilerV2_TestCase/workspace/"
-	//final var workspaceURI : String = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/"
-	final var pluginURI : String = "/local/hudson_kermeta/jobs/KermetaCompilerV2_TestCase/workspace/"
-	//final var pluginURI : String = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/"
-        final var withRich : Boolean = false
+import java.util.Properties
+import scala.tools.nsc.io.File
+
+object GlobalConfiguration {
+  
+  def loadFromProperties(_props : Properties) : Boolean = {
+    var loadResult = true
+    props = _props
+    //FIRST STEP CHECK VALUES
+    loadResult = loadResult && props.contains("use.default.aspect.uml")
+    loadResult = loadResult && props.contains("use.default.aspect.ecore")
+    loadResult = loadResult && props.contains("use.default.aspect.km")
+    loadResult = loadResult && props.contains("project.group.id")
+    loadResult = loadResult && props.contains("project.artefact.id")
+    if(loadResult){
+      frameworkGeneratedPackageName = "ScalaImplicit."+props.get("project.group.id")+"."+props.get("project.artefact.id")
+      outputProject = if(props.contains("output.target.folder")){ props.get("output.target.folder").toString } else { Util.createTempDirectory.getAbsolutePath }
+      outputFolder = outputProject+File.pathSeparator+"src"
+      outputBinFolder = outputProject+File.pathSeparator+"bin"
+      workspaceURI = if(props.contains("workspace.platform.uri")) { props.get("workspace.platform.uri").toString } else { null }
+      pluginURI = if(props.contains("workspace.plugin.uri")) { props.get("workspace.plugin.uri").toString } else { null }
+    }
+    return loadResult
+  }
+
+  var props : Properties = null
+  var frameworkGeneratedPackageName : String = null
+  var implicitConvTraitName : String = "ImplicitConversion"
+  var viewDefTraitName : String = "ViewType"
+  var factoryName : String = "RichFactory"
+  var outputProject : String = null
+  var outputFolder : String = null
+  var outputBinFolder : String = null
+  var scalaPrefix : String = "Scala"
+  var scalaAspectPrefix : String = "ScalaAspect"
+  var workspaceURI : String = null
+  var pluginURI : String = null
+  var withRich : Boolean = true
 
 } 
  
