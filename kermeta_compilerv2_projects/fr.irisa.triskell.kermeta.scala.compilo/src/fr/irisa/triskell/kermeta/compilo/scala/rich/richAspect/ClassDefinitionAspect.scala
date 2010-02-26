@@ -42,7 +42,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 						
             var packName = kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName)
             if (Util.hasEcoreTag(ty.eContainer.asInstanceOf[Package]) ){
-              packName = packName+"ScalaAspect"
+              packName = GlobalConfiguration.scalaAspectPrefix+"."+packName
             }
             res.append(Util.protectScalaKeyword(packName))
 						
@@ -100,15 +100,17 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
              *///					}else{
             //res.append(" with ")
             var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
+            if (Util.hasEcoreTag(ty)){
+              res.append(GlobalConfiguration.scalaAspectPrefix+".")
+            }
             res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
-            if (Util.hasEcoreTag(ty))
-              res.append("ScalaAspect")
+            
 								
             res.append(".")
             res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
             res.append("Aspect")
             //returnedString =returnedString + ", " +superC.getName;
-//					}
+            //					}
             i=i+1
           })
         res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
@@ -142,11 +144,11 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
       res1.append(" )\n")
       res1.append("checkParamInvariants(invariants)\n")
       /*
-      this.getSuperType.foreach(superC => {
-          res.append("super[")
-          res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
-          res.append("Aspect].checkInvariants\n")
-        })*/
+       this.getSuperType.foreach(superC => {
+       res.append("super[")
+       res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
+       res.append("Aspect].checkInvariants\n")
+       })*/
       //res.append("checkParamInvariants(super.getInvariants)\n")
       res1.append("}\n")
       /* End checkInvariants Generation  */
@@ -167,7 +169,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
               result.addAll(cd.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getAllInvariants)
             }
             
-        }
+          }
         case _ => println(st)
       }
     }
@@ -178,7 +180,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
     if (!Util.hasEcoreTag(this)  && !Util.hasEcoreTag(this.eContainer().asInstanceOf[Object]) || (Util.hasEcoreTag(this) && Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])))
       return kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName());
     else
-      return kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "ScalaAspect."+ this.getName());
+      return "ScalaAspect."+kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName());
   }
 
   def getQualifiedNameKermeta():String ={

@@ -18,9 +18,11 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
         if (this.getTarget.asInstanceOf[TypeLiteral].getTyperef().getType().isInstanceOf[ParameterizedType]){
 				
           var ty : TypeDefinition =this.getTarget.asInstanceOf[TypeLiteral].getTyperef().getType().asInstanceOf[ParameterizedType].getTypeDefinition()
+          if (Util.hasEcoreTag(ty.eContainer.asInstanceOf[Package])){
+            res.append(GlobalConfiguration.scalaAspectPrefix+".")
+          }
           res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
-          if (Util.hasEcoreTag(ty.eContainer.asInstanceOf[Package]))
-            res.append("ScalaAspect")
+
           res.append(".RichFactory.create")
           res.append(ty.getName())
           var ty1 : ParameterizedType = this.getTarget.asInstanceOf[TypeLiteral].getTyperef().getType().asInstanceOf[ParameterizedType]
