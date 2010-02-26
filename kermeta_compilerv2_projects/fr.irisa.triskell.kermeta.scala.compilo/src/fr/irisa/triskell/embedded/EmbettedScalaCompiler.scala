@@ -28,7 +28,7 @@ object EmbettedScalaCompiler extends LogAspect {
     var classpath : StringBuilder = new StringBuilder("."+File.pathSeparator)
     for(path <- jars) { classpath.append(path+File.pathSeparator) }
 		
-    var compilParams = List("-optimise","-d",outputPATH,"-classpath",classpath.toString) ++ listSrcFiles
+		var compilParams = List("-nowarn","-encoding","UTF8","-g:none","-optimise","-d",outputPATH,"-classpath",classpath.toString) ++ listSrcFiles
 		
     /* Compilation step */
     if(fsc){
