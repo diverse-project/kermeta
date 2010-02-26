@@ -33,11 +33,11 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
       res.append("\n{\n\tvar c : java.lang.reflect.Constructor[_] = classOf["+impName+"].getDeclaredConstructors.first\n")
       res.append("\tc.setAccessible(true);\n")
       res.append("\tvar pack : "+ impName + " =  c.newInstance().asInstanceOf["+ impName + "]\n")
-      res.append("\tpack.setEFactoryInstance(" + packName + "ScalaAspect.RichFactory)\n " )
+      res.append("\tpack.setEFactoryInstance(" +GlobalConfiguration.scalaAspectPrefix+"."+ packName + ".RichFactory)\n " )
       res.append("\tvar f : java.lang.reflect.Field = classOf[org.eclipse.emf.ecore.impl.EPackageImpl].getDeclaredField(\"ecoreFactory\")\n")
       res.append("\tf.setAccessible(true)\n")
       if(packName.equals("org.eclipse.emf.ecore")){
-        res.append("\tf.set(pack, "+ packName + "ScalaAspect.RichFactory)\n")
+        res.append("\tf.set(pack, "+ GlobalConfiguration.scalaAspectPrefix+"."+ packName + ".RichFactory)\n")
       }
       res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put("+Util.protectScalaKeyword(packName) + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
       res.append("\tkermeta.persistence.EcorePackages.getPacks().put("+Util.protectScalaKeyword(packName) + "."+ packNameUpper+"Package.eNS_URI, pack)\n")
@@ -49,7 +49,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
       res.append("var pack : "+Util.protectScalaKeyword(packName+"."+ Util.getPackagePrefix( packNameUpper)+"Package")+" = "+Util.protectScalaKeyword(impName +".init")+"\n")
       res.append("\torg.eclipse.emf.ecore.EPackage.Registry.INSTANCE.put("+Util.protectScalaKeyword(packName + "."+ Util.getPackagePrefix( packNameUpper)+"Package.eNS_URI")+", pack)\n")
       res.append("\tkermeta.persistence.EcorePackages.getPacks().put("+Util.protectScalaKeyword(packName + "."+ Util.getPackagePrefix( packNameUpper)+"Package.eNS_URI")+", pack)\n")
-      res.append("\tpack.setEFactoryInstance("+packName+"ScalaAspect.RichFactory)\n}\n\n")
+      res.append("\tpack.setEFactoryInstance("+GlobalConfiguration.scalaAspectPrefix+"."+packName+".RichFactory)\n}\n\n")
       return res.toString
     }
   }
@@ -89,7 +89,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
     var res :StringBuilder= new StringBuilder
     res.append("package runner \n")
     res.append("import java.io.PrintStream\n")
-    res.append("object MainRunner  extends fr.irisa.triskell.scala.generated.fw.ImplicitConversion{\n")
+    res.append("object MainRunner  extends "+GlobalConfiguration.frameworkGeneratedPackageName+"."+GlobalConfiguration.implicitConvTraitName+"{\n")
     //res.append("def main(args : Array[String]) : Unit = {\n\t" )
     res.append("def init() : Unit = {\n\t" )
     res.append("System.setOut(new PrintStream(\"outputStream\"));\n")
@@ -125,13 +125,13 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		
     res.append("}\n def main(args : Array[String]) : Unit = {\n\t init() \n\t" )
 
-		
-    res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(packageName))
-		
     if (packages.filter{e=>  e.getQualifiedName().equals(packageName)}.size==1)
     {
-      res.append("ScalaAspect")
+      res.append(GlobalConfiguration.scalaAspectPrefix+".")
     }
+    res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(packageName))
+		
+
     res.append(".RichFactory.create"+ className+"."+mainOperation )
 		
     res.append("(")
@@ -154,7 +154,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
     if (actualPackage == null)
       actualPackage=par.getQualifiedName()
     if (Util.hasEcoreTag(par))
-      actualPackage=actualPackage+"ScalaAspect";
+      actualPackage=GlobalConfiguration.scalaAspectPrefix+"."+actualPackage;
 
     if (!(par.getOwnedTypeDefinition.size()==0 || par.getOwnedTypeDefinition.filter(t=> t.isInstanceOf[ClassDefinition]).forall(t=> Util.hasCompilerIgnoreTag(t)) )){
       var factoryDef : StringBuilder =  new StringBuilder
@@ -181,9 +181,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
       //viewDef append "}\n"
       factoryDef append "}\n"
       Util.generateFile(actualPackage, GlobalConfiguration.factoryName, factoryDef.toString())
-      if (GlobalConfiguration.withRich){
-        Util.generateFile(actualPackage, GlobalConfiguration.viewDefTraitName, viewDef.toString())
-      }
+      Util.generateFile(actualPackage, GlobalConfiguration.viewDefTraitName, viewDef.toString())
       viewDef.clear
       factoryDef.clear
     }
@@ -202,7 +200,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
       genpackageName.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[PackageAspect].getQualifiedName))
       packageName.append(genpackageName.toString)
       if (Util.hasEcoreTag(par.eContainer().asInstanceOf[Package])){
-        packageName.append("ScalaAspect")
+        packageName.insert(0,GlobalConfiguration.scalaAspectPrefix+".")
       }
       genpackageName.append(".")
 				
@@ -212,17 +210,14 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 					
 				
       var param : StringBuilder = new StringBuilder
-      var mixinDef: StringBuilder = new StringBuilder
-
       par.generateParamerterClass(param);
       if (Util.hasEcoreTag(par)){
         var  implName:String = Util.getImplPackageSuffix(packageName.toString)
-        viewDef.append(" class Rich"+par.getName() + " extends ")
-        mixinDef.append( Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+implName.substring(1,implName.size) + par.getName()+"Impl"))+" with "+packageName.toString +"."+par.getName+"Aspect ")
+        viewDef.append(" class Rich"+par.getName()+" extends "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+implName.substring(1,implName.size) + par.getName()+"Impl"))+" with "+packageName.toString +"."+par.getName+"Aspect ")
         if (!par.eContainer.asInstanceOf[NamedElement].getQualifiedNameCompilo.contains("kermeta")){//!IsObjectClassChildren(par)){
-          mixinDef.append("with " + "fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation")
+          viewDef.append("with " + "fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation")
         }
-	viewDef.append(mixinDef.toString)
+					
         viewDef.append("\n")
         implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName()))+") = v.asInstanceOf["+ Util.protectScalaKeyword(packageName.toString)+"."+ par.getName+"Aspect]\n"
         implicitDef append " implicit def richAspect(v : "+ packageName.toString+"."+par.getName()+"Aspect) = v.asInstanceOf["+ Util.protectScalaKeyword(par.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo+ Util.getImplPackageSuffix(packageName.toString) + par.getName+"Impl")+"]\n"
@@ -230,9 +225,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
         var cd = getEcoreSuperClass(par)
 					
         //cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo +".impl." + cd.getName +"Impl
-        viewDef.append(" class Rich"+par.getName()+ param.toString +" extends ")
-        mixinDef.append(  cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo +".impl." + cd.getName +"Impl with "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+ param.toString +" with "+packageName.toString +"."+par.getName+"Aspect" + param.toString)
-       viewDef.append(mixinDef.toString + "\n")
+        viewDef.append(" class Rich"+par.getName()+ param.toString +" extends "+cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo +".impl." + cd.getName +"Impl with "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+ param.toString +" with "+packageName.toString +"."+par.getName+"Aspect" + param.toString +" \n")
         implicitDef append " implicit def richAspect" + param.toString + "(v : "+ kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"."+par.getName())+ param.toString +") = v.asInstanceOf["+ packageName.toString+"."+par.getName+"Aspect"+ param.toString +"]\n"
         implicitDef append " implicit def richAspect" + param.toString +"(v : "+ packageName.toString+"."+par.getName()+"Aspect" + param.toString +") = v.asInstanceOf["+ packageName.toString+"."+par.getName+ param.toString +"]\n"
 	
@@ -241,26 +234,11 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
       if (!par.isIsAbstract()){
         if (Util.hasEcoreTag(par)){
           factoryDefClass append " override"
-          factoryDefClass append " def create"+par.getName()+ param.toString +" : "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName())+param.toString)+" = { new "
-          if (GlobalConfiguration.withRich){
-           factoryDefClass append packageName.toString+".Rich"+par.getName + param.toString +" }\n"
-          }
-          else{
-             factoryDefClass append mixinDef.toString + "}\n"
-          }
-
+          factoryDefClass append " def create"+par.getName()+ param.toString +" : "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName())+param.toString)+" = { new "+ packageName.toString+".Rich"+par.getName + param.toString +" }\n"
         }
         else{
-
-          factoryDefClass append " def create"+par.getName()+ param.toString +" : "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"."+par.getName())+param.toString)+" = { new "
-             if (GlobalConfiguration.withRich){
-                factoryDefClass append packageName.toString+".Rich"+par.getName+ param.toString +" }\n"
-             }
-          else{
-             factoryDefClass append mixinDef.toString + "}\n"
-          }
-          }
-
+          factoryDefClass append " def create"+par.getName()+ param.toString +" : "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(packageName.toString+"."+par.getName())+param.toString)+" = { new "+ packageName.toString+".Rich"+par.getName+ param.toString +" }\n"
+        }
       }
     }
   }
