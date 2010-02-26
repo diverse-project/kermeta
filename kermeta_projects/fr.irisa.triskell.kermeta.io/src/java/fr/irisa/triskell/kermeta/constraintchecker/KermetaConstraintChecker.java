@@ -21,8 +21,10 @@ import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.Message;
 import org.kermeta.io.WarningMessage;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.model.KermetaModelHelper;
 
+import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
@@ -36,10 +38,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
-
-import org.kermeta.log4j.util.LogConfigurationHelper;
-
-import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -210,6 +208,41 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 		return super.visitOperation(operation);
 	}
 		
+	
+	@Override
+	public Object visitAssignment(Assignment expression) {
+	    CallExpression targetExp = expression.getTarget();
+	    
+	    // This part checks if a variable, an attribute, etc. is assigned to itself, e.g. self.fooVar := self.fooVar.
+	    // This case only occurs when the target and the value of the expression are of the same type.
+	    if(targetExp.getClass().equals(expression.getValue().getClass())) {
+	    	boolean warning = false;
+	    	
+	    	// If the target and the value are variables and their name are the same, it means that
+	    	// it is a self-assignment (it cannot have two different variables with the same name).
+	    	if(targetExp instanceof CallVariable && targetExp.getName().equals(((CallExpression) expression.getValue()).getName()))
+	    		warning = true;
+	    	else
+	    		// If the target and the value are features, we must check their reference property.
+		    	if(targetExp instanceof CallFeature) {
+		    		// We get the reference properties of the target and the value.
+		    		Property targetProp = ((CallFeature)targetExp).getStaticProperty();
+		    		Property valueProp  = ((CallFeature)expression.getValue()).getStaticProperty();
+		    		
+		    		// If the properties are in fact the same property, it means that it is
+		    		// a self-assignment.
+		    		if(targetProp!=null && valueProp!=null && targetProp==valueProp)
+		    			warning = true;
+		    	}
+	    	
+	    	if(warning)
+	    		addWarning("An object is assigned to itself.", expression);
+	    }
+	    
+		return genericVisitChildren(expression);
+	}
+	
+	
 	
 	/**
 	 * Checked constraints :
