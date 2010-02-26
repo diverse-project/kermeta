@@ -10,7 +10,7 @@ package kermeta::ki::malai::examples;
 
 
 require kermeta
-require "../presentation/AbstractPresentation.kmt"
+require "../../presentation/AbstractPresentation.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::presentation

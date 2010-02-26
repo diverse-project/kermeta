@@ -5,7 +5,7 @@
  * Authors  : 
  *            ablouin
  */
-@mainClass "kermeta::ki::malai::examples::Main"
+@mainClass "kermeta::ki::malai::examples::CanvasLauncher"
 @mainOperation "main"
 
 
@@ -15,15 +15,15 @@ package kermeta::ki::malai::examples;
 require kermeta
 require "ActivePresentation.kmt"
 require "Actions.kmt"
-require "../interaction/event/EventManager.kmt"
-require "../dispatcher/Dispatcher.kmt"
+require "../../interaction/event/EventManager.kmt"
+require "../../dispatcher/Dispatcher.kmt"
 
 using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::dispatcher
 
 
 
-class Main
+class CanvasLauncher
 {
 	operation main() : Void is do
 		var cui : CanvasUIWrapper init CanvasUIWrapper.new

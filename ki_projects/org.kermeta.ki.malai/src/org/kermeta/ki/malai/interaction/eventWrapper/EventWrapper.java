@@ -121,6 +121,145 @@ public class EventWrapper {
 	}
 	
 	
+	
+	
+	/**
+	 * @param self A Kermeta object.
+	 * @return The kermeta String of EventWrapper.MOUSE_WHEEL_MOVED.
+	 */
+	public static RuntimeObject getMouseWheelMovedEventString(RuntimeObject self) {
+		return String.create(EventWrapper.MOUSE_WHEEL_MOVED, self.getFactory());
+	}
+	
+	
+	
+	
+	
+	/**
+	 * @param self A Kermeta object.
+	 * @return The kermeta String of EventWrapper.MOUSE_RELEASED.
+	 */
+	public static RuntimeObject getMouseReleasedEventString(RuntimeObject self) {
+		return String.create(EventWrapper.MOUSE_RELEASED, self.getFactory());
+	}
+	
+	
+	
+	
+	
+	/**
+	 * @param self A Kermeta object.
+	 * @return The kermeta String of EventWrapper.MOUSE_PRESSED.
+	 */
+	public static RuntimeObject getMousePressedEventString(RuntimeObject self) {
+		return String.create(EventWrapper.MOUSE_PRESSED, self.getFactory());
+	}
+	
+	
+	
+	
+	
+	/**
+	 * @param self A Kermeta object.
+	 * @return The kermeta String of EventWrapper.MOUSE_MOVED.
+	 */
+	public static RuntimeObject getMouseMovedEventString(RuntimeObject self) {
+		return String.create(EventWrapper.MOUSE_MOVED, self.getFactory());
+	}
+	
+	
+	
+	
+	
+	/**
+	 * @param self A Kermeta object.
+	 * @return The kermeta String of EventWrapper.MOUSE_EXITED.
+	 */
+	public static RuntimeObject getMouseExitedEventString(RuntimeObject self) {
+		return String.create(EventWrapper.MOUSE_EXITED, self.getFactory());
+	}
+	
+	
+	
+	
+	
+	/**
+	 * @param self A Kermeta object.
+	 * @return The kermeta String of EventWrapper.MOUSE_ENTERED.
+	 */
+	public static RuntimeObject getMouseEnteredEventString(RuntimeObject self) {
+		return String.create(EventWrapper.MOUSE_ENTERED, self.getFactory());
+	}
+	
+	
+	
+	
+	
+	/**
+	 * @param self A Kermeta object.
+	 * @return The kermeta String of EventWrapper.MOUSE_DRAGGED.
+	 */
+	public static RuntimeObject getMouseDraggedEventString(RuntimeObject self) {
+		return String.create(EventWrapper.MOUSE_DRAGGED, self.getFactory());
+	}
+	
+	
+	
+	
+	
+	/**
+	 * @param self A Kermeta object.
+	 * @return The kermeta String of EventWrapper.MOUSE_CLICKED.
+	 */
+	public static RuntimeObject getMouseClickedEventString(RuntimeObject self) {
+		return String.create(EventWrapper.MOUSE_CLICKED, self.getFactory());
+	}
+	
+	
+	
+	
+	
+	/**
+	 * @param self A Kermeta object.
+	 * @return The kermeta String of EventWrapper.KEY_TYPED.
+	 */
+	public static RuntimeObject getKeyTypedEventString(RuntimeObject self) {
+		return String.create(EventWrapper.KEY_TYPED, self.getFactory());
+	}
+	
+	
+	
+	
+	/**
+	 * @param self A Kermeta object.
+	 * @return The kermeta String of EventWrapper.KEY_RELEASED.
+	 */
+	public static RuntimeObject getKeyReleasedEventString(RuntimeObject self) {
+		return String.create(EventWrapper.KEY_RELEASED, self.getFactory());
+	}
+	
+	
+	
+	/**
+	 * @param self A Kermeta object.
+	 * @return The kermeta String of EventWrapper.KEY_PRESSED.
+	 */
+	public static RuntimeObject getKeyPressedEventString(RuntimeObject self) {
+		return String.create(EventWrapper.KEY_PRESSED, self.getFactory());
+	}
+	
+	
+	
+	/**
+	 * @param self A Kermeta object.
+	 * @return The kermeta String of EventWrapper.ACTION_PERFORMED.
+	 */
+	public static RuntimeObject getActionPerformedEventString(RuntimeObject self) {
+		return String.create(EventWrapper.ACTION_PERFORMED, self.getFactory());
+	}
+	
+	
+	
 	/**
 	 * @param self A Kermeta object.
 	 * @return The kermeta String of EventWrapper.EXIT_EVENT.

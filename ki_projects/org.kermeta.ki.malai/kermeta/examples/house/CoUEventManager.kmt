@@ -1,0 +1,169 @@
+/* $Id:$ 
+ * Creation : February 25, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+@mainClass "kermeta::ki::malai::examples::CoUHouseManagerLauncher"
+@mainOperation "main"
+
+
+package kermeta::ki::malai::examples;
+
+
+require kermeta
+require "../../interaction/event/EventManager.kmt"
+require "../../interaction/event/ActionEvent.kmt"
+require "../../dispatcher/Dispatcher.kmt"
+require "HouseContextOfUse.kmt"
+require "HouseTaskConstraint.kmt"
+require "platform:/resource/org.kermeta.ki.kontext/src/kermeta/taskContexter/TaskContexter.kmt"
+require "platform:/resource/org.kermeta.ki.task/models/task.km"
+
+using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::dispatcher
+using kermeta::standard
+using org::kermeta::ki::kontext
+using task
+using kermeta::persistence
+
+
+
+class CoUHouseManagerLauncher
+{
+	operation main() : Void is do
+		var cui 				: MetaUIContext init MetaUIContext.new
+		var eventManager 		: CoUEventManager init CoUEventManager.new
+		var dispatcher 			: ListDispatcher init ListDispatcher.new
+
+		dispatcher.initialise
+
+		eventManager.initialise(dispatcher)
+		dispatcher.processes.add(eventManager)
+		
+		extern org::kermeta::ki::malai::examples::house::ui::MetaUIContext.initialise(cui, eventManager)
+		
+		dispatcher.run
+	end
+}
+
+
+
+
+
+class CoUEventManager inherits EventManager
+{
+	attribute cou : ContextOfUse
+	
+	attribute taskModel	: TaskModel
+	
+	attribute taskConstraints : HouseTaskConstraintModel
+	
+	attribute taskContexter : TaskContexter
+	
+	
+
+	method initialise(dispatcher : AbstractDispatcher) : Void is do
+		super(dispatcher)
+		
+		taskModel 		:= loadTaskModel
+		cou 			:= getContextInstance
+		taskConstraints := HouseTaskConstraintModel.new
+		taskContexter 	:= TaskContexter.new
+		
+		taskConstraints.initialise(taskModel)
+		updateTaskModel()
+	end
+	
+	
+	
+	operation updateTaskModel() : Void is do
+		var taskModelReduced : TaskModel
+		
+		taskModelReduced := taskContexter.contextualise("platform:/resource/org.kermeta.ki.malai/kermeta/examples/house/default.task", cou, taskConstraints)
+		taskContexter.saveTaskModel("platform:/resource/org.kermeta.ki.malai/kermeta/examples/house/outputTaskModel.task", taskModelReduced)
+	end
+	
+	
+	
+	operation getContextInstance() : ContextOfUse is do
+		var house : House init House.new
+		var hall  : Place init Place.new
+		var room1 : Place init Place.new
+		var light : Light init Light.new
+		
+		hall.name := "Hall"
+		room1.name := "Room 1"
+		light.id := "Light 1"
+		hall.lights.add(light)
+		light := Light.new
+		light.id := "Light 2"
+		hall.lights.add(light)
+		light := Light.new
+		light.id := "Light 3"
+		room1.lights.add(light)
+		
+		house.places.add(hall)
+		house.places.add(room1)
+
+		result := ContextOfUse.new
+		result.user := GrandMa.new
+		result.platform := Workstation.new
+		result.env := house
+	end
+
+
+
+
+
+	operation loadTaskModel() : TaskModel is do
+   		var repository : EMFRepository init EMFRepository.new
+   		repository.registerEcoreFile("platform:/resource/org.kermeta.ki.task/models/task.ecore")             
+   		var resource : Resource init repository.createResource("platform:/resource/org.kermeta.ki.malai/kermeta/examples/house/default.task",
+																"platform:/resource/org.kermeta.ki.task/models/task.ecore")
+       	resource.load()
+		
+		from var it : Iterator<Object> init resource.instances.iterator
+		until it.isOff
+		loop
+			var next : Object init it.next
+			if(TaskModel.isInstance(next)) then                 
+				result ?= next
+			end
+		end
+	end
+	
+	
+	
+
+	method process(event : Event) : Void is do
+		var actionPerfStr : String
+		
+		actionPerfStr ?= extern org::kermeta::ki::malai::interaction::eventWrapper::EventWrapper.getActionPerformedEventString(self)
+
+		if(actionPerfStr.equals(event.getName)) then
+		stdio.writeln(event.toString)
+			var ae : ActionEvent init event.getInfo.asType(ActionEvent)
+			var ac : String init ae.getActionCommand
+
+			if(ac.equals("AC_GRANDMA")) then
+				cou.user := GrandMa.new
+			else if(ac.equals("AC_NURSE")) then
+					cou.user := Nurse.new
+				end
+			end
+			
+			stdio.writeln("Updating the task model")
+			updateTaskModel()
+		end
+	end
+}
+
+
+
+
+
+
+class MetaUIContext {
+}
+

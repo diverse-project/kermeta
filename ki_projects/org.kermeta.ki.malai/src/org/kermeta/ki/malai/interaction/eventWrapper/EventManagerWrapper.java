@@ -63,7 +63,7 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		EventManagerWrapper emw = new EventManagerWrapper();
 		emw.dispatcher 			= (DispatcherWrapper) dispatcherRo.getUserData();
 		self.setUserData(emw);
-		
+
 		return self;
 	}
 	

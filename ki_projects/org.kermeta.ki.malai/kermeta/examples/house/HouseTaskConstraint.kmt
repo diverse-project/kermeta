@@ -1,0 +1,95 @@
+/* $Id:$ 
+ * Creation : February 19, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package kermeta::ki::malai::examples;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.kontext/src/kermeta/taskContexter/TaskConstraint.kmt"
+require "HouseContextOfUse.kmt"
+
+using kermeta::standard
+using org::kermeta::ki::kontext
+using task
+
+
+
+class HouseTaskConstraintModel inherits TaskConstraintModel {
+	operation initialise(taskModel : TaskModel) : Void is do
+		var grandMaCon  : GrandMaConstraint  init GrandMaConstraint.new
+		var noLightCon  : NoLightConstraint  init NoLightConstraint.new
+		var noHeaterCon : NoHeaterConstraint init NoHeaterConstraint.new
+		
+		grandMaCon.initialise(taskModel)
+		noLightCon.initialise(taskModel)
+		noHeaterCon.initialise(taskModel)
+		
+		constraints.add(grandMaCon)
+		constraints.add(noLightCon)
+		constraints.add(noHeaterCon)
+	end
+}
+
+
+
+
+class GrandMaConstraint inherits Constraint {
+	operation initialise(taskModel : TaskModel) : Void is do
+		var task : Task init lookForTask("Gerer Personnes", taskModel.tasks)	
+
+		if(not task.isVoid) then
+			tasks.add(task)
+		end
+	end
+
+
+	method isRespected(cou : ContextOfUse) : Boolean is do
+		result := cou.user.isKindOf(GrandMa)
+	end
+}
+
+
+
+
+class NoLightConstraint inherits Constraint {
+	operation initialise(taskModel : TaskModel) : Void is do
+		var task : Task init lookForTask("Gerer Lumiere", taskModel.tasks)	
+		
+		if(not task.isVoid) then
+			tasks.add(task)
+		end
+	end
+	
+	
+	method isRespected(cou : ContextOfUse) : Boolean is do
+		var house : House init cou.env.asType(House)
+		
+		result := if(house.isVoid) then false else not house.places.exists{ place | not place.lights.isEmpty } end
+	end
+}
+
+
+
+
+class NoHeaterConstraint inherits Constraint {
+	operation initialise(taskModel : TaskModel) : Void is do
+		var task : Task init lookForTask("Gerer Temperature", taskModel.tasks)	
+		
+		if(not task.isVoid) then
+			tasks.add(task)
+		end
+	end
+	
+	
+	method isRespected(cou : ContextOfUse) : Boolean is do
+		var house : House init cou.env.asType(House)
+		
+		result := if(house.isVoid) then false else not house.places.exists{ place | not place.heaters.isEmpty } end
+	end
+}
+
+
