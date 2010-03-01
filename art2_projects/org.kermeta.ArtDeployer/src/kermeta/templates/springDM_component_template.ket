@@ -101,7 +101,6 @@ parameters="c : art2::ComponentInstance"
             <from uri="direct:<%=np.portTypeRef.name%>"/>
             <to uri="activemq:topic:<%=remotePortTypeName%>.<%=remotePortTypeName%>"/>
         </route>
-			<%}%>
 		<%end%>
 	<%}%>
 	</camelContext>
@@ -160,7 +159,7 @@ parameters="c : art2::ComponentInstance"
 					<%}%>
 				<%}%>
 				<%}%>
-				<%if remoteNode.name.equals(c.container.asKindOf(art2::ContainerNode).name ) then%>
+				<%if remoteNode.name.equals(c.container.asType(art2::ContainerNode).name ) then%>
 					<property name="<%=np.portTypeRef.name%>" ref="<%=np.portTypeRef.name%>OSGI" />
 				<%else%>
 					<property name="<%=np.portTypeRef.name%>" ref="<%=np.portTypeRef.name%>AMQ" />

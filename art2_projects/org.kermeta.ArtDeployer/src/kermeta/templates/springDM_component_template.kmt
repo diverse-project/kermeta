@@ -6,40 +6,74 @@ using kermeta::utils
 class BluePrintGenerator{
 operation generate(c : art2::ComponentInstance):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->\n<blueprint xmlns=\"http://www.osgi.org/xmlns/blueprint/v1.0.0\"\n\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n\txsi:schemaLocation=\"\n    http://www.osgi.org/xmlns/blueprint/v1.0.0 \n    http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd\">\n\n\t<!-- create hosted ports -->\n")
+_res.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->\n<beans xmlns=\"http://www.springframework.org/schema/beans\"\n       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n       xmlns:amq=\"http://activemq.apache.org/schema/core\"\n       xmlns:osgi=\"http://www.springframework.org/schema/osgi\"\n       xmlns:jaxws=\"http://cxf.apache.org/jaxws\"\n       xmlns:simple=\"http://cxf.apache.org/simple\"\n       xsi:schemaLocation=\"\n       http://cxf.apache.org/simple http://cxf.apache.org/schemas/simple.xsd\n       http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd\n       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd\n       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd\n       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd\n       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd\">\n\n    <import resource=\"classpath:META-INF/cxf/cxf.xml\" />\n    <import resource=\"classpath:META-INF/cxf/cxf-extension-http.xml\" />\n    <import resource=\"classpath:META-INF/cxf/cxf-extension-http-jetty.xml\" />\n    <import resource=\"classpath:META-INF/cxf/cxf-extension-soap.xml\" />\n    \n    <!-- Add Camel transport type to CXF Bus -->\n    <bean class=\"org.apache.camel.component.cxf.transport.CamelTransportFactory\">\n        <property name=\"bus\" ref=\"cxf\" />\n        <property name=\"camelContext\" ref=\"camelContext\" />\n        <property name=\"transportIds\">\n            <list>\n                <value>http://cxf.apache.org/transports/camel</value>\n            </list>\n        </property>\n    </bean>\n    \n    <!-- Create ActiveMQ Camel component instance -->\n    <bean id=\"activemq\" class=\"org.apache.activemq.camel.component.ActiveMQComponent\">\n        <property name=\"brokerURL\" value=\"failover:tcp://localhost:61616\"/>\n    </bean>\n\n\t<!-- create hosted ports -->\n")
 c.hostedPorts.each{ hp | 
 _res.append("")
 if hp.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then
-_res.append("\t\n\t\t<bean id=\"")
+_res.append("\t\n\t<!-- Port Bean -->\n\t\t<bean id=\"")
 _res.append(hp.portTypeRef.name)
 _res.append("\" class=\"")
 _res.append(hp.portTypeRef.ref.bean)
 _res.append("\">\n\t\t\t<property name=\"container\" ref=\"")
 _res.append(c.name)
-_res.append("\" />\n\t\t</bean>\n\t\n\t\t<service ref=\"")
+_res.append("\" />\n\t\t</bean>\n\t\n\t<!-- Export Bean via osgi -->\n\t\t<osgi:service ref=\"")
 _res.append(hp.portTypeRef.name)
 _res.append("\" interface=\"")
 _res.append(hp.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl)
-_res.append("\">\n\t\t\t<service-properties>\n\t\t\t\t<entry key=\"artPorttyperefName\" value=\"")
+_res.append("\">\n\t\t\t<osgi:service-properties>\n\t\t\t\t<entry key=\"artPorttyperefName\" value=\"")
 _res.append(hp.portTypeRef.name)
 _res.append("\" />\n\t\t\t\t<entry key=\"artComponentinstanceName\" value=\"")
 _res.append(c.name)
-_res.append("\" />\n\t\t\t</service-properties>\n\t\t</service>\n")
+_res.append("\" />\n\t\t\t</osgi:service-properties>\n\t\t</osgi:service>\n\t\t\n\t<!-- Export Bean via CXF/Camel/ActiveMQ -->\n\t\t<simple:server id=\"dateService\" serviceClass=\"service.DateService\" address=\"camel://direct:")
+_res.append(c.name)
+_res.append(".")
+_res.append(hp.portTypeRef.name)
+_res.append("\">\n\t\t\t<simple:serviceBean><ref bean=\"")
+_res.append(hp.portTypeRef.name)
+_res.append("\" /></simple:serviceBean>\n\t\t\t<simple:dataBinding><bean class=\"org.apache.cxf.aegis.databinding.AegisDatabinding\" /></simple:dataBinding>\n\t\t</simple:server>\n\n")
 end
 _res.append("")
 }
-_res.append("\n\n\t<!-- create needed port binding -->\n")
+_res.append("\n\t<!-- create camel routes -->\n\t<camelContext xmlns=\"http://camel.apache.org/schema/spring\">\n")
+c.hostedPorts.each{ hp | 
+_res.append("\t\t<!-- hosted port route -->\n")
+if hp.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then
+_res.append("\t\t<route>\n            <from uri=\"activemq:topic:")
+_res.append(c.name)
+_res.append(".")
+_res.append(hp.portTypeRef.name)
+_res.append("?durableSubscriptionName=")
+_res.append(c.name)
+_res.append("\"/>\n            <to uri=\"direct:")
+_res.append(hp.portTypeRef.name)
+_res.append("\"/>\n        </route>\n")
+end
+_res.append("")
+}
+_res.append("")
 c.requirePorts.each{np | 
 _res.append("")
 if np.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then
-_res.append("\t\n")
+_res.append("")
  var portBinding : art2::Binding init void 
 _res.append("")
- c.container.asType(art2::ContainerNode).bindings.each{b| 
+ var remoteNode : art2::ContainerNode init void 
+_res.append("")
+ c.container.container.asType(art2::ContainerRoot).nodes.each{node | 
+_res.append("")
+ node.bindings.each{b| 
 _res.append("")
  b.ports.each{ p | 
 _res.append("")
-if(p.name.equals(np.name)) then portBinding := b  end
+if(p.name.equals(np.name)) then
+_res.append("")
+ portBinding := b 
+_res.append("")
+ remoteNode := node  
+_res.append("")
+end
+_res.append("")
+}
 _res.append("")
 }
 _res.append("")
@@ -48,15 +82,63 @@ _res.append("")
   var remoteComponentInstanceName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.container.asType(art2::NamedElement).name   
 _res.append("")
   var remotePortTypeName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.asType(art2::Port).portTypeRef.name   
-_res.append("<reference id=\"")
+_res.append("\t\t<route>\n            <from uri=\"direct:")
 _res.append(np.portTypeRef.name)
-_res.append("\" interface=\"")
+_res.append("\"/>\n            <to uri=\"activemq:topic:")
+_res.append(remotePortTypeName)
+_res.append(".")
+_res.append(remotePortTypeName)
+_res.append("\"/>\n        </route>\n")
+end
+_res.append("")
+}
+_res.append("\t</camelContext>\n\n\n\t<!-- create needed port binding -->\n")
+c.requirePorts.each{np | 
+_res.append("")
+if np.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then
+_res.append("")
+ var portBinding : art2::Binding init void 
+_res.append("")
+ var remoteNode : art2::ContainerNode init void 
+_res.append("")
+ c.container.container.asType(art2::ContainerRoot).nodes.each{node | 
+_res.append("")
+ node.bindings.each{b| 
+_res.append("")
+ b.ports.each{ p | 
+_res.append("")
+if(p.name.equals(np.name)) then
+_res.append("")
+ portBinding := b 
+_res.append("")
+ remoteNode := node  
+_res.append("")
+end
+_res.append("")
+}
+_res.append("")
+}
+_res.append("")
+}
+_res.append("")
+  var remoteComponentInstanceName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.container.asType(art2::NamedElement).name   
+_res.append("")
+  var remotePortTypeName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.asType(art2::Port).portTypeRef.name   
+_res.append("<osgi:reference id=\"")
+_res.append(np.portTypeRef.name)
+_res.append("OSGI\" interface=\"")
 _res.append(np.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl)
 _res.append("\" filter=\"&amp;(artComponentinstanceName=")
 _res.append(remoteComponentInstanceName)
 _res.append(")(artPorttyperefName=")
 _res.append(remotePortTypeName)
-_res.append(")\" />\t\n")
+_res.append(")\" />\n<simple:client id=\"")
+_res.append(np.portTypeRef.name)
+_res.append("AMQ\" address=\"camel://")
+_res.append(np.portTypeRef.name)
+_res.append("\" serviceClass=\"")
+_res.append(np.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl)
+_res.append("\" />\n")
 end
 _res.append("")
 }
@@ -64,7 +146,7 @@ _res.append("\t\n\n\t<!-- create the bean -->\n\t<bean id=\"")
 _res.append(c.name)
 _res.append("\" class=\"")
 _res.append(c.componentType.bean)
-_res.append("\" init-method=\"init\" destroy-method=\"stop\">\n\t\n\t\t<!-- property -->\n\t\t<property name=\"dictionary\">\n\t\t\t<props>\n\t\t\t\t<prop key=\"art.name\">")
+_res.append("\" init-method=\"init\" destroy-method=\"stop\">\n\t\t<!-- property -->\n\t\t<property name=\"dictionary\">\n\t\t\t<props>\n\t\t\t\t<prop key=\"art.name\">")
 _res.append(c.name)
 _res.append("</prop>\n\t\t\t</props>\n\t\t</property>\n\t\t<!-- end property -->\n\t\n\t\t<!-- inject hosted ports -->\n")
 c.hostedPorts.each{ hp | 
@@ -78,19 +160,49 @@ _res.append("\" />\n")
 end
 _res.append("")
 }
-_res.append("\n\n\t\t<!-- inject needed ports -->\n")
+_res.append("\n\t\t<!-- inject needed ports -->\n")
 c.requirePorts.each{np | 
 _res.append("")
 if np.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then
-_res.append("\t\t\t\t<property name=\"")
-_res.append(np.portTypeRef.name)
-_res.append("\" ref=\"")
-_res.append(np.portTypeRef.name)
-_res.append("\" />\n")
+_res.append("")
+ var remoteNode : art2::ContainerNode init void 
+_res.append("")
+ c.container.container.asType(art2::ContainerRoot).nodes.each{node | 
+_res.append("")
+ node.bindings.each{b| 
+_res.append("")
+ b.ports.each{ p | 
+_res.append("")
+if(p.name.equals(np.name)) then
+_res.append("")
+ remoteNode := node  
+_res.append("")
 end
 _res.append("")
 }
-_res.append("\t</bean>\n</blueprint>")
+_res.append("")
+}
+_res.append("")
+}
+_res.append("")
+if remoteNode.name.equals(c.container.asType(art2::ContainerNode).name ) then
+_res.append("\t\t\t\t\t<property name=\"")
+_res.append(np.portTypeRef.name)
+_res.append("\" ref=\"")
+_res.append(np.portTypeRef.name)
+_res.append("OSGI\" />\n")
+else
+_res.append("\t\t\t\t\t<property name=\"")
+_res.append(np.portTypeRef.name)
+_res.append("\" ref=\"")
+_res.append(np.portTypeRef.name)
+_res.append("AMQ\" />\n")
+end
+_res.append("")
+end
+_res.append("")
+}
+_res.append("\t</bean>\n</beans>")
 result := _res.toString
 end
 }
