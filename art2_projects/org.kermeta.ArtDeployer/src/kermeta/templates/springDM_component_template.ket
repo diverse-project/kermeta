@@ -1,0 +1,171 @@
+<%@ket
+package="org::kermeta::art::generator"
+require="platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
+using=""
+isAspectClass="false"
+class="BluePrintGenerator"
+ismethod="false"operation="generate"
+parameters="c : art2::ComponentInstance"
+%>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:simple="http://cxf.apache.org/simple"
+       xsi:schemaLocation="
+       http://cxf.apache.org/simple http://cxf.apache.org/schemas/simple.xsd
+       http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-extension-http.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-extension-http-jetty.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+    
+    <!-- Add Camel transport type to CXF Bus -->
+    <bean class="org.apache.camel.component.cxf.transport.CamelTransportFactory">
+        <property name="bus" ref="cxf" />
+        <property name="camelContext" ref="camelContext" />
+        <property name="transportIds">
+            <list>
+                <value>http://cxf.apache.org/transports/camel</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- Create ActiveMQ Camel component instance -->
+    <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="brokerURL" value="failover:tcp://localhost:61616"/>
+    </bean>
+
+	<!-- create hosted ports -->
+<%c.hostedPorts.each{ hp | %>
+	<%if hp.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then%>
+	
+	<!-- Port Bean -->
+		<bean id="<%=hp.portTypeRef.name%>" class="<%=hp.portTypeRef.ref.bean%>">
+			<property name="container" ref="<%=c.name%>" />
+		</bean>
+	
+	<!-- Export Bean via osgi -->
+		<osgi:service ref="<%=hp.portTypeRef.name%>" interface="<%=hp.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl%>">
+			<osgi:service-properties>
+				<entry key="artPorttyperefName" value="<%=hp.portTypeRef.name%>" />
+				<entry key="artComponentinstanceName" value="<%=c.name%>" />
+			</osgi:service-properties>
+		</osgi:service>
+		
+	<!-- Export Bean via CXF/Camel/ActiveMQ -->
+		<simple:server id="dateService" serviceClass="service.DateService" address="camel://direct:<%=c.name%>.<%=hp.portTypeRef.name%>">
+			<simple:serviceBean><ref bean="<%=hp.portTypeRef.name%>" /></simple:serviceBean>
+			<simple:dataBinding><bean class="org.apache.cxf.aegis.databinding.AegisDatabinding" /></simple:dataBinding>
+		</simple:server>
+
+	<%end%>
+<%}%>
+
+	<!-- create camel routes -->
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+	<%c.hostedPorts.each{ hp | %>
+		<!-- hosted port route -->
+		<%if hp.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then%>
+		<route>
+            <from uri="activemq:topic:<%=c.name%>.<%=hp.portTypeRef.name%>?durableSubscriptionName=<%=c.name%>"/>
+            <to uri="direct:<%=hp.portTypeRef.name%>"/>
+        </route>
+		<%end%>
+	<%}%>
+	<%c.requirePorts.each{np | %>
+		<%if np.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then%>
+			<% var portBinding : art2::Binding init void %>
+			<% var remoteNode : art2::ContainerNode init void %>
+			<% c.container.container.asType(art2::ContainerRoot).nodes.each{node | %>
+				<% node.bindings.each{b| %>
+					<% b.ports.each{ p | %>
+						<%if(p.name.equals(np.name)) then%>
+							<% portBinding := b %>
+							<% remoteNode := node  %>
+						<%end%>
+					<%}%>
+				<%}%>
+			<%}%>
+			<%  var remoteComponentInstanceName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.container.asType(art2::NamedElement).name   %>
+			<%  var remotePortTypeName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.asType(art2::Port).portTypeRef.name   %>
+		<route>
+            <from uri="direct:<%=np.portTypeRef.name%>"/>
+            <to uri="activemq:topic:<%=remotePortTypeName%>.<%=remotePortTypeName%>"/>
+        </route>
+			<%}%>
+		<%end%>
+	<%}%>
+	</camelContext>
+
+
+	<!-- create needed port binding -->
+<%c.requirePorts.each{np | %>
+	<%if np.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then%>
+			<% var portBinding : art2::Binding init void %>
+			<% var remoteNode : art2::ContainerNode init void %>
+			<% c.container.container.asType(art2::ContainerRoot).nodes.each{node | %>
+				<% node.bindings.each{b| %>
+					<% b.ports.each{ p | %>
+						<%if(p.name.equals(np.name)) then%>
+							<% portBinding := b %>
+							<% remoteNode := node  %>
+						<%end%>
+					<%}%>
+				<%}%>
+			<%}%>
+	<%  var remoteComponentInstanceName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.container.asType(art2::NamedElement).name   %>
+	<%  var remotePortTypeName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.asType(art2::Port).portTypeRef.name   %>
+<osgi:reference id="<%=np.portTypeRef.name%>OSGI" interface="<%=np.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl%>" filter="&amp;(artComponentinstanceName=<%=remoteComponentInstanceName%>)(artPorttyperefName=<%=remotePortTypeName%>)" />
+<simple:client id="<%=np.portTypeRef.name%>AMQ" address="camel://<%=np.portTypeRef.name%>" serviceClass="<%=np.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl%>" />
+	<%end%>
+<%}%>
+	
+
+	<!-- create the bean -->
+	<bean id="<%=c.name%>" class="<%=c.componentType.bean%>" init-method="init" destroy-method="stop">
+		<!-- property -->
+		<property name="dictionary">
+			<props>
+				<prop key="art.name"><%=c.name%></prop>
+			</props>
+		</property>
+		<!-- end property -->
+	
+		<!-- inject hosted ports -->
+<%c.hostedPorts.each{ hp | %>
+	<%if hp.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then%>	
+		<property name="<%=hp.portTypeRef.name%>" ref="<%=hp.portTypeRef.name%>" />
+	<%end%>
+<%}%>
+
+		<!-- inject needed ports -->
+		<%c.requirePorts.each{np | %>
+			<%if np.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then%>
+				<% var remoteNode : art2::ContainerNode init void %>
+				<% c.container.container.asType(art2::ContainerRoot).nodes.each{node | %>
+				<% node.bindings.each{b| %>
+					<% b.ports.each{ p | %>
+						<%if(p.name.equals(np.name)) then%>
+							<% remoteNode := node  %>
+						<%end%>
+					<%}%>
+				<%}%>
+				<%}%>
+				<%if remoteNode.name.equals(c.container.asKindOf(art2::ContainerNode).name ) then%>
+					<property name="<%=np.portTypeRef.name%>" ref="<%=np.portTypeRef.name%>OSGI" />
+				<%else%>
+					<property name="<%=np.portTypeRef.name%>" ref="<%=np.portTypeRef.name%>AMQ" />
+				<%end%>
+			<%end%>
+		<%}%>
+	</bean>
+</beans>
