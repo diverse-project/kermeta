@@ -6,6 +6,7 @@
     <name>fr.irisa.triskell.kermeta.compilo.scala</name>
     <version>0.0.1-SNAPSHOT</version>
     <description>Kermeta Compiler V2</description>
+    <packaging>bundle</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -81,6 +82,20 @@
                     <target>1.5</target>
                 </configuration>
             </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Private-Package>*</Private-Package>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                    </instructions>
+                </configuration>
+            </plugin>
+
         </plugins>
 
     </build>
@@ -178,18 +193,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.kermeta</groupId>
-            <artifactId>art.model</artifactId>
-            <version>1.0.0</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>uml2</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>uml2.common</artifactId>
             <version>1.5.0</version>
@@ -206,7 +209,13 @@
             <version>2.0.1</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.eclipse.uml2</groupId>
+            <artifactId>uml</artifactId>
+            <version>3.5.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>/Applications/eclipse/eclipse35-GMF/plugins/org.eclipse.uml2.uml_3.0.1.v200908281330.jar</systemPath>
+        </dependency>
 
     </dependencies>
 
