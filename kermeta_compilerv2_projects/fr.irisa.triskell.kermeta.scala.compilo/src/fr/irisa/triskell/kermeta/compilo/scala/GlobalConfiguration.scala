@@ -8,32 +8,37 @@
 
 package fr.irisa.triskell.kermeta.compilo.scala
 
-import java.util.Properties
+import java.util.ResourceBundle
 import scala.tools.nsc.io.File
+import scala.collection.JavaConversions._
 
-object GlobalConfiguration {
+object GlobalConfiguration extends LogAspect{
   
-  def loadFromProperties(_props : Properties) : Boolean = {
+  def load(_props : ResourceBundle) : Boolean = {
     var loadResult = true
     props = _props
     //FIRST STEP CHECK VALUES
-    loadResult = loadResult && props.contains("use.default.aspect.uml")
-    loadResult = loadResult && props.contains("use.default.aspect.ecore")
-    loadResult = loadResult && props.contains("use.default.aspect.km")
-    loadResult = loadResult && props.contains("project.group.id")
-    loadResult = loadResult && props.contains("project.artefact.id")
+    loadResult = loadResult && props.containsKey("use.default.aspect.uml")
+    loadResult = loadResult && props.containsKey("use.default.aspect.ecore")
+    loadResult = loadResult && props.containsKey("use.default.aspect.km")
+    loadResult = loadResult && props.containsKey("project.group.id")
+    loadResult = loadResult && props.containsKey("project.artefact.id")
     if(loadResult){
-      frameworkGeneratedPackageName = "ScalaImplicit."+props.get("project.group.id")+"."+props.get("project.artefact.id")
-      outputProject = if(props.contains("output.target.folder")){ props.get("output.target.folder").toString } else { Util.createTempDirectory.getAbsolutePath }
-      outputFolder = outputProject+File.pathSeparator+"src"
-      outputBinFolder = outputProject+File.pathSeparator+"bin"
-      workspaceURI = if(props.contains("workspace.platform.uri")) { props.get("workspace.platform.uri").toString } else { null }
-      pluginURI = if(props.contains("workspace.plugin.uri")) { props.get("workspace.plugin.uri").toString } else { null }
+      frameworkGeneratedPackageName = "ScalaImplicit."+props.getString("project.group.id")+"."+props.getString("project.artefact.id")
+      outputProject = if(props.containsKey("output.target.folder") && !props.getString("output.target.folder").isEmpty){ props.getString("output.target.folder") } else { 
+        var result = Util.createTempDirectory.getAbsolutePath
+        log.info("No output folder specified, temp created : "+result)
+        result
+      }
+      outputFolder = outputProject+"/src"
+      outputBinFolder = outputProject+"/bin"
+      workspaceURI = if(props.containsKey("workspace.platform.uri")) { props.getString("workspace.platform.uri") } else { null }
+      pluginURI = if(props.containsKey("workspace.plugin.uri")) { props.getString("workspace.plugin.uri") } else { null }
     }
     return loadResult
   }
 
-  var props : Properties = null
+  var props : ResourceBundle = null
   var frameworkGeneratedPackageName : String = null
   var implicitConvTraitName : String = "ImplicitConversion"
   var viewDefTraitName : String = "ViewType"

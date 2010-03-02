@@ -11,6 +11,8 @@ package fr.irisa.triskell.kermeta.compilo.scala
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
+import java.io.File
+import java.io.IOException
 import java.util._
 import scala.collection.JavaConversions._
 import java.util.concurrent.Executors
@@ -111,20 +113,19 @@ object Util extends LogAspect with RichAspectImplicit  {
    */
 	
   def getImplPackageSuffix(packName:String):String={
-    if ("org.eclipse.uml2.uml".equals(packName) || "uml".equals(packName.toString) || ("org.eclipse.uml2.uml"+GlobalConfiguration.scalaAspectPrefix).equals(packName.toString))
-    {//println("toti "+ packName)
-     return ".internal.impl."
-    }		else
-    {//	println("toto "+ packName)
+    if ("ScalaAspect.org.eclipse.uml2.uml".equals(packName) || "uml".equals(packName.toString) || ("ScalaAspect.org.eclipse.uml2.uml"+GlobalConfiguration.scalaAspectPrefix).equals(packName.toString))
+      return ".internal.impl."
+    else
+    {	println("toto "+ packName)
      return ".impl."
     }
   }
 
   def getPackagePrefix(packName:String):String={
-    if ("Kermeta".equals(packName) || "uml".equals(packName.toString) || ("org.eclipse.uml2.uml"+GlobalConfiguration.scalaAspectPrefix).equals(packName.toString))
+    if ("Kermeta".equals(packName) || "uml".equals(packName.toString) || ("ScalaAspect.org.eclipse.uml2.uml"+GlobalConfiguration.scalaAspectPrefix).equals(packName.toString))
     {
       return "Km"
-    }else if ("Uml".equals(packName) || "Uml".equals(packName.toString) || ("org.eclipse.uml2.uml"+GlobalConfiguration.scalaAspectPrefix).equals(packName.toString))
+    }else if ("Uml".equals(packName) || "Uml".equals(packName.toString) || ("ScalaAspect.org.eclipse.uml2.uml"+GlobalConfiguration.scalaAspectPrefix).equals(packName.toString) || ("org.eclipse.uml2.uml"+GlobalConfiguration.scalaAspectPrefix).equals(packName.toString))
     {
       return "UML"
     }else
@@ -170,8 +171,33 @@ object Util extends LogAspect with RichAspectImplicit  {
      list.get(i).generateScalaCode(res)
      }*/
   }
+
+  def createTempDirectory : File = {
+    val temp = File.createTempFile("temp", System.nanoTime.toString )
+    if( ! temp.delete )
+      ioError("Could not delete temp file: " + temp.getAbsolutePath )
+    if( ! temp.mkdir )
+      ioError("Could not create temp directory: " + temp.getAbsolutePath )
+    return temp
+  }
+
+  def ioError( msg : String ) = throw new IOException( msg )
    
-   
+
+  def doesGeneratePackage(packQualifiedName : String) : Boolean = {
+    var hasToGenerate : Boolean = true
+    if(GlobalConfiguration.props.getString("use.default.aspect.km")==true){
+      hasToGenerate && !packQualifiedName.startsWith("fr.irisa.triskell.kermeta.language")
+    }
+    if(GlobalConfiguration.props.getString("use.default.aspect.uml")==true){
+      hasToGenerate && !packQualifiedName.startsWith("")
+    }
+    if(GlobalConfiguration.props.getString("use.default.aspect.ecore")==true){
+      hasToGenerate && !packQualifiedName.startsWith("org.eclipse.emf")
+    }
+    if(!hasToGenerate){ log.info("Exclude compilation package |"+packQualifiedName) }
+    return hasToGenerate
+  }
    
    
    
