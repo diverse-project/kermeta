@@ -92,7 +92,9 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
     res.append("object MainRunner  extends "+GlobalConfiguration.frameworkGeneratedPackageName+"."+GlobalConfiguration.implicitConvTraitName+"{\n")
     //res.append("def main(args : Array[String]) : Unit = {\n\t" )
     res.append("def init() : Unit = {\n\t" )
-    res.append("System.setOut(new PrintStream(\"outputStream\"));\n")
+    if (GlobalConfiguration.isTest){
+      res.append("System.setOut(new PrintStream(\"outputStream\"));\n")
+  }
     res.append("kermeta.persistence.EcorePackages.workspaceURI = \"" + GlobalConfiguration.workspaceURI + "\"\n")
     res.append("kermeta.persistence.EcorePackages.pluginURI = \"" + GlobalConfiguration.pluginURI+ "\";\n")
     java.util.Collections.sort(packages, new java.util.Comparator[Package]{

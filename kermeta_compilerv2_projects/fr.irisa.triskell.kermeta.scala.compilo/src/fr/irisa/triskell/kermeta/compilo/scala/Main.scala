@@ -9,24 +9,46 @@
 package fr.irisa.triskell.kermeta.compilo.scala
   
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
+import java.io.File
+import java.io.FileInputStream
+import java.util.Properties
 import java.util.ResourceBundle
 import scala.collection.JavaConversions._
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
-import fr.irisa.triskell.kermeta.compilo.scala.loader._  
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor.impl._
 import fr.irisa.triskell.embedded._
 
 object Main extends LogAspect {
+
+
+  def init(propertyurl:String, projectName:String, classqname:String, KMFilename:String, operationName:String, classpath:java.util.Collection[String], args:String):Unit ={
+
+      var v = new Properties
+      v.load(new FileInputStream(new File(propertyurl)))
+      GlobalConfiguration.load(v)
+      additionalClassPath = classpath.toList
+      
+  }
+
+  def pomGeneration(){
+      //java -classpath /usr/share/maven2/lib/maven-debian-uber.jar:/usr/share/maven2/boot/classworlds.jar org.apache.maven.cli.compat.CompatibleMain -f ~/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo/pom.xml scala:compile package
+      //org.apache.maven.cli.compat.CompatibleMain.main()
+  }
+
+  var additionalClassPath: List[String] = _
+
   def main(args : Array[String]) : Unit = {
 
     //STEP 0 - LOAD PROPERTIES FILE
-    var resource : ResourceBundle = ResourceBundle.getBundle("kermetaCompiler")
-    GlobalConfiguration.load(resource)
-    println(GlobalConfiguration.outputFolder)
-
+    if (!GlobalConfiguration.init)
+    {
+      var resource : ResourceBundle = ResourceBundle.getBundle("kermetaCompiler")
+      GlobalConfiguration.load(resource)
+      println(GlobalConfiguration.outputFolder)
+    }
       
 
     
@@ -105,9 +127,9 @@ object Main extends LogAspect {
     // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/015_EcoreDocHelper.km"
     //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
 
-        inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/001_LoadUML.km"
+//    inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/001_LoadUML.km"
 
-	    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/001_LoadUML.km"
+//    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/001_LoadUML.km"
 	    	
     //    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Art2DroolsMatcher/Art2DROOLSPatternFramework.km"
 
@@ -126,8 +148,8 @@ object Main extends LogAspect {
 	  
     //  inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/013_LoadEcore.km"
 	  
-   // inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/org.kermeta.ArtKomparator/src/kermeta/Launcher.km"
-  //  runnerParams = List("///Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi")
+    // inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/org.kermeta.ArtKomparator/src/kermeta/Launcher.km"
+    //  runnerParams = List("///Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi")
 
 
     //inputFile = "/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/025simpleInvariant.km"
@@ -143,7 +165,10 @@ object Main extends LogAspect {
     }
 
     /* Scalac compilation step */
-    var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,EmbettedScalaCompiler.getActualClasspath,useFSC)
+    var classpath =EmbettedScalaCompiler.getActualClasspath
+    classpath = classpath ++ additionalClassPath
+    
+    var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
 
     // var classpath : java.util.List[String] = new java.util.ArrayList[String]
     //classpath.addAll(List(System.getProperty("java.class.path")))

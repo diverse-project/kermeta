@@ -13,7 +13,36 @@ import scala.tools.nsc.io.File
 import scala.collection.JavaConversions._
 
 object GlobalConfiguration extends LogAspect{
-  
+
+  var init : Boolean = false
+  var isTest : Boolean = false
+
+  def load(props : java.util.Properties) : Boolean = {
+    var loadResult = true
+    //FIRST STEP CHECK VALUES
+    loadResult = loadResult && props.containsKey("use.default.aspect.uml")
+    loadResult = loadResult && props.containsKey("use.default.aspect.ecore")
+    loadResult = loadResult && props.containsKey("use.default.aspect.km")
+    loadResult = loadResult && props.containsKey("project.group.id")
+    loadResult = loadResult && props.containsKey("project.artefact.id")
+    if(loadResult){
+      frameworkGeneratedPackageName = "ScalaImplicit."+props.getProperty("project.group.id")+"."+props.getProperty("project.artefact.id")
+      outputProject = if(props.containsKey("output.target.folder") && !props.getProperty("output.target.folder").isEmpty){ props.getProperty("output.target.folder") } else {
+        var result = Util.createTempDirectory.getAbsolutePath
+        log.info("No output folder specified, temp created : "+result)
+        result
+      }
+      outputFolder = outputProject+"/src"
+      outputBinFolder = outputProject+"/bin"
+      workspaceURI = if(props.containsKey("workspace.platform.uri")) { props.getProperty("workspace.platform.uri") } else { null }
+      pluginURI = if(props.containsKey("workspace.plugin.uri")) { props.getProperty("workspace.plugin.uri") } else { null }
+      this.init = true
+    }
+    return loadResult
+  }
+
+
+
   def load(_props : ResourceBundle) : Boolean = {
     var loadResult = true
     props = _props
@@ -34,6 +63,7 @@ object GlobalConfiguration extends LogAspect{
       outputBinFolder = outputProject+"/bin"
       workspaceURI = if(props.containsKey("workspace.platform.uri")) { props.getString("workspace.platform.uri") } else { null }
       pluginURI = if(props.containsKey("workspace.plugin.uri")) { props.getString("workspace.plugin.uri") } else { null }
+          this.init = true
     }
     return loadResult
   }
