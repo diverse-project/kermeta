@@ -1,5 +1,12 @@
-ABD ACD
-B
-D
-A
-C
+DEBUG : INIT NODE : duke.irisa.fr
+DEBUG : PROCESS hello
+DEBUG : PROCESS timer
+Generate hello Feature to ///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy
+WriteTxt=///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy/feature_hello.xml
+Generate timer Feature to ///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy
+WriteTxt=///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy/feature_timer.xml
+Generate h1 BluePrintComponent to ///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy
+WriteTxt=///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy/component_h1.xml
+Generate h2 BluePrintComponent to ///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy
+WriteTxt=///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy/component_h2.xml
+Generate t1 BluePrintComponent to ///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy

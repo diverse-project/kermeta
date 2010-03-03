@@ -6,7 +6,7 @@
     <name>fr.irisa.triskell.kermeta.compilo.scala</name>
     <version>0.0.1-SNAPSHOT</version>
     <description>Kermeta Compiler V2</description>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -207,14 +207,6 @@
             <groupId>org.kermeta.art2</groupId>
             <artifactId>model</artifactId>
             <version>2.0.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.uml2</groupId>
-            <artifactId>uml</artifactId>
-            <version>3.5.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>/Applications/eclipse/eclipse35-GMF/plugins/org.eclipse.uml2.uml_3.0.1.v200908281330.jar</systemPath>
         </dependency>
 
     </dependencies>
