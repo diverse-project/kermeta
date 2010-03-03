@@ -55,7 +55,11 @@ aspect class VariableDecl {
 		self.identifier := identifier
 		self.initialization := initialization
 		self.containedType.add(type)
-		self.type := TypeReference.new.initialize(type)
+		if type.isKindOf(PrimitiveType) then
+			self.type := TypeReference.new.initializeWithPrimitiveType(type)
+		else
+			self.type := TypeReference.new.initialize(type)
+		end
 		result := self
 	end
 }
@@ -155,7 +159,7 @@ aspect class CallFeature {
 	end
 	
 	/**
-	 * Creates a new CallFeature to produce a target.add(param)
+	 * Creates a new CallFeature to produce a target.func(param)
 	 * 
 	 * @param target
 	 *            name of the element on which the property is to be called
@@ -165,18 +169,18 @@ aspect class CallFeature {
 	 *            type of the element on which the property is to be called
 	 * @param typesFromFramework
 	 *            types from framework this CallFeature needs
+	 * @param func
+	 *			  name of the function to call
 	 */
-	operation initializeForAnAdd(target : CallExpression, param : String, targetType : Type, typesFromFramework : Hashtable<String,ClassDefinition>) : CallFeature is do
+	operation initializeForAFunctionCall(target : CallExpression, param : CallExpression, targetType : Type, typesFromFramework : Hashtable<String,ClassDefinition>, func : String) : CallFeature is do
 		var cl_add : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::VoidType"))
 		var pt_add : ProductType init ProductType.new.initialize(targetType)
 		var ft_add : FunctionType init FunctionType.new.initialize(pt_add,cl_add)
 		
-		// param
-		var cv : CallVariable init CallVariable.new.initialize(param)
 		// Add
-		self.initialize("add")
+		self.initialize(func)
 		self.containedType.add(ft_add)
-		self.parameters.add(cv)
+		self.parameters.add(param)
 		self.target := target
 		result := self
 	end
@@ -257,6 +261,16 @@ aspect class TypeReference {
 		self.upper := 1
 		self.name := c.name
 		self.containedType.add(c)
+		result := self
+	end
+	
+	operation initializeWithPrimitiveType(type : Type) : TypeReference is do
+		var pt : PrimitiveType
+		pt ?= type
+		self.type := type
+		self.upper := 1
+		self.name := pt.name
+		self.containedType.add(pt)
 		result := self
 	end
 }
