@@ -14,7 +14,6 @@ trait ClassAspect extends RichAspectImplicit with TypeAspect with ObjectAspect w
 		/*var pack : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName 
 		pack=kermeta.utils.TypeEquivalence.getPackageEquivalence(pack);
 		var s : String = pack + "."+this.getTypeDefinition().asInstanceOf[ClassDefinition].getName 
-		//println(s)
 //		if (Util.currentPackage.equals(pack))
 //				res.append(this.getTypeDefinition().asInstanceOf[ClassDefinition].getName )
 //		else
@@ -71,7 +70,6 @@ trait ClassAspect extends RichAspectImplicit with TypeAspect with ObjectAspect w
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		
 		if(this.getName() != "Main"){ //TODO REMOVE DEBUG MODE
-			Console.println("Skip Class "+this.getName)
 			return
 		}
 		

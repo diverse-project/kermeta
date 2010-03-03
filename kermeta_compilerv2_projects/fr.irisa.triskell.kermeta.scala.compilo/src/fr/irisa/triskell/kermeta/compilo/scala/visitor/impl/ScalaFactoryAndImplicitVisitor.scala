@@ -161,14 +161,11 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
     if (!(par.getOwnedTypeDefinition.size()==0 || par.getOwnedTypeDefinition.filter(t=> t.isInstanceOf[ClassDefinition]).forall(t=> Util.hasCompilerIgnoreTag(t)) )){
       var factoryDef : StringBuilder =  new StringBuilder
 			
-      println(par.getName
-              + " "+ par.getOwnedTypeDefinition.size())
-
+      
       factoryDef append "package "+actualPackage+"\n"
 				
       factoryDef append "object "+GlobalConfiguration.factoryName + " extends "
       //e.getOwnedTypeDefinition.filter(t=> t.isInstanceOf[ClassDefinition]).filter(t=> Util.hasEcoreTag(t)).size==0
-      println("package "+ par.getName + " " +par.getOwnedTypeDefinition.size )
       if (par.getOwnedTypeDefinition.size!= 0 &&  par.getOwnedTypeDefinition.filter(t=> t.isInstanceOf[ClassDefinition]).filter(e=> Util.hasEcoreTag(e)).size>0){
         factoryDef.append (Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.asInstanceOf[Package].getQualifiedName())+Util.getImplPackageSuffix(actualPackage)+ Util.getPackagePrefix(par.getName.substring(0,1).toUpperCase + par.getName.substring(1,par.getName.size))+"FactoryImpl with"))
       }
@@ -249,10 +246,8 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
     c.getSuperType.foreach(e=>
 		
       {
-        //println("taratata" + e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
         if (Util.hasEcoreTag(e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition]))
         {
-          //println("torototo" + e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
           return e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition]
         }
       }
@@ -270,10 +265,8 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
     c.getSuperType.foreach(e=>
 		
       {
-        //println("taratata" + e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
         if ("Object".equals(e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName))
         {
-          //println("torototo" + e.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName)
           return true
         }
       }

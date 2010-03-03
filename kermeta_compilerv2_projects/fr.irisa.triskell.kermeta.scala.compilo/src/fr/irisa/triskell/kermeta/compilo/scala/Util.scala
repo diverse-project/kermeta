@@ -116,7 +116,7 @@ object Util extends LogAspect with RichAspectImplicit  {
     if ("ScalaAspect.org.eclipse.uml2.uml".equals(packName) || "uml".equals(packName.toString) || ("ScalaAspect.org.eclipse.uml2.uml"+GlobalConfiguration.scalaAspectPrefix).equals(packName.toString))
       return ".internal.impl."
     else
-    {	println("toto "+ packName)
+    {	//println("toto "+ packName)
      return ".impl."
     }
   }

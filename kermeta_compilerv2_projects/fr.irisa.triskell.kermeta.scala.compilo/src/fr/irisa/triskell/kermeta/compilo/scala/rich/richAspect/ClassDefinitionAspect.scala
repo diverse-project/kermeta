@@ -159,7 +159,6 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
   
   def getAllInvariants() : EList[Constraint] =  {
     var result = this.getInv
-    println(this.getSuperType.size)
     this.getSuperType.foreach{st =>
       st match {
         case cd:Class => {
