@@ -48,7 +48,7 @@ trait ObjectAspect extends EObject  with Contracted {
 		if(inv !=  null ){
 			for(cond <- inv){
 				if(!cond._2()){
-					var constraintException : Exception  = kermeta.exceptions.RichFactory.createConstraintViolatedInvException
+					var constraintException = kermeta.exceptions.RichFactory.createConstraintViolatedInvException
 					constraintException.message = "Contraint Invariant Exception "+cond._1 
 					throw constraintException
 				}
