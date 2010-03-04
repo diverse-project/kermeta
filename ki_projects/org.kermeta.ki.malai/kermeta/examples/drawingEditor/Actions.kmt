@@ -10,8 +10,8 @@ package kermeta::ki::malai::examples;
 
 
 require kermeta
-require "../../action/Action.kmt"
-require "AbstractPresentation.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/AbstractPresentation.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::action
@@ -20,22 +20,22 @@ using kermeta::ki::malai::action
 class ActionSelect inherits Action {
 	reference selection : Shape[0..*]
 	
-	reference canvas : ModelCanvas
+	reference drawing : Drawing
 	
 	
 	
 	method doActionBody() : Void is do
-		canvas.selection.clear
+		drawing.selection.clear
 		
 		selection.each { sh |
-			canvas.selection.add(sh)
+			drawing.selection.add(sh)
 		}
 		stdio.writeln(selection.size().toString)
 	end
 	
 	
 	method canDo() : Boolean is do
-		result := canvas!=void
+		result := drawing!=void
 	end
 	
 	

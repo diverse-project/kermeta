@@ -13,36 +13,46 @@ package kermeta::ki::malai::examples;
 
 
 require kermeta
-require "ActivePresentation.kmt"
-require "Actions.kmt"
-require "../../interaction/event/EventManager.kmt"
-require "../../dispatcher/Dispatcher.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/ActivePresentation.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/Actions.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/dispatcher/Dispatcher.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/DnD.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
 
 using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::dispatcher
-
+using kermeta::ki::malai::interaction
+using kermeta::ki::malai::picking
+using kermeta::standard
 
 
 class CanvasLauncher
 {
 	operation main() : Void is do
-		var cui : CanvasUIWrapper init CanvasUIWrapper.new
-		var eventManager : EventManager init EventManager.new
-		var dispatcher : ListDispatcher init ListDispatcher.new
+		var aui          : CanvasIS       init CanvasIS.new
+		var eventManager : EventManager   init EventManager.new
+		var dispatcher   : ListDispatcher init ListDispatcher.new
+		var dnd          : DnD            init DnD.new
 		
 		dispatcher.initialise
 		eventManager.initialise(dispatcher)
 		dispatcher.processes.add(eventManager)
-		
-		extern org::kermeta::ki::malai::examples::canvas::CanvasExample.initialize(cui, eventManager)
+		aui.initialise(eventManager)
+		dnd.initialise(eventManager)
+
+		initSomeShapes(aui)
+		aui.setVisible(true)
 		
 		dispatcher.run
 	end
+	
+	
+	operation initSomeShapes(aui : CanvasIS) : Void is do
+		var ell : Ellipse init Ellipse.new
+		ell.initialise
+		
+		aui.drawing.addShape(ell)
+	end
 }
-
-
-
-class CanvasUIWrapper {
-
-}
-

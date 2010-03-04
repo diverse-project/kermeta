@@ -10,24 +10,17 @@ package kermeta::ki::malai::examples;
 
 
 require kermeta
-require "../../presentation/AbstractPresentation.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/presentation/AbstractPresentation.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::presentation
 
-class ModelCanvas inherits AbstractPresentation {
+class Drawing inherits AbstractPresentation {
 	attribute shapes : Shape[0..*]
 
 	reference selection : Shape[0..*]	
 
 	attribute shapeTmp : Shape
-	
-	
-	operation addShape(sh : Shape) : Void is do
-		if(sh!=void) then
-			shapes.add(sh)
-		end
-	end
 }
 
 
@@ -65,10 +58,10 @@ class Ellipse inherits Shape {
 			var pt1 : Point init Point.new
 			var pt2 : Point init Point.new
 			
-			pt1.x := i.toReal
-			pt2.x := i.toReal
-			pt1.y := 0.toReal
-			pt2.y := 1.toReal
+			pt1.x := (i*100).toReal
+			pt2.x := (i*100).toReal
+			pt1.y := 100.toReal
+			pt2.y := 200.toReal
 			points.add(pt1)
 			points.add(pt2)
 		}

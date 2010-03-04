@@ -98,7 +98,6 @@ class DnDMoveTransition inherits MoveTransition {
 
 
 	method action() : Void is do
-	stdio.writeln("move")
 		dnd.pxEnd  := px
 		dnd.pyEnd  := py
 		dnd.target := dnd.getPickableAt(px, py)
@@ -109,7 +108,6 @@ class DnDMoveTransition inherits MoveTransition {
 
 class DnDKeyPressureTransition inherits KeyPressureTransition {
 	method isGuardRespected() : Boolean is do
-	stdio.writeln("escape")
 		result := key==27
 	end
 }
@@ -119,7 +117,6 @@ class DnDPressureTransition inherits PressureTransition {
 	reference dnd : DnD
 
 	method action() : Void is do
-	stdio.writeln("press")
 		dnd.pxStart := px
 		dnd.pyStart := py
 		dnd.pxEnd   := px

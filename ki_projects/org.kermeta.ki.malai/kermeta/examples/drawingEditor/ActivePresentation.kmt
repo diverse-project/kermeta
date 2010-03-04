@@ -10,16 +10,84 @@ package kermeta::ki::malai::examples;
 
 
 require kermeta
-require "AbstractPresentation.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/AbstractPresentation.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
 
 using kermeta::standard
+using kermeta::ki::malai::picking
+using kermeta::ki::malai::interaction::event
 
 
-class ActiveModelCanvas inherits ModelCanvas
-{
-	method addShape(sh : Shape) : Void is do
-		super(sh)
+
+class CanvasIS {
+	attribute drawing : Drawing
+	
+	
+	operation initialise(eventManager : EventManager) : Void is do
+		drawing := Drawing.new
 		
-		stdio.writeln("added")
+		extern org::kermeta::ki::malai::examples::canvas::ui::CanvasIS.initialise(self, drawing, eventManager)
+	end
+	
+	
+	operation setVisible(visible : Boolean) : Void is do
+		extern org::kermeta::ki::malai::examples::canvas::ui::CanvasIS.setVisible(self, visible)
+	end
+	
+	
+	operation refreshView() : Void is do
+		extern org::kermeta::ki::malai::examples::canvas::ui::CanvasIS.refreshView(self)
+	end
+}
+
+
+
+aspect class Shape inherits Pickable {
+	method contains(px : Real, py : Real) : Boolean is do
+		result := false
+	end
+
+
+	operation initShapeUI() : Void is do
+		var i : Integer init 0
+		points.each{pt |  
+			extern org::kermeta::ki::malai::examples::canvas::concPres::ShapeUI.onPointAdded(self, pt.x, pt.y, i)
+			i := i+1
+		}
+	end	
+}
+
+
+
+
+aspect class Ellipse {
+
+}
+
+
+aspect class Drawing inherits Picker {
+	operation addShape(shape : Shape) : Void is do
+		shapes.add(shape)
+		extern org::kermeta::ki::malai::examples::canvas::concPres::CanvasUI.onShapeAdded(self, shape, -1)
+		shape.initShapeUI
+	end
+	
+	
+	method getPickableAt(px : Real, py : Real) : Pickable is do
+		result := void
+	end
+	
+	method getPickerAt(px : Real, py : Real) : Picker is do
+		result := void
+	end
+	
+/*	method getRelativePoint(px : Real, py : Real, obj : Object) : Point is do
+		result := void
+	end
+*/	
+	method contains(obj : Object) : Boolean is do
+		result := false
 	end
 }
