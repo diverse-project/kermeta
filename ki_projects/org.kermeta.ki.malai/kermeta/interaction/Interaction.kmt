@@ -104,7 +104,7 @@ abstract class Interaction inherits StateMachine
 	 */
 	operation getPickableAt(px : Real, py : Real) : Pickable is do
 		if(picker.isVoid) then
-			result := if pickable.isVoid or pickable.contains(px, py) then void else pickable end
+			result := if pickable.isVoid.orElse{v | pickable.contains(px, py)} then void else pickable end
 		else
 			result := picker.getPickableAt(px, py)
 		end
