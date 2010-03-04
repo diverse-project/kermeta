@@ -1,0 +1,131 @@
+/*
+ * Creation : March 4, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::interaction;
+
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
+require kermeta
+
+using kermeta::standard
+using kermeta::ki::malai::picking
+
+
+class DnD inherits Interaction
+{
+	attribute pxStart : Real
+	
+	attribute pyStart : Real
+	
+	attribute pxEnd : Real
+	
+	attribute pyEnd : Real
+	
+	attribute button : Integer
+	
+	reference target : Pickable
+	
+	reference source : Pickable
+	
+	
+	
+	
+	method reinit() : Void is do
+		super
+		
+		pxStart 	:= void
+		pyStart		:= void
+		pxEnd 		:= void
+		pyEnd		:= void
+		button		:= void
+		target		:= void
+		source 		:= void
+	end
+	
+	
+	
+	
+	method initStateMachine() : Void is do
+		var pressed  : State init IntermediaryState.new
+		var dragged  : State init IntermediaryState.new
+		var released : TerminalState init TerminalState.new
+		var aborted  : AbortingState init AbortingState.new
+		
+		pressed.initialise("pressed")
+		dragged.initialise("dragged")
+		released.initialise("released")
+		aborted.initialise("aborted")
+		addState(pressed)
+		addState(dragged)
+		addState(released)
+		addState(aborted)
+		
+		var dndpt : DnDPressureTransition init DnDPressureTransition.new
+		dndpt.dnd := self
+		dndpt.initialise(initState, pressed)
+		
+		var dndrt : ReleaseTransition init ReleaseTransition.new
+		dndrt.initialise(pressed, aborted)
+		
+		var dndkpt : DnDKeyPressureTransition init DnDKeyPressureTransition.new
+		dndkpt.initialise(pressed, aborted)
+		
+		var dndmt : DnDMoveTransition init DnDMoveTransition.new
+		dndmt.dnd := self
+		dndmt.initialise(pressed, dragged)
+		
+		dndmt := DnDMoveTransition.new
+		dndmt.dnd := self
+		dndmt.initialise(dragged, dragged)
+		
+		dndrt := ReleaseTransition.new
+		dndrt.initialise(dragged, released)
+		
+		dndkpt := DnDKeyPressureTransition.new
+		dndkpt.initialise(dragged, aborted)
+	end
+}
+
+
+
+class DnDMoveTransition inherits MoveTransition {
+	reference dnd : DnD
+
+
+	method action() : Void is do
+	stdio.writeln("move")
+		dnd.pxEnd  := px
+		dnd.pyEnd  := py
+		dnd.target := dnd.getPickableAt(px, py)
+	end
+}
+
+
+
+class DnDKeyPressureTransition inherits KeyPressureTransition {
+	method isGuardRespected() : Boolean is do
+	stdio.writeln("escape")
+		result := key==27
+	end
+}
+
+
+class DnDPressureTransition inherits PressureTransition {
+	reference dnd : DnD
+
+	method action() : Void is do
+	stdio.writeln("press")
+		dnd.pxStart := px
+		dnd.pyStart := py
+		dnd.pxEnd   := px
+		dnd.pyEnd   := py
+		dnd.button 	:= button
+		dnd.source  := dnd.getPickableAt(px, py)
+		dnd.target 	:= dnd.source
+	end
+}

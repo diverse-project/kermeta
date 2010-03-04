@@ -11,13 +11,11 @@ package kermeta::ki::malai::interaction;
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/graphics/Point.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
 
 using kermeta::ki::malai::interaction
-using kermeta::ki::malai::graphics
-using kermeta::standard
 using kermeta::ki::malai::picking
+using kermeta::standard
 
 
 class Press inherits Interaction
@@ -35,7 +33,7 @@ class Press inherits Interaction
 	method reinit() : Void is do
 		super
 		
-		button := -1
+		button := void
 		target := void
 	end
 	
@@ -46,7 +44,6 @@ class Press inherits Interaction
 		pressed.initialise("pressed")
 		addState(pressed)
 		ppt.initialise(initState, pressed)
-		
 	end
 }
 
@@ -57,7 +54,6 @@ class PressPressureTransition inherits PressureTransition
 	
 	
 	method action() : Void is do
-	stdio.writeln("press")
 		press.px     := px
 		press.py     := py
 		press.button := button
