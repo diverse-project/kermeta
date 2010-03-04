@@ -1,7 +1,7 @@
-/* $Id:$ 
+/*
  * Creation : February 24, 2010
  * Licence  : EPL 
- * Copyright:
+ * Copyright: INRIA Rennes
  * Authors  : Arnaud Blouin
  */
 
@@ -10,10 +10,15 @@ package kermeta::ki::malai::interaction::event;
 
 
 require kermeta
-require "../../dispatcher/Dispatcher.kmt"
-require "Event.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/dispatcher/Dispatcher.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/EventHandler.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/Event.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/MouseEvent.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/KeyEvent.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/ActionEvent.kmt"
 
 using kermeta::ki::malai::dispatcher
+using kermeta::ki::malai::interaction
 using kermeta::standard
 
 
@@ -24,6 +29,10 @@ using kermeta::standard
 */
 class EventManager inherits Dispatchable
 {
+	/** The objects that must be aware about new produced events. */
+	reference handlers : EventHandler[0..*]
+	
+
 	/** Initialises the EventManager. */
 	operation initialise(dispatcher : AbstractDispatcher) : Void is do
 		self.dispatcher := dispatcher
@@ -64,9 +73,55 @@ class EventManager inherits Dispatchable
 	
 	
 	/**
-		Processes the event produces by the Java UI and transfered to Kermeta.
+	* Processes the event produces by the Java UI and transfered to Kermeta.
 	*/
 	operation process(event : Event) : Void is do
-		stdio.writeln(event.getName)
-	end
+	//	stdio.writeln(event.getName)
+	
+		if(event.getName.equals("MOUSE_PRESSED")) then
+			var me : MouseEvent init event.getInfo.asType(MouseEvent)
+			handlers.each{h | h.onPressure(me.getButton, me.getX.toReal, me.getY.toReal, 0) }
+		else 
+		if(event.getName.equals("MOUSE_RELEASED")) then
+			var me : MouseEvent init event.getInfo.asType(MouseEvent)
+			handlers.each{h | h.onRelease(me.getButton, me.getX.toReal, me.getY.toReal, 0) }
+		else
+		if(event.getName.equals("MOUSE_MOVED")) then
+			var me : MouseEvent init event.getInfo.asType(MouseEvent)
+			handlers.each{h | h.onMove(me.getButton, me.getX.toReal, me.getY.toReal, false, 0) }
+		else
+		if(event.getName.equals("MOUSE_DRAGGED")) then
+			var me : MouseEvent init event.getInfo.asType(MouseEvent)
+			handlers.each{h | h.onMove(me.getButton, me.getX.toReal, me.getY.toReal, true, 0) }
+		else
+		if(event.getName.equals("KEY_PRESSED")) then
+			var ke : KeyEvent init event.getInfo.asType(KeyEvent)
+			handlers.each{h | h.onKeyPressure(ke.getKeyCode, 0) }
+		else
+		if(event.getName.equals("KEY_RELEASED")) then
+			var ke : KeyEvent init event.getInfo.asType(KeyEvent)
+			handlers.each{h | h.onKeyRelease(ke.getKeyCode, 0) }
+		else
+		if(event.getName.equals("ACTION_PERFORMED")) then
+			var ae : ActionEvent init event.getInfo.asType(ActionEvent)
+			
+			if(ae.isFromButton) then handlers.each{h | h.onButtonPressed(ae.getActionCommand) }
+			else if(ae.isFromTextField) then /* TODO */ end
+			end
+		end end end end end end end end
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

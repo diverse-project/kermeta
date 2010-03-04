@@ -9,11 +9,13 @@ package kermeta::ki::malai::interaction;
 
 
 require kermeta
-require "State.kmt"
-require "EventHandler.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/State.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/EventHandler.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/transition/Transition.kmt"
 
 using kermeta::standard
-
+using kermeta::ki::malai::interaction::event
 
 
 abstract class StateMachine inherits EventHandler
@@ -26,10 +28,15 @@ abstract class StateMachine inherits EventHandler
 	
 	reference currentState : State
 	
+	/** The general events manager that dispatches produced events. */
+	reference eventManager : EventManager
 	
-	operation initialise() : Void is do
+	
+	operation initialise(eventManager : EventManager) : Void is do
+		self.eventManager := eventManager
 		activated := true
 		initState := InitState.new
+		initState.initialise("init")
 		addState(initState)
 		reinit
 		initStateMachine	
@@ -78,7 +85,7 @@ abstract class StateMachine inherits EventHandler
 			var stop : Boolean init false
 			
 			currentState.transitions.exists{ t |
-				if(t.isKindOf(TextChangedTransition)) then
+				if(t.isInstanceOf(TextChangedTransition)) then
 					var tct : TextChangedTransition init t.asType(TextChangedTransition)
 	
 					tct.textCompName := textCompName
@@ -97,147 +104,147 @@ abstract class StateMachine inherits EventHandler
 	
 	
 
-/*	@Override
-	public void onButtonPressed(AbstractButton button) {
-		if(!activated) return ;
-		
-		boolean again = true;
-		Transition t;
-		
-		for(int i=0, j=currentState.transitions.size(); i<j && again; i++) {
-			t = currentState.transitions.elementAt(i);
+	method onButtonPressed(buttonName : String) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
 			
-			if(t instanceof ButtonPressedTransition) {
-				ButtonPressedTransition bpt = (ButtonPressedTransition) t;
+			currentState.transitions.exists{t |
+				if(t.isInstanceOf(ButtonPressedTransition)) then
+					t.asType(ButtonPressedTransition).buttonName := buttonName
+					
+					if(t.isGuardRespected) then
+						stop := true
+						executeTransition(t)
+					end
+				end
 				
-				bpt.setButton(button);
-				
-				if(t.isGuardRespected()) {
-					again = false;
-					executeTransition(t);
-				}
+				stop
 			}
-		}		
-	}
+		end		
+	end
 	
 	
 
-	@Override
-	public void onKeyPressure(int key, int idHID) {
-		if(!activated) return ;
-		
-		boolean again = true;
-		Transition t;
-		
-		for(int i=0, j=currentState.transitions.size(); i<j && again; i++) {
-			t = currentState.transitions.elementAt(i);
+	method onKeyPressure(key : Integer, idHID : Integer) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
 			
-			if(t instanceof KeyPressureTransition) {
-				KeyPressureTransition kpt = (KeyPressureTransition) t;
+			currentState.transitions.exists{t |
+				if(t.isInstanceOf(KeyPressureTransition)) then
+					t.asType(KeyPressureTransition).key := key
+					
+					if(t.isGuardRespected) then
+						stop := true
+						executeTransition(t)
+					end
+				end
 				
-				kpt.setKey(key);
-				
-				if(t.isGuardRespected()) {
-					again = false;
-					executeTransition(t);
-				}
+				stop
 			}
-		}		
-	}
+		end
+	end
 
-	@Override
-	public void onKeyRelease(int key, int idHID) {
-		if(!activated) return ;
-		
-		boolean again = true;
-		Transition t;
-		
-		for(int i=0, j=currentState.transitions.size(); i<j && again; i++) {
-			t = currentState.transitions.elementAt(i);
-			
-			if(t instanceof KeyReleaseTransition) {
-				KeyReleaseTransition krt = (KeyReleaseTransition) t;
-				
-				krt.setKey(key);
-				
-				if(t.isGuardRespected()) {
-					again = false;
-					executeTransition(t);
-				}
-			}
-		}		
-	}
 
-	@Override
-	public void onMove(int button, Point point, boolean pressed, int idHID) {
-		if(!activated) return ;
-		
-		boolean again = true;
-		Transition t;
-		
-		for(int i=0, j=currentState.transitions.size(); i<j && again; i++) {
-			t = currentState.transitions.elementAt(i);
-			
-			if(t instanceof MoveTransition) {
-				MoveTransition mt = (MoveTransition)t;
-				
-				mt.setPoint(point);
-				mt.setButton(button);
-				mt.setPressed(pressed);
-				
-				if(t.isGuardRespected()) {
-					again = false;
-					executeTransition(t);
-				}
-			}
-		}		
-	}
 
-	@Override
-	public void onPressure(int button, Point point, int idHID) {
-		if(!activated) return ;
-		
-		boolean again = true;
-		Transition t;
-		
-		for(int i=0, j=currentState.transitions.size(); i<j && again; i++) {
-			t = currentState.transitions.elementAt(i);
+	method onKeyRelease(key : Integer, idHID : Integer) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
 			
-			if(t instanceof PressureTransition) {
-				PressureTransition pt =  (PressureTransition)t;
+			currentState.transitions.exists{t |
+				if(t.isInstanceOf(KeyReleaseTransition)) then
+					t.asType(KeyReleaseTransition).key := key
+					
+					if(t.isGuardRespected) then
+						stop := true
+						executeTransition(t)
+					end
+				end
 				
-				pt.setPoint(point);
-				pt.setButton(button);
-				
-				if(t.isGuardRespected()) {
-					again = false;
-					executeTransition(t);
-				}
+				stop
 			}
-		}		
-	}
+		end
+	end
 
-	@Override
-	public void onRelease(int button, Point point, int idHID) {
-		if(!activated) return ;
-		
-		boolean again = true;
-		Transition t;
-		
-		for(int i=0, j=currentState.transitions.size(); i<j && again; i++) {
-			t = currentState.transitions.elementAt(i);
+
+
+	method onMove(button : Integer, px : Real, py : Real, pressed : Boolean, idHID : Integer) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
 			
-			if(t instanceof ReleaseTransition) {
-				ReleaseTransition rt = (ReleaseTransition)t;
+			currentState.transitions.exists{t |
+				if(t.isInstanceOf(MoveTransition)) then
+					var mt : MoveTransition init t.asType(MoveTransition)
+					
+					mt.px      := px
+					mt.py      := py
+					mt.button  := button
+					mt.pressed := pressed
+					
+					if(t.isGuardRespected) then
+						stop := true
+						executeTransition(t)
+					end
+				end
 				
-				rt.setPoint(point);
-				rt.setButton(button);
-				
-				if(t.isGuardRespected()) {
-					again = false;
-					executeTransition(t);
-				}
+				stop
 			}
-		}		
-	}*/
+		end
+	end
+	
+	
+
+
+	method onPressure(button : Integer, px : Real, py : Real, idHID : Integer) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+
+			currentState.transitions.exists{t |
+				if(t.isInstanceOf(PressureTransition)) then
+					var pt : PressureTransition init t.asType(PressureTransition)
+					
+					pt.px     := px
+					pt.py     := py
+					pt.button := button
+					
+					if(t.isGuardRespected) then
+						stop := true
+						executeTransition(t)
+					end
+				end
+				
+				stop
+			}
+		end
+	end
+
+
+
+	method onRelease(button : Integer, px : Real, py : Real, idHID : Integer) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+			
+			currentState.transitions.exists{t |
+				if(t.isInstanceOf(ReleaseTransition)) then
+					var rt : ReleaseTransition init t.asType(ReleaseTransition)
+					
+					rt.px     := px
+					rt.py     := py
+					rt.button := button
+					
+					if(t.isGuardRespected) then
+						stop := true
+						executeTransition(t)
+					end
+				end
+				
+				stop
+			}
+		end
+	end
 }

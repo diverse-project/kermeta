@@ -1,0 +1,66 @@
+/*
+ * Creation : February 26, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::interaction;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/graphics/Point.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
+
+using kermeta::ki::malai::interaction
+using kermeta::ki::malai::graphics
+using kermeta::standard
+using kermeta::ki::malai::picking
+
+
+class Press inherits Interaction
+{
+	attribute px : Real
+	
+	attribute py : Real
+	
+	attribute button : Integer
+	
+	reference target : Pickable
+	
+	
+	
+	method reinit() : Void is do
+		super
+		
+		button := -1
+		target := void
+	end
+	
+	
+	method initStateMachine() : Void is do
+		var pressed : TerminalState init TerminalState.new
+		var ppt : PressPressureTransition init PressPressureTransition.new
+		pressed.initialise("pressed")
+		addState(pressed)
+		ppt.initialise(initState, pressed)
+		
+	end
+}
+
+
+class PressPressureTransition inherits PressureTransition
+{
+	reference press : Press
+	
+	
+	method action() : Void is do
+	stdio.writeln("press")
+		press.px     := px
+		press.py     := py
+		press.button := button
+		press.target := press.getPickableAt(px, py)
+	end
+}

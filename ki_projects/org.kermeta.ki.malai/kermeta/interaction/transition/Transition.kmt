@@ -9,9 +9,13 @@ package kermeta::ki::malai::interaction;
 
 
 require kermeta
-require "../State.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/State.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/Event.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/MouseEvent.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/KeyEvent.kmt"
 
 using kermeta::standard
+using kermeta::ki::malai::interaction::event
 
 
 abstract class Transition
@@ -51,7 +55,7 @@ abstract class Transition
 	end
 	
 	
-//	operation update(e : EventObject) : Void is abstract//TODO
+	operation update(e : Event) : Void is abstract
 
 
 	method toString() : String is do
@@ -115,15 +119,16 @@ abstract class PointingDeviceTransition inherits Transition {
 	end
 
 	
-	//TODO
-/*	public void update(EventObject e) {
-		if(e!=null && e instanceof MouseEvent) {
-			MouseEvent me = (MouseEvent) e;
-			point  = me.getPoint();
-			button = me.getButton();
-		}
-	}
-*/	
+
+	method update(e : Event) : Void is do
+		if(e.isKindOf(MouseEvent)) then
+			var me : MouseEvent init e.asType(MouseEvent)
+			px 		:= me.getX.toReal
+			py 		:= me.getY.toReal
+			button  := me.getButton
+		end
+	end
+	
 }
 
 
@@ -145,14 +150,11 @@ class TextChangedTransition inherits Transition {
 	
 	attribute text : String
 	
-	//TODO
-/*	public void update(EventObject e) {
-		if(e!=null && e instanceof ActionEvent && e.getSource() instanceof JTextComponent) {
-			textComp = (JTextComponent) e.getSource();
-			text     = textComp.getText();
-		}
-	}
-*/
+	method update(e : Event) : Void is do//TODO
+		/*if(e.isKindOf(ActionEvent)) then
+			text = textComp.getText();
+		end*/
+	end
 }
 
 
@@ -168,10 +170,10 @@ abstract class KeyboardTransition inherits Transition {
 		key := -1
 	end
 	
-	//TODO
-/*	public void update(EventObject e) {
-		if(e!=null && e instanceof KeyEvent)
-			key = ((KeyEvent)e).getKeyCode();
-	}
-*/
+
+	method update(e : Event) : Void is do
+		if(e.isKindOf(KeyEvent)) then
+			key := e.asType(KeyEvent).getKeyCode()
+		end
+	end
 }

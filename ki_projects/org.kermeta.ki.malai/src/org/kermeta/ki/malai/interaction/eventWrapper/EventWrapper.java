@@ -114,9 +114,9 @@ public class EventWrapper {
 	 */
 	public static java.lang.String getEventClassPath(AWTEvent evt) {
 		if(evt instanceof ActionEvent) 		return "kermeta::ki::malai::interaction::event::ActionEvent";
-		if(evt instanceof MouseWheelEvent) 	return "kermeta::ki::malai::interaction::event::MouseWheelEventWrapper";
-		if(evt instanceof MouseEvent) 		return "kermeta::ki::malai::interaction::event::MouseEventWrapper";
-		if(evt instanceof KeyEvent)			return "kermeta::ki::malai::interaction::event::KeyEventWrapper";
+		if(evt instanceof MouseWheelEvent) 	return "kermeta::ki::malai::interaction::event::MouseWheelEvent";
+		if(evt instanceof MouseEvent) 		return "kermeta::ki::malai::interaction::event::MouseEvent";
+		if(evt instanceof KeyEvent)			return "kermeta::ki::malai::interaction::event::KeyEvent";
 		return "";
 	}
 	
