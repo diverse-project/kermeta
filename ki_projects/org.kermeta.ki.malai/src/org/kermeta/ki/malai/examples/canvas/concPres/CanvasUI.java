@@ -11,16 +11,40 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
+import org.kermeta.ki.malai.picking.Pickable;
+import org.kermeta.ki.malai.picking.Picker;
+
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 
 
 
-public class CanvasUI extends JPanel {
+public class CanvasUI extends JPanel implements Picker, Pickable {
 
 	private static final long serialVersionUID = 1L;
 
 	protected ArrayList<ShapeUI> shapesUI;
 	
 	protected EventManagerWrapper eventManager;
+	
+	
+	
+	
+	public static RuntimeObject onShapeAdded(RuntimeObject canvasRO, RuntimeObject shapeRO, RuntimeObject positionRO) {
+		CanvasUI canvasUI = (CanvasUI) canvasRO.getUserData();
+		int position 	  = Integer.getValue(positionRO);
+		String className  = NamedElementHelper.getQualifiedName(
+							((fr.irisa.triskell.kermeta.language.structure.Class)shapeRO.getMetaclass().getKCoreObject()).getTypeDefinition());
+		ShapeUI shape	  = ShapeUIFactory.getShapeUIInstance(className);
+		
+		canvasUI.addShape(position, shape);
+		shapeRO.setUserData(shape);
+		canvasUI.repaint();
+		
+		return canvasRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
 	
 	
 
@@ -108,5 +132,33 @@ public class CanvasUI extends JPanel {
 	public void addShape(int position, ShapeUI shape) {
 		if(shape!=null && position<shapesUI.size() && position>=0)
 			shapesUI.add(position, shape);
+		else
+			if((position==-1 || position==shapesUI.size()) && shape!=null)
+				shapesUI.add(shape);
+	}
+
+
+	public boolean contains(Object obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public Pickable getPickableAt(Point2D point) {
+		Pickable p = getViewAt(point);
+		
+		return p==null ? contains((int)point.getX(), (int)point.getY()) ? this : null : p;
+	}
+
+
+
+	public Picker getPickerAt(Point2D point) {
+		return null;
+	}
+
+
+
+	public Point2D getRelativePoint(Point2D pt, Object o) {
+		return getViewAt(pt)==null ? null : pt;
 	}
 }

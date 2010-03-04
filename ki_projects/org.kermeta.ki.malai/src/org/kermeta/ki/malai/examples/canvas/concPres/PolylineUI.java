@@ -14,10 +14,10 @@ public class PolylineUI extends ShapeUI {
 	@Override
 	public void paint(Graphics2D g) {
 		GeneralPath path = new GeneralPath();
-		path.moveTo((float)points.firstElement().getX(), (float)points.firstElement().getY());
+		path.moveTo((float)points.get(0).getX(), (float)points.get(0).getY());
 		
 		for(int i=1, j=points.size(); i<j; i++)
-			path.lineTo((float)points.elementAt(i).getX(), (float)points.elementAt(i).getY());
+			path.lineTo((float)points.get(i).getX(), (float)points.get(i).getY());
 		
 		g.setColor(colourFill);
 		g.fill(path);
