@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="lib/kermeta.compilo.scala-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/maven-debian-uber.jar"/>
+	<classpathentry kind="lib" path="lib/classworlds-1.1-final.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
