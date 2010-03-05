@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.kermeta.compilerv2; singleton:=true
+Bundle-Vendor: %providerName
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.kermeta.compiler.Activator
+Import-Package: org.eclipse.core.runtime,
+ org.osgi.framework;version="1.5.0",
+ org.eclipse.ui
+Bundle-ClassPath: lib/classworlds-1.1-final.jar,
+ lib/kermeta.compilo.scala-0.0.1-SNAPSHOT.jar,
+ lib/maven-debian-uber.jar,
+ .
+Export-Package: org.kermeta.compiler.service
