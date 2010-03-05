@@ -6,7 +6,7 @@
     <name>fr.irisa.triskell.kermeta.compilo.scala</name>
     <version>0.0.1-SNAPSHOT</version>
     <description>Kermeta Compiler V2</description>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,6 +27,10 @@
         <repository>
             <id>triskellPublic</id>
             <url>http://tipimouss.irisa.fr:8081/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>repoNetbeans</id>
+            <url>http://bits.netbeans.org/maven2/</url>
         </repository>
     </repositories>
 
@@ -55,11 +59,8 @@
                 <artifactId>maven-scala-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>process-resources</phase> <!-- to support mix java/scala only -->
-                        <goals>
-                            <goal>add-source</goal>      <!-- to support mix java/scala only -->
+                        <goals>     
                             <goal>compile</goal>
-                            <goal>testCompile</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -221,6 +222,13 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+
+                <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>maven-embedder-2.1-20080623-patched</artifactId>
+            <version>RELEASE68</version>
+        </dependency>
+
     </dependencies>
 
 
