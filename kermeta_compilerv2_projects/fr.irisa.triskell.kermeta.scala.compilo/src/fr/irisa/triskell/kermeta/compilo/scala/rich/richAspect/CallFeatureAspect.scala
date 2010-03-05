@@ -65,7 +65,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
   def generateOperationCall(res : StringBuilder){
     var TargetType : StringBuilder = new StringBuilder
     this.getTarget().getStaticType().generateScalaCode(TargetType)
-    res.append(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName))
+    res.append(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName)))
   }
 	
   def generateName(res : StringBuilder){

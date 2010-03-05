@@ -218,7 +218,15 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
         }
 					
         viewDef.append("\n")
-        implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName()))+") = v.asInstanceOf["+ Util.protectScalaKeyword(packageName.toString)+"."+ par.getName+"Aspect]\n"
+
+
+        if("EObject".equals(par.getName)){
+            implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName()))+") = v.asInstanceOf[fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect]\n"
+
+        } else {
+            implicitDef append " implicit def richAspect(v : "+ Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getTypeEquivalence(genpackageName.toString+par.getName()))+") = v.asInstanceOf["+ Util.protectScalaKeyword(packageName.toString)+"."+ par.getName+"Aspect]\n"
+        }
+
         implicitDef append " implicit def richAspect(v : "+ packageName.toString+"."+par.getName()+"Aspect) = v.asInstanceOf["+ Util.protectScalaKeyword(par.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo+ Util.getImplPackageSuffix(packageName.toString) + par.getName+"Impl")+"]\n"
       }else{
         var cd = getEcoreSuperClass(par)

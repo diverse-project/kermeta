@@ -19,7 +19,7 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
 				res.append(" override")
 			}
 			res.append(" def ")
-			res.append(this.getName())
+			res.append(Util.protectScalaKeyword(this.getName()))
 			/* Default constructor declaration */
 			res.append("(") 
 			var i = 0;
