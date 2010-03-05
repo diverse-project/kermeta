@@ -128,6 +128,9 @@ public class Pass1 extends MergePass {
 		ClassDefinition newDefinition = StructureFactory.eINSTANCE.createClassDefinition();
 		newDefinition.setName( definition.getName() );
 		newDefinition.setIsAbstract( definition.isIsAbstract() );
+		if ("NamedElement".equals(t.getName()))
+			System.err.println(definition.isIsAbstract() );
+		//newDefinition.setIsAbstract( true );
 		
 		kermetaUnit.addTypeDefinition(newDefinition, p);
 		/*
