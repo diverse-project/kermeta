@@ -9,11 +9,17 @@
             id="launchConfigurationTabGroup"
             type="org.kermeta.debug.runConfiguration">
       </launchConfigurationTabGroup>
-      <launchConfigurationTabGroup
+      <launchConfigurationTabGroup 
             class="org.kermeta.runner.launching.KermetaLaunchConfigTabGroup"
             description="Launch a Kermeta program in constraint mode"
             id="org.kermeta.debug.ui.launchConfigurationTabGroup2"
             type="org.kermeta.debug.constraintConfiguration">
+      </launchConfigurationTabGroup>
+      <launchConfigurationTabGroup
+            class="org.kermeta.runner.launching.compiled.KermetaLaunchCompiledConfigTabGroup"
+            description="Launch a Kermeta program in compiled mode"
+            id="org.kermeta.compile.ui.launchConfigurationTabGroup3"
+            type="org.kermeta.debug.compileConfiguration">
       </launchConfigurationTabGroup>
    </extension>
    <extension
@@ -27,6 +33,11 @@
             configTypeID="org.kermeta.debug.constraintConfiguration"
             icon="icons/kermeta_logo.gif"
             id="org.kermeta.debug.ui.launchConfigurationTypeImage2">
+      </launchConfigurationTypeImage>
+      <launchConfigurationTypeImage
+            configTypeID="org.kermeta.debug.compileConfiguration"
+            icon="icons/kermeta_logo.gif"
+            id="org.kermeta.compile.ui.launchConfigurationTypeImage2">
       </launchConfigurationTypeImage>
    </extension>
    <extension
@@ -106,13 +117,47 @@
             </enablement>
          </contextualLaunch>
       </shortcut>
+      <shortcut
+            class="org.kermeta.runner.launching.compiled.CompiledLaunchShortcut"
+            icon="icons/kermeta_logo.gif"
+            id="org.kermeta.compile.ui.kermetaApplication"
+            label="Kermeta Compiled Application"
+            modes="run">
+         <configurationType
+               id="org.kermeta.debug.compileConfiguration"> 
+         </configurationType>
+         <contextualLaunch>
+            <contextLabel
+                  label="Run as Kermeta Compiled Application"
+                  mode="run">
+            </contextLabel>
+            <enablement>
+               <count
+                     value="1">
+               </count>
+               <iterate
+                     operator="or">
+                  <or>
+                     <test
+                           property="org.eclipse.debug.ui.matchesPattern"
+                           value="*.kmt">
+                     </test>
+                     <test
+                           property="org.eclipse.debug.ui.matchesPattern"
+                           value="*.km">
+                     </test>
+                  </or>
+               </iterate>
+            </enablement>
+         </contextualLaunch>
+      </shortcut>
    </extension>
    <extension
          point="org.eclipse.debug.ui.debugModelPresentations">
       <debugModelPresentation
             class="org.kermeta.runner.ui.model.KModelPresentation"
             id="org.kermeta.debug">
-      </debugModelPresentation>
+      </debugModelPresentation> 
    </extension>
 
 <extension point="org.eclipse.ui.editorActions">
@@ -126,7 +171,6 @@
             id="org.kermeta.debugger.addBreakpointAction"
             label="Add Breakpoint"
             state="true"
-            style="push"
             tooltip="Kermeta Breakpoint">
       </action>
    </editorContribution>

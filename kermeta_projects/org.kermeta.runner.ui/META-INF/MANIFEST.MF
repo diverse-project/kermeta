@@ -21,6 +21,7 @@ Require-Bundle: org.eclipse.ui,
 Bundle-ActivationPolicy: lazy
 Export-Package: org.kermeta.runner.dialogs,
  org.kermeta.runner.launching,
+ org.kermeta.runner.launching.compiled,
  org.kermeta.runner.ui,
  org.kermeta.runner.ui.actions,
  org.kermeta.runner.ui.model
