@@ -98,8 +98,8 @@ class DnDMoveTransition inherits MoveTransition {
 
 
 	method action() : Void is do
-		dnd.pxEnd  := px
-		dnd.pyEnd  := py
+		dnd.pxEnd  := Real.clone(px)
+		dnd.pyEnd  := Real.clone(py)
 		dnd.target := dnd.getPickableAt(px, py)
 	end
 }
@@ -117,10 +117,10 @@ class DnDPressureTransition inherits PressureTransition {
 	reference dnd : DnD
 
 	method action() : Void is do
-		dnd.pxStart := px
-		dnd.pyStart := py
-		dnd.pxEnd   := px
-		dnd.pyEnd   := py
+		dnd.pxStart := Real.clone(px)
+		dnd.pyStart := Real.clone(px)
+		dnd.pxEnd   := Real.clone(px)
+		dnd.pyEnd   := Real.clone(py)
 		dnd.button 	:= button
 		dnd.source  := dnd.getPickableAt(px, py)
 		dnd.target 	:= dnd.source

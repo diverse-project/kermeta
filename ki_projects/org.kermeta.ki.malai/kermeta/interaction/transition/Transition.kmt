@@ -113,18 +113,20 @@ abstract class PointingDeviceTransition inherits Transition {
 	method initialise(inputState : State, outputState : State) : Void is do
 		super(inputState, outputState)
 
-		px := 0.toReal
-		py := 0.toReal
-		button := -1
+		px := void
+		py := void
+		button := void
 	end
 
 	
 
-	method update(e : Event) : Void is do
+	method update(e : Event) : Void is do//TODO remove this method since it is never called
 		if(e.isKindOf(MouseEvent)) then
 			var me : MouseEvent init e.asType(MouseEvent)
 			px 		:= me.getX.toReal
 			py 		:= me.getY.toReal
+			stdio.writeln("udpate PointingDeviceTransition:" + px.toString + " " + py.toString)
+			stdio.writeln("udpate PointingDeviceTransition:" + me.getX.toString + " " + me.getY.toString)
 			button  := me.getButton
 		end
 	end

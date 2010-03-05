@@ -44,6 +44,17 @@ public abstract class ShapeUI implements Pickable {
 	
 	
 	
+	public static RuntimeObject contains(RuntimeObject shapeRO, RuntimeObject xRO, RuntimeObject yRO) {
+		double x	 = Real.getValue(xRO);
+		double y	 = Real.getValue(yRO);
+		ShapeUI sh	 = (ShapeUI) shapeRO.getUserData();
+		boolean contains = sh.isIn(x, y);
+		
+		return contains ? shapeRO.getFactory().getMemory().trueINSTANCE : shapeRO.getFactory().getMemory().falseINSTANCE;
+	}
+	
+	
+	
 	
 	public ShapeUI() {
 		super();
@@ -58,7 +69,7 @@ public abstract class ShapeUI implements Pickable {
 	
 	
 	public boolean contains(Point point) {
-		return isIn(point);
+		return isIn(point.x, point.y);
 	}
 	
 	
@@ -84,8 +95,8 @@ public abstract class ShapeUI implements Pickable {
 	}
 	
 	
-	public boolean isIn(Point2D pt) {
-		if(points.size()==0 || pt==null) return false;
+	public boolean isIn(double x, double y) {
+		if(points.size()==0) return false;
 		
 		GeneralPath path = new GeneralPath();
 		path.moveTo((float)points.get(0).getX(), (float)points.get(0).getY());
@@ -93,7 +104,7 @@ public abstract class ShapeUI implements Pickable {
 		for(int i=1, j=points.size(); i<j; i++)
 			path.lineTo((float)points.get(i).getX(), (float)points.get(i).getY());
 		
-		return path.contains(pt);
+		return path.contains(x, y);
 	}
 	
 	

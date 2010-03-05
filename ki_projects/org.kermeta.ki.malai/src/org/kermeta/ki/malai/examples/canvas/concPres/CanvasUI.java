@@ -74,7 +74,7 @@ public class CanvasUI extends JPanel implements Picker, Pickable {
 		for(int i=shapesUI.size()-1; i>=0; i--) {
 			v = shapesUI.get(i);
 			
-			if(v.isIn(point))
+			if(v.isIn(point.getX(), point.getY()))
 				return v;
 		}
 		

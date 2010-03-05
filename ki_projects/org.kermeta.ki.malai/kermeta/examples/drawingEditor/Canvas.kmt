@@ -18,6 +18,7 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/dispatcher/Dispatcher.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/DnD.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
 
@@ -34,15 +35,19 @@ class CanvasLauncher
 		var aui          : CanvasIS       init CanvasIS.new
 		var eventManager : EventManager   init EventManager.new
 		var dispatcher   : ListDispatcher init ListDispatcher.new
-		var dnd          : DnD            init DnD.new
+//		var dnd          : DnD            init DnD.new
+		var press        : Press          init Press.new
 		
 		dispatcher.initialise
 		eventManager.initialise(dispatcher)
 		dispatcher.processes.add(eventManager)
 		aui.initialise(eventManager)
-		dnd.initialise(eventManager)
+		press.initialise(eventManager)
 
 		initSomeShapes(aui)
+		
+		press.picker := aui.drawing
+		
 		aui.setVisible(true)
 		
 		dispatcher.run

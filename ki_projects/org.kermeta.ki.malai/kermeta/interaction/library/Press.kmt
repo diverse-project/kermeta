@@ -41,6 +41,7 @@ class Press inherits Interaction
 	method initStateMachine() : Void is do
 		var pressed : TerminalState init TerminalState.new
 		var ppt : PressPressureTransition init PressPressureTransition.new
+		ppt.press := self
 		pressed.initialise("pressed")
 		addState(pressed)
 		ppt.initialise(initState, pressed)
@@ -54,9 +55,9 @@ class PressPressureTransition inherits PressureTransition
 	
 	
 	method action() : Void is do
-		press.px     := px
-		press.py     := py
+		press.px     := Real.clone(px)
+		press.py     := Real.clone(py)
 		press.button := button
-		press.target := press.getPickableAt(px, py)
+		press.target := press.getPickableAt(press.px, press.py)
 	end
 }

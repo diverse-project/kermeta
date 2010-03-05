@@ -46,7 +46,7 @@ class CanvasIS {
 
 aspect class Shape inherits Pickable {
 	method contains(px : Real, py : Real) : Boolean is do
-		result := false
+		result ?= extern org::kermeta::ki::malai::examples::canvas::concPres::ShapeUI.contains(self, px, py)
 	end
 
 
@@ -76,7 +76,14 @@ aspect class Drawing inherits Picker {
 	
 	
 	method getPickableAt(px : Real, py : Real) : Pickable is do
-		result := void
+		var pickable : Pickable
+
+		shapes.exists{sh | 
+			if(sh.contains(px, py)) then pickable := sh end
+			not pickable.isVoid
+		}
+		
+		result := pickable
 	end
 	
 	method getPickerAt(px : Real, py : Real) : Picker is do

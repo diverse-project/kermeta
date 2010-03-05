@@ -3,7 +3,6 @@ package org.kermeta.ki.malai.examples.canvas.concPres;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Point2D;
 
 public class EllipseUI extends ShapeUI {
 
@@ -14,12 +13,14 @@ public class EllipseUI extends ShapeUI {
 	
 	
 	@Override
-	public boolean isIn(Point2D pt) {
-		if(points.size()==0 || pt==null) return false;
+	public boolean isIn(double x, double y) {
+		if(points.size()==0) return false;
 		
 		Ellipse2D.Double ell = new Ellipse2D.Double(getMinX(), getMinY(), getWidth(), getHeight());
 		
-		return ell.contains(pt);
+		System.out.println(">>>>>>>>>isIs:" + x + "  " + y);
+		System.out.println(">>>>>>>>>isIs:" + ell.contains(x, y));
+		return ell.contains(x, y);
 	}
 	
 	
