@@ -435,7 +435,11 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 				datas.store(currentEnumeration, node);
 				kermetaUnit.addTypeDefinition(currentEnumeration, getCurrentPackage());
 				acceptList(node.getELiterals());
-			}		
+			}	
+			else{
+				Tag t = KermetaModelHelper.Tag.create("ecore", "true");
+				currentEnumeration.getOwnedTags().add(t);
+			}	
 			return currentEnumeration;
 		}
 		return null;
