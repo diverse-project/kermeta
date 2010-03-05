@@ -1,5 +1,5 @@
 /*
- * Created on 1 déc. 2005
+ * Created on 1 dï¿½c. 2005
  *
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
@@ -32,7 +32,7 @@ public class Run {
 	public static void main(String[] args) throws Exception{
 		
 		Hashtable variables = new Hashtable();
-		
+
 		KermetaUnit.STD_LIB_URI = "lib/framework.km";
 		KermetaUnit std = KermetaUnit.getStdLib();
 		KermetaInterpreter i = new KermetaInterpreter(std);
