@@ -11,7 +11,7 @@ class FileIO {
 		} else {
 			filename = file
 		}
-		println("WriteTxt="+filename)
+		//println("WriteTxt="+filename)
 		
 		var repname = new File(filename.substring(0, filename.lastIndexOf("/")))
 		if(!repname.exists()){ repname.mkdirs }
@@ -27,7 +27,7 @@ class FileIO {
 		} else {
 			filename = file
 		}
-		println("WriteTxt="+filename)
+		//println("WriteTxt="+filename)
 		
 		var repname = new File(filename.substring(0, filename.lastIndexOf("/")))
 		if(!repname.exists()){ repname.mkdirs }
