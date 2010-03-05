@@ -13,7 +13,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <scala.version>2.8.0.Beta1</scala.version>
     </properties>
-
     <repositories>
         <repository>
             <id>thirdparty</id>
@@ -82,6 +81,30 @@
                     <target>1.5</target>
                 </configuration>
             </plugin>
+
+		<plugin>
+		<groupId>org.codehaus.mojo</groupId>
+		<artifactId>truezip-maven-plugin</artifactId>
+		<version>1.0-beta-4</version>
+		<executions>
+		  <execution>
+		    <id>remove-a-file</id>
+		    <goals>
+		      <goal>remove</goal>
+		    </goals>
+		    <phase>package</phase>
+		    <configuration>
+		      <fileset>
+		        <directory>target/${project.artifactId}-${project.version}.jar/META-INF</directory>
+		        <includes>
+		          <include>**/*.RSA</include>
+			   <include>**/*.SF</include>
+		        </includes>
+		      </fileset>
+		    </configuration>
+		  </execution>
+		</executions>
+	      </plugin>
 
 
             <plugin>
