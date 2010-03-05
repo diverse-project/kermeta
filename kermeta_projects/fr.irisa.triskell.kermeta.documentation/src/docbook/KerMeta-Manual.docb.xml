@@ -1786,13 +1786,15 @@ class C {
         </section>
 
         <section>
-          <title>Other useful function when casting</title>
+          <title>Useful functions when casting</title>
 
-          <para>In complement you can use, the <literal>isVoid</literal>
+          <para>In complement you can use the <literal>isVoid</literal>
           operation (available on every object) to test the result of a
-          conditionnal cast. Or you may use the <literal>isKindOf</literal>
-          operation to test if the passed object is of the correct type before
-          the assignment/asType.</para>
+          conditionnal cast. Or you may use the <literal>isKindOf</literal> or the <literal>isInstanceOf</literal>
+          operations to test if the calling object has the same type of the given class before
+          the assignment/asType. The <literal>isKindOf</literal> operation returns <literal>true</literal> if the calling object 
+          has exactly the same type than the given class. The <literal>isInstanceOf</literal> operation returns <literal>true</literal>
+          if the calling object has the exact type or one of its super type than the given class.</para>
         </section>
       </section>
 
