@@ -12,11 +12,28 @@ using kermeta::kunit
 
 class TestReal inherits kermeta::kunit::TestCase {
 
+	attribute real1 : Real
+	
+	attribute real2 : Real
+
+
 	operation main() : Void is do
 		var tr : TestRunner init TestRunner.new
 		tr.run(TestReal)
 		tr.printTestResult
 	end
+	
+	
+	operation testRealUnreferencementAssignment() : Boolean is do
+		real1 := 11.toReal // Creation of a new Real
+		real2 := real1	   // real2 has now the Real value of real1
+		// The normal behaviour should be that real1 and real2 have the value 11.
+		// i.e. the assignement of real1 to real2 must not unreference real1 to void.
+		assert(not real1.isVoid)
+		assert(not real2.isVoid)
+		result := void
+	end
+	
 	
 	operation testRealInstanciation() : Boolean is do
 		var x : Real init "10".toReal

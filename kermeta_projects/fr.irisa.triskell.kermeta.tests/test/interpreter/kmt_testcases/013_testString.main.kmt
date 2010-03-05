@@ -10,11 +10,26 @@ require kermeta
 //
 class TestString inherits kermeta::kunit::TestCase {
  
+ 	attribute string1 : kermeta::standard::String
+ 	attribute string2 : kermeta::standard::String
+ 
     // Main operation that calls all the below ones
     operation main_operation() : kermeta::standard::String is do
 		stdio.write("toto")
 		result := void
     end
+    
+    
+	operation testStringUnreferencementAssignment() : Void is do
+		string1 := "hello" // Creation of a new String
+		string2 := string1	   // string2 has now the String value of string1
+		// The normal behaviour should be that string1 and string2 have the value "hello".
+		// i.e. the assignement of string1 to string2 must not unreference string1 to void.
+		assert(not string1.isVoid)
+		assert(not string2.isVoid)
+	end
+	
+	
     
     // throws an exception : == does not seem to work
     // error! more than failure

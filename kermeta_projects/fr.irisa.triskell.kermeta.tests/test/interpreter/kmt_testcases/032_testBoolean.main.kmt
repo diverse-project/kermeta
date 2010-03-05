@@ -12,12 +12,27 @@ using kermeta::standard
 // "and" is prioritary to "or"
 class TestBoolean inherits kermeta::kunit::TestCase 
 {
+	attribute boolean1 : Boolean
+	attribute boolean2 : Boolean
+
 	/** entry point when directly run (outside of daily test suites) */
 	operation main() : Void is do
     	var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
 		tr.run(TestBoolean)
 		tr.printTestResult
     end
+
+
+	operation testBooleanUnreferencementAssignment() : Boolean is do
+		boolean1 := false 			// Creation of a new Boolean
+		boolean2 := boolean1	   // boolean2 has now the Boolean value of boolean1
+		// The normal behaviour should be that boolean1 and boolean2 have the value false.
+		// i.e. the assignement of boolean1 to boolean2 must not unreference boolean1 to void.
+		assert(not boolean1.isVoid)
+		assert(not boolean2.isVoid)
+		result := void
+	end
+
 
 	operation testAssertTrue() is do
 		
