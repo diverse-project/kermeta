@@ -14,14 +14,16 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionHandler.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::picking
 using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::action
 
 
 
-class CanvasIS {
+class CanvasIS inherits ActionHandler {
 	attribute drawing : Drawing
 	
 	
@@ -40,6 +42,23 @@ class CanvasIS {
 	operation refreshView() : Void is do
 		extern org::kermeta::ki::malai::examples::canvas::ui::CanvasIS.refreshView(self)
 	end
+	
+	
+	method onActionAdded(action : Action) : Void is do
+		refreshView
+	end
+	
+	method onActionAborted(action : Action) : Void is do
+		refreshView
+	end 
+	
+	method onActionCancelled(action : Action) : Void is do
+		refreshView
+	end 
+	
+	method onActionExecuted(action : Action) : Void is do
+		refreshView
+	end 
 }
 
 
@@ -68,6 +87,66 @@ aspect class Ellipse {
 
 
 aspect class Drawing inherits Picker {
+
+	operation executeMapping() : Void is do
+		if(selection.empty) then
+			extern org::kermeta::ki::malai::examples::canvas::concPres::CanvasUI.setBorderVisible(self, false)
+		else
+			extern org::kermeta::ki::malai::examples::canvas::concPres::CanvasUI.setBorderVisible(self, true)
+			var tl : Point init getTLPoint(selection)
+			var br : Point init getBRPoint(selection)
+			extern org::kermeta::ki::malai::examples::canvas::concPres::CanvasUI.setBorderx(self, tl.x)
+			extern org::kermeta::ki::malai::examples::canvas::concPres::CanvasUI.setBordery(self, tl.y)
+			extern org::kermeta::ki::malai::examples::canvas::concPres::CanvasUI.setBorderwidth(self, br.x-tl.x)
+			extern org::kermeta::ki::malai::examples::canvas::concPres::CanvasUI.setBorderheight(self, br.y-tl.y)
+		end
+	end
+	
+	
+	operation getTLPoint(selection : Set<Shape>) : Point is do
+		result   := Point.new
+		result.x := 1000000.toReal
+		result.y := 1000000.toReal
+		
+		selection.each{sh | 
+			sh.points.each{pt |
+				if(pt.x<result.x) then result.x := Real.clone(pt.x) end
+				if(pt.y<result.y) then result.y := Real.clone(pt.y) end
+			}
+		}
+	end
+	
+	
+	operation getBRPoint(selection : Set<Shape>) : Point is do
+		result   := Point.new
+		result.x := -1000000.toReal
+		result.y := -1000000.toReal
+		
+		selection.each{sh | 
+			sh.points.each{pt |
+				if(pt.x>result.x) then result.x := Real.clone(pt.x) end
+				if(pt.y>result.y) then result.y := Real.clone(pt.y) end
+			}
+		}
+	end
+
+
+	operation addToSelection(shape : Shape) : Void is do
+		selection.add(shape)
+		executeMapping()
+	end
+
+
+	operation clearSelection() : Void is do
+		var size : Integer init selection.size
+		
+		if(size>0) then
+			selection.clear
+			executeMapping()
+		end
+	end
+
+
 	operation addShape(shape : Shape) : Void is do
 		shapes.add(shape)
 		extern org::kermeta::ki::malai::examples::canvas::concPres::CanvasUI.onShapeAdded(self, shape, -1)

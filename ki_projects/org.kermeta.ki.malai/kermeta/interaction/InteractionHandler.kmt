@@ -10,7 +10,7 @@ package kermeta::ki::malai::interaction;
 
 
 require kermeta
-require "./Interaction.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
 
 
 

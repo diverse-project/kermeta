@@ -1,0 +1,26 @@
+/*
+ * Creation : March 5, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+
+package kermeta::ki::malai::instrument;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Link.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::interaction
+using kermeta::ki::malai::interaction::event
+
+
+class PressLink inherits Link
+{
+	method createInteraction() : Interaction is do
+		result := Press.new
+	end
+}

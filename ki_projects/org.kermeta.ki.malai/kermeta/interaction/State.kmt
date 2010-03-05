@@ -9,9 +9,9 @@ package kermeta::ki::malai::interaction;
 
 
 require kermeta
-require "StateMachine.kmt"
-require "Interaction.kmt"
-require "transition/Transition.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/StateMachine.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/transition/Transition.kmt"
 
 using kermeta::standard
 
@@ -68,7 +68,7 @@ abstract class State
 
 class IntermediaryState inherits State {
 	method onIngoing() : Void is do
-		if(stateMachine.isKindOf(Interaction)) then
+		if(stateMachine.isInstanceOf(Interaction)) then
 			stateMachine.asType(Interaction).notifyHandlersOnUpdate()
 		end
 	end
@@ -80,7 +80,7 @@ class IntermediaryState inherits State {
 
 class AbortingState inherits State {
 	method onIngoing() : Void is do
-		if(stateMachine.isKindOf(Interaction)) then
+		if(stateMachine.isInstanceOf(Interaction)) then
 			stateMachine.asType(Interaction).notifyHandlersOnAborting()
 		end
 		stateMachine.reinit()
@@ -97,7 +97,7 @@ class InitState inherits State {
 	
 	
 	method onOutgoing() : Void is do
-		if(stateMachine.isKindOf(Interaction)) then
+		if(stateMachine.isInstanceOf(Interaction)) then
 			stateMachine.asType(Interaction).notifyHandlersOnStart()
 		end
 	end
@@ -107,7 +107,7 @@ class InitState inherits State {
 
 class TerminalState inherits State {
 	method onIngoing() : Void is do
-		if(stateMachine.isKindOf(Interaction)) then
+		if(stateMachine.isInstanceOf(Interaction)) then
 			stateMachine.asType(Interaction).notifyHandlersOnStop()
 		end
 		stateMachine.reinit()

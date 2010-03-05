@@ -16,7 +16,9 @@ import org.kermeta.ki.malai.picking.Picker;
 
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Real;
 
 
 
@@ -26,7 +28,74 @@ public class CanvasUI extends JPanel implements Picker, Pickable {
 
 	protected ArrayList<ShapeUI> shapesUI;
 	
+	protected SelectionBorder selectionBorder;
+	
 	protected EventManagerWrapper eventManager;
+	
+	
+	
+	public static RuntimeObject setBorderVisible(RuntimeObject canvasRO, RuntimeObject visibleRO) {
+		CanvasUI canvasUI = (CanvasUI) canvasRO.getUserData();
+		boolean visible   = Boolean.getValue(visibleRO);
+		
+		canvasUI.selectionBorder.setVisible(visible);
+		canvasUI.repaint();
+		
+		return canvasRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	
+	
+	public static RuntimeObject setBorderx(RuntimeObject canvasRO, RuntimeObject xRO) {
+		CanvasUI canvasUI = (CanvasUI) canvasRO.getUserData();
+		double x		  = Real.getValue(xRO);
+		
+		canvasUI.selectionBorder.x = x;
+		canvasUI.repaint();
+		
+		return canvasRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	
+	
+	public static RuntimeObject setBordery(RuntimeObject canvasRO, RuntimeObject yRO) {
+		CanvasUI canvasUI = (CanvasUI) canvasRO.getUserData();
+		double y		  = Real.getValue(yRO);
+		
+		canvasUI.selectionBorder.y = y;
+		canvasUI.repaint();
+		
+		return canvasRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	
+	
+	
+	public static RuntimeObject setBorderwidth(RuntimeObject canvasRO, RuntimeObject widthRO) {
+		CanvasUI canvasUI = (CanvasUI) canvasRO.getUserData();
+		double width	  = Real.getValue(widthRO);
+		
+		canvasUI.selectionBorder.width = width;
+		canvasUI.repaint();
+		
+		return canvasRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	
+	
+	
+	
+	public static RuntimeObject setBorderheight(RuntimeObject canvasRO, RuntimeObject heightRO) {
+		CanvasUI canvasUI = (CanvasUI) canvasRO.getUserData();
+		double height	  = Real.getValue(heightRO);
+		
+		canvasUI.selectionBorder.height = height;
+		canvasUI.repaint();
+		
+		return canvasRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	
 	
 	
 	
@@ -52,7 +121,8 @@ public class CanvasUI extends JPanel implements Picker, Pickable {
 		super();
 		
 		eventManager = emw;
-		shapesUI  = new ArrayList<ShapeUI>();
+		selectionBorder = new SelectionBorder();
+		shapesUI     = new ArrayList<ShapeUI>();
 		setPreferredSize(new Dimension(900, 500));
 		setFocusable(true);
 		
@@ -97,6 +167,9 @@ public class CanvasUI extends JPanel implements Picker, Pickable {
 
 		for(ShapeUI s : shapesUI)
 			s.paint(g2);
+		
+		if(selectionBorder.isVisible())
+			selectionBorder.paint(g2);
 	}
 
 

@@ -22,10 +22,10 @@ using kermeta::ki::malai::undo
 
 class ActionRegistry {
 	/** The saved actions. */
-	attribute actions : Sequence<Action>
+	attribute actions : Action[0..*]
 
 	/** The actions handlers. */
-	reference handlers : Sequence<ActionHandler>
+	reference handlers : ActionHandler[0..*]
 	
 	reference undoCollector : UndoCollector
 	

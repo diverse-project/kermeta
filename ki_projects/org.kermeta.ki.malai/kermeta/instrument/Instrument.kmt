@@ -11,11 +11,13 @@ package kermeta::ki::malai::instrument;
 
 
 require kermeta
-require "Link.kmt"
-require "../action/ActionRegistry.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Link.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::action
+using kermeta::ki::malai::interaction::event
 
 
 abstract class Instrument
@@ -38,7 +40,7 @@ abstract class Instrument
 	/**
 	 * Initialises the links of the instrument.
 	 */
-	operation initialiseLinks() is abstract
+	operation initialiseLinks(eventManager : EventManager) is abstract
 	
 	
 	/**

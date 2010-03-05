@@ -11,7 +11,7 @@ package kermeta::ki::malai::examples;
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/AbstractPresentation.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/ActivePresentation.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::action
@@ -25,21 +25,31 @@ class ActionSelect inherits Action {
 	
 	
 	method doActionBody() : Void is do
-		drawing.selection.clear
+		drawing.clearSelection()
 		
 		selection.each { sh |
-			drawing.selection.add(sh)
+			drawing.addToSelection(sh)
 		}
-		stdio.writeln(selection.size().toString)
 	end
 	
 	
+	
+	operation setSelection(selection : Shape) : Void is do
+		self.selection.clear()
+		
+		if(not selection.isVoid) then
+			self.selection.add(selection)
+		end
+	end
+	
+	
+	
 	method canDo() : Boolean is do
-		result := drawing!=void
+		result := not drawing.isVoid
 	end
 	
 	
 	method cancelledBy<T : Action>(action : T) : Boolean is do
-		result := self.isKindOf(T)
+		result := self.isInstanceOf(T)
 	end
 }

@@ -10,17 +10,22 @@ package kermeta::ki::malai::instrument;
 
 
 require kermeta
-require "./Instrument.kmt"
-require "../interaction/InteractionHandler.kmt"
-require "../action/Action.kmt"
-require "../action/ActionRegistry.kmt"
-require "../interaction/Interaction.kmt"
-require "../undo/Undoable.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/InteractionHandler.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/undo/Undoable.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::action
 using kermeta::ki::malai::interaction
+using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::undo
+using kermeta::ki::malai::picking
 
 
 
@@ -47,11 +52,41 @@ abstract class Link inherits InteractionHandler
 	 * @param instrument The instrument that contains the link.
 	 * @param exec Specifies if the action must be execute or update on each evolution of the interaction.
 	 */
-	operation initialise(instrument : Instrument, execute : Boolean) : Void is do
+	operation initialise(instrument : Instrument, eventManager : EventManager, execute : Boolean) : Void is do
 		self.instrument := instrument
 		self.execute    := execute
+		
+		interaction := createInteraction()
+		interaction.initialise(eventManager)
+		interaction.handlers.add(self)
 	end
 
+
+
+	/**
+	* Instanciates and returns the interaction corresponding to the link, but must not initialise the interaction.
+	*/
+	operation createInteraction() : Interaction is abstract
+
+	
+	/**
+	* Sets the given picker to the interaction corresponding to the link.
+	*/
+	operation setPickerToInteraction(picker : Picker) : Void is do
+		if(not interaction.isVoid) then
+			interaction.picker := picker
+		end
+	end
+
+
+	/**
+	* Sets the given pickable to the interaction corresponding to the link.
+	*/
+	operation setPickableToInteraction(pickable : Pickable) : Void is do
+		if(not interaction.isVoid) then
+			interaction.pickable := pickable
+		end
+	end
 
 
 	/**
@@ -82,7 +117,7 @@ abstract class Link inherits InteractionHandler
 	
 	
 	method interactionUpdates(inter : Interaction) : Void is do
-		if(action!=void and inter==interaction) then
+		if(not action.isVoid and inter==interaction) then
 			if(isConditionRespected) then
 				updateAction
 				
@@ -98,7 +133,7 @@ abstract class Link inherits InteractionHandler
 	
 	
 	method interactionStops(inter : Interaction) : Void is do
-		if(action!=void and interaction==inter) then
+		if(not action.isVoid and interaction==inter) then
 			if(isConditionRespected) then
     			if(not execute) then updateAction end
     			if(action.doIt) then action.done end

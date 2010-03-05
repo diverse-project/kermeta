@@ -1,0 +1,78 @@
+/*
+ * Creation : March 5, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+
+package kermeta::ki::malai::examples;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/PressLink.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/ActivePresentation.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/Actions.kmt"
+
+using kermeta::ki::malai::instrument
+using kermeta::ki::malai::interaction
+using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::action
+using kermeta::standard
+
+
+class Hand inherits Instrument
+{
+	reference drawing : Drawing
+	
+	
+	method initialiseLinks(eventManager : EventManager) : Void is do
+		var link : Link init Press2Select.new
+		
+		link.initialise(self, eventManager, false)
+		link.setPickerToInteraction(drawing)
+		links.add(link)
+	end
+}
+
+
+
+
+
+
+class Press2Select inherits PressLink
+{
+	method updateAction() : Void is do
+		if(not action.isVoid) then
+			var press : Press init interaction.asType(Press)
+			var as    : ActionSelect init action.asType(ActionSelect)
+			
+			if(press.target.isInstanceOf(Shape)) then
+				as.setSelection(press.target.asType(Shape))
+			else if(press.target.isInstanceOf(Drawing)) then
+				as.setSelection(void)
+				end
+			end
+		end
+	end
+	
+	
+	
+	method isConditionRespected() : Boolean is do
+		var press : Press init interaction.asType(Press)
+		result := press.target.isInstanceOf(Shape) or press.target.isInstanceOf(Drawing)
+	end
+	
+	
+	
+	method createAction() : Void is do
+		var as : ActionSelect init ActionSelect.new
+		var hand : Hand init instrument.asType(Hand)
+		
+		as.drawing := hand.drawing
+		action     := as
+	end
+}

@@ -15,15 +15,18 @@ package kermeta::ki::malai::examples;
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/ActivePresentation.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/Actions.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/Hand.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/dispatcher/Dispatcher.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/DnD.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.kmt"
+//require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/DnD.kmt"
+//require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
 
 using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::dispatcher
+using kermeta::ki::malai::action
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::picking
 using kermeta::standard
@@ -32,21 +35,28 @@ using kermeta::standard
 class CanvasLauncher
 {
 	operation main() : Void is do
-		var aui          : CanvasIS       init CanvasIS.new
-		var eventManager : EventManager   init EventManager.new
-		var dispatcher   : ListDispatcher init ListDispatcher.new
-//		var dnd          : DnD            init DnD.new
-		var press        : Press          init Press.new
+		var actionRegistry : ActionRegistry init ActionRegistry.new
+		var aui            : CanvasIS       init CanvasIS.new
+		var eventManager   : EventManager   init EventManager.new
+		var dispatcher     : ListDispatcher init ListDispatcher.new
+//		var dnd            : DnD            init DnD.new
+//		var press          : Press          init Press.new
+		var hand		   : Hand 		    init Hand.new
 		
+		actionRegistry.handlers.add(aui)
+		hand.initialise(actionRegistry)
 		dispatcher.initialise
 		eventManager.initialise(dispatcher)
 		dispatcher.processes.add(eventManager)
 		aui.initialise(eventManager)
-		press.initialise(eventManager)
+//		press.initialise(eventManager)
 
 		initSomeShapes(aui)
 		
-		press.picker := aui.drawing
+		hand.drawing := aui.drawing
+		hand.initialiseLinks(eventManager)
+		hand.activated := true
+//		press.picker := aui.drawing
 		
 		aui.setVisible(true)
 		
