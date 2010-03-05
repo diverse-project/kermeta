@@ -6,11 +6,7 @@ trait TypeAspect {
 		//o.isInstanceOf[Class]
 		return true;
 	}
-	def isInstance(o:ObjectAspect):Boolean={
-		//o.isInstanceOf[Class]
-		return true;
-	}
-        def deepClone(objectToClone:objectToClone: fr.irisa.triskell.kermeta.language.structure.Object):objectToClone: fr.irisa.triskell.kermeta.language.structure.Object={
+        def deepClone(objectToClone: fr.irisa.triskell.kermeta.language.structure.Object): fr.irisa.triskell.kermeta.language.structure.Object={
 		return null;
 	}
 
