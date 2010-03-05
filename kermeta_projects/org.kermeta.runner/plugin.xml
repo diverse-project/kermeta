@@ -12,6 +12,14 @@
             sourcePathComputerId="org.kermeta.debug.sourcePathComputer">
       </launchConfigurationType>
       <launchConfigurationType
+            delegate="org.kermeta.runner.launching.compiler.CompilerLaunchConfiguration"
+            id="org.kermeta.debug.compileConfiguration"
+            modes="run"
+            name="Kermeta Compiler Application"
+            sourceLocatorId="org.kermeta.debug.sourceLookupDirector"
+            sourcePathComputerId="org.kermeta.debug.sourcePathComputer">
+      </launchConfigurationType>
+      <launchConfigurationType
             delegate="org.kermeta.runner.launching.KConstraintLaunchConfiguration"
             id="org.kermeta.debug.constraintConfiguration"
             modes="run, debug"

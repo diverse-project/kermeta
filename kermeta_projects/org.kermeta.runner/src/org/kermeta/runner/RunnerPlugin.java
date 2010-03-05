@@ -26,6 +26,12 @@ public class RunnerPlugin extends AbstractUIPlugin {
 	// The shared instance
 	private static RunnerPlugin plugin;
 	
+	private BundleContext context;
+	
+	public BundleContext getContext() {
+		return context;
+	}
+
 	/** Logger to get the error of this interpreter */
 	final static public Log internalLog = LogConfigurationHelper.getLogger("kermeta.runner");
 	
@@ -41,6 +47,7 @@ public class RunnerPlugin extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+		this.context= context;
 		plugin = this;
 	}
 

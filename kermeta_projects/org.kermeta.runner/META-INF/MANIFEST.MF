@@ -15,9 +15,14 @@ Require-Bundle: org.eclipse.ui,
  org.kermeta.log4j.util;bundle-version="1.3.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.kermeta.runner,
+ org.kermeta.runner.compiler.propertieseditor.core,
+ org.kermeta.runner.compiler.propertieseditor.io,
+ org.kermeta.runner.compiler.propertieseditor.service,
  org.kermeta.runner.launching,
+ org.kermeta.runner.launching.compiler,
  org.kermeta.runner.model,
  org.kermeta.runner.model.variable,
  org.kermeta.runner.util
 Bundle-Vendor: IRISA/INRIA
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.kermeta.compiler.service
