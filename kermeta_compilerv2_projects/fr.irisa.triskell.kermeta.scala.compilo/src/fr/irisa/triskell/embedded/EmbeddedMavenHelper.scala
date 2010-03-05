@@ -16,7 +16,7 @@ import scala.collection.JavaConversions._
 
 object EmbeddedMavenHelper {
 
-  def run(createPackage : Boolean,standalone : Boolean,exec : Boolean) = {
+  def run(createPackage : Boolean,standalone : Boolean,exec : Boolean,additionalClasspath : List[String]) = {
 
     var goals = new scala.collection.mutable.ArrayBuffer[String]
     goals.add("clean")
@@ -24,13 +24,13 @@ object EmbeddedMavenHelper {
     
     if(createPackage){
       goals.add("install")
-      goals.add("bundle:install")
+      //goals.add("bundle:install")
     }
     if(exec){
       goals.add("scala:run")
     }
     
-    var project = POMGeneratorHelper.initProject(standalone)
+    var project = POMGeneratorHelper.initProject(standalone,additionalClasspath)
     var rootDirectory = new java.io.File(GlobalConfiguration.outputProject);
     var pomFile = new java.io.File(rootDirectory, "pom.xml");
     try {

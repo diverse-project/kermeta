@@ -5,6 +5,7 @@
 
 package fr.irisa.triskell.embedded
 
+import fr.irisa.triskell.kermeta.compilo.scala.GlobalConfiguration
 import org.apache.maven.model._
 import org.apache.maven.project._
 import org.codehaus.plexus.util.xml.Xpp3Dom
@@ -33,18 +34,14 @@ object POMGeneratorHelper {
     return dependency
   }
 
-  def initProject(standalone : Boolean) : MavenProject =  {
+  def initProject(standalone : Boolean,additionalClasspath : List[String]) : MavenProject =  {
     var project : MavenProject  = new MavenProject()
-    /* INIT MODEL */
 
-    //File projectDirectory = new File("/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo/generatedOutputFolder");
-
-    /* INIT PROJECT NAME */
-    project.setGroupId("fr.irisa.triskell.kermeta.compiled.output")
-    project.setArtifactId("fr.irisa.triskell.kermeta.compiled.outputArt")
+    project.setGroupId(GlobalConfiguration.props.getString("project.group.id"))
+    project.setArtifactId(GlobalConfiguration.props.getString("project.artefact.id"))
     project.setVersion("0.0.1-SNAPSHOT")
     project.setModelVersion("4.0.0")
-    //project.setPackaging("bundle");
+    project.setPackaging("bundle");
     project.setName("Kermeta Compiled output")
 
 
@@ -69,7 +66,7 @@ object POMGeneratorHelper {
     /* INIT PROJECT BUILD */
     var build = new Build()
     //build.setDirectory(projectDirectory.getAbsolutePath());
-    build.setSourceDirectory("/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo/generatedOutputFolder/src");
+    build.setSourceDirectory(GlobalConfiguration.outputFolder);
     //build.setOutputDirectory("target");
     build.setModelEncoding("UTF8");
 
@@ -112,14 +109,28 @@ object POMGeneratorHelper {
     pluginFelix.setArtifactId("maven-bundle-plugin");
     pluginFelix.setExtensions(true);
     /* CONFIGURATION */
+    
+    var importPackage = ""
+    var privatePackage = ""
+    var exportPackage = ""
+    if(standalone){
+      importPackage = ""
+      privatePackage = "*"
+      exportPackage = "*"
+    } else {
+      importPackage = "*"
+      privatePackage = ""
+      exportPackage = "*"
+    }
+
     var pluginFelixConfiguration = new Xpp3Dom("configuration");
     var pluginFelixInstruction = new Xpp3Dom("instructions");
     var pluginFelixInstructionPrivatePackage = new Xpp3Dom("Private-Package");
-    pluginFelixInstructionPrivatePackage.setValue("*");
+    pluginFelixInstructionPrivatePackage.setValue(privatePackage);
     var pluginFelixInstructionImportPackage = new Xpp3Dom("Import-Package");
-    pluginFelixInstructionImportPackage.setValue("*");
+    pluginFelixInstructionImportPackage.setValue(importPackage);
     var pluginFelixInstructionExportPackage = new Xpp3Dom("Export-Package");
-    pluginFelixInstructionExportPackage.setValue("*");
+    pluginFelixInstructionExportPackage.setValue(exportPackage);
     var pluginFelixInstructionBundleClassPath = new Xpp3Dom("BundleClassPath");
     pluginFelixInstructionBundleClassPath.setValue(".");
     pluginFelixInstruction.addChild(pluginFelixInstructionPrivatePackage);
@@ -141,7 +152,12 @@ object POMGeneratorHelper {
     dependencies.add(createDependency("org.eclipse", "emf", "3.5.0"));
     dependencies.add(createDependency("fr.irisa.triskell", "kermeta.scala.framework", "0.0.2-SNAPSHOT"));
     /* INIT LOCAL VARIABLE DEPENDENCY */
-    dependencies.add(createDependency("org.kermeta.art2", "art2.model", "1.1.0-SNAPSHOT"));
+
+    additionalClasspath.foreach{cp =>
+      dependencies.add(createLocalDependency("", "", "", cp))
+    }
+    
+    //dependencies.add(createDependency("org.kermeta.art2", "art2.model", "1.1.0-SNAPSHOT"));
 
 
 

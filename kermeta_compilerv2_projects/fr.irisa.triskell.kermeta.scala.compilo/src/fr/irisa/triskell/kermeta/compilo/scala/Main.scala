@@ -180,7 +180,7 @@ object Main extends LogAspect {
             }
         }
 
-    EmbeddedMavenHelper.run(true, true, true)
+    EmbeddedMavenHelper.run(true, true, true,additionalClassPath)
 	   
 	   
     }
