@@ -115,7 +115,7 @@ def generateAttribute(res : StringBuilder) : Unit ={
 			if (this.getType().isInstanceOf[PrimitiveType] 
 			&& !( 
 			
-			"fr.irisa.triskell.kermeta.language.structure.Boolean".equals(this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo) ||
+			"java.lang.Boolean".equals(this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo) ||
 			"org.eclipse.emf.ecore.EBoolean".equals(this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo)
 				)
 			)
@@ -141,7 +141,10 @@ def generateAttribute(res : StringBuilder) : Unit ={
 		}
 		
 		res.append( currentname.substring(0,1).toUpperCase() + currentname.substring(1,currentname.length) + "()" + "}")		
-		res.append("\n")
+		var typestring = new StringBuilder
+                this.getListorType(typestring)
+                res.append(".asInstanceOf[" + typestring.toString + "]")
+                res.append("\n")
 	}
 
 	

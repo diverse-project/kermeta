@@ -17,9 +17,11 @@ trait VariableDeclAspect extends RichAspectImplicit with ObjectAspect with LogAs
 		var template = new StringTemplate("var $ident$ : $type$ = $init$;")
 		var typeVal,initVal = new StringBuilder
 		this.getType().asInstanceOf[ObjectAspect].generateScalaCode(typeVal)
-		template.setAttribute("ident", Util.protectScalaKeyword(this.getIdentifier))
+       	template.setAttribute("ident", Util.protectScalaKeyword(this.getIdentifier))
 		template.setAttribute("type" , typeVal.toString)
 		if(this.getInitialization !=  null){
+                        //     println(" VariableDeclAspect " + this.getType + "  " + this.getInitialization())
+	
 			this.getInitialization().generateScalaCode(initVal)
 		} else {
 			initVal.append("null.asInstanceOf["+typeVal.toString+"]")

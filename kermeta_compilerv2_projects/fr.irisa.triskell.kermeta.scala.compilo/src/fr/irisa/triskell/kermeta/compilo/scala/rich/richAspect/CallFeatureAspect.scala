@@ -45,7 +45,9 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 	
   def generateTarget(res : StringBuilder){
     if (this.getTarget()!=null){
+      res.append("(")
       this.getTarget().generateScalaCode(res)
+      res.append(")")
     }else{
       println("//TODODODODO " + this.getName);
     }
@@ -74,7 +76,18 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
   def generatePropertyName(res : StringBuilder){
     res.append(GlobalConfiguration.scalaPrefix + this.getName())
   }
-	
+
+  def generateEnumLiteralCall(res : StringBuilder){
+      if (Util.hasEcoreTag(this.getStaticEnumLiteral.getEnumeration)){
+            var res1 : StringBuilder = new StringBuilder
+            generateName(res1)
+            res.append(res1.toString.toUpperCase())
+      }else{
+            generateName(res)
+      }
+  }
+
+
   def generateKUnitCase(res : StringBuilder){
     this.getTarget().generateScalaCode(res)
     res append ".run("
@@ -114,8 +127,10 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
       case _ if(this.getTarget == null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateName(res);generateParam(res,"(",")") }
       case _ if(this.getTarget != null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generatePropertyCall(res) }
       case _ if(this.getTarget == null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generatePropertyName(res) }
-      case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generateName(res) }
+      case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral !=null ) => {generateTarget(res);res.append(".");generateEnumLiteralCall(res) }
+      case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral ==null) => {generateTarget(res);res.append(".");generateName(res) }
       case _ => log.debug("!!! Uncatch case ")
+ 
     }
   }
 	

@@ -11,7 +11,8 @@ import java.util._
 trait DataTypeAspect extends RichAspectImplicit with ObjectAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		res.append(this.eContainer().asInstanceOf[Package].getQualifiedName)
+           // println("passe pa la " + this.getName)
+            res.append(this.eContainer().asInstanceOf[Package].getQualifiedName)
 		res.append(".")
 		res.append(this.getName())
 	}

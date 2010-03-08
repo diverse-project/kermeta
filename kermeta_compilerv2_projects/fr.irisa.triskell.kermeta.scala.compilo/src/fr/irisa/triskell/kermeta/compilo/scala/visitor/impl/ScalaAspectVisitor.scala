@@ -88,6 +88,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 					for(a <- listSuperTypes){
 						if(i == 0) { res1.append(" extends ") } else { res1.append(" with ") } 
 						res1.append(Util.protectScalaKeyword(a.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo))
+                                                par.generateBindingParamerterClass(a.asInstanceOf[Class],res1)
 						i = i + 1
 					}
 				} 

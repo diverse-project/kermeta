@@ -20,6 +20,7 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
 			}
 			res.append(" def ")
 			res.append(Util.protectScalaKeyword(this.getName()))
+                        this.generateParamerterOp( res)
 			/* Default constructor declaration */
 			res.append("(") 
 			var i = 0;
@@ -56,5 +57,16 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
 			}
 		}
 	}
+        def generateParamerterOp(res1:StringBuilder) = {
+            if (this.getTypeParameter().size()>0){  res1.append("[")
+        var ii = 0;
+        this.getTypeParameter.foreach{param=>
+            if (ii>0) {res1.append(",")}
+            res1.append(param.asInstanceOf[ObjectAspect].getQualifiedNameCompilo())
+            ii= ii+1
+        }
+        res1.append("]")
+         }
+    }
 	
 }
