@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+
 //import org.kermeta.io.KermetaUnit;
 
 
@@ -62,6 +63,14 @@ public abstract class AbstractReferenceMapCache<Key, Value> extends AbstractMap<
 		return super.remove(key);
 	}
 
+
+	@Override
+	public synchronized void clear() {		
+		super.clear();
+		map.clear();
+	}
+
+	
 
 } 
 
