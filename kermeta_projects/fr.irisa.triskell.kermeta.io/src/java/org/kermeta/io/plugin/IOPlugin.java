@@ -156,8 +156,6 @@ public class IOPlugin extends Plugin {
 					internalLog.error("in local_use mode, ExtensibleURIConverterImpl.URI_MAP must contain a mapping  for platform:/plugin/");
 				}if(!ExtensibleURIConverterImpl.URI_MAP.containsKey(URI.createURI("platform:/resource/"))){
 					internalLog.error("in local_use mode, ExtensibleURIConverterImpl.URI_MAP must contain a mapping  for platform:/resource/");
-				}if(!ExtensibleURIConverterImpl.URI_MAP.containsKey(URI.createURI("kconf:/loader/"))){
-					internalLog.error("in local_use mode, ExtensibleURIConverterImpl.URI_MAP must contain a mapping  for kconf:/loader/");
 				}
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("traceability",new XMIResourceFactoryImpl());
