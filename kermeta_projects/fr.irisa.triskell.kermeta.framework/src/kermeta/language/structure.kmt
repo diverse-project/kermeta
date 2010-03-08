@@ -525,6 +525,7 @@ aspect class Model {
  	/**
  	 * Returns a set of all the elements of the model that are instance of the given Type
  	 */
+ 	 @CompilerIgnore "true"
 	operation filter(typeName : Type) : Set<Object> is
 		do
 			result := contents.select { o | typeName.isInstance(o) }.asSet
@@ -646,7 +647,7 @@ aspect abstract class NamedElement
 	 * the list of the names of the packages hierarchically ordered, delimited by
 	 * a "::", followed by the name of this named element.
 	 */
-	@CompilerIgnore "true"
+	//@CompilerIgnore "true"
 	operation qualifiedName() : String is do
 		var elem : NamedElement init self
 		result := self.name
@@ -684,11 +685,12 @@ aspect class Enumeration
 	end
 }
 
-@CompilerIgnore "true"
+
 aspect class FunctionType {
 	/**
 	 * Right part of the FunctionType cannot be a ProductType
 	 */
+     //@CompilerIgnore "true"
 	inv resultType_must_not_be_a_ProductType is not right.isKindOf(ProductType)
 }
 
