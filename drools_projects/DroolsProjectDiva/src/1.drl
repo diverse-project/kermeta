@@ -44,18 +44,26 @@ if ( s8 == null){
 s8 = art.type.TypeFactory.eINSTANCE.createPort();
 uniqueobjects.put("s8",s8);
 }
+s0.setRoot(s1);
+s0.getServices().add(s6);
+s0.getTypes().add(s7);
+s1.getSubComponent().add(s2);
+s1.getSubComponent().add(s4);
 s2.setName("DefaultLogger");
 s2.setType(s7);
 s2.setSuperComponent(s1);
 s2.setImplem(s3);
+s3.setImplementingClass("eu.diva.tis.log.DefaultLogger");
 s4.setName("FakeLoggerClient");
 s4.setSuperComponent(s1);
 s4.getBinding().add(s5);
 s5.setId("DefaultLogger");
+s5.setServer(s8);
 s5.setServerInstance(s2);
 s6.setName("org.slf4j.Logger");
 s7.setName("eu.diva.tis.log");
 s7.getPort().add(s8);
+s8.setIsOptional(false);
 s8.setLower(1);
 s8.setUpper(1);
 s8.setRole("server");
