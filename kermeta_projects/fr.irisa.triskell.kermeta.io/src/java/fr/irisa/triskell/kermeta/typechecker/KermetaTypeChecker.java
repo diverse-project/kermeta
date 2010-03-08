@@ -81,6 +81,7 @@ public class KermetaTypeChecker {
         super();
         this.unit = unit;
         this.typecheckercontext = typecheckercontext;
+        this.typecheckercontext.addUnitCheckedInThisContext(unit);
     	unit.setTypeCheckerContext(typecheckercontext);
     }
     

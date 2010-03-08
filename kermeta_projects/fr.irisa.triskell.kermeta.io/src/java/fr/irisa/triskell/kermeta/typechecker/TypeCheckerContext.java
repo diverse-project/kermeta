@@ -14,9 +14,11 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 import org.apache.commons.logging.Log;
@@ -58,6 +60,15 @@ public class TypeCheckerContext {
 	final static private Log internalLog = LogConfigurationHelper.getLogger("TypeCheckerContext");
 	
 	protected List<Operation> specialOperations = new ArrayList<Operation>();
+	
+	/**
+	 * list of unit being check or having been check by the same context
+	 * This is used to make sure that the gargabe collector won't collect it unless the context is withdrawn
+	 */
+	protected Set<KermetaUnit> unitsCheckedInThisContext = new HashSet<KermetaUnit>();
+	public void addUnitCheckedInThisContext(KermetaUnit ku){
+		unitsCheckedInThisContext.add(ku);
+	}
 	
 	private void initializeSpecialOperations() {
 		specialOperations.add( getObjectAsTypeOperation() );
@@ -306,7 +317,7 @@ public class TypeCheckerContext {
 	public TypeCheckerContext(KermetaUnit unit) throws ContextNotInitializedOnAFrameworkError {
 		super();
 		this.unit = unit;
-		
+		addUnitCheckedInThisContext(unit);
 		//if ( ! unit.isTypeChecked() ) {        	
         	if (unit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object") != null){
         		initializeForTypeChecking(unit);
