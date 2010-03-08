@@ -74,7 +74,7 @@ trait PrimitiveTypeAspect extends RichAspectImplicit with ObjectAspect with LogA
         var res =  kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName())
        //var res = new StringBuilder
        //this.generateScalaCode(res)
-       println(res)
+      // println(res)
         return res;
     }
 
