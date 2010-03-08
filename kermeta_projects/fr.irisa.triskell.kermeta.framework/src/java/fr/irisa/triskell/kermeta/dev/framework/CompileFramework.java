@@ -35,13 +35,11 @@ public class CompileFramework {
 
     	IOPlugin.LOCAL_USE = true;
     	IOPlugin.FRAMEWORK_GENERATION = true;
-    	IOPlugin.setFrameworkGeneration(true);
-    	@SuppressWarnings("unused")
-		IOPlugin ioPlugin = IOPlugin.getDefault();
+    	//IOPlugin.setFrameworkGeneration(true);
     	
     	KermetaUnit kermetaUnit = null;
     	//kermetaUnit = LoaderPlugin.getDefault().load("platform:/resource/fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt", null);
-   	    kermetaUnit = IOPlugin.getDefault().getFramework();
+   	    kermetaUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.getFrameWorkURI());
     	
     	kermetaUnit.setFramework(false);
     	for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) )

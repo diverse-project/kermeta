@@ -14,9 +14,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.merger.Merger;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
@@ -37,11 +37,11 @@ public class MergeKmt {
     	//LoaderPlugin.setFrameworkGeneration(true);
     	//@SuppressWarnings("unused")
 		//IOPlugin ioPlugin = IOPlugin.getDefault();
-		URIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI("file:/home/barais/workspaces/kermetacvs1009/"));
-		URIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI("file:/home/barais/workspaces/kermetacvs1009/"));
+    	ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI("file:/home/barais/workspaces/kermetacvs1009/"));
+    	ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI("file:/home/barais/workspaces/kermetacvs1009/"));
     	
     	KermetaUnit kermetaUnit = null;
-    	kermetaUnit = LoaderPlugin.getDefault().load("platform:/resource/fr.irisa.triskell.kermeta.framework/300_testIfAnd.kmt", null);
+    	kermetaUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get("platform:/resource/fr.irisa.triskell.kermeta.framework/300_testIfAnd.kmt", null);
     	//kermetaUnit = LoaderPlugin.getDefault().getFramework();
     	
     	kermetaUnit.setFramework(false);
