@@ -12,7 +12,7 @@ parameters="classQualifiedName:String, packName:String, className:String, packNa
  	ctx.cache.put(self,na)	
 	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
 		ctx.res.append("<%=classQualifiedName%>" +" "+ na +  " = (<%=classQualifiedName%>) uniqueobjects.get(\\""+na+"\\");\n")
-		ctx.res.append("if (uniqueobjects.get(\\""+na+"\\")==null){\n"  )
+		ctx.res.append("if ("+" "+ na + " " + "== null){\n"  )
 		ctx.res.append(na +  " = <%=packName%>.<%=packNameUpper%>Factory.eINSTANCE.create<%=className%>();\n")
 		ctx.res.append("uniqueobjects.put(\\""+na+"\\","+ na+");\n")
 		ctx.res.append("}\n"  )
