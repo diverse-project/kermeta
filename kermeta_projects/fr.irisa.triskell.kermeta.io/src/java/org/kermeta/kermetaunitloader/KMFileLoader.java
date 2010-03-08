@@ -172,7 +172,7 @@ public class KMFileLoader extends AbstractLoader {
 				includeFramework = (Boolean) options.get(LoadingOptions.INCLUDE_FRAMEWORK);
 			if ( includeFramework ) {
 				KermetaUnit framework = kermetaUnitStore.get(IOPlugin.FRAMEWORK_KM_URI);
-				if ( ! frameworkLoading && framework != null ) {
+				if ( ! frameworkLoading && framework != null && !IOPlugin.FRAMEWORK_GENERATION  ) {
 					addResource(resourceSet, framework);
 					for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) ) {
 						addResource(resourceSet, unit);
