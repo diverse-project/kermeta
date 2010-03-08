@@ -15,7 +15,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.Hashtable;
 
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbol;
 
 
 

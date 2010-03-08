@@ -14,8 +14,10 @@ import fr.irisa.triskell.kermeta.KmPackage;
 
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Set;
 
@@ -38,7 +40,6 @@ import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitLoader;
 import org.kermeta.io.KermetaUnitRequire;
-import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParseErrorMessage;
@@ -69,13 +70,6 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	private EClass iBuildingStateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass kermetaUnitStorerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -197,6 +191,13 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	private EDataType iProgressMonitorEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType typeCheckerContextEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -223,20 +224,10 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link IoPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -248,7 +239,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		if (isInited) return (IoPackage)EPackage.Registry.INSTANCE.getEPackage(IoPackage.eNS_URI);
 
 		// Obtain or create and register package
-		IoPackageImpl theIoPackage = (IoPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new IoPackageImpl());
+		IoPackageImpl theIoPackage = (IoPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new IoPackageImpl());
 
 		isInited = true;
 
@@ -264,6 +255,9 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		// Mark meta-data to indicate it can't be changed
 		theIoPackage.freeze();
 
+  
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(IoPackage.eNS_URI, theIoPackage);
 		return theIoPackage;
 	}
 
@@ -281,17 +275,8 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKermetaUnit_Storer() {
-		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getKermetaUnit_Uri() {
-		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -300,7 +285,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EReference getKermetaUnit_ModelingUnit() {
-		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(2);
+		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -309,7 +294,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EReference getKermetaUnit_InternalPackageEntries() {
-		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(3);
+		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -318,7 +303,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EReference getKermetaUnit_ExternalPackageEntries() {
-		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(4);
+		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -327,16 +312,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EReference getKermetaUnit_ImportedKermetaUnits() {
-		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getKermetaUnit_Importers() {
-		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(6);
+		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -345,7 +321,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EReference getKermetaUnit_BuildingState() {
-		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(7);
+		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -354,7 +330,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EReference getKermetaUnit_Messages() {
-		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(8);
+		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -363,7 +339,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EAttribute getKermetaUnit_NeedASTTraces() {
-		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(9);
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -372,7 +348,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EAttribute getKermetaUnit_TypeChecked() {
-		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(10);
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -381,7 +357,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EAttribute getKermetaUnit_Framework() {
-		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(11);
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -390,7 +366,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EAttribute getKermetaUnit_Tracer() {
-		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(12);
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -399,7 +375,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EAttribute getKermetaUnit_ConstraintChecked() {
-		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(13);
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -408,7 +384,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EAttribute getKermetaUnit_Aspects() {
-		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(14);
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -417,7 +393,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EAttribute getKermetaUnit_IsBeingTypechecked() {
-		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(15);
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -426,7 +402,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EReference getKermetaUnit_TypeDefinitionCache() {
-		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(16);
+		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -435,7 +411,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EReference getKermetaUnit_KermetaUnitRequires() {
-		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(17);
+		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -444,7 +420,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EAttribute getKermetaUnit_Locked() {
-		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(18);
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -453,7 +429,16 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	public EAttribute getKermetaUnit_BaseAspects() {
-		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(19);
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(17);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKermetaUnit_TypeCheckerContext() {
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(18);
 	}
 
 	/**
@@ -463,24 +448,6 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 */
 	public EClass getIBuildingState() {
 		return iBuildingStateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getKermetaUnitStorer() {
-		return kermetaUnitStorerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getKermetaUnitStorer_KermetaUnits() {
-		return (EReference)kermetaUnitStorerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -785,6 +752,15 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getTypeCheckerContext() {
+		return typeCheckerContextEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public IoFactory getIoFactory() {
 		return (IoFactory)getEFactoryInstance();
 	}
@@ -809,13 +785,11 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		// Create classes and their features
 		kermetaUnitEClass = createEClass(KERMETA_UNIT);
-		createEReference(kermetaUnitEClass, KERMETA_UNIT__STORER);
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__URI);
 		createEReference(kermetaUnitEClass, KERMETA_UNIT__MODELING_UNIT);
 		createEReference(kermetaUnitEClass, KERMETA_UNIT__INTERNAL_PACKAGE_ENTRIES);
 		createEReference(kermetaUnitEClass, KERMETA_UNIT__EXTERNAL_PACKAGE_ENTRIES);
 		createEReference(kermetaUnitEClass, KERMETA_UNIT__IMPORTED_KERMETA_UNITS);
-		createEReference(kermetaUnitEClass, KERMETA_UNIT__IMPORTERS);
 		createEReference(kermetaUnitEClass, KERMETA_UNIT__BUILDING_STATE);
 		createEReference(kermetaUnitEClass, KERMETA_UNIT__MESSAGES);
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__NEED_AST_TRACES);
@@ -829,11 +803,9 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		createEReference(kermetaUnitEClass, KERMETA_UNIT__KERMETA_UNIT_REQUIRES);
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__LOCKED);
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__BASE_ASPECTS);
+		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__TYPE_CHECKER_CONTEXT);
 
 		iBuildingStateEClass = createEClass(IBUILDING_STATE);
-
-		kermetaUnitStorerEClass = createEClass(KERMETA_UNIT_STORER);
-		createEReference(kermetaUnitStorerEClass, KERMETA_UNIT_STORER__KERMETA_UNITS);
 
 		packageEntryEClass = createEClass(PACKAGE_ENTRY);
 		createEAttribute(packageEntryEClass, PACKAGE_ENTRY__QUALIFIED_NAME);
@@ -879,6 +851,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		antlrExceptionEDataType = createEDataType(ANTLR_EXCEPTION);
 		ioPluginEDataType = createEDataType(IO_PLUGIN);
 		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
+		typeCheckerContextEDataType = createEDataType(TYPE_CHECKER_CONTEXT);
 	}
 
 	/**
@@ -919,13 +892,11 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(kermetaUnitEClass, KermetaUnit.class, "KermetaUnit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getKermetaUnit_Storer(), this.getKermetaUnitStorer(), this.getKermetaUnitStorer_KermetaUnits(), "storer", null, 1, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKermetaUnit_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKermetaUnit_ModelingUnit(), theStructurePackage.getModelingUnit(), null, "modelingUnit", null, 1, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKermetaUnit_InternalPackageEntries(), this.getPackageEntry(), null, "internalPackageEntries", null, 0, -1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKermetaUnit_ExternalPackageEntries(), this.getPackageEntry(), null, "externalPackageEntries", null, 0, -1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKermetaUnit_ImportedKermetaUnits(), this.getKermetaUnit(), this.getKermetaUnit_Importers(), "importedKermetaUnits", null, 0, -1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKermetaUnit_Importers(), this.getKermetaUnit(), this.getKermetaUnit_ImportedKermetaUnits(), "importers", null, 0, -1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKermetaUnit_ImportedKermetaUnits(), this.getKermetaUnit(), null, "importedKermetaUnits", null, 0, -1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKermetaUnit_BuildingState(), this.getIBuildingState(), null, "buildingState", null, 1, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKermetaUnit_Messages(), this.getMessage(), null, "messages", null, 0, -1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKermetaUnit_NeedASTTraces(), ecorePackage.getEBoolean(), "needASTTraces", null, 0, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -953,6 +924,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		g3 = createEGenericType(theStructurePackage.getTypeDefinition());
 		g2.getETypeArguments().add(g3);
 		initEAttribute(getKermetaUnit_BaseAspects(), g1, "baseAspects", null, 0, 1, KermetaUnit.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKermetaUnit_TypeCheckerContext(), this.getTypeCheckerContext(), "typeCheckerContext", null, 0, 1, KermetaUnit.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(kermetaUnitEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -994,9 +966,6 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		op = addEOperation(kermetaUnitEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(kermetaUnitEClass, theStructurePackage.getTypeDefinition(), "getInternalTypeDefinitionByName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStructurePackage.getString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "getPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1066,23 +1035,14 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		addEOperation(kermetaUnitEClass, null, "unlock", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, this.getKermetaUnit(), "copy", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		addEOperation(kermetaUnitEClass, null, "fillTypeDefinitionCache", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(kermetaUnitEClass, this.getKermetaUnit(), "copy", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getTypeDefinition(), "getInternalTypeDefinitionByName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStructurePackage.getString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(iBuildingStateEClass, IBuildingState.class, "IBuildingState", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(kermetaUnitStorerEClass, KermetaUnitStorer.class, "KermetaUnitStorer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getKermetaUnitStorer_KermetaUnits(), this.getKermetaUnit(), this.getKermetaUnit_Storer(), "kermetaUnits", null, 0, -1, KermetaUnitStorer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(kermetaUnitStorerEClass, this.getKermetaUnit(), "get", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(kermetaUnitStorerEClass, this.getKermetaUnit(), "find", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(kermetaUnitStorerEClass, null, "unload", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(packageEntryEClass, PackageEntry.class, "PackageEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPackageEntry_QualifiedName(), ecorePackage.getEString(), "qualifiedName", null, 1, 1, PackageEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1154,6 +1114,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		initEDataType(antlrExceptionEDataType, ANTLRException.class, "ANTLRException", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(ioPluginEDataType, IOPlugin.class, "IOPlugin", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(typeCheckerContextEDataType, TypeCheckerContext.class, "TypeCheckerContext", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

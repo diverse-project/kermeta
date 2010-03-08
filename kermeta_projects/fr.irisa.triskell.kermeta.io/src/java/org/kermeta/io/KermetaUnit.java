@@ -20,6 +20,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.language.structure.Using;
 
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import org.kermeta.log4j.util.LogConfigurationHelper;
 
 import fr.irisa.triskell.traceability.helper.Tracer;
@@ -40,13 +41,11 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.io.KermetaUnit#getStorer <em>Storer</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getUri <em>Uri</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getModelingUnit <em>Modeling Unit</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getInternalPackageEntries <em>Internal Package Entries</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getExternalPackageEntries <em>External Package Entries</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getImportedKermetaUnits <em>Imported Kermeta Units</em>}</li>
- *   <li>{@link org.kermeta.io.KermetaUnit#getImporters <em>Importers</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getBuildingState <em>Building State</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getMessages <em>Messages</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#isNeedASTTraces <em>Need AST Traces</em>}</li>
@@ -60,6 +59,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  *   <li>{@link org.kermeta.io.KermetaUnit#getKermetaUnitRequires <em>Kermeta Unit Requires</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#isLocked <em>Locked</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getBaseAspects <em>Base Aspects</em>}</li>
+ *   <li>{@link org.kermeta.io.KermetaUnit#getTypeCheckerContext <em>Type Checker Context</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,34 +75,6 @@ public interface KermetaUnit extends EObject {
 	 */
 	final static public Log internalLog = LogConfigurationHelper.getLogger("Kermeta Unit");
 	
-	/**
-	 * Returns the value of the '<em><b>Storer</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.kermeta.io.KermetaUnitStorer#getKermetaUnits <em>Kermeta Units</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Storer</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Storer</em>' container reference.
-	 * @see #setStorer(KermetaUnitStorer)
-	 * @see org.kermeta.io.IoPackage#getKermetaUnit_Storer()
-	 * @see org.kermeta.io.KermetaUnitStorer#getKermetaUnits
-	 * @model opposite="kermetaUnits" required="true" transient="false"
-	 * @generated
-	 */
-	KermetaUnitStorer getStorer();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.io.KermetaUnit#getStorer <em>Storer</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Storer</em>' container reference.
-	 * @see #getStorer()
-	 * @generated
-	 */
-	void setStorer(KermetaUnitStorer value);
-
 	/**
 	 * Returns the value of the '<em><b>Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -189,7 +161,6 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Imported Kermeta Units</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.io.KermetaUnit}.
-	 * It is bidirectional and its opposite is '{@link org.kermeta.io.KermetaUnit#getImporters <em>Importers</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Imported Kermeta Units</em>' reference list isn't clear,
@@ -198,29 +169,10 @@ public interface KermetaUnit extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imported Kermeta Units</em>' reference list.
 	 * @see org.kermeta.io.IoPackage#getKermetaUnit_ImportedKermetaUnits()
-	 * @see org.kermeta.io.KermetaUnit#getImporters
-	 * @model opposite="importers"
+	 * @model
 	 * @generated
 	 */
 	EList<KermetaUnit> getImportedKermetaUnits();
-
-	/**
-	 * Returns the value of the '<em><b>Importers</b></em>' reference list.
-	 * The list contents are of type {@link org.kermeta.io.KermetaUnit}.
-	 * It is bidirectional and its opposite is '{@link org.kermeta.io.KermetaUnit#getImportedKermetaUnits <em>Imported Kermeta Units</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Importers</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Importers</em>' reference list.
-	 * @see org.kermeta.io.IoPackage#getKermetaUnit_Importers()
-	 * @see org.kermeta.io.KermetaUnit#getImportedKermetaUnits
-	 * @model opposite="importedKermetaUnits"
-	 * @generated
-	 */
-	EList<KermetaUnit> getImporters();
 
 	/**
 	 * Returns the value of the '<em><b>Building State</b></em>' reference.
@@ -541,6 +493,32 @@ public interface KermetaUnit extends EObject {
 	 * @generated
 	 */
 	void setBaseAspects(Map<TypeDefinition, EList<TypeDefinition>> value);
+
+	/**
+	 * Returns the value of the '<em><b>Type Checker Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Checker Context</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Checker Context</em>' attribute.
+	 * @see #setTypeCheckerContext(TypeCheckerContext)
+	 * @see org.kermeta.io.IoPackage#getKermetaUnit_TypeCheckerContext()
+	 * @model dataType="org.kermeta.io.TypeCheckerContext" transient="true"
+	 * @generated
+	 */
+	TypeCheckerContext getTypeCheckerContext();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.io.KermetaUnit#getTypeCheckerContext <em>Type Checker Context</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type Checker Context</em>' attribute.
+	 * @see #getTypeCheckerContext()
+	 * @generated
+	 */
+	void setTypeCheckerContext(TypeCheckerContext value);
 
 	/**
 	 * <!-- begin-user-doc -->

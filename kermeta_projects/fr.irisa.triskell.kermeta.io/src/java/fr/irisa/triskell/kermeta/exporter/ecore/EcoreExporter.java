@@ -42,6 +42,8 @@ import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -134,13 +136,13 @@ public class EcoreExporter {
 			pass3done.put( unit, false );	
 	}
 	
-	private void initializeResourceSet() {
+	private void initializeResourceSet() throws URIMalformedException, NotRegisteredURIException {
 		
-		KermetaUnit framework = IOPlugin.getDefault().getFramework();
+		KermetaUnit framework = IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.getFrameWorkURI());
 		if ( framework == null )
 			return;
 		
-		KermetaUnit ecore = IOPlugin.getDefault().getEcore();
+		KermetaUnit ecore = IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.getFrameWorkEcoreURI());
 		if ( ecore == null )
 			return;
 		
@@ -207,7 +209,7 @@ public class EcoreExporter {
 		
 	}
 	
-	private void initialize(KermetaUnit kermetaUnit, String rep, String fileName) {
+	private void initialize(KermetaUnit kermetaUnit, String rep, String fileName) throws URIMalformedException, NotRegisteredURIException {
 
 		initializeResourceSet();
 		initializeLoadings(kermetaUnit);
@@ -225,8 +227,10 @@ public class EcoreExporter {
 	 * @param kermetaUnit
 	 * @param rep
 	 * @param fileName
+	 * @throws NotRegisteredURIException 
+	 * @throws URIMalformedException 
 	 */
-	public void export(KermetaUnit kermetaUnit, String rep, String fileName, ExporterOptions exporterOptions) {
+	public void export(KermetaUnit kermetaUnit, String rep, String fileName, ExporterOptions exporterOptions) throws URIMalformedException, NotRegisteredURIException {
 		exportInMemory(kermetaUnit, rep, fileName, exporterOptions);
 		save();
 	}
@@ -259,7 +263,7 @@ public class EcoreExporter {
 		}
 	}
 	
-	public ResourceSet exportInMemory(KermetaUnit kermetaUnit, String rep, ExporterOptions exporterOptions) {
+	public ResourceSet exportInMemory(KermetaUnit kermetaUnit, String rep, ExporterOptions exporterOptions) throws URIMalformedException, NotRegisteredURIException {
 		return exportInMemory(kermetaUnit, rep, null, exporterOptions);
 	}
 	
@@ -269,8 +273,10 @@ public class EcoreExporter {
 	 * @param rep
 	 * @param fileName
 	 * @return
+	 * @throws NotRegisteredURIException 
+	 * @throws URIMalformedException 
 	 */
-	public ResourceSet exportInMemory(KermetaUnit kermetaUnit, String rep, String fileName, ExporterOptions exporterOptions) {
+	public ResourceSet exportInMemory(KermetaUnit kermetaUnit, String rep, String fileName, ExporterOptions exporterOptions) throws URIMalformedException, NotRegisteredURIException {
 		initialize(kermetaUnit, rep, fileName);
 		
 		this.exporterOptions = exporterOptions;
@@ -307,8 +313,10 @@ public class EcoreExporter {
 	 * 
 	 * @param kermetaUnit
 	 * @param rep
+	 * @throws NotRegisteredURIException 
+	 * @throws URIMalformedException 
 	 */
-	public void export(KermetaUnit kermetaUnit, String rep, ExporterOptions exporterOptions) {
+	public void export(KermetaUnit kermetaUnit, String rep, ExporterOptions exporterOptions) throws URIMalformedException, NotRegisteredURIException {
 		export(kermetaUnit, rep, null, exporterOptions);
 	}
 	
@@ -394,7 +402,7 @@ public class EcoreExporter {
 		pass3done.put(kermetaUnit, true);
 	}
 	
-	private void fillResourceSet(KermetaUnit kermetaUnit) {
+	private void fillResourceSet(KermetaUnit kermetaUnit) throws URIMalformedException, NotRegisteredURIException {
 		/*
 		 * 
 		 * Avoiding infinite loop. This is the stop condition.
@@ -422,7 +430,7 @@ public class EcoreExporter {
 		if ( resource == null )
 			resource = EMFRegistryHelper.getResource(uri);
 		
-		if ( kermetaUnit.isFramework() || kermetaUnit.equals(IOPlugin.getDefault().getEcore()) ) {
+		if ( kermetaUnit.isFramework() || kermetaUnit.equals(IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.getFrameWorkEcoreURI())) ) {
 			resourcesNotToSave.put( resource, kermetaUnit );
 			return;
 		}

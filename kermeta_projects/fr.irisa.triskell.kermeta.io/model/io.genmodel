@@ -14,14 +14,13 @@
     <genDataTypes ecoreDataType="io.ecore#//ANTLRException"/>
     <genDataTypes ecoreDataType="io.ecore#//IOPlugin"/>
     <genDataTypes ecoreDataType="io.ecore#//IProgressMonitor"/>
+    <genDataTypes ecoreDataType="io.ecore#//TypeCheckerContext"/>
     <genClasses ecoreClass="io.ecore#//KermetaUnit">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/storer"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/uri"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/modelingUnit"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/internalPackageEntries"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/externalPackageEntries"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/importedKermetaUnits"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/importers"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/buildingState"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/messages"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/needASTTraces"/>
@@ -34,6 +33,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/typeDefinitionCache"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/kermetaUnitRequires"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/locked"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/baseAspects"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/typeCheckerContext"/>
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/load"/>
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/addInternalPackage">
         <genParameters ecoreParameter="io.ecore#//KermetaUnit/addInternalPackage/qualifiedName"/>
@@ -69,9 +70,6 @@
       </genOperations>
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/getTypeDefinitionByQualifiedName">
         <genParameters ecoreParameter="io.ecore#//KermetaUnit/getTypeDefinitionByQualifiedName/qualifiedName"/>
-      </genOperations>
-      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getInternalTypeDefinitionByName">
-        <genParameters ecoreParameter="io.ecore#//KermetaUnit/getInternalTypeDefinitionByName/name"/>
       </genOperations>
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/getPackages.1">
         <genParameters ecoreParameter="io.ecore#//KermetaUnit/getPackages.1/qualifiedName"/>
@@ -131,32 +129,13 @@
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/isIndirectlyErroneous"/>
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/lock"/>
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/unlock"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/fillTypeDefinitionCache"/>
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/copy"/>
-      <genOperations ecoreOperation="io.ecore#//KermetaUnit/fillTypeDefinitionCache">
-        <genParameters ecoreParameter="io.ecore#//KermetaUnit/fillTypeDefinitionCache/aPackage"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getInternalTypeDefinitionByName">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/getInternalTypeDefinitionByName/name"/>
       </genOperations>
-      <genOperations ecoreOperation="io.ecore#//KermetaUnit/fillTypeDefinitionCache.1"/>
     </genClasses>
     <genClasses image="false" ecoreClass="io.ecore#//IBuildingState"/>
-    <genClasses ecoreClass="io.ecore#//KermetaUnitStorer">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnitStorer/kermetaUnits"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnitStorer/kermetaUnitsBeingLoaded"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnitStorer/kermetaUnitsBeingUnloaded"/>
-      <genOperations ecoreOperation="io.ecore#//KermetaUnitStorer/get">
-        <genParameters ecoreParameter="io.ecore#//KermetaUnitStorer/get/uri"/>
-      </genOperations>
-      <genOperations ecoreOperation="io.ecore#//KermetaUnitStorer/find">
-        <genParameters ecoreParameter="io.ecore#//KermetaUnitStorer/find/uri"/>
-      </genOperations>
-      <genOperations ecoreOperation="io.ecore#//KermetaUnitStorer/load">
-        <genParameters ecoreParameter="io.ecore#//KermetaUnitStorer/load/uri"/>
-        <genParameters ecoreParameter="io.ecore#//KermetaUnitStorer/load/options"/>
-        <genParameters ecoreParameter="io.ecore#//KermetaUnitStorer/load/monitor"/>
-      </genOperations>
-      <genOperations ecoreOperation="io.ecore#//KermetaUnitStorer/unload">
-        <genParameters ecoreParameter="io.ecore#//KermetaUnitStorer/unload/uri"/>
-      </genOperations>
-    </genClasses>
     <genClasses ecoreClass="io.ecore#//PackageEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//PackageEntry/qualifiedName"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//PackageEntry/package"/>
@@ -179,6 +158,7 @@
     <genClasses ecoreClass="io.ecore#//ParsingError">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//ParsingError/offset"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//ParsingError/length"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//ParsingError/lineNumber"/>
     </genClasses>
     <genClasses ecoreClass="io.ecore#//TypeDefinitionCache">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//TypeDefinitionCache/kermetaUnit"/>
@@ -189,9 +169,6 @@
       </genOperations>
       <genOperations ecoreOperation="io.ecore#//TypeDefinitionCache/getTypeDefinitionByQualifiedName">
         <genParameters ecoreParameter="io.ecore#//TypeDefinitionCache/getTypeDefinitionByQualifiedName/qualifiedName"/>
-      </genOperations>
-      <genOperations ecoreOperation="io.ecore#//TypeDefinitionCache/getInternalTypeDefinitionByQualifiedName">
-        <genParameters ecoreParameter="io.ecore#//TypeDefinitionCache/getInternalTypeDefinitionByQualifiedName/name"/>
       </genOperations>
       <genOperations ecoreOperation="io.ecore#//TypeDefinitionCache/addTypeDefinition">
         <genParameters ecoreParameter="io.ecore#//TypeDefinitionCache/addTypeDefinition/qualifiedName"/>

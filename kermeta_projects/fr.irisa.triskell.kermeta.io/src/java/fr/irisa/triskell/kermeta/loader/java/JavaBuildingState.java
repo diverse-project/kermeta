@@ -12,7 +12,7 @@
 
 package fr.irisa.triskell.kermeta.loader.java;
 
-import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.AbstractBuildingState;
 
 public class JavaBuildingState extends AbstractBuildingState {
 

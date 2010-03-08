@@ -19,6 +19,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.kermeta.io.plugin.IOPlugin;
 
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
+
 
 /**
  * this class provides some management methods used to work with a given ResourceSet 
@@ -46,7 +49,15 @@ public class ResourceSetManager {
 	 * @param resource_set
 	 */
 	public void addStdLibResource(){
-		addResource( IOPlugin.getDefault().getFramework().getModelingUnit().eResource() );
+		try {
+			addResource( IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.getFrameWorkURI()).getModelingUnit().eResource() );
+		} catch (URIMalformedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotRegisteredURIException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/** add the resources to this resourceSet, save their resourceSet for a restore later

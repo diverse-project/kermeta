@@ -66,10 +66,10 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbol;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolLambdaParameter;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolRescueParameter;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.FSuperCall;
@@ -98,18 +98,6 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	protected TypeCheckerContext context;
 	
-	static private List<Operation> specialOperations = TypeCheckerContext.specialOperations; //= new ArrayList<Operation>();
-	
-	/*static {
-		specialOperations.add( TypeCheckerContext.getObjectAsTypeOperation() );
-		specialOperations.add( TypeCheckerContext.getClassNewOperation() );
-		specialOperations.add( TypeCheckerContext.getModelTypeNewOperation() );
-		specialOperations.add( TypeCheckerContext.getClassCloneOperation() );
-		specialOperations.add( TypeCheckerContext.getModelFilterOperation() );
-		specialOperations.add( TypeCheckerContext.getModelAddOperation() );
-		specialOperations.add( TypeCheckerContext.getModelRemoveOperation() );	
-	}*/
-	
 	/**
 	 * Used for type inference on lambda expression parameters
 	 */
@@ -119,18 +107,9 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		this.unit = unit;
 		expressionTypes = new Hashtable<Expression, Type>();
 		this.context = context;
-		//initializeSpecialOperations();
 	}
 
-/*	private void initializeSpecialOperations() {
-		specialOperations.add( TypeCheckerContext.getObjectAsTypeOperation() );
-		specialOperations.add( TypeCheckerContext.getClassNewOperation() );
-		specialOperations.add( TypeCheckerContext.getModelTypeNewOperation() );
-		specialOperations.add( TypeCheckerContext.getClassCloneOperation() );
-		specialOperations.add( TypeCheckerContext.getModelFilterOperation() );
-		specialOperations.add( TypeCheckerContext.getModelAddOperation() );
-		specialOperations.add( TypeCheckerContext.getModelRemoveOperation() );		
-	}*/
+
 	
 	/**********************************
 	 *  RESULT AND EXPORTED INTERFACE
@@ -166,7 +145,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	
 	protected Type getUnionType(Type t1, Type t2) {
-		UnionType result = new UnionType();
+		UnionType result = new UnionType(context);
 		result.addType(t1);
 		result.addType(t2);
 		return result;
@@ -229,7 +208,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		if (exp instanceof CallFeature) {
 			// To avoid CallSuperOperations, which don't need to be virtualized
 			if ( (((CallFeature)exp).getTarget() != null) && getTypeOfExpression(((CallFeature) exp).getTarget()).getFType() instanceof VirtualType) {
-				operation_type = TypeVirtualizer.virtualizeOperationType(op, (VirtualType) getTypeOfExpression(((CallFeature)exp).getTarget()).getFType());
+				operation_type = TypeVirtualizer.virtualizeOperationType(op, (VirtualType) getTypeOfExpression(((CallFeature)exp).getTarget()).getFType(), context);
 				result = operation_type.getFunctionTypeRight();
 			}
 		}
@@ -281,8 +260,9 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			    // REPLACE AND CHECK
 			    for(int i=0; i<exp.getParameters().size(); i++) {
 					Type provided = getTypeOfExpression((Expression)exp.getParameters().get(i));
-					Type expected = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)required_params[i]).type, binding));
+					Type expected = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)required_params[i]).type, binding), context);
 					if (!provided.isSubTypeOf(expected)) {
+						new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)required_params[i]).type, binding), context);
 						provided.isSubTypeOf(expected);
 						unit.error("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+expected+", found "+provided+".",(Expression)exp.getParameters().get(i));
 					    error = true;
@@ -316,13 +296,13 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		    
 		    // Replace type variables in the return type of the operation
 		    if ( ! error )
-		        result = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)result).type, binding));
+		        result = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)result).type, binding), context);
 		    else
-		        result = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)result).type));
+		        result = new SimpleType(new TypeVariableLeastDerivedEnforcer(context).getBoundType( ((SimpleType)result).type), context);
 		
 	    }
 	    
-	    if ( specialOperations.contains( op.getOperation() ) )
+	    if ( context.specialOperations.contains( op.getOperation() ) )
 	    	result = processSpecialOperations(result, op, exp);
 	    
 	    // Return result
@@ -332,7 +312,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	private Type processSpecialOperations(Type t, CallableOperation op, CallExpression exp) {
 		Type result = t;
 	    // THE METHOD ISTYPE ON OBJECT (The OCL like cast)
-	    if (op.getOperation() == TypeCheckerContext.getObjectAsTypeOperation() ) {
+	    if (op.getOperation() == context.getObjectAsTypeOperation() ) {
 	    	// the operation has one Class parameter; 
 	    	// if this parameter is a TypeLitteral then the return type of the operation corresponds to that type litteral
 	    	Expression asType_param = (Expression)exp.getParameters().get(0);
@@ -341,7 +321,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    }
 	
 	    // THE METHOD NEW ON CLASS
-	    if (op.getOperation() == TypeCheckerContext.getClassNewOperation()) {
+	    if (op.getOperation() == context.getClassNewOperation()) {
 	        if (((CallFeature)exp).getTarget() instanceof TypeLiteral) {
 	            result = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget());
 	            // check that it is a concrete class (if the literal is in fact a class. If its a type variable, we're ok)
@@ -354,9 +334,9 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    }
 	    
 	    // THE OPERATION NEW ON MODELTYPE
-	    if ((op.getOperation() == TypeCheckerContext.getModelTypeNewOperation())
-	    		|| (op.getOperation() == TypeCheckerContext.getModelTypeVariableNewOperation())
-	    		|| (op.getOperation() == TypeCheckerContext.getObjectTypeVariableNewOperation())) {
+	    if ((op.getOperation() == context.getModelTypeNewOperation())
+	    		|| (op.getOperation() == context.getModelTypeVariableNewOperation())
+	    		|| (op.getOperation() == context.getObjectTypeVariableNewOperation())) {
 	    	if (((CallFeature)exp).getTarget() instanceof TypeLiteral) {
 	    		result = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget());
 	    	}
@@ -364,7 +344,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    
 	    // THE CLONE AND DEEPCLONE OPERATIONS ON CLASS 
 	    // FIXME Why the following line doesn't work !!!!
-	    if ( op.getOperation() == TypeCheckerContext.getClassCloneOperation() ) {
+	    if ( op.getOperation() == context.getClassCloneOperation() ) {
 	    	if (((CallFeature)exp).getTarget() instanceof TypeLiteral) {
 	    	// Check that the parameter is a instance of the type of the target ... A.clone(e:A) : A
 		    	if (exp.getParameters().size() == 1 ) {
@@ -397,7 +377,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    }
 	    
 	    // THE FILTER OPERATION ON MODEL
-	    if (op.getOperation() == TypeCheckerContext.getModelFilterOperation()) {
+	    if (op.getOperation() == context.getModelFilterOperation()) {
 	    	//Can only filter on one of the classes belonging to the model type or virtual types belonging to the model type variable
 	    	if (exp.getParameters().size() == 1) {
 	    		if (exp.getParameters().get(0) instanceof TypeLiteral) {
@@ -423,7 +403,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    				}
 	    			}
 			    	// The return type is a set of the parameter, so long as the parameter was a literal.
-		    		result = TypeCheckerContext.getSetType(provided.getFType());
+		    		result = context.getSetType(provided.getFType());
 	    		}
 
 	    	} else {
@@ -433,7 +413,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    }
 	    
 	    //The add operation on Model
-	    if (op.getOperation() == TypeCheckerContext.getModelAddOperation()) {
+	    if (op.getOperation() == context.getModelAddOperation()) {
 	    	// The type of the parameter must be a subtype of one of the types contained by the model-type of the receiver
 	    	if (exp.getParameters().size() == 1) {
 	    		Type provided = getTypeOfExpression((Expression) exp.getParameters().get(0));
@@ -442,7 +422,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
     	    		Iterator<fr.irisa.triskell.kermeta.language.structure.Class> classes = TypeMatchChecker.getContainedTypes((ModelType) getTypeOfExpression(((CallFeature) exp).getTarget()).getFType()).iterator();
     				while (!foundType && classes.hasNext()) {
     					fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class) classes.next();
-    					if (provided.isSubTypeOf(new SimpleType(cls))) {
+    					if (provided.isSubTypeOf(new SimpleType(cls, context))) {
     						foundType = true;
     					}
     				}
@@ -462,7 +442,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    }
 	    
 	    //The remove operation on Model
-	    if (op.getOperation() == TypeCheckerContext.getModelRemoveOperation()) {
+	    if (op.getOperation() == context.getModelRemoveOperation()) {
 	    	// The type of the parameter must be a subtype of one of the types contained by the model-type of the receiver
 	    	if (exp.getParameters().size() == 1) {
 	    		Type provided = getTypeOfExpression((Expression) exp.getParameters().get(0));
@@ -471,7 +451,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
     	    		Iterator<fr.irisa.triskell.kermeta.language.structure.Class> classes = TypeMatchChecker.getContainedTypes((ModelType) getTypeOfExpression(((CallFeature) exp).getTarget()).getFType()).iterator();
     				while (!foundType && classes.hasNext()) {
     					fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class) classes.next();
-    					if (provided.isSubTypeOf(new SimpleType(cls))) {
+    					if (provided.isSubTypeOf(new SimpleType(cls, context))) {
     						foundType = true;
     					}
     				}
@@ -495,7 +475,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	protected Type checkPropertyCall(CallableProperty prop, CallExpression exp) {
 		if (exp.getParameters().size() == 0) {
 			if ( (((CallFeature)exp).getTarget() != null) && (getTypeOfExpression(((CallFeature) exp).getTarget()).getFType() instanceof VirtualType)) {
-				return TypeVirtualizer.virtualizePropertyType(prop, (VirtualType) getTypeOfExpression(((CallFeature)exp).getTarget()).getFType());
+				return TypeVirtualizer.virtualizePropertyType(prop, (VirtualType) getTypeOfExpression(((CallFeature)exp).getTarget()).getFType(), context);
 			}
 		    return prop.getType(exp);
 		}
@@ -513,7 +493,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	 * of the last expression
 	 */
 	protected Type visitExpressionList(EList<Expression> expressions) {
-		Type result = TypeCheckerContext.VoidType;
+		Type result = context.VoidType;
 		for ( Expression expression : expressions )
 			result = (Type) this.accept(expression);
 		return result;
@@ -535,13 +515,13 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    // The target of the assignenement cannot have any parameter
 	    if (expression.getTarget().getParameters().size() != 0) {
 	        unit.error("TYPE-CHECKER : Only variables and properties can be assigned", expression);
-	        return TypeCheckerContext.VoidType;
+	        return context.VoidType;
 	    }
 	    
 	    // It should not be a superoperation call
 	    if (expression.getTarget() instanceof FSuperCall) {
 	        unit.error("TYPE-CHECKER : Only variables and properties can be assigned", expression);
-	        return TypeCheckerContext.VoidType;
+	        return context.VoidType;
 	    }
 	    
 	    // It should not be an operation call
@@ -556,14 +536,14 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			CallableOperation op = target.getOperationByName(fc.getName(), unit);
 			if (op != null) {
 			    unit.error("TYPE-CHECKER : Only variables and properties can be assigned", expression);
-			    return TypeCheckerContext.VoidType;
+			    return context.VoidType;
 			}
 			// Check if it is a property and if this property is derived AND readonly
 			CallableProperty prop = target.getPropertyByName(fc.getName());
 			if (prop!=null && prop.getProperty().isIsReadOnly())
 			{
 				unit.error("TYPE-CHECKER : '"+ fc.getName() + "' property is readonly. You can't assign it.", expression);
-				return TypeCheckerContext.VoidType;
+				return context.VoidType;
 				
 			}
 			
@@ -576,7 +556,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 					String message = "Assignment impossible because one class definition is missing a property named " + fc.getName() + ".";
 					unit.error(message, expression);	
 				}				
-				return TypeCheckerContext.VoidType;
+				return context.VoidType;
 			}
 			
 			// Check if the property is not a reflectivecollection
@@ -587,7 +567,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 						+ "Did you mean ? \n\t" + pp.accept(expression.getTarget()) + ".clear\n\t" + 
 						pp.accept(expression.getTarget()) + ".addAll(" +pp.accept(expression.getValue()) + ")"
 						, expression);
-				return TypeCheckerContext.VoidType;
+				return context.VoidType;
 			}
 	    }
 	    
@@ -597,7 +577,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    if (expression.isIsCast()) {
 	        
 	        // Allow casting ennumeration literals in Enum values
-	        if (targetType.getFType() instanceof Enumeration && provided_type.isSubTypeOf(TypeCheckerContext.EnumLitType) ) {
+	        if (targetType.getFType() instanceof Enumeration && provided_type.isSubTypeOf(context.EnumLitType) ) {
 	            return targetType;
 	        }
 	        
@@ -652,7 +632,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	public Object visitBlock(Block expression) {
 	    preVisit();
-		Type result = TypeCheckerContext.VoidType;
+		Type result = context.VoidType;
 		// Process contained expressions
 		context.pushContext();
 		result = visitExpressionList(expression.getStatement());
@@ -669,7 +649,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			context.pushContext();
 			// add the symbol
 			if (resc.getExceptionType() != null)
-			    context.addSymbol(new KMSymbolRescueParameter(resc), TypeCheckerContext.getTypeFromMultiplicityElement(resc.getExceptionType()));
+			    context.addSymbol(new KMSymbolRescueParameter(resc), context.getTypeFromMultiplicityElement(resc.getExceptionType()));
 			visitExpressionList(resc.getBody());
 			context.popContext();
 		}
@@ -680,8 +660,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	public Object visitBooleanLiteral(BooleanLiteral expression) {
 	    preVisit();
-	    setType(expression, TypeCheckerContext.BooleanType);
-		return TypeCheckerContext.BooleanType;
+	    setType(expression, context.BooleanType);
+		return context.BooleanType;
 	}
 	
 	public Object visitCallValue(CallValue expression) {
@@ -693,7 +673,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    {
 	        unit.error("TYPE-CHECKER : 'value' symbol is forbidden outside derived property", expression);
 	    }
-        result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentCallable());
+        result = context.getTypeFromMultiplicityElement(context.getCurrentCallable());
 	    setType(expression, result);
 	    return result;
 	}
@@ -735,14 +715,14 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			}
 			if (lit != null) {
 			    expression.setStaticEnumLiteral(lit);
-				result = new SimpleType(e);
+				result = new SimpleType(e, context);
 			}
 		}
 		
 		if (result == null) {
 		    // It the target type is an enumeration, the object should be an enumeration literal
 		    if (expression.getTarget() != null && target.getFType() instanceof Enumeration) {
-		        target = TypeCheckerContext.EnumLitType;
+		        target = context.EnumLitType;
 		    }
 		    
 			// Is it an operation call
@@ -775,7 +755,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 						expression.setStaticOperation(op.getOperation());
 					}
 			    }
-			    result = TypeCheckerContext.VoidType;
+			    result = context.VoidType;
 			}
 		}
 		
@@ -789,11 +769,11 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    if (context.getCurrentCallable() == null) {
 	    	// cannot call result here
 	    	unit.error("TYPE-CHECKER : invalid use of result", expression);
-	    	return TypeCheckerContext.VoidType;
+	    	return context.VoidType;
 	    }
 	    
 		// ele
-	    Type result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentCallable());
+	    Type result = context.getTypeFromMultiplicityElement(context.getCurrentCallable());
 	    // if there are parameters
 		if (expression.getParameters().size() != 0) {
 			result = getReturnTypeForParametrizedCallExpression(expression, result);
@@ -806,7 +786,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	public Object visitCallSuperOperation(CallSuperOperation expression) {
 	    preVisit();  
 	    // If user called "super" in an operation that has no super operation
-	    Type result = TypeCheckerContext.VoidType;
+	    Type result = context.VoidType;
 	    if (context.getSuperOperation() == null)
 	    {
 	    	unit.error("TYPE-CHECKER : the call of super is illegal in operation '" + context.getCurrentCallable().getName() + "' which is not a redefined one", expression);
@@ -826,8 +806,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		// Error if symbol not found
 		if (result == null) {
 			unit.error("TYPE-CHECKER : cannot resolve symbol " + expression.getName(), expression);
-			setType(expression, TypeCheckerContext.VoidType);
-			return TypeCheckerContext.VoidType;
+			setType(expression, context.VoidType);
+			return context.VoidType;
 		}
 		// if there are parameters
 		if (expression.getParameters().size() != 0) {
@@ -858,7 +838,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		} else
 			conditionTypeQualifiedName = KermetaModelHelper.NamedElement.qualifiedName( conditionType.getTypeDefinition() );
 		
-		if( ! conditionTypeQualifiedName.equals(NamedElementHelper.getQualifiedName(TypeCheckerContext.BooleanType.getTypeDefinition())) ) {
+		if( ! conditionTypeQualifiedName.equals(NamedElementHelper.getQualifiedName(context.BooleanType.getTypeDefinition())) ) {
 			unit.error("TYPE-CHECKER : The condition expression of a conditional statement should be a Boolean expression", expression.getCondition());
 		}
 		// compute the return type
@@ -875,14 +855,14 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	public Object visitEmptyExpression(EmptyExpression expression) {
 	    preVisit();
 		// Return type
-	    setType(expression, TypeCheckerContext.VoidType);
-		return TypeCheckerContext.VoidType;
+	    setType(expression, context.VoidType);
+		return context.VoidType;
 	}
 	
 	public Object visitIntegerLiteral(IntegerLiteral expression) {
 	    preVisit();
-	    setType(expression, TypeCheckerContext.IntegerType);
-		return TypeCheckerContext.IntegerType;
+	    setType(expression, context.IntegerType);
+		return context.IntegerType;
 	}
 	
 	public Object visitJavaStaticCall(JavaStaticCall expression) {
@@ -890,8 +870,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		// visit contained expression
 		visitExpressionList(expression.getParameters());
 		// The returned type is Objects
-		setType(expression, TypeCheckerContext.ObjectType);
-		return TypeCheckerContext.ObjectType;
+		setType(expression, context.ObjectType);
+		return context.ObjectType;
 	}
 	
 	public Object visitLambdaExpression(LambdaExpression expression) {
@@ -918,15 +898,15 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	            }
 	            
 	            else {
-	                //context.addSymbol(new KMSymbolLambdaParameter(param), TypeCheckerContext.ObjectType);
-	                //result_param.getFType().add(TypeCheckerContext.ObjectType);
+	                //context.addSymbol(new KMSymbolLambdaParameter(param), context.ObjectType);
+	                //result_param.getFType().add(context.ObjectType);
 	                unit.error("TYPE-CHECKER : Types of the function does not match required types", expression);
 	            }
 	            
 	        }
 	        else {
-	            Type t = TypeCheckerContext.getTypeFromMultiplicityElement(param.getType());
-	            ParameterizedTypeChecker.checkType(t.getFType(), unit, context, expression);
+	            Type t = context.getTypeFromMultiplicityElement(param.getType());
+	            ParameterizedTypeChecker.checkType(t.getFType(), unit,  expression, context);
 	            context.addSymbol(new KMSymbolLambdaParameter(param), t);
 	            result_param.getType().add(((SimpleType)t).type);
 	        }
@@ -963,7 +943,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		        result.getContainedType().add( (((UnionType)result_return).transformAsSimpleType()).type );
 	        
 	    }
-	    Type true_result = new SimpleType(result);
+	    Type true_result = new SimpleType(result, context);
 	    setType(expression, true_result);
         return true_result;
 	}
@@ -977,13 +957,13 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		this.accept(expression.getBody());
 		context.popContext();
 		// Check constraints
-		if(!getTypeOfExpression(expression.getStopCondition()).isSubTypeOf(TypeCheckerContext.BooleanType)) {
+		if(!getTypeOfExpression(expression.getStopCondition()).isSubTypeOf(context.BooleanType)) {
 			unit.error("TYPE-CHECKER : The until expression of a loop statement should be a Boolean expression", expression.getStopCondition());
 		}
 		
 		// Return type
-		setType(expression, TypeCheckerContext.VoidType);
-		return TypeCheckerContext.VoidType;
+		setType(expression, context.VoidType);
+		return context.VoidType;
 	}
 	
 	public Object visitRaise(Raise expression) {
@@ -991,8 +971,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		// process contained expression
 	    this.accept(expression.getExpression());
 	    // return void
-	    setType(expression, TypeCheckerContext.VoidType);
-	    return TypeCheckerContext.VoidType;
+	    setType(expression, context.VoidType);
+	    return context.VoidType;
 	}
 	
 	public Object visitSelfExpression(SelfExpression expression) {
@@ -1015,7 +995,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			cl.getTypeParamBinding().add(tvb);
 		}
 		
-		result = new SimpleType(cl);
+		result = new SimpleType(cl, context);
 		
 		// Return type
 		setType(expression, result);
@@ -1024,8 +1004,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	public Object visitStringLiteral(StringLiteral expression) {
 	    preVisit();
-	    setType(expression, TypeCheckerContext.StringType);
-		return TypeCheckerContext.StringType;
+	    setType(expression, context.StringType);
+		return context.StringType;
 	}
 	
 	public Object visitTypeLiteral(TypeLiteral expression) {
@@ -1034,35 +1014,35 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    fr.irisa.triskell.kermeta.language.structure.Type type = getTypeFromTypeLiteral(expression).type;
 	    if(type == null){
 	    	unit.error("TYPE-CHECKER : unable to retreive type from expression", expression);
-		    result = TypeCheckerContext.VoidType;
+		    result = context.VoidType;
 	    }
 	    else {
-		    ParameterizedTypeChecker.checkType(type, unit, context, expression);
+		    ParameterizedTypeChecker.checkType(type, unit, expression, context);
 			
 		    if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
-		    	result = TypeCheckerContext.ClassType;
+		    	result = context.ClassType;
 		    }
 		    else if (type instanceof Enumeration){
-		    	result = TypeCheckerContext.EnumType;
+		    	result = context.EnumType;
 		    }
 		    else if (type instanceof ModelType) {
-		    	result = TypeCheckerContext.ModelTypeType;
+		    	result = context.ModelTypeType;
 		    }
 		    else if (type instanceof ObjectTypeVariable) {
-		    	//result = TypeCheckerContext.ObjectTypeVariableType;
-		    	result = TypeCheckerContext.ClassType;
+		    	//result = context.ObjectTypeVariableType;
+		    	result = context.ClassType;
 		    }
 		    else if (type instanceof ModelTypeVariable) {
-		    	//result = TypeCheckerContext.ModelTypeVariableType;
-		    	result = TypeCheckerContext.ModelTypeType;
+		    	//result = context.ModelTypeVariableType;
+		    	result = context.ModelTypeType;
 		    }
 		    else if (type instanceof VirtualType) {
-		    	//result = TypeCheckerContext.VirtualTypeType;
-		    	result = TypeCheckerContext.ClassType;
+		    	//result = context.VirtualTypeType;
+		    	result = context.ClassType;
 		    }
 		    else {
 		    	unit.error("TYPE-CHECKER : Type literal should only refer to classes, enumerations, model types or type variables.", expression);
-			    result = TypeCheckerContext.VoidType;
+			    result = context.VoidType;
 		    }
 	    }
 	    setType(expression, result);
@@ -1071,8 +1051,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	public Object visitVariableDecl(VariableDecl expression) {
 	    preVisit();
-	    Type result = TypeCheckerContext.getTypeFromMultiplicityElement(expression.getType());  
-	    ParameterizedTypeChecker.checkType(result.getFType(), unit, context, expression);
+	    Type result = context.getTypeFromMultiplicityElement(expression.getType());  
+	    ParameterizedTypeChecker.checkType(result.getFType(), unit, expression, context);
 		// process contained expressions
 		if (expression.getInitialization() != null) 
 			this.accept(expression.getInitialization());
@@ -1105,8 +1085,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	public Object visitVoidLiteral(VoidLiteral expression) {
 	    preVisit();
-	    setType(expression, TypeCheckerContext.VoidType);
-		return TypeCheckerContext.VoidType;
+	    setType(expression, context.VoidType);
+		return context.VoidType;
 	}
 	
 	
@@ -1116,10 +1096,10 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		//FIXME: check that it is realy a class and generate an error othewise
 		
 		if (expression.getTyperef().getUpper() == 1) {
-			result = new SimpleType(expression.getTyperef().getType());
+			result = new SimpleType(expression.getTyperef().getType(), context);
 		}
 		else {
-			result = TypeCheckerContext.getTypeFromMultiplicityElement(expression.getTyperef());
+			result = context.getTypeFromMultiplicityElement(expression.getTyperef());
 		}
 		return (SimpleType)result;
 	}

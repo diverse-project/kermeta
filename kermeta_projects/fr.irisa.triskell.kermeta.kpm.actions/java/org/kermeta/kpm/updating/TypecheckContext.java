@@ -13,6 +13,7 @@
 package org.kermeta.kpm.updating;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,11 +21,14 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.cachemanager.KermetaUnitStore;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kermetaunitloader.LoaderFactory;
 import org.kermeta.kpm.IAction;
 import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.KermetaUnitHost;
 import org.kermeta.kpm.KpmManager;
+import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
@@ -32,6 +36,7 @@ import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
 public class TypecheckContext implements IAction {
 
@@ -40,6 +45,7 @@ public class TypecheckContext implements IAction {
 		List<Unit> l = null;
 		try  {
 			monitor.subTask("Typechecking");
+			KermetaUnitStore store = IOPlugin.getDefault().getEditionKermetaUnitStore(); 
 			
 			/*
 			 * 
@@ -61,7 +67,7 @@ public class TypecheckContext implements IAction {
 				 * Getting the corresponding kermeta unit.
 				 * 
 				 */
-				KermetaUnit kermetaUnit = IOPlugin.getDefault().getKermetaUnit(currentUnit.getName());
+				KermetaUnit kermetaUnit = store.get(currentUnit.getName());
 				
 				/*
 				 * 
@@ -73,10 +79,13 @@ public class TypecheckContext implements IAction {
 				kl.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) );
 				
 				/*
-				 * 
-				 * Typecheck and Constraintcheck every kermeta units.
-				 * 
+				 * Typecheck and Constraintcheck every kermeta units. 
 				 */
+				HashMap<String, Object> options = new HashMap<String, Object>();
+				// additional options for loading the framework
+				options.put(LoadingOptions.FRAMEWORK_LOADING, true);
+				options.put( LoadingOptions.ECORE_QuickFixEnabled, true );
+				TypeCheckerContext typecheckercontext = new TypeCheckerContext(store.get(IOPlugin.getFrameWorkURI(), options));
 				for ( KermetaUnit kunit : kl ) {
 					/*
 					 * 
@@ -91,7 +100,8 @@ public class TypecheckContext implements IAction {
 					
 					try {
 						if ( ! kunit.isErroneous() ) {
-							KermetaTypeChecker typechecker = new KermetaTypeChecker(kunit);
+							//IOPlugin.getDefault().getKermetaUnit(kunit.getUri()); // make sure this have been loaded in the current context
+							KermetaTypeChecker typechecker = new KermetaTypeChecker(kunit, typecheckercontext);
 							typechecker.checkUnit();
 							if ( ! kunit.isErroneous() ) {
 								KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(kunit);

@@ -17,7 +17,8 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.gymnast.runtime.core;visibility:=reexport,
  org.eclipse.emf.ecoretools.registration,
  org.antlr.antlr2,
- org.kermeta.log4j.util
+ org.kermeta.log4j.util,
+ fr.irisa.triskell.cache.utilities
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.kermeta.io.plugin.IOPlugin
 Export-Package: 
@@ -27,11 +28,11 @@ Export-Package:
  fr.irisa.triskell.kermeta.exceptions,
  fr.irisa.triskell.kermeta.exporter.ecore,
  fr.irisa.triskell.kermeta.exporter.km,
- fr.irisa.triskell.kermeta.loader.ecore,
+ fr.irisa.triskell.kermeta.loader.ecore.ecore2km,
  fr.irisa.triskell.kermeta.loader.expression,
  fr.irisa.triskell.kermeta.loader.java,
  fr.irisa.triskell.kermeta.loader.km,
- fr.irisa.triskell.kermeta.loader.kmt,
+ fr.irisa.triskell.kermeta.loader.kmt.kmt2km,
  fr.irisa.triskell.kermeta.modelhelper,
  fr.irisa.triskell.kermeta.parser,
  fr.irisa.triskell.kermeta.parser.gen.ast,
@@ -39,12 +40,16 @@ Export-Package:
  fr.irisa.triskell.kermeta.parser.helper,
  fr.irisa.triskell.kermeta.typechecker,
  org.kermeta.io,
+ org.kermeta.io.cachemanager,
  org.kermeta.io.impl,
  org.kermeta.io.plugin,
  org.kermeta.io.printer,
  org.kermeta.io.util,
  org.kermeta.io.util2,
  org.kermeta.io.validation,
+ org.kermeta.kermetaunitloader,
+ org.kermeta.kermetaunitloader.core,
+ org.kermeta.kermetaunitloader.kmt,
  org.kermeta.loader,
  org.kermeta.loader.kmt.fixer,
  org.kermeta.model

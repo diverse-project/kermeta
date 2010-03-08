@@ -27,11 +27,14 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
  */
 public abstract class Type {
 	
+	
+	public TypeCheckerContext context;
 	/**
 	 * Constructor
 	 */
-	public Type() {
+	public Type(TypeCheckerContext context) {
 		super();
+        this.context = context;
 	}
 	
 	/**

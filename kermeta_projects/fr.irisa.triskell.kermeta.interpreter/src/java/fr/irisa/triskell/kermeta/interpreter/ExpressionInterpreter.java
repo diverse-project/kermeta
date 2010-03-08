@@ -84,6 +84,7 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -163,7 +164,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		
 		fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getKCoreObject();
 		
-		CallableOperation op = new CallableOperation(foperation, self_type);
+		CallableOperation op = new CallableOperation(foperation, self_type, memory.getTypeCheckerContext());
 		
         // Create a context for this operation call, setting self object to ro_target
         interpreterContext.pushOperationCallFrame(ro_target, op, arguments, null);
@@ -210,7 +211,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	public RuntimeObject getRuntimeObjectForProperty(fr.irisa.triskell.kermeta.language.structure.Class fclass, String propertyName)
 	{
 	    // Create the corresponding type
-	    SimpleType target = new SimpleType(fclass);
+	    SimpleType target = new SimpleType(fclass,  memory.getTypeCheckerContext());
 	    // find the property
 	    CallableProperty cproperty = target.getPropertyByName(propertyName);
 	    //CallableProperty cproperty = this.interpreterContext.typeCache.getPropertyByName(target, propertyName);
@@ -862,7 +863,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     
     public InterpreterContext getInterpreterContext() {
     	return this.interpreterContext;
-    }    
+    }  
     public RuntimeMemory getMemory() {
         return memory;
     }

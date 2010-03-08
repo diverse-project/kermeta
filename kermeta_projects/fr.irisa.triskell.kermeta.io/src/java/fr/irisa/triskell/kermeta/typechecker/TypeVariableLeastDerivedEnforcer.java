@@ -36,12 +36,14 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
  */
 public class TypeVariableLeastDerivedEnforcer extends KermetaOptimizedVisitor {
 	
-	protected static fr.irisa.triskell.kermeta.language.structure.Type getBoundType(fr.irisa.triskell.kermeta.language.structure.Type generic) {
-		TypeVariableLeastDerivedEnforcer visitor = new TypeVariableLeastDerivedEnforcer();
+	protected fr.irisa.triskell.kermeta.language.structure.Type getBoundType(fr.irisa.triskell.kermeta.language.structure.Type generic) {
+		TypeVariableLeastDerivedEnforcer visitor = new TypeVariableLeastDerivedEnforcer(typecheckercontext);
 		return (fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(generic);
 	}
 	
-	protected StructureFactory struct_factory;
+	protected StructureFactory struct_factory;   
+	protected TypeCheckerContext typecheckercontext;
+	protected TypeVariableUtility typeVariableUtility;
 
 	
 	/**
@@ -97,15 +99,17 @@ public class TypeVariableLeastDerivedEnforcer extends KermetaOptimizedVisitor {
 
 	
 	public Object visitObjectTypeVariable(ObjectTypeVariable arg0) {
-		return TypeVariableUtility.getLeastDerivedAdmissibleType(arg0);
+		return typeVariableUtility.getLeastDerivedAdmissibleType(arg0);
 	}
 	
 	/**
 	 * Constructor 
 	 */
-	public TypeVariableLeastDerivedEnforcer() {
+	public TypeVariableLeastDerivedEnforcer(TypeCheckerContext typecheckercontext) {
 		super();
 		struct_factory = StructurePackageImpl.init().getStructureFactory();
+		this.typecheckercontext = typecheckercontext;
+		this.typeVariableUtility = new TypeVariableUtility(typecheckercontext);
 	}
 
 }

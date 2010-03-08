@@ -188,6 +188,10 @@ public class ClassDefinitionHelper {
 		 * Aspects
 		 * 
 		 */
+		if(unit == null){
+			System.out.println("uh oh ..");
+			KermetaUnitHelper.getKermetaUnitFromObject(current);
+		}
 		if ( unit.getAspects() != null && unit.getAspects().get(current) != null ) {
 			for ( TypeDefinition aspect : unit.getAspects().get(current) )  {
 				if ( aspect instanceof ClassDefinition )

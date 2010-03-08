@@ -95,7 +95,7 @@ abstract public class AbstractKInterpreter {
 	public AbstractKInterpreter(KermetaUnit program, BufferedReader inputReader, PrintStream outputWriter, PrintStream errorWriter) {
 		assert( program != null );
 		_kermetaUnit = program;
-		_memory = new RuntimeMemory(_kermetaUnit, this);
+		_memory = new RuntimeMemory(_kermetaUnit, this, _kermetaUnit.getTypeCheckerContext());
 		_context = new InterpreterContext(_memory);
 		_inputReader = inputReader;
 		_errorWriter = errorWriter;

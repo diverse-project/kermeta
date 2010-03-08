@@ -23,7 +23,6 @@ import org.kermeta.io.IoFactory;
 import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitRequire;
-import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParseErrorMessage;
 import org.kermeta.io.ParsingError;
@@ -34,6 +33,7 @@ import org.kermeta.io.plugin.IOPlugin;
 
 import antlr.ANTLRException;
 import fr.irisa.triskell.traceability.helper.Tracer;
+import java.lang.ref.WeakReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,7 +80,6 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case IoPackage.KERMETA_UNIT: return createKermetaUnit();
-			case IoPackage.KERMETA_UNIT_STORER: return createKermetaUnitStorer();
 			case IoPackage.PACKAGE_ENTRY: return createPackageEntry();
 			case IoPackage.ERROR_MESSAGE: return createErrorMessage();
 			case IoPackage.WARNING_MESSAGE: return createWarningMessage();
@@ -156,16 +155,6 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	public KermetaUnit createKermetaUnit() {
 		KermetaUnitImpl kermetaUnit = new KermetaUnitImpl();
 		return kermetaUnit;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public KermetaUnitStorer createKermetaUnitStorer() {
-		KermetaUnitStorerImpl kermetaUnitStorer = new KermetaUnitStorerImpl();
-		return kermetaUnitStorer;
 	}
 
 	/**

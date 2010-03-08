@@ -12,12 +12,16 @@ package fr.irisa.triskell.kermeta.dev.interpreter;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kermetaunitloader.LoaderFactory;
+import org.kermeta.loader.LoadingOptions;
 
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
@@ -26,7 +30,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
  * @author Franck Fleurey
- * This class compiles all the exten calls of the standard
+ * This class compiles all the extern calls of the standard
  * library to a command pattern. This greatly improves the performances
  */
 public class Extern2CmdCompiler extends KermetaOptimizedVisitor {
@@ -38,11 +42,15 @@ public class Extern2CmdCompiler extends KermetaOptimizedVisitor {
 		IOPlugin.getDefault();
 	}
 	
-	public static void main(String args[]) {
+	public static void main(String args[]) throws URIMalformedException, NotRegisteredURIException {
 
 		Extern2CmdCompiler generator = new Extern2CmdCompiler();
 		generator.initialize();
-		String code = generator.generate( LoaderPlugin.getDefault().getFramework() );
+		HashMap<String, Object> options = new HashMap<String, Object>();
+		options.put(LoadingOptions.FRAMEWORK_LOADING, true);
+		options.put( LoadingOptions.ECORE_QuickFixEnabled, true );
+		KermetaUnit frameworkUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.getFrameWorkURI(), options);
+		String code = generator.generate( frameworkUnit );
 		
 		try {
 			FileWriter w = new FileWriter("src/java/fr/irisa/triskell/kermeta/runtime/FrameworkExternCommand.java");

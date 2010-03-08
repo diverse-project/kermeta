@@ -45,8 +45,9 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 	 * @param context
 	 * @param codeContext
 	 */
-	public static void checkType(fr.irisa.triskell.kermeta.language.structure.Type t, KermetaUnit unit, TypeCheckerContext context, fr.irisa.triskell.kermeta.language.structure.Object codeContext) {
-		ParameterizedTypeChecker checker = new ParameterizedTypeChecker(unit, context, codeContext);
+	public static void checkType(fr.irisa.triskell.kermeta.language.structure.Type t, KermetaUnit unit,  fr.irisa.triskell.kermeta.language.structure.Object codeContext,
+			TypeCheckerContext typecheckercontext ) {
+		ParameterizedTypeChecker checker = new ParameterizedTypeChecker(unit,  codeContext, typecheckercontext);
 		checker.accept(t);
 	}
 	
@@ -60,11 +61,13 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 	private KermetaUnit unit;
 
 	private fr.irisa.triskell.kermeta.language.structure.Object codeContext; // this one is usefull in order to retreive the expression that use this type. allows to report the error at the right place
+    protected TypeCheckerContext typecheckercontext;
 	
-	public ParameterizedTypeChecker(KermetaUnit unit, TypeCheckerContext context, fr.irisa.triskell.kermeta.language.structure.Object codeContext) {
+	public ParameterizedTypeChecker(KermetaUnit unit, fr.irisa.triskell.kermeta.language.structure.Object codeContext, TypeCheckerContext typecheckercontext) {
 		super();
 		this.unit = unit;
 		this.codeContext = codeContext;
+		this.typecheckercontext = typecheckercontext;
 	}
 
 	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class arg0) {
@@ -84,12 +87,12 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 				//This smells like a hack. Need to initialize the type checker context
 				//TypeCheckerContext.initializeTypeChecker(StdLibKermetaUnitHelper.getKermetaUnit());
 				if (var instanceof ObjectTypeVariable) {
-					if (!TypeConformanceChecker.conforms(required, provided)) {
+					if (!TypeConformanceChecker.conforms(required, provided, typecheckercontext)) {
 						unit.error("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
 					}
 				} else if (var instanceof ModelTypeVariable) {
 					if (provided instanceof ModelType) {
-						TypeMatchChecker matcher = new TypeMatchChecker((ModelType) required, (ModelType) provided);
+						TypeMatchChecker matcher = new TypeMatchChecker((ModelType) required, (ModelType) provided, typecheckercontext);
 						boolean match = matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
 						if (!match) {
 							matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
@@ -113,7 +116,7 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 							}
 						}
 					} else if (provided instanceof ModelTypeVariable) {
-						TypeMatchChecker matcher = new TypeMatchChecker((ModelType) required, (ModelType) ((ModelTypeVariable) provided).getSupertype());
+						TypeMatchChecker matcher = new TypeMatchChecker((ModelType) required, (ModelType) ((ModelTypeVariable) provided).getSupertype(), typecheckercontext);
 						//match = TypeMatchChecker.match((ModelType) required, (ModelType) ((ModelTypeVariable) provided).getSupertype(), new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
 						boolean match = matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
 						if (!match) {

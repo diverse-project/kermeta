@@ -23,9 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.IBuildingState;
@@ -33,7 +31,6 @@ import org.kermeta.io.IoFactory;
 import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitRequire;
-import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParsingError;
@@ -56,6 +53,7 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.language.structure.Using;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.traceability.helper.Tracer;
@@ -67,13 +65,11 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getStorer <em>Storer</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getUri <em>Uri</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getModelingUnit <em>Modeling Unit</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getInternalPackageEntries <em>Internal Package Entries</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getExternalPackageEntries <em>External Package Entries</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getImportedKermetaUnits <em>Imported Kermeta Units</em>}</li>
- *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getImporters <em>Importers</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getBuildingState <em>Building State</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getMessages <em>Messages</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isNeedASTTraces <em>Need AST Traces</em>}</li>
@@ -87,6 +83,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getKermetaUnitRequires <em>Kermeta Unit Requires</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isLocked <em>Locked</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getBaseAspects <em>Base Aspects</em>}</li>
+ *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getTypeCheckerContext <em>Type Checker Context</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,16 +151,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @ordered
 	 */
 	protected EList<KermetaUnit> importedKermetaUnits;
-
-	/**
-	 * The cached value of the '{@link #getImporters() <em>Importers</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImporters()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<KermetaUnit> importers;
 
 	/**
 	 * The cached value of the '{@link #getBuildingState() <em>Building State</em>}' reference.
@@ -366,6 +353,26 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	protected Map<TypeDefinition, EList<TypeDefinition>> baseAspects;
 
 	/**
+	 * The default value of the '{@link #getTypeCheckerContext() <em>Type Checker Context</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeCheckerContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final TypeCheckerContext TYPE_CHECKER_CONTEXT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTypeCheckerContext() <em>Type Checker Context</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeCheckerContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypeCheckerContext typeCheckerContext = TYPE_CHECKER_CONTEXT_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
@@ -390,47 +397,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	@Override
 	protected EClass eStaticClass() {
 		return IoPackage.Literals.KERMETA_UNIT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public KermetaUnitStorer getStorer() {
-		if (eContainerFeatureID != IoPackage.KERMETA_UNIT__STORER) return null;
-		return (KermetaUnitStorer)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetStorer(KermetaUnitStorer newStorer, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newStorer, IoPackage.KERMETA_UNIT__STORER, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStorer(KermetaUnitStorer newStorer) {
-		if (newStorer != eInternalContainer() || (eContainerFeatureID != IoPackage.KERMETA_UNIT__STORER && newStorer != null)) {
-			if (EcoreUtil.isAncestor(this, newStorer))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newStorer != null)
-				msgs = ((InternalEObject)newStorer).eInverseAdd(this, IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS, KermetaUnitStorer.class, msgs);
-			msgs = basicSetStorer(newStorer, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__STORER, newStorer, newStorer));
 	}
 
 	/**
@@ -523,21 +489,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 */
 	public EList<KermetaUnit> getImportedKermetaUnits() {
 		if (importedKermetaUnits == null) {
-			importedKermetaUnits = new EObjectWithInverseResolvingEList.ManyInverse<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS, IoPackage.KERMETA_UNIT__IMPORTERS);
+			importedKermetaUnits = new EObjectResolvingEList<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS);
 		}
 		return importedKermetaUnits;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<KermetaUnit> getImporters() {
-		if (importers == null) {
-			importers = new EObjectWithInverseResolvingEList.ManyInverse<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT__IMPORTERS, IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS);
-		}
-		return importers;
 	}
 
 	/**
@@ -860,6 +814,27 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeCheckerContext getTypeCheckerContext() {
+		return typeCheckerContext;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeCheckerContext(TypeCheckerContext newTypeCheckerContext) {
+		TypeCheckerContext oldTypeCheckerContext = typeCheckerContext;
+		typeCheckerContext = newTypeCheckerContext;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__TYPE_CHECKER_CONTEXT, oldTypeCheckerContext, typeCheckerContext));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public void load() {
@@ -1174,9 +1149,11 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public void error(String message) {
-		ErrorMessage error = IoFactory.eINSTANCE.createErrorMessage();
-		error.setValue( message );
-		getMessages().add( error );
+		if(!KermetaUnitHelper.hasSimilarMessage(this, message)){
+			ErrorMessage error = IoFactory.eINSTANCE.createErrorMessage();
+			error.setValue( message );
+			getMessages().add( error );
+		}
 	}
 
 	/**
@@ -1185,9 +1162,11 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public void warning(String message) {
-		WarningMessage warning = IoFactory.eINSTANCE.createWarningMessage();
-		warning.setValue( message );
-		getMessages().add( warning );
+		if(!KermetaUnitHelper.hasSimilarMessage(this, message)){
+			WarningMessage warning = IoFactory.eINSTANCE.createWarningMessage();
+			warning.setValue( message );
+			getMessages().add( warning );
+		}
 	}
 
 	/**
@@ -1276,10 +1255,12 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public void error(String message, Object target) {
-		ErrorMessage error = IoFactory.eINSTANCE.createErrorMessage();
-		error.setValue( message );
-		error.setTarget( target );
-		getMessages().add( error );
+		if(!KermetaUnitHelper.hasSimilarMessage(this, message, target)){
+			ErrorMessage error = IoFactory.eINSTANCE.createErrorMessage();
+			error.setValue( message );
+			error.setTarget( target );
+			getMessages().add( error );
+		}
 	}
 
 	/**
@@ -1338,10 +1319,12 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public void warning(String message, Object target) {
-		WarningMessage warning = IoFactory.eINSTANCE.createWarningMessage();
-		warning.setValue( message );
-		warning.setTarget( target );
-		getMessages().add( warning );
+		if(!KermetaUnitHelper.hasSimilarMessage(this, message, target)){
+			WarningMessage warning = IoFactory.eINSTANCE.createWarningMessage();
+			warning.setValue( message );
+			warning.setTarget( target );
+			getMessages().add( warning );
+		}
 	}
 
 	/**
@@ -1372,16 +1355,16 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		}
 		
 		String[] parts = qualifiedName.split("::");
-		String currentQualifiedName = "";
+		StringBuffer currentQualifiedName = new StringBuffer();
 		String currentName = "";
 		Package currentPackage = null;
 		
 		for ( int i = 0; i < parts.length; i++ ) {
 			
-			currentQualifiedName += parts[i];
+			currentQualifiedName.append(parts[i]);
 			currentName = parts[i];
 			
-			Package p = findInternalpackage( currentQualifiedName );
+			Package p = findInternalpackage( currentQualifiedName.toString() );
 			if ( p == null ) {
 				p = KermetaModelHelper.Package.create( currentName );
 				
@@ -1395,14 +1378,14 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				 * 
 				 */
 				PackageEntry entry = IoFactory.eINSTANCE.createPackageEntry();
-				entry.setQualifiedName( currentQualifiedName );
+				entry.setQualifiedName( currentQualifiedName.toString() );
 				entry.setPackage( p );
 				getInternalPackageEntries().add( entry );
 				
 			} 
 			currentPackage = p;
 			
-			currentQualifiedName += "::";
+			currentQualifiedName.append("::");
 			
 		}
 		
@@ -1593,14 +1576,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case IoPackage.KERMETA_UNIT__STORER:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetStorer((KermetaUnitStorer)otherEnd, msgs);
-			case IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getImportedKermetaUnits()).basicAdd(otherEnd, msgs);
-			case IoPackage.KERMETA_UNIT__IMPORTERS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getImporters()).basicAdd(otherEnd, msgs);
 			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
 				if (typeDefinitionCache != null)
 					msgs = ((InternalEObject)typeDefinitionCache).eInverseRemove(this, IoPackage.TYPE_DEFINITION_CACHE__KERMETA_UNIT, TypeDefinitionCache.class, msgs);
@@ -1617,12 +1592,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case IoPackage.KERMETA_UNIT__STORER:
-				return basicSetStorer(null, msgs);
-			case IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS:
-				return ((InternalEList<?>)getImportedKermetaUnits()).basicRemove(otherEnd, msgs);
-			case IoPackage.KERMETA_UNIT__IMPORTERS:
-				return ((InternalEList<?>)getImporters()).basicRemove(otherEnd, msgs);
 			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
 				return basicSetTypeDefinitionCache(null, msgs);
 		}
@@ -1635,24 +1604,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
-			case IoPackage.KERMETA_UNIT__STORER:
-				return eInternalContainer().eInverseRemove(this, IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS, KermetaUnitStorer.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case IoPackage.KERMETA_UNIT__STORER:
-				return getStorer();
 			case IoPackage.KERMETA_UNIT__URI:
 				return getUri();
 			case IoPackage.KERMETA_UNIT__MODELING_UNIT:
@@ -1664,36 +1617,36 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return getExternalPackageEntries();
 			case IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS:
 				return getImportedKermetaUnits();
-			case IoPackage.KERMETA_UNIT__IMPORTERS:
-				return getImporters();
 			case IoPackage.KERMETA_UNIT__BUILDING_STATE:
 				if (resolve) return getBuildingState();
 				return basicGetBuildingState();
 			case IoPackage.KERMETA_UNIT__MESSAGES:
 				return getMessages();
 			case IoPackage.KERMETA_UNIT__NEED_AST_TRACES:
-				return isNeedASTTraces() ? Boolean.TRUE : Boolean.FALSE;
+				return isNeedASTTraces();
 			case IoPackage.KERMETA_UNIT__TYPE_CHECKED:
-				return isTypeChecked() ? Boolean.TRUE : Boolean.FALSE;
+				return isTypeChecked();
 			case IoPackage.KERMETA_UNIT__FRAMEWORK:
-				return isFramework() ? Boolean.TRUE : Boolean.FALSE;
+				return isFramework();
 			case IoPackage.KERMETA_UNIT__TRACER:
 				return getTracer();
 			case IoPackage.KERMETA_UNIT__CONSTRAINT_CHECKED:
-				return isConstraintChecked() ? Boolean.TRUE : Boolean.FALSE;
+				return isConstraintChecked();
 			case IoPackage.KERMETA_UNIT__ASPECTS:
 				return getAspects();
 			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
-				return isIsBeingTypechecked() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsBeingTypechecked();
 			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
 				if (resolve) return getTypeDefinitionCache();
 				return basicGetTypeDefinitionCache();
 			case IoPackage.KERMETA_UNIT__KERMETA_UNIT_REQUIRES:
 				return getKermetaUnitRequires();
 			case IoPackage.KERMETA_UNIT__LOCKED:
-				return isLocked() ? Boolean.TRUE : Boolean.FALSE;
+				return isLocked();
 			case IoPackage.KERMETA_UNIT__BASE_ASPECTS:
 				return getBaseAspects();
+			case IoPackage.KERMETA_UNIT__TYPE_CHECKER_CONTEXT:
+				return getTypeCheckerContext();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1707,9 +1660,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case IoPackage.KERMETA_UNIT__STORER:
-				setStorer((KermetaUnitStorer)newValue);
-				return;
 			case IoPackage.KERMETA_UNIT__URI:
 				setUri((String)newValue);
 				return;
@@ -1728,10 +1678,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				getImportedKermetaUnits().clear();
 				getImportedKermetaUnits().addAll((Collection<? extends KermetaUnit>)newValue);
 				return;
-			case IoPackage.KERMETA_UNIT__IMPORTERS:
-				getImporters().clear();
-				getImporters().addAll((Collection<? extends KermetaUnit>)newValue);
-				return;
 			case IoPackage.KERMETA_UNIT__BUILDING_STATE:
 				setBuildingState((IBuildingState)newValue);
 				return;
@@ -1740,25 +1686,25 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				getMessages().addAll((Collection<? extends Message>)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__NEED_AST_TRACES:
-				setNeedASTTraces(((Boolean)newValue).booleanValue());
+				setNeedASTTraces((Boolean)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__TYPE_CHECKED:
-				setTypeChecked(((Boolean)newValue).booleanValue());
+				setTypeChecked((Boolean)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__FRAMEWORK:
-				setFramework(((Boolean)newValue).booleanValue());
+				setFramework((Boolean)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__TRACER:
 				setTracer((Tracer)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__CONSTRAINT_CHECKED:
-				setConstraintChecked(((Boolean)newValue).booleanValue());
+				setConstraintChecked((Boolean)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__ASPECTS:
 				setAspects((Map<TypeDefinition, EList<TypeDefinition>>)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
-				setIsBeingTypechecked(((Boolean)newValue).booleanValue());
+				setIsBeingTypechecked((Boolean)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
 				setTypeDefinitionCache((TypeDefinitionCache)newValue);
@@ -1768,10 +1714,13 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				getKermetaUnitRequires().addAll((Collection<? extends KermetaUnitRequire>)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__LOCKED:
-				setLocked(((Boolean)newValue).booleanValue());
+				setLocked((Boolean)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__BASE_ASPECTS:
 				setBaseAspects((Map<TypeDefinition, EList<TypeDefinition>>)newValue);
+				return;
+			case IoPackage.KERMETA_UNIT__TYPE_CHECKER_CONTEXT:
+				setTypeCheckerContext((TypeCheckerContext)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1785,9 +1734,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case IoPackage.KERMETA_UNIT__STORER:
-				setStorer((KermetaUnitStorer)null);
-				return;
 			case IoPackage.KERMETA_UNIT__URI:
 				setUri(URI_EDEFAULT);
 				return;
@@ -1802,9 +1748,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return;
 			case IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS:
 				getImportedKermetaUnits().clear();
-				return;
-			case IoPackage.KERMETA_UNIT__IMPORTERS:
-				getImporters().clear();
 				return;
 			case IoPackage.KERMETA_UNIT__BUILDING_STATE:
 				setBuildingState((IBuildingState)null);
@@ -1845,6 +1788,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__BASE_ASPECTS:
 				setBaseAspects((Map<TypeDefinition, EList<TypeDefinition>>)null);
 				return;
+			case IoPackage.KERMETA_UNIT__TYPE_CHECKER_CONTEXT:
+				setTypeCheckerContext(TYPE_CHECKER_CONTEXT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1857,8 +1803,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case IoPackage.KERMETA_UNIT__STORER:
-				return getStorer() != null;
 			case IoPackage.KERMETA_UNIT__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
 			case IoPackage.KERMETA_UNIT__MODELING_UNIT:
@@ -1869,8 +1813,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return externalPackageEntries != null && !externalPackageEntries.isEmpty();
 			case IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS:
 				return importedKermetaUnits != null && !importedKermetaUnits.isEmpty();
-			case IoPackage.KERMETA_UNIT__IMPORTERS:
-				return importers != null && !importers.isEmpty();
 			case IoPackage.KERMETA_UNIT__BUILDING_STATE:
 				return buildingState != null;
 			case IoPackage.KERMETA_UNIT__MESSAGES:
@@ -1897,6 +1839,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return locked != LOCKED_EDEFAULT;
 			case IoPackage.KERMETA_UNIT__BASE_ASPECTS:
 				return baseAspects != null;
+			case IoPackage.KERMETA_UNIT__TYPE_CHECKER_CONTEXT:
+				return TYPE_CHECKER_CONTEXT_EDEFAULT == null ? typeCheckerContext != null : !TYPE_CHECKER_CONTEXT_EDEFAULT.equals(typeCheckerContext);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1931,6 +1875,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		result.append(locked);
 		result.append(", baseAspects: ");
 		result.append(baseAspects);
+		result.append(", typeCheckerContext: ");
+		result.append(typeCheckerContext);
 		result.append(')');
 		return result.toString();
 	}

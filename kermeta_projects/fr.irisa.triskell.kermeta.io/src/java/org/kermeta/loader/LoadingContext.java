@@ -25,11 +25,11 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbol;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolInterpreterVariable;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolOperation;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolParameter;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolProperty;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 public class LoadingContext {

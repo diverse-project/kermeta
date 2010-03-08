@@ -33,18 +33,18 @@ import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.AbstractBuildingState;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbol;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 
 public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 
-	protected Map<Object, Object> options = null;
+	protected Map<String, Object> options = null;
 	
 	protected IProgressMonitor monitor;
 	
-	protected AbstractKermetaUnitLoader(Map<Object, Object> options, IProgressMonitor monitor) {
+	protected AbstractKermetaUnitLoader(Map<String, Object> options, IProgressMonitor monitor) {
 		this.monitor = monitor;
 		this.options = options;
 	}
@@ -113,7 +113,7 @@ public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 	
 	
 	
-	static protected Hashtable <KermetaUnit, LoadingContext> context = new Hashtable <KermetaUnit, LoadingContext> ();
+	protected Hashtable <KermetaUnit, LoadingContext> context = new Hashtable <KermetaUnit, LoadingContext> ();
 	
 	public LoadingContext getLoadingContext(KermetaUnit kermetaUnit) {
 		LoadingContext result = context.get( kermetaUnit );

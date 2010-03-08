@@ -22,7 +22,7 @@ public class LoadingOptions {
 	 * This constant indicates that the given kmt comes from the content in memory of the textual editor and not from a file
 	 * 
 	 */
-	static final public String CONTENT = "content";
+	// static final public String CONTENT = "content";
 	
 	/*
 	 * 

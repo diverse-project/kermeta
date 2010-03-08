@@ -88,16 +88,16 @@ public class KermetaUnitHelper {
 	} */
 	
 	static public String getErrorsAsString(KermetaUnit kermetaUnit) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		
 		for ( Message message : (List <Message>) kermetaUnit.getMessages() ) {
 			
 			if ( message instanceof ErrorMessage )
-				result += message.getValue() + "\n";
+				result.append(message.getValue() + "\n");
 			
 		}
 		
-		return result;
+		return result.toString();
 	}
 	
 	
@@ -121,10 +121,10 @@ public class KermetaUnitHelper {
 		List<String> errors = new ArrayList<String> ();
 		List<KermetaUnit> kermetaUnitsProcessed = new ArrayList<KermetaUnit> ();
 		getAllErrorsAsString(kermetaUnit, errors, kermetaUnitsProcessed);
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		for (String s : errors)
-			result += s + "\n";
-		return result;
+			result.append(s + "\n");
+		return result.toString();
 	}
 	
 	static private void getAllErrorsAsString(KermetaUnit kermetaUnit, List<String> errors, List<KermetaUnit> kermetaUnitsProcessed) {
@@ -147,16 +147,17 @@ public class KermetaUnitHelper {
 	}
 	
 	static public String getWarningsAsString(KermetaUnit kermetaUnit) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
+		result.append("");
 		String sss = kermetaUnit.getMessages().size() >1 ? "s" : "";
 		for ( Message message : (List <Message>) kermetaUnit.getMessages() ) {
 			
 			if ( message instanceof WarningMessage )
-				result += "Warning"+sss+" : " + message.getValue() + "\n";
+				result.append("Warning"+sss+" : " + message.getValue() + "\n");
 			
 		}
 		
-		return result;
+		return result.toString();
 	}
 	
 	static public List <WarningMessage> getAllWarnings(KermetaUnit kermetaUnit) {
@@ -177,21 +178,21 @@ public class KermetaUnitHelper {
 	
 	
 	static public String getAllWarningsAsString(KermetaUnit kermetaUnit) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		for ( WarningMessage message : KermetaUnitHelper.getAllWarnings(kermetaUnit) )
-			result += message.getValue() + "\n";
+			result.append(message.getValue() + "\n");
 		
-		return result;
+		return result.toString();
 	}
 	
 	static public String getAllMessagesAsString(KermetaUnit kermetaUnit) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		
 		for ( Message message : (List <Message>) kermetaUnit.getMessages() ) {
-			result += "Warning : " + message.getValue() + "\n";
+			result.append("Warning : " + message.getValue() + "\n");
 		}
 		
-		return result;
+		return result.toString();
 	}
 	
 	static public boolean hasError(KermetaUnit kermetaUnit) {
@@ -223,6 +224,7 @@ public class KermetaUnitHelper {
 	}
 	
 	static public KermetaUnit getKermetaUnitFromObject(EObject o) {
+		// FIXME need to remove the use of this IOPlugin.getDefault().getKermetaUnits()
 		EList<KermetaUnit> s = new BasicEList<KermetaUnit>(IOPlugin.getDefault().getKermetaUnits());
 		ModelingUnit cu = getModelingUnit(o);
 		for ( KermetaUnit unit : s ) {
@@ -255,6 +257,37 @@ public class KermetaUnitHelper {
 		}
 		cache.setExternalSearchAuthorized(true);
 	}
+	
+	/** returns true if the unit already has a message with the same message
+	 * 
+	 * @param kermetaUnit
+	 * @param message
+	 * @return
+	 */
+	static public boolean hasSimilarMessage(KermetaUnit kermetaUnit, String message){
+		for (Iterator<Message> iterator = kermetaUnit.getMessages().iterator(); iterator.hasNext();) {
+			Message msg =  iterator.next();
+			if(msg.getValue().equals(message)) return true;
+			
+		}
+		return false;
+	}
+	
+	/** returns true if the unit already has a message with the same message
+	 * 
+	 * @param kermetaUnit
+	 * @param message
+	 * @return
+	 */
+	static public boolean hasSimilarMessage(KermetaUnit kermetaUnit, String message, Object target){
+		for (Iterator<Message> iterator = kermetaUnit.getMessages().iterator(); iterator.hasNext();) {
+			Message msg =  iterator.next();
+			if(msg.getValue().equals(message) && msg.getTarget().equals(target)) return true;
+			
+		}
+		return false;
+	}
+	
 }
 
 

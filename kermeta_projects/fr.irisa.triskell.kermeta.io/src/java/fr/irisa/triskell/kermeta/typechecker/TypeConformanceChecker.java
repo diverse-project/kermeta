@@ -37,24 +37,24 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 
 	
-	public static boolean conforms(fr.irisa.triskell.kermeta.language.structure.Type required, fr.irisa.triskell.kermeta.language.structure.Type provided) {
+	public static boolean conforms(fr.irisa.triskell.kermeta.language.structure.Type required, fr.irisa.triskell.kermeta.language.structure.Type provided, TypeCheckerContext typecheckercontext) {
 		// resolve primitive types
 	    provided = TypeCheckerContext.getCanonicalType(provided);
 	    required = TypeCheckerContext.getCanonicalType(required);
 	    
 		// The type void is a sub-type of everything		
     	if (provided instanceof VoidType || 
-   			( (provided instanceof Class) && ((Class) provided).getTypeDefinition() == ((Class) ((SimpleType)TypeCheckerContext.VoidType).type).getTypeDefinition()) ) 
+   			( (provided instanceof Class) && ((Class) provided).getTypeDefinition() == ((Class) ((SimpleType)typecheckercontext.VoidType).type).getTypeDefinition()) ) 
 			return true;
 		
     	// RETURN TRUE IF THE REQUIRED TYPE IS OBJECT OR ANY OF IT SUPERTYPE
-		Class cobject = (Class)((SimpleType)TypeCheckerContext.ObjectType).getType();
+		Class cobject = (Class)((SimpleType)typecheckercontext.ObjectType).getType();
 		if ( TypeEqualityChecker.equals(cobject, required) ) 
 			return true;
     	
 		//Return true if the required type is Model and the provided type is a modeltype
 		if (provided instanceof ModelType) {
-			fr.irisa.triskell.kermeta.language.structure.Class mobject = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ModelType).getType();
+			fr.irisa.triskell.kermeta.language.structure.Class mobject = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)typecheckercontext.ModelType).getType();
 			
 			if (TypeEqualityChecker.equals(mobject, required) && (provided instanceof ModelType)) {
 				return true;
@@ -67,7 +67,7 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 			}
 		}
 		
-		TypeConformanceChecker visitor = new TypeConformanceChecker(provided);
+		TypeConformanceChecker visitor = new TypeConformanceChecker(provided, typecheckercontext);
 		return ((Boolean)visitor.accept(required)).booleanValue();
 	}
 	
@@ -76,13 +76,15 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 	 * The type provided
 	 */
 	protected fr.irisa.triskell.kermeta.language.structure.Type provided;
+	protected TypeCheckerContext typecheckercontext;
 	
 	/**
 	 * 
 	 */
-	public TypeConformanceChecker(fr.irisa.triskell.kermeta.language.structure.Type provided) {
+	public TypeConformanceChecker(fr.irisa.triskell.kermeta.language.structure.Type provided, TypeCheckerContext typecheckercontext) {
 		super();
 		this.provided = provided;
+		this.typecheckercontext = typecheckercontext;
 	}
 	
 	
@@ -94,8 +96,8 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 		Boolean result = false;
 		if (provided instanceof FunctionType) {
 			FunctionType p = (FunctionType)provided;
-			if (TypeConformanceChecker.conforms(p.getLeft(), arg0.getLeft()) &&
-					TypeConformanceChecker.conforms(arg0.getRight(), p.getRight()) ) {
+			if (TypeConformanceChecker.conforms(p.getLeft(), arg0.getLeft(), typecheckercontext) &&
+					TypeConformanceChecker.conforms(arg0.getRight(), p.getRight(), typecheckercontext) ) {
 				result = true;
 			}
 		}
@@ -105,10 +107,10 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 	
 	public Object visitClass(Class arg0) {
 		boolean result = false;
-		if ((arg0 == TypeCheckerContext.ObjectType) && (provided instanceof VirtualType)) {
+		if ((arg0 == typecheckercontext.ObjectType) && (provided instanceof VirtualType)) {
 			result = true;
 		} else if (provided instanceof Class) {
-			ClassConformanceChecker checker = new ClassConformanceChecker( (Class)  provided );
+			ClassConformanceChecker checker = new ClassConformanceChecker( (Class)  provided , typecheckercontext);
 			result = checker.conforms( arg0 );
 		}
 		return result;
@@ -131,7 +133,7 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 				for(int i=0; i< p.getType().size(); i++) {
 					fr.irisa.triskell.kermeta.language.structure.Type t_provided = (fr.irisa.triskell.kermeta.language.structure.Type)p.getType().get(i);
 					fr.irisa.triskell.kermeta.language.structure.Type t_required = (fr.irisa.triskell.kermeta.language.structure.Type)arg0.getType().get(i);
-					if ( ! TypeConformanceChecker.conforms(t_required, t_provided) ) {
+					if ( ! TypeConformanceChecker.conforms(t_required, t_provided, typecheckercontext) ) {
 						result = false;
 						break;
 					}
@@ -143,10 +145,11 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 	
 	public Object visitObjectTypeVariable(ObjectTypeVariable arg0) {
 		// FIXME: This is probably too restrictive
-	    fr.irisa.triskell.kermeta.language.structure.Type r = TypeVariableUtility.getLeastDerivedAdmissibleType(arg0);
+		TypeVariableUtility typeVariableUtility = new TypeVariableUtility(typecheckercontext);
+	    fr.irisa.triskell.kermeta.language.structure.Type r = typeVariableUtility.getLeastDerivedAdmissibleType(arg0);
 	    if (provided instanceof ObjectTypeVariable) {
-	        fr.irisa.triskell.kermeta.language.structure.Type p = TypeVariableUtility.getLeastDerivedAdmissibleType(provided);
-	        return TypeConformanceChecker.conforms(r, p);
+	        fr.irisa.triskell.kermeta.language.structure.Type p = typeVariableUtility.getLeastDerivedAdmissibleType(provided);
+	        return TypeConformanceChecker.conforms(r, p, typecheckercontext);
 	    } else {
 	        return false;
 	    }

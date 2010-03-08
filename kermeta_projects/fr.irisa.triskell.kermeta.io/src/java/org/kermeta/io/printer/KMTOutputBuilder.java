@@ -35,7 +35,7 @@ public class KMTOutputBuilder {
 
 	public void print(KermetaUnit kermetaUnit, String rep, String fileName) {
 
-		setUri(kermetaUnit, rep + "/", fileName);
+		setUri(kermetaUnit, rep != null ? rep + "/" : "", fileName);
 		internalPrint(kermetaUnit);
 		
 	}

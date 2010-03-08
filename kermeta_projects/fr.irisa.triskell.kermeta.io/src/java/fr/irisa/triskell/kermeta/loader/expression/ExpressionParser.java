@@ -19,7 +19,7 @@ import org.kermeta.loader.LoadingContext;
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
 import fr.irisa.triskell.kermeta.parser.gen.ast.OperationBody;
 import fr.irisa.triskell.kermeta.parser.gen.ast.OperationExpressionBody;

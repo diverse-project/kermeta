@@ -18,7 +18,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.kpm.IAction;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -54,7 +54,9 @@ public class UnloadContext implements IAction {
 	 			 * Unloading kermeta units from the memory.
 	 			 * 
 	 			 */
-	 			LoaderPlugin.getDefault().unload(u.getName());
+	 			IOPlugin.getDefault().unload(u.getName());
+	 			
+	 			//LoaderPlugin.getDefault().unload(u.getName());
 	 			/*
 	 			 * 
 	 			 * Removing markers.

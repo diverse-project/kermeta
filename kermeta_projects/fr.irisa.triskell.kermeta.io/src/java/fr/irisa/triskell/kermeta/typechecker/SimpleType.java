@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.cachemanager.CallableFeaturesStore;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
@@ -52,8 +53,8 @@ public class SimpleType extends Type {
 	/**
 	 * Constructor
 	 */
-	public SimpleType(fr.irisa.triskell.kermeta.language.structure.Type type) {
-		super();	
+	public SimpleType(fr.irisa.triskell.kermeta.language.structure.Type type, TypeCheckerContext context) {
+		super(context);	
 		// Maybe the type is an alias. If it is the case, the real type is instanceType object from type object.
 		// FIXME This may not be the place to check. But it works.
 		if ( (type instanceof PrimitiveTypeImpl) 
@@ -61,6 +62,7 @@ public class SimpleType extends Type {
 			this.type = ((PrimitiveTypeImpl) type).getInstanceType();
 		else
 			this.type = type;
+
 	}
 	
 	/**
@@ -69,7 +71,7 @@ public class SimpleType extends Type {
 	public boolean isSubTypeOf(Type type) {
 		if (type instanceof SimpleType) {
 			fr.irisa.triskell.kermeta.language.structure.Type required = ((SimpleType)type).getType();
-			return TypeConformanceChecker.conforms(required, getType());
+			return TypeConformanceChecker.conforms(required, getType(), context);
 		}
 		else {
 			Iterator<Type> it = ((UnionType)type).types.iterator();
@@ -95,7 +97,8 @@ public class SimpleType extends Type {
 	}
 	
 	public List<CallableOperation> callableOperations(KermetaUnit source) {
-		List<CallableOperation> operations = CallableFeaturesCache.getInstance().getCallableOperations(type);
+		
+		List<CallableOperation> operations = context.getCallableFeaturesCache().getCallableOperations(type);
 		if ( operations == null ) {
 			
 			// Try to get a FClass
@@ -118,29 +121,29 @@ public class SimpleType extends Type {
 				}
 				resolved = tmp_cls;
 			} else {
-				resolved = TypeVariableUtility.getLeastDerivedAdmissibleType(resolved);
+				resolved = new TypeVariableUtility(context).getLeastDerivedAdmissibleType(resolved);
 			}
 			
 			if (resolved instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
 				Class c = (Class) resolved;
-				operations = InheritanceSearch.callableOperations(c, source);
+				operations = InheritanceSearch.callableOperations(c, source, context);
 			} else if (resolved instanceof ModelType) {
-				fr.irisa.triskell.kermeta.language.structure.Class model = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ModelType).type;
-				operations = InheritanceSearch.callableOperations(model, source);
+				fr.irisa.triskell.kermeta.language.structure.Class model = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)context.ModelType).type;
+				operations = InheritanceSearch.callableOperations(model, source, context);
 			}
 			else if(resolved instanceof FunctionType) {
-				operations = InheritanceSearch.callableOperations((fr.irisa.triskell.kermeta.language.structure.FunctionType)resolved);
+				operations = InheritanceSearch.callableOperations((fr.irisa.triskell.kermeta.language.structure.FunctionType)resolved, context);
 			} else {
 				operations = new ArrayList<CallableOperation>();
 			}
 			
-			CallableFeaturesCache.getInstance().addCallableOperations(type, operations);
+			context.getCallableFeaturesCache().addCallableOperations(type, operations);
 			
 		}
 		return operations;
 	}
 	public List<CallableProperty> callableProperties() {
-		List<CallableProperty> properties = CallableFeaturesCache.getInstance().getCallableProperties(type);
+		List<CallableProperty> properties = context.getCallableFeaturesCache().getCallableProperties(type);
 		if ( properties == null ) {
 			// Try to get a FClass
 			fr.irisa.triskell.kermeta.language.structure.Type resolved = type;
@@ -162,38 +165,38 @@ public class SimpleType extends Type {
 				}
 				resolved = tmp_cls;
 			} else {
-				resolved = TypeVariableUtility.getLeastDerivedAdmissibleType(resolved);
+				resolved = new TypeVariableUtility(context).getLeastDerivedAdmissibleType(resolved);
 			}
 			if (resolved instanceof Class) {			
-				properties = InheritanceSearch.callableProperties((Class) resolved);
+				properties = InheritanceSearch.callableProperties((Class) resolved, context);
 			} else if (resolved instanceof ModelType) {
-				Class model = (Class)((SimpleType)TypeCheckerContext.ModelType).type;
-				properties = InheritanceSearch.callableProperties(model);
+				Class model = (Class)((SimpleType)context.ModelType).type;
+				properties = InheritanceSearch.callableProperties(model, context);
 			}
 			else {
 				properties = new ArrayList<CallableProperty>();
 			}
 			
-			CallableFeaturesCache.getInstance().addCallableProperties(type, properties);
+			context.getCallableFeaturesCache().addCallableProperties(type, properties);
 			
 		}
 		return properties;
 	}
 	
 	public Type getFunctionTypeLeft() {
-		Type result = TypeCheckerContext.VoidType;
+		Type result = context.VoidType;
 		if (type instanceof FunctionType) {
 			FunctionType t = (FunctionType)type;
-			result = new SimpleType(t.getLeft());
+			result = new SimpleType(t.getLeft(),context);
 		}
 		return result;
 	}
 	
 	public Type getFunctionTypeRight() {
-		Type result = TypeCheckerContext.VoidType;
+		Type result = context.VoidType;
 		if (type instanceof FunctionType) {
 			FunctionType t = (FunctionType)type;
-			result = new SimpleType(t.getRight());
+			result = new SimpleType(t.getRight(),context);
 		}
 		return result;
 	}
@@ -204,7 +207,7 @@ public class SimpleType extends Type {
 			ProductType t = (ProductType)type;
 			result = new Type[t.getType().size()];
 			for(int i=0;i<t.getType().size(); i++) {
-				result[i] = new SimpleType((fr.irisa.triskell.kermeta.language.structure.Type)t.getType().get(i));
+				result[i] = new SimpleType((fr.irisa.triskell.kermeta.language.structure.Type)t.getType().get(i), context);
 			}
 		}
 		else {
@@ -227,7 +230,7 @@ public class SimpleType extends Type {
 	    if (generic instanceof SimpleType) {
 	        fr.irisa.triskell.kermeta.language.structure.Type g = ((SimpleType)generic).type;
 	        try {
-                return TypeVariableInferer.inferTypeVariableTypes(g, type);
+                return TypeVariableInferer.inferTypeVariableTypes(g, type, context);
             } catch (TypeDoesNotMatchError e) {
                 return null;
             }
@@ -238,7 +241,7 @@ public class SimpleType extends Type {
 	}
 	
     protected void inferTypeVariableBinding(fr.irisa.triskell.kermeta.language.structure.Type generic, Hashtable<TypeVariable, fr.irisa.triskell.kermeta.language.structure.Type> binding) {
-        TypeVariableInferer.inferTypeVariableTypes(generic, type, binding);
+        TypeVariableInferer.inferTypeVariableTypes(generic, type, binding, context);
     }
     
 	public String toString() {

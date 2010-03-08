@@ -98,7 +98,7 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 			}
 
 			// Get the feature
-			SimpleType target_type = new SimpleType(t_target);
+			SimpleType target_type = new SimpleType(t_target,  memory.getTypeCheckerContext());
 
 			if (node.getStaticOperation() == null && node.getStaticProperty() == null) {
 				node.getStaticOperation();

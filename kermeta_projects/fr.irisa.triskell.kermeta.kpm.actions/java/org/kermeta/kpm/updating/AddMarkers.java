@@ -17,6 +17,8 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitRequire;
 import org.kermeta.io.plugin.IOPlugin;
@@ -121,11 +123,11 @@ public class AddMarkers implements IAction {
 	
 	private void addRequireErrors(KermetaUnit kermetaUnit) {
 		if ( kermetaUnit.isErroneous() ) {
-			// if the unit has error, find all the unit that require it and add an error message on the require that link the units
-			for ( KermetaUnit importer : kermetaUnit.getImporters() ) {
+			// if the unit has error, find all the unit that require it and add an error message on the require that link the units			
+			for ( KermetaUnit importer : getImporters(kermetaUnit) ) {
 				KermetaUnitRequire r = findRequire(kermetaUnit, importer);
 				if ( r != null ) {
-					String message = "Resource " + kermetaUnit.getUri() + " contains errors.\n\n";
+					String message = "File " + kermetaUnit.getUri() + " contains errors.\n\n";
 					message = message + KermetaUnitHelper.getErrorsAsString( kermetaUnit );
 					importer.error( message, r.getRequire() );
 				}
@@ -133,15 +135,25 @@ public class AddMarkers implements IAction {
 		}
 		else if ( kermetaUnit.isWarned() ) {
 			// if the unit has warning, find all the unit that require it and add a warning message on the require that link the units
-			for ( KermetaUnit importer : kermetaUnit.getImporters() ) {
+			for ( KermetaUnit importer : getImporters(kermetaUnit) ) {
 				KermetaUnitRequire r = findRequire(kermetaUnit, importer);
 				if ( r != null ) {
-					String message = "Resource " + kermetaUnit.getUri() + " contains warnings.\n\n";
+					String message = "File " + kermetaUnit.getUri() + " contains warnings.\n\n";
 					message = message + KermetaUnitHelper.getWarningsAsString( kermetaUnit );
 					importer.warning( message, r.getRequire() );
 				}
 			}
 		}
+	}
+	private EList<KermetaUnit> getImporters(KermetaUnit kermetaUnit){
+		// find the importer units that must be notified of this error
+		EList<KermetaUnit> importerUnits = new BasicEList<KermetaUnit>();
+		for (KermetaUnit knownUnit : IOPlugin.getDefault().getKermetaUnits()){
+			if(knownUnit.getImportedKermetaUnits().contains(kermetaUnit)){
+				importerUnits.add(knownUnit);
+			}
+		}
+		return importerUnits;
 	}
 	
 	private KermetaUnitRequire findRequire(KermetaUnit importedUnit, KermetaUnit importerUnit) {

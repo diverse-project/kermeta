@@ -25,6 +25,7 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Map;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
+import fr.irisa.triskell.kermeta.typechecker.ContextNotInitializedOnAFrameworkError;
 
 /*
  * Implementation  of kermeta::language::DynamicExpression 
@@ -36,7 +37,7 @@ public class DynamicExpression {
     
 		
     // result ?= extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.parse(self, expression)
-	public static RuntimeObject parse(RuntimeObject self, RuntimeObject expression) {
+	public static RuntimeObject parse(RuntimeObject self, RuntimeObject expression) throws ContextNotInitializedOnAFrameworkError {
 	    
 		RuntimeObject ro_params = (RuntimeObject)self.getProperties().get("formalParameters");
 	    Hashtable params = Map.getHashtable(ro_params);
@@ -90,7 +91,7 @@ public class DynamicExpression {
 		
 		// the expression's creation process in the parse method of DynamicExpressionUnit may have find errors
 		if ( ! dynamicExpressionUnit.isErroneous() ) 
-			dynamicExpressionUnit.typeCheck(null);
+			dynamicExpressionUnit.typeCheck(null); 
 
 //	    if (!deu.messages.hasError()) deu.typeCheck(null);
 	    

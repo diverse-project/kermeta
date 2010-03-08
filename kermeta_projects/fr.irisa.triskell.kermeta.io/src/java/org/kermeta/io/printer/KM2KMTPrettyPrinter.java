@@ -347,14 +347,6 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			if((i==0) && (alreadyPrefixed) && (!prefix.equals(prefixTab))) {
 				result.append(this.accept((EObject)expressions.get(i)) + "\n");
 			}
-			else if((i==0) && (!alreadyPrefixed)) {
-				alreadyPrefixed = true;
-				EObject o = (EObject)expressions.get(i);
-				String temp = (String) this.accept(o);
-				if ( o instanceof ModelType )
-					temp = MODEL_TYPE_KW + " " + temp;
-				result.append(getPrefix() + temp + "\n");
-			}
 			else {
 				alreadyPrefixed = true;
 				EObject o = (EObject)expressions.get(i);

@@ -28,7 +28,7 @@ import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.AbstractBuildingState;
 
 import org.kermeta.log4j.util.LogConfigurationHelper;
 
@@ -44,7 +44,7 @@ public class JavaKermetaUnitLoader extends AbstractKermetaUnitLoader {
     final static public Log internalLog = LogConfigurationHelper.getLogger("JarKermetaUnitLoader");
 
     
-    public JavaKermetaUnitLoader(Map<Object, Object> options, IProgressMonitor monitor) {
+    public JavaKermetaUnitLoader(Map<String, Object> options, IProgressMonitor monitor) {
     	super(options, monitor);
     }
     

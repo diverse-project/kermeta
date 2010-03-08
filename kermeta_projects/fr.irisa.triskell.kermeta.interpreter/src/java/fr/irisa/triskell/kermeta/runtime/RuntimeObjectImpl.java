@@ -166,7 +166,7 @@ public class RuntimeObjectImpl implements RuntimeObject {
         // try with a numericValue
         // if the object defines a hashcode method (other than the default one deined on object), use it
         fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getKCoreObject();
-        SimpleType target_type = new SimpleType(t_target);
+        SimpleType target_type = new SimpleType(t_target, getFactory().getMemory().getTypeCheckerContext());
         ExpressionInterpreter interpreter = getFactory().getMemory().getInterpreter().getBasicInterpreter();
         InterpreterContext interpretercontext = interpreter.getInterpreterContext();
         CallableOperation  op = interpretercontext.typeCache.getOperationByName(target_type, "hashcode");
@@ -282,7 +282,7 @@ public class RuntimeObjectImpl implements RuntimeObject {
             }
             // if the object defines a equals method (other than the default one defined on object), use it
 	        fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getKCoreObject();
-	        SimpleType target_type = new SimpleType(t_target);
+	        SimpleType target_type = new SimpleType(t_target, getFactory().getMemory().getTypeCheckerContext());
 	        ExpressionInterpreter interpreter = getFactory().getMemory().getInterpreter().getBasicInterpreter();
 	        InterpreterContext interpretercontext = interpreter.getInterpreterContext();
 	        CallableOperation  op = interpretercontext.typeCache.getOperationByName(target_type, "equals");

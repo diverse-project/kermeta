@@ -356,7 +356,7 @@ public class TypeDefinitionCacheImpl extends EObjectImpl implements TypeDefiniti
 			case IoPackage.TYPE_DEFINITION_CACHE__ENTRIES:
 				return getEntries();
 			case IoPackage.TYPE_DEFINITION_CACHE__EXTERNAL_SEARCH_AUTHORIZED:
-				return isExternalSearchAuthorized() ? Boolean.TRUE : Boolean.FALSE;
+				return isExternalSearchAuthorized();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -377,7 +377,7 @@ public class TypeDefinitionCacheImpl extends EObjectImpl implements TypeDefiniti
 				setEntries((Map<String, TypeDefinitionCacheEntry>)newValue);
 				return;
 			case IoPackage.TYPE_DEFINITION_CACHE__EXTERNAL_SEARCH_AUTHORIZED:
-				setExternalSearchAuthorized(((Boolean)newValue).booleanValue());
+				setExternalSearchAuthorized((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

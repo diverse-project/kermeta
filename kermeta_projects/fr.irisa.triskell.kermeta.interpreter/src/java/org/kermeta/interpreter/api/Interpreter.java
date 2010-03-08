@@ -16,11 +16,13 @@ import org.eclipse.debug.core.model.RuntimeProcess;
 import org.kermeta.interpreter.InterpreterPlugin;
 import org.kermeta.interpreter.helper.RunnerHelper;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.checker.KermetaUnitChecker;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.cachemanager.KermetaUnitStore;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kermetaunitloader.LoaderFactory;
 import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -34,6 +36,8 @@ import fr.irisa.triskell.kermeta.launcher.KTestInterpreter;
 import fr.irisa.triskell.kermeta.launcher.KTraceInterpreter;
 import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.typechecker.ContextNotInitializedOnAFrameworkError;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class Interpreter {
 
@@ -79,7 +83,7 @@ public class Interpreter {
 	private boolean _merge = true;
 	
 	/**		The name of the merged kermeta unit used for the interpretation.		*/
-	private String _mergedUnitUri = "platform:/resource/interpreter_unit.km";
+	private String _mergedUnitUri = "platform:/resource/interpreter_unit.memory";
 	
 	/**		A boolean stating if after the execution, references to the memory and kermeta unit must be unset.		*/
 	private boolean _cleanAtEnd = true;
@@ -178,14 +182,20 @@ public class Interpreter {
 	private void calculateKermetaUnit(String uri) {
 		try {
 			if ( _merge ) {
-				_kermetaUnit = RunnerHelper.getKermetaUnitToExecute(uri, _mergedUnitUri);
+				_kermetaUnit = RunnerHelper.getKermetaUnitToExecute(uri, uri+".memory");
 			} else if ( ! _typeChecked ) {
-				_kermetaUnit = KermetaUnitChecker.check(uri);
+				// TODO in the end the interpreter must use its own store to make sure that
+				// the edition won't interfere with the execution
+				_kermetaUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(uri);
+			    new KermetaTypeChecker(_kermetaUnit).checkUnit();
+				new KermetaConstraintChecker(_kermetaUnit).checkUnit();
 			} else {
 				Map<String, Object> options = new HashMap<String, Object>();
 				options.put( LoadingOptions.ECORE_QuickFixEnabled, true );
 				options.put( LoadingOptions.INCLUDE_FRAMEWORK, false );
-				_kermetaUnit = LoaderPlugin.getDefault().load(uri, options);
+				// FIXME use a dedicated store 
+				KermetaUnitStore store = IOPlugin.getDefault().getEditionKermetaUnitStore();
+				_kermetaUnit = LoaderFactory.getDefault().getLoader(uri, options, store).load();
 				_kermetaUnit.setTypeChecked(true);
 			}
 		} catch (NotRegisteredURIException e) {
@@ -193,6 +203,9 @@ public class Interpreter {
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ContextNotInitializedOnAFrameworkError e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

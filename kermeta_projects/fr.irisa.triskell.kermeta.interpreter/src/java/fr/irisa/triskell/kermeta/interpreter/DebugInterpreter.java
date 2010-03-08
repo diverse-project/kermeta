@@ -50,6 +50,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
@@ -345,7 +346,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
     
     
     public DebugInterpreter(RuntimeMemory memory, int requestPort, int eventPort) throws IOException {
-    	super( memory );
+    	super( memory);
     	/*
     	 * 
     	 * Creating the server.

@@ -26,6 +26,7 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
 public class ConstraintInterpreter extends ExpressionInterpreter {
 	public AtPreVisitor atpreV;
@@ -163,7 +164,7 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 						null);
 	   			// set the constraintAppliedTo reference
 	   			fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)kre.raised_object.getMetaclass().getKCoreObject();        	
-	   	    	SimpleType target = new SimpleType(t_target);
+	   	    	SimpleType target = new SimpleType(t_target, memory.getTypeCheckerContext());
 	   			CallableProperty cproperty = target.getPropertyByName("constraintAppliedTo");
 	   		    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(cproperty.getProperty());
 	   		    RuntimeObject rovalue = getInterpreterContext().peekCallFrame().getSelf();
@@ -180,7 +181,7 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 						null);
 	   			// set the constraintAppliedTo reference
 	   			fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)kre.raised_object.getMetaclass().getKCoreObject();        	
-	   	    	SimpleType target = new SimpleType(t_target);
+	   	    	SimpleType target = new SimpleType(t_target,memory.getTypeCheckerContext() );
 	   			CallableProperty cproperty = target.getPropertyByName("constraintAppliedTo");
 	   		    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(cproperty.getProperty());
 	   		    RuntimeObject rovalue = getInterpreterContext().peekCallFrame().getSelf();

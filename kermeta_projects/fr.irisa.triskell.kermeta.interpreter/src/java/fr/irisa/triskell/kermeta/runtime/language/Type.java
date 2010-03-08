@@ -40,8 +40,8 @@ public class Type {
 					null,
 					null);
 		}
-		SimpleType required = new SimpleType(req);
-		SimpleType provided = new SimpleType(pro);
+		SimpleType required = new SimpleType(req, self.getFactory().getMemory().getTypeCheckerContext());
+		SimpleType provided = new SimpleType(pro, self.getFactory().getMemory().getTypeCheckerContext());
 		
 		if (provided.isSubTypeOf(required)) return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;

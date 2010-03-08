@@ -18,7 +18,6 @@ import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitLoader;
 import org.kermeta.io.KermetaUnitRequire;
-import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParseErrorMessage;
@@ -76,7 +75,7 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -90,10 +89,6 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseIBuildingState(IBuildingState object) {
 				return createIBuildingStateAdapter();
-			}
-			@Override
-			public Adapter caseKermetaUnitStorer(KermetaUnitStorer object) {
-				return createKermetaUnitStorerAdapter();
 			}
 			@Override
 			public Adapter casePackageEntry(PackageEntry object) {
@@ -166,20 +161,6 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createKermetaUnitAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.io.KermetaUnitStorer <em>Kermeta Unit Storer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.io.KermetaUnitStorer
-	 * @generated
-	 */
-	public Adapter createKermetaUnitStorerAdapter() {
 		return null;
 	}
 

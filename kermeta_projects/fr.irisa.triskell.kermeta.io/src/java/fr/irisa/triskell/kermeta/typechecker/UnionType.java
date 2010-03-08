@@ -41,8 +41,8 @@ public class UnionType extends Type {
 	/**
 	 * Constructor
 	 */
-	public UnionType() {
-		super();
+	public UnionType(TypeCheckerContext context) {
+		super(context);
 		types = new ArrayList<Type>();
 	}
 	
@@ -141,7 +141,7 @@ public class UnionType extends Type {
 	
 
 	public Type getFunctionTypeLeft() {
-		UnionType result = new UnionType();
+		UnionType result = new UnionType(context);
 		for(int i=0; i<types.size();i++) {
 			Type t = (Type)types.get(i);
 			result.addType(t.getFunctionTypeLeft());
@@ -150,7 +150,7 @@ public class UnionType extends Type {
 	}
 	
 	public Type getFunctionTypeRight() {
-		UnionType result = new UnionType();
+		UnionType result = new UnionType(context);
 		for(int i=0; i<types.size();i++) {
 			Type t = (Type)types.get(i);
 			result.addType(t.getFunctionTypeRight());
@@ -170,7 +170,7 @@ public class UnionType extends Type {
 		// initialize result
 		result = new Type[pt_size];
 		for(int j=0; j<pt_size; j++) {
-			result[j] = new UnionType();
+			result[j] = new UnionType(context);
 		}
 		// Build result. Add Void types when necessary
 		for(int i=0; i<types.size();i++) {
@@ -178,7 +178,7 @@ public class UnionType extends Type {
 			Type[] pt = t.getProductType();
 			for(int j=0; j<pt_size; j++) {
 				if (j<pt.length) ((UnionType)result[j]).addType(pt[j]);
-				else ((UnionType)result[j]).addType(TypeCheckerContext.VoidType);
+				else ((UnionType)result[j]).addType(context.VoidType);
 			}
 		}
 		return result;
@@ -215,7 +215,7 @@ public class UnionType extends Type {
 	}
 	
 	public SimpleType transformAsSimpleType() {
-	    SimpleType result = (SimpleType)TypeCheckerContext.ObjectType;
+	    SimpleType result = (SimpleType)context.ObjectType;
 	    
 	    Iterator<Type> it = types.iterator(); 
 	    while(it.hasNext()) {
@@ -240,10 +240,10 @@ public class UnionType extends Type {
 	    while(it.hasNext()) {
 	        Type t = it.next();
 	        if (t instanceof SimpleType) {
-	            result = TypeConformanceChecker.conforms(sup.type, ((SimpleType)t).type);
+	            result = TypeConformanceChecker.conforms(sup.type, ((SimpleType)t).type, context);
 	        }
 	        else {
-	            result = TypeConformanceChecker.conforms(sup.type, ((UnionType)t).transformAsSimpleType().type);
+	            result = TypeConformanceChecker.conforms(sup.type, ((UnionType)t).transformAsSimpleType().type, context);
 	        }
 	        if (!result) break;
 	    }

@@ -44,7 +44,7 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */
-	public static List<Type> allSuperTypes(Class c) {
+	public static List<Type> allSuperTypes(Class c, TypeCheckerContext context) {
 		List<Type> result = new ArrayList<Type>();
 		result.add(c);
 		// get all super types of direct supertypes
@@ -53,14 +53,14 @@ public class InheritanceSearch {
 			Class direct_st = (Class)super_type;
 			// propagate type variables
 			direct_st = (Class)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
-			List<Type> sts = allSuperTypes(direct_st);
+			List<Type> sts = allSuperTypes(direct_st, context);
 			for ( int i=0; i<sts.size(); i++ ) {
 				if ( ! result.contains(sts.get(i)) ) 
 					result.add( sts.get(i) );
 			}
 		}
 		// Add the type object which is implicitly a super type of every type
-		Class object = (Class)((SimpleType)TypeCheckerContext.ObjectType).type;
+		Class object = (Class)((SimpleType)context.ObjectType).type;
 		if ( ! TypeEqualityChecker.equals(c, object) && ! result.contains(object) )
 		    result.add(object);
 		return result;
@@ -112,7 +112,7 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */	
-	public static ArrayList<CallableOperation> callableOperations(Class c, KermetaUnit source) {
+	public static ArrayList<CallableOperation> callableOperations(Class c, KermetaUnit source, TypeCheckerContext context) {
 		List<KermetaUnit> units = new ArrayList<KermetaUnit>();
 		if ( source != null ) {
 			units.add(source);
@@ -139,11 +139,11 @@ public class InheritanceSearch {
 						Operation op = (Operation)next_op;
 				    	
 						if ( ! found_ops.containsKey(op.getName()) ) {
-							CallableOperation callableOperation = new CallableOperation(op, current);
+							CallableOperation callableOperation = new CallableOperation(op, current, context);
 							found_ops.put(op.getName(), callableOperation);
 							result.add( callableOperation );
 						} else if (found_ops.get(op.getName()).getOperation() == op.getSuperOperation() ) {
-							CallableOperation callableOperation = new CallableOperation(op, current);
+							CallableOperation callableOperation = new CallableOperation(op, current, context);
 							found_ops.put(op.getName(), callableOperation);
 							CallableOperation currentCallableOperation = found_ops.get( op.getName() );
 							result.remove( currentCallableOperation );
@@ -151,7 +151,7 @@ public class InheritanceSearch {
 						} else {
 							CallableOperation currentCallableOperation = found_ops.get( op.getName() );
 				    		if ( currentCallableOperation.getOperation().isIsAbstract() /*|| OperationHelper.isOverloadable(currentCallableOperation.operation)*/ ) {
-				    			CallableOperation callableOperation = new CallableOperation(op, current);
+				    			CallableOperation callableOperation = new CallableOperation(op, current, context);
 				    			found_ops.put(op.getName(), callableOperation);
 				    			result.remove( currentCallableOperation );
 					    		result.add( callableOperation );
@@ -194,21 +194,23 @@ public class InheritanceSearch {
 	 * @param ft
 	 * @return
 	 */
-	public static ArrayList<CallableOperation> callableOperations(fr.irisa.triskell.kermeta.language.structure.FunctionType ft) {
+	public static ArrayList<CallableOperation> callableOperations(fr.irisa.triskell.kermeta.language.structure.FunctionType ft,
+			TypeCheckerContext context) {
 		ArrayList<CallableOperation> result = new ArrayList<CallableOperation>();
 		
 		// Add all operations defined by class Object
-		fr.irisa.triskell.kermeta.language.structure.Class objectClass = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).type;
+		fr.irisa.triskell.kermeta.language.structure.Class objectClass = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)context.ObjectType).type;
 	    for (Object next_op : ((ClassDefinition) objectClass.getTypeDefinition()).getOwnedOperation()) {
 	    	Operation op = (Operation) next_op;
-    		result.add(new CallableOperation(op, objectClass));
+    		result.add(new CallableOperation(op, objectClass, context));
 	    }
 
 		return result;
 	}
 	
 	
-	public static CallableOperation getSuperOperation(fr.irisa.triskell.kermeta.language.structure.Class c, Operation method) {		
+	public static CallableOperation getSuperOperation(fr.irisa.triskell.kermeta.language.structure.Class c, Operation method,
+			TypeCheckerContext context) {		
 		ArrayList<fr.irisa.triskell.kermeta.language.structure.Class> toVisit = new ArrayList<fr.irisa.triskell.kermeta.language.structure.Class>();
 		toVisit.add(c);
 		List<ClassDefinition> classDefinitionProcessed = new ArrayList<ClassDefinition> ();
@@ -223,7 +225,7 @@ public class InheritanceSearch {
 				for (Object next : ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation()) {
 					Operation op = (Operation)next;
 					if (method.getSuperOperation() == op) {
-					    return new CallableOperation(op,current);
+					    return new CallableOperation(op,current, context);
 					}
 				}
 	
@@ -281,7 +283,8 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */
-	public static ArrayList<CallableProperty> callableProperties(fr.irisa.triskell.kermeta.language.structure.Class c) {
+	public static ArrayList<CallableProperty> callableProperties(fr.irisa.triskell.kermeta.language.structure.Class c, 
+			TypeCheckerContext context) {
 		ArrayList<CallableProperty> result = new ArrayList<CallableProperty>();
 		Hashtable<String, CallableProperty> found_poperties = new Hashtable<String, CallableProperty>();
 		ArrayList<Class> toVisit = new ArrayList<Class>();
@@ -302,7 +305,7 @@ public class InheritanceSearch {
 					Property property = (Property)next_prop;
 			    	
 					if ( ! found_poperties.containsKey(property.getName()) ) {
-						CallableProperty callableProperty = new CallableProperty(property, current);
+						CallableProperty callableProperty = new CallableProperty(property, current, context);
 						found_poperties.put(property.getName(), callableProperty);
 						result.add( callableProperty );				    	
 					}

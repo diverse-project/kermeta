@@ -18,7 +18,6 @@ import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitLoader;
 import org.kermeta.io.KermetaUnitRequire;
-import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParseErrorMessage;
@@ -113,12 +112,6 @@ public class IoSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case IoPackage.KERMETA_UNIT_STORER: {
-				KermetaUnitStorer kermetaUnitStorer = (KermetaUnitStorer)theEObject;
-				T result = caseKermetaUnitStorer(kermetaUnitStorer);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case IoPackage.PACKAGE_ENTRY: {
 				PackageEntry packageEntry = (PackageEntry)theEObject;
 				T result = casePackageEntry(packageEntry);
@@ -201,21 +194,6 @@ public class IoSwitch<T> {
 	 * @generated
 	 */
 	public T caseKermetaUnit(KermetaUnit object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Kermeta Unit Storer</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Kermeta Unit Storer</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseKermetaUnitStorer(KermetaUnitStorer object) {
 		return null;
 	}
 

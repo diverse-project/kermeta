@@ -38,24 +38,26 @@ public class TypeVirtualizer extends KermetaOptimizedVisitor {
 
 	private ModelTypeVariable modeltype_context;
 	protected StructureFactory struct_factory;
+	protected TypeCheckerContext context;
 	
 	/**
 	 * Default constructor
 	 */
-	public TypeVirtualizer(ModelTypeVariable mtc) {
+	public TypeVirtualizer(ModelTypeVariable mtc, TypeCheckerContext context) {
 		super();
+        this.context = context;
 		modeltype_context = mtc;
 		struct_factory = StructurePackageImpl.init().getStructureFactory();
 	}
 
-	public static Type virtualizeOperationType(CallableOperation op, VirtualType vt) {
-		TypeVirtualizer visitor = new TypeVirtualizer(vt.getModelType());
-		return new SimpleType((fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(op.getType(null).getFType()));
+	public static Type virtualizeOperationType(CallableOperation op, VirtualType vt, TypeCheckerContext context) {
+		TypeVirtualizer visitor = new TypeVirtualizer(vt.getModelType(), context);
+		return new SimpleType((fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(op.getType(null).getFType()), context);
 	}
 	
-	public static Type virtualizePropertyType(CallableProperty prop, VirtualType vt) {
-		TypeVirtualizer visitor = new TypeVirtualizer(vt.getModelType());
-		return new SimpleType((fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(prop.getType(null).getFType()));
+	public static Type virtualizePropertyType(CallableProperty prop, VirtualType vt, TypeCheckerContext context) {
+		TypeVirtualizer visitor = new TypeVirtualizer(vt.getModelType(), context);
+		return new SimpleType((fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(prop.getType(null).getFType()), context);
 	}
 	
 	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class cls) {

@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.cachemanager.CallableFeaturesStore;
 import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.model.internal.ClassDefinitionHelper;
 
@@ -45,12 +46,12 @@ public class KermetaTypeChecker {
 	
     protected KermetaUnit unit;
    
-    protected TypeCheckerContext context;
+    protected TypeCheckerContext typecheckercontext;
         
     private boolean internalOperation = false;
     
     public Type getTypeOfExpression(fr.irisa.triskell.kermeta.language.behavior.Expression expression) {
-        return new SimpleType(expression.getStaticType());
+        return new SimpleType(expression.getStaticType(), typecheckercontext);
     }
     
     
@@ -60,15 +61,27 @@ public class KermetaTypeChecker {
     
     /**
      * @param unit
+     * @throws ContextNotInitializedOnAFrameworkError 
      */
-    public KermetaTypeChecker(KermetaUnit unit) {
+    public KermetaTypeChecker(KermetaUnit unit) throws ContextNotInitializedOnAFrameworkError {
         super();
         this.unit = unit;
-        if ( ! unit.isTypeChecked() ) {
-        	if (unit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object") != null)
-        		TypeCheckerContext.initializeTypeChecker(unit);
-        	context = new TypeCheckerContext(unit);
+        if ( ! unit.isTypeChecked() ) {        	
+        	typecheckercontext = new TypeCheckerContext(unit);
+        	unit.setTypeCheckerContext(typecheckercontext);
         }
+    }
+  
+    /**
+     * typecheck a unit using a previous loaded context
+     * @param unit
+     * @param typecheckercontext
+     */
+    public KermetaTypeChecker(KermetaUnit unit, TypeCheckerContext typecheckercontext) {
+        super();
+        this.unit = unit;
+        this.typecheckercontext = typecheckercontext;
+    	unit.setTypeCheckerContext(typecheckercontext);
     }
     
     private void fixEMFNameForCompiler(Operation op) {
@@ -109,12 +122,12 @@ public class KermetaTypeChecker {
         			ClassDefinition cdef = (ClassDefinition) td;
            			// Check any parameterized supertypes
         			for (fr.irisa.triskell.kermeta.language.structure.Type sup : cdef.getSuperType())
-        				ParameterizedTypeChecker.checkType(sup, unit, context, cdef);
+        				ParameterizedTypeChecker.checkType(sup, unit,  cdef, typecheckercontext);
 
         			// Check property types
         			for (Property prop : cdef.getOwnedAttribute()) {
         				if ( prop.getType() != null )
-        					ParameterizedTypeChecker.checkType( prop.getType(), unit, context, prop );
+        					ParameterizedTypeChecker.checkType( prop.getType(), unit, prop, typecheckercontext );
         				else
         					unit.error("TYPE-CHECKER : property " + td.getName() + "." + prop.getName() + " has no type", prop);
         			}
@@ -122,12 +135,12 @@ public class KermetaTypeChecker {
         			// Check operation signatures
         			for ( Operation op : cdef.getOwnedOperation() ) {
         				if ( op.getType() != null ){
-        					ParameterizedTypeChecker.checkType(op.getType(), unit, context, op);
+        					ParameterizedTypeChecker.checkType(op.getType(), unit,  op, typecheckercontext);
         				}
         				//Check parameter types
         				for ( Parameter param : op.getOwnedParameter() ){
         					if(param.getType() != null)
-        						ParameterizedTypeChecker.checkType( param.getType(), unit, context, param );
+        						ParameterizedTypeChecker.checkType( param.getType(), unit,  param, typecheckercontext );
         					else
         						unit.error("TYPE-CHECKER : parameter " + op.getName() + "." + param.getName() + " has no type", param);
         				}
@@ -137,7 +150,7 @@ public class KermetaTypeChecker {
  
         		} else if (td instanceof PrimitiveType) {
         			// Check aliased types
-        			ParameterizedTypeChecker.checkType(((PrimitiveType)td).getInstanceType(), unit, context, (PrimitiveType)td);
+        			ParameterizedTypeChecker.checkType(((PrimitiveType)td).getInstanceType(), unit, (PrimitiveType)td, typecheckercontext);
         		}
         	}
         	
@@ -155,8 +168,9 @@ public class KermetaTypeChecker {
     /**
      * Type check all the class definitions 
      * of a kermeta unit
+     * @throws ContextNotInitializedOnAFrameworkError 
      */
-    public void checkUnit() {		
+    public void checkUnit() throws ContextNotInitializedOnAFrameworkError {		
    		if ( ! unit.isTypeChecked() ) {
     		internalLog.debug("Typechecking " + unit.getUri());
     		if ( ! unit.isErroneous() ) {
@@ -169,13 +183,13 @@ public class KermetaTypeChecker {
 	    			
     			for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(unit) ) {
     				if ( ! importedUnit.isTypeChecked() && ! importedUnit.isErroneous() ) {
-    					CallableFeaturesCache.destroyInstance();
-		    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit);
+    					// CallableFeaturesCache.destroyInstance();
+		    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit, this.typecheckercontext);
 		    			t.checkUnit();
 		    		}
 		    	}
     		}
-    		CallableFeaturesCache.destroyInstance();
+    		//CallableFeaturesCache.destroyInstance();
     	}
     }
     
@@ -197,12 +211,12 @@ public class KermetaTypeChecker {
     
     public void checkConstraint(Constraint c) {     	
     	if (c.eContainer() instanceof ClassDefinition)
-    		context.init((ClassDefinition)c.eContainer());
+    		typecheckercontext.init((ClassDefinition)c.eContainer());
     	else
-    		context.init(((Operation)c.eContainer()).getOwningClass(),(Operation) c.eContainer());
+    		typecheckercontext.init(((Operation)c.eContainer()).getOwningClass(),(Operation) c.eContainer());
     	if(c.getBody() != null){
-    		ExpressionChecker.typeCheckExpression(c.getBody(), unit, context);
-    		if(getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.VoidType) || !(getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.BooleanType))) {
+    		ExpressionChecker.typeCheckExpression(c.getBody(), unit, typecheckercontext);
+    		if(getTypeOfExpression(c.getBody()).isSubTypeOf(typecheckercontext.VoidType) || !(getTypeOfExpression(c.getBody()).isSubTypeOf(typecheckercontext.BooleanType))) {
     			unit.error("TYPE-CHECKER : The type of a constraint should be Boolean", c.getBody());
     		}
     	}
@@ -219,10 +233,10 @@ public class KermetaTypeChecker {
         int error_count = unit.getMessages().size();
         
         // initialize context
-        context.init(op.getOwningClass(), op);
+        typecheckercontext.init(op.getOwningClass(), op);
         // check the body of the operation if it is not abstract
         if (op.getBody() != null)
-            ExpressionChecker.typeCheckExpression(op.getBody(), unit, context);
+            ExpressionChecker.typeCheckExpression(op.getBody(), unit, typecheckercontext);
         
         for ( Constraint c : op.getPre() )
             checkConstraint(c);
@@ -247,7 +261,7 @@ public class KermetaTypeChecker {
     
     
     public void checkExpression(fr.irisa.triskell.kermeta.language.behavior.Expression expression) {
-        ExpressionChecker.typeCheckExpression(expression, unit, context);
+        ExpressionChecker.typeCheckExpression(expression, unit, typecheckercontext);
     }
     
     /**
@@ -257,15 +271,15 @@ public class KermetaTypeChecker {
     public void checkDerivedProperty(Property op) { 
         if ( op.isIsDerived() ) {
             // initialize context (add "value")
-            context.init(op.getOwningClass(), op);
+        	typecheckercontext.init(op.getOwningClass(), op);
             if (op.getSetterBody() != null)
-                ExpressionChecker.typeCheckExpression(op.getSetterBody(), unit, context);
+                ExpressionChecker.typeCheckExpression(op.getSetterBody(), unit, typecheckercontext);
             if (op.getGetterBody() != null)
-                ExpressionChecker.typeCheckExpression(op.getGetterBody(), unit, context);
+                ExpressionChecker.typeCheckExpression(op.getGetterBody(), unit, typecheckercontext);
         }
     }
 
     public TypeCheckerContext getContext() {
-        return context;
+        return typecheckercontext;
     }
 }

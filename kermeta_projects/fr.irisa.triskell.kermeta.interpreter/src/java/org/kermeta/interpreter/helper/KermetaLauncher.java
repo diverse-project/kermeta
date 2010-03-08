@@ -88,7 +88,7 @@ public class KermetaLauncher {
 	}
 
 	private static KInterpreter typeCheckTranfo(String file) throws KermetaIOFileNotFoundException, URIMalformedException, NotRegisteredURIException, IOException {
-		KermetaUnit unitToExecute = RunnerHelper.getKermetaUnitToExecute(file, "platform:/resource/interpreter_unit.km");
+		KermetaUnit unitToExecute = RunnerHelper.getKermetaUnitToExecute(file, file+".memory");
 		//KInterpreter interpreter = new KInterpreter(unitToExecute);
 		//return interpreter;
 		return null;

@@ -69,12 +69,13 @@ public class TypeMatchChecker {
 	private ModelType required;
 	private ModelType provided;
 	private Collection<Class> required_classes;
+	protected TypeCheckerContext typecheckercontext;
 
 	private boolean isRequired(
 			fr.irisa.triskell.kermeta.language.structure.Class cls) {
-		SimpleType simp = new SimpleType(cls);
+		SimpleType simp = new SimpleType(cls, typecheckercontext);
 		for (Class req : required_classes) {
-			if (simp.equals(new SimpleType(req))) {
+			if (simp.equals(new SimpleType(req, typecheckercontext))) {
 				return true;
 			}
 		}
@@ -97,8 +98,9 @@ public class TypeMatchChecker {
 	public static Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class> match(
 			ModelType required,
 			ModelType provided,
-			Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class> initialBindings) {
-		TypeMatchChecker matcher = new TypeMatchChecker(required, provided);
+			Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class> initialBindings,
+			TypeCheckerContext typecheckercontext) {
+		TypeMatchChecker matcher = new TypeMatchChecker(required, provided, typecheckercontext);
 		matcher.buildCandidates(initialBindings);
 		matcher.processCandidates();
 		matcher.evaluateCandidates();
@@ -115,13 +117,15 @@ public class TypeMatchChecker {
 		}
 	}
 
-	public TypeMatchChecker(ModelType required, ModelType provided) {
+	public TypeMatchChecker(ModelType required, ModelType provided, TypeCheckerContext typecheckercontext) {
 		this.required = required;
 		this.provided = provided;
 		dependencies = new HashSet<Dependency>();
 		errors = new ArrayList<TypeDoesNotMatchError>();
 		// Naouel
 		debugMsg = new ArrayList<String>();
+		this.typecheckercontext = typecheckercontext;
+		
 	}
 
 	public boolean matches(
@@ -230,8 +234,8 @@ public class TypeMatchChecker {
 			if (candidates.contains(b)) {
 				boolean fail = false;
 				Collection<Dependency> new_deps = new HashSet<Dependency>();
-				SimpleType r_type = new SimpleType(b.getFrom());
-				SimpleType p_type = new SimpleType(b.getTo());
+				SimpleType r_type = new SimpleType(b.getFrom(), typecheckercontext);
+				SimpleType p_type = new SimpleType(b.getTo(), typecheckercontext);
 				String rdef = b.getFrom().getTypeDefinition().getName();
 				String pdef = b.getTo().getTypeDefinition().getName();
 				debugMsg.clear();
@@ -376,7 +380,7 @@ public class TypeMatchChecker {
 						// TypeConformanceChecker
 						if (!TypeConformanceChecker.conforms(r_prop
 								.getProperty().getType(), p_prop.getProperty()
-								.getType())) {
+								.getType(), typecheckercontext)) {
 							debugMsg
 									.add("   ----------- (!fail) { if (!TypeConformanceChecker.conforms(r_prop.getProperty().getType(), p_prop.getProperty().getType())) } "
 											+ "\n");
@@ -438,7 +442,7 @@ public class TypeMatchChecker {
 							// Just a normal class - subtype check
 							if (!TypeConformanceChecker.conforms(r_op.getType(
 									null).getFType(), p_op.getType(null)
-									.getFType())) {
+									.getFType(), typecheckercontext)) {
 								debugMsg
 										.add("   ----------- (!fail) { if (!TypeConformanceChecker.conforms(r_op.getType(null).getFType(), p_op.getType(null).getFType())) }"
 												+ "\n");
@@ -485,8 +489,7 @@ public class TypeMatchChecker {
 									// when the provided class overwrites those operations
 									// (like "equals()", "isInstance()",...)
 									} else {
-										Collection<Class> p_param_subclasses = TypeMatchChecker
-												.getSubclassesOf(
+										Collection<Class> p_param_subclasses = getSubclassesOf(
 														(Class) p_param
 																.getType(),
 														provided_classes);
@@ -624,12 +627,12 @@ public class TypeMatchChecker {
 		while (b_iter.hasNext()) {
 			Binding b = b_iter.next();
 			boolean hasSuper = false;
-			SimpleType simp_from = new SimpleType(b.getFrom());
-			SimpleType simp_to = new SimpleType(b.getTo());
+			SimpleType simp_from = new SimpleType(b.getFrom(), typecheckercontext);
+			SimpleType simp_to = new SimpleType(b.getTo(), typecheckercontext);
 			for (Binding sup : candidates) {
 				if (!b.equals(sup)
-						&& simp_from.equals(new SimpleType(sup.getFrom()))) {
-					if ((new SimpleType(sup.getTo())).isSubTypeOf(simp_to)) {
+						&& simp_from.equals(new SimpleType(sup.getFrom(), typecheckercontext))) {
+					if ((new SimpleType(sup.getTo(), typecheckercontext)).isSubTypeOf(simp_to)) {
 						hasSuper = true;
 					}
 				}
@@ -641,9 +644,9 @@ public class TypeMatchChecker {
 
 		for (Class req : required_classes) {
 			int match_count = 0;
-			SimpleType simp = new SimpleType(req);
+			SimpleType simp = new SimpleType(req, typecheckercontext);
 			for (Binding b : candidates) {
-				if (simp.equals(new SimpleType(b.getFrom()))) {
+				if (simp.equals(new SimpleType(b.getFrom(), typecheckercontext))) {
 					match_count++;
 				}
 			}
@@ -675,7 +678,7 @@ public class TypeMatchChecker {
 							+ "': ambiguous match for required class '"
 							+ req.getTypeDefinition().getName() + "'.");
 					Class c = b.getFrom();
-					SimpleType st = new SimpleType(c);
+					SimpleType st = new SimpleType(c, typecheckercontext);
 					if (simp.equals(st)) {
 						internalLog.debug("req="
 								+ simp.getTypeDefinition().getName()
@@ -1082,12 +1085,12 @@ public class TypeMatchChecker {
 		return result;
 	}
 
-	private static Collection<Class> getSubclassesOf(Class cls,
+	private Collection<Class> getSubclassesOf(Class cls,
 			Collection<Class> fromList) {
 		Collection<Class> result = new HashSet<Class>();
-		SimpleType simp = new SimpleType(cls);
+		SimpleType simp = new SimpleType(cls, typecheckercontext);
 		for (Class sub_cls : fromList) {
-			SimpleType simp_sub = new SimpleType(sub_cls);
+			SimpleType simp_sub = new SimpleType(sub_cls, typecheckercontext);
 			if (simp_sub.isSubTypeOf(simp)) {
 				result.add(sub_cls);
 			}

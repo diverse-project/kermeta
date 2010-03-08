@@ -23,6 +23,10 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * Once  typechecked (and during typecheck), this attribute contains the context used by the last typechecker run on this unit
+ * It can then be further used by other typechecher or even the interpreter if needed
+ * <!-- end-model-doc -->
  * @see org.kermeta.io.IoFactory
  * @model kind="package"
  * @generated
@@ -71,22 +75,13 @@ public interface IoPackage extends EPackage {
 	int KERMETA_UNIT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Storer</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KERMETA_UNIT__STORER = 0;
-
-	/**
 	 * The feature id for the '<em><b>Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__URI = 1;
+	int KERMETA_UNIT__URI = 0;
 
 	/**
 	 * The feature id for the '<em><b>Modeling Unit</b></em>' reference.
@@ -95,7 +90,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__MODELING_UNIT = 2;
+	int KERMETA_UNIT__MODELING_UNIT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Internal Package Entries</b></em>' reference list.
@@ -104,7 +99,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__INTERNAL_PACKAGE_ENTRIES = 3;
+	int KERMETA_UNIT__INTERNAL_PACKAGE_ENTRIES = 2;
 
 	/**
 	 * The feature id for the '<em><b>External Package Entries</b></em>' reference list.
@@ -113,7 +108,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__EXTERNAL_PACKAGE_ENTRIES = 4;
+	int KERMETA_UNIT__EXTERNAL_PACKAGE_ENTRIES = 3;
 
 	/**
 	 * The feature id for the '<em><b>Imported Kermeta Units</b></em>' reference list.
@@ -122,16 +117,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__IMPORTED_KERMETA_UNITS = 5;
-
-	/**
-	 * The feature id for the '<em><b>Importers</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KERMETA_UNIT__IMPORTERS = 6;
+	int KERMETA_UNIT__IMPORTED_KERMETA_UNITS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Building State</b></em>' reference.
@@ -140,7 +126,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__BUILDING_STATE = 7;
+	int KERMETA_UNIT__BUILDING_STATE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Messages</b></em>' reference list.
@@ -149,7 +135,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__MESSAGES = 8;
+	int KERMETA_UNIT__MESSAGES = 6;
 
 	/**
 	 * The feature id for the '<em><b>Need AST Traces</b></em>' attribute.
@@ -158,7 +144,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__NEED_AST_TRACES = 9;
+	int KERMETA_UNIT__NEED_AST_TRACES = 7;
 
 	/**
 	 * The feature id for the '<em><b>Type Checked</b></em>' attribute.
@@ -167,7 +153,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__TYPE_CHECKED = 10;
+	int KERMETA_UNIT__TYPE_CHECKED = 8;
 
 	/**
 	 * The feature id for the '<em><b>Framework</b></em>' attribute.
@@ -176,7 +162,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__FRAMEWORK = 11;
+	int KERMETA_UNIT__FRAMEWORK = 9;
 
 	/**
 	 * The feature id for the '<em><b>Tracer</b></em>' attribute.
@@ -185,7 +171,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__TRACER = 12;
+	int KERMETA_UNIT__TRACER = 10;
 
 	/**
 	 * The feature id for the '<em><b>Constraint Checked</b></em>' attribute.
@@ -194,7 +180,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__CONSTRAINT_CHECKED = 13;
+	int KERMETA_UNIT__CONSTRAINT_CHECKED = 11;
 
 	/**
 	 * The feature id for the '<em><b>Aspects</b></em>' attribute.
@@ -203,7 +189,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__ASPECTS = 14;
+	int KERMETA_UNIT__ASPECTS = 12;
 
 	/**
 	 * The feature id for the '<em><b>Is Being Typechecked</b></em>' attribute.
@@ -212,7 +198,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__IS_BEING_TYPECHECKED = 15;
+	int KERMETA_UNIT__IS_BEING_TYPECHECKED = 13;
 
 	/**
 	 * The feature id for the '<em><b>Type Definition Cache</b></em>' reference.
@@ -221,7 +207,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__TYPE_DEFINITION_CACHE = 16;
+	int KERMETA_UNIT__TYPE_DEFINITION_CACHE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Kermeta Unit Requires</b></em>' reference list.
@@ -230,7 +216,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__KERMETA_UNIT_REQUIRES = 17;
+	int KERMETA_UNIT__KERMETA_UNIT_REQUIRES = 15;
 
 	/**
 	 * The feature id for the '<em><b>Locked</b></em>' attribute.
@@ -239,7 +225,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__LOCKED = 18;
+	int KERMETA_UNIT__LOCKED = 16;
 
 	/**
 	 * The feature id for the '<em><b>Base Aspects</b></em>' attribute.
@@ -248,7 +234,16 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__BASE_ASPECTS = 19;
+	int KERMETA_UNIT__BASE_ASPECTS = 17;
+
+	/**
+	 * The feature id for the '<em><b>Type Checker Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_UNIT__TYPE_CHECKER_CONTEXT = 18;
 
 	/**
 	 * The number of structural features of the '<em>Kermeta Unit</em>' class.
@@ -257,17 +252,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT_FEATURE_COUNT = 20;
-
-	/**
-	 * The meta object id for the '{@link org.kermeta.io.impl.KermetaUnitStorerImpl <em>Kermeta Unit Storer</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.io.impl.KermetaUnitStorerImpl
-	 * @see org.kermeta.io.impl.IoPackageImpl#getKermetaUnitStorer()
-	 * @generated
-	 */
-	int KERMETA_UNIT_STORER = 2;
+	int KERMETA_UNIT_FEATURE_COUNT = 19;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.io.impl.PackageEntryImpl <em>Package Entry</em>}' class.
@@ -277,7 +262,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getPackageEntry()
 	 * @generated
 	 */
-	int PACKAGE_ENTRY = 3;
+	int PACKAGE_ENTRY = 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.io.impl.IBuildingStateImpl <em>IBuilding State</em>}' class.
@@ -297,24 +282,6 @@ public interface IoPackage extends EPackage {
 	 * @ordered
 	 */
 	int IBUILDING_STATE_FEATURE_COUNT = 0;
-
-	/**
-	 * The feature id for the '<em><b>Kermeta Units</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KERMETA_UNIT_STORER__KERMETA_UNITS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Kermeta Unit Storer</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KERMETA_UNIT_STORER_FEATURE_COUNT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -351,7 +318,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getKermetaUnitLoader()
 	 * @generated
 	 */
-	int KERMETA_UNIT_LOADER = 4;
+	int KERMETA_UNIT_LOADER = 3;
 
 	/**
 	 * The feature id for the '<em><b>Kermeta Units</b></em>' reference list.
@@ -379,7 +346,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getMessage()
 	 * @generated
 	 */
-	int MESSAGE = 5;
+	int MESSAGE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -416,7 +383,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getErrorMessage()
 	 * @generated
 	 */
-	int ERROR_MESSAGE = 6;
+	int ERROR_MESSAGE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -453,7 +420,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getWarningMessage()
 	 * @generated
 	 */
-	int WARNING_MESSAGE = 7;
+	int WARNING_MESSAGE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -490,7 +457,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getParseErrorMessage()
 	 * @generated
 	 */
-	int PARSE_ERROR_MESSAGE = 8;
+	int PARSE_ERROR_MESSAGE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -536,7 +503,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getParsingError()
 	 * @generated
 	 */
-	int PARSING_ERROR = 9;
+	int PARSING_ERROR = 8;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -600,7 +567,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getTypeDefinitionCache()
 	 * @generated
 	 */
-	int TYPE_DEFINITION_CACHE = 10;
+	int TYPE_DEFINITION_CACHE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Kermeta Unit</b></em>' reference.
@@ -646,7 +613,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getTypeDefinitionCacheEntry()
 	 * @generated
 	 */
-	int TYPE_DEFINITION_CACHE_ENTRY = 11;
+	int TYPE_DEFINITION_CACHE_ENTRY = 10;
 
 	/**
 	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -683,7 +650,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getKermetaUnitRequire()
 	 * @generated
 	 */
-	int KERMETA_UNIT_REQUIRE = 12;
+	int KERMETA_UNIT_REQUIRE = 11;
 
 	/**
 	 * The feature id for the '<em><b>Kermeta Unit</b></em>' reference.
@@ -720,7 +687,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 13;
+	int SET = 12;
 
 
 	/**
@@ -731,7 +698,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 14;
+	int LIST = 13;
 
 
 	/**
@@ -742,7 +709,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getTracer()
 	 * @generated
 	 */
-	int TRACER = 15;
+	int TRACER = 14;
 
 
 	/**
@@ -753,7 +720,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getASTNode()
 	 * @generated
 	 */
-	int AST_NODE = 16;
+	int AST_NODE = 15;
 
 
 	/**
@@ -764,7 +731,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getANTLRException()
 	 * @generated
 	 */
-	int ANTLR_EXCEPTION = 17;
+	int ANTLR_EXCEPTION = 16;
 
 	/**
 	 * The meta object id for the '<em>IO Plugin</em>' data type.
@@ -774,7 +741,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getIOPlugin()
 	 * @generated
 	 */
-	int IO_PLUGIN = 18;
+	int IO_PLUGIN = 17;
 
 
 	/**
@@ -785,7 +752,18 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 19;
+	int IPROGRESS_MONITOR = 18;
+
+
+	/**
+	 * The meta object id for the '<em>Type Checker Context</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext
+	 * @see org.kermeta.io.impl.IoPackageImpl#getTypeCheckerContext()
+	 * @generated
+	 */
+	int TYPE_CHECKER_CONTEXT = 19;
 
 
 	/**
@@ -797,17 +775,6 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getKermetaUnit();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.kermeta.io.KermetaUnit#getStorer <em>Storer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Storer</em>'.
-	 * @see org.kermeta.io.KermetaUnit#getStorer()
-	 * @see #getKermetaUnit()
-	 * @generated
-	 */
-	EReference getKermetaUnit_Storer();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.kermeta.io.KermetaUnit#getUri <em>Uri</em>}'.
@@ -863,17 +830,6 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getKermetaUnit_ImportedKermetaUnits();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.kermeta.io.KermetaUnit#getImporters <em>Importers</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Importers</em>'.
-	 * @see org.kermeta.io.KermetaUnit#getImporters()
-	 * @see #getKermetaUnit()
-	 * @generated
-	 */
-	EReference getKermetaUnit_Importers();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.kermeta.io.KermetaUnit#getBuildingState <em>Building State</em>}'.
@@ -1019,25 +975,15 @@ public interface IoPackage extends EPackage {
 	EAttribute getKermetaUnit_BaseAspects();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.io.KermetaUnitStorer <em>Kermeta Unit Storer</em>}'.
+	 * Returns the meta object for the attribute '{@link org.kermeta.io.KermetaUnit#getTypeCheckerContext <em>Type Checker Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Kermeta Unit Storer</em>'.
-	 * @see org.kermeta.io.KermetaUnitStorer
+	 * @return the meta object for the attribute '<em>Type Checker Context</em>'.
+	 * @see org.kermeta.io.KermetaUnit#getTypeCheckerContext()
+	 * @see #getKermetaUnit()
 	 * @generated
 	 */
-	EClass getKermetaUnitStorer();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.io.KermetaUnitStorer#getKermetaUnits <em>Kermeta Units</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Kermeta Units</em>'.
-	 * @see org.kermeta.io.KermetaUnitStorer#getKermetaUnits()
-	 * @see #getKermetaUnitStorer()
-	 * @generated
-	 */
-	EReference getKermetaUnitStorer_KermetaUnits();
+	EAttribute getKermetaUnit_TypeCheckerContext();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.io.PackageEntry <em>Package Entry</em>}'.
@@ -1403,6 +1349,17 @@ public interface IoPackage extends EPackage {
 	EDataType getIProgressMonitor();
 
 	/**
+	 * Returns the meta object for data type '{@link fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext <em>Type Checker Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Type Checker Context</em>'.
+	 * @see fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext
+	 * @model instanceClass="fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext" serializeable="false"
+	 * @generated
+	 */
+	EDataType getTypeCheckerContext();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1433,14 +1390,6 @@ public interface IoPackage extends EPackage {
 		 * @generated
 		 */
 		EClass KERMETA_UNIT = eINSTANCE.getKermetaUnit();
-
-		/**
-		 * The meta object literal for the '<em><b>Storer</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference KERMETA_UNIT__STORER = eINSTANCE.getKermetaUnit_Storer();
 
 		/**
 		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
@@ -1481,14 +1430,6 @@ public interface IoPackage extends EPackage {
 		 * @generated
 		 */
 		EReference KERMETA_UNIT__IMPORTED_KERMETA_UNITS = eINSTANCE.getKermetaUnit_ImportedKermetaUnits();
-
-		/**
-		 * The meta object literal for the '<em><b>Importers</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference KERMETA_UNIT__IMPORTERS = eINSTANCE.getKermetaUnit_Importers();
 
 		/**
 		 * The meta object literal for the '<em><b>Building State</b></em>' reference feature.
@@ -1595,22 +1536,12 @@ public interface IoPackage extends EPackage {
 		EAttribute KERMETA_UNIT__BASE_ASPECTS = eINSTANCE.getKermetaUnit_BaseAspects();
 
 		/**
-		 * The meta object literal for the '{@link org.kermeta.io.impl.KermetaUnitStorerImpl <em>Kermeta Unit Storer</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.io.impl.KermetaUnitStorerImpl
-		 * @see org.kermeta.io.impl.IoPackageImpl#getKermetaUnitStorer()
-		 * @generated
-		 */
-		EClass KERMETA_UNIT_STORER = eINSTANCE.getKermetaUnitStorer();
-
-		/**
-		 * The meta object literal for the '<em><b>Kermeta Units</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Type Checker Context</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KERMETA_UNIT_STORER__KERMETA_UNITS = eINSTANCE.getKermetaUnitStorer_KermetaUnits();
+		EAttribute KERMETA_UNIT__TYPE_CHECKER_CONTEXT = eINSTANCE.getKermetaUnit_TypeCheckerContext();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.io.impl.PackageEntryImpl <em>Package Entry</em>}' class.
@@ -1919,6 +1850,16 @@ public interface IoPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType IPROGRESS_MONITOR = eINSTANCE.getIProgressMonitor();
+
+		/**
+		 * The meta object literal for the '<em>Type Checker Context</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext
+		 * @see org.kermeta.io.impl.IoPackageImpl#getTypeCheckerContext()
+		 * @generated
+		 */
+		EDataType TYPE_CHECKER_CONTEXT = eINSTANCE.getTypeCheckerContext();
 
 	}
 

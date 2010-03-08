@@ -93,7 +93,7 @@ public class Object {
 			throw new KermetaInterpreterError("Error while executing operation isInstanceOf on type Object : The class corresponding to parameter type could not be determined");
 		
 		// Check type conformance and return the result :
-		if (TypeConformanceChecker.conforms(param_class, actual_class))
+		if (TypeConformanceChecker.conforms(param_class, actual_class, self.getFactory().getMemory().getTypeCheckerContext()))
 			return self.getFactory().getMemory().trueINSTANCE;
 		else 
 			return self.getFactory().getMemory().falseINSTANCE;
@@ -122,7 +122,7 @@ public class Object {
 	   			
 	   			//Set additional data in the raised Exception
 	   			fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)kre.raised_object.getMetaclass().getKCoreObject();        	
-	   	    	SimpleType target = new SimpleType(t_target);	   			
+	   	    	SimpleType target = new SimpleType(t_target, self.getFactory().getMemory().getTypeCheckerContext());	   			
 	   			// set the constraintAppliedTo reference
 	   			CallableProperty constraintAppliedToproperty = target.getPropertyByName("constraintAppliedTo");
 	   		    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(constraintAppliedToproperty.getProperty());
@@ -167,7 +167,7 @@ public class Object {
 
 			//Set additional data in the raised Exception
 			fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)kre.raised_object.getMetaclass().getKCoreObject();        	
-			SimpleType target = new SimpleType(t_target);	   			
+			SimpleType target = new SimpleType(t_target, self.getFactory().getMemory().getTypeCheckerContext());	   			
 			// set the constraintAppliedTo reference
 			CallableProperty constraintAppliedToproperty = target.getPropertyByName("constraintAppliedTo");
 			RuntimeObject ro_property = memory.getRuntimeObjectForFObject(constraintAppliedToproperty.getProperty());
@@ -263,7 +263,7 @@ public class Object {
 		if (property.isIsDerived()) {
 			fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getKCoreObject();
 			ExpressionInterpreter interp = self.getFactory().getMemory().getInterpreter().getBasicInterpreter();
-			result = interp.getterDerivedProperty(new CallableProperty(property, cls), self, null);
+			result = interp.getterDerivedProperty(new CallableProperty(property, cls, self.getFactory().getMemory().getTypeCheckerContext()), self, null);
 		}
 		else {
 			result = (RuntimeObject)self.getProperties().get(getPropertyName(param0));
@@ -300,7 +300,7 @@ public class Object {
 		if (property.isIsDerived()) {
 			fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getKCoreObject();
 			ExpressionInterpreter interp = self.getFactory().getMemory().getInterpreter().getBasicInterpreter();
-			interp.setDerivedProperty(self, new CallableProperty(property, cls), param1, null);
+			interp.setDerivedProperty(self, new CallableProperty(property, cls, self.getFactory().getMemory().getTypeCheckerContext()), param1, null);
 		}
 		else {
 			// Unset first if there is an object
@@ -339,7 +339,7 @@ public class Object {
         // Find the property in which the object is stoted
         fr.irisa.triskell.kermeta.language.structure.Class containerClass = (fr.irisa.triskell.kermeta.language.structure.Class)container.getMetaclass().getKCoreObject();
         
-        Iterator<CallableProperty> it = InheritanceSearch.callableProperties(containerClass).iterator();
+        Iterator<CallableProperty> it = InheritanceSearch.callableProperties(containerClass, object.getFactory().getMemory().getTypeCheckerContext()).iterator();
         while (it.hasNext()) {
             CallableProperty cp = (CallableProperty)it.next();
             if (cp.getProperty().isIsComposite()) {

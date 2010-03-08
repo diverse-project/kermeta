@@ -23,7 +23,7 @@
             id="org.kermeta.kpm.actions.unloadcontext">
       </Action>
       <Action
-            class="org.kermeta.kpm.updating.LoadingContext"
+            class="org.kermeta.kpm.updating.LoadingContextKPMAction"
             id="org.kermeta.kpm.actions.loadcontext">
       </Action>
       <Action

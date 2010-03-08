@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableElement;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
 /**
  * The context of the interpreter. It contains a stack of contexts that are called <code>CallFrame</code>.
@@ -96,6 +97,7 @@ public class InterpreterContext {
      * It takes care of type binding.
      */
     public TypeCache typeCache = new TypeCache();
+    
     
     /**
      * Constructor

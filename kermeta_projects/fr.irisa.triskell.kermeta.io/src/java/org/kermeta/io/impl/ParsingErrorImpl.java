@@ -182,11 +182,11 @@ public class ParsingErrorImpl extends ErrorMessageImpl implements ParsingError {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case IoPackage.PARSING_ERROR__OFFSET:
-				return new Integer(getOffset());
+				return getOffset();
 			case IoPackage.PARSING_ERROR__LENGTH:
-				return new Integer(getLength());
+				return getLength();
 			case IoPackage.PARSING_ERROR__LINE_NUMBER:
-				return new Integer(getLineNumber());
+				return getLineNumber();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -200,13 +200,13 @@ public class ParsingErrorImpl extends ErrorMessageImpl implements ParsingError {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case IoPackage.PARSING_ERROR__OFFSET:
-				setOffset(((Integer)newValue).intValue());
+				setOffset((Integer)newValue);
 				return;
 			case IoPackage.PARSING_ERROR__LENGTH:
-				setLength(((Integer)newValue).intValue());
+				setLength((Integer)newValue);
 				return;
 			case IoPackage.PARSING_ERROR__LINE_NUMBER:
-				setLineNumber(((Integer)newValue).intValue());
+				setLineNumber((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

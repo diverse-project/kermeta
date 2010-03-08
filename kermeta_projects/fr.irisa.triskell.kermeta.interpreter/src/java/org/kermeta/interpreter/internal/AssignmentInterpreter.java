@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 
 public class AssignmentInterpreter {
@@ -45,10 +46,10 @@ public class AssignmentInterpreter {
 			}
 			
 			Type r = (Type)TypeVariableEnforcer.getBoundType(node.getTarget().getStaticType(), interpreter.getInterpreterContext().peekCallFrame().getTypeParameters());
-			
-			SimpleType expectedType = new SimpleType(r);
+			TypeCheckerContext tcc = interpreter.memory.getTypeCheckerContext();
+			SimpleType expectedType = new SimpleType(r, tcc);
 			Class p = (Class) rhs_value.getMetaclass().getKCoreObject();
-			SimpleType providedtype = new SimpleType(p);
+			SimpleType providedtype = new SimpleType(p, tcc);
 			
 			
 			/******************************/
@@ -69,7 +70,7 @@ public class AssignmentInterpreter {
 		    // Add to type param bindings the binding
 		    coll_class.getTypeParamBinding().add(binding);
 
-			if (expectedType.equals(new SimpleType(coll_class))) {
+			if (expectedType.equals(new SimpleType(coll_class, tcc))) {
 				// THIS IS A TERRIBLE HACK TO ALLOW CASTING COLLECTIONS
 				// OF ANYTHING TO COLLECTION OF OBJECTS
 				// **** THIS IS NOT TYPE SAFE ****
@@ -172,7 +173,7 @@ public class AssignmentInterpreter {
                 }
                 else {
                     // Get the Property -- is it the right way? 
-                    SimpleType target_type = new SimpleType(t_target);                    
+                    SimpleType target_type = new SimpleType(t_target, interpreter.memory.getTypeCheckerContext());                    
                     CallableProperty property =  target_type.getPropertyByName(propertyName);
                     //CallableProperty property =  this.interpreterContext.typeCache.getPropertyByName(target_type,propertyName);
                     Property fproperty = property.getProperty();

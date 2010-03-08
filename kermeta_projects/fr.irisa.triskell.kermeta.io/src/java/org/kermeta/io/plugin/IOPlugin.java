@@ -13,6 +13,7 @@
 package org.kermeta.io.plugin;
 
 import java.io.File;
+import java.util.HashMap;
 
 import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
@@ -25,10 +26,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.KermetaUnitStorer;
+import org.kermeta.io.cachemanager.KermetaUnitStore;
 import org.kermeta.loader.FrameworkMapping;
+import org.kermeta.loader.LoadingOptions;
 import org.kermeta.log4j.util.LogConfigurationHelper;
 
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
@@ -81,11 +82,21 @@ public class IOPlugin extends Plugin {
 	// The shared instance
 	private static IOPlugin plugin;
 	
-	private KermetaUnitStorer storer = IoFactory.eINSTANCE.createKermetaUnitStorer();
+	private KermetaUnitStore editionStorer;
 	
-	public KermetaUnit framework;
+	/**
+	 * Get the default KermetaUnitStore for edition. Typically used by UI plugins like editor and their associated checkers
+	 * Note that an interpreted run should use another store that this one, otherwise an edition may have impact on the run
+	 * @return
+	 */
+	public KermetaUnitStore getEditionKermetaUnitStore() {
+		return editionStorer;
+	}
+
+
+	//public KermetaUnit framework;
 	
-	public KermetaUnit ecore;
+	//public KermetaUnit ecore;
 	
 	static public String URI_MAP = "../fr.irisa.triskell.kermeta.io/uri.map";
 	
@@ -157,6 +168,11 @@ public class IOPlugin extends Plugin {
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new EcoreResourceFactoryImpl());	
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("traceability",new XMIResourceFactoryImpl());
 			}
+
+			HashMap<String, Object> loadingOptions = new HashMap<String, Object>();
+			//loadingOptions.put(LoadingOptions.CONTENT, content);
+			loadingOptions.put( LoadingOptions.ECORE_QuickFixEnabled, true );
+			editionStorer = new KermetaUnitStore(loadingOptions);
 			
 	/*		if ( ! FRAMEWORK_GENERATION ) {
 			
@@ -236,7 +252,7 @@ public class IOPlugin extends Plugin {
 	}
 
 	public KermetaUnit findKermetaUnit(String uri) {
-		return storer.find(uri);
+		return editionStorer.find(uri);
 	}
 	
 	/**
@@ -267,21 +283,19 @@ public class IOPlugin extends Plugin {
 	}
 	
 	public KermetaUnit getKermetaUnit( String uri, boolean isFramework) throws URIMalformedException, NotRegisteredURIException {
-		KermetaUnit kermetaUnit = storer.get( uri );
+		HashMap<String,Object> options = new HashMap<String,Object>();
+		if(uri.equals(IOPlugin.getFrameWorkURI()) || uri.equals("kermeta")){
+			//options.put(LoadingOptions.INCLUDE_FRAMEWORK, true);
+			options.put(LoadingOptions.FRAMEWORK_LOADING, true);
+		}
+		KermetaUnit kermetaUnit = editionStorer.get( uri, options );
 		if ( isFramework )
 			kermetaUnit.setFramework( true );
 		return kermetaUnit;
-		/*KermetaUnit kermetaUnit = storer.find( uri );
-		if ( kermetaUnit == null ) {
-			kermetaUnit = storer.get( uri );
-			if ( isFramework )
-				kermetaUnit.setFramework( true );
-		}
-		return kermetaUnit;*/
 	}
 	
 	public KermetaUnit basicGetKermetaUnit( String uri ) throws URIMalformedException, NotRegisteredURIException {
-		return storer.get( uri );
+		return editionStorer.get( uri );
 	}
 	
 	/*public KermetaUnit basicLoadKermetaUnit( String uri, IProgressMonitor monitor ) throws URIMalformedException, NotRegisteredURIException {
@@ -373,7 +387,10 @@ public class IOPlugin extends Plugin {
 	}*/
 	
 	public void unload( String uri ) {
-		storer.unload(uri);
+		editionStorer.unload(uri);
+	}
+	public void unloadAll(  ) {
+		editionStorer.clear();
 	}
 	
 	public void unload(IFile file) {
@@ -406,21 +423,22 @@ public class IOPlugin extends Plugin {
 		internalLog.info("Available Memory after running garbage collection : " + Runtime.getRuntime().freeMemory());
 	}*/
 	
-	public KermetaUnit getFramework() {
+/*	public KermetaUnit getFramework() {
 		return framework;
 	}
 	
 	public KermetaUnit getEcore() {
 		return ecore;
 	}
-	
+*/	
 	/**
-	 * list of unique units
+	 * list of unique units currently known
+	 * 
 	 * @return
 	 */
 	public EList<KermetaUnit> getKermetaUnits() {
 		// can return directly the units from the storer since it already doesn't contains duplicates  
-		return storer.getKermetaUnits();
+		return editionStorer.getKermetaUnits();
 	}
 	
 	/**

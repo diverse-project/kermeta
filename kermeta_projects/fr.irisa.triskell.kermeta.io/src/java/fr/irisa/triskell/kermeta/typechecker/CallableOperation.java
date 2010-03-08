@@ -41,14 +41,16 @@ public class CallableOperation extends CallableElement {
      * The operation
      */
     protected Operation operation;
+    protected TypeCheckerContext context;
 
     /**
      * Constructor
      */
-    public CallableOperation(Operation op, Class type) {
+    public CallableOperation(Operation op, Class type, TypeCheckerContext context) {
         super();
         operation = op;
         fclass = type;
+        this.context = context;
     }
 
     public boolean equals(Object other) {
@@ -72,22 +74,22 @@ public class CallableOperation extends CallableElement {
 
         Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
 
-        fr.irisa.triskell.kermeta.language.structure.Type rt = ((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement(operation)).getType();
+        fr.irisa.triskell.kermeta.language.structure.Type rt = ((SimpleType) context.getTypeFromMultiplicityElement(operation)).getType();
 
         if (operation.getOwnedParameter().size() == 0) {
             // it cannot be a generic method
             // The type parameter of the target class should be bound
-            result = new SimpleType(TypeVariableEnforcer.getBoundType(rt, bindings));
+            result = new SimpleType(TypeVariableEnforcer.getBoundType(rt, bindings), context);
         } else {
             FunctionType ft = StructureFactory.eINSTANCE.createFunctionType();
             ProductType pt = StructureFactory.eINSTANCE.createProductType();
             for (Parameter param : operation.getOwnedParameter()) {
-                pt.getType().add(((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement(param)).getType());
+                pt.getType().add(((SimpleType) context.getTypeFromMultiplicityElement(param)).getType());
             }
             ft.setRight(rt);
             ft.setLeft(pt);
           
-            result = new SimpleType(TypeVariableEnforcer.getBoundType(ft, bindings));
+            result = new SimpleType(TypeVariableEnforcer.getBoundType(ft, bindings), context);
         }
         
         if ( result.getFType().eContainer() == null && expression != null )
@@ -98,8 +100,8 @@ public class CallableOperation extends CallableElement {
     
     public Type getReturnType() {
         Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
-        fr.irisa.triskell.kermeta.language.structure.Type rt = ((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement(operation)).getType();
-        return new SimpleType(TypeVariableEnforcer.getBoundType(rt, bindings));
+        fr.irisa.triskell.kermeta.language.structure.Type rt = ((SimpleType) context.getTypeFromMultiplicityElement(operation)).getType();
+        return new SimpleType(TypeVariableEnforcer.getBoundType(rt, bindings), context);
     }
     
     public List<Type> getParameterTypes() {
@@ -107,7 +109,7 @@ public class CallableOperation extends CallableElement {
         Iterator<Parameter> ps = operation.getOwnedParameter().iterator();
         while (ps.hasNext()) {
             Parameter param = (Parameter) ps.next();
-            result.add((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement(param));
+            result.add((SimpleType) context.getTypeFromMultiplicityElement(param));
         }
         return result;
     }

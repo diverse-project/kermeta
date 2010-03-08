@@ -31,12 +31,14 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 public class ClassConformanceChecker {
 
 	private Class provided;
+    protected TypeCheckerContext typecheckercontext;
 	
 	private Stack<TypeDefinition> stack = new Stack<TypeDefinition> ();
 	
-	public ClassConformanceChecker(Class provided) {
+	public ClassConformanceChecker(Class provided, TypeCheckerContext typecheckercontext) {
 		this.provided = provided;
 		stack.add( provided.getTypeDefinition() );
+		this.typecheckercontext = typecheckercontext;
 	}
 	
 	public boolean conforms(Class required) {
@@ -66,7 +68,7 @@ public class ClassConformanceChecker {
 //		ClassDefinition cd = (ClassDefinition) unit.getTypeDefinitionByQualifiedName(qualifiedName);
 		Collection<TypeDefinition> context = null;
 //		if ( cd != null )
-		context = TypeDefinitionContextCache.getInstance().getContext( (ClassDefinition) provided.getTypeDefinition() );
+		context = typecheckercontext.getTypeDefinitionContextCache().getTypeDefinitionContext( (ClassDefinition) provided.getTypeDefinition() );
 		//context = KermetaModelHelper.ClassDefinition.getFullContext( (ClassDefinition) provided.getTypeDefinition() );
 //		else
 //			context = KermetaModelHelper.ClassDefinition.getContext( (ClassDefinition) provided.getTypeDefinition() );
@@ -97,8 +99,8 @@ public class ClassConformanceChecker {
 					while ( result && it_provided.hasNext() && it_required.hasNext() ) {
 						Type t_provided = it_provided.next().getType();
 						Type t_required = it_required.next().getType();
-						SimpleType providedType = new SimpleType( t_provided );
-						SimpleType requiredType = new SimpleType( t_required );
+						SimpleType providedType = new SimpleType( t_provided, typecheckercontext );
+						SimpleType requiredType = new SimpleType( t_required, typecheckercontext );
 						
 						if ( t_provided instanceof ObjectTypeVariable && t_required instanceof ObjectTypeVariable ) {
 							result = t_provided == t_required;

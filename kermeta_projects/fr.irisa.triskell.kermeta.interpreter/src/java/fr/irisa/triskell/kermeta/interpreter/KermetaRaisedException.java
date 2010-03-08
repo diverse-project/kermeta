@@ -84,7 +84,7 @@ public class KermetaRaisedException extends Error {
     	// display the attributes of the raise object
     	fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)raised_object.getMetaclass().getKCoreObject();        	    	
     	
-    	SimpleType target = new SimpleType(t_target);
+    	SimpleType target = new SimpleType(t_target, interpreter.getMemory().getTypeCheckerContext());
     	// Since any object can be raised as an exception, its not reasonable to expect a property called message
     	// toString exists on all objects!
     	// If the target type is Exception, than there exists a property named message
@@ -219,7 +219,7 @@ public class KermetaRaisedException extends Error {
     	
     	// adds some info on this exception (in the message attribute of the exception)
     	fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)raised_object.getMetaclass().getKCoreObject();        	
-    	SimpleType target = new SimpleType(t_target);
+    	SimpleType target = new SimpleType(t_target, memory.getTypeCheckerContext());
 	    CallableProperty cproperty = target.getPropertyByName("message");
 	    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(cproperty.getProperty());
 	    RuntimeObject rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(exceptionMessage, rofactory);

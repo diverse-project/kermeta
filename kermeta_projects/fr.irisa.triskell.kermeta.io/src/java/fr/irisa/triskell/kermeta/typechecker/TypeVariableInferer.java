@@ -12,7 +12,6 @@
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
-import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 
@@ -23,9 +22,9 @@ import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -47,17 +46,18 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 	 * @return A hashtable <Variable : ObjectTypeVariable, ActualType : fr.irisa.triskell.kermeta.language.structure.Type> or null if the provided does not match the generic type
 	 */
 	public static Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> 
-				  inferTypeVariableTypes(fr.irisa.triskell.kermeta.language.structure.Type generic, fr.irisa.triskell.kermeta.language.structure.Type provided) {
+				  inferTypeVariableTypes(fr.irisa.triskell.kermeta.language.structure.Type generic, fr.irisa.triskell.kermeta.language.structure.Type provided,
+							TypeCheckerContext typecheckercontext) {
 		Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> result = new Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type>();
 		
 		// Get rid of primitive types
 		provided = TypeCheckerContext.getCanonicalType(provided);
 		generic = TypeCheckerContext.getCanonicalType(generic);
 		
-		if (provided instanceof VoidType || TypeEqualityChecker.equals(provided, ((SimpleType)TypeCheckerContext.VoidType).type)) return result;
+		if (provided instanceof VoidType || TypeEqualityChecker.equals(provided, ((SimpleType)typecheckercontext.VoidType).type)) return result;
 		
 		try {
-			TypeVariableInferer visitor = new TypeVariableInferer(provided, result);
+			TypeVariableInferer visitor = new TypeVariableInferer(provided, result, typecheckercontext);
 			visitor.accept(generic);
 		}
 		catch(TypeDoesNotMatchError e) {
@@ -68,10 +68,11 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 	
 	public static void inferTypeVariableTypes(fr.irisa.triskell.kermeta.language.structure.Type generic, 
 			fr.irisa.triskell.kermeta.language.structure.Type provided, 
-			Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> result) {
+			Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> result,
+			TypeCheckerContext typecheckercontext) {
 	    provided = TypeCheckerContext.getCanonicalType(provided);
 		generic = TypeCheckerContext.getCanonicalType(generic);
-		TypeVariableInferer visitor = new TypeVariableInferer(provided, result);
+		TypeVariableInferer visitor = new TypeVariableInferer(provided, result, typecheckercontext);
 		result = (Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type>)visitor.accept(generic);
 	}
 	
@@ -83,14 +84,20 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 	
 	protected Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> result;
 	
+	protected TypeCheckerContext typecheckercontext;
+	protected TypeVariableUtility typeVariableUtility;
+	
 	/**
 	 * Constructor
 	 */
 	public TypeVariableInferer(fr.irisa.triskell.kermeta.language.structure.Type provided, 
-			Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> result) {
+			Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> result,
+			TypeCheckerContext typecheckercontext ) {
 		super();
 		this.provided = provided;
 		this.result = result;
+		this.typecheckercontext = typecheckercontext;
+		typeVariableUtility = new TypeVariableUtility(typecheckercontext);
 	}
 	
 	/**
@@ -98,8 +105,8 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 	 */
 	public Object visitFunctionType(FunctionType arg0) {
 		if (! (provided instanceof FunctionType) ) throw new TypeDoesNotMatchError();
-		TypeVariableInferer.inferTypeVariableTypes(arg0.getLeft(), ((FunctionType)provided).getLeft(), result);
-		TypeVariableInferer.inferTypeVariableTypes(arg0.getRight(), ((FunctionType)provided).getRight(), result);
+		TypeVariableInferer.inferTypeVariableTypes(arg0.getLeft(), ((FunctionType)provided).getLeft(), result, typecheckercontext);
+		TypeVariableInferer.inferTypeVariableTypes(arg0.getRight(), ((FunctionType)provided).getRight(), result, typecheckercontext);
 		return null;
 	}
 	
@@ -107,22 +114,22 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 	    
 	    // Handle type variables
 	    if (provided instanceof ObjectTypeVariable) {
-	        provided = TypeVariableUtility.getLeastDerivedAdmissibleType(provided);
+	        provided = new TypeVariableUtility(typecheckercontext).getLeastDerivedAdmissibleType(provided);
 	    }
 	    
 	    if (provided instanceof VoidType) return null;
 	    
-	    if ( (provided instanceof Enumeration) && TypeConformanceChecker.conforms(TypeCheckerContext.ObjectType.getFType(), arg0))
+	    if ( (provided instanceof Enumeration) && TypeConformanceChecker.conforms(typecheckercontext.ObjectType.getFType(), arg0, typecheckercontext))
 	    	return null;
 	    
 	    if (provided instanceof ModelType) {
-	    	if (TypeConformanceChecker.conforms(TypeCheckerContext.ModelType.getFType(), arg0)) {
+	    	if (TypeConformanceChecker.conforms(typecheckercontext.ModelType.getFType(), arg0, typecheckercontext)) {
 	    		return null;
 	    	}
-	    	Iterator<fr.irisa.triskell.kermeta.language.structure.Type> msupers =  InheritanceSearch.allSuperTypes((fr.irisa.triskell.kermeta.language.structure.Class) TypeCheckerContext.ModelType.getFType()).iterator();
+	    	Iterator<fr.irisa.triskell.kermeta.language.structure.Type> msupers =  InheritanceSearch.allSuperTypes((fr.irisa.triskell.kermeta.language.structure.Class) typecheckercontext.ModelType.getFType(), typecheckercontext).iterator();
 	    	while (msupers.hasNext()) {
 	    		fr.irisa.triskell.kermeta.language.structure.Type msuper = msupers.next();
-	    		if (TypeConformanceChecker.conforms(msuper, arg0)) 
+	    		if (TypeConformanceChecker.conforms(msuper, arg0, typecheckercontext)) 
 	    		{
 	    			return null;
 	    		}
@@ -132,7 +139,7 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 		if (! (provided instanceof fr.irisa.triskell.kermeta.language.structure.Class) ) 
 			throw new TypeDoesNotMatchError();
 		
-		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = InheritanceSearch.allSuperTypes((fr.irisa.triskell.kermeta.language.structure.Class)provided).iterator();		
+		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = InheritanceSearch.allSuperTypes((fr.irisa.triskell.kermeta.language.structure.Class)provided, typecheckercontext).iterator();		
 		while(it.hasNext()) {
 			fr.irisa.triskell.kermeta.language.structure.Class sp = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
 		    if (arg0.getTypeDefinition() == sp.getTypeDefinition()) {
@@ -140,7 +147,7 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 					try {
 						fr.irisa.triskell.kermeta.language.structure.Type g = ((TypeVariableBinding)arg0.getTypeParamBinding().get(i)).getType();
 						fr.irisa.triskell.kermeta.language.structure.Type p = ((TypeVariableBinding)sp.getTypeParamBinding().get(i)).getType();
-						TypeVariableInferer.inferTypeVariableTypes(g, p, result);
+						TypeVariableInferer.inferTypeVariableTypes(g, p, result, typecheckercontext);
 					} catch (Exception e) {
 						System.out.println();
 					}
@@ -167,23 +174,23 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 		for(int i=0; i<arg0.getType().size(); i++) {
 			fr.irisa.triskell.kermeta.language.structure.Type g = (fr.irisa.triskell.kermeta.language.structure.Type)arg0.getType().get(i);
 			fr.irisa.triskell.kermeta.language.structure.Type p = (fr.irisa.triskell.kermeta.language.structure.Type)((ProductType)provided).getType().get(i);
-			TypeVariableInferer.inferTypeVariableTypes(g, p, result);
+			TypeVariableInferer.inferTypeVariableTypes(g, p, result, typecheckercontext);
 		}
 		return null;
 	}
 	
 	public Object visitObjectTypeVariable(ObjectTypeVariable arg0) {
 		// check that this binding is OK
-	    if (!TypeConformanceChecker.conforms(TypeVariableUtility.getLeastDerivedAdmissibleType(arg0), TypeVariableUtility.getLeastDerivedAdmissibleType(provided))) {
+	    if (!TypeConformanceChecker.conforms(typeVariableUtility.getLeastDerivedAdmissibleType(arg0),typeVariableUtility.getLeastDerivedAdmissibleType(provided), typecheckercontext)) {
 			throw new TypeDoesNotMatchError();
 		}
 		// If there is already a binding :
 		if (result.get(arg0) != null) {
 			fr.irisa.triskell.kermeta.language.structure.Type provided2 = (fr.irisa.triskell.kermeta.language.structure.Type)result.get(arg0);
-		    if (TypeConformanceChecker.conforms(provided2, provided)) {
+		    if (TypeConformanceChecker.conforms(provided2, provided, typecheckercontext)) {
 		        // provided2 remains the appropriate binding
 		    }
-		    else if (TypeConformanceChecker.conforms(provided, provided2)) {
+		    else if (TypeConformanceChecker.conforms(provided, provided2, typecheckercontext)) {
 		        // provided becomes the appropriate binding
 		        result.put(arg0, provided);
 		    }

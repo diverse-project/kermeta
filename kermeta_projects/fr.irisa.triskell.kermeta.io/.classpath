@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="src/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry excluding="fr/irisa/triskell/kermeta/loader/kmt/KMT2KMPass1.java|fr/irisa/triskell/kermeta/loader/kmt/KMT2KMPass2_1.java|fr/irisa/triskell/kermeta/loader/kmt/KMT2KMPass2.java|fr/irisa/triskell/kermeta/loader/kmt/KMT2KMPass3.java|fr/irisa/triskell/kermeta/loader/kmt/KMT2KMPass4.java|fr/irisa/triskell/kermeta/loader/kmt/KMT2KMPass5.java|fr/irisa/triskell/kermeta/loader/kmt/KMT2KMPass6.java|fr/irisa/triskell/kermeta/loader/kmt/KMTUnitLoader.java|fr/irisa/triskell/kermeta/loader/kmt/KMT2KMPass7.java|fr/irisa/triskell/kermeta/loader/ecore/Ecore2KMLoader.java|fr/irisa/triskell/kermeta/loader/ecore/Ecore2KMPass4.java|fr/irisa/triskell/kermeta/loader/ecore/Ecore2KMPass5.java" kind="src" path="src/java"/>
 	<classpathentry kind="output" path="build/class"/>
 </classpath>

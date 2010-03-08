@@ -31,14 +31,17 @@ public class CallableProperty extends CallableElement {
     
     protected fr.irisa.triskell.kermeta.language.structure.Class fclass;
     
+    protected TypeCheckerContext context;
+    
     /**
      * @param property
      * @param fclass
      */
-    public CallableProperty(Property property, fr.irisa.triskell.kermeta.language.structure.Class fclass) {
+    public CallableProperty(Property property, fr.irisa.triskell.kermeta.language.structure.Class fclass, TypeCheckerContext context) {
         super();
         this.property = property;
         this.fclass = fclass;
+        this.context = context;
     }
     
     public boolean equals(Object other) {
@@ -56,10 +59,10 @@ public class CallableProperty extends CallableElement {
      */
     public Type getType(Expression expression) {
         // The type of the property
-    	fr.irisa.triskell.kermeta.language.structure.Type t = ((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(property)).type;
+    	fr.irisa.triskell.kermeta.language.structure.Type t = ((SimpleType)context.getTypeFromMultiplicityElement(property)).type;
         // subtitute varables :
         Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
-        SimpleType st = new SimpleType(TypeVariableEnforcer.getBoundType(t, bindings));
+        SimpleType st = new SimpleType(TypeVariableEnforcer.getBoundType(t, bindings), context);
         if ( st.getFType().eContainer() == null && expression != null )
         	expression.getContainedType().add(st.getType());
         return st;

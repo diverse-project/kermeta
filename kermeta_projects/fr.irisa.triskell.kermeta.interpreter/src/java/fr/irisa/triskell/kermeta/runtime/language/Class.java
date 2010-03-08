@@ -45,8 +45,8 @@ public class Class {
 		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getKCoreObject();
 		fr.irisa.triskell.kermeta.language.structure.Class pro = (fr.irisa.triskell.kermeta.language.structure.Class)object.getMetaclass().getKCoreObject();
 		
-		SimpleType required = new SimpleType(req);
-		SimpleType provided = new SimpleType(pro);
+		SimpleType required = new SimpleType(req, self.getFactory().getMemory().getTypeCheckerContext());
+		SimpleType provided = new SimpleType(pro, self.getFactory().getMemory().getTypeCheckerContext());
 		
 		if (provided.isSubTypeOf(required)) return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;

@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="io"
     nsURI="http://www.kermeta.org/io" nsPrefix="io">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="documentation" value="Once  typechecked (and during typecheck), this attribute contains the context used by the last typechecker run on this unit&#xD;&#xA;It can then be further used by other typechecher or even the interpreter if needed"/>
+  </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="KermetaUnit">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="a KermetaUnit is a representation of a file that can be loaded as kermeta code.&#xD;&#xA;It can be kmt (kermeta textual syntax), km (kermeta mode), ecore, or java jar&#xD;&#xA;It deals with various concerns like : file requirement (dependencies), syntax shortcut (using),&#xD;&#xA;   traces, &#xD;&#xA;and provides some useful functions"/>
@@ -132,8 +135,6 @@
     <eOperations name="getInternalTypeDefinitionByName" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition">
       <eParameters name="name" eType="ecore:EDataType ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/String"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="storer" lowerBound="1"
-        eType="#//KermetaUnitStorer" eOpposite="#//KermetaUnitStorer/kermetaUnits"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="URI of the unit. Ie. name of the file that was loaded"/>
@@ -146,9 +147,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="externalPackageEntries"
         upperBound="-1" eType="#//PackageEntry"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="importedKermetaUnits" upperBound="-1"
-        eType="#//KermetaUnit" eOpposite="#//KermetaUnit/importers"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="importers" upperBound="-1"
-        eType="#//KermetaUnit" eOpposite="#//KermetaUnit/importedKermetaUnits"/>
+        eType="#//KermetaUnit"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="buildingState" lowerBound="1"
         eType="#//IBuildingState"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="messages" upperBound="-1"
@@ -182,21 +181,10 @@
         </eTypeArguments>
       </eGenericType>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeCheckerContext" eType="#//TypeCheckerContext"
+        transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IBuildingState" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="KermetaUnitStorer">
-    <eOperations name="get" eType="#//KermetaUnit">
-      <eParameters name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="find" eType="#//KermetaUnit">
-      <eParameters name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="unload">
-      <eParameters name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="kermetaUnits" upperBound="-1"
-        eType="#//KermetaUnit" containment="true" eOpposite="#//KermetaUnit/storer"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageEntry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -274,4 +262,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="require" lowerBound="1"
         eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Require"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="TypeCheckerContext" instanceClassName="fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext"
+      serializable="false"/>
 </ecore:EPackage>

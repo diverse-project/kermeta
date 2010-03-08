@@ -92,7 +92,7 @@ public class CallFeatureDebugInterpreter {
 	    }
 
 		// Get the feature
-	    SimpleType target_type = new SimpleType(t_target);
+	    SimpleType target_type = new SimpleType(t_target, interpreter.memory.getTypeCheckerContext());
 	    //	  if this is a java object proxy some more initialization are needed
 	    boolean isJarProxy = ro_target.isJarProxy();
 	    /*if(RuntimeHelper.isJarProxy(target_type.getTypeDefinition())){

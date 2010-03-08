@@ -19,7 +19,7 @@ public class TypeLiteralInterpreter {
         RuntimeObject result = null;
         if (node!=null) 
         	interpreter.setParent(node);
-        Type t = ((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(node.getTyperef())).getType();
+        Type t = ((SimpleType)interpreter.memory.getTypeCheckerContext().getTypeFromMultiplicityElement(node.getTyperef())).getType();
        
         if (t instanceof Class) {
         	Class c = (Class)t;

@@ -32,14 +32,15 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbol;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolOperation;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolProperty;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolVariable;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
 import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaParser;
+import fr.irisa.triskell.kermeta.typechecker.ContextNotInitializedOnAFrameworkError;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
@@ -62,6 +63,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
     public DynamicExpressionUnit(KermetaUnit kermetaUnit) {
     	getImportedKermetaUnits().add(kermetaUnit);
     	importKermetaUnit(kermetaUnit);
+    	setTypeCheckerContext(kermetaUnit.getTypeCheckerContext());
     	/*setModelingUnit( kermetaUnit.getModelingUnit() );
     	getInternalPackageEntries().addAll( kermetaUnit.getInternalPackageEntries() );
     	getExternalPackageEntries().addAll( kermetaUnit.getExternalPackageEntries() );
@@ -151,11 +153,11 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
 
     }
     
-    public KermetaTypeChecker typeCheck(KermetaTypeChecker checker) {
+    public KermetaTypeChecker typeCheck(KermetaTypeChecker checker) throws ContextNotInitializedOnAFrameworkError {
        if ( expression == null || isErroneous() )
            throw new Error("Internal error : cannot type check the expression to eval");
-       if (checker == null) {
-           checker = new KermetaTypeChecker(this );
+       if (checker == null) {    	   
+           checker = new KermetaTypeChecker(this, this.getTypeCheckerContext() );
        }
        checker.getContext().init(this);
        
@@ -166,7 +168,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
     	   if ( symbol instanceof KMSymbolVariable ) {
     			var = (KMSymbolVariable) symbol;
            		if (var.getVariable().getStaticType() == null) continue;
-           		checker.getContext().addSymbol(var, new SimpleType(var.getVariable().getStaticType()));	   
+           		checker.getContext().addSymbol(var, new SimpleType(var.getVariable().getStaticType(), checker.getContext()));	   
     	   }
        }
        	   

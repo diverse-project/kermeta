@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
-import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KM;
+import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.Ecore2KM;
 
 /**
  * The Quick fix page allows to enable or disable some simple 

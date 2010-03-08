@@ -40,7 +40,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kermetaunitloader.LoaderFactory;
 import org.kermeta.loader.LoadingOptions;
 import org.kermeta.merger.Merger;
 
@@ -51,7 +52,7 @@ import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
-import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KM;
+import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.Ecore2KM;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
@@ -91,7 +92,7 @@ public class UnitExporterWizard extends Wizard {
 
 	public String defaultTraceExtension = "traceability";
 
-	protected Map<Object, Object> options = new HashMap<Object, Object>();
+	protected HashMap<String, Object> options = new HashMap<String, Object>();
 	
 	/**
 	 * <code>isInputKM</code> indicates weither the input unit is a km unit.
@@ -346,7 +347,7 @@ public class UnitExporterWizard extends Wizard {
 		//KermetaUnitFactory.getDefaultLoader().unloadAll();
 
 		try {
-			unit = LoaderPlugin.getDefault().load( inputFile_uri, options );
+			unit = IOPlugin.getDefault().getEditionKermetaUnitStore().get( inputFile_uri, options );
 			// init the tracer (needed in order to get error messages and for an eventual save of the trace file)
 			//initTraces();
 			//unit.setTracer(tracer);

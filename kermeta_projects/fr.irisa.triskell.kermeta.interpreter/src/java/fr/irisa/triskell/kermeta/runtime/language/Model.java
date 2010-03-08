@@ -105,7 +105,7 @@ public class Model {
 				requiredType =(DataType)oTypeDef;
 			} 
 			if (requiredType != null){
-				if(TypeConformanceChecker.conforms(requiredType, elementType)){
+				if(TypeConformanceChecker.conforms(requiredType, elementType, model.getFactory().getMemory().getTypeCheckerContext())){
 					// this element is compatible
 					Model.add(model, element);
 					return element;

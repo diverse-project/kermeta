@@ -16,7 +16,7 @@ import org.eclipse.ui.INewWizard;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingOptions;
 
-import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KM;
+import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.Ecore2KM;
 
 
 /**

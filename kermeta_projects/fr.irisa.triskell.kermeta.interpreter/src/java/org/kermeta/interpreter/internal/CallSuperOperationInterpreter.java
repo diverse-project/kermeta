@@ -27,7 +27,7 @@ public class CallSuperOperationInterpreter {
         // Get the parameters of this operation
 		List<RuntimeObject> parameters = interpreter.visitList(node.getParameters());
 		// Create a context for this operation call, setting self object to ro_target
-		interpreter.getInterpreterContext().pushOperationCallFrame(ro_target, InheritanceSearch.getSuperOperation(self_type, current_op), parameters, node);
+		interpreter.getInterpreterContext().pushOperationCallFrame(ro_target, InheritanceSearch.getSuperOperation(self_type, current_op, interpreter.memory.getTypeCheckerContext()), parameters, node);
 		
 		try {
 		    result = (RuntimeObject) interpreter.accept(current_op.getSuperOperation());

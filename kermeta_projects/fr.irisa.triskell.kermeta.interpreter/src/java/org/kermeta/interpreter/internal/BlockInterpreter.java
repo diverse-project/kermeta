@@ -11,6 +11,7 @@ import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.Rescue;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
 public class BlockInterpreter {
 
@@ -40,8 +41,9 @@ public class BlockInterpreter {
 	            if (r.getExceptionType() == null)
 	                resc_block = r;
 	            else {
-	                SimpleType exprected =  new SimpleType(r.getExceptionType().getType());
-	                SimpleType provided = new SimpleType((fr.irisa.triskell.kermeta.language.structure.Class)ex.raised_object.getMetaclass().getKCoreObject());
+	            	TypeCheckerContext tcc = interpreter.memory.getTypeCheckerContext();
+	                SimpleType exprected =  new SimpleType(r.getExceptionType().getType(), tcc);
+	                SimpleType provided = new SimpleType((fr.irisa.triskell.kermeta.language.structure.Class)ex.raised_object.getMetaclass().getKCoreObject(), tcc);
 	                if (provided.isSubTypeOf(exprected)) {
 	                    resc_block = r;
 	                }

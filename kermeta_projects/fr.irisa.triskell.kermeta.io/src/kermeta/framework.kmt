@@ -1,0 +1,6366 @@
+@executable "true"
+/**
+ * The root package. See the other packages if you want to browse the classes of Kermeta api.
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png"/>
+ */
+@ecore "true"
+@uri "http://www.kermeta.org/kermeta/1_2_0//kermeta"
+package kermeta;
+
+using kermeta::language
+using kermeta::standard
+using kermeta::exceptions
+using kermeta::utils
+using kermeta::persistence
+using kermeta::language::structure
+using kermeta::kunit
+using kermeta::io
+using kermeta::ecore
+using kermeta::interpreter
+using kermeta::language::behavior
+using kermeta::xmltype
+@ecore "true"
+/**This class is used to workaround an EMF bug, it doesn't really belong to Kermeta metamodel*/
+abstract class DummyClass
+{
+}
+/**
+ * Contains the implementation of Kermeta reflective collections.
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_package.png"/>
+ */
+@ecore "true"
+package language
+{
+	/**
+ * ReflectiveCollection is a special collection that is used to define the type 
+ * of attributes that have an upper multiplicity > 1 in a class. It indeed handles
+ * the update of opposite property if such an attribute has got one.
+ */
+@CompilerIgnore "true"
+	class ReflectiveCollection<G> inherits standard::Set<G>
+	{
+		/**
+	 * Overrides kermeta::standard::Collection<G>.clear(G)
+	 */
+		method clear() : Void from kermeta::standard::Collection is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.clear(self)
+			end
+
+		/**
+	 * Overrides kermeta::standard::Set<G>.remove(G)
+	 */
+		method remove(element : G) : Void from kermeta::standard::Set is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(self, element)
+			end
+
+		/**
+	 * Overrides kermeta::standard::Set<G>.add(G)
+	 * Add an element to this collection and update its opposite property if it exists.
+	 */
+		method add(element : G) : Void from kermeta::standard::Set is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(self, element)
+			end
+
+	}
+	/**
+ * ReflectiveSequence is an ordered ReflectiveCollection.
+ */
+@CompilerIgnore "true"
+	class ReflectiveSequence<G> inherits standard::OrderedSet<G>, ReflectiveCollection<G>
+	{
+		/**
+	 * Overrides kermeta::language::ReflectiveCollection<G>.clear()
+	 */
+		method clear() : Void from kermeta::language::ReflectiveCollection is
+			do
+				super()
+			end
+
+		/**
+	 * Overrides kermeta::standard::OrderedSet.addAt(Integer)
+	 */
+		method addAt(index : standard::Integer, element : G) : Void from kermeta::standard::OrderedSet is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.addAt(self, index, element)
+			end
+
+		/**
+	 * Overrides kermeta::standard::OrderedSet.removeAt(Integer)
+	 */
+		method removeAt(index : standard::Integer) : Void from kermeta::standard::OrderedCollection is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.removeAt(self, index)
+			end
+
+		/**
+	 * Overrides kermeta::language::ReflectiveCollection<G>.remove(G)
+	 */
+		method remove(element : G) : Void from kermeta::language::ReflectiveCollection is
+			do
+				super(element)
+			end
+
+		/**
+	 * Overrides kermeta::standard::OrderedSet.equals(Object)
+	 */
+		method equals(element : standard::Object) : standard::Boolean from kermeta::standard::OrderedSet is
+			do
+				result := super(element)
+			end
+
+		/**
+	 * Overrides kermeta::language::ReflectiveCollection<G>.add(G)
+	 */
+		method add(element : G) : Void from kermeta::language::ReflectiveCollection is
+			do
+				super(element)
+			end
+
+	}
+	@ecore "true"
+/**This class is used to workaround an EMF bug, it doesn't really belong to Kermeta metamodel*/
+	abstract class DummyClass
+	{
+	}
+	/**
+ * Contains the concrete implementation (including the operation bodies) 
+ * of the classes of the <code>kermeta::reflection</code> package.
+ * If you need more documentation, please take a look at the
+ * <code>kermeta::reflection</code> package which is more complete.
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_package.png"/>
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_visitor_view.png"/>
+ */
+@ecore "true"
+package structure
+	{
+		@ecore "true"
+/**Object definition: all entities of Kermeta metamodel explicitly inherit from Object*/
+		class Object
+		{
+			@ecore "true"
+/**An Object can be tagged by a Tag. 
+They are typically used to put comments/documentation on the object*/
+			reference tag : Tag[0..*]#object
+
+			@ecore "true"
+/**An object can contains a Tag.  
+Be careful, owning a tag doesn't means that the tag applies to the Object
+To know which Tags apply to the object use the "tag" reference*/
+			attribute ownedTags : Tag[0..*]
+
+			/**
+	 * Checks a constraint invariant defined for the metaclass of the Object
+	 * You can use PropertyConstraint for checking structural constraints associated to a property
+	 */
+@CompilerIgnore "true"
+			operation checkInvariant(invariant : Constraint) : Void is
+				do
+					var minusOne : Integer init 1.uminus
+					var cd : ClassDefinition init self.getMetaClass.classDefinition
+					if invariant.isKindOf(PropertyConstraint) then
+						var prop : Property init invariant.asType(PropertyConstraint).~property
+						var v : Object init self.get(prop)
+						if v.isVoid then
+							if prop.lower.equals(1) then
+								var e : exceptions::ConstraintViolatedInv init exceptions::ConstraintViolatedInv.new
+								e.constraintAppliedTo := self
+								e.message := "Invariant lower bound of ".plus(cd.name).plus("_").plus(prop.name).plus("_").plus(prop.type.toString).plus(" violated on ").plus(self.toString)
+								e.failedConstraint := invariant
+								raise e
+
+							end
+
+						else
+							if v.isInstanceOf(standard::Collection<Object>) then
+								var coll : standard::Collection<Object> init v.asType(standard::Collection<Object>)
+								if prop.upper.isNotEqual(minusOne).~and(coll.size.isGreater(prop.upper)) then
+									var e : exceptions::ConstraintViolatedInv init exceptions::ConstraintViolatedInv.new
+									e.constraintAppliedTo := self
+									e.message := "Invariant upper bound of ".plus(cd.name).plus("_").plus(prop.name).plus("_").plus(prop.type.toString).plus(" violated on ").plus(self.toString)
+									e.failedConstraint := invariant
+									raise e
+
+								end
+								if coll.size.isLower(prop.lower) then
+									var e : exceptions::ConstraintViolatedInv init exceptions::ConstraintViolatedInv.new
+									e.constraintAppliedTo := self
+									e.message := "Invariant lower bound of ".plus(cd.name).plus("_").plus(prop.name).plus("_").plus(prop.type.toString).plus(" violated on ").plus(self.toString)
+									e.failedConstraint := invariant
+									raise e
+
+								end
+
+							end
+
+						end
+
+					else
+						do
+							extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariant(self, invariant)
+						rescue(error : exceptions::RuntimeError)
+							var e : exceptions::ConstraintViolatedInv init exceptions::ConstraintViolatedInv.new
+							e.constraintAppliedTo := self
+							e.message := "Invariant violated on ".plus(self.toString).plus("runtime error (probably due to another failed constraint or an error in the code of the constraint)")
+							e.failedConstraint := invariant
+							e.nestedException := error
+							raise e
+
+						end
+
+					end
+				end
+
+			/**
+	 * True if the <code>~property</code> of the object has been set
+	 */
+@CompilerIgnore "true"
+			operation isSet(~property : Property) : Boolean is
+				do
+					result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(self, ~property)
+				end
+
+			/** 
+	 * Returns the instances of the given property for this Object.
+	 *
+	 * Example : 
+	 * <pre>
+	 * class A { reference attr : String }
+	 * </pre>
+	 * Using A :
+	 * <pre>
+	 * operation getAProp() is do
+	 *    var a : A
+	 *    var s : String
+	 *    var the_attr : Property init self.getMetaClass.ownedAttribute.one
+	 *    s ?= a.get(the_attr)
+	 * end
+	 * </pre>
+	 * The user has to cast
+	 * the result of this method according to the type and the upper multiplicity
+	 * of this property. If upper multiplicity > 1, than the effective type of the 
+	 * result is a Sequence<ThePropertyName>. Otherwise, the type corresponds to 
+	 * the name of the given Property (i.e the type of the property instance).
+	 */
+@CompilerIgnore "true"
+			operation get(~property : Property) : Object is
+				do
+					result := extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)
+				end
+
+			/**
+	 * Returns a Boolean stating whether the current Object is an instance of the given Class
+	 */
+@CompilerIgnore "true"
+			operation isKindOf(cl : Class) : Boolean is
+				do
+					result := self.getMetaClass.equals(cl)
+				end
+
+			/**
+	 * semantic equality,
+	 * if you wish to test for object identity you need to use the method oid
+	 * ex: x.oid == y.oid
+	 * by default, (ie. if not overloaded), the equals method for class Object implements 
+	 * the most discriminating possible equivalence relation on objects; that is, for any non-null 
+	 * reference values x and y, this method returns true if and only if x and y refer to the same 
+	 * object (x.oid == y.oid has the value true). 
+	 *
+	 * note1: the operator == is mapped to this 
+	 * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it
+	 */
+@CompilerIgnore "true"
+			operation equals(element : Object) : Boolean is
+				do
+					result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(self, element)
+				end
+
+			/**
+	 * Returns the Class object that is the metaclass of current Object
+	 */
+@CompilerIgnore "true"
+			operation getMetaClass() : Class is
+				do
+					result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getMetaClass(self)
+				end
+
+			/**
+	 * Sets the <code>element</code> to the <code>~property</code> of the object 
+	 */
+@CompilerIgnore "true"
+			operation ~set(~property : Property, element : Object) : Void is
+				do
+					if element.isInstanceOf(~property.type) then
+						extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)
+
+					else
+						var v : EnumerationLiteral
+						v ?= element
+						if v.isNotEqual(void).andThen{e | do
+								~property.type.equals(v.~enumeration)
+							end} then
+							extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, v)
+
+						else
+							var e : exceptions::IncompatibleTypeError init exceptions::IncompatibleTypeError.new
+							e.message := "IncompatibleTypeError : Cannot set property ".plus(~property.name).plus(" of object ").plus(self.toString).plus(" to ").plus(element.toString).plus(".")
+							raise e
+
+						end
+
+					end
+				end
+
+			/**
+	 * Returns a Boolean stating whether the Object is currently in a
+	 * frozen state
+	 */
+@CompilerIgnore "true"
+			operation isFrozen() : Boolean is
+				do
+					result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isFrozen(self)
+				end
+
+			/**
+	 * code used in hashtable in order to identify an object in the hashtable keys
+	 * This system is similar to the hashcode used in java. Please refer to java documentation
+	 * for more information about hashcode
+	 */
+@CompilerIgnore "true"
+			operation hashcode() : Integer is
+				do
+					result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode(self)
+				end
+
+			/**
+	 * Runs checking of invariants defined for the metaclass of the Object
+	 * Also check the multiplicity of attributes (except derived and transient attributes)
+	 */
+@CompilerIgnore "true"
+			operation checkInvariants() : Void is
+				do
+					var cd : ClassDefinition init self.getMetaClass.classDefinition
+					if cd.isVoid.~not then
+						cd.allAttribute.each{p | do
+								if p.tag.exists{t | do
+										t.name.equals("ecore.isTransient")
+									end}.~not.~and(p.isDerived.~not) then
+									var v : Object init self.get(p)
+									if v.isVoid.~not.andThen{f | do
+											v.isInstanceOf(standard::Collection<Object>)
+										end} then
+										var c : standard::Collection<Object> init v.asType(standard::Collection<Object>)
+										if p.upper.isNotEqual(1.uminus).~and(c.size.isGreater(p.upper)) then
+											var e : exceptions::ConstraintViolatedInv init exceptions::ConstraintViolatedInv.new
+											e.constraintAppliedTo := self
+											e.message := "Inv upper bound of ".plus(cd.name).plus(".").plus(p.name).plus(" violated on ").plus(self.toString)
+											raise e
+
+										end
+										if c.size.isLower(p.lower) then
+											var e : exceptions::ConstraintViolatedInv init exceptions::ConstraintViolatedInv.new
+											e.constraintAppliedTo := self
+											e.message := "Inv lower bound of ".plus(cd.name).plus(".").plus(p.name).plus(" violated on ").plus(self.toString)
+											raise e
+
+										end
+
+									else
+										if p.lower.equals(1).~and(v.isVoid) then
+											var e : exceptions::ConstraintViolatedInv init exceptions::ConstraintViolatedInv.new
+											e.constraintAppliedTo := self
+											e.message := "Inv lower bound of ".plus(cd.name).plus(".").plus(p.name).plus(" violated on ").plus(self.toString)
+											raise e
+
+										end
+
+									end
+
+								end
+							end}
+
+					end
+					extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)
+				end
+
+			/**
+	 * Checks all the invariants for this object and return a complete diagnostic.
+	 * This also includes the structural constraints associated to the properties.
+	 */
+@CompilerIgnore "true"
+			operation getViolatedConstraints() : exceptions::ConstraintsDiagnostic is
+				do
+					var contraintes : exceptions::ConstraintsDiagnostic init exceptions::ConstraintsDiagnostic.new.initialize
+					var cd : ClassDefinition
+					cd := self.getMetaClass.classDefinition
+					if cd.isVoid.~not then
+						cd.~inv.each{invariant | do
+								checkInvariant(invariant)
+							rescue(e : exceptions::ConstraintViolatedInv)
+								stdio.writeln("    ".plus(e.message))
+								contraintes.add(e)
+
+							end}
+						cd.getCachedAllAttribute.each{prop | do
+								if prop.tag.exists{t | do
+										t.name.equals("ecore.isTransient")
+									end}.~not.~and(prop.isDerived.~not) then
+									var constraint : PropertyConstraint init prop.propertyConstraint
+									if constraint.isVoid then
+										constraint := PropertyConstraint.new
+										if prop.type.isInstanceOf(ParameterizedType) then
+											constraint.name := cd.name.plus("_").plus(prop.name).plus("_").plus(prop.type.asType(ParameterizedType).typeDefinition.name)
+
+										else
+											constraint.name := cd.name.plus("_").plus(prop.name).plus("_").plus(prop.type.toString)
+
+										end
+										constraint.~property := prop
+
+									end
+									do
+										checkInvariant(constraint)
+									rescue(e : exceptions::ConstraintViolatedInv)
+										contraintes.add(e)
+
+									end
+									if prop.isComposite.~and(prop.getViolatedConstraintsMustDrillDown) then
+										var propValue : Object init self.get(prop)
+										if propValue.isVoid.~not then
+											if prop.upper.equals(1) then
+												if propValue.isInstanceOf(EnumerationLiteral).~not then
+													propValue.getViolatedConstraints.setConstraints.each{v | do
+															stdio.writeln("    ".plus(v.message))
+															contraintes.add(v)
+														end}
+
+												end
+
+											else
+												var subObjInstances : standard::Collection<Object>
+												subObjInstances ?= propValue
+												subObjInstances.each{aSubObjInstance | do
+														if aSubObjInstance.isInstanceOf(EnumerationLiteral).~not then
+															aSubObjInstance.getViolatedConstraints.setConstraints.each{v | do
+																	stdio.writeln("    ".plus(v.message))
+																	contraintes.add(v)
+																end}
+
+														end
+													end}
+
+											end
+
+										end
+
+									end
+
+								end
+							end}
+
+					end
+					result := contraintes
+				end
+
+			/**
+	 * Returns a Boolean stating whether the Object is Void
+	 */
+@CompilerIgnore "true"
+			operation isVoid() : Boolean is
+				do
+					result := false
+				end
+
+			/**
+	 * See kermeta::language::structure::Object.equals(Object)
+	 */
+@CompilerIgnore "true"
+			operation isNotEqual(element : Object) : Boolean is
+				do
+					result := equals(element).~not
+				end
+
+			/**
+	 * Returns the unique Oid of the Object
+	 */
+@CompilerIgnore "true"
+			operation oid() : Integer is
+				do
+					result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)
+				end
+
+			/**
+	 * Returns the Object that contains current Object, void if the Object has
+	 * no container
+	 */
+@CompilerIgnore "true"
+			operation container() : Object is
+				do
+					result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)
+				end
+
+			/**
+	 * Freeze the Object
+	 */
+@CompilerIgnore "true"
+			operation freeze() : Void is
+				do
+					extern fr::irisa::triskell::kermeta::runtime::language::Object.freeze(self)
+				end
+
+			/**
+	 * Remove the element set as the <code>~property</code> of the object.
+	 * The <code>isSet(~property)</code> method will then return False
+	 */
+@CompilerIgnore "true"
+			operation unset(~property : Property) : Void is
+				do
+					extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(self, ~property)
+				end
+
+			/**
+	 * Returns a Boolean stating whether the current Object conforms to given Type
+	 * This means: is this object an instance of this type, or is it an instance of its subtype 
+	 */
+@CompilerIgnore "true"
+			operation isInstanceOf(type : Type) : Boolean is
+				do
+					result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type)
+				end
+
+			/**
+	 * Returns the Resource currently containing (directly or indirectly) the Object 
+	 * or void if the object belongs to no Resource
+	 */
+@CompilerIgnore "true"
+			operation containingResource() : persistence::Resource is
+				do
+					result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getContainingResource(self)
+				end
+
+			/**
+	 * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.
+	 */
+@CompilerIgnore "true"
+			operation asType(type : Class) : Object is
+				do
+					if isInstanceOf(type) then
+						result := self
+
+					else
+						raise exceptions::TypeCastError.new
+
+					end
+				end
+
+			/**
+	 * Recursively runs checking of invariants defined for the metaclass of the Object
+	 * and its supertypes
+	 * Ignores derived attributes. 
+	 */
+@CompilerIgnore "true"
+			operation checkAllInvariants() : Void is
+				do
+					if self.isNotEqual(void) then
+						self.checkInvariants
+						var cd : ClassDefinition
+						cd ?= self.getMetaClass.typeDefinition
+						cd.allAttribute.each{prop | do
+								if prop.isComposite.~and(prop.isDerived.~not) then
+									if self.get(prop).isVoid.~not then
+										if self.get(prop).getMetaClass.typeDefinition.asType(ClassDefinition).allSuperTypes.exists{t | do
+												if t.isInstanceOf(ParameterizedType) then
+													t.asType(ParameterizedType).typeDefinition.qualifiedName.equals("kermeta::standard::Collection")
+
+												else
+													false
+
+												end
+											end} then
+											var subObjInstances : standard::Collection<Object>
+											subObjInstances ?= self.get(prop)
+											subObjInstances.each{aSubObjInstances | do
+													aSubObjInstances.checkAllInvariants
+												end}
+
+										else
+											self.get(prop).checkAllInvariants
+
+										end
+
+									end
+
+								end
+							end}
+
+					end
+				end
+
+			/**
+ 	 * Implements Object.toString()
+ 	 * Returns a String of form [qn:oid] where 'qn' is the qualified name of
+ 	 * the object type, and oid the unique ID of the object
+ 	 */
+@CompilerIgnore "true"
+			operation toString() : String is
+				do
+					result := "[".plus(self.getMetaClass.typeDefinition.qualifiedName).plus(":").plus(oid.toString).plus("]")
+				end
+
+		}
+		@ecore "true"
+/**Type of a model, consisting of a set of included type definitions*/
+		class ModelType inherits Type, TypeDefinition
+		{
+			@ecore "true"
+/**To be written*/
+			reference includedTypeDefinition : TypeDefinition[0..*]
+
+			/**
+	 * To be written ##########################################
+	 */
+@CompilerIgnore "true"
+			operation new() : Model is
+				do
+					result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.newObject(self)
+				end
+
+			/**
+	 * To be written ##########################################
+	 */
+@CompilerIgnore "true"
+			operation isModelTypeOf(m : Model) : Boolean is
+				do
+					result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.isModelTypeOf(self, m)
+				end
+
+		}
+		@ecore "true"
+/**Returns the Attributes, References, and derived Properties owned by
+the ClassDefinition of this Class.*/
+		class Class inherits ParameterizedType
+		{
+			@ecore "true"
+/**Returns the Operations owned by the ClassDefinition of this Class.*/
+			property readonly ownedOperation : Operation[0..*]
+				getter is do
+					var cDef : ClassDefinition
+					cDef ?= typeDefinition
+					result := cDef.ownedOperation
+				end
+
+			@ecore "true"
+/**Returns the Classes of which the ClassDefinition of this Class inherits.*/
+			property readonly superClass : set Class[0..*]
+				getter is do
+					var cDef : ClassDefinition
+					cDef ?= typeDefinition
+					var supertypes : standard::OrderedSet<Class> init standard::OrderedSet<Class>.new
+					cDef.superType.each{elem | do
+							if Class.isInstance(elem) then
+								var c : Class
+								c ?= elem
+								supertypes.add(c)
+
+							end
+						end}
+					result := supertypes
+				end
+
+			@ecore "true"
+/**Returns a Boolean stating whether ClassDefinition of this Class is abstract.*/
+			property readonly isAbstract : Boolean
+				getter is do
+					var cDef : ClassDefinition
+					cDef ?= typeDefinition
+					result := cDef.isAbstract
+				end
+
+			@ecore "true"
+/**Returns the name of the ClassDefinition of this Class*/
+			property readonly name : String
+				getter is do
+					result := typeDefinition.name
+				end
+
+			/**
+	 * Returns the ClassDefinition for this class
+	 */
+			property readonly classDefinition : ClassDefinition
+				getter is do
+					result ?= typeDefinition
+				end
+
+			@ecore "true"
+/**Returns the Attributes, References, and derived Properties owned by
+the ClassDefinition of this Class.*/
+			property readonly ownedAttribute : set Property[0..*]
+				getter is do
+					var cDef : ClassDefinition
+					cDef ?= typeDefinition
+					result := cDef.ownedAttribute
+				end
+
+			@CompilerIgnore "true"
+			method clone(objectToClone : Object) : Object from kermeta::language::structure::Type is
+				do
+					result := extern fr::irisa::triskell::kermeta::runtime::language::Class.cloneObject(self, objectToClone)
+				end
+
+			/**
+	 * Instantiates a new occurence for this Class
+	 */
+@CompilerIgnore "true"
+			operation new() : Object is
+				do
+					result := extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)
+				end
+
+			@CompilerIgnore "true"
+			method deepClone(objectToClone : Object) : Object from kermeta::language::structure::Type is
+				do
+					result := extern fr::irisa::triskell::kermeta::runtime::language::Class.deepCloneObject(self, objectToClone)
+				end
+
+			@CompilerIgnore "true"
+			method equals(other : Object) : Boolean from kermeta::language::structure::Object is
+				do
+					result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.equals(self, other)
+				end
+
+			/**
+	 * Returns the String representation of this class. 
+	 *  Note : throws an exception if this class has no classDefinition
+	 *  or if the classDefinition is not well constructed.
+	 */
+			method toString() : String from kermeta::language::structure::Object is
+				do
+					result := self.typeDefinition.name
+				end
+
+		}
+		@ecore "true"
+/**The definition of a class definition :)
+ <pre>class A
+{ 
+  attribute s : String
+}
+  </pre> is a class definition; in :
+<pre>
+main() : A is do end
+</pre>
+A is a <b>Class</b> : it corresponds to the <b>use</b> of the class definition of A*/
+		class ClassDefinition inherits GenericTypeDefinition, TypeContainer
+		{
+			@ecore "true"
+/**Operations owned by this ClassDefinition.*/
+			attribute ownedOperation : Operation[0..*]#owningClass
+
+			@ecore "true"
+/**Boolean stating whether the ClassDefinition is abstract (which means that
+no instance can be allocated)*/
+			attribute isAbstract : Boolean
+
+			/**
+	 * Data structure for getCachedAllAttribute
+	 */
+			reference _allAttributeCache : standard::Set<Property>
+
+			/**
+	 * Data structure for getCachedAllSuperTypes
+	 */
+			reference _allSuperTypesCache : standard::Set<Type>
+
+			@ecore "true"
+/**Classes from which this ClassDefinition inherits.*/
+			reference superType : Type[0..*]
+
+			@ecore "true"
+/**Invariants defined for this ClassDefinition*/
+			attribute ~inv : Constraint[0..*]#invOwner
+
+			/**
+	 * Returns all the Operations of this ClassDefinition
+	 * including the inherited ones
+	 */
+			property readonly allOperation : set Operation[0..*]
+				getter is do
+					result := standard::Set<Operation>.new
+					result.addAll(self.ownedOperation)
+					self.superType.each{t | do
+							if Class.isInstance(t) then
+								var c : Class
+								c ?= t
+								var cDef : ClassDefinition
+								cDef ?= c.typeDefinition
+								cDef.allOperation.each{p | do
+										result.add(p)
+									end}
+
+							end
+						end}
+				end
+
+			/**
+	 * Returns all the Attributes, References, derived Properties of this 
+	 * ClassDefinition including the inherited ones
+	 */
+			property readonly allAttribute : set Property[0..*]
+				getter is do
+					result := standard::Set<Property>.new
+					result.addAll(self.ownedAttribute)
+					self.superType.each{t | do
+							if Class.isInstance(t) then
+								var c : Class
+								c ?= t
+								var cDef : ClassDefinition
+								cDef ?= c.typeDefinition
+								cDef.allAttribute.each{p | do
+										result.add(p)
+									end}
+
+							end
+						end}
+				end
+
+			@ecore "true"
+/**Attributes, References, and derived Properties owned by this ClassDefinition.*/
+			attribute ownedAttribute : Property[0..*]#owningClass
+
+			/**
+	 * returns a cached version of the derived property allAttribute
+	 * It is intended to be used to optimize access on the reflexivity, 
+	 * do not use this cache if you are modifying the ClassDefinition
+	 */
+			operation getCachedAllAttribute() : standard::Set<Property> is
+				do
+					if _allAttributeCache.isVoid then
+						_allAttributeCache := allAttribute
+
+					end
+					result := _allAttributeCache
+				end
+
+			/**
+	 * returns a cached version of the derived property allSuperTypes
+	 * It is intended to be used to optimize access on the reflexivity, 
+	 * do not use this cache if you are modifying the ClassDefinition
+	 */
+			operation getCachedAllSuperTypes() : standard::Set<Type> is
+				do
+					if _allSuperTypesCache.isVoid then
+						_allSuperTypesCache := allSuperTypes
+
+					end
+					result := _allSuperTypesCache
+				end
+
+			/**
+	 * Returns all the types directly and indirectly inherited by this ClasDefinition 
+	 */
+			operation allSuperTypes() : standard::Set<Type> is
+				do
+					var allSuperClasses : standard::Set<Type> init standard::Set<Type>.new
+					var superClasses : standard::Set<Type> init standard::Set<Type>.new
+					superClasses.addAll(self.superType)
+					from superClasses.isEmpty.~not
+					until superClasses.isEmpty
+					loop
+						allSuperClasses.addAll(superClasses)
+						var temp : standard::Set<Type> init standard::Set<Type>.new
+						superClasses.each{s | do
+								if s.isInstanceOf(ParameterizedType) then
+									if s.asType(ParameterizedType).typeDefinition.isInstanceOf(ClassDefinition) then
+										temp.addAll(s.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).superType)
+
+									end
+
+								end
+							end}
+						superClasses.clear
+						superClasses.addAll(temp)
+					end
+					result := allSuperClasses
+				end
+
+		}
+		@ecore "true"
+/**Is the holder of a set of model elements (Object) that are compatible with the ModelType that has 
+instantiated this Model.*/
+		class Model
+		{
+			@ecore "true"
+/**Contents of this model...*/
+			reference readonly contents : Object[0..*]
+
+			/**
+ 	 * Add the Object if it is copmpatible with the ModelDefinition. Other objects are ignored.
+ 	 * Returns the object if it has been added (One can check that some element have been ignored or not)
+ 	 * return Void if not added
+ 	 */
+@CompilerIgnore "true"
+			operation addCompatible(objectToAdd : Object) : Object is
+				do
+					contents
+					result := extern fr::irisa::triskell::kermeta::runtime::language::Model.addCompatible(self, objectToAdd)
+				end
+
+			/**
+ 	 * Remove an object from the model
+ 	 */
+@CompilerIgnore "true"
+			operation remove(obj : Object) : Void is
+				do
+					extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(contents, obj)
+				end
+
+			/**
+ 	 * Add all the Object of the collection that are copmpatible with the ModelDefinition. Other objects are ignored.
+ 	 * Returns the list of Object that have been added (One can check that some element have been ignored or not)
+ 	 */
+@CompilerIgnore "true"
+			operation addAllCompatible(objectsToAdd : standard::Collection<Object>) : standard::Collection<Object> is
+				do
+					result := standard::Set<Object>.new
+					objectsToAdd.each{obj | do
+							var addedObject : Object init addCompatible(obj)
+							if addedObject.isVoid.~not then
+								result.add(obj)
+
+							end
+						end}
+				end
+
+			/**
+ 	 * Add an object to the model. According to the ModelType, the typechecker will statically verify if the object can be added or not
+ 	 */
+@CompilerIgnore "true"
+			operation add(obj : Object) : Void is
+				do
+					contents
+					extern fr::irisa::triskell::kermeta::runtime::language::Model.add(self, obj)
+				end
+
+			/**
+ 	 * Returns a set of all the elements of the model that are instance of the given Type
+ 	 */
+			operation filter(typeName : Type) : standard::Set<Object> is
+				do
+					result := contents.~select{o | do
+							typeName.isInstance(o)
+						end}.asSet
+				end
+
+		}
+		@ecore "true"
+/**Alias to kermeta::standard::Integer*/
+/**Base class definition for the <b>use</b> of a type.*/
+		class Type
+		{
+			@ecore "true"
+/**Owning TypeContainer, if any*/
+			reference typeContainer : TypeContainer#containedType
+
+			/**
+	 * Returns a copy of passed Object built by recursively copying attribute
+	 * properties, and referencing original reference properties values
+	 */
+			operation clone(objectToClone : Object) : Object is
+				abstract
+
+			/**
+	 * Returns a copy of passed Object built by recursively copying values of
+	 * all properties, no matter the property kind
+	 */
+			operation deepClone(objectToClone : Object) : Object is
+				abstract
+
+			/**
+ 	 * Implements Type.isSuperTypeOf(Type)
+ 	 * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)
+ 	 * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers
+ 	 * to extend it.
+ 	 */
+@CompilerIgnore "true"
+			operation isSuperTypeOf(object : Type) : Boolean is
+				do
+					result ?= extern fr::irisa::triskell::kermeta::runtime::language::Type.hasSubType(self, object)
+				end
+
+			/**
+	 * Implements Type.isInstance(Object)
+	 */
+@CompilerIgnore "true"
+			operation isInstance(element : Object) : Boolean is
+				do
+					result := element.isInstanceOf(self)
+				end
+
+			/**
+ 	 * Implements Type.isSubTypeOf(Type)
+ 	 * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)
+ 	 * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers
+ 	 * to extend it.
+ 	 */
+@CompilerIgnore "true"
+			operation isSubTypeOf(object : Type) : Boolean is
+				do
+					result := object.isSuperTypeOf(self)
+				end
+
+		}
+		@ecore "true"
+/**Any element that contain a  name (example : Operation, Property) inherit this
+class.*/
+		class NamedElement
+		{
+			@ecore "true"
+/**Name of this named element*/
+			attribute name : String[1..1]
+
+			/**
+	 * Returns the qualified name of this named element. Qualified name is 
+	 * the list of the names of the packages hierarchically ordered, delimited by
+	 * a "::", followed by the name of this named element.
+	 */
+@CompilerIgnore "true"
+			operation qualifiedName() : String is
+				do
+					var elem : NamedElement init self
+					result := self.name
+					if elem.container.isInstanceOf(NamedElement) then
+						from elem ?= elem.container
+						until elem.equals(void)
+						loop
+							result := elem.name.plus("::").plus(result)
+							if elem.container.isInstanceOf(NamedElement) then
+								elem ?= elem.container
+
+							else
+								elem := void
+
+							end
+						end
+
+					end
+				end
+
+		}
+		@ecore "true"
+/**Definition for Enumeration*/
+		class Enumeration inherits DataType
+		{
+			@ecore "true"
+/**Owned items in an Enumeration*/
+			attribute ownedLiteral : EnumerationLiteral[0..*]#~enumeration
+
+			/**
+	 * Implements kermeta::language::structure::Type.clone(Object)
+	 */
+@CompilerIgnore "true"
+			method clone(objectToClone : Object) : Object from kermeta::language::structure::Type is
+				do
+					raise "NOT IMPLEMENTED"
+				end
+
+		}
+		@CompilerIgnore "true"
+@ecore "true"
+/**Type used to define the use of lambda expressions.
+ Uses :
+ <pre>operation forAll(func : <G -> Boolean>) : Boolean is do
+     var test : Boolean init true
+     from var it : Iterator<G> init iterator
+     until it.isOff
+     loop
+        test := test and func(it.next)
+     end
+     result := test
+ end
+ </pre>
+ *
+ In the above example, &lt;G -> Boolean&gt; is a function type f(G) -&gt; 
+ Boolean, with a parameter of type G and a return type of type Boolean
+ The operation <code>forAll</code> takes a lambda expression as parameter.*/
+		class FunctionType inherits TypeContainer, Type
+		{
+			/**
+	 * Right part of the FunctionType cannot be a ProductType
+	 */
+			inv resultType_must_not_be_a_ProductType is
+				right.isKindOf(ProductType).~not
+			@ecore "true"
+/**Parameters of the function (a ProductType for multiple parameters)*/
+			reference left : Type
+
+			@ecore "true"
+/**Result type of the function*/
+			reference right : Type
+
+		}
+		alias String : standard::String;
+		alias Boolean : standard::Boolean;
+		@ecore "true"
+/**Every one knows what an operation is.*/
+		class Operation inherits MultiplicityElement
+		{
+			@ecore "true"
+/**TypeParameters of the Operation*/
+			reference typeParameter : TypeVariable[0..*]
+
+			@ecore "true"
+/**Body of the Operation, expressed as a KerMeta expression*/
+			attribute body : language::behavior::Expression
+
+			@ecore "true"
+/**Post-conditions of the Operation*/
+			attribute ~post : Constraint[0..*]#postOwner
+
+			@ecore "true"
+/**Boolean stating whether the Operation is abstract*/
+			attribute isAbstract : Boolean
+
+			@ecore "true"
+/**Parameters of the Operation*/
+			attribute ownedParameter : Parameter[0..*]#~operation
+
+			@ecore "true"
+/**Exceptions raised by the Operation*/
+			reference raisedException : Type[0..*]
+
+			@ecore "true"
+/**Pre-conditions of the Operation*/
+			attribute ~pre : Constraint[0..*]#preOwner
+
+			@ecore "true"
+/**Super-operation of the Operation, if any*/
+			reference superOperation : Operation
+
+			@ecore "true"
+/**ClassDefinition owning the Operation*/
+			reference owningClass : ClassDefinition#ownedOperation
+
+		}
+		@ecore "true"
+/**Class representing the property definition. Kermeta<->Ecore equivalence:
+ - Property with isComposite == true or with type is a base type (String, Integer, Boolean)  : EAttribute
+ - Property with isComposite == false : EReference*/
+		class Property inherits MultiplicityElement
+		{
+			attribute getViolatedConstraintsMustDrillDownCache : Boolean
+
+			@ecore "true"
+/**Opposite Property of the Property, void if the Property has no opposite*/
+			reference opposite : Property
+
+			@ecore "true"
+/**If True, the value of the property is not stored but computed from other properties*/
+			attribute isDerived : Boolean
+
+			@ecore "true"
+/**To be written*/
+			attribute getterBody : language::behavior::Expression
+
+			@ecore "true"
+/**To be written*/
+			attribute setterBody : language::behavior::Expression
+
+			@ecore "true"
+/**Boolean stating wether the setter is abstract.*/
+			attribute isSetterAbstract : Boolean
+
+			@ecore "true"
+/**ClassDefinition that owns the Property*/
+			reference owningClass : ClassDefinition#ownedAttribute
+
+			@ecore "true"
+/**Boolean stating wether the getter is abstract.*/
+			attribute isGetterAbstract : Boolean
+
+			@ecore "true"
+/**Boolean stating whether the Property has a containment role*/
+			attribute isComposite : Boolean
+
+			@ecore "true"
+/**To be written*/
+			attribute default : String
+
+			@ecore "true"
+/**Boolean stating whether the Property is read-only*/
+			attribute isReadOnly : Boolean
+
+			/** special constraint that apply to this Property
+     * Used by the getViolatedConstraints
+     */
+			attribute propertyConstraint : PropertyConstraint#~property
+
+			@ecore "true"
+/**Boolean stating whether the property allows to identify its containing Object*/
+			attribute isID : Boolean
+
+			operation getViolatedConstraintsMustDrillDown() : Boolean is
+				do
+					if getViolatedConstraintsMustDrillDownCache.isVoid then
+						getViolatedConstraintsMustDrillDownCache := standard::ValueType.isSuperTypeOf(self.type).~not
+
+					end
+					result := getViolatedConstraintsMustDrillDownCache
+				end
+
+		}
+		@ecore "true"
+/**Phantom class : EMF reflexive editors need that any element of a metamodel 
+has a direct or indirect containment relationship with the root model element of
+the metamodel. This class resolves this technical requirement.*/
+		abstract class TypeContainer
+		{
+			@ecore "true"
+/**Contained types*/
+			attribute containedType : Type[0..*]#typeContainer
+
+		}
+		@ecore "true"
+/**Item definition for enumeration*/
+		class EnumerationLiteral inherits NamedElement
+		{
+			@ecore "true"
+@ecore.isTransient "true"
+/**Owning Enumeration*/
+			reference ~enumeration : Enumeration#ownedLiteral
+
+		}
+		@ecore "true"
+/**Definition of a binding between a TypeVariable and a Type*/
+		class TypeVariableBinding inherits TypeContainer
+		{
+			@ecore "true"
+/**Assigned Type*/
+			reference type : Type[1..1]
+
+			@ecore "true"
+/**TypeVariable*/
+			reference variable : TypeVariable[1..1]
+
+		}
+		alias Integer : standard::Integer;
+		@ecore "true"
+/** Model elements with a multiplicity [lower..upper] inherit this class*/
+		class MultiplicityElement inherits TypedElement
+		{
+			@ecore "true"
+/**Boolean stating whether the element is ordered*/
+			attribute isOrdered : Boolean
+
+			@ecore "true"
+/**Max cardinality of the element, '-1' for '*'*/
+			attribute upper : UnlimitedNatural
+
+			@ecore "true"
+/**Min cardinality of the element*/
+			attribute lower : Integer
+
+			@ecore "true"
+/**Boolean stating whether duplicated elements are allowed*/
+			attribute isUnique : Boolean
+
+		}
+		alias UnlimitedNatural : standard::Integer;
+		@ecore "true"
+/**Abstraction of the notion of typed element : each element 
+that is typed inherits this class.*/
+		abstract class TypedElement inherits TypeContainer, NamedElement
+		{
+			@ecore "true"
+/**Type of the model element*/
+			reference type : Type
+
+		}
+		@ecore "true"
+/**This boolean allows to tell if this Type definition is an aspect or not
+If it is an aspect, then at runtime, its definition will be merged with the definition of another
+TypeDefinition that has exactly the same qualified name*/
+/**Abstraction for type definitions (ClassDefinition, ModelTypeDefinition, DataType inherit
+this class)*/
+		class TypeDefinition inherits NamedElement
+		{
+			@ecore "true"
+			attribute isAspect : Boolean
+
+		}
+		@ecore "true"
+/**Special type definition for Enumeration, PrimitiveType*/
+		abstract class DataType inherits Type, TypeDefinition
+		{
+		}
+		@ecore "true"
+/**Package in kermeta. Each kermeta model must have a root package. */
+		class Package inherits NamedElement, TypeDefinitionContainer
+		{
+			@ecore "true"
+@ecore.isTransient "true"
+/**Owning Package, if any*/
+			reference nestingPackage : Package#nestedPackage
+
+			@ecore "true"
+/**Nested Packages contained by the Package*/
+			attribute nestedPackage : Package[0..*]#nestingPackage
+
+			@ecore "true"
+/**Uri of the Package*/
+			attribute uri : String
+
+		}
+		@ecore "true"
+/**Definition for operation parameter*/
+		class Parameter inherits MultiplicityElement
+		{
+			@ecore "true"
+@ecore.isTransient "true"
+/**Owning operation*/
+			reference ~operation : Operation#ownedParameter
+
+		}
+		@ecore "true"
+/**The class definition for kermeta aliases. Above statement defines a primitive
+type called MyString, which instanceType is <code>kermeta::standard::String</code>
+<pre>alias MyString : kermeta::standard::String</pre>. Another example could be: <code>root::apackage::AClass</code>
+<pre>alias MyClass : root::apackage::AClass</pre>, thus a primitive type may be not a subtype of ValueType (ValueType is a concept from the Kermeta framework).*/
+		class PrimitiveType inherits DataType, TypeContainer
+		{
+			@ecore "true"
+/**The type the primitive type is linked with*/
+			reference instanceType : Type
+
+		}
+		@ecore "true"
+/**Tag is intended to be used to add documentation on a  model element,
+or add some textual information that cannot be expressed with any
+model element definition.*/
+		class Tag
+		{
+			@ecore "true"
+/**Name of the Tag*/
+			attribute name : String
+
+			@ecore "true"
+/**String value of the Tag*/
+			attribute ~value : String
+
+			@ecore "true"
+/**Objects to which the Tag is attached to*/
+			reference object : Object[1..*]#tag
+
+		}
+		@ecore "true"
+/**Constraint is part of a contract implementation in a Class definition or an operation.
+Three kinds of constraints are available : pre, post, and inv (invariant constraint)*/
+		class Constraint inherits NamedElement
+		{
+			@ecore "true"
+/**Body of the constraint, expressed as a KerMeta expression*/
+			attribute body : language::behavior::Expression[1..1]
+
+			@ecore "true"
+/**Owning Operation if Constraint corresponds to pre-condition*/
+			reference preOwner : Operation#~pre
+
+			@ecore "true"
+/**Type of the Constraint (precond/postcond/inv)*/
+			attribute stereotype : ConstraintType
+
+			@ecore "true"
+/**Owning Operation if Constraint corresponds to post-condition*/
+			reference postOwner : Operation#~post
+
+			@ecore "true"
+/**Language in which the constraint is expressed*/
+			attribute language : ConstraintLanguage
+
+			@ecore "true"
+/**Owning ClassDefinition if Constraint corresponds to invariant*/
+			reference invOwner : ClassDefinition#~inv
+
+		}
+		enumeration ConstraintType
+		{
+			~inv;
+			~pre;
+			~post;
+		}
+		enumeration ConstraintLanguage
+		{
+			kermeta;
+			ocl;
+		}
+		@ecore "true"
+/**Abstracts the definition of generic type definitions (i.e. type definitions that
+can be parameterized), namely, for ClassDefinition and ModelTypeDefinition.*/
+		abstract class GenericTypeDefinition inherits TypeDefinition
+		{
+			@ecore "true"
+/**Type variables defined for the GenericTypeDefinition*/
+			attribute typeParameter : TypeVariable[0..*]
+
+		}
+		@ecore "true"
+/**Abstraction for Parameterized types, namely, Class and ModelType*/
+		abstract class ParameterizedType inherits Type
+		{
+			@ecore "true"
+/**Bindings between type variables and provided types */
+			attribute typeParamBinding : TypeVariableBinding[0..*]
+
+			@ecore "true"
+/**Definition of the Type*/
+			reference typeDefinition : GenericTypeDefinition[1..1]
+
+			@ecore "true"
+/**To be written*/
+			attribute virtualTypeBinding : TypeVariableBinding[0..*]
+
+		}
+		@ecore "true"
+/**Definition of a type variable for generic types :  
+in class definition <pre>class AClass<X,Y> {}</pre>, X and Y are type variables.*/
+		abstract class TypeVariable inherits TypeContainer, Type, NamedElement
+		{
+			@ecore "true"
+/**Reference to the supertype, if any*/
+			reference supertype : Type
+
+		}
+		@ecore "true"
+/**To be written*/
+		class ObjectTypeVariable inherits TypeVariable
+		{
+		}
+		@ecore "true"
+/**To be written*/
+		class ModelTypeVariable inherits TypeVariable
+		{
+			@ecore "true"
+/**To be written*/
+			attribute virtualType : VirtualType[0..*]#modelType
+
+		}
+		@ecore "true"
+/**To be written*/
+		class VirtualType inherits ObjectTypeVariable
+		{
+			@ecore "true"
+/**To be written*/
+			reference modelType : ModelTypeVariable[1..1]#virtualType
+
+			@ecore "true"
+/**To be written*/
+			attribute typeParamBinding : TypeVariableBinding[0..*]
+
+			@ecore "true"
+/**To be written*/
+			reference classDefinition : ClassDefinition[1..1]
+
+		}
+		@ecore "true"
+/**The modeling unit is the root of any kermeta model. It contains packages, requires and usings.
+It also reference others modeling unit.*/
+		class ModelingUnit
+		{
+			@ecore "true"
+/**Set of "using" statement associated with this ModelingUnit. Ie. list of "syntatic shortcut"
+that can be used within this unit.*/
+			attribute usings : Using[0..*]
+
+			@ecore "true"
+/**root packages contained by this ModelingUnit*/
+			attribute packages : Package[0..*]
+
+			@ecore "true"
+/**list of filters that apply to this modeling unit.
+This means that if the same unit was loaded without this filters, it would have loaded more content
+only element whose qualified name begins with one of these filter will be loaded in the unit*/
+			attribute includeFilters : Filter[0..*]
+
+			@ecore "true"
+/**list of filters that apply to this modeling unit.
+This means that if the same unit was loaded without this filters, it would have loaded more content
+element whose qualified name begins with one of these filter will NOT be loaded in the unit*/
+			attribute excludeFilters : Filter[0..*]
+
+			@ecore "true"
+/**To be written*/
+			reference referencedModelingUnits : ModelingUnit[0..*]
+
+			@ecore "true"
+/**Set of "require" statements associated with this ModelingUnit. Ie. list of the other
+files required to run this unit*/
+			attribute requires : Require[0..*]
+
+		}
+		@ecore "true"
+/**To be written*/
+		class Require
+		{
+			@ecore "true"
+/**To be written*/
+			attribute uri : String
+
+		}
+		@ecore "true"
+/**To be written*/
+		class Using
+		{
+			@ecore "true"
+/**To be written*/
+			attribute qualifiedName : String
+
+		}
+		@ecore "true"
+/**Filter is the class that represent a filter on a ModelingUnit.
+the qualifiedName represent the beginning of the matched names*/
+		class Filter
+		{
+			@ecore "true"
+/**To be written*/
+			attribute qualifiedName : String
+
+		}
+		@ecore "true"
+/**Type corresponding to a set of Types
+Only used in the context of FunctionType*/
+		class ProductType inherits TypeContainer, Type
+		{
+			@ecore "true"
+/**Types */
+			reference type : seq Type[0..*]
+
+		}
+		@ecore "true"
+/**Class definition for the <pre>Void</pre> type*/
+		class VoidType inherits Type
+		{
+		}
+		@ecore "true"
+/**Abstraction of the notion of containment for type definitions. Now, kermeta metamodel contains one container
+element, that is Package. In a later release, ModelTypeDefinition will be the main container for type and
+package definition.*/
+		abstract class TypeDefinitionContainer inherits NamedElement
+		{
+			@ecore "true"
+/**Contained TypeDefinitions*/
+			attribute ownedTypeDefinition : TypeDefinition[0..*]
+
+		}
+		class PropertyConstraint inherits Constraint
+		{
+			/**
+	 * The property that is checked by this constraint
+	 * Typically, it will check the lower and upper bounds
+	 */
+			reference ~property : Property#propertyConstraint
+
+		}
+	}
+
+	@ecore "true"
+package behavior
+	{
+		@ecore "true"
+/**Any callable expression inherits this class, e.g : 
+  - variable call
+  - feature call ( <code>a.b</code> : b is a feature call)
+
+<img alt=""  height="90%" width="90%"  src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png" />*/
+		abstract class CallExpression inherits Expression
+		{
+			@ecore "true"
+/**To be written*/
+			reference staticTypeVariableBindings : language::structure::Type[0..*]
+
+			@ecore "true"
+/**A call must be named*/
+			attribute name : language::structure::String
+
+			@ecore "true"
+/**Kermeta calls can embedd expressions as parameters*/
+			attribute parameters : Expression[0..*]
+
+		}
+		@ecore "true"
+/**The base class for every entity used to define a behavior in operation body.*/
+		abstract class Expression inherits language::structure::TypeContainer
+		{
+			@ecore "true"
+/**Type of the Expression (set by type checking)*/
+			reference staticType : language::structure::Type
+
+		}
+		@ecore "true"
+/**We call "CallVariable" the use of a variable in a statement.
+in <code>i := j + 1</code>, i and j are 2 CallVariables.*/
+		class CallVariable inherits CallExpression
+		{
+			@ecore "true"
+/**Tells whether this CallVariable represents a call to @pre in a postcondition*/
+			attribute isAtpre : language::structure::Boolean
+
+		}
+		@ecore "true"
+/**CallFeature is the model element that refers to the use of a feature, i.e either 
+a property or an operation in a statement. In <code>stdio.writeln("hello")</code>, 
+<code>writeln</code> is a CallFeature.*/
+		class CallFeature inherits CallExpression
+		{
+			@ecore "true"
+/**The method which will be executed (operation case)
+and the result value passed to the caller*/
+			reference staticOperation : language::structure::Operation
+
+			@ecore "true"
+/**Tells whether this CallFeature represents a call to @pre in a postcondition*/
+			attribute isAtpre : language::structure::Boolean
+
+			@ecore "true"
+/**Target Expression (the owner of the feature)*/
+			attribute target : Expression
+
+			@ecore "true"
+/**To be written*/
+			reference staticEnumLiteral : language::structure::EnumerationLiteral
+
+			@ecore "true"
+/**The object which will be returned (property case)*/
+			reference staticProperty : language::structure::Property
+
+		}
+		@ecore "true"
+/**This class represents a call to the operataion in the parent class
+	In the following example, the type of super(element) is CallSuperOperation:
+
+class ParentClass {
+  operation op(element : Integer) : Integer is do
+      result := element + 1
+  end
+}
+ *
+class ChildClass {
+  method op(element : Integer) : Integer is do
+      result := super(element)
+  end
+}*/
+		class CallSuperOperation inherits CallExpression
+		{
+		}
+		@ecore "true"
+/**This class represents a call to the special internal variable "result" that is used to store the return value of any operation */
+		class CallResult inherits CallVariable
+		{
+		}
+		@ecore "true"
+/**CallValue refers to the use of the <code>value</code> reserved keyword. This keyword is
+only used in the body of the <code>setter</code> part of derived properties.*/
+		class CallValue inherits CallExpression
+		{
+		}
+		@ecore "true"
+/**Assignment is the model-element representation of the assignment statement <code>x := y</code>
+<img alt="" src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png"/>*/
+		class Assignment inherits Expression
+		{
+			@ecore "true"
+/**Target of the assignment, as a CallExpression*/
+			attribute target : CallExpression[1..1]
+
+			@ecore "true"
+/**Value to be assigned, as a KerMeta expression*/
+			attribute ~value : Expression[1..1]
+
+			@ecore "true"
+/**Boolean stating whether current assignment corresponds to a cast operation */
+			attribute isCast : language::structure::Boolean
+
+		}
+		@ecore "true"
+/**Block is the model-element representation for the <code>do...end</code> block.*/
+		class Block inherits Expression
+		{
+			@ecore "true"
+/**List of statements composing the block*/
+			attribute statement : Expression[0..*]
+
+			@ecore "true"
+/**List of rescues defined for the block*/
+			attribute rescueBlock : Rescue[0..*]
+
+		}
+		@ecore "true"
+/**Condition is the model-element representation for the <code></code> */
+		class Conditional inherits Expression
+		{
+			@ecore "true"
+/**Then part of the conditional statement*/
+			attribute thenBody : Expression[1..1]
+
+			@ecore "true"
+/**Condition expression of conditional statement*/
+			attribute condition : Expression[1..1]
+
+			@ecore "true"
+/**Optional else part of the conditional statement*/
+			attribute elseBody : Expression
+
+		}
+		@ecore "true"
+/**Refers to raise exception block*/
+		class Raise inherits Expression
+		{
+			@ecore "true"
+/**To be written #######################*/
+			attribute expression : Expression[1..1]
+
+		}
+		@ecore "true"
+/**Refers to rescue exception block*/
+		class Rescue
+		{
+			@ecore "true"
+/**Name of the catched exception*/
+			attribute exceptionName : language::structure::String
+
+			@ecore "true"
+/**Body of the rescue block, specified as a KerMeta expression*/
+			attribute body : Expression[1..*]
+
+			@ecore "true"
+/**Type of the cathed exception*/
+			attribute exceptionType : TypeReference[1..1]
+
+		}
+		@ecore "true"
+/**TypeReference refers to the type used in a variable declaration*/
+		class TypeReference inherits language::structure::MultiplicityElement
+		{
+		}
+		@ecore "true"
+/**Literal refers to String values, Integer values, etc.*/
+		abstract class Literal inherits Expression
+		{
+		}
+		@ecore "true"
+/**As suggested by its name, this class represents an expression that do nothing. Like a "nop"*/
+		class EmptyExpression inherits Expression
+		{
+		}
+		@ecore "true"
+/**This class represent a call to an extern Java operation. 
+This Java operation must be static and have at least one RuntimeO*/
+		class JavaStaticCall inherits Expression
+		{
+			@ecore "true"
+/**Name of the Java method to be launched in the identified Java class*/
+			attribute jmethod : language::structure::String
+
+			@ecore "true"
+/**Parameters of the Java static call provided as KerMeta expressions*/
+			attribute parameters : Expression[0..*]
+
+			@ecore "true"
+/**Qualified name of the targeted Java class*/
+			attribute jclass : language::structure::String
+
+		}
+		@ecore "true"
+/**Refers to lambda expression definition (<code>function { e | stdio.writeln(e.toString) }</code>)
+<img alt="" src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_lambda_expressions.png"/>*/
+		class LambdaExpression inherits Expression
+		{
+			@ecore "true"
+/**Body of the lambda expression providede as a KerMeta expression*/
+			attribute body : Expression[1..1]
+
+			@ecore "true"
+/**Parameters of the lambda expression*/
+			attribute parameters : LambdaParameter[0..*]
+
+		}
+		@ecore "true"
+/**Refers to parameter definition in lambda expression*/
+		class LambdaParameter
+		{
+			@ecore "true"
+/**Name of the lambda parameter*/
+			attribute name : language::structure::String
+
+			@ecore "true"
+/**To be written ################################*/
+			attribute type : TypeReference[1..1]
+
+		}
+		@ecore "true"
+/**This expression is a literal representing an Integer value*/
+		class IntegerLiteral inherits Literal
+		{
+			@ecore "true"
+/**The concrete value represented by this literal*/
+			attribute ~value : language::structure::Integer
+
+		}
+		@ecore "true"
+/**This expression is a literal representing a String value, typically : "my string"*/
+		class StringLiteral inherits Literal
+		{
+			@ecore "true"
+/**The concrete value represented by this literal*/
+			attribute ~value : language::structure::String
+
+		}
+		@ecore "true"
+/**This expression is a literal representing a Boolean value, typically : true or false keyword*/
+		class BooleanLiteral inherits Literal
+		{
+			@ecore "true"
+/**The concrete value represented by this literal*/
+			attribute ~value : language::structure::Boolean
+
+		}
+		@ecore "true"
+/**This expression is a literal representing a Type.
+for example, in 
+   Integer.new
+Integer is a type literal representing the type kermeta::standard::Integer*/
+		class TypeLiteral inherits Literal
+		{
+			@ecore "true"
+/**The type refered by this literal*/
+			attribute typeref : TypeReference[1..1]
+
+		}
+		@ecore "true"
+/**This class is used to represent the special expression void*/
+		class VoidLiteral inherits Literal
+		{
+		}
+		@ecore "true"
+/**Loop refers to <code>from var x : X init a until booleanCondition loop ... end</code>*/
+		class Loop inherits Expression
+		{
+			@ecore "true"
+/**Initialization expression for the loop*/
+			attribute initialization : Expression
+
+			@ecore "true"
+/**Body of the loop*/
+			attribute body : Expression
+
+			@ecore "true"
+/**Stop condition of the loop, is interpreted as a Bollean value*/
+			attribute stopCondition : Expression[1..1]
+
+		}
+		@ecore "true"
+/**Refers to <code>self</code> use*/
+		class SelfExpression inherits Expression
+		{
+		}
+		@ecore "true"
+/**refers to variable declaration <code>var x : X init a</code>
+<img alt="" src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png"/>*/
+		class VariableDecl inherits Expression
+		{
+			@ecore "true"
+/**Initialization expression for the variable
+Default value is <code>void</code> ????*/
+			attribute initialization : Expression
+
+			@ecore "true"
+/**Type of the declared variable*/
+			attribute type : TypeReference[1..1]
+
+			@ecore "true"
+/**Initialization expression for the variable
+Default value is <code>void</code> ????*/
+			attribute identifier : language::structure::String
+
+		}
+	}
+
+}
+
+/** 
+ * Contains the definition of a Kermeta exception and a few basic exceptions.
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png"/>
+ */
+package exceptions
+{
+	@CompilerIgnore "true"
+	class ConstraintsDiagnostic
+	{
+		attribute setConstraints : standard::Bag<ConstraintViolatedInv>
+
+		operation prettyPrint() : Void is
+			do
+				setConstraints.collect{constraint | do
+						constraint.constraintAppliedTo.containingResource.asType(persistence::EMFResource)
+					end}.asSet.each{resource | do
+						resource.clean
+					end}
+				setConstraints.each{c | do
+						var resource : persistence::EMFResource init c.constraintAppliedTo.containingResource.asType(persistence::EMFResource)
+						stdio.writeln(c.message.plus(" in file ").plus(resource.uri))
+						resource.mark(c.message)
+					end}
+			end
+
+		operation add(cons : ConstraintViolatedInv) : standard::~Void is
+			do
+				setConstraints.add(cons)
+			end
+
+		operation initialize() : ConstraintsDiagnostic is
+			do
+				setConstraints := standard::Bag<ConstraintViolatedInv>.new
+				result := self
+			end
+
+	}
+	/**
+ * Generic exceptions
+ * The main class from which all the exception inherit
+ */
+@CompilerIgnore "true"
+	class Exception
+	{
+		/** The message attached to the exception     */
+		attribute message : standard::String
+
+		/** Any nested exception     */
+		attribute nestedException : Exception
+
+		/**
+     * The stack trace as a String
+     * Filled by the interpreted when the exception is raised
+     */
+		attribute stackTrace : standard::String
+
+	}
+	/** Exception for interpreter exceptions */
+@CompilerIgnore "true"
+	class RuntimeError inherits Exception
+	{
+		/** The code that raised the exception */
+		attribute expression : language::behavior::Expression
+
+	}
+	/** Occurs when a feature is called on void */
+@CompilerIgnore "true"
+	class CallOnVoidTarget inherits RuntimeError
+	{
+	}
+	/**
+ * Occurs when a cast (Object::asType operation) fails
+ */
+@CompilerIgnore "true"
+	class TypeCastError inherits RuntimeError
+	{
+	}
+	/**
+ * Use this exception when you want to forbid the access to an unimplemented operation 
+ * and invite to implement it
+ */
+@CompilerIgnore "true"
+	class NotImplementedException inherits RuntimeError
+	{
+	}
+	/** 
+ * Use this exception when user tries to add an element to a property which type is collection
+ * which has an upper bound != -1 ( ie *)
+ */
+@CompilerIgnore "true"
+	class UpperBoundReachedError inherits RuntimeError
+	{
+	}
+	/**
+ * Creation on an abstract class. Usually this is detected by the type-checker. The only
+ * case where this happens is when instantiating a type variable, whose bound type turns
+ * out to be abstract.
+ */
+@CompilerIgnore "true"
+	class AbstractClassInstantiationError inherits RuntimeError
+	{
+	}
+	/**
+ * Raised by the Object::set operation if the type of the 
+ * Object to set has an incompatible type.
+ */
+@CompilerIgnore "true"
+	class IncompatibleTypeError inherits RuntimeError
+	{
+	}
+	/** well-known attempt to divide with a zero valued divider */
+@CompilerIgnore "true"
+	class DivisionByZero inherits Exception
+	{
+	}
+	/** the figure oversteps the capacity of the numeric variable */
+@CompilerIgnore "true"
+	class OverflowError inherits Exception
+	{
+	}
+	/** one of the required operands is void */
+@CompilerIgnore "true"
+	class VoidOperandError inherits Exception
+	{
+	}
+	/** the data overstep the size of the string variable */
+@CompilerIgnore "true"
+	class StringIndexOutOfBound inherits Exception
+	{
+	}
+	/**
+ * to be written #########################################
+ */
+@CompilerIgnore "true"
+	class StringFormatException inherits Exception
+	{
+	}
+	/** Occurs when trying to access out of bounds elements */
+@CompilerIgnore "true"
+	class IndexOutOfBound inherits Exception
+	{
+	}
+	/** Occurs when trying to access element on an empty collection */
+@CompilerIgnore "true"
+	class EmptyCollection inherits Exception
+	{
+	}
+	/**
+ * Occurs when calling next() operation while iterator is already
+ * positioned on the last element of a collection
+ */
+@CompilerIgnore "true"
+	class IteratorIsOff inherits Exception
+	{
+	}
+	/** an interaction with the underlying system failed */
+@CompilerIgnore "true"
+	class IOException inherits Exception
+	{
+	}
+	/** the file has not be found on the underlying system */
+	class FileNotFoundException inherits IOException
+	{
+	}
+	/** Common super class for all ConstraintVioloated exceptions */
+@CompilerIgnore "true"
+	class ConstraintViolatedException inherits Exception
+	{
+		/** Object on which the constraint was applied to
+	 * On Invariant, we can generally consider this object as the faulty Object
+	 */
+		reference constraintAppliedTo : standard::Object
+
+		/** constraint that has failed
+	 */
+		reference failedConstraint : language::structure::Constraint
+
+	}
+	/** The pre-condition is not satisfied */
+@CompilerIgnore "true"
+	class ConstraintViolatedPre inherits ConstraintViolatedException
+	{
+	}
+	/** The post-condition is not satisfied */
+@CompilerIgnore "true"
+	class ConstraintViolatedPost inherits ConstraintViolatedException
+	{
+	}
+	/** An invariant isn't satisfied on a given Object */
+@CompilerIgnore "true"
+	class ConstraintViolatedInv inherits ConstraintViolatedException
+	{
+	}
+	/** Occurs when Resource loading fails for some reasons */
+@CompilerIgnore "true"
+	class ResourceLoadException inherits Exception
+	{
+	}
+	/** Occurs when Resource saving fails for some reasons */
+@CompilerIgnore "true"
+	class ResourceSaveException inherits Exception
+	{
+		/** Object on which the the saved failed
+	 * One can rescue the exception and analyse the structure next to this object, 
+	 * this can give some clue about the faulty structure
+	 */
+		reference failedWhileSaving : standard::Object
+
+	}
+	/** Occurs when Resource saving fails because an object refers to an element which 
+ * belongs to the Definition of the currently running program */
+@CompilerIgnore "true"
+	class ResourceMixedLevelsException inherits ResourceSaveException
+	{
+	}
+	/** Occurs when trying to crate a Resource already existing in the Repository */
+@CompilerIgnore "true"
+	class ResourceCreateException inherits Exception
+	{
+	}
+	/** Raised when user tries to add an object that is not conform to the metamodel */
+@CompilerIgnore "true"
+	class ResourceUnconformityException inherits Exception
+	{
+	}
+	/** Raised when a resource cannot be loaded or saved because the URI used for 
+ * the  metamodel is not registered
+ */
+@CompilerIgnore "true"
+	class UnregisteredMetamodelException inherits Exception
+	{
+	}
+	/**
+ * to be written #########################################
+ */
+@CompilerIgnore "true"
+	class DynamicExpressionException inherits Exception
+	{
+	}
+}
+
+/**
+ * Contains the implementation of a unit test tool. This is a clone of
+ * JUnit architecture.
+ * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm
+ *
+ * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.
+ *
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png"/>
+ */
+/**
+ * main features of the famous Unit test tool for Kermeta language
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png"/>
+ */
+package kunit
+{
+	/**
+ * This exception is rose if there is a problem on the name of the test method
+ */
+@CompilerIgnore "true"
+	class InvalidTestCaseNameException inherits exceptions::Exception
+	{
+	}
+	/**
+ * This is for when we try to build a suite from a class that isn't a TestCase
+ */
+@CompilerIgnore "true"
+	class InvalidParameterException inherits exceptions::Exception
+	{
+	}
+	/**
+ * This is represents the aspect of tests that they may go wrong.
+ * it defines the ability to define the conditions for success
+ * (assertions) and the mechanism for recording that those 
+ * conditions have not been met.
+ */
+@CompilerIgnore "true"
+	abstract class Fallible inherits AbstractFallible
+	{
+		/**
+   * Set this attribute to false if you wish your test to not stop if the assert fails.
+   * note : if set to false, the count of failures/errors may be bigger that the number of executed test operations
+   */
+		attribute stopOnFailure : standard::Boolean
+
+		/**
+   * counter of assertions in the test method
+   */
+		attribute rank : standard::Integer
+
+		/**
+   * Log a failure if condition is false
+   */
+		method assertTrue(condition : standard::Boolean) : Void from kermeta::kunit::AbstractFallible is
+			do
+				assert(condition)
+			end
+
+		/**
+   * where failures will be put 
+   */
+		operation getLog() : Log
+			post logDefined is
+				result.isNotEqual(void)
+		is
+			abstract
+
+		/**
+   * Log a failure if condition is true
+   */
+		method assertFalseWithMsg(condition : standard::Boolean, message : standard::String) : Void from kermeta::kunit::AbstractFallible is
+			do
+				assertWithMsg(condition.~not, message)
+			end
+
+		/**
+   * Log a failure 
+   */
+		method fail(msg : standard::String) : Void from kermeta::kunit::AbstractFallible is
+			do
+				if mustStop then
+					var exception : AssertionFailedError init AssertionFailedError.new
+					exception.message := "explicit failure: ".plus(msg)
+					raise exception
+
+				else
+					getLog.addFailure(self, "explicit failure: ".plus(msg))
+
+				end
+			end
+
+		/**
+   * Log a failure if the two strings are not identical
+   */
+		method assertEqual(expected : standard::String, actual : standard::String) : Void from kermeta::kunit::AbstractFallible is
+			do
+				assertWithMsg(expected.equals(actual), "\nexpected\t:[".plus(expected).plus("] != \nactual\t:[").plus(actual).plus("]"))
+			end
+
+		/**
+   * Log a failure if condition is true
+   */
+		method assertFalse(condition : standard::Boolean) : Void from kermeta::kunit::AbstractFallible is
+			do
+				assert(condition.~not)
+			end
+
+		/**
+   * Log a failure if condition is false
+   */
+		method assertTrueWithMsg(condition : standard::Boolean, message : standard::String) : Void from kermeta::kunit::AbstractFallible is
+			do
+				assertWithMsg(condition, message)
+			end
+
+		/**
+   * Log a failure if condition is false
+   */
+		method assert(condition : standard::Boolean) : Void from kermeta::kunit::AbstractFallible is
+			do
+				var number : standard::Integer init self.number
+				if condition.~not then
+					var msg : standard::String init "assertion number ".plus(number.toString).plus(" failed")
+					if mustStop then
+						var exception : AssertionFailedError init AssertionFailedError.new
+						exception.message := msg
+						raise exception
+
+					else
+						getLog.addFailure(self, msg)
+
+					end
+
+				end
+			end
+
+		/**
+   * current order position of counter of assertions
+   */
+		operation number() : standard::Integer is
+			do
+				if rank.isVoid then
+					rank := 0
+
+				end
+				rank := rank.plus(1)
+				result := rank
+			end
+
+		/**
+   * Log a failure if condition is false
+   */
+		method assertWithMsg(condition : standard::Boolean, msg : standard::String) : Void from kermeta::kunit::AbstractFallible is
+			do
+				var number : standard::Integer init self.number
+				if condition.~not then
+					var realMsg : standard::String init "assertion number ".plus(number.toString).plus(" failed: ").plus(msg)
+					if mustStop then
+						var exception : AssertionFailedError init AssertionFailedError.new
+						exception.message := realMsg
+						raise exception
+
+					else
+						getLog.addFailure(self, realMsg)
+
+					end
+
+				end
+			end
+
+		operation mustStop() : standard::Boolean is
+			do
+				if stopOnFailure.isVoid then
+					stopOnFailure := true
+
+				end
+				result := stopOnFailure
+			end
+
+	}
+	/**
+ * Log is a log of failures and errors that happened to fallibles since start was called
+ */
+@CompilerIgnore "true"
+	class Log
+	{
+		/** 
+	 * list of detected assertion failures
+	 */
+		reference failures : Failure[0..*]
+
+		/**
+	 * list of detected test errors
+	 */
+		reference errors : Error[0..*]
+
+		/**
+	 * number of test that were run
+	 */
+		attribute runtests : standard::Integer
+
+		/**
+	* list of detected errors with the test harness
+	*/
+		reference harnessErrors : Error[0..*]
+
+		/**
+	 * Adds errors which occur during the SetUp phase
+	 */
+		operation addSetUpError(test : Fallible, e : exceptions::Exception) : Void is
+			do
+				harnessErrors.add(Error.new.initFrom(test, e).makeSetUp)
+			end
+
+		/**
+	 * Adds an error to the list of errors
+	 */
+		operation addTestError(test : Fallible, e : exceptions::Exception) : Void is
+			do
+				errors.add(Error.new.initFrom(test, e))
+			end
+
+		/**
+	 * Adds a failed test to the list of failed tests
+	 */
+		operation addFailure(test : Fallible, msg : standard::String) : Void is
+			do
+				failures.add(Failure.new.initFrom(test, msg))
+			end
+
+		/**
+	 * Adds errors which occur during the TearDown phase
+	 */
+		operation addTearDownError(test : Fallible, e : exceptions::Exception) : Void is
+			do
+				harnessErrors.add(Error.new.initFrom(test, e).makeTearDown)
+			end
+
+		/**
+	 * Increments the runtests counter
+	 */
+		operation newAttempt() : Void is
+			do
+				if runtests.equals(void) then
+					runtests := 0
+
+				end
+				runtests := 1.plus(runtests)
+			end
+
+	}
+	/**
+ * Failure represents an assertion failure stored in a failure log
+ */
+@CompilerIgnore "true"
+	class Failure
+	{
+		/**
+	 * the stored message (given or generated one)
+	 */
+		reference message : standard::String
+
+		/**
+	 * the stored failure
+	 */
+		reference failure : Fallible
+
+		/**
+	 * overwrite the default method, in order to add the message
+	 */
+		method toString() : standard::String from kermeta::language::structure::Object is
+			do
+				result := failure.toString.plus(" ").plus(message)
+			end
+
+		/**
+	 * initialization of the failure
+	 */
+		operation initFrom(fallible : Fallible, msg : standard::String) : Failure is
+			do
+				failure := fallible
+				message := msg
+				result := self
+			end
+
+	}
+	enumeration ErrorKind
+	{
+		setUpError;
+		testError;
+		tearDownError;
+	}
+	/**
+ * Error represents an occurrence of an exception in setUp, tearDown or a test
+ * and is stored in a failure log
+ */
+@CompilerIgnore "true"
+	class Error
+	{
+		/**
+	 * the stored error
+	 */
+		reference error : Fallible
+
+		/**
+	 * the Kermeta exception corresponding to the error
+	 */
+		reference exception : exceptions::Exception
+
+		/**
+	 * the nature of the stored error
+	 */
+		attribute kind : ErrorKind
+
+		/**
+	 * Changes the type of an error to makeTearDownError, the best way to use
+	 * this method is to call it after the init from line:
+	 * var e : Error init Error.new.initFrom(f, e).makeTearDown
+	 */
+		operation makeTearDown() : Error is
+			do
+				kind := ErrorKind.tearDownError
+				result := self
+			end
+
+		/**
+	 * Changes the type of an error to SetUpError, the best way to use
+	 * this method is to call it after the init from line:
+	 * var e : Error init Error.new.initFrom(f, e).makeSetUp
+	 */
+		operation makeSetUp() : Error is
+			do
+				kind := ErrorKind.setUpError
+				result := self
+			end
+
+		/**
+	 * overwrite the default method, in order to add :
+	 *   - the type
+	 *   - the message
+	 *   - the stack trace
+	 */
+		method toString() : standard::String from kermeta::language::structure::Object is
+			do
+				if kind.equals(ErrorKind.testError) then
+					result := error.toString
+
+				else
+					result := error.getMetaClass.name.plus(".")
+					if kind.equals(ErrorKind.setUpError) then
+						result := result.plus("setUp()")
+
+					else
+						result := result.plus("tearDown()")
+
+					end
+
+				end
+				result := result.plus(" raised ").plus(exception.getMetaClass.name)
+				if exception.message.isNotEqual(void) then
+					result := result.plus("\n    Caused by: ").plus(exception.message)
+
+				else
+					result := result.plus("\n    (no message)")
+
+				end
+				if exception.stackTrace.isNotEqual(void) then
+					result := result.plus("\n    Stack Trace:\n").plus(exception.stackTrace)
+
+				else
+					result := result.plus("\n    (no stack trace)")
+
+				end
+			end
+
+		/**
+	 * Sets up a new error with failable object and the exception that occurred
+	 * by default it will be a test error. Use makeSetUp or makeTearDown to
+	 * change its type
+	 */
+		operation initFrom(error : Fallible, e : exceptions::Exception) : Error is
+			do
+				self.error := error
+				exception := e
+				kind := ErrorKind.testError
+				result := self
+			end
+
+	}
+	/**
+ * The abstact notion of a test which is runnable and which has a log
+ * in which it can keep note of failures
+ */
+@CompilerIgnore "true"
+	abstract class Test
+	{
+		/**
+     * where failures and errors will be put 
+     */
+		reference log : Log
+
+		/**
+	 * Initializes the log where failures and errors will be put
+	 */
+@EMF_renameAs "setLogEMF_renameAs"
+		operation setLog(log : Log) : Void
+			pre paramNotVoid is
+				log.isNotEqual(void)
+			post logNotVoid is
+				self.log.isNotEqual(void)
+		is
+			do
+				self.log := log
+			end
+
+		/**
+	 * Execute the test and verify its assertions
+	 */
+		operation run() : Void
+			pre logNotVoid is
+				self.log.isNotEqual(void)
+		is
+			abstract
+
+		/**
+	 * called when run by the java testrunner
+	 */
+		operation initLog() : Log is
+			do
+				self.log := Log.new
+				result := self.log
+			end
+
+	}
+	/**
+ * A TestSuite is a structured collection of tests, using the
+ * composite pattern, all tests are runnable and have a log
+ * In addition a suite can be populated automatically from a
+ * test case class with one test case object for each test
+ * method in the class.
+ *  You can make a suite and populate it manually like this:
+ *
+ *  var suite : TestSuite init TestSuite.new.
+ *  suite.tests.add(t1)
+ *
+ *  Alternatively you can populate a suite automatically from
+ *  a class that inherits TestCase and which has several methods
+ *  called test:
+ *
+ *  var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)
+ */
+@CompilerIgnore "true"
+	class TestSuite inherits Test
+	{
+		/**
+	 * The collection of tests which will be ran as the suite
+	 */
+		reference tests : Test[0..*]
+
+		/**
+	  * Add to this suite, a set of test cases of type c, one for each
+	  * test method in class c. C must be a descendent of TestCase
+	  */
+		operation addAllTestCasesFrom(testCaseClass : language::structure::Class) : TestSuite
+			pre testCaseClassIsATestCase is
+				testCaseClass.superClass.contains(TestCase)
+		is
+			do
+				if testCaseClass.superClass.exists{sc | do
+						sc.equals(TestCase)
+					end}.~not then
+					var e : exceptions::Exception init InvalidParameterException.new
+					e.message := "Cannot build a suite from class: ".plus(testCaseClass.name)
+					raise e
+
+				end
+				testCaseClass.ownedOperation.~select{o | do
+						if o.name.size.isGreaterOrEqual(4) then
+							o.name.substring(0, 4).equals("test")
+
+						else
+							false
+
+						end
+					end}.each{o | do
+						var testCase : TestCase
+						testCase ?= testCaseClass.new
+						testCase.setTestMethodName(o.name)
+						self.tests.add(testCase)
+					end}
+				result := self
+			end
+
+		/** 
+	 * Run all the tests in the test suite
+	 */
+		method run() : standard::~Void from kermeta::kunit::Test is
+			do
+				tests.each{t | do
+						t.setLog(log)
+						t.run
+					end}
+			end
+
+		/**
+	  * to be written #####################################################
+	  */
+		operation addAllTestCasesFromAspects(testCaseClass : language::structure::Class, anAspect : language::structure::ClassDefinition) : Void is
+			do
+				anAspect.ownedOperation.~select{o | do
+						if o.name.size.isGreaterOrEqual(4) then
+							o.name.substring(0, 4).equals("test")
+
+						else
+							false
+
+						end
+					end}.each{o | do
+						var testCase : TestCase
+						testCase ?= testCaseClass.new
+						testCase.setTestMethodName(o.name)
+						self.tests.add(testCase)
+					end}
+			end
+
+	}
+	/**
+ * A test case comprises one or more test methods plus
+ * setUp and tearDown that build and destroy their test harness.
+ * An instance of a subclass of TestCase should have its
+ * testMethodName set to the name of one of its operations
+ * which should be called whe the test is run. You can do this
+ * yourself:
+ *
+ * var testCase : TestCase init MyTestCaseClass.new.setTestMethodName("testSomething")
+ *
+ * Alternatively if your TestCase Class has many methods whose
+ * name begins with 'test' you can create a set of instaces already
+ * set up with their testMethodName using the addAllTestCasesFrom
+ * operation on TestSuite
+ */
+@CompilerIgnore "true"
+	abstract class TestCase inherits Test, Fallible
+	{
+		/**
+	 * the name of the method which corresponds to the test case in the test class
+	 */
+		attribute __testMethodName : standard::String
+
+		/**
+	 * operation used when the TestCase is run from a java test runner, encapsulates the failures results
+	 * into an AssertionFailedError so the TestRunner can detect it
+	 */
+		operation raiseIfHasFailures() : Void is
+			do
+				var msg : standard::String init ""
+				if log.failures.empty.~not then
+					msg := "Failures: "
+					log.failures.each{f | do
+							msg := msg.plus("\n   ").plus(f.toString)
+						end}
+					var exception : AssertionFailedError init AssertionFailedError.new
+					exception.message := msg
+					raise exception
+
+				end
+				if log.errors.empty.~not then
+					log.errors.each{f | do
+							msg := "Errors: "
+							msg := msg.plus("\n   ").plus(f.toString)
+							var exception : exceptions::Exception init exceptions::Exception.new
+							exception.message := msg
+							raise exception
+						end}
+
+				end
+			end
+
+		/**
+	 * the things to be done before execution of the test method
+	 * (designed to be overwritten in real TestCase classes) 
+	 */
+		operation setUp() : Void is
+			do
+			end
+
+		/**
+	 * accessor on the log
+	 */
+@EMF_renameAs "getLogEMF_renameAs"
+		method getLog() : Log from kermeta::kunit::Fallible is
+			do
+				result := self.log
+			end
+
+		/**
+	 * Sets the name of the method from the concrete subclass of
+	 *  TestCase that should be executed when this TestCase instance
+	 * is run as a test.
+	 * Throws invalidTestCaseNameException if the given string is not
+	 * the name of a method in the test case
+	 */
+		operation setTestMethodName(name : standard::String) : TestCase is
+			do
+				__testMethodName := name
+				result := self
+			end
+
+		/**
+	 * accessor on the method name
+	 */
+		operation getTestMethodName() : standard::String is
+			do
+				result := __testMethodName
+			end
+
+		/**
+	 * overwrites the default method for more informative output
+	 */
+		method toString() : standard::String from kermeta::language::structure::Object is
+			do
+				result := self.getMetaClass.name.plus(".").plus(getTestMethodName).plus("()")
+			end
+
+		/**
+	 * Execute the whole test case : SetUp, test method, TearDown
+	 * The assertions of the test method are computed
+	 */
+		method run() : standard::~Void from kermeta::kunit::Test is
+			do
+				getLog.newAttempt
+				do
+					setUp
+					do
+						var de : interpreter::DynamicExpression init interpreter::DynamicExpression.new
+						de.initializeDefaults
+						de.selfClass ?= self.getMetaClass.typeDefinition
+						de.parse("self.".plus(self.getTestMethodName))
+						de.execute(self, utils::Hashtable<standard::String, standard::Object>.new)
+						do
+							tearDown
+						rescue(e : exceptions::Exception)
+							getLog.addTearDownError(self, e)
+
+						end
+					rescue(afe : AssertionFailedError)
+						getLog.addFailure(self, afe.message.plus("\nstack trace:\n").plus(afe.stackTrace))
+
+					rescue(e1 : exceptions::Exception)
+						getLog.addTestError(self, e1)
+						do
+							tearDown
+						rescue(e : exceptions::Exception)
+							getLog.addTearDownError(self, e)
+
+						end
+
+					end
+				rescue(e : exceptions::Exception)
+					getLog.addSetUpError(self, e)
+
+				end
+			end
+
+		/**
+	 * the things to be done after execution of the test method
+	 * (designed to be overwritten in real TestCase classes) 
+	 */
+		operation tearDown() : Void is
+			do
+			end
+
+	}
+	/**
+ * Create and use a test runner to run one or more tests and print the failure log. E.g.:
+ * do
+ *	     var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)
+ *	     var runner : TestRunner init TestRunner.new
+ *	     runner.run(suite)
+ *	     runner.printLogs
+ * end
+ *
+ * Where InterestingTestCaseSet is a subclass of TestCase and contains several test... methods
+ */
+@CompilerIgnore "true"
+	class TestRunner
+	{
+		/**
+	 * Where to register the failures and errors
+	 */
+		attribute log : Log
+
+		/**
+	 * Use this to run a test case or a test suite.
+	 * If you want to run all the test.... methods in a TestCase class,
+	 *  you can populate a suite with TestSuite.addAllTestCasesFrom
+	 */
+		operation runTest(test : Test) : Void
+			pre testNotVoid is
+				test.isNotEqual(void)
+			post logNotVoid is
+				log.isNotEqual(void)
+		is
+			do
+				log := Log.new
+				test.setLog(log)
+				test.run
+			end
+
+		/**
+	 * Prints the log or errors and failures from a test run.
+	 * Run some tests first.
+	 */
+		operation printTestResult() : standard::~Void is
+			do
+				stdio.writeln("\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n")
+				if log.failures.empty.~not then
+					stdio.writeln("\nFailures: ")
+					log.failures.each{f | do
+							stdio.writeln("\n   ".plus(f.toString))
+						end}
+
+				end
+				if log.errors.empty.~not then
+					stdio.writeln("\nErrors: ")
+					log.errors.each{e | do
+							stdio.writeln("\n   ".plus(e.toString))
+						end}
+
+				end
+				if log.harnessErrors.empty.~not then
+					stdio.writeln("\nErrors from setUp or tearDown : ")
+					log.harnessErrors.each{e | do
+							stdio.writeln("\n   ".plus(e.toString))
+						end}
+
+				end
+				stdio.writeln("\n Summary: ")
+				stdio.writeln("   Number of launched tests : ".plus(log.runtests.toString))
+				stdio.writeln("   Number of failures : ".plus(log.failures.size.toString))
+				stdio.writeln("   Number of errors : ".plus(log.errors.size.toString))
+				stdio.writeln("   Number of errors in setUp or tearDown: ".plus(log.harnessErrors.size.toString))
+				stdio.writeln("\n-------------------------------------------------------------------------------------------------------------------------------\n")
+			end
+
+		/**
+	  * For backwards compatibility with old kunit, this takes a test case class
+	  * and creates the necessary suite, and runs it. DEPRECATED
+	  */
+		operation run(testCaseClass : language::structure::Class) : Void
+			pre cIsATestCase is
+				testCaseClass.superClass.contains(TestCase)
+		is
+			do
+				runTest(TestSuite.new.addAllTestCasesFrom(testCaseClass))
+			end
+
+	}
+	/**
+ * to be written ############################
+ */
+@CompilerIgnore "true"
+	abstract class AbstractFallible
+	{
+		/** process the given condition and react if it is not satisfied */
+		operation assertTrue(condition : standard::Boolean) : Void is
+			abstract
+
+		/** 
+	 ** reduces all runs of white-space to a single space character
+	 **/
+		operation distil(s : standard::String) : standard::String is
+			do
+				result := ""
+				var white : standard::Boolean init false
+				from var i : standard::Integer init 0
+				until i.equals(s.size)
+				loop
+					var c : standard::String init s.elementAt(i).toString
+					if " \n\t".indexOf(c).isGreaterOrEqual(0) then
+						if white.~not then
+							white := true
+							result := result.plus(" ")
+
+						end
+
+					else
+						result := result.plus(c)
+						if white then
+							white := false
+
+						end
+
+					end
+					i := i.plus(1)
+				end
+			end
+
+		/**
+     * process the given condition and react with the given message
+     * if it is satisfied
+     */
+		operation assertFalseWithMsg(condition : standard::Boolean, message : standard::String) : Void is
+			abstract
+
+		/** to be used if a failure reaction is needed */
+		operation fail(msg : standard::String) : Void is
+			abstract
+
+		/** process the two given string and react if they are not equal */
+		operation assertEqual(expected : standard::String, actual : standard::String) : Void is
+			abstract
+
+		/** process the given condition and react if it is satisfied */
+		operation assertFalse(condition : standard::Boolean) : Void is
+			abstract
+
+		/**
+     * process the given condition and react with the given message
+     * if it is not satisfied
+     */
+		operation assertTrueWithMsg(condition : standard::Boolean, message : standard::String) : Void is
+			abstract
+
+		/** process the given condition and react if it is not satisfied */
+		operation assert(condition : standard::Boolean) : Void is
+			abstract
+
+		/**
+   * Log a failure if the two strings are not identical modulo-white-space
+   */
+		operation assertSimilar(expected : standard::String, actual : standard::String) : Void is
+			do
+				expected := distil(expected)
+				actual := distil(actual)
+				assertWithMsg(expected.equals(actual), "\nexpected\t:[".plus(expected).plus("] != \nactual  \t:[").plus(actual).plus("]"))
+			end
+
+		/**
+     * process the given condition and react with the given message
+     * if it is not satisfied
+     */
+		operation assertWithMsg(condition : standard::Boolean, msg : standard::String) : Void is
+			abstract
+
+	}
+	/** AssertionViolatedException are raised when assertions are violated */
+@CompilerIgnore "true"
+	class AssertionFailedError inherits exceptions::Exception
+	{
+	}
+	@CompilerIgnore "true"
+	class Assert inherits AbstractFallible
+	{
+		/** will fail if condition is false */
+		method assertTrue(condition : standard::Boolean) : Void from kermeta::kunit::AbstractFallible is
+			do
+				if condition.~not then
+					fail("assertTrue failed")
+
+				end
+			end
+
+		/** will fail if condition is true */
+		method assertFalseWithMsg(condition : standard::Boolean, msg : standard::String) : Void from kermeta::kunit::AbstractFallible is
+			do
+				if condition then
+					fail("assertTrueWithMsg failed : ".plus(msg))
+
+				end
+			end
+
+		/** raise a AssertionViolatedException with the provided message */
+		method fail(msg : standard::String) : Void from kermeta::kunit::AbstractFallible is
+			do
+				var exception : AssertionFailedError init AssertionFailedError.new
+				exception.message := msg
+				raise exception
+			end
+
+		/** Will fail if the two strings are not identical */
+		method assertEqual(expected : standard::String, actual : standard::String) : Void from kermeta::kunit::AbstractFallible is
+			do
+				if expected.equals(actual).~not then
+					fail("assertEqual failed\nexpected\t:[".plus(expected).plus("] != \nactual\t:[").plus(actual).plus("]"))
+
+				end
+			end
+
+		/** will fail if condition is true */
+		method assertFalse(condition : standard::Boolean) : Void from kermeta::kunit::AbstractFallible is
+			do
+				if condition then
+					fail("assertTrue number failed")
+
+				end
+			end
+
+		/** will fail if condition is false */
+		method assertTrueWithMsg(condition : standard::Boolean, msg : standard::String) : Void from kermeta::kunit::AbstractFallible is
+			do
+				if condition.~not then
+					fail("assertTrueWithMsg failed : ".plus(msg))
+
+				end
+			end
+
+		/** Fails if condition is false */
+		method assert(condition : standard::Boolean) : Void from kermeta::kunit::AbstractFallible is
+			do
+				if condition.~not then
+					fail("assert failed")
+
+				end
+			end
+
+		/** will fail if condition is false */
+		method assertWithMsg(condition : standard::Boolean, msg : standard::String) : Void from kermeta::kunit::AbstractFallible is
+			do
+				if condition.~not then
+					fail("assertTrueWithMsg failed : ".plus(msg))
+
+				end
+			end
+
+	}
+}
+
+/**
+ * Defines value types 
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/primitive_types_view.png"/>
+ */
+/**
+ * Defines Collection types 
+ * <img src="./figures/collections_view.png"/>
+ */
+/**
+ * Contains types dedicated to dealing with java objects
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png"/>
+ */
+package standard
+{
+	/**
+ * The class Void 
+ * By convention it is a sub-type of everything
+ */
+@CompilerIgnore "true"
+	class ~Void
+	{
+		/**
+	 * Return true
+	 */
+		method isVoid() : Boolean from kermeta::language::structure::Object is
+			do
+				result := true
+			end
+
+		/**
+	 * Returns true
+	 */
+		method isInstanceOf(type : language::structure::Type) : Boolean from kermeta::language::structure::Object is
+			do
+				result := true
+			end
+
+		/**
+	 * Returns the String identifier '<void>'
+	 */
+		method toString() : String from kermeta::language::structure::Object is
+			do
+				result := "<void>"
+			end
+
+	}
+	/**
+ * The abstract class ValueType does not contain any feature.
+ * However, any instance of a sub-class of ValueType will be passed by value 
+ * instead of by reference for any other objects.
+ * that means that each time you := such object it will call the clone function associated to it (Not implemented yet except for Integer, String and boolean!!!)
+ * 
+ */
+@CompilerIgnore "true"
+	abstract class ValueType
+	{
+	}
+	/**
+ * The abstract class Comparable defines a set of operation
+ * to compare instances of a class.
+ * Sub-classes only has to implement abstract operation compareTo.
+ * All other methods are defined w.r.t. the compareTo operation
+ */
+@CompilerIgnore "true"
+	abstract class Comparable
+	{
+		/**
+	 * return true if self < other
+	 */
+		operation isLower(other : Object) : Boolean is
+			do
+				result := self.compareTo(other).isLower(0)
+			end
+
+		/**
+	 * return true if self >= other
+	 */
+		operation isGreaterOrEqual(other : Object) : Boolean is
+			do
+				result := self.compareTo(other).isGreaterOrEqual(0)
+			end
+
+		/**
+	 * This method should be implemented by any class that inherits
+	 * from Comparable.
+	 * returns 0 if self = other
+	 * returns > 0 if  self > other
+	 * returns < 0 if  self < other
+	 */
+		operation compareTo(other : Object) : Integer is
+			abstract
+
+		/**
+	 * return true if self <= other
+	 */
+		operation isLowerOrEqual(other : Object) : Boolean is
+			do
+				result := self.compareTo(other).isLowerOrEqual(0)
+			end
+
+		/**
+	 * return true if self > other
+	 */
+		operation isGreater(other : Object) : Boolean is
+			do
+				result := self.compareTo(other).isGreater(0)
+			end
+
+	}
+	/**
+ * The abstract class Summable defines a set of operation
+ * to sum instances of a class.
+ * Sub-classes only has to implement abstract operation plus.
+  */
+@CompilerIgnore "true"
+	abstract class Summable<G>
+	{
+		/**
+	 * Summarization method to be implemented by any summable class.
+	 * The parameter must have the same type (or one of its subtypes)
+	 *  than the current object .
+	 */
+		operation plus(other : G) : G is
+			abstract
+
+	}
+	/**
+ * raised when two objects are not comparable
+ */
+@CompilerIgnore "true"
+	class NotComparableException inherits exceptions::Exception
+	{
+	}
+	/**
+ * The Boolean type
+ */
+@CompilerIgnore "true"
+	class Boolean inherits ValueType
+	{
+		/**
+	 * return not self
+	 */
+		operation ~not() : Boolean is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~not(self)
+			end
+
+		/**
+	 * return self xor other
+	 */
+		operation xor(other : Boolean) : Boolean is
+			do
+				result := self.~and(other.~not).~or(self.~not.~and(other))
+			end
+
+		/**
+	 * Returns true if <code>other</code> type is Boolean
+	 * and has the same boolean value than current object.
+	 */
+		method equals(other : Object) : Boolean from kermeta::language::structure::Object is
+			do
+				if other.getMetaClass.isNotEqual(Boolean) then
+					result := false
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.equals(self, other)
+
+				end
+			end
+
+		/**
+	 * return self or other
+	 */
+		operation ~or(other : Boolean) : Boolean is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~or(self, other)
+			end
+
+		/**
+	 * Short-circuit version of OR. This means that the function passed in parameter will be evaluated only if self is false
+	 * Note: we don't have a dedicated operator in the syntax for it yet so here is an example of use :
+	 *   self.orElse{v | functionThatReturnABoolean() }
+	 */
+		operation orElse(right : < Void->Boolean >) : Boolean is
+			do
+				if self then
+					result := true
+
+				else
+					result := right(void)
+
+				end
+			end
+
+		/**
+	 * return self implies other
+	 * http://en.wikipedia.org/wiki/Material_implication
+	 * meaning : (not self) or other
+	 */
+		operation implies(other : Boolean) : Boolean is
+			do
+				result := self.~not.~or(other)
+			end
+
+		/**
+	 * return self nand other
+	 */
+		operation nand(other : Boolean) : Boolean is
+			do
+				result := self.~and(other).~not
+			end
+
+		/**
+	 * Returns 'true' or 'false', depending on self  value
+	 */
+		method toString() : String from kermeta::language::structure::Object is
+			do
+				result := if self then
+					"true"
+
+				else
+					"false"
+
+				end
+			end
+
+		/**
+	 * Short-circuit version of AND. This means that the function passed in parameter will be evaluated only if self is true
+	 * Note: we don't have a dedicated operator in the syntax for it yet so here is an example of use :
+	 *   self.andThen{v | functionThatReturnABoolean() }
+	 */
+		operation andThen(right : < Void->Boolean >) : Boolean is
+			do
+				if self then
+					result := right(void)
+
+				else
+					result := false
+
+				end
+			end
+
+		/**
+	 * return self and other
+	 */
+		operation ~and(other : Boolean) : Boolean is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~and(self, other)
+			end
+
+	}
+	/**
+ * The abstract class Numeric is the root class for all
+ * numeric types
+ */
+@CompilerIgnore "true"
+	abstract class Numeric inherits Comparable, ValueType
+	{
+	}
+	/**
+ * The class Integer
+ */
+@CompilerIgnore "true"
+	class Integer inherits Numeric, Summable<Integer>
+	{
+		/**
+	 * return true if self < other
+	 */
+		method isLower(other : Object) : Boolean from kermeta::standard::Comparable is
+			do
+				if other.getMetaClass.isNotEqual(Integer) then
+					if other.getMetaClass.equals(Real) then
+						result := self.toReal.isLower(other)
+
+					else
+						result := false
+
+					end
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isLower(self, other)
+
+				end
+			end
+
+		/**
+	 * returns self + other
+	 */
+		method plus(other : Integer) : Integer from kermeta::standard::Summable is
+			do
+				if other.isVoid then
+					raise exceptions::VoidOperandError.new
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.plus(self, other)
+
+				end
+			end
+
+		/**
+	 * returns self * other
+	 */
+		operation mult(other : Integer) : Integer is
+			do
+				if other.isVoid then
+					raise exceptions::VoidOperandError.new
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.times(self, other)
+
+				end
+			end
+
+		/**
+	 * returns self - other
+	 */
+		operation minus(other : Integer) : Integer is
+			do
+				if other.isVoid then
+					raise exceptions::VoidOperandError.new
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.minus(self, other)
+
+				end
+			end
+
+		/**
+	 * Returns true if <code>other</code> type is Integer or Real
+	 * and has the same numeric value than current object.
+	 */
+		method equals(other : Object) : Boolean from kermeta::language::structure::Object is
+			do
+				if other.getMetaClass.isNotEqual(Integer) then
+					if other.getMetaClass.equals(Real) then
+						result := self.toReal.equals(other)
+
+					else
+						result := false
+
+					end
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.equals(self, other)
+
+				end
+			end
+
+		/**
+	 * returns self modulo other
+	 */
+		operation mod(other : Integer) : Integer is
+			do
+				if other.equals(0) then
+					raise exceptions::DivisionByZero.new
+
+				end
+				if other.isVoid then
+					raise exceptions::VoidOperandError.new
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.mod(self, other)
+
+				end
+			end
+
+		/**
+	 * returns self / other
+	 */
+		operation div(other : Integer) : Integer is
+			do
+				if other.equals(0) then
+					raise exceptions::DivisionByZero.new
+
+				end
+				if other.isVoid then
+					raise exceptions::VoidOperandError.new
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.div(self, other)
+
+				end
+			end
+
+		/**
+	 * Convert self as a Real
+	 */
+		operation toReal() : Real is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.toReal(self)
+			end
+
+		/**
+	 * Comparison
+	 */
+		method compareTo(other : Object) : Integer from kermeta::standard::Comparable is
+			do
+				if other.getMetaClass.isNotEqual(Integer) then
+					if other.getMetaClass.equals(Real) then
+						result := self.toReal.compareTo(other)
+
+					else
+						raise NotComparableException.new
+
+					end
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.compareTo(self, other)
+
+				end
+			end
+
+		/**
+	 * return true if self > other
+	 */
+		method isGreater(other : Object) : Boolean from kermeta::standard::Comparable is
+			do
+				if other.getMetaClass.isNotEqual(Integer) then
+					if other.getMetaClass.equals(Real) then
+						result := self.toReal.isGreater(other)
+
+					else
+						result := false
+
+					end
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isGreater(self, other)
+
+				end
+			end
+
+		/**
+	 * return true if self >= other
+	 */
+		method isGreaterOrEqual(other : Object) : Boolean from kermeta::standard::Comparable is
+			do
+				if other.getMetaClass.isNotEqual(Integer) then
+					if other.getMetaClass.equals(Real) then
+						result := self.toReal.isGreaterOrEqual(other)
+
+					else
+						result := false
+
+					end
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isGreaterOrEqual(self, other)
+
+				end
+			end
+
+		/**
+	 * returns -self
+	 */
+		operation uminus() : Integer is
+			do
+				result := 0.minus(self)
+			end
+
+		/**
+	 * Iteration
+	 */
+		operation times(body : < Integer->Object >) : Void is
+			do
+				from var i : Integer init 0
+				until i.isGreaterOrEqual(self)
+				loop
+					body(i)
+					i := i.plus(1)
+				end
+			end
+
+		/**
+	 * Numeric value in string format
+	 */
+		method toString() : String from kermeta::language::structure::Object is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.toString(self)
+			end
+
+		/**
+	 * return true if self <= other
+	 */
+		method isLowerOrEqual(other : Object) : Boolean from kermeta::standard::Comparable is
+			do
+				if other.getMetaClass.isNotEqual(Integer) then
+					if other.getMetaClass.equals(Real) then
+						result := self.toReal.isLowerOrEqual(other)
+
+					else
+						result := false
+
+					end
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isLowerOrEqual(self, other)
+
+				end
+			end
+
+	}
+	/**
+ * class Real
+ */
+@CompilerIgnore "true"
+	class Real inherits Numeric, Summable<Real>
+	{
+		/**
+	 * returns self + other
+	 */
+		method plus(other : Real) : Real from kermeta::standard::Summable is
+			do
+				if other.isVoid then
+					raise exceptions::VoidOperandError.new
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.plus(self, other)
+
+				end
+			end
+
+		/**
+	 * returns self * other
+	 */
+		operation mult(other : Real) : Real is
+			do
+				if other.isVoid then
+					raise exceptions::VoidOperandError.new
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.times(self, other)
+
+				end
+			end
+
+		/**
+	 * returns self - other
+	 */
+		operation minus(other : Real) : Real is
+			do
+				if other.isVoid then
+					raise exceptions::VoidOperandError.new
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.minus(self, other)
+
+				end
+			end
+
+		/**
+	 * Convert self as an Integer
+	 */
+		operation toInteger() : Integer is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.toInteger(self)
+			end
+
+		/**
+	 * returns -self
+	 */
+		operation uminus() : Real is
+			do
+				result := 0.toReal.minus(self)
+			end
+
+		/**
+	 * Returns true if <code>other</code> type is Integer or Real
+	 * and has the same numeric value than current object.
+	 */
+		method equals(other : Object) : Boolean from kermeta::language::structure::Object is
+			do
+				if other.getMetaClass.isNotEqual(Real) then
+					if other.getMetaClass.equals(Integer) then
+						result := self.equals(other.asType(Integer).toReal)
+
+					else
+						result := false
+
+					end
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.equals(self, other)
+
+				end
+			end
+
+		/**
+	 * returns self / other
+	 */
+		operation div(other : Real) : Real is
+			do
+				if other.equals(0.toReal) then
+					raise exceptions::DivisionByZero.new
+
+				end
+				if other.isVoid then
+					raise exceptions::VoidOperandError.new
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.div(self, other)
+
+				end
+			end
+
+		/**
+	 * Comparison
+	 */
+		method compareTo(other : Object) : Integer from kermeta::standard::Comparable is
+			do
+				if other.getMetaClass.isNotEqual(Real) then
+					if other.getMetaClass.equals(Integer) then
+						result := self.compareTo(other.asType(Integer).toReal)
+
+					else
+						raise NotComparableException.new
+
+					end
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.compareTo(self, other)
+
+				end
+			end
+
+		/**
+	 * Returns numeric value in string format
+	 */
+		method toString() : String from kermeta::language::structure::Object is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.toString(self)
+			end
+
+	}
+	/**
+ * The class Character
+ */
+@CompilerIgnore "true"
+	class Character inherits ValueType, Comparable
+	{
+		/**
+	 * Returns true if <code>other</code> type is Character
+	 * and has the same letter value than current object.
+	 */
+		method equals(other : Object) : Boolean from kermeta::language::structure::Object is
+			do
+				if other.getMetaClass.isNotEqual(Character) then
+					result := false
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.equals(self, other)
+
+				end
+			end
+
+		/**
+	 * Conversion from Character to String
+	 */
+		method toString() : String from kermeta::language::structure::Object is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.toString(self)
+			end
+
+		/**
+	 * Comparaison
+	 */
+		method compareTo(other : Object) : Integer from kermeta::standard::Comparable is
+			do
+				if other.isVoid then
+					raise exceptions::CallOnVoidTarget.new
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.compareTo(self, other)
+
+				end
+			end
+
+	}
+	/**
+ * The class String
+ */
+@CompilerIgnore "true"
+	class String inherits ValueType, Comparable, Summable<String>
+	{
+		/**
+	 * Appends other at the end of self
+	 * A more efficient method is kermeta::utils::StringBuffer::append(other)
+	 */
+		operation append(other : String) : Void is
+			do
+				if other.isVoid then
+					raise exceptions::CallOnVoidTarget.new
+
+				else
+					extern fr::irisa::triskell::kermeta::runtime::basetypes::String.append(self, other)
+
+				end
+			end
+
+		/**
+	 * returns a new string self + other
+	 */
+		method plus(other : String) : String from kermeta::standard::Summable is
+			do
+				if other.isVoid then
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.plus(self, other.toString)
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.plus(self, other)
+
+				end
+			end
+
+		/**
+	 * Returns true if <code>other</code> type is String
+	 * and has the same string value than current object.
+	 */
+		method equals(other : Object) : Boolean from kermeta::language::structure::Object is
+			do
+				if other.getMetaClass.isNotEqual(String) then
+					result := false
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.equals(self, other)
+
+				end
+			end
+
+		/**
+	 * Parses the current string into a real.
+	 * if no real value is recognized then a StringFormatException is raised.
+	 */
+		operation toReal() : Real is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toReal(self)
+				if result.isVoid then
+					raise exceptions::StringFormatException.new
+
+				end
+			end
+
+		/**
+	 * Parses the current string and returns true if the string is "true" and false if the string is "false"
+	 * The parsing is not case sensitive and if no boolean value is recognized then a StringFormatException is raised.
+	 */
+		operation toBoolean() : Boolean is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toBoolean(self)
+				if result.isVoid then
+					raise exceptions::StringFormatException.new
+
+				end
+			end
+
+		/**
+	 * Comparaison
+	 */
+		method compareTo(other : Object) : Integer from kermeta::standard::Comparable is
+			do
+				if other.isVoid then
+					raise exceptions::CallOnVoidTarget.new
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.compareTo(self, other)
+
+				end
+			end
+
+		/**
+	 * Return if a string is contained by another string
+	 */
+		operation contains(str1 : String) : Boolean is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.contains(self, str1)
+			end
+
+		/**
+	 * returns the index within this string of the first 
+	 * occurrence of the specified substring
+	 */
+		operation indexOf(str : String) : Integer is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.indexOf(self, str)
+			end
+
+		/**
+	 * returns the character at index in the String
+	 */
+		operation elementAt(index : Integer) : Character is
+			do
+				if index.isLower(0).~or(index.isGreater(size.minus(1))) then
+					raise exceptions::StringIndexOutOfBound.new
+
+				else
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.elementAt(self, index)
+
+				end
+			end
+
+		/**
+	 * returns the number of characters in the current String
+	 */
+		operation size() : Integer is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.size(self)
+			end
+
+		/**
+	 * Replaces all occurences of str1 in the current string by the string str2
+	 */
+		operation replace(str1 : String, str2 : String) : String is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.replace(self, str1, str2)
+			end
+
+		/**
+	 * Return the current string in upper case
+	 */
+		operation toUpperCase() : String is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toUpperCase(self)
+			end
+
+		/**
+	 * Parses the current string into an integer.
+	 * if no integer value is recognized then a StringFormatException is raised.
+	 */
+		operation toInteger() : Integer is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toInteger(self)
+				if result.isVoid then
+					raise exceptions::StringFormatException.new
+
+				end
+			end
+
+		/**
+	 * Return the current string in lower case
+	 */
+		operation toLowerCase() : String is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toLowerCase(self)
+			end
+
+		/**
+	 * returns a new string that is a substring of this string
+	 * takes as parameters : the startIndex and endIndex
+	 */
+		operation substring(startIndex : Integer, endIndex : Integer) : String is
+			do
+				if startIndex.isGreaterOrEqual(0).~and(startIndex.isLowerOrEqual(size)).~and(endIndex.isLowerOrEqual(size)).~and(endIndex.isGreaterOrEqual(startIndex)) then
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.substring(self, startIndex, endIndex)
+
+				else
+					raise exceptions::StringIndexOutOfBound.new
+
+				end
+			end
+
+		/**
+	 * Return of an ordered set of the splitted string
+	 * Note that the delimiter is a regular expression (as the split operation in java) 
+	 */
+		operation split(delimiter : String) : Sequence<String> is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.split(self, delimiter)
+			end
+
+		/**
+	 * returns the string itself
+	 */
+		method toString() : String from kermeta::language::structure::Object is
+			do
+				result := self
+			end
+
+	}
+	alias UnlimitedNatural : Integer;
+	alias Object : language::structure::Object;
+	/**
+ * Collection is the root abstract class for all kermeta collections
+ */
+@CompilerIgnore "true"
+	abstract class Collection<G>
+	{
+		/**
+	 * Returns a new Sequence composed of elements of the Collection that
+	 * do not validate the rejector function
+	 * example :
+	 * aCollection2 := aCollection.reject { e | 
+     *     \/* put here a condition that returns true for elements that must  be exclude in the resulting Collection *\/
+     * }
+	 */
+		operation reject(rejector : < G->Boolean >) : Sequence<G> is
+			do
+				result := self.~select{elem | do
+						rejector(elem).~not
+					end}
+			end
+
+		/**
+	 * Returns the number of instances of element in the Collection
+	 */
+		operation count(element : G) : Integer is
+			do
+				result := self.~select{e | do
+						e.equals(element)
+					end}.size
+			end
+
+		/**
+	 * Removes all instances of element from the Collection, based on
+	 * G.equals(Object) definition
+	 */
+		operation remove(element : G) : Void
+			post doesntContainsElementAnymore is
+				contains(element).~not
+		is
+			do
+				var elem : G
+				from elem := self.detect{e | do
+						e.equals(element)
+					end}
+				until elem.equals(void)
+				loop
+					extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
+					elem := self.detect{e | do
+							e.equals(element)
+						end}
+				end
+			end
+
+		/**
+	 * Returns true if the Collection does not contain element
+	 */
+		operation excludes(element : G) : Boolean is
+			do
+				result := self.contains(element).~not
+			end
+
+		/**
+	 * Runs function func on each element of the Collection
+	 * the eachContext contains some information about the each process that can be used in the function, 
+	 *  for example the index represents the rank in the collection, start on 0
+	 *  or boolean to indicates weither we are processing the first and/or the last element of the collection
+	 *  note that this rank is relative to the processing order. this processing order is ensured only for sequence and ordered set
+	 *
+	 * example : 
+	 * aCollection.indexedEach { e, eachContext | \/* do something with each element e of this collection *\/ }
+	 */
+		operation indexedEach(func : < [G, EachContext]->Object >) : Void is
+			do
+				var index : Integer init 0
+				from var it : Iterator<G> init self.iterator
+				until it.isOff
+				loop
+					var context : EachContext init EachContext.new.initialize(index, index.equals(0), index.equals(size.minus(1)))
+					func(it.next, context)
+					index := index.plus(1)
+				end
+			end
+
+		/**
+	 * Returns an element from the Collection or void if the Collection is empty
+	 */
+		operation one() : G is
+			do
+				if size.equals(0) then
+					result := void
+
+				else
+					var it : Iterator<G> init iterator
+					result := it.next
+
+				end
+			end
+
+		/**
+	 * Returns true if current Collection contains all elements of Collection elements
+	 * See Collection<G>.contains(Object)
+	 */
+		operation containsAll(elements : Collection<G>) : Boolean is
+			do
+				result := true
+				from var it : Iterator<G> init elements.iterator
+				until it.isOff.~or(result.~not)
+				loop
+					result := self.contains(it.next)
+				end
+			end
+
+		/**
+	 * Sum the element if they are summable (ie implement '+' operator by inheriting of the class Summable)
+	 */
+		operation sum() : G is
+			do
+				var res : G
+				var tmp : Summable<G>
+				var o : G
+				o := self.one
+				tmp ?= o
+				result := void
+				if tmp.isNotEqual(void) then
+					self.each{elem | do
+							o := elem
+							tmp ?= o
+							if tmp.isNotEqual(void) then
+								res := tmp.plus(res)
+
+							end
+						end}
+
+				end
+				result := res
+			end
+
+		/**
+	 * Returns a Boolean stating whether the Collection contains at least one
+	 * instance of element, based on G.equals(elt : Object) definition
+	 * Note: for checking whether a physical element is contained by the collection,
+	 * make use of G.oid()
+	 */
+		operation contains(element : G) : Boolean is
+			do
+				result := false
+				from var it : Iterator<G> init iterator
+				until it.isOff.~or(result)
+				loop
+					result := it.next.equals(element)
+				end
+			end
+
+		/**
+	 * Adds an element in the Collection (default implementation)
+	 */
+		operation add(element : G) : Void is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.add(self, element)
+			end
+
+		/**
+	 * Returns a new Sequence built from the Collection
+	 */
+		operation asSequence() : Sequence<G> is
+			abstract
+
+		/**
+	 * Returns true if the Collection contains no element of Collection elements
+	 */
+		operation excludesAll(elements : Collection<G>) : Boolean is
+			do
+				result := true
+				from var it : Iterator<G> init elements.iterator
+				until it.isOff.~or(result.~not)
+				loop
+					result := self.contains(it.next).~not
+				end
+			end
+
+		/**
+	 * OCL API alignment, doeas the same as contains
+	 * See Collection<G>.contains(Object)
+	 */
+		operation includes(element : G) : Boolean is
+			do
+				result := self.contains(element)
+			end
+
+		/**
+	 * Removes all elements from the Collection
+	 */
+		operation clear() : Void is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.clear(self)
+			end
+
+		/**
+	 * OCL alignment API, does the same as empty
+	 * See Collection<G>.empty()
+	 */
+		operation isEmpty() : Boolean is
+			do
+				result := self.empty
+			end
+
+		/**
+	 * Returns a Boolean stating whether the the collector function evaluates to a
+	 * different value for each element of the Collection
+	 * example :
+	 * aCollection2 := aCollection.isUnique { e | \/* put here an expression that must be unique for all elements, for example e.name *\/ }
+	 */
+		operation isUnique<T>(collector : < G->T >) : Boolean is
+			do
+				result := true
+				var s : Sequence<T> init Sequence<T>.new
+				from var it : Iterator<G> init iterator
+				until it.isOff.~or(result.~not)
+				loop
+					var t : T init collector(it.next)
+					if s.contains(t) then
+						result := false
+
+					else
+						s.add(t)
+
+					end
+				end
+			end
+
+		/**
+	 * Returns a new Bag built from the Collection
+	 */
+		operation asBag() : Bag<G> is
+			abstract
+
+		/**
+	 * Returns an element from the Collection
+	 * Raises an EmptyCollection exception if the Collection is empty
+	 */
+		operation any() : G is
+			do
+				if size.equals(0) then
+					raise exceptions::EmptyCollection.new
+
+				end
+				var it : Iterator<G> init iterator
+				result := it.next
+			end
+
+		/**
+	 * Returns a Boolean stating whether the Collection is empty
+	 */
+		operation empty() : Boolean is
+			do
+				result := size.equals(0)
+			end
+
+		/**
+	 * Combinaison of ForAll on two elements in the collection 
+	 * result := self.forAll{x | self.forAll {y | f(x,y)}}
+	 * (where x and y are 2 elements of the Collection)
+	 * typical use sample : ownedState.forAll{s1,s2| (s1.name==s2.name)implies(s1==s2)}
+	 */
+		operation forAllCpl(f : < [G, G]->Boolean >) : Boolean is
+			do
+				result := self.forAll{x | do
+						self.forAll{y | do
+								f(x, y)
+							end}
+					end}
+			end
+
+		/**
+	 * Combinaison of exists on two elements in the collection
+	 * => result := self.exists{x | self.exists {y | f(x,y)}}
+	 */
+		operation existsCpl(f : < [G, G]->Boolean >) : Boolean is
+			do
+				result := self.exists{x | do
+						self.exists{y | do
+								f(x, y)
+							end}
+					end}
+			end
+
+		/**
+	 * OCL alignment API
+	 * Returns a Boolean stating whether the Collection contains at least
+	 * one element 
+	 * See also Collection<G>.contains(Object)
+	 */
+		operation isNotEmpty() : Boolean is
+			do
+				result := self.empty.~not
+			end
+
+		/**
+	 * Returns an element of the Collection (usually the first) for which the detector function
+	 * is not false
+	 * Returns void if no elements is validated by the detector function
+	 * example : 
+	 * anObject := aCollection.detect { e | \/* a condition *\/} // returns an element that fulfill the condition.
+	 */
+		operation detect(detector : < G->Boolean >) : G is
+			do
+				var elem : G
+				result := void
+				from var it : Iterator<G> init iterator
+				until it.isOff.~or(result.isNotEqual(void))
+				loop
+					elem := it.next
+					if detector(elem) then
+						result := elem
+
+					end
+				end
+			end
+
+		/**
+	 * Returns an Iterator on the Collection
+	 */
+		operation iterator() : Iterator<G> is
+			do
+				result := Iterator<G>.new
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.iterator(self, result)
+			end
+
+		/**
+	 * Adds all elements from the Collection elements in the current Collection
+	 */
+		operation addAll(elements : Collection<G>) : Void is
+			do
+				elements.each{element | do
+						add(element)
+					end}
+			end
+
+		/**
+	 * OCL API alignment, does the same as containsAll
+	 * See Collection<G>.containsAll(Collection<G>)
+	 */
+		operation includesAll(elements : Collection<G>) : Boolean is
+			do
+				result := self.containsAll(elements)
+			end
+
+		/**
+	 * Returns a new Sequence composed of elements of the Collection that
+	 * validate the selector function
+	 * example :
+	 * aCollection2 := aCollection.select { e | 
+     *    \/* put here a condition that returns true for elements that must  be included in the resulting Collection *\/
+	 * }
+	 */
+		operation ~select(selector : < G->Boolean >) : Sequence<G> is
+			do
+				var elem : G
+				result := Sequence<G>.new
+				from var it : Iterator<G> init iterator
+				until it.isOff
+				loop
+					elem := it.next
+					if selector(elem) then
+						result.add(elem)
+
+					end
+				end
+			end
+
+		/**
+	 * Returns the number of elements in the Collection
+	 */
+		operation size() : Integer is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.size(self)
+			end
+
+		/**
+	 * Returns a new OrderedSet built from the Collection
+	 */
+		operation asOrderedSet() : OrderedSet<G> is
+			abstract
+
+		/**
+	 * Returns a Boolean stating whether no element of the Collection invalidates
+	 * the condition specified by function func
+	 * example : 
+	 * aBoolean := aCollection.forAll { e | \/* put here a condition *\/ } // return true if the condition is true for all elements in the collection.
+	 */
+		operation forAll(func : < G->Boolean >) : Boolean is
+			do
+				var test : Boolean init true
+				from var it : Iterator<G> init iterator
+				until it.isOff
+				loop
+					test := test.~and(func(it.next))
+				end
+				result := test
+			end
+
+		/**
+	 * Returns a Boolean stating whether at least one element of the Collection
+	 * validates the condition specified by function func
+	 * example :
+	 * aBoolean := aCollection.exists { e | \/* a condition *\/} // returns true if at least one element fulfill the condition.
+	 */
+		operation exists(func : < G->Boolean >) : Boolean is
+			do
+				var test : Boolean init false
+				from var it : Iterator<G> init iterator
+				until it.isOff.~or(test.isNotEqual(false))
+				loop
+					test := test.~or(func(it.next))
+				end
+				result := test
+			end
+
+		/**
+	 * Runs function func on each element of the Collection
+	 * example : 
+	 * aCollection.each { e | \/* do something with each element e of this collection *\/ }
+	 */
+		operation each(func : < G->Object >) : Void is
+			do
+				from var it : Iterator<G> init iterator
+				until it.isOff
+				loop
+					func(it.next)
+				end
+			end
+
+		/**
+	 * Returns a new Sequence which content corresponds to the result
+	 * of running the collector function for each element of the Collection
+	 * The new collection size is the same as in the original collection, and which element types is the type of the result of the expression.
+	 * example :
+	 * aCollection2 := aCollection.collect { e | \/* put here an expression, for example e.name *\/ } 
+	 */
+		operation collect<T>(collector : < G->T >) : Sequence<T> is
+			do
+				result := Sequence<T>.new
+				from var it : Iterator<G> init iterator
+				until it.isOff
+				loop
+					result.add(collector(it.next))
+				end
+			end
+
+		/**
+	 * Returns a new Set built from the Collection
+	 */
+		operation asSet() : Set<G> is
+			abstract
+
+	}
+	/**
+ * context used in the indexedEach of Collection
+ */
+@CompilerIgnore "true"
+	class EachContext
+	{
+		attribute isLast : Boolean
+
+		attribute index : Integer
+
+		attribute isFirst : Boolean
+
+		operation initialize(i : Integer, first : Boolean, last : Boolean) : EachContext is
+			do
+				index := i
+				isFirst := first
+				isLast := last
+				result := self
+			end
+
+	}
+	/**
+ * A Set is a non-ordered collection that contains distinct elements
+ * (with regards to the G.equals(Object) operation)
+ */
+@CompilerIgnore "true"
+	class Set<G> inherits Collection<G>
+	{
+		/**
+	 * Returns a new Set corresponding to the intersection of the Set elements
+	 * with the current Set
+	 */
+		operation intersection(elements : Collection<G>) : Set<G> is
+			do
+				result := Set<G>.new
+				var elem : G
+				from var it : Iterator<G> init self.iterator
+				until it.isOff
+				loop
+					elem := it.next
+					if elements.contains(elem) then
+						result.add(elem)
+
+					end
+				end
+			end
+
+		/**
+	 * Returns a new Set corresponding to the difference between the
+	 * current Set and the Set elements, ie all elements contained by 
+	 * the current Set that do not appear in the elements Set 
+	 */
+		operation minus(elements : Set<G>) : Set<G> is
+			do
+				result := Set<G>.new
+				var elem : G
+				from var it : Iterator<G> init self.iterator
+				until it.isOff
+				loop
+					elem := it.next
+					if elements.contains(elem).~not then
+						result.add(elem)
+
+					end
+				end
+			end
+
+		/**
+	 * Overrides Collection<G>.remove(G)
+	 * Removes the element from the Set if it is contained by the Set
+	 */
+		method remove(element : G) : Void from kermeta::standard::Collection is
+			do
+				var elem : G init self.detect{e | do
+						e.equals(element)
+					end}
+				if elem.isNotEqual(void) then
+					extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
+
+				end
+			end
+
+		/**
+	 * Overrides Object.equals(Object)
+	 * Returns a Boolean stating whether the provided element is equal to
+	 * current Set
+	 */
+		method equals(element : Object) : Boolean from kermeta::language::structure::Object is
+			do
+				var isEqual : Boolean init false
+				if element.isVoid.~not then
+					if Collection<G>.isInstance(element) then
+						var collection : Collection<G>
+						collection ?= element
+						if self.size.equals(collection.size) then
+							var elem : G
+							var ok : Boolean init true
+							from var it : Iterator<G> init self.iterator
+							until it.isOff.~or(ok.~not)
+							loop
+								elem := it.next
+								if collection.contains(elem).~not then
+									ok := false
+
+								end
+							end
+							isEqual := ok
+
+						end
+
+					end
+
+				end
+				result := isEqual
+			end
+
+		/**
+	 * Overrides Collection<G>.asSequence()
+	 * Returns a new Sequence composed of all elements of current Set
+	 */
+		method asSequence() : Sequence<G> from kermeta::standard::Collection is
+			do
+				var s : Sequence<G> init Sequence<G>.new
+				s.addAll(self)
+				result := s
+			end
+
+		/**
+	 * Overrides Collection<G>.add(G)
+	 * Adds elt to the Set if it is not already contained by the
+	 * Set, does nothing otherwise
+	 */
+		method add(element : G) : Void from kermeta::standard::Collection is
+			do
+				if self.contains(element).~not then
+					super(element)
+
+				end
+			end
+
+		/**
+	 * Returns a ordered set of the bag elements sorted using the given comparator.
+	 * The comparator must return :<ul>
+	 *   <li>+1 if the second <G> element is greater than the first</li> 
+	 *   <li>0 if the second <G> element equals the first</li> 
+	 *   <li>-1 if the second <G> element is lower than the first</li> 
+	 */
+/**
+	 * Recursive sort of the given (ordered) set using the given comparator.
+	 * The comparator must return :<ul>
+	 *   <li>+1 if the second <G> element is greater than the first</li> 
+	 *   <li>0 if the second <G> element equals the first</li> 
+	 *   <li>-1 if the second <G> element is lower than the first</li> 
+	 */
+/**
+	 * Internal concatenation tool for recursive 'quickSort()' method
+	 */
+		operation concatenate(less : OrderedSet<G>, pivot : OrderedSet<G>, greater : OrderedSet<G>) : OrderedSet<G> is
+			do
+				result := OrderedSet<G>.new
+				result.addAll(less)
+				result.addAll(pivot)
+				result.addAll(greater)
+			end
+
+		/**
+	 * Returns a new Set which contents corresponds to the symmetric
+	 * difference between current Set and Set s, ie all elements of
+	 * each Set that do not appear in the other one
+	 */
+		operation symmetricDifference(s : Set<G>) : Set<G> is
+			do
+				var res : Set<G> init s.minus(self)
+				result := self.minus(s)
+				result.addAll(res)
+			end
+
+		/**
+	 * Returns a new Set which content includes all non-Collection elements
+	 * of the current Set, and, for each Collection element of the current
+	 * Set, as many elements as the Collection contains
+	 * Duplicates are removed
+	 */
+		operation flatten() : Set<Object> is
+			do
+				var res : Set<Object> init Set<Object>.new
+				if G.isKindOf(Collection<Object>) then
+					var col : Collection<Object>
+					var o : Object
+					self.each{e | do
+							col ?= e
+							res.addAll(col)
+						end}
+
+				end
+				result := res
+			end
+
+		/**
+	 * Overrides Collection<G>.asOrderedSet()
+	 * Returns a new OrderedSet that contains all elements of current Set
+	 */
+		method asOrderedSet() : OrderedSet<G> from kermeta::standard::Collection is
+			do
+				var s : OrderedSet<G> init OrderedSet<G>.new
+				s.addAll(self)
+				result := s
+			end
+
+		/**
+	 * Overrides Collection<G>.asBag()
+	 * Returns a new Bag composed of all elements of current Set
+	 */
+		method asBag() : Bag<G> from kermeta::standard::Collection is
+			do
+				var s : Bag<G> init Bag<G>.new
+				s.addAll(self)
+				result := s
+			end
+
+		/**
+	 * Returns a new Set corresponding to the union of the Set elements
+	 * with the current Set
+	 */
+		operation union(elements : Set<G>) : Set<G> is
+			do
+				result := Set<G>.new
+				result.addAll(self)
+				result.addAll(elements)
+			end
+
+		/**
+	 * Overrides Collection<G>.asSet()
+	 * Returns a new Set composed of all elements of current Set
+	 */
+		method asSet() : Set<G> from kermeta::standard::Collection is
+			do
+				var s : Set<G> init Set<G>.new
+				s.addAll(self)
+				result := s
+			end
+
+		/**
+	 * Returns a new Bag corresponding to the union of the Bag elements
+	 * with the current Set
+	 */
+		operation unionWithBag(elements : Bag<G>) : Bag<G> is
+			do
+				result := Bag<G>.new
+				result.addAll(self)
+				result.addAll(elements)
+			end
+
+	}
+	/**
+ * Bag is a concrete non-ordered Collection allowing duplicates
+ */
+@CompilerIgnore "true"
+	class Bag<G> inherits Collection<G>
+	{
+		/**
+	 * Returns a new Bag corresponding to the intersection of elements
+	 * and the Bag
+	 */
+		operation intersection(elements : Bag<G>) : Bag<G> is
+			do
+				result := Bag<G>.new
+				var elem : G
+				var it : Iterator<G> init self.iterator
+				from it
+				until it.isOff
+				loop
+					elem := it.next
+					if elements.contains(elem) then
+						if self.count(elem).isLowerOrEqual(elements.count(elem)) then
+							result.add(elem)
+
+						end
+
+					end
+				end
+				it := elements.iterator
+				from it
+				until it.isOff
+				loop
+					elem := it.next
+					if self.contains(elem) then
+						if elements.count(elem).isLower(self.count(elem)) then
+							result.add(elem)
+
+						end
+
+					end
+				end
+			end
+
+		/**
+	 * Overrides Object.equals(elt : Object)
+	 * Returns a Boolean stating whether the provided element is equal to
+	 * current Bag
+	 */
+		method equals(element : Object) : Boolean from kermeta::language::structure::Object is
+			do
+				var isEqual : Boolean init false
+				if element.isVoid.~not then
+					if Collection<G>.isInstance(element) then
+						var collection : Bag<G>
+						collection ?= element
+						var selfAsSet : Set<G> init self.asSet
+						isEqual := selfAsSet.equals(collection.asSet)
+
+					end
+
+				end
+				result := isEqual
+			end
+
+		/**
+	 * Overrides Collection<G>.asSequence()
+	 * Returns a new Sequence containing all elements of current Bag
+	 */
+		method asSequence() : Sequence<G> from kermeta::standard::Collection is
+			do
+				var s : Sequence<G> init Sequence<G>.new
+				s.addAll(self)
+				result := s
+			end
+
+		/**
+	 * Returns a sequence of the bag elements sorted using the given comparator.
+	 * The comparator must return :<ul>
+	 *   <li>+1 if the second <G> element is greater than the first</li> 
+	 *   <li>0 if the second <G> element equals the first</li> 
+	 *   <li>-1 if the second <G> element is lower than the first</li> 
+	 */
+/**
+	 * Recursive sort of the given sequence using the given comparator.
+	 * The comparator must return :<ul>
+	 *   <li>+1 if the second <G> element is greater than the first</li> 
+	 *   <li>0 if the second <G> element equals the first</li> 
+	 *   <li>-1 if the second <G> element is lower than the first</li> 
+	 */
+/**
+	 * Internal concatenation tool for recursive 'quickSort()' method
+	 */
+		operation concatenate(less : Sequence<G>, pivot : Sequence<G>, greater : Sequence<G>) : Sequence<G> is
+			do
+				result := Sequence<G>.new
+				result.addAll(less)
+				result.addAll(pivot)
+				result.addAll(greater)
+			end
+
+		/**
+	 * Returns a new Bag which content includes the content of the
+	 * current Bag from which all instances of object have been
+	 * removed
+ 	 */
+		operation excluding(object : G) : Bag<G> is
+			do
+				var s : Bag<G> init Bag<G>.new
+				s.addAll(self)
+				s.remove(object)
+				result := s
+			end
+
+		/**
+	 * Returns a new Bag which content includes all non-Collection elements
+	 * of the current Set, and, for each Collection element of the current
+	 * Bag, as many elements as the Collection contains
+	 */
+		operation flatten() : Bag<Object> is
+			do
+				var res : Bag<Object> init Bag<Object>.new
+				if G.isKindOf(Collection<Object>) then
+					var col : Collection<Object>
+					var o : Object
+					self.each{e | do
+							col ?= e
+							res.addAll(col)
+						end}
+
+				end
+				result := res
+			end
+
+		/**
+	 * Returns a new Set corresponding to the intersection of a Set of
+	 * elements and the Bag
+	 */
+		operation intersectionWithSet(elements : Set<G>) : Set<G> is
+			do
+				result := Set<G>.new
+				var elem : G
+				from var it : Iterator<G> init elements.iterator
+				until it.isOff
+				loop
+					elem := it.next
+					if self.contains(elem) then
+						result.add(elem)
+
+					end
+				end
+			end
+
+		/**
+	 * Returns a new Bag which content includes the content of the
+	 * current Bag and the element object
+	 */
+		operation including(object : G) : Bag<G> is
+			do
+				var s : Bag<G> init Bag<G>.new
+				s.addAll(self)
+				s.add(object)
+				result := s
+			end
+
+		/**
+	 * Overrides Collection<G>.asOrderedSet()
+	 * Returns a new OrderedSet containing elements of the Bag without duplicates
+	 */
+		method asOrderedSet() : OrderedSet<G> from kermeta::standard::Collection is
+			do
+				var s : OrderedSet<G> init OrderedSet<G>.new
+				s.addAll(self)
+				result := s
+			end
+
+		/**
+	 * Overrides Collection<G>.asBag()
+	 * Returns a new Bag containing all elements of current Bag	
+	 */
+		method asBag() : Bag<G> from kermeta::standard::Collection is
+			do
+				var s : Bag<G> init Bag<G>.new
+				s.addAll(self)
+				result := s
+			end
+
+		/**
+	 * Returns a new Bag corresponding to the union of elements and
+	 * current Bag
+	 */
+		operation union(elements : Collection<G>) : Bag<G> is
+			do
+				result := Bag<G>.new
+				result.addAll(self)
+				result.addAll(elements)
+			end
+
+		/**
+	 * Removes one instance of element from the Bag
+	 */
+		operation removeOne(element : G) : Void is
+			do
+				var elem : G init self.detect{e | do
+						e.equals(element)
+					end}
+				if elem.isNotEqual(void) then
+					extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
+
+				end
+			end
+
+		/**
+	 * Removes the element identified by the provided Oid from the Bag
+	 */
+		operation removeFromOid(elementOid : Integer) : Void
+			post doesntContainsElementAnymore is
+				exists{e | do
+						e.oid.equals(elementOid)
+					end}.~not
+		is
+			do
+				var elem : G init self.detect{e | do
+						e.oid.equals(elementOid)
+					end}
+				if elem.isNotEqual(void) then
+					extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
+
+				end
+			end
+
+		/**
+	 * Overrides Collection<G>.asSet()
+	 * Returns a new Set containing elements of the Bag without duplicates
+	 */
+		method asSet() : Set<G> from kermeta::standard::Collection is
+			do
+				var s : Set<G> init Set<G>.new
+				s.addAll(self)
+				result := s
+			end
+
+	}
+	/**
+ * An OrderedCollection is the root abstract class for all ordered Collections.
+ */
+@CompilerIgnore "true"
+	abstract class OrderedCollection<G> inherits Collection<G>
+	{
+		/**
+	 * Removes the element at rank index from the OrderedCollection
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedCollection
+	 */
+		operation removeAt(index : Integer) : Void is
+			do
+				if index.isLower(0).~or(index.isGreater(size.minus(1))) then
+					raise exceptions::IndexOutOfBound.new
+
+				end
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.removeAt(self, index)
+			end
+
+		/**
+	 * Adds element in the OrderedCollection at rank index
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedCollection
+	 */
+		operation addAt(index : Integer, element : G) : Void is
+			do
+				if index.isLower(0).~or(index.isGreater(size)) then
+					raise exceptions::IndexOutOfBound.new
+
+				end
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.addAt(self, index, element)
+			end
+
+		/**
+	 * Returns the last element in the OrderedCollection
+	 * Raises an EmptyCollection exception if the OrderedCollection is empty
+	 */
+		operation last() : G is
+			do
+				if size.equals(0) then
+					raise exceptions::EmptyCollection.new
+
+				end
+				result := elementAt(size.minus(1))
+			end
+
+		/**
+	 * Overrides Object.equals(Object)
+	 * Returns a Boolean stating whether the provided element is equal to
+	 * current OrderedCollection
+	 */
+		method equals(element : Object) : Boolean from kermeta::language::structure::Object is
+			do
+				var isEqual : Boolean init false
+				if element.isVoid.~not then
+					if OrderedCollection<G>.isInstance(element) then
+						var collection : Collection<G>
+						collection ?= element
+						if self.size.equals(collection.size) then
+							var selfIterator : Iterator<G> init self.iterator
+							var collectionIterator : Iterator<G> init collection.iterator
+							var difference : Boolean init false
+							from 1.equals(1)
+							until selfIterator.isOff.~or(collectionIterator.isOff).~or(difference)
+							loop
+								if selfIterator.next.equals(collectionIterator.next).~not then
+									difference := true
+
+								end
+							end
+							isEqual := difference.~not
+
+						end
+
+					end
+
+				end
+				result := isEqual
+			end
+
+		/** 
+	 * Returns the index of the first instance of element in the OrderedCollection
+	 * or -1 if the element is not contained by the OrderedCollection
+	 * Raises an EmptyCollection exception if the OrderedCollection is empty
+	 */
+		operation indexOf(element : G) : Integer is
+			do
+				if size.equals(0) then
+					raise exceptions::EmptyCollection.new
+
+				end
+				var i : Integer init 0
+				var it : Iterator<G> init iterator
+				var found : Boolean init false
+				from found
+				until found.~or(it.isOff)
+				loop
+					if element.equals(it.next) then
+						found := true
+
+					else
+						i := i.plus(1)
+
+					end
+				end
+				if found then
+					result := i
+
+				else
+					result := 1.uminus
+
+				end
+			end
+
+		/**
+	 * Returns the element at rank index in the OrderedCollection
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedCollection
+	 */
+		operation elementAt(index : Integer) : G is
+			do
+				if index.isLower(0).~or(index.isGreater(size.minus(1))) then
+					raise exceptions::IndexOutOfBound.new
+
+				end
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.elementAt(self, index)
+			end
+
+		/** 
+	 * Returns the first element in the OrderedCollection
+	 * Raises an EmptyCollection exception if the OrderedCollection is empty
+	 */
+		operation first() : G is
+			do
+				if size.equals(0) then
+					raise exceptions::EmptyCollection.new
+
+				end
+				result := elementAt(0)
+			end
+
+	}
+	/**
+ * An OrderedSet is a Set that contained ordered distinct elements
+ */
+@CompilerIgnore "true"
+	class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
+	{
+		/**
+	 * Builds and returns a new OrderedSet from current one with element
+	 * inserted in head
+	 */
+		operation append(element : G) : OrderedSet<G> is
+			do
+				result := OrderedSet<G>.new
+				result.addAll(self)
+				result.add(element)
+			end
+
+		/**
+	 * Builds and returns a new OrderedSet from current one with element
+	 * inserted at rank index
+	 */
+		operation insertAt(index : Integer, subject : G) : OrderedSet<G> is
+			do
+				result := OrderedSet<G>.new
+				result.addAll(self)
+				result.addAt(index, subject)
+			end
+
+		/**
+	 * Overrides OrderedCollection<G>.addAt(Integer, G)
+	 * Adds element in the OrderedSet at rank index if the ordered set does
+	 * not already contain the element, does nothing otherwise
+	 */
+		method addAt(index : Integer, element : G) : Void from kermeta::standard::OrderedCollection is
+			do
+				if self.contains(element).~not then
+					super(index, element)
+
+				end
+			end
+
+		/**
+	 * See OrderedCollection<G>.equals(Object) 
+	 */
+		method equals(element : Object) : Boolean from kermeta::standard::OrderedCollection is
+			do
+				result := super(element)
+			end
+
+		/**
+	 * Builds and returns a new OrderedSet from current one with element
+	 * inserted in tail
+	 */
+		operation preppend(element : G) : OrderedSet<G> is
+			do
+				result := OrderedSet<G>.new
+				result.add(element)
+				result.addAll(self)
+			end
+
+		/**
+	 * Returns element at rank index in the sequence
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedSet
+	 */
+		operation at(index : Integer) : G is
+			do
+				if index.isGreaterOrEqual(0).~and(index.isLowerOrEqual(self.size)) then
+					var it : Iterator<G> init iterator
+					from var i : Integer init 1.uminus
+					until i.equals(index)
+					loop
+						result := it.next
+						i := i.plus(1)
+					end
+
+				else
+					raise exceptions::IndexOutOfBound.new
+
+				end
+			end
+
+		/**
+	 * See Set<G>.add(G)
+	 */
+		method add(element : G) : ~Void from kermeta::standard::Set is
+			do
+				super(element)
+			end
+
+		/**
+	 * Builds and returns a new OrderedSet composed of elements of current ordered
+	 * set from rank min to rank max (order is respected)
+	 * Raises IndexOutOfBound exception if min is negative, max is larger than 
+	 * the size of the ordered set or min is larger than max
+	 */
+		operation subSet(min : Integer, max : Integer) : OrderedSet<G> is
+			do
+				result := OrderedSet<G>.new
+				if min.isGreaterOrEqual(0).~and(max.isLowerOrEqual(self.size)).~and(min.isLowerOrEqual(max)) then
+					var it : Iterator<G> init iterator
+					var i : Integer init 0
+					from i
+					until i.equals(min)
+					loop
+						it.next
+						i := i.plus(1)
+					end
+					from i
+					until i.equals(max.plus(1))
+					loop
+						result.add(it.next)
+						i := i.plus(1)
+					end
+
+				else
+					raise exceptions::IndexOutOfBound.new
+
+				end
+			end
+
+	}
+	/**
+ * A Sequence is an OrderedCollection of elements allowing duplicates
+ */
+@CompilerIgnore "true"
+	class Sequence<G> inherits Bag<G>, OrderedCollection<G>
+	{
+		/**
+	 * Builds and returns a new Sequence composed of elements of current sequence
+	 * from rank min to rank max (order is respected)
+	 * Raises IndexOutOfBound exception if min is negative, max is larger than 
+	 * the size of the sequence or min is larger than max
+	 */
+		operation subSequence(min : Integer, max : Integer) : Sequence<G> is
+			do
+				result := Sequence<G>.new
+				if min.isGreaterOrEqual(0).~and(max.isLowerOrEqual(self.size)).~and(min.isLowerOrEqual(max)) then
+					var it : Iterator<G> init iterator
+					var i : Integer init 0
+					from i
+					until i.equals(min)
+					loop
+						it.next
+						i := i.plus(1)
+					end
+					from i
+					until i.equals(max.plus(1))
+					loop
+						result.add(it.next)
+						i := i.plus(1)
+					end
+
+				else
+					raise exceptions::IndexOutOfBound.new
+
+				end
+			end
+
+		/**
+	 * Builds and returns a new Sequence from current one with element
+	 * inserted in head
+	 */
+		operation append(element : G) : Sequence<G> is
+			do
+				result := Sequence<G>.new
+				result.addAll(self)
+				result.add(element)
+			end
+
+		/**
+	 * Builds and returns a new Sequence from current one with element
+	 * inserted at rank index
+	 */
+		operation insertAt(index : Integer, element : G) : Sequence<G> is
+			do
+				result := Sequence<G>.new
+				result.addAll(self)
+				result.addAt(index, element)
+			end
+
+		/**
+	 * Builds and returns a new Sequence from current one with element
+	 * inserted in tail
+	 */
+		operation preppend(element : G) : Sequence<G> is
+			do
+				result := Sequence<G>.new
+				result.add(element)
+				result.addAll(self)
+			end
+
+		/**
+	 * Overrides OrderedCollection<G>.equals(Object)
+	 * Returns a Boolean stating whether the provided element is equal to
+	 * current Sequence	
+	 */
+		method equals(element : Object) : Boolean from kermeta::standard::OrderedCollection is
+			do
+				result := super(element)
+			end
+
+		/**
+	 * Returns element at rank index in the sequence
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the Sequence
+	 */
+		operation at(index : Integer) : G is
+			do
+				if index.isGreaterOrEqual(0).~and(index.isLowerOrEqual(self.size)) then
+					var it : Iterator<G> init iterator
+					from var i : Integer init 1.uminus
+					until i.equals(index)
+					loop
+						result := it.next
+						i := i.plus(1)
+					end
+
+				else
+					raise exceptions::IndexOutOfBound.new
+
+				end
+			end
+
+	}
+	/**
+ * Iterator to be used with Collection
+ * See also Collection<G>.getIterator()
+ */
+@CompilerIgnore "true"
+	class Iterator<G>
+	{
+		/**
+	 * Returns true if the iterator has a next element
+	 */
+		operation hasNext() : Boolean is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.hasNext(self)
+			end
+
+		/**
+	 * Returns the next element of the iterator
+	 * Raises IteratorIsOff exception in case the iterator is on the last element 
+	 */
+		operation next() : G is
+			do
+				if hasNext.~not then
+					raise exceptions::IteratorIsOff.new
+
+				end
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.next(self)
+			end
+
+		/**
+	 * Returns true if the iterator is on the last element
+	 * i.e. returns not self.hasNext()
+	 */
+		operation isOff() : Boolean is
+			do
+				result := hasNext.~not
+			end
+
+	}
+	/** 
+  * This special object is used to represent java objects that cannot be concretely used with kermeta
+  * <b>the only actions possible on these objects are : assignment and passing them as parameter</b>
+  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png"/>
+  */
+@CompilerIgnore "true"
+	class UnknownJavaObject
+	{
+		/**
+ 	 * NOT IMPLEMENTED
+ 	 */
+		method toString() : String from kermeta::language::structure::Object is
+			do
+				result := "toString of  UnknownJavaObject not implemented yet"
+			end
+
+	}
+}
+
+/**
+ * Contains the classes that handle the serialization of models, in particular
+ * EMF models.
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/persistence_package.png"/>
+ */
+package persistence
+{
+	/**
+ * The main class that handle a loaded/saved model.
+ * There are a few important things to note for the developer :
+ * 
+ * - load a Resource : this loads a Collection of instances corresponding to the
+ *   objects in the loaded model. If the Collection of instances is empty, than 
+ *	 a ResourceLoadException is raised
+ *
+ * - save a Resource : this saves the collection of instances in a new file. This can
+ *   be correctly done if and only if the instances saved are conform to the metamodel
+ *   linked to this resource (this link does not need to be explicit. It is normally retrieved
+ *   through the EMF model -- see Java wrapping "Resource.java").
+ * 
+ * - add/remove an instance to the Resource : this adds an element in the resource. It cannot
+ *   be "simply" added because of the following potential errors :
+ *
+ *   - The object added is not conform to the metamodel -> Error
+ *   - The object was already added in the resource -> Not a real error : we do nothing
+ *   - The object to remove does not exist -> redirect to a collection-specific error
+ *   - The object to remove is attached to an object in the collection -> "dependency-violation" exception?
+
+ */
+@CompilerIgnore "true"
+	abstract class Resource inherits standard::Set<standard::Object>
+	{
+		/**	
+	 * Returns the set of Resources the current Resource, which must have been loaded,
+	 * depends on, an empty set if current Resource has no dependency
+	 */
+		property readonly dependentResources : set Resource[0..*]
+			getter is do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.getDependentResources(self, uri, metaModelURI, "EMF")
+			end
+
+		/**
+	 * Repository used to create the Resource
+	 * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only 
+	 * one Resource of a given Repository
+	 */
+		reference repository : Repository#resources
+
+		/** 
+	 * Returns the set of all Objects directly or indirectly contained by the Resource,
+	 * or an empty set if the Resource is empty
+	 * implementation note: since this derived property  build a set, it guarantees the unicity, as a drawback,
+	 *  calling this property on large resources will be really slow due to this verification. some user may prefer
+	 * to reimplement it using a bag.
+	 */
+		property readonly contents : set standard::Object[0..*]
+			getter is do
+				var res : standard::Set<language::structure::Object> init standard::Set<language::structure::Object>.new
+				res.addAll(self)
+				var coll : standard::Set<language::structure::Object>
+				self.each{e | do
+						coll ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getAllContainedObjects(e)
+						res.addAll(coll)
+					end}
+				result := res
+			end
+
+		/**
+	 * Indicates weither this resource will be updated when saving the repository
+	 * This is useful if the repository contains some metamodels that should not be saved.
+	 *
+	 * Note that in the current version, it doesn't ensure that you have not modified its content (using the freeze)
+	 * If you modify the elements of such resource, other resource that depend on it will be incorrectly saved 
+	 */
+		attribute isReadOnly : standard::Boolean
+
+		/**
+	 * Uri of the meta-model of the Resource to load
+	 */
+		attribute metaModelURI : standard::String
+
+		/**
+	 * Uri of the Resource to load
+	 */
+		attribute uri : standard::String
+
+		/**
+	 * Save a Resource in the file specified by the current value of uri 
+	 */
+		operation save() : Void is
+			abstract
+
+		/**
+	 * Save a Resource in a file referenced by the new uri.
+	 * note: this doesn't change the URI of the resource, it is only saved in another place 
+	 */
+		operation saveWithNewURI(new_uri : standard::String) : Void is
+			do
+			end
+
+		/**
+	 * Search for elements referenced by one element contained by this resource that are not contained by this repository
+	 * ie. element that EMF would claim as "not contained in a resource"
+	 * checks only objects directly referenced by the element in this resource, ignores indirectly referenced objects
+	 * example of use :
+	 *  var report : Set&lt;DanglingDiagnostic&gt;
+	 *	report := resource.findDanglingModelElements()
+	 *	report.each{ diag | stdio.writeln(diag.toString ) }
+	 */
+		operation findDanglingModelElements() : standard::Set<DanglingDiagnostic> is
+			do
+				result := standard::Set<DanglingDiagnostic>.new
+				self.contents.each{containedObj | do
+						var classDef : language::structure::ClassDefinition
+						classDef ?= containedObj.getMetaClass.typeDefinition
+						if classDef.isVoid.~not then
+							classDef.allAttribute.each{prop | do
+									if prop.isDerived.~not then
+										if prop.upper.isGreater(1).~or(prop.upper.equals(1.uminus)) then
+											var referencedObjs : standard::Collection<standard::Object>
+											referencedObjs ?= containedObj.get(prop)
+											if referencedObjs.isVoid.~not then
+												referencedObjs.each{referencedObj | do
+														if self.repository.resources.exists{res2 | do
+																res2.contents.contains(referencedObj)
+															end}.~not.~and(referencedObj.isKindOf(standard::String).~or(referencedObj.isKindOf(standard::Integer)).~or(referencedObj.isKindOf(standard::Boolean)).~not) then
+															var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
+															diagnostic.danglingElement := referencedObj
+															diagnostic.referencingElement := containedObj
+															diagnostic.referencingProperty := prop
+															result.add(diagnostic)
+
+														end
+													end}
+
+											end
+
+										else
+											var referencedObj : standard::Object
+											referencedObj := containedObj.get(prop)
+											if referencedObj.isVoid.~not then
+												if self.repository.resources.exists{res2 | do
+														res2.contents.contains(referencedObj)
+													end}.~not.~and(referencedObj.isKindOf(standard::String).~or(referencedObj.isKindOf(standard::Integer)).~or(referencedObj.isKindOf(standard::Boolean)).~not) then
+													var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
+													diagnostic.danglingElement := referencedObj
+													diagnostic.referencingElement := containedObj
+													diagnostic.referencingProperty := prop
+													result.add(diagnostic)
+
+												end
+
+											end
+
+										end
+
+									end
+								end}
+
+						end
+					end}
+			end
+
+		/**
+	 * Loads the Resource, thus making content of the Resource browsable.
+	 * Raises a ResourceLoadException in case loaded Resource is empty
+	 */
+		operation load() : Void is
+			abstract
+
+		/**
+	 * The entities contained in the model-instance, that are provided when user loads a resource 
+	 * instances == rootContents
+	 * this is a loop on Resource itself in order to get backward compatibility
+	 */
+@deprecated "user should use the resource directly since this is a collection"
+		operation instances() : Resource is
+			do
+				result := self
+			end
+
+		/**
+	 * Return a normalized version of the Uri of this resource
+	 * in order to prevent several loading of the same file because they have different path that leads to them, kermeta uses normalizedURI
+	 * for some of its functions (eg. repository.getResource )
+	 * As EMF needs URI of the form platform:/resource or platform:/plugin, kermeta automatically
+	 * normalize the uri when loading or saving. This is especially true for file:/ uri or relative uri (./ or / ) 
+	 * If you wish to know what concrete uri is used by kermeta when loading and saving you can use this function
+	 * to check how a given uri is normalized by kermeta
+	 */
+		operation normalizedUri() : standard::String is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
+			end
+
+	}
+	/**
+ * Extension of the Resource class definition that is specific to EMF Repository.
+ * User is not supposed to directly create it. Otherwise it will not be correctly initialized
+ * You must To create one 
+ */
+@CompilerIgnore "true"
+@CompilerIgnore "true"
+	class EMFResource inherits Resource
+	{
+		/**
+	 * Overrides Resource.save()
+	 */
+		method save() : Void from kermeta::persistence::Resource is
+			do
+				if isReadOnly then
+					var e : exceptions::ResourceSaveException init exceptions::ResourceSaveException.new
+					e.message := "Cannot save a readonly resource. Probably this resource was indirectly loaded when loading another resource. \n".plus("If you really intend to save this resource, you can set isReadOnly to false, but you must ensure to do so before any resource save.\n").plus("Note : setting isReadOnly to false on the metamodel may lead to unpredictable results")
+					raise e
+
+				end
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(self, self.uri, metaModelURI, "EMF", self, false)
+			end
+
+		/**
+	 * Overrides Set<Object>.remove(Object)
+	 * Remove the instance from the Resource
+	 */
+		method remove(instance : standard::Object) : Void from kermeta::standard::Set is
+			do
+				if self.contains(instance) then
+					extern fr::irisa::triskell::kermeta::runtime::language::Object.unSetContainingResource(instance)
+					super(instance)
+
+				end
+			end
+
+		operation clean() : standard::~Void is
+			do
+				do
+					extern fr::irisa::triskell::kermeta::runtime::MarkerHelper.cleanFile(self.uri)
+				end
+			end
+
+		/**
+	 * Overrides Resource.saveWithNewURI(String)
+	 */
+		method saveWithNewURI(new_uri : standard::String) : Void from kermeta::persistence::Resource is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(self, new_uri, metaModelURI, "EMF", self, false)
+			end
+
+		/**
+	 * Checks the Resource using the EMF validation function, and saves it if
+	 * validation succeeds
+	 * Applies validation to all root objects of the Resource
+	 * Returns true if the validation reports no error, raises exceptions otherwise
+	 */
+		operation saveAndValidateWithEMF() : standard::Boolean is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(self, self.uri, metaModelURI, "EMF", self, true)
+			end
+
+		operation mark(message : standard::String) : standard::~Void is
+			do
+				do
+					extern fr::irisa::triskell::kermeta::runtime::MarkerHelper.markFile(self.uri, message)
+				end
+			end
+
+		/**
+	 * Overrides Resource.load()
+	 * In case the metamodelURI was not previously set, metamodelURI is filled with
+	 * the nsuri of the root package of the metamodel used to load the Resource after
+	 * a successful load
+	 */
+		method load() : Void from kermeta::persistence::Resource is
+			do
+				self.clear
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(self, uri, metaModelURI, "EMF")
+				if self.size.equals(0) then
+					stdio.writeln("Resource load failed!")
+					var e : exceptions::ResourceLoadException init exceptions::ResourceLoadException.new
+					e.message := "Resource load failed, no object was created in this resource from ".plus(uri)
+					raise e
+
+				end
+			end
+
+		/**
+	 * Overrides Set<Object>.add(Object)
+	 * Add an instance to the Resource 
+	 * Ensures that the instance is referenced by a one and only one Resource of the same Repository
+	 * Ensures that the instance does not appear more than once in the Resource
+	 */
+		method add(instance : standard::Object) : Void from kermeta::standard::Set is
+			do
+				repository.resources.~select{r | do
+						r.isNotEqual(self).~and(r.contains(instance))
+					end}.each{r | do
+						stdio.writeln("DVK ! another resource of the same repository was containing this element")
+						r.remove(instance)
+					end}
+				extern fr::irisa::triskell::kermeta::runtime::language::Object.setContainingResource(instance, self)
+				super(instance)
+			end
+
+	}
+	/**
+ * Abstract resource container, that contains a list of available loaded resources, 
+ * and methods to create or get a resource given an URI.
+ * A repository cannot contain 2 resources which points to the same file (ie. that have the same normalizedURI)
+ */
+@CompilerIgnore "true"
+	abstract class Repository
+	{
+		/**
+	 * Resources created by this Repository 
+	 * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only 
+	 * one Resource of a given Repository
+	 */
+		attribute resources : set Resource[0..*]#repository
+
+		/**
+	 * Creates a new Resource with given uri, and an optional mm_uri
+	 * mm_uri is required when creating a new model from scratch.
+	 * Raises a ResourceCreate exception in case the Repository already
+	 * contains a Resource with the given uri
+	 * If uri does not points to an existing model file (in the case of
+	 * a model creation), calls to load() operation will fail as long as
+	 * the model has not been saved once
+	 */
+		operation createResource(uri : standard::String, mm_uri : standard::String) : Resource is
+			abstract
+
+		/**
+	 * Return a normalized version of the Uri 
+	 * in order to prevent several loading of the same file because they have different path that leads to them, kermeta uses normalizedURI
+	 * for some of its functions (eg. repository.getResource )
+	 * As EMF needs URI of the form platform:/resource or platform:/plugin, kermeta automatically
+	 * normalize the uri when loading or saving. This is especially true for file:/ uri or relative uri (./ or / ) 
+	 * If you wish to know what concrete uri is used by kermeta when loading and saving you can use this function
+	 * to check how a given uri is normalized by kermeta 
+	 */
+		operation normalizeUri(uri : standard::String) : standard::String is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
+			end
+
+		/**
+	 * Search for elements referenced by one element contained by this repository  that are not contained by this repository
+	 * ie. element that EMF would claim as "not contained in a resource"
+	 * example of use :
+	 *  var report : Set&lt;DanglingDiagnostic&gt;
+     *	report := repository.findDanglingModelElements()
+     *	report.each{ diag | stdio.writeln(diag.toString ) }
+	 */
+		operation findDanglingModelElements() : standard::Set<DanglingDiagnostic> is
+			do
+				result := standard::Set<DanglingDiagnostic>.new
+				var fullResContents : standard::Set<standard::Object>
+				self.resources.each{res | do
+						if fullResContents.isVoid then
+							fullResContents := res.contents
+
+						else
+							fullResContents.addAll(res.contents)
+
+						end
+					end}
+				fullResContents.each{containedObj | do
+						var classDef : language::structure::ClassDefinition
+						classDef ?= containedObj.getMetaClass.typeDefinition
+						if classDef.isVoid.~not then
+							classDef.allAttribute.each{prop | do
+									if prop.isDerived.~not then
+										if prop.upper.isGreater(1).~or(prop.upper.equals(1.uminus)) then
+											var referencedObjs : standard::Collection<standard::Object>
+											referencedObjs ?= containedObj.get(prop)
+											if referencedObjs.isVoid.~not then
+												referencedObjs.each{referencedObj | do
+														if fullResContents.contains(referencedObj).~not.~and(referencedObj.isKindOf(standard::String).~or(referencedObj.isKindOf(standard::Integer)).~or(referencedObj.isKindOf(standard::Boolean)).~not) then
+															var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
+															diagnostic.danglingElement := referencedObj
+															diagnostic.referencingElement := containedObj
+															diagnostic.referencingProperty := prop
+															result.add(diagnostic)
+
+														end
+													end}
+
+											end
+
+										else
+											var referencedObj : standard::Object
+											referencedObj := containedObj.get(prop)
+											if referencedObj.isVoid.~not then
+												if fullResContents.contains(referencedObj).~not.~and(referencedObj.isKindOf(standard::String).~or(referencedObj.isKindOf(standard::Integer)).~or(referencedObj.isKindOf(standard::Boolean)).~not) then
+													var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
+													diagnostic.danglingElement := referencedObj
+													diagnostic.referencingElement := containedObj
+													diagnostic.referencingProperty := prop
+													result.add(diagnostic)
+
+												end
+
+											end
+
+										end
+
+									end
+								end}
+
+						end
+					end}
+			end
+
+		/**
+	 * Returns the Resource associated with the given uri if this uri is associated with
+	 * an already created Resource of the Repository.
+	 * If the Repository contains no Resource associated with the given uri, creates
+	 * a new Resource and loads it.
+	 * In order to prevent multiple load of the same file by using variant path to the same file, all URI used by this function are normalized
+	 * Raises a ResourceCreate exception if the given uri does not point to an existing
+	 * model file 
+	 * May also raises loading exceptions if this is the first retrieval of the resource
+	 */
+		operation getResource(uri : standard::String) : Resource is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.initRepository(self)
+				var normalisedUri : standard::String init normalizeUri(uri)
+				from var it : standard::Iterator<Resource> init resources.iterator
+				until it.isOff
+				loop
+					var next : Resource init it.next
+					if normalisedUri.equals(next.normalizedUri) then
+						result := next
+
+					end
+				end
+				if result.equals(void) then
+					result := self.createResource(uri, "")
+					result.load
+
+				end
+			end
+
+	}
+	/**
+ * class used to gather the information required to make a user friendly report about a dangling element
+ * (see. findDanglingModelElements())
+ */
+@CompilerIgnore "true"
+	class DanglingDiagnostic
+	{
+		/**
+	 * Element that has a reference to the dangling element  
+	 */
+		reference referencingElement : standard::Object
+
+		/**
+	 * Element that is not contained by a resource in the repository  
+	 */
+		reference danglingElement : standard::Object
+
+		/**
+	 * Property used to reference the dangling element  
+	 */
+		reference referencingProperty : language::structure::Property
+
+		/**
+	 * user friendly message build with those informations
+	 */
+		method toString() : standard::String from kermeta::language::structure::Object is
+			do
+				result := danglingElement.toString.plus(" referenced by ").plus(referencingElement.toString).plus(".").plus(referencingProperty.name).plus(" is dangling")
+			end
+
+	}
+	/**
+ * Repository that stores and manages resources that come from EMF
+ */
+@CompilerIgnore "true"
+	class EMFRepository inherits Repository
+	{
+		/** 
+	 * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself
+	 * this is useful for example to make a dependency to framework.km
+	 * by default, not setting this is considered as false.
+	 */
+		attribute useInterpreterInternalResources : standard::Boolean
+
+		/**
+	 * When loading the Resources, 
+	 * if there are some errors due to an unknown metaclass while loading some objects, the loader try to ignore them
+	 * by default, not setting this attribute is considered as false.
+	 */
+		attribute ignoreLoadErrorUnknownMetaclass : standard::Boolean
+
+		/**
+	 * When loading the Resources, 
+	 * if there are some errors while loading some objects, the loader can try to ignore them
+	 * setting this attribute to true is equivalent to setting ignoreLoadErrorUnknownMetaclass and ignoreLoadErrorUnknownProperty to true
+	 * by default, not setting this attribute is considered as false.
+	 */
+		attribute ignoreAllLoadErrors : standard::Boolean
+
+		/**
+	 * When loading the Resources, 
+	 * if there are some errors due to an unknown property while loading some objects (ie. the metaclass is known but it cannot retreive
+	 * the given reference or attribute in the ClassDefinition, the loader try to ignore them
+	 * by default, not setting this attribute is considered as false.
+	 */
+		attribute ignoreLoadErrorUnknownProperty : standard::Boolean
+
+		/**
+	 * Overrides Repository.createResource(String, String)
+	 * Create a new resource for a model given by its uri, 
+	 * which meta-model is stored in file given by mm_uri
+	 * If file already exists, you'll be able to call the load method to concretly load the model
+	 * otherwise, you can only call the save method
+	 */
+		method createResource(uri : standard::String, mm_uri : standard::String) : Resource from kermeta::persistence::Repository is
+			do
+				if resources.collect{r | do
+						r.uri
+					end}.contains(uri).~not then
+					result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)
+
+				else
+					var e : exceptions::ResourceCreateException init exceptions::ResourceCreateException.new
+					e.message := "Trying to create a resource already existing at ".plus(uri).plus(".\n").plus("Remove existing resource from repository first, or use \"getResource\" operation.")
+					raise e
+
+				end
+			end
+
+		/**
+	  * Register the content of the given ecore file into EMF registry
+	  * Once registered, EMF will be able to load and save models conformant to this ecore file
+	  * Warning: if the NSURI you wish to register is already, registered (either statically or due to a previous call)
+	  *  it will do nothing. Ie. modification in the ecore file will not be taken into account unless you manually unregister it.	    
+	  */
+		operation registerEcoreFile(mm_uri : standard::String) : Void is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.registerEcoreFile(mm_uri)
+			end
+
+	}
+}
+
+/**
+ * Contains standard input/output related classes. 
+ */
+/**
+ * Contains file input/output related classes. 
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png"/>
+ */
+package io
+{
+	/**
+ * An implementation of StdIO : standard input/output
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png"/>
+ */
+@CompilerIgnore "true"
+	class StdIO
+	{
+		/**
+	 * Writeln the object to standard output
+	 */
+		operation writeln(object : standard::String) : Void is
+			do
+				if object.equals(void) then
+					object := "<void>"
+
+				end
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.writeln(object)
+			end
+
+		/**
+	 * Writeln the object to error output
+	 */
+		operation errorln(object : standard::String) : Void is
+			do
+				if object.equals(void) then
+					object := "<void>"
+
+				end
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.errorln(object)
+			end
+
+		/**
+	 * Writes the object to error output
+	 */
+		operation error(object : standard::String) : Void is
+			do
+				if object.equals(void) then
+					object := "<void>"
+
+				end
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.error(object)
+			end
+
+		/**
+	 * Writes the object to standard output
+	 */
+		operation write(object : standard::String) : Void is
+			do
+				if object.equals(void) then
+					object := "<void>"
+
+				end
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.write(object)
+			end
+
+		/**
+	 * Reads a String from standard input
+	 */
+		operation read(prompt : standard::String) : standard::String is
+			do
+				if prompt.equals(void) then
+					prompt := ""
+
+				end
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.read(prompt)
+			end
+
+	}
+	/**
+ * Implementation of simple helpers to read ans write text files
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png"/>
+ */
+@CompilerIgnore "true"
+	class FileIO
+	{
+		/**
+	 * Writes a String in a text file by using a specific encoding
+	 */
+		operation writeTextFileWithEncoding(filename : standard::String, text : standard::String, encoding : standard::String) : Void is
+			do
+				if filename.equals(void) then
+					raise exceptions::FileNotFoundException.new
+
+				end
+				extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFileWithEncoding(filename, text, encoding)
+			end
+
+		/**
+	 * Writes a String in a text file
+	 */
+		operation writeTextFile(filename : standard::String, text : standard::String) : Void is
+			do
+				if filename.equals(void) then
+					raise exceptions::FileNotFoundException.new
+
+				end
+				extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)
+			end
+
+		/**
+	 * Reads a text file
+	 */
+		operation readTextFile(filename : standard::String) : standard::String is
+			do
+				if filename.equals(void) then
+					raise exceptions::FileNotFoundException.new
+
+				end
+				var exists : standard::Boolean
+				var isdirectory : standard::Boolean
+				exists ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.fileExists(filename)
+				isdirectory ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.fileIsDirectory(filename)
+				if exists.~not then
+					var e : exceptions::FileNotFoundException init exceptions::FileNotFoundException.new
+					e.message := filename
+					raise e
+
+				end
+				if isdirectory then
+					var e : exceptions::FileNotFoundException init exceptions::FileNotFoundException.new
+					e.message := filename.plus(" is not a file")
+					raise e
+
+				end
+				result ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.readTextFile(filename)
+			end
+
+	}
+}
+
+/** 
+ * Contains special classes (Hashtable, Stack) that are not contained in Kermeta
+ * metamodel
+ */
+/** 
+ * Contains special classes (Hashtable, Stack) that are not contained in Kermeta
+ * metamodel
+ * 
+ * <img src="./figures/utils_package.png"/>
+ */
+package utils
+{
+	/**
+ * An implementation of stack
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png"/>
+ */
+@CompilerIgnore "true"
+	class Stack<G> inherits standard::Sequence<G>
+	{
+		/**
+	 * Get and remove the element at the top of the stack
+	 */
+		operation pop() : G is
+			do
+				result := peek
+				self.removeAt(0)
+			end
+
+		/**
+	 * Gets the element at the top of the stack
+	 */
+		operation peek() : G is
+			do
+				result := self.first
+			end
+
+		/**
+	 * Pushes an element into the stack
+	 */
+		operation push(element : G) : Void is
+			do
+				self.addAt(0, element)
+			end
+
+	}
+	/**
+ * An implementation of hashtable
+ * This implementation is for speed optimisation it cannot be serialized. 
+ * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png"/>
+ */
+@CompilerIgnore "true"
+	class Hashtable<K, V>
+	{
+		/**
+	 * Removes all elements from the Hashtable
+	 */
+		operation clear() : Void is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.clear(self)
+			end
+
+		/**
+	 * Returns the value for key 'key' if it exists, otherwise returns Void
+	 */
+		operation getValue(key : K) : V is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(self, key)
+			end
+
+		/**	
+	 * Returns a Boolean stating whether a key is present or not in this Hashtable
+	 */
+		operation containsKey(key : K) : standard::Boolean is
+			do
+				result := getValue(key).isNotEqual(void)
+			end
+
+		/**
+	 * Returns a collection containing the elements of this Hashtable
+	 */
+		operation values() : standard::Collection<V> is
+			do
+				result := standard::Bag<V>.new
+				keys.each{k | do
+						result.add(self.getValue(k))
+					end}
+			end
+
+		/**
+	 * Adds a entry into the Hashtable
+	 */
+		operation put(key : K, ~value : V) : Void is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.put(self, key, ~value)
+			end
+
+		/**
+	 * Removes the entry with key equals to 'key'
+	 */
+		operation remove(key : K) : Void is
+			do
+				extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.remove(self, key)
+			end
+
+		/**
+	 * Returns a set containing the hash keys of this Hashtable
+	 */
+		operation keys() : standard::Set<K> is
+			do
+				result := standard::Set<K>.new
+				from var it : standard::Iterator<K> init keyIterator
+				until it.isOff
+				loop
+					result.add(it.next)
+				end
+			end
+
+		/**
+	 * Returns an iterator over the Keys of this Hashtable
+	 */
+		operation keyIterator() : standard::Iterator<K> is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.keysIterator(self)
+			end
+
+		/**
+	 * Returns an iterator over the values of this Hashtable
+	 */
+		operation valueIterator() : standard::Iterator<V> is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.valueIterator(self)
+			end
+
+		/**
+	 * Returns the size of this Hashtable
+	 */
+		operation size() : standard::Integer is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.size(self)
+			end
+
+	}
+	/**
+ * This class mimic the behavior of the java's StringBuffer class. This enables better performance in long
+ * string concatenation.<br>
+ * <b>Only work on Strings</b>
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png"/>
+ */
+@CompilerIgnore "true"
+	class StringBuffer
+	{
+		/**
+	 * Append a given string at the end of this StringBuffer
+	 * @param arg0 A string to append at the end of this StringBuffer
+	 * @return A reference to this object
+	 */
+		operation append(arg0 : standard::String) : StringBuffer is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.append(self, arg0)
+			end
+
+		/**
+	 * Return the length of the StringBuffer
+	 * @return length of the StringBuffer
+	 */
+		operation length() : standard::Integer is
+			do
+				result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.length(self)
+			end
+
+		/**
+	 *Convert this StringBuffer to String and return its value
+	 *@return The string value of this StringBuffer
+	 */
+		method toString() : standard::String from kermeta::language::structure::Object is
+			do
+				var stringValue : standard::String
+				stringValue ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.toString(self)
+				result := stringValue
+			end
+
+	}
+}
+
+/** 
+ * Contains the definition of a Kermeta classes used for compatibility with Ecore 
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png"/>
+ */
+package ecore
+{
+	/**
+ * Kermeta representation of EMF EFeatureMapEntry
+ * it contains the name of the required feature and the actual value
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png"/>
+ */
+@CompilerIgnore "true"
+	class EFeatureMapEntry
+	{
+		attribute ~value : language::structure::Object
+
+		attribute eStructuralFeatureName : standard::String
+
+	}
+}
+
+/**
+ * Contains a set of classes whose function is to evaluate a kermeta 
+ * expression written as a string.
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/interpreter_package.png"/>
+ */
+package interpreter
+{
+	/**
+ * DynamicExpression is a class used to make dynamic calls, i.e dynamic evaluation
+ * of Kermeta statements represented in a string.
+ * 
+ * An example :
+ *   var de : DynamicExpression init DynamicExpression.new
+ *   de.initializeDefaults
+ *   de.formalParameters.put("a", String)
+ *   de.parse("stdio.writeln(a)") // note: to execute a list of statements, you have to surround them with do..end
+ *   var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+ *   params.put("a", "hello world!")
+ *   de.execute(void, params)
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/dynamic_expression_view.png"/>
+ */
+@CompilerIgnore "true"
+	class DynamicExpression
+	{
+		/**
+	 * the expression
+	 */
+		reference expression : language::behavior::Expression
+
+		/**
+	 * Parse errors and type errors
+	 */
+		reference errors : KermetaError[0..*]
+
+		/**
+	 * Formal parameters of the expression (bindings between parameters' names and types)
+	 */
+		reference formalParameters : utils::Hashtable<standard::String, language::structure::Type>
+
+		/**
+	 * The type of the self object
+	 * or void if the expression is not to be executed
+	 * in the context of an object
+	 */
+		reference selfClass : language::structure::ClassDefinition
+
+		/**
+     * Execute the expression in the given context
+     */
+		operation execute(selfObj : standard::Object, actualParams : utils::Hashtable<standard::String, standard::Object>) : standard::Object is
+			do
+				if expression.equals(void) then
+					var e : exceptions::DynamicExpressionException init exceptions::DynamicExpressionException.new
+					e.message := "execute precondition - expression is void"
+					raise e
+
+				end
+				if errors.size.isNotEqual(0) then
+					var e : exceptions::DynamicExpressionException init exceptions::DynamicExpressionException.new
+					e.message := "execute precondition - expression contains errors"
+					raise e
+
+				end
+				result := extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.execute(self, selfObj, actualParams)
+			end
+
+		/**
+	 * Initializes the formalParameters with an empty set of parameters
+	 * and the self type with void
+	 */
+		operation initializeDefaults() : standard::~Void is
+			do
+				formalParameters := utils::Hashtable<standard::String, language::structure::Type>.new
+				selfClass ?= standard::Object.typeDefinition
+			end
+
+		/**
+	 * Parse the expression as a string
+	 * and updates the expression field and errors
+	 * Returns true if the expression was parsed sucessfuly
+	 */
+		operation parse(expression : standard::String) : standard::Boolean is
+			do
+				errors.clear
+				if formalParameters.equals(void).~or(selfClass.equals(void)) then
+					var e : exceptions::DynamicExpressionException init exceptions::DynamicExpressionException.new
+					e.message := "parse precondition - formalParameters or selfType is void"
+					raise e
+
+				end
+				result ?= extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.parse(self, expression)
+				if errors.size.isNotEqual(0) then
+					var e : exceptions::DynamicExpressionException init exceptions::DynamicExpressionException.new
+					e.message := "parse result - expression contains errors"
+					errors.each{error | do
+							e.message.append("\n".plus(error.message))
+						end}
+					raise e
+
+				end
+			end
+
+		/**
+     * Execute the expression given as a string.
+     * the self type and formal parameters are supposed to be set
+     * before calling this operation
+     */
+		operation evalString(body : standard::String, selfObj : standard::Object, actualParams : utils::Hashtable<standard::String, standard::Object>) : standard::Object is
+			do
+				if parse(body).~not then
+					var e : exceptions::DynamicExpressionException init exceptions::DynamicExpressionException.new
+					e.message := "evalString - expression contains errors"
+					raise e
+
+				end
+				result := execute(selfObj, actualParams)
+			end
+
+	}
+	/**
+ * Kermeta language error in a code written in Kermeta
+ */
+@CompilerIgnore "true"
+	abstract class KermetaError
+	{
+		/**
+	 * Error message
+	 */
+		attribute message : standard::String
+
+	}
+	/**
+ * Kermeta error for parsing problems
+ */
+@CompilerIgnore "true"
+	class ParseError inherits KermetaError
+	{
+	}
+	/**
+ * Type errors in a code written in Kermeta
+ */
+@CompilerIgnore "true"
+	class TypeError inherits KermetaError
+	{
+	}
+}
+
+/** 
+ * Contains the definition of a Kermeta classes used for compatibility with XMLType.ecore 
+ * 
+ */
+package xmltype
+{
+	/**
+ * Kermeta representation of EMF type::QName from XMLType.ecore
+ * 
+ */
+@CompilerIgnore "true"
+	class QName inherits standard::String
+	{
+	}
+}
+

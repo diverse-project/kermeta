@@ -21,6 +21,9 @@ import java.util.Stack;
 
 import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.cachemanager.CallableFeaturesStore;
+import org.kermeta.io.cachemanager.TypeDefinitionContextStore;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
@@ -39,10 +42,10 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbol;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolInterpreterVariable;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolParameter;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolVariable;
 
 import org.kermeta.log4j.util.LogConfigurationHelper;
 
@@ -54,19 +57,23 @@ public class TypeCheckerContext {
 
 	final static private Log internalLog = LogConfigurationHelper.getLogger("TypeCheckerContext");
 	
-	static protected List<Operation> specialOperations = new ArrayList<Operation>();
+	protected List<Operation> specialOperations = new ArrayList<Operation>();
 	
-	static private void initializeSpecialOperations() {
-		specialOperations.add( TypeCheckerContext.getObjectAsTypeOperation() );
-		specialOperations.add( TypeCheckerContext.getClassNewOperation() );
-		specialOperations.add( TypeCheckerContext.getModelTypeNewOperation() );
-		specialOperations.add( TypeCheckerContext.getClassCloneOperation() );
-		specialOperations.add( TypeCheckerContext.getModelFilterOperation() );
-		specialOperations.add( TypeCheckerContext.getModelAddOperation() );
-		specialOperations.add( TypeCheckerContext.getModelRemoveOperation() );	
+	private void initializeSpecialOperations() {
+		specialOperations.add( getObjectAsTypeOperation() );
+		specialOperations.add( getClassNewOperation() );
+		specialOperations.add( getModelTypeNewOperation() );
+		specialOperations.add( getClassCloneOperation() );
+		specialOperations.add( getModelFilterOperation() );
+		specialOperations.add( getModelAddOperation() );
+		specialOperations.add( getModelRemoveOperation() );	
 	}
 	
-	public static void initializeTypeChecker(KermetaUnit std_lib) {
+	/**
+	 * Initialize the default/implicit objects and operations 
+	 * Mainly the one defined on Object, void, collections, ...
+	 */
+	public void initializeForTypeChecking( KermetaUnit std_lib) {
 	
 	    objectAsType = null;
 	    robjectAsType = null;
@@ -118,7 +125,7 @@ public class TypeCheckerContext {
 		initializeSpecialOperations();
 	}
 	
-	protected static Operation getObjectAsTypeOperation() {
+	protected Operation getObjectAsTypeOperation() {
 	    if (objectAsType == null) {
 	    	Class c = (Class) ((SimpleType) ObjectType).type;
 	    	ClassDefinition classDefinition = (ClassDefinition) c.getTypeDefinition();
@@ -139,7 +146,7 @@ public class TypeCheckerContext {
 	    return objectAsType;
 	}
 	
-	protected static Operation getClassNewOperation() {
+	protected Operation getClassNewOperation() {
 	    if (classNew == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ClassType).type).getTypeDefinition();
 	    	classNew = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "new");
@@ -147,7 +154,7 @@ public class TypeCheckerContext {
 	    return classNew;
 	}
 	
-	protected static Operation getModelTypeNewOperation() {
+	protected  Operation getModelTypeNewOperation() {
 	    if (modelTypeNew == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelTypeType).type).getTypeDefinition();
 	    	modelTypeNew = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "new");
@@ -155,7 +162,7 @@ public class TypeCheckerContext {
 	    return modelTypeNew;
 	}
 
-	protected static Operation getModelTypeVariableNewOperation() {
+	protected  Operation getModelTypeVariableNewOperation() {
 	    if (modelTypeVariableNew == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelTypeVariableType).type).getTypeDefinition();
 	    	modelTypeVariableNew = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "new");
@@ -163,7 +170,7 @@ public class TypeCheckerContext {
 	    return modelTypeVariableNew;
 	}
 
-	protected static Operation getObjectTypeVariableNewOperation() {
+	protected Operation getObjectTypeVariableNewOperation() {
 	    if (objectTypeVariableNew == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ObjectTypeVariableType).type).getTypeDefinition();
 	    	objectTypeVariableNew = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "new");
@@ -171,7 +178,7 @@ public class TypeCheckerContext {
 	    return objectTypeVariableNew;
 	}
 	
-	protected static Operation getModelFilterOperation() {
+	protected Operation getModelFilterOperation() {
 	    if (modelFilter == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition();
 	    	modelFilter = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "filter");
@@ -179,7 +186,7 @@ public class TypeCheckerContext {
 	    return modelFilter;
 	}
 	
-	protected static Operation getModelAddOperation() {
+	protected Operation getModelAddOperation() {
 	    if (modelAdd == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition();
 	    	modelAdd = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "add");
@@ -187,7 +194,7 @@ public class TypeCheckerContext {
 	    return modelAdd;
 	}
 	
-	protected static Operation getModelRemoveOperation() {
+	protected Operation getModelRemoveOperation() {
 	    if (modelRemove == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition();
 	    	modelRemove = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "remove");
@@ -195,7 +202,7 @@ public class TypeCheckerContext {
 	    return modelRemove;
 	}
 	
-	protected static Operation getClassCloneOperation() {
+	protected Operation getClassCloneOperation() {
 		
 		if (classClone == null) {
 			boolean found = false;
@@ -220,11 +227,11 @@ public class TypeCheckerContext {
 	}
 	
 	
-	protected static SimpleType createTypeForClassDefinition(String qualified_name, KermetaUnit unit) {
+	protected SimpleType createTypeForClassDefinition(String qualified_name, KermetaUnit unit) {
 	    ClassDefinition cdef = (ClassDefinition)unit.getTypeDefinitionByQualifiedName(qualified_name);
 	    fr.irisa.triskell.kermeta.language.structure.Class cls = StructureFactory.eINSTANCE.createClass();
 	    cls.setTypeDefinition(cdef);
-	    return new SimpleType(cls);
+	    return new SimpleType(cls, this);
 	}
 	
 	/**
@@ -252,55 +259,68 @@ public class TypeCheckerContext {
     }
 	
 	// The base types
-	protected static Type ObjectType;
+	protected Type ObjectType;
 	//protected static Type RObjectType;
-	protected static Type ModelType;
+	protected Type ModelType;
 	//protected static Type ReflectionObject;
-	protected static Type ClassType;
-	protected static Type EnumType;
-	protected static Type ModelTypeType;
-	protected static Type ObjectTypeVariableType;
-	protected static Type ModelTypeVariableType;
-	protected static Type VirtualTypeType;
-	protected static Type EnumLitType;
-	protected static Type VoidType;
-	protected static Type IntegerType;
-	protected static Type StringType;
-	protected static SimpleType BooleanType;
-	protected static Type StdIOType;
+	protected Type ClassType;
+	protected Type EnumType;
+	protected  Type ModelTypeType;
+	protected  Type ObjectTypeVariableType;
+	protected  Type ModelTypeVariableType;
+	protected  Type VirtualTypeType;
+	protected  Type EnumLitType;
+	protected Type VoidType;
+	protected  Type IntegerType;
+	protected  Type StringType;
+	protected  SimpleType BooleanType;
+	protected  Type StdIOType;
 	
-	protected static Operation objectAsType;
-	protected static Operation robjectAsType;
+	protected  Operation objectAsType;
+	protected  Operation robjectAsType;
 	
-	protected static Operation classNew;
-	protected static Operation classClone;
+	protected  Operation classNew;
+	protected  Operation classClone;
 	
-	protected static Operation modelTypeNew;
-	protected static Operation modelTypeVariableNew;
-	protected static Operation objectTypeVariableNew;
+	protected  Operation modelTypeNew;
+	protected  Operation modelTypeVariableNew;
+	protected  Operation objectTypeVariableNew;
 
-	protected static Operation modelFilter;
-	protected static Operation modelAdd;
-	protected static Operation modelRemove;
+	protected  Operation modelFilter;
+	protected  Operation modelAdd;
+	protected  Operation modelRemove;
 	
 	// The collection classes
-	protected static ClassDefinition SetClassDef;
-	protected static ClassDefinition OSetClassDef;
-	protected static ClassDefinition SeqClassDef;
-	protected static ClassDefinition BagClassDef;
+	protected  ClassDefinition SetClassDef;
+	protected  ClassDefinition OSetClassDef;
+	protected  ClassDefinition SeqClassDef;
+	protected  ClassDefinition BagClassDef;
 	
 	// The unit to type-check
 	protected KermetaUnit unit;
 	
 	/**
 	 * The constructor
+	 * @throws ContextNotInitializedOnAFrameworkError 
 	 */
-	public TypeCheckerContext(KermetaUnit unit) {
+	public TypeCheckerContext(KermetaUnit unit) throws ContextNotInitializedOnAFrameworkError {
 		super();
 		this.unit = unit;
-		interpreterCtx = new ContextFrame();
-		// FIXME: put the type of the IO std lib
-		interpreterCtx.addSymbol(new KMSymbolInterpreterVariable("stdio"), StdIOType);
+		
+		//if ( ! unit.isTypeChecked() ) {        	
+        	if (unit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object") != null){
+        		initializeForTypeChecking(unit);
+	    		interpreterCtx = new ContextFrame();
+	    		// FIXME: put the type of the IO std lib
+	    		interpreterCtx.addSymbol(new KMSymbolInterpreterVariable("stdio"), StdIOType);
+        	}
+        	else {
+        		unit.error("Cannot find kermeta::language::structure::Object, check your require statements.");
+        		//throw new ContextNotInitializedOnAFrameworkError(unit.getUri());
+        	}
+        //}
+		
+		
 	}
 	
 	/**
@@ -377,7 +397,7 @@ public class TypeCheckerContext {
 	}
 	
 	public CallableOperation getSuperOperation() {
-	    return InheritanceSearch.getSuperOperation((Class)((SimpleType)getSelfType()).type, currentOperation);    
+	    return InheritanceSearch.getSuperOperation((Class)((SimpleType)getSelfType()).type, currentOperation, this);    
 	}
 	
 	/**
@@ -417,9 +437,9 @@ public class TypeCheckerContext {
 				TypeVariableBinding bind = StructureFactory.eINSTANCE.createTypeVariableBinding();
 				bind.setVariable(tv);
 				if (tv.getSupertype() != null) bind.setType(tv.getSupertype());
-				else bind.setType(((SimpleType)TypeCheckerContext.ObjectType).getType());
+				else bind.setType(((SimpleType)ObjectType).getType());
 			}
-			selfType = new SimpleType(c);
+			selfType = new SimpleType(c, this);
 		}
 		return selfType;
 	}
@@ -461,14 +481,14 @@ public class TypeCheckerContext {
 	}
 	
 //	 Create a type "Set of something"
-	protected static Hashtable set_type_cache = new Hashtable();
-	protected static Type getSetType(fr.irisa.triskell.kermeta.language.structure.Type typeParam) {
+	protected Hashtable set_type_cache = new Hashtable();
+	protected Type getSetType(fr.irisa.triskell.kermeta.language.structure.Type typeParam) {
 		
 		Type result = (Type)set_type_cache.get(typeParam);
 		// not in the cache ?
 		if (result == null) {
 			// create the class
-			result = new SimpleType(createClass(SetClassDef, typeParam));
+			result = new SimpleType(createClass(SetClassDef, typeParam), this);
 			// store result in the cache
 			set_type_cache.put(typeParam, result);
 		}
@@ -476,13 +496,13 @@ public class TypeCheckerContext {
 	}
 	
 //	 Create a type "OrderedSet of something"
-	protected static Hashtable oset_type_cache = new Hashtable();
-	protected static Type getOrderedSetType(fr.irisa.triskell.kermeta.language.structure.Type typeParam) {
+	protected  Hashtable oset_type_cache = new Hashtable();
+	protected  Type getOrderedSetType(fr.irisa.triskell.kermeta.language.structure.Type typeParam) {
 		Type result = (Type)oset_type_cache.get(typeParam);
 		// not in the cache ?
 		if (result == null) {
 			// create the class
-			result = new SimpleType(createClass(OSetClassDef, typeParam));
+			result = new SimpleType(createClass(OSetClassDef, typeParam), this);
 			// store result in the cache
 			oset_type_cache.put(typeParam, result);
 		}
@@ -490,13 +510,13 @@ public class TypeCheckerContext {
 	}
 	
 	//	 Create a type "Sequence of something"
-	protected static Hashtable seq_type_cache = new Hashtable();
-	protected static Type getSequenceType(fr.irisa.triskell.kermeta.language.structure.Type typeParam) {
+	protected  Hashtable seq_type_cache = new Hashtable();
+	protected  Type getSequenceType(fr.irisa.triskell.kermeta.language.structure.Type typeParam) {
 		Type result = (Type)seq_type_cache.get(typeParam);
 		// not in the cache ?
 		if (result == null) {
 			// create the class
-			result = new SimpleType(createClass(SeqClassDef, typeParam));
+			result = new SimpleType(createClass(SeqClassDef, typeParam),this);
 			// store result in the cache
 			seq_type_cache.put(typeParam, result);
 		}
@@ -504,13 +524,13 @@ public class TypeCheckerContext {
 	}
 	
 	//	 Create a type "bag of something"
-	protected static Hashtable bag_type_cache = new Hashtable();
-	protected static Type getBagType(fr.irisa.triskell.kermeta.language.structure.Type typeParam) {
+	protected  Hashtable bag_type_cache = new Hashtable();
+	protected  Type getBagType(fr.irisa.triskell.kermeta.language.structure.Type typeParam) {
 		Type result = (Type)bag_type_cache.get(typeParam);
 		// not in the cache ?
 		if (result == null) {
 			// create the class
-			result = new SimpleType(createClass(BagClassDef, typeParam));
+			result = new SimpleType(createClass(BagClassDef, typeParam),this);
 			// store result in the cache
 			bag_type_cache.put(typeParam, result);
 		}
@@ -536,21 +556,22 @@ public class TypeCheckerContext {
 	 * @param element
 	 * @return
 	 */
-	public static Type getTypeFromMultiplicityElement(MultiplicityElement element) {
+	public Type getTypeFromMultiplicityElement(MultiplicityElement element) {
 		Type result;
 		
 		fr.irisa.triskell.kermeta.language.structure.Type element_simple_type = element.getType();
 		if (element_simple_type == null) {
-		    element_simple_type = ((SimpleType)TypeCheckerContext.VoidType).type;
-		    return new SimpleType(element_simple_type);
+		    element_simple_type = ((SimpleType)this.VoidType).type;
+		    return new SimpleType(element_simple_type, this);
 		}
 		
-		if (element.getUpper() == 1) result = new SimpleType(element_simple_type);
+		if (element.getUpper() == 1) result = new SimpleType(element_simple_type, this);
 		else {
 			if (element.isIsUnique() && element.isIsOrdered()) 
 				result = getOrderedSetType(element_simple_type);
-			else if (element.isIsUnique() && !element.isIsOrdered()) 
-				result = getSetType(element_simple_type);
+			else if (element.isIsUnique() && !element.isIsOrdered()) {
+				result = getSetType( element_simple_type);
+			}
 			else if (!element.isIsUnique() && element.isIsOrdered()) 
 				result = getSequenceType(element_simple_type);
 			else
@@ -569,4 +590,14 @@ public class TypeCheckerContext {
     public ClassDefinition getSelfClass() {
         return selfClass;
     }
+
+    protected TypeDefinitionContextStore typeDefintionContextCache = new TypeDefinitionContextStore();
+	public TypeDefinitionContextStore getTypeDefinitionContextCache() {
+		return typeDefintionContextCache;
+	}
+
+	protected CallableFeaturesStore callableFeaturesCache =  new CallableFeaturesStore();
+	public CallableFeaturesStore getCallableFeaturesCache() {
+		return callableFeaturesCache;
+	}
 }

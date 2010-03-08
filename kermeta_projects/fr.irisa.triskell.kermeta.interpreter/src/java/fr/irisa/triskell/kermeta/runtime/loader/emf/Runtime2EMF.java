@@ -40,8 +40,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EEnumLiteralImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.FeatureMapUtil;
-import org.eclipse.emf.ecore.util.FeatureMap.Entry;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.eclipse.emf.ResourceHelper;
@@ -52,8 +51,6 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
-
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * This class converts models that were created by the user through the

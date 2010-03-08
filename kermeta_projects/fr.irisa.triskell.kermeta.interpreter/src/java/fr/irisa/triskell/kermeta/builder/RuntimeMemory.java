@@ -21,6 +21,8 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
+
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 
@@ -56,6 +58,15 @@ public class RuntimeMemory {
 		return _interpreter;
 	}
 	
+	protected TypeCheckerContext _typecheckerContext;
+	/** connexion to the typechecker that created this memory: used for creating new types
+	 * 
+	 * @return
+	 */
+	public TypeCheckerContext getTypeCheckerContext(){
+		return _typecheckerContext;
+	}
+	
 	/** list of EPackage that have been used to load or save model	
 	 * the key is the NSURI, (used to avoid reloading a resource with the save NSURI)
 	 * this helps to deal with the problem of classcast exception when saving instances created from various version in memory of the same MM
@@ -63,9 +74,10 @@ public class RuntimeMemory {
 	//public Hashtable<String,EPackage> mmEPackages = new Hashtable<String,EPackage>();
 	public Registry interpreterEPackageRegistry = new EPackageRegistryImpl();
 	
-    public RuntimeMemory(KermetaUnit unit, AbstractKInterpreter interpreter) {
+    public RuntimeMemory(KermetaUnit unit, AbstractKInterpreter interpreter, TypeCheckerContext typecheckerContext) {
         roFactory = new RuntimeObjectFactory(this);
         this.unit = unit;
+        this._typecheckerContext = typecheckerContext;
         memoryLoader = new RuntimeMemoryLoader(unit,this);
         memoryLoader.init();
         _interpreter = interpreter;

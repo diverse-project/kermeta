@@ -34,7 +34,6 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.model.edit,
  org.kermeta.merger,
  org.eclipse.gymnast.runtime.core,
- org.kermeta.io.loader,
  org.eclipse.debug.core,
  org.antlr.antlr2;bundle-version="[2.7.7,3.0.0)",
  org.kermeta.log4j.util

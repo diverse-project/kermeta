@@ -26,11 +26,17 @@ import fr.irisa.triskell.kermeta.language.structure.VirtualType;
  */
 public class TypeVariableUtility {
 
-	public static fr.irisa.triskell.kermeta.language.structure.Type getLeastDerivedAdmissibleType(fr.irisa.triskell.kermeta.language.structure.Type ptype) {
+	protected TypeCheckerContext typecheckercontext;
+	public TypeVariableUtility(TypeCheckerContext typecheckercontext) {
+		super();
+		this.typecheckercontext = typecheckercontext;
+	}
+	
+	public fr.irisa.triskell.kermeta.language.structure.Type getLeastDerivedAdmissibleType(fr.irisa.triskell.kermeta.language.structure.Type ptype) {
 		fr.irisa.triskell.kermeta.language.structure.Type result = ptype;
 		if (result instanceof VirtualType) {
 			//Can't do this statically for a VirtualType!
-			result = ((SimpleType)TypeCheckerContext.ObjectType).getType();
+			result = ((SimpleType)typecheckercontext.ObjectType).getType();
 		}
 		while(result instanceof ObjectTypeVariable) {
 			ObjectTypeVariable tv = (ObjectTypeVariable)result;
@@ -39,7 +45,7 @@ public class TypeVariableUtility {
 				if ( result instanceof PrimitiveType )
 					result = KermetaModelHelper.PrimitiveType.resolvePrimitiveType( (PrimitiveType) result );
 			} else 
-				result = ((SimpleType)TypeCheckerContext.ObjectType).getType();
+				result = ((SimpleType)typecheckercontext.ObjectType).getType();
 		}
 		while (result instanceof ModelTypeVariable) {
 			ModelTypeVariable mtv = (ModelTypeVariable) result;

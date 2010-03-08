@@ -35,15 +35,6 @@ public interface IoFactory extends EFactory {
 	KermetaUnit createKermetaUnit();
 
 	/**
-	 * Returns a new object of class '<em>Kermeta Unit Storer</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Kermeta Unit Storer</em>'.
-	 * @generated
-	 */
-	KermetaUnitStorer createKermetaUnitStorer();
-
-	/**
 	 * Returns a new object of class '<em>Package Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
