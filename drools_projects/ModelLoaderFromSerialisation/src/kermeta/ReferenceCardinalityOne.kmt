@@ -7,13 +7,11 @@ operation generateOne(PropertyNameUpper:String,PropertyName:String):String is do
 var _res: StringBuffer init StringBuffer.new
 _res.append("\tif (not self.")
 _res.append(PropertyName)
-_res.append(".isVoid()) then\n\tctx.res.append(\"if (\" + ctx.cache.getValue(self) + \" != null && \" + ctx.cache.getValue(self.")
-_res.append(PropertyName)
-_res.append(") + \"!=null){\" )\n\t\tctx.res.append(ctx.cache.getValue(self) + \".set\"+\"")
+_res.append(".isVoid()) then\n\t\tctx.res.append(ctx.cache.getValue(self) + \".set\"+\"")
 _res.append(PropertyNameUpper)
 _res.append("\"+\"(\"+ctx.cache.getValue(self.")
 _res.append(PropertyName)
-_res.append(")+\");\n\")\t\n\tctx.res.append(\"}\")\n\tend\n")
+_res.append(")+\");\n\")\t\n\tend\n")
 result := _res.toString
 end
 }

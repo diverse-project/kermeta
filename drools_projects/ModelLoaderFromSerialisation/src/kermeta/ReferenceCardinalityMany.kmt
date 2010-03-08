@@ -7,9 +7,9 @@ operation generateMany(PropertyNameUpper:String,PropertyName:String):String is d
 var _res: StringBuffer init StringBuffer.new
 _res.append("\n\tself.")
 _res.append(PropertyName)
-_res.append(".each{c|\n\tctx.res.append(\"if (\" + ctx.cache.getValue(self) + \" != null && \" + ctx.cache.getValue(c) + \"!=null){\" )\n\tctx.res.append(ctx.cache.getValue(self) + \".get\"+\"")
+_res.append(".each{c|\n\tctx.res.append(ctx.cache.getValue(self) + \".get\"+\"")
 _res.append(PropertyNameUpper)
-_res.append("\"+\"().add(\"+ctx.cache.getValue(c)+\");\n\")\t\n\tctx.res.append(\"}\")\n\t}\t\n\n\n")
+_res.append("\"+\"().add(\"+ctx.cache.getValue(c)+\");\n\")\t\n\t}\t\n\n\n")
 result := _res.toString
 end
 }
