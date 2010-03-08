@@ -16,7 +16,6 @@ import junit.framework.TestSuite;
 
 import org.apache.commons.logging.Log;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.log4j.util.LogConfigurationHelper;
 
@@ -70,12 +69,6 @@ public class JunitTestSuite extends TestSuite {
     	URIMapUtil.addMapEntry(ExtensibleURIConverterImpl.URI_MAP, "platform:/resource/", selfPath);
     	internalLog.info("   " + "platform:/resource/ => " + selfPath);
 
-    	// kconf:/loader/ is were plugin Loader lives
-    	String loaderPluginPath = LoaderPlugin.class.getProtectionDomain()
-											.getCodeSource().getLocation().toExternalForm();
-    	loaderPluginPath = loaderPluginPath.replace("bin/", "");
-    	URIMapUtil.addMapEntry(ExtensibleURIConverterImpl.URI_MAP, "kconf:/loader/", loaderPluginPath+"instances/");
-    	internalLog.info("   " + "kconf:/loader/ => " + loaderPluginPath+"instances/");
     	
     	if ( ioPlugin == null ) {
 		

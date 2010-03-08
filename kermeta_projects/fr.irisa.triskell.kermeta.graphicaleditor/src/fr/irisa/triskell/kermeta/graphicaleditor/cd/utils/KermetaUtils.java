@@ -20,10 +20,12 @@ import java.util.List;
 import java.util.Set;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
 
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -95,7 +97,16 @@ public class KermetaUtils {
 	 * dynamically change, so we did not consider this eventuality.
 	 */
 	public KermetaUnit loadStdLib() {
-		return LoaderPlugin.getDefault().getFramework();
+		try {
+			return IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.getFrameWorkURI());
+		} catch (URIMalformedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotRegisteredURIException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**

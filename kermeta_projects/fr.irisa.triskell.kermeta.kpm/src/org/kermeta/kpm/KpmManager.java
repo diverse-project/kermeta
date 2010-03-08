@@ -88,14 +88,18 @@ public class KpmManager {
 	}
 	
 	/**
-	 * 
+	 * Create a unit in the workspace (unit in memory or platform:/plugin are ignored)
+	 * add it only if it doesn't exist
 	 * @param resource
 	 * @return
 	 */
 	public Unit conditionalAddUnit(String resourceName) {
 		IResource resource;
-		resource = ResourceHelper.getIFile(resourceName);
-		return _manager.conditionalAddUnit(resource);
+		resource = ResourceHelper.getIFile(resourceName); // if we require someting in the platform/plugin the resource will be null, but in this case we don't care that it might change ?
+		if (resource != null)
+				return _manager.conditionalAddUnit(resource);
+		else
+			return null;		
 	}
 	
 	/**
@@ -145,7 +149,7 @@ public class KpmManager {
 	 */
 	public void resetKPM(){
 		_manager.reset();
-		// get the new version of the manger
+		// get the new version of the manager
 		initialize();
 	}
 	

@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.core.helper.JarHelper;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.LoadingOptions;
 import org.kermeta.merger.Merger;
 import org.kermeta.merger.exporter.commandLineOptions.Option_H;
@@ -35,7 +35,7 @@ import org.kermeta.merger.exporter.commandLineOptions.Option_kconf;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KM;
+import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.Ecore2KM;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 
@@ -272,7 +272,7 @@ public class FullMergeKmExporter {
         
         		
 		try {
-			KermetaUnit mainUnit = LoaderPlugin.getDefault().load( inputFile, options );
+			KermetaUnit mainUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(inputFile);;
 			
 		
 			Set<KermetaUnit> unitsToMerge = new HashSet<KermetaUnit>();

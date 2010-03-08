@@ -62,6 +62,7 @@ public class KPMPreferencePage
 	}
 	
 	HelpfulTextFieldEditor excludedExtensionTextField;
+	HelpfulTextFieldEditor includedExtensionTextField;
 	
 	@Override
 	protected Control createContents(Composite parent) {
@@ -128,11 +129,18 @@ public class KPMPreferencePage
 		group2.setLayout( group2Layout );*/
 		GridData gridData2 = new GridData();
 		gridData2.widthHint = 450;
-		gridData2.heightHint = 100;
+		gridData2.heightHint = 200;
 		group2.setLayoutData(gridData2);
 		
-		excludedExtensionTextField = new HelpfulTextFieldEditor(PreferenceConstants.P_EXCLUDED_EXTENSIONS, "&Excluded extension:\none line per pattern\n(* = any string, ? = any character)", group2);		
 		Font font = new Font(this.getShell().getDisplay(), "Courier", 8, SWT.NORMAL);
+		includedExtensionTextField = new HelpfulTextFieldEditor(PreferenceConstants.P_INCLUDED_EXTENSIONS, "&Included for automatic typecheck:\none line per pattern\n(* = any string, ? = any character)", group2);		
+		includedExtensionTextField.getTextControl(group2).setFont(font);
+		includedExtensionTextField.setToolTipText("Only files with these extensions will be automatically typechecked");
+		includedExtensionTextField.setPage(this);
+		includedExtensionTextField.setPreferenceStore(getPreferenceStore());
+		includedExtensionTextField.load();
+		
+		excludedExtensionTextField = new HelpfulTextFieldEditor(PreferenceConstants.P_EXCLUDED_EXTENSIONS, "&Excluded extension:\none line per pattern\n(* = any string, ? = any character)", group2);		
 		excludedExtensionTextField.getTextControl(group2).setFont(font);
 		excludedExtensionTextField.setToolTipText("Files with these extensions will be ignored by KPM");
 		excludedExtensionTextField.setPage(this);

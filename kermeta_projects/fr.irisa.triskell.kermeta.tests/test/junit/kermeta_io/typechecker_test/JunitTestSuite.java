@@ -22,7 +22,6 @@ import java.util.HashMap;
 import junit.framework.TestCase;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.LoadingOptions;
 
@@ -67,7 +66,8 @@ public class JunitTestSuite extends TestCase {
 
 	// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
-public void testvalid_001_simpleUML_MM_behavior() throws Exception {
+
+ public void testvalid_001_simpleUML_MM_behavior() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","001_simpleUML_MM_behavior.kmt" );
 }
 
@@ -451,7 +451,7 @@ testinvalidFile("test/io/typechecher_tests/invalid","test_clone.kmt" );
 		
 		HashMap<String, Object> loaderOptions = new HashMap<String, Object>();
 		loaderOptions.put( LoadingOptions.ECORE_QuickFixEnabled, true );
-		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(path, loaderOptions);
+		KermetaUnit kermetaUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(path, loaderOptions);
 		
 		if ( kermetaUnit.isIndirectlyErroneous() ){
 			//assertTrue("kermeta unit has errors during loading", false);
@@ -466,14 +466,14 @@ testinvalidFile("test/io/typechecher_tests/invalid","test_clone.kmt" );
 			assertTrue( KermetaUnitHelper.getErrorsAsString(kermetaUnit), false );
 		}
 			
-		LoaderPlugin.getDefault().unload( path );
+		IOPlugin.getDefault().unload( path );
 		
 	}
 	
 	/** Testing invalid file means that we are looking for one error per operation of the given file */
 	public void testinvalidFile(String dir, String file) throws Exception {
 
-		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load( TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file, null);
+		KermetaUnit kermetaUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get( TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file, null);
 		
 		if ( ! kermetaUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit );
@@ -502,6 +502,6 @@ testinvalidFile("test/io/typechecher_tests/invalid","test_clone.kmt" );
 		
 		}
 		
-		LoaderPlugin.getDefault().unload( kermetaUnit.getUri() );
+		IOPlugin.getDefault().unload( kermetaUnit.getUri() );
 	}
 }

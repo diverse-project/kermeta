@@ -30,9 +30,11 @@ import org.kermeta.kpm.EventDispatcher;
 import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.KpmManager;
 import org.kermeta.kpm.internal.InternalKpmManager;
+import org.kermeta.kpm.preferences.KPMPreferenceHelper;
 
 import fr.irisa.triskell.eclipse.resources.ProjectBuilderHelper;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.string.EscapeChars;
 
 /**
  * This class is used to handle Workspace level events
@@ -52,6 +54,10 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener,
 		if ( event.getDelta() != null ){
 			final IResourceChangeEvent ev = event;
 			final WorkspaceResourceChangeListener visitor = this;
+			
+			// check if there is something that might be done, otherwise do nothing, not event create a thread ...
+			if(!hasResourceToProcess(event.getDelta())) 
+				return;
 			WorkspaceJob job = new WorkspaceJob("KPM inspecting changes of " + event.getDelta().getResource().getName()) {
 				@Override
 				public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException { 
@@ -74,12 +80,29 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener,
 
 			};
 			//job.setRule(delta.getResource().getProject());
+			
+			
 			job.schedule();
 		}
 
 
 	}
 
+	protected boolean hasResourceToProcess(IResourceDelta delta) {
+		
+		for(String pattern : KPMPreferenceHelper.getExcludedFilePatterns()){
+			if(delta.getResource().getName().matches(EscapeChars.forSimpleRegex(pattern)))
+				return true;
+		}
+		IResourceDelta[] children =delta.getAffectedChildren();
+		for (int i = 0; i < children.length; i++) {
+			if(hasResourceToProcess(children[i]))
+				return true;
+		}
+		return false;
+	}
+	
+	
 	public boolean visit(IResourceDelta delta) throws CoreException {
 		// Flag stating whether to continue the visit or not.
 		boolean processResourceChildren = true;
@@ -170,7 +193,10 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener,
 			
 			switch( delta.getKind() ) {
 			case IResourceDelta.ADDED :
-				// there is no way that this resource is known by an existing kpm file, so ignore the addition
+				// there is no way that this new resource is known by an existing kpm file, so ignore the addition
+				// DVK except in the case where the unit is require by a faulty kmt, adding this unit: fixes the faulty kmt ...
+				//    in order to enable this scenario, we need to create unit even for non existing files
+				//			but then the question is how to remove such ghost unit ...
 				break;
 			case IResourceDelta.REMOVED :
 				// must remove entries in kpm file				

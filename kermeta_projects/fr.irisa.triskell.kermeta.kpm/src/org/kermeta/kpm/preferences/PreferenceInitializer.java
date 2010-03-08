@@ -31,6 +31,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		IPreferenceStore store = KPMPlugin.getDefault().getPreferenceStore();
 		store.setDefault(PreferenceConstants.P_EXCLUDED_EXTENSIONS,
 				"*.class\n*.java\n/.*\n\n");
+		store.setDefault(PreferenceConstants.P_INCLUDED_EXTENSIONS,
+		"*.kmt\n*.ecore\n*.km\n\n");
 	}
 
 }

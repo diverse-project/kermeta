@@ -32,7 +32,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.checker.KermetaUnitChecker;
+import org.kermeta.io.KermetaUnitChecker;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.runner.launching.KConstants;
 
 import fr.irisa.triskell.kermeta.KermetaMessages;
@@ -127,7 +128,7 @@ public class CompiledLaunchShortcut implements ILaunchShortcut {
 	 * @throws NotRegisteredURIException 
 	 */
 	private void launchSelectedFile(IFile ifile, String mode) throws NotRegisteredURIException, URIMalformedException {
-		KermetaUnit unit = KermetaUnitChecker.check(ifile);
+		KermetaUnit unit = KermetaUnitChecker.check(ifile, IOPlugin.getDefault().getEditionKermetaUnitStore());
 		
 		if ( unit.isIndirectlyErroneous() ) {
 			MessageDialog.openError(new Shell(), "The file is not correctly typechecked.", fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper.getAllErrorsAsString(unit));

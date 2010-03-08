@@ -9,10 +9,7 @@
    <feature url="features/org.kermeta.emfutils.feature_1.0.1.jar" id="org.kermeta.emfutils.feature" version="1.0.1">
       <category name="OtherTools from Kermeta"/>
    </feature>
-   <feature url="features/org.kermeta.log4j_1.2.0.jar" id="org.kermeta.log4j" version="1.2.0">
-      <category name="OtherTools from Kermeta"/>
-   </feature>
-   <feature url="features/fr.mopcom.wfr.feature_1.0.0.jar" id="fr.mopcom.wfr.feature" version="1.0.0">
+   <feature url="features/fr.mopcom.wfr.feature_1.0.0.201002011547.jar" id="fr.mopcom.wfr.feature" version="1.0.0.201002011547">
       <category name="Kermeta MDKs"/>
    </feature>
    <feature url="features/org.openembedd.logo.csm_1.0.0.jar" id="org.openembedd.logo.csm" version="1.0.0">
@@ -36,31 +33,22 @@
    <feature url="features/fr.irisa.triskell.kermeta.ket.feature_1.3.2.jar" id="fr.irisa.triskell.kermeta.ket.feature" version="1.3.2">
       <category name="Kermeta IDE"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta_1.3.2.jar" id="fr.irisa.triskell.kermeta" version="1.3.2">
-      <category name="Kermeta IDE"/>
-   </feature>
    <feature url="features/org.kermeta.kompose.feature_0.0.5.jar" id="org.kermeta.kompose.feature" version="0.0.5">
       <category name="Kermeta MDKs"/>
    </feature>
    <feature url="features/fr.irisa.triskell.kermeta.ocl_1.3.2.jar" id="fr.irisa.triskell.kermeta.ocl" version="1.3.2">
       <category name="Kermeta MDKs"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.traceability_1.3.2.jar" id="fr.irisa.triskell.traceability" version="1.3.2">
+   <feature url="features/org.kermeta.uml2_1.3.2.201002011547.jar" id="org.kermeta.uml2" version="1.3.2.201002011547">
       <category name="Kermeta MDKs"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.ecore_1.3.2.jar" id="fr.irisa.triskell.kermeta.ecore" version="1.3.2">
-      <category name="Kermeta MDKs"/>
-   </feature>
-   <feature url="features/org.kermeta.uml2_1.3.2.jar" id="org.kermeta.uml2" version="1.3.2">
-      <category name="Kermeta MDKs"/>
-   </feature>
-   <feature url="features/org.kermeta.sintaks.feature_0.1.3.200910261201.jar" id="org.kermeta.sintaks.feature" version="0.1.3.200910261201">
+   <feature url="features/org.kermeta.sintaks.feature_0.1.3.201002011547.jar" id="org.kermeta.sintaks.feature" version="0.1.3.201002011547">
       <category name="Sintaks"/>
    </feature>
    <feature url="features/org.kermeta.kmlogo.feature_1.3.2.jar" id="org.kermeta.kmlogo.feature" version="1.3.2">
       <category name="Kermeta Samples"/>
    </feature>
-   <feature url="features/org.kermeta.tutorial.aspects_1.3.2.jar" id="org.kermeta.tutorial.aspects" version="1.3.2">
+   <feature url="features/org.kermeta.tutorial.aspects_1.3.2.201002011547.jar" id="org.kermeta.tutorial.aspects" version="1.3.2.201002011547">
       <category name="Kermeta Samples"/>
    </feature>
    <feature url="features/org.topcased.modeler.uml_2.5.0.v200907221102.jar" id="org.topcased.modeler.uml" version="2.5.0.v200907221102">
@@ -72,17 +60,11 @@
    <feature url="features/org.polarion.eclipse.team.svn.connector.svnkit15_2.2.0.I20090505-1500.jar" id="org.polarion.eclipse.team.svn.connector.svnkit15" version="2.2.0.I20090505-1500">
       <category name="ThirdParty (opensource tools redistributed for convenience by Kermeta site)"/>
    </feature>
-   <feature url="features/org.kermeta.compiler.feature_1.3.2.jar" id="org.kermeta.compiler.feature" version="1.3.2">
-      <category name="Kermeta IDE"/>
-   </feature>
    <feature url="features/fr.inria.ipr.feature_0.2.1.jar" id="fr.inria.ipr.feature" version="0.2.1">
       <category name="OtherTools from Kermeta"/>
    </feature>
    <feature url="features/org.eclipse.gymnast.runtime_0.2.0.jar" id="org.eclipse.gymnast.runtime" version="0.2.0">
       <category name="ThirdParty (opensource tools redistributed for convenience by Kermeta site)"/>
-   </feature>
-   <feature url="features/org.kermeta.uml2.profile.marte_0.1.0.jar" id="org.kermeta.uml2.profile.marte" version="0.1.0">
-      <category name="Kermeta MDKs"/>
    </feature>
    <feature url="features/org.topcased.dependencies_2.5.0.v200907220940.jar" id="org.topcased.dependencies" version="2.5.0.v200907220940">
       <category name="ThirdParty (opensource tools redistributed for convenience by Kermeta site)"/>
@@ -92,6 +74,24 @@
    </feature>
    <feature url="features/com.cea.papyrus.feature_1.10.1.jar" id="com.cea.papyrus.feature" version="1.10.1">
       <category name="ThirdParty (opensource tools redistributed for convenience by Kermeta site)"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.kermeta_1.3.2.201002011547.jar" id="fr.irisa.triskell.kermeta" version="1.3.2.201002011547">
+      <category name="Kermeta IDE"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.traceability_1.3.2.201002011547.jar" id="fr.irisa.triskell.traceability" version="1.3.2.201002011547">
+      <category name="Kermeta MDKs"/>
+   </feature>
+   <feature url="features/org.kermeta.compiler.feature_1.3.2.201002011547.jar" id="org.kermeta.compiler.feature" version="1.3.2.201002011547">
+      <category name="Kermeta IDE"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.kermeta.ecore_1.3.2.201002011547.jar" id="fr.irisa.triskell.kermeta.ecore" version="1.3.2.201002011547">
+      <category name="Kermeta MDKs"/>
+   </feature>
+   <feature url="features/org.kermeta.log4j_1.3.2.201002011547.jar" id="org.kermeta.log4j" version="1.3.2.201002011547">
+      <category name="OtherTools from Kermeta"/>
+   </feature>
+   <feature url="features/org.kermeta.uml2.profile.marte_0.1.0.201002011547.jar" id="org.kermeta.uml2.profile.marte" version="0.1.0.201002011547">
+      <category name="Kermeta MDKs"/>
    </feature>
    <category-def name="Kermeta IDE" label="Kermeta IDE">
       <description>

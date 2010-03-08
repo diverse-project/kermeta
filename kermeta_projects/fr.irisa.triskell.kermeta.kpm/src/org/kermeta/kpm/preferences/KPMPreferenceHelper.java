@@ -33,5 +33,22 @@ public class KPMPreferenceHelper {
 		}
 		return excludedExtensions;
 	}
-
+	
+	/**
+	 * Returns the list of patterns that must be included that are stored in the preference string
+	 * @return
+	 */
+	public static EList<String> getIncludedFilePatterns(){
+		EList<String> includedExtensions = new BasicEList<String>();
+		String allExtensions = KPMPlugin.getDefault().getPreferenceStore().getString(PreferenceConstants.P_INCLUDED_EXTENSIONS);
+		String[] sArray = allExtensions.split(" |\n");
+		int i = 0;
+		while( i < sArray.length){
+			if(sArray[i].trim().length() > 0){
+				includedExtensions.add(sArray[i].trim());
+			}
+			i++;
+		}
+		return includedExtensions;
+	}
 }

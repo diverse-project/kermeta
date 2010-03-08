@@ -17,7 +17,6 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -52,7 +51,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         EditorReconcilingStrategy.clearMarkers(file);
        
         try {
-			result = LoaderPlugin.getDefault().load( uri, null );
+			result = IOPlugin.getDefault().getEditionKermetaUnitStore().get( uri );
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
 		} catch (NotRegisteredURIException e) {

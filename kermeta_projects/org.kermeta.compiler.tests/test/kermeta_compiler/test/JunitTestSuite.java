@@ -15,15 +15,11 @@ package kermeta_compiler.test;
 import junit.framework.TestSuite;
 
 import org.apache.commons.logging.Log;
-import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 import fr.irisa.triskell.kermeta.launcher.CompiledRunJunitFactory;
-import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
-
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 
 

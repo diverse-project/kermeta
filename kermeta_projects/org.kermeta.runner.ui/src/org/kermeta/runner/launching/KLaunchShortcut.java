@@ -10,15 +10,14 @@
 package org.kermeta.runner.launching;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
@@ -34,14 +33,19 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.checker.KermetaUnitChecker;
-import org.kermeta.runner.launching.KConstants;
+import org.kermeta.io.cachemanager.KermetaUnitStore;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kermetaunitloader.LoaderFactory;
+import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.kermeta.KermetaMessages;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
 abstract public class KLaunchShortcut implements ILaunchShortcut {
 
@@ -133,7 +137,18 @@ abstract public class KLaunchShortcut implements ILaunchShortcut {
 	 * @throws NotRegisteredURIException 
 	 */
 	private void launchSelectedFile(IFile ifile, String mode) throws NotRegisteredURIException, URIMalformedException {
-		KermetaUnit unit = KermetaUnitChecker.check(ifile);
+		String uri = "platform:/resource" + ifile.getFullPath().toString();
+		
+		KermetaUnitStore store = IOPlugin.getDefault().getEditionKermetaUnitStore();
+		
+		
+		TypeCheckerContext typecheckercontext = new TypeCheckerContext(store.get(IOPlugin.getFrameWorkURI()));
+		
+		// TODO in the end the interpreter must use its own store to make sure that
+		// the edition won't interfere with the execution
+		KermetaUnit unit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(uri);
+		new KermetaTypeChecker(unit, typecheckercontext).checkUnit();
+		new KermetaConstraintChecker(unit).checkUnit();
 		
 		if ( unit.isIndirectlyErroneous() ) {
 			MessageDialog.openError(new Shell(), "The file is not correctly typechecked.", fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper.getAllErrorsAsString(unit));
@@ -142,7 +157,7 @@ abstract public class KLaunchShortcut implements ILaunchShortcut {
 		
 		try {
 			// Get the @mainClass and @mainOperation tags (if they exist)
-			Tag cls = ModelingUnitHelper.getMainClass( unit );
+			Tag cls = ModelingUnitHelper.getMainClass( unit ); 
 			String className = "";
 			if ( cls != null )
 				className = cls.getValue();

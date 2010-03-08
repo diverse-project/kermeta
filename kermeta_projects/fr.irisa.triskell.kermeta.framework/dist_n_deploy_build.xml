@@ -20,6 +20,7 @@
   		<pathelement location="../org.eclipse.gymnast.runtime.core/bin"/>
   		<pathelement location="../org.kermeta.log4j.util/bin"/>
   		<pathelement location="../org.kermeta.merger/bin"/>
+  		<pathelement location="../org.antlr.antlr2/bin"/>
 
 		<fileset dir="${eclipse.home}/plugins">
 		    <include name="**/org.eclipse.emf.common_*.jar"/>

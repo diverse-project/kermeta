@@ -14,6 +14,7 @@
 package org.kermeta.runner.launching;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
@@ -57,7 +58,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.checker.KermetaUnitChecker;
+import org.kermeta.io.KermetaUnitChecker;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.loader.LoadingOptions;
 import org.kermeta.runner.dialogs.SelectionListDialog;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -73,6 +76,7 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
+import fr.irisa.triskell.kermeta.typechecker.ContextNotInitializedOnAFrameworkError;
 /**
  * 
  */
@@ -278,11 +282,17 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     	String defaultClassName = "";
     	if(kunit == null && selectedFile != null)
     	{
-    		try {
-				kunit = KermetaUnitChecker.check(selectedFile);
+    		try {    			
+    			/*options = new HashMap<String, Object>();
+    			options.put(LoadingOptions.CONTENT, content);
+    			options.put( LoadingOptions.ECORE_QuickFixEnabled, true );*/
+				kunit = KermetaUnitChecker.check(selectedFile, IOPlugin.getDefault().getEditionKermetaUnitStore());
 			} catch (NotRegisteredURIException e) {
 				e.printStackTrace();
 			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			} catch (ContextNotInitializedOnAFrameworkError e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     	}
@@ -305,7 +315,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     	if(kunit == null && selectedFile != null)
     	{
     		try {
-				kunit = KermetaUnitChecker.check(selectedFile);
+				kunit = KermetaUnitChecker.check(selectedFile, IOPlugin.getDefault().getEditionKermetaUnitStore());
 			} catch (NotRegisteredURIException e) {
 				e.printStackTrace();
 			} catch (URIMalformedException e) {
@@ -529,7 +539,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     	try{
 	        IFile selectedFile = ResourceHelper.getIFile(fileLocationText.getText());
 	        // Recompile kermeta source code
-	        KermetaUnit selectedUnit = KermetaUnitChecker.check(selectedFile);
+	        KermetaUnit selectedUnit = KermetaUnitChecker.check(selectedFile, IOPlugin.getDefault().getEditionKermetaUnitStore());
 	        
 	        if (selectedClassString == null){
 	        	MessageDialog.openError(getShell(),"","Please select a class before searching for the operation ...");
@@ -608,7 +618,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     protected void parseFileAndUpdateFields(String currentPath) throws NotRegisteredURIException, URIMalformedException
     {
         IFile file = ResourceHelper.getIFile(currentPath);
-        KermetaUnit selectedUnit = KermetaUnitChecker.check(file);
+        KermetaUnit selectedUnit = KermetaUnitChecker.check(file, IOPlugin.getDefault().getEditionKermetaUnitStore());
         Tag operation = ModelingUnitHelper.getMainOperation( selectedUnit );
 	    Tag cls = ModelingUnitHelper.getMainClass( selectedUnit );
 
@@ -712,7 +722,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     	try{
 	        // Reparse the selected file
 	        IFile selectedFile = ResourceHelper.getIFile(fileLocationText.getText());
-	        KermetaUnit selectedUnit = KermetaUnitChecker.check(selectedFile);
+	        KermetaUnit selectedUnit = KermetaUnitChecker.check(selectedFile, IOPlugin.getDefault().getEditionKermetaUnitStore());
 	        
 	        // Get classes of root package, and recursively of child packages
 	        Set <TypeDefinition> typedefs = KermetaUnitHelper.getTypeDefinitions( selectedUnit );

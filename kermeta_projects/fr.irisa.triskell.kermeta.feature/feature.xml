@@ -153,13 +153,6 @@ GPL license.
          unpack="false"/>
 
    <plugin
-         id="org.kermeta.io.loader"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="fr.irisa.triskell.kermeta.documentation"
          download-size="0"
          install-size="0"
@@ -224,6 +217,13 @@ GPL license.
 
    <plugin
          id="fr.irisa.triskell.kermeta.interpreter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.compilerv2"
          download-size="0"
          install-size="0"
          version="0.0.0"

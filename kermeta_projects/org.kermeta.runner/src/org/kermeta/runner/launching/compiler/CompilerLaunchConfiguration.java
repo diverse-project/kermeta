@@ -26,7 +26,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.kermeta.compiler.service.CompilerService;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.merger.Merger;
 import org.kermeta.runner.RunnerPlugin;
 import org.kermeta.runner.compiler.propertieseditor.service.PropertyFileService;
@@ -111,7 +111,7 @@ public class CompilerLaunchConfiguration implements
 		
     	KermetaUnit kermetaUnit = null;
     	try {
-			kermetaUnit = LoaderPlugin.getDefault().load(kmtpath, null);
+			kermetaUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(kmtpath, null);
 		} catch (URIMalformedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

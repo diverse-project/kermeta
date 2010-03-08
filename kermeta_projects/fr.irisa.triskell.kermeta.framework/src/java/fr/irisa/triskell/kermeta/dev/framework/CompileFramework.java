@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.merger.Merger;
 
@@ -23,6 +22,7 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.typechecker.ContextNotInitializedOnAFrameworkError;
 
 
 /**
@@ -31,17 +31,17 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
  */
 public class CompileFramework {
 
-    public static void main(String[] args) throws NotRegisteredURIException, URIMalformedException, IOException {
+    public static void main(String[] args) throws NotRegisteredURIException, URIMalformedException, IOException, ContextNotInitializedOnAFrameworkError {
 
     	IOPlugin.LOCAL_USE = true;
     	IOPlugin.FRAMEWORK_GENERATION = true;
-    	LoaderPlugin.setFrameworkGeneration(true);
+    	IOPlugin.setFrameworkGeneration(true);
     	@SuppressWarnings("unused")
 		IOPlugin ioPlugin = IOPlugin.getDefault();
     	
     	KermetaUnit kermetaUnit = null;
     	//kermetaUnit = LoaderPlugin.getDefault().load("platform:/resource/fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt", null);
-   	kermetaUnit = LoaderPlugin.getDefault().getFramework();
+   	    kermetaUnit = IOPlugin.getDefault().getFramework();
     	
     	kermetaUnit.setFramework(false);
     	for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) )

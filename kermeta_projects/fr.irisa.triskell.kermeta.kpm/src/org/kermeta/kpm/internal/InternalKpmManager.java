@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.internal.builder.Initializor;
 import org.kermeta.kpm.internal.builder.KPMRules;
-import org.kermeta.kpm.internal.builder.ProjectVisitor;
 import org.kermeta.kpm.internal.builder.UnitCreator;
 import org.kermeta.kpm.internal.builder.WorkspaceResourceChangeListener;
 import org.kermeta.kpm.preferences.KPMPreferenceHelper;
@@ -85,6 +84,8 @@ public class InternalKpmManager {
 		initialize();
 	}
 	
+	
+	private WorkspaceResourceChangeListener workspaceResourceChangeListener;
 	/**
 	 * 
 	 */
@@ -94,7 +95,8 @@ public class InternalKpmManager {
 			initializeRules();
 			initializeExtensionElements();
 			//initializeProjects();			
-			ResourcesPlugin.getWorkspace().addResourceChangeListener( new WorkspaceResourceChangeListener() );
+			workspaceResourceChangeListener = new WorkspaceResourceChangeListener();
+			ResourcesPlugin.getWorkspace().addResourceChangeListener(workspaceResourceChangeListener  );
 		} catch (CoreException e) {
 			KPMPlugin.logErrorMessage("Failed to initialize", e);
 		}
@@ -126,7 +128,7 @@ public class InternalKpmManager {
 			_kpm = KpmFactory.eINSTANCE.createKPM();
 			r.getContents().add(_kpm);
 			Initializor i = new Initializor(_kpm, true);
-			ResourcesPlugin.getWorkspace().getRoot().accept(i);
+			// ResourcesPlugin.getWorkspace().getRoot().accept(i);
 			try {
 				r.save(null);
 			} catch (Exception e1) {
@@ -155,14 +157,14 @@ public class InternalKpmManager {
 		return ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + _relativePath;
 	}
 	
-	/**
+	/* *
 	 * @throws CoreException 
 	 * 
 	 */
-	private void initializeProjects() throws CoreException {
+	/*private void initializeProjects() throws CoreException {
 		ProjectVisitor v = new ProjectVisitor();
 		ResourcesPlugin.getWorkspace().getRoot().accept(v);
-	}
+	} */
 	
 	/**
 	 * 
@@ -272,6 +274,7 @@ public class InternalKpmManager {
 	 * Reset the current KPM manager
 	 */
 	public void reset(){
+		ResourcesPlugin.getWorkspace().removeResourceChangeListener(workspaceResourceChangeListener);
 		// clean the current manager ?
 		try {
 			// removes the kpm file

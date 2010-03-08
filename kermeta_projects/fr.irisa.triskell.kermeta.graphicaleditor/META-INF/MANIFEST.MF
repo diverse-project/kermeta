@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta class diagram graphical editor
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.graphicaleditor; singleton:=true
-Bundle-Version: 1.3.2
+Bundle-Version: 1.3.2.qualifier
 Bundle-Activator: fr.irisa.triskell.kermeta.graphicaleditor.KmPlugin
 Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
@@ -19,7 +19,6 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.model.editor,
  org.eclipse.ui,
  fr.irisa.triskell.kermeta.io,
- org.kermeta.io.loader,
  fr.irisa.triskell.kermeta
 Bundle-ActivationPolicy: lazy
 Export-Package: fr.irisa.triskell.kermeta.graphicaleditor,

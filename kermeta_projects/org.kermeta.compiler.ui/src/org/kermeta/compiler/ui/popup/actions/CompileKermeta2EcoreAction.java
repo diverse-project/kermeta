@@ -29,7 +29,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.Kmt2KmExporter4Compiler;
 import org.kermeta.compiler.ui.Activator;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.simk.presentation.SimkEditor;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -84,7 +84,7 @@ public class CompileKermeta2EcoreAction implements IObjectActionDelegate {
 					Kmt2KmExporter4Compiler kermetaCompiler = new Kmt2KmExporter4Compiler(file);
 					
 					String uri = "platform:/resource" + file.getFullPath().toString();
-					KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(uri, null);
+					KermetaUnit kermetaUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(uri, null);
 					// Generate the km merged and the traceability model
 					kermetaCompiler.writeUnit(kermetaUnit, file);
 					monitor.worked(1);
@@ -144,7 +144,7 @@ public class CompileKermeta2EcoreAction implements IObjectActionDelegate {
 		}
 		try {
 			action.setEnabled(false);
-			KermetaUnit ku_fromFile = LoaderPlugin.getDefault().load(
+			KermetaUnit ku_fromFile = IOPlugin.getDefault().getEditionKermetaUnitStore().get(
 					"platform:/resource/" + file.getFullPath(), null);
 			if (!ku_fromFile.isErroneous()) {
 				action.setEnabled(true);

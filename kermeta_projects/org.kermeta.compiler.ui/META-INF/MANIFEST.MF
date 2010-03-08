@@ -17,7 +17,6 @@ Require-Bundle: org.eclipse.ui,
  org.kermeta.compiler.generator,
  org.kermeta.simk,
  fr.irisa.triskell.traceability.model,
- org.kermeta.io.loader,
  org.kermeta.compiler.common,
  org.kermeta.structurecompiler.compiled,
  org.kermeta.log4j.util

@@ -24,7 +24,7 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.Kmt2KmExporter4Compiler;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
 
 public class MergeAction implements IObjectActionDelegate {
 
@@ -43,7 +43,7 @@ public class MergeAction implements IObjectActionDelegate {
 				try {
 					
 					String uri = "platform:/resource" + file.getFullPath().toString();
-					KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(uri, null);
+					KermetaUnit kermetaUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(uri, null);
 					Kmt2KmExporter4Compiler kermetaCompiler = new Kmt2KmExporter4Compiler(file);
 					kermetaCompiler.writeUnit(kermetaUnit, file);
 					

@@ -18,7 +18,7 @@ import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.merger.Merger;
 
@@ -50,7 +50,7 @@ public class Kmt2KmExporter4Compiler {
 		
 		
 		/////////// Add the framework directives to the given ModelingUnit for compiling
-		KermetaUnit framework_directives_ku = LoaderPlugin.getDefault().load("platform:/plugin/org.kermeta.framework.compiler.directives/src/kermeta/framework_directives_for_compiler.kmt", null);
+		KermetaUnit framework_directives_ku = IOPlugin.getDefault().getEditionKermetaUnitStore().get("platform:/plugin/org.kermeta.framework.compiler.directives/src/kermeta/framework_directives_for_compiler.kmt", null);
 		
 		kermetaUnit.addRequire(framework_directives_ku.getUri(), framework_directives_ku);
 		

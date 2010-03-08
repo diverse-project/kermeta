@@ -39,7 +39,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
@@ -148,7 +147,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		// Load the KermetaUnit for the given file (only needed to get the rootPackage :} of the km(t) file and
 		// the list of its nested packages) 
 		try {
-			kmunit = LoaderPlugin.getDefault().load(inputFile, null);
+			kmunit = IOPlugin.getDefault().getKermetaUnitStore().get(inputFile, null);
 			//kmunit = LoaderPlugin.getDefault().getFramework();
 		} catch (NotRegisteredURIException e) {
 			e.printStackTrace();

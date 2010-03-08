@@ -24,8 +24,9 @@ import junit.framework.TestSuite;
 
 import org.kermeta.interpreter.helper.RunnerHelper;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.checker.KermetaUnitChecker;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.KermetaUnitChecker;
+import org.kermeta.io.cachemanager.KermetaUnitStore;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
@@ -35,6 +36,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
+import fr.irisa.triskell.kermeta.typechecker.ContextNotInitializedOnAFrameworkError;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
@@ -111,14 +113,18 @@ public abstract class AbstractRunJunitFactory implements Test {
     
     public String getUnitToExecuteURI() {
         try {
-        	if ( executable == null )
-        		executable = RunnerHelper.getKermetaUnitToExecute(unit_uri, "platform:/resource/interpreter.km");
+        	if ( executable == null ){
+        		executable = RunnerHelper.getKermetaUnitToExecute(unit_uri, unit_uri+".memory");
+        	}
 			return executable.getUri();
         } catch (NotRegisteredURIException e) {
 			e.printStackTrace();
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ContextNotInitializedOnAFrameworkError e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -142,15 +148,17 @@ public abstract class AbstractRunJunitFactory implements Test {
     	int index  = unit_uri.lastIndexOf("/");
     	String failedTestName = unit_uri.substring(index+1);
         
+    	// force a cleanup of the store
+    	IOPlugin.getDefault().getEditionKermetaUnitStore().clear();
     	try {
     		/*
     		 * 
     		 * Trying to load the file. If the load fails we catch the exceptions to add a fail test case.
     		 * 
     		 */
-    		Map<Object, Object> options = new HashMap<Object, Object>();
+    		HashMap<String, Object> options = new HashMap<String, Object>();
     		options.put(LoadingOptions.ECORE_QuickFixEnabled, true);
-    		unit = LoaderPlugin.getDefault().load( unit_uri, options );
+    		unit = IOPlugin.getDefault().getEditionKermetaUnitStore().get( unit_uri, options );
 		} catch (Exception e) {
 			e.printStackTrace();
 			theTestCase = new FailedTestCase(failedTestName, e);
@@ -164,6 +172,7 @@ public abstract class AbstractRunJunitFactory implements Test {
         	 * Typechecking the kermeta unit. If errors occurs create a fail test case.
         	 * 
         	 */
+        	
         	KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
         	typechecker.checkUnit();
 
@@ -213,8 +222,8 @@ public abstract class AbstractRunJunitFactory implements Test {
                 if ( cd != null ) {
                 	ClassDefinition class_test = (ClassDefinition)unit.getTypeDefinitionByQualifiedName("kermeta::kunit::TestCase");
             
-	                SimpleType kunit_test_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(class_test));
-	                SimpleType main_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(cd));
+	                SimpleType kunit_test_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(class_test), unit.getTypeCheckerContext());
+	                SimpleType main_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(cd), unit.getTypeCheckerContext());
 	                
 	                if (main_type.isSubTypeOf(kunit_test_type)) 
 	                	isTestCase = true;
@@ -374,7 +383,7 @@ public abstract class AbstractRunJunitFactory implements Test {
      	 * Unloading the source.
      	 * 
      	 */
-    	LoaderPlugin.getDefault().unload(unit_uri);
+    	IOPlugin.getDefault().unload(unit_uri);
     	
     	/*
     	 * 
@@ -384,7 +393,7 @@ public abstract class AbstractRunJunitFactory implements Test {
     	if ( executable != null ) {
         	String s = executable.getUri();
     		executable = null;
-    		LoaderPlugin.getDefault().unload( s );
+    		IOPlugin.getDefault().unload( s );
     	}
     	unit = null;
     	Runtime.getRuntime().gc();
@@ -397,11 +406,14 @@ public abstract class AbstractRunJunitFactory implements Test {
 	public KermetaUnit getUnit() {
 		if ( unit == null ) {
 			try {
-				unit = KermetaUnitChecker.check( unit_uri );
+				unit = KermetaUnitChecker.check( unit_uri, IOPlugin.getDefault().getEditionKermetaUnitStore() );
 			} catch (NotRegisteredURIException e1) {
 				e1.printStackTrace();
 			} catch (URIMalformedException e1) {
 				e1.printStackTrace();
+			} catch (ContextNotInitializedOnAFrameworkError e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		return unit;

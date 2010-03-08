@@ -13,6 +13,8 @@
 package org.kermeta.merger;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -23,9 +25,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.IOWrappedException;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.checker.KermetaUnitChecker;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kermetaunitloader.AbstractLoader;
 import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
 import org.kermeta.merger.internal.MergeContext;
 import org.kermeta.merger.internal.Pass1;
@@ -38,17 +39,24 @@ import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.structure.Class;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
-import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.AbstractBuildingState;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.typechecker.ContextNotInitializedOnAFrameworkError;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 public class Merger {
 	
 	private KermetaUnit kermetaUnit = null;
 	
-	public String process(Set<KermetaUnit> kermetaUnitsToMerge, boolean trace, boolean executable) throws IOException, URIMalformedException, NotRegisteredURIException {
+	public String process(Set<KermetaUnit> kermetaUnitsToMerge, boolean trace, boolean executable) throws IOException, URIMalformedException, NotRegisteredURIException, ContextNotInitializedOnAFrameworkError {
 		String s = getDefaultPath(kermetaUnitsToMerge, true);
 		process(kermetaUnitsToMerge, s, trace, executable);		
 		return s;
@@ -80,7 +88,7 @@ public class Merger {
 			return s + ".km";
 	}
 	
-	public String process(Set<KermetaUnit> kermetaUnitsToMerge, String path, String fileName, boolean trace, boolean executable) throws URIMalformedException, IOException, NotRegisteredURIException {
+	public String process(Set<KermetaUnit> kermetaUnitsToMerge, String path, String fileName, boolean trace, boolean executable) throws URIMalformedException, IOException, NotRegisteredURIException, ContextNotInitializedOnAFrameworkError {
 		String s = "";
 		if ( fileName == null )
 			s = path + "/" + getDefaultPath(kermetaUnitsToMerge, false);
@@ -90,11 +98,11 @@ public class Merger {
 		return s;
 	}
 	
-	public void process(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile, boolean executable) throws URIMalformedException, NotRegisteredURIException, IOException {
+	public void process(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile, boolean executable) throws URIMalformedException, NotRegisteredURIException, IOException, ContextNotInitializedOnAFrameworkError {
 		process(kermetaUnitsToMerge, outputFile, true, executable);
 	}
 	
-	public KermetaUnit process(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile, boolean trace, boolean executable) throws URIMalformedException, IOException, NotRegisteredURIException {
+	public KermetaUnit process(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile, boolean trace, boolean executable) throws URIMalformedException, IOException, NotRegisteredURIException, ContextNotInitializedOnAFrameworkError {
 		
 		processInMemory(kermetaUnitsToMerge, outputFile, trace);
 		
@@ -127,7 +135,8 @@ public class Merger {
 		}
 		
 		if ( executable ) {
-			KermetaUnitChecker.check( kermetaUnit.getUri() );
+			KermetaTypeChecker typechecker = new KermetaTypeChecker(kermetaUnit);
+			typechecker.checkUnit();
 		}
 		
 		resource.save(null);
@@ -139,7 +148,7 @@ public class Merger {
 	}
 	
 	public KermetaUnit processInMemory(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile, boolean trace) throws NotRegisteredURIException, URIMalformedException, IOException {
-		LoaderPlugin.getDefault().unload(outputFile);
+		IOPlugin.getDefault().unload(outputFile);
 		kermetaUnit = IOPlugin.getDefault().basicGetKermetaUnit(outputFile);
 		Tag t = KermetaModelHelper.Tag.create(KermetaModelHelper.Tag.KERMETA_EXECUTABLE, "true");
 		kermetaUnit.getModelingUnit().getOwnedTags().add(t);
@@ -215,6 +224,16 @@ public class Merger {
 		for ( Package p : kermetaUnit.getPackages() )
 			fixTypeContainement(p);
 
+		/*
+		 * Some inheritance links must be removed.
+		 * Ex: an aspect that inherits several times from Object 
+		 */
+		for ( TypeDefinition td : KermetaUnitHelper.getInternalTypeDefinitions( kermetaUnit ) ) {
+			if ( td instanceof ClassDefinition ) {
+				ClassDefinition cdef = (ClassDefinition) td;
+				AbstractLoader.cleanInheritanceHierarchy(cdef);				
+			}
+		}
 		return kermetaUnit;
 	}
 	
@@ -242,6 +261,7 @@ public class Merger {
 			}
 		}
 	}
+
 
 
 }

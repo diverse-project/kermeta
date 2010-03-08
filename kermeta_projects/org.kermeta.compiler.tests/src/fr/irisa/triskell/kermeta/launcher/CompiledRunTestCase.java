@@ -42,7 +42,7 @@ import org.kermeta.compiler.Kmt2KmExporter4Compiler;
 import org.kermeta.compiler.tests.CompilerTestsPlugin;
 import org.kermeta.core.helper.FileHelper;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.simk.presentation.SimkEditor;
 import org.osgi.framework.Bundle;
 
@@ -191,7 +191,7 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
 		Kmt2KmExporter4Compiler kermetaCompiler = new Kmt2KmExporter4Compiler(source_file);
 		
 		String uri = "platform:/resource" + source_file.getFullPath().toString();
-		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(uri, null);
+		KermetaUnit kermetaUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(uri, null);
 		if(kermetaUnit.isErroneous()) throw new Exception(kermetaUnit.getMessages().get(0).getValue());
 		// Generate the km merged and the traceability model
 		kermetaCompiler.writeUnit(kermetaUnit, km_merged_file);

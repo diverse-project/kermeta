@@ -65,7 +65,7 @@ public class InterpretedRunTestCase extends AbstractRunTestCase {
         if (interpreter == null) {
             System.err.println("Memory before interpreter : " + Runtime.getRuntime().totalMemory());
             Map<String, Object> options = new HashMap<String, Object>();
-            options.put( InterpreterOptions.MERGE, false);
+            options.put( InterpreterOptions.MERGE, true);
             if ( constraintExecution )
             	interpreter = new Interpreter( containerTestSuite.getUnitToExecuteURI(), InterpreterMode.TEST_CONSTRAINT_RUN, options );
             else
@@ -104,9 +104,9 @@ public class InterpretedRunTestCase extends AbstractRunTestCase {
         System.out.println("    * #ro total       : " + RuntimeObjectImpl.getInstanceCounter());
         System.out.println("    * time (ms)       : " + time);
         System.out.println("    ************************************************");
-        if(isLastOfSerie){
+     //   if(isLastOfSerie){
         	interpreter = null;
-        }
+     //   }
         
     }
 

@@ -23,7 +23,6 @@ import java.util.Map;
 import junit.framework.TestCase;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.LoadingOptions;
 
@@ -369,10 +368,10 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","030_weaving_independe
 		
 		String path = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 		
-		Map<Object, Object> options = new HashMap<Object, Object>();
+		HashMap<String, Object> options = new HashMap<String, Object>();
 		options.put(LoadingOptions.ECORE_QuickFixEnabled, true);
 		
-		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(path, options);
+		KermetaUnit kermetaUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(path, options);
 		
 		if ( kermetaUnit.isIndirectlyErroneous() )
 			assertTrue("kermeta unit has errors during loading", false);
@@ -404,17 +403,17 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","030_weaving_independe
 			assertTrue("Kermeta Unit has errors when cycle constraint checking.", false);
 		}
 		
-		LoaderPlugin.getDefault().unload( kermetaUnit.getUri() );
+		IOPlugin.getDefault().unload( kermetaUnit.getUri() );
 	}
 	
 	public void testinvalidFile(String dir, String file) throws Exception {
 	    
 		String path = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 		
-		Map<Object, Object> options = new HashMap<Object, Object>();
+		HashMap<String, Object> options = new HashMap<String, Object>();
 		options.put(LoadingOptions.ECORE_QuickFixEnabled, true);
 		
-		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(path, options);
+		KermetaUnit kermetaUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(path, options);
 
 		boolean inheritanceCycleDetected = false;
 		if ( kermetaUnit.isIndirectlyErroneous() ) {
@@ -453,7 +452,7 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","030_weaving_independe
 			}
 		}
 		
-		LoaderPlugin.getDefault().unload( kermetaUnit.getUri() );
+		IOPlugin.getDefault().unload( kermetaUnit.getUri() );
 
 	}
 }

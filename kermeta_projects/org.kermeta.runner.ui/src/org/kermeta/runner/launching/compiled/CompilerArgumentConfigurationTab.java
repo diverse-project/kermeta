@@ -57,7 +57,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.checker.KermetaUnitChecker;
+import org.kermeta.io.KermetaUnitChecker;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.runner.dialogs.SelectionListDialog;
 import org.kermeta.runner.launching.KConstants;
 
@@ -284,7 +285,7 @@ public class CompilerArgumentConfigurationTab extends AbstractLaunchConfiguratio
     	if(kunit == null && selectedFile != null)
     	{
     		try {
-				kunit = KermetaUnitChecker.check(selectedFile);
+				kunit = KermetaUnitChecker.check(selectedFile, IOPlugin.getDefault().getEditionKermetaUnitStore());
 			} catch (NotRegisteredURIException e) {
 				e.printStackTrace();
 			} catch (URIMalformedException e) {
@@ -310,7 +311,7 @@ public class CompilerArgumentConfigurationTab extends AbstractLaunchConfiguratio
     	if(kunit == null && selectedFile != null)
     	{
     		try {
-				kunit = KermetaUnitChecker.check(selectedFile);
+				kunit = KermetaUnitChecker.check(selectedFile, IOPlugin.getDefault().getEditionKermetaUnitStore());
 			} catch (NotRegisteredURIException e) {
 				e.printStackTrace();
 			} catch (URIMalformedException e) {
@@ -535,7 +536,7 @@ public class CompilerArgumentConfigurationTab extends AbstractLaunchConfiguratio
     	try{
 	        IFile selectedFile = ResourceHelper.getIFile(fileLocationText.getText());
 	        // Recompile kermeta source code
-	        KermetaUnit selectedUnit = KermetaUnitChecker.check(selectedFile);
+	        KermetaUnit selectedUnit = KermetaUnitChecker.check(selectedFile, IOPlugin.getDefault().getEditionKermetaUnitStore());
 	        
 	        if (selectedClassString == null){
 	        	MessageDialog.openError(getShell(),"","Please select a class before searching for the operation ...");
@@ -615,7 +616,7 @@ public class CompilerArgumentConfigurationTab extends AbstractLaunchConfiguratio
     protected void parseFileAndUpdateFields(String currentPath) throws NotRegisteredURIException, URIMalformedException
     {
         IFile file = ResourceHelper.getIFile(currentPath);
-        KermetaUnit selectedUnit = KermetaUnitChecker.check(file);
+        KermetaUnit selectedUnit = KermetaUnitChecker.check(file, IOPlugin.getDefault().getEditionKermetaUnitStore());
         Tag operation = ModelingUnitHelper.getMainOperation( selectedUnit );
 	    Tag cls = ModelingUnitHelper.getMainClass( selectedUnit );
 
@@ -719,7 +720,7 @@ public class CompilerArgumentConfigurationTab extends AbstractLaunchConfiguratio
     	try{
 	        // Reparse the selected file
 	        IFile selectedFile = ResourceHelper.getIFile(fileLocationText.getText());
-	        KermetaUnit selectedUnit = KermetaUnitChecker.check(selectedFile);
+	        KermetaUnit selectedUnit = KermetaUnitChecker.check(selectedFile, IOPlugin.getDefault().getEditionKermetaUnitStore());
 	        
 	        // Get classes of root package, and recursively of child packages
 	        Set <TypeDefinition> typedefs = KermetaUnitHelper.getTypeDefinitions( selectedUnit );

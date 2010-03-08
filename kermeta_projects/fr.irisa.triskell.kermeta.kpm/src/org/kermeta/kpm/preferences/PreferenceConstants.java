@@ -18,6 +18,7 @@ public class PreferenceConstants {
 	
 
 	public static final String P_EXCLUDED_EXTENSIONS = "KPMExcludedExtensionsPreference";
+	public static final String P_INCLUDED_EXTENSIONS = "KPMIncludedExtensionsPreference";
 
 	
 }
