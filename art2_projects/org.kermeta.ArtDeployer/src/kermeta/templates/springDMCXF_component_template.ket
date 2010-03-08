@@ -3,7 +3,7 @@ package="org::kermeta::art::generator"
 require="platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
 using=""
 isAspectClass="false"
-class="BluePrintGenerator"
+class="ComponentInstanceGenerator"
 ismethod="false"operation="generate"
 parameters="c : art2::ComponentInstance"
 %>
@@ -41,7 +41,7 @@ parameters="c : art2::ComponentInstance"
     
     <!-- Create ActiveMQ Camel component instance -->
     <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
-        <property name="brokerURL" value="failover:tcp://localhost:61616"/>
+        <property name="brokerURL" value="vm://default"/>
     </bean>
 
 	<!-- create hosted ports -->
@@ -62,7 +62,7 @@ parameters="c : art2::ComponentInstance"
 		</osgi:service>
 		
 	<!-- Export Bean via CXF/Camel/ActiveMQ -->
-		<simple:server id="dateService" serviceClass="service.DateService" address="camel://direct:<%=c.name%>.<%=hp.portTypeRef.name%>">
+		<simple:server id="dateService" serviceClass="<%=hp.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl%>" address="camel://direct:<%=c.name%>.<%=hp.portTypeRef.name%>">
 			<simple:serviceBean><ref bean="<%=hp.portTypeRef.name%>" /></simple:serviceBean>
 			<simple:dataBinding><bean class="org.apache.cxf.aegis.databinding.AegisDatabinding" /></simple:dataBinding>
 		</simple:server>
@@ -77,7 +77,7 @@ parameters="c : art2::ComponentInstance"
 		<%if hp.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then%>
 		<route>
             <from uri="activemq:topic:<%=c.name%>.<%=hp.portTypeRef.name%>?durableSubscriptionName=<%=c.name%>"/>
-            <to uri="direct:<%=hp.portTypeRef.name%>"/>
+            <to uri="direct:<%=c.name%>.<%=hp.portTypeRef.name%>"/>
         </route>
 		<%end%>
 	<%}%>
@@ -98,8 +98,8 @@ parameters="c : art2::ComponentInstance"
 			<%  var remoteComponentInstanceName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.container.asType(art2::NamedElement).name   %>
 			<%  var remotePortTypeName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.asType(art2::Port).portTypeRef.name   %>
 		<route>
-            <from uri="direct:<%=np.portTypeRef.name%>"/>
-            <to uri="activemq:topic:<%=remotePortTypeName%>.<%=remotePortTypeName%>"/>
+            <from uri="direct:<%=c.name%>.<%=np.portTypeRef.name%>"/>
+            <to uri="activemq:topic:<%=remoteComponentInstanceName%>.<%=remotePortTypeName%>"/>
         </route>
 		<%end%>
 	<%}%>
@@ -123,8 +123,16 @@ parameters="c : art2::ComponentInstance"
 			<%}%>
 	<%  var remoteComponentInstanceName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.container.asType(art2::NamedElement).name   %>
 	<%  var remotePortTypeName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.asType(art2::Port).portTypeRef.name   %>
-<osgi:reference id="<%=np.portTypeRef.name%>OSGI" interface="<%=np.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl%>" filter="&amp;(artComponentinstanceName=<%=remoteComponentInstanceName%>)(artPorttyperefName=<%=remotePortTypeName%>)" />
-<simple:client id="<%=np.portTypeRef.name%>AMQ" address="camel://<%=np.portTypeRef.name%>" serviceClass="<%=np.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl%>" />
+
+<%if remoteNode.name.equals(c.container.asType(art2::ContainerNode).name ) then%>
+<osgi:reference id="<%=np.portTypeRef.name%>OSGI" interface="<%=np.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl%>" filter="(&amp;(artComponentinstanceName=<%=remoteComponentInstanceName%>)(artPorttyperefName=<%=remotePortTypeName%>))" cardinality="1..1" />
+<%else%>
+<simple:client id="<%=np.portTypeRef.name%>AMQ" address="camel://direct:<%=c.name%>.<%=np.portTypeRef.name%>" serviceClass="<%=np.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl%>">
+        <simple:dataBinding>
+            <bean class="org.apache.cxf.aegis.databinding.AegisDatabinding" />
+        </simple:dataBinding>
+</simple:client>
+<%end%>
 	<%end%>
 <%}%>
 	

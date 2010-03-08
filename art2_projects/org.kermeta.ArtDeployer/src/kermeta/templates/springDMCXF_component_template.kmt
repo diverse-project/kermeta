@@ -3,10 +3,10 @@ require kermeta
 require "platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
 using kermeta::standard
 using kermeta::utils
-class BluePrintGenerator{
+class ComponentInstanceGenerator{
 operation generate(c : art2::ComponentInstance):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->\n<beans xmlns=\"http://www.springframework.org/schema/beans\"\n       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n       xmlns:amq=\"http://activemq.apache.org/schema/core\"\n       xmlns:osgi=\"http://www.springframework.org/schema/osgi\"\n       xmlns:jaxws=\"http://cxf.apache.org/jaxws\"\n       xmlns:simple=\"http://cxf.apache.org/simple\"\n       xsi:schemaLocation=\"\n       http://cxf.apache.org/simple http://cxf.apache.org/schemas/simple.xsd\n       http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd\n       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd\n       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd\n       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd\n       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd\">\n\n    <import resource=\"classpath:META-INF/cxf/cxf.xml\" />\n    <import resource=\"classpath:META-INF/cxf/cxf-extension-http.xml\" />\n    <import resource=\"classpath:META-INF/cxf/cxf-extension-http-jetty.xml\" />\n    <import resource=\"classpath:META-INF/cxf/cxf-extension-soap.xml\" />\n    \n    <!-- Add Camel transport type to CXF Bus -->\n    <bean class=\"org.apache.camel.component.cxf.transport.CamelTransportFactory\">\n        <property name=\"bus\" ref=\"cxf\" />\n        <property name=\"camelContext\" ref=\"camelContext\" />\n        <property name=\"transportIds\">\n            <list>\n                <value>http://cxf.apache.org/transports/camel</value>\n            </list>\n        </property>\n    </bean>\n    \n    <!-- Create ActiveMQ Camel component instance -->\n    <bean id=\"activemq\" class=\"org.apache.activemq.camel.component.ActiveMQComponent\">\n        <property name=\"brokerURL\" value=\"failover:tcp://localhost:61616\"/>\n    </bean>\n\n\t<!-- create hosted ports -->\n")
+_res.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->\n<beans xmlns=\"http://www.springframework.org/schema/beans\"\n       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n       xmlns:amq=\"http://activemq.apache.org/schema/core\"\n       xmlns:osgi=\"http://www.springframework.org/schema/osgi\"\n       xmlns:jaxws=\"http://cxf.apache.org/jaxws\"\n       xmlns:simple=\"http://cxf.apache.org/simple\"\n       xsi:schemaLocation=\"\n       http://cxf.apache.org/simple http://cxf.apache.org/schemas/simple.xsd\n       http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd\n       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd\n       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd\n       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd\n       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd\">\n\n    <import resource=\"classpath:META-INF/cxf/cxf.xml\" />\n    <import resource=\"classpath:META-INF/cxf/cxf-extension-http.xml\" />\n    <import resource=\"classpath:META-INF/cxf/cxf-extension-http-jetty.xml\" />\n    <import resource=\"classpath:META-INF/cxf/cxf-extension-soap.xml\" />\n    \n    <!-- Add Camel transport type to CXF Bus -->\n    <bean class=\"org.apache.camel.component.cxf.transport.CamelTransportFactory\">\n        <property name=\"bus\" ref=\"cxf\" />\n        <property name=\"camelContext\" ref=\"camelContext\" />\n        <property name=\"transportIds\">\n            <list>\n                <value>http://cxf.apache.org/transports/camel</value>\n            </list>\n        </property>\n    </bean>\n    \n    <!-- Create ActiveMQ Camel component instance -->\n    <bean id=\"activemq\" class=\"org.apache.activemq.camel.component.ActiveMQComponent\">\n        <property name=\"brokerURL\" value=\"vm://default\"/>\n    </bean>\n\n\t<!-- create hosted ports -->\n")
 c.hostedPorts.each{ hp | 
 _res.append("")
 if hp.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then
@@ -24,7 +24,9 @@ _res.append("\">\n\t\t\t<osgi:service-properties>\n\t\t\t\t<entry key=\"artPortt
 _res.append(hp.portTypeRef.name)
 _res.append("\" />\n\t\t\t\t<entry key=\"artComponentinstanceName\" value=\"")
 _res.append(c.name)
-_res.append("\" />\n\t\t\t</osgi:service-properties>\n\t\t</osgi:service>\n\t\t\n\t<!-- Export Bean via CXF/Camel/ActiveMQ -->\n\t\t<simple:server id=\"dateService\" serviceClass=\"service.DateService\" address=\"camel://direct:")
+_res.append("\" />\n\t\t\t</osgi:service-properties>\n\t\t</osgi:service>\n\t\t\n\t<!-- Export Bean via CXF/Camel/ActiveMQ -->\n\t\t<simple:server id=\"dateService\" serviceClass=\"")
+_res.append(hp.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl)
+_res.append("\" address=\"camel://direct:")
 _res.append(c.name)
 _res.append(".")
 _res.append(hp.portTypeRef.name)
@@ -45,6 +47,8 @@ _res.append(hp.portTypeRef.name)
 _res.append("?durableSubscriptionName=")
 _res.append(c.name)
 _res.append("\"/>\n            <to uri=\"direct:")
+_res.append(c.name)
+_res.append(".")
 _res.append(hp.portTypeRef.name)
 _res.append("\"/>\n        </route>\n")
 end
@@ -83,9 +87,11 @@ _res.append("")
 _res.append("")
   var remotePortTypeName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.asType(art2::Port).portTypeRef.name   
 _res.append("\t\t<route>\n            <from uri=\"direct:")
+_res.append(c.name)
+_res.append(".")
 _res.append(np.portTypeRef.name)
 _res.append("\"/>\n            <to uri=\"activemq:topic:")
-_res.append(remotePortTypeName)
+_res.append(remoteComponentInstanceName)
 _res.append(".")
 _res.append(remotePortTypeName)
 _res.append("\"/>\n        </route>\n")
@@ -124,21 +130,29 @@ _res.append("")
   var remoteComponentInstanceName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.container.asType(art2::NamedElement).name   
 _res.append("")
   var remotePortTypeName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.asType(art2::Port).portTypeRef.name   
+_res.append("\n")
+if remoteNode.name.equals(c.container.asType(art2::ContainerNode).name ) then
 _res.append("<osgi:reference id=\"")
 _res.append(np.portTypeRef.name)
 _res.append("OSGI\" interface=\"")
 _res.append(np.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl)
-_res.append("\" filter=\"&amp;(artComponentinstanceName=")
+_res.append("\" filter=\"(&amp;(artComponentinstanceName=")
 _res.append(remoteComponentInstanceName)
 _res.append(")(artPorttyperefName=")
 _res.append(remotePortTypeName)
-_res.append(")\" />\n<simple:client id=\"")
+_res.append("))\" cardinality=\"1..1\" />\n")
+else
+_res.append("<simple:client id=\"")
 _res.append(np.portTypeRef.name)
-_res.append("AMQ\" address=\"camel://")
+_res.append("AMQ\" address=\"camel://direct:")
+_res.append(c.name)
+_res.append(".")
 _res.append(np.portTypeRef.name)
 _res.append("\" serviceClass=\"")
 _res.append(np.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl)
-_res.append("\" />\n")
+_res.append("\">\n        <simple:dataBinding>\n            <bean class=\"org.apache.cxf.aegis.databinding.AegisDatabinding\" />\n        </simple:dataBinding>\n</simple:client>\n")
+end
+_res.append("")
 end
 _res.append("")
 }

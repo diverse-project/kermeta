@@ -3,7 +3,7 @@ require kermeta
 require "platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
 using kermeta::standard
 using kermeta::utils
-class BluePrintGenerator{
+class ComponentInstanceGenerator{
 operation generate(c : art2::ComponentInstance):String is do
 var _res: StringBuffer init StringBuffer.new
 _res.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->\n<blueprint xmlns=\"http://www.osgi.org/xmlns/blueprint/v1.0.0\"\n\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n\txsi:schemaLocation=\"\n    http://www.osgi.org/xmlns/blueprint/v1.0.0 \n    http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd\">\n\n\t<!-- create hosted ports -->\n")

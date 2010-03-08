@@ -3,7 +3,7 @@ package="org::kermeta::art::generator"
 require="platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
 using=""
 isAspectClass="false"
-class="BluePrintGenerator"
+class="ComponentInstanceGenerator"
 ismethod="false"operation="generate"
 parameters="c : art2::ComponentInstance"
 %>
