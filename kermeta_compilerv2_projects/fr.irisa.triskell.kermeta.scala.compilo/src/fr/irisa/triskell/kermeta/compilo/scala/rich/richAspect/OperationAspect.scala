@@ -19,7 +19,11 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
 				res.append(" override")
 			}
 			res.append(" def ")
-			res.append(Util.protectScalaKeyword(this.getName()))
+                        if (this.getOwnedTags.exists(e=> "EMF_renameAs".equals(e.asInstanceOf[Tag].getName()))){                            
+                                res.append(Util.protectScalaKeyword(this.getOwnedTags.filter( e => "EMF_renameAs".equals(e.asInstanceOf[Tag].getName())).get(0).getValue))
+                        }else{
+                               res.append(Util.protectScalaKeyword(this.getName()))
+                        }
                         this.generateParamerterOp( res)
 			/* Default constructor declaration */
 			res.append("(") 

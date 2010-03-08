@@ -137,7 +137,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
             res1.append("override def checkInvariants(){\n")
             res1.append("val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap( ")
             var i = 0
-            listInv foreach(a => {
+            listInv.filter(b => !Util.hasCompilerIgnoreTag(b)  ).foreach(a => {
                     if(i != 0) res1.append(",")
                     res1.append("(")
                     res1.append("\""+a.getName+"\" -> (()=>")
