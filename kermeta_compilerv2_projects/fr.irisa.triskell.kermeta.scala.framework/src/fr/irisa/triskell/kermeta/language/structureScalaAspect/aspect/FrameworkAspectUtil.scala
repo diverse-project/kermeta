@@ -6,7 +6,8 @@ object FrameworkAspectUtil {
 		var hashtable : java.util.HashMap[String,String]= new java.util.HashMap[String,String]();
 		hashtable.put("ClassDefinition","ClassDefinitionAspect");
 		hashtable.put("fr.irisa.triskell.kermeta.language.structure.Type","fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.TypeAspect");
-				
+		hashtable.put("org.eclipse.emf.ecore.EClass","fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ClassDefinition");
+
 		hashtable
 	}
 	def getDefaultAspect(key:String):String={

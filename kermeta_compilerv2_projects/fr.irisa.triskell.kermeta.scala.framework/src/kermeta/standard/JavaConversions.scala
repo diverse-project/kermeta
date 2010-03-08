@@ -46,7 +46,7 @@ object JavaConversions {
   import scala.collection.{ generic, immutable, mutable, Traversable }
   import scala.reflect.ClassManifest
   
-   class RichKermetaList[A] ( value : ju.List[A]) {
+   class RichKermetaList[A] ( value : ju.List[A]) extends  fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation with  EObjectImplForPrimitive{
 	  
 	  def first() = value.get(0)
 	  
@@ -119,9 +119,6 @@ object JavaConversions {
 	def elementAt(arg:Int):A={
 		return value.get(arg)
 	}
-	def getMetaClass():String={
-		return this.getClass().toString();
-	}
 	def asSet() :java.util.List[A] = {
 		var res : java.util.List[A] = new java.util.ArrayList[A];
 		this.each{e=> res.add(e)}
@@ -143,7 +140,7 @@ object JavaConversions {
 		return res
 	}
 	//TODO
-	def isVoid() :Boolean= {this==null}
+	override def isVoid() :Boolean= {value == null}
   }
 
   class RichKermetaSet[A] ( value : ju.Set[A]) {

@@ -87,7 +87,7 @@ class RichIterator (value: java.util.Iterator[_]) extends RichValueType[Boolean]
 
 class RichBoolean (value: Boolean) extends RichValueType[Boolean] {
 			
-	override def isVoid():Boolean = value ==null;  
+	override def isVoid():Boolean = false;
 	
 	def not() :Boolean={return !value}
 	def xor(other : Boolean) :Boolean={(value || other) && !(value && other)}
@@ -141,7 +141,7 @@ class RichJavaBoolean (value: java.lang.Boolean) extends RichValueType[Boolean] 
 abstract class RichNumeric[G]  extends Comparable[G]{}
 
 class RichInteger(value: Int)  extends RichNumeric[Int] with EObjectImplForPrimitive{
-	override  def isVoid():Boolean = value ==null;  
+	override  def isVoid():Boolean = false;
 	override def isLower(other : Int) :Boolean={value<other}
 	def plus(other : Int) :Int={value+other}
 	def plus(other : Integer) :Int={value+other.intValue}
@@ -199,7 +199,7 @@ class RichReal (value: Double) extends RichNumeric[Double] with EObjectImplForPr
 	def isGreaterOrEqual(other : Double) :Boolean={ value>=other }
 	def isLowerOrEqual(other : Double) :Boolean={ value<=other }
 	def isGreater(other : Double) :Boolean={ value>other }
-	override def isVoid():Boolean = value ==null;  
+	override def isVoid():Boolean = false;
 	
 
 }
@@ -208,7 +208,7 @@ class RichCharacter(value:Char)  extends RichValueType with EObjectImplForPrimit
 	//TODO
 	def compareTo(other : Object) :Int={0}
 	override def toString() :java.lang.String={return ""+value}
-	override  def isVoid():Boolean = value ==null;  
+	override  def isVoid():Boolean = false;
 	
 }
 
