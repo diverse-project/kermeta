@@ -77,8 +77,10 @@ object JavaConversions {
 	def excludesAll(elements : Collection[A]) :Boolean={/*TODO*/return true}
 	def isUnique(a : A) :Boolean={return this.countElement(a)==1}
 	def any() :A={return one()}
+        def at(index:Int) :A={return value.get(index)}
 	//TODO
 	def empty() :Boolean={return value.size==0}
+
 	//TODO
 	def forAllCpl(f : A,A:A=>Boolean) :Boolean={return true}
 	def forAll(f : A=>Boolean) :Boolean={ var i : ju.Iterator[A] = value.iterator
@@ -146,7 +148,7 @@ object JavaConversions {
 
   class RichKermetaSet[A] ( value : ju.Set[A]) {
 	  
-	 
+	      
 	
 	def asSetType[B]() :java.util.List[B]={  
 	 	var res : java.util.List[B] = new java.util.ArrayList[B];

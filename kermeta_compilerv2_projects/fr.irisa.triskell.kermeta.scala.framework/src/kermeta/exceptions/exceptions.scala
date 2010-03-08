@@ -81,8 +81,13 @@ trait IOException extends Exception{
 trait FileNotFoundException extends Exception{
 }
 trait ConstraintViolatedException extends Exception{
-var constraintAppliedTo:Object = None.get;
+var constraintAppliedTo:org.eclipse.emf.ecore.EObject = None.get;
 var failedConstraint:Constraint= None.get;
+def ScalaconstraintAppliedTo:org.eclipse.emf.ecore.EObject = constraintAppliedTo
+def ScalaconstraintAppliedTo_=(arg:org.eclipse.emf.ecore.EObject) = {constraintAppliedTo = arg}
+def ScalafailedConstraint:Constraint = failedConstraint
+def ScalafailedConstraint_=(arg:Constraint) = {failedConstraint = arg}
+
 }
 trait ConstraintViolatedPre extends Exception{
 }
@@ -104,6 +109,31 @@ trait ResourceUnconformityException extends Exception{
 trait UnregisteredMetamodelException extends Exception{
 }
 trait DynamicExpressionException extends Exception{
+}
+
+trait ConstraintsDiagnostic extends Exception{
+    
+    var setConstraints : java.util.List[ConstraintViolatedInv] = _
+	
+	/* Initialize */
+	def initialize() : ConstraintsDiagnostic={
+            setConstraints = new java.util.ArrayList[ConstraintViolatedInv]
+		return this;
+        }
+	
+	/* Adds a ConstraintViolatedInv object to setConstraints */	
+	def add(cons : ConstraintViolatedInv)={
+            setConstraints.add(cons)
+        }
+	
+	/* Prints the content */
+	def prettyPrint() ={
+		//stdio.writeln("Number of violated constraints : " + setConstraints.size.toString)
+	
+		//Clean the markers on the associated resources
+		
+		
+	}
 }
 
 

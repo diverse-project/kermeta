@@ -60,7 +60,8 @@ trait ObjectAspect extends EObject  with Contracted {
 		val invariants : scala.collection.immutable.HashMap[String,Condition] = scala.collection.immutable.HashMap[String,Condition]()
 		checkParamInvariants(invariants)
 	}
-	def checkAllInvariants() = { /*TODO*/ println("todo checkAllInvariant") }	
+	def checkAllInvariants() = { /*TODO*/ println("todo checkAllInvariant") }
+        def getViolatedConstraints() : kermeta.exceptions.ConstraintsDiagnostic={/*TODO*/ println("todo checkAllInvariant"); return null;}
 	
 	
 }

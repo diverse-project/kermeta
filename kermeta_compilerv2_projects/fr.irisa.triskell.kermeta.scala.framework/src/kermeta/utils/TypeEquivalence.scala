@@ -40,10 +40,12 @@ object TypeEquivalence {
 		typeEquivelence.put("kermeta.standard.Sequence", "java.util.List");
 		typeEquivelence.put("kermeta.standard.Bag", "java.util.List");
 		typeEquivelence.put("kermeta.standard.String", "java.lang.String");
+		//typeEquivelence.put(" fr.irisa.triskell.kermeta.language.structure.String", "java.lang.String");
 		typeEquivelence.put("kermeta.standard.Integer", "Int");
 		typeEquivelence.put("kermeta.standard.Real", "java.lang.Double");
 		typeEquivelence.put("kermeta.standard.Character", "java.lang.Character");
 		typeEquivelence.put("int", "Int");
+                typeEquivelence.put("double", "Double");
 		typeEquivelence.put("boolean", "java.lang.Boolean");
 		typeEquivelence.put("kermeta.standard.Boolean", "java.lang.Boolean");
 		typeEquivelence.put("java.lang.Class","java.lang.Class[_]")
