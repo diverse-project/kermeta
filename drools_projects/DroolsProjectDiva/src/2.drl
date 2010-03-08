@@ -12,49 +12,61 @@ m.put("rootRole",$s1);
  art.System s0 = art.ArtFactory.eINSTANCE.createSystem();
 art.instance.CompositeInstance s1 = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
 art.instance.PrimitiveInstance s2 = (art.instance.PrimitiveInstance) uniqueobjects.get("s2");
-if (uniqueobjects.get("s2")==null){
+if ( s2 == null){
 s2 = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();
 uniqueobjects.put("s2",s2);
 }
 art.implem.OSGiComponent s3 = (art.implem.OSGiComponent) uniqueobjects.get("s3");
-if (uniqueobjects.get("s3")==null){
+if ( s3 == null){
 s3 = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
 uniqueobjects.put("s3",s3);
 }
 art.type.FunctionalService s4 = (art.type.FunctionalService) uniqueobjects.get("s4");
-if (uniqueobjects.get("s4")==null){
+if ( s4 == null){
 s4 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
 uniqueobjects.put("s4",s4);
 }
-art.type.PrimitiveType s5 = (art.type.PrimitiveType) uniqueobjects.get("s5");
-if (uniqueobjects.get("s5")==null){
-s5 = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+art.type.FunctionalService s5 = (art.type.FunctionalService) uniqueobjects.get("s5");
+if ( s5 == null){
+s5 = art.type.TypeFactory.eINSTANCE.createFunctionalService();
 uniqueobjects.put("s5",s5);
 }
-art.type.Port s6 = (art.type.Port) uniqueobjects.get("s6");
-if (uniqueobjects.get("s6")==null){
-s6 = art.type.TypeFactory.eINSTANCE.createPort();
+art.type.PrimitiveType s6 = (art.type.PrimitiveType) uniqueobjects.get("s6");
+if ( s6 == null){
+s6 = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
 uniqueobjects.put("s6",s6);
 }
-if (s0 != null && s1!=null){s0.setRoot(s1);
-}if (s0 != null && s4!=null){s0.getServices().add(s4);
-}if (s0 != null && s5!=null){s0.getTypes().add(s5);
-}if (s1 != null && s2!=null){s1.getSubComponent().add(s2);
-}if (s2 != null){s2.setName("FireDeployer");
-}if (s2 != null && s5!=null){s2.setType(s5);
-}if (s2 != null && s1!=null){s2.setSuperComponent(s1);
-}if (s2 != null && s3!=null){s2.setImplem(s3);
-}if (s3 != null){s3.setImplementingClass("eu.diva.tis.context.sensor.FireDeployer");
-}if (s4 != null){s4.setName("eu.diva.tis.api.context.SensorDeployer");
-}if (s5 != null){s5.setName("eu.diva.tis.context.sensor.deployer");
-}if (s5 != null && s6!=null){s5.getPort().add(s6);
-}if (s6 != null){s6.setIsOptional(false);
-}if (s6 != null){s6.setLower(1);
-}if (s6 != null){s6.setUpper(1);
-}if (s6 != null){s6.setRole("server");
-}if (s6 != null){s6.setName("deployer");
-}if (s6 != null && s4!=null){s6.setService(s4);
-}$s0.getServices().add((art.type.Service)  uniqueobjects.get("s4"));
-$s0.getTypes().add((art.type.ComponentType)  uniqueobjects.get("s5"));
+art.type.Port s7 = (art.type.Port) uniqueobjects.get("s7");
+if ( s7 == null){
+s7 = art.type.TypeFactory.eINSTANCE.createPort();
+uniqueobjects.put("s7",s7);
+}
+art.type.Port s8 = (art.type.Port) uniqueobjects.get("s8");
+if ( s8 == null){
+s8 = art.type.TypeFactory.eINSTANCE.createPort();
+uniqueobjects.put("s8",s8);
+}
+s2.setName("FireDeployer");
+s2.setType(s6);
+s2.setSuperComponent(s1);
+s2.setImplem(s3);
+s4.setName("eu.diva.tis.api.context.SensorDeployer");
+s5.setName("org.slf4j.Logger");
+s6.setName("eu.diva.tis.context.sensor.deployer");
+s6.getPort().add(s7);
+s6.getPort().add(s8);
+s7.setLower(1);
+s7.setUpper(1);
+s7.setRole("server");
+s7.setName("deployer");
+s7.setService(s4);
+s8.setLower(1);
+s8.setUpper(1);
+s8.setRole("client");
+s8.setName("logger");
+s8.setService(s5);
+$s0.getServices().add((art.type.Service)  uniqueobjects.get("s4"));
+$s0.getServices().add((art.type.Service)  uniqueobjects.get("s5"));
+$s0.getTypes().add((art.type.ComponentType)  uniqueobjects.get("s6"));
 $s1.getSubComponent().add((art.instance.ComponentInstance)  uniqueobjects.get("s2"));
 end
