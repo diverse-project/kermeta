@@ -87,6 +87,9 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
       }
   }
 
+  def generateIsInstance(res : StringBuilder){
+    res.append(this.getName())
+  }
 
   def generateKUnitCase(res : StringBuilder){
     this.getTarget().generateScalaCode(res)
@@ -119,7 +122,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
       case "isKindOf" => {generateTarget(res);res.append(".isInstanceOf");generateParam(res,"[","]")}
       case "asKindOf" => {generateTarget(res);res.append(".asInstanceOf");generateParam(res,"[","]")}
       case "isInstanceOf" => {generateTarget(res);res.append(".isInstanceOf");generateParam(res,"[","]") ;}
-			
+      case "isInstance" => {generateParam(res,"","") ;res.append(".isInstanceOf");res.append("[");generateTarget(res);res.append("]");}
       case "isVoid" => { res.append("kermeta.standard.RichFactory.isVoid("); generateTarget(res);res.append(")");}
 			
       case "new" => generateNew(res)
