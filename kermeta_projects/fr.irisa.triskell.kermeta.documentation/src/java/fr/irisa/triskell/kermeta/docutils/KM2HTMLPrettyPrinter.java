@@ -147,7 +147,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		// Load the KermetaUnit for the given file (only needed to get the rootPackage :} of the km(t) file and
 		// the list of its nested packages) 
 		try {
-			kmunit = IOPlugin.getDefault().getKermetaUnitStore().get(inputFile, null);
+			kmunit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(inputFile, null);
 			//kmunit = LoaderPlugin.getDefault().getFramework();
 		} catch (NotRegisteredURIException e) {
 			e.printStackTrace();
