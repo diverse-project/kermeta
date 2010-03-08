@@ -97,6 +97,9 @@ public class Pass1 extends MergePass {
 						// Try to trace
 						context.tryToTrace(newTypeDefinition, t);
 					} else if ( ! definitionProcessed.contains(t) && t instanceof ClassDefinition && (existingTypedefinition != null) ) {
+						if ( t instanceof ClassDefinition ){
+							((ClassDefinition)existingTypedefinition).setIsAbstract(((ClassDefinition)existingTypedefinition).isIsAbstract() || ((ClassDefinition)t).isIsAbstract());
+						}
 						if ( ! context.getAspects((ClassDefinition) existingTypedefinition).contains(t) ) {
 							context.addAspect((ClassDefinition) existingTypedefinition, (ClassDefinition) t);
 							createConstraints((ClassDefinition) existingTypedefinition, (ClassDefinition) t);
