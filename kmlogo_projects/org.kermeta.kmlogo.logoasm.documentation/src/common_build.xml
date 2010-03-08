@@ -87,6 +87,7 @@
 		<copy todir="${build.docbook.dir}/${project.name}">
 						<fileset file="${OOo.source.dir}/ooo2dbk.xml"/>
 		</copy>
+		<mkdir dir="${build.docbook.dir}/${project.name}/figures"/>
 		<copy file="${build.docbook.dir}/${project.name}/${project.name}.docb.xml" 
 			tofile="${build.docbook.dir}/${project.name}/index.xml"
 			filtering="true"
