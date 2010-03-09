@@ -14,13 +14,9 @@ Require-Bundle: org.eclipse.ui,
  org.kermeta.kmlogo.logoasm.srcKermeta,
  org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.kermeta.kmlogo.logoasm.ui,
  org.kermeta.kmlogo.logoasm.ui.popup.actions,
  org.kermeta.kmlogo.logoasm.ui.tools.wizards
 Bundle-Vendor: IRISA/INRIA
-Bundle-NativeCode:  lib/libicmdbluez.so ; processor = x86 ; osname = Linux,  lib/librxtxSerial.jnilib ; osname = Mac OS X,  lib/rxtxSerial.dll ; processor = x86 ; osname = Windows NT,  lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 98,  lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 95,   lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 2000,   lib/rxtxSerial.dll ; processor = x86 ; osname = Windows XP
-Bundle-ClassPath: lib/bluecove.jar,
- lib/icommand.jar,
- lib/RXTXcomm.jar,
- .
+Bundle-ClassPath: .
