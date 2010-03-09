@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: FSM sample Documentation
+Bundle-SymbolicName: fr.irisa.triskell.kermeta.samples.fsm.documentation
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
