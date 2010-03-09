@@ -15,10 +15,6 @@
   
 	<toc file="mainToc.xml"/>
 	<toc file="toc.xml" primary="false"/>
-	<toc
-   		file="build/eclipse.help/Kermeta-Tutorial-Process/toc.xml"
-		primary="false">
- 	</toc>
  	<toc
    		file="build/eclipse.help/Kermeta-Tutorial-Logo/toc.xml"
    		primary="false">
