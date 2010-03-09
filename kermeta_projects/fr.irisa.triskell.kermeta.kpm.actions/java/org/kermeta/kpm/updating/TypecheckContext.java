@@ -85,6 +85,10 @@ public class TypecheckContext implements IAction {
 				// additional options for loading the framework
 				options.put(LoadingOptions.FRAMEWORK_LOADING, true);
 				options.put( LoadingOptions.ECORE_QuickFixEnabled, true );
+				// get the framework and the Typechecker context associated to it if it already exist
+				// TypeCheckerContext typecheckercontext = store.get(IOPlugin.getFrameWorkURI(), options).getTypeCheckerContext();
+				// if (typecheckercontext == null)
+				//	typecheckercontext = new TypeCheckerContext(store.get(IOPlugin.getFrameWorkURI(), options));
 				TypeCheckerContext typecheckercontext = new TypeCheckerContext(store.get(IOPlugin.getFrameWorkURI(), options));
 				for ( KermetaUnit kunit : kl ) {
 					/*
