@@ -282,7 +282,7 @@ public class KermetaUnitHelper {
 	static public boolean hasSimilarMessage(KermetaUnit kermetaUnit, String message, Object target){
 		for (Iterator<Message> iterator = kermetaUnit.getMessages().iterator(); iterator.hasNext();) {
 			Message msg =  iterator.next();
-			if(msg.getValue().equals(message) && msg.getTarget().equals(target)) return true;
+			if(msg.getValue().equals(message) && msg.getTarget() != null && msg.getTarget().equals(target)) return true;
 			
 		}
 		return false;
