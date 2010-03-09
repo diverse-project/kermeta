@@ -20,6 +20,7 @@
     <toc file="build/eclipse.help/KermetaEMFTutorial/toc.xml" />
     <toc file="build/eclipse.help/KerMeta-Manual/toc.xml"/>
     <toc file="build/eclipse.help/KerMeta-MDK/toc.xml"/>
+    <toc file="build/eclipse.help/Kermeta-Tutorial-Process/toc.xml"/>
     
     <toc file="build/eclipse.help/KerMeta-The-FSM-example/toc.xml" />
     <toc file="build/eclipse.help/KerMeta-How-to-create-a-metamodel/toc.xml" />

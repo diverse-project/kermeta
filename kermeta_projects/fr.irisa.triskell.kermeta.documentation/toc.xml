@@ -20,6 +20,12 @@
 		     href="build/html/KermetaFramework/framework.km.html">
 		</topic>				
 		<topic label="Tutorials">
+		    <topic label="Building DSL with kermeta tutorial" >
+		    	<topic label="Main Process"  href="build/eclipse.help/Kermeta-Tutorial-Process/index.html"> 
+					<link toc="build/eclipse.help/Kermeta-Tutorial-Process/toc.xml"/>
+				</topic>
+				<anchor id="building_dls_tutorials" />
+		    </topic>
 			<topic label="KerMeta load and save with EMF Tutorial" href="build/eclipse.help/KermetaEMFTutorial/index.html"> 
 				<link toc="build/eclipse.help/KermetaEMFTutorial/toc.xml" />
 			</topic>
@@ -37,7 +43,7 @@
 			</topic>
 			<anchor id="tutorials" />					
 		</topic>
-		<topic label="MDKs (Model development Kit)">	
+		<topic label="MDKs (Model Development Kit)">	
 			<topic label="Kermeta MDK" href="build/eclipse.help/KerMeta-MDK/index.html"> 
 				<link toc="build/eclipse.help/KerMeta-MDK/toc.xml" />
 			</topic>		
