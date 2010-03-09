@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+            
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.nxc"
+            id="org.kermeta.kmlogo.logoasm.ui.contribution2">
+         <menu
+               label="Logo"
+               path="additions"
+               id="org.kermeta.kmlogo.logoasm.ui.menu2">
+            <separator
+                  name="group2">
+            </separator>
+         </menu>
+         <action
+               label="Compile to NXT Binary (*.rxe)"
+               class="org.kermeta.kmlogo.logoasm.ui.popup.actions.NXC2RXE"
+               menubarPath="org.kermeta.kmlogo.logoasm.ui.menu2/group2"
+               enablesFor="1"
+               id="org.kermeta.kmlogo.logoasm.ui.newAction2">
+         </action>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.rxe"
+            id="org.kermeta.kmlogo.logoasm.ui.contribution3">
+         <menu
+               label="Logo"
+               path="additions"
+               id="org.kermeta.kmlogo.logoasm.ui.menu3">
+            <separator
+                  name="group3">
+            </separator>
+         </menu>
+         <action
+               class="org.kermeta.kmlogo.logoasm.ui.popup.actions.UploadRXE"
+               enablesFor="1"
+               icon="icons/bluetooth.png"
+               id="org.kermeta.kmlogo.logoasm.ui.newAction3"
+               label="Upload file to the NXT brick"
+               menubarPath="org.kermeta.kmlogo.logoasm.ui.menu3/group3">
+         </action>
+      </objectContribution>      
+   </extension>
+</plugin>

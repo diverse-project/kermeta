@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Logo OS specific UI
+Bundle-SymbolicName: org.kermeta.kmlogo.logoasm.ui.osspecific;singleton:=true
+Bundle-Version: 1.3.2.qualifier
+Bundle-Activator: org.kermeta.kmlogo.logoasm.ui.osspecific.Activator
+Bundle-Vendor: IRISA/INRIA
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.osgi.framework;version="1.3.0"
+Require-Bundle: org.eclipse.ui,
+ org.kermeta.kmlogo.logoasm.model,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ fr.irisa.triskell.kermeta.interpreter
+Bundle-NativeCode:  lib/libicmdbluez.so ; processor = x86 ; osname = Linux,  
+lib/librxtxSerial.jnilib ; osname = Mac OS X,  
+lib/rxtxSerial.dll ; processor = x86 ; osname = Win32,
+lib/rxtxSerial.dll ; processor = x86 ; osname = Windows NT,  
+lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 98,  
+lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 95,   
+lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 2000,   
+lib/rxtxSerial.dll ; processor = x86 ; osname = Windows XP,   
+lib/rxtxSerial.dll ; processor = x86 ; osname = Windows Vista,
+lib/rxtxSerial.dll ; processor = x86 ; osname = Windows 7
+Bundle-ClassPath: lib/bluecove.jar,
+ lib/icommand.jar,
+ lib/RXTXcomm.jar,
+ .
