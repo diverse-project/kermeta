@@ -1,1 +1,0 @@
-the documentation src is inside org.kmlogo.documentation
