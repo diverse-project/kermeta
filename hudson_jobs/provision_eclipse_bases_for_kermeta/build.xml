@@ -5,7 +5,7 @@
 	<!-- <property name="eclipse.version.name" value="linux_x86_64"/> -->
 	<!-- <property name="eclipse.base.dir" location="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/> -->
 	<!-- <property name="target.eclipse.dir" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/> -->
-	<property name="target.eclipse.zip" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip"/>
+	<!-- <property name="target.eclipse.zip" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip"/> -->
 	<!-- <property name="eclipse.home" location="${eclipse.base.dir}/eclipse"/> -->
 	<property name="equinox.jar" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
@@ -134,9 +134,9 @@
   org.topcased.dependencies.feature.group
   org.topcased.modeler.uml.feature.group
 -->
-		<!-- <zip destfile="${target.eclipse.zip}">
-			<fileset dir="${target.eclipse.dir}"></fileset>
-		</zip> -->
+		<zip destfile="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip">
+			<fileset dir="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"></fileset>
+		</zip>
 	</target>
 	<target name="provision_feature">
 		<echo>Provisionning ${eclipse.version.name} with ${feature.name}</echo>
