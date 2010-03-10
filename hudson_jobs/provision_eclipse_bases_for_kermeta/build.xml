@@ -1,4 +1,4 @@
-<project name="build_kermeta_bases" default="all">
+<project name="build_eclipse_bases_for_kermeta" default="all">
 
 	<property name="env.WORKSPACE" location="."/>
 	<property name="eclipse.native.version.name" value="linux_x86_64"/>
@@ -15,18 +15,18 @@
 	<!-- <property name="eclipse.official.repository" value="http://eclipse.ialto.org/releases/galileo"/> -->
 	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
 		
-	<target name="all" depends="provision_kermeta_linux_x86_64_base, provision_kermeta_linux_x86_base">
+	<target name="all" depends="provision_linux_x86_64_base_for_kermeta, provision_linux_x86_base_for_kermeta, provision_win32_base_for_kermeta, provision_win32-x86_64_base_for_kermeta">
 	</target>
 
 
-	<target name="provision_kermeta_linux_x86_64_base">
+	<target name="provision_linux_x86_64_base_for_kermeta">
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="linux_x86_64"/>
 			<param name="archive.extension" value="tar.gz"/>
 			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk-x86_64.tar.gz"/>
 		</antcall>
 	</target>
-	<target name="provision_kermeta_linux_x86_base">
+	<target name="provision_linux_x86_base_for_kermeta">
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="linux_x86"/>
 			<param name="archive.extension" value="tar.gz"/>
@@ -34,7 +34,21 @@
 		</antcall>
 	</target>
 
-
+	<target name="provision_win32_base_for_kermeta">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="win32"/>
+			<param name="archive.extension" value="zip"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-win32.zip"/>
+		</antcall>
+	</target>
+	
+	<target name="provision_win32-x86_64_base_for_kermeta">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="win32-x86_64"/>
+			<param name="archive.extension" value="zip"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-win32-x86_64.zip"/>
+		</antcall>
+	</target>
 
 	<target name="provision_eclipse_version">
 		<echo>Provision ${eclipse.version.name}</echo>
