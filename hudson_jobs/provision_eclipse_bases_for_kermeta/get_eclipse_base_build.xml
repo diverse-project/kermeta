@@ -1,0 +1,90 @@
+<!-- $Id: deploy_build.xml 8749 2009-10-07 08:39:58Z dvojtise $ -->
+<project name="get_eclipse_base" default="all" basedir=".">
+        
+    <description>
+        Get an eclipse base from its official location
+    </description>
+	<!-- these first properties are supposed to be set when called by a user, these are only default sample values -->
+	<property name="eclipse.version.name" value="linux_x86_64"/>	
+	<property name="archive.extension" value="tar.gz"/>
+	<!--  location where we can donwload the eclipse base -->
+	<property name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk-x86_64.tar.gz"/>
+
+	<property name="env.WORKSPACE" location="."/>
+	<property name="eclipse.base.dir" location="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base/"/>
+	<property name="eclipse.base.download.folder" location="${env.WORKSPACE}/eclipsebase.tmp"/>
+	<property name="timestamp.file" location="${eclipse.base.dir}/eclipse_${eclipse.version.name}_base.zip.tstamp"/>
+	<property name="eclipse.base.downloaded.zip" location="${eclipse.base.download.folder}/EclipseBase_${eclipse.version.name}.${archive.extension}"/>
+	
+
+	<path id="ant-extensions">
+	    <fileset dir="${basedir}/ant-extensions" includes="**/*.jar" />
+	    <pathelement path="${basedir}/ant-extensions" />
+	  </path>
+	
+	<target name="all" depends="get.base.zip"
+		description="Get a base Eclipse">
+        	<antcall target="check.expand.eclipse_base.zip"/>  
+    	</target>	
+	<target name="get.base.zip">
+		<mkdir dir="${eclipse.base.download.folder}"/>
+		<get src="${eclipse.base.url}" 
+					dest="${eclipse.base.downloaded.zip}"
+					usetimestamp="true"/>
+	</target>
+	<target name="check.expand.eclipse_base.zip">
+	    <condition property="tmp:eclipse_base.available" value="true">
+	        <and>
+	        <available file="${eclipse.base.dir}/eclipse" type="dir" /> 
+	        <uptodate srcfile="${eclipse.base.downloaded.zip}" 
+	        		  targetfile="${timestamp.file}" />
+	        </and>
+	    </condition>
+	    <antcall target="expand.eclipse_base.zip" />
+	</target>
+	<target name="expand.eclipse_base.zip" unless="tmp:eclipse_base.available">
+		<echo>
+	    #####################################################
+        UNPACKING OR UPGRADING Eclipse ${eclipse.version.name} BASE
+	    #####################################################
+	    </echo>
+		<delete  dir="${eclipse.base.dir}"/>
+		<mkdir  dir="${eclipse.base.dir}"/>
+		<antcall target="expand.${archive.extension}"/>
+		<!-- <unzip dest="${eclipse.base.dir}"
+			src="${eclipse.base.downloaded.zip}">
+		</unzip> 
+		<gunzip dest="${eclipse.base.download.folder}" src="${eclipse.base.downloaded.zip}"/>
+		<untar dest="${eclipse.base.dir}" >
+			<fileset dir="${eclipse.base.download.folder}">
+        			<include name="*${eclipse.version.name}*.tar"/>
+			</fileset>
+		</untar>
+		-->
+	    <taskdef name="LastModifiedMillis" classname="LastModifiedMillis">
+	        <classpath refid="ant-extensions" />
+	    </taskdef>
+
+		<LastModifiedMillis file="${eclipse.base.downloaded.zip}" property="millis" />
+		<touch file="${timestamp.file}" millis="${millis}" />
+    	</target>
+
+	<target name="expand.tar.gz">
+		<gunzip dest="${eclipse.base.download.folder}" src="${eclipse.base.downloaded.zip}"/>
+		<untar dest="${eclipse.base.dir}" >
+			<fileset dir="${eclipse.base.download.folder}">
+        			<include name="*${eclipse.version.name}*.tar"/>
+			</fileset>
+		</untar>
+	</target>
+	<target name="expand.zip">
+		<unzip dest="${eclipse.base.dir}"
+			src="${eclipse.base.downloaded.zip}">
+		</unzip>
+	</target>
+	
+	<target name="clean.base" >
+		<delete  dir="${eclipse.base.dir}"/>
+    </target>
+	
+</project>
