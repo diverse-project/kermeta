@@ -10,7 +10,8 @@
 	<property name="equinox.jar" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
 	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
-	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/galileo"/> 
+	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/galileo"/>
+	<property name="topcased.official.repository" value="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.5/"/>
 	<!-- <property name="eclipse.official.repository" value="http://eclipse.ialto.org/releases/galileo"/> -->
 	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
 		
@@ -48,38 +49,76 @@
 			<param name="eclipse.base.dir" value="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
 		</antcall>
-		<!-- -->
+		<!-- FROM OFFICIAL ECLIPSE UPDATE SITE -->
 		<antcall target="provision_feature">
-    			<param name="feature.name" value="org.eclipse.emf.sdk.feature.group"/>
+    		<param name="feature.name" value="org.eclipse.emf.sdk.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
 		<antcall target="provision_feature">
-    			<param name="feature.name" value="org.eclipse.emf.ecoretools.sdk.feature.group"/>
+    		<param name="feature.name" value="org.eclipse.emf.ecoretools.sdk.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
 		<antcall target="provision_feature">
-    			<param name="feature.name" value="org.eclipse.emf.compare.sdk.feature.group"/>
+    		<param name="feature.name" value="org.eclipse.emf.compare.sdk.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.eclipse.wst.xml_ui.feature.feature.group"/>
+			<param name="feature.repository" value="${eclipse.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.eclipse.emf.compare.sdk.feature.group"/>
+			<param name="feature.repository" value="${eclipse.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.eclipse.gmf.sdk.feature.group"/>
+			<param name="feature.repository" value="${eclipse.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.eclipse.jet.sdk.feature.group"/>
+			<param name="feature.repository" value="${eclipse.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.eclipse.ocl.all.sdk.feature.group"/>
+			<param name="feature.repository" value="${eclipse.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.eclipse.uml2.sdk.feature.group"/>
+			<param name="feature.repository" value="${eclipse.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.eclipse.uml2tools.sdk.feature.group"/>
+			<param name="feature.repository" value="${eclipse.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.eclipse.xsd.sdk.feature.group"/>
+			<param name="feature.repository" value="${eclipse.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.polarion.eclipse.team.svn.connector.feature.group"/>
+			<param name="feature.repository" value="${eclipse.official.repository}"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+
+		<!-- FROM OTHER UPDATE SITE -->
   <!--
-  org.polarion.eclipse.team.svn.connector.feature.group
-  org.eclipse.wst.xml_ui.feature.feature.group
-  org.eclipse.emf.compare.sdk.feature.group
   org.emftext.access.feature.group
   org.emftext.sdk.feature.group
   org.emftext.commons.antlr3_1_1.feature.group
   edu.umd.cs.findbugs.plugin.eclipse.feature.group
-  org.eclipse.gmf.sdk.feature.group
-  org.eclipse.jet.sdk.feature.group
-  org.eclipse.ocl.all.sdk.feature.group
   org.topcased.dependencies.feature.group
   org.topcased.modeler.uml.feature.group
-  org.eclipse.uml2.sdk.feature.group
-  org.eclipse.uml2tools.sdk.feature.group
-  org.eclipse.xsd.sdk.feature.group
 -->
 		<!-- <zip destfile="${target.eclipse.zip}">
 			<fileset dir="${target.eclipse.dir}"></fileset>
