@@ -12,7 +12,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -30,30 +29,25 @@ import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryIm
 import org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor;
 import org.emftext.runtime.IOptions;
 
+/**
+ * Main class for the transformation from Java models to ECore models
+ * @author mclavreu
+ *
+ */
 public class Java2EcoreMain {
 	public static void main(String[] args) throws IOException {
 		setUp();
+		// Mandatory for Ecore proxies references in models to be resolved
 		JavaClasspath cp = JavaClasspath.get(rs);
-		// TODO Jar path to be changed and loaded from the environment
-		File jarPath = new File("/home/mclavreu/main_workspace/toto/lib/org.eclipse.emf.common_2.5.0.v200906151043.jar");
-		File jarPath2 = new File("/home/mclavreu/main_workspace/toto/lib/mtep.jar");
-	//	File jarPath2 = new File("/home/mclavreu/main_workspace_runtime/ical/lib/ical.jar");
-		File jarPath3 = new File("/usr/lib/jvm/java-6-sun-1.6.0.15/jre/lib/rt.jar");
-		
-		File jarPath4 = new File("/home/mclavreu/main_workspace/toto/lib/xms.jar");
-		cp.registerClassifierJar(URI.createFileURI(jarPath
-				.getCanonicalPath()));
-		cp.registerClassifierJar(URI.createFileURI(jarPath2
-				.getCanonicalPath()));
-		cp.registerClassifierJar(URI.createFileURI(jarPath3
+		File libRT_jarPath = new File(System.getProperty("java.home")+"/lib/rt.jar");
+		cp.registerClassifierJar(URI.createFileURI(libRT_jarPath
 			.getCanonicalPath()));
-		cp.registerClassifierJar(URI.createFileURI(jarPath4
-				.getCanonicalPath()));
 		cp.registerStdLib();
-		/* Used before in the demo*/
+		
+		/* demo*/
 		//URI xmiuri = URI.createFileURI("/home/mclavreu/Desktop/eclipse-bundle-prototype/workspace/test_proto/models/xms/xms.xmi");
-		URI xmiuri = URI.createFileURI("/home/mclavreu/Desktop/eclipse-bundle-prototype/workspace/lab2corporate/tmp/api1/api1.xmi");
-		//System.out.println(args[0]);
+		URI xmiuri = URI.createFileURI("/home/mclavreu/Desktop/eclipse-bundle-prototype/workspace/lab2corporate/tmp/api1/api11.xmi");
+		
 		//URI xmiuri = URI.createFileURI(args[0]);
 		XMIResource resource = (XMIResource) rs.getResource(xmiuri, true);
 		
@@ -63,7 +57,6 @@ public class Java2EcoreMain {
 		resource.load(options);
 		List<EObject> res = new ArrayList<EObject>();
 		res.addAll(resource.getContents());
-		//System.out.println("batard1");
 		Collections.sort(res, new Comparator<EObject>() {
 
 			//@Override
@@ -84,70 +77,43 @@ public class Java2EcoreMain {
 		});
 		EPackage root = EcoreFactoryImpl.eINSTANCE.createEPackage();
 		root.setName("root");
-		//Java2ECore v = new Java2ECore(root);
 		Java2Tree v = new Java2Tree(root);
 		resolveAllProxies();
+		
+		// first pass - hierarchy
 		for (EObject o : res){
 			v.accept(o);
 		}
-		int index = 0;
 		
+		// debug info
+		/*int index = 0;
 		for (Tree<org.emftext.language.java.classifiers.Class> tree : v.hierarchy) {
 			index += tree.getSize();
 			System.out.println("hierarchy "+index);
 			tree.toString();
-		}
-		System.out.println("total="+res.size()+" hierarchy elts="+index);
+		}*/
+		//System.out.println("total="+res.size()+" hierarchy elts="+index);
 		EcoreUtil.resolveAll(rs);
 		resolveAllProxies();
+		
+		// second pass - ecore model
 		for (Tree<org.emftext.language.java.classifiers.Class> tree : v.hierarchy) {
 			v.accept2(tree);
 		}
-		/*for (String s : v.superclasses.keySet()) {
-			System.out.println(s+" "+v.superclasses.get(s));
-		}*/
-		for (EObject o : res){
-			v.accept2(o);
-		}
-	/*	//resolveAllProxies();
-		for (EObject o : res){
-			v.accept3(o);
-		}
-		//resolveAllProxies();
-		for (EObject o : res){
-			v.accept4(o);
-		}*/
-		//resolveAllProxies();
-		URI outputUri = URI.createFileURI("/home/mclavreu/Desktop/eclipse-bundle-prototype/workspace/lab2corporate/tmp/api1/api.ecore");
+		
+		URI outputUri = URI.createFileURI("/home/mclavreu/Desktop/eclipse-bundle-prototype/workspace/lab2corporate/tmp/api1/api11.ecore");
 		//URI outputUri = URI.createFileURI("/home/mclavreu/Desktop/eclipse-bundle-prototype/workspace/test_proto/models/xms/xms.ecore");
 		//URI outputUri = URI.createFileURI(args[1]);
 		XMIResource r = (XMIResource) rs.createResource(outputUri);
-		//EPackage java_package = null;
-		/*for (EPackage p : root.getESubpackages()) {
-			if (p.getName().equals("java"))
-				java_package = p;
-		}*/
-		//emptyPackage(java_package);
-		//root.getESubpackages().remove(java_package);
 		r.getContents().addAll(root.eContents());
-		//System.out.println("batard8");
 		r.save(null);
-		//System.out.println("batard9");
 	}
-	/*private static void emptyPackage(EPackage p) {
-		List<EClassifier> list = new ArrayList<EClassifier>();
-		for (EPackage pack : p.getESubpackages()) {
-			emptyPackage(pack);
-		}
-		for (EClassifier e : p.getEClassifiers()){
-			list.add(e);
-		}
-		for (EClassifier eClassifier : list) {
-			EcoreUtil.delete(eClassifier);
-		}
-		
-	}*/
+	
 	protected static final ResourceSet rs = new ResourceSetImpl();
+	
+	/**
+	 * Registry initialization with JAMOPP related resources
+	 */
 	protected static void setUp() {
 		EPackage.Registry.INSTANCE.put("http://www.emftext.org/java",
 				JavaPackage.eINSTANCE);
@@ -160,6 +126,12 @@ public class Java2EcoreMain {
 				IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
 		
 	}
+	
+	/**
+	 * Method that tries to resolve proxies.
+	 * Proxies are references in models to external resources
+	 * @return
+	 */
 	protected static boolean resolveAllProxies() {
 		boolean failure = false;
 		String msg = "";
@@ -174,7 +146,6 @@ public class Java2EcoreMain {
 						msg += "\nCan not find referenced element in classpath: "
 								+ ((InternalEObject) crElement).eProxyURI();
 						failure = true;
-						//System.out.println(msg);
 					}
 				}
 			}
