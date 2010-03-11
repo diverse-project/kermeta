@@ -47,8 +47,8 @@
 	<target name="get_repository_source">
 		<delete dir="${source.features.and.bundles}" failonerror="false"/>
 		<mkdir dir="${env.WORKSPACE}/tmp"/>
-		<get src="source.features.and.bundles.url" 
-					dest="source.features.and.bundles.downloaded.zip"
+		<get src="${source.features.and.bundles.url}" 
+					dest="${source.features.and.bundles.downloaded.zip}"
 					usetimestamp="true"/>
 		<unzip dest="${source.features.and.bundles}"
 			src="${source.features.and.bundles.downloaded.zip}">
