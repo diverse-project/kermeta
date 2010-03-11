@@ -16,7 +16,7 @@
 	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
 	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/ws/provision_eclipse_bases_for_kermeta/build/kermeta_linux_x86_64_base.zip"/>
 		
-	<target name="all" depends="get_studio_base">
+	<target name="all" depends="get_studio_base, compile">
 		
 	</target>
 
