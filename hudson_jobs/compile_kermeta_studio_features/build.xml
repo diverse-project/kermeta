@@ -1,0 +1,51 @@
+<project name="build_kermeta_bases" default="all">
+
+	<!-- initialize env with Hudson variable -->
+	<property environment="env"/>
+	
+	<property name="env.WORKSPACE" location="."/>
+	<property name="eclipse.native.version.name" value="linux_x86_64"/>
+	<!-- <property name="eclipse.home" location="${eclipse.base.dir}/eclipse"/> -->
+	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
+	<property name="pde.build.foldername" value="org.eclipse.pde.build_3.5.1.R35x_20090820"/>
+	
+	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
+	<property name="eclipse.build.dir" location="./src"/>
+	<property name="eclipse.build.scripts.dir" location="./eclipse_build_scripts"/>
+	
+	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
+	<property name="studio.base.url" value="http://studio.gforge.inria.fr/bundle/latest_build/studioBase.zip"/>
+		
+	<target name="all" depends="get_studio_base">
+		
+	</target>
+
+	<target name="get_studio_base">
+		<ant antfile="get_studio_base_build.xml">
+  			<property name="studio.base.url" value="${studio.base.url}"/>
+			<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
+		</ant>
+	</target>
+
+	
+	<target name="compile" depends="">	
+		<mkdir dir="${eclipse.workspace.dir}"/>
+		<java jar="${eclipse.home}/plugins/${equinox.jar.filename}"
+		           fork="true"
+		           failonerror="true"
+		           maxmemory="128m"
+		           >
+			<arg value="-application"/>
+			<arg value="org.eclipse.ant.core.antRunner"/>
+			<arg value="-buildfile"/>
+			<arg value="${eclipse.home}/plugins/${pde.build.foldername}/scripts/build.xml"/>
+			<arg value="-data"/>
+			<arg value="${eclipse.workspace.dir}"/>
+			<arg value="-Dbuilder=${eclipse.build.scripts.dir}"/>
+			<arg value="-DbuildDirectory=${eclipse.build.dir}"/>
+			<!--<arg value="-Dcomponent=traceability"/>-->
+			<!--<arg value="-Dpde.build.scripts=${eclipse.home}/plugins/org.eclipse.pde.build_3.4.1.R34x_v20080805/scripts"/>-->
+			<arg value="-Dbase=${studio.base.dir}"/>
+		</java>
+	</target>
+</project>
