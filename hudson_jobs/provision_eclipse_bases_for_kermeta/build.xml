@@ -49,12 +49,27 @@
 			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-win32-x86_64.zip"/>
 		</antcall>
 	</target>
+	
+	<target name="provision_macos-cocoa_x86_64_base_for_kermeta">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="macos-cocoa_x86_64"/>
+			<param name="archive.extension" value="tar.gz"/>
+			<param name="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-macosx-cocoa-x86_64.tar.gz"/>
+		</antcall>
+	</target>
+	<target name="provision_macos-cocoa_base_for_kermeta">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="macos-cocoa"/>
+			<param name="archive.extension" value="tar.gz"/>
+			<param name="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-macosx-cocoa.tar.gz"/>
+		</antcall>
+	</target>
 
 	<target name="provision_eclipse_version">
 		<echo>Provision ${eclipse.version.name}</echo>
 		<ant antfile="get_eclipse_base_build.xml">
   			<property name="eclipse.version.name" value="${eclipse.version.name}"/>
-  			<property name="archive.extension" value="tar.gz"/>
+  			<property name="archive.extension" value="${archive.extension}"/>
   			<property name="eclipse.base.url" value="${eclipse.base.url}"/>
 		</ant>
 
@@ -134,6 +149,8 @@
   org.topcased.dependencies.feature.group
   org.topcased.modeler.uml.feature.group
 -->
+
+		<delete file="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip" failonerror="false"/>
 		<zip destfile="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip">
 			<fileset dir="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"></fileset>
 		</zip>
