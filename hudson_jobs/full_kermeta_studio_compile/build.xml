@@ -30,6 +30,7 @@
 	
 	<target name="compile" depends="unzip_external_sources">	
 		<mkdir dir="${eclipse.workspace.dir}"/>
+		<delete dir="./I.DevelopmentBuild"/>
 		<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
 		           fork="true"
 		           failonerror="true"

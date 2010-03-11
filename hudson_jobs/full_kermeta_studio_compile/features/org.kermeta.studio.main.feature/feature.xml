@@ -41,4 +41,8 @@
          id="fr.irisa.triskell.kermeta.ket.feature"
          version="0.0.0"/>
 
+   <includes
+         id="fr.irisa.triskell.kermeta.graphical"
+         version="0.0.0"/>
+
 </feature>
