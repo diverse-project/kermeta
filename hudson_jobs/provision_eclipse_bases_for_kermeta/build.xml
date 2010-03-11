@@ -119,12 +119,12 @@
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
-		<antcall target="provision_feature">
+<!--		<antcall target="provision_feature">
     		<param name="feature.name" value="org.polarion.eclipse.team.svn.connector.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
-
+-->
 		<!-- FROM OTHER UPDATE SITE -->
   <!--
   org.emftext.access.feature.group
