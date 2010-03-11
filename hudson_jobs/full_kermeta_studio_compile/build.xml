@@ -5,7 +5,6 @@
 	
 	<property name="env.WORKSPACE" location="."/>
 	<property name="eclipse.native.version.name" value="linux_x86_64"/>
-	<!-- <property name="eclipse.home" location="${eclipse.base.dir}/eclipse"/> -->
 	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
 	<property name="pde.build.foldername" value="org.eclipse.pde.build_3.5.1.R35x_20090820"/>
 	
@@ -15,7 +14,8 @@
 	
 	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
 	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/ws/provision_eclipse_bases_for_kermeta/build/kermeta_linux_x86_64_base.zip"/>
-		
+	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
+	
 	<target name="all" depends="get_studio_base, compile">
 		
 	</target>
@@ -30,7 +30,7 @@
 	
 	<target name="compile" depends="">	
 		<mkdir dir="${eclipse.workspace.dir}"/>
-		<java jar="${eclipse.home}/plugins/${equinox.jar.filename}"
+		<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
 		           fork="true"
 		           failonerror="true"
 		           maxmemory="128m"
@@ -38,7 +38,7 @@
 			<arg value="-application"/>
 			<arg value="org.eclipse.ant.core.antRunner"/>
 			<arg value="-buildfile"/>
-			<arg value="${eclipse.home}/plugins/${pde.build.foldername}/scripts/build.xml"/>
+			<arg value="${eclipse.bin.home}/plugins/${pde.build.foldername}/scripts/build.xml"/>
 			<arg value="-data"/>
 			<arg value="${eclipse.workspace.dir}"/>
 			<arg value="-Dbuilder=${eclipse.build.scripts.dir}"/>
