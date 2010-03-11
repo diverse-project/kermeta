@@ -102,7 +102,7 @@
 		
 		<!-- FIND BUGS -->
 		<antcall target="provision_feature">
-    		<param name="feature.name" value="http://findbugs.cs.umd.edu/eclipse"/>
+    		<param name="feature.name" value="edu.umd.cs.findbugs.plugin.eclipse.feature.group"/>
 			<param name="feature.repository" value="http://findbugs.cs.umd.edu/eclipse"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
