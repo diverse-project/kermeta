@@ -39,7 +39,7 @@
 		     target="html.help"/>
 	</target>
 	
-	<target name="eclipse.help" >
+	<target name="eclipse.help"  depends="preparedbk">
 		<ant antfile="common_build.xml"
 		     target="eclipse.help"/>
 	</target>
