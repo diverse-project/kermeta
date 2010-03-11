@@ -78,17 +78,23 @@
 			<param name="eclipse.base.dir" value="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
 		</antcall>
+		
+		<!-- get log4j plugin from Kermeta site -->
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.apache.log4j"/>
+			<param name="feature.repository" value="http://www.kermeta.org/update"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+  		</antcall>
+		
 		<!-- FROM OFFICIAL ECLIPSE UPDATE SITE -->
 		<antcall target="provision_feature">
     		<param name="feature.name" value="org.eclipse.emf.sdk.feature.group, org.eclipse.emf.ecoretools.sdk.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.wst.xml_ui.feature.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.gmf.sdk.feature.group, org.eclipse.jet.sdk.feature.group, org.eclipse.ocl.all.sdk.feature.group, org.eclipse.uml2.sdk.feature.group, org.eclipse.uml2tools.sdk.feature.group, org.eclipse.xsd.sdk.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
-		<!-- <antcall target="provision_feature">
-    		<param name="feature.name" value="org.eclipse.emf.ecoretools.sdk.feature.group"/>
-			<param name="feature.repository" value="${eclipse.official.repository}"/>
-			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
-  		</antcall>
+		
+		
+		<!--
 		<antcall target="provision_feature">
     		<param name="feature.name" value="org.eclipse.emf.compare.sdk.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
