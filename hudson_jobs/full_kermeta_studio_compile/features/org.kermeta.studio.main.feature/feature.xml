@@ -21,4 +21,8 @@
          id="fr.irisa.triskell.traceability"
          version="0.0.0"/>
 
+   <includes
+         id="org.kermeta.log4j"
+         version="0.0.0"/>
+
 </feature>
