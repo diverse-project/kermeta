@@ -45,4 +45,12 @@
          id="fr.irisa.triskell.kermeta.graphical"
          version="0.0.0"/>
 
+   <includes
+         id="fr.irisa.triskell.kermeta.ecore"
+         version="0.0.0"/>
+
+   <includes
+         id="org.kermeta.uml2"
+         version="0.0.0"/>
+
 </feature>
