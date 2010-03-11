@@ -29,4 +29,8 @@
          id="org.eclipse.gymnast.runtime"
          version="0.0.0"/>
 
+   <includes
+         id="fr.irisa.triskell.kermeta"
+         version="0.0.0"/>
+
 </feature>
