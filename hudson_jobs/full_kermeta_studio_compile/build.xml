@@ -28,7 +28,7 @@
 	</target>
 
 	
-	<target name="compile" depends="unzip_external_sources">	
+	<target name="compile" depends="unzip_external_sources, compile_eclipse_help">	
 		<mkdir dir="${eclipse.workspace.dir}"/>
 		<delete dir="./I.DevelopmentBuild"/>
 		<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
@@ -54,4 +54,29 @@
 		<ant dir="${eclipse.build.dir}/plugins/org.antlr.antlr2" antfile="unjar_build.xml">
 		</ant>
 	</target>
+	
+	<!-- build the eclipse help of the documentation plugins -->
+	<target name="compile_eclipse_help">
+		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
+			antfile="Kermeta-Manual_build.xml">
+			<target>preparedbk</target>
+			<target>eclipse.help</target>
+		</ant>
+		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
+					antfile="Kermeta-UI-UserGuide_build.xml">
+					<target>preparedbk</target>
+					<target>eclipse.help</target>
+				</ant>
+		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
+					antfile="Kermeta-how-to-install-KerMeta_build.xml">
+					<target>preparedbk</target>
+					<target>eclipse.help</target>
+				</ant>
+		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
+					antfile="Kermeta-MDK_build.xml">
+					<target>preparedbk</target>
+					<target>eclipse.help</target>
+				</ant>
+	</target>
+	
 </project>
