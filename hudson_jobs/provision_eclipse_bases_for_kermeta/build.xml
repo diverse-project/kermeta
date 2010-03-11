@@ -80,11 +80,11 @@
 		</antcall>
 		<!-- FROM OFFICIAL ECLIPSE UPDATE SITE -->
 		<antcall target="provision_feature">
-    		<param name="feature.name" value="org.eclipse.emf.sdk.feature.group"/>
+    		<param name="feature.name" value="org.eclipse.emf.sdk.feature.group, org.eclipse.emf.ecoretools.sdk.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.wst.xml_ui.feature.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.gmf.sdk.feature.group, org.eclipse.jet.sdk.feature.group, org.eclipse.ocl.all.sdk.feature.group, org.eclipse.uml2.sdk.feature.group, org.eclipse.uml2tools.sdk.feature.group, org.eclipse.xsd.sdk.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
-		<antcall target="provision_feature">
+		<!-- <antcall target="provision_feature">
     		<param name="feature.name" value="org.eclipse.emf.ecoretools.sdk.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
@@ -134,6 +134,7 @@
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
+  		-->
 <!--		<antcall target="provision_feature">
     		<param name="feature.name" value="org.polarion.eclipse.team.svn.connector.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
