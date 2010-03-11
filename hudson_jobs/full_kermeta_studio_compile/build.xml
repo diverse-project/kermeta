@@ -9,7 +9,7 @@
 	<property name="pde.build.foldername" value="org.eclipse.pde.build_3.5.2.R35x_20100114"/>
 	
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
-	<property name="eclipse.build.dir" location="./src"/>
+	<property name="eclipse.build.dir" location="."/>
 	<property name="eclipse.build.scripts.dir" location="./eclipse_build_scripts"/>
 	
 	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
