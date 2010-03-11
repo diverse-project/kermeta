@@ -88,29 +88,30 @@
 		
 		<!-- FROM OFFICIAL ECLIPSE UPDATE SITE -->
 		<antcall target="provision_feature">
-    		<param name="feature.name" value="org.eclipse.emf.sdk.feature.group, org.eclipse.emf.ecoretools.sdk.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.wst.xml_ui.feature.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.gmf.sdk.feature.group, org.eclipse.jet.sdk.feature.group, org.eclipse.ocl.all.sdk.feature.group, org.eclipse.uml2.sdk.feature.group, org.eclipse.uml2tools.sdk.feature.group, org.eclipse.xsd.sdk.feature.group, org.eclipse.team.svn.feature.group"/>
+    		<param name="feature.name" value="org.eclipse.emf.sdk.feature.group, org.eclipse.emf.ecoretools.sdk.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.wst.xml_ui.feature.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.gmf.sdk.feature.group, org.eclipse.jet.sdk.feature.group, org.eclipse.ocl.all.sdk.feature.group, org.eclipse.uml2.sdk.feature.group, org.eclipse.uml2tools.sdk.feature.group, org.eclipse.xsd.sdk.feature.group, org.eclipse.team.svn.feature.group, org.eclipse.xpand.sdk.feature.group"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
 		
+		<!-- FROM TOPCASED -->
 		<antcall target="provision_feature">
     		<param name="feature.name" value="org.topcased.modeler.uml.feature.group, org.topcased.dependencies.feature.group"/>
 			<param name="feature.repository" value="${topcased.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
 		
-<!--		<antcall target="provision_feature">
-    		<param name="feature.name" value="org.polarion.eclipse.team.svn.connector.feature.group"/>
-			<param name="feature.repository" value="${eclipse.official.repository}"/>
+		<!-- FIND BUGS -->
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="http://findbugs.cs.umd.edu/eclipse"/>
+			<param name="feature.repository" value="http://findbugs.cs.umd.edu/eclipse"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
--->
+
 		<!-- FROM OTHER UPDATE SITE -->
   <!--
   org.emftext.access.feature.group
   org.emftext.sdk.feature.group
   org.emftext.commons.antlr3_1_1.feature.group
-  edu.umd.cs.findbugs.plugin.eclipse.feature.group
 -->
 
 		<delete file="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip" failonerror="false"/>
