@@ -6,7 +6,7 @@
 	<property name="env.WORKSPACE" location="."/>
 	<property name="eclipse.native.version.name" value="linux_x86_64"/>
 	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
-	<property name="pde.build.foldername" value="org.eclipse.pde.build_3.5.1.R35x_20090820"/>
+	<property name="pde.build.foldername" value="org.eclipse.pde.build_3.5.2.R35x_20100114"/>
 	
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
 	<property name="eclipse.build.dir" location="./src"/>
