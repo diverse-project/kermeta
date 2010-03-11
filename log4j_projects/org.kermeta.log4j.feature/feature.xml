@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.log4j"
       label="Log4j Feature"
-      version="1.2.0"
+      version="1.3.2.qualifier"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/">
