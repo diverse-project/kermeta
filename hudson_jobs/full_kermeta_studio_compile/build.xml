@@ -58,19 +58,13 @@
 	<!-- build the eclipse help of the documentation plugins -->
 	<target name="compile_eclipse_help">
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="Kermeta-Manual_build.xml">
-			<target>preparedbk</target>
-			<target>eclipse.help</target>
-		</ant>
+			antfile="Kermeta-Manual_build.xml" target ="eclipse.help"/>
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-					antfile="Kermeta-UI-UserGuide_build.xml"
-					target ="eclipse.help"/>
+			antfile="Kermeta-UI-UserGuide_build.xml" target ="eclipse.help"/>
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-					antfile="Kermeta-how-to-install-KerMeta_build.xml"
-					target ="eclipse.help"/>
+			antfile="Kermeta-how-to-install-KerMeta_build.xml" target ="eclipse.help"/>
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-					antfile="Kermeta-MDK_build.xml"
-					target ="eclipse.help"/>
+			antfile="Kermeta-MDK_build.xml"	target ="eclipse.help"/>
 	</target>
 	
 </project>
