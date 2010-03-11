@@ -159,7 +159,7 @@
 			file="${build.dir}/html.help/${project.name}/htmlhelp.chm"/>
 	</target>
 	
-	<target name="eclipse.help" depends="prepare_index.xml">
+	<target name="eclipse.help" depends="preparedbk, prepare_index.xml">
 		<antcall target="clean.eclipse.help" />
         <mkdir dir="${build.dir}/eclipse.help/${project.name}" />
 		<copy todir="${build.dir}/eclipse.help/${project.name}/${project.name}_figures">
