@@ -33,4 +33,12 @@
          id="fr.irisa.triskell.kermeta"
          version="0.0.0"/>
 
+   <includes
+         id="org.kermeta.compiler.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="fr.irisa.triskell.kermeta.ket.feature"
+         version="0.0.0"/>
+
 </feature>
