@@ -23,9 +23,7 @@
 		description="Get a base Eclipse for build the Studio">
         <antcall target="check.expand.studio_base.zip"/>  
     </target>
-	
-	<!-- TODO get the base from an adress on the web -->
-	
+		
 	<target name="get.base.zip">
 		<mkdir dir="${env.WORKSPACE}/studiobase.tmp/"/>
 		<get src="${studio.base.url}" 
