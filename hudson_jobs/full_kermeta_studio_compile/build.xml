@@ -69,15 +69,15 @@
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
 			antfile="Kermeta-Tutorial-Process_build.xml"	target ="eclipse.help"/>		
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="KerMeta-Deploying-a-code_build.xml" target ="eclipse.help"/>
+			antfile="Kermeta-Deploying-a-code_build.xml" target ="eclipse.help"/>
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
 			antfile="KermetaEMFTutorial_build.xml" target ="eclipse.help"/>
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="KerMeta-How-to-create-a-metamodel_build.xml" target ="eclipse.help"/>
+			antfile="Kermeta-How-to-create-a-metamodel_build.xml" target ="eclipse.help"/>
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="KerMeta-How-to-add-behavior-to-a-metamodel_build.xml"	target ="eclipse.help"/>
+			antfile="Kermeta-How-to-add-behavior-to-a-metamodel_build.xml"	target ="eclipse.help"/>
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="KerMeta-How-to-use-run-configuration_build.xml"	target ="eclipse.help"/>
+			antfile="Kermeta-How-to-use-run-configuration_build.xml"	target ="eclipse.help"/>
 		
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.ket.documentation/src" 
 					antfile="KET_Manual_build.xml"	target ="eclipse.help"/>
