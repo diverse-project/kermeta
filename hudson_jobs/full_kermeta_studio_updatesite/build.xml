@@ -7,7 +7,7 @@
 	
 	<property name="source.features.and.bundles.downloaded.zip" location="${env.WORKSPACE}/tmp/features_and_bundles.zip"/>		
 	<property name="source.features.and.bundles.url" value="http://tipimouss.irisa.fr:8090/job/full_kermeta_studio_compile/lastSuccessfulBuild/artifact/full_kermeta_studio_compile/I.DevelopmentBuild/org.kermeta.studio.main.feature-DevelopmentBuild.zip"/>		
-	<property name="updatesite.repository" location="${env.WORKSPACE}/build/repository"/>
+	<property name="updatesite.repository" location="${env.WORKSPACE}/build/updatesite"/>
 	<property name="source.features.and.bundles" location="${env.WORKSPACE}/build/features_and_bundles"/>	
 	
 	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
