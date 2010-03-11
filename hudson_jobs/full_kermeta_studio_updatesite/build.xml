@@ -1,0 +1,57 @@
+<project name="full_kermeta_studio_updatesite" default="all">
+	<!-- configuration properties -->		
+	<!-- project configuration -->
+	<property environment="env"/>
+
+	<property name="env.WORKSPACE" location="."/>
+	
+	<property name="source.features.and.bundles.downloaded.zip" location="${env.WORKSPACE}/tmp/features_and_bundles.zip"/>		
+	<property name="source.features.and.bundles.url" location="http://tipimouss.irisa.fr:8090/job/full_kermeta_studio_compile/lastSuccessfulBuild/artifact/full_kermeta_studio_compile/I.DevelopmentBuild/org.kermeta.studio.main.feature-DevelopmentBuild.zip"/>		
+	<property name="updatesite.repository" location="${env.WORKSPACE}/build/repository"/>
+	<property name="source.features.and.bundles" location="${env.WORKSPACE}/build/features_and_bundles"/>	
+	
+	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
+	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_linux_x86_64_base.zip"/>
+	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
+	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
+	
+	<target name="all" depends="get_studio_base, publish_features_and_bundles">
+
+	</target>
+	
+	<target name="publish_features_and_bundles" depends="get_repository_source">
+		<delete dir="${updatesite.repository}" failonerror="false"/>
+		<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
+				           fork="true"
+				           failonerror="true"
+				           maxmemory="128m"
+				           >
+					<arg value="-application"/>
+					<arg value="org.eclipse.equinox.p2.publisher.FeaturesAndBundlesPublisher"/>
+					<arg value="-metadataRepository"/>
+					<arg value="file:/${updatesite.repository}"/>
+					<arg value="-artifactRepository"/>
+					<arg value="file:/${updatesite.repository}"/>
+					<arg value="-source"/>
+					<arg value="${source.features.and.bundles}/eclipse"/>
+					<arg value="-compress"/>
+					<arg value="-publishArtifacts"/>
+				</java>	
+	</target>	
+	<target name="get_studio_base">
+		<ant antfile="get_studio_base_build.xml">
+  			<property name="studio.base.url" value="${studio.base.url}"/>
+			<property name="studio.base.dir" location="${studio.base.dir}"/>
+		</ant>
+	</target>
+	<target name="get_repository_source">
+		<delete dir="${source.features.and.bundles}" failonerror="false"/>
+		<mkdir dir="${env.WORKSPACE}/tmp"/>
+		<get src="source.features.and.bundles.url" 
+					dest="source.features.and.bundles.downloaded.zip"
+					usetimestamp="true"/>
+		<unzip dest="${source.features.and.bundles}"
+			src="${source.features.and.bundles.downloaded.zip}">
+		</unzip> 	
+	</target>
+</project>

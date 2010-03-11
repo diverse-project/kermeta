@@ -1,0 +1,68 @@
+<!-- $Id: deploy_build.xml 8749 2009-10-07 08:39:58Z dvojtise $ -->
+<project name="get_studio_base" default="all" basedir=".">
+        
+    <description>
+        Get the studio base from its official location
+    </description>
+
+	<!-- initialize env with Hudson variable -->
+	<property environment="env"/>
+	
+	<!-- other initialization -->
+	<property name="env.WORKSPACE" location="C:/Temp/kermeta_hudson/workspace/studio_compile_studio"/>
+	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>	
+	<property name="studio.base.downloaded.zip" location="${env.WORKSPACE}/studiobase.tmp/StudioBase.zip"/>
+	<property name="studio.base.url" value="http://studio.gforge.inria.fr/bundle/latest_build/studioBase.zip"/>
+	
+	<path id="ant-extensions">
+	    <fileset dir="${basedir}/ant-extensions" includes="**/*.jar" />
+	    <pathelement path="${basedir}/ant-extensions" />
+	  </path>
+	
+    <target name="all" depends="get.base.zip"
+		description="Get a base Eclipse for build the Studio">
+        <antcall target="check.expand.studio_base.zip"/>  
+    </target>
+	
+	<!-- TODO get the base from an adress on the web -->
+	
+	<target name="get.base.zip">
+		<mkdir dir="${env.WORKSPACE}/studiobase.tmp/"/>
+		<get src="${studio.base.url}" 
+					dest="${studio.base.downloaded.zip}"
+					usetimestamp="true"/>
+	</target>
+	<target name="check.expand.studio_base.zip">
+	    <condition property="tmp:studio_base.available" value="true">
+	        <and>
+	        <available file="${studio.base.dir}/studioBase/eclipse" type="dir" /> <!-- be carefull the zip contains an intermediate folder -->
+	        <uptodate srcfile="${studio.base.downloaded.zip}" 
+	        		  targetfile="${studio.base.dir}/studiobase.zip.tstamp" />
+	        </and>
+	    </condition>
+	    <antcall target="expand.studio_base.zip" />
+	</target>
+	<target name="expand.studio_base.zip" unless="tmp:studio_base.available">
+		<echo>
+	    #####################################################
+        UNPACKING OR UPGRADING studio BASE
+	    #####################################################
+	    </echo>
+		<delete  dir="${studio.base.dir}"/>
+		<mkdir  dir="${studio.base.dir}"/>
+		<unzip dest="${studio.base.dir}"
+			src="${studio.base.downloaded.zip}">
+		</unzip>    
+	    <taskdef name="LastModifiedMillis" classname="LastModifiedMillis">
+	        <classpath refid="ant-extensions" />
+	    </taskdef>
+
+		<LastModifiedMillis file="${studio.base.downloaded.zip}" property="millis" />
+		<touch file="${studio.base.dir}/studiobase.zip.tstamp" millis="${millis}" />
+    </target>
+	
+	<target name="clean.base" >
+		<delete  dir="${studio.base.dir}"/>
+    </target>
+	
+</project>
