@@ -28,7 +28,7 @@
 	</target>
 
 	
-	<target name="compile" depends="">	
+	<target name="compile" depends="unzip_external_sources">	
 		<mkdir dir="${eclipse.workspace.dir}"/>
 		<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
 		           fork="true"
@@ -47,5 +47,10 @@
 			<!--<arg value="-Dpde.build.scripts=${eclipse.home}/plugins/org.eclipse.pde.build_3.4.1.R34x_v20080805/scripts"/>-->
 			<arg value="-Dbase=${studio.base.dir}"/>
 		</java>
+	</target>
+	
+	<target name="unzip_external_sources">
+		<ant dir="${eclipse.build.dir}/plugins/org.antlr.antlr2" antfile="unjar_build.xml">
+		</ant>
 	</target>
 </project>
