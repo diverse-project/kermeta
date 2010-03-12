@@ -20,8 +20,8 @@
 	    <antcall target="provision_kermeta_linux_x86"/>
 	    <antcall target="provision_kermeta_win32"/>
 	    <antcall target="provision_kermeta_win32_x86_64"/>
-	 <!--   <antcall target="provision_kermeta_macosx-cocoa_x86_64"/>
-	    <antcall target="provision_kermeta_macosx-cocoa"/> -->
+	 	<antcall target="provision_kermeta_macosx-cocoa_x86_64"/>
+	    <antcall target="provision_kermeta_macosx-cocoa"/> 
 	</target>
 
 
@@ -60,14 +60,14 @@
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa_x86_64"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-macosx-cocoa-x86_64.tar.gz"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_macosx-cocoa_x86_64_base.zip"/>
 		</antcall>
 	</target>
 	<target name="provision_kermeta_macosx-cocoa">
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa"/>
 			<param name="archive.extension" value="tar.gz"/>
-			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-macosx-cocoa.tar.gz"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_macosx-cocoa_base.zip"/>
 		</antcall>
 	</target>
 
