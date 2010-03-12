@@ -1,0 +1,135 @@
+<project name="build_eclipse_bases_for_kermeta" default="all">
+
+	<property name="env.WORKSPACE" location="."/>
+	<property name="eclipse.native.version.name" value="linux_x86_64"/>
+	<!-- <property name="eclipse.version.name" value="linux_x86_64"/> -->
+	<!-- <property name="eclipse.base.dir" location="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/> -->
+	<!-- <property name="target.eclipse.dir" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/> -->
+	<!-- <property name="target.eclipse.zip" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip"/> -->
+	<!-- <property name="eclipse.home" location="${eclipse.base.dir}/eclipse"/> -->
+	<property name="equinox.jar" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
+	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
+	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
+	<property name="eclipse.official.repository" value="http://download.eclipse.org/releases/galileo"/>
+	<property name="topcased.official.repository" value="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.5/"/>
+	<!-- <property name="eclipse.official.repository" value="http://eclipse.ialto.org/releases/galileo"/> -->
+	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
+		
+	<target name="all" depends="">
+		<antcall target="provision_kermeta_linux_x86_64"/>
+	    <antcall target="provision_kermeta_linux_x86"/>
+	    <antcall target="provision_kermeta_win32"/>
+	    <antcall target="provision_kermeta_win32_x86_64"/>
+	 <!--   <antcall target="provision_kermeta_macosx-cocoa_x86_64"/>
+	    <antcall target="provision_kermeta_macosx-cocoa"/> -->
+	</target>
+
+
+	<target name="provision_kermeta_linux_x86_64">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="linux_x86_64"/>
+			<param name="archive.extension" value="zip"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_linux_x86_64_base.zip"/>
+		</antcall>
+	</target>
+	<target name="provision_kermeta_linux_x86">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="linux_x86"/>
+			<param name="archive.extension" value="zip"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_linux_x86_base.zip"/>
+		</antcall>
+	</target>
+
+	<target name="provision_kermeta_win32">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="win32"/>
+			<param name="archive.extension" value="zip"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_win32_base.zip"/>
+		</antcall>
+	</target>
+	
+	<target name="provision_kermeta_win32_x86_64">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="win32_x86_64"/>
+			<param name="archive.extension" value="zip"/>
+			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_win32_x86_64_base.zip"/>
+		</antcall>
+	</target>
+	
+	<target name="provision_kermeta_macosx-cocoa_x86_64">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="macosx-cocoa_x86_64"/>
+			<param name="archive.extension" value="tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-macosx-cocoa-x86_64.tar.gz"/>
+		</antcall>
+	</target>
+	<target name="provision_kermeta_macosx-cocoa">
+		<antcall target="provision_eclipse_version">
+			<param name="eclipse.version.name" value="macosx-cocoa"/>
+			<param name="archive.extension" value="tar.gz"/>
+			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-macosx-cocoa.tar.gz"/>
+		</antcall>
+	</target>
+
+	<target name="provision_eclipse_version">
+		<echo>Provision ${eclipse.version.name}</echo>
+		<ant antfile="get_eclipse_base_build.xml">
+  			<property name="eclipse.version.name" value="${eclipse.version.name}"/>
+  			<property name="archive.extension" value="${archive.extension}"/>
+  			<property name="eclipse.base.url" value="${eclipse.base.url}"/>
+		</ant>
+
+		<mkdir dir="${eclipse.workspace.dir}"/>
+		<antcall target="create_target_base">
+			<param name="eclipse.base.dir" value="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}"/>
+		</antcall>
+		
+		<!-- get log4j plugin from lastest succesfult updatesite build  -->
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="fr.irisa.triskell.kermeta.feature.group, fr.irisa.triskell.kermeta.ecore.feature.group, fr.irisa.triskell.kermeta.graphical.feature.group, fr.irisa.triskell.kermeta.ket.feature.group, fr.irisa.triskell.traceability.feature.group, org.kermeta.compiler.feature.feature.group, org.kermeta.log4j.feature.group, org.kermeta.uml2.feature.group, org.eclipse.gymnast.runtime.feature.group, "/>
+			<param name="feature.repository" value="http://tipimouss.irisa.fr:8090/job/full_kermeta_studio_updatesite/lastSuccessfulBuild/artifact/updatesite/"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}"/>
+  		</antcall>
+		
+		
+
+
+		<delete file="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}.zip" failonerror="false"/>
+		<zip destfile="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}.zip">
+			<fileset dir="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}"></fileset>
+		</zip>
+	</target>
+	<target name="provision_feature">
+		<echo>Provisionning ${eclipse.version.name} with ${feature.name}</echo>
+		<java jar="${target.eclipse.dir}/eclipse/plugins/${equinox.jar}"
+		           fork="true"
+		           failonerror="true"
+		           maxmemory="128m"
+		           >
+			<arg value="-application"/>
+			<arg value="org.eclipse.equinox.p2.director"/>
+			<arg value="-metadataRepository"/>
+			<arg value="${feature.repository}"/>
+			<arg value="-artifactRepository"/>
+			<arg value="${feature.repository}"/>
+			<arg value="-installIU"/>
+			<arg value="${feature.name}"/>
+			<arg value="-destination"/>
+			<arg value="${target.eclipse.dir}/eclipse"/>
+			<arg value="-profile"/>
+			<arg value="SDKProfile"/>   
+ 			<jvmarg value="-Declipse.p2.data.area=${target.eclipse.dir}/eclipse/p2"/>
+		</java>	
+	</target>
+	
+	<!-- create an empty base from the downloaded one -->
+	<target name="create_target_base">
+		<delete dir="${target.eclipse.dir}" failonerror="false"/>
+		<copy todir="${target.eclipse.dir}">
+			<fileset dir="${eclipse.base.dir}" includes="**" />
+		</copy>	
+	</target>
+
+
+</project>
