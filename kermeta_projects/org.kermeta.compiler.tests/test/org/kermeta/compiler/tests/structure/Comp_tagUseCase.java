@@ -24,7 +24,6 @@ import org.kermeta.interpreter.api.InitializationError;
 import org.kermeta.interpreter.api.Interpreter;
 import org.kermeta.interpreter.api.InterpreterMode;
 import org.kermeta.interpreter.api.InterpreterOptions;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.simk.impl.SimkPackageImpl;
 
@@ -62,7 +61,6 @@ public class Comp_tagUseCase {
 	@BeforeClass
 	static public void setInterpreter() {
 		IOPlugin.LOCAL_USE = true;
-		LoaderPlugin.getDefault();
 		
 		SimkPackageImpl.init();
 
@@ -86,7 +84,7 @@ public class Comp_tagUseCase {
 	 */
 	@AfterClass
 	static public void unsetInterpreter() {
-		LoaderPlugin.getDefault().unload( Constants.TEST_COMP_BEHAVIOR_LAUNCHER );
+		IOPlugin.getDefault().unload( Constants.TEST_COMP_BEHAVIOR_LAUNCHER );
 	}
     /*
 	 * 
