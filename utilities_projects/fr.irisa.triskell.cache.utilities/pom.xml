@@ -46,7 +46,7 @@
 	</build>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>Triskell-snapshot</id>
+			<id>triskell-snapshot</id>
 			<name>Triskell Snapshot</name>
 			<url>http://tipimouss.irisa.fr:8081/nexus/content/repositories/triskell-snapshots/</url>
 		</snapshotRepository>
