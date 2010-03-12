@@ -87,8 +87,10 @@
   		</antcall>
 		
 		<!-- FROM OFFICIAL ECLIPSE UPDATE SITE -->
+		<!-- org.eclipse.xpand.sdk.feature.group is required by topcased UML modeler,
+		     org.eclipse.jdt seems not installed in some version (win32) and is required by findbug -->
 		<antcall target="provision_feature">
-    		<param name="feature.name" value="org.eclipse.emf.sdk.feature.group, org.eclipse.emf.ecoretools.sdk.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.wst.xml_ui.feature.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.gmf.sdk.feature.group, org.eclipse.jet.sdk.feature.group, org.eclipse.ocl.all.sdk.feature.group, org.eclipse.uml2.sdk.feature.group, org.eclipse.uml2tools.sdk.feature.group, org.eclipse.xsd.sdk.feature.group, org.eclipse.team.svn.feature.group, org.eclipse.xpand.sdk.feature.group"/>
+    		<param name="feature.name" value="org.eclipse.emf.sdk.feature.group, org.eclipse.emf.ecoretools.sdk.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.wst.xml_ui.feature.feature.group, org.eclipse.emf.compare.sdk.feature.group, org.eclipse.gmf.sdk.feature.group, org.eclipse.jet.sdk.feature.group, org.eclipse.ocl.all.sdk.feature.group, org.eclipse.uml2.sdk.feature.group, org.eclipse.uml2tools.sdk.feature.group, org.eclipse.xsd.sdk.feature.group, org.eclipse.team.svn.feature.group, org.eclipse.xpand.sdk.feature.group, org.eclipse.jdt"/>
 			<param name="feature.repository" value="${eclipse.official.repository}"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
