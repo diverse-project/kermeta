@@ -35,7 +35,7 @@ the terms of the EPL licence.
       <import plugin="org.eclipse.jdt.launching"/>
       <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
       <import plugin="org.kermeta.merger"/>
-      <import plugin="org.kermeta.io.loader"/>
+     <!--  <import plugin="org.kermeta.io.loader"/> -->
       <import plugin="org.apache.commons.logging" version="1.0.4" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.emf.ecore.editor"/>
