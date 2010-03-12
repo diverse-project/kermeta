@@ -1,9 +1,8 @@
-/* $Id:$ 
+/*
  * Creation : February 22, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
 
 
@@ -14,9 +13,12 @@ require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Link.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::action
+using kermeta::ki::malai::picking
 using kermeta::ki::malai::interaction::event
 
 
@@ -35,6 +37,24 @@ abstract class Instrument
 		activated := false
 		self.actionRegistry := actionRegistry
 	end
+	
+	
+	
+	/**
+	* Adds and configures the given link to the instrument.
+	*/
+	operation addLink(link : Link, picker : Picker, pickable : Pickable, eventManager : EventManager, execute : Boolean) : Void is do
+		link.initialise(self, eventManager, false)
+		link.execute := execute
+		
+		if(pickable.isVoid) 
+		then link.setPickerToInteraction(picker)
+		else link.setPickableToInteraction(pickable)
+		end
+		
+		links.add(link)
+	end
+	
 	
 	
 	/**

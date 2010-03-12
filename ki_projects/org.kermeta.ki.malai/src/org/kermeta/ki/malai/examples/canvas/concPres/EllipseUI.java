@@ -18,8 +18,6 @@ public class EllipseUI extends ShapeUI {
 		
 		Ellipse2D.Double ell = new Ellipse2D.Double(getMinX(), getMinY(), getWidth(), getHeight());
 		
-		System.out.println(">>>>>>>>>isIs:" + x + "  " + y);
-		System.out.println(">>>>>>>>>isIs:" + ell.contains(x, y));
 		return ell.contains(x, y);
 	}
 	

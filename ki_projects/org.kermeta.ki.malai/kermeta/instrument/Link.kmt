@@ -1,7 +1,7 @@
-/* $Id:$ 
+/*
  * Creation : February 22, 2010
  * Licence  : EPL 
- * Copyright:
+ * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
 
@@ -38,7 +38,7 @@ abstract class Link inherits InteractionHandler
 	attribute action : Action
 	
 	/** The instrument that contains the link. */
-	attribute instrument : Instrument
+	reference instrument : Instrument
 	
 	/** Specifies if the action must be execute or update
 	 * on each evolution of the interaction. */
@@ -136,7 +136,7 @@ abstract class Link inherits InteractionHandler
 		if(not action.isVoid and interaction==inter) then
 			if(isConditionRespected) then
     			if(not execute) then updateAction end
-    			if(action.doIt) then action.done end
+    			if(action.doIt) then action.setDone end
     
     			if(action.hadEffect) then
     				if(action.isRegisterable) then
@@ -144,7 +144,7 @@ abstract class Link inherits InteractionHandler
     				else instrument.actionRegistry.cancelActions(action)
     				end
     			end
-    			
+   			
     			action := void
 			else
 				action.abort()

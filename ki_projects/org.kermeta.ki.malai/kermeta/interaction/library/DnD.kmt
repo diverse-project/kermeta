@@ -118,7 +118,7 @@ class DnDPressureTransition inherits PressureTransition {
 
 	method action() : Void is do
 		dnd.pxStart := Real.clone(px)
-		dnd.pyStart := Real.clone(px)
+		dnd.pyStart := Real.clone(py)
 		dnd.pxEnd   := Real.clone(px)
 		dnd.pyEnd   := Real.clone(py)
 		dnd.button 	:= button

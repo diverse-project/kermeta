@@ -1,9 +1,8 @@
-/* $Id:$ 
+/*
  * Creation : February 8, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
 
 package kermeta::ki::malai::examples;
@@ -14,6 +13,7 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/presentation/AbstractPr
 
 using kermeta::standard
 using kermeta::ki::malai::presentation
+
 
 class Drawing inherits AbstractPresentation {
 	attribute shapes : Shape[0..*]
@@ -86,15 +86,6 @@ abstract class Shape {
 	attribute points : Point[0..*]
 	
 	
-	
-	operation move(tx : Real, ty : Real) : Void is do
-		points.each { pt | 
-			pt.x := pt.x + tx
-			pt.y := pt.y + ty
-		}
-	end
-	
-	
 	operation getTopLeftPoint() : Point is do
 		result := Point.new
 		
@@ -122,7 +113,7 @@ abstract class Shape {
 			points.each{ pt |
 				if(pt.x!=tl.x) then
 					if(pt.x==br.x) then
-					     pt.x := x
+					     pt.x := Real.clone(x)
 					else pt.x := tl.x+(pt.x-tl.x)*percent
 					end
 				end
@@ -142,7 +133,7 @@ abstract class Shape {
 			points.each{ pt |
 				if(pt.x!=br.x) then
 					if(pt.x!=tl.x) then
-						pt.x := x
+						pt.x := Real.clone(x)
 					else
 						pt.x := br.x+(pt.x-br.x)*percent
 					end
@@ -162,7 +153,7 @@ abstract class Shape {
 			points.each{ pt |
 				if(pt.y!=tl.y) then
 					if(pt.y!=br.y) then
-						pt.y := y
+						pt.y := Real.clone(y)
 					else
 						pt.y := tl.y+(pt.y-tl.y)*percent
 					end
@@ -183,7 +174,7 @@ abstract class Shape {
 			points.each{ pt |
 				if(pt.y!=br.y) then
 					if(pt.y==tl.y) then
-						pt.y := y
+						pt.y := Real.clone(y)
 					else 
 						pt.y := br.y+(pt.y-br.y)*percent
 					end
@@ -209,7 +200,7 @@ abstract class Shape {
 		result := "10000000".toReal
 		
 		points.each { pt |
-			if(pt.x<result) then result := pt.x end
+			if(pt.x<result) then result := Real.clone(pt.x) end
 		}
 	end
 	
@@ -218,7 +209,7 @@ abstract class Shape {
 		result := "10000000".toReal
 		
 		points.each { pt |
-			if(pt.y<result) then result := pt.y end
+			if(pt.y<result) then result := Real.clone(pt.y) end
 		}
 	end
 	
@@ -227,7 +218,7 @@ abstract class Shape {
 		result := "-10000000".toReal
 		
 		points.each { pt |
-			if(pt.x>result) then result := pt.x end
+			if(pt.x>result) then result := Real.clone(pt.x) end
 		}
 	end
 	
@@ -236,11 +227,10 @@ abstract class Shape {
 		result := "-10000000".toReal
 		
 		points.each { pt |
-			if(pt.y>result) then result := pt.y end
+			if(pt.y>result) then result := Real.clone(pt.y) end
 		}
 	end
 }
-
 
 
 
@@ -252,11 +242,9 @@ class Point {
 	
 	
 	operation setPoint(pt : Point) : Void is do
-		if(pt!=void) then
-			self.x := pt.x
-			self.y := pt.y
+		if(not pt.isVoid) then
+			self.x := Real.clone(pt.x)
+			self.y := Real.clone(pt.y)
 		end
 	end
 }
-
-

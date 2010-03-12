@@ -1,19 +1,16 @@
-/* $Id:$ 
+/*
  * Creation : February 4, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
-@mainClass "kermeta::ki::malai::undo::UndoCollector"
-
 
 package kermeta::ki::malai::undo;
 
 
 require kermeta
-require "Undoable.kmt"
-require "UndoHandler.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/undo/Undoable.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/undo/UndoHandler.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -31,10 +28,12 @@ class UndoCollector
 	attribute max : Integer
 	
 	/** The handlers that handles the collector. */
-	reference handlers : Sequence<UndoHandler>
+	reference handlers : UndoHandler[0..*]
 	
 	operation initialise() : Void is do
 		max := 50
+		undoStack := Stack<Undoable>.new
+		redoStack := Stack<Undoable>.new
 	end
 
 	

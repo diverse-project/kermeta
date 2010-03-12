@@ -13,6 +13,7 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/Event
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/PressLink.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/DnDLink.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/ActivePresentation.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/Actions.kmt"
@@ -30,15 +31,54 @@ class Hand inherits Instrument
 	
 	
 	method initialiseLinks(eventManager : EventManager) : Void is do
-		var link : Link init Press2Select.new
-		
-		link.initialise(self, eventManager, false)
-		link.setPickerToInteraction(drawing)
-		links.add(link)
+		addLink(Press2Select.new, drawing, void, eventManager, false)
+		addLink(DnD2Translate.new, drawing, void, eventManager, true)
 	end
 }
 
 
+
+class DnD2Translate inherits DnDLink
+{
+	method updateAction() : Void is do
+		if(not action.isVoid) then
+			var at  : ActionTranslate init action.asType(ActionTranslate)
+			var dnd : DnD init interaction.asType(DnD) 
+			
+			at.endPt.x := Real.clone(dnd.pxEnd) 
+			at.endPt.y := Real.clone(dnd.pyEnd)
+		end
+	end
+	
+	
+	method isConditionRespected() : Boolean is do
+		result := interaction.asType(DnD).source.isInstanceOf(Shape)
+	end
+	
+	
+	method createAction() : Void is do
+		var as : ActionSelect init instrument.actionRegistry.getAction(ActionSelect).asType(ActionSelect)
+		var dnd : DnD init interaction.asType(DnD)
+		 
+		if(as.isVoid) then
+			var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			ex.message := "No selection action found."
+			raise ex
+		end
+
+		var am : ActionTranslate init ActionTranslate.new
+		
+		am.initialise(instrument.actionRegistry)
+		am.sel := as
+		am.srcPt := Point.new
+		am.endPt := Point.new
+		am.srcPt.x := Real.clone(dnd.pxStart)
+		am.srcPt.y := Real.clone(dnd.pyStart)
+		am.endPt.x := Real.clone(dnd.pxEnd)
+		am.endPt.y := Real.clone(dnd.pyEnd)
+		action := am
+	end
+}
 
 
 
@@ -72,6 +112,7 @@ class Press2Select inherits PressLink
 		var as : ActionSelect init ActionSelect.new
 		var hand : Hand init instrument.asType(Hand)
 		
+		as.initialise(instrument.actionRegistry)
 		as.drawing := hand.drawing
 		action     := as
 	end

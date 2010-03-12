@@ -32,6 +32,21 @@ public abstract class ShapeUI implements Pickable {
 	
 	
 	
+	public static RuntimeObject onPtModified(RuntimeObject shapeRO, RuntimeObject xRO, RuntimeObject yRO, RuntimeObject positionRO) {
+		int position = Integer.getValue(positionRO);
+		double x	 = Real.getValue(xRO);
+		double y	 = Real.getValue(yRO);
+		ShapeUI sh	 = (ShapeUI) shapeRO.getUserData();
+		Point2D.Double pt = position==-1 ? sh.getPoints().get(sh.getPoints().size()-1) : sh.getPoints().get(position);
+		
+		pt.x = x;
+		pt.y = y;
+		
+		return shapeRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	
+	
 	public static RuntimeObject onPointAdded(RuntimeObject shapeRO, RuntimeObject xRO, RuntimeObject yRO, RuntimeObject positionRO) {
 		int position = Integer.getValue(positionRO);
 		double x	 = Real.getValue(xRO);

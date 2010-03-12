@@ -1,0 +1,112 @@
+/*
+ * Creation : March 10, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+
+
+package kermeta::ki::malai::examples;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/ActivePresentation.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::instrument
+using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::action
+
+
+class Pencil inherits Instrument
+{
+	reference drawing : Drawing
+	
+	/*
+	0: Rectangle
+	1: Ellipse
+	2: Polygon 
+	*/
+	attribute currentChoice : Integer
+	
+	
+	method initialise(actionRegistry : ActionRegistry) : Void is do
+		super(actionRegistry)
+		
+		currentChoice := 0
+	end
+	
+	
+	
+	method initialiseLinks(eventManager : EventManager) : Void is do
+//		addLink(Press2Select.new, drawing, void, eventManager, false)
+	end
+}
+
+/*
+
+
+
+class DnD2AddShape inherits DnDLink {
+	method createAction() : Void is do
+		var shape : Shape
+		var aas   : ActionAddShape init ActionAddShape.new
+		var dnd   : DnD init interaction.asType(DnD)
+
+		if(currentChoice==0) then
+			shape := Rectangle.new
+		else if(currentChoice==1) then
+			shape := Ellipse.new
+		else
+			shape := Polygon.new
+		end
+
+		var ptx  : Integer init dnd.getStartPtx
+		var pty  : Integer init dnd.getStartPty
+
+						
+    		shape.addPoint(new Point(pt.x, pt.y));
+    		shape.addPoint(new Point(pt.x+1, pt.y));
+    		shape.addPoint(new Point(pt.x+1, pt.y+1));
+		
+		aas.setShape(shape);
+		aas.setCanvas(Pencil.this.canvas);
+		
+		action = aas;
+	end
+
+	@Override
+	public boolean isConditionRespected() {
+		Pencil.ShapeChoice sc = ((Pencil)instrument).getCurrentChoice();
+		
+		return sc==Pencil.ShapeChoice.ELLIPSE || sc==Pencil.ShapeChoice.RECTANGLE;
+	}
+
+	@Override
+	public void updateAction() {
+		ActionAddShape aas 	= (ActionAddShape) action;
+		DnD dnd				= getInteraction();
+		
+		aas.getShape().setRight(dnd.getEndPt().getX());
+		aas.getShape().setBottom(dnd.getEndPt().getY());
+		Pencil.this.canvasUI.repaint();
+	}
+	
+	
+	@Override
+	public void interimFeedback() {
+		if(Pencil.this.canvasUI.getShapeTmp()==null) {
+			ActiveMapper.ACTIVE_MAPPER.modify(ModelCanvasField.shapeTmp, Pencil.this.canvas, ((ActionAddShape)action).getShape());
+			Pencil.this.canvasUI.repaint();
+		}
+	}
+}
+*/
+
+
+
+
+
+

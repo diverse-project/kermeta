@@ -1,19 +1,19 @@
-/* $Id:$ 
+/*
  * Creation : February 3, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
-@mainClass "kermeta::ki::malai::action::Action"
 
 
 package kermeta::ki::malai::action;
 
 
 require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.kmt"
 
 using kermeta::standard
+using kermeta::language::structure
 
 
 abstract class Action {
@@ -23,11 +23,17 @@ abstract class Action {
 	/** Defines if the action has started. */
 	attribute started : Boolean
 	
+	/** The action registry that contains objects that want to be notified
+	* by events on actions. */
+	reference actionRegistry : ActionRegistry
 	
-	operation initialize() : Void is do
+	
+	operation initialise(actionRegistry : ActionRegistry) : Void is do
 		done := false
 		started := false
+		self.actionRegistry := actionRegistry
 	end
+	
 	
 	
 	 /** Executes the action. Should be overridden by sub-class to define stuffs to execute.
@@ -39,8 +45,7 @@ abstract class Action {
 			
 			doActionBody()
 			
-			//for(ActionHandler handler : ActionsRegistry.REGISTRY.handlers)
-			//	handler.onActionExecuted(this);
+			actionRegistry.handlers.each{h | h.onActionExecuted(self) }
 		else 
 			result := false
 		end
@@ -62,7 +67,7 @@ abstract class Action {
 	/** Defines if the given action can cancel the calling action.
 		Returns true if the given action cancels the calling action.
 		'action': The action to test. */
-	operation cancelledBy<T : Action>(action : T) : Boolean is abstract
+	operation cancelledBy(action : Class) : Boolean is abstract
 
 
 	/** Sets the action to 'done'. */

@@ -1,9 +1,8 @@
-/* $Id:$ 
+/*
  * Creation : February 8, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
 
 package kermeta::ki::malai::examples;
@@ -11,10 +10,91 @@ package kermeta::ki::malai::examples;
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/undo/Undoable.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/examples/drawingEditor/ActivePresentation.kmt"
 
 using kermeta::standard
+using kermeta::language::structure
 using kermeta::ki::malai::action
+using kermeta::ki::malai::undo
+
+
+
+class ActionTranslate inherits Action, Undoable {
+	reference sel   : ActionSelect
+	
+	attribute srcPt : Point
+	
+	attribute endPt : Point
+	
+	attribute tmpPt : Point
+	
+	
+	method doActionBody() : Void is do
+		if(tmpPt.isVoid) then
+			tmpPt := Point.new
+			tmpPt.x := Real.clone(srcPt.x)
+			tmpPt.y := Real.clone(srcPt.y)
+		end
+		
+		var tx : Real init endPt.x - tmpPt.x
+		var ty : Real init endPt.y - tmpPt.y
+		
+		sel.selection.each{sh | sh.translate(tx, ty) }
+		tmpPt.x := Real.clone(endPt.x)
+		tmpPt.y := Real.clone(endPt.y)
+		
+		sel.drawing.executeMapping //FIXME beurk. Must be replaced by active mapping.
+	end
+	
+	
+	method canDo() : Boolean is do
+		result := (not sel.isVoid).andThen{b | sel.isDone and not endPt.isVoid and not srcPt.isVoid }
+	end
+	
+	
+	method hadEffect() : Boolean is do
+		result := isDone and not endPt.isVoid and not srcPt.isVoid
+	end
+	
+	
+	method getUndoName() : String is do
+		result := "Move shape"
+	end
+	
+	
+	method redo() : Void is do
+		if(isDone and canDo) then
+    		var tx : Real init endPt.x - srcPt.x
+    		var ty : Real init endPt.x - srcPt.y
+    		
+    		sel.selection.each{sh | sh.translate(tx, ty) }
+		end
+	end
+	
+	
+	method undo() : Void is do
+		if(isDone and canDo) then
+    		var tx : Real init endPt.x - srcPt.x
+    		var ty : Real init endPt.x - srcPt.y
+    		
+    		sel.selection.each{sh | sh.translate(-tx, -ty) }
+		end
+	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := true
+	end
+	
+	
+	method cancelledBy(action : kermeta::language::structure::Class) : Boolean is do
+		result := false
+	end
+}
+
+
+
 
 
 class ActionSelect inherits Action {
@@ -33,6 +113,9 @@ class ActionSelect inherits Action {
 	end
 	
 	
+	method hadEffect() : Boolean is do
+		result := isDone
+	end
 	
 	operation setSelection(selection : Shape) : Void is do
 		self.selection.clear()
@@ -49,7 +132,12 @@ class ActionSelect inherits Action {
 	end
 	
 	
-	method cancelledBy<T : Action>(action : T) : Boolean is do
-		result := self.isInstanceOf(T)
+	method cancelledBy(action : Class) : Boolean is do
+		result := self.isInstanceOf(action)
+	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := true
 	end
 }

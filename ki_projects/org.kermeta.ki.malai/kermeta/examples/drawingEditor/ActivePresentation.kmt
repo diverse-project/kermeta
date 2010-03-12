@@ -1,9 +1,8 @@
-/* $Id:$ 
+/*
  * Creation : February 9, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
 
 package kermeta::ki::malai::examples;
@@ -20,6 +19,7 @@ using kermeta::standard
 using kermeta::ki::malai::picking
 using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::action
+
 
 
 
@@ -64,6 +64,16 @@ class CanvasIS inherits ActionHandler {
 
 
 aspect class Shape inherits Pickable {
+	operation translate(tx : Real, ty : Real) : Void is do
+		points.each { pt | 
+			pt.x := pt.x + tx
+			pt.y := pt.y + ty
+		}
+		
+		executeMappingPoint
+	end
+	
+	
 	method contains(px : Real, py : Real) : Boolean is do
 		result ?= extern org::kermeta::ki::malai::examples::canvas::concPres::ShapeUI.contains(self, px, py)
 	end
@@ -75,7 +85,16 @@ aspect class Shape inherits Pickable {
 			extern org::kermeta::ki::malai::examples::canvas::concPres::ShapeUI.onPointAdded(self, pt.x, pt.y, i)
 			i := i+1
 		}
-	end	
+	end
+	
+	
+	operation executeMappingPoint() : Void is do
+		var i : Integer init 0
+		points.each { pt | 
+			extern org::kermeta::ki::malai::examples::canvas::concPres::ShapeUI.onPtModified(self, pt.x, pt.y, i)
+			i := i+1
+		}
+	end
 }
 
 

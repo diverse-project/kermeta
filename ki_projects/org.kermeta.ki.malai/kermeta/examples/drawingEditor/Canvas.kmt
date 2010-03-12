@@ -1,9 +1,8 @@
-/* $Id:$ 
+/*
  * Creation : February 8, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
 @mainClass "kermeta::ki::malai::examples::CanvasLauncher"
 @mainOperation "main"
@@ -22,19 +21,20 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.k
 //require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/DnD.kmt"
 //require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
 
 using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::dispatcher
 using kermeta::ki::malai::action
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::picking
+using kermeta::ki::malai::undo
 using kermeta::standard
 
 
 class CanvasLauncher
 {
 	operation main() : Void is do
+		var undoCollector  : UndoCollector  init UndoCollector.new 
 		var actionRegistry : ActionRegistry init ActionRegistry.new
 		var aui            : CanvasIS       init CanvasIS.new
 		var eventManager   : EventManager   init EventManager.new
@@ -43,6 +43,8 @@ class CanvasLauncher
 //		var press          : Press          init Press.new
 		var hand		   : Hand 		    init Hand.new
 		
+		undoCollector.initialise
+		actionRegistry.initialise(undoCollector)
 		actionRegistry.handlers.add(aui)
 		hand.initialise(actionRegistry)
 		dispatcher.initialise

@@ -61,7 +61,7 @@ abstract class Dispatchable
 /**
 	Defines a dispatcher that contains only a single process.
 */
-class SingleDisptacher inherits AbstractDispatcher 
+class SingleDispatcher inherits AbstractDispatcher 
 {
 	/** The process managed by the dispatcher. */
 	reference process : Dispatchable
