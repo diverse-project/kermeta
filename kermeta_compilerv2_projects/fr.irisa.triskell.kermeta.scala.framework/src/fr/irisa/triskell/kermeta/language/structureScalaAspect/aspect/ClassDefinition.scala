@@ -5,11 +5,11 @@ import org.eclipse.emf.ecore.impl._
 
 trait ClassDefinition extends EClass {
 	
-    def ScalatypeDefinition : fr.irisa.triskell.kermeta.language.structure.ClassDefinition= {
+    /*def ScalatypeDefinition : fr.irisa.triskell.kermeta.language.structure.ClassDefinition= {
         var classdef : ClassDefinitionWrapper= new ClassDefinitionWrapper()
         classdef.classdef = this.eClass;
         return classdef;
-    }
+    }*/
 
 }
 

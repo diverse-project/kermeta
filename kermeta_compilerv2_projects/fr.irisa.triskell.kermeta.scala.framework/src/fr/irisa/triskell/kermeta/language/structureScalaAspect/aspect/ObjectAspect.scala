@@ -9,7 +9,7 @@ trait ObjectAspect extends EObject  with Contracted {
 //	 def getOwnedTags():org.eclipse.emf.common.util.EList[fr.irisa.triskell.kermeta.language.structure.Tag]=null;
 //	 def getTag():org.eclipse.emf.common.util.EList[fr.irisa.triskell.kermeta.language.structure.Tag]=null;
 
-	def getMetaClass() = this.eClass()
+	def getMetaClass() : fr.irisa.triskell.kermeta.language.structure.Class= null//this.eClass()
 	//def classDefinition = this.asInstanceOf[EClass]
 	//def ScalaclassDefinition = classDefinition
 	def typedefinition = this
