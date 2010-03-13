@@ -96,7 +96,7 @@
 
 
 		<delete file="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}.zip" failonerror="false"/>
-		<zip destfile="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}.zip">
+		<zip destfile="${env.WORKSPACE}/build/kermeta_svn_${eclipse.version.name}.zip">
 			<fileset dir="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}"></fileset>
 		</zip>
 	</target>
