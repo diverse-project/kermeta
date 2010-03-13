@@ -59,14 +59,14 @@
 	<target name="provision_kermeta_macosx-cocoa_x86_64">
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa_x86_64"/>
-			<param name="archive.extension" value="tar.gz"/>
+			<param name="archive.extension" value="zip"/>
 			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_macosx-cocoa_x86_64_base.zip"/>
 		</antcall>
 	</target>
 	<target name="provision_kermeta_macosx-cocoa">
 		<antcall target="provision_eclipse_version">
 			<param name="eclipse.version.name" value="macosx-cocoa"/>
-			<param name="archive.extension" value="tar.gz"/>
+			<param name="archive.extension" value="zip"/>
 			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_macosx-cocoa_base.zip"/>
 		</antcall>
 	</target>
