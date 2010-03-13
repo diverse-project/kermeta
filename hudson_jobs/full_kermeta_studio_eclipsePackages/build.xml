@@ -14,7 +14,10 @@
 	<property name="topcased.official.repository" value="http://topcased-mm.gforge.enseeiht.fr/release/update-site3.5/"/>
 	<!-- <property name="eclipse.official.repository" value="http://eclipse.ialto.org/releases/galileo"/> -->
 	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
-		
+	<property name="splash.file" location="./branding/splash.bmp"/>
+	<property name="org.eclipse.platform.version" value="org.eclipse.platform_3.3.202.v201002111343"/>
+	
+	
 	<target name="all" depends="">
 		<antcall target="provision_kermeta_linux_x86_64"/>
 	    <antcall target="provision_kermeta_linux_x86"/>
@@ -92,7 +95,9 @@
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}"/>
   		</antcall>
 		
-		
+		<copy file="${splash.file}" 
+			todir="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}/eclipse/plugins/${org.eclipse.platform.version}"
+			overwrite="true"/>
 
 
 		<delete file="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}.zip" failonerror="false"/>
