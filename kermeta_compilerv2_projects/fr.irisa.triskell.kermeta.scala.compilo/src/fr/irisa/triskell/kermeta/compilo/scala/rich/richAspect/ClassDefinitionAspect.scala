@@ -1,6 +1,9 @@
 package fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect
 
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
+import kermeta.utils.ReflexivityLoader
+import org.antlr.stringtemplate.StringTemplate
+import org.antlr.stringtemplate.StringTemplateGroup
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.impl.EObjectImpl
@@ -74,7 +77,9 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 				
             this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))
             this.getOwnedOperation filter(op=> !Util.hasEcoreTag(op) || op.getBody !=null) foreach(op=> op.generateScalaCode(res))
+            this.generategetQualifiedName(res)
             res.append("}\n")
+
         }else{
             res.append("trait ")
             res.append(this.getName())
@@ -112,7 +117,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
                         res.append(".")
                         res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
                         res.append("Aspect")
-                         generateBindingParamerterClass(superC.asInstanceOf[Class],res)
+                        generateBindingParamerterClass(superC.asInstanceOf[Class],res)
                         //returnedString =returnedString + ", " +superC.getName;
                         //					}
                         i=i+1
@@ -126,9 +131,19 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 				
             /* Generate Invariants */
             this.generateInvariants(res)
+            this.generategetQualifiedName(res)
       
+
             res.append("}\n")
         }
+    }
+
+
+    def generategetQualifiedName(res:StringBuilder) = {
+        var qualifiedName = ReflexivityLoader.qualifiedName(this)
+        var template = new StringTemplate("override def getMetaClass():fr.irisa.triskell.kermeta.language.structure.Class={\n var cd : fr.irisa.triskell.kermeta.language.structure.ClassDefinition =   kermeta.utils.ReflexivityLoader.getMetaClass(\"$ClassName$\"); \n         if (cd !=null){ \n var cl = ScalaAspect.fr.irisa.triskell.kermeta.language.structure. RichFactory.createClass \n cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
+        template.setAttribute("ClassName", qualifiedName)
+        res.append(template.toString)
     }
 
     def generateInvariants(res1:StringBuilder) = {
@@ -204,14 +219,14 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
         }
     }
     def generateBindingParamerterClass(superC:Class,res1:StringBuilder) = {
-         if (superC.getTypeParamBinding().size()>0){  res1.append("[")
-        var ii = 0;
-        superC.getTypeParamBinding.foreach{binding=>
-            if (ii>0) {res1.append(",")}
-            binding.getType.generateScalaCode(res1)
-            ii= ii+1
+        if (superC.getTypeParamBinding().size()>0){  res1.append("[")
+                                                   var ii = 0;
+                                                   superC.getTypeParamBinding.foreach{binding=>
+                if (ii>0) {res1.append(",")}
+                binding.getType.generateScalaCode(res1)
+                ii= ii+1
+            }
+                                                   res1.append("]")
         }
-        res1.append("]")
-         }
     }
 }

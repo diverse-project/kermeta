@@ -108,43 +108,58 @@ trait PropertyAspect extends RichAspectImplicit with ObjectAspect with LogAspect
         res.append(this.getName+"")
         res.append(" : ")
         getListorType(res)
-        res.append("={this.")
-				
-		
-        if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")){
-            if (this.getType().isInstanceOf[PrimitiveType]
-                && !(
+        res.append("={")
+        if (this.getGetterBody == null){
+            res.append("this.")
+            if (s.toString.equals("Boolean") || s.toString.equals("java.lang.Boolean") || s.toString.equals("kermeta.standard.Boolean")){
+                if (this.getType().isInstanceOf[PrimitiveType]
+                    && !(
 			
-                    "fr.irisa.triskell.kermeta.language.structure.Boolean".equals(this.getType().asInstanceOf[PrimitiveType].whichBoolean) ||
-                    "org.eclipse.emf.ecore.EBoolean".equals(this.getType().asInstanceOf[PrimitiveType].whichBoolean)
+                        "fr.irisa.triskell.kermeta.language.structure.Boolean".equals(this.getType().asInstanceOf[PrimitiveType].whichBoolean) ||
+                        "org.eclipse.emf.ecore.EBoolean".equals(this.getType().asInstanceOf[PrimitiveType].whichBoolean)
+                    )
                 )
-            )
-            {
+                {
 				
 				
-                log.info("ECHO TYPE "+s+" "+this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo)
-                res.append(prefix+"get")
-            }else{
-                res.append(prefix+"is")
+                    log.info("ECHO TYPE "+s+" "+this.getType().asInstanceOf[PrimitiveType].getQualifiedNameCompilo)
+                    res.append(prefix+"get")
+                }else{
+                    res.append(prefix+"is")
+                }
             }
+            else
+            {
+                res.append(prefix+"get")
+            }
+		
+		
+		
+            //Cas des collections uml
+            if ((this.getUpper>1 ||this.getUpper == -1) && "uml".equals(this.eContainer.eContainer.asInstanceOf[NamedElement].getName)){
+                currentname = getUmlExtension
+            }
+		
+            res.append( currentname.substring(0,1).toUpperCase() + currentname.substring(1,currentname.length) + "()" + "}")
+
+        }else{
+            res.append("var result : ")
+            this.getListorType(res)
+            //res append "Any"
+            res.append(" = null.asInstanceOf[")
+            this.getListorType(res)
+            res.append("]; \n")
+
+            res.append(this.getGetterBody.generateScalaCode(res))
+            res append " \n return result\n}"
+
+//            res.append("\n}")
         }
-        else
-        {
-            res.append(prefix+"get")
-        }
-		
-		
-		
-        //Cas des collections uml
-        if ((this.getUpper>1 ||this.getUpper == -1) && "uml".equals(this.eContainer.eContainer.asInstanceOf[NamedElement].getName)){
-            currentname = getUmlExtension
-        }
-		
-        res.append( currentname.substring(0,1).toUpperCase() + currentname.substring(1,currentname.length) + "()" + "}")
         var typestring = new StringBuilder
         this.getListorType(typestring)
         res.append(".asInstanceOf[" + typestring.toString + "]")
         res.append("\n")
+
     }
 
 	
@@ -188,19 +203,24 @@ trait PropertyAspect extends RichAspectImplicit with ObjectAspect with LogAspect
             res.append(this.getName+"_=(")
             res.append("arg : ")
             getListorType(res)
-            //res.append(")={this.set" + this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size) + "(arg)" + "}")
-            if (this.getUpper>1 ||this.getUpper == -1){
-		//Cas des collections uml
-                if ("uml".equals(this.eContainer.eContainer.asInstanceOf[NamedElement].getName)){
-                    currentname =getUmlExtension
+            res.append(")={")
+            if (this.getGetterBody == null  && this.getSetterBody==null){
+                //res.append(")={this.set" + this.getName.substring(0,1).toUpperCase + this.getName.substring(1,this.getName.size) + "(arg)" + "}")
+                if (this.getUpper>1 ||this.getUpper == -1){
+                    //Cas des collections uml
+                    if ("uml".equals(this.eContainer.eContainer.asInstanceOf[NamedElement].getName)){
+                        currentname =getUmlExtension
+                    }
+                    res.append("this."+prefix+"get" + currentname.substring(0,1).toUpperCase + currentname.substring(1,currentname.size) + "().clear\n")
+                    res.append("this."+prefix+"get" + currentname.substring(0,1).toUpperCase + currentname.substring(1,currentname.size) + "().addAll(arg)\n")
+                }else{
+                    res.append( "this."+prefix+"set" + currentname.substring(0,1).toUpperCase + currentname.substring(1,currentname.size) + "(arg)")
                 }
-                res.append(")={this."+prefix+"get" + currentname.substring(0,1).toUpperCase + currentname.substring(1,currentname.size) + "().clear\n")
-                res.append("this."+prefix+"get" + currentname.substring(0,1).toUpperCase + currentname.substring(1,currentname.size) + "().addAll(arg)\n")
-                res.append("}")
             }else{
-                res.append( ")={this."+prefix+"set" + currentname.substring(0,1).toUpperCase + currentname.substring(1,currentname.size) + "(arg)" + "}")
+                this.getSetterBody.generateScalaCode(res)
+
             }
-            res.append("\n")
+            res.append("}\n")
 		
         }
     }
