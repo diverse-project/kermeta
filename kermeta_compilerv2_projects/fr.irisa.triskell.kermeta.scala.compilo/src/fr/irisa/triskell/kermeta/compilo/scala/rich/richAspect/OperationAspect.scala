@@ -32,25 +32,28 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
 				if (i==0) { 
 					res.append(Util.protectScalaKeyword(par.getName()))
 					res.append(" : ")
-					par.getType.generateScalaCode(res)
+					this.getListorType(par, res)//par.getType.generateScalaCode(res)
 				}else{
 					res.append(", ")
 					res.append(Util.protectScalaKeyword(par.getName()))
 					res.append(" : ")
-					par.getType.generateScalaCode(res)
+					this.getListorType(par, res)//					par.getType.generateScalaCode(res)
 				}
 				i=i + 1
 			})
 			res.append("):")
 			/* Return Type Declaration */
-			this.getType.generateScalaCode(res)
+                        this.getListorType(res)
+                    //this.getType.generateScalaCode(res)
 			if (this.getBody!= null){
 				res.append(" = {\n")
 				res.append("var result : ")
-				this.getType.generateScalaCode(res)
+				     this.getListorType(res)
+                                 //   this.getType.generateScalaCode(res)
 				//res append "Any"
 				res.append(" = null.asInstanceOf[")
-				this.getType.generateScalaCode(res)
+				     this.getListorType(res)
+                                   //this.getType.generateScalaCode(res)
 				res.append("]; \n")
 				
 				this.getBody().generateScalaCode(res)
@@ -72,5 +75,40 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
         res1.append("]")
          }
     }
-	
+
+        def getListorType(res:StringBuilder)={
+	if (this.getUpper>1 ||this.getUpper == -1){
+            if (this.isIsOrdered){
+                res.append("java.util.List[")
+            }else{
+                //TODO gestion des SETs
+                res.append("java.util.List[")
+            }
+            this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+            res.append("]")
+	} else {
+            this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+	}
+
+
+    }
+
+       def getListorType(param:Parameter,res:StringBuilder)={
+	if (param.getUpper>1 ||param.getUpper == -1){
+            if (param.isIsOrdered){
+                res.append("java.util.List[")
+            }else{
+                //TODO gestion des SETs
+                res.append("java.util.List[")
+            }
+            param.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+            res.append("]")
+	} else {
+            param.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+	}
+
+
+    }
+
+
 }

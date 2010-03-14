@@ -16,8 +16,9 @@ trait VariableDeclAspect extends RichAspectImplicit with ObjectAspect with LogAs
 		log.debug("VariableDecl={}",this.getIdentifier)
 		var template = new StringTemplate("var $ident$ : $type$ = $init$;")
 		var typeVal,initVal = new StringBuilder
-		this.getType().asInstanceOf[ObjectAspect].generateScalaCode(typeVal)
-       	template.setAttribute("ident", Util.protectScalaKeyword(this.getIdentifier))
+		this.getListorType(typeVal)
+                //this.getType().asInstanceOf[ObjectAspect].generateScalaCode(typeVal)
+           	template.setAttribute("ident", Util.protectScalaKeyword(this.getIdentifier))
 		template.setAttribute("type" , typeVal.toString)
 		if(this.getInitialization !=  null){
                         //     println(" VariableDeclAspect " + this.getType + "  " + this.getInitialization())
@@ -30,5 +31,22 @@ trait VariableDeclAspect extends RichAspectImplicit with ObjectAspect with LogAs
 		res.append(template.toString)
 	}
 	
-	
+    def getListorType(res:StringBuilder)={
+	if (this.getType.getUpper>1 ||this.getType.getUpper == -1){
+            if (this.getType.isIsOrdered){
+                res.append("java.util.List[")
+            }else{
+                //TODO gestion des SETs
+                res.append("java.util.List[")
+            }
+            this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+            res.append("]")
+	} else {
+            this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+	}
+
+
+    }
+
+
 }
