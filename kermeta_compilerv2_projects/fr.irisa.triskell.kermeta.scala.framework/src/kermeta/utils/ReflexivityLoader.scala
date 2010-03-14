@@ -32,6 +32,8 @@ object ReflexivityLoader {
                 if (e.isInstanceOf[ClassDefinition])
                     classdefs .add(e.asInstanceOf[ClassDefinition])
             )
+            println("init reflexive layer")
+            isInit= true
         }
         var selectedclassdefs = classdefs.filter(e=> qualifiedName(e) .equals(classQualifiedName))
         

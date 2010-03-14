@@ -114,7 +114,11 @@ object JavaConversions {
 
 	}
 	//override def size() :Int={return value.length}
-	def each(func : A=> Unit):Unit ={ var i : ju.Iterator[A] = value.iterator; while (i.hasNext){func(i.next)  } }
+	def each(func : A=> Unit):Unit ={
+            var clone : ju.List[A] = new ju.ArrayList[A]
+            clone.addAll(value)
+            var i : ju.Iterator[A] = clone.iterator; while (i.hasNext){func(i.next)  }
+        }
 	/*TODO*///def collect(collector : A=> Unit) :Sequence[A]={return null}
 	def elementAt(arg:Int):A={
 		return value.get(arg)
@@ -139,6 +143,26 @@ object JavaConversions {
 		this.each{e=> res.add(e)}
 		return res
 	}
+        def addUnique(a:A) :Unit = {
+            if (!value.contains(a))
+                value.add(a)
+		//var res : java.util.List[A] = new java.util.ArrayList[A];
+		//this.each{e=> res.add(e)}
+		//return res
+	}
+
+        def addAllUnique(a:ju.Collection[A]) :Unit = {
+            var i : ju.Iterator[A] = a.iterator 
+                while (i.hasNext){
+                    var element:A  = i.next
+                    if (!value.contains(element))
+                        value.add(element)
+            }
+		//var res : java.util.List[A] = new java.util.ArrayList[A];
+		//this.each{e=> res.add(e)}
+		//return res
+	}
+
 	//TODO
 	override def isVoid() :Boolean= {value == null}
   }

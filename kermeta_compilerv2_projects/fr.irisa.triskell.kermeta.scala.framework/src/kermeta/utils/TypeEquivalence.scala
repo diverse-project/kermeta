@@ -72,13 +72,17 @@ object TypeEquivalence {
 		var Collection : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		Collection.put("count", "countElement");
 		methodEquivalence.put("kermeta.standard.Collection", Collection);
-		
+
+   /*             Collection  = new java.util.HashMap[String,String]
+		Collection.put("add", "addUnique");
+		Collection.put("addAll", "addAllUnique");
+		methodEquivalence.put("java.util.List", Collection);*/
 		var ClassDefinition : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		ClassDefinition.put("allAttribute", "eAllAttributes")
 		methodEquivalence.put("fr.irisa.triskell.kermeta.scala.framework.language.structure.ClassDefinition", ClassDefinition);
 		
 		
-		//methodEquivalence 
+   		//methodEquivalence
 		var Str : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		Str.put("size", "ksize");
 		methodEquivalence.put("kermeta.standard.String", Str);
@@ -93,7 +97,8 @@ object TypeEquivalence {
 	 
 	def getMethodEquivalence(classN:String,methodName:String):String={
 		var className :String = classN
-		//println("getMethodEquivalence " + className + " " + methodName )
+		//if (methodName.equals("add"))
+                 //   println("getMethodEquivalence " + className + " " + methodName )
 		var res :String = null
 		if (className.contains("["))
 			 className = className.substring(0,className.indexOf("["))
