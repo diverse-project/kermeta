@@ -156,6 +156,8 @@
 			<arg value="${target.eclipse.dir}/eclipse"/>
 			<arg value="-bundlepool"/>
 			<arg value="${target.eclipse.dir}/eclipse"/>
+			<arg value="-profileProperties"/>
+			<arg value="org.eclipse.update.install.features=true"/>
 			<arg value="-profile"/>
 			<arg value="SDKProfile"/>   
  			<jvmarg value="-Declipse.p2.data.area=${target.eclipse.dir}/eclipse/p2"/>
