@@ -81,7 +81,7 @@
 		</ant>
 	</target>
 	
-	<target name="provision_eclipse_version" >
+	<target name="provision_eclipse_version" depends="get_native_eclipse">
 		<echo>Provision ${eclipse.version.name}</echo>
 		<ant antfile="get_eclipse_base_build.xml">
   			<property name="eclipse.version.name" value="${eclipse.version.name}"/>
@@ -137,7 +137,7 @@
 			<fileset dir="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"></fileset>
 		</zip>
 	</target>
-	<target name="provision_feature" depends="get_native_eclipse">
+	<target name="provision_feature" >
 		<echo>Provisionning ${eclipse.version.name} with ${feature.name}</echo>
 		<java jar="${env.WORKSPACE}/build/kermeta_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
 		           fork="true"
@@ -153,6 +153,8 @@
 			<arg value="-installIU"/>
 			<arg value="${feature.name}"/>
 			<arg value="-destination"/>
+			<arg value="${target.eclipse.dir}/eclipse"/>
+			<arg value="-bundlepool "/>
 			<arg value="${target.eclipse.dir}/eclipse"/>
 			<arg value="-profile"/>
 			<arg value="SDKProfile"/>   
