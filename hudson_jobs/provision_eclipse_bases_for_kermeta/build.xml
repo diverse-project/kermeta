@@ -154,7 +154,7 @@
 			<arg value="${feature.name}"/>
 			<arg value="-destination"/>
 			<arg value="${target.eclipse.dir}/eclipse"/>
-			<arg value="-bundlepool "/>
+			<arg value="-bundlepool"/>
 			<arg value="${target.eclipse.dir}/eclipse"/>
 			<arg value="-profile"/>
 			<arg value="SDKProfile"/>   
