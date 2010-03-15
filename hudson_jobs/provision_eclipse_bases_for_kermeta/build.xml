@@ -2,6 +2,8 @@
 
 	<property name="env.WORKSPACE" location="."/>
 	<property name="eclipse.native.version.name" value="linux_x86_64"/>
+	<property name="eclipse.native.archive.extension" value="tar.gz"/>
+	<property name="eclipse.native.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk-x86_64.tar.gz"/>
 	<!-- <property name="eclipse.version.name" value="linux_x86_64"/> -->
 	<!-- <property name="eclipse.base.dir" location="${env.WORKSPACE}/eclipse_${eclipse.version.name}_base"/> -->
 	<!-- <property name="target.eclipse.dir" location="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/> -->
@@ -71,7 +73,15 @@
 		</antcall>
 	</target>
 
-	<target name="provision_eclipse_version">
+	<target name="get_native_eclipse">
+		<ant antfile="get_eclipse_base_build.xml">
+  			<property name="eclipse.version.name" value="${eclipse.native.version.name}"/>
+  			<property name="archive.extension" value="${eclipse.native.archive.extension}"/>
+  			<property name="eclipse.base.url" value="${eclipse.native.base.url}"/>
+		</ant>
+	</target>
+	
+	<target name="provision_eclipse_version" >
 		<echo>Provision ${eclipse.version.name}</echo>
 		<ant antfile="get_eclipse_base_build.xml">
   			<property name="eclipse.version.name" value="${eclipse.version.name}"/>
@@ -127,9 +137,9 @@
 			<fileset dir="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"></fileset>
 		</zip>
 	</target>
-	<target name="provision_feature">
+	<target name="provision_feature" depends="get_native_eclipse">
 		<echo>Provisionning ${eclipse.version.name} with ${feature.name}</echo>
-		<java jar="${target.eclipse.dir}/eclipse/plugins/${equinox.jar}"
+		<java jar="${env.WORKSPACE}/build/kermeta_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
 		           fork="true"
 		           failonerror="true"
 		           maxmemory="128m"
