@@ -37,7 +37,7 @@ object EmbeddedMavenHelper {
         if(createPackage){
 
             goals.add("package")
-           // goals.add("install")
+            // goals.add("install")
             //goals.add("bundle:install")
         }
         if(exec){
@@ -64,12 +64,13 @@ object EmbeddedMavenHelper {
             var oldOut : OutputStream = System.out
             var oldErr : OutputStream = System.err
 
-            System.setOut(new PrintStream(outputstream))
-            System.setErr(new PrintStream(outputstream))
-
-         //   maven.setLogger(new MavenEmbedderFileLogger(new java.io.File("/tmp/testoutput")));
+            if (outputstream != null){
+                System.setOut(new PrintStream(outputstream))
+                System.setErr(new PrintStream(outputstream))
+            }
+            //   maven.setLogger(new MavenEmbedderFileLogger(new java.io.File("/tmp/testoutput")));
             
-              maven.setLogger(new MavenEmbedderConsoleLogger());
+            maven.setLogger(new MavenEmbedderConsoleLogger());
             //ArtifactRepository localRepository, Settings settings,
             //                                         EventDispatcher eventDispatcher, List goals, String baseDirectory,
             //                                   ProfileManager globalProfileManager, Properties executionProperties,
@@ -79,7 +80,7 @@ object EmbeddedMavenHelper {
             // executionProperties.put("maven.test.skip", "true");
 
 //      var request = new DefaultMavenExecutionRequest(localRepository,settings,eventDispatcher,goals,GlobalConfiguration.outputProject,globalProfileManager,executionProperties,true)//.setBaseDirectory(rootDirectory)//.setGoals(goals)
-      var request = new DefaultMavenExecutionRequest().setBaseDirectory(rootDirectory).setGoals(goals)
+            var request = new DefaultMavenExecutionRequest().setBaseDirectory(rootDirectory).setGoals(goals)
             request.setLoggingLevel(MavenExecutionRequest.LOGGING_LEVEL_ERROR);
             request.setProperty("once", "true");
             request.setProperty("maven.test.skip", "true");
@@ -98,9 +99,10 @@ object EmbeddedMavenHelper {
             //  maven.start
             //var result = maven.execute(project, goals, null,null ,executionProperties,rootDirectory);
             var result = maven.execute(request)
-            System.setOut(new PrintStream(oldOut))
-            System.setErr(new PrintStream(oldErr))
-
+            if (outputstream != null){
+                System.setOut(new PrintStream(oldOut))
+                System.setErr(new PrintStream(oldErr))
+            }
             //import scala.collection.JavaConversions._
             //println(result.getExceptions.mkString)
 
