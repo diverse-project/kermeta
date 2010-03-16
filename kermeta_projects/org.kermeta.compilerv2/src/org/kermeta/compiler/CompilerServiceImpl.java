@@ -28,7 +28,7 @@ public class CompilerServiceImpl implements CompilerService {
 		// Step 1 Generate Scala
 		//try {
 			fr.irisa.triskell.kermeta.compilo.scala.Main.init(propertiesfile,
-					projectName, classqname, operationName, classpath, args);
+					projectName, classqname, operationName, classpath, args,null);
 			String[] arg = new String[2];
 			arg[0] = "-i";
 			arg[1] = kmuri;
