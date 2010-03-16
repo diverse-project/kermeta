@@ -45,9 +45,11 @@ object Main extends LogAspect {
             GlobalConfiguration.load(resource)
             println(GlobalConfiguration.outputFolder)
         }
+
+        //additionalClassPath = List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/lib/plugins/hrc.jar")
       
 
-    
+
 
         var inputFile : String = ""
         var runnerParams = List[String]()
@@ -148,10 +150,14 @@ object Main extends LogAspect {
 	  
         //  inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/013_LoadEcore.km"
 	  
-         inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/org.kermeta.ArtKomparator/src/kermeta/Launcher.km"
-         runnerParams = List("///Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi")
+        /// inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/org.kermeta.ArtKomparator/src/kermeta/Launcher.km"
+        // runnerParams = List("///Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi")
 
-
+        //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Speeds/StaticSemanticChecker.km"
+        //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/reflexivity/Serializer.km"
+        //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/reflexivity/reflexivity.km"
+    //    inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/pruner/metamodelPruner.km"
+//        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/pruner/TestCollection.km"
         //inputFile = "/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/025simpleInvariant.km"
 
         // inputFile = "/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/022_InvWithMultipleInheritance.km"
@@ -168,16 +174,18 @@ object Main extends LogAspect {
         }
 
         /* Scalac compilation step */
-        var classpath =EmbettedScalaCompiler.getActualClasspath
-        classpath = classpath ++ additionalClassPath
+        /*var classpath =EmbettedScalaCompiler.getActualClasspath
+        if (additionalClassPath != null)
+             classpath = classpath ++ additionalClassPath*/
 
 
         if (scalacompile){
-            var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
+            //var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
             /* Scala runner */
-            if(compilationResult == 0){
+           /* if(compilationResult == 0){
                 EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
-            }
+            }*/
+           EmbeddedMavenHelper.run(true, true, true, additionalClassPath)
         }
 
     EmbeddedMavenHelper.run(true, true, true,additionalClassPath)
