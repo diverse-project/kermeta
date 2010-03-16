@@ -9,11 +9,14 @@ import com.sun.xml.internal.stream.buffer.sax.Properties
 import fr.irisa.triskell.kermeta.compilo.scala.GlobalConfiguration
 import java.io.FileWriter
 //import org.apache.maven.embedder.DefaultConfiguration
+import java.io.OutputStream
+import java.io.PrintStream
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.artifact.repository.metadata.DefaultRepositoryMetadataManager
 import org.apache.maven.embedder.DefaultConfiguration
 import org.apache.maven.embedder.MavenEmbedder
 import org.apache.maven.embedder.MavenEmbedderConsoleLogger
+import org.apache.maven.embedder.MavenEmbedderFileLogger
 import org.apache.maven.execution.DefaultMavenExecutionRequest
 import org.apache.maven.execution.MavenExecutionRequest
 import org.apache.maven.monitor.event.DefaultEventMonitor
@@ -25,7 +28,7 @@ import sun.awt.dnd.SunDropTargetContextPeer.EventDispatcher
 
 object EmbeddedMavenHelper {
 
-    def run(createPackage : Boolean,standalone : Boolean,exec : Boolean,additionalClasspath : List[String]) = {
+    def run(createPackage : Boolean,standalone : Boolean,exec : Boolean,additionalClasspath : List[String], outputstream : OutputStream) = {
 
         var goals = new scala.collection.mutable.ArrayBuffer[String]
         goals.add("clean")
@@ -58,7 +61,15 @@ object EmbeddedMavenHelper {
             var configuration = new DefaultConfiguration().setClassLoader(Thread.currentThread().getContextClassLoader());
             var validationResult = MavenEmbedder.validateConfiguration(configuration);
             maven = new MavenEmbedder(configuration);
-            maven.setLogger(new MavenEmbedderConsoleLogger());
+            var oldOut : OutputStream = System.out
+            var oldErr : OutputStream = System.err
+
+            System.setOut(new PrintStream(outputstream))
+            System.setErr(new PrintStream(outputstream))
+
+         //   maven.setLogger(new MavenEmbedderFileLogger(new java.io.File("/tmp/testoutput")));
+            
+              maven.setLogger(new MavenEmbedderConsoleLogger());
             //ArtifactRepository localRepository, Settings settings,
             //                                         EventDispatcher eventDispatcher, List goals, String baseDirectory,
             //                                   ProfileManager globalProfileManager, Properties executionProperties,
@@ -72,6 +83,7 @@ object EmbeddedMavenHelper {
             request.setLoggingLevel(MavenExecutionRequest.LOGGING_LEVEL_ERROR);
             request.setProperty("once", "true");
             request.setProperty("maven.test.skip", "true");
+            
             /*MavenProject project,
              List goals,
              EventMonitor eventMonitor,
@@ -86,6 +98,9 @@ object EmbeddedMavenHelper {
             //  maven.start
             //var result = maven.execute(project, goals, null,null ,executionProperties,rootDirectory);
             var result = maven.execute(request)
+            System.setOut(new PrintStream(oldOut))
+            System.setErr(new PrintStream(oldErr))
+
             //import scala.collection.JavaConversions._
             //println(result.getExceptions.mkString)
 
