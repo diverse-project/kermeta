@@ -1,16 +1,8 @@
 package org.kermeta.compiler;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Properties;
 
-import org.antlr.stringtemplate.StringTemplate;
-import org.antlr.stringtemplate.StringTemplateGroup;
 import org.kermeta.compiler.service.CompilerService;
 
 public class CompilerServiceImpl implements CompilerService {
@@ -28,24 +20,24 @@ public class CompilerServiceImpl implements CompilerService {
 
 	}
 
-	
+	@Override
 	public void compile(String kmuri, String propertiesfile,
 			String projectName, String classqname, String operationName,
 			Collection<String> classpath, String args) {
 
 		// Step 1 Generate Scala
-		try {
+		//try {
 			fr.irisa.triskell.kermeta.compilo.scala.Main.init(propertiesfile,
 					projectName, classqname, operationName, classpath, args);
-			String[] arg = new String[3];
+			String[] arg = new String[2];
 			arg[0] = "-i";
 			arg[1] = kmuri;
-			arg[2] = "-nocompile";
+			//arg[2] = "-nocompile";
 			fr.irisa.triskell.kermeta.compilo.scala.Main.main(arg);
 
 			// Step 2 Generate pom.xml
 
-			StringTemplateGroup group = new StringTemplateGroup("mygroup");
+			/*StringTemplateGroup group = new StringTemplateGroup("mygroup");
 			StringTemplate st = group.getInstanceOf("templates/pom");
 			Properties ps = new Properties();
 			
@@ -57,7 +49,7 @@ public class CompilerServiceImpl implements CompilerService {
 			PrintWriter pw = new PrintWriter(pom);
 			pw.write(st.toString());
 			pw.flush();
-			pw.close();
+			pw.close();*/
 
 			// Step 3 Run maven
 
@@ -66,7 +58,7 @@ public class CompilerServiceImpl implements CompilerService {
 			// org.apache.maven.cli.compat.CompatibleMain -f
 			// ~/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo/pom.xml
 			// scala:compile package
-			String[] arg1 = new String[6];
+			/*String[] arg1 = new String[6];
 			arg1[0] = "-f";
 			arg1[1] = pomuri;
 			arg1[2] = "-q";
@@ -84,7 +76,7 @@ public class CompilerServiceImpl implements CompilerService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 	}
 
