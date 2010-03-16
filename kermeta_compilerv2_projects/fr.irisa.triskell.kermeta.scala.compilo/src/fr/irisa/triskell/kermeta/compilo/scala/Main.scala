@@ -23,18 +23,19 @@ import fr.irisa.triskell.embedded._
 
 object Main extends LogAspect {
 
+var outputStream : java.io.OutputStream=null
 
-    def init(propertyurl:String, projectName:String, classqname:String,  operationName:String, classpath:java.util.Collection[String], args:String):Unit ={
+    def init(propertyurl:String, projectName:String, classqname:String,  operationName:String, classpath:java.util.Collection[String], args:String, outputStream : java.io.OutputStream):Unit ={
 
         var v = new Properties
         v.load(new FileInputStream(new File(propertyurl)))
         GlobalConfiguration.load(v)
         additionalClassPath = classpath.toList
-      
+        this.outputStream = outputStream
     }
  
 
-    var additionalClassPath: List[String] = List("/Users/ffouquet/Desktop/hrcmodel.jar")
+    var additionalClassPath: List[String] = List()
 
     def main(args : Array[String]) : Unit = {
 
@@ -156,7 +157,7 @@ object Main extends LogAspect {
         //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Speeds/StaticSemanticChecker.km"
         //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/reflexivity/Serializer.km"
         //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/reflexivity/reflexivity.km"
-    //    inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/pruner/metamodelPruner.km"
+        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/pruner/metamodelPruner.km"
 //        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/pruner/TestCollection.km"
         //inputFile = "/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/025simpleInvariant.km"
 
@@ -185,10 +186,10 @@ object Main extends LogAspect {
            /* if(compilationResult == 0){
                 EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
             }*/
-           EmbeddedMavenHelper.run(true, true, true, additionalClassPath)
+           EmbeddedMavenHelper.run(true, true, true, additionalClassPath,outputStream)
         }
 
-    EmbeddedMavenHelper.run(true, true, true,additionalClassPath)
+
 	   
 	   
     }
