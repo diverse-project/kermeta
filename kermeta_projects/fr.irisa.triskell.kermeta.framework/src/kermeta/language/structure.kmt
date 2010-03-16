@@ -164,7 +164,7 @@ aspect class Object
 	/**
 	 * Returns a Boolean stating whether the current Object is an instance of the given Class
 	 */
-	@CompilerIgnore "true"
+	//@CompilerIgnore "true"
 	operation isKindOf(cl : Class) : Boolean is do
 		result := (self.getMetaClass.equals(cl))
 	end
@@ -395,7 +395,6 @@ aspect class Class
 	/**
 	 * Returns the ClassDefinition for this class
 	 */
-	@CompilerIgnore "true"
 	property readonly classDefinition : ClassDefinition
 		getter is do
 			result ?= typeDefinition
@@ -441,7 +440,7 @@ aspect class Class
 	 *  Note : throws an exception if this class has no classDefinition
 	 *  or if the classDefinition is not well constructed.
 	 */
-	@CompilerIgnore "true"
+	//@CompilerIgnore "true"
 	method toString() : String is do
 		result := self.typeDefinition.name
 	end
@@ -647,7 +646,6 @@ aspect abstract class NamedElement
 	 * the list of the names of the packages hierarchically ordered, delimited by
 	 * a "::", followed by the name of this named element.
 	 */
-	//@CompilerIgnore "true"
 	operation qualifiedName() : String is do
 		var elem : NamedElement init self
 		result := self.name
