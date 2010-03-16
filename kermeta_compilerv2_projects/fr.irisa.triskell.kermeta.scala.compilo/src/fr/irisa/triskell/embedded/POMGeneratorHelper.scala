@@ -140,10 +140,10 @@ object POMGeneratorHelper {
         var pluginFelixInstructionBundleClassPath = new Xpp3Dom("BundleClassPath");
         pluginFelixInstructionBundleClassPath.setValue(".");
         //pluginFelixInstruction.addChild(pluginFelixInstructionPrivatePackage);
-           if(!standalone)
-               pluginFelixInstruction.addChild(pluginFelixInstructionImportPackage);
-           else
-                pluginFelixInstruction.addChild(pluginFelixInstructionPrivatePackage);
+        if(!standalone)
+            pluginFelixInstruction.addChild(pluginFelixInstructionImportPackage);
+        else
+            pluginFelixInstruction.addChild(pluginFelixInstructionPrivatePackage);
 
         //pluginFelixInstruction.addChild(pluginFelixInstructionExportPackage);
         pluginFelixInstruction.addChild(pluginFelixInstructionBundleClassPath);
@@ -199,9 +199,11 @@ object POMGeneratorHelper {
         /* INIT LOCAL VARIABLE DEPENDENCY */
 
         var i = 0
-        additionalClasspath.foreach{cp =>
-            dependencies.add(createLocalDependency("local" +i, "local", "1.0.0", cp))
-            i= i+1
+        if (additionalClasspath!= null){
+            additionalClasspath.foreach{cp =>
+                dependencies.add(createLocalDependency("local" +i, "local", "1.0.0", cp))
+                i= i+1
+            }
         }
     
     
