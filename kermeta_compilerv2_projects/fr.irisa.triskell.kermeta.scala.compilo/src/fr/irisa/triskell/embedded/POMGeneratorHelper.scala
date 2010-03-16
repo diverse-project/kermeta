@@ -37,8 +37,8 @@ object POMGeneratorHelper {
     def initProject(standalone : Boolean,additionalClasspath : List[String]) : MavenProject =  {
         var project : MavenProject  = new MavenProject()
 
-        project.setGroupId(GlobalConfiguration.props.getString("project.group.id"))
-        project.setArtifactId(GlobalConfiguration.props.getString("project.artefact.id"))
+        project.setGroupId(GlobalConfiguration.props.getProperty("project.group.id"))
+        project.setArtifactId(GlobalConfiguration.props.getProperty("project.artefact.id"))
         project.setVersion("0.0.1-SNAPSHOT")
         project.setModelVersion("4.0.0")
         project.setPackaging("bundle");

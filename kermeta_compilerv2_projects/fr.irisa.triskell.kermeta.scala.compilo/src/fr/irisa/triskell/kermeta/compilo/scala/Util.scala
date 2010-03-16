@@ -186,13 +186,13 @@ object Util extends LogAspect with RichAspectImplicit  {
 
   def doesGeneratePackage(packQualifiedName : String) : Boolean = {
     var hasToGenerate : Boolean = true
-    if(GlobalConfiguration.props.getString("use.default.aspect.km")==true){
+    if(GlobalConfiguration.props.getProperty("use.default.aspect.km")==true){
       hasToGenerate && !packQualifiedName.startsWith("fr.irisa.triskell.kermeta.language")
     }
-    if(GlobalConfiguration.props.getString("use.default.aspect.uml")==true){
+    if(GlobalConfiguration.props.getProperty("use.default.aspect.uml")==true){
       hasToGenerate && !packQualifiedName.startsWith("")
     }
-    if(GlobalConfiguration.props.getString("use.default.aspect.ecore")==true){
+    if(GlobalConfiguration.props.getProperty("use.default.aspect.ecore")==true){
       hasToGenerate && !packQualifiedName.startsWith("org.eclipse.emf")
     }
     if(!hasToGenerate){ log.info("Exclude compilation package |"+packQualifiedName) }

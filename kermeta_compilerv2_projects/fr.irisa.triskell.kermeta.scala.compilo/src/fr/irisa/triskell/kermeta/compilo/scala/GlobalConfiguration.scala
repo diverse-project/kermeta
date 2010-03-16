@@ -8,6 +8,7 @@
 
 package fr.irisa.triskell.kermeta.compilo.scala
 
+import java.util.Properties
 import java.util.ResourceBundle
 import scala.tools.nsc.io.File
 import scala.collection.JavaConversions._
@@ -17,36 +18,51 @@ object GlobalConfiguration extends LogAspect{
   var init : Boolean = false
   var isTest : Boolean = false
 
-  def load(props : java.util.Properties) : Boolean = {
+  def load(_props : java.util.Properties) : Boolean = {
     var loadResult = true
+    props = _props
+        //props = new ResourceBundle
+            _props
     //FIRST STEP CHECK VALUES
-    loadResult = loadResult && props.containsKey("use.default.aspect.uml")
-    loadResult = loadResult && props.containsKey("use.default.aspect.ecore")
-    loadResult = loadResult && props.containsKey("use.default.aspect.km")
-    loadResult = loadResult && props.containsKey("project.group.id")
-    loadResult = loadResult && props.containsKey("project.artefact.id")
+    loadResult = loadResult && _props.containsKey("use.default.aspect.uml")
+    loadResult = loadResult && _props.containsKey("use.default.aspect.ecore")
+    loadResult = loadResult && _props.containsKey("use.default.aspect.km")
+    loadResult = loadResult && _props.containsKey("project.group.id")
+    loadResult = loadResult && _props.containsKey("project.artefact.id")
     if(loadResult){
-      frameworkGeneratedPackageName = "ScalaImplicit."+props.getProperty("project.group.id")+"."+props.getProperty("project.artefact.id")
-      outputProject = if(props.containsKey("output.target.folder") && !props.getProperty("output.target.folder").isEmpty){ props.getProperty("output.target.folder") } else {
+      frameworkGeneratedPackageName = "ScalaImplicit."+_props.getProperty("project.group.id")+"."+_props.getProperty("project.artefact.id")
+      outputProject = if(_props.containsKey("output.target.folder") && !_props.getProperty("output.target.folder").isEmpty){ _props.getProperty("output.target.folder") } else {
         var result = Util.createTempDirectory.getAbsolutePath
         log.info("No output folder specified, temp created : "+result)
         result
       }
       outputFolder = outputProject+"/src"
       outputBinFolder = outputProject+"/bin"
-      workspaceURI = if(props.containsKey("workspace.platform.uri")) { props.getProperty("workspace.platform.uri") } else { null }
-      pluginURI = if(props.containsKey("workspace.plugin.uri")) { props.getProperty("workspace.plugin.uri") } else { null }
+      workspaceURI = if(_props.containsKey("workspace.platform.uri")) { _props.getProperty("workspace.platform.uri") } else { null }
+      pluginURI = if(_props.containsKey("workspace.plugin.uri")) { _props.getProperty("workspace.plugin.uri") } else { null }
       this.init = true
     }
     return loadResult
   }
 
+def convertResourceBundleToProperties( resource:ResourceBundle)  : Properties = {
+    var  properties = new Properties();
+
+    resource.getKeys().foreach(key =>
+      properties.put(key, resource.getString(key))
+      )
+    return properties;
+
+}
 
 
-  def load(_props : ResourceBundle) : Boolean = {
-    var loadResult = true
-    props = _props
+  def load(props : ResourceBundle) : Boolean = {
+
+     var loadResult = true
+     this.props = this.convertResourceBundleToProperties(props)
+    //props = _props
     //FIRST STEP CHECK VALUES
+    //
     loadResult = loadResult && props.containsKey("use.default.aspect.uml")
     loadResult = loadResult && props.containsKey("use.default.aspect.ecore")
     loadResult = loadResult && props.containsKey("use.default.aspect.km")
@@ -68,7 +84,9 @@ object GlobalConfiguration extends LogAspect{
     return loadResult
   }
 
-  var props : ResourceBundle = null
+  //var props : ResourceBundle = null
+      var props : Properties = null
+
   var frameworkGeneratedPackageName : String = null
   var implicitConvTraitName : String = "ImplicitConversion"
   var viewDefTraitName : String = "ViewType"
