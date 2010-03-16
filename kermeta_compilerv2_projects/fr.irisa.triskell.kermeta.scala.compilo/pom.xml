@@ -59,7 +59,7 @@
                 <artifactId>maven-scala-plugin</artifactId>
                 <executions>
                     <execution>
-                        <goals>     
+                        <goals>
                             <goal>compile</goal>
                         </goals>
                     </execution>
@@ -72,6 +72,16 @@
                         <arg>-dependencyfile</arg>
                         <arg>${project.build.directory}/.scala_dependencies</arg>
                     </args>
+                    <launchers>
+                        <launcher>
+                            <id>runner.MainRunner</id>
+                            <mainClass>fr.irisa.triskell.kermeta.compilo.scala.Main</mainClass>
+                            <!-- jvmArgs are optional -->
+                            <jvmArgs>
+                                <jvmArg>-Xmx512m</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                    </launchers>
                 </configuration>
             </plugin>
             <plugin>
@@ -83,29 +93,29 @@
                 </configuration>
             </plugin>
 
-		<plugin>
-		<groupId>org.codehaus.mojo</groupId>
-		<artifactId>truezip-maven-plugin</artifactId>
-		<version>1.0-beta-4</version>
-		<executions>
-		  <execution>
-		    <id>remove-a-file</id>
-		    <goals>
-		      <goal>remove</goal>
-		    </goals>
-		    <phase>package</phase>
-		    <configuration>
-		      <fileset>
-		        <directory>target/${project.artifactId}-${project.version}.jar/META-INF</directory>
-		        <includes>
-		          <include>**/*.RSA</include>
-			   <include>**/*.SF</include>
-		        </includes>
-		      </fileset>
-		    </configuration>
-		  </execution>
-		</executions>
-	      </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>truezip-maven-plugin</artifactId>
+                <version>1.0-beta-4</version>
+                <executions>
+                    <execution>
+                        <id>remove-a-file</id>
+                        <goals>
+                            <goal>remove</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <fileset>
+                                <directory>target/${project.artifactId}-${project.version}.jar/META-INF</directory>
+                                <includes>
+                                    <include>**/*.RSA</include>
+                                    <include>**/*.SF</include>
+                                </includes>
+                            </fileset>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
 
             <plugin>
@@ -216,26 +226,30 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+        <!-- <dependency>
+            <groupId>fr.irisa.triskell</groupId>
+            <artifactId>kermeta.scala.framework</artifactId>
+            <version>0.0.2-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>-->
         <dependency>
             <groupId>fr.irisa.triskell</groupId>
             <artifactId>kermeta.scala.framework</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.2-SNAPSHOT</version>
+            <type>jar</type>
             <scope>compile</scope>
         </dependency>
-
-                <dependency>
+        <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>maven-embedder-2.1-20080623-patched</artifactId>
             <version>RELEASE68</version>
         </dependency>
         <dependency>
-            <groupId>org.kermeta.art2</groupId>
-            <artifactId>art2.model</artifactId>
-            <version>1.1.0-SNAPSHOT</version>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>truezip-maven-plugin</artifactId>
+            <version>1.0-beta-5</version>
         </dependency>
     </dependencies>
-
-
     <distributionManagement>
         <snapshotRepository>
             <id>nexus</id>
