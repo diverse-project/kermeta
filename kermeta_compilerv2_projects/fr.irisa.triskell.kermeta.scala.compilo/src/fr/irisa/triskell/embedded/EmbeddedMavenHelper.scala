@@ -34,7 +34,7 @@ object EmbeddedMavenHelper {
         if(createPackage){
 
             goals.add("package")
-            goals.add("install")
+           // goals.add("install")
             //goals.add("bundle:install")
         }
         if(exec){
@@ -86,8 +86,8 @@ object EmbeddedMavenHelper {
             //  maven.start
             //var result = maven.execute(project, goals, null,null ,executionProperties,rootDirectory);
             var result = maven.execute(request)
-            import scala.collection.JavaConversions._
-            println(result.getExceptions.mkString)
+            //import scala.collection.JavaConversions._
+            //println(result.getExceptions.mkString)
 
         } catch {
             case e: Exception => e.printStackTrace()
