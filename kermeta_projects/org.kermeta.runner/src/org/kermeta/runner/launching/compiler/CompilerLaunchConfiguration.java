@@ -89,8 +89,8 @@ public class CompilerLaunchConfiguration implements
 			
 			
 			Object o = configuration.getAttribute("org.eclipse.jdt.launching.CLASSPATH",(List)null);
-			System.out.println(o.getClass());
-			
+			//System.out.println(o.getClass());
+			//TODO gérer kle classpath
 			serv.compile(kmpath.substring(0,kmpath.length()-1), 
 					projectpath+File.separatorChar+"Compiler.properties", p.getName(), 
 					configuration.getAttribute("fr.irisa.triskell.kermeta.launching.KM_CLASSQNAME", (String)null),
