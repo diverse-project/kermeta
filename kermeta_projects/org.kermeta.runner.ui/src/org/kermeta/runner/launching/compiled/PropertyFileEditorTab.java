@@ -6,10 +6,13 @@
 package org.kermeta.runner.launching.compiled;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.StringTokenizer;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -517,7 +520,7 @@ public class PropertyFileEditorTab extends AbstractLaunchConfigurationTab
 	 * Method saveToPropertyFile.
 	 */
 	private void saveToPropertyFile() {
-		if (i_propertiesFileService != null){
+		if (i_propertiesFileService != null) {
 			i_propertiesFileService.writeToPropertiesFile(i_file, i_dataMap);
 		}
 		setDirty(false);
@@ -586,9 +589,9 @@ public class PropertyFileEditorTab extends AbstractLaunchConfigurationTab
 		updatePropertiesTable();
 		try {
 			if (configuration.isWorkingCopy())
-				((ILaunchConfigurationWorkingCopy)configuration).setAttribute("change", !configuration.getAttribute(
-					"change", true));
-			
+				((ILaunchConfigurationWorkingCopy) configuration).setAttribute(
+						"change", !configuration.getAttribute("change", true));
+
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -809,39 +812,80 @@ public class PropertyFileEditorTab extends AbstractLaunchConfigurationTab
 		return "Configuration globale";
 	}
 
-	private void initTab(){
-		IProject p =null;
-		
+	private void initTab() {
+		IProject p = null;
+
 		try {
-			String projectPath= configuration.getAttribute(KConstants.KM_PROJECTNAME,
-					(String)null);			
+			String projectPath = configuration.getAttribute(
+					KConstants.KM_PROJECTNAME, (String) null);
 			System.err.println(projectPath);
 			if (projectPath != null)
 				p = ResourceHelper.getIProject(projectPath);
 		} catch (CoreException e1) {
 			e1.printStackTrace();
 		}
-		if (p == null){
-			if (i_newButton != null){
+		if (p == null) {
+			if (i_newButton != null) {
 				i_newButton.setEnabled(false);
 				i_delButton.setEnabled(false);
 			}
-		}else{
-			if (i_newButton != null){
+		} else {
+			if (i_newButton != null) {
 				i_newButton.setEnabled(true);
 				i_delButton.setEnabled(true);
 			}
 		}
-		
-		
+
 		if (p != null) {
-			System.out.println("project is not null");
+			// System.out.println("project is not null");
 			IFile f = p.getFile("Compiler.properties");
 			if (f.exists()) {
 				this.i_file = new File(f.getLocation().toOSString());
 				i_propertiesFileService = new PropertyFileService(i_file);
 			} else {
-				// TODO
+				this.i_file = new File(f.getLocation().toOSString());
+				try {
+					this.i_file.createNewFile();
+					PrintWriter w = new PrintWriter(this.i_file);
+					w
+							.println("#optimisation, use default pre compiled aspect\n"
+									+ "use.default.aspect.uml = false\n"
+									+ "use.default.aspect.ecore = false\n"
+									+ "use.default.aspect.km = false\n"
+									+ "\n"
+									+ "user.additional.classpath =\n"
+									+ "\n"
+									+ "project.group.id = org.kermeta.default.output\n"
+									+ "project.artefact.id = org.kermeta.default.output\n"
+									+ "\n"
+									+ "#use a specified file as output stream, default is System.out\n"
+									+ "output.target.default.output = output\n"
+									+ "\n"
+									+ "#specify target compilation steps\n"
+									+ "output.target.embeddedCompileAndRun = true\n"
+									+ "output.target.mavenCompileAndRun = true\n"
+									+ "output.target.mavenFullPackage = false\n"
+									+ "output.target.package = false\n"
+									+ "\n"
+									+ "#specified output project output, default is temporary file\n"
+									+ "output.target.folder = /home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.output\n"
+									+ "\n"
+									+ "#workspace loader mapping\n"
+									+ "workspace.plugin.uri =\n"
+									+ "workspace.platform.uri =\n"
+									+ "\n"
+									+ "clean = false\n"
+									+ "createPackage = false\n"
+									+ "exec = true\n"
+									+ "standalone =false \n"
+									);
+					w.flush();
+					w.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
 			try {
 				this.i_initData = i_propertiesFileService.readPropertiesFile();
@@ -851,12 +895,12 @@ public class PropertyFileEditorTab extends AbstractLaunchConfigurationTab
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else{
+		} else {
 			System.out.println("project is null");
 		}
 
 	}
-	
+
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		this.configuration = configuration;
 		this.i_initData = new ArrayList<PropertyLineWrapper>();
@@ -881,7 +925,7 @@ public class PropertyFileEditorTab extends AbstractLaunchConfigurationTab
 		this.configuration = configuration;
 		this.i_initData = new ArrayList<PropertyLineWrapper>();
 		this.initTab();
-		
+
 		System.out.println("setDefaults");
 	}
 
