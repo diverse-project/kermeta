@@ -5,6 +5,8 @@ import java.util.Collection;
 
 import org.kermeta.compiler.service.CompilerService;
 
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
+
 public class CompilerServiceImpl implements CompilerService {
 
 	/**
@@ -27,8 +29,9 @@ public class CompilerServiceImpl implements CompilerService {
 
 		// Step 1 Generate Scala
 		//try {
+		EclipseConsole console = new EclipseConsole("kermeta compiler");
 			fr.irisa.triskell.kermeta.compilo.scala.Main.init(propertiesfile,
-					projectName, classqname, operationName, classpath, args,null);
+					projectName, classqname, operationName, classpath, args,console.getOutputStream());
 			String[] arg = new String[2];
 			arg[0] = "-i";
 			arg[1] = kmuri;
