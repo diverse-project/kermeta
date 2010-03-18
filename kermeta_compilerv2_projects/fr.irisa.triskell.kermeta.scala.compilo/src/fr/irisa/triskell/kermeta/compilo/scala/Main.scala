@@ -186,7 +186,7 @@ var outputStream : java.io.OutputStream=null
            /* if(compilationResult == 0){
                 EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
             }*/
-           EmbeddedMavenHelper.run(true, true, true, additionalClassPath,outputStream)
+           EmbeddedMavenHelper.run(GlobalConfiguration.clean,GlobalConfiguration.createPackage, GlobalConfiguration.standalone, GlobalConfiguration.exec,  additionalClassPath,outputStream)
         }
 
 
