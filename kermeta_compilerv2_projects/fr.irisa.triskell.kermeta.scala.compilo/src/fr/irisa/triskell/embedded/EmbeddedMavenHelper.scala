@@ -5,35 +5,28 @@
 
 package fr.irisa.triskell.embedded
 
-import com.sun.xml.internal.stream.buffer.sax.Properties
 import fr.irisa.triskell.kermeta.compilo.scala.GlobalConfiguration
 import java.io.FileWriter
 //import org.apache.maven.embedder.DefaultConfiguration
 import java.io.OutputStream
 import java.io.PrintStream
-import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.artifact.repository.metadata.DefaultRepositoryMetadataManager
 import org.apache.maven.embedder.DefaultConfiguration
 import org.apache.maven.embedder.MavenEmbedder
 import org.apache.maven.embedder.MavenEmbedderConsoleLogger
-import org.apache.maven.embedder.MavenEmbedderFileLogger
 import org.apache.maven.execution.DefaultMavenExecutionRequest
 import org.apache.maven.execution.MavenExecutionRequest
-import org.apache.maven.monitor.event.DefaultEventMonitor
-import org.apache.maven.profiles.ProfileManager
-import org.apache.maven.project.MavenProject
-import org.apache.maven.settings.Settings
 import scala.collection.JavaConversions._
-import sun.awt.dnd.SunDropTargetContextPeer.EventDispatcher
 
 object EmbeddedMavenHelper {
 
-    def run(createPackage : Boolean,standalone : Boolean,exec : Boolean,additionalClasspath : List[String], outputstream : OutputStream) = {
+    def run(clean : Boolean, createPackage : Boolean,standalone : Boolean,exec : Boolean,additionalClasspath : List[String], outputstream : OutputStream) = {
 
         var goals = new scala.collection.mutable.ArrayBuffer[String]
-        goals.add("clean")
-        goals.add("scala:compile")
-    
+        if (clean){
+            goals.add("clean")
+            goals.add("scala:compile")
+        }
         if(createPackage){
 
             goals.add("package")
