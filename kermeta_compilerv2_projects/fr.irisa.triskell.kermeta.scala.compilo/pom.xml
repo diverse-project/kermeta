@@ -6,7 +6,7 @@
     <name>fr.irisa.triskell.kermeta.compilo.scala</name>
     <version>0.0.1-SNAPSHOT</version>
     <description>Kermeta Compiler V2</description>
-  <packaging>bundle</packaging>
+  <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
