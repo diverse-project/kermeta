@@ -1,0 +1,26 @@
+/* $Id:$ 
+ * Creation : June 30, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+class Main
+{
+	
+	
+	attribute foo : Foo
+}
+
+@deprecated "do not use me anymore !"
+class Foo {
+
+}

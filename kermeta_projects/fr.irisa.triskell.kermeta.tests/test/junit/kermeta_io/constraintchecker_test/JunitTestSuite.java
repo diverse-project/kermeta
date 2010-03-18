@@ -357,6 +357,38 @@ public void testinvalid_030_weaving_independent_aspects_02() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","030_weaving_independent_aspects_02.kmt" );
 }
 
+public void testinvalid_031_useOfDeprecated_attribute() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","031_useOfDeprecated_attribute.kmt" );
+}
+
+public void testinvalid_031_useOfDeprecated_Definition_in_attribute() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","031_useOfDeprecated_Definition_in_attribute.kmt" );
+}
+
+public void testinvalid_031_useOfDeprecated_Definition_in_inheritance() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","031_useOfDeprecated_Definition_in_inheritance.kmt" );
+}
+
+public void testinvalid_031_useOfDeprecated_Definition_in_parameter_type() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","031_useOfDeprecated_Definition_in_parameter_type.kmt" );
+}
+
+public void testinvalid_031_useOfDeprecated_Definition_in_returnType() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","031_useOfDeprecated_Definition_in_returnType.kmt" );
+}
+
+public void testinvalid_031_useOfDeprecated_Definition_in_TypeLiteral() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","031_useOfDeprecated_Definition_in_TypeLiteral.kmt" );
+}
+
+public void testinvalid_031_useOfDeprecated_Definition_in_vardecl() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","031_useOfDeprecated_Definition_in_vardecl.kmt" );
+}
+
+public void testinvalid_031_useOfDeprecated_operation() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","031_useOfDeprecated_operation.kmt" );
+}
+
 /*** END GENERATED TESTS ***/
 	// do not modify this comment
 

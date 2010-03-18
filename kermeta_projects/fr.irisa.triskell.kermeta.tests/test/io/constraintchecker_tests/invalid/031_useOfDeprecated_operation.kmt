@@ -1,0 +1,23 @@
+/* $Id:$ 
+ * Creation : June 30, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+package root_package;
+
+
+require kermeta
+class Main
+{    
+	operation main() : Void is do 
+		main2
+	end
+	
+	@deprecated "since kermeta1.3.2, please use foof"
+	operation main2() : Void is do
+	end
+	
+}
