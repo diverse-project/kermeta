@@ -28,12 +28,16 @@ import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
+import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
@@ -53,7 +57,9 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	public static final String CONSTRAINT_ERROR = "The stereotype of a constraint is erroneous";
 	public static final String ATPRE_IN_POST_ERROR = "@pre must be contained by a post condition";
 	public static final String ATPRE_PROPERTY_ERROR = "@pre must only be associated to a property";
-    
+    public static final String DEPRECATED_TAG_KEYWORD = "deprecated";
+	
+	
 	/**
 	 * The KermetaUnit that will be build so that we can constraint check more easily the model
 	 * hosted by the resource stored in <code>inputFile</code>.
@@ -79,7 +85,9 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	}
 	
 
-    /**
+
+
+	/**
      * check all the class definitions 
      * of a kermeta unit
      */
@@ -136,9 +144,28 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 			}
 		}
 		
+		/* check for use of deprecated ClassDefinition
+		 * 
+		 */
+		for ( Type t:  class_definition.getSuperType()){
+			checkDeprecatedTypeDefinition(t, class_definition);
+		}
+		
 		return super.visitClassDefinition(class_definition);
 	}
-		/**
+	
+	public void checkDeprecatedTypeDefinition(Type typeToCheck, fr.irisa.triskell.kermeta.language.structure.Object nodeToWarn){
+		if(typeToCheck instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+			Tag deprecatedTag = KermetaModelHelper.Tag.getTag(((fr.irisa.triskell.kermeta.language.structure.Class)typeToCheck).getTypeDefinition(), DEPRECATED_TAG_KEYWORD);
+			if (deprecatedTag != null){
+				addWarning("Use of deprecated TypeDefinition "
+						+ ((fr.irisa.triskell.kermeta.language.structure.Class)typeToCheck).getTypeDefinition().getName()
+						+ ". "+ deprecatedTag.getValue(), nodeToWarn);
+			}
+		}
+	}
+	
+	/**
 	 * Checked constraints :
 	 *   - The stereotype must conform to the right constrained class.
 	 * 
@@ -249,7 +276,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	 *   - Only CallFeature contained in postcondition can have isIsAtPre == true.
 	 *   - Sometimes it is not possible to anticipate the value of a callfeature
 	 *   - calling a new on a value type (ie. String, Integer, Real, ... doesn't make sense unless we have the notion of default value
-	 * 
+	 *   - raise warning for use of deprecated feature
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitConstraint(fr.irisa.triskell.kermeta.language.structure.Constraint)
 	 */
 	public Object visitCallFeature(CallFeature node) {
@@ -281,9 +308,47 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 			
 			///addWarning(msg, node)
 		}
+		if(node.getStaticOperation()!= null){
+			Tag deprecatedTag = KermetaModelHelper.Tag.getTag(node.getStaticOperation(), DEPRECATED_TAG_KEYWORD);
+			if (deprecatedTag != null){
+				addWarning("Use of deprecated operation "+node.getName()+". "+ deprecatedTag.getValue(), node);
+			}
+		}
+		if(node.getStaticProperty()!= null){
+			Tag deprecatedTag = KermetaModelHelper.Tag.getTag(node.getStaticProperty(), DEPRECATED_TAG_KEYWORD);
+			if (deprecatedTag != null){
+				addWarning("Use of deprecated property "+node.getName()+". "+ deprecatedTag.getValue(), node);
+			}
+		}
+		if(node.getStaticType()!= null){
+			Tag deprecatedTag = KermetaModelHelper.Tag.getTag(node.getStaticType(), DEPRECATED_TAG_KEYWORD);
+			if (deprecatedTag != null){
+				addWarning("Use of deprecated feature "+node.getName()+". "+ deprecatedTag.getValue(), node);
+			}
+		}
 		return super.visitCallFeature(node);
 	}
-	
+
+	/**
+	 * - check for use of deprecated TypeDefinition
+	 */
+    @Override
+	public Object visitVariableDecl(VariableDecl node) {
+		checkDeprecatedTypeDefinition(node.getStaticType(), node);
+		return super.visitVariableDecl(node);
+	}
+    
+    
+	@Override
+	public Object visitTypeLiteral(TypeLiteral node) {
+		
+		checkDeprecatedTypeDefinition(node.getTyperef().getType(), node);
+		return super.visitTypeLiteral(node);
+	}
+
+
+
+
 	private Boolean isContainerPost(EObject node) {
 		if (node instanceof fr.irisa.triskell.kermeta.language.structure.Package)
 			return false;

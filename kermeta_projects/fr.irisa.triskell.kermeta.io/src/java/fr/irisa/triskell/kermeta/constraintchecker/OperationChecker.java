@@ -77,9 +77,22 @@ public class OperationChecker extends AbstractChecker {
 				checkReturnType(operation) &&
 				checkOperationSignature(operation) &&
 				checkOperationIsAbstract(operation);
+			checkUseOfDeprecated(operation);
 		}
 		else return Boolean.FALSE;
 		return new Boolean(result);
+	}
+
+	private void checkUseOfDeprecated(Operation operation2) {
+
+		// check return type use of deprecated 
+		checkDeprecatedTypeDefinition(operation.getType(), operation);
+
+		// check use of deprecated on parameters
+		for( Parameter  p : operation.getOwnedParameter()){
+			
+			checkDeprecatedTypeDefinition(p.getType(), p);
+		}
 	}
 
 	/** 
@@ -276,10 +289,11 @@ public class OperationChecker extends AbstractChecker {
 		boolean result = ReturnTypeChecker.typeCheckExpression(operation);
 		if ( ! result ){
 			if(KermetaModelHelper.Tag.getTag(classDefinition,Jar2KMPass.JARUNIT_TAG_NAME) == null)
-				builder.error("In class definition " + NamedElementHelper.getQualifiedName(classDefinition) + ", the result variable has not been correctly set in operation " + operation.getName() + ".", operation);
+				builder.error("In class definition " + NamedElementHelper.getQualifiedName(classDefinition) + ", the result variable has not been correctly set in operation " + operation.getName() + ".", operation);			
 		}
 		return result; 
 	}
+
 	
 	/**
 	 * 

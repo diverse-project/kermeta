@@ -92,9 +92,14 @@ public class PropertyChecker extends AbstractChecker {
 			checkAttributeIsUsable() &&
 			checkDerivedPropertySetterConstraints()
 			;
+		checkUseOfDeprecated();
 		return new Boolean(result);
 	}
 
+	private void checkUseOfDeprecated() {
+		checkDeprecatedTypeDefinition(property.getType(), property);
+	}
+	
 	/**
 	 * Constraints:
 	 *   - A property must not have the same name as another property or operation

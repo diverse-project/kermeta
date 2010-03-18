@@ -15,6 +15,10 @@ package fr.irisa.triskell.kermeta.constraintchecker;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.model.KermetaModelHelper;
+
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 
 
 /**
@@ -53,5 +57,17 @@ public abstract class AbstractChecker {
 			builder.error(ERROR_TYPE + ": " + msg, node);
 		else
 			builder.warning(ERROR_TYPE + ": " + msg, node);
+	}
+	
+	public void checkDeprecatedTypeDefinition(Type typeToCheck, fr.irisa.triskell.kermeta.language.structure.Object nodeToWarn){
+		if(typeToCheck instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+			Tag deprecatedTag = KermetaModelHelper.Tag.getTag(((fr.irisa.triskell.kermeta.language.structure.Class)typeToCheck).getTypeDefinition(), KermetaConstraintChecker.DEPRECATED_TAG_KEYWORD);
+			if (deprecatedTag != null){
+
+				addProblem(WARNING, "Use of deprecated TypeDefinition "
+						+ ((fr.irisa.triskell.kermeta.language.structure.Class)typeToCheck).getTypeDefinition().getName()
+						+ ". "+ deprecatedTag.getValue(), nodeToWarn);
+			}
+		}
 	}
 }
