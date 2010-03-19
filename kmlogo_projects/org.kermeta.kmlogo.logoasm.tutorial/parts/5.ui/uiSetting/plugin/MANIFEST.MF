@@ -7,9 +7,7 @@ Bundle-Activator: org.kermeta.kmlogo.logoasm.ui.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
- org.kermeta.io.loader,
  fr.irisa.triskell.kermeta.interpreter,
- org.kermeta.log4j.util,
  org.kermeta.kmlogo.logoasm.model,
  org.kermeta.kmlogo.logoasm.edit,
  org.kermeta.kmlogo.logoasm.srcKermeta,
@@ -25,3 +23,4 @@ Bundle-ClassPath: lib/bluecove.jar,
  lib/icommand.jar,
  lib/RXTXcomm.jar,
  .
+Import-Package: org.slf4j
