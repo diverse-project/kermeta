@@ -16,8 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.io,
  org.kermeta.interest;visibility:=reexport,
  fr.irisa.triskell.kermeta.interpreter,
- org.kermeta.merger,
- org.kermeta.log4j.util
+ org.kermeta.merger
 Bundle-ActivationPolicy: lazy
 Export-Package: fr.irisa.triskell.kermeta.kpm,
  fr.irisa.triskell.kermeta.kpm.impl,
@@ -29,3 +28,4 @@ Export-Package: fr.irisa.triskell.kermeta.kpm,
  org.kermeta.kpm.preferences
 Bundle-Activator: org.kermeta.kpm.KPMPlugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.slf4j

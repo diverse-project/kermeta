@@ -9,19 +9,19 @@
 */
 package org.kermeta.kpm;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class KPMPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.kpm";
 	
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KPM");
+	final static public Logger internalLog = LoggerFactory.getLogger("KPM");
 
 	// The shared instance
 	private static KPMPlugin plugin;

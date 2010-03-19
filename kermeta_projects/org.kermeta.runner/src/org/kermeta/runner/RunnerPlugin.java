@@ -9,11 +9,11 @@
 */
 package org.kermeta.runner;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -33,7 +33,7 @@ public class RunnerPlugin extends AbstractUIPlugin {
 	}
 
 	/** Logger to get the error of this interpreter */
-	final static public Log internalLog = LogConfigurationHelper.getLogger("kermeta.runner");
+	final static public Logger internalLog = LoggerFactory.getLogger("kermeta.runner");
 	
 	/**
 	 * The constructor

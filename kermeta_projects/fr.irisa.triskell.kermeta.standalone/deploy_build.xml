@@ -49,10 +49,10 @@
 			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.kermeta.io_*.jar"/>
 		    <mapper type="merge" to="kermeta.io.jar"/>
 		</copy>
-		<copy todir="./lib/" flatten="true"> <!-- rename io to kermeta.io.loader.jar -->
-			<fileset dir="${kermeta.plugins}" includes="**/org.kermeta.io.loader_*.jar"/>
+		<!-- <copy todir="./lib/" flatten="true"> --><!-- rename io to kermeta.io.loader.jar -->
+		<!--	<fileset dir="${kermeta.plugins}" includes="**/org.kermeta.io.loader_*.jar"/>
 		    <mapper type="merge" to="kermeta.io.loader.jar"/>
-		</copy>
+		</copy> -->
 
 		<copy todir="./lib/" flatten="true"> <!-- rename io to kermeta.merger.jar -->
 			<fileset dir="${kermeta.plugins}" includes="**/org.kermeta.merger_*.jar"/>

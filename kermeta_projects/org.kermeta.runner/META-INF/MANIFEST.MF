@@ -10,8 +10,7 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta.interpreter,
  org.kermeta.merger,
  org.eclipse.jdt.launching,
- org.eclipse.jdt.core,
- org.kermeta.log4j.util;bundle-version="1.3.0"
+ org.eclipse.jdt.core
 Bundle-ActivationPolicy: lazy
 Export-Package: org.kermeta.runner,
  org.kermeta.runner.compiler.propertieseditor.core,
@@ -24,4 +23,5 @@ Export-Package: org.kermeta.runner,
  org.kermeta.runner.util
 Bundle-Vendor: IRISA/INRIA
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: org.kermeta.compiler.service
+Import-Package: org.kermeta.compiler.service,
+ org.slf4j

@@ -13,6 +13,11 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.Resource.IOWrappedException;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.merger.Merger;
@@ -23,6 +28,7 @@ import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.typechecker.ContextNotInitializedOnAFrameworkError;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 
 /**
@@ -70,8 +76,49 @@ public class CompileFramework {
         	for (KermetaUnit u : l){
         		System.err.println(u.getUri());
         	}
-        	KermetaUnit mergedUnit = merger.process(l, "platform:/resource/fr.irisa.triskell.kermeta.framework/dist/framework.km", true, false);
-        	System.out.println("Mergin and Saving done");
+        	// KermetaUnit mergedUnit = merger.process(l, "platform:/resource/fr.irisa.triskell.kermeta.framework/dist/framework.km.memory", true, false);
+        	String outputFile = "platform:/resource/fr.irisa.triskell.kermeta.framework/dist/framework.km";
+        	KermetaUnit mergedUnit = merger.processInMemory(l, outputFile+".memory", true);
+        	    		
+    		ResourceSet resourceSet = new ResourceSetImpl();
+    		/*
+    		 * 
+    		 * Creating the resource the kermeta model.
+    		 * 
+    		 */
+    		URI uri = URI.createURI( outputFile );
+    		Resource resource = resourceSet.createResource(uri);
+    		resource.getContents().add( mergedUnit.getModelingUnit() );
+    		
+    		/*
+    		 * 
+    		 * Creating the resource for the trace model.
+    		 * 
+    		 */
+        	int index = outputFile.lastIndexOf(".");
+        	String traceFile = outputFile.substring(0, index) + ".traceability";
+    		URI traceModelURI = URI.createURI(traceFile);
+    		Resource traceResource = resourceSet.createResource(traceModelURI);
+    		if ( mergedUnit.getTracer().getTraceModel() != null ) {
+    			traceResource.getContents().add( mergedUnit.getTracer().getTraceModel() );
+    			try {
+    				traceResource.save(null);
+    			} catch(IOWrappedException e) {
+    				System.out.println();
+    			}
+    		}
+    		
+    		KermetaTypeChecker typechecker = new KermetaTypeChecker(mergedUnit);
+    		typechecker.checkUnit(); 
+    		if(mergedUnit.isErroneous()){
+    			System.err.println("Merged unit contains errors");
+    			System.err.println(KermetaUnitHelper.getAllErrorsAsString(mergedUnit));
+    		}
+    		
+    		resource.save(null);
+        	
+        	
+        	System.out.println("Merging and Saving done");
         	//System.out.println("SAVING IN KM...");
 //        	KmExporter exporter = new KmExporter();
 //        	exporter.export(kermetaUnit, dist_folder, true);

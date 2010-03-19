@@ -352,7 +352,7 @@ public class KBasicProcess extends Process {
 						RunnerPlugin.internalLog.warn(
 								"(not implemented) problem with an entry CPE_CONTAINER of the classpath, "
 										+ projectEntry.getPath().toOSString()
-										+ " cannot be added in classloader", null);
+										+ " cannot be added in classloader");
 						//urlsV.add(new URL(projectEntry.getPath().toOSString()));
 					}
 					else if (projectEntry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
@@ -391,7 +391,7 @@ public class KBasicProcess extends Process {
 									RunnerPlugin.internalLog.warn(
 											"problem with an entry of the classpath, "
 													+ projectEntry.getPath().toOSString()
-													+ " cannot be added in classloader", null);
+													+ " cannot be added in classloader");
 								}
 
 							}
