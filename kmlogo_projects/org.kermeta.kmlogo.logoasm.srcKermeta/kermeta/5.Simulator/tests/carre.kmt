@@ -16,6 +16,6 @@ class Main
 {
 	operation main() : Void is do 
 		var simulator : Interpreter init Interpreter.new
-		simulator.execute("platform:/resource/org.kermeta.kmlogo.logoasm.srcKermeta/kermeta/1.Models/carre2.logoasm")
+		simulator.execute("platform:/resource/org.kermeta.kmlogo.logoasm.srcKermeta/kermeta/1.Models/carre.logoasm")
 	end
 }

@@ -11,7 +11,6 @@
 package kmLogo;
 
 require kermeta
-//require "../1.MetaModel/ASMLogo.ecore"
 require "http://www.kermeta.org/kmLogo"
 require "NXCTemplate.kmt"
 
@@ -25,6 +24,20 @@ using kermeta::io
  * Implementation of the Abstract Syntactic Model
  */
 package ASM {
+
+	@aspect "true"
+	class LogoProgram 
+	{
+		operation compileToNXC(context : NXCCompiler) : String is do
+			result := context.prefix
+			context.incDepth
+			instructions.each{ instruction  | 
+				result.append(context.prefix + instruction.compileToNXC(context) + "\n") 
+			}
+			context.decDepth
+			result.append(context.prefix)
+		end 
+	}
 
 	@aspect "true"
 	class Instruction 
@@ -251,7 +264,7 @@ package ASM {
 
 class NXCCompiler 
 {	
-	reference root : ASM::Instruction
+	reference root : ASM::LogoProgram
 	
 	reference subs : String[*]
 	reference depth : Integer
@@ -265,7 +278,7 @@ class NXCCompiler
 	
 	operation main() is
 	do
-		compile("tests/snowflake.xmi", "tests/test2.nxc", void)
+		compile("./tests/k.xmi", "./tests/k.nxc", void)
 	end
 	
 	operation compile(uri : String, out : String, api : String) : String is
@@ -290,7 +303,7 @@ class NXCCompiler
 		stdio.writeln(result)
 	end
 	
-	operation loadProgram(uri : String) : ASM::Instruction is do
+	operation loadProgram(uri : String) : ASM::LogoProgram is do
 		var res : EMFRepository init EMFRepository.new
         var resource : Resource init res.getResource(uri)
         result ?= resource.instances.one  

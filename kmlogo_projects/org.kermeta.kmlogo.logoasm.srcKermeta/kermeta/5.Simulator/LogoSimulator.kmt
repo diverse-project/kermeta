@@ -21,7 +21,7 @@ using kmLogo::controler
 class Interpreter 
 {
 	attribute context : Context
-	reference root : ASM::Instruction
+	reference root : ASM::LogoProgram
 	
 	operation execute(uri : String) is
 	do
@@ -43,7 +43,7 @@ class Interpreter
 		controler.modelChanged
 	end
 	
-	operation loadProgram(uri : String) : ASM::Instruction is do
+	operation loadProgram(uri : String) : ASM::LogoProgram is do
 		var res : EMFRepository init EMFRepository.new
         var resource : Resource init res.getResource(uri)
         result ?= resource.instances.one  

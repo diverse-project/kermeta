@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM" xsi:schemaLocation="http://www.kermeta.org/kmLogo/ASM ../ASMLogo.ecore#//ASM">
+<ASM:LogoProgram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM" xsi:schemaLocation="http://www.kermeta.org/kmLogo/ASM ../ASMLogo.ecore#//ASM">
   <instructions xsi:type="ASM:Right">
     <angle xsi:type="ASM:Constant" integerValue="90"/>
   </instructions>
@@ -27,4 +27,4 @@
   <instructions xsi:type="ASM:Forward">
     <steps xsi:type="ASM:Constant" integerValue="10"/>
   </instructions>
-</ASM:Block>
+</ASM:LogoProgram>

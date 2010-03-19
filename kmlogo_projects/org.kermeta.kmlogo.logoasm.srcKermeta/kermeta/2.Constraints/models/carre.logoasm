@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
+<ASM:LogoProgram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
   <instructions xsi:type="ASM:ProcDeclaration" name="carre" procCall="//@instructions.3">
     <args name="size"/>
     <block>
@@ -22,4 +22,4 @@
     <actualArgs xsi:type="ASM:Constant" integerValue="50"/>
   </instructions>
   <instructions xsi:type="ASM:PenUp"/>
-</ASM:Block>
+</ASM:LogoProgram>

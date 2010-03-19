@@ -47,6 +47,14 @@ class Context  {
  */
 package ASM {
 
+	aspect class LogoProgram 
+	{
+		operation eval(context : Context) : Integer is do 
+			instructions.each{instruction  | result := instruction.eval(context)}
+		end 
+	}
+	
+
 	aspect class Instruction 
 	{
 		operation eval(context : Context) : Integer is do
