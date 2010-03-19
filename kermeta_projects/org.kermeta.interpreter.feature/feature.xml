@@ -30,7 +30,7 @@ the terms of the EPL licence.
       <import plugin="fr.irisa.triskell.traceability.model"/>
       <import plugin="org.kermeta.merger"/>
       <import plugin="org.eclipse.gymnast.runtime.core"/>
-      <import plugin="org.kermeta.io.loader"/>
+     <!-- <import plugin="org.kermeta.io.loader"/> -->
       <import plugin="fr.irisa.triskell.kermeta.io"/>
       <import plugin="org.eclipse.debug.core"/>
       <import plugin="org.junit4"/>
