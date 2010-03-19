@@ -1,11 +1,11 @@
 package fr.irisa.triskell.kermeta.touchnavigator;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * The main plugin class to be used in the desktop.
@@ -17,7 +17,7 @@ public class TouchNavigatorPlugin extends AbstractUIPlugin {
 	
 	public static final String EMFModelTouchView_ID = "fr.irisa.triskell.kermeta.touchnavigator.views.EMFModelTouchView";
 	
-	final static public Log internalLog = LogConfigurationHelper.getLogger("TouchNavigator");
+	final static public Logger internalLog = LoggerFactory.getLogger("TouchNavigator");
 	
 	/**
 	 * The constructor.

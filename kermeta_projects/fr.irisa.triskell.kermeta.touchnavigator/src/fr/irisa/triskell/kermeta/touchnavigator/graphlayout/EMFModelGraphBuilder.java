@@ -13,7 +13,6 @@ package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -22,6 +21,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.touchgraph.graphlayout.Edge;
 import com.touchgraph.graphlayout.Node;
@@ -30,7 +31,6 @@ import com.touchgraph.graphlayout.TGPanel;
 
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -49,7 +49,7 @@ public class EMFModelGraphBuilder extends KermetaOptimizedVisitor{
     protected ModelGraphMapping modelGraphMapping = new ModelGraphMapping();
         
 	
-    final static public Log internalLog = LogConfigurationHelper.getLogger("EMFModelGraphBuilder");
+    final static public Logger internalLog = LoggerFactory.getLogger("EMFModelGraphBuilder");
 	
 	
 	public EMFModelGraphBuilder(TGPanel newtgPanel, Resource res) {
