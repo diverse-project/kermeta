@@ -9,10 +9,10 @@
 */
 package org.kermeta.kpm.test;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -26,7 +26,7 @@ public class KpmTestPlugin extends AbstractUIPlugin {
 	private static KpmTestPlugin plugin;
 	
 	// Log4j logger for this plugin
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KpmTestPlugin");
+	final static public Logger internalLog = LoggerFactory.getLogger("KpmTestPlugin");
 	
 	/**
 	 * The constructor
