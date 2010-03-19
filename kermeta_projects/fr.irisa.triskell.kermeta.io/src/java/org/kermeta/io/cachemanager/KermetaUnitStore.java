@@ -12,7 +12,6 @@ package org.kermeta.io.cachemanager;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
@@ -22,7 +21,8 @@ import org.kermeta.kermetaunitloader.LoaderFactory;
 import org.kermeta.kermetaunitloader.core.EmptyKermetaUnitBuilder;
 import org.kermeta.loader.FrameworkMapping;
 import org.kermeta.loader.LoadingOptions;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.cache.utilities.WeakReferenceMapCache;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
@@ -37,7 +37,7 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
  */
 public class KermetaUnitStore  
 { 
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KermetaUnitStore");
+	final static public Logger internalLog = LoggerFactory.getLogger("KermetaUnitStore");
 	protected int nbInCache = 0;
 	HashSet<String> unitList = new HashSet<String>();
 	protected final WeakReferenceMapCache<String, KermetaUnit> kermetaUnitCache = new WeakReferenceMapCache<String, KermetaUnit>();

@@ -17,7 +17,6 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.gymnast.runtime.core;visibility:=reexport,
  org.eclipse.emf.ecoretools.registration,
  org.antlr.antlr2,
- org.kermeta.log4j.util,
  fr.irisa.triskell.cache.utilities
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.kermeta.io.plugin.IOPlugin
@@ -56,3 +55,4 @@ Export-Package:
 Bundle-Vendor: IRISA/INRIA
 Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.slf4j

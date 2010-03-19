@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -33,8 +32,9 @@ import org.kermeta.io.cachemanager.KermetaUnitStore;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.kermetaunitloader.core.EmptyKermetaUnitBuilder;
 import org.kermeta.loader.LoadingOptions;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.model.KermetaModelHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
@@ -56,7 +56,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  */
 public class KMFileLoader extends AbstractLoader {
 
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KMFileLoader");
+	final static public Logger internalLog = LoggerFactory.getLogger("KMFileLoader");
 	
 	
 	protected Map<String, Object> options;
@@ -171,11 +171,13 @@ public class KMFileLoader extends AbstractLoader {
 			if ( options.containsKey(LoadingOptions.INCLUDE_FRAMEWORK) )
 				includeFramework = (Boolean) options.get(LoadingOptions.INCLUDE_FRAMEWORK);
 			if ( includeFramework ) {
-				KermetaUnit framework = kermetaUnitStore.get(IOPlugin.FRAMEWORK_KM_URI);
-				if ( ! frameworkLoading && framework != null && !IOPlugin.FRAMEWORK_GENERATION  ) {
-					addResource(resourceSet, framework);
-					for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) ) {
-						addResource(resourceSet, unit);
+				if (!IOPlugin.FRAMEWORK_GENERATION){
+					KermetaUnit framework = kermetaUnitStore.get(IOPlugin.FRAMEWORK_KM_URI);
+					if ( ! frameworkLoading && framework != null  ) {
+						addResource(resourceSet, framework);
+						for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) ) {
+							addResource(resourceSet, unit);
+						}
 					}
 				}
 			}

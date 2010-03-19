@@ -55,7 +55,7 @@ public class OperationTypeVariableChecker extends KermetaOptimizedVisitor {
 	    	}
 	    	catch(NullPointerException e){
 	    		unit.error("TYPE-CHECKER INTERNAL ERROR : checker cannot check type " +t+" of operation " + op.getName() + " please verify that you have implemented all visit operations", op);
-	    		IOPlugin.internalLog.error("TYPE-CHECKER INTERNAL ERROR : checker cannot check type " +t+" of operation " + op.getName() + " please verify that you have implemented all visit operations", null);
+	    		IOPlugin.internalLog.error("TYPE-CHECKER INTERNAL ERROR : checker cannot check type " +t+" of operation " + op.getName() + " please verify that you have implemented all visit operations");
 	    	}
 	    	for(Parameter param : op.getOwnedParameter()){
 	    		try{
@@ -65,7 +65,7 @@ public class OperationTypeVariableChecker extends KermetaOptimizedVisitor {
 	    		}
 		    	catch(NullPointerException e){
 		    		unit.error("TYPE-CHECKER INTERNAL ERROR : checker cannot check type " +t+" of operation " + op.getName() + " please verify that you have implemented all visit operations", op);
-		    		IOPlugin.internalLog.error("TYPE-CHECKER INTERNAL ERROR : checker cannot check type " +t+" of operation " + op.getName() + " please verify that you have implemented all visit operations", null);
+		    		IOPlugin.internalLog.error("TYPE-CHECKER INTERNAL ERROR : checker cannot check type " +t+" of operation " + op.getName() + " please verify that you have implemented all visit operations");
 		    	}
 	    	}
 	    	ClassDefinition cd = (ClassDefinition)op.eContainer();

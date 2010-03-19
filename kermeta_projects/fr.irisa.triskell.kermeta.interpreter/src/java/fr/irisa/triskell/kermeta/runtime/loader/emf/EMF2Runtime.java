@@ -17,7 +17,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.EList;
@@ -37,8 +36,9 @@ import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.kermeta.customidentity.CustomHashtable;
 import org.kermeta.customidentity.ReferenceComparer;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.model.KermetaModelHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -69,7 +69,7 @@ import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 public class EMF2Runtime {
 
     /** Logger to get the error of this launcher */
-    final static public Log internalLog = LogConfigurationHelper.getLogger("KMT.EMF2Runtime");
+    final static public Logger internalLog = LoggerFactory.getLogger("KMT.EMF2Runtime");
 
     /**
      * Hashtable that contains the RuntimeObjects that host the Types of the metamodel.

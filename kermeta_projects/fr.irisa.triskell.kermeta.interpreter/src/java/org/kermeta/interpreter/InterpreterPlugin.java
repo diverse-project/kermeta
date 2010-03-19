@@ -1,16 +1,16 @@
 package org.kermeta.interpreter;
 
-import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class InterpreterPlugin extends Plugin {
 
 	/** Logger to get the error of this interpreter */
-	final static public Log internalLog = LogConfigurationHelper.getLogger("kermeta.interpreter");
+	final static public Logger internalLog = LoggerFactory.getLogger("kermeta.interpreter");
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.interpreter";

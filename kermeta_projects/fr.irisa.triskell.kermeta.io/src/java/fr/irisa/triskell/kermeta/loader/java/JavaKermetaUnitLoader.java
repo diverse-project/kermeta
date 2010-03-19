@@ -17,7 +17,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
@@ -30,7 +29,8 @@ import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.AbstractBuildingState;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JavaKermetaUnitLoader extends AbstractKermetaUnitLoader {
 
@@ -41,7 +41,7 @@ public class JavaKermetaUnitLoader extends AbstractKermetaUnitLoader {
 	//	 The cache structure are there but will be filled only on request due to the memory required to keep it	
 	private JarCache jarCache;
 	
-    final static public Log internalLog = LogConfigurationHelper.getLogger("JarKermetaUnitLoader");
+    final static public Logger internalLog = LoggerFactory.getLogger("JarKermetaUnitLoader");
 
     
     public JavaKermetaUnitLoader(Map<String, Object> options, IProgressMonitor monitor) {

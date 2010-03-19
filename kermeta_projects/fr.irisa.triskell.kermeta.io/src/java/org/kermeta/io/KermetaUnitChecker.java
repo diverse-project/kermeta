@@ -12,12 +12,12 @@ package org.kermeta.io;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.cachemanager.KermetaUnitStore;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
@@ -28,7 +28,7 @@ import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class KermetaUnitChecker {
 
-	final static private Log logger = LogConfigurationHelper.getLogger("LoaderPlugin");
+	final static private Logger logger = LoggerFactory.getLogger("LoaderPlugin");
 	
 	/**
 	 * 

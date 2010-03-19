@@ -29,6 +29,7 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.typechecker.ContextNotInitializedOnAFrameworkError;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
 public class RunnerHelper {
 

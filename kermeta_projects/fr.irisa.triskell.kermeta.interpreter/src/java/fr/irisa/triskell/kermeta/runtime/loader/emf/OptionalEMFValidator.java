@@ -9,13 +9,13 @@
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.validation.model.EvaluationMode;
 import org.eclipse.emf.validation.service.IBatchValidator;
 import org.eclipse.emf.validation.service.ModelValidationService;
+import org.slf4j.Logger;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
@@ -26,10 +26,10 @@ import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
  */
 public class OptionalEMFValidator {
 	
-	public Log internalLog;
+	public Logger internalLog;
 	protected RuntimeMemory runtimeMemory;
 	
-	public OptionalEMFValidator(Log logger, RuntimeMemory rMemory){
+	public OptionalEMFValidator(Logger logger, RuntimeMemory rMemory){
 		internalLog = logger;
 		runtimeMemory = rMemory;
 	}

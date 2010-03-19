@@ -16,17 +16,17 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
 
-import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
 import org.kermeta.model.internal.TagHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * This class implements a cache for various request on the java jar
@@ -51,7 +51,7 @@ public class JarCache {
 	// structure used to optimize the retreival of java fields from a kermeta property
 	protected Hashtable<Property,Field> cachedJavaFields =  new Hashtable<Property,Field>();
 	
-	final static public Log internalLog = LogConfigurationHelper.getLogger("JarCache");
+	final static public Logger internalLog = LoggerFactory.getLogger("JarCache");
 	
 	
 	protected KermetaUnit kermetaUnit = null;

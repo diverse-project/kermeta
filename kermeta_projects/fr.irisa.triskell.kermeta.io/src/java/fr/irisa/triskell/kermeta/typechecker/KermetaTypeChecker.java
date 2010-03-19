@@ -16,11 +16,10 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.cachemanager.CallableFeaturesStore;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.model.internal.ClassDefinitionHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -42,7 +41,7 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
  */
 public class KermetaTypeChecker {
     
-	final static private Log internalLog = LogConfigurationHelper.getLogger("TypeChecker");	
+	final static private Logger internalLog = LoggerFactory.getLogger("TypeChecker");	
 	
     protected KermetaUnit unit;
    

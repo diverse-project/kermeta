@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -33,7 +32,8 @@ import org.kermeta.kermetaunitloader.core.EmptyKermetaUnitBuilder;
 import org.kermeta.kermetaunitloader.core.ReportUsingError;
 import org.kermeta.kermetaunitloader.core.RequireResolver;
 import org.kermeta.loader.LoadingOptions;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -52,7 +52,7 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
  */
 public class EcoreResourceLoader extends AbstractLoader {
 
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KMFileLoader");
+	final static public Logger internalLog = LoggerFactory.getLogger("KMFileLoader");
 	
 	
 	protected Map<String, Object> options;

@@ -20,7 +20,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.core.helper.JarHelper;
@@ -42,7 +43,6 @@ import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 import fr.irisa.triskell.utils.argumentsreader.CheckOption;
 import fr.irisa.triskell.utils.argumentsreader.NoOption;
@@ -81,7 +81,7 @@ public class RunCommandLine {
     protected boolean logExecutionTime = false;
     
 	/** Logger to get the error of this launcher */
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
+	final static public Logger internalLog = LoggerFactory.getLogger("KMT.launcher");
 
     public RunCommandLine(String[] args) {
 	    super();

@@ -23,7 +23,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -40,7 +39,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EEnumLiteralImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.eclipse.emf.ResourceHelper;
@@ -58,7 +58,7 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
  */
 public class Runtime2EMF {
 
-	final static public Log internalLog = LogConfigurationHelper
+	final static public Logger internalLog = LoggerFactory
 			.getLogger("KMT.Runtime2EMF");
 
 	final static public String ECORE_NSURI = "http://www.eclipse.org/emf/2002/Ecore";
@@ -836,7 +836,7 @@ public class Runtime2EMF {
 			if(type.eResource().getURI().toString().equals(KmPackage.eNS_URI)){ /* "http://www.kermeta.org/kermeta/1_2_0//kermeta"*/
 				internalLog.debug("not able to create the enumeration literal concrete object for instanceClass "+type.getInstanceClassName()+ " for " +
 						enum_literal_name	+
-						", let's try as an EObject", null);
+						", let's try as an EObject");
 				// this is a special case of writing a km file, so we need to find the enum in the km and not a EEnum
 				result = createEObjectFromRuntimeObjectWithResource(rObject, type.eResource());
 			}

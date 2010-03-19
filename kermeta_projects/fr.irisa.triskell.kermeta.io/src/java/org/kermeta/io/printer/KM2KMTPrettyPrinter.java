@@ -16,10 +16,11 @@ package org.kermeta.io.printer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.model.internal.TagHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
@@ -73,7 +74,6 @@ import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -113,7 +113,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 *  according to the context inside which it is (i.e typeDefintion or not typeDefinition) */
 	protected boolean typedef = true;
 	
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KM2KMT");
+	final static public Logger internalLog = LoggerFactory.getLogger("KM2KMT");
 	
 	private StringBuffer content = new StringBuffer("");
 	private boolean operationPrinting = false;

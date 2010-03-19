@@ -14,15 +14,15 @@ package fr.irisa.triskell.kermeta.constraintchecker;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.Message;
 import org.kermeta.io.WarningMessage;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.model.KermetaModelHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
@@ -51,7 +51,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
     
         
-    final static public Log internalLog = LogConfigurationHelper.getLogger("ConstraintChecker");
+    final static public Logger internalLog = LoggerFactory.getLogger("ConstraintChecker");
    
     public static final String NAME_ERROR = "An element is unnamed";
 	public static final String CONSTRAINT_ERROR = "The stereotype of a constraint is erroneous";
@@ -85,9 +85,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	}
 	
 
-
-
-	/**
+    /**
      * check all the class definitions 
      * of a kermeta unit
      */

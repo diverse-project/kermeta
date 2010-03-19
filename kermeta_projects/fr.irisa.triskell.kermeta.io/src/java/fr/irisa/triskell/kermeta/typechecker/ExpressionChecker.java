@@ -1060,8 +1060,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		// Check constraints
 		if (expression.getInitialization() != null) {
 			if (!getTypeOfExpression(expression.getInitialization()).isSubTypeOf(result)) {
-				KermetaUnitHelper.getKermetaUnitFromObject( ((SimpleType) getTypeOfExpression(expression.getInitialization())).getTypeDefinition() );
-				KermetaUnitHelper.getKermetaUnitFromObject( ((SimpleType) result).getTypeDefinition() );
+				//KermetaUnitHelper.getKermetaUnitFromObject( ((SimpleType) getTypeOfExpression(expression.getInitialization())).getTypeDefinition() );
+				//KermetaUnitHelper.getKermetaUnitFromObject( ((SimpleType) result).getTypeDefinition() );
 				getTypeOfExpression(expression.getInitialization()).isSubTypeOf(result);
 				unit.error("TYPE-CHECKER : The initialization expression should be compatible with the type of the variable : expected "+result+", found "+getTypeOfExpression(expression.getInitialization())+".", expression.getInitialization());
 			}

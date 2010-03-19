@@ -138,7 +138,7 @@ public class EcoreExporter {
 	
 	private void initializeResourceSet() throws URIMalformedException, NotRegisteredURIException {
 		
-		KermetaUnit framework = IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.getFrameWorkURI());
+		KermetaUnit framework = IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.FRAMEWORK_KM_URI);
 		if ( framework == null )
 			return;
 		

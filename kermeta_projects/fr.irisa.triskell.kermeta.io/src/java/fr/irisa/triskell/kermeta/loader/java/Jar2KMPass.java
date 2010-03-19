@@ -16,7 +16,6 @@ import java.lang.reflect.WildcardType;
 import java.util.Hashtable;
 import java.util.jar.JarEntry;
 
-import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -25,7 +24,8 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -35,7 +35,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public abstract class Jar2KMPass {
 	protected KermetaUnit builder;
-	final static public Log internalLog = LogConfigurationHelper.getLogger("Jar2KM");
+	final static public Logger internalLog = LoggerFactory.getLogger("Jar2KM");
 	
 	final static public String JARUNIT_TAG_NAME = "IsProxyForJar";
 	final static public String INITOPERATION_TAG_NAME = "IsInitOperation";

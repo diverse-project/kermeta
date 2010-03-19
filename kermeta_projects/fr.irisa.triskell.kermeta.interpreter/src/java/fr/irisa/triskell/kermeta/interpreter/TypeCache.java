@@ -14,13 +14,14 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.Hashtable;
 
-import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.Type;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 
 /**
@@ -32,7 +33,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
 public class TypeCache {
 
 
-	final static public Log log = LogConfigurationHelper.getLogger("KMT.cache");
+	final static public Logger log = LoggerFactory.getLogger("KMT.cache");
 	protected Hashtable theCache =  new Hashtable();
 	
 	/**

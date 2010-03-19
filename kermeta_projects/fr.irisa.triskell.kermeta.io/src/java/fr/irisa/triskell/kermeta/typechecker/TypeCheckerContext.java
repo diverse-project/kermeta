@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
-import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.cachemanager.CallableFeaturesStore;
 import org.kermeta.io.cachemanager.TypeDefinitionContextStore;
@@ -49,7 +48,8 @@ import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolInterpreterVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMSymbolVariable;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Franck Fleurey
@@ -57,7 +57,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public class TypeCheckerContext {
 
-	final static private Log internalLog = LogConfigurationHelper.getLogger("TypeCheckerContext");
+	final static private Logger internalLog = LoggerFactory.getLogger("TypeCheckerContext");
 	
 	protected List<Operation> specialOperations = new ArrayList<Operation>();
 	

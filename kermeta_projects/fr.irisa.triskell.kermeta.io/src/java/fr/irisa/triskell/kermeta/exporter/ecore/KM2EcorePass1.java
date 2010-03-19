@@ -17,7 +17,6 @@ package fr.irisa.triskell.kermeta.exporter.ecore;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -39,6 +38,8 @@ import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 import org.kermeta.model.internal.TagHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -60,7 +61,6 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 
 /**
@@ -69,7 +69,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public class KM2EcorePass1 extends KM2Ecore {
 
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KMT2Ecore.pass1");
+	final static public Logger internalLog = LoggerFactory.getLogger("KMT2Ecore.pass1");
 	
 	/** The name of the currently visited element */
 	protected String current_name;

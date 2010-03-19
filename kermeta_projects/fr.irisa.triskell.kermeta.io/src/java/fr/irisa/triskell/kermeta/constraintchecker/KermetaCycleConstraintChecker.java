@@ -14,8 +14,9 @@ package fr.irisa.triskell.kermeta.constraintchecker;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.directedgraph.DirectedGraphClass;
 import fr.irisa.triskell.kermeta.directedgraph.Findcycle;
@@ -25,7 +26,6 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * Constraint checker 
@@ -38,7 +38,7 @@ public class KermetaCycleConstraintChecker {
     Hashtable<Integer, Object> nodeId2Object = new Hashtable<Integer, Object>();
     Hashtable<Object, Integer> fObject2nodeId = new Hashtable<Object, Integer>();
         
-    final static public Log internalLog = LogConfigurationHelper.getLogger("CycleConstraintChecker");
+    final static public Logger internalLog = LoggerFactory.getLogger("CycleConstraintChecker");
    
     /**
      * @param unit

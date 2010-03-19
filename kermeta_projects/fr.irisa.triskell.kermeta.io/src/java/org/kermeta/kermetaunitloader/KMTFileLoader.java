@@ -13,7 +13,6 @@ package org.kermeta.kermetaunitloader;
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.cachemanager.KermetaUnitStore;
 import org.kermeta.kermetaunitloader.core.BuildAspects;
@@ -27,7 +26,8 @@ import org.kermeta.kermetaunitloader.kmt.KmtAst2KMStructure;
 import org.kermeta.kermetaunitloader.kmt.SuperTypesSetter;
 import org.kermeta.kermetaunitloader.kmt.TypeSetter;
 import org.kermeta.loader.LoadingContext;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
@@ -45,7 +45,7 @@ import fr.irisa.triskell.kermeta.parser.gen.ast.CompUnit;
 public class KMTFileLoader extends AbstractLoader {
 
 
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KMTFileLoader");
+	final static public Logger internalLog = LoggerFactory.getLogger("KMTFileLoader");
 	
 	protected Map<String, Object> options;
 	protected String kmtFileUri;

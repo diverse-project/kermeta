@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -12,13 +11,14 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DirectedGraphClass implements DirectedGraphInterface {
 	protected KermetaUnit unit;
 	ArrayList<TypeDefinition> nodes;
 	    
-    final static public Log internalLog = LogConfigurationHelper.getLogger("CycleConstraintChecker");
+    final static public Logger internalLog = LoggerFactory.getLogger("CycleConstraintChecker");
    
     /**
      * @param unit

@@ -18,7 +18,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -46,6 +45,8 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.interpreter.InterpreterPlugin;
 import org.kermeta.io.util2.ResourceSetManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
@@ -57,7 +58,6 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Repository;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 /**
  * FIXME : Check that we work with all qualified names of Classes.
  */
@@ -111,7 +111,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     protected QualifiedNamePatcher qualifiedNamePatcher;
 
     /** Logger to get the error of this launcher */
-    final static public Log internalLog = LogConfigurationHelper.getLogger("KMT.EMFRuntime");
+    final static public Logger internalLog = LoggerFactory.getLogger("KMT.EMFRuntime");
     
     /**
      * NOTE : this constructor should not been called directly by client.

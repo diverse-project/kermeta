@@ -24,12 +24,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.model.KermetaModelHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -62,7 +62,7 @@ import fr.irisa.triskell.kermeta.modelhelper.ModelTypeHelper;
  */
 public class TypeMatchChecker {
 
-	final static public Log internalLog = LogConfigurationHelper
+	final static public Logger internalLog = LoggerFactory
 			.getLogger("TypeMatchChecker");
 	private Collection<Binding> candidates;
 	private Collection<Dependency> dependencies;

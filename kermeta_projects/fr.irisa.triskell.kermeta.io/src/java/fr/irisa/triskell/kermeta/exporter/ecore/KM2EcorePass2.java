@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -64,7 +63,8 @@ import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -81,7 +81,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
  */
 public class KM2EcorePass2 extends KM2Ecore {
 
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KMT2Ecore.pass2");
+	final static public Logger internalLog = LoggerFactory.getLogger("KMT2Ecore.pass2");
 	
 	protected Package currentPackage;
 	

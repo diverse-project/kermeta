@@ -8,10 +8,11 @@ package org.kermeta.io;
 
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import antlr.ANTLRException;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
@@ -21,7 +22,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.language.structure.Using;
 
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 import fr.irisa.triskell.traceability.helper.Tracer;
 
@@ -73,7 +73,7 @@ public interface KermetaUnit extends EObject {
 	 * 
 	 * @generated NOT
 	 */
-	final static public Log internalLog = LogConfigurationHelper.getLogger("Kermeta Unit");
+	final static public Logger internalLog = LoggerFactory.getLogger("Kermeta Unit");
 	
 	/**
 	 * Returns the value of the '<em><b>Uri</b></em>' attribute.

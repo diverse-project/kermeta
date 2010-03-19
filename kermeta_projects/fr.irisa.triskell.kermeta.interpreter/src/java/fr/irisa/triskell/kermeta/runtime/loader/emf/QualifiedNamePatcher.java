@@ -227,7 +227,7 @@ public class QualifiedNamePatcher {
 		        
 	        } catch (IOException e) {
 	            // TODO Auto-generated catch block
-	        	EMFRuntimeUnit.internalLog.warn(e);
+	        	EMFRuntimeUnit.internalLog.warn(e.toString());
 	            canLoadMetaModelResource = false;
 	            EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that some packages are really toplevel..." );
 	            EMFRuntimeUnit.internalLog.warn("Cannot retrieve the metamodel. "+ mm_uri + " If you have trouble loading your model, maybe you should use repository.createResource(\"yourmodel.xmi\", \"yourmetamodel.ecore\") instead of repository.getResource(\"yourmodel.xmi\")");

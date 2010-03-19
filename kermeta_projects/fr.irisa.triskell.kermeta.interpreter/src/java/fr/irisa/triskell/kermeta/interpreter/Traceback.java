@@ -12,20 +12,19 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.TextReference;
@@ -41,7 +40,7 @@ import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
  */
 public class Traceback {
 
-	final static public Log log = LogConfigurationHelper.getLogger("KMT.INTERPRETER");
+	final static public Logger log = LoggerFactory.getLogger("KMT.INTERPRETER");
 	
     ExpressionInterpreter interpreter;
     // The precise object that caused the error (usually, a block, but the developer
@@ -350,7 +349,7 @@ public class Traceback {
         int charnum = node.getRangeStart();
         try
         {
-            InputStream in = new URIConverterImpl().createInputStream(URI.createURI(unit_struri));
+            InputStream in = new ExtensibleURIConverterImpl().createInputStream(URI.createURI(unit_struri));
             while ((c = in.read()) != -1 && charcount<=charnum) {
                 charcount += 1; if (c=='\n') linenum += 1;
             }

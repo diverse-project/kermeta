@@ -15,7 +15,6 @@ package org.kermeta.io.plugin;
 import java.io.File;
 import java.util.HashMap;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
@@ -30,7 +29,8 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.cachemanager.KermetaUnitStore;
 import org.kermeta.loader.FrameworkMapping;
 import org.kermeta.loader.LoadingOptions;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
@@ -77,7 +77,7 @@ public class IOPlugin extends Plugin {
 	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.io";
 	
 	// The logger for this plugin
-	final static public Log internalLog = LogConfigurationHelper.getLogger("IO");
+	final static public Logger internalLog = LoggerFactory.getLogger("IO");
 
 	// The shared instance
 	private static IOPlugin plugin;

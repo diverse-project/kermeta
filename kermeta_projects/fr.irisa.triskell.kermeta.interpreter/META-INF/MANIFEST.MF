@@ -17,8 +17,7 @@ Require-Bundle: fr.irisa.triskell.kermeta.model,
  org.eclipse.gymnast.runtime.core,
  fr.irisa.triskell.kermeta.io;visibility:=reexport,
  org.eclipse.debug.core,
- org.eclipse.emf.ecoretools.registration;bundle-version="[1.0.99,2.0.0)",
- org.kermeta.log4j.util
+ org.eclipse.emf.ecoretools.registration;bundle-version="[1.0.99,2.0.0)"
 Export-Package: fr.irisa.triskell.kermeta.builder,
  fr.irisa.triskell.kermeta.dev.interpreter,
  fr.irisa.triskell.kermeta.error,
@@ -45,4 +44,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: fr.irisa.triskell.traceability,
  fr.irisa.triskell.traceability.helper,
- junit.framework
+ junit.framework,
+ org.slf4j
