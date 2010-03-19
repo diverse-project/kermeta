@@ -5,12 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class CompilerProperties {
 	
-	public final static Log internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
+	public final static Logger internalLog = LoggerFactory.getLogger("KermetaCompiler");
 	
 	// Used in the *.compiler.properties file
 	public final static String PLUGIN_ID = "plugin_id";

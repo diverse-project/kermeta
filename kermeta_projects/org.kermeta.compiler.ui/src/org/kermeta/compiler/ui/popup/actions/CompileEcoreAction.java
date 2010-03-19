@@ -13,7 +13,6 @@ package org.kermeta.compiler.ui.popup.actions;
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -29,7 +28,8 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.Compiler;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This action is dedicated to launch the generation of the Java source code from the Ecore and Simk files
@@ -43,7 +43,7 @@ public class CompileEcoreAction implements IObjectActionDelegate {
 
 	protected IFile ecorefile;
 	
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
+	final static public Logger internalLog = LoggerFactory.getLogger("KermetaCompiler");
 
 	/**
 	 * Constructor for CompileEcoreAction.
