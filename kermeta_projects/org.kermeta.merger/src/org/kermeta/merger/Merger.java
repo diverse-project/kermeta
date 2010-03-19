@@ -34,6 +34,8 @@ import org.kermeta.merger.internal.Pass2;
 import org.kermeta.merger.internal.Pass3;
 import org.kermeta.merger.internal.Pass4;
 import org.kermeta.model.KermetaModelHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -53,6 +55,9 @@ import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 public class Merger {
+	
+	// Log4j logger for this plugin
+	final static public Logger internalLog = LoggerFactory.getLogger("Merger");
 	
 	private KermetaUnit kermetaUnit = null;
 	
@@ -148,6 +153,7 @@ public class Merger {
 	}
 	
 	public KermetaUnit processInMemory(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile, boolean trace) throws NotRegisteredURIException, URIMalformedException, IOException {
+		internalLog.debug("processInMemory " + outputFile);
 		IOPlugin.getDefault().unload(outputFile);
 		kermetaUnit = IOPlugin.getDefault().basicGetKermetaUnit(outputFile);
 		Tag t = KermetaModelHelper.Tag.create(KermetaModelHelper.Tag.KERMETA_EXECUTABLE, "true");
@@ -179,12 +185,12 @@ public class Merger {
 		}
 		
 		try {
-			
 			/*
 			 * 
 			 * Structure creation
 			 * 
 			 */
+			internalLog.debug("processInMemory Pass1 " + outputFile);
 			Pass1 pass1 = new Pass1(kermetaUnit, context);
 			pass1.process();
 			
@@ -193,6 +199,7 @@ public class Merger {
 			 * Features creation
 			 * 
 			 */
+			internalLog.debug("processInMemory Pass2 " + outputFile);
 			Pass2 pass2 = new Pass2(kermetaUnit, context);
 			pass2.process();
 			
@@ -201,6 +208,7 @@ public class Merger {
 			 * Type setting
 			 * 
 			 */
+			internalLog.debug("processInMemory Pass3 " + outputFile);
 			Pass3 pass3 = new Pass3(kermetaUnit, context);
 			pass3.process();
 	
@@ -209,6 +217,7 @@ public class Merger {
 			 * Operations bodies creation
 			 * 
 			 */
+			internalLog.debug("processInMemory Pass4 " + outputFile);
 			Pass4 pass4 = new Pass4(kermetaUnit, context);
 			pass4.process();
 

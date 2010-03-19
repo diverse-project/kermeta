@@ -1,12 +1,12 @@
 package org.kermeta.merger;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -20,7 +20,7 @@ public class MergerPlugin extends Plugin {
 	private static MergerPlugin plugin;
 	
 	// Log4j logger for this plugin
-	final static public Log log4jLogger = LogConfigurationHelper.getLogger("MergerPlugin");	
+	final static public Logger log4jLogger = LoggerFactory.getLogger("MergerPlugin");	
 
 	
 	/**
