@@ -16,15 +16,15 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.texteditor.KermetaEditorEventListener;
 import org.kermeta.texteditor.ModelcheckingStrategy;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * The main plugin class to be used in the desktop.
@@ -41,7 +41,7 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	final static public String KMT_PARTITIONING = "_KMT_PARTITIONING_";
 
 	// Log4j logger for this plugin
-	final static public Log internalLog = LogConfigurationHelper.getLogger("TexteditorPlugin");
+	final static public Logger internalLog = LoggerFactory.getLogger("TexteditorPlugin");
 	
 	// Resource bundle.
 	private ResourceBundle resourceBundle;
@@ -71,7 +71,7 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	 */
 	public Set<KermetaEditorEventListener> kermetaEditorEventListeners = new HashSet <KermetaEditorEventListener> (); 
 	
-	final static public Log pluginLog = LogConfigurationHelper.getLogger("KermetaEditor");
+	final static public Logger pluginLog = LoggerFactory.getLogger("KermetaEditor");
 	
 	/**
 	 * The constructor.

@@ -11,9 +11,10 @@ package fr.irisa.triskell.kermeta.visitor;
 import java.lang.reflect.*;
 import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
-import org.apache.commons.logging.Log;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * @author Franck Fleurey
@@ -22,7 +23,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public class KermetaVisitor {
 
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KMT.model");
+	final static public Logger internalLog = LoggerFactory.getLogger("KMT.model");
 			// This is a generic visit method.
 			public Object genericVisitChildren(EObject node) {
 				Object result = null;

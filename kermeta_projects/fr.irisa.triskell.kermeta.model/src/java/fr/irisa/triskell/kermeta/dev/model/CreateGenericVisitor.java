@@ -124,8 +124,8 @@ public class CreateGenericVisitor {
 			classTemplate += "import java.util.Iterator;\n";
 			classTemplate += "import org.eclipse.emf.ecore.EObject;\n";
 			classTemplate += "import fr.irisa.triskell.kermeta.error.KermetaVisitorError;\n";
-			classTemplate += "import org.apache.commons.logging.Log;\n";
-			classTemplate += "import org.kermeta.log4j.util.LogConfigurationHelper;\n";
+			classTemplate += "import org.slf4j.Logger;\n";
+			classTemplate += "import org.slf4j.LoggerFactory;\n";
 			classTemplate += "\n";
 			classTemplate += "/**\n";
 			classTemplate += " * @author Franck Fleurey\n";
@@ -134,7 +134,7 @@ public class CreateGenericVisitor {
 			classTemplate += " */\n";
 			classTemplate += "public class XclassNameX {\n";
 			classTemplate += "\n";
-			classTemplate += "	final static public Log internalLog = LogConfigurationHelper.getLogger(\"KMT.model\");\n";
+			classTemplate += "	final static public Logger internalLog = LoggerFactory.getLogger(\"KMT.model\");\n";
 			classTemplate +="			// This is a generic visit method.\n";
 			classTemplate +="			public Object genericVisitChildren(EObject node) {\n";
 			classTemplate +="				Object result = null;\n";

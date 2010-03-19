@@ -4,17 +4,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Hashtable;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.ui.provider.TreeContentProvider;
 import fr.irisa.triskell.kermeta.ui.provider.TreeViewerLabelProvider;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -28,7 +28,7 @@ public class KermetaUIPlugin extends AbstractUIPlugin {
 	
 
 	// Log4j logger for this plugin
-	final static public Log log4jLogger = LogConfigurationHelper.getLogger("KermetaUIPlugin");
+	final static public Logger log4jLogger = LoggerFactory.getLogger("KermetaUIPlugin");
 	
 	// The shared instance
 	private static KermetaUIPlugin plugin;
