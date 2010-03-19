@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EclipseEnabled Slf4j UI
+Bundle-SymbolicName: org.kermeta.slf4j.eclipse.ui;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.kermeta.slf4j.eclipse.ui.Activator
+Bundle-Vendor: IRISA/INRIA
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.osgi.framework;version="1.3.0"
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.kermeta.slf4j.eclipse
+Export-Package: org.kermeta.slf4j.eclipse.preferences,
+ org.kermeta.slf4j.eclipse.ui

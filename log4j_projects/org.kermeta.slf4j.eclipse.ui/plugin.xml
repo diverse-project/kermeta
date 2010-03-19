@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.kermeta.slf4j.eclipse.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="fr.irisa.triskell.kermeta.ui.preferences.KermetaPreferencePage"
+            class="org.kermeta.slf4j.eclipse.preferences.LoggingPreferencePage"
+            id="org.kermeta.slf4j.eclipse.preferences.LoggingPreferencePage"
+            name="Logging Preferences">
+      </page>
+   </extension>
+
+</plugin>
