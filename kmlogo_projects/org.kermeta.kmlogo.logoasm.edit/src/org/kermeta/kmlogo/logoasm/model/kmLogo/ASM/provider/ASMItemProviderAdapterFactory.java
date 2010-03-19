@@ -628,6 +628,29 @@ public class ASMItemProviderAdapterFactory extends ASMAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.LogoProgram} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LogoProgramItemProvider logoProgramItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.LogoProgram}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLogoProgramAdapter() {
+		if (logoProgramItemProvider == null) {
+			logoProgramItemProvider = new LogoProgramItemProvider(this);
+		}
+
+		return logoProgramItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -750,6 +773,7 @@ public class ASMItemProviderAdapterFactory extends ASMAdapterFactory implements 
 		if (equalsItemProvider != null) equalsItemProvider.dispose();
 		if (greaterItemProvider != null) greaterItemProvider.dispose();
 		if (lowerItemProvider != null) lowerItemProvider.dispose();
+		if (logoProgramItemProvider != null) logoProgramItemProvider.dispose();
 	}
 
 }
