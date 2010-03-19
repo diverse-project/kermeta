@@ -8,11 +8,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
  fr.irisa.triskell.kermeta.interpreter,
- org.kermeta.log4j.util,
  org.kermeta.kmlogo.logoasm.model,
  org.kermeta.kmlogo.logoasm.edit,
  org.kermeta.kmlogo.logoasm.srcKermeta,
- org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo;bundle-version="1.0.0"
+ org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.kermeta.kmlogo.logoasm.ui,
@@ -20,3 +19,5 @@ Export-Package: org.kermeta.kmlogo.logoasm.ui,
  org.kermeta.kmlogo.logoasm.ui.tools.wizards
 Bundle-Vendor: IRISA/INRIA
 Bundle-ClassPath: .
+Import-Package: org.slf4j
+
