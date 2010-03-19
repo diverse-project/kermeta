@@ -84,6 +84,7 @@ public class ASMFactoryImpl extends EFactoryImpl implements ASMFactory {
 			case ASMPackage.EQUALS: return createEquals();
 			case ASMPackage.GREATER: return createGreater();
 			case ASMPackage.LOWER: return createLower();
+			case ASMPackage.LOGO_PROGRAM: return createLogoProgram();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -327,6 +328,16 @@ public class ASMFactoryImpl extends EFactoryImpl implements ASMFactory {
 	public Lower createLower() {
 		LowerImpl lower = new LowerImpl();
 		return lower;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LogoProgram createLogoProgram() {
+		LogoProgramImpl logoProgram = new LogoProgramImpl();
+		return logoProgram;
 	}
 
 	/**

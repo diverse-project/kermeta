@@ -935,6 +935,35 @@ public interface ASMPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl.LogoProgramImpl <em>Logo Program</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl.LogoProgramImpl
+	 * @see org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl.ASMPackageImpl#getLogoProgram()
+	 * @generated
+	 */
+	int LOGO_PROGRAM = 28;
+
+	/**
+	 * The feature id for the '<em><b>Instructions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGO_PROGRAM__INSTRUCTIONS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Logo Program</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGO_PROGRAM_FEATURE_COUNT = 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Instruction <em>Instruction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1446,6 +1475,27 @@ public interface ASMPackage extends EPackage {
 	EClass getLower();
 
 	/**
+	 * Returns the meta object for class '{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.LogoProgram <em>Logo Program</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Logo Program</em>'.
+	 * @see org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.LogoProgram
+	 * @generated
+	 */
+	EClass getLogoProgram();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.LogoProgram#getInstructions <em>Instructions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Instructions</em>'.
+	 * @see org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.LogoProgram#getInstructions()
+	 * @see #getLogoProgram()
+	 * @generated
+	 */
+	EReference getLogoProgram_Instructions();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1914,6 +1964,24 @@ public interface ASMPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LOWER = eINSTANCE.getLower();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl.LogoProgramImpl <em>Logo Program</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl.LogoProgramImpl
+		 * @see org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl.ASMPackageImpl#getLogoProgram()
+		 * @generated
+		 */
+		EClass LOGO_PROGRAM = eINSTANCE.getLogoProgram();
+
+		/**
+		 * The meta object literal for the '<em><b>Instructions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOGO_PROGRAM__INSTRUCTIONS = eINSTANCE.getLogoProgram_Instructions();
 
 	}
 

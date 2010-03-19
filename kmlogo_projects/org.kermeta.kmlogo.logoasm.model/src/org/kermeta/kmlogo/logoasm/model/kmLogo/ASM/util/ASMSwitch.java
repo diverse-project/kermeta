@@ -309,6 +309,12 @@ public class ASMSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ASMPackage.LOGO_PROGRAM: {
+				LogoProgram logoProgram = (LogoProgram)theEObject;
+				T result = caseLogoProgram(logoProgram);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -730,6 +736,21 @@ public class ASMSwitch<T> {
 	 * @generated
 	 */
 	public T caseLower(Lower object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Logo Program</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Logo Program</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLogoProgram(LogoProgram object) {
 		return null;
 	}
 

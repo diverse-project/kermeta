@@ -242,6 +242,15 @@ public interface ASMFactory extends EFactory {
 	Lower createLower();
 
 	/**
+	 * Returns a new object of class '<em>Logo Program</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Logo Program</em>'.
+	 * @generated
+	 */
+	LogoProgram createLogoProgram();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

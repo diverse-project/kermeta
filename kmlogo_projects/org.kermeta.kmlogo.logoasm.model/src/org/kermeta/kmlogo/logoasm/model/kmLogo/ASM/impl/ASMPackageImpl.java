@@ -29,6 +29,7 @@ import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Greater;
 import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.If;
 import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Instruction;
 import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Left;
+import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.LogoProgram;
 import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Lower;
 import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Minus;
 import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Mult;
@@ -250,6 +251,13 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 	 * @generated
 	 */
 	private EClass lowerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass logoProgramEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -763,6 +771,24 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getLogoProgram() {
+		return logoProgramEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLogoProgram_Instructions() {
+		return (EReference)logoProgramEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ASMFactory getASMFactory() {
 		return (ASMFactory)getEFactoryInstance();
 	}
@@ -862,6 +888,9 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 		greaterEClass = createEClass(GREATER);
 
 		lowerEClass = createEClass(LOWER);
+
+		logoProgramEClass = createEClass(LOGO_PROGRAM);
+		createEReference(logoProgramEClass, LOGO_PROGRAM__INSTRUCTIONS);
 	}
 
 	/**
@@ -999,6 +1028,9 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 		initEClass(greaterEClass, Greater.class, "Greater", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(lowerEClass, Lower.class, "Lower", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(logoProgramEClass, LogoProgram.class, "LogoProgram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLogoProgram_Instructions(), this.getInstruction(), null, "instructions", null, 0, -1, LogoProgram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } //ASMPackageImpl
