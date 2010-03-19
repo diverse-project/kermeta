@@ -37,7 +37,6 @@ public class LogoBracketInformationProvider {
 	public java.util.Collection<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoBracketPair> getBracketPairs() {
 		java.util.Collection<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoBracketPair> result = new java.util.ArrayList<org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ILogoBracketPair>();
 		result.add(new BracketPair("(", ")", true));
-		result.add(new BracketPair("{", "}", true));
 		result.add(new BracketPair("[", "]", true));
 		return result;
 	}

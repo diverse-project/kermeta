@@ -10,6 +10,7 @@ public class LogoSyntaxCoverageInformationProvider {
 	
 	public org.eclipse.emf.ecore.EClass[] getClassesWithSyntax() {
 		return new org.eclipse.emf.ecore.EClass[] {
+			org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getLogoProgram(),
 			org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getBack(),
 			org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getForward(),
 			org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getLeft(),
@@ -39,7 +40,7 @@ public class LogoSyntaxCoverageInformationProvider {
 	
 	public org.eclipse.emf.ecore.EClass[] getStartSymbols() {
 		return new org.eclipse.emf.ecore.EClass[] {
-			org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getBlock(),
+			org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getLogoProgram(),
 		};
 	}
 	

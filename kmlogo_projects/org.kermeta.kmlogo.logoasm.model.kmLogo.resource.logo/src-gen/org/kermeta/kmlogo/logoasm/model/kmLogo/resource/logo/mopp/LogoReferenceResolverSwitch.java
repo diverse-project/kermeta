@@ -30,15 +30,17 @@ public class LogoReferenceResolverSwitch implements org.kermeta.kmlogo.logoasm.m
 		}
 		if (org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getProcCall().isInstance(container)) {
 			LogoFuzzyResolveResult<org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration> frr = new LogoFuzzyResolveResult<org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration>(result);
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(reference.getName());
-			if (feature instanceof org.eclipse.emf.ecore.EReference) {
+			java.lang.String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("declaration")) {
 				procCallDeclarationReferenceResolver.resolve(identifier, (org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcCall) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
 		if (org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getParameterCall().isInstance(container)) {
 			LogoFuzzyResolveResult<org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Parameter> frr = new LogoFuzzyResolveResult<org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Parameter>(result);
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(reference.getName());
-			if (feature instanceof org.eclipse.emf.ecore.EReference) {
+			java.lang.String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("parameter")) {
 				parameterCallParameterReferenceResolver.resolve(identifier, (org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ParameterCall) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}

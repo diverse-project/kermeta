@@ -8,7 +8,7 @@ public class LogoNewFileContentProvider {
 	
 	public java.lang.String getNewFileContent(java.lang.String newFileName) {
 		return getExampleContent(new org.eclipse.emf.ecore.EClass[] {
-			org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getBlock(),
+			org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.eINSTANCE.getLogoProgram(),
 		}, getMetaInformation().getClassesWithSyntax(), newFileName);
 	}
 	
