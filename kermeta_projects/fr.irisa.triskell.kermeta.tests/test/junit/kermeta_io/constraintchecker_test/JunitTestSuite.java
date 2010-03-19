@@ -43,14 +43,14 @@ public class JunitTestSuite extends TestCase {
 	
 
 	public JunitTestSuite(String arg0) {
-		super(arg0);	
+		super(arg0);
 		initialize();
 	}
 	
 	private void initialize() {
 
 		if ( ioPlugin == null ) {
-		
+			org.kermeta.slf4j.eclipse.Activator.getDefault().configureLog4JLogger("../org.kermeta.slf4j.eclipse/kermeta_log4j_configuration.xml");							
 			IOPlugin.LOCAL_USE = true;
 			ioPlugin = IOPlugin.getDefault();
 		

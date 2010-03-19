@@ -13,14 +13,14 @@ package kermeta_interpreter.constraint_test;
 
 import junit.framework.TestSuite;
 
-import org.apache.commons.logging.Log;
 import org.kermeta.io.plugin.IOPlugin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.launcher.AbstractRunJunitFactory;
 import fr.irisa.triskell.kermeta.launcher.InterpretedRunJunitFactory;
 import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * Interpreter test suite dedicated to model load and save using EMF.
@@ -28,17 +28,17 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public class JunitTestSuite extends TestSuite {
 
-	final static public Log internalLog = LogConfigurationHelper.getLogger("JunitTestSuite");
+	final static public Logger internalLog = LoggerFactory.getLogger("JunitTestSuite");
     AbstractRunJunitFactory runfactory = new InterpretedRunJunitFactory();
     
     static private IOPlugin ioPlugin;
 
     private void initialize() {
-    	System.setProperty(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
+    /*	System.setProperty(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
     	"../fr.irisa.triskell.kermeta.model/kermeta_log4j_configuration.xml");
     	// reload conf in case iwas loaded befaore with another configuration
     	org.kermeta.log4j.util.LogConfigurationHelper.configureLog4JLogger(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName);
-    	
+    */	
     	if ( ioPlugin == null ) {
 		
     		IOPlugin.LOCAL_USE = true;

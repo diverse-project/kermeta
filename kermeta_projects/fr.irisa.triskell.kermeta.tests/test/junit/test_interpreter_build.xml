@@ -29,7 +29,7 @@
 	<property name="kermeta.t.class" location="..\..\build\class" />
 	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\${dot.or.buildclass}" />
 	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\${dot.or.buildclass}" />
-	<property name="kermeta.io.loader.jar" location="..\..\..\org.kermeta.io.loader\${dot.or.bin}" />
+	<!-- <property name="kermeta.io.loader.jar" location="..\..\..\org.kermeta.io.loader\${dot.or.bin}" /> -->
 	<property name="kermeta.interest.jar" location="..\..\..\org.kermeta.interest\${dot.or.bin}" />
 	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta.interpreter\${dot.or.buildclass}" />
 	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\${dot.or.bin}" />
@@ -76,7 +76,7 @@
 		<pathelement location="${kermeta.model.jar}" />
 		<pathelement location="${kermeta.interpreter.jar}" />
 		<pathelement location="${kermeta.io.jar}" />
-		<pathelement location="${kermeta.io.loader.jar}" />
+		<!-- <pathelement location="${kermeta.io.loader.jar}" /> -->
 		<pathelement location="${kermeta.merger.jar}" />
 		<pathelement location="${kermeta.interest.jar}" />
 		<pathelement location="${kermeta.model.jar}" />

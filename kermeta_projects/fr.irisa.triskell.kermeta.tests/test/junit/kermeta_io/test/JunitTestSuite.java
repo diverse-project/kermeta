@@ -48,9 +48,12 @@ public class JunitTestSuite extends TestCase {
 	
 	public JunitTestSuite(String arg0) {
 		super(arg0);
+		org.kermeta.slf4j.eclipse.Activator.getDefault().configureLog4JLogger("../org.kermeta.slf4j.eclipse/kermeta_log4j_configuration.xml");
 		initialize();
-		System.setProperty(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
-		        "../fr.irisa.triskell.kermeta.texteditor/kermeta_log4j_configuration.xml");
+		/* System.setProperty("log4j.configuration",
+		        "file:/C:/eclipse3.5_dev/eclipse/workspace_head/org.kermeta.slf4j.eclipse/kermeta_log4j_configuration.xml");
+		 */
+		
 	}
 	
 	private void initialize() {

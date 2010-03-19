@@ -20,11 +20,11 @@ package fr.irisa.triskell.kermeta.launcher;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
 import org.kermeta.interpreter.api.Interpreter;
 import org.kermeta.interpreter.api.InterpreterMode;
 import org.kermeta.interpreter.api.InterpreterOptions;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
@@ -36,7 +36,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 public class InterpretedRunTestCase extends AbstractRunTestCase {
 
     /** Logger to get the error of this launcher */
-    final static public Log internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
+    final static public Logger internalLog = LoggerFactory.getLogger("KMT.launcher");
     
     protected Interpreter interpreter = null;
     

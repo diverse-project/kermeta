@@ -14,10 +14,10 @@ package kermeta_interpreter.test;
 
 import junit.framework.TestSuite;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.launcher.InterpretedRunJunitFactory;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
@@ -31,7 +31,7 @@ import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
  */
 public class JunitTestSuite extends TestSuite {
 
-	final static public Log internalLog = LogConfigurationHelper.getLogger("JunitTestSuite");
+	final static public Logger internalLog = LoggerFactory.getLogger("JunitTestSuite");
     
     static private IOPlugin ioPlugin;
     
@@ -48,11 +48,11 @@ public class JunitTestSuite extends TestSuite {
 														.getCodeSource().getLocation().toExternalForm();
     	modelPluginPath = modelPluginPath.replace("build/class/", "");
     	modelPluginPath = modelPluginPath.replace("file:/", ""); // remove leading protocol that isn't supported by LogConfigurationHelper
-    	System.setProperty(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
+    /*	System.setProperty(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
     			modelPluginPath + "kermeta_log4j_configuration.xml");
     	// reload conf in case it was loaded before with another configuration
     	org.kermeta.log4j.util.LogConfigurationHelper.configureLog4JLogger(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName);
-    	
+    	*/
     	
     	// initialize URIMAP
     	// platform:/plugin is were plugin IO lives

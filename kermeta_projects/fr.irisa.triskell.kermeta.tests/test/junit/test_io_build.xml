@@ -28,7 +28,7 @@
 	<property name="kermeta.test.class" location="${build.bin}"/>
 	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\${dot.or.buildclass}"/>
 	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\${dot.or.buildclass}" />
-	<property name="kermeta.io.loader.jar" location="..\..\..\org.kermeta.io.loader\${dot.or.bin}" />
+	<!-- <property name="kermeta.io.loader.jar" location="..\..\..\org.kermeta.io.loader\${dot.or.bin}" /> -->
 	<property name="kermeta.merger.jar" location="..\..\..\org.kermeta.merger\${dot.or.bin}" />
 	<property name="kermeta.log4j.util.jar" location="..\..\..\org.kermeta.log4j.util\${dot.or.bin}" />
 	<property name="kermeta.interest.jar" location="..\..\..\org.kermeta.interest\${dot.or.bin}" />
@@ -71,7 +71,7 @@
 	<path id="io.class.path">
 	    <pathelement location="${kermeta.model.jar}"/>
 	    <pathelement location="${kermeta.io.jar}"/>
-		<pathelement location="${kermeta.io.loader.jar}" />
+		<!-- <pathelement location="${kermeta.io.loader.jar}" /> -->
 		<pathelement location="${kermeta.merger.jar}" />
 		<pathelement location="${kermeta.interest.jar}" />
 		<pathelement location="${kermeta.log4j.util.jar}" />

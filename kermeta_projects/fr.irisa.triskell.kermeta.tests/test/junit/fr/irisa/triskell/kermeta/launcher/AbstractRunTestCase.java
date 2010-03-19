@@ -13,8 +13,8 @@ package fr.irisa.triskell.kermeta.launcher;
 
 import junit.framework.TestCase;
 
-import org.apache.commons.logging.Log;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Launcher for Kermeta interpreter. It can be run from the command line or as a
@@ -23,7 +23,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
 public abstract class AbstractRunTestCase extends TestCase {
 
     /** Logger to get the error of this launcher */
-    final static public Log internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
+    final static public Logger internalLog = LoggerFactory.getLogger("KMT.launcher");
 
     protected String mainClassValue;
     protected String mainOperationValue;

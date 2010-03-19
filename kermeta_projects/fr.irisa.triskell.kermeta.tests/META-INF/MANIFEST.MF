@@ -18,9 +18,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.compare,
  org.eclipse.emf.compare.diff,
  org.eclipse.emf.compare.match,
- org.apache.commons.logging,
  org.eclipse.debug.core,
- org.kermeta.log4j.util
+ org.kermeta.slf4j.eclipse
 Export-Package: fr.irisa.triskell.kermeta.interpreter.test,
  fr.irisa.triskell.kermeta.launcher,
  fr.irisa.triskell.kermeta.tests.comparison,
@@ -39,3 +38,4 @@ Bundle-ClassPath: lib/thirdparty/junit.jar,
  .
 Bundle-Vendor: IRISA/INRIA
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.slf4j

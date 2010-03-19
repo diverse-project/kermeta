@@ -14,14 +14,14 @@ package fr.irisa.triskell.kermeta.interpreter.test;
 
 import junit.framework.TestCase;
 
-import org.apache.commons.logging.Log;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of the java part for an extern JavaCall from Kermeta.
@@ -37,7 +37,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
  */
 public class TestJavaCall extends TestCase{
     
-    final static public Log internalLog = LogConfigurationHelper.getLogger("test.JavaCall");
+    final static public Logger internalLog = LoggerFactory.getLogger("test.JavaCall");
 	
     static private int callCounter = 0;
     static private int lastCallCounter = 0;
