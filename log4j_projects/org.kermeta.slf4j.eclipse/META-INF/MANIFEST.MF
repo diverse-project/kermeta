@@ -12,6 +12,7 @@ Require-Bundle: org.eclipse.ui,
  org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.kermeta.slf4j.eclipse,
+ org.kermeta.slf4j.eclipse.preferences,
  org.slf4j;version="1.5.11",
  org.slf4j.helpers;version="1.5.11",
  org.slf4j.impl;version="1.5.11",
