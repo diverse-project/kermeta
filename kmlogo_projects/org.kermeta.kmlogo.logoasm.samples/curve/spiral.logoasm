@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
-  <instructions xsi:type="ASM:ProcDeclaration" name="spiral" procCall="//@instructions.0/@block/@instructions.0/@thenPart/@instructions.2 //@instructions.3">
+<ASM:LogoProgram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
+  <instructions xsi:type="ASM:ProcDeclaration" name="recursive_spiral" procCall="//@instructions.0/@block/@instructions.0/@thenPart/@instructions.2 //@instructions.3">
     <args name="size"/>
     <block>
       <instructions xsi:type="ASM:If">
@@ -27,7 +27,6 @@
         </thenPart>
         <elsePart/>
       </instructions>
-      <instructions xsi:type="ASM:Constant"/>
     </block>
   </instructions>
   <instructions xsi:type="ASM:Clear"/>
@@ -36,4 +35,4 @@
     <actualArgs xsi:type="ASM:Constant" integerValue="10"/>
   </instructions>
   <instructions xsi:type="ASM:PenUp"/>
-</ASM:Block>
+</ASM:LogoProgram>

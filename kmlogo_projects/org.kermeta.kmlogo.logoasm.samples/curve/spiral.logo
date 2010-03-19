@@ -1,8 +1,8 @@
 TO recursive_spiral :size 
 	IFELSE <(:size,30) [
 		FORWARD :size
-		RIGHT 15 
-		$recursive_spiral( /(*(:size,102),100) )
+		RIGHT 30 
+		$recursive_spiral( /(*(:size,110),100) )
 	]
 	[ ]
 END

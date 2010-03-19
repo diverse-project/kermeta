@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
+<ASM:LogoProgram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
   <instructions xsi:type="ASM:ProcDeclaration" name="lefthilbert" procCall="//@instructions.0/@block/@instructions.0/@thenPart/@instructions.4 //@instructions.0/@block/@instructions.0/@thenPart/@instructions.6 //@instructions.1/@block/@instructions.0/@thenPart/@instructions.1 //@instructions.1/@block/@instructions.0/@thenPart/@instructions.9 //@instructions.2/@block/@instructions.7">
     <args name="level"/>
     <args name="size"/>
@@ -174,4 +174,4 @@
     <actualArgs xsi:type="ASM:Constant" integerValue="5"/>
     <actualArgs xsi:type="ASM:Constant" integerValue="10"/>
   </instructions>
-</ASM:Block>
+</ASM:LogoProgram>

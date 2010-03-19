@@ -1,13 +1,15 @@
-<?xml version="1.0" encoding="ASCII"?>
-<ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://kmLogo.ecore/ASM">
-  <instructions xsi:type="ASM:ProcDeclaration" name="carre" procCall="//@instructions.3">
+<?xml version="1.0" encoding="UTF-8"?>
+<ASM:LogoProgram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
+  <instructions xsi:type="ASM:ProcDeclaration" name="carre">
     <args name="size"/>
     <block>
       <instructions xsi:type="ASM:Repeat">
         <condition xsi:type="ASM:Constant" integerValue="4"/>
         <block>
           <instructions xsi:type="ASM:Forward">
-            <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+            <steps xsi:type="ASM:ParameterCall">
+              <parameter href="carre.logo#EMFTEXT_INTERNAL_URI_FRAGMENT_0_size"/>
+            </steps>
           </instructions>
           <instructions xsi:type="ASM:Right">
             <angle xsi:type="ASM:Constant" integerValue="90"/>
@@ -18,8 +20,9 @@
   </instructions>
   <instructions xsi:type="ASM:Clear"/>
   <instructions xsi:type="ASM:PenDown"/>
-  <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
+  <instructions xsi:type="ASM:ProcCall">
     <actualArgs xsi:type="ASM:Constant" integerValue="50"/>
+    <declaration href="carre.logo#EMFTEXT_INTERNAL_URI_FRAGMENT_1_carre"/>
   </instructions>
   <instructions xsi:type="ASM:PenUp"/>
-</ASM:Block>
+</ASM:LogoProgram>
