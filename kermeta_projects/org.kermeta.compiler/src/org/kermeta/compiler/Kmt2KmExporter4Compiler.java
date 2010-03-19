@@ -14,13 +14,13 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.merger.Merger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -30,7 +30,7 @@ public class Kmt2KmExporter4Compiler {
 
 	protected IFile kermetafile;
 
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
+	final static public Logger internalLog = LoggerFactory.getLogger("KermetaCompiler");
 
 	/**
 	 * Constructor for CompileKermetaAction.

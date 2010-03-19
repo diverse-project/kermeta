@@ -16,17 +16,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 
 public class GenModelUtil {
 	
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
+	final static public Logger internalLog = LoggerFactory.getLogger("KermetaCompiler");
 
 	static public GenPackage getGenPackage(GenModel genModel, String uri) {
 		for ( GenPackage genPackage : genModel.getGenPackages() ) {

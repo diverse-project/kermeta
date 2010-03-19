@@ -26,9 +26,8 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.interpreter,
  org.kermeta.merger,
  org.kermeta.compiler.common,
- org.apache.commons.logging;bundle-version="1.0.4",
  org.kermeta.compiler.generator,
- org.kermeta.framework.compiler.directives,
- org.kermeta.log4j.util
+ org.kermeta.framework.compiler.directives
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.kermeta.compiler.CompilerPlugin
+Import-Package: org.slf4j
