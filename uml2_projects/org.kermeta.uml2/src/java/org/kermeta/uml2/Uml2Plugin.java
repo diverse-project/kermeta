@@ -1,12 +1,13 @@
 package org.kermeta.uml2;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.kermeta.KermetaIcons;
 import fr.irisa.triskell.kermeta.FileRegistry;
@@ -14,7 +15,6 @@ import fr.irisa.triskell.kermeta.plugin.CompatibilityChecker;
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
 
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 
 /**
@@ -30,7 +30,7 @@ public class Uml2Plugin extends AbstractUIPlugin {
 	//Icons "registry"
 	protected static KermetaIcons kermetaIcons;
 	// Logger for this plugin
-	protected static Log pluginLog;
+	protected static Logger pluginLog;
 	
 	private IOConsole console = null;
 	
@@ -79,9 +79,9 @@ public class Uml2Plugin extends AbstractUIPlugin {
 	/**	 
 	 * @return Logger : a log4j logger
 	 */
-	public static Log getLogger()
+	public static Logger getLogger()
 	{
-		if(pluginLog == null) pluginLog = LogConfigurationHelper.getLogger("Kermeta");
+		if(pluginLog == null) pluginLog = LoggerFactory.getLogger("Kermeta");
 		return pluginLog;
 	}
 	
