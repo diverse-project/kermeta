@@ -10,9 +10,9 @@
 
 package org.kermeta.compiler.tests;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.Plugin;
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CompilerTestsPlugin extends Plugin {
 
@@ -21,7 +21,7 @@ public class CompilerTestsPlugin extends Plugin {
 	public static final String PLUGIN_ID = "org.kermeta.compiler.tests";
 	
 	/** Logger to get the error of this interpreter */
-	final static public Log internalLog = LogConfigurationHelper.getLogger("compiler.tests");
+	final static public Logger internalLog = LoggerFactory.getLogger("compiler.tests");
 
 	public CompilerTestsPlugin() {
 		// TODO Auto-generated constructor stub

@@ -24,7 +24,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jdt.core,
  org.eclipse.debug.core,
  org.openembedd.tests,
- org.kermeta.log4j.util
+ org.kermeta.slf4j.eclipse;bundle-version="1.0.0"
 Export-Package: fr.irisa.triskell.kermeta.launcher,
  kermeta_compiler.test,
  org.kermeta.compiler.tests,
