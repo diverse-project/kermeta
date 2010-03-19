@@ -70,14 +70,21 @@ more  information on the Apache Software Foundation, please see
    </url>
 
    <plugin
-         id="org.kermeta.log4j.util"
+         id="org.apache.log4j"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.apache.log4j"
+         id="org.kermeta.slf4j.eclipse"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.slf4j.eclipse.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
