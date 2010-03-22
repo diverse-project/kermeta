@@ -39,6 +39,7 @@ public class CompileFramework {
 
     public static void main(String[] args) throws NotRegisteredURIException, URIMalformedException, IOException, ContextNotInitializedOnAFrameworkError {
 
+    	org.kermeta.slf4j.eclipse.Activator.getDefault().configureLog4JLogger("../org.kermeta.slf4j.eclipse/kermeta_log4j_configuration.xml");
     	IOPlugin.LOCAL_USE = true;
     	IOPlugin.FRAMEWORK_GENERATION = true;
     	//IOPlugin.setFrameworkGeneration(true);
@@ -125,8 +126,10 @@ public class CompileFramework {
   //      	System.out.println("DONE");
 
         	System.out.println("SAVING IN ECORE...");
+        	mergedUnit.setFramework(true);
+        	mergedUnit.setUri("platform:/resource/fr.irisa.triskell.kermeta.framework/dist/framework.km");
         	EcoreExporter exporter2 = new EcoreExporter();
-        	exporter2.export(mergedUnit, dist_folder, ExporterOptions.getDefault());
+        	exporter2.export(mergedUnit, dist_folder, IOPlugin.getFrameWorkURI(), ExporterOptions.getDefault());
         	System.out.println("DONE");
         }
     }
