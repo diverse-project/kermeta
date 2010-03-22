@@ -1,0 +1,189 @@
+/*
+ * Creation : March 11, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+@mainClass "kermeta::ki::visual::Visual"
+@mainOperation "main"
+
+package kermeta::ki::visual;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/pruning/Pruner.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/VisitableKermeta.km"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/dispatcher/Dispatcher.kmt"
+
+using kermeta
+using kermeta::ki::malai::undo
+using kermeta::ki::malai::action
+using kermeta::standard
+using kermeta::ki::malai::interaction::event
+using kermeta::persistence
+using kermeta::language::structure
+using kermeta::language::behavior
+using kermeta::ki::malai::dispatcher
+
+
+class Visual
+{
+	operation main() : Void is do
+		var undoCollector  : UndoCollector   init UndoCollector.new 
+		var actionRegistry : ActionRegistry  init ActionRegistry.new
+		var aui			   : MetamodelCanvas init MetamodelCanvas.new
+		var eventManager   : EventManager    init EventManager.new
+		var dispatcher     : ListDispatcher  init ListDispatcher.new
+		var pruner		   : Pruner			 init Pruner.new
+		
+		undoCollector.initialise
+		actionRegistry.initialise(undoCollector)
+		actionRegistry.handlers.add(aui)
+		dispatcher.initialise
+		eventManager.initialise(dispatcher)
+		dispatcher.processes.add(eventManager)
+//		aui.loadMetamodel("/examples/example1.km")
+		aui.loadMetamodel("/examples/Ecore.km")
+		aui.initialise(eventManager)
+		var temp : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
+		
+		temp.modelingUnit := aui.metamodel
+		aui.metamodel.accept(temp)
+		extern org::kermeta::ki::visual::MetamodelVizuFrame.organise(aui)
+		
+		pruner.initialise(actionRegistry)
+		pruner.metamodel := aui.metamodel
+		pruner.initialiseLinks(eventManager)
+		pruner.activated := true
+		
+		aui.setVisible(true)
+		
+		aui.refreshView
+		dispatcher.run
+	end
+	
+		operation loadMetamodel(muURI: String) : ModelingUnit is do
+		var rep : EMFRepository init EMFRepository.new
+		var res : EMFResource
+		res ?= rep.getResource(muURI)
+		result ?= res.one
+	end
+}
+
+
+
+
+class MetamodelCanvas inherits ActionHandler {
+	attribute metamodel : ModelingUnit 
+
+
+	
+	operation initialise(eventManager : EventManager) : Void is do
+		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, eventManager)
+	end
+
+
+	operation loadMetamodel(muURI: String) : Void is do
+		var rep : EMFRepository init EMFRepository.new
+		var res : EMFResource
+		res ?= rep.getResource(muURI)
+		metamodel ?= res.one
+	end
+
+	
+	
+	operation setVisible(visible : Boolean) : Void is do
+		extern org::kermeta::ki::visual::MetamodelVizuFrame.setVisible(self, visible)
+	end
+	
+	
+	operation refreshView() : Void is do
+		extern org::kermeta::ki::visual::MetamodelVizuFrame.refreshView(self)
+	end
+	
+	
+	
+	method onActionAdded(action : Action) : Void is do
+		refreshView
+	end
+	
+	method onActionAborted(action : Action) : Void is do
+		refreshView
+	end 
+	
+	method onActionCancelled(action : Action) : Void is do
+		refreshView
+	end 
+	
+	method onActionExecuted(action : Action) : Void is do
+		refreshView
+	end 
+}
+
+
+
+class Metamodel2ViewVisitor inherits KermetaVisitor {
+	attribute firstPass : Boolean
+	
+	reference modelingUnit : ModelingUnit
+
+	reference classes : ClassDefinition[0..*]
+	
+	reference links : Property[0..*]
+	
+
+	method visitModelingUnit(mu: ModelingUnit): Void is do
+		firstPass := true
+		mu.packages.each{p | p.accept(self) }
+		firstPass := false
+		mu.packages.each{p | p.accept(self) }
+	end
+	
+	
+	method visitPackage(p: Package) : Void is do
+		p.nestedPackage.each{p | p.accept(self)}
+		p.ownedTypeDefinition.each{td | td.accept(self)}
+	end
+	
+	
+	method visitOperation(o: Operation) : Void is do
+	end	
+
+
+	
+	method visitProperty(p: Property): Void is do
+		if(p.type.isInstanceOf(Class)) then
+			var cd : ClassDefinition init p.type.asType(Class).classDefinition
+			
+			if(classes.contains(cd)) then
+				extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(modelingUnit, p, p.isComposite, p.owningClass, cd, -1)
+			end
+			links.add(p)			
+		end
+	end
+	
+	
+	
+	method visitClassDefinition(c: ClassDefinition) : Void is do
+		if(firstPass) then
+			classes.add(c)
+			extern org::kermeta::ki::visual::view::MetamodelView.onEntityAdded(modelingUnit, c, c.isAspect, -1)
+			c.entity2ViewMapping
+		else
+			c.ownedAttribute.each{p | p.accept(self)}
+			c.ownedOperation.each{o | o.accept(self)}
+			
+			c.superType.each{t |
+				if(t.isInstanceOf(Class)) then
+					var cd : ClassDefinition init t.asType(Class).classDefinition
+					
+					if(classes.contains(cd)) then
+						extern org::kermeta::ki::visual::view::MetamodelView.onInheritanceAdded(modelingUnit, c, cd, -1)
+					end
+				end
+			}
+		end
+	end
+}

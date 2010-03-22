@@ -1,0 +1,42 @@
+/* $Id:$ 
+ * Creation : March 26, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            sagarsen
+ */
+package kermeta::language::structure;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+
+using kermeta::language::structure
+
+aspect class Property
+{
+	//Determine if a property is constrained
+	operation  isConstrained():Boolean is do
+		//result:=true
+		//For the moment
+		result:=false
+	end
+	//Determine if used in a transformation
+	
+	operation isTransformed():Boolean is do
+		//result:=true
+		//For the moment
+		result:=false
+	end
+}
+
+aspect class ClassDefinition
+{
+	//Determine if class is used in an invariant
+	operation isConstrained():Boolean is do
+		//result:=true
+		//For the moment
+		result:=false
+	end
+}

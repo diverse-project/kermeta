@@ -1,0 +1,105 @@
+/*
+ * Creation : March 16, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin 
+ */
+package kermeta::language::structure;
+
+//require "platform:/resource/org.kermeta.static_analysis/src/kermeta/visitor/EnhancedKermeta.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
+require kermeta
+
+
+using kermeta::standard
+using kermeta::ki::malai::picking
+
+
+aspect class ClassDefinition inherits Pickable {
+	operation entity2ViewMapping() : Void is do
+		extern org::kermeta::ki::visual::view::EntityView.name2name(self, self.name)
+		extern org::kermeta::ki::visual::view::EntityView.setVisible(self, true)
+	end
+	
+	
+	method contains(px : Real, py : Real) : Boolean is do
+		result ?= extern org::kermeta::ki::visual::view::EntityView.contains(self, px, py)
+	end
+	
+	
+	operation setVisible(visible : Boolean) : Void is do
+		extern org::kermeta::ki::visual::view::EntityView.setVisible(self, visible)
+	end
+}
+
+
+aspect class ModelingUnit inherits Picker {
+	operation setVisibleAll() : Void is do
+		packages.each{p | 
+			p.allNestedClassDefinitions.each{cd | cd.setVisible(true)}}
+	end
+
+
+	method getPickableAt(px : Real, py : Real) : Pickable is do
+		var pickable : Pickable
+
+		packages.exists{p |
+			result := p.allNestedClassDefinitions.detect{cd | cd.contains(px, py) }
+			not result.isVoid
+		}
+	end
+}
+
+
+
+aspect class Package
+{
+
+	property readonly allNestedPackages: set Package [0..*]
+		getter is do
+			result := Set<Package>.new
+			result.add(self)
+			nestedPackage.each{p | result.addAll(p.allNestedPackages)} 
+		end
+
+	property readonly allNestedClassDefinitions: set ClassDefinition [0..*]
+		getter is do
+			result := Set<ClassDefinition>.new
+			ownedTypeDefinition.select{td | td.isInstanceOf(ClassDefinition)}.each{cd | result.add(cd.asType(ClassDefinition))}
+			nestedPackage.each{p | result.addAll(p.allNestedClassDefinitions)} 
+		end
+		
+	property readonly allNestedAttributes: set Property [0..*]
+		getter is do
+			result := Set<Property>.new
+			allNestedClassDefinitions.each{cd | result.addAll(cd.ownedAttribute)}
+		end
+		
+	property readonly numberOfPackages: Integer
+		getter is do
+			result := 1
+			nestedPackage.each{p | result := result + p.numberOfPackages}
+		end
+			
+	property readonly numberOfClasses: Integer
+		getter is do
+			result := ownedTypeDefinition.select{td | td.isInstanceOf(ClassDefinition)}.size
+			nestedPackage.each{p | result := result + p.numberOfClasses}
+		end
+		/*
+	property readonly numberOfAttributes: Integer
+		getter is do
+			result := 0
+			ownedTypeDefinition.select{td | td.isInstanceOf(ClassDefinition)}.each{c | result := result + c.asType(ClassDefinition).numberOfAttributes}
+			nestedPackage.each{p | result := result + p.numberOfAttributes}
+		end*/
+}
+
+
+aspect class Operation {
+}
+
+
+aspect class Property {
+}
+

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <packages name="ecore" uri="http://www.eclipse.org/emf/2002/Ecore">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EClass"
+        superType="#//@packages.0/EClass/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EClassifier"/>
+      <ownedAttribute name="eOperations" type="#//@packages.0/EClass/eOperations/@containedType.0"
+          isOrdered="true" upper="-1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EOperation"/>
+      </ownedAttribute>
+      <ownedAttribute name="eGenericSuperTypes" type="#//@packages.0/EClass/eGenericSuperTypes/@containedType.0"
+          isOrdered="true" upper="-1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EGenericType"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EClassifier"
+        isAbstract="true" superType="#//@packages.0/EClassifier/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="ePackage" type="#//@packages.0/EClassifier/ePackage/@containedType.0"
+          isOrdered="true" upper="1" isReadOnly="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EPackage"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EOperation"
+        superType="#//@packages.0/EOperation/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/ETypedElement"/>
+      <ownedAttribute name="eContainingClass" type="#//@packages.0/EOperation/eContainingClass/@containedType.0"
+          isOrdered="true" upper="1" isReadOnly="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EClass"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EPackage"
+        superType="#//@packages.0/EPackage/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="eClassifiers" type="#//@packages.0/EPackage/eClassifiers/@containedType.0"
+          isOrdered="true" upper="-1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EClassifier"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ETypedElement"
+        isAbstract="true" superType="#//@packages.0/ETypedElement/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="eType" type="#//@packages.0/ETypedElement/eType/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EClassifier"/>
+      </ownedAttribute>
+      <ownedAttribute name="eGenericType" type="#//@packages.0/ETypedElement/eGenericType/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EGenericType"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EGenericType"
+        superType="#//@packages.0/EGenericType/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="eClassifier" type="#//@packages.0/EGenericType/eClassifier/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/EClassifier"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="ecore"/>
+</kermeta_language_structure:ModelingUnit>

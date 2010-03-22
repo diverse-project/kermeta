@@ -1,0 +1,98 @@
+/*
+ * Creation : February 17, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+
+package kermeta::ki::visual;
+
+
+require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/pruning/algorithm/metamodelPruner.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+
+
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::ki::malai::action
+
+
+
+class ActionReinitView inherits Action {
+	reference metamodel : ModelingUnit
+	
+	
+	method doActionBody() : Void is do
+		metamodel.setVisibleAll()
+	end
+	
+	
+	
+	method hadEffect() : Boolean is do
+		result := isDone
+	end
+	
+	
+	method canDo() : Boolean is do
+		result := not metamodel.isVoid
+	end
+	
+	
+	method cancelledBy(action : Class) : Boolean is do
+		result := false
+	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := true
+	end
+}
+
+
+
+
+
+class ActionPrune inherits Action {
+	reference selection : ClassDefinition
+	
+	reference metamodel : ModelingUnit
+	
+	
+	
+	method doActionBody() : Void is do
+		var pruningOp  : MetamodelPruner init MetamodelPruner.new
+		var reqClasses : Bag<RequiredClass> init Bag<RequiredClass>.new
+		var reqClass   : RequiredClass init RequiredClass.new
+		
+		reqClass.name := selection.name
+		reqClasses.add(reqClass)
+		pruningOp.inputKermetaMetamodel := metamodel
+		
+		pruningOp.initialize(reqClasses, Bag<RequiredProperty>.new, Bag<RequiredEnumeration>.new, 3)
+		
+		if pruningOp.preprocess then
+			pruningOp.transform
+		end
+	end
+	
+	
+	method hadEffect() : Boolean is do
+		result := isDone
+	end
+	
+	
+	method canDo() : Boolean is do
+		result := not metamodel.isVoid and not selection.isVoid
+	end
+	
+	
+	method cancelledBy(action : Class) : Boolean is do
+		result := false
+	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := true
+	end
+}

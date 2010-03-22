@@ -1,0 +1,37 @@
+package ex;
+
+require kermeta
+
+
+class A {
+	attribute varA1 : kermeta::standard::Integer
+
+	operation opA1() : Void is do 
+	end
+}
+
+
+
+class B {
+	reference varB1 : A
+	attribute varB2 : kermeta::standard::Real
+}
+
+
+
+class C {
+	attribute varC1 : A
+	
+	operation opC1() : Void is do
+	end
+	
+	operation opC2() : Void is do
+	end
+}
+
+
+
+class D inherits A, B, C{
+}
+
+
