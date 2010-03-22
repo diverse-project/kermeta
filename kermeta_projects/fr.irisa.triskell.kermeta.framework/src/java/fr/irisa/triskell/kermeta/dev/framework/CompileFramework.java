@@ -126,10 +126,10 @@ public class CompileFramework {
   //      	System.out.println("DONE");
 
         	System.out.println("SAVING IN ECORE...");
-        	mergedUnit.setFramework(true);
-        	mergedUnit.setUri("platform:/resource/fr.irisa.triskell.kermeta.framework/dist/framework.km");
+        	//mergedUnit.setFramework(true);
+        	mergedUnit.setUri(outputFile);
         	EcoreExporter exporter2 = new EcoreExporter();
-        	exporter2.export(mergedUnit, dist_folder, IOPlugin.getFrameWorkURI(), ExporterOptions.getDefault());
+        	exporter2.export(mergedUnit, dist_folder, ExporterOptions.getDefault());
         	System.out.println("DONE");
         }
     }
