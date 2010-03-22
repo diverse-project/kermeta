@@ -32,6 +32,14 @@ public class AbstractBuildingState implements IBuildingState {
 	
 	public boolean aspectsDone = false;
 	
+
+	public boolean allRequiresResolved = false;
+
+	public boolean allRequiredUnitImported = false;
+	public boolean allRequireErrorPropagated = false;
+	public boolean allAspectBuilt = false;
+	public boolean allTypeSet = false;
+	
 	/**
 	 * loader used for creating this unit
 	 * This is used when restarting an unfinished load (typically during cyclic dependencies)

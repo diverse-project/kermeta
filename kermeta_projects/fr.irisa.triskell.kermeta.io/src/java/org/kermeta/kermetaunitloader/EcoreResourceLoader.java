@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.cachemanager.KermetaUnitStore;
+import org.kermeta.kermetaunitloader.AbstractLoader.CommandStep;
 import org.kermeta.kermetaunitloader.core.BuildAspects;
 import org.kermeta.kermetaunitloader.core.EmptyKermetaUnitBuilder;
 import org.kermeta.kermetaunitloader.core.ReportUsingError;
@@ -43,6 +44,9 @@ import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.Ecore2KMPass1;
 import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.Ecore2KMPass2;
 import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.Ecore2KMPass3;
 import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.Ecore2KMPass6;
+import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.EcoreBuildingState;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.AbstractBuildingState;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMTBuildingState;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 
@@ -52,7 +56,7 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
  */
 public class EcoreResourceLoader extends AbstractLoader {
 
-	final static public Logger internalLog = LoggerFactory.getLogger("KMFileLoader");
+	final static public Logger internalLog = LoggerFactory.getLogger("EcoreFileLoader");
 	
 	
 	protected Map<String, Object> options;
@@ -77,7 +81,79 @@ public class EcoreResourceLoader extends AbstractLoader {
 	}
 	
 	@Override
-	public KermetaUnit load() {
+	public void createCommands(){
+		groupedCommands.put(CommandStep.requireResolving, new AbstractCommand(){
+				@Override
+				public void executeCommand() {
+					internalLog.debug("Loading Ecore resource " + ecoreResourceUri);
+					loadEcoreResource();
+					
+					internalLog.debug("building km structure  " + ecoreResourceUri);
+					ecore2kmStructure();
+					
+					internalLog.debug("Resolving \"requires\"... of " +ecoreResourceUri);
+					RequireResolver.resolve(loadedUnit);
+				}				
+			});	
+		groupedCommands.put(CommandStep.requireImport, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Importing required units... of " +ecoreResourceUri);
+				importKermetaUnits();
+			}				
+		});
+		
+		groupedCommands.put(CommandStep.requireErrorPropagation, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Propagating require errors... of " +ecoreResourceUri);
+				ReportUsingError.propagateErrors(loadedUnit);
+			}				
+		});
+
+		
+		groupedCommands.put(CommandStep.aspectBuilding, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Building aspects... of " +ecoreResourceUri);
+				BuildAspects.build(loadedUnit);
+			}				
+		});
+		groupedCommands.put(CommandStep.typeSetting, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Setting types of " +ecoreResourceUri);
+				ecore2kmSetTypes();
+			}				
+		});
+		groupedCommands.put(CommandStep.bodies_and_opposite_Setting, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Setting opposite and loading bodies of " +ecoreResourceUri);
+				LoadBodiesAndSetOppositesPass();
+			}				
+		});
+		groupedCommands.put(CommandStep.quickFixApplication, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Applying quickfixes " +ecoreResourceUri);
+				ApplyQuickFixPass();
+			}				
+		});
+		groupedCommands.put(CommandStep.loadingFinalization, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Removing unnecessary inheritance and finalize loading");
+				finalizeLoad();
+			}				
+		});
+		
+	}
+	/*
+	@Override
+	public KermetaUnit load() throws URIMalformedException, NotRegisteredURIException {
+		EcoreBuildingState buildingState = (EcoreBuildingState)loadedUnit.getBuildingState();
+		
 		//Step 1:
 		internalLog.debug("Loading Ecore resource " + ecoreResourceUri);
 		loadEcoreResource();
@@ -87,25 +163,51 @@ public class EcoreResourceLoader extends AbstractLoader {
 		ecore2kmStructure();
 		if(loadedUnit.isErroneous()) return loadedUnit;
 		
-		internalLog.debug("Resolving \"requires\"... of " +ecoreResourceUri);
-		RequireResolver.resolve(loadedUnit);
-		if(loadedUnit.isErroneous()) return loadedUnit;
-
-		internalLog.debug("Importing required units... of " +ecoreResourceUri);
-		importKermetaUnits();
-		if(loadedUnit.isErroneous()) return loadedUnit;
+		if(!buildingState.allRequiresResolved){
+			internalLog.debug("Resolving \"requires\"... of " +ecoreResourceUri);
+			RequireResolver.resolve(loadedUnit);
+			buildingState.allRequiresResolved = true;
+			if(loadedUnit.isErroneous()) return loadedUnit;
+		}
+		// make sure all the context is correctly loaded up to this step
+		enforceAllUnitsResolvedRequire();
+		// due to the enforce maybe another have finished the load for us
+		if(((EcoreBuildingState)loadedUnit.getBuildingState()).loaded){
+			internalLog.debug("Resuming already loaded unit " +ecoreResourceUri);
+			return loadedUnit;
+		}
 		
-		internalLog.debug("Propagating require errors... of " +ecoreResourceUri);
-		ReportUsingError.propagateErrors(loadedUnit);
-		if(loadedUnit.isErroneous()) return loadedUnit;
+		if(!buildingState.allRequiredUnitImported){
+			internalLog.debug("Importing required units... of " +ecoreResourceUri);
+			importKermetaUnits();
+			buildingState.allRequiredUnitImported = true;
+			if(loadedUnit.isErroneous()) return loadedUnit;
+		}
 		
-		internalLog.debug("Building aspects... of " +ecoreResourceUri);
-		BuildAspects.build(loadedUnit);
-		if(loadedUnit.isErroneous()) return loadedUnit;
-		
-		internalLog.debug("Setting types of " +ecoreResourceUri);
-		ecore2kmSetTypes();
-		if(loadedUnit.isErroneous()) return loadedUnit;
+		if(!buildingState.allRequireErrorPropagated){
+			internalLog.debug("Propagating require errors... of " +ecoreResourceUri);
+			ReportUsingError.propagateErrors(loadedUnit);
+			buildingState.allRequireErrorPropagated = true;
+			if(loadedUnit.isErroneous()) return loadedUnit;
+		}
+		if(!buildingState.allAspectBuilt){
+			internalLog.debug("Building aspects... of " +ecoreResourceUri);
+			BuildAspects.build(loadedUnit);
+			buildingState.allAspectBuilt =  true;
+			if(loadedUnit.isErroneous()) return loadedUnit;
+		}
+		if(!buildingState.allTypeSet){
+			internalLog.debug("Setting types of " +ecoreResourceUri);
+			ecore2kmSetTypes();
+			buildingState.allTypeSet = true;
+			if(loadedUnit.isErroneous()) return loadedUnit;
+		}
+		enforceAllTypeSet();
+		// due to the enforce maybe another have finished the load for us
+		if(((EcoreBuildingState)loadedUnit.getBuildingState()).loaded){
+			internalLog.debug("Resuming already loaded unit " +ecoreResourceUri);
+			return loadedUnit;
+		}
 		
 		internalLog.debug("Setting opposite and loading bodies of " +ecoreResourceUri);
 		LoadBodiesAndSetOppositesPass();
@@ -121,7 +223,7 @@ public class EcoreResourceLoader extends AbstractLoader {
 		
 		return loadedUnit;
 	}
-	
+	*/
 	protected void loadEcoreResource(){
 	
 		/*
@@ -207,6 +309,29 @@ public class EcoreResourceLoader extends AbstractLoader {
 			 * Activate the external search
 			 */
 			loadedUnit.getTypeDefinitionCache().setExternalSearchAuthorized(true);
+		}
+	}
+	
+	protected void enforceAllUnitsResolvedRequire() throws URIMalformedException, NotRegisteredURIException{
+		for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits(loadedUnit) ){
+			if(unitToImport.getBuildingState() instanceof KMTBuildingState){
+				AbstractBuildingState buildingState = (AbstractBuildingState) unitToImport.getBuildingState();
+				if(!buildingState.allRequiresResolved){
+					// restart a load
+					buildingState.kermetaUnitLoader.load();
+				}
+			}
+		}
+	}
+	protected void enforceAllTypeSet() throws URIMalformedException, NotRegisteredURIException{
+		for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits(loadedUnit) ){
+			if(unitToImport.getBuildingState() instanceof AbstractBuildingState){
+				AbstractBuildingState buildingState = (AbstractBuildingState) unitToImport.getBuildingState();
+				if(!buildingState.allTypeSet){
+					// restart a load
+					buildingState.kermetaUnitLoader.load();
+				}
+			}
 		}
 	}
 

@@ -11,7 +11,7 @@
 package org.kermeta.kermetaunitloader;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import org.kermeta.io.KermetaUnit;
@@ -31,13 +31,115 @@ public abstract class AbstractLoader {
 
 	protected KermetaUnit loadedUnit;
 	
+	public enum CommandStep {requireResolving, 
+							requireImport, 
+							requireErrorPropagation, 
+							aspectBuilding, 
+							modelTypeBuilding, 
+							typeSetting, 
+							supertypeSetting, 
+							bodies_and_opposite_Setting, 
+							annotationAddition, 
+							traceModelLoading, 
+							quickFixApplication,
+							loadingFinalization, structureCreation, };
+	
+	/**
+	 * List of the commands that need to be performed level by level
+	 * the next group of command cannot be performed unless all previous command (from required unit are performed 
+	 */
+	public HashMap<CommandStep,AbstractCommand> groupedCommands = new HashMap<CommandStep,AbstractCommand>();
+	
+	protected boolean commandCreated = false;
+
+	private boolean isResolvingRequire = false;
+	
 	/**
 	 * Load the kermeta unit
 	 * @throws NotRegisteredURIException 
 	 * @throws URIMalformedException 
 	 */
-	public abstract KermetaUnit load() throws URIMalformedException, NotRegisteredURIException; 
+	public KermetaUnit load() throws URIMalformedException, NotRegisteredURIException{
+		// first creates the commands for this unit
+		if(!commandCreated){
+			createCommands();
+			commandCreated = true;
+		}
+		// perform the loading steps,
+		if(groupedCommands.get(CommandStep.structureCreation) != null){
+			groupedCommands.get(CommandStep.structureCreation).executeCommand();
+			groupedCommands.remove(CommandStep.structureCreation);
+		}
+		
+		
+		// perform the loading steps,
+		if(groupedCommands.get(CommandStep.requireResolving) != null){
+	//		if(isResolvingRequire ) // we have reentered this step before it has finished
+	//			return loadedUnit;
+	//		isResolvingRequire= true;
+			groupedCommands.get(CommandStep.requireResolving).executeCommand();
+			groupedCommands.remove(CommandStep.requireResolving);
+	//		isResolvingRequire= false;
+		}
+		
+		// ensure all required unit are loaded up to this point
+		for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits(loadedUnit) ){			
+			if(unitToImport.getBuildingState() instanceof AbstractBuildingState){
+				AbstractBuildingState buildingState = (AbstractBuildingState) unitToImport.getBuildingState();
+				if(buildingState.kermetaUnitLoader.groupedCommands.get(CommandStep.requireResolving) != null){
+					// start a load for this unit too
+					buildingState.kermetaUnitLoader.load();
+				}
+			}
+		}
+		
+		// from this point the commands must apply to all required units
+		// they apply to all required unit in order to ensure homogeneous load of the data in units 
+		// (and make sure all data are available for doing the next step)
+		// due to the architecture, the command may have been performed by the load operation of another unit.
+		
+		performSynchronizedCommand(CommandStep.requireImport);
+		performSynchronizedCommand(CommandStep.requireErrorPropagation);
+		performSynchronizedCommand(CommandStep.aspectBuilding);
+		performSynchronizedCommand(CommandStep.modelTypeBuilding);
+		performSynchronizedCommand(CommandStep.typeSetting);
+		performSynchronizedCommand(CommandStep.supertypeSetting);
+		performSynchronizedCommand(CommandStep.bodies_and_opposite_Setting);
+		performSynchronizedCommand(CommandStep.annotationAddition);
+		performSynchronizedCommand(CommandStep.quickFixApplication);
+		performSynchronizedCommand(CommandStep.traceModelLoading);
+		performSynchronizedCommand(CommandStep.loadingFinalization);
+		
+		
+		return loadedUnit;
+	}
 	
+	/**
+	 * All commands of the given level will be performed if necessary
+	 * @param stepToPerform
+	 */
+	protected void performSynchronizedCommand(CommandStep stepToPerform){
+		if(groupedCommands.get(stepToPerform)!= null){
+			groupedCommands.get(stepToPerform).executeCommand();
+			// remove the command that has been done
+			groupedCommands.remove(stepToPerform);
+		}
+		for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits(loadedUnit) ){			
+			if(unitToImport.getBuildingState() instanceof AbstractBuildingState){
+				AbstractBuildingState buildingState = (AbstractBuildingState) unitToImport.getBuildingState();
+				if(buildingState.kermetaUnitLoader.groupedCommands.get(stepToPerform)!= null){
+					buildingState.kermetaUnitLoader.groupedCommands.get(stepToPerform).executeCommand();
+					// remove the command that has been done
+					buildingState.kermetaUnitLoader.groupedCommands.remove(stepToPerform);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * this operation is responsible for creating the command 
+	 */
+	public abstract void createCommands();
 	
 	/**
 	 * final step when loading a KermetaUnit

@@ -30,7 +30,10 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.cachemanager.KermetaUnitStore;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kermetaunitloader.AbstractLoader.CommandStep;
 import org.kermeta.kermetaunitloader.core.EmptyKermetaUnitBuilder;
+import org.kermeta.kermetaunitloader.core.RequireResolver;
+import org.kermeta.kermetaunitloader.kmt.KmtAst2KMStructure;
 import org.kermeta.loader.LoadingOptions;
 import org.kermeta.model.KermetaModelHelper;
 import org.slf4j.Logger;
@@ -84,21 +87,47 @@ public class KMFileLoader extends AbstractLoader {
 	}
 	
 	@Override
-	public KermetaUnit load() {
-		//Step 1:
-		internalLog.debug("Loading KM structure of " +kmFileUri);
-		internalLoadResource();		
-	    //<action class="org.kermeta.io.loader.km.Load"/>
-	    
-		internalLog.debug("Loading trace model of " +kmFileUri);
-		loadTrace();
-	  	//Step 2:
-		internalLog.debug("Removing unnecessary inheritance and finalize loading of " +kmFileUri);
-	    finalizeLoad();
-	    //<action class="org.kermeta.io.loader.core.FinalizeLoading"/>
-	  
+	public void createCommands(){
+		groupedCommands.put(CommandStep.requireResolving, new AbstractCommand(){
+				@Override
+				public void executeCommand() {
+					internalLog.debug("Loading KM structure of " +kmFileUri);
+					internalLoadResource();	
+				}				
+			});	
+
 		
-		return loadedUnit;
+		groupedCommands.put(CommandStep.requireImport, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				importAllKermetaUnits();
+			}				
+		});
+		
+		
+		groupedCommands.put(CommandStep.aspectBuilding, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				constructAspectsListsForAll(loadedUnit);
+			}				
+		});
+		
+		groupedCommands.put(CommandStep.traceModelLoading, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Loading trace model of " +kmFileUri);
+				loadTrace();
+			}				
+		});	
+		groupedCommands.put(CommandStep.loadingFinalization, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Removing unnecessary inheritance and finalize loading of " +kmFileUri);
+			    finalizeLoad();
+			}				
+		});
+		
+		
 	}
 	
 	
@@ -261,16 +290,12 @@ public class KMFileLoader extends AbstractLoader {
 					}
 				}
 			}
-							
+
 			createInternalPackageEntries();
 			
 			createTypeDefinitionCache();
 			
 			processRequire();
-			
-			importAllKermetaUnits();
-			
-			constructAspectsListsForAll(loadedUnit);
 						
 		} catch ( URIMalformedException exception ) {
 			exception.printStackTrace();

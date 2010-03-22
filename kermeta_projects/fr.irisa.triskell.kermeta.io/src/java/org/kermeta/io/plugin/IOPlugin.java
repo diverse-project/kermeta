@@ -39,6 +39,7 @@ import fr.irisa.triskell.kermeta.impl.KmPackageImpl;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 
 public class IOPlugin extends Plugin {
+	
 
 	public static String FRAMEWORK_KM_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km";
 

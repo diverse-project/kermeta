@@ -33,7 +33,7 @@ import antlr.RecognitionException;
 import antlr.TokenStreamException;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMTBuildingState;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.modelhelper.ASTHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.CompUnit;
@@ -64,82 +64,99 @@ public class KMTFileLoader extends AbstractLoader {
 		loadedUnit = EmptyKermetaUnitBuilder.buildEmptyUnit(kmtFileUri, this);
 	}
 	
+
 	@Override
-	public KermetaUnit load() throws URIMalformedException, NotRegisteredURIException {
+	public void createCommands(){
+		internalLog.debug("Create load commands for " +kmtFileUri);
+		groupedCommands.put(CommandStep.structureCreation, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Loading AST... of " +kmtFileUri);
+				loadAST();
+				internalLog.debug("Generating km structure from AST... of " +kmtFileUri);
+				KmtAst2KMStructure ast2KM = new KmtAst2KMStructure(loadedUnit);
+			    ast2KM.generateStructure(ast);
+			}				
+		});
+		groupedCommands.put(CommandStep.requireResolving, new AbstractCommand(){
+				@Override
+				public void executeCommand() {
+					
+				    internalLog.debug("Resolving \"requires\"... of " +kmtFileUri);
+					RequireResolver.resolve(loadedUnit);
+				}				
+			});	
+		groupedCommands.put(CommandStep.requireImport, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Importing required units... of " +kmtFileUri);
+				importKermetaUnits();
+			}				
+		});	
+		groupedCommands.put(CommandStep.requireErrorPropagation, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Propagating require errors... of " +kmtFileUri);
+				ReportUsingError.propagateErrors(loadedUnit);
+			}				
+		});
 		
-		KMTBuildingState buildingState = (KMTBuildingState)loadedUnit.getBuildingState();
-				
-		if(!buildingState.astLoaded){
-			internalLog.debug("Loading AST... of " +kmtFileUri);
-			loadAST();
-			buildingState.astLoaded = true;
-			if(loadedUnit.isErroneous()) return loadedUnit;			
-		}
-		if(!buildingState.kmStructureCreated){
-			internalLog.debug("Generating km structure from AST... of " +kmtFileUri);
-			KmtAst2KMStructure ast2KM = new KmtAst2KMStructure(loadedUnit);
-		    ast2KM.generateStructure(ast);
-		    buildingState.kmStructureCreated = true;
-			if(loadedUnit.isErroneous()) return loadedUnit;
-		}
-		if(!buildingState.allRequiresResolved){
-			internalLog.debug("Resolving \"requires\"... of " +kmtFileUri);
-			RequireResolver.resolve(loadedUnit);
-			buildingState.allRequiresResolved = true;
-			if(loadedUnit.isErroneous()) return loadedUnit;
-		}
-		
-		// make sure all the context is correctly loaded up to this step
-		enforceAllUnitsResolvedRequire();
-		// due to the enforce maybe another have finished the load for us
-		if(((KMTBuildingState)loadedUnit.getBuildingState()).loaded){
-			internalLog.debug("Resuming already loaded unit " +kmtFileUri);
-			return loadedUnit;
-		}
-		
-		internalLog.debug("Importing required units... of " +kmtFileUri);
-		importKermetaUnits();
-		if(loadedUnit.isErroneous()) return loadedUnit;
-		
-		internalLog.debug("Propagating require errors... of " +kmtFileUri);
-		ReportUsingError.propagateErrors(loadedUnit);
-		if(loadedUnit.isErroneous()) return loadedUnit;
-		
-		
-		internalLog.debug("Building aspects... of " +kmtFileUri);
-		BuildAspects.build(loadedUnit);
-		if(loadedUnit.isErroneous()) return loadedUnit;
-		
-		internalLog.debug("Building modeltype content... of " +kmtFileUri);
-		ModelTypeContentBuilder modeltypeContentBuilder = new ModelTypeContentBuilder(loadedUnit, loadingContext);
-		modeltypeContentBuilder.generateContent(ast);
-		if(loadedUnit.isErroneous()) return loadedUnit;
-		
-		internalLog.debug("Setting types... of " +kmtFileUri);
-		TypeSetter tsetter =  new TypeSetter(loadedUnit, loadingContext);
-		tsetter.setTypes(ast);
-		if(loadedUnit.isErroneous()) return loadedUnit;
-		
-		internalLog.debug("Setting supertypes... of " +kmtFileUri);
-		SuperTypesSetter stsetter =  new SuperTypesSetter(loadedUnit, loadingContext);
-		stsetter.setSuperTypes(ast);
-		if(loadedUnit.isErroneous()) return loadedUnit;
-		
-		internalLog.debug("Setting bodies and opposites... of " +kmtFileUri);
-		BodiesAndOppositesSetter bsetter =  new BodiesAndOppositesSetter(loadedUnit, loadingContext);
-		bsetter.performAction(ast);
-		if(loadedUnit.isErroneous()) return loadedUnit;
-		
-		internalLog.debug("Adding annotations... of " +kmtFileUri);
-		AnnotationBuilder abuilder =  new AnnotationBuilder(loadedUnit);
-		abuilder.performAction(ast);
-		if(loadedUnit.isErroneous()) return loadedUnit;
-				
-		internalLog.debug("Removing unnecessary inheritance and finalize loading... of " +kmtFileUri);
-	    finalizeLoad();
-	    // doesn't need AST trace anymore
-		loadedUnit.setNeedASTTraces(false);
-		return loadedUnit;
+		groupedCommands.put(CommandStep.aspectBuilding, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Building aspects... of " +kmtFileUri);
+				BuildAspects.build(loadedUnit);
+			}				
+		});
+		groupedCommands.put(CommandStep.modelTypeBuilding, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Building modeltype content... of " +kmtFileUri);
+				ModelTypeContentBuilder modeltypeContentBuilder = new ModelTypeContentBuilder(loadedUnit, loadingContext);
+				modeltypeContentBuilder.generateContent(ast);
+			}				
+		});
+		groupedCommands.put(CommandStep.typeSetting, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Setting types... of " +kmtFileUri);
+				TypeSetter tsetter =  new TypeSetter(loadedUnit, loadingContext);
+				tsetter.setTypes(ast);
+			}
+		});
+		groupedCommands.put(CommandStep.supertypeSetting, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Setting supertypes... of " +kmtFileUri);
+				SuperTypesSetter stsetter =  new SuperTypesSetter(loadedUnit, loadingContext);
+				stsetter.setSuperTypes(ast);
+			}
+		});
+		groupedCommands.put(CommandStep.bodies_and_opposite_Setting, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Setting bodies and opposites... of " +kmtFileUri);
+				BodiesAndOppositesSetter bsetter =  new BodiesAndOppositesSetter(loadedUnit, loadingContext);
+				bsetter.performAction(ast);
+			}
+		});
+		groupedCommands.put(CommandStep.annotationAddition, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Adding annotations... of " +kmtFileUri);
+				AnnotationBuilder abuilder =  new AnnotationBuilder(loadedUnit);
+				abuilder.performAction(ast);
+			}
+		});
+		groupedCommands.put(CommandStep.loadingFinalization, new AbstractCommand(){
+			@Override
+			public void executeCommand() {
+				internalLog.debug("Removing unnecessary inheritance and finalize loading... of " +kmtFileUri);
+			    finalizeLoad();
+			    // doesn't need AST trace anymore
+				loadedUnit.setNeedASTTraces(false);
+			}
+		});
 	}
 	
 	
@@ -171,9 +188,21 @@ public class KMTFileLoader extends AbstractLoader {
 
 	protected void enforceAllUnitsResolvedRequire() throws URIMalformedException, NotRegisteredURIException{
 		for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits(loadedUnit) ){
-			if(unitToImport.getBuildingState() instanceof KMTBuildingState){
-				KMTBuildingState buildingState = (KMTBuildingState) unitToImport.getBuildingState();
+			if(unitToImport.getBuildingState() instanceof AbstractBuildingState){
+				AbstractBuildingState buildingState = (AbstractBuildingState) unitToImport.getBuildingState();
 				if(!buildingState.allRequiresResolved){
+					// restart a load
+					buildingState.kermetaUnitLoader.load();
+				}
+			}
+		}
+	}
+	
+	protected void enforceAllTypeSet() throws URIMalformedException, NotRegisteredURIException{
+		for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits(loadedUnit) ){
+			if(unitToImport.getBuildingState() instanceof AbstractBuildingState){
+				AbstractBuildingState buildingState = (AbstractBuildingState) unitToImport.getBuildingState();
+				if(!buildingState.allTypeSet){
 					// restart a load
 					buildingState.kermetaUnitLoader.load();
 				}

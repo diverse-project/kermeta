@@ -78,16 +78,18 @@ public class EmptyKermetaUnitBuilder extends AbstractLoader{
 		String extension = kermetaUnitURI.substring(index+1);
 		if ( extension.equals("kmt") ) {
 			kermetaUnit.setBuildingState( new KMTBuildingState() );
-			((KMTBuildingState)kermetaUnit.getBuildingState()).kermetaUnitLoader = loader;
 			kermetaUnit.setNeedASTTraces(true);
-		} else if ( extension.equals("ecore") || uri.equals(IOPlugin.ECORE_URI) )
+		} else if ( extension.equals("ecore") || uri.equals(IOPlugin.ECORE_URI) ){
 			kermetaUnit.setBuildingState( new EcoreBuildingState() );
-		else if ( extension.equals("km") )
+		} else if ( extension.equals("km") ){
 			kermetaUnit.setBuildingState( new KmBuildingState() );
-		else if ( extension.equals("jar") )
+		}
+		else if ( extension.equals("jar") ){
 			kermetaUnit.setBuildingState( new JavaBuildingState() );
-		else if ( extension.equals("memory") )
+		}
+		else if ( extension.equals("memory") ){
 			kermetaUnit.setBuildingState( new KmBuildingState() );
+		}
 		else if ( ! EMFRegistryHelper.isRegistered( kermetaUnitURI ) ) {
 			//				kermetaUnit.setBuildingState( new AbstractBuildingState() );
 			//				kermetaUnit.error("Unknown Format. It is impossible to load this file.\n You may have to register this URI.");
@@ -95,20 +97,25 @@ public class EmptyKermetaUnitBuilder extends AbstractLoader{
 			throw new NotRegisteredURIException(kermetaUnitURI);
 		} else {
 			Object o = Registry.INSTANCE.get( kermetaUnitURI );
-			if ( o instanceof Package )
+			if ( o instanceof Package ){
 				kermetaUnit.setBuildingState( new KmBuildingState() );
+			}
 			else if ( o instanceof EPackage.Descriptor ) {
 				EPackage p = ((EPackage.Descriptor) o).getEPackage();
 				if ( p instanceof Package )
 					kermetaUnit.setBuildingState( new KmBuildingState() );
 				else
 					kermetaUnit.setBuildingState( new EcoreBuildingState() );
+
 			}
 			else if ( o instanceof EPackage ) {
 				kermetaUnit.setBuildingState( new EcoreBuildingState() );
 			} else
 				kermetaUnit.error("Unknown Format. It is impossible to load this registered resource.");
 		}	
+		if((AbstractBuildingState)kermetaUnit.getBuildingState()!= null)
+			((AbstractBuildingState)kermetaUnit.getBuildingState()).kermetaUnitLoader = loader;
+			
 		return kermetaUnit;
 	}
 
@@ -122,9 +129,8 @@ public class EmptyKermetaUnitBuilder extends AbstractLoader{
 	}
 
 	@Override
-	public KermetaUnit load() throws URIMalformedException,
-			NotRegisteredURIException {
-		return loadedUnit;
+	public void createCommands(){
+		// nothing to do for empty unit
 	}
 	
 }

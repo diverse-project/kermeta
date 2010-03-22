@@ -102,6 +102,7 @@ public class SuperTypesSetter extends KermetaASTNodeVisitor  {
 				switch (superOperations.size()) {
 				case 0:
 					kermetaUnit.error("No super operation found for method " + o.getName() + " in class definition " + KermetaModelHelper.NamedElement.qualifiedName((NamedElement)o.eContainer()), o);
+					KermetaModelHelper.ClassDefinition.getSuperOperations(owner, o.getName());
 					break;
 				case 1:
 					o.setSuperOperation( superOperations.get(0) );

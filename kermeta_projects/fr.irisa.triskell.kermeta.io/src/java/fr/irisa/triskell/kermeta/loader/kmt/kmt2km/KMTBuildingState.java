@@ -15,30 +15,14 @@ package fr.irisa.triskell.kermeta.loader.kmt.kmt2km;
 
 public class KMTBuildingState extends AbstractBuildingState {
 
-/*	public boolean doneLoadImportedUnits = false;
-	
-	public boolean doneLoadTypeDefinitions = false;
-	
-	public boolean doneImport = false;
-	
-	public boolean baseAspectDone = false;
-	
-	public boolean replacingObjecTypeVariablesDone = false;
-	
-	public boolean doneLoadStructuralFeatures = false;
-	
-	public boolean doneLoadOppositeProperties = false;
-	
-	public boolean doneLoadBodies = false;
-	
-	public boolean doneLoadAnnotations = false;
-	
-	public boolean doneMarkError = false;
-	
-	public boolean loading = false;*/
 	public boolean astLoaded = false;	
 	public boolean kmStructureCreated = false;
-	public boolean allRequiresResolved = false;
+	// public boolean allRequiresResolved = false;
+	// public boolean allAspectBuilt = false;
+	//public boolean allRequiredUnitImported = false;
+	// public boolean allRequireErrorPropagated = false;
+	public boolean allModelTypeContentBuilt = false;
+	
 	
 }
 

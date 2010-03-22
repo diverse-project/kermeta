@@ -16,19 +16,8 @@ import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.AbstractBuildingState;
 
 public class EcoreBuildingState extends AbstractBuildingState {
 	
-	public boolean pass1done = false;
-	
-	public boolean pass2done = false;
-	
-	public boolean importDone = false;
-	
-	public boolean pass3done = false;
-	
-	public boolean pass4done = false;
-	
-	public boolean pass5done = false;
-	
-	public boolean pass6done = false;
+
+	public boolean allRequiresResolved = false;
 	
 }
 

@@ -39,6 +39,8 @@ import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.model.KermetaModelHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
@@ -53,6 +55,8 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 public class EcoreExporter {
 
+	final static public Logger internalLog = LoggerFactory.getLogger(EcoreExporter.class);
+	
 	private ResourceSet resourceSet = new ResourceSetImpl();
 	
 	private Hashtable <KermetaUnit, Resource> resources = new Hashtable <KermetaUnit, Resource> ();
@@ -142,7 +146,11 @@ public class EcoreExporter {
 		if ( framework == null )
 			return;
 		
-		KermetaUnit ecore = IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.getFrameWorkEcoreURI());
+		KermetaUnit ecore;
+		if(IOPlugin.FRAMEWORK_GENERATION)
+			return;
+		else
+			ecore = IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.getFrameWorkEcoreURI());
 		if ( ecore == null )
 			return;
 		
@@ -292,15 +300,18 @@ public class EcoreExporter {
 		try {
 			
 			EPackage p = null;
-			Iterator <EObject> iterator = resources.get(kermetaUnit).getContents().iterator();
-			while ( iterator.hasNext() && (p == null) ) {
-				EObject o = iterator.next();
-				if ( o instanceof EPackage )
-					p = (EPackage) o;
+			if(resources.get(kermetaUnit)!=null){
+				Iterator <EObject> iterator = resources.get(kermetaUnit).getContents().iterator();
+				while ( iterator.hasNext() && (p == null) ) {
+					EObject o = iterator.next();
+					if ( o instanceof EPackage )
+						p = (EPackage) o;
+				}
+				
+				p.getEClassifiers().add( getKermetaTypesAlias() );
 			}
-			
-			p.getEClassifiers().add( getKermetaTypesAlias() );
-						
+			else
+				internalLog.debug("framework resource in memory");
 
 		} catch(Exception e ) {
 			e.printStackTrace();
@@ -430,7 +441,7 @@ public class EcoreExporter {
 		if ( resource == null )
 			resource = EMFRegistryHelper.getResource(uri);
 		
-		if ( kermetaUnit.isFramework() || kermetaUnit.equals(IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.getFrameWorkEcoreURI())) ) {
+		if ( !IOPlugin.FRAMEWORK_GENERATION && (kermetaUnit.isFramework() || kermetaUnit.equals(IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.getFrameWorkEcoreURI()))) ) {
 			resourcesNotToSave.put( resource, kermetaUnit );
 			return;
 		}
@@ -493,6 +504,7 @@ public class EcoreExporter {
 			return;
 		
 		if ( kermetaUnit.isFramework() ) {
+			uris.put(kermetaUnit, kermetaUnit.getUri());
 			//uris.put(kermetaUnit, kermetaUnit.getUri());
 			return;
 		}
