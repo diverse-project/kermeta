@@ -104,9 +104,9 @@ public class InterpretedRunTestCase extends AbstractRunTestCase {
         System.out.println("    * #ro total       : " + RuntimeObjectImpl.getInstanceCounter());
         System.out.println("    * time (ms)       : " + time);
         System.out.println("    ************************************************");
-     //   if(isLastOfSerie){
+        //if(isLastOfSerie){
         	interpreter = null;
-     //   }
+        //}
         
     }
 
@@ -123,7 +123,10 @@ public class InterpretedRunTestCase extends AbstractRunTestCase {
     		interpreter.setEntryPoint(mainClassValue, mainOperationValue);
     		if(this.containerTestSuite._defaultpath !=  null) 
     			interpreter.setDefaultPath(this.containerTestSuite._defaultpath);
-    		interpreter.launch();   		
+    		if(!isLastOfSerie)
+    			interpreter.launchAndWait();
+    		else
+    			interpreter.launch();   		
     	} catch(KermetaRaisedException e){
     		// If this is a kermeta assertion that failed, then the Test must fail
     		fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)e.raised_object.getMetaclass().getKCoreObject();        	
