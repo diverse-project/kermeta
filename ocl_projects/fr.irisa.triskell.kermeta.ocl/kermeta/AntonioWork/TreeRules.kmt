@@ -7,7 +7,7 @@
  */
 package ocl2DROOLS;
 
-
+  
 require kermeta
 
 require "StructType.kmt"
