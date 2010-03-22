@@ -19,8 +19,11 @@
   		<pathelement location="../fr.irisa.triskell.traceability.model/bin"/>
   		<pathelement location="../org.eclipse.gymnast.runtime.core/bin"/>
   		<pathelement location="../org.kermeta.log4j.util/bin"/>
+  		<pathelement location="../org.kermeta.slf4j.eclipse/bin"/>
+  		<pathelement location="../org.kermeta.slf4j.eclipse/lib/thirdparty/slf4j-api-1.5.11.jar"/>
   		<pathelement location="../org.kermeta.merger/bin"/>
   		<pathelement location="../org.antlr.antlr2/bin"/>
+		<pathelement location="../fr.irisa.triskell.cache.utilities/target/classes"/>
 
 		<fileset dir="${eclipse.home}/plugins">
 		    <include name="**/org.eclipse.emf.common_*.jar"/>
