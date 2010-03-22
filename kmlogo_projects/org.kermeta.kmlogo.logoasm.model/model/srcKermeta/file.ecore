@@ -23,8 +23,12 @@
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
-    <eSubpackages name="ASM" nsURI="platform:/resource/org.kermeta.kmlogo.logoasm.model/srcKermeta/file.ecore#/kmLogo/ASM"
+    <eSubpackages name="ASM" nsURI="platform:/resource/org.kermeta.kmlogo.logoasm.model/model/srcKermeta/file2.ecore#/kmLogo/ASM"
         nsPrefix="ASM">
+      <eClassifiers xsi:type="ecore:EClass" name="LogoProgram">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
+            eType="#/1/ASM/Instruction" containment="true"/>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Instruction" abstract="true"/>
       <eClassifiers xsi:type="ecore:EClass" name="Primitive" abstract="true" eSuperTypes="#/1/ASM/Instruction"/>
       <eClassifiers xsi:type="ecore:EClass" name="Back" eSuperTypes="#/1/ASM/Primitive">

@@ -133,4 +133,10 @@ package ASM
 	class Lower inherits BinaryExp
 	{
 	}
+	class LogoProgram
+	{
+		attribute instructions : Instruction[0..*]
+
+	}
 }
+
