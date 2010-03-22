@@ -38,6 +38,7 @@
 	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta.interpreter\${dot.or.buildclass}" />
 
 	<property name="log4j.jar" location="${eclipse.home}/plugins/org.apache.log4j_1.2.13.v200903072027.jar" />
+	<property name="slf4j.jar" location="..\..\..\org.kermeta.slf4j.eclipse\${dot.or.bin}" />
 	<property name="antlr.jar" location="..\..\..\org.antlr.antlr2\${dot.or.bin}"/>
 	<!--<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar" />-->
 	<!--<property name="emfatic-core.jar" location="..\..\..\org.eclipse.gymnast.runtime.core\${dot.or.bin}"/>-->
@@ -95,6 +96,7 @@
 		<pathelement location="${jface.jar}"/>
 		<pathelement location="${swt.jar}"/>
 	    <pathelement location="${log4j.jar}"/>
+	    <pathelement location="${slf4j.jar}"/>
 		<pathelement location="${junit4.jar}" />
 		<pathelement location="${hamcrest.core.jar}" />
 		<pathelement location="${apache.commons.logging.jar}" />
