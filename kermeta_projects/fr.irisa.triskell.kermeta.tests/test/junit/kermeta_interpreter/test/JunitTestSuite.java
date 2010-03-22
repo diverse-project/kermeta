@@ -37,6 +37,7 @@ public class JunitTestSuite extends TestSuite {
     
     public JunitTestSuite() {
     	super();
+    	org.kermeta.slf4j.eclipse.Activator.getDefault().configureLog4JLogger("../org.kermeta.slf4j.eclipse/kermeta_log4j_configuration.xml");
     	initialize();
 		generatedCall();
     }  
