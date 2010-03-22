@@ -1,0 +1,59 @@
+/* $Id: OCLHelper.kmt,v 1.6 2008-10-28 15:19:45 barais Exp $
+ * File : EcoreHelper.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Sep 08, 2005
+ * Authors : 
+ *  Didier Vojtisek <dvojtise@irisa.fr>
+ *  Damien Pollet   <dpollet@irisa.fr>
+ * 
+ */
+//@mainClass "OCLHelpers::OCLHelper"
+//@mainOperation "main"
+
+
+package oclHelpers;
+      
+require kermeta
+require "oclcstvisitor.kmt" 
+ //require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+    
+using ocl::cst
+using kermeta::standard
+using kermeta::persistence
+using kermeta::exceptions
+
+/** This class provides some helper methods to load/save Ecore models
+    Plus some other useful navigation methods
+ */
+class OCLHelper
+{ 
+	 
+    operation getPackageDeclaration(model : Resource): ocl::cst::PackageDeclarationCS is
+	    do
+	    	result ?= model.instances.detect{ o |
+	    			var packageDeclaration: ocl::cst::PackageDeclarationCS
+		     	   packageDeclaration ?= o
+		     	   packageDeclaration != void
+	    		}
+	    end
+	    
+	    /* I think this is no longer used --- mark
+	operation getInvExpression(os: Set<Object>): ocl::cst::OCLExpressionCS is
+		do
+			var invariant : InvCS 
+			invariant ?= os.detect{ o | 
+				o.isKindOf(PackageDeclarationCS)
+			}.asType(PackageDeclarationCS).contextDecls.detect{ o |
+				o.isKindOf(ClassifierContextDeclCS)
+			}.asType(ClassifierContextDeclCS).invOrDefCS
+			// TODO: check for null invariant here and throw exception						
+			result := invariant.expressionCS
+		end
+		*/
+		
+	
+
+  }
+  

@@ -2,7 +2,7 @@ package company
  --  forALl with two variables
 context Business::Company inv diff:
 	self.employee->forAll( e1, e2 : Personnel::Person |
-	e1 <> e2 implies e1.forename <> e2.forename)
+	e1 <> e2 implies e1.forename <> e2.forename)  -- e1 <> e2 implies e1.forename <> e2.forename)
 context Personnel::Person inv notyoungEmployee:
 	self.age>18
 endpackage

@@ -1,0 +1,88 @@
+ /* $Id: OCLDROOLSPrinter.kmt,v 1.17 2008-11-02 18:21:04 barais Exp $
+ * File : OCLDROOLSPrinter.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Authors :  	Olivier Brais, 
+ *				Mark Skipper
+ *				Antonio de Almeida Souza Neto
+ * 
+ */
+@mainClass "ocl2DROOLS::OCLDROOLSPrinter"
+@mainOperation "main"
+ 
+/* This package contains operations code for Visitor Patterns
+ You should use Patterns4Ecore.kmt operations for applying Patterns */
+package ocl2DROOLS; 
+
+ 
+require "ocl2DroolsVisitor.kmt" 
+//require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+
+require "OCLHelper.kmt"  
+require "IOMixin.kmt"
+
+
+require "http://www.eclipse.org/ocl/1.1.0/OCLCST"
+//require "Tools.kmt"    
+//require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+    
+  
+using kermeta::standard
+using kermeta::persistence  
+using kermeta::exceptions
+using ocl::cst
+using ocl2kmt
+//using EcoreHelpers
+using oclHelpers  
+  
+class OCLDROOLSPrinter  
+{ 
+	attribute repository: EMFRepository
+	attribute parsedOclURI: String
+    reference oclHelper : OCLHelper
+
+    attribute visitor :Ocl2DroolsVisitor 
+   
+    attribute parsedOcl : Resource
+    attribute metamodel: Resource
+    
+    operation main(): Void is
+		do
+				//self.generateOCL("../../ocl/speedsDepTest.xmi", "../../ocl/speedsL1.ecore", "speedsDepTest.kmt")
+				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl/test/6.xmi",
+				"test.drl")//"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/01.kmt")
+	    end
+	     
+	      
+    /** generateOCL
+     **  parsedOclURI: String <-- the xmi file containing the OCLCST model of the expression
+     **  metamodelURI: String <-- the metamodel against which the ocl was written
+     **  Outputfilename: String <-- where to write the kermeta code
+     **/ 
+	  operation generateOCL(parsedOclURI : String,Outputfilename : String): Void is
+		do
+			repository := EMFRepository.new
+	     	parsedOcl  := repository.createResource(parsedOclURI,"platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore")
+	     	parsedOcl.load() 
+	     	
+	     
+			oclHelper := OCLHelper.new 
+		 
+	
+
+			// the preprocessor and the visitor shold use the same ecore helper  so they share models
+	    	visitor := Ocl2DroolsVisitor.new 
+	    	
+	    	visitor.initializeAttributes()
+		    
+		    stdio.writeln("======= Pass one ========")
+			oclHelper.getPackageDeclaration(parsedOcl.instances).accept(visitor)
+		    stdio.writeln("=======  Done  ========") 
+			var f : kermeta::io::FileIO init kermeta::io::FileIO.new
+			var io : StringWriter   
+			
+	    end
+	    
+
+}

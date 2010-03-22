@@ -1,0 +1,94 @@
+/* $Id: KermetaHelper.kmt,v 1.7 2008-11-02 18:21:08 barais Exp $
+ * Creation date: July 25, 2007
+ * License:
+ * Copyright:
+ * Authors: Mark Skipper
+ */
+
+package ocl2kmt;
+
+require kermeta
+using kermeta::standard
+ 
+ 
+class KermetaHelper
+{
+  
+  	reference keywords : Collection<String>
+	 operation isKermetaKeyword(word: String): Boolean is
+          do
+				if (keywords.isVoid) then
+						keywords := Bag<String>.new
+						keywords.add("package")
+							keywords.add("require")
+							keywords.add("includeFilter")
+							keywords.add("excludeFilter")
+							keywords.add("using")
+							keywords.add("inherits")
+							keywords.add("class")
+							//keywords.add("@pre" )
+							keywords.add("pre")
+							keywords.add("post")
+							keywords.add("inv")
+							keywords.add("abstract")
+							keywords.add("Self")
+							keywords.add("Void")
+							keywords.add("attribute")
+		 					keywords.add("reference")
+							keywords.add("property")
+							keywords.add("readonly")
+							keywords.add("getter")
+							keywords.add("is")
+							keywords.add("setter")
+							keywords.add("raises")
+							keywords.add("select")
+							keywords.add("operation")
+							keywords.add("method")
+							keywords.add("bag")
+							keywords.add("set")
+							keywords.add("seq")
+							keywords.add("oset")
+							keywords.add("alias")
+							keywords.add("enumeration")
+							keywords.add("and")
+							keywords.add("or")
+							keywords.add("not")
+							//keywords.add("self")
+							keywords.add("super")
+							keywords.add("do")
+							keywords.add("end")
+							keywords.add("function")
+							keywords.add("rescue")
+							keywords.add("from")
+							keywords.add("until")
+							keywords.add("loop")
+							keywords.add("if")
+							keywords.add("then")
+							keywords.add("else")
+							keywords.add("raise")
+							keywords.add("var")
+							keywords.add("init")
+							keywords.add("extern")
+							keywords.add("true")
+							keywords.add("false")
+							keywords.add("void") 
+							keywords.add("result") 
+							keywords.add("value") 
+					
+					
+				end	
+          		result :=keywords.contains(word)	          
+          		
+          		end
+
+	operation escape(s: String): String is
+		do
+			    if isKermetaKeyword(s) then
+			    	result := "~"
+		    	else
+			    	result := ""
+			    end
+			    result := result + s
+		end
+
+}

@@ -1,0 +1,44 @@
+/* $Id:$ 
+ * Creation : March 9, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Antonio de Almeida Souza Neto
+ */
+package ocl2DROOLS;
+
+
+require kermeta
+
+require "StructType.kmt"
+
+
+using kermeta::standard
+using kermeta::exceptions
+using kermeta::utils
+
+
+class TreeRules
+{
+	reference stackStructType : Stack<StructType>
+
+	reference childNode : Sequence<TreeRules>
+	
+	reference parentNode : TreeRules
+	
+	operation getListChildRules( listChildRules: Sequence<Stack<StructType>> ) is 
+		do
+			var structType : StructType init StructType.new
+				
+			
+			if ( not stackStructType.isVoid() ) then
+				if ( stackStructType.size() > 0 and childNode.isVoid() ) then
+					listChildRules.add(stackStructType)
+				end
+			end
+			
+			if (not childNode.isVoid()) then
+					childNode.each{ t | t.getListChildRules( listChildRules )	}
+				end
+		end
+}

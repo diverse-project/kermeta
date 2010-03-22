@@ -1,0 +1,8 @@
+package sample
+
+context A::getB(a: Integer, b: Boolean): B
+	pre: a > 0
+	pre: true
+	post: result = self.ab
+
+endpackage

@@ -1,0 +1,6 @@
+package company
+ -- simple example for new model 
+context Personnel::Person inv:
+	self.company ->first().employee.forename
+	
+endpackage

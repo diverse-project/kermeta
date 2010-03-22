@@ -1,0 +1,700 @@
+/* $Id: Ocl2DroolsVisitor.kmt,v 1.22 2010-02-25 14:15:06 dvojtise Exp $
+ * Creation date: February 25, 2010
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors: 
+ *			Antonio de Almeida Souza Neto
+ */
+
+  
+package ocl2DROOLS;
+require kermeta
+
+require "oclcstvisitor.kmt" 
+require "../helpers/QualifiedName.kmt"
+require "IOMixin.kmt" 
+
+ 
+require "../helpers/QualifiedName.kmt"
+
+require "KermetaHelper.kmt" 
+
+require "StructType.kmt"
+require "TreeRules.kmt"
+    
+using kermeta::standard
+using kermeta::exceptions
+using ocl::cst 
+using ocl::cst::visitors 
+using kermeta::utils
+using qualifiedNames
+
+
+
+ 
+/** This started out life as a pretty-printer from the parsed OCL Concrete Syntax Tree
+ ** to Kermeta source code. Of course this is not a simple case ore pretty-printing
+ ** because OCL has some oddities like the meaning of a.b.c depends on whether
+ ** a.b refers to a single object or a collection (or "association", it's helpful to think
+ ** about these as multiple associations, not as the collections that implement them
+ ** in a programming language like kermeta). So the TypeSystemMixin adds facilities
+ ** to keep track of the features (attributes and associations) and operations that
+ ** appear in these expressions, and what their returned types are. These are
+ ** called from within the visit methods here to set and, where necessary, obtain
+ ** the necessary additional type information.
+ **/
+ class Ocl2DroolsVisitor inherits Visitor {
+
+		attribute counterVar : Integer
+		
+		reference stackStructType : Stack<StructType>
+		
+		reference treeRules: TreeRules
+		
+		operation initializeAttributes() : Void is
+			do
+				counterVar := 1
+				
+				stackStructType :=  Stack<StructType>.new
+			end
+			
+		operation writeRules(ruleName: SimpleNameCS, contextName: String ) is
+			do
+				var structType : StructType init  StructType.new
+				var listRules : Sequence<Stack<StructType>> init Sequence<Stack<StructType>>.new
+				
+				//if is a stack top, we don't write the next type
+				//The last element can't reference another
+				var stackTop: Boolean init true
+				
+			
+				treeRules.getListChildRules(listRules)
+				
+				from var i : Integer init 0
+				until i == listRules.size()
+				loop
+					stdio.write("rule \"")
+					if ( not ruleName.isVoid() ) then
+						stdio.write(ruleName.~value.toString() )
+					else
+						stdio.write( "0" )
+					end
+					if ( i != 0 ) then
+						stdio.write( i.toString() )
+					end
+					stdio.writeln("\"")
+					stdio.writeln("when")
+
+					stackStructType := listRules.at(i)
+
+					stackTop := true
+				
+					//print the statements
+					from stackStructType.size()
+					until stackStructType.size() == 0
+					loop
+						structType := stackStructType.pop()
+						
+						stdio.write("	$var" + counterVar.toString() + ": ")
+						stdio.write("org.eclipse.emf.ecore.")
+						stdio.write(structType.typeElement + "(")
+						
+						if ( not structType.nameElement.isVoid() ) then
+							stdio.write("name == \"")
+							if ( stackStructType.size() == 0 ) then
+								stdio.write(contextName) //visitable.pathNameCS.sequenceOfNames.each{p| stdio.write(p)}
+								stdio.write("\"")
+							else	
+								stdio.write(structType.nameElement + "\"")
+							end
+	
+							
+							
+							if ( not structType.nextElement.isVoid() and not stackTop ) then
+								stdio.write(", ")
+							end
+	
+						end
+						
+						
+	
+						if ( not structType.nextElement.isVoid() and not stackTop ) then
+							stdio.write( structType.nextElement + " " + structType.relation + " $var" + (counterVar - 1).toString() )
+						end
+	
+						stdio.writeln(")")
+						
+						
+						counterVar := counterVar + 1
+						
+						stackTop := false
+					end
+					
+					
+					stdio.writeln("then")
+					stdio.write("	System.out.println(\"")
+					if ( not ruleName.isVoid() ) then
+						stdio.write(ruleName.~value.toString() )
+					else
+						stdio.write( "0" )
+					end
+					if ( i != 0 ) then
+						stdio.write( i.toString() )
+					end
+					stdio.writeln(" is applicable\");")
+					stdio.writeln("end")
+					stdio.writeln("")
+				
+				
+					i := i + 1
+				end
+			end
+		
+
+		operation writePrimitiveVariable(typeVar: String) is
+			do
+				var structType1 : StructType init StructType.new
+				var structType2 : StructType init StructType.new
+				
+				//if it's a primitive variable, it's not a true child
+				// then we remove the current child and use the brother
+				treeRules := treeRules.parentNode
+				treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
+				if ( treeRules.childNode.size() > 0 ) then
+					treeRules := treeRules.childNode.at(treeRules.childNode.size() - 1)
+				end
+
+				stackStructType := treeRules.stackStructType
+				
+				
+				//stackStructType := treeRules.parentNode.childNode.at(treeRules.childNode.size() - 1).stackStructType
+				if ( stackStructType.size()>=1 ) then
+					structType1 := stackStructType.pop()
+				end
+				if ( stackStructType.size()>=1 ) then
+					structType2 := stackStructType.pop()
+				end
+		
+				
+				if ( structType1.typeElement == "EOperation" ) then
+				
+					structType1.nextElement := "EType"
+					structType1.relation := "=="
+						
+					structType2.nextElement := "EAllOperations"
+					structType2.relation := "contains"
+					
+				else
+					structType1.typeElement := "EAttribute"
+					structType1.nextElement := "EAttributeType"
+					structType1.relation := "=="
+						
+					structType2.nextElement := "EAllAttributes"
+					structType2.relation := "contains"
+				end
+
+				stackStructType.push(structType2)
+				stackStructType.push(structType1)
+				
+				//stacks the statement "EDataType"
+				structType1 := StructType.new
+				structType1.typeElement := "EDataType"
+				structType1.nameElement := typeVar
+				
+				stackStructType.push(structType1)
+			end 
+
+
+	    operation visit(visitable : Visitable) : Void is
+			do
+			
+			end
+
+		method visitCSTNode(visitable : CSTNode) : Void is
+			do
+			
+			end
+			
+		method visitTypeCS(visitable : TypeCS) : kermeta::standard::~Void is
+			do
+    			
+			end
+		 
+		method visitPackageDeclarationCS(visitable : PackageDeclarationCS) : Void is
+			do
+  			 	visitable.contextDecls.each{e|e.accept(self)}
+   			 end
+		
+		method visitContextDeclCS(visitable : ContextDeclCS) : Void is
+			do
+
+			end
+
+		method visitPropertyContextCS(visitable : PropertyContextCS) : Void is
+			do
+
+			end
+
+		method visitClassifierContextDeclCS(visitable : ClassifierContextDeclCS) : Void is
+			do
+				stackStructType := Stack<StructType>.new
+			
+				treeRules := TreeRules.new
+				treeRules.stackStructType := stackStructType
+				visitable.invOrDefCS.accept(self)
+				
+				//(ruleName, contextName)
+				writeRules(visitable.invOrDefCS.simpleNameCS, visitable.pathNameCS.sequenceOfNames.elementAt(visitable.pathNameCS.sequenceOfNames.size() - 1) )
+
+			end
+			
+		attribute currentContextClassifier : ecore::EClassifier
+
+		method visitOperationContextDeclCS(visitable : OperationContextDeclCS) : Void is
+			do
+				stackStructType := Stack<StructType>.new
+			
+				treeRules := TreeRules.new
+				treeRules.stackStructType := stackStructType
+			
+				visitable.operationCS.accept(self)
+				
+				visitable.prePostOrBodyDecls.each{e|e.accept(self)}
+			end
+  
+		method visitPrePostOrBodyDeclCS(visitable : PrePostOrBodyDeclCS) : Void is
+			do
+				stdio.writeln("Pass visitPrePostOrBodyDeclCS")
+			end
+
+		
+
+		method visitOperationCS(visitable : OperationCS) : Void is
+			do
+				var structType : StructType init StructType.new
+				
+				stdio.writeln("Pass visitOperationCS")
+			
+				
+				structType.nameElement := visitable.pathNameCS.sequenceOfNames.at( visitable.pathNameCS.sequenceOfNames.size() - 1 )
+				structType.typeElement := "EClass"
+				structType.nextElement := "EAllOperations"
+				structType.relation := "contains"
+				stackStructType.push(structType)
+
+				structType := StructType.new
+				
+				structType.nameElement := visitable.simpleNameCS.~value
+				structType.typeElement := "EOperation"
+				structType.nextElement := "EType"
+				structType.relation := "=="
+				
+				stackStructType.push(structType)
+				
+				visitable.typeCS.accept(self)
+				
+				//(ruleName, contextName)
+				writeRules(visitable.simpleNameCS, visitable.pathNameCS.sequenceOfNames.at( visitable.pathNameCS.sequenceOfNames.size() - 1 ))
+				
+				visitable.pathNameCS.sequenceOfNames.each{e |stdio.writeln("pathName: " + e)}
+				
+				stdio.writeln("SimpleName: " + visitable.simpleNameCS.~value)
+				
+				if ( visitable.typeCS.isKindOf(PathNameCS) ) then
+					visitable.typeCS.asType(PathNameCS).sequenceOfNames.each{e |stdio.writeln("pathName 2: " + e)} 
+				end
+			end
+
+		method visitInitOrDerValueCS(visitable : InitOrDerValueCS) : Void is
+			do
+			
+			end
+
+		method visitDerValueCS(visitable : DerValueCS) : Void is
+			do
+				
+			end
+
+		method visitInitValueCS(visitable : InitValueCS) : Void is
+			do
+				
+			end
+
+		method visitInvOrDefCS(visitable : InvOrDefCS) : Void is
+			do
+			
+			end
+
+		method visitInvCS(visitable : InvCS) : Void is
+			do
+				visitable.expressionCS.accept(self)
+			end
+
+		method visitDefCS(visitable : DefCS) : Void is
+			do
+				
+			end
+
+		method visitDefExpressionCS(visitable : DefExpressionCS) : Void is
+			do
+			
+			end
+
+		method visitPathNameCS(visitable : PathNameCS) : Void is
+			do
+				
+			end
+          
+		method visitSimpleNameCS(visitable : SimpleNameCS) : Void is
+			do
+		    	
+			end
+
+		reference qualifiedTypeName: QualifiedName
+		
+		method visitPrimitiveTypeCS(visitable : PrimitiveTypeCS) : Void is
+			do
+			
+			end
+
+		method visitTupleTypeCS(visitable : TupleTypeCS) : Void is
+			do
+			
+			end
+
+		method visitCollectionTypeCS(visitable : CollectionTypeCS) : Void is
+			do
+				
+			end
+
+		method visitOCLExpressionCS(visitable : OCLExpressionCS) : Void is
+			do
+			
+			end
+			 
+		method visitVariableCS(visitable : VariableCS) : Void is
+			do
+    			
+			end
+
+		method visitLetExpCS(visitable : LetExpCS) : Void is
+			do
+				
+			end
+
+		method visitIfExpCS(visitable : IfExpCS) : Void is
+			do
+				
+			end
+
+		method visitMessageExpCS(visitable : MessageExpCS) : Void is
+			do
+				
+			end
+
+		method visitOCLMessageArgCS(visitable : OCLMessageArgCS) : Void is
+			do
+				
+			end
+
+		method visitLiteralExpCS(visitable : LiteralExpCS) : Void is
+			do
+							
+			end
+
+		operation visitEnumLiteral(visitable : EnumLiteralExpCS) : Void is
+			do
+    			
+			end
+			
+		operation visitEnumLiteralAsType(visitable : EnumLiteralExpCS) : Void is
+			do
+				
+			end
+			
+		method visitEnumLiteralExpCS(visitable : EnumLiteralExpCS) : Void is
+			do
+			
+			end
+
+		method visitCollectionLiteralExpCS(visitable : CollectionLiteralExpCS) : Void is
+			do
+			
+			end
+
+		method visitTupleLiteralExpCS(visitable : TupleLiteralExpCS) : Void is
+			do
+					
+			end
+
+		method visitPrimitiveLiteralExpCS(visitable : PrimitiveLiteralExpCS) : Void is
+			do
+
+			end
+
+		method visitIntegerLiteralExpCS(visitable : IntegerLiteralExpCS) : Void is
+			do
+				writePrimitiveVariable("EInt")
+			end
+
+		method visitRealLiteralExpCS(visitable : RealLiteralExpCS) : Void is
+			do
+				writePrimitiveVariable("EFloat")
+			end
+
+		method visitStringLiteralExpCS(visitable : StringLiteralExpCS) : Void is
+			do
+				writePrimitiveVariable("EString")
+			end
+
+		method visitBooleanLiteralExpCS(visitable : BooleanLiteralExpCS) : Void is
+			do
+				writePrimitiveVariable("EBoolean")
+			end
+
+		method visitNullLiteralExpCS(visitable : NullLiteralExpCS) : Void is
+			do
+
+			end
+
+		method visitInvalidLiteralExpCS(visitable : InvalidLiteralExpCS) : Void is
+			do
+						
+			end
+
+		method visitCollectionLiteralPartCS(visitable : CollectionLiteralPartCS) : Void is
+			do
+				
+			end
+
+		method visitCollectionRangeCS(visitable : CollectionRangeCS) : Void is
+			do
+				
+			end
+
+		method visitCallExpCS(visitable : CallExpCS) : Void is
+			do
+			
+			end
+
+		method visitLoopExpCS(visitable : LoopExpCS) : Void is
+			do
+				
+			end
+ 
+	
+		method visitIteratorExpCS(visitable : IteratorExpCS) : Void is
+			do
+				visitable.source.accept(self)
+				visitable.body.accept(self)
+			end
+
+		method visitIterateExpCS(visitable : IterateExpCS) : Void is
+			do
+			end
+			
+		operation handleVariableExpression(featureName: String): Void is
+			do
+			
+			end
+			
+		operation handleStringLiteral(content: String) : Void is
+			do
+			
+			end
+			
+		/**  You have thee choices here:
+		 ** - could be a string literal (there seems to be a bug in the parser that makes them look like this
+		 ** - it could be a variable expression, call the handler above
+		 ** - it coul dbe the name of a type, but only if we are expecting one because the function
+		 ** is one of those special ones that takes a type name as a parameter such as oclAsType(...)
+		 **/
+		method visitVariableExpCS(visitable : VariableExpCS) : Void is
+			do
+				var structType : StructType init StructType.new
+			
+				structType.nameElement := visitable.simpleNameCS.~value
+				if ( visitable.simpleNameCS.~value == "self" ) then
+					structType.typeElement := "EClass"
+					structType.nextElement := "EStructuralFeatures"
+					structType.relation := "contains"
+					
+					if ( stackStructType.size() > 0 ) then
+						stackStructType.clear()
+					end
+					
+					stackStructType.push(structType)
+
+				end
+
+			end
+		
+		operation visitActualParameters(visitable : FeatureCallExpCS) : Void is
+			do
+				
+			end
+		
+		method visitFeatureCallExpCS(visitable : FeatureCallExpCS) : Void is
+			do
+				var structType : StructType init StructType.new
+				
+				visitable.source.accept(self)
+								
+				//The "EClass" like context is already stacked in this case
+				if ( stackStructType.size() > 1 ) then
+					structType.typeElement := "EClass"
+					structType.nextElement := "EStructuralFeatures"
+					structType.relation := "contains"
+				
+					stackStructType.push(structType)
+					
+					structType := StructType.new
+				end
+
+				structType.nameElement := visitable.simpleNameCS.~value
+				structType.typeElement := "EStructuralFeature"
+				structType.nextElement := "EType"
+				structType.relation := "=="
+				
+				stackStructType.push(structType)
+			end
+
+		
+		method visitOperationCallExpCS(visitable : OperationCallExpCS) : Void is
+			do
+				var structType : StructType init StructType.new
+
+				
+				treeRules.childNode := Sequence<TreeRules>.new
+				
+				
+				if ( (visitable.simpleNameCS.~value != "self") and (not visitable.source.isVoid())) then
+					
+					treeRules.childNode.add( TreeRules.new )
+					
+					//fills the parent node in the child node
+					treeRules.childNode.at(0).parentNode := treeRules
+					
+					//navigate to down the tree of expressions
+					treeRules := treeRules.childNode.at(0)
+					
+					treeRules.stackStructType := Stack<StructType>.new
+					treeRules.stackStructType.addAll(stackStructType)
+					stackStructType := treeRules.stackStructType
+					
+					visitable.source.accept(self)
+					
+					
+					//To not print the comparison symbols like >, <= etc.
+					if ( visitable.simpleNameCS.type == SimpleTypeEnum.identifier ) then
+						//If the last is not Class, it use the new
+						if ( stackStructType.size() == 1 ) then
+							structType := stackStructType.pop()
+						end
+						
+						structType.typeElement := "EClass"
+						structType.nextElement := "EAllOperations"
+						structType.relation := "contains"
+					
+						stackStructType.push(structType)
+						
+						structType := StructType.new
+	
+						structType.nameElement := visitable.simpleNameCS.~value
+						structType.typeElement := "EOperation"
+						structType.nextElement := "EType"
+						structType.relation := "=="
+						
+						stackStructType.push(structType)
+					end
+					
+					
+					//navigate to up, returning
+					treeRules := treeRules.parentNode
+					
+					
+					//Remove the last element if no childs and its stack is void
+					if  (stackStructType.size() == 0) then
+						if (treeRules.childNode.at(treeRules.childNode.size() - 1).childNode.isVoid()) then
+							treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
+						else
+							if (treeRules.childNode.at(treeRules.childNode.size() - 1).childNode.size() == 0) then
+								treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
+							end
+						end
+						
+					end
+					
+					
+					stackStructType := treeRules.stackStructType
+				end
+				
+
+				from var i : Integer init 0
+				until i== visitable.arguments.size()
+				loop
+					
+					treeRules.childNode.add( TreeRules.new )
+					
+					//fills the parent node
+					treeRules.childNode.at(treeRules.childNode.size() - 1).parentNode := treeRules
+					
+					//navigate to down the tree of expressions
+					treeRules := treeRules.childNode.at(treeRules.childNode.size() - 1)
+					
+					treeRules.stackStructType := Stack<StructType>.new
+					treeRules.stackStructType.addAll(stackStructType)
+					stackStructType := treeRules.stackStructType
+					
+					visitable.arguments.at(i).accept(self)
+					
+					//navigate to up, returning
+					treeRules := treeRules.parentNode
+					
+					
+					//Remove the last element if no childs and its stack is void
+					if  (stackStructType.size() == 0) then
+						if (treeRules.childNode.at(treeRules.childNode.size() - 1).childNode.isVoid()) then
+							treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
+						else
+							if (treeRules.childNode.at(treeRules.childNode.size() - 1).childNode.size() == 0) then
+								treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
+							end
+						end
+						
+					end
+					
+					
+					
+					stackStructType := treeRules.stackStructType
+					
+					i := i + 1
+				end
+				
+				//If not exists a rule expression for this node, and it has just one or zero child, this node is cut
+				if ( treeRules.stackStructType.size() == 0 ) then
+					if (treeRules.childNode.size() == 1 ) then
+						if ( not treeRules.parentNode.isVoid() ) then
+							treeRules.childNode.at(0).parentNode := treeRules.parentNode
+							treeRules.parentNode.childNode.removeAt(treeRules.parentNode.childNode.size() - 1)
+							treeRules.parentNode.childNode.add(treeRules.childNode.at(0))
+						end
+						treeRules := treeRules.childNode.at(0)
+						stackStructType := treeRules.stackStructType
+					end
+				end
+
+			end
+
+		method visitIsMarkedPreCS(visitable : IsMarkedPreCS) : Void is
+			do
+					
+			end
+
+		method visitStateExpCS(visitable : StateExpCS) : Void is
+			do
+						
+			end
+
+	}
+	

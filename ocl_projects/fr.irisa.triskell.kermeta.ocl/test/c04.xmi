@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="139">
+  <pathNameCS startOffset="8" endOffset="14">
+    <sequenceOfNames>company</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="52" endOffset="124" invOrDefCS="//@contextDecls.0/@constraints.0">
+    <pathNameCS startOffset="60" endOffset="76">
+      <sequenceOfNames>Personnel</sequenceOfNames>
+      <sequenceOfNames>Person</sequenceOfNames>
+    </pathNameCS>
+    <constraints xsi:type="ocl.cst:InvCS" startOffset="78" endOffset="124">
+      <expressionCS xsi:type="ocl.cst:FeatureCallExpCS" startOffset="85" endOffset="124" accessor="dot">
+        <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="85" endOffset="115" accessor="dot">
+          <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="85" endOffset="106" accessor="arrow">
+            <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="85" endOffset="96" accessor="dot">
+              <source xsi:type="ocl.cst:VariableExpCS" startOffset="85" endOffset="88">
+                <simpleNameCS startOffset="85" endOffset="88" value="self" type="self"/>
+              </source>
+              <simpleNameCS startOffset="90" endOffset="96" value="company"/>
+            </source>
+            <simpleNameCS startOffset="100" endOffset="104" value="first"/>
+          </source>
+          <simpleNameCS startOffset="108" endOffset="115" value="employee"/>
+        </source>
+        <simpleNameCS startOffset="117" endOffset="124" value="forename"/>
+      </expressionCS>
+    </constraints>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>

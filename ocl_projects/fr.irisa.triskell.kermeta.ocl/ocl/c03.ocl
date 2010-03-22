@@ -1,0 +1,7 @@
+package company
+ -- simple example for new model 
+context Business::Company inv:
+	self.owner.oclIsKindOf (Personnel::Person) implies self.owner->oclAsType(Personnel::Person).forename <> 'duprie'
+	
+	
+endpackage

@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="287">
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="297">
   <pathNameCS startOffset="8" endOffset="18">
     <sequenceOfNames>kmLogo</sequenceOfNames>
     <sequenceOfNames>ASM</sequenceOfNames>
   </pathNameCS>
-  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="21" endOffset="129" invOrDefCS="//@contextDecls.0/@constraints.0">
-    <pathNameCS startOffset="29" endOffset="36">
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="23" endOffset="133" invOrDefCS="//@contextDecls.0/@constraints.0">
+    <pathNameCS startOffset="31" endOffset="38">
       <sequenceOfNames>ProcCall</sequenceOfNames>
     </pathNameCS>
-    <constraints xsi:type="ocl.cst:InvCS" startOffset="39" endOffset="129">
-      <simpleNameCS startOffset="43" endOffset="80" value="apropriate_number_of_actual_parameters"/>
-      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="85" endOffset="129">
-        <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="85" endOffset="102" accessor="arrow">
-          <source xsi:type="ocl.cst:VariableExpCS" startOffset="85" endOffset="94">
-            <simpleNameCS startOffset="85" endOffset="94" value="actualArgs"/>
+    <constraints xsi:type="ocl.cst:InvCS" startOffset="42" endOffset="133">
+      <simpleNameCS startOffset="46" endOffset="83" value="apropriate_number_of_actual_parameters"/>
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="89" endOffset="133">
+        <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="89" endOffset="106" accessor="arrow">
+          <source xsi:type="ocl.cst:VariableExpCS" startOffset="89" endOffset="98">
+            <simpleNameCS startOffset="89" endOffset="98" value="actualArgs"/>
           </source>
-          <simpleNameCS startOffset="97" endOffset="100" value="size"/>
+          <simpleNameCS startOffset="101" endOffset="104" value="size"/>
         </source>
-        <simpleNameCS startOffset="104" endOffset="104" value="=" type="String"/>
-        <arguments xsi:type="ocl.cst:OperationCallExpCS" startOffset="106" endOffset="129" accessor="arrow">
-          <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="106" endOffset="121" accessor="dot">
-            <source xsi:type="ocl.cst:VariableExpCS" startOffset="106" endOffset="116">
-              <simpleNameCS startOffset="106" endOffset="116" value="declaration"/>
+        <simpleNameCS startOffset="108" endOffset="108" value="=" type="String"/>
+        <arguments xsi:type="ocl.cst:OperationCallExpCS" startOffset="110" endOffset="133" accessor="arrow">
+          <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="110" endOffset="125" accessor="dot">
+            <source xsi:type="ocl.cst:VariableExpCS" startOffset="110" endOffset="120">
+              <simpleNameCS startOffset="110" endOffset="120" value="declaration"/>
             </source>
-            <simpleNameCS startOffset="118" endOffset="121" value="args"/>
+            <simpleNameCS startOffset="122" endOffset="125" value="args"/>
           </source>
-          <simpleNameCS startOffset="124" endOffset="127" value="size"/>
+          <simpleNameCS startOffset="128" endOffset="131" value="size"/>
         </arguments>
       </expressionCS>
     </constraints>
   </contextDecls>
-  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="133" endOffset="275" invOrDefCS="//@contextDecls.1/@constraints.0">
-    <pathNameCS startOffset="141" endOffset="155">
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="139" endOffset="283" invOrDefCS="//@contextDecls.1/@constraints.0">
+    <pathNameCS startOffset="147" endOffset="161">
       <sequenceOfNames>ProcDeclaration</sequenceOfNames>
     </pathNameCS>
-    <constraints xsi:type="ocl.cst:InvCS" startOffset="158" endOffset="275">
-      <simpleNameCS startOffset="162" endOffset="194" value="unique_names_for_formal_arguments"/>
-      <expressionCS xsi:type="ocl.cst:IteratorExpCS" startOffset="200" endOffset="275" accessor="arrow">
-        <source xsi:type="ocl.cst:VariableExpCS" startOffset="200" endOffset="203">
-          <simpleNameCS startOffset="200" endOffset="203" value="args"/>
+    <constraints xsi:type="ocl.cst:InvCS" startOffset="165" endOffset="283">
+      <simpleNameCS startOffset="169" endOffset="201" value="unique_names_for_formal_arguments"/>
+      <expressionCS xsi:type="ocl.cst:IteratorExpCS" startOffset="208" endOffset="283" accessor="arrow">
+        <source xsi:type="ocl.cst:VariableExpCS" startOffset="208" endOffset="211">
+          <simpleNameCS startOffset="208" endOffset="211" value="args"/>
         </source>
-        <simpleNameCS startOffset="206" endOffset="211" value="forAll" type="keyword"/>
-        <variable1 startOffset="215" endOffset="216" name="a1"/>
-        <body xsi:type="ocl.cst:IteratorExpCS" startOffset="220" endOffset="274" accessor="arrow">
-          <source xsi:type="ocl.cst:VariableExpCS" startOffset="220" endOffset="223">
-            <simpleNameCS startOffset="220" endOffset="223" value="args"/>
+        <simpleNameCS startOffset="214" endOffset="219" value="forAll" type="keyword"/>
+        <variable1 startOffset="223" endOffset="224" name="a1"/>
+        <body xsi:type="ocl.cst:IteratorExpCS" startOffset="228" endOffset="282" accessor="arrow">
+          <source xsi:type="ocl.cst:VariableExpCS" startOffset="228" endOffset="231">
+            <simpleNameCS startOffset="228" endOffset="231" value="args"/>
           </source>
-          <simpleNameCS startOffset="226" endOffset="231" value="forAll" type="keyword"/>
-          <variable1 startOffset="235" endOffset="236" name="a2"/>
-          <body xsi:type="ocl.cst:OperationCallExpCS" startOffset="240" endOffset="272">
-            <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="240" endOffset="256">
-              <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="240" endOffset="246" accessor="dot">
-                <source xsi:type="ocl.cst:VariableExpCS" startOffset="240" endOffset="241">
-                  <simpleNameCS startOffset="240" endOffset="241" value="a1"/>
+          <simpleNameCS startOffset="234" endOffset="239" value="forAll" type="keyword"/>
+          <variable1 startOffset="243" endOffset="244" name="a2"/>
+          <body xsi:type="ocl.cst:OperationCallExpCS" startOffset="248" endOffset="280">
+            <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="248" endOffset="264">
+              <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="248" endOffset="254" accessor="dot">
+                <source xsi:type="ocl.cst:VariableExpCS" startOffset="248" endOffset="249">
+                  <simpleNameCS startOffset="248" endOffset="249" value="a1"/>
                 </source>
-                <simpleNameCS startOffset="243" endOffset="246" value="name"/>
+                <simpleNameCS startOffset="251" endOffset="254" value="name"/>
               </source>
-              <simpleNameCS startOffset="248" endOffset="248" value="=" type="String"/>
-              <arguments xsi:type="ocl.cst:FeatureCallExpCS" startOffset="250" endOffset="256" accessor="dot">
-                <source xsi:type="ocl.cst:VariableExpCS" startOffset="250" endOffset="251">
-                  <simpleNameCS startOffset="250" endOffset="251" value="a2"/>
+              <simpleNameCS startOffset="256" endOffset="256" value="=" type="String"/>
+              <arguments xsi:type="ocl.cst:FeatureCallExpCS" startOffset="258" endOffset="264" accessor="dot">
+                <source xsi:type="ocl.cst:VariableExpCS" startOffset="258" endOffset="259">
+                  <simpleNameCS startOffset="258" endOffset="259" value="a2"/>
                 </source>
-                <simpleNameCS startOffset="253" endOffset="256" value="name"/>
+                <simpleNameCS startOffset="261" endOffset="264" value="name"/>
               </arguments>
             </source>
-            <simpleNameCS startOffset="258" endOffset="264" value="implies" type="String"/>
-            <arguments xsi:type="ocl.cst:OperationCallExpCS" startOffset="266" endOffset="272">
-              <source xsi:type="ocl.cst:VariableExpCS" startOffset="266" endOffset="267">
-                <simpleNameCS startOffset="266" endOffset="267" value="a1"/>
+            <simpleNameCS startOffset="266" endOffset="272" value="implies" type="String"/>
+            <arguments xsi:type="ocl.cst:OperationCallExpCS" startOffset="274" endOffset="280">
+              <source xsi:type="ocl.cst:VariableExpCS" startOffset="274" endOffset="275">
+                <simpleNameCS startOffset="274" endOffset="275" value="a1"/>
               </source>
-              <simpleNameCS startOffset="269" endOffset="269" value="=" type="String"/>
-              <arguments xsi:type="ocl.cst:VariableExpCS" startOffset="271" endOffset="272">
-                <simpleNameCS startOffset="271" endOffset="272" value="a2"/>
+              <simpleNameCS startOffset="277" endOffset="277" value="=" type="String"/>
+              <arguments xsi:type="ocl.cst:VariableExpCS" startOffset="279" endOffset="280">
+                <simpleNameCS startOffset="279" endOffset="280" value="a2"/>
               </arguments>
             </arguments>
           </body>

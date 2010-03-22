@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="155">
+  <pathNameCS startOffset="8" endOffset="14">
+    <sequenceOfNames>company</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="49" endOffset="143" invOrDefCS="//@contextDecls.0/@constraints.0">
+    <pathNameCS startOffset="57" endOffset="73">
+      <sequenceOfNames>Business</sequenceOfNames>
+      <sequenceOfNames>Company</sequenceOfNames>
+    </pathNameCS>
+    <constraints xsi:type="ocl.cst:InvCS" startOffset="75" endOffset="143">
+      <expressionCS xsi:type="ocl.cst:IteratorExpCS" startOffset="82" endOffset="143" accessor="arrow">
+        <source xsi:type="ocl.cst:IteratorExpCS" startOffset="82" endOffset="119" accessor="arrow">
+          <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="82" endOffset="94" accessor="dot">
+            <source xsi:type="ocl.cst:VariableExpCS" startOffset="82" endOffset="85">
+              <simpleNameCS startOffset="82" endOffset="85" value="self" type="self"/>
+            </source>
+            <simpleNameCS startOffset="87" endOffset="94" value="employee"/>
+          </source>
+          <simpleNameCS startOffset="97" endOffset="102" value="select" type="keyword"/>
+          <variable1 startOffset="105" endOffset="105" name="e"/>
+          <body xsi:type="ocl.cst:OperationCallExpCS" startOffset="109" endOffset="118">
+            <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="109" endOffset="113" accessor="dot">
+              <source xsi:type="ocl.cst:VariableExpCS" startOffset="109" endOffset="109">
+                <simpleNameCS startOffset="109" endOffset="109" value="e"/>
+              </source>
+              <simpleNameCS startOffset="111" endOffset="113" value="age"/>
+            </source>
+            <simpleNameCS startOffset="115" endOffset="115" value=">" type="String"/>
+            <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="117" endOffset="118" symbol="45" integerSymbol="45"/>
+          </body>
+        </source>
+        <simpleNameCS startOffset="122" endOffset="127" value="forAll" type="keyword"/>
+        <variable1 startOffset="130" endOffset="130" name="e"/>
+        <body xsi:type="ocl.cst:OperationCallExpCS" startOffset="133" endOffset="142">
+          <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="133" endOffset="137" accessor="dot">
+            <source xsi:type="ocl.cst:VariableExpCS" startOffset="133" endOffset="133">
+              <simpleNameCS startOffset="133" endOffset="133" value="e"/>
+            </source>
+            <simpleNameCS startOffset="135" endOffset="137" value="age"/>
+          </source>
+          <simpleNameCS startOffset="139" endOffset="139" value=">" type="String"/>
+          <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="141" endOffset="142" symbol="45" integerSymbol="45"/>
+        </body>
+      </expressionCS>
+    </constraints>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>

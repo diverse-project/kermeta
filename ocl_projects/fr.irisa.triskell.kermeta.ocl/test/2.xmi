@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="98">
+  <pathNameCS startOffset="8" endOffset="15">
+    <sequenceOfNames>package1</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="20" endOffset="81" invOrDefCS="//@contextDecls.0/@constraints.0">
+    <pathNameCS startOffset="28" endOffset="28">
+      <sequenceOfNames>A</sequenceOfNames>
+    </pathNameCS>
+    <constraints xsi:type="ocl.cst:InvCS" startOffset="32" endOffset="81">
+      <simpleNameCS startOffset="36" endOffset="46" value="nameminsize"/>
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="52" endOffset="81">
+        <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="52" endOffset="76" accessor="dot">
+          <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="52" endOffset="71" accessor="dot">
+            <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="52" endOffset="66" accessor="dot">
+              <source xsi:type="ocl.cst:VariableExpCS" startOffset="52" endOffset="55">
+                <simpleNameCS startOffset="52" endOffset="55" value="self" type="self"/>
+              </source>
+              <simpleNameCS startOffset="57" endOffset="66" value="university"/>
+            </source>
+            <simpleNameCS startOffset="68" endOffset="71" value="name"/>
+          </source>
+          <simpleNameCS startOffset="73" endOffset="76" value="size"/>
+        </source>
+        <simpleNameCS startOffset="78" endOffset="79" value=">=" type="String"/>
+        <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="81" endOffset="81" symbol="8" integerSymbol="8"/>
+      </expressionCS>
+    </constraints>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>

@@ -1,0 +1,128 @@
+/* $Id: IOHelper.kmt,v 1.5 2008-11-02 18:21:05 barais Exp $
+ * Creation date: July 25, 2007
+ * License:
+ * Copyright:
+ * Authors: Mark Skipper
+ */
+
+
+package ocl2kmt; 
+
+require kermeta
+
+using kermeta::standard
+using kermeta::io
+using kermeta::exceptions
+
+class StringWriter inherits StdIO
+{ 
+ 
+	reference s: String
+ 
+	method write(object: String) is
+		do
+			if s.isVoid then 
+				s := object
+			else
+				s.append(object)
+			end
+		end 
+		
+	method writeln(object: String) is
+		do
+			self.write(object)
+			self.write("\n")
+		end
+		
+	method read(prompt: String): String is
+		do
+			var e: Exception init Exception.new
+			e.message := "Sorry, you can't read from a writer"
+			raise e
+		end
+}
+
+class FileWriter inherits StdIO
+{
+
+	reference f: kermeta::io::FileIO
+	reference filename :String
+	method write(object: String) is
+		do
+			if f.isVoid then
+				f := kermeta::io::FileIO.new
+			end
+			if filename != void then
+					
+				f.writeTextFile(filename, object)
+			else
+				var e: Exception init Exception.new
+				e.message := "Sorry, filename is not set"
+				
+				raise e
+			end
+			
+		end
+		
+	method writeln(object: String) is
+		do
+			self.write(object)
+			self.write(" ")
+		end
+		
+	method read(prompt: String): String is
+		do
+			var e: Exception init Exception.new
+			e.message := "Sorry, you can't read from a writer"
+			raise e
+		end
+}
+
+class IOHelper {
+			
+		reference  __io: StdIO 
+		
+		operation getIo(): StdIO is
+			do
+				if __io.isVoid then
+					// writes to a string by default
+					__io :=StringWriter.new
+				end
+				result := __io
+			end
+		reference  __ierr: StdIO 
+		
+		operation getIerr(): StdIO is
+			do
+				if __io.isVoid then
+					__io :=stdio
+				end
+				result := __io
+			end
+		/**
+		 * Use this to set a string writer to get the generated source as a string
+		 */
+		operation setIo(newio: StdIO) is
+			do
+				self.__io := newio
+			end
+		
+	    operation write(s: String) : Void is
+		    do
+		    	getIo.write(s)
+		    end
+    
+	    operation writeln(s: String): Void is
+		    do
+		    	getIo.writeln(s)
+		    end
+		 operation writeerr(s: String) : Void is
+		    do
+		    	getIo.write(s)
+		    end
+    
+	    operation writeerrln(s: String): Void is
+		    do
+		    	getIo.writeln(s)
+		    end
+}

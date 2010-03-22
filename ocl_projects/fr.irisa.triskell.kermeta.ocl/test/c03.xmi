@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="214">
+  <pathNameCS startOffset="8" endOffset="14">
+    <sequenceOfNames>company</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="52" endOffset="196" invOrDefCS="//@contextDecls.0/@constraints.0">
+    <pathNameCS startOffset="60" endOffset="76">
+      <sequenceOfNames>Business</sequenceOfNames>
+      <sequenceOfNames>Company</sequenceOfNames>
+    </pathNameCS>
+    <constraints xsi:type="ocl.cst:InvCS" startOffset="78" endOffset="196">
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="85" endOffset="196">
+        <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="85" endOffset="126" accessor="dot">
+          <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="85" endOffset="94" accessor="dot">
+            <source xsi:type="ocl.cst:VariableExpCS" startOffset="85" endOffset="88">
+              <simpleNameCS startOffset="85" endOffset="88" value="self" type="self"/>
+            </source>
+            <simpleNameCS startOffset="90" endOffset="94" value="owner"/>
+          </source>
+          <simpleNameCS startOffset="96" endOffset="106" value="oclIsKindOf"/>
+          <arguments xsi:type="ocl.cst:EnumLiteralExpCS" startOffset="109" endOffset="125">
+            <pathNameCS startOffset="109" endOffset="117">
+              <sequenceOfNames>Personnel</sequenceOfNames>
+            </pathNameCS>
+            <simpleNameCS startOffset="120" endOffset="125" value="Person"/>
+          </arguments>
+        </source>
+        <simpleNameCS startOffset="128" endOffset="134" value="implies" type="String"/>
+        <arguments xsi:type="ocl.cst:OperationCallExpCS" startOffset="136" endOffset="196">
+          <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="136" endOffset="184" accessor="dot">
+            <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="136" endOffset="175" accessor="arrow">
+              <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="136" endOffset="145" accessor="dot">
+                <source xsi:type="ocl.cst:VariableExpCS" startOffset="136" endOffset="139">
+                  <simpleNameCS startOffset="136" endOffset="139" value="self" type="self"/>
+                </source>
+                <simpleNameCS startOffset="141" endOffset="145" value="owner"/>
+              </source>
+              <simpleNameCS startOffset="148" endOffset="156" value="oclAsType"/>
+              <arguments xsi:type="ocl.cst:EnumLiteralExpCS" startOffset="158" endOffset="174">
+                <pathNameCS startOffset="158" endOffset="166">
+                  <sequenceOfNames>Personnel</sequenceOfNames>
+                </pathNameCS>
+                <simpleNameCS startOffset="169" endOffset="174" value="Person"/>
+              </arguments>
+            </source>
+            <simpleNameCS startOffset="177" endOffset="184" value="forename"/>
+          </source>
+          <simpleNameCS startOffset="186" endOffset="187" value="&lt;>" type="String"/>
+          <arguments xsi:type="ocl.cst:StringLiteralExpCS" startOffset="189" endOffset="196" symbol="'duprie'" stringSymbol="'duprie'" unescapedStringSymbol="duprie"/>
+        </arguments>
+      </expressionCS>
+    </constraints>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>
