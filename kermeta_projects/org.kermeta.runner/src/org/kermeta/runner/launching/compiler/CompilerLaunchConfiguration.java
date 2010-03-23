@@ -115,7 +115,7 @@ public class CompilerLaunchConfiguration implements
 		} catch (URIMalformedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (NotRegisteredURIException e) {
+		} catch (NotRegisteredURIException e) { 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
