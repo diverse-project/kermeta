@@ -10,7 +10,6 @@ package fr.irisa.triskell.kermeta.compilo.scala
 
 import java.util.Properties
 import java.util.ResourceBundle
-import scala.tools.nsc.io.File
 import scala.collection.JavaConversions._
 
 object GlobalConfiguration extends LogAspect{

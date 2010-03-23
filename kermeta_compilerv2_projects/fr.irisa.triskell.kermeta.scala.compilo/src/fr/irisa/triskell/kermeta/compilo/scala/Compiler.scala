@@ -33,10 +33,12 @@ class Compiler extends RichAspectImplicit with LogAspect {
         println(GlobalConfiguration.outputFolder)
         var fi  = new File(url);
         var fo =  new File(GlobalConfiguration.outputFolder +File.separator+".."+File.separator + "resources").getCanonicalFile
-        fo.mkdir
+        fo.mkdirs
         fo = new File(GlobalConfiguration.outputFolder  +File.separator+".."+File.separator + "resources"+File.separator +"Reflexivity.km" ).getCanonicalFile
         if (fo.exists)
             fo.delete
+       
+        
 
         fo.createNewFile
         ReflexivityLoader.copyFile(fi, fo);

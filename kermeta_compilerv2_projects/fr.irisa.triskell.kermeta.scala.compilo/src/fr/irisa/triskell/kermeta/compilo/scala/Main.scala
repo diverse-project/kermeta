@@ -189,8 +189,10 @@ object Main extends LogAspect {
              }*/
             if (GlobalConfiguration.exec && !GlobalConfiguration.createPackage ){
                 var classpath =EmbettedScalaCompiler.getActualClasspath
+                println(classpath.mkString)
                 if (additionalClassPath != null)
                     classpath = classpath ++ additionalClassPath
+                classpath = classpath ++ List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo/target/kermeta.compilo.scala-0.0.1-SNAPSHOT.jar")
                 var oldOut : java.io.OutputStream = System.out
                 var oldErr : java.io.OutputStream = System.err
 
