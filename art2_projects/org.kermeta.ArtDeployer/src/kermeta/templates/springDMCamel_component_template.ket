@@ -28,28 +28,39 @@ parameters="c : art2::ComponentInstance"
 
 	<!-- create hosted ports -->
 <%c.hostedPorts.each{ hp | %>
+	<% var interfaceImpl : String init "" %>
 	<%if hp.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then%>
+	<% interfaceImpl := hp.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface %>
+	<%else%>
+	<% interfaceImpl := "org.kermeta.art2.framework.MessagePort"  %>
+	<%end%>
 	
 	<!-- Port Bean -->
 		<bean id="<%=hp.portTypeRef.name%>" class="<%=hp.portTypeRef.ref.bean%>">
-			<property name="container" ref="<%=c.name%>" />
+			<property name="component" ref="<%=c.name%>" />
+			<property name="name" value="<%=hp.portTypeRef.name%>" />
 		</bean>
 	
 	<!-- Export Bean via osgi -->
-		<osgi:service ref="<%=hp.portTypeRef.name%>" interface="<%=hp.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface%>">
+		<osgi:service ref="<%=hp.portTypeRef.name%>" interface="<%=interfaceImpl%>">
 			<osgi:service-properties>
 				<entry key="artPorttyperefName" value="<%=hp.portTypeRef.name%>" />
 				<entry key="artComponentinstanceName" value="<%=c.name%>" />
 			</osgi:service-properties>
 		</osgi:service>
 		
-	<%end%>
 <%}%>
 
 
 	<!-- create needed port binding -->
 <%c.requirePorts.each{np | %>
+	<% var interfaceImpl : String init "" %>
 	<%if np.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then%>
+	<% interfaceImpl := np.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface %>
+	<%else%>
+	<% interfaceImpl := "org.kermeta.art2.framework.MessagePort"  %>
+	<%end%>
+
 		<% var portBinding : art2::Binding init void %>
 		<% var remoteNode : art2::ContainerNode init void %>
 		<% c.container.container.asType(art2::ContainerRoot).bindings.each{b | %>
@@ -62,38 +73,44 @@ parameters="c : art2::ComponentInstance"
 		<%  var remotePortTypeName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.asType(art2::Port).portTypeRef.name   %>
 
 		<%if remoteNode.name.equals(c.container.asType(art2::ContainerNode).name ) then%>
-			<osgi:reference id="<%=np.portTypeRef.name%>" interface="<%=np.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface%>" filter="(&amp;(artComponentinstanceName=<%=remoteComponentInstanceName%>)(artPorttyperefName=<%=remotePortTypeName%>))" cardinality="1..1" />
+			<osgi:reference id="<%=np.portTypeRef.name%>" interface="<%=interfaceImpl%>" filter="(&amp;(artComponentinstanceName=<%=remoteComponentInstanceName%>)(artPorttyperefName=<%=remotePortTypeName%>))" cardinality="1..1" />
 		<%end%>
-	<%end%>
 <%}%>
 
 <camelContext id="camelContext" xmlns="http://camel.apache.org/schema/spring">
 <%c.hostedPorts.each{ hp | %>
+	<% var interfaceImpl : String init "" %>
 	<%if hp.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then%>
-		<!-- Export Bean via Camel/ActiveMQ -->
-	<camel:export id="<%=hp.portTypeRef.name%>Proxy" uri="activemq:topic:<%=c.name%>.<%=hp.portTypeRef.name%>?durableSubscriptionName=<%=c.name%>" serviceRef="<%=hp.portTypeRef.name%>" serviceInterface="<%=hp.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface%>"/>
+	<% interfaceImpl := hp.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface %>
+	<%else%>
+	<% interfaceImpl := "org.kermeta.art2.framework.MessagePort"  %>
 	<%end%>
+	<!-- Export Bean via Camel/ActiveMQ -->
+	<camel:export id="<%=hp.portTypeRef.name%>Proxy" uri="activemq:queue:<%=c.name%>.<%=hp.portTypeRef.name%>?durableSubscriptionName=<%=c.name%>" serviceRef="<%=hp.portTypeRef.name%>" serviceInterface="<%=interfaceImpl%>"/>
 <%}%>
-	<!-- create needed port binding -->
+
+<!-- create needed port binding -->
 <%c.requirePorts.each{np | %>
+	<% var interfaceImpl : String init "" %>
 	<%if np.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then%>
-			<% var portBinding : art2::Binding init void %>
-			<% var remoteNode : art2::ContainerNode init void %>
-			<% c.container.container.asType(art2::ContainerRoot).bindings.each{b | %>
-					<% b.ports.each{ p | %>
-						<%if(p.name.equals(np.name)) then%>
-							<% portBinding := b %>
-							<% remoteNode := p.container.container.asType(art2::ContainerNode)  %>
-						<%end%>
-				<%}%>
-			<%}%>
+	<% interfaceImpl := np.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface %>
+	<%else%>
+	<% interfaceImpl := "org.kermeta.art2.framework.MessagePort"  %>
+	<%end%>
+	<% var portBinding : art2::Binding init void %>
+	<% var remoteNode : art2::ContainerNode init void %>
+	<% c.container.container.asType(art2::ContainerRoot).bindings.each{b | %>
+		<% b.ports.each{ p | %>
+			<%if(p.name.equals(np.name)) then%>
+				<% portBinding := b %>
+				<% remoteNode := p.container.container.asType(art2::ContainerNode)  %>
+			<%end%>
+		<%}%>
+	<%}%>
 	<%  var remoteComponentInstanceName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.container.asType(art2::NamedElement).name   %>
 	<%  var remotePortTypeName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.asType(art2::Port).portTypeRef.name   %>
 
-<%if not(remoteNode.name.equals(c.container.asType(art2::ContainerNode).name )) then%>
-<camel:proxy id="<%=np.portTypeRef.name%>" serviceInterface="<%=np.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface%>" serviceUrl="activemq:topic:<%=remoteComponentInstanceName%>.<%=remotePortTypeName%>"/>
-<%end%>
-<%end%>
+<camel:proxy id="<%=np.portTypeRef.name%>" serviceInterface="<%=interfaceImpl%>" serviceUrl="activemq:queue:<%=remoteComponentInstanceName%>.<%=remotePortTypeName%>"/>
 <%}%>
 </camelContext>
 	
@@ -108,18 +125,27 @@ parameters="c : art2::ComponentInstance"
 		</property>
 		<!-- end property -->
 	
-		<!-- inject hosted ports -->
+<!-- inject hosted ports -->
+<property name="hostedPorts">
+<map>	
 <%c.hostedPorts.each{ hp | %>
-	<%if hp.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then%>	
-		<property name="<%=hp.portTypeRef.name%>" ref="<%=hp.portTypeRef.name%>" />
-	<%end%>
+<entry key="<%=hp.portTypeRef.name%>">
+<ref bean="<%=hp.portTypeRef.name%>" />
+</entry>
 <%}%>
+</map>
+</property>
 
-		<!-- inject needed ports -->
-		<%c.requirePorts.each{np | %>
-			<%if np.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then%>
-					<property name="<%=np.portTypeRef.name%>" ref="<%=np.portTypeRef.name%>" />
-			<%end%>
-		<%}%>
+<!-- inject hosted ports -->
+<property name="neededPorts">
+<map>	
+<%c.requirePorts.each{ np | %>
+<entry key="<%=np.portTypeRef.name%>">
+<ref bean="<%=np.portTypeRef.name%>" />
+</entry>
+<%}%>
+</map>
+</property>
+
 	</bean>
 </beans>

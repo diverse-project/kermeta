@@ -9,30 +9,50 @@ var _res: StringBuffer init StringBuffer.new
 _res.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->\n<beans xmlns=\"http://www.springframework.org/schema/beans\"\n       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n       xmlns:amq=\"http://activemq.apache.org/schema/core\"\n       xmlns:osgi=\"http://www.springframework.org/schema/osgi\"\n       xmlns:camel=\"http://camel.apache.org/schema/spring\"\n       xsi:schemaLocation=\"\n       http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd\n       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd\n       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd\n       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd\">\n    \n    <!-- Create ActiveMQ Camel component instance -->\n    <bean id=\"activemq\" class=\"org.apache.activemq.camel.component.ActiveMQComponent\">\n        <property name=\"brokerURL\" value=\"vm://default\"/>\n    </bean>\n\n\t<!-- create hosted ports -->\n")
 c.hostedPorts.each{ hp | 
 _res.append("")
+ var interfaceImpl : String init "" 
+_res.append("")
 if hp.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then
+_res.append("")
+ interfaceImpl := hp.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface 
+_res.append("")
+else
+_res.append("")
+ interfaceImpl := "org.kermeta.art2.framework.MessagePort"  
+_res.append("")
+end
 _res.append("\t\n\t<!-- Port Bean -->\n\t\t<bean id=\"")
 _res.append(hp.portTypeRef.name)
 _res.append("\" class=\"")
 _res.append(hp.portTypeRef.ref.bean)
-_res.append("\">\n\t\t\t<property name=\"container\" ref=\"")
+_res.append("\">\n\t\t\t<property name=\"component\" ref=\"")
 _res.append(c.name)
+_res.append("\" />\n\t\t\t<property name=\"name\" value=\"")
+_res.append(hp.portTypeRef.name)
 _res.append("\" />\n\t\t</bean>\n\t\n\t<!-- Export Bean via osgi -->\n\t\t<osgi:service ref=\"")
 _res.append(hp.portTypeRef.name)
 _res.append("\" interface=\"")
-_res.append(hp.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface)
+_res.append(interfaceImpl)
 _res.append("\">\n\t\t\t<osgi:service-properties>\n\t\t\t\t<entry key=\"artPorttyperefName\" value=\"")
 _res.append(hp.portTypeRef.name)
 _res.append("\" />\n\t\t\t\t<entry key=\"artComponentinstanceName\" value=\"")
 _res.append(c.name)
 _res.append("\" />\n\t\t\t</osgi:service-properties>\n\t\t</osgi:service>\n\t\t\n")
-end
-_res.append("")
 }
 _res.append("\n\n\t<!-- create needed port binding -->\n")
 c.requirePorts.each{np | 
 _res.append("")
+ var interfaceImpl : String init "" 
+_res.append("")
 if np.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then
 _res.append("")
+ interfaceImpl := np.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface 
+_res.append("")
+else
+_res.append("")
+ interfaceImpl := "org.kermeta.art2.framework.MessagePort"  
+_res.append("")
+end
+_res.append("\n")
  var portBinding : art2::Binding init void 
 _res.append("")
  var remoteNode : art2::ContainerNode init void 
@@ -57,7 +77,7 @@ if remoteNode.name.equals(c.container.asType(art2::ContainerNode).name ) then
 _res.append("\t\t\t<osgi:reference id=\"")
 _res.append(np.portTypeRef.name)
 _res.append("\" interface=\"")
-_res.append(np.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface)
+_res.append(interfaceImpl)
 _res.append("\" filter=\"(&amp;(artComponentinstanceName=")
 _res.append(remoteComponentInstanceName)
 _res.append(")(artPorttyperefName=")
@@ -65,16 +85,24 @@ _res.append(remotePortTypeName)
 _res.append("))\" cardinality=\"1..1\" />\n")
 end
 _res.append("")
-end
-_res.append("")
 }
 _res.append("\n<camelContext id=\"camelContext\" xmlns=\"http://camel.apache.org/schema/spring\">\n")
 c.hostedPorts.each{ hp | 
 _res.append("")
+ var interfaceImpl : String init "" 
+_res.append("")
 if hp.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then
-_res.append("\t\t<!-- Export Bean via Camel/ActiveMQ -->\n\t<camel:export id=\"")
+_res.append("")
+ interfaceImpl := hp.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface 
+_res.append("")
+else
+_res.append("")
+ interfaceImpl := "org.kermeta.art2.framework.MessagePort"  
+_res.append("")
+end
+_res.append("\t<!-- Export Bean via Camel/ActiveMQ -->\n\t<camel:export id=\"")
 _res.append(hp.portTypeRef.name)
-_res.append("Proxy\" uri=\"activemq:topic:")
+_res.append("Proxy\" uri=\"activemq:queue:")
 _res.append(c.name)
 _res.append(".")
 _res.append(hp.portTypeRef.name)
@@ -83,15 +111,23 @@ _res.append(c.name)
 _res.append("\" serviceRef=\"")
 _res.append(hp.portTypeRef.name)
 _res.append("\" serviceInterface=\"")
-_res.append(hp.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface)
+_res.append(interfaceImpl)
 _res.append("\"/>\n")
-end
-_res.append("")
 }
-_res.append("\t<!-- create needed port binding -->\n")
+_res.append("\n<!-- create needed port binding -->\n")
 c.requirePorts.each{np | 
 _res.append("")
+ var interfaceImpl : String init "" 
+_res.append("")
 if np.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then
+_res.append("")
+ interfaceImpl := np.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface 
+_res.append("")
+else
+_res.append("")
+ interfaceImpl := "org.kermeta.art2.framework.MessagePort"  
+_res.append("")
+end
 _res.append("")
  var portBinding : art2::Binding init void 
 _res.append("")
@@ -116,21 +152,15 @@ _res.append("")
   var remoteComponentInstanceName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.container.asType(art2::NamedElement).name   
 _res.append("")
   var remotePortTypeName : String init portBinding.ports.select{ p | not(p.name.equals(np.name)) }.first.asType(art2::Port).portTypeRef.name   
-_res.append("\n")
-if not(remoteNode.name.equals(c.container.asType(art2::ContainerNode).name )) then
-_res.append("<camel:proxy id=\"")
+_res.append("\n<camel:proxy id=\"")
 _res.append(np.portTypeRef.name)
 _res.append("\" serviceInterface=\"")
-_res.append(np.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface)
-_res.append("\" serviceUrl=\"activemq:topic:")
+_res.append(interfaceImpl)
+_res.append("\" serviceUrl=\"activemq:queue:")
 _res.append(remoteComponentInstanceName)
 _res.append(".")
 _res.append(remotePortTypeName)
 _res.append("\"/>\n")
-end
-_res.append("")
-end
-_res.append("")
 }
 _res.append("</camelContext>\n\t\n\n\t<!-- create the bean -->\n\t<bean id=\"")
 _res.append(c.name)
@@ -138,31 +168,23 @@ _res.append("\" class=\"")
 _res.append(c.componentType.bean)
 _res.append("\" init-method=\"init\" destroy-method=\"stop\">\n\t\t<!-- property -->\n\t\t<property name=\"dictionary\">\n\t\t\t<props>\n\t\t\t\t<prop key=\"art.name\">")
 _res.append(c.name)
-_res.append("</prop>\n\t\t\t</props>\n\t\t</property>\n\t\t<!-- end property -->\n\t\n\t\t<!-- inject hosted ports -->\n")
+_res.append("</prop>\n\t\t\t</props>\n\t\t</property>\n\t\t<!-- end property -->\n\t\n<!-- inject hosted ports -->\n<property name=\"hostedPorts\">\n<map>\t\n")
 c.hostedPorts.each{ hp | 
-_res.append("")
-if hp.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then
-_res.append("\t\t<property name=\"")
+_res.append("<entry key=\"")
 _res.append(hp.portTypeRef.name)
-_res.append("\" ref=\"")
+_res.append("\">\n<ref bean=\"")
 _res.append(hp.portTypeRef.name)
-_res.append("\" />\n")
-end
-_res.append("")
+_res.append("\" />\n</entry>\n")
 }
-_res.append("\n\t\t<!-- inject needed ports -->\n")
-c.requirePorts.each{np | 
-_res.append("")
-if np.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then
-_res.append("\t\t\t\t\t<property name=\"")
+_res.append("</map>\n</property>\n\n<!-- inject hosted ports -->\n<property name=\"neededPorts\">\n<map>\t\n")
+c.requirePorts.each{ np | 
+_res.append("<entry key=\"")
 _res.append(np.portTypeRef.name)
-_res.append("\" ref=\"")
+_res.append("\">\n<ref bean=\"")
 _res.append(np.portTypeRef.name)
-_res.append("\" />\n")
-end
-_res.append("")
+_res.append("\" />\n</entry>\n")
 }
-_res.append("\t</bean>\n</beans>")
+_res.append("</map>\n</property>\n\n\t</bean>\n</beans>")
 result := _res.toString
 end
 }

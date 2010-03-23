@@ -12,7 +12,10 @@ require kermeta
 require "AbstractArtDeployCommand.kmt"
 require "platform:/resource/org.kermeta.art.model/metamodel/art.ecore"
 require "templates/karaf_feature_template.kmt"
-require "templates/blueprint_component_template.kmt"
+//require "templates/blueprint_component_template.kmt"
+//require "templates/springDM_component_template.kmt"
+require "templates/springDMCamel_component_template.kmt"
+
 using kermeta::io
 using kermeta::standard
 
@@ -75,7 +78,8 @@ class AddComponentInstance inherits ComponentInstanceCommand
 {
 	method execute(ctx : CommandContext) is do 
 	//GENERATE & DEPLOY A BLUEPRINT INSTANCE
-		var generator : BluePrintGenerator init BluePrintGenerator.new
+		//var generator : BluePrintGenerator init BluePrintGenerator.new
+		var generator : ComponentInstanceGenerator init ComponentInstanceGenerator.new		
 		stdio.writeln("Generate "+self.contextComponentInstance.name+" BluePrintComponent to "+ctx.runtimePATH)
 		var fileIO : FileIO init FileIO.new 
 		var xml : String init generator.generate(contextComponentInstance)
@@ -99,7 +103,8 @@ class UpdateComponentInstance inherits ComponentInstanceCommand
 {
 	method execute(ctx : CommandContext) is do
 	//UPDATE AN ALREADY DEPLOY BLUEPRINT INSTANCE
-		var generator : BluePrintGenerator init BluePrintGenerator.new
+		//var generator : BluePrintGenerator init BluePrintGenerator.new
+		var generator : ComponentInstanceGenerator init ComponentInstanceGenerator.new
 		stdio.writeln("GenerateUpdate "+self.contextComponentInstance.name+" BluePrintComponent to "+ctx.runtimePATH)
 		var fileIO : FileIO init FileIO.new 
 		var xml : String init generator.generate(contextComponentInstance)

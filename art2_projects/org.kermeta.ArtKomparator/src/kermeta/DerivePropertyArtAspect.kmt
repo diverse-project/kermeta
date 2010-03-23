@@ -47,9 +47,9 @@ aspect class ComponentInstance {
 		//TEST COLLECTION BINDINGS
 		if(not(result))
 		then
-			//ckeck all bindings from runtime node where neededPorts used
+			//ckeck all bindings from runtime where neededPorts used
 			var neededBindingRuntime : OrderedSet<Binding> init OrderedSet<Binding>.new
-			self.container.asType(ContainerNode).bindings.each{b|
+			self.container.container.asType(ContainerRoot).bindings.each{b|
 				b.ports.each{p|
 					self.requirePorts.each{np|
 						if(np.isEquals(p)) then neededBindingRuntime.add(b) end
@@ -58,7 +58,7 @@ aspect class ComponentInstance {
 			}
 			//check all bindings from update node where neededPorts used
 			var neededBindingUpdate : OrderedSet<Binding> init OrderedSet<Binding>.new
-			ct.container.asType(ContainerNode).bindings.each{b|
+			self.container.container.asType(ContainerRoot).bindings.each{b|
 				b.ports.each{p|
 					self.requirePorts.each{np|
 						if(np.isEquals(p)) then neededBindingUpdate.add(b) end
@@ -94,6 +94,25 @@ aspect class Binding {
 		self.ports.each{p|
 			if(not(ct.ports.exists{ p2 | p.isEquals(p2) })) then result := false end
 		}
+	end
+	
+	operation isUsingPort(p : Port) : Boolean is do
+		result := false
+		self.ports.each{ op | 
+			if(p.isEquals(op)) then 
+				result := true
+			end
+		}
+	end
+	
+	operation opositePort(p : Port) : Port is do
+		if(isUsingPort(p)) then
+			self.ports.each{ op | 
+				if(not(p.isEquals(op))) then 
+					result := op
+				end
+			}
+		end
 	end
 }
 

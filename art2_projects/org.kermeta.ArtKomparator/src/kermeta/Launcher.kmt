@@ -34,8 +34,16 @@ class Launcher
 
 	operation launchFromModel(newModel : art2::ContainerRoot) : Void is do 
 	
-	//self.nodeName := "duke.irisa.fr"
-	//hotdeployPATH := "///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy"
+	self.nodeName := "duke.irisa.fr"
+	hotdeployPATH := "///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy"
+	
+	//self.nodeName := "cajou.irisa.fr"
+	//hotdeployPATH := "///Users/ffouquet/Serve/rs/apache-servicemix-4.2.0-fuse-01-00/deploy2"
+	
+	//self.nodeName := "entimid-desktop.irisa.fr"
+	//hotdeployPATH := "///Users/ffouquet/Servers/apache-servicemix-4.2.0-fuse-01-00/deploy3"
+	
+	
 	
 	//newModel := "/Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi"
 	

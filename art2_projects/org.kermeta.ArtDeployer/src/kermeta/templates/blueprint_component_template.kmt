@@ -9,7 +9,7 @@ var _res: StringBuffer init StringBuffer.new
 _res.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- Powered by KET: Kermeta Emitter Template. See http://www.kermeta.org -->\n<blueprint xmlns=\"http://www.osgi.org/xmlns/blueprint/v1.0.0\"\n\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n\txsi:schemaLocation=\"\n    http://www.osgi.org/xmlns/blueprint/v1.0.0 \n    http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd\">\n\n\t<!-- create hosted ports -->\n")
 c.hostedPorts.each{ hp | 
 _res.append("")
-if hp.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then
+if hp.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then
 _res.append("\t\n\t\t<bean id=\"")
 _res.append(hp.portTypeRef.name)
 _res.append("\" class=\"")
@@ -19,7 +19,7 @@ _res.append(c.name)
 _res.append("\" />\n\t\t</bean>\n\t\n\t\t<service ref=\"")
 _res.append(hp.portTypeRef.name)
 _res.append("\" interface=\"")
-_res.append(hp.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl)
+_res.append(hp.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface)
 _res.append("\">\n\t\t\t<service-properties>\n\t\t\t\t<entry key=\"artPorttyperefName\" value=\"")
 _res.append(hp.portTypeRef.name)
 _res.append("\" />\n\t\t\t\t<entry key=\"artComponentinstanceName\" value=\"")
@@ -31,11 +31,11 @@ _res.append("")
 _res.append("\n\n\t<!-- create needed port binding -->\n")
 c.requirePorts.each{np | 
 _res.append("")
-if np.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then
+if np.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then
 _res.append("\t\n")
  var portBinding : art2::Binding init void 
 _res.append("")
- c.container.asType(art2::ContainerNode).bindings.each{b| 
+ c.container.container.asType(art2::ContainerRoot).bindings.each{b| 
 _res.append("")
  b.ports.each{ p | 
 _res.append("")
@@ -51,7 +51,7 @@ _res.append("")
 _res.append("<reference id=\"")
 _res.append(np.portTypeRef.name)
 _res.append("\" interface=\"")
-_res.append(np.portTypeRef.ref.interface.asType(art2::OSGiScrDataType).interfaceImpl)
+_res.append(np.portTypeRef.ref.interface.asType(art2::ServiceDataType).interface)
 _res.append("\" filter=\"&amp;(artComponentinstanceName=")
 _res.append(remoteComponentInstanceName)
 _res.append(")(artPorttyperefName=")
@@ -69,7 +69,7 @@ _res.append(c.name)
 _res.append("</prop>\n\t\t\t</props>\n\t\t</property>\n\t\t<!-- end property -->\n\t\n\t\t<!-- inject hosted ports -->\n")
 c.hostedPorts.each{ hp | 
 _res.append("")
-if hp.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then
+if hp.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then
 _res.append("\t\t<property name=\"")
 _res.append(hp.portTypeRef.name)
 _res.append("\" ref=\"")
@@ -81,7 +81,7 @@ _res.append("")
 _res.append("\n\n\t\t<!-- inject needed ports -->\n")
 c.requirePorts.each{np | 
 _res.append("")
-if np.portTypeRef.ref.interface.isKindOf(art2::OSGiScrDataType) then
+if np.portTypeRef.ref.interface.isKindOf(art2::ServiceDataType) then
 _res.append("\t\t\t\t<property name=\"")
 _res.append(np.portTypeRef.name)
 _res.append("\" ref=\"")
