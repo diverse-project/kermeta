@@ -33,11 +33,6 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 	/** The events produces by the UI but not yet analysed by the Kermeta EventManager. */
 	protected List<EventWrapper> events;
 	
-//	public static final int ID_MOUSE = 0;
-//	
-//	public static final int ID_KB 	 = 1;
-	
-//	protected Vector<EventHandler> handlers;
 	
 	
 	/**
@@ -47,7 +42,6 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		super();
 		
 		events = new ArrayList<EventWrapper>();
-//		handlers = new Vector<EventHandler>();
 	}
 	
 
@@ -230,11 +224,6 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(dispatcher) {
 			dispatcher.notifyAll();
 		}
-//		Object src = e.getSource();
-//		
-//		for(EventHandler handler : handlers)
-//			if(handler.matches(src))
-//				handler.onPressure(e.getButton(), e.getPoint(), ID_MOUSE);
 	}
 
 
@@ -246,11 +235,6 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(dispatcher) {
 			dispatcher.notifyAll();
 		}
-//		Object src = e.getSource();
-//		
-//		for(EventHandler handler : handlers)
-//			if(handler.matches(src))
-//			handler.onRelease(e.getButton(), e.getPoint(), ID_MOUSE);		
 	}
 
 	
@@ -261,11 +245,6 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(dispatcher) {
 			dispatcher.notifyAll();
 		}
-//		Object src = e.getSource();
-//		
-//		for(EventHandler handler : handlers)
-//			if(handler.matches(src))
-//			handler.onKeyPressure(e.getKeyCode(), ID_KB);		
 	}
 
 	
@@ -276,11 +255,6 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(dispatcher) {
 			dispatcher.notifyAll();
 		}
-//		Object src = e.getSource();
-//		
-//		for(EventHandler handler : handlers)
-//			if(handler.matches(src))
-//			handler.onKeyRelease(e.getKeyCode(), ID_KB);
 	}
 
 	
@@ -301,11 +275,6 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(dispatcher) {
 			dispatcher.notifyAll();
 		}
-//		Object src = e.getSource();
-//		
-//		for(EventHandler handler : handlers)
-//			if(handler.matches(src))
-//			handler.onMove(e.getButton(), e.getPoint(), true, ID_MOUSE);			
 	}
 
 	
@@ -316,11 +285,6 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(dispatcher) {
 			dispatcher.notifyAll();
 		}
-//		Object src = e.getSource();
-//		
-//		for(EventHandler handler : handlers)
-//			if(handler.matches(src))
-//			handler.onMove(e.getButton(), e.getPoint(), false, ID_MOUSE);			
 	}
 
 	
@@ -341,22 +305,6 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 		synchronized(dispatcher) {
 			dispatcher.notifyAll();
 		}
-//		Object src = e.getSource();
-//		
-//		if(src instanceof AbstractButton) {
-//			AbstractButton ab = (AbstractButton)e.getSource();
-//			
-//    		for(EventHandler handler : handlers)
-//    			if(handler.matches(src))
-//    				handler.onButtonPressed(ab);
-//		}
-//		else if(src instanceof JTextComponent) {
-//			JTextComponent tc = (JTextComponent)e.getSource();
-//			
-//    		for(EventHandler handler : handlers)
-//    			if(handler.matches(src))
-//    				handler.onTextChanged(tc);
-//		}
 	}
 
 
