@@ -1,0 +1,161 @@
+/* $Id:$ 
+ * Creation : February 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : Brice Morin
+ */
+
+@mainClass "art::MainCleaning"
+@mainOperation "main"
+
+package art;
+
+
+require kermeta
+
+require "http://art"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+
+using art::type
+using art::instance
+
+class MainCleaning
+{
+	operation main(artToClean : String) : Void is
+	do
+		var rep : Repository  init EMFRepository.new
+		var res : Resource 
+		
+		//var artToClean : String init "platform:/resource/DroolsGenerator/base/thales.woven.art"
+		
+		res := rep.createResource(artToClean, "platform:/plugin/org.kermeta.art.model/model/metamodel@runtime.ecore")
+		res.load
+		var root : System
+		root ?= res.one()
+		
+		root.doClean
+		
+		res.saveWithNewURI(artToClean.substring(0,artToClean.size-4)+".clean.art")
+	end
+}
+
+class CleaningContext
+{
+	attribute hashTypes : Hashtable<String, ComponentType>
+	attribute hashServices : Hashtable<String, Service>
+	
+	operation initCleaningContext() : Void is
+	do
+		hashTypes := Hashtable<String, ComponentType>.new
+		hashServices := Hashtable<String, Service>.new
+	end
+}
+
+aspect class System
+{
+	operation doClean() : Void is 
+	do
+		var context : CleaningContext init CleaningContext.new
+		context.initCleaningContext
+		clean(context)
+		clean2(context)
+	end
+
+	operation clean(context : CleaningContext) : Void is 
+	do 		
+		self.types.each{t | context.hashTypes.put(t.name, t)}
+		
+		self.types.reject{t | 
+			context.hashTypes.values.contains(t)
+		}.each{t | 
+			self.types.remove(t)
+		}
+		
+		self.root.clean(context)
+		
+		
+		
+		self.services.each{s | context.hashServices.put(s.name, s)}
+		
+		self.services.reject{s | 
+			context.hashServices.values.contains(s)
+		}.each{s |
+			self.services.remove(s)
+		}
+		
+		self.types.each{t |
+			t.clean(context)
+		}
+	end
+	
+	operation clean2(context : CleaningContext) : Void is
+	do
+		self.root.clean2(context)
+	end
+}
+
+package instance
+{
+	aspect class ComponentInstance
+	{
+		operation clean(context : CleaningContext) : Void is
+		do
+			if(self.type != void) then
+				self.type := context.hashTypes.getValue(self.type.name)
+			end
+		end
+		
+		operation clean2(context : CleaningContext) : Void is
+		do
+			self.binding.each{b | b.clean2(context)}
+		end
+	}
+	
+	aspect class CompositeInstance
+	{
+		method clean(context : CleaningContext) : Void is
+		do
+			super(context)
+			self.subComponent.each{c | c.clean(context)}	
+		end
+		
+		method clean2(context : CleaningContext) : Void is
+		do
+			super(context)
+			self.subComponent.each{c | c.clean2(context)}	
+		end
+	}
+	
+	aspect class TransmissionBinding
+	{
+		operation clean2(context : CleaningContext) : Void is
+		do
+			var clientType : ComponentType init self.container.asType(ComponentInstance).type
+			var serverType : ComponentType init self.serverInstance.type
+			self.server := serverType.port.detect{p | p.role == self.server.role and p.name == self.server.name}
+			self.client := clientType.port.detect{p | p.role == self.client.role and p.name == self.client.name}
+		end
+	}
+}
+
+package type
+{
+	aspect class ComponentType
+	{
+		operation clean(context : CleaningContext) : Void is 
+		do
+			self.port.each{p | p.clean(context)}	
+		end
+	}
+	
+	aspect class AbstractPort
+	{
+		operation clean(context : CleaningContext) : Void is 
+		do
+			self.service := context.hashServices.getValue(self.service.name)
+		end	
+	}
+}

@@ -1,0 +1,166 @@
+/* $Id:$ 
+ * Creation : February 9, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+
+
+package org::smartadapters::core;
+require "platform:/lookup/org.kermeta.art.adapter/model/runtime_AOM_Framework1.ecore"
+//require "http://SmartAdapters4ART/smartadapters/core"
+
+require kermeta
+using kermeta::standard
+
+aspect class Adaptation{
+	operation toDrools(ctx:adaptations::Context) : Void is do 
+
+	end
+ }
+
+
+package adaptations{
+
+class Context{
+	reference res : kermeta::utils::StringBuffer
+	reference cache : kermeta::utils::Hashtable<Object,String>
+	operation getGenerateName():String is do
+		if (i.isVoid) then i:= 0 end
+		result :="s"+ i.toString()
+		i:=i+1
+	end
+	reference i : Integer	
+	
+	operation generateSetOne(objecttoSet:Object ,propertyName:String,str:Boolean, val:Object, ref:Boolean, cast1:String, cast2:String) : Void is do
+		if (not val.isVoid) then
+				if objecttoSet.ownedTags.exists{tag | "unique".equals(tag.name)} then
+					res.append("(("+cast1  +")uniqueobjects.get(\"" +cache.getValue(objecttoSet)+ "\"))")
+				else
+					res.append(cache.getValue(objecttoSet))
+				end
+			res.append(".set")
+			res.append(propertyName)
+			res.append("(")
+			if str then res.append("\"") end
+			if ref then
+				if val.ownedTags.exists{tag | "unique".equals(tag.name)} then
+					res.append("("+cast2 +")  uniqueobjects.get(\"" +cache.getValue(val)+ "\")")
+				else
+					res.append(cache.getValue(val))					
+				end
+			else
+				res.append(val.toString)		
+			end
+			if str then res.append("\"") end
+			res.append(");\n")
+		end		
+		
+	
+	end
+
+	operation generateSetMany(objecttoSet:Object ,propertyName:String,str:Boolean, vals:Set<Object>, ref:Boolean, cast1:String, cast2:String) : Void is do
+		vals.each{val|
+			if objecttoSet.ownedTags.exists{tag | "unique".equals(tag.name)} then
+					res.append("(("+cast1  +")uniqueobjects.get(\"" +cache.getValue(objecttoSet)+ "\"))")
+			else
+					res.append(cache.getValue(objecttoSet))
+			end
+			res.append(".get")
+			res.append(propertyName)
+			res.append("().add(")
+			if str then res.append("\"") end
+			if ref then
+				if val.ownedTags.exists{tag | "unique".equals(tag.name)} then
+					res.append("("+cast2 +")  uniqueobjects.get(\"" +cache.getValue(val)+ "\")")
+				else
+					res.append(cache.getValue(val))					
+				end
+			else
+				res.append(val.toString)		
+			end
+			if str then res.append("\"") end
+			res.append(");\n")
+		}
+			
+	end
+	
+	
+}
+
+aspect class SetruntimeSystem
+{
+	method toDrools(ctx:Context) : Void is do 
+		
+		ctx.generateSetOne(self.SystemToSet, "Name", true, self.refname, false,"art.System","")
+		ctx.generateSetOne(self.SystemToSet, "Root", false, self.refroot, true,"art.System","")
+		ctx.generateSetMany(self.SystemToSet, "Services", false, self.refservices, true,"art.System","art.type.Service")
+		ctx.generateSetMany(self.SystemToSet, "Types", false, self.reftypes, true,"art.System","art.type.ComponentType")
+		ctx.generateSetMany(self.SystemToSet, "DataTypes", false, self.refdataTypes, true,"art.System","art.DataType")
+		
+	end
+	
+	
+}
+aspect class SetruntimeinstanceComponentInstance
+{
+	method toDrools(ctx:Context) : Void is do 
+		ctx.generateSetOne(self.ComponentInstanceToSet, "Name", true, self.refname, false,"art.instance.ComponentInstance","")
+//		ctx.generateSetOne(self.ComponentInstanceToSet, "ContentDesc", true, self.refcontentDesc, false)
+//		ctx.generateSetOne(self.ComponentInstanceToSet, "ControllerDesc", true, self.refcontrollerDesc, false)
+		ctx.generateSetOne(self.ComponentInstanceToSet, "State", true, self.refstate, false,"art.instance.ComponentInstance","")
+		ctx.generateSetOne(self.ComponentInstanceToSet, "Type", false, self.reftype, true,"art.instance.ComponentInstance","art.type.ComponentType")
+		ctx.generateSetOne(self.ComponentInstanceToSet, "SuperComponent", false, self.refsuperComponent, true,"art.instance.ComponentInstance","art.instance.CompositeInstance")
+		ctx.generateSetMany(self.ComponentInstanceToSet, "Attribute", false, self.refattribute, true,"art.instance.ComponentInstance","art.instance.AttributeInstance")
+		ctx.generateSetMany(self.ComponentInstanceToSet, "Binding", false, self.refbinding, true,"art.instance.ComponentInstance","art.instance.TransmissionBinding")		
+	end
+	
+	
+}
+
+aspect class SetruntimeinstanceCompositeInstance
+{
+	method toDrools(ctx:Context) : Void is do 
+		ctx.generateSetOne(self.CompositeInstanceToSet, "Name", true, self.refname, false,"art.instance.CompositeInstance","")
+		ctx.generateSetOne(self.CompositeInstanceToSet, "State", true, self.refstate, false,"art.instance.CompositeInstance","")
+		ctx.generateSetOne(self.CompositeInstanceToSet, "Type", false, self.reftype, true,"art.instance.CompositeInstance","art.type.ComponentType")
+		ctx.generateSetOne(self.CompositeInstanceToSet, "SuperComponent", false, self.refsuperComponent, true,"art.instance.CompositeInstance","art.instance.CompositeInstance")
+		ctx.generateSetMany(self.CompositeInstanceToSet, "Attribute", false, self.refattribute, true,"art.instance.CompositeInstance","art.instance.AttributeInstance")
+		ctx.generateSetMany(self.CompositeInstanceToSet, "Binding", false, self.refbinding, true,"art.instance.CompositeInstance","art.instance.TransmissionBinding")		
+		ctx.generateSetMany(self.CompositeInstanceToSet, "SubComponent", false, self.refsubComponent, true,"art.instance.CompositeInstance","art.instance.ComponentInstance")		
+		ctx.generateSetMany(self.CompositeInstanceToSet, "Delegation", false, self.refdelegation, true,"art.instance.CompositeInstance","art.instance.DelegationBinding")		
+		
+	end
+	
+	
+}
+
+aspect class SetruntimeinstancePrimitiveInstance
+{
+	method toDrools(ctx:Context) : Void is do 
+		ctx.generateSetOne(self.PrimitiveInstanceToSet, "Name", true, self.refname, false,"art.instance.PrimitiveInstance","")
+		ctx.generateSetOne(self.PrimitiveInstanceToSet, "State", true, self.refstate, false,"art.instance.PrimitiveInstance","")
+		ctx.generateSetOne(self.PrimitiveInstanceToSet, "Type", false, self.reftype, true,"art.instance.PrimitiveInstance","art.type.ComponentType")
+		ctx.generateSetOne(self.PrimitiveInstanceToSet, "SuperComponent", false, self.refsuperComponent, true,"art.instance.PrimitiveInstance","art.instance.CompositeInstance")
+		ctx.generateSetMany(self.PrimitiveInstanceToSet, "Attribute", false, self.refattribute, true,"art.instance.PrimitiveInstance","art.instance.AttributeInstance")
+		ctx.generateSetMany(self.PrimitiveInstanceToSet, "Binding", false, self.refbinding, true,"art.instance.PrimitiveInstance","art.instance.TransmissionBinding")		
+		
+	end
+	
+	
+}
+
+aspect class SetruntimeinstanceTransmissionBinding
+{
+	method toDrools(ctx:Context) : Void is do 
+		ctx.generateSetOne(self.TransmissionBindingToSet, "Id", true, self.refId, false,"art.instance.TransmissionBinding","")
+		ctx.generateSetOne(self.TransmissionBindingToSet, "Client", false, self.refclient, true,"art.instance.TransmissionBinding", "art.type.AbstractPort")
+		ctx.generateSetOne(self.TransmissionBindingToSet, "Server", false, self.refserver, true,"art.instance.TransmissionBinding","art.type.AbstractPort")
+		ctx.generateSetOne(self.TransmissionBindingToSet, "ServerInstance", false, self.refserverInstance, true,"art.instance.TransmissionBinding","art.instance.ComponentInstance")
+	end
+	
+	
+}
+
+}

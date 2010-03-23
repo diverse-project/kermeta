@@ -1,0 +1,2052 @@
+
+/* $Id:$ 
+ * Creation : February 9, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "pattern::Main"
+@mainOperation "main"
+
+
+package pattern;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore"
+require "s1.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+
+class Main {
+
+	operation initialize():Context is do
+		var ctx : Context init Context.new
+		ctx.res := kermeta::utils::StringBuffer.new
+		ctx.cache := kermeta::utils::Hashtable<Object,String>.new		
+		result:=ctx		
+	end
+	
+	
+	
+	operation main(uri:String) : Void is do
+		var ctx : Context init self.initialize()
+		var rep : EMFRepository  init EMFRepository.new
+		var res : EMFResource 
+		res ?= rep.createResource(uri, "platform:/resource/org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore")
+		res.load
+		var s : System 
+		s?= res.one()
+		s.pass1create(ctx)
+		s.pass2set(ctx)
+		stdio.writeln(ctx.res.toString) 
+	end
+}
+class Context{
+	reference res : kermeta::utils::StringBuffer
+	reference cache : kermeta::utils::Hashtable<Object,String>
+	reference lastgenerateName : String
+	
+	operation getGenerateName():String is do
+		if (i.isVoid) then i:= 0 end
+		result :="s"+ i.toString()
+		lastgenerateName := result
+		i:=i+1
+	end
+	reference i : Integer	
+}
+
+package art {
+aspect class NamedElement {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.NamedElement" +" "+ na +  " = (art.NamedElement) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.ArtFactory.eINSTANCE.createNamedElement();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.NamedElement" +" "+ na +  " = art.ArtFactory.eINSTANCE.createNamedElement();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+end 
+ }
+aspect class ModelElement {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.ModelElement" +" "+ na +  " = (art.ModelElement) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.ArtFactory.eINSTANCE.createModelElement();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.ModelElement" +" "+ na +  " = art.ArtFactory.eINSTANCE.createModelElement();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+end 
+ }
+aspect class System {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.System" +" "+ na +  " = (art.System) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.ArtFactory.eINSTANCE.createSystem();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.System" +" "+ na +  " = art.ArtFactory.eINSTANCE.createSystem();
+")
+	end
+	
+if not self.root.isVoid then
+
+	self.root.pass1create(ctx)
+end
+
+if self.services.size >0 then
+
+	self.services.each{c|c.pass1create(ctx)}
+end
+
+if self.types.size >0 then
+
+	self.types.each{c|c.pass1create(ctx)}
+end
+
+if self.dataTypes.size >0 then
+
+	self.dataTypes.each{c|c.pass1create(ctx)}
+end
+
+if self.groups.size >0 then
+
+	self.groups.each{c|c.pass1create(ctx)}
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+	if (not self.root.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Root"+"("+ctx.cache.getValue(self.root)+");
+")	
+	end
+
+	self.services.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Services"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.types.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Types"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.dataTypes.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"DataTypes"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.groups.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Groups"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if not self.root.isVoid then
+
+	self.root.pass2set(ctx)
+end
+
+if self.services.size >0 then
+
+	self.services.each{c|c.pass2set(ctx)}
+end
+
+if self.types.size >0 then
+
+	self.types.each{c|c.pass2set(ctx)}
+end
+
+if self.dataTypes.size >0 then
+
+	self.dataTypes.each{c|c.pass2set(ctx)}
+end
+
+if self.groups.size >0 then
+
+	self.groups.each{c|c.pass2set(ctx)}
+end
+end 
+ }
+aspect class DataType {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.DataType" +" "+ na +  " = (art.DataType) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.ArtFactory.eINSTANCE.createDataType();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.DataType" +" "+ na +  " = art.ArtFactory.eINSTANCE.createDataType();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+end 
+ }
+aspect class TypedElement {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.TypedElement" +" "+ na +  " = (art.TypedElement) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.ArtFactory.eINSTANCE.createTypedElement();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.TypedElement" +" "+ na +  " = art.ArtFactory.eINSTANCE.createTypedElement();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+	if (not self.type.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
+")	
+	end
+end 
+ }
+aspect class CardinalityElement {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.CardinalityElement" +" "+ na +  " = (art.CardinalityElement) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.ArtFactory.eINSTANCE.createCardinalityElement();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.CardinalityElement" +" "+ na +  " = art.ArtFactory.eINSTANCE.createCardinalityElement();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.lower.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Lower"+"("+self.lower.toString+");
+")	
+	end
+	if (not self.upper.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Upper"+"("+self.upper.toString+");
+")	
+	end
+	if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+end 
+ }
+package instance {
+aspect class ComponentInstance {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.ComponentInstance" +" "+ na +  " = (art.instance.ComponentInstance) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createComponentInstance();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.instance.ComponentInstance" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createComponentInstance();
+")
+	end
+	
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass1create(ctx)}
+end
+
+if self.binding.size >0 then
+
+	self.binding.each{c|c.pass1create(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass1create(ctx)
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.state.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"State"+"(\""+self.state.toString+"\");
+")	
+	end
+	if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+	if (not self.type.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
+")	
+	end
+	if (not self.superComponent.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"SuperComponent"+"("+ctx.cache.getValue(self.superComponent)+");
+")	
+	end
+
+	self.~attribute.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Attribute"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.binding.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Binding"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+	if (not self.implem.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Implem"+"("+ctx.cache.getValue(self.implem)+");
+")	
+	end
+
+	self.groups.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Groups"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass2set(ctx)}
+end
+
+if self.binding.size >0 then
+
+	self.binding.each{c|c.pass2set(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass2set(ctx)
+end
+end 
+ }
+
+aspect class PrimitiveInstance {
+
+	/**
+	 * pass1create is responsible for creating the elements of the advice model.
+	 * In particular, it manages the uniqueness of these elements
+	 */
+	method  pass1create(ctx:Context):Void is do 
+		//Associates a unique string to this (self) element
+		var na : String init ctx.getGenerateName
+ 		ctx.cache.put(self,na)
+ 			
+ 		//if this element is unique
+		if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+			ctx.res.append("art.instance.PrimitiveInstance" +" "+ na +  " = (art.instance.PrimitiveInstance) uniqueobjects.get(\""+na+"\");")
+			ctx.res.append("if ("+" "+ na + " " + "== null){")
+			ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();")
+			ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");")
+			ctx.res.append("}")
+		else //else, this element is not unique
+			ctx.res.append("art.instance.PrimitiveInstance" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createPrimitiveInstance();")
+		end
+	
+		//visiting all the contained elements
+		if self.~attribute.size >0 then
+			self.~attribute.each{c|c.pass1create(ctx)}
+		end
+
+		if self.binding.size >0 then
+			self.binding.each{c|c.pass1create(ctx)}
+		end
+
+		if not self.implem.isVoid then
+			self.implem.pass1create(ctx)
+		end	
+	end 
+
+	/**
+	 * pass1set is responsible for linking together the (already created) elements of the advice model 
+	 */
+	method  pass2set(ctx:Context):Void is do 
+ 		if (not self.state.isVoid()) then
+			ctx.res.append(ctx.cache.getValue(self) + ".set"+"State"+"(\""+self.state.toString+"\");")	
+		end
+		if (not self.name.isVoid()) then
+			ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");")	
+		end
+		if (not self.type.isVoid()) then
+			ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");")	
+		end
+		if (not self.superComponent.isVoid()) then
+			ctx.res.append(ctx.cache.getValue(self) + ".set"+"SuperComponent"+"("+ctx.cache.getValue(self.superComponent)+");")	
+		end
+
+		self.~attribute.each{c|
+			ctx.res.append(ctx.cache.getValue(self) + ".get"+"Attribute"+"().add("+ctx.cache.getValue(c)+");")	
+		}	
+
+		self.binding.each{c|
+			ctx.res.append(ctx.cache.getValue(self) + ".get"+"Binding"+"().add("+ctx.cache.getValue(c)+");")	
+		}	
+
+		if (not self.implem.isVoid()) then
+			ctx.res.append(ctx.cache.getValue(self) + ".set"+"Implem"+"("+ctx.cache.getValue(self.implem)+");")	
+		end
+
+		self.groups.each{c|
+			ctx.res.append(ctx.cache.getValue(self) + ".get"+"Groups"+"().add("+ctx.cache.getValue(c)+");")	
+		}	
+
+		//visiting all the contained elements
+		if self.~attribute.size >0 then
+			self.~attribute.each{c|c.pass2set(ctx)}
+		end
+
+		if self.binding.size >0 then
+			self.binding.each{c|c.pass2set(ctx)}
+		end
+
+		if not self.implem.isVoid then
+			self.implem.pass2set(ctx)
+		end
+	end 
+}
+
+
+aspect class CompositeInstance {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.CompositeInstance" +" "+ na +  " = (art.instance.CompositeInstance) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.instance.CompositeInstance" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createCompositeInstance();
+")
+	end
+	
+if self.subComponent.size >0 then
+
+	self.subComponent.each{c|c.pass1create(ctx)}
+end
+
+if self.delegation.size >0 then
+
+	self.delegation.each{c|c.pass1create(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass1create(ctx)}
+end
+
+if self.binding.size >0 then
+
+	self.binding.each{c|c.pass1create(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass1create(ctx)
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.state.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"State"+"(\""+self.state.toString+"\");
+")	
+	end
+	if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+
+	self.subComponent.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"SubComponent"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.delegation.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Delegation"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+	if (not self.type.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
+")	
+	end
+	if (not self.superComponent.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"SuperComponent"+"("+ctx.cache.getValue(self.superComponent)+");
+")	
+	end
+
+	self.~attribute.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Attribute"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.binding.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Binding"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+	if (not self.implem.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Implem"+"("+ctx.cache.getValue(self.implem)+");
+")	
+	end
+
+	self.groups.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Groups"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if self.subComponent.size >0 then
+
+	self.subComponent.each{c|c.pass2set(ctx)}
+end
+
+if self.delegation.size >0 then
+
+	self.delegation.each{c|c.pass2set(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass2set(ctx)}
+end
+
+if self.binding.size >0 then
+
+	self.binding.each{c|c.pass2set(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass2set(ctx)
+end
+end 
+ }
+aspect class Binding {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.Binding" +" "+ na +  " = (art.instance.Binding) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createBinding();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.instance.Binding" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createBinding();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.id.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Id"+"(\""+self.id.toString+"\");
+")	
+	end
+	if (not self.serverInstance.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ServerInstance"+"("+ctx.cache.getValue(self.serverInstance)+");
+")	
+	end
+end 
+ }
+aspect class TransmissionBinding {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.TransmissionBinding" +" "+ na +  " = (art.instance.TransmissionBinding) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.instance.TransmissionBinding" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createTransmissionBinding();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.id.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Id"+"(\""+self.id.toString+"\");
+")	
+	end
+	if (not self.client.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Client"+"("+ctx.cache.getValue(self.client)+");
+")	
+	end
+	if (not self.server.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Server"+"("+ctx.cache.getValue(self.server)+");
+")	
+	end
+	if (not self.serverInstance.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ServerInstance"+"("+ctx.cache.getValue(self.serverInstance)+");
+")	
+	end
+end 
+ }
+aspect class DelegationBinding {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.DelegationBinding" +" "+ na +  " = (art.instance.DelegationBinding) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createDelegationBinding();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.instance.DelegationBinding" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createDelegationBinding();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.id.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Id"+"(\""+self.id.toString+"\");
+")	
+	end
+	if (not self.source.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Source"+"("+ctx.cache.getValue(self.source)+");
+")	
+	end
+	if (not self.exported.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Exported"+"("+ctx.cache.getValue(self.exported)+");
+")	
+	end
+	if (not self.serverInstance.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ServerInstance"+"("+ctx.cache.getValue(self.serverInstance)+");
+")	
+	end
+end 
+ }
+aspect class AttributeInstance {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.AttributeInstance" +" "+ na +  " = (art.instance.AttributeInstance) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createAttributeInstance();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.instance.AttributeInstance" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createAttributeInstance();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 	end 
+ }
+aspect class ValuedAttribute {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.ValuedAttribute" +" "+ na +  " = (art.instance.ValuedAttribute) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createValuedAttribute();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.instance.ValuedAttribute" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createValuedAttribute();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.~value.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
+")	
+	end
+	if (not self.~attribute.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Attribute"+"("+ctx.cache.getValue(self.~attribute)+");
+")	
+	end
+end 
+ }
+aspect class DictionaryValuedAttribute {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.DictionaryValuedAttribute" +" "+ na +  " = (art.instance.DictionaryValuedAttribute) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createDictionaryValuedAttribute();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.instance.DictionaryValuedAttribute" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createDictionaryValuedAttribute();
+")
+	end
+	
+if self.entries.size >0 then
+
+	self.entries.each{c|c.pass1create(ctx)}
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 	
+	self.entries.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Entries"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+	if (not self.~attribute.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Attribute"+"("+ctx.cache.getValue(self.~attribute)+");
+")	
+	end
+
+if self.entries.size >0 then
+
+	self.entries.each{c|c.pass2set(ctx)}
+end
+end 
+ }
+aspect class Entry {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.Entry" +" "+ na +  " = (art.instance.Entry) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createEntry();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.instance.Entry" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createEntry();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.~value.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
+")	
+	end
+end 
+ }
+aspect class DefaultEntry {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.DefaultEntry" +" "+ na +  " = (art.instance.DefaultEntry) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createDefaultEntry();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.instance.DefaultEntry" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createDefaultEntry();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.~value.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
+")	
+	end
+	if (not self.key.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Key"+"("+ctx.cache.getValue(self.key)+");
+")	
+	end
+end 
+ }
+aspect class OtherEntry {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.instance.OtherEntry" +" "+ na +  " = (art.instance.OtherEntry) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.instance.InstanceFactory.eINSTANCE.createOtherEntry();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.instance.OtherEntry" +" "+ na +  " = art.instance.InstanceFactory.eINSTANCE.createOtherEntry();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.key.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Key"+"(\""+self.key.toString+"\");
+")	
+	end
+	if (not self.~value.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
+")	
+	end
+end 
+ }
+}
+package type {
+aspect class ComponentType {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.ComponentType" +" "+ na +  " = (art.type.ComponentType) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createComponentType();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.ComponentType" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createComponentType();
+")
+	end
+	
+if self.port.size >0 then
+
+	self.port.each{c|c.pass1create(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass1create(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass1create(ctx)
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+
+	self.port.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Port"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.~attribute.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Attribute"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.groups.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Groups"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+	if (not self.implem.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Implem"+"("+ctx.cache.getValue(self.implem)+");
+")	
+	end
+
+if self.port.size >0 then
+
+	self.port.each{c|c.pass2set(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass2set(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass2set(ctx)
+end
+end 
+ }
+aspect class PrimitiveType {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.PrimitiveType" +" "+ na +  " = (art.type.PrimitiveType) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.PrimitiveType" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createPrimitiveType();
+")
+	end
+	
+if self.port.size >0 then
+
+	self.port.each{c|c.pass1create(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass1create(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass1create(ctx)
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+
+	self.port.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Port"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.~attribute.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Attribute"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.groups.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Groups"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+	if (not self.implem.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Implem"+"("+ctx.cache.getValue(self.implem)+");
+")	
+	end
+
+if self.port.size >0 then
+
+	self.port.each{c|c.pass2set(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass2set(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass2set(ctx)
+end
+end 
+ }
+aspect class CompositeType {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.CompositeType" +" "+ na +  " = (art.type.CompositeType) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createCompositeType();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.CompositeType" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createCompositeType();
+")
+	end
+	
+if self.port.size >0 then
+
+	self.port.each{c|c.pass1create(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass1create(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass1create(ctx)
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+
+	self.port.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Port"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.~attribute.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Attribute"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.groups.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Groups"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+	if (not self.implem.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Implem"+"("+ctx.cache.getValue(self.implem)+");
+")	
+	end
+
+if self.port.size >0 then
+
+	self.port.each{c|c.pass2set(ctx)}
+end
+
+if self.~attribute.size >0 then
+
+	self.~attribute.each{c|c.pass2set(ctx)}
+end
+
+if not self.implem.isVoid then
+
+	self.implem.pass2set(ctx)
+end
+end 
+ }
+aspect class Service {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.Service" +" "+ na +  " = (art.type.Service) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createService();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.Service" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createService();
+")
+	end
+	
+if self.~operation.size >0 then
+
+	self.~operation.each{c|c.pass1create(ctx)}
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+
+	self.~operation.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Operation"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if self.~operation.size >0 then
+
+	self.~operation.each{c|c.pass2set(ctx)}
+end
+end 
+ }
+aspect class Operation {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.Operation" +" "+ na +  " = (art.type.Operation) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createOperation();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.Operation" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createOperation();
+")
+	end
+	
+if self.input.size >0 then
+
+	self.input.each{c|c.pass1create(ctx)}
+end
+
+if self.output.size >0 then
+
+	self.output.each{c|c.pass1create(ctx)}
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+
+	self.input.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Input"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.output.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Output"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if self.input.size >0 then
+
+	self.input.each{c|c.pass2set(ctx)}
+end
+
+if self.output.size >0 then
+
+	self.output.each{c|c.pass2set(ctx)}
+end
+end 
+ }
+aspect class Parameter {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.Parameter" +" "+ na +  " = (art.type.Parameter) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createParameter();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.Parameter" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createParameter();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+	if (not self.type.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
+")	
+	end
+end 
+ }
+aspect class FunctionalService {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.FunctionalService" +" "+ na +  " = (art.type.FunctionalService) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.FunctionalService" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createFunctionalService();
+")
+	end
+	
+if self.~operation.size >0 then
+
+	self.~operation.each{c|c.pass1create(ctx)}
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+
+	self.~operation.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Operation"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if self.~operation.size >0 then
+
+	self.~operation.each{c|c.pass2set(ctx)}
+end
+end 
+ }
+aspect class ControlService {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.ControlService" +" "+ na +  " = (art.type.ControlService) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createControlService();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.ControlService" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createControlService();
+")
+	end
+	
+if self.~operation.size >0 then
+
+	self.~operation.each{c|c.pass1create(ctx)}
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+
+	self.~operation.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Operation"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if self.~operation.size >0 then
+
+	self.~operation.each{c|c.pass2set(ctx)}
+end
+end 
+ }
+aspect class AbstractPort {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.AbstractPort" +" "+ na +  " = (art.type.AbstractPort) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createAbstractPort();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.AbstractPort" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createAbstractPort();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.role.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Role"+"(\""+self.role.toString+"\");
+")	
+	end
+	if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+	if (not self.service.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Service"+"("+ctx.cache.getValue(self.service)+");
+")	
+	end
+end 
+ }
+aspect class Port {
+method  pass1create(ctx:Context):Void from CardinalityElement is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.Port" +" "+ na +  " = (art.type.Port) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createPort();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.Port" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createPort();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void from CardinalityElement is do 
+ 		if (not self.isOptional.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"IsOptional"+"("+self.isOptional.toString+");
+")	
+	end
+	if (not self.lower.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Lower"+"("+self.lower.toString+");
+")	
+	end
+	if (not self.upper.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Upper"+"("+self.upper.toString+");
+")	
+	end
+	if (not self.role.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Role"+"(\""+self.role.toString+"\");
+")	
+	end
+	if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+	if (not self.service.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Service"+"("+ctx.cache.getValue(self.service)+");
+")	
+	end
+end 
+ }
+aspect class PortCollection {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.PortCollection" +" "+ na +  " = (art.type.PortCollection) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createPortCollection();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.PortCollection" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createPortCollection();
+")
+	end
+	
+if self.ids.size >0 then
+
+	self.ids.each{c|c.pass1create(ctx)}
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.role.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Role"+"(\""+self.role.toString+"\");
+")	
+	end
+	if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+
+	self.ids.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Ids"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+	if (not self.service.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Service"+"("+ctx.cache.getValue(self.service)+");
+")	
+	end
+
+if self.ids.size >0 then
+
+	self.ids.each{c|c.pass2set(ctx)}
+end
+end 
+ }
+aspect class PortId {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.PortId" +" "+ na +  " = (art.type.PortId) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createPortId();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.PortId" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createPortId();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+end 
+ }
+aspect class Attribute {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.Attribute" +" "+ na +  " = (art.type.Attribute) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createAttribute();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.Attribute" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createAttribute();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+	if (not self.type.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
+")	
+	end
+end 
+ }
+aspect class BasicAttribute {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.BasicAttribute" +" "+ na +  " = (art.type.BasicAttribute) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createBasicAttribute();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.BasicAttribute" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createBasicAttribute();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.defaultValue.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"DefaultValue"+"(\""+self.defaultValue.toString+"\");
+")	
+	end
+	if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+	if (not self.type.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
+")	
+	end
+end 
+ }
+aspect class Dictionary {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.Dictionary" +" "+ na +  " = (art.type.Dictionary) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createDictionary();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.Dictionary" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createDictionary();
+")
+	end
+	
+if self.keys.size >0 then
+
+	self.keys.each{c|c.pass1create(ctx)}
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+	if (not self.~valueType.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ValueType"+"("+ctx.cache.getValue(self.~valueType)+");
+")	
+	end
+
+	self.keys.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Keys"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+	if (not self.type.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Type"+"("+ctx.cache.getValue(self.type)+");
+")	
+	end
+
+if self.keys.size >0 then
+
+	self.keys.each{c|c.pass2set(ctx)}
+end
+end 
+ }
+aspect class DictionaryDefaultValue {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.type.DictionaryDefaultValue" +" "+ na +  " = (art.type.DictionaryDefaultValue) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.type.TypeFactory.eINSTANCE.createDictionaryDefaultValue();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.type.DictionaryDefaultValue" +" "+ na +  " = art.type.TypeFactory.eINSTANCE.createDictionaryDefaultValue();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.key.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Key"+"(\""+self.key.toString+"\");
+")	
+	end
+	if (not self.~value.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Value"+"(\""+self.~value.toString+"\");
+")	
+	end
+end 
+ }
+}
+package implem {
+aspect class ComponentImplementation {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.implem.ComponentImplementation" +" "+ na +  " = (art.implem.ComponentImplementation) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.implem.ImplemFactory.eINSTANCE.createComponentImplementation();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.implem.ComponentImplementation" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createComponentImplementation();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 	end 
+ }
+aspect class FractalComponent {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.implem.FractalComponent" +" "+ na +  " = (art.implem.FractalComponent) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.implem.ImplemFactory.eINSTANCE.createFractalComponent();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.implem.FractalComponent" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createFractalComponent();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.controllerDesc.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ControllerDesc"+"(\""+self.controllerDesc.toString+"\");
+")	
+	end
+	if (not self.contentDesc.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ContentDesc"+"(\""+self.contentDesc.toString+"\");
+")	
+	end
+end 
+ }
+aspect class OSGiComponent {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.implem.OSGiComponent" +" "+ na +  " = (art.implem.OSGiComponent) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.implem.OSGiComponent" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiComponent();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.implementingClass.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"ImplementingClass"+"(\""+self.implementingClass.toString+"\");
+")	
+	end
+end 
+ }
+aspect class TypeImplementation {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.implem.TypeImplementation" +" "+ na +  " = (art.implem.TypeImplementation) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.implem.ImplemFactory.eINSTANCE.createTypeImplementation();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.implem.TypeImplementation" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createTypeImplementation();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 	end 
+ }
+aspect class OSGiType {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.implem.OSGiType" +" "+ na +  " = (art.implem.OSGiType) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.implem.OSGiType" +" "+ na +  " = art.implem.ImplemFactory.eINSTANCE.createOSGiType();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.generateInstanceBundle.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"GenerateInstanceBundle"+"("+self.generateInstanceBundle.toString+");
+")	
+	end
+end 
+ }
+}
+package group {
+aspect class Group {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.group.Group" +" "+ na +  " = (art.group.Group) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.group.GroupFactory.eINSTANCE.createGroup();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.group.Group" +" "+ na +  " = art.group.GroupFactory.eINSTANCE.createGroup();
+")
+	end
+	end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+end 
+ }
+aspect class TypeGroup {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.group.TypeGroup" +" "+ na +  " = (art.group.TypeGroup) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.group.GroupFactory.eINSTANCE.createTypeGroup();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.group.TypeGroup" +" "+ na +  " = art.group.GroupFactory.eINSTANCE.createTypeGroup();
+")
+	end
+	
+if self.subGroups.size >0 then
+
+	self.subGroups.each{c|c.pass1create(ctx)}
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+
+	self.types.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Types"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.subGroups.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"SubGroups"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if self.subGroups.size >0 then
+
+	self.subGroups.each{c|c.pass2set(ctx)}
+end
+end 
+ }
+aspect class InstanceGroup {
+method  pass1create(ctx:Context):Void is do 
+ 	
+	var na : String init ctx.getGenerateName
+ 	ctx.cache.put(self,na)	
+	if self.ownedTags.exists{tag | "unique".equals(tag.name)} then
+		ctx.res.append("art.group.InstanceGroup" +" "+ na +  " = (art.group.InstanceGroup) uniqueobjects.get(\""+na+"\");
+")
+		ctx.res.append("if ("+" "+ na + " " + "== null){
+"  )
+		ctx.res.append(na +  " = art.group.GroupFactory.eINSTANCE.createInstanceGroup();
+")
+		ctx.res.append("uniqueobjects.put(\""+na+"\","+ na+");
+")
+		ctx.res.append("}
+"  )
+		
+	else
+		ctx.res.append("art.group.InstanceGroup" +" "+ na +  " = art.group.GroupFactory.eINSTANCE.createInstanceGroup();
+")
+	end
+	
+if self.subGroups.size >0 then
+
+	self.subGroups.each{c|c.pass1create(ctx)}
+end
+end 
+method  pass2set(ctx:Context):Void is do 
+ 		if (not self.name.isVoid()) then
+		ctx.res.append(ctx.cache.getValue(self) + ".set"+"Name"+"(\""+self.name.toString+"\");
+")	
+	end
+
+	self.instances.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"Instances"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+	self.subGroups.each{c|
+	ctx.res.append(ctx.cache.getValue(self) + ".get"+"SubGroups"+"().add("+ctx.cache.getValue(c)+");
+")	
+	}	
+
+
+
+if self.subGroups.size >0 then
+
+	self.subGroups.each{c|c.pass2set(ctx)}
+end
+end 
+ }
+}
+}

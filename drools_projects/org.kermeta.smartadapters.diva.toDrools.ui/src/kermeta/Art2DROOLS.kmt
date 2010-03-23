@@ -1,0 +1,343 @@
+/* $Id:$ 
+ * Creation : February 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+
+
+package pattern::art;
+
+
+require kermeta
+
+//require "platform:/resource/eu.ict_diva.weaver.smartadapters/metamodel/metamodel@runtimePattern.ecore"
+require "./Art2DROOLSPatternFramework.kmt"
+
+
+
+aspect class System
+{
+	method toDrools(ctx : patternframework::Context) : Void is do 
+		var name : String init ctx.getGenerateName()
+		ctx.cache.put(self,name)
+		
+		self.root.toDrools(ctx)
+		
+		ctx.res.append("$")
+		ctx.res.append(name) 
+		ctx.res.append(": art.System(")
+		ctx.res.append("root == $" + ctx.cache.getValue(self.root))			
+		ctx.res.append(")\n")
+		
+	end
+}
+
+package instance{
+
+	aspect class ComponentInstance
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do 		
+
+			var name : String init ctx.getGenerateName()
+			ctx.cache.put(self,name)
+			
+			var i : Integer init 0
+			
+			ctx.res.append("$")
+			ctx.res.append(name) 
+			ctx.res.append(": art.instance.ComponentInstance(")
+			if (not self.name.isVoid) then
+				ctx.res.append("name == \"" + self.name + "\"")
+				i:=i+1
+			end
+			if (not self.type.isVoid) then
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("type == $" + ctx.cache.getValue(self.type))
+				i:=i+1
+			end
+			
+			ctx.res.append(")\n")
+
+		end
+	}
+	aspect class CompositeInstance
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do 
+			var name : String init ctx.getGenerateName()
+			ctx.cache.put(self,name)
+			
+			if (not self.type.isVoid()) then
+					self.type.toDrools(ctx)
+			end
+			self.subComponent.each{e|e.toDrools(ctx)}
+					
+					var i : Integer init 0
+					
+					ctx.res.append("$")
+					ctx.res.append(name) 
+					ctx.res.append(": art.instance.CompositeInstance(")
+					if (not self.name.isVoid) then
+						ctx.res.append("name == \"" + self.name + "\"")
+						i:=i+1
+					end
+					if (not self.type.isVoid) then
+						if (i>0) then ctx.res.append(",") end
+						ctx.res.append("type == $" + ctx.cache.getValue(self.type))
+						i:=i+1
+					end
+					if (self.subComponent.size > 0) then
+						if (i>0) then ctx.res.append(",") end
+						var j : Integer init 0
+						self.subComponent.each{s| if (j>0) then ctx.res.append(",") end
+						ctx.res.append("subComponent contains $" + ctx.cache.getValue(s))
+						j:=j+1
+						}
+						i:=i+1
+					end
+				ctx.res.append(")\n")
+			end
+		
+	}
+	aspect class PrimitiveInstance
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do 
+			self.type.toDrools(ctx)
+			var name : String init ctx.getGenerateName()
+			ctx.cache.put(self,name)
+			
+			var i : Integer init 0
+			
+			ctx.res.append("$")
+			ctx.res.append(name) 
+			ctx.res.append(": art.instance.PrimitiveInstance(")
+			if (not self.name.isVoid) then
+				ctx.res.append("name == \"" + self.name + "\"")
+				i:=i+1
+			end
+			if (not self.type.isVoid) then
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("type == $" + ctx.cache.getValue(self.type))
+				i:=i+1
+			end
+			
+							ctx.res.append(")\n")
+			
+			
+		end
+	}
+	aspect class Binding
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do 
+		end
+	}
+	
+}
+
+package type{
+
+	aspect class ComponentType
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do 
+			self.port.each{e|e.toDrools(ctx)}
+			var name : String init ctx.getGenerateName()
+			ctx.cache.put(self,name)			
+			var i : Integer init 0
+			
+			ctx.res.append("$")
+			ctx.res.append(name) 
+			ctx.res.append(": art.type.ComponentType(")
+			if (not self.name.isVoid) then
+				ctx.res.append("name == \"" + self.name + "\"")
+				i:=i+1
+			end
+			self.port.each{p|
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("port contains $" + ctx.cache.getValue(p))
+				i:=i+1
+			}
+			
+							ctx.res.append(")\n")
+		end
+	}
+
+	aspect class CompositeType
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do 
+			self.port.each{e|e.toDrools(ctx)}
+			var name : String init ctx.getGenerateName()
+			ctx.cache.put(self,name)			
+			var i : Integer init 0
+			
+			ctx.res.append("$")
+			ctx.res.append(name) 
+			ctx.res.append(": art.type.CompositeType(")
+			if (not self.name.isVoid) then
+				ctx.res.append("name == \"" + self.name + "\"")
+				i:=i+1
+			end
+			self.port.each{p|
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("port contains $" + ctx.cache.getValue(p))
+				i:=i+1
+			}
+			
+							ctx.res.append(")\n")
+		end
+	}
+	aspect class PrimitiveType
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do 
+			self.port.each{e|e.toDrools(ctx)}
+			var name : String init ctx.getGenerateName()
+			ctx.cache.put(self,name)			
+			var i : Integer init 0
+			
+			ctx.res.append("$")
+			ctx.res.append(name) 
+			ctx.res.append(": art.type.PrimitiveType(")
+			if (not self.name.isVoid) then
+				ctx.res.append("name == \"" + self.name + "\"")
+				i:=i+1
+			end
+			self.port.each{p|
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("port contains $" + ctx.cache.getValue(p))
+				i:=i+1
+			}
+			
+							ctx.res.append(")\n")
+		end
+	}
+	
+	aspect class Port
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do 
+			if (service != void) then
+				self.service.toDrools(ctx)
+			end
+			var name : String init ctx.getGenerateName()
+			ctx.cache.put(self,name)
+			
+			var i : Integer init 0
+			
+			ctx.res.append("$")
+			ctx.res.append(name) 
+			ctx.res.append(": art.type.Port(")
+			if (not self.name.isVoid) then
+				ctx.res.append("name == \"" + self.name + "\"")
+				i:=i+1
+			end
+			if (not self.role.isVoid) then
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("role == \"" + self.role + "\"")
+				i:=i+1
+			end
+			if (not self.service.isVoid) then
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("service == $" + ctx.cache.getValue(self.service))
+				i:=i+1
+			end
+			
+	
+			
+							ctx.res.append(")\n")
+				
+		
+		end
+	}
+	
+	aspect class PortCollection
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do
+			ids.each{pId | pId.toDrools(ctx)}
+			
+			if (service != void) then
+				self.service.toDrools(ctx)
+			end
+			var name : String init ctx.getGenerateName()
+			ctx.cache.put(self,name)
+			
+			var i : Integer init 0
+			
+			ctx.res.append("$")
+			ctx.res.append(name) 
+			ctx.res.append(": art.type.PortCollection(")
+			if (not self.name.isVoid) then
+				ctx.res.append("name == \"" + self.name + "\"")
+				i:=i+1
+			end
+			if (not self.role.isVoid) then
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("role == \"" + self.role + "\"")
+				i:=i+1
+			end
+			if (not self.service.isVoid) then
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("service == $" + ctx.cache.getValue(self.service))
+				i:=i+1
+			end
+			self.ids.each{id|
+				if (i>0) then ctx.res.append(",") end
+				ctx.res.append("ids contains $" + ctx.cache.getValue(id))
+				i:=i+1
+			}
+			ctx.res.append(")\n")
+		end 
+	}
+	
+	aspect class PortId
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do 
+			var name : String init ctx.getGenerateName()
+			ctx.cache.put(self,name)
+	
+			ctx.res.append("$")
+			ctx.res.append(name) 
+			ctx.res.append(": art.type.PortId(")
+			if (not self.name.isVoid) then
+				ctx.res.append("name == \"" + self.name + "\"")
+			end
+			ctx.res.append(")\n")				
+		end	
+	}
+	
+	aspect class Service
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do 
+			//    $s : art.type.Service(name == "org.slf4j.Logger") 
+			var name : String init ctx.getGenerateName()
+			ctx.cache.put(self,name)
+	
+			ctx.res.append("$")
+			ctx.res.append(name) 
+			ctx.res.append(": art.type.Service(")
+			if (not self.name.isVoid) then
+				ctx.res.append("name == \"" + self.name + "\"")
+			end
+							ctx.res.append(")\n")
+						
+			
+							
+		end
+	}
+	
+	aspect class Operation
+	{
+		method toDrools(ctx : patternframework::Context) : Void is do 
+			//    $s : art.type.Service(name == "org.slf4j.Logger") 
+			ctx.res.append("$")
+			ctx.res.append(ctx.getGenerateName())
+			ctx.res.append(": art.type.Operation(")
+			if (not self.name.isVoid) then
+				ctx.res.append("name == \"" + self.name + "\"")
+			end
+						
+			
+							
+		end
+	}
+	
+
+}

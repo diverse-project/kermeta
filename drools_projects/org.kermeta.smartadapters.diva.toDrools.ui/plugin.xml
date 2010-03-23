@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.kermeta.smartadapters.diva.toDrools.ui.CompilerUI"
+            nameFilter="*.smART"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="smartadapters.diva.menu"
+               label="SmartAdapters4DiVA">
+         </menu>
+         <action
+               class="org.kermeta.smartadapters.diva.toDrools.ui.CompilerUI"
+               id="org.kermeta.smartadapters.diva.toDrools.ui.action1"
+               label="Compile Aspect"
+               menubarPath="smartadapters.diva.menu">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="org.kermeta.smartadapters.diva.toDrools.ui.CompilerUI"
+            nameFilter="*.art"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="smartadapters.diva.menu"
+               label="SmartAdapters4DiVA">
+         </menu>
+         <action
+               class="org.kermeta.smartadapters.diva.toDrools.ui.CleanerUI"
+               id="org.kermeta.smartadapters.diva.toDrools.ui.action2"
+               label="Clean Model"
+               menubarPath="smartadapters.diva.menu">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
