@@ -25,7 +25,6 @@ public class CleanerUI implements IObjectActionDelegate, Runnable {
 	protected StructuredSelection currentSelection;
     protected IFile file;
 	
-	@Override
 	public void run() {
 		IOConsole console = new EclipseConsole("SmartAdapters Cleaner for DiVA");
 		console.println(new InfoMessage("Cleaning DiVA architectural model: " + file.getLocation().toOSString() + "..."));

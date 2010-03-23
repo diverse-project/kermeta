@@ -25,7 +25,6 @@ public class CompilerUI implements IObjectActionDelegate, Runnable {
 	protected StructuredSelection currentSelection;
     protected IFile file;
 	
-	@Override
 	public void run() {
 		IOConsole console = new EclipseConsole("SmartAdapters compiler for DiVA");
 		console.println(new InfoMessage("Compiling DiVA aspect models: " + file.getLocation().toOSString() + "..."));
