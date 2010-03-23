@@ -454,6 +454,7 @@ public class KMFileLoader extends AbstractLoader {
 	}
 	
 	private void addResource(ResourceSet resourceSet, KermetaUnit kermetaUnit) {
-		resourceSet.getResources().add( kermetaUnit.getModelingUnit().eResource() );
+		if(kermetaUnit.getModelingUnit().eResource() !=  null)
+			resourceSet.getResources().add( kermetaUnit.getModelingUnit().eResource() );
 	}
 }
