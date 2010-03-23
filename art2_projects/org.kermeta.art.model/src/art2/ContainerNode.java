@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link art2.ContainerNode#getComponents <em>Components</em>}</li>
- *   <li>{@link art2.ContainerNode#getBindings <em>Bindings</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,21 +40,5 @@ public interface ContainerNode extends NamedElement {
 	 * @generated
 	 */
 	EList<ComponentInstance> getComponents();
-
-	/**
-	 * Returns the value of the '<em><b>Bindings</b></em>' containment reference list.
-	 * The list contents are of type {@link art2.Binding}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Bindings</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Bindings</em>' containment reference list.
-	 * @see art2.Art2Package#getContainerNode_Bindings()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Binding> getBindings();
 
 } // ContainerNode

@@ -21,8 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link art2.ContainerRoot#getNodes <em>Nodes</em>}</li>
  *   <li>{@link art2.ContainerRoot#getComponentTypes <em>Component Types</em>}</li>
  *   <li>{@link art2.ContainerRoot#getRepositories <em>Repositories</em>}</li>
- *   <li>{@link art2.ContainerRoot#getDataTypes <em>Data Types</em>}</li>
- *   <li>{@link art2.ContainerRoot#getAvailablePortImpl <em>Available Port Impl</em>}</li>
+ *   <li>{@link art2.ContainerRoot#getBindings <em>Bindings</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,35 +79,19 @@ public interface ContainerRoot extends EObject {
 	EList<Repository> getRepositories();
 
 	/**
-	 * Returns the value of the '<em><b>Data Types</b></em>' containment reference list.
-	 * The list contents are of type {@link art2.DataType}.
+	 * Returns the value of the '<em><b>Bindings</b></em>' containment reference list.
+	 * The list contents are of type {@link art2.Binding}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Data Types</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Bindings</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data Types</em>' containment reference list.
-	 * @see art2.Art2Package#getContainerRoot_DataTypes()
+	 * @return the value of the '<em>Bindings</em>' containment reference list.
+	 * @see art2.Art2Package#getContainerRoot_Bindings()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<DataType> getDataTypes();
-
-	/**
-	 * Returns the value of the '<em><b>Available Port Impl</b></em>' containment reference list.
-	 * The list contents are of type {@link art2.AbstractPortImpl}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Available Port Impl</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Available Port Impl</em>' containment reference list.
-	 * @see art2.Art2Package#getContainerRoot_AvailablePortImpl()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<AbstractPortImpl> getAvailablePortImpl();
+	EList<Binding> getBindings();
 
 } // ContainerRoot

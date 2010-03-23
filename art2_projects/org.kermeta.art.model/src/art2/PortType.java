@@ -15,7 +15,6 @@ package art2;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link art2.PortType#getImpl <em>Impl</em>}</li>
  *   <li>{@link art2.PortType#getInterface <em>Interface</em>}</li>
  *   <li>{@link art2.PortType#isSynchrone <em>Synchrone</em>}</li>
  *   <li>{@link art2.PortType#getBean <em>Bean</em>}</li>
@@ -27,32 +26,6 @@ package art2;
  * @generated
  */
 public interface PortType extends NamedElement {
-	/**
-	 * Returns the value of the '<em><b>Impl</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Impl</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Impl</em>' reference.
-	 * @see #setImpl(AbstractPortImpl)
-	 * @see art2.Art2Package#getPortType_Impl()
-	 * @model required="true"
-	 * @generated
-	 */
-	AbstractPortImpl getImpl();
-
-	/**
-	 * Sets the value of the '{@link art2.PortType#getImpl <em>Impl</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Impl</em>' reference.
-	 * @see #getImpl()
-	 * @generated
-	 */
-	void setImpl(AbstractPortImpl value);
-
 	/**
 	 * Returns the value of the '<em><b>Interface</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

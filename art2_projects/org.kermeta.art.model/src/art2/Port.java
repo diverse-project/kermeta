@@ -6,6 +6,8 @@
  */
 package art2;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +18,7 @@ package art2;
  * The following features are supported:
  * <ul>
  *   <li>{@link art2.Port#getPortTypeRef <em>Port Type Ref</em>}</li>
+ *   <li>{@link art2.Port#getMetrics <em>Metrics</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,5 +52,21 @@ public interface Port extends NamedElement {
 	 * @generated
 	 */
 	void setPortTypeRef(PortTypeRef value);
+
+	/**
+	 * Returns the value of the '<em><b>Metrics</b></em>' reference list.
+	 * The list contents are of type {@link art2.Metric}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Metrics</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Metrics</em>' reference list.
+	 * @see art2.Art2Package#getPort_Metrics()
+	 * @model
+	 * @generated
+	 */
+	EList<Metric> getMetrics();
 
 } // Port

@@ -25,29 +25,29 @@ package art2;
  */
 public interface TypedElement extends NamedElement {
 	/**
-	 * Returns the value of the '<em><b>Datatype</b></em>' reference.
+	 * Returns the value of the '<em><b>Datatype</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Datatype</em>' reference isn't clear,
+	 * If the meaning of the '<em>Datatype</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Datatype</em>' reference.
-	 * @see #setDatatype(DataType)
+	 * @return the value of the '<em>Datatype</em>' attribute.
+	 * @see #setDatatype(String)
 	 * @see art2.Art2Package#getTypedElement_Datatype()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
-	DataType getDatatype();
+	String getDatatype();
 
 	/**
-	 * Sets the value of the '{@link art2.TypedElement#getDatatype <em>Datatype</em>}' reference.
+	 * Sets the value of the '{@link art2.TypedElement#getDatatype <em>Datatype</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Datatype</em>' reference.
+	 * @param value the new value of the '<em>Datatype</em>' attribute.
 	 * @see #getDatatype()
 	 * @generated
 	 */
-	void setDatatype(DataType value);
+	void setDatatype(String value);
 
 } // TypedElement

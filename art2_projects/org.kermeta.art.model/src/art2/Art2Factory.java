@@ -89,33 +89,6 @@ public interface Art2Factory extends EFactory {
 	Namespace createNamespace();
 
 	/**
-	 * Returns a new object of class '<em>Port Service Impl</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Port Service Impl</em>'.
-	 * @generated
-	 */
-	PortServiceImpl createPortServiceImpl();
-
-	/**
-	 * Returns a new object of class '<em>Port Actor Impl</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Port Actor Impl</em>'.
-	 * @generated
-	 */
-	PortActorImpl createPortActorImpl();
-
-	/**
-	 * Returns a new object of class '<em>Port Message Impl</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Port Message Impl</em>'.
-	 * @generated
-	 */
-	PortMessageImpl createPortMessageImpl();
-
-	/**
 	 * Returns a new object of class '<em>Dictionary</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -260,15 +233,6 @@ public interface Art2Factory extends EFactory {
 	NamedElement createNamedElement();
 
 	/**
-	 * Returns a new object of class '<em>Data Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Type</em>'.
-	 * @generated
-	 */
-	DataType createDataType();
-
-	/**
 	 * Returns a new object of class '<em>Integration Pattern</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -287,13 +251,13 @@ public interface Art2Factory extends EFactory {
 	ExtraFonctionalProperty createExtraFonctionalProperty();
 
 	/**
-	 * Returns a new object of class '<em>OS Gi Scr Data Type</em>'.
+	 * Returns a new object of class '<em>Metric</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>OS Gi Scr Data Type</em>'.
+	 * @return a new object of class '<em>Metric</em>'.
 	 * @generated
 	 */
-	OSGiScrDataType createOSGiScrDataType();
+	Metric createMetric();
 
 	/**
 	 * Returns the package supported by this factory.

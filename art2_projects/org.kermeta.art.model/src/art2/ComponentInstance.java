@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link art2.ComponentInstance#getDictionary <em>Dictionary</em>}</li>
  *   <li>{@link art2.ComponentInstance#getRequirePorts <em>Require Ports</em>}</li>
  *   <li>{@link art2.ComponentInstance#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link art2.ComponentInstance#getMetrics <em>Metrics</em>}</li>
  * </ul>
  * </p>
  *
@@ -138,5 +139,21 @@ public interface ComponentInstance extends NamedElement {
 	 * @generated
 	 */
 	void setNamespace(Namespace value);
+
+	/**
+	 * Returns the value of the '<em><b>Metrics</b></em>' reference list.
+	 * The list contents are of type {@link art2.Metric}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Metrics</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Metrics</em>' reference list.
+	 * @see art2.Art2Package#getComponentInstance_Metrics()
+	 * @model
+	 * @generated
+	 */
+	EList<Metric> getMetrics();
 
 } // ComponentInstance
