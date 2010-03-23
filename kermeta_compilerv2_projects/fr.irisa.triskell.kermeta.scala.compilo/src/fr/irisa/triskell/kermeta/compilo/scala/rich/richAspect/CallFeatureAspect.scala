@@ -143,7 +143,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
             case "addAll"
                 if (this.getTarget != null && (this.getTarget.getStaticType != null && this.getTarget.getStaticType.isInstanceOf[fr.irisa.triskell.kermeta.language.structure.Class]) //|| (this.getStaticProperty != null && this.getStaticProperty.getType.isInstanceOf[fr.irisa.triskell.kermeta.language.structure.Class]))
                     && (this.getTarget.getStaticType.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Class].getTypeDefinition.getName.equals("OrderedSet")
-                       ||this.getTarget.getStaticType.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Class].getTypeDefinition.getName.equals("Set")))
+                        ||this.getTarget.getStaticType.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Class].getTypeDefinition.getName.equals("Set")))
                             =>{generateTarget(res);res.append(".");res.append("addAllUnique");generateParam(res,"(",")")}
             case "new" => generateNew(res)
             case _ if(this.getTarget != null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateTarget(res);res.append(".");generateOperationCall(res);generateParam(res,"(",")")}
