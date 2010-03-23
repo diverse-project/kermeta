@@ -15,5 +15,5 @@ Export-Package: org.smartadapters.core,
  org.smartadapters.core.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.kermeta.art.model.pattern;visibility:=reexport
+ org.kermeta.art.model.pattern;bundle-version="1.0.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy

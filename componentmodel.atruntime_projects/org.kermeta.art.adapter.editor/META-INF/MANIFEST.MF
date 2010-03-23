@@ -12,9 +12,9 @@ Export-Package: org.smartadapters.core.adaptations.presentation,
  org.smartadapters.core.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,
- org.kermeta.art.adapter.edit;visibility:=reexport,
+ org.kermeta.art.adapter.edit;bundle-version="1.0.0";visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.ui.ide;visibility:=reexport,
- org.kermeta.art.model.pattern.edit;visibility:=reexport
+ org.kermeta.art.model.pattern.edit;bundle-version="1.0.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy

@@ -11,8 +11,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.smartadapters.core.adaptations.provider,
  org.smartadapters.core.provider
 Require-Bundle: org.eclipse.core.runtime,
- org.kermeta.art.adapter;visibility:=reexport,
+ org.kermeta.art.adapter;bundle-version="1.0.0";visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport,
- org.kermeta.art.model.pattern;visibility:=reexport,
- org.kermeta.art.model.pattern.edit;visibility:=reexport
+ org.kermeta.art.model.pattern;bundle-version="1.0.0";visibility:=reexport,
+ org.kermeta.art.model.pattern.edit;bundle-version="1.0.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy
