@@ -32,6 +32,9 @@
 			<param name="eclipse.version.name" value="linux_x86_64"/>
 			<param name="archive.extension" value="tar.gz"/>
 			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk-x86_64.tar.gz"/>
+			<param name="target.os" value="linux"/>
+			<param name="target.ws" value="gtk"/>
+			<param name="target.arch" value="x86_64"/>
 		</antcall>
 	</target>
 	<target name="provision_linux_x86_base_for_kermeta">
@@ -39,6 +42,9 @@
 			<param name="eclipse.version.name" value="linux_x86"/>
 			<param name="archive.extension" value="tar.gz"/>
 			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-SDK-3.5.2-linux-gtk.tar.gz"/>
+			<param name="target.os" value="linux"/>
+			<param name="target.ws" value="gtk"/>
+			<param name="target.arch" value="x86"/>
 		</antcall>
 	</target>
 
@@ -47,6 +53,9 @@
 			<param name="eclipse.version.name" value="win32"/>
 			<param name="archive.extension" value="zip"/>
 			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-win32.zip"/>
+			<param name="target.os" value="win32"/>
+			<param name="target.ws" value="win32"/>
+			<param name="target.arch" value="x86"/>
 		</antcall>
 	</target>
 	
@@ -55,6 +64,9 @@
 			<param name="eclipse.version.name" value="win32_x86_64"/>
 			<param name="archive.extension" value="zip"/>
 			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-win32-x86_64.zip"/>
+			<param name="target.os" value="win32"/>
+			<param name="target.ws" value="win32"/>
+			<param name="target.arch" value="x86_64"/>
 		</antcall>
 	</target>
 	
@@ -63,6 +75,9 @@
 			<param name="eclipse.version.name" value="macosx-cocoa_x86_64"/>
 			<param name="archive.extension" value="tar.gz"/>
 			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-macosx-cocoa-x86_64.tar.gz"/>
+			<param name="target.os" value="macosx"/>
+			<param name="target.ws" value="cocoa"/>
+			<param name="target.arch" value="x86_64"/>
 		</antcall>
 	</target>
 	<target name="provision_macosx-cocoa_base_for_kermeta">
@@ -70,6 +85,9 @@
 			<param name="eclipse.version.name" value="macosx-cocoa"/>
 			<param name="archive.extension" value="tar.gz"/>
 			<param name="eclipse.base.url" value="http://eclipse.ialto.org/eclipse/downloads/drops/R-3.5.2-201002111343/eclipse-platform-3.5.2-macosx-cocoa.tar.gz"/>
+			<param name="target.os" value="macosx"/>
+			<param name="target.ws" value="cocoa"/>
+			<param name="target.arch" value="x86"/>
 		</antcall>
 	</target>
 
@@ -139,6 +157,7 @@
 	</target>
 	<target name="provision_feature" >
 		<echo>Provisionning ${eclipse.version.name} with ${feature.name}</echo>
+		<echo>OS=${os}; arch=${target.arch}; ws=${target.ws}</echo>
 		<java jar="${env.WORKSPACE}/build/kermeta_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
 		           fork="true"
 		           failonerror="true"
@@ -159,7 +178,13 @@
 			<arg value="-profileProperties"/>
 			<arg value="org.eclipse.update.install.features=true"/>
 			<arg value="-profile"/>
-			<arg value="SDKProfile"/>   
+			<arg value="SDKProfile"/> 
+			<arg value="-p2.os"/> 
+			<arg value="${target.os}"/> 
+			<arg value="-p2.ws"/> 
+			<arg value="${target.ws}"/> 
+			<arg value="-p2.arch"/> 
+			<arg value="${target.arch}"/>
  			<jvmarg value="-Declipse.p2.data.area=${target.eclipse.dir}/eclipse/p2"/>
 		</java>	
 	</target>
