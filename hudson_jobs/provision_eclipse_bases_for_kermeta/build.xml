@@ -157,7 +157,7 @@
 	</target>
 	<target name="provision_feature" >
 		<echo>Provisionning ${eclipse.version.name} with ${feature.name}</echo>
-		<echo>OS=${os}; arch=${target.arch}; ws=${target.ws}</echo>
+		<echo>OS=${target.os}; arch=${target.arch}; ws=${target.ws}</echo>
 		<java jar="${env.WORKSPACE}/build/kermeta_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
 		           fork="true"
 		           failonerror="true"
