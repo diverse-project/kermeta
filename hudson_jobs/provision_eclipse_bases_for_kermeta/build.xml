@@ -35,6 +35,7 @@
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86_64"/>
+			<param name="target.profile" value="SDKProfile"/>
 		</antcall>
 	</target>
 	<target name="provision_linux_x86_base_for_kermeta">
@@ -45,6 +46,7 @@
 			<param name="target.os" value="linux"/>
 			<param name="target.ws" value="gtk"/>
 			<param name="target.arch" value="x86"/>
+			<param name="target.profile" value="SDKProfile"/>
 		</antcall>
 	</target>
 
@@ -56,6 +58,7 @@
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86"/>
+			<param name="target.profile" value="PlatformProfile"/>
 		</antcall>
 	</target>
 	
@@ -67,6 +70,7 @@
 			<param name="target.os" value="win32"/>
 			<param name="target.ws" value="win32"/>
 			<param name="target.arch" value="x86_64"/>
+			<param name="target.profile" value="PlatformProfile"/>
 		</antcall>
 	</target>
 	
@@ -78,6 +82,7 @@
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86_64"/>
+			<param name="target.profile" value="PlatformProfile"/>
 		</antcall>
 	</target>
 	<target name="provision_macosx-cocoa_base_for_kermeta">
@@ -88,6 +93,7 @@
 			<param name="target.os" value="macosx"/>
 			<param name="target.ws" value="cocoa"/>
 			<param name="target.arch" value="x86"/>
+			<param name="target.profile" value="PlatformProfile"/>
 		</antcall>
 	</target>
 
@@ -157,7 +163,7 @@
 	</target>
 	<target name="provision_feature" >
 		<echo>Provisionning ${eclipse.version.name} with ${feature.name}</echo>
-		<echo>OS=${target.os}; arch=${target.arch}; ws=${target.ws}</echo>
+		<echo>OS=${target.os}; arch=${target.arch}; ws=${target.ws}; target.profile=${target.profile}</echo>
 		<java jar="${env.WORKSPACE}/build/kermeta_${eclipse.native.version.name}_base/eclipse/plugins/${equinox.jar}"
 		           fork="true"
 		           failonerror="true"
@@ -178,7 +184,7 @@
 			<arg value="-profileProperties"/>
 			<arg value="org.eclipse.update.install.features=true"/>
 			<arg value="-profile"/>
-			<arg value="SDKProfile"/> 
+			<arg value="${target.profile}"/> 
 			<arg value="-p2.os"/> 
 			<arg value="${target.os}"/> 
 			<arg value="-p2.ws"/> 
