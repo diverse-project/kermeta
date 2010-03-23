@@ -11,6 +11,7 @@ import org.smartadapters.core.setAdaptation;
 import pattern.art.instance.ComponentInstance;
 import pattern.art.instance.TransmissionBinding;
 
+import pattern.art.type.AbstractPort;
 import pattern.art.type.Port;
 
 /**
@@ -69,12 +70,12 @@ public interface SetruntimeinstanceTransmissionBinding extends setAdaptation {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Refclient</em>' reference.
-	 * @see #setRefclient(Port)
+	 * @see #setRefclient(AbstractPort)
 	 * @see org.smartadapters.core.adaptations.AdaptationsPackage#getSetruntimeinstanceTransmissionBinding_Refclient()
 	 * @model
 	 * @generated
 	 */
-	Port getRefclient();
+	AbstractPort getRefclient();
 
 	/**
 	 * Sets the value of the '{@link org.smartadapters.core.adaptations.SetruntimeinstanceTransmissionBinding#getRefclient <em>Refclient</em>}' reference.
@@ -84,7 +85,7 @@ public interface SetruntimeinstanceTransmissionBinding extends setAdaptation {
 	 * @see #getRefclient()
 	 * @generated
 	 */
-	void setRefclient(Port value);
+	void setRefclient(AbstractPort value);
 
 	/**
 	 * Returns the value of the '<em><b>Refserver</b></em>' reference.
@@ -95,12 +96,12 @@ public interface SetruntimeinstanceTransmissionBinding extends setAdaptation {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Refserver</em>' reference.
-	 * @see #setRefserver(Port)
+	 * @see #setRefserver(AbstractPort)
 	 * @see org.smartadapters.core.adaptations.AdaptationsPackage#getSetruntimeinstanceTransmissionBinding_Refserver()
 	 * @model
 	 * @generated
 	 */
-	Port getRefserver();
+	AbstractPort getRefserver();
 
 	/**
 	 * Sets the value of the '{@link org.smartadapters.core.adaptations.SetruntimeinstanceTransmissionBinding#getRefserver <em>Refserver</em>}' reference.
@@ -110,7 +111,7 @@ public interface SetruntimeinstanceTransmissionBinding extends setAdaptation {
 	 * @see #getRefserver()
 	 * @generated
 	 */
-	void setRefserver(Port value);
+	void setRefserver(AbstractPort value);
 
 	/**
 	 * Returns the value of the '<em><b>Refserver Instance</b></em>' reference.

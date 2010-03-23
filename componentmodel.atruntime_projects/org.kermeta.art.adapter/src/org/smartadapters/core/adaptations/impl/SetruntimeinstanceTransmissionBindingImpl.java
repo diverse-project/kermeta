@@ -21,6 +21,7 @@ import org.smartadapters.core.impl.setAdaptationImpl;
 import pattern.art.instance.ComponentInstance;
 import pattern.art.instance.TransmissionBinding;
 
+import pattern.art.type.AbstractPort;
 import pattern.art.type.Port;
 
 /**
@@ -59,7 +60,7 @@ public class SetruntimeinstanceTransmissionBindingImpl extends setAdaptationImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected Port refclient;
+	protected AbstractPort refclient;
 
 	/**
 	 * The cached value of the '{@link #getRefserver() <em>Refserver</em>}' reference.
@@ -69,7 +70,7 @@ public class SetruntimeinstanceTransmissionBindingImpl extends setAdaptationImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected Port refserver;
+	protected AbstractPort refserver;
 
 	/**
 	 * The cached value of the '{@link #getRefserverInstance() <em>Refserver Instance</em>}' reference.
@@ -163,10 +164,10 @@ public class SetruntimeinstanceTransmissionBindingImpl extends setAdaptationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Port getRefclient() {
+	public AbstractPort getRefclient() {
 		if (refclient != null && refclient.eIsProxy()) {
 			InternalEObject oldRefclient = (InternalEObject)refclient;
-			refclient = (Port)eResolveProxy(oldRefclient);
+			refclient = (AbstractPort)eResolveProxy(oldRefclient);
 			if (refclient != oldRefclient) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AdaptationsPackage.SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFCLIENT, oldRefclient, refclient));
@@ -180,7 +181,7 @@ public class SetruntimeinstanceTransmissionBindingImpl extends setAdaptationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Port basicGetRefclient() {
+	public AbstractPort basicGetRefclient() {
 		return refclient;
 	}
 
@@ -189,8 +190,8 @@ public class SetruntimeinstanceTransmissionBindingImpl extends setAdaptationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRefclient(Port newRefclient) {
-		Port oldRefclient = refclient;
+	public void setRefclient(AbstractPort newRefclient) {
+		AbstractPort oldRefclient = refclient;
 		refclient = newRefclient;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AdaptationsPackage.SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFCLIENT, oldRefclient, refclient));
@@ -201,10 +202,10 @@ public class SetruntimeinstanceTransmissionBindingImpl extends setAdaptationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Port getRefserver() {
+	public AbstractPort getRefserver() {
 		if (refserver != null && refserver.eIsProxy()) {
 			InternalEObject oldRefserver = (InternalEObject)refserver;
-			refserver = (Port)eResolveProxy(oldRefserver);
+			refserver = (AbstractPort)eResolveProxy(oldRefserver);
 			if (refserver != oldRefserver) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AdaptationsPackage.SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFSERVER, oldRefserver, refserver));
@@ -218,7 +219,7 @@ public class SetruntimeinstanceTransmissionBindingImpl extends setAdaptationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Port basicGetRefserver() {
+	public AbstractPort basicGetRefserver() {
 		return refserver;
 	}
 
@@ -227,8 +228,8 @@ public class SetruntimeinstanceTransmissionBindingImpl extends setAdaptationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRefserver(Port newRefserver) {
-		Port oldRefserver = refserver;
+	public void setRefserver(AbstractPort newRefserver) {
+		AbstractPort oldRefserver = refserver;
 		refserver = newRefserver;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AdaptationsPackage.SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFSERVER, oldRefserver, refserver));
@@ -331,10 +332,10 @@ public class SetruntimeinstanceTransmissionBindingImpl extends setAdaptationImpl
 				setTransmissionBindingToSet((TransmissionBinding)newValue);
 				return;
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFCLIENT:
-				setRefclient((Port)newValue);
+				setRefclient((AbstractPort)newValue);
 				return;
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFSERVER:
-				setRefserver((Port)newValue);
+				setRefserver((AbstractPort)newValue);
 				return;
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFSERVER_INSTANCE:
 				setRefserverInstance((ComponentInstance)newValue);
@@ -358,10 +359,10 @@ public class SetruntimeinstanceTransmissionBindingImpl extends setAdaptationImpl
 				setTransmissionBindingToSet((TransmissionBinding)null);
 				return;
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFCLIENT:
-				setRefclient((Port)null);
+				setRefclient((AbstractPort)null);
 				return;
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFSERVER:
-				setRefserver((Port)null);
+				setRefserver((AbstractPort)null);
 				return;
 			case AdaptationsPackage.SETRUNTIMEINSTANCE_TRANSMISSION_BINDING__REFSERVER_INSTANCE:
 				setRefserverInstance((ComponentInstance)null);

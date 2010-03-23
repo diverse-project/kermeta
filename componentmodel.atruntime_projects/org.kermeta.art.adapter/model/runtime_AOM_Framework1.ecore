@@ -154,8 +154,8 @@
             eSuperTypes="#//smartadapters/core/setAdaptation">
           <eStructuralFeatures xsi:type="ecore:EReference" name="TransmissionBindingToSet"
               eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/TransmissionBinding"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refclient" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/type/Port"/>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="refserver" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refclient" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/type/AbstractPort"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refserver" eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/type/AbstractPort"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refserverInstance"
               eType="ecore:EClass ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/instance/ComponentInstance"/>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="refId" eType="ecore:EDataType ../../org.kermeta.art.model.pattern/model/metamodel@runtimePattern.ecore#//art/String"/>
