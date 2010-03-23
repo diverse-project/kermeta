@@ -874,9 +874,13 @@ public class PropertyFileEditorTab extends AbstractLaunchConfigurationTab
 									+ "workspace.plugin.uri =\n"
 									+ "workspace.platform.uri =\n"
 									+ "\n"
+									+ "#clean before compile\n"									
 									+ "clean = false\n"
+									+ "#create package using maven\n"
 									+ "createPackage = false\n"
+									+ "#Exec Output\n"
 									+ "exec = true\n"
+									+ "#Create a standalone big jar with everything\n"
 									+ "standalone =false \n"
 									);
 					w.flush();
