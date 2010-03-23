@@ -11,6 +11,7 @@ package fr.irisa.triskell.kermeta.compilo.scala
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
 import java.io.File
 import java.io.FileInputStream
+import java.io.PrintStream
 import java.util.Properties
 import java.util.ResourceBundle
 import scala.collection.JavaConversions._
@@ -23,7 +24,7 @@ import fr.irisa.triskell.embedded._
 
 object Main extends LogAspect {
 
-var outputStream : java.io.OutputStream=null
+    var outputStream : java.io.OutputStream=null
 
     def init(propertyurl:String, projectName:String, classqname:String,  operationName:String, classpath:java.util.Collection[String], args:String, outputStream : java.io.OutputStream):Unit ={
 
@@ -122,7 +123,7 @@ var outputStream : java.io.OutputStream=null
 	   
         var compilo = new Compiler
 	  
-      //   inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/068_testVariableInit.main.km"
+        //   inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/068_testVariableInit.main.km"
         // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/037_testLambda.main.km"
 //	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/078_testAddVoidInReflectiveCollection.main.km"
         //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
@@ -135,7 +136,7 @@ var outputStream : java.io.OutputStream=null
 //    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/001_LoadUML.km"
 	    	
         //    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Art2DroolsMatcher/Art2DROOLSPatternFramework.km"
-
+        //       inputFile="/home/barais/workspaces/kermetaRuntimeTest/Test/src/kermeta/new_file.km"
         //    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LoadSaveKm/0001LoadAndSaveKm.km"
         //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.km"
 //   inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.km"
@@ -157,14 +158,14 @@ var outputStream : java.io.OutputStream=null
         //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Speeds/StaticSemanticChecker.km"
         //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/reflexivity/Serializer.km"
         //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/reflexivity/reflexivity.km"
-     //   inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/pruner/metamodelPruner.km"
+        //   inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/pruner/metamodelPruner.km"
 //        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/pruner/TestCollection.km"
         //inputFile = "/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/025simpleInvariant.km"
 
         // inputFile = "/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/022_InvWithMultipleInheritance.km"
 
 
-  //  inputFile = "/Users/ffouquet/Desktop/SpeedWorkspace/SpeedsStaticSemantics-2.1.6/l1/kermeta/StaticSemanticChecker.km"
+        //  inputFile = "/Users/ffouquet/Desktop/SpeedWorkspace/SpeedsStaticSemantics-2.1.6/l1/kermeta/StaticSemanticChecker.km"
 
 
         if(inputFile != ""){
@@ -176,21 +177,39 @@ var outputStream : java.io.OutputStream=null
 
         /* Scalac compilation step */
         /*var classpath =EmbettedScalaCompiler.getActualClasspath
-        if (additionalClassPath != null)
-             classpath = classpath ++ additionalClassPath*/
+         if (additionalClassPath != null)
+         classpath = classpath ++ additionalClassPath*/
 
 
         if (scalacompile){
             //var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
             /* Scala runner */
-           /* if(compilationResult == 0){
-                EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
-            }*/
-           EmbeddedMavenHelper.run(GlobalConfiguration.clean,GlobalConfiguration.createPackage, GlobalConfiguration.standalone, GlobalConfiguration.exec,  additionalClassPath,outputStream)
+            /* if(compilationResult == 0){
+             EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
+             }*/
+            if (GlobalConfiguration.exec && !GlobalConfiguration.createPackage ){
+                var classpath =EmbettedScalaCompiler.getActualClasspath
+                if (additionalClassPath != null)
+                    classpath = classpath ++ additionalClassPath
+                var oldOut : java.io.OutputStream = System.out
+                var oldErr : java.io.OutputStream = System.err
+
+                if (outputStream != null){
+                    System.setOut(new java.io.PrintStream(outputStream))
+                    System.setErr(new java.io.PrintStream(outputStream))
+                }
+                var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
+                /* Scala runner */
+                if(compilationResult == 0){
+                    EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
+                }
+                if (outputStream != null){
+                    System.setOut(new PrintStream(oldOut))
+                    System.setErr(new PrintStream(oldErr))
+                }
+            }else{
+                EmbeddedMavenHelper.run(GlobalConfiguration.clean,GlobalConfiguration.createPackage, GlobalConfiguration.standalone, GlobalConfiguration.exec,  additionalClassPath,outputStream)
+            }
         }
-
-
-	   
-	   
     }
 }
