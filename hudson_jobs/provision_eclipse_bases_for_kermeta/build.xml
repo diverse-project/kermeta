@@ -197,10 +197,12 @@
 	
 	<!-- create an empty base from the downloaded one -->
 	<target name="create_target_base">
-		<delete dir="${target.eclipse.dir}" failonerror="false"/>
+		<delete dir="${target.eclipse.dir}" failonerror="false"/>	
 		<copy todir="${target.eclipse.dir}">
-			<fileset dir="${eclipse.base.dir}" includes="**" />
-		</copy>	
+			<fileset dir="${eclipse.base.dir}" includes="**" >
+				<exclude name="*.tstamp"/>
+			</fileset>
+		</copy>
 	</target>
 
 

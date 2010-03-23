@@ -33,6 +33,10 @@
 			<param name="eclipse.version.name" value="linux_x86_64"/>
 			<param name="archive.extension" value="zip"/>
 			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_linux_x86_64_base.zip"/>
+			<param name="target.os" value="linux"/>
+			<param name="target.ws" value="gtk"/>
+			<param name="target.arch" value="x86_64"/>
+			<param name="target.profile" value="SDKProfile"/>
 		</antcall>
 	</target>
 	<target name="provision_kermeta_linux_x86">
@@ -40,6 +44,10 @@
 			<param name="eclipse.version.name" value="linux_x86"/>
 			<param name="archive.extension" value="zip"/>
 			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_linux_x86_base.zip"/>
+			<param name="target.os" value="linux"/>
+			<param name="target.ws" value="gtk"/>
+			<param name="target.arch" value="x86"/>
+			<param name="target.profile" value="SDKProfile"/>
 		</antcall>
 	</target>
 
@@ -48,6 +56,10 @@
 			<param name="eclipse.version.name" value="win32"/>
 			<param name="archive.extension" value="zip"/>
 			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_win32_base.zip"/>
+			<param name="target.os" value="win32"/>
+			<param name="target.ws" value="win32"/>
+			<param name="target.arch" value="x86"/>
+			<param name="target.profile" value="PlatformProfile"/>
 		</antcall>
 	</target>
 	
@@ -56,6 +68,10 @@
 			<param name="eclipse.version.name" value="win32_x86_64"/>
 			<param name="archive.extension" value="zip"/>
 			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_win32_x86_64_base.zip"/>
+			<param name="target.os" value="win32"/>
+			<param name="target.ws" value="win32"/>
+			<param name="target.arch" value="x86_64"/>
+			<param name="target.profile" value="PlatformProfile"/>
 		</antcall>
 	</target>
 	
@@ -64,6 +80,10 @@
 			<param name="eclipse.version.name" value="macosx-cocoa_x86_64"/>
 			<param name="archive.extension" value="zip"/>
 			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_macosx-cocoa_x86_64_base.zip"/>
+			<param name="target.os" value="macosx"/>
+			<param name="target.ws" value="cocoa"/>
+			<param name="target.arch" value="x86_64"/>
+			<param name="target.profile" value="PlatformProfile"/>
 		</antcall>
 	</target>
 	<target name="provision_kermeta_macosx-cocoa">
@@ -71,6 +91,10 @@
 			<param name="eclipse.version.name" value="macosx-cocoa"/>
 			<param name="archive.extension" value="zip"/>
 			<param name="eclipse.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_macosx-cocoa_base.zip"/>
+			<param name="target.os" value="macosx"/>
+			<param name="target.ws" value="cocoa"/>
+			<param name="target.arch" value="x86"/>
+			<param name="target.profile" value="PlatformProfile"/>
 		</antcall>
 	</target>
 
@@ -107,6 +131,7 @@
 	</target>
 	<target name="provision_feature">
 		<echo>Provisionning ${eclipse.version.name} with ${feature.name}</echo>
+		<echo>OS=${target.os}; arch=${target.arch}; ws=${target.ws}; target.profile=${target.profile}</echo>
 		<java jar="${target.eclipse.dir}/eclipse/plugins/${equinox.jar}"
 		           fork="true"
 		           failonerror="true"
@@ -127,7 +152,13 @@
 			<arg value="-profileProperties"/>
 			<arg value="org.eclipse.update.install.features=true"/>
 			<arg value="-profile"/>
-			<arg value="SDKProfile"/>   
+			<arg value="${target.profile}"/> 
+			<arg value="-p2.os"/> 
+			<arg value="${target.os}"/> 
+			<arg value="-p2.ws"/> 
+			<arg value="${target.ws}"/> 
+			<arg value="-p2.arch"/> 
+			<arg value="${target.arch}"/>   
  			<jvmarg value="-Declipse.p2.data.area=${target.eclipse.dir}/eclipse/p2"/>
 		</java>	
 	</target>
