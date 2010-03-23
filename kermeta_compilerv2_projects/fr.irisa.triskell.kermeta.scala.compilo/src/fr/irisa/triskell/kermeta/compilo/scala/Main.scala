@@ -187,7 +187,7 @@ object Main extends LogAspect {
             /* if(compilationResult == 0){
              EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
              }*/
-            if (GlobalConfiguration.exec && !GlobalConfiguration.createPackage ){
+           /* if (GlobalConfiguration.exec && !GlobalConfiguration.createPackage ){
                 var classpath =EmbettedScalaCompiler.getActualClasspath
                 println(classpath.mkString)
                 if (additionalClassPath != null)
@@ -201,7 +201,7 @@ object Main extends LogAspect {
                     System.setErr(new java.io.PrintStream(outputStream))
                 }
                 var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
-                /* Scala runner */
+                //Scala runner
                 if(compilationResult == 0){
                     EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
                 }
@@ -209,9 +209,9 @@ object Main extends LogAspect {
                     System.setOut(new PrintStream(oldOut))
                     System.setErr(new PrintStream(oldErr))
                 }
-            }else{
+            }else{*/
                 EmbeddedMavenHelper.run(GlobalConfiguration.clean,GlobalConfiguration.createPackage, GlobalConfiguration.standalone, GlobalConfiguration.exec,  additionalClassPath,outputStream)
-            }
+          //  }
         }
     }
 }
