@@ -71,9 +71,9 @@ abstract class StateMachine inherits EventHandler
 		if(activated) then
     		do
     			t.action()
-    			currentState.onOutgoing()
+    			if(not t.silent) then currentState.onOutgoing() end
     			currentState := t.outputState
-    			currentState.onIngoing()
+    			if(not t.silent) then currentState.onIngoing() end
     		rescue(ex : kermeta::exceptions::Exception) reinit end
     	end
 	end

@@ -24,22 +24,26 @@ abstract class Transition
 	
 	reference outputState : State
 	
+	/** Defines if the state machine must call onIngoing, etc. when the transition is executed.  */
+	attribute silent : Boolean
+	
 	
 	operation initialise(inputState : State, outputState : State) : Void is do
 		if(inputState.isVoid or outputState.isVoid) then raise kermeta::exceptions::Exception.new end
 		
-		if(inputState.isKindOf(AbortingState) or inputState.isKindOf(TerminalState)) then
+		if(inputState.isInstanceOf(AbortingState) or inputState.isInstanceOf(TerminalState)) then
 			var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
 			ex.message := "Input state cannot be an ending nor an aborting state."
 			raise ex
 		end
 		
-		if(outputState.isKindOf(InitState)) then
+		if(outputState.isInstanceOf(InitState)) then
 			var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
 			ex.message := "Onput state cannot be an init state."
 			raise ex
 		end
 		
+		silent := false
 		self.inputState  := inputState
 		self.outputState := outputState
 		
@@ -55,9 +59,6 @@ abstract class Transition
 	end
 	
 	
-	operation update(e : Event) : Void is abstract
-
-
 	method toString() : String is do
 		result := super + "[" + inputState.name + ">>" + outputState.name + "]"
 	end
@@ -117,20 +118,6 @@ abstract class PointingDeviceTransition inherits Transition {
 		py := void
 		button := void
 	end
-
-	
-
-	method update(e : Event) : Void is do//TODO remove this method since it is never called
-		if(e.isKindOf(MouseEvent)) then
-			var me : MouseEvent init e.asType(MouseEvent)
-			px 		:= me.getX.toReal
-			py 		:= me.getY.toReal
-			stdio.writeln("udpate PointingDeviceTransition:" + px.toString + " " + py.toString)
-			stdio.writeln("udpate PointingDeviceTransition:" + me.getX.toString + " " + me.getY.toString)
-			button  := me.getButton
-		end
-	end
-	
 }
 
 
@@ -151,12 +138,6 @@ class TextChangedTransition inherits Transition {
 	attribute textCompName : String
 	
 	attribute text : String
-	
-	method update(e : Event) : Void is do//TODO
-		/*if(e.isKindOf(ActionEvent)) then
-			text = textComp.getText();
-		end*/
-	end
 }
 
 
@@ -170,12 +151,5 @@ abstract class KeyboardTransition inherits Transition {
 		super(inputState, outputState)
 		
 		key := -1
-	end
-	
-
-	method update(e : Event) : Void is do
-		if(e.isKindOf(KeyEvent)) then
-			key := e.asType(KeyEvent).getKeyCode()
-		end
 	end
 }
