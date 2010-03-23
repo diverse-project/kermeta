@@ -118,8 +118,9 @@ public class KermetaUnitStore
 			kermetaUnit = loader.getLoadedUnit(); // at this step the unit is still empty, but we need to add it to the store in case it is required during the load process
 			// add the unit in the cache
 			kermetaUnitCache.put(kermetaUnitURI, kermetaUnit);
-			// really load the unit content
-			loader.load();
+			// really load the unit content (except if the don't load existing option is set (for example when merging in memory)
+			if(options.get(LoadingOptions.DONT_LOAD_EXISTING_RESOURCE) == null || !((Boolean)options.get(LoadingOptions.DONT_LOAD_EXISTING_RESOURCE)))
+				loader.load();
 		} 
 		return kermetaUnit;
 	}

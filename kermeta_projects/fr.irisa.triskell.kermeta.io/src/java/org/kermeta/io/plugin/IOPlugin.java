@@ -293,8 +293,17 @@ public class IOPlugin extends Plugin {
 		return kermetaUnit;
 	}
 	
+	/**
+	 * either retreive the existing unit in the storer or create an emptty unit (ie. doesn't try to load the unit from the resource)
+	 * @param uri
+	 * @return
+	 * @throws URIMalformedException
+	 * @throws NotRegisteredURIException
+	 */
 	public KermetaUnit basicGetKermetaUnit( String uri ) throws URIMalformedException, NotRegisteredURIException {
-		return editionStorer.get( uri );
+		HashMap<String,Object> options = new HashMap<String,Object>();
+		options.put(LoadingOptions.DONT_LOAD_EXISTING_RESOURCE, true);
+		return editionStorer.get( uri, options );
 	}
 	
 	/*public KermetaUnit basicLoadKermetaUnit( String uri, IProgressMonitor monitor ) throws URIMalformedException, NotRegisteredURIException {

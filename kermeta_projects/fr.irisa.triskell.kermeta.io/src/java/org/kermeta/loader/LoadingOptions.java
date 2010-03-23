@@ -14,8 +14,16 @@ package org.kermeta.loader;
 
 public class LoadingOptions {
 
+	/**
+	 * This load option is used to tell that we are loading teh framework itself
+	 */
 	static final public String FRAMEWORK_LOADING = "framework_loading";
 	
+	/**
+	 * this option is used to prevent from loading an existing resource
+	 * useful for example when this unit is calculated and need to be saved at the end (ex: merge in memory then save the result)
+	 */
+	public static final String DONT_LOAD_EXISTING_RESOURCE = "do_not_load_existing_resource";	
 	/*
 	 * 
 	 * Constants for KMT loading.
@@ -38,6 +46,8 @@ public class LoadingOptions {
 	 * This constant indicates that the given km requires the loading of the framework.km
 	 */
 	static final public String INCLUDE_FRAMEWORK = "_INCLUDE_FRAMEWORK_";
+
+
 	
 	
 }
