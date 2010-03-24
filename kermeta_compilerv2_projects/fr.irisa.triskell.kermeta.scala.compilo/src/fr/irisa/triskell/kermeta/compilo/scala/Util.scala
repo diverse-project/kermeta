@@ -79,14 +79,15 @@ object Util extends LogAspect with RichAspectImplicit  {
   }
 	
   val keywords = scala.List("implicit","match","requires","type","var","abstract","do","finally","import","object","throw","val","case","else","for","lazy","override","return","trait","catch","extends","forSome","match","package","sealed","try","while","class","false","if","new","private","super","true","with","def","final","implicit","null","protected","this","yield","_",":","=","=>","<-","<:","<%",">:","#","@")
+  val badChar = scala.List("_")
   def protectScalaKeyword(value : String) : String = {
     var returnString  = new StringBuilder
     var splittedVal = new RichIterable(value.split('.'))
     splittedVal.foreachCtx((e,ctx) => {
         if(!ctx.isFirst){ returnString.append(".") }
-        if(keywords.exists(p => p.equals(e))){
+        if(badChar.exists({p=>e.contains(p)}) || keywords.exists(p => p.equals(e))){
           returnString append "`"+e+"`"
-          log.info("Reserved Scala Keyword : {}, backquote protection : ",value)
+          log.info("Reserved Scala Keyword : {}, backquote protection : ",e)
         } else {
           returnString append e
         }
