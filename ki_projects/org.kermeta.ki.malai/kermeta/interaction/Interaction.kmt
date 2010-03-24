@@ -10,10 +10,9 @@ package kermeta::ki::malai::interaction;
 
 
 require kermeta
-require "StateMachine.kmt"
-require "InteractionHandler.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/StateMachine.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/InteractionHandler.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
 
 using kermeta::ki::malai::picking

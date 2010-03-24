@@ -10,9 +10,6 @@ package kermeta::ki::malai::interaction;
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/State.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/EventHandler.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/transition/Transition.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::interaction::event

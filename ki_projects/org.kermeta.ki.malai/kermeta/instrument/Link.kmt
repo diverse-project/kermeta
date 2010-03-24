@@ -12,13 +12,6 @@ package kermeta::ki::malai::instrument;
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/InteractionHandler.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/undo/Undoable.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::action
