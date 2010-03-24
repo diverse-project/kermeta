@@ -13,12 +13,12 @@ public abstract class ComponentView {
 	
 	public static RuntimeObject onPruning(RuntimeObject prunedObjectRO) {
 		Object prunedObject = prunedObjectRO.getUserData();
-		System.out.println(prunedObject);
+
 		if(prunedObject==null) {
 			System.err.println("No associated Java object to the Kermeta object: " + prunedObjectRO);
 			return prunedObjectRO.getFactory().getMemory().voidINSTANCE;
 		}
-		System.out.println((prunedObject instanceof EntityView));
+
 		if(prunedObject instanceof EntityView)
 			((EntityView)prunedObject).visible = false;
 		

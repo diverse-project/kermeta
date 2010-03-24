@@ -8,17 +8,17 @@ package kermeta::ki::visual;
 
 
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/PressLink.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/pruning/Prune.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/interaction/CtrlMultiPress.kmt"
 
 using kermeta::language::structure
 using kermeta::standard
 using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction
+using kermeta::ki::malai::action
 
 
 class Pruner inherits Instrument
@@ -26,6 +26,7 @@ class Pruner inherits Instrument
 	reference metamodel : ModelingUnit
 	
 	method initialiseLinks(eventManager : EventManager) : Void is do
+		addLink(MultiPress2Prune.new, metamodel, void, eventManager, false)
 		addLink(Press2Prune.new, metamodel, void, eventManager, false)
 		addLink(Press2Reinit.new, metamodel, void, eventManager, false)
 	end
@@ -34,15 +35,70 @@ class Pruner inherits Instrument
 
 
 
-class Press2Reinit inherits PressLink
+class MultiPress2Prune inherits Link
 {
+	method createInteraction() : Interaction is do
+		result := CtrlMultiPress.new
+	end
+	
+	
+	method getActionClass() : Class is do
+		result := ActionPrune
+	end
+	
+	
+	method isConditionRespected() : Boolean is do
+		result := true
+	end
+	
+	
+	method updateAction() : Void is do
+		if(not action.isVoid) then
+			var press : CtrlMultiPress init interaction.asType(CtrlMultiPress)
+			var as    : ActionPrune init action.asType(ActionPrune)
+			
+			press.objects.each{o |
+				if((not o.isVoid).andThen{b | o.isInstanceOf(ClassDefinition)}) then
+					as.selection.add(o.asType(ClassDefinition))
+				end
+			}
+
+		end
+	end
+	
+	
+	method createAction() : Void is do
+		var as : ActionPrune init ActionPrune.new
+		var pruner : Pruner init instrument.asType(Pruner)
+		
+		as.initialise(instrument.actionRegistry)
+		as.metamodel := pruner.metamodel
+		action       := as
+	end
+}
+
+
+
+
+class Press2Reinit inherits Link
+{
+	method createInteraction() : Interaction is do
+		result := Press.new
+	end
+	
 	method updateAction() : Void is do
 	end
 	
 	
+	method getActionClass() : Class is do
+		result := ActionReinitView
+	end
+	
 	
 	method isConditionRespected() : Boolean is do
-		result := interaction.asType(Press).target.isVoid
+		var press : Press init interaction.asType(Press)
+		
+		result := press.target.isVoid
 	end
 	
 	
@@ -61,15 +117,26 @@ class Press2Reinit inherits PressLink
 
 
 
-class Press2Prune inherits PressLink
+class Press2Prune inherits Link
 {
+	method createInteraction() : Interaction is do
+		result := Press.new
+	end
+	
+	
+	method getActionClass() : Class is do
+		result := ActionPrune
+	end
+	
+	
 	method updateAction() : Void is do
 		if(not action.isVoid) then
 			var press : Press init interaction.asType(Press)
 			var as    : ActionPrune init action.asType(ActionPrune)
 			
 			if(press.target.isInstanceOf(ClassDefinition)) then
-				as.selection := press.target.asType(ClassDefinition)
+				as.selection.clear
+				as.selection.add(press.target.asType(ClassDefinition))
 			end
 		end
 	end
@@ -77,7 +144,8 @@ class Press2Prune inherits PressLink
 	
 	
 	method isConditionRespected() : Boolean is do
-		result := interaction.asType(Press).target.isInstanceOf(ClassDefinition)
+		var press : Press init interaction.asType(Press)
+		result := not press.target.isVoid and press.target.isInstanceOf(ClassDefinition)
 	end
 	
 	

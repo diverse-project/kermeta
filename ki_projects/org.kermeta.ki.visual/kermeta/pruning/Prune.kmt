@@ -54,7 +54,7 @@ class ActionReinitView inherits Action {
 
 
 class ActionPrune inherits Action {
-	reference selection : ClassDefinition
+	reference selection : ClassDefinition[0..*]
 	
 	reference metamodel : ModelingUnit
 	
@@ -63,12 +63,15 @@ class ActionPrune inherits Action {
 	method doActionBody() : Void is do
 		var pruningOp  : MetamodelPruner init MetamodelPruner.new
 		var reqClasses : Bag<RequiredClass> init Bag<RequiredClass>.new
-		var reqClass   : RequiredClass init RequiredClass.new
+		var reqClass   : RequiredClass
 		
-		reqClass.name := selection.name
-		reqClasses.add(reqClass)
+		selection.each{cd |
+			reqClass      := RequiredClass.new
+	        reqClass.name := cd.name
+			reqClasses.add(reqClass)
+		}
+		
 		pruningOp.inputKermetaMetamodel := metamodel
-		
 		pruningOp.initialize(reqClasses, Bag<RequiredProperty>.new, Bag<RequiredEnumeration>.new, 3)
 		
 		if pruningOp.preprocess then
@@ -83,7 +86,7 @@ class ActionPrune inherits Action {
 	
 	
 	method canDo() : Boolean is do
-		result := not metamodel.isVoid and not selection.isVoid
+		result := not metamodel.isVoid and selection.size>0
 	end
 	
 	

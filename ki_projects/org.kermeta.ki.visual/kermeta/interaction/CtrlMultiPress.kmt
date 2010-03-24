@@ -1,0 +1,133 @@
+/*
+ * Creation : March 23, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::interaction;
+
+
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
+require kermeta
+
+
+using kermeta::standard
+using kermeta::ki::malai::picking
+
+
+class CtrlMultiPress inherits Interaction
+{
+	attribute pxs : Sequence<Real>
+	attribute pys : Sequence<Real>
+	
+	reference objects : Pickable[0..*]
+	
+	
+	method reinit() : Void is do
+		super
+
+		pxs := Sequence<Real>.new
+		pys := Sequence<Real>.new
+		objects.clear
+	end
+	
+	
+	
+	
+	method initStateMachine() : Void is do
+		var keyPressed  : State init IntermediaryState.new
+		var pressed     : State init IntermediaryState.new
+		var released    : State init IntermediaryState.new
+		var aborted     : AbortingState init AbortingState.new
+		var keyReleased : TerminalState init TerminalState.new
+	
+		keyPressed.initialise("keyPressed")
+		keyReleased.initialise("keyReleased")
+		pressed.initialise("pressed")
+		released.initialise("released")
+		aborted.initialise("aborted")
+		addState(keyPressed)
+		addState(pressed)
+		addState(keyReleased)
+		addState(released)
+		addState(aborted)
+		
+		
+		var transition : Transition
+		
+		transition := CtrlMultiPressKeyPressureTransition.new
+		transition.initialise(initState, keyPressed)
+		
+		transition := MoveTransition.new
+		transition.initialise(keyPressed, keyPressed)
+		
+		transition := KeyReleaseTransition.new
+		transition.initialise(keyPressed, aborted)
+		
+		var mp : CtrlMultiPressPressureTransition init CtrlMultiPressPressureTransition.new
+		mp.ctrlPress := self
+		mp.initialise(keyPressed, pressed)
+		
+		transition := CtrlMultiPressEscapeKeyPressureTransition.new
+		transition.initialise(pressed, aborted)
+		
+		transition := MoveTransition.new
+		transition.initialise(pressed, pressed)
+	
+		transition := TestKeyRelease.new
+		transition.initialise(pressed, keyReleased)
+		
+		transition := ReleaseTransition.new
+		transition.initialise(pressed, released)
+		
+		mp := CtrlMultiPressPressureTransition.new
+		mp.ctrlPress := self
+		mp.initialise(released, pressed)
+		
+		transition := TestKeyRelease.new
+		transition.initialise(released, keyReleased)
+		
+		transition := CtrlMultiPressEscapeKeyPressureTransition.new
+		transition.initialise(released, aborted)
+		
+		transition := MoveTransition.new
+		transition.initialise(released, released)
+	end
+}
+
+
+class TestKeyRelease inherits KeyReleaseTransition
+{
+	method action() : Void is do
+		stdio.writeln("action TestKeyRelease")
+	end
+}
+
+
+class CtrlMultiPressPressureTransition inherits PressureTransition {
+	reference ctrlPress : CtrlMultiPress
+
+	method action() : Void is do
+		ctrlPress.pxs.add(Real.clone(px))
+		ctrlPress.pys.add(Real.clone(py))
+		ctrlPress.objects.add(ctrlPress.getPickableAt(px, py))
+	end
+}
+
+
+
+class CtrlMultiPressKeyPressureTransition inherits KeyPressureTransition {
+	method isGuardRespected() : Boolean is do
+	stdio.writeln("CtrlMultiPressKeyPressureTransition")
+		result := key==17 // 'ctrl'
+	end
+}
+
+
+
+class CtrlMultiPressEscapeKeyPressureTransition inherits KeyPressureTransition {
+	method isGuardRespected() : Boolean is do
+		result := key==27 // 'escape'
+	end
+}

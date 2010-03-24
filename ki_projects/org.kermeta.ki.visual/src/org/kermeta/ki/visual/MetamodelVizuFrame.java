@@ -101,7 +101,7 @@ public class MetamodelVizuFrame extends JFrame {
 				if(cpt==100)
 					again = false;
 			}
-			System.out.println(change1 + " " + change2 + " " + gap);
+
 			change2=change1;
 	    }
 		

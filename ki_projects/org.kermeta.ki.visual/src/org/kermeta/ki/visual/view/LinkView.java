@@ -251,7 +251,7 @@ public abstract class LinkView extends ComponentView {
 	
 	public static Point2D.Double getIntersectionSegment(Line2D l1, Line2D l2) {
 		Point2D.Double p = getIntersection(l1, l2);
-		System.out.println(p);
+
 		if(p==null) 
 			return null;
 
