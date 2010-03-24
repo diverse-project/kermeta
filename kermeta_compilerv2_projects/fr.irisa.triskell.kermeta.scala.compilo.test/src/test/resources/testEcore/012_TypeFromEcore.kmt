@@ -13,8 +13,8 @@ package test1;
 
 
 require kermeta
-require "platform:/resource/Test/src/kermeta/test1/A.ecore"
-
+require "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/A.ecore"
+ 
 using kermeta::standard
 using kermeta::persistence
 class Main
@@ -38,4 +38,10 @@ aspect class A{
 	end
 	
 	
+}
+
+package foo{
+class C{
+	attribute  toto : String
+}
 }
