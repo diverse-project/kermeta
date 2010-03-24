@@ -62,7 +62,7 @@ object EmbeddedMavenHelper {
                 System.setErr(new PrintStream(outputstream))
             }
             //   maven.setLogger(new MavenEmbedderFileLogger(new java.io.File("/tmp/testoutput")));
-            
+
             maven.setLogger(new MavenEmbedderConsoleLogger());
             //ArtifactRepository localRepository, Settings settings,
             //                                         EventDispatcher eventDispatcher, List goals, String baseDirectory,
@@ -78,6 +78,7 @@ object EmbeddedMavenHelper {
             request.setProperty("once", "true");
             request.setProperty("maven.test.skip", "true");
             request.setOffline(true)
+            
             
             /*MavenProject project,
              List goals,

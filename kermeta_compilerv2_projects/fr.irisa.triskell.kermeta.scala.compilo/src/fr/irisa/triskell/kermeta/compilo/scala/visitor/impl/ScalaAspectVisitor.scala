@@ -15,16 +15,13 @@ class ScalaAspectVisitor extends IVisitor with RichAspectImplicit with LogAspect
 		par.getPackages().foreach(p => p.accept(this))		
 	}     
 
-  
-	def visit(par : Package){ 
+	def visit(par : Package){
 		var actualPackage = par.getQualifiedName
-		//if (!(actualPackage.startsWith("kermeta.io")||actualPackage.startsWith("kermeta.standard")||actualPackage.startsWith("kermeta.exceptions")||actualPackage.startsWith("kermeta.ecore"))){
-		//if (!actualPackage.startsWith("kermeta.") || actualPackage.startsWith("kermeta.kunit")){
-		//if (!actualPackage.startsWith("kermeta") ){
+                if (Util.doesGeneratePackage(actualPackage)){
 			var subTask = new ScalaAspectPackageVisitorRunnable
 			VisitorAsyncUtility.runAfter(par,subTask)
  			par.getNestedPackage.foreach(p=> {p.accept(this)})
-		//}
+		}
 	}
  
 	def visit(par : ClassDefinition){Console.println("multithread error")}

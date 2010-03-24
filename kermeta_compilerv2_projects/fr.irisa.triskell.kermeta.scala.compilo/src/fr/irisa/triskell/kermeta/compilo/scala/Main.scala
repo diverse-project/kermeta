@@ -123,7 +123,7 @@ object Main extends LogAspect {
 	   
         var compilo = new Compiler
 	  
-        //   inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/068_testVariableInit.main.km"
+     //      inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/068_testVariableInit.main.km"
         // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/037_testLambda.main.km"
 //	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/078_testAddVoidInReflectiveCollection.main.km"
         //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
@@ -152,8 +152,8 @@ object Main extends LogAspect {
 	  
         //  inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/013_LoadEcore.km"
 	  
-        /// inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/org.kermeta.ArtKomparator/src/kermeta/Launcher.km"
-        // runnerParams = List("///Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi")
+         inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/org.kermeta.ArtKomparator/src/kermeta/Launcher.km"
+         runnerParams = List("///Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi")
 
         //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Speeds/StaticSemanticChecker.km"
         //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/reflexivity/Serializer.km"
@@ -167,7 +167,6 @@ object Main extends LogAspect {
 
         //  inputFile = "/Users/ffouquet/Desktop/SpeedWorkspace/SpeedsStaticSemantics-2.1.6/l1/kermeta/StaticSemanticChecker.km"
 
-
         if(inputFile != ""){
             log.info("KM compilation begin on "+inputFile)
             compilo.compile(inputFile)
@@ -176,13 +175,13 @@ object Main extends LogAspect {
         }
 
         /* Scalac compilation step */
-        /*var classpath =EmbettedScalaCompiler.getActualClasspath
+        var classpath =EmbettedScalaCompiler.getActualClasspath
          if (additionalClassPath != null)
-         classpath = classpath ++ additionalClassPath*/
+         classpath = classpath ++ additionalClassPath
 
 
         if (scalacompile){
-            //var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
+            var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
             /* Scala runner */
             /* if(compilationResult == 0){
              EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
@@ -192,7 +191,7 @@ object Main extends LogAspect {
                 println(classpath.mkString)
                 if (additionalClassPath != null)
                     classpath = classpath ++ additionalClassPath
-                classpath = classpath ++ List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo/target/kermeta.compilo.scala-0.0.1-SNAPSHOT.jar")
+                //classpath = classpath ++ List("/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo/target/kermeta.compilo.scala-0.0.1-SNAPSHOT.jar")
                 var oldOut : java.io.OutputStream = System.out
                 var oldErr : java.io.OutputStream = System.err
 

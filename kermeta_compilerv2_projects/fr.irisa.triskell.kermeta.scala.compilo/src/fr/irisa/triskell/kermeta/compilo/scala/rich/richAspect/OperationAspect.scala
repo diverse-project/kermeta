@@ -61,7 +61,9 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
 				//this.getType.generateScalaCode(res)
 				//res append "]\n}\n"
 				//res.append("}/*End_"+this.getName()+"*/\n")
-			}
+			} else {
+                          res.append("\n")
+                        }
 		}
 	}
         def generateParamerterOp(res1:StringBuilder) = {
