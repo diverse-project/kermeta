@@ -4,7 +4,6 @@
  * Copyright:
  * Authors  : Arnaud Blouin
  */
-
 package kermeta::ki::malai::interaction;
 
 
@@ -40,6 +39,14 @@ abstract class StateMachine inherits EventHandler
 	end
 	
 	
+	/**
+	* Indicates if the state machine is running.
+	*/
+	operation isRunning() : Boolean is do
+		result := activated and currentState!=initState
+	end
+	
+	
 	
 	operation setActivated(activated : Boolean) : Void is do
 		self.activated := activated
@@ -68,9 +75,9 @@ abstract class StateMachine inherits EventHandler
 		if(activated) then
     		do
     			t.action()
-    			if(not t.silent) then currentState.onOutgoing() end
+    			currentState.onOutgoing()
     			currentState := t.outputState
-    			if(not t.silent) then currentState.onIngoing() end
+    			currentState.onIngoing()
     		rescue(ex : kermeta::exceptions::Exception) reinit end
     	end
 	end

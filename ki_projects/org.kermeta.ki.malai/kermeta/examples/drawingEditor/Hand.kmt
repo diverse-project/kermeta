@@ -23,6 +23,7 @@ using kermeta::ki::malai::interaction
 using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::action
 using kermeta::standard
+using kermeta::language::structure
 
 
 class Hand inherits Instrument
@@ -55,6 +56,10 @@ class DnD2Translate inherits DnDLink
 		result := interaction.asType(DnD).source.isInstanceOf(Shape)
 	end
 	
+	
+	method getActionClass() : Class is do
+		result := ActionSelect
+	end
 	
 	method createAction() : Void is do
 		var as : ActionSelect init instrument.actionRegistry.getAction(ActionSelect).asType(ActionSelect)
@@ -106,6 +111,10 @@ class Press2Select inherits PressLink
 		result := press.target.isInstanceOf(Shape) or press.target.isInstanceOf(Drawing)
 	end
 	
+	
+	method getActionClass() : Class is do
+		result := ActionSelect
+	end
 	
 	
 	method createAction() : Void is do

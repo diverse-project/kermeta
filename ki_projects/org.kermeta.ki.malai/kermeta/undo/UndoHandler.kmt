@@ -1,17 +1,13 @@
-/* $Id:$ 
+/*
  * Creation : February 4, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
-@mainClass "kermeta::ki::malai::undo::UndoHandler"
-
-
 package kermeta::ki::malai::undo;
 
-
 require kermeta
+
 
 /** This handler must help objet that want to be aware of
 	undone/redone event (for instance, to update some widgets). */

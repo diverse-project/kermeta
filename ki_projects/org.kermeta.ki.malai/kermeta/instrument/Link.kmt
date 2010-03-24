@@ -4,16 +4,14 @@
  * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
-
-
 package kermeta::ki::malai::instrument;
-
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/InteractionHandler.kmt"
 
 using kermeta::standard
+using kermeta::language::structure
 using kermeta::ki::malai::action
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::interaction::event
@@ -21,7 +19,12 @@ using kermeta::ki::malai::undo
 using kermeta::ki::malai::picking
 
 
-
+/**
+* In the Malai interaction model, an instrument links interactions to actions.
+* Thus, an instrument is composed of Link definitions: each Link links an interaction
+* to an action. A Link manages the life cycle of an action following the life cycle
+* of the interaction (started, aborted, etc.).
+*/
 abstract class Link inherits InteractionHandler
 {
 	/** The source interaction. */
@@ -52,6 +55,42 @@ abstract class Link inherits InteractionHandler
 		interaction := createInteraction()
 		interaction.initialise(eventManager)
 		interaction.handlers.add(self)
+	end
+
+
+	
+	/**
+	* Returns the Class of the action that produces the link.
+	* Notably called into method isRunnable.
+	*/
+	operation getActionClass() : Class is abstract
+	
+	
+	
+	
+	/**
+	* Indicates if the link can be run. To be run, no link, of the instrument, that produces the 
+	* same type of action must be running.
+	*/
+	operation isRunnable() : Boolean is do
+		result := true
+		
+		instrument.links.exists{link |
+			if(link!=self and link.isRunning and link.getActionClass==getActionClass) then
+				result := false
+			end
+			result
+		}
+	end
+
+
+
+
+	/**
+	* Returns true if the link is currently in use.
+	*/
+	operation isRunning() : Boolean is do
+		result := interaction.isRunning()
 	end
 
 
@@ -111,16 +150,11 @@ abstract class Link inherits InteractionHandler
 	
 	method interactionUpdates(inter : Interaction) : Void is do
 		if(not action.isVoid and inter==interaction) then
-			if(isConditionRespected) then
-				updateAction
-				
-    			if(execute and action.canDo) then action.doIt end
-    			
-				interimFeedback
-			else
-				action.abort
-				action := void
-			end
+				if(isConditionRespected) then
+					updateAction
+	    			if(execute and action.canDo) then action.doIt end
+					interimFeedback
+				end
 		end
 	end
 	
@@ -130,7 +164,7 @@ abstract class Link inherits InteractionHandler
 			if(isConditionRespected) then
     			if(not execute) then updateAction end
     			if(action.doIt) then action.setDone end
-    
+
     			if(action.hadEffect) then
     				if(action.isRegisterable) then
     					 instrument.actionRegistry.addAction(action)
@@ -149,26 +183,19 @@ abstract class Link inherits InteractionHandler
 	
 	
 	method interactionStarts(inter : Interaction) : Void is do
-		if(action.isVoid and inter==interaction and instrument.activated) then
-			if(isConditionRespected) then
-				do createAction
-				rescue (e : kermeta::exceptions::Exception) end
-				interimFeedback
-			else
-				var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
-				ex.message := "MustAbortStateMachineException"
-				raise ex 
-			end
+		if(isRunnable and action.isVoid and inter==interaction and instrument.activated) then
+			createAction
+			interimFeedback
 		end
 	end
 	
 	
 	method interactionAborts(inter : Interaction) : Void is do
-		if(action!=void and inter==interaction) then
+		if(not action.isVoid and inter==interaction) then
 			action.abort()
 			
 			if(execute) then
-				if(action.isKindOf(Undoable)) then
+				if(action.isInstanceOf(Undoable)) then
 					action.asType(Undoable).undo()
 				else
 					var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new

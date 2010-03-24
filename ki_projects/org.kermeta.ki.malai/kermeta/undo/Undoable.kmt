@@ -1,13 +1,9 @@
-/* $Id:$ 
+/*
  * Creation : February 4, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
-@mainClass "kermeta::ki::malai::undo::Undoable"
-
-
 package kermeta::ki::malai::undo;
 
 

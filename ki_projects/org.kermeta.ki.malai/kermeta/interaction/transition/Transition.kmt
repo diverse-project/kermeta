@@ -24,9 +24,6 @@ abstract class Transition
 	
 	reference outputState : State
 	
-	/** Defines if the state machine must call onIngoing, etc. when the transition is executed.  */
-	attribute silent : Boolean
-	
 	
 	operation initialise(inputState : State, outputState : State) : Void is do
 		if(inputState.isVoid or outputState.isVoid) then raise kermeta::exceptions::Exception.new end
@@ -43,7 +40,6 @@ abstract class Transition
 			raise ex
 		end
 		
-		silent := false
 		self.inputState  := inputState
 		self.outputState := outputState
 		
