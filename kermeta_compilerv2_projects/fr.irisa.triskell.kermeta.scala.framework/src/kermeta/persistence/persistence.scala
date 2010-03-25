@@ -1,6 +1,7 @@
 package kermeta.persistence
  
 import kermeta.standard._
+
 import java.io.File; 
 import java.io.IOException;
 import java.util.Collections;
@@ -21,27 +22,27 @@ import fr.irisa.triskell.kermeta.KmPackage;
 import org.eclipse.emf.ecore._;
 import java.lang.String
 
-abstract class Resource  extends java.util.ArrayList[EObject]{
-    var dependentResources:Resource=null;
+abstract class Resource  extends java.util.ArrayList[fr.irisa.triskell.kermeta.language.structure.Object]{
+    var dependentResources:Resource=_;
     //var contents:java.util.List[Object]=null;
-    var repository:Repository=null;
+    var repository:Repository=_;
     var metaModelURI:String="";
     var isReadOnly:Boolean=false;
     var uri:String="";
     def save()
     def saveWithNewURI(new_uri : String)
-    def findDanglingModelElements() :Set[Object]={return null}
+    def findDanglingModelElements() :Set[Object]={null }
     def load()
     def instances() :Resource={return this}
     def normalizedUri() :String={return metaModelURI}
-    def Scalacontents_=(arg : java.util.List[EObject])={this.clear; this.addAll( arg)}
-    def Scalacontents:  java.util.List[EObject]={this}
+    def Scalacontents_=(arg : java.util.List[fr.irisa.triskell.kermeta.language.structure.Object])={this.clear; this.addAll( arg)}
+    def Scalacontents={this}
 
 	
 } 
  
 
-abstract class Repository  extends Object{
+abstract class Repository {
     var resources:Resource=null;
     def createResource(uri : String, mm_uri : String) :Resource
     def normalizeUri(uri : String) :String={return uri}
@@ -126,7 +127,11 @@ class EMFResource  extends Resource  {
         var resource :org.eclipse.emf.ecore.resource.Resource  = rs.getResource(uri1,true);
         //resource.load(new java.util.HashMap)
         if (resource.isLoaded() && resource.getContents().size() > 0) {
-            this.addAll(resource.getContents());
+          import kermeta.standard.JavaConversions._
+          resource.getContents.each(elem=>{
+              this.add(elem.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object])
+          })
+            
         }
 			
     }

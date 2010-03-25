@@ -40,224 +40,244 @@ package kermeta.standard;
  *  @author Miles Sabin
  *  @since  2.8
  */
+import org.eclipse.emf.common.util.EList
+
 object JavaConversions {
   import java.{ lang => jl, util => ju }
   import java.util.{ concurrent => juc }
   import scala.collection.{ generic, immutable, mutable, Traversable }
   import scala.reflect.ClassManifest
   
-   class RichKermetaList[A] ( value : ju.List[A]) extends  fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation with  EObjectImplForPrimitive{
+  class RichKermetaList[A] ( value : ju.List[A]) extends  fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation with  EObjectImplForPrimitive with EList[A]{
 	  
-	  def first() = value.get(0)
-	  
+    def first() = value.get(0)
+
+
+    def move( newPosition : Int, o : A){
+      if(value.contains(o)){
+        value.remove(o)
+        value.add(newPosition, o)
+      }
+    }
+    def move(newPos : Int , old : Int):A ={
+      move(newPos,value.get(old))
+      value.get(newPos)
+    }
 	 
 	
-	def asSetType[B]() :java.util.List[B]={  
-	 	var res : java.util.List[B] = new java.util.ArrayList[B];
-		this.each{e=> res.add(e.asInstanceOf[B])}
-		return res
-	}  
-	def reject(rejector: A => scala.Boolean) :java.util.List[A]={  
-	 	var res : java.util.List[A] = new java.util.ArrayList[A];
-		this.each(e=> if(!rejector(e)) {res.add(e)})
-		return res 
-	}
-	def countElement(element : A) :java.lang.Integer={
-		return this.select(e => e.equals(element)).size
-	}  
-	//TODO
-	def excludes(element : A) :java.lang.Boolean={return true;}
-	def one() :A={value.iterator.next}
-	//TODO
-	def containsAll(elts : Collection[A]) :scala.Boolean={ true}
-	//TODO
-	def sum() :A={return value.iterator.next}
-	def includes(element : A) :Boolean={return value.contains(element)}
-	//TODO
-	def excludesAll(elements : Collection[A]) :Boolean={/*TODO*/return true}
-	def isUnique(a : A) :Boolean={return this.countElement(a)==1}
-	def any() :A={return one()}
-        def at(index:Int) :A={return value.get(index)}
-	//TODO
-	def empty() :Boolean={return value.size==0}
+    def asSetType[B]() :java.util.List[B]={
+      var res : java.util.List[B] = new java.util.ArrayList[B];
+      this.each{e=> res.add(e.asInstanceOf[B])}
+      return res
+    }
+    def reject(rejector: A => scala.Boolean) :java.util.List[A]={
+      var res : java.util.List[A] = new java.util.ArrayList[A];
+      this.each(e=> if(!rejector(e)) {res.add(e)})
+      return res
+    }
+    def countElement(element : A) :java.lang.Integer={
+      return this.select(e => e.equals(element)).size
+    }
+    //TODO
+    def excludes(element : A) :java.lang.Boolean={return true;}
+    def one() :A={value.iterator.next}
+    //TODO
+    def containsAll(elts : Collection[A]) :scala.Boolean={ true}
+    //TODO
+    def sum() :A={return value.iterator.next}
+    def includes(element : A) :Boolean={return value.contains(element)}
+    //TODO
+    def excludesAll(elements : Collection[A]) :Boolean={/*TODO*/return true}
+    def isUnique(a : A) :Boolean={return this.countElement(a)==1}
+    def any() :A={return one()}
+    def at(index:Int) :A={return value.get(index)}
+    //TODO
+    def empty() :Boolean={return value.size==0}
 
-	//TODO
-	def forAllCpl(f : A,A:A=>Boolean) :Boolean={return true}
-	def forAll(f : A=>Boolean) :Boolean={ var i : ju.Iterator[A] = value.iterator
-		while (i.hasNext) {
-			if (!f(i.next())) 
-				return false
-		} 
-	return true
-	}
-	//TODO
-	def exists(f : A=>Boolean) :Boolean={ var i : ju.Iterator[A] = value.iterator
-		while (i.hasNext) {
-			if (f(i.next())) 
-				return true
-		}
-	return false
-	}
+    //TODO
+    def forAllCpl(f : A,A:A=>Boolean) :Boolean={return true}
+    def forAll(f : A=>Boolean) :Boolean={ var i : ju.Iterator[A] = value.iterator
+                                         while (i.hasNext) {
+        if (!f(i.next()))
+          return false
+      }
+                                         return true
+    }
+    //TODO
+    def exists(f : A=>Boolean) :Boolean={ var i : ju.Iterator[A] = value.iterator
+                                         while (i.hasNext) {
+        if (f(i.next()))
+          return true
+      }
+                                         return false
+    }
 	
-	def existsCpl(f : A,A:A=>Boolean) :Boolean={return true}
-	def isNotEmpty() :java.lang.Boolean={return !(value.size==0)}
-	def detect(detector : A=> Boolean) :A={
-		val res = this.select(e=> detector(e))
-		if(res != null && res.size>0) { return res.get(0)} else { return null.asInstanceOf[A] }
-	}
-	//def iterator() :java.laIterator[A]={return value.iterator}
-	/*TODO*/def includesAll(elements : Collection[A]) :Boolean={return true}
-	def select(selector : A=> scala.Boolean) :java.util.List[A]={
-		var res : java.util.List[A] = new java.util.ArrayList[A];
-		this.each(e=> if(selector(e)) {res.add(e)})		
-		return res 
+    def existsCpl(f : A,A:A=>Boolean) :Boolean={return true}
+    def isNotEmpty() :java.lang.Boolean={return !(value.size==0)}
+    def detect(detector : A=> Boolean) :A={
+      val res = this.select(e=> detector(e))
+      if(res != null && res.size>0) { return res.get(0)} else { return null.asInstanceOf[A] }
+    }
+    //def iterator() :java.laIterator[A]={return value.iterator}
+    /*TODO*/def includesAll(elements : Collection[A]) :Boolean={return true}
+    def select(selector : A=> scala.Boolean) :java.util.List[A]={
+      var res : java.util.List[A] = new java.util.ArrayList[A];
+      this.each(e=> if(selector(e)) {res.add(e)})
+      return res
 
-	}
-	//override def size() :Int={return value.length}
-	def each(func : A=> Unit):Unit ={
-            var clone : ju.List[A] = new ju.ArrayList[A]
-            clone.addAll(value)
-            var i : ju.Iterator[A] = clone.iterator; while (i.hasNext){func(i.next)  }
-        }
-	/*TODO*///def collect(collector : A=> Unit) :Sequence[A]={return null}
-	def elementAt(arg:Int):A={
-		return value.get(arg)
-	}
-	def asSet() :java.util.List[A] = {
-		var res : java.util.List[A] = new java.util.ArrayList[A];
-		this.each{e=> res.add(e)}
-		return res
-	}
-	def asOrderedSet() :java.util.List[A] = {
-		var res : java.util.List[A] = new java.util.ArrayList[A];
-		this.each{e=> res.add(e)}
-		return res
-	}
-	def asBag() :java.util.List[A] = {
-		var res : java.util.List[A] = new java.util.ArrayList[A];
-		this.each{e=> res.add(e)}
-		return res
-	}
-	def asSequence() :java.util.List[A] = {
-		var res : java.util.List[A] = new java.util.ArrayList[A];
-		this.each{e=> res.add(e)}
-		return res
-	}
-        def addUnique(a:A) :Unit = {
-            if (!value.contains(a))
-                value.add(a)
-		//var res : java.util.List[A] = new java.util.ArrayList[A];
-		//this.each{e=> res.add(e)}
-		//return res
-	}
+    }
+    //override def size() :Int={return value.length}
+    def each(func : A=> Unit):Unit ={
+      var clone : ju.List[A] = new ju.ArrayList[A]
+      clone.addAll(value)
+      var i : ju.Iterator[A] = clone.iterator; while (i.hasNext){func(i.next)  }
+    }
+    /*TODO*///def collect(collector : A=> Unit) :Sequence[A]={return null}
+    def elementAt(arg:Int):A={
+      return value.get(arg)
+    }
+    def asSet() :java.util.List[A] = {
+      var res : java.util.List[A] = new java.util.ArrayList[A];
+      this.each{e=> res.add(e)}
+      return res
+    }
+    def asOrderedSet() :java.util.List[A] = {
+      var res : java.util.List[A] = new java.util.ArrayList[A];
+      this.each{e=> res.add(e)}
+      return res
+    }
+    def asBag() :java.util.List[A] = {
+      var res : java.util.List[A] = new java.util.ArrayList[A];
+      this.each{e=> res.add(e)}
+      return res
+    }
+    def asSequence() :java.util.List[A] = {
+      var res : java.util.List[A] = new java.util.ArrayList[A];
+      this.each{e=> res.add(e)}
+      return res
+    }
+    def addUnique(a:A) :Unit = {
+      if (!value.contains(a))
+        value.add(a)
+      //var res : java.util.List[A] = new java.util.ArrayList[A];
+      //this.each{e=> res.add(e)}
+      //return res
+    }
 
-        def addAllUnique(a:ju.Collection[A]) :Unit = {
-            var i : ju.Iterator[A] = a.iterator 
-                while (i.hasNext){
-                    var element:A  = i.next
-                    if (!value.contains(element))
-                        value.add(element)
-            }
-		//var res : java.util.List[A] = new java.util.ArrayList[A];
-		//this.each{e=> res.add(e)}
-		//return res
-	}
+    def addAllUnique(a:ju.Collection[A]) :Unit = {
+      var i : ju.Iterator[A] = a.iterator
+      while (i.hasNext){
+        var element:A  = i.next
+        if (!value.contains(element))
+          value.add(element)
+      }
+      //var res : java.util.List[A] = new java.util.ArrayList[A];
+      //this.each{e=> res.add(e)}
+      //return res
+    }
 
-	//TODO
-	override def isVoid() :Boolean= {value == null}
+    def addAt(arg:Int,elem : A){
+      value.add(arg, elem)
+    }
+    def removeAt(arg:Int){
+      value.remove(arg)
+    }
+
+    //TODO
+    override def isVoid() :Boolean= {value == null}
   }
 
   class RichKermetaSet[A] ( value : ju.Set[A]) {
 	  
 	      
 	
-	def asSetType[B]() :java.util.List[B]={  
-	 	var res : java.util.List[B] = new java.util.ArrayList[B];
-		this.each(e=> res.add(e.asInstanceOf[B]))
-		return res
-	}  
-	def reject(rejector: A => scala.Boolean) :java.util.List[A]={  
-	 	var res : java.util.List[A] = new java.util.ArrayList[A];
-		this.each(e=> if(!rejector(e)) {res.add(e)})
-		return res 
-	}
-	def countElement(element : A) :java.lang.Integer={
-		return this.select(e => e.equals(element)).size
-	}  
-	//TODO
-	def excludes(element : A) :java.lang.Boolean={return true;}
-	def one() :A={value.iterator.next}
-	//TODO
-	def containsAll(elts : Collection[A]) :scala.Boolean={ true}
-	//TODO
-	def sum() :A={return value.iterator.next}
-	def includes(element : A) :Boolean={return value.contains(element)}
-	//TODO
-	def excludesAll(elements : Collection[A]) :Boolean={/*TODO*/return true}
-	def isUnique(a : A) :Boolean={return this.countElement(a)==1}
-	def any() :A={return one()}
-	//TODO
-	def empty() :Boolean={return value.size==0}
-	//TODO
-	def forAllCpl(f : A,A:A=>Boolean) :Boolean={return true}
-	def forAll(f : A=>Boolean) :Boolean={ var i : ju.Iterator[A] = value.iterator
-		while (i.hasNext) {
-			if (!f(i.next())) 
-				return false
-		} 
-	return true
-	}
-	//TODO
-	def exists(f : A=>Boolean) :Boolean={ var i : ju.Iterator[A] = value.iterator
-		while (i.hasNext) {
-			if (f(i.next())) 
-				return true
-		}
-	return false
-	}
+    def asSetType[B]() :java.util.List[B]={
+      var res : java.util.List[B] = new java.util.ArrayList[B];
+      this.each(e=> res.add(e.asInstanceOf[B]))
+      return res
+    }
+    def reject(rejector: A => scala.Boolean) :java.util.List[A]={
+      var res : java.util.List[A] = new java.util.ArrayList[A];
+      this.each(e=> if(!rejector(e)) {res.add(e)})
+      return res
+    }
+    def countElement(element : A) :java.lang.Integer={
+      return this.select(e => e.equals(element)).size
+    }
+    //TODO
+    def excludes(element : A) :java.lang.Boolean={return true;}
+    def one() :A={value.iterator.next}
+    //TODO
+    def containsAll(elts : Collection[A]) :scala.Boolean={ true}
+    //TODO
+    def sum() :A={return value.iterator.next}
+    def includes(element : A) :Boolean={return value.contains(element)}
+    //TODO
+    def excludesAll(elements : Collection[A]) :Boolean={/*TODO*/return true}
+    def isUnique(a : A) :Boolean={return this.countElement(a)==1}
+    def any() :A={return one()}
+    //TODO
+    def empty() :Boolean={return value.size==0}
+    //TODO
+    def forAllCpl(f : A,A:A=>Boolean) :Boolean={return true}
+    def forAll(f : A=>Boolean) :Boolean={ var i : ju.Iterator[A] = value.iterator
+                                         while (i.hasNext) {
+        if (!f(i.next()))
+          return false
+      }
+                                         return true
+    }
+    //TODO
+    def exists(f : A=>Boolean) :Boolean={ var i : ju.Iterator[A] = value.iterator
+                                         while (i.hasNext) {
+        if (f(i.next()))
+          return true
+      }
+                                         return false
+    }
 	
-	def existsCpl(f : A,A:A=>Boolean) :Boolean={return true}
-	def isNotEmpty() :java.lang.Boolean={return !(value.size==0)}
-	def detect(detector : A=> Boolean) :A={
-		val res = this.select(e=> detector(e))
-		if(res != null && res.size>0) { return res.get(0)} else { return null.asInstanceOf[A] }
-	}
-	//def iterator() :java.laIterator[A]={return value.iterator}
-	/*TODO*/def includesAll(elements : Collection[A]) :Boolean={return true}
-	def select(selector : A=> scala.Boolean) :java.util.List[A]={
-		var res : java.util.List[A] = new java.util.ArrayList[A];
-		this.each(e=> if(selector(e)) {res.add(e)})		
-		return res 
+    def existsCpl(f : A,A:A=>Boolean) :Boolean={return true}
+    def isNotEmpty() :java.lang.Boolean={return !(value.size==0)}
+    def detect(detector : A=> Boolean) :A={
+      val res = this.select(e=> detector(e))
+      if(res != null && res.size>0) { return res.get(0)} else { return null.asInstanceOf[A] }
+    }
+    //def iterator() :java.laIterator[A]={return value.iterator}
+    /*TODO*/def includesAll(elements : Collection[A]) :Boolean={return true}
+    def select(selector : A=> scala.Boolean) :java.util.List[A]={
+      var res : java.util.List[A] = new java.util.ArrayList[A];
+      this.each(e=> if(selector(e)) {res.add(e)})
+      return res
 
-	}
-	//override def size() :Int={return value.length}
-	def each(func : A=> Unit):Unit ={ var i : ju.Iterator[A] = value.iterator; while (i.hasNext){func(i.next)  } }
-	/*TODO*///def collect(collector : A=> Unit) :Sequence[A]={return null}
-	def getMetaClass():String={
-		return this.getClass().toString();
-	}
-	def asSet() :java.util.List[A] = {
-		var res : java.util.List[A] = new java.util.ArrayList[A];
-		this.each{e=> res.add(e)}
-		return res
-	}
-	def asOrderedSet() :java.util.List[A] = {
-		var res : java.util.List[A] = new java.util.ArrayList[A];
-		this.each{e=> res.add(e)}
-		return res
-	}
-	def asBag() :java.util.List[A] = {
-		var res : java.util.List[A] = new java.util.ArrayList[A];
-		this.each{e=> res.add(e)}
-		return res
-	}
-	def asSequence() :java.util.List[A] = {
-		var res : java.util.List[A] = new java.util.ArrayList[A];
-		this.each{e=> res.add(e)}
-		return res
-	}
-	//TODO
-	def isVoid() :Boolean= {this==null}
+    }
+    //override def size() :Int={return value.length}
+    def each(func : A=> Unit):Unit ={ var i : ju.Iterator[A] = value.iterator; while (i.hasNext){func(i.next)  } }
+    /*TODO*///def collect(collector : A=> Unit) :Sequence[A]={return null}
+    def getMetaClass():String={
+      return this.getClass().toString();
+    }
+    def asSet() :java.util.List[A] = {
+      var res : java.util.List[A] = new java.util.ArrayList[A];
+      this.each{e=> res.add(e)}
+      return res
+    }
+    def asOrderedSet() :java.util.List[A] = {
+      var res : java.util.List[A] = new java.util.ArrayList[A];
+      this.each{e=> res.add(e)}
+      return res
+    }
+    def asBag() :java.util.List[A] = {
+      var res : java.util.List[A] = new java.util.ArrayList[A];
+      this.each{e=> res.add(e)}
+      return res
+    }
+    def asSequence() :java.util.List[A] = {
+      var res : java.util.List[A] = new java.util.ArrayList[A];
+      this.each{e=> res.add(e)}
+      return res
+    }
+    //TODO
+    def isVoid() :Boolean= {this==null}
   }
 
   
