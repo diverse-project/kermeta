@@ -22,8 +22,7 @@ class Main
 	operation main() : Void is do 
 		var a : A init A.new
 		a.name := "Bonjour"
-		a.test
-		
+		a.test		
 	end
 }
 
@@ -41,7 +40,25 @@ aspect class A{
 }
 
 package foo{
-class C{
-	attribute  toto : String
-}
+	class C inherits test1::Main {
+		attribute  toto : String
+		attribute  m : test1::Main
+		attribute  m1 : test1::A
+		
+		operation test(toto : String,m : test1::Main,m1 : test1::A):test1::A is do
+			result := void
+		end
+		)
+		
+	}
+	class D inherits test1::A inherits C{
+		attribute  toto : String
+		attribute  m : test1::Main
+		attribute  m1 : test1::A
+		operation test1(toto : String,m : test1::Main,m1 : test1::A):test1::Main is do
+			result := void
+		end
+		
+	}
+
 }
