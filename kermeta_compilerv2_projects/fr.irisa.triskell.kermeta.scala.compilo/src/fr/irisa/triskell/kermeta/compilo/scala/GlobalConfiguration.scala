@@ -83,7 +83,9 @@ object GlobalConfiguration extends LogAspect{
         return loadResult
     }
 
-    def createPackage() : Boolean={var  createpackage = props.getProperty("createPackage")
+    def createPackage() : Boolean={ 
+
+    var  createpackage = props.getProperty("createPackage")
                                    if ("true".equals(createpackage))
                                        return true
                                    else

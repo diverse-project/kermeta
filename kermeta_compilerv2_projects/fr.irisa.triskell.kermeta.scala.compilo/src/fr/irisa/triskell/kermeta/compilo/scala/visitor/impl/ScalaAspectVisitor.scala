@@ -49,7 +49,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 		if (!Util.hasCompilerIgnoreTag(par)){ 
 
 			var genpackageName : StringBuilder= new StringBuilder
-			var packageName : StringBuilder= new StringBuilder
+			//var packageName : StringBuilder= new StringBuilder
 			
 			genpackageName.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.eContainer.asInstanceOf[PackageAspect].getQualifiedNameCompilo))
 			
@@ -59,8 +59,8 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 				//genpackageName.append("ScalaAspect")
                                 genpackageName.insert(0, GlobalConfiguration.scalaAspectPrefix+".")
 			}
-			packageName.append(genpackageName.toString)
-			packageName.append(".")
+			//packageName.append(genpackageName.toString)
+			//packageName.append(".")
 			
 			var res : StringBuilder = new StringBuilder
 			res.append("package "+genpackageName+"\n")
@@ -84,7 +84,7 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
 					var i = 0
 					for(a <- listSuperTypes){
 						if(i == 0) { res1.append(" extends ") } else { res1.append(" with ") } 
-						res1.append(Util.protectScalaKeyword(a.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo))
+						res1.append(Util.protectScalaKeyword(Util.getQualifiedNamedBase(a.asInstanceOf[Class].getTypeDefinition)))
                                                 par.generateBindingParamerterClass(a.asInstanceOf[Class],res1)
 						i = i + 1
 					}

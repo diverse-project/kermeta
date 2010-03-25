@@ -43,7 +43,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 					
                         var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
 						
-						
+			/*
                         var packName = kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName)
                         if (Util.hasEcoreTag(ty.eContainer.asInstanceOf[Package]) ){
                             packName = GlobalConfiguration.scalaAspectPrefix+"."+packName
@@ -54,7 +54,8 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
                         res.append(".")
                         res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
                         res.append("Aspect")
-                        
+                        */
+                        res.append(Util.getQualifiedNamedAspect(superC.asInstanceOf[Class].getTypeDefinition))
                         generateBindingParamerterClass(superC.asInstanceOf[Class],res)
                         /*}else{
                          res.append(" with ")
@@ -107,16 +108,20 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
                          res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
                          *///					}else{
                         //res.append(" with ")
-                        var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
-                        if (Util.hasEcoreTag(ty)){
-                            res.append(GlobalConfiguration.scalaAspectPrefix+".")
-                        }
-                        res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
+                        //var ty : GenericTypeDefinition = superC.asInstanceOf[Class].getTypeDefinition
+                        //if (Util.hasEcoreTag(ty) ){
+                        //    res.append(GlobalConfiguration.scalaAspectPrefix+".")
+                        //}
+                        //res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(ty.eContainer.asInstanceOf[Package].getQualifiedName))
             
 								
-                        res.append(".")
-                        res.append(superC.asInstanceOf[Class].getTypeDefinition.getName)
-                        res.append("Aspect")
+                        //res.append(".")
+
+            //println(superC.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
+
+            res.append(Util.getQualifiedNamedAspect(superC.asInstanceOf[Class].getTypeDefinition))
+            //res.append(superC.asInstanceOf[Class].getTypeDefinition.getQualifiedNameCompilo)
+                        //res.append("Aspect")
                         generateBindingParamerterClass(superC.asInstanceOf[Class],res)
                         //returnedString =returnedString + ", " +superC.getName;
                         //					}
@@ -194,11 +199,26 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
         return result
     }
 	
-    override def getQualifiedNameCompilo():String ={
-        if (!Util.hasEcoreTag(this)  && !Util.hasEcoreTag(this.eContainer().asInstanceOf[Object]) || (Util.hasEcoreTag(this) && Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])))
-            return kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName());
-        else
-            return "ScalaAspect."+kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName());
+    override def getQualifiedNameCompilo():String = {
+
+      var baseName : String = kermeta.utils.TypeEquivalence.getTypeEquivalence(this.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo() + "."+ this.getName())
+      return baseName
+
+    /*
+    if(baseName.contains("fr.irisa.triskell.kermeta.language.structure.Object")){
+        log.error("=====INFO "+Util.hasEcoreTag(this)+" "+Util.hasEcoreTag(this.eContainer().asInstanceOf[Object]))
+      }
+
+        baseName = baseName match {
+        //case _ if(!Util.hasEcoreTag(this) && Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])) => { "ScalaAspect."+baseName }
+        case _ if(Util.hasEcoreTag(this) && Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])) => baseName
+        case _ if(!Util.hasEcoreTag(this) && !Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])) => baseName
+        case _ => { "ScalaAspect."+baseName }
+      }
+
+       return baseName*/
+
+
     }
 
     def getQualifiedNameKermeta():String ={

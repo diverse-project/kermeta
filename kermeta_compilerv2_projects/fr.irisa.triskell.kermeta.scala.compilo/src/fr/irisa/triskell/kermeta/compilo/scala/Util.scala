@@ -199,6 +199,32 @@ object Util extends LogAspect with RichAspectImplicit  {
     if(!hasToGenerate){ log.info("Exclude compilation package |"+packQualifiedName) }
     return hasToGenerate
   }
+
+
+  def getQualifiedNamedAspect(typD : GenericTypeDefinition) : String = {
+    var baseName : String = typD.getQualifiedNameCompilo
+
+    //if(baseName.equals("org.eclipse.emf.ecore.ENamedElementAspect")){
+      log.info(baseName+" - "+Util.hasEcoreTag(typD)+" - "+Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object]))
+    //}
+
+    baseName = baseName match {
+        //case _ if(!Util.hasEcoreTag(this) && Util.hasEcoreTag(this.eContainer().asInstanceOf[Object])) => { "ScalaAspect."+baseName }
+        //case _ if(Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object])) => baseName
+        case _ if(!Util.hasEcoreTag(typD) && !Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object])) => baseName
+        case _ => { GlobalConfiguration.scalaAspectPrefix+"."+baseName }
+      }
+    return baseName+"Aspect"
+  }
+
+  def getQualifiedNamedBase(typD : GenericTypeDefinition) : String = {
+    var baseName : String = typD.getQualifiedNameCompilo
+    baseName = baseName match {
+      case _ if(!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object])) => { GlobalConfiguration.scalaAspectPrefix+"."+baseName }
+      case _ => { baseName }
+    }
+    return baseName
+  }
    
    
    

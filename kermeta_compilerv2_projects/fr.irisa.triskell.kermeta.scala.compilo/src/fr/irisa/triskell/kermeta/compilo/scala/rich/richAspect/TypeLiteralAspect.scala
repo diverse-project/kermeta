@@ -18,6 +18,11 @@ trait TypeLiteralAspect extends RichAspectImplicit with ObjectAspect {
 
 			}
 		}*/
+
+    if(this.getTyperef().getType.getQualifiedNameCompilo().equals("test1.Main")){
+      log.info("type : "+this.getTyperef().getType.getQualifiedNameCompilo())
+    }
+
 		res.append(this.getTyperef().getType.getQualifiedNameCompilo())
 		/* Check Generique Param */
 			try{
