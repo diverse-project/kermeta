@@ -196,9 +196,13 @@ trait PropertyAspect extends RichAspectImplicit with ObjectAspect with LogAspect
     def generateScalSet(res : StringBuilder,prefix:String) : Unit ={
         if (!this.isIsReadOnly()&& !this.isIsDerived()){
             var currentname : String = this.getName
-            if ("class".equals(currentname)){
+            
+          /*  if ("class".equals(currentname)){
                 currentname=currentname+"_"
-            }
+            }else if ("class_".equals(currentname)){
+                currentname = "class"
+            }*/
+            //println(this.getName)
             res.append("def "+GlobalConfiguration.scalaPrefix)
             res.append(this.getName+"_=(")
             res.append("arg : ")
