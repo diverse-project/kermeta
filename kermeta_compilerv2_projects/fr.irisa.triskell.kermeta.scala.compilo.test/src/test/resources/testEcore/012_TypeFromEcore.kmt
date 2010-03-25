@@ -17,7 +17,7 @@ require "platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/tes
  
 using kermeta::standard
 using kermeta::persistence
-class Main
+class Main inherits test1::foo::E
 {
 	operation main() : Void is do 
 		var a : A init A.new
@@ -48,17 +48,27 @@ package foo{
 		operation test(toto : String,m : test1::Main,m1 : test1::A):test1::A is do
 			result := void
 		end
-		)
+		
 		
 	}
-	class D inherits test1::A inherits C{
-		attribute  toto : String
-		attribute  m : test1::Main
-		attribute  m1 : test1::A
+	class D inherits test1::A, C{
+		attribute  toto2 : String
+		attribute  m3 : test1::Main
+		attribute  m14 : test1::A
+		method test1(toto : String,m : test1::Main,m1 : test1::A):test1::Main is do
+			result := void
+		end
+		
+	}
+	class E {
+		attribute  toto1 : String
+		attribute  m2 : test1::Main
+		attribute  m12 : test1::A
 		operation test1(toto : String,m : test1::Main,m1 : test1::A):test1::Main is do
 			result := void
 		end
 		
 	}
+	
 
 }
