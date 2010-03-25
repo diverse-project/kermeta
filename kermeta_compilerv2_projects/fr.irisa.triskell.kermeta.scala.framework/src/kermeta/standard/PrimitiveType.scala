@@ -20,7 +20,37 @@ object PrimitiveConversion{
 	implicit def integer2kermeta(x: Int) = new RichInteger(x)	
 	implicit def real2kermeta(x: Double) = new RichReal(x)	
 	implicit def character2kermeta(x: Char) = new RichCharacter(x)	
-	implicit def toInt(in:Integer) = new RichInteger(in.intValue)
+	implicit def toInt(in:java.lang.Integer) :Int = {var t : Int = in.intValue; return t;}
+       implicit def ListInteger2ListInt(x:  org.eclipse.emf.common.util.EList[java.lang.Integer]) :java.util.List[Int] = {
+           import kermeta.standard.JavaConversions._
+           var l=new java.util.ArrayList[Int]() ;
+            x.each(e=> l.add(e.intValue) );
+            return l;
+       }
+       implicit def ListInt2ListInteger(x: java.util.List[Int] ) :org.eclipse.emf.common.util.EList[java.lang.Integer] = {
+           import kermeta.standard.JavaConversions._
+           var l=new java.util.ArrayList[Integer]()
+            x.each(e=> l.add(new Integer(e)))
+            return l;
+
+       }
+
+           implicit def ListBoolean2ListBool(x:  org.eclipse.emf.common.util.EList[java.lang.Boolean]) :java.util.List[Boolean] = {
+           import kermeta.standard.JavaConversions._
+           var l=new java.util.ArrayList[Boolean]() ;
+            x.each(e=> l.add(e.booleanValue) );
+            return l;
+       }
+       implicit def ListBool2ListBoolean(x: java.util.List[Boolean] ) :org.eclipse.emf.common.util.EList[java.lang.Boolean] = {
+           import kermeta.standard.JavaConversions._
+           var l=new java.util.ArrayList[java.lang.Boolean]()
+            x.each(e=> l.add(new java.lang.Boolean(e)))
+            return l;
+
+       }
+
+
+
 }  
   
 class RichClass(e:Class[_]){
