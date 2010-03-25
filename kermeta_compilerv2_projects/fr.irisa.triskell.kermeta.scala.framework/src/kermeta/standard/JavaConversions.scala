@@ -183,6 +183,176 @@ object JavaConversions {
       value.remove(arg)
     }
 
+        def add(e:A) :Boolean= {
+		return value.add(e);
+	}
+
+
+    def add(index:Int, element:A) ={
+		value.add(index, element);
+	}
+
+
+	def addAll(c : ju.Collection[_<:A]):Boolean ={
+
+		return value.addAll(c);
+	}
+
+
+	def addAll(index:Int, c: ju.Collection[_<:A]):Boolean ={
+		return value.addAll(index, c);
+	}
+
+
+	def clear() ={
+
+		value.clear();
+	}
+
+
+	override def clone():Object = {
+
+		return null;
+	}
+
+
+	def contains( o:Object) :Boolean = {
+
+		return value.contains(o);
+	}
+
+
+
+
+	def get(index:Int) : A= {
+
+		return value.get(index);
+	}
+
+
+	def indexOf(o: Object):Int= {
+
+		return value.indexOf(o);
+	}
+
+
+	def  isEmpty() :Boolean = {
+
+		return value.isEmpty();
+	}
+
+
+	def lastIndexOf( o:Object):Int= {
+
+		return value.lastIndexOf(o);
+	}
+
+
+	def remove(index:Int):A= {
+
+		return value.remove(index);
+	}
+
+
+	def remove( o:Object):Boolean= {
+
+		return value.remove(o);
+	}
+
+
+
+           def  toArray [T](x$1: Array[T with java.lang.Object]) : Array[T with java.lang.Object]={
+               return null;//value.toArray(x$1)
+           }
+
+	def set(index:Int, element:A):A= {
+
+		return value.set(index, element);
+	}
+
+
+	def size() :Int = {
+
+		return value.size();
+	}
+
+
+	def toArray(): Array[Object] = {
+
+		return value.toArray();
+	}
+
+
+        def listIterator() : 	ju.ListIterator[A] ={
+
+		return value.listIterator();
+	}
+
+
+	def  listIterator( arg0:Int): ju.ListIterator[A]= {
+
+		return value.listIterator(arg0);
+	}
+
+
+	def subList(arg0:Int, arg1:Int) : ju.List[A] = {
+
+		return value.subList(arg0, arg1);
+	}
+
+	/*public <T> T[] toArray(T[] a) {
+
+		return value.toArray(a);
+	}*/
+
+
+
+
+
+	override def equals( arg0:Any) :Boolean = {
+
+		return value.equals(arg0);
+	}
+
+
+	override def hashCode() :Int= {
+
+		return value.hashCode();
+	}
+
+
+	def iterator() :ju.Iterator[A]={
+
+		return value.iterator();
+	}
+
+
+	
+
+
+	
+
+	
+
+	def containsAll( arg0:ju.Collection[_]) :Boolean ={
+
+		return value.containsAll(arg0);
+	}
+
+
+	def removeAll( arg0 :ju.Collection[_] ) :Boolean= {
+
+		return value.removeAll(arg0);
+	}
+
+
+	def retainAll(arg0 :ju.Collection[_]) :Boolean = {
+
+		return value.retainAll(arg0);
+	}
+
+
+
     //TODO
     override def isVoid() :Boolean= {value == null}
   }
@@ -284,7 +454,7 @@ object JavaConversions {
   implicit def asBuffer[A](l : ju.List[A]) = new RichKermetaList(l)//l match {
   implicit def asSet[A](l : ju.Set[A]) = new RichKermetaSet(l)//l match {
 
-  
+  	
   
   
 }
