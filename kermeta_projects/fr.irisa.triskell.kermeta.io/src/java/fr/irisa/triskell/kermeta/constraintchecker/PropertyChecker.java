@@ -93,7 +93,7 @@ public class PropertyChecker extends AbstractChecker {
 			checkDerivedPropertySetterConstraints()
 			;
 		checkUseOfDeprecated();
-		return new Boolean(result);
+		return Boolean.valueOf(result);
 	}
 
 	private void checkUseOfDeprecated() {
@@ -347,7 +347,7 @@ public class PropertyChecker extends AbstractChecker {
 				 for(Property p : KermetaModelHelper.ClassDefinition.getAllPropertiesWithOpposite(cd)){
 					 if(p.getLower() == 1 && p.getUpper() == 1){
 						 if((p.getOpposite() != property) && p.getOpposite().isIsComposite()) {
-							 builder.warning("Property " + property.getName() + " cannot be used because the target class " + cd.getName() +
+							 builder.warning("Property " + property.getOwningClass().getName()+"."+property.getName() + " cannot be used because the target class " + cd.getName() +
 							 		" is already contained in a mandatory composition : " + new KM2KMTPrettyPrinter().ppSimplifiedPropertyInContext(p) , 
 							 	property );
 							 
