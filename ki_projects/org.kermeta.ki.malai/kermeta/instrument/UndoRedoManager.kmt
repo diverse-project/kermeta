@@ -1,0 +1,139 @@
+/*
+ * Creation : March 24, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::instrument;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Redo.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Undo.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/ButtonPressed.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::ki::malai::instrument
+using kermeta::ki::malai::interaction
+using kermeta::ki::malai::undo
+using kermeta::ki::malai::widget
+using kermeta::ki::malai::picking
+using kermeta::ki::malai::action
+using kermeta::ki::malai::interaction::event
+
+
+class UndoRedoManager inherits Instrument, UndoHandler
+{
+	attribute undoButton : Button
+	
+	attribute redoButton : Button
+	
+	reference picker : Picker
+	
+	reference undoCollector : UndoCollector
+	
+	
+	
+	operation initialiseWidgets(eventManager : EventManager) : Void is do
+		undoButton := Button.new
+		redoButton := Button.new
+		undoButton.initialiseWithIcon("/org/kermeta/ki/malai/res/Undo.png", eventManager)
+		redoButton.initialiseWithIcon("/org/kermeta/ki/malai/res/Redo.png", eventManager)
+	end
+	
+	
+	method initialiseLinks(eventManager : EventManager) : Void is do
+		addLink(ButtonPressed2Redo.new, picker, void, eventManager, false)
+		addLink(ButtonPressed2Undo.new, picker, void, eventManager, false)
+	end
+	
+	
+	
+	method setActivated(activated : Boolean) : Void is do
+		super(activated)
+		
+		if(activated) then
+			updateUndo()
+		else
+    		undoButton.setEnable(false)
+    		redoButton.setEnable(false)
+		end
+	end
+	
+	
+	
+	method updateUndo() : Void is do
+		if(activated) then
+    		undoButton.setEnable(not undoCollector.getLastUndo.isVoid)
+    		redoButton.setEnable(not undoCollector.getLastRedo.isVoid)
+		end
+	end
+}
+
+
+
+
+abstract class UndoRedoLink inherits Link {
+	method createInteraction() : Interaction is do
+		result := ButtonPressed.new
+	end
+	
+	
+	method updateAction() : Void is do end
+}
+
+
+
+
+class ButtonPressed2Redo inherits UndoRedoLink
+{
+	method getActionClass() : Class is do
+		result := Redo
+	end
+	
+	
+	method isConditionRespected() : Boolean is do
+		var bp : ButtonPressed init interaction.asType(ButtonPressed)
+		var undoManager : UndoRedoManager init instrument.asType(UndoRedoManager)
+		
+		result := not undoManager.undoCollector.getLastRedo.isVoid and bp.button==undoManager.redoButton
+	end
+	
+	
+	method createAction() : Void is do
+		var redo : Redo init Redo.new
+		
+		redo.undoCollector := instrument.asType(UndoRedoManager).undoCollector
+		redo.initialise(instrument.actionRegistry)
+		action := redo
+	end
+}
+
+
+
+
+class ButtonPressed2Undo inherits UndoRedoLink
+{
+	method getActionClass() : Class is do
+		result := Undo
+	end
+	
+	
+	method isConditionRespected() : Boolean is do
+		var bp : ButtonPressed init interaction.asType(ButtonPressed)
+		var undoManager : UndoRedoManager init instrument.asType(UndoRedoManager)
+
+		result := not undoManager.undoCollector.getLastUndo.isVoid and bp.button==undoManager.undoButton
+	end
+	
+	
+	method createAction() : Void is do
+		var undo : Undo init Undo.new
+		
+		undo.undoCollector := instrument.asType(UndoRedoManager).undoCollector
+		undo.initialise(instrument.actionRegistry)
+		action := undo
+	end
+}

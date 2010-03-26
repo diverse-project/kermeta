@@ -1,20 +1,17 @@
 /*
  * Creation : February 23, 2010
  * Licence  : EPL 
- * Copyright:
+ * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
-
-
 package kermeta::ki::malai::picking;
 
 
 require kermeta
-require "Pickable.kmt"
-require "../graphics/Point.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Pickable.kmt"
+
 
 using kermeta::standard
-using kermeta::ki::malai::graphics
 
 
 abstract class Picker
@@ -23,7 +20,5 @@ abstract class Picker
 	
 	operation getPickerAt(px : Real, py : Real) : Picker is abstract
 	
-	operation getRelativePoint(px : Real, py : Real, obj : Object) : Point is abstract
-	
-	operation contains(obj : Object) : Boolean is abstract
+	operation containsObject(obj : Object) : Boolean is abstract
 }

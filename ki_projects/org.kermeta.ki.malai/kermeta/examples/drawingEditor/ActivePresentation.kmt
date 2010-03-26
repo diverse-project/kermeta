@@ -192,7 +192,7 @@ aspect class Drawing inherits Picker {
 		result := void
 	end
 */	
-	method contains(obj : Object) : Boolean is do
+	method containsObject(obj : Object) : Boolean is do
 		result := false
 	end
 }

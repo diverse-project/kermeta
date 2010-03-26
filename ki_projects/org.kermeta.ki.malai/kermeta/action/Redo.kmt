@@ -1,21 +1,18 @@
-/* $Id:$ 
+/*
  * Creation : February 4, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
-@mainClass "kermeta::ki::malai::action::Redo"
-
-
 package kermeta::ki::malai::action;
 
 
 require kermeta
-require "Action.kmt"
-require "../undo/UndoCollector.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/undo/UndoCollector.kmt"
 
 using kermeta::standard
+using kermeta::language::structure
 using kermeta::ki::malai::undo
 
 
@@ -29,8 +26,7 @@ class Redo inherits Action
 	end
 
 
-
-	method cancelledBy(action : Action) : Boolean is do
+	method cancelledBy(action : Class) : Boolean is do
 		result := false
 	end
 

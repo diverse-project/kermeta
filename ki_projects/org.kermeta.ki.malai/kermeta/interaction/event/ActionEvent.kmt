@@ -20,16 +20,6 @@ using kermeta::standard
 */
 class ActionEvent inherits AWTEvent
 {
-	operation isFromButton() : Boolean is do
-	//TODO
-		result := false
-	end
-	
-	operation isFromTextField() : Boolean is do
-	//TODO
-		result := false
-	end
-
 	operation getModifiers() : Integer is do
 		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::ActionEventWrapper.getModifiers(self)
 	end

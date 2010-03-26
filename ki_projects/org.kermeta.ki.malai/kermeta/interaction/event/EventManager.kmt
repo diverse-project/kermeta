@@ -1,11 +1,9 @@
 /*
  * Creation : February 24, 2010
  * Licence  : EPL 
- * Copyright: INRIA Rennes
+ * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
-
-
 package kermeta::ki::malai::interaction::event;
 
 
@@ -19,7 +17,9 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/Actio
 
 using kermeta::ki::malai::dispatcher
 using kermeta::ki::malai::interaction
+using kermeta::ki::malai::widget
 using kermeta::standard
+
 
 
 /**
@@ -76,11 +76,14 @@ class EventManager inherits Dispatchable
 	* Processes the event produces by the Java UI and transfered to Kermeta.
 	*/
 	operation process(event : Event) : Void is do
-	//	stdio.writeln(event.getName)
-	
 		if(event.getName.equals("MOUSE_PRESSED")) then
 			var me : MouseEvent init event.getInfo.asType(MouseEvent)
-			handlers.each{h | h.onPressure(me.getButton, me.getX.toReal, me.getY.toReal, 0) }
+			handlers.each{h |
+				if(h.matches(event.getInfo.getSourceObject)) then 
+					h.onPressure(me.getButton, me.getX.toReal, me.getY.toReal, 0) 
+				end
+			}
+
 		else 
 		if(event.getName.equals("MOUSE_RELEASED")) then
 			var me : MouseEvent init event.getInfo.asType(MouseEvent)
@@ -104,24 +107,10 @@ class EventManager inherits Dispatchable
 		else
 		if(event.getName.equals("ACTION_PERFORMED")) then
 			var ae : ActionEvent init event.getInfo.asType(ActionEvent)
-			
-			if(ae.isFromButton) then handlers.each{h | h.onButtonPressed(ae.getActionCommand) }
-			else if(ae.isFromTextField) then /* TODO */ end
+			var src : Object init ae.getSourceObject
+
+			if(src.isInstanceOf(Button)) then handlers.each{h | h.onButtonPressed(src.asType(Button)) }
+			//TODO else if(ae.isFromTextField) then /* TODO */ end
 			end
 		end end end end end end end end
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

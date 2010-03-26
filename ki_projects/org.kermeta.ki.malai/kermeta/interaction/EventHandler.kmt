@@ -1,17 +1,16 @@
 /*
  * Creation : February 23, 2010
  * Licence  : EPL 
- * Copyright:
+ * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
-
-
 package kermeta::ki::malai::interaction;
 
-
 require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
 
 using kermeta::standard
+using kermeta::ki::malai::widget
 
 
 abstract class EventHandler {
@@ -25,7 +24,7 @@ abstract class EventHandler {
 	
 	operation onKeyRelease(key : Integer, idHID : Integer) : Void is abstract
 	
-	operation onButtonPressed(buttonName : String) : Void is abstract
+	operation onButtonPressed(button : Button) : Void is abstract
 	
 	operation onTextChanged(textCompName : String, TextValue : String) : Void is abstract
 	

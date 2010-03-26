@@ -10,12 +10,13 @@ package kermeta::ki::malai::interaction;
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/State.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/Event.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/MouseEvent.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/KeyEvent.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::widget
 
 
 abstract class Transition
@@ -67,9 +68,7 @@ abstract class Transition
 
 
 class ButtonPressedTransition inherits Transition {
-
-	reference buttonName : String
-	
+	reference button : Button
 }
 
 

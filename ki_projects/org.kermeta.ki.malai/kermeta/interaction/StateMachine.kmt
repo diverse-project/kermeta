@@ -12,6 +12,7 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/State.kmt"
 
 using kermeta::standard
 using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::widget
 
 
 abstract class StateMachine inherits EventHandler
@@ -108,14 +109,14 @@ abstract class StateMachine inherits EventHandler
 	
 	
 
-	method onButtonPressed(buttonName : String) : Void is do
+	method onButtonPressed(button : Button) : Void is do
 		if(activated) then
 			var stop : Boolean init false
 			var t : Transition
 			
 			currentState.transitions.exists{t |
 				if(t.isInstanceOf(ButtonPressedTransition)) then
-					t.asType(ButtonPressedTransition).buttonName := buttonName
+					t.asType(ButtonPressedTransition).button := button
 					
 					if(t.isGuardRespected) then
 						stop := true

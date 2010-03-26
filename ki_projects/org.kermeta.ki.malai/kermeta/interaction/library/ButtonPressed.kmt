@@ -1,0 +1,49 @@
+/*
+ * Creation : March 24, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::interaction;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::widget
+
+
+class ButtonPressed inherits Interaction
+{
+	reference button : Button
+	
+	
+	method reinit() : Void is do
+		super
+
+		button := void		
+	end
+	
+	
+	method initStateMachine() : Void is do
+		var pressed : TerminalState init TerminalState.new
+	
+		pressed.initialise("pressed")
+		addState(pressed)
+		
+		var bppt : ButtonPressedPressTransition init ButtonPressedPressTransition.new
+		bppt.buttonPressed := self
+		bppt.initialise(initState, pressed)
+	end
+}
+
+
+
+class ButtonPressedPressTransition inherits ButtonPressedTransition {
+	reference buttonPressed : ButtonPressed
+
+	method action() : Void is do
+		buttonPressed.button := button
+	end
+}

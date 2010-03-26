@@ -1,15 +1,15 @@
 /*
  * Creation : February 24, 2010
  * Licence  : EPL 
- * Copyright:
+ * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
-
-
 package kermeta::ki::malai::interaction::event;
 
-
 require kermeta
+
+using kermeta::standard
+
 
 
 /**
@@ -17,4 +17,10 @@ require kermeta
 */
 abstract class AWTEvent
 {
+	/**
+		Returns the source object that produced the event.
+	*/
+	operation getSourceObject() : Object is do
+		result := extern org::kermeta::ki::malai::interaction::eventWrapper::AWTEventWrapper.getSourceObject(self)
+	end
 }
