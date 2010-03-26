@@ -82,6 +82,8 @@ class SingleDispatcher inherits AbstractDispatcher
 			// If an exception occurs, the dispatcher stopped.
 			rescue(ex : kermeta::exceptions::Exception) running := false end
 		end
+		
+		extern org::kermeta::ki::malai::kermetaMap::RuntimeObject2JavaMap.cleanMap(self)
 	end
 }
 

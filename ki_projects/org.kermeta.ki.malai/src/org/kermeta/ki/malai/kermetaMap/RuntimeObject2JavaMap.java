@@ -1,6 +1,7 @@
 package org.kermeta.ki.malai.kermetaMap;
 
 import java.util.IdentityHashMap;
+import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
@@ -23,6 +24,21 @@ public class RuntimeObject2JavaMap extends IdentityHashMap<Object, RuntimeObject
 		super();
 	}
 	
+	
+	
+	public static RuntimeObject cleanMap(RuntimeObject selfRO) {
+		Iterator<Entry<Object, RuntimeObject>> it = MAP.entrySet().iterator();
+		Entry<Object, RuntimeObject> entry;
+		
+		while(it.hasNext()) {
+			entry = it.next();
+			removeUserData(entry.getValue());
+		}
+		
+		MAP.clear();
+		
+		return selfRO.getFactory().getMemory().voidINSTANCE;
+	}
 	
 	
 	
