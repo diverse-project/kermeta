@@ -79,6 +79,13 @@ class Button inherits GraphicalComponent
 
 
 
+class ToggleButton inherits Button
+{
+}
+
+
+
+
 class Panel inherits GraphicalComponent, Picker
 {
 	reference components : GraphicalComponent[0..*]

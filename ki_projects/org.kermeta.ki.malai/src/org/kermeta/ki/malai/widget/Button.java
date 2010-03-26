@@ -6,15 +6,30 @@ import java.net.URL;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JToggleButton;
 
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 
 public abstract class Button 
 {
+	public static AbstractButton createButtonInstance(RuntimeObject buttonRO) {
+		if(buttonRO==null) return null;
+		
+		final String className = NamedElementHelper.getQualifiedName(
+				((fr.irisa.triskell.kermeta.language.structure.Class)buttonRO.getMetaclass().getKCoreObject()).getTypeDefinition());
+		
+		if("kermeta::ki::malai::widget::Button".equals(className)) 			  return new JButton();
+		else if("kermeta::ki::malai::widget::ToggleButton".equals(className)) return new JToggleButton();
+		
+		return null;
+	}
+	
+	
 	public static void attachToEventManager(EventManagerWrapper manager, AbstractButton button) {
 		manager.attachTo(button);
 	}
@@ -22,7 +37,9 @@ public abstract class Button
 	
 	public static RuntimeObject initialise(RuntimeObject buttonRO, RuntimeObject eventManagerRO) {
 		final EventManagerWrapper emw = (EventManagerWrapper) eventManagerRO.getUserData();
-		final JButton button 			= new JButton("button");
+		final AbstractButton button   = createButtonInstance(buttonRO);
+		
+		button.setText("button");
 		
 		buttonRO.setUserData(button);
 		RuntimeObject2JavaMap.MAP.put(button, buttonRO);
@@ -46,14 +63,12 @@ public abstract class Button
 	
 	
 	public static RuntimeObject initialiseWithURI(RuntimeObject widgetRO, RuntimeObject uriRO, RuntimeObject eventManagerRO) {
-		final EventManagerWrapper emw = (EventManagerWrapper) eventManagerRO.getUserData();
-		final ImageIcon imageIcon = loadImageIcon(fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(uriRO));
-		JButton button;
+		final EventManagerWrapper emw 	= (EventManagerWrapper) eventManagerRO.getUserData();
+		final ImageIcon imageIcon 		= loadImageIcon(fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(uriRO));
+		AbstractButton button 			= createButtonInstance(widgetRO);
 		
-		if(imageIcon==null)
-			button = new JButton();
-		else
-			button = new JButton(imageIcon);
+		if(imageIcon!=null)
+			button.setIcon(imageIcon);
 		
 		widgetRO.setUserData(button);
 		RuntimeObject2JavaMap.MAP.put(button, widgetRO);
@@ -65,8 +80,10 @@ public abstract class Button
 	
 	
 	public static RuntimeObject initialiseWithText(RuntimeObject widgetRO, RuntimeObject textRO, RuntimeObject eventManagerRO) {
-		final EventManagerWrapper emw = (EventManagerWrapper) eventManagerRO.getUserData();
-		final JButton button = new JButton(textRO.getPrimitiveType());
+		final EventManagerWrapper emw 	= (EventManagerWrapper) eventManagerRO.getUserData();
+		final AbstractButton button 	= createButtonInstance(widgetRO);
+		
+		button.setText(fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(textRO));
 		
 		widgetRO.setUserData(button);
 		RuntimeObject2JavaMap.MAP.put(button, widgetRO);
