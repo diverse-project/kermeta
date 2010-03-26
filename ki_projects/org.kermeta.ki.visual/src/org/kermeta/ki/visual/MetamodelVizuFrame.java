@@ -6,7 +6,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.AbstractButton;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -25,14 +27,21 @@ public class MetamodelVizuFrame extends JFrame {
 	
 	
 	
-	public static RuntimeObject initialiseToolbar(RuntimeObject toolbarRO, RuntimeObject undoButRO, RuntimeObject redoButRO) {
+	public static RuntimeObject initialiseToolbar(RuntimeObject toolbarRO, RuntimeObject undoButRO, RuntimeObject redoButRO, 
+							RuntimeObject prunerButRO) {
 		JPanel toolbar = (JPanel) toolbarRO.getUserData();
-		AbstractButton undoBut = (AbstractButton)undoButRO.getUserData();
-		AbstractButton redoBut = (AbstractButton)redoButRO.getUserData();
+		AbstractButton undoBut 		= (AbstractButton)undoButRO.getUserData();
+		AbstractButton redoBut 		= (AbstractButton)redoButRO.getUserData();
+		AbstractButton prunerBut 	= (AbstractButton)prunerButRO.getUserData();
+		ButtonGroup group 			= new ButtonGroup();
 		
 		toolbar.setLayout(new BoxLayout(toolbar, BoxLayout.LINE_AXIS));
 		toolbar.add(undoBut);
 		toolbar.add(redoBut);
+		toolbar.add(Box.createHorizontalStrut(30));
+		toolbar.add(prunerBut);
+		
+		group.add(prunerBut);
 		
 		return toolbarRO.getFactory().getMemory().voidINSTANCE;
 	}

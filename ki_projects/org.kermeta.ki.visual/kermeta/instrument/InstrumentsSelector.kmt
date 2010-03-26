@@ -1,0 +1,97 @@
+/*
+ * Creation : March 23, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::visual;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/ButtonPressLink.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/ButtonPressed.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActivateDesactivateInstruments.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/pruning/Pruner.kmt"
+
+using kermeta::ki::malai::instrument
+using kermeta::ki::malai::interaction
+using kermeta::ki::malai::widget
+using kermeta::ki::malai::picking
+using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::action
+using kermeta::standard
+using kermeta::language::structure
+
+
+class InstrumentsSelector inherits Instrument
+{
+	reference pruner : Pruner
+	
+	attribute prunerButton : ToggleButton
+	
+	reference picker : Picker
+	
+	
+
+	operation initialiseInstruments(pruner : Pruner, eventManager : EventManager) : Void is do
+		self.pruner := pruner
+		pruner.setActivated(true)
+		
+		prunerButton := ToggleButton.new
+		prunerButton.initialiseWithText("P", eventManager)
+		
+		interimFeedback
+	end
+	
+	
+	
+	method initialiseLinks(eventManager : EventManager) : Void is do
+		addLink(ButtonPressed2ActivateIns.new, picker, void, eventManager, false)
+	end
+	
+	
+	method interimFeedback() : Void is do
+		prunerButton.setSelected(pruner.activated)
+	end
+}
+
+
+
+class ButtonPressed2ActivateIns inherits ButtonPressLink
+{
+	method getActionClass() : Class is do
+		result := ActivateDesactivateInstruments
+	end
+	
+	
+	
+	method isConditionRespected() : Boolean is do
+		var bp       : ButtonPressed       init interaction.asType(ButtonPressed)
+		var selector : InstrumentsSelector init instrument.asType(InstrumentsSelector)
+
+		result := selector.prunerButton==bp.button
+	end
+	
+	
+	
+	method createAction() : Void is do
+		var button : Button init interaction.asType(ButtonPressed).button
+		var selector : InstrumentsSelector init instrument.asType(InstrumentsSelector)
+		var activeAction : ActivateDesactivateInstruments init ActivateDesactivateInstruments.new
+		
+		if(button==selector.prunerButton) then
+			activeAction.instrumentsActivate.add(selector.pruner)
+		else
+			activeAction.instrumentsDesactivate.add(selector.pruner)
+		end
+		
+		action := activeAction
+	end
+	
+	
+	method updateAction() : Void is do end
+}
+
+
+
+

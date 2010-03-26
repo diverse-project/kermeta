@@ -13,6 +13,7 @@ require kermeta
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/pruning/Pruner.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/VisitableKermeta.km"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/InstrumentsSelector.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/UndoRedoManager.kmt"
 
 using kermeta
@@ -61,6 +62,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	attribute undoCollector : UndoCollector
 	
+	attribute selector : InstrumentsSelector
+	
 	attribute actionRegistry : ActionRegistry
 	
 	attribute eventManager : EventManager
@@ -71,8 +74,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 
 	
 	operation initialise(eventManager : EventManager) : Void is do
-//		loadMetamodel("/examples/example1.km")
-		loadMetamodel("/examples/Ecore.km")
+		loadMetamodel("/examples/example1.km")
+//		loadMetamodel("/examples/Ecore.km")
 
 		self.eventManager := eventManager
 		undoCollector     := UndoCollector.new 
@@ -83,19 +86,24 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		actionRegistry.initialise(undoCollector)
 		actionRegistry.handlers.add(self)
 
-		pruner      := Pruner.new
-		undoManager := UndoRedoManager.new
+		pruner      	 := Pruner.new
+		undoManager 	 := UndoRedoManager.new
+		selector         := InstrumentsSelector.new
 		
 		pruner.initialise(actionRegistry)
 		undoManager.initialise(actionRegistry)
 		undoManager.initialiseWidgets(eventManager)
-		
+		selector.initialise(actionRegistry)
+		selector.initialiseInstruments(pruner, eventManager)
+
 		initialiseUI
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, eventManager)
 		
+		selector.picker := toolbar
+		selector.initialiseLinks(eventManager)
+		selector.setActivated(true)
 		pruner.metamodel := metamodel
 		pruner.initialiseLinks(eventManager)
-		pruner.setActivated(true)
 
 		undoManager.undoCollector := undoCollector		
 		undoManager.picker := toolbar
@@ -119,9 +127,11 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	operation initialiseUI() : Void is do
 		toolbar := Panel.new
 		toolbar.initialise(eventManager)
-		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialiseToolbar(toolbar, undoManager.undoButton, undoManager.redoButton)
+		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialiseToolbar(toolbar, undoManager.undoButton, 
+					undoManager.redoButton, selector.prunerButton)
 		toolbar.components.add(undoManager.undoButton)
 		toolbar.components.add(undoManager.redoButton)
+		toolbar.components.add(selector.prunerButton)
 	end
 
 

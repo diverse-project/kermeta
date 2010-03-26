@@ -29,7 +29,7 @@ class ActionReinitView inherits Action, Undoable {
 		areVisible := Sequence<Boolean>.new
 
 		metamodel.packages.each{pkg |
-			pkg.allNestedClassDefinitions.each{cd | stdio.writeln(cd.name)
+			pkg.allNestedClassDefinitions.each{cd |
 				areVisible.add(cd.isVisible)
 				i := i + 1
 			}
@@ -64,7 +64,7 @@ class ActionReinitView inherits Action, Undoable {
 		var i : Integer init 0
 
 		metamodel.packages.each{pkg |
-			pkg.allNestedClassDefinitions.each{cd | stdio.writeln(cd.name)
+			pkg.allNestedClassDefinitions.each{cd |
 				cd.setVisible(areVisible.at(i))
 				i := i + 1
 			}

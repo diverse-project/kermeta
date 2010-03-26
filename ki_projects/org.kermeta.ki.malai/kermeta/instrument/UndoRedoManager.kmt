@@ -8,6 +8,7 @@ package kermeta::ki::malai::instrument;
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/ButtonPressLink.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Redo.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Undo.kmt"
@@ -75,19 +76,7 @@ class UndoRedoManager inherits Instrument, UndoHandler
 
 
 
-abstract class UndoRedoLink inherits Link {
-	method createInteraction() : Interaction is do
-		result := ButtonPressed.new
-	end
-	
-	
-	method updateAction() : Void is do end
-}
-
-
-
-
-class ButtonPressed2Redo inherits UndoRedoLink
+class ButtonPressed2Redo inherits ButtonPressLink
 {
 	method getActionClass() : Class is do
 		result := Redo
@@ -109,12 +98,15 @@ class ButtonPressed2Redo inherits UndoRedoLink
 		redo.initialise(instrument.actionRegistry)
 		action := redo
 	end
+	
+	
+	method updateAction() : Void is do end
 }
 
 
 
 
-class ButtonPressed2Undo inherits UndoRedoLink
+class ButtonPressed2Undo inherits ButtonPressLink
 {
 	method getActionClass() : Class is do
 		result := Undo
@@ -136,4 +128,7 @@ class ButtonPressed2Undo inherits UndoRedoLink
 		undo.initialise(instrument.actionRegistry)
 		action := undo
 	end
+	
+	
+	method updateAction() : Void is do end
 }

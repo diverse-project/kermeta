@@ -1,0 +1,51 @@
+/*
+ * Creation : March 26, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::action;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::ki::malai::instrument
+
+
+class ActivateDesactivateInstruments inherits Action
+{
+	reference instrumentsActivate : Instrument[0..*]
+	
+	reference instrumentsDesactivate : Instrument[0..*]
+	
+	
+	
+	method canDo() : Boolean is do
+		result := not instrumentsActivate.empty or not instrumentsDesactivate.isVoid
+	end
+
+
+	method cancelledBy(action : Class) : Boolean is do
+		result := false
+	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := false
+	end
+
+
+	method hadEffect() : Boolean is do
+		result := isDone()
+	end
+
+
+	method doActionBody() : Void is do
+		instrumentsActivate.each{ins | ins.setActivated(true)}
+		instrumentsDesactivate.each{ins | ins.setActivated(false)}
+	end
+}
