@@ -81,8 +81,8 @@
 		
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.ket.documentation/src" 
 					antfile="KET_Manual_build.xml"	target ="eclipse.help"/>
-		<ant dir="${eclipse.build.dir}/plugins/org.kermeta.ecore.documentation/src" 
-					antfile="Ecore-MDK_build.xml"	target ="eclipse.help"/>
+		<!-- <ant dir="${eclipse.build.dir}/plugins/org.kermeta.ecore.documentation/src" 
+					antfile="Ecore-MDK_build.xml"	target ="eclipse.help"/> -->
 	</target>
 	
 </project>
