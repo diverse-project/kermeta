@@ -1,12 +1,11 @@
 /*
  * Creation : March 16, 2010
- * Licence  : EPL 
+ * Licence  : EPL
  * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin 
  */
 package kermeta::language::structure;
 
-//require "platform:/resource/org.kermeta.static_analysis/src/kermeta/visitor/EnhancedKermeta.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
 require kermeta
 
@@ -30,7 +29,13 @@ aspect class ClassDefinition inherits Pickable {
 	operation setVisible(visible : Boolean) : Void is do
 		extern org::kermeta::ki::visual::view::EntityView.setVisible(self, visible)
 	end
+	
+	operation isVisible() : Boolean is do
+		result ?= extern org::kermeta::ki::visual::view::EntityView.isVisible(self)
+	end
 }
+
+
 
 
 aspect class ModelingUnit inherits Picker {
@@ -48,13 +53,22 @@ aspect class ModelingUnit inherits Picker {
 			not result.isVoid
 		}
 	end
+	
+	
+	method containsObject(obj : Object) : Boolean is do
+		packages.exists{p |
+			result := p.allNestedClassDefinitions.exists{cd | cd==obj }
+			result
+		}
+	end
 }
+
+
 
 
 
 aspect class Package
 {
-
 	property readonly allNestedPackages: set Package [0..*]
 		getter is do
 			result := Set<Package>.new
@@ -86,13 +100,6 @@ aspect class Package
 			result := ownedTypeDefinition.select{td | td.isInstanceOf(ClassDefinition)}.size
 			nestedPackage.each{p | result := result + p.numberOfClasses}
 		end
-		/*
-	property readonly numberOfAttributes: Integer
-		getter is do
-			result := 0
-			ownedTypeDefinition.select{td | td.isInstanceOf(ClassDefinition)}.each{c | result := result + c.asType(ClassDefinition).numberOfAttributes}
-			nestedPackage.each{p | result := result + p.numberOfAttributes}
-		end*/
 }
 
 
@@ -102,4 +109,3 @@ aspect class Operation {
 
 aspect class Property {
 }
-

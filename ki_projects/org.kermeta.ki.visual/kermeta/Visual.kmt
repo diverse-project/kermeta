@@ -10,79 +10,120 @@
 package kermeta::ki::visual;
 
 require kermeta
-require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActionRegistry.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/pruning/Pruner.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/VisitableKermeta.km"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/dispatcher/Dispatcher.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/UndoRedoManager.kmt"
 
 using kermeta
 using kermeta::ki::malai::undo
+using kermeta::ki::malai::widget
 using kermeta::ki::malai::action
 using kermeta::standard
 using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::instrument
 using kermeta::persistence
 using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::ki::malai::dispatcher
+using kermeta::ki::malai::picking
 
 
 class Visual
 {
 	operation main() : Void is do
-		var undoCollector  : UndoCollector   init UndoCollector.new 
-		var actionRegistry : ActionRegistry  init ActionRegistry.new
 		var aui			   : MetamodelCanvas init MetamodelCanvas.new
 		var eventManager   : EventManager    init EventManager.new
 		var dispatcher     : ListDispatcher  init ListDispatcher.new
-		var pruner		   : Pruner			 init Pruner.new
 		
-		undoCollector.initialise
-		actionRegistry.initialise(undoCollector)
-		actionRegistry.handlers.add(aui)
 		dispatcher.initialise
 		eventManager.initialise(dispatcher)
 		dispatcher.processes.add(eventManager)
-//		aui.loadMetamodel("/examples/example1.km")
-		aui.loadMetamodel("/examples/Ecore.km")
+		
 		aui.initialise(eventManager)
-		var temp : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
-		
-		temp.modelingUnit := aui.metamodel
-		aui.metamodel.accept(temp)
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.organise(aui)
-		
-		pruner.initialise(actionRegistry)
-		pruner.metamodel := aui.metamodel
-		pruner.initialiseLinks(eventManager)
-		pruner.activated := true
-		
 		aui.setVisible(true)
-		
 		aui.refreshView
+		
 		dispatcher.run
-	end
-	
-		operation loadMetamodel(muURI: String) : ModelingUnit is do
-		var rep : EMFRepository init EMFRepository.new
-		var res : EMFResource
-		res ?= rep.getResource(muURI)
-		result ?= res.one
 	end
 }
 
 
 
 
-class MetamodelCanvas inherits ActionHandler {
-	attribute metamodel : ModelingUnit 
+class MetamodelCanvas inherits ActionHandler, UndoHandler {
+	attribute metamodel : ModelingUnit
+	
+	attribute pruner : Pruner
+	
+	attribute undoManager : UndoRedoManager
+	
+	attribute undoCollector : UndoCollector
+	
+	attribute actionRegistry : ActionRegistry
+	
+	attribute eventManager : EventManager
+	
+	attribute toolbar : Panel
+	
 
 
 	
 	operation initialise(eventManager : EventManager) : Void is do
-		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, eventManager)
+//		loadMetamodel("/examples/example1.km")
+		loadMetamodel("/examples/Ecore.km")
+
+		self.eventManager := eventManager
+		undoCollector     := UndoCollector.new 
+		actionRegistry    := ActionRegistry.new
+		
+		undoCollector.initialise
+		undoCollector.handlers.add(self)
+		actionRegistry.initialise(undoCollector)
+		actionRegistry.handlers.add(self)
+
+		pruner      := Pruner.new
+		undoManager := UndoRedoManager.new
+		
+		pruner.initialise(actionRegistry)
+		undoManager.initialise(actionRegistry)
+		undoManager.initialiseWidgets(eventManager)
+		
+		initialiseUI
+		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, eventManager)
+		
+		pruner.metamodel := metamodel
+		pruner.initialiseLinks(eventManager)
+		pruner.setActivated(true)
+
+		undoManager.undoCollector := undoCollector		
+		undoManager.picker := toolbar
+		undoCollector.handlers.add(undoManager)
+		undoManager.initialiseLinks(eventManager)
+		undoManager.setActivated(true)
+		
+		var model2view : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
+		model2view.modelingUnit := metamodel
+		metamodel.accept(model2view)
 	end
+	
+	
+	
+	method updateUndo() : Void is do
+		refreshView
+	end
+	
+	
+	
+	operation initialiseUI() : Void is do
+		toolbar := Panel.new
+		toolbar.initialise(eventManager)
+		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialiseToolbar(toolbar, undoManager.undoButton, undoManager.redoButton)
+		toolbar.components.add(undoManager.undoButton)
+		toolbar.components.add(undoManager.redoButton)
+	end
+
 
 
 	operation loadMetamodel(muURI: String) : Void is do

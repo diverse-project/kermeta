@@ -69,6 +69,20 @@ public abstract class EntityView extends ComponentView {
 
 	
 	
+	public static RuntimeObject isVisible(RuntimeObject entityRO) {
+		Object obj = entityRO.getUserData();
+		boolean ok;
+		
+		if(obj!=null && obj instanceof EntityView) {
+			ok = ((EntityView)obj).visible;
+		}
+		else ok = false;
+		
+		return ok ? entityRO.getFactory().getMemory().trueINSTANCE : entityRO.getFactory().getMemory().falseINSTANCE;
+	}
+	
+	
+	
 	public static RuntimeObject setVisible(RuntimeObject entityRO, RuntimeObject visibleRO) {
 		EntityView view = (EntityView) entityRO.getUserData();
 		boolean visible = Boolean.getValue(visibleRO);

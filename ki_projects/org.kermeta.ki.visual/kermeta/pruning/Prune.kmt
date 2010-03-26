@@ -4,7 +4,6 @@
  * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
  */
-
 package kermeta::ki::visual;
 
 
@@ -16,14 +15,26 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
 using kermeta::standard
 using kermeta::language::structure
 using kermeta::ki::malai::action
+using kermeta::ki::malai::undo
 
 
-
-class ActionReinitView inherits Action {
+class ActionReinitView inherits Action, Undoable {
 	reference metamodel : ModelingUnit
+	
+	attribute areVisible : Sequence<Boolean>
 	
 	
 	method doActionBody() : Void is do
+		var i : Integer init 0
+		areVisible := Sequence<Boolean>.new
+
+		metamodel.packages.each{pkg |
+			pkg.allNestedClassDefinitions.each{cd | stdio.writeln(cd.name)
+				areVisible.add(cd.isVisible)
+				i := i + 1
+			}
+		}
+		
 		metamodel.setVisibleAll()
 	end
 	
@@ -47,20 +58,49 @@ class ActionReinitView inherits Action {
 	method isRegisterable() : Boolean is do
 		result := true
 	end
+	
+	
+	method undo() : Void is do
+		var i : Integer init 0
+
+		metamodel.packages.each{pkg |
+			pkg.allNestedClassDefinitions.each{cd | stdio.writeln(cd.name)
+				cd.setVisible(areVisible.at(i))
+				i := i + 1
+			}
+		}
+	end
+	
+	
+	method redo() : Void is do
+		metamodel.setVisibleAll()
+	end
 }
 
 
 
 
 
-class ActionPrune inherits Action {
+class ActionPrune inherits Action, Undoable {
 	reference selection : ClassDefinition[0..*]
 	
 	reference metamodel : ModelingUnit
 	
+	attribute areVisible : Sequence<Boolean>
 	
 	
 	method doActionBody() : Void is do
+		// Saving the current visible values.
+		var i : Integer init 0
+		areVisible := Sequence<Boolean>.new
+
+		metamodel.packages.each{pkg |
+			pkg.allNestedClassDefinitions.each{cd |
+				areVisible.add(cd.isVisible)
+				i := i + 1
+			}
+		}
+		
 		var pruningOp  : MetamodelPruner init MetamodelPruner.new
 		var reqClasses : Bag<RequiredClass> init Bag<RequiredClass>.new
 		var reqClass   : RequiredClass
@@ -97,5 +137,31 @@ class ActionPrune inherits Action {
 	
 	method isRegisterable() : Boolean is do
 		result := true
+	end
+	
+	
+	method undo() : Void is do
+		changeVisibility
+	end
+	
+	
+	method redo() : Void is do
+		changeVisibility
+	end
+	
+	
+	operation changeVisibility() : Void is do
+		var areVisible2 : Sequence<Boolean> init Sequence<Boolean>.new
+		var i : Integer init 0
+
+		metamodel.packages.each{pkg |
+			pkg.allNestedClassDefinitions.each{cd |
+				areVisible2.add(cd.isVisible)
+				cd.setVisible(areVisible.at(i))
+				i := i + 1
+			}
+		}
+		
+		areVisible := areVisible2
 	end
 }

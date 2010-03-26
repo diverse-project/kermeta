@@ -1,14 +1,18 @@
 package org.kermeta.ki.visual;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.AbstractButton;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.UIManager;
 
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
+import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 import org.kermeta.ki.visual.view.MetamodelView;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -21,6 +25,21 @@ public class MetamodelVizuFrame extends JFrame {
 	
 	
 	
+	public static RuntimeObject initialiseToolbar(RuntimeObject toolbarRO, RuntimeObject undoButRO, RuntimeObject redoButRO) {
+		JPanel toolbar = (JPanel) toolbarRO.getUserData();
+		AbstractButton undoBut = (AbstractButton)undoButRO.getUserData();
+		AbstractButton redoBut = (AbstractButton)redoButRO.getUserData();
+		
+		toolbar.setLayout(new BoxLayout(toolbar, BoxLayout.LINE_AXIS));
+		toolbar.add(undoBut);
+		toolbar.add(redoBut);
+		
+		return toolbarRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	
+	
+	
 	public static RuntimeObject organise(RuntimeObject appliRO) {
 		MetamodelVizuFrame interactiveSys = (MetamodelVizuFrame) appliRO.getUserData();
 		interactiveSys.organiseModel();
@@ -29,11 +48,15 @@ public class MetamodelVizuFrame extends JFrame {
 	}
 	
 	
-	public static RuntimeObject initialise(RuntimeObject appliRO, RuntimeObject mmRO, RuntimeObject emwRO) {
-		EventManagerWrapper emw = (EventManagerWrapper) emwRO.getUserData();
-		MetamodelVizuFrame canvasIS = new MetamodelVizuFrame(emw);
+	public static RuntimeObject initialise(RuntimeObject appliRO, RuntimeObject mmRO, RuntimeObject tbRO, RuntimeObject emwRO) {
+		EventManagerWrapper emw 	= (EventManagerWrapper) emwRO.getUserData();
+		JPanel toolbar 				= (JPanel) tbRO.getUserData();
+		MetamodelVizuFrame canvasIS = new MetamodelVizuFrame(emw, toolbar);
+		
 		appliRO.setUserData(canvasIS);
 		mmRO.setUserData(canvasIS.mmView);
+		RuntimeObject2JavaMap.MAP.put(canvasIS, appliRO);
+		RuntimeObject2JavaMap.MAP.put(canvasIS.mmView, mmRO);
 		
 		return appliRO.getFactory().getMemory().voidINSTANCE;
 	}
@@ -61,16 +84,18 @@ public class MetamodelVizuFrame extends JFrame {
 	
 	
 	
-	public MetamodelVizuFrame(EventManagerWrapper emw) { 
+	public MetamodelVizuFrame(EventManagerWrapper emw, JPanel toolbar) { 
 		super("Metamodel visualisation");
 		
-		try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); } 
-		catch(Exception e) { /* */ }
-
+//		try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); } 
+//		catch(Exception e) { /* */ }
+		
+		getContentPane().setLayout(new BorderLayout());
 		mmView = new MetamodelView(emw);
 		JScrollPane sp = new JScrollPane(mmView);
 		sp.setPreferredSize(new Dimension(1000, 800));
-		getContentPane().add(sp);
+		getContentPane().add(sp, BorderLayout.CENTER);
+		getContentPane().add(toolbar, BorderLayout.NORTH);
 		setLocation(100, 100);
 		pack();
 		

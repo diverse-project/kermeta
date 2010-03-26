@@ -1,5 +1,7 @@
 package org.kermeta.ki.visual;
 
+import javax.swing.JPanel;
+
 
 public class MetamodelVizu {
 
@@ -7,7 +9,7 @@ public class MetamodelVizu {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		MetamodelVizuFrame frame = new MetamodelVizuFrame(null);
+		MetamodelVizuFrame frame = new MetamodelVizuFrame(null, new JPanel());
 		
 		/*		MetamodelView mm = frame.mmView;
 		EntityView b = new ClassView("B");

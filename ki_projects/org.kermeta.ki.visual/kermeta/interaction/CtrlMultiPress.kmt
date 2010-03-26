@@ -75,7 +75,7 @@ class CtrlMultiPress inherits Interaction
 		transition := MoveTransition.new
 		transition.initialise(pressed, pressed)
 	
-		transition := TestKeyRelease.new
+		transition := KeyReleaseTransition.new
 		transition.initialise(pressed, keyReleased)
 		
 		transition := ReleaseTransition.new
@@ -85,7 +85,7 @@ class CtrlMultiPress inherits Interaction
 		mp.ctrlPress := self
 		mp.initialise(released, pressed)
 		
-		transition := TestKeyRelease.new
+		transition := KeyReleaseTransition.new
 		transition.initialise(released, keyReleased)
 		
 		transition := CtrlMultiPressEscapeKeyPressureTransition.new
@@ -96,13 +96,6 @@ class CtrlMultiPress inherits Interaction
 	end
 }
 
-
-class TestKeyRelease inherits KeyReleaseTransition
-{
-	method action() : Void is do
-		stdio.writeln("action TestKeyRelease")
-	end
-}
 
 
 class CtrlMultiPressPressureTransition inherits PressureTransition {
@@ -119,7 +112,6 @@ class CtrlMultiPressPressureTransition inherits PressureTransition {
 
 class CtrlMultiPressKeyPressureTransition inherits KeyPressureTransition {
 	method isGuardRespected() : Boolean is do
-	stdio.writeln("CtrlMultiPressKeyPressureTransition")
 		result := key==17 // 'ctrl'
 	end
 }

@@ -1,0 +1,126 @@
+/*
+ * Creation : March 23, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::widget;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::picking
+using kermeta::ki::malai::interaction::event
+
+
+
+abstract class GraphicalComponent inherits Pickable
+{
+	operation initialise(eventManager : EventManager) : Void is abstract
+	
+
+	operation setEnable(enable : Boolean) : Void is do
+		extern org::kermeta::ki::malai::widget::GraphicalComponent.setEnable(self, enable)
+	end
+
+	
+	operation setVisible(visible : Boolean) : Void is do
+		extern org::kermeta::ki::malai::widget::GraphicalComponent.setVisible(self, visible)
+	end
+	
+	
+	
+	method contains(px : Real, py : Real) : Boolean is do
+		result ?= extern org::kermeta::ki::malai::widget::GraphicalComponent.contains(self, px, py)
+	end
+	
+	
+	operation getX() : Integer is do
+		result ?= extern org::kermeta::ki::malai::widget::GraphicalComponent.getX(self)
+	end
+	
+	
+	operation getY() : Integer is do
+		result ?= extern org::kermeta::ki::malai::widget::GraphicalComponent.getY(self)
+	end
+}
+
+
+
+
+class Button inherits GraphicalComponent
+{
+	operation getActionCommand() : String is do
+		result ?= extern org::kermeta::ki::malai::widget::Button.getActionCommand(self)
+	end
+
+
+	method initialise(eventManager : EventManager) : Void is do
+		extern org::kermeta::ki::malai::widget::Button.initialise(self, eventManager)
+	end
+
+	operation setSelected(selected : Boolean) : Void is do
+		extern org::kermeta::ki::malai::widget::Button.setSelected(self, selected)
+	end
+	
+	
+	operation initialiseWithIcon(uri : String, eventManager : EventManager) : Void is do
+		extern org::kermeta::ki::malai::widget::Button.initialiseWithURI(self, uri, eventManager)
+	end
+	
+	
+	operation initialiseWithText(text : String, eventManager : EventManager) : Void is do
+		extern org::kermeta::ki::malai::widget::Button.initialiseWithText(self, text, eventManager)
+	end
+}
+
+
+
+
+class Panel inherits GraphicalComponent, Picker
+{
+	reference components : GraphicalComponent[0..*]
+	
+	
+	method initialise(eventManager : EventManager) : Void is do
+		extern org::kermeta::ki::malai::widget::Panel.initialise(self, eventManager)
+	end
+	
+	
+	
+	operation addComponent(component : GraphicalComponent) : Void is do
+		components.add(component)
+		extern org::kermeta::ki::malai::widget::Panel.add(self, component)
+	end
+	
+	
+	
+	method getPickerAt(px : Real, py : Real) : Picker is do
+		result := components.detect{c | c.isInstanceOf(Picker) and c.contains(px, py) }.asType(Picker)
+	end
+	
+	
+	
+	method getPickableAt(px : Real, py : Real) : Pickable is do
+		components.exists{c |
+			if(c.isInstanceOf(Pickable) and c.contains(px, py)) then
+				result := c
+			else if(c.isInstanceOf(Picker)) then
+					result := c.asType(Picker).getPickableAt(px - c.getX.toReal, py - c.getY.toReal)
+				end
+			end
+			
+			not result.isVoid
+		}
+	end
+	
+	
+	
+	method containsObject(obj : Object) : Boolean is do
+		result := components.exists{c |
+			c==obj or c.isInstanceOf(Picker).andThen{b | c.asType(Picker).containsObject(obj) }
+		}
+	end
+}

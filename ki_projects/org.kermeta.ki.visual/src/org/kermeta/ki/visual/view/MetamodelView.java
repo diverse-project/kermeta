@@ -16,6 +16,7 @@ import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
 
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
+import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 import org.kermeta.ki.visual.Force;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -41,6 +42,7 @@ public class MetamodelView extends JPanel implements Scrollable {
 
 		metamodelView.addEntity(position, view);
 		entityRO.setUserData(view);
+		RuntimeObject2JavaMap.MAP.put(view, entityRO);
 		metamodelView.repaint();
 		
 		return mmRO.getFactory().getMemory().voidINSTANCE;
@@ -59,7 +61,6 @@ public class MetamodelView extends JPanel implements Scrollable {
 		
 		view.visible = true;
 		metamodelView.addLink(position, view);
-//		linkRO.setUserData(view);
 		metamodelView.repaint();
 		
 		return mmRO.getFactory().getMemory().voidINSTANCE;
@@ -77,7 +78,6 @@ public class MetamodelView extends JPanel implements Scrollable {
 		
 		view.visible = true;
 		metamodelView.addLink(position, view);
-//		linkRO.setUserData(view);
 		metamodelView.repaint();
 		
 		return mmRO.getFactory().getMemory().voidINSTANCE;
