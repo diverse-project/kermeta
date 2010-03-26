@@ -28,6 +28,7 @@ trait ClassAspect extends RichAspectImplicit with TypeAspect with ObjectAspect w
             var i : Int = 1
             res.append("[")
             this.getTypeParamBinding.foreach(e=> {
+//                    res.append("_<:")
                     e.generateScalaCode(res)
                     if (i< this.getTypeParamBinding.size()){
                         res.append(", ")

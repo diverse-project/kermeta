@@ -30,7 +30,7 @@ trait CallSuperOperationAspect extends RichAspectImplicit with ObjectAspect with
     var superTrait = classFrom.getSuperType.filter({s=>isSubTypeOf(s, superClassFromName)}).head
                 
     res.append("super["+superTrait.asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getName+"Aspect]")
-    res.append("."+actualOperation.getName())
+    res.append("."+Util.getEcoreRenameOperation(actualOperation.getSuperOperation))
     res.append("(")
                 
     this.getParameters().foreach(par => par.generateScalaCode(res))

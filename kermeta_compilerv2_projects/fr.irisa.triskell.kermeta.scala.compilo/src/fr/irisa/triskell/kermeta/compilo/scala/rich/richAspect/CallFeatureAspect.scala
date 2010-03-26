@@ -76,7 +76,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
 
             }
         }else{
-            res.append(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, this.getName)))
+            res.append(Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, Util.getEcoreRenameOperation(this.getStaticOperation))))
 
         }
     }
@@ -147,7 +147,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
                             =>{generateTarget(res);res.append(".");res.append("addAllUnique");generateParam(res,"(",")")}
             case "new" => generateNew(res)
             case _ if(this.getTarget != null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateTarget(res);res.append(".");generateOperationCall(res);generateParam(res,"(",")")}
-            case _ if(this.getTarget == null && this.getStaticOperation!=null && this.getStaticProperty==null) => {generateName(res);generateParam(res,"(",")") }
+            case _ if(this.getTarget == null && this.getStaticOperation!=null && this.getStaticProperty==null) => {res.append(Util.getEcoreRenameOperation(this.getStaticOperation));generateParam(res,"(",")") }
             case _ if(this.getTarget != null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generateTarget(res);res.append(".");generatePropertyCall(res) }
             case _ if(this.getTarget == null && this.getStaticProperty!=null && this.getStaticOperation==null) => {generatePropertyName(res) }
             case _ if(this.getTarget != null && this.getStaticProperty==null && this.getStaticOperation==null && this.getStaticEnumLiteral !=null ) => {generateTarget(res);res.append(".");generateEnumLiteralCall(res) }
