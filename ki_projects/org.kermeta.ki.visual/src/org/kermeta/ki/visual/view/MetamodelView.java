@@ -19,6 +19,9 @@ import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 import org.kermeta.ki.visual.Force;
 
+import edu.uci.ics.jung.algorithms.layout.KKLayout;
+import edu.uci.ics.jung.graph.DelegateForest;
+import edu.uci.ics.jung.graph.Forest;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
@@ -31,6 +34,8 @@ public class MetamodelView extends JPanel implements Scrollable {
 	protected List<LinkView> links;
 	
 	protected EventManagerWrapper eventManager;
+	
+	protected Forest<EntityView, LinkView> forest;
 	
 	
 	
@@ -101,6 +106,47 @@ public class MetamodelView extends JPanel implements Scrollable {
 	
 	
 	
+	
+	public void initialiseForest() {
+		forest = new DelegateForest<EntityView, LinkView>();
+
+		for(EntityView entity : entities)
+			forest.addVertex(entity);
+		
+		for(LinkView link : links)
+			forest.addEdge(link, link.getEntitySrc(), link.getEntityTar());
+	}
+	
+	
+	
+	
+	public void setTreeLayout() {
+		KKLayout<EntityView,LinkView> treeLayout = new KKLayout<EntityView,LinkView>(forest, new DistanceVisu(this));
+		treeLayout.setSize(new Dimension(1000, 800));
+		
+		for(EntityView entity : entities) {
+			entity.setCentre((int)treeLayout.getX(entity), (int)treeLayout.getY(entity));
+			entity.update();
+		}
+		
+		recentre();
+		
+//		for(LinkView link : links)
+//			link.update();
+		
+		repaint();
+		updatePreferredSize();
+	}
+	
+	
+	
+	
+	public Forest<EntityView, LinkView> getForest() {
+		return forest;
+	}
+
+
+
 	public void addLink(int position, LinkView link) {
 		if(link!=null && position<entities.size() && position>=0)
 			links.add(position, link);
@@ -218,9 +264,8 @@ public class MetamodelView extends JPanel implements Scrollable {
 		xMin = Double.MAX_VALUE;
 		yMin = Double.MAX_VALUE;
 
-		for(i=1; i<nbEntities; i++) {
+		for(i=0; i<nbEntities; i++) {
 			rec = entities.get(i).getBorders();
-
 			if(rec.getMinX() < xMin) xMin = rec.getMinX();
 			if(rec.getMinY() < yMin) yMin = rec.getMinY();
 		}

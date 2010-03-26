@@ -37,139 +37,6 @@ class RequiredEnumeration
 	attribute name: String
 }
 
-/*
-class Main {
-	attribute metamodelPruner:MetamodelPruner
-	reference reqClasses: bag RequiredClass[0..*]
-	reference reqProperties : bag RequiredProperty[0..*]
-	reference reqEnumerations : bag RequiredEnumeration[0..*]
-	reference topLevelClass : RequiredClass
-	attribute numberOfPasses: Integer
-
-	
-	operation getReqClass(className: String):RequiredClass is do
-		var tempClass : RequiredClass init RequiredClass.new
-
-		tempClass.name:=className
-		result:=tempClass
-	end
-	
-	operation getReqProp(propertyName: String, owningClassName: String ):RequiredProperty is do
-		var tempProperty: RequiredProperty init RequiredProperty.new
-
-		tempProperty.name:=propertyName
-		tempProperty.owningClassName:=owningClassName
-		result:=tempProperty
-	end
-	
-	
-	
-	operation initializePasses(): Void is do
-		//Set number of passes detection (useful for determining package hierarchy depth)
-		self.numberOfPasses := 3
-	end
-	
-	
-	
-	operation initializeRequiredProperties():Void is do
-		//Initialize manually or extract from a transformation
-		self.reqProperties.addAll(Bag<RequiredProperty>.new)
-	end
-	
-	
-	
-	operation initializeRequiredClasses(): Void is do
-		
-		//Initialize manually or extract from a transformation
-		self.reqClasses.addAll(Bag<RequiredClass>.new)
-		//Specify Top-Level Class
-		self.topLevelClass := RequiredClass.new
-		self.topLevelClass.name := "JComponent"
-		self.reqClasses.add(self.topLevelClass)
-		
-		
-		//Java: Required Classes
-		//self.reqClasses.add(self.getReqClass("Container"))
-		//self.reqClasses.add(self.getReqClass("JTextComponent"))
-		self.reqClasses.add(self.getReqClass("JFrame"))
-		self.reqClasses.add(self.getReqClass("JButton"))
-		self.reqClasses.add(self.getReqClass("JPanel"))
-		self.reqClasses.add(self.getReqClass("JCheckBox"))
-		self.reqClasses.add(self.getReqClass("JLabel"))
-		
-		//Java: Required Properties
-		
-		//Swing: Just keep name and containment relations
-        self.reqProperties.add(self.getReqProp("name","Component"))
-        self.reqProperties.add(self.getReqProp("component","Container"))
-	end
-	
-	
-	
-	operation main() : Void is do 
-		//self.searchRequiredClasses("platform:/resource/Cartier/testModels/UMLMARTE2ECORE/uml.km","platform:/resource/Cartier/testModels/UMLMARTE2ECORE/UMLProfile2Ecore.km")
-		self.prune("platform:/resource/MetamodelPruner/input/swing.km")
-	end
-	
-	
-	operation pruneMetamodel(metamodel : ModelingUnit, classDef : ClassDefinition) : Void is do
-		self.metamodelPruner := MetamodelPruner.new
-		self.initializeRequiredClasses
-		self.initializePasses
-		
-		self.metamodelPruner.headerNotice
-		
-		//Load Modelling Domain
-		self.metamodelPruner.inputKermetaMetamodel := metamodel
-		//Intiliaze with the required classes
-		self.metamodelPruner.initialize(self.reqClasses,self.reqProperties,self.reqEnumerations,self.numberOfPasses)
-		//Preprocess the metamodel
-		
-		if self.metamodelPruner.preprocess then
-			stdio.write("---Pre-processing Step---")
-			stdio.writeln("OK")
-		
-		
-			self.metamodelPruner.transform
-			
-	//		stdio.write("---Save Final Meta-model---")
-	//		metamodelPruner.save("platform:/resource/MetamodelPruner/outputModels/swing_pruned.km")
-		stdio.writeln("OK")
-		end
-	
-	end
-	
-
-	operation prune(metamodelURI:String):Void is do
-		
-		self.metamodelPruner:=MetamodelPruner.new
-		self.initializeRequiredClasses
-		self.initializePasses
-		
-		self.metamodelPruner.headerNotice
-		
-		//Load Modelling Domain
-		self.metamodelPruner.load(metamodelURI)
-		//Intiliaze with the required classes
-		self.metamodelPruner.initialize(self.reqClasses,self.reqProperties,self.reqEnumerations,self.numberOfPasses)
-		//Preprocess the metamodel
-		
-		if self.metamodelPruner.preprocess then
-			stdio.write("---Pre-processing Step---")
-			stdio.writeln("OK")
-		
-		
-			self.metamodelPruner.transform
-			
-			stdio.write("---Save Final Meta-model---")
-			metamodelPruner.save("platform:/resource/MetamodelPruner/outputModels/swing_pruned.km")
-		stdio.writeln("OK")
-		end
-	
-	end
-}
-*/
-
 
 
 class MetamodelPruner
@@ -200,7 +67,7 @@ class MetamodelPruner
 	reference numberOfPasses: Integer
 	attribute emptyPackages: bag Package[0..*]
 	operation headerNotice(): Void is do
-		stdio.writeln("Metamodel Pruner (Beta) Pruning Meta-model\n")
+//		stdio.writeln("Metamodel Pruner (Beta) Pruning Meta-model\n")
 	end
 	
 	
@@ -304,7 +171,7 @@ class MetamodelPruner
 	
 	operation preprocess(): Boolean is do
 		/* Accumulate All Kermeta objects in the metamodel */
-		stdio.writeln("Getting all packages, types and properties in the metamodel..")
+//		stdio.writeln("Getting all packages, types and properties in the metamodel..")
 		self.getKermetaObjects
 		var isExisting:Boolean init false
 		var canProceed:Boolean init true
@@ -317,12 +184,12 @@ class MetamodelPruner
 						isExisting:=true
 	
 						self.requiredKermetaMetaClasses.add(o.asType(ClassDefinition))
-						stdio.writeln(" The Class Definition " + c.name +" exists in the meta-model")
+					//	stdio.writeln(" The Class Definition " + c.name +" exists in the meta-model")
 					end
 				end
 			}	
 			if isExisting==false then
-				stdio.writeln(" The Class Definition " + c.name +" does not exist in the meta-model")
+			//	stdio.writeln(" The Class Definition " + c.name +" does not exist in the meta-model")
 				
 				canProceed:=false
 			end
@@ -333,12 +200,12 @@ class MetamodelPruner
 																			if o.asType(Enumeration).name==e.name then
 																				isExisting:=true
 																				self.requiredKermetaMetaEnumerations.add(o.asType(Enumeration))
-																				stdio.writeln(" The Enumeration Definition " + e.name +" exists in the meta-model")
+																		//		stdio.writeln(" The Enumeration Definition " + e.name +" exists in the meta-model")
 																			end
 																		end
 																	}	
 											if isExisting==false then
-												stdio.writeln(" The Enumeration Definition " + e.name +" does not exist in the meta-model")
+											//	stdio.writeln(" The Enumeration Definition " + e.name +" does not exist in the meta-model")
 												
 												canProceed:=false
 											end
@@ -353,7 +220,7 @@ class MetamodelPruner
 						if a.name==p.name and a.owningClass.name==p.owningClassName then
 							isExisting:=true
 							self.requiredKermetaMetaProperties.add(a.asType(Property))
-							stdio.writeln(" The Property " + p.owningClassName+"."+p.name +" exists in the meta-model")
+							//stdio.writeln(" The Property " + p.owningClassName+"."+p.name +" exists in the meta-model")
 						end
 					}
 				end
@@ -368,11 +235,11 @@ class MetamodelPruner
 				stdio.writeln(" Some required meta-concepts are not present in the meta-model") 
 				stdio.writeln("\t\tPre-processing Notification: Cannot proceed with pruning operation. All Meta-concepts Not Present.")
 				result:=false
-		else
+/*		else
 				stdio.writeln("\t\tPre-processing Notification: Can proceed with pruning operation. All Meta-concepts Present.")
 			
 				self.modelMetrics
-				result:=true
+				result:=true*/
 		end
 		result:=true
 	end
@@ -381,59 +248,57 @@ class MetamodelPruner
 	operation load(uri:String): Void is do
 		var repository : EMFRepository init EMFRepository.new
 		var resource : Resource init repository.createResource(uri,"http://www.kermeta.org/kermeta/1_2_0//kermeta")
-		stdio.write("---Loading Input Kermeta meta-model..")
 		resource.load
 		self.inputKermetaMetamodel ?= resource.one
-		stdio.writeln("OK")
 	end
 	
 	/*Transform Kermeta input meta-model to pruned output meta-model*/
 	operation transform(): Void is do
 	
-		stdio.writeln("---Step 1: Determine required classes and properties---")
+//		stdio.writeln("---Step 1: Determine required classes and properties---")
 			self.getRequiredConcepts
-			self.showRequiredConcepts
-		stdio.writeln("---Step 2.1: All Tags Removal Step---")
+//			self.showRequiredConcepts
+//		stdio.writeln("---Step 2.1: All Tags Removal Step---")
 		//This step is taken since we do not use tags in a declarative model
 			self.TagRemoval
-		stdio.writeln("---Step 2.2: All Operations Removal Step---")
+//		stdio.writeln("---Step 2.2: All Operations Removal Step---")
 		//This step is taken since we do not use operations in a declarative model
 			self.OperationRemoval
 		
-		stdio.write("---Step 3: Property Removal Step---")
+//		stdio.write("---Step 3: Property Removal Step---")
 			//self.TestPropertyRemoval("package")
 			//self.TestPropertyRemoval("ownedType")
 			self.PropertyRemoval
-		stdio.writeln("OK")
+//		stdio.writeln("OK")
 		
-		stdio.writeln("---Step 4: Class Removal Step---")
+//		stdio.writeln("---Step 4: Class Removal Step---")
 			//self.TestClassRemoval("Comment")
 			self.ClassRemoval
-		stdio.writeln("OK")
+//		stdio.writeln("OK")
 		
-		stdio.writeln("---Step 5: Enumeration Removal Step---")
+//		stdio.writeln("---Step 5: Enumeration Removal Step---")
 			self.EnumerationRemoval
-		stdio.writeln("OK")
+//		stdio.writeln("OK")
 		
-		stdio.writeln("---Step 6: Primitive Type Removal Step---")
+//		stdio.writeln("---Step 6: Primitive Type Removal Step---")
 			self.PrimitiveTypeRemoval
-		stdio.writeln("OK")
+//		stdio.writeln("OK")
 		
-		stdio.writeln("---Step 7: Package Removal Step---")
+//		stdio.writeln("---Step 7: Package Removal Step---")
 			self.EmptyPackageRemoval
-		stdio.writeln("OK")
+//		stdio.writeln("OK")
 		
 			
 		
-		stdio.writeln("Number of classes and properties in output metamodel")
-		self.modelMetrics
+//		stdio.writeln("Number of classes and properties in output metamodel")
+//		self.modelMetrics
 		
 		//stdio.writeln("Useless Classes")
 		//self.showUseLess
-		stdio.writeln("---Conserved Concepts---")
-		self.showRequiredConcepts
-		stdio.writeln("---End of Transformation---")	
-		
+//		stdio.writeln("---Conserved Concepts---")
+//		self.showRequiredConcepts
+//		stdio.writeln("---End of Transformation---")	
+		stdio.writeln("metamodel pruned.")
 	end
 	
 
@@ -962,12 +827,12 @@ class MetamodelPruner
 			 			}
 			 								
 			 			if removeProperty==true then								
-			 				stdio.writeln("Removing property "+prop.name+" of class "+ object.name +"...")
+			 				//stdio.writeln("Removing property "+prop.name+" of class "+ object.name +"...")
 			 				extern org::kermeta::ki::visual::view::ComponentView.onPruning(prop)
 			 					
 			 				if not prop.opposite.isVoid  then
 			 					if not prop.opposite.owningClass.isVoid then
-			 						stdio.writeln("Removing opposite property "+prop.opposite.name+" of class "+ prop.opposite.owningClass.name +"...")
+			 					//	stdio.writeln("Removing opposite property "+prop.opposite.name+" of class "+ prop.opposite.owningClass.name +"...")
 			 						extern org::kermeta::ki::visual::view::ComponentView.onPruning(prop.opposite)
 			 					end
 			 				end
@@ -1006,7 +871,7 @@ class MetamodelPruner
 						end 
 					
 						if removeClass then								
-					 		stdio.writeln("Removing Class "+object.asType(ClassDefinition).name+"...")
+					 	//	stdio.writeln("Removing Class "+object.asType(ClassDefinition).name+"...")
 					 		
 					 		extern org::kermeta::ki::visual::view::ComponentView.onPruning(object)
 						end
@@ -1041,7 +906,7 @@ class MetamodelPruner
 					end 
 				
 					if removePT==true then								
-				 		stdio.writeln("Removing Primitive Type "+object.asType(PrimitiveType).name+"...")
+				 	//	stdio.writeln("Removing Primitive Type "+object.asType(PrimitiveType).name+"...")
 				 		extern org::kermeta::ki::visual::view::ComponentView.onPruning(object)
 					end
 				end
@@ -1075,7 +940,7 @@ class MetamodelPruner
 				 	}
 				 
 				 if removeEnum==true then 
-						stdio.writeln("Removing Enumeration "+object.asType(Enumeration).name+"...")
+					//	stdio.writeln("Removing Enumeration "+object.asType(Enumeration).name+"...")
 						extern org::kermeta::ki::visual::view::ComponentView.onPruning(object)
 					end
 				end
@@ -1119,12 +984,12 @@ class MetamodelPruner
 			
 		end
 			if count==2 and not aPackage.nestedPackage.isEmpty then
-				stdio.writeln("Removing Package "+aPackage.name)
+			//	stdio.writeln("Removing Package "+aPackage.name)
 				extern org::kermeta::ki::visual::view::ComponentView.onPruning(aPackage)
 			end
 			
 			if count==1 and  aPackage.nestedPackage.isEmpty then
-				stdio.writeln("Removing Package "+aPackage.name)
+			//	stdio.writeln("Removing Package "+aPackage.name)
 				extern org::kermeta::ki::visual::view::ComponentView.onPruning(aPackage)
 			end
 			
@@ -1220,7 +1085,7 @@ class MetamodelPruner
 			}
 					
 		end
-		stdio.writeln("Total number of types and properties in package "+aPackage.name+" = "+packageObjects.size.toString)
+	//	stdio.writeln("Total number of types and properties in package "+aPackage.name+" = "+packageObjects.size.toString)
 		result:=packageObjects
 				
 	end

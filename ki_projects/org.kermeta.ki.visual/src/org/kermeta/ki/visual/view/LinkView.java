@@ -40,6 +40,18 @@ public abstract class LinkView extends ComponentView {
 	
 	
 	
+	public EntityView getEntitySrc() {
+		return entitySrc;
+	}
+
+
+
+	public EntityView getEntityTar() {
+		return entityTar;
+	}
+
+
+
 	@Override
 	public void paint(Graphics2D g) {
 		if(visible && entitySrc.visible && entityTar.visible) {
