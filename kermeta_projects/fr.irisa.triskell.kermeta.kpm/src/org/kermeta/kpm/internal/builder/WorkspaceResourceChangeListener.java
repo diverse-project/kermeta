@@ -90,7 +90,7 @@ public class WorkspaceResourceChangeListener implements IResourceChangeListener,
 
 	protected boolean hasResourceToProcess(IResourceDelta delta) {
 		
-		for(String pattern : KPMPreferenceHelper.getExcludedFilePatterns()){
+		for(String pattern : KPMPreferenceHelper.getIncludedFilePatterns()){
 			if(delta.getResource().getName().matches(EscapeChars.forSimpleRegex(pattern)))
 				return true;
 		}
