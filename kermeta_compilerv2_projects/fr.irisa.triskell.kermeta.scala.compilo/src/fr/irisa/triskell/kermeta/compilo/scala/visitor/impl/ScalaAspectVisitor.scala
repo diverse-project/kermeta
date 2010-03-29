@@ -88,7 +88,21 @@ class ScalaAspectPackageVisitorRunnable extends IVisitor with RichAspectImplicit
                                                 par.generateBindingParamerterClass(a.asInstanceOf[Class],res1)
 						i = i + 1
 					}
-				} 
+				}
+
+                                //GENERATE METHOD SIGNATURE
+                                res1.append("{\n")
+                                par.getOwnedOperation.foreach{op : Operation =>
+                                  op.generateSignature(res1)
+                                }
+                                res1.append("}\n")
+                                /*
+                                par.getOwnedAttribute.foreach{at : Attribute
+
+                                }
+                                */
+                                //GENERATE ATTRIBUTE SIGNATURE
+
 				//res1.append("trait " + par.getName + " extends "+superQualifiedName+" with fr.irisa.triskell.kermeta.scala.framework.language.structure.ObjectAspect")
 				Util.generateFile(genpackageName.toString, par.getName, res1.toString())
 			}

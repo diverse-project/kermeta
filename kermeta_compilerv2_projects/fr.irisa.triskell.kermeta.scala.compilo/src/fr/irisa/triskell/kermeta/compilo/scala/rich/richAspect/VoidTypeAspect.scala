@@ -11,7 +11,7 @@ import java.util._
 trait VoidTypeAspect extends RichAspectImplicit with ObjectAspect {
 
 	override def generateScalaCode(res : StringBuilder) : Unit = {
-		res.append("Void")
+		res.append("kermeta.standard.Void")
 	}
 
 }
