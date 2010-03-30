@@ -194,7 +194,7 @@ trait PropertyAspect extends RichAspectImplicit with ObjectAspect with LogAspect
     }
 	
     def generateScalSet(res : StringBuilder,prefix:String) : Unit ={
-        if (!this.isIsReadOnly()&& !this.isIsDerived()){
+        if (!this.isIsReadOnly()){
             var currentname : String = this.getName
             
           /*  if ("class".equals(currentname)){
@@ -205,7 +205,7 @@ trait PropertyAspect extends RichAspectImplicit with ObjectAspect with LogAspect
             //println(this.getName)
             res.append("def "+GlobalConfiguration.scalaPrefix)
             res.append(this.getName+"_=(")
-            res.append("arg : ")
+            res.append("value : ")
             getListorType(res)
             res.append(")={")
             if (this.getGetterBody == null  && this.getSetterBody==null){
@@ -216,9 +216,9 @@ trait PropertyAspect extends RichAspectImplicit with ObjectAspect with LogAspect
                         currentname =getUmlExtension
                     }
                     res.append("this."+prefix+"get" + currentname.substring(0,1).toUpperCase + currentname.substring(1,currentname.size) + "().clear\n")
-                    res.append("this."+prefix+"get" + currentname.substring(0,1).toUpperCase + currentname.substring(1,currentname.size) + "().addAll(arg)\n")
+                    res.append("this."+prefix+"get" + currentname.substring(0,1).toUpperCase + currentname.substring(1,currentname.size) + "().addAll(value)\n")
                 }else{
-                    res.append( "this."+prefix+"set" + currentname.substring(0,1).toUpperCase + currentname.substring(1,currentname.size) + "(arg)")
+                    res.append( "this."+prefix+"set" + currentname.substring(0,1).toUpperCase + currentname.substring(1,currentname.size) + "(value)")
                 }
             }else{
                 this.getSetterBody.generateScalaCode(res)
