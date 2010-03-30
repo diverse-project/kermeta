@@ -203,8 +203,8 @@ public class TestOCLParser {
 		//String baseDir = "/udd/barais/runtime-New_configuration/fr.irisa.triskell.kermeta.ocl/";
 		/*String baseDir = "/home/mskipper/runtime-EclipseApplication/fr.irisa.triskell.kermeta.ocl/";
 		for (String fn: filenames){*/
-			String oclSourceFileName = "ocl/" + "1" + ".ocl";
-			String xmiOutputFileName = "test/" + "1" + ".xmi";
+			String oclSourceFileName = "ocl/" + "c04" + ".ocl";
+			String xmiOutputFileName = "test/" + "c04" + ".xmi";
 			System.out.println("Processing: " + oclSourceFileName + " --> " + xmiOutputFileName  );
 			try {
 				run(oclSourceFileName, xmiOutputFileName);
