@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore._
 import kermeta.standard.JavaConversions._
 import kermeta.standard.PrimitiveConversion._
  
-
-trait Exception extends java.lang.Throwable with fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect{
+trait Exception extends ExceptionAspect{}
+trait ExceptionAspect extends java.lang.Throwable with fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.ObjectAspect{
 var message:String=null;
 var nestedException:Exception=null; 
 var stackTrace:String=null;
@@ -45,42 +45,116 @@ def ScalastackTrace_=(arg : java.lang.String)={stackTrace  = arg}
    def eNotify( notification:org.eclipse.emf.common.notify.Notification):Unit=null;
    
 }  
-trait RuntimeError extends Exception{
+trait RuntimeErrorAspect extends Exception{
 var expression:Expression=null;
 }
-trait CallOnVoidTarget extends Exception{
+trait RuntimeError extends RuntimeErrorAspect{
 }
-trait TypeCastError extends Exception{
+
+trait CallOnVoidTargetAspect extends Exception{
 }
-trait NotImplementedException extends Exception{
+trait CallOnVoidTarget extends CallOnVoidTargetAspect{
 }
-trait UpperBoundReachedError extends Exception{
+
+
+trait TypeCastErrorAspect extends Exception{
 }
-trait AbstractClassInstantiationError extends Exception{
+
+trait TypeCastError extends TypeCastErrorAspect{
 }
-trait IncompatibleTypeError extends Exception{
+
+
+trait NotImplementedExceptionAspect extends Exception{
 }
-trait DivisionByZero extends Exception{
+
+trait NotImplementedException extends NotImplementedExceptionAspect{
 }
-trait OverflowError extends Exception{
+
+
+trait UpperBoundReachedErrorAspect extends Exception{
 }
-trait VoidOperandError extends Exception{
+
+trait UpperBoundReachedError extends UpperBoundReachedErrorAspect{
 }
-trait StringIndexOutOfBound extends Exception{
+
+
+trait AbstractClassInstantiationErrorAspect extends Exception{
 }
-trait StringFormatException extends Exception{
+
+trait AbstractClassInstantiationError extends AbstractClassInstantiationErrorAspect{
 }
-trait IndexOutOfBound extends Exception{
+
+
+trait IncompatibleTypeErrorAspect extends Exception{
 }
-trait EmptyCollection extends Exception{
+
+trait IncompatibleTypeError extends IncompatibleTypeErrorAspect{
 }
-trait IteratorIsOff extends Exception{
+
+
+
+trait DivisionByZeroAspect extends Exception{
 }
-trait IOException extends Exception{
+
+trait DivisionByZero extends DivisionByZeroAspect{
 }
-trait FileNotFoundException extends Exception{
+
+
+trait OverflowErrorAspect extends Exception{
 }
-trait ConstraintViolatedException extends Exception{
+trait OverflowError extends OverflowErrorAspect{
+}
+
+
+trait VoidOperandErrorAspect extends Exception{
+}
+trait VoidOperandError extends VoidOperandErrorAspect{
+}
+
+
+trait StringIndexOutOfBoundAspect extends Exception{
+}
+trait StringIndexOutOfBound extends StringIndexOutOfBoundAspect{
+}
+
+
+trait StringFormatExceptionAspect extends Exception{
+}
+trait StringFormatException extends StringFormatExceptionAspect{
+}
+
+
+trait IndexOutOfBoundAspect extends Exception{
+}
+trait IndexOutOfBound extends IndexOutOfBoundAspect{
+}
+
+
+trait EmptyCollectionAspect extends Exception{
+}
+trait EmptyCollection extends EmptyCollectionAspect{
+}
+
+
+trait IteratorIsOffAspect extends Exception{
+}
+trait IteratorIsOff extends IteratorIsOffAspect{
+}
+
+
+trait IOExceptionAspect extends Exception{
+}
+trait IOException extends IOExceptionAspect{
+}
+
+
+trait FileNotFoundExceptionAspect extends Exception{
+}
+trait FileNotFoundException extends FileNotFoundExceptionAspect{
+}
+
+
+trait ConstraintViolatedExceptionAspect extends Exception{
 var constraintAppliedTo:org.eclipse.emf.ecore.EObject = None.get;
 var failedConstraint:Constraint= None.get;
 def ScalaconstraintAppliedTo:org.eclipse.emf.ecore.EObject = constraintAppliedTo
@@ -89,36 +163,80 @@ def ScalafailedConstraint:Constraint = failedConstraint
 def ScalafailedConstraint_=(arg:Constraint) = {failedConstraint = arg}
 
 }
-trait ConstraintViolatedPre extends Exception{
-}
-trait ConstraintViolatedPost extends Exception{
-}
-trait ConstraintViolatedInv extends Exception{
-}
-trait ResourceLoadException extends Exception{
-}
-trait ResourceSaveException extends Exception{
-var failedWhileSaving:Object= None.get; 
-}
-trait ResourceMixedLevelsException extends Exception{
-}
-trait ResourceCreateException extends Exception{
-}
-trait ResourceUnconformityException extends Exception{
-}
-trait UnregisteredMetamodelException extends Exception{
-}
-trait DynamicExpressionException extends Exception{
+trait ConstraintViolatedException extends ConstraintViolatedExceptionAspect{
 }
 
-trait ConstraintsDiagnostic extends Exception{
+
+
+trait ConstraintViolatedPreAspect extends Exception{
+}
+trait ConstraintViolatedPre extends ConstraintViolatedPreAspect{
+}
+
+
+trait ConstraintViolatedPostAspect extends Exception{
+}
+trait ConstraintViolatedPost extends ConstraintViolatedPostAspect{
+}
+
+
+trait ConstraintViolatedInvAspect extends Exception{
+}
+
+trait ConstraintViolatedInv extends ConstraintViolatedInvAspect{
+}
+
+
+trait ResourceLoadExceptionAspect extends Exception{
+}
+trait ResourceLoadException extends ResourceLoadExceptionAspect{
+}
+
+
+trait ResourceSaveExceptionAspect extends Exception{
+var failedWhileSaving:Object= None.get; 
+}
+trait ResourceSaveException extends ResourceSaveExceptionAspect{
+}
+
+
+trait ResourceMixedLevelsExceptionAspect extends Exception{
+}
+trait ResourceMixedLevelsException extends ResourceMixedLevelsExceptionAspect{
+}
+
+
+trait ResourceCreateExceptionAspect extends Exception{
+}
+trait ResourceCreateException extends ResourceCreateExceptionAspect{
+}
+
+
+trait ResourceUnconformityExceptionAspect extends Exception{
+}
+trait ResourceUnconformityException extends ResourceUnconformityExceptionAspect{
+}
+
+
+trait UnregisteredMetamodelExceptionAspect extends Exception{
+}
+trait UnregisteredMetamodelException extends UnregisteredMetamodelExceptionAspect{
+}
+
+
+trait DynamicExpressionExceptionAspect extends Exception{
+}
+trait DynamicExpressionException extends DynamicExpressionExceptionAspect{
+}
+
+trait ConstraintsDiagnosticAspect extends Exception{
     
     var setConstraints : java.util.List[ConstraintViolatedInv] = _
 	
 	/* Initialize */
 	def initialize() : ConstraintsDiagnostic={
             setConstraints = new java.util.ArrayList[ConstraintViolatedInv]
-		return this;
+		return this.asInstanceOf[ConstraintsDiagnostic];
         }
 	
 	/* Adds a ConstraintViolatedInv object to setConstraints */	
@@ -134,6 +252,13 @@ trait ConstraintsDiagnostic extends Exception{
 		
 		
 	}
+
+
 }
+
+trait ConstraintsDiagnostic extends ConstraintsDiagnosticAspect{
+
+}
+
 
 
