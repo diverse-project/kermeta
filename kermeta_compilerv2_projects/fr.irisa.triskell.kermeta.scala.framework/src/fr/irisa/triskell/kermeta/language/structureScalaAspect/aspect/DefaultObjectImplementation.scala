@@ -8,5 +8,6 @@ trait DefaultObjectImplementation extends fr.irisa.triskell.kermeta.language.str
 	
 	def getOwnedTags():org.eclipse.emf.common.util.EList[fr.irisa.triskell.kermeta.language.structure.Tag]=ownedTags;
 	def getTag():org.eclipse.emf.common.util.EList[fr.irisa.triskell.kermeta.language.structure.Tag]=tags;
+        //TODO
 }
  

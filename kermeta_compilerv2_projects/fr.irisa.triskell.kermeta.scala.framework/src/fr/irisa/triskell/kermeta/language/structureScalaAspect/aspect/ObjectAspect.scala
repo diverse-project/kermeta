@@ -17,7 +17,7 @@ trait ObjectAspect extends EObject  with Contracted {
     //override def equals(o : Any) : Boolean = o == this /*TODO*/
     def isNotEqual(o : Any) : Boolean = !equals(o)
     def isKindOf(cl : EClass) : Boolean = this.eClass().equals(cl)
-    def get(prop : fr.irisa.triskell.kermeta.language.structure.Property) :Any= {return this.getClass().getMethod("Scala"+prop.getName).invoke(this)}
+    def get(prop : fr.irisa.triskell.kermeta.language.structure.Property) :fr.irisa.triskell.kermeta.language.structure.Object= {return this.getClass().getMethod("Scala"+prop.getName).invoke(this).asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object]}
     def set(prop : fr.irisa.triskell.kermeta.language.structure.Property,o : java.lang.Object) = {
         var m : java.lang.reflect.Method = null
         m = this.getClass().getMethods.filter(m1=> m1.getName.equals("Scala"+prop.getName+"_$eq")).apply(0)
@@ -28,6 +28,9 @@ trait ObjectAspect extends EObject  with Contracted {
         }
 
     }
+
+    def containingResource() : kermeta.persistence.Resource ={null}
+
     def isSet(prop : EStructuralFeature) =  this.eIsSet(prop)
     def unset(prop : EStructuralFeature) = this.eUnset(prop)
     def oid() : Int = this.hashCode() /*TODO*/
