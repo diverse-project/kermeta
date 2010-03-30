@@ -1,0 +1,25 @@
+/* $Id:$ 
+ * Creation : March 30, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "test::Main"
+@mainOperation "main"
+
+
+package test;
+
+
+require kermeta
+
+using kermeta::language::structure
+class Main
+{
+	operation main() : Void is do 
+		
+		var cl : Class init Main
+		stdio.writeln(cl.getMetaClass.toString)
+	end
+}
