@@ -1,0 +1,12 @@
+package sample
+
+context Dinheiro::getB(a: Moeda, b: Boolean): B
+	pre nome1: a.valor > 0.0
+	pre nome2: self.employee->select( e : Personnel::Person | e.age > 45)->size()>0
+	post poscondicao: self.ab = self.ab@pre - 1
+	post resultado: result = a 
+	post kindof: self.owner.oclIsKindOf (Personnel::Person) implies self.owner.oclAsType(Personnel::Person).forename <> 'duprie'
+	post testfirst: self.company ->first().employee.forename
+
+	
+endpackage
