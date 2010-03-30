@@ -2,6 +2,7 @@ package fr.irisa.triskell.kermeta.compilo.scala.visitor.impl
 
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
 import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
+import org.antlr.stringtemplate.StringTemplate
 import scala.collection.JavaConversions._
 import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.language._
@@ -84,9 +85,12 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		
 		
     var mainClassDef = par.eAllContents.filter{e=>e.isInstanceOf[ClassDefinition] }.filter(e=> e.asInstanceOf[ClassDefinition].getName.equals(className) ).toList.first
-    var mainOperationSize = mainClassDef.asInstanceOf[ClassDefinition].getOwnedOperation.filter{e=>e.getName.equals(mainOperation)}.first.asInstanceOf[Operation].getOwnedParameter.size
-		
-
+    var mainOperationSize = 0
+    try{
+        mainClassDef.asInstanceOf[ClassDefinition].getOwnedOperation.filter{e=>e.getName.equals(mainOperation)}.first.asInstanceOf[Operation].getOwnedParameter.size
+    } catch {
+        case e: java.util.NoSuchElementException => {}
+    }
 		
     //TODO gérer le cas des package venant d'ecore
     var res :StringBuilder= new StringBuilder
@@ -148,8 +152,8 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		
     res.append("\n}\n}")
 		
-		
     Util.generateFile("runner", "MainRunner", res.toString())
+        this.genetateUtilObject
 		
     par.getPackages().foreach(p => p.accept(this) )
   }
@@ -299,5 +303,21 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
     implicitDef append "}\n"
     Util.generateFile(GlobalConfiguration.frameworkGeneratedPackageName, GlobalConfiguration.implicitConvTraitName, implicitDef.toString())
   }
+
+    def genetateUtilObject() = {
+        var template = new StringTemplate("package scalaUtil\n object Util {\n    def getMetaClass(t:String):fr.irisa.triskell.kermeta.language.structure.Class={\n "+
+                                          "var cd : fr.irisa.triskell.kermeta.language.structure.ClassDefinition =   kermeta.utils.ReflexivityLoader.getMetaClass(t);\n"+
+                                          "if (cd !=null){\n"+
+                                          "            var cl = ScalaAspect.fr.irisa.triskell.kermeta.language.structure. RichFactory.createClass\n"+
+                                          "            cl.setTypeDefinition(cd)\n"+
+                                          "          return cl\n"+
+                                          "        }else\n"+
+                                          "            return null;\n}\n}\n")
+
+               Util.generateFile("scalaUtil","Util", template.toString)
+
+
+    }
+
 	
 }
