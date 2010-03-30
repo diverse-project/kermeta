@@ -50,7 +50,7 @@ class OCLDROOLSPrinter
     operation main(): Void is
 		do
 				//self.generateOCL("../../ocl/speedsDepTest.xmi", "../../ocl/speedsL1.ecore", "speedsDepTest.kmt")
-				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl/test/6.xmi",
+				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl/test/c04.xmi",
 				"test.drl")//"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/01.kmt")
 	    end
 	     

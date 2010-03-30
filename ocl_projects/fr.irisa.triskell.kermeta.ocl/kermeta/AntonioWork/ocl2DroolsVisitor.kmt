@@ -21,6 +21,7 @@ require "KermetaHelper.kmt"
 
 require "StructType.kmt"
 require "TreeRules.kmt"
+require "VariableType.kmt"
     
 using kermeta::standard
 using kermeta::exceptions
@@ -51,11 +52,42 @@ using qualifiedNames
 		
 		reference treeRules: TreeRules
 		
+		reference contextName: String
+		
+		reference listVariableType: Sequence<VariableType>
+		
 		operation initializeAttributes() : Void is
 			do
 				counterVar := 1
 				
 				stackStructType :=  Stack<StructType>.new
+				
+				listVariableType := Sequence<VariableType>.new
+			end
+			
+		operation isOCLOperation(operationName: String) : Boolean is
+			do
+				var listOCLOperation : Set<String> init Set<String>.new
+				
+				//definition of the OCL operations
+				listOCLOperation.add("oclIsNew")
+				listOCLOperation.add("oclIsUndefined")
+				listOCLOperation.add("oclIsInvalid")
+				listOCLOperation.add("oclIsTypeOf")
+				listOCLOperation.add("oclIsKindOf")
+				listOCLOperation.add("oclIsInState")
+				listOCLOperation.add("hasReturned")
+				listOCLOperation.add("isSignalSent")
+				listOCLOperation.add("isOperationCall")
+				
+				listOCLOperation.add("oclAsType")
+				
+				if (listOCLOperation.exists{s| s == operationName}) then
+					result := true
+				else
+					result := false
+				end
+				
 			end
 			
 		operation writeRules(ruleName: SimpleNameCS, contextName: String ) is
@@ -101,8 +133,8 @@ using qualifiedNames
 						
 						if ( not structType.nameElement.isVoid() ) then
 							stdio.write("name == \"")
-							if ( stackStructType.size() == 0 ) then
-								stdio.write(contextName) //visitable.pathNameCS.sequenceOfNames.each{p| stdio.write(p)}
+							if ( stackStructType.size() == 0 and structType.nameElement == "self") then
+								stdio.write(contextName)
 								stdio.write("\"")
 							else	
 								stdio.write(structType.nameElement + "\"")
@@ -156,52 +188,61 @@ using qualifiedNames
 				var structType1 : StructType init StructType.new
 				var structType2 : StructType init StructType.new
 				
-				//if it's a primitive variable, it's not a true child
-				// then we remove the current child and use the brother
-				treeRules := treeRules.parentNode
-				treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
-				if ( treeRules.childNode.size() > 0 ) then
-					treeRules := treeRules.childNode.at(treeRules.childNode.size() - 1)
+				
+				if ( not treeRules.parentNode.isVoid() ) then
+					//if it's a primitive variable, it's not a true child
+					// then we remove the current child and use the brother
+					treeRules := treeRules.parentNode
+					treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
+					if ( treeRules.childNode.size() > 0 ) then
+						treeRules := treeRules.childNode.at(treeRules.childNode.size() - 1)
+					end
 				end
 
 				stackStructType := treeRules.stackStructType
 				
 				
 				//stackStructType := treeRules.parentNode.childNode.at(treeRules.childNode.size() - 1).stackStructType
-				if ( stackStructType.size()>=1 ) then
+				if ( stackStructType.size() > 0 ) then
 					structType1 := stackStructType.pop()
-				end
-				if ( stackStructType.size()>=1 ) then
-					structType2 := stackStructType.pop()
-				end
-		
 				
-				if ( structType1.typeElement == "EOperation" ) then
-				
-					structType1.nextElement := "EType"
-					structType1.relation := "=="
-						
-					structType2.nextElement := "EAllOperations"
-					structType2.relation := "contains"
+					if ( stackStructType.size()> 0 ) then
+						structType2 := stackStructType.pop()
+					end
+			
 					
-				else
-					structType1.typeElement := "EAttribute"
-					structType1.nextElement := "EAttributeType"
-					structType1.relation := "=="
+					if ( structType1.typeElement == "EOperation" ) then
+					
+						structType1.nextElement := "EType"
+						structType1.relation := "=="
+							
+						structType2.nextElement := "EAllOperations"
+						structType2.relation := "contains"
 						
-					structType2.nextElement := "EAllAttributes"
-					structType2.relation := "contains"
+					else
+						structType1.typeElement := "EAttribute"
+						structType1.nextElement := "EAttributeType"
+						structType1.relation := "=="
+							
+						structType2.nextElement := "EAllAttributes"
+						structType2.relation := "contains"
+					end
+					
+					if ( structType2.typeElement.isVoid() ) then
+						structType2.typeElement := "EClass"
+					end
+	
+					stackStructType.push(structType2)
+					stackStructType.push(structType1)
+					
+					//stacks the statement "EDataType"
+					structType1 := StructType.new
+					structType1.typeElement := "EDataType"
+					structType1.nameElement := typeVar
+					
+					stackStructType.push(structType1)
+				
 				end
-
-				stackStructType.push(structType2)
-				stackStructType.push(structType1)
-				
-				//stacks the statement "EDataType"
-				structType1 := StructType.new
-				structType1.typeElement := "EDataType"
-				structType1.nameElement := typeVar
-				
-				stackStructType.push(structType1)
 			end 
 
 
@@ -262,9 +303,19 @@ using qualifiedNames
 				visitable.prePostOrBodyDecls.each{e|e.accept(self)}
 			end
   
+  
 		method visitPrePostOrBodyDeclCS(visitable : PrePostOrBodyDeclCS) : Void is
 			do
-				stdio.writeln("Pass visitPrePostOrBodyDeclCS")
+				stackStructType := Stack<StructType>.new
+			
+				treeRules := TreeRules.new
+				treeRules.stackStructType := stackStructType
+			
+				visitable.expressionCS.accept(self)
+				
+				//(ruleName, contextName)
+				writeRules( visitable.simpleNameCS, contextName )
+				
 			end
 
 		
@@ -273,9 +324,7 @@ using qualifiedNames
 			do
 				var structType : StructType init StructType.new
 				
-				stdio.writeln("Pass visitOperationCS")
 			
-				
 				structType.nameElement := visitable.pathNameCS.sequenceOfNames.at( visitable.pathNameCS.sequenceOfNames.size() - 1 )
 				structType.typeElement := "EClass"
 				structType.nextElement := "EAllOperations"
@@ -291,18 +340,14 @@ using qualifiedNames
 				
 				stackStructType.push(structType)
 				
+				visitable.parameters.each{e| e.accept(self)}
+				
 				visitable.typeCS.accept(self)
 				
+				contextName := visitable.pathNameCS.sequenceOfNames.at( visitable.pathNameCS.sequenceOfNames.size() - 1 )
+				
 				//(ruleName, contextName)
-				writeRules(visitable.simpleNameCS, visitable.pathNameCS.sequenceOfNames.at( visitable.pathNameCS.sequenceOfNames.size() - 1 ))
-				
-				visitable.pathNameCS.sequenceOfNames.each{e |stdio.writeln("pathName: " + e)}
-				
-				stdio.writeln("SimpleName: " + visitable.simpleNameCS.~value)
-				
-				if ( visitable.typeCS.isKindOf(PathNameCS) ) then
-					visitable.typeCS.asType(PathNameCS).sequenceOfNames.each{e |stdio.writeln("pathName 2: " + e)} 
-				end
+				writeRules(visitable.simpleNameCS, contextName )
 			end
 
 		method visitInitOrDerValueCS(visitable : InitOrDerValueCS) : Void is
@@ -342,7 +387,28 @@ using qualifiedNames
 
 		method visitPathNameCS(visitable : PathNameCS) : Void is
 			do
+				var structType : StructType init StructType.new
+
+			
+				if ( stackStructType.size()>=1 ) then
+					structType := stackStructType.pop()
+				end
 				
+				
+				if ( structType.typeElement == "EOperation" ) then
+				
+					structType.nextElement := "EType"
+					structType.relation := "=="
+					
+					stackStructType.push(structType)
+					
+					structType := StructType.new
+					
+					structType.nameElement := visitable.sequenceOfNames.at( visitable.sequenceOfNames.size() - 1 )
+					structType.typeElement := "EClass"
+					
+					stackStructType.push(structType)
+				end
 			end
           
 		method visitSimpleNameCS(visitable : SimpleNameCS) : Void is
@@ -354,7 +420,19 @@ using qualifiedNames
 		
 		method visitPrimitiveTypeCS(visitable : PrimitiveTypeCS) : Void is
 			do
-			
+				if ( visitable.~value == "Integer" ) then
+					writePrimitiveVariable("EInt")
+				else if ( visitable.~value == "String" ) then
+					writePrimitiveVariable("EString")
+				else if ( visitable.~value == "Boolean" ) then
+					writePrimitiveVariable("EBoolean")
+				else if ( visitable.~value == "Real" ) then
+					writePrimitiveVariable("EFloat")
+				end
+				end
+				end
+				end
+
 			end
 
 		method visitTupleTypeCS(visitable : TupleTypeCS) : Void is
@@ -374,6 +452,14 @@ using qualifiedNames
 			 
 		method visitVariableCS(visitable : VariableCS) : Void is
 			do
+    			var variableType : VariableType init VariableType.new
+    			
+    			if ( visitable.typeCS.isKindOf(PathNameCS) ) then
+					variableType.variable := visitable.name
+					variableType.type := visitable.typeCS.asType(PathNameCS).sequenceOfNames.at(visitable.typeCS.asType(PathNameCS).sequenceOfNames.size() - 1)
+				
+					listVariableType.add(variableType)
+				end
     			
 			end
 
@@ -512,9 +598,11 @@ using qualifiedNames
 		method visitVariableExpCS(visitable : VariableExpCS) : Void is
 			do
 				var structType : StructType init StructType.new
+				var typeVariable : String init ""
 			
-				structType.nameElement := visitable.simpleNameCS.~value
+				
 				if ( visitable.simpleNameCS.~value == "self" ) then
+					structType.nameElement := visitable.simpleNameCS.~value
 					structType.typeElement := "EClass"
 					structType.nextElement := "EStructuralFeatures"
 					structType.relation := "contains"
@@ -525,6 +613,21 @@ using qualifiedNames
 					
 					stackStructType.push(structType)
 
+				else
+				
+					listVariableType.each{ e |  
+							if ( e.variable == visitable.simpleNameCS.~value ) then
+								typeVariable := e.type
+							end
+						}
+					if ( typeVariable != "" ) then
+						structType.nameElement := typeVariable
+						structType.typeElement := "EClass"
+						structType.nextElement := "EStructuralFeatures"
+						structType.relation := "contains"
+			
+						stackStructType.push(structType)
+					end
 				end
 
 			end
@@ -563,6 +666,7 @@ using qualifiedNames
 		method visitOperationCallExpCS(visitable : OperationCallExpCS) : Void is
 			do
 				var structType : StructType init StructType.new
+				var canAccesArguments: Boolean init true
 
 				
 				treeRules.childNode := Sequence<TreeRules>.new
@@ -585,8 +689,10 @@ using qualifiedNames
 					visitable.source.accept(self)
 					
 					
-					//To not print the comparison symbols like >, <= etc.
-					if ( visitable.simpleNameCS.type == SimpleTypeEnum.identifier ) then
+					//To not print the comparison symbols like >, <= etc. and operations from OCL collection
+					if ( visitable.simpleNameCS.type == SimpleTypeEnum.identifier and 
+						visitable.accessor != DotOrArrowEnum.arrow and
+						not isOCLOperation(visitable.simpleNameCS.~value)) then
 						//If the last is not Class, it use the new
 						if ( stackStructType.size() == 1 ) then
 							structType := stackStructType.pop()
@@ -610,65 +716,83 @@ using qualifiedNames
 					
 					
 					//navigate to up, returning
-					treeRules := treeRules.parentNode
+					if ( not treeRules.parentNode.isVoid() ) then
+						treeRules := treeRules.parentNode
 					
-					
-					//Remove the last element if no childs and its stack is void
-					if  (stackStructType.size() == 0) then
-						if (treeRules.childNode.at(treeRules.childNode.size() - 1).childNode.isVoid()) then
-							treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
-						else
-							if (treeRules.childNode.at(treeRules.childNode.size() - 1).childNode.size() == 0) then
-								treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
-							end
-						end
 						
+						//Remove the last element if no childs and its stack is void
+						if  (stackStructType.size() == 0) then
+							if (treeRules.childNode.at(treeRules.childNode.size() - 1).childNode.isVoid()) then
+								treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
+							else
+								if (treeRules.childNode.at(treeRules.childNode.size() - 1).childNode.size() == 0) then
+									treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
+								end
+							end
+							
+						end
+					
 					end
 					
 					
 					stackStructType := treeRules.stackStructType
 				end
 				
+				//When it's a operation of collection (like ...->size() == 0 )
+				// we can't acces the right side of operation
+				if ( visitable.simpleNameCS.type != SimpleTypeEnum.identifier) then
+					if ( visitable.source.isKindOf(OperationCallExpCS) ) then
+						if ( visitable.source.asType(OperationCallExpCS).accessor == DotOrArrowEnum.arrow ) then
+							canAccesArguments := false
+						end
+					end
+				end
 
-				from var i : Integer init 0
-				until i== visitable.arguments.size()
-				loop
-					
-					treeRules.childNode.add( TreeRules.new )
-					
-					//fills the parent node
-					treeRules.childNode.at(treeRules.childNode.size() - 1).parentNode := treeRules
-					
-					//navigate to down the tree of expressions
-					treeRules := treeRules.childNode.at(treeRules.childNode.size() - 1)
-					
-					treeRules.stackStructType := Stack<StructType>.new
-					treeRules.stackStructType.addAll(stackStructType)
-					stackStructType := treeRules.stackStructType
-					
-					visitable.arguments.at(i).accept(self)
-					
-					//navigate to up, returning
-					treeRules := treeRules.parentNode
-					
-					
-					//Remove the last element if no childs and its stack is void
-					if  (stackStructType.size() == 0) then
-						if (treeRules.childNode.at(treeRules.childNode.size() - 1).childNode.isVoid()) then
-							treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
-						else
-							if (treeRules.childNode.at(treeRules.childNode.size() - 1).childNode.size() == 0) then
-								treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
+				
+				if ( canAccesArguments ) then
+
+					from var i : Integer init 0
+					until i== visitable.arguments.size()
+					loop
+	
+						treeRules.childNode.add( TreeRules.new )
+						
+						//fills the parent node
+						treeRules.childNode.at(treeRules.childNode.size() - 1).parentNode := treeRules
+						
+						//navigate to down the tree of expressions
+						treeRules := treeRules.childNode.at(treeRules.childNode.size() - 1)
+						
+						treeRules.stackStructType := Stack<StructType>.new
+						treeRules.stackStructType.addAll(stackStructType)
+						stackStructType := treeRules.stackStructType
+						
+						visitable.arguments.at(i).accept(self)
+						
+						//navigate to up, returning
+						if ( not treeRules.parentNode.isVoid() ) then
+							treeRules := treeRules.parentNode
+	
+						
+							//Remove the last element if no childs and its stack is void
+							if  (stackStructType.size() == 0) then
+								if (treeRules.childNode.at(treeRules.childNode.size() - 1).childNode.isVoid()) then
+									treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
+								else
+									if (treeRules.childNode.at(treeRules.childNode.size() - 1).childNode.size() == 0) then
+										treeRules.childNode.removeAt(treeRules.childNode.size() - 1)
+									end
+								end
+								
 							end
+						
 						end
 						
+						stackStructType := treeRules.stackStructType
+						
+						i := i + 1
 					end
 					
-					
-					
-					stackStructType := treeRules.stackStructType
-					
-					i := i + 1
 				end
 				
 				//If not exists a rule expression for this node, and it has just one or zero child, this node is cut
@@ -682,6 +806,35 @@ using qualifiedNames
 						treeRules := treeRules.childNode.at(0)
 						stackStructType := treeRules.stackStructType
 					end
+				
+				
+				end
+				
+				if ( visitable.simpleNameCS.~value == "oclAsType" ) then
+					if ( treeRules.childNode.isVoid() ) then
+						treeRules := treeRules.parentNode
+					end
+					
+					treeRules.childNode.add(TreeRules.new)
+					
+					//fills the parent node
+					treeRules.childNode.at(treeRules.childNode.size() - 1).parentNode := treeRules
+					
+					//navigate to down the tree of expressions
+					treeRules := treeRules.childNode.at(treeRules.childNode.size() - 1)
+					
+					treeRules.stackStructType := Stack<StructType>.new
+					
+					stackStructType := treeRules.stackStructType
+					
+					structType := StructType.new
+					
+					structType.nameElement := visitable.arguments.at(visitable.arguments.size() - 1).asType(EnumLiteralExpCS).simpleNameCS.~value
+					structType.typeElement := "EClass"
+					structType.nextElement := "EStructuralFeatures"
+					structType.relation := "contains"
+					
+					stackStructType.push(structType)
 				end
 
 			end

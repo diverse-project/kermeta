@@ -1,0 +1,27 @@
+/* $Id:$ 
+ * Creation : March 23, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Antonio de Almeida Souza Neto
+ */
+ 
+
+package ocl2DROOLS;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::exceptions
+using kermeta::utils
+
+
+class VariableType
+{
+
+	attribute variable : String
+
+	attribute type : String
+	
+}
