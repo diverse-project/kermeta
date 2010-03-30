@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="123">
+  <pathNameCS startOffset="8" endOffset="13">
+    <sequenceOfNames>sample</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:OperationContextDeclCS" startOffset="18" endOffset="109">
+    <operationCS startOffset="26" endOffset="59">
+      <pathNameCS startOffset="26" endOffset="26">
+        <sequenceOfNames>A</sequenceOfNames>
+      </pathNameCS>
+      <simpleNameCS startOffset="29" endOffset="32" value="getB"/>
+      <parameters startOffset="34" endOffset="43" name="a">
+        <typeCS xsi:type="ocl.cst:PrimitiveTypeCS" startOffset="37" endOffset="43" value="Integer" type="Integer"/>
+      </parameters>
+      <parameters startOffset="46" endOffset="55" name="b">
+        <typeCS xsi:type="ocl.cst:PrimitiveTypeCS" startOffset="49" endOffset="55" value="Boolean" type="Boolean"/>
+      </parameters>
+      <typeCS xsi:type="ocl.cst:PathNameCS" startOffset="59" endOffset="59">
+        <sequenceOfNames>B</sequenceOfNames>
+      </typeCS>
+    </operationCS>
+    <prePostOrBodyDecls startOffset="63" endOffset="72">
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="68" endOffset="72">
+        <source xsi:type="ocl.cst:VariableExpCS" startOffset="68" endOffset="68">
+          <simpleNameCS startOffset="68" endOffset="68" value="a"/>
+        </source>
+        <simpleNameCS startOffset="70" endOffset="70" value=">" type="String"/>
+        <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="72" endOffset="72" symbol="0" integerSymbol="0"/>
+      </expressionCS>
+    </prePostOrBodyDecls>
+    <prePostOrBodyDecls startOffset="76" endOffset="84">
+      <expressionCS xsi:type="ocl.cst:BooleanLiteralExpCS" startOffset="81" endOffset="84" symbol="true" booleanSymbol="true"/>
+    </prePostOrBodyDecls>
+    <prePostOrBodyDecls startOffset="88" endOffset="109" kind="post">
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="94" endOffset="109">
+        <source xsi:type="ocl.cst:VariableExpCS" startOffset="94" endOffset="99">
+          <simpleNameCS startOffset="94" endOffset="99" value="result"/>
+        </source>
+        <simpleNameCS startOffset="101" endOffset="101" value="=" type="String"/>
+        <arguments xsi:type="ocl.cst:FeatureCallExpCS" startOffset="103" endOffset="109" accessor="dot">
+          <source xsi:type="ocl.cst:VariableExpCS" startOffset="103" endOffset="106">
+            <simpleNameCS startOffset="103" endOffset="106" value="self" type="self"/>
+          </source>
+          <simpleNameCS startOffset="108" endOffset="109" value="ab"/>
+        </arguments>
+      </expressionCS>
+    </prePostOrBodyDecls>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>

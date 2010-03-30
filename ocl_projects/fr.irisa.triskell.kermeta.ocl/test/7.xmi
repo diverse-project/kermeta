@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="452">
+  <pathNameCS startOffset="8" endOffset="13">
+    <sequenceOfNames>sample</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:OperationContextDeclCS" startOffset="18" endOffset="435">
+    <operationCS startOffset="26" endOffset="64">
+      <pathNameCS startOffset="26" endOffset="33">
+        <sequenceOfNames>Dinheiro</sequenceOfNames>
+      </pathNameCS>
+      <simpleNameCS startOffset="36" endOffset="39" value="getB"/>
+      <parameters startOffset="41" endOffset="48" name="a">
+        <typeCS xsi:type="ocl.cst:PathNameCS" startOffset="44" endOffset="48">
+          <sequenceOfNames>Moeda</sequenceOfNames>
+        </typeCS>
+      </parameters>
+      <parameters startOffset="51" endOffset="60" name="b">
+        <typeCS xsi:type="ocl.cst:PrimitiveTypeCS" startOffset="54" endOffset="60" value="Boolean" type="Boolean"/>
+      </parameters>
+      <typeCS xsi:type="ocl.cst:PathNameCS" startOffset="64" endOffset="64">
+        <sequenceOfNames>B</sequenceOfNames>
+      </typeCS>
+    </operationCS>
+    <prePostOrBodyDecls startOffset="68" endOffset="91">
+      <simpleNameCS startOffset="72" endOffset="76" value="nome1"/>
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="79" endOffset="91">
+        <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="79" endOffset="85" accessor="dot">
+          <source xsi:type="ocl.cst:VariableExpCS" startOffset="79" endOffset="79">
+            <simpleNameCS startOffset="79" endOffset="79" value="a"/>
+          </source>
+          <simpleNameCS startOffset="81" endOffset="85" value="valor"/>
+        </source>
+        <simpleNameCS startOffset="87" endOffset="87" value=">" type="String"/>
+        <arguments xsi:type="ocl.cst:RealLiteralExpCS" startOffset="89" endOffset="91" symbol="0.0" realSymbol="0.0"/>
+      </expressionCS>
+    </prePostOrBodyDecls>
+    <prePostOrBodyDecls startOffset="95" endOffset="173">
+      <simpleNameCS startOffset="99" endOffset="103" value="nome2"/>
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="106" endOffset="173">
+        <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="106" endOffset="171" accessor="arrow">
+          <source xsi:type="ocl.cst:IteratorExpCS" startOffset="106" endOffset="163" accessor="arrow">
+            <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="106" endOffset="118" accessor="dot">
+              <source xsi:type="ocl.cst:VariableExpCS" startOffset="106" endOffset="109">
+                <simpleNameCS startOffset="106" endOffset="109" value="self" type="self"/>
+              </source>
+              <simpleNameCS startOffset="111" endOffset="118" value="employee"/>
+            </source>
+            <simpleNameCS startOffset="121" endOffset="126" value="select" type="keyword"/>
+            <variable1 startOffset="129" endOffset="149" name="e">
+              <typeCS xsi:type="ocl.cst:PathNameCS" startOffset="133" endOffset="149">
+                <sequenceOfNames>Personnel</sequenceOfNames>
+                <sequenceOfNames>Person</sequenceOfNames>
+              </typeCS>
+            </variable1>
+            <body xsi:type="ocl.cst:OperationCallExpCS" startOffset="153" endOffset="162">
+              <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="153" endOffset="157" accessor="dot">
+                <source xsi:type="ocl.cst:VariableExpCS" startOffset="153" endOffset="153">
+                  <simpleNameCS startOffset="153" endOffset="153" value="e"/>
+                </source>
+                <simpleNameCS startOffset="155" endOffset="157" value="age"/>
+              </source>
+              <simpleNameCS startOffset="159" endOffset="159" value=">" type="String"/>
+              <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="161" endOffset="162" symbol="45" integerSymbol="45"/>
+            </body>
+          </source>
+          <simpleNameCS startOffset="166" endOffset="169" value="size"/>
+        </source>
+        <simpleNameCS startOffset="172" endOffset="172" value=">" type="String"/>
+        <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="173" endOffset="173" symbol="0" integerSymbol="0"/>
+      </expressionCS>
+    </prePostOrBodyDecls>
+    <prePostOrBodyDecls startOffset="177" endOffset="219" kind="post">
+      <simpleNameCS startOffset="182" endOffset="192" value="poscondicao"/>
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="195" endOffset="219">
+        <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="195" endOffset="201" accessor="dot">
+          <source xsi:type="ocl.cst:VariableExpCS" startOffset="195" endOffset="198">
+            <simpleNameCS startOffset="195" endOffset="198" value="self" type="self"/>
+          </source>
+          <simpleNameCS startOffset="200" endOffset="201" value="ab"/>
+        </source>
+        <simpleNameCS startOffset="203" endOffset="203" value="=" type="String"/>
+        <arguments xsi:type="ocl.cst:OperationCallExpCS" startOffset="205" endOffset="219">
+          <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="205" endOffset="215" accessor="dot">
+            <source xsi:type="ocl.cst:VariableExpCS" startOffset="205" endOffset="208">
+              <simpleNameCS startOffset="205" endOffset="208" value="self" type="self"/>
+            </source>
+            <simpleNameCS startOffset="210" endOffset="211" value="ab"/>
+            <isMarkedPreCS startOffset="212" endOffset="215" pre="true"/>
+          </source>
+          <simpleNameCS startOffset="217" endOffset="217" value="-" type="String"/>
+          <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="219" endOffset="219" symbol="1" integerSymbol="1"/>
+        </arguments>
+      </expressionCS>
+    </prePostOrBodyDecls>
+    <prePostOrBodyDecls startOffset="223" endOffset="248" kind="post">
+      <simpleNameCS startOffset="228" endOffset="236" value="resultado"/>
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="239" endOffset="248">
+        <source xsi:type="ocl.cst:VariableExpCS" startOffset="239" endOffset="244">
+          <simpleNameCS startOffset="239" endOffset="244" value="result"/>
+        </source>
+        <simpleNameCS startOffset="246" endOffset="246" value="=" type="String"/>
+        <arguments xsi:type="ocl.cst:VariableExpCS" startOffset="248" endOffset="248">
+          <simpleNameCS startOffset="248" endOffset="248" value="a"/>
+        </arguments>
+      </expressionCS>
+    </prePostOrBodyDecls>
+    <prePostOrBodyDecls startOffset="253" endOffset="376" kind="post">
+      <simpleNameCS startOffset="258" endOffset="263" value="kindof"/>
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="266" endOffset="376">
+        <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="266" endOffset="307" accessor="dot">
+          <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="266" endOffset="275" accessor="dot">
+            <source xsi:type="ocl.cst:VariableExpCS" startOffset="266" endOffset="269">
+              <simpleNameCS startOffset="266" endOffset="269" value="self" type="self"/>
+            </source>
+            <simpleNameCS startOffset="271" endOffset="275" value="owner"/>
+          </source>
+          <simpleNameCS startOffset="277" endOffset="287" value="oclIsKindOf"/>
+          <arguments xsi:type="ocl.cst:EnumLiteralExpCS" startOffset="290" endOffset="306">
+            <pathNameCS startOffset="290" endOffset="298">
+              <sequenceOfNames>Personnel</sequenceOfNames>
+            </pathNameCS>
+            <simpleNameCS startOffset="301" endOffset="306" value="Person"/>
+          </arguments>
+        </source>
+        <simpleNameCS startOffset="309" endOffset="315" value="implies" type="String"/>
+        <arguments xsi:type="ocl.cst:OperationCallExpCS" startOffset="317" endOffset="376">
+          <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="317" endOffset="364" accessor="dot">
+            <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="317" endOffset="355" accessor="dot">
+              <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="317" endOffset="326" accessor="dot">
+                <source xsi:type="ocl.cst:VariableExpCS" startOffset="317" endOffset="320">
+                  <simpleNameCS startOffset="317" endOffset="320" value="self" type="self"/>
+                </source>
+                <simpleNameCS startOffset="322" endOffset="326" value="owner"/>
+              </source>
+              <simpleNameCS startOffset="328" endOffset="336" value="oclAsType"/>
+              <arguments xsi:type="ocl.cst:EnumLiteralExpCS" startOffset="338" endOffset="354">
+                <pathNameCS startOffset="338" endOffset="346">
+                  <sequenceOfNames>Personnel</sequenceOfNames>
+                </pathNameCS>
+                <simpleNameCS startOffset="349" endOffset="354" value="Person"/>
+              </arguments>
+            </source>
+            <simpleNameCS startOffset="357" endOffset="364" value="forename"/>
+          </source>
+          <simpleNameCS startOffset="366" endOffset="367" value="&lt;>" type="String"/>
+          <arguments xsi:type="ocl.cst:StringLiteralExpCS" startOffset="369" endOffset="376" symbol="'duprie'" stringSymbol="'duprie'" unescapedStringSymbol="duprie"/>
+        </arguments>
+      </expressionCS>
+    </prePostOrBodyDecls>
+    <prePostOrBodyDecls startOffset="380" endOffset="435" kind="post">
+      <simpleNameCS startOffset="385" endOffset="393" value="testfirst"/>
+      <expressionCS xsi:type="ocl.cst:FeatureCallExpCS" startOffset="396" endOffset="435" accessor="dot">
+        <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="396" endOffset="426" accessor="dot">
+          <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="396" endOffset="417" accessor="arrow">
+            <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="396" endOffset="407" accessor="dot">
+              <source xsi:type="ocl.cst:VariableExpCS" startOffset="396" endOffset="399">
+                <simpleNameCS startOffset="396" endOffset="399" value="self" type="self"/>
+              </source>
+              <simpleNameCS startOffset="401" endOffset="407" value="company"/>
+            </source>
+            <simpleNameCS startOffset="411" endOffset="415" value="first"/>
+          </source>
+          <simpleNameCS startOffset="419" endOffset="426" value="employee"/>
+        </source>
+        <simpleNameCS startOffset="428" endOffset="435" value="forename"/>
+      </expressionCS>
+    </prePostOrBodyDecls>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>
