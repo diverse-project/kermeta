@@ -89,7 +89,7 @@ object GlobalConfiguration extends LogAspect{
                                    if ("true".equals(createpackage))
                                        return true
                                    else
-                                       return false
+                                       return true
     }
     def standalone() : Boolean={var  standalone = props.getProperty("standalone")
                                 if ("true".equals(standalone))
