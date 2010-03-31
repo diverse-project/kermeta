@@ -6,7 +6,7 @@
         point="org.eclipse.ui.popupMenus">
      <objectContribution
            adaptable="true"
-           id="fr.irisa.triskell.kermeta.addRemoveNatureAction"
+           id="fr.irisa.triskell.kermeta.addNatureAction"
            objectClass="org.eclipse.core.resources.IProject">
         <menu
               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
@@ -14,11 +14,44 @@
               path="additions">
            <separator name="kermetagroup2"/>
         </menu>
+        <visibility> <!-- can use <enablement>  --> 
+			 <not> 
+		       <objectState name="projectNature" value="fr.irisa.triskell.kermeta.KermetaNature"/> 
+			 </not>
+       	</visibility>
        <action
-              class="fr.irisa.triskell.kermeta.actions.ToggleNatureAction"
-              id="fr.irisa.triskell.kermeta.addRemoveNatureAction"
-              label="Add/Remove Kermeta Nature"
-              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+             class="fr.irisa.triskell.kermeta.actions.ToggleNatureAction"
+             icon="images/new_kermeta_project.gif"
+             id="fr.irisa.triskell.kermeta.addNatureAction"
+             label="Add Kermeta Nature"
+             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
+              <enablement> <!-- can use <enablement>  --> 
+				 <not> 
+			       <objectState name="projectNature" value="fr.irisa.triskell.kermeta.KermetaNature"/> 
+				 </not>
+       		  </enablement>
+       </action>
+     </objectContribution>
+     <objectContribution
+           adaptable="true"
+           id="fr.irisa.triskell.kermeta.removeNatureAction"
+           objectClass="org.eclipse.core.resources.IProject">
+        <menu
+              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+              label="Kermeta"
+              path="additions">
+           <separator name="kermetagroup2"/>
+        </menu>
+        <visibility> <!-- can use <enablement>  -->
+		      <objectState name="projectNature" value="fr.irisa.triskell.kermeta.KermetaNature"/> 
+       	</visibility>
+       <action
+             class="fr.irisa.triskell.kermeta.actions.ToggleNatureAction"
+             icon="images/remove_kermeta_nature.gif"
+             id="fr.irisa.triskell.kermeta.removeNatureAction"
+             label="Remove Kermeta Nature"
+             menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">              
+       </action>
      </objectContribution>
      <objectContribution
            adaptable="false"
