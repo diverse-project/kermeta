@@ -10,16 +10,19 @@ import fr.irisa.triskell.kermeta.language.behavior._
 trait TypeLiteralAspect extends RichAspectImplicit with ObjectAspect {
 	 
     override def generateScalaCode(res : StringBuilder) : Unit = {
-        res.append("scalaUtil.Util.getMetaClass(\"")
+        if (this.getTyperef().getType.isInstanceOf[Class]){
+            res.append("scalaUtil.Util.getMetaClass(\"")
+        }
         this.getTyperef().getType.generateScalaCode(res)
-        res.append("\")")
-        
+        if (this.getTyperef().getType.isInstanceOf[Class]){
+            res.append("\")")
+        }        
     }
 
     def generateScalaCodeForInstanceOf(res : StringBuilder) : Unit = {
 //        res.append("scalaUtil.Util.getMetaClass(\"")
         this.getTyperef().getType.generateScalaCode(res)
- //       res.append("\")")
+        //       res.append("\")")
 
     }
 
