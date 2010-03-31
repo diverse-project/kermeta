@@ -1,0 +1,24 @@
+/* $Id:$ 
+ * Creation : March 31, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+class Main
+{
+	attribute a : kermeta::standard::String 
+		
+	operation main2() : Void is do
+		var a2 : kermeta::standard::String 
+		self.a := Main.new.a // should not raise a warning since this is 2 different instances
+	end
+}
