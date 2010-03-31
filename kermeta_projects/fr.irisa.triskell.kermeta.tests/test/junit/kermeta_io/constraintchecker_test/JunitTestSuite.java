@@ -105,6 +105,10 @@ public void testvalid_028_weaving_in_kermeta_aspect9() throws Exception {
 testvalidFile("test/io/constraintchecker_tests/valid","028_weaving_in_kermeta_aspect9.kmt" );
 }
 
+public void testvalid_032_assigned_to_self_02() throws Exception {
+testvalidFile("test/io/constraintchecker_tests/valid","032_assigned_to_self_02.kmt" );
+}
+
 public void testinvalid_001_cyclicinheritance_01() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","001_cyclicinheritance_01.kmt" );
 }
@@ -387,6 +391,10 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","031_useOfDeprecated_D
 
 public void testinvalid_031_useOfDeprecated_operation() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","031_useOfDeprecated_operation.kmt" );
+}
+
+public void testinvalid_032_assigned_to_self_01() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","032_assigned_to_self_01.kmt" );
 }
 
 /*** END GENERATED TESTS ***/
