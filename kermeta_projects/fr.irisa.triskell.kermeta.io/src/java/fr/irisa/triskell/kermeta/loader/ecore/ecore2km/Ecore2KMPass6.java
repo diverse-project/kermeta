@@ -135,7 +135,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 				Property prop = KermetaModelHelper.ClassDefinition.getPropertyByName(currentClassDefinition, currentOperation.getName());
 				if (prop != null) {
 					String newName = methodRenamePrefix + currentOperation.getName();
-					kermetaUnit.warning("Quickfix used to rename duplicate operation due to a the property with the same name: " + currentOperation.getName() + " renamed into " + newName, null);		        	
+					kermetaUnit.warning("Quickfix used to rename duplicate operation due to a the property with the same name: " + currentClassDefinition.getName()+"."+currentOperation.getName() + " renamed into " + newName, null);		        	
 				
 					currentOperation.setName(newName);
 					
@@ -153,7 +153,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 				String newName;
 				while ((op != null) && (op != currentOperation)) {
 					newName = currentOperation.getName() + i;
-					kermetaUnit.warning("Quickfix used to rename duplicate operation: " + currentOperation.getName() + " renamed into " + newName, null);		        	
+					kermetaUnit.warning("Quickfix used to rename duplicate operation: " + currentClassDefinition.getName()+"."+currentOperation.getName() + " renamed into " + newName, null);		        	
 					currentOperation.setName(newName);
 					
 					op = KermetaModelHelper.ClassDefinition.getOperationByName(currentClassDefinition, currentOperation.getName());
@@ -195,7 +195,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 
 				if(! match) {
 					newName = methodRenamePrefix + currentOperation.getName();
-					kermetaUnit.warning("Quickfix used to rename duplicate operation due to a the property with the same name: " + currentOperation.getName() + " renamed into " + newName, null);		        	
+					kermetaUnit.warning("Quickfix used to rename duplicate operation due to a the property with the same name: " +currentClassDefinition.getName()+"."+ currentOperation.getName() + " renamed into " + newName, null);		        	
 
 					currentOperation.setName(newName);
 					// Propagate renaming only to submethods (link to the supermethod is deleted)
