@@ -5,8 +5,7 @@
  * Authors  : 
  *            dvojtise
  */
-@mainClass "root_package::Main"
-@mainOperation "main"
+
 
 
 package root_package;
