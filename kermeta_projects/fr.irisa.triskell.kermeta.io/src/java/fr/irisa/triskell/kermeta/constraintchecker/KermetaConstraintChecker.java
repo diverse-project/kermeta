@@ -28,6 +28,7 @@ import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
+import fr.irisa.triskell.kermeta.language.behavior.SelfExpression;
 import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -250,13 +251,19 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	    	else
 	    		// If the target and the value are features, we must check their reference property.
 		    	if(targetExp instanceof CallFeature) {
+		    		CallFeature targetFeat = (CallFeature)targetExp;
+		    		CallFeature valueFeat  = (CallFeature)expression.getValue();
 		    		// We get the reference properties of the target and the value.
-		    		Property targetProp = ((CallFeature)targetExp).getStaticProperty();
-		    		Property valueProp  = ((CallFeature)expression.getValue()).getStaticProperty();
+		    		Property targetProp = targetFeat.getStaticProperty();
+		    		Property valueProp  = valueFeat.getStaticProperty();
 		    		
 		    		// If the properties are in fact the same property, it means that it is
 		    		// a self-assignment.
-		    		if(targetProp!=null && valueProp!=null && targetProp==valueProp)
+		    		if(targetProp!=null && valueProp!=null && targetProp==valueProp && 
+		    			// This checking checks only simple cases : self.name and name. If a more complex instruction
+		    			// is defined, the checking does not check anything.
+	    				(targetFeat.getTarget()==null || targetFeat.getTarget() instanceof SelfExpression) &&
+	    				(valueFeat.getTarget()==null || valueFeat.getTarget() instanceof SelfExpression))
 		    			warning = true;
 		    	}
 	    	

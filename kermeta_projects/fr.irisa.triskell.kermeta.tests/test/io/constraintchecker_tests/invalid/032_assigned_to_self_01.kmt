@@ -16,7 +16,10 @@ class Main
 {
 	attribute a : kermeta::standard::String 
 	operation main() : Void is do 	
-		self.a := a  // should raise a warning
+		self.a := a  	  // should raise a warning
+		a := self.a  	  // should raise a warning
+		self.a := self.a  // should raise a warning
+		a := a  	 	  // should raise a warning
 	end
 	
 }
