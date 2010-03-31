@@ -84,13 +84,13 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 		
 		
 		
-        var mainClassDef = par.eAllContents.filter{e=>e.isInstanceOf[ClassDefinition] }.filter(e=> e.asInstanceOf[ClassDefinition].getName.equals(className) ).toList.first
-        var mainOperationSize = 0
-        try{
-            mainClassDef.asInstanceOf[ClassDefinition].getOwnedOperation.filter{e=>e.getName.equals(mainOperation)}.first.asInstanceOf[Operation].getOwnedParameter.size
-        } catch {
-            case e: java.util.NoSuchElementException => {}
-        }
+    var mainClassDef = par.eAllContents.filter{e=>e.isInstanceOf[ClassDefinition] }.filter(e=> e.asInstanceOf[ClassDefinition].getName.equals(className) ).toList.first
+    var mainOperationSize = 0
+    try{
+       mainOperationSize = mainClassDef.asInstanceOf[ClassDefinition].getOwnedOperation.filter{e=>e.getName.equals(mainOperation)}.first.asInstanceOf[Operation].getOwnedParameter.size
+    } catch {
+        case e: java.util.NoSuchElementException => {}
+    }
 		
         //TODO gérer le cas des package venant d'ecore
         var res :StringBuilder= new StringBuilder

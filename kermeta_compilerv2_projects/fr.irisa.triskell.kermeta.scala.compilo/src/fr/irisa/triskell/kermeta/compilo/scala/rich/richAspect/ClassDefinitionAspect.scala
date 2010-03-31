@@ -71,8 +71,8 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
                 res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
             }
             res append " with "+Util.protectScalaKeyword(Util.getQualifiedNamedBase(this))
-	   // res.append("{\n")
-      res.append("{this:"+Util.protectScalaKeyword(Util.protectScalaKeyword(Util.getQualifiedNamedBase(this)))+"=>\n")
+	    res.append("{\n")
+    //  res.append("{this:"+Util.protectScalaKeyword(Util.getQualifiedNamedBase(this))+"=>\n")
 				
 				
 				
@@ -129,8 +129,8 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
                     })
                 res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
             }
-            //res.append("{\n")
-            res.append("{this:"+Util.protectScalaKeyword(Util.protectScalaKeyword(Util.getQualifiedNamedBase(this)))+"=>\n")
+            res.append("{\n")
+            //res.append("{this:"+Util.protectScalaKeyword(Util.protectScalaKeyword(Util.getQualifiedNamedBase(this)))+"=>\n")
 
             this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))
             this.getOwnedOperation filter(op=> !Util.hasEcoreTag(op)) foreach(op=> op.generateScalaCode(res))
@@ -180,8 +180,6 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
         }
     }
 
-
-  
     def getAllInvariants() : EList[Constraint] =  {
         var result = this.getInv
         this.getSuperType.foreach{st =>
