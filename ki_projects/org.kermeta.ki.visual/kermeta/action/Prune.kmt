@@ -128,6 +128,8 @@ class ActionPrune inherits Action, Undoable {
 			}
 		}
 		
+		metamodel.reinitView
+		
 		var pruningOp  : MetamodelPruner init MetamodelPruner.new
 		var reqClasses : Bag<RequiredClass> init Bag<RequiredClass>.new
 		var reqClass   : RequiredClass
