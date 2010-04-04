@@ -60,7 +60,7 @@ public class InheritanceView extends LinkView {
 	
 	@Override
 	public void paint(Graphics2D g) {
-		if(visible && entitySrc.visible && entityTar.visible) {
+		if(isVisible()) {
 			super.paint(g);
 			
 			final Point2D.Double translation = beginRotation(pointTar, g);

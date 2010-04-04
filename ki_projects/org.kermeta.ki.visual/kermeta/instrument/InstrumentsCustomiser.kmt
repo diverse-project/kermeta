@@ -1,0 +1,79 @@
+/*
+ * Creation : April 2, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::visual;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/ButtonPressLink.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/ButtonPressed.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Pruner.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/action/ModifyPrunerViewPolicy.kmt"
+
+
+using kermeta::ki::malai::instrument
+using kermeta::ki::malai::widget
+using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::picking
+using kermeta::ki::malai::interaction
+using kermeta::language::structure
+
+
+class InstrumentsCustomiser inherits Instrument
+{
+	reference pruner : Pruner
+	
+	reference picker : Picker
+	
+	
+	
+	method initialiseLinks(eventManager : EventManager) : Void is do
+		addLink(ButtonPress2ModifyViewPolicy.new, picker, void, eventManager, false)	
+	end
+}
+
+
+
+
+class ButtonPress2ModifyViewPolicy inherits ButtonPressLink
+{
+	method getActionClass() : Class is do
+		result := ModifyPrunerViewPolicy
+	end
+	
+	
+	
+	method isConditionRespected() : Boolean is do
+		var bp       : ButtonPressed         init interaction.asType(ButtonPressed)
+		var custom   : InstrumentsCustomiser init instrument.asType(InstrumentsCustomiser)
+
+		result := custom.pruner.hideButton==bp.button or custom.pruner.grayedButton==bp.button
+	end
+	
+	
+	
+	method createAction() : Void is do
+		var button : Button init interaction.asType(ButtonPressed).button
+		var custom : InstrumentsCustomiser init instrument.asType(InstrumentsCustomiser)
+		var modifAction : ModifyPrunerViewPolicy init ModifyPrunerViewPolicy.new
+		
+		modifAction.initialise(instrument.actionRegistry)
+		modifAction.pruner := custom.pruner
+		
+		if(button==custom.pruner.hideButton) then
+			modifAction.newViewPolicy := PrunerViewPolicy.hide
+		else if(button==custom.pruner.grayedButton) then
+				modifAction.newViewPolicy := PrunerViewPolicy.gray
+			end
+		end
+		
+		action := modifAction
+	end
+	
+	
+	method updateAction() : Void is do end
+}

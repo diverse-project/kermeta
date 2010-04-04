@@ -8,7 +8,7 @@ package kermeta::ki::visual;
 
 
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
-require "platform:/resource/org.kermeta.ki.visual/kermeta/pruning/algorithm/metamodelPruner.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/pruning/metamodelPruner.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
 
 
@@ -18,24 +18,37 @@ using kermeta::ki::malai::action
 using kermeta::ki::malai::undo
 
 
+enumeration PrunerViewPolicy { hide; gray; }
+
+
+
 class ActionReinitView inherits Action, Undoable {
+	reference viewPolicy : PrunerViewPolicy
+
 	reference metamodel : ModelingUnit
 	
-	attribute areVisible : Sequence<Boolean>
+	attribute arePruned : Sequence<Boolean>
 	
 	
 	method doActionBody() : Void is do
 		var i : Integer init 0
-		areVisible := Sequence<Boolean>.new
+		var pruned : Boolean
+		arePruned := Sequence<Boolean>.new
 
 		metamodel.packages.each{pkg |
 			pkg.allNestedClassDefinitions.each{cd |
-				areVisible.add(cd.isVisible)
+				pruned := cd.isPruned
+				arePruned.add(pruned)
+				
+				if(viewPolicy.isVoid and pruned) then
+					viewPolicy := if cd.isVisible then PrunerViewPolicy.hide else PrunerViewPolicy.gray end
+				end
+				
 				i := i + 1
 			}
 		}
 		
-		metamodel.setVisibleAll()
+		metamodel.reinitView
 	end
 	
 	
@@ -65,7 +78,9 @@ class ActionReinitView inherits Action, Undoable {
 
 		metamodel.packages.each{pkg |
 			pkg.allNestedClassDefinitions.each{cd |
-				cd.setVisible(areVisible.at(i))
+				if(arePruned.at(i)) then
+					cd.prune(viewPolicy)
+				end
 				i := i + 1
 			}
 		}
@@ -73,7 +88,7 @@ class ActionReinitView inherits Action, Undoable {
 	
 	
 	method redo() : Void is do
-		metamodel.setVisibleAll()
+		metamodel.reinitView
 	end
 }
 
@@ -86,17 +101,29 @@ class ActionPrune inherits Action, Undoable {
 	
 	reference metamodel : ModelingUnit
 	
-	attribute areVisible : Sequence<Boolean>
+	reference viewPolicy : PrunerViewPolicy
+	
+	attribute arePruned : Sequence<Boolean>
+	
+	attribute oldViewPolicy : PrunerViewPolicy
+	
 	
 	
 	method doActionBody() : Void is do
 		// Saving the current visible values.
 		var i : Integer init 0
-		areVisible := Sequence<Boolean>.new
+		var pruned : Boolean
+		arePruned := Sequence<Boolean>.new
 
 		metamodel.packages.each{pkg |
 			pkg.allNestedClassDefinitions.each{cd |
-				areVisible.add(cd.isVisible)
+				pruned := cd.isPruned
+				arePruned.add(pruned)
+
+				if(viewPolicy.isVoid and pruned) then
+					oldViewPolicy := if cd.isVisible then PrunerViewPolicy.hide else PrunerViewPolicy.gray end
+				end
+				
 				i := i + 1
 			}
 		}
@@ -112,11 +139,13 @@ class ActionPrune inherits Action, Undoable {
 		}
 		
 		pruningOp.inputKermetaMetamodel := metamodel
-		pruningOp.initialize(reqClasses, Bag<RequiredProperty>.new, Bag<RequiredEnumeration>.new, 3)
+		pruningOp.initialize(reqClasses, Bag<RequiredProperty>.new, Bag<RequiredEnumeration>.new, 3, viewPolicy)
 		
 		if pruningOp.preprocess then
 			pruningOp.transform
 		end
+		
+		extern org::kermeta::ki::visual::view::MetamodelView.updateArrows(metamodel)
 	end
 	
 	
@@ -126,7 +155,7 @@ class ActionPrune inherits Action, Undoable {
 	
 	
 	method canDo() : Boolean is do
-		result := not metamodel.isVoid and selection.size>0
+		result := not metamodel.isVoid and selection.size>0 and not viewPolicy.isVoid
 	end
 	
 	
@@ -141,27 +170,32 @@ class ActionPrune inherits Action, Undoable {
 	
 	
 	method undo() : Void is do
-		changeVisibility
+		changeVisibility(oldViewPolicy)
 	end
 	
 	
 	method redo() : Void is do
-		changeVisibility
+		changeVisibility(viewPolicy)
 	end
 	
 	
-	operation changeVisibility() : Void is do
-		var areVisible2 : Sequence<Boolean> init Sequence<Boolean>.new
+	operation changeVisibility(policy : PrunerViewPolicy) : Void is do
+		var arePruned2 : Sequence<Boolean> init Sequence<Boolean>.new
 		var i : Integer init 0
-
+		
 		metamodel.packages.each{pkg |
 			pkg.allNestedClassDefinitions.each{cd |
-				areVisible2.add(cd.isVisible)
-				cd.setVisible(areVisible.at(i))
+				arePruned2.add(cd.isPruned)
+				if(arePruned.at(i)) then 
+					cd.prune(policy)
+				else
+					cd.unprune
+				end		
 				i := i + 1
 			}
 		}
 		
-		areVisible := areVisible2
+		arePruned := arePruned2
+		extern org::kermeta::ki::visual::view::MetamodelView.updateArrows(metamodel)
 	end
 }

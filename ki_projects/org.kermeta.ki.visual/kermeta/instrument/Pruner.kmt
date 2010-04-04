@@ -8,10 +8,10 @@ package kermeta::ki::visual;
 
 
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/PressLink.kmt"
-require "platform:/resource/org.kermeta.ki.visual/kermeta/pruning/Prune.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/action/Prune.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/interaction/CtrlMultiPress.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/PressLink.kmt"
 
 using kermeta::language::structure
 using kermeta::standard
@@ -19,16 +19,54 @@ using kermeta::ki::malai::interaction::event
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::action
+using kermeta::ki::malai::widget
+
 
 
 class Pruner inherits Instrument
 {
 	reference metamodel : ModelingUnit
 	
+	attribute viewPolicy : PrunerViewPolicy
+	
+	attribute hideButton : ToggleButton
+	
+	attribute grayedButton : ToggleButton
+	
+	
+	
+	method initialise(actionRegistry : ActionRegistry) : Void is do
+		super(actionRegistry)
+		
+		viewPolicy := PrunerViewPolicy.hide
+	end
+	
+	
+	
+	operation initialiseWidgets(eventManager : EventManager) : Void is do
+		hideButton   := ToggleButton.new
+		grayedButton := ToggleButton.new
+		
+		hideButton.initialiseWithText("Hide", eventManager)
+		grayedButton.initialiseWithText("Gray", eventManager)
+		
+		interimFeedback
+	end
+	
+	
+	
 	method initialiseLinks(eventManager : EventManager) : Void is do
 		addLink(MultiPress2Prune.new, metamodel, void, eventManager, false)
 		addLink(Press2Prune.new, metamodel, void, eventManager, false)
 		addLink(Press2Reinit.new, metamodel, void, eventManager, false)
+	end
+	
+	
+	method interimFeedback() : Void is do
+		hideButton.setSelected(viewPolicy==PrunerViewPolicy.hide)
+		grayedButton.setSelected(viewPolicy==PrunerViewPolicy.gray)
+		hideButton.setVisible(activated)
+		grayedButton.setVisible(activated)
 	end
 }
 
@@ -72,8 +110,9 @@ class MultiPress2Prune inherits Link
 		var pruner : Pruner init instrument.asType(Pruner)
 		
 		as.initialise(instrument.actionRegistry)
-		as.metamodel := pruner.metamodel
-		action       := as
+		as.viewPolicy := pruner.viewPolicy
+		as.metamodel  := pruner.metamodel
+		action        := as
 	end
 }
 
@@ -154,7 +193,8 @@ class Press2Prune inherits Link
 		var pruner : Pruner init instrument.asType(Pruner)
 		
 		as.initialise(instrument.actionRegistry)
-		as.metamodel := pruner.metamodel
-		action       := as
+		as.viewPolicy := pruner.viewPolicy
+		as.metamodel  := pruner.metamodel
+		action        := as
 	end
 }

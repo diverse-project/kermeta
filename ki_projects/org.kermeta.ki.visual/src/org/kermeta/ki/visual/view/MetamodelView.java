@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
-import org.kermeta.ki.visual.Force;
+import org.kermeta.ki.visual.view.ComponentView.Visibility;
 
 import edu.uci.ics.jung.algorithms.layout.KKLayout;
 import edu.uci.ics.jung.graph.DelegateForest;
@@ -37,6 +37,18 @@ public class MetamodelView extends JPanel implements Scrollable {
 	
 	protected Forest<EntityView, LinkView> forest;
 	
+	
+	
+	public static RuntimeObject updateArrows(RuntimeObject mmRO) {
+		MetamodelView metamodelView = (MetamodelView) mmRO.getUserData();
+		
+		for(LinkView link : metamodelView.links)
+			link.update();
+		
+		metamodelView.repaint();
+		
+		return mmRO.getFactory().getMemory().voidINSTANCE;
+	}
 	
 	
 	public static RuntimeObject onEntityAdded(RuntimeObject mmRO, RuntimeObject entityRO, RuntimeObject isAspectRO, RuntimeObject positionRO) {
@@ -64,7 +76,7 @@ public class MetamodelView extends JPanel implements Scrollable {
 		EntityView tarClass    = (EntityView) tarClassRO.getUserData();
 		LinkView view = new RelationView(srcClass, tarClass);
 		
-		view.visible = true;
+		view.visibility = Visibility.STANDARD;
 		metamodelView.addLink(position, view);
 		metamodelView.repaint();
 		
@@ -81,7 +93,7 @@ public class MetamodelView extends JPanel implements Scrollable {
 		int position		   = Integer.getValue(positionRO);
 		InheritanceView view   = new InheritanceView(srcClass, tarClass);
 		
-		view.visible = true;
+		view.visibility = Visibility.STANDARD;
 		metamodelView.addLink(position, view);
 		metamodelView.repaint();
 		
@@ -111,10 +123,12 @@ public class MetamodelView extends JPanel implements Scrollable {
 		forest = new DelegateForest<EntityView, LinkView>();
 
 		for(EntityView entity : entities)
-			forest.addVertex(entity);
+			if(entity.isVisible())
+				forest.addVertex(entity);
 		
 		for(LinkView link : links)
-			forest.addEdge(link, link.getEntitySrc(), link.getEntityTar());
+			if(link.isVisible())
+				forest.addEdge(link, link.getEntitySrc(), link.getEntityTar());
 	}
 	
 	
@@ -130,10 +144,6 @@ public class MetamodelView extends JPanel implements Scrollable {
 		}
 		
 		recentre();
-		
-//		for(LinkView link : links)
-//			link.update();
-		
 		repaint();
 		updatePreferredSize();
 	}
@@ -210,49 +220,6 @@ public class MetamodelView extends JPanel implements Scrollable {
 	
 	public void addAspectView(String name) {
 		entities.add(new ClassView(name));
-	}
-	
-	
-	
-	public double reorganise() { 
-		Force sum = new Force();
-		EntityView e1, e2, entity;
-		double change=0.;
-		int i, j;
-		final int nbEntities = entities.size();
-		final int nbLinks    = entities.size();
-
-		for(i=0; i<nbEntities; i++) { 
-			sum.setX(0.);
-			sum.setY(0.);
-
-			entity = entities.get(i);
-
-			for(j=0; j<nbEntities; j++)
-				if(j!=i) 
-					sum = sum.addForces(entity.influenceEntity(entities.get(j)));
-
-			for(j=0; j<nbLinks; j++){
-				e1 = links.get(j).entitySrc;
-				e2 = links.get(j).entityTar;
-
-				if(e1 == entity || e2 == entity) 
-					sum = sum.addForces(entity.forceArc(links.get(j)));
-			}
-
-			change += sum.getX() + sum.getY();
-
-			entities.get(i).setX((int)(entities.get(i).getX() + sum.getX()));
-			entities.get(i).setY((int)(entities.get(i).getY() + sum.getY()));
-		}
-		
-		for(EntityView e : entities)
-			e.update();
-		
-		for(LinkView link : links)
-			link.update();
-
-		return change;
 	}
 	
 	

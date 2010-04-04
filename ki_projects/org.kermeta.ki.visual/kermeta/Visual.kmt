@@ -11,9 +11,10 @@ package kermeta::ki::visual;
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
-require "platform:/resource/org.kermeta.ki.visual/kermeta/pruning/Pruner.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Pruner.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/VisitableKermeta.km"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/InstrumentsSelector.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/InstrumentsCustomiser.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/UndoRedoManager.kmt"
 
 using kermeta
@@ -64,6 +65,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	attribute selector : InstrumentsSelector
 	
+	attribute customiser : InstrumentsCustomiser
+	
 	attribute actionRegistry : ActionRegistry
 	
 	attribute eventManager : EventManager
@@ -90,8 +93,12 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		pruner      	 := Pruner.new
 		undoManager 	 := UndoRedoManager.new
 		selector         := InstrumentsSelector.new
+		customiser		 := InstrumentsCustomiser.new
 		
+		customiser.pruner := pruner
+		customiser.initialise(actionRegistry)
 		pruner.initialise(actionRegistry)
+		pruner.initialiseWidgets(eventManager)
 		undoManager.initialise(actionRegistry)
 		undoManager.initialiseWidgets(eventManager)
 		selector.initialise(actionRegistry)
@@ -99,7 +106,10 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 
 		initialiseUI
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, eventManager)
-		
+
+		customiser.picker := toolbar
+		customiser.initialiseLinks(eventManager)
+		customiser.setActivated(true)	
 		selector.picker := toolbar
 		selector.initialiseLinks(eventManager)
 		selector.setActivated(true)
@@ -129,7 +139,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		toolbar := Panel.new
 		toolbar.initialise(eventManager)
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialiseToolbar(toolbar, undoManager.undoButton, 
-					undoManager.redoButton, selector.prunerButton)
+					undoManager.redoButton, selector.prunerButton, pruner.grayedButton, pruner.hideButton)
 		toolbar.components.add(undoManager.undoButton)
 		toolbar.components.add(undoManager.redoButton)
 		toolbar.components.add(selector.prunerButton)

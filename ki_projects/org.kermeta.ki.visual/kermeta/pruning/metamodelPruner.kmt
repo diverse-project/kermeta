@@ -11,6 +11,7 @@ package kermeta::ki::visual;
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Pruner.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -62,17 +63,20 @@ class MetamodelPruner
 	reference numberOfPasses: Integer
 	attribute emptyPackages: Package[0..*]
 	
+	reference viewPolicy : PrunerViewPolicy
+	
 	
 	
 	
 	operation initialize(requiredClasses : bag RequiredClass[0..*], requiredProperties : bag RequiredProperty[0..*], 
-						requiredEnumerations : bag RequiredEnumeration[0..*], numberOfPasses : Integer) : Void is do
-		self.requiredMetaClasses.addAll(requiredClasses)
-		self.requiredMetaProperties.addAll(requiredProperties)
-		self.requiredMetaEnumerations.addAll(requiredEnumerations)
-		self.requiredMetaProperties.addAll(requiredProperties)
-		self.requiredMetaEnumerations.addAll(requiredEnumerations)
+						requiredEnumerations : bag RequiredEnumeration[0..*], numberOfPasses : Integer, viewPolicy : PrunerViewPolicy) : Void is do
+		requiredMetaClasses.addAll(requiredClasses)
+		requiredMetaProperties.addAll(requiredProperties)
+		requiredMetaEnumerations.addAll(requiredEnumerations)
+		requiredMetaProperties.addAll(requiredProperties)
+		requiredMetaEnumerations.addAll(requiredEnumerations)
 		self.numberOfPasses := numberOfPasses
+		self.viewPolicy := viewPolicy
 	end
 	
 	
@@ -276,14 +280,13 @@ class MetamodelPruner
 	
 	
 	operation includeAllObligatoryPropertiesAndTheirTypes():Void is do
-//		var option : Integer init Integer.new
 		var propLower0 : Boolean
 		var propClass  : Boolean
 		var propEnum   : Boolean
 		var propPrim   : Boolean
 		var oppVoid    : Boolean
 		
-		self.requiredKermetaMetaClasses.each{c |
+		requiredKermetaMetaClasses.each{c |
 			c.ownedAttribute.each{ prop |
 			 	propLower0 := prop.lower == 0
 			 	propClass  := prop.type.isInstanceOf(Class)
@@ -293,93 +296,93 @@ class MetamodelPruner
 			 	
 				//Option 1
 				if propLower0 and  propClass then
-					self.requiredKermetaMetaProperties.add(prop)
-					self.requiredKermetaMetaClasses.add(prop.type.asType(Class).classDefinition)
-					self.requiredKermetaMetaClasses.add(prop.owningClass)
+					requiredKermetaMetaProperties.add(prop)
+					requiredKermetaMetaClasses.add(prop.type.asType(Class).classDefinition)
+					requiredKermetaMetaClasses.add(prop.owningClass)
 					
 					if not oppVoid then
-						self.requiredKermetaMetaProperties.add(prop.opposite)
-						self.requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
-						self.requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+						requiredKermetaMetaProperties.add(prop.opposite)
+						requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
+						requiredKermetaMetaClasses.add(prop.opposite.owningClass)
 					end
 				end
 				
 				//Option 2
 				if propLower0 and propEnum then
-					self.requiredKermetaMetaProperties.add(prop)
-					self.requiredKermetaMetaEnumerations.add(prop.type.asType(Enumeration))
+					requiredKermetaMetaProperties.add(prop)
+					requiredKermetaMetaEnumerations.add(prop.type.asType(Enumeration))
 				end
 				
 				//Option 3
 				if propPrim then
 					if(propLower0) then
-						self.requiredKermetaMetaProperties.add(prop)
-						self.requiredKermetaMetaPrimitiveTypes.add(prop.type.asType(PrimitiveType))
-						self.requiredKermetaMetaClasses.add(prop.owningClass)
+						requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaPrimitiveTypes.add(prop.type.asType(PrimitiveType))
+						requiredKermetaMetaClasses.add(prop.owningClass)
 					else
 						//Add all properties with opposite property that are composite
 						//Which means that we add all potential containers for a class
 						//Since, opposite properties caputre important relationships such as multiple possible containers
-						self.requiredKermetaMetaProperties.add(prop)
-						self.requiredKermetaMetaPrimitiveTypes.add(prop.type.asType(PrimitiveType))
-						self.requiredKermetaMetaClasses.add(prop.owningClass)
+						requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaPrimitiveTypes.add(prop.type.asType(PrimitiveType))
+						requiredKermetaMetaClasses.add(prop.owningClass)
 					end
 				end
 				
 				if not oppVoid then
 					if prop.opposite.isComposite then
-						self.requiredKermetaMetaProperties.add(prop)
-						self.requiredKermetaMetaClasses.add(prop.type.asType(Class).classDefinition)
-						self.requiredKermetaMetaClasses.add(prop.owningClass)
+						requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaClasses.add(prop.type.asType(Class).classDefinition)
+						requiredKermetaMetaClasses.add(prop.owningClass)
 						
-						self.requiredKermetaMetaProperties.add(prop.opposite)
-						self.requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
-						self.requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+						requiredKermetaMetaProperties.add(prop.opposite)
+						requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
+						requiredKermetaMetaClasses.add(prop.opposite.owningClass)
 					end
 				end 
 				
 				if not propLower0 and propClass then
-					self.requiredKermetaMetaProperties.add(prop)
-					self.requiredKermetaMetaClasses.add(prop.type.asType(Class).classDefinition)
-					self.requiredKermetaMetaClasses.add(prop.owningClass)
+					requiredKermetaMetaProperties.add(prop)
+					requiredKermetaMetaClasses.add(prop.type.asType(Class).classDefinition)
+					requiredKermetaMetaClasses.add(prop.owningClass)
 					
 					if not oppVoid then
-						self.requiredKermetaMetaProperties.add(prop.opposite)
-						self.requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
-						self.requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+						requiredKermetaMetaProperties.add(prop.opposite)
+						requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
+						requiredKermetaMetaClasses.add(prop.opposite.owningClass)
 					end
 				end
 				
 				if not propLower0 and propEnum then
-					self.requiredKermetaMetaProperties.add(prop)
-					self.requiredKermetaMetaEnumerations.add(prop.type.asType(Enumeration))
+					requiredKermetaMetaProperties.add(prop)
+					requiredKermetaMetaEnumerations.add(prop.type.asType(Enumeration))
 				end
 			
 				//Add all required properties and their type
-				self.requiredMetaProperties.each{ p |
+				requiredMetaProperties.each{ p |
 					if p.name==prop.name and p.owningClassName == prop.owningClass.name then
 						if propEnum then
-							self.requiredKermetaMetaProperties.add(prop)
-							self.requiredKermetaMetaClasses.add(prop.owningClass)
-							self.requiredKermetaMetaEnumerations.add(prop.type.asType(Enumeration))
+							requiredKermetaMetaProperties.add(prop)
+							requiredKermetaMetaClasses.add(prop.owningClass)
+							requiredKermetaMetaEnumerations.add(prop.type.asType(Enumeration))
 						end
 						
 						if propClass then
-							self.requiredKermetaMetaProperties.add(prop)
-							self.requiredKermetaMetaClasses.add(prop.type.asType(Class).classDefinition)
-							self.requiredKermetaMetaClasses.add(prop.owningClass)
+							requiredKermetaMetaProperties.add(prop)
+							requiredKermetaMetaClasses.add(prop.type.asType(Class).classDefinition)
+							requiredKermetaMetaClasses.add(prop.owningClass)
 							
 							if not oppVoid then
-								self.requiredKermetaMetaProperties.add(prop.opposite)
-								self.requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
-								self.requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+								requiredKermetaMetaProperties.add(prop.opposite)
+								requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
+								requiredKermetaMetaClasses.add(prop.opposite.owningClass)
 							end
 						end
 						
 						if propPrim then
-							self.requiredKermetaMetaProperties.add(prop)
-							self.requiredKermetaMetaPrimitiveTypes.add(prop.type.asType(PrimitiveType))
-							self.requiredKermetaMetaClasses.add(prop.owningClass)
+							requiredKermetaMetaProperties.add(prop)
+							requiredKermetaMetaPrimitiveTypes.add(prop.type.asType(PrimitiveType))
+							requiredKermetaMetaClasses.add(prop.owningClass)
 						end
 					end
 				}
@@ -387,30 +390,30 @@ class MetamodelPruner
 				//Option 4
 				/*
 				if prop.isComposite and propClass and propLower0 then
-					if self.isInRequriedSetOfMetaClasses(prop.type.asType(Class).classDefinition) then
-						self.requiredKermetaMetaProperties.add(prop)
-						self.requiredKermetaMetaClasses.add(prop.type.asType(Class).classDefinition)
-						self.requiredKermetaMetaClasses.add(prop.owningClass)
+					if isInRequriedSetOfMetaClasses(prop.type.asType(Class).classDefinition) then
+						requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaClasses.add(prop.type.asType(Class).classDefinition)
+						requiredKermetaMetaClasses.add(prop.owningClass)
 						
 						if not oppVoid then
-							self.requiredKermetaMetaProperties.add(prop.opposite)
-							self.requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
-							self.requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+							requiredKermetaMetaProperties.add(prop.opposite)
+							requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
+							requiredKermetaMetaClasses.add(prop.opposite.owningClass)
 						end
 					end 
 				end
 				*/
 				
 				if prop.isComposite and propClass and not propLower0 then
-					if self.isInRequriedSetOfMetaClasses(prop.type.asType(Class).classDefinition) then
-						self.requiredKermetaMetaProperties.add(prop)
-						self.requiredKermetaMetaClasses.add(prop.type.asType(Class).classDefinition)
-						self.requiredKermetaMetaClasses.add(prop.owningClass)
+					if isInRequriedSetOfMetaClasses(prop.type.asType(Class).classDefinition) then
+						requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaClasses.add(prop.type.asType(Class).classDefinition)
+						requiredKermetaMetaClasses.add(prop.owningClass)
 						
 						if not oppVoid then
-							self.requiredKermetaMetaProperties.add(prop.opposite)
-							self.requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
-							self.requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+							requiredKermetaMetaProperties.add(prop.opposite)
+							requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
+							requiredKermetaMetaClasses.add(prop.opposite.owningClass)
 						end
 					end 
 				end
@@ -418,38 +421,38 @@ class MetamodelPruner
 				//Option 5
 				/*
 				if prop.isComposite and prop.type.isInstanceOf(Enumeration) and prop.lower==0 then
-					if self.isInRequriedSetOfMetaEnumerations(prop.type.asType(Enumeration)) then
+					if isInRequriedSetOfMetaEnumerations(prop.type.asType(Enumeration)) then
 						//stdio.writeln("Property added="+prop.name)
-						self.requiredKermetaMetaEnumerations.add(prop.type.asType(Enumeration))
-						self.requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaEnumerations.add(prop.type.asType(Enumeration))
+						requiredKermetaMetaProperties.add(prop)
 					end 
 				end
 				*/
 				
 				if prop.isComposite and propEnum and not propLower0 then
-					if self.isInRequriedSetOfMetaEnumerations(prop.type.asType(Enumeration)) then
-						self.requiredKermetaMetaEnumerations.add(prop.type.asType(Enumeration))
-						self.requiredKermetaMetaProperties.add(prop)
+					if isInRequriedSetOfMetaEnumerations(prop.type.asType(Enumeration)) then
+						requiredKermetaMetaEnumerations.add(prop.type.asType(Enumeration))
+						requiredKermetaMetaProperties.add(prop)
 					end 
 				end
 				
 				if propClass then
-					if self.isInRequriedSetOfMetaClasses(prop.type.asType(Class).classDefinition) then
-						self.requiredKermetaMetaProperties.add(prop)
-						self.requiredKermetaMetaClasses.add(prop.owningClass)
+					if isInRequriedSetOfMetaClasses(prop.type.asType(Class).classDefinition) then
+						requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaClasses.add(prop.owningClass)
 						
 						if not oppVoid then
-							self.requiredKermetaMetaProperties.add(prop.opposite)
-							self.requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
-							self.requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+							requiredKermetaMetaProperties.add(prop.opposite)
+							requiredKermetaMetaClasses.add(prop.opposite.type.asType(Class).classDefinition)
+							requiredKermetaMetaClasses.add(prop.opposite.owningClass)
 						end
 					end 
 				end
 				
 				if propEnum then
-					if self.isInRequriedSetOfMetaEnumerations(prop.type.asType(Enumeration)) then
-						self.requiredKermetaMetaEnumerations.add(prop.type.asType(Enumeration))
-						self.requiredKermetaMetaProperties.add(prop)
+					if isInRequriedSetOfMetaEnumerations(prop.type.asType(Enumeration)) then
+						requiredKermetaMetaEnumerations.add(prop.type.asType(Enumeration))
+						requiredKermetaMetaProperties.add(prop)
 					end 
 				end
 			}
@@ -466,11 +469,11 @@ class MetamodelPruner
 	
 
 	operation includeAllMultiLevelSuperClasses():Void is do
-		self.requiredKermetaMetaClasses.each { c |
+		requiredKermetaMetaClasses.each { c |
 			c.allSuperTypes.each { t | 
 				if t.isInstanceOf(Class)   then
-					if self.isClassInMM(t.asType(Class).classDefinition) then
-						self.requiredKermetaMetaClasses.add(t.asType(Class).classDefinition)
+					if isClassInMM(t.asType(Class).classDefinition) then
+						requiredKermetaMetaClasses.add(t.asType(Class).classDefinition)
 					end
 				end
 			}
@@ -497,29 +500,29 @@ class MetamodelPruner
 	operation getRequiredConcepts():Void is do
 		//Phase 1: Adding all required types
 		//Add initial set of required kermeta meta-classes
-		self.includeInitialClasses
+		includeInitialClasses
 		//Add initial set of required kermeta meta-enumerations
-		self.includeInitialEnumerations
+		includeInitialEnumerations
 		//Add initial set of required kermeta meta-properties
-		self.includeInitialProperties
+		includeInitialProperties
 		
 		//Add all multilevel superclasses
-		self.includeAllMultiLevelSuperClasses
+		includeAllMultiLevelSuperClasses
 	
 		//Phase 2: Adding all required properties
 		//Pass 1
-		self.includeAllObligatoryPropertiesAndTheirTypes
+		includeAllObligatoryPropertiesAndTheirTypes
 		//Add all multilevel superclasses
-		self.includeAllMultiLevelSuperClasses
+		includeAllMultiLevelSuperClasses
 	
-		self.includeAllObligatoryPropertiesAndTheirTypes
+		includeAllObligatoryPropertiesAndTheirTypes
 		//Add all multilevel superclasses
-		self.includeAllMultiLevelSuperClasses
+		includeAllMultiLevelSuperClasses
 
 		//Pass 3
-		self.includeAllObligatoryPropertiesAndTheirTypes
+		includeAllObligatoryPropertiesAndTheirTypes
 		//Add all multilevel superclasses
-		self.includeAllMultiLevelSuperClasses
+		includeAllMultiLevelSuperClasses
 	end
 
 
@@ -530,7 +533,7 @@ class MetamodelPruner
 				object | 
 					if object.isInstanceOf(ClassDefinition) then
 						object.asType(ClassDefinition).ownedOperation.each {
-							 op |  extern org::kermeta::ki::visual::view::ComponentView.onPruning(op)
+							 op |  extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, op)
 						}
 				end
 			}
@@ -554,9 +557,9 @@ class MetamodelPruner
 	
 	operation TagRemovalInPackage(aPackage : Package):Void is do
 		if (not aPackage.isVoid) then
-			aPackage.tag.each{ t | extern org::kermeta::ki::visual::view::ComponentView.onPruning(t) }
+			aPackage.tag.each{ t | extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, t) }
 			aPackage.asType(TypeDefinitionContainer).ownedTags.each { 
-				object | extern org::kermeta::ki::visual::view::ComponentView.onPruning(object)
+				object | extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
 			}
 		end
 		
@@ -570,7 +573,7 @@ class MetamodelPruner
 	operation TagRemoval() : Void is do
 		//Remove all Tags for Modelling Unit
 		inputKermetaMetamodel.ownedTags.each { 
-			tag | extern org::kermeta::ki::visual::view::ComponentView.onPruning(tag)
+			tag | extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, tag)
 		}
 		
 		//Remove all Tags from packages
@@ -591,11 +594,11 @@ class MetamodelPruner
 			 			}
 			 								
 			 			if removeProperty then								
-			 				extern org::kermeta::ki::visual::view::ComponentView.onPruning(prop)
+			 				extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, prop)
 			 					
 			 				if not prop.opposite.isVoid  then
 			 					if not prop.opposite.owningClass.isVoid then
-			 						extern org::kermeta::ki::visual::view::ComponentView.onPruning(prop.opposite)
+			 						extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, prop.opposite)
 			 					end
 			 				end
 			 			end
@@ -623,7 +626,7 @@ class MetamodelPruner
 				if object.isInstanceOf(ClassDefinition) then
 					//If the class is in the set of required classes
 					if not requiredKermetaMetaClasses.contains(object.asType(ClassDefinition)) then								
-				 		extern org::kermeta::ki::visual::view::ComponentView.onPruning(object)
+				 		extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
 					end
 				end
 			}
@@ -648,7 +651,7 @@ class MetamodelPruner
 				if object.isInstanceOf(PrimitiveType) then
 					//If the class is in the set of required classes
 					if not requiredKermetaMetaPrimitiveTypes.contains(object.asType(PrimitiveType)) then								
-				 		extern org::kermeta::ki::visual::view::ComponentView.onPruning(object)
+				 		extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
 					end
 				end
 			}
@@ -678,7 +681,7 @@ class MetamodelPruner
 				 	}
 				 
 					if removeEnum then 
-						extern org::kermeta::ki::visual::view::ComponentView.onPruning(object)
+						extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
 					end
 				end
 			}
@@ -706,7 +709,7 @@ class MetamodelPruner
 				
 		if(aPackage.nestedPackage.isEmpty) then
 			if ownedTypeDefEmpty then
-				extern org::kermeta::ki::visual::view::ComponentView.onPruning(aPackage)
+				extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, aPackage)
 			end
 		else
 			aPackage.nestedPackage.each{p |//TODO does it really work?
@@ -714,7 +717,7 @@ class MetamodelPruner
 			}
 				
 			if ownedTypeDefEmpty and result then
-				extern org::kermeta::ki::visual::view::ComponentView.onPruning(aPackage)
+				extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, aPackage)
 			end
 		end
 	end
@@ -725,7 +728,7 @@ class MetamodelPruner
 	operation EmptyPackageRemoval():Void is do
 		self.inputKermetaMetamodel.packages.each{ p |
 			if self.isPackageEmpty(p) then
-				extern org::kermeta::ki::visual::view::ComponentView.onPruning(p)
+				extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, p)
 			end
 		}
 	end

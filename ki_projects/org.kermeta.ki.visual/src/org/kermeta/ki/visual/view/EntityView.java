@@ -15,17 +15,11 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.kermeta.ki.visual.Force;
-
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Real;
 
 
 public abstract class EntityView extends ComponentView {
-	public static final double ELECTRIC_CONSTANT = 9000000.; 
-	public static final double CHARGE 			 = 0.5;
-	
 	private static double lastx = 100;
 	private static double lasty = 100;
 	
@@ -39,11 +33,16 @@ public abstract class EntityView extends ComponentView {
 	
 	protected List<PropertyView> propertiesView;
 	
+	protected double scale;
+
+	protected double fontSize;
+	
+	protected Font font;
+	
 	
 	protected static final Graphics2D		 GRAPHICS;
 	protected static final FontMetrics 		 FONT_METRICS;
 	protected static final FontRenderContext FONT_RENDER_CONT;
-	protected static final Font 			 FONT = new Font("Times New Roman", Font.PLAIN, 12);
 	
 	static {
 		BufferedImage bufferImage = new BufferedImage(2, 2, BufferedImage.TYPE_INT_RGB);
@@ -66,33 +65,21 @@ public abstract class EntityView extends ComponentView {
 		
 		return contains ? entityRO.getFactory().getMemory().trueINSTANCE : entityRO.getFactory().getMemory().falseINSTANCE; 
 	}
+	
+	
 
-	
-	
-	public static RuntimeObject isVisible(RuntimeObject entityRO) {
-		Object obj = entityRO.getUserData();
-		boolean ok;
-		
-		if(obj!=null && obj instanceof EntityView) {
-			ok = ((EntityView)obj).visible;
-		}
-		else ok = false;
-		
-		return ok ? entityRO.getFactory().getMemory().trueINSTANCE : entityRO.getFactory().getMemory().falseINSTANCE;
-	}
-	
-	
-	
-	public static RuntimeObject setVisible(RuntimeObject entityRO, RuntimeObject visibleRO) {
+	public static RuntimeObject unprune(RuntimeObject entityRO) {
 		EntityView view = (EntityView) entityRO.getUserData();
-		boolean visible = Boolean.getValue(visibleRO);
 		
-		view.visible = visible;
+		view.visibility = Visibility.STANDARD;
+		view.setScale(1.);
+		view.lineColor 	   = view.getLineColor(255);
+		view.fillingColor  = view.getFillingColor(255);
 		view.update();
 		
 		return entityRO.getFactory().getMemory().voidINSTANCE;
 	}
-
+	
 	
 	public static RuntimeObject name2name(RuntimeObject entityRO, RuntimeObject newNameRO) {
 		EntityView view = (EntityView) entityRO.getUserData();
@@ -107,13 +94,15 @@ public abstract class EntityView extends ComponentView {
 	
 	
 	public EntityView(String name) {
+		super();
 		this.name = name;
 		
 		propertiesView = new ArrayList<PropertyView>();
 		path 		   = new GeneralPath();
 		centre 		   = new Point2D.Double(lastx, lasty);
-		lineColor 	   = Color.BLACK;
-		fillingColor   = Color.WHITE;
+		lineColor 	   = getLineColor(255);
+		fillingColor   = getFillingColor(255);
+		setScale(1.);
 		update();
 		
 		if(lastx>400) {
@@ -126,23 +115,41 @@ public abstract class EntityView extends ComponentView {
 	
 	
 	
+	public abstract Color getFillingColor(int opacity);
+	
+	
+	public abstract Color getLineColor(int opacity);
+	
+	
+	
 	@Override
 	public void paint(Graphics2D g) {
-		if(!visible)
+		if(!isVisible())
 			return ;
 		
-		final TextLayout tl  = new TextLayout(name, FONT, FONT_RENDER_CONT);
-		final int textWidth  = (int) tl.getBounds().getWidth();
-		final int textHeight  = (int) tl.getBounds().getHeight();
-		final int textHeaderHeight = getTextHeaderHeight();
-		
+		final TextLayout tl  		= new TextLayout(name, font, FONT_RENDER_CONT);
+		final int textWidth  		= (int) tl.getBounds().getWidth();
+		final int textHeight  		= (int) tl.getBounds().getHeight();
+		final int textHeaderHeight 	= getTextHeaderHeight();
+
 		g.setColor(fillingColor);
 		g.fill(path);
 		g.setColor(lineColor);
 		g.draw(path);
 		g.setColor(Color.BLACK);
+		g.setFont(font);
 		g.drawString(name, (int)centre.x-textWidth/2, (int)centre.y-getPreferredSize().height/2+textHeight+(textHeaderHeight-textHeight)/2);
-		
+	}
+	
+	
+	
+	public void setScale(final double scale) {
+		if(scale>0.) {
+			this.scale = scale;
+			fontSize   = 14.*scale;
+			font 	   = new Font("Times New Roman", Font.PLAIN, (int)fontSize);
+			update();
+		}
 	}
 	
 	
@@ -153,25 +160,29 @@ public abstract class EntityView extends ComponentView {
 	
 	@Override
 	public void update() {
-		final Dimension dim  = getPreferredSize();
-		final int textHeight = getTextHeaderHeight();
+		final Dimension dim    = getPreferredSize();
+		final int textHeight   = getTextHeaderHeight();
+		final float halfWidth  = (dim.width/2f);
+		final float halfHeight = (dim.height/2f);
+		final float cx 		   = (float) centre.x;
+		final float cy 		   = (float) centre.y;
 		
 		path.reset();
-		path.moveTo((float)centre.x-dim.width/2f, (float)centre.y-dim.height/2f);
-		path.lineTo((float)centre.x+dim.width/2f, (float)centre.y-dim.height/2f);
-		path.lineTo((float)centre.x+dim.width/2f, (float)centre.y+dim.height/2f);
-		path.lineTo((float)centre.x-dim.width/2f, (float)centre.y+dim.height/2f);
+		path.moveTo(cx-halfWidth, cy-halfHeight);
+		path.lineTo(cx+halfWidth, cy-halfHeight);
+		path.lineTo(cx+halfWidth, cy+halfHeight);
+		path.lineTo(cx-halfWidth, cy+halfHeight);
 		path.closePath();
-		path.moveTo((float)centre.x-dim.width/2f, (float)centre.y-dim.height/2f+textHeight);
-		path.lineTo((float)centre.x+dim.width/2f, (float)centre.y-dim.height/2f+textHeight);
+		path.moveTo(cx-halfWidth, cy-halfHeight+textHeight);
+		path.lineTo(cx+halfWidth, cy-halfHeight+textHeight);
 	}
 	
 	
 	protected Dimension getPreferredSize() {
 		Dimension dim = new Dimension();
 		
-		dim.height = 70;
-		dim.width  = 100;
+		dim.height = (int) (70 * scale);
+		dim.width  = (int) (100 * scale);
 		
 		return dim;
 	}
@@ -266,37 +277,5 @@ public abstract class EntityView extends ComponentView {
 	
 	public double getHeight() {
 		return getBorders().getHeight();
-	}
-	
-	
-	
-	public Force forceArc(final LinkView arc) { 	
-		double norm 		= LinkView.STRAIGHTNESS*(arc.getLength() - LinkView.LENGTH_INIT);
-		EntityView entity 	= arc.entitySrc;
-		
-		if(entity == this) 
-			entity = arc.entityTar;
-
-		final double fX = norm * (entity.getX() - getX()) / Math.max(arc.getLength(), 1);
-		final double fY = norm * (entity.getX() - getY()) / Math.max(arc.getLength(), 1);
-
-		return new Force(fX/10., fY/10.);
-	}
-	
-	
-	
-	public Force influenceEntity(final EntityView entity) { 	
-		double fX, fY, norm;
-		final double x = getX();
-		final double y = getY();
-		final double x2 = entity.getX();
-		final double y2 = entity.getY();
-		final double d = Math.sqrt( (x - x2) * (x - x2) + (y - y2) * (y - y2)) ;
-
-		norm = ELECTRIC_CONSTANT*CHARGE*CHARGE/(d*d);
-		fY   = -norm * (y2 - y) / d;
-		fX   = -norm * (x2 - x) / d;
-
-		return new Force(fX, fY);
 	}
 }

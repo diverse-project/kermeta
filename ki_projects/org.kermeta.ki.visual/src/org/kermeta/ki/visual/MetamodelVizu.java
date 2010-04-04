@@ -20,16 +20,9 @@ public class MetamodelVizu {
 		
 		MetamodelView mm = frame.mmView;
 		EntityView b = new ClassView("B");
-		b.setVisible(true);
-		
 		EntityView c = new ClassView("C");
-		c.setVisible(true);
-		
 		EntityView d = new ClassView("D");
-		d.setVisible(true);
-		
 		EntityView a = new ClassView("A");
-		a.setVisible(true);
 		
 		LinkView link = new RelationView(b, a);
 		link.update();

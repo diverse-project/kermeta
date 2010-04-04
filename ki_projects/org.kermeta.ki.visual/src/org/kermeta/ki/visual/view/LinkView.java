@@ -9,8 +9,7 @@ import java.awt.geom.Rectangle2D;
 
 
 public abstract class LinkView extends ComponentView {
-	public static final int STRAIGHTNESS = 5; 
-	public static final int LENGTH_INIT  = 100;
+	public static final Color COLOR_GRAYED = new Color(210, 210, 210, 180);
 	
 	protected EntityView entitySrc;
 	
@@ -30,6 +29,12 @@ public abstract class LinkView extends ComponentView {
 		entityTar = target;
 		initialise();
 		update();
+	}
+	
+	
+	@Override
+	public boolean isVisible() {
+		return super.isVisible() && entitySrc.isVisible() && entityTar.isVisible();
 	}
 	
 	
@@ -54,7 +59,7 @@ public abstract class LinkView extends ComponentView {
 
 	@Override
 	public void paint(Graphics2D g) {
-		if(visible && entitySrc.visible && entityTar.visible) {
+		if(isVisible()) {
 			g.setColor(getLineColor());
 			g.draw(line);
 		}
@@ -63,7 +68,7 @@ public abstract class LinkView extends ComponentView {
 	
 	
 	public Color getLineColor() {
-		return Color.BLACK;
+		return entitySrc.visibility==Visibility.GRAYED || entityTar.visibility==Visibility.GRAYED ? COLOR_GRAYED : Color.BLACK;
 	}
 	
 	
@@ -163,10 +168,10 @@ public abstract class LinkView extends ComponentView {
 		pointTar    = intersectionPoint(line, entityTar.getBorders());
 		
 		if(pointSrc==null || pointTar==null)
-			visible = false;
+			visibility = Visibility.NONE;
 		else {
 			this.line.setLine(pointSrc.x, pointSrc.y, pointTar.x, pointTar.y);
-			visible = true;
+			visibility = entitySrc.visibility==Visibility.GRAYED || entityTar.visibility==Visibility.GRAYED ? Visibility.GRAYED : Visibility.STANDARD;
 		}
 	}
 

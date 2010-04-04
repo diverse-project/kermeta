@@ -11,7 +11,7 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/ButtonPressLink.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/ButtonPressed.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActivateDesactivateInstruments.kmt"
-require "platform:/resource/org.kermeta.ki.visual/kermeta/pruning/Pruner.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Pruner.kmt"
 
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction

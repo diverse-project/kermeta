@@ -28,20 +28,29 @@ public class MetamodelVizuFrame extends JFrame {
 	
 	
 	public static RuntimeObject initialiseToolbar(RuntimeObject toolbarRO, RuntimeObject undoButRO, RuntimeObject redoButRO, 
-							RuntimeObject prunerButRO) {
+							RuntimeObject prunerButRO, RuntimeObject prunerGrayButRO, RuntimeObject prunerHideButRO) {
 		JPanel toolbar = (JPanel) toolbarRO.getUserData();
 		AbstractButton undoBut 		= (AbstractButton)undoButRO.getUserData();
 		AbstractButton redoBut 		= (AbstractButton)redoButRO.getUserData();
 		AbstractButton prunerBut 	= (AbstractButton)prunerButRO.getUserData();
-		ButtonGroup group 			= new ButtonGroup();
+		AbstractButton grayedBut 	= (AbstractButton)prunerGrayButRO.getUserData();
+		AbstractButton hideBut 		= (AbstractButton)prunerHideButRO.getUserData();
+		ButtonGroup groupSelector 	= new ButtonGroup();
+		ButtonGroup groupPruner 	= new ButtonGroup();
 		
 		toolbar.setLayout(new BoxLayout(toolbar, BoxLayout.LINE_AXIS));
 		toolbar.add(undoBut);
 		toolbar.add(redoBut);
 		toolbar.add(Box.createHorizontalStrut(30));
 		toolbar.add(prunerBut);
+		toolbar.add(Box.createHorizontalStrut(50));
+		toolbar.add(hideBut);
+		toolbar.add(grayedBut);
 		
-		group.add(prunerBut);
+		groupSelector.add(prunerBut);
+		
+		groupPruner.add(hideBut);
+		groupPruner.add(grayedBut);
 		
 		return toolbarRO.getFactory().getMemory().voidINSTANCE;
 	}
@@ -94,6 +103,9 @@ public class MetamodelVizuFrame extends JFrame {
 	
 	
 	
+	
+	
+	
 	public MetamodelVizuFrame(EventManagerWrapper emw, JPanel toolbar) { 
 		super("Metamodel visualisation");
 		
@@ -114,34 +126,15 @@ public class MetamodelVizuFrame extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				if(mmView.getEventManager()!=null)
 					mmView.getEventManager().onExitEvent();
-            }});  
-	}
-	
-	
-	
-	public void organiseModel() {
-		double change1, change2=0.;
-		int cpt = 0;
-		boolean again = true;
-		double gap = 1.;
-		
-		while(again) {		
-			change1 = mmView.reorganise();
-			
-			if((change2+gap)>=change1 && (change2-gap)<=change1)
-				again = false;
-			else {
-				cpt++;
-				
-				if(cpt==100)
-					again = false;
-			}
-
-			change2=change1;
-	    }
-		
-		mmView.recentre();
-		mmView.updatePreferredSize();
-		mmView.validate();
+            }});
+     
+		new FileDrop(mmView, new FileDrop.Listener()
+        {   public void filesDropped( java.io.File[] files )
+            {   for( int i = 0; i < files.length; i++ )
+                {  
+            		System.out.println(files[i].getAbsolutePath());
+                }   // end for: through each dropped file
+            }   // end filesDropped
+        }); // end Fi
 	}
 }
