@@ -6,9 +6,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JPanel;
 import javax.swing.JViewport;
@@ -19,7 +23,7 @@ import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 import org.kermeta.ki.visual.view.ComponentView.Visibility;
 
-import edu.uci.ics.jung.algorithms.layout.KKLayout;
+import edu.uci.ics.jung.algorithms.layout.TreeLayout;
 import edu.uci.ics.jung.graph.DelegateForest;
 import edu.uci.ics.jung.graph.Forest;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -135,22 +139,39 @@ public class MetamodelView extends JPanel implements Scrollable {
 			if(entity.isVisible())
 				forest.addVertex(entity);
 		
+//		Map<EntityView, EntityView> linksAdded = new IdentityHashMap<EntityView, EntityView>();
+		
 		for(LinkView link : links)
-			if(link.isVisible())
-				forest.addEdge(link, link.getEntitySrc(), link.getEntityTar());
+			if(link.isVisible() && link instanceof InheritanceView) {
+//				//if(linksAdded.get(link.getEntitySrc())!=link.getEntityTar() && linksAdded.get(link.getEntityTar())!=link.getEntitySrc())
+					forest.addEdge(link, link.getEntitySrc(), link.getEntityTar());
+			}
 	}
 	
 	
 	
 	
 	public void setTreeLayout() {
-		KKLayout<EntityView,LinkView> treeLayout = new KKLayout<EntityView,LinkView>(forest, new DistanceVisu(this));
-		treeLayout.setSize(new Dimension(1000, 800));
+		MyTreeLayout<EntityView,LinkView> treeLayout   = new MyTreeLayout<EntityView,LinkView>(forest, 200, 200);
+		Iterator<Entry<EntityView, Point2D>> locations = treeLayout.getLocations().entrySet().iterator();
+		Entry<EntityView, Point2D> location;
 		
-		for(EntityView entity : entities) {
-			entity.setCentre((int)treeLayout.getX(entity), (int)treeLayout.getY(entity));
-			entity.update();
+		while(locations.hasNext()) {
+			location = locations.next();
+			location.getKey().setCentre(location.getValue());
+			location.getKey().update();
 		}
+//		KKLayout<EntityView,LinkView> treeLayout = new KKLayout<EntityView,LinkView>(forest, new DistanceVisu(this));
+//		treeLayout.setSize(new Dimension(1000, 800));
+//		
+//		for(EntityView entity : entities) {
+//			entity.setCentre((int)treeLayout.getX(entity), (int)treeLayout.getY(entity));
+//			entity.update();
+//		}
+		
+		
+		for(LinkView link : links)
+			link.update();
 		
 		recentre();
 		repaint();
@@ -304,3 +325,18 @@ public class MetamodelView extends JPanel implements Scrollable {
         return (orientation == SwingConstants.VERTICAL) ? visibleRect.height : visibleRect.width;
 	}
 }
+
+
+
+class MyTreeLayout<V, E> extends TreeLayout<V, E> {
+
+	public MyTreeLayout(Forest<V, E> g, int distx, int disty) {
+		super(g, distx, disty);
+	}
+	
+	
+	public Map<V, Point2D> getLocations() {
+		return locations;
+	}
+}
+

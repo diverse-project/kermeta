@@ -203,8 +203,8 @@ public abstract class EntityView extends ComponentView {
 
 
 
-	public void setCentre(Point2D.Double centre) {
-		this.centre = centre;
+	public void setCentre(Point2D centre) {
+		this.centre.setLocation(centre.getX(), centre.getY());
 	}
 
 

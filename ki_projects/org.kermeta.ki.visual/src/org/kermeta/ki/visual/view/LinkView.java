@@ -34,7 +34,7 @@ public abstract class LinkView extends ComponentView {
 	
 	@Override
 	public boolean isVisible() {
-		return super.isVisible() && entitySrc.isVisible() && entityTar.isVisible();
+		return super.isVisible() && pointSrc!=null && pointTar!=null && entitySrc.isVisible() && entityTar.isVisible();
 	}
 	
 	
