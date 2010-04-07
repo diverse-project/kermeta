@@ -184,10 +184,11 @@ public abstract class EntityView extends ComponentView {
 	
 	
 	protected Dimension getPreferredSize() {
-		Dimension dim = new Dimension();
+		Rectangle2D bound 	= FONT_METRICS.getStringBounds(name, null);
+		Dimension dim 		= new Dimension();
 		
 		dim.height = (int) (70 * scale);
-		dim.width  = (int) (100 * scale);
+		dim.width  = (int) ((bound.getWidth()+5.) * scale);
 		
 		return dim;
 	}
