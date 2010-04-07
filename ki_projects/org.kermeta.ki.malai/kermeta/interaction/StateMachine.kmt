@@ -252,4 +252,32 @@ abstract class StateMachine inherits EventHandler
 			}
 		end
 	end
+	
+	
+	
+	
+	method onWheel(px : Real, py : Real, isUp : Boolean, increment : Integer, idHID : Integer) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+
+			currentState.transitions.exists{t |
+				if(t.isInstanceOf(WheelTransition)) then
+					var wt : WheelTransition init t.asType(WheelTransition)
+				
+					wt.px        := px
+					wt.py        := py
+					wt.isUp      := isUp
+					wt.increment := increment
+					
+					if(t.isGuardRespected) then
+						stop := true
+						executeTransition(t)
+					end
+				end
+				
+				stop
+			}
+		end
+	end
 }

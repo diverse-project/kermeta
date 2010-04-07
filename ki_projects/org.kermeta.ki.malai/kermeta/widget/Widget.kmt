@@ -97,6 +97,36 @@ class Panel inherits GraphicalComponent, Picker
 	
 	
 	
+	operation hasScrollbars() : Boolean is do
+		result ?= extern org::kermeta::ki::malai::widget::Panel.hasScrollbars(self)
+	end
+	
+	
+	
+	operation isVerticalScrollbarVisible() : Boolean is do
+		result ?= extern org::kermeta::ki::malai::widget::Panel.isVerticalScrollbarVisible(self)
+	end
+	
+	
+	
+	operation isHorizontalScrollbarVisible() : Boolean is do
+		result ?= extern org::kermeta::ki::malai::widget::Panel.isHorizontalScrollbarVisible(self)
+	end
+	
+	
+	
+	operation scrollVertically(increment : Integer) : Void is do
+		extern org::kermeta::ki::malai::widget::Panel.scrollVertically(self, increment)
+	end
+	
+	
+	
+	operation scrollHorizontally(increment : Integer) : Void is do
+		extern org::kermeta::ki::malai::widget::Panel.scrollHorizontally(self, increment)
+	end
+	
+	
+	
 	operation addComponent(component : GraphicalComponent) : Void is do
 		components.add(component)
 		extern org::kermeta::ki::malai::widget::Panel.add(self, component)

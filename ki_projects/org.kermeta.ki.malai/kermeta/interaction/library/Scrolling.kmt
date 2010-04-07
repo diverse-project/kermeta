@@ -1,0 +1,69 @@
+/*
+ * Creation : April 6, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::interaction;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/MouseWheelEvent.kmt"
+
+
+using kermeta::ki::malai::interaction
+using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::picking
+using kermeta::standard
+
+
+
+class Scrolling inherits Interaction
+{
+	attribute increment : Integer
+	
+	attribute px : Real
+	
+	attribute py : Real
+	
+	reference target : Pickable
+	
+	
+	method reinit() : Void is do
+		super
+		
+		px 		  := void
+		py		  := void
+		target	  := void
+		increment := 0
+	end
+	
+	
+
+	method initStateMachine() : Void is do
+		var wheeled : State init TerminalState.new
+
+		wheeled.initialise("wheeled")
+		addState(wheeled)
+
+		var swt : ScrollingWheelTransition init ScrollingWheelTransition.new
+		swt.scrolling := self
+		swt.initialise(initState, wheeled)
+	end
+}
+
+
+
+
+class ScrollingWheelTransition inherits WheelTransition
+{
+	reference scrolling : Scrolling
+	
+	
+	method action() : Void is do
+		scrolling.increment := scrolling.increment + (if(isUp) then -increment else increment end)
+		scrolling.px        := Real.clone(px)
+		scrolling.py        := Real.clone(py)
+		scrolling.target    := scrolling.getPickableAt(scrolling.px, scrolling.py)
+	end
+}

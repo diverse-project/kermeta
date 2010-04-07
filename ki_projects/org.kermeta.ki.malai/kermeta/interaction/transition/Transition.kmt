@@ -96,6 +96,14 @@ class MoveTransition inherits PointingDeviceTransition {
 
 
 
+class WheelTransition inherits PointingDeviceTransition {
+	attribute isUp : Boolean
+	
+	attribute increment : Integer
+}
+
+
+
 
 abstract class PointingDeviceTransition inherits Transition {
 	attribute px : Real

@@ -14,6 +14,7 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/Event
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/MouseEvent.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/KeyEvent.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/ActionEvent.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/MouseWheelEvent.kmt"
 
 using kermeta::ki::malai::dispatcher
 using kermeta::ki::malai::interaction
@@ -76,8 +77,8 @@ class EventManager inherits Dispatchable
 	* Processes the event produces by the Java UI and transfered to Kermeta.
 	*/
 	operation process(event : Event) : Void is do
+		var name : String   init event.getName
 		var info : AWTEvent init event.getInfo
-		var name : String init event.getName
 
 		if(info.isInstanceOf(MouseEvent)) then
 			var me 		: MouseEvent init info.asType(MouseEvent)
@@ -102,6 +103,14 @@ class EventManager inherits Dispatchable
 			if(name.equals("MOUSE_RELEASED")) then
 				var object  : Object init info.getSourceObject
 				handlers.each{h | if(h.matches(object)) then h.onRelease(button, x, y, 0) end }
+			end 
+			if(name.equals("MOUSE_WHEEL_MOVED")) then
+				var object : Object init info.getSourceObject
+				var mwe    : MouseWheelEvent init info.asType(MouseWheelEvent)
+				var isUp   : Boolean init mwe.getWheelRotation<0
+				var increment : Integer init mwe.getScrollAmount
+				
+				handlers.each{h | if(h.matches(object)) then h.onWheel(x, y, isUp, increment, 0) end }
 			end end end end
 		else
 		if(info.isInstanceOf(KeyEvent)) then
@@ -120,9 +129,7 @@ class EventManager inherits Dispatchable
 			var src : Object init info.asType(ActionEvent).getSourceObject
 			
 			if(src.isInstanceOf(Button)) then
-				var object  : Object init info.getSourceObject
-				stdio.writeln(src.toString + " " + object.toString)
-				handlers.each{h | if(h.matches(object)) then h.onButtonPressed(object.asType(Button)) end }
+				handlers.each{h | if(h.matches(src)) then h.onButtonPressed(src.asType(Button)) end }
 			//TODO else if(ae.isFromTextField) then /* TODO */ end
 			end
 		end end end

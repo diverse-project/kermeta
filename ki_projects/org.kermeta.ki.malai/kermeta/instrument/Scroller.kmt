@@ -1,0 +1,75 @@
+/*
+ * Creation : April 6, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::instrument;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Scroll.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Scrolling.kmt"
+
+
+using kermeta::ki::malai::instrument
+using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::widget
+using kermeta::ki::malai::picking
+using kermeta::ki::malai::action
+using kermeta::ki::malai::interaction
+using kermeta::language::structure
+
+
+
+class Scroller inherits Instrument
+{
+	reference panel : Panel
+	
+	reference picker : Picker
+	
+	
+	
+	method initialiseLinks(eventManager : EventManager) : Void is do
+		addLink(Scrolling2Scroll.new, picker, void, eventManager, false)
+	end
+}
+
+
+
+
+class Scrolling2Scroll inherits Link
+{
+	method createInteraction() : Interaction is do
+		result := Scrolling.new
+	end
+	
+	
+	method getActionClass() : Class is do
+		result := Scroll
+	end
+	
+	
+	method isConditionRespected() : Boolean is do
+		result := true
+	end
+	
+	
+	method createAction() : Void is do
+		var scroll    : Scroll    init Scroll.new
+		var scrolling : Scrolling init interaction.asType(Scrolling)
+		var scroller  : Scroller  init instrument.asType(Scroller)
+		
+		scroll.panel     := scroller.panel 
+		scroll.increment := scrolling.increment
+		action 		     := scroll
+		action.initialise(instrument.actionRegistry)
+	end
+	
+	
+	method updateAction() : Void is do end
+}
+
+
+
+

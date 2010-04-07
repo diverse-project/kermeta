@@ -14,6 +14,8 @@ using kermeta::ki::malai::widget
 
 
 abstract class EventHandler {
+	operation onWheel(px : Real, py : Real, isUp : Boolean, increment : Integer, idHID : Integer) : Void is abstract
+
 	operation onPressure(button : Integer, px : Real, py : Real, idHID : Integer) : Void is abstract
 	
 	operation onRelease(button : Integer, px : Real, py : Real, idHID : Integer) : Void is abstract

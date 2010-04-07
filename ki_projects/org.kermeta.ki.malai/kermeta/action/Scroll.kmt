@@ -1,0 +1,48 @@
+/*
+ * Creation : April 7, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::action;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::ki::malai::widget
+
+
+
+class Scroll inherits Action
+{
+	reference panel : Panel
+	
+	attribute increment : Integer
+	
+	
+	method canDo() : Boolean is do
+		result := not panel.isVoid.andThen{b | panel.hasScrollbars } and not increment.isVoid
+	end
+
+
+	method cancelledBy(action : Class) : Boolean is do
+		result := false
+	end
+
+
+	method hadEffect() : Boolean is do
+		result := isDone()
+	end
+
+
+	method doActionBody() : Void is do
+		if(panel.isVerticalScrollbarVisible) then
+			panel.scrollVertically(increment)
+		else
+			panel.scrollHorizontally(increment)
+		end
+	end
+}
