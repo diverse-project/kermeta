@@ -18,7 +18,7 @@ using kermeta::ki::visual
 
 aspect class ClassDefinition inherits Pickable {
 	operation entity2ViewMapping() : Void is do
-		extern org::kermeta::ki::visual::view::EntityView.name2name(self, self.name)
+		extern org::kermeta::ki::visual::view::EntityView.update(self, self.name, self.isAbstract)
 	end
 	
 	

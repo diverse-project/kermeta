@@ -39,6 +39,8 @@ public abstract class EntityView extends ComponentView {
 	
 	protected Font font;
 	
+	protected int fontStyle;
+	
 	
 	protected static final Graphics2D		 GRAPHICS;
 	protected static final FontMetrics 		 FONT_METRICS;
@@ -81,11 +83,13 @@ public abstract class EntityView extends ComponentView {
 	}
 	
 	
-	public static RuntimeObject name2name(RuntimeObject entityRO, RuntimeObject newNameRO) {
+	public static RuntimeObject update(RuntimeObject entityRO, RuntimeObject newNameRO, RuntimeObject abstractRO) {
 		EntityView view = (EntityView) entityRO.getUserData();
 		String newName  = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(newNameRO);
+		Boolean isAbstract = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(abstractRO);
 		
 		view.name = newName;
+		view.fontStyle = isAbstract ? Font.ITALIC : Font.PLAIN;
 		view.update();
 		
 		return entityRO.getFactory().getMemory().voidINSTANCE;
@@ -97,6 +101,7 @@ public abstract class EntityView extends ComponentView {
 		super();
 		this.name = name;
 		
+		fontStyle	   = Font.PLAIN;
 		propertiesView = new ArrayList<PropertyView>();
 		path 		   = new GeneralPath();
 		centre 		   = new Point2D.Double(lastx, lasty);
@@ -147,7 +152,6 @@ public abstract class EntityView extends ComponentView {
 		if(scale>0.) {
 			this.scale = scale;
 			fontSize   = 14.*scale;
-			font 	   = new Font("Times New Roman", Font.PLAIN, (int)fontSize);
 			update();
 		}
 	}
@@ -167,6 +171,7 @@ public abstract class EntityView extends ComponentView {
 		final float cx 		   = (float) centre.x;
 		final float cy 		   = (float) centre.y;
 		
+		font = new Font("Times New Roman", fontStyle, (int)fontSize);
 		path.reset();
 		path.moveTo(cx-halfWidth, cy-halfHeight);
 		path.lineTo(cx+halfWidth, cy-halfHeight);
