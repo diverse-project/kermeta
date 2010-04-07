@@ -16,6 +16,7 @@ require "platform:/resource/org.kermeta.ki.visual/kermeta/VisitableKermeta.km"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/InstrumentsSelector.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/InstrumentsCustomiser.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/UndoRedoManager.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Scroller.kmt"
 
 using kermeta
 using kermeta::ki::malai::undo
@@ -67,11 +68,15 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	attribute customiser : InstrumentsCustomiser
 	
+	attribute scroller : Scroller
+	
 	attribute actionRegistry : ActionRegistry
 	
 	attribute eventManager : EventManager
 	
 	attribute toolbar : Panel
+	
+	attribute viewPanel : Panel
 	
 
 
@@ -94,7 +99,9 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		undoManager 	 := UndoRedoManager.new
 		selector         := InstrumentsSelector.new
 		customiser		 := InstrumentsCustomiser.new
+		scroller         := Scroller.new
 		
+		scroller.initialise(actionRegistry)
 		customiser.pruner := pruner
 		customiser.initialise(actionRegistry)
 		pruner.initialise(actionRegistry)
@@ -105,8 +112,12 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		selector.initialiseInstruments(pruner, eventManager)
 
 		initialiseUI
-		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, eventManager)
+		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, viewPanel, eventManager)
 
+		scroller.panel  := viewPanel
+		scroller.picker := metamodel
+		scroller.initialiseLinks(eventManager)
+		scroller.setActivated(true)
 		customiser.picker := toolbar
 		customiser.initialiseLinks(eventManager)
 		customiser.setActivated(true)	
@@ -136,12 +147,18 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	
 	operation initialiseUI() : Void is do
-		toolbar := Panel.new
+		toolbar    := Panel.new
+		viewPanel  := Panel.new
+		
 		toolbar.initialise(eventManager)
+		
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialiseToolbar(toolbar, undoManager.undoButton, 
 					undoManager.redoButton, selector.prunerButton, pruner.grayedButton, pruner.hideButton)
+					
 		toolbar.components.add(undoManager.undoButton)
 		toolbar.components.add(undoManager.redoButton)
+		toolbar.components.add(pruner.hideButton)
+		toolbar.components.add(pruner.grayedButton)
 		toolbar.components.add(selector.prunerButton)
 	end
 

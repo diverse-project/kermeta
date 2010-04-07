@@ -67,12 +67,14 @@ public class MetamodelVizuFrame extends JFrame {
 	}
 	
 	
-	public static RuntimeObject initialise(RuntimeObject appliRO, RuntimeObject mmRO, RuntimeObject tbRO, RuntimeObject emwRO) {
+	public static RuntimeObject initialise(RuntimeObject appliRO, RuntimeObject mmRO, RuntimeObject tbRO, 
+											RuntimeObject viewPanelRO, RuntimeObject emwRO) {
 		EventManagerWrapper emw 	= (EventManagerWrapper) emwRO.getUserData();
 		JPanel toolbar 				= (JPanel) tbRO.getUserData();
 		MetamodelVizuFrame canvasIS = new MetamodelVizuFrame(emw, toolbar);
 		
 		appliRO.setUserData(canvasIS);
+		viewPanelRO.setUserData(canvasIS.mmView);
 		mmRO.setUserData(canvasIS.mmView);
 		RuntimeObject2JavaMap.MAP.put(canvasIS, appliRO);
 		RuntimeObject2JavaMap.MAP.put(canvasIS.mmView, mmRO);

@@ -300,6 +300,17 @@ public class MetamodelView extends JPanel implements Scrollable {
 	
 	
 	
+	public Dimension getPreferredScrollableViewportSize()
+	{	return new Dimension(-100, 100);  }
+	
+
+	
+	public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+        return (orientation == SwingConstants.VERTICAL) ? visibleRect.height : visibleRect.width;
+	}
+	
+	
+	
 	public boolean getScrollableTracksViewportHeight() {
 		return getParent() instanceof JViewport ? ((JViewport)getParent()).getHeight() > getPreferredSize().height : false;
 	}
@@ -313,16 +324,6 @@ public class MetamodelView extends JPanel implements Scrollable {
 	
 	public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
 		return 4;
-	}
-
-
-	public Dimension getPreferredScrollableViewportSize() {	
-		return new Dimension(-100, 100);
-	}
-
-
-	public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
-        return (orientation == SwingConstants.VERTICAL) ? visibleRect.height : visibleRect.width;
 	}
 }
 
