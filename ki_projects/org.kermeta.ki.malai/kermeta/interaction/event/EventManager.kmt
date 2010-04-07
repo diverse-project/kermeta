@@ -76,41 +76,55 @@ class EventManager inherits Dispatchable
 	* Processes the event produces by the Java UI and transfered to Kermeta.
 	*/
 	operation process(event : Event) : Void is do
-		if(event.getName.equals("MOUSE_PRESSED")) then
-			var me : MouseEvent init event.getInfo.asType(MouseEvent)
-			handlers.each{h |
-				if(h.matches(event.getInfo.getSourceObject)) then 
-					h.onPressure(me.getButton, me.getX.toReal, me.getY.toReal, 0) 
-				end
-			}
+		var info : AWTEvent init event.getInfo
+		var name : String init event.getName
 
-		else 
-		if(event.getName.equals("MOUSE_RELEASED")) then
-			var me : MouseEvent init event.getInfo.asType(MouseEvent)
-			handlers.each{h | h.onRelease(me.getButton, me.getX.toReal, me.getY.toReal, 0) }
+		if(info.isInstanceOf(MouseEvent)) then
+			var me 		: MouseEvent init info.asType(MouseEvent)
+			var button 	: Integer 	 init me.getButton
+			var x 		: Real 		 init me.getX.toReal
+			var y 		: Real 		 init me.getY.toReal
+			
+			if(name.equals("MOUSE_MOVED")) then
+			// FIXME: must sue the following line in compiled mode. The interpreter is too slow.
+//				handlers.each{h | if(h.matches(object)) then h.onMove(button, x, y, false, 0) end }
+				handlers.each{h | h.onMove(button, x, y, false, 0) }
+			else
+			if(name.equals("MOUSE_DRAGGED")) then
+			// FIXME: must sue the following line in compiled mode. The interpreter is too slow.			
+//				handlers.each{h | if(h.matches(object)) then h.onMove(button, x, y, true, 0) end }
+				handlers.each{h | h.onMove(button, x, y, true, 0) }
+			else
+			if(name.equals("MOUSE_PRESSED")) then
+				var object  : Object init info.getSourceObject
+				handlers.each{h | if(h.matches(object)) then h.onPressure(button, x, y, 0) end }
+			else
+			if(name.equals("MOUSE_RELEASED")) then
+				var object  : Object init info.getSourceObject
+				handlers.each{h | if(h.matches(object)) then h.onRelease(button, x, y, 0) end }
+			end end end end
 		else
-		if(event.getName.equals("MOUSE_MOVED")) then
-			var me : MouseEvent init event.getInfo.asType(MouseEvent)
-			handlers.each{h | h.onMove(me.getButton, me.getX.toReal, me.getY.toReal, false, 0) }
+		if(info.isInstanceOf(KeyEvent)) then
+			var keyCode : Integer init info.asType(KeyEvent).getKeyCode
+			
+			if(name.equals("KEY_PRESSED")) then
+				var object  : Object init info.getSourceObject
+				handlers.each{h | if(h.matches(object)) then h.onKeyPressure(keyCode, 0) end }
+			else
+			if(name.equals("KEY_RELEASED")) then
+				var object  : Object init info.getSourceObject
+				handlers.each{h | if(h.matches(object)) then h.onKeyRelease(keyCode, 0) end }
+			end end
 		else
-		if(event.getName.equals("MOUSE_DRAGGED")) then
-			var me : MouseEvent init event.getInfo.asType(MouseEvent)
-			handlers.each{h | h.onMove(me.getButton, me.getX.toReal, me.getY.toReal, true, 0) }
-		else
-		if(event.getName.equals("KEY_PRESSED")) then
-			var ke : KeyEvent init event.getInfo.asType(KeyEvent)
-			handlers.each{h | h.onKeyPressure(ke.getKeyCode, 0) }
-		else
-		if(event.getName.equals("KEY_RELEASED")) then
-			var ke : KeyEvent init event.getInfo.asType(KeyEvent)
-			handlers.each{h | h.onKeyRelease(ke.getKeyCode, 0) }
-		else
-		if(event.getName.equals("ACTION_PERFORMED")) then
-			var ae : ActionEvent init event.getInfo.asType(ActionEvent)
-			var src : Object init ae.getSourceObject
-
-			if(src.isInstanceOf(Button)) then handlers.each{h | h.onButtonPressed(src.asType(Button)) }
+		if(name.equals("ACTION_PERFORMED")) then
+			var src : Object init info.asType(ActionEvent).getSourceObject
+			
+			if(src.isInstanceOf(Button)) then
+				var object  : Object init info.getSourceObject
+				stdio.writeln(src.toString + " " + object.toString)
+				handlers.each{h | if(h.matches(object)) then h.onButtonPressed(object.asType(Button)) end }
 			//TODO else if(ae.isFromTextField) then /* TODO */ end
 			end
-		end end end end end end end end
+		end end end
+	end
 }
