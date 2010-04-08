@@ -81,14 +81,14 @@ public class MetamodelView extends JPanel implements Scrollable {
 	
 	
 	public static RuntimeObject onLinkAdded(RuntimeObject mmRO, RuntimeObject linkRO, RuntimeObject compositionRO, RuntimeObject srcClassRO, 
-							RuntimeObject tarClassRO, RuntimeObject positionRO) {
+											RuntimeObject tarClassRO, RuntimeObject positionRO) {
 		MetamodelView metamodelView = (MetamodelView) mmRO.getUserData();
 		int position		   = Integer.getValue(positionRO);
-//		boolean isComposition  = Boolean.getValue(compositionRO);
 		EntityView srcClass    = (EntityView) srcClassRO.getUserData();
 		EntityView tarClass    = (EntityView) tarClassRO.getUserData();
-		LinkView view = new RelationView(srcClass, tarClass);
-		
+		LinkView view = new RelationView(srcClass, tarClass, Boolean.getValue(compositionRO));
+
+		linkRO.setUserData(view);
 		view.visibility = Visibility.STANDARD;
 		metamodelView.addLink(position, view);
 		metamodelView.repaint();
