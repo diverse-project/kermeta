@@ -23,6 +23,13 @@ public abstract class EntityView extends ComponentView {
 	private static double lastx = 100;
 	private static double lasty = 100;
 	
+	public static final float WIDTH_GAP = 2f;
+	
+	public static final float HEIGHT_GAP = 4f;
+	
+	public static final float HEIGHT_HEADER_GAP = 10f;
+	
+	
 	protected Point2D.Double centre;
 	
 	protected Color lineColor;
@@ -41,6 +48,8 @@ public abstract class EntityView extends ComponentView {
 	
 	protected int fontStyle;
 	
+	protected List<AttributeView> attributes; 
+	
 	
 	protected static final Graphics2D		 GRAPHICS;
 	protected static final FontMetrics 		 FONT_METRICS;
@@ -57,7 +66,23 @@ public abstract class EntityView extends ComponentView {
 		bufferImage = null;
 	}
 	
+	
+	
+	public static RuntimeObject onAttributeAdded(RuntimeObject entityRO, RuntimeObject propertyRO, 
+						RuntimeObject nameRO, RuntimeObject typeNameRO) {
+		EntityView view = (EntityView) entityRO.getUserData();
+		String name		= fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(nameRO);
+		String typeName	= fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(typeNameRO);
+		AttributeView attr = new AttributeView(name, typeName, view);
+		
+		view.attributes.add(attr);
+		view.update();
+		propertyRO.setUserData(attr);
+		
+		return entityRO.getFactory().getMemory().voidINSTANCE; 
+	}
 
+	
 	
 	public static RuntimeObject contains(RuntimeObject entityRO, RuntimeObject xRO, RuntimeObject yRO) {
 		EntityView view = (EntityView) entityRO.getUserData();
@@ -77,6 +102,10 @@ public abstract class EntityView extends ComponentView {
 		view.setScale(1.);
 		view.lineColor 	   = view.getLineColor(255);
 		view.fillingColor  = view.getFillingColor(255);
+		
+		for(AttributeView attr : view.attributes)
+			attr.visibility = Visibility.STANDARD;
+		
 		view.update();
 		
 		return entityRO.getFactory().getMemory().voidINSTANCE;
@@ -101,6 +130,7 @@ public abstract class EntityView extends ComponentView {
 		super();
 		this.name = name;
 		
+		attributes	   = new ArrayList<AttributeView>();
 		fontStyle	   = Font.PLAIN;
 		propertiesView = new ArrayList<PropertyView>();
 		path 		   = new GeneralPath();
@@ -110,12 +140,12 @@ public abstract class EntityView extends ComponentView {
 		setScale(1.);
 		update();
 		
-		if(lastx>400) {
+		if(lastx>600) {
 			lastx = 100.;
-			lasty += 180.;
+			lasty += 280.;
 		}
 		
-		lastx += 200;
+		lastx += 300;
 	}
 	
 	
@@ -132,18 +162,22 @@ public abstract class EntityView extends ComponentView {
 		if(!isVisible())
 			return ;
 		
-		final TextLayout tl  		= new TextLayout(name, font, FONT_RENDER_CONT);
-		final int textWidth  		= (int) tl.getBounds().getWidth();
-		final int textHeight  		= (int) tl.getBounds().getHeight();
-		final int textHeaderHeight 	= getTextHeaderHeight();
-
+		final Rectangle2D titleBounds = getTitleBounds();
+		final int textWidth  		= (int) titleBounds.getWidth();
+		final int textHeight  		= (int) titleBounds.getHeight();
+		final int textHeaderHeight 	= (int) (textHeight + HEIGHT_HEADER_GAP);
+		
 		g.setColor(fillingColor);
 		g.fill(path);
 		g.setColor(lineColor);
 		g.draw(path);
 		g.setColor(Color.BLACK);
 		g.setFont(font);
-		g.drawString(name, (int)centre.x-textWidth/2, (int)centre.y-getPreferredSize().height/2+textHeight+(textHeaderHeight-textHeight)/2);
+		g.drawString(name, (float)centre.x-textWidth/2, (float)centre.y-getPreferredSize().height/2+textHeight+(textHeaderHeight-textHeight)/2);
+		
+		for(AttributeView attr : attributes) {
+			attr.paint(g);
+		}
 	}
 	
 	
@@ -157,38 +191,69 @@ public abstract class EntityView extends ComponentView {
 	}
 	
 	
-	protected int getTextHeaderHeight() {
-		return FONT_METRICS.getHeight() + 10;
-	}
 	
 	
 	@Override
 	public void update() {
-		final Dimension dim    = getPreferredSize();
-		final int textHeight   = getTextHeaderHeight();
+		font = new Font("Arial", fontStyle, (int)fontSize);
+		
+		final Dimension dim    			= getPreferredSize();
+		final Rectangle2D titleBounds 	= getTitleBounds();
+		int textHeight  				= (int) titleBounds.getHeight();
+		final int textHeaderHeight   	= (int) (textHeight + HEIGHT_HEADER_GAP);
 		final float halfWidth  = (dim.width/2f);
 		final float halfHeight = (dim.height/2f);
 		final float cx 		   = (float) centre.x;
 		final float cy 		   = (float) centre.y;
+		final float xAttr 	   = cx-halfWidth + WIDTH_GAP;
+		float yAttr 		   = cy-halfHeight + textHeaderHeight + HEIGHT_GAP;
 		
-		font = new Font("Times New Roman", fontStyle, (int)fontSize);
 		path.reset();
 		path.moveTo(cx-halfWidth, cy-halfHeight);
 		path.lineTo(cx+halfWidth, cy-halfHeight);
 		path.lineTo(cx+halfWidth, cy+halfHeight);
 		path.lineTo(cx-halfWidth, cy+halfHeight);
 		path.closePath();
-		path.moveTo(cx-halfWidth, cy-halfHeight+textHeight);
-		path.lineTo(cx+halfWidth, cy-halfHeight+textHeight);
+		path.moveTo(cx-halfWidth, cy-halfHeight+textHeaderHeight);
+		path.lineTo(cx+halfWidth, cy-halfHeight+textHeaderHeight);
+		
+		
+		for(AttributeView attr : attributes) {
+			textHeight 	= (int) attr.getHeight();
+			yAttr 		+= textHeight;
+			attr.setPosition(xAttr, yAttr);
+			yAttr += HEIGHT_GAP;
+		}
 	}
 	
 	
+	
+	protected Rectangle2D getTitleBounds() {
+		return new TextLayout(name, font, FONT_RENDER_CONT).getBounds();
+	}
+	
+	
+	
 	protected Dimension getPreferredSize() {
-		Rectangle2D bound 	= FONT_METRICS.getStringBounds(name, null);
-		Dimension dim 		= new Dimension();
+		final Rectangle2D titleBounds 	= getTitleBounds();
+		Dimension dim 					= new Dimension();
+		int width;
 		
-		dim.height = (int) (70 * scale);
-		dim.width  = (int) ((bound.getWidth()+5.) * scale);
+		dim.height = (int) (titleBounds.getHeight() + HEIGHT_HEADER_GAP*2);
+		dim.width  = (int) (titleBounds.getWidth() + 2*WIDTH_GAP);
+		
+		for(AttributeView attr : attributes) {
+			width = (int) attr.getWidth();
+			
+			if(dim.width<(width+WIDTH_GAP*2f))
+				dim.width = (int) (2*WIDTH_GAP+width);
+			
+			dim.height += attr.getHeight()+HEIGHT_GAP;
+		}
+		
+		
+		dim.height *= scale;
+		dim.width  *= scale;
 		
 		return dim;
 	}

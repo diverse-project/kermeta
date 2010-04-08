@@ -22,7 +22,7 @@ public abstract class ComponentView {
 		boolean isHidePolicy = Boolean.getValue(isHidePolicyRO);
 
 		if(prunedObject==null) {
-			System.err.println("No associated Java object to the Kermeta object: " + prunedObjectRO);
+//			System.err.println("No associated Java object to the Kermeta object: " + prunedObjectRO);
 			return prunedObjectRO.getFactory().getMemory().voidINSTANCE;
 		}
 
@@ -36,6 +36,10 @@ public abstract class ComponentView {
 				entity.setScale(0.6);
 				entity.update();
 			}
+		}
+		else if(prunedObject instanceof AttributeView) {
+			AttributeView attr = (AttributeView) prunedObject;
+			attr.visibility    = isHidePolicy ? Visibility.NONE : Visibility.GRAYED;
 		}
 		
 		return prunedObjectRO.getFactory().getMemory().voidINSTANCE;

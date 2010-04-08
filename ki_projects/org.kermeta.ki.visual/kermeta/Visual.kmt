@@ -235,11 +235,17 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 	method visitProperty(p: Property): Void is do
 		if(p.type.isInstanceOf(Class)) then
 			var cd : ClassDefinition init p.type.asType(Class).classDefinition
-			
+
 			if(classes.contains(cd)) then
 				extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(modelingUnit, p, p.isComposite, p.owningClass, cd, -1)
 			end
-			links.add(p)			
+			links.add(p)
+		else
+			if(p.type.isInstanceOf(PrimitiveType)) then
+				var pt : PrimitiveType init p.type.asType(PrimitiveType)
+				
+				extern org::kermeta::ki::visual::view::EntityView.onAttributeAdded(p.owningClass, p, p.name, pt.name)
+			end
 		end
 	end
 	
