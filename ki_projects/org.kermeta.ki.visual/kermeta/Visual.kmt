@@ -228,7 +228,19 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 	
 	
 	method visitOperation(o: Operation) : Void is do
-	end	
+		var typeName : String init if(o.type.isInstanceOf(NamedElement)) then o.type.asType(NamedElement).name else "" end
+		var paramTypeName 	: String
+
+		extern org::kermeta::ki::visual::view::EntityView.onOperationAdded(o.owningClass, o, o.name, typeName, o.isAbstract)
+		
+		o.ownedParameter.each{param |
+			paramTypeName := if(param.type.isInstanceOf(NamedElement)) then param.type.asType(NamedElement).name else void end
+			
+			if(not paramTypeName.isVoid) then
+				extern org::kermeta::ki::visual::view::OperationView.onParameterAdded(o, param.name, paramTypeName)
+			end
+		}
+	end
 
 
 	

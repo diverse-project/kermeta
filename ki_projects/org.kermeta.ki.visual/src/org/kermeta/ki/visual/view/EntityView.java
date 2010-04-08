@@ -38,8 +38,6 @@ public abstract class EntityView extends ComponentView {
 	
 	protected String name;
 	
-	protected List<PropertyView> propertiesView;
-	
 	protected double scale;
 
 	protected double fontSize;
@@ -49,6 +47,8 @@ public abstract class EntityView extends ComponentView {
 	protected int fontStyle;
 	
 	protected List<AttributeView> attributes; 
+	
+	protected List<OperationView> operations; 
 	
 	
 	protected static final Graphics2D		 GRAPHICS;
@@ -81,6 +81,23 @@ public abstract class EntityView extends ComponentView {
 		
 		return entityRO.getFactory().getMemory().voidINSTANCE; 
 	}
+		
+		
+	
+	public static RuntimeObject onOperationAdded(RuntimeObject entityRO, RuntimeObject opRO, 
+						RuntimeObject nameRO, RuntimeObject typeNameRO, RuntimeObject abstractRO) {
+			EntityView view  = (EntityView) entityRO.getUserData();
+			String name		 = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(nameRO);
+			String typeName	 = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(typeNameRO);
+			Boolean isAbs	 = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(abstractRO);
+			OperationView op = new OperationView(name, typeName, isAbs, view);
+			
+			view.operations.add(op);
+			view.update();
+			opRO.setUserData(op);
+			
+			return entityRO.getFactory().getMemory().voidINSTANCE; 
+	}
 
 	
 	
@@ -105,6 +122,9 @@ public abstract class EntityView extends ComponentView {
 		
 		for(AttributeView attr : view.attributes)
 			attr.visibility = Visibility.STANDARD;
+		
+		for(OperationView op : view.operations)
+			op.visibility = Visibility.STANDARD;
 		
 		view.update();
 		
@@ -131,8 +151,8 @@ public abstract class EntityView extends ComponentView {
 		this.name = name;
 		
 		attributes	   = new ArrayList<AttributeView>();
+		operations	   = new ArrayList<OperationView>();
 		fontStyle	   = Font.PLAIN;
-		propertiesView = new ArrayList<PropertyView>();
 		path 		   = new GeneralPath();
 		centre 		   = new Point2D.Double(lastx, lasty);
 		lineColor 	   = getLineColor(255);
@@ -175,9 +195,11 @@ public abstract class EntityView extends ComponentView {
 		g.setFont(font);
 		g.drawString(name, (float)centre.x-textWidth/2, (float)centre.y-getPreferredSize().height/2+textHeight+(textHeaderHeight-textHeight)/2);
 		
-		for(AttributeView attr : attributes) {
+		for(AttributeView attr : attributes)
 			attr.paint(g);
-		}
+		
+		for(OperationView op : operations)
+			op.paint(g);
 	}
 	
 	
@@ -224,6 +246,18 @@ public abstract class EntityView extends ComponentView {
 			attr.setPosition(xAttr, yAttr);
 			yAttr += HEIGHT_GAP;
 		}
+		
+		if(!operations.isEmpty() && visibility==Visibility.STANDARD) {
+			path.moveTo(cx-halfWidth, yAttr);
+			path.lineTo(cx+halfWidth, yAttr);
+		}
+		
+		for(OperationView op : operations) {
+			textHeight 	= (int) op.getHeight();
+			yAttr 		+= textHeight;
+			op.setPosition(xAttr, yAttr);
+			yAttr += HEIGHT_GAP;
+		}
 	}
 	
 	
@@ -251,6 +285,14 @@ public abstract class EntityView extends ComponentView {
 			dim.height += attr.getHeight()+HEIGHT_GAP;
 		}
 		
+		for(OperationView op : operations) {
+			width = (int) op.getWidth();
+			
+			if(dim.width<(width+WIDTH_GAP*2f))
+				dim.width = (int) (2*WIDTH_GAP+width);
+			
+			dim.height += op.getHeight()+HEIGHT_GAP;
+		}
 		
 		dim.height *= scale;
 		dim.width  *= scale;

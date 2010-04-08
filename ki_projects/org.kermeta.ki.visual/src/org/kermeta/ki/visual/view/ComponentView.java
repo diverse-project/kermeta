@@ -37,8 +37,8 @@ public abstract class ComponentView {
 				entity.update();
 			}
 		}
-		else if(prunedObject instanceof AttributeView) {
-			AttributeView attr = (AttributeView) prunedObject;
+		else if(prunedObject instanceof EntityElementView) {
+			EntityElementView attr = (EntityElementView) prunedObject;
 			attr.visibility    = isHidePolicy ? Visibility.NONE : Visibility.GRAYED;
 		}
 		
