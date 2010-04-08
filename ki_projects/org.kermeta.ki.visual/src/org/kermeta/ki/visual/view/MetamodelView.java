@@ -116,6 +116,24 @@ public class MetamodelView extends JPanel implements Scrollable {
 	
 	
 	
+	public static RuntimeObject update(RuntimeObject mmRO) {
+		MetamodelView metamodelView = (MetamodelView) mmRO.getUserData();
+		
+		for(EntityView entity : metamodelView.entities)
+			entity.update();
+		
+		for(LinkView link : metamodelView.links)
+			link.update();
+		
+		metamodelView.repaint();
+		
+		return mmRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	
+	
+	
+	
 	public MetamodelView(EventManagerWrapper emw) {
 		super();
 

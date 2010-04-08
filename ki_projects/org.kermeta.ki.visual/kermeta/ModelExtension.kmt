@@ -54,6 +54,7 @@ aspect class ClassDefinition inherits Pickable {
 aspect class ModelingUnit inherits Picker {
 	operation reinitView() : Void is do
 		packages.each{p | p.allNestedClassDefinitions.each{cd | cd.unprune }}
+		extern org::kermeta::ki::visual::view::MetamodelView.update(self)
 	end
 
 
