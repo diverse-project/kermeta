@@ -15,6 +15,7 @@ package org.kermeta.model;
 import java.util.Collection;
 import java.util.List;
 
+import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.internal.ClassDefinitionHelper;
 import org.kermeta.model.internal.ConstraintHelper;
 import org.kermeta.model.internal.EnumerationHelper;
@@ -201,56 +202,56 @@ public class KermetaModelHelper {
 			return ClassDefinitionHelper.create(name, isAbstract, isAspect);
 		}
 		
-		public List<Operation> getSuperOperations(ClassDefinition base, String operationName) {
-			return ClassDefinitionHelper.getSuperOperations(base, operationName);
+		public List<Operation> getSuperOperations(KermetaUnit rootUnit, ClassDefinition base, String operationName) {
+			return ClassDefinitionHelper.getSuperOperations(rootUnit, base, operationName);
 		}
 				
-		public Operation getSuperOperation(ClassDefinition base, String superClassQualifiedName, String operationName) {
-			return ClassDefinitionHelper.getSuperOperation(base, superClassQualifiedName, operationName);
+		public Operation getSuperOperation(KermetaUnit rootUnit, ClassDefinition base, String superClassQualifiedName, String operationName) {
+			return ClassDefinitionHelper.getSuperOperation(rootUnit, base, superClassQualifiedName, operationName);
 		}
 		
-		public Collection<TypeDefinition> getContext(ClassDefinition c) {
-			return ClassDefinitionHelper.getContext(c);
+		public Collection<TypeDefinition> getContext(KermetaUnit rootUnit, ClassDefinition c) {
+			return ClassDefinitionHelper.getContext(rootUnit, c);
 		}
 		
-		public Collection<TypeDefinition> getFullContext(ClassDefinition c) {
-			return ClassDefinitionHelper.getFullContext(c);
+		public Collection<TypeDefinition> getFullContext(KermetaUnit rootUnit, ClassDefinition c) {
+			return ClassDefinitionHelper.getFullContext(rootUnit, c);
 		}
 				
-		public Property getPropertyByName(ClassDefinition c, String name) {
-			return ClassDefinitionHelper.getPropertyByName(c, name);
+		public Property getPropertyByName(KermetaUnit rootUnit, ClassDefinition c, String name) {
+			return ClassDefinitionHelper.getPropertyByName(rootUnit, c, name);
 		}
 		
-		public List<Property> getAllProperties(ClassDefinition cls) {
-			return ClassDefinitionHelper.getAllProperties(cls);
+		public List<Property> getAllProperties(KermetaUnit rootUnit, ClassDefinition cls) {
+			return ClassDefinitionHelper.getAllProperties(rootUnit, cls);
 		}
 		
-		public List<Property> getAllPropertiesWithOpposite(ClassDefinition cls) {
-			return ClassDefinitionHelper.getAllPropertiesWithOpposite(cls);
+		public List<Property> getAllPropertiesWithOpposite(KermetaUnit rootUnit, ClassDefinition cls) {
+			return ClassDefinitionHelper.getAllPropertiesWithOpposite(rootUnit, cls);
 		}
 		
-		public Operation getOperationByName(ClassDefinition c, String name) {
-			return ClassDefinitionHelper.getOperationByName(c, name);
+		public Operation getOperationByName(KermetaUnit rootUnit, ClassDefinition c, String name) {
+			return ClassDefinitionHelper.getOperationByName(rootUnit, c, name);
 		}
 		
-		public List<Operation> getAllOperations(ClassDefinition cls) {
-			return ClassDefinitionHelper.getAllOperations(cls);
+		public List<Operation> getAllOperations(KermetaUnit rootUnit, ClassDefinition cls) {
+			return ClassDefinitionHelper.getAllOperations(rootUnit, cls);
 		}
 		
-		public List<Constraint> getAllInvariants(ClassDefinition cls) {
-			return ClassDefinitionHelper.getAllInvariants(cls);
+		public List<Constraint> getAllInvariants(KermetaUnit rootUnit, ClassDefinition cls) {
+			return ClassDefinitionHelper.getAllInvariants(rootUnit, cls);
 		}
 		
 		public TypeVariable getTypeParameter(ClassDefinition cls, String name) {
 			return ClassDefinitionHelper.getTypeParameter(cls, name);
 		}
 		
-		public boolean isCollection(ClassDefinition c) {
-			return ClassDefinitionHelper.isCollection(c);
+		public boolean isCollection(KermetaUnit rootUnit, ClassDefinition c) {
+			return ClassDefinitionHelper.isCollection(rootUnit, c);
 		}
 		
-		public boolean isSuperTypeOf(ClassDefinition superclass, ClassDefinition clazz) {
-			return ClassDefinitionHelper.isSuperTypeOf(superclass, clazz);			
+		public boolean isSuperTypeOf(KermetaUnit rootUnit, ClassDefinition superclass, ClassDefinition clazz) {
+			return ClassDefinitionHelper.isSuperTypeOf(rootUnit, superclass, clazz);			
 		}
 
 	}
@@ -328,12 +329,12 @@ public class KermetaModelHelper {
 		public List<Operation> getSuperOperations(Operation op) {
 			return OperationHelper.getSuperOperations(op);
 		}
-		public List<Constraint> getAllPreconditions(Operation op) {
-			return OperationHelper.getAllPreconditions(op);
+		public List<Constraint> getAllPreconditions(KermetaUnit rootUnit, Operation op) {
+			return OperationHelper.getAllPreconditions(rootUnit, op);
 		}
 		
-		public List<Constraint> getAllPostconditions(Operation op) {
-			return OperationHelper.getAllPostconditions(op);
+		public List<Constraint> getAllPostconditions(KermetaUnit rootUnit, Operation op) {
+			return OperationHelper.getAllPostconditions(rootUnit, op);
 		}
 	}
 	

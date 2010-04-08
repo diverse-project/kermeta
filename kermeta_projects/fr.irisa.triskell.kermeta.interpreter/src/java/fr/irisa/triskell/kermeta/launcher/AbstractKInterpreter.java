@@ -137,7 +137,7 @@ abstract public class AbstractKInterpreter {
 	    	 String message = "Entry @mainClass '" + className + "' not found.";
 	    	 throwError(message);
 	    }
-		_mainOperation = KermetaModelHelper.ClassDefinition.getOperationByName(_mainClassDefinition, operationName);
+		_mainOperation = KermetaModelHelper.ClassDefinition.getOperationByName(_kermetaUnit, _mainClassDefinition, operationName);
 		if ( _mainOperation == null ) {
 	        String message = "Cannot find entry @mainOperation '" + operationName + "' in @mainClass '" + className+"'";
 	        throwError(message);
@@ -150,7 +150,7 @@ abstract public class AbstractKInterpreter {
 	    	 String message = "Entry @mainClass '" + className + "' not found.";
 	    	 throwError(message);
 	    }
-		_mainOperation = KermetaModelHelper.ClassDefinition.getOperationByName(_mainClassDefinition, operationName);
+		_mainOperation = KermetaModelHelper.ClassDefinition.getOperationByName(_kermetaUnit, _mainClassDefinition, operationName);
 		if ( _mainOperation == null ) {
 	        String message = "Cannot find entry @mainOperation '" + operationName + "' in @mainClass '" + className+"'";
 	        throwError(message);

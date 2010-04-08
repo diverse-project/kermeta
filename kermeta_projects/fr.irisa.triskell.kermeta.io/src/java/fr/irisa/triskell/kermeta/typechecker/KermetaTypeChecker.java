@@ -85,7 +85,7 @@ public class KermetaTypeChecker {
     }
     
     private void fixEMFNameForCompiler(Operation op) {
-    	for (Property prop : ClassDefinitionHelper.getAllProperties((ClassDefinition) op.eContainer())) {
+    	for (Property prop : ClassDefinitionHelper.getAllProperties(unit, (ClassDefinition) op.eContainer())) {
 			if( op.getName().length()>3 && op.getName().substring(3, op.getName().length()).toLowerCase().equals(prop.getName().toLowerCase()) &&
 					( op.getName().substring(0, 3).equals("set") || op.getName().substring(0, 3).equals("get") ) ) {
 				addRenamingTag(op);

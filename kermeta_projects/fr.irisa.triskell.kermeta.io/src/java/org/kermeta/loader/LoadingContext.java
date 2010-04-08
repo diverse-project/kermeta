@@ -16,6 +16,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
 
+import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -67,7 +68,7 @@ public class LoadingContext {
 	 */
 	protected Hashtable<String, KMSymbol> interpreterSymbols = new Hashtable<String, KMSymbol>();
 
-	public void pushContext(ClassDefinition cd) {
+	public void pushContext(KermetaUnit rootUnit, ClassDefinition cd) {
 		/*
 		 * 
 		 * Pushing Context
@@ -78,10 +79,11 @@ public class LoadingContext {
 		for ( TypeVariable tv : cd.getTypeParameter() )
 			addTypeVar( tv );
 		// add attributes and operations
-		for ( fr.irisa.triskell.kermeta.language.structure.Operation op : KermetaModelHelper.ClassDefinition.getAllOperations(cd) )
+		
+		for ( fr.irisa.triskell.kermeta.language.structure.Operation op : KermetaModelHelper.ClassDefinition.getAllOperations(rootUnit, cd) )
 			addSymbol( new KMSymbolOperation(op) );
 		
-		for ( fr.irisa.triskell.kermeta.language.structure.Property prop : KermetaModelHelper.ClassDefinition.getAllProperties(cd) )
+		for ( fr.irisa.triskell.kermeta.language.structure.Property prop : KermetaModelHelper.ClassDefinition.getAllProperties(rootUnit, cd) )
 			addSymbol( new KMSymbolProperty(prop) );
 	}
 	

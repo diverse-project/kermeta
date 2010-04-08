@@ -49,7 +49,7 @@ public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 		this.options = options;
 	}
 	
-	public void constructAspectsListsForAll(KermetaUnit kermetaUnit) {
+/*	public void constructAspectsListsForAll(KermetaUnit kermetaUnit) {
 		
 		AbstractBuildingState state = (AbstractBuildingState) kermetaUnit.getBuildingState();
 		
@@ -58,13 +58,13 @@ public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 		
 		constructAspectsLists(kermetaUnit);
 		state.aspectsDone = true;
-		
+*/		
 		/*
 		 * 
 		 * Loading the structure for the imported units.
 		 * 
 		 */
-		Iterator <KermetaUnit> iterator = kermetaUnit.getImportedKermetaUnits().iterator();
+/*		Iterator <KermetaUnit> iterator = kermetaUnit.getImportedKermetaUnits().iterator();
 		while ( iterator.hasNext() ) {
 			KermetaUnit currentUnit = iterator.next();
 			
@@ -104,14 +104,14 @@ public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 				}
 			}
 			
-			
+	*/		
 		/*	EList<TypeDefinition> l = KermetaUnitHelper.getAspects(kermetaUnit, t);
 			if ( ! l.isEmpty() )
 				kermetaUnit.getAspects().put( t, l);*/
-		}
+/*		}
 	}
 	
-	
+	*/
 	
 	protected Hashtable <KermetaUnit, LoadingContext> context = new Hashtable <KermetaUnit, LoadingContext> ();
 	

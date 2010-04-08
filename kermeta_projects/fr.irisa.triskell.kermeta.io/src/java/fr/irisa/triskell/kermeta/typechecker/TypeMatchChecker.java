@@ -46,6 +46,7 @@ import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ModelTypeHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 
 //import com.sun.net.ssl.internal.ssl.Debug;
 
@@ -250,7 +251,7 @@ public class TypeMatchChecker {
 					CallableProperty p_prop = null;
 					String valueRenameTag = null;
 
-					valueRenameTag = TypeMatchChecker.getValueRenameTag(r_prop);
+					valueRenameTag = getValueRenameTag(r_prop);
 
 					if (valueRenameTag == null) {
 						p_prop = p_type.getPropertyByName(r_prop.getName());
@@ -579,7 +580,7 @@ public class TypeMatchChecker {
 	 * @param CallableProperty r_prop
 	 * @return String
 	 */
-	private static String getValueRenameTag(CallableProperty r_prop) {
+	private String getValueRenameTag(CallableProperty r_prop) {
 
 		String valueRenameTag = null;
 
@@ -595,13 +596,12 @@ public class TypeMatchChecker {
 
 		KermetaUnit kermetaUnit = KermetaUnitHelper
 				.getKermetaUnitFromObject(classDefinition);
-		EList<TypeDefinition> aspectList = kermetaUnit.getAspects().get(
-				classDefinition);
+		List<TypeDefinition> aspectList = TypeDefinitionHelper.getAllAspects(kermetaUnit, KermetaModelHelper.ClassDefinition.qualifiedName(classDefinition));
 		if (aspectList != null) {
 			for (TypeDefinition aspect : aspectList) {
-				if (aspect instanceof ClassDefinition) {
+				if (aspect instanceof ClassDefinition && aspect != classDefinition) {
 					List<Property> props = KermetaModelHelper.ClassDefinition
-							.getAllProperties((ClassDefinition) aspect);
+							.getAllProperties(typecheckercontext.unit, (ClassDefinition) aspect);
 					for (Property otherProperty : props) {
 						if (otherProperty.getName().equals(
 								r_prop.getProperty().getName())) {
@@ -887,7 +887,7 @@ public class TypeMatchChecker {
 				ClassDefinition cToClassDef = (ClassDefinition) cTo
 						.getTypeDefinition();
 
-				isSubClass = ClassDefinitionHelper.isSuperClassOfByName(
+				isSubClass = ClassDefinitionHelper.isSuperClassOfByName( typecheckercontext.unit,
 						p_classDef, cToClassDef);
 				
 				if (b.getTo().equals(cTo)) {

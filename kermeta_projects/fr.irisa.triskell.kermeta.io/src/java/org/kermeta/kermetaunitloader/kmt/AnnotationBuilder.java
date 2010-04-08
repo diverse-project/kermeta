@@ -87,7 +87,7 @@ public class AnnotationBuilder extends KermetaASTNodeVisitor   {
 					else {
 						fr.irisa.triskell.kermeta.language.structure.Tag mainOperationTag = ModelingUnitHelper.getMainOperation(kermetaUnit);
 						if ( mainOperationTag != null ) {
-							Operation op = KermetaModelHelper.ClassDefinition.getOperationByName( (ClassDefinition) mainClass, mainOperationTag.getValue() );
+							Operation op = KermetaModelHelper.ClassDefinition.getOperationByName(kermetaUnit,  (ClassDefinition) mainClass, mainOperationTag.getValue() );
 							if ( op == null )
 								kermetaUnit.warning("Main Operation not found.", km2ecore.get(mainOperationTag));
 						}

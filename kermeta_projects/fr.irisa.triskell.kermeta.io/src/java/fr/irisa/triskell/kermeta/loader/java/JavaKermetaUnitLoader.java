@@ -75,7 +75,7 @@ public class JavaKermetaUnitLoader extends AbstractKermetaUnitLoader {
 			AbstractBuildingState state = (AbstractBuildingState) unit.getBuildingState();
 			state.loaded = true;
 			
-			constructAspectsListsForAll(unit);
+		//	constructAspectsListsForAll(unit);
 			
 			return unit;
 		} catch (URIMalformedException e) {

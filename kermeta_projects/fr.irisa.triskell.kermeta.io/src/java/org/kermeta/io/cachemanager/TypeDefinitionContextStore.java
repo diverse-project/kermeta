@@ -15,6 +15,7 @@ package org.kermeta.io.cachemanager;
 import java.util.Collection;
 import java.util.Map;
 
+import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.cache.utilities.SoftReferenceMapCache;
@@ -26,10 +27,10 @@ public class TypeDefinitionContextStore {
 	private Map<TypeDefinition, Collection<TypeDefinition>> _contexts = new SoftReferenceMapCache<TypeDefinition, Collection<TypeDefinition>>();
 	//private Map<TypeDefinition, Collection<TypeDefinition>> _contexts = new HashMap<TypeDefinition, Collection<TypeDefinition>>();
 	
-	public Collection<TypeDefinition> getTypeDefinitionContext(TypeDefinition t) {
+	public Collection<TypeDefinition> getTypeDefinitionContext(KermetaUnit rootUnit, TypeDefinition t) {
 		Collection<TypeDefinition> context = _contexts.get(t);
 		if ( context == null && t instanceof ClassDefinition ) {
-			context = KermetaModelHelper.ClassDefinition.getFullContext( (ClassDefinition) t );
+			context = KermetaModelHelper.ClassDefinition.getFullContext(rootUnit,  (ClassDefinition) t );
 			_contexts.put(t, context);
 		}
 		return context;

@@ -35,6 +35,7 @@ import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParsingError;
 import org.kermeta.io.TypeDefinitionCache;
+import org.kermeta.io.TypeDefinitionContext;
 import org.kermeta.io.TypeDefinitionCacheEntry;
 import org.kermeta.io.WarningMessage;
 import org.kermeta.io.plugin.IOPlugin;
@@ -77,13 +78,13 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isFramework <em>Framework</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getTracer <em>Tracer</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isConstraintChecked <em>Constraint Checked</em>}</li>
- *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getAspects <em>Aspects</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isIsBeingTypechecked <em>Is Being Typechecked</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getTypeDefinitionCache <em>Type Definition Cache</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getKermetaUnitRequires <em>Kermeta Unit Requires</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isLocked <em>Locked</em>}</li>
- *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getBaseAspects <em>Base Aspects</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getTypeCheckerContext <em>Type Checker Context</em>}</li>
+ *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getAllImportedKermetaUnitsCache <em>All Imported Kermeta Units Cache</em>}</li>
+ *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getTypeDefinitionContextsCache <em>Type Definition Contexts Cache</em>}</li>
  * </ul>
  * </p>
  *
@@ -280,7 +281,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated
 	 * @ordered
 	 */
-	protected Map<TypeDefinition, EList<TypeDefinition>> aspects;
+	//protected Map<TypeDefinition, EList<TypeDefinition>> aspects;
 
 	/**
 	 * The default value of the '{@link #isIsBeingTypechecked() <em>Is Being Typechecked</em>}' attribute.
@@ -350,7 +351,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated
 	 * @ordered
 	 */
-	protected Map<TypeDefinition, EList<TypeDefinition>> baseAspects;
+//	protected Map<TypeDefinition, EList<TypeDefinition>> baseAspects;
 
 	/**
 	 * The default value of the '{@link #getTypeCheckerContext() <em>Type Checker Context</em>}' attribute.
@@ -373,6 +374,26 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	protected TypeCheckerContext typeCheckerContext = TYPE_CHECKER_CONTEXT_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getAllImportedKermetaUnitsCache() <em>All Imported Kermeta Units Cache</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllImportedKermetaUnitsCache()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<KermetaUnit> allImportedKermetaUnitsCache;
+
+	/**
+	 * The cached value of the '{@link #getTypeDefinitionContextsCache() <em>Type Definition Contexts Cache</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeDefinitionContextsCache()
+	 * @generated
+	 * @ordered
+	 */
+	protected Map<String, TypeDefinitionContext> typeDefinitionContextsCache;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
@@ -380,8 +401,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	protected KermetaUnitImpl() {
 		super();
 		setModelingUnit( StructureFactory.eINSTANCE.createModelingUnit() );
-		aspects = new HashMap <TypeDefinition, EList<TypeDefinition> > ();
-		baseAspects = new HashMap <TypeDefinition, EList<TypeDefinition> > ();
+		// initialize the cache structure
+		typeDefinitionContextsCache = new HashMap<String, TypeDefinitionContext> ();
 		setTypeDefinitionCache( IoFactory.eINSTANCE.createTypeDefinitionCache() );
 		// if there is no tracer defined create a memory tracer
 		// useful because at the end of the build the AST will be discarded to free the memory
@@ -658,21 +679,21 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map<TypeDefinition, EList<TypeDefinition>> getAspects() {
+	/*public Map<TypeDefinition, EList<TypeDefinition>> getAspects() {
 		return aspects;
-	}
+	}*/
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAspects(Map<TypeDefinition, EList<TypeDefinition>> newAspects) {
+/*	public void setAspects(Map<TypeDefinition, EList<TypeDefinition>> newAspects) {
 		Map<TypeDefinition, EList<TypeDefinition>> oldAspects = aspects;
 		aspects = newAspects;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__ASPECTS, oldAspects, aspects));
-	}
+	} */
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -795,21 +816,21 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map<TypeDefinition, EList<TypeDefinition>> getBaseAspects() {
+/*	public Map<TypeDefinition, EList<TypeDefinition>> getBaseAspects() {
 		return baseAspects;
-	}
+	} */
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBaseAspects(Map<TypeDefinition, EList<TypeDefinition>> newBaseAspects) {
+	/*public void setBaseAspects(Map<TypeDefinition, EList<TypeDefinition>> newBaseAspects) {
 		Map<TypeDefinition, EList<TypeDefinition>> oldBaseAspects = baseAspects;
 		baseAspects = newBaseAspects;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__BASE_ASPECTS, oldBaseAspects, baseAspects));
-	}
+	} */
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -830,6 +851,39 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		typeCheckerContext = newTypeCheckerContext;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__TYPE_CHECKER_CONTEXT, oldTypeCheckerContext, typeCheckerContext));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<KermetaUnit> getAllImportedKermetaUnitsCache() {
+		if (allImportedKermetaUnitsCache == null) {
+			allImportedKermetaUnitsCache = new EObjectResolvingEList<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT__ALL_IMPORTED_KERMETA_UNITS_CACHE);
+		}
+		return allImportedKermetaUnitsCache;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map<String, TypeDefinitionContext> getTypeDefinitionContextsCache() {
+		return typeDefinitionContextsCache;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeDefinitionContextsCache(Map<String, TypeDefinitionContext> newTypeDefinitionContextsCache) {
+		Map<String, TypeDefinitionContext> oldTypeDefinitionContextsCache = typeDefinitionContextsCache;
+		typeDefinitionContextsCache = newTypeDefinitionContextsCache;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CONTEXTS_CACHE, oldTypeDefinitionContextsCache, typeDefinitionContextsCache));
 	}
 
 	/**
@@ -1632,8 +1686,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return getTracer();
 			case IoPackage.KERMETA_UNIT__CONSTRAINT_CHECKED:
 				return isConstraintChecked();
-			case IoPackage.KERMETA_UNIT__ASPECTS:
-				return getAspects();
 			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
 				return isIsBeingTypechecked();
 			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
@@ -1643,10 +1695,12 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return getKermetaUnitRequires();
 			case IoPackage.KERMETA_UNIT__LOCKED:
 				return isLocked();
-			case IoPackage.KERMETA_UNIT__BASE_ASPECTS:
-				return getBaseAspects();
 			case IoPackage.KERMETA_UNIT__TYPE_CHECKER_CONTEXT:
 				return getTypeCheckerContext();
+			case IoPackage.KERMETA_UNIT__ALL_IMPORTED_KERMETA_UNITS_CACHE:
+				return getAllImportedKermetaUnitsCache();
+			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CONTEXTS_CACHE:
+				return getTypeDefinitionContextsCache();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1700,9 +1754,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__CONSTRAINT_CHECKED:
 				setConstraintChecked((Boolean)newValue);
 				return;
-			case IoPackage.KERMETA_UNIT__ASPECTS:
-				setAspects((Map<TypeDefinition, EList<TypeDefinition>>)newValue);
-				return;
 			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
 				setIsBeingTypechecked((Boolean)newValue);
 				return;
@@ -1716,11 +1767,15 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__LOCKED:
 				setLocked((Boolean)newValue);
 				return;
-			case IoPackage.KERMETA_UNIT__BASE_ASPECTS:
-				setBaseAspects((Map<TypeDefinition, EList<TypeDefinition>>)newValue);
-				return;
 			case IoPackage.KERMETA_UNIT__TYPE_CHECKER_CONTEXT:
 				setTypeCheckerContext((TypeCheckerContext)newValue);
+				return;
+			case IoPackage.KERMETA_UNIT__ALL_IMPORTED_KERMETA_UNITS_CACHE:
+				getAllImportedKermetaUnitsCache().clear();
+				getAllImportedKermetaUnitsCache().addAll((Collection<? extends KermetaUnit>)newValue);
+				return;
+			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CONTEXTS_CACHE:
+				setTypeDefinitionContextsCache((Map<String, TypeDefinitionContext>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1770,9 +1825,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__CONSTRAINT_CHECKED:
 				setConstraintChecked(CONSTRAINT_CHECKED_EDEFAULT);
 				return;
-			case IoPackage.KERMETA_UNIT__ASPECTS:
-				setAspects((Map<TypeDefinition, EList<TypeDefinition>>)null);
-				return;
 			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
 				setIsBeingTypechecked(IS_BEING_TYPECHECKED_EDEFAULT);
 				return;
@@ -1785,11 +1837,14 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__LOCKED:
 				setLocked(LOCKED_EDEFAULT);
 				return;
-			case IoPackage.KERMETA_UNIT__BASE_ASPECTS:
-				setBaseAspects((Map<TypeDefinition, EList<TypeDefinition>>)null);
-				return;
 			case IoPackage.KERMETA_UNIT__TYPE_CHECKER_CONTEXT:
 				setTypeCheckerContext(TYPE_CHECKER_CONTEXT_EDEFAULT);
+				return;
+			case IoPackage.KERMETA_UNIT__ALL_IMPORTED_KERMETA_UNITS_CACHE:
+				getAllImportedKermetaUnitsCache().clear();
+				return;
+			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CONTEXTS_CACHE:
+				setTypeDefinitionContextsCache((Map<String, TypeDefinitionContext>)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -1827,8 +1882,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return TRACER_EDEFAULT == null ? tracer != null : !TRACER_EDEFAULT.equals(tracer);
 			case IoPackage.KERMETA_UNIT__CONSTRAINT_CHECKED:
 				return constraintChecked != CONSTRAINT_CHECKED_EDEFAULT;
-			case IoPackage.KERMETA_UNIT__ASPECTS:
-				return aspects != null;
 			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
 				return isBeingTypechecked != IS_BEING_TYPECHECKED_EDEFAULT;
 			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
@@ -1837,10 +1890,12 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return kermetaUnitRequires != null && !kermetaUnitRequires.isEmpty();
 			case IoPackage.KERMETA_UNIT__LOCKED:
 				return locked != LOCKED_EDEFAULT;
-			case IoPackage.KERMETA_UNIT__BASE_ASPECTS:
-				return baseAspects != null;
 			case IoPackage.KERMETA_UNIT__TYPE_CHECKER_CONTEXT:
 				return TYPE_CHECKER_CONTEXT_EDEFAULT == null ? typeCheckerContext != null : !TYPE_CHECKER_CONTEXT_EDEFAULT.equals(typeCheckerContext);
+			case IoPackage.KERMETA_UNIT__ALL_IMPORTED_KERMETA_UNITS_CACHE:
+				return allImportedKermetaUnitsCache != null && !allImportedKermetaUnitsCache.isEmpty();
+			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CONTEXTS_CACHE:
+				return typeDefinitionContextsCache != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1867,16 +1922,14 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		result.append(tracer);
 		result.append(", constraintChecked: ");
 		result.append(constraintChecked);
-		result.append(", aspects: ");
-		result.append(aspects);
 		result.append(", isBeingTypechecked: ");
 		result.append(isBeingTypechecked);
 		result.append(", locked: ");
 		result.append(locked);
-		result.append(", baseAspects: ");
-		result.append(baseAspects);
 		result.append(", typeCheckerContext: ");
 		result.append(typeCheckerContext);
+		result.append(", typeDefinitionContextsCache: ");
+		result.append(typeDefinitionContextsCache);
 		result.append(')');
 		return result.toString();
 	}

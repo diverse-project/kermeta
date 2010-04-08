@@ -306,7 +306,7 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 	 * @return
 	 */
 	public String htmlDocumentation(ClassDefinition node) {
-		Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext(node);
+		Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext(KermetaUnitHelper.getKermetaUnitFromObject(node),node);
 		String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(node);
 		//KermetaModelHelper.ClassDefinition.getAllOperations(cd)
 		StringBuilder tags = new StringBuilder("");
@@ -520,7 +520,7 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 		result.append("\n") ;		
 		String tags = ppTags(node.getTag());
 		if(!tags.equals("")) result.append("<div class=\"documentation\">" +tags + "</div>\n") ;
-		List<Constraint> allPreconditions = KermetaModelHelper.Operation.getAllPreconditions(node);
+		List<Constraint> allPreconditions = KermetaModelHelper.Operation.getAllPreconditions(rootUnit, node);
 		if(!allPreconditions.isEmpty()){
 			result.append("<H3>Preconditions :</H3>");			
 			for(Constraint c : allPreconditions){
@@ -532,11 +532,11 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 				result.append("\t"+htmlSummary(c) + " " + createAspectReference(preUnit,aspectUnitsReferences) +"\n");
 			}
 		}
-		List<Constraint> allPostconditions = KermetaModelHelper.Operation.getAllPostconditions(node); 
+		List<Constraint> allPostconditions = KermetaModelHelper.Operation.getAllPostconditions(rootUnit, node); 
 		if(!allPostconditions.isEmpty()){
 			result.append("<H3>Postconditions :</H3>");			
 			for(Constraint c : allPostconditions){
-				KermetaUnit postUnit = KermetaUnitHelper.getKermetaUnitFromObject(c);
+				KermetaUnit postUnit = rootUnit; // KermetaUnitHelper.getKermetaUnitFromObject(c);
 				if(!aspectUnitsReferences.containsKey(postUnit)){
 					aspectUnitsReferences.put(postUnit,"["+ (aspectUnitsReferences.size()+1) +"]");
 					aspectReferencesUnits.put(aspectUnitsReferences.get(postUnit), postUnit);
@@ -615,7 +615,7 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 			result.append("</div>\n") ;
 		}
 		result.append("\n<H2><A name=\"aspectFiles\">The feature is defined in the following file</A></H2>");		
-		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(node);
+		KermetaUnit unit = rootUnit; //KermetaUnitHelper.getKermetaUnitFromObject(node);
 		result.append("\t[1] " + unit.getUri()+"\n");
 		return result.toString();
 	}
@@ -884,11 +884,14 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 		
 	}
 	
+	protected KermetaUnit rootUnit;
+	
 	/**
 	 * Constructor
 	 */
-	public KMTDocHTMLPrettyPrinter() {
+	public KMTDocHTMLPrettyPrinter(KermetaUnit rootUnit) {
 		super();
+		this.rootUnit = rootUnit;
 	}
 
 }

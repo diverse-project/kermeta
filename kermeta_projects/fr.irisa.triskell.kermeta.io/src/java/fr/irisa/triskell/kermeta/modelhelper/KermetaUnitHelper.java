@@ -44,12 +44,15 @@ public class KermetaUnitHelper {
 	 * @param value
 	 * @return
 	 */
-	static public List <KermetaUnit> getAllImportedKermetaUnits(KermetaUnit value) {
-		List <KermetaUnit> units = new ArrayList <KermetaUnit> ();
-		if ( value != null )
-			getAllImportedKermetaUnits(value, units);
-		units.remove(value);  // if contains the value, remove it
-		return units;
+	static synchronized public List <KermetaUnit> getAllImportedKermetaUnits(KermetaUnit unit) {
+		List<KermetaUnit> cache = unit.getAllImportedKermetaUnitsCache();
+		if(cache.size() == 0 && unit.getImportedKermetaUnits().size() != 0){
+			// need to recalculate the cache
+			if ( unit != null )
+				getAllImportedKermetaUnits(unit, cache);
+			cache.remove(unit);  // if contains the current unit, remove it
+		}
+		return cache;
 	}
 
 	/**

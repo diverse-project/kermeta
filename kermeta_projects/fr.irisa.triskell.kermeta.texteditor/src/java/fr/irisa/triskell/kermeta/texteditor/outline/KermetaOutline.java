@@ -146,7 +146,7 @@ public class KermetaOutline extends ContentOutlinePage implements InterestedObje
 		treeViewer.setLabelProvider( new DecoratingLabelProvider( new OutlineLabelProvider(), decorator ) );
 		
 		treeViewer.addSelectionChangedListener(this);
-		treeViewer.addDoubleClickListener( new DoubleClickListener() );
+		treeViewer.addDoubleClickListener( new DoubleClickListener(this) );
 		
 		// Update manually to calculate the list of erroneous and warned items.
 		updateValue( getKermetaUnit() );
@@ -404,7 +404,11 @@ public class KermetaOutline extends ContentOutlinePage implements InterestedObje
 			if ( o instanceof ClassDefinition ) {
 				ClassDefinition cd = (ClassDefinition) o;
 				String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(cd);
-				Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext( (ClassDefinition) o );
+				KermetaUnit ku = getKermetaUnit();
+				if (ku == null){
+					ku = KermetaUnitHelper.getKermetaUnitFromObject(o);
+				}
+				Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext( ku, (ClassDefinition) o );
 				for ( TypeDefinition t : context ) {
 					if ( KermetaModelHelper.NamedElement.qualifiedName(t).equals(qualifiedName) ) {
 						container.add( t );

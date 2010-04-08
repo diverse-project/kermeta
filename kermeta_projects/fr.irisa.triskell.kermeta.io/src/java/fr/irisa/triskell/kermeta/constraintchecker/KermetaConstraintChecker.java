@@ -125,7 +125,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 		//current_class = class_definition;
 		current_class = class_definition;
 		// check for inheritance cycles
-		if ( KermetaModelHelper.ClassDefinition.isSuperTypeOf( current_class, current_class)) {
+		if ( KermetaModelHelper.ClassDefinition.isSuperTypeOf(builder, current_class, current_class)) {
 			addProblem("Cycle in the inheritance tree - The type hierachy of class '" + current_class.getName()+"' is inconsistant.", current_class);
 			return false;
 		}
@@ -268,7 +268,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 		    	}
 	    	
 	    	if(warning)
-	    		addWarning("An object is assigned to itself.", expression);
+	    		addWarning("Unnecessary assignment, the attribute or reference is assigned to itself.", expression);
 	    }
 	    
 		return super.visitAssignment(expression);

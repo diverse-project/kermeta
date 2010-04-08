@@ -545,7 +545,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		getAbstractOperationProposal(proposals, offset, stringToMatch);
 		
 		List<KermetaCompletionProposal> methodsProposals = new ArrayList<KermetaCompletionProposal> ();		
-		for ( Operation op : KermetaModelHelper.ClassDefinition.getAllOperations(cd) ) {
+		for ( Operation op : KermetaModelHelper.ClassDefinition.getAllOperations(editor.getKermetaUnit(), cd) ) {
 			if ( ! cd.getOwnedOperation().contains(op) && ! NamedElementHelper.getQualifiedName( (NamedElement) op.eContainer() ).matches("kermeta::reflection.+") ) {
 				String regex = stringToMatch + ".+";
 				if ( op.getName().matches(regex) ) {
@@ -753,7 +753,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		 * 
 		 */
 		List<KermetaCompletionProposal> temp = new ArrayList<KermetaCompletionProposal>();
-		for ( Property property : KermetaModelHelper.ClassDefinition.getAllProperties(cdef) ) {
+		for ( Property property : KermetaModelHelper.ClassDefinition.getAllProperties(editor.getKermetaUnit(), cdef) ) {
 			String regex = stringToMatch.toLowerCase() + ".+";
 			if ( property.getName().toLowerCase().matches(regex) ) {
 				KM2KMTPrettyPrinter prettyprinter = new KM2KMTPrettyPrinter();
@@ -783,7 +783,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		 */
 		temp = new ArrayList<KermetaCompletionProposal>();
 		Map<String, Operation> processedOperations = new HashMap<String, Operation>();
-		for ( Operation operation : KermetaModelHelper.ClassDefinition.getAllOperations(cdef) ) {
+		for ( Operation operation : KermetaModelHelper.ClassDefinition.getAllOperations(editor.getKermetaUnit(), cdef) ) {
 			if ( ! processedOperations.containsKey(operation.getName()) ) {
 				processedOperations.put(operation.getName(), operation);
 				String regex = stringToMatch.toLowerCase() + ".+";
@@ -964,7 +964,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			 * 
 			 */
 			if ( ! found ) {
-				Iterator<Property> iterator = KermetaModelHelper.ClassDefinition.getAllProperties(cdef).iterator();
+				Iterator<Property> iterator = KermetaModelHelper.ClassDefinition.getAllProperties(editor.getKermetaUnit(), cdef).iterator();
 				while ( ! found && iterator.hasNext() ) {
 					Property currentProperty = iterator.next();
 					if ( currentProperty.getName().equals(s) ) {
@@ -1009,7 +1009,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			 * 
 			 */
 			if ( ! found ) {
-				Iterator<Operation> iterator = KermetaModelHelper.ClassDefinition.getAllOperations(cdef).iterator();
+				Iterator<Operation> iterator = KermetaModelHelper.ClassDefinition.getAllOperations(editor.getKermetaUnit(), cdef).iterator();
 				while ( ! found && iterator.hasNext() ) {
 					Operation currentOperation = iterator.next();
 					if ( currentOperation.getName().equals(s) ) {

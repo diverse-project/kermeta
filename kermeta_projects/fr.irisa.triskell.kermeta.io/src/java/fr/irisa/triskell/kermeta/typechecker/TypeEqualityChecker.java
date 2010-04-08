@@ -34,6 +34,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -91,10 +92,7 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 			KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject( arg0.getTypeDefinition() );
 			List<TypeDefinition> providedTypeDefinitions = new ArrayList<TypeDefinition>();
 			providedTypeDefinitions.add( arg0.getTypeDefinition() );
-			if ( unit.getAspects().get( arg0.getTypeDefinition() ) != null )
-				providedTypeDefinitions.addAll( unit.getAspects().get( arg0.getTypeDefinition() ) );
-			if ( unit.getBaseAspects().get( arg0.getTypeDefinition() ) != null )
-				providedTypeDefinitions.addAll( unit.getBaseAspects().get( arg0.getTypeDefinition() ) );
+			providedTypeDefinitions.addAll( TypeDefinitionHelper.getAllAspects(unit, KermetaModelHelper.ClassDefinition.qualifiedName(arg0.getTypeDefinition()) ) );
 			
 			/*unit = KermetaUnitHelper.getKermetaUnitFromObject( p.getTypeDefinition() );
 			List<TypeDefinition> requiredTypeDefinitions = new ArrayList<TypeDefinition>();

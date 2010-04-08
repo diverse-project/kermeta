@@ -863,14 +863,14 @@ public class EMF2Runtime {
 		if (propertyExists == true)
 		{
 			//System.out.println("feature name : " + eclass.getName()+ "."+ feature.getName());
-			result = KermetaModelHelper.ClassDefinition.getPropertyByName(classDef, propName);
+			result = KermetaModelHelper.ClassDefinition.getPropertyByName(unit.getRuntimeMemory().getUnit(), classDef, propName);
 			// If result is still null, send an exception
 			if (result == null)
 			{
 				if(ignoreAllLoadErrors || ignoreLoadErrorUnknownProperty){
 					String errmsg = "Ignoring property due to :  Not able to find '"+ propName+"' property on class " + KermetaModelHelper.ClassDefinition.qualifiedName(classDef) +
 					" ; known properties are : ";
-					for ( Object prop : KermetaModelHelper.ClassDefinition.getAllProperties(classDef)) 
+					for ( Object prop : KermetaModelHelper.ClassDefinition.getAllProperties(unit.getRuntimeMemory().getUnit(), classDef)) 
 					{ errmsg += ((Property)prop).getName() + ", "; }
 					errmsg += "\n in class \"" + classDef.getName() +"\"";
 					errmsg += "\nwith feature == " + feature;
@@ -879,7 +879,7 @@ public class EMF2Runtime {
 				else{
 					String errmsg = "EMF loading error : property set failed.\n  Not able to find '"+ propName+"' property on class " + KermetaModelHelper.ClassDefinition.qualifiedName(classDef) +
 					" ; known properties are : ";
-					for ( Object prop : KermetaModelHelper.ClassDefinition.getAllProperties(classDef)) 
+					for ( Object prop : KermetaModelHelper.ClassDefinition.getAllProperties(unit.getRuntimeMemory().getUnit(), classDef)) 
 					{ errmsg += ((Property)prop).getName() + ", "; }
 					errmsg += "\n in class \"" + classDef.getName() +"\"";
 					errmsg += "\nwith feature == " + feature;

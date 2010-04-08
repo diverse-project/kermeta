@@ -140,7 +140,7 @@ public class EcoreExporter {
 			pass3done.put( unit, false );	
 	}
 	
-	private void initializeResourceSet() throws URIMalformedException, NotRegisteredURIException {
+	private void initializeResourceSet(KermetaUnit kermetaUnit) throws URIMalformedException, NotRegisteredURIException {
 		
 		KermetaUnit framework = IOPlugin.getDefault().getEditionKermetaUnitStore().get(IOPlugin.FRAMEWORK_KM_URI);
 		if ( framework == null )
@@ -186,7 +186,7 @@ public class EcoreExporter {
 					
 					if ( o instanceof EAttribute ) {
 						if ( currentClassDefinition != null ) {
-							Property p = KermetaModelHelper.ClassDefinition.getPropertyByName(currentClassDefinition, ((EAttribute) o ).getName() );
+							Property p = KermetaModelHelper.ClassDefinition.getPropertyByName(kermetaUnit, currentClassDefinition, ((EAttribute) o ).getName() );
 							if ( p != null )
 								km2ecoremapping.put(p, (EObject) o);
 						}
@@ -194,7 +194,7 @@ public class EcoreExporter {
 					
 					if ( o instanceof EOperation ) {
 						if ( currentClassDefinition != null ) {
-							currentOperation = KermetaModelHelper.ClassDefinition.getOperationByName(currentClassDefinition, ((EOperation) o ).getName() );
+							currentOperation = KermetaModelHelper.ClassDefinition.getOperationByName(kermetaUnit, currentClassDefinition, ((EOperation) o ).getName() );
 							if ( currentOperation != null )
 								km2ecoremapping.put(currentOperation, (EObject) o);
 						}
@@ -219,7 +219,7 @@ public class EcoreExporter {
 	
 	private void initialize(KermetaUnit kermetaUnit, String rep, String fileName) throws URIMalformedException, NotRegisteredURIException {
 
-		initializeResourceSet();
+		initializeResourceSet(kermetaUnit);
 		initializeLoadings(kermetaUnit);
 
 		/*

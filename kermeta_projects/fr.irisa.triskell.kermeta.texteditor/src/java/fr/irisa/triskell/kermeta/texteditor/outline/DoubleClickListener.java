@@ -55,6 +55,13 @@ import fr.irisa.triskell.traceability.TextReference;
 
 public class DoubleClickListener implements IDoubleClickListener {
 
+	private KermetaOutline outline;
+
+	public DoubleClickListener(KermetaOutline kermetaOutline) {
+		super();
+	    this.outline = kermetaOutline;
+	}
+
 	public void doubleClick(DoubleClickEvent event) {
 
 		if ( event.getSelection() instanceof TreeSelection ) {
@@ -124,7 +131,7 @@ public class DoubleClickListener implements IDoubleClickListener {
 		if ( o instanceof ClassDefinition ) {
 			ClassDefinition cd = (ClassDefinition) o;
 			// Get the list of aspects
-			Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getFullContext( cd );
+			Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getFullContext(outline.getKermetaUnit(), cd );
 			List<TypeDefinition> l = new ArrayList<TypeDefinition>();
 			for ( TypeDefinition td : context )
 				if ( td.getName().equals(cd.getName()) )

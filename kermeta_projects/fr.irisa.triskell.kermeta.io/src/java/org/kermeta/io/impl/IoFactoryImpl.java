@@ -88,6 +88,7 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 			case IoPackage.TYPE_DEFINITION_CACHE: return createTypeDefinitionCache();
 			case IoPackage.TYPE_DEFINITION_CACHE_ENTRY: return createTypeDefinitionCacheEntry();
 			case IoPackage.KERMETA_UNIT_REQUIRE: return createKermetaUnitRequire();
+			case IoPackage.TYPE_DEFINITION_CONTEXT: return createTypeDefinitionContext();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -235,6 +236,16 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	public KermetaUnitRequire createKermetaUnitRequire() {
 		KermetaUnitRequireImpl kermetaUnitRequire = new KermetaUnitRequireImpl();
 		return kermetaUnitRequire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeDefinitionContext createTypeDefinitionContext() {
+		TypeDefinitionContextImpl typeDefinitionContext = new TypeDefinitionContextImpl();
+		return typeDefinitionContext;
 	}
 
 	/**

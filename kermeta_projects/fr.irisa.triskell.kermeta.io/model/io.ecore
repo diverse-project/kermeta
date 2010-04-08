@@ -159,30 +159,27 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tracer" eType="#//Tracer"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraintChecked" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aspects" transient="true">
-      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
-        <eTypeArguments eClassifier="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition"/>
-        <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
-          <eTypeArguments eClassifier="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition"/>
-        </eTypeArguments>
-      </eGenericType>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isBeingTypechecked" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinitionCache" lowerBound="1"
         eType="#//TypeDefinitionCache" eOpposite="#//TypeDefinitionCache/kermetaUnit"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="kermetaUnitRequires" upperBound="-1"
         eType="#//KermetaUnitRequire"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="locked" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseAspects" transient="true">
-      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
-        <eTypeArguments eClassifier="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition"/>
-        <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
-          <eTypeArguments eClassifier="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition"/>
-        </eTypeArguments>
-      </eGenericType>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeCheckerContext" eType="#//TypeCheckerContext"
         transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allImportedKermetaUnitsCache"
+        upperBound="-1" eType="#//KermetaUnit">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Should not be used directly. &#xD;&#xA;This cache is filled and used by the KermetaUnitHelper.getAllImportedUnit"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeDefinitionContextsCache"
+        transient="true">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+        <eTypeArguments eClassifier="ecore:EDataType ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/String"/>
+        <eTypeArguments eClassifier="#//TypeDefinitionContext"/>
+      </eGenericType>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IBuildingState" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="PackageEntry">
@@ -264,4 +261,18 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="TypeCheckerContext" instanceClassName="fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionContext">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This class is used to store a cache of the getContext on a given TypeDefinition&#xD;&#xA;This getContext returns a structure showing all the aspects of this TypeDefinition and all inherited classes (including their respective aspects)"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="ecore:EDataType ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="context" transient="true">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+        <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+        <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+          <eTypeArguments eClassifier="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition"/>
+        </eTypeArguments>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
 </ecore:EPackage>

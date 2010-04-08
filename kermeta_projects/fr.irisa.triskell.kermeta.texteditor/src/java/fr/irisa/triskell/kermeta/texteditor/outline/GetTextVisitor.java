@@ -48,12 +48,12 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
  */
 public class GetTextVisitor extends KermetaOptimizedVisitor {
 	
-    //protected KermetaOutline outline;
+    protected KermetaOutline outline;
 	
 	
 
-	public GetTextVisitor(/*KermetaOutline outline*/) {
-	    //this.outline = outline;
+	public GetTextVisitor(KermetaOutline outline) {
+	    this.outline = outline;
 		//pp = new KM2KMTPrettyPrinter();
 	}
 	
@@ -75,8 +75,8 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 		}
 		
 		// build the list of inherited classes using all aspects
-		List<TypeDefinition> context = TypeDefinitionHelper.getAspects( node );
-		context.addAll( TypeDefinitionHelper.getBaseAspects(node) );
+		List<TypeDefinition> context = TypeDefinitionHelper.getAspects(outline.getKermetaUnit().getModelingUnit(), node );
+		context.addAll( TypeDefinitionHelper.getBaseAspects(outline.getKermetaUnit().getModelingUnit(), node) );
 				
 		EList<Type> allSuperTypes = new BasicEList<Type>(node.getSuperType());
 		for ( TypeDefinition typeDefinition : context ) {	    	

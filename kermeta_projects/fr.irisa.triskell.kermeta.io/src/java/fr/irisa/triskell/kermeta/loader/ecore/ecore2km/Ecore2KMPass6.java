@@ -132,7 +132,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 			
 			// Quickfix to handle operation named like properties
 			if ( isMethodPropertyNameOverlapSafe ) {
-				Property prop = KermetaModelHelper.ClassDefinition.getPropertyByName(currentClassDefinition, currentOperation.getName());
+				Property prop = KermetaModelHelper.ClassDefinition.getPropertyByName(kermetaUnit, currentClassDefinition, currentOperation.getName());
 				if (prop != null) {
 					String newName = methodRenamePrefix + currentOperation.getName();
 					kermetaUnit.warning("Quickfix used to rename duplicate operation due to a the property with the same name: " + currentClassDefinition.getName()+"."+currentOperation.getName() + " renamed into " + newName, null);		        	
@@ -147,7 +147,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 			if ( isMethodNameOverlapSafe ) {
 				
 				// Quickfix to avoid two operations with the same name in the same class (even with different parameters)
-				Operation op = KermetaModelHelper.ClassDefinition.getOperationByName(currentClassDefinition, currentOperation.getName());
+				Operation op = KermetaModelHelper.ClassDefinition.getOperationByName(kermetaUnit, currentClassDefinition, currentOperation.getName());
 
 				int i = 2;
 				String newName;
@@ -156,7 +156,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 					kermetaUnit.warning("Quickfix used to rename duplicate operation: " + currentClassDefinition.getName()+"."+currentOperation.getName() + " renamed into " + newName, null);		        	
 					currentOperation.setName(newName);
 					
-					op = KermetaModelHelper.ClassDefinition.getOperationByName(currentClassDefinition, currentOperation.getName());
+					op = KermetaModelHelper.ClassDefinition.getOperationByName(kermetaUnit, currentClassDefinition, currentOperation.getName());
 					
 					propagateRenaming(currentOperation);
 				}
@@ -165,7 +165,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 				// Quickfix to avoid 2 operations with the same name but different parameters in a single inheritance tree
 				EList<Parameter> refParams = currentOperation.getOwnedParameter();
 
-				List<Operation> opList = KermetaModelHelper.ClassDefinition.getAllOperations(currentClassDefinition);
+				List<Operation> opList = KermetaModelHelper.ClassDefinition.getAllOperations(kermetaUnit, currentClassDefinition);
 				Iterator<Operation> it = opList.iterator();
 				
 				boolean match = true;
@@ -279,7 +279,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 			}
 			else
 			{
-				superop = KermetaModelHelper.ClassDefinition.getOperationByName(cdef, currentOperation.getName()); 
+				superop = KermetaModelHelper.ClassDefinition.getOperationByName(kermetaUnit, cdef, currentOperation.getName()); 
 				currentOperation.setSuperOperation(superop);
 			}
 		}

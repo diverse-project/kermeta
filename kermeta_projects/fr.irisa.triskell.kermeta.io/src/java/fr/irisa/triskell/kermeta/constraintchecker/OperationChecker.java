@@ -144,7 +144,8 @@ public class OperationChecker extends AbstractChecker {
 	 */
 	private boolean checkOperationIsUnique(Operation operation)
 	{
-		List <Operation> ops = KermetaModelHelper.ClassDefinition.getAllOperations(classDefinition);
+		List <Operation> ops = KermetaModelHelper.ClassDefinition.getAllOperations(builder, classDefinition);
+		
 		for (Operation op : ops) {
 
 			if ( op != operation ) { 

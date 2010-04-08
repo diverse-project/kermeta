@@ -102,16 +102,16 @@ public class Object {
     /** Implementation of method checkInvariants called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants() */
 	public static RuntimeObject checkInvariants(RuntimeObject self) {
-		
+		 RuntimeMemory memory = self.getFactory().getMemory();
 		 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getKCoreObject();
 	     ClassDefinition classDef = (ClassDefinition)metaClass.getTypeDefinition();
 	     
 	     java.lang.String message = "";
-	     List<Constraint> invariants = KermetaModelHelper.ClassDefinition.getAllInvariants( classDef );
+	     List<Constraint> invariants = KermetaModelHelper.ClassDefinition.getAllInvariants(memory.getUnit(), classDef );
 	     
 	     for (Constraint c : invariants ) {
 	    	 if ( ! checkConstraint(c.getBody(), classDef, self) ) {
-	    		 RuntimeMemory memory = self.getFactory().getMemory();
+	    		 
 	   			 message += "Inv " + c.getName() + " of class " + classDef.getName() + " violated";
 	   			KermetaRaisedException kre = KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
 	        			message,
@@ -623,8 +623,9 @@ public class Object {
 	 * @return       - RO for the collection of RO objects directly contained by the object
 	 */
 	public static RuntimeObject getContainedObjects(RuntimeObject selfRO) {
+		KermetaUnit kunit = selfRO.getFactory().getMemory().getUnit();
 		// Build RO for collection to be returned
-       	GenericTypeDefinition objClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::language::structure::Object");
+       	GenericTypeDefinition objClassDef  = (GenericTypeDefinition)kunit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object");
 	    fr.irisa.triskell.kermeta.language.structure.Class objClass = StructureFactory.eINSTANCE.createClass();
 	    objClass.setTypeDefinition(objClassDef);
 	    
@@ -647,12 +648,12 @@ public class Object {
 	    RuntimeObject mcRO = selfRO.getMetaclass();
 	    fr.irisa.triskell.kermeta.language.structure.Class cl = (fr.irisa.triskell.kermeta.language.structure.Class) mcRO.getKCoreObject();
 	    ClassDefinition cDef = (ClassDefinition) cl.getTypeDefinition();
-	    List<Property> props = KermetaModelHelper.ClassDefinition.getAllProperties(cDef);
+	    List<Property> props = KermetaModelHelper.ClassDefinition.getAllProperties(kunit, cDef);
 	    
 	    // !!!!!! Begin Pure hack dans ta face !!!!!!
 	    // Required for handling the specific case of "ecore::EEnumLiteral" type which recursively
 	    // includes enumerationLiterals through its "instance" property
-	    KermetaUnit kunit = selfRO.getFactory().getMemory().getUnit();
+	    
 	    ClassDefinition eEnumLitCDef = (ClassDefinition) kunit.getTypeDefinitionByName("ecore::EEnumLiteral");
 	    if(cDef == eEnumLitCDef) return resultRO;
 	    // !!!!!! End pure hack !!!!!!

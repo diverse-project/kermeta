@@ -361,7 +361,7 @@ public class RuntimeObjectFactory {
 	 * If not found, look in the supertypes
 	 */
 	private Property getProperty(ClassDefinition metaclass,String propertyName) {
-		Iterator<Property> it = KermetaModelHelper.ClassDefinition.getAllProperties(metaclass).iterator();
+		Iterator<Property> it = KermetaModelHelper.ClassDefinition.getAllProperties(memory.getUnit(), metaclass).iterator();
 		while(it.hasNext()) {
 			Property property = (Property)it.next();
 			if(property.getName().equals(propertyName))

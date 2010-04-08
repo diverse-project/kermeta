@@ -105,13 +105,13 @@ public class KMFileLoader extends AbstractLoader {
 		});
 		
 		
-		groupedCommands.put(CommandStep.aspectBuilding, new AbstractCommand(){
+	/*	groupedCommands.put(CommandStep.aspectBuilding, new AbstractCommand(){
 			@Override
 			public void executeCommand() {
 				constructAspectsListsForAll(loadedUnit);
 			}				
 		});
-		
+		*/
 		groupedCommands.put(CommandStep.traceModelLoading, new AbstractCommand(){
 			@Override
 			public void executeCommand() {
@@ -363,7 +363,7 @@ public class KMFileLoader extends AbstractLoader {
 			}	
 		}	
 	}
-	
+	/*
 	protected void constructAspectsListsForAll(KermetaUnit kermetaUnit) {
 		
 		AbstractBuildingState state = (AbstractBuildingState) kermetaUnit.getBuildingState();
@@ -373,13 +373,13 @@ public class KMFileLoader extends AbstractLoader {
 		
 		constructAspectsLists(kermetaUnit);
 		state.aspectsDone = true;
-		
+	*/	
 		/*
 		 * 
 		 * Loading the structure for the imported units.
 		 * 
 		 */
-		Iterator <KermetaUnit> iterator = kermetaUnit.getImportedKermetaUnits().iterator();
+	/*	Iterator <KermetaUnit> iterator = kermetaUnit.getImportedKermetaUnits().iterator();
 		while ( iterator.hasNext() ) {
 			KermetaUnit currentUnit = iterator.next();
 			
@@ -391,7 +391,8 @@ public class KMFileLoader extends AbstractLoader {
 		state.loading = false;
 		
 	}
-	
+	*/
+	/*
 	private void constructAspectsLists(KermetaUnit kermetaUnit) {	
 		for ( TypeDefinition t : KermetaUnitHelper.getInternalTypeDefinitions(kermetaUnit) ) {
 			if ( t.isIsAspect() ) {
@@ -420,7 +421,7 @@ public class KMFileLoader extends AbstractLoader {
 			}
 		}
 	}
-	
+	*/
 	private Set <KermetaUnit> getKermetaUnitToImport(KermetaUnit kermetaUnit) {
 		Set <KermetaUnit> list = new HashSet <KermetaUnit> ();
 		getKermetaUnitToImport(kermetaUnit, list);

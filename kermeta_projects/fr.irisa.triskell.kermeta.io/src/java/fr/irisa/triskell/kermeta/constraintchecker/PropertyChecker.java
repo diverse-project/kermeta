@@ -117,7 +117,7 @@ public class PropertyChecker extends AbstractChecker {
 		int number_of_duplicate = 1;
 		
 		KermetaUnitHelper.getKermetaUnitFromObject( classDefinition );
-		List <Property> props = KermetaModelHelper.ClassDefinition.getAllProperties(classDefinition);
+		List <Property> props = KermetaModelHelper.ClassDefinition.getAllProperties(builder, classDefinition);
 		for (Property p : props) {
 			if ( (p != property) && (p.getName().equals(property.getName())) ) {		
 				ClassDefinition possibleBaseClass = (ClassDefinition) p.eContainer();
@@ -132,8 +132,7 @@ public class PropertyChecker extends AbstractChecker {
 							ClassDefinition cd1 = (ClassDefinition) ((Class) property.getType()).getTypeDefinition();
 							ClassDefinition cd2 = (ClassDefinition) ((Class) p.getType()).getTypeDefinition();
 						
-							KermetaUnit cd1KermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject(cd1);
-							if ( cd1KermetaUnit.getBaseAspects().get(cd1) != null && ! cd1KermetaUnit.getBaseAspects().get(cd1).contains(cd2) )
+							if ( TypeDefinitionHelper.getBaseAspects(builder.getModelingUnit(), cd1) != null && ! TypeDefinitionHelper.getBaseAspects(builder.getModelingUnit(),cd1).contains(cd2) )
 							//if ( ! ClassDefinitionHelper.getAllBaseClasses(cd1).contains(cd2) )
 								error = true;
 						} else if ( property.getType() instanceof Enumeration && p.getType() instanceof Enumeration ) {
@@ -156,10 +155,9 @@ public class PropertyChecker extends AbstractChecker {
 					}
 				} else if ( p.getName().equals(property.getName()) ) {
 	
-					KermetaUnit cd1KermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject(possibleBaseClass);
-					if ( cd1KermetaUnit.getBaseAspects().get(possibleBaseClass) == null )
+					if ( TypeDefinitionHelper.getBaseAspects(builder.getModelingUnit(),possibleBaseClass) == null )
 						number_of_duplicate += 1;
-					else if ( ! cd1KermetaUnit.getBaseAspects().get(possibleBaseClass).contains(classDefinition) )
+					else if ( ! TypeDefinitionHelper.getBaseAspects(builder.getModelingUnit(),possibleBaseClass).contains(classDefinition) )
 						number_of_duplicate += 1;
 				}
 			
@@ -262,7 +260,7 @@ public class PropertyChecker extends AbstractChecker {
 					 container1 = (ClassDefinition) property.getOpposite().getOpposite().eContainer();
 				 ClassDefinition container2 = (ClassDefinition) property.eContainer();
 			 
-				 if ( (container1 != container2) && ! TypeDefinitionHelper.getBaseAspects(container2).contains(container1) ) {			 
+				 if ( (container1 != container2) && ! TypeDefinitionHelper.getBaseAspects(builder.getModelingUnit(),  container2).contains(container1) ) {			 
 					 builder.error(OPPOSITE_ERROR
 						 + pp .ppSimplifiedPropertyInContext(property), property);
 					 if(property.getOpposite().getOpposite() == null)
@@ -295,7 +293,7 @@ public class PropertyChecker extends AbstractChecker {
 	private boolean checkPropertiesConformity() {
 		boolean result = true;
 		KermetaUnitHelper.getKermetaUnitFromObject( classDefinition );
-		List <Property> props = KermetaModelHelper.ClassDefinition.getAllProperties(classDefinition);
+		List <Property> props = KermetaModelHelper.ClassDefinition.getAllProperties(builder, classDefinition);
 		for (Property p : props) {
 			result = result && checkPropertyConformity(p);
 		}
@@ -312,7 +310,7 @@ public class PropertyChecker extends AbstractChecker {
 				 TypeDefinition typeDefinition = unit.getTypeDefinitionByQualifiedName(qualifiedName);
 				 if ( typeDefinition != null && typeDefinition instanceof ClassDefinition ) {
 					 ClassDefinition cd = (ClassDefinition) typeDefinition;
-					 Property p = KermetaModelHelper.ClassDefinition.getPropertyByName(cd, property.getName());
+					 Property p = KermetaModelHelper.ClassDefinition.getPropertyByName(builder, cd, property.getName());
 					 if ( p != null && p != property ) {
 						 if ( ! property.isIsGetterAbstract() && ! p.isIsGetterAbstract() ) {
 							 builder.error("Property " + property.getName() + " has redeclared the getter declared in " + unit.getUri() + ".", property.getGetterBody());
@@ -344,7 +342,7 @@ public class PropertyChecker extends AbstractChecker {
 			 if(type instanceof fr.irisa.triskell.kermeta.language.structure.Class){
 				 fr.irisa.triskell.kermeta.language.structure.Class ctype = ( fr.irisa.triskell.kermeta.language.structure.Class)type;
 				 ClassDefinition cd = (ClassDefinition)ctype.getTypeDefinition();
-				 for(Property p : KermetaModelHelper.ClassDefinition.getAllPropertiesWithOpposite(cd)){
+				 for(Property p : KermetaModelHelper.ClassDefinition.getAllPropertiesWithOpposite(builder, cd)){
 					 if(p.getLower() == 1 && p.getUpper() == 1){
 						 if((p.getOpposite() != property) && p.getOpposite().isIsComposite()) {
 							 builder.warning("Property " + property.getOwningClass().getName()+"."+property.getName() + " cannot be used because the target class " + cd.getName() +

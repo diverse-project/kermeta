@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
 /**
@@ -110,8 +111,7 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
     			isDefinedOnClass = ((ClassDefinition)parentItem.modelElement).getOwnedAttribute().contains(modelElement);
     			if(!isDefinedOnClass){
     				// let's try on aspects
-    				KermetaUnit kermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject(parentItem.modelElement);
-    				List<TypeDefinition> l = kermetaUnit.getBaseAspects().get(((ClassDefinition)parentItem.modelElement));
+    				List<TypeDefinition> l = TypeDefinitionHelper.getBaseAspects(outline.getKermetaUnit().getModelingUnit(), ((ClassDefinition)parentItem.modelElement));
     				if ( l != null ) {
     					for(TypeDefinition td  : l) {
 	    					if(td instanceof ClassDefinition){
@@ -158,8 +158,7 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
     			isDefinedOnClass = ((ClassDefinition)parentItem.modelElement).getOwnedAttribute().contains(modelElement);
     			if(!isDefinedOnClass){
     				// let's try on aspects
-    				KermetaUnit kermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject(parentItem.modelElement);
-    				List<TypeDefinition> l = kermetaUnit.getBaseAspects().get(((ClassDefinition)parentItem.modelElement));
+    				List<TypeDefinition> l = TypeDefinitionHelper.getBaseAspects(outline.getKermetaUnit().getModelingUnit(), ((ClassDefinition)parentItem.modelElement));
     				if ( l != null ) {
     					for(TypeDefinition td  : l) {
     						if(td instanceof ClassDefinition){
@@ -280,7 +279,7 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
 	public String getLabel() {
 	    if (label == null) {
 	        try {
-	            GetTextVisitor v = new GetTextVisitor();
+	            GetTextVisitor v = new GetTextVisitor(outline);
 	            label = (String)v.accept(modelElement);
 	        }
 	        catch(Throwable t) {

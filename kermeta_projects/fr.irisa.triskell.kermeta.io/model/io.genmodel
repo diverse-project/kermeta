@@ -28,13 +28,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/framework"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/tracer"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/constraintChecked"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/aspects"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/isBeingTypechecked"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/typeDefinitionCache"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/kermetaUnitRequires"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/locked"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/baseAspects"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/typeCheckerContext"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/allImportedKermetaUnitsCache"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/typeDefinitionContextsCache"/>
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/load"/>
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/addInternalPackage">
         <genParameters ecoreParameter="io.ecore#//KermetaUnit/addInternalPackage/qualifiedName"/>
@@ -190,6 +190,10 @@
     <genClasses ecoreClass="io.ecore#//KermetaUnitRequire">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnitRequire/kermetaUnit"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnitRequire/require"/>
+    </genClasses>
+    <genClasses ecoreClass="io.ecore#//TypeDefinitionContext">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//TypeDefinitionContext/qualifiedName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//TypeDefinitionContext/context"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

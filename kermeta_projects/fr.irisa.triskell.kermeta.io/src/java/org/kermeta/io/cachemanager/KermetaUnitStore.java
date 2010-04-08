@@ -173,6 +173,8 @@ public class KermetaUnitStore
 			}
 		}
 		if (! currentunitList.containsAll(unitList)){
+			HashSet<String> diff = (HashSet<String>) unitList.clone();
+			diff.removeAll(currentunitList);
 			internalLog.debug("   some elements in cache have been removed " +nbInCache +"->" +currentcount);
 		}
 		unitList = currentunitList;

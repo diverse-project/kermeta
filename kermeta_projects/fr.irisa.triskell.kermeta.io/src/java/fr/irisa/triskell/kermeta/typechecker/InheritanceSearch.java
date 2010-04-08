@@ -16,6 +16,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -166,16 +167,9 @@ public class InheritanceSearch {
 				        if ( ! toVisit.contains(stype) ) 
 				        	toVisit.add(stype);
 				    }
-			
-				    for ( TypeDefinition baseClass : TypeDefinitionHelper.getBaseAspects(current.getTypeDefinition()) ) {
-				    	if ( baseClass instanceof ClassDefinition ) {
-				    		Class baseClassType = StructureFactory.eINSTANCE.createClass();
-				    		baseClassType.setTypeDefinition( (ClassDefinition) baseClass );
-				    		toVisit.add(baseClassType);
-				    	}
-				    }
-						    
-					for ( TypeDefinition aspectClass : TypeDefinitionHelper.getAspects( (ClassDefinition) current.getTypeDefinition()) ) {
+
+				    
+					for ( TypeDefinition aspectClass : TypeDefinitionHelper.getAllAspects(context.unit, KermetaModelHelper.ClassDefinition.qualifiedName((ClassDefinition) current.getTypeDefinition())) ) {
 						if ( aspectClass instanceof ClassDefinition ) {
 							Class aspectClassType = StructureFactory.eINSTANCE.createClass();
 							aspectClassType.setTypeDefinition( (ClassDefinition) aspectClass );
@@ -209,7 +203,7 @@ public class InheritanceSearch {
 	}
 	
 	
-	public static CallableOperation getSuperOperation(fr.irisa.triskell.kermeta.language.structure.Class c, Operation method,
+	public static CallableOperation getSuperOperation( fr.irisa.triskell.kermeta.language.structure.Class c, Operation method,
 			TypeCheckerContext context) {		
 		ArrayList<fr.irisa.triskell.kermeta.language.structure.Class> toVisit = new ArrayList<fr.irisa.triskell.kermeta.language.structure.Class>();
 		toVisit.add(c);
@@ -236,15 +230,8 @@ public class InheritanceSearch {
 			        	toVisit.add(stype);
 			    }
 		
-			    for ( TypeDefinition baseClass : TypeDefinitionHelper.getBaseAspects(current.getTypeDefinition()) ) {
-			    	if ( baseClass instanceof ClassDefinition ) {
-			    		Class baseClassType = StructureFactory.eINSTANCE.createClass();
-			    		baseClassType.setTypeDefinition( (ClassDefinition) baseClass );
-			    		toVisit.add(baseClassType);
-			    	}
-			    }
 					    
-				for ( TypeDefinition aspectClass : TypeDefinitionHelper.getAspects( (ClassDefinition) current.getTypeDefinition()) ) {
+				for ( TypeDefinition aspectClass : TypeDefinitionHelper.getAllAspects(context.unit, KermetaModelHelper.ClassDefinition.qualifiedName((ClassDefinition) current.getTypeDefinition()) )) {
 					if ( aspectClass instanceof ClassDefinition ) {
 						Class aspectClassType = StructureFactory.eINSTANCE.createClass();
 						aspectClassType.setTypeDefinition( (ClassDefinition) aspectClass );
@@ -319,15 +306,9 @@ public class InheritanceSearch {
 				    	toVisit.add(stype);
 				}
 		
-				for ( TypeDefinition baseClass : TypeDefinitionHelper.getBaseAspects(current.getTypeDefinition()) ) {			    		
-				  	if ( baseClass instanceof ClassDefinition ) {
-				  		Class baseClassType = StructureFactory.eINSTANCE.createClass();
-				   		baseClassType.setTypeDefinition( (ClassDefinition) baseClass );
-				   		toVisit.add(baseClassType);
-				   	}
-			    }
+				
 			    
-				for ( TypeDefinition aspectClass : TypeDefinitionHelper.getAspects( (ClassDefinition) current.getTypeDefinition()) ) {
+				for ( TypeDefinition aspectClass : TypeDefinitionHelper.getAllAspects(context.unit, KermetaModelHelper.ClassDefinition.qualifiedName((ClassDefinition) current.getTypeDefinition())) ) {
 					if ( aspectClass instanceof ClassDefinition ) {
 						Class aspectClassType = StructureFactory.eINSTANCE.createClass();
 						aspectClassType.setTypeDefinition( (ClassDefinition) aspectClass );

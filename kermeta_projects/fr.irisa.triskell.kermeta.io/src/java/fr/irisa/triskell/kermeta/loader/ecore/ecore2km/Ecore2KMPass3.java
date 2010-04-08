@@ -78,10 +78,10 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 		for ( TypeVariable tv : currentClassDefinition.getTypeParameter() )
 			context.addTypeVar(tv);
 		
-		for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(currentClassDefinition) )
+		for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(kermetaUnit, currentClassDefinition) )
 			context.addSymbol( new KMSymbolProperty(p) );
 		
-		for ( Operation op : KermetaModelHelper.ClassDefinition.getAllOperations(currentClassDefinition) )
+		for ( Operation op : KermetaModelHelper.ClassDefinition.getAllOperations(kermetaUnit, currentClassDefinition) )
 			context.addSymbol( new KMSymbolOperation(op) );
 		
 		// Set the super types of the type parameters

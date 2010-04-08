@@ -537,13 +537,13 @@ public class DebugInterpreter extends ExpressionInterpreter {
 				Class metaclass = (Class) runtimeVariable.getMetaclass().getKCoreObject();
 				if ( metaclass.getTypeDefinition() instanceof ClassDefinition ) {
 					ClassDefinition cd = (ClassDefinition) metaclass.getTypeDefinition();
-					if ( KermetaModelHelper.ClassDefinition.isCollection(cd) ) {
+					if ( KermetaModelHelper.ClassDefinition.isCollection(getKermetaUnit(), cd) ) {
 						List<Object> collection = (List<Object>) runtimeVariable.getJavaNativeObject();
 						if ( collection != null )
 							for ( int i = 0; i < collection.size(); i++ )
 								value += "|index*" + i;
 					}			
-					for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(cd) ) {
+					for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(getKermetaUnit(), cd) ) {
 						if ( p.isIsDerived() )
 							value += "|property*" + p.getName();
 						else if ( p.isIsComposite() )	

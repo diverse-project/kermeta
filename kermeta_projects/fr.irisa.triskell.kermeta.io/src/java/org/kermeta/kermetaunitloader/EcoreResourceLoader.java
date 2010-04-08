@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.cachemanager.KermetaUnitStore;
 import org.kermeta.kermetaunitloader.AbstractLoader.CommandStep;
-import org.kermeta.kermetaunitloader.core.BuildAspects;
 import org.kermeta.kermetaunitloader.core.EmptyKermetaUnitBuilder;
 import org.kermeta.kermetaunitloader.core.ReportUsingError;
 import org.kermeta.kermetaunitloader.core.RequireResolver;
@@ -112,13 +111,13 @@ public class EcoreResourceLoader extends AbstractLoader {
 		});
 
 		
-		groupedCommands.put(CommandStep.aspectBuilding, new AbstractCommand(){
+	/*	groupedCommands.put(CommandStep.aspectBuilding, new AbstractCommand(){
 			@Override
 			public void executeCommand() {
 				internalLog.debug("Building aspects... of " +ecoreResourceUri);
 				BuildAspects.build(loadedUnit);
 			}				
-		});
+		}); */
 		groupedCommands.put(CommandStep.typeSetting, new AbstractCommand(){
 			@Override
 			public void executeCommand() {

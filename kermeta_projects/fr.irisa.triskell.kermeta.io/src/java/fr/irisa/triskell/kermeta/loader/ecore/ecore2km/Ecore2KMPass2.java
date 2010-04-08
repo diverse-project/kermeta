@@ -441,7 +441,7 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 			}
 			else
 			{
-				superop = (Operation)KermetaModelHelper.ClassDefinition.getOperationByName(cdef, currentOperation.getName()); 
+				superop = (Operation)KermetaModelHelper.ClassDefinition.getOperationByName(kermetaUnit, cdef, currentOperation.getName()); 
 				currentOperation.setSuperOperation(superop);
 			}
 		}

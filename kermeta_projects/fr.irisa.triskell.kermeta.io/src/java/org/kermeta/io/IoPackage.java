@@ -183,22 +183,13 @@ public interface IoPackage extends EPackage {
 	int KERMETA_UNIT__CONSTRAINT_CHECKED = 11;
 
 	/**
-	 * The feature id for the '<em><b>Aspects</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KERMETA_UNIT__ASPECTS = 12;
-
-	/**
 	 * The feature id for the '<em><b>Is Being Typechecked</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__IS_BEING_TYPECHECKED = 13;
+	int KERMETA_UNIT__IS_BEING_TYPECHECKED = 12;
 
 	/**
 	 * The feature id for the '<em><b>Type Definition Cache</b></em>' reference.
@@ -207,7 +198,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__TYPE_DEFINITION_CACHE = 14;
+	int KERMETA_UNIT__TYPE_DEFINITION_CACHE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Kermeta Unit Requires</b></em>' reference list.
@@ -216,7 +207,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__KERMETA_UNIT_REQUIRES = 15;
+	int KERMETA_UNIT__KERMETA_UNIT_REQUIRES = 14;
 
 	/**
 	 * The feature id for the '<em><b>Locked</b></em>' attribute.
@@ -225,16 +216,7 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__LOCKED = 16;
-
-	/**
-	 * The feature id for the '<em><b>Base Aspects</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KERMETA_UNIT__BASE_ASPECTS = 17;
+	int KERMETA_UNIT__LOCKED = 15;
 
 	/**
 	 * The feature id for the '<em><b>Type Checker Context</b></em>' attribute.
@@ -243,7 +225,25 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT__TYPE_CHECKER_CONTEXT = 18;
+	int KERMETA_UNIT__TYPE_CHECKER_CONTEXT = 16;
+
+	/**
+	 * The feature id for the '<em><b>All Imported Kermeta Units Cache</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_UNIT__ALL_IMPORTED_KERMETA_UNITS_CACHE = 17;
+
+	/**
+	 * The feature id for the '<em><b>Type Definition Contexts Cache</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_UNIT__TYPE_DEFINITION_CONTEXTS_CACHE = 18;
 
 	/**
 	 * The number of structural features of the '<em>Kermeta Unit</em>' class.
@@ -680,6 +680,43 @@ public interface IoPackage extends EPackage {
 	int KERMETA_UNIT_REQUIRE_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.io.impl.TypeDefinitionContextImpl <em>Type Definition Context</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.io.impl.TypeDefinitionContextImpl
+	 * @see org.kermeta.io.impl.IoPackageImpl#getTypeDefinitionContext()
+	 * @generated
+	 */
+	int TYPE_DEFINITION_CONTEXT = 12;
+
+	/**
+	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CONTEXT__QUALIFIED_NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CONTEXT__CONTEXT = 1;
+
+	/**
+	 * The number of structural features of the '<em>Type Definition Context</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CONTEXT_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '<em>Set</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -687,7 +724,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 12;
+	int SET = 13;
 
 
 	/**
@@ -698,7 +735,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 13;
+	int LIST = 14;
 
 
 	/**
@@ -709,7 +746,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getTracer()
 	 * @generated
 	 */
-	int TRACER = 14;
+	int TRACER = 15;
 
 
 	/**
@@ -720,7 +757,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getASTNode()
 	 * @generated
 	 */
-	int AST_NODE = 15;
+	int AST_NODE = 16;
 
 
 	/**
@@ -731,7 +768,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getANTLRException()
 	 * @generated
 	 */
-	int ANTLR_EXCEPTION = 16;
+	int ANTLR_EXCEPTION = 17;
 
 	/**
 	 * The meta object id for the '<em>IO Plugin</em>' data type.
@@ -741,7 +778,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getIOPlugin()
 	 * @generated
 	 */
-	int IO_PLUGIN = 17;
+	int IO_PLUGIN = 18;
 
 
 	/**
@@ -752,7 +789,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 18;
+	int IPROGRESS_MONITOR = 19;
 
 
 	/**
@@ -763,7 +800,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getTypeCheckerContext()
 	 * @generated
 	 */
-	int TYPE_CHECKER_CONTEXT = 19;
+	int TYPE_CHECKER_CONTEXT = 20;
 
 
 	/**
@@ -909,17 +946,6 @@ public interface IoPackage extends EPackage {
 	EAttribute getKermetaUnit_ConstraintChecked();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.io.KermetaUnit#getAspects <em>Aspects</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Aspects</em>'.
-	 * @see org.kermeta.io.KermetaUnit#getAspects()
-	 * @see #getKermetaUnit()
-	 * @generated
-	 */
-	EAttribute getKermetaUnit_Aspects();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.kermeta.io.KermetaUnit#isIsBeingTypechecked <em>Is Being Typechecked</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -964,17 +990,6 @@ public interface IoPackage extends EPackage {
 	EAttribute getKermetaUnit_Locked();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.io.KermetaUnit#getBaseAspects <em>Base Aspects</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Base Aspects</em>'.
-	 * @see org.kermeta.io.KermetaUnit#getBaseAspects()
-	 * @see #getKermetaUnit()
-	 * @generated
-	 */
-	EAttribute getKermetaUnit_BaseAspects();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.kermeta.io.KermetaUnit#getTypeCheckerContext <em>Type Checker Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -984,6 +999,28 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getKermetaUnit_TypeCheckerContext();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.io.KermetaUnit#getAllImportedKermetaUnitsCache <em>All Imported Kermeta Units Cache</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>All Imported Kermeta Units Cache</em>'.
+	 * @see org.kermeta.io.KermetaUnit#getAllImportedKermetaUnitsCache()
+	 * @see #getKermetaUnit()
+	 * @generated
+	 */
+	EReference getKermetaUnit_AllImportedKermetaUnitsCache();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.io.KermetaUnit#getTypeDefinitionContextsCache <em>Type Definition Contexts Cache</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type Definition Contexts Cache</em>'.
+	 * @see org.kermeta.io.KermetaUnit#getTypeDefinitionContextsCache()
+	 * @see #getKermetaUnit()
+	 * @generated
+	 */
+	EAttribute getKermetaUnit_TypeDefinitionContextsCache();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.io.PackageEntry <em>Package Entry</em>}'.
@@ -1272,6 +1309,38 @@ public interface IoPackage extends EPackage {
 	EReference getKermetaUnitRequire_Require();
 
 	/**
+	 * Returns the meta object for class '{@link org.kermeta.io.TypeDefinitionContext <em>Type Definition Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Definition Context</em>'.
+	 * @see org.kermeta.io.TypeDefinitionContext
+	 * @generated
+	 */
+	EClass getTypeDefinitionContext();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.io.TypeDefinitionContext#getQualifiedName <em>Qualified Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Qualified Name</em>'.
+	 * @see org.kermeta.io.TypeDefinitionContext#getQualifiedName()
+	 * @see #getTypeDefinitionContext()
+	 * @generated
+	 */
+	EAttribute getTypeDefinitionContext_QualifiedName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.io.TypeDefinitionContext#getContext <em>Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Context</em>'.
+	 * @see org.kermeta.io.TypeDefinitionContext#getContext()
+	 * @see #getTypeDefinitionContext()
+	 * @generated
+	 */
+	EAttribute getTypeDefinitionContext_Context();
+
+	/**
 	 * Returns the meta object for data type '{@link java.util.Set <em>Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1488,14 +1557,6 @@ public interface IoPackage extends EPackage {
 		EAttribute KERMETA_UNIT__CONSTRAINT_CHECKED = eINSTANCE.getKermetaUnit_ConstraintChecked();
 
 		/**
-		 * The meta object literal for the '<em><b>Aspects</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute KERMETA_UNIT__ASPECTS = eINSTANCE.getKermetaUnit_Aspects();
-
-		/**
 		 * The meta object literal for the '<em><b>Is Being Typechecked</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1528,20 +1589,28 @@ public interface IoPackage extends EPackage {
 		EAttribute KERMETA_UNIT__LOCKED = eINSTANCE.getKermetaUnit_Locked();
 
 		/**
-		 * The meta object literal for the '<em><b>Base Aspects</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute KERMETA_UNIT__BASE_ASPECTS = eINSTANCE.getKermetaUnit_BaseAspects();
-
-		/**
 		 * The meta object literal for the '<em><b>Type Checker Context</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute KERMETA_UNIT__TYPE_CHECKER_CONTEXT = eINSTANCE.getKermetaUnit_TypeCheckerContext();
+
+		/**
+		 * The meta object literal for the '<em><b>All Imported Kermeta Units Cache</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KERMETA_UNIT__ALL_IMPORTED_KERMETA_UNITS_CACHE = eINSTANCE.getKermetaUnit_AllImportedKermetaUnitsCache();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Definition Contexts Cache</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KERMETA_UNIT__TYPE_DEFINITION_CONTEXTS_CACHE = eINSTANCE.getKermetaUnit_TypeDefinitionContextsCache();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.io.impl.PackageEntryImpl <em>Package Entry</em>}' class.
@@ -1780,6 +1849,32 @@ public interface IoPackage extends EPackage {
 		 * @generated
 		 */
 		EReference KERMETA_UNIT_REQUIRE__REQUIRE = eINSTANCE.getKermetaUnitRequire_Require();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.io.impl.TypeDefinitionContextImpl <em>Type Definition Context</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.io.impl.TypeDefinitionContextImpl
+		 * @see org.kermeta.io.impl.IoPackageImpl#getTypeDefinitionContext()
+		 * @generated
+		 */
+		EClass TYPE_DEFINITION_CONTEXT = eINSTANCE.getTypeDefinitionContext();
+
+		/**
+		 * The meta object literal for the '<em><b>Qualified Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPE_DEFINITION_CONTEXT__QUALIFIED_NAME = eINSTANCE.getTypeDefinitionContext_QualifiedName();
+
+		/**
+		 * The meta object literal for the '<em><b>Context</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPE_DEFINITION_CONTEXT__CONTEXT = eINSTANCE.getTypeDefinitionContext_Context();
 
 		/**
 		 * The meta object literal for the '<em>Set</em>' data type.

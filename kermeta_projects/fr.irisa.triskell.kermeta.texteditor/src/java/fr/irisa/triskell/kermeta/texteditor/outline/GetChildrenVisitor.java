@@ -72,7 +72,7 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		ArrayList<ModelElementOutlineItem> propertiesMEOIs = new ArrayList<ModelElementOutlineItem>();
 		ArrayList<ModelElementOutlineItem> operationsMEOIs = new ArrayList<ModelElementOutlineItem>();
 		
-		Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getFullContext( arg0 );
+		Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getFullContext(outline.getKermetaUnit(), arg0 );
 		
 		Set <String> propertiesName = new HashSet <String> ();
 		Set <String> operationsName = new HashSet <String> ();

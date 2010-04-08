@@ -15,6 +15,7 @@ package org.kermeta.model.internal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -66,13 +67,13 @@ public class OperationHelper {
 	 * pre from an aspect
 	 * User may filter this unsig the qualified name in order to separate aspects and inherited pre
 	 */
-	public static List<Constraint> getAllPreconditions(Operation op) {
+	public static List<Constraint> getAllPreconditions(KermetaUnit rootUnit, Operation op) {
 				
 		// go up to the ClassDefinition
 		ClassDefinition cls =op.getOwningClass();
 		// in all of the operations of the class and its aspects and inherited class		
 		List<Constraint> preconditions = new ArrayList<Constraint>();
-		for ( TypeDefinition typeDefinition :KermetaModelHelper.ClassDefinition.getContext(cls) )
+		for ( TypeDefinition typeDefinition :KermetaModelHelper.ClassDefinition.getContext(rootUnit,cls) )
 			if ( typeDefinition instanceof ClassDefinition ){
 				for(Operation potentialOp : ((ClassDefinition) typeDefinition).getOwnedOperation()){
 					if(potentialOp.getName().equals(op.getName())){
@@ -88,13 +89,13 @@ public class OperationHelper {
 	 * post from an aspect
 	 * User may filter this unsig the qualified name in order to separate aspects and inherited pre
 	 */
-	public static List<Constraint> getAllPostconditions(Operation op) {
+	public static List<Constraint> getAllPostconditions(KermetaUnit rootUnit, Operation op) {
 				
 		// go up to the ClassDefinition
 		ClassDefinition cls =op.getOwningClass();
 		// in all of the operations of the class and its aspects and inherited class		
 		List<Constraint> postconditions = new ArrayList<Constraint>();
-		for ( TypeDefinition typeDefinition :KermetaModelHelper.ClassDefinition.getContext(cls) )
+		for ( TypeDefinition typeDefinition :KermetaModelHelper.ClassDefinition.getContext(rootUnit, cls) )
 			if ( typeDefinition instanceof ClassDefinition ){
 				for(Operation potentialOp : ((ClassDefinition) typeDefinition).getOwnedOperation()){
 					if(potentialOp.getName().equals(op.getName())){

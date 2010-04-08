@@ -107,7 +107,7 @@ public class TypeSetter extends KermetaASTNodeVisitor {
 	public boolean beginVisit(ClassDecl classDecl) {
 		ClassDefinition classDefinition = (ClassDefinition) kermetaUnit.getModelElementByNode(classDecl);
 		context.current_class = classDefinition;
-		context.pushContext(classDefinition);
+		context.pushContext(kermetaUnit, classDefinition);
 		/*
 		 * 
 		 * Setting the super types
@@ -227,7 +227,7 @@ public class TypeSetter extends KermetaASTNodeVisitor {
 				return false;
 			}
 			ClassDefinition opposite_class = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)p.getType()).getTypeDefinition();
-			fr.irisa.triskell.kermeta.language.structure.Property oppositeProperty = KermetaModelHelper.ClassDefinition.getPropertyByName(opposite_class, opname);
+			fr.irisa.triskell.kermeta.language.structure.Property oppositeProperty = KermetaModelHelper.ClassDefinition.getPropertyByName(kermetaUnit, opposite_class, opname);
 			if (oppositeProperty == null) {
 				kermetaUnit.error("Unable to resolve opposite of property " + p.getName(), property.getOppositeName());
 				return false;

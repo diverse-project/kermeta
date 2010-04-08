@@ -63,7 +63,7 @@ public class RuntimeObjectHelper {
 		ClassDefinition coll_cd = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::standard::Collection");
 		fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) robject
 				.getMetaclass().getKCoreObject();
-		if (KermetaModelHelper.ClassDefinition.isSuperTypeOf(coll_cd,
+		if (KermetaModelHelper.ClassDefinition.isSuperTypeOf(kunit, coll_cd,
 				(ClassDefinition) c.getTypeDefinition()))
 			b = true;
 		return b;
@@ -86,7 +86,7 @@ public class RuntimeObjectHelper {
 		ClassDefinition coll_cd = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::standard::OrderedCollection");
 		fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) robject
 				.getMetaclass().getKCoreObject();
-		if (KermetaModelHelper.ClassDefinition.isSuperTypeOf(coll_cd,
+		if (KermetaModelHelper.ClassDefinition.isSuperTypeOf(kunit, coll_cd,
 				(ClassDefinition) c.getTypeDefinition()))
 			b = true;
 		return b;
@@ -125,7 +125,7 @@ public class RuntimeObjectHelper {
 	 * @return
 	 */
 	public static RuntimeObject getPropertyByName(RuntimeObject robject, String propertyName){
-		Property property = KermetaModelHelper.ClassDefinition.getPropertyByName((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) robject.getMetaclass().getKCoreObject()).getTypeDefinition(), propertyName);
+		Property property = KermetaModelHelper.ClassDefinition.getPropertyByName(robject.getFactory().getMemory().getUnit(), (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) robject.getMetaclass().getKCoreObject()).getTypeDefinition(), propertyName);
 		RuntimeObject roProperty = robject.getFactory().getMemory().getRuntimeObjectForFObject(property);
 		return roProperty;
 	}

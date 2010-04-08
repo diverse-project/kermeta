@@ -33,9 +33,11 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
+import org.kermeta.io.KermetaUnit;
 import org.kermeta.texteditor.KermetaEditorEventListener;
 import org.kermeta.texteditor.KermetaTextEditor;
 
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.ui.textPresentation.KMTDocHTMLPrettyPrinter;
 import fr.irisa.triskell.kermeta.ui.textPresentation.PrintableFinder;
@@ -71,8 +73,8 @@ public class KermetadocView extends ViewPart implements KermetaEditorEventListen
 	private TexteditorPlugin textEditorPlugin = null;
 
 
-	KMTDocHTMLPrettyPrinter hintpp = new KMTDocHTMLPrettyPrinter();
 	
+
 	private String currentHTMLDocumentation =  "";
 		
 
@@ -236,7 +238,7 @@ public class KermetadocView extends ViewPart implements KermetaEditorEventListen
 	/* The real work of doing the doc
 	 * 
 	 */
-	public void updateHTMLDocumentationFrom(Object n) {
+	public void updateHTMLDocumentationFrom(KermetaUnit rootUnit, Object n) {
 		
 		Boolean isValidUpdate = false;
 		String newHTMLDocumentation = "";
@@ -244,8 +246,8 @@ public class KermetadocView extends ViewPart implements KermetaEditorEventListen
 			if (n instanceof EObject){	
 				PrintableFinder finder = new PrintableFinder();
 				EObject printableObject = (EObject)finder.accept((EObject)n);
-				if(printableObject != null){
-					newHTMLDocumentation = (String)hintpp.getHTMLDoc(printableObject);
+				if(printableObject != null){					
+					newHTMLDocumentation = (String)new KMTDocHTMLPrettyPrinter(rootUnit).getHTMLDoc(printableObject);
 				
 					if(newHTMLDocumentation != null) // maybe the getHTMLDoc doesn't work for this kind of object
 						isValidUpdate = true;
@@ -277,14 +279,14 @@ public class KermetadocView extends ViewPart implements KermetaEditorEventListen
 	 * @see KermetaEditorEventListener#textHoverCalled()
 	 */
 	public void textHoverCalled(fr.irisa.triskell.kermeta.language.structure.Object fobj) {
-		updateHTMLDocumentationFrom(fobj);
+		updateHTMLDocumentationFrom(KermetaUnitHelper.getKermetaUnitFromObject(fobj),fobj);
 	}
 	
 	/**
 	 * @see KermetaEditorEventListener#outlineSelectionChanged()
 	 */
 	public void outlineSelectionChanged(fr.irisa.triskell.kermeta.language.structure.Object fobj) {
-		updateHTMLDocumentationFrom(fobj);
+		updateHTMLDocumentationFrom(KermetaUnitHelper.getKermetaUnitFromObject(fobj),fobj);
 	}
 	/** 
 	 * Action when a kermetaEditor selection was changed
@@ -335,6 +337,6 @@ public class KermetadocView extends ViewPart implements KermetaEditorEventListen
 	}
 
 	public void contentAssistSelectionChanged(fr.irisa.triskell.kermeta.language.structure.Object o) {
-		updateHTMLDocumentationFrom(o);
+		updateHTMLDocumentationFrom(KermetaUnitHelper.getKermetaUnitFromObject(o),o);
 	}
 }

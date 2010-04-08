@@ -151,9 +151,9 @@ public class KermetaRaisedException extends Error {
         fr.irisa.triskell.kermeta.language.structure.Class fc = (fr.irisa.triskell.kermeta.language.structure.Class)raised_object.getMetaclass().getKCoreObject();
         ClassDefinition exception_cd = (ClassDefinition)memory.getUnit().getTypeDefinitionByName("kermeta::exceptions::RuntimeError");
         // Is the raised_object an kermeta::exceptions::RuntimeError?
-        if (cause_object!=null && KermetaModelHelper.ClassDefinition.isSuperTypeOf(exception_cd, (ClassDefinition) fc.getTypeDefinition()))
+        if (cause_object!=null && KermetaModelHelper.ClassDefinition.isSuperTypeOf(memory.getUnit(), exception_cd, (ClassDefinition) fc.getTypeDefinition()))
         {
-            Property fexp_prop = KermetaModelHelper.ClassDefinition.getPropertyByName((ClassDefinition) fc.getTypeDefinition(), "expression");
+            Property fexp_prop = KermetaModelHelper.ClassDefinition.getPropertyByName(memory.getUnit(), (ClassDefinition) fc.getTypeDefinition(), "expression");
             RuntimeObject expression_property = memory.getRuntimeObjectForFObject(fexp_prop);
             RuntimeObject expression_value = cause_object;
             // Set the "expression" property of the RuntimeError

@@ -27,6 +27,7 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 
 public class ClassConformanceChecker {
 
@@ -50,12 +51,13 @@ public class ClassConformanceChecker {
 		 * 
 		 */
 		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(required.getTypeDefinition());
-		List<TypeDefinition> requiredTypeDefinitions = new ArrayList<TypeDefinition>();
-		requiredTypeDefinitions.add( required.getTypeDefinition() );
-		List<TypeDefinition> l = unit.getBaseAspects().get(required.getTypeDefinition());
+		List<TypeDefinition> requiredTypeDefinitions  = 
+			TypeDefinitionHelper.getAllAspects(unit, KermetaModelHelper.ClassDefinition.qualifiedName(required.getTypeDefinition()));
+		//requiredTypeDefinitions.add( required.getTypeDefinition() );
+		/*List<TypeDefinition> l =TypeDefinitionHelper.getBaseAspects(unit.getModelingUnit(), required.getTypeDefinition());
 		if ( l != null )
 			requiredTypeDefinitions.addAll( l );
-		
+		*/
 		/*
 		 * 
 		 * The provided type is maybe aspectized. So we first try to get the possible aspect
@@ -68,7 +70,7 @@ public class ClassConformanceChecker {
 //		ClassDefinition cd = (ClassDefinition) unit.getTypeDefinitionByQualifiedName(qualifiedName);
 		Collection<TypeDefinition> context = null;
 //		if ( cd != null )
-		context = typecheckercontext.getTypeDefinitionContextCache().getTypeDefinitionContext( (ClassDefinition) provided.getTypeDefinition() );
+		context = typecheckercontext.getTypeDefinitionContextCache().getTypeDefinitionContext(unit, (ClassDefinition) provided.getTypeDefinition() );
 		//context = KermetaModelHelper.ClassDefinition.getFullContext( (ClassDefinition) provided.getTypeDefinition() );
 //		else
 //			context = KermetaModelHelper.ClassDefinition.getContext( (ClassDefinition) provided.getTypeDefinition() );

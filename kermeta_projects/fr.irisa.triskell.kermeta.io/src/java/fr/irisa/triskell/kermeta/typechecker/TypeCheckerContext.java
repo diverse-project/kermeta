@@ -14,13 +14,16 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.cachemanager.CallableFeaturesStore;
 import org.kermeta.io.cachemanager.TypeDefinitionContextStore;
@@ -80,6 +83,8 @@ public class TypeCheckerContext {
 		specialOperations.add( getModelRemoveOperation() );	
 	}
 	
+	
+	
 	/**
 	 * Initialize the default/implicit objects and operations 
 	 * Mainly the one defined on Object, void, collections, ...
@@ -135,12 +140,13 @@ public class TypeCheckerContext {
 		
 		initializeSpecialOperations();
 	}
-	
+		
+
 	protected Operation getObjectAsTypeOperation() {
 	    if (objectAsType == null) {
 	    	Class c = (Class) ((SimpleType) ObjectType).type;
 	    	ClassDefinition classDefinition = (ClassDefinition) c.getTypeDefinition();
-	    	Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext(classDefinition);
+	    	Collection<TypeDefinition> context = KermetaModelHelper.ClassDefinition.getContext(unit, classDefinition);
 	    	for ( TypeDefinition td : context ) {
 	    		if ( td instanceof ClassDefinition ) {
 	    			
@@ -160,7 +166,7 @@ public class TypeCheckerContext {
 	protected Operation getClassNewOperation() {
 	    if (classNew == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ClassType).type).getTypeDefinition();
-	    	classNew = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "new");
+	    	classNew = KermetaModelHelper.ClassDefinition.getOperationByName(unit, cd, "new");
 	    }
 	    return classNew;
 	}
@@ -168,7 +174,7 @@ public class TypeCheckerContext {
 	protected  Operation getModelTypeNewOperation() {
 	    if (modelTypeNew == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelTypeType).type).getTypeDefinition();
-	    	modelTypeNew = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "new");
+	    	modelTypeNew = KermetaModelHelper.ClassDefinition.getOperationByName(unit, cd, "new");
 	    }
 	    return modelTypeNew;
 	}
@@ -176,7 +182,7 @@ public class TypeCheckerContext {
 	protected  Operation getModelTypeVariableNewOperation() {
 	    if (modelTypeVariableNew == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelTypeVariableType).type).getTypeDefinition();
-	    	modelTypeVariableNew = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "new");
+	    	modelTypeVariableNew = KermetaModelHelper.ClassDefinition.getOperationByName(unit, cd, "new");
 	    }
 	    return modelTypeVariableNew;
 	}
@@ -184,7 +190,7 @@ public class TypeCheckerContext {
 	protected Operation getObjectTypeVariableNewOperation() {
 	    if (objectTypeVariableNew == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ObjectTypeVariableType).type).getTypeDefinition();
-	    	objectTypeVariableNew = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "new");
+	    	objectTypeVariableNew = KermetaModelHelper.ClassDefinition.getOperationByName(unit, cd, "new");
 	    }
 	    return objectTypeVariableNew;
 	}
@@ -192,7 +198,7 @@ public class TypeCheckerContext {
 	protected Operation getModelFilterOperation() {
 	    if (modelFilter == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition();
-	    	modelFilter = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "filter");
+	    	modelFilter = KermetaModelHelper.ClassDefinition.getOperationByName(unit, cd, "filter");
 	    }
 	    return modelFilter;
 	}
@@ -200,7 +206,7 @@ public class TypeCheckerContext {
 	protected Operation getModelAddOperation() {
 	    if (modelAdd == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition();
-	    	modelAdd = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "add");
+	    	modelAdd = KermetaModelHelper.ClassDefinition.getOperationByName(unit, cd, "add");
 	    }
 	    return modelAdd;
 	}
@@ -208,7 +214,7 @@ public class TypeCheckerContext {
 	protected Operation getModelRemoveOperation() {
 	    if (modelRemove == null) {
 	    	ClassDefinition cd = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition();
-	    	modelRemove = KermetaModelHelper.ClassDefinition.getOperationByName(cd, "remove");
+	    	modelRemove = KermetaModelHelper.ClassDefinition.getOperationByName(unit, cd, "remove");
 	    }
 	    return modelRemove;
 	}

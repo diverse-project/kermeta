@@ -61,6 +61,8 @@ public class TypecheckContext implements IAction {
 			 */
 			List<Unit> copy = new ArrayList<Unit>(l);
 			
+			List<KermetaUnit> kl = new ArrayList<KermetaUnit>();
+			
 			for ( Unit currentUnit : copy ) {
 				/*
 				 * 
@@ -74,10 +76,10 @@ public class TypecheckContext implements IAction {
 				 * Getting the list of kermeta units.
 				 * 
 				 */
-				List<KermetaUnit> kl = new ArrayList<KermetaUnit>();
+				
 				kl.add(kermetaUnit);
 				kl.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) );
-				
+			}	
 				/*
 				 * Typecheck and Constraintcheck every kermeta units. 
 				 */
@@ -124,7 +126,7 @@ public class TypecheckContext implements IAction {
 					}
 				}
 				
-			}
+			//}
 		} catch(Exception e) {
 			if(l == null)
 				KPMPlugin.logErrorMessage("Error getting 'context' in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);

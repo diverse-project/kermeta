@@ -12,12 +12,19 @@
 
 package fr.irisa.triskell.kermeta.modelhelper;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.tool.ContainedTypeDefinitionFinder;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
  * 
@@ -136,6 +143,56 @@ public class ModelingUnitHelper {
 	static public String getMainClassAsString(ModelingUnit modelingUnit) {
 		if( getMainClass(modelingUnit) != null ) {
 			return getMainClass(modelingUnit).getValue();
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * returns a list of the ModelingUnit required units(directly or indirectly from this unit) doesn't contains 
+	 * the unit even if it is indirectly required
+	 * @param value
+	 * @return
+	 */
+	static public List <ModelingUnit> getAllImportedKermetaUnits(ModelingUnit value) {
+		List <ModelingUnit> units = new ArrayList <ModelingUnit> ();
+		if ( value != null )
+			getAllImportedKermetaUnits(value, units);
+		units.remove(value);  // if contains the value, remove it
+		return units;
+	}
+	/**
+	 * completes the list of ModelingUnit required units(directly or indirectly from this unit)
+	 * it may contains itself if it is indirectly required
+	 * @param value
+	 * @param units
+	 */
+	static private void getAllImportedKermetaUnits(ModelingUnit value, List <ModelingUnit> units) {
+		Iterator <ModelingUnit> iterator = value.getReferencedModelingUnits().iterator();
+		while ( iterator.hasNext() ) {
+			ModelingUnit current = iterator.next();
+			if ( ! units.contains(current) ) {
+				units.add( current );
+				getAllImportedKermetaUnits(current, units);
+			}
+		}
+	}
+	
+	/**
+	 * returns a list of the TypeDefinition contained by this ModelingUnit
+	 * @param value
+	 * @return
+	 */
+	static public List <TypeDefinition> getContainedTypeDefinitions(ModelingUnit value) {
+		List <TypeDefinition> typeDefinitions = ContainedTypeDefinitionFinder.findContainedTypeDefinitions(value);
+		return typeDefinitions;
+	}
+	
+	static public TypeDefinition findContainedTypeDefinitionByQualifiedName(ModelingUnit mu, String qualifiedName) {
+		List <TypeDefinition> typeDefinitions = getContainedTypeDefinitions(mu);
+		for(TypeDefinition td : typeDefinitions){
+			if(KermetaModelHelper.ClassDefinition.qualifiedName(td).equals(qualifiedName))
+				return td;
 		}
 		return null;
 	}

@@ -69,7 +69,7 @@ public class StackFactory {
 					}
 				}
 				// Adding info on properties.
-				for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(frame.getOperation().getOwningClass()) ) {
+				for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(kermetaUnit, frame.getOperation().getOwningClass()) ) {
 					// We voluntarily don't take the derived property because getter and setter are some piece of code you may want to debug.
 					if ( ! p.isIsDerived() ) {
 						if ( p.isIsComposite() )	
@@ -93,7 +93,7 @@ public class StackFactory {
 			stackInfo += "|" + frame.getProperty().getOwningClass().getName();
 			stackInfo += "|property*" + frame.getProperty().getName();
 			// Adding info on properties.
-			for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(frame.getProperty().getOwningClass()) ) {
+			for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(kermetaUnit, frame.getProperty().getOwningClass()) ) {
 				if ( p.isIsDerived() )
 					stackInfo += "|property*" + p.getName();
 				else if ( p.isIsComposite() )	
@@ -138,7 +138,7 @@ public class StackFactory {
 
 				ClassDefinition cd = frame.getOperation().getOwningClass();
 				// Adding info on properties.
-				for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(cd) ) {
+				for ( Property p : KermetaModelHelper.ClassDefinition.getAllProperties(kermetaunit, cd) ) {
 					if ( p.isIsDerived() )
 						stackInfo += "|property*" + p.getName();
 					else if ( p.isIsComposite() )	

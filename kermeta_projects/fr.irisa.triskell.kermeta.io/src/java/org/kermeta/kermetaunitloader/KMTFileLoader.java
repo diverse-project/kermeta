@@ -15,7 +15,6 @@ import java.util.Map;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.cachemanager.KermetaUnitStore;
-import org.kermeta.kermetaunitloader.core.BuildAspects;
 import org.kermeta.kermetaunitloader.core.EmptyKermetaUnitBuilder;
 import org.kermeta.kermetaunitloader.core.ReportUsingError;
 import org.kermeta.kermetaunitloader.core.RequireResolver;
@@ -73,6 +72,14 @@ public class KMTFileLoader extends AbstractLoader {
 			public void executeCommand() {
 				internalLog.debug("Loading AST... of " +kmtFileUri);
 				loadAST();
+				if(loadedUnit.isErroneous()){
+					// cannot continue
+					// remove remaining commands
+					groupedCommands.clear();
+					AbstractBuildingState state = (AbstractBuildingState) loadedUnit.getBuildingState();
+					state.loaded = true;
+					return;
+				}
 				internalLog.debug("Generating km structure from AST... of " +kmtFileUri);
 				KmtAst2KMStructure ast2KM = new KmtAst2KMStructure(loadedUnit);
 			    ast2KM.generateStructure(ast);
@@ -101,13 +108,14 @@ public class KMTFileLoader extends AbstractLoader {
 			}				
 		});
 		
-		groupedCommands.put(CommandStep.aspectBuilding, new AbstractCommand(){
+	/*	groupedCommands.put(CommandStep.aspectBuilding, new AbstractCommand(){
 			@Override
 			public void executeCommand() {
 				internalLog.debug("Building aspects... of " +kmtFileUri);
-				BuildAspects.build(loadedUnit);
+				BuildAspects.build(loadedUnit, );
 			}				
 		});
+		*/
 		groupedCommands.put(CommandStep.modelTypeBuilding, new AbstractCommand(){
 			@Override
 			public void executeCommand() {

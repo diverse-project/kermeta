@@ -50,7 +50,7 @@ public class KTestInterpreter extends KInterpreter {
 	/** call the given operation 
 	 * do nothing if the operation doesn't exist*/
 	private void callOperation(ExpressionInterpreter exp_interpreter, RuntimeObject entryObject, String operationName) {
-		Operation operation = KermetaModelHelper.ClassDefinition.getOperationByName(_mainClassDefinition, operationName);
+		Operation operation = KermetaModelHelper.ClassDefinition.getOperationByName(_memory.getUnit(), _mainClassDefinition, operationName);
 		if ( operation != null )
 			exp_interpreter.invoke(entryObject, operation, null);
 	}

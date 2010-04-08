@@ -134,7 +134,8 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
          * Attributes
          * 
          */
-        for ( Property property : KermetaModelHelper.ClassDefinition.getAllProperties(context) )
+        
+        for ( Property property : KermetaModelHelper.ClassDefinition.getAllProperties(this, context) )
         	loadingContext.addSymbol( new KMSymbolProperty(property) );
         
         /*
@@ -142,7 +143,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
          * Operations
          * 
          */
-        for ( Operation operation : KermetaModelHelper.ClassDefinition.getAllOperations(context) )
+        for ( Operation operation : KermetaModelHelper.ClassDefinition.getAllOperations(this, context) )
         	loadingContext.addSymbol( new KMSymbolOperation(operation) );
         
 		if (ast_exp != null)

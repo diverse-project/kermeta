@@ -53,13 +53,13 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  *   <li>{@link org.kermeta.io.KermetaUnit#isFramework <em>Framework</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getTracer <em>Tracer</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#isConstraintChecked <em>Constraint Checked</em>}</li>
- *   <li>{@link org.kermeta.io.KermetaUnit#getAspects <em>Aspects</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#isIsBeingTypechecked <em>Is Being Typechecked</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getTypeDefinitionCache <em>Type Definition Cache</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getKermetaUnitRequires <em>Kermeta Unit Requires</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#isLocked <em>Locked</em>}</li>
- *   <li>{@link org.kermeta.io.KermetaUnit#getBaseAspects <em>Base Aspects</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getTypeCheckerContext <em>Type Checker Context</em>}</li>
+ *   <li>{@link org.kermeta.io.KermetaUnit#getAllImportedKermetaUnitsCache <em>All Imported Kermeta Units Cache</em>}</li>
+ *   <li>{@link org.kermeta.io.KermetaUnit#getTypeDefinitionContextsCache <em>Type Definition Contexts Cache</em>}</li>
  * </ul>
  * </p>
  *
@@ -360,7 +360,7 @@ public interface KermetaUnit extends EObject {
 	 * @model transient="true"
 	 * @generated
 	 */
-	Map<TypeDefinition, EList<TypeDefinition>> getAspects();
+	// Map<TypeDefinition, EList<TypeDefinition>> getAspects();
 
 	/**
 	 * Sets the value of the '{@link org.kermeta.io.KermetaUnit#getAspects <em>Aspects</em>}' attribute.
@@ -370,7 +370,7 @@ public interface KermetaUnit extends EObject {
 	 * @see #getAspects()
 	 * @generated
 	 */
-	void setAspects(Map<TypeDefinition, EList<TypeDefinition>> value);
+	 // void setAspects(Map<TypeDefinition, EList<TypeDefinition>> value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Being Typechecked</b></em>' attribute.
@@ -482,7 +482,7 @@ public interface KermetaUnit extends EObject {
 	 * @model transient="true"
 	 * @generated
 	 */
-	Map<TypeDefinition, EList<TypeDefinition>> getBaseAspects();
+//	Map<TypeDefinition, EList<TypeDefinition>> getBaseAspects();
 
 	/**
 	 * Sets the value of the '{@link org.kermeta.io.KermetaUnit#getBaseAspects <em>Base Aspects</em>}' attribute.
@@ -492,7 +492,7 @@ public interface KermetaUnit extends EObject {
 	 * @see #getBaseAspects()
 	 * @generated
 	 */
-	void setBaseAspects(Map<TypeDefinition, EList<TypeDefinition>> value);
+//	void setBaseAspects(Map<TypeDefinition, EList<TypeDefinition>> value);
 
 	/**
 	 * Returns the value of the '<em><b>Type Checker Context</b></em>' attribute.
@@ -519,6 +519,48 @@ public interface KermetaUnit extends EObject {
 	 * @generated
 	 */
 	void setTypeCheckerContext(TypeCheckerContext value);
+
+	/**
+	 * Returns the value of the '<em><b>All Imported Kermeta Units Cache</b></em>' reference list.
+	 * The list contents are of type {@link org.kermeta.io.KermetaUnit}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Should not be used directly. 
+	 * This cache is filled and used by the KermetaUnitHelper.getAllImportedUnit
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>All Imported Kermeta Units Cache</em>' reference list.
+	 * @see org.kermeta.io.IoPackage#getKermetaUnit_AllImportedKermetaUnitsCache()
+	 * @model
+	 * @generated
+	 */
+	EList<KermetaUnit> getAllImportedKermetaUnitsCache();
+
+	/**
+	 * Returns the value of the '<em><b>Type Definition Contexts Cache</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Definition Contexts Cache</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Definition Contexts Cache</em>' attribute.
+	 * @see #setTypeDefinitionContextsCache(Map)
+	 * @see org.kermeta.io.IoPackage#getKermetaUnit_TypeDefinitionContextsCache()
+	 * @model transient="true"
+	 * @generated
+	 */
+	Map<String, TypeDefinitionContext> getTypeDefinitionContextsCache();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.io.KermetaUnit#getTypeDefinitionContextsCache <em>Type Definition Contexts Cache</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type Definition Contexts Cache</em>' attribute.
+	 * @see #getTypeDefinitionContextsCache()
+	 * @generated
+	 */
+	void setTypeDefinitionContextsCache(Map<String, TypeDefinitionContext> value);
 
 	/**
 	 * <!-- begin-user-doc -->

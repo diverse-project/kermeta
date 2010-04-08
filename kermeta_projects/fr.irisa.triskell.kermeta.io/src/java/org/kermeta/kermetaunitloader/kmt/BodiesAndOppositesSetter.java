@@ -52,7 +52,7 @@ public class BodiesAndOppositesSetter extends KermetaASTNodeVisitor {
 	@Override
 	public boolean beginVisit(ClassDecl classDecl) {
 		ClassDefinition classDefinition = (ClassDefinition) kermetaUnit.getModelElementByNode(classDecl);
-		context.pushContext(classDefinition);
+		context.pushContext(kermetaUnit, classDefinition);
 		
 		/*
 		 * 
@@ -80,7 +80,7 @@ public class BodiesAndOppositesSetter extends KermetaASTNodeVisitor {
 			Type type = p.getType();
 			if ( type instanceof Class ) {
 				ClassDefinition oppositeClassDefinition = (ClassDefinition) ((Class) type).getTypeDefinition();
-				fr.irisa.triskell.kermeta.language.structure.Property oppositeProperty = KermetaModelHelper.ClassDefinition.getPropertyByName(oppositeClassDefinition, name);
+				fr.irisa.triskell.kermeta.language.structure.Property oppositeProperty = KermetaModelHelper.ClassDefinition.getPropertyByName(kermetaUnit, oppositeClassDefinition, name);
 				if ( oppositeProperty != null )
 					p.setOpposite( oppositeProperty );
 			}

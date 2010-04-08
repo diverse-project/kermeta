@@ -589,7 +589,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        	if ( targetType.getFType() instanceof Class && provided_type.getFType() instanceof Class ) {
 	        		ClassDefinition pCDef = (ClassDefinition) ((Class) provided_type.getFType()).getTypeDefinition();
 	        		ClassDefinition tCDef = (ClassDefinition) ((Class) targetType.getFType()).getTypeDefinition();
-	        		if ( ! KermetaModelHelper.ClassDefinition.isSuperTypeOf(pCDef, tCDef) ) {
+	        		if ( ! KermetaModelHelper.ClassDefinition.isSuperTypeOf(unit, pCDef, tCDef) ) {
 	        			Operation op = null;
 	        			Property property = null;
 	        			ClassDefinition cd = null;
@@ -620,12 +620,17 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	            return targetType;
 	        }
 	    }
-	    else {	    		
-	        if (!provided_type.isSubTypeOf(targetType)) {
-	        	provided_type.isSubTypeOf(targetType);
-	            unit.error("TYPE-CHECKER : Type mismatch, "+provided_type+" does not conform to required type : "+targetType+".", expression);
-	        }
-	        setType(expression, provided_type);
+	    else {	   
+	    	if(provided_type != null){
+		        if (!provided_type.isSubTypeOf(targetType)) {
+		        	provided_type.isSubTypeOf(targetType);
+		            unit.error("TYPE-CHECKER : Type mismatch, "+provided_type+" does not conform to required type : "+targetType+".", expression);
+		        }
+		        setType(expression, provided_type);
+	    	}
+		    else
+		    	unit.error("TYPE-CHECKER : Type mismatch, null does not conform to required type : "+targetType+".", expression);
+	        
 	        return provided_type;
 	    }
 	}
@@ -1059,11 +1064,16 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		
 		// Check constraints
 		if (expression.getInitialization() != null) {
+			if(getTypeOfExpression(expression.getInitialization())!=null){
 			if (!getTypeOfExpression(expression.getInitialization()).isSubTypeOf(result)) {
 				//KermetaUnitHelper.getKermetaUnitFromObject( ((SimpleType) getTypeOfExpression(expression.getInitialization())).getTypeDefinition() );
 				//KermetaUnitHelper.getKermetaUnitFromObject( ((SimpleType) result).getTypeDefinition() );
 				getTypeOfExpression(expression.getInitialization()).isSubTypeOf(result);
 				unit.error("TYPE-CHECKER : The initialization expression should be compatible with the type of the variable : expected "+result+", found "+getTypeOfExpression(expression.getInitialization())+".", expression.getInitialization());
+			}
+			}
+			else{
+				unit.error("TYPE-CHECKER : The initialization expression should be compatible with the type of the variable : expected "+result+", found null." , expression.getInitialization());
 			}
 		}
 		
