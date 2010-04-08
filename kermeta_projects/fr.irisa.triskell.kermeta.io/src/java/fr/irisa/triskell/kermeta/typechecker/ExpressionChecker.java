@@ -697,6 +697,10 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		Type target;
 		if (expression.getTarget() != null) {
 			target = getTypeOfExpression(expression.getTarget());
+			if(target == null){
+				unit.error("TYPE-CHECKER : cannot resolve type of target "+expression.getTarget().toString() + " in expression " + expression.getName() + ".",expression);
+				return context.VoidType;
+			}
 			if (expression.getTarget() instanceof TypeLiteral) {
 				TypeLiteral tl = (TypeLiteral)expression.getTarget();
 				fr.irisa.triskell.kermeta.language.structure.Type tlt = getTypeFromTypeLiteral(tl).type;

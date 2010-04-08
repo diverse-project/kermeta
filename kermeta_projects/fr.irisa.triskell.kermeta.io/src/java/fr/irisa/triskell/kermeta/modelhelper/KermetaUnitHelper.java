@@ -45,6 +45,7 @@ public class KermetaUnitHelper {
 	 * @return
 	 */
 	static synchronized public List <KermetaUnit> getAllImportedKermetaUnits(KermetaUnit unit) {
+		List<KermetaUnit> result = new ArrayList<KermetaUnit>();
 		List<KermetaUnit> cache = unit.getAllImportedKermetaUnitsCache();
 		if(cache.size() == 0 && unit.getImportedKermetaUnits().size() != 0){
 			// need to recalculate the cache
@@ -52,7 +53,8 @@ public class KermetaUnitHelper {
 				getAllImportedKermetaUnits(unit, cache);
 			cache.remove(unit);  // if contains the current unit, remove it
 		}
-		return cache;
+		result.addAll(cache);
+		return result;
 	}
 
 	/**
