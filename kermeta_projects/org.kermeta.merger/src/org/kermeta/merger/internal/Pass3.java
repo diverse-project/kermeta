@@ -202,7 +202,7 @@ public class Pass3 extends MergePass {
 			if ( p.getOpposite() != null ) {
 				String qualifiedName = NamedElementHelper.getQualifiedName( (NamedElement) p.getOpposite().eContainer() );
 				ClassDefinition cd = (ClassDefinition) kermetaUnit.getTypeDefinitionByQualifiedName(qualifiedName, new NullProgressMonitor());
-				newProperty.setOpposite( KermetaModelHelper.ClassDefinition.getPropertyByName(cd, p.getOpposite().getName()) );
+				newProperty.setOpposite( KermetaModelHelper.ClassDefinition.getPropertyByName(kermetaUnit, cd, p.getOpposite().getName()) );
 			}
 		}
 	}
@@ -244,7 +244,7 @@ public class Pass3 extends MergePass {
 			if ( baseOperation.getSuperOperation() != null ) {
 				String qualifiedName = NamedElementHelper.getQualifiedName( (ClassDefinition) baseOperation.getSuperOperation().eContainer() ); 
 				ClassDefinition cd = (ClassDefinition) kermetaUnit.getTypeDefinitionByQualifiedName(qualifiedName);
-				Operation superOperation = KermetaModelHelper.ClassDefinition.getOperationByName(cd, baseOperation.getSuperOperation().getName());
+				Operation superOperation = KermetaModelHelper.ClassDefinition.getOperationByName(kermetaUnit, cd, baseOperation.getSuperOperation().getName());
 				newOperation.setSuperOperation( superOperation );
 			}
 			

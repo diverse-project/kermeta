@@ -30,6 +30,7 @@ public class OutProcessor {
 	 * @param monitor
 	 */
 	static public void process(Unit unit, Out out, Map<String, Object> args, IProgressMonitor monitor) {
+		
 		// Processing parameters before.
 		for ( Parameter p : out.getParameters() ) {
 			if ( p.getType().equals("String") ) {

@@ -82,7 +82,7 @@ public class TypeCloner {
 				} else if ( otv.eContainer() instanceof Operation ) {
 					Operation baseoperation = (Operation) otv.eContainer();
 					ClassDefinition cdef = (ClassDefinition) unit.getTypeDefinitionByQualifiedName( KermetaModelHelper.NamedElement.qualifiedName( baseoperation.getOwningClass()) );
-					Operation newoperation = KermetaModelHelper.ClassDefinition.getOperationByName(cdef, baseoperation.getName() );
+					Operation newoperation = KermetaModelHelper.ClassDefinition.getOperationByName(unit, cdef, baseoperation.getName() );
 					TypeVariable newotv = KermetaModelHelper.Operation.getTypeVariable(newoperation, otv.getName());
 					return newotv;
 				} 
@@ -100,7 +100,7 @@ public class TypeCloner {
 						current = current.eContainer();
 					}
 					ClassDefinition newClassDefinition = (ClassDefinition) unit.getTypeDefinitionByQualifiedName( KermetaModelHelper.NamedElement.qualifiedName(cdef) );
-					Operation newoperation = KermetaModelHelper.ClassDefinition.getOperationByName(newClassDefinition, operation.getName() );
+					Operation newoperation = KermetaModelHelper.ClassDefinition.getOperationByName(unit, newClassDefinition, operation.getName() );
 					
 					// Getting the type variable
 					TypeVariable tv = KermetaModelHelper.Operation.getTypeVariable(newoperation, otv.getName());

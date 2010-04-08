@@ -40,7 +40,7 @@ public class CallFeatureCloner {
 		if ( node.getStaticOperation() != null ) {
 			ClassDefinition baseClassDefinition = node.getStaticOperation().getOwningClass();
 			ClassDefinition newClassDefinition = (ClassDefinition) unit.getTypeDefinitionByQualifiedName( KermetaModelHelper.NamedElement.qualifiedName(baseClassDefinition) );
-			Operation newOperation = KermetaModelHelper.ClassDefinition.getOperationByName( newClassDefinition, node.getStaticOperation().getName() );
+			Operation newOperation = KermetaModelHelper.ClassDefinition.getOperationByName(unit, newClassDefinition, node.getStaticOperation().getName() );
 			call.setStaticOperation( newOperation );
 		}
 		if ( node.getStaticEnumLiteral() != null ) {
@@ -51,7 +51,7 @@ public class CallFeatureCloner {
 		if ( node.getStaticProperty() != null ) {
 			ClassDefinition baseClassDefinition = node.getStaticProperty().getOwningClass();
 			ClassDefinition newClassDefinition = (ClassDefinition) unit.getTypeDefinitionByQualifiedName( KermetaModelHelper.NamedElement.qualifiedName(baseClassDefinition) );
-			Property newProperty = KermetaModelHelper.ClassDefinition.getPropertyByName( newClassDefinition, node.getStaticProperty().getName() );
+			Property newProperty = KermetaModelHelper.ClassDefinition.getPropertyByName(unit, newClassDefinition, node.getStaticProperty().getName() );
 			call.setStaticProperty( newProperty );
 		}
 		

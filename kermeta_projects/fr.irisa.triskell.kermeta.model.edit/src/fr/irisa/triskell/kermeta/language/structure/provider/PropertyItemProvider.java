@@ -17,6 +17,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -35,6 +36,7 @@ import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 /**
@@ -178,11 +180,11 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 								ClassDefinition eOppositeReferenceType = (ClassDefinition) ((Class) eOpposite
 										.getType()).getTypeDefinition();
 								if (eOppositeContainingClass == null
-										|| KermetaModelHelper.ClassDefinition.isSuperTypeOf(
+										|| ClassDefinitionHelper.isSuperClassOfByName(
 												eOppositeContainingClass,
 												eReferenceType)
 										|| eOppositeContainingClass != eReferenceType
-										|| KermetaModelHelper.ClassDefinition.isSuperTypeOf(
+										|| ClassDefinitionHelper.isSuperClassOfByName(
 												eContainingClass,
 												eOppositeReferenceType)
 										|| eContainingClass != eOppositeReferenceType) {
