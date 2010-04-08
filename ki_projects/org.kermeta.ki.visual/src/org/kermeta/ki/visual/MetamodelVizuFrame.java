@@ -98,6 +98,7 @@ public class MetamodelVizuFrame extends JFrame {
 	public static RuntimeObject refreshView(RuntimeObject appliRO) {
 		MetamodelVizuFrame interactiveSys = (MetamodelVizuFrame) appliRO.getUserData();
 		
+		interactiveSys.mmView.revalidate();
 		interactiveSys.mmView.repaint();
 		
 		return appliRO.getFactory().getMemory().voidINSTANCE;
@@ -130,13 +131,12 @@ public class MetamodelVizuFrame extends JFrame {
 					mmView.getEventManager().onExitEvent();
             }});
      
-		new FileDrop(mmView, new FileDrop.Listener()
-        {   public void filesDropped( java.io.File[] files )
-            {   for( int i = 0; i < files.length; i++ )
-                {  
+		new FileDrop(mmView, new FileDrop.Listener() {
+			public void filesDropped( java.io.File[] files ) {
+				for( int i = 0; i < files.length; i++ )  {  
             		System.out.println(files[i].getAbsolutePath());
-                }   // end for: through each dropped file
-            }   // end filesDropped
-        }); // end Fi
+                }
+            }
+        });
 	}
 }
