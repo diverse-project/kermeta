@@ -11,6 +11,7 @@ package org.kermeta.io.cachemanager;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -142,7 +143,11 @@ public class KermetaUnitStore
 		return kermetaUnitCache.get(realURI);
 	}
 	
-	synchronized public void unload(String uri) {
+	/**
+	 * Unload the specified unit
+	 * @param uri
+	 */
+	synchronized public void basicUnload(String uri) {
 
 		String realURI = FrameworkMapping.mapping.get(uri);
 		if ( realURI == null )
@@ -154,6 +159,22 @@ public class KermetaUnitStore
 		KermetaUnit kermetaUnit = kermetaUnitCache.get(realURI);
 		if ( kermetaUnit != null ) {
 			kermetaUnitCache.remove(realURI);			
+		}
+	}
+	
+	/**
+	 * unload a unit and all dependent units
+	 * @param uri
+	 */
+	synchronized public void unload(String uri) {
+		basicUnload(uri);
+		for(Entry<String, KermetaUnit> kuEntry : kermetaUnitCache.entrySet()){
+			for(KermetaUnit ku : kuEntry.getValue().getImportedKermetaUnits()){
+				if(uri.equals(ku.getUri()) ){
+					// then it must be removed from memory too
+					 unload(kuEntry.getValue().getUri());
+				}
+			}
 		}
 	}
 	/**
