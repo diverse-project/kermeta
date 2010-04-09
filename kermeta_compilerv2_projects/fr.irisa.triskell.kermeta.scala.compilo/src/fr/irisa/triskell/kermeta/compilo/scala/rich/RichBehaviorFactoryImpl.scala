@@ -90,7 +90,7 @@ class RichBehaviorFactoryImpl extends BehaviorFactoryImpl {
 	}
 
 	override def createJavaStaticCall() : JavaStaticCall = {
-		new JavaStaticCallImpl() with ObjectAspect
+		new JavaStaticCallView
 	}
 
 	override def createVariableDecl() : VariableDecl = {

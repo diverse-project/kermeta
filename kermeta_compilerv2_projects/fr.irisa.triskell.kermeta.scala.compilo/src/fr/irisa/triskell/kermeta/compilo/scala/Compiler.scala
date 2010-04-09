@@ -43,7 +43,7 @@ class Compiler extends RichAspectImplicit with LogAspect {
         fo.createNewFile
         ReflexivityLoader.copyFile(fi, fo);
         var midTime= System.currentTimeMillis() - startTime
-        log.info("Loading KM model step complete in "+(midTime)+" millisecondes ")
+        log.error("Loading KM model step complete in "+(midTime)+" millisecondes ")
         startTime = System.currentTimeMillis
         /* Target Model Aspect Generation */
         var visitorAspect = new ScalaAspectVisitor
@@ -59,7 +59,7 @@ class Compiler extends RichAspectImplicit with LogAspect {
         Util.threadExecutor.awaitTermination(600,TimeUnit.SECONDS) /* Waiting for all tasks finished */
         /* End step */
         var endTime= System.currentTimeMillis() - startTime
-        log.info("Compilation step complete in "+(endTime)+" millisecondes ")
+        log.error("Compilation step complete in "+(endTime)+" millisecondes ")
     }
 
 }

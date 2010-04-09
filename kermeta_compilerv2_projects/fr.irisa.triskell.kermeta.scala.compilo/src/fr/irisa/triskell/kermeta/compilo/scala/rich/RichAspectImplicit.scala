@@ -57,6 +57,8 @@ trait RichAspectImplicit {
 	implicit def rich (xs : Constraint) = xs.asInstanceOf[ConstraintAspect]
 	implicit def rich (xs : Rescue) = xs.asInstanceOf[RescueAspect]
 
+implicit def rich (xs : JavaStaticCall) = xs.asInstanceOf[JavaStaticCallAspect]
+implicit def rich (xs : JavaStaticCallAspect) = xs.asInstanceOf[JavaStaticCall]
 	
 	
 	implicit def rich (xs : PackageAspect) = xs.asInstanceOf[Package]

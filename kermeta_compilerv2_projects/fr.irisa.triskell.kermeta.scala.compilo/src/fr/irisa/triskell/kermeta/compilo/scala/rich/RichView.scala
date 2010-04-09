@@ -55,6 +55,8 @@ class TypeDefinitionView extends TypeDefinitionImpl with TypeDefinitionAspect
 class ConstraintView extends ConstraintImpl with ConstraintAspect
 class RescueView extends RescueImpl with RescueAspect
 
+class JavaStaticCallView extends JavaStaticCallImpl with JavaStaticCallAspect
+
 
 
 
