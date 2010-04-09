@@ -12,7 +12,7 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
   implicit def rich (xs : OperationAspect) = xs.asInstanceOf[Operation]
 
   def generateSignature(res : StringBuilder) : Unit = {
-if (!Util.hasCompilerIgnoreTag(this)){
+    if (!Util.hasCompilerIgnoreTag(this)){
       log.debug("Operation={}",this.getName)
       res.append("\n   ")
       if (this.getSuperOperation()!=null          ){
@@ -114,37 +114,65 @@ if (!Util.hasCompilerIgnoreTag(this)){
   }
 
   def getListorType(res:StringBuilder)={
+
+    var res1 : StringBuilder = new StringBuilder
+
     if (this.getUpper>1 ||this.getUpper == -1){
       if (this.isIsOrdered){
-        res.append("java.util.List[")
+        res.append("org.eclipse.emf.common.util.EList[")
       }else{
         //TODO gestion des SETs
-        res.append("java.util.List[")
+        res.append("org.eclipse.emf.common.util.EList[")
       }
-      this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+
+      this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res1)
+      res.append(getLocalTypeEquivalence(res1.toString))
       res.append("]")
+
     } else {
-      this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+
+
+      this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res1)
+      res.append(getLocalTypeEquivalence(res1.toString))
+
     }
 
 
   }
 
   def getListorType(param:Parameter,res:StringBuilder)={
+    var res1 : StringBuilder = new StringBuilder
     if (param.getUpper>1 ||param.getUpper == -1){
       if (param.isIsOrdered){
-        res.append("java.util.List[")
+        res.append("org.eclipse.emf.common.util.EList[")
       }else{
         //TODO gestion des SETs
-        res.append("java.util.List[")
+        res.append("org.eclipse.emf.common.util.EList[")
       }
-      param.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+      param.getType().asInstanceOf[ObjectAspect].generateScalaCode(res1)
+      res.append(getLocalTypeEquivalence(res1.toString))
       res.append("]")
     } else {
-      param.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
+      param.getType().asInstanceOf[ObjectAspect].generateScalaCode(res1)
+      res.append(getLocalTypeEquivalence(res1.toString))
     }
 
 
+  }
+
+  def getLocalTypeEquivalence(t : String ) : String = {
+    val booleanRegex = ".*Boolean".r
+    t match {
+        case "kermeta.standard.Void" => "Unit"
+        case "Int" => "java.lang.Integer"
+        case booleanRegex() if (this.getType().isInstanceOf[PrimitiveType]
+                    && (
+                        "fr.irisa.triskell.kermeta.language.structure.Boolean".equals(this.getType().asInstanceOf[PrimitiveTypeAspect].whichBoolean) ||
+                        "org.eclipse.emf.ecore.EBoolean".equals(this.getType().asInstanceOf[PrimitiveTypeAspect].whichBoolean) )
+                ) => println("WAZZZZZAAAAA");"Boolean"
+        case booleanRegex() => "java.lang.Boolean"
+        case _ => t
+    }
   }
 
 

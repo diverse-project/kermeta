@@ -129,11 +129,13 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
                     })
                 res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
             }
+            res append " with "+Util.protectScalaKeyword(Util.getQualifiedNamedBase(this))
             res.append("{\n")
             //res.append("{this:"+Util.protectScalaKeyword(Util.protectScalaKeyword(Util.getQualifiedNamedBase(this)))+"=>\n")
 
             this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))
             this.getOwnedOperation filter(op=> !Util.hasEcoreTag(op)) foreach(op=> op.generateScalaCode(res))
+            
 				
             /* Generate Invariants */
             this.generateInvariants(res)
