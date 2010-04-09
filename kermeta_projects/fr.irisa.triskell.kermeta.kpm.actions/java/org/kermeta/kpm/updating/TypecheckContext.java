@@ -91,8 +91,9 @@ public class TypecheckContext implements IAction {
 				// TypeCheckerContext typecheckercontext = store.get(IOPlugin.getFrameWorkURI(), options).getTypeCheckerContext();
 				// if (typecheckercontext == null)
 				//	typecheckercontext = new TypeCheckerContext(store.get(IOPlugin.getFrameWorkURI(), options));
-				TypeCheckerContext typecheckercontext = new TypeCheckerContext(store.get(IOPlugin.getFrameWorkURI(), options));
+				//TypeCheckerContext typecheckercontext = new TypeCheckerContext(store.get(IOPlugin.getFrameWorkURI(), options));
 				for ( KermetaUnit kunit : kl ) {
+					TypeCheckerContext typecheckercontext = new TypeCheckerContext(kunit);
 					/*
 					 * 
 					 * Updating the context.
