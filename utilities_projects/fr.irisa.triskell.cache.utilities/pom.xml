@@ -53,12 +53,12 @@
 		<repository>
       		<id>tipimouss-local-maven-repository</id>
       		<name>Tipimouss Local release repository</name>
-      		<url>file://local/maven2</url>
+      		<url>file:/local/maven2</url>
     	</repository>
     	<snapshotRepository>
       		<id>tipimouss-local-maven-repository</id>
       		<name>Tipimouss Local  snapshot repository</name>
-      		<url>file://local/maven2-snapshots</url>
+      		<url>file:/local/maven2-snapshots</url>
     	</snapshotRepository>		
 	</distributionManagement>
 </project>
