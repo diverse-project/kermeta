@@ -1,4 +1,4 @@
-package org.kermeta.smartadapters.drools;
+package org.kermeta.smartadapters.drools.standalone;
 
 import java.io.IOException;
 import java.util.HashMap;

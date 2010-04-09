@@ -28,7 +28,7 @@ public class CompilerUI implements IObjectActionDelegate, Runnable {
 	public void run() {
 		IOConsole console = new EclipseConsole("SmartAdapters compiler for DiVA");
 		console.println(new InfoMessage("Compiling DiVA aspect models: " + file.getLocation().toOSString() + "..."));
-		
+			
 		try {			
 				
 			String file_uri = "file:/" + file.getLocation().toOSString().replace("\\", "/");
