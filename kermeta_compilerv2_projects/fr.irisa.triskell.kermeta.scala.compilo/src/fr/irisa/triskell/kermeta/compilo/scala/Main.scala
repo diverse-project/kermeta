@@ -48,10 +48,10 @@ object Main extends LogAspect {
       println(GlobalConfiguration.outputFolder)
     }
 
-  //  additionalClassPath = List("/Users/ffouquet/Desktop/fumlKermeta.jar")
+    additionalClassPath = List("/Users/ffouquet/Desktop/fumlKermeta.jar")
     //additionalClassPath + "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.output/lib/test1.jar"
    // additionalClassPath = List("/Users/ffouquet/Documents/DEV/workspaces/art/org.kermeta.art.model/target/art2.model-1.1.0-SNAPSHOT.jar")
-   additionalClassPath = List("/Users/ffouquet/Documents/DEV/workspaces/art/org.kermeta.art.model/target/art2.model-1.1.0-SNAPSHOT.jar")
+   //additionalClassPath = List("/Users/ffouquet/Documents/DEV/workspaces/art/org.kermeta.art.model/target/art2.model-1.1.0-SNAPSHOT.jar")
 
 
 
@@ -160,7 +160,7 @@ object Main extends LogAspect {
     //
     //
 
-    inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/org.kermeta.ArtDslCommand/src/kermeta/ArtDslCommand.km"
+ //   inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/org.kermeta.ArtDslCommand/src/kermeta/ArtDslCommand.km"
 
     //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Speeds/StaticSemanticChecker.km"
     //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/reflexivity/Serializer.km"
@@ -178,7 +178,7 @@ object Main extends LogAspect {
 
     //inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/012_TypeFromEcore.km"
 
-   // inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fuml/fr.irisa.triskell.fuml/src/kermeta/fuml/FUMLStarter.km"
+    inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fuml/fr.irisa.triskell.fuml/src/kermeta/fuml/FUMLStarter.km"
 
 
     if(inputFile != ""){
