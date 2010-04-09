@@ -142,11 +142,12 @@ abstract public class KLaunchShortcut implements ILaunchShortcut {
 		KermetaUnitStore store = IOPlugin.getDefault().getEditionKermetaUnitStore();
 		
 		
-		TypeCheckerContext typecheckercontext = new TypeCheckerContext(store.get(IOPlugin.getFrameWorkURI()));
 		
 		// TODO in the end the interpreter must use its own store to make sure that
 		// the edition won't interfere with the execution
 		KermetaUnit unit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(uri);
+		TypeCheckerContext typecheckercontext = new TypeCheckerContext(unit);
+		
 		new KermetaTypeChecker(unit, typecheckercontext).checkUnit();
 		new KermetaConstraintChecker(unit).checkUnit();
 		
