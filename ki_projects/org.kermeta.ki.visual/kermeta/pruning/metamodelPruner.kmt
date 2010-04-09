@@ -57,7 +57,7 @@ class MetamodelPruner
 	
 	/*Removed Meta-concepts*/
 	reference removedKermetaMetaClasses : ClassDefinition[0..*]
-	reference removedKermetaMetaProperties : Property[0..*]
+//	reference removedKermetaMetaProperties : Property[0..*]
 	reference removedKermetaMetaEnumerations : Enumeration[0..*]
 	/*number of passes*/
 	reference numberOfPasses: Integer
@@ -156,8 +156,8 @@ class MetamodelPruner
 	operation transform(): Void is do
 		getRequiredConcepts
 		TagRemoval
-		OperationRemoval
-		PropertyRemoval
+//		OperationRemoval
+//		PropertyRemoval
 		ClassRemoval
 		EnumerationRemoval
 		PrimitiveTypeRemoval
@@ -167,9 +167,8 @@ class MetamodelPruner
 
 
 
-	operation includeClassesInPackage(aPackage : Package) : Bag<ClassDefinition> is do
+	operation includeClassesInPackage(aPackage : Package, classes : Set<ClassDefinition>) : Void is do
 		var cd : ClassDefinition
-		result := Bag<ClassDefinition>.new
 		
 		if (not aPackage.isVoid) then
 			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{object | 
@@ -178,16 +177,14 @@ class MetamodelPruner
 					
 					requiredMetaClasses.each{ c | 
 						if c.name==cd.name then
-							result.add(cd)
+							classes.add(cd)
 						end
 					}	
 				end
 			}
 			
 			if not aPackage.nestedPackage.isEmpty then
-				aPackage.nestedPackage.each{p |
-					result.addAll(includeClassesInPackage(p))			
-				}
+				aPackage.nestedPackage.each{p | includeClassesInPackage(p, classes) }
 			end
 		end
 	end
@@ -195,9 +192,8 @@ class MetamodelPruner
 	
 	
 	
-	operation includeEnumsInPackage(aPackage : Package) : Bag<Enumeration> is do
+	operation includeEnumsInPackage(aPackage : Package, enums : Set<Enumeration>) : Void is do
 		var en : Enumeration
-		result := Bag<Enumeration>.new
 		
 		if(not aPackage.isVoid) then
 			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{object | 
@@ -206,7 +202,7 @@ class MetamodelPruner
 					
 					requiredMetaEnumerations.each{ c | 
 						if c.name==en.name then
-							result.add(en)
+							enums.add(en)
 						end
 					}	
 				end
@@ -214,9 +210,7 @@ class MetamodelPruner
 			}
 			
 			if not aPackage.nestedPackage.isEmpty then
-				aPackage.nestedPackage.each{p |
-					result.addAll(includeEnumsInPackage(p))			
-				}
+				aPackage.nestedPackage.each{p | includeEnumsInPackage(p, enums) }
 			end
 		end
 	end
@@ -224,16 +218,14 @@ class MetamodelPruner
 	
 	
 
-	operation includePropertiesInPackage(aPackage : Package) : Bag<Property> is do
-		result := Bag<Property>.new
-		
+	operation includePropertiesInPackage(aPackage : Package, props : Set<Property>) : Void  is do
 		if(not aPackage.isVoid) then
 			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{object |
 				if object.isInstanceOf(ClassDefinition) then
 					object.asType(ClassDefinition).ownedAttribute.each{prop |
 						requiredMetaProperties.each{rprop |
 							if rprop.name==prop.name then
-								result.add(prop.asType(Property))
+								props.add(prop.asType(Property))
 							end
 						}
 					}
@@ -242,9 +234,7 @@ class MetamodelPruner
 		end
 		
 		if not aPackage.nestedPackage.isEmpty then
-			aPackage.nestedPackage.each{p |
-				result.addAll(includePropertiesInPackage(p))			
-			}
+			aPackage.nestedPackage.each{p | includePropertiesInPackage(p, props) }
 		end
 	end
 	
@@ -471,9 +461,9 @@ class MetamodelPruner
 		
 	operation getRequiredConcepts():Void is do
 		inputKermetaMetamodel.packages.each{p |
-			requiredKermetaMetaClasses.addAll(includeClassesInPackage(p))
-			requiredKermetaMetaEnumerations.addAll(includeEnumsInPackage(p))
-			requiredKermetaMetaProperties.addAll(includePropertiesInPackage(p))
+			includeClassesInPackage(p, requiredKermetaMetaClasses)
+			includeEnumsInPackage(p, requiredKermetaMetaEnumerations)
+			includePropertiesInPackage(p, requiredKermetaMetaProperties)
 		}	
 		//Add all multilevel superclasses
 		includeAllMultiLevelSuperClasses
@@ -495,7 +485,7 @@ class MetamodelPruner
 	end
 
 
-
+/*
 	operation OperationRemovalInPackage(aPackage : Package) : Void is do
 		if (not aPackage.isVoid) then
 			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each { 
@@ -513,15 +503,15 @@ class MetamodelPruner
 			aPackage.nestedPackage.each{ p | OperationRemovalInPackage(p) }
 		end
 	end
+	*/
 	
 	
 	
-	
-	
+	/*
 	operation OperationRemoval() : Void is do
 		inputKermetaMetamodel.packages.each { p | OperationRemovalInPackage(p)}
 	end
-	
+	*/
 	
 	
 	
@@ -551,7 +541,7 @@ class MetamodelPruner
 	end
 	
 	
-	
+	/*
 	operation PropertyRemovalInPackage(aPackage : Package) : Void is do
 		var removeProperty : Boolean
 		
@@ -589,7 +579,7 @@ class MetamodelPruner
 	operation PropertyRemoval(): Void is do
 		inputKermetaMetamodel.packages.each{ p | PropertyRemovalInPackage(p)}
 	end
-	
+	*/
 	
 	
 	operation ClassRemovalInPackage(aPackage : Package):Void is do
@@ -712,27 +702,26 @@ class MetamodelPruner
 
 
 	
-	operation getPackageObjects(aPackage:Package) : Bag<Object> is do
+	operation getPackageObjects(aPackage : Package, objects : Set<Object>) : Void is do
 		var pkg : TypeDefinitionContainer init aPackage.asType(TypeDefinitionContainer)
 		var cd : ClassDefinition
-		result := Bag<Object>.new
 		
 		if not pkg.ownedTypeDefinition.isEmpty  then
 			pkg.ownedTypeDefinition.each {object |
-				if object.isInstanceOf(Package) then result.add(object)
+				if object.isInstanceOf(Package) then objects.add(object)
 				else if object.isInstanceOf(ClassDefinition) then
 					cd := object.asType(ClassDefinition)
-					result.add(object)
-					cd.ownedAttribute.each{prop | result.add(prop)}
-					cd.~inv.each{constraint | result.add(constraint)}
-				else if object.isInstanceOf(PrimitiveType)   then result.add(object)
-				else if object.isInstanceOf(Enumeration)     then result.add(object)
+					objects.add(object)
+					cd.ownedAttribute.each{prop | objects.add(prop)}
+					cd.~inv.each{constraint | objects.add(constraint)}
+				else if object.isInstanceOf(PrimitiveType)   then objects.add(object)
+				else if object.isInstanceOf(Enumeration)     then objects.add(object)
 				end end end end
 			}
 		end
 		
 		if not aPackage.nestedPackage.isEmpty then
-			aPackage.nestedPackage.each{p | result.addAll(getPackageObjects(p))}
+			aPackage.nestedPackage.each{p | getPackageObjects(p, objects)}
 		end
 	end
 	
@@ -740,7 +729,7 @@ class MetamodelPruner
 	
 	
 	operation getKermetaObjects():Void is do
-		inputKermetaMetamodel.packages.each { p | kermetaObjects.addAll(getPackageObjects(p)) }
+		inputKermetaMetamodel.packages.each { p | getPackageObjects(p, kermetaObjects) }
 	end
 	
 	
