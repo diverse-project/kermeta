@@ -9,24 +9,17 @@
  */
 package fr.irisa.triskell.kermeta.modelhelper;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.TypeDefinitionCacheEntry;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
@@ -40,40 +33,6 @@ public class ClassDefinitionHelper {
 	// ---------------------------------
 	// functions about inheritance
 	// ---------------------------------
-
-	/**
-	 * Return true if supercls is a super class of cls
-	 * @param supercls the Super class to which we compare cls
-	 * @param cls the class to compare to the super class
-	 * @return
-	 */
-/*	public static boolean isSuperClassOf(ClassDefinition supercls, ClassDefinition cls) {
-		try {
-			for(Type stype : cls.getSuperType()) {
-				ClassDefinition scls = TypeHelper.getClassDefinition(stype);
-				if (supercls == scls) return true;
-				else if(isSuperClassOf(supercls, scls)) return true;
-			}
-			for ( TypeDefinition typeDefinition : TypeDefinitionHelper.getBaseAspects(cls) ) {
-				if ( typeDefinition instanceof ClassDefinition ) {
-					ClassDefinition c = (ClassDefinition) typeDefinition;
-					if ( isSuperClassOf(supercls, c) )
-						return true;
-				}
-			}
-			for ( TypeDefinition typeDefinition : TypeDefinitionHelper.getBaseAspects(supercls) ) {
-				if ( typeDefinition instanceof ClassDefinition ) {
-					ClassDefinition c = (ClassDefinition) typeDefinition;
-					if ( isSuperClassOf(c, cls) )
-						return true;
-				}
-			}
-			return false;
-		} catch (StackOverflowError e) {
-			System.out.println();
-		}
-		return false;
-	}*/
 	
 	/**
 	 * Return true if supercls is a super class of cls, retrieval by name
