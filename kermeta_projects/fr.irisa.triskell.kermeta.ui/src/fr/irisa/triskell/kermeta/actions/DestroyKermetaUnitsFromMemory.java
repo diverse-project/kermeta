@@ -17,6 +17,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.kpm.KpmManager;
 
 public class DestroyKermetaUnitsFromMemory implements
 		IWorkbenchWindowActionDelegate {
@@ -30,6 +31,7 @@ public class DestroyKermetaUnitsFromMemory implements
 	public void run(IAction action) {
 		//LoaderPlugin.getDefault().unloadAll();
 		IOPlugin.getDefault().unloadAll();
+		KpmManager.getDefault().resetKPM();
 	}
 
 	public void selectionChanged(IAction action, ISelection selection) {
