@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
+import org.kermeta.model.internal.ClassDefinitionHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -282,7 +283,7 @@ public class InheritanceSearch {
 
 			Class current = toVisit.get(0);
 			toVisit.remove(0);
-			KermetaUnitHelper.getKermetaUnitFromObject( current.getTypeDefinition() );
+			//KermetaUnitHelper.getKermetaUnitFromObject( current.getTypeDefinition() );
 
 			if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
 				classDefinitionProcessed.add( (ClassDefinition) current.getTypeDefinition() );
