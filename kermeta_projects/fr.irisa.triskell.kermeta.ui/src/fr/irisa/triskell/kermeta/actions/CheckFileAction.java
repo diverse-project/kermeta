@@ -59,15 +59,17 @@ public class CheckFileAction implements IEditorActionDelegate {
 					if ( file != null ) {
 						Unit unit = KpmManager.getDefault().getUnit( file );
 						if(unit == null){						
-							KermetaUIPlugin.logErrorMessage("Cannot retrieve a unit for " +file.getName() + " in KPM manager", new Exception("OutofdateKPM"));
+							KermetaUIPlugin.logWarningMessage("Cannot retrieve a unit for " +file.getName() + " in KPM manager", new Exception("OutofdateKPM"));
+							// the file wasn't know/managed by kpm, add it
+				   			KpmManager.getDefault().conditionalAddUnit(file);
+				   			unit = KpmManager.getDefault().getUnit( file );
 						}
-						else{
-							unit.setLastTimeModified( new Date(0) );
-							Map<String, Object> options = new HashMap<String, Object>();
-							if ( document != null )
-								options.put("content", document.get());
-							EventDispatcher.sendEvent(unit, "update", options, monitor);
-						}
+						unit.setLastTimeModified( new Date(0) );
+						Map<String, Object> options = new HashMap<String, Object>();
+						if ( document != null )
+							options.put("content", document.get());
+						EventDispatcher.sendEvent(unit, "update", options, monitor);
+						
 					}
 				} finally {
 					monitor.done();
