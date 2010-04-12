@@ -19,8 +19,14 @@ object PrimitiveConversion{
 	
 	implicit def integer2kermeta(x: Int) = new RichInteger(x)	
 	implicit def real2kermeta(x: Double) = new RichReal(x)	
-	implicit def character2kermeta(x: Char) = new RichCharacter(x)	
-	implicit def toInt(in:java.lang.Integer) :Int = {var t : Int = in.intValue; return t;}
+	implicit def character2kermeta(x: Char) = new RichCharacter(x)
+        //implicit def listToEList[G](l : java.util.List[G]) = l.asInstanceOf[org.eclipse.emf.common.util.EList[G]]
+	
+        implicit def toInt2(in:java.lang.Integer) : Int = in.intValue
+        implicit def toInt(in:java.lang.Integer) : RichInteger = new RichInteger(in.intValue)
+
+
+  
        implicit def ListInteger2ListInt(x:  org.eclipse.emf.common.util.EList[java.lang.Integer]) :java.util.List[Int] = {
            import kermeta.standard.JavaConversions._
            var l=new java.util.ArrayList[Int]() ;
@@ -182,17 +188,13 @@ class RichInteger(value: Int)  extends RichNumeric[Int] with EObjectImplForPrimi
 	override def equals(other : Any) :Boolean={if (other.isInstanceOf[Int]) return value==other.asInstanceOf[Int]; if (other.isInstanceOf[Integer]) return value==other.asInstanceOf[Integer].intValue;else false}
 	def equals(other : Int) :Boolean={value==other}
 	def equals(other : Integer) :Boolean={value == other.intValue}
-	//TODO
-	def mod(other : Int) :Int={return 0}
-	//TODO
-	def mod(other : Integer) :Int={return 0}
+	def mod(other : Int) :Int={return value % other}
+	def mod(other : Integer) :Int={return value % other.intValue}
 	def div(other : Int) :Int={return value/other}
 	def div(other : Integer) :Int={return value/(other.intValue)}
 	def toReal() :Double={return value}
-	//TODO
-	override def compareTo(other : Int) :Int={return 0}
-	//TODO
-	def compareTo(other : Integer) :Int={return 0} 
+	override def compareTo(other : Int) :Int={return value.compare(other) }
+	def compareTo(other : Integer) :Int={return value.compare(other.intValue)}
 	override def isGreater(other : Int) :Boolean={return value>other}
 	def isGreater(other : Integer) :Boolean={return value>other.intValue}
 	override def isGreaterOrEqual(other : Int) :Boolean={value>=other}

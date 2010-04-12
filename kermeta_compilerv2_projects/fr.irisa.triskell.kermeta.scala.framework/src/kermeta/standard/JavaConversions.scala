@@ -52,6 +52,8 @@ object JavaConversions {
 	  
     def first() = value.get(0)
 
+    def last() = value.get(value.size-1)
+
 
     def move( newPosition : Int, o : A){
       if(value.contains(o)){
