@@ -151,7 +151,7 @@ aspect abstract class Mergeable
 				var col : Collection<Object>
 				col ?= result.get(p)
 				if (matching.size == 0) then
-					if not composer.mode.name.equals("INTERSECTION") then
+					if not composer.mode.equals(Modes.INTERSECTION) then
 						col.add(me)
 					end
 				else
@@ -172,7 +172,7 @@ aspect abstract class Mergeable
 				var col : Collection<Object>
 				col ?= result.get(p)
 				if matching.size == 0 then
-					if not composer.mode.name.equals("INTERSECTION") then
+					if not composer.mode.equals(Modes.INTERSECTION) then
 						col.add(me)
 					end
 				/*else
@@ -390,7 +390,9 @@ class ModelElementComposer
 		ctx.indexate(m2)
 		self.logger.printDebug("compose merge.kmt : end indexate")
 		if m1 == void or m2 == void then
-			raise "Model elements are not mergeable"
+			var ex : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			ex.message := "Model elements are not mergeable"
+			raise ex
 		end
 		self.logger.printDebug("compose merge.kmt : trying to compose "+m1.toString+" / "+m2.toString)
 		self.logger.printDebug("compose merge.kmt : signatures "+(m1.getSignature==m2.getSignature).toString)
@@ -410,7 +412,8 @@ class ModelElementComposer
 	 * param ctx : index context
 	 * returns a restored mergeable object
 	 */
-	operation fixReferences(e : Mergeable, ctx : MergeContext) : Mergeable is do
+	operation fixReferences(e1 : Mergeable, ctx : MergeContext) : Mergeable is do
+		var e : Mergeable init e1
 		// the object is already processed
 		if ctx.isProcessed(e) then
 			result := e
