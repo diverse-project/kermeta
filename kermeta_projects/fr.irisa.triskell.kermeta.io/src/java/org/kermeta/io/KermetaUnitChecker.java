@@ -127,7 +127,8 @@ public class KermetaUnitChecker {
 	static public KermetaUnit check(IFile file, KermetaUnitStore store) throws NotRegisteredURIException, URIMalformedException, ContextNotInitializedOnAFrameworkError {
 		if ( file == null )
 			return null;
-		return check(file, null);
+//		return check(file.getLocationURI().toString(), store);
+		return check(file, store, new NullProgressMonitor());
 	}
 	
 	static private void check(KermetaUnit unit, IProgressMonitor monitor) throws ContextNotInitializedOnAFrameworkError {
