@@ -1,0 +1,811 @@
+/*
+ * Creation : March 16, 2009
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : 
+ *            Sagar Sen
+ *            Arnaud Blouin
+ */
+package kermeta::ki::visual;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Pruner.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::language::structure
+
+class RequiredProperty
+{
+	attribute name: String
+	attribute owningClassName: String
+}
+
+class RequiredClass
+{
+	attribute name: String
+}
+
+class RequiredEnumeration
+{
+	attribute name: String
+}
+
+
+
+class MetamodelPruner
+{
+	/* Input Kermeta Meta-model */
+	reference inputKermetaMetamodel : ModelingUnit
+	/* Kermeta Objects */
+	reference inputKermetaObjects : Object[0..*]
+	/* Required Meta-classes */
+	reference requiredMetaClasses : RequiredClass[0..*]
+	reference requiredMetaProperties : RequiredProperty[0..*]
+	reference requiredMetaEnumerations : RequiredEnumeration[0..*]
+	
+	/* Required Kermeta Meta-concepts*/
+	reference requiredKermetaMetaClasses :  ClassDefinition[0..*]
+	reference requiredKermetaMetaProperties :  Property[0..*]
+	reference requiredKermetaMetaEnumerations:  Enumeration[0..*]
+	reference requiredKermetaMetaPrimitiveTypes :  PrimitiveType[0..*]
+
+	/* Bag of all Kermeta objects in Meta-model */ 
+	reference kermetaObjects : Object[0..*]
+	
+	/*Removed Meta-concepts*/
+	reference removedKermetaMetaClasses : ClassDefinition[0..*]
+//	reference removedKermetaMetaProperties : Property[0..*]
+	reference removedKermetaMetaEnumerations : Enumeration[0..*]
+	/*number of passes*/
+	reference numberOfPasses: Integer
+	attribute emptyPackages: Package[0..*]
+	
+	reference viewPolicy : PrunerViewPolicy
+	
+	
+	
+	
+	operation initialize(requiredClasses : bag RequiredClass[0..*], requiredProperties : bag RequiredProperty[0..*], 
+						requiredEnumerations : bag RequiredEnumeration[0..*], numberOfPasses : Integer, viewPolicy : PrunerViewPolicy) : Void is do
+		requiredMetaClasses.addAll(requiredClasses)
+		requiredMetaProperties.addAll(requiredProperties)
+		requiredMetaEnumerations.addAll(requiredEnumerations)
+		requiredMetaProperties.addAll(requiredProperties)
+		requiredMetaEnumerations.addAll(requiredEnumerations)
+		self.numberOfPasses := numberOfPasses
+		self.viewPolicy := viewPolicy
+	end
+	
+	
+
+	
+	operation preprocess(): Boolean is do
+		getKermetaObjects
+		
+		var isExisting : Boolean
+		
+		//Check if all required classes exist in the input metamodel
+		result := not requiredMetaClasses.exists{ c | 
+			isExisting := false
+			
+			kermetaObjects.each{ o | 	
+				if o.isInstanceOf(ClassDefinition) then 
+					if o.asType(TypeDefinition).name==c.name then
+						isExisting := true
+						requiredKermetaMetaClasses.add(o.asType(ClassDefinition))
+					end
+				end
+				
+				isExisting
+			}
+			
+			not isExisting
+		}
+		
+		if(result) then
+			//Check if all required enumerations exist in the input metamodel
+			result := not requiredMetaEnumerations.exists{ e |
+				isExisting := false
+				
+				kermetaObjects.exists{ o | 
+					if o.isInstanceOf(Enumeration) then 
+						if o.asType(Enumeration).name==e.name then
+							isExisting := true
+							requiredKermetaMetaEnumerations.add(o.asType(Enumeration))
+						end
+					end
+					
+					isExisting
+				}	
+				
+				not isExisting
+			}
+		end
+		
+		if(result) then
+			//Check if all required properties exist in the input metamodel
+			result := not requiredMetaProperties.exists{ p |
+				isExisting := false
+				
+				kermetaObjects.exists{ o | 
+					if o.isInstanceOf(ClassDefinition) then 
+						o.asType(ClassDefinition).ownedAttribute.each {a | 
+							if a.name==p.name and a.owningClass.name==p.owningClassName then
+								isExisting := true
+								requiredKermetaMetaProperties.add(a.asType(Property))
+							end
+						}
+					end
+					
+					isExisting
+				}
+				
+				not isExisting
+			}
+		end
+	end
+	
+	
+	
+	
+	
+	/* Transform Kermeta input meta-model to pruned output meta-model */
+	operation transform(): Void is do
+		getRequiredConcepts
+		TagRemoval
+//		OperationRemoval
+//		PropertyRemoval
+		ClassRemoval
+		EnumerationRemoval
+		PrimitiveTypeRemoval
+		EmptyPackageRemoval
+	end
+	
+
+
+
+	operation includeClassesInPackage(aPackage : Package, classes : Set<ClassDefinition>) : Void is do
+		var cd : ClassDefinition
+		
+		if (not aPackage.isVoid) then
+			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{object | 
+				if object.isInstanceOf(ClassDefinition) then
+					cd := object.asType(ClassDefinition)
+					
+					requiredMetaClasses.each{ c | 
+						if c.name==cd.name then
+							classes.add(cd)
+						end
+					}	
+				end
+			}
+			
+			if not aPackage.nestedPackage.isEmpty then
+				aPackage.nestedPackage.each{p | includeClassesInPackage(p, classes) }
+			end
+		end
+	end
+	
+	
+	
+	
+	operation includeEnumsInPackage(aPackage : Package, enums : Set<Enumeration>) : Void is do
+		var en : Enumeration
+		
+		if(not aPackage.isVoid) then
+			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{object | 
+				if object.isInstanceOf(Enumeration) then
+					en := object.asType(Enumeration)
+					
+					requiredMetaEnumerations.each{ c | 
+						if c.name==en.name then
+							enums.add(en)
+						end
+					}	
+				end
+				
+			}
+			
+			if not aPackage.nestedPackage.isEmpty then
+				aPackage.nestedPackage.each{p | includeEnumsInPackage(p, enums) }
+			end
+		end
+	end
+	
+	
+	
+
+	operation includePropertiesInPackage(aPackage : Package, props : Set<Property>) : Void  is do
+		if(not aPackage.isVoid) then
+			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{object |
+				if object.isInstanceOf(ClassDefinition) then
+					object.asType(ClassDefinition).ownedAttribute.each{prop |
+						requiredMetaProperties.each{rprop |
+							if rprop.name==prop.name then
+								props.add(prop.asType(Property))
+							end
+						}
+					}
+				end
+			}
+		end
+		
+		if not aPackage.nestedPackage.isEmpty then
+			aPackage.nestedPackage.each{p | includePropertiesInPackage(p, props) }
+		end
+	end
+	
+	
+	
+	
+	operation includeAllObligatoryPropertiesAndTheirTypes():Void is do
+		var propLower0 : Boolean
+		var propClass  : Boolean
+		var propEnum   : Boolean
+		var propPrim   : Boolean
+		var oppVoid    : Boolean
+		var propCD     : ClassDefinition
+		var oppPropCD  : ClassDefinition
+		var enum       : Enumeration
+		var primTyp    : PrimitiveType
+		
+		requiredKermetaMetaClasses.each{c |
+			c.ownedAttribute.each{ prop |
+			 	propLower0 := prop.lower == 0
+			 	propClass  := prop.type.isInstanceOf(Class)
+			 	propEnum   := prop.type.isInstanceOf(Enumeration)
+			 	propPrim   := prop.type.isInstanceOf(PrimitiveType)
+			 	oppVoid    := prop.opposite.isVoid
+			 	propCD     := if(propClass) then prop.type.asType(Class).classDefinition else void end
+			 	oppPropCD  := if(not oppVoid and propClass) then prop.opposite.type.asType(Class).classDefinition else void end
+			 	enum	   := if(propEnum) then prop.type.asType(Enumeration) else void end
+			 	primTyp	   := if(propPrim) then prop.type.asType(PrimitiveType) else void end
+			 	
+				//Option 1
+				if propLower0 and  propClass then
+					requiredKermetaMetaProperties.add(prop)
+					requiredKermetaMetaClasses.add(propCD)
+					requiredKermetaMetaClasses.add(prop.owningClass)
+					
+					if not oppVoid then
+						requiredKermetaMetaProperties.add(prop.opposite)
+						requiredKermetaMetaClasses.add(oppPropCD)
+						requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+					end
+				end
+				
+				//Option 2
+				if propLower0 and propEnum then
+					requiredKermetaMetaProperties.add(prop)
+					requiredKermetaMetaEnumerations.add(enum)
+				end
+				
+				//Option 3
+				if propPrim then
+					requiredKermetaMetaProperties.add(prop)
+					requiredKermetaMetaPrimitiveTypes.add(primTyp)
+					requiredKermetaMetaClasses.add(prop.owningClass)
+				end
+				
+				if not oppVoid then
+					if prop.opposite.isComposite then
+						requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaClasses.add(propCD)
+						requiredKermetaMetaClasses.add(prop.owningClass)
+						
+						requiredKermetaMetaProperties.add(prop.opposite)
+						requiredKermetaMetaClasses.add(oppPropCD)
+						requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+					end
+				end 
+				
+				if not propLower0 and propClass then
+					requiredKermetaMetaProperties.add(prop)
+					requiredKermetaMetaClasses.add(propCD)
+					requiredKermetaMetaClasses.add(prop.owningClass)
+					
+					if not oppVoid then
+						requiredKermetaMetaProperties.add(prop.opposite)
+						requiredKermetaMetaClasses.add(oppPropCD)
+						requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+					end
+				end
+				
+				if not propLower0 and propEnum then
+					requiredKermetaMetaProperties.add(prop)
+					requiredKermetaMetaEnumerations.add(enum)
+				end
+			
+				//Add all required properties and their type
+				requiredMetaProperties.each{ p |
+					if p.name==prop.name and p.owningClassName == prop.owningClass.name then
+						if propEnum then
+							requiredKermetaMetaProperties.add(prop)
+							requiredKermetaMetaClasses.add(prop.owningClass)
+							requiredKermetaMetaEnumerations.add(enum)
+						else						
+						if propClass then
+							requiredKermetaMetaProperties.add(prop)
+							requiredKermetaMetaClasses.add(propCD)
+							requiredKermetaMetaClasses.add(prop.owningClass)
+							
+							if not oppVoid then
+								requiredKermetaMetaProperties.add(prop.opposite)
+								requiredKermetaMetaClasses.add(oppPropCD)
+								requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+							end
+						else						
+						if propPrim then
+							requiredKermetaMetaProperties.add(prop)
+							requiredKermetaMetaPrimitiveTypes.add(primTyp)
+							requiredKermetaMetaClasses.add(prop.owningClass)
+						end end end
+					end
+				}
+				
+				//Option 4
+				/*
+				if prop.isComposite and propClass and propLower0 then
+					if isInRequriedSetOfMetaClasses(propCD) then
+						requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaClasses.add(propCD)
+						requiredKermetaMetaClasses.add(prop.owningClass)
+						
+						if not oppVoid then
+							requiredKermetaMetaProperties.add(prop.opposite)
+							requiredKermetaMetaClasses.add(oppPropCD)
+							requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+						end
+					end 
+				end
+				*/
+				
+				if prop.isComposite and propClass and not propLower0 then
+					if isInRequriedSetOfMetaClasses(propCD) then
+						requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaClasses.add(propCD)
+						requiredKermetaMetaClasses.add(prop.owningClass)
+						
+						if not oppVoid then
+							requiredKermetaMetaProperties.add(prop.opposite)
+							requiredKermetaMetaClasses.add(oppPropCD)
+							requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+						end
+					end 
+				end
+				
+				//Option 5
+				/*
+				if prop.isComposite and propEnum and prop.lower==0 then
+					if isInRequriedSetOfMetaEnumerations(enum) then
+						requiredKermetaMetaEnumerations.add(enum)
+						requiredKermetaMetaProperties.add(prop)
+					end 
+				end
+				*/
+				
+				if prop.isComposite and propEnum and not propLower0 then
+					if isInRequriedSetOfMetaEnumerations(enum) then
+						requiredKermetaMetaEnumerations.add(enum)
+						requiredKermetaMetaProperties.add(prop)
+					end 
+				end
+				
+				if propClass then
+					if isInRequriedSetOfMetaClasses(propCD) then
+						requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaClasses.add(prop.owningClass)
+						
+						if not oppVoid then
+							requiredKermetaMetaProperties.add(prop.opposite)
+							requiredKermetaMetaClasses.add(oppPropCD)
+							requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+						end
+					end 
+				end
+				
+				if propEnum then
+					if isInRequriedSetOfMetaEnumerations(enum) then
+						requiredKermetaMetaEnumerations.add(enum)
+						requiredKermetaMetaProperties.add(prop)
+					end 
+				end
+			}
+		}
+		
+		//Add all owning classes
+		requiredKermetaMetaProperties.each{prop |
+			requiredKermetaMetaClasses.add(prop.owningClass)
+		}
+	end
+	
+	
+	
+	
+
+	operation includeAllMultiLevelSuperClasses():Void is do
+		var cd : ClassDefinition
+		
+		requiredKermetaMetaClasses.each { c |
+			c.allSuperTypes.each { t | 
+				if t.isInstanceOf(Class) then
+					cd := t.asType(Class).classDefinition
+					
+					if isClassInMM(cd) then
+						requiredKermetaMetaClasses.add(cd)
+					end
+				end
+			}
+		}
+	end
+	
+	
+
+	
+	operation isInRequriedSetOfMetaClasses(tempClass: ClassDefinition) : Boolean is do
+		result := requiredKermetaMetaClasses.exists{c | c == tempClass }
+	end
+	
+	
+	
+	
+	operation isInRequriedSetOfMetaEnumerations(tempEnum: Enumeration) : Boolean is do
+		result := requiredKermetaMetaEnumerations.exists{e | e ==tempEnum }
+	end
+		
+		
+		
+		
+	operation getRequiredConcepts():Void is do
+		inputKermetaMetamodel.packages.each{p |
+			includeClassesInPackage(p, requiredKermetaMetaClasses)
+			includeEnumsInPackage(p, requiredKermetaMetaEnumerations)
+			includePropertiesInPackage(p, requiredKermetaMetaProperties)
+		}	
+		//Add all multilevel superclasses
+		includeAllMultiLevelSuperClasses
+	
+		//Phase 2: Adding all required properties
+		//Pass 1
+		includeAllObligatoryPropertiesAndTheirTypes
+		//Add all multilevel superclasses
+		includeAllMultiLevelSuperClasses
+	
+		includeAllObligatoryPropertiesAndTheirTypes
+		//Add all multilevel superclasses
+		includeAllMultiLevelSuperClasses
+
+		//Pass 3
+		includeAllObligatoryPropertiesAndTheirTypes
+		//Add all multilevel superclasses
+		includeAllMultiLevelSuperClasses
+	end
+
+
+/*
+	operation OperationRemovalInPackage(aPackage : Package) : Void is do
+		if (not aPackage.isVoid) then
+			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each { 
+				object | 
+					if object.isInstanceOf(ClassDefinition) then
+						object.asType(ClassDefinition).ownedOperation.each {
+							 op |  extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, op)
+//									extern org::kermeta::ki::visual::view::MetamodelView.refresh(inputKermetaMetamodel)
+						}
+				end
+			}
+		end
+		
+		if not aPackage.nestedPackage.isEmpty then
+			aPackage.nestedPackage.each{ p | OperationRemovalInPackage(p) }
+		end
+	end
+	*/
+	
+	
+	
+	/*
+	operation OperationRemoval() : Void is do
+		inputKermetaMetamodel.packages.each { p | OperationRemovalInPackage(p)}
+	end
+	*/
+	
+	
+	
+	operation TagRemovalInPackage(aPackage : Package):Void is do
+		if (not aPackage.isVoid) then
+			aPackage.tag.each{ t | extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, t) }
+			aPackage.asType(TypeDefinitionContainer).ownedTags.each { 
+				object | extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
+			}
+		end
+		
+		if not aPackage.nestedPackage.isEmpty then
+			aPackage.nestedPackage.each{ p | TagRemovalInPackage(p) }
+		end
+	end
+
+
+
+	operation TagRemoval() : Void is do
+		//Remove all Tags for Modelling Unit
+		inputKermetaMetamodel.ownedTags.each { 
+			tag | extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, tag)
+		}
+		
+		//Remove all Tags from packages
+		inputKermetaMetamodel.packages.each { p | TagRemovalInPackage(p) }
+	end
+	
+	
+	/*
+	operation PropertyRemovalInPackage(aPackage : Package) : Void is do
+		var removeProperty : Boolean
+		
+		if not aPackage.isVoid then
+			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each {object | 
+				if object.isInstanceOf(ClassDefinition) then
+					object.asType(ClassDefinition).ownedAttribute.each {prop | 	
+			 			removeProperty := requiredKermetaMetaProperties.exists{reqProp |
+				 			reqProp == prop
+			 			}
+			 								
+			 			if removeProperty then								
+			 				extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, prop)
+//		 					extern org::kermeta::ki::visual::view::MetamodelView.refresh(inputKermetaMetamodel)
+		 					
+			 				if not prop.opposite.isVoid  then
+			 					if not prop.opposite.owningClass.isVoid then
+			 						extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, prop.opposite)
+//			 						extern org::kermeta::ki::visual::view::MetamodelView.refresh(inputKermetaMetamodel)
+			 					end
+			 				end
+			 			end
+					}	
+				end	
+			}
+		end
+			
+		if not aPackage.nestedPackage.isEmpty then
+			aPackage.nestedPackage.each { p | PropertyRemovalInPackage(p)}
+		end
+	end
+	
+	
+	
+	operation PropertyRemoval(): Void is do
+		inputKermetaMetamodel.packages.each{ p | PropertyRemovalInPackage(p)}
+	end
+	*/
+	
+	
+	operation ClassRemovalInPackage(aPackage : Package):Void is do
+		if not aPackage.isVoid then
+			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{object | 
+				if object.isInstanceOf(ClassDefinition) then
+					//If the class is in the set of required classes
+					if not requiredKermetaMetaClasses.contains(object.asType(ClassDefinition)) then								
+				 		extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
+//				 		extern org::kermeta::ki::visual::view::MetamodelView.refresh(inputKermetaMetamodel)
+					end
+				end
+			}
+		end
+		
+		if not aPackage.nestedPackage.isEmpty then
+			aPackage.nestedPackage.each{ p | ClassRemovalInPackage(p) }
+		end
+	end
+	
+	
+	
+	operation ClassRemoval():Void is do
+		inputKermetaMetamodel.packages.each { p | ClassRemovalInPackage(p) }
+	end
+	
+	
+
+	operation PrimitiveTypeRemovalInPackage(aPackage : Package) : Void is do
+		if not aPackage.isVoid then				 			
+			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{object | 
+				if object.isInstanceOf(PrimitiveType) then
+					//If the class is in the set of required classes
+					if not requiredKermetaMetaPrimitiveTypes.contains(object.asType(PrimitiveType)) then								
+				 		extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
+					end
+				end
+			}
+		end
+		
+		if not aPackage.nestedPackage.isEmpty then
+			aPackage.nestedPackage.each{ p | PrimitiveTypeRemovalInPackage(p) }
+		end
+	end
+	 
+	 
+	 
+	operation PrimitiveTypeRemoval():Void is do
+		inputKermetaMetamodel.packages.each{ p | PrimitiveTypeRemovalInPackage(p)}
+	end
+	
+	
+	
+	operation EnumerationRemovalInPackage(aPackage: Package):Void is do
+		var removeEnum : Boolean
+		
+		if not aPackage.isVoid then 
+			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{ object | 
+				if object.isInstanceOf(Enumeration) then
+					removeEnum := not requiredKermetaMetaEnumerations.exists{ e |
+					 	e==object.asType(Enumeration)
+				 	}
+				 
+					if removeEnum then 
+						extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, object)
+					end
+				end
+			}
+		end
+		
+		if not aPackage.nestedPackage.isEmpty then
+			aPackage.nestedPackage.each{p | EnumerationRemovalInPackage(p) }
+		end
+	end
+	
+	
+	
+	
+	operation EnumerationRemoval():Void is do
+		self.inputKermetaMetamodel.packages.each{ p | EnumerationRemovalInPackage(p) }
+	end
+
+
+
+
+	operation isPackageEmpty(aPackage : Package) : Boolean is do
+	//FIXME this operation does not work at all.
+		var ownedTypeDefEmpty : Boolean init aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.isEmpty
+		result := false
+				
+		if(aPackage.nestedPackage.isEmpty) then
+			if ownedTypeDefEmpty then
+				extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, aPackage)
+				extern org::kermeta::ki::visual::view::MetamodelView.refresh(inputKermetaMetamodel)
+			end
+		else
+			aPackage.nestedPackage.each{p |//TODO does it really work?
+				result := result and isPackageEmpty(p) 
+			}
+				
+			if ownedTypeDefEmpty and result then
+				extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, aPackage)
+//				extern org::kermeta::ki::visual::view::MetamodelView.refresh(inputKermetaMetamodel)
+			end
+		end
+	end
+	
+	
+	
+	
+	operation EmptyPackageRemoval():Void is do
+		self.inputKermetaMetamodel.packages.each{ p |
+			if self.isPackageEmpty(p) then
+				extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, p)
+//				extern org::kermeta::ki::visual::view::MetamodelView.refresh(inputKermetaMetamodel)
+			end
+		}
+	end
+	
+
+
+	
+	operation getPackageObjects(aPackage : Package, objects : Set<Object>) : Void is do
+		var pkg : TypeDefinitionContainer init aPackage.asType(TypeDefinitionContainer)
+		var cd : ClassDefinition
+		
+		if not pkg.ownedTypeDefinition.isEmpty  then
+			pkg.ownedTypeDefinition.each {object |
+				if object.isInstanceOf(Package) then objects.add(object)
+				else if object.isInstanceOf(ClassDefinition) then
+					cd := object.asType(ClassDefinition)
+					objects.add(object)
+					cd.ownedAttribute.each{prop | objects.add(prop)}
+					cd.~inv.each{constraint | objects.add(constraint)}
+				else if object.isInstanceOf(PrimitiveType)   then objects.add(object)
+				else if object.isInstanceOf(Enumeration)     then objects.add(object)
+				end end end end
+			}
+		end
+		
+		if not aPackage.nestedPackage.isEmpty then
+			aPackage.nestedPackage.each{p | getPackageObjects(p, objects)}
+		end
+	end
+	
+	
+	
+	
+	operation getKermetaObjects():Void is do
+		inputKermetaMetamodel.packages.each { p | getPackageObjects(p, kermetaObjects) }
+	end
+	
+	
+	
+	operation isClassInPackage(c : ClassDefinition, aPackage : Package) : Boolean is do
+		result := false
+		
+		if(not aPackage.isVoid) then
+			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{ 
+				object | 
+				if object.isInstanceOf(ClassDefinition) then
+					if c==object.asType(ClassDefinition) then
+						result := true
+					end
+				end	
+			}
+			
+			if(not aPackage.nestedPackage.isEmpty) then
+				aPackage.nestedPackage.each{p |
+					if not result then
+						result := isClassInPackage(c, p)
+					end
+				}
+			end
+		end
+	end
+	
+	
+	
+	
+	operation isClassInMM(c : ClassDefinition) : Boolean is do
+		result := inputKermetaMetamodel.packages.exists{p | isClassInPackage(c, p) }
+	end
+	
+	
+	
+	
+	operation packageContainsPropertyOfType(c : ClassDefinition, aPackage : Package) : Boolean is do
+		if aPackage.isVoid then
+			result := false
+		else
+			result := aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.exists{object |
+				if object.isInstanceOf(ClassDefinition) then
+					var aClass : ClassDefinition init object.asType(ClassDefinition)
+					
+					aClass.ownedAttribute.exists{oA |
+						if oA.type.isInstanceOf(Class) then
+							if oA.type.asType(Class).classDefinition == c then
+								result := true
+							end
+						end
+						
+						result
+					}
+				end
+				
+				result
+			}
+		end
+		
+		if not aPackage.nestedPackage.isEmpty and not result then
+			result := aPackage.nestedPackage.exists{p |
+						packageContainsPropertyOfType(c, p)
+					}
+		end
+	end
+
+
+
+
+	
+	operation isUseLess(c : ClassDefinition): Boolean is do
+		var isUsed : Boolean init inputKermetaMetamodel.packages.exists{p | 
+									packageContainsPropertyOfType(c, p)
+								}
+		
+		result := c.isAbstract and c.ownedAttribute.empty and (not isUsed)
+	end
+}

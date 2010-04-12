@@ -8,7 +8,7 @@ package kermeta::ki::visual;
 
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
-require "platform:/resource/org.kermeta.ki.visual/kermeta/pruning/ClassFlattener.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/operation/ClassFlattener.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
 
 
@@ -84,13 +84,6 @@ class Flat inherits Action, Undoable
 			end
 			
 			in.source.superType.add(in.sourceType)
-			
-			stdio.writeln(">>")
-			in.source.superType.each{st | 
-				if(st.isInstanceOf(ParameterizedType)) then
-					stdio.writeln(st.asType(ParameterizedType).typeDefinition.name)
-				end
-			}
 			extern org::kermeta::ki::visual::view::MetamodelView.onInheritanceAdded(metamodel, in.source, in.target, -1)
 		}
 		
