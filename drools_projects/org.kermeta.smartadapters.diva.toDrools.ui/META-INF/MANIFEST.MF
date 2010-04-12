@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ui
 Bundle-SymbolicName: org.kermeta.smartadapters.diva.toDrools.ui;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.0
 Export-Package: org.kermeta.smartadapters.diva.toDrools.ui
 Import-Package: org.eclipse.jface.action,
  org.eclipse.jface.viewers,
