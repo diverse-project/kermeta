@@ -7,7 +7,7 @@ import scala._
 /* Defintion des riches Classes */
 class RichEClassImpl extends EClassImpl with EClassAspect
 
-/* Definition des implicites des classes Žtendus */
+/* Definition des implicites des classes ï¿½tendus */
 trait implicitAspect {
     implicit def richEclassAspect(xs: EClass) = xs.asInstanceOf[RichEClassImpl]
     implicit def richEclassAspect(xs: EClassAspect) = xs.asInstanceOf[RichEClassImpl]
@@ -52,10 +52,10 @@ object TestReflectionScala extends implicitAspect {
 	  var b : EPackage = v.getResourceContents("/Users/ffouquet/Documents/DEV/workspaces/scala-sandbox/testReflection/metamodel/metamodel.ecore").get(0).asInstanceOf[EPackage];
 	  var e  = b.getEClassifiers.filter{e=> e.eClass().getName().equals("EClass")}
 	  var firstEClass = e.first.asInstanceOf[EClass]
-	   Console.println(firstEClass.getName())
+	 //  Console.println(firstEClass.getName())
 	  firstEClass.testGetReflection
 	  firstEClass.testSetReflection
-	  Console.println(firstEClass.getName())
+	  //Console.println(firstEClass.getName())
   }
 }
 
