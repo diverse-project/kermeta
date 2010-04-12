@@ -1,0 +1,68 @@
+/*
+ * Creation : April 9, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::visual;
+
+
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/action/Flat.kmt"
+
+
+using kermeta::ki::malai::instrument
+using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::interaction
+using kermeta::language::structure
+
+
+class Flattener inherits Instrument
+{
+	reference metamodel : ModelingUnit
+	
+	
+	method initialiseLinks(eventManager : EventManager) : Void is do
+		addLink(Press2Flat.new, metamodel, void, eventManager, false)
+	end
+}
+
+
+
+
+class Press2Flat inherits PressLink
+{
+	method getActionClass() : Class is do
+		result := Flat
+	end
+	
+	
+	method updateAction() : Void is do
+		if(not action.isVoid) then
+			var press : Press init interaction.asType(Press)
+			var flat  : Flat  init action.asType(Flat)
+			
+			if(press.target.isInstanceOf(ClassDefinition)) then
+				flat.classToFlat := press.target.asType(ClassDefinition)
+			end
+		end
+	end
+	
+	
+	
+	method isConditionRespected() : Boolean is do
+		var press : Press init interaction.asType(Press)
+		result := not press.target.isVoid and press.target.isInstanceOf(ClassDefinition)
+	end
+	
+	
+	method createAction() : Void is do
+		var flat      : Flat      init Flat.new
+		var flattener : Flattener init instrument.asType(Flattener)
+		
+		flat.initialise(instrument.actionRegistry)
+		flat.metamodel  := flattener.metamodel
+		action          := flat
+	end
+}

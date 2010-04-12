@@ -12,6 +12,7 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/Butt
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/ButtonPressed.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActivateDesactivateInstruments.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Pruner.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Flattener.kmt"
 
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction
@@ -27,18 +28,25 @@ class InstrumentsSelector inherits Instrument
 {
 	reference pruner : Pruner
 	
+	reference flattener : Flattener
+	
 	attribute prunerButton : ToggleButton
+	
+	attribute flattenerButton : ToggleButton
 	
 	reference picker : Picker
 	
 	
 
-	operation initialiseInstruments(pruner : Pruner, eventManager : EventManager) : Void is do
-		self.pruner := pruner
+	operation initialiseInstruments(pruner : Pruner, flattener : Flattener, eventManager : EventManager) : Void is do
+		self.pruner    := pruner
+		self.flattener := flattener
 		pruner.setActivated(true)
 		
 		prunerButton := ToggleButton.new
+		flattenerButton := ToggleButton.new
 		prunerButton.initialiseWithText("P", eventManager)
+		flattenerButton.initialiseWithText("F", eventManager)
 		
 		interimFeedback
 	end
@@ -52,6 +60,7 @@ class InstrumentsSelector inherits Instrument
 	
 	method interimFeedback() : Void is do
 		prunerButton.setSelected(pruner.activated)
+		flattenerButton.setSelected(flattener.activated)
 	end
 }
 
@@ -69,7 +78,7 @@ class ButtonPressed2ActivateIns inherits ButtonPressLink
 		var bp       : ButtonPressed       init interaction.asType(ButtonPressed)
 		var selector : InstrumentsSelector init instrument.asType(InstrumentsSelector)
 
-		result := selector.prunerButton==bp.button
+		result := selector.prunerButton==bp.button or selector.flattenerButton==bp.button
 	end
 	
 	
@@ -81,17 +90,16 @@ class ButtonPressed2ActivateIns inherits ButtonPressLink
 		
 		if(button==selector.prunerButton) then
 			activeAction.instrumentsActivate.add(selector.pruner)
+			activeAction.instrumentsDesactivate.add(selector.flattener)
 		else
+			activeAction.instrumentsActivate.add(selector.flattener)
 			activeAction.instrumentsDesactivate.add(selector.pruner)
 		end
 		
 		action := activeAction
+		action.initialise(instrument.actionRegistry)
 	end
 	
 	
 	method updateAction() : Void is do end
 }
-
-
-
-

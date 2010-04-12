@@ -156,13 +156,8 @@ class Press2Reinit inherits Link
 
 
 
-class Press2Prune inherits Link
+class Press2Prune inherits PressLink
 {
-	method createInteraction() : Interaction is do
-		result := Press.new
-	end
-	
-	
 	method getActionClass() : Class is do
 		result := ActionPrune
 	end

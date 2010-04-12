@@ -81,6 +81,19 @@ public abstract class EntityView extends ComponentView {
 		
 		return entityRO.getFactory().getMemory().voidINSTANCE; 
 	}
+	
+	
+	
+	public static RuntimeObject onAttributeRemoved(RuntimeObject entityRO, RuntimeObject propertyRO) {
+		EntityView view 	= (EntityView) entityRO.getUserData();
+		AttributeView attr 	= (AttributeView) propertyRO.getUserData();
+		
+		view.attributes.remove(attr);
+		view.update();
+		propertyRO.setUserData(null);
+		
+		return entityRO.getFactory().getMemory().voidINSTANCE; 
+	}
 		
 		
 	
@@ -97,6 +110,20 @@ public abstract class EntityView extends ComponentView {
 			opRO.setUserData(op);
 			
 			return entityRO.getFactory().getMemory().voidINSTANCE; 
+	}
+	
+	
+	
+	
+	public static RuntimeObject onOperationRemoved(RuntimeObject entityRO, RuntimeObject opRO) {
+		EntityView view  = (EntityView) entityRO.getUserData();
+		OperationView op = (OperationView) opRO.getUserData();
+		
+		view.operations.remove(op);
+		view.update();
+		opRO.setUserData(null);
+		
+		return entityRO.getFactory().getMemory().voidINSTANCE; 
 	}
 
 	

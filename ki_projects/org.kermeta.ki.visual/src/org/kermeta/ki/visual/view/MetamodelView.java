@@ -64,16 +64,31 @@ public class MetamodelView extends JPanel implements Scrollable {
 	}
 	
 	
+	
+	public static RuntimeObject onEntityRemoved(RuntimeObject mmRO, RuntimeObject entityRO) {
+		MetamodelView metamodelView = (MetamodelView) mmRO.getUserData();
+		EntityView view   			= (EntityView) entityRO.getUserData();
+		
+		metamodelView.entities.remove(view);
+		RuntimeObject2JavaMap.MAP.remove(view);
+		// We do not release the user data.
+		
+		return mmRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	
+	
 	public static RuntimeObject onEntityAdded(RuntimeObject mmRO, RuntimeObject entityRO, RuntimeObject isAspectRO, RuntimeObject positionRO) {
+		Object obj		  = entityRO.getUserData();
 		MetamodelView metamodelView = (MetamodelView) mmRO.getUserData();
 		int position 	  = Integer.getValue(positionRO);
 		boolean isAspect  = Boolean.getValue(isAspectRO);
-		EntityView view   = isAspect ? new AspectView("aspect") : new ClassView("class");
+		// If an object is attached as user data, we use it.
+		EntityView view   = (EntityView) (obj==null ?( isAspect ? new AspectView("aspect") : new ClassView("class")) : obj);
 
 		metamodelView.addEntity(position, view);
 		entityRO.setUserData(view);
 		RuntimeObject2JavaMap.MAP.put(view, entityRO);
-		metamodelView.repaint();
 		
 		return mmRO.getFactory().getMemory().voidINSTANCE;
 	}
@@ -83,15 +98,56 @@ public class MetamodelView extends JPanel implements Scrollable {
 	public static RuntimeObject onLinkAdded(RuntimeObject mmRO, RuntimeObject linkRO, RuntimeObject compositionRO, RuntimeObject srcClassRO, 
 											RuntimeObject tarClassRO, RuntimeObject positionRO) {
 		MetamodelView metamodelView = (MetamodelView) mmRO.getUserData();
-		int position		   = Integer.getValue(positionRO);
-		EntityView srcClass    = (EntityView) srcClassRO.getUserData();
-		EntityView tarClass    = (EntityView) tarClassRO.getUserData();
+		int position		  	= Integer.getValue(positionRO);
+		EntityView srcClass    	= (EntityView) srcClassRO.getUserData();
+		EntityView tarClass    	= (EntityView) tarClassRO.getUserData();
 		LinkView view = new RelationView(srcClass, tarClass, Boolean.getValue(compositionRO));
 
 		linkRO.setUserData(view);
 		view.visibility = Visibility.STANDARD;
 		metamodelView.addLink(position, view);
-		metamodelView.repaint();
+		
+		return mmRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	
+	
+	public static RuntimeObject onLinkRemoved(RuntimeObject mmRO, RuntimeObject linkRO) {
+		MetamodelView metamodelView = (MetamodelView) mmRO.getUserData();
+		LinkView view 				= (LinkView) linkRO.getUserData(); 
+		
+		metamodelView.links.remove(view);
+		linkRO.setUserData(null);
+		
+		return mmRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	
+	
+	public static RuntimeObject onInheritanceRemoved(RuntimeObject mmRO, RuntimeObject srcClassRO, RuntimeObject tarClassRO) {
+		MetamodelView metamodelView = (MetamodelView) mmRO.getUserData();
+		EntityView srcClass    		= (EntityView) srcClassRO.getUserData();
+		EntityView tarClass    		= (EntityView) tarClassRO.getUserData();
+		InheritanceView view;
+		boolean again				= true;
+		final int size				= metamodelView.links.size();
+		int i						= 0;
+		LinkView link;
+		
+		while(again && i<size) {
+			link = metamodelView.links.get(i);
+			
+			if(link instanceof InheritanceView) {
+				view = (InheritanceView) link;
+				
+				if(view.entitySrc==srcClass && view.entityTar==tarClass) {
+					metamodelView.links.remove(link);
+					again = false;
+				}
+			}
+			
+			i++;
+		}
 		
 		return mmRO.getFactory().getMemory().voidINSTANCE;
 	}
@@ -101,14 +157,13 @@ public class MetamodelView extends JPanel implements Scrollable {
 	
 	public static RuntimeObject onInheritanceAdded(RuntimeObject mmRO, RuntimeObject srcClassRO, RuntimeObject tarClassRO, RuntimeObject positionRO) {
 		MetamodelView metamodelView = (MetamodelView) mmRO.getUserData();
-		EntityView srcClass    = (EntityView) srcClassRO.getUserData();
-		EntityView tarClass    = (EntityView) tarClassRO.getUserData();
-		int position		   = Integer.getValue(positionRO);
-		InheritanceView view   = new InheritanceView(srcClass, tarClass);
+		EntityView srcClass    		= (EntityView) srcClassRO.getUserData();
+		EntityView tarClass    		= (EntityView) tarClassRO.getUserData();
+		int position		   		= Integer.getValue(positionRO);
+		InheritanceView view   		= new InheritanceView(srcClass, tarClass);
 		
 		view.visibility = Visibility.STANDARD;
 		metamodelView.addLink(position, view);
-		metamodelView.repaint();
 		
 		return mmRO.getFactory().getMemory().voidINSTANCE;
 	}
@@ -122,10 +177,14 @@ public class MetamodelView extends JPanel implements Scrollable {
 		for(EntityView entity : metamodelView.entities)
 			entity.update();
 		
+		metamodelView.recentre();
+		
 		for(LinkView link : metamodelView.links)
 			link.update();
 		
 		metamodelView.repaint();
+		metamodelView.updatePreferredSize();
+		metamodelView.revalidate();
 		
 		return mmRO.getFactory().getMemory().voidINSTANCE;
 	}

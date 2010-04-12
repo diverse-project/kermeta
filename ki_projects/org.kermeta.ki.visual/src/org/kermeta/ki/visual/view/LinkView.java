@@ -163,15 +163,17 @@ public abstract class LinkView extends ComponentView {
 	
 	@Override
 	public void update() {
-		Line2D line = new Line2D.Double(entitySrc.centre, entityTar.centre);
-		pointSrc    = intersectionPoint(line, entitySrc.getBorders());
-		pointTar    = intersectionPoint(line, entityTar.getBorders());
-		
-		if(pointSrc==null || pointTar==null)
-			visibility = Visibility.NONE;
-		else {
-			this.line.setLine(pointSrc.x, pointSrc.y, pointTar.x, pointTar.y);
-			visibility = entitySrc.visibility==Visibility.GRAYED || entityTar.visibility==Visibility.GRAYED ? Visibility.GRAYED : Visibility.STANDARD;
+		if(entitySrc!=null && entityTar!=null) {
+			Line2D line = new Line2D.Double(entitySrc.centre, entityTar.centre);
+			pointSrc    = intersectionPoint(line, entitySrc.getBorders());
+			pointTar    = intersectionPoint(line, entityTar.getBorders());
+			
+			if(pointSrc==null || pointTar==null)
+				visibility = Visibility.NONE;
+			else {
+				this.line.setLine(pointSrc.x, pointSrc.y, pointTar.x, pointTar.y);
+				visibility = entitySrc.visibility==Visibility.GRAYED || entityTar.visibility==Visibility.GRAYED ? Visibility.GRAYED : Visibility.STANDARD;
+			}
 		}
 	}
 

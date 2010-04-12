@@ -16,6 +16,22 @@ using kermeta::ki::malai::picking
 using kermeta::ki::visual
 
 
+aspect class Object {
+	operation isVisible() : Boolean is do
+		result ?= extern org::kermeta::ki::visual::view::ComponentView.isVisible(self)
+	end
+	
+	
+	operation getModelingUnit() : ModelingUnit is do
+		var obj : Object init container()
+		
+		result := if(obj.isInstanceOf(ModelingUnit)) then obj.asType(ModelingUnit)
+					else if(obj.isInstanceOf(Object)) then obj.asType(Object).getModelingUnit()
+					else void end end
+	end
+}
+
+
 aspect class ClassDefinition inherits Pickable {
 	operation entity2ViewMapping() : Void is do
 		extern org::kermeta::ki::visual::view::EntityView.update(self, self.name, self.isAbstract)
@@ -42,9 +58,91 @@ aspect class ClassDefinition inherits Pickable {
 	end
 	
 	
+	
+	operation copyPropertyTo(p : Property, srcClass : ClassDefinition, metamodel : ModelingUnit) : Property is do
+		result := Property.new
+		
+		result.name 			:= p.name
+		result.isComposite 		:= p.isComposite
+		result.isID 			:= p.isID
+		result.default 			:= p.default
+		result.isReadOnly 		:= p.isReadOnly
+		result.isDerived 		:= p.isDerived
+		result.isGetterAbstract := p.isGetterAbstract
+		result.isSetterAbstract := p.isSetterAbstract
+		result.getterBody 		:= p.getterBody
+		result.setterBody 		:= p.setterBody
+		result.upper 			:= p.upper
+		result.lower 			:= p.lower
+		result.isOrdered 		:= p.isOrdered
+		result.isUnique 		:= p.isUnique
+		result.type 			:= p.type
+		
+		result.containedType.addAll(p.containedType)
+		srcClass.ownedAttribute.add(result)
+		
+		if(result.type.isInstanceOf(PrimitiveType)) then
+			extern org::kermeta::ki::visual::view::EntityView.onAttributeAdded(srcClass, result, 
+									result.name, result.type.asType(PrimitiveType).name)
+		else 
+			if(result.type.isInstanceOf(Class)) then
+				var cd : ClassDefinition init p.type.asType(Class).classDefinition
+				
+				extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, result, result.isComposite,
+																					srcClass, cd, -1)
+			end
+		end
+	end
+	
+	
+	
+	operation movePropertyTo(p : Property, srcClass : ClassDefinition, metamodel : ModelingUnit) : Void is do
+		srcClass.ownedAttribute.add(p)
+		self.ownedAttribute.remove(p)
+		
+		if(p.type.isInstanceOf(PrimitiveType)) then
+			extern org::kermeta::ki::visual::view::EntityView.onAttributeRemoved(self, p)
+			extern org::kermeta::ki::visual::view::EntityView.onAttributeAdded(srcClass, p, p.name, p.type.asType(PrimitiveType).name)
+		else 
+			if(p.type.isInstanceOf(Class)) then
+				var cd : ClassDefinition init p.type.asType(Class).classDefinition
+				
+				extern org::kermeta::ki::visual::view::MetamodelView.onLinkRemoved(metamodel, p)
+				extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, p, p.isComposite, srcClass, cd, -1)
+			end
+		end
+	end
+	
+	
+	
+	operation moveOperationTo(op : Operation, srcClass : ClassDefinition) : Void is do
+		var typeName : String init if(op.type.isInstanceOf(NamedElement)) then op.type.asType(NamedElement).name else "" end
+		
+		srcClass.ownedOperation.add(op)
+		self.ownedOperation.remove(op)
 
-	operation isVisible() : Boolean is do
-		result ?= extern org::kermeta::ki::visual::view::ComponentView.isVisible(self)
+		extern org::kermeta::ki::visual::view::EntityView.onOperationRemoved(self, op)
+		extern org::kermeta::ki::visual::view::EntityView.onOperationAdded(srcClass, op, op.name, typeName, op.isAbstract)
+	end
+	
+	
+	
+	operation getSubTypes() : Set<ClassDefinition> is do
+		var modelingUnit : ModelingUnit init getModelingUnit
+		var cd : ClassDefinition
+		result := Set<ClassDefinition>.new
+		
+		modelingUnit.packages.each{p |
+			p.ownedTypeDefinition.each{td |
+				if(self!=td and td.isInstanceOf(ClassDefinition)) then
+					cd := td.asType(ClassDefinition)
+					cd.superType.each{st | 
+						if(not st.isVoid and st.isInstanceOf(ParameterizedType).andThen{b | st.asType(ParameterizedType).typeDefinition==self}) 
+						then result.add(cd) end 
+					}
+				end
+			}
+		}
 	end
 }
 
@@ -52,7 +150,7 @@ aspect class ClassDefinition inherits Pickable {
 
 
 aspect class ModelingUnit inherits Picker {
-	operation reinitView() : Void is do
+	operation reinitView() : Void is do//TODO see if ownedTypeDefinition works
 		packages.each{p | p.allNestedClassDefinitions.each{cd | cd.unprune }}
 		extern org::kermeta::ki::visual::view::MetamodelView.update(self)
 	end
@@ -61,7 +159,7 @@ aspect class ModelingUnit inherits Picker {
 	method getPickableAt(px : Real, py : Real) : Pickable is do
 		var pickable : Pickable
 
-		packages.exists{p |
+		packages.exists{p |//TODO see if ownedTypeDefinition works
 			result := p.allNestedClassDefinitions.detect{cd | cd.contains(px, py) }
 			not result.isVoid
 		}
@@ -69,7 +167,7 @@ aspect class ModelingUnit inherits Picker {
 	
 	
 	method containsObject(obj : Object) : Boolean is do
-		packages.exists{p |
+		packages.exists{p |//TODO see if ownedTypeDefinition works
 			result := p.allNestedClassDefinitions.exists{cd | cd==obj }
 			result
 		}

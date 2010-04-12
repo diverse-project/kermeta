@@ -60,6 +60,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	attribute pruner : Pruner
 	
+	attribute flattener : Flattener
+	
 	attribute undoManager : UndoRedoManager
 	
 	attribute undoCollector : UndoCollector
@@ -96,11 +98,13 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		actionRegistry.handlers.add(self)
 
 		pruner      	 := Pruner.new
+		flattener      	 := Flattener.new
 		undoManager 	 := UndoRedoManager.new
 		selector         := InstrumentsSelector.new
 		customiser		 := InstrumentsCustomiser.new
 		scroller         := Scroller.new
 		
+		flattener.initialise(actionRegistry)
 		scroller.initialise(actionRegistry)
 		customiser.pruner := pruner
 		customiser.initialise(actionRegistry)
@@ -109,7 +113,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		undoManager.initialise(actionRegistry)
 		undoManager.initialiseWidgets(eventManager)
 		selector.initialise(actionRegistry)
-		selector.initialiseInstruments(pruner, eventManager)
+		selector.initialiseInstruments(pruner, flattener, eventManager)
 
 		initialiseUI
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, viewPanel, eventManager)
@@ -126,6 +130,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		selector.setActivated(true)
 		pruner.metamodel := metamodel
 		pruner.initialiseLinks(eventManager)
+		flattener.metamodel := metamodel
+		flattener.initialiseLinks(eventManager)
 
 		undoManager.undoCollector := undoCollector		
 		undoManager.picker := toolbar
@@ -153,13 +159,15 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		toolbar.initialise(eventManager)
 		
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialiseToolbar(toolbar, undoManager.undoButton, 
-					undoManager.redoButton, selector.prunerButton, pruner.grayedButton, pruner.hideButton)
+					undoManager.redoButton, selector.prunerButton, selector.flattenerButton, pruner.grayedButton, 
+					pruner.hideButton)
 					
 		toolbar.components.add(undoManager.undoButton)
 		toolbar.components.add(undoManager.redoButton)
 		toolbar.components.add(pruner.hideButton)
 		toolbar.components.add(pruner.grayedButton)
 		toolbar.components.add(selector.prunerButton)
+		toolbar.components.add(selector.flattenerButton)
 	end
 
 

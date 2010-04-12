@@ -28,11 +28,13 @@ public class MetamodelVizuFrame extends JFrame {
 	
 	
 	public static RuntimeObject initialiseToolbar(RuntimeObject toolbarRO, RuntimeObject undoButRO, RuntimeObject redoButRO, 
-							RuntimeObject prunerButRO, RuntimeObject prunerGrayButRO, RuntimeObject prunerHideButRO) {
+							RuntimeObject prunerButRO, RuntimeObject flattenerButRO, RuntimeObject prunerGrayButRO, 
+							RuntimeObject prunerHideButRO) {
 		JPanel toolbar = (JPanel) toolbarRO.getUserData();
 		AbstractButton undoBut 		= (AbstractButton)undoButRO.getUserData();
 		AbstractButton redoBut 		= (AbstractButton)redoButRO.getUserData();
 		AbstractButton prunerBut 	= (AbstractButton)prunerButRO.getUserData();
+		AbstractButton flattenerBut	= (AbstractButton)flattenerButRO.getUserData();
 		AbstractButton grayedBut 	= (AbstractButton)prunerGrayButRO.getUserData();
 		AbstractButton hideBut 		= (AbstractButton)prunerHideButRO.getUserData();
 		ButtonGroup groupSelector 	= new ButtonGroup();
@@ -43,11 +45,13 @@ public class MetamodelVizuFrame extends JFrame {
 		toolbar.add(redoBut);
 		toolbar.add(Box.createHorizontalStrut(30));
 		toolbar.add(prunerBut);
+		toolbar.add(flattenerBut);
 		toolbar.add(Box.createHorizontalStrut(50));
 		toolbar.add(hideBut);
 		toolbar.add(grayedBut);
 		
 		groupSelector.add(prunerBut);
+		groupSelector.add(flattenerBut);
 		
 		groupPruner.add(hideBut);
 		groupPruner.add(grayedBut);
