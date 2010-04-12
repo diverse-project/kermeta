@@ -194,9 +194,9 @@ trait PropertyAspect extends RichAspectImplicit with ObjectAspect with LogAspect
         if (!this.isIsReadOnly()){
             var currentname : String = this.getName
             
-          /*  if ("class".equals(currentname)){
+            if (("uml".equals(this.eContainer.eContainer.asInstanceOf[NamedElement].getName))&&("class".equals(currentname))){
                 currentname=currentname+"_"
-            }else if ("class_".equals(currentname)){
+            }/*else if ("class_".equals(currentname)){
                 currentname = "class"
             }*/
             //println(this.getName)
