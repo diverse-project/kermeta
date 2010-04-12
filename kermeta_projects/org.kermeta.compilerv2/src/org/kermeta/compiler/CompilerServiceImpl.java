@@ -24,10 +24,10 @@ public class CompilerServiceImpl implements CompilerService {
 
 	public void compile(String kmuri, String propertiesfile,
 			String projectName, String classqname, String operationName,
-			Collection<String> classpath, String args) {
+			Collection<String> classpath, String args) {	
 
 		// Step 1 Generate Scala
-		//try {
+		//try {		
 		EclipseConsole console = new EclipseConsole("kermeta compiler");
 			fr.irisa.triskell.kermeta.compilo.scala.Main.init(propertiesfile,
 					projectName, classqname, operationName, classpath, args,console.getOutputStream());
