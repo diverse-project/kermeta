@@ -40,4 +40,9 @@ class Redo inherits Action
 		undoCollector.redo()
 		done()
 	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := false
+	end
 }

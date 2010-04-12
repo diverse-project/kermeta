@@ -18,7 +18,7 @@ using kermeta::ki::malai::interaction
 using kermeta::ki::malai::interaction::event
 
 
-class DnDLink inherits Link
+abstract class DnDLink inherits Link
 {
 	method createInteraction() : Interaction is do
 		result := DnD.new

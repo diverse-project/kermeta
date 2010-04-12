@@ -15,7 +15,7 @@ using kermeta::ki::malai::interaction
 
 
 
-class ButtonPressLink inherits Link
+abstract class ButtonPressLink inherits Link
 {
 	method createInteraction() : Interaction is do
 		result := ButtonPressed.new

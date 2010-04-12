@@ -45,4 +45,9 @@ class Scroll inherits Action
 			panel.scrollHorizontally(increment)
 		end
 	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := false
+	end
 }

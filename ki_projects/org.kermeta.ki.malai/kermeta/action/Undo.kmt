@@ -40,4 +40,9 @@ class Undo inherits Action
 		undoCollector.undo()
 		done()
 	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := false
+	end
 }
