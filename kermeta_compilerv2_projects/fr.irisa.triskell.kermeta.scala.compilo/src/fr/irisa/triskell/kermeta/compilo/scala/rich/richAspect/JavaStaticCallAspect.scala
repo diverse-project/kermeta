@@ -15,12 +15,25 @@ import fr.irisa.triskell.kermeta.language.behavior._
 trait JavaStaticCallAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
 
   override def generateScalaCode(res : StringBuilder) : Unit = {
+
+res.append(this.getJclass.replace("::", ".")+"."+this.getJmethod+"(")
+var i = 0
+this.getParameters.foreach{par=>
+if(i != 0){res append ","}
+par.generateScalaCode(res)
+i = i + 1
+}
+res.append(")")
+
+
+      /*
       this.getOwnedTags.foreach{ tag =>
+            println("extern call"+tag.getName+" "+tag.getValue)
           if(tag.getName.contains("compiledJavaExtern")){
             res.append(tag.getValue)
           }
 
-      }
+      }*/
 
   }
 }
