@@ -24,6 +24,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
+import org.eclipse.jdt.launching.IRuntimeClasspathEntry;
+import org.eclipse.jdt.launching.JavaRuntime;
 import org.kermeta.compiler.service.CompilerService;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
@@ -45,8 +47,10 @@ public class CompilerLaunchConfiguration implements
 	File i_file;
 	PropertyFileService i_propertiesFileService;
 
+	@SuppressWarnings("restriction")
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
+
 		String projectName = configuration.getAttribute(
 				KConstants.KM_PROJECTNAME, (String) null);
 		p = ResourceHelper.getIProject(projectName);
@@ -88,14 +92,29 @@ public class CompilerLaunchConfiguration implements
 			
 			
 			
-			Object o = configuration.getAttribute("org.eclipse.jdt.launching.CLASSPATH",(List)null);
-			//System.out.println(o.getClass());
+			//DefaultProjectClasspathEntry entries = new DefaultProjectClasspathEntry();
+			//System.err.println(entries.getRuntimeClasspathEntries(configuration).length);
+			
+			List<String> libs =  new ArrayList<String>();
+			List<String> o = configuration.getAttribute("org.eclipse.jdt.launching.CLASSPATH",(List)new ArrayList<String>());
+			for (String element:o){
+				
+				 IRuntimeClasspathEntry entry1 = 
+                     JavaRuntime.newRuntimeClasspathEntry(element);
+				if (entry1.getType() ==IRuntimeClasspathEntry.ARCHIVE){
+					libs.add(entry1.getPath().makeAbsolute().toOSString());
+					System.err.println(entry1.getPath().makeAbsolute().toOSString());
+				}
+			} 
+			
+			
+			
 			//TODO gérer kle classpath
 			serv.compile(kmpath.substring(0,kmpath.length()-1), 
 					projectpath+File.separatorChar+"Compiler.properties", p.getName(), 
 					configuration.getAttribute("fr.irisa.triskell.kermeta.launching.KM_CLASSQNAME", (String)null),
 					configuration.getAttribute("fr.irisa.triskell.kermeta.launching.KM_OPERATIONNAME", (String)null),
-					new ArrayList<String>(), 
+					libs, 
 					configuration.getAttribute("fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS", (String)null));
 			
 			
