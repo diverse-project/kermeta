@@ -19,7 +19,7 @@ import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 
 public class CleanerUI implements IObjectActionDelegate, Runnable {
 
-	public static final String DIVA_KERMETA_CODE = "platform:/plugin/org.kermeta.smartadapters.diva.toDrools.ui/kermeta/ARTcleaner/ArtCleaner.kmt";
+	public static final String DIVA_KERMETA_CODE = "platform:/plugin/org.kermeta.smartadapters.diva.toDrools.ui/src/kermeta/ARTcleaner/ArtCleaner.kmt";
 	public static final String ENTRY_POINT = "art::MainCleaning";
 	
 	protected StructuredSelection currentSelection;
