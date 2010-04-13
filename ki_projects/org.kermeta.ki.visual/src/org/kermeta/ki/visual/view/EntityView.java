@@ -132,7 +132,7 @@ public abstract class EntityView extends ComponentView {
 		EntityView view = (EntityView) entityRO.getUserData();
 		double x = Real.getValue(xRO);
 		double y = Real.getValue(yRO);
-		boolean contains = view.isVisible() && view.getBorders().contains(x, y);
+		boolean contains = view.isVisible() && view.getBordersZoomed().contains(x, y);
 		
 		return contains ? entityRO.getFactory().getMemory().trueINSTANCE : entityRO.getFactory().getMemory().falseINSTANCE; 
 	}
@@ -327,6 +327,16 @@ public abstract class EntityView extends ComponentView {
 		return dim;
 	}
 
+	
+	
+	public Rectangle2D getBordersZoomed() {
+		Dimension dim   = getPreferredSize();
+		Rectangle2D rec = new Rectangle2D.Double((centre.x-dim.width/2.)*MetamodelView.zoom, (centre.y-dim.height/2)*MetamodelView.zoom, 
+												(dim.width)*MetamodelView.zoom, (dim.height)*MetamodelView.zoom);
+		
+		return rec;
+	}
+	
 
 	
 	public Rectangle2D getBorders() {

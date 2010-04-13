@@ -2,6 +2,7 @@ package org.kermeta.ki.visual;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -122,10 +123,13 @@ public class MetamodelVizuFrame extends JFrame {
 		getContentPane().setLayout(new BorderLayout());
 		mmView = new MetamodelView(emw);
 		JScrollPane sp = new JScrollPane(mmView);
-		sp.setPreferredSize(new Dimension(1000, 800));
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		int width  = (int)(screen.width*0.85);
+		int height = (int)(screen.height*0.8);
+		sp.setPreferredSize(new Dimension(width, height));
 		getContentPane().add(sp, BorderLayout.CENTER);
 		getContentPane().add(toolbar, BorderLayout.NORTH);
-		setLocation(100, 100);
+		setLocation((screen.width-width)/2, (screen.height-height)/2);
 		pack();
 		
      	addWindowListener(new WindowAdapter() {

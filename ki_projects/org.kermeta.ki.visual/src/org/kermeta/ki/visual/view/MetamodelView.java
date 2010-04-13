@@ -42,7 +42,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable {
 	
 	protected Forest<EntityView, LinkView> forest;
 	
-	protected double zoom;
+	protected static double zoom;
 	
 	
 	public static RuntimeObject refresh(RuntimeObject mmRO) {
@@ -378,7 +378,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable {
 				maxY = dim.getMaxY();
 		}
 		
-		setPreferredSize(new Dimension((int)maxX, (int)maxY));
+		setPreferredSize(new Dimension((int)(maxX*zoom), (int)(maxY*zoom)));
 	}
 	
 	
