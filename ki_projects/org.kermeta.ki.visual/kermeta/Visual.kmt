@@ -17,6 +17,7 @@ require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Instruments
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/InstrumentsCustomiser.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/UndoRedoManager.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Scroller.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Zoomer.kmt"
 
 using kermeta
 using kermeta::ki::malai::undo
@@ -70,6 +71,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	attribute customiser : InstrumentsCustomiser
 	
+	attribute zoomer : Zoomer
+	
 	attribute scroller : Scroller
 	
 	attribute actionRegistry : ActionRegistry
@@ -97,6 +100,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		actionRegistry.initialise(undoCollector)
 		actionRegistry.handlers.add(self)
 
+		zoomer			 := Zoomer.new
 		pruner      	 := Pruner.new
 		flattener      	 := Flattener.new
 		undoManager 	 := UndoRedoManager.new
@@ -104,6 +108,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		customiser		 := InstrumentsCustomiser.new
 		scroller         := Scroller.new
 		
+		zoomer.initialise(actionRegistry)
 		flattener.initialise(actionRegistry)
 		scroller.initialise(actionRegistry)
 		customiser.pruner := pruner
@@ -118,6 +123,10 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		initialiseUI
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, viewPanel, eventManager)
 
+		zoomer.zoomable  := metamodel
+		zoomer.metamodel := metamodel
+		zoomer.initialiseLinks(eventManager)
+		zoomer.setActivated(true)
 		scroller.panel  := viewPanel
 		scroller.picker := metamodel
 		scroller.initialiseLinks(eventManager)

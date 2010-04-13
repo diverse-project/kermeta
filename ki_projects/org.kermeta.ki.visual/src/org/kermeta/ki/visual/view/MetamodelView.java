@@ -19,6 +19,7 @@ import javax.swing.JViewport;
 import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
 
+import org.kermeta.ki.malai.Zoomable;
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 import org.kermeta.ki.visual.view.ComponentView.Visibility;
@@ -30,7 +31,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 
-public class MetamodelView extends JPanel implements Scrollable {
+public class MetamodelView extends JPanel implements Scrollable, Zoomable {
 	private static final long serialVersionUID = 1L;
 
 	protected List<EntityView> entities;
@@ -41,6 +42,7 @@ public class MetamodelView extends JPanel implements Scrollable {
 	
 	protected Forest<EntityView, LinkView> forest;
 	
+	protected double zoom;
 	
 	
 	public static RuntimeObject refresh(RuntimeObject mmRO) {
@@ -199,6 +201,7 @@ public class MetamodelView extends JPanel implements Scrollable {
 		eventManager = emw;
 		entities  	 = new ArrayList<EntityView>();
 		links 		 = new ArrayList<LinkView>();
+		zoom		 = 1.;
 		
 		setFocusable(true);
 		
@@ -302,6 +305,7 @@ public class MetamodelView extends JPanel implements Scrollable {
 
 	@Override
 	public void paint(Graphics g) {
+		requestFocus();
 		Graphics2D g2 = (Graphics2D)g;
 		
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
@@ -312,6 +316,8 @@ public class MetamodelView extends JPanel implements Scrollable {
 		g2.setColor(Color.WHITE);
 		g2.fillRect(0, 0, getWidth(), getHeight());
 		
+		g2.scale(zoom, zoom);
+
 		for(EntityView entity : entities)
 			entity.paint(g2);
 		
@@ -401,6 +407,21 @@ public class MetamodelView extends JPanel implements Scrollable {
 	
 	public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
 		return 4;
+	}
+
+
+	public void zoomDefault() {
+		zoom = 1.;
+	}
+
+
+	public void zoomIn(double increment) {
+		zoom += increment;
+	}
+
+
+	public void zoomOut(double decrement) {
+		zoom -= decrement;
 	}
 }
 

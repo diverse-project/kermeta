@@ -35,6 +35,8 @@ class Flat inherits Action, Undoable
 		flatteningOperation.flat(classToFlat)
 		
 		extern org::kermeta::ki::visual::view::MetamodelView.update(metamodel)
+		
+		done()
 	end
 	
 	

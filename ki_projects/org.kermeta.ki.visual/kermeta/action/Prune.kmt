@@ -49,6 +49,7 @@ class ActionReinitView inherits Action, Undoable {
 		}
 		
 		metamodel.reinitView
+		done()
 	end
 	
 	
@@ -148,6 +149,7 @@ class ActionPrune inherits Action, Undoable {
 		end
 		
 		extern org::kermeta::ki::visual::view::MetamodelView.updateArrows(metamodel)
+		done()
 	end
 	
 	

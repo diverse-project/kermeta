@@ -300,6 +300,7 @@ public class FileDrop {
 					// over the drag target.
 				} // end dragOver
 
+				@SuppressWarnings("unchecked")
 				public void drop(java.awt.dnd.DropTargetDropEvent evt) {
 					log(out, "FileDrop: drop event.");
 					try { // Get whatever was dropped

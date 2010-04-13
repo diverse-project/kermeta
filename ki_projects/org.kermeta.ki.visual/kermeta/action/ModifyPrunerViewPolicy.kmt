@@ -31,6 +31,8 @@ class ModifyPrunerViewPolicy inherits Action, Undoable
 	method doActionBody() : Void is do
 		oldViewPolicy := pruner.viewPolicy
 		redo
+		
+		done()
 	end
 	
 	
