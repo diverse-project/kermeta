@@ -23,12 +23,40 @@ aspect class System
 		var name : String init ctx.getGenerateName()
 		ctx.cache.put(self,name)
 		
+		self.services.each{s | s.toDrools(ctx)}
+		self.types.each{t | t.toDrools(ctx)}
+		
 		self.root.toDrools(ctx)
+		
+		var i : Integer init 0
 		
 		ctx.res.append("$")
 		ctx.res.append(name) 
 		ctx.res.append(": art.System(")
-		ctx.res.append("root == $" + ctx.cache.getValue(self.root))			
+		ctx.res.append("root == $" + ctx.cache.getValue(self.root))	
+		i := i+1
+		
+		if (self.services.size > 0) then
+			if (i>0) then ctx.res.append(",") end
+			var j : Integer init 0
+			self.services.each{s| 
+				if (j>0) then ctx.res.append(",") end
+				ctx.res.append("services contains $" + ctx.cache.getValue(s))
+				j:=j+1
+			}
+			i:=i+1
+		end
+		if (self.types.size > 0) then
+			if (i>0) then ctx.res.append(",") end
+			var j : Integer init 0
+			self.types.each{s| 
+				if (j>0) then ctx.res.append(",") end
+				ctx.res.append("types contains $" + ctx.cache.getValue(s))
+				j:=j+1
+			}
+			i:=i+1
+		end
+				
 		ctx.res.append(")\n")
 		
 	end
@@ -68,9 +96,9 @@ package instance{
 			var name : String init ctx.getGenerateName()
 			ctx.cache.put(self,name)
 			
-			if (not self.type.isVoid()) then
+			/*if (not self.type.isVoid()) then
 					self.type.toDrools(ctx)
-			end
+			end*/
 			self.subComponent.each{e|e.toDrools(ctx)}
 					
 					var i : Integer init 0
@@ -103,7 +131,7 @@ package instance{
 	aspect class PrimitiveInstance
 	{
 		method toDrools(ctx : patternframework::Context) : Void is do 
-			self.type.toDrools(ctx)
+			//self.type.toDrools(ctx)
 			var name : String init ctx.getGenerateName()
 			ctx.cache.put(self,name)
 			
@@ -214,9 +242,9 @@ package type{
 	aspect class Port
 	{
 		method toDrools(ctx : patternframework::Context) : Void is do 
-			if (service != void) then
+			/*if (service != void) then
 				self.service.toDrools(ctx)
-			end
+			end*/
 			var name : String init ctx.getGenerateName()
 			ctx.cache.put(self,name)
 			
@@ -253,9 +281,9 @@ package type{
 		method toDrools(ctx : patternframework::Context) : Void is do
 			ids.each{pId | pId.toDrools(ctx)}
 			
-			if (service != void) then
+			/*if (service != void) then
 				self.service.toDrools(ctx)
-			end
+			end*/
 			var name : String init ctx.getGenerateName()
 			ctx.cache.put(self,name)
 			

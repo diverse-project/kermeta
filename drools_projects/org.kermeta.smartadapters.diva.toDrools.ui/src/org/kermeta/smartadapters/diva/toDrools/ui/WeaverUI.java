@@ -11,6 +11,10 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.smartadapters.drools.standalone.SmartAdaptersDrools;
 
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
+
 public class WeaverUI implements IObjectActionDelegate, Runnable {
 
 	protected Shell shell;
@@ -19,8 +23,18 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 	protected IFile baseFile;
 	protected IFile aspectFile;
 
-	public void run() {		
-		SmartAdaptersDrools.main(new String[]{"file:/"+baseFile.getRawLocation().toOSString(),"file:/"+baseFile.getRawLocation().toOSString().replace(".art", ".woven.art"),aspectFile.getRawLocation().toOSString()});
+	public void run() {
+		if (baseFile != null && aspectFile != null){
+			IOConsole console = new EclipseConsole("SmartAdapters weaver for DiVA");
+			console.println(new InfoMessage("Weaving..."));
+			
+			System.out.println("RUN");
+			SmartAdaptersDrools.main(new String[]{"file:/"+baseFile.getRawLocation().toOSString(),"file:/"+baseFile.getRawLocation().toOSString().replace(".art", ".woven.art"),aspectFile.getRawLocation().toOSString()});
+			
+			console.println(new InfoMessage("Done!"));
+		}
+		baseFile = null;
+		aspectFile = null;
 		//MessageDialog.openInformation(shell, "Info", "Weaving...");
 	}
 
@@ -42,7 +56,6 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
-
 		for(Object o : ((StructuredSelection)selection).toList()){
 			File file = (File)o;
 			if(file.getFullPath().getFileExtension().equals("art")){
@@ -51,10 +64,9 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 			else if (file.getFullPath().getFileExtension().equals("drl")){
 				aspectFile = file;
 			}
-			
-			if (baseFile != null && aspectFile != null){
-				run();
-			}
+		}
+		if (baseFile != null && aspectFile != null){
+			run();
 		}
 	}
 }
