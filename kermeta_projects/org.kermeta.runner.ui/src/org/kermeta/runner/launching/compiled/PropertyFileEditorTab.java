@@ -868,7 +868,7 @@ public class PropertyFileEditorTab extends AbstractLaunchConfigurationTab
 									+ "output.target.package = false\n"
 									+ "\n"
 									+ "#specified output project output, default is temporary file\n"
-									+ "output.target.folder = /home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.output\n"
+									+ "output.target.folder = "+ p.getLocation().toOSString() + File.separator + "ScalaOutput" +"\n"
 									+ "\n"
 									+ "#workspace loader mapping\n"
 									+ "workspace.plugin.uri =\n"
