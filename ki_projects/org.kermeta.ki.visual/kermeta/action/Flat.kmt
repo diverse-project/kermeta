@@ -70,6 +70,13 @@ class Flat inherits Action, Undoable
 			end
 		}
 	
+		flatteningOperation.removedProperties.each{prop |
+			prop.owningClass.ownedAttribute.add(prop.prop)
+			prop.prop.owningClass := prop.owningClass  
+			extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, prop.prop, prop.prop.isComposite, 
+									prop.prop.owningClass, prop.owningClass, -1)
+		}
+		
 		flatteningOperation.addedOperations.each{op |
 			classToFlat.moveOperationTo(op.op, op.owningClass)
 		}
@@ -98,12 +105,6 @@ class Flat inherits Action, Undoable
 				end
 			}
 			extern org::kermeta::ki::visual::view::MetamodelView.onInheritanceRemoved(metamodel, in.source, in.target)
-		}
-		
-		flatteningOperation.removedProperties.each{prop |
-			prop.owningClass.ownedAttribute.add(prop.prop)
-			extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, prop.prop, prop.prop.isComposite, 
-									prop.prop.owningClass, prop.owningClass, -1)
 		}
 		
 		extern org::kermeta::ki::visual::view::MetamodelView.update(metamodel)

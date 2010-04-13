@@ -97,8 +97,8 @@ aspect class ClassDefinition inherits Pickable {
 	
 	
 	operation movePropertyTo(p : Property, srcClass : ClassDefinition, metamodel : ModelingUnit) : Void is do
-		srcClass.ownedAttribute.add(p)
 		self.ownedAttribute.remove(p)
+		srcClass.ownedAttribute.add(p)
 		
 		if(p.type.isInstanceOf(PrimitiveType)) then
 			extern org::kermeta::ki::visual::view::EntityView.onAttributeRemoved(self, p)

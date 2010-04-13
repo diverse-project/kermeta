@@ -430,7 +430,7 @@ class MetamodelPruner
 		var cd : ClassDefinition
 		
 		requiredKermetaMetaClasses.each { c |
-			c.allSuperTypes.each { t | 
+			c.superType.each { t | 
 				if t.isInstanceOf(Class) then
 					cd := t.asType(Class).classDefinition
 					

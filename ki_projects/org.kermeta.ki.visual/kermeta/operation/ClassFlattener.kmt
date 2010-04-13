@@ -56,6 +56,7 @@ class ClassFlattener
 				removedInheritances.add(inheritance)
 				
 				classToFlat.superType.remove(superType)
+				extern org::kermeta::ki::visual::view::MetamodelView.onInheritanceRemoved(metamodel, classToFlat, cd)
 				flatClass(cd, classToFlat)
 			end
 		end

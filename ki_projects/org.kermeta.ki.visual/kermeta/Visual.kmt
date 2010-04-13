@@ -87,6 +87,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 
 	
 	operation initialise(eventManager : EventManager) : Void is do
+//		loadMetamodel("/examples/example2.km")
 //		loadMetamodel("/examples/example1.km")
 //		loadMetamodel("/examples/Ecore.km")
 		loadMetamodel("/examples/Ecore2.km")

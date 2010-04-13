@@ -1,0 +1,24 @@
+package ex;
+
+require kermeta
+
+
+class A {
+}
+
+class C {
+	attribute varC1 : A
+	
+	operation opC1() : Void is do
+	end
+	
+	operation opC2() : Void is do
+	end
+}
+
+
+
+class D inherits C{
+}
+
+
