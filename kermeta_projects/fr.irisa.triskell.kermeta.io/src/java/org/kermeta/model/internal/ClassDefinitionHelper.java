@@ -13,6 +13,7 @@
 package org.kermeta.model.internal;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -65,7 +66,10 @@ public class ClassDefinitionHelper {
 	 * @return
 	 */
 	static public List<Operation> getDirectSuperOperations(KermetaUnit rootUnit, ClassDefinition base, String operationName) {
-		Map<Integer, EList<TypeDefinition>> l = _getContext(rootUnit, base);
+		//create a copy
+		Map<Integer, EList<TypeDefinition>> l = new HashMap<Integer, EList<TypeDefinition>>();
+		l.putAll(_getContext(rootUnit, base));
+		
 		
 		/*
 		 * 
@@ -105,7 +109,9 @@ public class ClassDefinitionHelper {
 	 * @return
 	 */
 	static public List<Operation> getSuperOperations(KermetaUnit rootUnit, ClassDefinition base, String operationName) {
-		Map<Integer, EList<TypeDefinition>> l = _getContext(rootUnit, base);
+		//create a copy
+		Map<Integer, EList<TypeDefinition>> l = new HashMap<Integer, EList<TypeDefinition>>();
+		l.putAll(_getContext(rootUnit, base));
 		
 		/*
 		 * 
