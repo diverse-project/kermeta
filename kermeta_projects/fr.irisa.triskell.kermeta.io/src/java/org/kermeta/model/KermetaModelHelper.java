@@ -205,6 +205,9 @@ public class KermetaModelHelper {
 		public List<Operation> getSuperOperations(KermetaUnit rootUnit, ClassDefinition base, String operationName) {
 			return ClassDefinitionHelper.getSuperOperations(rootUnit, base, operationName);
 		}
+		public List<Operation> getDirectSuperOperations(KermetaUnit rootUnit, ClassDefinition base, String operationName) {
+			return ClassDefinitionHelper.getDirectSuperOperations(rootUnit, base, operationName);
+		}
 				
 		public Operation getSuperOperation(KermetaUnit rootUnit, ClassDefinition base, String superClassQualifiedName, String operationName) {
 			return ClassDefinitionHelper.getSuperOperation(rootUnit, base, superClassQualifiedName, operationName);

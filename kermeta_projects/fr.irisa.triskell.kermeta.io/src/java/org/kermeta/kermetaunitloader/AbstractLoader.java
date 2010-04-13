@@ -70,6 +70,7 @@ public abstract class AbstractLoader {
 			groupedCommands.get(CommandStep.structureCreation).executeCommand();
 			groupedCommands.remove(CommandStep.structureCreation);
 		}
+		loadedUnit.getTypeDefinitionContextsCache().clear();
 		
 		
 		// perform the loading steps,
@@ -103,6 +104,9 @@ public abstract class AbstractLoader {
 		performSynchronizedCommand(CommandStep.aspectBuilding);
 		performSynchronizedCommand(CommandStep.modelTypeBuilding);
 		performSynchronizedCommand(CommandStep.typeSetting);
+		// DVK: Hack :the cache build in the previous step may be incomplete, (because all super type may not have been set when first called :-( ) reset it
+		// a better solution would be to better separate the actions needing allOperations and the typesetting step
+		loadedUnit.getTypeDefinitionContextsCache().clear();
 		performSynchronizedCommand(CommandStep.supertypeSetting);
 		performSynchronizedCommand(CommandStep.bodies_and_opposite_Setting);
 		performSynchronizedCommand(CommandStep.annotationAddition);

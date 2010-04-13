@@ -48,10 +48,11 @@ public class SuperTypesSetter extends KermetaASTNodeVisitor  {
 	
 	public SuperTypesSetter(KermetaUnit keremtaUnit, LoadingContext loadingContext) {
 		this.kermetaUnit = keremtaUnit;
-		this.context = loadingContext;
+		this.context = loadingContext;		
 	}
 
 	public void setSuperTypes(CompUnit ast) {
+		
 		ast.accept(this);
 	}
 	
@@ -92,13 +93,14 @@ public class SuperTypesSetter extends KermetaASTNodeVisitor  {
 				String qualifiedName = KermetaASTHelper.qualifiedIDAsString(operation.getSuperSelection());
 				TypeDefinition supertypeDefinition = kermetaUnit.getTypeDefinitionByName(qualifiedName);
 				fr.irisa.triskell.kermeta.language.structure.Operation superOperation = KermetaModelHelper.ClassDefinition.getSuperOperation(kermetaUnit, owner, KermetaModelHelper.NamedElement.qualifiedName(supertypeDefinition), o.getName());
+				
 				if ( superOperation != null )
 					o.setSuperOperation(superOperation);
 				else 	
 					kermetaUnit.error("No super operation found in " + qualifiedName + " for operation " + o.getName(), o);
 			} else {
 				//fr.irisa.triskell.kermeta.language.structure.Operation superOperation = KermetaModelHelper.ClassDefinition.getFirstSuperOperation(owner, o.getName());
-				List<fr.irisa.triskell.kermeta.language.structure.Operation> superOperations = KermetaModelHelper.ClassDefinition.getSuperOperations(kermetaUnit, owner, o.getName());
+				List<fr.irisa.triskell.kermeta.language.structure.Operation> superOperations = KermetaModelHelper.ClassDefinition.getDirectSuperOperations(kermetaUnit, owner, o.getName());
 				switch (superOperations.size()) {
 				case 0:
 					kermetaUnit.error("No super operation found for method " + o.getName() + " in class definition " + KermetaModelHelper.NamedElement.qualifiedName((NamedElement)o.eContainer()), o);
@@ -112,7 +114,10 @@ public class SuperTypesSetter extends KermetaASTNodeVisitor  {
 					fr.irisa.triskell.kermeta.language.structure.Operation firstOp = superOperations.get(0);
 					boolean allTheSameOperation = true;
 					for(fr.irisa.triskell.kermeta.language.structure.Operation  op :superOperations){
-						if(op != firstOp) allTheSameOperation = false;
+						if(op != firstOp) {
+							// maybe there are aspect of one another
+							allTheSameOperation = false;
+						}
 					}
 					if(! allTheSameOperation){
 						String message = "Several super operations found for method " + o.getName() + " in class definition " + KermetaModelHelper.NamedElement.qualifiedName((NamedElement)o.eContainer());

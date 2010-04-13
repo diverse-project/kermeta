@@ -59,34 +59,19 @@ public class ClassDefinitionHelper {
 	}
 	
 	/**
-	 * Look into the super types of the base class definition if an operation matches with the given name.
+	 * Look into the direct super types of the base class definition if an operation matches with the given name.
 	 * @param base
 	 * @param operationName
 	 * @return
 	 */
-	static public List<Operation> getSuperOperations(KermetaUnit rootUnit, ClassDefinition base, String operationName) {
+	static public List<Operation> getDirectSuperOperations(KermetaUnit rootUnit, ClassDefinition base, String operationName) {
 		Map<Integer, EList<TypeDefinition>> l = _getContext(rootUnit, base);
-		/*
-		 * 
-		 * Getting the class definition to remove. We do not want the base class and its aspects.
-		 * 
-		 */
-	/*	String qualifiedName = KermetaModelHelper.NamedElement.qualifiedName(base);
-		List<ClassDefinition> classDefinitionToRemove = new ArrayList<ClassDefinition>();
-		for ( TypeDefinition td : l.() ) {
-			if ( td instanceof ClassDefinition) {
-				ClassDefinition cd = (ClassDefinition) td;
-				if ( KermetaModelHelper.NamedElement.qualifiedName(cd).equals(qualifiedName) )
-					classDefinitionToRemove.add(cd);
-			}
-		}*/
+		
 		/*
 		 * 
 		 * Removing the extra class definitions.
 		 * 
 		 */
-/*		for ( ClassDefinition cd : classDefinitionToRemove )
-			l.remove(cd);*/
 		
 		l.remove(0);
 				
@@ -101,7 +86,7 @@ public class ClassDefinitionHelper {
 							if ( operations == null ) {
 								operations = new ArrayList<Operation>();
 								result.put( entry.getKey(), operations );
-							}
+							}							
 							operations.add( operation );
 						}
 				}
@@ -109,24 +94,41 @@ public class ClassDefinitionHelper {
 		}
 		
 		
-		/*for ( Entry<TypeDefinition, Integer> entry : l.entrySet() ) {
-			if ( entry.getKey() instanceof ClassDefinition ) {
-				ClassDefinition cd = (ClassDefinition) entry.getKey();
-				for ( Operation operation : cd.getOwnedOperation() )
-					if ( operation.getName().equals(operationName) ) {
-						List<Operation> operations = result.get( entry.getValue() );
-						if ( operations == null ) {
-							operations = new ArrayList<Operation>();
-							result.put( entry.getValue(), operations );
-						}
-						operations.add( operation );
-					}
-			}
-		}*/
-		
 		if ( result.size() == 0 || result.get(result.firstKey()) == null )
 			return new ArrayList<Operation>();
 		return result.get(result.firstKey());
+	}
+	/**
+	 * Look into the super types of the base class definition for all operation matching the given name.
+	 * @param base
+	 * @param operationName
+	 * @return
+	 */
+	static public List<Operation> getSuperOperations(KermetaUnit rootUnit, ClassDefinition base, String operationName) {
+		Map<Integer, EList<TypeDefinition>> l = _getContext(rootUnit, base);
+		
+		/*
+		 * 
+		 * Removing the extra class definitions.
+		 * 
+		 */
+		
+		l.remove(0);
+				
+		List<Operation> result = new ArrayList<Operation>();
+		for (Entry<Integer, EList<TypeDefinition>> entry : l.entrySet()) {
+			for (TypeDefinition td : entry.getValue() ) {
+				if ( td instanceof ClassDefinition ) {
+					ClassDefinition cd = (ClassDefinition) td;
+					for ( Operation operation : cd.getOwnedOperation() )
+						if ( operation.getName().equals(operationName) ) {
+							result.add( operation );
+						}
+				}
+			}
+		}
+		
+		return result;
 	}
 	
 	static private Map<Integer, EList<TypeDefinition>> _getContext(KermetaUnit rootUnit, ClassDefinition c) {
@@ -263,9 +265,17 @@ public class ClassDefinitionHelper {
 		EList<TypeDefinition> aspectList = new BasicEList<TypeDefinition>();
 		for(KermetaUnit ku : units){
 			List<TypeDefinition> aspectListFromUnit = TypeDefinitionHelper.getAllAspects(ku, KermetaModelHelper.ClassDefinition.qualifiedName(current));
-			aspectList.addAll(aspectListFromUnit ) ;
+			for(TypeDefinition newDef : aspectListFromUnit){
+				if(!aspectList.contains(newDef))
+					aspectList.add(newDef ) ;		
+			}
+			
 		}
-		map.put(deep, aspectList);
+		if(map.get(deep) != null){
+			map.get(deep).addAll(aspectList);
+		}
+		else
+			map.put(deep, aspectList);
 		// for all aspects, looks for inheritance
 		for(TypeDefinition td : aspectList){
 			for ( Type supertype : ((ClassDefinition)td).getSuperType() ) {
@@ -357,7 +367,13 @@ public class ClassDefinitionHelper {
 	 * @return
 	 */
 	static public Operation getSuperOperation(KermetaUnit rootUnit, ClassDefinition base, String superClassQualifiedName, String operationName) {
-		List<TypeDefinition> l = getContext(rootUnit, base);
+		List<Operation> opList = getSuperOperations(rootUnit, base, operationName);
+		for(Operation op : opList){
+			if(superClassQualifiedName.equals(KermetaModelHelper.NamedElement.qualifiedName(op.getOwningClass()))){
+				return op;
+			}
+		}
+	/*	List<TypeDefinition> l = getContext(rootUnit, base);
 		l.remove(base);
 		for ( TypeDefinition td : l ) {
 			if ( td instanceof ClassDefinition ) {
@@ -367,7 +383,7 @@ public class ClassDefinitionHelper {
 						if ( operation.getName().equals(operationName) )
 							return operation;
 			}
-		}
+		}*/
 		return null;
 	}
 
