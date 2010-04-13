@@ -1,0 +1,80 @@
+/*
+ * Creation : April 12, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::action;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/picking/Picker.kmt"
+
+using kermeta::ki::malai::picking
+using kermeta::standard
+using kermeta::language::structure
+
+
+
+class Zoom inherits Action
+{
+	reference metamodel : ModelingUnit
+
+	reference zoomable : Picker
+	
+	attribute px : Integer
+	
+	attribute py : Integer
+	
+	attribute increment : Integer
+	
+	attribute previousIncrement : Integer
+	
+	
+	method canDo() : Boolean is do
+		result := not zoomable.isVoid and not metamodel.isVoid and not increment.isVoid
+	end
+	
+	
+	
+	method doActionBody() : Void is do
+		var incr : Integer init if(previousIncrement.isVoid) then increment else increment-previousIncrement end
+
+		if(incr>0) then
+			extern org::kermeta::ki::malai::ZoomUtils.zoomIn(zoomable, getZoomIncrement()*incr.toReal)
+		else
+			extern org::kermeta::ki::malai::ZoomUtils.zoomOut(zoomable, getZoomIncrement()*incr.toReal*-1.toReal)
+		end
+		
+		extern org::kermeta::ki::visual::view::MetamodelView.update(metamodel)
+		done()
+
+		previousIncrement := increment
+	end
+	
+
+
+	method cancelledBy(action : Class) : Boolean is do
+		result := false
+	end
+
+
+	method hadEffect() : Boolean is do
+		result := isDone()
+	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := false
+	end
+	
+	operation getZoomIncrement() : Real is do
+		result := "0.25".toReal
+	end
+}
+
+
+
+
+

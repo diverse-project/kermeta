@@ -1,0 +1,75 @@
+/*
+ * Creation : April 12, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::instrument;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Zoom.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/KeysScroll.kmt"
+
+
+using kermeta::ki::malai::picking
+using kermeta::ki::malai::action
+using kermeta::ki::malai::instrument
+using kermeta::ki::malai::interaction
+using kermeta::ki::malai::widget
+using kermeta::ki::malai::interaction::event
+using kermeta::standard
+using kermeta::language::structure
+
+
+class Zoomer inherits Instrument
+{
+	reference zoomable : Picker
+	
+	reference metamodel : ModelingUnit
+	
+	
+	method initialiseLinks(eventManager : EventManager) : Void is do
+		addLink(Scroll2Zoom.new, zoomable, void, eventManager, true)
+	end
+}
+
+
+
+
+class Scroll2Zoom inherits Link
+{
+	method createInteraction() : Interaction is do
+		result := KeysScroll.new
+	end
+	
+	
+	method getActionClass() : Class is do
+		result := Zoom
+	end
+	
+	
+	method isConditionRespected() : Boolean is do
+		var scroll : KeysScroll init interaction.asType(KeysScroll)
+		result := not scroll.keys.isEmpty and not scroll.numberUp.isVoid
+	end
+	
+	
+	method createAction() : Void is do
+		var zoomIn : Zoom   init Zoom.new
+		var zoomer : Zoomer init instrument.asType(Zoomer)
+		 
+		zoomIn.zoomable := zoomer.zoomable
+		zoomIn.metamodel := zoomer.metamodel
+		zoomIn.initialise(instrument.actionRegistry)
+		action := zoomIn
+	end
+	
+	
+	method updateAction() : Void is do
+		var scroll : KeysScroll init interaction.asType(KeysScroll)
+		var zoom   : Zoom 		init action.asType(Zoom)
+		
+		zoom.increment := scroll.numberUp
+	end
+}

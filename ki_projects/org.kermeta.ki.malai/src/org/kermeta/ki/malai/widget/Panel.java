@@ -93,7 +93,7 @@ public abstract class Panel
 		int increment  = Integer.getValue(incrementR0);
 		
 		if(bar!=null && bar.isVisible())
-			bar.setValue(bar.getValue() + increment);
+			bar.setValue(bar.getValue() - increment);
 	}
 	
 	

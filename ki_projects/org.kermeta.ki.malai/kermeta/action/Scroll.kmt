@@ -44,6 +44,8 @@ class Scroll inherits Action
 		else
 			panel.scrollHorizontally(increment)
 		end
+		
+		done()
 	end
 	
 	

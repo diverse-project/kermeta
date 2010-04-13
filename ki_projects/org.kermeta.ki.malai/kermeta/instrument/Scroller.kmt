@@ -9,7 +9,7 @@ package kermeta::ki::malai::instrument;
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Instrument.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Scroll.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Scrolling.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/KeysScroll.kmt"
 
 
 using kermeta::ki::malai::instrument
@@ -41,7 +41,7 @@ class Scroller inherits Instrument
 class Scrolling2Scroll inherits Link
 {
 	method createInteraction() : Interaction is do
-		result := Scrolling.new
+		result := KeysScroll.new
 	end
 	
 	
@@ -51,17 +51,17 @@ class Scrolling2Scroll inherits Link
 	
 	
 	method isConditionRespected() : Boolean is do
-		result := true
+		result := interaction.asType(KeysScroll).keys.empty
 	end
 	
 	
 	method createAction() : Void is do
-		var scroll    : Scroll    init Scroll.new
-		var scrolling : Scrolling init interaction.asType(Scrolling)
-		var scroller  : Scroller  init instrument.asType(Scroller)
+		var scroll    : Scroll     init Scroll.new
+		var scrolling : KeysScroll init interaction.asType(KeysScroll)
+		var scroller  : Scroller   init instrument.asType(Scroller)
 		
 		scroll.panel     := scroller.panel 
-		scroll.increment := scrolling.increment
+		scroll.increment := scrolling.numberUp
 		action 		     := scroll
 		action.initialise(instrument.actionRegistry)
 	end
@@ -69,7 +69,3 @@ class Scrolling2Scroll inherits Link
 	
 	method updateAction() : Void is do end
 }
-
-
-
-
