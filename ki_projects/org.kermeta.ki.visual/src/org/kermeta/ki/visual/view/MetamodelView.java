@@ -98,12 +98,19 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable {
 	
 	
 	public static RuntimeObject onLinkAdded(RuntimeObject mmRO, RuntimeObject linkRO, RuntimeObject compositionRO, RuntimeObject srcClassRO, 
-											RuntimeObject tarClassRO, RuntimeObject positionRO) {
+											RuntimeObject tarClassRO, RuntimeObject srcNameRO, RuntimeObject srcCardRO, RuntimeObject tarNameRO,
+											RuntimeObject tarCardRO, RuntimeObject positionRO) {
 		MetamodelView metamodelView = (MetamodelView) mmRO.getUserData();
 		int position		  	= Integer.getValue(positionRO);
 		EntityView srcClass    	= (EntityView) srcClassRO.getUserData();
 		EntityView tarClass    	= (EntityView) tarClassRO.getUserData();
-		LinkView view = new RelationView(srcClass, tarClass, Boolean.getValue(compositionRO));
+		String srcRole			= srcNameRO==null ? null : fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(srcNameRO);
+		String targetRole		= tarNameRO==null ? null : fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(tarNameRO);
+		String srcCard			= srcCardRO==null ? null : fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(srcCardRO);
+		String targetCard		= tarCardRO==null ? null : fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(tarCardRO);
+		
+		LinkView view = new RelationView(srcClass, tarClass, Boolean.getValue(compositionRO), 
+										srcRole, targetRole, srcCard, targetCard);
 
 		linkRO.setUserData(view);
 		view.visibility = Visibility.STANDARD;

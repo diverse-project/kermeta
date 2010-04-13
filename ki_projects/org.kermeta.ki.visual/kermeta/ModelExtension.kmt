@@ -59,42 +59,6 @@ aspect class ClassDefinition inherits Pickable {
 	
 	
 	
-	operation copyPropertyTo(p : Property, srcClass : ClassDefinition, metamodel : ModelingUnit) : Property is do
-		result := Property.new
-		
-		result.name 			:= p.name
-		result.isComposite 		:= p.isComposite
-		result.isID 			:= p.isID
-		result.default 			:= p.default
-		result.isReadOnly 		:= p.isReadOnly
-		result.isDerived 		:= p.isDerived
-		result.isGetterAbstract := p.isGetterAbstract
-		result.isSetterAbstract := p.isSetterAbstract
-		result.getterBody 		:= p.getterBody
-		result.setterBody 		:= p.setterBody
-		result.upper 			:= p.upper
-		result.lower 			:= p.lower
-		result.isOrdered 		:= p.isOrdered
-		result.isUnique 		:= p.isUnique
-		result.type 			:= p.type
-		
-		result.containedType.addAll(p.containedType)
-		srcClass.ownedAttribute.add(result)
-		
-		if(result.type.isInstanceOf(PrimitiveType)) then
-			extern org::kermeta::ki::visual::view::EntityView.onAttributeAdded(srcClass, result, 
-									result.name, result.type.asType(PrimitiveType).name)
-		else 
-			if(result.type.isInstanceOf(Class)) then
-				var cd : ClassDefinition init p.type.asType(Class).classDefinition
-				
-				extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, result, result.isComposite,
-																					srcClass, cd, -1)
-			end
-		end
-	end
-	
-	
 	
 	operation movePropertyTo(p : Property, srcClass : ClassDefinition, metamodel : ModelingUnit) : Void is do
 		self.ownedAttribute.remove(p)
@@ -108,7 +72,9 @@ aspect class ClassDefinition inherits Pickable {
 				var cd : ClassDefinition init p.type.asType(Class).classDefinition
 				
 				extern org::kermeta::ki::visual::view::MetamodelView.onLinkRemoved(metamodel, p)
-				extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, p, p.isComposite, srcClass, cd, -1)
+				extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, p, p.isComposite, srcClass, cd, 
+						p.name, p.getCardinalityString, if(not p.opposite.isVoid) then p.opposite.name end, 
+						if(not p.opposite.isVoid) then p.opposite.getCardinalityString end, -1)
 			end
 		end
 	end
@@ -219,4 +185,11 @@ aspect class Operation {
 
 
 aspect class Property {
+	operation getCardinalityString() : String is do
+		if(upper==lower) then
+			result := if(upper==-1) then "*" else upper.toString end
+		else
+			result := lower.toString + ".." + if(upper==-1) then "*" else upper.toString end
+		end
+	end
 }

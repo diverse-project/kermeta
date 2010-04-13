@@ -267,7 +267,9 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 			var cd : ClassDefinition init p.type.asType(Class).classDefinition
 
 			if(classes.contains(cd)) then
-				extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(modelingUnit, p, p.isComposite, p.owningClass, cd, -1)
+				extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(modelingUnit, p, p.isComposite, p.owningClass, cd, 
+											p.name, p.getCardinalityString, if(not p.opposite.isVoid) then p.opposite.name end, 
+											if(not p.opposite.isVoid) then p.opposite.getCardinalityString end, -1)
 			end
 			links.add(p)
 		else

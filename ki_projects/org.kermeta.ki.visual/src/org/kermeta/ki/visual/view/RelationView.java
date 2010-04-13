@@ -17,10 +17,17 @@ public class RelationView extends LinkView {
 	protected boolean isComposition;
 	
 	
-	public RelationView(EntityView src, EntityView target, boolean isComposition) {
+	public RelationView(EntityView src, EntityView target, boolean isComposition, 
+			String srcRole, String targetRole, String srcCard, String targetCard) {
 		super(src, target);
 		
 		this.isComposition = isComposition;
+
+		if(srcRole!=null)
+			endingSrc = new RoleView(srcRole, srcCard, this, true);
+		
+		if(targetRole!=null)
+			endingTar = new RoleView(targetRole, targetCard, this, false);
 	}
 
 
@@ -72,6 +79,12 @@ public class RelationView extends LinkView {
 			
 			if(translation!=null)
 				endRotation(translation, g);
+			
+			if(endingSrc!=null)
+				endingSrc.paint(g);
+			
+			if(endingTar!=null)
+				endingTar.paint(g);
 		}
 	}
 }

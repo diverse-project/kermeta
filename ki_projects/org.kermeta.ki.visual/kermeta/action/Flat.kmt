@@ -74,7 +74,9 @@ class Flat inherits Action, Undoable
 			prop.owningClass.ownedAttribute.add(prop.prop)
 			prop.prop.owningClass := prop.owningClass  
 			extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, prop.prop, prop.prop.isComposite, 
-									prop.prop.owningClass, prop.owningClass, -1)
+									prop.prop.owningClass, prop.owningClass, 
+									prop.prop.name, prop.prop.getCardinalityString, if(not prop.prop.opposite.isVoid) then prop.prop.opposite.name end, 
+									if(not prop.prop.opposite.isVoid) then prop.prop.opposite.getCardinalityString end  , -1)
 		}
 		
 		flatteningOperation.addedOperations.each{op |

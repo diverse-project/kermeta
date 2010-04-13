@@ -1,5 +1,7 @@
 package org.kermeta.ki.visual.view;
 
+import static java.lang.Math.PI;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
@@ -96,7 +98,7 @@ public abstract class LinkView extends ComponentView {
 	
 	
 	public double getA() {
-		if(pointSrc.x==pointTar.x)
+		if(isVerticalLine())
 			return Double.NaN;
 
 		return (pointSrc.y - pointTar.y)/(pointSrc.x - pointTar.x);
@@ -266,6 +268,155 @@ public abstract class LinkView extends ComponentView {
 		
 		return new Point2D.Double(x, y);
 	}
+	
+	
+	
+	public static boolean equals(double a, double b){
+		return Math.abs(a - b) <= 0.00001;
+	}
+	
+	
+	public boolean isVerticalLine() {
+		return equals(pointSrc.getX(), pointTar.getX());
+	}
+	
+	
+	
+	public boolean isHorizontalLine() {
+		return equals(pointSrc.getY(), pointTar.getY());
+	}
+	
+	
+	
+	
+	
+	public static Point2D.Double[] findPoints(final Line2D.Double line, final double x, final double y, final double distance) {
+		if(line==null)
+			return null;
+		
+		if(equals(distance, 0.)) {
+			Point2D.Double[] sol = new Point2D.Double[1];
+			sol[0] 		 		 = new Point2D.Double(x,y);
+			
+			return sol;
+		}
+		
+		if(equals(line.getX1(), line.getX2())) {
+			if(equals(line.getY1(), line.getY2()))// The line is a point. So no position can be computed. 
+				return null;
+			
+			Point2D.Double sol[] = new Point2D.Double[2];
+			sol[0] = new Point2D.Double(x, y-distance);
+			sol[1] = new Point2D.Double(x, y+distance);
+			
+			return sol;
+		}
+		
+		final double a = (line.y1 - line.y2)/(line.x1 - line.x2);
+		final double b = line.y1 - a*line.x1;
+		double A = a*a+1., B = -2.*(x+y*a-a*b);
+		double C = b*b-(2.*y*b)+y*y+x*x-(distance*distance);
+		double delta = B*B-4.*A*C;
+
+		if(delta>0.) {
+			double _x1, _x2, _y1, _y2;
+			Point2D.Double sol[] = new Point2D.Double[2];
+			
+			_x1 = (-B+Math.sqrt(delta))/(2*A);
+			_x2 = (-B-Math.sqrt(delta))/(2*A);
+			_y1 = a*_x1+b;
+			_y2 = a*_x2+b;
+			sol[0] = new Point2D.Double(_x1, _y1);
+			sol[1] = new Point2D.Double(_x2, _y2);
+			
+			return sol;
+		}
+		else
+			if(equals(delta, 0.)) {
+				double _x2, _y2;
+				Point2D.Double sol[] = new Point2D.Double[1];
+				
+				_x2 = -B/2*A;
+				_y2 = a*_x2+b;
+				sol[0] = new Point2D.Double(_x2, _y2);
+				
+				return sol;
+			}
+			else 
+				return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	public Line2D.Double getPerpendicularLine(final Point2D.Double pt) {
+		if(isVerticalLine())
+			return equals(pt.getX(), pointSrc.getX()) ? new Line2D.Double(0., pt.getY(), pt.x, pt.y) : null;
+			
+		if(equals(pt.getX(), 0.)) {
+			Point2D.Double pt3  = new Point2D.Double(pointTar.getX(), pointTar.getY());
+			Point2D.Double pt2  = rotatePoint(pt3, pt, Math.PI/2.);
+			
+			return new Line2D.Double(pt2, pt);
+		}
+		
+		double a = getA();
+		
+		if(equals(a, 0.))
+			return new Line2D.Double(pt.getX(), pt.getY(), pt.getX(), pt.getY()-10.);
+		
+		double a2 = -1./a;
+		
+		return new Line2D.Double(0., pt.getY()-a2*pt.getX(), pt.x, pt.y);
+	}
+
+	
+	
+	
+	
+	public static Point2D.Double rotatePoint(final Point2D.Double srcPt, final Point2D.Double gravityC, final double theta) {
+		Point2D.Double pt = new Point2D.Double();
+		double cosTheta;
+		double sinTheta;
+		double angle 	= theta;
+		double gx 		= gravityC.getX();
+		double gy 		= gravityC.getY();
+
+		if(angle<0.)
+			angle = 2.*PI + angle;
+		
+		angle = angle%(2.*PI);
+		
+		if(equals(angle, 0.))
+			return (Point2D.Double)srcPt.clone();
+		
+		if(equals(angle-PI/2., 0.)) {	
+			cosTheta = 0.;
+			sinTheta = 1.;
+		}
+		else if(equals(angle-PI, 0.)) {
+				cosTheta = -1.;
+				sinTheta = 0.;
+			}
+			else if(equals(angle-(3.*PI/2.), 0.)) {
+					cosTheta = 0.;
+					sinTheta = -1.;
+				}
+				else {
+					cosTheta = Math.cos(angle);
+					sinTheta = Math.sin(angle);
+				}
+		
+		pt.x = cosTheta * (srcPt.x - gx) - sinTheta * (srcPt.y - gy) + gx;
+		pt.y = sinTheta * (srcPt.x - gx) + cosTheta * (srcPt.y - gy) + gy;
+
+		return pt;
+	}
+	
+	
 	
 	
 	public static Point2D.Double getIntersectionSegment(Line2D l1, Line2D l2) {
