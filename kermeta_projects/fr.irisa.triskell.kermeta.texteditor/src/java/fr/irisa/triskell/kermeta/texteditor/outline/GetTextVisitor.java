@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -75,10 +76,10 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 		}
 		
 		// build the list of inherited classes using all aspects
-		List<TypeDefinition> context = TypeDefinitionHelper.getAspects(outline.getKermetaUnit().getModelingUnit(), node );
-		context.addAll( TypeDefinitionHelper.getBaseAspects(outline.getKermetaUnit().getModelingUnit(), node) );
+		List<TypeDefinition> context = TypeDefinitionHelper.getAllAspects(outline.getKermetaUnit(), KermetaModelHelper.ClassDefinition.qualifiedName(node) );
+		//context.addAll( TypeDefinitionHelper.getBaseAspects(outline.getKermetaUnit().getModelingUnit(), node) );
 				
-		EList<Type> allSuperTypes = new BasicEList<Type>(node.getSuperType());
+		EList<Type> allSuperTypes = new BasicEList<Type>();
 		for ( TypeDefinition typeDefinition : context ) {	    	
 	    	if ( typeDefinition instanceof ClassDefinition ) {
 	    		ClassDefinition cl = (ClassDefinition) typeDefinition;
