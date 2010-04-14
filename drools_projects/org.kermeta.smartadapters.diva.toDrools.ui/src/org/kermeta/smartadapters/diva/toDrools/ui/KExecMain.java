@@ -27,6 +27,7 @@ public class KExecMain {
 
 		Map<String, Object> options = new Hashtable<String, Object>();
 		options.put(InterpreterOptions.TYPE_CHECKED, true);
+		options.put(InterpreterOptions.CLEAN_AT_END, true);
 		
 		Interpreter interpreter = new Interpreter(DIVA_KERMETA_CODE, InterpreterMode.RUN, options);
 	    interpreter.setStreams(console);		

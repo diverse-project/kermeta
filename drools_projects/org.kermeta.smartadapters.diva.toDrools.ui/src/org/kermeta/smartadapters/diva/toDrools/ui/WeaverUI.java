@@ -1,5 +1,7 @@
 package org.kermeta.smartadapters.diva.toDrools.ui;
 
+import java.io.IOException;
+
 import org.eclipse.core.internal.resources.File;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.action.IAction;
@@ -14,8 +16,13 @@ import org.kermeta.smartadapters.drools.standalone.SmartAdaptersDrools;
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 
 public class WeaverUI implements IObjectActionDelegate, Runnable {
+
+	public static final String DIVA_KERMETA_CODE = "platform:/plugin/org.kermeta.smartadapters.diva.toDrools.ui/src/kermeta/ARTcleaner/ArtCleaner.kmt";
+	public static final String ENTRY_POINT = "art::MainCleaning";
 
 	protected Shell shell;
 
@@ -27,11 +34,35 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 		if (baseFile != null && aspectFile != null){
 			IOConsole console = new EclipseConsole("SmartAdapters weaver for DiVA");
 			console.println(new InfoMessage("Weaving..."));
-			
-			System.out.println("RUN");
+
 			SmartAdaptersDrools.main(new String[]{"file:/"+baseFile.getRawLocation().toOSString(),"file:/"+baseFile.getRawLocation().toOSString().replace(".art", ".woven.art"),aspectFile.getRawLocation().toOSString()});
-			
+
 			console.println(new InfoMessage("Done!"));
+
+
+
+			String file_uri = "file:/" + baseFile.getRawLocation().toOSString().replace(".art", ".woven.art").replace("\\", "/");
+			System.out.println(file_uri);
+			try {
+				console.println(new InfoMessage("Cleaning..."));
+				KExecMain.run("main", file_uri, console, DIVA_KERMETA_CODE, ENTRY_POINT);
+				console.println(new InfoMessage("Done!"));
+
+				java.io.File file;
+				file = new java.io.File(baseFile.getRawLocation().toOSString().replace(".art", ".woven.art"));
+				file.delete();
+				file = new java.io.File(baseFile.getRawLocation().toOSString().replace(".art", ".woven.clean.art"));
+				file.renameTo(new java.io.File(baseFile.getRawLocation().toOSString().replace(".art", ".woven.art")));
+
+			} catch (NotRegisteredURIException e) {
+				e.printStackTrace();
+			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+
 		}
 		baseFile = null;
 		aspectFile = null;
@@ -56,17 +87,23 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
-		for(Object o : ((StructuredSelection)selection).toList()){
-			File file = (File)o;
-			if(file.getFullPath().getFileExtension().equals("art")){
-				baseFile = file;
+		System.out.println("org.kermeta.smartadapters.diva.toDrools.ui.WeaveAspect");
+		System.out.println(action.getId());
+		System.out.println((action.getId()!=null && action.getId().equals("org.kermeta.smartadapters.diva.toDrools.ui.WeaveAspect")));
+
+		if(action.getId()!=null && action.getId().equals("org.kermeta.smartadapters.diva.toDrools.ui.WeaveAspect")){
+			for(Object o : ((StructuredSelection)selection).toList()){
+				File file = (File)o;
+				if(file.getFullPath().getFileExtension().equals("art")){
+					baseFile = file;
+				}
+				else if (file.getFullPath().getFileExtension().equals("drl")){
+					aspectFile = file;
+				}
 			}
-			else if (file.getFullPath().getFileExtension().equals("drl")){
-				aspectFile = file;
-			}
-		}
-		if (baseFile != null && aspectFile != null){
-			run();
+			/*if (baseFile != null && aspectFile != null){
+				run();
+			}*/
 		}
 	}
 }

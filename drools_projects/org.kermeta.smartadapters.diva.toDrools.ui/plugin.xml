@@ -14,7 +14,7 @@
          <action
                class="org.kermeta.smartadapters.diva.toDrools.ui.CompilerUI"
                icon="icons/DivaModelFile.gif"
-               id="org.kermeta.smartadapters.diva.toDrools.ui.action1"
+               id="org.kermeta.smartadapters.diva.toDrools.ui.CompileAspect"
                label="Compile Aspect"
                menubarPath="smartadapters.diva.menu">
          </action>
@@ -30,7 +30,7 @@
          <action
                class="org.kermeta.smartadapters.diva.toDrools.ui.CleanerUI"
                icon="icons/DivaModelFile.gif"
-               id="org.kermeta.smartadapters.diva.toDrools.ui.action2"
+               id="org.kermeta.smartadapters.diva.toDrools.ui.Clean"
                label="Clean Model"
                menubarPath="smartadapters.diva.menu">
          </action>
@@ -47,7 +47,7 @@
                class="org.kermeta.smartadapters.diva.toDrools.ui.WeaverUI"
                enablesFor="2"
                icon="icons/DivaModelFile.gif"
-               id="org.kermeta.smartadapters.diva.toDrools.ui.action3"
+               id="org.kermeta.smartadapters.diva.toDrools.ui.WeaveAspect"
                label="Weave Aspect"
                menubarPath="smartadapters.diva.menu">
          </action>
