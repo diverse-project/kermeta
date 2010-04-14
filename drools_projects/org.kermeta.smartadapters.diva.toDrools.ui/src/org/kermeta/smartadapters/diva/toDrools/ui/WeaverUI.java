@@ -87,10 +87,6 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
-		System.out.println("org.kermeta.smartadapters.diva.toDrools.ui.WeaveAspect");
-		System.out.println(action.getId());
-		System.out.println((action.getId()!=null && action.getId().equals("org.kermeta.smartadapters.diva.toDrools.ui.WeaveAspect")));
-
 		if(action.getId()!=null && action.getId().equals("org.kermeta.smartadapters.diva.toDrools.ui.WeaveAspect")){
 			for(Object o : ((StructuredSelection)selection).toList()){
 				File file = (File)o;
@@ -101,9 +97,6 @@ public class WeaverUI implements IObjectActionDelegate, Runnable {
 					aspectFile = file;
 				}
 			}
-			/*if (baseFile != null && aspectFile != null){
-				run();
-			}*/
 		}
 	}
 }
