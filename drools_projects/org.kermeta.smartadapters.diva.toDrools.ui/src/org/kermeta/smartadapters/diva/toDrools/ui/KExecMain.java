@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Hashtable;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.kermeta.interpreter.api.Interpreter;
 import org.kermeta.interpreter.api.InterpreterMode;
+import org.kermeta.interpreter.api.InterpreterOptions;
 import org.osgi.framework.Bundle;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
@@ -22,7 +25,10 @@ public class KExecMain {
 	
 	public static void run(String op, String fileURI, IOConsole console, String DIVA_KERMETA_CODE, String entryPoint) throws NotRegisteredURIException, IOException, URIMalformedException  {
 
-		Interpreter interpreter = new Interpreter(DIVA_KERMETA_CODE, InterpreterMode.RUN, null);
+		Map<String, Object> options = new Hashtable<String, Object>();
+		options.put(InterpreterOptions.TYPE_CHECKED, true);
+		
+		Interpreter interpreter = new Interpreter(DIVA_KERMETA_CODE, InterpreterMode.RUN, options);
 	    interpreter.setStreams(console);		
 	    interpreter.setEntryPoint(entryPoint, op);
 		String[] parameters = new String[1];

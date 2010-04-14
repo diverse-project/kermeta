@@ -30,16 +30,9 @@ public class CompilerUI implements IObjectActionDelegate, Runnable {
 		console.println(new InfoMessage("Compiling DiVA aspect models: " + file.getLocation().toOSString() + "..."));
 			
 		try {			
-				
 			String file_uri = "file:/" + file.getLocation().toOSString().replace("\\", "/");
-		    System.out.println(file_uri);
-			KExecMain.run("main", file_uri, console, DIVA_KERMETA_CODE, ENTRY_POINT);
-			
+		    KExecMain.run("main", file_uri, console, DIVA_KERMETA_CODE, ENTRY_POINT);
 			console.println(new OKMessage("Execution terminated successfully."));
-			
-			//AspectCompiler.compile(file_uri);
-			
-			
 		} catch (Throwable e) {
 			console.println(new ErrorMessage("Runtime error : "));
 			console.println(new ThrowableMessage(e));
