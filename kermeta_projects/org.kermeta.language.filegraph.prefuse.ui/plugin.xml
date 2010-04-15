@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.kermeta.language.filegraph.prefuse.ui.contribution1"
+            nameFilter="*.kmt"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               label="Kermeta"
+               path="additions"
+               id="org.kermeta.language.filegraph.prefuse.ui.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Show file dependencies"
+               class="org.kermeta.language.filegraph.prefuse.ui.popup.actions.ShowFileDependenciesAction"
+               menubarPath="org.kermeta.language.filegraph.prefuse.ui.menu1/group1"
+               enablesFor="1"
+               id="org.kermeta.language.filegraph.prefuse.ui.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

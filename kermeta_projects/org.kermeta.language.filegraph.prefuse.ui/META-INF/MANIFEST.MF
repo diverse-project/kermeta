@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kermeta Filegraph Prefuse UI
+Bundle-SymbolicName: org.kermeta.language.filegraph.prefuse.ui; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.kermeta.language.filegraph.prefuse.ui.Activator
+Bundle-Vendor: IRISA/INRIA
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Import-Package: org.kermeta.language.filegraph
+Bundle-ClassPath: lib/thirdparty/prefuse.jar,
+ .
