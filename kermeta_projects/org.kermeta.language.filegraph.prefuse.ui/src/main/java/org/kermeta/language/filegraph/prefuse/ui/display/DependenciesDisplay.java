@@ -10,6 +10,8 @@
 
 package org.kermeta.language.filegraph.prefuse.ui.display;
 
+import org.kermeta.language.filegraph.prefuse.action.layout.AggregateLayout;
+
 import prefuse.Constants;
 import prefuse.Display;
 import prefuse.Visualization;
@@ -38,17 +40,15 @@ public class DependenciesDisplay extends Display {
     public static final String AGGR = "aggregates";
     public static final String NODELABEL = "label";
     
-	public DependenciesDisplay(Graph graph) {
+	public DependenciesDisplay(Graph graph, Visualization vis) {
 		// initialize the display content (m_viz)
-		super(new Visualization());
+		super(vis);
 		
 		// add the data to the visu
-		m_vis.addGraph(GRAPH, graph);
-		m_vis.setInteractive(EDGES, null, false);
+	//	m_vis.addGraph(GRAPH, graph);
+	//	m_vis.setInteractive(EDGES, null, false);
 		
-		 AggregateTable at = m_vis.addAggregates(AGGR);
-	     at.addColumn(VisualItem.POLYGON, float[].class);
-	     at.addColumn("id", int.class);
+		 
 	     
 	    // m_vis.
 	        
@@ -89,16 +89,21 @@ public class DependenciesDisplay extends Display {
 				VisualItem.STROKECOLOR, ColorLib.gray(150));
 		ColorAction edgeArrCol = new ColorAction("graph.edges",
 				VisualItem.FILLCOLOR, ColorLib.gray(150));
+		ColorAction aStroke = new ColorAction(AGGR, VisualItem.STROKECOLOR);
+        aStroke.setDefaultColor(ColorLib.gray(200));
+        aStroke.add("_hover", ColorLib.rgb(255,100,100));
 		// list those color actions
 		ActionList colActions = new ActionList();
 		colActions.add(itemCol);
 		colActions.add(textCol);
 		colActions.add(edgeCol);
 		colActions.add(edgeArrCol);
+		colActions.add(aStroke);
 		
 		// add a dynamic display of items
 		ActionList dynLayout = new ActionList(Activity.INFINITY);
 		dynLayout.add(new ForceDirectedLayout(GRAPH));
+		dynLayout.add(new AggregateLayout(AGGR));
 		dynLayout.add(new RepaintAction());
 		
 		m_vis.putAction("color", colActions);

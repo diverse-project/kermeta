@@ -1,6 +1,8 @@
 package org.kermeta.language.filegraph.prefuse.ui.popup.actions;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFrame;
@@ -17,6 +19,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.kermeta.language.filegraph.CycleGraph;
 import org.kermeta.language.filegraph.GraphNode;
 import org.kermeta.language.filegraph.IFileGraphService;
 import org.kermeta.language.filegraph.SimpleGraph;
@@ -25,13 +28,17 @@ import org.kermeta.language.filegraph.prefuse.ui.display.DependenciesDisplay;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
+import prefuse.Constants;
+import prefuse.Visualization;
 import prefuse.controls.DragControl;
 import prefuse.controls.PanControl;
 import prefuse.controls.ZoomControl;
 import prefuse.data.Edge;
 import prefuse.data.Graph;
 import prefuse.data.Node;
+import prefuse.visual.AggregateItem;
 import prefuse.visual.AggregateTable;
+import prefuse.visual.VisualGraph;
 import prefuse.visual.VisualItem;
 
 
@@ -74,13 +81,16 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 					IFileGraphService fileGraphService = (IFileGraphService)context.getService(ref);
 					
 					// computer the graph
-					SimpleGraph simpleGraph = fileGraphService.getSimpleGraph(selectedFile.toString());
+					CycleGraph cycleGraph = fileGraphService.getCycleGraph(selectedFile.toString());
 					
 					// transform the graph for prefuse
-					Graph graph = convertToPrefuseGraph(simpleGraph);
+					Visualization vis = new Visualization();
+					Graph graph = convertToPrefuseGraph(cycleGraph, vis);
+					
+					// transform cycle into aggregates
 					
 					// open the view
-					DependenciesDisplay display = new DependenciesDisplay(graph);
+					DependenciesDisplay display = new DependenciesDisplay(graph, vis);
 					// some stuff needed to control graph
 			        display.addControlListener(new DragControl());
 			        display.addControlListener(new PanControl());
@@ -121,14 +131,38 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 			selectedFile = (IFile) treeSelection.getFirstElement();
 		}
 	}
-
+	protected Graph convertToPrefuseGraph(CycleGraph cycleGraph, Visualization vis){
+		// compute the simple graph
+		Map<GraphNode, Node> convertedNodes = new HashMap<GraphNode, Node>();
+		Graph result = convertToPrefuseGraph((SimpleGraph)cycleGraph, convertedNodes);
+		
+		VisualGraph vg = vis.addGraph(DependenciesDisplay.GRAPH, result);
+        vis.setInteractive(DependenciesDisplay.EDGES, null, false);
+        vis.setValue(DependenciesDisplay.NODES, null, VisualItem.SHAPE,
+                new Integer(Constants.SHAPE_ELLIPSE)); 
+		
+		 AggregateTable at = vis.addAggregates(DependenciesDisplay.AGGR);
+	     at.addColumn(VisualItem.POLYGON, float[].class);
+	     at.addColumn("id", int.class);
+		
+		//compute the aggregates
+	    int i = 1;
+	    Iterator nodes = vg.nodes();
+		for(List<GraphNode> cycleNodes : cycleGraph.getCycles()){
+			AggregateItem aitem = (AggregateItem)at.addItem();
+            aitem.setInt("id", i++);
+            for ( GraphNode node : cycleNodes  ) {
+            	aitem.addItem(vis.getVisualItem(DependenciesDisplay.NODES, convertedNodes.get(node)));
+            }
+		}
+		
+		return result;
+	}
 	
-	protected Graph convertToPrefuseGraph(SimpleGraph simpleGraph){
+	protected Graph convertToPrefuseGraph(SimpleGraph simpleGraph, Map<GraphNode, Node> convertedNodes){
 		Graph result = new Graph(true);
 		result.addColumn(DependenciesDisplay.NODELABEL, String.class);
 		
-		
-		Map<GraphNode, Node> convertedNodes = new HashMap<GraphNode, Node>();
 		
 		// process root
 		convertNodeToPrefuse(result, simpleGraph.getRootNode(), convertedNodes);
