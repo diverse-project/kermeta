@@ -28,11 +28,17 @@ import org.osgi.framework.ServiceReference;
 import prefuse.controls.DragControl;
 import prefuse.controls.PanControl;
 import prefuse.controls.ZoomControl;
+import prefuse.data.Edge;
 import prefuse.data.Graph;
 import prefuse.data.Node;
+import prefuse.visual.AggregateTable;
+import prefuse.visual.VisualItem;
 
 
 public class ShowFileDependenciesAction implements IObjectActionDelegate {
+	
+
+	
 
 	private Shell shell;
 	
@@ -115,8 +121,8 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 
 	
 	protected Graph convertToPrefuseGraph(SimpleGraph simpleGraph){
-		Graph result = new Graph();
-		result.addColumn("label", String.class);
+		Graph result = new Graph(true);
+		result.addColumn(DependenciesDisplay.NODELABEL, String.class);
 		
 		
 		Map<GraphNode, Node> convertedNodes = new HashMap<GraphNode, Node>();
@@ -127,9 +133,13 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 		// for each converted nodes, add the edges
 		for(GraphNode fileNode : convertedNodes.keySet()){
 			for(GraphNode childNode :fileNode.getDirectReferences()){
-				result.addEdge(convertedNodes.get(fileNode), convertedNodes.get(childNode));
+				/* Edge edge = */result.addEdge(convertedNodes.get(fileNode), convertedNodes.get(childNode));
+				
 			}
 		}
+		
+		// add aggregates
+		//result.
 		
 		return result;
 	}
