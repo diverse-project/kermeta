@@ -39,8 +39,6 @@ object Main extends LogAspect {
 
     var additionalClassPath: List[String] = List()
 
-    var result : Int =0;
-    def getResult = resut;
     def main(args : Array[String]) : Unit = {
 
         //STEP 0 - LOAD PROPERTIES FILE
