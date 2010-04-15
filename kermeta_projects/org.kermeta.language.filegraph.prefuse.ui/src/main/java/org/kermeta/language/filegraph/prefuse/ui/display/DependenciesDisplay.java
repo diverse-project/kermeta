@@ -103,6 +103,9 @@ public class DependenciesDisplay extends Display {
 		
 		m_vis.putAction("color", colActions);
 		m_vis.putAction("layout", dynLayout);
+		
+
+        
 	}
 	
 	public void run() {

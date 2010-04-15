@@ -85,6 +85,9 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 			        display.addControlListener(new DragControl());
 			        display.addControlListener(new PanControl());
 			        display.addControlListener(new ZoomControl());
+			        display.setSize(500,500);
+			        display.pan(250, 250);
+			        //display.setHighQuality(true);
 			        
 			        // Prefuse Swing window
 			        JFrame frame = new JFrame("File dependencies");
