@@ -1551,7 +1551,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		KermetaUnit result = (KermetaUnit) EcoreUtil.copy(this);
 		// fill the cache for correct use of the copied unit
 		result.fillTypeDefinitionCache();
-		result.getImportedKermetaUnits().addAll(KermetaUnitHelper.getAllImportedKermetaUnits(this));
+		result.getImportedKermetaUnits().addAll(this.getImportedKermetaUnits());
 		result.getTypeDefinitionCache().setExternalSearchAuthorized(true);
 		return result;
 	}
