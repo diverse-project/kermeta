@@ -1,13 +1,38 @@
 package fr.irisa.triskell.scala.compilo.test;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.TestCase;
 
 import org.junit.Test;
 
 public class TestCompiloCases extends TestCase {
+	
 
+	void listJar(File folderTest, List<String> files) {
+		System.err.println(folderTest.getAbsolutePath());
+		for (File f : folderTest.listFiles(new FileFilter() {
+
+			public boolean accept(File arg0) {
+				return (!arg0.isDirectory()) && arg0.getName().endsWith(".jar");
+			}
+
+		})) {
+			files.add((f.getAbsolutePath()));
+		}
+	}
+
+	
+	public List<String> getJars(String testcase){
+		
+		List<String> res = new ArrayList<String>();		
+		listJar(new File((testcase.substring(0, testcase.lastIndexOf("/")))),res);
+		return res;
+	}
+	
 	public void process(String testcase) {
 
 		String basePATH = this.getClass().getResource("/").getPath();
@@ -30,7 +55,7 @@ public class TestCompiloCases extends TestCase {
 		/* VERSION 1.2 COMPILER FROM M2 OR NEXUS REPOSITORY */
 //	    def init(propertyurl:String, projectName:String, classqname:String,  operationName:String, classpath:java.util.Collection[String], args:String, outputStream : java.io.OutputStream):Unit ={
 
-		fr.irisa.triskell.kermeta.compilo.scala.Main.init("Compiler.properties", "", "", "", new ArrayList<String>(), "", null);
+		fr.irisa.triskell.kermeta.compilo.scala.Main.init("Compiler.properties", "", "", "", this.getJars(testcase), "", null);
 		String[] arg = new String[2];
 		arg[0] = "-i";
 		arg[1] = testcase + ".km";
