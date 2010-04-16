@@ -142,22 +142,16 @@ object Util extends LogAspect with RichAspectImplicit  {
     var threadExecutor : ExecutorService = null
    
    
-    def generateScalaCodeEach[A <: Object](res : StringBuilder,list : Iterable[A],sep : String ){
+    def generateScalaCodeEach[A <: Object](res : StringBuilder,list : Iterable[A],sep : String )={
         implicit def rich (xs : Iterable[A]) = new RichIterable(list)
         list.foreachCtx((e,ctx) => {
                 if(!ctx.isFirst) {res.append(sep) }
                 e.asInstanceOf[ObjectAspect].generateScalaCode(res)
             })
-        //TODO CAS INTERESSANT POUR LES FONCTIONS ANONYM
-        /*
-         for(i <- 0 until list.size){
-         if(i != 0) {res.append(sep) }
-         list.get(i).generateScalaCode(res)
-         }*/
     }
    
    
-    def generateProtectedScalaCodeEach[A <: Object](res : StringBuilder,list : Iterable[A],sep : String ){
+    def generateProtectedScalaCodeEach[A <: Object](res : StringBuilder,list : Iterable[A],sep : String )={
         implicit def rich (xs : Iterable[A]) = new RichIterable(list)
         list.foreachCtx((e,ctx) => {
                 if(!ctx.isFirst) {res.append(sep) }

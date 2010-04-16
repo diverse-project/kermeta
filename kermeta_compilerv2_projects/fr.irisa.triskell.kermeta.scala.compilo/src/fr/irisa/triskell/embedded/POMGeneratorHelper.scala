@@ -195,7 +195,7 @@ object POMGeneratorHelper {
         dependencies.add(this.createDependency("org.scala-lang", "scala-library", "2.8.0.RC1"))
         dependencies.add(createDependency("fr.irisa.triskell", "kermeta.model", "1.3.0"));
         dependencies.add(createDependency("org.eclipse", "emf", "3.5.0"));
-        dependencies.add(createDependency("fr.irisa.triskell", "kermeta.scala.framework", "0.0.2-SNAPSHOT"));
+        dependencies.add(createDependency("fr.irisa.triskell", "kermeta.scala.framework", "0.0.3"));
         /* INIT LOCAL VARIABLE DEPENDENCY */
 
         var i = 0

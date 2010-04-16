@@ -21,8 +21,10 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor.impl._
 import fr.irisa.triskell.embedded._
+import org.slf4j.{Logger,LoggerFactory}
 
 object Main extends LogAspect {
+//	def log = LoggerFactory.getLogger(this.getClass())
 
     var outputStream : java.io.OutputStream=null
 
@@ -51,10 +53,10 @@ object Main extends LogAspect {
             GlobalConfiguration.load(resource)
             println(GlobalConfiguration.outputFolder)
         }
-//       additionalClassPath = List("/home/barais/workspaces/kermetaRuntimeTest/AntWorld/libNative/native.jar"
-        //                          ,
- //           "/opt/galileo/eclipse/plugins/org.eclipse.uml2.common_1.5.0.v200905041045.jar","/opt/galileo/eclipse/plugins/org.eclipse.uml2.uml_3.0.1.v200908281330.jar"
-  //      )
+/*       additionalClassPath = List("/home/barais/workspaces/kermetaRuntimeTest/AntWorld/libNative/native.jar"
+                                  ,
+          "/opt/galileo/eclipse/plugins/org.eclipse.uml2.common_1.5.0.v200905041045.jar","/opt/galileo/eclipse/plugins/org.eclipse.uml2.uml_3.0.1.v200908281330.jar"
+        )*/
  /*       "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/kompose/fr.irisa.triskell.traceability.model_1.3.2.jar",
         "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/kompose/flowEMFEditor_1.0.0.jar",
     "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/kompose/org.kermeta.kompose.core.model_0.0.5.jar")
@@ -102,6 +104,9 @@ object Main extends LogAspect {
         var compilo = new Compiler
 
 
+//        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/000HelloWorld.km"
+//        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/perfs/metamodelPruner.km"
+//        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/perfs/001_LoadUML.km"
         if(inputFile != ""){
             log.info("KM compilation begin on "+inputFile)
                     compilo.compile(inputFile)
@@ -146,7 +151,7 @@ object Main extends LogAspect {
                     System.setErr(new PrintStream(oldErr))
                 }
             }else{
-                result = EmbeddedMavenHelper.run(GlobalConfiguration.clean,GlobalConfiguration.createPackage, GlobalConfiguration.standalone, GlobalConfiguration.exec,  additionalClassPath,outputStream)
+                EmbeddedMavenHelper.run(GlobalConfiguration.clean,GlobalConfiguration.createPackage, GlobalConfiguration.standalone, GlobalConfiguration.exec,  additionalClassPath,outputStream)
             }
         }
     }

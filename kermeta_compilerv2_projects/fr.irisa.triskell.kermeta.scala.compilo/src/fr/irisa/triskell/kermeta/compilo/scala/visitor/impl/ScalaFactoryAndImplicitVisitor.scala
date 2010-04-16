@@ -62,7 +62,7 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
         viewDef = new StringBuilder
         implicitDef = new StringBuilder
         implicitDef append "package "+GlobalConfiguration.frameworkGeneratedPackageName+"\n"
-        implicitDef append "trait "+GlobalConfiguration.implicitConvTraitName+" {\n"
+        implicitDef append "object "+GlobalConfiguration.implicitConvTraitName+" {\n"
         factoryDefClass = new StringBuilder
     }
     var packages : java.util.List[Package] = _
@@ -96,7 +96,9 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
         var res :StringBuilder= new StringBuilder
         res.append("package runner \n")
         res.append("import java.io.PrintStream\n")
-        res.append("object MainRunner  extends "+GlobalConfiguration.frameworkGeneratedPackageName+"."+GlobalConfiguration.implicitConvTraitName+"{\n")
+        res.append("import "+ GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName +"._\n")
+
+        res.append("object MainRunner  {\n")
         //res.append("def main(args : Array[String]) : Unit = {\n\t" )
         res.append("def init() : Unit = {\n\t" )
         if (GlobalConfiguration.isTest){
@@ -173,13 +175,13 @@ class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit wi
 			
       
                 factoryDef append "package "+actualPackage+"\n"
-				
-                factoryDef append "object "+GlobalConfiguration.factoryName + " extends "
+                factoryDef append "import "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName +"._\n"
+
+                factoryDef append "object "+GlobalConfiguration.factoryName 
                 //e.getOwnedTypeDefinition.filter(t=> t.isInstanceOf[ClassDefinition]).filter(t=> Util.hasEcoreTag(t)).size==0
                 if (par.getOwnedTypeDefinition.size!= 0 &&  par.getOwnedTypeDefinition.filter(t=> t.isInstanceOf[ClassDefinition]).filter(e=> Util.hasEcoreTag(e)).size>0){
-                    factoryDef.append (Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.asInstanceOf[Package].getQualifiedName())+Util.getImplPackageSuffix(actualPackage)+ Util.getPackagePrefix(par.getName.substring(0,1).toUpperCase + par.getName.substring(1,par.getName.size))+"FactoryImpl with"))
+                    factoryDef.append (" extends " +Util.protectScalaKeyword(kermeta.utils.TypeEquivalence.getPackageEquivalence(par.asInstanceOf[Package].getQualifiedName())+Util.getImplPackageSuffix(actualPackage)+ Util.getPackagePrefix(par.getName.substring(0,1).toUpperCase + par.getName.substring(1,par.getName.size))+"FactoryImpl"))
                 }
-                factoryDef append " "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
                 factoryDef append "{\n"
                 viewDef append "package "+actualPackage+"\n"
                 //viewDef append "trait "+viewDefTraitName+"{\n"

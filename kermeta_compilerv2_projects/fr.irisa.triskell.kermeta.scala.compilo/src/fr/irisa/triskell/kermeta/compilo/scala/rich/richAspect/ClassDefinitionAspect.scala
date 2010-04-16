@@ -21,6 +21,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
     }
 	
     override def generateScalaCode(res : StringBuilder) : Unit = {
+        res.append("import "+ GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName +"._\n")
         if (Util.hasEcoreTag(this)){
             res.append("trait ")
             res.append(this.getName())
@@ -31,7 +32,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
             if (this.getSuperType.size == 0){//1 && "Object".equals(this.getSuperType.first.asInstanceOf[ParameterizedType].getTypeDefinition.asInstanceOf[ClassDefinition].getName) ){
                 res append " extends "+ fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
                 // res.append(" with ScalaAspect.org.eclipse.emf.ecore.EObjectAspect")
-                res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
+//                res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
             } else {
                 var i = 0;
                 this.getSuperType.foreach(superC => {
@@ -68,7 +69,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
                     })
 				
                 res append " with "+ fr.irisa.triskell.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(this.getQualifiedNameCompilo())
-                res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
+//                res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
             }
             res append " with "+Util.protectScalaKeyword(Util.getQualifiedNamedBase(this))
 	    res.append("{\n")
@@ -127,7 +128,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
                         //					}
                         i=i+1
                     })
-                res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
+  //              res append " with "+GlobalConfiguration.frameworkGeneratedPackageName + "."+GlobalConfiguration.implicitConvTraitName
             }
             res append " with "+Util.protectScalaKeyword(Util.getQualifiedNamedBase(this))
             res.append("{\n")
