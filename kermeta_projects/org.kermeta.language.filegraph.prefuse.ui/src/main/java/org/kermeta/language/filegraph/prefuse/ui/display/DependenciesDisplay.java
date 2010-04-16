@@ -12,7 +12,6 @@ package org.kermeta.language.filegraph.prefuse.ui.display;
 
 import java.util.List;
 
-import org.kermeta.language.filegraph.GraphNode;
 import org.kermeta.language.filegraph.prefuse.action.layout.AggregateLayout;
 
 import prefuse.Constants;
