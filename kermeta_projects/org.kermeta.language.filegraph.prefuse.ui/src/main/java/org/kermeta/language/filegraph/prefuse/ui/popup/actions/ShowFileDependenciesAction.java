@@ -30,6 +30,8 @@ import org.kermeta.language.filegraph.prefuse.ui.display.DependenciesDisplay;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
+import filegraph.mockup.FileGraphService;
+
 import prefuse.controls.DragControl;
 import prefuse.controls.PanControl;
 import prefuse.controls.ZoomControl;
@@ -70,13 +72,16 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 			public IStatus run(IProgressMonitor monitor) {
 				
 				try {
-					// get the service (we expect only one)
+			/*		// get the service (we expect only one)
 					BundleContext context = Activator.getDefault().context;
 					ServiceReference ref = context.getServiceReference(IFileGraphService.class.getName());
 					IFileGraphService fileGraphService = (IFileGraphService)context.getService(ref);
 					
 					// computer the graph
 					CycleGraph cycleGraph = fileGraphService.getCycleGraph(selectedFile.toString());
+			 */		
+					// TEST use mockup
+					CycleGraph cycleGraph = new FileGraphService().getCycleGraph(selectedFile.toString());
 					
 					// transform the graph for prefuse
 					Map<GraphNode, Node> convertedNodes = new HashMap<GraphNode, Node>();
@@ -123,10 +128,15 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 		for(List<GraphNode> cycleNodes : cycleGraph.getCycles()){
 			Aggregate agg = new Aggregate();
 			result.add(agg);
-			if(cycleNodes.size()-1 <= DependenciesDisplay.NB_AGGREGATE_COLOR)
-				agg.setColorid( cycleNodes.size()-1);
-			else
-				agg.setColorid( DependenciesDisplay.NB_AGGREGATE_COLOR);
+			if(cycleNodes.size() <= 2){
+				agg.setColorid( 0 );
+			}
+			else {
+				if(cycleNodes.size()-2 <= DependenciesDisplay.NB_AGGREGATE_COLOR)
+					agg.setColorid( cycleNodes.size()-2);
+				else
+					agg.setColorid( DependenciesDisplay.NB_AGGREGATE_COLOR);
+			}
 			for ( GraphNode node : cycleNodes  ) {
             	agg.getAggregatedNodes().add( convertedNodes.get(node));
             }
