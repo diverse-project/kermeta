@@ -6,6 +6,7 @@ package org.kermeta.language.filegraph.test;
 import java.io.File;
 import java.util.List;
 
+import org.kermeta.language.filegraph.CycleGraph;
 import org.kermeta.language.filegraph.GraphNode;
 import org.kermeta.language.filegraph.SimpleGraph;
 import org.kermeta.language.filegraph.impl.FileGraphService;
@@ -22,12 +23,20 @@ public class Main {
 	public static void main(String[] args) {
 		FileGraphService sce = new FileGraphService();
 		File f = new File("/home/hrambelo/Applications/Eclipses/32/E_CodeCamp_Kermeta/runtime-New_configuration/kermeta_preparser/nouveau dossier/req1.kermeta_contour");
-		SimpleGraph graph = sce.getSimpleGraph(f);
+		/*SimpleGraph graph = sce.getSimpleGraph(f);
 		List<GraphNode> innerNodes = graph.getRootNode().getDirectReferences();
 		System.out.println("nodes in req1.kermeta_contour");
 		for (GraphNode node : innerNodes){
 			System.out.println(node.getName());
+		}*/
+		
+		CycleGraph cyleGraph = sce.getCycleGraph(f);
+		List<GraphNode> innerCycleNodes = cyleGraph.getRootNode().getDirectReferences();
+		System.out.println("nodes in req1.kermeta_contour CYCLE");
+		for (GraphNode node : innerCycleNodes){
+			System.out.println(node.getName());
 		}
+		
 	}
 
 }

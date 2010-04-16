@@ -12,6 +12,7 @@ package org.kermeta.language.filegraph.impl;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.kermeta.language.filegraph.CycleGraph;
@@ -24,10 +25,22 @@ import org.kermeta.language.filegraph.util.UriResolver;
 public class FileGraphService implements IFileGraphService{
 
 	//collect the known uris
-	private List<String> knownUris = new ArrayList<String>();
+	private HashMap<String, GraphNode> knownUris = new HashMap<String, GraphNode>();
+	
 	
 	public CycleGraph getCycleGraph(File rootFile) {
-		// TODO Auto-generated method stub
+		
+		String rootFileURI = rootFile.getPath();
+		//validate the URI (file exists on disk) 
+		String uri = UriResolver.resolveUri(rootFileURI, rootFileURI);
+		if (uri != null){
+			CycleGraph resultgraph = new CycleGraph();
+			//set the root node
+			GraphNode root = recursiveResolve(rootFileURI, rootFileURI, true);
+			root.setName(rootFileURI);
+			resultgraph.setRootNode(root);
+			return resultgraph;
+		}
 		return null;
 	}
 
@@ -43,7 +56,7 @@ public class FileGraphService implements IFileGraphService{
 		if (uri != null){
 			SimpleGraph resultgraph = new SimpleGraph();
 			//set the root node
-			GraphNode root = recursiveResolve(rootFileURI, rootFileURI);
+			GraphNode root = recursiveResolve(rootFileURI, rootFileURI, false);
 			root.setName(rootFileURI);
 			resultgraph.setRootNode(root);
 			return resultgraph;
@@ -64,12 +77,13 @@ public class FileGraphService implements IFileGraphService{
 		return null;
 	}
 
-	private GraphNode recursiveResolve(String fileUri, String rootFileURI){
+	private GraphNode recursiveResolve(String fileUri, String rootFileURI, boolean cycleMode){
 		String uri = UriResolver.resolveUri(fileUri, rootFileURI);
 		//if uri is valid
 		if (uri != null){
-			knownUris.add(uri);
+			
 			GraphNode node = new GraphNode();
+			knownUris.put(uri, node);
 			//look into content of the resource to find require
 			List<String> requires = getResourceRequires(uri);
 			//if found some require then add to the node
@@ -80,11 +94,13 @@ public class FileGraphService implements IFileGraphService{
 					String resolvedUri = UriResolver.resolveUri(requireUri,rootFileURI); 
 					if (resolvedUri != null){
 						GraphNode requiredNode = new GraphNode();
-						if (!knownUris.contains(resolvedUri)){
-							requiredNode  = recursiveResolve(resolvedUri, rootFileURI);
+						if (!knownUris.keySet().contains(resolvedUri)){
+							requiredNode  = recursiveResolve(resolvedUri, rootFileURI, cycleMode);
+						}else if (cycleMode){
+							requiredNode = knownUris.get(resolvedUri);
+							
 						}
 						requiredNode.setName(resolvedUri);
-						// if URI OK add URI to directreferencename
 						node.getDirectReferences().add(requiredNode);
 					}
 				}

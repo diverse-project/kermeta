@@ -19,7 +19,6 @@ public class UriResolver {
 				uri = s;
 			else {
 				String cleanedRequire = cleanRequireValue(s);
-				System.out.println(cleanedRequire);
 				if (cleanedRequire.equals("kermeta")
 						|| cleanedRequire.equals("java_rt_jar")) {
 					uri = cleanedRequire;
