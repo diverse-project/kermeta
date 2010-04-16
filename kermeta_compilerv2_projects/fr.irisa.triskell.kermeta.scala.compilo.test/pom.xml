@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.irisa.triskell</groupId>
 	<artifactId>kermtea.scala.compilo.test</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	
 	<repositories>
 		<repository>
@@ -48,7 +48,7 @@
 		<dependency>
 			<groupId>fr.irisa.triskell</groupId>
 			<artifactId>kermeta.compilo.scala</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 			<scope>compile</scope>
 
 			<exclusions>
@@ -180,7 +180,7 @@
 		<dependency>
 			<groupId>fr.irisa.triskell</groupId>
 			<artifactId>kermeta.scala.framework</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<version>0.0.3</version>
 			<scope>compile</scope>
 		</dependency>
 		
