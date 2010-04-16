@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/014_AspectOnKM.kmt" lineBeginAt="21" charBeginAt="307" lineEndAt="21" charEndAt="405"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="014_AspectOnKM.km#//@packages.0/language/structure/ModelingUnit"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/014_AspectOnKM.kmt" lineBeginAt="23" charBeginAt="336" lineEndAt="23" charEndAt="403"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="014_AspectOnKM.km#//@packages.0/language/structure/ModelingUnit/toto"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/014_AspectOnKM.kmt" lineBeginAt="23" charBeginAt="355" lineEndAt="23" charEndAt="359"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="014_AspectOnKM.km#//@packages.0/language/structure/ModelingUnit/toto/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/014_AspectOnKM.kmt" lineBeginAt="24" charBeginAt="384" lineEndAt="24" charEndAt="395"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="014_AspectOnKM.km#//@packages.0/language/structure/ModelingUnit/toto/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/014_AspectOnKM.kmt" lineBeginAt="24" charBeginAt="370" lineEndAt="24" charEndAt="375"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="014_AspectOnKM.km#//@packages.0/language/structure/ModelingUnit/toto/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/014_AspectOnKM.kmt" lineBeginAt="24" charBeginAt="375" lineEndAt="24" charEndAt="396"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="014_AspectOnKM.km#//@packages.0/language/structure/ModelingUnit/toto/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/014_AspectOnKM.kmt" lineBeginAt="23" charBeginAt="363" lineEndAt="23" charEndAt="403"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="014_AspectOnKM.km#//@packages.0/language/structure/ModelingUnit/toto/@body"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" traces="//@traces.6"/>
+</traceability:TraceModel>
