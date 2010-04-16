@@ -23,7 +23,10 @@ import org.kermeta.language.filegraph.util.UriResolver;
 
 public class FileGraphService implements IFileGraphService{
 
-	public CycleGraph getCycleGraph(String rootFileURI) {
+	//collect the known uris
+	private List<String> knownUris = new ArrayList<String>();
+	
+	public CycleGraph getCycleGraph(File rootFile) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -31,38 +34,21 @@ public class FileGraphService implements IFileGraphService{
 	/**
 	 * Provide the list of the URI associated to this URI
 	 */
-	public SimpleGraph getSimpleGraph(String rootFileURI) {
+	public SimpleGraph getSimpleGraph(File rootFile) {
 		
-		SimpleGraph resultgraph = new SimpleGraph();
-		GraphNode root = new GraphNode();
-		//validate the URI
-		String uri = UriResolver.resolveUri(rootFileURI);
-		System.out.println("uri : " +uri);
-		//if uri is valid
+		
+		String rootFileURI = rootFile.getPath();
+		//validate the URI (file exists on disk) 
+		String uri = UriResolver.resolveUri(rootFileURI, rootFileURI);
 		if (uri != null){
-		
-			//look into content of the resource to find require
-			//if found some require then add to the node
-			List<String> requires = getResourceRequires(uri);
-			for (String requireUri : requires){
-				//for each require build the tree according to root's direct references
-				//i.e. : validate the require URI
-				String resolvedUri = UriResolver.resolveUri(requireUri); 
-				System.out.println("requireUri : " +requireUri);
-				if (resolvedUri != null){
-					GraphNode require = new GraphNode();
-					require.setName(resolvedUri);
-					// if URI OK add URI to directreferencename
-					root.getDirectReferences().add(require); 
-				}
-			}
-		}else{
-			return null;
+			SimpleGraph resultgraph = new SimpleGraph();
+			//set the root node
+			GraphNode root = recursiveResolve(rootFileURI, rootFileURI);
+			root.setName(rootFileURI);
+			resultgraph.setRootNode(root);
+			return resultgraph;
 		}
-		//set the root node
-		root.setName(rootFileURI);
-		resultgraph.setRootNode(root);
-		return resultgraph;
+		return null;
 	}
 
 	/**
@@ -74,9 +60,38 @@ public class FileGraphService implements IFileGraphService{
 		return FileTraversal.getRequires(uri);
 	}
 
-	public List<String> getAllRequired(String rootFileURI) {
-		// TODO Auto-generated method stub
+	public List<String> getAllRequired(File rootFile) {
 		return null;
 	}
 
+	private GraphNode recursiveResolve(String fileUri, String rootFileURI){
+		String uri = UriResolver.resolveUri(fileUri, rootFileURI);
+		//if uri is valid
+		if (uri != null){
+			knownUris.add(uri);
+			GraphNode node = new GraphNode();
+			//look into content of the resource to find require
+			List<String> requires = getResourceRequires(uri);
+			//if found some require then add to the node
+			if (!requires.isEmpty()){
+				//for each require build the tree according to root's direct references
+				for (String requireUri : requires){
+					//validate the require URI
+					String resolvedUri = UriResolver.resolveUri(requireUri,rootFileURI); 
+					if (resolvedUri != null){
+						GraphNode requiredNode = new GraphNode();
+						if (!knownUris.contains(resolvedUri)){
+							requiredNode  = recursiveResolve(resolvedUri, rootFileURI);
+						}
+						requiredNode.setName(resolvedUri);
+						// if URI OK add URI to directreferencename
+						node.getDirectReferences().add(requiredNode);
+					}
+				}
+			}
+			return node;
+		}
+		return null;
+	}
+	
 }

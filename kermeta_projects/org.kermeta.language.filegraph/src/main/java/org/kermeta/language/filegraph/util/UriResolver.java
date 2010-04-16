@@ -10,7 +10,7 @@ import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 
 public class UriResolver {
 
-	public static String resolveUri(String fileUri){
+	public static String resolveUri(String fileUri, String rootFileURI){
 		String s = fileUri;
 		String resultUri = null;
 		try {
@@ -19,7 +19,7 @@ public class UriResolver {
 				uri = s;
 			else {
 				String cleanedRequire = cleanRequireValue(s);
-
+				System.out.println(cleanedRequire);
 				if (cleanedRequire.equals("kermeta")
 						|| cleanedRequire.equals("java_rt_jar")) {
 					uri = cleanedRequire;
@@ -48,17 +48,13 @@ public class UriResolver {
 					/*
 					 * Take care about relative path.
 					 */
-					/*if (!cleanedRequire.startsWith("platform:\\\\/")
-							&& !cleanedRequire.startsWith("file:")) {
-						int index = node.eResource().getURI().toString()
-								.lastIndexOf("/");
-						String path = node.eResource().getURI().toString()
-								.substring(0, index);
+					if (!cleanedRequire.startsWith("platform:\\\\/")
+							&& !cleanedRequire.startsWith("file:")&& !cleanedRequire.startsWith("/")) {
+						int index = rootFileURI.lastIndexOf("/");
+						String path = rootFileURI.substring(0, index);
 						uri = path + "/" + cleanedRequire;
 					} else
-						uri = cleanedRequire;*/
-					//TODO to replace cause hard coded
-					uri = cleanedRequire;
+						uri = cleanedRequire;
 				}
 			}
 
@@ -124,7 +120,7 @@ public class UriResolver {
 			 * the kermeta unit to import.
 			 */
 
-			resultUri = uri;
+			//resultUri = uri;
 
 			} catch (Throwable t) {
 			return null;

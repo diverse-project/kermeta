@@ -1,5 +1,6 @@
 package org.kermeta.language.filegraph;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -8,10 +9,10 @@ import java.util.List;
 */
 public interface IFileGraphService{
  	
-	 public SimpleGraph getSimpleGraph(String rootFileURI);
+	 public SimpleGraph getSimpleGraph(File rootFile);
 	 
-	 public CycleGraph getCycleGraph(String rootFileURI);
+	 public CycleGraph getCycleGraph(File rootFile);
 	 
-	 public List<String> getAllRequired(String rootFileURI);
+	 public List<String> getAllRequired(File rootFile);
 	
 }
