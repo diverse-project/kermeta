@@ -76,8 +76,8 @@ object EmbeddedMavenHelper {
             var request = new DefaultMavenExecutionRequest().setBaseDirectory(rootDirectory).setGoals(goals)
             request.setLoggingLevel(MavenExecutionRequest.LOGGING_LEVEL_ERROR);
             request.setProperty("once", "true");
-            request.setProperty("maven.test.skip", "true");
-            request.setOffline(true)
+//            request.setProperty("maven.test.skip", "true");
+ //           request.setOffline(false)
             
             
             /*MavenProject project,
