@@ -4,8 +4,13 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
 public class FileTraversal {
 
@@ -15,8 +20,12 @@ public class FileTraversal {
 
 			String sCurrentLine;
 			//read each line of the file
-			BufferedReader br = new BufferedReader(new FileReader(uri));
-			
+			URI _uri = URI.createURI(uri);
+			URIConverter converter = new ExtensibleURIConverterImpl();
+			 
+			BufferedReader br = new BufferedReader(
+					 new InputStreamReader(converter.createInputStream(_uri)));
+			 
 			while ((sCurrentLine = br.readLine()) != null) {
 				if (sCurrentLine.contains("require")&& !sCurrentLine.startsWith("//")&& 
 						!sCurrentLine.startsWith("/*")&& !sCurrentLine.startsWith("*")){
@@ -31,11 +40,11 @@ public class FileTraversal {
 
 		} catch (FileNotFoundException e) {
 
-			//e.printStackTrace();
+			e.printStackTrace();
 
 		} catch (IOException e) {
 
-			//e.printStackTrace();
+			e.printStackTrace();
 
 		}
 

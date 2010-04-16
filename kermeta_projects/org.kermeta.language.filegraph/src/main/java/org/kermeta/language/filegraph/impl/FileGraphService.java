@@ -14,6 +14,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.kermeta.language.filegraph.CycleGraph;
@@ -75,7 +76,13 @@ public class FileGraphService implements IFileGraphService{
 	}
 
 	public List<String> getAllRequired(URI rootFile) {
-		return null;
+		List<String> result = new ArrayList<String>();
+		getSimpleGraph(rootFile);
+		Set<String> uris = knownUris.keySet();
+		for (String uri : uris){
+			result.add(uri);
+		}
+		return result;
 	}
 
 	private GraphNode recursiveResolve(String fileUri, String rootFileURI, boolean cycleMode){
