@@ -18,6 +18,7 @@ import org.kermeta.language.filegraph.prefuse.data.Aggregate;
 import prefuse.Constants;
 import prefuse.Display;
 import prefuse.Visualization;
+import prefuse.action.Action;
 import prefuse.action.ActionList;
 import prefuse.action.RepaintAction;
 import prefuse.action.assignment.ColorAction;
@@ -138,19 +139,27 @@ public class DependenciesDisplay extends Display {
 		
 		// add a dynamic display of items
 		ActionList dynLayout = new ActionList(Activity.INFINITY);
-		dynLayout.add(new ForceDirectedLayout(GRAPH));
+		dynLayout.add(new ForceDirectedLayout(GRAPH, true));
 		dynLayout.add(new AggregateLayout(AGGR));
 		dynLayout.add(new RepaintAction());
 		
 		m_vis.putAction("color", colActions);
 		m_vis.putAction("layout", dynLayout);
-		
-
+				
         
 	}
 	
 	public void run() {
-		m_vis.run("color");
-		m_vis.run("layout");
+		colorActivity = m_vis.run("color");
+		layoutActivity = m_vis.run("layout");
+		
+	}
+	
+	Activity colorActivity;
+	Activity layoutActivity;
+	
+	public void stopAnimation(){
+		colorActivity.cancel();
+		layoutActivity.cancel();
 	}
 }
