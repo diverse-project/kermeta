@@ -4,10 +4,9 @@
     <groupId>fr.irisa.triskell</groupId>
     <artifactId>kermeta.compilo.scala</artifactId>
     <name>fr.irisa.triskell.kermeta.compilo.scala</name>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2</version>
     <description>Kermeta Compiler V2</description>
     <packaging>jar</packaging>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -239,7 +238,7 @@
         <dependency>
             <groupId>fr.irisa.triskell</groupId>
             <artifactId>kermeta.scala.framework</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
+            <version>0.0.3</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
