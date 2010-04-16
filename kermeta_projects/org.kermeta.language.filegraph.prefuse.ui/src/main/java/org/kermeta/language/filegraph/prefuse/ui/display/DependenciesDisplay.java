@@ -46,7 +46,7 @@ public class DependenciesDisplay extends Display {
     public static final String NODE_LABEL = "label";
     public static final String AGGR_COLORID = "color.id";
     
-    public static final int NB_AGGREGATE_COLOR = 3;
+    public static final int NB_AGGREGATE_COLOR = 7;
     
 	public DependenciesDisplay(Graph graph, List<Aggregate> aggregates) {
 		// initialize the display content (m_viz)
@@ -114,10 +114,14 @@ public class DependenciesDisplay extends Display {
 		ColorAction aStroke = new ColorAction(AGGR, VisualItem.STROKECOLOR);
         aStroke.setDefaultColor(ColorLib.gray(200));
         aStroke.add("_hover", ColorLib.rgb(255,100,100));        
-        int[] palette = new int[] {
+        int[] palette = new int[] { // colors id for the Aggregates
                 ColorLib.rgba(255,200,200,150),
                 ColorLib.rgba(200,255,200,150),
-                ColorLib.rgba(200,200,255,150)
+                ColorLib.rgba(219,219,112,150),
+                ColorLib.rgba(153,204,50,150),
+                ColorLib.rgba(234,173,234,150),
+                ColorLib.rgba(200,200,255,150),
+                ColorLib.rgba(255,99,71,150)
             };
          ColorAction aFill = new DataColorAction(AGGR, AGGR_COLORID,
                     Constants.NOMINAL, VisualItem.FILLCOLOR, palette);
