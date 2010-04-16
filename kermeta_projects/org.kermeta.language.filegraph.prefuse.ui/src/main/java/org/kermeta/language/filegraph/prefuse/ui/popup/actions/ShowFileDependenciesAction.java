@@ -1,6 +1,5 @@
 package org.kermeta.language.filegraph.prefuse.ui.popup.actions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +20,6 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.language.filegraph.CycleGraph;
 import org.kermeta.language.filegraph.GraphNode;
-import org.kermeta.language.filegraph.IFileGraphService;
-import org.kermeta.language.filegraph.SimpleGraph;
 import org.kermeta.language.filegraph.prefuse.controls.AggregateDragControl;
 import org.kermeta.language.filegraph.prefuse.data.Aggregate;
 import org.kermeta.language.filegraph.prefuse.data.FileGraphToPrefuseConverter;
@@ -31,9 +28,9 @@ import org.kermeta.language.filegraph.prefuse.ui.display.DependenciesDisplay;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
+import org.kermeta.language.filegraph.IFileGraphService;
 import filegraph.mockup.FileGraphService;
 
-import prefuse.controls.DragControl;
 import prefuse.controls.PanControl;
 import prefuse.controls.ZoomControl;
 import prefuse.data.Graph;
@@ -74,15 +71,15 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 				
 				try {
 					// get the service (we expect only one)
-			/*		BundleContext context = Activator.getDefault().context;
+					BundleContext context = Activator.getDefault().context;
 					ServiceReference ref = context.getServiceReference(IFileGraphService.class.getName());
 					IFileGraphService fileGraphService = (IFileGraphService)context.getService(ref);
 					
 					// computer the graph
 					CycleGraph cycleGraph = fileGraphService.getCycleGraph(selectedFile.toString());
-			 */		
+			 		
 					// TEST use mockup
-					CycleGraph cycleGraph = new FileGraphService().getCycleGraph(selectedFile.toString());
+			//		CycleGraph cycleGraph = new FileGraphService().getCycleGraph(selectedFile.toString());
 					
 					// transform the graph for prefuse
 					Map<GraphNode, Node> convertedNodes = new HashMap<GraphNode, Node>();
