@@ -53,7 +53,7 @@ public class TypeDefinitionHelper {
 	static public List<TypeDefinition> getAllAspects(KermetaUnit rootUnit, String typeDefinitionQualifiedName){
 		List<TypeDefinition> result = new UniqueEList<TypeDefinition>();
 		List<KermetaUnit> searchedUnits = KermetaUnitHelper.getAllImportedKermetaUnits(rootUnit);
-		searchedUnits.add(rootUnit);
+		searchedUnits.add(0,rootUnit);
 		for ( KermetaUnit importedUnit : searchedUnits ) {
 			TypeDefinition entry = importedUnit.getTypeDefinitionByQualifiedName( typeDefinitionQualifiedName);
 			if(entry!= null)
