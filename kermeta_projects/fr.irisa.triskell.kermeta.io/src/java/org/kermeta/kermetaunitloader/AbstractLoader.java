@@ -93,6 +93,8 @@ public abstract class AbstractLoader {
 				}
 			}
 		}
+		// the cache cannot be reliable before all units are loaded, next call should recalculate it
+		loadedUnit.getAllImportedKermetaUnitsCache().clear();
 		
 		// from this point the commands must apply to all required units
 		// they apply to all required unit in order to ensure homogeneous load of the data in units 
@@ -107,6 +109,9 @@ public abstract class AbstractLoader {
 		// DVK: Hack :the cache build in the previous step may be incomplete, (because all super type may not have been set when first called :-( ) reset it
 		// a better solution would be to better separate the actions needing allOperations and the typesetting step
 		loadedUnit.getTypeDefinitionContextsCache().clear();
+		for(KermetaUnit ku : KermetaUnitHelper.getAllImportedKermetaUnits(loadedUnit)){
+			ku.getTypeDefinitionContextsCache().clear();
+		}
 		performSynchronizedCommand(CommandStep.supertypeSetting);
 		performSynchronizedCommand(CommandStep.bodies_and_opposite_Setting);
 		performSynchronizedCommand(CommandStep.annotationAddition);
