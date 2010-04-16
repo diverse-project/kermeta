@@ -9,17 +9,16 @@
             nameFilter="*.kmt"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
-               label="Kermeta"
-               path="additions"
-               id="org.kermeta.language.filegraph.prefuse.ui.menu1">
-            <separator
-                  name="group1">
-            </separator>
-         </menu>
+	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+	         label="KerMeta"
+	         path="additions">
+      		<separator name="kermetagroupextra"/>
+		</menu>
          <action
                label="Show file dependencies"
+               icon="icons/prefuse_aggregategraph.png"
                class="org.kermeta.language.filegraph.prefuse.ui.popup.actions.ShowFileDependenciesAction"
-               menubarPath="org.kermeta.language.filegraph.prefuse.ui.menu1/group1"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroupextra"
                enablesFor="1"
                id="org.kermeta.language.filegraph.prefuse.ui.newAction">
          </action>
