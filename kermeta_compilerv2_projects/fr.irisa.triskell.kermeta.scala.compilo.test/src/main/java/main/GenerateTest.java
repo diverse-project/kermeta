@@ -1,10 +1,8 @@
 package main;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,21 +62,22 @@ public class GenerateTest {
 		
 
 		
-		StringTemplateGroup group = new StringTemplateGroup("tests");
-		StringTemplate st = group.getInstanceOf("group/templates/TestCompiloCases");
-		StringBuilder output = new StringBuilder();
-		output.append(st.toString());
-		for (String s : files)
-			System.err.println(s);
 		
 
 		for (String s : files){		
-			StringTemplate test = group.getInstanceOf("group/templates/Tests");
+
 			String testRep = s.substring(0,s.lastIndexOf("/"));
 			String testname =   s.substring(s.lastIndexOf("/")+1, s.length()-3);
+			StringTemplateGroup group = new StringTemplateGroup("tests");
+//			StringTemplate st = group.getInstanceOf("group/templates/TestCompiloCases");
+			StringBuilder output = new StringBuilder();
+			output.append("package fr.irisa.triskell.scala.compilo.test;\n import org.junit.Test;\n	public class " +testRep.replace("/", "_") + testname.replace(".", "") + " extends TestCompiloCases{\n");
+
 			
 			//System.err.println(testRep);
 			//System.err.println(testname);
+			StringTemplate test = group.getInstanceOf("group/templates/Tests");
+			
 			output.append("\t");
 
 			test.setAttribute("testname", testname);
@@ -86,24 +85,27 @@ public class GenerateTest {
 			test.setAttribute("testRep", testRep);			
 			output.append(test.toString());
 			output.append("\n");
+			File f = new File("src/test/java/fr/irisa/triskell/scala/compilo/test/"+ testRep.replace("/", "_") + testname.replace(".", "")+ ".java");
+			
+			output.append("}");
+
+			try {
+				PrintWriter writer  =new PrintWriter(f);
+				writer.append(output.toString());
+				writer.flush();
+				writer.close();
+			
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 
 		}
 		
 		
-		output.append("}");
 		
 		//System.out.println(output.toString());
-		File f = new File("src/test/java/fr/irisa/triskell/scala/compilo/test/TestCompiloCases.java");
-		try {
-			PrintWriter writer  =new PrintWriter(f);
-			writer.append(output.toString());
-			writer.flush();
-			writer.close();
-		
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 	}
 	
