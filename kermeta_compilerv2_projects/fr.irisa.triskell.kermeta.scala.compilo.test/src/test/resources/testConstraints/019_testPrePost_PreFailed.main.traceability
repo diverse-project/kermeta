@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <traces sourceReferences="//@references.16" targetReferences="//@references.17" description="//@messages.8"/>
+  <traces sourceReferences="//@references.18" targetReferences="//@references.19" description="//@messages.9"/>
+  <traces sourceReferences="//@references.20" targetReferences="//@references.21" description="//@messages.10"/>
+  <traces sourceReferences="//@references.22" targetReferences="//@references.23" description="//@messages.11"/>
+  <traces sourceReferences="//@references.24" targetReferences="//@references.25" description="//@messages.12"/>
+  <traces sourceReferences="//@references.26" targetReferences="//@references.27" description="//@messages.13"/>
+  <traces sourceReferences="//@references.28" targetReferences="//@references.29" description="//@messages.14"/>
+  <traces sourceReferences="//@references.30" targetReferences="//@references.31" description="//@messages.15"/>
+  <traces sourceReferences="//@references.32" targetReferences="//@references.33" description="//@messages.16"/>
+  <traces sourceReferences="//@references.34" targetReferences="//@references.35" description="//@messages.17"/>
+  <traces sourceReferences="//@references.36" targetReferences="//@references.37" description="//@messages.18"/>
+  <traces sourceReferences="//@references.38" targetReferences="//@references.39" description="//@messages.19"/>
+  <traces sourceReferences="//@references.40" targetReferences="//@references.41" description="//@messages.20"/>
+  <traces sourceReferences="//@references.42" targetReferences="//@references.43" description="//@messages.21"/>
+  <traces sourceReferences="//@references.44" targetReferences="//@references.45" description="//@messages.22"/>
+  <traces sourceReferences="//@references.46" targetReferences="//@references.47" description="//@messages.23"/>
+  <traces sourceReferences="//@references.48" targetReferences="//@references.49" description="//@messages.24"/>
+  <traces sourceReferences="//@references.50" targetReferences="//@references.51" description="//@messages.25"/>
+  <traces sourceReferences="//@references.52" targetReferences="//@references.53" description="//@messages.26"/>
+  <traces sourceReferences="//@references.54" targetReferences="//@references.55" description="//@messages.27"/>
+  <traces sourceReferences="//@references.56" targetReferences="//@references.57" description="//@messages.28"/>
+  <traces sourceReferences="//@references.58" targetReferences="//@references.59" description="//@messages.29"/>
+  <traces sourceReferences="//@references.60" targetReferences="//@references.61" description="//@messages.30"/>
+  <traces sourceReferences="//@references.62" targetReferences="//@references.63" description="//@messages.31"/>
+  <traces sourceReferences="//@references.64" targetReferences="//@references.65" description="//@messages.32"/>
+  <traces sourceReferences="//@references.66" targetReferences="//@references.67" description="//@messages.33"/>
+  <traces sourceReferences="//@references.68" targetReferences="//@references.69" description="//@messages.34"/>
+  <traces sourceReferences="//@references.70" targetReferences="//@references.71" description="//@messages.35"/>
+  <traces sourceReferences="//@references.72" targetReferences="//@references.73" description="//@messages.36"/>
+  <traces sourceReferences="//@references.74" targetReferences="//@references.75" description="//@messages.37"/>
+  <traces sourceReferences="//@references.76" targetReferences="//@references.77" description="//@messages.38"/>
+  <traces sourceReferences="//@references.78" targetReferences="//@references.79" description="//@messages.39"/>
+  <traces sourceReferences="//@references.80" targetReferences="//@references.81" description="//@messages.40"/>
+  <traces sourceReferences="//@references.82" targetReferences="//@references.83" description="//@messages.41"/>
+  <traces sourceReferences="//@references.84" targetReferences="//@references.85" description="//@messages.42"/>
+  <traces sourceReferences="//@references.86" targetReferences="//@references.87" description="//@messages.43"/>
+  <traces sourceReferences="//@references.88" targetReferences="//@references.89" description="//@messages.44"/>
+  <traces sourceReferences="//@references.90" targetReferences="//@references.91" description="//@messages.45"/>
+  <traces sourceReferences="//@references.92" targetReferences="//@references.93" description="//@messages.46"/>
+  <traces sourceReferences="//@references.94" targetReferences="//@references.95" description="//@messages.47"/>
+  <traces sourceReferences="//@references.96" targetReferences="//@references.97" description="//@messages.48"/>
+  <traces sourceReferences="//@references.98" targetReferences="//@references.99" description="//@messages.49"/>
+  <traces sourceReferences="//@references.100" targetReferences="//@references.101" description="//@messages.50"/>
+  <traces sourceReferences="//@references.102" targetReferences="//@references.103" description="//@messages.51"/>
+  <traces sourceReferences="//@references.104" targetReferences="//@references.105" description="//@messages.52"/>
+  <traces sourceReferences="//@references.106" targetReferences="//@references.107" description="//@messages.53"/>
+  <traces sourceReferences="//@references.108" targetReferences="//@references.109" description="//@messages.54"/>
+  <traces sourceReferences="//@references.110" targetReferences="//@references.111" description="//@messages.55"/>
+  <traces sourceReferences="//@references.112" targetReferences="//@references.113" description="//@messages.56"/>
+  <traces sourceReferences="//@references.114" targetReferences="//@references.115" description="//@messages.57"/>
+  <traces sourceReferences="//@references.116" targetReferences="//@references.117" description="//@messages.58"/>
+  <traces sourceReferences="//@references.118" targetReferences="//@references.119" description="//@messages.59"/>
+  <traces sourceReferences="//@references.120" targetReferences="//@references.121" description="//@messages.60"/>
+  <traces sourceReferences="//@references.122" targetReferences="//@references.123" description="//@messages.61"/>
+  <traces sourceReferences="//@references.124" targetReferences="//@references.125" description="//@messages.62"/>
+  <traces sourceReferences="//@references.126" targetReferences="//@references.127" description="//@messages.63"/>
+  <traces sourceReferences="//@references.128" targetReferences="//@references.129" description="//@messages.64"/>
+  <traces sourceReferences="//@references.130" targetReferences="//@references.131" description="//@messages.65"/>
+  <traces sourceReferences="//@references.132" targetReferences="//@references.133" description="//@messages.66"/>
+  <traces sourceReferences="//@references.134" targetReferences="//@references.135" description="//@messages.67"/>
+  <traces sourceReferences="//@references.136" targetReferences="//@references.137" description="//@messages.68"/>
+  <traces sourceReferences="//@references.138" targetReferences="//@references.139" description="//@messages.69"/>
+  <traces sourceReferences="//@references.140" targetReferences="//@references.141" description="//@messages.70"/>
+  <traces sourceReferences="//@references.142" targetReferences="//@references.143" description="//@messages.71"/>
+  <traces sourceReferences="//@references.144" targetReferences="//@references.145" description="//@messages.72"/>
+  <traces sourceReferences="//@references.146" targetReferences="//@references.147" description="//@messages.73"/>
+  <traces sourceReferences="//@references.148" targetReferences="//@references.149" description="//@messages.74"/>
+  <traces sourceReferences="//@references.150" targetReferences="//@references.151" description="//@messages.75"/>
+  <traces sourceReferences="//@references.152" targetReferences="//@references.153" description="//@messages.76"/>
+  <traces sourceReferences="//@references.154" targetReferences="//@references.155" description="//@messages.77"/>
+  <traces sourceReferences="//@references.156" targetReferences="//@references.157" description="//@messages.78"/>
+  <traces sourceReferences="//@references.158" targetReferences="//@references.159" description="//@messages.79"/>
+  <traces sourceReferences="//@references.160" targetReferences="//@references.161" description="//@messages.80"/>
+  <traces sourceReferences="//@references.162" targetReferences="//@references.163" description="//@messages.81"/>
+  <traces sourceReferences="//@references.164" targetReferences="//@references.165" description="//@messages.82"/>
+  <traces sourceReferences="//@references.166" targetReferences="//@references.167" description="//@messages.83"/>
+  <traces sourceReferences="//@references.168" targetReferences="//@references.169" description="//@messages.84"/>
+  <traces sourceReferences="//@references.170" targetReferences="//@references.171" description="//@messages.85"/>
+  <traces sourceReferences="//@references.172" targetReferences="//@references.173" description="//@messages.86"/>
+  <traces sourceReferences="//@references.174" targetReferences="//@references.175" description="//@messages.87"/>
+  <traces sourceReferences="//@references.176" targetReferences="//@references.177" description="//@messages.88"/>
+  <traces sourceReferences="//@references.178" targetReferences="//@references.179" description="//@messages.89"/>
+  <traces sourceReferences="//@references.180" targetReferences="//@references.181" description="//@messages.90"/>
+  <traces sourceReferences="//@references.182" targetReferences="//@references.183" description="//@messages.91"/>
+  <traces sourceReferences="//@references.184" targetReferences="//@references.185" description="//@messages.92"/>
+  <traces sourceReferences="//@references.186" targetReferences="//@references.187" description="//@messages.93"/>
+  <traces sourceReferences="//@references.188" targetReferences="//@references.189" description="//@messages.94"/>
+  <traces sourceReferences="//@references.190" targetReferences="//@references.191" description="//@messages.95"/>
+  <traces sourceReferences="//@references.192" targetReferences="//@references.193" description="//@messages.96"/>
+  <traces sourceReferences="//@references.194" targetReferences="//@references.195" description="//@messages.97"/>
+  <traces sourceReferences="//@references.196" targetReferences="//@references.197" description="//@messages.98"/>
+  <traces sourceReferences="//@references.198" targetReferences="//@references.199" description="//@messages.99"/>
+  <traces sourceReferences="//@references.200" targetReferences="//@references.201" description="//@messages.100"/>
+  <traces sourceReferences="//@references.202" targetReferences="//@references.203" description="//@messages.101"/>
+  <traces sourceReferences="//@references.204" targetReferences="//@references.205" description="//@messages.102"/>
+  <traces sourceReferences="//@references.206" targetReferences="//@references.207" description="//@messages.103"/>
+  <traces sourceReferences="//@references.208" targetReferences="//@references.209" description="//@messages.104"/>
+  <traces sourceReferences="//@references.210" targetReferences="//@references.211" description="//@messages.105"/>
+  <traces sourceReferences="//@references.212" targetReferences="//@references.213" description="//@messages.106"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="15" charBeginAt="263" lineEndAt="15" charEndAt="1316"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="63" charBeginAt="1318" lineEndAt="63" charEndAt="1561"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="66" charBeginAt="1369" lineEndAt="66" charEndAt="1391"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/str"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="65" charBeginAt="1338" lineEndAt="65" charEndAt="1366"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/strParent"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="68" charBeginAt="1410" lineEndAt="68" charEndAt="1424"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="68" charBeginAt="1395" lineEndAt="68" charEndAt="1557"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="69" charBeginAt="1427" lineEndAt="69" charEndAt="1467"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@pre.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="70" charBeginAt="1469" lineEndAt="70" charEndAt="1542"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@post.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="18" charBeginAt="330" lineEndAt="18" charEndAt="357"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/strMain"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="17" charBeginAt="307" lineEndAt="17" charEndAt="328"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/b"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="26" charBeginAt="489" lineEndAt="26" charEndAt="1043"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="50" charBeginAt="1067" lineEndAt="50" charEndAt="1081"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="50" charBeginAt="1055" lineEndAt="50" charEndAt="1308"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="51" charBeginAt="1088" lineEndAt="51" charEndAt="1102"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@pre.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="52" charBeginAt="1108" lineEndAt="52" charEndAt="1137"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@post.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="53" charBeginAt="1143" lineEndAt="53" charEndAt="1212"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@post.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="20" charBeginAt="361" lineEndAt="20" charEndAt="479"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="26" charBeginAt="509" lineEndAt="26" charEndAt="513"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="20" charBeginAt="380" lineEndAt="20" charEndAt="384"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/main/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="69" charBeginAt="1457" lineEndAt="69" charEndAt="1463"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@pre.0/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="69" charBeginAt="1450" lineEndAt="69" charEndAt="1453"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@pre.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="69" charBeginAt="1454" lineEndAt="69" charEndAt="1456"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@pre.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="69" charBeginAt="1447" lineEndAt="69" charEndAt="1467"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@pre.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="70" charBeginAt="1532" lineEndAt="70" charEndAt="1538"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="70" charBeginAt="1525" lineEndAt="70" charEndAt="1528"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="70" charBeginAt="1529" lineEndAt="70" charEndAt="1531"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="70" charBeginAt="1507" lineEndAt="70" charEndAt="1519"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="70" charBeginAt="1494" lineEndAt="70" charEndAt="1503"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="70" charBeginAt="1504" lineEndAt="70" charEndAt="1506"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="70" charBeginAt="1521" lineEndAt="70" charEndAt="1524"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="70" charBeginAt="1491" lineEndAt="70" charEndAt="1542"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/MainParent/truc/@post.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="28" charBeginAt="533" lineEndAt="28" charEndAt="536"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="28" charBeginAt="540" lineEndAt="28" charEndAt="546"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="28" charBeginAt="533" lineEndAt="28" charEndAt="546"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="29" charBeginAt="555" lineEndAt="29" charEndAt="564"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="29" charBeginAt="568" lineEndAt="29" charEndAt="580"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.1/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="29" charBeginAt="555" lineEndAt="29" charEndAt="580"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="30" charBeginAt="589" lineEndAt="30" charEndAt="590"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.2/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="30" charBeginAt="594" lineEndAt="30" charEndAt="598"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.2/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="30" charBeginAt="589" lineEndAt="30" charEndAt="598"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="31" charBeginAt="603" lineEndAt="31" charEndAt="610"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.3/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="31" charBeginAt="614" lineEndAt="31" charEndAt="618"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.3/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="31" charBeginAt="603" lineEndAt="31" charEndAt="618"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="34" charBeginAt="658" lineEndAt="34" charEndAt="659"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.43">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.4/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="34" charBeginAt="663" lineEndAt="34" charEndAt="668"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.44">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.4/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="34" charBeginAt="658" lineEndAt="34" charEndAt="668"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.45">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.4"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="37" charBeginAt="693" lineEndAt="37" charEndAt="699"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.46">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="37" charBeginAt="688" lineEndAt="37" charEndAt="692"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.47">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="38" charBeginAt="720" lineEndAt="38" charEndAt="725"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.48">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="38" charBeginAt="713" lineEndAt="38" charEndAt="719"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.49">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="39" charBeginAt="749" lineEndAt="39" charEndAt="771"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.50">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="40" charBeginAt="797" lineEndAt="40" charEndAt="800"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.51">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.0/@body.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="40" charBeginAt="800" lineEndAt="40" charEndAt="809"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.52">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="40" charBeginAt="783" lineEndAt="40" charEndAt="788"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.53">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.0/@body.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="40" charBeginAt="788" lineEndAt="40" charEndAt="810"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.54">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="41" charBeginAt="835" lineEndAt="41" charEndAt="838"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.55">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.0/@body.1/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="41" charBeginAt="838" lineEndAt="41" charEndAt="846"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.56">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.0/@body.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="41" charBeginAt="821" lineEndAt="41" charEndAt="826"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.57">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.0/@body.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="41" charBeginAt="826" lineEndAt="41" charEndAt="847"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.58">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.0/@body.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="42" charBeginAt="865" lineEndAt="42" charEndAt="870"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.59">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.0/@body.2/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="42" charBeginAt="858" lineEndAt="42" charEndAt="864"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.60">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.0/@body.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="39" charBeginAt="735" lineEndAt="39" charEndAt="871"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.61">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="43" charBeginAt="895" lineEndAt="43" charEndAt="916"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.62">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.1/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.63" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="44" charBeginAt="942" lineEndAt="44" charEndAt="945"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.63">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.1/@body.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.64" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="44" charBeginAt="945" lineEndAt="44" charEndAt="954"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.64">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.1/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.65" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="44" charBeginAt="928" lineEndAt="44" charEndAt="933"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.65">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.1/@body.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.66" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="44" charBeginAt="933" lineEndAt="44" charEndAt="955"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.66">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.1/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.67" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="45" charBeginAt="980" lineEndAt="45" charEndAt="983"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.67">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.1/@body.1/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.68" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="45" charBeginAt="983" lineEndAt="45" charEndAt="991"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.68">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.1/@body.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.69" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="45" charBeginAt="966" lineEndAt="45" charEndAt="971"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.69">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.1/@body.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.70" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="45" charBeginAt="971" lineEndAt="45" charEndAt="992"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.70">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.1/@body.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.71" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="46" charBeginAt="1010" lineEndAt="46" charEndAt="1014"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.71">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.1/@body.2/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.72" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="46" charBeginAt="1003" lineEndAt="46" charEndAt="1009"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.72">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.1/@body.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.73" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="43" charBeginAt="881" lineEndAt="43" charEndAt="1015"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.73">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5/@rescueBlock.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.74" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="36" charBeginAt="681" lineEndAt="36" charEndAt="1029"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.74">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body/@statement.5"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.75" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="27" charBeginAt="522" lineEndAt="27" charEndAt="1043"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.75">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/test0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.76" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="51" charBeginAt="1101" lineEndAt="51" charEndAt="1102"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.76">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@pre.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.77" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="56" charBeginAt="1252" lineEndAt="56" charEndAt="1258"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.77">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.78" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="56" charBeginAt="1238" lineEndAt="56" charEndAt="1243"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.78">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.79" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="56" charBeginAt="1243" lineEndAt="56" charEndAt="1259"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.79">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.80" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="57" charBeginAt="1268" lineEndAt="57" charEndAt="1271"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.80">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@body/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.81" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="57" charBeginAt="1275" lineEndAt="57" charEndAt="1280"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.81">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@body/@statement.1/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.82" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="57" charBeginAt="1268" lineEndAt="57" charEndAt="1280"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.82">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.83" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="58" charBeginAt="1289" lineEndAt="58" charEndAt="1290"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.83">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@body/@statement.2/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.84" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="58" charBeginAt="1294" lineEndAt="58" charEndAt="1299"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.84">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@body/@statement.2/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.85" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="58" charBeginAt="1289" lineEndAt="58" charEndAt="1299"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.85">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.86" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="55" charBeginAt="1223" lineEndAt="55" charEndAt="1308"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.86">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.87" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="52" charBeginAt="1126" lineEndAt="52" charEndAt="1133"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.87">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@post.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.88" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="52" charBeginAt="1123" lineEndAt="52" charEndAt="1137"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.88">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@post.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.89" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="53" charBeginAt="1203" lineEndAt="53" charEndAt="1208"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.89">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.90" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="53" charBeginAt="1196" lineEndAt="53" charEndAt="1199"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.90">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.91" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="53" charBeginAt="1200" lineEndAt="53" charEndAt="1202"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.91">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.92" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="53" charBeginAt="1179" lineEndAt="53" charEndAt="1191"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.92">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.93" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="53" charBeginAt="1162" lineEndAt="53" charEndAt="1171"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.93">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.94" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="53" charBeginAt="1176" lineEndAt="53" charEndAt="1178"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.94">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.95" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="53" charBeginAt="1192" lineEndAt="53" charEndAt="1195"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.95">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.96" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="53" charBeginAt="1159" lineEndAt="53" charEndAt="1212"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.96">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/truc/@post.1/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.97" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="21" charBeginAt="421" lineEndAt="21" charEndAt="431"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.97">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/main/@body/@statement.0/@initialization/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.98" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="21" charBeginAt="431" lineEndAt="21" charEndAt="435"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.98">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/main/@body/@statement.0/@initialization"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.99" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="21" charBeginAt="405" lineEndAt="21" charEndAt="415"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.99">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/main/@body/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.100" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="21" charBeginAt="396" lineEndAt="21" charEndAt="435"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.100">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/main/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.101" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="22" charBeginAt="445" lineEndAt="22" charEndAt="449"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.101">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/main/@body/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.102" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="22" charBeginAt="438" lineEndAt="22" charEndAt="440"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.102">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/main/@body/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.103" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="22" charBeginAt="440" lineEndAt="22" charEndAt="450"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.103">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/main/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.104" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="23" charBeginAt="453" lineEndAt="23" charEndAt="455"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.104">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/main/@body/@statement.2/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.105" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="23" charBeginAt="455" lineEndAt="23" charEndAt="471"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.105">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/main/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.106" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/019_testPrePost_PreFailed.main.kmt" lineBeginAt="20" charBeginAt="388" lineEndAt="20" charEndAt="479"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.106">
+    <refObject href="019_testPrePost_PreFailed.main.km#//@packages.1/Main/main/@body"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.7"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.8"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.9"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.10"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.11"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.12"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.13"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.14"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.15"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.16"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.17"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.18"/>
+  <messages language="english" type="Mapping" traces="//@traces.19"/>
+  <messages language="english" type="Mapping" traces="//@traces.20"/>
+  <messages language="english" type="Mapping" traces="//@traces.21"/>
+  <messages language="english" type="Mapping" traces="//@traces.22"/>
+  <messages language="english" type="Mapping" traces="//@traces.23"/>
+  <messages language="english" type="Mapping" traces="//@traces.24"/>
+  <messages language="english" type="Mapping" traces="//@traces.25"/>
+  <messages language="english" type="Mapping" traces="//@traces.26"/>
+  <messages language="english" type="Mapping" traces="//@traces.27"/>
+  <messages language="english" type="Mapping" traces="//@traces.28"/>
+  <messages language="english" type="Mapping" traces="//@traces.29"/>
+  <messages language="english" type="Mapping" traces="//@traces.30"/>
+  <messages language="english" type="Mapping" traces="//@traces.31"/>
+  <messages language="english" type="Mapping" traces="//@traces.32"/>
+  <messages language="english" type="Mapping" traces="//@traces.33"/>
+  <messages language="english" type="Mapping" traces="//@traces.34"/>
+  <messages language="english" type="Mapping" traces="//@traces.35"/>
+  <messages language="english" type="Mapping" traces="//@traces.36"/>
+  <messages language="english" type="Mapping" traces="//@traces.37"/>
+  <messages language="english" type="Mapping" traces="//@traces.38"/>
+  <messages language="english" type="Mapping" traces="//@traces.39"/>
+  <messages language="english" type="Mapping" traces="//@traces.40"/>
+  <messages language="english" type="Mapping" traces="//@traces.41"/>
+  <messages language="english" type="Mapping" traces="//@traces.42"/>
+  <messages language="english" type="Mapping" traces="//@traces.43"/>
+  <messages language="english" type="Mapping" traces="//@traces.44"/>
+  <messages language="english" type="Mapping" traces="//@traces.45"/>
+  <messages language="english" type="Mapping" traces="//@traces.46"/>
+  <messages language="english" type="Mapping" traces="//@traces.47"/>
+  <messages language="english" type="Mapping" traces="//@traces.48"/>
+  <messages language="english" type="Mapping" traces="//@traces.49"/>
+  <messages language="english" type="Mapping" traces="//@traces.50"/>
+  <messages language="english" type="Mapping" traces="//@traces.51"/>
+  <messages language="english" type="Mapping" traces="//@traces.52"/>
+  <messages language="english" type="Mapping" traces="//@traces.53"/>
+  <messages language="english" type="Mapping" traces="//@traces.54"/>
+  <messages language="english" type="Mapping" traces="//@traces.55"/>
+  <messages language="english" type="Mapping" traces="//@traces.56"/>
+  <messages language="english" type="Mapping" traces="//@traces.57"/>
+  <messages language="english" type="Mapping" traces="//@traces.58"/>
+  <messages language="english" type="Mapping" traces="//@traces.59"/>
+  <messages language="english" type="Mapping" traces="//@traces.60"/>
+  <messages language="english" type="Mapping" traces="//@traces.61"/>
+  <messages language="english" type="Mapping" traces="//@traces.62"/>
+  <messages language="english" type="Mapping" traces="//@traces.63"/>
+  <messages language="english" type="Mapping" traces="//@traces.64"/>
+  <messages language="english" type="Mapping" traces="//@traces.65"/>
+  <messages language="english" type="Mapping" traces="//@traces.66"/>
+  <messages language="english" type="Mapping" traces="//@traces.67"/>
+  <messages language="english" type="Mapping" traces="//@traces.68"/>
+  <messages language="english" type="Mapping" traces="//@traces.69"/>
+  <messages language="english" type="Mapping" traces="//@traces.70"/>
+  <messages language="english" type="Mapping" traces="//@traces.71"/>
+  <messages language="english" type="Mapping" traces="//@traces.72"/>
+  <messages language="english" type="Mapping" traces="//@traces.73"/>
+  <messages language="english" type="Mapping" traces="//@traces.74"/>
+  <messages language="english" type="Mapping" traces="//@traces.75"/>
+  <messages language="english" type="Mapping" traces="//@traces.76"/>
+  <messages language="english" type="Mapping" traces="//@traces.77"/>
+  <messages language="english" type="Mapping" traces="//@traces.78"/>
+  <messages language="english" type="Mapping" traces="//@traces.79"/>
+  <messages language="english" type="Mapping" traces="//@traces.80"/>
+  <messages language="english" type="Mapping" traces="//@traces.81"/>
+  <messages language="english" type="Mapping" traces="//@traces.82"/>
+  <messages language="english" type="Mapping" traces="//@traces.83"/>
+  <messages language="english" type="Mapping" traces="//@traces.84"/>
+  <messages language="english" type="Mapping" traces="//@traces.85"/>
+  <messages language="english" type="Mapping" traces="//@traces.86"/>
+  <messages language="english" type="Mapping" traces="//@traces.87"/>
+  <messages language="english" type="Mapping" traces="//@traces.88"/>
+  <messages language="english" type="Mapping" traces="//@traces.89"/>
+  <messages language="english" type="Mapping" traces="//@traces.90"/>
+  <messages language="english" type="Mapping" traces="//@traces.91"/>
+  <messages language="english" type="Mapping" traces="//@traces.92"/>
+  <messages language="english" type="Mapping" traces="//@traces.93"/>
+  <messages language="english" type="Mapping" traces="//@traces.94"/>
+  <messages language="english" type="Mapping" traces="//@traces.95"/>
+  <messages language="english" type="Mapping" traces="//@traces.96"/>
+  <messages language="english" type="Mapping" traces="//@traces.97"/>
+  <messages language="english" type="Mapping" traces="//@traces.98"/>
+  <messages language="english" type="Mapping" traces="//@traces.99"/>
+  <messages language="english" type="Mapping" traces="//@traces.100"/>
+  <messages language="english" type="Mapping" traces="//@traces.101"/>
+  <messages language="english" type="Mapping" traces="//@traces.102"/>
+  <messages language="english" type="Mapping" traces="//@traces.103"/>
+  <messages language="english" type="Mapping" traces="//@traces.104"/>
+  <messages language="english" type="Mapping" traces="//@traces.105"/>
+  <messages language="english" type="Mapping" traces="//@traces.106"/>
+</traceability:TraceModel>

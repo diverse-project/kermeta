@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <traces sourceReferences="//@references.16" targetReferences="//@references.17" description="//@messages.8"/>
+  <traces sourceReferences="//@references.18" targetReferences="//@references.19" description="//@messages.9"/>
+  <traces sourceReferences="//@references.20" targetReferences="//@references.21" description="//@messages.10"/>
+  <traces sourceReferences="//@references.22" targetReferences="//@references.23" description="//@messages.11"/>
+  <traces sourceReferences="//@references.24" targetReferences="//@references.25" description="//@messages.12"/>
+  <traces sourceReferences="//@references.26" targetReferences="//@references.27" description="//@messages.13"/>
+  <traces sourceReferences="//@references.28" targetReferences="//@references.29" description="//@messages.14"/>
+  <traces sourceReferences="//@references.30" targetReferences="//@references.31" description="//@messages.15"/>
+  <traces sourceReferences="//@references.32" targetReferences="//@references.33" description="//@messages.16"/>
+  <traces sourceReferences="//@references.34" targetReferences="//@references.35" description="//@messages.17"/>
+  <traces sourceReferences="//@references.36" targetReferences="//@references.37" description="//@messages.18"/>
+  <traces sourceReferences="//@references.38" targetReferences="//@references.39" description="//@messages.19"/>
+  <traces sourceReferences="//@references.40" targetReferences="//@references.41" description="//@messages.20"/>
+  <traces sourceReferences="//@references.42" targetReferences="//@references.43" description="//@messages.21"/>
+  <traces sourceReferences="//@references.44" targetReferences="//@references.45" description="//@messages.22"/>
+  <traces sourceReferences="//@references.46" targetReferences="//@references.47" description="//@messages.23"/>
+  <traces sourceReferences="//@references.48" targetReferences="//@references.49" description="//@messages.24"/>
+  <traces sourceReferences="//@references.50" targetReferences="//@references.51" description="//@messages.25"/>
+  <traces sourceReferences="//@references.52" targetReferences="//@references.53" description="//@messages.26"/>
+  <traces sourceReferences="//@references.54" targetReferences="//@references.55" description="//@messages.27"/>
+  <traces sourceReferences="//@references.56" targetReferences="//@references.57" description="//@messages.28"/>
+  <traces sourceReferences="//@references.58" targetReferences="//@references.59" description="//@messages.29"/>
+  <traces sourceReferences="//@references.60" targetReferences="//@references.61" description="//@messages.30"/>
+  <traces sourceReferences="//@references.62" targetReferences="//@references.63" description="//@messages.31"/>
+  <traces sourceReferences="//@references.64" targetReferences="//@references.65" description="//@messages.32"/>
+  <traces sourceReferences="//@references.66" targetReferences="//@references.67" description="//@messages.33"/>
+  <traces sourceReferences="//@references.68" targetReferences="//@references.69" description="//@messages.34"/>
+  <traces sourceReferences="//@references.70" targetReferences="//@references.71" description="//@messages.35"/>
+  <traces sourceReferences="//@references.72" targetReferences="//@references.73" description="//@messages.36"/>
+  <traces sourceReferences="//@references.74" targetReferences="//@references.75" description="//@messages.37"/>
+  <traces sourceReferences="//@references.76" targetReferences="//@references.77" description="//@messages.38"/>
+  <traces sourceReferences="//@references.78" targetReferences="//@references.79" description="//@messages.39"/>
+  <traces sourceReferences="//@references.80" targetReferences="//@references.81" description="//@messages.40"/>
+  <traces sourceReferences="//@references.82" targetReferences="//@references.83" description="//@messages.41"/>
+  <traces sourceReferences="//@references.84" targetReferences="//@references.85" description="//@messages.42"/>
+  <traces sourceReferences="//@references.86" targetReferences="//@references.87" description="//@messages.43"/>
+  <traces sourceReferences="//@references.88" targetReferences="//@references.89" description="//@messages.44"/>
+  <traces sourceReferences="//@references.90" targetReferences="//@references.91" description="//@messages.45"/>
+  <traces sourceReferences="//@references.92" targetReferences="//@references.93" description="//@messages.46"/>
+  <traces sourceReferences="//@references.94" targetReferences="//@references.95" description="//@messages.47"/>
+  <traces sourceReferences="//@references.96" targetReferences="//@references.97" description="//@messages.48"/>
+  <traces sourceReferences="//@references.98" targetReferences="//@references.99" description="//@messages.49"/>
+  <traces sourceReferences="//@references.100" targetReferences="//@references.101" description="//@messages.50"/>
+  <traces sourceReferences="//@references.102" targetReferences="//@references.103" description="//@messages.51"/>
+  <traces sourceReferences="//@references.104" targetReferences="//@references.105" description="//@messages.52"/>
+  <traces sourceReferences="//@references.106" targetReferences="//@references.107" description="//@messages.53"/>
+  <traces sourceReferences="//@references.108" targetReferences="//@references.109" description="//@messages.54"/>
+  <traces sourceReferences="//@references.110" targetReferences="//@references.111" description="//@messages.55"/>
+  <traces sourceReferences="//@references.112" targetReferences="//@references.113" description="//@messages.56"/>
+  <traces sourceReferences="//@references.114" targetReferences="//@references.115" description="//@messages.57"/>
+  <traces sourceReferences="//@references.116" targetReferences="//@references.117" description="//@messages.58"/>
+  <traces sourceReferences="//@references.118" targetReferences="//@references.119" description="//@messages.59"/>
+  <traces sourceReferences="//@references.120" targetReferences="//@references.121" description="//@messages.60"/>
+  <traces sourceReferences="//@references.122" targetReferences="//@references.123" description="//@messages.61"/>
+  <traces sourceReferences="//@references.124" targetReferences="//@references.125" description="//@messages.62"/>
+  <traces sourceReferences="//@references.126" targetReferences="//@references.127" description="//@messages.63"/>
+  <traces sourceReferences="//@references.128" targetReferences="//@references.129" description="//@messages.64"/>
+  <traces sourceReferences="//@references.130" targetReferences="//@references.131" description="//@messages.65"/>
+  <traces sourceReferences="//@references.132" targetReferences="//@references.133" description="//@messages.66"/>
+  <traces sourceReferences="//@references.134" targetReferences="//@references.135" description="//@messages.67"/>
+  <traces sourceReferences="//@references.136" targetReferences="//@references.137" description="//@messages.68"/>
+  <traces sourceReferences="//@references.138" targetReferences="//@references.139" description="//@messages.69"/>
+  <traces sourceReferences="//@references.140" targetReferences="//@references.141" description="//@messages.70"/>
+  <traces sourceReferences="//@references.142" targetReferences="//@references.143" description="//@messages.71"/>
+  <traces sourceReferences="//@references.144" targetReferences="//@references.145" description="//@messages.72"/>
+  <traces sourceReferences="//@references.146" targetReferences="//@references.147" description="//@messages.73"/>
+  <traces sourceReferences="//@references.148" targetReferences="//@references.149" description="//@messages.74"/>
+  <traces sourceReferences="//@references.150" targetReferences="//@references.151" description="//@messages.75"/>
+  <traces sourceReferences="//@references.152" targetReferences="//@references.153" description="//@messages.76"/>
+  <traces sourceReferences="//@references.154" targetReferences="//@references.155" description="//@messages.77"/>
+  <traces sourceReferences="//@references.156" targetReferences="//@references.157" description="//@messages.78"/>
+  <traces sourceReferences="//@references.158" targetReferences="//@references.159" description="//@messages.79"/>
+  <traces sourceReferences="//@references.160" targetReferences="//@references.161" description="//@messages.80"/>
+  <traces sourceReferences="//@references.162" targetReferences="//@references.163" description="//@messages.81"/>
+  <traces sourceReferences="//@references.164" targetReferences="//@references.165" description="//@messages.82"/>
+  <traces sourceReferences="//@references.166" targetReferences="//@references.167" description="//@messages.83"/>
+  <traces sourceReferences="//@references.168" targetReferences="//@references.169" description="//@messages.84"/>
+  <traces sourceReferences="//@references.170" targetReferences="//@references.171" description="//@messages.85"/>
+  <traces sourceReferences="//@references.172" targetReferences="//@references.173" description="//@messages.86"/>
+  <traces sourceReferences="//@references.174" targetReferences="//@references.175" description="//@messages.87"/>
+  <traces sourceReferences="//@references.176" targetReferences="//@references.177" description="//@messages.88"/>
+  <traces sourceReferences="//@references.178" targetReferences="//@references.179" description="//@messages.89"/>
+  <traces sourceReferences="//@references.180" targetReferences="//@references.181" description="//@messages.90"/>
+  <traces sourceReferences="//@references.182" targetReferences="//@references.183" description="//@messages.91"/>
+  <traces sourceReferences="//@references.184" targetReferences="//@references.185" description="//@messages.92"/>
+  <traces sourceReferences="//@references.186" targetReferences="//@references.187" description="//@messages.93"/>
+  <traces sourceReferences="//@references.188" targetReferences="//@references.189" description="//@messages.94"/>
+  <traces sourceReferences="//@references.190" targetReferences="//@references.191" description="//@messages.95"/>
+  <traces sourceReferences="//@references.192" targetReferences="//@references.193" description="//@messages.96"/>
+  <traces sourceReferences="//@references.194" targetReferences="//@references.195" description="//@messages.97"/>
+  <traces sourceReferences="//@references.196" targetReferences="//@references.197" description="//@messages.98"/>
+  <traces sourceReferences="//@references.198" targetReferences="//@references.199" description="//@messages.99"/>
+  <traces sourceReferences="//@references.200" targetReferences="//@references.201" description="//@messages.100"/>
+  <traces sourceReferences="//@references.202" targetReferences="//@references.203" description="//@messages.101"/>
+  <traces sourceReferences="//@references.204" targetReferences="//@references.205" description="//@messages.102"/>
+  <traces sourceReferences="//@references.206" targetReferences="//@references.207" description="//@messages.103"/>
+  <traces sourceReferences="//@references.208" targetReferences="//@references.209" description="//@messages.104"/>
+  <traces sourceReferences="//@references.210" targetReferences="//@references.211" description="//@messages.105"/>
+  <traces sourceReferences="//@references.212" targetReferences="//@references.213" description="//@messages.106"/>
+  <traces sourceReferences="//@references.214" targetReferences="//@references.215" description="//@messages.107"/>
+  <traces sourceReferences="//@references.216" targetReferences="//@references.217" description="//@messages.108"/>
+  <traces sourceReferences="//@references.218" targetReferences="//@references.219" description="//@messages.109"/>
+  <traces sourceReferences="//@references.220" targetReferences="//@references.221" description="//@messages.110"/>
+  <traces sourceReferences="//@references.222" targetReferences="//@references.223" description="//@messages.111"/>
+  <traces sourceReferences="//@references.224" targetReferences="//@references.225" description="//@messages.112"/>
+  <traces sourceReferences="//@references.226" targetReferences="//@references.227" description="//@messages.113"/>
+  <traces sourceReferences="//@references.228" targetReferences="//@references.229" description="//@messages.114"/>
+  <traces sourceReferences="//@references.230" targetReferences="//@references.231" description="//@messages.115"/>
+  <traces sourceReferences="//@references.232" targetReferences="//@references.233" description="//@messages.116"/>
+  <traces sourceReferences="//@references.234" targetReferences="//@references.235" description="//@messages.117"/>
+  <traces sourceReferences="//@references.236" targetReferences="//@references.237" description="//@messages.118"/>
+  <traces sourceReferences="//@references.238" targetReferences="//@references.239" description="//@messages.119"/>
+  <traces sourceReferences="//@references.240" targetReferences="//@references.241" description="//@messages.120"/>
+  <traces sourceReferences="//@references.242" targetReferences="//@references.243" description="//@messages.121"/>
+  <traces sourceReferences="//@references.244" targetReferences="//@references.245" description="//@messages.122"/>
+  <traces sourceReferences="//@references.246" targetReferences="//@references.247" description="//@messages.123"/>
+  <traces sourceReferences="//@references.248" targetReferences="//@references.249" description="//@messages.124"/>
+  <traces sourceReferences="//@references.250" targetReferences="//@references.251" description="//@messages.125"/>
+  <traces sourceReferences="//@references.252" targetReferences="//@references.253" description="//@messages.126"/>
+  <traces sourceReferences="//@references.254" targetReferences="//@references.255" description="//@messages.127"/>
+  <traces sourceReferences="//@references.256" targetReferences="//@references.257" description="//@messages.128"/>
+  <traces sourceReferences="//@references.258" targetReferences="//@references.259" description="//@messages.129"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="15" charBeginAt="317" lineEndAt="15" charEndAt="1410"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="65" charBeginAt="1412" lineEndAt="65" charEndAt="1656"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="77" charBeginAt="1658" lineEndAt="77" charEndAt="1937"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="17" charBeginAt="361" lineEndAt="17" charEndAt="382"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/b"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="18" charBeginAt="384" lineEndAt="18" charEndAt="411"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/strMain"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="26" charBeginAt="541" lineEndAt="26" charEndAt="1133"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="51" charBeginAt="1157" lineEndAt="51" charEndAt="1171"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="51" charBeginAt="1145" lineEndAt="51" charEndAt="1402"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="52" charBeginAt="1178" lineEndAt="52" charEndAt="1192"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@pre.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="53" charBeginAt="1198" lineEndAt="53" charEndAt="1227"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@post.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="54" charBeginAt="1233" lineEndAt="54" charEndAt="1302"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@post.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="20" charBeginAt="414" lineEndAt="20" charEndAt="532"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="67" charBeginAt="1460" lineEndAt="67" charEndAt="1488"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/strParent"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="69" charBeginAt="1505" lineEndAt="69" charEndAt="1519"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="69" charBeginAt="1493" lineEndAt="69" charEndAt="1652"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="70" charBeginAt="1522" lineEndAt="70" charEndAt="1562"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@pre.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="71" charBeginAt="1564" lineEndAt="71" charEndAt="1637"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@post.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="79" charBeginAt="1684" lineEndAt="79" charEndAt="1718"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/strParentParent"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="80" charBeginAt="1721" lineEndAt="80" charEndAt="1743"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/str"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="82" charBeginAt="1762" lineEndAt="82" charEndAt="1776"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="82" charBeginAt="1747" lineEndAt="82" charEndAt="1933"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="83" charBeginAt="1779" lineEndAt="83" charEndAt="1825"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@pre.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="84" charBeginAt="1827" lineEndAt="84" charEndAt="1918"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@post.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="26" charBeginAt="561" lineEndAt="26" charEndAt="565"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="20" charBeginAt="433" lineEndAt="20" charEndAt="437"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/main/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="28" charBeginAt="585" lineEndAt="28" charEndAt="588"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="28" charBeginAt="592" lineEndAt="28" charEndAt="598"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="28" charBeginAt="585" lineEndAt="28" charEndAt="598"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="29" charBeginAt="607" lineEndAt="29" charEndAt="616"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="29" charBeginAt="620" lineEndAt="29" charEndAt="632"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.1/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="29" charBeginAt="607" lineEndAt="29" charEndAt="632"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="30" charBeginAt="641" lineEndAt="30" charEndAt="656"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.2/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="30" charBeginAt="660" lineEndAt="30" charEndAt="678"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.2/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="30" charBeginAt="641" lineEndAt="30" charEndAt="678"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="31" charBeginAt="687" lineEndAt="31" charEndAt="688"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.3/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="31" charBeginAt="692" lineEndAt="31" charEndAt="696"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.3/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="31" charBeginAt="687" lineEndAt="31" charEndAt="696"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="32" charBeginAt="701" lineEndAt="32" charEndAt="708"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.4/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="32" charBeginAt="712" lineEndAt="32" charEndAt="716"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.4/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="32" charBeginAt="701" lineEndAt="32" charEndAt="716"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.4"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="34" charBeginAt="732" lineEndAt="34" charEndAt="738"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.5/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="34" charBeginAt="727" lineEndAt="34" charEndAt="731"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.5"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="36" charBeginAt="757" lineEndAt="36" charEndAt="758"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.6/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="36" charBeginAt="762" lineEndAt="36" charEndAt="766"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.43">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.6/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="36" charBeginAt="757" lineEndAt="36" charEndAt="766"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.44">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.6"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="38" charBeginAt="788" lineEndAt="38" charEndAt="794"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.45">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="38" charBeginAt="783" lineEndAt="38" charEndAt="787"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.46">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="39" charBeginAt="815" lineEndAt="39" charEndAt="819"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.47">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="39" charBeginAt="808" lineEndAt="39" charEndAt="814"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.48">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="40" charBeginAt="843" lineEndAt="40" charEndAt="865"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.49">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="41" charBeginAt="891" lineEndAt="41" charEndAt="894"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.50">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.0/@body.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="41" charBeginAt="894" lineEndAt="41" charEndAt="903"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.51">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="41" charBeginAt="877" lineEndAt="41" charEndAt="882"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.52">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.0/@body.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="41" charBeginAt="882" lineEndAt="41" charEndAt="904"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.53">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="42" charBeginAt="929" lineEndAt="42" charEndAt="932"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.54">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.0/@body.1/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="42" charBeginAt="932" lineEndAt="42" charEndAt="940"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.55">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.0/@body.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="42" charBeginAt="915" lineEndAt="42" charEndAt="920"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.56">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.0/@body.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="42" charBeginAt="920" lineEndAt="42" charEndAt="941"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.57">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.0/@body.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="43" charBeginAt="959" lineEndAt="43" charEndAt="964"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.58">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.0/@body.2/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="43" charBeginAt="952" lineEndAt="43" charEndAt="958"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.59">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.0/@body.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="40" charBeginAt="829" lineEndAt="40" charEndAt="965"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.60">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="44" charBeginAt="989" lineEndAt="44" charEndAt="1010"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.61">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.1/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="45" charBeginAt="1036" lineEndAt="45" charEndAt="1039"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.62">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.1/@body.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.63" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="45" charBeginAt="1039" lineEndAt="45" charEndAt="1048"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.63">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.1/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.64" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="45" charBeginAt="1022" lineEndAt="45" charEndAt="1027"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.64">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.1/@body.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.65" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="45" charBeginAt="1027" lineEndAt="45" charEndAt="1049"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.65">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.1/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.66" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="46" charBeginAt="1074" lineEndAt="46" charEndAt="1077"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.66">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.1/@body.1/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.67" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="46" charBeginAt="1077" lineEndAt="46" charEndAt="1085"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.67">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.1/@body.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.68" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="46" charBeginAt="1060" lineEndAt="46" charEndAt="1065"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.68">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.1/@body.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.69" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="46" charBeginAt="1065" lineEndAt="46" charEndAt="1086"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.69">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.1/@body.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.70" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="47" charBeginAt="1104" lineEndAt="47" charEndAt="1109"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.70">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.1/@body.2/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.71" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="47" charBeginAt="1097" lineEndAt="47" charEndAt="1103"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.71">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.1/@body.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.72" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="44" charBeginAt="975" lineEndAt="44" charEndAt="1110"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.72">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7/@rescueBlock.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.73" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="37" charBeginAt="776" lineEndAt="37" charEndAt="1124"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.73">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body/@statement.7"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.74" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="27" charBeginAt="574" lineEndAt="27" charEndAt="1133"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.74">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/test0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.75" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="52" charBeginAt="1191" lineEndAt="52" charEndAt="1192"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.75">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@pre.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.76" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="57" charBeginAt="1345" lineEndAt="57" charEndAt="1351"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.76">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.77" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="57" charBeginAt="1331" lineEndAt="57" charEndAt="1336"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.77">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.78" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="57" charBeginAt="1336" lineEndAt="57" charEndAt="1352"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.78">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.79" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="58" charBeginAt="1361" lineEndAt="58" charEndAt="1364"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.79">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@body/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.80" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="58" charBeginAt="1368" lineEndAt="58" charEndAt="1373"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.80">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@body/@statement.1/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.81" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="58" charBeginAt="1361" lineEndAt="58" charEndAt="1373"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.81">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.82" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="59" charBeginAt="1382" lineEndAt="59" charEndAt="1383"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.82">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@body/@statement.2/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.83" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="59" charBeginAt="1387" lineEndAt="59" charEndAt="1392"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.83">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@body/@statement.2/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.84" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="59" charBeginAt="1382" lineEndAt="59" charEndAt="1392"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.84">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.85" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="56" charBeginAt="1316" lineEndAt="56" charEndAt="1402"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.85">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.86" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="53" charBeginAt="1216" lineEndAt="53" charEndAt="1223"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.86">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@post.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.87" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="53" charBeginAt="1213" lineEndAt="53" charEndAt="1227"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.87">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@post.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.88" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="54" charBeginAt="1293" lineEndAt="54" charEndAt="1298"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.88">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.89" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="54" charBeginAt="1286" lineEndAt="54" charEndAt="1289"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.89">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.90" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="54" charBeginAt="1290" lineEndAt="54" charEndAt="1292"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.90">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.91" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="54" charBeginAt="1269" lineEndAt="54" charEndAt="1281"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.91">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.92" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="54" charBeginAt="1252" lineEndAt="54" charEndAt="1261"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.92">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.93" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="54" charBeginAt="1266" lineEndAt="54" charEndAt="1268"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.93">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.94" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="54" charBeginAt="1282" lineEndAt="54" charEndAt="1285"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.94">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@post.1/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.95" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="54" charBeginAt="1249" lineEndAt="54" charEndAt="1302"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.95">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/truc/@post.1/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.96" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="21" charBeginAt="474" lineEndAt="21" charEndAt="484"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.96">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/main/@body/@statement.0/@initialization/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.97" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="21" charBeginAt="484" lineEndAt="21" charEndAt="488"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.97">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/main/@body/@statement.0/@initialization"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.98" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="21" charBeginAt="458" lineEndAt="21" charEndAt="468"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.98">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/main/@body/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.99" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="21" charBeginAt="449" lineEndAt="21" charEndAt="488"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.99">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/main/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.100" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="22" charBeginAt="498" lineEndAt="22" charEndAt="502"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.100">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/main/@body/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.101" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="22" charBeginAt="491" lineEndAt="22" charEndAt="493"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.101">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/main/@body/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.102" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="22" charBeginAt="493" lineEndAt="22" charEndAt="503"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.102">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/main/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.103" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="23" charBeginAt="506" lineEndAt="23" charEndAt="508"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.103">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/main/@body/@statement.2/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.104" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="23" charBeginAt="508" lineEndAt="23" charEndAt="524"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.104">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/main/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.105" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="20" charBeginAt="441" lineEndAt="20" charEndAt="532"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.105">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/Main/main/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.106" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="70" charBeginAt="1552" lineEndAt="70" charEndAt="1558"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.106">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@pre.0/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.107" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="70" charBeginAt="1545" lineEndAt="70" charEndAt="1548"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.107">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@pre.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.108" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="70" charBeginAt="1549" lineEndAt="70" charEndAt="1551"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.108">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@pre.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.109" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="70" charBeginAt="1542" lineEndAt="70" charEndAt="1562"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.109">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@pre.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.110" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="71" charBeginAt="1627" lineEndAt="71" charEndAt="1633"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.110">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.111" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="71" charBeginAt="1620" lineEndAt="71" charEndAt="1623"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.111">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.112" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="71" charBeginAt="1624" lineEndAt="71" charEndAt="1626"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.112">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.113" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="71" charBeginAt="1602" lineEndAt="71" charEndAt="1614"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.113">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.114" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="71" charBeginAt="1589" lineEndAt="71" charEndAt="1598"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.114">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.115" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="71" charBeginAt="1599" lineEndAt="71" charEndAt="1601"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.115">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.116" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="71" charBeginAt="1616" lineEndAt="71" charEndAt="1619"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.116">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@post.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.117" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="71" charBeginAt="1586" lineEndAt="71" charEndAt="1637"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.117">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParent/truc/@post.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.118" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="83" charBeginAt="1815" lineEndAt="83" charEndAt="1821"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.118">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@pre.0/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.119" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="83" charBeginAt="1808" lineEndAt="83" charEndAt="1811"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.119">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@pre.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.120" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="83" charBeginAt="1812" lineEndAt="83" charEndAt="1814"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.120">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@pre.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.121" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="83" charBeginAt="1805" lineEndAt="83" charEndAt="1825"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.121">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@pre.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.122" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="84" charBeginAt="1908" lineEndAt="84" charEndAt="1914"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.122">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@post.0/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.123" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="84" charBeginAt="1901" lineEndAt="84" charEndAt="1904"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.123">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@post.0/@body/@statement.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.124" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="84" charBeginAt="1905" lineEndAt="84" charEndAt="1907"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.124">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@post.0/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.125" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="84" charBeginAt="1877" lineEndAt="84" charEndAt="1895"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.125">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@post.0/@body/@statement.0/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.126" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="84" charBeginAt="1858" lineEndAt="84" charEndAt="1873"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.126">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@post.0/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.127" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="84" charBeginAt="1874" lineEndAt="84" charEndAt="1876"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.127">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@post.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.128" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="84" charBeginAt="1897" lineEndAt="84" charEndAt="1900"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.128">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@post.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.129" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testConstraints/018_testPrePost_PostInheritedInheritedPass1.main.kmt" lineBeginAt="84" charBeginAt="1855" lineEndAt="84" charEndAt="1918"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.129">
+    <refObject href="018_testPrePost_PostInheritedInheritedPass1.main.km#//@packages.1/MainParentParent/truc/@post.0/@body"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.7"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.8"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.9"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.10"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.11"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.12"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.13"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.14"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.15"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.16"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.17"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.18"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.19"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.20"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.21"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.22"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.23"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.24"/>
+  <messages language="english" type="Mapping" traces="//@traces.25"/>
+  <messages language="english" type="Mapping" traces="//@traces.26"/>
+  <messages language="english" type="Mapping" traces="//@traces.27"/>
+  <messages language="english" type="Mapping" traces="//@traces.28"/>
+  <messages language="english" type="Mapping" traces="//@traces.29"/>
+  <messages language="english" type="Mapping" traces="//@traces.30"/>
+  <messages language="english" type="Mapping" traces="//@traces.31"/>
+  <messages language="english" type="Mapping" traces="//@traces.32"/>
+  <messages language="english" type="Mapping" traces="//@traces.33"/>
+  <messages language="english" type="Mapping" traces="//@traces.34"/>
+  <messages language="english" type="Mapping" traces="//@traces.35"/>
+  <messages language="english" type="Mapping" traces="//@traces.36"/>
+  <messages language="english" type="Mapping" traces="//@traces.37"/>
+  <messages language="english" type="Mapping" traces="//@traces.38"/>
+  <messages language="english" type="Mapping" traces="//@traces.39"/>
+  <messages language="english" type="Mapping" traces="//@traces.40"/>
+  <messages language="english" type="Mapping" traces="//@traces.41"/>
+  <messages language="english" type="Mapping" traces="//@traces.42"/>
+  <messages language="english" type="Mapping" traces="//@traces.43"/>
+  <messages language="english" type="Mapping" traces="//@traces.44"/>
+  <messages language="english" type="Mapping" traces="//@traces.45"/>
+  <messages language="english" type="Mapping" traces="//@traces.46"/>
+  <messages language="english" type="Mapping" traces="//@traces.47"/>
+  <messages language="english" type="Mapping" traces="//@traces.48"/>
+  <messages language="english" type="Mapping" traces="//@traces.49"/>
+  <messages language="english" type="Mapping" traces="//@traces.50"/>
+  <messages language="english" type="Mapping" traces="//@traces.51"/>
+  <messages language="english" type="Mapping" traces="//@traces.52"/>
+  <messages language="english" type="Mapping" traces="//@traces.53"/>
+  <messages language="english" type="Mapping" traces="//@traces.54"/>
+  <messages language="english" type="Mapping" traces="//@traces.55"/>
+  <messages language="english" type="Mapping" traces="//@traces.56"/>
+  <messages language="english" type="Mapping" traces="//@traces.57"/>
+  <messages language="english" type="Mapping" traces="//@traces.58"/>
+  <messages language="english" type="Mapping" traces="//@traces.59"/>
+  <messages language="english" type="Mapping" traces="//@traces.60"/>
+  <messages language="english" type="Mapping" traces="//@traces.61"/>
+  <messages language="english" type="Mapping" traces="//@traces.62"/>
+  <messages language="english" type="Mapping" traces="//@traces.63"/>
+  <messages language="english" type="Mapping" traces="//@traces.64"/>
+  <messages language="english" type="Mapping" traces="//@traces.65"/>
+  <messages language="english" type="Mapping" traces="//@traces.66"/>
+  <messages language="english" type="Mapping" traces="//@traces.67"/>
+  <messages language="english" type="Mapping" traces="//@traces.68"/>
+  <messages language="english" type="Mapping" traces="//@traces.69"/>
+  <messages language="english" type="Mapping" traces="//@traces.70"/>
+  <messages language="english" type="Mapping" traces="//@traces.71"/>
+  <messages language="english" type="Mapping" traces="//@traces.72"/>
+  <messages language="english" type="Mapping" traces="//@traces.73"/>
+  <messages language="english" type="Mapping" traces="//@traces.74"/>
+  <messages language="english" type="Mapping" traces="//@traces.75"/>
+  <messages language="english" type="Mapping" traces="//@traces.76"/>
+  <messages language="english" type="Mapping" traces="//@traces.77"/>
+  <messages language="english" type="Mapping" traces="//@traces.78"/>
+  <messages language="english" type="Mapping" traces="//@traces.79"/>
+  <messages language="english" type="Mapping" traces="//@traces.80"/>
+  <messages language="english" type="Mapping" traces="//@traces.81"/>
+  <messages language="english" type="Mapping" traces="//@traces.82"/>
+  <messages language="english" type="Mapping" traces="//@traces.83"/>
+  <messages language="english" type="Mapping" traces="//@traces.84"/>
+  <messages language="english" type="Mapping" traces="//@traces.85"/>
+  <messages language="english" type="Mapping" traces="//@traces.86"/>
+  <messages language="english" type="Mapping" traces="//@traces.87"/>
+  <messages language="english" type="Mapping" traces="//@traces.88"/>
+  <messages language="english" type="Mapping" traces="//@traces.89"/>
+  <messages language="english" type="Mapping" traces="//@traces.90"/>
+  <messages language="english" type="Mapping" traces="//@traces.91"/>
+  <messages language="english" type="Mapping" traces="//@traces.92"/>
+  <messages language="english" type="Mapping" traces="//@traces.93"/>
+  <messages language="english" type="Mapping" traces="//@traces.94"/>
+  <messages language="english" type="Mapping" traces="//@traces.95"/>
+  <messages language="english" type="Mapping" traces="//@traces.96"/>
+  <messages language="english" type="Mapping" traces="//@traces.97"/>
+  <messages language="english" type="Mapping" traces="//@traces.98"/>
+  <messages language="english" type="Mapping" traces="//@traces.99"/>
+  <messages language="english" type="Mapping" traces="//@traces.100"/>
+  <messages language="english" type="Mapping" traces="//@traces.101"/>
+  <messages language="english" type="Mapping" traces="//@traces.102"/>
+  <messages language="english" type="Mapping" traces="//@traces.103"/>
+  <messages language="english" type="Mapping" traces="//@traces.104"/>
+  <messages language="english" type="Mapping" traces="//@traces.105"/>
+  <messages language="english" type="Mapping" traces="//@traces.106"/>
+  <messages language="english" type="Mapping" traces="//@traces.107"/>
+  <messages language="english" type="Mapping" traces="//@traces.108"/>
+  <messages language="english" type="Mapping" traces="//@traces.109"/>
+  <messages language="english" type="Mapping" traces="//@traces.110"/>
+  <messages language="english" type="Mapping" traces="//@traces.111"/>
+  <messages language="english" type="Mapping" traces="//@traces.112"/>
+  <messages language="english" type="Mapping" traces="//@traces.113"/>
+  <messages language="english" type="Mapping" traces="//@traces.114"/>
+  <messages language="english" type="Mapping" traces="//@traces.115"/>
+  <messages language="english" type="Mapping" traces="//@traces.116"/>
+  <messages language="english" type="Mapping" traces="//@traces.117"/>
+  <messages language="english" type="Mapping" traces="//@traces.118"/>
+  <messages language="english" type="Mapping" traces="//@traces.119"/>
+  <messages language="english" type="Mapping" traces="//@traces.120"/>
+  <messages language="english" type="Mapping" traces="//@traces.121"/>
+  <messages language="english" type="Mapping" traces="//@traces.122"/>
+  <messages language="english" type="Mapping" traces="//@traces.123"/>
+  <messages language="english" type="Mapping" traces="//@traces.124"/>
+  <messages language="english" type="Mapping" traces="//@traces.125"/>
+  <messages language="english" type="Mapping" traces="//@traces.126"/>
+  <messages language="english" type="Mapping" traces="//@traces.127"/>
+  <messages language="english" type="Mapping" traces="//@traces.128"/>
+  <messages language="english" type="Mapping" traces="//@traces.129"/>
+</traceability:TraceModel>
