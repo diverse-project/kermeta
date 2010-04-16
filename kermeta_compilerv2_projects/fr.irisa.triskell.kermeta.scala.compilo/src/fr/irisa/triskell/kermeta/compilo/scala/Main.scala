@@ -98,88 +98,8 @@ object Main extends LogAspect {
             case _ =>
         }
 	  
-	 
-        // var t: LoadModelHelper = new LoadModelHelper()  ;
-	  
-        //  BehaviorPackage.eINSTANCE.setEFactoryInstance(new RichBehaviorFactoryImpl())
-        //  StructurePackage.eINSTANCE.setEFactoryInstance(new RichStructureFactoryImpl())
-		  
-	      
-        //var v : ModelingUnit = t.loadKM("tp1.km");
-        //var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/000HelloWorld.km");
-        //var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/001testAssignement2.km")
-        //var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/001testAssignement.km")
-        //var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/002_testArithm.main.km")
-//  	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/003_testOpCall.main.km")
-//  	var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/004_testOpOpCall.main.km")
-        //var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/005_testOpPkgCall.main.km")
-        //var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/006_testClosure.km")
-  	
-        //var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/010_testLoop.main.km")
-        //var v : ModelingUnit = t.loadKM("../compilerv2_test/tests/011_testBenchmark.main.km")
-        //var v : ModelingUnit = t.loadKM("../compilerv2_test/testEcore/012_TypeFromEcore.km")
-        //var v : ModelingUnit = t.loadKM("../compilerv2_test/testEcore/013_LoadEcore.km")
-        //var res = new StringBuilder
-        /*
-         var visitorAspect = new ScalaAspectVisitor
-         VisitorAsyncUtility.runAfter(v,visitorAspect)
-         var visitorImplicitFactory = new ScalaFactoryAndImplicitVisitor
-         VisitorAsyncUtility.runAfter(v,visitorImplicitFactory)
-         println("DONE")
-	     
-         Util.threadExecutor.shutdown()
-         */
 	   
         var compilo = new Compiler
-	  
-        //   inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/068_testVariableInit.main.km"
-        // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/037_testLambda.main.km"
-//	 inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/078_testAddVoidInReflectiveCollection.main.km"
-        //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
-        // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/012_TypeFromEcore.km"
-        // inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/015_EcoreDocHelper.km"
-        //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/075_PropertyEqualityUsingEnum.main.km"
-
-//    inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/001_LoadUML.km"
-
-//    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/uml/001_LoadUML.km"
-	    	
-        //    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Art2DroolsMatcher/Art2DROOLSPatternFramework.km"
-        //       inputFile="/home/barais/workspaces/kermetaRuntimeTest/Test/src/kermeta/new_file.km"
-        //    inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LoadSaveKm/0001LoadAndSaveKm.km"
-        //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.km"
-//   inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.km"
-        //inputFile = "../fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/0012_kunit.km"
-        //compilo.compile("../compilerv2_test/tests/010_testLoop.main.km")
-	  
-	  
-	  
-		 
-        //inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/ART2BluePrint/src/main.km"
-	  
-        //inputFile = "/Users/ffouquet/Documents/DEV/workspaces/pruner/MetamodelPruner/src/kermeta/metamodelPruner.km"
-	  
-        //  inputFile = "/Users/ffouquet/Documents/DEV/workspaces/fr.irisa.triskell.kermeta.compiloV2/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/013_LoadEcore.km"
-	 // inputFile="/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testEcore/012_TypeFromEcore.km"
-  //      inputFile="/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testFuml/FUMLStarter.km"
-//        inputFile="/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/kompose/flowComposer.km"
-//        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/exception/000TestClass.km"
-//            inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/exception/0001TestException.km"
-        /// inputFile = "/Users/ffouquet/Documents/DEV/workspaces/art/org.kermeta.ArtKomparator/src/kermeta/Launcher.km"
-        // runnerParams = List("///Users/ffouquet/Documents/DEV/workspaces/runtime-artIDE/Drop/multi_sample.xmi")
-
-        //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/Speeds/StaticSemanticChecker.km"
-        //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/reflexivity/Serializer.km"
-        //inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/reflexivity/reflexivity.km"
-       //   inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/pruner/metamodelPruner.km"
-//        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/pruner/TestCollection.km"
-        //inputFile = "/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/025simpleInvariant.km"
-    //    inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/perfs/001_LoadUML.km"
-       // inputFile="/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/perfs/metamodelPruner.km"
-        // inputFile = "/Users/ffouquet/NetBeansProjects/KermetaCompiler/kermeta_compilerv2_projects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/022_InvWithMultipleInheritance.km"
-
-
-        //  inputFile = "/Users/ffouquet/Desktop/SpeedWorkspace/SpeedsStaticSemantics-2.1.6/l1/kermeta/StaticSemanticChecker.km"
 
 
         if(inputFile != ""){
@@ -226,7 +146,7 @@ object Main extends LogAspect {
                     System.setErr(new PrintStream(oldErr))
                 }
             }else{
-                EmbeddedMavenHelper.run(GlobalConfiguration.clean,GlobalConfiguration.createPackage, GlobalConfiguration.standalone, GlobalConfiguration.exec,  additionalClassPath,outputStream)
+                result = EmbeddedMavenHelper.run(GlobalConfiguration.clean,GlobalConfiguration.createPackage, GlobalConfiguration.standalone, GlobalConfiguration.exec,  additionalClassPath,outputStream)
             }
         }
     }

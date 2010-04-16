@@ -6,7 +6,7 @@ import java.io.File
 
 object EmbettedScalaCompiler extends LogAspect {
 	
-    def getActualClasspath = List(System.getProperty("java.class.path"))
+    def getActualClasspath = List(System.getProperty("java.classpath"))
 	
 	
   def compile(srcPATH : String, outputPATH : String, cleanOutput : Boolean, jars : List[String], fsc : Boolean) : Int = {

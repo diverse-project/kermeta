@@ -20,7 +20,7 @@ import scala.collection.JavaConversions._
 
 object EmbeddedMavenHelper {
 
-    def run(clean : Boolean, createPackage : Boolean,standalone : Boolean,exec : Boolean,additionalClasspath : List[String], outputstream : OutputStream) = {
+    def run(clean : Boolean, createPackage : Boolean,standalone : Boolean,exec : Boolean,additionalClasspath : List[String], outputstream : OutputStream) :Int = {
 
         var goals = new scala.collection.mutable.ArrayBuffer[String]
         if (clean){
@@ -93,16 +93,18 @@ object EmbeddedMavenHelper {
             // maven.setClassLoader(Thread.currentThread().getContextClassLoader())
             //  maven.start
             //var result = maven.execute(project, goals, null,null ,executionProperties,rootDirectory);
-            var result = maven.execute(request)
+            var result :org.apache.maven.execution.MavenExecutionResult  = maven.execute(request)
+            
             if (outputstream != null){
                 System.setOut(new PrintStream(oldOut))
                 System.setErr(new PrintStream(oldErr))
             }
+            return result.getExceptions().size();
             //import scala.collection.JavaConversions._
             //println(result.getExceptions.mkString)
 
         } catch {
-            case e: Exception => e.printStackTrace()
+            case e: Exception => e.printStackTrace(); 
         } finally {
             if (maven != null) {
                 try {
@@ -112,6 +114,7 @@ object EmbeddedMavenHelper {
                 }
             }
         }
+        return -1;
     }
 
 }
