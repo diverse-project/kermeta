@@ -97,7 +97,7 @@ public class DependenciesDisplay extends Display {
 		/////// Processing step ///////////
 		
 		// we use red color for error items
-		int[] colors = new int[] {
+		int[] colors = new int[] {  
 				ColorLib.rgb(150, 150, 255)
 		};
 		// we fill up the nodes labels
@@ -143,12 +143,22 @@ public class DependenciesDisplay extends Display {
 		dynLayout.add(new AggregateLayout(AGGR));
 		dynLayout.add(new RepaintAction());
 		
+		//setDoubleBuffered(true);
 		m_vis.putAction("color", colActions);
 		m_vis.putAction("layout", dynLayout);
-				
+			
         
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#setVisible(boolean)
+	 */
+	@Override
+	public void setVisible(boolean aFlag) {
+		// TODO Auto-generated method stub
+		super.setVisible(aFlag);
+	}
+
 	public void run() {
 		colorActivity = m_vis.run("color");
 		layoutActivity = m_vis.run("layout");

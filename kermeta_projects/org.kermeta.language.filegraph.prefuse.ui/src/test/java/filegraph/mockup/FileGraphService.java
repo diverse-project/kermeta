@@ -10,6 +10,7 @@
 
 package filegraph.mockup;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import org.kermeta.language.filegraph.SimpleGraph;
 
 public class FileGraphService implements IFileGraphService{
 
-	public CycleGraph getCycleGraph(String rootFileURI) {
+	public CycleGraph getCycleGraph(File rootFileURI) {
 		CycleGraph result = new CycleGraph();
 		GraphNode rootNode = new GraphNode();
 		rootNode.setName("root");
@@ -30,7 +31,7 @@ public class FileGraphService implements IFileGraphService{
 			rootNode.getDirectReferences().add(n);
 			for ( Integer i2=0; i2<1+i; ++i2 ) {
 				GraphNode n2 = new GraphNode();
-				n2.setName(i.toString()+"_"+i2.toString());
+				n2.setName(i.toString()+"\n"+i2.toString());
 				n.getDirectReferences().add(n2);
 				
 		    }
@@ -49,7 +50,7 @@ public class FileGraphService implements IFileGraphService{
 		return result;
 	}
 
-	public SimpleGraph getSimpleGraph(String rootFileURI) {
+	public SimpleGraph getSimpleGraph(File rootFileURI) {
 		SimpleGraph result = new SimpleGraph();
 		GraphNode rootNode = new GraphNode();
 		rootNode.setName("root");
@@ -67,7 +68,7 @@ public class FileGraphService implements IFileGraphService{
 		return result;
 	}
 
-	public List<String> getAllRequired(String rootFileURI) {
+	public List<String> getAllRequired(File rootFile) {
 		// TODO Auto-generated method stub
 		return null;
 	}

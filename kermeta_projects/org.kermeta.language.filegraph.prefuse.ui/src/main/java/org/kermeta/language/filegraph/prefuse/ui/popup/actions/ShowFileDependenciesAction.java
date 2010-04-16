@@ -1,5 +1,6 @@
 package org.kermeta.language.filegraph.prefuse.ui.popup.actions;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeSelection;
@@ -76,8 +80,19 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 					IFileGraphService fileGraphService = (IFileGraphService)context.getService(ref);
 					
 					// computer the graph
-					CycleGraph cycleGraph = fileGraphService.getCycleGraph(selectedFile.toString());
-			 		
+					URI uri = URI.createURI(selectedFile.toString());
+					
+					URI.createPlatformResourceURI(selectedFile.getProject().getName()+"/"+selectedFile.getProjectRelativePath().toString(), true);
+					// Resolving the filePath
+					URIConverter converter = new ExtensibleURIConverterImpl();
+					uri = converter.normalize(uri);
+					selectedFile.getProjectRelativePath();
+					File f1 = new File(URI.createPlatformResourceURI("/"+selectedFile.getProject().getName()+"/"+selectedFile.getProjectRelativePath().toString(), true).toString()		);
+					File f2 = new File(selectedFile.getLocationURI().toString().replace("file:", "/")	);
+					File f3 = new File(selectedFile.getLocationURI().toString()	);
+					//f.exists()
+					CycleGraph cycleGraph = fileGraphService.getCycleGraph(f1);
+		 	 		
 					// TEST use mockup
 			//		CycleGraph cycleGraph = new FileGraphService().getCycleGraph(selectedFile.toString());
 					

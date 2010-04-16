@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Kermeta"
+            id="fr.irisa.triskell.kermeta.view">
+      </category>
+      <view
+            name="Kermeta file graph View"
+            icon="icons/touchgraph.gif"
+            category="fr.irisa.triskell.kermeta.view"
+            class="org.kermeta.language.filegraph.prefuse.views.FileGraphView"
+            id="org.kermeta.language.filegraph.prefuse.views.FileGraphView">
+      </view>
+      
+   </extension>
    <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution

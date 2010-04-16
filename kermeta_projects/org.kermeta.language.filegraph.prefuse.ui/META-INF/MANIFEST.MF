@@ -7,7 +7,8 @@ Bundle-Activator: org.kermeta.language.filegraph.prefuse.ui.Activator
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.core.resources
+ org.eclipse.core.resources,
+ fr.irisa.triskell.eclipse.util
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Import-Package: org.kermeta.language.filegraph
