@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-compile and deploy</actionName>
+            <displayName>compile and deploy</displayName>
+            <goals>
+                <goal>scala:compile</goal>
+                <goal>package</goal>
+                <goal>deploy</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-clen and package</actionName>
+            <displayName>clen and package</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>scala:compile</goal>
+                <goal>package</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-compile and jar</actionName>
+            <displayName>compile and jar</displayName>
+            <goals>
+                <goal>scala:compile</goal>
+                <goal>jar</goal>
+            </goals>
+        </action>
+    </actions>
