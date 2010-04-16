@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/IntegerLiteral_writeln_100.kmt" lineBeginAt="16" charBeginAt="194" lineEndAt="16" charEndAt="273"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="IntegerLiteral_writeln_100.km#//@packages.0/Main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/IntegerLiteral_writeln_100.kmt" lineBeginAt="18" charBeginAt="208" lineEndAt="18" charEndAt="271"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="IntegerLiteral_writeln_100.km#//@packages.0/Main/main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/IntegerLiteral_writeln_100.kmt" lineBeginAt="18" charBeginAt="227" lineEndAt="18" charEndAt="231"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="IntegerLiteral_writeln_100.km#//@packages.0/Main/main/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/IntegerLiteral_writeln_100.kmt" lineBeginAt="19" charBeginAt="255" lineEndAt="19" charEndAt="256"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="IntegerLiteral_writeln_100.km#//@packages.0/Main/main/@body/@statement.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/IntegerLiteral_writeln_100.kmt" lineBeginAt="19" charBeginAt="256" lineEndAt="19" charEndAt="265"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="IntegerLiteral_writeln_100.km#//@packages.0/Main/main/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/IntegerLiteral_writeln_100.kmt" lineBeginAt="19" charBeginAt="241" lineEndAt="19" charEndAt="246"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="IntegerLiteral_writeln_100.km#//@packages.0/Main/main/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/IntegerLiteral_writeln_100.kmt" lineBeginAt="19" charBeginAt="246" lineEndAt="19" charEndAt="266"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="IntegerLiteral_writeln_100.km#//@packages.0/Main/main/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/IntegerLiteral_writeln_100.kmt" lineBeginAt="18" charBeginAt="235" lineEndAt="18" charEndAt="271"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="IntegerLiteral_writeln_100.km#//@packages.0/Main/main/@body"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" traces="//@traces.7"/>
+</traceability:TraceModel>

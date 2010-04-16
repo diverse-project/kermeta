@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <traces sourceReferences="//@references.16" targetReferences="//@references.17" description="//@messages.8"/>
+  <traces sourceReferences="//@references.18" targetReferences="//@references.19" description="//@messages.9"/>
+  <traces sourceReferences="//@references.20" targetReferences="//@references.21" description="//@messages.10"/>
+  <traces sourceReferences="//@references.22" targetReferences="//@references.23" description="//@messages.11"/>
+  <traces sourceReferences="//@references.24" targetReferences="//@references.25" description="//@messages.12"/>
+  <traces sourceReferences="//@references.26" targetReferences="//@references.27" description="//@messages.13"/>
+  <traces sourceReferences="//@references.28" targetReferences="//@references.29" description="//@messages.14"/>
+  <traces sourceReferences="//@references.30" targetReferences="//@references.31" description="//@messages.15"/>
+  <traces sourceReferences="//@references.32" targetReferences="//@references.33" description="//@messages.16"/>
+  <traces sourceReferences="//@references.34" targetReferences="//@references.35" description="//@messages.17"/>
+  <traces sourceReferences="//@references.36" targetReferences="//@references.37" description="//@messages.18"/>
+  <traces sourceReferences="//@references.38" targetReferences="//@references.39" description="//@messages.19"/>
+  <traces sourceReferences="//@references.40" targetReferences="//@references.41" description="//@messages.20"/>
+  <traces sourceReferences="//@references.42" targetReferences="//@references.43" description="//@messages.21"/>
+  <traces sourceReferences="//@references.44" targetReferences="//@references.45" description="//@messages.22"/>
+  <traces sourceReferences="//@references.46" targetReferences="//@references.47" description="//@messages.23"/>
+  <traces sourceReferences="//@references.48" targetReferences="//@references.49" description="//@messages.24"/>
+  <traces sourceReferences="//@references.50" targetReferences="//@references.51" description="//@messages.25"/>
+  <traces sourceReferences="//@references.52" targetReferences="//@references.53" description="//@messages.26"/>
+  <traces sourceReferences="//@references.54" targetReferences="//@references.55" description="//@messages.27"/>
+  <traces sourceReferences="//@references.56" targetReferences="//@references.57" description="//@messages.28"/>
+  <traces sourceReferences="//@references.58" targetReferences="//@references.59" description="//@messages.29"/>
+  <traces sourceReferences="//@references.60" targetReferences="//@references.61" description="//@messages.30"/>
+  <traces sourceReferences="//@references.62" targetReferences="//@references.63" description="//@messages.31"/>
+  <traces sourceReferences="//@references.64" targetReferences="//@references.65" description="//@messages.32"/>
+  <traces sourceReferences="//@references.66" targetReferences="//@references.67" description="//@messages.33"/>
+  <traces sourceReferences="//@references.68" targetReferences="//@references.69" description="//@messages.34"/>
+  <traces sourceReferences="//@references.70" targetReferences="//@references.71" description="//@messages.35"/>
+  <traces sourceReferences="//@references.72" targetReferences="//@references.73" description="//@messages.36"/>
+  <traces sourceReferences="//@references.74" targetReferences="//@references.75" description="//@messages.37"/>
+  <traces sourceReferences="//@references.76" targetReferences="//@references.77" description="//@messages.38"/>
+  <traces sourceReferences="//@references.78" targetReferences="//@references.79" description="//@messages.39"/>
+  <traces sourceReferences="//@references.80" targetReferences="//@references.81" description="//@messages.40"/>
+  <traces sourceReferences="//@references.82" targetReferences="//@references.83" description="//@messages.41"/>
+  <traces sourceReferences="//@references.84" targetReferences="//@references.85" description="//@messages.42"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="18" charBeginAt="257" lineEndAt="18" charEndAt="1195"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="41" charBeginAt="927" lineEndAt="41" charEndAt="1188"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="28" charBeginAt="570" lineEndAt="28" charEndAt="924"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="20" charBeginAt="306" lineEndAt="20" charEndAt="560"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="41" charBeginAt="966" lineEndAt="41" charEndAt="970"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="28" charBeginAt="614" lineEndAt="28" charEndAt="618"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="20" charBeginAt="325" lineEndAt="20" charEndAt="329"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/main/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="45" charBeginAt="1046" lineEndAt="45" charEndAt="1047"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@condition/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="45" charBeginAt="1045" lineEndAt="45" charEndAt="1046"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@condition/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="45" charBeginAt="1040" lineEndAt="45" charEndAt="1041"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@condition/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="45" charBeginAt="1039" lineEndAt="45" charEndAt="1040"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@condition/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="45" charBeginAt="1042" lineEndAt="45" charEndAt="1044"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@condition"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="49" charBeginAt="1141" lineEndAt="49" charEndAt="1176"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@elseBody/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="49" charBeginAt="1127" lineEndAt="49" charEndAt="1132"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@elseBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="49" charBeginAt="1132" lineEndAt="49" charEndAt="1177"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@elseBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="49" charBeginAt="1127" lineEndAt="49" charEndAt="1177"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@elseBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="47" charBeginAt="1077" lineEndAt="47" charEndAt="1112"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@thenBody/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="47" charBeginAt="1063" lineEndAt="47" charEndAt="1068"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@thenBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="47" charBeginAt="1068" lineEndAt="47" charEndAt="1113"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@thenBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="47" charBeginAt="1063" lineEndAt="47" charEndAt="1113"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0/@thenBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="45" charBeginAt="1034" lineEndAt="45" charEndAt="1183"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="41" charBeginAt="974" lineEndAt="41" charEndAt="1188"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareNegativeInts/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="31" charBeginAt="713" lineEndAt="31" charEndAt="714"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.0/@initialization/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="31" charBeginAt="712" lineEndAt="31" charEndAt="713"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.0/@initialization"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="31" charBeginAt="699" lineEndAt="31" charEndAt="706"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="31" charBeginAt="684" lineEndAt="31" charEndAt="714"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="33" charBeginAt="773" lineEndAt="33" charEndAt="774"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1/@condition/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="33" charBeginAt="772" lineEndAt="33" charEndAt="773"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1/@condition/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="33" charBeginAt="760" lineEndAt="33" charEndAt="768"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1/@condition/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="33" charBeginAt="769" lineEndAt="33" charEndAt="771"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1/@condition"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="37" charBeginAt="872" lineEndAt="37" charEndAt="907"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1/@elseBody/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="37" charBeginAt="858" lineEndAt="37" charEndAt="863"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1/@elseBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="37" charBeginAt="863" lineEndAt="37" charEndAt="908"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1/@elseBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="37" charBeginAt="858" lineEndAt="37" charEndAt="908"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1/@elseBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="35" charBeginAt="806" lineEndAt="35" charEndAt="841"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1/@thenBody/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="35" charBeginAt="792" lineEndAt="35" charEndAt="797"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1/@thenBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="35" charBeginAt="797" lineEndAt="35" charEndAt="842"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1/@thenBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="35" charBeginAt="792" lineEndAt="35" charEndAt="842"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1/@thenBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="33" charBeginAt="755" lineEndAt="33" charEndAt="916"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="28" charBeginAt="622" lineEndAt="28" charEndAt="924"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/test_CompareVarAndNegativeInt/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="24" charBeginAt="488" lineEndAt="24" charEndAt="517"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/main/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="25" charBeginAt="528" lineEndAt="25" charEndAt="552"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/main/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/079_testIntegerComparison.kmt" lineBeginAt="20" charBeginAt="333" lineEndAt="20" charEndAt="560"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
+    <refObject href="079_testIntegerComparison.km#//@packages.0/TestIntegerComparison/main/@body"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" traces="//@traces.7"/>
+  <messages language="english" type="Mapping" traces="//@traces.8"/>
+  <messages language="english" type="Mapping" traces="//@traces.9"/>
+  <messages language="english" type="Mapping" traces="//@traces.10"/>
+  <messages language="english" type="Mapping" traces="//@traces.11"/>
+  <messages language="english" type="Mapping" traces="//@traces.12"/>
+  <messages language="english" type="Mapping" traces="//@traces.13"/>
+  <messages language="english" type="Mapping" traces="//@traces.14"/>
+  <messages language="english" type="Mapping" traces="//@traces.15"/>
+  <messages language="english" type="Mapping" traces="//@traces.16"/>
+  <messages language="english" type="Mapping" traces="//@traces.17"/>
+  <messages language="english" type="Mapping" traces="//@traces.18"/>
+  <messages language="english" type="Mapping" traces="//@traces.19"/>
+  <messages language="english" type="Mapping" traces="//@traces.20"/>
+  <messages language="english" type="Mapping" traces="//@traces.21"/>
+  <messages language="english" type="Mapping" traces="//@traces.22"/>
+  <messages language="english" type="Mapping" traces="//@traces.23"/>
+  <messages language="english" type="Mapping" traces="//@traces.24"/>
+  <messages language="english" type="Mapping" traces="//@traces.25"/>
+  <messages language="english" type="Mapping" traces="//@traces.26"/>
+  <messages language="english" type="Mapping" traces="//@traces.27"/>
+  <messages language="english" type="Mapping" traces="//@traces.28"/>
+  <messages language="english" type="Mapping" traces="//@traces.29"/>
+  <messages language="english" type="Mapping" traces="//@traces.30"/>
+  <messages language="english" type="Mapping" traces="//@traces.31"/>
+  <messages language="english" type="Mapping" traces="//@traces.32"/>
+  <messages language="english" type="Mapping" traces="//@traces.33"/>
+  <messages language="english" type="Mapping" traces="//@traces.34"/>
+  <messages language="english" type="Mapping" traces="//@traces.35"/>
+  <messages language="english" type="Mapping" traces="//@traces.36"/>
+  <messages language="english" type="Mapping" traces="//@traces.37"/>
+  <messages language="english" type="Mapping" traces="//@traces.38"/>
+  <messages language="english" type="Mapping" traces="//@traces.39"/>
+  <messages language="english" type="Mapping" traces="//@traces.40"/>
+  <messages language="english" type="Mapping" traces="//@traces.41"/>
+  <messages language="english" type="Mapping" traces="//@traces.42"/>
+</traceability:TraceModel>

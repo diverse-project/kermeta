@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <traces sourceReferences="//@references.16" targetReferences="//@references.17" description="//@messages.8"/>
+  <traces sourceReferences="//@references.18" targetReferences="//@references.19" description="//@messages.9"/>
+  <traces sourceReferences="//@references.20" targetReferences="//@references.21" description="//@messages.10"/>
+  <traces sourceReferences="//@references.22" targetReferences="//@references.23" description="//@messages.11"/>
+  <traces sourceReferences="//@references.24" targetReferences="//@references.25" description="//@messages.12"/>
+  <traces sourceReferences="//@references.26" targetReferences="//@references.27" description="//@messages.13"/>
+  <traces sourceReferences="//@references.28" targetReferences="//@references.29" description="//@messages.14"/>
+  <traces sourceReferences="//@references.30" targetReferences="//@references.31" description="//@messages.15"/>
+  <traces sourceReferences="//@references.32" targetReferences="//@references.33" description="//@messages.16"/>
+  <traces sourceReferences="//@references.34" targetReferences="//@references.35" description="//@messages.17"/>
+  <traces sourceReferences="//@references.36" targetReferences="//@references.37" description="//@messages.18"/>
+  <traces sourceReferences="//@references.38" targetReferences="//@references.39" description="//@messages.19"/>
+  <traces sourceReferences="//@references.40" targetReferences="//@references.41" description="//@messages.20"/>
+  <traces sourceReferences="//@references.42" targetReferences="//@references.43" description="//@messages.21"/>
+  <traces sourceReferences="//@references.44" targetReferences="//@references.45" description="//@messages.22"/>
+  <traces sourceReferences="//@references.46" targetReferences="//@references.47" description="//@messages.23"/>
+  <traces sourceReferences="//@references.48" targetReferences="//@references.49" description="//@messages.24"/>
+  <traces sourceReferences="//@references.50" targetReferences="//@references.51" description="//@messages.25"/>
+  <traces sourceReferences="//@references.52" targetReferences="//@references.53" description="//@messages.26"/>
+  <traces sourceReferences="//@references.54" targetReferences="//@references.55" description="//@messages.27"/>
+  <traces sourceReferences="//@references.56" targetReferences="//@references.57" description="//@messages.28"/>
+  <traces sourceReferences="//@references.58" targetReferences="//@references.59" description="//@messages.29"/>
+  <traces sourceReferences="//@references.60" targetReferences="//@references.61" description="//@messages.30"/>
+  <traces sourceReferences="//@references.62" targetReferences="//@references.63" description="//@messages.31"/>
+  <traces sourceReferences="//@references.64" targetReferences="//@references.65" description="//@messages.32"/>
+  <traces sourceReferences="//@references.66" targetReferences="//@references.67" description="//@messages.33"/>
+  <traces sourceReferences="//@references.68" targetReferences="//@references.69" description="//@messages.34"/>
+  <traces sourceReferences="//@references.70" targetReferences="//@references.71" description="//@messages.35"/>
+  <traces sourceReferences="//@references.72" targetReferences="//@references.73" description="//@messages.36"/>
+  <traces sourceReferences="//@references.74" targetReferences="//@references.75" description="//@messages.37"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="15" charBeginAt="191" lineEndAt="15" charEndAt="379"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="24" charBeginAt="381" lineEndAt="24" charEndAt="489"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/B"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="31" charBeginAt="491" lineEndAt="31" charEndAt="628"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="33" charBeginAt="505" lineEndAt="33" charEndAt="626"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="26" charBeginAt="404" lineEndAt="26" charEndAt="487"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/B/getAttribute"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="16" charBeginAt="202" lineEndAt="16" charEndAt="243"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A/ai"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="18" charBeginAt="249" lineEndAt="18" charEndAt="377"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A/getAttribute"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="33" charBeginAt="524" lineEndAt="33" charEndAt="528"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="34" charBeginAt="552" lineEndAt="34" charEndAt="553"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.0/@initialization/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="34" charBeginAt="553" lineEndAt="34" charEndAt="557"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.0/@initialization"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="34" charBeginAt="545" lineEndAt="34" charEndAt="546"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="34" charBeginAt="537" lineEndAt="34" charEndAt="557"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="35" charBeginAt="560" lineEndAt="35" charEndAt="561"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.1/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="35" charBeginAt="561" lineEndAt="35" charEndAt="564"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="35" charBeginAt="568" lineEndAt="35" charEndAt="569"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.1/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="35" charBeginAt="560" lineEndAt="35" charEndAt="569"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="36" charBeginAt="597" lineEndAt="36" charEndAt="598"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.2/@parameters.0/@parameters.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="36" charBeginAt="598" lineEndAt="36" charEndAt="620"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.2/@parameters.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="36" charBeginAt="611" lineEndAt="36" charEndAt="620"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.2/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="36" charBeginAt="586" lineEndAt="36" charEndAt="594"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.2/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="36" charBeginAt="595" lineEndAt="36" charEndAt="596"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.2/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="36" charBeginAt="572" lineEndAt="36" charEndAt="577"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.2/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="36" charBeginAt="577" lineEndAt="36" charEndAt="621"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="33" charBeginAt="532" lineEndAt="33" charEndAt="626"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/Main/main/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="27" charBeginAt="464" lineEndAt="27" charEndAt="470"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/B/getAttribute/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="27" charBeginAt="474" lineEndAt="27" charEndAt="479"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/B/getAttribute/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="27" charBeginAt="464" lineEndAt="27" charEndAt="481"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/B/getAttribute/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="26" charBeginAt="458" lineEndAt="26" charEndAt="487"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/B/getAttribute/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="19" charBeginAt="343" lineEndAt="19" charEndAt="345"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A/getAttribute/@body/@statement.0/@parameters.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="19" charBeginAt="345" lineEndAt="19" charEndAt="354"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A/getAttribute/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="19" charBeginAt="326" lineEndAt="19" charEndAt="342"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A/getAttribute/@body/@statement.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="19" charBeginAt="342" lineEndAt="19" charEndAt="343"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A/getAttribute/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="19" charBeginAt="312" lineEndAt="19" charEndAt="317"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A/getAttribute/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="19" charBeginAt="317" lineEndAt="19" charEndAt="355"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A/getAttribute/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="20" charBeginAt="359" lineEndAt="20" charEndAt="365"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A/getAttribute/@body/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="20" charBeginAt="369" lineEndAt="20" charEndAt="371"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A/getAttribute/@body/@statement.1/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="20" charBeginAt="359" lineEndAt="20" charEndAt="371"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A/getAttribute/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/CallSuperOperation_no_params_return_453.kmt" lineBeginAt="18" charBeginAt="306" lineEndAt="18" charEndAt="377"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
+    <refObject href="CallSuperOperation_no_params_return_453.km#//@packages.0/A/getAttribute/@body"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.7"/>
+  <messages language="english" type="Mapping" traces="//@traces.8"/>
+  <messages language="english" type="Mapping" traces="//@traces.9"/>
+  <messages language="english" type="Mapping" traces="//@traces.10"/>
+  <messages language="english" type="Mapping" traces="//@traces.11"/>
+  <messages language="english" type="Mapping" traces="//@traces.12"/>
+  <messages language="english" type="Mapping" traces="//@traces.13"/>
+  <messages language="english" type="Mapping" traces="//@traces.14"/>
+  <messages language="english" type="Mapping" traces="//@traces.15"/>
+  <messages language="english" type="Mapping" traces="//@traces.16"/>
+  <messages language="english" type="Mapping" traces="//@traces.17"/>
+  <messages language="english" type="Mapping" traces="//@traces.18"/>
+  <messages language="english" type="Mapping" traces="//@traces.19"/>
+  <messages language="english" type="Mapping" traces="//@traces.20"/>
+  <messages language="english" type="Mapping" traces="//@traces.21"/>
+  <messages language="english" type="Mapping" traces="//@traces.22"/>
+  <messages language="english" type="Mapping" traces="//@traces.23"/>
+  <messages language="english" type="Mapping" traces="//@traces.24"/>
+  <messages language="english" type="Mapping" traces="//@traces.25"/>
+  <messages language="english" type="Mapping" traces="//@traces.26"/>
+  <messages language="english" type="Mapping" traces="//@traces.27"/>
+  <messages language="english" type="Mapping" traces="//@traces.28"/>
+  <messages language="english" type="Mapping" traces="//@traces.29"/>
+  <messages language="english" type="Mapping" traces="//@traces.30"/>
+  <messages language="english" type="Mapping" traces="//@traces.31"/>
+  <messages language="english" type="Mapping" traces="//@traces.32"/>
+  <messages language="english" type="Mapping" traces="//@traces.33"/>
+  <messages language="english" type="Mapping" traces="//@traces.34"/>
+  <messages language="english" type="Mapping" traces="//@traces.35"/>
+  <messages language="english" type="Mapping" traces="//@traces.36"/>
+  <messages language="english" type="Mapping" traces="//@traces.37"/>
+</traceability:TraceModel>

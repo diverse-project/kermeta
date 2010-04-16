@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <traces sourceReferences="//@references.16" targetReferences="//@references.17" description="//@messages.8"/>
+  <traces sourceReferences="//@references.18" targetReferences="//@references.19" description="//@messages.9"/>
+  <traces sourceReferences="//@references.20" targetReferences="//@references.21" description="//@messages.10"/>
+  <traces sourceReferences="//@references.22" targetReferences="//@references.23" description="//@messages.11"/>
+  <traces sourceReferences="//@references.24" targetReferences="//@references.25" description="//@messages.12"/>
+  <traces sourceReferences="//@references.26" targetReferences="//@references.27" description="//@messages.13"/>
+  <traces sourceReferences="//@references.28" targetReferences="//@references.29" description="//@messages.14"/>
+  <traces sourceReferences="//@references.30" targetReferences="//@references.31" description="//@messages.15"/>
+  <traces sourceReferences="//@references.32" targetReferences="//@references.33" description="//@messages.16"/>
+  <traces sourceReferences="//@references.34" targetReferences="//@references.35" description="//@messages.17"/>
+  <traces sourceReferences="//@references.36" targetReferences="//@references.37" description="//@messages.18"/>
+  <traces sourceReferences="//@references.38" targetReferences="//@references.39" description="//@messages.19"/>
+  <traces sourceReferences="//@references.40" targetReferences="//@references.41" description="//@messages.20"/>
+  <traces sourceReferences="//@references.42" targetReferences="//@references.43" description="//@messages.21"/>
+  <traces sourceReferences="//@references.44" targetReferences="//@references.45" description="//@messages.22"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="17" charBeginAt="192" lineEndAt="17" charEndAt="249"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="Assignment_classe_405.km#//@packages.0/A"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="22" charBeginAt="251" lineEndAt="22" charEndAt="473"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="18" charBeginAt="203" lineEndAt="18" charEndAt="246"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="Assignment_classe_405.km#//@packages.0/A/myAtt"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="24" charBeginAt="265" lineEndAt="24" charEndAt="471"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="24" charBeginAt="284" lineEndAt="24" charEndAt="288"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="26" charBeginAt="353" lineEndAt="26" charEndAt="354"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.0/@initialization/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="26" charBeginAt="354" lineEndAt="26" charEndAt="358"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.0/@initialization"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="26" charBeginAt="346" lineEndAt="26" charEndAt="347"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="26" charBeginAt="336" lineEndAt="26" charEndAt="358"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="27" charBeginAt="361" lineEndAt="27" charEndAt="364"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.1/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="27" charBeginAt="364" lineEndAt="27" charEndAt="370"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="27" charBeginAt="374" lineEndAt="27" charEndAt="384"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.1/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="27" charBeginAt="361" lineEndAt="27" charEndAt="384"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="29" charBeginAt="404" lineEndAt="29" charEndAt="405"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.2/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="29" charBeginAt="388" lineEndAt="29" charEndAt="405"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="30" charBeginAt="409" lineEndAt="30" charEndAt="418"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.3/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="30" charBeginAt="422" lineEndAt="30" charEndAt="425"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.3/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="30" charBeginAt="409" lineEndAt="30" charEndAt="425"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="31" charBeginAt="442" lineEndAt="31" charEndAt="451"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.4/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="31" charBeginAt="451" lineEndAt="31" charEndAt="457"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.4/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="31" charBeginAt="428" lineEndAt="31" charEndAt="433"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.4/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="31" charBeginAt="433" lineEndAt="31" charEndAt="458"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body/@statement.4"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/Assignment_classe_405.kmt" lineBeginAt="24" charBeginAt="292" lineEndAt="24" charEndAt="471"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
+    <refObject href="Assignment_classe_405.km#//@packages.0/Main/main/@body"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" traces="//@traces.7"/>
+  <messages language="english" type="Mapping" traces="//@traces.8"/>
+  <messages language="english" type="Mapping" traces="//@traces.9"/>
+  <messages language="english" type="Mapping" traces="//@traces.10"/>
+  <messages language="english" type="Mapping" traces="//@traces.11"/>
+  <messages language="english" type="Mapping" traces="//@traces.12"/>
+  <messages language="english" type="Mapping" traces="//@traces.13"/>
+  <messages language="english" type="Mapping" traces="//@traces.14"/>
+  <messages language="english" type="Mapping" traces="//@traces.15"/>
+  <messages language="english" type="Mapping" traces="//@traces.16"/>
+  <messages language="english" type="Mapping" traces="//@traces.17"/>
+  <messages language="english" type="Mapping" traces="//@traces.18"/>
+  <messages language="english" type="Mapping" traces="//@traces.19"/>
+  <messages language="english" type="Mapping" traces="//@traces.20"/>
+  <messages language="english" type="Mapping" traces="//@traces.21"/>
+  <messages language="english" type="Mapping" traces="//@traces.22"/>
+</traceability:TraceModel>

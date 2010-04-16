@@ -1,0 +1,1293 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <traces sourceReferences="//@references.16" targetReferences="//@references.17" description="//@messages.8"/>
+  <traces sourceReferences="//@references.18" targetReferences="//@references.19" description="//@messages.9"/>
+  <traces sourceReferences="//@references.20" targetReferences="//@references.21" description="//@messages.10"/>
+  <traces sourceReferences="//@references.22" targetReferences="//@references.23" description="//@messages.11"/>
+  <traces sourceReferences="//@references.24" targetReferences="//@references.25" description="//@messages.12"/>
+  <traces sourceReferences="//@references.26" targetReferences="//@references.27" description="//@messages.13"/>
+  <traces sourceReferences="//@references.28" targetReferences="//@references.29" description="//@messages.14"/>
+  <traces sourceReferences="//@references.30" targetReferences="//@references.31" description="//@messages.15"/>
+  <traces sourceReferences="//@references.32" targetReferences="//@references.33" description="//@messages.16"/>
+  <traces sourceReferences="//@references.34" targetReferences="//@references.35" description="//@messages.17"/>
+  <traces sourceReferences="//@references.36" targetReferences="//@references.37" description="//@messages.18"/>
+  <traces sourceReferences="//@references.38" targetReferences="//@references.39" description="//@messages.19"/>
+  <traces sourceReferences="//@references.40" targetReferences="//@references.41" description="//@messages.20"/>
+  <traces sourceReferences="//@references.42" targetReferences="//@references.43" description="//@messages.21"/>
+  <traces sourceReferences="//@references.44" targetReferences="//@references.45" description="//@messages.22"/>
+  <traces sourceReferences="//@references.46" targetReferences="//@references.47" description="//@messages.23"/>
+  <traces sourceReferences="//@references.48" targetReferences="//@references.49" description="//@messages.24"/>
+  <traces sourceReferences="//@references.50" targetReferences="//@references.51" description="//@messages.25"/>
+  <traces sourceReferences="//@references.52" targetReferences="//@references.53" description="//@messages.26"/>
+  <traces sourceReferences="//@references.54" targetReferences="//@references.55" description="//@messages.27"/>
+  <traces sourceReferences="//@references.56" targetReferences="//@references.57" description="//@messages.28"/>
+  <traces sourceReferences="//@references.58" targetReferences="//@references.59" description="//@messages.29"/>
+  <traces sourceReferences="//@references.60" targetReferences="//@references.61" description="//@messages.30"/>
+  <traces sourceReferences="//@references.62" targetReferences="//@references.63" description="//@messages.31"/>
+  <traces sourceReferences="//@references.64" targetReferences="//@references.65" description="//@messages.32"/>
+  <traces sourceReferences="//@references.66" targetReferences="//@references.67" description="//@messages.33"/>
+  <traces sourceReferences="//@references.68" targetReferences="//@references.69" description="//@messages.34"/>
+  <traces sourceReferences="//@references.70" targetReferences="//@references.71" description="//@messages.35"/>
+  <traces sourceReferences="//@references.72" targetReferences="//@references.73" description="//@messages.36"/>
+  <traces sourceReferences="//@references.74" targetReferences="//@references.75" description="//@messages.37"/>
+  <traces sourceReferences="//@references.76" targetReferences="//@references.77" description="//@messages.38"/>
+  <traces sourceReferences="//@references.78" targetReferences="//@references.79" description="//@messages.39"/>
+  <traces sourceReferences="//@references.80" targetReferences="//@references.81" description="//@messages.40"/>
+  <traces sourceReferences="//@references.82" targetReferences="//@references.83" description="//@messages.41"/>
+  <traces sourceReferences="//@references.84" targetReferences="//@references.85" description="//@messages.42"/>
+  <traces sourceReferences="//@references.86" targetReferences="//@references.87" description="//@messages.43"/>
+  <traces sourceReferences="//@references.88" targetReferences="//@references.89" description="//@messages.44"/>
+  <traces sourceReferences="//@references.90" targetReferences="//@references.91" description="//@messages.45"/>
+  <traces sourceReferences="//@references.92" targetReferences="//@references.93" description="//@messages.46"/>
+  <traces sourceReferences="//@references.94" targetReferences="//@references.95" description="//@messages.47"/>
+  <traces sourceReferences="//@references.96" targetReferences="//@references.97" description="//@messages.48"/>
+  <traces sourceReferences="//@references.98" targetReferences="//@references.99" description="//@messages.49"/>
+  <traces sourceReferences="//@references.100" targetReferences="//@references.101" description="//@messages.50"/>
+  <traces sourceReferences="//@references.102" targetReferences="//@references.103" description="//@messages.51"/>
+  <traces sourceReferences="//@references.104" targetReferences="//@references.105" description="//@messages.52"/>
+  <traces sourceReferences="//@references.106" targetReferences="//@references.107" description="//@messages.53"/>
+  <traces sourceReferences="//@references.108" targetReferences="//@references.109" description="//@messages.54"/>
+  <traces sourceReferences="//@references.110" targetReferences="//@references.111" description="//@messages.55"/>
+  <traces sourceReferences="//@references.112" targetReferences="//@references.113" description="//@messages.56"/>
+  <traces sourceReferences="//@references.114" targetReferences="//@references.115" description="//@messages.57"/>
+  <traces sourceReferences="//@references.116" targetReferences="//@references.117" description="//@messages.58"/>
+  <traces sourceReferences="//@references.118" targetReferences="//@references.119" description="//@messages.59"/>
+  <traces sourceReferences="//@references.120" targetReferences="//@references.121" description="//@messages.60"/>
+  <traces sourceReferences="//@references.122" targetReferences="//@references.123" description="//@messages.61"/>
+  <traces sourceReferences="//@references.124" targetReferences="//@references.125" description="//@messages.62"/>
+  <traces sourceReferences="//@references.126" targetReferences="//@references.127" description="//@messages.63"/>
+  <traces sourceReferences="//@references.128" targetReferences="//@references.129" description="//@messages.64"/>
+  <traces sourceReferences="//@references.130" targetReferences="//@references.131" description="//@messages.65"/>
+  <traces sourceReferences="//@references.132" targetReferences="//@references.133" description="//@messages.66"/>
+  <traces sourceReferences="//@references.134" targetReferences="//@references.135" description="//@messages.67"/>
+  <traces sourceReferences="//@references.136" targetReferences="//@references.137" description="//@messages.68"/>
+  <traces sourceReferences="//@references.138" targetReferences="//@references.139" description="//@messages.69"/>
+  <traces sourceReferences="//@references.140" targetReferences="//@references.141" description="//@messages.70"/>
+  <traces sourceReferences="//@references.142" targetReferences="//@references.143" description="//@messages.71"/>
+  <traces sourceReferences="//@references.144" targetReferences="//@references.145" description="//@messages.72"/>
+  <traces sourceReferences="//@references.146" targetReferences="//@references.147" description="//@messages.73"/>
+  <traces sourceReferences="//@references.148" targetReferences="//@references.149" description="//@messages.74"/>
+  <traces sourceReferences="//@references.150" targetReferences="//@references.151" description="//@messages.75"/>
+  <traces sourceReferences="//@references.152" targetReferences="//@references.153" description="//@messages.76"/>
+  <traces sourceReferences="//@references.154" targetReferences="//@references.155" description="//@messages.77"/>
+  <traces sourceReferences="//@references.156" targetReferences="//@references.157" description="//@messages.78"/>
+  <traces sourceReferences="//@references.158" targetReferences="//@references.159" description="//@messages.79"/>
+  <traces sourceReferences="//@references.160" targetReferences="//@references.161" description="//@messages.80"/>
+  <traces sourceReferences="//@references.162" targetReferences="//@references.163" description="//@messages.81"/>
+  <traces sourceReferences="//@references.164" targetReferences="//@references.165" description="//@messages.82"/>
+  <traces sourceReferences="//@references.166" targetReferences="//@references.167" description="//@messages.83"/>
+  <traces sourceReferences="//@references.168" targetReferences="//@references.169" description="//@messages.84"/>
+  <traces sourceReferences="//@references.170" targetReferences="//@references.171" description="//@messages.85"/>
+  <traces sourceReferences="//@references.172" targetReferences="//@references.173" description="//@messages.86"/>
+  <traces sourceReferences="//@references.174" targetReferences="//@references.175" description="//@messages.87"/>
+  <traces sourceReferences="//@references.176" targetReferences="//@references.177" description="//@messages.88"/>
+  <traces sourceReferences="//@references.178" targetReferences="//@references.179" description="//@messages.89"/>
+  <traces sourceReferences="//@references.180" targetReferences="//@references.181" description="//@messages.90"/>
+  <traces sourceReferences="//@references.182" targetReferences="//@references.183" description="//@messages.91"/>
+  <traces sourceReferences="//@references.184" targetReferences="//@references.185" description="//@messages.92"/>
+  <traces sourceReferences="//@references.186" targetReferences="//@references.187" description="//@messages.93"/>
+  <traces sourceReferences="//@references.188" targetReferences="//@references.189" description="//@messages.94"/>
+  <traces sourceReferences="//@references.190" targetReferences="//@references.191" description="//@messages.95"/>
+  <traces sourceReferences="//@references.192" targetReferences="//@references.193" description="//@messages.96"/>
+  <traces sourceReferences="//@references.194" targetReferences="//@references.195" description="//@messages.97"/>
+  <traces sourceReferences="//@references.196" targetReferences="//@references.197" description="//@messages.98"/>
+  <traces sourceReferences="//@references.198" targetReferences="//@references.199" description="//@messages.99"/>
+  <traces sourceReferences="//@references.200" targetReferences="//@references.201" description="//@messages.100"/>
+  <traces sourceReferences="//@references.202" targetReferences="//@references.203" description="//@messages.101"/>
+  <traces sourceReferences="//@references.204" targetReferences="//@references.205" description="//@messages.102"/>
+  <traces sourceReferences="//@references.206" targetReferences="//@references.207" description="//@messages.103"/>
+  <traces sourceReferences="//@references.208" targetReferences="//@references.209" description="//@messages.104"/>
+  <traces sourceReferences="//@references.210" targetReferences="//@references.211" description="//@messages.105"/>
+  <traces sourceReferences="//@references.212" targetReferences="//@references.213" description="//@messages.106"/>
+  <traces sourceReferences="//@references.214" targetReferences="//@references.215" description="//@messages.107"/>
+  <traces sourceReferences="//@references.216" targetReferences="//@references.217" description="//@messages.108"/>
+  <traces sourceReferences="//@references.218" targetReferences="//@references.219" description="//@messages.109"/>
+  <traces sourceReferences="//@references.220" targetReferences="//@references.221" description="//@messages.110"/>
+  <traces sourceReferences="//@references.222" targetReferences="//@references.223" description="//@messages.111"/>
+  <traces sourceReferences="//@references.224" targetReferences="//@references.225" description="//@messages.112"/>
+  <traces sourceReferences="//@references.226" targetReferences="//@references.227" description="//@messages.113"/>
+  <traces sourceReferences="//@references.228" targetReferences="//@references.229" description="//@messages.114"/>
+  <traces sourceReferences="//@references.230" targetReferences="//@references.231" description="//@messages.115"/>
+  <traces sourceReferences="//@references.232" targetReferences="//@references.233" description="//@messages.116"/>
+  <traces sourceReferences="//@references.234" targetReferences="//@references.235" description="//@messages.117"/>
+  <traces sourceReferences="//@references.236" targetReferences="//@references.237" description="//@messages.118"/>
+  <traces sourceReferences="//@references.238" targetReferences="//@references.239" description="//@messages.119"/>
+  <traces sourceReferences="//@references.240" targetReferences="//@references.241" description="//@messages.120"/>
+  <traces sourceReferences="//@references.242" targetReferences="//@references.243" description="//@messages.121"/>
+  <traces sourceReferences="//@references.244" targetReferences="//@references.245" description="//@messages.122"/>
+  <traces sourceReferences="//@references.246" targetReferences="//@references.247" description="//@messages.123"/>
+  <traces sourceReferences="//@references.248" targetReferences="//@references.249" description="//@messages.124"/>
+  <traces sourceReferences="//@references.250" targetReferences="//@references.251" description="//@messages.125"/>
+  <traces sourceReferences="//@references.252" targetReferences="//@references.253" description="//@messages.126"/>
+  <traces sourceReferences="//@references.254" targetReferences="//@references.255" description="//@messages.127"/>
+  <traces sourceReferences="//@references.256" targetReferences="//@references.257" description="//@messages.128"/>
+  <traces sourceReferences="//@references.258" targetReferences="//@references.259" description="//@messages.129"/>
+  <traces sourceReferences="//@references.260" targetReferences="//@references.261" description="//@messages.130"/>
+  <traces sourceReferences="//@references.262" targetReferences="//@references.263" description="//@messages.131"/>
+  <traces sourceReferences="//@references.264" targetReferences="//@references.265" description="//@messages.132"/>
+  <traces sourceReferences="//@references.266" targetReferences="//@references.267" description="//@messages.133"/>
+  <traces sourceReferences="//@references.268" targetReferences="//@references.269" description="//@messages.134"/>
+  <traces sourceReferences="//@references.270" targetReferences="//@references.271" description="//@messages.135"/>
+  <traces sourceReferences="//@references.272" targetReferences="//@references.273" description="//@messages.136"/>
+  <traces sourceReferences="//@references.274" targetReferences="//@references.275" description="//@messages.137"/>
+  <traces sourceReferences="//@references.276" targetReferences="//@references.277" description="//@messages.138"/>
+  <traces sourceReferences="//@references.278" targetReferences="//@references.279" description="//@messages.139"/>
+  <traces sourceReferences="//@references.280" targetReferences="//@references.281" description="//@messages.140"/>
+  <traces sourceReferences="//@references.282" targetReferences="//@references.283" description="//@messages.141"/>
+  <traces sourceReferences="//@references.284" targetReferences="//@references.285" description="//@messages.142"/>
+  <traces sourceReferences="//@references.286" targetReferences="//@references.287" description="//@messages.143"/>
+  <traces sourceReferences="//@references.288" targetReferences="//@references.289" description="//@messages.144"/>
+  <traces sourceReferences="//@references.290" targetReferences="//@references.291" description="//@messages.145"/>
+  <traces sourceReferences="//@references.292" targetReferences="//@references.293" description="//@messages.146"/>
+  <traces sourceReferences="//@references.294" targetReferences="//@references.295" description="//@messages.147"/>
+  <traces sourceReferences="//@references.296" targetReferences="//@references.297" description="//@messages.148"/>
+  <traces sourceReferences="//@references.298" targetReferences="//@references.299" description="//@messages.149"/>
+  <traces sourceReferences="//@references.300" targetReferences="//@references.301" description="//@messages.150"/>
+  <traces sourceReferences="//@references.302" targetReferences="//@references.303" description="//@messages.151"/>
+  <traces sourceReferences="//@references.304" targetReferences="//@references.305" description="//@messages.152"/>
+  <traces sourceReferences="//@references.306" targetReferences="//@references.307" description="//@messages.153"/>
+  <traces sourceReferences="//@references.308" targetReferences="//@references.309" description="//@messages.154"/>
+  <traces sourceReferences="//@references.310" targetReferences="//@references.311" description="//@messages.155"/>
+  <traces sourceReferences="//@references.312" targetReferences="//@references.313" description="//@messages.156"/>
+  <traces sourceReferences="//@references.314" targetReferences="//@references.315" description="//@messages.157"/>
+  <traces sourceReferences="//@references.316" targetReferences="//@references.317" description="//@messages.158"/>
+  <traces sourceReferences="//@references.318" targetReferences="//@references.319" description="//@messages.159"/>
+  <traces sourceReferences="//@references.320" targetReferences="//@references.321" description="//@messages.160"/>
+  <traces sourceReferences="//@references.322" targetReferences="//@references.323" description="//@messages.161"/>
+  <traces sourceReferences="//@references.324" targetReferences="//@references.325" description="//@messages.162"/>
+  <traces sourceReferences="//@references.326" targetReferences="//@references.327" description="//@messages.163"/>
+  <traces sourceReferences="//@references.328" targetReferences="//@references.329" description="//@messages.164"/>
+  <traces sourceReferences="//@references.330" targetReferences="//@references.331" description="//@messages.165"/>
+  <traces sourceReferences="//@references.332" targetReferences="//@references.333" description="//@messages.166"/>
+  <traces sourceReferences="//@references.334" targetReferences="//@references.335" description="//@messages.167"/>
+  <traces sourceReferences="//@references.336" targetReferences="//@references.337" description="//@messages.168"/>
+  <traces sourceReferences="//@references.338" targetReferences="//@references.339" description="//@messages.169"/>
+  <traces sourceReferences="//@references.340" targetReferences="//@references.341" description="//@messages.170"/>
+  <traces sourceReferences="//@references.342" targetReferences="//@references.343" description="//@messages.171"/>
+  <traces sourceReferences="//@references.344" targetReferences="//@references.345" description="//@messages.172"/>
+  <traces sourceReferences="//@references.346" targetReferences="//@references.347" description="//@messages.173"/>
+  <traces sourceReferences="//@references.348" targetReferences="//@references.349" description="//@messages.174"/>
+  <traces sourceReferences="//@references.350" targetReferences="//@references.351" description="//@messages.175"/>
+  <traces sourceReferences="//@references.352" targetReferences="//@references.353" description="//@messages.176"/>
+  <traces sourceReferences="//@references.354" targetReferences="//@references.355" description="//@messages.177"/>
+  <traces sourceReferences="//@references.356" targetReferences="//@references.357" description="//@messages.178"/>
+  <traces sourceReferences="//@references.358" targetReferences="//@references.359" description="//@messages.179"/>
+  <traces sourceReferences="//@references.360" targetReferences="//@references.361" description="//@messages.180"/>
+  <traces sourceReferences="//@references.362" targetReferences="//@references.363" description="//@messages.181"/>
+  <traces sourceReferences="//@references.364" targetReferences="//@references.365" description="//@messages.182"/>
+  <traces sourceReferences="//@references.366" targetReferences="//@references.367" description="//@messages.183"/>
+  <traces sourceReferences="//@references.368" targetReferences="//@references.369" description="//@messages.184"/>
+  <traces sourceReferences="//@references.370" targetReferences="//@references.371" description="//@messages.185"/>
+  <traces sourceReferences="//@references.372" targetReferences="//@references.373" description="//@messages.186"/>
+  <traces sourceReferences="//@references.374" targetReferences="//@references.375" description="//@messages.187"/>
+  <traces sourceReferences="//@references.376" targetReferences="//@references.377" description="//@messages.188"/>
+  <traces sourceReferences="//@references.378" targetReferences="//@references.379" description="//@messages.189"/>
+  <traces sourceReferences="//@references.380" targetReferences="//@references.381" description="//@messages.190"/>
+  <traces sourceReferences="//@references.382" targetReferences="//@references.383" description="//@messages.191"/>
+  <traces sourceReferences="//@references.384" targetReferences="//@references.385" description="//@messages.192"/>
+  <traces sourceReferences="//@references.386" targetReferences="//@references.387" description="//@messages.193"/>
+  <traces sourceReferences="//@references.388" targetReferences="//@references.389" description="//@messages.194"/>
+  <traces sourceReferences="//@references.390" targetReferences="//@references.391" description="//@messages.195"/>
+  <traces sourceReferences="//@references.392" targetReferences="//@references.393" description="//@messages.196"/>
+  <traces sourceReferences="//@references.394" targetReferences="//@references.395" description="//@messages.197"/>
+  <traces sourceReferences="//@references.396" targetReferences="//@references.397" description="//@messages.198"/>
+  <traces sourceReferences="//@references.398" targetReferences="//@references.399" description="//@messages.199"/>
+  <traces sourceReferences="//@references.400" targetReferences="//@references.401" description="//@messages.200"/>
+  <traces sourceReferences="//@references.402" targetReferences="//@references.403" description="//@messages.201"/>
+  <traces sourceReferences="//@references.404" targetReferences="//@references.405" description="//@messages.202"/>
+  <traces sourceReferences="//@references.406" targetReferences="//@references.407" description="//@messages.203"/>
+  <traces sourceReferences="//@references.408" targetReferences="//@references.409" description="//@messages.204"/>
+  <traces sourceReferences="//@references.410" targetReferences="//@references.411" description="//@messages.205"/>
+  <traces sourceReferences="//@references.412" targetReferences="//@references.413" description="//@messages.206"/>
+  <traces sourceReferences="//@references.414" targetReferences="//@references.415" description="//@messages.207"/>
+  <traces sourceReferences="//@references.416" targetReferences="//@references.417" description="//@messages.208"/>
+  <traces sourceReferences="//@references.418" targetReferences="//@references.419" description="//@messages.209"/>
+  <traces sourceReferences="//@references.420" targetReferences="//@references.421" description="//@messages.210"/>
+  <traces sourceReferences="//@references.422" targetReferences="//@references.423" description="//@messages.211"/>
+  <traces sourceReferences="//@references.424" targetReferences="//@references.425" description="//@messages.212"/>
+  <traces sourceReferences="//@references.426" targetReferences="//@references.427" description="//@messages.213"/>
+  <traces sourceReferences="//@references.428" targetReferences="//@references.429" description="//@messages.214"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="12" charBeginAt="199" lineEndAt="12" charEndAt="801"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="45" charBeginAt="804" lineEndAt="45" charEndAt="1245"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="68" charBeginAt="1247" lineEndAt="68" charEndAt="2326"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="70" charBeginAt="1313" lineEndAt="70" charEndAt="2318"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="27" charBeginAt="482" lineEndAt="27" charEndAt="494"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="27" charBeginAt="495" lineEndAt="27" charEndAt="507"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@ownedParameter.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="27" charBeginAt="467" lineEndAt="27" charEndAt="798"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="14" charBeginAt="229" lineEndAt="14" charEndAt="240"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="14" charBeginAt="213" lineEndAt="14" charEndAt="463"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="47" charBeginAt="830" lineEndAt="47" charEndAt="835"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="47" charBeginAt="836" lineEndAt="47" charEndAt="848"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@ownedParameter.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="47" charBeginAt="849" lineEndAt="47" charEndAt="861"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@ownedParameter.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="47" charBeginAt="816" lineEndAt="47" charEndAt="1243"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="71" charBeginAt="1364" lineEndAt="71" charEndAt="1365"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="71" charBeginAt="1356" lineEndAt="71" charEndAt="1365"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="72" charBeginAt="1380" lineEndAt="72" charEndAt="1381"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.1/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="72" charBeginAt="1372" lineEndAt="72" charEndAt="1381"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="74" charBeginAt="1395" lineEndAt="74" charEndAt="1396"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.2/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="74" charBeginAt="1400" lineEndAt="74" charEndAt="1401"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.2/@value/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="74" charBeginAt="1401" lineEndAt="74" charEndAt="1405"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.2/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="74" charBeginAt="1395" lineEndAt="74" charEndAt="1405"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="75" charBeginAt="1412" lineEndAt="75" charEndAt="1413"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.3/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="75" charBeginAt="1417" lineEndAt="75" charEndAt="1418"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.3/@value/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="75" charBeginAt="1418" lineEndAt="75" charEndAt="1422"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.3/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="75" charBeginAt="1412" lineEndAt="75" charEndAt="1422"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="78" charBeginAt="1453" lineEndAt="78" charEndAt="1457"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.4/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="78" charBeginAt="1446" lineEndAt="78" charEndAt="1447"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.4/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="78" charBeginAt="1447" lineEndAt="78" charEndAt="1458"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.4/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="79" charBeginAt="1473" lineEndAt="79" charEndAt="1478"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.4/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="79" charBeginAt="1466" lineEndAt="79" charEndAt="1472"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.4/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="80" charBeginAt="1497" lineEndAt="80" charEndAt="1506"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.4/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="81" charBeginAt="1523" lineEndAt="81" charEndAt="1527"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.4/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="81" charBeginAt="1516" lineEndAt="81" charEndAt="1522"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.4/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="80" charBeginAt="1487" lineEndAt="80" charEndAt="1528"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.4/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="77" charBeginAt="1436" lineEndAt="77" charEndAt="1538"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.4"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="84" charBeginAt="1562" lineEndAt="84" charEndAt="1567"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.5/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="84" charBeginAt="1555" lineEndAt="84" charEndAt="1556"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.5/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="84" charBeginAt="1556" lineEndAt="84" charEndAt="1568"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.5/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="85" charBeginAt="1583" lineEndAt="85" charEndAt="1588"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.5/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="85" charBeginAt="1576" lineEndAt="85" charEndAt="1582"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.5/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="86" charBeginAt="1607" lineEndAt="86" charEndAt="1616"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.5/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="87" charBeginAt="1633" lineEndAt="87" charEndAt="1637"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.5/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="87" charBeginAt="1626" lineEndAt="87" charEndAt="1632"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.5/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="86" charBeginAt="1597" lineEndAt="86" charEndAt="1638"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.43">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.5/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="83" charBeginAt="1545" lineEndAt="83" charEndAt="1648"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.44">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.5"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="89" charBeginAt="1662" lineEndAt="89" charEndAt="1666"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.45">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.6/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="89" charBeginAt="1667" lineEndAt="89" charEndAt="1671"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.46">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.6/@parameters.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="89" charBeginAt="1655" lineEndAt="89" charEndAt="1656"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.47">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.6/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="89" charBeginAt="1656" lineEndAt="89" charEndAt="1672"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.48">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.6"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="91" charBeginAt="1696" lineEndAt="91" charEndAt="1700"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.49">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.7/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="91" charBeginAt="1701" lineEndAt="91" charEndAt="1706"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.50">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.7/@statement.0/@parameters.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="91" charBeginAt="1689" lineEndAt="91" charEndAt="1690"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.51">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.7/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="91" charBeginAt="1690" lineEndAt="91" charEndAt="1707"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.52">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.7/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="92" charBeginAt="1722" lineEndAt="92" charEndAt="1727"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.53">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.7/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="92" charBeginAt="1715" lineEndAt="92" charEndAt="1721"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.54">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.7/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="93" charBeginAt="1746" lineEndAt="93" charEndAt="1755"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.55">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.7/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="94" charBeginAt="1772" lineEndAt="94" charEndAt="1776"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.56">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.7/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="94" charBeginAt="1765" lineEndAt="94" charEndAt="1771"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.57">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.7/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="93" charBeginAt="1736" lineEndAt="93" charEndAt="1777"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.58">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.7/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="90" charBeginAt="1679" lineEndAt="90" charEndAt="1787"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.59">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.7"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="97" charBeginAt="1811" lineEndAt="97" charEndAt="1816"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.60">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.8/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="97" charBeginAt="1817" lineEndAt="97" charEndAt="1821"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.61">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.8/@statement.0/@parameters.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="97" charBeginAt="1804" lineEndAt="97" charEndAt="1805"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.62">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.8/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.63" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="97" charBeginAt="1805" lineEndAt="97" charEndAt="1822"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.63">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.8/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.64" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="98" charBeginAt="1837" lineEndAt="98" charEndAt="1841"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.64">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.8/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.65" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="98" charBeginAt="1830" lineEndAt="98" charEndAt="1836"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.65">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.8/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.66" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="99" charBeginAt="1860" lineEndAt="99" charEndAt="1866"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.66">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.8/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.67" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="100" charBeginAt="1883" lineEndAt="100" charEndAt="1887"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.67">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.8/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.68" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="100" charBeginAt="1876" lineEndAt="100" charEndAt="1882"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.68">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.8/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.69" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="99" charBeginAt="1850" lineEndAt="99" charEndAt="1888"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.69">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.8/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.70" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="96" charBeginAt="1794" lineEndAt="96" charEndAt="1898"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.70">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.8"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.71" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="103" charBeginAt="1923" lineEndAt="103" charEndAt="1928"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.71">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.9/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.72" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="103" charBeginAt="1929" lineEndAt="103" charEndAt="1934"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.72">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.9/@statement.0/@parameters.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.73" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="103" charBeginAt="1916" lineEndAt="103" charEndAt="1917"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.73">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.9/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.74" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="103" charBeginAt="1917" lineEndAt="103" charEndAt="1935"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.74">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.9/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.75" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="104" charBeginAt="1951" lineEndAt="104" charEndAt="1956"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.75">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.9/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.76" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="104" charBeginAt="1944" lineEndAt="104" charEndAt="1950"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.76">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.9/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.77" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="105" charBeginAt="1975" lineEndAt="105" charEndAt="1984"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.77">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.9/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.78" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="106" charBeginAt="2002" lineEndAt="106" charEndAt="2006"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.78">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.9/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.79" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="106" charBeginAt="1995" lineEndAt="106" charEndAt="2001"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.79">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.9/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.80" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="105" charBeginAt="1966" lineEndAt="105" charEndAt="2007"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.80">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.9/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.81" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="102" charBeginAt="1905" lineEndAt="102" charEndAt="2018"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.81">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.9"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.82" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="108" charBeginAt="2032" lineEndAt="108" charEndAt="2033"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.82">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.10/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.83" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="108" charBeginAt="2034" lineEndAt="108" charEndAt="2038"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.83">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.10/@parameters.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.84" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="108" charBeginAt="2039" lineEndAt="108" charEndAt="2043"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.84">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.10/@parameters.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.85" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="108" charBeginAt="2026" lineEndAt="108" charEndAt="2027"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.85">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.10/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.86" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="108" charBeginAt="2027" lineEndAt="108" charEndAt="2044"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.86">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.10"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.87" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="109" charBeginAt="2058" lineEndAt="109" charEndAt="2059"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.87">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.11/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.88" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="109" charBeginAt="2060" lineEndAt="109" charEndAt="2065"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.88">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.11/@parameters.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.89" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="109" charBeginAt="2066" lineEndAt="109" charEndAt="2070"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.89">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.11/@parameters.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.90" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="109" charBeginAt="2052" lineEndAt="109" charEndAt="2053"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.90">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.11/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.91" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="109" charBeginAt="2053" lineEndAt="109" charEndAt="2071"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.91">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.11"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.92" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="111" charBeginAt="2096" lineEndAt="111" charEndAt="2097"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.92">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.12/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.93" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="111" charBeginAt="2098" lineEndAt="111" charEndAt="2102"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.93">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.12/@statement.0/@parameters.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.94" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="111" charBeginAt="2103" lineEndAt="111" charEndAt="2108"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.94">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.12/@statement.0/@parameters.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.95" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="111" charBeginAt="2090" lineEndAt="111" charEndAt="2091"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.95">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.12/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.96" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="111" charBeginAt="2091" lineEndAt="111" charEndAt="2109"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.96">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.12/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.97" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="112" charBeginAt="2125" lineEndAt="112" charEndAt="2130"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.97">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.12/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.98" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="112" charBeginAt="2118" lineEndAt="112" charEndAt="2124"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.98">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.12/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.99" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="113" charBeginAt="2149" lineEndAt="113" charEndAt="2158"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.99">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.12/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.100" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="114" charBeginAt="2176" lineEndAt="114" charEndAt="2180"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.100">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.12/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.101" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="114" charBeginAt="2169" lineEndAt="114" charEndAt="2175"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.101">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.12/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.102" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="113" charBeginAt="2140" lineEndAt="113" charEndAt="2181"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.102">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.12/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.103" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="110" charBeginAt="2079" lineEndAt="110" charEndAt="2190"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.103">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.12"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.104" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="117" charBeginAt="2214" lineEndAt="117" charEndAt="2215"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.104">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.13/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.105" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="117" charBeginAt="2216" lineEndAt="117" charEndAt="2221"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.105">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.13/@statement.0/@parameters.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.106" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="117" charBeginAt="2222" lineEndAt="117" charEndAt="2227"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.106">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.13/@statement.0/@parameters.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.107" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="117" charBeginAt="2208" lineEndAt="117" charEndAt="2209"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.107">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.13/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.108" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="117" charBeginAt="2209" lineEndAt="117" charEndAt="2228"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.108">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.13/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.109" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="118" charBeginAt="2244" lineEndAt="118" charEndAt="2249"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.109">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.13/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.110" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="118" charBeginAt="2237" lineEndAt="118" charEndAt="2243"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.110">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.13/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.111" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="119" charBeginAt="2268" lineEndAt="119" charEndAt="2277"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.111">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.13/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.112" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="120" charBeginAt="2295" lineEndAt="120" charEndAt="2299"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.112">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.13/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.113" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="120" charBeginAt="2288" lineEndAt="120" charEndAt="2294"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.113">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.13/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.114" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="119" charBeginAt="2259" lineEndAt="119" charEndAt="2300"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.114">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.13/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.115" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="116" charBeginAt="2197" lineEndAt="116" charEndAt="2309"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.115">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body/@statement.13"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.116" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="70" charBeginAt="1347" lineEndAt="70" charEndAt="2318"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.116">
+    <refObject href="018_testExceptions.main.km#//@packages.0/TestExceptions/testmain_operation/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.117" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="28" charBeginAt="521" lineEndAt="28" charEndAt="523"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.117">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@condition"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.118" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="35" charBeginAt="660" lineEndAt="35" charEndAt="662"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.118">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.119" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="35" charBeginAt="655" lineEndAt="35" charEndAt="659"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.119">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.120" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="36" charBeginAt="680" lineEndAt="36" charEndAt="689"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.120">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.121" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="37" charBeginAt="708" lineEndAt="37" charEndAt="709"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.121">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.0/@parameters.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.122" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="37" charBeginAt="709" lineEndAt="37" charEndAt="726"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.122">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.123" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="37" charBeginAt="717" lineEndAt="37" charEndAt="726"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.123">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.124" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="37" charBeginAt="696" lineEndAt="37" charEndAt="701"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.124">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.125" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="37" charBeginAt="701" lineEndAt="37" charEndAt="727"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.125">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.126" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="38" charBeginAt="747" lineEndAt="38" charEndAt="760"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.126">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.127" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="38" charBeginAt="733" lineEndAt="38" charEndAt="738"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.127">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.128" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="38" charBeginAt="738" lineEndAt="38" charEndAt="761"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.128">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.129" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="36" charBeginAt="668" lineEndAt="36" charEndAt="761"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.129">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.130" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="34" charBeginAt="648" lineEndAt="34" charEndAt="785"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.130">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.131" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="34" charBeginAt="648" lineEndAt="34" charEndAt="785"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.131">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@elseBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.132" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="29" charBeginAt="541" lineEndAt="29" charEndAt="543"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.132">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody/@statement.0/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.133" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="29" charBeginAt="536" lineEndAt="29" charEndAt="540"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.133">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody/@statement.0/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.134" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="30" charBeginAt="561" lineEndAt="30" charEndAt="570"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.134">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.135" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="31" charBeginAt="589" lineEndAt="31" charEndAt="590"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.135">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.136" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="31" charBeginAt="590" lineEndAt="31" charEndAt="598"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.136">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.137" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="31" charBeginAt="577" lineEndAt="31" charEndAt="582"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.137">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.138" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="31" charBeginAt="582" lineEndAt="31" charEndAt="599"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.138">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.139" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="32" charBeginAt="619" lineEndAt="32" charEndAt="629"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.139">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.140" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="32" charBeginAt="605" lineEndAt="32" charEndAt="610"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.140">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.141" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="32" charBeginAt="610" lineEndAt="32" charEndAt="630"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.141">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.142" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="30" charBeginAt="549" lineEndAt="30" charEndAt="630"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.142">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.143" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="28" charBeginAt="529" lineEndAt="28" charEndAt="639"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.143">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.144" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="28" charBeginAt="529" lineEndAt="28" charEndAt="639"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.144">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0/@thenBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.145" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="28" charBeginAt="518" lineEndAt="28" charEndAt="792"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.145">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.146" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="27" charBeginAt="512" lineEndAt="27" charEndAt="798"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.146">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA2/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.147" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="15" charBeginAt="255" lineEndAt="15" charEndAt="256"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.147">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@condition"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.148" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="20" charBeginAt="399" lineEndAt="20" charEndAt="408"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.148">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@elseBody/@statement.0/@expression/@statement.0/@initialization/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.149" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="20" charBeginAt="408" lineEndAt="20" charEndAt="412"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.149">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@elseBody/@statement.0/@expression/@statement.0/@initialization"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.150" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="20" charBeginAt="384" lineEndAt="20" charEndAt="393"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.150">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@elseBody/@statement.0/@expression/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.151" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="20" charBeginAt="376" lineEndAt="20" charEndAt="412"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.151">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@elseBody/@statement.0/@expression/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.152" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="21" charBeginAt="418" lineEndAt="21" charEndAt="419"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.152">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@elseBody/@statement.0/@expression/@statement.1/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.153" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="21" charBeginAt="419" lineEndAt="21" charEndAt="427"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.153">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@elseBody/@statement.0/@expression/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.154" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="21" charBeginAt="431" lineEndAt="21" charEndAt="435"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.154">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@elseBody/@statement.0/@expression/@statement.1/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.155" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="21" charBeginAt="418" lineEndAt="21" charEndAt="435"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.155">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@elseBody/@statement.0/@expression/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.156" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="22" charBeginAt="441" lineEndAt="22" charEndAt="442"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.156">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@elseBody/@statement.0/@expression/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.157" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="20" charBeginAt="373" lineEndAt="20" charEndAt="450"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.157">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@elseBody/@statement.0/@expression"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.158" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="20" charBeginAt="367" lineEndAt="20" charEndAt="450"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.158">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@elseBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.159" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="20" charBeginAt="367" lineEndAt="20" charEndAt="450"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.159">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@elseBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.160" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="16" charBeginAt="299" lineEndAt="16" charEndAt="308"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.160">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@thenBody/@statement.0/@expression/@statement.0/@initialization/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.161" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="16" charBeginAt="308" lineEndAt="16" charEndAt="312"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.161">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@thenBody/@statement.0/@expression/@statement.0/@initialization"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.162" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="16" charBeginAt="284" lineEndAt="16" charEndAt="293"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.162">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@thenBody/@statement.0/@expression/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.163" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="16" charBeginAt="276" lineEndAt="16" charEndAt="312"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.163">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@thenBody/@statement.0/@expression/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.164" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="17" charBeginAt="318" lineEndAt="17" charEndAt="319"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.164">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@thenBody/@statement.0/@expression/@statement.1/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.165" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="17" charBeginAt="319" lineEndAt="17" charEndAt="327"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.165">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@thenBody/@statement.0/@expression/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.166" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="17" charBeginAt="331" lineEndAt="17" charEndAt="343"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.166">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@thenBody/@statement.0/@expression/@statement.1/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.167" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="17" charBeginAt="318" lineEndAt="17" charEndAt="343"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.167">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@thenBody/@statement.0/@expression/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.168" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="18" charBeginAt="349" lineEndAt="18" charEndAt="350"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.168">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@thenBody/@statement.0/@expression/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.169" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="16" charBeginAt="273" lineEndAt="16" charEndAt="358"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.169">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@thenBody/@statement.0/@expression"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.170" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="16" charBeginAt="267" lineEndAt="16" charEndAt="358"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.170">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@thenBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.171" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="16" charBeginAt="267" lineEndAt="16" charEndAt="358"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.171">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0/@thenBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.172" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="15" charBeginAt="251" lineEndAt="15" charEndAt="457"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.172">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.173" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="14" charBeginAt="245" lineEndAt="14" charEndAt="463"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.173">
+    <refObject href="018_testExceptions.main.km#//@packages.0/A/opA1/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.174" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="48" charBeginAt="876" lineEndAt="48" charEndAt="878"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.174">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@condition"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.175" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="55" charBeginAt="1020" lineEndAt="55" charEndAt="1022"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.175">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.176" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="55" charBeginAt="1013" lineEndAt="55" charEndAt="1014"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.176">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.177" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="55" charBeginAt="1014" lineEndAt="55" charEndAt="1023"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.177">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.178" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="56" charBeginAt="1040" lineEndAt="56" charEndAt="1049"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.178">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.179" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="57" charBeginAt="1068" lineEndAt="57" charEndAt="1069"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.179">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.0/@parameters.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.180" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="57" charBeginAt="1069" lineEndAt="57" charEndAt="1086"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.180">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.181" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="57" charBeginAt="1077" lineEndAt="57" charEndAt="1086"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.181">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.182" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="57" charBeginAt="1056" lineEndAt="57" charEndAt="1061"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.182">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.183" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="57" charBeginAt="1061" lineEndAt="57" charEndAt="1087"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.183">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.184" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="58" charBeginAt="1107" lineEndAt="58" charEndAt="1120"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.184">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.185" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="58" charBeginAt="1093" lineEndAt="58" charEndAt="1098"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.185">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.186" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="58" charBeginAt="1098" lineEndAt="58" charEndAt="1121"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.186">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0/@body.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.187" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="56" charBeginAt="1028" lineEndAt="56" charEndAt="1121"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.187">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.188" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="54" charBeginAt="1006" lineEndAt="54" charEndAt="1145"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.188">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.189" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="54" charBeginAt="1006" lineEndAt="54" charEndAt="1145"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.189">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@elseBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.190" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="49" charBeginAt="899" lineEndAt="49" charEndAt="901"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.190">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.191" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="49" charBeginAt="892" lineEndAt="49" charEndAt="893"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.191">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.192" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="49" charBeginAt="893" lineEndAt="49" charEndAt="902"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.192">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.193" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="50" charBeginAt="919" lineEndAt="50" charEndAt="928"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.193">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.194" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="51" charBeginAt="947" lineEndAt="51" charEndAt="948"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.194">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.195" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="51" charBeginAt="948" lineEndAt="51" charEndAt="956"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.195">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.196" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="51" charBeginAt="935" lineEndAt="51" charEndAt="940"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.196">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.197" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="51" charBeginAt="940" lineEndAt="51" charEndAt="957"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.197">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.198" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="52" charBeginAt="977" lineEndAt="52" charEndAt="987"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.198">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.199" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="52" charBeginAt="963" lineEndAt="52" charEndAt="968"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.199">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.200" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="52" charBeginAt="968" lineEndAt="52" charEndAt="988"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.200">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0/@body.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.201" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="50" charBeginAt="907" lineEndAt="50" charEndAt="988"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.201">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.202" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="48" charBeginAt="885" lineEndAt="48" charEndAt="997"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.202">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.203" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="48" charBeginAt="885" lineEndAt="48" charEndAt="997"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.203">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0/@thenBody"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.204" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="48" charBeginAt="872" lineEndAt="48" charEndAt="1152"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.204">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.205" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="62" charBeginAt="1168" lineEndAt="62" charEndAt="1177"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.205">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@rescueBlock.0/@exceptionType"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.206" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="63" charBeginAt="1196" lineEndAt="63" charEndAt="1197"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.206">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@rescueBlock.0/@body.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.207" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="63" charBeginAt="1197" lineEndAt="63" charEndAt="1205"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.207">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@rescueBlock.0/@body.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.208" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="63" charBeginAt="1184" lineEndAt="63" charEndAt="1189"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.208">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@rescueBlock.0/@body.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.209" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="63" charBeginAt="1189" lineEndAt="63" charEndAt="1206"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.209">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@rescueBlock.0/@body.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.210" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="64" charBeginAt="1226" lineEndAt="64" charEndAt="1236"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.210">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@rescueBlock.0/@body.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.211" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="64" charBeginAt="1212" lineEndAt="64" charEndAt="1217"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.211">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@rescueBlock.0/@body.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.212" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="64" charBeginAt="1217" lineEndAt="64" charEndAt="1237"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.212">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@rescueBlock.0/@body.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.213" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="62" charBeginAt="1156" lineEndAt="62" charEndAt="1237"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.213">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body/@rescueBlock.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.214" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/018_testExceptions.main.kmt" lineBeginAt="47" charBeginAt="866" lineEndAt="47" charEndAt="1243"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.214">
+    <refObject href="018_testExceptions.main.km#//@packages.0/B/opB/@body"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.7"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.8"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.9"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.10"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.11"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.12"/>
+  <messages language="english" type="Mapping" traces="//@traces.13"/>
+  <messages language="english" type="Mapping" traces="//@traces.14"/>
+  <messages language="english" type="Mapping" traces="//@traces.15"/>
+  <messages language="english" type="Mapping" traces="//@traces.16"/>
+  <messages language="english" type="Mapping" traces="//@traces.17"/>
+  <messages language="english" type="Mapping" traces="//@traces.18"/>
+  <messages language="english" type="Mapping" traces="//@traces.19"/>
+  <messages language="english" type="Mapping" traces="//@traces.20"/>
+  <messages language="english" type="Mapping" traces="//@traces.21"/>
+  <messages language="english" type="Mapping" traces="//@traces.22"/>
+  <messages language="english" type="Mapping" traces="//@traces.23"/>
+  <messages language="english" type="Mapping" traces="//@traces.24"/>
+  <messages language="english" type="Mapping" traces="//@traces.25"/>
+  <messages language="english" type="Mapping" traces="//@traces.26"/>
+  <messages language="english" type="Mapping" traces="//@traces.27"/>
+  <messages language="english" type="Mapping" traces="//@traces.28"/>
+  <messages language="english" type="Mapping" traces="//@traces.29"/>
+  <messages language="english" type="Mapping" traces="//@traces.30"/>
+  <messages language="english" type="Mapping" traces="//@traces.31"/>
+  <messages language="english" type="Mapping" traces="//@traces.32"/>
+  <messages language="english" type="Mapping" traces="//@traces.33"/>
+  <messages language="english" type="Mapping" traces="//@traces.34"/>
+  <messages language="english" type="Mapping" traces="//@traces.35"/>
+  <messages language="english" type="Mapping" traces="//@traces.36"/>
+  <messages language="english" type="Mapping" traces="//@traces.37"/>
+  <messages language="english" type="Mapping" traces="//@traces.38"/>
+  <messages language="english" type="Mapping" traces="//@traces.39"/>
+  <messages language="english" type="Mapping" traces="//@traces.40"/>
+  <messages language="english" type="Mapping" traces="//@traces.41"/>
+  <messages language="english" type="Mapping" traces="//@traces.42"/>
+  <messages language="english" type="Mapping" traces="//@traces.43"/>
+  <messages language="english" type="Mapping" traces="//@traces.44"/>
+  <messages language="english" type="Mapping" traces="//@traces.45"/>
+  <messages language="english" type="Mapping" traces="//@traces.46"/>
+  <messages language="english" type="Mapping" traces="//@traces.47"/>
+  <messages language="english" type="Mapping" traces="//@traces.48"/>
+  <messages language="english" type="Mapping" traces="//@traces.49"/>
+  <messages language="english" type="Mapping" traces="//@traces.50"/>
+  <messages language="english" type="Mapping" traces="//@traces.51"/>
+  <messages language="english" type="Mapping" traces="//@traces.52"/>
+  <messages language="english" type="Mapping" traces="//@traces.53"/>
+  <messages language="english" type="Mapping" traces="//@traces.54"/>
+  <messages language="english" type="Mapping" traces="//@traces.55"/>
+  <messages language="english" type="Mapping" traces="//@traces.56"/>
+  <messages language="english" type="Mapping" traces="//@traces.57"/>
+  <messages language="english" type="Mapping" traces="//@traces.58"/>
+  <messages language="english" type="Mapping" traces="//@traces.59"/>
+  <messages language="english" type="Mapping" traces="//@traces.60"/>
+  <messages language="english" type="Mapping" traces="//@traces.61"/>
+  <messages language="english" type="Mapping" traces="//@traces.62"/>
+  <messages language="english" type="Mapping" traces="//@traces.63"/>
+  <messages language="english" type="Mapping" traces="//@traces.64"/>
+  <messages language="english" type="Mapping" traces="//@traces.65"/>
+  <messages language="english" type="Mapping" traces="//@traces.66"/>
+  <messages language="english" type="Mapping" traces="//@traces.67"/>
+  <messages language="english" type="Mapping" traces="//@traces.68"/>
+  <messages language="english" type="Mapping" traces="//@traces.69"/>
+  <messages language="english" type="Mapping" traces="//@traces.70"/>
+  <messages language="english" type="Mapping" traces="//@traces.71"/>
+  <messages language="english" type="Mapping" traces="//@traces.72"/>
+  <messages language="english" type="Mapping" traces="//@traces.73"/>
+  <messages language="english" type="Mapping" traces="//@traces.74"/>
+  <messages language="english" type="Mapping" traces="//@traces.75"/>
+  <messages language="english" type="Mapping" traces="//@traces.76"/>
+  <messages language="english" type="Mapping" traces="//@traces.77"/>
+  <messages language="english" type="Mapping" traces="//@traces.78"/>
+  <messages language="english" type="Mapping" traces="//@traces.79"/>
+  <messages language="english" type="Mapping" traces="//@traces.80"/>
+  <messages language="english" type="Mapping" traces="//@traces.81"/>
+  <messages language="english" type="Mapping" traces="//@traces.82"/>
+  <messages language="english" type="Mapping" traces="//@traces.83"/>
+  <messages language="english" type="Mapping" traces="//@traces.84"/>
+  <messages language="english" type="Mapping" traces="//@traces.85"/>
+  <messages language="english" type="Mapping" traces="//@traces.86"/>
+  <messages language="english" type="Mapping" traces="//@traces.87"/>
+  <messages language="english" type="Mapping" traces="//@traces.88"/>
+  <messages language="english" type="Mapping" traces="//@traces.89"/>
+  <messages language="english" type="Mapping" traces="//@traces.90"/>
+  <messages language="english" type="Mapping" traces="//@traces.91"/>
+  <messages language="english" type="Mapping" traces="//@traces.92"/>
+  <messages language="english" type="Mapping" traces="//@traces.93"/>
+  <messages language="english" type="Mapping" traces="//@traces.94"/>
+  <messages language="english" type="Mapping" traces="//@traces.95"/>
+  <messages language="english" type="Mapping" traces="//@traces.96"/>
+  <messages language="english" type="Mapping" traces="//@traces.97"/>
+  <messages language="english" type="Mapping" traces="//@traces.98"/>
+  <messages language="english" type="Mapping" traces="//@traces.99"/>
+  <messages language="english" type="Mapping" traces="//@traces.100"/>
+  <messages language="english" type="Mapping" traces="//@traces.101"/>
+  <messages language="english" type="Mapping" traces="//@traces.102"/>
+  <messages language="english" type="Mapping" traces="//@traces.103"/>
+  <messages language="english" type="Mapping" traces="//@traces.104"/>
+  <messages language="english" type="Mapping" traces="//@traces.105"/>
+  <messages language="english" type="Mapping" traces="//@traces.106"/>
+  <messages language="english" type="Mapping" traces="//@traces.107"/>
+  <messages language="english" type="Mapping" traces="//@traces.108"/>
+  <messages language="english" type="Mapping" traces="//@traces.109"/>
+  <messages language="english" type="Mapping" traces="//@traces.110"/>
+  <messages language="english" type="Mapping" traces="//@traces.111"/>
+  <messages language="english" type="Mapping" traces="//@traces.112"/>
+  <messages language="english" type="Mapping" traces="//@traces.113"/>
+  <messages language="english" type="Mapping" traces="//@traces.114"/>
+  <messages language="english" type="Mapping" traces="//@traces.115"/>
+  <messages language="english" type="Mapping" traces="//@traces.116"/>
+  <messages language="english" type="Mapping" traces="//@traces.117"/>
+  <messages language="english" type="Mapping" traces="//@traces.118"/>
+  <messages language="english" type="Mapping" traces="//@traces.119"/>
+  <messages language="english" type="Mapping" traces="//@traces.120"/>
+  <messages language="english" type="Mapping" traces="//@traces.121"/>
+  <messages language="english" type="Mapping" traces="//@traces.122"/>
+  <messages language="english" type="Mapping" traces="//@traces.123"/>
+  <messages language="english" type="Mapping" traces="//@traces.124"/>
+  <messages language="english" type="Mapping" traces="//@traces.125"/>
+  <messages language="english" type="Mapping" traces="//@traces.126"/>
+  <messages language="english" type="Mapping" traces="//@traces.127"/>
+  <messages language="english" type="Mapping" traces="//@traces.128"/>
+  <messages language="english" type="Mapping" traces="//@traces.129"/>
+  <messages language="english" type="Mapping" traces="//@traces.130"/>
+  <messages language="english" type="Mapping" traces="//@traces.131"/>
+  <messages language="english" type="Mapping" traces="//@traces.132"/>
+  <messages language="english" type="Mapping" traces="//@traces.133"/>
+  <messages language="english" type="Mapping" traces="//@traces.134"/>
+  <messages language="english" type="Mapping" traces="//@traces.135"/>
+  <messages language="english" type="Mapping" traces="//@traces.136"/>
+  <messages language="english" type="Mapping" traces="//@traces.137"/>
+  <messages language="english" type="Mapping" traces="//@traces.138"/>
+  <messages language="english" type="Mapping" traces="//@traces.139"/>
+  <messages language="english" type="Mapping" traces="//@traces.140"/>
+  <messages language="english" type="Mapping" traces="//@traces.141"/>
+  <messages language="english" type="Mapping" traces="//@traces.142"/>
+  <messages language="english" type="Mapping" traces="//@traces.143"/>
+  <messages language="english" type="Mapping" traces="//@traces.144"/>
+  <messages language="english" type="Mapping" traces="//@traces.145"/>
+  <messages language="english" type="Mapping" traces="//@traces.146"/>
+  <messages language="english" type="Mapping" traces="//@traces.147"/>
+  <messages language="english" type="Mapping" traces="//@traces.148"/>
+  <messages language="english" type="Mapping" traces="//@traces.149"/>
+  <messages language="english" type="Mapping" traces="//@traces.150"/>
+  <messages language="english" type="Mapping" traces="//@traces.151"/>
+  <messages language="english" type="Mapping" traces="//@traces.152"/>
+  <messages language="english" type="Mapping" traces="//@traces.153"/>
+  <messages language="english" type="Mapping" traces="//@traces.154"/>
+  <messages language="english" type="Mapping" traces="//@traces.155"/>
+  <messages language="english" type="Mapping" traces="//@traces.156"/>
+  <messages language="english" type="Mapping" traces="//@traces.157"/>
+  <messages language="english" type="Mapping" traces="//@traces.158"/>
+  <messages language="english" type="Mapping" traces="//@traces.159"/>
+  <messages language="english" type="Mapping" traces="//@traces.160"/>
+  <messages language="english" type="Mapping" traces="//@traces.161"/>
+  <messages language="english" type="Mapping" traces="//@traces.162"/>
+  <messages language="english" type="Mapping" traces="//@traces.163"/>
+  <messages language="english" type="Mapping" traces="//@traces.164"/>
+  <messages language="english" type="Mapping" traces="//@traces.165"/>
+  <messages language="english" type="Mapping" traces="//@traces.166"/>
+  <messages language="english" type="Mapping" traces="//@traces.167"/>
+  <messages language="english" type="Mapping" traces="//@traces.168"/>
+  <messages language="english" type="Mapping" traces="//@traces.169"/>
+  <messages language="english" type="Mapping" traces="//@traces.170"/>
+  <messages language="english" type="Mapping" traces="//@traces.171"/>
+  <messages language="english" type="Mapping" traces="//@traces.172"/>
+  <messages language="english" type="Mapping" traces="//@traces.173"/>
+  <messages language="english" type="Mapping" traces="//@traces.174"/>
+  <messages language="english" type="Mapping" traces="//@traces.175"/>
+  <messages language="english" type="Mapping" traces="//@traces.176"/>
+  <messages language="english" type="Mapping" traces="//@traces.177"/>
+  <messages language="english" type="Mapping" traces="//@traces.178"/>
+  <messages language="english" type="Mapping" traces="//@traces.179"/>
+  <messages language="english" type="Mapping" traces="//@traces.180"/>
+  <messages language="english" type="Mapping" traces="//@traces.181"/>
+  <messages language="english" type="Mapping" traces="//@traces.182"/>
+  <messages language="english" type="Mapping" traces="//@traces.183"/>
+  <messages language="english" type="Mapping" traces="//@traces.184"/>
+  <messages language="english" type="Mapping" traces="//@traces.185"/>
+  <messages language="english" type="Mapping" traces="//@traces.186"/>
+  <messages language="english" type="Mapping" traces="//@traces.187"/>
+  <messages language="english" type="Mapping" traces="//@traces.188"/>
+  <messages language="english" type="Mapping" traces="//@traces.189"/>
+  <messages language="english" type="Mapping" traces="//@traces.190"/>
+  <messages language="english" type="Mapping" traces="//@traces.191"/>
+  <messages language="english" type="Mapping" traces="//@traces.192"/>
+  <messages language="english" type="Mapping" traces="//@traces.193"/>
+  <messages language="english" type="Mapping" traces="//@traces.194"/>
+  <messages language="english" type="Mapping" traces="//@traces.195"/>
+  <messages language="english" type="Mapping" traces="//@traces.196"/>
+  <messages language="english" type="Mapping" traces="//@traces.197"/>
+  <messages language="english" type="Mapping" traces="//@traces.198"/>
+  <messages language="english" type="Mapping" traces="//@traces.199"/>
+  <messages language="english" type="Mapping" traces="//@traces.200"/>
+  <messages language="english" type="Mapping" traces="//@traces.201"/>
+  <messages language="english" type="Mapping" traces="//@traces.202"/>
+  <messages language="english" type="Mapping" traces="//@traces.203"/>
+  <messages language="english" type="Mapping" traces="//@traces.204"/>
+  <messages language="english" type="Mapping" traces="//@traces.205"/>
+  <messages language="english" type="Mapping" traces="//@traces.206"/>
+  <messages language="english" type="Mapping" traces="//@traces.207"/>
+  <messages language="english" type="Mapping" traces="//@traces.208"/>
+  <messages language="english" type="Mapping" traces="//@traces.209"/>
+  <messages language="english" type="Mapping" traces="//@traces.210"/>
+  <messages language="english" type="Mapping" traces="//@traces.211"/>
+  <messages language="english" type="Mapping" traces="//@traces.212"/>
+  <messages language="english" type="Mapping" traces="//@traces.213"/>
+  <messages language="english" type="Mapping" traces="//@traces.214"/>
+</traceability:TraceModel>

@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <traces sourceReferences="//@references.16" targetReferences="//@references.17" description="//@messages.8"/>
+  <traces sourceReferences="//@references.18" targetReferences="//@references.19" description="//@messages.9"/>
+  <traces sourceReferences="//@references.20" targetReferences="//@references.21" description="//@messages.10"/>
+  <traces sourceReferences="//@references.22" targetReferences="//@references.23" description="//@messages.11"/>
+  <traces sourceReferences="//@references.24" targetReferences="//@references.25" description="//@messages.12"/>
+  <traces sourceReferences="//@references.26" targetReferences="//@references.27" description="//@messages.13"/>
+  <traces sourceReferences="//@references.28" targetReferences="//@references.29" description="//@messages.14"/>
+  <traces sourceReferences="//@references.30" targetReferences="//@references.31" description="//@messages.15"/>
+  <traces sourceReferences="//@references.32" targetReferences="//@references.33" description="//@messages.16"/>
+  <traces sourceReferences="//@references.34" targetReferences="//@references.35" description="//@messages.17"/>
+  <traces sourceReferences="//@references.36" targetReferences="//@references.3" description="//@messages.18"/>
+  <traces sourceReferences="//@references.37" targetReferences="//@references.1" description="//@messages.19"/>
+  <traces sourceReferences="//@references.38" targetReferences="//@references.1" description="//@messages.20"/>
+  <traces sourceReferences="//@references.39" targetReferences="//@references.3" description="//@messages.21"/>
+  <traces sourceReferences="//@references.40" targetReferences="//@references.41" description="//@messages.22"/>
+  <traces sourceReferences="//@references.42" targetReferences="//@references.43" description="//@messages.23"/>
+  <traces sourceReferences="//@references.44" targetReferences="//@references.45" description="//@messages.24"/>
+  <traces sourceReferences="//@references.46" targetReferences="//@references.47" description="//@messages.25"/>
+  <traces sourceReferences="//@references.48" targetReferences="//@references.49" description="//@messages.26"/>
+  <traces sourceReferences="//@references.50" targetReferences="//@references.51" description="//@messages.27"/>
+  <traces sourceReferences="//@references.52" targetReferences="//@references.53" description="//@messages.28"/>
+  <traces sourceReferences="//@references.54" targetReferences="//@references.55" description="//@messages.29"/>
+  <traces sourceReferences="//@references.56" targetReferences="//@references.57" description="//@messages.30"/>
+  <traces sourceReferences="//@references.58" targetReferences="//@references.59" description="//@messages.31"/>
+  <traces sourceReferences="//@references.60" targetReferences="//@references.61" description="//@messages.32"/>
+  <traces sourceReferences="//@references.62" targetReferences="//@references.63" description="//@messages.33"/>
+  <traces sourceReferences="//@references.64" targetReferences="//@references.65" description="//@messages.34"/>
+  <traces sourceReferences="//@references.66" targetReferences="//@references.67" description="//@messages.35"/>
+  <traces sourceReferences="//@references.68" targetReferences="//@references.69" description="//@messages.36"/>
+  <traces sourceReferences="//@references.70" targetReferences="//@references.71" description="//@messages.37"/>
+  <traces sourceReferences="//@references.72" targetReferences="//@references.73" description="//@messages.38"/>
+  <traces sourceReferences="//@references.74" targetReferences="//@references.75" description="//@messages.39"/>
+  <traces sourceReferences="//@references.76" targetReferences="//@references.77" description="//@messages.40"/>
+  <traces sourceReferences="//@references.78" targetReferences="//@references.79" description="//@messages.41"/>
+  <traces sourceReferences="//@references.80" targetReferences="//@references.81" description="//@messages.42"/>
+  <traces sourceReferences="//@references.82" targetReferences="//@references.83" description="//@messages.43"/>
+  <traces sourceReferences="//@references.84" targetReferences="//@references.85" description="//@messages.44"/>
+  <traces sourceReferences="//@references.86" targetReferences="//@references.87" description="//@messages.45"/>
+  <traces sourceReferences="//@references.88" targetReferences="//@references.89" description="//@messages.46"/>
+  <traces sourceReferences="//@references.90" targetReferences="//@references.91" description="//@messages.47"/>
+  <traces sourceReferences="//@references.92" targetReferences="//@references.93" description="//@messages.48"/>
+  <traces sourceReferences="//@references.94" targetReferences="//@references.95" description="//@messages.49"/>
+  <traces sourceReferences="//@references.96" targetReferences="//@references.97" description="//@messages.50"/>
+  <traces sourceReferences="//@references.98" targetReferences="//@references.99" description="//@messages.51"/>
+  <traces sourceReferences="//@references.100" targetReferences="//@references.101" description="//@messages.52"/>
+  <traces sourceReferences="//@references.102" targetReferences="//@references.103" description="//@messages.53"/>
+  <traces sourceReferences="//@references.104" targetReferences="//@references.105" description="//@messages.54"/>
+  <traces sourceReferences="//@references.106" targetReferences="//@references.107" description="//@messages.55"/>
+  <traces sourceReferences="//@references.108" targetReferences="//@references.109" description="//@messages.56"/>
+  <traces sourceReferences="//@references.110" targetReferences="//@references.111" description="//@messages.57"/>
+  <traces sourceReferences="//@references.112" targetReferences="//@references.113" description="//@messages.58"/>
+  <traces sourceReferences="//@references.114" targetReferences="//@references.115" description="//@messages.59"/>
+  <traces sourceReferences="//@references.116" targetReferences="//@references.117" description="//@messages.60"/>
+  <traces sourceReferences="//@references.118" targetReferences="//@references.119" description="//@messages.61"/>
+  <traces sourceReferences="//@references.120" targetReferences="//@references.121" description="//@messages.62"/>
+  <traces sourceReferences="//@references.122" targetReferences="//@references.123" description="//@messages.63"/>
+  <traces sourceReferences="//@references.124" targetReferences="//@references.125" description="//@messages.64"/>
+  <traces sourceReferences="//@references.126" targetReferences="//@references.127" description="//@messages.65"/>
+  <traces sourceReferences="//@references.128" targetReferences="//@references.129" description="//@messages.66"/>
+  <traces sourceReferences="//@references.130" targetReferences="//@references.131" description="//@messages.67"/>
+  <traces sourceReferences="//@references.132" targetReferences="//@references.133" description="//@messages.68"/>
+  <traces sourceReferences="//@references.134" targetReferences="//@references.135" description="//@messages.69"/>
+  <traces sourceReferences="//@references.136" targetReferences="//@references.137" description="//@messages.70"/>
+  <traces sourceReferences="//@references.138" targetReferences="//@references.139" description="//@messages.71"/>
+  <traces sourceReferences="//@references.140" targetReferences="//@references.141" description="//@messages.72"/>
+  <traces sourceReferences="//@references.142" targetReferences="//@references.143" description="//@messages.73"/>
+  <traces sourceReferences="//@references.144" targetReferences="//@references.145" description="//@messages.74"/>
+  <traces sourceReferences="//@references.146" targetReferences="//@references.147" description="//@messages.75"/>
+  <traces sourceReferences="//@references.148" targetReferences="//@references.149" description="//@messages.76"/>
+  <traces sourceReferences="//@references.150" targetReferences="//@references.151" description="//@messages.77"/>
+  <traces sourceReferences="//@references.152" targetReferences="//@references.153" description="//@messages.78"/>
+  <traces sourceReferences="//@references.154" targetReferences="//@references.155" description="//@messages.79"/>
+  <traces sourceReferences="//@references.156" targetReferences="//@references.157" description="//@messages.80"/>
+  <traces sourceReferences="//@references.158" targetReferences="//@references.159" description="//@messages.81"/>
+  <traces sourceReferences="//@references.160" targetReferences="//@references.161" description="//@messages.82"/>
+  <traces sourceReferences="//@references.162" targetReferences="//@references.163" description="//@messages.83"/>
+  <traces sourceReferences="//@references.164" targetReferences="//@references.165" description="//@messages.84"/>
+  <traces sourceReferences="//@references.166" targetReferences="//@references.167" description="//@messages.85"/>
+  <traces sourceReferences="//@references.168" targetReferences="//@references.169" description="//@messages.86"/>
+  <traces sourceReferences="//@references.170" targetReferences="//@references.171" description="//@messages.87"/>
+  <traces sourceReferences="//@references.172" targetReferences="//@references.173" description="//@messages.88"/>
+  <traces sourceReferences="//@references.174" targetReferences="//@references.175" description="//@messages.89"/>
+  <traces sourceReferences="//@references.176" targetReferences="//@references.177" description="//@messages.90"/>
+  <traces sourceReferences="//@references.178" targetReferences="//@references.179" description="//@messages.91"/>
+  <traces sourceReferences="//@references.180" targetReferences="//@references.181" description="//@messages.92"/>
+  <traces sourceReferences="//@references.182" targetReferences="//@references.183" description="//@messages.93"/>
+  <traces sourceReferences="//@references.184" targetReferences="//@references.185" description="//@messages.94"/>
+  <traces sourceReferences="//@references.186" targetReferences="//@references.187" description="//@messages.95"/>
+  <traces sourceReferences="//@references.188" targetReferences="//@references.189" description="//@messages.96"/>
+  <traces sourceReferences="//@references.190" targetReferences="//@references.191" description="//@messages.97"/>
+  <traces sourceReferences="//@references.192" targetReferences="//@references.193" description="//@messages.98"/>
+  <traces sourceReferences="//@references.194" targetReferences="//@references.195" description="//@messages.99"/>
+  <traces sourceReferences="//@references.196" targetReferences="//@references.197" description="//@messages.100"/>
+  <traces sourceReferences="//@references.198" targetReferences="//@references.199" description="//@messages.101"/>
+  <traces sourceReferences="//@references.200" targetReferences="//@references.201" description="//@messages.102"/>
+  <traces sourceReferences="//@references.202" targetReferences="//@references.203" description="//@messages.103"/>
+  <traces sourceReferences="//@references.204" targetReferences="//@references.205" description="//@messages.104"/>
+  <traces sourceReferences="//@references.206" targetReferences="//@references.207" description="//@messages.105"/>
+  <traces sourceReferences="//@references.208" targetReferences="//@references.209" description="//@messages.106"/>
+  <traces sourceReferences="//@references.210" targetReferences="//@references.211" description="//@messages.107"/>
+  <traces sourceReferences="//@references.212" targetReferences="//@references.213" description="//@messages.108"/>
+  <traces sourceReferences="//@references.214" targetReferences="//@references.215" description="//@messages.109"/>
+  <traces sourceReferences="//@references.216" targetReferences="//@references.217" description="//@messages.110"/>
+  <traces sourceReferences="//@references.218" targetReferences="//@references.219" description="//@messages.111"/>
+  <traces sourceReferences="//@references.220" targetReferences="//@references.221" description="//@messages.112"/>
+  <traces sourceReferences="//@references.222" targetReferences="//@references.223" description="//@messages.113"/>
+  <traces sourceReferences="//@references.224" targetReferences="//@references.225" description="//@messages.114"/>
+  <traces sourceReferences="//@references.226" targetReferences="//@references.227" description="//@messages.115"/>
+  <traces sourceReferences="//@references.228" targetReferences="//@references.229" description="//@messages.116"/>
+  <traces sourceReferences="//@references.230" targetReferences="//@references.231" description="//@messages.117"/>
+  <traces sourceReferences="//@references.232" targetReferences="//@references.233" description="//@messages.118"/>
+  <traces sourceReferences="//@references.234" targetReferences="//@references.235" description="//@messages.119"/>
+  <traces sourceReferences="//@references.236" targetReferences="//@references.237" description="//@messages.120"/>
+  <traces sourceReferences="//@references.238" targetReferences="//@references.239" description="//@messages.121"/>
+  <traces sourceReferences="//@references.240" targetReferences="//@references.241" description="//@messages.122"/>
+  <traces sourceReferences="//@references.242" targetReferences="//@references.243" description="//@messages.123"/>
+  <traces sourceReferences="//@references.244" targetReferences="//@references.245" description="//@messages.124"/>
+  <traces sourceReferences="//@references.246" targetReferences="//@references.247" description="//@messages.125"/>
+  <traces sourceReferences="//@references.248" targetReferences="//@references.249" description="//@messages.126"/>
+  <traces sourceReferences="//@references.250" targetReferences="//@references.251" description="//@messages.127"/>
+  <traces sourceReferences="//@references.252" targetReferences="//@references.253" description="//@messages.128"/>
+  <traces sourceReferences="//@references.254" targetReferences="//@references.255" description="//@messages.129"/>
+  <traces sourceReferences="//@references.256" targetReferences="//@references.257" description="//@messages.130"/>
+  <traces sourceReferences="//@references.258" targetReferences="//@references.259" description="//@messages.131"/>
+  <traces sourceReferences="//@references.260" targetReferences="//@references.261" description="//@messages.132"/>
+  <traces sourceReferences="//@references.262" targetReferences="//@references.263" description="//@messages.133"/>
+  <traces sourceReferences="//@references.264" targetReferences="//@references.265" description="//@messages.134"/>
+  <traces sourceReferences="//@references.266" targetReferences="//@references.267" description="//@messages.135"/>
+  <traces sourceReferences="//@references.268" targetReferences="//@references.269" description="//@messages.136"/>
+  <traces sourceReferences="//@references.270" targetReferences="//@references.271" description="//@messages.137"/>
+  <traces sourceReferences="//@references.272" targetReferences="//@references.273" description="//@messages.138"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="11" charBeginAt="211" lineEndAt="11" charEndAt="212"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0 //@traces.19 //@traces.20">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/T"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="11" charBeginAt="213" lineEndAt="11" charEndAt="214"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1 //@traces.18 //@traces.21">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/U"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="11" charBeginAt="194" lineEndAt="11" charEndAt="470"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="34" charBeginAt="472" lineEndAt="34" charEndAt="1697"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="14" charBeginAt="239" lineEndAt="14" charEndAt="254"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/y"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="13" charBeginAt="221" lineEndAt="13" charEndAt="236"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/x"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="16" charBeginAt="276" lineEndAt="16" charEndAt="283"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/set_x/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="16" charBeginAt="260" lineEndAt="16" charEndAt="308"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/set_x"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="24" charBeginAt="364" lineEndAt="24" charEndAt="412"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/get_x"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="20" charBeginAt="328" lineEndAt="20" charEndAt="335"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/set_y/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="20" charBeginAt="312" lineEndAt="20" charEndAt="360"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/set_y"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="28" charBeginAt="416" lineEndAt="28" charEndAt="464"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/get_y"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="37" charBeginAt="540" lineEndAt="37" charEndAt="623"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/names"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="42" charBeginAt="626" lineEndAt="42" charEndAt="763"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="64" charBeginAt="1130" lineEndAt="64" charEndAt="1677"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="48" charBeginAt="767" lineEndAt="48" charEndAt="918"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="54" charBeginAt="921" lineEndAt="54" charEndAt="998"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="58" charBeginAt="1001" lineEndAt="58" charEndAt="1124"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="11" charBeginAt="213" lineEndAt="11" charEndAt="214"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="11" charBeginAt="211" lineEndAt="11" charEndAt="212"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="11" charBeginAt="211" lineEndAt="11" charEndAt="212"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="11" charBeginAt="213" lineEndAt="11" charEndAt="214"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="17" charBeginAt="294" lineEndAt="17" charEndAt="295"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/set_x/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="17" charBeginAt="299" lineEndAt="17" charEndAt="302"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/set_x/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="17" charBeginAt="294" lineEndAt="17" charEndAt="302"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/set_x/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="16" charBeginAt="288" lineEndAt="16" charEndAt="308"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/set_x/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="25" charBeginAt="395" lineEndAt="25" charEndAt="401"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/get_x/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="25" charBeginAt="405" lineEndAt="25" charEndAt="406"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/get_x/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="25" charBeginAt="395" lineEndAt="25" charEndAt="406"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/get_x/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="24" charBeginAt="389" lineEndAt="24" charEndAt="412"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/get_x/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="21" charBeginAt="346" lineEndAt="21" charEndAt="347"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/set_y/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="21" charBeginAt="351" lineEndAt="21" charEndAt="354"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/set_y/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="21" charBeginAt="346" lineEndAt="21" charEndAt="354"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/set_y/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="20" charBeginAt="340" lineEndAt="20" charEndAt="360"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/set_y/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="29" charBeginAt="447" lineEndAt="29" charEndAt="453"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/get_y/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="29" charBeginAt="457" lineEndAt="29" charEndAt="458"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/get_y/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="29" charBeginAt="447" lineEndAt="29" charEndAt="458"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/get_y/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="28" charBeginAt="441" lineEndAt="28" charEndAt="464"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/ParamClass/get_y/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="43" charBeginAt="684" lineEndAt="43" charEndAt="695"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test1/@body/@statement.0/@initialization/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="43" charBeginAt="695" lineEndAt="43" charEndAt="699"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test1/@body/@statement.0/@initialization"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="43" charBeginAt="660" lineEndAt="43" charEndAt="678"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test1/@body/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="43" charBeginAt="652" lineEndAt="43" charEndAt="699"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test1/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="45" charBeginAt="745" lineEndAt="45" charEndAt="756"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test1/@body/@statement.1/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="45" charBeginAt="734" lineEndAt="45" charEndAt="735"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.43">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test1/@body/@statement.1/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="45" charBeginAt="735" lineEndAt="45" charEndAt="757"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.44">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test1/@body/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="45" charBeginAt="727" lineEndAt="45" charEndAt="733"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.45">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test1/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="42" charBeginAt="647" lineEndAt="42" charEndAt="763"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.46">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test1/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="66" charBeginAt="1184" lineEndAt="66" charEndAt="1210"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.47">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="66" charBeginAt="1175" lineEndAt="66" charEndAt="1210"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.48">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="67" charBeginAt="1227" lineEndAt="67" charEndAt="1253"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.49">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.1/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="67" charBeginAt="1218" lineEndAt="67" charEndAt="1253"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.50">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="69" charBeginAt="1267" lineEndAt="69" charEndAt="1269"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.51">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.2/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="69" charBeginAt="1273" lineEndAt="69" charEndAt="1299"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.52">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.2/@value/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="69" charBeginAt="1299" lineEndAt="69" charEndAt="1303"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.53">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.2/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="69" charBeginAt="1267" lineEndAt="69" charEndAt="1303"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.54">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="70" charBeginAt="1310" lineEndAt="70" charEndAt="1312"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.55">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.3/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="70" charBeginAt="1316" lineEndAt="70" charEndAt="1342"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.56">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.3/@value/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="70" charBeginAt="1342" lineEndAt="70" charEndAt="1346"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.57">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.3/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="70" charBeginAt="1310" lineEndAt="70" charEndAt="1346"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.58">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="71" charBeginAt="1362" lineEndAt="71" charEndAt="1363"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.59">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.4/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="71" charBeginAt="1353" lineEndAt="71" charEndAt="1355"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.60">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.4/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="71" charBeginAt="1355" lineEndAt="71" charEndAt="1364"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.61">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.4"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="72" charBeginAt="1380" lineEndAt="72" charEndAt="1387"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.62">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.5/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.63" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="72" charBeginAt="1371" lineEndAt="72" charEndAt="1373"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.63">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.5/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.64" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="72" charBeginAt="1373" lineEndAt="72" charEndAt="1388"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.64">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.5"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.65" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="73" charBeginAt="1404" lineEndAt="73" charEndAt="1410"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.65">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.6/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.66" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="73" charBeginAt="1395" lineEndAt="73" charEndAt="1397"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.66">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.6/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.67" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="73" charBeginAt="1397" lineEndAt="73" charEndAt="1411"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.67">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.6"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.68" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="74" charBeginAt="1427" lineEndAt="74" charEndAt="1428"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.68">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.7/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.69" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="74" charBeginAt="1418" lineEndAt="74" charEndAt="1420"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.69">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.7/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.70" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="74" charBeginAt="1420" lineEndAt="74" charEndAt="1429"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.70">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.7"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.71" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="75" charBeginAt="1455" lineEndAt="75" charEndAt="1456"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.71">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.8/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.72" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="75" charBeginAt="1443" lineEndAt="75" charEndAt="1445"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.72">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.8/@parameters.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.73" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="75" charBeginAt="1445" lineEndAt="75" charEndAt="1453"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.73">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.8/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.74" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="75" charBeginAt="1453" lineEndAt="75" charEndAt="1455"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.74">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.8/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.75" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="75" charBeginAt="1436" lineEndAt="75" charEndAt="1442"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.75">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.8"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.76" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="76" charBeginAt="1483" lineEndAt="76" charEndAt="1490"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.76">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.9/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.77" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="76" charBeginAt="1471" lineEndAt="76" charEndAt="1473"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.77">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.9/@parameters.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.78" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="76" charBeginAt="1473" lineEndAt="76" charEndAt="1481"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.78">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.9/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.79" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="76" charBeginAt="1481" lineEndAt="76" charEndAt="1483"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.79">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.9/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.80" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="76" charBeginAt="1464" lineEndAt="76" charEndAt="1470"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.80">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.9"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.81" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="77" charBeginAt="1517" lineEndAt="77" charEndAt="1523"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.81">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.10/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.82" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="77" charBeginAt="1505" lineEndAt="77" charEndAt="1507"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.82">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.10/@parameters.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.83" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="77" charBeginAt="1507" lineEndAt="77" charEndAt="1515"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.83">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.10/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.84" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="77" charBeginAt="1515" lineEndAt="77" charEndAt="1517"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.84">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.10/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.85" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="77" charBeginAt="1498" lineEndAt="77" charEndAt="1504"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.85">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.10"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.86" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="78" charBeginAt="1550" lineEndAt="78" charEndAt="1551"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.86">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.11/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.87" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="78" charBeginAt="1538" lineEndAt="78" charEndAt="1540"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.87">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.11/@parameters.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.88" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="78" charBeginAt="1540" lineEndAt="78" charEndAt="1548"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.88">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.11/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.89" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="78" charBeginAt="1548" lineEndAt="78" charEndAt="1550"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.89">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.11/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.90" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="78" charBeginAt="1531" lineEndAt="78" charEndAt="1537"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.90">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.11"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.91" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="79" charBeginAt="1568" lineEndAt="79" charEndAt="1570"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.91">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.12/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.92" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="79" charBeginAt="1570" lineEndAt="79" charEndAt="1578"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.92">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.12/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.93" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="79" charBeginAt="1559" lineEndAt="79" charEndAt="1561"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.93">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.12/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.94" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="79" charBeginAt="1561" lineEndAt="79" charEndAt="1579"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.94">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.12"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.95" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="80" charBeginAt="1595" lineEndAt="80" charEndAt="1597"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.95">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.13/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.96" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="80" charBeginAt="1597" lineEndAt="80" charEndAt="1605"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.96">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.13/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.97" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="80" charBeginAt="1586" lineEndAt="80" charEndAt="1588"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.97">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.13/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.98" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="80" charBeginAt="1588" lineEndAt="80" charEndAt="1606"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.98">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.13"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.99" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="81" charBeginAt="1632" lineEndAt="81" charEndAt="1639"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.99">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.14/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.100" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="81" charBeginAt="1620" lineEndAt="81" charEndAt="1622"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.100">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.14/@parameters.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.101" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="81" charBeginAt="1622" lineEndAt="81" charEndAt="1630"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.101">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.14/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.102" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="81" charBeginAt="1630" lineEndAt="81" charEndAt="1632"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.102">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.14/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.103" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="81" charBeginAt="1613" lineEndAt="81" charEndAt="1619"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.103">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.14"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.104" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="82" charBeginAt="1666" lineEndAt="82" charEndAt="1667"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.104">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.15/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.105" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="82" charBeginAt="1654" lineEndAt="82" charEndAt="1656"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.105">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.15/@parameters.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.106" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="82" charBeginAt="1656" lineEndAt="82" charEndAt="1664"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.106">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.15/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.107" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="82" charBeginAt="1664" lineEndAt="82" charEndAt="1666"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.107">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.15/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.108" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="82" charBeginAt="1647" lineEndAt="82" charEndAt="1653"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.108">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body/@statement.15"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.109" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="64" charBeginAt="1165" lineEndAt="64" charEndAt="1677"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.109">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test_main_operation/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.110" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="49" charBeginAt="825" lineEndAt="49" charEndAt="836"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.110">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test2/@body/@statement.0/@initialization/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.111" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="49" charBeginAt="836" lineEndAt="49" charEndAt="840"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.111">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test2/@body/@statement.0/@initialization"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.112" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="49" charBeginAt="801" lineEndAt="49" charEndAt="819"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.112">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test2/@body/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.113" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="49" charBeginAt="793" lineEndAt="49" charEndAt="840"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.113">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test2/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.114" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="51" charBeginAt="893" lineEndAt="51" charEndAt="911"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.114">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test2/@body/@statement.1/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.115" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="51" charBeginAt="878" lineEndAt="51" charEndAt="879"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.115">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test2/@body/@statement.1/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.116" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="51" charBeginAt="879" lineEndAt="51" charEndAt="912"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.116">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test2/@body/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.117" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="51" charBeginAt="871" lineEndAt="51" charEndAt="877"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.117">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test2/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.118" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="48" charBeginAt="788" lineEndAt="48" charEndAt="918"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.118">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test2/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.119" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="55" charBeginAt="973" lineEndAt="55" charEndAt="991"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.119">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test3/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.120" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="55" charBeginAt="954" lineEndAt="55" charEndAt="959"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.120">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test3/@body/@statement.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.121" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="55" charBeginAt="959" lineEndAt="55" charEndAt="992"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.121">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test3/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.122" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="55" charBeginAt="947" lineEndAt="55" charEndAt="953"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.122">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test3/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.123" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="54" charBeginAt="942" lineEndAt="54" charEndAt="998"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.123">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/test3/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.124" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="59" charBeginAt="1054" lineEndAt="59" charEndAt="1064"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.124">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/main/@body/@statement.0/@initialization/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.125" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="59" charBeginAt="1064" lineEndAt="59" charEndAt="1068"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.125">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/main/@body/@statement.0/@initialization"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.126" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="59" charBeginAt="1038" lineEndAt="59" charEndAt="1048"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.126">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/main/@body/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.127" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="59" charBeginAt="1029" lineEndAt="59" charEndAt="1068"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.127">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/main/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.128" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="60" charBeginAt="1078" lineEndAt="60" charEndAt="1097"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.128">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/main/@body/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.129" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="60" charBeginAt="1071" lineEndAt="60" charEndAt="1073"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.129">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/main/@body/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.130" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="60" charBeginAt="1073" lineEndAt="60" charEndAt="1098"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.130">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/main/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.131" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="61" charBeginAt="1101" lineEndAt="61" charEndAt="1103"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.131">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/main/@body/@statement.2/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.132" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="61" charBeginAt="1103" lineEndAt="61" charEndAt="1119"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.132">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/main/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.133" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="58" charBeginAt="1021" lineEndAt="58" charEndAt="1124"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.133">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/main/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.134" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="39" charBeginAt="585" lineEndAt="39" charEndAt="591"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.134">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/names/@getterBody/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.135" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="39" charBeginAt="595" lineEndAt="39" charEndAt="613"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.135">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/names/@getterBody/@statement.0/@value/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.136" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="39" charBeginAt="613" lineEndAt="39" charEndAt="617"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.136">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/names/@getterBody/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.137" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="39" charBeginAt="585" lineEndAt="39" charEndAt="617"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.137">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/names/@getterBody/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.138" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/016_testParametricClasses.main.kmt" lineBeginAt="38" charBeginAt="579" lineEndAt="38" charEndAt="623"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.138">
+    <refObject href="016_testParametricClasses.main.km#//@packages.0/TestParametricClass/names/@getterBody"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.7"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.8"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.9"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.10"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.11"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.12"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.13"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.14"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.15"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.16"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.17"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.18"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.19"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.20"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.21"/>
+  <messages language="english" type="Mapping" traces="//@traces.22"/>
+  <messages language="english" type="Mapping" traces="//@traces.23"/>
+  <messages language="english" type="Mapping" traces="//@traces.24"/>
+  <messages language="english" type="Mapping" traces="//@traces.25"/>
+  <messages language="english" type="Mapping" traces="//@traces.26"/>
+  <messages language="english" type="Mapping" traces="//@traces.27"/>
+  <messages language="english" type="Mapping" traces="//@traces.28"/>
+  <messages language="english" type="Mapping" traces="//@traces.29"/>
+  <messages language="english" type="Mapping" traces="//@traces.30"/>
+  <messages language="english" type="Mapping" traces="//@traces.31"/>
+  <messages language="english" type="Mapping" traces="//@traces.32"/>
+  <messages language="english" type="Mapping" traces="//@traces.33"/>
+  <messages language="english" type="Mapping" traces="//@traces.34"/>
+  <messages language="english" type="Mapping" traces="//@traces.35"/>
+  <messages language="english" type="Mapping" traces="//@traces.36"/>
+  <messages language="english" type="Mapping" traces="//@traces.37"/>
+  <messages language="english" type="Mapping" traces="//@traces.38"/>
+  <messages language="english" type="Mapping" traces="//@traces.39"/>
+  <messages language="english" type="Mapping" traces="//@traces.40"/>
+  <messages language="english" type="Mapping" traces="//@traces.41"/>
+  <messages language="english" type="Mapping" traces="//@traces.42"/>
+  <messages language="english" type="Mapping" traces="//@traces.43"/>
+  <messages language="english" type="Mapping" traces="//@traces.44"/>
+  <messages language="english" type="Mapping" traces="//@traces.45"/>
+  <messages language="english" type="Mapping" traces="//@traces.46"/>
+  <messages language="english" type="Mapping" traces="//@traces.47"/>
+  <messages language="english" type="Mapping" traces="//@traces.48"/>
+  <messages language="english" type="Mapping" traces="//@traces.49"/>
+  <messages language="english" type="Mapping" traces="//@traces.50"/>
+  <messages language="english" type="Mapping" traces="//@traces.51"/>
+  <messages language="english" type="Mapping" traces="//@traces.52"/>
+  <messages language="english" type="Mapping" traces="//@traces.53"/>
+  <messages language="english" type="Mapping" traces="//@traces.54"/>
+  <messages language="english" type="Mapping" traces="//@traces.55"/>
+  <messages language="english" type="Mapping" traces="//@traces.56"/>
+  <messages language="english" type="Mapping" traces="//@traces.57"/>
+  <messages language="english" type="Mapping" traces="//@traces.58"/>
+  <messages language="english" type="Mapping" traces="//@traces.59"/>
+  <messages language="english" type="Mapping" traces="//@traces.60"/>
+  <messages language="english" type="Mapping" traces="//@traces.61"/>
+  <messages language="english" type="Mapping" traces="//@traces.62"/>
+  <messages language="english" type="Mapping" traces="//@traces.63"/>
+  <messages language="english" type="Mapping" traces="//@traces.64"/>
+  <messages language="english" type="Mapping" traces="//@traces.65"/>
+  <messages language="english" type="Mapping" traces="//@traces.66"/>
+  <messages language="english" type="Mapping" traces="//@traces.67"/>
+  <messages language="english" type="Mapping" traces="//@traces.68"/>
+  <messages language="english" type="Mapping" traces="//@traces.69"/>
+  <messages language="english" type="Mapping" traces="//@traces.70"/>
+  <messages language="english" type="Mapping" traces="//@traces.71"/>
+  <messages language="english" type="Mapping" traces="//@traces.72"/>
+  <messages language="english" type="Mapping" traces="//@traces.73"/>
+  <messages language="english" type="Mapping" traces="//@traces.74"/>
+  <messages language="english" type="Mapping" traces="//@traces.75"/>
+  <messages language="english" type="Mapping" traces="//@traces.76"/>
+  <messages language="english" type="Mapping" traces="//@traces.77"/>
+  <messages language="english" type="Mapping" traces="//@traces.78"/>
+  <messages language="english" type="Mapping" traces="//@traces.79"/>
+  <messages language="english" type="Mapping" traces="//@traces.80"/>
+  <messages language="english" type="Mapping" traces="//@traces.81"/>
+  <messages language="english" type="Mapping" traces="//@traces.82"/>
+  <messages language="english" type="Mapping" traces="//@traces.83"/>
+  <messages language="english" type="Mapping" traces="//@traces.84"/>
+  <messages language="english" type="Mapping" traces="//@traces.85"/>
+  <messages language="english" type="Mapping" traces="//@traces.86"/>
+  <messages language="english" type="Mapping" traces="//@traces.87"/>
+  <messages language="english" type="Mapping" traces="//@traces.88"/>
+  <messages language="english" type="Mapping" traces="//@traces.89"/>
+  <messages language="english" type="Mapping" traces="//@traces.90"/>
+  <messages language="english" type="Mapping" traces="//@traces.91"/>
+  <messages language="english" type="Mapping" traces="//@traces.92"/>
+  <messages language="english" type="Mapping" traces="//@traces.93"/>
+  <messages language="english" type="Mapping" traces="//@traces.94"/>
+  <messages language="english" type="Mapping" traces="//@traces.95"/>
+  <messages language="english" type="Mapping" traces="//@traces.96"/>
+  <messages language="english" type="Mapping" traces="//@traces.97"/>
+  <messages language="english" type="Mapping" traces="//@traces.98"/>
+  <messages language="english" type="Mapping" traces="//@traces.99"/>
+  <messages language="english" type="Mapping" traces="//@traces.100"/>
+  <messages language="english" type="Mapping" traces="//@traces.101"/>
+  <messages language="english" type="Mapping" traces="//@traces.102"/>
+  <messages language="english" type="Mapping" traces="//@traces.103"/>
+  <messages language="english" type="Mapping" traces="//@traces.104"/>
+  <messages language="english" type="Mapping" traces="//@traces.105"/>
+  <messages language="english" type="Mapping" traces="//@traces.106"/>
+  <messages language="english" type="Mapping" traces="//@traces.107"/>
+  <messages language="english" type="Mapping" traces="//@traces.108"/>
+  <messages language="english" type="Mapping" traces="//@traces.109"/>
+  <messages language="english" type="Mapping" traces="//@traces.110"/>
+  <messages language="english" type="Mapping" traces="//@traces.111"/>
+  <messages language="english" type="Mapping" traces="//@traces.112"/>
+  <messages language="english" type="Mapping" traces="//@traces.113"/>
+  <messages language="english" type="Mapping" traces="//@traces.114"/>
+  <messages language="english" type="Mapping" traces="//@traces.115"/>
+  <messages language="english" type="Mapping" traces="//@traces.116"/>
+  <messages language="english" type="Mapping" traces="//@traces.117"/>
+  <messages language="english" type="Mapping" traces="//@traces.118"/>
+  <messages language="english" type="Mapping" traces="//@traces.119"/>
+  <messages language="english" type="Mapping" traces="//@traces.120"/>
+  <messages language="english" type="Mapping" traces="//@traces.121"/>
+  <messages language="english" type="Mapping" traces="//@traces.122"/>
+  <messages language="english" type="Mapping" traces="//@traces.123"/>
+  <messages language="english" type="Mapping" traces="//@traces.124"/>
+  <messages language="english" type="Mapping" traces="//@traces.125"/>
+  <messages language="english" type="Mapping" traces="//@traces.126"/>
+  <messages language="english" type="Mapping" traces="//@traces.127"/>
+  <messages language="english" type="Mapping" traces="//@traces.128"/>
+  <messages language="english" type="Mapping" traces="//@traces.129"/>
+  <messages language="english" type="Mapping" traces="//@traces.130"/>
+  <messages language="english" type="Mapping" traces="//@traces.131"/>
+  <messages language="english" type="Mapping" traces="//@traces.132"/>
+  <messages language="english" type="Mapping" traces="//@traces.133"/>
+  <messages language="english" type="Mapping" traces="//@traces.134"/>
+  <messages language="english" type="Mapping" traces="//@traces.135"/>
+  <messages language="english" type="Mapping" traces="//@traces.136"/>
+  <messages language="english" type="Mapping" traces="//@traces.137"/>
+  <messages language="english" type="Mapping" traces="//@traces.138"/>
+</traceability:TraceModel>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/005_testExternPackageCall.kmt" lineBeginAt="6" charBeginAt="84" lineEndAt="6" charEndAt="202"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
+    <refObject href="005_testExternPackageCall.km#//@packages.0/Test_opcall"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/005_testExternPackageCall.kmt" lineBeginAt="7" charBeginAt="108" lineEndAt="7" charEndAt="200"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="005_testExternPackageCall.km#//@packages.0/Test_opcall/operation_asg"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/005_testExternPackageCall.kmt" lineBeginAt="8" charBeginAt="177" lineEndAt="8" charEndAt="183"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="005_testExternPackageCall.km#//@packages.0/Test_opcall/operation_asg/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/005_testExternPackageCall.kmt" lineBeginAt="8" charBeginAt="191" lineEndAt="8" charEndAt="192"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="005_testExternPackageCall.km#//@packages.0/Test_opcall/operation_asg/@body/@statement.0/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/005_testExternPackageCall.kmt" lineBeginAt="8" charBeginAt="187" lineEndAt="8" charEndAt="188"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="005_testExternPackageCall.km#//@packages.0/Test_opcall/operation_asg/@body/@statement.0/@value/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/005_testExternPackageCall.kmt" lineBeginAt="8" charBeginAt="189" lineEndAt="8" charEndAt="190"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="005_testExternPackageCall.km#//@packages.0/Test_opcall/operation_asg/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/005_testExternPackageCall.kmt" lineBeginAt="8" charBeginAt="177" lineEndAt="8" charEndAt="192"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="005_testExternPackageCall.km#//@packages.0/Test_opcall/operation_asg/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/005_testExternPackageCall.kmt" lineBeginAt="7" charBeginAt="166" lineEndAt="7" charEndAt="200"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="005_testExternPackageCall.km#//@packages.0/Test_opcall/operation_asg/@body"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" traces="//@traces.7"/>
+</traceability:TraceModel>

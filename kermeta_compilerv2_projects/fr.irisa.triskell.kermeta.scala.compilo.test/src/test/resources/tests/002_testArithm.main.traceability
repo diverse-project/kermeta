@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://www.kermeta.org/Traceability">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.3" description="//@messages.1"/>
+  <traces sourceReferences="//@references.4" targetReferences="//@references.5" description="//@messages.2"/>
+  <traces sourceReferences="//@references.6" targetReferences="//@references.7" description="//@messages.3"/>
+  <traces sourceReferences="//@references.8" targetReferences="//@references.9" description="//@messages.4"/>
+  <traces sourceReferences="//@references.10" targetReferences="//@references.11" description="//@messages.5"/>
+  <traces sourceReferences="//@references.12" targetReferences="//@references.13" description="//@messages.6"/>
+  <traces sourceReferences="//@references.14" targetReferences="//@references.15" description="//@messages.7"/>
+  <traces sourceReferences="//@references.16" targetReferences="//@references.17" description="//@messages.8"/>
+  <traces sourceReferences="//@references.18" targetReferences="//@references.19" description="//@messages.9"/>
+  <traces sourceReferences="//@references.20" targetReferences="//@references.21" description="//@messages.10"/>
+  <traces sourceReferences="//@references.22" targetReferences="//@references.23" description="//@messages.11"/>
+  <traces sourceReferences="//@references.24" targetReferences="//@references.25" description="//@messages.12"/>
+  <traces sourceReferences="//@references.26" targetReferences="//@references.27" description="//@messages.13"/>
+  <traces sourceReferences="//@references.28" targetReferences="//@references.1" description="//@messages.14"/>
+  <traces sourceReferences="//@references.29" targetReferences="//@references.30" description="//@messages.15"/>
+  <traces sourceReferences="//@references.31" targetReferences="//@references.32" description="//@messages.16"/>
+  <traces sourceReferences="//@references.33" targetReferences="//@references.34" description="//@messages.17"/>
+  <traces sourceReferences="//@references.35" targetReferences="//@references.36" description="//@messages.18"/>
+  <traces sourceReferences="//@references.37" targetReferences="//@references.38" description="//@messages.19"/>
+  <traces sourceReferences="//@references.39" targetReferences="//@references.40" description="//@messages.20"/>
+  <traces sourceReferences="//@references.41" targetReferences="//@references.42" description="//@messages.21"/>
+  <traces sourceReferences="//@references.43" targetReferences="//@references.44" description="//@messages.22"/>
+  <traces sourceReferences="//@references.45" targetReferences="//@references.46" description="//@messages.23"/>
+  <traces sourceReferences="//@references.47" targetReferences="//@references.48" description="//@messages.24"/>
+  <traces sourceReferences="//@references.49" targetReferences="//@references.50" description="//@messages.25"/>
+  <traces sourceReferences="//@references.51" targetReferences="//@references.52" description="//@messages.26"/>
+  <traces sourceReferences="//@references.53" targetReferences="//@references.54" description="//@messages.27"/>
+  <traces sourceReferences="//@references.55" targetReferences="//@references.56" description="//@messages.28"/>
+  <traces sourceReferences="//@references.57" targetReferences="//@references.58" description="//@messages.29"/>
+  <traces sourceReferences="//@references.59" targetReferences="//@references.60" description="//@messages.30"/>
+  <traces sourceReferences="//@references.61" targetReferences="//@references.62" description="//@messages.31"/>
+  <traces sourceReferences="//@references.63" targetReferences="//@references.64" description="//@messages.32"/>
+  <traces sourceReferences="//@references.65" targetReferences="//@references.66" description="//@messages.33"/>
+  <traces sourceReferences="//@references.67" targetReferences="//@references.68" description="//@messages.34"/>
+  <traces sourceReferences="//@references.69" targetReferences="//@references.70" description="//@messages.35"/>
+  <traces sourceReferences="//@references.71" targetReferences="//@references.72" description="//@messages.36"/>
+  <traces sourceReferences="//@references.73" targetReferences="//@references.74" description="//@messages.37"/>
+  <traces sourceReferences="//@references.75" targetReferences="//@references.76" description="//@messages.38"/>
+  <traces sourceReferences="//@references.77" targetReferences="//@references.78" description="//@messages.39"/>
+  <traces sourceReferences="//@references.79" targetReferences="//@references.80" description="//@messages.40"/>
+  <traces sourceReferences="//@references.81" targetReferences="//@references.82" description="//@messages.41"/>
+  <traces sourceReferences="//@references.83" targetReferences="//@references.84" description="//@messages.42"/>
+  <traces sourceReferences="//@references.85" targetReferences="//@references.86" description="//@messages.43"/>
+  <traces sourceReferences="//@references.87" targetReferences="//@references.88" description="//@messages.44"/>
+  <traces sourceReferences="//@references.89" targetReferences="//@references.90" description="//@messages.45"/>
+  <traces sourceReferences="//@references.91" targetReferences="//@references.92" description="//@messages.46"/>
+  <traces sourceReferences="//@references.93" targetReferences="//@references.94" description="//@messages.47"/>
+  <traces sourceReferences="//@references.95" targetReferences="//@references.96" description="//@messages.48"/>
+  <traces sourceReferences="//@references.97" targetReferences="//@references.98" description="//@messages.49"/>
+  <traces sourceReferences="//@references.99" targetReferences="//@references.100" description="//@messages.50"/>
+  <traces sourceReferences="//@references.101" targetReferences="//@references.102" description="//@messages.51"/>
+  <traces sourceReferences="//@references.103" targetReferences="//@references.104" description="//@messages.52"/>
+  <traces sourceReferences="//@references.105" targetReferences="//@references.106" description="//@messages.53"/>
+  <traces sourceReferences="//@references.107" targetReferences="//@references.108" description="//@messages.54"/>
+  <traces sourceReferences="//@references.109" targetReferences="//@references.110" description="//@messages.55"/>
+  <traces sourceReferences="//@references.111" targetReferences="//@references.112" description="//@messages.56"/>
+  <traces sourceReferences="//@references.113" targetReferences="//@references.114" description="//@messages.57"/>
+  <traces sourceReferences="//@references.115" targetReferences="//@references.116" description="//@messages.58"/>
+  <traces sourceReferences="//@references.117" targetReferences="//@references.118" description="//@messages.59"/>
+  <traces sourceReferences="//@references.119" targetReferences="//@references.120" description="//@messages.60"/>
+  <traces sourceReferences="//@references.121" targetReferences="//@references.122" description="//@messages.61"/>
+  <traces sourceReferences="//@references.123" targetReferences="//@references.124" description="//@messages.62"/>
+  <traces sourceReferences="//@references.125" targetReferences="//@references.126" description="//@messages.63"/>
+  <traces sourceReferences="//@references.127" targetReferences="//@references.128" description="//@messages.64"/>
+  <traces sourceReferences="//@references.129" targetReferences="//@references.130" description="//@messages.65"/>
+  <traces sourceReferences="//@references.131" targetReferences="//@references.132" description="//@messages.66"/>
+  <traces sourceReferences="//@references.133" targetReferences="//@references.134" description="//@messages.67"/>
+  <traces sourceReferences="//@references.135" targetReferences="//@references.136" description="//@messages.68"/>
+  <traces sourceReferences="//@references.137" targetReferences="//@references.138" description="//@messages.69"/>
+  <traces sourceReferences="//@references.139" targetReferences="//@references.140" description="//@messages.70"/>
+  <traces sourceReferences="//@references.141" targetReferences="//@references.142" description="//@messages.71"/>
+  <traces sourceReferences="//@references.143" targetReferences="//@references.144" description="//@messages.72"/>
+  <traces sourceReferences="//@references.145" targetReferences="//@references.146" description="//@messages.73"/>
+  <traces sourceReferences="//@references.147" targetReferences="//@references.148" description="//@messages.74"/>
+  <traces sourceReferences="//@references.149" targetReferences="//@references.150" description="//@messages.75"/>
+  <traces sourceReferences="//@references.151" targetReferences="//@references.152" description="//@messages.76"/>
+  <traces sourceReferences="//@references.153" targetReferences="//@references.154" description="//@messages.77"/>
+  <traces sourceReferences="//@references.155" targetReferences="//@references.156" description="//@messages.78"/>
+  <traces sourceReferences="//@references.157" targetReferences="//@references.158" description="//@messages.79"/>
+  <traces sourceReferences="//@references.159" targetReferences="//@references.160" description="//@messages.80"/>
+  <traces sourceReferences="//@references.161" targetReferences="//@references.162" description="//@messages.81"/>
+  <traces sourceReferences="//@references.163" targetReferences="//@references.164" description="//@messages.82"/>
+  <traces sourceReferences="//@references.165" targetReferences="//@references.166" description="//@messages.83"/>
+  <traces sourceReferences="//@references.167" targetReferences="//@references.168" description="//@messages.84"/>
+  <traces sourceReferences="//@references.169" targetReferences="//@references.170" description="//@messages.85"/>
+  <traces sourceReferences="//@references.171" targetReferences="//@references.172" description="//@messages.86"/>
+  <traces sourceReferences="//@references.173" targetReferences="//@references.174" description="//@messages.87"/>
+  <traces sourceReferences="//@references.175" targetReferences="//@references.176" description="//@messages.88"/>
+  <traces sourceReferences="//@references.177" targetReferences="//@references.178" description="//@messages.89"/>
+  <traces sourceReferences="//@references.179" targetReferences="//@references.180" description="//@messages.90"/>
+  <traces sourceReferences="//@references.181" targetReferences="//@references.182" description="//@messages.91"/>
+  <traces sourceReferences="//@references.183" targetReferences="//@references.184" description="//@messages.92"/>
+  <traces sourceReferences="//@references.185" targetReferences="//@references.186" description="//@messages.93"/>
+  <traces sourceReferences="//@references.187" targetReferences="//@references.188" description="//@messages.94"/>
+  <traces sourceReferences="//@references.189" targetReferences="//@references.190" description="//@messages.95"/>
+  <traces sourceReferences="//@references.191" targetReferences="//@references.192" description="//@messages.96"/>
+  <traces sourceReferences="//@references.193" targetReferences="//@references.194" description="//@messages.97"/>
+  <traces sourceReferences="//@references.195" targetReferences="//@references.196" description="//@messages.98"/>
+  <traces sourceReferences="//@references.197" targetReferences="//@references.198" description="//@messages.99"/>
+  <traces sourceReferences="//@references.199" targetReferences="//@references.200" description="//@messages.100"/>
+  <traces sourceReferences="//@references.201" targetReferences="//@references.202" description="//@messages.101"/>
+  <traces sourceReferences="//@references.203" targetReferences="//@references.204" description="//@messages.102"/>
+  <traces sourceReferences="//@references.205" targetReferences="//@references.206" description="//@messages.103"/>
+  <traces sourceReferences="//@references.207" targetReferences="//@references.208" description="//@messages.104"/>
+  <traces sourceReferences="//@references.209" targetReferences="//@references.210" description="//@messages.105"/>
+  <traces sourceReferences="//@references.211" targetReferences="//@references.212" description="//@messages.106"/>
+  <traces sourceReferences="//@references.213" targetReferences="//@references.214" description="//@messages.107"/>
+  <traces sourceReferences="//@references.215" targetReferences="//@references.216" description="//@messages.108"/>
+  <traces sourceReferences="//@references.217" targetReferences="//@references.218" description="//@messages.109"/>
+  <traces sourceReferences="//@references.219" targetReferences="//@references.220" description="//@messages.110"/>
+  <traces sourceReferences="//@references.221" targetReferences="//@references.222" description="//@messages.111"/>
+  <traces sourceReferences="//@references.223" targetReferences="//@references.224" description="//@messages.112"/>
+  <traces sourceReferences="//@references.225" targetReferences="//@references.226" description="//@messages.113"/>
+  <traces sourceReferences="//@references.227" targetReferences="//@references.228" description="//@messages.114"/>
+  <traces sourceReferences="//@references.229" targetReferences="//@references.230" description="//@messages.115"/>
+  <traces sourceReferences="//@references.231" targetReferences="//@references.232" description="//@messages.116"/>
+  <traces sourceReferences="//@references.233" targetReferences="//@references.234" description="//@messages.117"/>
+  <traces sourceReferences="//@references.235" targetReferences="//@references.236" description="//@messages.118"/>
+  <traces sourceReferences="//@references.237" targetReferences="//@references.238" description="//@messages.119"/>
+  <traces sourceReferences="//@references.239" targetReferences="//@references.240" description="//@messages.120"/>
+  <traces sourceReferences="//@references.241" targetReferences="//@references.242" description="//@messages.121"/>
+  <traces sourceReferences="//@references.243" targetReferences="//@references.244" description="//@messages.122"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="10" charBeginAt="127" lineEndAt="10" charEndAt="170"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0 //@traces.14">
+    <refObject href="002_testArithm.main.km#//@packages.0/Integer"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="15" charBeginAt="253" lineEndAt="15" charEndAt="2230"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="17" charBeginAt="278" lineEndAt="17" charEndAt="1233"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="81" charBeginAt="2138" lineEndAt="81" charEndAt="2202"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4bis"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="67" charBeginAt="1722" lineEndAt="67" charEndAt="1754"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation2/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="67" charBeginAt="1701" lineEndAt="67" charEndAt="1824"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="61" charBeginAt="1575" lineEndAt="61" charEndAt="1607"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation1/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="61" charBeginAt="1554" lineEndAt="61" charEndAt="1682"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="77" charBeginAt="2004" lineEndAt="77" charEndAt="2036"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="77" charBeginAt="1983" lineEndAt="77" charEndAt="2106"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="72" charBeginAt="1864" lineEndAt="72" charEndAt="1896"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation3/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="72" charBeginAt="1843" lineEndAt="72" charEndAt="1966"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="52" charBeginAt="1287" lineEndAt="52" charEndAt="1319"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@ownedParameter.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="52" charBeginAt="1263" lineEndAt="52" charEndAt="1536"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="10" charBeginAt="127" lineEndAt="10" charEndAt="170"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="18" charBeginAt="357" lineEndAt="18" charEndAt="383"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="18" charBeginAt="348" lineEndAt="18" charEndAt="383"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="19" charBeginAt="401" lineEndAt="19" charEndAt="427"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.1/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="19" charBeginAt="392" lineEndAt="19" charEndAt="427"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="20" charBeginAt="445" lineEndAt="20" charEndAt="471"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.2/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="20" charBeginAt="436" lineEndAt="20" charEndAt="471"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="21" charBeginAt="491" lineEndAt="21" charEndAt="517"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.3/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="21" charBeginAt="480" lineEndAt="21" charEndAt="517"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="22" charBeginAt="538" lineEndAt="22" charEndAt="564"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.4/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="22" charBeginAt="526" lineEndAt="22" charEndAt="564"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.4"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="23" charBeginAt="585" lineEndAt="23" charEndAt="611"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.5/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="23" charBeginAt="573" lineEndAt="23" charEndAt="611"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.5"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="24" charBeginAt="632" lineEndAt="24" charEndAt="658"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.6/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="24" charBeginAt="620" lineEndAt="24" charEndAt="658"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.6"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="25" charBeginAt="679" lineEndAt="25" charEndAt="705"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.7/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="25" charBeginAt="667" lineEndAt="25" charEndAt="705"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.7"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="26" charBeginAt="727" lineEndAt="26" charEndAt="753"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.8/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="26" charBeginAt="714" lineEndAt="26" charEndAt="753"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.8"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="27" charBeginAt="775" lineEndAt="27" charEndAt="801"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.9/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="27" charBeginAt="762" lineEndAt="27" charEndAt="801"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.9"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="30" charBeginAt="838" lineEndAt="30" charEndAt="842"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.10/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="30" charBeginAt="860" lineEndAt="30" charEndAt="861"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.10/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="30" charBeginAt="846" lineEndAt="30" charEndAt="859"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.10/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="30" charBeginAt="838" lineEndAt="30" charEndAt="862"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.10"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="33" charBeginAt="896" lineEndAt="33" charEndAt="898"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.11/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="33" charBeginAt="913" lineEndAt="33" charEndAt="914"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.11/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="33" charBeginAt="902" lineEndAt="33" charEndAt="912"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.11/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="33" charBeginAt="896" lineEndAt="33" charEndAt="915"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.11"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="34" charBeginAt="924" lineEndAt="34" charEndAt="928"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.43">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.12/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="34" charBeginAt="943" lineEndAt="34" charEndAt="944"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.44">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.12/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="34" charBeginAt="932" lineEndAt="34" charEndAt="942"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.45">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.12/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="34" charBeginAt="924" lineEndAt="34" charEndAt="945"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.46">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.12"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="35" charBeginAt="954" lineEndAt="35" charEndAt="959"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.47">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.13/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="35" charBeginAt="976" lineEndAt="35" charEndAt="977"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.48">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.13/@value/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="35" charBeginAt="974" lineEndAt="35" charEndAt="975"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.49">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.13/@value/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="35" charBeginAt="975" lineEndAt="35" charEndAt="976"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.50">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.13/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="35" charBeginAt="963" lineEndAt="35" charEndAt="973"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.51">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.13/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="35" charBeginAt="954" lineEndAt="35" charEndAt="978"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.52">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.13"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="38" charBeginAt="1005" lineEndAt="38" charEndAt="1007"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.53">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.14/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="38" charBeginAt="1022" lineEndAt="38" charEndAt="1023"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.54">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.14/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="38" charBeginAt="1011" lineEndAt="38" charEndAt="1021"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.55">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.14/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="38" charBeginAt="1005" lineEndAt="38" charEndAt="1024"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.56">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.14"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="39" charBeginAt="1033" lineEndAt="39" charEndAt="1037"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.57">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.15/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="39" charBeginAt="1052" lineEndAt="39" charEndAt="1053"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.58">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.15/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="39" charBeginAt="1041" lineEndAt="39" charEndAt="1051"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.59">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.15/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="39" charBeginAt="1033" lineEndAt="39" charEndAt="1054"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.60">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.15"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="43" charBeginAt="1119" lineEndAt="43" charEndAt="1121"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.61">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.16/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="43" charBeginAt="1136" lineEndAt="43" charEndAt="1137"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.62">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.16/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.63" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="43" charBeginAt="1125" lineEndAt="43" charEndAt="1135"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.63">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.16/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.64" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="43" charBeginAt="1119" lineEndAt="43" charEndAt="1138"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.64">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.16"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.65" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="44" charBeginAt="1147" lineEndAt="44" charEndAt="1151"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.65">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.17/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.66" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="44" charBeginAt="1166" lineEndAt="44" charEndAt="1167"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.66">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.17/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.67" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="44" charBeginAt="1155" lineEndAt="44" charEndAt="1165"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.67">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.17/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.68" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="44" charBeginAt="1147" lineEndAt="44" charEndAt="1168"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.68">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.17"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.69" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="47" charBeginAt="1210" lineEndAt="47" charEndAt="1216"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.69">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.18/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.70" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="47" charBeginAt="1220" lineEndAt="47" charEndAt="1224"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.70">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.18/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.71" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="47" charBeginAt="1210" lineEndAt="47" charEndAt="1224"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.71">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body/@statement.18"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.72" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="17" charBeginAt="337" lineEndAt="17" charEndAt="1233"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.72">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/main_operation/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.73" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="82" charBeginAt="2182" lineEndAt="82" charEndAt="2188"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.73">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4bis/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.74" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="82" charBeginAt="2196" lineEndAt="82" charEndAt="2197"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.74">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4bis/@body/@statement.0/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.75" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="82" charBeginAt="2192" lineEndAt="82" charEndAt="2193"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.75">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4bis/@body/@statement.0/@value/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.76" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="82" charBeginAt="2194" lineEndAt="82" charEndAt="2195"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.76">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4bis/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.77" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="82" charBeginAt="2182" lineEndAt="82" charEndAt="2197"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.77">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4bis/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.78" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="81" charBeginAt="2177" lineEndAt="81" charEndAt="2202"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.78">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4bis/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.79" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="68" charBeginAt="1799" lineEndAt="68" charEndAt="1805"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.79">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation2/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.80" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="68" charBeginAt="1813" lineEndAt="68" charEndAt="1816"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.80">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation2/@body/@statement.0/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.81" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="68" charBeginAt="1809" lineEndAt="68" charEndAt="1810"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.81">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation2/@body/@statement.0/@value/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.82" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="68" charBeginAt="1811" lineEndAt="68" charEndAt="1812"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.82">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation2/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.83" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="68" charBeginAt="1799" lineEndAt="68" charEndAt="1816"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.83">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation2/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.84" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="67" charBeginAt="1788" lineEndAt="67" charEndAt="1824"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.84">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation2/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.85" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="62" charBeginAt="1652" lineEndAt="62" charEndAt="1658"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.85">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation1/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.86" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="62" charBeginAt="1666" lineEndAt="62" charEndAt="1669"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.86">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation1/@body/@statement.0/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.87" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="62" charBeginAt="1662" lineEndAt="62" charEndAt="1663"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.87">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation1/@body/@statement.0/@value/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.88" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="62" charBeginAt="1664" lineEndAt="62" charEndAt="1665"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.88">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation1/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.89" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="62" charBeginAt="1652" lineEndAt="62" charEndAt="1669"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.89">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation1/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.90" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="61" charBeginAt="1641" lineEndAt="61" charEndAt="1682"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.90">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation1/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.91" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="78" charBeginAt="2081" lineEndAt="78" charEndAt="2087"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.91">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.92" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="78" charBeginAt="2095" lineEndAt="78" charEndAt="2098"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.92">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4/@body/@statement.0/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.93" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="78" charBeginAt="2091" lineEndAt="78" charEndAt="2092"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.93">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4/@body/@statement.0/@value/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.94" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="78" charBeginAt="2093" lineEndAt="78" charEndAt="2094"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.94">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.95" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="78" charBeginAt="2081" lineEndAt="78" charEndAt="2098"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.95">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.96" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="77" charBeginAt="2070" lineEndAt="77" charEndAt="2106"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.96">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation4/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.97" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="73" charBeginAt="1941" lineEndAt="73" charEndAt="1947"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.97">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation3/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.98" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="73" charBeginAt="1955" lineEndAt="73" charEndAt="1958"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.98">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation3/@body/@statement.0/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.99" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="73" charBeginAt="1951" lineEndAt="73" charEndAt="1952"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.99">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation3/@body/@statement.0/@value/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.100" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="73" charBeginAt="1953" lineEndAt="73" charEndAt="1954"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.100">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation3/@body/@statement.0/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.101" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="73" charBeginAt="1941" lineEndAt="73" charEndAt="1958"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.101">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation3/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.102" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="72" charBeginAt="1930" lineEndAt="72" charEndAt="1966"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.102">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation3/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.103" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="53" charBeginAt="1378" lineEndAt="53" charEndAt="1404"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.103">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.0/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.104" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="53" charBeginAt="1364" lineEndAt="53" charEndAt="1404"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.104">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.105" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="54" charBeginAt="1421" lineEndAt="54" charEndAt="1447"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.105">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.1/@type"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.106" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="54" charBeginAt="1413" lineEndAt="54" charEndAt="1447"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.106">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.107" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="55" charBeginAt="1456" lineEndAt="55" charEndAt="1457"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.107">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.2/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.108" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="55" charBeginAt="1461" lineEndAt="55" charEndAt="1462"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.108">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.2/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.109" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="55" charBeginAt="1456" lineEndAt="55" charEndAt="1462"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.109">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.110" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="56" charBeginAt="1471" lineEndAt="56" charEndAt="1478"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.110">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.3/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.111" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="56" charBeginAt="1500" lineEndAt="56" charEndAt="1502"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.111">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.3/@value/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.112" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="56" charBeginAt="1494" lineEndAt="56" charEndAt="1497"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.112">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.3/@value/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.113" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="56" charBeginAt="1488" lineEndAt="56" charEndAt="1489"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.113">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.3/@value/@target/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.114" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="56" charBeginAt="1484" lineEndAt="56" charEndAt="1485"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.114">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.3/@value/@target/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.115" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="56" charBeginAt="1486" lineEndAt="56" charEndAt="1487"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.115">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.3/@value/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.116" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="56" charBeginAt="1492" lineEndAt="56" charEndAt="1493"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.116">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.3/@value/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.117" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="56" charBeginAt="1498" lineEndAt="56" charEndAt="1499"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.117">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.3/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.118" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="56" charBeginAt="1471" lineEndAt="56" charEndAt="1502"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.118">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.119" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="57" charBeginAt="1511" lineEndAt="57" charEndAt="1517"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.119">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.4/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.120" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="57" charBeginAt="1521" lineEndAt="57" charEndAt="1528"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.120">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.4/@value"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.121" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="57" charBeginAt="1511" lineEndAt="57" charEndAt="1528"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.121">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body/@statement.4"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.122" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/002_testArithm.main.kmt" lineBeginAt="52" charBeginAt="1353" lineEndAt="52" charEndAt="1536"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.122">
+    <refObject href="002_testArithm.main.km#//@packages.0/Test_arithm/operation_ptm/@body"/>
+  </references>
+  <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.2"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.3"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.4"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.5"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.6"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.7"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.8"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.9"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.10"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.11"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.12"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.13"/>
+  <messages language="english" type="Mapping" value="" traces="//@traces.14"/>
+  <messages language="english" type="Mapping" traces="//@traces.15"/>
+  <messages language="english" type="Mapping" traces="//@traces.16"/>
+  <messages language="english" type="Mapping" traces="//@traces.17"/>
+  <messages language="english" type="Mapping" traces="//@traces.18"/>
+  <messages language="english" type="Mapping" traces="//@traces.19"/>
+  <messages language="english" type="Mapping" traces="//@traces.20"/>
+  <messages language="english" type="Mapping" traces="//@traces.21"/>
+  <messages language="english" type="Mapping" traces="//@traces.22"/>
+  <messages language="english" type="Mapping" traces="//@traces.23"/>
+  <messages language="english" type="Mapping" traces="//@traces.24"/>
+  <messages language="english" type="Mapping" traces="//@traces.25"/>
+  <messages language="english" type="Mapping" traces="//@traces.26"/>
+  <messages language="english" type="Mapping" traces="//@traces.27"/>
+  <messages language="english" type="Mapping" traces="//@traces.28"/>
+  <messages language="english" type="Mapping" traces="//@traces.29"/>
+  <messages language="english" type="Mapping" traces="//@traces.30"/>
+  <messages language="english" type="Mapping" traces="//@traces.31"/>
+  <messages language="english" type="Mapping" traces="//@traces.32"/>
+  <messages language="english" type="Mapping" traces="//@traces.33"/>
+  <messages language="english" type="Mapping" traces="//@traces.34"/>
+  <messages language="english" type="Mapping" traces="//@traces.35"/>
+  <messages language="english" type="Mapping" traces="//@traces.36"/>
+  <messages language="english" type="Mapping" traces="//@traces.37"/>
+  <messages language="english" type="Mapping" traces="//@traces.38"/>
+  <messages language="english" type="Mapping" traces="//@traces.39"/>
+  <messages language="english" type="Mapping" traces="//@traces.40"/>
+  <messages language="english" type="Mapping" traces="//@traces.41"/>
+  <messages language="english" type="Mapping" traces="//@traces.42"/>
+  <messages language="english" type="Mapping" traces="//@traces.43"/>
+  <messages language="english" type="Mapping" traces="//@traces.44"/>
+  <messages language="english" type="Mapping" traces="//@traces.45"/>
+  <messages language="english" type="Mapping" traces="//@traces.46"/>
+  <messages language="english" type="Mapping" traces="//@traces.47"/>
+  <messages language="english" type="Mapping" traces="//@traces.48"/>
+  <messages language="english" type="Mapping" traces="//@traces.49"/>
+  <messages language="english" type="Mapping" traces="//@traces.50"/>
+  <messages language="english" type="Mapping" traces="//@traces.51"/>
+  <messages language="english" type="Mapping" traces="//@traces.52"/>
+  <messages language="english" type="Mapping" traces="//@traces.53"/>
+  <messages language="english" type="Mapping" traces="//@traces.54"/>
+  <messages language="english" type="Mapping" traces="//@traces.55"/>
+  <messages language="english" type="Mapping" traces="//@traces.56"/>
+  <messages language="english" type="Mapping" traces="//@traces.57"/>
+  <messages language="english" type="Mapping" traces="//@traces.58"/>
+  <messages language="english" type="Mapping" traces="//@traces.59"/>
+  <messages language="english" type="Mapping" traces="//@traces.60"/>
+  <messages language="english" type="Mapping" traces="//@traces.61"/>
+  <messages language="english" type="Mapping" traces="//@traces.62"/>
+  <messages language="english" type="Mapping" traces="//@traces.63"/>
+  <messages language="english" type="Mapping" traces="//@traces.64"/>
+  <messages language="english" type="Mapping" traces="//@traces.65"/>
+  <messages language="english" type="Mapping" traces="//@traces.66"/>
+  <messages language="english" type="Mapping" traces="//@traces.67"/>
+  <messages language="english" type="Mapping" traces="//@traces.68"/>
+  <messages language="english" type="Mapping" traces="//@traces.69"/>
+  <messages language="english" type="Mapping" traces="//@traces.70"/>
+  <messages language="english" type="Mapping" traces="//@traces.71"/>
+  <messages language="english" type="Mapping" traces="//@traces.72"/>
+  <messages language="english" type="Mapping" traces="//@traces.73"/>
+  <messages language="english" type="Mapping" traces="//@traces.74"/>
+  <messages language="english" type="Mapping" traces="//@traces.75"/>
+  <messages language="english" type="Mapping" traces="//@traces.76"/>
+  <messages language="english" type="Mapping" traces="//@traces.77"/>
+  <messages language="english" type="Mapping" traces="//@traces.78"/>
+  <messages language="english" type="Mapping" traces="//@traces.79"/>
+  <messages language="english" type="Mapping" traces="//@traces.80"/>
+  <messages language="english" type="Mapping" traces="//@traces.81"/>
+  <messages language="english" type="Mapping" traces="//@traces.82"/>
+  <messages language="english" type="Mapping" traces="//@traces.83"/>
+  <messages language="english" type="Mapping" traces="//@traces.84"/>
+  <messages language="english" type="Mapping" traces="//@traces.85"/>
+  <messages language="english" type="Mapping" traces="//@traces.86"/>
+  <messages language="english" type="Mapping" traces="//@traces.87"/>
+  <messages language="english" type="Mapping" traces="//@traces.88"/>
+  <messages language="english" type="Mapping" traces="//@traces.89"/>
+  <messages language="english" type="Mapping" traces="//@traces.90"/>
+  <messages language="english" type="Mapping" traces="//@traces.91"/>
+  <messages language="english" type="Mapping" traces="//@traces.92"/>
+  <messages language="english" type="Mapping" traces="//@traces.93"/>
+  <messages language="english" type="Mapping" traces="//@traces.94"/>
+  <messages language="english" type="Mapping" traces="//@traces.95"/>
+  <messages language="english" type="Mapping" traces="//@traces.96"/>
+  <messages language="english" type="Mapping" traces="//@traces.97"/>
+  <messages language="english" type="Mapping" traces="//@traces.98"/>
+  <messages language="english" type="Mapping" traces="//@traces.99"/>
+  <messages language="english" type="Mapping" traces="//@traces.100"/>
+  <messages language="english" type="Mapping" traces="//@traces.101"/>
+  <messages language="english" type="Mapping" traces="//@traces.102"/>
+  <messages language="english" type="Mapping" traces="//@traces.103"/>
+  <messages language="english" type="Mapping" traces="//@traces.104"/>
+  <messages language="english" type="Mapping" traces="//@traces.105"/>
+  <messages language="english" type="Mapping" traces="//@traces.106"/>
+  <messages language="english" type="Mapping" traces="//@traces.107"/>
+  <messages language="english" type="Mapping" traces="//@traces.108"/>
+  <messages language="english" type="Mapping" traces="//@traces.109"/>
+  <messages language="english" type="Mapping" traces="//@traces.110"/>
+  <messages language="english" type="Mapping" traces="//@traces.111"/>
+  <messages language="english" type="Mapping" traces="//@traces.112"/>
+  <messages language="english" type="Mapping" traces="//@traces.113"/>
+  <messages language="english" type="Mapping" traces="//@traces.114"/>
+  <messages language="english" type="Mapping" traces="//@traces.115"/>
+  <messages language="english" type="Mapping" traces="//@traces.116"/>
+  <messages language="english" type="Mapping" traces="//@traces.117"/>
+  <messages language="english" type="Mapping" traces="//@traces.118"/>
+  <messages language="english" type="Mapping" traces="//@traces.119"/>
+  <messages language="english" type="Mapping" traces="//@traces.120"/>
+  <messages language="english" type="Mapping" traces="//@traces.121"/>
+  <messages language="english" type="Mapping" traces="//@traces.122"/>
+</traceability:TraceModel>
