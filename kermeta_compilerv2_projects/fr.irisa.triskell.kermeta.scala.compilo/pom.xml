@@ -4,7 +4,7 @@
     <groupId>fr.irisa.triskell</groupId>
     <artifactId>kermeta.compilo.scala</artifactId>
     <name>fr.irisa.triskell.kermeta.compilo.scala</name>
-    <version>0.0.2</version>
+    <version>0.0.2-SNAPSHOT</version>
     <description>Kermeta Compiler V2</description>
     <packaging>jar</packaging>
     <properties>
