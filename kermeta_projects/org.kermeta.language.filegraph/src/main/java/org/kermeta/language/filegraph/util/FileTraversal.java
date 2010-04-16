@@ -18,7 +18,6 @@ public class FileTraversal {
 			BufferedReader br = new BufferedReader(new FileReader(uri));
 			
 			while ((sCurrentLine = br.readLine()) != null) {
-				System.out.println("sCurrentLine" + sCurrentLine);
 				if (sCurrentLine.contains("require")&& !sCurrentLine.startsWith("//")&& 
 						!sCurrentLine.startsWith("/*")&& !sCurrentLine.startsWith("*")){
 					int uriStart = sCurrentLine.indexOf("\"")+1;
