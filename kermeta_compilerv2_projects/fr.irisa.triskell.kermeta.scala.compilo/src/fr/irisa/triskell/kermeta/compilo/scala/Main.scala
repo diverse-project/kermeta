@@ -39,6 +39,9 @@ object Main extends LogAspect {
 
     var additionalClassPath: List[String] = List()
 
+    var result : Int = -1;
+    def getResult() : Int = result ;
+
     def main(args : Array[String]) : Unit = {
 
         //STEP 0 - LOAD PROPERTIES FILE
@@ -212,6 +215,7 @@ object Main extends LogAspect {
                     System.setErr(new java.io.PrintStream(outputStream))
                 }
                 var compilationResult = EmbettedScalaCompiler.compile(GlobalConfiguration.outputFolder, GlobalConfiguration.outputBinFolder,true,classpath,useFSC)
+                result = compilationResult
                 
                 //Scala runner
                 if(compilationResult == 0){
