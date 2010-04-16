@@ -13,6 +13,7 @@ package org.kermeta.language.filegraph.prefuse.ui.display;
 import java.util.List;
 
 import org.kermeta.language.filegraph.prefuse.action.layout.AggregateLayout;
+import org.kermeta.language.filegraph.prefuse.data.Aggregate;
 
 import prefuse.Constants;
 import prefuse.Display;
@@ -67,7 +68,7 @@ public class DependenciesDisplay extends Display {
 			AggregateItem aitem = (AggregateItem)at.addItem();	
 			// compute the color depending on the number of element in the cycle
 			aitem.setInt(DependenciesDisplay.AGGR_COLORID, aggregate.getColorid());
-            for ( Node node : aggregate.aggregatedNodes  ) {
+            for ( Node node : aggregate.getAggregatedNodes()  ) {
             	aitem.addItem(m_vis.getVisualItem(DependenciesDisplay.NODES, node));
             }
 		}

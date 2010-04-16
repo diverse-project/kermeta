@@ -8,7 +8,7 @@
 * Authors : Didier Vojtisek
 */
 
-package org.kermeta.language.filegraph.prefuse.ui.display;
+package org.kermeta.language.filegraph.prefuse.data;
 
 import java.util.ArrayList;
 import java.util.List;

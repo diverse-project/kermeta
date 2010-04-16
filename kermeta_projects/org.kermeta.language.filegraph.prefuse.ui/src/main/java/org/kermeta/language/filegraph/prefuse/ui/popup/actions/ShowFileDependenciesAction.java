@@ -24,8 +24,9 @@ import org.kermeta.language.filegraph.GraphNode;
 import org.kermeta.language.filegraph.IFileGraphService;
 import org.kermeta.language.filegraph.SimpleGraph;
 import org.kermeta.language.filegraph.prefuse.controls.AggregateDragControl;
+import org.kermeta.language.filegraph.prefuse.data.Aggregate;
+import org.kermeta.language.filegraph.prefuse.data.FileGraphToPrefuseConverter;
 import org.kermeta.language.filegraph.prefuse.ui.Activator;
-import org.kermeta.language.filegraph.prefuse.ui.display.Aggregate;
 import org.kermeta.language.filegraph.prefuse.ui.display.DependenciesDisplay;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -72,21 +73,21 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 			public IStatus run(IProgressMonitor monitor) {
 				
 				try {
-			/*		// get the service (we expect only one)
+					// get the service (we expect only one)
 					BundleContext context = Activator.getDefault().context;
 					ServiceReference ref = context.getServiceReference(IFileGraphService.class.getName());
 					IFileGraphService fileGraphService = (IFileGraphService)context.getService(ref);
 					
 					// computer the graph
 					CycleGraph cycleGraph = fileGraphService.getCycleGraph(selectedFile.toString());
-			 */		
+			 		
 					// TEST use mockup
-					CycleGraph cycleGraph = new FileGraphService().getCycleGraph(selectedFile.toString());
+				//	CycleGraph cycleGraph = new FileGraphService().getCycleGraph(selectedFile.toString());
 					
 					// transform the graph for prefuse
 					Map<GraphNode, Node> convertedNodes = new HashMap<GraphNode, Node>();
-					Graph graph = convertToPrefuseGraph(cycleGraph, convertedNodes);
-					List<Aggregate> aggregates = convertToAggregates(cycleGraph, convertedNodes);
+					Graph graph = FileGraphToPrefuseConverter.convertToPrefuseGraph(cycleGraph, convertedNodes);
+					List<Aggregate> aggregates = FileGraphToPrefuseConverter.convertToAggregates(cycleGraph, convertedNodes);
 					
 					// open the view
 					DependenciesDisplay display = new DependenciesDisplay(graph, aggregates);
@@ -123,26 +124,6 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 		
 	}
 
-	protected List<Aggregate> convertToAggregates(CycleGraph cycleGraph, Map<GraphNode, Node> convertedNodes) {
-		List<Aggregate> result =  new ArrayList<Aggregate>();
-		for(List<GraphNode> cycleNodes : cycleGraph.getCycles()){
-			Aggregate agg = new Aggregate();
-			result.add(agg);
-			if(cycleNodes.size() <= 2){
-				agg.setColorid( 0 );
-			}
-			else {
-				if(cycleNodes.size()-2 <= DependenciesDisplay.NB_AGGREGATE_COLOR)
-					agg.setColorid( cycleNodes.size()-2);
-				else
-					agg.setColorid( DependenciesDisplay.NB_AGGREGATE_COLOR);
-			}
-			for ( GraphNode node : cycleNodes  ) {
-            	agg.getAggregatedNodes().add( convertedNodes.get(node));
-            }
-		}
-		return result;
-	}
 
 	/**
 	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
@@ -154,33 +135,5 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 		}
 	}
 	
-	protected Graph convertToPrefuseGraph(SimpleGraph simpleGraph, Map<GraphNode, Node> convertedNodes){
-		Graph result = new Graph(true);
-		result.addColumn(DependenciesDisplay.NODE_LABEL, String.class);
-		
-		
-		// process root
-		convertNodeToPrefuse(result, simpleGraph.getRootNode(), convertedNodes);
-		
-		// for each converted nodes, add the edges
-		for(GraphNode fileNode : convertedNodes.keySet()){
-			for(GraphNode childNode :fileNode.getDirectReferences()){
-				/* Edge edge = */result.addEdge(convertedNodes.get(fileNode), convertedNodes.get(childNode));
-				
-			}
-		}
-		
-		return result;
-	}
-	protected void convertNodeToPrefuse(Graph prefuseGraph, GraphNode fileNode, Map<GraphNode, Node> convertedNodes){
-		if(!convertedNodes.containsKey(fileNode)){
-			Node n = prefuseGraph.addNode();
-			n.setString("label", fileNode.getName());
-			convertedNodes.put(fileNode, n);
-			for(GraphNode childNode :fileNode.getDirectReferences()){
-				convertNodeToPrefuse(prefuseGraph, childNode, convertedNodes);
-			}
-		}		
-	}
 	
 }
