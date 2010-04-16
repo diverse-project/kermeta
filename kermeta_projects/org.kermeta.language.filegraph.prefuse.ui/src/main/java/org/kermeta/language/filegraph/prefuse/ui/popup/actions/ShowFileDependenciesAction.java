@@ -74,15 +74,15 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 				
 				try {
 					// get the service (we expect only one)
-					BundleContext context = Activator.getDefault().context;
+			/*		BundleContext context = Activator.getDefault().context;
 					ServiceReference ref = context.getServiceReference(IFileGraphService.class.getName());
 					IFileGraphService fileGraphService = (IFileGraphService)context.getService(ref);
 					
 					// computer the graph
 					CycleGraph cycleGraph = fileGraphService.getCycleGraph(selectedFile.toString());
-			 		
+			 */		
 					// TEST use mockup
-				//	CycleGraph cycleGraph = new FileGraphService().getCycleGraph(selectedFile.toString());
+					CycleGraph cycleGraph = new FileGraphService().getCycleGraph(selectedFile.toString());
 					
 					// transform the graph for prefuse
 					Map<GraphNode, Node> convertedNodes = new HashMap<GraphNode, Node>();
@@ -93,7 +93,6 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 					DependenciesDisplay display = new DependenciesDisplay(graph, aggregates);
 					// some stuff needed to control graph
 					display.addControlListener(new AggregateDragControl());
-			        display.addControlListener(new DragControl());
 			        display.addControlListener(new PanControl());
 			        display.addControlListener(new ZoomControl());
 			        display.setSize(500,500);
@@ -111,6 +110,13 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 			        
 			        // start up the dynamic display
 			        display.run();
+			    /*    try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			        display.stopAnimation(); */
 					
 				} finally {
 					monitor.done();
