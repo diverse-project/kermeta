@@ -71,7 +71,7 @@ public class GenerateTest {
 			StringTemplateGroup group = new StringTemplateGroup("tests");
 //			StringTemplate st = group.getInstanceOf("group/templates/TestCompiloCases");
 			StringBuilder output = new StringBuilder();
-			output.append("package fr.irisa.triskell.scala.compilo.test;\n import org.junit.Test;\n	public class " +testRep.replace("/", "_") + testname.replace(".", "") + " extends TestCompiloCases{\n");
+			output.append("package fr.irisa.triskell.scala.compilo.test;\n import org.junit.Test;\n	public class Test" +testRep.replace("/", "_") + testname.replace(".", "") + " extends TestCompiloCases{\n");
 
 			
 			//System.err.println(testRep);
@@ -85,7 +85,7 @@ public class GenerateTest {
 			test.setAttribute("testRep", testRep);			
 			output.append(test.toString());
 			output.append("\n");
-			File f = new File("src/test/java/fr/irisa/triskell/scala/compilo/test/"+ testRep.replace("/", "_") + testname.replace(".", "")+ ".java");
+			File f = new File("src/test/java/fr/irisa/triskell/scala/compilo/test/Test"+ testRep.replace("/", "_") + testname.replace(".", "")+ ".java");
 			
 			output.append("}");
 
