@@ -31,7 +31,7 @@ public class GenerateTest {
 		for (File f : folderTest.listFiles(new FileFilter() {
 
 			public boolean accept(File arg0) {
-				return (!arg0.isDirectory()) && arg0.getName().endsWith(".kmt");
+				return (!arg0.isDirectory()) && arg0.getName().endsWith(".km");
 			}
 
 		})) {
@@ -75,14 +75,14 @@ public class GenerateTest {
 		for (String s : files){		
 			StringTemplate test = group.getInstanceOf("group/templates/Tests");
 			String testRep = s.substring(0,s.lastIndexOf("/"));
-			String testname = s.substring(s.lastIndexOf("/")+1, s.length()-4);
+			String testname =   s.substring(s.lastIndexOf("/")+1, s.length()-3);
 			
 			//System.err.println(testRep);
 			//System.err.println(testname);
 			output.append("\t");
 
 			test.setAttribute("testname", testname);
-			test.setAttribute("testnametest", testname.replace(".", ""));
+			test.setAttribute("testnametest", testRep.replace("/", "_") + testname.replace(".", ""));
 			test.setAttribute("testRep", testRep);			
 			output.append(test.toString());
 			output.append("\n");

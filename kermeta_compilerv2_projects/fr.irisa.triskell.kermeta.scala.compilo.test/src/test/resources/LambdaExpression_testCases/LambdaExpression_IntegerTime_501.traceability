@@ -18,67 +18,67 @@
   <traces sourceReferences="//@references.30" targetReferences="//@references.31" description="//@messages.15"/>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="17" charBeginAt="216" lineEndAt="17" charEndAt="357"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="19" charBeginAt="230" lineEndAt="19" charEndAt="355"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="19" charBeginAt="249" lineEndAt="19" charEndAt="253"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@containedType.0"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@containedType.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="20" charBeginAt="303" lineEndAt="20" charEndAt="305"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body/@statement.0/@initialization"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body/@statement.0/@initialization"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="20" charBeginAt="271" lineEndAt="20" charEndAt="297"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body/@statement.0/@type"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body/@statement.0/@type"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="20" charBeginAt="263" lineEndAt="20" charEndAt="305"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body/@statement.0"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body/@statement.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="21" charBeginAt="336" lineEndAt="21" charEndAt="338"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0/@target"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0/@target"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="21" charBeginAt="338" lineEndAt="21" charEndAt="347"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="21" charBeginAt="322" lineEndAt="21" charEndAt="327"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@target"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@target"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="21" charBeginAt="327" lineEndAt="21" charEndAt="348"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="21" charBeginAt="315" lineEndAt="21" charEndAt="350"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body/@statement.1/@parameters.0/@body"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body/@statement.1/@parameters.0/@body"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="21" charBeginAt="317" lineEndAt="21" charEndAt="319"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body/@statement.1/@parameters.0/@parameters.0"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body/@statement.1/@parameters.0/@parameters.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="21" charBeginAt="315" lineEndAt="21" charEndAt="350"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body/@statement.1/@parameters.0"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body/@statement.1/@parameters.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="21" charBeginAt="308" lineEndAt="21" charEndAt="309"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body/@statement.1/@target"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body/@statement.1/@target"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="21" charBeginAt="309" lineEndAt="21" charEndAt="350"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body/@statement.1"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body/@statement.1"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_IntegerTime_501.kmt" lineBeginAt="19" charBeginAt="257" lineEndAt="19" charEndAt="355"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
-    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.1/Main/main/@body"/>
+    <refObject href="LambdaExpression_IntegerTime_501.km#//@packages.0/Main/main/@body"/>
   </references>
   <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
   <messages language="english" type="Mapping" value="" traces="//@traces.1"/>

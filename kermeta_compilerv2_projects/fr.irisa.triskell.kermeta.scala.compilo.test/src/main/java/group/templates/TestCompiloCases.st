@@ -1,12 +1,10 @@
 package fr.irisa.triskell.scala.compilo.test;
 
-import java.io.File;
+import java.util.ArrayList;
 
 import junit.framework.TestCase;
 
 import org.junit.Test;
-
-import fr.irisa.triskell.kermeta.compilo.scala.Compiler;
 
 public class TestCompiloCases extends TestCase {
 
@@ -30,11 +28,28 @@ public class TestCompiloCases extends TestCase {
 		 * ExternRunner.launch(compilingCommand.toString());
 		 */
 		/* VERSION 1.2 COMPILER FROM M2 OR NEXUS REPOSITORY */
-		Compiler compilo = new Compiler();
-		compilo.compile(testcase + ".km");
+//	    def init(propertyurl:String, projectName:String, classqname:String,  operationName:String, classpath:java.util.Collection[String], args:String, outputStream : java.io.OutputStream):Unit ={
 
+		fr.irisa.triskell.kermeta.compilo.scala.Main.init("Compiler.properties", "", "", "", new ArrayList<String>(), "", null);
+		String[] arg = new String[2];
+		arg[0] = "-i";
+		arg[1] = testcase + ".km";
+
+		fr.irisa.triskell.kermeta.compilo.scala.Main.main(arg);
+		assertEquals(fr.irisa.triskell.kermeta.compilo.scala.Main.getResult(), 0);
+		
+		
+		//Compiler compilo = new Compiler();
+
+		
+//		compilo.compile(testcase + ".km");
+
+         
+        //Scala runner
+        
+		
 		/* Step 2 Compiled Software */
-		try {
+/*		try {
 			File f = new File("outputStream");
 			if (f != null) {
 				f.delete();
@@ -60,6 +75,6 @@ public class TestCompiloCases extends TestCase {
 		File f = new File("outputStream");
 		if (f != null) {
 			f.delete();
-		}
-	}
-
+		}*/
+		
+	}	

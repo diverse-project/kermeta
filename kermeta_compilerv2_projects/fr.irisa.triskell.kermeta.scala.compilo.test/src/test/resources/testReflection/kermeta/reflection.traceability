@@ -197,25 +197,25 @@
   <traces sourceReferences="//@references.388" targetReferences="//@references.389" description="//@messages.194"/>
   <traces sourceReferences="//@references.390" targetReferences="//@references.391" description="//@messages.195"/>
   <traces sourceReferences="//@references.392" targetReferences="//@references.393" description="//@messages.196"/>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/helpers/EcoreUtil.kmt" lineBeginAt="22" charBeginAt="334" lineEndAt="22" charEndAt="1500"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="24" charBeginAt="416" lineEndAt="24" charEndAt="978"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
-    <refObject href="reflection.km#//@packages.1/EcoreUtil"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="24" charBeginAt="416" lineEndAt="24" charEndAt="978"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
     <refObject href="reflection.km#//@packages.0/Main"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="50" charBeginAt="1387" lineEndAt="50" charEndAt="1608"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/helpers/EcoreUtil.kmt" lineBeginAt="22" charBeginAt="334" lineEndAt="22" charEndAt="1500"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
+    <refObject href="reflection.km#//@packages.1/EcoreUtil"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="26" charBeginAt="430" lineEndAt="26" charEndAt="972"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
+    <refObject href="reflection.km#//@packages.0/Main/main"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="50" charBeginAt="1387" lineEndAt="50" charEndAt="1608"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
     <refObject href="reflection.km#//@packages.0/EClass/testSetReflection"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="40" charBeginAt="1002" lineEndAt="40" charEndAt="1383"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="26" charBeginAt="430" lineEndAt="26" charEndAt="972"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="40" charBeginAt="1002" lineEndAt="40" charEndAt="1383"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
-    <refObject href="reflection.km#//@packages.0/Main/main"/>
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/helpers/EcoreUtil.kmt" lineBeginAt="31" charBeginAt="558" lineEndAt="31" charEndAt="573"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
@@ -261,409 +261,409 @@
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
     <refObject href="reflection.km#//@packages.0/Main/main/@containedType.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="52" charBeginAt="1567" lineEndAt="52" charEndAt="1568"/>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="27" charBeginAt="509" lineEndAt="27" charEndAt="634"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="52" charBeginAt="1568" lineEndAt="52" charEndAt="1573"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="52" charBeginAt="1557" lineEndAt="52" charEndAt="1566"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="52" charBeginAt="1566" lineEndAt="52" charEndAt="1567"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="52" charBeginAt="1543" lineEndAt="52" charEndAt="1548"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="52" charBeginAt="1548" lineEndAt="52" charEndAt="1574"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="53" charBeginAt="1588" lineEndAt="53" charEndAt="1589"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.1/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="53" charBeginAt="1590" lineEndAt="53" charEndAt="1598"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.1/@parameters.1"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="53" charBeginAt="1578" lineEndAt="53" charEndAt="1582"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.1/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="53" charBeginAt="1582" lineEndAt="53" charEndAt="1599"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.1"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1536" lineEndAt="51" charEndAt="1603"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1537" lineEndAt="51" charEndAt="1538"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1536" lineEndAt="51" charEndAt="1603"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1523" lineEndAt="51" charEndAt="1529"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1509" lineEndAt="51" charEndAt="1510"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1510" lineEndAt="51" charEndAt="1530"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1515" lineEndAt="51" charEndAt="1530"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1506" lineEndAt="51" charEndAt="1603"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0/@body"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1507" lineEndAt="51" charEndAt="1508"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1506" lineEndAt="51" charEndAt="1603"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1485" lineEndAt="51" charEndAt="1486"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@parameters.0/@body/@statement.0/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1486" lineEndAt="51" charEndAt="1498"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@parameters.0/@body/@statement.0/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1481" lineEndAt="51" charEndAt="1484"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@parameters.0/@body/@statement.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1478" lineEndAt="51" charEndAt="1603"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@parameters.0/@body"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1479" lineEndAt="51" charEndAt="1480"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@parameters.0/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1478" lineEndAt="51" charEndAt="1603"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1425" lineEndAt="51" charEndAt="1429"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@target/@target/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1429" lineEndAt="51" charEndAt="1603"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.43">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@target/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1442" lineEndAt="51" charEndAt="1603"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.44">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1458" lineEndAt="51" charEndAt="1603"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.45">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1471" lineEndAt="51" charEndAt="1603"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.46">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1499" lineEndAt="51" charEndAt="1603"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.47">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1531" lineEndAt="51" charEndAt="1603"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.48">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="50" charBeginAt="1420" lineEndAt="50" charEndAt="1608"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.49">
-    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1353" lineEndAt="45" charEndAt="1354"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.50">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@target/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1344" lineEndAt="45" charEndAt="1348"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.51">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1348" lineEndAt="45" charEndAt="1364"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.52">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1355" lineEndAt="45" charEndAt="1364"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.53">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1338" lineEndAt="45" charEndAt="1343"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.54">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1331" lineEndAt="45" charEndAt="1332"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.55">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target/@target/@parameters.0/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1332" lineEndAt="45" charEndAt="1337"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.56">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target/@target/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1321" lineEndAt="45" charEndAt="1330"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.57">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1330" lineEndAt="45" charEndAt="1331"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.58">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1337" lineEndAt="45" charEndAt="1338"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.59">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1343" lineEndAt="45" charEndAt="1344"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.60">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1307" lineEndAt="45" charEndAt="1312"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.61">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1312" lineEndAt="45" charEndAt="1365"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.62">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.63" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1119" lineEndAt="41" charEndAt="1378"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.63">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.64" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1120" lineEndAt="41" charEndAt="1121"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.64">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.65" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1119" lineEndAt="41" charEndAt="1378"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.65">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.66" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1100" lineEndAt="41" charEndAt="1101"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.66">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.67" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1101" lineEndAt="41" charEndAt="1113"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.67">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.68" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1096" lineEndAt="41" charEndAt="1099"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.68">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.69" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1093" lineEndAt="41" charEndAt="1378"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.69">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@parameters.0/@body"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.70" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1094" lineEndAt="41" charEndAt="1095"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.70">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@parameters.0/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.71" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1093" lineEndAt="41" charEndAt="1378"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.71">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@parameters.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.72" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1040" lineEndAt="41" charEndAt="1044"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.72">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@target/@target/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.73" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1044" lineEndAt="41" charEndAt="1378"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.73">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@target/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.74" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1057" lineEndAt="41" charEndAt="1378"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.74">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.75" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1073" lineEndAt="41" charEndAt="1378"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.75">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.76" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1086" lineEndAt="41" charEndAt="1378"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.76">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.77" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1114" lineEndAt="41" charEndAt="1378"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.77">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.78" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="40" charBeginAt="1035" lineEndAt="40" charEndAt="1383"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.78">
-    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body"/>
-  </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.79" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="27" charBeginAt="509" lineEndAt="27" charEndAt="634"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.79">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.0/@initialization/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.80" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="27" charBeginAt="485" lineEndAt="27" charEndAt="494"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.80">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="27" charBeginAt="485" lineEndAt="27" charEndAt="494"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.0/@initialization/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.81" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="27" charBeginAt="494" lineEndAt="27" charEndAt="635"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.81">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="27" charBeginAt="494" lineEndAt="27" charEndAt="635"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.0/@initialization/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.82" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="27" charBeginAt="498" lineEndAt="27" charEndAt="635"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.82">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="27" charBeginAt="498" lineEndAt="27" charEndAt="635"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.0/@initialization"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.83" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="27" charBeginAt="471" lineEndAt="27" charEndAt="479"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.83">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="27" charBeginAt="471" lineEndAt="27" charEndAt="479"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.0/@type"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.84" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="27" charBeginAt="463" lineEndAt="27" charEndAt="635"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.84">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="27" charBeginAt="463" lineEndAt="27" charEndAt="635"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.85" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="28" charBeginAt="646" lineEndAt="28" charEndAt="652"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.85">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="28" charBeginAt="646" lineEndAt="28" charEndAt="652"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.1/@type"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.86" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="28" charBeginAt="638" lineEndAt="28" charEndAt="652"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.86">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="28" charBeginAt="638" lineEndAt="28" charEndAt="652"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.87" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="655" lineEndAt="29" charEndAt="656"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.87">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="655" lineEndAt="29" charEndAt="656"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.2/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.88" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="695" lineEndAt="29" charEndAt="701"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.88">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="695" lineEndAt="29" charEndAt="701"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.2/@value/@target/@parameters.0/@body/@statement.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.89" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="684" lineEndAt="29" charEndAt="685"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.89">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="684" lineEndAt="29" charEndAt="685"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.2/@value/@target/@parameters.0/@body/@statement.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.90" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="685" lineEndAt="29" charEndAt="702"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.90">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="685" lineEndAt="29" charEndAt="702"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.2/@value/@target/@parameters.0/@body/@statement.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.91" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="681" lineEndAt="29" charEndAt="707"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.91">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="681" lineEndAt="29" charEndAt="707"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.2/@value/@target/@parameters.0/@body"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.92" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="682" lineEndAt="29" charEndAt="683"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.92">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.29" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="682" lineEndAt="29" charEndAt="683"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.29">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.2/@value/@target/@parameters.0/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.93" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="681" lineEndAt="29" charEndAt="707"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.93">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.30" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="681" lineEndAt="29" charEndAt="707"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.30">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.2/@value/@target/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.94" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="660" lineEndAt="29" charEndAt="661"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.94">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.31" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="660" lineEndAt="29" charEndAt="661"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.31">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.2/@value/@target/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.95" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="661" lineEndAt="29" charEndAt="707"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.95">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.32" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="661" lineEndAt="29" charEndAt="707"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.32">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.2/@value/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.96" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="674" lineEndAt="29" charEndAt="707"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.96">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.33" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="674" lineEndAt="29" charEndAt="707"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.33">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.2/@value/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.97" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="703" lineEndAt="29" charEndAt="707"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.97">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.34" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="703" lineEndAt="29" charEndAt="707"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.34">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.2/@value"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.98" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="655" lineEndAt="29" charEndAt="707"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.98">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.35" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="29" charBeginAt="655" lineEndAt="29" charEndAt="707"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.35">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.2"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.99" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="30" charBeginAt="724" lineEndAt="30" charEndAt="725"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.99">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.36" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="30" charBeginAt="724" lineEndAt="30" charEndAt="725"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.36">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.3/@parameters.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.100" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="30" charBeginAt="725" lineEndAt="30" charEndAt="730"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.100">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.37" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="30" charBeginAt="725" lineEndAt="30" charEndAt="730"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.37">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.3/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.101" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="30" charBeginAt="710" lineEndAt="30" charEndAt="715"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.101">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.38" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="30" charBeginAt="710" lineEndAt="30" charEndAt="715"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.38">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.3/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.102" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="30" charBeginAt="715" lineEndAt="30" charEndAt="731"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.102">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.39" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="30" charBeginAt="715" lineEndAt="30" charEndAt="731"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.39">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.3"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.103" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="31" charBeginAt="734" lineEndAt="31" charEndAt="735"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.103">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.40" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="31" charBeginAt="734" lineEndAt="31" charEndAt="735"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.40">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.4/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.104" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="31" charBeginAt="735" lineEndAt="31" charEndAt="755"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.104">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.41" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="31" charBeginAt="735" lineEndAt="31" charEndAt="755"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.41">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.4"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.105" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="32" charBeginAt="758" lineEndAt="32" charEndAt="759"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.105">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.42" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="32" charBeginAt="758" lineEndAt="32" charEndAt="759"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.42">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.5/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.106" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="32" charBeginAt="759" lineEndAt="32" charEndAt="779"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.106">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.43" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="32" charBeginAt="759" lineEndAt="32" charEndAt="779"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.43">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.5"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.107" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="33" charBeginAt="806" lineEndAt="33" charEndAt="807"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.107">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.44" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="33" charBeginAt="806" lineEndAt="33" charEndAt="807"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.44">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.6/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.108" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="33" charBeginAt="808" lineEndAt="33" charEndAt="942"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.108">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.45" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="33" charBeginAt="808" lineEndAt="33" charEndAt="942"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.45">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.6/@parameters.1"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.109" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="33" charBeginAt="782" lineEndAt="33" charEndAt="791"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.109">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.46" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="33" charBeginAt="782" lineEndAt="33" charEndAt="791"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.46">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.6/@target/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.110" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="33" charBeginAt="791" lineEndAt="33" charEndAt="943"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.110">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.47" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="33" charBeginAt="791" lineEndAt="33" charEndAt="943"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.47">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.6/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.111" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="33" charBeginAt="795" lineEndAt="33" charEndAt="943"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.111">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.48" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="33" charBeginAt="795" lineEndAt="33" charEndAt="943"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.48">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.6"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.112" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="34" charBeginAt="960" lineEndAt="34" charEndAt="961"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.112">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.49" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="34" charBeginAt="960" lineEndAt="34" charEndAt="961"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.49">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.7/@parameters.0/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.113" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="34" charBeginAt="961" lineEndAt="34" charEndAt="966"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.113">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.50" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="34" charBeginAt="961" lineEndAt="34" charEndAt="966"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.50">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.7/@parameters.0"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.114" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="34" charBeginAt="946" lineEndAt="34" charEndAt="951"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.114">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.51" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="34" charBeginAt="946" lineEndAt="34" charEndAt="951"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.51">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.7/@target"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.115" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="34" charBeginAt="951" lineEndAt="34" charEndAt="967"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.115">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.52" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="34" charBeginAt="951" lineEndAt="34" charEndAt="967"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.52">
     <refObject href="reflection.km#//@packages.0/Main/main/@body/@statement.7"/>
   </references>
-  <references xsi:type="traceability:TextReference" targetTraces="//@traces.116" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="26" charBeginAt="457" lineEndAt="26" charEndAt="972"/>
-  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.116">
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.53" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="26" charBeginAt="457" lineEndAt="26" charEndAt="972"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.53">
     <refObject href="reflection.km#//@packages.0/Main/main/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.54" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="52" charBeginAt="1567" lineEndAt="52" charEndAt="1568"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.54">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.55" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="52" charBeginAt="1568" lineEndAt="52" charEndAt="1573"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.55">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.56" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="52" charBeginAt="1557" lineEndAt="52" charEndAt="1566"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.56">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.57" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="52" charBeginAt="1566" lineEndAt="52" charEndAt="1567"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.57">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.58" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="52" charBeginAt="1543" lineEndAt="52" charEndAt="1548"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.58">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.59" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="52" charBeginAt="1548" lineEndAt="52" charEndAt="1574"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.59">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.60" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="53" charBeginAt="1588" lineEndAt="53" charEndAt="1589"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.60">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.1/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.61" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="53" charBeginAt="1590" lineEndAt="53" charEndAt="1598"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.61">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.1/@parameters.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.62" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="53" charBeginAt="1578" lineEndAt="53" charEndAt="1582"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.62">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.1/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.63" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="53" charBeginAt="1582" lineEndAt="53" charEndAt="1599"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.63">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body/@statement.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.64" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1536" lineEndAt="51" charEndAt="1603"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.64">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.65" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1537" lineEndAt="51" charEndAt="1538"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.65">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.66" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1536" lineEndAt="51" charEndAt="1603"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.66">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.67" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1523" lineEndAt="51" charEndAt="1529"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.67">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.68" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1509" lineEndAt="51" charEndAt="1510"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.68">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.69" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1510" lineEndAt="51" charEndAt="1530"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.69">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.70" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1515" lineEndAt="51" charEndAt="1530"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.70">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.71" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1506" lineEndAt="51" charEndAt="1603"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.71">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.72" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1507" lineEndAt="51" charEndAt="1508"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.72">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.73" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1506" lineEndAt="51" charEndAt="1603"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.73">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.74" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1485" lineEndAt="51" charEndAt="1486"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.74">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@parameters.0/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.75" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1486" lineEndAt="51" charEndAt="1498"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.75">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@parameters.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.76" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1481" lineEndAt="51" charEndAt="1484"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.76">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@parameters.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.77" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1478" lineEndAt="51" charEndAt="1603"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.77">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@parameters.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.78" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1479" lineEndAt="51" charEndAt="1480"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.78">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.79" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1478" lineEndAt="51" charEndAt="1603"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.79">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.80" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1425" lineEndAt="51" charEndAt="1429"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.80">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@target/@target/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.81" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1429" lineEndAt="51" charEndAt="1603"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.81">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@target/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.82" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1442" lineEndAt="51" charEndAt="1603"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.82">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.83" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1458" lineEndAt="51" charEndAt="1603"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.83">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.84" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1471" lineEndAt="51" charEndAt="1603"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.84">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.85" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1499" lineEndAt="51" charEndAt="1603"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.85">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.86" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="51" charBeginAt="1531" lineEndAt="51" charEndAt="1603"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.86">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.87" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="50" charBeginAt="1420" lineEndAt="50" charEndAt="1608"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.87">
+    <refObject href="reflection.km#//@packages.0/EClass/testSetReflection/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.88" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1353" lineEndAt="45" charEndAt="1354"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.88">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.89" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1344" lineEndAt="45" charEndAt="1348"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.89">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.90" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1348" lineEndAt="45" charEndAt="1364"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.90">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.91" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1355" lineEndAt="45" charEndAt="1364"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.91">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.92" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1338" lineEndAt="45" charEndAt="1343"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.92">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.93" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1331" lineEndAt="45" charEndAt="1332"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.93">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target/@target/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.94" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1332" lineEndAt="45" charEndAt="1337"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.94">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.95" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1321" lineEndAt="45" charEndAt="1330"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.95">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.96" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1330" lineEndAt="45" charEndAt="1331"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.96">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.97" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1337" lineEndAt="45" charEndAt="1338"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.97">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.98" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1343" lineEndAt="45" charEndAt="1344"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.98">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.99" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1307" lineEndAt="45" charEndAt="1312"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.99">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.100" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="45" charBeginAt="1312" lineEndAt="45" charEndAt="1365"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.100">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.101" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1119" lineEndAt="41" charEndAt="1378"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.101">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.102" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1120" lineEndAt="41" charEndAt="1121"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.102">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.103" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1119" lineEndAt="41" charEndAt="1378"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.103">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.104" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1100" lineEndAt="41" charEndAt="1101"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.104">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.105" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1101" lineEndAt="41" charEndAt="1113"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.105">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.106" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1096" lineEndAt="41" charEndAt="1099"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.106">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@parameters.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.107" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1093" lineEndAt="41" charEndAt="1378"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.107">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@parameters.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.108" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1094" lineEndAt="41" charEndAt="1095"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.108">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.109" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1093" lineEndAt="41" charEndAt="1378"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.109">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.110" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1040" lineEndAt="41" charEndAt="1044"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.110">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@target/@target/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.111" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1044" lineEndAt="41" charEndAt="1378"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.111">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@target/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.112" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1057" lineEndAt="41" charEndAt="1378"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.112">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.113" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1073" lineEndAt="41" charEndAt="1378"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.113">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.114" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1086" lineEndAt="41" charEndAt="1378"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.114">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.115" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="41" charBeginAt="1114" lineEndAt="41" charEndAt="1378"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.115">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTraces="//@traces.116" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/reflection.kmt" lineBeginAt="40" charBeginAt="1035" lineEndAt="40" charEndAt="1383"/>
+  <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.116">
+    <refObject href="reflection.km#//@packages.0/EClass/testGetReflection/@body"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.117" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/testReflection/kermeta/helpers/EcoreUtil.kmt" lineBeginAt="32" charBeginAt="623" lineEndAt="32" charEndAt="636"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.117">

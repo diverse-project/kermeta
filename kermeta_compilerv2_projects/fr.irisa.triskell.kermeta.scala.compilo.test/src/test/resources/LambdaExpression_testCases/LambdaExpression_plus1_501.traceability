@@ -31,119 +31,119 @@
   <traces sourceReferences="//@references.56" targetReferences="//@references.57" description="//@messages.28"/>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="17" charBeginAt="240" lineEndAt="17" charEndAt="569"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.0">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="19" charBeginAt="276" lineEndAt="19" charEndAt="567"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.1">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="19" charBeginAt="295" lineEndAt="19" charEndAt="299"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.2">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@containedType.0"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@containedType.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="20" charBeginAt="319" lineEndAt="20" charEndAt="375"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.3">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.0/@type"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.0/@type"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="20" charBeginAt="309" lineEndAt="20" charEndAt="375"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.4">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.0"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="21" charBeginAt="420" lineEndAt="21" charEndAt="421"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.5">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.1/@initialization"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.1/@initialization"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="21" charBeginAt="388" lineEndAt="21" charEndAt="414"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.6">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.1/@type"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.1/@type"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="21" charBeginAt="378" lineEndAt="21" charEndAt="421"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.7">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.1"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.1"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.8" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="22" charBeginAt="424" lineEndAt="22" charEndAt="427"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.8">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.2/@target"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.2/@target"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.9" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="22" charBeginAt="489" lineEndAt="22" charEndAt="490"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.9">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body/@statement.0/@parameters.0/@target"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body/@statement.0/@parameters.0/@target"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.10" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="22" charBeginAt="490" lineEndAt="22" charEndAt="499"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.10">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body/@statement.0/@parameters.0"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body/@statement.0/@parameters.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.11" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="22" charBeginAt="475" lineEndAt="22" charEndAt="480"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.11">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body/@statement.0/@target"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body/@statement.0/@target"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.12" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="22" charBeginAt="480" lineEndAt="22" charEndAt="500"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.12">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body/@statement.0"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body/@statement.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.13" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="22" charBeginAt="501" lineEndAt="22" charEndAt="505"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.13">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body/@statement.1"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body/@statement.1"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.14" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="23" charBeginAt="509" lineEndAt="23" charEndAt="510"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.14">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body/@statement.2"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body/@statement.2"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.15" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="22" charBeginAt="475" lineEndAt="22" charEndAt="510"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.15">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@body"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="22" charBeginAt="446" lineEndAt="22" charEndAt="472"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.16">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@parameters.0/@type"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@parameters.0/@type"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="22" charBeginAt="442" lineEndAt="22" charEndAt="472"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.17">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@parameters.0"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.2/@value/@parameters.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="22" charBeginAt="431" lineEndAt="22" charEndAt="512"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.18">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.2/@value"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.2/@value"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="22" charBeginAt="424" lineEndAt="22" charEndAt="512"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.19">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.2"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.2"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="24" charBeginAt="515" lineEndAt="24" charEndAt="518"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.20">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.3/@target"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.3/@target"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="24" charBeginAt="526" lineEndAt="24" charEndAt="527"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.21">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.3/@value/@parameters.0"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.3/@value/@parameters.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="24" charBeginAt="522" lineEndAt="24" charEndAt="525"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.22">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.3/@value"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.3/@value"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.23" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="24" charBeginAt="515" lineEndAt="24" charEndAt="528"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.23">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.3"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.3"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.24" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="26" charBeginAt="549" lineEndAt="26" charEndAt="552"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.24">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.4/@parameters.0/@target"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.4/@parameters.0/@target"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.25" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="26" charBeginAt="552" lineEndAt="26" charEndAt="561"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.25">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.4/@parameters.0"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.4/@parameters.0"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.26" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="26" charBeginAt="535" lineEndAt="26" charEndAt="540"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.26">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.4/@target"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.4/@target"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.27" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="26" charBeginAt="540" lineEndAt="26" charEndAt="562"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.27">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body/@statement.4"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body/@statement.4"/>
   </references>
   <references xsi:type="traceability:TextReference" targetTraces="//@traces.28" fileURI="platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/LambdaExpression_testCases/LambdaExpression_plus1_501.kmt" lineBeginAt="19" charBeginAt="303" lineEndAt="19" charEndAt="567"/>
   <references xsi:type="traceability:ModelReference" sourceTraces="//@traces.28">
-    <refObject href="LambdaExpression_plus1_501.km#//@packages.1/LambdaExpression_plus1_501/main/@body"/>
+    <refObject href="LambdaExpression_plus1_501.km#//@packages.0/LambdaExpression_plus1_501/main/@body"/>
   </references>
   <messages language="english" type="Mapping" value="" traces="//@traces.0"/>
   <messages language="english" type="Mapping" value="" traces="//@traces.1"/>
