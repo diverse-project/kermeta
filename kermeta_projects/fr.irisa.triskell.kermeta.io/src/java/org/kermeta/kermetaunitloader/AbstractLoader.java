@@ -93,8 +93,7 @@ public abstract class AbstractLoader {
 				}
 			}
 		}
-		// the cache cannot be reliable before all units are loaded, next call should recalculate it
-		loadedUnit.getAllImportedKermetaUnitsCache().clear();
+		
 		
 		// from this point the commands must apply to all required units
 		// they apply to all required unit in order to ensure homogeneous load of the data in units 
@@ -102,6 +101,8 @@ public abstract class AbstractLoader {
 		// due to the architecture, the command may have been performed by the load operation of another unit.
 		
 		performSynchronizedCommand(CommandStep.requireImport);
+		// the cache cannot be reliable before all units are loaded, next call should recalculate it
+		loadedUnit.getAllImportedKermetaUnitsCache().clear();
 		performSynchronizedCommand(CommandStep.requireErrorPropagation);
 		performSynchronizedCommand(CommandStep.aspectBuilding);
 		performSynchronizedCommand(CommandStep.modelTypeBuilding);
