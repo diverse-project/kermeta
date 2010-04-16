@@ -267,7 +267,7 @@ public class ClassDefinitionHelper {
 	static private void getContext(List<KermetaUnit> units, ClassDefinition current, Map<Integer, EList<TypeDefinition>> map, int deep) {
 		for ( List<TypeDefinition> l : map.values() )
 			if ( l.contains(current))
-				return; // several definition of the same class will have to stop the recursion
+				return; // several definitions of the same class: will have to stop the recursion
 		EList<TypeDefinition> aspectList = new BasicEList<TypeDefinition>();
 		for(KermetaUnit ku : units){
 			List<TypeDefinition> aspectListFromUnit = TypeDefinitionHelper.getAllAspects(ku, KermetaModelHelper.ClassDefinition.qualifiedName(current));
@@ -292,79 +292,7 @@ public class ClassDefinitionHelper {
 			}
 		}
 	}
-	static private void getContext2(List<KermetaUnit> units, ClassDefinition current, Map<Integer, EList<TypeDefinition>> map, int deep) {
-		for ( List<TypeDefinition> l : map.values() )
-			if ( l.contains(current))
-				return;/* // several definition of the same class will have to stop the recursion*/
-			/*	if(map.get(deep) != null)
-					if (! map.get(deep).contains(current) )
-						// ignore several definition at the same inheritance depth (may be due to aspects)
-						return;
-					else {
-						// several definitions of the same class at various inheritance depth. Stop the recursion but add the classdef to the list
-						map.get(deep).add(current); 
-						return;
-					}
-				else {
-					// several definitions of the same class at various inheritance depth. Stop the recursion but add the classdef to the list
-					List<TypeDefinition> list2 = new ArrayList<TypeDefinition>();
-					map.put(deep, list2);
-				
-					list2.add(current);
-					return;
-				}	
-		*/
-		KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(current);
-		if ( units.contains(unit) ) {
-		/*	List<TypeDefinition> l = map.get(deep);
-			if ( l == null ) {
-				l = new ArrayList<TypeDefinition>();
-				map.put(deep, l);
-			}
-			l.add(current);
-		*/
-			/*
-			 * 
-			 * Supertypes
-			 * 
-			 */
-			for ( Type supertype : current.getSuperType() ) {
-				if ( supertype instanceof Class ) {
-					Class superclass = (Class) supertype;
-					getContext(units, (ClassDefinition) superclass.getTypeDefinition(), map, deep+1);
-				}
-			}
-			
-			/*
-			 * 
-			 * Aspects
-			 * 
-			 */
-			for ( TypeDefinition aspect : getAspects(unit, current) )  {
-				if ( aspect instanceof ClassDefinition )
-					getFullContext(unit, (ClassDefinition) aspect, map, deep );
-			}
-			/*if ( unit.getAspects() != null && unit.getAspects().get(current) != null ) {
-				for ( TypeDefinition aspect : unit.getAspects().get(current) )  {
-					if ( aspect instanceof ClassDefinition )
-						getContext( units, (ClassDefinition) aspect, map, deep );
-				}
-			}*/
-			
-			/*
-			 * 
-			 * Base Classes
-			 *  
-			 */
-		/*	if ( unit.getBaseAspects() != null && unit.getBaseAspects().get(current) != null ) {
-				for ( TypeDefinition base : unit.getBaseAspects().get(current) )  {
-					if ( base instanceof ClassDefinition )
-						getContext( units, (ClassDefinition) base, map, deep );
-				}
-			}*/
-		}	
-	}
-	
+		
 	/**
 	 * Search for a base's super class with the given qualified name. Look for a method with the given operation name in the possible found super class.
 	 * @param base
@@ -378,18 +306,7 @@ public class ClassDefinitionHelper {
 			if(superClassQualifiedName.equals(KermetaModelHelper.NamedElement.qualifiedName(op.getOwningClass()))){
 				return op;
 			}
-		}
-	/*	List<TypeDefinition> l = getContext(rootUnit, base);
-		l.remove(base);
-		for ( TypeDefinition td : l ) {
-			if ( td instanceof ClassDefinition ) {
-				ClassDefinition cd = (ClassDefinition) td;
-				if ( KermetaModelHelper.NamedElement.qualifiedName(cd).equals(superClassQualifiedName) )
-					for ( Operation operation : cd.getOwnedOperation() )
-						if ( operation.getName().equals(operationName) )
-							return operation;
-			}
-		}*/
+		}	
 		return null;
 	}
 
