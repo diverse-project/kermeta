@@ -28,15 +28,15 @@ public class FileGraphService implements IFileGraphService{
 			GraphNode n = new GraphNode();
 			n.setName(i.toString());
 			rootNode.getDirectReferences().add(n);
-			for ( Integer i2=0; i2<5; ++i2 ) {
+			for ( Integer i2=0; i2<1+i; ++i2 ) {
 				GraphNode n2 = new GraphNode();
 				n2.setName(i.toString()+"_"+i2.toString());
 				n.getDirectReferences().add(n2);
 				
 		    }
 			// add a cycle
-			for ( Integer i2=0; i2<5; ++i2 ) {
-				if(i2 == 4)
+			for ( Integer i2=0; i2<n.getDirectReferences().size(); ++i2 ) {
+				if(i2 == n.getDirectReferences().size()-1)
 					n.getDirectReferences().get(i2).getDirectReferences().add(n.getDirectReferences().get(0));
 				else
 					n.getDirectReferences().get(i2).getDirectReferences().add(n.getDirectReferences().get(i2+1));				
