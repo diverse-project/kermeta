@@ -99,17 +99,24 @@ public class UriResolver {
 						}
 						// ok no exception, completly switch to the new uri
 						uri = newUri;
-					} else if (!converter.exists(emfURI, null))
+					} else if (!converter.exists(emfURI, null)){
 						/*
 						 * throw new IOException("The file " + uri +
 						 * " does not exist.");
 						 */
 						return null;
+					}
+					else{
+						resultUri = uri;
+					}
 				} else if (!uri.equals("kermeta") && !uri.equals("java_rt_jar"))
 					/*
 					 * throw new IOException("The file " + uri +
 					 * " does not exist.");
-					 */if (converter.exists(emfURI, null)){
+					 * 
+					 */
+					
+					if (converter.exists(emfURI, null)){
 						 resultUri = uri;
 					 }
 			}
