@@ -77,7 +77,7 @@ public class MergeKmt {
 		FullMergeKmExporter merger = new FullMergeKmExporter("", "", "file:" + basePATH + "/../../plugins/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km", "file:" + basePATH + "/../../plugins/", "file:" + basePATH + "/../../plugins/org.kermeta.io.loader/instances/");
 		ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI("file:" + basePATH + "/../../plugins/"));
 		ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI("file:" + basePATH + "/../../../"));
-		ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("kconf:/loader/"), URI.createURI("file:" + basePATH + "/../../plugins/org.kermeta.io.loader/"));   
+		ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("kconf:/loader/"), URI.createURI("file:" + basePATH + "/../../plugins/org.kermeta.io.loader/instances/"));   
 
 		for (String s : files) {
 			merger.merge("platform:/resource/fr.irisa.triskell.kermeta.scala.compilo.test/"+s,
