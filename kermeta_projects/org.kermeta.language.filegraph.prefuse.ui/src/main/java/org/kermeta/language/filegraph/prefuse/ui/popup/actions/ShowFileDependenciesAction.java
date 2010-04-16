@@ -90,8 +90,14 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 					File f1 = new File(URI.createPlatformResourceURI("/"+selectedFile.getProject().getName()+"/"+selectedFile.getProjectRelativePath().toString(), true).toString()		);
 					File f2 = new File(selectedFile.getLocationURI().toString().replace("file:", "/")	);
 					File f3 = new File(selectedFile.getLocationURI().toString()	);
-					//f.exists()
-					CycleGraph cycleGraph = fileGraphService.getCycleGraph(f1);
+					new File(selectedFile.getName().toString()	);
+					
+					URI u1 = URI.createPlatformResourceURI("/"+selectedFile.getProject().getName()+"/"+selectedFile.getProjectRelativePath().toString(), true);
+					converter.exists(u1, null);
+					//f1.to
+					
+					//f1.exists()
+					CycleGraph cycleGraph = fileGraphService.getCycleGraph(u1);
 		 	 		
 					// TEST use mockup
 			//		CycleGraph cycleGraph = new FileGraphService().getCycleGraph(selectedFile.toString());
