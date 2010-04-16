@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.kermeta.language.filegraph.CycleGraph;
 import org.kermeta.language.filegraph.GraphNode;
 import org.kermeta.language.filegraph.IFileGraphService;
@@ -28,9 +29,9 @@ public class FileGraphService implements IFileGraphService{
 	private HashMap<String, GraphNode> knownUris = new HashMap<String, GraphNode>();
 	
 	
-	public CycleGraph getCycleGraph(File rootFile) {
+	public CycleGraph getCycleGraph(URI rootFile) {
 		
-		String rootFileURI = rootFile.getPath();
+		String rootFileURI = rootFile.toString();
 		//validate the URI (file exists on disk) 
 		String uri = UriResolver.resolveUri(rootFileURI, rootFileURI);
 		if (uri != null){
@@ -47,10 +48,10 @@ public class FileGraphService implements IFileGraphService{
 	/**
 	 * Provide the list of the URI associated to this URI
 	 */
-	public SimpleGraph getSimpleGraph(File rootFile) {
+	public SimpleGraph getSimpleGraph(URI rootFile) {
 		
 		
-		String rootFileURI = rootFile.getPath();
+		String rootFileURI = rootFile.toString();
 		//validate the URI (file exists on disk) 
 		String uri = UriResolver.resolveUri(rootFileURI, rootFileURI);
 		if (uri != null){
@@ -73,7 +74,7 @@ public class FileGraphService implements IFileGraphService{
 		return FileTraversal.getRequires(uri);
 	}
 
-	public List<String> getAllRequired(File rootFile) {
+	public List<String> getAllRequired(URI rootFile) {
 		return null;
 	}
 
