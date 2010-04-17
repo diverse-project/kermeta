@@ -126,7 +126,7 @@ public class UriResolver {
 			 * the kermeta unit to import.
 			 */
 
-			//resultUri = uri;
+			resultUri = uri;
 
 			} catch (Throwable t) {
 			return null;
