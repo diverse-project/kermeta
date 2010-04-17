@@ -2,11 +2,11 @@ package org.kermeta.language.filegraph.util;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -25,17 +25,34 @@ public class FileTraversal {
 			 
 			BufferedReader br = new BufferedReader(
 					 new InputStreamReader(converter.createInputStream(_uri)));
-			 
+
+			boolean inBlockComment = false;
 			while ((sCurrentLine = br.readLine()) != null) {
-				if (sCurrentLine.contains("require")&& !sCurrentLine.startsWith("//")&& 
-						!sCurrentLine.startsWith("/*")&& !sCurrentLine.startsWith("*")){
-					int uriStart = sCurrentLine.indexOf("\"")+1;
-					int uriEnd = sCurrentLine.lastIndexOf("\"");
-					String currUri = sCurrentLine.substring(uriStart, uriEnd);
-					if (currUri != null){
-						requires.add(currUri);
+				boolean inLineCommment = false;
+				StringTokenizer st = new StringTokenizer(sCurrentLine);
+				while (st.hasMoreTokens()) {
+					String token = st.nextToken(); 
+					if(token.startsWith("//"))
+						inLineCommment = true;
+					if(token.startsWith("/*"))
+						inBlockComment =  true;
+					if(token.endsWith("*/"))
+						inBlockComment =  false;
+					if(!inLineCommment && !inBlockComment){
+						// ignore commented tokens
+						if(token.equals("require")){
+							// next token is our string 
+							// TODO deal with require split on 2 lines ?
+							String rawUri = st.nextToken();
+							if (rawUri != null){
+								String currUri = rawUri.replaceAll("\"", "");
+								requires.add(currUri);
+							}
+						}
 					}
-				}
+			    }
+				inLineCommment = false; // reset for next line
+				
 			}
 
 		} catch (FileNotFoundException e) {
