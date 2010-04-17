@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.layout.GridData;
@@ -31,7 +32,6 @@ import org.kermeta.language.filegraph.prefuse.data.Aggregate;
 import org.kermeta.language.filegraph.prefuse.data.FileGraphToPrefuseConverter;
 import org.kermeta.language.filegraph.prefuse.ui.display.DependenciesDisplay;
 
-import filegraph.mockup.FileGraphService;
 
 import prefuse.Display;
 import prefuse.controls.PanControl;
@@ -88,7 +88,7 @@ public class FileGraphView extends ViewPart {
 	}
 	
 	protected DependenciesDisplay getDummyDisplay(){
-		CycleGraph cycleGraph = new FileGraphService().getCycleGraph(new File("/"));
+		CycleGraph cycleGraph = new filegraph.mockup.FileGraphService().getCycleGraph(URI.createURI("/"));
 		
 		// transform the graph for prefuse
 		Map<GraphNode, Node> convertedNodes = new HashMap<GraphNode, Node>();

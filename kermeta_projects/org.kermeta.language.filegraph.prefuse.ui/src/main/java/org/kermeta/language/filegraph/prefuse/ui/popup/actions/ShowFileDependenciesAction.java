@@ -33,7 +33,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 import org.kermeta.language.filegraph.IFileGraphService;
-import filegraph.mockup.FileGraphService;
+//import filegraph.mockup.FileGraphService;
 
 import prefuse.controls.PanControl;
 import prefuse.controls.ZoomControl;
@@ -100,7 +100,7 @@ public class ShowFileDependenciesAction implements IObjectActionDelegate {
 					CycleGraph cycleGraph = fileGraphService.getCycleGraph(u1);
 		 	 		
 					// TEST use mockup
-			//		CycleGraph cycleGraph = new FileGraphService().getCycleGraph(selectedFile.toString());
+			//		CycleGraph cycleGraph = new filegraph.mockup.FileGraphService().getCycleGraph(selectedFile.toString());
 					
 					// transform the graph for prefuse
 					Map<GraphNode, Node> convertedNodes = new HashMap<GraphNode, Node>();

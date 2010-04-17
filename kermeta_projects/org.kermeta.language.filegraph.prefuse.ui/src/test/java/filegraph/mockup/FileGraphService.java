@@ -14,6 +14,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.kermeta.language.filegraph.CycleGraph;
 import org.kermeta.language.filegraph.GraphNode;
 import org.kermeta.language.filegraph.IFileGraphService;
@@ -21,7 +22,7 @@ import org.kermeta.language.filegraph.SimpleGraph;
 
 public class FileGraphService implements IFileGraphService{
 
-	public CycleGraph getCycleGraph(File rootFileURI) {
+	public CycleGraph getCycleGraph(URI rootFileURI) {
 		CycleGraph result = new CycleGraph();
 		GraphNode rootNode = new GraphNode();
 		rootNode.setName("root");
@@ -50,7 +51,7 @@ public class FileGraphService implements IFileGraphService{
 		return result;
 	}
 
-	public SimpleGraph getSimpleGraph(File rootFileURI) {
+	public SimpleGraph getSimpleGraph(URI rootFileURI) {
 		SimpleGraph result = new SimpleGraph();
 		GraphNode rootNode = new GraphNode();
 		rootNode.setName("root");
@@ -68,7 +69,7 @@ public class FileGraphService implements IFileGraphService{
 		return result;
 	}
 
-	public List<String> getAllRequired(File rootFile) {
+	public List<String> getAllRequired(URI rootFile) {
 		// TODO Auto-generated method stub
 		return null;
 	}
