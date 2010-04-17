@@ -13,6 +13,7 @@ package org.kermeta.language.filegraph.prefuse.data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.kermeta.language.filegraph.CycleGraph;
 import org.kermeta.language.filegraph.GraphNode;
@@ -45,7 +46,8 @@ public class FileGraphToPrefuseConverter {
 	protected static void convertNodeToPrefuse(Graph prefuseGraph, GraphNode fileNode, Map<GraphNode, Node> convertedNodes){
 		if(!convertedNodes.containsKey(fileNode)){
 			Node n = prefuseGraph.addNode();
-			n.setString("label", fileNode.getName());
+			
+			n.setString("label", computeLabel(fileNode.getName()));
 			convertedNodes.put(fileNode, n);
 			for(GraphNode childNode :fileNode.getDirectReferences()){
 				convertNodeToPrefuse(prefuseGraph, childNode, convertedNodes);
@@ -53,6 +55,17 @@ public class FileGraphToPrefuseConverter {
 		}		
 	}
 	
+	protected static String computeLabel(String origName){
+		StringBuffer result = new StringBuffer();
+		String[] tokens = origName.split("/");
+		
+		if(tokens.length > 1 && (tokens[tokens.length-1].endsWith("kmt") || tokens[tokens.length-1].endsWith("ecore"))){
+			result.append("...\n");
+			result.append(tokens[tokens.length-1]);
+		}
+		else result.append(origName);
+		return result.toString();
+	}
 
 	public static List<Aggregate> convertToAggregates(CycleGraph cycleGraph, Map<GraphNode, Node> convertedNodes) {
 		List<Aggregate> result =  new ArrayList<Aggregate>();
