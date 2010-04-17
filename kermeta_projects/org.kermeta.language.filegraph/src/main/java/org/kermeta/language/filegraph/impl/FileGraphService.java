@@ -10,7 +10,6 @@
 
 package org.kermeta.language.filegraph.impl;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +26,7 @@ import org.kermeta.language.filegraph.util.UriResolver;
 public class FileGraphService implements IFileGraphService{
 
 	//collect the known uris
-	private HashMap<String, GraphNode> knownUris = new HashMap<String, GraphNode>();
+	//private HashMap<String, GraphNode> knownUris = new HashMap<String, GraphNode>();
 	
 	
 	public CycleGraph getCycleGraph(URI rootFile) {
@@ -38,7 +37,8 @@ public class FileGraphService implements IFileGraphService{
 		if (uri != null){
 			CycleGraph resultgraph = new CycleGraph();
 			//set the root node
-			GraphNode root = recursiveResolve(rootFileURI, rootFileURI, true);
+			HashMap<String, GraphNode> knownUris = new HashMap<String, GraphNode>();
+			GraphNode root = recursiveResolve(rootFileURI, rootFileURI, true, knownUris);
 			root.setName(rootFileURI);
 			resultgraph.setRootNode(root);
 			return resultgraph;
@@ -58,7 +58,8 @@ public class FileGraphService implements IFileGraphService{
 		if (uri != null){
 			SimpleGraph resultgraph = new SimpleGraph();
 			//set the root node
-			GraphNode root = recursiveResolve(rootFileURI, rootFileURI, false);
+			HashMap<String, GraphNode> knownUris = new HashMap<String, GraphNode>();
+			GraphNode root = recursiveResolve(rootFileURI, rootFileURI, false, knownUris);
 			root.setName(rootFileURI);
 			resultgraph.setRootNode(root);
 			return resultgraph;
@@ -76,8 +77,9 @@ public class FileGraphService implements IFileGraphService{
 	}
 
 	public List<String> getAllRequired(URI rootFile) {
-		List<String> result = new ArrayList<String>();
-		getSimpleGraph(rootFile);
+		List<String> result = new ArrayList<String>();		
+		HashMap<String, GraphNode> knownUris = new HashMap<String, GraphNode>();
+		recursiveResolve(rootFile.toString(), rootFile.toString(), false, knownUris);
 		Set<String> uris = knownUris.keySet();
 		for (String uri : uris){
 			result.add(uri);
@@ -85,7 +87,7 @@ public class FileGraphService implements IFileGraphService{
 		return result;
 	}
 
-	private GraphNode recursiveResolve(String fileUri, String rootFileURI, boolean cycleMode){
+	protected GraphNode recursiveResolve(String fileUri, String rootFileURI, boolean cycleMode, HashMap<String, GraphNode> knownUris){
 		String uri = UriResolver.resolveUri(fileUri, rootFileURI);
 		//if uri is valid
 		if (uri != null){
@@ -99,18 +101,26 @@ public class FileGraphService implements IFileGraphService{
 				//for each require build the tree according to root's direct references
 				for (String requireUri : requires){
 					//validate the require URI
-					String resolvedUri = UriResolver.resolveUri(requireUri,rootFileURI); 
+					String resolvedUri = UriResolver.resolveUri(requireUri,rootFileURI);
+					GraphNode requiredNode = new GraphNode();
 					if (resolvedUri != null){
-						GraphNode requiredNode = new GraphNode();
+						
 						if (!knownUris.keySet().contains(resolvedUri)){
-							requiredNode  = recursiveResolve(resolvedUri, rootFileURI, cycleMode);
+							requiredNode  = recursiveResolve(resolvedUri, rootFileURI, cycleMode, knownUris);
 						}else if (cycleMode){
 							requiredNode = knownUris.get(resolvedUri);
 							
 						}
 						requiredNode.setName(resolvedUri);
 						node.getDirectReferences().add(requiredNode);
-					}
+					}/*
+					else{
+						// cannot resolve the URI to a file, simply add the require without modification
+						// (for example when requiring something in the registry
+						// do not try to go recursively
+						requiredNode.setName(requireUri);
+						
+					}*/
 				}
 			}
 			return node;
