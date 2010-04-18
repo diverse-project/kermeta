@@ -1,11 +1,11 @@
-/*$Id: $
+/*$Id : $
 * Project : org.kermeta.language.filegraph
-* File : 	FileGraph.java
+* File : 	FileGraphService.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 15 avr. 2010
-* Authors : Didier Vojtisek
+* Creation date : 18 avr. 2010
+* Authors : Haja RAMBELONTSALAMA
 */
 
 package org.kermeta.language.filegraph.impl;
@@ -24,22 +24,18 @@ import org.kermeta.language.filegraph.util.FileTraversal;
 import org.kermeta.language.filegraph.util.UriResolver;
 
 public class FileGraphService implements IFileGraphService{
-
-	//collect the known uris
-	//private HashMap<String, GraphNode> knownUris = new HashMap<String, GraphNode>();
 	
-	
-	public CycleGraph getCycleGraph(URI rootFile) {
+	public CycleGraph getCycleGraph(URI rootURI) {
 		
-		String rootFileURI = rootFile.toString();
+		//String rootFileURI = rootFile.toString();
 		//validate the URI (file exists on disk) 
-		String uri = UriResolver.resolveUri(rootFileURI, rootFileURI);
+		URI uri = UriResolver.resolveUri(rootURI, rootURI);
 		if (uri != null){
 			CycleGraph resultgraph = new CycleGraph();
 			//set the root node
-			HashMap<String, GraphNode> knownUris = new HashMap<String, GraphNode>();
-			GraphNode root = recursiveResolve(rootFileURI, rootFileURI, true, knownUris);
-			root.setName(rootFileURI);
+			HashMap<URI, GraphNode> knownUris = new HashMap<URI, GraphNode>();
+			GraphNode root = recursiveResolve(rootURI, rootURI, true, knownUris);
+			root.setName(rootURI.toString());
 			resultgraph.setRootNode(root);
 			return resultgraph;
 		}
@@ -49,18 +45,18 @@ public class FileGraphService implements IFileGraphService{
 	/**
 	 * Provide the list of the URI associated to this URI
 	 */
-	public SimpleGraph getSimpleGraph(URI rootFile) {
+	public SimpleGraph getSimpleGraph(URI rootURI) {
 		
 		
-		String rootFileURI = rootFile.toString();
+		//String rootFileURI = rootFile.toString();
 		//validate the URI (file exists on disk) 
-		String uri = UriResolver.resolveUri(rootFileURI, rootFileURI);
+		URI uri = UriResolver.resolveUri(rootURI, rootURI);
 		if (uri != null){
 			SimpleGraph resultgraph = new SimpleGraph();
 			//set the root node
-			HashMap<String, GraphNode> knownUris = new HashMap<String, GraphNode>();
-			GraphNode root = recursiveResolve(rootFileURI, rootFileURI, false, knownUris);
-			root.setName(rootFileURI);
+			HashMap<URI, GraphNode> knownUris = new HashMap<URI, GraphNode>();
+			GraphNode root = recursiveResolve(rootURI, rootURI, false, knownUris);
+			root.setName(rootURI.toString());
 			resultgraph.setRootNode(root);
 			return resultgraph;
 		}
@@ -72,23 +68,23 @@ public class FileGraphService implements IFileGraphService{
 	 * @param uri
 	 * @return
 	 */
-	private List<String> getResourceRequires(String uri) {
+	private List<String> getResourceRequires(URI uri) {
 		return FileTraversal.getRequires(uri);
 	}
 
-	public List<String> getAllRequired(URI rootFile) {
-		List<String> result = new ArrayList<String>();		
-		HashMap<String, GraphNode> knownUris = new HashMap<String, GraphNode>();
-		recursiveResolve(rootFile.toString(), rootFile.toString(), false, knownUris);
-		Set<String> uris = knownUris.keySet();
-		for (String uri : uris){
+	public List<URI> getAllRequired(URI rootURI) {
+		List<URI> result = new ArrayList<URI>();		
+		HashMap<URI, GraphNode> knownUris = new HashMap<URI, GraphNode>();
+		recursiveResolve(rootURI, rootURI, false, knownUris);
+		Set<URI> uris = knownUris.keySet();
+		for (URI uri : uris){
 			result.add(uri);
 		}
 		return result;
 	}
 
-	protected GraphNode recursiveResolve(String fileUri, String rootFileURI, boolean cycleMode, HashMap<String, GraphNode> knownUris){
-		String uri = UriResolver.resolveUri(fileUri, rootFileURI);
+	protected GraphNode recursiveResolve(URI fileUri, URI rootURI, boolean cycleMode, HashMap<URI, GraphNode> knownUris){
+		URI uri = UriResolver.resolveUri(fileUri, rootURI);
 		//if uri is valid
 		if (uri != null){
 			
@@ -101,17 +97,17 @@ public class FileGraphService implements IFileGraphService{
 				//for each require build the tree according to root's direct references
 				for (String requireUri : requires){
 					//validate the require URI
-					String resolvedUri = UriResolver.resolveUri(requireUri,rootFileURI);
+					URI resolvedUri = UriResolver.resolveUri(URI.createURI(requireUri),rootURI);
 					GraphNode requiredNode = new GraphNode();
 					if (resolvedUri != null){
 						
 						if (!knownUris.keySet().contains(resolvedUri)){
-							requiredNode  = recursiveResolve(resolvedUri, rootFileURI, cycleMode, knownUris);
+							requiredNode  = recursiveResolve(resolvedUri, rootURI, cycleMode, knownUris);
 						}else if (cycleMode){
 							requiredNode = knownUris.get(resolvedUri);
 							
 						}
-						requiredNode.setName(resolvedUri);
+						requiredNode.setName(resolvedUri.toString());
 						node.getDirectReferences().add(requiredNode);
 					}/*
 					else{

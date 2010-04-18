@@ -1,3 +1,12 @@
+/*$Id : $
+* Project : org.kermeta.language.filegraph
+* File : 	UriResolver.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 18 avr. 2010
+* Authors : Haja RAMBELONTSALAMA
+*/
 package org.kermeta.language.filegraph.util;
 
 import org.eclipse.emf.common.util.URI;
@@ -10,9 +19,10 @@ import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 
 public class UriResolver {
 
-	public static String resolveUri(String fileUri, String rootFileURI){
-		String s = fileUri;
-		String resultUri = null;
+	public static URI resolveUri(URI fileUri, URI rootURI){
+		String s = fileUri.toString();
+		String rootFileURI = rootURI.toString();
+		URI resultUri = null;
 		try {
 			String uri;
 			if (s.matches("http.+"))
@@ -107,7 +117,7 @@ public class UriResolver {
 						return null;
 					}
 					else{
-						resultUri = uri;
+						resultUri = URI.createURI(uri);
 					}
 				} else if (!uri.equals("kermeta") && !uri.equals("java_rt_jar"))
 					/*
@@ -117,7 +127,7 @@ public class UriResolver {
 					 */
 					
 					if (converter.exists(emfURI, null)){
-						 resultUri = uri;
+						 resultUri = URI.createURI(uri);
 					 }
 			}
 
@@ -126,7 +136,7 @@ public class UriResolver {
 			 * the kermeta unit to import.
 			 */
 
-			resultUri = uri;
+			resultUri = URI.createURI(uri);
 
 			} catch (Throwable t) {
 			return null;

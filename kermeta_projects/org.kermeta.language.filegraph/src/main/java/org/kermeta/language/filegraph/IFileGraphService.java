@@ -1,6 +1,14 @@
+/*$Id : $
+* Project : org.kermeta.language.filegraph
+* File : 	IFileGraphService.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 18 avr. 2010
+* Authors : Haja RAMBELONTSALAMA
+*/
 package org.kermeta.language.filegraph;
 
-import java.io.File;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -15,6 +23,6 @@ public interface IFileGraphService{
 	 
 	 public CycleGraph getCycleGraph(URI rootFile);
 	 
-	 public List<String> getAllRequired(URI rootFile);
+	 public List<URI> getAllRequired(URI rootFile);
 	
 }

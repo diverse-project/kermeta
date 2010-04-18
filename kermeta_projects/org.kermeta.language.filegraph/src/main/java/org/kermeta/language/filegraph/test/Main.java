@@ -38,10 +38,10 @@ public class Main {
 			System.out.println(node.getName());
 		}*/
 		
-		List<String> result = sce.getAllRequired(URI.createURI(f.getPath()));
+		List<URI> result = sce.getAllRequired(URI.createURI(f.getPath()));
 		System.out.println("nodes in req1.kermeta_contour ALL");
-		for (String r : result){
-			System.out.println(r);
+		for (URI r : result){
+			System.out.println(r.toString());
 		}
 	}
 

@@ -1,3 +1,12 @@
+/*$Id : $
+* Project : org.kermeta.language.filegraph
+* File : 	FileTraversal.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 18 avr. 2010
+* Authors : Haja RAMBELONTSALAMA
+*/
 package org.kermeta.language.filegraph.util;
 
 import java.io.BufferedReader;
@@ -14,13 +23,13 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
 public class FileTraversal {
 
-	public static List<String> getRequires(String uri) {
+	public static List<String> getRequires(URI uri) {
 		List<String> requires = new ArrayList<String>();
 		try {
 
 			String sCurrentLine;
-			//read each line of the file
-			URI _uri = URI.createURI(uri);
+			// read each line of the file
+			URI _uri = uri;
 			URIConverter converter = new ExtensibleURIConverterImpl();
 			 
 			BufferedReader br = new BufferedReader(
