@@ -105,7 +105,7 @@ object Main extends LogAspect {
 
 
 //        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/tests/000HelloWorld.km"
-        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/perfs/metamodelPruner.km"
+//        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/perfs/metamodelPruner.km"
 //        inputFile = "/home/barais/NetBeansProjects/fr.irisa.triskell.kermeta.scala.compilo.test/src/test/resources/perfs/001_LoadUML.km"
         if(inputFile != ""){
             log.info("KM compilation begin on "+inputFile)
@@ -126,7 +126,7 @@ object Main extends LogAspect {
             /* if(compilationResult == 0){
              EmbettedScalaRunner.run(GlobalConfiguration.outputBinFolder, "runner.MainRunner", runnerParams)
              }*/
-            if (GlobalConfiguration.exec && !GlobalConfiguration.createPackage &&false){
+            if (GlobalConfiguration.exec && !GlobalConfiguration.createPackage ){
                 var classpath =EmbettedScalaCompiler.getActualClasspath
                 println(classpath.mkString)
                 if (additionalClassPath != null)
