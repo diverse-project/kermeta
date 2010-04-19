@@ -12,7 +12,7 @@ import fr.irisa.triskell.kermeta.language.structure._
 
 object Parser extends StandardTokenParsers {
 
-  lexical.reserved += ("package","require","using")
+  lexical.reserved += ("package","require","using","class","aspect","abstract")
   lexical.delimiters += ("=",";","::","@","{","}")
 
   def parse : Unit = {
@@ -54,7 +54,7 @@ object Parser extends StandardTokenParsers {
 //def topLevelDecls = (topLevelDecl)
   def topLevelDecl : Parser[Any] = (annotations | annotableElement)+
   def annotations = ("@" ~ ident ~ "=" ~ stringLit )
-  def annotableElement = (subPackageDecl)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
+  def annotableElement = (subPackageDecl | classDecl)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
   def subPackageDecl = ("package" ~ ident ~ "{" ~ (topLevelDeclOpt) ~ "}" )
   def topLevelDeclOpt = (topLevelDecl ?)
   /*def modelTypeDecl = ("")
@@ -62,9 +62,14 @@ object Parser extends StandardTokenParsers {
    def enumDecl = ("")
    def dataTypeDecl = ("")*/
 
+  def classDecl = ( aspectModifier ~ abstractModifier ~ classKind ~ ident ~ "{" ~ "}" )
+  // def classDecl = (aspectModifier)? (abstractModifier)? classKind ident"inherits" superTypes=typelst)? LCURLY classMemberDecls RCURLY;
+  def classKind = "class" //| "interface" ;
+  def abstractModifier = ("abstract")?
+  def aspectModifier = ("aspect")?
 
+  
   def expr = (stringLit | ident )
-
 
   /*
 
@@ -86,7 +91,6 @@ object Parser extends StandardTokenParsers {
 
 class Interpreter(tree: List[_]) {
   def run() {
-    //TOO
     walkTree(tree)
   }
   private def walkTree(tree: List[_]) {
@@ -97,6 +101,3 @@ class Interpreter(tree: List[_]) {
   }
 
 }
-
-
-sealed abstract class Statement
