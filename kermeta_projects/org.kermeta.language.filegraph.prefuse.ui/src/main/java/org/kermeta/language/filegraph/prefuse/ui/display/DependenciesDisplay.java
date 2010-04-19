@@ -27,6 +27,7 @@ import prefuse.action.layout.graph.ForceDirectedLayout;
 import prefuse.activity.Activity;
 import prefuse.data.Graph;
 import prefuse.data.Node;
+import prefuse.data.expression.parser.ExpressionParser;
 import prefuse.render.DefaultRendererFactory;
 import prefuse.render.EdgeRenderer;
 import prefuse.render.LabelRenderer;
@@ -52,6 +53,7 @@ public class DependenciesDisplay extends Display {
     public static final String EDGES = "graph.edges";
     public static final String AGGR = "aggregates";
     public static final String NODE_LABEL = "label";
+    public static final String NODE_ISROOT = "isroot";
     public static final String AGGR_COLORID = "color.id";
     
     public static final int NB_AGGREGATE_COLOR = 7;
@@ -109,8 +111,11 @@ public class DependenciesDisplay extends Display {
 				ColorLib.rgb(150, 150, 255)
 		};
 		// we fill up the nodes labels
-		DataColorAction itemCol = new DataColorAction(NODES, NODE_LABEL,
-				Constants.NOMINAL, VisualItem.FILLCOLOR, colors);
+		//DataColorAction itemCol = new DataColorAction(NODES, NODE_LABEL,
+		//		Constants.NOMINAL, VisualItem.FILLCOLOR, colors);
+		ColorAction itemCol = new ColorAction(NODES,
+				VisualItem.FILLCOLOR, ColorLib.rgb(150, 150, 255));
+        itemCol.add(ExpressionParser.predicate("isroot = true"), ColorLib.rgb(100, 100, 255));
 		ColorAction itemBorderCol = new ColorAction(NODES,
 				VisualItem.STROKECOLOR, ColorLib.gray(0));
 		// the label text is dark

@@ -28,10 +28,12 @@ public class FileGraphToPrefuseConverter {
 	public static Graph convertToPrefuseGraph(SimpleGraph simpleGraph, Map<GraphNode, Node> convertedNodes){
 		Graph result = new Graph(true);
 		result.addColumn(DependenciesDisplay.NODE_LABEL, String.class);
+		result.addColumn(DependenciesDisplay.NODE_ISROOT, Boolean.class);
 		
 		
 		// process root
 		convertNodeToPrefuse(result, simpleGraph.getRootNode(), convertedNodes);
+		convertedNodes.get(simpleGraph.getRootNode()).set(DependenciesDisplay.NODE_ISROOT, true);
 		
 		// for each converted nodes, add the edges
 		for(GraphNode fileNode : convertedNodes.keySet()){
@@ -47,7 +49,8 @@ public class FileGraphToPrefuseConverter {
 		if(!convertedNodes.containsKey(fileNode)){
 			Node n = prefuseGraph.addNode();
 			
-			n.setString("label", computeLabel(fileNode.getName()));
+			n.setString(DependenciesDisplay.NODE_LABEL, computeLabel(fileNode.getName()));
+			n.set(DependenciesDisplay.NODE_ISROOT, false);
 			convertedNodes.put(fileNode, n);
 			for(GraphNode childNode :fileNode.getDirectReferences()){
 				convertNodeToPrefuse(prefuseGraph, childNode, convertedNodes);
@@ -86,5 +89,8 @@ public class FileGraphToPrefuseConverter {
             }
 		}
 		return result;
+	}
+	public static void customNodeColor(Map<GraphNode, Node> convertedNodes){
+		
 	}
 }
