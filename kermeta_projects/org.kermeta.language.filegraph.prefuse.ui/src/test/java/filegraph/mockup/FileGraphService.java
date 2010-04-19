@@ -69,7 +69,7 @@ public class FileGraphService implements IFileGraphService{
 		return result;
 	}
 
-	public List<String> getAllRequired(URI rootFile) {
+	public List<URI> getAllRequired(URI rootFile) {
 		// TODO Auto-generated method stub
 		return null;
 	}
