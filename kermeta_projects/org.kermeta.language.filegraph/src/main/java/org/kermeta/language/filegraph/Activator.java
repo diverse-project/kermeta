@@ -16,6 +16,8 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator implements BundleActivator {
 
+	// The shared instance
+	private static Activator plugin;
 	public BundleContext context;
 	
 	public IFileGraphService fileGraphService;
@@ -26,7 +28,7 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext context) throws Exception {
 		this.context = context;
-		
+		plugin = this;
 		// initiates and registers the provided service
 		fileGraphService =  new FileGraphService();
 		Properties props = new Properties();
@@ -41,6 +43,16 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
+		plugin = null;
 	}
 
+	/**
+	 * Returns the shared instance
+	 *
+	 * @return the shared instance
+	 */
+	public static Activator getDefault() {
+		return plugin;
+	}
+	
 }
