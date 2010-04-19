@@ -93,11 +93,17 @@ public class SuperTypesSetter extends KermetaASTNodeVisitor  {
 				String qualifiedName = KermetaASTHelper.qualifiedIDAsString(operation.getSuperSelection());
 				TypeDefinition supertypeDefinition = kermetaUnit.getTypeDefinitionByName(qualifiedName);
 				fr.irisa.triskell.kermeta.language.structure.Operation superOperation = KermetaModelHelper.ClassDefinition.getSuperOperation(kermetaUnit, owner, KermetaModelHelper.NamedElement.qualifiedName(supertypeDefinition), o.getName());
-				
+				if( superOperation == null ){
+					// HACK retry after flushing out the cache DVK, probaly a problem in a previous step but seems very hard to sort it out ...
+					kermetaUnit.getAllImportedKermetaUnitsCache().clear();
+					kermetaUnit.getTypeDefinitionContextsCache().clear();
+					superOperation = KermetaModelHelper.ClassDefinition.getSuperOperation(kermetaUnit, owner, KermetaModelHelper.NamedElement.qualifiedName(supertypeDefinition), o.getName());
+				}
 				if ( superOperation != null )
 					o.setSuperOperation(superOperation);
-				else 	
+				else 	{
 					kermetaUnit.error("No super operation found in " + qualifiedName + " for operation " + o.getName(), o);
+				}
 			} else {
 				//fr.irisa.triskell.kermeta.language.structure.Operation superOperation = KermetaModelHelper.ClassDefinition.getFirstSuperOperation(owner, o.getName());
 				List<fr.irisa.triskell.kermeta.language.structure.Operation> superOperations = KermetaModelHelper.ClassDefinition.getDirectSuperOperations(kermetaUnit, owner, o.getName());
