@@ -1,0 +1,9 @@
+package TOTO;
+require kermeta
+require "titi"
+using org::kermeta::tester
+
+@myanotation="drop"
+package dede {
+
+}
