@@ -7,3 +7,7 @@ using org::kermeta::tester
 package dede {
 
 }
+
+aspect abstract class MyFirstClass{
+
+}
