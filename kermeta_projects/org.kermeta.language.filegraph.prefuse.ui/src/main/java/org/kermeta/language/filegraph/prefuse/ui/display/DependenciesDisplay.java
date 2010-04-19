@@ -33,6 +33,13 @@ import prefuse.render.LabelRenderer;
 import prefuse.render.PolygonRenderer;
 import prefuse.render.Renderer;
 import prefuse.util.ColorLib;
+import prefuse.util.force.DragForce;
+import prefuse.util.force.Force;
+import prefuse.util.force.ForceSimulator;
+import prefuse.util.force.NBodyForce;
+import prefuse.util.force.RungeKuttaIntegrator;
+import prefuse.util.force.SpringForce;
+import prefuse.util.ui.JValueSlider;
 import prefuse.visual.AggregateItem;
 import prefuse.visual.AggregateTable;
 import prefuse.visual.VisualItem;
@@ -94,6 +101,7 @@ public class DependenciesDisplay extends Display {
         drf.add("ingroup('aggregates')", polyR);
 		m_vis.setRendererFactory(drf);
 		
+		
 		/////// Processing step ///////////
 		
 		// we use red color for error items
@@ -139,7 +147,23 @@ public class DependenciesDisplay extends Display {
 		
 		// add a dynamic display of items
 		ActionList dynLayout = new ActionList(Activity.INFINITY);
-		dynLayout.add(new ForceDirectedLayout(GRAPH, true));
+		// adapt the force
+		ForceSimulator fsim = new ForceSimulator(new RungeKuttaIntegrator());
+
+		float gravConstant = -10f; //default: -1f
+		float minDistance = -1f;
+		float theta = 0.9f;
+
+		float drag = 0.01f;
+		float springCoeff = 1E-4f;  
+		float defaultLength = 200f;  //default: 50f
+
+		fsim.addForce(new NBodyForce(gravConstant, minDistance, theta));
+		fsim.addForce(new DragForce(drag));
+		fsim.addForce(new SpringForce(springCoeff, defaultLength));
+		    
+		ForceDirectedLayout fdl = new ForceDirectedLayout(GRAPH, fsim,true);
+		dynLayout.add(fdl);
 		dynLayout.add(new AggregateLayout(AGGR));
 		dynLayout.add(new RepaintAction());
 		
