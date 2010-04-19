@@ -111,6 +111,8 @@ public class DependenciesDisplay extends Display {
 		// we fill up the nodes labels
 		DataColorAction itemCol = new DataColorAction(NODES, NODE_LABEL,
 				Constants.NOMINAL, VisualItem.FILLCOLOR, colors);
+		ColorAction itemBorderCol = new ColorAction(NODES,
+				VisualItem.STROKECOLOR, ColorLib.gray(0));
 		// the label text is dark
 		ColorAction textCol = new ColorAction(NODES,
 				VisualItem.TEXTCOLOR, ColorLib.gray(0));
@@ -139,6 +141,7 @@ public class DependenciesDisplay extends Display {
 		// list those color actions
 		ActionList colActions = new ActionList();
 		colActions.add(itemCol);
+		colActions.add(itemBorderCol);
 		colActions.add(textCol);
 		colActions.add(edgeCol);
 		colActions.add(edgeArrCol);
