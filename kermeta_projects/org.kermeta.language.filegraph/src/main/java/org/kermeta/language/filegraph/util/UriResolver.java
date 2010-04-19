@@ -56,6 +56,7 @@ public class UriResolver {
 				} else {
 					/*
 					 * Take care about relative path.
+					 * TODO deal with uri like "../../<uri>"
 					 */
 					if (!cleanedRequire.startsWith("platform:\\\\/")
 							&& !cleanedRequire.startsWith("file:")&& !cleanedRequire.startsWith("/")) {

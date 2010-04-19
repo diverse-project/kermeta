@@ -1,6 +1,12 @@
-/**
- * 
- */
+/*$Id : $
+* Project : org.kermeta.language.filegraph
+* File : 	Main.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 18 avr. 2010
+* Authors : Haja RAMBELONTSALAMA
+*/
 package org.kermeta.language.filegraph.test;
 
 import java.io.File;

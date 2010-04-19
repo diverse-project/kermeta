@@ -30,6 +30,7 @@ public class FileTraversal {
 			String sCurrentLine;
 			// read each line of the file
 			URI _uri = uri;
+			//System.out.println(_uri.toString());
 			URIConverter converter = new ExtensibleURIConverterImpl();
 			 
 			BufferedReader br = new BufferedReader(
@@ -51,24 +52,23 @@ public class FileTraversal {
 						//go to next line
 						continue;
 					}
+					// ignore commented tokens
 					if(!inLineCommment && !inBlockComment){
 						// deal with require split on 2 lines
 						if (!splitOn2lines){
-						// ignore commented tokens
 							if(token.equals("require")){
 								// next token is our string 
-								// TODO deal with require split on 2 lines ?
-								
 								if (st.hasMoreTokens()){
 									String rawUri = st.nextToken();
 									String currUri = rawUri.replaceAll("\"", "");
 									requires.add(currUri);
 								}else {
+									// deal with require split on 2 lines 
 									splitOn2lines = true;
 								}
 							}
 						}else{
-							//the token is our string
+							//the token is our uri
 							//we assume that the parser has already raised an error if it is a void require
 							String currUri = token.replaceAll("\"", "");
 							requires.add(currUri);
@@ -77,7 +77,6 @@ public class FileTraversal {
 					}
 			    }
 				inLineCommment = false; // reset for next line
-				
 			}
 
 		} catch (FileNotFoundException e) {
