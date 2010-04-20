@@ -125,7 +125,7 @@ trait CallFeatureAspect extends RichAspectImplicit with CallExpressionAspect wit
             o.asInstanceOf[TypeLiteral].generateScalaCodeForInstanceOf(res)
         }
         else{
-           o.asInstanceOf[TypeLiteral].generateScalaCode(res)
+           o.asInstanceOf[ObjectAspect].generateScalaCode(res)
             }
         res.append("]")
 

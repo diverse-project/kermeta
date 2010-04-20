@@ -79,6 +79,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 				
             this.getOwnedAttribute foreach(a=> a.generateScalaCode(res))
             this.getOwnedOperation filter(op=> !Util.hasEcoreTag(op) || op.getBody !=null) foreach(op=> op.generateScalaCode(res))
+            this.generateInvariants(res)
             this.generategetQualifiedName(res)
             res.append("}\n")
 
