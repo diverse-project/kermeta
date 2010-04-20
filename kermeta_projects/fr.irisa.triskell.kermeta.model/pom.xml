@@ -17,7 +17,7 @@
 			</resource>
 		</resources>
 		<sourceDirectory>target/filtered-sources/java</sourceDirectory>
-		<outputDirectory>bin</outputDirectory>
+		<outputDirectory>build/class</outputDirectory>
         <plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
