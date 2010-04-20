@@ -73,8 +73,8 @@
 			</snapshots>
 			<url>http://www.kermeta.org/maven2-snapshots</url>
 			<layout>default</layout>
-			</repository>
-      </repositories>
+		</repository>
+     </repositories>
 	 <distributionManagement>
 		<repository>
       		<id>tipimouss-local-maven-repository</id>
