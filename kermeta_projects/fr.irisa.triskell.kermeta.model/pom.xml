@@ -4,7 +4,7 @@
 	<groupId>org.kermeta</groupId>
 	<artifactId>fr.irisa.triskell.kermeta.model</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Kermeta - Traceability model</name>
+	<name>Kermeta - Kermeta model</name>
 	<build>
 		<resources>
 			<resource>
