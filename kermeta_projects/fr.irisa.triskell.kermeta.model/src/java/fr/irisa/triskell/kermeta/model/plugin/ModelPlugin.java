@@ -6,7 +6,7 @@
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 6 févr. 07
+* Creation date : 6 feb. 07
 * Authors : paco
 */
 
