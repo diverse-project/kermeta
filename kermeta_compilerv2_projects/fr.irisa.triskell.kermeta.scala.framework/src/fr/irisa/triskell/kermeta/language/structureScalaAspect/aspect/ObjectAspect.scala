@@ -73,7 +73,8 @@ trait ObjectAspect extends EObject  with Contracted {
         checkParamInvariants(invariants)
     }
     def checkAllInvariants() = { /*TODO*/ println("todo checkAllInvariant") }
-    def getViolatedConstraints() : kermeta.exceptions.ConstraintsDiagnostic={/*TODO*/ println("todo checkAllInvariant"); return null;}
+    def getViolatedConstraints() : kermeta.exceptions.ConstraintsDiagnostic={
+    /*TODO*/ println("todo getViolatedConstraints"); return new Throwable with ConstraintsDiagnostic;}
 	
 	
 }

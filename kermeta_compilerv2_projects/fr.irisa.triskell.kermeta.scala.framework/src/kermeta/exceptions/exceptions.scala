@@ -168,19 +168,22 @@ trait ConstraintViolatedException extends ConstraintViolatedExceptionAspect{
 
 
 
-trait ConstraintViolatedPreAspect extends Exception{
+trait ConstraintViolatedPreAspect extends ConstraintViolatedException{
 }
 trait ConstraintViolatedPre extends ConstraintViolatedPreAspect{
 }
 
 
-trait ConstraintViolatedPostAspect extends Exception{
+trait ConstraintViolatedPostAspect extends ConstraintViolatedException{
 }
 trait ConstraintViolatedPost extends ConstraintViolatedPostAspect{
 }
 
 
-trait ConstraintViolatedInvAspect extends Exception{
+trait ConstraintViolatedInvAspect extends ConstraintViolatedException{
+/*  var failedConstraint : Constraint = null;
+  def ScalafailedConstraint : Constraint={return this.failedConstraint}
+  def ScalafailedConstraint_=(arg : Constraint)={failedConstraint  = arg}*/
 }
 
 trait ConstraintViolatedInv extends ConstraintViolatedInvAspect{
@@ -231,7 +234,9 @@ trait DynamicExpressionException extends DynamicExpressionExceptionAspect{
 
 trait ConstraintsDiagnosticAspect extends Exception{
     
-    var setConstraints : java.util.List[ConstraintViolatedInv] = _
+    var setConstraints : java.util.List[ConstraintViolatedInv] = new java.util.ArrayList[ConstraintViolatedInv] 
+    def ScalasetConstraints : java.util.List[ConstraintViolatedInv]={return this.setConstraints}
+    def ScalasetConstraints_=(arg : java.util.List[ConstraintViolatedInv])={this.setConstraints.clear; this.setConstraints.addAll(arg)}
 	
 	/* Initialize */
 	def initialize() : ConstraintsDiagnostic={
@@ -252,6 +257,7 @@ trait ConstraintsDiagnosticAspect extends Exception{
 		
 		
 	}
+
 
 
 }

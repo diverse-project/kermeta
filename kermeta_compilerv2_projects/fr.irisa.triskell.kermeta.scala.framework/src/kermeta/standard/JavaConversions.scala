@@ -84,12 +84,12 @@ object JavaConversions {
     def excludes(element : A) :java.lang.Boolean={return true;}
     def one() :A={value.iterator.next}
     //TODO
-    def containsAll(elts : Collection[A]) :scala.Boolean={ true}
+    //def containsAll(elts : ju.Collection[_]) :scala.Boolean={ true}
     //TODO
     def sum() :A={return value.iterator.next}
     def includes(element : A) :Boolean={return value.contains(element)}
     //TODO
-    def excludesAll(elements : Collection[A]) :Boolean={/*TODO*/return true}
+    def excludesAll(elements : ju.Collection[A]) :Boolean={/*TODO*/return true}
     def isUnique(a : A) :Boolean={return this.countElement(a)==1}
     def any() :A={return one()}
     def at(index:Int) :A={return value.get(index)}
@@ -121,7 +121,7 @@ object JavaConversions {
       if(res != null && res.size>0) { return res.get(0)} else { return null.asInstanceOf[A] }
     }
     //def iterator() :java.laIterator[A]={return value.iterator}
-    /*TODO*/def includesAll(elements : Collection[A]) :Boolean={return true}
+    /*TODO*/def includesAll(elements : ju.Collection[A]) :Boolean={return true}
     def select(selector : A=> scala.Boolean) :java.util.List[A]={
       var res : java.util.List[A] = new java.util.ArrayList[A];
       this.each(e=> if(selector(e)) {res.add(e)})
@@ -134,7 +134,8 @@ object JavaConversions {
       clone.addAll(value)
       var i : ju.Iterator[A] = clone.iterator; while (i.hasNext){func(i.next)  }
     }
-    /*TODO*///def collect(collector : A=> Unit) :Sequence[A]={return null}
+
+    def collect[B](collector : A=> B) :java.util.List[B]={var res = new ju.ArrayList[B](); this.each(e=> res.add(collector(e)))  ; return res  }
     def elementAt(arg:Int):A={
       return value.get(arg)
     }
@@ -166,7 +167,7 @@ object JavaConversions {
       //return res
     }
 
-    def addAllUnique(a:ju.Collection[A]) :Unit = {
+    def addAllUnique(a: ju.Collection[A]) :Unit = {
       var i : ju.Iterator[A] = a.iterator
       while (i.hasNext){
         var element:A  = i.next
@@ -380,12 +381,12 @@ object JavaConversions {
     def excludes(element : A) :java.lang.Boolean={return true;}
     def one() :A={value.iterator.next}
     //TODO
-    def containsAll(elts : Collection[A]) :scala.Boolean={ true}
+    def containsAll(elts : ju.Collection[A]) :scala.Boolean={ true}
     //TODO
     def sum() :A={return value.iterator.next}
     def includes(element : A) :Boolean={return value.contains(element)}
     //TODO
-    def excludesAll(elements : Collection[A]) :Boolean={/*TODO*/return true}
+    def excludesAll(elements : ju.Collection[A]) :Boolean={/*TODO*/return true}
     def isUnique(a : A) :Boolean={return this.countElement(a)==1}
     def any() :A={return one()}
     //TODO
@@ -424,7 +425,7 @@ object JavaConversions {
     }
     //override def size() :Int={return value.length}
     def each(func : A=> Unit):Unit ={ var i : ju.Iterator[A] = value.iterator; while (i.hasNext){func(i.next)  } }
-    /*TODO*///def collect(collector : A=> Unit) :Sequence[A]={return null}
+    def collect[B](collector : A=> B) :java.util.List[B]={var res = new ju.ArrayList[B](); this.each(e=> res.add(collector(e)))  ; return res  }
     def getMetaClass():String={
       return this.getClass().toString();
     }
