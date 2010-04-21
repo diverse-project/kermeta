@@ -1,0 +1,35 @@
+/* $Id:$ 
+ * Creation : June 26, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Olivier Beaudoux
+ *			  Didier Vojtisek
+ * Description : this test checks the bug #8182
+ */
+
+
+
+package tests;
+
+
+require kermeta
+
+package A
+{
+    class C {}
+}
+
+package B
+{
+    class C {}
+    class D
+    {
+        reference c: C
+       
+        operation D() is
+        do
+            c := C.new() // bug here
+        end
+    }
+}

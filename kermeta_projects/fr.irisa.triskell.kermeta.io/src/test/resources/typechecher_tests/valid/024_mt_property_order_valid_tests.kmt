@@ -1,0 +1,60 @@
+/* $Id: 024_mt_property_order_valid_tests.kmt,v 1.1 2007-09-10 08:35:07 cfaucher Exp $
+ * Creation date: November 10, 2006
+ * License: EPL
+ * Authors:
+ * 	Didier Vojtisek
+ * Description:
+ *		This verifies the various possibilities about reference multiplicities
+ */
+
+
+package mt_property_order;
+
+
+require kermeta
+require "024_mt_property_order.kmt"
+using kermeta::standard
+
+class Tester{
+	operation testNeedsMStandard() : Void is do
+		NeedsMStandard<mStandardT>.new
+		//NeedsMStandard<mSetT>.new	// invalid see invalid testcase
+		NeedsMStandard<mOSetT>.new
+		//NeedsMStandard<mSeqT>.new	// invalid see invalid testcase
+		//NeedsMStandard<mBagT>.new	// invalid see invalid testcase
+	end
+	operation testNeedsMSet() : Void is do		
+		NeedsMSet<mStandardT>.new	// ordered set should be a valid non ordered set  (it inherits from it)
+		NeedsMSet<mSetT>.new
+		NeedsMSet<mOSetT>.new	// ordered set should be a valid non ordered set  (it inherits from it)
+		//NeedsMSet<mSeqT>.new	// invalid see invalid testcase
+		//NeedsMSet<mBagT>.new	// invalid see invalid testcase
+	end
+	
+	
+	operation testNeedsMOSet() : Void is do		
+		NeedsMOSet<mStandardT>.new
+		//NeedsMOSet<mSetT>.new	// invalid see invalid testcase
+		NeedsMOSet<mOSetT>.new
+		//NeedsMOSet<mSeqT>.new	// invalid see invalid testcase
+		//NeedsMOSet<mBagT>.new	// invalid see invalid testcase
+	end
+	
+	operation testNeedsMSeq() : Void is do		
+		//NeedsMSeq<mStandardT>.new	// invalid see invalid testcase
+		//NeedsMSeq<mSetT>.new	// invalid see invalid testcase
+		//NeedsMSeq<mOSetT>.new	// invalid see invalid testcase
+		NeedsMSeq<mSeqT>.new
+		//NeedsMSeq<mBagT>.new	// invalid see invalid testcase
+	end
+	
+	operation testNeedsMBag() : Void is do		
+		//NeedsMBag<mStandardT>.new	// invalid see invalid testcase
+		//NeedsMBag<mSetT>.new	// invalid see invalid testcase
+		//NeedsMBag<mOSetT>.new	// invalid see invalid testcase
+		NeedsMBag<mSeqT>.new	// a sequence should be a valid Bag (it inherits from it)
+		NeedsMBag<mBagT>.new
+	end
+
+}
+  

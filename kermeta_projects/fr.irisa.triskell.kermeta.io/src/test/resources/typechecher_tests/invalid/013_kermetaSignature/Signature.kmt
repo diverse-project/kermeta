@@ -1,0 +1,46 @@
+
+
+package Signature;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::io
+
+
+class Top {}
+
+class Middle inherits  Top {
+        operation triggerError() is do
+end
+}
+
+class Bottom inherits  Middle {}
+
+class Up
+{
+	operation cv(t : Top) : String is do
+		result := "Up"
+	end
+	operation ~inv(m : Middle) : String is do
+		result := "Up"
+	end
+	operation ctv(b : Bottom) : String is do
+	 	result := "Up"
+	end
+}
+
+class Down inherits Up
+{
+	method cv(m : Top) : String is do // parameter cannot be of type Middle due to invariance
+	// m.triggerError() // pour d�clencher l'erreur de type
+		result := "Down"
+	end
+	method ~inv(m : Middle) : String is do
+		result := "Down"
+	end
+	method ctv(m : Bottom) : String is do // parameter cannot be of type Middle due to invariance
+		result := "Down"
+	end
+}
+

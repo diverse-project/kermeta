@@ -1,0 +1,30 @@
+/* $Id: 021_fsm_quicktest.kmt,v 1.2 2008-02-14 07:13:28 uid21732 Exp $
+ * Creation date: November 10, 2006
+ * License:	EPL
+ * Authors:
+ * 		Didier Vojtisek
+ */
+@mainClass "fsm::Main"
+@mainOperation "main"
+
+
+package fsm;
+require "021_minimization.kmt"
+require "021_mandstart_fsm_type.kmt"
+require "021_multstart_fsm_type.kmt"
+require "021_composite_fsm_type.kmt"
+require "021_finalstates_fsm_type.kmt"
+
+
+require kermeta
+class Main
+{
+    operation main() : Void is do 
+    	// the one which aren't commented should work
+		Minimizer<basic_fsmT>.new.minimizeAll(basic_fsmT.new)
+		Minimizer<mandstart_fsmT>.new.minimizeAll(mandstart_fsmT.new)
+	    //Minimizer<multstart_fsmT>.new.minimizeAll(multstart_fsmT.new)  // not conformant because upper bound 1 cannot be bound to a collection and vice versa
+		Minimizer<finalstates_fsmT>.new.minimizeAll(finalstates_fsmT.new)
+		Minimizer<composite_fsmT>.new.minimizeAll(composite_fsmT.new)
+    end
+}

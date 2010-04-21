@@ -1,0 +1,45 @@
+
+package virtualTypeInheritance_test;
+
+require kermeta
+
+using kermeta::standard
+
+package base {
+	abstract class Exp {
+		operation accept(v : Visitor) : Integer is abstract
+	}
+	class Num inherits Exp {
+		attribute val : Integer
+		method accept(v : Visitor) : Integer is
+		do
+			result := v.visitNum(self)
+		end
+	}
+	abstract class Visitor { 
+		operation visitNum(n : Num) : Integer is abstract
+	}
+}
+modeltype baseT { base::Exp, base::Num, base::Visitor }
+
+class BaseEval<MT : baseT> inherits MT::Visitor {
+
+	operation evaluate(e : MT::Exp) : Integer is
+	do
+		result := e.accept(self)
+	end
+	
+	operation visitNum(n : MT::Num) : Integer is
+	do
+		result := n.val
+	end
+}
+
+class Main {
+	operation main() : Void is
+	do
+		var num : base::Num init base::Num.new
+		num.val := 3
+		stdio.writeln(BaseEval<baseT>.evaluate(num).toString)
+	end
+}

@@ -1,0 +1,18 @@
+/* $Id: $
+ * Creation date: February 18, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package ~Void;
+
+require kermeta
+
+using kermeta::standard
+
+class GenericClass<ReturnType, ParamType>
+{
+	operation test(p : ParamType) : ReturnType is
+		abstract
+}

@@ -1,0 +1,83 @@
+/* $Id: 025_weaving_in_kermeta_aspect1.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $ */
+// checks various syntax/type problem with aspect
+// in this sample we always declare the base first ...
+
+// Type checking on simple control stucts
+@mainClass "weavingtest::Main"
+@mainOperation "main"
+package weavingtest;
+
+require kermeta
+require "025_weaving_in_kermeta_aspect1/025_weaving_in_kermeta_aspect1_baseClass.kmt"
+
+
+@aspect "true"
+@anothertag "othertagvalue"
+class A {
+	
+
+}
+
+@aspect "true"
+class B inherits C{}
+
+
+@aspect "true"
+class C {
+
+	inv myinv is true
+	operation test1(param : A) : Void is do
+		a == b
+		a == d
+	end
+	
+	operation test0(param : A) : Void 
+	pre mypre is true
+	post mypost is true
+	is abstract
+		
+	attribute a : A
+	attribute c : A
+	attribute d : B
+	
+	operation returnInteger() : kermeta::standard::Integer is do
+		result := 0
+	end
+	
+	operation overload1() : Void 
+	pre mypre is true
+	is do
+		//overload the base version
+		stdio.writeln("overload the base version")
+	end
+	
+	@overloadable "true" 
+	operation overload2() : Void 
+	pre mypre is true
+	is do
+		//overload the base versions
+		stdio.writeln("overload the base version")
+		
+		assertTrueWithMsg(false,"overload2 from aspect shouldn't overload the base !")
+	end
+
+}
+
+@aspect "false"
+class D{
+}
+
+
+class Main{
+	operation main() : Void is do
+		var aC : C init C.new
+		var aA : A init A.new
+		stdio.writeln(aC.returnInteger.toString)
+		stdio.writeln(aC.returnString)		
+		aC.test0(aA)
+		aC.overload1
+		aC.overload2
+	end
+}
+/* END OF FILE */
+

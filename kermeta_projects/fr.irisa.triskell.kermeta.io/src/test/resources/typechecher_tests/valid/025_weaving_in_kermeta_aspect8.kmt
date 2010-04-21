@@ -1,0 +1,21 @@
+/* $Id: 025_weaving_in_kermeta_aspect8.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $ */
+
+// Type checking of kermeta weavinf
+
+package weavinginvalidtest7;
+
+require kermeta
+require "025_weaving_in_kermeta_aspect8/025_weaving_in_kermeta_aspect8_baseClass.kmt"
+
+using kermeta::standard
+
+
+@aspect "true"
+class A {
+	operation amethod() : A[0..*] is do
+		result := OrderedSet<A>.new
+	end
+
+}
+
+/* END OF FILE */

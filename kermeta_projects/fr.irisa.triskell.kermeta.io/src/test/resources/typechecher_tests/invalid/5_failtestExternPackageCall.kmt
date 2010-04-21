@@ -1,0 +1,13 @@
+package testExternPackage;
+
+//require "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km" 
+require kermeta
+ 
+// operation called in another package
+// This test fails because : 
+// -> class Integer is not resolved 
+class Test_opcall {
+    operation operation_asg() : Integer is do
+        result := 4 * 3
+    end
+}

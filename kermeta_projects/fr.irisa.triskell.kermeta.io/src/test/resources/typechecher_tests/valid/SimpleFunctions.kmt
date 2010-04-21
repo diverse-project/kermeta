@@ -1,0 +1,104 @@
+/* $Id: SimpleFunctions.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $ */
+
+// Some simple lambda expressions
+
+package SimpleFunction;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::language::structure
+
+class IntegerIterator {
+	
+	attribute max : Integer
+	
+	operation times( body : <Integer -> Object> ) is do
+	
+		from var i : Integer init 0
+		until i == max
+		loop
+			body(i)
+		end
+	
+	end
+	
+}
+
+class A {}
+class B inherits A {}
+
+class Test {
+
+	operation test1() : Void is do
+		it := IntegerIterator.new
+		it.max := 10
+		var res : Integer
+		it.times { i | res * i }
+	end
+
+	operation test2() : Void is do
+		var fact : < Integer -> Integer >
+		fact := function { k : Integer | if k == 1 then k * fact(k-1) 3 else 1 end }
+		fact(12)
+		it.times(fact)
+	end
+	
+	operation test21() : Void is do
+		var fact : < Integer -> Integer >
+		fact := function { k: Integer | if k == 1 then k * fact(k-1)	else 1 end }
+		fact
+		it.times(fact)
+	end
+	
+	operation test22() : Void is do
+		var fact : < [Integer, Integer] -> Integer >
+		fact := function { j:Integer,  k : Integer | if k == 1 then j * fact(k-1, 2) 3 else 1 end }
+		fact(12, 3)
+	end
+	
+	operation test3() : Void is do
+		var f1 : <B->A>
+		var f2 : <A->B>
+		
+		f1 := f2
+		a := f2(a)
+		b := f2(a)
+		
+	end
+	
+	operation test4() : Void is do
+		var la : seq A[*] init Sequence<A>.new 
+		la := la.~select{ ma | ma == a}
+	end
+	
+	operation test5() : Void is do
+		var sort : < [<A -> Integer>, Collection<A>] -> Collection<A> >
+		var criterion : <A -> Integer>
+		
+		a := sort(criterion, la).one
+		
+		a := sort(function{ o : Object | 8}, la).one
+		
+	end
+	
+	operation test6() : Void is do
+		var myclassdef : ClassDefinition
+		var names : Collection<String>
+		
+		myclassdef ?= self.getMetaClass.typeDefinition
+		names := myclassdef.ownedOperation
+					.~select{ op | op.name.indexOf("test") == 0}
+					.collect{ op | op.name }
+	end
+
+	reference a : A
+	reference b : B
+	
+	reference la : A[1..*]
+	
+	attribute it : IntegerIterator
+
+}
+
+/* END OF FILE */

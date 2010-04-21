@@ -1,0 +1,32 @@
+package r;
+require kermeta
+using kermeta::standard
+class C2bis inherits C1, C1bis {
+	/*
+	 * c
+	 *      
+	 */
+	 
+	method op2() is do
+	end
+	
+	
+	
+}
+
+class C1
+{
+	operation op1(a:Integer,b:String) is do
+	end
+
+	operation op2() is do
+	end
+
+}
+
+
+class C1bis
+{
+	operation op2() is do
+	end
+}

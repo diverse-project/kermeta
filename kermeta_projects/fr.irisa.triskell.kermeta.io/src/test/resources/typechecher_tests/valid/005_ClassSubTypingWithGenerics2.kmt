@@ -1,0 +1,38 @@
+/* $Id: 005_ClassSubTypingWithGenerics2.kmt,v 1.1 2008-11-25 10:15:18 dvojtise Exp $ 
+ * Creation : November 25, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ * Test for bug #6882
+ */
+@mainClass "test::io::generics::ClassSubTypingWithGenericsTest"
+@mainOperation "mainTest"
+
+
+package test::io::generics;
+
+
+require kermeta
+using kermeta::standard
+
+class ClassSubTypingWithGenericsTest inherits kermeta::kunit::TestCase
+{
+	operation mainTest() : Void is do 
+		
+		var g: Generic<Integer> init Generic<Integer>.new
+        g.test() // ok, of course
+        var b: Base //init g // not ok...
+		b := g // Bug #6882 not ok...
+		g ?= b
+		b ?= g
+	end
+}
+
+class Base {
+    operation test() : Void is do
+    	stdio.writeln("Do something")
+    end
+}
+
+class Generic<C> inherits Base { }

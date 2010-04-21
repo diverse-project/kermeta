@@ -1,0 +1,23 @@
+/* $Id: 026_weaving_in_kermeta_mixed_base_aspect.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+ * Creation date: February 8, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ * checks that the order of declaraion of base and aspect classes doesn't really matter if there is no conflict
+ */
+
+
+package root_package;
+
+
+require kermeta
+
+require "026_weaving_in_kermeta_mixed/026_weaving_in_kermeta_mixed_baseClass.kmt"
+require "026_weaving_in_kermeta_mixed/026_weaving_in_kermeta_mixed_aspect.kmt"
+
+@aspect "true"
+class Main
+{
+	operation main2() : Void is do 
+	end
+}

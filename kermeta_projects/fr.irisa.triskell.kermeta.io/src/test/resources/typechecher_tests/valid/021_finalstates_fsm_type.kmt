@@ -1,0 +1,43 @@
+/* $Id: 021_finalstates_fsm_type.kmt,v 1.2 2008-02-14 07:13:28 uid21732 Exp $
+ * Creation date: November 10, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package fsm;
+
+
+require kermeta
+using kermeta::standard
+
+package finalstates_fsm {
+
+  class FSM {
+    attribute alphabet : set String[0..*]
+    attribute ownedState : set State[0..*]#owningFSM
+    attribute ownedTransition : set Transition[0..*]
+    reference initialState : State
+    reference finalState : set State[0..*]
+  }
+
+  class State {
+  	attribute name : String
+  	reference owningFSM : FSM#ownedState
+  	reference incomingTransition : Transition[0..*]#target
+  	reference outgoingTransition : Transition[0..*]#source
+  }
+
+  class Transition {
+    attribute input : String
+    attribute output : String
+    reference source : State#outgoingTransition
+    reference target : State#incomingTransition
+  }
+
+  class FinalState inherits State { }
+
+}
+
+modeltype finalstates_fsmT { finalstates_fsm::FSM, finalstates_fsm::State,
+                       finalstates_fsm::Transition, finalstates_fsm::FinalState }

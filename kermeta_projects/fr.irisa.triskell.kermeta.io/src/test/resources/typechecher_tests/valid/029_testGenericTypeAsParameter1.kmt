@@ -1,0 +1,23 @@
+/* $Id: 029_testGenericTypeAsParameter1.kmt,v 1.2 2008-11-26 10:00:46 cfaucher Exp $
+ * Creation : November 26, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cfaucher
+ */
+
+package testGenericTypeAsParameter1;
+
+
+require kermeta
+
+using kermeta::standard
+
+
+class GenericClass<C> {
+	
+    operation testOperation1(o: C) is do end
+        
+    operation testOperation2(o: GenericClass<C>) is do end
+    
+}

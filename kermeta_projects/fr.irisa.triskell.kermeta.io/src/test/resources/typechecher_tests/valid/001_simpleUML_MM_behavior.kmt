@@ -1,0 +1,45 @@
+package simpleUML_MM;
+
+require kermeta
+require "001_simpleUML_MM.ecore"
+
+using kermeta
+using kermeta::standard
+
+@aspect "true"
+class Class
+{
+	// Operational semantic
+	operation allParents() : Class[0..*] is
+		do
+			result := getParentsRecursive(self.container.asType(ClassModel).classifier.select{clr | Class.isInstance(clr)}.size)	
+		end
+	/**
+	 * getParentRecuresive returns all the Class which are the parent of self.
+	 * nbmax_recursion is an Integer used to have a limit in the number of recursion because there is a risk of loop. A class can be its own parent.
+	 * nbmax_recursion is fixed depending on the risk of loop, here the nb_max_recursion is initialized with the number of class in the model
+	 */
+	operation getParentsRecursive(nbmax_recursion : Integer) : Class[0..*] is
+		do
+			result := OrderedSet<Class>.new
+			if(self.parent != void)
+			then
+				result.add(self.parent)
+				if(nbmax_recursion > 0)
+				then
+					nbmax_recursion := nbmax_recursion-1
+					result.addAll(self.parent.getParentsRecursive(nbmax_recursion))
+				end
+			end
+		end
+		
+		
+	operation allAttributes() : Attribute[0..*] is
+		do
+			result := OrderedSet<Attribute>.new
+			result.addAll(self.attrs)
+			var parent_classes : OrderedSet<Class> init allParents()
+			
+			parent_classes.collect{pc|pc.attrs}.each{set_attrs|result.addAll(set_attrs)}
+		end
+}

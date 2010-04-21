@@ -1,0 +1,81 @@
+/* $Id: 024_mt_property_order.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+ * Creation date: November 10, 2006
+ * License: EPL
+ * Authors:
+ * 		Didier Vojtisek
+ * Description:
+ *		This verifies the various possibilities about property order  (ie. set, ordered set, bag etc)
+ */
+
+
+package mt_property_order;
+
+
+require kermeta
+using kermeta::standard
+
+// ---------------------
+package mStandard {
+  class A {
+    reference aB : B[0..*]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype mStandardT { mStandard::A, mStandard::B }
+class NeedsMStandard<MT : mStandardT> { }
+
+// ---------------------
+package mSet {
+  class A {
+    reference aB : set B[0..*]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype mSetT { mSet::A, mSet::B }
+class NeedsMSet<MT : mSetT> { }
+
+// ---------------------
+package mOSet {
+  class A {
+    reference aB : oset B[0..*]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype mOSetT { mOSet::A, mOSet::B }
+class NeedsMOSet<MT : mOSetT> { }
+
+
+// ---------------------
+package mSeq {
+  class A {
+    reference aB : seq B[0..*]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype mSeqT { mSeq::A, mSeq::B }
+class NeedsMSeq<MT : mSeqT> { }
+
+// ---------------------
+package mBag {
+  class A {
+    reference aB : bag B[0..*]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+modeltype mBagT { mBag::A, mBag::B }
+class NeedsMBag<MT : mBagT> { }

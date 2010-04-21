@@ -1,0 +1,107 @@
+/* $Id: 022_mt_multiplicity_valid_tests.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+ * Creation date: November 10, 2006
+ * License: EPL
+ * Authors:
+ * 	Didier Vojtisek
+ * Description:
+ *		This verifies the various possibilities about reference multiplicities
+ */
+@mainClass "mt_multiplicity::Tester"
+@mainOperation "test"
+
+
+package mt_multiplicity;
+
+
+require kermeta
+require "022_mt_multiplicity.kmt"
+using kermeta::standard
+
+class Tester{
+	operation test() : Void is do end
+	operation testNeedsM0_1() : Void is do
+		NeedsM0_1<m0_1T>.new
+		//NeedsM0_1<m0T>.new		invalid, must be checked in the invalid testsuite
+		NeedsM0_1<m1T>.new
+		//NeedsM0_1<m0_nT>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM0_1<m0_2T>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM0_1<m1_nT>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM0_1<m1_2T>.new 	invalid, must be checked in the invalid testsuite
+		//NeedsM0_1<m0_3T>.new	invalid, must be checked in the invalid testsuite
+	end
+	operation testNeedsM0() : Void is do
+		NeedsM0<m0_1T>.new
+		NeedsM0<m0T>.new
+		NeedsM0<m1T>.new
+		NeedsM0<m0_nT>.new
+		NeedsM0<m0_2T>.new
+		NeedsM0<m1_nT>.new
+		NeedsM0<m1_2T>.new
+		NeedsM0<m0_3T>.new
+	end
+	
+	operation testNeedsM1() : Void is do
+		//NeedsM1<m0_1T>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM1<m0T>.new	invalid, must be checked in the invalid testsuite
+		NeedsM1<m1T>.new
+		//NeedsM1<m0_nT>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM1<m0_2T>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM1<m1_nT>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM1<m1_2T>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM1<m0_3T>.new		invalid, must be checked in the invalid testsuite
+	end
+	operation testNeedsM0_n() : Void is do
+		//NeedsM0_n<m0_1T>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM0_n<m0T>.new		invalid, must be checked in the invalid testsuite
+		//NeedsM0_n<m1T>.new		invalid, must be checked in the invalid testsuite
+		NeedsM0_n<m0_nT>.new
+		NeedsM0_n<m0_2T>.new
+		NeedsM0_n<m1_nT>.new
+		NeedsM0_n<m1_2T>.new
+		NeedsM0_n<m0_3T>.new
+	end
+	
+	operation testNeedsM0_2() : Void is do
+		//NeedsM0_2<m0_1T>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM0_2<m0T>.new		invalid, must be checked in the invalid testsuite
+		//NeedsM0_2<m1T>.new		invalid, must be checked in the invalid testsuite
+		//NeedsM0_2<m0_nT>.new	invalid, must be checked in the invalid testsuite
+		NeedsM0_2<m0_2T>.new
+		//NeedsM0_2<m1_nT>.new	invalid, must be checked in the invalid testsuite
+		NeedsM0_2<m1_2T>.new
+		//NeedsM0_2<m0_3T>.new	invalid, must be checked in the invalid testsuite
+	end
+	operation testNeedsM1_n() : Void is do
+		//NeedsM1_n<m0_1T>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM1_n<m0T>.new		invalid, must be checked in the invalid testsuite
+		//NeedsM1_n<m1T>.new		invalid, must be checked in the invalid testsuite
+		//NeedsM1_n<m0_nT>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM1_n<m0_2T>.new	invalid, must be checked in the invalid testsuite
+		NeedsM1_n<m1_nT>.new
+		NeedsM1_n<m1_2T>.new
+		//NeedsM1_n<m0_3T>.new	invalid, must be checked in the invalid testsuite
+	end
+	
+	operation testNeedsM1_2() : Void is do
+		//NeedsM1_2<m0_1T>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM1_2<m0T>.new		invalid, must be checked in the invalid testsuite
+		//NeedsM1_2<m1T>.new		invalid, must be checked in the invalid testsuite
+		//NeedsM1_2<m0_nT>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM1_2<m0_2T>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM1_2<m1_nT>.new	invalid, must be checked in the invalid testsuite
+		NeedsM1_2<m1_2T>.new
+		//NeedsM1_2<m0_3T>.new	invalid, must be checked in the invalid testsuite
+	end
+	
+	operation testNeedsM0_3() : Void is do
+		//NeedsM0_3<m0_1T>.new	invalid, must be checked in the invalid testsuite
+		//NeedsM0_3<m0T>.new		invalid, must be checked in the invalid testsuite
+		//NeedsM0_3<m1T>.new		invalid, must be checked in the invalid testsuite
+		//NeedsM0_3<m0_nT>.new	invalid, must be checked in the invalid testsuite
+		NeedsM0_3<m0_2T>.new
+		//NeedsM0_3<m1_nT>.new	invalid, must be checked in the invalid testsuite
+		NeedsM0_3<m1_2T>.new
+		NeedsM0_3<m0_3T>.new
+	end
+}
+  

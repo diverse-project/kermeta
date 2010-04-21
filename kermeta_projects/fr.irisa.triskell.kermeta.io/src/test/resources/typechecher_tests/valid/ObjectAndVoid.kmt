@@ -1,0 +1,72 @@
+/* $Id: ObjectAndVoid.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $ */
+
+//Test special types Object and Void
+
+package toto;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::language::structure
+
+
+class A {
+
+	operation op1() : Void is do end
+	
+	operation op2() is do end
+	
+	operation op3() : Object is do 
+		result := void
+	end
+	
+	operation op4( o : Object) is do end 
+
+}
+
+
+
+class Test {
+
+	attribute a : A
+	
+	attribute o : Object
+	
+	attribute v : Void 
+	
+	operation test1() is do
+		o := a.op1
+	end
+	
+	operation test2() is do
+		o := a.op2
+	end
+	
+	operation test3() is do
+		v := a.op1
+	end
+	
+	operation test4() is do
+		v := a.op2
+	end
+	
+	operation test5() is do
+		o := a.op3
+	end
+
+	operation test6() is do
+		o := a.op4(a.op1)
+	end
+	
+	operation test7() is do
+		o := a.op4(a.op2)
+	end
+	
+	operation test8() is do
+		v := a.op4(void)
+	end
+
+}
+
+/* END OF FILE */

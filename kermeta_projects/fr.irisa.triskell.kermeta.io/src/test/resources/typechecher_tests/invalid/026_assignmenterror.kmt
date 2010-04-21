@@ -1,0 +1,18 @@
+package assignmenterror_026;
+
+require kermeta
+using kermeta::standard
+
+/* this test is for bug #2182 */
+class Main {
+
+	operation main() is do
+		var elt: ModelElement init ModelElement.new
+		elt.nome := "Coucou" // must raise an error here
+	end
+}
+
+
+class ModelElement {
+	attribute name : String
+}

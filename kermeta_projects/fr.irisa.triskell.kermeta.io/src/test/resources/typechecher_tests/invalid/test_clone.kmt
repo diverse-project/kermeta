@@ -1,0 +1,57 @@
+@mainClass "test::Main"
+@mainOperation "main"
+
+
+package test;
+
+
+require kermeta
+
+
+
+class B {}
+
+class C inherits B 
+{}
+
+abstract class D  {}
+
+class E inherits D 
+{}
+
+class A {
+
+	attribute b : B
+	
+	reference b2 : B
+}
+
+class Main
+{
+    operation main() : Void is do 
+    	stdio.writeln("starting test")
+    	
+    	var b1 : B init B.new
+    	var b2 : B init B.new
+    	
+    	var a1 : A init A.new
+    	a1.b := b1
+    	a1.b2 := b2
+    	
+    	// The attribute has a wrong type
+    	var a2 : A init A.clone(b1)
+    	//var a3 : A init A.clone(a1)
+    	
+    	// Test clone with inheritance 
+    	var c1 : C init C.new
+    	var c2 : C init C.clone(b2) // wrong parameter type
+    	//var b3 : B init B.clone(c1)
+    	
+    	// Test clone on an abstract class
+    	var d2 : D init E.new
+    	var d1 : D init D.clone(d2)
+    	
+    	stdio.writeln("starting test")
+    	
+    end
+}

@@ -1,0 +1,21 @@
+/* $Id: 027_weaving_in_kermeta_aspect1.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+ * Creation date: February 8, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ * checks that we can create an aspects that redefines the inheritance (must not complain about double inheritance of A)
+ */
+
+package root_package;
+
+
+require kermeta
+require "027_weaving_in_kermeta_aspect1/027_weaving_in_kermeta_base.kmt"
+
+@aspect "true"
+class Main inherits A
+{
+	operation main1() : Void is do 
+	end
+}
+

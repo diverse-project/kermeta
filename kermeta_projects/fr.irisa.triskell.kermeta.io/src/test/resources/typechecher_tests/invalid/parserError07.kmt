@@ -1,0 +1,29 @@
+/* $Id: parserError07.kmt,v 1.2 2008-04-14 09:25:33 dvojtise Exp $
+ * Creation date: January 10, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ *  the parser must fail on that file
+ * see bug #4768
+ * introduce a parser error  between usings
+ */
+
+
+
+
+package root_package;
+
+
+
+
+require kermeta
+
+using kermeta::language::structure
+ggg
+using kermeta::standard
+
+class Main 
+{
+	operation main () : Void is do 
+	end
+}
