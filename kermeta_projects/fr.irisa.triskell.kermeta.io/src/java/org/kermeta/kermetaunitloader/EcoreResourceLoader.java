@@ -4,7 +4,7 @@
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 22 févr. 2010
+* Creation date : 22 fÃ©vr. 2010
 * Authors : Didier Vojtisek
 */
 
@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.cachemanager.KermetaUnitStore;
-import org.kermeta.kermetaunitloader.AbstractLoader.CommandStep;
 import org.kermeta.kermetaunitloader.core.EmptyKermetaUnitBuilder;
 import org.kermeta.kermetaunitloader.core.ReportUsingError;
 import org.kermeta.kermetaunitloader.core.RequireResolver;
@@ -43,7 +42,6 @@ import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.Ecore2KMPass1;
 import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.Ecore2KMPass2;
 import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.Ecore2KMPass3;
 import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.Ecore2KMPass6;
-import fr.irisa.triskell.kermeta.loader.ecore.ecore2km.EcoreBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.KMTBuildingState;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;

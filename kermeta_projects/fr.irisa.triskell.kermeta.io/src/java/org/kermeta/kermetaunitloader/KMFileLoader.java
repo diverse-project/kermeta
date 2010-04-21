@@ -4,7 +4,7 @@
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 22 févr. 2010
+* Creation date : 22 fÃ©vr. 2010
 * Authors : Didier Vojtisek
 */
 
@@ -12,15 +12,12 @@ package org.kermeta.kermetaunitloader;
 
 import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -30,12 +27,8 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.cachemanager.KermetaUnitStore;
 import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.kermetaunitloader.AbstractLoader.CommandStep;
 import org.kermeta.kermetaunitloader.core.EmptyKermetaUnitBuilder;
-import org.kermeta.kermetaunitloader.core.RequireResolver;
-import org.kermeta.kermetaunitloader.kmt.KmtAst2KMStructure;
 import org.kermeta.loader.LoadingOptions;
-import org.kermeta.model.KermetaModelHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +38,6 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;

@@ -4,7 +4,7 @@
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 27 août 07
+* Creation date : 27 aoÃ»t 07
 * Authors : cfaucher <cfaucher@irisa.fr>
 */
 
