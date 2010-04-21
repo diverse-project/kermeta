@@ -8,11 +8,11 @@
 	<build>
 		<resources>
 			<resource>
-				<targetPath>../target/filtered-sources/java</targetPath>
+				<targetPath>../../target/filtered-sources/java</targetPath>
 				<directory>src/java</directory>
 			</resource>
 			<resource>
-				<targetPath>../target/filtered-sources/java</targetPath>
+				<targetPath>../../target/filtered-sources/java</targetPath>
 				<directory>build/java</directory>
 			</resource>
 		</resources>
