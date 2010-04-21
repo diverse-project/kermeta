@@ -7,8 +7,9 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait LambdaParameterAspect extends RichAspectImplicit with ObjectAspect {
+trait LambdaParameterAspect extends ObjectAspect {
 	
 	implicit def rich (xs : LambdaParameterAspect) = xs.asInstanceOf[LambdaParameter]
 	
@@ -16,7 +17,7 @@ trait LambdaParameterAspect extends RichAspectImplicit with ObjectAspect {
 		res.append(this.getName())
 		if(this.getType() != null) {
 			res.append(" : ")
-			this.getType().generateScalaCode(res)
+			this.getType().asInstanceOf[ObjectAspect].generateScalaCode(res)
 		}
 	}
 }

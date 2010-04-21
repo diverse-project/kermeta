@@ -8,8 +8,9 @@ import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
 import org.eclipse.emf.ecore.EObject
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait CallSuperOperationAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
+trait CallSuperOperationAspect extends ObjectAspect with LogAspect {
 	
   override def generateScalaCode(res : StringBuilder) : Unit = {
     log.debug("CallSuperOperation={}",this.getName())

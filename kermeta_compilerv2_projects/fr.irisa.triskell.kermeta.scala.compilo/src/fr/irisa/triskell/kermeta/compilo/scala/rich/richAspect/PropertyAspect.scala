@@ -7,8 +7,9 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait PropertyAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
+trait PropertyAspect extends ObjectAspect with LogAspect {
 	
 	
 	

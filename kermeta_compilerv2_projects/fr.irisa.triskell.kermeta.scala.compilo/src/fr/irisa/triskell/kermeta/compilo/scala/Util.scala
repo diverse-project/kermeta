@@ -17,10 +17,11 @@ import java.util._
 import scala.collection.JavaConversions._
 import java.util.concurrent.Executors
 import java.util.concurrent.ExecutorService
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
 import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
 
-object Util extends LogAspect with RichAspectImplicit  {
+object Util extends LogAspect {
     /**
      * Check if a model element has an Ecore Tag
      * @param obj model element to test
@@ -87,7 +88,7 @@ object Util extends LogAspect with RichAspectImplicit  {
                 if(!ctx.isFirst){ returnString.append(".") }
                 if(badChar.exists({p=>e.contains(p)}) || keywords.exists(p => p.equals(e))){
                     returnString append "`"+e+"`"
-                    log.info("Reserved Scala Keyword : {}, backquote protection : ",e)
+                    log.debug("Reserved Scala Keyword : {}, backquote protection : ",e)
                 } else {
                     returnString append e
                 }
@@ -190,16 +191,16 @@ object Util extends LogAspect with RichAspectImplicit  {
         if(GlobalConfiguration.props.getProperty("use.default.aspect.ecore")==true){
             hasToGenerate && !packQualifiedName.startsWith("org.eclipse.emf")
         }
-        if(!hasToGenerate){ log.info("Exclude compilation package |"+packQualifiedName) }
+        if(!hasToGenerate){ log.debug("Exclude compilation package |"+packQualifiedName) }
         return hasToGenerate
     }
 
 
     def getQualifiedNamedAspect(typD : GenericTypeDefinition) : String = {
-        var baseName : String = typD.getQualifiedNameCompilo
+        var baseName = typD.asInstanceOf[ObjectAspect].getQualifiedNameCompilo
 
         //if(baseName.equals("org.eclipse.emf.ecore.ENamedElementAspect")){
-        log.info(baseName+" - "+Util.hasEcoreTag(typD)+" - "+Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object]))
+        log.debug(baseName+" - "+Util.hasEcoreTag(typD)+" - "+Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object]))
         //}
 
         baseName = baseName match {
@@ -212,7 +213,7 @@ object Util extends LogAspect with RichAspectImplicit  {
     }
 
     def getQualifiedNamedBase(typD : GenericTypeDefinition) : String = {
-        var baseName : String = typD.getQualifiedNameCompilo
+        var baseName = typD.asInstanceOf[ObjectAspect].getQualifiedNameCompilo
         baseName = baseName match {
             case _ if(!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[Object])) => { GlobalConfiguration.scalaAspectPrefix+"."+baseName }
             case _ => { baseName }

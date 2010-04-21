@@ -7,8 +7,9 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait DataTypeAspect extends RichAspectImplicit with ObjectAspect {
+trait DataTypeAspect extends ObjectAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
            // println("passe pa la " + this.getName)

@@ -14,8 +14,9 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.Executors
 import java.io.File
 import java.util.concurrent.ExecutorService
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-class Compiler extends RichAspectImplicit with LogAspect {
+class Compiler extends LogAspect {
 
     def compile(url : String){
         log.debug("Cleaning Output Step")
@@ -28,7 +29,7 @@ class Compiler extends RichAspectImplicit with LogAspect {
 
         /* Loading Model KM Step */
         var startTime = System.currentTimeMillis
-        var v : ModelingUnit = t.loadKM(url) /* Load KM Model */
+        var v : IVisitable = t.loadKM(url).asInstanceOf[IVisitable] /* Load KM Model */
 
         println(GlobalConfiguration.outputFolder)
         var fi  = new File(url);
@@ -43,7 +44,7 @@ class Compiler extends RichAspectImplicit with LogAspect {
         fo.createNewFile
         ReflexivityLoader.copyFile(fi, fo);
         var midTime= System.currentTimeMillis() - startTime
-        log.error("Loading KM model step complete in "+(midTime)+" millisecondes ")
+        log.info("Loading KM model step complete in "+(midTime)+" millisecondes ")
         startTime = System.currentTimeMillis
         /* Target Model Aspect Generation */
         var visitorAspect = new ScalaAspectVisitor
@@ -59,7 +60,7 @@ class Compiler extends RichAspectImplicit with LogAspect {
         Util.threadExecutor.awaitTermination(600,TimeUnit.SECONDS) /* Waiting for all tasks finished */
         /* End step */
         var endTime= System.currentTimeMillis() - startTime
-        log.error("Compilation step complete in "+(endTime)+" millisecondes ")
+        log.info("Compilation step complete in "+(endTime)+" millisecondes ")
     }
 
 }

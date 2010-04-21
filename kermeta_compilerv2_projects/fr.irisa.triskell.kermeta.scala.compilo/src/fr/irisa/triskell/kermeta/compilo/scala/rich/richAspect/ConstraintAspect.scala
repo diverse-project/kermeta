@@ -6,8 +6,9 @@ import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait ConstraintAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
+trait ConstraintAspect extends ObjectAspect with LogAspect {
 	
 	override def generateScalaCode(res : StringBuilder) : Unit = {
 		log.debug("Generate Constraint {}",this.getName)

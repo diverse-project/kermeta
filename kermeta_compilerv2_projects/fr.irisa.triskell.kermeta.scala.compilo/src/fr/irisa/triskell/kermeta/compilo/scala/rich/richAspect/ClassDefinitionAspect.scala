@@ -3,18 +3,16 @@ package fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
 import kermeta.utils.ReflexivityLoader
 import org.antlr.stringtemplate.StringTemplate
-import org.antlr.stringtemplate.StringTemplateGroup
 import org.eclipse.emf.common.util.EList
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.impl.EObjectImpl
 import scala.collection.JavaConversions._
 import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IVisitable {
+trait ClassDefinitionAspect extends ObjectAspect with IVisitable {
 	
     override def accept(visitor : IVisitor){
         visitor.visit(this)
@@ -151,7 +149,7 @@ trait ClassDefinitionAspect extends RichAspectImplicit with ObjectAspect with IV
 
     def generategetQualifiedName(res:StringBuilder) = {
         var qualifiedName = ReflexivityLoader.qualifiedName(this)
-        var template = new StringTemplate("override def getMetaClass():fr.irisa.triskell.kermeta.language.structure.Class={\n var cd : fr.irisa.triskell.kermeta.language.structure.ClassDefinition =   kermeta.utils.ReflexivityLoader.getMetaClass(\"$ClassName$\"); \n         if (cd !=null){ \n var cl = ScalaAspect.fr.irisa.triskell.kermeta.language.structure. RichFactory.createClass \n cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
+        var template = new StringTemplate("override def getMetaClass():fr.irisa.triskell.kermeta.language.structure.Class={\n var cd : fr.irisa.triskell.kermeta.language.structure.ClassDefinition =   kermeta.utils.ReflexivityLoader.getMetaClass(\"$ClassName$\"); \n         if (cd !=null){ \n var cl = ScalaAspect.fr.irisa.triskell.kermeta.language.structure.RichFactory.createClass \n cl.setTypeDefinition(cd) \n return cl \n }else \n return null; \n }\n")
         template.setAttribute("ClassName", qualifiedName)
         res.append(template.toString)
     }

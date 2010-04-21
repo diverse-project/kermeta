@@ -7,8 +7,9 @@ import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
  
-trait PrimitiveTypeAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
+trait PrimitiveTypeAspect extends ObjectAspect with LogAspect {
 	
     implicit def rich (xs : PrimitiveTypeAspect) = xs.asInstanceOf[PrimitiveType]
 
@@ -53,10 +54,10 @@ trait PrimitiveTypeAspect extends RichAspectImplicit with ObjectAspect with LogA
 			
         }else{
             if (this.getInstanceType !=null){
-                this.getInstanceType.generateScalaCode(res)
+                this.getInstanceType.asInstanceOf[ObjectAspect].generateScalaCode(res)
             }
             else
-                res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[Package].getQualifiedName)+"."+this.getName())
+                res.append(kermeta.utils.TypeEquivalence.getPackageEquivalence(this.eContainer().asInstanceOf[PackageAspect].getQualifiedName)+"."+this.getName())
         }
 
 		

@@ -1,5 +1,8 @@
+
 package fr.irisa.triskell.kermeta.compilo.scala.visitor.impl
 
+
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 import fr.irisa.triskell.kermeta.compilo.scala.rich._
 import fr.irisa.triskell.kermeta.compilo.scala.rich.richAspect._
 import org.antlr.stringtemplate.StringTemplate
@@ -11,7 +14,7 @@ import fr.irisa.triskell.kermeta.language.behavior._
 import fr.irisa.triskell.kermeta.compilo.scala.visitor._
 
 
-class ScalaFactoryAndImplicitVisitor extends IVisitor with RichAspectImplicit with LogAspect {
+class ScalaFactoryAndImplicitVisitor extends IVisitor with LogAspect {
 
   
     var viewDef : StringBuilder = _

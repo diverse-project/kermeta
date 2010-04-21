@@ -36,6 +36,7 @@ object EmbeddedMavenHelper {
         if(exec){
             goals.add("scala:run")
         }
+
     
         var project = POMGeneratorHelper.initProject(standalone,additionalClasspath)
         var rootDirectory = new java.io.File(GlobalConfiguration.outputProject);

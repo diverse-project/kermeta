@@ -6,8 +6,9 @@ import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait AssignmentAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
+trait AssignmentAspect extends ObjectAspect with LogAspect {
     this : Assignment =>
     override def generateScalaCode(res : StringBuilder) : Unit = {
         log.debug("Assignment={}",this.toString)

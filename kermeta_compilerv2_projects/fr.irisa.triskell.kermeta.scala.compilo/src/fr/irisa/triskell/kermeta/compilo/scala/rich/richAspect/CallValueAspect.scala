@@ -7,8 +7,9 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait CallValueAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
+trait CallValueAspect extends ObjectAspect with LogAspect {
 
     override def generateScalaCode(res : StringBuilder) : Unit = {
         log.debug("CallValue={}",this.getName())

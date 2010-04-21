@@ -7,8 +7,9 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait ClassAspect extends RichAspectImplicit with TypeAspect with ObjectAspect with LogAspect {
+trait ClassAspect extends TypeAspect with ObjectAspect with LogAspect {
 
     override def generateScalaCode(res : StringBuilder) : Unit = {
         /*var pack : String = this.getTypeDefinition().eContainer().asInstanceOf[Package].getQualifiedName
@@ -65,7 +66,11 @@ trait ClassAspect extends RichAspectImplicit with TypeAspect with ObjectAspect w
 	
     override def getQualifiedNameCompilo():String ={
         var res = new StringBuilder
-        res.append(Util.protectScalaKeyword(Util.getQualifiedNamedBase(this.getTypeDefinition)))
+        var typename = Util.protectScalaKeyword(Util.getQualifiedNamedBase(this.getTypeDefinition))
+        if(typename.contains(".")) res.append("_root_.")
+        res.append(typename)
+
+
         /*if (this.getTypeParamBinding.size>0){
          var i = 0;
          res.append("[")

@@ -11,8 +11,9 @@ import fr.irisa.triskell.kermeta.compilo.scala._
 import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait JavaStaticCallAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
+trait JavaStaticCallAspect extends ObjectAspect with LogAspect {
 
   override def generateScalaCode(res : StringBuilder) : Unit = {
 

@@ -7,8 +7,9 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 import java.util._
+import fr.irisa.triskell.kermeta.compilo.scala.rich.RichAspectImplicit._
 
-trait UsingAspect extends RichAspectImplicit with ObjectAspect {
+trait UsingAspect extends ObjectAspect {
 	                                                         
 	override def generateScalaCode(res : StringBuilder) = {
 		res.append("\n")

@@ -7,7 +7,7 @@ import fr.irisa.triskell.kermeta.language._
 import fr.irisa.triskell.kermeta.language.structure._ 
 import fr.irisa.triskell.kermeta.language.behavior._
 
-trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspect {
+trait OperationAspect extends ObjectAspect with LogAspect {
 	
   implicit def rich (xs : OperationAspect) = xs.asInstanceOf[Operation]
 
@@ -91,7 +91,7 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
         //this.getType.generateScalaCode(res)
         res.append("]; \n")
 				
-        this.getBody().generateScalaCode(res)
+        this.getBody().asInstanceOf[ObjectAspect].generateScalaCode(res)
         res append " return result\n}\n"
         //this.getType.generateScalaCode(res)
         //res append "]\n}\n"
@@ -169,7 +169,7 @@ trait OperationAspect extends RichAspectImplicit with ObjectAspect with LogAspec
                     && (
                         "fr.irisa.triskell.kermeta.language.structure.Boolean".equals(this.getType().asInstanceOf[PrimitiveTypeAspect].whichBoolean) ||
                         "org.eclipse.emf.ecore.EBoolean".equals(this.getType().asInstanceOf[PrimitiveTypeAspect].whichBoolean) )
-                ) => println("WAZZZZZAAAAA");"Boolean"
+                ) => "Boolean"
         case booleanRegex() => "java.lang.Boolean"
         case _ => t
     }
