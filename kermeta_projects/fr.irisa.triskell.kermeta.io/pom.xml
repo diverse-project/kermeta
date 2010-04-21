@@ -41,7 +41,7 @@
 		</dependency>
 	  	<dependency>
 	  		<groupId>org.kermeta</groupId>
-	  		<artifactId>fr.irisa.triskell.eclipse.util</artifactId>
+	  		<artifactId>fr.irisa.triskell.eclipse.util-NoUI</artifactId>
 	  		<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 	  	</dependency>
@@ -75,7 +75,7 @@
 	  	</dependency>
 	  	<dependency>
 	  		<groupId>org.kermeta</groupId>
-	  		<artifactId>org.eclipse.gymnast.runtime.core-noui</artifactId>
+	  		<artifactId>org.eclipse.gymnast.runtime.core-NoUI</artifactId>
 	  		<version>0.0.1-SNAPSHOT</version>
 	  		<type>jar</type>
 	  		<scope>compile</scope>
@@ -96,7 +96,7 @@
 	  	</dependency>
 	  	<dependency>
 	  		<groupId>org.kermeta</groupId>
-	  		<artifactId>org.eclipse.ecoretools.registration-noui</artifactId>
+	  		<artifactId>org.eclipse.ecoretools.registration-NoUI</artifactId>
 	  		<version>0.0.1-SNAPSHOT</version>
 	  		<type>jar</type>
 	  		<scope>compile</scope>
