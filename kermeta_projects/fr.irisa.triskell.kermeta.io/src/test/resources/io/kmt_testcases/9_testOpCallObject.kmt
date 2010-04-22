@@ -1,0 +1,37 @@
+package testOpCallObject;
+
+require kermeta
+
+
+// Creation of an object
+class MyObject {
+
+	attribute attr1 : kermeta::standard::Integer
+	attribute attr2 : kermeta::standard::Boolean
+
+	operation set_attr1(arg0 : kermeta::standard::Integer) : Void is do
+	
+		attr1 := arg0
+	end
+	
+	operation set_attr2(arg0 : kermeta::standard::Boolean) : Void is do
+
+		attr2 := arg0
+	end
+
+}
+
+class MyObjectCreation {
+
+	operation createMyObject() : MyObject is do
+		var object : MyObject
+		var bool   : kermeta::standard::Boolean
+		var int    : kermeta::standard::Integer
+		bool := true
+		int  := 4
+		object := MyObject.new
+		object.set_attr1(int)
+		object.set_attr2(bool)
+		result := object
+	end
+}

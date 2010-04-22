@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="puzzle">
+  <eClassifiers xsi:type="ecore:EClass" name="Service" abstract="true">
+    <eOperations name="call"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequiredService" eSuperTypes="#//Service">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="provider" upperBound="-1"
+        eType="#//Connector" eOpposite="#//Connector/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customer" lowerBound="1"
+        eType="#//Component" eOpposite="#//Component/requiredService"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProvidedService" eSuperTypes="#//Service">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customer" upperBound="-1"
+        eType="#//Connector" eOpposite="#//Connector/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="provider" lowerBound="1"
+        eType="#//Component" eOpposite="#//Component/providedService"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connector">
+    <eOperations name="deleguate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//ProvidedService"
+        eOpposite="#//ProvidedService/customer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//RequiredService"
+        eOpposite="#//RequiredService/provider"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Component" abstract="true">
+    <eOperations name="execute">
+      <eParameters name="service" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providedService" lowerBound="1"
+        upperBound="-1" eType="#//ProvidedService" containment="true" eOpposite="#//ProvidedService/provider"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredService" upperBound="-1"
+        eType="#//RequiredService" containment="true" eOpposite="#//RequiredService/customer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//CompositeComponent"
+        eOpposite="#//CompositeComponent/subComponent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimtiveComponent" eSuperTypes="#//Component"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeComponent" eSuperTypes="#//Component">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subComponent" lowerBound="1"
+        upperBound="-1" eType="#//Component" containment="true" eOpposite="#//Component/owner"/>
+  </eClassifiers>
+</ecore:EPackage>

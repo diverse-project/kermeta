@@ -1,0 +1,52 @@
+package testConditional;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+
+class Class1 {
+	
+	operation operation1() is do
+		
+		var v1 : Integer init 2
+		var v2 : String init "blah" 
+		
+		if v1 == 2 then
+			v1 := 3
+		else
+			v1 := 0
+		end
+		
+		if true then v2 := "coucou" end
+		
+		var b : Boolean init true
+		
+		if if b then false else true end then
+		end
+		
+	end
+	
+}
+
+class Class2 {
+	operation operation21(s1: String, s2 : String) : String is do
+		 	if s1 == s2 then 
+				  		"same"
+					else
+						"different"
+					end
+	end
+}
+
+package package1 {
+	class Class11 {
+	
+		operation operation111() : Void is do
+		
+		end
+	
+	}
+}

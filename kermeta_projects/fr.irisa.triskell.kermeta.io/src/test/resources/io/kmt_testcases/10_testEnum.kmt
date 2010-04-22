@@ -1,0 +1,36 @@
+package testEnum;
+
+require kermeta
+
+using kermeta::standard
+
+class Test_enum {
+
+	attribute color : Couleur
+	
+	attribute colors : Couleur[*]
+	
+	
+	operation getColor() : Couleur is
+	do
+		result := Couleur.jaune
+	end
+
+    operation setColor(c : Couleur) : Set<Couleur> is do
+    	color := Couleur.rouge
+        result := Set<Couleur>.new
+        colors.add(c)
+        colors.each{ col | 
+        	result.add(col)
+        	color := col
+        }
+    end
+}
+
+
+enumeration Couleur {
+	jaune;
+	bleu;
+	vert;
+	rouge;
+}

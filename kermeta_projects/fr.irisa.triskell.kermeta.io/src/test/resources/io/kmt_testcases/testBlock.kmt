@@ -1,0 +1,30 @@
+package testBlock::blah;
+
+require kermeta
+
+class Class1 {
+	
+	operation operation1() is do
+		
+		do
+			do
+			
+			rescue
+			
+			end
+			
+			do end
+		
+		end
+		
+		do do do end end end
+		
+		do
+		
+		rescue(e : testBlock::blah::Class1)
+			do end
+		end
+
+	end
+	
+}

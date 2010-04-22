@@ -1,0 +1,48 @@
+package testProperty;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+class Class1 inherits Class5 {
+	attribute readonly property11 : String
+	reference property12 : String[1]
+	reference property13 : String[1..*]
+	reference property14 : String[1..4]
+	reference property15 : oset String[*]
+	
+	attribute property16 : Integer[5]
+}
+
+
+package package1 {
+
+	abstract class Class11 inherits Class1 {
+		reference readonly property111 : Class12
+	}
+	
+	class Class12 inherits Class11, Class1 {
+		reference property113 : testProperty::Class2<Integer>[*]
+	}
+
+}
+
+class Class2<G> {}
+
+class Class3 {
+
+	attribute ownedClass4 : Class4[0..*]#owner
+	reference someClass4 : set Class4[*]#someClass3
+}
+
+class Class4 {
+	reference owner : Class3#ownedClass4
+	reference someClass3 : seq testProperty::Class3[*]#someClass4
+}
+
+class Class5 {
+	attribute readonly subClass5 : set Class5[*]#superClass5
+	reference superClass5 : Class5#subClass5
+}

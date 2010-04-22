@@ -1,0 +1,36 @@
+package testSimpleAnnotations;
+
+require kermeta
+
+/*
+ * bonjour les degats
+ */
+
+class String {}
+class Integer {}
+class Boolean {}
+
+// une belle classe !!
+// qui dechire
+class Class1 {
+	
+	 operation truc() is do
+	 end
+	 
+	/** Mon operation */
+	@return "of the jedi"
+	operation operation1() is do
+		// v1 is a variable
+		// another
+		var v1 : Boolean
+		var v2 : Boolean // super variable v2
+		//v1 := v1 and v2
+		// end of operation
+	end
+	// the end
+	
+}
+
+/* END OF FILE */
+
+// Another end of file

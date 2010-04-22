@@ -1,0 +1,48 @@
+package testExpression;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+
+class Class1 {
+	
+	operation operation1() is do
+		
+		var i1 : Integer init 2 + 2 + 2
+		var i2 : Integer init i1 * 2/2
+		var v2 : String init "coucou" + i1.toString
+		
+		i2 := -i1 + i2 - i1 + i2 * (10 / 2) + 3 + ((3*5))
+		
+		if i1 > (i1 := i2) then 
+			var i3 : Integer init i1
+			var b1 : Boolean
+			if b1 := i2 > i3 and not (i2 != i1) then "blah" end
+		end
+		
+	end
+	
+}
+
+class Class2 {
+	operation operation21(s1: String, s2 : String) : String is do
+			if s1 == s2 then 
+				  		result := "same" + "string".toUpper() + "blah" + (s1 > s2).toString.concat("blah")
+					else
+						result := "different"
+					end
+	end
+}
+
+package package1 {
+	class Class11 {
+	
+		operation operation111() : Void is do
+		
+		end
+	
+	}
+}

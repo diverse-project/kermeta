@@ -1,0 +1,50 @@
+package testpackage;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+
+class State {
+  attribute name : String
+  reference owner : StateMachine[0..1]#states
+  reference outgoing : Transition[0..*]#source
+  reference incoming : Transition[0..*]#target
+}
+
+class Transition {
+  attribute event : String
+  attribute guard : String
+  reference owner : StateMachine[1]#transitions
+  reference source : State#outgoing
+  reference target : State#incoming
+}
+
+class StateMachine {
+  reference states : State[0..*]#owner
+  reference transitions : Transition[0..*]#owner
+}
+
+modeltype BasicSM { State, Transition, StateMachine }
+
+
+class Determiniser<T : BasicSM> {
+
+  attribute equiv_classes : Hashtable<T::State, Set<T::State> >
+  
+  operation determiniseAll(input : T) : T is
+  do
+    // The bodies are silly for now
+    determinise(T::StateMachine.new)
+    "blah".size
+    result := input
+  end
+  
+  operation determinise(input : T::StateMachine) : T::StateMachine is
+  do
+    input.states.add(T::State.new)
+    input.transitions.add(T::Transition.new)
+    result := input
+  end
+  
+}

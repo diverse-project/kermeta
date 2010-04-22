@@ -1,0 +1,28 @@
+package testExtractOperation;
+
+require kermeta
+
+class String
+{
+}
+class Integer
+{
+}
+class Boolean
+{
+}
+class Class1
+{
+	operation operation1() : String is
+		do
+			result := "toto"
+		end
+	operation operation2() : String is
+		do
+			result := "titi"
+		end
+}
+package toto
+{
+}
+

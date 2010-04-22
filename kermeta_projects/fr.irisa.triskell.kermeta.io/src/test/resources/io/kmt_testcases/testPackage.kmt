@@ -1,0 +1,22 @@
+package testPackage;
+
+require kermeta
+
+//using metacore::standard
+
+package package1 {
+
+	package package11 {}
+
+	package package12 {
+	
+	}
+
+}
+
+package package2 
+{
+	package package21 { package package211{}}
+}
+
+package package3 {}

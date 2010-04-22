@@ -1,0 +1,15 @@
+package testSCommentAlone;
+
+require kermeta
+
+class String {}
+class Integer {}
+class Boolean {}
+
+class Class1 {
+	
+	operation operation1() is do
+		//TODO : implement this operation
+	end
+	
+}

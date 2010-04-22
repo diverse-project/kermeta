@@ -1,0 +1,13 @@
+package testAssignment;
+
+require kermeta
+
+class Test_assignment {
+
+    operation operation1() : kermeta::standard::Integer is do
+        var ~result : kermeta::standard::Integer
+        ~result := 4
+        result := ~result
+    end
+}
+
