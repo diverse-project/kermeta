@@ -17,6 +17,10 @@
 				<targetPath>../../target/test-workspace/fr.irisa.triskell.kermeta.io/src/kermeta</targetPath>
         		<directory>src/kermeta</directory>
       		</testResource>
+      		<testResource>
+				<targetPath>../../target/test-classes</targetPath>
+        		<directory>src/test/resources/test-classes</directory>
+      		</testResource>
     	</testResources>
 		<sourceDirectory>src/java</sourceDirectory>
 		<outputDirectory>build/class</outputDirectory>
