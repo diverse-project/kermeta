@@ -17,11 +17,14 @@
 
 package kermeta_io.constraintchecker_test;
 
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.LoadingOptions;
@@ -29,7 +32,6 @@ import org.kermeta.loader.LoadingOptions;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaCycleConstraintChecker;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 
@@ -39,19 +41,34 @@ import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
  */
 public class JunitTestSuite extends TestCase {
 
+	public static final String PLUGIN_TESTS_PATH = "platform:/plugin/fr.irisa.triskell.kermeta.io/";
+	
 	static private IOPlugin ioPlugin;
 	
 
-	public JunitTestSuite(String arg0) {
+	public JunitTestSuite(String arg0) throws URISyntaxException {
 		super(arg0);
 		initialize();
 	}
 	
-	private void initialize() {
+	private void initialize() throws URISyntaxException {
 
 		if ( ioPlugin == null ) {
-			org.kermeta.slf4j.eclipse.Activator.getDefault().configureLog4JLogger("../org.kermeta.slf4j.eclipse/kermeta_log4j_configuration.xml");							
-			IOPlugin.LOCAL_USE = true;
+			//IOPlugin.LOCAL_USE = true;
+			// initialize URIMap
+			// find the root of the environment
+			// use http://java.sun.com/j2se/1.5.0/docs/guide/lang/resources.html
+			java.net.URI rootDir = null;
+			rootDir = getClass().getResource("/").toURI().resolve("..");
+			System.out.println("rootDir = "+"file:/"+rootDir.getPath());
+			
+				
+			String resource = "file:/"+rootDir.getPath()+ "test-workspace/";
+			ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI(resource));
+			ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI(resource));
+			//System.out.println("");
+			System.out.println("\tplatform:/resource/ -> " + resource);
+			System.out.println("\tplatform:/plugin/ -> " + resource);
 			ioPlugin = IOPlugin.getDefault();
 		
 		}
@@ -406,7 +423,7 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","032_assigned_to_self_
 	public void testvalidFile(String dir, String file) throws Exception {
 	    
 		
-		String path = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
+		String path = PLUGIN_TESTS_PATH + dir + "/" + file;
 		
 		HashMap<String, Object> options = new HashMap<String, Object>();
 		options.put(LoadingOptions.ECORE_QuickFixEnabled, true);
@@ -448,7 +465,7 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","032_assigned_to_self_
 	
 	public void testinvalidFile(String dir, String file) throws Exception {
 	    
-		String path = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
+		String path = PLUGIN_TESTS_PATH + dir + "/" + file;
 		
 		HashMap<String, Object> options = new HashMap<String, Object>();
 		options.put(LoadingOptions.ECORE_QuickFixEnabled, true);
