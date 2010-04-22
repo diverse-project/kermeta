@@ -134,7 +134,60 @@
 	  		<type>jar</type>
 	  		<scope>test</scope>
 	  	</dependency>
+	  	<dependency>
+	  		<groupId>org.eclipse.emf.compare</groupId>
+  			<artifactId>org.eclipse.emf.compare</artifactId>
+  			<version>1.0.1</version>
+	  		<type>jar</type>
+	  		<scope>test</scope>
+	  	</dependency>
+	  	<dependency>
+  			<groupId>org.eclipse.emf.compare.match</groupId>
+  			<artifactId>org.eclipse.emf.compare.match</artifactId>
+  			<version>1.0.1</version>
+	  		<type>jar</type>
+	  		<scope>test</scope>
+	  	</dependency>
+	  	<dependency>
+	  		<groupId>org.eclipse.emf.compare.diff</groupId>
+  			<artifactId>org.eclipse.emf.compare.diff</artifactId>
+  			<version>1.0.1</version>
+	  		<type>jar</type>
+	  		<scope>test</scope>
+	  	</dependency>
 	</dependencies>
+	<repositories>
+	    <repository>
+	      <releases>
+	        <enabled>false</enabled>
+	        <updatePolicy>always</updatePolicy>
+	        <checksumPolicy>warn</checksumPolicy>
+	      </releases>
+	      <snapshots>
+	        <enabled>true</enabled>
+	        <updatePolicy>never</updatePolicy>
+	        <checksumPolicy>fail</checksumPolicy>
+	      </snapshots>
+	      <id>kermetaSnapshots</id>
+	      <name>Kermeta Snapshots</name>
+	      <url>http://www.kermeta.org/maven2-snapshots</url>
+	    </repository>
+	     <repository>
+	      <releases>
+	        <enabled>true</enabled>
+	        <updatePolicy>always</updatePolicy>
+	        <checksumPolicy>warn</checksumPolicy>
+	      </releases>
+	      <snapshots>
+	        <enabled>true</enabled>
+	        <updatePolicy>never</updatePolicy>
+	        <checksumPolicy>fail</checksumPolicy>
+	      </snapshots>
+	      <id>kermeta repo</id>
+	      <name>Kermeta Repository</name>
+	      <url>http://www.kermeta.org/maven2</url>
+	    </repository>
+ 	 </repositories>
 	 <distributionManagement>
 		<repository>
       		<id>tipimouss-local-maven-repository</id>
