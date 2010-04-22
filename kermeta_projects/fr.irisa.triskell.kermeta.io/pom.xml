@@ -19,7 +19,7 @@
       		</testResource>
       		<testResource>
 				<targetPath>../../target/test-classes</targetPath>
-        		<directory>src/test/resources/test-classes</directory>
+        		<directory>src/test/classes-resources</directory>
       		</testResource>
     	</testResources>
 		<sourceDirectory>src/java</sourceDirectory>
