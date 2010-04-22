@@ -26,7 +26,10 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KMTOutputBuilder;
 import org.kermeta.io.util2.UserDirURI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import fr.irisa.triskell.eclipse.resources.URIHelper;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
@@ -40,13 +43,15 @@ import fr.irisa.triskell.kermeta.tests.comparison.EMFCompareModelHelper;
  */
 public class JunitTestSuite extends TestCase {
 
-	public static final String PLUGIN_TESTS_PATH = "platform:/plugin/fr.irisa.triskell.kermeta.io/";
+	public static final String PLUGIN_TESTS_PATH = "platform:/resource/fr.irisa.triskell.kermeta.io/";
 	
 	static private String EXPECTED_KM_FOLDER = "/expected_output/km";
 	
 	static private String OUTPUT_KM_FOLDER = "/output";
 
 	static private String OUTPUT_KMT_FOLDER = "/output";
+	
+	final static public Logger internalLog = LoggerFactory.getLogger(JunitTestSuite.class);
 
 	
 	static private IOPlugin ioPlugin;
@@ -413,9 +418,10 @@ testWithFile("src/test/resources/io_tests/kmt_testcases","testVariable.kmt" );
 	// do not modify this comment
 	
 public void testWithFile(String dir, String file) {
-	IOPlugin.internalLog.debug(" *** testWithFile " + file);
+	internalLog.debug(" *** testWithFile " + file);
 	
-	UserDirURI.createDirFromName(dir+"/output");
+	UserDirURI.createDirFromName(PLUGIN_TESTS_PATH+dir+"/output");
+	internalLog.debug("createDirFromName " +PLUGIN_TESTS_PATH+dir+"/output");
 	
 	String kmFile = FileHelper.replaceExtension(file, "km");
 	// The file can either be an ecore or a kmt
@@ -438,6 +444,7 @@ public void testWithFile(String dir, String file) {
 		
 		// Pretty print the file
 		KMTOutputBuilder builder = new KMTOutputBuilder();
+		internalLog.debug("outputFileURI=" +outputFileURI);
 		builder.print(source, null, outputFileURI);
 		builder.flush();
 		
@@ -446,6 +453,8 @@ public void testWithFile(String dir, String file) {
 				// then the imported units also need to be printed for a comparison against expected_output
 				builder = new KMTOutputBuilder();
 				String importedUnitOutputFileURI = importedUnit.getUri().replaceFirst(PLUGIN_TESTS_PATH + dir, outputKMTFolder);
+				UserDirURI.createDirFromName(URIHelper.removeFileName(importedUnitOutputFileURI));
+				internalLog.debug("importedUnitOutputFileURI=" +importedUnitOutputFileURI);
 				builder.print(importedUnit, null, importedUnitOutputFileURI);
 				builder.flush();
 			}
@@ -460,7 +469,8 @@ public void testWithFile(String dir, String file) {
 		
 		// Exporting the source file into km
 		KmExporter exporter = new KmExporter();
-		exporter.export(source, null, outputKMFileURI, false);
+		internalLog.debug("outputKMFileURI=" +outputKMFileURI);
+		exporter.export(source, "", outputKMFileURI, false);
 		
 		// Loading the generated km file
 		KermetaUnit kmOutput = IOPlugin.getDefault().getEditionKermetaUnitStore().get(outputKMFileURI, null);
