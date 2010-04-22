@@ -6,6 +6,18 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Kermeta - Kermeta IO</name>
 	<build>
+    	<testResources>
+      		<testResource>
+      			<!-- copy the test resources into a kind of workspace for simulating eclipse environment -->
+				<targetPath>../../target/test-workspace/fr.irisa.triskell.kermeta.io/src/test/resources</targetPath>
+        		<directory>src/test/resources</directory>
+      		</testResource>
+      		<testResource>
+      			<!-- copy the test resources into a kind of workspace for simulating eclipse environment -->
+				<targetPath>../../target/test-workspace/fr.irisa.triskell.kermeta.io/src/kermeta</targetPath>
+        		<directory>src/kermeta</directory>
+      		</testResource>
+    	</testResources>
 		<sourceDirectory>src/java</sourceDirectory>
 		<outputDirectory>build/class</outputDirectory>
         <plugins>
@@ -17,7 +29,17 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-		</plugins>
+      		<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-surefire-plugin</artifactId>
+        		<!-- <version>2.5</version> -->
+        		<configuration>
+          			<includes>
+            			<include>**/JunitTestSuite.java</include>
+          			</includes>
+        		</configuration>
+      		</plugin>
+    	</plugins>
 	</build>
 	<dependencies>
 		<dependency>
@@ -100,6 +122,13 @@
 	  		<version>0.0.1-SNAPSHOT</version>
 	  		<type>jar</type>
 	  		<scope>compile</scope>
+	  	</dependency>
+	  	<dependency>
+	  		<groupId>junit</groupId>
+	  		<artifactId>junit</artifactId>
+	  		<version>3.8.2</version>
+	  		<type>jar</type>
+	  		<scope>test</scope>
 	  	</dependency>
 	</dependencies>
 	 <distributionManagement>
