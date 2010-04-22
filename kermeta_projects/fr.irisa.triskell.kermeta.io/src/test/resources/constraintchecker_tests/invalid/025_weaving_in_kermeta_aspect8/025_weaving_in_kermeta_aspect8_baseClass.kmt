@@ -1,0 +1,9 @@
+package weavinginvalidtest7;
+
+require kermeta
+
+using kermeta::standard
+
+class A {
+	operation amethod() : A[0..*] is abstract
+}

@@ -1,0 +1,18 @@
+/* $Id: 003_associations_05.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+require kermeta
+
+/* opposite mismatch  : the association is illformed */
+class A {
+    attribute b : B
+}
+class B {
+	reference r1 : A#b
+	operation truc()  is do 
+	end
+}
+

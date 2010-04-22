@@ -1,0 +1,14 @@
+package root_package;
+
+require kermeta
+
+class G {
+    attribute r1 : H[1]#r2
+    reference r2 : H#r1
+}
+class H {
+    attribute r1 : G[1]#r2
+    reference r2 : G#r1
+}
+
+

@@ -1,0 +1,28 @@
+/* $Id: 005_undeterministic_several_superoperations_01.kmt,v 1.2 2008-07-18 07:06:36 dvojtise Exp $
+ * This test the implementation of feature request #5951
+ */
+package undeterministicSeveralSuperoperations;
+require kermeta
+using kermeta::standard
+class C2 inherits C1, C1bis {
+	// one, might think that we should raise a warning on the class, but since kermeta have aspects, we cannot
+	// know if this is really incorrect unless we use the operation without requiring the correct aspect.
+	operation foo() is do
+		op2		// must raise an error this call is undeterministic because we cannot choose 
+				// between C1.op2 and C1bis.op2 
+	end 	
+}
+
+class C1
+{
+	operation op2() is do
+	end
+
+}
+
+
+class C1bis
+{
+	operation op2() is do
+	end
+}

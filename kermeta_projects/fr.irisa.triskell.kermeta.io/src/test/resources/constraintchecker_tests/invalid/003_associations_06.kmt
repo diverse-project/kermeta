@@ -1,0 +1,25 @@
+/* $Id: 003_associations_06.kmt,v 1.3 2007-12-14 16:36:44 dvojtise Exp $ */
+
+// Test of a invalid associations
+
+/** not usable link : the atribute a in class C cannot be 
+ *	used without raising a constraint exception on A.b
+ * This is because only one object can contain another. Since A declares that it must have 1 B through a 
+ * relation that is a composition. No other composition can be used to point to A ! 
+ */
+package root_package;
+
+require kermeta
+
+
+class A {
+    reference b : B[1]#a
+}
+class B {
+	attribute a : A#b
+	
+}
+
+class C {
+	attribute a : A // a warning should occur here
+}

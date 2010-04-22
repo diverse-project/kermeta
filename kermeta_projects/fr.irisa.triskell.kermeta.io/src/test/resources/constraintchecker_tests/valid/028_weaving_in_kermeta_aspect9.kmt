@@ -1,0 +1,23 @@
+/* $Id: 028_weaving_in_kermeta_aspect9.kmt,v 1.1 2007-09-10 08:35:07 cfaucher Exp $
+ * Creation date: February 8, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ * checks that the order of declaraion of base and aspect classes doesn't really matter if there is no conflict
+ */
+
+
+package root_package;
+
+
+require kermeta
+require "028_weaving_in_kermeta_aspect9/028_weaving_in_kermeta_base9.kmt"
+
+
+// redefinition of existing property is legal
+@aspect "true"
+class A 
+{
+	reference aB2 : B	
+	reference aB : B#aA 
+}

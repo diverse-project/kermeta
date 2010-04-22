@@ -1,0 +1,38 @@
+/* $Id: 005_superoperations_parammismatch5_inv.kmt,v 1.3 2007-10-16 11:49:10 ftanguy Exp $ */
+
+// Test of constraints on operations
+// This test must make specific errors to appear. 
+
+package root_package;
+
+require kermeta
+
+using kermeta::standard
+
+
+class C1
+{
+	operation op1(a:Integer,b:String) is do
+			result := void
+	end
+
+	operation op2() is do
+		result := void
+	end
+
+}
+
+
+
+class C2 inherits C1
+{
+	/** 
+	 * This method overloads the op1 defined in C1, which does not have any parameter 
+	 * This is an ERROR
+	 */
+	method op1(a:kermeta::standard::String,b:Integer) is do 
+		result := void
+	end
+}
+
+

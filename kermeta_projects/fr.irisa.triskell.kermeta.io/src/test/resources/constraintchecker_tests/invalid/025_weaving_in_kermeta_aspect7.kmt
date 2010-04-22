@@ -1,0 +1,28 @@
+/* $Id: 025_weaving_in_kermeta_aspect7.kmt,v 1.2 2008-02-14 07:13:30 uid21732 Exp $ */
+
+// Type checking of kermeta weavinf
+
+package weavinginvalidtest7;
+
+require kermeta
+require "025_weaving_in_kermeta_aspect7/025_weaving_in_kermeta_aspect7.kmt"
+
+using kermeta::standard
+
+@aspect "true"
+class C {
+
+
+	property a : A // invalid, should fail because this is not a reference like it is defined in the base ...
+        getter is do
+           result := c
+        end
+        setter is do
+            c := value
+        end	
+	attribute c : A
+	attribute d : B
+
+}
+
+/* END OF FILE */

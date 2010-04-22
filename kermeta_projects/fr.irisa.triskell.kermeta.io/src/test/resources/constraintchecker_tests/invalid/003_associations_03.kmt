@@ -1,0 +1,17 @@
+/* $Id: 003_associations_03.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+require kermeta
+
+/* opposite mismatch  : the association is illformed */
+class A {
+    reference b : B#r2
+}
+class B {
+	reference r1 : A#b
+	reference r2 : A
+	
+}

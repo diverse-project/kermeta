@@ -1,0 +1,22 @@
+/* $Id: $
+ * Creation date: October 3, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+require "008_testRequiresCollidingC.kmt"
+
+class Main
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}

@@ -1,0 +1,15 @@
+/* $Id: 003_associations_01.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+require kermeta
+
+/* composition multiplicity must be 0..1 or 1*/
+class A {
+    attribute b : B[1]#owner
+}
+class B {
+    reference owner : A[*]#b // should fail here
+}

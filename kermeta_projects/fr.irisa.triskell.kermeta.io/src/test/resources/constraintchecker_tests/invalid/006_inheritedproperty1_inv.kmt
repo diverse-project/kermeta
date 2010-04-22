@@ -1,0 +1,23 @@
+/* $Id: 006_inheritedproperty1_inv.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
+
+// Test of constraints on operations
+// When constraints are checked, errors
+
+package root_package;
+
+require kermeta
+
+using kermeta::standard
+
+
+
+class C1
+{
+	reference p1 : String
+}
+
+
+class C3 inherits C1
+{
+	property p1 : Integer
+}

@@ -1,0 +1,19 @@
+/* $Id: 001_cyclicinheritance_03.kmt,v 1.2 2007-10-16 11:49:09 ftanguy Exp $ */
+
+// Test of a invalid inheritance
+
+package root_package;
+
+require kermeta
+
+/* cycle inheritance*/
+class A inherits B{
+    
+}
+class B inherits C{
+    
+}
+
+class C inherits A{
+    
+}

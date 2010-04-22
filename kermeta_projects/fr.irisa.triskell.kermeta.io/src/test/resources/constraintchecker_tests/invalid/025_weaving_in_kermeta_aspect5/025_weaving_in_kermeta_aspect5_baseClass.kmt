@@ -1,0 +1,18 @@
+package weavinginvalidtest5;
+
+require kermeta
+
+using kermeta::standard
+
+class A {
+
+
+}
+
+class B inherits A {}
+class C inherits kermeta::kunit::Assert{
+
+	attribute a : A
+	attribute b : B
+
+}
