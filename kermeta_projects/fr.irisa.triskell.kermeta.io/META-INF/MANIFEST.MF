@@ -55,4 +55,7 @@ Export-Package:
 Bundle-Vendor: IRISA/INRIA
 Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: org.slf4j
+Import-Package: org.eclipse.emf.compare;resolution:=optional,
+ org.eclipse.emf.compare.diff;resolution:=optional,
+ org.eclipse.emf.compare.match;resolution:=optional,
+ org.slf4j

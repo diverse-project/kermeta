@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
 
 public class CompareModel {
 	
@@ -48,7 +47,6 @@ public class CompareModel {
 	 * 
 	 */
 	private void init() {
-		TestPlugin.getDefault();
 		this.leftModelURI = URI.createFileURI(this.leftModelPath);
 		this.rightModelURI = URI.createFileURI(this.rightModelPath);
 	}

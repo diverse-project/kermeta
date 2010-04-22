@@ -11,6 +11,7 @@ package fr.irisa.triskell.kermeta.tests.comparison;
 
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
@@ -20,14 +21,17 @@ import org.eclipse.emf.compare.match.metamodel.MatchModel;
 import org.eclipse.emf.compare.match.service.MatchService;
 import org.eclipse.emf.compare.util.ModelUtils;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
 
 public class EMFCompareModelHelper {
-	
+	final static public Logger internalLog = LoggerFactory.getLogger(EMFCompareModelHelper.class);
 	/**
 	 * 
 	 * @param leftModelPath
@@ -60,8 +64,8 @@ public class EMFCompareModelHelper {
 
 		try {
 			// Register the extensions, we are not the two files are the same extension, also we try to register the two extensions
-			EMFRuntimeUnit.registerEMFextensionToFactoryMap(leftModelPath);
-			EMFRuntimeUnit.registerEMFextensionToFactoryMap(rightModelPath);
+			registerEMFextensionToFactoryMap(leftModelPath);
+			registerEMFextensionToFactoryMap(rightModelPath);
 			
 			// Loads the two models passed as arguments
 			
@@ -148,5 +152,46 @@ public class EMFCompareModelHelper {
 	public static boolean isDifferent(EObject model1, EObject model2) {
 		DiffModel diffModel = getDiffModel(model1, model2);
 		return (((DiffGroup) diffModel.getOwnedElements().get(0)).getSubchanges() > 0) ? true : false;
+	}
+	
+	/**
+     * Register a Factory for a file extension. This is necessary especially when running outside of eclipse 
+     * @param kunit_uri : name of the file for which we want to register the extension
+     */
+	public static void registerEMFextensionToFactoryMap(String kunit_uri) {
+		String ext = kunit_uri.substring(kunit_uri.lastIndexOf(".")+1);
+		
+		if (! Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().contains(ext)){
+			if(ext != null){
+				internalLog.debug("registering extension: " + ext);					
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ext,new XMIResourceFactoryImpl());
+			}
+		}
+		else internalLog.debug(" extension " + ext + " is already registered ");
+/*		if (! Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().contains("ecore")){
+			internalLog.debug("registering extension: ecore");
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
+		}*/
+		logEMFRegistryExtensionContent();
+	}
+	/** print the content of the EMF Registry */
+	private static String logEMFRegistryExtensionContent() {
+		String msg = "";
+		try {
+				
+			Boolean isFirst = true;
+	    	Iterator<String> it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
+	    	while(it.hasNext()) {
+	    		if(!isFirst) msg += " | ";
+	    		else isFirst = false;
+	    		// weird sometime it crashes here with a null pointer !
+	    		msg += it.next().toString();
+	    	}
+	    	internalLog.debug("Factory.Registry known extensions are : " + msg);
+		}
+	    catch(Exception e){
+	    	e.printStackTrace();
+	    }
+    	return msg;
 	}
 }

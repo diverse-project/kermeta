@@ -8,7 +8,7 @@
 * Authors : Franck Fleurey <ffleurey@irisa.fr>
 */
 
-package kermeta_io.test;
+package kermeta_io.io_test;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,11 +20,11 @@ import java.util.Arrays;
 
 public class GenerateJUnitTestSuite {
 
-	private static final String io_folder = "test/io/";
+	private static final String io_folder = "src/test/resources/";
 
-	protected static String[] folders = {io_folder + "ecore_testcases", 
+	protected static String[] folders = {io_folder + "io_tests/ecore_testcases", 
 										//"test/emfatic_testcases", 
-										io_folder + "kmt_testcases"} ;
+										io_folder + "io_tests/kmt_testcases"} ;
 	protected static String[] filetypes = {"kmt", "emf", "ecore"};
 	
 	protected static String template = null;
@@ -37,7 +37,7 @@ public class GenerateJUnitTestSuite {
 		return template;
 	}
 
-	protected static String junitfile = "test/junit/kermeta_io/test/JunitTestSuite.java";
+	protected static String junitfile = "src/test/java/kermeta_io/io_test/JunitTestSuite.java";
 
 	public static void main(String[] args) {
 		String tcs = "";
