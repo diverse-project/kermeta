@@ -165,14 +165,14 @@
 	      </releases>
 	      <snapshots>
 	        <enabled>true</enabled>
-	        <updatePolicy>never</updatePolicy>
+	        <updatePolicy>always</updatePolicy>
 	        <checksumPolicy>fail</checksumPolicy>
 	      </snapshots>
-	      <id>kermetaSnapshots</id>
-	      <name>Kermeta Snapshots</name>
-	      <url>http://www.kermeta.org/maven2-snapshots</url>
+	      <id>tipimoussSnapshots</id>
+	      <name>Tipimouss Snapshots</name>
+	      <url>http://tipimouss.irisa.fr/maven2-snapshots</url>
 	    </repository>
-	     <repository>
+	    <repository>
 	      <releases>
 	        <enabled>true</enabled>
 	        <updatePolicy>always</updatePolicy>
