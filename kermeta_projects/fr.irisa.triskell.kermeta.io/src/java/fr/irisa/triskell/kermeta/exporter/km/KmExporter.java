@@ -59,7 +59,7 @@ public class KmExporter {
 	 */
 	public void export(KermetaUnit kermetaUnit, String rep, String fileName, boolean trace) {
 		
-		setUri(kermetaUnit, rep + "/", fileName);
+		setUri(kermetaUnit,  rep != null ? rep + "/" : "/", fileName);
 		fillResourceSet(kermetaUnit);
 		//addResourceReferences();
 		try {
