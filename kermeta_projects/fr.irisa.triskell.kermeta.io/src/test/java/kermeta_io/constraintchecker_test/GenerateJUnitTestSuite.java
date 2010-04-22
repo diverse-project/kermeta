@@ -20,7 +20,7 @@ import java.util.Arrays;
 
 public class GenerateJUnitTestSuite {
 
-	private static final String io_folder = "test/io/";
+	private static final String io_folder = "src/test/resources/";
 	
 	protected static String[] folders = {io_folder + "constraintchecker_tests/valid", io_folder + "constraintchecker_tests/invalid"} ;
 	protected static String[] filetypes = {"kmt", "emf"};
@@ -35,7 +35,7 @@ public class GenerateJUnitTestSuite {
 		return template;
 	}
 
-	protected static String junitfile = "test/junit/kermeta_io/constraintchecker_test/JunitTestSuite.java";
+	protected static String junitfile = "src/test/java/kermeta_io/constraintchecker_test/JunitTestSuite.java";
 
 	public static void main(String[] args) {
 		String tcs = "";
