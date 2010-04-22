@@ -146,11 +146,20 @@ object Parser extends StandardTokenParsers {
       newo
   }
   def fRescueLst = ident
-  def fCall = (ident ~ callFeatureQualifiedName)
+  def fCall : Parser[Expression] = (ident ~ callFeatureQualifiedName) ^^ { case id1 ~ qualName =>
+      var newo = BehaviorFactory.eINSTANCE.createCallFeature
+      id1 match {
+        case "super" => {
+            var newo = BehaviorFactory.eINSTANCE.createCallSuperOperation
+        }
+        case _ => 
+      }
+      newo
+  }
 
   def fLiteral = ( stringLit | fBooleanLiteral | numericLit | fVoidLiteral )
   def fBooleanLiteral = ("true" | "false")
-  def fVoidLiteral = ( "Void" )
+  def fVoidLiteral = ( "Void" ) ^^^ {BehaviorFactory.eINSTANCE.createVoidLiteral}
   def callFeatureQualifiedName =  ( "." ~ ident ||| "." ~ ident ~ "(" ~ callFeatureParams ~ ")" )*
   def callFeatureParams = ( fStatement ~ callFeatureParam )?
   def callFeatureParam = (("," ~ fStatement)*)  ^^^ println("PARAM")
