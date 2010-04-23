@@ -90,7 +90,7 @@ object TypeEquivalence {
 		methodEquivalence.put("kermeta.standard.String", Str);
 		methodEquivalence.put("String", Str);
 		methodEquivalence.put("java.lang.String", Str);
-		
+		methodEquivalence.put("_root_.java.lang.String", Str);
 		
 		
 		methodEquivalence 

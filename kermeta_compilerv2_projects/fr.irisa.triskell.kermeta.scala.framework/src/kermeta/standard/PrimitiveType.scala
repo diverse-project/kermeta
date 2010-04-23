@@ -272,7 +272,7 @@ class RichString(value: java.lang.String)  extends RichValueType with EObjectImp
 	//TODO
 
 	
-	
+	//def size():Int={return value.size}
 	def append(other : String):String={return value + other}
 	def plus(other : String) :java.lang.String={return value + other}
 	def toReal() :Double={return java.lang.Double.parseDouble(value)}

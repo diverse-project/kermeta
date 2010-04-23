@@ -89,7 +89,8 @@ object JavaConversions {
     def sum() :A={return value.iterator.next}
     def includes(element : A) :Boolean={return value.contains(element)}
     //TODO
-    def excludesAll(elements : ju.Collection[A]) :Boolean={/*TODO*/return true}
+    def excludesAll(elements :
+                    ju.Collection[A]) :Boolean={/*TODO*/return true}
     def isUnique(a : A) :Boolean={return this.countElement(a)==1}
     def any() :A={return one()}
     def at(index:Int) :A={return value.get(index)}
