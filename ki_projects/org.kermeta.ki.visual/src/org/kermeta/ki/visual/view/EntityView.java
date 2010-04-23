@@ -74,7 +74,6 @@ public abstract class EntityView extends ComponentView {
 		String name		= fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(nameRO);
 		String typeName	= fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(typeNameRO);
 		AttributeView attr = new AttributeView(name, typeName, view);
-		
 		view.attributes.add(attr);
 		view.update();
 		propertyRO.setUserData(attr);

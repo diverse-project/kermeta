@@ -1,9 +1,14 @@
 package org.kermeta.ki.visual.view;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class ClassView extends EntityView {
 
+	protected ArrayList<Aspect> aspects;
+	
+	
+	
 	public ClassView(String name) {
 		super(name);
 	}

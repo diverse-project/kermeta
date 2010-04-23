@@ -5,9 +5,13 @@ import java.awt.Font;
 
 public class AttributeView extends EntityElementView {
 
+	protected Aspect aspect;
+	
+	
 	public AttributeView(String name, String typeName, EntityView parent) {
 		super(name, typeName, parent);
-		
+	
+		aspect = null;
 		update();
 	}
 

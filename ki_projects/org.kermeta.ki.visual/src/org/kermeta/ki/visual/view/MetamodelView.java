@@ -9,10 +9,8 @@ import java.awt.RenderingHints;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.swing.JPanel;
 import javax.swing.JViewport;
@@ -24,6 +22,7 @@ import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 import org.kermeta.ki.visual.view.ComponentView.Visibility;
 
+import edu.uci.ics.jung.algorithms.layout.KKLayout;
 import edu.uci.ics.jung.algorithms.layout.TreeLayout;
 import edu.uci.ics.jung.graph.DelegateForest;
 import edu.uci.ics.jung.graph.Forest;
@@ -80,13 +79,35 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable {
 	
 	
 	
-	public static RuntimeObject onEntityAdded(RuntimeObject mmRO, RuntimeObject entityRO, RuntimeObject isAspectRO, RuntimeObject positionRO) {
+	public static RuntimeObject onEntityAdded(RuntimeObject mmRO, RuntimeObject entityRO, RuntimeObject isAspectRO, RuntimeObject positionRO, RuntimeObject nameRO) {
 		Object obj		  = entityRO.getUserData();
+		Object name		  = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(nameRO);
 		MetamodelView metamodelView = (MetamodelView) mmRO.getUserData();
 		int position 	  = Integer.getValue(positionRO);
 		boolean isAspect  = Boolean.getValue(isAspectRO);
 		// If an object is attached as user data, we use it.
-		EntityView view   = (EntityView) (obj==null ?( isAspect ? new AspectView("aspect") : new ClassView("class")) : obj);
+		EntityView view = null;
+		
+		if(isAspect) {
+			int i = 0, size = metamodelView.entities.size();
+			
+			while(view==null && i<size) {
+				if(metamodelView.entities.get(i).getName().equals(name))
+					view = metamodelView.entities.get(i);
+				else
+					i++;
+			}
+			
+			if(view==null) {
+				System.err.println("ERROR: aspect added but not its reference class");
+				return mmRO.getFactory().getMemory().voidINSTANCE;
+			}
+			
+			entityRO.setUserData(view);
+			return mmRO.getFactory().getMemory().voidINSTANCE;
+		}
+		
+		view = (EntityView) (obj==null ? new ClassView("class") : obj);
 
 		metamodelView.addEntity(position, view);
 		entityRO.setUserData(view);
@@ -239,22 +260,22 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable {
 	
 	
 	public void setTreeLayout() {
-		MyTreeLayout<EntityView,LinkView> treeLayout   = new MyTreeLayout<EntityView,LinkView>(forest, 200, 200);
-		Iterator<Entry<EntityView, Point2D>> locations = treeLayout.getLocations().entrySet().iterator();
-		Entry<EntityView, Point2D> location;
-		
-		while(locations.hasNext()) {
-			location = locations.next();
-			location.getKey().setCentre(location.getValue());
-			location.getKey().update();
-		}
-//		KKLayout<EntityView,LinkView> treeLayout = new KKLayout<EntityView,LinkView>(forest, new DistanceVisu(this));
-//		treeLayout.setSize(new Dimension(1000, 800));
+//		MyTreeLayout<EntityView,LinkView> treeLayout   = new MyTreeLayout<EntityView,LinkView>(forest, 200, 200);
+//		Iterator<Entry<EntityView, Point2D>> locations = treeLayout.getLocations().entrySet().iterator();
+//		Entry<EntityView, Point2D> location;
 //		
-//		for(EntityView entity : entities) {
-//			entity.setCentre((int)treeLayout.getX(entity), (int)treeLayout.getY(entity));
-//			entity.update();
+//		while(locations.hasNext()) {
+//			location = locations.next();
+//			location.getKey().setCentre(location.getValue());
+//			location.getKey().update();
 //		}
+		KKLayout<EntityView,LinkView> treeLayout = new KKLayout<EntityView,LinkView>(forest, new DistanceVisu(this));
+		treeLayout.setSize(new Dimension(1000, 1000));
+		
+		for(EntityView entity : entities) {
+			entity.setCentre((int)treeLayout.getX(entity), (int)treeLayout.getY(entity));
+			entity.update();
+		}
 		
 		
 		for(LinkView link : links)
