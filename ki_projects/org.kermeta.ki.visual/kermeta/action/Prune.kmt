@@ -110,6 +110,12 @@ class ActionPrune inherits Action, Undoable {
 	
 	
 	
+	operation setPruningParameters(pruningOperation : MetamodelPruner) : Void is do
+		pruningOperation.isHierarchicalPruning := false
+	end
+	
+	
+	
 	method doActionBody() : Void is do
 		// Saving the current visible values.
 		var i : Integer init 0
@@ -143,6 +149,7 @@ class ActionPrune inherits Action, Undoable {
 		
 		pruningOp.inputKermetaMetamodel := metamodel
 		pruningOp.initialize(reqClasses, Bag<RequiredProperty>.new, Bag<RequiredEnumeration>.new, 3, viewPolicy)
+		setPruningParameters(pruningOp)
 		
 		if pruningOp.preprocess then
 			pruningOp.transform

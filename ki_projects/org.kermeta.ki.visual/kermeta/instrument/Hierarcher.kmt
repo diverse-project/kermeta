@@ -1,0 +1,70 @@
+/*
+ * Creation : April 23, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::visual;
+
+
+require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/action/PruneHierarchy.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
+
+
+using kermeta::ki::malai::instrument
+using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::interaction
+using kermeta::language::structure
+
+
+
+class Hierarcher inherits Instrument
+{
+	reference metamodel : ModelingUnit
+	
+	
+	method initialiseLinks(eventManager : EventManager) : Void is do
+		addLink(Press2GetHierarchy.new, metamodel, void, eventManager, false)
+	end
+}
+
+
+
+
+class Press2GetHierarchy inherits PressLink
+{
+	method getActionClass() : Class is do
+		result := PruneHierarchy
+	end
+	
+	
+	method updateAction() : Void is do
+		if(not action.isVoid) then
+			var press : Press init interaction.asType(Press)
+			var prune : PruneHierarchy  init action.asType(PruneHierarchy)
+			
+			if(press.target.isInstanceOf(ClassDefinition)) then
+				prune.selection.add(press.target.asType(ClassDefinition))
+			end
+		end
+	end
+	
+	
+	
+	method isConditionRespected() : Boolean is do
+		var press : Press init interaction.asType(Press)
+		result := not press.target.isVoid and press.target.isInstanceOf(ClassDefinition)
+	end
+	
+	
+	method createAction() : Void is do
+		var prune      : PruneHierarchy      init PruneHierarchy.new
+		var hierarcher : Hierarcher init instrument.asType(Hierarcher)
+		
+		prune.initialise(instrument.actionRegistry)
+		prune.metamodel  := hierarcher.metamodel
+		prune.viewPolicy := PrunerViewPolicy.hide
+		action           := prune
+	end
+}

@@ -37,6 +37,8 @@ class RequiredEnumeration
 
 class MetamodelPruner
 {
+	attribute isHierarchicalPruning : Boolean
+	
 	/* Input Kermeta Meta-model */
 	reference inputKermetaMetamodel : ModelingUnit
 	/* Kermeta Objects */
@@ -460,28 +462,38 @@ class MetamodelPruner
 		
 		
 	operation getRequiredConcepts():Void is do
-		inputKermetaMetamodel.packages.each{p |
-			includeClassesInPackage(p, requiredKermetaMetaClasses)
-			includeEnumsInPackage(p, requiredKermetaMetaEnumerations)
-			includePropertiesInPackage(p, requiredKermetaMetaProperties)
-		}	
-		//Add all multilevel superclasses
-		includeAllMultiLevelSuperClasses
+		if(isHierarchicalPruning) then
+			inputKermetaMetamodel.packages.each{p |
+				includeClassesInPackage(p, requiredKermetaMetaClasses)
+			}
+			
+			includeAllMultiLevelSuperClasses
+			includeAllMultiLevelSuperClasses
+			includeAllMultiLevelSuperClasses
+		else
+			inputKermetaMetamodel.packages.each{p |
+				includeClassesInPackage(p, requiredKermetaMetaClasses)
+				includeEnumsInPackage(p, requiredKermetaMetaEnumerations)
+				includePropertiesInPackage(p, requiredKermetaMetaProperties)
+			}	
+			//Add all multilevel superclasses
+			includeAllMultiLevelSuperClasses
+		
+			//Phase 2: Adding all required properties
+			//Pass 1
+			includeAllObligatoryPropertiesAndTheirTypes
+			//Add all multilevel superclasses
+			includeAllMultiLevelSuperClasses
+		
+			includeAllObligatoryPropertiesAndTheirTypes
+			//Add all multilevel superclasses
+			includeAllMultiLevelSuperClasses
 	
-		//Phase 2: Adding all required properties
-		//Pass 1
-		includeAllObligatoryPropertiesAndTheirTypes
-		//Add all multilevel superclasses
-		includeAllMultiLevelSuperClasses
-	
-		includeAllObligatoryPropertiesAndTheirTypes
-		//Add all multilevel superclasses
-		includeAllMultiLevelSuperClasses
-
-		//Pass 3
-		includeAllObligatoryPropertiesAndTheirTypes
-		//Add all multilevel superclasses
-		includeAllMultiLevelSuperClasses
+			//Pass 3
+			includeAllObligatoryPropertiesAndTheirTypes
+			//Add all multilevel superclasses
+			includeAllMultiLevelSuperClasses
+		end
 	end
 
 

@@ -9,12 +9,14 @@
 
 package kermeta::ki::visual;
 
-require kermeta
+//require kermeta
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Pruner.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Hierarcher.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/VisitableKermeta.km"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/InstrumentsSelector.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/InstrumentsCustomiser.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/action/Prune.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/UndoRedoManager.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Scroller.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Zoomer.kmt"
@@ -61,6 +63,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	attribute pruner : Pruner
 	
+	attribute hierarcher : Hierarcher
+	
 	attribute flattener : Flattener
 	
 	attribute undoManager : UndoRedoManager
@@ -91,6 +95,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 //		loadMetamodel("/examples/example1.km")
 //		loadMetamodel("/examples/Ecore.km")
 		loadMetamodel("/examples/Ecore2.km")
+//		loadMetamodel("/examples/UML.km")
+//		loadMetamodel("/examples/UMLAspect.km")
 
 		self.eventManager := eventManager
 		undoCollector     := UndoCollector.new 
@@ -101,6 +107,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		actionRegistry.initialise(undoCollector)
 		actionRegistry.handlers.add(self)
 
+		hierarcher		 := Hierarcher.new
 		zoomer			 := Zoomer.new
 		pruner      	 := Pruner.new
 		flattener      	 := Flattener.new
@@ -109,6 +116,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		customiser		 := InstrumentsCustomiser.new
 		scroller         := Scroller.new
 		
+		hierarcher.initialise(actionRegistry)
 		zoomer.initialise(actionRegistry)
 		flattener.initialise(actionRegistry)
 		scroller.initialise(actionRegistry)
@@ -119,11 +127,13 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		undoManager.initialise(actionRegistry)
 		undoManager.initialiseWidgets(eventManager)
 		selector.initialise(actionRegistry)
-		selector.initialiseInstruments(pruner, flattener, eventManager)
+		selector.initialiseInstruments(pruner, flattener, hierarcher, eventManager)
 
 		initialiseUI
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, viewPanel, eventManager)
 
+		hierarcher.metamodel := metamodel
+		hierarcher.initialiseLinks(eventManager)
 		zoomer.zoomable  := metamodel
 		zoomer.metamodel := metamodel
 		zoomer.initialiseLinks(eventManager)
@@ -152,6 +162,16 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		var model2view : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
 		model2view.modelingUnit := metamodel
 		metamodel.accept(model2view)
+		
+		//TOREMOVE
+//		var action : ActionPrune init ActionPrune.new
+//		action.metamodel := metamodel
+//		action.actionRegistry := actionRegistry
+//		action.selection.add(model2view.clazz)
+//		action.viewPolicy := PrunerViewPolicy.hide
+//		action.doIt()
+//		extern org::kermeta::ki::visual::MetamodelVizuFrame.organise(self)
+//		extern org::kermeta::ki::visual::view::MetamodelView.update(metamodel)
 	end
 	
 	
@@ -169,7 +189,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		toolbar.initialise(eventManager)
 		
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialiseToolbar(toolbar, undoManager.undoButton, 
-					undoManager.redoButton, selector.prunerButton, selector.flattenerButton, pruner.grayedButton, 
+					undoManager.redoButton, selector.prunerButton, selector.flattenerButton, selector.hierarcherButton, pruner.grayedButton, 
 					pruner.hideButton)
 					
 		toolbar.components.add(undoManager.undoButton)
@@ -177,6 +197,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		toolbar.components.add(pruner.hideButton)
 		toolbar.components.add(pruner.grayedButton)
 		toolbar.components.add(selector.prunerButton)
+		toolbar.components.add(selector.hierarcherButton)
 		toolbar.components.add(selector.flattenerButton)
 	end
 
@@ -222,6 +243,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 
 
 class Metamodel2ViewVisitor inherits KermetaVisitor {
+	reference clazz : ClassDefinition//TO REMOVE
+	
 	attribute firstPass : Boolean
 	
 	reference modelingUnit : ModelingUnit
@@ -266,11 +289,16 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 		if(p.type.isInstanceOf(Class)) then
 			var cd : ClassDefinition init p.type.asType(Class).classDefinition
 
-			if(classes.contains(cd)) then
-				extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(modelingUnit, p, p.isComposite, p.owningClass, cd, 
-											p.name, p.getCardinalityString, if(not p.opposite.isVoid) then p.opposite.name end, 
-											if(not p.opposite.isVoid) then p.opposite.getCardinalityString end, -1)
+			if(cd.name=="String" or cd.name=="Boolean" or cd.name=="Real" or cd.name=="Integer") then
+				extern org::kermeta::ki::visual::view::EntityView.onAttributeAdded(p.owningClass, p, p.name, cd.name)
+			else	
+				if(classes.contains(cd)) then
+					extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(modelingUnit, p, p.isComposite, p.owningClass, cd, 
+												p.name, p.getCardinalityString, if(not p.opposite.isVoid) then p.opposite.name end, 
+												if(not p.opposite.isVoid) then p.opposite.getCardinalityString end, -1)
+				end
 			end
+			
 			links.add(p)
 		else
 			if(p.type.isInstanceOf(PrimitiveType)) then
@@ -284,9 +312,11 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 	
 	
 	method visitClassDefinition(c: ClassDefinition) : Void is do
+		if(c.name=="Class") then clazz := c end
+	
 		if(firstPass) then
 			classes.add(c)
-			extern org::kermeta::ki::visual::view::MetamodelView.onEntityAdded(modelingUnit, c, c.isAspect, -1)
+			extern org::kermeta::ki::visual::view::MetamodelView.onEntityAdded(modelingUnit, c, c.isAspect, -1, c.name)
 			c.entity2ViewMapping
 		else
 			c.ownedAttribute.each{p | p.accept(self)}

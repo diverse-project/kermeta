@@ -13,6 +13,7 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/But
 require "platform:/resource/org.kermeta.ki.malai/kermeta/action/ActivateDesactivateInstruments.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Pruner.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Flattener.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Hierarcher.kmt"
 
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction
@@ -30,23 +31,31 @@ class InstrumentsSelector inherits Instrument
 	
 	reference flattener : Flattener
 	
+	reference hierarcher : Hierarcher
+	
 	attribute prunerButton : ToggleButton
 	
 	attribute flattenerButton : ToggleButton
+	
+	attribute hierarcherButton : ToggleButton
 	
 	reference picker : Picker
 	
 	
 
-	operation initialiseInstruments(pruner : Pruner, flattener : Flattener, eventManager : EventManager) : Void is do
-		self.pruner    := pruner
-		self.flattener := flattener
+	operation initialiseInstruments(pruner : Pruner, flattener : Flattener, hierarcher : Hierarcher, eventManager : EventManager) : Void is do
+		self.pruner     := pruner
+		self.flattener  := flattener
+		self.hierarcher := hierarcher
 		pruner.setActivated(true)
 		
-		prunerButton := ToggleButton.new
-		flattenerButton := ToggleButton.new
+		prunerButton     := ToggleButton.new
+		flattenerButton  := ToggleButton.new
+		hierarcherButton := ToggleButton.new
+		
 		prunerButton.initialiseWithText("P", eventManager)
 		flattenerButton.initialiseWithText("F", eventManager)
+		hierarcherButton.initialiseWithText("H", eventManager)
 		
 		interimFeedback
 	end
@@ -78,7 +87,8 @@ class ButtonPressed2ActivateIns inherits ButtonPressLink
 		var bp       : ButtonPressed       init interaction.asType(ButtonPressed)
 		var selector : InstrumentsSelector init instrument.asType(InstrumentsSelector)
 
-		result := selector.prunerButton==bp.button or selector.flattenerButton==bp.button
+		result := selector.prunerButton==bp.button or selector.flattenerButton==bp.button or 
+					selector.hierarcherButton==bp.button
 	end
 	
 	
@@ -91,9 +101,17 @@ class ButtonPressed2ActivateIns inherits ButtonPressLink
 		if(button==selector.prunerButton) then
 			activeAction.instrumentsActivate.add(selector.pruner)
 			activeAction.instrumentsDesactivate.add(selector.flattener)
+			activeAction.instrumentsDesactivate.add(selector.hierarcher)
 		else
-			activeAction.instrumentsActivate.add(selector.flattener)
-			activeAction.instrumentsDesactivate.add(selector.pruner)
+			if(button==selector.hierarcherButton) then
+				activeAction.instrumentsActivate.add(selector.hierarcher)
+				activeAction.instrumentsDesactivate.add(selector.flattener)
+				activeAction.instrumentsDesactivate.add(selector.pruner)
+			else
+				activeAction.instrumentsActivate.add(selector.flattener)
+				activeAction.instrumentsDesactivate.add(selector.pruner)
+				activeAction.instrumentsDesactivate.add(selector.hierarcher)
+			end
 		end
 		
 		action := activeAction
