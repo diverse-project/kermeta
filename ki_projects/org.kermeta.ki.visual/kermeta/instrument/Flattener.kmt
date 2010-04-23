@@ -6,11 +6,9 @@
  */
 package kermeta::ki::visual;
 
-
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/action/Flat.kmt"
-
 
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction::event
