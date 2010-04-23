@@ -13,6 +13,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.UIManager;
 
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
@@ -120,8 +121,8 @@ public class MetamodelVizuFrame extends JFrame {
 	public MetamodelVizuFrame(EventManagerWrapper emw, JPanel toolbar) { 
 		super("Metamodel visualisation");
 		
-//		try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); } 
-//		catch(Exception e) { /* */ }
+		try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); } 
+		catch(Exception e) { /* */ }
 		
 		getContentPane().setLayout(new BorderLayout());
 		mmView = new MetamodelView(emw);

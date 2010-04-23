@@ -53,9 +53,9 @@ class InstrumentsSelector inherits Instrument
 		flattenerButton  := ToggleButton.new
 		hierarcherButton := ToggleButton.new
 		
-		prunerButton.initialiseWithText("P", eventManager)
-		flattenerButton.initialiseWithText("F", eventManager)
-		hierarcherButton.initialiseWithText("H", eventManager)
+		prunerButton.initialiseWithIcon("/res/prune.png", eventManager)
+		flattenerButton.initialiseWithIcon("/res/flat.png", eventManager)
+		hierarcherButton.initialiseWithIcon("/res/hierar.png", eventManager)
 		
 		interimFeedback
 	end
