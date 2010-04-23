@@ -42,7 +42,13 @@ trait OperationAspect extends ObjectAspect with LogAspect {
           i=i + 1
         })
       res.append(") : ")
-      this.getListorType(res)
+      var res1 = new StringBuilder
+      this.getListorType(res1)
+      if ("_root_.kermeta.standard.Void".equals(res1.toString)){
+        res.append("Unit")
+      }else{
+        res.append(res1)
+      }
     }
   }
 	
@@ -78,7 +84,13 @@ trait OperationAspect extends ObjectAspect with LogAspect {
         })
       res.append("):")
       /* Return Type Declaration */
-      this.getListorType(res)
+     var res1 = new StringBuilder
+      this.getListorType(res1)
+      if ("_root_.kermeta.standard.Void".equals(res1.toString)){
+        res.append("Unit")
+      }else{
+        res.append(res1)
+      }
       //this.getType.generateScalaCode(res)
       if (this.getBody!= null){
         res.append(" = {\n")
