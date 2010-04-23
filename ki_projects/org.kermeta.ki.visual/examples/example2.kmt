@@ -2,8 +2,15 @@ package ex;
 
 require kermeta
 
+using kermeta::standard
+
 
 class A {
+	attribute bbb : String
+}
+
+aspect class A {
+	attribute aa : String
 }
 
 class C {

@@ -7,13 +7,25 @@
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="A"
         superType="#//@packages.0/A/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="bbb" type="#//@packages.0/A/bbb/@containedType.0" isOrdered="true"
+          upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="A"
+        isAspect="true" superType="#//@packages.0/A.1/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="aa" type="#//@packages.0/A.1/aa/@containedType.0" isOrdered="true"
+          upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+      </ownedAttribute>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="C"
         superType="#//@packages.0/C/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
       <ownedAttribute name="varC1" type="#//@packages.0/C/varC1/@containedType.0"
           isOrdered="true" upper="1" isComposite="true">
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/A"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/A.1"/>
       </ownedAttribute>
       <ownedOperation name="opC1" type="#//@packages.0/C/opC1/@containedType.0" isOrdered="true"
           upper="1">
@@ -35,4 +47,5 @@
   </packages>
   <requires uri="kermeta"/>
   <usings qualifiedName="ex"/>
+  <usings qualifiedName="kermeta::standard"/>
 </kermeta_language_structure:ModelingUnit>
