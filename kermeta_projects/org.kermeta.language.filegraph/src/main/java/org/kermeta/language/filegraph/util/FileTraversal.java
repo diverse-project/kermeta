@@ -23,6 +23,10 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
 public class FileTraversal {
 
+	private FileTraversal(){
+		
+	}
+	
 	public static List<String> getRequires(URI uri) {
 		List<String> requires = new ArrayList<String>();
 		try {
@@ -43,10 +47,12 @@ public class FileTraversal {
 				StringTokenizer st = new StringTokenizer(sCurrentLine);
 				while (st.hasMoreTokens()) {
 					String token = st.nextToken(); 
-					if(token.startsWith("//"))
+					if(token.startsWith("//")){
 						inLineCommment = true;
-					if(token.startsWith("/*"))
+					}
+					if(token.startsWith("/*")){
 						inBlockComment =  true;
+					}
 					if(token.endsWith("*/")){
 						inBlockComment =  false;
 						//go to next line
@@ -78,6 +84,7 @@ public class FileTraversal {
 			    }
 				inLineCommment = false; // reset for next line
 			}
+			br.close();
 
 		} catch (FileNotFoundException e) {
 

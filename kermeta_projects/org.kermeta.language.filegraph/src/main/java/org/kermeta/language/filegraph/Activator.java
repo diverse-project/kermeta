@@ -16,6 +16,9 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator implements BundleActivator {
 
+	// The plug-in ID
+	public static final String PLUGIN_ID = "org.kermeta.language.filegraph";
+	
 	// The shared instance
 	private static Activator plugin;
 	public BundleContext context;

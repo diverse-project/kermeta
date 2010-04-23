@@ -28,8 +28,9 @@ public class CycleGraph extends SimpleGraph {
 	 * @return the cycles
 	 */
 	public List<List<GraphNode>> getCycles() {
-		if(cycles ==  null)
+		if(cycles ==  null){
 			cycles =  new ArrayList<List<GraphNode>>();
+		}
 		return cycles;
 	}
 }

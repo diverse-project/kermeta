@@ -30,8 +30,9 @@ public class GraphNode {
 	 * @return the directReferences
 	 */
 	public List<GraphNode> getDirectReferences() {
-		if(directReferences ==  null)
+		if(directReferences ==  null){
 			directReferences =  new ArrayList<GraphNode>();
+		}
 		return directReferences;
 	}
 

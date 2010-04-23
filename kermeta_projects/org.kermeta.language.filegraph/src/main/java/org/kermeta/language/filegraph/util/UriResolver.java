@@ -19,6 +19,10 @@ import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 
 public class UriResolver {
 
+	private UriResolver(){
+		
+	}
+	
 	public static URI resolveUri(URI fileUri, URI rootURI){
 		String s = fileUri.toString();
 		String rootFileURI = rootURI.toString();
