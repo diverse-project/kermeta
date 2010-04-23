@@ -5,11 +5,16 @@
 
 package org.kermeta.scala.parser
 
+import scala.io.Source
+
 object Runner{
 
   def main(args: Array[String]): Unit = {
-    Parser.parse
+    val input = Source.fromFile(new java.io.File("sample.kmt")).getLines("\n").reduceLeft[String](_ + '\n' + _)
+    var result = Parser.parse(input)
+    result match {
+      case Some(_ @ res) => new Interpreter(res).run
+      case None =>
+    }
   }
-
-
 }

@@ -1,32 +1,26 @@
 
 package org.kermeta.scala.parser
 
-import scala.io.Source
 import scala.util.parsing.combinator.syntactical.StandardTokenParsers
 import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
+import scala.collection.JavaConversions._
 
 object Parser extends StandardTokenParsers {
   lexical.reserved += ("package","require","using","class","aspect","abstract","inv","operation","method","is","do","end","var")
   lexical.delimiters += ("=",";","::","@","{","}","(",")",":",":=",".",",")
 
-  def parse : Unit = {
-
-    val input = Source.fromFile(new java.io.File("sample.kmt")).getLines("\n").reduceLeft[String](_ + '\n' + _)
-    val tokens = new lexical.Scanner(input)
-    val result = phrase(program)(tokens)
-
+  def parse(content : String) : Option[List[Any]] = {
+    val tokens = new lexical.Scanner(content)
+    val result : ParseResult[List[Any]] = phrase(program)(tokens)
     result match {
-      case Success(tree, _) => new Interpreter(tree).run()
+      case Success(tree, _) => {Some(tree) }
       case e: NoSuccess => {
           Console.err.println(e)
           exit(100)
+          None
         }
     }
-
-
-    
-    
   }
 
   def program = scompUnit+
@@ -74,8 +68,6 @@ object Parser extends StandardTokenParsers {
         case Some(_) =>  newo.setIsAbstract(true)
         case None => newo.setIsAbstract(false)
       }
-
-      //TODO remplir class definition
       members.foreach{member => {
           member match {
             case m : Constraint => newo.getInv.add(m)
@@ -101,99 +93,99 @@ object Parser extends StandardTokenParsers {
       //TODO
       newo
   }
-  def operation = operationKind ~ ident ~ "(" ~ ")" ~ ":" ~ ident ~ "is" ~ operationBody ^^ { case opkind ~ opName ~ _ ~ _  ~ _ ~ id2 ~ _ ~ body =>
+  def operation =  ( operationKind ~ ident ~ "(" ~ ")" ~ ":" ~ ident ~ "is" ~ operationExpressionBody) ^^ { case opkind ~ opName ~ _ ~ _  ~ _ ~ id2 ~ _ ~ body =>
       var newo =StructureFactory.eINSTANCE.createOperation
-
       opkind match {
         case "operation" => println("oper")
         case "method" => println("method")
       }
       newo.setName(opName)
+      newo.setBody(body)
       newo
   }
-  def operationKind = ("operation" | "method")
-  def property = ""
+  private def operationKind = ("operation" | "method")
+  def property = "prop" ^^^ StructureFactory.eINSTANCE.createProperty
   def abstractModifier = ("abstract")?
   def aspectModifier = ("aspect")?
 
-  def operationBody = (operationEmptyBody | operationExpressionBody)
-  def operationEmptyBody = ("abstract")
-  def operationExpressionBody = ( (annotation?) ~ fExpressionLst)
+  private def operationBody = ("abstract" ^^^ {null} | operationExpressionBody)
+  def operationExpressionBody = ( (annotation?) ~ fStatement) ^^ { case a1 ~ exp =>
+      a1 match {
+        case Some(_ @ tag) => exp.getTag.add(tag)
+        case None =>
+      }
+      exp
+  }
 
-  def fExpressionLst = (fStatement+)
-  def fStatement : Parser[Any] = (fBlock | fVariableDecl | fAssignement | fCall | fLiteral )//fLoop | fConditional | fRaiseException |  | fAssignement)
-  /*
-   *
-   *def fLoop = ""
-   def fConditional = ""
-   def fRaiseException = ""
-   */
-  def fVariableDecl : Parser[Any] = "var" ~> ident ~ ":" ~ ident ~ packageQualifiedName ^^ { case id1 ~ _ ~ id2 ~ id3  =>
+  def fExpressionLst : Parser[List[Expression]] = (fStatement+)
+  def fStatement : Parser[Expression] = (fBlock | fVariableDecl | fAssignement | fCall | fLiteral )//fLoop | fConditional | fRaiseException |  | fAssignement)
+
+  def fVariableDecl : Parser[Expression] = "var" ~> ident ~ ":" ~ ident ~ packageQualifiedName ^^ { case id1 ~ _ ~ id2 ~ id3  =>
       var newo = BehaviorFactory.eINSTANCE.createVariableDecl
-      newo.setIdentifier(id1.toString)
-      newo
-  }
-  def fAssignement = ( ident ~ ":=" ~ fStatement) ^^ { case id ~ _ ~ statment =>
-      var newo = BehaviorFactory.eINSTANCE.createAssignment
-      //newo.setTarget(ident)
-      //newo.setValue(fStatement)
-      newo
-  }
+      newo.setIdentifier(id1)
+      var typeName = id2+"::"+id3
+      //TODO FAIRE UN SET DE TYPE PROXY
 
-  def fBlock = "do" ~> fExpressionLst ~ (fRescueLst?) <~ "end" ^^ { case expL ~ rescueL =>
-      var newo = BehaviorFactory.eINSTANCE.createBlock
-      
       newo
   }
-  def fRescueLst = ident
-  def fCall : Parser[Expression] = (ident ~ callFeatureQualifiedName) ^^ { case id1 ~ qualName =>
+  private def fAssignement : Parser[Expression] = ( fCall ~ ":=" ~ fStatement) ^^ { case target ~ _ ~ statment =>
+      var newo = BehaviorFactory.eINSTANCE.createAssignment
+      newo.setTarget(target)
+      newo.setValue(statment)
+      newo
+  }
+  private def fBlock : Parser[Expression] = "do" ~> fExpressionLst ~ (fRescueLst?) <~ "end" ^^ { case expL ~ rescueL =>
+      var newo = BehaviorFactory.eINSTANCE.createBlock
+      newo.getStatement.addAll(expL)
+      newo.getStatement.add(rescueL getOrElse BehaviorFactory.eINSTANCE.createEmptyExpression)
+      newo
+  }
+  def fRescueLst = ident ^^^ {BehaviorFactory.eINSTANCE.createEmptyExpression}
+  def fCall : Parser[CallFeature] = (ident ~ callFeatureQualifiedName) ^^ { case id1 ~ qualName =>
       var newo = BehaviorFactory.eINSTANCE.createCallFeature
       id1 match {
         case "super" => {
             var newo = BehaviorFactory.eINSTANCE.createCallSuperOperation
-        }
+            newo
+          }
+          //TODO
         case _ => 
       }
       newo
   }
 
-  def fLiteral = ( stringLit | fBooleanLiteral | numericLit | fVoidLiteral )
-  def fBooleanLiteral = ("true" | "false")
-  def fVoidLiteral = ( "Void" ) ^^^ {BehaviorFactory.eINSTANCE.createVoidLiteral}
-  def callFeatureQualifiedName =  ( "." ~ ident ||| "." ~ ident ~ "(" ~ callFeatureParams ~ ")" )*
-  def callFeatureParams = ( fStatement ~ callFeatureParam )?
-  def callFeatureParam = (("," ~ fStatement)*)  ^^^ println("PARAM")
+  private def fLiteral : Parser[Expression] = ( fStringLiteral | fBooleanLiteral | fNumericLiteral | fVoidLiteral )
+  private def fBooleanLiteral : Parser[Expression] = ("true" ^^^ {
+      var newo = BehaviorFactory.eINSTANCE.createBooleanLiteral
+      newo.setValue(true)
+      newo
+    } | "false" ^^^ {
+      var newo = BehaviorFactory.eINSTANCE.createBooleanLiteral
+      newo.setValue(false)
+      newo
+    } ) 
+  private def fVoidLiteral : Parser[Expression] = ( "Void" ) ^^^ { BehaviorFactory.eINSTANCE.createVoidLiteral }
+  private def fStringLiteral : Parser[Expression] = ( stringLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createStringLiteral;newo.setValue(e.toString);newo  } )
+  private def fNumericLiteral : Parser[Expression] = ( numericLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createIntegerLiteral;newo.setValue(e.toInt);newo  } )
+
+  def callFeatureQualifiedName =  ( "." ~ ident ^^ {case _ ~ name =>
+        var newo = BehaviorFactory.eINSTANCE.createCallVariable
+        newo.setName(name)
+        newo
+    } ||| "." ~ ident ~ "(" ~ callFeatureParams ~ ")" ^^ { case _ ~ name ~ _ ~ params ~ _ =>
+        var newo = BehaviorFactory.eINSTANCE.createCallFeature
+        newo.setName(name)
+        params match {
+          case Some(_ @ p) => newo.getParameters.addAll(p)
+          case None =>
+        }
+        newo
+    }
+  )*
+  private def callFeatureParams = ( fStatement ~ callFeatureParam ^^ { case stat ~statL => List(stat)++statL } )?
+  private def callFeatureParam = (("," ~ fStatement ^^ { case delim ~ stat => stat } )*)
 
   def expr = (stringLit | ident )
-
-  /*
-
-   def stmt: Parser[Statement] = ( "print" ~ expr ^^ { case _ ~ e => Print(e) }
-   | "space" ^^^ Space()
-   | "repeat" ~ numericLit ~ (stmt+) ~ "next" ^^ {
-   case _ ~ times ~ stmts ~ _ => Repeat(times.toInt, stmts)
-   }
-   | "let" ~ ident ~ "=" ~ expr ^^ { case _ ~ id ~ _ ~ e => Let(id, e) } )
-
-   def expr = ( "HELLO" ^^^ Hello()
-   | "GOODBYE" ^^^ Goodbye()
-   | stringLit ^^ { case s => Literal(s) }
-   | numericLit ^^ { case s => Literal(s) }
-   | ident ^^ { case id => Variable(id) } )
-
-   */
-}
-
-class Interpreter(tree: List[_]) {
-  def run() {
-    walkTree(tree)
-  }
-  private def walkTree(tree: List[_]) {
-    tree match {
-      case e :: rest => {println(e.toString);walkTree(rest)  }
-      case Nil =>
-    }
-  }
 
 }
 
