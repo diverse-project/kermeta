@@ -6,6 +6,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -20,6 +23,7 @@ import javax.swing.SwingConstants;
 import org.kermeta.ki.malai.Zoomable;
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
+import org.kermeta.ki.visual.MetamodelVizuFrame;
 import org.kermeta.ki.visual.view.ComponentView.Visibility;
 
 import edu.uci.ics.jung.algorithms.layout.KKLayout;
@@ -30,7 +34,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 
-public class MetamodelView extends JPanel implements Scrollable, Zoomable {
+public class MetamodelView extends JPanel implements Scrollable, Zoomable, MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = 1L;
 
 	protected List<EntityView> entities;
@@ -235,6 +239,9 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable {
 		
 		if(eventManager!=null)
 			eventManager.attachTo(this);
+		
+		addMouseListener(this); //TODO to remove!!
+		addMouseMotionListener(this); //TODO to remove!!
 	}
 	
 	
@@ -450,6 +457,77 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable {
 
 	public void zoomOut(double decrement) {
 		zoom -= decrement;
+	}
+
+
+	public void mouseClicked(MouseEvent e) {
+		// 
+		
+	}
+
+
+	public void mouseEntered(MouseEvent e) {
+		// 
+		
+	}
+
+
+	public void mouseExited(MouseEvent e) {
+//		
+	}
+
+
+	public EntityView draggedShape;//TODO to remove!!
+	public int startX;
+	public int startY;
+	
+	public void mousePressed(MouseEvent e) {//TODO to remove
+		if(MetamodelVizuFrame.hand.isSelected()) {
+			draggedShape = null;
+			int i=0, size = entities.size();
+			
+			while(draggedShape==null && i<size) {
+				if(entities.get(i).getBorders().contains(e.getX(), e.getY())) {
+					draggedShape = entities.get(i);
+					startX = e.getX();
+					startY = e.getY();
+				}
+				else
+					i++;
+			}
+		}
+	}
+
+
+	public void mouseReleased(MouseEvent e) {
+		draggedShape = null;
+		startX = 0;
+		startY = 0;
+	}
+
+
+	public void mouseDragged(MouseEvent e) {
+		if(draggedShape!=null) {
+			int gapX = e.getX() - startX;
+			int gapY = e.getY() - startY;
+			draggedShape.setCentre((int)draggedShape.getCentre().x + gapX, (int)draggedShape.getCentre().y + gapY);
+			startX = e.getX();
+			startY = e.getY();
+			
+			draggedShape.update();
+			
+			for(LinkView link : links)
+				if(link.getEntitySrc()==draggedShape || link.getEntityTar()==draggedShape)
+					link.update();
+				
+			repaint();
+			revalidate();
+		}
+	}
+
+
+	public void mouseMoved(MouseEvent e) {
+		// 
 	}
 }
 

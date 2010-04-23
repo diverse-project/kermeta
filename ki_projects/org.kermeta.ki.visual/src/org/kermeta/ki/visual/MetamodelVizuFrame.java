@@ -13,7 +13,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.UIManager;
 
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
@@ -28,16 +27,19 @@ public class MetamodelVizuFrame extends JFrame {
 	protected MetamodelView mmView;
 	
 	
+	public static AbstractButton hand;//TODO to remove!!
+	
 	
 	public static RuntimeObject initialiseToolbar(RuntimeObject toolbarRO, RuntimeObject undoButRO, RuntimeObject redoButRO, 
 							RuntimeObject prunerButRO, RuntimeObject flattenerButRO, RuntimeObject hierarcherButRO, 
-							RuntimeObject prunerGrayButRO, RuntimeObject prunerHideButRO) {
-		JPanel toolbar = (JPanel) toolbarRO.getUserData();
+							RuntimeObject handButRO, RuntimeObject prunerGrayButRO, RuntimeObject prunerHideButRO) {
+		JPanel toolbar 				= (JPanel) toolbarRO.getUserData();
 		AbstractButton undoBut 		= (AbstractButton)undoButRO.getUserData();
 		AbstractButton redoBut 		= (AbstractButton)redoButRO.getUserData();
 		AbstractButton prunerBut 	= (AbstractButton)prunerButRO.getUserData();
 		AbstractButton flattenerBut	= (AbstractButton)flattenerButRO.getUserData();
 		AbstractButton hierarcherBut= (AbstractButton)hierarcherButRO.getUserData();
+		AbstractButton handBut		= (AbstractButton)handButRO.getUserData();
 		AbstractButton grayedBut 	= (AbstractButton)prunerGrayButRO.getUserData();
 		AbstractButton hideBut 		= (AbstractButton)prunerHideButRO.getUserData();
 		ButtonGroup groupSelector 	= new ButtonGroup();
@@ -50,6 +52,8 @@ public class MetamodelVizuFrame extends JFrame {
 		toolbar.add(prunerBut);
 		toolbar.add(hierarcherBut);
 		toolbar.add(flattenerBut);
+		toolbar.add(handBut);
+		hand = handBut;
 		toolbar.add(Box.createHorizontalStrut(50));
 		toolbar.add(hideBut);
 		toolbar.add(grayedBut);
@@ -57,6 +61,7 @@ public class MetamodelVizuFrame extends JFrame {
 		groupSelector.add(prunerBut);
 		groupSelector.add(hierarcherBut);
 		groupSelector.add(flattenerBut);
+		groupSelector.add(handBut);
 		
 		groupPruner.add(hideBut);
 		groupPruner.add(grayedBut);
@@ -121,8 +126,8 @@ public class MetamodelVizuFrame extends JFrame {
 	public MetamodelVizuFrame(EventManagerWrapper emw, JPanel toolbar) { 
 		super("Metamodel visualisation");
 		
-		try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); } 
-		catch(Exception e) { /* */ }
+//		try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); } 
+//		catch(Exception e) { /* */ }
 		
 		getContentPane().setLayout(new BorderLayout());
 		mmView = new MetamodelView(emw);

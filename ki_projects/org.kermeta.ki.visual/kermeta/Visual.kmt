@@ -12,6 +12,7 @@ package kermeta::ki::visual;
 //require kermeta
 require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Pruner.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Hand.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Hierarcher.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/VisitableKermeta.km"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/InstrumentsSelector.kmt"
@@ -63,6 +64,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	
 	attribute pruner : Pruner
 	
+	attribute hand : Hand
+	
 	attribute hierarcher : Hierarcher
 	
 	attribute flattener : Flattener
@@ -94,7 +97,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 //		loadMetamodel("/examples/example2.km")
 //		loadMetamodel("/examples/example1.km")
 //		loadMetamodel("/examples/Ecore.km")
-		loadMetamodel("/examples/Ecore2.km")
+		loadMetamodel("/examples/Ecore.km")
 //		loadMetamodel("/examples/UML.km")
 //		loadMetamodel("/examples/UMLAspect.km")
 
@@ -107,6 +110,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		actionRegistry.initialise(undoCollector)
 		actionRegistry.handlers.add(self)
 
+		hand			 := Hand.new
 		hierarcher		 := Hierarcher.new
 		zoomer			 := Zoomer.new
 		pruner      	 := Pruner.new
@@ -116,6 +120,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		customiser		 := InstrumentsCustomiser.new
 		scroller         := Scroller.new
 		
+		hand.initialise(actionRegistry)
 		hierarcher.initialise(actionRegistry)
 		zoomer.initialise(actionRegistry)
 		flattener.initialise(actionRegistry)
@@ -127,11 +132,13 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		undoManager.initialise(actionRegistry)
 		undoManager.initialiseWidgets(eventManager)
 		selector.initialise(actionRegistry)
-		selector.initialiseInstruments(pruner, flattener, hierarcher, eventManager)
+		selector.initialiseInstruments(pruner, flattener, hierarcher, hand, eventManager)
 
 		initialiseUI
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, viewPanel, eventManager)
 
+		hand.picker := metamodel
+		hand.initialiseLinks(eventManager)
 		hierarcher.metamodel := metamodel
 		hierarcher.initialiseLinks(eventManager)
 		zoomer.zoomable  := metamodel
@@ -189,8 +196,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		toolbar.initialise(eventManager)
 		
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialiseToolbar(toolbar, undoManager.undoButton, 
-					undoManager.redoButton, selector.prunerButton, selector.flattenerButton, selector.hierarcherButton, pruner.grayedButton, 
-					pruner.hideButton)
+					undoManager.redoButton, selector.prunerButton, selector.flattenerButton, selector.hierarcherButton,
+					selector.handButton, pruner.grayedButton, pruner.hideButton)
 					
 		toolbar.components.add(undoManager.undoButton)
 		toolbar.components.add(undoManager.redoButton)
@@ -199,6 +206,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		toolbar.components.add(selector.prunerButton)
 		toolbar.components.add(selector.hierarcherButton)
 		toolbar.components.add(selector.flattenerButton)
+		toolbar.components.add(selector.handButton)
 	end
 
 
