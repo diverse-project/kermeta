@@ -38,7 +38,7 @@ abstract class Interaction inherits StateMachine
 	method matches(obj : Object) : Boolean is do
 		result := if(obj.isVoid and pickable.isVoid and picker.isVoid) then false
 				else if(picker.isVoid) 
-					then pickable==obj else picker==obj or picker.containsObject(obj)
+					then pickable==obj else (picker==obj).orElse{b | picker.containsObject(obj)}
 					end 
 				end
 	end
