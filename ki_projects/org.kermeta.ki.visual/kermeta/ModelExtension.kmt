@@ -133,10 +133,15 @@ aspect class ModelingUnit inherits Picker {
 	
 	
 	method containsObject(obj : Object) : Boolean is do
-		packages.exists{p |//TODO see if ownedTypeDefinition works
-			result := p.allNestedClassDefinitions.exists{cd | cd==obj }
-			result
-		}
+		if((obj.isVoid).orElse{b | not obj.isInstanceOf(ClassDefinition) and not obj.isInstanceOf(Operation)
+				and not obj.isInstanceOf(Property)}) then
+			result := false
+		else
+			packages.exists{p |//TODO see if ownedTypeDefinition works
+				result := p.allNestedClassDefinitions.exists{cd | cd==obj }
+				result
+			}
+		end
 	end
 }
 

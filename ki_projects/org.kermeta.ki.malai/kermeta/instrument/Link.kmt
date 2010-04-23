@@ -76,7 +76,7 @@ abstract class Link inherits InteractionHandler
 		result := true
 		
 		instrument.links.exists{link |
-			if(link!=self and link.isRunning and link.getActionClass==getActionClass) then
+			if((link!=self).andThen{b| link.isRunning.andThen{b| link.getActionClass==getActionClass}}) then
 				result := false
 			end
 			result
