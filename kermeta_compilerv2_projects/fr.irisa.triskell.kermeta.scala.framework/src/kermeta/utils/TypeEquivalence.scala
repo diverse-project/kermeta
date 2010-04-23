@@ -65,15 +65,15 @@ object TypeEquivalence {
 		Hashtable.put("getValue", "get");
 		Hashtable.put("keys", "keySet");
 		//Hashtable.put("getValue", "get");
-		methodEquivalence.put("java.util.HashMap", Hashtable);
+		methodEquivalence.put("_root_.java.util.HashMap", Hashtable);
 		
 		var Stack : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		Stack.put("peek", "peek");
-		methodEquivalence.put("kermeta.utils.Stack", Stack);
+		methodEquivalence.put("_root_.kermeta.utils.Stack", Stack);
 		
 		var Collection : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		Collection.put("count", "countElement");
-		methodEquivalence.put("kermeta.standard.Collection", Collection);
+		methodEquivalence.put("_root_.kermeta.standard.Collection", Collection);
 
    /*             Collection  = new java.util.HashMap[String,String]
 		Collection.put("add", "addUnique");
@@ -81,14 +81,14 @@ object TypeEquivalence {
 		methodEquivalence.put("java.util.List", Collection);*/
 		var ClassDefinition : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		ClassDefinition.put("allAttribute", "eAllAttributes")
-		methodEquivalence.put("fr.irisa.triskell.kermeta.scala.framework.language.structure.ClassDefinition", ClassDefinition);
+		methodEquivalence.put("_root_.fr.irisa.triskell.kermeta.scala.framework.language.structure.ClassDefinition", ClassDefinition);
 		
 		
    		//methodEquivalence
 		var Str : java.util.HashMap[String,String] = new java.util.HashMap[String,String]
 		Str.put("size", "ksize");
-		methodEquivalence.put("kermeta.standard.String", Str);
-		methodEquivalence.put("String", Str);
+		methodEquivalence.put("_root_.kermeta.standard.String", Str);
+		methodEquivalence.put("_root_.String", Str);
 		methodEquivalence.put("java.lang.String", Str);
 		methodEquivalence.put("_root_.java.lang.String", Str);
 		
