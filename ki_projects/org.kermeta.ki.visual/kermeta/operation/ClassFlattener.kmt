@@ -128,14 +128,8 @@ class ClassFlattener
 				inBackup := InheritanceBackup.new
 				inBackup.source := st
 				inBackup.target := currentClass
-				inBackup.sourceType := st.superType.detect{st2 |
-					if(st2.isInstanceOf(ParameterizedType)) then
-						if(st2.asType(ParameterizedType).typeDefinition==currentClass) then
-							true
-						end
-					end
-				}
-				
+				inBackup.sourceType := st.superType.detect{st2 | (st2.isInstanceOf(ParameterizedType)).andThen{b | st2.asType(ParameterizedType).typeDefinition==currentClass }}
+
 				removedInheritances.add(inBackup)
 				if(not inBackup.sourceType.isVoid) then
 					st.superType.remove(inBackup.sourceType)
