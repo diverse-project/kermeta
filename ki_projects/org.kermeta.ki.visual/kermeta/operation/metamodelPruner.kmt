@@ -37,6 +37,8 @@ class RequiredEnumeration
 
 class MetamodelPruner
 {
+	attribute radius : Integer 
+
 	attribute isHierarchicalPruning : Boolean
 	
 	/* Input Kermeta Meta-model */
@@ -157,13 +159,13 @@ class MetamodelPruner
 	/* Transform Kermeta input meta-model to pruned output meta-model */
 	operation transform(): Void is do
 		getRequiredConcepts
-		TagRemoval
+//		TagRemoval
 //		OperationRemoval
-//		PropertyRemoval
+		PropertyRemoval
 		ClassRemoval
-		EnumerationRemoval
-		PrimitiveTypeRemoval
-		EmptyPackageRemoval
+//		EnumerationRemoval
+//		PrimitiveTypeRemoval
+//		EmptyPackageRemoval
 	end
 	
 
@@ -173,7 +175,7 @@ class MetamodelPruner
 		var cd : ClassDefinition
 		
 		if (not aPackage.isVoid) then
-			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{object | 
+			aPackage.ownedTypeDefinition.each{object |
 				if object.isInstanceOf(ClassDefinition) then
 					cd := object.asType(ClassDefinition)
 					
@@ -198,7 +200,7 @@ class MetamodelPruner
 		var en : Enumeration
 		
 		if(not aPackage.isVoid) then
-			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{object | 
+			aPackage.ownedTypeDefinition.each{object | 
 				if object.isInstanceOf(Enumeration) then
 					en := object.asType(Enumeration)
 					
@@ -222,7 +224,7 @@ class MetamodelPruner
 
 	operation includePropertiesInPackage(aPackage : Package, props : Set<Property>) : Void  is do
 		if(not aPackage.isVoid) then
-			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each{object |
+			aPackage.ownedTypeDefinition.each{object |
 				if object.isInstanceOf(ClassDefinition) then
 					object.asType(ClassDefinition).ownedAttribute.each{prop |
 						requiredMetaProperties.each{rprop |
@@ -428,10 +430,10 @@ class MetamodelPruner
 	
 	
 
-	operation includeAllMultiLevelSuperClasses():Void is do
+	operation includeAllMultiLevelSuperClasses(classes : set ClassDefinition[0..*]):Void is do
 		var cd : ClassDefinition
 		
-		requiredKermetaMetaClasses.each { c |
+		classes.each { c |
 			c.superType.each { t | 
 				if t.isInstanceOf(Class) then
 					cd := t.asType(Class).classDefinition
@@ -459,7 +461,19 @@ class MetamodelPruner
 	end
 		
 		
+	/*	
+	operation includeSuperClasses():Void is do
+		var cd : ClassDefinition
 		
+		requiredKermetaMetaClasses.each { c |
+			c.superType.each { t | 
+				if t.isInstanceOf(Class) then
+					cd := t.asType(Class).classDefinition
+				end
+			}
+		}
+	end
+		*/
 		
 	operation getRequiredConcepts():Void is do
 		if(isHierarchicalPruning) then
@@ -467,32 +481,65 @@ class MetamodelPruner
 				includeClassesInPackage(p, requiredKermetaMetaClasses)
 			}
 			
-			includeAllMultiLevelSuperClasses
-			includeAllMultiLevelSuperClasses
-			includeAllMultiLevelSuperClasses
+			var size2 : Integer init -1
+			
+			from var size : Integer init 0
+			until size==size2
+			loop
+				size  := requiredKermetaMetaClasses.size
+				includeAllMultiLevelSuperClasses(requiredKermetaMetaClasses)
+				size2 := requiredKermetaMetaClasses.size
+			end
+			
+			requiredKermetaMetaClasses.each{clazz | stdio.writeln(clazz.name)
+				clazz.ownedAttribute.each{attr |
+					if(not attr.type.isInstanceOf(PrimitiveType)) then
+						extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, attr)
+					end
+				}
+			}
 		else
 			inputKermetaMetamodel.packages.each{p |
 				includeClassesInPackage(p, requiredKermetaMetaClasses)
-				includeEnumsInPackage(p, requiredKermetaMetaEnumerations)
-				includePropertiesInPackage(p, requiredKermetaMetaProperties)
-			}	
-			//Add all multilevel superclasses
-			includeAllMultiLevelSuperClasses
-		
-			//Phase 2: Adding all required properties
-			//Pass 1
-			includeAllObligatoryPropertiesAndTheirTypes
-			//Add all multilevel superclasses
-			includeAllMultiLevelSuperClasses
-		
-			includeAllObligatoryPropertiesAndTheirTypes
-			//Add all multilevel superclasses
-			includeAllMultiLevelSuperClasses
-	
-			//Pass 3
-			includeAllObligatoryPropertiesAndTheirTypes
-			//Add all multilevel superclasses
-			includeAllMultiLevelSuperClasses
+			//	includeEnumsInPackage(p, requiredKermetaMetaEnumerations)
+			//	includePropertiesInPackage(p, requiredKermetaMetaProperties)
+			}
+			
+			radius := 1//FIXME
+			
+			if(radius<=0) then
+				includeAllMultiLevelSuperClasses(requiredKermetaMetaClasses)
+				includeAllObligatoryPropertiesAndTheirTypes
+				//Add all multilevel superclasses
+				includeAllMultiLevelSuperClasses(requiredKermetaMetaClasses)
+			
+				//Pass 3
+				includeAllObligatoryPropertiesAndTheirTypes
+				//Add all multilevel superclasses
+				includeAllMultiLevelSuperClasses(requiredKermetaMetaClasses)
+			else
+				var formerClasses : set ClassDefinition[0..*] init Set<ClassDefinition>.new
+			
+				from var cpt : Integer init 0
+				until cpt>=radius
+				loop
+					requiredKermetaMetaClasses.each{mc | formerClasses.add(mc)}
+					includeAllObligatoryPropertiesAndTheirTypes
+					includeAllMultiLevelSuperClasses(formerClasses)
+					cpt := cpt + 1
+					formerClasses.clear
+				end
+				
+				requiredKermetaMetaClasses.each{c |
+					if(not c.isVoid) then//FIXME
+						c.ownedAttribute.each{ prop |
+							if prop.type.isInstanceOf(PrimitiveType) then
+								requiredKermetaMetaProperties.add(prop)
+							end
+						}
+					end
+				}
+			end
 		end
 	end
 
@@ -553,7 +600,7 @@ class MetamodelPruner
 	end
 	
 	
-	/*
+	
 	operation PropertyRemovalInPackage(aPackage : Package) : Void is do
 		var removeProperty : Boolean
 		
@@ -561,11 +608,9 @@ class MetamodelPruner
 			aPackage.asType(TypeDefinitionContainer).ownedTypeDefinition.each {object | 
 				if object.isInstanceOf(ClassDefinition) then
 					object.asType(ClassDefinition).ownedAttribute.each {prop | 	
-			 			removeProperty := requiredKermetaMetaProperties.exists{reqProp |
-				 			reqProp == prop
-			 			}
+			 			removeProperty := not requiredKermetaMetaProperties.exists{reqProp | reqProp == prop }
 			 								
-			 			if removeProperty then								
+			 			if removeProperty then
 			 				extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, prop)
 //		 					extern org::kermeta::ki::visual::view::MetamodelView.refresh(inputKermetaMetamodel)
 		 					
@@ -591,7 +636,7 @@ class MetamodelPruner
 	operation PropertyRemoval(): Void is do
 		inputKermetaMetamodel.packages.each{ p | PropertyRemovalInPackage(p)}
 	end
-	*/
+	
 	
 	
 	operation ClassRemovalInPackage(aPackage : Package):Void is do

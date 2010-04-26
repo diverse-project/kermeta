@@ -41,6 +41,10 @@ public abstract class ComponentView {
 			EntityElementView attr = (EntityElementView) prunedObject;
 			attr.visibility    = isHidePolicy ? Visibility.NONE : Visibility.GRAYED;
 		}
+		else if(prunedObject instanceof LinkView) {
+			LinkView link = (LinkView) prunedObject;
+			link.visibility = isHidePolicy ? Visibility.NONE : Visibility.GRAYED;
+		}
 		
 		return prunedObjectRO.getFactory().getMemory().voidINSTANCE;
 	}

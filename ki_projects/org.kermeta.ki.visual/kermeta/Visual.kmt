@@ -97,9 +97,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 //		loadMetamodel("/examples/example2.km")
 //		loadMetamodel("/examples/example1.km")
 //		loadMetamodel("/examples/Ecore.km")
-		loadMetamodel("/examples/Ecore.km")
-//		loadMetamodel("/examples/UML.km")
-//		loadMetamodel("/examples/UMLAspect.km")
+		loadMetamodel("/examples/UML.km")
 
 		self.eventManager := eventManager
 		undoCollector     := UndoCollector.new 
@@ -131,16 +129,22 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		pruner.initialiseWidgets(eventManager)
 		undoManager.initialise(actionRegistry)
 		undoManager.initialiseWidgets(eventManager)
+		
+		pruner.metamodel := metamodel
+		pruner.initialiseLinks(eventManager)
+		flattener.metamodel := metamodel
+		flattener.initialiseLinks(eventManager)
+		hand.picker := metamodel
+		hand.initialiseLinks(eventManager)
+		hierarcher.metamodel := metamodel
+		hierarcher.initialiseLinks(eventManager)
+		
 		selector.initialise(actionRegistry)
 		selector.initialiseInstruments(pruner, flattener, hierarcher, hand, eventManager)
 
 		initialiseUI
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, viewPanel, eventManager)
 
-		hand.picker := metamodel
-		hand.initialiseLinks(eventManager)
-		hierarcher.metamodel := metamodel
-		hierarcher.initialiseLinks(eventManager)
 		zoomer.zoomable  := metamodel
 		zoomer.metamodel := metamodel
 		zoomer.initialiseLinks(eventManager)
@@ -156,10 +160,6 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		selector.initialiseLinks(eventManager)
 		selector.setActivated(true)
 		pruner.metamodel := metamodel
-		pruner.initialiseLinks(eventManager)
-		flattener.metamodel := metamodel
-		flattener.initialiseLinks(eventManager)
-
 		undoManager.undoCollector := undoCollector		
 		undoManager.picker := toolbar
 		undoCollector.handlers.add(undoManager)
@@ -171,14 +171,32 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		metamodel.accept(model2view)
 		
 		//TOREMOVE
-//		var action : ActionPrune init ActionPrune.new
-//		action.metamodel := metamodel
-//		action.actionRegistry := actionRegistry
-//		action.selection.add(model2view.clazz)
-//		action.viewPolicy := PrunerViewPolicy.hide
-//		action.doIt()
-//		extern org::kermeta::ki::visual::MetamodelVizuFrame.organise(self)
-//		extern org::kermeta::ki::visual::view::MetamodelView.update(metamodel)
+/*		var action : PruneHierarchy init PruneHierarchy.new
+		action.metamodel := metamodel
+		action.actionRegistry := actionRegistry
+		action.selection.add(model2view.clazz)
+		action.viewPolicy := PrunerViewPolicy.hide
+		action.doIt()
+		extern org::kermeta::ki::visual::MetamodelVizuFrame.organise(self)
+		extern org::kermeta::ki::visual::view::MetamodelView.update(metamodel)*/
+/* 		var action2 : Flat init Flat.new
+		action2.metamodel := metamodel
+		action2.actionRegistry := actionRegistry
+		action2.classToFlat := model2view.clazz
+		action2.doIt()
+		
+		var action : ActionPrune init ActionPrune.new
+		action.metamodel := metamodel
+		action.actionRegistry := actionRegistry
+		action.selection.add(model2view.clazz)
+		action.viewPolicy := PrunerViewPolicy.hide
+		action.doIt() */
+	//	extern org::kermeta::ki::visual::MetamodelVizuFrame.organise(self)
+	//	extern org::kermeta::ki::visual::view::MetamodelView.update(metamodel)
+		
+		
+	//	extern org::kermeta::ki::visual::MetamodelVizuFrame.organise(self)
+	//	extern org::kermeta::ki::visual::view::MetamodelView.update(metamodel)
 	end
 	
 	
