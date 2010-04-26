@@ -16,12 +16,15 @@ public class RelationView extends LinkView {
 
 	protected boolean isComposition;
 	
+	protected GeneralPath composition;
+	
 	
 	public RelationView(EntityView src, EntityView target, boolean isComposition, 
 			String srcRole, String targetRole, String srcCard, String targetCard) {
 		super(src, target);
 		
 		this.isComposition = isComposition;
+		composition		   = isComposition ? new GeneralPath() : null;
 
 		if(srcRole!=null)
 			endingSrc = new RoleView(srcRole, srcCard, this, true);
@@ -30,6 +33,40 @@ public class RelationView extends LinkView {
 			endingTar = new RoleView(targetRole, targetCard, this, false);
 	}
 
+	
+	
+	
+	@Override
+	public void update() {
+		super.update();
+		
+		if(pointSrc!=null && pointTar!=null) {
+			final double lineAngle = getLineAngle();
+			final double xRot;
+			final double yRot;
+			final double b = getB();
+			
+			if(equals(Math.abs(lineAngle), Math.PI/2.)) {
+				xRot = -Math.sin(-lineAngle)*(pointSrc.y-b);
+				yRot = Math.cos(-lineAngle)*(pointSrc.y-b)+b;
+			}
+			else {
+				xRot = Math.cos(-lineAngle)*pointSrc.x-Math.sin(-lineAngle)*(pointSrc.y-b); 
+				yRot = Math.sin(-lineAngle)*pointSrc.x+Math.cos(-lineAngle)*(pointSrc.y-b)+b;
+			}
+			
+			if(isComposition) {
+				composition.reset();
+				composition.moveTo((float)xRot, (float)yRot);
+				composition.lineTo((float)xRot+LENGTH_ARROW, (float)yRot+WIDTH_ARROW/2f);
+				composition.lineTo((float)xRot+LENGTH_ARROW*2f, (float)yRot);
+				composition.lineTo((float)xRot+LENGTH_ARROW, (float)yRot-WIDTH_ARROW/2f);
+				composition.closePath();
+			}
+		}
+	}
+	
+	
 
 
 	@Override
@@ -43,7 +80,7 @@ public class RelationView extends LinkView {
 			double xRot;
 			double yRot;
 			
-			if(Math.abs(lineAngle)==(Math.PI/2.)) {
+			if(equals(Math.abs(lineAngle), Math.PI/2.)) {
 				yRot = pointTar.y;
 				xRot = pointTar.x;
 			}
@@ -56,26 +93,8 @@ public class RelationView extends LinkView {
 			g.drawLine((int)xRot, (int)yRot, (int)xRot-LENGTH_ARROW, (int)yRot-WIDTH_ARROW/2);
 			g.drawLine((int)xRot, (int)yRot, (int)xRot-LENGTH_ARROW, (int)yRot+WIDTH_ARROW/2);
 			
-			if(isComposition) {
-				GeneralPath compoPath = new GeneralPath();
-				
-				if(Math.abs(lineAngle)==(Math.PI/2.)) {
-					xRot = pointSrc.x;
-					yRot = pointSrc.y;
-				}
-				else {
-					xRot = Math.cos(-lineAngle)*pointSrc.x-Math.sin(-lineAngle)*(pointSrc.y-b); 
-					yRot = Math.sin(-lineAngle)*pointSrc.x+Math.cos(-lineAngle)*(pointSrc.y-b)+b;
-				}
-				
-				compoPath.moveTo((float)xRot, (float)yRot);
-				compoPath.lineTo((float)xRot+LENGTH_ARROW, (float)yRot+WIDTH_ARROW/2f);
-				compoPath.lineTo((float)xRot+LENGTH_ARROW*2f, (float)yRot);
-				compoPath.lineTo((float)xRot+LENGTH_ARROW, (float)yRot-WIDTH_ARROW/2f);
-				compoPath.closePath();
-				
-				g.fill(compoPath);
-			}
+			if(isComposition)
+				g.fill(composition);
 			
 			if(translation!=null)
 				endRotation(translation, g);

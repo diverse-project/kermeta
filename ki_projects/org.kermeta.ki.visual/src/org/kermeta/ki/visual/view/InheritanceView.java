@@ -39,7 +39,7 @@ public class InheritanceView extends LinkView {
 			final double yRot;
 			final double b = getB();
 			
-			if(Math.abs(lineAngle)==(Math.PI/2.)) {
+			if(equals(Math.abs(lineAngle), Math.PI/2.)) {
 				yRot = pointTar.y;
 				xRot = pointTar.x;
 			}
