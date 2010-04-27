@@ -184,19 +184,20 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		action2.actionRegistry := actionRegistry
 		action2.classToFlat := model2view.clazz
 		action2.doIt()
-		
-		var action : ActionPrune init ActionPrune.new
+		*/
+/*		var action : ActionPrune init ActionPrune.new
 		action.metamodel := metamodel
 		action.actionRegistry := actionRegistry
 		action.selection.add(model2view.clazz)
+		action.selection.add(model2view.op)
+		action.selection.add(model2view.prop)
+		action.selection.add(model2view.asso)
+		action.selection.add(model2view.pkg)
+		action.selection.add(model2view.param)
 		action.viewPolicy := PrunerViewPolicy.hide
-		action.doIt() */
-	//	extern org::kermeta::ki::visual::MetamodelVizuFrame.organise(self)
-	//	extern org::kermeta::ki::visual::view::MetamodelView.update(metamodel)
-		
-		
-	//	extern org::kermeta::ki::visual::MetamodelVizuFrame.organise(self)
-	//	extern org::kermeta::ki::visual::view::MetamodelView.update(metamodel)
+		action.doIt() 
+		extern org::kermeta::ki::visual::MetamodelVizuFrame.organise(self)
+		extern org::kermeta::ki::visual::view::MetamodelView.update(metamodel)*/
 	end
 	
 	
@@ -269,7 +270,12 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 
 
 class Metamodel2ViewVisitor inherits KermetaVisitor {
-	reference clazz : ClassDefinition//TO REMOVE
+/* 	reference clazz : ClassDefinition//TO REMOVE
+	reference op    : ClassDefinition//TO REMOVE
+	reference prop    : ClassDefinition//TO REMOVE
+	reference asso    : ClassDefinition//TO REMOVE
+	reference pkg    : ClassDefinition//TO REMOVE
+	reference param    : ClassDefinition//TO REMOVE */
 	
 	attribute firstPass : Boolean
 	
@@ -331,6 +337,11 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 				var pt : PrimitiveType init p.type.asType(PrimitiveType)
 				
 				extern org::kermeta::ki::visual::view::EntityView.onAttributeAdded(p.owningClass, p, p.name, pt.name)
+			else
+				if(p.type.isInstanceOf(Enumeration)) then
+					var enum : Enumeration init p.type.asType(Enumeration)
+					extern org::kermeta::ki::visual::view::EntityView.onAttributeAdded(p.owningClass, p, p.name, enum.name)
+				end
 			end
 		end
 	end
@@ -338,7 +349,12 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 	
 	
 	method visitClassDefinition(c: ClassDefinition) : Void is do
-		if(c.name=="Class") then clazz := c end
+/*		if(c.name=="Class") then clazz := c end
+		if(c.name=="Package") then pkg := c end
+		if(c.name=="Operation") then op := c end
+		if(c.name=="Property") then prop := c end
+		if(c.name=="Association") then asso := c end
+		if(c.name=="Parameter") then param := c end*/
 	
 		if(firstPass) then
 			classes.add(c)
