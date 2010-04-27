@@ -32,7 +32,7 @@
   	</dependency>
   	<dependency>
   		<groupId>org.kermeta</groupId>
-  		<artifactId>fr.irisa.triskell.eclipse.util</artifactId>
+  		<artifactId>fr.irisa.triskell.eclipse.util-NoUI</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
