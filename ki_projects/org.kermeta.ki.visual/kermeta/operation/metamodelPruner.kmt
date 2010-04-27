@@ -37,6 +37,8 @@ class RequiredEnumeration
 
 class MetamodelPruner
 {
+	attribute considerCard0 : Boolean
+
 	attribute radius : Integer 
 
 	attribute isHierarchicalPruning : Boolean
@@ -269,22 +271,26 @@ class MetamodelPruner
 			 	primTyp	   := if(propPrim) then prop.type.asType(PrimitiveType) else void end
 			 	
 				//Option 1
-				if propLower0 and  propClass then
-					requiredKermetaMetaProperties.add(prop)
-					requiredKermetaMetaClasses.add(propCD)
-					requiredKermetaMetaClasses.add(prop.owningClass)
-					
-					if not oppVoid then
-						requiredKermetaMetaProperties.add(prop.opposite)
-						requiredKermetaMetaClasses.add(oppPropCD)
-						requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+				if propLower0 and propClass then
+					if(considerCard0.orElse{b | requiredKermetaMetaClasses.contains(propCD)}) then
+						requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaClasses.add(propCD)
+						requiredKermetaMetaClasses.add(prop.owningClass)
+						
+						if not oppVoid then
+							requiredKermetaMetaProperties.add(prop.opposite)
+							requiredKermetaMetaClasses.add(oppPropCD)
+							requiredKermetaMetaClasses.add(prop.opposite.owningClass)
+						end
 					end
 				end
 				
 				//Option 2
 				if propLower0 and propEnum then
-					requiredKermetaMetaProperties.add(prop)
-					requiredKermetaMetaEnumerations.add(enum)
+					if(considerCard0.orElse{b | requiredKermetaMetaEnumerations.contains(enum)}) then
+						requiredKermetaMetaProperties.add(prop)
+						requiredKermetaMetaEnumerations.add(enum)
+					end
 				end
 				
 				//Option 3
@@ -461,21 +467,9 @@ class MetamodelPruner
 	end
 		
 		
-	/*	
-	operation includeSuperClasses():Void is do
-		var cd : ClassDefinition
-		
-		requiredKermetaMetaClasses.each { c |
-			c.superType.each { t | 
-				if t.isInstanceOf(Class) then
-					cd := t.asType(Class).classDefinition
-				end
-			}
-		}
-	end
-		*/
-		
 	operation getRequiredConcepts():Void is do
+		considerCard0 := true //FIXME
+		
 		if(isHierarchicalPruning) then
 			inputKermetaMetamodel.packages.each{p |
 				includeClassesInPackage(p, requiredKermetaMetaClasses)
@@ -505,7 +499,7 @@ class MetamodelPruner
 			//	includePropertiesInPackage(p, requiredKermetaMetaProperties)
 			}
 			
-			radius := 1//FIXME
+			radius := 0//FIXME
 			
 			if(radius<=0) then
 				includeAllMultiLevelSuperClasses(requiredKermetaMetaClasses)
