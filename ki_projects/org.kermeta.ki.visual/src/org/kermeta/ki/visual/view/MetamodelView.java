@@ -254,20 +254,23 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 			if(entity.isVisible())
 				forest.addVertex(entity);
 		
-//		Map<EntityView, EntityView> linksAdded = new IdentityHashMap<EntityView, EntityView>();
+//		Map<EntityView, EntityView> classesAdded = new IdentityHashMap<EntityView, EntityView>();
 		
 		for(LinkView link : links)
-			if(link.isVisible() && link instanceof InheritanceView) {
-//				//if(linksAdded.get(link.getEntitySrc())!=link.getEntityTar() && linksAdded.get(link.getEntityTar())!=link.getEntitySrc())
+//			if(link.isVisible() && link instanceof InheritanceView) {
+//				if(classesAdded.get(link.getEntityTar())==null) {
 					forest.addEdge(link, link.getEntitySrc(), link.getEntityTar());
-			}
+//					classesAdded.put(link.entitySrc, link.entitySrc);
+//					classesAdded.put(link.entityTar, link.entityTar);
+//				}
+//			}
 	}
 	
 	
 	
 	
 	public void setTreeLayout() {
-//		MyTreeLayout<EntityView,LinkView> treeLayout   = new MyTreeLayout<EntityView,LinkView>(forest, 200, 200);
+//		MyTreeLayout<EntityView,LinkView> treeLayout   = new MyTreeLayout<EntityView,LinkView>(forest, 300, 400);
 //		Iterator<Entry<EntityView, Point2D>> locations = treeLayout.getLocations().entrySet().iterator();
 //		Entry<EntityView, Point2D> location;
 //		
@@ -277,7 +280,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 //			location.getKey().update();
 //		}
 		KKLayout<EntityView,LinkView> treeLayout = new KKLayout<EntityView,LinkView>(forest, new DistanceVisu(this));
-		treeLayout.setSize(new Dimension(1000, 1000));
+		treeLayout.setSize(new Dimension(2000, 2000));
 		
 		for(EntityView entity : entities) {
 			entity.setCentre((int)treeLayout.getX(entity), (int)treeLayout.getY(entity));
@@ -484,16 +487,16 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 	public void mousePressed(MouseEvent e) {//TODO to remove
 		if(MetamodelVizuFrame.hand.isSelected()) {
 			draggedShape = null;
-			int i=0, size = entities.size();
+			int i=entities.size()-1;
 			
-			while(draggedShape==null && i<size) {
-				if(entities.get(i).getBorders().contains(e.getX(), e.getY())) {
+			while(draggedShape==null && i>=0) {
+				if(entities.get(i).isVisible() && entities.get(i).getBorders().contains(e.getX()*zoom, e.getY()*zoom)) {
 					draggedShape = entities.get(i);
 					startX = e.getX();
 					startY = e.getY();
 				}
 				else
-					i++;
+					i--;
 			}
 		}
 	}
@@ -521,6 +524,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 					link.update();
 				
 			repaint();
+			updatePreferredSize();
 			revalidate();
 		}
 	}
