@@ -134,6 +134,30 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 		String srcCard			= srcCardRO==null ? null : fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(srcCardRO);
 		String targetCard		= tarCardRO==null ? null : fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(tarCardRO);
 		
+		if(targetRole!=null) {
+			//checking if the target relation has been already added by its opposite.
+			boolean again = true;
+			int i=0, size = metamodelView.links.size();
+			LinkView link;
+			RelationView rel;
+			
+			while(again && i<size) {
+				link = metamodelView.links.get(i);
+				
+				if(link.entitySrc==tarClass && link.entityTar==srcClass && link instanceof RelationView) {
+					rel = (RelationView)link;
+					
+					if(rel.endingTar.name.equals(srcRole) && rel.endingTar.card.equals(srcCard))
+						again = false;
+				}
+				
+				i++;
+			}
+			
+			if(!again)
+				return mmRO.getFactory().getMemory().voidINSTANCE;
+		}
+		
 		LinkView view = new RelationView(srcClass, tarClass, Boolean.getValue(compositionRO), 
 										srcRole, targetRole, srcCard, targetCard);
 
