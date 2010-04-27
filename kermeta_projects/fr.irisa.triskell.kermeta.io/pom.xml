@@ -159,6 +159,21 @@
 	<repositories>
 	    <repository>
 	      <releases>
+	        <enabled>true</enabled>
+	        <updatePolicy>always</updatePolicy>
+	        <checksumPolicy>warn</checksumPolicy>
+	      </releases>
+	      <snapshots>
+	        <enabled>true</enabled>
+	        <updatePolicy>always</updatePolicy>
+	        <checksumPolicy>warn</checksumPolicy>
+	      </snapshots>
+	      <id>tipimouss repo</id>
+	      <name>Tipimouss Repository</name>
+	      <url>http://tipimouss.irisa.fr/maven2</url>
+	    </repository>
+	    <repository>
+	      <releases>
 	        <enabled>false</enabled>
 	        <updatePolicy>always</updatePolicy>
 	        <checksumPolicy>warn</checksumPolicy>
@@ -166,7 +181,7 @@
 	      <snapshots>
 	        <enabled>true</enabled>
 	        <updatePolicy>always</updatePolicy>
-	        <checksumPolicy>fail</checksumPolicy>
+	        <checksumPolicy>warn</checksumPolicy>
 	      </snapshots>
 	      <id>tipimoussSnapshots</id>
 	      <name>Tipimouss Snapshots</name>
@@ -196,7 +211,7 @@
       		<uniqueVersion>false</uniqueVersion>
     	</repository>
     	<snapshotRepository>
-      		<id>tipimouss-local-maven-repository</id>
+      		<id>tipimouss-local-maven-snapshot-repository</id>
       		<name>Tipimouss Local  snapshot repository</name>
       		<url>file:/var/www/html/maven2-snapshots</url>
       		<uniqueVersion>false</uniqueVersion>
