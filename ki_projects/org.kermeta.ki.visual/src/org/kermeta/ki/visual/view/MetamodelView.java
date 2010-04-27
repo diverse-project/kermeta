@@ -431,14 +431,15 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 		double maxY = Double.MIN_VALUE;
 		Rectangle2D dim;
 		
-		for(EntityView entity : entities) {
-			dim = entity.getBorders();
-			
-			if(dim.getMaxX()>maxX)
-				maxX = dim.getMaxX();
-			if(dim.getMaxY()>maxY)
-				maxY = dim.getMaxY();
-		}
+		for(EntityView entity : entities)
+			if(entity.isVisible()) {
+				dim = entity.getBorders();
+				
+				if(dim.getMaxX()>maxX)
+					maxX = dim.getMaxX();
+				if(dim.getMaxY()>maxY)
+					maxY = dim.getMaxY();
+			}
 		
 		setPreferredSize(new Dimension((int)(maxX*zoom), (int)(maxY*zoom)));
 	}
