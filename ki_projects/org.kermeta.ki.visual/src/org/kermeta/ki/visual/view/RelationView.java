@@ -41,10 +41,12 @@ public class RelationView extends LinkView {
 		super.update();
 		
 		if(pointSrc!=null && pointTar!=null) {
-			final double lineAngle = getLineAngle();
+			final boolean recursive = entitySrc==entityTar;
+			final double lineAngle = recursive ? 0. : getLineAngle();
 			final double xRot;
 			final double yRot;
-			final double b = getB();
+			final double b = recursive ? entitySrc.centre.y : getB();
+			final float lgth = recursive ? -LENGTH_ARROW : LENGTH_ARROW;
 			
 			if(equals(Math.abs(lineAngle), Math.PI/2.)) {
 				xRot = -Math.sin(-lineAngle)*(pointSrc.y-b);
@@ -58,9 +60,9 @@ public class RelationView extends LinkView {
 			if(isComposition) {
 				composition.reset();
 				composition.moveTo((float)xRot, (float)yRot);
-				composition.lineTo((float)xRot+LENGTH_ARROW, (float)yRot+WIDTH_ARROW/2f);
-				composition.lineTo((float)xRot+LENGTH_ARROW*2f, (float)yRot);
-				composition.lineTo((float)xRot+LENGTH_ARROW, (float)yRot-WIDTH_ARROW/2f);
+				composition.lineTo((float)xRot+lgth, (float)yRot+lgth/2f);
+				composition.lineTo((float)xRot+lgth*2f, (float)yRot);
+				composition.lineTo((float)xRot+lgth, (float)yRot-lgth/2f);
 				composition.closePath();
 			}
 		}
@@ -74,9 +76,10 @@ public class RelationView extends LinkView {
 		if(isVisible()) {
 			super.paint(g);
 			
-			final Point2D.Double translation = beginRotation(pointTar, g);
-			final double lineAngle = getLineAngle();
-			final double b = getB();
+			final boolean recursive = entitySrc==entityTar;
+			final Point2D.Double translation = recursive ? null : beginRotation(pointTar, g);
+			final double lineAngle = recursive ? 0. : getLineAngle();
+			final double b = recursive ? entitySrc.centre.y : getB();
 			double xRot;
 			double yRot;
 			

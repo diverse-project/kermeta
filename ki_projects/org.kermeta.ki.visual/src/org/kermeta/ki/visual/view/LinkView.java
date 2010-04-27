@@ -4,6 +4,7 @@ import static java.lang.Math.PI;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -21,7 +22,7 @@ public abstract class LinkView extends ComponentView {
 	
 	protected Point2D.Double pointTar;
 	
-	protected Line2D line;
+	protected GeneralPath path;
 	
 	
 	public LinkView(EntityView src, EntityView target) {
@@ -42,7 +43,7 @@ public abstract class LinkView extends ComponentView {
 	
 	
 	protected void initialise() {
-		line = new Line2D.Double();
+		path = new GeneralPath();
 	}
 	
 	
@@ -63,7 +64,7 @@ public abstract class LinkView extends ComponentView {
 	public void paint(Graphics2D g) {
 		if(isVisible()) {
 			g.setColor(getLineColor());
-			g.draw(line);
+			g.draw(path);
 		}
 	}
 	
@@ -166,15 +167,32 @@ public abstract class LinkView extends ComponentView {
 	@Override
 	public void update() {
 		if(entitySrc!=null && entityTar!=null) {
-			Line2D line = new Line2D.Double(entitySrc.centre, entityTar.centre);
-			pointSrc    = intersectionPoint(line, entitySrc.getBorders());
-			pointTar    = intersectionPoint(line, entityTar.getBorders());
-			
-			if(pointSrc==null || pointTar==null)
-				visibility = Visibility.NONE;
+			if(entitySrc==entityTar) {
+				Rectangle2D rec  = entitySrc.getBorders();
+				final float gap = 60f;
+				pointSrc = intersectionPoint(new Line2D.Double(new Point2D.Double(entitySrc.centre.x-300, entitySrc.centre.y-10), new Point2D.Double(entitySrc.centre.x, entitySrc.centre.y-10)), rec);
+				pointTar = intersectionPoint(new Line2D.Double(new Point2D.Double(entitySrc.centre.x-300, entitySrc.centre.y+10), new Point2D.Double(entitySrc.centre.x, entitySrc.centre.y+10)), rec);
+				
+				path.reset();
+				path.moveTo((float)pointSrc.x, (float)pointSrc.y);
+				path.lineTo((float)pointSrc.x-gap, (float)pointSrc.y);
+				path.lineTo((float)pointSrc.x-gap, (float)pointTar.y);
+				path.lineTo((float)pointTar.x, (float)pointTar.y);
+			}
 			else {
-				this.line.setLine(pointSrc.x, pointSrc.y, pointTar.x, pointTar.y);
-				visibility = entitySrc.visibility==Visibility.GRAYED || entityTar.visibility==Visibility.GRAYED ? Visibility.GRAYED : Visibility.STANDARD;
+				Line2D line = new Line2D.Double(entitySrc.centre, entityTar.centre);
+				pointSrc    = intersectionPoint(line, entitySrc.getBorders());
+				pointTar    = intersectionPoint(line, entityTar.getBorders());
+				
+				if(pointSrc==null || pointTar==null)
+					visibility = Visibility.NONE;
+				else {
+					path.reset();
+					path.moveTo((float)pointSrc.x, (float)pointSrc.y);
+					path.lineTo((float)pointTar.x, (float)pointTar.y);
+//					if(visibility==Visibility.STANDARD)
+						visibility = entitySrc.visibility==Visibility.GRAYED || entityTar.visibility==Visibility.GRAYED ? Visibility.GRAYED : Visibility.STANDARD;
+				}
 			}
 		}
 	}
