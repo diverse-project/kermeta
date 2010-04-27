@@ -51,11 +51,13 @@
       		<id>tipimouss-local-maven-repository</id>
       		<name>Tipimouss Local release repository</name>
       		<url>file:/var/www/html/maven2</url>
+      		<uniqueVersion>false</uniqueVersion>
     	</repository>
     	<snapshotRepository>
-      		<id>tipimouss-local-maven-repository</id>
+      		<id>tipimouss-local-maven-snapshot-repository</id>
       		<name>Tipimouss Local  snapshot repository</name>
       		<url>file:/var/www/html/maven2-snapshots</url>
+      		<uniqueVersion>false</uniqueVersion>
     	</snapshotRepository>		
 	</distributionManagement>
 </project>
