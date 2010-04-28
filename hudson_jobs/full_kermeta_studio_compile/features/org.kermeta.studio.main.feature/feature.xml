@@ -53,4 +53,8 @@
          id="org.kermeta.uml2"
          version="0.0.0"/>
 
+   <includes
+         id="fr.irisa.triskell.kermeta.samples.fsm"
+         version="0.0.0"/>
+
 </feature>
