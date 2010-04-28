@@ -154,6 +154,7 @@ public class ClassDefinitionHelper {
 		return tdc.getContext();
 	}
 	
+	
 	/**
 	 * Return all the classes related to this one :
 	 * This includes the aspects and the inherited class definition

@@ -35,6 +35,7 @@ import org.kermeta.model.KermetaModelHelper;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.loader.kmt.kmt2km.AbstractBuildingState;
 
 public class KermetaUnitHelper {
 
@@ -46,14 +47,24 @@ public class KermetaUnitHelper {
 	 */
 	static synchronized public List <KermetaUnit> getAllImportedKermetaUnits(KermetaUnit unit) {
 		List<KermetaUnit> result = new ArrayList<KermetaUnit>();
-		List<KermetaUnit> cache = unit.getAllImportedKermetaUnitsCache();
-		if(cache.size() == 0 && unit.getImportedKermetaUnits().size() != 0){
-			// need to recalculate the cache
-			if ( unit != null )
-				getAllImportedKermetaUnits(unit, cache);
-			cache.remove(unit);  // if contains the current unit, remove it
+		boolean cacheActivated = false;
+		if((AbstractBuildingState)unit.getBuildingState()!= null){
+			cacheActivated = ((AbstractBuildingState)unit.getBuildingState()).allImportedUnitCacheActivated;
 		}
-		result.addAll(cache);
+		if(cacheActivated){
+			List<KermetaUnit> cache = unit.getAllImportedKermetaUnitsCache();
+			if(cache.size() == 0 && unit.getImportedKermetaUnits().size() != 0){
+				// need to recalculate the cache
+				if ( unit != null )
+					getAllImportedKermetaUnits(unit, cache);  
+			}
+			cache.remove(unit);// if contains the current unit, remove it
+			result.addAll(cache);
+		}
+		else{
+			getAllImportedKermetaUnits(unit, result);
+			result.remove(unit);// if contains the current unit, remove it
+		}
 		return result;
 	}
 
@@ -82,15 +93,6 @@ public class KermetaUnitHelper {
 		}
 		return list;
 	}
-	
-	/*static public List <ErrorMessage> getAllErrors(KermetaUnit kermetaUnit) {
-		List <ErrorMessage> list = new ArrayList <ErrorMessage> ();
-		for ( Message message : (List <Message>) kermetaUnit.getMessages() ) {
-			if ( message instanceof ErrorMessage )
-				list.add( (ErrorMessage) message );
-		}
-		return list;
-	} */
 	
 	static public String getErrorsAsString(KermetaUnit kermetaUnit) {
 		StringBuffer result = new StringBuffer();
@@ -291,6 +293,26 @@ public class KermetaUnitHelper {
 			
 		}
 		return false;
+	}
+
+
+	/**
+	 * Tells if all currently known importedUnit are 
+	 * @param loadedUnit
+	 * @return
+	 */
+	public static boolean allKnownImportedUnitRequireResolved(
+			KermetaUnit loadedUnit) {
+		boolean result = true;
+		for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits(loadedUnit) ){			
+			if(unitToImport.getBuildingState() instanceof AbstractBuildingState){
+				AbstractBuildingState buildingState = (AbstractBuildingState) unitToImport.getBuildingState();
+				if(!buildingState.allRequiresResolved){
+					result = false;
+				}
+			}
+		}
+		return result;
 	}
 	
 }

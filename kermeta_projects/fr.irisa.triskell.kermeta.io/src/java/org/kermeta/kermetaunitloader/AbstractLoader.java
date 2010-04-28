@@ -52,8 +52,6 @@ public abstract class AbstractLoader {
 	
 	protected boolean commandCreated = false;
 
-	private boolean isResolvingRequire = false;
-	
 	/**
 	 * Load the kermeta unit
 	 * @throws NotRegisteredURIException 
@@ -84,15 +82,20 @@ public abstract class AbstractLoader {
 		}
 		
 		// ensure all required unit are loaded up to this point
-		for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits(loadedUnit) ){			
-			if(unitToImport.getBuildingState() instanceof AbstractBuildingState){
-				AbstractBuildingState buildingState = (AbstractBuildingState) unitToImport.getBuildingState();
-				if(buildingState.kermetaUnitLoader.groupedCommands.get(CommandStep.requireResolving) != null){
-					// start a load for this unit too
-					buildingState.kermetaUnitLoader.load();
+		AbstractBuildingState buildingState = (AbstractBuildingState) loadedUnit.getBuildingState();
+		buildingState.allRequiresResolved = true;
+		while(!KermetaUnitHelper.allKnownImportedUnitRequireResolved(loadedUnit)){
+			for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits(loadedUnit) ){			
+				if(unitToImport.getBuildingState() instanceof AbstractBuildingState){
+					AbstractBuildingState unitToImportbuildingState = (AbstractBuildingState) unitToImport.getBuildingState();
+					if(unitToImportbuildingState.kermetaUnitLoader.groupedCommands.get(CommandStep.requireResolving) != null){
+						// start a load for this unit too
+						unitToImportbuildingState.kermetaUnitLoader.load();
+					}
 				}
 			}
 		}
+		buildingState.allImportedUnitCacheActivated = true;
 		
 		
 		// from this point the commands must apply to all required units
@@ -105,6 +108,12 @@ public abstract class AbstractLoader {
 		loadedUnit.getAllImportedKermetaUnitsCache().clear();
 		performSynchronizedCommand(CommandStep.requireErrorPropagation);
 		performSynchronizedCommand(CommandStep.aspectBuilding);
+		loadedUnit.getTypeDefinitionCache().getEntries().clear();
+		loadedUnit.fillTypeDefinitionCache();
+		for(KermetaUnit ku : KermetaUnitHelper.getAllImportedKermetaUnits(loadedUnit)){
+			ku.getTypeDefinitionCache().getEntries().clear();
+			ku.fillTypeDefinitionCache();
+		}
 		performSynchronizedCommand(CommandStep.modelTypeBuilding);
 		performSynchronizedCommand(CommandStep.typeSetting);
 		// DVK: Hack :the cache build in the previous step may be incomplete, (because all super type may not have been set when first called :-( ) reset it

@@ -33,12 +33,16 @@ public class AbstractBuildingState implements IBuildingState {
 	public boolean aspectsDone = false;
 	
 
+	/** used to know if all the require of this unit have been resolved (doesn't take into account indirect require */
 	public boolean allRequiresResolved = false;
 
 	public boolean allRequiredUnitImported = false;
 	public boolean allRequireErrorPropagated = false;
 	public boolean allAspectBuilt = false;
 	public boolean allTypeSet = false;
+	
+	/** activate the cache for KermetaUnitHelper.getAllImportedKermetaUnits() */
+	public boolean allImportedUnitCacheActivated = false;
 	
 	/**
 	 * loader used for creating this unit

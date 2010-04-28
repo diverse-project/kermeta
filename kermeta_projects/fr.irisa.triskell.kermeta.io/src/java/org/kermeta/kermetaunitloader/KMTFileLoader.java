@@ -127,7 +127,10 @@ public class KMTFileLoader extends AbstractLoader {
 		groupedCommands.put(CommandStep.typeSetting, new AbstractCommand(){
 			@Override
 			public void executeCommand() {
-				
+				loadedUnit.getTypeDefinitionContextsCache().clear();
+				for(KermetaUnit ku : KermetaUnitHelper.getAllImportedKermetaUnits(loadedUnit)){
+					ku.getTypeDefinitionContextsCache().clear();
+				}
 				internalLog.debug("Setting types... of " +kmtFileUri);
 				TypeSetter tsetter =  new TypeSetter(loadedUnit, loadingContext);
 				tsetter.setTypes(ast);
