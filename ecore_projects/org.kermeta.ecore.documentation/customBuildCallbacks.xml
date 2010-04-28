@@ -18,7 +18,7 @@
 	<!-- ===================================================================== -->
 	<target name="pre.build.jars">
 		<echo>pre build jar ${build.result.folder}</echo>
-		<ant antfile="src/Ecore-MDK_build.xml"  dir="src" target="eclipse.help"></ant>
+		<ant antfile="Ecore-MDK_build.xml"  dir="src" target="eclipse.help"></ant>
 	</target>
 
 	<!-- ===================================================================== -->
