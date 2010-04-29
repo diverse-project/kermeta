@@ -57,4 +57,8 @@
          id="fr.irisa.triskell.kermeta.samples.fsm"
          version="0.0.0"/>
 
+   <includes
+         id="org.kermeta.kmlogo.logoasm.feature"
+         version="0.0.0"/>
+
 </feature>
