@@ -115,11 +115,11 @@ public class InheritanceSearch {
 	 * @return
 	 */	
 	public static ArrayList<CallableOperation> callableOperations(Class c, KermetaUnit source, TypeCheckerContext context) {
-		List<KermetaUnit> units = new ArrayList<KermetaUnit>();
-		if ( source != null ) {
-			units.add(source);
-			units.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
-		}
+	//	List<KermetaUnit> units = new ArrayList<KermetaUnit>();
+	//	if ( source != null ) {
+	//		units.add(source);
+	//		units.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
+	//	}
 		ArrayList<CallableOperation> result = new ArrayList<CallableOperation>();
 		Hashtable<String, CallableOperation> found_ops = new Hashtable<String, CallableOperation>();
 		ArrayList<Class> toVisit = new ArrayList<Class>();
@@ -130,8 +130,8 @@ public class InheritanceSearch {
 
 			Class current = toVisit.get(0);
 			toVisit.remove(0);
-			KermetaUnit u = KermetaUnitHelper.getKermetaUnitFromObject( current.getTypeDefinition() );
-			if ( units.size() == 0 || units.contains(u) ) {
+	//		KermetaUnit u = KermetaUnitHelper.getKermetaUnitFromObject( current.getTypeDefinition() );
+	//		if ( units.size() == 0 || units.contains(u) ) {
 				
 				if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
 					classDefinitionProcessed.add( (ClassDefinition) current.getTypeDefinition() );
@@ -179,7 +179,7 @@ public class InheritanceSearch {
 					}
 				}
 			}
-		}
+	//	}
 
 		return result;
 	}
