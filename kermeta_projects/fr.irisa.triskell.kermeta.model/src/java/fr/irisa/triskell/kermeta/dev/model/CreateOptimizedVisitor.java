@@ -197,7 +197,7 @@ public class CreateOptimizedVisitor {
 			classTemplate += "  protected fr.irisa.triskell.kermeta.language.structure.Object parent;\n";
 			classTemplate += "	private static Hashtable<String,AcceptCommand> acceptCmds = null;\n";
 			classTemplate += getParentAttributeAccessors();
-			classTemplate += "	private static AcceptCommand getAcceptCmd(EObject node) {\n";
+			classTemplate += "	private synchronized static AcceptCommand getAcceptCmd(EObject node) {\n";
 			classTemplate += "		if (acceptCmds == null) {\n";
 			classTemplate += "			acceptCmds = new Hashtable<String,AcceptCommand>();\n";
 			classTemplate += "XinitCmdsX\n";

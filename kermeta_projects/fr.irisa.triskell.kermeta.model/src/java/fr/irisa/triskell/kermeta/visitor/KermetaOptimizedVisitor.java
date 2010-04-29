@@ -28,7 +28,7 @@ public class KermetaOptimizedVisitor {
  
   public fr.irisa.triskell.kermeta.language.structure.Object getParent() {
     return parent; }
-	private static AcceptCommand getAcceptCmd(EObject node) {
+	private synchronized static AcceptCommand getAcceptCmd(EObject node) {
 		if (acceptCmds == null) {
 			acceptCmds = new Hashtable<String,AcceptCommand>();
 			acceptCmds.put("CallVariable",
@@ -166,6 +166,7 @@ public class KermetaOptimizedVisitor {
 		if (cmd == null) {
          String msg = "Error in visitor : no strategy to handle node of type "
                  + node.getClass().getName();
+         getAcceptCmd(node);
          if (parent!=null) {
              msg += "   (when visiting parent '" + parent.getClass().getName() + "'";
              if (parent instanceof NamedElement) msg += " named: '" + ((NamedElement)parent).getName() + "')";
