@@ -353,6 +353,9 @@ public class EMF2Runtime {
 		int processedElements = 0;
 		int nbPreExistingObjects = 0;
 		try {
+			// HACK
+			unit.getRuntimeMemory().getUnit().getTypeDefinitionContextsCache().clear();
+			
 			String fileName = unit.getUriAsString().substring(unit.getUriAsString().lastIndexOf('/')+1);
 			SubMonitor progress = SubMonitor.convert(monitor, "Loading " + fileName, 4 );
 			
@@ -883,6 +886,9 @@ public class EMF2Runtime {
 					{ errmsg += ((Property)prop).getName() + ", "; }
 					errmsg += "\n in class \"" + classDef.getName() +"\"";
 					errmsg += "\nwith feature == " + feature;
+					KermetaModelHelper.ClassDefinition.getPropertyByName(unit.getRuntimeMemory().getUnit(), classDef, propName);
+					unit.getRuntimeMemory().getUnit().getTypeDefinitionContextsCache().clear();
+					KermetaModelHelper.ClassDefinition.getPropertyByName(unit.getRuntimeMemory().getUnit(), classDef, propName);
 					unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
 				}
 			}
