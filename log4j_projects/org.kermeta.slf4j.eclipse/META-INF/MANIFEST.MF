@@ -18,7 +18,6 @@ Export-Package: org.kermeta.slf4j.eclipse,
  org.slf4j.impl;version="1.5.11",
  org.slf4j.spi;version="1.5.11"
 Import-Package: org.apache.log4j
-Bundle-ClassPath: lib/thirdparty/slf4j-api-1.5.11.jar,
- .
+Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.kermeta.slf4j.eclipse.Activator
