@@ -30,7 +30,7 @@ public class KmLogoTutorialWizardSoluce
 		List<ProjectDescriptor> projects = new ArrayList<ProjectDescriptor>(1);
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.tutorial.zip", "org.kermeta.kmlogo.logoasm.tutorial"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.samples.zip", "org.kermeta.kmlogo.logoasm.samples"));
-		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.emftext.commons.antlr3_1_1.zip", "org.emftext.commons.antlr3_1_1"));
+		// projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.emftext.commons.antlr3_1_1.zip", "org.emftext.commons.antlr3_1_1"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.emftexteditor.zip", "org.kermeta.kmlogo.logoasm.emftexteditor"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.model.zip", "org.kermeta.kmlogo.logoasm.model"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.edit.zip", "org.kermeta.kmlogo.logoasm.edit"));

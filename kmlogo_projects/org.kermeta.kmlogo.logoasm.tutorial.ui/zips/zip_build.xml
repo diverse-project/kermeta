@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="org.kermeta.kmlogo.samples" default="all" basedir=".">
+	
+	
+	<target name="all">
+		<antcall target="org.kermeta.kmlogo.logoasm.edit.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.editor.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.emftexteditor.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.model.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.samples.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.srcKermeta.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.tutorial.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.ui.linux.x86.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.ui.macosx.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.ui.win32.x86.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.ui.zip"/>
+	</target>
+	
+	<target name="org.kermeta.kmlogo.logoasm.edit.zip" >		
+			<zip destfile="org.kermeta.kmlogo.logoasm.edit.zip" basedir="../../org.kermeta.kmlogo.logoasm.edit" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+	<target name="org.kermeta.kmlogo.logoasm.editor.zip" >		
+			<zip destfile="org.kermeta.kmlogo.logoasm.editor.zip" basedir="../../org.kermeta.kmlogo.logoasm.editor" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+	<target name="org.kermeta.kmlogo.logoasm.emftexteditor.zip" >		
+			<zip destfile="org.kermeta.kmlogo.logoasm.emftexteditor.zip" basedir="../../org.kermeta.kmlogo.logoasm.emftexteditor" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+	<target name="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.zip" >		
+			<zip destfile="org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.zip" basedir="../../org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+	<target name="org.kermeta.kmlogo.logoasm.model.zip" >		
+			<zip destfile="org.kermeta.kmlogo.logoasm.model.zip" basedir="../../org.kermeta.kmlogo.logoasm.model" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+		<target name="org.kermeta.kmlogo.logoasm.samples.zip" >		
+				<zip destfile="org.kermeta.kmlogo.logoasm.samples.zip" basedir="../../org.kermeta.kmlogo.logoasm.samples" includes="**" filesonly="false" whenempty="skip" update="false"/>
+		</target>
+	<target name="org.kermeta.kmlogo.logoasm.srcKermeta.zip" >		
+			<zip destfile="org.kermeta.kmlogo.logoasm.srcKermeta.zip" basedir="../../org.kermeta.kmlogo.logoasm.srcKermeta" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+	<target name="org.kermeta.kmlogo.logoasm.tutorial.zip" >		
+			<zip destfile="org.kermeta.kmlogo.logoasm.tutorial.zip" basedir="../../org.kermeta.kmlogo.logoasm.tutorial" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+	<target name="org.kermeta.kmlogo.logoasm.ui.linux.x86.zip" >		
+			<zip destfile="org.kermeta.kmlogo.logoasm.ui.linux.x86.zip" basedir="../../org.kermeta.kmlogo.logoasm.ui.linux.x86" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+	<target name="org.kermeta.kmlogo.logoasm.ui.macosx.zip" >		
+			<zip destfile="org.kermeta.kmlogo.logoasm.ui.macosx.zip" basedir="../../org.kermeta.kmlogo.logoasm.ui.macosx" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+	<target name="org.kermeta.kmlogo.logoasm.ui.win32.x86.zip" >		
+			<zip destfile="org.kermeta.kmlogo.logoasm.ui.win32.x86.zip" basedir="../../org.kermeta.kmlogo.logoasm.ui.win32.x86" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+	<target name="org.kermeta.kmlogo.logoasm.ui.zip" >		
+		<zip destfile="org.kermeta.kmlogo.logoasm.ui.zip" basedir="../../org.kermeta.kmlogo.logoasm.ui" includes="**" filesonly="false" whenempty="skip" update="false"/>
+	</target>
+	
+</project>
