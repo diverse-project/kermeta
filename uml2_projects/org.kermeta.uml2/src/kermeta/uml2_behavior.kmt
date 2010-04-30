@@ -11,9 +11,10 @@ package root_package;
 * NB: Be sure to populate this class with require of your newly defined aspects !
 */
 require kermeta
-require "platform:/lookup/org.kermeta.uml2/src/kermeta/behavior/NamedElement.kmt"
 require "platform:/lookup/org.kermeta.uml2/src/kermeta/behavior/Component.kmt"
-require "platform:/lookup/org.kermeta.uml2/src/kermeta/behavior/Package.kmt"
 require "platform:/lookup/org.kermeta.uml2/src/kermeta/behavior/Element.kmt"
+require "platform:/lookup/org.kermeta.uml2/src/kermeta/behavior/MultiplicityElement.kmt"
+require "platform:/lookup/org.kermeta.uml2/src/kermeta/behavior/NamedElement.kmt"
+require "platform:/lookup/org.kermeta.uml2/src/kermeta/behavior/Package.kmt"
 class UML2Behavior {
 }

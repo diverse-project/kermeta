@@ -12,7 +12,7 @@ package uml;
 
 
 require kermeta
-require "http://www.eclipse.org/uml2/2.1.0/UML"
+require "http://www.eclipse.org/uml2/3.0.0/UML"
 
 using kermeta::persistence
 using kermeta::standard
