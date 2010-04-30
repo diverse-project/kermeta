@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="org.antlr.antlr2_x" default="unjar" basedir=".">
+	
+	<target name="unjar" >
+		<tstamp>
+			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+		</tstamp>
+		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+		
+		<unzip src="lib/thirdparty/slf4j-api-1.5.11-sources.jar" dest="extracted_src">
+			<patternset>
+			    <exclude name="**/impl/**"/>
+		        <exclude name="**/META-INF/**"/>
+			</patternset>
+		</unzip>
+		<!-- <delete file="antlr-2.7.7.tar"/>
+		<move todir="extracted_src">
+		    <fileset dir="tmp"/>
+		</move> -->
+	</target>
+
+</project>
