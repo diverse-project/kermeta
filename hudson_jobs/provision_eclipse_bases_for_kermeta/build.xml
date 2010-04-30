@@ -149,12 +149,19 @@
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
   		</antcall>
 
+		<!-- FROM EMFTEXT -->
+		<antcall target="provision_feature">
+		    		<param name="feature.name" value="org.emftext.access.feature.group, org.emftext.sdk.feature.group, org.emftext.commons.antlr3_1_1.feature.group"/>
+					<param name="feature.repository" value="http://reuseware.org/update"/>
+					<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+		</antcall>
+		<!-- FROM m2eclipse.sonatype.org -->
+		<antcall target="provision_feature">
+		    		<param name="feature.name" value="org.maven.ide.eclipse.feature.feature.group"/>
+					<param name="feature.repository" value="http://m2eclipse.sonatype.org/sites/m2e"/>
+					<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base"/>
+		</antcall>
 		<!-- FROM OTHER UPDATE SITE -->
-  <!--
-  org.emftext.access.feature.group
-  org.emftext.sdk.feature.group
-  org.emftext.commons.antlr3_1_1.feature.group
--->
 
 		<delete file="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip" failonerror="false"/>
 		<zip destfile="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}_base.zip">
