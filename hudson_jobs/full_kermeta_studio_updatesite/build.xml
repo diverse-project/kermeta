@@ -15,7 +15,7 @@
 	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
 	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
 	
-	<target name="all" depends="get_studio_base, publish_features_and_bundles">
+	<target name="all" depends="get_studio_base, publish_features_and_bundles, get_site_template">
 
 	</target>
 	
@@ -38,6 +38,14 @@
 					<arg value="-publishArtifacts"/>
 				</java>	
 	</target>	
+	<target name="get_site_template">
+		<copy todir="${updatesite.repository}">
+			<fileset dir="${env.WORKSPACE}/full_kermeta_studio_updatesite/site-template/fr.irisa.triskell.kermeta.site" includes="**" >
+				<exclude name="readme.txt"/>
+				<exclude name="*_build.xml"/>
+			</fileset>	
+		</copy>
+	</target>
 	<target name="get_studio_base">
 		<ant antfile="get_studio_base_build.xml">
   			<property name="studio.base.url" value="${studio.base.url}"/>
