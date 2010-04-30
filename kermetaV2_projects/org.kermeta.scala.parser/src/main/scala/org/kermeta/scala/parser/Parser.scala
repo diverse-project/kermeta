@@ -4,6 +4,8 @@ package org.kermeta.scala.parser
 import scala.util.parsing.combinator.syntactical.StandardTokenParsers
 import fr.irisa.triskell.kermeta.language.structure._
 import fr.irisa.triskell.kermeta.language.behavior._
+import fr.irisa.triskell.kermeta.language.structure.impl._
+import fr.irisa.triskell.kermeta.language.behavior.impl._
 import scala.collection.JavaConversions._
 
 object Parser extends StandardTokenParsers {
@@ -96,8 +98,8 @@ object Parser extends StandardTokenParsers {
   def operation =  ( operationKind ~ ident ~ "(" ~ ")" ~ ":" ~ ident ~ "is" ~ operationExpressionBody) ^^ { case opkind ~ opName ~ _ ~ _  ~ _ ~ id2 ~ _ ~ body =>
       var newo =StructureFactory.eINSTANCE.createOperation
       opkind match {
-        case "operation" => println("oper")
-        case "method" => println("method")
+        case "operation" => //NOTHING TO DO
+        case "method" => /* println("method") SET SUPER OPERATION */
       }
       newo.setName(opName)
       newo.setBody(body)
@@ -124,8 +126,9 @@ object Parser extends StandardTokenParsers {
       var newo = BehaviorFactory.eINSTANCE.createVariableDecl
       newo.setIdentifier(id1)
       var typeName = id2+"::"+id3
-      //TODO FAIRE UN SET DE TYPE PROXY
-
+      var newtype = BehaviorFactory.eINSTANCE.createTypeReference
+      newtype.setName(typeName)
+      newo.setType(newtype)
       newo
   }
   private def fAssignement : Parser[Expression] = ( fCall ~ ":=" ~ fStatement) ^^ { case target ~ _ ~ statment =>
@@ -141,18 +144,6 @@ object Parser extends StandardTokenParsers {
       newo
   }
   def fRescueLst = ident ^^^ {BehaviorFactory.eINSTANCE.createEmptyExpression}
-  def fCall : Parser[CallFeature] = (ident ~ callFeatureQualifiedName) ^^ { case id1 ~ qualName =>
-      var newo = BehaviorFactory.eINSTANCE.createCallFeature
-      id1 match {
-        case "super" => {
-            var newo = BehaviorFactory.eINSTANCE.createCallSuperOperation
-            newo
-          }
-          //TODO
-        case _ => 
-      }
-      newo
-  }
 
   private def fLiteral : Parser[Expression] = ( fStringLiteral | fBooleanLiteral | fNumericLiteral | fVoidLiteral )
   private def fBooleanLiteral : Parser[Expression] = ("true" ^^^ {
@@ -168,20 +159,55 @@ object Parser extends StandardTokenParsers {
   private def fStringLiteral : Parser[Expression] = ( stringLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createStringLiteral;newo.setValue(e.toString);newo  } )
   private def fNumericLiteral : Parser[Expression] = ( numericLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createIntegerLiteral;newo.setValue(e.toInt);newo  } )
 
-  def callFeatureQualifiedName =  ( "." ~ ident ^^ {case _ ~ name =>
-        var newo = BehaviorFactory.eINSTANCE.createCallVariable
-        newo.setName(name)
+  def fCall : Parser[CallFeature] = ( 
+    ident ^^ {
+      case e =>
+        var newo = BehaviorFactory.eINSTANCE.createCallFeature;
+        newo.setName(e.toString);
+        println(newo)
         newo
-    } ||| "." ~ ident ~ "(" ~ callFeatureParams ~ ")" ^^ { case _ ~ name ~ _ ~ params ~ _ =>
-        var newo = BehaviorFactory.eINSTANCE.createCallFeature
-        newo.setName(name)
-        params match {
-          case Some(_ @ p) => newo.getParameters.addAll(p)
-          case None =>
-        }
+    } |||
+    ident ~ "(" ~ callFeatureParams ~ ")" ^^^println("ICI") |||
+    ident ~ callFeatureQualifiedName ^^ {
+      case id1 ~ callF =>
+        var newo = BehaviorFactory.eINSTANCE.createCallFeature;
+        newo.setName(id1.toString)
+        newo.setTarget(callF)
+        println(newo)
         newo
-    }
-  )*
+    } |||
+    ident ~ "(" ~ callFeatureParams ~ ")" ~ callFeatureQualifiedName
+  ) ^^ {
+    case e => BehaviorFactory.eINSTANCE.createCallFeature
+      /*case id1 ~ qualName =>
+       var newo = BehaviorFactory.eINSTANCE.createCallFeature
+       id1 match {
+       case "super" => {
+       var newo = BehaviorFactory.eINSTANCE.createCallSuperOperation
+       newo
+       }
+       //TODO
+       case _ =>
+       }
+       newo*/
+  }
+
+  def callFeatureQualifiedName : Parser[CallFeature] =  "." ~ fCall ^^ {case _ ~ subcall => subcall }
+  /*
+   var newo = BehaviorFactory.eINSTANCE.createCallVariable
+   BehaviorFactory.eINSTANCE.createC
+   newo.setName(name)
+   newo
+   } ||| "." ~ ident ~ "(" ~ callFeatureParams ~ ")" ^^ { case _ ~ name ~ _ ~ params ~ _ =>
+   var newo = BehaviorFactory.eINSTANCE.createCallFeature
+   newo.setName(name)
+   params match {
+   case Some(_ @ p) => newo.getParameters.addAll(p)
+   case None =>
+   }
+   newo
+   }
+   )**/
   private def callFeatureParams = ( fStatement ~ callFeatureParam ^^ { case stat ~statL => List(stat)++statL } )?
   private def callFeatureParam = (("," ~ fStatement ^^ { case delim ~ stat => stat } )*)
 
