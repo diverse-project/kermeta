@@ -15,7 +15,7 @@
 	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
 	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
 	
-	<target name="all" depends="get_studio_base, publish_features_and_bundles, get_site_template">
+	<target name="all" depends="get_studio_base, publish_features_and_bundles, get_site_template, chmod">
 
 	</target>
 	
@@ -45,6 +45,13 @@
 				<exclude name="*_build.xml"/>
 			</fileset>	
 		</copy>
+	</target>
+	<target name="chmod">
+		<chmod perm="g+w">
+			<fileset dir="${updatesite.repository}">
+			    <include name="**/**"/>
+			 </fileset>
+		</chmod>
 	</target>
 	<target name="get_studio_base">
 		<ant antfile="get_studio_base_build.xml">
