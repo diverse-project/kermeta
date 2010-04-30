@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/fr.irisa.triskell.kermeta_1.3.2.qualifier.jar" id="fr.irisa.triskell.kermeta" version="1.3.2.qualifier">
+      <category name="Kermeta IDE"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.kermeta.graphical_1.3.2.qualifier.jar" id="fr.irisa.triskell.kermeta.graphical" version="1.3.2.qualifier">
+      <category name="Kermeta IDE"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.kermeta.ket.feature_1.3.2.jar" id="fr.irisa.triskell.kermeta.ket.feature" version="1.3.2">
+      <category name="Kermeta IDE"/>
+   </feature>
+   <feature url="features/org.kermeta.compiler.feature_1.3.2.qualifier.jar" id="org.kermeta.compiler.feature" version="1.3.2.qualifier">
+      <category name="Kermeta IDE"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.kermeta.ecore_1.3.2.qualifier.jar" id="fr.irisa.triskell.kermeta.ecore" version="1.3.2.qualifier">
+      <category name="Kermeta MDKs"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.kermeta.ocl_1.3.2.jar" id="fr.irisa.triskell.kermeta.ocl" version="1.3.2">
+      <category name="Kermeta MDKs"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.ktr.feature_1.0.1.jar" id="fr.irisa.triskell.ktr.feature" version="1.0.1">
+      <category name="Kermeta MDKs"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.traceability_1.3.2.qualifier.jar" id="fr.irisa.triskell.traceability" version="1.3.2.qualifier">
+      <category name="Kermeta MDKs"/>
+   </feature>
+   <feature url="features/org.kermeta.kompose.feature_0.0.5.jar" id="org.kermeta.kompose.feature" version="0.0.5">
+      <category name="Kermeta MDKs"/>
+   </feature>
+   <feature url="features/org.kermeta.uml2_1.3.2.qualifier.jar" id="org.kermeta.uml2" version="1.3.2.qualifier">
+      <category name="Kermeta MDKs"/>
+   </feature>
+   <feature url="features/org.kermeta.uml2.profile.marte_0.1.0.qualifier.jar" id="org.kermeta.uml2.profile.marte" version="0.1.0.qualifier">
+      <category name="Kermeta MDKs"/>
+   </feature>
+   <feature url="features/fr.mopcom.wfr.feature_1.0.0.qualifier.jar" id="fr.mopcom.wfr.feature" version="1.0.0.qualifier">
+      <category name="Kermeta MDKs"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.kermeta.samples.fsm_1.3.0.qualifier.jar" id="fr.irisa.triskell.kermeta.samples.fsm" version="1.3.0.qualifier">
+      <category name="Kermeta Samples"/>
+   </feature>
+   <feature url="features/org.kermeta.kmlogo.logoasm.feature_1.3.2.qualifier.jar" id="org.kermeta.kmlogo.logoasm.feature" version="1.3.2.qualifier">
+      <category name="Kermeta Samples"/>
+   </feature>
+   <feature url="features/org.kermeta.tutorial.aspects_1.3.2.qualifier.jar" id="org.kermeta.tutorial.aspects" version="1.3.2.qualifier">
+      <category name="Kermeta Samples"/>
+   </feature>
+   <feature url="features/org.kermeta.emfutils.feature_1.0.1.jar" id="org.kermeta.emfutils.feature" version="1.0.1">
+      <category name="OtherTools from Kermeta"/>
+   </feature>
+   <feature url="features/org.topcased.dependencies_2.5.0.v200907220940.jar" id="org.topcased.dependencies" version="2.5.0.v200907220940">
+      <category name="ThirdParty (opensource tools redistributed for convenience by Kermeta site)"/>
+   </feature>
+   <feature url="features/org.topcased.modeler.uml_2.5.0.v200907221102.jar" id="org.topcased.modeler.uml" version="2.5.0.v200907221102">
+      <category name="ThirdParty (opensource tools redistributed for convenience by Kermeta site)"/>
+   </feature>
+   <feature url="features/org.eclipse.gymnast.runtime_0.2.0.jar" id="org.eclipse.gymnast.runtime" version="0.2.0">
+      <category name="ThirdParty (opensource tools redistributed for convenience by Kermeta site)"/>
+   </feature>
+   <category-def name="Kermeta IDE" label="Kermeta IDE"/>
+   <category-def name="Kermeta MDKs" label="Kermeta MDKs"/>
+   <category-def name="Kermeta Samples" label="Kermeta Samples"/>
+   <category-def name="OtherTools from Kermeta" label="OtherTools from Kermeta"/>
+   <category-def name="ThirdParty (opensource tools redistributed for convenience by Kermeta site)" label="ThirdParty (opensource tools redistributed for convenience by Kermeta site)"/>
+</site>
