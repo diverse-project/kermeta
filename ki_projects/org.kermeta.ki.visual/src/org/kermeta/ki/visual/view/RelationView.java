@@ -65,6 +65,15 @@ public class RelationView extends LinkView {
 				composition.lineTo((float)xRot+lgth, (float)yRot-lgth/2f);
 				composition.closePath();
 			}
+			
+			if(endingSrc!=null)
+				endingSrc.update();
+			
+			if(endingTar!=null)
+				endingTar.update();
+		}
+		else {
+		//	System.err.println("ERR>>" + this + " " + entitySrc.name + " " + entityTar.name + " " + endingTar.name.text + " " + endingSrc.name.text);
 		}
 	}
 	

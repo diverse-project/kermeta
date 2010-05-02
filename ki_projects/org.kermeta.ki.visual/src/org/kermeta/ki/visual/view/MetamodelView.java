@@ -283,7 +283,10 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 		for(LinkView link : links)
 //			if(link.isVisible() && link instanceof InheritanceView) {
 //				if(classesAdded.get(link.getEntityTar())==null) {
-					forest.addEdge(link, link.getEntitySrc(), link.getEntityTar());
+					if(link.getEntitySrc()==null || link.getEntityTar()==null)
+						System.err.println("ERR forest>>" + link + " " + (link.getEntitySrc()==null ? "null" : link.getEntitySrc().name) + " " + (link.getEntityTar()==null ? "null" : link.getEntityTar().name));
+					else
+						forest.addEdge(link, link.getEntitySrc(), link.getEntityTar());
 //					classesAdded.put(link.entitySrc, link.entitySrc);
 //					classesAdded.put(link.entityTar, link.entityTar);
 //				}
@@ -506,22 +509,60 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 
 
 	public EntityView draggedShape;//TODO to remove!!
+	public FloatingText draggedLabel;//TODO to remove!!
 	public int startX;
 	public int startY;
 	
 	public void mousePressed(MouseEvent e) {//TODO to remove
 		if(MetamodelVizuFrame.hand.isSelected()) {
-			draggedShape = null;
-			int i=entities.size()-1;
+			draggedLabel = null;
+			int i = links.size()-1;
+			LinkView link;
+			RelationView rel;
 			
-			while(draggedShape==null && i>=0) {
-				if(entities.get(i).isVisible() && entities.get(i).getBorders().contains(e.getX()*zoom, e.getY()*zoom)) {
-					draggedShape = entities.get(i);
-					startX = e.getX();
-					startY = e.getY();
+			while(draggedLabel==null && i>=0) {
+				link = links.get(i);
+				
+				if(link instanceof RelationView && link.isVisible()) {
+					rel = (RelationView) link;
+					rel.update();
+					if(rel.endingSrc.name.contains(e.getX()*zoom, e.getY()*zoom)) {
+						draggedLabel = rel.endingSrc.name;
+						startX = e.getX();
+						startY = e.getY();
+					} else if(rel.endingSrc.card.contains(e.getX()*zoom, e.getY()*zoom)) {
+						draggedLabel = rel.endingSrc.card;
+						startX = e.getX();
+						startY = e.getY();
+					} else if(rel.endingTar.name.contains(e.getX()*zoom, e.getY()*zoom)) {
+						draggedLabel = rel.endingTar.name;
+						startX = e.getX();
+						startY = e.getY();
+					} else if(rel.endingTar.card.contains(e.getX()*zoom, e.getY()*zoom)) {
+						draggedLabel = rel.endingTar.card;
+						startX = e.getX();
+						startY = e.getY();
+					}
 				}
-				else
-					i--;
+				i--;
+			}
+				
+			if(draggedLabel==null) {
+				draggedShape = null;
+				i = entities.size()-1;
+				
+				while(draggedShape==null && i>=0) {
+					if(entities.get(i).isVisible() && entities.get(i).getBorders().contains(e.getX()*zoom, e.getY()*zoom)) {
+						draggedShape = entities.get(i);
+						startX = e.getX();
+						startY = e.getY();
+					}
+					else
+						i--;
+				}
+			}
+			else {
+				draggedLabel.setManualPosition(e.getX(), e.getY());
 			}
 		}
 	}
@@ -529,29 +570,38 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 
 	public void mouseReleased(MouseEvent e) {
 		draggedShape = null;
+		draggedLabel = null;
 		startX = 0;
 		startY = 0;
 	}
 
 
 	public void mouseDragged(MouseEvent e) {
-		if(draggedShape!=null) {
-			int gapX = e.getX() - startX;
-			int gapY = e.getY() - startY;
-			draggedShape.setCentre((int)draggedShape.getCentre().x + gapX, (int)draggedShape.getCentre().y + gapY);
+		int gapX = e.getX() - startX;
+		int gapY = e.getY() - startY;
+		
+		if(draggedLabel!=null) {
+			draggedLabel.setPosition(draggedLabel.getPosition().x + gapX, draggedLabel.getPosition().y + gapY);
 			startX = e.getX();
 			startY = e.getY();
 			
-			draggedShape.update();
-			
-			for(LinkView link : links)
-				if(link.getEntitySrc()==draggedShape || link.getEntityTar()==draggedShape)
-					link.update();
-				
 			repaint();
-			updatePreferredSize();
-			revalidate();
-		}
+		} else
+			if(draggedShape!=null) {
+				draggedShape.setCentre((int)draggedShape.getCentre().x + gapX, (int)draggedShape.getCentre().y + gapY);
+				startX = e.getX();
+				startY = e.getY();
+				
+				draggedShape.update();
+				
+				for(LinkView link : links)
+					if(link.getEntitySrc()==draggedShape || link.getEntityTar()==draggedShape)
+						link.update();
+					
+				repaint();
+				updatePreferredSize();
+				revalidate();
+			}
 	}
 
 

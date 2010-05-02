@@ -295,12 +295,20 @@ public abstract class LinkView extends ComponentView {
 	
 	
 	public boolean isVerticalLine() {
+		if(pointSrc==null || pointTar==null) {
+			System.err.println("ERR>isVerticalLine>" + this + " " + entitySrc.name + " " + entityTar.name);
+			return false;
+		}
 		return equals(pointSrc.getX(), pointTar.getX());
 	}
 	
 	
 	
 	public boolean isHorizontalLine() {
+		if(pointSrc==null || pointTar==null) {
+			System.err.println("ERR>isHorizontalLine>" + this + " " + entitySrc.name + " " + entityTar.name);
+			return false;
+		}
 		return equals(pointSrc.getY(), pointTar.getY());
 	}
 	
