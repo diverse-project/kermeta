@@ -78,6 +78,7 @@
 		</chmod>
 		<sshexec host="${deploy.server}"
 		         username="${deploy.user}"
+				 keyfile="${key.file}"
 			     trust="yes"
 			     command="rm -R ${deploy.path};  
 		                  "/>
