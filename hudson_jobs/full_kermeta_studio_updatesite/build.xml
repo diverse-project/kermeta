@@ -15,9 +15,14 @@
 	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_bases_for_kermeta/build/kermeta_linux_x86_64_base.zip"/>
 	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
 	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
+	<property name="deploy.server" value="web1.irisa.fr"/>
+	<property name="deploy.user" value="web-triskell"/>
+	<property name="deploy.path" value="/home/web/apache/sites/kermeta.org/htdocs/integration_build/update"/>
 	
-	<target name="all" depends="get_studio_base, publish_features_and_bundles, publish_categories, get_site_template, chmod">
-
+	
+	
+	<target name="all" depends="get_studio_base, publish_features_and_bundles, publish_categories, get_site_template">
+		<antcall target="upload" />
 	</target>
 	
 	<target name="publish_features_and_bundles" depends="get_repository_source">
@@ -55,8 +60,8 @@
 						<arg value="file:/${category.definition}"/>
 						<arg value="-categoryQualifier"/>
 						<arg value="-compress"/>
-					</java>	
-		</target>
+			</java>	
+	</target>
 	<target name="get_site_template">
 		<copy todir="${updatesite.repository}">
 			<fileset dir="${env.WORKSPACE}/full_kermeta_studio_updatesite/site-template/fr.irisa.triskell.kermeta.site" includes="**" >
@@ -65,12 +70,23 @@
 			</fileset>	
 		</copy>
 	</target>
-	<target name="chmod">
+	<target name="upload">
 		<chmod perm="g+w">
 			<fileset dir="${updatesite.repository}">
 			    <include name="**/**"/>
 			 </fileset>
 		</chmod>
+		<sshexec host="${deploy.server}"
+		         username="${deploy.user}"
+			     trust="yes"
+			     command="rm -R ${deploy.path};  
+		                  "/>
+		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}"
+			keyfile="${key.file}">
+		    <fileset dir="${updatesite.repository}">
+		      <include name="**/**"/>
+		    </fileset>
+		</scp>
 	</target>
 	<target name="get_studio_base">
 		<ant antfile="get_studio_base_build.xml">
