@@ -80,7 +80,7 @@
 		         username="${deploy.user}"
 				 keyfile="${key.file}"
 			     trust="yes"
-			     command="rm -R ${deploy.path};  
+			     command="rm -Rf ${deploy.path};  
 		                  "/>
 		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}"
 			keyfile="${key.file}">
