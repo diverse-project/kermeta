@@ -33,23 +33,23 @@ object Parser extends StandardTokenParsers {
                 case t : Tag => newp.getTag.add(t)
                 case r : Require => newp.getRequires.add(r)
                 case p : Package => newp.getPackages.add(p)
-                case _ => println("unknow elem")
-          }}
-        case _ => println("TODO modeling unit catch some type sub elem")
-      }}
+                case _ @ elem => println("unknow elem" + elem)
+              }}
+          case _ => println("TODO modeling unit catch some type sub elem")
+        }}
       newp
   }
   def kermetaUnit = scompUnit+
 
-  def scompUnit = (/*packageDecl|*/importStmts|usingStmts|topLevelDecl) // TODO ADD ANNOTATION TO ELEM
+  def scompUnit = (packageDecl|importStmts|usingStmts|topLevelDecl) // TODO ADD ANNOTATION TO ELEM
 
   /* DEPRECATED */
-  /*
+  
   def packageDecl = "package" ~ expr ~ ";" ^^ { case _ ~ p ~ _ => {
         var newp =StructureFactory.eINSTANCE.createPackage
         newp.setName(p)
         newp
-      }}*/
+      }}
   def importStmts = importStmt+
   private def importStmt = "require" <~ expr ^^ { case e =>
       var newo =StructureFactory.eINSTANCE.createRequire
@@ -61,9 +61,24 @@ object Parser extends StandardTokenParsers {
       newo.setQualifiedName(id.toString+"::"+name.toString)
   }
   private def packageQualifiedName =  ( "::" ~ ident )*
-  def topLevelDecl : Parser[Any] = ((annotation | annotableElement)+) ^^ { case elems =>
-
+  private def topLevelDecl : Parser[List[Object]] = ((annotation | annotableElement)+) ^^ { case elems =>
+      var listAnnotElem : List[Object] = List()
+      var listTempTagToAdd : List[Tag] = List()
+      for(elem <- elems ){
+        elem match {
+          case t : Tag => listTempTagToAdd=listTempTagToAdd++List(t)
+          case o : Object => {
+              listTempTagToAdd.foreach{tag=>o.getTag.add(tag)}
+              listAnnotElem = listAnnotElem ++ List(o)
+              listTempTagToAdd = Nil
+          }
+        }
+      }
+      if(listTempTagToAdd != Nil){ listAnnotElem = listAnnotElem++listTempTagToAdd}
+      listAnnotElem
+      
   }
+  
   private def annotation : Parser[Tag] = "@" ~> ident ~ stringLit ^^ { case id1 ~ st1 =>
       var newo =StructureFactory.eINSTANCE.createTag
       newo.setName(id1.toString)
@@ -71,7 +86,7 @@ object Parser extends StandardTokenParsers {
       newo
   }
   def annotableElement = (subPackageDecl | classDecl)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
-  def subPackageDecl = ("package" ~ ident ~ "{" ~ (topLevelDeclOpt) ~ "}" ) ^^ { case _ ~ packageName ~ _ ~ decls ~ _ =>
+  def subPackageDecl = "package" ~ ident ~ "{" ~ (topLevelDeclOpt) ~ "}" ^^ { case _ ~ packageName ~ _ ~ decls ~ _ =>
       var newp =StructureFactory.eINSTANCE.createPackage
       newp.setName(packageName)
       decls match {
@@ -84,7 +99,7 @@ object Parser extends StandardTokenParsers {
       }
       newp
   }
-  def topLevelDeclOpt = (topLevelDecl ?)
+  def topLevelDeclOpt = topLevelDecl ?
   /*def modelTypeDecl = ("")
    def classDecl = ("")
    def enumDecl = ("")
