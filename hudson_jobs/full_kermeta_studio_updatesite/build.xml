@@ -82,7 +82,7 @@
 				 passphrase=""
 			     trust="yes"
 			     command="rm -Rf ${deploy.path};  
-		                  "/>
+						  mkdir ${deploy.path};"/>
 		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}"
 			keyfile="${key.file}"
 			passphrase=""
