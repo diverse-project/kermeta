@@ -174,11 +174,11 @@ object Parser extends StandardTokenParsers {
   def fExpressionLst : Parser[List[Expression]] = (fStatement+)
   def fStatement : Parser[Expression] = (fBlock | fVariableDecl | fAssignement | fCall | fLiteral )//fLoop | fConditional | fRaiseException |  | fAssignement)
 
-  def fVariableDecl : Parser[Expression] = "var" ~> ident ~ ":" ~ ident ~ packageQualifiedName ^^ { case id1 ~ _ ~ id2 ~ id3  =>
+  def fVariableDecl : Parser[Expression] = "var" ~> ident ~ ":" ~ packageName ^^ { case id1 ~ _ ~ name  =>
       var newo = BehaviorFactory.eINSTANCE.createVariableDecl
       newo.setIdentifier(id1)
       var newtype = BehaviorFactory.eINSTANCE.createTypeReference
-      newtype.setName(id2+id3)
+      newtype.setName(name)
       newo.setType(newtype)
       newo
   }
