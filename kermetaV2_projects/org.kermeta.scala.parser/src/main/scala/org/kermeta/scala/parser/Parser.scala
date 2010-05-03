@@ -30,7 +30,7 @@ object Parser extends StandardTokenParsers {
       var newp =StructureFactory.eINSTANCE.createModelingUnit
       unit.foreach{elem => elem match {
           case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
-                case t : Tag => newp.getTag.add(t)
+                case t : Tag => newp.getTag.add(t);newp.getOwnedTags.add(t)
                 case r : Require => newp.getRequires.add(r)
                 case p : Package => newp.getPackages.add(p)
                 case _ @ elem => println("unknow elem" + elem)
@@ -41,26 +41,29 @@ object Parser extends StandardTokenParsers {
   }
   def kermetaUnit = scompUnit+
 
-  def scompUnit = (packageDecl|importStmts|usingStmts|topLevelDecl) // TODO ADD ANNOTATION TO ELEM
+  def scompUnit = (/*packageDecl|*/importStmts|usingStmts|topLevelDecl) // TODO ADD ANNOTATION TO ELEM
 
   /* DEPRECATED */
-  
-  def packageDecl = "package" ~ expr ~ ";" ^^ { case _ ~ p ~ _ => {
-        var newp =StructureFactory.eINSTANCE.createPackage
-        newp.setName(p)
-        newp
-      }}
-  def importStmts = importStmt+
-  private def importStmt = "require" <~ expr ^^ { case e =>
+  /*
+   def packageDecl : Parser[Package] = "package" ~ expr ~ ";" ^^ { case _ ~ p ~ _ => {
+   var newp =StructureFactory.eINSTANCE.createPackage
+   newp.setName(p)
+   newp
+   }}*/
+  private def importStmts = importStmt+
+  private def importStmt = "require" ~ packageName ^^ { case _ ~ e =>
       var newo =StructureFactory.eINSTANCE.createRequire
       newo.setUri(e.toString)
       newo
   }
-  private def usingStmts = "using" ~> ident ~ packageQualifiedName ^^ { case id ~ name =>
+  private def usingStmts = "using" ~ packageName ^^ { case _ ~ name =>
       var newo =StructureFactory.eINSTANCE.createUsing
-      newo.setQualifiedName(id.toString+"::"+name.toString)
+      newo.setQualifiedName(name.toString)
   }
-  private def packageQualifiedName =  ( "::" ~ ident )*
+  private def packageName : Parser[String] = ident ~ packageQualifiedName ^^ { case id ~ q => id+q  }
+  private def packageQualifiedName : Parser[String] =  (( "::" ~ ident )*) ^^ { case lId =>
+      (for(idp <- lId) yield idp match {case _ ~ ident => "::"+ident.toString}).mkString
+  }
   private def topLevelDecl : Parser[List[Object]] = ((annotation | annotableElement)+) ^^ { case elems =>
       var listAnnotElem : List[Object] = List()
       var listTempTagToAdd : List[Tag] = List()
@@ -68,10 +71,10 @@ object Parser extends StandardTokenParsers {
         elem match {
           case t : Tag => listTempTagToAdd=listTempTagToAdd++List(t)
           case o : Object => {
-              listTempTagToAdd.foreach{tag=>o.getTag.add(tag)}
+              listTempTagToAdd.foreach{tag=>o.getTag.add(tag);o.getOwnedTags.add(tag)}
               listAnnotElem = listAnnotElem ++ List(o)
               listTempTagToAdd = Nil
-          }
+            }
         }
       }
       if(listTempTagToAdd != Nil){ listAnnotElem = listAnnotElem++listTempTagToAdd}
@@ -86,20 +89,20 @@ object Parser extends StandardTokenParsers {
       newo
   }
   def annotableElement = (subPackageDecl | classDecl)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
-  def subPackageDecl = "package" ~ ident ~ "{" ~ (topLevelDeclOpt) ~ "}" ^^ { case _ ~ packageName ~ _ ~ decls ~ _ =>
+  def subPackageDecl = "package" ~ ident ~ "{" ~ (topLevelDecl?) ~ "}" ^^ { case _ ~ packageName ~ _ ~ decls ~ _ =>
       var newp =StructureFactory.eINSTANCE.createPackage
       newp.setName(packageName)
       decls match {
         case Some(_ @ subElem) => subElem.asInstanceOf[List[_]].foreach{elem => elem match {
               case cdef : ClassDefinition => newp.getOwnedTypeDefinition.add(cdef)
               case subPack : Package => newp.getNestedPackage.add(subPack);subPack.setNestingPackage(newp)
-              case _ =>
+              case _ => println("unknow subelem")
             }}
         case None => println("Warning : Empty Package "+newp.getName)
       }
       newp
   }
-  def topLevelDeclOpt = topLevelDecl ?
+  //def topLevelDeclOpt = topLevelDecl ?
   /*def modelTypeDecl = ("")
    def classDecl = ("")
    def enumDecl = ("")
@@ -129,7 +132,7 @@ object Parser extends StandardTokenParsers {
   private def classMemberDecls = annotableClassMemberDecl +
   private def annotableClassMemberDecl = (annotation?) ~ classMemberDecl ^^ { case e ~ e1 =>
       e match {
-        case Some(_) => println("TODO ADD ANNOTATION")
+        case Some(_ @ annotation) => e1.getOwnedTags.add(annotation)
         case None => //NOTHING TO DO
       }
       e1
@@ -141,14 +144,17 @@ object Parser extends StandardTokenParsers {
       //TODO
       newo
   }
-  def operation =  ( operationKind ~ ident ~ "(" ~ ")" ~ ":" ~ ident ~ "is" ~ operationExpressionBody) ^^ { case opkind ~ opName ~ _ ~ _  ~ _ ~ id2 ~ _ ~ body =>
+  def operation =  ( operationKind ~ ident ~ "(" ~ ")" ~ ":" ~ packageName ~ "is" ~ operationExpressionBody) ^^ { case opkind ~ opName ~ _ ~ _  ~ _ ~ id2 ~ _ ~ body =>
       var newo =StructureFactory.eINSTANCE.createOperation
       opkind match {
         case "operation" => //NOTHING TO DO
         case "method" => /* println("method") SET SUPER OPERATION */
       }
       newo.setName(opName)
-      newo.setBody(body)
+      if(body != null) newo.setBody(body)
+      //var newtype = StructureFactory.eINSTANCE.createType
+      //newtype
+      //newo.setType(newtype)
       newo
   }
   private def operationKind = ("operation" | "method")
@@ -171,9 +177,8 @@ object Parser extends StandardTokenParsers {
   def fVariableDecl : Parser[Expression] = "var" ~> ident ~ ":" ~ ident ~ packageQualifiedName ^^ { case id1 ~ _ ~ id2 ~ id3  =>
       var newo = BehaviorFactory.eINSTANCE.createVariableDecl
       newo.setIdentifier(id1)
-      var typeName = id2+"::"+id3
       var newtype = BehaviorFactory.eINSTANCE.createTypeReference
-      newtype.setName(typeName)
+      newtype.setName(id2+id3)
       newo.setType(newtype)
       newo
   }
@@ -193,52 +198,53 @@ object Parser extends StandardTokenParsers {
 
   private def fLiteral : Parser[Expression] = ( fStringLiteral | fBooleanLiteral | fNumericLiteral | fVoidLiteral )
   private def fBooleanLiteral : Parser[Expression] = ("true" ^^^ {
-      var newo = BehaviorFactory.eINSTANCE.createBooleanLiteral
-      newo.setValue(true)
+      var newo = BehaviorFactory.eINSTANCE.createBooleanLiteral;newo.setValue(true)
       newo
     } | "false" ^^^ {
-      var newo = BehaviorFactory.eINSTANCE.createBooleanLiteral
-      newo.setValue(false)
+      var newo = BehaviorFactory.eINSTANCE.createBooleanLiteral;newo.setValue(false)
       newo
     } ) 
   private def fVoidLiteral : Parser[Expression] = ( "Void" ) ^^^ { BehaviorFactory.eINSTANCE.createVoidLiteral }
   private def fStringLiteral : Parser[Expression] = ( stringLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createStringLiteral;newo.setValue(e.toString);newo  } )
   private def fNumericLiteral : Parser[Expression] = ( numericLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createIntegerLiteral;newo.setValue(e.toInt);newo  } )
 
-  def fCall : Parser[CallFeature] = ( 
+  def fCall : Parser[CallExpression] = (
     ident ^^ {
       case e =>
-        var newo = BehaviorFactory.eINSTANCE.createCallFeature;
+        var newo = BehaviorFactory.eINSTANCE.createCallVariable
         newo.setName(e.toString);
-        println(newo)
         newo
     } |||
-    ident ~ "(" ~ callFeatureParams ~ ")" ^^^println("ICI") |||
+    ident ~ "(" ~ (callFeatureParams?) ~ ")" ^^ { case id ~ _ ~ params ~ _ =>
+        var newo = BehaviorFactory.eINSTANCE.createCallFeature
+        newo.setName(id)
+        params match {
+          case Some(_ @ par) => for(p <- par) newo.getParameters.add(p)
+          case None =>
+        }
+        newo
+
+    } |||
     ident ~ callFeatureQualifiedName ^^ {
       case id1 ~ callF =>
         var newo = BehaviorFactory.eINSTANCE.createCallFeature;
         newo.setName(id1.toString)
         newo.setTarget(callF)
-        println(newo)
         newo
     } |||
-    ident ~ "(" ~ callFeatureParams ~ ")" ~ callFeatureQualifiedName
-  ) ^^ {
-    case e => BehaviorFactory.eINSTANCE.createCallFeature
-      /*case id1 ~ qualName =>
-       var newo = BehaviorFactory.eINSTANCE.createCallFeature
-       id1 match {
-       case "super" => {
-       var newo = BehaviorFactory.eINSTANCE.createCallSuperOperation
-       newo
-       }
-       //TODO
-       case _ =>
-       }
-       newo*/
-  }
+    ident ~ "(" ~ (callFeatureParams?) ~ ")" ~ callFeatureQualifiedName ^^ { case id ~ _ ~ params ~ _ ~ qualName => {
+        var newo = BehaviorFactory.eINSTANCE.createCallFeature
+        newo.setName(id)
+        params match {
+          case Some(_ @ par) => for(p <- par) newo.getParameters.add(p)
+          case None =>
+        }
+        qualName.asInstanceOf[CallFeature].setTarget(newo)
+        newo
+      }
+  })
 
-  def callFeatureQualifiedName : Parser[CallFeature] =  "." ~ fCall ^^ {case _ ~ subcall => subcall }
+  def callFeatureQualifiedName : Parser[CallExpression] =  "." ~ fCall ^^ {case _ ~ subcall => subcall }
   /*
    var newo = BehaviorFactory.eINSTANCE.createCallVariable
    BehaviorFactory.eINSTANCE.createC
@@ -254,7 +260,7 @@ object Parser extends StandardTokenParsers {
    newo
    }
    )**/
-  private def callFeatureParams = ( fStatement ~ callFeatureParam ^^ { case stat ~statL => List(stat)++statL } )?
+  private def callFeatureParams = fStatement ~ callFeatureParam ^^ { case stat ~ statL => List(stat)++statL }
   private def callFeatureParam = (("," ~ fStatement ^^ { case delim ~ stat => stat } )*)
 
   def expr = (stringLit | ident )

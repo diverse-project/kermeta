@@ -41,14 +41,14 @@ object LoadSaveKM {
     rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
     var uri1:URI   = URI.createURI(uri)
     var res : Resource = rs.createResource(uri1)
-    r.getTag.foreach{tag=>res.getContents.add(tag)}
+    //r.getTag.foreach{tag=>res.getContents.add(tag)}
     res.getContents.add(r)
-    recursiveAddToResource(r,res)
+    //recursiveAddToResource(r,res)
 
     res.save(new HashMap());
   
   }
-
+/*
   def recursiveAddToResource(elem : EObject, res : Resource) : Any = {
     elem.eAllContents.foreach{subelem =>
       //res.getContents.add(subelem)
@@ -56,6 +56,6 @@ object LoadSaveKM {
       subelem.asInstanceOf[fr.irisa.triskell.kermeta.language.structure.Object].getTag.foreach{tag => res.getContents.add(tag)}
 
     }
-  }
+  }*/
 
 }
