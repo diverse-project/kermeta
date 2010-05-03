@@ -85,7 +85,8 @@
 		                  "/>
 		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}"
 			keyfile="${key.file}"
-			passphrase="">
+			passphrase=""
+		    trust="yes">
 		    <fileset dir="${updatesite.repository}">
 		      <include name="**/**"/>
 		    </fileset>
