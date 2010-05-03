@@ -147,7 +147,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 				if(link.entitySrc==tarClass && link.entityTar==srcClass && link instanceof RelationView) {
 					rel = (RelationView)link;
 					
-					if(rel.endingTar.name.equals(srcRole) && rel.endingTar.card.equals(srcCard))
+					if(rel.endingTar.name.text.equals(srcRole) && rel.endingTar.card.text.equals(srcCard))
 						again = false;
 				}
 				
