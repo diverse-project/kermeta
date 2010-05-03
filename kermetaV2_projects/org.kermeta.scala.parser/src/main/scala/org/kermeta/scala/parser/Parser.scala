@@ -116,7 +116,7 @@ object Parser extends StandardTokenParsers {
         case None => newo.setIsAspect(false)
       }
       abstractM match {
-        case Some(_) =>  newo.setIsAbstract(true)
+        case Some(_) => newo.setIsAbstract(true)
         case None => newo.setIsAbstract(false)
       }
       members.foreach{member => {
@@ -144,7 +144,7 @@ object Parser extends StandardTokenParsers {
       //TODO
       newo
   }
-  def operation =  ( operationKind ~ ident ~ "(" ~ ")" ~ ":" ~ packageName ~ "is" ~ operationExpressionBody) ^^ { case opkind ~ opName ~ _ ~ _  ~ _ ~ id2 ~ _ ~ body =>
+  def operation =  ( operationKind ~ ident ~ "(" ~ (operationParameters?) ~ ")" ~ ":" ~ packageName ~ "is" ~ operationExpressionBody) ^^ { case opkind ~ opName ~ _ ~ params ~ _  ~ _ ~ id2 ~ _ ~ body =>
       var newo =StructureFactory.eINSTANCE.createOperation
       opkind match {
         case "operation" => //NOTHING TO DO
@@ -152,11 +152,30 @@ object Parser extends StandardTokenParsers {
       }
       newo.setName(opName)
       if(body != null) newo.setBody(body)
+
+      params match {
+        case Some(_ @ lpara) => for(par <- lpara) newo.getOwnedParameter.add(par)
+        case None => // DO NOTHING
+      }
+
       //var newtype = StructureFactory.eINSTANCE.createType
       //newtype
       //newo.setType(newtype)
       newo
   }
+
+  //def operationParameters = operationParameters*
+  def operationParameter : Parser[Parameter] = ident ~ ":" ~ packageName ^^ { case id ~ _ ~ name =>
+      var newo = StructureFactory.eINSTANCE.createParameter
+      newo.setName(id.toString)
+      //TODO SET TYPE
+      //StructureFactory.eINSTANCE.createType.
+      //newo.setType(name.)
+      newo
+  }
+  def operationParameterss = (("," ~ operationParameter )*) ^^ { case params => for(par <- params) yield par match {case _ ~ p => p} }
+  def operationParameters = operationParameter ~ operationParameterss ^^ { case par ~ params => List(par)++params }
+
   private def operationKind = ("operation" | "method")
   def property = "prop" ^^^ StructureFactory.eINSTANCE.createProperty
   def abstractModifier = ("abstract")?
