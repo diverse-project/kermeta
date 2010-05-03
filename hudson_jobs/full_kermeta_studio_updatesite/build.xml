@@ -52,7 +52,7 @@
 						<arg value="-metadataRepository"/>
 						<arg value="file:/${updatesite.repository}"/>
 						<arg value="-categoryDefinition"/>
-						<arg value="${category.definition}"/>
+						<arg value="file:/${category.definition}"/>
 						<arg value="-categoryQualifier"/>
 						<arg value="-compress"/>
 					</java>	
