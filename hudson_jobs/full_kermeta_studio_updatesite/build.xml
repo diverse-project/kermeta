@@ -8,6 +8,7 @@
 	<property name="source.features.and.bundles.downloaded.zip" location="${env.WORKSPACE}/tmp/features_and_bundles.zip"/>		
 	<property name="source.features.and.bundles.url" value="http://tipimouss.irisa.fr:8090/job/full_kermeta_studio_compile/lastSuccessfulBuild/artifact/full_kermeta_studio_compile/I.DevelopmentBuild/org.kermeta.studio.main.feature-DevelopmentBuild.zip"/>		
 	<property name="updatesite.repository" location="${env.WORKSPACE}/updatesite"/>
+	<property name="category.definition" location="./category.xml"/>
 	<property name="source.features.and.bundles" location="${env.WORKSPACE}/build/features_and_bundles"/>	
 	
 	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
@@ -15,7 +16,7 @@
 	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
 	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.0.201.R35x_v20090715.jar"/>
 	
-	<target name="all" depends="get_studio_base, publish_features_and_bundles, get_site_template, chmod">
+	<target name="all" depends="get_studio_base, publish_features_and_bundles, publish_categories, get_site_template, chmod">
 
 	</target>
 	
@@ -37,7 +38,25 @@
 					<arg value="-compress"/>
 					<arg value="-publishArtifacts"/>
 				</java>	
-	</target>	
+	</target>
+	<target name="publish_categories" depends="publish_features_and_bundles">
+			<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
+					           fork="true"
+					           failonerror="true"
+					           maxmemory="128m"
+					           >
+						<arg value="-console"/>
+						<arg value="-consolelog "/>
+						<arg value="-application"/>
+						<arg value="org.eclipse.equinox.p2.publisher.CategoryPublisher"/>
+						<arg value="-metadataRepository"/>
+						<arg value="file:/${updatesite.repository}"/>
+						<arg value="-categoryDefinition"/>
+						<arg value="${category.definition}"/>
+						<arg value="-categoryQualifier"/>
+						<arg value="-compress"/>
+					</java>	
+		</target>
 	<target name="get_site_template">
 		<copy todir="${updatesite.repository}">
 			<fileset dir="${env.WORKSPACE}/full_kermeta_studio_updatesite/site-template/fr.irisa.triskell.kermeta.site" includes="**" >
