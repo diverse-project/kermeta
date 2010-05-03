@@ -79,11 +79,13 @@
 		<sshexec host="${deploy.server}"
 		         username="${deploy.user}"
 				 keyfile="${key.file}"
+				 passphrase=""
 			     trust="yes"
 			     command="rm -Rf ${deploy.path};  
 		                  "/>
 		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}"
-			keyfile="${key.file}">
+			keyfile="${key.file}"
+			passphrase="">
 		    <fileset dir="${updatesite.repository}">
 		      <include name="**/**"/>
 		    </fileset>
