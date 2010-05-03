@@ -12,9 +12,9 @@ object Parser extends StandardTokenParsers {
   lexical.reserved += ("package","require","using","class","aspect","abstract","inv","operation","method","is","do","end","var")
   lexical.delimiters += ("=",";","::","@","{","}","(",")",":",":=",".",",")
 
-  def parse(content : String) : Option[List[Any]] = {
+  def parse(content : String) : Option[ModelingUnit] = {
     val tokens = new lexical.Scanner(content)
-    val result : ParseResult[List[Any]] = phrase(program)(tokens)
+    val result = phrase(program)(tokens)
     result match {
       case Success(tree, _) => {Some(tree) }
       case e: NoSuccess => {
@@ -25,26 +25,45 @@ object Parser extends StandardTokenParsers {
     }
   }
 
-  def program = scompUnit+
-  def scompUnit = (packageDecl|importStmts|usingStmts|topLevelDecl)
+  /* MODELING UNIT DEFINITION */
+  def program = kermetaUnit ^^ { case unit => 
+      var newp =StructureFactory.eINSTANCE.createModelingUnit
+      unit.foreach{elem => elem match {
+          case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
+                case t : Tag => newp.getTag.add(t)
+                case r : Require => newp.getRequires.add(r)
+                case p : Package => newp.getPackages.add(p)
+                case _ => println("unknow elem")
+          }}
+        case _ => println("TODO modeling unit catch some type sub elem")
+      }}
+      newp
+  }
+  def kermetaUnit = scompUnit+
+
+  def scompUnit = (/*packageDecl|*/importStmts|usingStmts|topLevelDecl) // TODO ADD ANNOTATION TO ELEM
+
+  /* DEPRECATED */
+  /*
   def packageDecl = "package" ~ expr ~ ";" ^^ { case _ ~ p ~ _ => {
         var newp =StructureFactory.eINSTANCE.createPackage
         newp.setName(p)
         newp
-      }}
+      }}*/
   def importStmts = importStmt+
-  def importStmt = "require" <~ expr ^^ { case e =>
+  private def importStmt = "require" <~ expr ^^ { case e =>
       var newo =StructureFactory.eINSTANCE.createRequire
       newo.setUri(e.toString)
       newo
   }
-  def usingStmts = "using" ~> ident ~ packageQualifiedName ^^ { case id ~ name =>
+  private def usingStmts = "using" ~> ident ~ packageQualifiedName ^^ { case id ~ name =>
       var newo =StructureFactory.eINSTANCE.createUsing
       newo.setQualifiedName(id.toString+"::"+name.toString)
   }
-  def packageQualifiedName =  ( "::" ~ ident )*
-//def topLevelDecls = (topLevelDecl)
-  def topLevelDecl : Parser[Any] = (annotation | annotableElement)+
+  private def packageQualifiedName =  ( "::" ~ ident )*
+  def topLevelDecl : Parser[Any] = ((annotation | annotableElement)+) ^^ { case elems =>
+
+  }
   private def annotation : Parser[Tag] = "@" ~> ident ~ stringLit ^^ { case id1 ~ st1 =>
       var newo =StructureFactory.eINSTANCE.createTag
       newo.setName(id1.toString)
@@ -52,7 +71,19 @@ object Parser extends StandardTokenParsers {
       newo
   }
   def annotableElement = (subPackageDecl | classDecl)// | modelTypeDecl | classDecl | enumDecl | dataTypeDecl )
-  def subPackageDecl = ("package" ~> ident <~ "{" ~ (topLevelDeclOpt) ~ "}" )
+  def subPackageDecl = ("package" ~ ident ~ "{" ~ (topLevelDeclOpt) ~ "}" ) ^^ { case _ ~ packageName ~ _ ~ decls ~ _ =>
+      var newp =StructureFactory.eINSTANCE.createPackage
+      newp.setName(packageName)
+      decls match {
+        case Some(_ @ subElem) => subElem.asInstanceOf[List[_]].foreach{elem => elem match {
+              case cdef : ClassDefinition => newp.getOwnedTypeDefinition.add(cdef)
+              case subPack : Package => newp.getNestedPackage.add(subPack);subPack.setNestingPackage(newp)
+              case _ =>
+            }}
+        case None => println("Warning : Empty Package "+newp.getName)
+      }
+      newp
+  }
   def topLevelDeclOpt = (topLevelDecl ?)
   /*def modelTypeDecl = ("")
    def classDecl = ("")

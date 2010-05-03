@@ -17,8 +17,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 
 object LoadSaveKM {
 
-
-
   def loadKmModel(uri:String): TreeIterator[EObject] ={
     var rs:ResourceSetImpl  = new ResourceSetImpl();
     rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*",new XMIResourceFactoryImpl());
@@ -27,16 +25,13 @@ object LoadSaveKM {
 
   }
 
-
-
   def saveKmModel( uri: String, r:Resource ) = {
     var rs :ResourceSetImpl = new ResourceSetImpl();
     rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*",new XMIResourceFactoryImpl());
     rs.getPackageRegistry().put(KmPackage.eNS_URI, KmPackage.eINSTANCE);
     var uri1:URI   = URI.createURI(uri);//.replace("platform:/resource/",EcorePackages.workspaceURI).replace("platform:/plugin/",EcorePackages.pluginURI ));
     r.setURI(uri1);
-    r.save(new HashMap());
-		
+    r.save(new HashMap());	
   }
 
   def saveKmModelingUnit( uri: String, r:ModelingUnit ) = {
