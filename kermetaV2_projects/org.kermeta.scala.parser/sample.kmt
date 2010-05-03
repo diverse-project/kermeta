@@ -8,17 +8,15 @@
 @mainClass "p1::Main"
 @mainOperation "main"
 
-
-package p1;
-
-
 require kermeta
 
-aspect abstract class Main
-{
+package p1{
+    aspect abstract class Main
+    {
 	operation main() : Void is do
 		var a : kermeta::standard::Integer
 		a := 4
 		stdio.writeln("Assignment value = ","")
 	end
+    }
 }
