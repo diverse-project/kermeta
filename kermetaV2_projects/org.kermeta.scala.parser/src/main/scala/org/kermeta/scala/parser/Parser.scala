@@ -9,7 +9,7 @@ import fr.irisa.triskell.kermeta.language.behavior.impl._
 import scala.collection.JavaConversions._
 
 object Parser extends StandardTokenParsers {
-  lexical.reserved += ("package","require","using","class","aspect","abstract","inv","operation","method","is","do","end","var")
+  lexical.reserved += ("package","require","using","class","aspect","abstract","inv","operation","method","is","do","end","var","from","until","loop","if","then","else","init")
   lexical.delimiters += ("=",";","::","@","{","}","(",")",":",":=",".",",")
 
   def parse(content : String) : Option[ModelingUnit] = {
@@ -78,8 +78,7 @@ object Parser extends StandardTokenParsers {
         }
       }
       if(listTempTagToAdd != Nil){ listAnnotElem = listAnnotElem++listTempTagToAdd}
-      listAnnotElem
-      
+      listAnnotElem  
   }
   
   private def annotation : Parser[Tag] = "@" ~> ident ~ stringLit ^^ { case id1 ~ st1 =>
@@ -139,9 +138,10 @@ object Parser extends StandardTokenParsers {
   }
   def classMemberDecl = ( invariant | operation | property ) //attribute | reference | operation ;
 
-  def invariant = ("inv" ~> expr ) ^^ { case expr =>
+  def invariant = ("inv" ~ ident ~ "is" ~ fStatement ) ^^ { case _ ~ ident ~ _ ~ expr =>
       var newo =StructureFactory.eINSTANCE.createConstraint
-      //TODO
+      newo.setName(ident)
+      newo.setBody(expr)
       newo
   }
   def operation =  ( operationKind ~ ident ~ "(" ~ (operationParameters?) ~ ")" ~ ":" ~ packageName ~ "is" ~ operationExpressionBody) ^^ { case opkind ~ opName ~ _ ~ params ~ _  ~ _ ~ id2 ~ _ ~ body =>
@@ -157,10 +157,7 @@ object Parser extends StandardTokenParsers {
         case Some(_ @ lpara) => for(par <- lpara) newo.getOwnedParameter.add(par)
         case None => // DO NOTHING
       }
-
-      //var newtype = StructureFactory.eINSTANCE.createType
-      //newtype
-      //newo.setType(newtype)
+      //TODO INSERT NON RESOLVING TYPE
       newo
   }
 
@@ -191,14 +188,20 @@ object Parser extends StandardTokenParsers {
   }
 
   def fExpressionLst : Parser[List[Expression]] = (fStatement+)
-  def fStatement : Parser[Expression] = (fBlock | fVariableDecl | fAssignement | fCall | fLiteral )//fLoop | fConditional | fRaiseException |  | fAssignement)
+  def fStatement : Parser[Expression] = (pExpression | fBlock | fVariableDecl | fAssignement | fCall | fLiteral | fLoop | fConditional )// | fConditional | fRaiseException )
 
-  def fVariableDecl : Parser[Expression] = "var" ~> ident ~ ":" ~ packageName ^^ { case id1 ~ _ ~ name  =>
+  def pExpression : Parser[Expression] = "(" ~ fStatement ~ ")" ^^ { case _ ~ statment ~ _ => statment }
+
+  def fVariableDecl : Parser[Expression] = "var" ~> ident ~ ":" ~ packageName ~ (("init" ~ fStatement)?) ^^ { case id1 ~ _ ~ name ~ initStat  =>
       var newo = BehaviorFactory.eINSTANCE.createVariableDecl
       newo.setIdentifier(id1)
       var newtype = BehaviorFactory.eINSTANCE.createTypeReference
       newtype.setName(name)
       newo.setType(newtype)
+      initStat match {
+        case None =>
+        case Some(elseExp)=> elseExp match { case "init"~statm => newo.setInitialization(statm) }
+      }
       newo
   }
   private def fAssignement : Parser[Expression] = ( fCall ~ ":=" ~ fStatement) ^^ { case target ~ _ ~ statment =>
@@ -207,6 +210,28 @@ object Parser extends StandardTokenParsers {
       newo.setValue(statment)
       newo
   }
+
+  private def fLoop : Parser[Expression] = "from" ~ fStatement ~ "until" ~ fStatement ~ "loop" ~ fStatement ~ "end" ^^ { case _ ~ init ~ _ ~ stop ~ _ ~ body ~ _ =>
+      var newo = BehaviorFactory.eINSTANCE.createLoop
+      newo.setInitialization(init)
+      newo.setStopCondition(stop)
+      newo.setBody(body)
+      newo
+  }
+  
+  private def fConditional : Parser[Expression] = "if"~fStatement~"then"~fStatement~(("else"~fStatement)?)~"end" ^^ { case _~cond~_~thenBody~elseBody~_=>
+      var newo = BehaviorFactory.eINSTANCE.createConditional
+      newo.setCondition(cond)
+      newo.setThenBody(thenBody)
+      elseBody match {
+        case None => //NOTHING TO DO
+        case Some(_ @ parser) => parser match {
+            case "else"~elseBody => newo.setElseBody(elseBody)
+        }
+      }
+      newo
+  }
+
   private def fBlock : Parser[Expression] = "do" ~> fExpressionLst ~ (fRescueLst?) <~ "end" ^^ { case expL ~ rescueL =>
       var newo = BehaviorFactory.eINSTANCE.createBlock
       newo.getStatement.addAll(expL)
@@ -252,16 +277,16 @@ object Parser extends StandardTokenParsers {
         newo
     } |||
     ident ~ "(" ~ (callFeatureParams?) ~ ")" ~ callFeatureQualifiedName ^^ { case id ~ _ ~ params ~ _ ~ qualName => {
-        var newo = BehaviorFactory.eINSTANCE.createCallFeature
-        newo.setName(id)
-        params match {
-          case Some(_ @ par) => for(p <- par) newo.getParameters.add(p)
-          case None =>
+          var newo = BehaviorFactory.eINSTANCE.createCallFeature
+          newo.setName(id)
+          params match {
+            case Some(_ @ par) => for(p <- par) newo.getParameters.add(p)
+            case None =>
+          }
+          qualName.asInstanceOf[CallFeature].setTarget(newo)
+          newo
         }
-        qualName.asInstanceOf[CallFeature].setTarget(newo)
-        newo
-      }
-  })
+    })
 
   def callFeatureQualifiedName : Parser[CallExpression] =  "." ~ fCall ^^ {case _ ~ subcall => subcall }
   /*
