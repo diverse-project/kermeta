@@ -70,7 +70,8 @@
             <para>We recommend to the beginner to read this document till the end first. Advanced
                 user might directly jump to the concrete examples : the <ulink
                     url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"> FSM
-                    tutorial</ulink> or the <ulink url="../Kermeta-Tutorial-Logo/">Logo
+                    tutorial</ulink> or the <ulink
+                    url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/">Logo
                     Tutorial</ulink>. </para>
         </important>
         <para>For the explanation of the concepts mentioned here, please refer to the <ulink
@@ -91,8 +92,8 @@
                 </listitem>
                 <listitem>
                     <para>we will add some behaviour (through aspect weaving with Kermeta) where you
-                        can bind with another framework (provide GUI defined with another language
-                        for example). </para>
+                        can bind with another framework (provide GUI defined with another language -
+                        Java for example). </para>
                 </listitem>
             </orderedlist></para>
         <figure>
@@ -145,16 +146,16 @@
                 represented by an ecore metamodel which is the starting point of this
                 tutorial.</para>
             <para>So first things first! Let's create the ecore file which is a class-diagram where
-                a class represents a main concepts of the language. Before moving on, we won't
-                forget to set up its <link linkend="sec_package_registry.link">nsURI</link>. As a
-                standard ecore file, any ecore aware tools can be used to visualize it. To that
-                extent, you can choose to generate/initialize its ecorediag file which contains the
-                graphical informations of the metamodel elements. Then, you can generate the model
-                code provided by EMF genmodel.</para>
+                a class represents a main concept of the language.Then, we won't forget to set up
+                its <link linkend="sec_package_registry.link">nsURI</link>. As a standard ecore
+                file, any ecore aware tools can be used to visualize it. To that extent, you can
+                choose to generate/initialize its ecorediag file which contains the graphical
+                informations of the metamodel elements. Then, you can generate the model code
+                provided by EMF genmodel.</para>
             <para>With Kermeta, you can also "program" your metamodel. Instead of designing it with
-                its representation, you 'll textually define the concepts of your metamodel. Then,
-                with Kermeta, you obtain the ecore file by calling the generate ecore metamodel on
-                your Kermeta program source (.kmt). </para>
+                its representation, you 'll textually define the concepts of your metamodel. By
+                calling the generate ecore metamodel on your Kermeta program source (.kmt), you
+                obtain the ecore file.</para>
             <tip>
                 <para> If you want to learn more about how to create an ecore metamodel with
                     eclipse, please refer to the <ulink
@@ -169,9 +170,9 @@
                                     > FSM tutorial</ulink></para>
                         </listitem>
                         <listitem>
-                            <para>Logo metamodel :<ulink
-                                    url="../Kermeta-Tutorial-Process/index.html#chapter_MM">
-                                    defining the metamodel</ulink></para>
+                            <para>Define the metamodel section in <ulink
+                                    url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/"
+                                    >Logo Tutorial</ulink></para>
                         </listitem>
                     </itemizedlist></para>
             </note>
@@ -180,15 +181,14 @@
     <chapter id="chapter_process_define_editor.link">
         <title id="chapter_define_editor.title.link">Define the editor<phrase/></title>
         <para>In this task, you will learn how to provide editors to create model instances which
-            conforms to your metamodel. There are many ways to do so however in this tutorial we
-            will focus more on the textual editor. As these techniques are independant each others,
-            you can experiment each of them according to your needs.</para>
+            conforms to your metamodel. There are many ways to do so. As these techniques are
+            independant each others, you can experiment each of them according to your needs.</para>
         <section id="sec_dynamic_instance.link">
             <title id="sec_dynamic_instance.title.link">Dynamic instance</title>
-            <para>This is the most simple and faster way for creating an instance of a meta-model
-                during the first development phases. Creation is accessible by right-clicking onto
-                the root class/model object of the meta-model. Because of the containment property,
-                classes are only available for creation through this root class.</para>
+            <para>This is the most simple and fastest way for creating an instance of a meta-model.
+                Creation is accessible by right-clicking onto the root meta-class. Because of the
+                containment property, classes are only available for creation through this root
+                class.</para>
             <note>
                 <para>Illustrations of this technique can be seen in the dedicated part of the
                     tutorials : <itemizedlist>
@@ -198,9 +198,9 @@
                                     > FSM tutorial</ulink></para>
                         </listitem>
                         <listitem>
-                            <para>How to<ulink
-                                    url="../Kermeta-Tutorial-Logo/index.html#section_dynamic_instance"
-                                    > create a dynamic instance</ulink> in th Logo tutorial</para>
+                            <para>Dynamic instance in the <ulink
+                                    url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/"
+                                    >Logo Tutorial</ulink></para>
                         </listitem>
                     </itemizedlist></para>
             </note>
@@ -235,36 +235,44 @@
                 <para>If you want to have an example on this technique, please refer to the example
                     in :<itemizedlist>
                         <listitem>
-                            <para>Logo tutorial : <ulink
-                                    url="../Kermeta-Tutorial-Logo/index.html#section_textual_editor"
-                                    >Textual editor</ulink></para>
+                            <para>Textual editor section in <ulink
+                                    url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/"
+                                    >Logo Tutorial</ulink></para>
                         </listitem>
                     </itemizedlist></para>
             </note>
         </section>
         <section id="sec_gmf_editor.link">
             <title id="sec_gmf_editor.title.link">GMF editor</title>
-            <para>The last manipulation technique of a metamodel is to do so in a graphical way. A
-                dedicated tutorial covers the process to define such kind of editor in the <ulink
-                    url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"> FSM
-                    tutorial</ulink>.</para>
+            <para>The last manipulation technique of a metamodel is to do so in a graphical
+                way.</para>
+            <note>
+                <para>A dedicated tutorial covers the process to define such kind of editor in
+                    :</para>
+                <itemizedlist>
+                    <listitem>
+                        <para><ulink
+                                url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/">
+                                FSM tutorial</ulink>.</para>
+                    </listitem>
+                </itemizedlist>
+            </note>
         </section>
     </chapter>
     <chapter id="chapter_model_manipulation_kermeta.link">
         <title id="chapter_model_manipulation_kermeta.title.link">Model manipulation in
             Kermeta<phrase/></title>
         <para>This section illustrates some importants steps in order to succesfully manipulate the
-            metamodel in Kermeta.  This is about why to register your metamodel and how to load/save
+            metamodel in Kermeta. This is about why to register your metamodel and how to load/save
             it.</para>
         <section id="sec_serialisation.link">
             <title id="sec_serialisation.title.link">Serialisation</title>
-            <para>The serialization allows to save and load models thanks to the persistence
-                library. The persistence library is inspired from the resource manager of EMF
-                models. There is a repository (called EMFRepository), that is aimed at containing a
-                set of resources (the EMFResources). Each resource contains a reference called
-                instances, that contains all the root classes of the loaded model (there is usually
-                only have one root class). So, the procedure of creation of a resource that will
-                handle EMF models is the following : </para>
+            <para>Thanks to the persistence library, you can serialize (save and load) models. The
+                persistence library is inspired from the resource manager of EMF models. There is a
+                repository (called EMFRepository) containing a set of resources (the EMFResources).
+                Each resource contains a reference called instance which contains all the root
+                classes of the loaded model (there is usually one root class). So, the procedure of
+                creation of a resource that will handle EMF models is the following : </para>
             <orderedlist>
                 <listitem>
                     <para>Instanciate an EMFRepository;</para>
@@ -291,7 +299,7 @@
             <para>In order to link the instance file with its meta-model, a relative path should be
                 provided (aka nsURI). So, after the creation of the metamodel, we need to register
                 this metamodel into the EMF Package Registry. In deployed mode (ie. in a runtime
-                workbench), the ecore is automatically registered by the plugin, in development
+                workbench), the ecore is automatically registered by the plugin. In development
                 mode, you need to manually register it.</para>
             <para>There is two ways to do that, deploying an EMF plugin which add permanently the
                 meta model to the Eclipse's EMF Package Registry or register dynamically the meta
@@ -313,15 +321,15 @@
             constraints specified inside your language. Constarints on metamodels are static
             semantic. For instance you may add well formedness rules aka contracts to control errors
             made by users.</para>
-        <para>Thanks to aspect weaving, Kermeta allow you to reopen ecore class definition in order
-            to add pre/post condition into it so as to satisfy the specified constraints.  You only
+        <para>Thanks to aspect weaving, Kermeta allows you to reopen ecore class definition in order
+            to add pre/post condition into it so as to satisfy the specified constraints. You only
             have to weave these pre/post-conditions (for instace adding some invariants) and call
             the method checkAllInvariant() on the root element of the model to check the
             contract.</para>
         <tip>
             <para>These constraints can also be expressed in OCL which is the OMG official language.
                 You can import them merely by calling these methods. Kermeta offer the same easy
-                navigation inside existing model in OCL. </para>
+                navigation inside existing model in OCL (&lt;Collection>.each, ...). </para>
         </tip>
         <note>
             <para>Examples of how to add contract to your ecore model can be reached in the examples
@@ -332,9 +340,9 @@
                             FSM tutorial</ulink> : How to add constraints</para>
                 </listitem>
                 <listitem>
-                    <para>Logo tutorial : <ulink
-                            url="../Kermeta-Tutorial-Logo/index.html#chapter_contract">Adding
-                            contract</ulink></para>
+                    <para>Contract chapter in <ulink
+                            url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/">Logo
+                            Tutorial</ulink>.</para>
                 </listitem>
             </itemizedlist>
         </note>
@@ -344,13 +352,13 @@
         <para>Like adding the contracts seen on the previous chapter, some dynamic semantics can be
             added to our metamodel through Kermeta aspect weaving. According to the dynamic behave
             that we want to express, we weave aspect operation inside each element of the metamodel
-            where there is an action to express (i.e.:  add methods that represent the action that
+            where there is an action to express (i.e.: add methods that represent the action that
             you want for that element). </para>
-        <para>To do so you have to define a virtual machine representing the application domain
+        <para>To do so you have to define a virtual machine (VM) representing the application domain
             where you'are going to weave your methods.</para>
-        <para>If needed, you can implement a Kermeta wrapper to another language or librairie to add
-            missing feature in Kermeta to your VM (you can call Java.Math to perform calculation or
-            Java AWT for drawing). </para>
+        <para>If needed, you can implement a Kermeta wrapper to another language or librairy to add
+            missing feature to your VM (you can call Java.Math to perform calculation or Java AWT
+            for drawing). </para>
         <note>
             <para>A complete example is given inside : </para>
             <itemizedlist>
@@ -360,9 +368,9 @@
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Logo tutorial : <ulink
-                            url="../Kermeta-Tutorial-Logo/index.html#dynamic_semantic">Behaviour :
-                            dynamic semantic section</ulink></para>
+                    <para>Behaviour chapter in <ulink
+                            url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/">Logo
+                            Tutorial</ulink></para>
                 </listitem>
             </itemizedlist>
         </note>
@@ -383,9 +391,9 @@
                             FSM tutorial</ulink></para>
                 </listitem>
                 <listitem>
-                    <para>Logo example : <ulink
-                            url="../Kermeta-Tutorial-Logo/index.html#section_model_transformation_compilation"
-                            >Model transformation and compilation</ulink></para>
+                    <para>Model transformation - Compilation chapter in <ulink
+                            url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/">Logo
+                            Tutorial</ulink></para>
                 </listitem>
             </itemizedlist>
         </note>
@@ -394,16 +402,16 @@
         <title id="chapter_ui_improvements.title.link">UI improvements</title>
         <para>The final step is deploying the DSL environment inside an eclipse GUI. These
             improvements begin with an appropriate texteditor for the DSL (popupmenus, icons,
-            wizards, ...). Then through the PDE offered by eclipse, ui elements are added to
-            interract with the interpreter of our DSL. </para>
+            wizards, ...). Then through the Plug-in Development Environment (PDE) offered by
+            eclipse, ui elements are added to interract with the interpreter of our DSL. </para>
         <note>
             <para>An example on how to implement those ui tweaking is provided in the tutorial below
                 :</para>
             <itemizedlist>
                 <listitem>
-                    <para>Logo example : <ulink
-                            url="../Keremta-Tutorial-Logo/index.html#ui_improvements">Ui
-                            improvements</ulink></para>
+                    <para>UI improvements in <ulink
+                            url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/">Logo
+                            Tutorial</ulink></para>
                 </listitem>
             </itemizedlist>
         </note>
@@ -411,14 +419,14 @@
     <chapter id="chapter_conclusion.link">
         <title id="chapter_conclusion.title.link">Conclusion</title>
         <para>This is the end of this tutorial, we cover the needed processes to build DSL with
-            Kermeta. Now you should be able to implement your own DSL language using Kermeta.
-            Through this tutorial, we provided a Model Delevelopment Kit (MDK) in order to you being
-            able to build your own one starting from <emphasis role="bold">"just" an .ecore file and
-                Kermeta</emphasis>.</para>
+            Kermeta. Through this tutorial, we provided a Model Delevelopment Kit (MDK) for Logo
+            language. Now, using Kermeta, you should be able to implement your own DSL language
+            starting from <emphasis role="bold">"just" an .ecore file</emphasis>.</para>
         <para>You may either move on to the full examples through the <ulink
                 url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"> FSM
-                tutorial</ulink> and the <ulink url="../Kermeta-Tutorial-Logo/index.html">Logo
-                tutorial</ulink> in order to see the implementation of these processes or either you
+                tutorial</ulink> and the <ulink
+                url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/">Logo
+                Tutorial</ulink> in order to see the implementation of these processes or either you
             may play it<link linkend="chapter_introduction.link"> back to the
             begining</link>.</para>
     </chapter>
