@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+<toc label="Task oriented tutorials">
+	<topic label="How to create a graphical editor for FSM with GMF" href="build/eclipse.help/KerMeta-Create-FSM-Graphical-Editor-With-GMF/index.html"> 
+		<link toc="build/eclipse.help/KerMeta-Create-FSM-Graphical-Editor-With-GMF/toc.xml"/>
+	</topic>
+</toc>

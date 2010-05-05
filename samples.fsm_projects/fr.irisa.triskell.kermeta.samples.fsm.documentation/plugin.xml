@@ -4,9 +4,15 @@
   <extension point="org.eclipse.help.toc">
   
 	<toc file="mainToc.xml"/>
-	<toc file="toc.xml" primary="false"/>
+	<toc file="mainToc2.xml"/>
+	<toc file="toc_GMF.xml" primary="false"/>
+	<toc file="toc_FSM_example.xml" primary="false"/>
  	<toc
    		file="build/eclipse.help/KerMeta-The-FSM-example/toc.xml"
+   		primary="false">
+	</toc>
+	<toc
+   		file="build/eclipse.help/KerMeta-Create-FSM-Graphical-Editor-With-GMF/toc.xml"
    		primary="false">
 	</toc>
   </extension>

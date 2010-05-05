@@ -3,5 +3,5 @@
 
 <toc link_to="../fr.irisa.triskell.kermeta.documentation/toc.xml#building_dsl_tutorials" 
 	 label="Building DSL with kermeta tutorial ">
-	<link toc="toc.xml" />
+	<link toc="toc_FSM_example.xml" />
 </toc>
