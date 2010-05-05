@@ -283,10 +283,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 		for(LinkView link : links)
 //			if(link.isVisible() && link instanceof InheritanceView) {
 //				if(classesAdded.get(link.getEntityTar())==null) {
-					if(link.getEntitySrc()==null || link.getEntityTar()==null)
-						System.err.println("ERR forest>>" + link + " " + (link.getEntitySrc()==null ? "null" : link.getEntitySrc().name) + " " + (link.getEntityTar()==null ? "null" : link.getEntityTar().name));
-					else
-						forest.addEdge(link, link.getEntitySrc(), link.getEntityTar());
+					forest.addEdge(link, link.getEntitySrc(), link.getEntityTar());
 //					classesAdded.put(link.entitySrc, link.entitySrc);
 //					classesAdded.put(link.entityTar, link.entityTar);
 //				}
@@ -307,7 +304,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 //			location.getKey().update();
 //		}
 		KKLayout<EntityView,LinkView> treeLayout = new KKLayout<EntityView,LinkView>(forest, new DistanceVisu(this));
-		treeLayout.setSize(new Dimension(800, 800));
+		treeLayout.setSize(new Dimension(2000, 2000));
 		
 		for(EntityView entity : entities) {
 			entity.setCentre((int)treeLayout.getX(entity), (int)treeLayout.getY(entity));

@@ -58,6 +58,14 @@
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/F"/>
       </ownedAttribute>
     </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="J"
+        superType="#//@packages.0/J/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/E"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="K"
+        superType="#//@packages.0/K/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/J"/>
+    </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="G"
         superType="#//@packages.0/G/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>

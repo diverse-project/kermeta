@@ -1,59 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
     xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
   <packages name="ex">
-    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="A"
-        superType="#//@packages.0/A/@containedType.0">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
-      <ownedAttribute name="varA1" type="#//@packages.0/A/varA1/@containedType.0"
-          isOrdered="true" upper="1" isComposite="true">
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
-      </ownedAttribute>
-      <ownedOperation name="opA1" type="#//@packages.0/A/opA1/@containedType.0" isOrdered="true"
-          upper="1">
-        <containedType xsi:type="kermeta_language_structure:VoidType"/>
-        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/A/opA1/@body/@containedType.0">
-          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
-        </body>
-      </ownedOperation>
-    </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="B"
-        superType="#//@packages.0/B/@containedType.0">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
-      <ownedAttribute name="varB1" type="#//@packages.0/B/varB1/@containedType.0"
-          isOrdered="true" upper="1">
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/A"/>
-      </ownedAttribute>
-      <ownedAttribute name="varB2" type="#//@packages.0/B/varB2/@containedType.0"
-          isOrdered="true" upper="1" isComposite="true">
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Real"/>
-      </ownedAttribute>
-    </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="C"
         superType="#//@packages.0/C/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
-      <ownedAttribute name="varC1" type="#//@packages.0/C/varC1/@containedType.0"
-          isOrdered="true" upper="1" isComposite="true">
+      <ownedAttribute name="mElt" type="#//@packages.0/C/mElt/@containedType.0" isOrdered="true"
+          upper="1" opposite="#//@packages.0/A/annot">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/A"/>
       </ownedAttribute>
-      <ownedOperation name="opC1" type="#//@packages.0/C/opC1/@containedType.0" isOrdered="true"
-          upper="1">
-        <containedType xsi:type="kermeta_language_structure:VoidType"/>
-        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/A/opA1/@body/@containedType.0"/>
-      </ownedOperation>
-      <ownedOperation name="opC2" type="#//@packages.0/C/opC2/@containedType.0" isOrdered="true"
-          upper="1">
-        <containedType xsi:type="kermeta_language_structure:VoidType"/>
-        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/A/opA1/@body/@containedType.0"/>
-      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="A"
+        superType="#//@packages.0/A/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="annot" type="#//@packages.0/A/annot/@containedType.0"
+          isOrdered="true" upper="-1" opposite="#//@packages.0/C/mElt" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/C"/>
+      </ownedAttribute>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="D"
-        superType="#//@packages.0/D/@containedType.0 #//@packages.0/D/@containedType.1 #//@packages.0/D/@containedType.2">
+        superType="#//@packages.0/D/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/A"/>
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/B"/>
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/C"/>
     </ownedTypeDefinition>
   </packages>
   <requires uri="kermeta"/>

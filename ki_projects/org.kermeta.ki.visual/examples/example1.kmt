@@ -3,35 +3,28 @@ package ex;
 require kermeta
 
 
-class A {
-	attribute varA1 : kermeta::standard::Integer
-
-	operation opA1() : Void is do 
-	end
+class C  {
+	reference mElt : A[0..1]#annot
+	
+//	attribute varB1 : B[0..*]
+	
+//	reference varB2 : B[0..*]
 }
 
 
-
+/* 
 class B {
-	reference varB1 : A
-	attribute varB2 : kermeta::standard::Real
+}
+*/
+
+
+class A  {
+	attribute annot : C[0..*]#mElt
 }
 
 
 
-class C {
-	attribute varC1 : A
-	
-	operation opC1() : Void is do
-	end
-	
-	operation opC2() : Void is do
-	end
-}
-
-
-
-class D inherits A, B, C{
+class D inherits A {
 }
 
 

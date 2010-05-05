@@ -66,7 +66,6 @@ aspect class ClassDefinition inherits Pickable {
 	
 	
 	operation movePropertyTo(p : Property, srcClass : ClassDefinition, metamodel : ModelingUnit) : Void is do
-		stdio.writeln("moveProp>" + p.name + " " + srcClass.name)
 		self.ownedAttribute.remove(p)
 		srcClass.ownedAttribute.add(p)
 		
@@ -85,19 +84,10 @@ aspect class ClassDefinition inherits Pickable {
 						cd := srcClass
 					end
 					
-					if((not p.opposite.isVoid).andThen{b | p.opposite.type.isInstanceOf(Class)}) then
-						var oppClazz : Class init p.opposite.type.asType(Class)
-						
-						if(oppClazz.typeDefinition==self and oppClazz.typeDefinition==p.opposite.owningClass) then
-							var clazz : Class init Class.new
-							stdio.writeln("====" + p.opposite.type.toString + " " + p.opposite.owningClass.name)
-							clazz.typeDefinition := srcClass
-						//	p.opposite.type := clazz
-						//	p.opposite.owningClass := srcClass
-						end
-					end
-				
 					extern org::kermeta::ki::visual::view::MetamodelView.onLinkRemoved(metamodel, p)
+					if(not p.opposite.isVoid) then
+						extern org::kermeta::ki::visual::view::MetamodelView.onLinkRemoved(metamodel, p.opposite)
+					end
 					extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, p, p.isComposite, srcClass, cd, 
 							p.name, p.getCardinalityString, if(not p.opposite.isVoid) then p.opposite.name end, 
 							if(not p.opposite.isVoid) then p.opposite.getCardinalityString end, -1)
@@ -143,6 +133,11 @@ aspect class ClassDefinition inherits Pickable {
 
 
 aspect class ModelingUnit inherits Picker {
+	operation isClassDefined(classDef : GenericTypeDefinition) : Boolean is do
+		result := (not classDef.isVoid).andThen{b | packages.exists{p | p.ownedTypeDefinition.exists{td | classDef==td }}}
+	end
+
+
 	operation reinitView() : Void is do//TODO see if ownedTypeDefinition works
 		packages.each{p | p.allNestedClassDefinitions.each{cd | cd.unprune }}
 		extern org::kermeta::ki::visual::view::MetamodelView.update(self)

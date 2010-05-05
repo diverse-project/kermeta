@@ -31,6 +31,12 @@ class I {
 	attribute fRef : F#iRef
 }
 
+
+class J inherits E {
+}
+
+class K inherits J { }
+
 class G {
 	attribute gggggg : String
 }
