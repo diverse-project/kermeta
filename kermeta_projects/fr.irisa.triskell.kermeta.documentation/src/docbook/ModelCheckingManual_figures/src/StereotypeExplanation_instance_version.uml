@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_wEa90ABmEd-BWYzbrfX_Jw" name="StereotypeExplanation_instance_version">
+  <elementImport xmi:id="_wEcL8ABmEd-BWYzbrfX_Jw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_wEcL8QBmEd-BWYzbrfX_Jw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_wEcL8gBmEd-BWYzbrfX_Jw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_wEcL8wBmEd-BWYzbrfX_Jw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_xSkL8ABmEd-BWYzbrfX_Jw" name="MyStereotype">
+    <ownedAttribute xmi:id="_-6I04ABmEd-BWYzbrfX_Jw" name="myStereotpeProperty" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_hCa24ABpEd-BWYzbrfX_Jw" name="base_Classifier" type="_VTSywABoEd-BWYzbrfX_Jw" association="_hCV-YABpEd-BWYzbrfX_Jw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hCa24gBpEd-BWYzbrfX_Jw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hCa24QBpEd-BWYzbrfX_Jw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_gjJEcABqEd-BWYzbrfX_Jw" name="base_Package" type="_bHRRoABqEd-BWYzbrfX_Jw" association="_gjIdYABqEd-BWYzbrfX_Jw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gjJEcgBqEd-BWYzbrfX_Jw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gjJEcQBqEd-BWYzbrfX_Jw"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_5kMD4ABmEd-BWYzbrfX_Jw" name="" classifier="_xSkL8ABmEd-BWYzbrfX_Jw">
+    <slot xmi:id="_jTRxIABnEd-BWYzbrfX_Jw" definingFeature="_-6I04ABmEd-BWYzbrfX_Jw"/>
+    <slot xmi:id="_zDHuIABnEd-BWYzbrfX_Jw" definingFeature="_hCZowABpEd-BWYzbrfX_Jw">
+      <value xmi:type="uml:InstanceValue" xmi:id="_zDIVMABnEd-BWYzbrfX_Jw" instance="_NC9wwABnEd-BWYzbrfX_Jw"/>
+    </slot>
+  </packagedElement>
+  <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_NC9wwABnEd-BWYzbrfX_Jw" name="MyStereotypedClass" classifier="_VTSywABoEd-BWYzbrfX_Jw"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_VTSywABoEd-BWYzbrfX_Jw" name="uml::Classifier"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_hCV-YABpEd-BWYzbrfX_Jw" memberEnd="_hCZowABpEd-BWYzbrfX_Jw _hCa24ABpEd-BWYzbrfX_Jw">
+    <ownedEnd xmi:id="_hCZowABpEd-BWYzbrfX_Jw" name="" type="_xSkL8ABmEd-BWYzbrfX_Jw" association="_hCV-YABpEd-BWYzbrfX_Jw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hCZowgBpEd-BWYzbrfX_Jw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hCZowQBpEd-BWYzbrfX_Jw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_bHRRoABqEd-BWYzbrfX_Jw" name="uml::Package"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_gjIdYABqEd-BWYzbrfX_Jw" memberEnd="_gjIdYQBqEd-BWYzbrfX_Jw _gjJEcABqEd-BWYzbrfX_Jw">
+    <ownedEnd xmi:id="_gjIdYQBqEd-BWYzbrfX_Jw" name="" type="_xSkL8ABmEd-BWYzbrfX_Jw" association="_gjIdYABqEd-BWYzbrfX_Jw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gjIdYwBqEd-BWYzbrfX_Jw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gjIdYgBqEd-BWYzbrfX_Jw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Package>

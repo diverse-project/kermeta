@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_4Bti8Aw3Ed-mk5UJ7TH0dw" name="StereotypeExplanation_enduser" metaclassReference="_UG8IQAw4Ed-mk5UJ7TH0dw _W9xygAw4Ed-mk5UJ7TH0dw">
+  <eAnnotations xmi:id="_oVwgEQw6Ed-mk5UJ7TH0dw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_oVwgEgw6Ed-mk5UJ7TH0dw" name="StereotypeExplanation_enduser" nsURI="http:///schemas/StereotypeExplanation_enduser/_oVwgEAw6Ed-mk5UJ7TH0dw/0" nsPrefix="StereotypeExplanation_enduser">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_oVwgEww6Ed-mk5UJ7TH0dw" name="MyStereotype">
+        <eAnnotations xmi:id="_oVwgFAw6Ed-mk5UJ7TH0dw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_7vYukAw3Ed-mk5UJ7TH0dw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_oVwgFQw6Ed-mk5UJ7TH0dw" name="base_Classifier" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_oVwgFww6Ed-mk5UJ7TH0dw" name="base_Package" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Package"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_oVwgGQw6Ed-mk5UJ7TH0dw" name="myStereotypeProperty" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <elementImport xmi:id="_4Dpcsgw3Ed-mk5UJ7TH0dw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_4D8XkAw3Ed-mk5UJ7TH0dw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_4D8XkQw3Ed-mk5UJ7TH0dw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_4D8Xkgw3Ed-mk5UJ7TH0dw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <elementImport xmi:id="_UG8IQAw4Ed-mk5UJ7TH0dw" alias="">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
+  </elementImport>
+  <elementImport xmi:id="_W9xygAw4Ed-mk5UJ7TH0dw">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Package"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_7vYukAw3Ed-mk5UJ7TH0dw" name="MyStereotype">
+    <ownedAttribute xmi:id="_muvJ0gw4Ed-mk5UJ7TH0dw" name="base_Classifier" association="_muvJ0Aw4Ed-mk5UJ7TH0dw">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_oX78Qgw4Ed-mk5UJ7TH0dw" name="base_Package" association="_oX78QAw4Ed-mk5UJ7TH0dw">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Package"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_t_pysAw4Ed-mk5UJ7TH0dw" name="myStereotypeProperty">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_muvJ0Aw4Ed-mk5UJ7TH0dw" name="Classifier_MyStereotype" memberEnd="_muvJ0Qw4Ed-mk5UJ7TH0dw _muvJ0gw4Ed-mk5UJ7TH0dw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_muvJ0Qw4Ed-mk5UJ7TH0dw" name="extension_MyStereotype" type="_7vYukAw3Ed-mk5UJ7TH0dw" aggregation="composite" association="_muvJ0Aw4Ed-mk5UJ7TH0dw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_oX78QAw4Ed-mk5UJ7TH0dw" name="Package_MyStereotype" memberEnd="_oX78QQw4Ed-mk5UJ7TH0dw _oX78Qgw4Ed-mk5UJ7TH0dw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_oX78QQw4Ed-mk5UJ7TH0dw" name="extension_MyStereotype" type="_7vYukAw3Ed-mk5UJ7TH0dw" aggregation="composite" association="_oX78QAw4Ed-mk5UJ7TH0dw"/>
+  </packagedElement>
+</uml:Profile>

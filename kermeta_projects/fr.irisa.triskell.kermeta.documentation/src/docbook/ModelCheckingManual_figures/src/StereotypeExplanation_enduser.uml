@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:StereotypeExplanation_enduser="http:///schemas/StereotypeExplanation_enduser/_oVwgEAw6Ed-mk5UJ7TH0dw/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/StereotypeExplanation_enduser/_oVwgEAw6Ed-mk5UJ7TH0dw/0 StereotypeExplanation_enduser.profile.uml#_oVwgEgw6Ed-mk5UJ7TH0dw">
+  <uml:Package xmi:id="_BghKQAw5Ed-mk5UJ7TH0dw" name="StereotypeExplanation_enduser">
+    <elementImport xmi:id="_BhtdSAw5Ed-mk5UJ7TH0dw">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </elementImport>
+    <elementImport xmi:id="_BhtdSQw5Ed-mk5UJ7TH0dw">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </elementImport>
+    <elementImport xmi:id="_BhtdSgw5Ed-mk5UJ7TH0dw">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+    </elementImport>
+    <elementImport xmi:id="_BhtdSww5Ed-mk5UJ7TH0dw">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_wUsiAAw5Ed-mk5UJ7TH0dw" name="MyStereotypedClass"/>
+    <profileApplication xmi:id="_qFhNgAw6Ed-mk5UJ7TH0dw">
+      <eAnnotations xmi:id="_qF0IcAw6Ed-mk5UJ7TH0dw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="StereotypeExplanation_enduser.profile.uml#_oVwgEgw6Ed-mk5UJ7TH0dw"/>
+      </eAnnotations>
+      <appliedProfile href="StereotypeExplanation_enduser.profile.uml#_4Bti8Aw3Ed-mk5UJ7TH0dw"/>
+    </profileApplication>
+  </uml:Package>
+  <StereotypeExplanation_enduser:MyStereotype xmi:id="_raT2MAw6Ed-mk5UJ7TH0dw" base_Classifier="_wUsiAAw5Ed-mk5UJ7TH0dw"/>
+</xmi:XMI>
