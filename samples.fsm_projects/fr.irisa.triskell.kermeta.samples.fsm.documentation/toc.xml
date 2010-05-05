@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+<toc label="Building DSL with Kermeta">
+	<topic label="FSM Tutorial example" href="build/eclipse.help/KerMeta-The-FSM-example/index.html"> 
+		<link toc="build/eclipse.help/KerMeta-The-FSM-example/toc.xml"/>
+	</topic>
+</toc>

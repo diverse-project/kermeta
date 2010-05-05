@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: FSM sample Documentation
-Bundle-SymbolicName: fr.irisa.triskell.kermeta.samples.fsm.documentation
+Bundle-SymbolicName: fr.irisa.triskell.kermeta.samples.fsm.documentation;singleton:=true
 Bundle-Version: 1.3.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: IRISA/INRIA
