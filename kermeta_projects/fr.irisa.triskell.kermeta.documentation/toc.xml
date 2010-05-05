@@ -5,40 +5,40 @@
 		<topic label="Kermeta manual" href="build/eclipse.help/KerMeta-Manual/index.html"> 
 			<link toc="build/eclipse.help/KerMeta-Manual/toc.xml" />
 		</topic>
-		<!--<topic label="KerMeta Tutorial" href="build/eclipse.help/KerMeta-Tutorial/index.html"> 
-			<link toc="build/eclipse.help/KerMeta-Tutorial/toc.xml" />
-		</topic>	-->
 		<topic label="KerMeta user interface" href="build/eclipse.help/KerMeta-UI-UserGuide/index.html"> 
 			<link toc="build/eclipse.help/KerMeta-UI-UserGuide/toc.xml" />
 		</topic>
-		<topic label="Deploying KerMeta code" href="build/eclipse.help/KerMeta-Deploying-a-code/index.html"> 
-			<link toc="build/eclipse.help/KerMeta-Deploying-a-code/toc.xml" />
-		</topic>
-  <anchor id="org.kermeta.KETAnchor"/>
+  		<anchor id="org.kermeta.KETAnchor"/>
 			
 		<topic label="Kermeta framework (generated doc)"
 		     href="build/html/KermetaFramework/framework.km.html">
 		</topic>				
 		<topic label="Tutorials">
-		    <topic label="Building DSL with kermeta tutorial" >
-		    	<topic label="Main Process"  href="build/eclipse.help/Kermeta-Tutorial-Process/index.html"> 
+		    <topic label="Building DSL with kermeta tutorials" >
+		    	<topic label="Building DSL main process"  href="build/eclipse.help/Kermeta-Tutorial-Process/index.html"> 
 					<link toc="build/eclipse.help/Kermeta-Tutorial-Process/toc.xml"/>
 				</topic>
-				<anchor id="building_dls_tutorials" />
+				<anchor id="building_dsl_tutorials" />
 		    </topic>
-			<topic label="KerMeta load and save with EMF Tutorial" href="build/eclipse.help/KermetaEMFTutorial/index.html"> 
-				<link toc="build/eclipse.help/KermetaEMFTutorial/toc.xml" />
-			</topic>
-			<topic label="How to create a metamodel" href="build/eclipse.help/KerMeta-How-to-create-a-metamodel/index.html"> 
-				<link toc="build/eclipse.help/KerMeta-How-to-create-a-metamodel/toc.xml" />
-			</topic>
-			<topic label="How to add behavior to a metamodel" href="build/eclipse.help/KerMeta-How-to-add-behavior-to-a-metamodel/index.html"> 
-				<link toc="build/eclipse.help/KerMeta-How-to-add-behavior-to-a-metamodel/toc.xml" />
-			</topic>				
-			<topic label="How to execute a behavior" href="build/eclipse.help/KerMeta-How-to-use-run-configuration/index.html"> 
-				<link toc="build/eclipse.help/KerMeta-How-to-use-run-configuration/toc.xml" />
-			</topic>
-			<anchor id="tutorials" />					
+		    <topic label="Task oriented tutorials (How to)">
+		    	<topic label="KerMeta load and save with EMF Tutorial" href="build/eclipse.help/KermetaEMFTutorial/index.html"> 
+					<link toc="build/eclipse.help/KermetaEMFTutorial/toc.xml" />
+				</topic>
+				<topic label="How to create a metamodel" href="build/eclipse.help/KerMeta-How-to-create-a-metamodel/index.html"> 
+					<link toc="build/eclipse.help/KerMeta-How-to-create-a-metamodel/toc.xml" />
+				</topic>
+				<topic label="How to add behavior to a metamodel" href="build/eclipse.help/KerMeta-How-to-add-behavior-to-a-metamodel/index.html"> 
+					<link toc="build/eclipse.help/KerMeta-How-to-add-behavior-to-a-metamodel/toc.xml" />
+				</topic>				
+				<topic label="How to execute a behavior" href="build/eclipse.help/KerMeta-How-to-use-run-configuration/index.html"> 
+					<link toc="build/eclipse.help/KerMeta-How-to-use-run-configuration/toc.xml" />
+				</topic>
+				<topic label="Deploying KerMeta code" href="build/eclipse.help/KerMeta-Deploying-a-code/index.html"> 
+					<link toc="build/eclipse.help/KerMeta-Deploying-a-code/toc.xml" />
+				</topic>
+		    </topic>
+			<anchor id="tutorials" />
+		   					
 		</topic>
 		<topic label="MDKs (Model Development Kit)">	
 			<topic label="Kermeta MDK" href="build/eclipse.help/KerMeta-MDK/index.html"> 
@@ -55,8 +55,6 @@
 		<topic label="Kermeta history and known limitations (online)"
 			href="http://www.kermeta.org/update/history.html">
 		</topic>
-					
-		
 	</topic>
 	<topic label="Developer documentation"
 		href="src/eclipse.help/developer_doc.html">			
