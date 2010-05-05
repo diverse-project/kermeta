@@ -24,19 +24,19 @@ public class MetamodelVizu {
 		EntityView d = new ClassView("D");
 		EntityView a = new ClassView("A");
 		
-		LinkView link = new RelationView(b, a, false, null, null, null, null);
+		LinkView link = new RelationView(b, a, false, true, null, null, null, null);
 		link.update();
 		
-		LinkView link2 = new RelationView(c, a, false, null, null, null, null);
+		LinkView link2 = new RelationView(c, a, false, true, null, null, null, null);
 		link2.update();
 		
-		LinkView link3 = new RelationView(d, a, true, null, null, null, null);
+		LinkView link3 = new RelationView(d, a, true, true, null, null, null, null);
 		link3.update();
 		
-		LinkView link4 = new RelationView(b, d, false, null, null, null, null);
+		LinkView link4 = new RelationView(b, d, false, true, null, null, null, null);
 		link4.update();
 		
-		LinkView link5 = new RelationView(d, c, true, null, null, null, null);
+		LinkView link5 = new RelationView(d, c, true, true, null, null, null, null);
 		link5.update();
 		
 		mm.addEntity(-1, a);

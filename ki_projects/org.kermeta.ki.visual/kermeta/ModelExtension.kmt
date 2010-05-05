@@ -88,9 +88,19 @@ aspect class ClassDefinition inherits Pickable {
 					if(not p.opposite.isVoid) then
 						extern org::kermeta::ki::visual::view::MetamodelView.onLinkRemoved(metamodel, p.opposite)
 					end
-					extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, p, p.isComposite, srcClass, cd, 
-							p.name, p.getCardinalityString, if(not p.opposite.isVoid) then p.opposite.name end, 
-							if(not p.opposite.isVoid) then p.opposite.getCardinalityString end, -1)
+					
+					var oppositeName : String init ""
+					var oppositeCompo : Boolean init false
+					var oppositeCardString : String init ""
+					
+					if(not p.opposite.isVoid) then 
+						oppositeName  := p.opposite.name 
+						oppositeCompo := p.opposite.isComposite
+						oppositeCardString := p.opposite.getCardinalityString
+					end
+			
+					extern org::kermeta::ki::visual::view::MetamodelView.onRelationAdded(metamodel, p, p.isComposite, srcClass, cd, 
+											p.name, p.getCardinalityString, oppositeName, oppositeCardString, -1, oppositeCompo)
 				end
 			end
 		end

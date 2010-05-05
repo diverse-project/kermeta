@@ -122,9 +122,9 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 
 	
 	
-	public static RuntimeObject onLinkAdded(RuntimeObject mmRO, RuntimeObject linkRO, RuntimeObject compositionRO, RuntimeObject srcClassRO, 
+	public static RuntimeObject onRelationAdded(RuntimeObject mmRO, RuntimeObject linkRO, RuntimeObject compositionRO, RuntimeObject srcClassRO, 
 											RuntimeObject tarClassRO, RuntimeObject srcNameRO, RuntimeObject srcCardRO, RuntimeObject tarNameRO,
-											RuntimeObject tarCardRO, RuntimeObject positionRO) {
+											RuntimeObject tarCardRO, RuntimeObject positionRO, RuntimeObject compositionAtSourceRO) {
 		MetamodelView metamodelView = (MetamodelView) mmRO.getUserData();
 		int position		  	= Integer.getValue(positionRO);
 		EntityView srcClass    	= (EntityView) srcClassRO.getUserData();
@@ -133,6 +133,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 		String targetRole		= tarNameRO==null ? null : fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(tarNameRO);
 		String srcCard			= srcCardRO==null ? null : fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(srcCardRO);
 		String targetCard		= tarCardRO==null ? null : fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(tarCardRO);
+		boolean compoAtSrc		= Boolean.getValue(compositionAtSourceRO);
 		
 		if(targetRole!=null) {
 			//checking if the target relation has been already added by its opposite.
@@ -158,7 +159,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 				return mmRO.getFactory().getMemory().voidINSTANCE;
 		}
 		
-		LinkView view = new RelationView(srcClass, tarClass, Boolean.getValue(compositionRO), 
+		LinkView view = new RelationView(srcClass, tarClass, Boolean.getValue(compositionRO), compoAtSrc,
 										srcRole, targetRole, srcCard, targetCard);
 
 		linkRO.setUserData(view);

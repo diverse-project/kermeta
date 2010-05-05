@@ -72,11 +72,20 @@ class Flat inherits Action, Undoable
 	
 		flatteningOperation.removedProperties.each{prop |
 			prop.owningClass.ownedAttribute.add(prop.prop)
-			prop.prop.owningClass := prop.owningClass  
-			extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, prop.prop, prop.prop.isComposite, 
-									prop.prop.owningClass, prop.owningClass, 
-									prop.prop.name, prop.prop.getCardinalityString, if(not prop.prop.opposite.isVoid) then prop.prop.opposite.name end, 
-									if(not prop.prop.opposite.isVoid) then prop.prop.opposite.getCardinalityString end  , -1)
+			prop.prop.owningClass := prop.owningClass
+			var oppositeName : String init ""
+			var oppositeCompo : Boolean init false
+			var oppositeCardString : String init ""
+			
+			if(not prop.prop.opposite.isVoid) then 
+				oppositeName  := prop.prop.opposite.name 
+				oppositeCompo := prop.prop.opposite.isComposite
+				oppositeCardString := prop.prop.opposite.getCardinalityString
+			end
+			
+			extern org::kermeta::ki::visual::view::MetamodelView.onRelationAdded(metamodel, prop.prop, prop.prop.isComposite, 
+									prop.prop.owningClass, prop.owningClass, prop.prop.name, prop.prop.getCardinalityString, 
+									oppositeName, oppositeCardString, -1, oppositeCompo)
 		}
 		
 		flatteningOperation.addedOperations.each{op |

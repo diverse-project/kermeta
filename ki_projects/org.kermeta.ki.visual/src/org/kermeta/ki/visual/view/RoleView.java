@@ -13,12 +13,15 @@ public class RoleView {
 	
 	protected RelationView view;
 	
+	protected boolean isComposition;
+	
 	protected boolean source;
 	
 	
-	public RoleView(final String name, final String card, RelationView view, boolean source) {
+	public RoleView(final String name, final String card, RelationView view, boolean source, boolean isComposition) {
 		super();
 		
+		this.isComposition = isComposition;
 		this.name = new FloatingText(name, this);
 		this.card = new FloatingText(card, this);
 		this.view = view;
@@ -121,5 +124,10 @@ public class RoleView {
 			name.paint(g);
 			card.paint(g);
 		}
+	}
+
+
+	public boolean exists() {
+		return name.text!=null && name.text.length()>0;
 	}
 }

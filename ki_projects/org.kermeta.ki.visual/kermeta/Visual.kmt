@@ -334,9 +334,17 @@ class Metamodel2ViewVisitor inherits KermetaVisitor {
 				extern org::kermeta::ki::visual::view::EntityView.onAttributeAdded(p.owningClass, p, p.name, cd.name)
 			else	
 				if(classes.contains(cd)) then
-					extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(modelingUnit, p, p.isComposite, p.owningClass, cd, 
-												p.name, p.getCardinalityString, if(not p.opposite.isVoid) then p.opposite.name end, 
-												if(not p.opposite.isVoid) then p.opposite.getCardinalityString end, -1)
+					var oppositeName : String init ""
+					var oppositeCompo : Boolean init false
+					var oppositeCardString : String init ""
+					
+					if(not p.opposite.isVoid) then 
+						oppositeName  := p.opposite.name 
+						oppositeCompo := p.opposite.isComposite
+						oppositeCardString := p.opposite.getCardinalityString
+					end
+					extern org::kermeta::ki::visual::view::MetamodelView.onRelationAdded(modelingUnit, p, p.isComposite or oppositeCompo, p.owningClass, cd, 
+												p.name, p.getCardinalityString, oppositeName, oppositeCardString, -1, oppositeCompo)
 				end
 			end
 			

@@ -14,25 +14,28 @@ public class RelationView extends LinkView {
 	
 	protected RoleView endingTar;
 
-	protected boolean isComposition;
-	
 	protected GeneralPath composition;
 	
 	
-	public RelationView(EntityView src, EntityView target, boolean isComposition, 
+	public RelationView(EntityView src, EntityView target, boolean isComposition, boolean compositionAtStart,
 			String srcRole, String targetRole, String srcCard, String targetCard) {
 		super(src, target);
 		
-		this.isComposition = isComposition;
-		composition		   = isComposition ? new GeneralPath() : null;
+		
+		composition = isComposition ? new GeneralPath() : null;
 
 		if(srcRole!=null)
-			endingSrc = new RoleView(srcRole, srcCard, this, true);
+			endingSrc = new RoleView(srcRole, srcCard, this, true, isComposition && compositionAtStart);
 		
 		if(targetRole!=null)
-			endingTar = new RoleView(targetRole, targetCard, this, false);
+			endingTar = new RoleView(targetRole, targetCard, this, false, isComposition && !compositionAtStart);
 	}
 
+	
+	
+	public boolean isComposition() {
+		return (endingSrc!=null && endingSrc.isComposition) || (endingTar!=null && endingTar.isComposition);
+	}
 	
 	
 	
@@ -41,23 +44,32 @@ public class RelationView extends LinkView {
 		super.update();
 		
 		if(pointSrc!=null && pointTar!=null) {
-			final boolean recursive = entitySrc==entityTar;
-			final double lineAngle = recursive ? 0. : getLineAngle();
-			final double xRot;
-			final double yRot;
-			final double b = recursive ? entitySrc.centre.y : getB();
-			final float lgth = recursive ? -LENGTH_ARROW : LENGTH_ARROW;
-			
-			if(equals(Math.abs(lineAngle), Math.PI/2.)) {
-				xRot = -Math.sin(-lineAngle)*(pointSrc.y-b);
-				yRot = Math.cos(-lineAngle)*(pointSrc.y-b)+b;
-			}
-			else {
-				xRot = Math.cos(-lineAngle)*pointSrc.x-Math.sin(-lineAngle)*(pointSrc.y-b); 
-				yRot = Math.sin(-lineAngle)*pointSrc.x+Math.cos(-lineAngle)*(pointSrc.y-b)+b;
-			}
-			
-			if(isComposition) {
+			if(isComposition()) {
+				final boolean recursive = entitySrc==entityTar;
+				final double lineAngle = recursive ? 0. : getLineAngle();
+				final double xRot;
+				final double yRot;
+				final double b = recursive ? entitySrc.centre.y : getB();
+				final float lgth = recursive || !endingSrc.isComposition ? -LENGTH_ARROW : LENGTH_ARROW;
+				final Point2D.Double pt = endingSrc.isComposition ? pointSrc : pointTar;
+				
+				if(equals(Math.abs(lineAngle), Math.PI/2.))
+					if(endingSrc.isComposition) {
+						xRot = -Math.sin(-lineAngle)*(pointSrc.y-b);
+						yRot = Math.cos(-lineAngle)*(pointSrc.y-b)+b;
+					}
+					else {
+						yRot = pointTar.y;
+						xRot = pointTar.x;
+					}
+				else {
+					xRot = Math.cos(-lineAngle)*pt.x-Math.sin(-lineAngle)*(pt.y-b); 
+					yRot = Math.sin(-lineAngle)*pt.x+Math.cos(-lineAngle)*(pt.y-b)+b;
+				}
+				
+				if(composition==null)
+					composition = new GeneralPath();
+				
 				composition.reset();
 				composition.moveTo((float)xRot, (float)yRot);
 				composition.lineTo((float)xRot+lgth, (float)yRot+lgth/2f);
@@ -73,7 +85,6 @@ public class RelationView extends LinkView {
 				endingTar.update();
 		}
 		else {
-		//	System.err.println("ERR>>" + this + " " + entitySrc.name + " " + entityTar.name + " " + endingTar.name.text + " " + endingSrc.name.text);
 		}
 	}
 	
@@ -102,10 +113,13 @@ public class RelationView extends LinkView {
 			}
 			
 			g.setColor(getLineColor());
-			g.drawLine((int)xRot, (int)yRot, (int)xRot-LENGTH_ARROW, (int)yRot-WIDTH_ARROW/2);
-			g.drawLine((int)xRot, (int)yRot, (int)xRot-LENGTH_ARROW, (int)yRot+WIDTH_ARROW/2);
 			
-			if(isComposition)
+			if(!endingSrc.exists() || !endingTar.exists()) {
+				g.drawLine((int)xRot, (int)yRot, (int)xRot-LENGTH_ARROW, (int)yRot-WIDTH_ARROW/2);
+				g.drawLine((int)xRot, (int)yRot, (int)xRot-LENGTH_ARROW, (int)yRot+WIDTH_ARROW/2);
+			}
+			
+			if(isComposition())
 				g.fill(composition);
 			
 			if(translation!=null)
