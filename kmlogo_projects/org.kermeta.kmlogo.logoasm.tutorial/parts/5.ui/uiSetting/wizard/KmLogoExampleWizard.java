@@ -8,6 +8,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.kmlogo.logoasm.ui.Activator;
 
 import fr.irisa.triskell.eclipse.wizard.AbstractExampleWizard;
+//import fr.irisa.triskell.eclipse.wizard.AbstractExampleWizard.ProjectDescriptor;
 
 
 public class KmLogoExampleWizard extends AbstractExampleWizard {

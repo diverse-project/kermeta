@@ -1,13 +1,12 @@
 package org.kermeta.kmlogo.logoasm.ui;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-
-import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -18,7 +17,7 @@ public class Activator extends AbstractUIPlugin {
 	public static final String PLUGIN_ID = "org.kermeta.kmlogo.logoasm.ui";
 
 	// Log4j logger for this plugin
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KMLogoUI");
+	final static public Logger internalLog = LoggerFactory.getLogger("KMLogoUI");
 
 	
 	// The shared instance

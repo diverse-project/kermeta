@@ -1,17 +1,9 @@
 package org.kermeta.kmlogo.logoasm.ui;
 
-//import ExtResourceFactory;
-//import Resource;
-//import ResourceSetImpl;
-//import XMIResourceFactoryImpl;
-
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-//import org.emftext.language.your_dsl.resource.ext.ExtResourceFactory;
 
 import java.io.IOException;
 
@@ -28,6 +20,7 @@ public class ConvertToLogoasmK {
 		try {
 			resourceA.load(null);
 			resourceB.getContents().addAll(resourceA.getContents());
+			org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(resourceB);
 			resourceB.save(null);
 		} catch (IOException e) {
 			e.printStackTrace();

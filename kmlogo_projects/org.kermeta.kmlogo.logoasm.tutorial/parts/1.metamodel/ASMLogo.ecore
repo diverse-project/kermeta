@@ -89,5 +89,9 @@
     <eClassifiers xsi:type="ecore:EClass" name="Equals" eSuperTypes="#//ASM/BinaryExp"/>
     <eClassifiers xsi:type="ecore:EClass" name="Greater" eSuperTypes="#//ASM/BinaryExp"/>
     <eClassifiers xsi:type="ecore:EClass" name="Lower" eSuperTypes="#//ASM/BinaryExp"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LogoProgram">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
+          eType="#//ASM/Instruction" containment="true"/>
+    </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

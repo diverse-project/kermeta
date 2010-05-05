@@ -18,12 +18,11 @@
             </separator>
          </menu>
          <action
-               class="org.kermeta.kmlogo.logoasm.ui.popup.actions.NXC2RXE"
-               enablesFor="1"
-               id="org.kermeta.kmlogo.logoasm.ui.newAction2"
                label="Compile to NXT Binary (*.rxe)"
+               class="org.kermeta.kmlogo.logoasm.ui.popup.actions.NXC2RXE"
                menubarPath="org.kermeta.kmlogo.logoasm.ui.menu2/group2"
-               style="radio">
+               enablesFor="1"
+               id="org.kermeta.kmlogo.logoasm.ui.newAction2">
          </action>
       </objectContribution>
       <objectContribution

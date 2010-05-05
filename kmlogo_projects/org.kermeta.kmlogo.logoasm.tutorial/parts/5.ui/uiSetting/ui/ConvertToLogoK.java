@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp.LogoResourceFactory;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
 
 public class ConvertToLogoK {
 	public static void run(String file_uri, IOConsole console) {
@@ -26,8 +25,7 @@ public class ConvertToLogoK {
 				.appendFileExtension("logo").toFileString();
 
 		try {
-			// trick : avoid crash when the file doesn't already exist on file
-			// system
+			// a trick to avoid hang/crash when the file doesn't already exist on file system
 			// create/save an empty file before
 			Resource logoRsc = resourceSet.createResource(URI
 					.createFileURI(newUri));
@@ -36,6 +34,7 @@ public class ConvertToLogoK {
 
 			logoRsc = resourceSet.getResource(URI.createFileURI(newUri), true);
 			logoRsc.getContents().addAll(logoasmRsc.getContents());
+			org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(logoRsc);
 			logoRsc.save(null);
 		} catch (IOException e) {
 			e.printStackTrace();

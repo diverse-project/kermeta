@@ -10,7 +10,13 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.sdk.concretesyntax.resource.cs.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>org.emftext.sdk.concretesyntax.resource.cs.nature</nature>
 	</natures>
 </projectDescription>
