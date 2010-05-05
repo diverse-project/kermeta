@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <?eclipse version="3.0"?>
-<plugin name="KmLogo tutorial documentation" id="org.kermeta.kmlogo.logoasm.documentation" version="1.3.2.qualifier" provider-name="IRISA/INRIA">
-   <requires>
-      <import plugin="fr.irisa.triskell.kermeta" export="false"/>
-      <import plugin="org.eclipse.core.runtime.compatibility"/>
-      <import plugin="org.eclipse.help"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="fr.irisa.triskell.kermeta.io"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.ui"/>
-   </requires>
+<plugin>   
   <extension point="org.eclipse.help.toc">
   
 	<toc file="mainToc.xml"/>
