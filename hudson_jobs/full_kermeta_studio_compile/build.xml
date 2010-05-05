@@ -58,31 +58,9 @@
 	<!-- build the eclipse help of the documentation plugins -->
 	<target name="compile_eclipse_help">
 		<!-- documentation from Kermeta main plugin -->
-		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="Kermeta-Manual_build.xml" target ="eclipse.help"/>
-		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="KerMeta-UI-UserGuide_build.xml" target ="eclipse.help"/>
-		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="KerMeta-how-to-install-KerMeta_build.xml" target ="eclipse.help"/>
-		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="Kermeta-MDK_build.xml"	target ="eclipse.help"/>
-		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="Kermeta-Tutorial-Process_build.xml"	target ="eclipse.help"/>		
-		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="Kermeta-Deploying-a-code_build.xml" target ="eclipse.help"/>
-		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="KermetaEMFTutorial_build.xml" target ="eclipse.help"/>
-		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="Kermeta-How-to-create-a-metamodel_build.xml" target ="eclipse.help"/>
-		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="Kermeta-How-to-add-behavior-to-a-metamodel_build.xml"	target ="eclipse.help"/>
-		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.documentation/src" 
-			antfile="Kermeta-How-to-use-run-configuration_build.xml"	target ="eclipse.help"/>
 		
 		<ant dir="${eclipse.build.dir}/plugins/fr.irisa.triskell.kermeta.ket.documentation/src" 
 					antfile="KET_Manual_build.xml"	target ="eclipse.help"/>
-		<!-- <ant dir="${eclipse.build.dir}/plugins/org.kermeta.ecore.documentation/src" 
-					antfile="Ecore-MDK_build.xml"	target ="eclipse.help"/> -->
 	</target>
 	
 </project>
