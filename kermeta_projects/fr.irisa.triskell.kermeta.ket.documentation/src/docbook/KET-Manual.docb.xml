@@ -346,9 +346,9 @@ end
     		<ulink url="http://www.kermeta.org/mdk/ket">http://www.kermeta.org/mdk/ket</ulink>.
     	</para>
     	<para>
-    		Additionally, you can post questions on Kermeta mailing lists [
-    		<ulink url="http://gforge.inria.fr/mail/?group_id=32">http://gforge.inria.fr/mail/?group_id=32</ulink>) and forums (
-    		<ulink url="http://gforge.inria.fr/forum/?group_id=32">http://gforge.inria.fr/forum/?group_id=32</ulink>).
+    		Additionally, you can post questions on Kermeta mailing lists 
+    		(<ulink url="http://gforge.inria.fr/mail/?group_id=32">http://gforge.inria.fr/mail/?group_id=32</ulink>) and forums 
+    		(<ulink url="http://gforge.inria.fr/forum/?group_id=32">http://gforge.inria.fr/forum/?group_id=32</ulink>).
     	</para>
     </chapter>
 </book>
