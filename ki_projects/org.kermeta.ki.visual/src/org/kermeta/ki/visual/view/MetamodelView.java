@@ -307,7 +307,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 //			location.getKey().update();
 //		}
 		KKLayout<EntityView,LinkView> treeLayout = new KKLayout<EntityView,LinkView>(forest, new DistanceVisu(this));
-		treeLayout.setSize(new Dimension(2000, 2000));
+		treeLayout.setSize(new Dimension(800, 800));
 		
 		for(EntityView entity : entities) {
 			entity.setCentre((int)treeLayout.getX(entity), (int)treeLayout.getY(entity));

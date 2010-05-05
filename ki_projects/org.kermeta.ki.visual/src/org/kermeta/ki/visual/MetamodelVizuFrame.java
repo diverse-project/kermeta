@@ -13,6 +13,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 
 import org.kermeta.ki.malai.interaction.eventWrapper.EventManagerWrapper;
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
@@ -32,7 +33,8 @@ public class MetamodelVizuFrame extends JFrame {
 	
 	public static RuntimeObject initialiseToolbar(RuntimeObject toolbarRO, RuntimeObject undoButRO, RuntimeObject redoButRO, 
 							RuntimeObject prunerButRO, RuntimeObject flattenerButRO, RuntimeObject hierarcherButRO, 
-							RuntimeObject handButRO, RuntimeObject prunerGrayButRO, RuntimeObject prunerHideButRO) {
+							RuntimeObject handButRO, RuntimeObject prunerGrayButRO, RuntimeObject prunerHideButRO, RuntimeObject radiusRO,
+							RuntimeObject showOpButRO, RuntimeObject showAttrButRO) {
 		JPanel toolbar 				= (JPanel) toolbarRO.getUserData();
 		AbstractButton undoBut 		= (AbstractButton)undoButRO.getUserData();
 		AbstractButton redoBut 		= (AbstractButton)redoButRO.getUserData();
@@ -42,6 +44,9 @@ public class MetamodelVizuFrame extends JFrame {
 		AbstractButton handBut		= (AbstractButton)handButRO.getUserData();
 		AbstractButton grayedBut 	= (AbstractButton)prunerGrayButRO.getUserData();
 		AbstractButton hideBut 		= (AbstractButton)prunerHideButRO.getUserData();
+		JSpinner radiusSpin			= (JSpinner)radiusRO.getUserData();
+		AbstractButton showOpBut	= (AbstractButton)showOpButRO.getUserData();
+		AbstractButton showAttrBut	= (AbstractButton)showAttrButRO.getUserData();
 		ButtonGroup groupSelector 	= new ButtonGroup();
 		ButtonGroup groupPruner 	= new ButtonGroup();
 		
@@ -57,6 +62,10 @@ public class MetamodelVizuFrame extends JFrame {
 		toolbar.add(Box.createHorizontalStrut(50));
 		toolbar.add(hideBut);
 		toolbar.add(grayedBut);
+		toolbar.add(radiusSpin);
+		toolbar.add(Box.createHorizontalStrut(50));
+		toolbar.add(showOpBut);
+		toolbar.add(showAttrBut);
 		
 		groupSelector.add(prunerBut);
 		groupSelector.add(hierarcherBut);

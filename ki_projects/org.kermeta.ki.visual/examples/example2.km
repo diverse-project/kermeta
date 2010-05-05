@@ -20,6 +20,60 @@
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
       </ownedAttribute>
     </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="E"
+        superType="#//@packages.0/E/@containedType.0 #//@packages.0/E/@containedType.1 #//@packages.0/E/@containedType.2">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/F"/>
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/G"/>
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/H"/>
+      <ownedAttribute name="eee" type="#//@packages.0/E/eee/@containedType.0" isOrdered="true"
+          upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+      </ownedAttribute>
+      <ownedAttribute name="mye" type="#//@packages.0/E/mye/@containedType.0" isOrdered="true"
+          upper="1" opposite="#//@packages.0/E/eym" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/E"/>
+      </ownedAttribute>
+      <ownedAttribute name="eym" type="#//@packages.0/E/eym/@containedType.0" isOrdered="true"
+          upper="1" opposite="#//@packages.0/E/mye">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/E"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="F"
+        superType="#//@packages.0/F/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="fffff" type="#//@packages.0/F/fffff/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+      </ownedAttribute>
+      <ownedAttribute name="iRef" type="#//@packages.0/F/iRef/@containedType.0" isOrdered="true"
+          upper="1" opposite="#//@packages.0/I/fRef">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/I"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="I"
+        superType="#//@packages.0/I/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="fRef" type="#//@packages.0/I/fRef/@containedType.0" isOrdered="true"
+          upper="1" opposite="#//@packages.0/F/iRef" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/F"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="G"
+        superType="#//@packages.0/G/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="gggggg" type="#//@packages.0/G/gggggg/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="H"
+        superType="#//@packages.0/H/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="hhhh" type="#//@packages.0/H/hhhh/@containedType.0" isOrdered="true"
+          upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="C"
         superType="#//@packages.0/C/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
@@ -41,8 +95,9 @@
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="D"
-        superType="#//@packages.0/D/@containedType.0">
+        superType="#//@packages.0/D/@containedType.0 #//@packages.0/D/@containedType.1">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/C"/>
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/E"/>
     </ownedTypeDefinition>
   </packages>
   <requires uri="kermeta"/>

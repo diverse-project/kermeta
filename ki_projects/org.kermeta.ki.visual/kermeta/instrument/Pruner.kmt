@@ -33,6 +33,8 @@ class Pruner inherits Instrument
 	
 	attribute grayedButton : ToggleButton
 	
+	attribute radiusSpinner : Spinner
+	
 	
 	
 	method initialise(actionRegistry : ActionRegistry) : Void is do
@@ -44,11 +46,13 @@ class Pruner inherits Instrument
 	
 	
 	operation initialiseWidgets(eventManager : EventManager) : Void is do
-		hideButton   := ToggleButton.new
-		grayedButton := ToggleButton.new
+		hideButton    := ToggleButton.new
+		grayedButton  := ToggleButton.new
+		radiusSpinner := Spinner.new
 		
 		hideButton.initialiseWithText("Hide", eventManager)
 		grayedButton.initialiseWithText("Gray", eventManager)
+		radiusSpinner.initialise(eventManager)
 		
 		interimFeedback
 	end
@@ -67,6 +71,7 @@ class Pruner inherits Instrument
 		grayedButton.setSelected(viewPolicy==PrunerViewPolicy.gray)
 		hideButton.setVisible(activated)
 		grayedButton.setVisible(activated)
+		radiusSpinner.setVisible(activated)
 	end
 }
 

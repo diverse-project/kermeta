@@ -33,6 +33,11 @@ aspect class Object {
 
 
 aspect class ClassDefinition inherits Pickable {
+	operation isKermetaPrimitiveType() : Boolean is do
+		result := name=="String" or name=="Boolean" or name=="Real" or name=="Integer"
+	end
+
+
 	operation entity2ViewMapping() : Void is do
 		extern org::kermeta::ki::visual::view::EntityView.update(self, self.name, self.isAbstract)
 	end
@@ -61,6 +66,7 @@ aspect class ClassDefinition inherits Pickable {
 	
 	
 	operation movePropertyTo(p : Property, srcClass : ClassDefinition, metamodel : ModelingUnit) : Void is do
+		stdio.writeln("moveProp>" + p.name + " " + srcClass.name)
 		self.ownedAttribute.remove(p)
 		srcClass.ownedAttribute.add(p)
 		
@@ -71,10 +77,31 @@ aspect class ClassDefinition inherits Pickable {
 			if(p.type.isInstanceOf(Class)) then
 				var cd : ClassDefinition init p.type.asType(Class).classDefinition
 				
-				extern org::kermeta::ki::visual::view::MetamodelView.onLinkRemoved(metamodel, p)
-				extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, p, p.isComposite, srcClass, cd, 
-						p.name, p.getCardinalityString, if(not p.opposite.isVoid) then p.opposite.name end, 
-						if(not p.opposite.isVoid) then p.opposite.getCardinalityString end, -1)
+				if(cd.isKermetaPrimitiveType) then
+					extern org::kermeta::ki::visual::view::EntityView.onAttributeRemoved(self, p)
+					extern org::kermeta::ki::visual::view::EntityView.onAttributeAdded(srcClass, p, p.name, cd.name)
+				else
+					if(cd==self) then
+						cd := srcClass
+					end
+					
+					if((not p.opposite.isVoid).andThen{b | p.opposite.type.isInstanceOf(Class)}) then
+						var oppClazz : Class init p.opposite.type.asType(Class)
+						
+						if(oppClazz.typeDefinition==self and oppClazz.typeDefinition==p.opposite.owningClass) then
+							var clazz : Class init Class.new
+							stdio.writeln("====" + p.opposite.type.toString + " " + p.opposite.owningClass.name)
+							clazz.typeDefinition := srcClass
+						//	p.opposite.type := clazz
+						//	p.opposite.owningClass := srcClass
+						end
+					end
+				
+					extern org::kermeta::ki::visual::view::MetamodelView.onLinkRemoved(metamodel, p)
+					extern org::kermeta::ki::visual::view::MetamodelView.onLinkAdded(metamodel, p, p.isComposite, srcClass, cd, 
+							p.name, p.getCardinalityString, if(not p.opposite.isVoid) then p.opposite.name end, 
+							if(not p.opposite.isVoid) then p.opposite.getCardinalityString end, -1)
+				end
 			end
 		end
 	end

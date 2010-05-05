@@ -1,0 +1,49 @@
+/*
+ * Creation : May 4, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::visual;
+
+require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/ButtonPressLink.kmt"
+
+
+using kermeta::ki::malai::instrument
+using kermeta::ki::malai::interaction
+using kermeta::ki::malai::widget
+using kermeta::ki::malai::interaction::event
+
+
+class ElementsDisplayer inherits Instrument
+{
+	attribute opButton : ToggleButton
+	
+	attribute attrButton : ToggleButton
+	
+	
+		operation initialiseWidgets(eventManager : EventManager) : Void is do
+		opButton   := ToggleButton.new
+		attrButton := ToggleButton.new
+		
+		opButton.initialiseWithIcon("/res/op.png", eventManager)
+		attrButton.initialiseWithIcon("/res/attr.png", eventManager)
+		
+		interimFeedback
+	end
+	
+	
+	
+	method initialiseLinks(eventManager : EventManager) : Void is do
+	end
+	
+	
+	
+	method interimFeedback() : Void is do
+	end
+}
+
+
+
+

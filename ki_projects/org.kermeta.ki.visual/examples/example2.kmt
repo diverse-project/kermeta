@@ -13,6 +13,32 @@ aspect class A {
 	attribute aa : String
 }
 
+class E inherits F, G, H {
+	attribute eee : String
+	
+	attribute mye : E#eym
+	
+	reference eym : E#mye
+}
+
+class F {
+	attribute fffff : String
+	
+	reference iRef : I#fRef
+}
+
+class I {
+	attribute fRef : F#iRef
+}
+
+class G {
+	attribute gggggg : String
+}
+
+class H {
+	attribute hhhh : String
+}
+
 class C {
 	attribute varC1 : A
 	
@@ -25,7 +51,7 @@ class C {
 
 
 
-class D inherits C{
+class D inherits C, E{
 }
 
 

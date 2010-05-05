@@ -61,10 +61,10 @@ class ClassFlattener
 			end
 		end
 		
-		// Removing attributes which type if a removed class.
+		// Removing attributes which type is a removed class.
 		metamodel.packages.each{p |
 			p.ownedTypeDefinition.each{td |
-				if(self!=td and td.isInstanceOf(ClassDefinition)) then
+				if(classToFlat!=td and td.isInstanceOf(ClassDefinition)) then
 					cd := td.asType(ClassDefinition)
 					
 					cd.ownedAttribute.each{attr |
@@ -72,13 +72,14 @@ class ClassFlattener
 							cd2 := attr.type.asType(ParameterizedType).typeDefinition.asType(ClassDefinition)
 							
 							removedClasses.each{cl |
-								if(cl==cd2) then
+								if((cl==cd2).andThen{b | (not attr.opposite.isVoid).andThen{b | removedClasses.exists{clazz | clazz==attr.opposite.owningClass}}}) then
 									prop := PropertyBackup.new
 									prop.prop := attr
 									prop.owningClass := cd
 									removedProperties.add(prop)
 																		
 									cd.ownedAttribute.remove(attr)
+									stdio.writeln(">>>>" + attr.name + " " + attr.type.toString + " " + attr.toString + " " + cd.name + " " + attr.opposite.owningClass.name)
 									extern org::kermeta::ki::visual::view::MetamodelView.onLinkRemoved(metamodel, attr)
 								end
 							}
@@ -87,6 +88,9 @@ class ClassFlattener
 				end
 			}
 		}
+		
+		
+		classToFlat.ownedAttribute.each{prop | stdio.writeln("]]]]:" + prop.name) }
 	end
 	
 	
@@ -98,14 +102,14 @@ class ClassFlattener
 			var inBackup   : InheritanceBackup
 				
 			// Moving properties
-			currentClass.ownedAttribute.each{prop |
-				if(prop.isVisible) then
+			currentClass.ownedAttribute.each{prop | stdio.writeln(">" + prop.name + " " + currentClass.name + " " + prop.isVisible.toString)
+			//	if(prop.isVisible) then
 					currentClass.movePropertyTo(prop, classToFlat, metamodel)
 					propBackUp := PropertyBackup.new
 					propBackUp.prop := prop
 					propBackUp.owningClass := currentClass
 					addedProperties.add(propBackUp)
-				end
+			//	end
 			}
 			
 			// Moving operations
