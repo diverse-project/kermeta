@@ -29,9 +29,6 @@
 			<topic label="KerMeta load and save with EMF Tutorial" href="build/eclipse.help/KermetaEMFTutorial/index.html"> 
 				<link toc="build/eclipse.help/KermetaEMFTutorial/toc.xml" />
 			</topic>
-			<topic label="The FSM example" href="build/eclipse.help/KerMeta-The-FSM-example/index.html"> 
-				<link toc="build/eclipse.help/KerMeta-The-FSM-example/toc.xml" />
-			</topic>			
 			<topic label="How to create a metamodel" href="build/eclipse.help/KerMeta-How-to-create-a-metamodel/index.html"> 
 				<link toc="build/eclipse.help/KerMeta-How-to-create-a-metamodel/toc.xml" />
 			</topic>

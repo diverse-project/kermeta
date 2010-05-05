@@ -1,8 +1,8 @@
-<project name="KerMeta-Create-FSM-Graphical-Editor-With-GMF" default="all">
+<project name="KerMeta-The-FSM-example" default="all">
 	<!-- configuration properties -->		
 	<!-- project configuration -->
 	<property name="project.base.dir" location=".."/>
-	<property name="project.name" value="KerMeta-Create-FSM-Graphical-Editor-With-GMF"/>
+	<property name="project.name" value="KerMeta-The-FSM-example"/>
 	<property name="build.dir" location="${project.base.dir}/build"/>
 	<property name="build.docbook.dir" location="${build.dir}/docbook42"/>
 	<property name="OOo.source.dir" location="${project.base.dir}/src/OOo"/>
