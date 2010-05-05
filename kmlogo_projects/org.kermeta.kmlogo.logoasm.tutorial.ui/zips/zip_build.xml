@@ -15,6 +15,7 @@
 		<antcall target="org.kermeta.kmlogo.logoasm.ui.macosx.zip"/>
 		<antcall target="org.kermeta.kmlogo.logoasm.ui.win32.x86.zip"/>
 		<antcall target="org.kermeta.kmlogo.logoasm.ui.zip"/>
+		<antcall target="org.kermeta.kmlogo.logoasm.ui.osspecific.zip"/>
 	</target>
 	
 	<target name="org.kermeta.kmlogo.logoasm.edit.zip" >		
@@ -53,5 +54,7 @@
 	<target name="org.kermeta.kmlogo.logoasm.ui.zip" >		
 		<zip destfile="org.kermeta.kmlogo.logoasm.ui.zip" basedir="../../org.kermeta.kmlogo.logoasm.ui" includes="**" filesonly="false" whenempty="skip" update="false"/>
 	</target>
-	
+	<target name="org.kermeta.kmlogo.logoasm.ui.osspecific.zip">
+		<zip destfile="org.kermeta.kmlogo.logoasm.ui.osspecific.zip" basedir="../../org.kermeta.kmlogo.logoasm.ui.osspecific" includes="**" filesonly="false" whenempty="skip" update="false" />
+	</target>
 </project>

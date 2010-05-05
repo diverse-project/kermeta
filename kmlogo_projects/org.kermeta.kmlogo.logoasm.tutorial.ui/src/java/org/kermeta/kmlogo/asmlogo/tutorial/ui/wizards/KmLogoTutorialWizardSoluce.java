@@ -30,7 +30,6 @@ public class KmLogoTutorialWizardSoluce
 		List<ProjectDescriptor> projects = new ArrayList<ProjectDescriptor>(1);
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.tutorial.zip", "org.kermeta.kmlogo.logoasm.tutorial"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.samples.zip", "org.kermeta.kmlogo.logoasm.samples"));
-		// projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.emftext.commons.antlr3_1_1.zip", "org.emftext.commons.antlr3_1_1"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.emftexteditor.zip", "org.kermeta.kmlogo.logoasm.emftexteditor"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.model.zip", "org.kermeta.kmlogo.logoasm.model"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.edit.zip", "org.kermeta.kmlogo.logoasm.edit"));
@@ -38,6 +37,7 @@ public class KmLogoTutorialWizardSoluce
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.zip", "org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.srcKermeta.zip", "org.kermeta.kmlogo.logoasm.srcKermeta"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.ui.zip", "org.kermeta.kmlogo.logoasm.ui"));
+		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.ui.osspecific.zip", "org.kermeta.kmlogo.logoasm.ui.osspecific"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.ui.linux.x86.zip", "org.kermeta.kmlogo.logoasm.ui.linux.x86.zip"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.ui.macosx.zip", "org.kermeta.kmlogo.logoasm.ui.macosx.zip"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.ui.win32.x86.zip", "org.kermeta.kmlogo.logoasm.ui.win32.x86.zip"));
