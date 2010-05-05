@@ -320,8 +320,8 @@ public abstract class EntityView extends ComponentView {
 			dim.height += op.getHeight()+HEIGHT_GAP;
 		}
 		
-		dim.height *= scale;
-		dim.width  *= scale;
+		dim.width  = (int) (Math.max(dim.width, 30)*scale);
+		dim.height = (int) (Math.max(dim.height, 20)*scale);
 		
 		return dim;
 	}
