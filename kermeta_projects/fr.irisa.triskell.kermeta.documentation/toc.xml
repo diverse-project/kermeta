@@ -36,6 +36,7 @@
 				<topic label="Deploying KerMeta code" href="build/eclipse.help/KerMeta-Deploying-a-code/index.html"> 
 					<link toc="build/eclipse.help/KerMeta-Deploying-a-code/toc.xml" />
 				</topic>
+				<anchor id="task_tutorials" />
 		    </topic>
 			<anchor id="tutorials" />
 		   					
