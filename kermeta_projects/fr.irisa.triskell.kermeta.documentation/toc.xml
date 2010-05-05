@@ -33,7 +33,10 @@
 				<topic label="How to execute a behavior" href="build/eclipse.help/KerMeta-How-to-use-run-configuration/index.html"> 
 					<link toc="build/eclipse.help/KerMeta-How-to-use-run-configuration/toc.xml" />
 				</topic>
-				<topic label="Deploying KerMeta code" href="build/eclipse.help/KerMeta-Deploying-a-code/index.html"> 
+				<topic label="How to write a model checker in Kermeta" href="build/eclipse.help/ModelCheckingManual/index.html"> 
+					<link toc="build/eclipse.help/ModelCheckingManual/toc.xml" />
+				</topic>
+				<topic label="How to deploy KerMeta code" href="build/eclipse.help/KerMeta-Deploying-a-code/index.html"> 
 					<link toc="build/eclipse.help/KerMeta-Deploying-a-code/toc.xml" />
 				</topic>
 				<anchor id="task_tutorials" />

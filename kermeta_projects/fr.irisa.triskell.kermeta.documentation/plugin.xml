@@ -26,5 +26,6 @@
     <toc file="build/eclipse.help/KerMeta-How-to-create-a-metamodel/toc.xml" />
     <toc file="build/eclipse.help/KerMeta-How-to-add-behavior-to-a-metamodel/toc.xml" />
     <toc file="build/eclipse.help/KerMeta-How-to-use-run-configuration/toc.xml"/>
+    <toc file="build/eclipse.help/ModelCheckingManual/toc.xml"/>
   </extension>
 </plugin>

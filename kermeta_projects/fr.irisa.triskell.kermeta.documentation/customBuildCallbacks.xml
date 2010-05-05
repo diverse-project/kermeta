@@ -28,6 +28,7 @@
 		<ant antfile="Kermeta-How-to-create-a-metamodel_build.xml"  dir="src" target="eclipse.help"></ant>
 		<ant antfile="Kermeta-How-to-add-behavior-to-a-metamodel_build.xml"  	dir="src" target="eclipse.help"></ant>
 		<ant antfile="Kermeta-How-to-use-run-configuration_build.xml"  			dir="src" target="eclipse.help"></ant>
+		<ant antfile="ModelCheckingManual_build.xml"  			dir="src" target="eclipse.help"></ant>
 	</target>
 
 	<!-- ===================================================================== -->

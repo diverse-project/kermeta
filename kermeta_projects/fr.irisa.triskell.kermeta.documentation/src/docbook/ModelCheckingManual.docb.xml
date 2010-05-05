@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book lang="en-US">
+  <bookinfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="ModelCheckingManual_figures/MopcomLogo.png"
+                   format="PNG" />
+      </imageobject>
+    </mediaobject>
+
+    <title>Model checking manual</title>
+
+    <pubdate>Build date: @BUILD.DATE@</pubdate>
+
+    <author>
+      <firstname>Didier</firstname>
+      <surname>Vojtisek</surname>
+    </author>
+
+    <keywordset>
+      <keyword>Kermeta</keyword>
+
+      <keyword>Model checking</keyword>
+    </keywordset>
+
+    <subtitle>How to use and write a model checker with Kermeta</subtitle>
+
+    <abstract>
+      <para>This document presents the different concerns about model checking
+      with Kermeta.</para>
+
+      <para>Not all aspects of writing or integrating are presented as they
+      may be specific to the user choice or requiring some additional
+      development that aren't available at the time of writing of this
+      document, however the document try to list these potential usage.</para>
+
+      <para>The various sample presented in this document are extracted from
+      the model checker written in the context of the Mopcom SoC
+      project.</para>
+      <para>The document also details how to prepare an uml profile for being used in a checker. In 
+      this context, it presents how to optimize the navigation in the uml model thanks to kermeta aspects.</para>
+
+      <para>The document is organized as follow. The first chapter explains
+      the base concepts used by a model checker including some specificities
+      of Kermeta. The second chapter show a typical use of a model checker in
+      the end user envrionnment. The third chapter provides some guidelines
+      for writing a model checker. This chapter also presents some limitations
+      when writing a model checker and various leads to get rid of
+      them.</para>
+    </abstract>
+
+    <publishername><ulink
+    url="http://www.inria.fr">INRIA</ulink></publishername>
+  </bookinfo>
+
+  <chapter>
+    <title>Base concepts</title>
+
+    <para>The global goal of a model checker is to verify that a guiven model
+    is valid for a given intend. Running a check on a model helps the user in
+    detecting an invalid model in the early steps of a modeling
+    process.</para>
+
+    <section>
+      <title>Constraints</title>
+
+      <para>The core of a model checker is to verify constraints. A constraint
+      is a condition or restriction expressed in natural language text or in a
+      machine readable language for the purpose of declaring some of the
+      semantics of an element.</para>
+
+      <para>To be able to build tool that use these constraints, they must be
+      expressed using a machine readable language like OCL of Kermeta.</para>
+
+      <para>The language standardized by the OMG is OCL (Object Constraint
+      Language). Kermeta can also natively express the same constraints. In
+      order to use Kermeta runtime (interpreter or java compiler).</para>
+
+      <para>Since OCL behavior is a subset of Kermeta behavior, there is a
+      transformation that allows to convert OCL constraint into kermeta ones,
+      so the constraint can be used in any kermeta program (for example in a
+      model checker, but also in other kind of application)</para>
+
+      <note>
+        <para>In kermeta 1.3.2, we still need to manually do this conversion
+        if we want to reuse OCL constraints in a kermeta program. However we
+        plan to offer the possibility to directly include the OCL file in a
+        kermeta program (ex: require "my.ocl") so the integration will be
+        smoother.</para>
+      </note>
+    </section>
+
+    <section>
+      <title>Invariant constraints used to complement the metamodel
+      structure</title>
+
+      <para>By default, the structure of a metamodel will help a given editor
+      to build a conformant model.</para>
+
+      <para>Typically, if you take uml metamodel, the tree editor is smart
+      enough to not propose to add a Package into a Class, but will propose
+      only concepts that can fit in it, for example an Operation.</para>
+
+      <figure>
+        <title>Restriction of the proposal for model element creation driven by the metamodel
+        structure</title>
+        <screenshot>
+          <screeninfo></screeninfo>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="ModelCheckingManual_figures/sample_uml_child_creation.png"
+                         format="PNG" />
+            </imageobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+
+      <para>However, some constraints are difficult or impossible to capture
+      using only the metamodel structure.</para>
+
+      <para>For example UML metamodel specification is complemented with a lot
+      of constraints, typically expressed in OCL.</para>
+
+      <para><example>
+          <title>Sample of constraint in UMLmetamodel on Classifier (excerpt
+          form UML specification)</title>
+
+          <para>Expressed in natural language : Generalization hierarchies
+          must be directed and acyclical. A classifier can not be both a
+          transitively general and transitively specific classifier of the
+          same classifier.</para>
+
+          <para>Expressed in OCL :</para>
+
+          <programlisting>not self.allParents()-&gt;includes(self)</programlisting>
+        </example>A typical translation of this contraint in kermeta will be :
+      (TODO)</para>
+    </section>
+
+    <section>
+      <title>Invariant constraints used to restrict a metamodel for a given
+      intend</title>
+
+      <para>In order to implement a given process, it is sometime necessary to
+      add some more constraints on a metamodel.</para>
+
+      <para>This will help to capture the intend behind the use of the given
+      metamodel.</para>
+
+      <para>For example on a large metamodel like UML, we may want to use only
+      a subset of it and even this subset can be used following some design
+      rules. These addtional rules will help to specify the intend of the
+      model, so it can be processed in a given way.</para>
+
+      <para>For example in a top down process, each step of the process may be
+      expressed using UML, but at each step we add some more information and
+      precision (typical MDA process) Even if each step use a valid UML model
+      (regarding its structure and the standard constraints), a tool designed
+      to work on a UML model of a given step might not work with an UML model
+      of another process step.</para>
+
+      <para>In order to help the user detect the inconstancy, the basic idea
+      is then to provide a set of invariant that are specific to a given
+      step.</para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Using a model checker written in Kermeta</title>
+
+    <para>This chapter presents various way to use a model checker from the
+    point of view of the end user.</para>
+
+    <section>
+      <title>Get the model to check in the appropriate format</title>
+
+      <para>A model checker written in kermeta is dependent on its EMF
+      (Eclipse Modeling Framework) implementation. It is designed to work with
+      a specific metamodel.</para>
+
+      <para>If the model to check isn't in the correct format (for example in specific modeler format like Rhapsody) it
+      is necessary to translate it (export) to the checker supported
+      format.</para>
+
+	<figure>
+        <title>Example : Export from Rhapsody modeler to the XMI format supported by EMF</title>
+        <screenshot>
+          <screeninfo></screeninfo>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="ModelCheckingManual_figures/rhapsody_xmi_export.jpg"
+                         format="JPEG" />
+            </imageobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </section>
+
+    <section>
+      <title>Integration in a graphical user interface</title>
+
+      <para>Typically, the model checker can be integrated in the end user
+      graphical interface. For example, in Mopcom project we have provided
+      some popup actions for uml file resources, that allows to launch the
+      various check on uml models.</para>
+
+
+      <figure>
+        <title>Integration example of Mopcom model checkers using popup menu
+        on uml files</title>
+
+        <screenshot>
+          <screeninfo></screeninfo>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="ModelCheckingManual_figures/mopcom_checker_popup_menu.png"
+                         format="PNG" />
+            </imageobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+	  <tip><para>You can find the procedure to provide such popup menu thet runs a kermeta program and the 
+	  typical associated java code is presented in the logo tutorial (TODO add a link to the online version)</para></tip>
+      <para>More advanced GUI integration are possible depending on the user
+      integrated environment. For example, we may use the ability of eclipse
+      to detect file changes to automatically run the check and report the
+      failed invariant in the problem view. However, automatic check must be
+      considered with care, since the user may need to have an incorrect model
+      during some phase of his modeling process. A good practice would be to
+      always propose to disable automatic check.</para>
+
+      <para>As the model checkers are sometime specific to a given development
+      step in a process, we can also imagine to customize the user environment
+      to propose and activate only the relevant checkers for the current
+      process step.</para>
+    </section>
+
+    <section>
+      <title>Run the checker as a standalone application</title>
+
+      <para>Like any kermeta program, a model checker written in Kermeta can
+      be run as a standalone application, for example on the command line.
+      However, in this case, the main operation of the checker must ensure to
+      report the failed invariants in a textual way.</para>
+
+      <para>For more information about running a kermeta application from the
+      command line, please refer to the kermeta UI user guide <ulink
+      url="???">http://www.kermeta.org/documents/ui_user_guide/</ulink></para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Writing a checker</title>
+
+    <para>This section presents how to write the invariant constraints and
+    build a model checker from them.</para>
+
+    <para>Using Kermeta, checking a model is done in 3 steps :</para>
+
+    <itemizedlist>
+      <listitem>        <para>Declare which concept will be know and checked. Ie. the metaclasses know by your kermeta program. </para>
+      </listitem>
+      <listitem>
+        <para>Retreive the model to check. (typically with a resource
+        load)</para>
+      </listitem>
+
+      <listitem>
+        <para>for all the root elements of the resource call the
+        checkAllInvariant to recursively verify the model by checking the
+        constraints that apply to a given element.</para>
+
+        <para>Optionnally, we may want to verify only a subset of the model by
+        selecting.</para>
+      </listitem>
+
+      <listitem>
+        <para>Reports the elements that violate an invariant to the
+        user.</para>
+
+        <para>Ideally, with a user friendly message or interface.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para></para>
+	<section>
+      <title>Declaring Metaclasse</title>
+       <para>In Kermeta, you need to declare which metaclasses are known in your Kermeta program. 
+       This is acheived by using the <literal>require</literal> keyword which acts like an import. Then all class definition that are 
+       "required" will be available and known by your program. 
+       Otherwise you won't be able to load the model Ie. you can create an instance only of classes for which you know the definition !</para>
+       
+       <section>
+        <title>General case</title>
+		<para>For checking your own metamodel, this is usually simple as you only need to add something like :</para>
+       	<programlisting language="kermeta">require "yourmetamodel.ecore"</programlisting>
+       	<para>You can directly require the ecore file because, if you need to have an extended version of a ClassDefinition, you can simply augment it using kermeta aspects.</para>
+        <tip><para>If your ecore is deployed as a plugin you can also require the nsUri of the root package of your ecore inn ordr to get the version in EMF memory (in its registry). For ex:</para>
+        <programlisting language="kermeta">require "http://www.eclipse.org/emf/2002/Ecore"</programlisting>
+        <para>will get the version in memory, whereas </para>
+        <programlisting language="kermeta">require "platform:/plugin/org.eclipse.emf/ecore/model/Ecore.ecore"</programlisting>
+        <para>will get the file in the plugin  org.eclipse.emf.ecore. 
+        Also note that these two require are incompatible in the same kermeta program since they connect to two similar but potentially different version of the same ClassDefinitions.</para>        
+        </tip>
+      </section>
+      <section>
+        <title>ClassDefintion of UML Profiles</title>
+        <para>In UML profiles, the stereotypes are a bit special because declaring a new stereotype definition is equivalent to declaring a new ClassDefinition that 
+        connects to the UML element (a uml::CLassifier, a uml::Package, a uml::LifeLine, etc).</para>
+        <para>The following figures show how a typical profiles is represented in a uml modeller (ie. what a uml end user see in his modeller)
+          and what is actually in memory at the instance level (ie. at the metamodel level point of view, what is manipulated by a model transformation or model checker tool) 
+        </para>
+        <figure>
+           <title>Stereotype declaration and instance as seen in a classical uml modeller</title>
+	
+	       <screenshot>
+	         <screeninfo></screeninfo>
+	
+	         <mediaobject>
+	           <imageobject>
+	             <imagedata fileref="ModelCheckingManual_figures/StereotypeExplanation_enduser_stereotype_definition.png"
+	                        format="PNG" />
+	           </imageobject>
+	         </mediaobject>
+	       </screenshot>
+	     </figure>
+	     <figure id="stereotype.use.fig.link">
+           <title id="stereotype.use.title.fig.link">Stereotype use in a classical uml modeller</title>
+	
+	       <screenshot>
+	         <screeninfo></screeninfo>
+	
+	         <mediaobject>
+	           <imageobject>
+	             <imagedata fileref="ModelCheckingManual_figures/StereotypeExplanation_enduser_stereotype_use.png"
+	                        format="PNG" />
+	           </imageobject>
+	         </mediaobject>
+	       </screenshot>
+	     </figure>
+	     <para>You can notice in (<xref linkend="stereotype.use.fig.link"/>) that the use of the stereotype is presented using some custom presentation, here it use the default presentation: name of the applied stereotype between double lower and greater, the stereotype atributes appears in a special tab in the property view. </para>
+        
+	     <figure>
+           <title>Stereotype declaration and instance as seen from the metamodel point of view (ie. in an "ecore" modeller)</title>
+	
+	       <screenshot>
+	         <screeninfo></screeninfo>
+	
+	         <mediaobject>
+	           <imageobject>
+	             <imagedata fileref="ModelCheckingManual_figures/StereotypeExplanation_instance_version.png"
+	                        format="PNG" />
+	           </imageobject>
+	         </mediaobject>
+	       </screenshot>
+	     </figure>
+	     
+	     <note><para>This instance representation isn't specific to Kermeta, all modelling tools (including editors, model transformation tools, ...) use this 
+	     representation internally even if they provide a simplified graphical representation.</para></note>
+        <para>You can notice several points :</para>
+        <itemizedlist>
+        	<listitem><para>
+        		the stereotype object isn't contained by an uml element. Actually, they are stored at the root of the xmi file (usually side by sides with the
+        		root uml::Model element that contain the uml model) </para>
+        	</listitem>
+        	<listitem><para>
+        		this link is navigable only in one direction, from the stereotype to the uml element.</para>
+        	</listitem>
+        </itemizedlist>
+        <para>Actually, the stereotype acts like a kind of decoration on top of the uml element, this was a requiremnt in uml specification in order to be 
+        able to load a uml model even if a specific tool don't know how to deal with a specific profile, the underlying uml model is still valid and
+        can be processed.</para>
+        <para>This has some impacts on navigating in the model. For example, if from an uml element you want to know
+        if it exists a stereotype that "decorate" the uml element, you'll have to navigate up to the resource
+        <footnote id="ftn2"><para>this will work only if you suppose that the stereotype is contained by the same resource as the uml
+        object. Otherwise, you'll also have to search within all the resources known by the containing Repository !</para></footnote>
+        and then search within all the ob ject there if there is one that have a <literal>base_XXX</literal> property
+        that points to the uml object ...  
+        </para>
+        
+        <example>
+          <title>Trivial but inefficient navigation in uml profiles</title>
+          <programlisting language="kermeta">operation getClassifierStereotypes(aClassifier : uml::Classifier) : kermeta::standard::Sequence&lt;kermeta::standard::Object&gt; is do 
+   var containingResource : kermeta::persistence::Resource init aClassifier.containingResource<co
+                id="get.root.resource.co"
+                linkends="get.root.resource.callout" />
+   result := containingResource.select{ o |
+      var base_ClassifierProperty : kermeta::language::structure::Property
+      var classDefinition : kermeta::language::structure::ClassDefinition 
+      classDefinition ?= o.getMetaClass.typeDefinition
+      base_ClassifierProperty := classDefinition.allAttribute.detect { o | o.name.equals( "base_Classifier" ) } <co
+                id="get.classifier.property.co"
+                linkends="get.classifier.property.callout" />		   
+      o.get(base_ClassifierProperty) == aClassifier<co
+                id="is.stereotypeof.aClassifier.co"
+                linkends="is.stereotypeof.aClassifier.callout" />
+   }		
+end</programlisting>
+			<para><calloutlist>
+                <callout arearefs="get.root.resource.co"
+                         id="get.root.resource.callout">
+                  <para>We have to look into the resource, in this case we guess (but we may be wrong!) that the stereotype is contained by
+                  the same resource (xmi file) as the uml element</para>
+                </callout>
+                <callout arearefs="get.classifier.property.co"
+                         id="get.classifier.property.callout">
+                  <para>since we only know that the stereotype has a property named "base_Classifier" we have to use reflexivity</para>
+                </callout>
+                <callout arearefs="is.stereotypeof.aClassifier.co"
+                         id="is.stereotypeof.aClassifier.callout">
+                  <para>If true then we have a stereotype of <literal>aClassifier</literal></para> 
+                </callout>
+              </calloutlist>
+           </para>
+        </example>
+        <para>This is quite inefficient even on such simple request. A traditionnal approach would have been to use 
+        a cache (for exemple in a Hashtable), but even that isn't really satisfying. We will see in section 
+			<xref endterm="section_constraints_on_uml_profiles.title.link"
+                linkend="section_constraints_on_uml_profiles.link" /> how we can simplify the navigation using kermeta aspects.</para>
+      </section>
+    </section>
+    <section>
+      <title>Retrieving the model to check (Model load)</title>
+
+      <para>The goal of this step is to get the model you want to check. It can be coupled to another process or model transformation written in Kermeta, however in most case, a simple
+      resource load is usually enough to build a standalone checker.</para>
+
+      <section>
+        <title>Model load general case</title>
+		<para>As of Kermeta 1.3.2, loading a model is done using two concepts : a Resource which usually represent a file, and a Repository which represent a 
+		a context for a set of Resources.</para>
+        <para>TODO kermeta code sample</para>
+        <para><example>
+            <title>Sample of load UML resource with profile</title>
+
+            <programlisting language="kermeta">var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new <co
+                id="load.base.init.repository.co"
+                linkends="load.base.init.repository.callout" />
+var inputResource : kermeta::persistence::EMFResource
+inputResource ?= inputRepository.createUMLResource(fileToLoad, "platform:/plugin/org.company.yourmetamodel/model/yourmetamodel.ecore")
+inputResource.load()<co id="load.base.co" linkends="load.base.callout" />
+</programlisting>
+
+            <para><calloutlist>
+                <callout arearefs="load.base.init.repository.co"
+                         id="load.base.init.repository.callout">
+                  <para>use a new repository for all the resources to
+                  load</para>
+                </callout>
+                <callout arearefs="load.base.co"
+                         id="load.base.callout">
+                  <para>Load the resource, if it depends on other resources they will be loaded too in the same Repository </para>
+                </callout>
+              </calloutlist>After these instructions, the inputResource can be
+            navigated to retreive all the model elements. This resource is a
+            collection that contains all the element at the root of the loaded
+            file.</para>
+            <programlisting language="kermeta">inputResource.one <co
+                id="load.base.navigate.one.co"
+                linkends="load.base.navigate.one.callout" />
+inputResource.each{ rootElement | // do something on each element at the root of the Resource }<co
+                id="load.base.navigate.each.co"
+                linkends="load.base.navigate.each.callout" />
+            </programlisting>
+            <para><calloutlist>
+                <callout arearefs="load.base.navigate.one.co"
+                         id="load.base.navigate.one.callout">
+                  <para>For example, if you know that there is always one root element in your model, navigate by getting only <literal>one</literal>.
+                  </para>
+                </callout>
+                <callout arearefs="load.base.navigate.each.co"
+                         id="load.base.navigate.each.callout">
+                  <para>or process the collection of root elements for example with a <literal>each</literal> (or you can also use <literal>select</literal>, <literal>collect</literal>, etc operations availables on collections) </para>
+                </callout>
+              </calloutlist></para>
+          </example></para>
+      </section>
+
+      <section>
+        <title>Loading UML model with profiles</title>
+
+        <para>TODO enabling profile, special UML resource</para>
+
+        <para><example>
+            <title>Sample of load UML resource with profile</title>
+
+            <programlisting language="kermeta">var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new <co
+                id="load.uml.init.repository.co"
+                linkends="load.uml.init.repository.callout" />
+inputRepository.registerEcoreFile("platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore") <co
+                id="load.uml.register.ecore.co"
+                linkends="load.uml.register.ecore.callout" />
+inputRepository.registerEcoreFile("platform:/plugin/org.eclipse.uml2.uml/model/UML_21.ecore")
+inputRepository.ignoreLoadErrorUnknownProperty := true <co
+                id="load.uml.ignore.error.co"
+                linkends="load.uml.ignore.error.callout" />
+inputRepository.ignoreLoadErrorUnknownMetaclass := true
+var inputResource : kermeta::persistence::EMFResource
+inputResource ?= inputRepository.createUMLResource(fileToLoad, "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore")
+inputResource.load()</programlisting>
+
+            <para><calloutlist>
+                <callout arearefs="load.uml.init.repository.co"
+                         id="load.uml.init.repository.callout">
+                  <para>use a new repository for all the resources to
+                  load</para>
+                </callout>
+
+                <callout arearefs="load.uml.register.ecore.co"
+                         id="load.uml.register.ecore.callout">
+                  <para>Optionnal, helps to find load UML model when not run
+                  in eclipse. May also help in compiled mode</para>
+                </callout>
+
+                <callout arearefs="load.uml.ignore.error.co"
+                         id="load.uml.ignore.error.callout">
+                  <para>Optional, These options help to load UML model for
+                  wich we don't have translated all stereotype into proper
+                  ecore classdefinition. Setting these option to true will
+                  simply ignore the model elements that cannot be
+                  loaded.</para>
+                </callout>
+              </calloutlist>After these instructions, the inputResource can be
+            navigated to retreive all the model elements. This resource is a
+            collection that contains all the element at the root of the loaded
+            file.</para>
+          </example></para>
+
+        <para>TODO show a figure explaining the location of the stereotypes at
+        the root of the file</para>
+      </section>
+    </section>
+
+    <section>
+      <title>Writing constraint</title>
+
+      <para>This second step is the core part of the checker. It consist in
+      writing the invariant constraints associated to the metaclasses of the
+      model we want to check.</para>
+
+      <para>Actually, the context of the invariant (ie. the metaclass
+      containing the invariant) constitute a kind of filter for the
+      invariants. On a given element, only invariants that apply to this
+      element will be checked. This also constitutes the basis for the
+      organisation of the constraints because they will natively be displayed
+      in their containing class.</para>
+
+      <para>For every combinaison of metamodel and intent, we need to write a
+      set of constraints.</para>
+
+      <para></para>
+
+      <section>
+        <title>General case</title>
+
+        <para>As stated above, the invariant naturally applies to a metaclass.
+        Kermeta aspect allows to reopen a metaclass definition, then adding an
+        invariant to an existing metaclass is quite simple.</para>
+
+        <example>
+          <title>Example of invariant definition on UML metamodel</title>
+
+          <programlisting language="kermeta">package uml;   // name of the package for these definition, the same as the one we want to aspectize
+
+
+require kermeta
+         // require the UML2 metamodel
+require "http://www.eclipse.org/uml2/3.0.0/UML"
+
+aspect class Classifier    // use aspect keyword in order to reopen the metaclass uml::Classifier
+{
+   inv inheritanceMustBeDirectedAndAcyclical is do
+      not self.allParents().includes(self)  // the expression in the invariant must return false if the invariant is violated
+   end
+}</programlisting>
+
+          <para>This sample adds an invariant to the metaclass uml::Classifier
+          that checks that the inheritance is directed and doesn't have a
+          cycle.</para>
+        </example>
+
+        <para><warning>
+            <para>Be careful, in this sample, the operation allParents is
+            abstract in the metamodel. You must ensure to provide an
+            implementation for it otherwise you'll get a
+            NotImplementedException. </para>
+            <para>In that sample, you can use the uml2 MDK and require the following file somewhere in your kermeta program:</para>
+            <programlisting>require "platform:/plugin/org.kermeta.uml2/src/kermeta/uml2_behavior.kmt"</programlisting>
+            <para>TODO : Implement this allParent() in uml MDK!!!</para>
+
+            <para>A similar problem is when using derived properties for which
+            you need to provide a behavior.</para>
+          </warning></para>
+
+        <para><note>
+            <para>Please note that the invariant name
+            (inheritanceMustBeDirectedAndAcyclical in the above sample) may
+            not be unique, however a good practice is to use a name as
+            explicit as possible</para>
+          </note></para>
+
+        <para></para>
+      </section>
+
+      <section id="section_constraints_on_uml_profiles.link">
+        <title id="section_constraints_on_uml_profiles.title.link">Constraints on UML profiles</title>
+
+        <para>When using UML profiles you may have some specificties.</para>
+
+        <para>TODO enabling profile for adding invariant on it</para>
+
+        <para>TODO</para>
+
+        <para>Opposite on stereotype</para>
+
+        <para>TODO more generally use aspects to simplify a check algorithm
+        (complexity and/or readability)</para>
+      </section>
+
+      <section>
+        <title>Model checker product lines (ie. Organizing invariant
+        constraints)</title>
+
+        <para>TODO use kermeta aspect to select the set of constraints for a
+        given intent, typical folder organisation in Mopcom</para>
+      </section>
+    </section>
+
+    <section>
+      <title>Launching the check and giving feedback on failed constraints</title>
+
+      <para>Kermeta offers several operation that allows to  </para>
+
+      <section>
+        <title>General case</title>
+
+        <para>TODO provide the natural language version in the documentation
+        associated to the invariant</para>
+
+        <para>TODO report only the first one or all</para>
+      </section>
+
+      <section>
+        <title>Feedback for constraints on UML Profiles</title>
+
+        <para></para>
+      </section>
+    </section>
+
+    <section>
+      <title>Limitations and possible enhancements</title>
+
+      <para>This chapter list some issues that my complexify the creation of a
+      model checker. If possible, it also presents some cues towards resolving
+      these problems.</para>
+      <para><note><para>As this section presents some innovative ideas, if you have implemented some of 
+      them, please let us know and consider contributing your work to this document.</para></note></para>
+
+      <para></para>
+
+      <section>
+        <title>Load of large model</title>
+
+        <para>TODO</para>
+
+        <para>Leads : Load on demand/lazy loading</para>
+
+        <para>Leads : selective load</para>
+      </section>
+
+      <section>
+        <title>Many or complex constraints </title>
+
+        <para>TODO</para>
+
+        <para>Leads : compilation</para>
+
+        <para>Leads : incremental check</para>
+      </section>
+
+      <section>
+        <title>Test of model checker themselves</title>
+
+        <para>TODO</para>
+
+        <para>Leads : Provides big representative sample models, then modify
+        them to make them invalid; use getViolatedConstraints and add assert for all the contraints you want to see</para>
+
+        <para>Leads : Generate test models</para>
+      </section>
+
+      <section>
+        <title>Advanced Model checker product line</title>
+
+        <para>TODO</para>
+
+        <para>Leads : use model type + aspect to adapt compatible metamodels
+        and then reuse existing invariants</para>
+
+        <para>Leads : </para>
+      </section>
+      <section>
+        <title>Automatic Generation of constraint from a set of sample model</title>
+
+        <para>TODO</para>
+
+        <para>Leads : from a set of sample model representative of an intent, we
+        can generate the constraints that restrict the metamodel to only the used elements.</para>
+
+        <para>Leads : </para>
+      </section>
+    </section>
+  </chapter>
+</book>
