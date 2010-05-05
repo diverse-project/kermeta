@@ -3,11 +3,12 @@
 <plugin>
 
    <extension point="org.eclipse.help.toc">
-		<toc primary="true" file="toc.xml"></toc>
-  <toc
-        file="build/eclipse.help/KET-Manual/toc.xml"
-        primary="false">
-  </toc>
+		<toc file="mainToc.xml"/>
+		<toc file="toc.xml" primary="false"/>
+	  	<toc
+	        file="build/eclipse.help/KET-Manual/toc.xml"
+	        primary="false">
+	  	</toc>
 	</extension>
 
 </plugin>

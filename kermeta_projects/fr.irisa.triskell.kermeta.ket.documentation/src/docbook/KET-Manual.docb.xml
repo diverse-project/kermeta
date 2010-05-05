@@ -99,10 +99,15 @@ This is the reference manual for anybody who want to use KET.</para>
 	from some computation.
 	Once templates are ready to be compiled, they are interpreted by the 
 	template engine. It creates a new Kermeta file that declares a generator 
-	as a generate(params) method.
+	as a generate(params) method.</para>
+	<warning><para>
 	Using KET is efficient when templates contains more text that expressions 
-	(i.e a text with holes). If you need more computation than text, you 
-	should consider writing a pretty printer in Kermeta.</para>
+	(i.e. a text with holes). If you need more computation than text, you 
+	should consider writing a pretty printer directly in Kermeta
+	<footnote><para>Writing a pretty printer is a kind of visitor which is quite ease to write thanks to kermeta aspects.
+    </para></footnote>
+	.</para></warning>
+	<tip><para>Since everything goes down to a kermeta code, you can also combine the approaches KET/kermeta pretty printer</para></tip>
   </chapter>
 
   <chapter id="chapter_generator.link">
@@ -333,5 +338,17 @@ operation main() : Void is do
 	stdio.writeln(gen.generate())
 end
 }</programlisting>
+    </chapter>
+    <chapter>
+    	<title>Online resources</title>
+    	<para>
+    		You'll find additional resources and samples online :
+    		<ulink url="http://www.kermeta.org/mdk/ket">http://www.kermeta.org/mdk/ket</ulink>.
+    	</para>
+    	<para>
+    		Additionally, you can post questions on Kermeta mailing lists [
+    		<ulink url="http://gforge.inria.fr/mail/?group_id=32">http://gforge.inria.fr/mail/?group_id=32</ulink>) and forums (
+    		<ulink url="http://gforge.inria.fr/forum/?group_id=32">http://gforge.inria.fr/forum/?group_id=32</ulink>).
+    	</para>
     </chapter>
 </book>
