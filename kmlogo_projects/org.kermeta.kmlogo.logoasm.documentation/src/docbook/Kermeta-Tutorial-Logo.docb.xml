@@ -12,25 +12,6 @@
     <pubdate>Build date: @BUILD.DATE@</pubdate>
     <pubdate>$Date:: 2010-01-26 14:40:23#$</pubdate>
     <author>
-      <firstname>Zoé</firstname>
-      <surname>Drey</surname>
-    </author>
-    <author>
-      <firstname>Cyril</firstname>
-      <surname>Faucher</surname>
-    </author>
-    <author>
-      <firstname>Franck</firstname>
-      <surname>Fleurey</surname>
-    </author>
-    <author>
-      <firstname>Vincent</firstname>
-      <surname>Mahé</surname></author>
-    <author>
-      <firstname>Didier</firstname>
-      <surname>Vojtisek</surname>
-    </author>
-    <author>
       <firstname>Haja</firstname>
       <surname>Rambelontsalama</surname>
     </author>
@@ -305,7 +286,7 @@
             you will have to double-click on<emphasis role="bold"> Package ASM</emphasis> to open it
             and then <emphasis role="bold">Create</emphasis> button from the window wizard). </para>
           <para>You should obtain an overview of all the concepts in your metamodel (see the figure
-            below).</para>
+            below -it may differ from actual version but is here for illustration purpose).</para>
         </step>
       </procedure>
       <figure>
@@ -472,6 +453,11 @@ package ASM
 	class Lower inherits BinaryExp
 	{
 	}
+	class LogoProgram
+	{
+		attribute instructions : Instruction[0..*]
+
+	}
 }
 </programlisting>
       <para>Inside <emphasis role="bold">org.kermeta.kmlogo.logoasm.model/model</emphasis>, create a
@@ -481,7 +467,8 @@ package ASM
         listing above, you may copy/paste to replace the generated code). </para>
       <para>After saving, right-click on it and choose <emphasis role="bold">Kermeta > Generate
           Ecore</emphasis>. </para>
-      <para>You should retrieve our logo language's .ecore representation that we saw before.</para>
+      <para>You should retrieve our logo language's .ecore representation that we 've just seen
+        before.</para>
     </section>
   </chapter>
   <chapter id="chapter_editor.link">
@@ -501,13 +488,14 @@ package ASM
         </step>
         <step>
           <para> Go to the <emphasis role="bold">outline view</emphasis>. Select the top level
-            element inside your metamodel (for example here the Block).</para>
+            element inside your metamodel (for example here the LogoProgram as it is the entry
+            point).</para>
         </step>
         <step>
           <para> Right-click on this element and choose <emphasis role="bold">Create a dynamic
               instance</emphasis>.</para>
           <figure>
-            <title>Creating a dynamic instance</title>
+            <title>Creating a dynamic instance (illustration purpose)</title>
             <mediaobject>
               <imageobject><imagedata fileref="Kermeta-Tutorial-Logo_figures/KermetaDynamicInst.png"
                 /></imageobject>
@@ -574,9 +562,9 @@ package ASM
     <section id="section_tree_view_editor.link">
       <title id="section_tree_view_editor.title.link">Tree view editor<phrase/></title>
       <para>Using the tree-view editor is the second way to manipulate metamodel instances. Open
-        your ecore file and select a top level element inside your metamodel (for instance Block).
-        Right-click on that element and seclect New Child or New Sibling to add elements like we've
-        seen on the previous section.</para>
+        your ecore file and select a top level element inside your metamodel (for instance
+        LogoProgram). Right-click on that element and seclect New Child or New Sibling to add
+        elements like we've seen on the previous section.</para>
       <para>This step is also largly covered in the<ulink
           url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"> FSM
         tutorial</ulink>.</para>
@@ -614,8 +602,8 @@ package ASM
             (through the nsUri) and define the style and the concrete rules for each concept that we
             want to map.</para>
           <tip>
-            <para>If you meet with some errors, be sure that you register your ecore and that the
-              path to your genmodel is correct.</para>
+            <para>If you meet with some errors, be sure that you <link linkend="set_ns_uri"
+                >register</link> your ecore and that the path to your genmodel is correct.</para>
           </tip>
         </step>
         <step>
@@ -732,9 +720,10 @@ aspect class ProcCall{
 }
 </programlisting>
           <note>
-            <para>If you get errors on "http://www.kermeta.org/kmLogo", check your package
-              registration. you may hit the <emphasis role="bold">check this file</emphasis> button
-              (on Kermeta's perspective toolbar) to refresh.</para>
+            <para>If you get errors on "http://www.kermeta.org/kmLogo", check your <link
+                linkend="set_ns_uri">package registration</link>. you may hit the <emphasis
+                role="bold">check this file</emphasis> button (on Kermeta's perspective toolbar) to
+              refresh.</para>
           </note>
         </step>
         <step>
@@ -766,10 +755,11 @@ aspect class ProcCall{
           <para>Let's now run our first Kermeta application : Right-click on the file <emphasis
               role="bold">CheckModels.kmt</emphasis> and choose <emphasis role="bold">Run as > Run
               as Kermeta application</emphasis>. <note>
-              <para>If you get errors, again, check that you did not forget to register you ecore.
-                Maybe it is necessary to clean all the projects or launch the kermeta cleaner (trash
-                bin with kermeta icon on your toolbar) or hit the kermeta validator ("check this
-                file" button in Kermeta perspective toolbar)</para>
+              <para>If you get errors, again, check that you did not forget to <link
+                  linkend="set_ns_uri">register</link> you ecore. Maybe it is necessary to clean all
+                the projects or launch the kermeta cleaner (trash bin with kermeta icon on your
+                toolbar) or hit the kermeta validator ("check this file" button in Kermeta
+                perspective toolbar)</para>
             </note></para>
           <para>On your console view, you should view the result below (you can review the models to
             see its conformance to the ecore ) : </para>
@@ -857,7 +847,7 @@ aspect class ProcCall{
             the file which handle the plug-in nature of the project. Observe its content (extension,
             ..). (you may delete the folder <emphasis role="bold">3.JavaInterfaces/plugin</emphasis>
             and the package <emphasis role="bold">src/org.kermeta.kmlogo.logoasm.srckermeta
-            </emphasis> since we don't use it.</para>
+            </emphasis> since we don't use it).</para>
         </step>
         <step>
           <para>At this point your project<emphasis role="bold">
@@ -1169,8 +1159,8 @@ aspect class ProcCall{
         <para>Find operation compileToStdOut() of class "NXCCompiler", normally (when we fix the
           compiler as now it is hard coded) it should call an operation "getAPI" to define the base
           API of the target platform.</para>
-        <para>To launch compiling, refer to the "chapter 10 Using the deployed DSL
-          environment".</para>
+        <para>To launch compiling, refer to the <link linkend="chapter_using_deployed_DSL.link"
+            >"chapter 10 Using the deployed DSL environment"</link>.</para>
       </step>
     </procedure>
   </chapter>
@@ -1178,17 +1168,18 @@ aspect class ProcCall{
     <title id="chapter_ui_improvements.title.link">UI improvements<anchor id="ui_improvements"
       /></title>
     <para>This chapter introduces the code needed to deploy a Kermeta code for a end user (eclipse
-      GUI). It will use the interpreter as sample. </para>
+      GUI). It will use the interpreter as sample.</para>
     <section id="section_gui_deployement.link">
       <title id="section_gui_deployment.title.link">GUI deployment setup<phrase/></title>
       <para>We need to add some GUI elements to interract with the interpreter sample through
-        eclipse GUI. </para>
+        eclipse GUI. To do so, we are going to set up 2 plugin projects one to handle ui settings
+        and one to handle needed libraries :</para>
       <procedure>
         <step>
           <para>Create a new plug-in project and name it : <emphasis role="bold"
               >org.kermeta.kmlogo.logoasm.ui</emphasis>. This plugin project contains the eclipse
             extension and the code that allows to launch a kermeta program from Eclipse GUI. This
-            allows to hide to the end user in which language the transformation is written.</para>
+            hides the language in which the transformation is written in to the end user.</para>
           <para>On the creational wizard : Be sure that you set the activator at <emphasis
               role="bold">org.kermeta.kmlogo.logoasm.ui.Activator</emphasis> then hit next.</para>
           <para>Select<emphasis role="bold"> custom plug-in wizard</emphasis> and select <emphasis
@@ -1254,9 +1245,9 @@ aspect class ProcCall{
               </listitem>
               <listitem>
                 <para><emphasis role="bold">CompileLogoNXC.java</emphasis>, <emphasis role="bold"
-                    >UploadRXE.java</emphasis>, <emphasis role="bold">RunLogo.java</emphasis>,
-                    <emphasis role="bold">ConvertToLogoasm</emphasis>, <emphasis role="bold">
-                    ConvertToLogo</emphasis>, from the folder <emphasis role="bold"
+                    >RunLogo.java</emphasis>, <emphasis role="bold">ConvertToLogoasm</emphasis>,
+                    <emphasis role="bold"> ConvertToLogo</emphasis>, from the folder <emphasis
+                    role="bold"
                     >org.kermeta.kmlogo.logoasm.tutorial/parts/5.ui/uiSetting/popup</emphasis> into
                   the package <emphasis role="bold"
                     >org.kermeta.kmlogo.logoasm.ui.popup.actions</emphasis>;</para>
@@ -1271,7 +1262,7 @@ aspect class ProcCall{
               >org.kermeta.kmlogo.logoasm.ui.tools.wizard</emphasis>, delete the file <emphasis
               role="bold">KmLogoExampleWizardPage.java</emphasis> since we do not use it.</para>
           <para>It is normal that you got errors at this time just because there are needed
-            librairies that we shoul define in next step.</para>
+            librairies that we shoul define inside steps ahead.</para>
           <para>
             <caution>
               <para><emphasis role="bold">RunLogo.java</emphasis> is the code to call the Logo
@@ -1283,14 +1274,6 @@ aspect class ProcCall{
                 interpreter will not correctly find the java code called via the "extern". </para>
             </caution>
           </para>
-        </step>
-        <step>
-          <para>Set up the missing librairies : Copy the folder <emphasis role="bold"
-              >org.kermeta.kmlogo.logoasm.tutorial/parts/5.ui/uiSetting/lib</emphasis> and paste it
-            into your root project.</para>
-          <para>Unfold this folder, add <emphasis role="bold">bluecove.jar</emphasis>, <emphasis
-              role="bold">icommand.jar</emphasis>, <emphasis role="bold">RXTXcomm.jar</emphasis> to
-            the Java build path (right-click) and move to the next step.</para>
         </step>
         <step>
           <para>Copy the file <emphasis role="bold"
@@ -1315,13 +1298,90 @@ aspect class ProcCall{
             the one from <emphasis role="bold"
               >org.kermeta.kmlogo.logoasm.tutorial/parts/5.ui/uiSetting/plugin</emphasis>.</para>
           <para>Open the file and have a look at the dependecies and the export package of the
+            project. We've done with the first plugin project, let's now move on to the
+            second.</para>
+        </step>
+        <step>
+          <para>Create a new plug-in project and name it : <emphasis role="bold"
+              >org.kermeta.kmlogo.logoasm.ui.osspecific</emphasis>. This plugin project handles the
+            implementation of specific missing libraries according to each platform.</para>
+          <para>On the creational wizard : Be sure that you set the activator at <emphasis
+              role="bold">org.kermeta.kmlogo.logoasm.ui.osspecific.Activator</emphasis> then hit
+            next.</para>
+          <para>Select<emphasis role="bold"> custom plug-in wizard</emphasis> and select <emphasis
+              role="bold">Popup Menu</emphasis> then hit next.</para>
+        </step>
+        <step>
+          <para>In the <emphasis role="bold">Sample Popup Menu</emphasis><itemizedlist>
+              <listitem>
+                <para>set Submenu name to <emphasis role="bold">Logo</emphasis>;</para>
+              </listitem>
+              <listitem>
+                <para>set Action Label to <emphasis role="bold">Compile to NXT Binary
+                    (*.rxe)</emphasis>;</para>
+              </listitem>
+              <listitem>
+                <para>set Java package name to <emphasis role="bold"
+                    >org.kermeta.kmlogo.logoasm.ui.popup.actions</emphasis>;</para>
+              </listitem>
+              <listitem>
+                <para>set Action Class to <emphasis role="bold">NXC2RXE</emphasis>;</para>
+              </listitem>
+            </itemizedlist></para>
+          <para>If you are asked wether to open the plug-in perspective which you are not familiar
+            with, you can choose "No".</para>
+        </step>
+        <step>
+          <para>Copy (and replace) all the files from the folder :<itemizedlist>
+              <listitem>
+                <para><emphasis role="bold">Activator.java</emphasis> from the folder <emphasis
+                    role="bold"
+                    >org.kermeta.kmlogo.logoasm.tutorial/parts/5.ui/uiOsSpecific/ui</emphasis> into
+                  the package<emphasis role="bold"
+                    >org.kermeta.kmlogo.logoasm.ui.osspecific.ui</emphasis>;</para>
+              </listitem>
+              <listitem>
+                <para><emphasis role="bold">UploadRXE.java</emphasis> from the folder <emphasis
+                    role="bold"
+                    >org.kermeta.kmlogo.logoasm.tutorial/parts/5.ui/uiOsSpecific/popup</emphasis>
+                  into the package <emphasis role="bold"
+                    >org.kermeta.kmlogo.logoasm.ui.osspecific.actions</emphasis>;</para>
+              </listitem>
+            </itemizedlist></para>
+          <para>It is normal that you got errors at this time just because there are needed
+            librairies that we shoul define in next step.</para>
+        </step>
+        <step>
+          <para>Set up the missing librairies : Copy the folder <emphasis role="bold"
+              >org.kermeta.kmlogo.logoasm.tutorial/parts/5.ui/uiOsSpecific/lib</emphasis> and paste
+            it into your root project.</para>
+          <para>Unfold this folder, add <emphasis role="bold">bluecove.jar</emphasis>, <emphasis
+              role="bold">icommand.jar</emphasis>, <emphasis role="bold">RXTXcomm.jar</emphasis> to
+            the Java build path (right-click) and move to the next step.</para>
+        </step>
+        <step>
+          <para>Copy the file <emphasis role="bold"
+              >org.kermeta.kmlogo.logoasm.tutorial/parts/5.ui/uiOsSpecific/plugin/plugin.xml</emphasis>
+            and overwrite the one in the created project. </para>
+          <para>Open the file and have a look to the popupMenus extension. They declares the actions
+            for the end user.<note>
+              <para>You can customize with your own action by opening the <emphasis role="bold"
+                  >Extensions</emphasis> tab of<emphasis role="bold"> plugin.xml</emphasis> file and
+                choose <emphasis role="bold">add</emphasis> button to add your action.</para>
+            </note></para>
+        </step>
+        <step>
+          <para>Copy and replace the file <emphasis role="bold">META-INF/MANIFEST.MF</emphasis> by
+            the one from <emphasis role="bold"
+              >org.kermeta.kmlogo.logoasm.tutorial/parts/5.ui/uiOsSpecific/plugin</emphasis>.</para>
+          <para>Open the file and have a look at the dependecies and the export package of the
             project.</para>
-          <para>To be sure that the editor'configuration has not been overwritten, right-click on
-              <emphasis role="bold"
-              >org.kermeta.kmlogo.logoasm.emftexteditor/concrete_syntax/ASMLogo.cs </emphasis> and
-            choose to <emphasis role="bold">Generate Text Ressource</emphasis> again.</para>
         </step>
       </procedure>
+      <para>To be sure that the editor'configuration has not been overwritten, right-click on
+          <emphasis role="bold">org.kermeta.kmlogo.logoasm.emftexteditor/concrete_syntax/ASMLogo.cs
+        </emphasis> and choose to <emphasis role="bold">Generate Text Ressource</emphasis>
+        again.</para>
       <para>Now that everything is correctly configured, let's jump into the last step of this
         tutorial which is the deployement the Logo demo.</para>
     </section>
@@ -1329,8 +1389,8 @@ aspect class ProcCall{
   <chapter id="chapter_using_deployed_DSL.link">
     <title id="chapter_using_deployed_DSL.title.link">Using the deployed DSL
       environment<phrase/></title>
-    <para>It is time for testing the whole now! This last step describe the way you use your DSL
-      within an eclipse workbench.</para>
+    <para>Now that we've set everything up correctly, it's time for testing the whole! This last
+      step describe the way you use your DSL within an eclipse workbench.</para>
     <procedure>
       <step>
         <para>Start a new eclipse worbench <emphasis role="bold">Run > Run Configuration > new
@@ -1348,13 +1408,20 @@ aspect class ProcCall{
         <para>Type in the example code below to tell the turtle to draw a square. If you get some
           errors, hit <emphasis role="bold">CtrlSpace</emphasis> and enjoy the built-in context
           assistant to help you resolving.</para>
-        <figure>
-          <title>Logo : Code example</title>
-          <mediaobject>
-            <imageobject><imagedata fileref="Kermeta-Tutorial-Logo_figures/KermetaLogoCarre.png"
-              /></imageobject>
-          </mediaobject>
-        </figure>
+        <programlisting>TO carre :size [
+	REPEAT 4 [
+		Forward 5
+		REPEAT 4 [Forward 5]
+		]
+	Forward 5
+]
+end
+
+CLEAR
+
+PENDOWN
+$carre(50)
+PENUP</programlisting>
         <para>Save your program and right-click on it and choose <emphasis role="bold">Logo > Logo
             to logoasm</emphasis> in our created pop-up menu. Look at your project directory a new
           file <emphasis role="bold">carre.logoasm</emphasis> was created.</para>
@@ -1364,19 +1431,26 @@ aspect class ProcCall{
             Simulator</emphasis>.</para>
         <para>You should see our graphical representation of a turtle drawing a square like in
           section 7.4.2.</para>
+      </step>
+      <step>
+        <para>Now you should have a ".nxc" file which is a C-like language containing the
+          instructions. You convert it to a binary file ".rxe" one by choosing <emphasis role="bold"
+            >Logo > Compile to NXT Binary</emphasis> when right-clicking on ".nxc" file.</para>
         <para>Now, on the file carre.logoasm, you can use the same Logo menu to generate NXC
           compiler by choosing <emphasis role="bold">Generate NXC Code</emphasis> (If you want an
           xmi version you can File > Save your file in <emphasis role="bold">.xmi</emphasis>
           type)</para>
-        <para>Now you should have a ".nxc" file which is a C-like language containing the
-          instructions. You convert it to a binary file ".rxe" one by choosing <emphasis role="bold"
-            >Logo > Compile to NXT Binary</emphasis> when right-clicking on ".nxc" file.</para>
+      </step>
+      <step>
         <para>Finally you got a ".rxe" that you can upload by bluetooth to your Logo turtle device
           by the same menu <emphasis role="bold">Logo > Upload RXE</emphasis>.</para>
         <para>
           <caution>
             <para>You need to set up a corresponding environment (which is not covered by this
-              tutorial) if you want to implement the compiler.</para>
+              tutorial) if you want to implement the compiler. </para>
+            <para>Maybe you need to check out the <link linkend="chapter_conclusion.link"
+                >soluce</link> that we provide in order to succesfully achieve this last step and
+              see the complete version including the linux, macos, and windows integration</para>
           </caution>
         </para>
       </step>
@@ -1398,7 +1472,14 @@ aspect class ProcCall{
       <para>If you want to shortcut to the final results directly or if you want to compare your
         results with the soluce code deployed inside the Kermeta Eclipse, you may launch <emphasis
           role="bold">File -> New -> Example... -> Kermeta Samples -> Kermeta 2 Logo tuto
-          (soluce)</emphasis></para>
+          (soluce)</emphasis>. You'll then got a project structure as illustrated as below : </para>
+      <figure>
+        <title>Logo solution project structure</title>
+        <mediaobject>
+          <imageobject><imagedata fileref="Kermeta-Tutorial-Logo_figures/KermetaSoluceLogo.png"
+            /></imageobject>
+        </mediaobject>
+      </figure>
     </note>
   </chapter>
 </book>
