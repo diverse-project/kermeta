@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Traceability Documentation Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.traceability.documentation; singleton:=true
-Bundle-Version: 1.3.0
+Bundle-Version: 1.3.0.qualifier
 Bundle-Activator: fr.irisa.triskell.traceability.documentation.Activator
-Bundle-Vendor: INRIA / IRISA
+Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
