@@ -4,6 +4,10 @@
 
    <extension point="org.eclipse.help.toc">
 		<toc primary="true" file="toc.xml"></toc>
+  <toc
+        file="build/eclipse.help/KET-Manual/toc.xml"
+        primary="false">
+  </toc>
 	</extension>
 
 </plugin>

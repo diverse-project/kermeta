@@ -5,6 +5,9 @@
 	<topic label="KET Manual">
     <topic href="html/introduction.html" label="Introduction">
     </topic>
+    <topic label="Kermeta MDK" href="build/eclipse.help/KET-Manual/index.html"> 
+		<link toc="build/eclipse.help/KET-Manual/toc.xml" />
+	</topic>
     <topic href="html/syntax.html" label="Ket syntax reference">
     </topic>
     <topic href="html/example.html" label="example">
