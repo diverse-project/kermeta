@@ -120,11 +120,16 @@
   		</antcall>
 		
 		<!-- get plugin from Cyril's Emios MDE Utils  -->
-		<antcall target="provision_feature">
+		<!-- <antcall target="provision_feature">
     		<param name="feature.name" value="org.emios.mde.utils4emf.feature.feature.group, org.emios.mde.utils4kermeta.feature.feature.group"/>
 			<param name="feature.repository" value="http://emios.sourceforge.net/mde/update/"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}"/>
-  		</antcall>
+  		</antcall> -->
+		<antcall target="provision_feature">
+    		<param name="feature.name" value="org.emios.mde.utils4emf.feature.feature.group"/>
+			<param name="feature.repository" value="http://emios.sourceforge.net/mde/update/"/>
+			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}"/>
+  		</antcall> 
 		
 		<copy file="${splash.file}" 
 			todir="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}/eclipse/plugins/${org.eclipse.platform.version}"
