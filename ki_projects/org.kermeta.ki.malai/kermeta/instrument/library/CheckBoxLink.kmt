@@ -8,14 +8,13 @@ package kermeta::ki::malai::instrument;
 
 
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Link.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/SpinnerValueChanged.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/CheckBoxPressed.kmt"
 
 using kermeta::ki::malai::interaction
 
-
-abstract class SpinnerLink inherits Link
+class CheckBoxLink inherits Link
 {
 	method createInteraction() : Interaction is do
-		result := SpinnerValueChanged.new
+		result := CheckBoxPressed.new
 	end
 }

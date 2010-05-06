@@ -110,6 +110,8 @@ class ActionPrune inherits Action, Undoable {
 	
 	attribute oldViewPolicy : PrunerViewPolicy
 	
+	attribute card0 : Boolean
+	
 	
 	
 	operation setPruningParameters(pruningOperation : MetamodelPruner) : Void is do
@@ -150,7 +152,7 @@ class ActionPrune inherits Action, Undoable {
 		}
 		
 		pruningOp.inputKermetaMetamodel := metamodel
-		pruningOp.initialize(reqClasses, Bag<RequiredProperty>.new, Bag<RequiredEnumeration>.new, 3, viewPolicy, radiusEffect)
+		pruningOp.initialize(reqClasses, Bag<RequiredProperty>.new, Bag<RequiredEnumeration>.new, 3, viewPolicy, radiusEffect, card0)
 		setPruningParameters(pruningOp)
 		
 		if pruningOp.preprocess then
@@ -168,7 +170,7 @@ class ActionPrune inherits Action, Undoable {
 	
 	
 	method canDo() : Boolean is do
-		result := not metamodel.isVoid and selection.size>0 and not viewPolicy.isVoid
+		result := not metamodel.isVoid and selection.size>0 and not viewPolicy.isVoid and not radiusEffect.isVoid and not card0.isVoid
 	end
 	
 	

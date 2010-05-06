@@ -98,8 +98,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	operation initialise(eventManager : EventManager) : Void is do
 //		loadMetamodel("/examples/example2.km")
 //		loadMetamodel("/examples/example1.km")
-//		loadMetamodel("/examples/Ecore.km")
-		loadMetamodel("/examples/UML.km")
+		loadMetamodel("/examples/Ecore.km")
+//		loadMetamodel("/examples/UML.km")
 
 		self.eventManager := eventManager
 		undoCollector     := UndoCollector.new 
@@ -227,7 +227,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialiseToolbar(toolbar, undoManager.undoButton, 
 					undoManager.redoButton, selector.prunerButton, selector.flattenerButton, selector.hierarcherButton,
-					selector.handButton, pruner.grayedButton, pruner.hideButton, pruner.radiusSpinner, 
+					selector.handButton, pruner.grayedButton, pruner.hideButton, pruner.radiusSpinner, pruner.cardCheckBox,
 					eltDisplayer.opButton, eltDisplayer.attrButton)
 					
 		toolbar.components.add(undoManager.undoButton)
@@ -235,6 +235,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		toolbar.components.add(pruner.hideButton)
 		toolbar.components.add(pruner.grayedButton)
 		toolbar.components.add(pruner.radiusSpinner)
+		toolbar.components.add(pruner.cardCheckBox)
 		toolbar.components.add(selector.prunerButton)
 		toolbar.components.add(selector.hierarcherButton)
 		toolbar.components.add(selector.flattenerButton)

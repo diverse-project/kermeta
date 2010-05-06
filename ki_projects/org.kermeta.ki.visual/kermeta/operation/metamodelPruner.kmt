@@ -76,7 +76,7 @@ class MetamodelPruner
 	
 	operation initialize(requiredClasses : bag RequiredClass[0..*], requiredProperties : bag RequiredProperty[0..*], 
 						requiredEnumerations : bag RequiredEnumeration[0..*], numberOfPasses : Integer, 
-						viewPolicy : PrunerViewPolicy, radiusEffect : Integer) : Void is do
+						viewPolicy : PrunerViewPolicy, radiusEffect : Integer, card0 : Boolean) : Void is do
 		requiredMetaClasses.addAll(requiredClasses)
 		requiredMetaProperties.addAll(requiredProperties)
 		requiredMetaEnumerations.addAll(requiredEnumerations)
@@ -86,6 +86,7 @@ class MetamodelPruner
 		self.numberOfPasses := numberOfPasses
 		self.viewPolicy     := viewPolicy
 		self.radiusEffect   := radiusEffect
+		considerCard0		:= card0
 	end
 	
 	
@@ -471,8 +472,6 @@ class MetamodelPruner
 		
 		
 	operation getRequiredConcepts():Void is do
-		considerCard0 := true //FIXME
-		
 		if(isHierarchicalPruning) then
 			inputKermetaMetamodel.packages.each{p |
 				includeClassesInPackage(p, requiredKermetaMetaClasses)

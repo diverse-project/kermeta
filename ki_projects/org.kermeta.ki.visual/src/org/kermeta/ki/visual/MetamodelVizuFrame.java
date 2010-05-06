@@ -10,6 +10,7 @@ import javax.swing.AbstractButton;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -33,7 +34,7 @@ public class MetamodelVizuFrame extends JFrame {
 	
 	public static RuntimeObject initialiseToolbar(RuntimeObject toolbarRO, RuntimeObject undoButRO, RuntimeObject redoButRO, 
 							RuntimeObject prunerButRO, RuntimeObject flattenerButRO, RuntimeObject hierarcherButRO, 
-							RuntimeObject handButRO, RuntimeObject prunerGrayButRO, RuntimeObject prunerHideButRO, RuntimeObject radiusRO,
+							RuntimeObject handButRO, RuntimeObject prunerGrayButRO, RuntimeObject prunerHideButRO, RuntimeObject radiusRO, RuntimeObject cardRO,
 							RuntimeObject showOpButRO, RuntimeObject showAttrButRO) {
 		JPanel toolbar 				= (JPanel) toolbarRO.getUserData();
 		AbstractButton undoBut 		= (AbstractButton)undoButRO.getUserData();
@@ -47,6 +48,7 @@ public class MetamodelVizuFrame extends JFrame {
 		JSpinner radiusSpin			= (JSpinner)radiusRO.getUserData();
 		AbstractButton showOpBut	= (AbstractButton)showOpButRO.getUserData();
 		AbstractButton showAttrBut	= (AbstractButton)showAttrButRO.getUserData();
+		JCheckBox cardCB			= (JCheckBox)cardRO.getUserData();
 		ButtonGroup groupSelector 	= new ButtonGroup();
 		ButtonGroup groupPruner 	= new ButtonGroup();
 		
@@ -63,6 +65,7 @@ public class MetamodelVizuFrame extends JFrame {
 		toolbar.add(hideBut);
 		toolbar.add(grayedBut);
 		toolbar.add(radiusSpin);
+		toolbar.add(cardCB);
 		toolbar.add(Box.createHorizontalStrut(50));
 		toolbar.add(showOpBut);
 		toolbar.add(showAttrBut);

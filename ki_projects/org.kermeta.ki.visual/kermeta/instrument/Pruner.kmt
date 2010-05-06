@@ -35,15 +35,20 @@ class Pruner inherits Instrument
 	
 	attribute radiusSpinner : Spinner
 	
+	attribute cardCheckBox : CheckBox
+	
 	attribute radiusEffect : Integer
+	
+	attribute considerCard0 : Boolean
 	
 	
 	
 	method initialise(actionRegistry : ActionRegistry) : Void is do
 		super(actionRegistry)
 		
-		viewPolicy   := PrunerViewPolicy.hide
-		radiusEffect := 0
+		viewPolicy    := PrunerViewPolicy.hide
+		radiusEffect  := 0
+		considerCard0 := true
 	end
 	
 	
@@ -52,11 +57,13 @@ class Pruner inherits Instrument
 		hideButton    := ToggleButton.new
 		grayedButton  := ToggleButton.new
 		radiusSpinner := Spinner.new
+		cardCheckBox  := CheckBox.new
 		
 		hideButton.initialiseWithText("Hide", eventManager)
 		grayedButton.initialiseWithText("Gray", eventManager)
 		radiusSpinner.initialise(eventManager)
-		
+		cardCheckBox.initialise(eventManager)
+		cardCheckBox.setText("With card 0")
 		interimFeedback
 	end
 	
@@ -75,6 +82,8 @@ class Pruner inherits Instrument
 		hideButton.setVisible(activated)
 		grayedButton.setVisible(activated)
 		radiusSpinner.setVisible(activated)
+		cardCheckBox.setVisible(activated)
+		cardCheckBox.setSelected(considerCard0)
 	end
 }
 
@@ -119,6 +128,7 @@ class MultiPress2Prune inherits Link
 		
 		as.initialise(instrument.actionRegistry)
 		as.radiusEffect := pruner.radiusEffect
+		as.card0		:= pruner.considerCard0
 		as.viewPolicy   := pruner.viewPolicy
 		as.metamodel    := pruner.metamodel
 		action          := as
@@ -199,6 +209,7 @@ class Press2Prune inherits PressLink
 		as.initialise(instrument.actionRegistry)
 		as.radiusEffect := pruner.radiusEffect
 		as.viewPolicy   := pruner.viewPolicy
+		as.card0		:= pruner.considerCard0
 		as.metamodel    := pruner.metamodel
 		action          := as
 	end

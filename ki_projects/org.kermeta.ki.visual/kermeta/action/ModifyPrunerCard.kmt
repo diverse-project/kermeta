@@ -1,0 +1,49 @@
+/*
+ * Creation : May 6, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::visual;
+
+require "platform:/resource/org.kermeta.ki.malai/kermeta/action/Action.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::ki::malai::action
+
+
+class ModifyPrunerCard inherits Action
+{
+	attribute card0 : Boolean
+	
+	reference pruner : Pruner
+	
+	
+	
+	method doActionBody() : Void is do
+		pruner.considerCard0 := card0
+		done()
+	end
+	
+	
+	method hadEffect() : Boolean is do
+		result := isDone
+	end
+	
+	
+	method canDo() : Boolean is do
+		result := not pruner.isVoid and not card0.isVoid
+	end
+	
+	
+	method cancelledBy(action : Class) : Boolean is do
+		result := false
+	end
+	
+	
+	method isRegisterable() : Boolean is do
+		result := true
+	end
+}

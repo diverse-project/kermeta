@@ -278,6 +278,29 @@ abstract class StateMachine inherits EventHandler
 	end
 	
 	
+	method onCheckBoxPressed(checkbox : CheckBox) : Void is do
+		if(activated) then
+			var stop : Boolean init false
+			var t : Transition
+
+			currentState.transitions.exists{t |
+				if(t.isInstanceOf(CheckBoxTransition)) then
+					var cbt : CheckBoxTransition init t.asType(CheckBoxTransition)
+				
+					cbt.checkbox := checkbox
+					
+					if(t.isGuardRespected) then
+						stop := true
+						executeTransition(t)
+					end
+				end
+				
+				stop
+			}
+		end
+	end
+	
+	
 	
 	method onWheel(px : Real, py : Real, isUp : Boolean, increment : Integer, idHID : Integer) : Void is do
 		if(activated) then

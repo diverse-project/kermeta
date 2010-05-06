@@ -1,0 +1,49 @@
+/*
+ * Creation : May 6, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::interaction;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::widget
+
+
+class CheckBoxPressed inherits Interaction
+{
+	reference checkbox : CheckBox
+	
+	
+	method reinit() : Void is do
+		super
+
+		checkbox := void		
+	end
+	
+	
+	method initStateMachine() : Void is do
+		var pressed : TerminalState init TerminalState.new
+	
+		pressed.initialise("pressed")
+		addState(pressed)
+		
+		var bppt : CBPressedPressTransition init CBPressedPressTransition.new
+		bppt.cbPressed := self
+		bppt.initialise(initState, pressed)
+	end
+}
+
+
+
+class CBPressedPressTransition inherits CheckBoxTransition {
+	reference cbPressed : CheckBoxPressed
+
+	method action() : Void is do
+		cbPressed.checkbox := checkbox
+	end
+}

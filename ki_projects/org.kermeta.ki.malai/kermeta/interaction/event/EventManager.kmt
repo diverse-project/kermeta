@@ -130,9 +130,12 @@ class EventManager inherits Dispatchable
 		if(name.equals("ACTION_PERFORMED")) then
 			var src : Object init info.asType(ActionEvent).getSourceObject
 			
-			if(src.isInstanceOf(Button)) then
-				handlers.each{h | if(h.matches(src)) then h.onButtonPressed(src.asType(Button)) end }
-			//TODO else if(ae.isFromTextField) then /* TODO */ end
+			if(src.isInstanceOf(CheckBox)) then
+				handlers.each{h | if(h.matches(src)) then h.onCheckBoxPressed(src.asType(CheckBox)) end }
+			else
+				if(src.isInstanceOf(Button)) then
+					handlers.each{h | if(h.matches(src)) then h.onButtonPressed(src.asType(Button)) end }
+				end
 			end
 		else
 		if(name.equals("ITEM_STATE_CHANGED")) then

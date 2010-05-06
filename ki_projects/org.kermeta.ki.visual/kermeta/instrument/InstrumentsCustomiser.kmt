@@ -11,10 +11,12 @@ require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/ButtonPressLink.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/SpinnerLink.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/CheckBoxLink.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/ButtonPressed.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Pruner.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/action/ModifyPrunerViewPolicy.kmt"
-require "platform:/resource/org.kermeta.ki.visual/kermeta/action/ModifyRadiusEffect.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/action/ModifyPrunerRadiusEffect.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/action/ModifyPrunerCard.kmt"
 
 
 using kermeta::ki::malai::instrument
@@ -36,15 +38,47 @@ class InstrumentsCustomiser inherits Instrument
 	method initialiseLinks(eventManager : EventManager) : Void is do
 		addLink(ButtonPress2ModifyViewPolicy.new, picker, void, eventManager, false)	
 		addLink(ValueChanged2ChangeRadius.new, picker, void, eventManager, false)	
+		addLink(CheckBoxPressed2Card.new, picker, void, eventManager, false)	
 	end
 }
 
 
 
+class CheckBoxPressed2Card inherits CheckBoxLink {
+	method getActionClass() : Class is do
+		result := ModifyPrunerCard
+	end
+	
+	
+	method isConditionRespected() : Boolean is do
+		var inter    : CheckBoxPressed       init interaction.asType(CheckBoxPressed)
+		var custom   : InstrumentsCustomiser init instrument.asType(InstrumentsCustomiser)
+
+		result := custom.pruner.cardCheckBox == inter.checkbox
+	end
+	
+	
+	
+	method createAction() : Void is do
+		var cb : CheckBox init interaction.asType(CheckBoxPressed).checkbox
+		var custom  : InstrumentsCustomiser init instrument.asType(InstrumentsCustomiser)
+		var modifAction : ModifyPrunerCard init ModifyPrunerCard.new
+		
+		modifAction.initialise(instrument.actionRegistry)
+		modifAction.pruner   := custom.pruner
+		modifAction.card0    := cb.isChecked
+		action 				 := modifAction
+	end
+	
+	
+	method updateAction() : Void is do end
+}
+
+
 
 class ValueChanged2ChangeRadius inherits SpinnerLink {
 	method getActionClass() : Class is do
-		result := ModifyRadiusEffect
+		result := ModifyPrunerRadiusEffect
 	end
 	
 	
@@ -59,7 +93,7 @@ class ValueChanged2ChangeRadius inherits SpinnerLink {
 	method createAction() : Void is do
 		var spinner : Spinner init interaction.asType(SpinnerValueChanged).spinner
 		var custom  : InstrumentsCustomiser init instrument.asType(InstrumentsCustomiser)
-		var modifAction : ModifyRadiusEffect init ModifyRadiusEffect.new
+		var modifAction : ModifyPrunerRadiusEffect init ModifyPrunerRadiusEffect.new
 		
 		modifAction.initialise(instrument.actionRegistry)
 		modifAction.pruner   := custom.pruner

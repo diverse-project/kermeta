@@ -71,6 +71,12 @@ class SpinnerTransition inherits Transition {
 
 
 
+class CheckBoxTransition inherits Transition {
+	reference checkbox : CheckBox
+}
+
+
+
 
 class ButtonPressedTransition inherits Transition {
 	reference button : Button

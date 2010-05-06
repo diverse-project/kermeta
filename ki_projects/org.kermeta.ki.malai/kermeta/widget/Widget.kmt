@@ -85,6 +85,25 @@ class ToggleButton inherits Button
 
 
 
+
+class CheckBox inherits ToggleButton
+{
+	method initialise(eventManager : EventManager) : Void is do
+		extern org::kermeta::ki::malai::widget::CheckBox.initialise(self, eventManager)
+	end
+	
+	operation isChecked() : Boolean is do
+		result ?= extern org::kermeta::ki::malai::widget::CheckBox.isChecked(self)
+	end
+	
+	operation setText(text : String) : Void is do
+		extern org::kermeta::ki::malai::widget::CheckBox.setText(self, text)
+	end
+}
+
+
+
+
 class Spinner inherits GraphicalComponent
 {
 	method initialise(eventManager : EventManager) : Void is do
