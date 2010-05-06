@@ -343,7 +343,7 @@ public class PropertyChecker extends AbstractChecker {
 				 ClassDefinition cd = (ClassDefinition)ctype.getTypeDefinition();
 				 for(Property p : KermetaModelHelper.ClassDefinition.getAllPropertiesWithOpposite(builder, cd)){
 					 if(p.getLower() == 1 && p.getUpper() == 1){
-						 if((p.getOpposite() != property) && p.getOpposite().isIsComposite()) {
+						 if(!(p.getOpposite().getName().equals(property.getName())) && p.getOpposite().isIsComposite()) {
 							 builder.warning("Property " + property.getOwningClass().getName()+"."+property.getName() + " cannot be used because the target class " + cd.getName() +
 							 		" is already contained in a mandatory composition : " + new KM2KMTPrettyPrinter().ppSimplifiedPropertyInContext(p) , 
 							 	property );
