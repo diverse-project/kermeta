@@ -73,7 +73,7 @@
 		<gunzip dest="${eclipse.base.download.folder}" src="${eclipse.base.downloaded.zip}"/>
 		<untar dest="${eclipse.base.dir}" >
 			<fileset dir="${eclipse.base.download.folder}">
-        			<include name="*${eclipse.version.name}*.tar"/>
+        			<include name="*${eclipse.version.name}.tar"/>
 			</fileset>
 		</untar>
 	</target>
