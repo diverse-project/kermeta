@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
-<!-- $Id: KET-Manual.docb.xml 8015 2009-06-08 21:12:21Z kermeta_bot $ -->
+<!-- $Id$ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta Emitter Template</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date:: 2009-10-15 16:31:00#$</pubdate>
+    <pubdate>$Date::                     $</pubdate>
 
     <author>
       <firstname>Cyril</firstname>
