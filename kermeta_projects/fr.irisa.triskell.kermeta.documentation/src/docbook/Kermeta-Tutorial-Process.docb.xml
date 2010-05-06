@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Process-Tutorial.docb.xml 8828 2010-10-26 13:40:23Z hrambelo $ -->
+<!-- $Id$ -->
 <book lang="en-US" id="process_tutorial">
     <bookinfo>
         <mediaobject>
@@ -11,7 +11,7 @@
         </mediaobject>
         <title>Kermeta Tutorial : Processes to build a DSL</title>
         <pubdate>Build date: @BUILD.DATE@</pubdate>
-        <pubdate>$Date:: 2010-01-26 14:40:23#$</pubdate>
+        <pubdate>$Date::                     $</pubdate>
         <author>
             <firstname>Haja</firstname>
             <surname>Rambelontsalama</surname>
