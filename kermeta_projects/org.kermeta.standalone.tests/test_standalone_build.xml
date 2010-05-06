@@ -1,4 +1,4 @@
-<!-- $Id: test_standalone_build.xml,v 1.3 2008-07-23 12:37:28 dvojtise Exp $ -->
+<!-- $Id$ -->
 <project name="run standalone interpreter tests" default="all" basedir=".">
 	
 	<description>
