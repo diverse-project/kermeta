@@ -18,12 +18,12 @@
 	<property name="eclipse.official.repository.local.mirror" location="${env.WORKSPACE}/eclipse_repository_mirror"/>
 		
 	<target name="all" depends="">
-	    <antcall target="provision_macosx-cocoa_x86_64_base_for_kermeta"/>
+	   <!-- <antcall target="provision_macosx-cocoa_x86_64_base_for_kermeta"/>
 	    <antcall target="provision_macosx-cocoa_base_for_kermeta"/>
-		<antcall target="provision_linux_x86_64_base_for_kermeta"/>
+		<antcall target="provision_linux_x86_64_base_for_kermeta"/> -->
 	    <antcall target="provision_linux_x86_base_for_kermeta"/>
-	    <antcall target="provision_win32_base_for_kermeta"/>
-	    <antcall target="provision_win32_x86_64_base_for_kermeta"/>
+	    <!-- <antcall target="provision_win32_base_for_kermeta"/>
+	    <antcall target="provision_win32_x86_64_base_for_kermeta"/> -->
 	</target>
 
 
