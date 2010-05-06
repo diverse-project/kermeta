@@ -247,27 +247,26 @@ public class PropertyChecker extends AbstractChecker {
 		 if(property.getOpposite() != null)
 		 {
 			 KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
-			 // Opposite mismatch
-			// if ( property.getOpposite() != null ) {
-				 /*
-				  * 
-				  * If the property got an opposite, check if the container of the respective opposite property is the same,
-				  * or an aspect of the current container which is a class definition.
-				  * 
-				  */
-				 ClassDefinition container1 = null;
-				 if ( property.getOpposite().getOpposite() != null ) 
-					 container1 = (ClassDefinition) property.getOpposite().getOpposite().eContainer();
-				 ClassDefinition container2 = (ClassDefinition) property.eContainer();
 			 
-				 if ( (container1 != container2) && ! TypeDefinitionHelper.getBaseAspects(builder.getModelingUnit(),  container2).contains(container1) ) {			 
+			 /*
+			  * 
+			  * If the property got an opposite, check if the container of the respective opposite property is the same,
+			  * or an aspect of the current container.
+			  * 
+			  */
+			 ClassDefinition container1 = null;
+			 if ( property.getOpposite().getOpposite() != null ) 
+				 container1 = (ClassDefinition) property.getOpposite().getOpposite().eContainer();
+			 ClassDefinition container2 = (ClassDefinition) property.eContainer();
+			 String oppcontainerQualifiedName = NamedElementHelper.getQualifiedName(container2);
+			 if ( (container1 != container2)  && ! TypeDefinitionHelper.getAllAspects(builder,oppcontainerQualifiedName).contains(container1) && !TypeDefinitionHelper.getAllAspects(builder,oppcontainerQualifiedName).contains(container2) ) {			 
+				 builder.error(OPPOSITE_ERROR
+					 + pp .ppSimplifiedPropertyInContext(property), property);
+				 if(property.getOpposite().getOpposite() == null)
 					 builder.error(OPPOSITE_ERROR
-						 + pp .ppSimplifiedPropertyInContext(property), property);
-					 if(property.getOpposite().getOpposite() == null)
-						 builder.error(OPPOSITE_ERROR
-						+ pp.ppSimplifiedPropertyInContext(property.getOpposite()), property.getOpposite());
-					 result = false;
-				 }
+					+ pp.ppSimplifiedPropertyInContext(property.getOpposite()), property.getOpposite());
+				 result = false;
+			 }
 
 			 // Composition multiplicity
 			 if(property.getOpposite().isIsComposite()){
