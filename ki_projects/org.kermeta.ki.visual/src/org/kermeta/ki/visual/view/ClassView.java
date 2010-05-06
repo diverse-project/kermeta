@@ -9,8 +9,8 @@ public class ClassView extends EntityView {
 	
 	
 	
-	public ClassView(String name) {
-		super(name);
+	public ClassView(String name, MetamodelView metamodel) {
+		super(name, metamodel);
 	}
 
 	

@@ -8,12 +8,17 @@ package kermeta::ki::visual;
 
 require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/ButtonPressLink.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/ButtonPressed.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/action/ChangeVisibility.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/ModelExtension.kmt"
 
-
+using kermeta::standard
+using kermeta::language::structure
 using kermeta::ki::malai::instrument
 using kermeta::ki::malai::interaction
 using kermeta::ki::malai::widget
 using kermeta::ki::malai::interaction::event
+using kermeta::ki::malai::picking
 
 
 class ElementsDisplayer inherits Instrument
@@ -22,27 +27,112 @@ class ElementsDisplayer inherits Instrument
 	
 	attribute attrButton : ToggleButton
 	
+	reference metamodel : ModelingUnit
 	
-		operation initialiseWidgets(eventManager : EventManager) : Void is do
+	reference picker : Picker
+	
+	
+	operation initialiseWidgets(eventManager : EventManager) : Void is do
 		opButton   := ToggleButton.new
 		attrButton := ToggleButton.new
 		
 		opButton.initialiseWithIcon("/res/op.png", eventManager)
 		attrButton.initialiseWithIcon("/res/attr.png", eventManager)
-		
-		interimFeedback
 	end
 	
 	
 	
 	method initialiseLinks(eventManager : EventManager) : Void is do
+		addLink(ButtonPress2ChangeOperationsVisibility.new, picker, void, eventManager, false)	
+		addLink(ButtonPress2ChangePropertiesVisibility.new, picker, void, eventManager, false)	
 	end
 	
 	
 	
 	method interimFeedback() : Void is do
+		opButton.setSelected(metamodel.isOperationsVisible)
+		attrButton.setSelected(metamodel.isPropertiesVisible)
 	end
 }
+
+
+
+
+class ButtonPress2ChangeOperationsVisibility inherits ButtonPressLink
+{
+	method getActionClass() : Class is do
+		result := ChangeOperationsVisibility
+	end
+	
+	
+	
+	method isConditionRespected() : Boolean is do
+		var bp       : ButtonPressed         init interaction.asType(ButtonPressed)
+		var ins      : ElementsDisplayer     init instrument.asType(ElementsDisplayer)
+
+		result := ins.opButton==bp.button
+		stdio.writeln(result.toString)
+	end
+	
+	
+	
+	method createAction() : Void is do
+		var ins    		: ElementsDisplayer 			init instrument.asType(ElementsDisplayer)
+		var modifAction : ChangeOperationsVisibility 	init ChangeOperationsVisibility.new
+		modifAction.initialise(instrument.actionRegistry)
+		modifAction.metamodel := ins.metamodel
+		modifAction.visible := not ins.metamodel.isOperationsVisible()
+		action := modifAction
+	end
+	
+	
+	method updateAction() : Void is do end
+}
+
+
+
+class ButtonPress2ChangePropertiesVisibility inherits ButtonPressLink
+{
+	method getActionClass() : Class is do
+		result := ChangePropertiesVisibility
+	end
+	
+	
+	
+	method isConditionRespected() : Boolean is do
+		var bp       : ButtonPressed         init interaction.asType(ButtonPressed)
+		var ins      : ElementsDisplayer     init instrument.asType(ElementsDisplayer)
+
+		result := ins.attrButton==bp.button
+	end
+	
+	
+	
+	method createAction() : Void is do
+		var ins    		: ElementsDisplayer 			init instrument.asType(ElementsDisplayer)
+		var modifAction : ChangePropertiesVisibility 	init ChangePropertiesVisibility.new
+		
+		modifAction.initialise(instrument.actionRegistry)
+		modifAction.metamodel := ins.metamodel
+		modifAction.visible := not ins.metamodel.isPropertiesVisible()
+		action := modifAction
+	end
+	
+	
+	method updateAction() : Void is do end
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

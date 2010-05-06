@@ -98,8 +98,8 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 	operation initialise(eventManager : EventManager) : Void is do
 //		loadMetamodel("/examples/example2.km")
 //		loadMetamodel("/examples/example1.km")
-//		loadMetamodel("/examples/Ecore.km")
-		loadMetamodel("/examples/UML.km")
+		loadMetamodel("/examples/Ecore.km")
+//		loadMetamodel("/examples/UML.km")
 
 		self.eventManager := eventManager
 		undoCollector     := UndoCollector.new 
@@ -121,6 +121,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		customiser		 := InstrumentsCustomiser.new
 		scroller         := Scroller.new
 		
+		eltDisplayer.initialise(actionRegistry)
 		hand.initialise(actionRegistry)
 		hierarcher.initialise(actionRegistry)
 		zoomer.initialise(actionRegistry)
@@ -142,6 +143,7 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		hierarcher.metamodel := metamodel
 		hierarcher.initialiseLinks(eventManager)
 		
+		eltDisplayer.metamodel := metamodel
 		eltDisplayer.initialise(actionRegistry)
 		eltDisplayer.initialiseWidgets(eventManager)
 		selector.initialise(actionRegistry)
@@ -150,6 +152,14 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		initialiseUI
 		extern org::kermeta::ki::visual::MetamodelVizuFrame.initialise(self, metamodel, toolbar, viewPanel, eventManager)
 
+		var model2view : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
+		model2view.modelingUnit := metamodel
+		metamodel.accept(model2view)
+		
+		eltDisplayer.picker := toolbar
+		eltDisplayer.initialiseLinks(eventManager)
+		eltDisplayer.interimFeedback
+		eltDisplayer.setActivated(true)
 		zoomer.zoomable  := metamodel
 		zoomer.metamodel := metamodel
 		zoomer.initialiseLinks(eventManager)
@@ -170,10 +180,6 @@ class MetamodelCanvas inherits ActionHandler, UndoHandler {
 		undoCollector.handlers.add(undoManager)
 		undoManager.initialiseLinks(eventManager)
 		undoManager.setActivated(true)
-		
-		var model2view : Metamodel2ViewVisitor init Metamodel2ViewVisitor.new
-		model2view.modelingUnit := metamodel
-		metamodel.accept(model2view)
 		
 		//TOREMOVE
 /*		var action : PruneHierarchy init PruneHierarchy.new

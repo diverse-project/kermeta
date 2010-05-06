@@ -40,7 +40,48 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 	
 	protected EventManagerWrapper eventManager;
 	
-	protected static double zoom;
+	protected double zoom;
+	
+	protected boolean operationsVisible;
+	
+	protected boolean attributesVisible;
+	
+	
+	
+	public static RuntimeObject isOperationsVisible(RuntimeObject mmRO) {
+		MetamodelView mm = (MetamodelView) mmRO.getUserData();
+		return mm.operationsVisible ? mmRO.getFactory().getMemory().trueINSTANCE : mmRO.getFactory().getMemory().falseINSTANCE;
+	}
+	
+	
+	
+	public static RuntimeObject isPropertiesVisible(RuntimeObject mmRO) {
+		MetamodelView mm = (MetamodelView) mmRO.getUserData();
+		return mm.attributesVisible ? mmRO.getFactory().getMemory().trueINSTANCE : mmRO.getFactory().getMemory().falseINSTANCE;
+	}
+	
+	
+	
+	public static RuntimeObject setOperationsVisible(RuntimeObject mmRO, RuntimeObject visibleRO) {
+		MetamodelView mm = (MetamodelView) mmRO.getUserData();
+		boolean visible  = Boolean.getValue(visibleRO);
+		
+		mm.operationsVisible = visible;
+		
+		return mmRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	
+	
+	public static RuntimeObject setPropertiesVisible(RuntimeObject mmRO, RuntimeObject visibleRO) {
+		MetamodelView mm = (MetamodelView) mmRO.getUserData();
+		boolean visible  = Boolean.getValue(visibleRO);
+		
+		mm.attributesVisible = visible;
+		
+		return mmRO.getFactory().getMemory().voidINSTANCE;
+	}
+	
 	
 	
 	public static RuntimeObject refresh(RuntimeObject mmRO) {
@@ -106,7 +147,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 			return mmRO.getFactory().getMemory().voidINSTANCE;
 		}
 		
-		view = (EntityView) (obj==null ? new ClassView("class") : obj);
+		view = (EntityView) (obj==null ? new ClassView("class", metamodelView) : obj);
 
 		metamodelView.addEntity(position, view);
 		entityRO.setUserData(view);
@@ -250,6 +291,8 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 	public MetamodelView(EventManagerWrapper emw) {
 		super();
 
+		operationsVisible = true;
+		attributesVisible = true;
 		eventManager = emw;
 		entities  	 = new ArrayList<EntityView>();
 		links 		 = new ArrayList<LinkView>();
@@ -286,16 +329,6 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 				forest.add(levels);
 			}
 			roots.remove(0);
-		}
-		
-		for(ArrayList<ArrayList<EntityView>> subForest : forest) {
-			System.out.println("---------------------");
-			
-			for(ArrayList<EntityView> level : subForest) {
-				for(EntityView entity : level)
-					System.out.print(entity.name + " "); 
-				System.out.print("\n-\n");
-			}
 		}
 		
 		setMetamodelPosition(forest);
@@ -507,12 +540,7 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 	
 	
 	public void addClassView(String name) {
-		entities.add(new ClassView(name));
-	}
-	
-	
-	public void addAspectView(String name) {
-		entities.add(new ClassView(name));
+		entities.add(new ClassView(name, this));
 	}
 	
 	

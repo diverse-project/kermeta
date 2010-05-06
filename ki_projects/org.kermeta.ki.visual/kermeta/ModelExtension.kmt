@@ -175,6 +175,26 @@ aspect class ModelingUnit inherits Picker {
 			}
 		end
 	end
+	
+	
+	operation isOperationsVisible() : Boolean is do
+		result ?= extern org::kermeta::ki::visual::view::MetamodelView.isOperationsVisible(self)
+	end
+	
+	
+	operation isPropertiesVisible() : Boolean is do
+		result ?= extern org::kermeta::ki::visual::view::MetamodelView.isPropertiesVisible(self)
+	end
+	
+	
+	operation setOperationsVisible(visible : Boolean) : Void is do
+		extern org::kermeta::ki::visual::view::MetamodelView.setOperationsVisible(self, visible)
+	end
+	
+	
+	operation setPropertiesVisible(visible : Boolean) : Void is do
+		extern org::kermeta::ki::visual::view::MetamodelView.setPropertiesVisible(self, visible)
+	end
 }
 
 

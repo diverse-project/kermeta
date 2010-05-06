@@ -19,10 +19,10 @@ public class MetamodelVizu {
 		MetamodelVizuFrame frame = new MetamodelVizuFrame(null, new JPanel());
 		
 		MetamodelView mm = frame.mmView;
-		EntityView b = new ClassView("B");
-		EntityView c = new ClassView("C");
-		EntityView d = new ClassView("D");
-		EntityView a = new ClassView("A");
+		EntityView b = new ClassView("B", mm);
+		EntityView c = new ClassView("C", mm);
+		EntityView d = new ClassView("D", mm);
+		EntityView a = new ClassView("A", mm);
 		
 		LinkView link = new RelationView(b, a, false, true, null, null, null, null);
 		link.update();

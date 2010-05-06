@@ -20,15 +20,13 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Real;
 
 
 public abstract class EntityView extends ComponentView {
-	private static double lastx = 100;
-	private static double lasty = 100;
-	
 	public static final float WIDTH_GAP = 2f;
 	
 	public static final float HEIGHT_GAP = 4f;
 	
 	public static final float HEIGHT_HEADER_GAP = 10f;
 	
+	protected MetamodelView metamodel;//FIXME may provoke memory leaks when a class is removed but not dereferenced from the metamodel.
 	
 	protected Point2D.Double centre;
 	
@@ -172,26 +170,24 @@ public abstract class EntityView extends ComponentView {
 	
 	
 	
-	public EntityView(String name) {
+	public EntityView(String name, MetamodelView metamodel) {
 		super();
+		
+		if(metamodel==null)
+			throw new IllegalArgumentException();
+		
+		this.metamodel = metamodel;
 		this.name = name;
 		
 		attributes	   = new ArrayList<AttributeView>();
 		operations	   = new ArrayList<OperationView>();
 		fontStyle	   = Font.PLAIN;
 		path 		   = new GeneralPath();
-		centre 		   = new Point2D.Double(lastx, lasty);
+		centre 		   = new Point2D.Double();
 		lineColor 	   = getLineColor(255);
 		fillingColor   = getFillingColor(255);
 		setScale(1.);
 		update();
-		
-		if(lastx>600) {
-			lastx = 100.;
-			lasty += 280.;
-		}
-		
-		lastx += 300;
 	}
 	
 	
@@ -221,11 +217,13 @@ public abstract class EntityView extends ComponentView {
 		g.setFont(font);
 		g.drawString(name, (float)centre.x-textWidth/2, (float)centre.y-getPreferredSize().height/2+textHeight+(textHeaderHeight-textHeight)/2);
 		
-		for(AttributeView attr : attributes)
-			attr.paint(g);
+		if(metamodel.attributesVisible)
+			for(AttributeView attr : attributes)
+				attr.paint(g);
 		
-		for(OperationView op : operations)
-			op.paint(g);
+		if(metamodel.operationsVisible)
+			for(OperationView op : operations)
+				op.paint(g);
 	}
 	
 	
@@ -265,24 +263,26 @@ public abstract class EntityView extends ComponentView {
 		path.moveTo(cx-halfWidth, cy-halfHeight+textHeaderHeight);
 		path.lineTo(cx+halfWidth, cy-halfHeight+textHeaderHeight);
 		
+		if(metamodel.attributesVisible)
+			for(AttributeView attr : attributes) {
+				textHeight 	= (int) attr.getHeight();
+				yAttr 		+= textHeight;
+				attr.setPosition(xAttr, yAttr);
+				yAttr += HEIGHT_GAP;
+			}
 		
-		for(AttributeView attr : attributes) {
-			textHeight 	= (int) attr.getHeight();
-			yAttr 		+= textHeight;
-			attr.setPosition(xAttr, yAttr);
-			yAttr += HEIGHT_GAP;
-		}
-		
-		if(!operations.isEmpty() && visibility==Visibility.STANDARD) {
-			path.moveTo(cx-halfWidth, yAttr);
-			path.lineTo(cx+halfWidth, yAttr);
-		}
-		
-		for(OperationView op : operations) {
-			textHeight 	= (int) op.getHeight();
-			yAttr 		+= textHeight;
-			op.setPosition(xAttr, yAttr);
-			yAttr += HEIGHT_GAP;
+		if(metamodel.operationsVisible) {
+			if(!operations.isEmpty() && visibility==Visibility.STANDARD) {
+				path.moveTo(cx-halfWidth, yAttr);
+				path.lineTo(cx+halfWidth, yAttr);
+			}
+			
+			for(OperationView op : operations) {
+				textHeight 	= (int) op.getHeight();
+				yAttr 		+= textHeight;
+				op.setPosition(xAttr, yAttr);
+				yAttr += HEIGHT_GAP;
+			}
 		}
 	}
 	
@@ -302,23 +302,25 @@ public abstract class EntityView extends ComponentView {
 		dim.height = (int) (titleBounds.getHeight() + HEIGHT_HEADER_GAP*2);
 		dim.width  = (int) (titleBounds.getWidth() + 2*WIDTH_GAP);
 		
-		for(AttributeView attr : attributes) {
-			width = (int) attr.getWidth();
-			
-			if(dim.width<(width+WIDTH_GAP*2f))
-				dim.width = (int) (2*WIDTH_GAP+width);
-			
-			dim.height += attr.getHeight()+HEIGHT_GAP;
-		}
+		if(metamodel.attributesVisible)
+			for(AttributeView attr : attributes) {
+				width = (int) attr.getWidth();
+				
+				if(dim.width<(width+WIDTH_GAP*2f))
+					dim.width = (int) (2*WIDTH_GAP+width);
+				
+				dim.height += attr.getHeight()+HEIGHT_GAP;
+			}
 		
-		for(OperationView op : operations) {
-			width = (int) op.getWidth();
-			
-			if(dim.width<(width+WIDTH_GAP*2f))
-				dim.width = (int) (2*WIDTH_GAP+width);
-			
-			dim.height += op.getHeight()+HEIGHT_GAP;
-		}
+		if(metamodel.operationsVisible)
+			for(OperationView op : operations) {
+				width = (int) op.getWidth();
+				
+				if(dim.width<(width+WIDTH_GAP*2f))
+					dim.width = (int) (2*WIDTH_GAP+width);
+				
+				dim.height += op.getHeight()+HEIGHT_GAP;
+			}
 		
 		dim.width  = (int) (Math.max(dim.width, 30)*scale);
 		dim.height = (int) (Math.max(dim.height, 20)*scale);
@@ -330,8 +332,8 @@ public abstract class EntityView extends ComponentView {
 	
 	public Rectangle2D getBordersZoomed() {
 		Dimension dim   = getPreferredSize();
-		Rectangle2D rec = new Rectangle2D.Double((centre.x-dim.width/2.)*MetamodelView.zoom, (centre.y-dim.height/2)*MetamodelView.zoom, 
-												(dim.width)*MetamodelView.zoom, (dim.height)*MetamodelView.zoom);
+		Rectangle2D rec = new Rectangle2D.Double((centre.x-dim.width/2.)*metamodel.zoom, (centre.y-dim.height/2)*metamodel.zoom, 
+												(dim.width)*metamodel.zoom, (dim.height)*metamodel.zoom);
 		
 		return rec;
 	}
