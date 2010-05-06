@@ -12,6 +12,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,10 +27,6 @@ import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 import org.kermeta.ki.visual.MetamodelVizuFrame;
 import org.kermeta.ki.visual.view.ComponentView.Visibility;
 
-import edu.uci.ics.jung.algorithms.layout.KKLayout;
-import edu.uci.ics.jung.algorithms.layout.TreeLayout;
-import edu.uci.ics.jung.graph.DelegateForest;
-import edu.uci.ics.jung.graph.Forest;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
@@ -42,8 +39,6 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 	protected List<LinkView> links;
 	
 	protected EventManagerWrapper eventManager;
-	
-	protected Forest<EntityView, LinkView> forest;
 	
 	protected static double zoom;
 	
@@ -272,62 +267,184 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 	
 	
 	
-	public void initialiseForest() {
-		forest = new DelegateForest<EntityView, LinkView>();
-
+	public void updateLayout() {
+		Map<EntityView, EntityView> hashMap = new IdentityHashMap<EntityView, EntityView>();
+		ArrayList<ArrayList<ArrayList<EntityView>>> forest = new ArrayList<ArrayList<ArrayList<EntityView>>>();
+		ArrayList<ArrayList<EntityView>> levels;
+		
 		for(EntityView entity : entities)
 			if(entity.isVisible())
-				forest.addVertex(entity);
+				hashMap.put(entity, entity);
 		
-//		Map<EntityView, EntityView> classesAdded = new IdentityHashMap<EntityView, EntityView>();
+		ArrayList<EntityView> roots = getRootEntities(this);
 		
-		for(LinkView link : links)
-//			if(link.isVisible() && link instanceof InheritanceView) {
-//				if(classesAdded.get(link.getEntityTar())==null) {
-					forest.addEdge(link, link.getEntitySrc(), link.getEntityTar());
-//					classesAdded.put(link.entitySrc, link.entitySrc);
-//					classesAdded.put(link.entityTar, link.entityTar);
-//				}
-//			}
-	}
-	
-	
-	
-	
-	public void setTreeLayout() {
-//		MyTreeLayout<EntityView,LinkView> treeLayout   = new MyTreeLayout<EntityView,LinkView>(forest, 300, 400);
-//		Iterator<Entry<EntityView, Point2D>> locations = treeLayout.getLocations().entrySet().iterator();
-//		Entry<EntityView, Point2D> location;
-//		
-//		while(locations.hasNext()) {
-//			location = locations.next();
-//			location.getKey().setCentre(location.getValue());
-//			location.getKey().update();
-//		}
-		KKLayout<EntityView,LinkView> treeLayout = new KKLayout<EntityView,LinkView>(forest, new DistanceVisu(this));
-		treeLayout.setSize(new Dimension(2000, 2000));
-		
-		for(EntityView entity : entities) {
-			entity.setCentre((int)treeLayout.getX(entity), (int)treeLayout.getY(entity));
-			entity.update();
+		while(!roots.isEmpty()) {
+			if(hashMap.get(roots.get(0))!=null) {
+				levels = new ArrayList<ArrayList<EntityView>>(); 
+				
+				setLevels(roots.get(0), levels, hashMap);
+				forest.add(levels);
+			}
+			roots.remove(0);
 		}
 		
+		for(ArrayList<ArrayList<EntityView>> subForest : forest) {
+			System.out.println("---------------------");
+			
+			for(ArrayList<EntityView> level : subForest) {
+				for(EntityView entity : level)
+					System.out.print(entity.name + " "); 
+				System.out.print("\n-\n");
+			}
+		}
 		
-		for(LinkView link : links)
-			link.update();
-		
+		setMetamodelPosition(forest);
 		recentre();
-		repaint();
 		updatePreferredSize();
+		revalidate();
 	}
 	
 	
 	
-	
-	public Forest<EntityView, LinkView> getForest() {
-		return forest;
+	protected void setMetamodelPosition(ArrayList<ArrayList<ArrayList<EntityView>>> forest) {
+		Point2D pointMax = new Point2D.Double();
+		
+		for(ArrayList<ArrayList<EntityView>> subForest : forest)
+			if(!subForest.isEmpty())
+				setPositions(subForest, 0, pointMax.getX()+110, pointMax);
 	}
+	
+	
+	
+	protected Rectangle2D setPositions(ArrayList<ArrayList<EntityView>> subForest, int level, double x, Point2D pointMax) {
+		Rectangle2D bounds = setLevelPositions(subForest.get(level), x, 0);
+		
+		if(subForest.size()>(level+1)) {
+			Rectangle2D rec = setPositions(subForest, level+1, x, pointMax);
+			final double gapX = rec.getCenterX()-bounds.getCenterX();
+			final double gapY = bounds.getMinY() - rec.getMinY() + bounds.getHeight() + 110;
 
+			for(EntityView entity : subForest.get(level))
+				entity.setCentre((int)(entity.getCentre().x+gapX), (int)(entity.getCentre().y-gapY));
+			
+			bounds.setFrame(bounds.getX()+gapX, bounds.getY()-gapY, bounds.getWidth(), bounds.getHeight());
+		}
+		
+		if(bounds.getMaxX()>pointMax.getX())
+			pointMax.setLocation(bounds.getMaxX(), pointMax.getY());
+		
+		if(bounds.getMaxY()>pointMax.getY())
+			pointMax.setLocation(pointMax.getX(), bounds.getMaxY());
+		
+		return bounds;
+	}
+	
+	
+	
+	protected Rectangle2D setLevelPositions(final ArrayList<EntityView> level, final double x, final double y) {
+		Dimension dim 	= new Dimension(0, 0);
+		final int size 	= level.size();
+		int i			= 0;
+		Dimension entityDim;
+		EntityView entity;
+		double x2 = x;
+		final double gapClass = 110;
+		
+		while(i<size) {
+			entity    = level.get(i);
+			entityDim = entity.getPreferredSize();
+			
+			if(entityDim.height>dim.height)
+				dim.height = entityDim.height;
+			
+			entity.setCentre((int)(x2+entityDim.width/2.), (int)(y+entityDim.height/2.));
+			x2 += entityDim.width;
+			dim.width += entityDim.width;
+			
+			if((i+1)<size) {
+				dim.width 	+= gapClass;
+				x2 			+= gapClass;
+			}
+			
+			i++;
+		}
+		
+		return new Rectangle2D.Double(x, y, dim.width, dim.height);
+	}
+	
+	
+	
+	
+	protected void setLevels(EntityView root, ArrayList<ArrayList<EntityView>> levels, Map<EntityView, EntityView> hashMap) {
+		if(levels.isEmpty())
+			levels.add(new ArrayList<EntityView>());
+		
+		hashMap.remove(root);
+		levels.get(0).add(root);
+		setLevels(root, levels, 1, hashMap);
+	}
+	
+	
+	
+	protected void setLevels(EntityView entity, ArrayList<ArrayList<EntityView>> levels, int level, Map<EntityView, EntityView> hashMap) {
+		ArrayList<EntityView> subClasses = getDirectSubClasses(entity, this);
+
+		for(EntityView subClass : subClasses) {
+			if(hashMap.get(subClass)!=null) {
+				hashMap.remove(subClass);
+				
+				if((levels.size()-1)<level)
+					levels.add(new ArrayList<EntityView>());
+					
+				levels.get(level).add(subClass);
+				setLevels(subClass, levels, level+1, hashMap);
+			}
+		}
+	}
+	
+	
+	
+	public static ArrayList<EntityView> getDirectSubClasses(EntityView entity, MetamodelView metamodel) {
+		ArrayList<EntityView> sub = new ArrayList<EntityView>();
+		
+		for(LinkView link : metamodel.links)
+			if(link instanceof InheritanceView && ((InheritanceView)link).entityTar==entity)
+				sub.add(((InheritanceView)link).entitySrc);
+		
+		return sub;
+	}
+	
+	
+	
+	
+	public static ArrayList<EntityView> getRootEntities(MetamodelView metamodel) {
+		ArrayList<EntityView> roots = new ArrayList<EntityView>();
+		boolean again;
+		int i;
+		final int size = metamodel.links.size();
+		LinkView link;
+		
+		for(EntityView entityView : metamodel.entities) {
+			i = 0;
+			again = true;
+			
+			while(again && i<size) {
+				link = metamodel.links.get(i);
+				
+				if(link instanceof InheritanceView && ((InheritanceView)link).entitySrc==entityView)
+					again = false;
+				
+				i++;
+			}
+			
+			if(again && !roots.contains(entityView))
+				roots.add(entityView);
+		}
+		
+		return roots;
+	}
+	
+	
 
 
 	public void addLink(int position, LinkView link) {
@@ -607,18 +724,3 @@ public class MetamodelView extends JPanel implements Scrollable, Zoomable, Mouse
 		// 
 	}
 }
-
-
-
-class MyTreeLayout<V, E> extends TreeLayout<V, E> {
-
-	public MyTreeLayout(Forest<V, E> g, int distx, int disty) {
-		super(g, distx, disty);
-	}
-	
-	
-	public Map<V, Point2D> getLocations() {
-		return locations;
-	}
-}
-

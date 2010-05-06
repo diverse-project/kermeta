@@ -49,9 +49,6 @@ public class MetamodelVizu {
 		mm.addLink(-1, link4);
 		mm.addLink(-1, link5);
 		
-		mm.initialiseForest();
-		mm.setTreeLayout();
-		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}

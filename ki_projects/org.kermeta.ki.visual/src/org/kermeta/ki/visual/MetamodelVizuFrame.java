@@ -83,8 +83,9 @@ public class MetamodelVizuFrame extends JFrame {
 	
 	public static RuntimeObject organise(RuntimeObject appliRO) {
 		MetamodelVizuFrame interactiveSys = (MetamodelVizuFrame) appliRO.getUserData();
-		interactiveSys.mmView.initialiseForest();
-		interactiveSys.mmView.setTreeLayout();
+		interactiveSys.mmView.updateLayout();
+//		interactiveSys.mmView.initialiseForest();
+//		interactiveSys.mmView.setTreeLayout();
 		
 		return appliRO.getFactory().getMemory().voidINSTANCE;
 	}
