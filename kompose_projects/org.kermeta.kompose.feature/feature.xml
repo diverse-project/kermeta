@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.kompose.feature"
       label="Kompose"
-      version="0.0.5"
+      version="0.0.5.qualifier"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/mdk/kompose">
@@ -221,19 +221,6 @@ Inc. in the United States, other countries, or both.
          unpack="false"/>
 
    <plugin
-         id="org.kermeta.kompose.specialization.ecore.samples"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.kermeta.kompose.specialization.ecore.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.kermeta.kompose.specialization.ecore.ui"
          download-size="0"
          install-size="0"
@@ -242,19 +229,6 @@ Inc. in the United States, other countries, or both.
 
    <plugin
          id="org.kermeta.kompose.specialization.rdbschema"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.kermeta.kompose.specialization.rdbschema.samples"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.kermeta.kompose.specialization.rdbschema.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -280,11 +254,5 @@ Inc. in the United States, other countries, or both.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="org.kermeta.kompose.specialization.uml2.samples"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
 
 </feature>
