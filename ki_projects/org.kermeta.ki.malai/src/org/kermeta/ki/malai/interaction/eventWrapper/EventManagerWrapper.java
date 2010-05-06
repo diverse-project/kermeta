@@ -1,8 +1,11 @@
 package org.kermeta.ki.malai.interaction.eventWrapper;
 
 import java.awt.Component;
+import java.awt.ItemSelectable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -15,6 +18,9 @@ import java.util.List;
 
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
+import javax.swing.JSpinner;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.kermeta.ki.malai.dispatcherWrapper.DispatcherWrapper;
 
@@ -26,7 +32,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
  * @author Arnaud Blouin
  *
  */
-public class EventManagerWrapper implements MouseListener, KeyListener, MouseMotionListener, MouseWheelListener, ActionListener {
+public class EventManagerWrapper implements MouseListener, KeyListener, MouseMotionListener, MouseWheelListener, ActionListener, ItemListener, ChangeListener {
 	/** The dispatcher to notify. */
 	protected DispatcherWrapper dispatcher;
 	
@@ -132,6 +138,12 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 			
 			if(comp instanceof AbstractButton)
 				((AbstractButton)comp).addActionListener(this);
+			
+			if(comp instanceof ItemSelectable)
+				((ItemSelectable)comp).addItemListener(this);
+			
+			if(comp instanceof JSpinner)
+				((JSpinner)comp).addChangeListener(this);
 		}
 	}
 	
@@ -149,6 +161,12 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 			
 			if(comp instanceof AbstractButton)
 				((AbstractButton)comp).removeActionListener(this);
+			
+			if(comp instanceof ItemSelectable)
+				((ItemSelectable)comp).removeItemListener(this);
+			
+			if(comp instanceof JSpinner)
+				((JSpinner)comp).removeChangeListener(this);
 		}
 	}
 	
@@ -311,7 +329,29 @@ public class EventManagerWrapper implements MouseListener, KeyListener, MouseMot
 
 	public void onExitEvent() {
 		synchronized(events) {
-			events.add(new EventWrapper(EventWrapper.EXIT_EVENT, null));
+			events.add(new EventWrapper(EventWrapper.EXIT_EVENT, null));//FIXME provokes crash while quitting the program (info is null)
+		}
+		synchronized(dispatcher) {
+			dispatcher.notifyAll();
+		}
+	}
+	
+	
+
+	public void itemStateChanged(ItemEvent e) {
+		synchronized(events) {
+			events.add(new EventWrapper(EventWrapper.ITEM_STATE_CHANGED, e));
+		}
+		synchronized(dispatcher) {
+			dispatcher.notifyAll();
+		}
+	}
+
+
+
+	public void stateChanged(ChangeEvent e) {
+		synchronized(events) {
+			events.add(new EventWrapper(EventWrapper.STATE_CHANGED, e));
 		}
 		synchronized(dispatcher) {
 			dispatcher.notifyAll();
