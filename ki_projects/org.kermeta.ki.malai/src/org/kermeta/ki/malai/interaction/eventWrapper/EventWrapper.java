@@ -1,10 +1,13 @@
 package org.kermeta.ki.malai.interaction.eventWrapper;
 
-import java.awt.AWTEvent;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.util.EventObject;
+
+import javax.swing.event.ChangeEvent;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
@@ -40,6 +43,10 @@ public class EventWrapper {
 	
 	public static final java.lang.String ACTION_PERFORMED	= "ACTION_PERFORMED";
 	
+	public static final java.lang.String ITEM_STATE_CHANGED	= "ITEM_STATE_CHANGED";
+	
+	public static final java.lang.String STATE_CHANGED		= "STATE_CHANGED";
+	
 	public static final java.lang.String EXIT_EVENT			= "EXIT_EVENT";
 	
 	
@@ -47,7 +54,7 @@ public class EventWrapper {
 	protected java.lang.String name;
 	
 	/** The Java event object produced by the UI. */
-	protected AWTEvent info;
+	protected EventObject info;
 	
 	
 	/**
@@ -56,7 +63,7 @@ public class EventWrapper {
 	 * @param info The java event object.
 	 * @throws IllegalArgumentException If name is null.
 	 */
-	public EventWrapper(java.lang.String name, AWTEvent info) {
+	public EventWrapper(java.lang.String name, EventObject info) {
 		super();
 		
 		if(name==null)
@@ -94,11 +101,13 @@ public class EventWrapper {
 			EventWrapper ew  = (EventWrapper) obj;
 			// To create a Kermeta instance using the EventWrapper, we must get the type of the 
 			// Java event object (e.g. ActionEvent, MouseEvent, etc.) in order to get the good
-			// Kermeta class path to create an isntance of this Kermeta class.
-			RuntimeObject ro = self.getFactory().createObjectFromClassName(getEventClassPath(ew.info));
-			ro.setUserData(ew.info);
-			
-			return ro;
+			// Kermeta class path to create an instance of this Kermeta class.
+			try {
+				RuntimeObject ro = self.getFactory().createObjectFromClassName(getEventClassPath(ew.info));
+				ro.setUserData(ew.info);
+				
+				return ro;
+			}catch(Exception ex) {ex.printStackTrace(); }
 		}
 		
 		return self.getFactory().getMemory().voidINSTANCE;
@@ -112,12 +121,14 @@ public class EventWrapper {
 	 * @param evt The Java event object to check.
 	 * @return The Kermeta class path corresponding to the Kermeta class of the given Java Event class.
 	 */
-	public static java.lang.String getEventClassPath(AWTEvent evt) {
+	public static java.lang.String getEventClassPath(EventObject evt) {
 		if(evt instanceof ActionEvent) 		return "kermeta::ki::malai::interaction::event::ActionEvent";
 		if(evt instanceof MouseWheelEvent) 	return "kermeta::ki::malai::interaction::event::MouseWheelEvent";
 		if(evt instanceof MouseEvent) 		return "kermeta::ki::malai::interaction::event::MouseEvent";
 		if(evt instanceof KeyEvent)			return "kermeta::ki::malai::interaction::event::KeyEvent";
-		return "";
+		if(evt instanceof ItemEvent)		return "kermeta::ki::malai::interaction::event::ItemEvent";
+		if(evt instanceof ChangeEvent)		return "kermeta::ki::malai::interaction::event::ChangeEvent";
+		return "EVENT CLASS NOT FOUND";
 	}
 	
 	

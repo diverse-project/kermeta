@@ -35,12 +35,15 @@ class Pruner inherits Instrument
 	
 	attribute radiusSpinner : Spinner
 	
+	attribute radiusEffect : Integer
+	
 	
 	
 	method initialise(actionRegistry : ActionRegistry) : Void is do
 		super(actionRegistry)
 		
-		viewPolicy := PrunerViewPolicy.hide
+		viewPolicy   := PrunerViewPolicy.hide
+		radiusEffect := 0
 	end
 	
 	
@@ -115,9 +118,10 @@ class MultiPress2Prune inherits Link
 		var pruner : Pruner init instrument.asType(Pruner)
 		
 		as.initialise(instrument.actionRegistry)
-		as.viewPolicy := pruner.viewPolicy
-		as.metamodel  := pruner.metamodel
-		action        := as
+		as.radiusEffect := pruner.radiusEffect
+		as.viewPolicy   := pruner.viewPolicy
+		as.metamodel    := pruner.metamodel
+		action          := as
 	end
 }
 
@@ -193,8 +197,9 @@ class Press2Prune inherits PressLink
 		var pruner : Pruner init instrument.asType(Pruner)
 		
 		as.initialise(instrument.actionRegistry)
-		as.viewPolicy := pruner.viewPolicy
-		as.metamodel  := pruner.metamodel
-		action        := as
+		as.radiusEffect := pruner.radiusEffect
+		as.viewPolicy   := pruner.viewPolicy
+		as.metamodel    := pruner.metamodel
+		action          := as
 	end
 }

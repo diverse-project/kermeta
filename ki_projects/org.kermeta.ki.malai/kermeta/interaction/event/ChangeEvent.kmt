@@ -1,0 +1,25 @@
+/* $Id:$ 
+ * Creation : May 6, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package kermeta::ki::malai::interaction::event;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/AWTEvent.kmt"
+
+using kermeta::standard
+
+
+/**
+	Defines a class that corresponds to the Java ChangeEvent class.
+*/
+class ChangeEvent inherits AWTEvent
+{
+	operation getValue() : String is do
+		result ?= extern org::kermeta::ki::malai::interaction::eventWrapper::ChangeEventWrapper.getValue(self)
+	end
+}

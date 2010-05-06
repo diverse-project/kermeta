@@ -6,7 +6,6 @@
  */
 package kermeta::ki::malai::instrument;
 
-require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Link.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/ButtonPressed.kmt"
 

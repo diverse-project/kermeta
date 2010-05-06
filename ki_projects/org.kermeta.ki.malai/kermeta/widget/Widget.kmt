@@ -90,6 +90,10 @@ class Spinner inherits GraphicalComponent
 	method initialise(eventManager : EventManager) : Void is do
 		extern org::kermeta::ki::malai::widget::Spinner.initialise(self, eventManager)
 	end
+	
+	operation getValue() : String is do
+		result ?= extern org::kermeta::ki::malai::widget::Spinner.getValue(self)
+	end
 }
 
 

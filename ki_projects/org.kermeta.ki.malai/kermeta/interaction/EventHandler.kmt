@@ -30,5 +30,7 @@ abstract class EventHandler {
 	
 	operation onTextChanged(textCompName : String, TextValue : String) : Void is abstract
 	
+	operation onSpinnerValueModified(spinner : Spinner) : Void is abstract
+	
 	operation matches(object : Object) : Boolean is abstract
 }

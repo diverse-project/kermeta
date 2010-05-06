@@ -10,9 +10,11 @@ package kermeta::ki::visual;
 require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/ButtonPressLink.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/library/SpinnerLink.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/ButtonPressed.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/instrument/Pruner.kmt"
 require "platform:/resource/org.kermeta.ki.visual/kermeta/action/ModifyPrunerViewPolicy.kmt"
+require "platform:/resource/org.kermeta.ki.visual/kermeta/action/ModifyRadiusEffect.kmt"
 
 
 using kermeta::ki::malai::instrument
@@ -33,7 +35,40 @@ class InstrumentsCustomiser inherits Instrument
 	
 	method initialiseLinks(eventManager : EventManager) : Void is do
 		addLink(ButtonPress2ModifyViewPolicy.new, picker, void, eventManager, false)	
+		addLink(ValueChanged2ChangeRadius.new, picker, void, eventManager, false)	
 	end
+}
+
+
+
+
+class ValueChanged2ChangeRadius inherits SpinnerLink {
+	method getActionClass() : Class is do
+		result := ModifyRadiusEffect
+	end
+	
+	
+	method isConditionRespected() : Boolean is do
+		var inter    : SpinnerValueChanged   init interaction.asType(SpinnerValueChanged)
+		var custom   : InstrumentsCustomiser init instrument.asType(InstrumentsCustomiser)
+
+		result := custom.pruner.radiusSpinner == inter.spinner
+	end
+	
+	
+	method createAction() : Void is do
+		var spinner : Spinner init interaction.asType(SpinnerValueChanged).spinner
+		var custom  : InstrumentsCustomiser init instrument.asType(InstrumentsCustomiser)
+		var modifAction : ModifyRadiusEffect init ModifyRadiusEffect.new
+		
+		modifAction.initialise(instrument.actionRegistry)
+		modifAction.pruner   := custom.pruner
+		modifAction.newValue := spinner.getValue.toInteger
+		action := modifAction
+	end
+	
+	
+	method updateAction() : Void is do end
 }
 
 

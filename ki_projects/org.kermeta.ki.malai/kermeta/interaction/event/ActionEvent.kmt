@@ -4,13 +4,11 @@
  * Copyright:
  * Authors  : Arnaud Blouin
  */
-
-
 package kermeta::ki::malai::interaction::event;
 
 
 require kermeta
-require "AWTEvent.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/AWTEvent.kmt"
 
 using kermeta::standard
 

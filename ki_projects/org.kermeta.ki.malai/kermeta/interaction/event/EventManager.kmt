@@ -15,6 +15,8 @@ require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/Mouse
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/KeyEvent.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/ActionEvent.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/MouseWheelEvent.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/ItemEvent.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/ChangeEvent.kmt"
 
 using kermeta::ki::malai::dispatcher
 using kermeta::ki::malai::interaction
@@ -132,6 +134,17 @@ class EventManager inherits Dispatchable
 				handlers.each{h | if(h.matches(src)) then h.onButtonPressed(src.asType(Button)) end }
 			//TODO else if(ae.isFromTextField) then /* TODO */ end
 			end
-		end end end
+		else
+		if(name.equals("ITEM_STATE_CHANGED")) then
+			var src : Object init info.asType(ItemEvent)
+			//TODO
+		else
+		if(name.equals("STATE_CHANGED")) then
+			var src : Object init info.asType(ChangeEvent).getSourceObject
+
+			if(src.isInstanceOf(Spinner)) then
+				handlers.each{h | if(h.matches(src)) then h.onSpinnerValueModified(src.asType(Spinner)) end }
+			end
+		end end end end end
 	end
 }

@@ -71,7 +71,6 @@ class ButtonPress2ChangeOperationsVisibility inherits ButtonPressLink
 		var ins      : ElementsDisplayer     init instrument.asType(ElementsDisplayer)
 
 		result := ins.opButton==bp.button
-		stdio.writeln(result.toString)
 	end
 	
 	

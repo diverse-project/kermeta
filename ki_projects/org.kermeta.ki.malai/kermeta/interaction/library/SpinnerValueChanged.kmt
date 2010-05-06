@@ -1,0 +1,49 @@
+/*
+ * Creation : May 6, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::interaction;
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/Interaction.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/widget/Widget.kmt"
+
+using kermeta::standard
+using kermeta::ki::malai::widget
+
+
+class SpinnerValueChanged inherits Interaction
+{
+	reference spinner : Spinner
+	
+	
+	method reinit() : Void is do
+		super
+
+		spinner := void		
+	end
+	
+	
+	
+	method initStateMachine() : Void is do
+		var pressed : TerminalState init TerminalState.new
+	
+		pressed.initialise("changed")
+		addState(pressed)
+		
+		var bppt : ValueChangedSpinnerTransition init ValueChangedSpinnerTransition.new
+		bppt.spinnerValueChanged := self
+		bppt.initialise(initState, pressed)
+	end
+}
+
+
+class ValueChangedSpinnerTransition inherits SpinnerTransition {
+	reference spinnerValueChanged : SpinnerValueChanged
+
+	method action() : Void is do
+		spinnerValueChanged.spinner := spinner
+	end
+}

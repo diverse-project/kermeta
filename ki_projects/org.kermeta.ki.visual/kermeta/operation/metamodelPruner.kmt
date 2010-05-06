@@ -39,7 +39,7 @@ class MetamodelPruner
 {
 	attribute considerCard0 : Boolean
 
-	attribute radius : Integer 
+	attribute radiusEffect : Integer 
 
 	attribute isHierarchicalPruning : Boolean
 	
@@ -75,14 +75,17 @@ class MetamodelPruner
 	
 	
 	operation initialize(requiredClasses : bag RequiredClass[0..*], requiredProperties : bag RequiredProperty[0..*], 
-						requiredEnumerations : bag RequiredEnumeration[0..*], numberOfPasses : Integer, viewPolicy : PrunerViewPolicy) : Void is do
+						requiredEnumerations : bag RequiredEnumeration[0..*], numberOfPasses : Integer, 
+						viewPolicy : PrunerViewPolicy, radiusEffect : Integer) : Void is do
 		requiredMetaClasses.addAll(requiredClasses)
 		requiredMetaProperties.addAll(requiredProperties)
 		requiredMetaEnumerations.addAll(requiredEnumerations)
 		requiredMetaProperties.addAll(requiredProperties)
 		requiredMetaEnumerations.addAll(requiredEnumerations)
+		
 		self.numberOfPasses := numberOfPasses
-		self.viewPolicy := viewPolicy
+		self.viewPolicy     := viewPolicy
+		self.radiusEffect   := radiusEffect
 	end
 	
 	
@@ -499,9 +502,7 @@ class MetamodelPruner
 			//	includePropertiesInPackage(p, requiredKermetaMetaProperties)
 			}
 			
-			radius := 0//FIXME
-			
-			if(radius<=0) then
+			if(radiusEffect<=0) then
 				includeAllMultiLevelSuperClasses(requiredKermetaMetaClasses)
 				includeAllObligatoryPropertiesAndTheirTypes
 				//Add all multilevel superclasses
@@ -515,7 +516,7 @@ class MetamodelPruner
 				var formerClasses : set ClassDefinition[0..*] init Set<ClassDefinition>.new
 			
 				from var cpt : Integer init 0
-				until cpt>=radius
+				until cpt>=radiusEffect
 				loop
 					requiredKermetaMetaClasses.each{mc | formerClasses.add(mc)}
 					includeAllObligatoryPropertiesAndTheirTypes

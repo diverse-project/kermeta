@@ -8,14 +8,10 @@
 package kermeta::ki::malai::instrument;
 
 
-require kermeta
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Link.kmt"
 require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/Press.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/EventManager.kmt"
 
-using kermeta::standard
 using kermeta::ki::malai::interaction
-using kermeta::ki::malai::interaction::event
 
 
 abstract class PressLink inherits Link

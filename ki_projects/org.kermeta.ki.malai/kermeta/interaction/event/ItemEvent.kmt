@@ -1,0 +1,21 @@
+/*
+ * Creation : May 6, 2010
+ * Licence  : EPL 
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
+ */
+package kermeta::ki::malai::interaction::event;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/event/AWTEvent.kmt"
+
+using kermeta::standard
+
+
+/**
+	Defines a class that corresponds to the Java ItemEvent class.
+*/
+class ItemEvent inherits AWTEvent
+{
+}

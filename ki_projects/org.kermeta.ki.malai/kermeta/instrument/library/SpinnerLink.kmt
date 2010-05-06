@@ -1,5 +1,5 @@
 /*
- * Creation : March 5, 2010
+ * Creation : May 6, 2010
  * Licence  : EPL 
  * Copyright: INRIA Rennes, Triskell
  * Authors  : Arnaud Blouin
@@ -9,14 +9,14 @@ package kermeta::ki::malai::instrument;
 
 
 require "platform:/resource/org.kermeta.ki.malai/kermeta/instrument/Link.kmt"
-require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/DnD.kmt"
+require "platform:/resource/org.kermeta.ki.malai/kermeta/interaction/library/SpinnerValueChanged.kmt"
 
 using kermeta::ki::malai::interaction
 
 
-abstract class DnDLink inherits Link
+abstract class SpinnerLink inherits Link
 {
 	method createInteraction() : Interaction is do
-		result := DnD.new
+		result := SpinnerValueChanged.new
 	end
 }

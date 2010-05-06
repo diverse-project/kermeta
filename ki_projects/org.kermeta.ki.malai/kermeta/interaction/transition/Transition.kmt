@@ -64,6 +64,11 @@ abstract class Transition
 
 
 
+class SpinnerTransition inherits Transition {
+	reference spinner : Spinner
+}
+
+
 
 
 

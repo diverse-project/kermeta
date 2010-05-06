@@ -1,6 +1,6 @@
 package org.kermeta.ki.malai.interaction.eventWrapper;
 
-import java.awt.AWTEvent;
+import java.util.EventObject;
 
 import org.kermeta.ki.malai.kermetaMap.RuntimeObject2JavaMap;
 
@@ -19,9 +19,8 @@ public abstract class AWTEventWrapper {
 		final Object obj = self.getUserData();
 		RuntimeObject ro;
 		
-		if(obj instanceof AWTEvent){
-			final Object src = ((AWTEvent)obj).getSource();
-			
+		if(obj instanceof EventObject){
+			final Object src = ((EventObject)obj).getSource();
 			ro = src==null ? null : RuntimeObject2JavaMap.MAP.get(src); 
 		}
 		else ro = null;

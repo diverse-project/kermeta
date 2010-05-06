@@ -24,4 +24,15 @@ public abstract class Spinner {
 		
 		return spinnerRO.getFactory().getMemory().voidINSTANCE; 
 	}
+	
+	
+	public static RuntimeObject getValue(RuntimeObject spinnerRO) {
+		JSpinner spinner = (JSpinner) spinnerRO.getUserData();
+		
+		if(spinner==null)
+			return spinnerRO.getFactory().getMemory().voidINSTANCE; 
+
+		String value = spinner.getValue().toString();
+		return fr.irisa.triskell.kermeta.runtime.basetypes.String.create(value, spinnerRO.getFactory());
+	}
 }
