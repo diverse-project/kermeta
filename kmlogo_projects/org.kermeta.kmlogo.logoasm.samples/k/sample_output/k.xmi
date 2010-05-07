@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://kmLogo.ecore/ASM">
+<ASM:LogoProgram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
   <instructions xsi:type="ASM:ProcDeclaration" name="k" procCall="//@instructions.2">
     <args name="scale"/>
     <block>
@@ -69,4 +69,4 @@
   <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
     <actualArgs xsi:type="ASM:Constant" integerValue="4"/>
   </instructions>
-</ASM:Block>
+</ASM:LogoProgram>
