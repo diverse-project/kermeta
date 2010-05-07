@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <psf version="2.0">
 <provider id="org.eclipse.team.svn.core.svnnature">
+<project reference="1.0.1,svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/Docbook_projects/ant-docbook-styler,ant-docbook-styler,70b1f174ba59001f1f45aa78288809e2;svn+ssh://scm.gforge.inria.fr/svn/kermeta;svn+ssh://scm.gforge.inria.fr/svn/kermeta;branches;tags;trunk;true;3b3ea266-f0f1-470e-95cb-5b2c9abc2e95;svn+ssh://scm.gforge.inria.fr/svn/kermeta;;false;;;22"/>
 <project reference="1.0.1,svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/utilities_projects/fr.irisa.triskell.cache.utilities,fr.irisa.triskell.cache.utilities,70b1f174ba59001f1f45aa78288809e2;svn+ssh://scm.gforge.inria.fr/svn/kermeta;svn+ssh://scm.gforge.inria.fr/svn/kermeta;branches;tags;trunk;true;3b3ea266-f0f1-470e-95cb-5b2c9abc2e95;svn+ssh://scm.gforge.inria.fr/svn/kermeta;;false;;;22"/>
 <project reference="1.0.1,svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/kermeta_projects/fr.irisa.triskell.eclipse.util,fr.irisa.triskell.eclipse.util,70b1f174ba59001f1f45aa78288809e2;svn+ssh://scm.gforge.inria.fr/svn/kermeta;svn+ssh://scm.gforge.inria.fr/svn/kermeta;branches;tags;trunk;true;3b3ea266-f0f1-470e-95cb-5b2c9abc2e95;svn+ssh://scm.gforge.inria.fr/svn/kermeta;;false;;;22"/>
 <project reference="1.0.1,svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/kermeta_projects/fr.irisa.triskell.kermeta,fr.irisa.triskell.kermeta,70b1f174ba59001f1f45aa78288809e2;svn+ssh://scm.gforge.inria.fr/svn/kermeta;svn+ssh://scm.gforge.inria.fr/svn/kermeta;branches;tags;trunk;true;3b3ea266-f0f1-470e-95cb-5b2c9abc2e95;svn+ssh://scm.gforge.inria.fr/svn/kermeta;;false;;;22"/>
+<project reference="1.0.1,svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/kermeta_projects/fr.irisa.triskell.kermeta.documentation,fr.irisa.triskell.kermeta.documentation,70b1f174ba59001f1f45aa78288809e2;svn+ssh://scm.gforge.inria.fr/svn/kermeta;svn+ssh://scm.gforge.inria.fr/svn/kermeta;branches;tags;trunk;true;3b3ea266-f0f1-470e-95cb-5b2c9abc2e95;svn+ssh://scm.gforge.inria.fr/svn/kermeta;;false;;;22"/>
 <project reference="1.0.1,svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/ecore_projects/fr.irisa.triskell.kermeta.ecore,fr.irisa.triskell.kermeta.ecore,70b1f174ba59001f1f45aa78288809e2;svn+ssh://scm.gforge.inria.fr/svn/kermeta;svn+ssh://scm.gforge.inria.fr/svn/kermeta;branches;tags;trunk;true;3b3ea266-f0f1-470e-95cb-5b2c9abc2e95;svn+ssh://scm.gforge.inria.fr/svn/kermeta;;false;;;22"/>
 <project reference="1.0.1,svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/kermeta_projects/fr.irisa.triskell.kermeta.framework,fr.irisa.triskell.kermeta.framework,70b1f174ba59001f1f45aa78288809e2;svn+ssh://scm.gforge.inria.fr/svn/kermeta;svn+ssh://scm.gforge.inria.fr/svn/kermeta;branches;tags;trunk;true;3b3ea266-f0f1-470e-95cb-5b2c9abc2e95;svn+ssh://scm.gforge.inria.fr/svn/kermeta;;false;;;22"/>
 <project reference="1.0.1,svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/kermeta_projects/fr.irisa.triskell.kermeta.interpreter,fr.irisa.triskell.kermeta.interpreter,70b1f174ba59001f1f45aa78288809e2;svn+ssh://scm.gforge.inria.fr/svn/kermeta;svn+ssh://scm.gforge.inria.fr/svn/kermeta;branches;tags;trunk;true;3b3ea266-f0f1-470e-95cb-5b2c9abc2e95;svn+ssh://scm.gforge.inria.fr/svn/kermeta;;false;;;22"/>
@@ -49,6 +51,12 @@
 <project reference="1.0.1,svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/kermeta_projects/org.kermeta.structurecompiler.compiled,org.kermeta.structurecompiler.compiled,70b1f174ba59001f1f45aa78288809e2;svn+ssh://scm.gforge.inria.fr/svn/kermeta;svn+ssh://scm.gforge.inria.fr/svn/kermeta;branches;tags;trunk;true;3b3ea266-f0f1-470e-95cb-5b2c9abc2e95;svn+ssh://scm.gforge.inria.fr/svn/kermeta;;false;;;22"/>
 <project reference="1.0.1,svn+ssh://scm.gforge.inria.fr/svn/kermeta/trunk/uml2_projects/org.kermeta.uml2.profiles.model,org.kermeta.uml2.profiles.model,70b1f174ba59001f1f45aa78288809e2;svn+ssh://scm.gforge.inria.fr/svn/kermeta;svn+ssh://scm.gforge.inria.fr/svn/kermeta;branches;tags;trunk;true;3b3ea266-f0f1-470e-95cb-5b2c9abc2e95;svn+ssh://scm.gforge.inria.fr/svn/kermeta;;false;;;22"/>
 </provider>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1273225119589_4" label="devsupport_projects" name="devsupport_projects">
+<item elementID="=org.antlr.antlr2" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" id="1273229909912_11" label="Docbook_projects" name="Docbook_projects">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/ant-docbook-styler" type="4"/>
+</workingSets>
 <workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" id="1273225288436_10" label="emfatic_projects" name="emfatic_projects">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.runtime.core" type="4"/>
 </workingSets>
@@ -89,6 +97,7 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.runner.ui" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.simk" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.structurecompiler.compiled" type="4"/>
+<item elementID="=fr.irisa.triskell.kermeta.documentation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" id="1273225153630_5" label="log4j_projects" name="log4j_projects">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.slf4j.eclipse" type="4"/>
@@ -110,8 +119,5 @@
 </workingSets>
 <workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" id="1273224996922_1" label="utilities_projects" name="utilities_projects">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.cache.utilities" type="4"/>
-</workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1273225119589_4" label="devsupport_projects" name="devsupport_projects">
-<item elementID="=org.antlr.antlr2" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 </psf>
