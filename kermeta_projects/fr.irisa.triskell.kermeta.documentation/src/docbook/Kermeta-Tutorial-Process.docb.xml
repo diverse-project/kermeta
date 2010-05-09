@@ -11,7 +11,7 @@
         </mediaobject>
         <title>Kermeta Tutorial : Processes to build a DSL</title>
         <pubdate>Build date: @BUILD.DATE@</pubdate>
-        <pubdate>$Date::                     $</pubdate>
+        <pubdate/>
         <author>
             <firstname>Haja</firstname>
             <surname>Rambelontsalama</surname>
@@ -62,10 +62,10 @@
     <chapter id="chapter_introduction.link">
         <title id="chapter_introduction.title.link">Introduction<phrase/></title>
         <para>This document is an user-guide to create a Domain Specific Language (DSL) using the
-            Kermeta language. This main document explains the different processes to rapidly achieve
-            this goal. Thanks to the implemented fonctionalities inside Kermeta language, we can
-            easily manipulate models, weave an compose elements without altering the core of our
-            model.</para>
+            Kermeta language. This main document is a 10 minute-reading document and explains the
+            different processes to rapidly achieve this goal. Thanks to the implemented
+            fonctionalities inside Kermeta language, we can easily manipulate models, weave an
+            compose elements without altering the core of our model.</para>
         <important>
             <para>We recommend to the beginner to read this document till the end first. Advanced
                 user might directly jump to the concrete examples : the <ulink
@@ -81,23 +81,27 @@
         <para>The big picture of this tutorial is illustrated in the figure below: <anchor
                 id="big_picture_para"/><orderedlist>
                 <listitem>
-                    <para>starting from an ecore metamodel;</para>
+                    <para>starting <link linkend="chapter_define_abstract_syntax.link">from an ecore
+                            metamodel</link>;</para>
                 </listitem>
                 <listitem>
-                    <para>we will provide editors to create its model instances; </para>
+                    <para>we will <link linkend="chapter_define_editor.title.link">provide
+                            editors</link> to create its model instances; </para>
                 </listitem>
                 <listitem>
-                    <para>we will add contracts (through aspect weaving with Kermeta) to manage
-                        constraints specified inside the metamodel;</para>
+                    <para>we will <link linkend="chapter_contract.link">add contracts</link>
+                        (through aspect weaving with Kermeta) to manage constraints specified inside
+                        the metamodel;</para>
                 </listitem>
                 <listitem>
-                    <para>we will add some behaviour (through aspect weaving with Kermeta) where you
-                        can bind with another framework (provide GUI defined with another language -
-                        Java for example). </para>
+                    <para>we will <link linkend="chapter_behaviour.link">add some behaviour</link>
+                        (through aspect weaving with Kermeta) where you can bind with another
+                        framework (provide GUI defined with another language - Java for example).
+                    </para>
                 </listitem>
             </orderedlist></para>
         <figure>
-            <title>MDK overview</title>
+            <title>MDK overview<anchor id="mdk_big_picture"/></title>
             <mediaobject>
                 <imageobject><imagedata
                         fileref="Kermeta-Tutorial-Process_figures/KermetaProcess.png"
@@ -380,8 +384,8 @@
             Compilation<phrase/></title>
         <para>In this next part of the tutorial, we manage the transformation of the metamodel or
             its compilation to another environnement.</para>
-        <para>Through the same mechanism of aspect weaving a class in Kermeta, you map your language
-            with another environement through weaving "compilation". </para>
+        <para>Through the same mechanism of aspect weaving provided in Kermeta, you map your
+            language with another environement through weaving "compilation". </para>
         <note>
             <para>Code example on how to implement those weaving "compilation" are available at
                 :</para>
@@ -401,7 +405,7 @@
     <chapter id="chapter_ui_improvements.link">
         <title id="chapter_ui_improvements.title.link">UI improvements</title>
         <para>The final step is deploying the DSL environment inside an eclipse GUI. These
-            improvements begin with an appropriate texteditor for the DSL (popupmenus, icons,
+            improvements begin with an appropriate UI for the DSL (editor, popupmenus, icons,
             wizards, ...). Then through the Plug-in Development Environment (PDE) offered by
             eclipse, ui elements are added to interract with the interpreter of our DSL. </para>
         <note>
@@ -421,7 +425,8 @@
         <para>This is the end of this tutorial, we cover the needed processes to build DSL with
             Kermeta. Through this tutorial, we provided a Model Delevelopment Kit (MDK) for Logo
             language. Now, using Kermeta, you should be able to implement your own DSL language
-            starting from <emphasis role="bold">"just" an .ecore file</emphasis>.</para>
+            starting from <emphasis role="bold">"just" an .ecore file</emphasis> (remember our first
+                <link linkend="mdk_big_picture">illustration</link>) .</para>
         <para>You may either move on to the full examples through the <ulink
                 url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"> FSM
                 tutorial</ulink> and the <ulink
