@@ -6,7 +6,7 @@ Bundle-Version: 1.3.2.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.kermeta.kmlogo.logoasm.model.kmLogo,
  org.kermeta.kmlogo.logoasm.model.kmLogo.ASM,
  org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl,

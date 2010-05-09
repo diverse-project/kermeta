@@ -1,9 +1,12 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+/*$Id : LogoOutlinePageTreeViewer.java v 1.3 May 8, 2010 9:18:16 AM hrambelo Exp $
+* Project : org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo
+* File : 	LogoOutlinePageTreeViewer.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1 2010
+* ----------------------------------------------------------------------------
+* Creation date : May 8, 2010
+* Authors : Haja RAMBELONTSALAMA
+*/
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui;
 
 // This custom implementation of a TreeViewer expands the tree

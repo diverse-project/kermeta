@@ -1,9 +1,12 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+/*$Id : LogoCopiedEObjectInternalEList.java v 1.3 May 8, 2010 9:18:29 AM hrambelo Exp $
+* Project : org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo
+* File : 	LogoCopiedEObjectInternalEList.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1 2010
+* ----------------------------------------------------------------------------
+* Creation date : May 8, 2010
+* Authors : Haja RAMBELONTSALAMA
+*/
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.util;
 
 public class LogoCopiedEObjectInternalEList extends org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.util.LogoCopiedEList<org.eclipse.emf.ecore.EObject> implements org.eclipse.emf.ecore.util.InternalEList<org.eclipse.emf.ecore.EObject> {

@@ -1,9 +1,12 @@
-/**
- * <copyright>
- * </copyright>
- *
- * $Id$
- */
+/*$Id : KmLogoPackage.java v 1.3 May 8, 2010 9:38:22 AM hrambelo Exp $
+* Project : org.kermeta.kmlogo.logoasm.model
+* File : 	KmLogoPackage.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1 2010
+* ----------------------------------------------------------------------------
+* Creation date : May 8, 2010
+* Authors : Haja RAMBELONTSALAMA
+*/
 package org.kermeta.kmlogo.logoasm.model.kmLogo;
 
 import org.eclipse.emf.ecore.EDataType;

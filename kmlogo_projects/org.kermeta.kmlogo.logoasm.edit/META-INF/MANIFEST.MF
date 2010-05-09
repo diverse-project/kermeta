@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: org.kermeta.kmlogo.logoasm.kmLogo.provider.ASMLogoEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.kermeta.kmlogo.logoasm.kmLogo.provider,
  org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.provider
 Require-Bundle: org.eclipse.core.runtime,
