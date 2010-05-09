@@ -10,7 +10,7 @@
     </mediaobject>
     <title>Logo Tutorial : Building kmLogo DSL using Kermeta</title>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date:: 2010-01-26 14:40:23#$</pubdate>
+    <pubdate/>
     <author>
       <firstname>Haja</firstname>
       <surname>Rambelontsalama</surname>
@@ -62,11 +62,11 @@
       of the different part of the code so as to build a programming environnement for the Logo. </para>
     <note>
       <para>We <emphasis role="bold">recommend</emphasis> that you <emphasis role="bold"
-          >firstly</emphasis> read the <ulink url="../Kermeta-Tutorial-Process/index.html"
-          >process-tutorial</ulink> in order to look at the "<ulink
-          url="../Kermeta-Tutorial-Process/index.html#big_picture_para"><emphasis role="bold">big
-            picture</emphasis></ulink>" of what we are going to build here and to have an overview
-        of the <emphasis role="bold">methodology</emphasis> to follow.</para>
+          >firstly</emphasis> read the <emphasis role="bold">Building DSL main process</emphasis>
+        tutorial (See Building DSL with kermeta tutorials) in order to look at the "<emphasis
+          role="bold">big picture</emphasis>" (See Introduction chapter) of what we are going to
+        build here and to have an overview of the <emphasis role="bold">methodology</emphasis> to
+        follow.</para>
     </note>
   </chapter>
   <chapter id="chapter_installation.link">
@@ -87,6 +87,9 @@
           </listitem>
           <listitem>
             <para>You should be familiar with eclipse modelling environnement.</para>
+          </listitem>
+          <listitem>
+            <para>You should have notion of aspect oriented programmation (AOP).</para>
           </listitem>
         </itemizedlist></para>
     </section>
@@ -132,7 +135,10 @@
     <section id="section_from_ecore_to_generated_code.link">
       <title id="section_from_ecore_to_generated_code.title.link">From Ecore to genenerated
         code</title>
-      <para>In order to define the metamodel, process as follow : </para>
+      <para>In order to define the metamodel, we are going to process as follow : create an ecore
+        file, set up its nsURI and create its corresponding generator model (.genmodel). Then we are
+        going to define the different needed informations (base package, model directory, file
+        extension, plugin ID,...). See the Example below for a step by step : </para>
       <procedure>
         <step>
           <para>Inside the project <emphasis role="bold">
@@ -148,7 +154,9 @@
             Back, Forward, Left, PenUp, ... Some are expressions, for example : Plus, Minus, ... And
             some are control structures, for example : If, while, Repeat, ...</para>
         </step>
-        <step><anchor id="set_ns_uri"/><para>Let's now set up the property of our metamodel: </para><procedure>
+        <step>
+          <para>Let's now set up the property of our metamodel (if not already set): </para>
+          <procedure>
             <step>
               <para>Inside the file <emphasis role="bold">ASMLogo.ecore</emphasis>;</para>
             </step>
@@ -156,11 +164,10 @@
               <para>Select <emphasis role="bold">kmLogo</emphasis> package, right-click on it and
                 choose <emphasis role="bold">show properties view</emphasis>;</para>
             </step>
-            <step>
-              <para>Set the <emphasis role="bold">ns URI</emphasis> to
-                "http://www.kermeta.org/kmLogo" and save it;</para>
-            </step>
-          </procedure></step>
+            <step><anchor id="set_ns_uri"/><para>Set the <emphasis role="bold">ns URI</emphasis> to
+                "http://www.kermeta.org/kmLogo" and save it;</para></step>
+          </procedure>
+        </step>
         <step>
           <para>Then, create an <emphasis role="bold">EMF Generator Model</emphasis> (File > New..)
             and name it <emphasis role="bold">ASMLogo.genmodel</emphasis>, hit next and chosse
@@ -242,11 +249,6 @@
                   </listitem>
                 </itemizedlist></para>
             </step>
-            <step>
-              <para>Save and go back to the genmodel editor, right-click on the <emphasis
-                  role="bold">kmLogo package</emphasis> (unfold ASMLogo) and choose<emphasis
-                  role="bold"> show properties View</emphasis> (if not already open); </para>
-            </step>
           </procedure>
         </step>
         <step>
@@ -265,7 +267,8 @@
               >org.kermeta.kmlogo.logoasm.model.editor</emphasis>.</para>
           <para>You may <emphasis role="bold">copy</emphasis> the files ASMLogo.ecore and
             ASMLogo.genmodel inside a folder <emphasis role="bold"
-              >org.kermeta.kmlogo.logoasm.model/model</emphasis> in order to store them.</para>
+              >org.kermeta.kmlogo.logoasm.model/model</emphasis> in order to be coherent with the
+            plugin intention (store the model)</para>
           <para>You should now have a project structure as illustrated below : <figure>
               <title>Project structure after generating the model, edit and editor code</title>
               <mediaobject>
@@ -509,7 +512,7 @@ package ASM
       <para>If you want to learn more, follow the complete example below or check out the other
         available example in the FSM Tutorial.</para>
       <example>
-        <title>Example creation of the dots.xmi</title>
+        <title>Creation of the dots.xmi</title>
         <orderedlist>
           <listitem>
             <para>Right-click on the file "dots.xmi" and choose "open with .. > Sample Reflective
@@ -523,8 +526,8 @@ package ASM
           <listitem>
             <para>Then, right-click on "Instruction Right" and choose <emphasis role="bold">New
                 child > Angle Constant</emphasis> to define the angle of the rotation. Select the
-              element "Constant" and in the properties view, set the <emphasis role="bold">Intetger
-                Value</emphasis> to 90.</para>
+              element "Constant" and in the properties view (right clic show property view), set the
+                <emphasis role="bold">Intetger Value</emphasis> to 90.</para>
           </listitem>
           <listitem>
             <para>We set the fisrt instruction. In the editor, right-click and choose <emphasis
@@ -561,10 +564,10 @@ package ASM
     </section>
     <section id="section_tree_view_editor.link">
       <title id="section_tree_view_editor.title.link">Tree view editor<phrase/></title>
-      <para>Using the tree-view editor is the second way to manipulate metamodel instances. Open
-        your ecore file and select a top level element inside your metamodel (for instance
-        LogoProgram). Right-click on that element and seclect New Child or New Sibling to add
-        elements like we've seen on the previous section.</para>
+      <para>Using the tree-view editor is the second way to manipulate model instances. Open your
+        ecore file and select a top level element inside your metamodel (for instance LogoProgram).
+        Right-click on that element and seclect New Child or New Sibling to add elements like we've
+        seen on the previous section.</para>
       <para>This step is also largly covered in the<ulink
           url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"> FSM
         tutorial</ulink>.</para>
@@ -576,7 +579,7 @@ package ASM
         metamodel and can be processed by the interpreter. In this example we will use <ulink
           url="http://www.emftext.org">EMFText</ulink> to generate the concrete syntax of our
         metamodel. </para>
-      <para>Follow these steps to set up the concrete syntax of your language and its assocoated
+      <para>Follow these steps to set up the concrete syntax of your language and its associated
         textual editor : </para>
       <procedure>
         <step>
@@ -599,20 +602,19 @@ package ASM
               url="http://www.emftext.org/index.php/EMFText_CS_Language_Reference">emftext CS
               language reference</ulink>.</para>
           <para>Here, we defined the file extension of our DSL (logo), link it to our metamodel
-            (through the nsUri) and define the style and the concrete rules for each concept that we
-            want to map.</para>
+            (through the nsUri) and define the style and the concrete rules for each meta-class
+            concept that we want to map.</para>
           <tip>
             <para>If you meet with some errors, be sure that you <link linkend="set_ns_uri"
                 >register</link> your ecore and that the path to your genmodel is correct.</para>
           </tip>
         </step>
-        <step>
-          <para>Right-click on <emphasis role="bold">ASMLogo.cs</emphasis> file and choose <emphasis
-              role="bold">generate Text Ressource</emphasis>.</para>
-          <para>This would add two project in your structure : <emphasis role="bold"
-              >org.emftext.commons.antlr3_1_1</emphasis> and <emphasis role="bold"
-              >org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo</emphasis>.</para>
-        </step>
+        <step><anchor id="generate_text_resource"/><para>Right-click on <emphasis role="bold"
+              >ASMLogo.cs</emphasis> file and choose <emphasis role="bold">generate Text
+              Ressource</emphasis>.</para><para>This would add two project in your project structure
+            : <emphasis role="bold">org.emftext.commons.antlr3_1_1</emphasis> and <emphasis
+              role="bold"
+          >org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo</emphasis>.</para></step>
       </procedure>
       <para>You have just finished to set up your text editor. Keep going through this tutorial to
         test it inside a real interpreter.</para>
@@ -628,7 +630,7 @@ package ASM
   <chapter id="chapter_model_manipulation_kermeta.link">
     <title id="chapter_model_manipulation_kermeta.title.link">Model manipulation in
       Kermeta<phrase/></title>
-    <para>Thesa are few steps on how to manipulate metamodel in Kermeta. This is about why to
+    <para>These are few steps on how to manipulate metamodel in Kermeta. This is about why to
       register your metamodel and how to load/save it.</para>
     <section id="section_package_registry.link">
       <title id="section_package_registry.title.link">Package registry<phrase/></title>
@@ -676,16 +678,19 @@ endpackage
     <section id="section_kermeta_implementation.link">
       <title id="section_kermeta_implementation.title.link">Implementation in
         Kermeta<phrase/></title>
-      <para>Kermeta offers same mechanism as OCL to navigate inside the elements. Through aspect
-        weaving, Kermeta allow to reopen a class and weave an aspect inside in order to add this
-        pre/post conditions. Let's implement the example above in Kermeta :</para>
+      <para>Kermeta offers same mechanism as OCL to navigate inside the elements
+        (&lt;Collection>.each, &lt;Collection>.forAll, ...). Through aspect weaving, Kermeta allow
+        to reopen a class and weave an aspect inside in order to add this pre/post conditions. Let's
+        implement the example above in Kermeta :</para>
       <procedure>
         <step>
           <para>Create a new plug-in project <emphasis role="bold"
               >org.kermeta.kmlogo.logoasm.srcKermeta</emphasis> (set all by default, hit next and
-            finish). </para>
-          <para>Create a folder <emphasis role="bold">kermeta</emphasis> inside. This is the folder
-            where we are going to put all kermeta sources for this tutorial.</para>
+            finish, if you're not familiar with plug-in perspective choose no as ansqwer to that
+            question). </para>
+          <para>Create a folder <emphasis role="bold">kermeta</emphasis> on the root of this
+            project. This is the folder where we are going to put all kermeta sources for this
+            tutorial.</para>
         </step>
         <step>
           <para>Inside the folder <emphasis role="bold">kermeta</emphasis>, create a folder
@@ -761,8 +766,9 @@ aspect class ProcCall{
                 toolbar) or hit the kermeta validator ("check this file" button in Kermeta
                 perspective toolbar)</para>
             </note></para>
-          <para>On your console view, you should view the result below (you can review the models to
-            see its conformance to the ecore ) : </para>
+          <para>On your console view, you should view the result below though the model instances
+            are conform to our metamodel (you can right-clic and "validate" to see its conformance
+            to the ecore ) : </para>
           <figure>
             <title>Kermeta application checkModels output</title>
             <mediaobject>
@@ -789,10 +795,12 @@ aspect class ProcCall{
       <title>Preparation of the environnement<phrase/></title>
       <para>First of all let's prepare the appropriate environnement needed for this implementation.
         The concerned project during this chapter will be <emphasis role="bold"
-          >org.kermeta.kmlogo.logoasm.srcKermeta</emphasis>.</para>
+          >org.kermeta.kmlogo.logoasm.srcKermeta</emphasis>. We'll setup the graphical UI with java
+        AWT and the Java Math wrapper in order add math to Kermeta and be able to call them later
+        with aspect weaving.</para>
       <procedure>
         <step>
-          <para>Copy the folders and its content inside <emphasis role="bold"
+          <para>Copy/paste the folders and its content from <emphasis role="bold"
               >org.kermeta.kmlogo.logoasm.tutorial/parts/3.behaviour/...</emphasis> into <emphasis
               role="bold">org.kermeta.kmlogo.logoasm.srcKermeta/kermeta/</emphasis> i.e.: <itemizedlist>
               <listitem>
@@ -825,9 +833,10 @@ aspect class ProcCall{
               </listitem>
               <listitem>
                 <para><emphasis role="bold">3.JavaInterfaces/wrapper/</emphasis> into the package
-                    <emphasis role="bold">org.kermeta.kmLogowrapper</emphasis> (you may delete the
-                  folder <emphasis role="bold">3.JavaInterfaces/gui/</emphasis> and <emphasis
-                    role="bold">3.JavaInterfaces/wrapper/</emphasis> after).</para>
+                    <emphasis role="bold">org.kermeta.kmLogowrapper</emphasis> (as they are now
+                  empty, you may delete the folder <emphasis role="bold"
+                    >3.JavaInterfaces/gui/</emphasis> and <emphasis role="bold"
+                    >3.JavaInterfaces/wrapper/</emphasis> after).</para>
               </listitem>
             </itemizedlist></para>
         </step>
@@ -866,10 +875,12 @@ aspect class ProcCall{
     <section id="section_dynamic_semantic.link">
       <title id="section_dynamic_semantic.title.link">Dynamic semantic<phrase/><anchor
           id="dynamic_semantic"/></title>
-      <para>Thanks to the weaving, we are going to add some operations and properties to the
-        ASMLogo.ecore in order to provide an operational semantics to Logo. </para>
-      <para>We will weave an interpreter to the ASM by adding "eval" operations to the ASM
-        metaclasses. This eval operation will pass the actual context of the program.</para>
+      <para>Here we are going to learn how to weave an aspect with Kermeta. Thanks to these weaving,
+        we are going to add some operations and properties to the ASMLogo.ecore in order to provide
+        an operational semantics to Logo. </para>
+      <para>We will weave an interpreter to the ASM by adding "eval" operations to the ASM metaclass
+        where there's a behaviour. This eval operation will pass the actual context of the
+        program.</para>
       <procedure>
         <step>
           <para>Open <emphasis role="bold"
@@ -989,14 +1000,14 @@ aspect class ProcCall{
                   <para>calling the appropriate java code </para>
                 </listitem>
               </itemizedlist></para>
-            <tip>
+            <important>
               <para>Remember that the objects in java side must implement a RuntimeObject in order
                 to be manipulated with Kermeta. This is why all static method contains Runtimeobject
                 parameters which is the Kermeta object kept in memory at runtime, and at last, must
                 return a RuntimeObject. </para>
               <para>Also notice that the conversion to java types is done by the <emphasis
                   role="bold">TYPE.create()</emphasis> method.</para>
-            </tip>
+            </important>
           </step>
           <step>
             <para>So in order to use these wrapper, simply <emphasis role="bold">import</emphasis>
@@ -1109,23 +1120,24 @@ aspect class ProcCall{
               instance.</para>
             <para>Now that we are sure that the VM is working correctly, let's test the interpreter
               that we have set up. To do so, open the file <emphasis role="bold"
-                >5.Simulator/tests/carre.kmt</emphasis>. It will instanciate a simulator, load a
-              model from <emphasis role="bold">1.Models/carre.logoasm</emphasis> and execute the
-              interpreter. Right-click the file and<emphasis role="bold"> run as kermeta
+                >5.Simulator/tests/carre.kmt</emphasis>. It will instanciate a simulator, load an
+              instance model from <emphasis role="bold">1.Models/carre.logoasm</emphasis> and
+              execute the interpreter. Right-click the file and<emphasis role="bold"> run as kermeta
                 application</emphasis>, you should obtain the same illustration as before. </para>
           </step>
           <step>
-            <para>Let's have another test. Remember the "dots.xmi" that you created before inside
-                <emphasis role="bold">org.kermeta.kmlogo.logoasm.model/model</emphasis> (if not a
+            <para>Let's have another test. Remember the "dots.xmi" that you've created before inside
+                <emphasis role="bold">org.kermeta.kmlogo.logoasm.model/model</emphasis> (if not, a
               copy is available at "org.kermeta.kmlogo.logoasm.tutorial/parts/1.metamodel/model").
               Move it to the folder <emphasis role="bold"
                 >org.kermeta.kmlogo.logoasm.srcKermeta/kermeta/1.Models/</emphasis>. Open it and
               save it as <emphasis role="bold">dots.logoasm</emphasis> so as to convert it as a
-              model instance understandable by our interpreter. Now, open the file <emphasis
-                role="bold">5.Simulator/tests/dots.kmt</emphasis> and see that it calls the model
-              we've just renamed. Run it as a Kermeta application to see the results (you can test
-              the other models (*.logoasm) in the folder <emphasis role="bold"
-              >1.Model</emphasis>).</para>
+              model instance understandable by our interpreter (remember the file extension that
+              we've set up in the .genmodel). Now, open the file <emphasis role="bold"
+                >5.Simulator/tests/dots.kmt</emphasis> and see that it calls the model we've just
+              renamed. Run it as a Kermeta application to see the results (you can test the other
+              models (*.logoasm) in the folder <emphasis role="bold"
+              >5.Simulator/test</emphasis>).</para>
           </step>
         </procedure>
       </section>
@@ -1152,13 +1164,13 @@ aspect class ProcCall{
           robot).</para>
       </step>
       <step>
-        <para>Find operation "compileToNXC" of class "If" and observe how the code is
-          compiled.</para>
+        <para>Find operation "compileToNXC" of class "If" and observe how the code is compiled
+          (remember that you can navigate through the outline view).</para>
       </step>
       <step>
-        <para>Find operation compileToStdOut() of class "NXCCompiler", normally (when we fix the
-          compiler as now it is hard coded) it should call an operation "getAPI" to define the base
-          API of the target platform.</para>
+        <para>Find operation compileToStdOut() of class "NXCCompiler". Normally it should call an
+          operation "getAPI" to define the base API of the target platform but right now it is hard
+          coded until we fix the compiler.</para>
         <para>To launch compiling, refer to the <link linkend="chapter_using_deployed_DSL.link"
             >"chapter 10 Using the deployed DSL environment"</link>.</para>
       </step>
@@ -1182,9 +1194,9 @@ aspect class ProcCall{
             hides the language in which the transformation is written in to the end user.</para>
           <para>On the creational wizard : Be sure that you set the activator at <emphasis
               role="bold">org.kermeta.kmlogo.logoasm.ui.Activator</emphasis> then hit next.</para>
-          <para>Select<emphasis role="bold"> custom plug-in wizard</emphasis> and select <emphasis
-              role="bold">New File Wizard</emphasis> and <emphasis role="bold">Popup Menu</emphasis>
-            then hit next.</para>
+          <para>Select<emphasis role="bold"> custom plug-in wizard</emphasis> and hit next, select
+              <emphasis role="bold">New File Wizard</emphasis> and <emphasis role="bold">Popup
+              Menu</emphasis> then hit next.</para>
         </step>
         <step>
           <para>In the <emphasis role="bold">New Wizard Option</emphasis> : <itemizedlist>
@@ -1209,7 +1221,8 @@ aspect class ProcCall{
                 <para>set Wizard name to <emphasis role="bold">KmLogo samples</emphasis>;</para>
               </listitem>
               <listitem>
-                <para>file extension to <emphasis role="bold">.kmt</emphasis>.</para>
+                <para>file extension to <emphasis role="bold">kmt</emphasis> and inital file name to
+                    <emphasis role="bold">new_file.kmt</emphasis>.</para>
               </listitem>
             </itemizedlist></para>
           <para>In the <emphasis role="bold">Sample Popup Menu</emphasis><itemizedlist>
@@ -1225,7 +1238,8 @@ aspect class ProcCall{
                     >org.kermeta.kmlogo.logoasm.ui.popup.actions</emphasis>;</para>
               </listitem>
               <listitem>
-                <para>set Action Class to <emphasis role="bold">RunLogo</emphasis>;</para>
+                <para>set Action Class to <emphasis role="bold">RunLogo</emphasis> and hit
+                  finish;</para>
               </listitem>
             </itemizedlist></para>
           <para>If you are asked wether to open the plug-in perspective which you are not familiar
@@ -1263,17 +1277,7 @@ aspect class ProcCall{
               role="bold">KmLogoExampleWizardPage.java</emphasis> since we do not use it.</para>
           <para>It is normal that you got errors at this time just because there are needed
             librairies that we shoul define inside steps ahead.</para>
-          <para>
-            <caution>
-              <para><emphasis role="bold">RunLogo.java</emphasis> is the code to call the Logo
-                interpreter (the operational behavior we've defined for it). Open it and look at how
-                is manipulated the kmt file;</para>
-              <para><emphasis role="bold">RunLogoK.java</emphasis> is code calls Kermeta interpreter
-                with a given kermeta program and parameters. In addition to initializing the
-                interpreter, this code also sets the correct java classpath. Otherwise, Kermeta
-                interpreter will not correctly find the java code called via the "extern". </para>
-            </caution>
-          </para>
+          <para/>
         </step>
         <step>
           <para>Copy the file <emphasis role="bold"
@@ -1300,6 +1304,18 @@ aspect class ProcCall{
           <para>Open the file and have a look at the dependecies and the export package of the
             project. We've done with the first plugin project, let's now move on to the
             second.</para>
+          <caution>
+            <para><emphasis role="bold">RunLogo.java</emphasis> is the code to call the Logo
+              interpreter (the operational behavior we've defined for it). Open it and look at how
+              is manipulated the kmt file;</para>
+            <para><emphasis role="bold">RunLogoK.java</emphasis> is code calls Kermeta interpreter
+              with a given kermeta program and parameters. In addition to initializing the
+              interpreter, this code also sets the correct java classpath. Otherwise, Kermeta
+              interpreter will not correctly find the java code called via the "extern". </para>
+          </caution>
+          <para>You should now have no errors (if there's one left reffering to an unresolved
+            "LogoResourceFactory" regenerate the code for texteditor (repeat <link
+              linkend="generate_text_resource">step 4 of 4.3</link>))</para>
         </step>
         <step>
           <para>Create a new plug-in project and name it : <emphasis role="bold"
@@ -1308,8 +1324,8 @@ aspect class ProcCall{
           <para>On the creational wizard : Be sure that you set the activator at <emphasis
               role="bold">org.kermeta.kmlogo.logoasm.ui.osspecific.Activator</emphasis> then hit
             next.</para>
-          <para>Select<emphasis role="bold"> custom plug-in wizard</emphasis> and select <emphasis
-              role="bold">Popup Menu</emphasis> then hit next.</para>
+          <para>Select<emphasis role="bold"> custom plug-in wizard</emphasis> and hit next, select
+              <emphasis role="bold">Popup Menu</emphasis> then hit next.</para>
         </step>
         <step>
           <para>In the <emphasis role="bold">Sample Popup Menu</emphasis><itemizedlist>
@@ -1322,10 +1338,12 @@ aspect class ProcCall{
               </listitem>
               <listitem>
                 <para>set Java package name to <emphasis role="bold"
-                    >org.kermeta.kmlogo.logoasm.ui.popup.actions</emphasis>;</para>
+                      >org.kermeta.kmlogo.logoasm.<emphasis role="underline"
+                    >ui.popup</emphasis>.actions</emphasis>;</para>
               </listitem>
               <listitem>
-                <para>set Action Class to <emphasis role="bold">NXC2RXE</emphasis>;</para>
+                <para>set Action Class to <emphasis role="bold">NXC2RXE</emphasis> then hit
+                  finish;</para>
               </listitem>
             </itemizedlist></para>
           <para>If you are asked wether to open the plug-in perspective which you are not familiar
@@ -1338,7 +1356,7 @@ aspect class ProcCall{
                     role="bold"
                     >org.kermeta.kmlogo.logoasm.tutorial/parts/5.ui/uiOsSpecific/ui</emphasis> into
                   the package<emphasis role="bold"
-                    >org.kermeta.kmlogo.logoasm.ui.osspecific.ui</emphasis>;</para>
+                    >org.kermeta.kmlogo.logoasm.ui.osspecific</emphasis>;</para>
               </listitem>
               <listitem>
                 <para><emphasis role="bold">UploadRXE.java</emphasis> from the folder <emphasis
@@ -1408,20 +1426,17 @@ aspect class ProcCall{
         <para>Type in the example code below to tell the turtle to draw a square. If you get some
           errors, hit <emphasis role="bold">CtrlSpace</emphasis> and enjoy the built-in context
           assistant to help you resolving.</para>
-        <programlisting>TO carre :size [
-	REPEAT 4 [
-		Forward 5
-		REPEAT 4 [Forward 5]
+        <programlisting>to carre :size 
+	Repeat 4 [
+		
+			Forward :size 
+			Right 90 
 		]
-	Forward 5
-]
-end
-
-CLEAR
-
-PENDOWN
-$carre(50)
-PENUP</programlisting>
+end 
+Clear 
+PenDown 
+carre ( 50 ) 
+PenUp </programlisting>
         <para>Save your program and right-click on it and choose <emphasis role="bold">Logo > Logo
             to logoasm</emphasis> in our created pop-up menu. Look at your project directory a new
           file <emphasis role="bold">carre.logoasm</emphasis> was created.</para>
@@ -1433,24 +1448,34 @@ PENUP</programlisting>
           section 7.4.2.</para>
       </step>
       <step>
-        <para>Now you should have a ".nxc" file which is a C-like language containing the
-          instructions. You convert it to a binary file ".rxe" one by choosing <emphasis role="bold"
-            >Logo > Compile to NXT Binary</emphasis> when right-clicking on ".nxc" file.</para>
-        <para>Now, on the file carre.logoasm, you can use the same Logo menu to generate NXC
-          compiler by choosing <emphasis role="bold">Generate NXC Code</emphasis> (If you want an
-          xmi version you can File > Save your file in <emphasis role="bold">.xmi</emphasis>
-          type)</para>
+        <para>As you can see in the popup menu there are other available actions that we've defined
+          early inside the extension of the plugin.xml file. Now if you want to compile, right clic
+          on the file carre.logoasm, and choose <emphasis role="bold">Generate NXC Code</emphasis>
+          (If you want an xmi version you can File > Save your file in <emphasis role="bold"
+            >.xmi</emphasis> type). You should see a newly created file carre.nxc which is a C-like
+          language containing the instructions. </para>
+        <note>
+          <para>For some reason (an uri converter, path setup, ..) some may not find the *.nxc file
+            inside their project but into a folder "platform:" and its subfolder in their workspace.
+            You should manually copy it into your workspace</para>
+        </note>
       </step>
       <step>
-        <para>Finally you got a ".rxe" that you can upload by bluetooth to your Logo turtle device
-          by the same menu <emphasis role="bold">Logo > Upload RXE</emphasis>.</para>
+        <para>From that .nxc file, you can convert it to a binary file ".rxe" one by choosing
+            <emphasis role="bold">Logo > Compile to NXT Binary</emphasis>. Finally you got a ".rxe"
+          that you can upload by bluetooth to your Logo turtle device by the same menu <emphasis
+            role="bold">Logo > Upload RXE</emphasis>. If the above submenues don't show see the
+          caution below.</para>
         <para>
           <caution>
-            <para>You need to set up a corresponding environment (which is not covered by this
-              tutorial) if you want to implement the compiler. </para>
+            <para>For this last step, you need to set up a corresponding environment (which is not
+              covered by nor the target of this tutorial) if you want to implement the compiler. </para>
             <para>Maybe you need to check out the <link linkend="chapter_conclusion.link"
                 >soluce</link> that we provide in order to succesfully achieve this last step and
-              see the complete version including the linux, macos, and windows integration</para>
+              see the complete version including the linux, macos, and windows integration.
+              Additionaly, you may also folow instructions inside <emphasis role="bold"
+                >lib/INSTALL.rxtx</emphasis> inside the project <emphasis role="bold"
+                >org.kermeta.kmlogo.logoasm.ui.osspecific</emphasis>.</para>
           </caution>
         </para>
       </step>
@@ -1463,14 +1488,16 @@ PENUP</programlisting>
       order to you being able to build your own one from <emphasis role="bold">"just" an .ecore file
         and Kermeta</emphasis>. Like the <ulink
         url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"> FSM tutorial</ulink>, this
-      was a concrete example, the process is described in the <ulink
-        url="../Kermeta-Tutorial-Process/index.html">process-tutorial</ulink>. Information on
-      Kermeta language is available inside the <ulink url="http://www.kermeta.org/documents/manual/"
-        >manual</ulink> and other tutorials on Kermeta are available on<ulink
-        url="http://www.kermeta.org/documents/tutorials/"> tutorial page</ulink>.</para>
+      was a concrete example, the process is described in the <emphasis role="bold">Building DSL
+        main process</emphasis> tutorial (See Building DSL with kermeta tutorials) with  the
+        "<emphasis role="bold">big picture</emphasis>" (See Introduction chapter) of what we've
+      built here. Information on Kermeta language is available inside the <ulink
+        url="http://www.kermeta.org/documents/manual/">manual</ulink> and other tutorials on Kermeta
+      are available on<ulink url="http://www.kermeta.org/documents/tutorials/"> tutorial
+        page</ulink>.</para>
     <note>
-      <para>If you want to shortcut to the final results directly or if you want to compare your
-        results with the soluce code deployed inside the Kermeta Eclipse, you may launch <emphasis
+      <para>If you want to compare your results with the soluce code deployed inside the Kermeta
+        Eclipse or if you want to shortcut to the final results directly, you may launch <emphasis
           role="bold">File -> New -> Example... -> Kermeta Samples -> Kermeta 2 Logo tuto
           (soluce)</emphasis>. You'll then got a project structure as illustrated as below : </para>
       <figure>
