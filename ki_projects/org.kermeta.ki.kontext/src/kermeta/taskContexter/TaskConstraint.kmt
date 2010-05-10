@@ -1,13 +1,9 @@
-/* $Id:$ 
+/*
  * Creation : February 19, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin
  */
-@mainClass "org::kermeta::ki::kontext::TaskConstraintModel"
-
-
 package org::kermeta::ki::kontext;
 
 require kermeta

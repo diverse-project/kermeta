@@ -1,12 +1,9 @@
-/* $Id:$ 
+/*
  * Creation : January 25, 2010
  * Licence  : EPL 
  * Copyright:
  * Authors  : Arnaud Blouin
  */
-@mainClass "org::kermeta::ki::kontext::house::House"
-
-
 package org::kermeta::ki::kontext::house;
 
 

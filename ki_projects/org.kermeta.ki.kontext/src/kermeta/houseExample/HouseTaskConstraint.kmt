@@ -1,13 +1,9 @@
-/* $Id:$ 
+/*
  * Creation : February 19, 2010
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            ablouin
+ * Copyright: INRIA Rennes, Triskell
+ * Authors  : Arnaud Blouin 
  */
-@mainClass "org::kermeta::ki::kontext::house::HouseTaskConstraintModel"
-
-
 package org::kermeta::ki::kontext::house;
 
 
