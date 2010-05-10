@@ -487,7 +487,7 @@ class MetamodelPruner
 				size2 := requiredKermetaMetaClasses.size
 			end
 			
-			requiredKermetaMetaClasses.each{clazz | stdio.writeln(clazz.name)
+			requiredKermetaMetaClasses.each{clazz |
 				clazz.ownedAttribute.each{attr |
 					if(not attr.type.isInstanceOf(PrimitiveType)) then
 						extern org::kermeta::ki::visual::view::ComponentView.onPruning(viewPolicy==PrunerViewPolicy.hide, attr)
