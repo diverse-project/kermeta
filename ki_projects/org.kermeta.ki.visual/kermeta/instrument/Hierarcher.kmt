@@ -63,8 +63,10 @@ class Press2GetHierarchy inherits PressLink
 		var hierarcher : Hierarcher init instrument.asType(Hierarcher)
 		
 		prune.initialise(instrument.actionRegistry)
-		prune.metamodel  := hierarcher.metamodel
-		prune.viewPolicy := PrunerViewPolicy.hide
-		action           := prune
+		prune.metamodel    := hierarcher.metamodel
+		prune.radiusEffect := 0
+		prune.card0		   := false
+		prune.viewPolicy   := PrunerViewPolicy.hide
+		action             := prune
 	end
 }
