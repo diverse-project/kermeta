@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
+  <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="kermeta_v2_component_architecture">
+    <packagedElement xmi:type="uml:Component" xmi:id="_fJnw0FnPEd-yi4T5V_c02g" name="Kermeta_V2">
+      <ownedComment xmi:id="_nFhlgFnREd-yi4T5V_c02g" annotatedElement="_lEBAwFnREd-yi4T5V_c02g">
+        <body>Merge 2 km files&#xD;
+(could/should be written with kompose)</body>
+      </ownedComment>
+      <ownedComment xmi:id="_FQu_4FnSEd-yi4T5V_c02g" annotatedElement="_jkuYQFnREd-yi4T5V_c02g">
+        <body>V1 : simply merge all km into a single one&#xD;
+V2: Apply generic aspect to their possible location (see François)</body>
+      </ownedComment>
+      <ownedComment xmi:id="_uUW8AFnXEd-yi4T5V_c02g" annotatedElement="_fdLFUFnXEd-yi4T5V_c02g">
+        <body>return a compiled version of the km</body>
+      </ownedComment>
+      <ownedComment xmi:id="_S-NYUFnZEd-yi4T5V_c02g" annotatedElement="_OPe_YFnZEd-yi4T5V_c02g">
+        <body>Exposes the compiled code in the user workspace.&#xD;
+(for building new bundles)</body>
+      </ownedComment>
+      <ownedComment xmi:id="_Fap3QFnaEd-yi4T5V_c02g" annotatedElement="_Z6A0MFnWEd-yi4T5V_c02g">
+        <body>Has code completion&#xD;
+</body>
+      </ownedComment>
+      <ownedComment xmi:id="_-tXGYFwqEd-wC_r7VJ74rg" annotatedElement="_pZkWoFnPEd-yi4T5V_c02g">
+        <body>Calculates the loading context</body>
+      </ownedComment>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_lnPUgFnPEd-yi4T5V_c02g" name="FileDependenciesGraph" clientDependency="_z_w5QlnPEd-yi4T5V_c02g">
+        <interfaceRealization xmi:id="_z_w5QlnPEd-yi4T5V_c02g" name="InterfaceRealization1" supplier="_pZkWoFnPEd-yi4T5V_c02g" client="_lnPUgFnPEd-yi4T5V_c02g" contract="_pZkWoFnPEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_pZkWoFnPEd-yi4T5V_c02g" name="IFileGraphService"/>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_6xlyYFnPEd-yi4T5V_c02g" name="KMResourceLoader" clientDependency="_9If_YlnPEd-yi4T5V_c02g _FN4LElnQEd-yi4T5V_c02g _pTFeslnQEd-yi4T5V_c02g _0miI4lnQEd-yi4T5V_c02g _NxyTklnVEd-yi4T5V_c02g _1pU6ElwqEd-wC_r7VJ74rg">
+        <interfaceRealization xmi:id="_pTFeslnQEd-yi4T5V_c02g" name="InterfaceRealization1" supplier="_eRGX8FnQEd-yi4T5V_c02g" client="_6xlyYFnPEd-yi4T5V_c02g" contract="_eRGX8FnQEd-yi4T5V_c02g"/>
+        <interfaceRealization xmi:id="_0miI4lnQEd-yi4T5V_c02g" name="InterfaceRealization2" supplier="_slEM0FnQEd-yi4T5V_c02g" client="_6xlyYFnPEd-yi4T5V_c02g" contract="_slEM0FnQEd-yi4T5V_c02g"/>
+        <interfaceRealization xmi:id="_NxyTklnVEd-yi4T5V_c02g" name="InterfaceRealization3" supplier="_IKsIMFnVEd-yi4T5V_c02g" client="_6xlyYFnPEd-yi4T5V_c02g" contract="_IKsIMFnVEd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_9If_YlnPEd-yi4T5V_c02g" name="Usage1" supplier="_pZkWoFnPEd-yi4T5V_c02g" client="_6xlyYFnPEd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_FN4LElnQEd-yi4T5V_c02g" name="Usage2" supplier="_AhzdgFnQEd-yi4T5V_c02g" client="_6xlyYFnPEd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_1pU6ElwqEd-wC_r7VJ74rg" name="Usage3" supplier="_nfMWoFwqEd-wC_r7VJ74rg" client="_6xlyYFnPEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="__YVUAFnPEd-yi4T5V_c02g" name="TypeResolver" clientDependency="_EamUAlnQEd-yi4T5V_c02g">
+        <interfaceRealization xmi:id="_EamUAlnQEd-yi4T5V_c02g" name="InterfaceRealization1" supplier="_AhzdgFnQEd-yi4T5V_c02g" client="__YVUAFnPEd-yi4T5V_c02g" contract="_AhzdgFnQEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_AhzdgFnQEd-yi4T5V_c02g" name="ITypeResolverService"/>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_eRGX8FnQEd-yi4T5V_c02g" name="ITypeResolvedResourceService"/>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_slEM0FnQEd-yi4T5V_c02g" name="IResourceErrorService"/>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_6ev5cFnQEd-yi4T5V_c02g" name="AspectChecker" clientDependency="_8ejOAlnQEd-yi4T5V_c02g _2PgfklnVEd-yi4T5V_c02g">
+        <interfaceRealization xmi:id="_2PgfklnVEd-yi4T5V_c02g" name="InterfaceRealization1" supplier="_slEM0FnQEd-yi4T5V_c02g" client="_6ev5cFnQEd-yi4T5V_c02g" contract="_slEM0FnQEd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_8ejOAlnQEd-yi4T5V_c02g" name="Usage1" supplier="_eRGX8FnQEd-yi4T5V_c02g" client="_6ev5cFnQEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_X5UhEFnREd-yi4T5V_c02g" name="FileDependenciesView" clientDependency="_bRUXolnREd-yi4T5V_c02g">
+        <packagedElement xmi:type="uml:Usage" xmi:id="_bRUXolnREd-yi4T5V_c02g" name="Usage1" supplier="_pZkWoFnPEd-yi4T5V_c02g" client="_X5UhEFnREd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_jkuYQFnREd-yi4T5V_c02g" name="KmWeaver" clientDependency="_4ldnIFnREd-yi4T5V_c02g _6sQ7klnREd-yi4T5V_c02g __jWe8VnUEd-yi4T5V_c02g">
+        <interfaceRealization xmi:id="__jWe8VnUEd-yi4T5V_c02g" name="InterfaceRealization1" supplier="_8R25AFnUEd-yi4T5V_c02g" client="_jkuYQFnREd-yi4T5V_c02g" contract="_8R25AFnUEd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_4ldnIFnREd-yi4T5V_c02g" name="Usage1" supplier="_wqUVgFnREd-yi4T5V_c02g" client="_jkuYQFnREd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_6sQ7klnREd-yi4T5V_c02g" name="Usage2" supplier="_eRGX8FnQEd-yi4T5V_c02g" client="_jkuYQFnREd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_lEBAwFnREd-yi4T5V_c02g" name="KmMerger" clientDependency="_zBKRElnREd-yi4T5V_c02g">
+        <interfaceRealization xmi:id="_zBKRElnREd-yi4T5V_c02g" name="InterfaceRealization1" supplier="_wqUVgFnREd-yi4T5V_c02g" client="_lEBAwFnREd-yi4T5V_c02g" contract="_wqUVgFnREd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_wqUVgFnREd-yi4T5V_c02g" name="IKmMergerService"/>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_8R25AFnUEd-yi4T5V_c02g" name="IKmWeaverService"/>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_AOrT4FnVEd-yi4T5V_c02g" name="Interpreter" clientDependency="_RwI_glnVEd-yi4T5V_c02g _DRNwclnYEd-yi4T5V_c02g _wGOb4lxAEd-wC_r7VJ74rg">
+        <interfaceRealization xmi:id="_wGOb4lxAEd-wC_r7VJ74rg" name="InterfaceRealization1" supplier="_t3ukAFxAEd-wC_r7VJ74rg" client="_AOrT4FnVEd-yi4T5V_c02g" contract="_t3ukAFxAEd-wC_r7VJ74rg"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_RwI_glnVEd-yi4T5V_c02g" name="Usage1" supplier="_8R25AFnUEd-yi4T5V_c02g" client="_AOrT4FnVEd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_DRNwclnYEd-yi4T5V_c02g" name="Usage2" supplier="_-MbA4FnXEd-yi4T5V_c02g" client="_AOrT4FnVEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_Br1OYFnVEd-yi4T5V_c02g" name="Compiler" clientDependency="_SXCnclnVEd-yi4T5V_c02g _ifp-4lnXEd-yi4T5V_c02g">
+        <interfaceRealization xmi:id="_ifp-4lnXEd-yi4T5V_c02g" name="InterfaceRealization1" supplier="_fdLFUFnXEd-yi4T5V_c02g" client="_Br1OYFnVEd-yi4T5V_c02g" contract="_fdLFUFnXEd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_SXCnclnVEd-yi4T5V_c02g" name="Usage1" supplier="_8R25AFnUEd-yi4T5V_c02g" client="_Br1OYFnVEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_IKsIMFnVEd-yi4T5V_c02g" name="ITypeUnresolvedResourceService"/>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_TBnOcFnVEd-yi4T5V_c02g" name="TypeChecker" clientDependency="_U1ME4lnVEd-yi4T5V_c02g _3Cs3ElnVEd-yi4T5V_c02g">
+        <interfaceRealization xmi:id="_3Cs3ElnVEd-yi4T5V_c02g" name="InterfaceRealization1" supplier="_slEM0FnQEd-yi4T5V_c02g" client="_TBnOcFnVEd-yi4T5V_c02g" contract="_slEM0FnQEd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_U1ME4lnVEd-yi4T5V_c02g" name="Usage1" supplier="_8R25AFnUEd-yi4T5V_c02g" client="_TBnOcFnVEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_VdeM4FnVEd-yi4T5V_c02g" name="ConstraintChecker" clientDependency="_Xm9B4FnVEd-yi4T5V_c02g _3tp4kFnVEd-yi4T5V_c02g">
+        <interfaceRealization xmi:id="_3tp4kFnVEd-yi4T5V_c02g" name="InterfaceRealization1" supplier="_slEM0FnQEd-yi4T5V_c02g" client="_VdeM4FnVEd-yi4T5V_c02g" contract="_slEM0FnQEd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_Xm9B4FnVEd-yi4T5V_c02g" name="Usage1" supplier="_8R25AFnUEd-yi4T5V_c02g" client="_VdeM4FnVEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_Z6A0MFnWEd-yi4T5V_c02g" name="TextEditor" clientDependency="_u9mbYlnZEd-yi4T5V_c02g _afcfsFnaEd-yi4T5V_c02g _h9N40lnaEd-yi4T5V_c02g _K91-kFxBEd-wC_r7VJ74rg">
+        <packagedElement xmi:type="uml:Usage" xmi:id="_u9mbYlnZEd-yi4T5V_c02g" name="Usage1" supplier="_slEM0FnQEd-yi4T5V_c02g" client="_Z6A0MFnWEd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_afcfsFnaEd-yi4T5V_c02g" name="Usage2" supplier="_eRGX8FnQEd-yi4T5V_c02g" client="_Z6A0MFnWEd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_h9N40lnaEd-yi4T5V_c02g" name="Usage3" supplier="_IKsIMFnVEd-yi4T5V_c02g" client="_Z6A0MFnWEd-yi4T5V_c02g"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_K91-kFxBEd-wC_r7VJ74rg" name="Usage4" supplier="_FUzScFxBEd-wC_r7VJ74rg" client="_Z6A0MFnWEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_gV1oIFnWEd-yi4T5V_c02g" name="EclipseInterpreterUI" clientDependency="_yap8oFxAEd-wC_r7VJ74rg">
+        <packagedElement xmi:type="uml:Usage" xmi:id="_yap8oFxAEd-wC_r7VJ74rg" name="Usage1" supplier="_t3ukAFxAEd-wC_r7VJ74rg" client="_gV1oIFnWEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_8R1Y8FnWEd-yi4T5V_c02g" name="EclipseCompiledRunnerUI" clientDependency="__cUGA1nYEd-yi4T5V_c02g">
+        <packagedElement xmi:type="uml:Usage" xmi:id="__cUGA1nYEd-yi4T5V_c02g" name="Usage1" supplier="_fdLFUFnXEd-yi4T5V_c02g" client="_8R1Y8FnWEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_EnL6UFnXEd-yi4T5V_c02g" name="CommandLineCompiledRunner" clientDependency="_HXxgslnZEd-yi4T5V_c02g">
+        <packagedElement xmi:type="uml:Usage" xmi:id="_HXxgslnZEd-yi4T5V_c02g" name="Usage1" supplier="_fdLFUFnXEd-yi4T5V_c02g" client="_EnL6UFnXEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_NFb5AFnXEd-yi4T5V_c02g" name="CommandLineInterpreter" clientDependency="_zPEcIlxAEd-wC_r7VJ74rg">
+        <packagedElement xmi:type="uml:Usage" xmi:id="_zPEcIlxAEd-wC_r7VJ74rg" name="Usage1" supplier="_t3ukAFxAEd-wC_r7VJ74rg" client="_NFb5AFnXEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_fdLFUFnXEd-yi4T5V_c02g" name="IKmCompilerService"/>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_-MbA4FnXEd-yi4T5V_c02g" name="IConsoleService"/>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_OPe_YFnZEd-yi4T5V_c02g" name="CompiledCodeDeployerUI" clientDependency="_RlfR4lnZEd-yi4T5V_c02g">
+        <packagedElement xmi:type="uml:Usage" xmi:id="_RlfR4lnZEd-yi4T5V_c02g" name="Usage1" supplier="_fdLFUFnXEd-yi4T5V_c02g" client="_OPe_YFnZEd-yi4T5V_c02g"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_DBFiYFnbEd-wC_r7VJ74rg" name="MergerUI" clientDependency="_Hq9QgFnbEd-wC_r7VJ74rg">
+        <packagedElement xmi:type="uml:Usage" xmi:id="_Hq9QgFnbEd-wC_r7VJ74rg" name="Usage1" supplier="_wqUVgFnREd-yi4T5V_c02g" client="_DBFiYFnbEd-wC_r7VJ74rg"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_NXR6IFnbEd-wC_r7VJ74rg" name="WeaverUI" clientDependency="_Usl60FnbEd-wC_r7VJ74rg">
+        <packagedElement xmi:type="uml:Usage" xmi:id="_Usl60FnbEd-wC_r7VJ74rg" name="Usage1" supplier="_8R25AFnUEd-yi4T5V_c02g" client="_NXR6IFnbEd-wC_r7VJ74rg"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_tDvE0FnbEd-wC_r7VJ74rg" name="CommandLineCompiler" clientDependency="_v3x5wlnbEd-wC_r7VJ74rg">
+        <packagedElement xmi:type="uml:Usage" xmi:id="_v3x5wlnbEd-wC_r7VJ74rg" name="Usage1" supplier="_fdLFUFnXEd-yi4T5V_c02g" client="_tDvE0FnbEd-wC_r7VJ74rg"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_NYZz8FwqEd-wC_r7VJ74rg" name="Ecore2KMLoader" clientDependency="_olIrAlwqEd-wC_r7VJ74rg">
+        <interfaceRealization xmi:id="_olIrAlwqEd-wC_r7VJ74rg" name="InterfaceRealization1" supplier="_nfMWoFwqEd-wC_r7VJ74rg" client="_NYZz8FwqEd-wC_r7VJ74rg" contract="_nfMWoFwqEd-wC_r7VJ74rg"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_TG0vUFwqEd-wC_r7VJ74rg" name="OCL2KMLoader" clientDependency="_poZe0lwqEd-wC_r7VJ74rg">
+        <interfaceRealization xmi:id="_poZe0lwqEd-wC_r7VJ74rg" name="InterfaceRealization1" supplier="_nfMWoFwqEd-wC_r7VJ74rg" client="_TG0vUFwqEd-wC_r7VJ74rg" contract="_nfMWoFwqEd-wC_r7VJ74rg"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_XnIRwFwqEd-wC_r7VJ74rg" name="KMT2KMLoader"/>
+      <nestedClassifier xmi:type="uml:Component" xmi:id="_aWQKcFwqEd-wC_r7VJ74rg" name="Ket2KMLoader" clientDependency="_pG57UlwqEd-wC_r7VJ74rg">
+        <interfaceRealization xmi:id="_pG57UlwqEd-wC_r7VJ74rg" name="InterfaceRealization1" supplier="_nfMWoFwqEd-wC_r7VJ74rg" client="_aWQKcFwqEd-wC_r7VJ74rg" contract="_nfMWoFwqEd-wC_r7VJ74rg"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_nfMWoFwqEd-wC_r7VJ74rg" name="IKMResourceLoadingService"/>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_t3ukAFxAEd-wC_r7VJ74rg" name="IKmInterpreterUI"/>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_FUzScFxBEd-wC_r7VJ74rg" name="IFileChangeNotificationService"/>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
