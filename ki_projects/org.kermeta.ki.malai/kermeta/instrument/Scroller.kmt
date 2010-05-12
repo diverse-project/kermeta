@@ -61,7 +61,7 @@ class Scrolling2Scroll inherits Link
 		var scroller  : Scroller   init instrument.asType(Scroller)
 		
 		scroll.panel     := scroller.panel 
-		scroll.increment := scrolling.numberUp
+		scroll.increment := scrolling.numberUp*20
 		action 		     := scroll
 		action.initialise(instrument.actionRegistry)
 	end
