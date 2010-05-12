@@ -149,12 +149,13 @@ abstract class Link inherits InteractionHandler
 	
 	
 	method interactionUpdates(inter : Interaction) : Void is do
-		if(not action.isVoid and inter==interaction) then
-				if(isConditionRespected) then
-					updateAction
-	    			if(execute and action.canDo) then action.doIt end
-					interimFeedback
-				end
+		if(inter==interaction) then
+			if(isConditionRespected) then
+				if(action.isVoid) then createAction end
+				updateAction
+    			if(execute and action.canDo) then action.doIt end
+				interimFeedback
+			end
 		end
 	end
 	
@@ -184,8 +185,10 @@ abstract class Link inherits InteractionHandler
 	
 	method interactionStarts(inter : Interaction) : Void is do
 		if(isRunnable and action.isVoid and inter==interaction and instrument.activated) then
-			createAction
-			interimFeedback
+			if(isConditionRespected) then
+				createAction
+				interimFeedback
+			end
 		end
 	end
 	
