@@ -42,6 +42,7 @@ class EcoreComposer inherits kompose::Composer
 		result.classes.put("Reference", EReference)
 		result.classes.put("Operation", EOperation)
 		result.classes.put("Parameter", EParameter)
+		result.classes.put("Type",EDataType)
    end
 }
 // 2) Definition of specific signature classes
