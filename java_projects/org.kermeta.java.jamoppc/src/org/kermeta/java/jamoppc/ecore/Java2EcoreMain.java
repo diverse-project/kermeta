@@ -46,9 +46,10 @@ public class Java2EcoreMain {
 		
 		/* demo*/
 		//URI xmiuri = URI.createFileURI("/home/mclavreu/Desktop/eclipse-bundle-prototype/workspace/test_proto/models/xms/xms.xmi");
-		URI xmiuri = URI.createFileURI("/home/mclavreu/Desktop/eclipse-bundle-prototype/workspace/lab2corporate/tmp/api1/api11.xmi");
-		
-		//URI xmiuri = URI.createFileURI(args[0]);
+		//URI xmiuri = URI.createFileURI("/home/mclavreu/Desktop/eclipse-bundle-prototype/workspace/lab2corporate/tmp/api1/api11.xmi");
+		//URI xmiuri = URI.createFileURI("/home/mclavreu/main_workspace/ical/tmp/api1/api1.xmi");
+		//URI xmiuri = URI.createFileURI("/home/mclavreu/main_workspace/gcal/tmp/api1/api1.xmi");
+		URI xmiuri = URI.createFileURI(args[0]);
 		XMIResource resource = (XMIResource) rs.getResource(xmiuri, true);
 		
 		Map<Object,Object> options = new HashMap<Object, Object>();
@@ -101,9 +102,11 @@ public class Java2EcoreMain {
 			v.accept2(tree);
 		}
 		
-		URI outputUri = URI.createFileURI("/home/mclavreu/Desktop/eclipse-bundle-prototype/workspace/lab2corporate/tmp/api1/api11.ecore");
+		//URI outputUri = URI.createFileURI("/home/mclavreu/Desktop/eclipse-bundle-prototype/workspace/lab2corporate/tmp/api1/api11.ecore");
 		//URI outputUri = URI.createFileURI("/home/mclavreu/Desktop/eclipse-bundle-prototype/workspace/test_proto/models/xms/xms.ecore");
-		//URI outputUri = URI.createFileURI(args[1]);
+		//URI outputUri = URI.createFileURI("/home/mclavreu/main_workspace/ical/models/api1.ecore");
+		//URI outputUri = URI.createFileURI("/home/mclavreu/main_workspace/gcal/models/api1.ecore");
+		URI outputUri = URI.createFileURI(args[1]);
 		XMIResource r = (XMIResource) rs.createResource(outputUri);
 		r.getContents().addAll(root.eContents());
 		r.save(null);

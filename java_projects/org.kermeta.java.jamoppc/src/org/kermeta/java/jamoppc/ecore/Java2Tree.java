@@ -53,6 +53,7 @@ public class Java2Tree extends TreeVisitor{
 	private final String DOUBLE = "java.lang.Double";
 	private final String FLOAT = "java.lang.Float";
 	private final String VOID = "java.lang.Void";
+	private final String DATE = "java.util.Date";
 	
 	CompilationUnit currentCompilationUnit;
 	EPackage root;
@@ -92,6 +93,7 @@ public class Java2Tree extends TreeVisitor{
 		primitive_types.put(DOUBLE, "Double");
 		primitive_types.put(FLOAT, "Float");
 		primitive_types.put(VOID, "Void");
+		primitive_types.put(DATE, "Date");
 	}
 	
 	/**
@@ -221,7 +223,7 @@ public class Java2Tree extends TreeVisitor{
 			classes.put(getClassifierQualifiedName(c), cl);
 			// Need to process the members of the class ot create the Enumerations
 			for (EObject m : c.getMembers()){
-				if (m instanceof Enumeration)
+				if (m instanceof Enumeration || m instanceof Class)
 					this.accept(m);
 			}
 			if (lastPackage != null)
@@ -311,9 +313,10 @@ public class Java2Tree extends TreeVisitor{
 	 */
 	public void visitClass2(Class c){
 		lastPackage = root;
-		CompilationUnit cu = (CompilationUnit)c.eContainer();
+		//CompilationUnit cu = (CompilationUnit)c.eContainer();
 		String packageName = "";
-		int index = cu.getNamespaces().size();
+		packageName = getPackageNameFromAClass(c);
+		/*int index = cu.getNamespaces().size();
 		for (int i = 0; i < index; i++) {
 			String namespace = cu.getNamespaces().get(i);
 			if (lastPackage == root)
@@ -322,6 +325,7 @@ public class Java2Tree extends TreeVisitor{
 				packageName = lastPackage.getName()+"."+namespace;
 			lastPackage = packages.get(packageName);
 		}
+		*/
 		lastPackage = packages.get(packageName);
 		lastclass = classes.get(getClassifierQualifiedName(c));
 		if (superclass != null)
@@ -330,6 +334,25 @@ public class Java2Tree extends TreeVisitor{
 			this.accept2(m);
 	}
 	
+	private String getPackageNameFromAClass(Class c) {
+		String packageName = "";
+		if (c.eContainer() instanceof CompilationUnit){
+			CompilationUnit cu = (CompilationUnit)c.eContainer();
+			int index = cu.getNamespaces().size();
+			for (int i = 0; i < index; i++) {
+				String namespace = cu.getNamespaces().get(i);
+				if (lastPackage == root)
+					packageName = namespace;
+				else
+					packageName = lastPackage.getName()+"."+namespace;
+				lastPackage = packages.get(packageName);
+			}
+			return packageName;
+		}
+		else
+			return getPackageNameFromAClass((Class)c.getContainer());
+	}
+
 	/**
 	 * Visits a Field of a Class - second pass
 	 * @param e the Field object
@@ -474,8 +497,11 @@ public class Java2Tree extends TreeVisitor{
 	 */
 	private void visitCollectionClassifierReference(String classifierName, ClassifierReference e){
 		if (collections_types.contains(classifierName)){
-			QualifiedTypeArgument arg = ((QualifiedTypeArgument)e.getTypeArguments().get(0));
-			this.accept2(arg.getType());
+			System.out.println(classifierName);
+			if (e.getTypeArguments().size() != 0){
+				QualifiedTypeArgument arg = ((QualifiedTypeArgument)e.getTypeArguments().get(0));
+				this.accept2(arg.getType());
+			}
 			lastElement.setUpperBound(-1);
 		}
 	}
