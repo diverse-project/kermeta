@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="DATA"
+    nsURI="http://lola" nsPrefix="data">
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Unmeasurable" eSuperTypes="#//Quality%20Attribute #//Argument"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality Metric" eSuperTypes="#//Argument"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Metric Function" eSuperTypes="#//Function #//Argument"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Measurement Provider" eSuperTypes="#//Third%20Party"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Third Party" eSuperTypes="#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Requester" eSuperTypes="#//Cost #//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Provider" eSuperTypes="#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="User" eSuperTypes="#//Actor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contactInformation" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Argument"/>
+  <eClassifiers xsi:type="ecore:EClass" name="User Profile"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Service"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Simple Constraint" eSuperTypes="#//Constraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Complex Constraint" eSuperTypes="#//Constraint #//Constraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraints List">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="listSize" eType="#//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Comparison Predicate" eSuperTypes="#//Binary%20Predicate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint Predicate" eSuperTypes="#//Predicate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Predicate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Binary Predicate" eSuperTypes="#//Predicate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Unary Predicate" eSuperTypes="#//Predicate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="N-ary Predicate" eSuperTypes="#//Predicate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality Requirements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Service Object"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality Demand" eSuperTypes="#//Quality%20Specification"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality Request"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality Specification"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality Selection Model"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality Offering" eSuperTypes="#//Quality%20Specification">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="validity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality Capabilities"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Contract">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="validity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timeLimit"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exceptionConditions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Selection Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Negotiation Strategy" eSuperTypes="#//Requester">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Cost">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currency"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CostModel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CostFunction" eSuperTypes="#//Function"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Function">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QoS Group"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Scale Transformation Function" eSuperTypes="#//Function"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Service Level"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Rules"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Numeric" eSuperTypes="#//Argument"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Broker" eSuperTypes="#//Third%20Party"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Process Performance Metric" eSuperTypes="#//Quality%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="KPI" eSuperTypes="#//Constraint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="analysis period"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formula"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Condition Evaluator" eSuperTypes="#//Third%20Party"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Actor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Agent" eSuperTypes="#//Actor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Company" eSuperTypes="#//Actor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Company Profile"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Ordering Function" eSuperTypes="#//Function"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Penalty"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Composite Contract" eSuperTypes="#//Contract"/>
+  <eSubpackages name="UML Standard Profile"/>
+</ecore:EPackage>

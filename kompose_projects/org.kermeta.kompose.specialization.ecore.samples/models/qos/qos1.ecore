@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="DATA"
+    nsPrefix="">
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Domain Dependent" eSuperTypes="#//Quality%20Attribute #//Quality%20Attribute #//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Application Domain"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="URI" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Domain Independent" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Negotiable" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Non-Negotiable" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality Metric" eSuperTypes="#//Argument">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="URI" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Static Metric" eSuperTypes="#//Quality%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Dynamic Metric" eSuperTypes="#//Quality%20Metric #//Quality%20Metric #//Quality%20Metric">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schedule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layers"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resource Metric" eSuperTypes="#//Quality%20Metric #//Quality%20Metric #//Quality%20Metric #//Quality%20Metric #//Quality%20Metric #//Dynamic%20Metric #//Dynamic%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Measurement Directive"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Complex Metric" eSuperTypes="#//Quality%20Metric #//Dynamic%20Metric #//Dynamic%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Aggregated Metric" eSuperTypes="#//Complex%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Metric Function" eSuperTypes="#//Argument"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Absolute Metric" eSuperTypes="#//Quality%20Metric #//Quality%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Nominal Metric" eSuperTypes="#//Quality%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Ordinal Metric" eSuperTypes="#//Quality%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Interval Metric" eSuperTypes="#//Quality%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Ratio Metric" eSuperTypes="#//Quality%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Unit">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abbrevation" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="synonym" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Measurement Party"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Value Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Metric Relation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="impact" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Numeric" eSuperTypes="#//Argument"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Argument"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Service Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Service Object"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Basic Unit" eSuperTypes="#//Unit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MultipleOfUnit" eSuperTypes="#//Unit">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Unique Unit" eSuperTypes="#//Basic%20Unit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DerivedUnit" eSuperTypes="#//Basic%20Unit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Argument List"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Service Level"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Rules"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Controllable Metric" eSuperTypes="#//Quality%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Uncontrollable Metric" eSuperTypes="#//Quality%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Controllable" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Uncontrollable" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Measurable" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Unmeasurable" eSuperTypes="#//Argument #//Quality%20Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scale" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Functional Level"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quality Group"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Dependency"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quantitative" eSuperTypes="#//Dependency">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formula"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Qualitative" eSuperTypes="#//Dependency">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="impact" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metric Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="#//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Negotiable Metric" eSuperTypes="#//Quality%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Non-Negotiable Metric" eSuperTypes="#//Quality%20Metric"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Ordering Function"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QoS" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QoE" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Atomic" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Composite" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QoBiz" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QoI" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Functional" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Non-Functional" eSuperTypes="#//Quality%20Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Numeric List"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Numeric Function" eSuperTypes="#//Argument"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Levels">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Business"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Service"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Infrastructure"/>
+  </eClassifiers>
+  <eSubpackages name="UML Standard Profile"/>
+  <eSubpackages name="Virtual dependencies"/>
+</ecore:EPackage>

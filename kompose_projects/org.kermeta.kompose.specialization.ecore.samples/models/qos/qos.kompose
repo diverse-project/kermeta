@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/qos/qos1.ecore" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/qos/qos2.ecore" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/qos/out.ecore" metamodelName="http://www.eclipse.org/emf/2002/Ecore"/>

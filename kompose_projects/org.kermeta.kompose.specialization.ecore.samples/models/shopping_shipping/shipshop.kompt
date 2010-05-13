@@ -1,0 +1,57 @@
+// Common Metamodel URI (for now, Kompose only works with models conforming to a single metamodel)
+// Available values are "http://www.eclipse.org/emf/2002/Ecore" and "http://www.kermeta.org/rdbschema.ecore" for now
+EXT "http://www.eclipse.org/emf/2002/Ecore"
+
+// Primary Model URI
+PM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/shopping_shipping/shopping.ecore" 
+
+// Aspect Model URI
+AM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/shopping_shipping/shipping.ecore" 
+
+// Composed Model URI
+CM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/shopping_shipping/order.ecore"
+
+// predirectives for primary model
+PMPre {
+}
+
+// predirectives for aspect model
+AMPre {
+	shipping::Pack.name = "Cart"
+	shipping::Person.name = "Customer"
+	shipping::Article.name = "Item"
+	shipping::Cart::recipient.name = "customer"
+	shipping::Cart::articles.name = "items"
+	shipping.name = "shopping"
+	
+}
+
+// postdirectives 
+Post { 
+	// Cart
+	shopping::Cart::customer.name = "client"
+	shopping::Cart.name = "Order"
+	
+	// Customer
+	//create Type as $t
+	//$t.name = "String"
+	//$t.instanceClassName = "java.lang.String"
+	//shopping.eClassifiers + $t
+	
+	create Attribute as $n
+	$n.name = "name"
+	$n.eType = shopping::String
+	shopping::Customer.eStructuralFeatures + $n
+	
+	create Attribute as $a
+	$a.name = "address"
+	$a.eType = shopping::String
+	shopping::Customer.eStructuralFeatures + $a
+	
+	shopping::Customer::cart.name = "order"
+	shopping::Customer.name = "Client"
+	
+	// Item
+	shopping::Item::cart.name = "order"
+	
+}

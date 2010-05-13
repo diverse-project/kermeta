@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/shopping_shipping/shopping.ecore" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/shopping_shipping/shipping.ecore" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/shopping_shipping/order.ecore" metamodelName="http://www.eclipse.org/emf/2002/Ecore">
+  <postdirectives xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="shopping::Cart::customer"/>
+    <value xsi:type="kompose:StringLiteral" value="client"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="shopping::Cart"/>
+    <value xsi:type="kompose:StringLiteral" value="Order"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Create" className="Type" identifier="t"/>
+  <postdirectives xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:IDRef" identifier="t"/>
+    <value xsi:type="kompose:StringLiteral" value="String"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="instanceClassName">
+    <target xsi:type="kompose:IDRef" identifier="t"/>
+    <value xsi:type="kompose:StringLiteral" value="java.lang.String"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="shopping"/>
+    <value xsi:type="kompose:IDRef" identifier="t"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Create" className="Attribute" identifier="n"/>
+  <postdirectives xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:IDRef" identifier="n"/>
+    <value xsi:type="kompose:StringLiteral" value="name"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="eType">
+    <target xsi:type="kompose:IDRef" identifier="n"/>
+    <value xsi:type="kompose:IDRef" identifier="t"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Add" propertyName="eStructuralFeatures">
+    <target xsi:type="kompose:NameRef" qname="shopping::Customer"/>
+    <value xsi:type="kompose:IDRef" identifier="n"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Create" className="Attribute" identifier="a"/>
+  <postdirectives xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:IDRef" identifier="a"/>
+    <value xsi:type="kompose:StringLiteral" value="address"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="eType">
+    <target xsi:type="kompose:IDRef" identifier="a"/>
+    <value xsi:type="kompose:IDRef" identifier="t"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Add" propertyName="eStructuralFeatures">
+    <target xsi:type="kompose:NameRef" qname="shopping::Customer"/>
+    <value xsi:type="kompose:IDRef" identifier="a"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="shopping::Customer::cart"/>
+    <value xsi:type="kompose:StringLiteral" value="order"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="shopping::Customer"/>
+    <value xsi:type="kompose:StringLiteral" value="Client"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="shopping::Item::cart"/>
+    <value xsi:type="kompose:StringLiteral" value="order"/>
+  </postdirectives>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="shipping::Pack"/>
+    <value xsi:type="kompose:StringLiteral" value="Cart"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="shipping::Person"/>
+    <value xsi:type="kompose:StringLiteral" value="Customer"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="shipping::Article"/>
+    <value xsi:type="kompose:StringLiteral" value="Item"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="shipping::Cart::recipient"/>
+    <value xsi:type="kompose:StringLiteral" value="customer"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="shipping::Cart::articles"/>
+    <value xsi:type="kompose:StringLiteral" value="items"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="shipping"/>
+    <value xsi:type="kompose:StringLiteral" value="shopping"/>
+  </predirectivesAM>
+</kompose:Composer>

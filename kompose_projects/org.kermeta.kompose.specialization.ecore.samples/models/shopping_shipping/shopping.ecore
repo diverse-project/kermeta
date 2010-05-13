@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="shopping"
+    nsURI="http://shopping/1.0" nsPrefix="shopping">
+  <eClassifiers xsi:type="ecore:EClass" name="Cart">
+    <eOperations name="addItem">
+      <eParameters name="item" eType="#//Item"/>
+    </eOperations>
+    <eOperations name="removeItem">
+      <eParameters name="item" eType="#//Item"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1"
+        eType="#//Item"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customer" lowerBound="1"
+        eType="#//Customer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="totalCost" eType="#//Float"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Item">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="price" eType="#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cart" eType="#//Cart"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Book" eSuperTypes="#//Item">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nbPages" eType="#//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DVD" eSuperTypes="#//Item">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="#//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Customer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="username" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cart" eType="#//Cart"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Float" instanceClassName="java.lang.Float"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+</ecore:EPackage>

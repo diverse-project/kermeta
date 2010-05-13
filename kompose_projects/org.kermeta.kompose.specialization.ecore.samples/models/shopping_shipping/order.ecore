@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="shopping"
+    nsURI="http://shopping/1.0" nsPrefix="shopping">
+  <eClassifiers xsi:type="ecore:EDataType" name="Float" instanceClassName="java.lang.Float"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DVD" eSuperTypes="#//Item">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="#//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Digital"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Order">
+    <eOperations name="addItem">
+      <eParameters name="item" eType="#//Item"/>
+    </eOperations>
+    <eOperations name="removeItem">
+      <eParameters name="item" eType="#//Item"/>
+    </eOperations>
+    <eOperations name="ship"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="totalCost" eType="#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="totalWeight" eType="#//Integer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="trackingID" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="client" lowerBound="1"
+        eType="#//Client"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1"
+        eType="#//Item"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Item">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="price" eType="#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="order" eType="#//Order"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="#//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Book" eSuperTypes="#//Item">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nbPages" eType="#//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Client">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="order" eType="#//Order"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="username" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String.1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" eType="#//String.1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+</ecore:EPackage>
