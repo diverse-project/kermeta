@@ -12,18 +12,19 @@ AM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/b
 CM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/bank/BankBLP.ecore"
 
 // predirectives for primary model
-PMPre {
-	"tata","titi",BLP.name += Bank.name
+PMPre { 
+	BLP::BankUser.name,"tata","titi", BLP.name += Bank.name
 }
 
 // predirectives for aspect model
 AMPre { 
 	// Rename package BLP to Bank
-	//BLP.name = "Bank"
+	BLP.name = "Bank"
+	BLP::name.upper = -1
 }
 
 // postdirectives 
 Post { 
-	//Bank::Controller.eOperations - Bank::Controller::transfer
+	Bank::Controller.eOperations - Bank::Controller::transfer
 	//Bank::Controller.eOperations - Bank::Controller::withdraw
 }

@@ -2,6 +2,7 @@ grammar Directives;
 
 options {
   language = Java;
+  k=4;
 }
 @header {
 package org.kermeta.kompose.core.parser;
@@ -74,42 +75,52 @@ directives returns [ArrayList lst = new ArrayList()]:
   (d=directive {lst.add(d);})*
 ;
 
+/*directive returns [ElementDirective c] :
+  (changeD {$c=$changeD.d;} | concatD {$c=$concatD.d;} | createD{$c=$createD.d;})
+;*/
+
 directive returns [ElementDirective c] :
-  (concatD {$c=$concatD.d;} | createD{$c=$createD.d;} | changeD {$c=$changeD.d;})
+  (propertyD {$c=$propertyD.c;} | stringD {$c=$stringD.c;} | createD{$c=$createD.d;})
 ;
 
 createD returns [Create d = factory.createCreate()]
   @after{
-	  d.setClassName($id.text);
-	  d.setIdentifier($var.text);
+    d.setClassName($id.text);
+    d.setIdentifier($var.text);
   }
   :
   CREATE id=ID AS DOLLAR var=ID
 ;
 
-changeD returns [Change d = null]
-  @after{
-    d.setPropertyName($prop.text);
-    d.setTarget(ref);
-  }
-  :
-  ref=refObj DOT prop=ID 
-  (setD {$d=$setD.d;} | addD {$d=$addD.d;} | 
-  removeD {$d=$removeD.d;} )
+propertyD returns [ElementDirective c = null]:
+  ref=refObj DOT prop=ID (changeD[$prop.text, ref]{$c=$changeD.d;} | concatD[$prop.text, ref]{$c=$concatD.d;})
 ;
 
-concatD returns [Concat d = factory.createConcat()]
-  @init{
-    ArrayList<String> list = new ArrayList<String>();
-    StringLiteral ref = factory.createStringLiteral();
-  }
+stringD returns [ElementDirective c = null]:
+  ref=stringL concatD[$ref.text,null]{$c=$concatD.d;}
+;
+
+changeD [String prop, ElementRef ref] returns [Change d = null]
   @after{
-    ref.setValue($target.text);
-    d.getPropertyNames().addAll(list);
-    d.setTarget(ref);
+    d.setPropertyName($prop);
+    d.setTarget($ref);
   }
   :
-  first=concat_property {list.add($first.text);} (COMMA property=concat_property {list.add($property.text);})* CONCAT target=concat_property
+  (setD {$d=$setD.d;} | addD {$d=$addD.d;} | removeD {$d=$removeD.d;})
+;
+
+concatD [String prop, ElementRef ref] returns [Concat d = factory.createConcat()]
+  @init{
+    ArrayList<String> list = new ArrayList<String>();
+    list.add($prop);
+  }
+  @after{
+    d.setValue($target.ref);
+    d.getPropertyNames().addAll(list);
+    d.setTarget($ref);
+  }
+  :
+  (COMMA property=concat_property {list.add($property.text);})* CONCAT target=concat_property
 ;
 
 fragment concat_property returns [ElementRef ref = null]:
@@ -152,7 +163,7 @@ idRef returns [IDRef ref = factory.createIDRef()]
 
 stringL returns [StringLiteral ref = factory.createStringLiteral()]
   @after{
-    ref.setValue($v.text.substring(1, $v.text.length()-1));
+    $ref.setValue($v.text.substring(1, $v.text.length()-1));
   }
   :
     v=STRING_LITERAL
