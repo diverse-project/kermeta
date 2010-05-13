@@ -1,4 +1,4 @@
-// $ANTLR 3.1.1 /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g 2009-07-30 15:20:27
+// $ANTLR 3.1.1 /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g 2009-07-31 17:16:58
 
 package org.kermeta.kompose.core.parser;
 
@@ -67,7 +67,7 @@ public class DirectivesParser extends Parser {
         
 
     public String[] getTokenNames() { return DirectivesParser.tokenNames; }
-    public String getGrammarFileName() { return "/home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g"; }
+    public String getGrammarFileName() { return "/home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g"; }
 
 
       private static KomposeFactory factory = KomposePackageImpl.init().getKomposeFactory();
@@ -98,7 +98,7 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "dirUnit"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:51:1: dirUnit returns [Composer c = factory.createComposer();] : 'EXT' ext= STRING_LITERAL ( 'MODE' mode= ( UNION | INTER ) )? 'PM' pm= STRING_LITERAL 'AM' am= STRING_LITERAL 'CM' cm= STRING_LITERAL 'PMPre' LCURLY pmpre= directives RCURLY 'AMPre' LCURLY ampre= directives RCURLY 'Post' LCURLY post= directives RCURLY ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:52:1: dirUnit returns [Composer c = factory.createComposer();] : 'EXT' ext= STRING_LITERAL ( 'MODE' mode= ( UNION | INTER ) )? 'PM' pm= STRING_LITERAL 'AM' am= STRING_LITERAL 'CM' cm= STRING_LITERAL 'PMPre' LCURLY pmpre= directives RCURLY 'AMPre' LCURLY ampre= directives RCURLY 'Post' LCURLY post= directives RCURLY ;
     public final Composer dirUnit() throws RecognitionException {
         Composer c =  factory.createComposer();;
 
@@ -115,12 +115,12 @@ public class DirectivesParser extends Parser {
 
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:62:3: ( 'EXT' ext= STRING_LITERAL ( 'MODE' mode= ( UNION | INTER ) )? 'PM' pm= STRING_LITERAL 'AM' am= STRING_LITERAL 'CM' cm= STRING_LITERAL 'PMPre' LCURLY pmpre= directives RCURLY 'AMPre' LCURLY ampre= directives RCURLY 'Post' LCURLY post= directives RCURLY )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:63:3: 'EXT' ext= STRING_LITERAL ( 'MODE' mode= ( UNION | INTER ) )? 'PM' pm= STRING_LITERAL 'AM' am= STRING_LITERAL 'CM' cm= STRING_LITERAL 'PMPre' LCURLY pmpre= directives RCURLY 'AMPre' LCURLY ampre= directives RCURLY 'Post' LCURLY post= directives RCURLY
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:62:3: ( 'EXT' ext= STRING_LITERAL ( 'MODE' mode= ( UNION | INTER ) )? 'PM' pm= STRING_LITERAL 'AM' am= STRING_LITERAL 'CM' cm= STRING_LITERAL 'PMPre' LCURLY pmpre= directives RCURLY 'AMPre' LCURLY ampre= directives RCURLY 'Post' LCURLY post= directives RCURLY )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:63:3: 'EXT' ext= STRING_LITERAL ( 'MODE' mode= ( UNION | INTER ) )? 'PM' pm= STRING_LITERAL 'AM' am= STRING_LITERAL 'CM' cm= STRING_LITERAL 'PMPre' LCURLY pmpre= directives RCURLY 'AMPre' LCURLY ampre= directives RCURLY 'Post' LCURLY post= directives RCURLY
             {
-            match(input,30,FOLLOW_30_in_dirUnit59); 
-            ext=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_dirUnit63); 
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:64:3: ( 'MODE' mode= ( UNION | INTER ) )?
+            match(input,30,FOLLOW_30_in_dirUnit66); 
+            ext=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_dirUnit70); 
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:64:3: ( 'MODE' mode= ( UNION | INTER ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -129,10 +129,10 @@ public class DirectivesParser extends Parser {
             }
             switch (alt2) {
                 case 1 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:64:4: 'MODE' mode= ( UNION | INTER )
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:64:4: 'MODE' mode= ( UNION | INTER )
                     {
-                    match(input,31,FOLLOW_31_in_dirUnit68); 
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:64:16: ( UNION | INTER )
+                    match(input,31,FOLLOW_31_in_dirUnit75); 
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:64:16: ( UNION | INTER )
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -150,17 +150,17 @@ public class DirectivesParser extends Parser {
                     }
                     switch (alt1) {
                         case 1 :
-                            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:64:17: UNION
+                            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:64:17: UNION
                             {
-                            match(input,UNION,FOLLOW_UNION_in_dirUnit73); 
+                            match(input,UNION,FOLLOW_UNION_in_dirUnit80); 
                             c.setMode(Modes.UNION);
 
                             }
                             break;
                         case 2 :
-                            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:64:51: INTER
+                            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:64:51: INTER
                             {
-                            match(input,INTER,FOLLOW_INTER_in_dirUnit79); 
+                            match(input,INTER,FOLLOW_INTER_in_dirUnit86); 
                             c.setMode(Modes.INTERSECTION);
 
                             }
@@ -174,36 +174,36 @@ public class DirectivesParser extends Parser {
 
             }
 
-            match(input,32,FOLLOW_32_in_dirUnit88); 
-            pm=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_dirUnit92); 
-            match(input,33,FOLLOW_33_in_dirUnit96); 
-            am=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_dirUnit100); 
-            match(input,34,FOLLOW_34_in_dirUnit104); 
-            cm=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_dirUnit108); 
-            match(input,35,FOLLOW_35_in_dirUnit115); 
-            match(input,LCURLY,FOLLOW_LCURLY_in_dirUnit117); 
-            pushFollow(FOLLOW_directives_in_dirUnit121);
+            match(input,32,FOLLOW_32_in_dirUnit95); 
+            pm=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_dirUnit99); 
+            match(input,33,FOLLOW_33_in_dirUnit103); 
+            am=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_dirUnit107); 
+            match(input,34,FOLLOW_34_in_dirUnit111); 
+            cm=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_dirUnit115); 
+            match(input,35,FOLLOW_35_in_dirUnit122); 
+            match(input,LCURLY,FOLLOW_LCURLY_in_dirUnit124); 
+            pushFollow(FOLLOW_directives_in_dirUnit128);
             pmpre=directives();
 
             state._fsp--;
 
-            match(input,RCURLY,FOLLOW_RCURLY_in_dirUnit123); 
-            match(input,36,FOLLOW_36_in_dirUnit127); 
-            match(input,LCURLY,FOLLOW_LCURLY_in_dirUnit129); 
-            pushFollow(FOLLOW_directives_in_dirUnit133);
+            match(input,RCURLY,FOLLOW_RCURLY_in_dirUnit130); 
+            match(input,36,FOLLOW_36_in_dirUnit134); 
+            match(input,LCURLY,FOLLOW_LCURLY_in_dirUnit136); 
+            pushFollow(FOLLOW_directives_in_dirUnit140);
             ampre=directives();
 
             state._fsp--;
 
-            match(input,RCURLY,FOLLOW_RCURLY_in_dirUnit135); 
-            match(input,37,FOLLOW_37_in_dirUnit139); 
-            match(input,LCURLY,FOLLOW_LCURLY_in_dirUnit141); 
-            pushFollow(FOLLOW_directives_in_dirUnit145);
+            match(input,RCURLY,FOLLOW_RCURLY_in_dirUnit142); 
+            match(input,37,FOLLOW_37_in_dirUnit146); 
+            match(input,LCURLY,FOLLOW_LCURLY_in_dirUnit148); 
+            pushFollow(FOLLOW_directives_in_dirUnit152);
             post=directives();
 
             state._fsp--;
 
-            match(input,RCURLY,FOLLOW_RCURLY_in_dirUnit147); 
+            match(input,RCURLY,FOLLOW_RCURLY_in_dirUnit154); 
 
             }
 
@@ -229,7 +229,7 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "directives"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:74:1: directives returns [ArrayList lst = new ArrayList()] : (d= directive )* ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:74:1: directives returns [ArrayList lst = new ArrayList()] : (d= directive )* ;
     public final ArrayList directives() throws RecognitionException {
         ArrayList lst =  new ArrayList();
 
@@ -237,25 +237,19 @@ public class DirectivesParser extends Parser {
 
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:74:53: ( (d= directive )* )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:75:3: (d= directive )*
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:74:53: ( (d= directive )* )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:75:3: (d= directive )*
             {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:75:3: (d= directive )*
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:75:3: (d= directive )*
             loop3:
             do {
                 int alt3=2;
-                int LA3_0 = input.LA(1);
-
-                if ( (LA3_0==STRING_LITERAL||(LA3_0>=CREATE && LA3_0<=ID)||LA3_0==DOLLAR||(LA3_0>=MINUS && LA3_0<=FALSE)) ) {
-                    alt3=1;
-                }
-
-
+                alt3 = dfa3.predict(input);
                 switch (alt3) {
             	case 1 :
-            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:75:4: d= directive
+            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:75:4: d= directive
             	    {
-            	    pushFollow(FOLLOW_directive_in_directives164);
+            	    pushFollow(FOLLOW_directive_in_directives171);
             	    d=directive();
 
             	    state._fsp--;
@@ -286,58 +280,58 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "directive"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:78:1: directive returns [ElementDirective c] : ( concatD | createD | changeD ) ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:82:1: directive returns [ElementDirective c] : ( propertyD | stringD | createD ) ;
     public final ElementDirective directive() throws RecognitionException {
         ElementDirective c = null;
 
-        Concat concatD1 = null;
+        ElementDirective propertyD1 = null;
 
-        Create createD2 = null;
+        ElementDirective stringD2 = null;
 
-        Change changeD3 = null;
+        Create createD3 = null;
 
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:78:40: ( ( concatD | createD | changeD ) )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:79:3: ( concatD | createD | changeD )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:82:40: ( ( propertyD | stringD | createD ) )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:83:3: ( propertyD | stringD | createD )
             {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:79:3: ( concatD | createD | changeD )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:83:3: ( propertyD | stringD | createD )
             int alt4=3;
             alt4 = dfa4.predict(input);
             switch (alt4) {
                 case 1 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:79:4: concatD
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:83:4: propertyD
                     {
-                    pushFollow(FOLLOW_concatD_in_directive184);
-                    concatD1=concatD();
+                    pushFollow(FOLLOW_propertyD_in_directive194);
+                    propertyD1=propertyD();
 
                     state._fsp--;
 
-                    c =concatD1;
+                    c =propertyD1;
 
                     }
                     break;
                 case 2 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:79:31: createD
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:83:35: stringD
                     {
-                    pushFollow(FOLLOW_createD_in_directive190);
-                    createD2=createD();
+                    pushFollow(FOLLOW_stringD_in_directive200);
+                    stringD2=stringD();
 
                     state._fsp--;
 
-                    c =createD2;
+                    c =stringD2;
 
                     }
                     break;
                 case 3 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:79:57: changeD
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:83:62: createD
                     {
-                    pushFollow(FOLLOW_changeD_in_directive195);
-                    changeD3=changeD();
+                    pushFollow(FOLLOW_createD_in_directive206);
+                    createD3=createD();
 
                     state._fsp--;
 
-                    c =changeD3;
+                    c =createD3;
 
                     }
                     break;
@@ -360,7 +354,7 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "createD"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:82:1: createD returns [Create d = factory.createCreate()] : CREATE id= ID AS DOLLAR var= ID ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:86:1: createD returns [Create d = factory.createCreate()] : CREATE id= ID AS DOLLAR var= ID ;
     public final Create createD() throws RecognitionException {
         Create d =  factory.createCreate();
 
@@ -368,20 +362,20 @@ public class DirectivesParser extends Parser {
         Token var=null;
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:87:3: ( CREATE id= ID AS DOLLAR var= ID )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:88:3: CREATE id= ID AS DOLLAR var= ID
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:91:3: ( CREATE id= ID AS DOLLAR var= ID )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:92:3: CREATE id= ID AS DOLLAR var= ID
             {
-            match(input,CREATE,FOLLOW_CREATE_in_createD221); 
-            id=(Token)match(input,ID,FOLLOW_ID_in_createD225); 
-            match(input,AS,FOLLOW_AS_in_createD227); 
-            match(input,DOLLAR,FOLLOW_DOLLAR_in_createD229); 
-            var=(Token)match(input,ID,FOLLOW_ID_in_createD233); 
+            match(input,CREATE,FOLLOW_CREATE_in_createD231); 
+            id=(Token)match(input,ID,FOLLOW_ID_in_createD235); 
+            match(input,AS,FOLLOW_AS_in_createD237); 
+            match(input,DOLLAR,FOLLOW_DOLLAR_in_createD239); 
+            var=(Token)match(input,ID,FOLLOW_ID_in_createD243); 
 
             }
 
 
-            	  d.setClassName((id!=null?id.getText():null));
-            	  d.setIdentifier((var!=null?var.getText():null));
+                d.setClassName((id!=null?id.getText():null));
+                d.setIdentifier((var!=null?var.getText():null));
               
         }
         catch (RecognitionException re) {
@@ -395,91 +389,204 @@ public class DirectivesParser extends Parser {
     // $ANTLR end "createD"
 
 
-    // $ANTLR start "changeD"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:91:1: changeD returns [Change d = null] : ref= refObj DOT prop= ID ( setD | addD | removeD ) ;
-    public final Change changeD() throws RecognitionException {
-        Change d =  null;
+    // $ANTLR start "propertyD"
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:95:1: propertyD returns [ElementDirective c = null] : ref= refObj DOT prop= ID ( changeD[$prop.text, ref] | concatD[$prop.text, ref] ) ;
+    public final ElementDirective propertyD() throws RecognitionException {
+        ElementDirective c =  null;
 
         Token prop=null;
         ElementRef ref = null;
 
-        Set setD4 = null;
+        Change changeD4 = null;
 
-        Add addD5 = null;
-
-        Remove removeD6 = null;
+        Concat concatD5 = null;
 
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:96:3: (ref= refObj DOT prop= ID ( setD | addD | removeD ) )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:97:3: ref= refObj DOT prop= ID ( setD | addD | removeD )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:95:46: (ref= refObj DOT prop= ID ( changeD[$prop.text, ref] | concatD[$prop.text, ref] ) )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:96:3: ref= refObj DOT prop= ID ( changeD[$prop.text, ref] | concatD[$prop.text, ref] )
             {
-            pushFollow(FOLLOW_refObj_in_changeD258);
+            pushFollow(FOLLOW_refObj_in_propertyD259);
             ref=refObj();
 
             state._fsp--;
 
-            match(input,DOT,FOLLOW_DOT_in_changeD260); 
-            prop=(Token)match(input,ID,FOLLOW_ID_in_changeD264); 
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:98:3: ( setD | addD | removeD )
-            int alt5=3;
-            switch ( input.LA(1) ) {
-            case EQUALS:
-                {
+            match(input,DOT,FOLLOW_DOT_in_propertyD261); 
+            prop=(Token)match(input,ID,FOLLOW_ID_in_propertyD265); 
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:96:26: ( changeD[$prop.text, ref] | concatD[$prop.text, ref] )
+            int alt5=2;
+            int LA5_0 = input.LA(1);
+
+            if ( ((LA5_0>=EQUALS && LA5_0<=MINUS)) ) {
                 alt5=1;
-                }
-                break;
-            case PLUS:
-                {
+            }
+            else if ( ((LA5_0>=COMMA && LA5_0<=CONCAT)) ) {
                 alt5=2;
-                }
-                break;
-            case MINUS:
-                {
-                alt5=3;
-                }
-                break;
-            default:
+            }
+            else {
                 NoViableAltException nvae =
                     new NoViableAltException("", 5, 0, input);
 
                 throw nvae;
             }
-
             switch (alt5) {
                 case 1 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:98:4: setD
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:96:27: changeD[$prop.text, ref]
                     {
-                    pushFollow(FOLLOW_setD_in_changeD270);
-                    setD4=setD();
+                    pushFollow(FOLLOW_changeD_in_propertyD268);
+                    changeD4=changeD((prop!=null?prop.getText():null), ref);
 
                     state._fsp--;
 
-                    d =setD4;
+                    c =changeD4;
 
                     }
                     break;
                 case 2 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:98:25: addD
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:96:70: concatD[$prop.text, ref]
                     {
-                    pushFollow(FOLLOW_addD_in_changeD276);
-                    addD5=addD();
+                    pushFollow(FOLLOW_concatD_in_propertyD274);
+                    concatD5=concatD((prop!=null?prop.getText():null), ref);
 
                     state._fsp--;
 
-                    d =addD5;
+                    c =concatD5;
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return c;
+    }
+    // $ANTLR end "propertyD"
+
+
+    // $ANTLR start "stringD"
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:99:1: stringD returns [ElementDirective c = null] : ref= stringL concatD[$ref.text,null] ;
+    public final ElementDirective stringD() throws RecognitionException {
+        ElementDirective c =  null;
+
+        DirectivesParser.stringL_return ref = null;
+
+        Concat concatD6 = null;
+
+
+        try {
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:99:44: (ref= stringL concatD[$ref.text,null] )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:100:3: ref= stringL concatD[$ref.text,null]
+            {
+            pushFollow(FOLLOW_stringL_in_stringD293);
+            ref=stringL();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_concatD_in_stringD295);
+            concatD6=concatD((ref!=null?input.toString(ref.start,ref.stop):null), null);
+
+            state._fsp--;
+
+            c =concatD6;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return c;
+    }
+    // $ANTLR end "stringD"
+
+
+    // $ANTLR start "changeD"
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:103:1: changeD[String prop, ElementRef ref] returns [Change d = null] : ( setD | addD | removeD ) ;
+    public final Change changeD(String prop, ElementRef ref) throws RecognitionException {
+        Change d =  null;
+
+        Set setD7 = null;
+
+        Add addD8 = null;
+
+        Remove removeD9 = null;
+
+
+        try {
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:108:3: ( ( setD | addD | removeD ) )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:109:3: ( setD | addD | removeD )
+            {
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:109:3: ( setD | addD | removeD )
+            int alt6=3;
+            switch ( input.LA(1) ) {
+            case EQUALS:
+                {
+                alt6=1;
+                }
+                break;
+            case PLUS:
+                {
+                alt6=2;
+                }
+                break;
+            case MINUS:
+                {
+                alt6=3;
+                }
+                break;
+            default:
+                NoViableAltException nvae =
+                    new NoViableAltException("", 6, 0, input);
+
+                throw nvae;
+            }
+
+            switch (alt6) {
+                case 1 :
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:109:4: setD
+                    {
+                    pushFollow(FOLLOW_setD_in_changeD323);
+                    setD7=setD();
+
+                    state._fsp--;
+
+                    d =setD7;
+
+                    }
+                    break;
+                case 2 :
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:109:25: addD
+                    {
+                    pushFollow(FOLLOW_addD_in_changeD329);
+                    addD8=addD();
+
+                    state._fsp--;
+
+                    d =addD8;
 
                     }
                     break;
                 case 3 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:99:3: removeD
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:109:46: removeD
                     {
-                    pushFollow(FOLLOW_removeD_in_changeD285);
-                    removeD6=removeD();
+                    pushFollow(FOLLOW_removeD_in_changeD335);
+                    removeD9=removeD();
 
                     state._fsp--;
 
-                    d =removeD6;
+                    d =removeD9;
 
                     }
                     break;
@@ -490,7 +597,7 @@ public class DirectivesParser extends Parser {
             }
 
 
-                d.setPropertyName((prop!=null?prop.getText():null));
+                d.setPropertyName(prop);
                 d.setTarget(ref);
               
         }
@@ -506,11 +613,9 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "concatD"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:102:1: concatD returns [Concat d = factory.createConcat()] : first= concat_property ( COMMA property= concat_property )* CONCAT target= concat_property ;
-    public final Concat concatD() throws RecognitionException {
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:112:1: concatD[String prop, ElementRef ref] returns [Concat d = factory.createConcat()] : ( COMMA property= concat_property )* CONCAT target= concat_property ;
+    public final Concat concatD(String prop, ElementRef ref) throws RecognitionException {
         Concat d =  factory.createConcat();
-
-        DirectivesParser.concat_property_return first = null;
 
         DirectivesParser.concat_property_return property = null;
 
@@ -519,35 +624,29 @@ public class DirectivesParser extends Parser {
 
 
             ArrayList<String> list = new ArrayList<String>();
-            StringLiteral ref = factory.createStringLiteral();
+            list.add(prop);
           
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:112:3: (first= concat_property ( COMMA property= concat_property )* CONCAT target= concat_property )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:113:3: first= concat_property ( COMMA property= concat_property )* CONCAT target= concat_property
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:122:3: ( ( COMMA property= concat_property )* CONCAT target= concat_property )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:123:3: ( COMMA property= concat_property )* CONCAT target= concat_property
             {
-            pushFollow(FOLLOW_concat_property_in_concatD320);
-            first=concat_property();
-
-            state._fsp--;
-
-            list.add((first!=null?input.toString(first.start,first.stop):null));
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:113:50: ( COMMA property= concat_property )*
-            loop6:
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:123:3: ( COMMA property= concat_property )*
+            loop7:
             do {
-                int alt6=2;
-                int LA6_0 = input.LA(1);
+                int alt7=2;
+                int LA7_0 = input.LA(1);
 
-                if ( (LA6_0==COMMA) ) {
-                    alt6=1;
+                if ( (LA7_0==COMMA) ) {
+                    alt7=1;
                 }
 
 
-                switch (alt6) {
+                switch (alt7) {
             	case 1 :
-            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:113:51: COMMA property= concat_property
+            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:123:4: COMMA property= concat_property
             	    {
-            	    match(input,COMMA,FOLLOW_COMMA_in_concatD325); 
-            	    pushFollow(FOLLOW_concat_property_in_concatD329);
+            	    match(input,COMMA,FOLLOW_COMMA_in_concatD370); 
+            	    pushFollow(FOLLOW_concat_property_in_concatD374);
             	    property=concat_property();
 
             	    state._fsp--;
@@ -558,12 +657,12 @@ public class DirectivesParser extends Parser {
             	    break;
 
             	default :
-            	    break loop6;
+            	    break loop7;
                 }
             } while (true);
 
-            match(input,CONCAT,FOLLOW_CONCAT_in_concatD335); 
-            pushFollow(FOLLOW_concat_property_in_concatD339);
+            match(input,CONCAT,FOLLOW_CONCAT_in_concatD380); 
+            pushFollow(FOLLOW_concat_property_in_concatD384);
             target=concat_property();
 
             state._fsp--;
@@ -572,7 +671,7 @@ public class DirectivesParser extends Parser {
             }
 
 
-                ref.setValue((target!=null?input.toString(target.start,target.stop):null));
+                d.setValue((target!=null?target.ref:null));
                 d.getPropertyNames().addAll(list);
                 d.setTarget(ref);
               
@@ -592,64 +691,64 @@ public class DirectivesParser extends Parser {
     };
 
     // $ANTLR start "concat_property"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:116:10: fragment concat_property returns [ElementRef ref = null] : ( ( nameRef DOT prop= ID ) | stringL );
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:126:10: fragment concat_property returns [ElementRef ref = null] : ( ( nameRef DOT prop= ID ) | stringL );
     public final DirectivesParser.concat_property_return concat_property() throws RecognitionException {
         DirectivesParser.concat_property_return retval = new DirectivesParser.concat_property_return();
         retval.start = input.LT(1);
 
         Token prop=null;
-        NameRef nameRef7 = null;
+        NameRef nameRef10 = null;
 
-        StringLiteral stringL8 = null;
+        DirectivesParser.stringL_return stringL11 = null;
 
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:116:57: ( ( nameRef DOT prop= ID ) | stringL )
-            int alt7=2;
-            int LA7_0 = input.LA(1);
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:126:57: ( ( nameRef DOT prop= ID ) | stringL )
+            int alt8=2;
+            int LA8_0 = input.LA(1);
 
-            if ( (LA7_0==ID) ) {
-                alt7=1;
+            if ( (LA8_0==ID) ) {
+                alt8=1;
             }
-            else if ( (LA7_0==STRING_LITERAL) ) {
-                alt7=2;
+            else if ( (LA8_0==STRING_LITERAL) ) {
+                alt8=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 7, 0, input);
+                    new NoViableAltException("", 8, 0, input);
 
                 throw nvae;
             }
-            switch (alt7) {
+            switch (alt8) {
                 case 1 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:117:3: ( nameRef DOT prop= ID )
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:127:3: ( nameRef DOT prop= ID )
                     {
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:117:3: ( nameRef DOT prop= ID )
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:117:4: nameRef DOT prop= ID
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:127:3: ( nameRef DOT prop= ID )
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:127:4: nameRef DOT prop= ID
                     {
-                    pushFollow(FOLLOW_nameRef_in_concat_property356);
-                    nameRef7=nameRef();
+                    pushFollow(FOLLOW_nameRef_in_concat_property401);
+                    nameRef10=nameRef();
 
                     state._fsp--;
 
-                    match(input,DOT,FOLLOW_DOT_in_concat_property358); 
-                    prop=(Token)match(input,ID,FOLLOW_ID_in_concat_property362); 
+                    match(input,DOT,FOLLOW_DOT_in_concat_property403); 
+                    prop=(Token)match(input,ID,FOLLOW_ID_in_concat_property407); 
 
                     }
 
-                    retval.ref =nameRef7;
+                    retval.ref =nameRef10;
 
                     }
                     break;
                 case 2 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:117:48: stringL
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:127:48: stringL
                     {
-                    pushFollow(FOLLOW_stringL_in_concat_property369);
-                    stringL8=stringL();
+                    pushFollow(FOLLOW_stringL_in_concat_property414);
+                    stringL11=stringL();
 
                     state._fsp--;
 
-                    retval.ref =stringL8;
+                    retval.ref =(stringL11!=null?stringL11.ref:null);
 
                     }
                     break;
@@ -670,7 +769,7 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "setD"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:120:1: setD returns [Set d = factory.createSet()] : EQUALS ref= refObj ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:130:1: setD returns [Set d = factory.createSet()] : EQUALS ref= refObj ;
     public final Set setD() throws RecognitionException {
         Set d =  factory.createSet();
 
@@ -678,11 +777,11 @@ public class DirectivesParser extends Parser {
 
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:120:43: ( EQUALS ref= refObj )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:121:3: EQUALS ref= refObj
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:130:43: ( EQUALS ref= refObj )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:131:3: EQUALS ref= refObj
             {
-            match(input,EQUALS,FOLLOW_EQUALS_in_setD385); 
-            pushFollow(FOLLOW_refObj_in_setD389);
+            match(input,EQUALS,FOLLOW_EQUALS_in_setD430); 
+            pushFollow(FOLLOW_refObj_in_setD434);
             ref=refObj();
 
             state._fsp--;
@@ -704,7 +803,7 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "addD"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:124:1: addD returns [Add d = factory.createAdd()] : PLUS ref= refObj ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:134:1: addD returns [Add d = factory.createAdd()] : PLUS ref= refObj ;
     public final Add addD() throws RecognitionException {
         Add d =  factory.createAdd();
 
@@ -712,11 +811,11 @@ public class DirectivesParser extends Parser {
 
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:124:43: ( PLUS ref= refObj )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:125:3: PLUS ref= refObj
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:134:43: ( PLUS ref= refObj )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:135:3: PLUS ref= refObj
             {
-            match(input,PLUS,FOLLOW_PLUS_in_addD405); 
-            pushFollow(FOLLOW_refObj_in_addD409);
+            match(input,PLUS,FOLLOW_PLUS_in_addD450); 
+            pushFollow(FOLLOW_refObj_in_addD454);
             ref=refObj();
 
             state._fsp--;
@@ -738,7 +837,7 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "removeD"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:128:1: removeD returns [Remove d = factory.createRemove()] : MINUS ref= refObj ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:138:1: removeD returns [Remove d = factory.createRemove()] : MINUS ref= refObj ;
     public final Remove removeD() throws RecognitionException {
         Remove d =  factory.createRemove();
 
@@ -746,11 +845,11 @@ public class DirectivesParser extends Parser {
 
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:128:52: ( MINUS ref= refObj )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:129:3: MINUS ref= refObj
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:138:52: ( MINUS ref= refObj )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:139:3: MINUS ref= refObj
             {
-            match(input,MINUS,FOLLOW_MINUS_in_removeD425); 
-            pushFollow(FOLLOW_refObj_in_removeD429);
+            match(input,MINUS,FOLLOW_MINUS_in_removeD470); 
+            pushFollow(FOLLOW_refObj_in_removeD474);
             ref=refObj();
 
             state._fsp--;
@@ -772,117 +871,117 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "refObj"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:132:1: refObj returns [ElementRef ref = null] : ( nameRef | idRef | stringL | booleanL | integerL );
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:142:1: refObj returns [ElementRef ref = null] : ( nameRef | idRef | stringL | booleanL | integerL );
     public final ElementRef refObj() throws RecognitionException {
         ElementRef ref =  null;
 
-        NameRef nameRef9 = null;
+        NameRef nameRef12 = null;
 
-        IDRef idRef10 = null;
+        IDRef idRef13 = null;
 
-        StringLiteral stringL11 = null;
+        DirectivesParser.stringL_return stringL14 = null;
 
-        BooleanLiteral booleanL12 = null;
+        BooleanLiteral booleanL15 = null;
 
-        IntegerLiteral integerL13 = null;
+        IntegerLiteral integerL16 = null;
 
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:132:39: ( nameRef | idRef | stringL | booleanL | integerL )
-            int alt8=5;
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:142:39: ( nameRef | idRef | stringL | booleanL | integerL )
+            int alt9=5;
             switch ( input.LA(1) ) {
             case ID:
                 {
-                alt8=1;
+                alt9=1;
                 }
                 break;
             case DOLLAR:
                 {
-                alt8=2;
+                alt9=2;
                 }
                 break;
             case STRING_LITERAL:
                 {
-                alt8=3;
+                alt9=3;
                 }
                 break;
             case TRUE:
             case FALSE:
                 {
-                alt8=4;
+                alt9=4;
                 }
                 break;
             case MINUS:
             case INT_LITERAL:
                 {
-                alt8=5;
+                alt9=5;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 8, 0, input);
+                    new NoViableAltException("", 9, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt8) {
+            switch (alt9) {
                 case 1 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:133:3: nameRef
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:143:3: nameRef
                     {
-                    pushFollow(FOLLOW_nameRef_in_refObj445);
-                    nameRef9=nameRef();
+                    pushFollow(FOLLOW_nameRef_in_refObj490);
+                    nameRef12=nameRef();
 
                     state._fsp--;
 
-                    ref =nameRef9;
+                    ref =nameRef12;
 
                     }
                     break;
                 case 2 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:133:34: idRef
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:143:34: idRef
                     {
-                    pushFollow(FOLLOW_idRef_in_refObj451);
-                    idRef10=idRef();
+                    pushFollow(FOLLOW_idRef_in_refObj496);
+                    idRef13=idRef();
 
                     state._fsp--;
 
-                    ref =idRef10;
+                    ref =idRef13;
 
                     }
                     break;
                 case 3 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:134:3: stringL
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:144:3: stringL
                     {
-                    pushFollow(FOLLOW_stringL_in_refObj459);
-                    stringL11=stringL();
+                    pushFollow(FOLLOW_stringL_in_refObj504);
+                    stringL14=stringL();
 
                     state._fsp--;
 
-                    ref =stringL11;
+                    ref =(stringL14!=null?stringL14.ref:null);
 
                     }
                     break;
                 case 4 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:134:34: booleanL
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:144:34: booleanL
                     {
-                    pushFollow(FOLLOW_booleanL_in_refObj465);
-                    booleanL12=booleanL();
+                    pushFollow(FOLLOW_booleanL_in_refObj510);
+                    booleanL15=booleanL();
 
                     state._fsp--;
 
-                    ref =booleanL12;
+                    ref =booleanL15;
 
                     }
                     break;
                 case 5 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:135:3: integerL
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:145:3: integerL
                     {
-                    pushFollow(FOLLOW_integerL_in_refObj474);
-                    integerL13=integerL();
+                    pushFollow(FOLLOW_integerL_in_refObj519);
+                    integerL16=integerL();
 
                     state._fsp--;
 
-                    ref =integerL13;
+                    ref =integerL16;
 
                     }
                     break;
@@ -901,7 +1000,7 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "nameRef"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:138:1: nameRef returns [NameRef ref = factory.createNameRef()] : qname= qualifiedID ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:148:1: nameRef returns [NameRef ref = factory.createNameRef()] : qname= qualifiedID ;
     public final NameRef nameRef() throws RecognitionException {
         NameRef ref =  factory.createNameRef();
 
@@ -909,10 +1008,10 @@ public class DirectivesParser extends Parser {
 
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:142:3: (qname= qualifiedID )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:143:4: qname= qualifiedID
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:152:3: (qname= qualifiedID )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:153:4: qname= qualifiedID
             {
-            pushFollow(FOLLOW_qualifiedID_in_nameRef504);
+            pushFollow(FOLLOW_qualifiedID_in_nameRef549);
             qname=qualifiedID();
 
             state._fsp--;
@@ -936,18 +1035,18 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "idRef"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:146:1: idRef returns [IDRef ref = factory.createIDRef()] : DOLLAR id= ID ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:156:1: idRef returns [IDRef ref = factory.createIDRef()] : DOLLAR id= ID ;
     public final IDRef idRef() throws RecognitionException {
         IDRef ref =  factory.createIDRef();
 
         Token id=null;
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:150:3: ( DOLLAR id= ID )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:151:4: DOLLAR id= ID
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:160:3: ( DOLLAR id= ID )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:161:4: DOLLAR id= ID
             {
-            match(input,DOLLAR,FOLLOW_DOLLAR_in_idRef528); 
-            id=(Token)match(input,ID,FOLLOW_ID_in_idRef532); 
+            match(input,DOLLAR,FOLLOW_DOLLAR_in_idRef573); 
+            id=(Token)match(input,ID,FOLLOW_ID_in_idRef577); 
 
             }
 
@@ -965,24 +1064,30 @@ public class DirectivesParser extends Parser {
     }
     // $ANTLR end "idRef"
 
+    public static class stringL_return extends ParserRuleReturnScope {
+        public StringLiteral ref = factory.createStringLiteral();
+    };
 
     // $ANTLR start "stringL"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:154:1: stringL returns [StringLiteral ref = factory.createStringLiteral()] : v= STRING_LITERAL ;
-    public final StringLiteral stringL() throws RecognitionException {
-        StringLiteral ref =  factory.createStringLiteral();
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:164:1: stringL returns [StringLiteral ref = factory.createStringLiteral()] : v= STRING_LITERAL ;
+    public final DirectivesParser.stringL_return stringL() throws RecognitionException {
+        DirectivesParser.stringL_return retval = new DirectivesParser.stringL_return();
+        retval.start = input.LT(1);
 
         Token v=null;
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:158:3: (v= STRING_LITERAL )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:159:5: v= STRING_LITERAL
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:168:3: (v= STRING_LITERAL )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:169:5: v= STRING_LITERAL
             {
-            v=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_stringL559); 
+            v=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_stringL604); 
 
             }
 
+            retval.stop = input.LT(-1);
 
-                ref.setValue((v!=null?v.getText():null).substring(1, (v!=null?v.getText():null).length()-1));
+
+                retval.ref.setValue((v!=null?v.getText():null).substring(1, (v!=null?v.getText():null).length()-1));
               
         }
         catch (RecognitionException re) {
@@ -991,13 +1096,13 @@ public class DirectivesParser extends Parser {
         }
         finally {
         }
-        return ref;
+        return retval;
     }
     // $ANTLR end "stringL"
 
 
     // $ANTLR start "integerL"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:162:1: integerL returns [IntegerLiteral ref = factory.createIntegerLiteral()] : str= integer ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:172:1: integerL returns [IntegerLiteral ref = factory.createIntegerLiteral()] : str= integer ;
     public final IntegerLiteral integerL() throws RecognitionException {
         IntegerLiteral ref =  factory.createIntegerLiteral();
 
@@ -1005,10 +1110,10 @@ public class DirectivesParser extends Parser {
 
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:166:3: (str= integer )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:167:3: str= integer
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:176:3: (str= integer )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:177:3: str= integer
             {
-            pushFollow(FOLLOW_integer_in_integerL584);
+            pushFollow(FOLLOW_integer_in_integerL629);
             str=integer();
 
             state._fsp--;
@@ -1035,34 +1140,34 @@ public class DirectivesParser extends Parser {
     };
 
     // $ANTLR start "integer"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:170:1: integer returns [Integer str = null] : ( MINUS )? INT_LITERAL ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:180:1: integer returns [Integer str = null] : ( MINUS )? INT_LITERAL ;
     public final DirectivesParser.integer_return integer() throws RecognitionException {
         DirectivesParser.integer_return retval = new DirectivesParser.integer_return();
         retval.start = input.LT(1);
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:170:37: ( ( MINUS )? INT_LITERAL )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:171:3: ( MINUS )? INT_LITERAL
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:180:37: ( ( MINUS )? INT_LITERAL )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:181:3: ( MINUS )? INT_LITERAL
             {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:171:3: ( MINUS )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:181:3: ( MINUS )?
+            int alt10=2;
+            int LA10_0 = input.LA(1);
 
-            if ( (LA9_0==MINUS) ) {
-                alt9=1;
+            if ( (LA10_0==MINUS) ) {
+                alt10=1;
             }
-            switch (alt9) {
+            switch (alt10) {
                 case 1 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:171:4: MINUS
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:181:4: MINUS
                     {
-                    match(input,MINUS,FOLLOW_MINUS_in_integer600); 
+                    match(input,MINUS,FOLLOW_MINUS_in_integer645); 
 
                     }
                     break;
 
             }
 
-            match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_integer604); 
+            match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_integer649); 
 
             }
 
@@ -1081,7 +1186,7 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "booleanL"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:174:1: booleanL returns [BooleanLiteral ref = factory.createBooleanLiteral()] : ( TRUE | FALSE ) ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:184:1: booleanL returns [BooleanLiteral ref = factory.createBooleanLiteral()] : ( TRUE | FALSE ) ;
     public final BooleanLiteral booleanL() throws RecognitionException {
         BooleanLiteral ref =  factory.createBooleanLiteral();
 
@@ -1089,38 +1194,38 @@ public class DirectivesParser extends Parser {
             boolean val = false;
           
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:181:3: ( ( TRUE | FALSE ) )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:182:5: ( TRUE | FALSE )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:191:3: ( ( TRUE | FALSE ) )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:192:5: ( TRUE | FALSE )
             {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:182:5: ( TRUE | FALSE )
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:192:5: ( TRUE | FALSE )
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA10_0==TRUE) ) {
-                alt10=1;
+            if ( (LA11_0==TRUE) ) {
+                alt11=1;
             }
-            else if ( (LA10_0==FALSE) ) {
-                alt10=2;
+            else if ( (LA11_0==FALSE) ) {
+                alt11=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 10, 0, input);
+                    new NoViableAltException("", 11, 0, input);
 
                 throw nvae;
             }
-            switch (alt10) {
+            switch (alt11) {
                 case 1 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:182:6: TRUE
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:192:6: TRUE
                     {
-                    match(input,TRUE,FOLLOW_TRUE_in_booleanL636); 
+                    match(input,TRUE,FOLLOW_TRUE_in_booleanL681); 
                      val = true; 
 
                     }
                     break;
                 case 2 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:182:28: FALSE
+                    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:192:28: FALSE
                     {
-                    match(input,FALSE,FOLLOW_FALSE_in_booleanL641); 
+                    match(input,FALSE,FOLLOW_FALSE_in_booleanL686); 
 
                     }
                     break;
@@ -1146,7 +1251,7 @@ public class DirectivesParser extends Parser {
 
 
     // $ANTLR start "qualifiedID"
-    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:185:1: qualifiedID returns [String val = \"\"] : str1= ID ( COL_COL strn= ID )* ;
+    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:195:1: qualifiedID returns [String val = \"\"] : str1= ID ( COL_COL strn= ID )* ;
     public final String qualifiedID() throws RecognitionException {
         String val =  "";
 
@@ -1154,35 +1259,29 @@ public class DirectivesParser extends Parser {
         Token strn=null;
 
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:185:38: (str1= ID ( COL_COL strn= ID )* )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:186:3: str1= ID ( COL_COL strn= ID )*
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:195:38: (str1= ID ( COL_COL strn= ID )* )
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:196:3: str1= ID ( COL_COL strn= ID )*
             {
-            str1=(Token)match(input,ID,FOLLOW_ID_in_qualifiedID658); 
+            str1=(Token)match(input,ID,FOLLOW_ID_in_qualifiedID703); 
             val+=(str1!=null?str1.getText():null);
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:186:30: ( COL_COL strn= ID )*
-            loop11:
+            // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:196:30: ( COL_COL strn= ID )*
+            loop12:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
-
-                if ( (LA11_0==COL_COL) ) {
-                    alt11=1;
-                }
-
-
-                switch (alt11) {
+                int alt12=2;
+                alt12 = dfa12.predict(input);
+                switch (alt12) {
             	case 1 :
-            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:186:31: COL_COL strn= ID
+            	    // /home/mclavreu/main_workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:196:31: COL_COL strn= ID
             	    {
-            	    match(input,COL_COL,FOLLOW_COL_COL_in_qualifiedID663); 
-            	    strn=(Token)match(input,ID,FOLLOW_ID_in_qualifiedID667); 
+            	    match(input,COL_COL,FOLLOW_COL_COL_in_qualifiedID708); 
+            	    strn=(Token)match(input,ID,FOLLOW_ID_in_qualifiedID712); 
             	    val+="::"+(strn!=null?strn.getText():null);
 
             	    }
             	    break;
 
             	default :
-            	    break loop11;
+            	    break loop12;
                 }
             } while (true);
 
@@ -1203,30 +1302,92 @@ public class DirectivesParser extends Parser {
     // Delegated rules
 
 
+    protected DFA3 dfa3 = new DFA3(this);
     protected DFA4 dfa4 = new DFA4(this);
-    static final String DFA4_eotS =
+    protected DFA12 dfa12 = new DFA12(this);
+    static final String DFA3_eotS =
         "\12\uffff";
-    static final String DFA4_eofS =
+    static final String DFA3_eofS =
         "\12\uffff";
-    static final String DFA4_minS =
-        "\1\4\2\15\2\uffff\2\12\1\uffff\1\15\1\16";
-    static final String DFA4_maxS =
-        "\1\25\1\26\1\17\2\uffff\2\12\1\uffff\1\26\1\22";
-    static final String DFA4_acceptS =
-        "\3\uffff\1\2\1\3\2\uffff\1\1\2\uffff";
-    static final String DFA4_specialS =
+    static final String DFA3_minS =
+        "\1\4\11\uffff";
+    static final String DFA3_maxS =
+        "\1\25\11\uffff";
+    static final String DFA3_acceptS =
+        "\1\uffff\1\2\1\1\7\uffff";
+    static final String DFA3_specialS =
         "\12\uffff}>";
+    static final String[] DFA3_transitionS = {
+            "\1\2\3\uffff\1\1\2\2\1\uffff\1\2\5\uffff\4\2",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] DFA3_eot = DFA.unpackEncodedString(DFA3_eotS);
+    static final short[] DFA3_eof = DFA.unpackEncodedString(DFA3_eofS);
+    static final char[] DFA3_min = DFA.unpackEncodedStringToUnsignedChars(DFA3_minS);
+    static final char[] DFA3_max = DFA.unpackEncodedStringToUnsignedChars(DFA3_maxS);
+    static final short[] DFA3_accept = DFA.unpackEncodedString(DFA3_acceptS);
+    static final short[] DFA3_special = DFA.unpackEncodedString(DFA3_specialS);
+    static final short[][] DFA3_transition;
+
+    static {
+        int numStates = DFA3_transitionS.length;
+        DFA3_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA3_transition[i] = DFA.unpackEncodedString(DFA3_transitionS[i]);
+        }
+    }
+
+    class DFA3 extends DFA {
+
+        public DFA3(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 3;
+            this.eot = DFA3_eot;
+            this.eof = DFA3_eof;
+            this.min = DFA3_min;
+            this.max = DFA3_max;
+            this.accept = DFA3_accept;
+            this.special = DFA3_special;
+            this.transition = DFA3_transition;
+        }
+        public String getDescription() {
+            return "()* loopback of 75:3: (d= directive )*";
+        }
+    }
+    static final String DFA4_eotS =
+        "\14\uffff";
+    static final String DFA4_eofS =
+        "\14\uffff";
+    static final String DFA4_minS =
+        "\1\4\2\uffff\1\15\10\uffff";
+    static final String DFA4_maxS =
+        "\1\25\2\uffff\1\17\10\uffff";
+    static final String DFA4_acceptS =
+        "\1\uffff\1\1\6\uffff\1\3\1\uffff\1\2\1\uffff";
+    static final String DFA4_specialS =
+        "\14\uffff}>";
     static final String[] DFA4_transitionS = {
-            "\1\2\4\uffff\1\3\1\1\1\uffff\1\4\5\uffff\4\4",
-            "\1\6\10\uffff\1\5",
-            "\1\4\2\7",
+            "\1\3\4\uffff\1\10\1\1\1\uffff\1\1\5\uffff\4\1",
             "",
             "",
-            "\1\10",
-            "\1\11",
+            "\1\1\2\12",
             "",
-            "\1\6\10\uffff\1\5",
-            "\2\7\3\4"
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
     };
 
     static final short[] DFA4_eot = DFA.unpackEncodedString(DFA4_eotS);
@@ -1259,80 +1420,143 @@ public class DirectivesParser extends Parser {
             this.transition = DFA4_transition;
         }
         public String getDescription() {
-            return "79:3: ( concatD | createD | changeD )";
+            return "83:3: ( propertyD | stringD | createD )";
+        }
+    }
+    static final String DFA12_eotS =
+        "\14\uffff";
+    static final String DFA12_eofS =
+        "\14\uffff";
+    static final String DFA12_minS =
+        "\1\4\13\uffff";
+    static final String DFA12_maxS =
+        "\1\26\13\uffff";
+    static final String DFA12_acceptS =
+        "\1\uffff\1\2\11\uffff\1\1";
+    static final String DFA12_specialS =
+        "\14\uffff}>";
+    static final String[] DFA12_transitionS = {
+            "\1\1\3\uffff\3\1\1\uffff\2\1\4\uffff\4\1\1\13",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] DFA12_eot = DFA.unpackEncodedString(DFA12_eotS);
+    static final short[] DFA12_eof = DFA.unpackEncodedString(DFA12_eofS);
+    static final char[] DFA12_min = DFA.unpackEncodedStringToUnsignedChars(DFA12_minS);
+    static final char[] DFA12_max = DFA.unpackEncodedStringToUnsignedChars(DFA12_maxS);
+    static final short[] DFA12_accept = DFA.unpackEncodedString(DFA12_acceptS);
+    static final short[] DFA12_special = DFA.unpackEncodedString(DFA12_specialS);
+    static final short[][] DFA12_transition;
+
+    static {
+        int numStates = DFA12_transitionS.length;
+        DFA12_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA12_transition[i] = DFA.unpackEncodedString(DFA12_transitionS[i]);
+        }
+    }
+
+    class DFA12 extends DFA {
+
+        public DFA12(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 12;
+            this.eot = DFA12_eot;
+            this.eof = DFA12_eof;
+            this.min = DFA12_min;
+            this.max = DFA12_max;
+            this.accept = DFA12_accept;
+            this.special = DFA12_special;
+            this.transition = DFA12_transition;
+        }
+        public String getDescription() {
+            return "()* loopback of 196:30: ( COL_COL strn= ID )*";
         }
     }
  
 
-    public static final BitSet FOLLOW_30_in_dirUnit59 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_STRING_LITERAL_in_dirUnit63 = new BitSet(new long[]{0x0000000180000000L});
-    public static final BitSet FOLLOW_31_in_dirUnit68 = new BitSet(new long[]{0x0000000000000060L});
-    public static final BitSet FOLLOW_UNION_in_dirUnit73 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_INTER_in_dirUnit79 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_32_in_dirUnit88 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_STRING_LITERAL_in_dirUnit92 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_33_in_dirUnit96 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_STRING_LITERAL_in_dirUnit100 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_34_in_dirUnit104 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_STRING_LITERAL_in_dirUnit108 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_35_in_dirUnit115 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_LCURLY_in_dirUnit117 = new BitSet(new long[]{0x00000000003C1710L});
-    public static final BitSet FOLLOW_directives_in_dirUnit121 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_RCURLY_in_dirUnit123 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_36_in_dirUnit127 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_LCURLY_in_dirUnit129 = new BitSet(new long[]{0x00000000003C1710L});
-    public static final BitSet FOLLOW_directives_in_dirUnit133 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_RCURLY_in_dirUnit135 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_dirUnit139 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_LCURLY_in_dirUnit141 = new BitSet(new long[]{0x00000000003C1710L});
-    public static final BitSet FOLLOW_directives_in_dirUnit145 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_RCURLY_in_dirUnit147 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_directive_in_directives164 = new BitSet(new long[]{0x00000000003C1612L});
-    public static final BitSet FOLLOW_concatD_in_directive184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_createD_in_directive190 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_changeD_in_directive195 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CREATE_in_createD221 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_ID_in_createD225 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_AS_in_createD227 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_DOLLAR_in_createD229 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_ID_in_createD233 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_refObj_in_changeD258 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_DOT_in_changeD260 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_ID_in_changeD264 = new BitSet(new long[]{0x0000000000070000L});
-    public static final BitSet FOLLOW_setD_in_changeD270 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_addD_in_changeD276 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_removeD_in_changeD285 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_concat_property_in_concatD320 = new BitSet(new long[]{0x000000000000C000L});
-    public static final BitSet FOLLOW_COMMA_in_concatD325 = new BitSet(new long[]{0x0000000000000410L});
-    public static final BitSet FOLLOW_concat_property_in_concatD329 = new BitSet(new long[]{0x000000000000C000L});
-    public static final BitSet FOLLOW_CONCAT_in_concatD335 = new BitSet(new long[]{0x0000000000000410L});
-    public static final BitSet FOLLOW_concat_property_in_concatD339 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_nameRef_in_concat_property356 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_DOT_in_concat_property358 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_ID_in_concat_property362 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_stringL_in_concat_property369 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_EQUALS_in_setD385 = new BitSet(new long[]{0x00000000003C1610L});
-    public static final BitSet FOLLOW_refObj_in_setD389 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_PLUS_in_addD405 = new BitSet(new long[]{0x00000000003C1610L});
-    public static final BitSet FOLLOW_refObj_in_addD409 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_MINUS_in_removeD425 = new BitSet(new long[]{0x00000000003C1610L});
-    public static final BitSet FOLLOW_refObj_in_removeD429 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_nameRef_in_refObj445 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_idRef_in_refObj451 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_stringL_in_refObj459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_booleanL_in_refObj465 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_integerL_in_refObj474 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_qualifiedID_in_nameRef504 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DOLLAR_in_idRef528 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_ID_in_idRef532 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_LITERAL_in_stringL559 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_integer_in_integerL584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_MINUS_in_integer600 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_INT_LITERAL_in_integer604 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TRUE_in_booleanL636 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FALSE_in_booleanL641 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_qualifiedID658 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_COL_COL_in_qualifiedID663 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_ID_in_qualifiedID667 = new BitSet(new long[]{0x0000000000400002L});
+    public static final BitSet FOLLOW_30_in_dirUnit66 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_STRING_LITERAL_in_dirUnit70 = new BitSet(new long[]{0x0000000180000000L});
+    public static final BitSet FOLLOW_31_in_dirUnit75 = new BitSet(new long[]{0x0000000000000060L});
+    public static final BitSet FOLLOW_UNION_in_dirUnit80 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_INTER_in_dirUnit86 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_32_in_dirUnit95 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_STRING_LITERAL_in_dirUnit99 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_33_in_dirUnit103 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_STRING_LITERAL_in_dirUnit107 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_34_in_dirUnit111 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_STRING_LITERAL_in_dirUnit115 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_35_in_dirUnit122 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_LCURLY_in_dirUnit124 = new BitSet(new long[]{0x00000000003C1710L});
+    public static final BitSet FOLLOW_directives_in_dirUnit128 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_RCURLY_in_dirUnit130 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_36_in_dirUnit134 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_LCURLY_in_dirUnit136 = new BitSet(new long[]{0x00000000003C1710L});
+    public static final BitSet FOLLOW_directives_in_dirUnit140 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_RCURLY_in_dirUnit142 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_37_in_dirUnit146 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_LCURLY_in_dirUnit148 = new BitSet(new long[]{0x00000000003C1710L});
+    public static final BitSet FOLLOW_directives_in_dirUnit152 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_RCURLY_in_dirUnit154 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_directive_in_directives171 = new BitSet(new long[]{0x00000000003C1612L});
+    public static final BitSet FOLLOW_propertyD_in_directive194 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_stringD_in_directive200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_createD_in_directive206 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CREATE_in_createD231 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_ID_in_createD235 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_AS_in_createD237 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_DOLLAR_in_createD239 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_ID_in_createD243 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_refObj_in_propertyD259 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_DOT_in_propertyD261 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_ID_in_propertyD265 = new BitSet(new long[]{0x000000000007C000L});
+    public static final BitSet FOLLOW_changeD_in_propertyD268 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_concatD_in_propertyD274 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_stringL_in_stringD293 = new BitSet(new long[]{0x000000000007C000L});
+    public static final BitSet FOLLOW_concatD_in_stringD295 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_setD_in_changeD323 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_addD_in_changeD329 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_removeD_in_changeD335 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_COMMA_in_concatD370 = new BitSet(new long[]{0x0000000000000410L});
+    public static final BitSet FOLLOW_concat_property_in_concatD374 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_CONCAT_in_concatD380 = new BitSet(new long[]{0x0000000000000410L});
+    public static final BitSet FOLLOW_concat_property_in_concatD384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_nameRef_in_concat_property401 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_DOT_in_concat_property403 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_ID_in_concat_property407 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_stringL_in_concat_property414 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_EQUALS_in_setD430 = new BitSet(new long[]{0x00000000003C1410L});
+    public static final BitSet FOLLOW_refObj_in_setD434 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_PLUS_in_addD450 = new BitSet(new long[]{0x00000000003C1410L});
+    public static final BitSet FOLLOW_refObj_in_addD454 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_MINUS_in_removeD470 = new BitSet(new long[]{0x00000000003C1410L});
+    public static final BitSet FOLLOW_refObj_in_removeD474 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_nameRef_in_refObj490 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_idRef_in_refObj496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_stringL_in_refObj504 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_booleanL_in_refObj510 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_integerL_in_refObj519 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_qualifiedID_in_nameRef549 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_DOLLAR_in_idRef573 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_ID_in_idRef577 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_LITERAL_in_stringL604 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_integer_in_integerL629 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_MINUS_in_integer645 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_INT_LITERAL_in_integer649 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TRUE_in_booleanL681 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FALSE_in_booleanL686 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_qualifiedID703 = new BitSet(new long[]{0x0000000000400002L});
+    public static final BitSet FOLLOW_COL_COL_in_qualifiedID708 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_ID_in_qualifiedID712 = new BitSet(new long[]{0x0000000000400002L});
 
 }
