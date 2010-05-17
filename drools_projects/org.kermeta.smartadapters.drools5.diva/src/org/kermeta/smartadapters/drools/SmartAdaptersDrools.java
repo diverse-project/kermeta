@@ -450,10 +450,10 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 		return confs;
 	}
 
-	private String getBestConfiguration(String model_uri, String context_uri, boolean simpleInterface) {
+	public String getBestConfiguration(String context_uri, boolean simpleInterface) {
 		if (simpleInterface) {
 			String configuration_uri = "";
-			configuration_uri = reasoner.getBestConfigurations(model_uri, context_uri);
+			configuration_uri = reasoner.getBestConfigurations(dsplFile, context_uri);
 			return configuration_uri;
 		}
 		else {
@@ -461,7 +461,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 			try {
 				ReasonerHandle reasoner = new arf.reasoner.ReasonerHandle("Alloy SAT Reasoner");
 				Loader loader = new arf.model.util.Loader();
-				ModelHandle model = new arf.ModelHandle(loader, model_uri);
+				ModelHandle model = new arf.ModelHandle(loader, dsplFile);
 				InputHandle input = new arf.InputHandle(loader, context_uri, null);
 				QuestionHandle question = new arf.question.QuestionHandle(service.arf.ARF.QUESTIONS.GET_BEST_VALID_CONFIGURATIONS);
 				arf.setReasoner(reasoner);
@@ -540,7 +540,7 @@ public class SmartAdaptersDrools implements DiVAComponentOSGi, IWeaver, ActionLi
 			
 			logger.info("Reasoning...");
 			
-			String confURI = getBestConfiguration(dsplFile, contextFile, simpleInterface);
+			String confURI = getBestConfiguration(contextFile, simpleInterface);
 			
 			logger.info("Reasoning time: "+(System.currentTimeMillis()-start)+" ms");
 
