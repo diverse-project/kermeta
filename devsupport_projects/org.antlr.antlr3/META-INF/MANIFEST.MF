@@ -7,5 +7,6 @@ Bundle-Activator: org.antlr.antlr3.Activator
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.osgi.framework;version="1.3.0"
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ original_lib/stringtemplate-3.2.jar
 Export-Package: org.antlr.runtime
