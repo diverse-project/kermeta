@@ -254,4 +254,11 @@ Inc. in the United States, other countries, or both.
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="org.antlr.antlr3"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>

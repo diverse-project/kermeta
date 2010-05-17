@@ -53,6 +53,8 @@
 	<target name="unzip_external_sources">
 		<ant dir="${eclipse.build.dir}/plugins/org.antlr.antlr2" antfile="unjar_build.xml">
 		</ant>
+		<ant dir="${eclipse.build.dir}/plugins/org.antlr.antlr3" antfile="unjar_build.xml">
+		</ant>
 	</target>
 	
 	<!-- build the eclipse help of the documentation plugins -->
