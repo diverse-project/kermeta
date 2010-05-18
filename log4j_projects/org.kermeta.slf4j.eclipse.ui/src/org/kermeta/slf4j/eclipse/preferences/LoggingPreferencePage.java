@@ -13,7 +13,6 @@ package org.kermeta.slf4j.eclipse.preferences;
 import org.eclipse.jface.preference.*;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
-import org.kermeta.slf4j.eclipse.ui.Activator;
 
 /**
  * This class represents a preference page that
@@ -35,7 +34,7 @@ public class LoggingPreferencePage
 
 	public LoggingPreferencePage() {
 		super(GRID);
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
+		setPreferenceStore(org.kermeta.slf4j.eclipse.Activator.getDefault().getPreferenceStore());
 		setDescription("Preferences for logging with kermeta");
 	}
 	
