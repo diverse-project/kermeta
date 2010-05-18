@@ -39,7 +39,7 @@ public class NXC2RXE implements IObjectActionDelegate
 	/** The file selection */
 	private StructuredSelection	selection;
 	
-	private final String PLUGIN_ID = "org.kermeta.kmlogo.logoasm.ui.win32";
+	private final String PLUGIN_ID = "org.kermeta.kmlogo.logoasm.ui.win32.x86";
 
 	/**
 	 * Constructor
@@ -62,7 +62,7 @@ public class NXC2RXE implements IObjectActionDelegate
 	public void run(IAction action)
 	{
 		Console console = new Console("NBC console");
-
+		console.printlnInfo("Calling native executable...");
 		String[] cmd = new String[3];
 
 		try
@@ -105,16 +105,25 @@ public class NXC2RXE implements IObjectActionDelegate
 						}
 					}
 				}
+				console.printlnInfo("Done");
 			}
-			else
+			else {
+				console.printError("Cannot find the NBC native utilities.");
 				Plugin.getDefault().getLog().log(
 					new Status(IStatus.ERROR, Plugin.PLUGIN_ID, "Cannot find the NBC native utilities."));
+			}
 		}
 		catch (IOException ioe)
 		{
+			console.printError("Failed, see error log view for details");
 			Plugin.getDefault().getLog().log(
 				new Status(IStatus.ERROR, Plugin.PLUGIN_ID, 0,
 					"An I/O Exception has been thrown during the search of the executable.", ioe));
+		}
+		catch (Exception e) {
+			console.printError("Failed, see error log view for details");
+			Plugin.getDefault().getLog().log(new Status(IStatus.ERROR, Plugin.PLUGIN_ID, 0,
+					"An exception has been thrown during the search of the executable.", e));
 		}
 
 		// Close the console output stream

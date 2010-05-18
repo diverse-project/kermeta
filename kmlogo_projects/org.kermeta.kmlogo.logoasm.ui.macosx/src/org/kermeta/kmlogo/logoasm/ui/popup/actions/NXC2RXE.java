@@ -115,15 +115,23 @@ public class NXC2RXE implements IObjectActionDelegate
 					}
 				}
 			}
-			else
+			else{
+				console.printError("Cannot find the NBC native utilities.");
 				Plugin.getDefault().getLog().log(
 					new Status(IStatus.ERROR, Plugin.PLUGIN_ID, "Cannot find the NBC native utilities."));
+			}
 		}
 		catch (IOException ioe)
 		{
+			console.printError("Failed, see error log view for details");
 			Plugin.getDefault().getLog().log(
 				new Status(IStatus.ERROR, Plugin.PLUGIN_ID, 0,
 					"An I/O Exception has been thrown during the search of the executable.", ioe));
+		}
+		catch (Exception e) {
+			console.printError("Failed, see error log view for details");
+			Plugin.getDefault().getLog().log(new Status(IStatus.ERROR, Plugin.PLUGIN_ID, 0,
+					"An exception has been thrown during the search of the executable.", e));
 		}
 
 		// Close the console output stream
