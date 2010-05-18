@@ -87,7 +87,7 @@
 	    <pathelement location="${slf4j.jar}"/>
 		<pathelement location="${kermeta.tests.jar}" />
 		<pathelement location="${triskell.eclipse.util.jar}" />
-		<pathelement location="${triskell.cache.utilities.jar" />
+		<pathelement location="${triskell.cache.utilities.jar}" />
 		<pathelement location="${traceability.jar}" />
 	    <pathelement location="${ecoretools.registration.jar}"/>
 		<pathelement location="${debug.core.jar}" />

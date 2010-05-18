@@ -78,7 +78,7 @@
 		<pathelement location="${kermeta.interest.jar}" />
 		<pathelement location="${kermeta.log4j.util.jar}" />
 		<pathelement location="${triskell.eclipse.util.jar}"/>
-		<pathelement location="${triskell.cache.utilities.jar" />
+		<pathelement location="${triskell.cache.utilities.jar}" />
 	    <pathelement location="${traceability.jar}"/>
 	    <pathelement location="${ecoretools.registration.jar}"/>
 	    <!-- <pathelement location="${cu_kermeta.jar}"/> -->
