@@ -11,7 +11,7 @@ object Runner{
 
   def main(args: Array[String]): Unit = {
     val input = Source.fromFile(new java.io.File("sample.kmt")).getLines("\n").reduceLeft[String](_ + '\n' + _)
-    var result = Parser.parse(input)
+    var result = new Parser().parse(input)
     result match {
       case Some(_ @ res) => LoadSaveKM.saveKmModelingUnit("parsed.km", res) //new Interpreter(res).run
       case None =>

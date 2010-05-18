@@ -8,7 +8,12 @@ import fr.irisa.triskell.kermeta.language.structure.impl._
 import fr.irisa.triskell.kermeta.language.behavior.impl._
 import scala.collection.JavaConversions._
 
-object Parser extends StandardTokenParsers {
+object ParserFactory {
+  def createParser = new org.kermeta.scala.parser.Parser
+}
+
+class Parser extends StandardTokenParsers {
+
   lexical.reserved += ("package","require","using","class","aspect","abstract","inv","operation","method","is","do","end","var","from","until","loop","if","then","else","init")
   lexical.delimiters += ("=",";","::","@","{","}","(",")",":",":=",".",",")
 
@@ -18,12 +23,30 @@ object Parser extends StandardTokenParsers {
     result match {
       case Success(tree, _) => {Some(tree) }
       case e: NoSuccess => {
-          Console.err.println(e)
-          exit(100)
+          lastNoSucess = Some(e)
           None
         }
     }
   }
+
+
+  var lastNoSucess : Option[NoSuccess] = None
+
+  def getErrors : Option[ParseException] = {
+    lastNoSucess match {
+      case Some(err) => {
+          val pos = err.next.pos
+          var except = new ParseException
+          except.line = pos.line
+          except.colonne = pos.column
+          except.errMsg = err.msg
+          return Some(except)
+      }
+      case None => None
+    }
+
+  }
+
 
   /* MODELING UNIT DEFINITION */
   def program = kermetaUnit ^^ { case unit => 
@@ -251,6 +274,28 @@ object Parser extends StandardTokenParsers {
   private def fVoidLiteral : Parser[Expression] = ( "Void" ) ^^^ { BehaviorFactory.eINSTANCE.createVoidLiteral }
   private def fStringLiteral : Parser[Expression] = ( stringLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createStringLiteral;newo.setValue(e.toString);newo  } )
   private def fNumericLiteral : Parser[Expression] = ( numericLit ^^ { case e => var newo =BehaviorFactory.eINSTANCE.createIntegerLiteral;newo.setValue(e.toInt);newo  } )
+
+
+  def unaryExpression : Parser[Expression] = "!" ~ fStatement ^^ {
+    case _ ~ stat => BehaviorFactory.eINSTANCE.createCallFeature
+  }
+  def binaryExpression : Parser[Expression] = fStatement ~ binaryOp ~ fStatement ^^ { case stat1 ~ op ~ stat2 =>
+      var newo = BehaviorFactory.eINSTANCE.createCallFeature
+      newo.setTarget(stat1)
+      newo.getParameters.add(stat2)
+      op match {
+        case "+" => newo.setName("plus")
+        case "-" => newo.setName("minus")
+        case "and" => newo.setName("and")
+        case "or" => newo.setName("or")
+        case "*" => newo.setName("mult")
+        case "/" => newo.setName("div")
+        case _ =>
+      }
+      println(newo)
+      newo
+  }
+  def binaryOp : Parser[String] = ( "+" ) // | "- " | "and" | "or" | "*" | "/" )
 
   def fCall : Parser[CallExpression] = (
     ident ^^ {
