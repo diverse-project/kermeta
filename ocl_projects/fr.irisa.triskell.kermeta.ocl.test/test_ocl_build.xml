@@ -11,7 +11,8 @@
 	<!-- <property name="dot.or.bin" value="@dot"/> -->
 	<property name="dot.or.buildclass" value="build/class"/>
 	<!-- <property name="dot.or.buildclass" value="@dot"/> -->
-		
+	<property name="dot.or.targetclasses" value="target/classes"/>
+			
 
 
 	<property name="build.bin" location="./build/class" />
@@ -25,8 +26,10 @@
 	<property name="kermeta.interest.jar" location="..\org.kermeta.interest\${dot.or.bin}" />
 	<property name="kermeta.interpreter.jar" location="..\fr.irisa.triskell.kermeta.interpreter\${dot.or.buildclass}" />
 	<property name="triskell.eclipse.util.jar" location="..\fr.irisa.triskell.eclipse.util\${dot.or.bin}" />
+	<property name="triskell.cache.utilities.jar" location="..\..\..\fr.irisa.triskell.cache.utilities\${dot.or.targetclasses}" />
 	<property name="kermeta.merger.jar" location="..\org.kermeta.merger\${dot.or.bin}" />
 	<property name="kermeta.log4j.util.jar" location="..\org.kermeta.log4j.util\${dot.or.bin}" />
+	<property name="slf4j.jar" location="..\..\..\org.kermeta.slf4j.eclipse\${dot.or.bin}" />
 	<property name="traceability.jar" location="..\fr.irisa.triskell.traceability.model\${dot.or.bin}" />
 	<property name="kermeta.tests.jar" location="..\fr.irisa.triskell.kermeta.tests\${dot.or.bin}" />
 	<property name="ecoretools.registration.jar" location="..\org.eclipse.emf.ecoretools.registration\${dot.or.bin}"/>
@@ -77,8 +80,10 @@
 		<pathelement location="${kermeta.interest.jar}" />
 		<pathelement location="${kermeta.model.jar}" />
 		<pathelement location="${kermeta.log4j.util.jar}" />
+	    <pathelement location="${slf4j.jar}"/>
 		<pathelement location="${kermeta.tests.jar}" />
 		<pathelement location="${triskell.eclipse.util.jar}" />
+		<pathelement location="${triskell.cache.utilities.jar}" />
 		<pathelement location="${traceability.jar}" />
 	    <pathelement location="${ecoretools.registration.jar}"/>
 		<pathelement location="${debug.core.jar}" />
