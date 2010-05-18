@@ -13,7 +13,8 @@ package fsm_package;
 
 
 require kermeta
-require "../../metamodel/fsm.ecore"
+
+require "http://www.kermeta.org/fsm"
 
 using kermeta::persistence 
 using kermeta::standard
