@@ -130,10 +130,10 @@
             </imageobject>
           </mediaobject>
         </figure>
-        <para>Select : "File" &gt; "New"&gt;&gt; "Example..."&gt;&gt;&gt; A window appears. You are
-          asked to choose a wizard for project creation. At the bottom of the list, you will find
-          "Kermeta samples" item. Browse it and select "FSM tutorial Demo". The "Finish" button has
-          been enabled. Click on it.</para>
+        <para>Select : "File" &gt; "New"&gt;&gt; "Example.. A window appears. You are asked to
+          choose a wizard for project creation. At the bottom of the list, you will find "Kermeta
+          samples" item. Browse it and select "FSM tutorial Demo". The "Finish" button has been
+          enabled. Click on it.</para>
         <figure>
           <title> Wizard for selection</title>
           <mediaobject>
@@ -142,9 +142,9 @@
             </imageobject>
           </mediaobject>
         </figure>
-        <para>Thanks to the wizard creation project, a project named
-          "fr.irisa.triskell.kermeta.samples.fsm.demoAspect" appeared on the left side of
-          Eclipse.</para>
+        <para>Thanks to the wizard creation project, a project named<emphasis role="bold">
+            "fr.irisa.triskell.kermeta.samples.fsm.demoAspect" </emphasis>appeared on the left side
+          of Eclipse.</para>
         <figure>
           <title> View of the example project</title>
           <mediaobject>
@@ -861,7 +861,7 @@ class Main
           the main operation. There is no parameter. To run this script with constraint checking,
           right click on "minimization.kmt" and select "Run As" and "Kermeta Constrained
           Application". To run this script without constraint checking, right click on
-          "minimization.kmt" and select "Run As" and "Kermeta App".</para>
+          "minimization.kmt" and select "Run As" and  "Run As Kermeta Application".</para>
         <figure>
           <title> Execution of minimization example</title>
           <mediaobject>
