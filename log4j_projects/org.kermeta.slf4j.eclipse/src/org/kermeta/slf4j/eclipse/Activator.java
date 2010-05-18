@@ -64,7 +64,7 @@ public class Activator extends AbstractUIPlugin {
     		}
 			configureLog4JLogger(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + LOG4JCONFIGDEFAULTLOCATION_IN_METADATA);
 		} catch (Exception e) {
-			System.err.print("Not able to copy kermeta_log4j_configuration.xml in .metadata directory "+ e.getMessage() +"\n");
+			System.err.print("Not able to copy kermeta_log4j_configuration.xml in .metadata directory "+ e +"\n");
 			// don't worry about that, the log4j will simply use its default configuration
 		}
 	}
@@ -139,7 +139,9 @@ public class Activator extends AbstractUIPlugin {
 	  	{
 	  		org.apache.log4j.xml.DOMConfigurator.configure(filePath);
 	  		org.apache.log4j.Logger.getRootLogger().info("log4j "+ (isLog4JConfigured ? "(re)" : "") + "configured with "+filePath);
+	  		
 	  	}
+	  	
 	  	isLog4JConfigured = true;
 	}
 	private boolean isLog4JConfigured=false; 

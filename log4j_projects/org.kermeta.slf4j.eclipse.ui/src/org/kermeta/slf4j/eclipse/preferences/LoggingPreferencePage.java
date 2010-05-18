@@ -38,6 +38,12 @@ public class LoggingPreferencePage
 		setDescription("Preferences for logging with kermeta");
 	}
 	
+	@Override
+	protected IPreferenceStore doGetPreferenceStore() {
+		
+		return org.kermeta.slf4j.eclipse.Activator.getDefault().getPreferenceStore();
+	}
+
 	/**
 	 * Creates the field editors. Field editors are abstractions of
 	 * the common GUI blocks needed to manipulate various types
