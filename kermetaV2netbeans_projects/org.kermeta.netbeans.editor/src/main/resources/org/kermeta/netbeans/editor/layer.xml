@@ -21,6 +21,11 @@
                         </folder>
                     </folder>
                 </folder>
+
+                <folder name="CompletionProviders">
+                    <file name="org-kermeta-netbeans-editor-completion-KermetaCompletionProvider.instance"/>
+                </folder>
+
             </folder>
         </folder>
     </folder>
