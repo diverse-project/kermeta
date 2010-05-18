@@ -132,7 +132,7 @@
         </figure>
         <para>Select : "File" &gt; "New"&gt;&gt; "Example..."&gt;&gt;&gt; A window appears. You are
           asked to choose a wizard for project creation. At the bottom of the list, you will find
-          "Kermeta samples" item. Browse it and select "FSM Tutorial Demo". The "Finish" button has
+          "Kermeta samples" item. Browse it and select "FSM tutorial Demo". The "Finish" button has
           been enabled. Click on it.</para>
         <figure>
           <title> Wizard for selection</title>
@@ -197,13 +197,13 @@
     <section id="CreateFsmMetamodel">
       <title>Create the fsm meta-model </title>
       <para> In this tutorial we want to create the fsm metamodel with EMF. To start with, create a
-        new General project (File-> New-> Other -> General ->Project) and name it <emphasis
-          role="strong">org.kermeta.fsm.emf </emphasis> . Then create a new folder model on it. If
-        you want to create an EMF metamodel for fsm from scratch you can follow the tutorial <ulink
-          type="" url="../KerMeta-Create-Meta-model-With-EMF/index.html">"How to create an EMF meta
-          model?""</ulink> and use the EMF Sample reflexive editor to create a metamodel like in the
-        following figure into the folder model. Otherwise, you can simply copy the file
-        fsmStatic.ecore from <emphasis role="bold"
+        new General project (File-> New-> Other -> Eclipse Modeling Framework  -> Empty EMF Project)
+        and name it <emphasis role="strong">org.kermeta.fsm.emf </emphasis> . Then create a new
+        folder model on it. If you want to create an EMF metamodel for fsm from scratch you can
+        follow the tutorial <ulink type="" url="../KerMeta-Create-Meta-model-With-EMF/index.html"
+          >"How to create an EMF meta model?""</ulink> and use the EMF Sample reflexive editor to
+        create a metamodel like in the following figure into the folder model. Otherwise, you can
+        simply copy the file fsmStatic.ecore from <emphasis role="bold"
           >fr.irisa.triskell.kermeta.samples.fsm.demoAspect/metamodels/fsm.ecore</emphasis>
           to<emphasis role="bold"> org.kermeta.fsm.emf/model</emphasis> folder.</para>
       <para/>
@@ -227,15 +227,16 @@
   </chapter>
   <chapter>
     <title>Editor</title>
-    <para>In this chapter we present how to create instances of the Fsm metamodel. </para>
+    <para>In this chapter we present how to create instances of the Fsm metamodel.  You can use two
+      ways to do  that, creating dynamic instances directly or using an EMF tree editor.</para>
     <section>
       <title>Dynamic instances<phrase id="create_model"/></title>
       <para> Like shown in the Process tutorial create a dynamic instance is an easy way to create
         an instance of a metamodel during the first development phases. To do so : <orderedlist>
           <listitem>
             <para>Create a new folder dynamic_instance in org.eclipse.fsm.emf .Open the fsm.ecore
-              file with the Sample Ecore Model Editor (Right click on the file -> Open with -> Other
-              -> Sample Ecore Model Editor) </para>
+              file with the Sample Ecore Model Editor (Right click on the file -> Open with  ->
+              Sample Ecore Model Editor) </para>
           </listitem>
           <listitem>
             <para>Right click on the FSM metaclass -> Create Dynamic Instance and select the folder
@@ -284,16 +285,15 @@
               <para>Once the meta-model is created, it is possible to create a model for model
                 generation, called <emphasis>genmodel</emphasis>:<orderedlist>
                   <listitem>
-                    <para>Right click on model folder <emphasis role="strong"><emphasis
+                    <para>Right click on the file fsm.ecore <emphasis role="strong"><emphasis
                           role="strong">File </emphasis></emphasis><emphasis role="strong">&gt; New
                         &gt; </emphasis><emphasis role="strong">O</emphasis><emphasis role="strong"
                         >ther &gt; Eclipse Modeling Framework </emphasis>folder<emphasis
                         role="strong"> &gt; EMF Generator Model</emphasis>;</para>
                   </listitem>
                   <listitem>
-                    <para>Choose a name for your genmodel ( you can name
-                        it<emphasis>fsm.genmodel</emphasis> ) and Select Ecore model in the
-                      following wizard;</para>
+                    <para>Keep the proposed name (<emphasis>fsm.genmodel</emphasis>) and  click on
+                      load.  Then,  select Ecore model in the following wizard;</para>
                   </listitem>
                   <listitem>
                     <para>Select <emphasis role="strong">Browse workspace</emphasis> button, and
@@ -325,8 +325,9 @@
                     </figure>
                   </listitem>
                   <listitem>
-                    <para>Right-click on the root node of the <emphasis>fsm.genmodel</emphasis>, and
-                      choose the <emphasis role="strong">Generate all</emphasis> item.</para>
+                    <para>Right-click on the root node of the <emphasis>fsm.genmodel</emphasis>
+                      (second sub node),  and choose the <emphasis role="strong">Generate
+                        all</emphasis> item.</para>
                   </listitem>
                 </orderedlist></para>
             </listitem>
@@ -343,7 +344,7 @@
             </mediaobject>
           </figure>
         </para>
-        <para> You can customize this EMF editor following the section <link
+        <para> You can customize this EMF editor following the example given on  the section <link
             linkend="CustomizeEMF_Editor"> Customize the generated EMF editor</link> . </para>
       </section>
       <section>
@@ -352,8 +353,8 @@
           launched through the tool bar menu:</para>
         <orderedlist continuation="restarts" numeration="arabic">
           <listitem>
-            <para>In Eclipse Galileo (3.5), right click on org.kermeta.fsm.emf.editor and select
-              Run->Run As -> Eclipse Application</para>
+            <para>In Eclipse Galileo (3.5), right click on org.kermeta.fsm.emf.editor and select Run
+              As -> Eclipse Application</para>
           </listitem>
           <listitem>
             <para>Once the new eclipse application is launched, create a new General project (e.g.
@@ -411,7 +412,7 @@
       program can be achieved by just copying the code provided in the following sections, following
       carefully the suggested instructions. Readers who want to directly load their own models
       should directly go to the section <link linkend="completeKermetaProgramTemplate"> A template
-        for a complete Kermeta program </link> and copy the given template. </para>
+        for a complete Kermeta program </link> and customize the given template. </para>
     <para> You can start with opening the Kermeta perspective with Window->Open Perspective -> Other
       -> Kermeta and create a new Kermeta project (File -> New -> New Kermeta Project into the
       Kermeta perspective). Name it org.kermeta.fsm.serialisation, copy the file fsm.ecore into
@@ -431,15 +432,7 @@
         <para>To do this, select in the main menu of Eclipse</para>
         <para>"File" &gt; "New" ->"New Kermeta File"</para>
         <para>This action opens the following window.</para>
-        <figure>
-          <title> Create a new Kermeta file</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata fileref="KerMeta-The-FSM-example_figures/kmt-from-scratch.png"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
-        <para>Select "New Kermeta file" and press "Next &gt;".</para>
+        <para/>
         <figure>
           <title> Wizard to create a new Kermeta file</title>
           <mediaobject>
@@ -475,6 +468,9 @@
             click on the project Kermeta-> Add Kermeta nature. It permit to check the .kmt files at
             the beginning of Eclipse. </para>
         </tip>
+        <para>Now, we add Kermeta code to load and save models compliant with the fsm.ecore
+          metamodel. For this you need to register the EMF metamodel into the Package
+          Registry.</para>
       </section>
     </section>
     <section id="PackageRegistry_Presentation">
