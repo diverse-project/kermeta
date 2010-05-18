@@ -270,6 +270,7 @@
   </chapter>
   <chapter>
     <title> Conclusion</title>
-    <para> Now, you have installed Kermeta into Eclipse. It 's time to use it!</para>
+    <para> Now, you have installed Kermeta into Eclipse. It 's time to use it! For more information, please refer to  <ulink url="http://www.kermeta.org/tutorials"> Kermeta tutorials</ulink> or
+    <ulink url="http://www.kermeta.org/documents/manual"> Kermeta Manual</ulink>  </para>
   </chapter>
 </book>
