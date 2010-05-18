@@ -13,3 +13,4 @@ Require-Bundle: org.eclipse.ui,
  org.kermeta.slf4j.eclipse
 Export-Package: org.kermeta.slf4j.eclipse.preferences,
  org.kermeta.slf4j.eclipse.ui
+Bundle-ActivationPolicy: lazy
