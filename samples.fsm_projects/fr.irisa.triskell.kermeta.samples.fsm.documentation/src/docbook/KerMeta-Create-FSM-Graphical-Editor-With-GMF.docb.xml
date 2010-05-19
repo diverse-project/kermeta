@@ -21,7 +21,11 @@
     <bibliomisc>Licence EPL</bibliomisc>
     <date>19/07/2006</date>
     <abstract>
-      <para> This tutorial shows how to create a GMF editor for Fsm models. </para>
+      <para> This tutorial shows how to create a GMF editor for Fsm models.  This tutorial
+        consitutes only an example that illustrate the global fsm example. For more informations and
+        tutorials about GMF please refer to the GMF documentation and its tutorials (<ulink
+          url="http://www.eclipse.org/modeling/gmf/"> http://www.eclipse.org/modeling/gmf/</ulink>
+        (Eclipse GMF Project) ).</para>
     </abstract>
     <publisher>
       <publishername>INRIA</publishername>
@@ -45,9 +49,7 @@
       let by MOF which defines only the structure of meta-models, by adding a way to specify static
       semantic (similar to OCL) and dynamic semantic (using operational semantic in the operation of
       the metamodel). Kermeta uses the object-oriented paradigm like Java or Eiffel. This document
-      presents various aspects of the language, including the textual syntax, the metamodel (which
-      can be viewed as the abstract syntax) and some more advanced features typically included in
-      its framework.</para>
+      complete the metamodel overview showing how to create a graphical editor for fsm. </para>
     <important>
       <para> Kermeta is an evolving software and despite that we put a lot of attention to this
         document, it may contain errors (more likely in the code samples). If you find any error or
