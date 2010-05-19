@@ -28,6 +28,7 @@ import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
@@ -121,7 +122,7 @@ public class PropertyChecker extends AbstractChecker {
 		for (Property p : props) {
 			if ( (p != property) && (p.getName().equals(property.getName())) ) {		
 				ClassDefinition possibleBaseClass = (ClassDefinition) p.eContainer();
-				if ( classDefinition.isIsAspect() && (possibleBaseClass != classDefinition) ) {
+				if ( (classDefinition.isIsAspect() || possibleBaseClass.isIsAspect()) && (possibleBaseClass != classDefinition) ) {
 					boolean error = false;
 
 					if ( property.isIsComposite() != p.isIsComposite() )
@@ -163,7 +164,7 @@ public class PropertyChecker extends AbstractChecker {
 			
 			}
 		}
-		// An operation cannot be defined twice in the same class
+		// A property cannot be defined twice in the same class
 		if (number_of_duplicate > 1) {
 			addProblem(ERROR, "Class '"+classDefinition.getName()+"' " +
 					"duplicate definition of property '"+property.getName()+"'.",property);
@@ -254,12 +255,43 @@ public class PropertyChecker extends AbstractChecker {
 			  * or an aspect of the current container.
 			  * 
 			  */
-			 ClassDefinition container1 = null;
-			 if ( property.getOpposite().getOpposite() != null ) 
-				 container1 = (ClassDefinition) property.getOpposite().getOpposite().eContainer();
 			 ClassDefinition container2 = (ClassDefinition) property.eContainer();
-			 String oppcontainerQualifiedName = NamedElementHelper.getQualifiedName(container2);
-			 if ( (container1 != container2)  && ! TypeDefinitionHelper.getAllAspects(builder,oppcontainerQualifiedName).contains(container1) && !TypeDefinitionHelper.getAllAspects(builder,oppcontainerQualifiedName).contains(container2) ) {			 
+			 String containerQualifiedName = NamedElementHelper.getQualifiedName(container2);
+			 ClassDefinition container1 = null;
+			 if ( property.getOpposite().getOpposite() != null ){ 
+				 container1 = (ClassDefinition) property.getOpposite().getOpposite().eContainer();				
+				 if((container1 != container2)  && ! containerQualifiedName.equals(NamedElementHelper.getQualifiedName(container1))){
+					 builder.error(OPPOSITE_ERROR
+							 + pp .ppSimplifiedPropertyInContext(property), property);
+						 if(property.getOpposite().getOpposite() == null)
+							 builder.error(OPPOSITE_ERROR
+							+ pp.ppSimplifiedPropertyInContext(property.getOpposite()), property.getOpposite());
+						 result = false;
+				 }
+			 }
+			 else {
+				 // must check that an aspect points back to this property
+				 //List<TypeDefinition> aspects = TypeDefinitionHelper.getAllAspects(builder,NamedElementHelper.getQualifiedName((ClassDefinition)property.getOpposite().eContainer()));
+				 boolean foundAspectWithMatchingOpposite = false;
+				 List <Property> props = KermetaModelHelper.ClassDefinition.getAllProperties(builder, (ClassDefinition)((Class)property.getType()).getTypeDefinition());
+				 for (Property p : props) {
+					 if(p.getOpposite() != null){
+						 String pcontainerQualifiedName = NamedElementHelper.getQualifiedName((ClassDefinition)p.getOpposite().eContainer());
+						 if( p.getOpposite().getName().equals(property.getName()) && containerQualifiedName.equals(pcontainerQualifiedName)){
+							 foundAspectWithMatchingOpposite = true;
+						 }
+					 }
+				 }
+				 if(!foundAspectWithMatchingOpposite){
+					 builder.error(OPPOSITE_ERROR + " no aspect with matching opposite "
+							 + pp .ppSimplifiedPropertyInContext(property), property);
+						 if(property.getOpposite().getOpposite() == null)
+							 builder.error(OPPOSITE_ERROR
+							+ pp.ppSimplifiedPropertyInContext(property.getOpposite()), property.getOpposite());
+						 result = false;
+				 }
+			 }
+			 if ( (container1 != container2)  && ! TypeDefinitionHelper.getAllAspects(builder,containerQualifiedName).contains(container1) && !TypeDefinitionHelper.getAllAspects(builder,containerQualifiedName).contains(container2) ) {			 
 				 builder.error(OPPOSITE_ERROR
 					 + pp .ppSimplifiedPropertyInContext(property), property);
 				 if(property.getOpposite().getOpposite() == null)
@@ -343,7 +375,9 @@ public class PropertyChecker extends AbstractChecker {
 				 ClassDefinition cd = (ClassDefinition)ctype.getTypeDefinition();
 				 for(Property p : KermetaModelHelper.ClassDefinition.getAllPropertiesWithOpposite(builder, cd)){
 					 if(p.getLower() == 1 && p.getUpper() == 1){
-						 if(!(p.getOpposite().getName().equals(property.getName())) && p.getOpposite().isIsComposite()) {
+						 if(!(p.getOpposite().getName().equals(property.getName()) 
+								 	&& NamedElementHelper.getQualifiedName(((ClassDefinition)property.eContainer())).equals(NamedElementHelper.getQualifiedName(((ClassDefinition)p.getOpposite().eContainer())))) 
+								 && p.getOpposite().isIsComposite()) {
 							 builder.warning("Property " + property.getOwningClass().getName()+"."+property.getName() + " cannot be used because the target class " + cd.getName() +
 							 		" is already contained in a mandatory composition : " + new KM2KMTPrettyPrinter().ppSimplifiedPropertyInContext(p) , 
 							 	property );
