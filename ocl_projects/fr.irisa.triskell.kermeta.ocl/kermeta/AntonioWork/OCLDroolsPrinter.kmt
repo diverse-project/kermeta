@@ -50,7 +50,7 @@ class OCLDROOLSPrinter
     operation main(): Void is
 		do
 				//self.generateOCL("../../ocl/speedsDepTest.xmi", "../../ocl/speedsL1.ecore", "speedsDepTest.kmt")
-				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl/test/c04.xmi",
+				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl/test/exemple.xmi",
 				"test.drl")//"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/01.kmt")
 	    end
 	     
@@ -76,9 +76,9 @@ class OCLDROOLSPrinter
 	    	
 	    	visitor.initializeAttributes()
 		    
-		    stdio.writeln("======= Pass one ========")
+		    //stdio.writeln("======= Pass one ========")
 			oclHelper.getPackageDeclaration(parsedOcl.instances).accept(visitor)
-		    stdio.writeln("=======  Done  ========") 
+		    //stdio.writeln("=======  Done  ========") 
 			var f : kermeta::io::FileIO init kermeta::io::FileIO.new
 			var io : StringWriter   
 			

@@ -94,6 +94,7 @@ using qualifiedNames
 			do
 				var structType : StructType init  StructType.new
 				var listRules : Sequence<Stack<StructType>> init Sequence<Stack<StructType>>.new
+				var ruleNameStr : String init ""
 				
 				//if is a stack top, we don't write the next type
 				//The last element can't reference another
@@ -107,16 +108,16 @@ using qualifiedNames
 				loop
 					stdio.write("rule \"")
 					if ( not ruleName.isVoid() ) then
-						stdio.write(ruleName.~value.toString() )
+						ruleNameStr := ruleName.~value.toString()
 					else
-						stdio.write( "0" )
+						ruleNameStr := "0" 
 					end
 					if ( i != 0 ) then
-						stdio.write( i.toString() )
+						ruleNameStr := ruleNameStr + i.toString()
 					end
-					stdio.writeln("\"")
+					
+					stdio.writeln(ruleNameStr + "\"")
 					stdio.writeln("when")
-
 					stackStructType := listRules.at(i)
 
 					stackTop := true
@@ -128,7 +129,7 @@ using qualifiedNames
 						structType := stackStructType.pop()
 						
 						stdio.write("	$var" + counterVar.toString() + ": ")
-						stdio.write("org.eclipse.emf.ecore.")
+						//stdio.write("org.eclipse.emf.ecore.")
 						stdio.write(structType.typeElement + "(")
 						
 						if ( not structType.nameElement.isVoid() ) then
@@ -162,18 +163,14 @@ using qualifiedNames
 						stackTop := false
 					end
 					
+					stdio.writeln("	EPackage(EClassifiers contains " + "$var" + (counterVar - 1).toString() + ")")
 					
 					stdio.writeln("then")
 					stdio.write("	System.out.println(\"")
-					if ( not ruleName.isVoid() ) then
-						stdio.write(ruleName.~value.toString() )
-					else
-						stdio.write( "0" )
-					end
-					if ( i != 0 ) then
-						stdio.write( i.toString() )
-					end
+					
+					stdio.write(ruleNameStr)
 					stdio.writeln(" is applicable\");")
+					stdio.writeln("	insertLogical(new IntConstraintOccurrence(\""+  ruleNameStr +"\", 10));")
 					stdio.writeln("end")
 					stdio.writeln("")
 				
@@ -263,8 +260,19 @@ using qualifiedNames
 		 
 		method visitPackageDeclarationCS(visitable : PackageDeclarationCS) : Void is
 			do
+				stdio.writeln("import org.drools.solver.core.score.calculator.SimpleScoreCalculator;")
+				stdio.writeln("import org.drools.solver.core.score.constraint.UnweightedConstraintOccurrence;")
+				stdio.writeln("import org.drools.solver.core.score.constraint.ConstraintType;")
+				
+				stdio.writeln("import org.drools.solver.core.score.constraint.IntConstraintOccurrence;")
+				
+				stdio.writeln("import org.eclipse.emf.ecore.*;\n")
+				
+				stdio.writeln("global SimpleScoreCalculator scoreCalculator;\n")
+			
+			
   			 	visitable.contextDecls.each{e|e.accept(self)}
-   			 end
+   			end
 		
 		method visitContextDeclCS(visitable : ContextDeclCS) : Void is
 			do
@@ -655,7 +663,7 @@ using qualifiedNames
 				end
 
 				structType.nameElement := visitable.simpleNameCS.~value
-				structType.typeElement := "EStructuralFeature"
+				structType.typeElement := "EReference"
 				structType.nextElement := "EType"
 				structType.relation := "=="
 				
