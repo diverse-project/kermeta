@@ -30,6 +30,7 @@ public class ConvertToLogoasmK {
 			resourceA.load(null);
 			resourceB.getContents().addAll(resourceA.getContents());
 			org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(resourceB);
+			org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(resourceSet);
 			resourceB.save(null);
 		} catch (IOException e) {
 			e.printStackTrace();

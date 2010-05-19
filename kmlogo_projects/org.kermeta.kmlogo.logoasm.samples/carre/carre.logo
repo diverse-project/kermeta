@@ -1,11 +1,15 @@
-to carre :size 
+To carre :size 
 	Repeat 4 
-		
-			Forward :size 
-			Right 90 
-		 
-	
-end 
+	[ 
+		Forward :size 
+		Right 90 
+		If ( 4 > :size ) Then 
+		[ 
+			Left 90 
+		] 
+	] 
+End 
+
 Clear 
 PenDown 
 carre ( 50 ) 

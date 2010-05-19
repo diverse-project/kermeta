@@ -50,9 +50,9 @@
       <genClasses ecoreClass="ASMLogo.ecore#//ASM/ProcDeclaration">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASMLogo.ecore#//ASM/ProcDeclaration/name"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASMLogo.ecore#//ASM/ProcDeclaration/args"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASMLogo.ecore#//ASM/ProcDeclaration/block"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference ASMLogo.ecore#//ASM/ProcDeclaration/procCall"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASMLogo.ecore#//ASM/ProcDeclaration/instructions"/>
       </genClasses>
       <genClasses ecoreClass="ASMLogo.ecore#//ASM/Block">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASMLogo.ecore#//ASM/Block/instructions"/>

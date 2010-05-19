@@ -558,7 +558,7 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getProcDeclaration_Block() {
+	public EReference getProcDeclaration_ProcCall() {
 		return (EReference)procDeclarationEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -567,7 +567,7 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getProcDeclaration_ProcCall() {
+	public EReference getProcDeclaration_Instructions() {
 		return (EReference)procDeclarationEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -853,8 +853,8 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 		procDeclarationEClass = createEClass(PROC_DECLARATION);
 		createEAttribute(procDeclarationEClass, PROC_DECLARATION__NAME);
 		createEReference(procDeclarationEClass, PROC_DECLARATION__ARGS);
-		createEReference(procDeclarationEClass, PROC_DECLARATION__BLOCK);
 		createEReference(procDeclarationEClass, PROC_DECLARATION__PROC_CALL);
+		createEReference(procDeclarationEClass, PROC_DECLARATION__INSTRUCTIONS);
 
 		blockEClass = createEClass(BLOCK);
 		createEReference(blockEClass, BLOCK__INSTRUCTIONS);
@@ -993,8 +993,8 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 		initEClass(procDeclarationEClass, ProcDeclaration.class, "ProcDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProcDeclaration_Name(), theKmLogoPackage.getString(), "name", null, 0, 1, ProcDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProcDeclaration_Args(), this.getParameter(), null, "args", null, 0, -1, ProcDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProcDeclaration_Block(), this.getBlock(), null, "block", null, 0, 1, ProcDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProcDeclaration_ProcCall(), this.getProcCall(), this.getProcCall_Declaration(), "procCall", null, 0, -1, ProcDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProcDeclaration_Instructions(), this.getInstruction(), null, "instructions", null, 0, -1, ProcDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(blockEClass, Block.class, "Block", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBlock_Instructions(), this.getInstruction(), null, "instructions", null, 0, -1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

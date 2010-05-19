@@ -21,8 +21,8 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration#getName <em>Name</em>}</li>
  *   <li>{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration#getArgs <em>Args</em>}</li>
- *   <li>{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration#getBlock <em>Block</em>}</li>
  *   <li>{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration#getProcCall <em>Proc Call</em>}</li>
+ *   <li>{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration#getInstructions <em>Instructions</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,32 +74,6 @@ public interface ProcDeclaration extends Instruction {
 	EList<Parameter> getArgs();
 
 	/**
-	 * Returns the value of the '<em><b>Block</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Block</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Block</em>' containment reference.
-	 * @see #setBlock(Block)
-	 * @see org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage#getProcDeclaration_Block()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Block getBlock();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration#getBlock <em>Block</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Block</em>' containment reference.
-	 * @see #getBlock()
-	 * @generated
-	 */
-	void setBlock(Block value);
-
-	/**
 	 * Returns the value of the '<em><b>Proc Call</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcCall}.
 	 * It is bidirectional and its opposite is '{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcCall#getDeclaration <em>Declaration</em>}'.
@@ -116,5 +90,21 @@ public interface ProcDeclaration extends Instruction {
 	 * @generated
 	 */
 	EList<ProcCall> getProcCall();
+
+	/**
+	 * Returns the value of the '<em><b>Instructions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Instruction}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Instructions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Instructions</em>' containment reference list.
+	 * @see org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage#getProcDeclaration_Instructions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Instruction> getInstructions();
 
 } // ProcDeclaration

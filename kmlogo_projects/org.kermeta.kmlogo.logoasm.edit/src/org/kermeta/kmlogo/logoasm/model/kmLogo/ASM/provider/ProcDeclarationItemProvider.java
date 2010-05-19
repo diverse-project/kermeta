@@ -130,7 +130,7 @@ public class ProcDeclarationItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ASMPackage.Literals.PROC_DECLARATION__ARGS);
-			childrenFeatures.add(ASMPackage.Literals.PROC_DECLARATION__BLOCK);
+			childrenFeatures.add(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS);
 		}
 		return childrenFeatures;
 	}
@@ -189,7 +189,7 @@ public class ProcDeclarationItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ASMPackage.PROC_DECLARATION__ARGS:
-			case ASMPackage.PROC_DECLARATION__BLOCK:
+			case ASMPackage.PROC_DECLARATION__INSTRUCTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -214,8 +214,118 @@ public class ProcDeclarationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ASMPackage.Literals.PROC_DECLARATION__BLOCK,
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createBack()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createForward()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createLeft()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createRight()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createPenDown()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createPenUp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createClear()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createConstant()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createProcCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createProcDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
 				 ASMFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createControlStructure()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createIf()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createRepeat()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createWhile()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createParameterCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createPlus()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createMinus()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createMult()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createDiv()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createEquals()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createGreater()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ASMPackage.Literals.PROC_DECLARATION__INSTRUCTIONS,
+				 ASMFactory.eINSTANCE.createLower()));
 	}
 
 }

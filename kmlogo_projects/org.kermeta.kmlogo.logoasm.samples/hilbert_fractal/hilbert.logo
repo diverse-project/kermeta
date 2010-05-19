@@ -1,52 +1,51 @@
-TO lefthilbert :level :size
-	IFELSE >(:level, 0) 
-	[
-		LEFT 90
-		$righthilbert( +(:level,-1), :size)
-		FORWARD :size
-		RIGHT 90
-		$lefthilbert( +(:level,-1), :size)
-		FORWARD :size
-		$lefthilbert( +(:level,-1), :size)
-		RIGHT 90 
-		FORWARD :size
-		$righthilbert( +(:level,-1), :size)
-		LEFT 90
-	]
-	[ ]
-END
+To lefthilbert :level :size 
+	Ifelse ( :level > 0 ) 
+	[ 
+		Left 90 
+		righthilbert ( ( :level + -1 ) , :size ) 
+		Forward :size 
+		Right 90 
+		lefthilbert ( ( :level + -1 ) , :size ) 
+		Forward :size 
+		lefthilbert ( ( :level + -1 ) , :size ) 
+		Right 90 
+		Forward :size 
+		righthilbert ( ( :level + -1 ) , :size ) 
+		Left 90 
+	] 
+	[ 
+	] 
+End 
 
-TO righthilbert :level :size
-	IFELSE >(:level, 0) 
-	[
-		RIGHT 90
-		$lefthilbert( +(:level,-1), :size)
-		FORWARD :size
-		LEFT 90
-		$righthilbert( +(:level,-1), :size)
-		FORWARD :size
-		$righthilbert( +(:level,-1), :size)
-		LEFT 90 
-		FORWARD :size
-		$lefthilbert( +(:level,-1), :size)
-		RIGHT 90
-	]
-	[ ]
-END
+To righthilbert :level :size 
+	Ifelse ( :level > 0 ) 
+	[ 
+		Right 90 
+		lefthilbert ( ( :level + -1 ) , :size ) 
+		Forward :size 
+		Left 90 
+		righthilbert ( ( :level + -1 ) , :size ) 
+		Forward :size 
+		righthilbert ( ( :level + -1 ) , :size ) 
+		Left 90 
+		Forward :size 
+		lefthilbert ( ( :level + -1 ) , :size ) 
+		Right 90 
+	] 
+	[ 
+	] 
+End 
 
-TO drawhilbert :level :size
-	
-	RIGHT 180
-	FORWARD *(:size, *(:level, 2))
-	LEFT 90
-	FORWARD *(:size, *(:level, 2))
-	RIGHT 90
-	LEFT 180
-	
-	PENDOWN
-	$lefthilbert( :level, :size)
-	PENUP
-END
+To drawhilbert :level :size 
+	Right 180 
+	Forward ( :size * ( :level * 2 ) ) 
+	Left 90 
+	Forward ( :size * ( :level * 2 ) ) 
+	Right 90 
+	Left 180 
+	PenDown 
+	lefthilbert ( :level , :size ) 
+	PenUp 
+End 
 
-$drawhilbert ( 5, 10)
-
+drawhilbert ( 5 , 10 ) 

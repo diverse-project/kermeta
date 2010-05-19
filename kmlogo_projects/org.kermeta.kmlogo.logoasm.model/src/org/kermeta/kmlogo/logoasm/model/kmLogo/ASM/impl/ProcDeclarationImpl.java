@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage;
+import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Instruction;
 import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Block;
 import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Parameter;
 import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcCall;
@@ -40,8 +41,8 @@ import org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration;
  * <ul>
  *   <li>{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl.ProcDeclarationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl.ProcDeclarationImpl#getArgs <em>Args</em>}</li>
- *   <li>{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl.ProcDeclarationImpl#getBlock <em>Block</em>}</li>
  *   <li>{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl.ProcDeclarationImpl#getProcCall <em>Proc Call</em>}</li>
+ *   <li>{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl.ProcDeclarationImpl#getInstructions <em>Instructions</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,16 +80,6 @@ public class ProcDeclarationImpl extends InstructionImpl implements ProcDeclarat
 	protected EList<Parameter> args;
 
 	/**
-	 * The cached value of the '{@link #getBlock() <em>Block</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBlock()
-	 * @generated
-	 * @ordered
-	 */
-	protected Block block;
-
-	/**
 	 * The cached value of the '{@link #getProcCall() <em>Proc Call</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -97,6 +88,16 @@ public class ProcDeclarationImpl extends InstructionImpl implements ProcDeclarat
 	 * @ordered
 	 */
 	protected EList<ProcCall> procCall;
+
+	/**
+	 * The cached value of the '{@link #getInstructions() <em>Instructions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInstructions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Instruction> instructions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -155,54 +156,23 @@ public class ProcDeclarationImpl extends InstructionImpl implements ProcDeclarat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Block getBlock() {
-		return block;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetBlock(Block newBlock, NotificationChain msgs) {
-		Block oldBlock = block;
-		block = newBlock;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ASMPackage.PROC_DECLARATION__BLOCK, oldBlock, newBlock);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setBlock(Block newBlock) {
-		if (newBlock != block) {
-			NotificationChain msgs = null;
-			if (block != null)
-				msgs = ((InternalEObject)block).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ASMPackage.PROC_DECLARATION__BLOCK, null, msgs);
-			if (newBlock != null)
-				msgs = ((InternalEObject)newBlock).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ASMPackage.PROC_DECLARATION__BLOCK, null, msgs);
-			msgs = basicSetBlock(newBlock, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ASMPackage.PROC_DECLARATION__BLOCK, newBlock, newBlock));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<ProcCall> getProcCall() {
 		if (procCall == null) {
 			procCall = new EObjectWithInverseResolvingEList<ProcCall>(ProcCall.class, this, ASMPackage.PROC_DECLARATION__PROC_CALL, ASMPackage.PROC_CALL__DECLARATION);
 		}
 		return procCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Instruction> getInstructions() {
+		if (instructions == null) {
+			instructions = new EObjectContainmentEList<Instruction>(Instruction.class, this, ASMPackage.PROC_DECLARATION__INSTRUCTIONS);
+		}
+		return instructions;
 	}
 
 	/**
@@ -230,10 +200,10 @@ public class ProcDeclarationImpl extends InstructionImpl implements ProcDeclarat
 		switch (featureID) {
 			case ASMPackage.PROC_DECLARATION__ARGS:
 				return ((InternalEList<?>)getArgs()).basicRemove(otherEnd, msgs);
-			case ASMPackage.PROC_DECLARATION__BLOCK:
-				return basicSetBlock(null, msgs);
 			case ASMPackage.PROC_DECLARATION__PROC_CALL:
 				return ((InternalEList<?>)getProcCall()).basicRemove(otherEnd, msgs);
+			case ASMPackage.PROC_DECLARATION__INSTRUCTIONS:
+				return ((InternalEList<?>)getInstructions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -250,10 +220,10 @@ public class ProcDeclarationImpl extends InstructionImpl implements ProcDeclarat
 				return getName();
 			case ASMPackage.PROC_DECLARATION__ARGS:
 				return getArgs();
-			case ASMPackage.PROC_DECLARATION__BLOCK:
-				return getBlock();
 			case ASMPackage.PROC_DECLARATION__PROC_CALL:
 				return getProcCall();
+			case ASMPackage.PROC_DECLARATION__INSTRUCTIONS:
+				return getInstructions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -274,12 +244,13 @@ public class ProcDeclarationImpl extends InstructionImpl implements ProcDeclarat
 				getArgs().clear();
 				getArgs().addAll((Collection<? extends Parameter>)newValue);
 				return;
-			case ASMPackage.PROC_DECLARATION__BLOCK:
-				setBlock((Block)newValue);
-				return;
 			case ASMPackage.PROC_DECLARATION__PROC_CALL:
 				getProcCall().clear();
 				getProcCall().addAll((Collection<? extends ProcCall>)newValue);
+				return;
+			case ASMPackage.PROC_DECLARATION__INSTRUCTIONS:
+				getInstructions().clear();
+				getInstructions().addAll((Collection<? extends Instruction>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -299,11 +270,11 @@ public class ProcDeclarationImpl extends InstructionImpl implements ProcDeclarat
 			case ASMPackage.PROC_DECLARATION__ARGS:
 				getArgs().clear();
 				return;
-			case ASMPackage.PROC_DECLARATION__BLOCK:
-				setBlock((Block)null);
-				return;
 			case ASMPackage.PROC_DECLARATION__PROC_CALL:
 				getProcCall().clear();
+				return;
+			case ASMPackage.PROC_DECLARATION__INSTRUCTIONS:
+				getInstructions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -321,10 +292,10 @@ public class ProcDeclarationImpl extends InstructionImpl implements ProcDeclarat
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ASMPackage.PROC_DECLARATION__ARGS:
 				return args != null && !args.isEmpty();
-			case ASMPackage.PROC_DECLARATION__BLOCK:
-				return block != null;
 			case ASMPackage.PROC_DECLARATION__PROC_CALL:
 				return procCall != null && !procCall.isEmpty();
+			case ASMPackage.PROC_DECLARATION__INSTRUCTIONS:
+				return instructions != null && !instructions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -48,10 +48,10 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="args" upperBound="-1"
           eType="#//ASM/Parameter" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//ASM/Block"
-          containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="procCall" upperBound="-1"
           eType="#//ASM/ProcCall" eOpposite="#//ASM/ProcCall/declaration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
+          eType="#//ASM/Instruction" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//ASM/Instruction">
       <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"

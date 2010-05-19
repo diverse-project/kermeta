@@ -919,10 +919,10 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 		printCountingMap.put("name", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.PROC_DECLARATION__ARGS));
 		printCountingMap.put("args", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
-		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.PROC_DECLARATION__BLOCK));
-		printCountingMap.put("block", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.PROC_DECLARATION__PROC_CALL));
 		printCountingMap.put("procCall", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.PROC_DECLARATION__INSTRUCTIONS));
+		printCountingMap.put("instructions", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
 		int count;
 		boolean iterate = true;
@@ -961,17 +961,31 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 				printCountingMap.putAll(printCountingMap1);
 			}
 		}
-		//////////////DEFINITION PART BEGINS (Containment):
-		count = printCountingMap.get("block");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.PROC_DECLARATION__BLOCK));
-			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-			}
-			printCountingMap.put("block", count - 1);
-		}
 		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_ProcDeclaration_2(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
+			print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_ProcDeclaration_2(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		//////////////DEFINITION PART BEGINS (LineBreak):
+		out.println();
+		out.print(localtab);
+		//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_ProcDeclaration_3(element, localtab, out, printCountingMap);
+		//////////////DEFINITION PART BEGINS (LineBreak):
+		out.println();
+		out.print(localtab);
 	}
 	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_ProcDeclaration_0(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		int alt = -1;
@@ -997,12 +1011,12 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 			break;
 			case 2:			{
 				//////////////DEFINITION PART BEGINS (CsString):
-				out.print("To");
+				out.print("to");
 				out.print(" ");
 			}
 			break;
 			default:			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("to");
+			out.print("To");
 			out.print(" ");
 		}
 	}
@@ -1027,6 +1041,30 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 		}
 	}
 	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_ProcDeclaration_2(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+		java.lang.String localtab = outertab;
+		int count;
+		//////////////DEFINITION PART BEGINS (LineBreak):
+		localtab += "	";
+		out.println();
+		out.print(localtab);
+		//////////////DEFINITION PART BEGINS (Containment):
+		count = printCountingMap.get("instructions");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.PROC_DECLARATION__INSTRUCTIONS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("instructions", count - 1);
+		}
+	}
+	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_ProcDeclaration_3(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		int alt = -1;
 		alt=0;
 		int matches=		0;
@@ -1050,12 +1088,12 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 			break;
 			case 2:			{
 				//////////////DEFINITION PART BEGINS (CsString):
-				out.print("End");
+				out.print("end");
 				out.print(" ");
 			}
 			break;
 			default:			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("end");
+			out.print("End");
 			out.print(" ");
 		}
 	}
@@ -1067,57 +1105,22 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
 		printCountingMap.put("instructions", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
-		int alt = -1;
-		alt=0;
-		int matches=		0;
-		int tempMatchCount;
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"instructions"		));
-		if (tempMatchCount > matches) {
-			alt = 1;
-			matches = tempMatchCount;
-		}
-		switch(alt) {
-			case 1:			{
-				boolean iterate = true;
-				java.io.StringWriter sWriter = null;
-				java.io.PrintWriter out1 = null;
-				java.util.HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = null;
-				//////////////DEFINITION PART BEGINS (CompoundDefinition):
-				print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_Block_1(element, localtab, out, printCountingMap);
-				//////////////DEFINITION PART BEGINS (CompoundDefinition):
-				iterate = true;
-				while (iterate) {
-					sWriter = new java.io.StringWriter();
-					out1 = new java.io.PrintWriter(sWriter);
-					printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-					print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_Block_2(element, localtab, out1, printCountingMap1);
-					if (printCountingMap.equals(printCountingMap1)) {
-						iterate = false;
-						out1.close();
-					} else {
-						out1.flush();
-						out1.close();
-						out.print(sWriter.toString());
-						printCountingMap.putAll(printCountingMap1);
-					}
-				}
-				//////////////DEFINITION PART BEGINS (LineBreak):
-				out.println();
-				out.print(localtab);
-			}
-			break;
-			default:			java.io.StringWriter sWriter = null;
-			java.io.PrintWriter out1 = null;
-			java.util.HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = null;
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("[");
-			out.print(" ");
-			//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = null;
+		//////////////DEFINITION PART BEGINS (CsString):
+		out.print("[");
+		out.print(" ");
+		//////////////DEFINITION PART BEGINS (CompoundDefinition):
+		iterate = true;
+		while (iterate) {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
 			printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
 			print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_Block_0(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
 				out1.close();
 			} else {
 				out1.flush();
@@ -1125,317 +1128,15 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 				out.print(sWriter.toString());
 				printCountingMap.putAll(printCountingMap1);
 			}
-			//////////////DEFINITION PART BEGINS (LineBreak):
-			out.println();
-			out.print(localtab);
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("]");
-			out.print(" ");
-			//////////////DEFINITION PART BEGINS (LineBreak):
-			out.println();
-			out.print(localtab);
 		}
-	}
-	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_Block_0(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Block element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
-		int count;
 		//////////////DEFINITION PART BEGINS (LineBreak):
-		localtab += "	";
 		out.println();
 		out.print(localtab);
-		//////////////DEFINITION PART BEGINS (Containment):
-		count = printCountingMap.get("instructions");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
-			java.util.List<?> list = (java.util.List<?>) o;
-			int index = list.size() - count;
-			if (index >= 0) {
-				o = list.get(index);
-			} else {
-				o = null;
-			}
-			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-			}
-			printCountingMap.put("instructions", count - 1);
-		}
+		//////////////DEFINITION PART BEGINS (CsString):
+		out.print("]");
+		out.print(" ");
 	}
-	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_Block_1(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Block element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
-		int count;
-		int alt = -1;
-		alt=0;
-		int matches=		matchCount(printCountingMap, java.util.Arrays.asList(		"instructions"		));
-		int tempMatchCount;
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"instructions"		));
-		if (tempMatchCount > matches) {
-			alt = 1;
-			matches = tempMatchCount;
-		}
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"instructions"		));
-		if (tempMatchCount > matches) {
-			alt = 2;
-			matches = tempMatchCount;
-		}
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"instructions"		));
-		if (tempMatchCount > matches) {
-			alt = 3;
-			matches = tempMatchCount;
-		}
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"instructions"		));
-		if (tempMatchCount > matches) {
-			alt = 4;
-			matches = tempMatchCount;
-		}
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"instructions"		));
-		if (tempMatchCount > matches) {
-			alt = 5;
-			matches = tempMatchCount;
-		}
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"instructions"		));
-		if (tempMatchCount > matches) {
-			alt = 6;
-			matches = tempMatchCount;
-		}
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"instructions"		));
-		if (tempMatchCount > matches) {
-			alt = 7;
-			matches = tempMatchCount;
-		}
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"instructions"		));
-		if (tempMatchCount > matches) {
-			alt = 8;
-			matches = tempMatchCount;
-		}
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"instructions"		));
-		if (tempMatchCount > matches) {
-			alt = 9;
-			matches = tempMatchCount;
-		}
-		tempMatchCount=		matchCount(printCountingMap, java.util.Arrays.asList(		"instructions"		));
-		if (tempMatchCount > matches) {
-			alt = 10;
-			matches = tempMatchCount;
-		}
-		switch(alt) {
-			case 1:			{
-				//////////////DEFINITION PART BEGINS (Containment):
-				count = printCountingMap.get("instructions");
-				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
-					java.util.List<?> list = (java.util.List<?>) o;
-					int index = list.size() - count;
-					if (index >= 0) {
-						o = list.get(index);
-					} else {
-						o = null;
-					}
-					if (o != null) {
-						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-					}
-					printCountingMap.put("instructions", count - 1);
-				}
-			}
-			break;
-			case 2:			{
-				//////////////DEFINITION PART BEGINS (Containment):
-				count = printCountingMap.get("instructions");
-				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
-					java.util.List<?> list = (java.util.List<?>) o;
-					int index = list.size() - count;
-					if (index >= 0) {
-						o = list.get(index);
-					} else {
-						o = null;
-					}
-					if (o != null) {
-						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-					}
-					printCountingMap.put("instructions", count - 1);
-				}
-			}
-			break;
-			case 3:			{
-				//////////////DEFINITION PART BEGINS (Containment):
-				count = printCountingMap.get("instructions");
-				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
-					java.util.List<?> list = (java.util.List<?>) o;
-					int index = list.size() - count;
-					if (index >= 0) {
-						o = list.get(index);
-					} else {
-						o = null;
-					}
-					if (o != null) {
-						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-					}
-					printCountingMap.put("instructions", count - 1);
-				}
-			}
-			break;
-			case 4:			{
-				//////////////DEFINITION PART BEGINS (Containment):
-				count = printCountingMap.get("instructions");
-				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
-					java.util.List<?> list = (java.util.List<?>) o;
-					int index = list.size() - count;
-					if (index >= 0) {
-						o = list.get(index);
-					} else {
-						o = null;
-					}
-					if (o != null) {
-						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-					}
-					printCountingMap.put("instructions", count - 1);
-				}
-			}
-			break;
-			case 5:			{
-				//////////////DEFINITION PART BEGINS (Containment):
-				count = printCountingMap.get("instructions");
-				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
-					java.util.List<?> list = (java.util.List<?>) o;
-					int index = list.size() - count;
-					if (index >= 0) {
-						o = list.get(index);
-					} else {
-						o = null;
-					}
-					if (o != null) {
-						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-					}
-					printCountingMap.put("instructions", count - 1);
-				}
-			}
-			break;
-			case 6:			{
-				//////////////DEFINITION PART BEGINS (Containment):
-				count = printCountingMap.get("instructions");
-				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
-					java.util.List<?> list = (java.util.List<?>) o;
-					int index = list.size() - count;
-					if (index >= 0) {
-						o = list.get(index);
-					} else {
-						o = null;
-					}
-					if (o != null) {
-						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-					}
-					printCountingMap.put("instructions", count - 1);
-				}
-			}
-			break;
-			case 7:			{
-				//////////////DEFINITION PART BEGINS (Containment):
-				count = printCountingMap.get("instructions");
-				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
-					java.util.List<?> list = (java.util.List<?>) o;
-					int index = list.size() - count;
-					if (index >= 0) {
-						o = list.get(index);
-					} else {
-						o = null;
-					}
-					if (o != null) {
-						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-					}
-					printCountingMap.put("instructions", count - 1);
-				}
-			}
-			break;
-			case 8:			{
-				//////////////DEFINITION PART BEGINS (Containment):
-				count = printCountingMap.get("instructions");
-				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
-					java.util.List<?> list = (java.util.List<?>) o;
-					int index = list.size() - count;
-					if (index >= 0) {
-						o = list.get(index);
-					} else {
-						o = null;
-					}
-					if (o != null) {
-						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-					}
-					printCountingMap.put("instructions", count - 1);
-				}
-			}
-			break;
-			case 9:			{
-				//////////////DEFINITION PART BEGINS (Containment):
-				count = printCountingMap.get("instructions");
-				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
-					java.util.List<?> list = (java.util.List<?>) o;
-					int index = list.size() - count;
-					if (index >= 0) {
-						o = list.get(index);
-					} else {
-						o = null;
-					}
-					if (o != null) {
-						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-					}
-					printCountingMap.put("instructions", count - 1);
-				}
-			}
-			break;
-			case 10:			{
-				//////////////DEFINITION PART BEGINS (Containment):
-				count = printCountingMap.get("instructions");
-				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
-					java.util.List<?> list = (java.util.List<?>) o;
-					int index = list.size() - count;
-					if (index >= 0) {
-						o = list.get(index);
-					} else {
-						o = null;
-					}
-					if (o != null) {
-						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-					}
-					printCountingMap.put("instructions", count - 1);
-				}
-			}
-			break;
-			default:			//////////////DEFINITION PART BEGINS (LineBreak):
-			localtab += "	";
-			out.println();
-			out.print(localtab);
-			//////////////DEFINITION PART BEGINS (Containment):
-			count = printCountingMap.get("instructions");
-			if (count > 0) {
-				Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.BLOCK__INSTRUCTIONS));
-				java.util.List<?> list = (java.util.List<?>) o;
-				int index = list.size() - count;
-				if (index >= 0) {
-					o = list.get(index);
-				} else {
-					o = null;
-				}
-				if (o != null) {
-					doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-				}
-				printCountingMap.put("instructions", count - 1);
-			}
-		}
-	}
-	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_Block_2(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Block element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_Block_2_0(element, localtab, out, printCountingMap);
-	}
-	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_Block_2_0(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Block element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_Block_0(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Block element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		java.lang.String localtab = outertab;
 		int count;
 		int alt = -1;
@@ -1717,6 +1418,7 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.IF__ELSE_PART));
 		printCountingMap.put("elsePart", temp == null ? 0 : 1);
 		// print collected hidden tokens
+		int count;
 		int alt = -1;
 		alt=0;
 		int matches=		matchCount(printCountingMap, java.util.Arrays.asList(		"condition"		,
@@ -1732,62 +1434,70 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 		switch(alt) {
 			case 1:			{
 				//////////////DEFINITION PART BEGINS (CompoundDefinition):
-				print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_1(element, localtab, out, printCountingMap);
+				print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_2(element, localtab, out, printCountingMap);
+				//////////////DEFINITION PART BEGINS (Containment):
+				count = printCountingMap.get("condition");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.IF__CONDITION));
+					if (o != null) {
+						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+					}
+					printCountingMap.put("condition", count - 1);
+				}
+				//////////////DEFINITION PART BEGINS (LineBreak):
+				out.println();
+				out.print(localtab);
+				//////////////DEFINITION PART BEGINS (Containment):
+				count = printCountingMap.get("thenPart");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.IF__THEN_PART));
+					if (o != null) {
+						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+					}
+					printCountingMap.put("thenPart", count - 1);
+				}
+				//////////////DEFINITION PART BEGINS (LineBreak):
+				out.println();
+				out.print(localtab);
+				//////////////DEFINITION PART BEGINS (Containment):
+				count = printCountingMap.get("elsePart");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.IF__ELSE_PART));
+					if (o != null) {
+						doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+					}
+					printCountingMap.put("elsePart", count - 1);
+				}
 			}
 			break;
 			default:			//////////////DEFINITION PART BEGINS (CompoundDefinition):
 			print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_0(element, localtab, out, printCountingMap);
+			//////////////DEFINITION PART BEGINS (Containment):
+			count = printCountingMap.get("condition");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.IF__CONDITION));
+				if (o != null) {
+					doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+				}
+				printCountingMap.put("condition", count - 1);
+			}
+			//////////////DEFINITION PART BEGINS (CompoundDefinition):
+			print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_1(element, localtab, out, printCountingMap);
+			//////////////DEFINITION PART BEGINS (LineBreak):
+			out.println();
+			out.print(localtab);
+			//////////////DEFINITION PART BEGINS (Containment):
+			count = printCountingMap.get("thenPart");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.IF__THEN_PART));
+				if (o != null) {
+					doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+				}
+				printCountingMap.put("thenPart", count - 1);
+			}
 		}
 	}
 	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_0(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.If element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
-		int count;
-		java.io.StringWriter sWriter = null;
-		java.io.PrintWriter out1 = null;
-		java.util.HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = null;
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_0_0(element, localtab, out, printCountingMap);
-		//////////////DEFINITION PART BEGINS (Containment):
-		count = printCountingMap.get("condition");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.IF__CONDITION));
-			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-			}
-			printCountingMap.put("condition", count - 1);
-		}
-		//////////////DEFINITION PART BEGINS (LineBreak):
-		out.println();
-		out.print(localtab);
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_0_1(element, localtab, out, printCountingMap);
-		//////////////DEFINITION PART BEGINS (Containment):
-		count = printCountingMap.get("thenPart");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.IF__THEN_PART));
-			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-			}
-			printCountingMap.put("thenPart", count - 1);
-		}
-		//////////////DEFINITION PART BEGINS (LineBreak):
-		out.println();
-		out.print(localtab);
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		sWriter = new java.io.StringWriter();
-		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-		print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_0_2(element, localtab, out1, printCountingMap1);
-		if (printCountingMap.equals(printCountingMap1)) {
-			out1.close();
-		} else {
-			out1.flush();
-			out1.close();
-			out.print(sWriter.toString());
-			printCountingMap.putAll(printCountingMap1);
-		}
-	}
-	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_0_0(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.If element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		int alt = -1;
 		alt=0;
 		int matches=		0;
@@ -1820,7 +1530,7 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 			out.print(" ");
 		}
 	}
-	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_0_1(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.If element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_1(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.If element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		int alt = -1;
 		alt=0;
 		int matches=		0;
@@ -1844,106 +1554,16 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 			break;
 			case 2:			{
 				//////////////DEFINITION PART BEGINS (CsString):
-				out.print("Then");
+				out.print("then");
 				out.print(" ");
 			}
 			break;
 			default:			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("then");
+			out.print("Then");
 			out.print(" ");
 		}
 	}
-	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_0_2(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.If element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
-		int count;
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_0_2_0(element, localtab, out, printCountingMap);
-		//////////////DEFINITION PART BEGINS (Containment):
-		count = printCountingMap.get("elsePart");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.IF__ELSE_PART));
-			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-			}
-			printCountingMap.put("elsePart", count - 1);
-		}
-		//////////////DEFINITION PART BEGINS (LineBreak):
-		out.println();
-		out.print(localtab);
-	}
-	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_0_2_0(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.If element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		int alt = -1;
-		alt=0;
-		int matches=		0;
-		int tempMatchCount;
-		tempMatchCount=		0;
-		if (tempMatchCount > matches) {
-			alt = 1;
-			matches = tempMatchCount;
-		}
-		tempMatchCount=		0;
-		if (tempMatchCount > matches) {
-			alt = 2;
-			matches = tempMatchCount;
-		}
-		switch(alt) {
-			case 1:			{
-				//////////////DEFINITION PART BEGINS (CsString):
-				out.print("else");
-				out.print(" ");
-			}
-			break;
-			case 2:			{
-				//////////////DEFINITION PART BEGINS (CsString):
-				out.print("ELSE");
-				out.print(" ");
-			}
-			break;
-			default:			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("Else");
-			out.print(" ");
-		}
-	}
-	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_1(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.If element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-		java.lang.String localtab = outertab;
-		int count;
-		//////////////DEFINITION PART BEGINS (CompoundDefinition):
-		print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_1_0(element, localtab, out, printCountingMap);
-		//////////////DEFINITION PART BEGINS (Containment):
-		count = printCountingMap.get("condition");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.IF__CONDITION));
-			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-			}
-			printCountingMap.put("condition", count - 1);
-		}
-		//////////////DEFINITION PART BEGINS (LineBreak):
-		out.println();
-		out.print(localtab);
-		//////////////DEFINITION PART BEGINS (Containment):
-		count = printCountingMap.get("thenPart");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.IF__THEN_PART));
-			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-			}
-			printCountingMap.put("thenPart", count - 1);
-		}
-		//////////////DEFINITION PART BEGINS (LineBreak):
-		out.println();
-		out.print(localtab);
-		//////////////DEFINITION PART BEGINS (Containment):
-		count = printCountingMap.get("elsePart");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ASMPackage.IF__ELSE_PART));
-			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-			}
-			printCountingMap.put("elsePart", count - 1);
-		}
-	}
-	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_1_0(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.If element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+	public void print_org_kermeta_kmlogo_logoasm_model_kmLogo_ASM_If_2(org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.If element, java.lang.String outertab, java.io.PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 		int alt = -1;
 		alt=0;
 		int matches=		0;
@@ -2019,7 +1639,6 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 			printCountingMap.put("condition", count - 1);
 		}
 		//////////////DEFINITION PART BEGINS (LineBreak):
-		localtab += "	";
 		out.println();
 		out.print(localtab);
 		//////////////DEFINITION PART BEGINS (Containment):
@@ -2089,7 +1708,6 @@ public class LogoPrinter implements org.kermeta.kmlogo.logoasm.model.kmLogo.reso
 			printCountingMap.put("condition", count - 1);
 		}
 		//////////////DEFINITION PART BEGINS (LineBreak):
-		localtab += "	";
 		out.println();
 		out.print(localtab);
 		//////////////DEFINITION PART BEGINS (Containment):

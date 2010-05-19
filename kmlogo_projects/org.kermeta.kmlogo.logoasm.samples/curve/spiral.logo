@@ -1,14 +1,15 @@
-TO recursive_spiral :size 
-	IFELSE <(:size,30) [
-		FORWARD :size
-		RIGHT 30 
-		$recursive_spiral( /(*(:size,110),100) )
-	]
-	[ ]
-END
+To recursive_spiral :size 
+	Ifelse ( :size < 30 ) 
+	[ 
+		Forward :size 
+		Right 30 
+		recursive_spiral ( ( ( :size * 110 ) / 100 ) ) 
+	] 
+	[ 
+	] 
+End 
 
-CLEAR
-PENDOWN
-$recursive_spiral(10)
-PENUP
-
+Clear 
+PenDown 
+recursive_spiral ( 10 ) 
+PenUp 

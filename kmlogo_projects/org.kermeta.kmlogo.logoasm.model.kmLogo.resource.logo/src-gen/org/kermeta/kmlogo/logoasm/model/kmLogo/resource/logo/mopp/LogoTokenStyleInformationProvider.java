@@ -176,22 +176,22 @@ public class LogoTokenStyleInformationProvider {
 		if ("penDown".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
 		}
-		if ("to".equals(tokenName)) {
+		if ("To".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
 		}
 		if ("TO".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
 		}
-		if ("To".equals(tokenName)) {
+		if ("to".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
 		}
-		if ("end".equals(tokenName)) {
+		if ("End".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
 		}
 		if ("END".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
 		}
-		if ("End".equals(tokenName)) {
+		if ("end".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
 		}
 		if ("If".equals(tokenName)) {
@@ -203,22 +203,13 @@ public class LogoTokenStyleInformationProvider {
 		if ("if".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
 		}
-		if ("then".equals(tokenName)) {
+		if ("Then".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
 		}
 		if ("THEN".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
 		}
-		if ("Then".equals(tokenName)) {
-			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
-		}
-		if ("Else".equals(tokenName)) {
-			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
-		}
-		if ("else".equals(tokenName)) {
-			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
-		}
-		if ("ELSE".equals(tokenName)) {
+		if ("then".equals(tokenName)) {
 			return new TokenStyleImpl(new int[] {0x80, 0x00, 0x55}, true, false, false, false);
 		}
 		if ("Ifelse".equals(tokenName)) {

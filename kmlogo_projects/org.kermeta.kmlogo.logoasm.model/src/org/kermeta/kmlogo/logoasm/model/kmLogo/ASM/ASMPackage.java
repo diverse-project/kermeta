@@ -419,22 +419,22 @@ public interface ASMPackage extends EPackage {
 	int PROC_DECLARATION__ARGS = INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Block</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROC_DECLARATION__BLOCK = INSTRUCTION_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Proc Call</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROC_DECLARATION__PROC_CALL = INSTRUCTION_FEATURE_COUNT + 3;
+	int PROC_DECLARATION__PROC_CALL = INSTRUCTION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Instructions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROC_DECLARATION__INSTRUCTIONS = INSTRUCTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Proc Declaration</em>' class.
@@ -1228,17 +1228,6 @@ public interface ASMPackage extends EPackage {
 	EReference getProcDeclaration_Args();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration#getBlock <em>Block</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Block</em>'.
-	 * @see org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration#getBlock()
-	 * @see #getProcDeclaration()
-	 * @generated
-	 */
-	EReference getProcDeclaration_Block();
-
-	/**
 	 * Returns the meta object for the reference list '{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration#getProcCall <em>Proc Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1248,6 +1237,17 @@ public interface ASMPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getProcDeclaration_ProcCall();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration#getInstructions <em>Instructions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Instructions</em>'.
+	 * @see org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.ProcDeclaration#getInstructions()
+	 * @see #getProcDeclaration()
+	 * @generated
+	 */
+	EReference getProcDeclaration_Instructions();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.Block <em>Block</em>}'.
@@ -1749,20 +1749,20 @@ public interface ASMPackage extends EPackage {
 		EReference PROC_DECLARATION__ARGS = eINSTANCE.getProcDeclaration_Args();
 
 		/**
-		 * The meta object literal for the '<em><b>Block</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PROC_DECLARATION__BLOCK = eINSTANCE.getProcDeclaration_Block();
-
-		/**
 		 * The meta object literal for the '<em><b>Proc Call</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference PROC_DECLARATION__PROC_CALL = eINSTANCE.getProcDeclaration_ProcCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Instructions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROC_DECLARATION__INSTRUCTIONS = eINSTANCE.getProcDeclaration_Instructions();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.kmlogo.logoasm.model.kmLogo.ASM.impl.BlockImpl <em>Block</em>}' class.

@@ -3,22 +3,20 @@
   <instructions xsi:type="ASM:ProcDeclaration" name="circle" procCall="//@instructions.3">
     <args name="ne"/>
     <args name="size"/>
-    <block>
-      <instructions xsi:type="ASM:Repeat">
-        <condition xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-        <block>
-          <instructions xsi:type="ASM:Right">
-            <angle xsi:type="ASM:Div">
-              <lhs xsi:type="ASM:Constant" integerValue="360"/>
-              <rhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-            </angle>
-          </instructions>
-          <instructions xsi:type="ASM:Forward">
-            <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-        </block>
-      </instructions>
-    </block>
+    <instructions xsi:type="ASM:Repeat">
+      <condition xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+      <block>
+        <instructions xsi:type="ASM:Right">
+          <angle xsi:type="ASM:Div">
+            <lhs xsi:type="ASM:Constant" integerValue="360"/>
+            <rhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+          </angle>
+        </instructions>
+        <instructions xsi:type="ASM:Forward">
+          <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+      </block>
+    </instructions>
   </instructions>
   <instructions xsi:type="ASM:Clear"/>
   <instructions xsi:type="ASM:PenDown"/>
