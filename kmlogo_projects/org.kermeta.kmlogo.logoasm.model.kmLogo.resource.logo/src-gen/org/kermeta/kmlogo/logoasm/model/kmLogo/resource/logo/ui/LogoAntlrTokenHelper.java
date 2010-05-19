@@ -1,12 +1,9 @@
-/*$Id : LogoAntlrTokenHelper.java v 1.3 May 8, 2010 9:18:15 AM hrambelo Exp $
-* Project : org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo
-* File : 	LogoAntlrTokenHelper.java
-* License : EPL
-* Copyright : IRISA / INRIA / Universite de Rennes 1 2010
-* ----------------------------------------------------------------------------
-* Creation date : May 8, 2010
-* Authors : Haja RAMBELONTSALAMA
-*/
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui;
 
 // A helper class that decides which tokens can be used for custom syntax highlighting.

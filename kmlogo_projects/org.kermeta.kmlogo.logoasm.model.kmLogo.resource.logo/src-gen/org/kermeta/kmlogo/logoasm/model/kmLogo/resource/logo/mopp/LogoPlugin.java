@@ -1,12 +1,9 @@
-/*$Id : LogoPlugin.java v 1.3 May 8, 2010 9:17:59 AM hrambelo Exp $
-* Project : org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo
-* File : 	LogoPlugin.java
-* License : EPL
-* Copyright : IRISA / INRIA / Universite de Rennes 1 2010
-* ----------------------------------------------------------------------------
-* Creation date : May 8, 2010
-* Authors : Haja RAMBELONTSALAMA
-*/
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp;
 
 // A singleton class for the text resource plug-in.

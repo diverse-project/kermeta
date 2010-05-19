@@ -1,12 +1,9 @@
-/*$Id : ILogoReferenceResolveResult.java v 1.3 May 8, 2010 9:17:03 AM hrambelo Exp $
-* Project : org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo
-* File : 	ILogoReferenceResolveResult.java
-* License : EPL
-* Copyright : IRISA / INRIA / Universite de Rennes 1 2010
-* ----------------------------------------------------------------------------
-* Creation date : May 8, 2010
-* Authors : Haja RAMBELONTSALAMA
-*/
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo;
 
 // The result of a single attempt to resolve an identifier. The

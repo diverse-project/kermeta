@@ -102,21 +102,16 @@ RULES{
 	
 	ASM.ProcDeclaration::=	( "to" | "TO" | "To" )#0 name[](args  )*  block ( "end" | "END" | "End" ) ;
 	
-	ASM.Block ::= (!1 	instructions:ASM.If |instructions:ASM.Right |instructions:ASM.Left |instructions:ASM.Back |
+	ASM.Block ::= "["(!1instructions:ASM.Block)? !0 "]"!0 
+				| 
+					(!1 instructions:ASM.If |instructions:ASM.Right |instructions:ASM.Left |instructions:ASM.Back |
 						instructions:ASM.Forward |instructions:ASM.PenDown |instructions:ASM.PenUp |instructions:ASM.Clear |
 						instructions:ASM.ProcCall |instructions:ASM.Repeat |instructions:ASM.While	)
 						  
 					((!1instructions:ASM.If |instructions:ASM.Right |instructions:ASM.Left |instructions:ASM.Back |
 						instructions:ASM.Forward |instructions:ASM.PenDown |instructions:ASM.PenUp |instructions:ASM.Clear |
-						instructions:ASM.ProcCall |instructions:ASM.Repeat |instructions:ASM.While ))* !0 
-						
-				| "["(!1instructions:ASM.If |instructions:ASM.Right |instructions:ASM.Left |instructions:ASM.Back |
-						instructions:ASM.Forward |instructions:ASM.PenDown |instructions:ASM.PenUp |instructions:ASM.Clear |
-						instructions:ASM.ProcCall |instructions:ASM.Repeat |instructions:ASM.While )? 
-					
-					(!1	instructions:ASM.If |instructions:ASM.Right |instructions:ASM.Left |instructions:ASM.Back |
-						instructions:ASM.Forward |instructions:ASM.PenDown |instructions:ASM.PenUp |instructions:ASM.Clear |
-						instructions:ASM.ProcCall |instructions:ASM.Repeat |instructions:ASM.While )* "]" !0  ;
+						instructions:ASM.ProcCall |instructions:ASM.Repeat |instructions:ASM.While ))* !0   
+				;
 	
 	ASM.If::= 	(( "If" | "IF" | "if" ) condition !0 ( "then" | "THEN" | "Then" ) thenPart !0 ( ("Else"|"else"|"ELSE") elsePart !0 )?)|
 				(("Ifelse" | "IFELSE" | "ifelse" ) condition !0 thenPart !0 elsePart) ;

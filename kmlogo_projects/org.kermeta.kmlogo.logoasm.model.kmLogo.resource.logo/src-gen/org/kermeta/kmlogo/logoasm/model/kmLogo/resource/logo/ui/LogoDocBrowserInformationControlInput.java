@@ -1,12 +1,9 @@
-/*$Id : LogoDocBrowserInformationControlInput.java v 1.3 May 8, 2010 9:18:16 AM hrambelo Exp $
-* Project : org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo
-* File : 	LogoDocBrowserInformationControlInput.java
-* License : EPL
-* Copyright : IRISA / INRIA / Universite de Rennes 1 2010
-* ----------------------------------------------------------------------------
-* Creation date : May 8, 2010
-* Authors : Haja RAMBELONTSALAMA
-*/
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
 package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.ui;
 
 // Provides input for the <code>TextHover</code>. The most is copied from

@@ -1,12 +1,4 @@
-/*$Id : LogoLexer.java v 1.3 May 8, 2010 9:17:57 AM hrambelo Exp $
-* Project : org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo
-* File : 	LogoLexer.java
-* License : EPL
-* Copyright : IRISA / INRIA / Universite de Rennes 1 2010
-* ----------------------------------------------------------------------------
-* Creation date : May 8, 2010
-* Authors : Haja RAMBELONTSALAMA
-*/
+// $ANTLR 3.1.1
 
 	package org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo.mopp;
 
@@ -119,15 +111,15 @@ public class LogoLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "/home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g"; }
+    public String getGrammarFileName() { return "/home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g"; }
 
     // $ANTLR start "T__11"
     public final void mT__11() throws RecognitionException {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:16:7: ( 'Back' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:16:9: 'Back'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:16:7: ( 'Back' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:16:9: 'Back'
             {
             match("Back"); 
 
@@ -147,8 +139,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:17:7: ( 'BACK' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:17:9: 'BACK'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:17:7: ( 'BACK' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:17:9: 'BACK'
             {
             match("BACK"); 
 
@@ -168,8 +160,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:18:7: ( 'bk' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:18:9: 'bk'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:18:7: ( 'bk' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:18:9: 'bk'
             {
             match("bk"); 
 
@@ -189,8 +181,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19:7: ( 'BK' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19:9: 'BK'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19:7: ( 'BK' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19:9: 'BK'
             {
             match("BK"); 
 
@@ -210,8 +202,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20:7: ( 'back' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20:9: 'back'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20:7: ( 'back' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20:9: 'back'
             {
             match("back"); 
 
@@ -231,8 +223,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21:7: ( 'Forward' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21:9: 'Forward'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21:7: ( 'Forward' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21:9: 'Forward'
             {
             match("Forward"); 
 
@@ -252,8 +244,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:22:7: ( 'fd' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:22:9: 'fd'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:22:7: ( 'fd' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:22:9: 'fd'
             {
             match("fd"); 
 
@@ -273,8 +265,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:23:7: ( 'FORWARD' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:23:9: 'FORWARD'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:23:7: ( 'FORWARD' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:23:9: 'FORWARD'
             {
             match("FORWARD"); 
 
@@ -294,8 +286,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:24:7: ( 'FD' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:24:9: 'FD'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:24:7: ( 'FD' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:24:9: 'FD'
             {
             match("FD"); 
 
@@ -315,8 +307,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:25:7: ( 'forward' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:25:9: 'forward'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:25:7: ( 'forward' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:25:9: 'forward'
             {
             match("forward"); 
 
@@ -336,8 +328,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:26:7: ( 'Left' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:26:9: 'Left'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:26:7: ( 'Left' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:26:9: 'Left'
             {
             match("Left"); 
 
@@ -357,8 +349,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:27:7: ( 'lt' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:27:9: 'lt'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:27:7: ( 'lt' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:27:9: 'lt'
             {
             match("lt"); 
 
@@ -378,8 +370,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:28:7: ( 'LEFT' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:28:9: 'LEFT'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:28:7: ( 'LEFT' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:28:9: 'LEFT'
             {
             match("LEFT"); 
 
@@ -399,8 +391,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:29:7: ( 'LT' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:29:9: 'LT'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:29:7: ( 'LT' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:29:9: 'LT'
             {
             match("LT"); 
 
@@ -420,8 +412,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:30:7: ( 'left' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:30:9: 'left'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:30:7: ( 'left' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:30:9: 'left'
             {
             match("left"); 
 
@@ -441,8 +433,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:31:7: ( 'Right' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:31:9: 'Right'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:31:7: ( 'Right' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:31:9: 'Right'
             {
             match("Right"); 
 
@@ -462,8 +454,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:32:7: ( 'rt' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:32:9: 'rt'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:32:7: ( 'rt' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:32:9: 'rt'
             {
             match("rt"); 
 
@@ -483,8 +475,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:33:7: ( 'RIGHT' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:33:9: 'RIGHT'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:33:7: ( 'RIGHT' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:33:9: 'RIGHT'
             {
             match("RIGHT"); 
 
@@ -504,8 +496,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:34:7: ( 'RT' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:34:9: 'RT'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:34:7: ( 'RT' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:34:9: 'RT'
             {
             match("RT"); 
 
@@ -525,8 +517,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:35:7: ( 'right' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:35:9: 'right'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:35:7: ( 'right' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:35:9: 'right'
             {
             match("right"); 
 
@@ -546,8 +538,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:36:7: ( 'PenDown' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:36:9: 'PenDown'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:36:7: ( 'PenDown' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:36:9: 'PenDown'
             {
             match("PenDown"); 
 
@@ -567,8 +559,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:37:7: ( 'PENDOWN' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:37:9: 'PENDOWN'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:37:7: ( 'PENDOWN' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:37:9: 'PENDOWN'
             {
             match("PENDOWN"); 
 
@@ -588,8 +580,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:38:7: ( 'PD' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:38:9: 'PD'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:38:7: ( 'PD' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:38:9: 'PD'
             {
             match("PD"); 
 
@@ -609,8 +601,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:39:7: ( 'pd' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:39:9: 'pd'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:39:7: ( 'pd' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:39:9: 'pd'
             {
             match("pd"); 
 
@@ -630,8 +622,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:40:7: ( 'penDown' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:40:9: 'penDown'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:40:7: ( 'penDown' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:40:9: 'penDown'
             {
             match("penDown"); 
 
@@ -651,8 +643,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:41:7: ( 'PenUp' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:41:9: 'PenUp'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:41:7: ( 'PenUp' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:41:9: 'PenUp'
             {
             match("PenUp"); 
 
@@ -672,8 +664,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:42:7: ( 'PENUP' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:42:9: 'PENUP'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:42:7: ( 'PENUP' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:42:9: 'PENUP'
             {
             match("PENUP"); 
 
@@ -693,8 +685,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:43:7: ( 'pu' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:43:9: 'pu'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:43:7: ( 'pu' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:43:9: 'pu'
             {
             match("pu"); 
 
@@ -714,8 +706,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:44:7: ( 'PU' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:44:9: 'PU'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:44:7: ( 'PU' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:44:9: 'PU'
             {
             match("PU"); 
 
@@ -735,8 +727,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:45:7: ( 'penUp' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:45:9: 'penUp'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:45:7: ( 'penUp' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:45:9: 'penUp'
             {
             match("penUp"); 
 
@@ -756,8 +748,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:46:7: ( 'Clear' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:46:9: 'Clear'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:46:7: ( 'Clear' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:46:9: 'Clear'
             {
             match("Clear"); 
 
@@ -777,8 +769,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:47:7: ( 'CLEAR' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:47:9: 'CLEAR'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:47:7: ( 'CLEAR' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:47:9: 'CLEAR'
             {
             match("CLEAR"); 
 
@@ -798,8 +790,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:48:7: ( 'cs' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:48:9: 'cs'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:48:7: ( 'cs' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:48:9: 'cs'
             {
             match("cs"); 
 
@@ -819,8 +811,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:49:7: ( 'CLEARSCREEN' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:49:9: 'CLEARSCREEN'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:49:7: ( 'CLEARSCREEN' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:49:9: 'CLEARSCREEN'
             {
             match("CLEARSCREEN"); 
 
@@ -840,8 +832,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:50:7: ( 'clearScreen' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:50:9: 'clearScreen'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:50:7: ( 'clearScreen' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:50:9: 'clearScreen'
             {
             match("clearScreen"); 
 
@@ -861,8 +853,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:51:7: ( 'ClearScreen' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:51:9: 'ClearScreen'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:51:7: ( 'ClearScreen' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:51:9: 'ClearScreen'
             {
             match("ClearScreen"); 
 
@@ -882,8 +874,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:52:7: ( 'CS' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:52:9: 'CS'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:52:7: ( 'CS' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:52:9: 'CS'
             {
             match("CS"); 
 
@@ -903,8 +895,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:53:7: ( 'clear' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:53:9: 'clear'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:53:7: ( 'clear' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:53:9: 'clear'
             {
             match("clear"); 
 
@@ -924,8 +916,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:54:7: ( '$' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:54:9: '$'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:54:7: ( '$' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:54:9: '$'
             {
             match('$'); 
 
@@ -944,8 +936,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:55:7: ( '(' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:55:9: '('
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:55:7: ( '(' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:55:9: '('
             {
             match('('); 
 
@@ -964,8 +956,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:56:7: ( ',' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:56:9: ','
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:56:7: ( ',' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:56:9: ','
             {
             match(','); 
 
@@ -984,8 +976,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:57:7: ( ')' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:57:9: ')'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:57:7: ( ')' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:57:9: ')'
             {
             match(')'); 
 
@@ -1004,8 +996,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:58:7: ( 'to' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:58:9: 'to'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:58:7: ( 'to' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:58:9: 'to'
             {
             match("to"); 
 
@@ -1025,8 +1017,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:59:7: ( 'TO' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:59:9: 'TO'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:59:7: ( 'TO' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:59:9: 'TO'
             {
             match("TO"); 
 
@@ -1046,8 +1038,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:60:7: ( 'To' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:60:9: 'To'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:60:7: ( 'To' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:60:9: 'To'
             {
             match("To"); 
 
@@ -1067,8 +1059,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:61:7: ( 'end' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:61:9: 'end'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:61:7: ( 'end' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:61:9: 'end'
             {
             match("end"); 
 
@@ -1088,8 +1080,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:62:7: ( 'END' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:62:9: 'END'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:62:7: ( 'END' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:62:9: 'END'
             {
             match("END"); 
 
@@ -1109,8 +1101,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__58;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:63:7: ( 'End' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:63:9: 'End'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:63:7: ( 'End' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:63:9: 'End'
             {
             match("End"); 
 
@@ -1130,8 +1122,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__59;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:64:7: ( '[' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:64:9: '['
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:64:7: ( '[' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:64:9: '['
             {
             match('['); 
 
@@ -1150,8 +1142,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:65:7: ( ']' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:65:9: ']'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:65:7: ( ']' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:65:9: ']'
             {
             match(']'); 
 
@@ -1170,8 +1162,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__61;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:66:7: ( 'If' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:66:9: 'If'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:66:7: ( 'If' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:66:9: 'If'
             {
             match("If"); 
 
@@ -1191,8 +1183,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:67:7: ( 'IF' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:67:9: 'IF'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:67:7: ( 'IF' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:67:9: 'IF'
             {
             match("IF"); 
 
@@ -1212,8 +1204,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__63;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:68:7: ( 'if' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:68:9: 'if'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:68:7: ( 'if' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:68:9: 'if'
             {
             match("if"); 
 
@@ -1233,8 +1225,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:69:7: ( 'then' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:69:9: 'then'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:69:7: ( 'then' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:69:9: 'then'
             {
             match("then"); 
 
@@ -1254,8 +1246,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__65;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:70:7: ( 'THEN' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:70:9: 'THEN'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:70:7: ( 'THEN' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:70:9: 'THEN'
             {
             match("THEN"); 
 
@@ -1275,8 +1267,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__66;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:71:7: ( 'Then' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:71:9: 'Then'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:71:7: ( 'Then' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:71:9: 'Then'
             {
             match("Then"); 
 
@@ -1296,8 +1288,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__67;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:72:7: ( 'Else' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:72:9: 'Else'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:72:7: ( 'Else' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:72:9: 'Else'
             {
             match("Else"); 
 
@@ -1317,8 +1309,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__68;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:73:7: ( 'else' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:73:9: 'else'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:73:7: ( 'else' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:73:9: 'else'
             {
             match("else"); 
 
@@ -1338,8 +1330,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__69;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:74:7: ( 'ELSE' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:74:9: 'ELSE'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:74:7: ( 'ELSE' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:74:9: 'ELSE'
             {
             match("ELSE"); 
 
@@ -1359,8 +1351,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__70;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:75:7: ( 'Ifelse' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:75:9: 'Ifelse'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:75:7: ( 'Ifelse' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:75:9: 'Ifelse'
             {
             match("Ifelse"); 
 
@@ -1380,8 +1372,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__71;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:76:7: ( 'IFELSE' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:76:9: 'IFELSE'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:76:7: ( 'IFELSE' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:76:9: 'IFELSE'
             {
             match("IFELSE"); 
 
@@ -1401,8 +1393,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__72;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:77:7: ( 'ifelse' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:77:9: 'ifelse'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:77:7: ( 'ifelse' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:77:9: 'ifelse'
             {
             match("ifelse"); 
 
@@ -1422,8 +1414,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__73;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:78:7: ( 'Repeat' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:78:9: 'Repeat'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:78:7: ( 'Repeat' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:78:9: 'Repeat'
             {
             match("Repeat"); 
 
@@ -1443,8 +1435,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__74;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:79:7: ( 'REPEAT' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:79:9: 'REPEAT'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:79:7: ( 'REPEAT' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:79:9: 'REPEAT'
             {
             match("REPEAT"); 
 
@@ -1464,8 +1456,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__75;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:80:7: ( 'repeat' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:80:9: 'repeat'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:80:7: ( 'repeat' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:80:9: 'repeat'
             {
             match("repeat"); 
 
@@ -1485,8 +1477,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__76;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:81:7: ( 'While' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:81:9: 'While'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:81:7: ( 'While' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:81:9: 'While'
             {
             match("While"); 
 
@@ -1506,8 +1498,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__77;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:82:7: ( 'WHILE' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:82:9: 'WHILE'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:82:7: ( 'WHILE' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:82:9: 'WHILE'
             {
             match("WHILE"); 
 
@@ -1527,8 +1519,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__78;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:83:7: ( 'while' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:83:9: 'while'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:83:7: ( 'while' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:83:9: 'while'
             {
             match("while"); 
 
@@ -1548,8 +1540,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__79;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:84:7: ( ':' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:84:9: ':'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:84:7: ( ':' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:84:9: ':'
             {
             match(':'); 
 
@@ -1568,8 +1560,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__80;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:85:7: ( '+' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:85:9: '+'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:85:7: ( '+' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:85:9: '+'
             {
             match('+'); 
 
@@ -1588,8 +1580,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__81;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:86:7: ( '-' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:86:9: '-'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:86:7: ( '-' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:86:9: '-'
             {
             match('-'); 
 
@@ -1608,8 +1600,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__82;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:87:7: ( '*' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:87:9: '*'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:87:7: ( '*' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:87:9: '*'
             {
             match('*'); 
 
@@ -1628,8 +1620,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__83;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:88:7: ( '/' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:88:9: '/'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:88:7: ( '/' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:88:9: '/'
             {
             match('/'); 
 
@@ -1648,8 +1640,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__84;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:89:7: ( '=' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:89:9: '='
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:89:7: ( '=' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:89:9: '='
             {
             match('='); 
 
@@ -1668,8 +1660,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__85;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:90:7: ( '>' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:90:9: '>'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:90:7: ( '>' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:90:9: '>'
             {
             match('>'); 
 
@@ -1688,8 +1680,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = T__86;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:91:7: ( '<' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:91:9: '<'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:91:7: ( '<' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:91:9: '<'
             {
             match('<'); 
 
@@ -1708,7 +1700,7 @@ public class LogoLexer extends Lexer {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21705:8: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19995:8: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1726,9 +1718,9 @@ public class LogoLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21706:2: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19996:2: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21706:2: ( '-' )?
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19996:2: ( '-' )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -1737,7 +1729,7 @@ public class LogoLexer extends Lexer {
                     }
                     switch (alt1) {
                         case 1 :
-                            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21706:3: '-'
+                            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19996:3: '-'
                             {
                             match('-'); 
 
@@ -1746,14 +1738,14 @@ public class LogoLexer extends Lexer {
 
                     }
 
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21706:8: ( '1' .. '9' )
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21706:9: '1' .. '9'
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19996:8: ( '1' .. '9' )
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19996:9: '1' .. '9'
                     {
                     matchRange('1','9'); 
 
                     }
 
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21706:18: ( '0' .. '9' )*
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19996:18: ( '0' .. '9' )*
                     loop2:
                     do {
                         int alt2=2;
@@ -1766,7 +1758,7 @@ public class LogoLexer extends Lexer {
 
                         switch (alt2) {
                     	case 1 :
-                    	    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21706:19: '0' .. '9'
+                    	    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19996:19: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1782,7 +1774,7 @@ public class LogoLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21706:30: '0'
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19996:30: '0'
                     {
                     match('0'); 
 
@@ -1803,10 +1795,10 @@ public class LogoLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21707:6: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21708:2: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19997:6: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19998:2: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
             {
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21708:2: ( '-' )?
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19998:2: ( '-' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1815,7 +1807,7 @@ public class LogoLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21708:3: '-'
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19998:3: '-'
                     {
                     match('-'); 
 
@@ -1824,7 +1816,7 @@ public class LogoLexer extends Lexer {
 
             }
 
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21708:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19998:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1842,16 +1834,16 @@ public class LogoLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21708:9: ( '1' .. '9' ) ( '0' .. '9' )*
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19998:9: ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21708:9: ( '1' .. '9' )
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21708:10: '1' .. '9'
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19998:9: ( '1' .. '9' )
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19998:10: '1' .. '9'
                     {
                     matchRange('1','9'); 
 
                     }
 
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21708:20: ( '0' .. '9' )*
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19998:20: ( '0' .. '9' )*
                     loop5:
                     do {
                         int alt5=2;
@@ -1864,7 +1856,7 @@ public class LogoLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21708:21: '0' .. '9'
+                    	    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19998:21: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1880,7 +1872,7 @@ public class LogoLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21708:34: '0'
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19998:34: '0'
                     {
                     match('0'); 
 
@@ -1890,7 +1882,7 @@ public class LogoLexer extends Lexer {
             }
 
             match('.'); 
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21708:43: ( '0' .. '9' )+
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19998:43: ( '0' .. '9' )+
             int cnt7=0;
             loop7:
             do {
@@ -1904,7 +1896,7 @@ public class LogoLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21708:44: '0' .. '9'
+            	    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:19998:44: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1937,7 +1929,7 @@ public class LogoLexer extends Lexer {
         try {
             int _type = SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21710:11: ( ( '//' (~ ( '\\n' | '\\r' ) )* ) | ( ';' (~ ( '\\n' | '\\r' ) )* ) )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20000:11: ( ( '//' (~ ( '\\n' | '\\r' ) )* ) | ( ';' (~ ( '\\n' | '\\r' ) )* ) )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1955,14 +1947,14 @@ public class LogoLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21711:2: ( '//' (~ ( '\\n' | '\\r' ) )* )
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20001:2: ( '//' (~ ( '\\n' | '\\r' ) )* )
                     {
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21711:2: ( '//' (~ ( '\\n' | '\\r' ) )* )
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21711:3: '//' (~ ( '\\n' | '\\r' ) )*
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20001:2: ( '//' (~ ( '\\n' | '\\r' ) )* )
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20001:3: '//' (~ ( '\\n' | '\\r' ) )*
                     {
                     match("//"); 
 
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21711:7: (~ ( '\\n' | '\\r' ) )*
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20001:7: (~ ( '\\n' | '\\r' ) )*
                     loop8:
                     do {
                         int alt8=2;
@@ -1975,7 +1967,7 @@ public class LogoLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21711:8: ~ ( '\\n' | '\\r' )
+                    	    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20001:8: ~ ( '\\n' | '\\r' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2002,13 +1994,13 @@ public class LogoLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21711:26: ( ';' (~ ( '\\n' | '\\r' ) )* )
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20001:26: ( ';' (~ ( '\\n' | '\\r' ) )* )
                     {
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21711:26: ( ';' (~ ( '\\n' | '\\r' ) )* )
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21711:27: ';' (~ ( '\\n' | '\\r' ) )*
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20001:26: ( ';' (~ ( '\\n' | '\\r' ) )* )
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20001:27: ';' (~ ( '\\n' | '\\r' ) )*
                     {
                     match(';'); 
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21711:30: (~ ( '\\n' | '\\r' ) )*
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20001:30: (~ ( '\\n' | '\\r' ) )*
                     loop9:
                     do {
                         int alt9=2;
@@ -2021,7 +2013,7 @@ public class LogoLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21711:31: ~ ( '\\n' | '\\r' )
+                    	    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20001:31: ~ ( '\\n' | '\\r' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2063,12 +2055,12 @@ public class LogoLexer extends Lexer {
         try {
             int _type = ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21714:11: ( '/*' ( . )* '*/' )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21715:2: '/*' ( . )* '*/'
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20004:11: ( '/*' ( . )* '*/' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20005:2: '/*' ( . )* '*/'
             {
             match("/*"); 
 
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21715:6: ( . )*
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20005:6: ( . )*
             loop11:
             do {
                 int alt11=2;
@@ -2093,7 +2085,7 @@ public class LogoLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21715:6: .
+            	    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20005:6: .
             	    {
             	    matchAny(); 
 
@@ -2124,10 +2116,10 @@ public class LogoLexer extends Lexer {
         try {
             int _type = TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21717:5: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21718:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20007:5: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20008:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             {
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21718:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20008:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             int cnt12=0;
             loop12:
             do {
@@ -2141,7 +2133,7 @@ public class LogoLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:
+            	    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:
             	    {
             	    if ( input.LA(1)=='-'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -2181,8 +2173,8 @@ public class LogoLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21719:11: ( ( ' ' | '\\t' | '\\f' ) )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21720:2: ( ' ' | '\\t' | '\\f' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20009:11: ( ( ' ' | '\\t' | '\\f' ) )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20010:2: ( ' ' | '\\t' | '\\f' )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -2210,10 +2202,10 @@ public class LogoLexer extends Lexer {
         try {
             int _type = LINEBREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21723:10: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21724:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20013:10: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20014:2: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21724:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20014:2: ( '\\r\\n' | '\\r' | '\\n' )
             int alt13=3;
             int LA13_0 = input.LA(1);
 
@@ -2237,7 +2229,7 @@ public class LogoLexer extends Lexer {
             }
             switch (alt13) {
                 case 1 :
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21724:3: '\\r\\n'
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20014:3: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -2245,14 +2237,14 @@ public class LogoLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21724:12: '\\r'
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20014:12: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:21724:19: '\\n'
+                    // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:20014:19: '\\n'
                     {
                     match('\n'); 
 
@@ -2274,586 +2266,586 @@ public class LogoLexer extends Lexer {
     // $ANTLR end "LINEBREAK"
 
     public void mTokens() throws RecognitionException {
-        // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | INTEGER | FLOAT | SL_COMMENT | ML_COMMENT | TEXT | WHITESPACE | LINEBREAK )
+        // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | INTEGER | FLOAT | SL_COMMENT | ML_COMMENT | TEXT | WHITESPACE | LINEBREAK )
         int alt14=83;
         alt14 = dfa14.predict(input);
         switch (alt14) {
             case 1 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:10: T__11
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:10: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 2 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:16: T__12
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:16: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 3 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:22: T__13
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:22: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 4 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:28: T__14
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:28: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 5 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:34: T__15
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:34: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 6 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:40: T__16
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:40: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 7 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:46: T__17
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:46: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 8 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:52: T__18
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:52: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 9 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:58: T__19
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:58: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 10 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:64: T__20
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:64: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 11 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:70: T__21
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:70: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 12 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:76: T__22
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:76: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 13 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:82: T__23
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:82: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
             case 14 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:88: T__24
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:88: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
             case 15 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:94: T__25
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:94: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
             case 16 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:100: T__26
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:100: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
             case 17 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:106: T__27
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:106: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
             case 18 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:112: T__28
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:112: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
             case 19 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:118: T__29
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:118: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
             case 20 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:124: T__30
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:124: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
             case 21 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:130: T__31
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:130: T__31
                 {
                 mT__31(); 
 
                 }
                 break;
             case 22 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:136: T__32
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:136: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
             case 23 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:142: T__33
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:142: T__33
                 {
                 mT__33(); 
 
                 }
                 break;
             case 24 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:148: T__34
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:148: T__34
                 {
                 mT__34(); 
 
                 }
                 break;
             case 25 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:154: T__35
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:154: T__35
                 {
                 mT__35(); 
 
                 }
                 break;
             case 26 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:160: T__36
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:160: T__36
                 {
                 mT__36(); 
 
                 }
                 break;
             case 27 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:166: T__37
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:166: T__37
                 {
                 mT__37(); 
 
                 }
                 break;
             case 28 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:172: T__38
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:172: T__38
                 {
                 mT__38(); 
 
                 }
                 break;
             case 29 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:178: T__39
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:178: T__39
                 {
                 mT__39(); 
 
                 }
                 break;
             case 30 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:184: T__40
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:184: T__40
                 {
                 mT__40(); 
 
                 }
                 break;
             case 31 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:190: T__41
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:190: T__41
                 {
                 mT__41(); 
 
                 }
                 break;
             case 32 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:196: T__42
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:196: T__42
                 {
                 mT__42(); 
 
                 }
                 break;
             case 33 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:202: T__43
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:202: T__43
                 {
                 mT__43(); 
 
                 }
                 break;
             case 34 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:208: T__44
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:208: T__44
                 {
                 mT__44(); 
 
                 }
                 break;
             case 35 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:214: T__45
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:214: T__45
                 {
                 mT__45(); 
 
                 }
                 break;
             case 36 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:220: T__46
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:220: T__46
                 {
                 mT__46(); 
 
                 }
                 break;
             case 37 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:226: T__47
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:226: T__47
                 {
                 mT__47(); 
 
                 }
                 break;
             case 38 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:232: T__48
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:232: T__48
                 {
                 mT__48(); 
 
                 }
                 break;
             case 39 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:238: T__49
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:238: T__49
                 {
                 mT__49(); 
 
                 }
                 break;
             case 40 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:244: T__50
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:244: T__50
                 {
                 mT__50(); 
 
                 }
                 break;
             case 41 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:250: T__51
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:250: T__51
                 {
                 mT__51(); 
 
                 }
                 break;
             case 42 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:256: T__52
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:256: T__52
                 {
                 mT__52(); 
 
                 }
                 break;
             case 43 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:262: T__53
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:262: T__53
                 {
                 mT__53(); 
 
                 }
                 break;
             case 44 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:268: T__54
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:268: T__54
                 {
                 mT__54(); 
 
                 }
                 break;
             case 45 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:274: T__55
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:274: T__55
                 {
                 mT__55(); 
 
                 }
                 break;
             case 46 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:280: T__56
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:280: T__56
                 {
                 mT__56(); 
 
                 }
                 break;
             case 47 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:286: T__57
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:286: T__57
                 {
                 mT__57(); 
 
                 }
                 break;
             case 48 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:292: T__58
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:292: T__58
                 {
                 mT__58(); 
 
                 }
                 break;
             case 49 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:298: T__59
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:298: T__59
                 {
                 mT__59(); 
 
                 }
                 break;
             case 50 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:304: T__60
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:304: T__60
                 {
                 mT__60(); 
 
                 }
                 break;
             case 51 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:310: T__61
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:310: T__61
                 {
                 mT__61(); 
 
                 }
                 break;
             case 52 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:316: T__62
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:316: T__62
                 {
                 mT__62(); 
 
                 }
                 break;
             case 53 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:322: T__63
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:322: T__63
                 {
                 mT__63(); 
 
                 }
                 break;
             case 54 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:328: T__64
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:328: T__64
                 {
                 mT__64(); 
 
                 }
                 break;
             case 55 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:334: T__65
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:334: T__65
                 {
                 mT__65(); 
 
                 }
                 break;
             case 56 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:340: T__66
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:340: T__66
                 {
                 mT__66(); 
 
                 }
                 break;
             case 57 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:346: T__67
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:346: T__67
                 {
                 mT__67(); 
 
                 }
                 break;
             case 58 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:352: T__68
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:352: T__68
                 {
                 mT__68(); 
 
                 }
                 break;
             case 59 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:358: T__69
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:358: T__69
                 {
                 mT__69(); 
 
                 }
                 break;
             case 60 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:364: T__70
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:364: T__70
                 {
                 mT__70(); 
 
                 }
                 break;
             case 61 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:370: T__71
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:370: T__71
                 {
                 mT__71(); 
 
                 }
                 break;
             case 62 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:376: T__72
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:376: T__72
                 {
                 mT__72(); 
 
                 }
                 break;
             case 63 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:382: T__73
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:382: T__73
                 {
                 mT__73(); 
 
                 }
                 break;
             case 64 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:388: T__74
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:388: T__74
                 {
                 mT__74(); 
 
                 }
                 break;
             case 65 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:394: T__75
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:394: T__75
                 {
                 mT__75(); 
 
                 }
                 break;
             case 66 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:400: T__76
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:400: T__76
                 {
                 mT__76(); 
 
                 }
                 break;
             case 67 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:406: T__77
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:406: T__77
                 {
                 mT__77(); 
 
                 }
                 break;
             case 68 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:412: T__78
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:412: T__78
                 {
                 mT__78(); 
 
                 }
                 break;
             case 69 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:418: T__79
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:418: T__79
                 {
                 mT__79(); 
 
                 }
                 break;
             case 70 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:424: T__80
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:424: T__80
                 {
                 mT__80(); 
 
                 }
                 break;
             case 71 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:430: T__81
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:430: T__81
                 {
                 mT__81(); 
 
                 }
                 break;
             case 72 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:436: T__82
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:436: T__82
                 {
                 mT__82(); 
 
                 }
                 break;
             case 73 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:442: T__83
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:442: T__83
                 {
                 mT__83(); 
 
                 }
                 break;
             case 74 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:448: T__84
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:448: T__84
                 {
                 mT__84(); 
 
                 }
                 break;
             case 75 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:454: T__85
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:454: T__85
                 {
                 mT__85(); 
 
                 }
                 break;
             case 76 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:460: T__86
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:460: T__86
                 {
                 mT__86(); 
 
                 }
                 break;
             case 77 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:466: INTEGER
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:466: INTEGER
                 {
                 mINTEGER(); 
 
                 }
                 break;
             case 78 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:474: FLOAT
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:474: FLOAT
                 {
                 mFLOAT(); 
 
                 }
                 break;
             case 79 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:480: SL_COMMENT
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:480: SL_COMMENT
                 {
                 mSL_COMMENT(); 
 
                 }
                 break;
             case 80 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:491: ML_COMMENT
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:491: ML_COMMENT
                 {
                 mML_COMMENT(); 
 
                 }
                 break;
             case 81 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:502: TEXT
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:502: TEXT
                 {
                 mTEXT(); 
 
                 }
                 break;
             case 82 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:507: WHITESPACE
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:507: WHITESPACE
                 {
                 mWHITESPACE(); 
 
                 }
                 break;
             case 83 :
-                // /home/hrambelo/Applications/Eclipses/32/E_Logo_Deploy/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:518: LINEBREAK
+                // /home/hrambelo/application/Eclipse/64/Svn64/workspace/org.kermeta.kmlogo.logoasm.model.kmLogo.resource.logo/src-gen/org/kermeta/kmlogo/logoasm/model/kmLogo/resource/logo/mopp/Logo.g:1:518: LINEBREAK
                 {
                 mLINEBREAK(); 
 
