@@ -99,7 +99,7 @@
       <title> Prerequisites</title>
       <caution>
         <para>KerMeta must be installed (FSM tutorial is only available in this case). If not,
-          please read the "<ulink type="" url="../KerMeta-How-to-install-KerMeta/index.html">How to
+          please read the "<ulink type="" url="../../../../fr.irisa.triskell.kermeta.documentation/build/eclipse.help/KerMeta-How-to-install-KerMeta/index.html">How to
             install KerMeta</ulink>" tutorial.</para>
       </caution>
       <section>
@@ -200,7 +200,7 @@
         new EMF project (File-> New-> Other -> Eclipse Modeling Framework -> Empty EMF Project) and
         name it <emphasis role="strong">org.kermeta.fsm.emf </emphasis> . Then create a new folder
         model on it. If you want to create an EMF metamodel for fsm from scratch you can follow the
-        tutorial <ulink type="" url="../KerMeta-Create-Meta-model-With-EMF/index.html">"How to
+        tutorial <ulink type="" url="../../../../fr.irisa.triskell.kermeta.documentation/build/eclipse.help/KerMeta-Create-Meta-model-With-EMF/index.html">"How to
           create an EMF meta model?""</ulink> and use the EMF Sample reflexive editor to create a
         metamodel like in the following figure into the folder model. Name it<emphasis role="italic"
           > fsm.ecore</emphasis>. Otherwise, you can simply copy the file fsm.ecore from <emphasis
