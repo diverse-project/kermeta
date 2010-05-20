@@ -10,7 +10,7 @@
 	<!--<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>-->
 	<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\kermeta.org\\docs"/>
 			
-	<target name="all" depends="OOo2dbk, html.single, html.chunked ,pdf.fop">
+	<target name="all" depends="preparedbk, html.single, html.chunked,  pdf.fop">
 	</target>
 	
 
