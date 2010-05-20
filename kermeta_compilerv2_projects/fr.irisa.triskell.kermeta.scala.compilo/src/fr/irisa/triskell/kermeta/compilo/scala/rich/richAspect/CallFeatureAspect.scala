@@ -140,7 +140,7 @@ trait CallFeatureAspect extends CallExpressionAspect with LogAspect {
       case "isNotEqual" => {generateTarget(res);res.append(" != ");generateParam(res,"(",")")}
       case "isEqual" => {generateTarget(res);res.append(" == ");generateParam(res,"(",")")}
       case "equals" => {res.append("(");generateTarget(res);res.append(" == ");generateParam(res,"(",")");res.append(")");}
-      case "run" if(this.getTarget != null) => generateKUnitCase(res)
+      //case "run" if(this.getTarget != null) => generateKUnitCase(res)
       case "asType" => {generateTarget(res);res.append(".asInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
       case "isKindOf" => {generateTarget(res);res.append(".isInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
       case "asKindOf" => {generateTarget(res);res.append(".asInstanceOf");generateInstanceOf(res, this.getParameters.get(0))}
