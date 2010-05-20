@@ -15,13 +15,17 @@
 			dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/"
 			target="all">
 		</ant>
+		<ant antfile="Kermeta-MDK_build.xml"
+			dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/"
+			target="all">
+		</ant>
 	</target>
 	<target name="publish_kermeta_docs" depends="build_kermeta_docs">
 		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}/fr.irisa.triskell.kermeta.documentation/build"
 			keyfile="${key.file}"
 			passphrase=""
 		    trust="yes">
-		    <fileset dir="${updatesite.repository}">
+		    <fileset dir="imported_projects/fr.irisa.triskell.kermeta.documentation/build">
 		      		<include name="**/**"/>
 			      	<exclude name="**/docboo42/**"/>
 				  	<exclude name="**/eclipse.help/**"/>
