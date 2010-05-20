@@ -434,10 +434,10 @@
         role="bold">Other</emphasis> -> <emphasis role="bold">Kermeta</emphasis> and create a new
       Kermeta project <emphasis role="bold">(File</emphasis> -><emphasis role="bold"> New</emphasis>
         -><emphasis role="bold"> New Kermeta Project</emphasis> into the Kermeta perspective). Name
-      it <emphasis role="italic">org.kermeta.fsm.serialisation</emphasis>, copy the file fsm.ecore
+      it <emphasis role="bold">org.kermeta.fsm.serialisation</emphasis>, copy the file fsm.ecore
       (from <emphasis role="bold"
         >fr.irisa.triskell.kermeta.samples.fsm.demoAspect/metamodels/fsm.ecore</emphasis>) into
-      metamodel folder.  The following section presents how to create a new Kermeta file.</para>
+      metamodel folder. The following section presents how to create a new Kermeta file.</para>
     <section>
       <title> Create a new Kermeta file </title>
         <para>We want to add a new kermeta file into the folder kermeta into
@@ -602,7 +602,7 @@
         // Create the repository, then the resource
          var repository : EMFRepository init EMFRepository.new
          var resource : EMFResource 
-         resource ?= repository.createResource("platform:/resource/org.kermeta.fsm.serialisation/model/Fsm_dyn_sample1.xmi", "platform:/resource/org.kermeta.fsm.serialisation/metamodel/fsm.ecore")
+         resource ?= repository.getResource("platform:/resource/org.kermeta.fsm.serialisation/model/Fsm_dyn_sample1.xmi")
          <co id="load.emfmodel.createResource.co" linkends="load.emfmodel.createResource.callout"/>
          resource.load
 
@@ -623,16 +623,16 @@ end
                   <para> To serialize the class definition, the nsURI of the meta model need to be
                     known. </para>
                 </callout>
+                 <callout arearefs="load.emfmodel.using.persistence.co"
+                  id="load.emfmodel.using.persistence.callout">
+                  <para> This method permits to retrieve the resource where the model is stored or
+                    create a new resource if it does not exist.</para>
+                </callout>
                 <callout arearefs="load.emfmodel.createResource.co"
                   id="load.emfmodel.createResource.callout">
                   <para> The persistence permits to load and save EMF models. The key word
                       <emphasis>using</emphasis> is used to simplify writing code like import in
                     Java. </para>
-                </callout>
-                <callout arearefs="load.emfmodel.using.persistence.co"
-                  id="load.emfmodel.using.persistence.callout">
-                  <para> The second parameter of this method permit to know what exactly will be
-                    saved. </para>
                 </callout>
                 <callout arearefs="load.emfmodel.resource.co" id="load.emfmodel.resource.callout">
                   <para> resource is collection of instances which are in the root file. The first
@@ -641,11 +641,20 @@ end
                       <para> You can use <emphasis role="strong">resource.each </emphasis> if you
                         want to browse through the resource.</para>
                     </tip>
+                    <tip>
+                    <title> Create new resource for your instance model</title> 
+                    <para> You can create a nex resource to contain your model with the method
+                          <emphasis role="italic"><emphasis role="italic"
+                            >repository.createResource(NsURI instance model, NsURI
+                            metamodel)</emphasis></emphasis></para>
+                      <para> repository is an EMFRepository that contain the resource. </para>
+                    </tip>
                   </para>
                 </callout>
               </calloutlist>
             </para>
-          </example>To run this file simply right click on it (Run As -> Kermeta Application). You
+          </example>To run this file simply right click on it (<emphasis role="italic">Run
+            As</emphasis> -><emphasis role="italic"> Run As Kermeta Application</emphasis>). You
           should obtain the following trace in the Eclipse's console : </para>
         <figure id="refIllustration85">
           <title>Fsm_dyn_sample1.xmi content </title>
@@ -742,9 +751,8 @@ class Main
       // Create the repository, then the resource
       var &lt;my_rep&gt; : EMFRepository init EMFRepository.new 
       var &lt;my_resource&gt; : EMFResource 
-      &lt;my_resource&gt; ?= repository.createResource(
-      "&lt;relative_path_of_my_model_to_load&gt;",
-      "&lt;relative_path_of_the_metamodel&gt;")
+      &lt;my_resource&gt; ?= repository.getResource(
+      "&lt;relative_path_of_my_model_to_load&gt;"),
       &lt;my_resource&gt;.load
      // Load the emf model - get the root class 
       &lt;my_model_object&gt; ?= resource.one
