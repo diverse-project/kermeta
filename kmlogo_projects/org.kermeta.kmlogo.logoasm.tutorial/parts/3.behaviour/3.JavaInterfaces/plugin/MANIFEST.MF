@@ -1,10 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: SrcKermeta
+Bundle-Name: Kermeta src for KmLogo tutorial
 Bundle-SymbolicName: org.kermeta.kmlogo.logoasm.srcKermeta;singleton=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.3.2.qualifier
 Export-Package: org.kermeta.kmLogo.gui;uses:="javax.swing",
  org.kermeta.kmLogo.wrapper;uses:="fr.irisa.triskell.kermeta.runtime"
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.5.0",
- fr.irisa.triskell.kermeta.interpreter;bundle-version="1.3.2",
- org.kermeta.kmlogo.logoasm.model;bundle-version="1.0.0"
+Require-Bundle: org.eclipse.core.runtime,
+ fr.irisa.triskell.kermeta.interpreter,
+ org.kermeta.kmlogo.logoasm.model
+Bundle-Vendor: INRIA/IRISA
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

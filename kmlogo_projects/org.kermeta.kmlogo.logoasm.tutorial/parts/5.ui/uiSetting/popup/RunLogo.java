@@ -8,6 +8,7 @@
  * Authors       : 
  *		Franck Fleurey
  *		Didier Vojtisek
+ *		Haja Rambelontsalama
  */
 package org.kermeta.kmlogo.logoasm.ui.popup.actions;
 

@@ -70,9 +70,9 @@ package ASM
 
 		attribute args : Parameter[0..*]
 
-		attribute block : Block
-
 		reference procCall : ProcCall[0..*]#declaration
+
+		attribute instructions : Instruction[0..*]
 
 	}
 	class Block inherits Instruction

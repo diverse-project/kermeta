@@ -1,3 +1,12 @@
+/*$Id : ExecHelper.java v 1.3 May 8, 2010 9:43:14 AM hrambelo Exp $
+* Project : org.kermeta.kmlogo.logoasm.ui
+* File : 	ExecHelper.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1 2010
+* ----------------------------------------------------------------------------
+* Creation date : May 8, 2010
+* Authors : Haja RAMBELONTSALAMA
+*/
 package org.kermeta.kmlogo.logoasm.ui;
 
 /*

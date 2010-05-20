@@ -149,7 +149,10 @@ package ASM {
 			// push it on the stack
 			context.pushFrame(frame)
 			// transfert control to procedure body
-			result := declaration.block.eval(context)
+			declaration.instructions.each{ i | 
+				result := i.eval(context)
+			}
+			//result := declaration.instructions.eval(context)
 			// pop stack frame
 			context.popFrame
 		end
@@ -162,7 +165,9 @@ package ASM {
 			if condition.eval(context) != 0 then
 				result := thenPart.eval(context)
 			else
-				result := elsePart.eval(context)
+				if not elsePart.isVoid() then
+					result := elsePart.eval(context)
+				end
 			end						
 		end 
 	}
@@ -182,7 +187,14 @@ package ASM {
 	
 	aspect class Repeat
 	{
-		
+		method eval(context : Context) : Integer is do 
+			from var i : Integer init condition.eval(context)
+			until i < 1
+			loop
+				result := block.eval(context)
+				i := i - 1
+			end
+		end 
 	}
 	
 	/*

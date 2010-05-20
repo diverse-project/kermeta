@@ -23,12 +23,8 @@
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
-    <eSubpackages name="ASM" nsURI="platform:/resource/org.kermeta.kmlogo.logoasm.model/model/srcKermeta/file2.ecore#/kmLogo/ASM"
+    <eSubpackages name="ASM" nsURI="platform:/resource/org.kermeta.kmlogo.logoasm.model/model/srcKermeta/file.ecore#/kmLogo/ASM"
         nsPrefix="ASM">
-      <eClassifiers xsi:type="ecore:EClass" name="LogoProgram">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
-            eType="#/1/ASM/Instruction" containment="true"/>
-      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Instruction" abstract="true"/>
       <eClassifiers xsi:type="ecore:EClass" name="Primitive" abstract="true" eSuperTypes="#/1/ASM/Instruction"/>
       <eClassifiers xsi:type="ecore:EClass" name="Back" eSuperTypes="#/1/ASM/Primitive">
@@ -78,10 +74,10 @@
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="args" upperBound="-1"
             eType="#/1/ASM/Parameter" containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#/1/ASM/Block"
-            containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="procCall" upperBound="-1"
             eType="#/1/ASM/ProcCall" eOpposite="#/1/ASM/ProcCall/declaration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
+            eType="#/1/ASM/Instruction" containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#/1/ASM/Instruction">
         <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
@@ -123,6 +119,10 @@
       <eClassifiers xsi:type="ecore:EClass" name="Equals" eSuperTypes="#/1/ASM/BinaryExp"/>
       <eClassifiers xsi:type="ecore:EClass" name="Greater" eSuperTypes="#/1/ASM/BinaryExp"/>
       <eClassifiers xsi:type="ecore:EClass" name="Lower" eSuperTypes="#/1/ASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="LogoProgram">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
+            eType="#/1/ASM/Instruction" containment="true"/>
+      </eClassifiers>
     </eSubpackages>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource"/>

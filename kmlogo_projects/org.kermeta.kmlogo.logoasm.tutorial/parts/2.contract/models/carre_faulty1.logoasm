@@ -2,7 +2,7 @@
 <ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
   <instructions xsi:type="ASM:ProcDeclaration" name="carre" procCall="//@instructions.3">
     <args name="size"/>
-    <block>
+    
       <instructions xsi:type="ASM:Repeat">
         <condition xsi:type="ASM:Constant" integerValue="4"/>
         <block>
@@ -14,7 +14,7 @@
           </instructions>
         </block>
       </instructions>
-    </block>
+   
   </instructions>
   <instructions xsi:type="ASM:Clear"/>
   <instructions xsi:type="ASM:PenDown"/>

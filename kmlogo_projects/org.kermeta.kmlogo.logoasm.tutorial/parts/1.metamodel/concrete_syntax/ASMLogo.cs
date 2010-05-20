@@ -1,3 +1,19 @@
+//*******************************************************************************
+// Copyright IRISA / INRIA / Universite de Rennes 1 2010
+// 
+// All rights reserved. This program and the accompanying materials
+// are made available under the terms of the Eclipse Public License v1.0 
+// which accompanies this distribution, and is available at
+// http://www.eclipse.org/legal/epl-v10.html
+//
+// Contributors:
+//   Software Technology Group - TU Dresden, Germany 
+//      - initial API and implementation
+//	IRISA / INRIA / Universite de Rennes 1
+//		- Logo language implementation
+//		- author : Haja Rambelontsalama
+// ******************************************************************************/
+
 SYNTAXDEF logo
 FOR <http://www.kermeta.org/kmLogo> <platform:/resource/org.kermeta.kmlogo.logoasm.model/model/ASMLogo.genmodel>
 START ASM.LogoProgram
@@ -64,7 +80,7 @@ TOKENSTYLES{
 
 RULES{
 	
-	ASM.LogoProgram::=	(instructions !0  )* ;
+	ASM.LogoProgram::=	(instructions !0)* ;
 	
 	ASM.Back::=		( "Back" | "BACK" | "bk" | "BK" | "back" )steps  ;
 	
@@ -84,32 +100,21 @@ RULES{
 	
 	ASM.ProcCall::=	( "$"  )?declaration[]( "(" actualArgs ( "," actualArgs  )* ")"  )? ;
 	
-	ASM.ProcDeclaration::=	( "to" | "TO" | "To" )#0 name[](args  )*  block ( "end" | "END" | "End" ) ;
+	ASM.ProcDeclaration::=	( "To" | "TO" | "to" )#0 name[](args  )* (!1instructions)* !0 ( "End" | "END" | "end" ) !0 ;
 	
-	ASM.Block ::= (!1 	instructions:ASM.If |instructions:ASM.Right |instructions:ASM.Left |instructions:ASM.Back |
+	ASM.Block ::= "["(!1instructions:ASM.If |instructions:ASM.Right |instructions:ASM.Left |instructions:ASM.Back |
 						instructions:ASM.Forward |instructions:ASM.PenDown |instructions:ASM.PenUp |instructions:ASM.Clear |
-						instructions:ASM.ProcCall |instructions:ASM.Repeat |instructions:ASM.While	)
-						  
-					((!1instructions:ASM.If |instructions:ASM.Right |instructions:ASM.Left |instructions:ASM.Back |
-						instructions:ASM.Forward |instructions:ASM.PenDown |instructions:ASM.PenUp |instructions:ASM.Clear |
-						instructions:ASM.ProcCall |instructions:ASM.Repeat |instructions:ASM.While ))* !0 
-						
-				| "["(!1instructions:ASM.If |instructions:ASM.Right |instructions:ASM.Left |instructions:ASM.Back |
-						instructions:ASM.Forward |instructions:ASM.PenDown |instructions:ASM.PenUp |instructions:ASM.Clear |
-						instructions:ASM.ProcCall |instructions:ASM.Repeat |instructions:ASM.While )? 
-					
-					(!1	instructions:ASM.If |instructions:ASM.Right |instructions:ASM.Left |instructions:ASM.Back |
-						instructions:ASM.Forward |instructions:ASM.PenDown |instructions:ASM.PenUp |instructions:ASM.Clear |
-						instructions:ASM.ProcCall |instructions:ASM.Repeat |instructions:ASM.While )* "]" !0  ;
+						instructions:ASM.ProcCall |instructions:ASM.Repeat |instructions:ASM.While )* !0 "]"
+					;
 	
-	ASM.If::= 	(( "If" | "IF" | "if" ) condition !0 ( "then" | "THEN" | "Then" ) thenPart !0 ( ("Else"|"else"|"ELSE") elsePart !0 )?)|
-				(("Ifelse" | "IFELSE" | "ifelse" ) condition !0 thenPart !0 elsePart) ;
-	
+	ASM.If::= 	( "If" | "IF" | "if" ) condition ( "Then" | "THEN" | "then" ) !0 thenPart |
+				("Ifelse" | "IFELSE" | "ifelse" ) condition !0 thenPart !0  elsePart  
+	;
 	ASM.ControlStructure::=	condition  ;
 	
-	ASM.Repeat::=	( "Repeat" | "REPEAT" | "repeat") #0 condition !1 block  ;
+	ASM.Repeat::=	( "Repeat" | "REPEAT" | "repeat") #0 condition !0 block  ;
 	
-	ASM.While::=	( "While" | "WHILE" | "while") #0 condition !1 block  ;
+	ASM.While::=	( "While" | "WHILE" | "while") #0 condition !0 block  ;
 	
 	ASM.Parameter::= ":" #0 name[] ;
 	

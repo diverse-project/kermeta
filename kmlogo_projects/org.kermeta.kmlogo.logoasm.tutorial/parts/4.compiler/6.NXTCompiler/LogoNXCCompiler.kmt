@@ -63,7 +63,9 @@ package ASM {
 			proc.append(")\n")
 			var depth : Integer init context.depth
 			context.depth := 0
-			proc.append(block.compileToNXC(context))
+			instructions.each{i | 
+				proc.append(i.compileToNXC(context))
+			}
 			context.subs.add(proc)
 			context.depth := depth
 		end
@@ -184,8 +186,10 @@ package ASM {
 		method compileToNXC(context : NXCCompiler) : String is do
 			result := "if (" + condition.compileToNXC(context) + ")\n"
 			result.append(thenPart.compileToNXC(context))
-			result.append("\n" + context.prefix + "else\n")
-			result.append(elsePart.compileToNXC(context))
+			if not elsePart.isVoid() then
+				result.append("\n" + context.prefix + "else\n")
+				result.append(elsePart.compileToNXC(context))
+			end
 		end 
 	}
 	
@@ -289,6 +293,7 @@ class NXCCompiler
 		var nxc : String init root.compileToNXC(self)
 		// We shoudl read API from the file but right now it is hard codded
 		result := NXCCodeGenerator.new.generate(subs, nxc)
+		stdio.writeln(out)
 		io.writeTextFile(out, result)
 	end
 	

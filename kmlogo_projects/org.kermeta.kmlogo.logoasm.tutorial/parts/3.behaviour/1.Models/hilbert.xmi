@@ -1,174 +1,168 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ASM:LogoProgram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
-  <instructions xsi:type="ASM:ProcDeclaration" name="lefthilbert" procCall="//@instructions.0/@block/@instructions.0/@thenPart/@instructions.4 //@instructions.0/@block/@instructions.0/@thenPart/@instructions.6 //@instructions.1/@block/@instructions.0/@thenPart/@instructions.1 //@instructions.1/@block/@instructions.0/@thenPart/@instructions.9 //@instructions.2/@block/@instructions.7">
+  <instructions xsi:type="ASM:ProcDeclaration" name="lefthilbert" procCall="//@instructions.0/@instructions.0/@thenPart/@instructions.4 //@instructions.0/@instructions.0/@thenPart/@instructions.6 //@instructions.1/@instructions.0/@thenPart/@instructions.1 //@instructions.1/@instructions.0/@thenPart/@instructions.9 //@instructions.2/@instructions.7">
     <args name="level"/>
     <args name="size"/>
-    <block>
-      <instructions xsi:type="ASM:If">
-        <condition xsi:type="ASM:Greater">
-          <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-          <rhs xsi:type="ASM:Constant"/>
-        </condition>
-        <thenPart>
-          <instructions xsi:type="ASM:Left">
-            <angle xsi:type="ASM:Constant" integerValue="90"/>
-          </instructions>
-          <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.1">
-            <actualArgs xsi:type="ASM:Plus">
-              <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-              <rhs xsi:type="ASM:Constant" integerValue="-1"/>
-            </actualArgs>
-            <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:Forward">
-            <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:Right">
-            <angle xsi:type="ASM:Constant" integerValue="90"/>
-          </instructions>
-          <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
-            <actualArgs xsi:type="ASM:Plus">
-              <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-              <rhs xsi:type="ASM:Constant" integerValue="-1"/>
-            </actualArgs>
-            <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:Forward">
-            <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
-            <actualArgs xsi:type="ASM:Plus">
-              <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-              <rhs xsi:type="ASM:Constant" integerValue="-1"/>
-            </actualArgs>
-            <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:Right">
-            <angle xsi:type="ASM:Constant" integerValue="90"/>
-          </instructions>
-          <instructions xsi:type="ASM:Forward">
-            <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.1">
-            <actualArgs xsi:type="ASM:Plus">
-              <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-              <rhs xsi:type="ASM:Constant" integerValue="-1"/>
-            </actualArgs>
-            <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:Left">
-            <angle xsi:type="ASM:Constant" integerValue="90"/>
-          </instructions>
-        </thenPart>
-        <elsePart/>
-      </instructions>
-    </block>
+    <instructions xsi:type="ASM:If">
+      <condition xsi:type="ASM:Greater">
+        <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+        <rhs xsi:type="ASM:Constant"/>
+      </condition>
+      <thenPart>
+        <instructions xsi:type="ASM:Left">
+          <angle xsi:type="ASM:Constant" integerValue="90"/>
+        </instructions>
+        <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.1">
+          <actualArgs xsi:type="ASM:Plus">
+            <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+            <rhs xsi:type="ASM:Constant" integerValue="-1"/>
+          </actualArgs>
+          <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:Forward">
+          <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:Right">
+          <angle xsi:type="ASM:Constant" integerValue="90"/>
+        </instructions>
+        <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
+          <actualArgs xsi:type="ASM:Plus">
+            <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+            <rhs xsi:type="ASM:Constant" integerValue="-1"/>
+          </actualArgs>
+          <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:Forward">
+          <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
+          <actualArgs xsi:type="ASM:Plus">
+            <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+            <rhs xsi:type="ASM:Constant" integerValue="-1"/>
+          </actualArgs>
+          <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:Right">
+          <angle xsi:type="ASM:Constant" integerValue="90"/>
+        </instructions>
+        <instructions xsi:type="ASM:Forward">
+          <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.1">
+          <actualArgs xsi:type="ASM:Plus">
+            <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+            <rhs xsi:type="ASM:Constant" integerValue="-1"/>
+          </actualArgs>
+          <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:Left">
+          <angle xsi:type="ASM:Constant" integerValue="90"/>
+        </instructions>
+      </thenPart>
+      <elsePart/>
+    </instructions>
   </instructions>
-  <instructions xsi:type="ASM:ProcDeclaration" name="righthilbert" procCall="//@instructions.0/@block/@instructions.0/@thenPart/@instructions.1 //@instructions.0/@block/@instructions.0/@thenPart/@instructions.9 //@instructions.1/@block/@instructions.0/@thenPart/@instructions.4 //@instructions.1/@block/@instructions.0/@thenPart/@instructions.6">
+  <instructions xsi:type="ASM:ProcDeclaration" name="righthilbert" procCall="//@instructions.0/@instructions.0/@thenPart/@instructions.1 //@instructions.0/@instructions.0/@thenPart/@instructions.9 //@instructions.1/@instructions.0/@thenPart/@instructions.4 //@instructions.1/@instructions.0/@thenPart/@instructions.6">
     <args name="level"/>
     <args name="size"/>
-    <block>
-      <instructions xsi:type="ASM:If">
-        <condition xsi:type="ASM:Greater">
-          <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-          <rhs xsi:type="ASM:Constant"/>
-        </condition>
-        <thenPart>
-          <instructions xsi:type="ASM:Right">
-            <angle xsi:type="ASM:Constant" integerValue="90"/>
-          </instructions>
-          <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
-            <actualArgs xsi:type="ASM:Plus">
-              <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-              <rhs xsi:type="ASM:Constant" integerValue="-1"/>
-            </actualArgs>
-            <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:Forward">
-            <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:Left">
-            <angle xsi:type="ASM:Constant" integerValue="90"/>
-          </instructions>
-          <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.1">
-            <actualArgs xsi:type="ASM:Plus">
-              <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-              <rhs xsi:type="ASM:Constant" integerValue="-1"/>
-            </actualArgs>
-            <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:Forward">
-            <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.1">
-            <actualArgs xsi:type="ASM:Plus">
-              <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-              <rhs xsi:type="ASM:Constant" integerValue="-1"/>
-            </actualArgs>
-            <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:Left">
-            <angle xsi:type="ASM:Constant" integerValue="90"/>
-          </instructions>
-          <instructions xsi:type="ASM:Forward">
-            <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
-            <actualArgs xsi:type="ASM:Plus">
-              <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-              <rhs xsi:type="ASM:Constant" integerValue="-1"/>
-            </actualArgs>
-            <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          </instructions>
-          <instructions xsi:type="ASM:Right">
-            <angle xsi:type="ASM:Constant" integerValue="90"/>
-          </instructions>
-        </thenPart>
-        <elsePart/>
-      </instructions>
-    </block>
+    <instructions xsi:type="ASM:If">
+      <condition xsi:type="ASM:Greater">
+        <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+        <rhs xsi:type="ASM:Constant"/>
+      </condition>
+      <thenPart>
+        <instructions xsi:type="ASM:Right">
+          <angle xsi:type="ASM:Constant" integerValue="90"/>
+        </instructions>
+        <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
+          <actualArgs xsi:type="ASM:Plus">
+            <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+            <rhs xsi:type="ASM:Constant" integerValue="-1"/>
+          </actualArgs>
+          <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:Forward">
+          <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:Left">
+          <angle xsi:type="ASM:Constant" integerValue="90"/>
+        </instructions>
+        <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.1">
+          <actualArgs xsi:type="ASM:Plus">
+            <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+            <rhs xsi:type="ASM:Constant" integerValue="-1"/>
+          </actualArgs>
+          <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:Forward">
+          <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.1">
+          <actualArgs xsi:type="ASM:Plus">
+            <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+            <rhs xsi:type="ASM:Constant" integerValue="-1"/>
+          </actualArgs>
+          <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:Left">
+          <angle xsi:type="ASM:Constant" integerValue="90"/>
+        </instructions>
+        <instructions xsi:type="ASM:Forward">
+          <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
+          <actualArgs xsi:type="ASM:Plus">
+            <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+            <rhs xsi:type="ASM:Constant" integerValue="-1"/>
+          </actualArgs>
+          <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        </instructions>
+        <instructions xsi:type="ASM:Right">
+          <angle xsi:type="ASM:Constant" integerValue="90"/>
+        </instructions>
+      </thenPart>
+      <elsePart/>
+    </instructions>
   </instructions>
   <instructions xsi:type="ASM:ProcDeclaration" name="drawhilbert" procCall="//@instructions.3">
     <args name="level"/>
     <args name="size"/>
-    <block>
-      <instructions xsi:type="ASM:Right">
-        <angle xsi:type="ASM:Constant" integerValue="180"/>
-      </instructions>
-      <instructions xsi:type="ASM:Forward">
-        <steps xsi:type="ASM:Mult">
-          <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          <rhs xsi:type="ASM:Mult">
-            <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-            <rhs xsi:type="ASM:Constant" integerValue="2"/>
-          </rhs>
-        </steps>
-      </instructions>
-      <instructions xsi:type="ASM:Left">
-        <angle xsi:type="ASM:Constant" integerValue="90"/>
-      </instructions>
-      <instructions xsi:type="ASM:Forward">
-        <steps xsi:type="ASM:Mult">
-          <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-          <rhs xsi:type="ASM:Mult">
-            <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-            <rhs xsi:type="ASM:Constant" integerValue="2"/>
-          </rhs>
-        </steps>
-      </instructions>
-      <instructions xsi:type="ASM:Right">
-        <angle xsi:type="ASM:Constant" integerValue="90"/>
-      </instructions>
-      <instructions xsi:type="ASM:Left">
-        <angle xsi:type="ASM:Constant" integerValue="180"/>
-      </instructions>
-      <instructions xsi:type="ASM:PenDown"/>
-      <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
-        <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
-        <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
-      </instructions>
-      <instructions xsi:type="ASM:PenUp"/>
-    </block>
+    <instructions xsi:type="ASM:Right">
+      <angle xsi:type="ASM:Constant" integerValue="180"/>
+    </instructions>
+    <instructions xsi:type="ASM:Forward">
+      <steps xsi:type="ASM:Mult">
+        <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        <rhs xsi:type="ASM:Mult">
+          <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+          <rhs xsi:type="ASM:Constant" integerValue="2"/>
+        </rhs>
+      </steps>
+    </instructions>
+    <instructions xsi:type="ASM:Left">
+      <angle xsi:type="ASM:Constant" integerValue="90"/>
+    </instructions>
+    <instructions xsi:type="ASM:Forward">
+      <steps xsi:type="ASM:Mult">
+        <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+        <rhs xsi:type="ASM:Mult">
+          <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+          <rhs xsi:type="ASM:Constant" integerValue="2"/>
+        </rhs>
+      </steps>
+    </instructions>
+    <instructions xsi:type="ASM:Right">
+      <angle xsi:type="ASM:Constant" integerValue="90"/>
+    </instructions>
+    <instructions xsi:type="ASM:Left">
+      <angle xsi:type="ASM:Constant" integerValue="180"/>
+    </instructions>
+    <instructions xsi:type="ASM:PenDown"/>
+    <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
+      <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+      <actualArgs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+    </instructions>
+    <instructions xsi:type="ASM:PenUp"/>
   </instructions>
   <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.2">
     <actualArgs xsi:type="ASM:Constant" integerValue="5"/>
