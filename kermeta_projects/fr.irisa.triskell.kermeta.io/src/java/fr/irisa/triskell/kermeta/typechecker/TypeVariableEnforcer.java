@@ -42,8 +42,7 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	public static fr.irisa.triskell.kermeta.language.structure.Type getBoundType(fr.irisa.triskell.kermeta.language.structure.Type generic, 
 			Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings) {
 		TypeVariableEnforcer visitor = new TypeVariableEnforcer(bindings);
-		if ( generic == null )
-			System.out.println();
+		
 		return (fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(generic);
 	}
 	

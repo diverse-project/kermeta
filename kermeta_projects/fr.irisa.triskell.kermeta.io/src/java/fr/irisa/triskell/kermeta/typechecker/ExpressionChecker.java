@@ -297,8 +297,16 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		    // Replace type variables in the return type of the operation
 		    if ( ! error )
 		        result = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)result).type, binding), context);
-		    else
-		        result = new SimpleType(new TypeVariableLeastDerivedEnforcer(context).getBoundType( ((SimpleType)result).type), context);
+		    else{
+		    	fr.irisa.triskell.kermeta.language.structure.Type derivedType = new TypeVariableLeastDerivedEnforcer(context).getBoundType( ((SimpleType)result).type);
+		    	if(derivedType != null){
+			        result = new SimpleType(derivedType, context);
+		    	}
+		    	else {
+		    		// cannot derive type (maybe due to an error in the kermeta program
+		    		result = context.VoidType;
+		    	}
+		    }
 		
 	    }
 	    
@@ -858,6 +866,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			result = getTypeOfExpression(expression.getThenBody());
 		// Return type
 		setType(expression, result);
+		
 		return result;
 	}
 	
