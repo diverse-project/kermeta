@@ -11,14 +11,18 @@
 	</target>
 	
 	<target name="build_kermeta_docs" depends="">
-		<ant antfile="Kermeta-Manual_build.xml"
-			dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/"
-			target="all">
-		</ant>
-		<ant antfile="Kermeta-MDK_build.xml"
-			dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/"
-			target="all">
-		</ant>
+		<ant antfile="Kermeta-Manual_build.xml"								dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/" target="all">	</ant>
+		<ant antfile="Kermeta-MDK_build.xml"								dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/" target="all">	</ant>
+		<ant antfile="KerMeta-UI-UserGuide_build.xml" 						dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/" target="all"></ant>
+		<ant antfile="KerMeta-how-to-install-KerMeta_build.xml"  			dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/" target="all"></ant>
+		<ant antfile="Kermeta-MDK_build.xml"  								dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/" target="all"></ant>
+		<ant antfile="Kermeta-Tutorial-Process_build.xml"  					dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/" target="all"></ant>
+		<ant antfile="Kermeta-Deploying-a-code_build.xml"  					dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/" target="all"></ant>
+		<ant antfile="KermetaEMFTutorial_build.xml"  						dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/" target="all"></ant>
+		<ant antfile="Kermeta-How-to-create-a-metamodel_build.xml"  		dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/" target="all"></ant>
+		<ant antfile="Kermeta-How-to-add-behavior-to-a-metamodel_build.xml"	dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/" target="all"></ant>
+		<ant antfile="Kermeta-How-to-use-run-configuration_build.xml"  		dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/" target="all"></ant>
+		<ant antfile="ModelCheckingManual_build.xml"  						dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/" target="all"></ant>
 	</target>
 	<target name="publish_kermeta_docs" depends="build_kermeta_docs">
 		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}/fr.irisa.triskell.kermeta.documentation/build"
