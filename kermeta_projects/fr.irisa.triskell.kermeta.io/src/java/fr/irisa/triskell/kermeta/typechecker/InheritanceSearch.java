@@ -12,13 +12,15 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
+
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
-import org.kermeta.model.internal.ClassDefinitionHelper;
 
+import fr.irisa.triskell.cache.utilities.SoftReferenceMapCache;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -30,7 +32,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 
 /**
@@ -46,8 +47,16 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */
-	public static List<Type> allSuperTypes(Class c, TypeCheckerContext context) {
-		List<Type> result = new ArrayList<Type>();
+	public static List<Type> allSuperTypes(Class c, TypeCheckerContext context) {		
+		List<Type> result;
+		
+		// is it in the cache
+		result = allSuperTypesCache.get(c);
+		if(result != null) 
+			return result;
+		
+		// not in the cache, calculate it
+		result = new ArrayList<Type>();
 		result.add(c);
 		// get all super types of direct supertypes
 		for (Object super_type : ((ClassDefinition) c.getTypeDefinition()).getSuperType()) {
@@ -65,8 +74,17 @@ public class InheritanceSearch {
 		Class object = (Class)((SimpleType)context.ObjectType).type;
 		if ( ! TypeEqualityChecker.equals(c, object) && ! result.contains(object) )
 		    result.add(object);
+		
+		// push the result in cache for possible later use
+		allSuperTypesCache.put(c, result);
 		return result;
 	}
+	
+	/** cache for optimizing call to allSuperTypes
+	 * the GC may collect its content at any time
+	 * Note: shoul we use the context ?
+	 */
+	protected static Map<Class, List<Type>> allSuperTypesCache = new SoftReferenceMapCache<Class, List<Type>>();
 	
 	/**
 	 * Returns the direct super types of a class.
