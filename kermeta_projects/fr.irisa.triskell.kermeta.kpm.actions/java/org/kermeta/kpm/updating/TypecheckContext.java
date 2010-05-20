@@ -23,7 +23,6 @@ import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.cachemanager.KermetaUnitStore;
 import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.kermetaunitloader.LoaderFactory;
 import org.kermeta.kpm.IAction;
 import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.KermetaUnitHost;
@@ -34,7 +33,6 @@ import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
@@ -78,7 +76,7 @@ public class TypecheckContext implements IAction {
 				 */
 				
 				kl.add(kermetaUnit);
-				kl.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) );
+			//	kl.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) );
 			}	
 				/*
 				 * Typecheck and Constraintcheck every kermeta units. 
@@ -92,6 +90,33 @@ public class TypecheckContext implements IAction {
 				// if (typecheckercontext == null)
 				//	typecheckercontext = new TypeCheckerContext(store.get(IOPlugin.getFrameWorkURI(), options));
 				//TypeCheckerContext typecheckercontext = new TypeCheckerContext(store.get(IOPlugin.getFrameWorkURI(), options));
+				
+				/* Merger merger = new Merger();
+				Set<KermetaUnit> unitset = new HashSet<KermetaUnit>();
+				unitset.addAll(kl);
+				KermetaUnit mergedUnit = merger.processInMemory(unitset, "platform:/resource/merged_in_memory.km");
+				TypeCheckerContext typecheckercontext1 = new TypeCheckerContext(mergedUnit);
+				try {
+					if ( ! mergedUnit.isErroneous() ) {
+						
+						KermetaTypeChecker typechecker = new KermetaTypeChecker(mergedUnit, typecheckercontext1);
+						typechecker.checkUnit();
+						if ( ! mergedUnit.isErroneous() ) {
+							KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(mergedUnit);
+							constraintchecker.checkUnit();
+						}
+						IFile file = ResourceHelper.getIFile( mergedUnit.getUri() );
+						KermetaUnitHost.getInstance().updateValue(file, mergedUnit);			
+					}
+				} catch (IdNotFoundException e) {
+				} catch(Exception e){
+					if(l == null)
+						KPMPlugin.logErrorMessage("Error getting 'context' in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);
+					else
+						KPMPlugin.logErrorMessage("Error in the kpm file. Maybe due to an out of date version of '.project.kpm'", e);
+					
+				} */
+				
 				for ( KermetaUnit kunit : kl ) {
 					TypeCheckerContext typecheckercontext = new TypeCheckerContext(kunit);
 					/*
@@ -108,6 +133,9 @@ public class TypecheckContext implements IAction {
 					try {
 						if ( ! kunit.isErroneous() ) {
 							//IOPlugin.getDefault().getKermetaUnit(kunit.getUri()); // make sure this have been loaded in the current context
+							
+							
+							
 							KermetaTypeChecker typechecker = new KermetaTypeChecker(kunit, typecheckercontext);
 							typechecker.checkUnit();
 							if ( ! kunit.isErroneous() ) {
