@@ -1,0 +1,14 @@
+<project name="publish_web_documentation" default="publish_all">
+
+	<property name="env.WORKSPACE" location="."/>
+		
+	<target name="publish_all" depends="">
+	   	<antcall target="publish_kermeta_docs"/>
+	</target>
+	
+	<target name="build_kermeta_docs" depends="">
+	</target>
+	<target name="publish_kermeta_docs" depends="build_kermeta_docs">
+	</target>
+
+</project>
