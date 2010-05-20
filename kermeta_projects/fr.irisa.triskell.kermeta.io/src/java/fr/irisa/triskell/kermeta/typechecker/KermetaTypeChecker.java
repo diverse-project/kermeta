@@ -178,6 +178,7 @@ public class KermetaTypeChecker {
 	    		checkPackages( unit.getInternalPackages() );
 	    		unit.setTypeChecked( true );
 	    	}
+    		internalLog.debug("main typechecking done");
 		    	
     		if ( ! unit.isErroneous() ) {
 	    			
@@ -189,6 +190,7 @@ public class KermetaTypeChecker {
 		    		}
 		    	}
     		}
+    		internalLog.debug("imported unit Typechecking done");
     		//CallableFeaturesCache.destroyInstance();
     	}
     }
