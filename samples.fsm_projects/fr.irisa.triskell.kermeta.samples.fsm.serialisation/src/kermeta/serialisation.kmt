@@ -29,7 +29,7 @@ class Main
          // Create the repository, then the resource
          var repository : EMFRepository init EMFRepository.new
          var resource : EMFResource 
-         resource ?= repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.serialisation/model/Fsm_dyn_sample1.xmi", "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.serialisation/metamodel/fsm.ecore")
+         resource ?= repository.getResource("platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.serialisation/model/Fsm_dyn_sample1.xmi")
          resource.load
 
  		// Load the fsm (we get the instance) 
