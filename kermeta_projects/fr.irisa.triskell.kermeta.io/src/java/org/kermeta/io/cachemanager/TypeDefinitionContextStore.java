@@ -24,17 +24,29 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 public class TypeDefinitionContextStore {
 	
-	private Map<TypeDefinition, Collection<TypeDefinition>> _contexts = new SoftReferenceMapCache<TypeDefinition, Collection<TypeDefinition>>();
+	private Map<KermetaUnit, Map<TypeDefinition, Collection<TypeDefinition>>> _contexts = new SoftReferenceMapCache<KermetaUnit, Map<TypeDefinition, Collection<TypeDefinition>>>();
+	
+	//private Map<TypeDefinition, Collection<TypeDefinition>> _contexts = new SoftReferenceMapCache<TypeDefinition, Collection<TypeDefinition>>();
 	//private Map<TypeDefinition, Collection<TypeDefinition>> _contexts = new HashMap<TypeDefinition, Collection<TypeDefinition>>();
 	
 	public Collection<TypeDefinition> getTypeDefinitionContext(KermetaUnit rootUnit, TypeDefinition t) {
-		Collection<TypeDefinition> context = _contexts.get(t);
+		Collection<TypeDefinition> context = null;
+		Map<TypeDefinition, Collection<TypeDefinition>> unitContexts = _contexts.get(rootUnit);
+		if ( unitContexts != null){
+			context = unitContexts.get(t);
+		}
+		else{
+			// prepare the map
+			unitContexts = new SoftReferenceMapCache<TypeDefinition, Collection<TypeDefinition>>();
+			_contexts.put(rootUnit, unitContexts);
+		}
 		if ( context == null && t instanceof ClassDefinition ) {
 			context = KermetaModelHelper.ClassDefinition.getFullContext(rootUnit,  (ClassDefinition) t );
-			_contexts.put(t, context);
+			unitContexts.put(t, context);
 		}
 		return context;
-	}	
+	}
+	
 	
 }
 

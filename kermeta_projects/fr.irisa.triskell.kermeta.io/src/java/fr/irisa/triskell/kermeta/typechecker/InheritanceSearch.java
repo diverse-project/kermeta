@@ -13,6 +13,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
 
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -58,16 +59,19 @@ public class InheritanceSearch {
 		// not in the cache, calculate it
 		result = new ArrayList<Type>();
 		result.add(c);
-		// get all super types of direct supertypes
-		for (Object super_type : ((ClassDefinition) c.getTypeDefinition()).getSuperType()) {
-			// get the super type
-			Class direct_st = (Class)super_type;
-			// propagate type variables
-			direct_st = (Class)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
-			List<Type> sts = allSuperTypes(direct_st, context);
-			for ( int i=0; i<sts.size(); i++ ) {
-				if ( ! result.contains(sts.get(i)) ) 
-					result.add( sts.get(i) );
+		// get all super types of direct supertypes (also look into aspects)
+		Collection<TypeDefinition> typedefAspects = context.getTypeDefinitionContextCache().getTypeDefinitionContext(context.unit, c.getTypeDefinition());
+		for(TypeDefinition td : typedefAspects){
+			for (Object super_type : ((ClassDefinition) td).getSuperType()) {
+				// get the super type
+				Class direct_st = (Class)super_type;
+				// propagate type variables
+				direct_st = (Class)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
+				List<Type> sts = allSuperTypes(direct_st, context);
+				for ( int i=0; i<sts.size(); i++ ) {
+					if ( ! result.contains(sts.get(i)) ) 
+						result.add( sts.get(i) );
+				}
 			}
 		}
 		// Add the type object which is implicitly a super type of every type
