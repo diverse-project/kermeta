@@ -1,14 +1,39 @@
 <project name="publish_web_documentation" default="publish_all">
 
 	<property name="env.WORKSPACE" location="."/>
+	<property name="deploy.server" value="web1.irisa.fr"/>
+	<property name="deploy.user" value="web-triskell"/>
+	<property name="deploy.path" value="/home/web/apache/sites/kermeta.org/htdocs/docs"/>
+		
 		
 	<target name="publish_all" depends="">
 	   	<antcall target="publish_kermeta_docs"/>
 	</target>
 	
 	<target name="build_kermeta_docs" depends="">
+		<ant antfile="Kermeta-Manual_build.xml"
+			dir="imported_projects/fr.irisa.triskell.kermeta.documentation/src/"
+			target="all">
+		</ant>
 	</target>
 	<target name="publish_kermeta_docs" depends="build_kermeta_docs">
+		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}/fr.irisa.triskell.kermeta.documentation/build"
+			keyfile="${key.file}"
+			passphrase=""
+		    trust="yes">
+		    <fileset dir="${updatesite.repository}">
+		      		<include name="**/**"/>
+			      	<exclude name="**/docboo42/**"/>
+				  	<exclude name="**/eclipse.help/**"/>
+		    </fileset>
+		</scp>
+		<!-- <copy todir="exported_projects/fr.irisa.triskell.kermeta.documentation/build">
+			    <fileset dir="imported_projects/fr.irisa.triskell.kermeta.documentation/build">
+			      <include name="**/**"/>
+			      <exclude name="**/docboo42/**"/>
+				  <exclude name="**/eclipse.help/**"/>
+			    </fileset>
+		</copy> -->
 	</target>
 
 </project>
