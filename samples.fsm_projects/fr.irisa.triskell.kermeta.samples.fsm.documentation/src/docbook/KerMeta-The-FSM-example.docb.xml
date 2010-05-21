@@ -10,7 +10,7 @@
       <firstname>François Tanguy, Didier Vojtisek, Zoé Drey, Marie Gouyette</firstname>
       <firstname/>
     </author>
-    <title>Building a DSL with Kermeta tutorial</title>
+    <title>Tutorial : Building a DSL using Kermeta</title>
     <keywordset>
       <keyword>Kermeta</keyword>
       <keyword>metamodeling</keyword>

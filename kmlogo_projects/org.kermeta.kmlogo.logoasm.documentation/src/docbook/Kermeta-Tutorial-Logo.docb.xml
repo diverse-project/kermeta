@@ -8,9 +8,9 @@
       <imageobject>
         <imagedata fileref="Kermeta-Tutorial-Logo_figures/KermetaLogo.png"/></imageobject>
     </mediaobject>
-    <title>Logo Tutorial : Building kmLogo DSL using Kermeta</title>
+    <title>Tutorial : Building a DSL using Kermeta</title>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <date>Last modification: $Date:: 2010-03-05 11:10:01#$</date>
+    <date>Revision: $Date:: 2010-03-05 11:10:01#$</date>
     <author>
       <firstname>Haja</firstname>
       <surname>Rambelontsalama</surname>
@@ -20,11 +20,11 @@
       <keyword>metamodeling</keyword>
       <keyword>language</keyword>
       <keyword>kmLogo</keyword></keywordset>
-    <subtitle>Reference manual</subtitle>
+    <subtitle>Logo sample</subtitle>
     <bibliomisc>License EPL</bibliomisc>
     <abstract>
       <para>This tutorial is a step-by-step user-guide to build integrated tools with the Kermeta
-        language. The illustrated example here is building the kmLogo DSL with Kermeta.</para>
+        language. The illustrated example here is building the Logo DSL with Kermeta.</para>
     </abstract>
     <publisher>
       <publishername>INRIA</publishername>
