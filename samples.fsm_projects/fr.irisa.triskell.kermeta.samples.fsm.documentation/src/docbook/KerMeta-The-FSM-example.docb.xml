@@ -149,7 +149,7 @@
           <title> View of the example project</title>
           <mediaobject>
             <imageobject>
-              <imagedata fileref="KerMeta-The-FSM-example_figures/main_window_fsm_loaded.png"/>
+              <imagedata fileref="KerMeta-The-FSM-example_figures/main_window_fsm_loaded.png"  depth="5.5in"/>
             </imageobject>
           </mediaobject>
         </figure>
