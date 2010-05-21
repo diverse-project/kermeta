@@ -86,6 +86,7 @@
 					en particulier la possibilité d'ajouter un docbook file ? == merge ??-->
 		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
 		<filter token="OUTPUT.VERSION" value="${output.version}"/>
+		<filter token="ONLINE.OR.LOCAL" value="${online.or.local.url}"/>
 				
 		<!-- <copy todir="${build.docbook.dir}/${project.name}">
 						<fileset file="${OOo.source.dir}/ooo2dbk.xml"/>
@@ -99,6 +100,7 @@
 	<target name="html.single">
 		<antcall target="prepare_index.xml">
 			<param name="output.version" value="html.single"/>
+			<param name="online.or.local.url" value="../../../../"/>
 		</antcall>
 		<antcall target="clean.html.single" />
         <mkdir dir="${build.dir}/html.single/${project.name}" />
@@ -123,6 +125,7 @@
 	<target name="html.chunked"  > 
 		<antcall target="prepare_index.xml">
 			<param name="output.version" value="html.chunked"/>
+			<param name="online.or.local.url" value="../../../../"/>
 		</antcall>
 		<antcall target="clean.html.chunked" />
         <mkdir dir="${build.dir}/html.chunked/${project.name}" />
@@ -145,6 +148,7 @@
 	<target name="html.help" >
 		<antcall target="prepare_index.xml">
 			<param name="output.version" value="html.help"/>
+			<param name="online.or.local.url" value="../../../../"/>
 		</antcall>
 		<antcall target="clean.html.help" />
         <mkdir dir="${build.dir}/html.help/${project.name}" />
@@ -174,6 +178,7 @@
 	<target name="eclipse.help" depends="preparedbk">
 		<antcall target="prepare_index.xml">
 			<param name="output.version" value="eclipse.help"/>
+			<param name="online.or.local.url" value="../../../../"/>
 		</antcall>
 		<antcall target="clean.eclipse.help" />
         <mkdir dir="${build.dir}/eclipse.help/${project.name}" />
@@ -212,6 +217,7 @@
 	<target name="pdf.fop"  >
 		<antcall target="prepare_index.xml">
 			<param name="output.version" value="html.single"/>
+			<param name="online.or.local.url" value="http://www.kermeta.org/docs/"/>
 		</antcall>
 	        <antcall target="clean.fop" />
 	    	        
