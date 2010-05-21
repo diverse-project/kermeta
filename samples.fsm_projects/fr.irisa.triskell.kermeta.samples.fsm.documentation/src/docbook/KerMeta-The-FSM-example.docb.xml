@@ -5,6 +5,7 @@
   <?oooversion?>
   <bookinfo>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
+    <date>Last modification: $Date::                     $</date>
     <author>
       <firstname>François Tanguy, Didier Vojtisek, Zoé Drey, Marie Gouyette</firstname>
       <firstname/>
