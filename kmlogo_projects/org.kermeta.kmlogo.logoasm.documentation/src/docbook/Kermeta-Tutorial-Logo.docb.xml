@@ -10,7 +10,7 @@
     </mediaobject>
     <title>Logo Tutorial : Building kmLogo DSL using Kermeta</title>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate/>
+    <date>Last modification: $Date:: 2010-03-05 11:10:01#$</date>
     <author>
       <firstname>Haja</firstname>
       <surname>Rambelontsalama</surname>
