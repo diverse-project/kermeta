@@ -60,16 +60,18 @@
 		<copy todir="${build.docbook.dir}/${project.name}">
 			<fileset file="${docbook.source.dir}/${project.name}.docb.xml"/>
 		</copy>
+		<mkdir dir="${build.docbook.dir}/${project.name}/figures"/>
 		<!-- copy the images -->		
-		<copy todir="${build.docbook.dir}/${project.name}/figures">
+		<!-- <copy todir="${build.docbook.dir}/${project.name}/figures">
 			<fileset dir="${OOo.source.dir}/figures"/>
-		</copy>
+		</copy> -->
 		<copy todir="${build.docbook.dir}/${project.name}/${project.name}_figures">
 			<fileset dir="${docbook.source.dir}/${project.name}_figures"/>
 		</copy>
-    	<copy todir="${build.dir}/figures">
+		<mkdir dir="${build.dir}/figures"/>
+    	<!-- <copy todir="${build.dir}/figures">
     	    <fileset dir="${OOo.source.dir}/figures"/>
-    	</copy>	
+    	</copy> -->	
     	<copy todir="${build.dir}/figures">
     	    <fileset dir="${project.base.dir}/src/figures"/>
     	</copy>	
@@ -85,9 +87,9 @@
 		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
 		<filter token="OUTPUT.VERSION" value="${output.version}"/>
 				
-		<copy todir="${build.docbook.dir}/${project.name}">
+		<!-- <copy todir="${build.docbook.dir}/${project.name}">
 						<fileset file="${OOo.source.dir}/ooo2dbk.xml"/>
-		</copy>
+		</copy> -->
 		<copy file="${build.docbook.dir}/${project.name}/${project.name}.docb.xml" 
 			tofile="${build.docbook.dir}/${project.name}/index.xml"
 			filtering="true"
@@ -118,7 +120,7 @@
         <fail message="not good: single HTML failed." unless="tmp:single.ok" />
 	</target>
 	
-	<target name="html.chunked">
+	<target name="html.chunked"  > 
 		<antcall target="prepare_index.xml">
 			<param name="output.version" value="html.chunked"/>
 		</antcall>
@@ -140,7 +142,7 @@
         <available property="tmp:chunked.ok" file="${build.dir}/html.chunked/${project.name}/index.html" />
         <fail message="not good: chunked HTML failed." unless="tmp:chunked.ok" />
 	</target>
-	<target name="html.help">
+	<target name="html.help" >
 		<antcall target="prepare_index.xml">
 			<param name="output.version" value="html.help"/>
 		</antcall>
@@ -207,7 +209,7 @@
         <fail message="not good: Eclipse Help failed." unless="tmp:Eclipsehelp.ok" />
 	</target>
 	
-	<target name="pdf.fop"  depends="prepare_index.xml">
+	<target name="pdf.fop"  >
 		<antcall target="prepare_index.xml">
 			<param name="output.version" value="html.single"/>
 		</antcall>
