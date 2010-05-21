@@ -8,8 +8,7 @@
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date$</pubdate>
-
+    <pubdate>Last modification $Date: 2010-01-29 11:01:52#$</pubdate>
     <author>
       <firstname>Didier</firstname>
       <surname>Vojtisek</surname>
