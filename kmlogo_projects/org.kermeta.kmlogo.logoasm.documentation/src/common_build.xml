@@ -60,14 +60,15 @@
 		<copy todir="${build.docbook.dir}/${project.name}">
 			<fileset file="${docbook.source.dir}/${project.name}.docb.xml"/>
 		</copy>
-		<!-- copy the images -->		
-		<copy todir="${build.docbook.dir}/${project.name}/figures">
+		<!-- copy the images -->
+		<mkdir dir="${build.docbook.dir}/${project.name}/figures"/>
+		<copy todir="${build.docbook.dir}/${project.name}/figures" failonerror="false">
 			<fileset dir="${OOo.source.dir}/figures"/>
 		</copy>
 		<copy todir="${build.docbook.dir}/${project.name}/${project.name}_figures">
 			<fileset dir="${docbook.source.dir}/${project.name}_figures"/>
 		</copy>
-    	<copy todir="${build.dir}/figures">
+    	<copy todir="${build.dir}/figures" failonerror="false">
     	    <fileset dir="${OOo.source.dir}/figures"/>
     	</copy>	
     	<copy todir="${build.dir}/figures">
