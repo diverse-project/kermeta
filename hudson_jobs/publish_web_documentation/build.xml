@@ -7,10 +7,10 @@
 		
 		
 	<target name="publish_all" depends="">
-	   	<antcall target="publish_kermeta_docs"/>
-		<antcall target="publish_kmlogo_docs"/>
 		<antcall target="publish_fsm_docs"/>
 		<antcall target="publish_traceability_docs"/>
+	   	<antcall target="publish_kermeta_docs"/>
+		<antcall target="publish_kmlogo_docs"/>
 	</target>
 	
 	<target name="build_kermeta_docs" depends="">
