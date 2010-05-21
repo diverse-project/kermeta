@@ -8,6 +8,7 @@
 		
 	<target name="publish_all" depends="">
 	   	<antcall target="publish_kermeta_docs"/>
+		<antcall target="publish_kmlogo_docs"/>
 	</target>
 	
 	<target name="build_kermeta_docs" depends="">
@@ -42,6 +43,22 @@
 				  <exclude name="**/eclipse.help/**"/>
 			    </fileset>
 		</copy> -->
+	</target>
+	
+	<target name="build_kmlogo_docs" depends="">
+			<ant antfile="Kermeta-Tutorial-Logo_build.xml"	dir="imported_projects/org.kermeta.kmlogo.logasm.documentation/src/" target="all">	</ant>			
+	</target>
+	<target name="publish_kmlogo_docs" depends="build_kmlogo_docs">
+		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}/org.kermeta.kmlogo.logasm.documentation/build"
+			keyfile="${key.file}"
+			passphrase=""
+		    trust="yes">
+		    <fileset dir="imported_projects/org.kermeta.kmlogo.logasm.documentation/build">
+		      		<include name="**/**"/>
+			      	<exclude name="**/docboo42/**"/>
+				  	<exclude name="**/eclipse.help/**"/>
+		    </fileset>
+		</scp>
 	</target>
 
 </project>
