@@ -64,7 +64,8 @@
 	</target>
 	
 	<target name="build_fsm_docs" depends="">
-				<ant antfile="Kermeta-Tutorial-Logo_build.xml"	dir="imported_projects/fr.irisa.triskell.kermeta.samples.fsm.documentation/src/" target="all">	</ant>			
+		<ant antfile="KerMeta-The-FSM-example_build.xml"	dir="imported_projects/fr.irisa.triskell.kermeta.samples.fsm.documentation/src/" target="all">	</ant>
+		<ant antfile="KerMeta-Create-FSM-Graphical-Editor-With-GMF_build.xml"	dir="imported_projects/fr.irisa.triskell.kermeta.samples.fsm.documentation/src/" target="all">	</ant>
 	</target>
 	<target name="publish_fsm_docs" depends="build_fsm_docs">
 		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}/fr.irisa.triskell.kermeta.samples.fsm.documentation/build"
