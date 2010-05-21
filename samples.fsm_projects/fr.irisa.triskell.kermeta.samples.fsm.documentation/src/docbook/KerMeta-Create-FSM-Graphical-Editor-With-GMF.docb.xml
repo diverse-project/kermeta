@@ -6,12 +6,12 @@
   <?oooversion?>
   <bookinfo>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
+    <date>Revision: $Date:: 2010-05-21 15:35:33#$</date>
     <author>
       <firstname> Marie Gouyette</firstname>
       <firstname/>
     </author>
-    <title>Kermeta tutorial</title>
-    <date>2006-09-25T10:35:34</date>
+    <title>GMF graphical editor tutorial</title>
     <keywordset>
       <keyword>Kermeta</keyword>
       <keyword>metamodeling</keyword>
@@ -19,7 +19,6 @@
     </keywordset>
     <subtitle> How to create a FSM graphical editor with GMF? </subtitle>
     <bibliomisc>Licence EPL</bibliomisc>
-    <date>19/07/2006</date>
     <abstract>
       <para> This tutorial shows how to create a GMF editor for Fsm models.  This tutorial
         consitutes only an example that illustrate the global fsm example. For more informations and

@@ -5,21 +5,19 @@
   <?oooversion?>
   <bookinfo>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <date>Last modification: $Date::                     $</date>
+    <date>Revision: $Date::                     $</date>
     <author>
       <firstname>François Tanguy, Didier Vojtisek, Zoé Drey, Marie Gouyette</firstname>
       <firstname/>
     </author>
-    <title>Kermeta tutorial</title>
-    <date>2006-09-25T10:35:34</date>
+    <title>Building a DSL with Kermeta tutorial</title>
     <keywordset>
       <keyword>Kermeta</keyword>
       <keyword>metamodeling</keyword>
       <keyword>language</keyword>
     </keywordset>
-    <subtitle> FSM example</subtitle>
+    <subtitle>FSM example</subtitle>
     <bibliomisc>Licence EPL</bibliomisc>
-    <date>19/07/2006</date>
     <abstract>
       <para>This tutorial is part of a serie of tutorials that explain step by step the process
         explained in the  <ulink url="../../../../fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html"> Building DSL main process</ulink>. In this case, it rely on
