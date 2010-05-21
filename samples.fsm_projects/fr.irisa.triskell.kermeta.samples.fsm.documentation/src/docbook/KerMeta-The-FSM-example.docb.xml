@@ -79,7 +79,7 @@
   <chapter>
     <title>Introduction</title>
     <para>This tutorial gives an overview of many concepts used through KerMeta project creation.
-      You can retrieve all the steps defined in the <ulink type="" url=""> Manual Process to build a DSL </ulink> on which you can iterate in order to progress in your development. Following this
+      You can retrieve all the steps defined in the <ulink type="" url="../../../../fr.irisa.triskell.kermeta.documentation/build/html.single/Kermeta-Tutorial-Process"> Manual Process to build a DSL </ulink> on which you can iterate in order to progress in your development. Following this
       tutorial should give you the knowledge : to create a meta model, check its invariants, run
       configurations, add pre and post conditions and add behaviour on it. To cover all this
       features, we decided to start from an existing example. Because it is a complete KerMeta
