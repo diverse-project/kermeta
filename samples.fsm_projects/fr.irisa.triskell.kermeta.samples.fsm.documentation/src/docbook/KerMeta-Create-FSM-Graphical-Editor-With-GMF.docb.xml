@@ -558,8 +558,9 @@
           </mediaobject>
         </figure>
       </para>
-      <para> We have created a very little graphical editor to illustrate the FSM example. For more
-        informations please refer to the GMF documentation.</para>
+      <para> We have created a very little graphical editor to illustrate the FSM example . For more
+        informations please refer to the   <ulink url="http://www.eclipse.org/modeling/gmf/">
+              GMF documentation</ulink>.</para>
     </section>
   </chapter>
 </book>

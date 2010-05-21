@@ -21,7 +21,7 @@
     <date>19/07/2006</date>
     <abstract>
       <para>This tutorial is part of a serie of tutorials that explain step by step the process
-        explained in the  <ulink url="../../../../fr.irisa.triskell.kermeta.documentation/build/html.single/Kermeta-Tutorial-Process"> Building DSL main process</ulink>. In this case, it rely on
+        explained in the  <ulink url="../../../../fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html"> Building DSL main process</ulink>. In this case, it rely on
         the classical Finite State Machine example. </para>
     </abstract>
     <publisher>
@@ -79,7 +79,7 @@
   <chapter>
     <title>Introduction</title>
     <para>This tutorial gives an overview of many concepts used through KerMeta project creation.
-      You can retrieve all the steps defined in the <ulink type="" url="../../../../fr.irisa.triskell.kermeta.documentation/build/html.single/Kermeta-Tutorial-Process"> Manual Process to build a DSL </ulink> on which you can iterate in order to progress in your development. Following this
+      You can retrieve all the steps defined in the <ulink type="" url="../../../../fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html"> Manual Process to build a DSL </ulink> on which you can iterate in order to progress in your development. Following this
       tutorial should give you the knowledge : to create a meta model, check its invariants, run
       configurations, add pre and post conditions and add behaviour on it. To cover all this
       features, we decided to start from an existing example. Because it is a complete KerMeta
@@ -99,7 +99,7 @@
       <title> Prerequisites</title>
       <caution>
         <para>KerMeta must be installed (FSM tutorial is only available in this case). If not,
-          please read the "<ulink type="" url="../../../../fr.irisa.triskell.kermeta.documentation/build/eclipse.help/KerMeta-How-to-install-KerMeta/index.html">How to
+          please read the "<ulink type="" url="../../../../fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/KerMeta-How-to-install-KerMeta/index.html">How to
             install KerMeta</ulink>" tutorial.</para>
       </caution>
       <section>
@@ -200,7 +200,7 @@
         new EMF project (File-> New-> Other -> Eclipse Modeling Framework -> Empty EMF Project) and
         name it <emphasis role="strong">org.kermeta.fsm.emf </emphasis> . Then create a new folder
         model on it. If you want to create an EMF metamodel for fsm from scratch you can follow the
-        tutorial <ulink type="" url="../../../../fr.irisa.triskell.kermeta.documentation/build/eclipse.help/KerMeta-Create-Meta-model-With-EMF/index.html">"How to
+        tutorial <ulink type="" url="../../../../fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/KerMeta-How-to-create-a-metamodel/index.html">"How to
           create an EMF meta model?""</ulink> and use the EMF Sample reflexive editor to create a
         metamodel like in the following figure into the folder model. Name it<emphasis role="italic"
           > fsm.ecore</emphasis>. Otherwise, you can simply copy the file fsm.ecore from <emphasis
@@ -266,7 +266,7 @@
           </imageobject>
         </mediaobject>
       </figure>
-      <para>The Logo tutorial presents how to create a dynamic instance with an ecorediag. The next
+      <para>The  <ulink  url="../../../../org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"> Logo tutorial </ulink> presents how to create a dynamic instance with an ecorediag. The next
         section presents another way to create instances of a given metamodel, create a tree view
         editor with an EMF project.</para>
     </section>
@@ -404,7 +404,7 @@
           url="http://www.eclipse.org/Xtext/"> XText</ulink> , <ulink type=""
           url="http://www.emftext.org/index.php/EMFText"> EMFText</ulink>, <ulink type=""
           url="http://www.kermeta.org/sintaks/"> Sintaks </ulink> (which is part of the Kermeta
-        project) . This textuals editors are not detailed here, please refer to the logo tutorial.
+        project) . This textuals editors are not detailed here, please refer to the <ulink  url="../../../../org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"> Logo tutorial </ulink>.
       </para>
     </section>
     <section>
@@ -464,7 +464,7 @@
         default one is good for us) and change the package to fsm_package. Click on "Finish".</para>
         <para>Now your main window should look like the one below. The file is written in KerMeta
           language. So you can edit this file to add some classes, attributes and so on using the
-          KerMeta language (read <ulink type="" url="http://www.kermeta.org/documents/manual/">
+          KerMeta language (read <ulink type="" url="http://www.kermeta.org/documents/user_doc/manual/">
             Kermeta Manual</ulink> for more details on KerMeta language).</para>
         <para/>
         <figure>
@@ -1420,7 +1420,7 @@ post post3 of operation step of class State violated</programlisting>
   <chapter>
     <title> UI improvements </title>
     <para> You can customize your user interface like shown below. For more samples please refer to
-      the Logo sample. </para>
+      the <ulink  url="../../../../org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"> Logo tutorial </ulink>. </para>
     <section id="CustomizeEMF_Editor">
       <title> Customize the generated EMF editor</title>
       <para> Generated code can be modified for customization. An EMF editor for FSM models is ever
@@ -1529,6 +1529,6 @@ post post3 of operation step of class State violated</programlisting>
     <title> Conclusion</title>
     <para> This tutorial give an illustration of the steps presented into the Processes to build a
       DSL Document (cf hyperlien), in particular it focus on traitment of an ecore meta model into
-      Kermeta. For more informations please refer to others tutorials available <ulink url="http://www.kermeta.org/documents/tutorials">http://www.kermeta.org/documents/tutorials</ulink>  .</para>
+      Kermeta. For more informations please refer to others tutorials available <ulink url="http://www.kermeta.org/documents/tutorials/">http://www.kermeta.org/documents/tutorials</ulink>  .</para>
   </chapter>
 </book>
