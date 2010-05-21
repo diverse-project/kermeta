@@ -21,7 +21,7 @@
     <date>19/07/2006</date>
     <abstract>
       <para>This tutorial is part of a serie of tutorials that explain step by step the process
-        explained in the  <ulink type="" url=""> Manual Process to build a DSL </ulink>. In this case, it rely on
+        explained in the  <ulink url="../../../../fr.irisa.triskell.kermeta.documentation/build/html.single/Kermeta-Tutorial-Process"> Building DSL main process</ulink>. In this case, it rely on
         the classical Finite State Machine example. </para>
     </abstract>
     <publisher>
