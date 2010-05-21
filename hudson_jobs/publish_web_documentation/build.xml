@@ -113,7 +113,7 @@
 		</scp>
 	</target>
 	<target name="build_ket_docs" depends="">
-		<ant antfile="KET-Manual_build.xml"								dir="imported_projects/fr.irisa.triskell.kermeta.ket.documentation/src/" target="all">	</ant>		
+		<ant antfile="KET_Manual_build.xml"								dir="imported_projects/fr.irisa.triskell.kermeta.ket.documentation/src/" target="all">	</ant>		
 	</target>
 	<target name="publish_ket_docs" depends="build_ket_docs">
 		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}/fr.irisa.triskell.kermeta.ket.documentation/build"
