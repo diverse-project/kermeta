@@ -61,10 +61,15 @@
 			<fileset file="${docbook.source.dir}/${project.name}.docb.xml"/>
 		</copy>
 		<!-- copy the images -->		
-		
+		<copy todir="${build.docbook.dir}/${project.name}/figures">
+			<fileset dir="${OOo.source.dir}/figures"/>
+		</copy>
 		<copy todir="${build.docbook.dir}/${project.name}/${project.name}_figures">
 			<fileset dir="${docbook.source.dir}/${project.name}_figures"/>
 		</copy>
+    	<copy todir="${build.dir}/figures">
+    	    <fileset dir="${OOo.source.dir}/figures"/>
+    	</copy>	
     	<copy todir="${build.dir}/figures">
     	    <fileset dir="${project.base.dir}/src/figures"/>
     	</copy>	
@@ -78,15 +83,21 @@
 		<!-- note : voir comment on peut améliorer le script avec une config, 
 					en particulier la possibilité d'ajouter un docbook file ? == merge ??-->
 		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+		<filter token="OUTPUT.VERSION" value="${output.version}"/>
 				
-		
+		<copy todir="${build.docbook.dir}/${project.name}">
+						<fileset file="${OOo.source.dir}/ooo2dbk.xml"/>
+		</copy>
 		<copy file="${build.docbook.dir}/${project.name}/${project.name}.docb.xml" 
 			tofile="${build.docbook.dir}/${project.name}/index.xml"
 			filtering="true"
 			overwrite="true"/>
 	</target>
 	
-	<target name="html.single" depends="prepare_index.xml">
+	<target name="html.single">
+		<antcall target="prepare_index.xml">
+			<param name="output.version" value="html.single"/>
+		</antcall>
 		<antcall target="clean.html.single" />
         <mkdir dir="${build.dir}/html.single/${project.name}" />
 		<copy todir="${build.dir}/html.single/${project.name}/${project.name}_figures">
@@ -107,7 +118,10 @@
         <fail message="not good: single HTML failed." unless="tmp:single.ok" />
 	</target>
 	
-	<target name="html.chunked"  depends="prepare_index.xml"> 
+	<target name="html.chunked">
+		<antcall target="prepare_index.xml">
+			<param name="output.version" value="html.chunked"/>
+		</antcall>
 		<antcall target="clean.html.chunked" />
         <mkdir dir="${build.dir}/html.chunked/${project.name}" />
 		<copy todir="${build.dir}/html.chunked/${project.name}/${project.name}_figures">
@@ -126,7 +140,10 @@
         <available property="tmp:chunked.ok" file="${build.dir}/html.chunked/${project.name}/index.html" />
         <fail message="not good: chunked HTML failed." unless="tmp:chunked.ok" />
 	</target>
-	<target name="html.help" depends="prepare_index.xml">
+	<target name="html.help">
+		<antcall target="prepare_index.xml">
+			<param name="output.version" value="html.help"/>
+		</antcall>
 		<antcall target="clean.html.help" />
         <mkdir dir="${build.dir}/html.help/${project.name}" />
 		<copy todir="${build.dir}/html.help/${project.name}/${project.name}_figures">
@@ -152,7 +169,10 @@
 			file="${build.dir}/html.help/${project.name}/htmlhelp.chm"/>
 	</target>
 	
-	<target name="eclipse.help" depends="prepare_index.xml">
+	<target name="eclipse.help" depends="preparedbk">
+		<antcall target="prepare_index.xml">
+			<param name="output.version" value="eclipse.help"/>
+		</antcall>
 		<antcall target="clean.eclipse.help" />
         <mkdir dir="${build.dir}/eclipse.help/${project.name}" />
 		<copy todir="${build.dir}/eclipse.help/${project.name}/${project.name}_figures">
@@ -188,6 +208,9 @@
 	</target>
 	
 	<target name="pdf.fop"  depends="prepare_index.xml">
+		<antcall target="prepare_index.xml">
+			<param name="output.version" value="html.single"/>
+		</antcall>
 	        <antcall target="clean.fop" />
 	    	        
 	        <mkdir dir="${build.dir}/pdf.fop/${project.name}" />
@@ -256,8 +279,8 @@
 		  	</copy>
 			<copy file="${build.dir}/pdf.fop/${project.name}/${project.name}.pdf" 
 					todir="${deployment.dest}"/>
-			<copy file="${build.dir}/html.help/${project.name}/${project.name}.chm" 
-				todir="${deployment.dest}"/>
+			<!-- <copy file="${build.dir}/html.help/${project.name}/${project.name}.chm" 
+				todir="${deployment.dest}"/> -->
 
 		</target>
 	
