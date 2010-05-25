@@ -1,6 +1,6 @@
 Logo Tutorial : Building kmLogo DSL using Kermeta
 
-Files inside this project are RAW files provided as a starting point for this tutorial.
+Files inside this project are RAW files provided as a starting point for this tutorial (so it normal that you may encounter some errors).
 
 In order to implement them, please follow the step by step guide 
 provided inside the Logo Tutorial available : 

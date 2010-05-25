@@ -12,7 +12,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
  fr.irisa.triskell.kermeta.interpreter
-Bundle-NativeCode:  lib/libicmdbluez.so ; processor = x86 ; osname = Linux, lib/librxtxSerial.jnilib ; osname = Mac OS X,  lib/rxtxSerial.dll ; processor = x86 ; processor=x86-64 ; osname = Win32
 Bundle-ClassPath: lib/bluecove.jar,
  lib/icommand.jar,
  lib/RXTXcomm.jar,

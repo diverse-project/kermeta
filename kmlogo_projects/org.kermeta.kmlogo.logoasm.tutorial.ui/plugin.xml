@@ -55,7 +55,7 @@
            hasPages="false"
            icon="icons/logoSoluce.gif"
            id="org.kermeta.kmlogo.logoasm.tutorial.ui.wizards.KmLogoTutorialWizardSoluce"
-           name="Kermeta 2 Logo tuto (soluce)">
+           name="Kermeta 2 Logo tuto (solution)">
      </wizard>
   </extension>
 </plugin>

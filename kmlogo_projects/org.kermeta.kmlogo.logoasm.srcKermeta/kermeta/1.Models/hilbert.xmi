@@ -59,7 +59,6 @@
           <angle xsi:type="ASM:Constant" integerValue="90"/>
         </instructions>
       </thenPart>
-      <elsePart/>
     </instructions>
   </instructions>
   <instructions xsi:type="ASM:ProcDeclaration" name="righthilbert" procCall="//@instructions.0/@instructions.0/@thenPart/@instructions.1 //@instructions.0/@instructions.0/@thenPart/@instructions.9 //@instructions.1/@instructions.0/@thenPart/@instructions.4 //@instructions.1/@instructions.0/@thenPart/@instructions.6">
@@ -121,7 +120,6 @@
           <angle xsi:type="ASM:Constant" integerValue="90"/>
         </instructions>
       </thenPart>
-      <elsePart/>
     </instructions>
   </instructions>
   <instructions xsi:type="ASM:ProcDeclaration" name="drawhilbert" procCall="//@instructions.3">

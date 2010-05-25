@@ -189,7 +189,7 @@ end
 aspect class Repeat
 {
 method compileToNXC(context : NXCCompiler) : String is do
-result := "repeat (" + condition.compileToNXC(context) + ");\n"
+result := "repeat (" + condition.compileToNXC(context) + ")\n"
 result.append(block.compileToNXC(context))
 end 
 }

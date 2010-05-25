@@ -6,6 +6,7 @@ class="NXCCodeGenerator"
 parameters="subs : String[*], nxc : String"
 %>
 
+
 /**
  * This is the implementation of a LOGO Turtle for NXT
  * Author : Franck FLEUREY
@@ -23,7 +24,7 @@ parameters="subs : String[*], nxc : String"
 #include "NXCDefs.h"
 
 // Correponds to D/d
-#define ANGLE_FACTOR 18
+#define ANGLE_FACTOR 8
 
 // The Motors connections
 #define PEN_MOTOR OUT_A
@@ -32,7 +33,7 @@ parameters="subs : String[*], nxc : String"
 #define MOVE_MOTORS OUT_BC
 
 // define step lenght in wheel rotation (degree)
-#define STEP 10
+#define STEP 50
 
 // define the angle of which the pen motor has to move
 #define PEN_ANGLE 45
@@ -45,10 +46,14 @@ parameters="subs : String[*], nxc : String"
  */
 sub forward(int d)
 {
- int angle = d * STEP;
+// int angle = d * STEP;
+   int angle = d * STEP;
+  OnFwd(LEFT_MOTOR, SPEED);
+  OnFwd(RIGHT_MOTOR, SPEED);
+  Wait(angle);
  //ResetTachoCount(MOVE_MOTORS)
  // RotateMotorEx(ports, pwr, angle, turnpct, bSync, bStop)
- RotateMotorEx(MOVE_MOTORS, SPEED, angle, 0, true, false);
+// RotateMotorEx(MOVE_MOTORS, SPEED, angle, 0, true, false);
  Off(MOVE_MOTORS);
 }
 
@@ -64,11 +69,13 @@ sub turn(int n)
   OnRev(LEFT_MOTOR, SPEED);
   OnFwd(RIGHT_MOTOR, SPEED);
   Wait(n*ANGLE_FACTOR);
+  Off(MOVE_MOTORS);
  }
  else {
   OnRev(RIGHT_MOTOR, SPEED);
   OnFwd(LEFT_MOTOR, SPEED);
   Wait((-n)*ANGLE_FACTOR);
+  Off(MOVE_MOTORS);
  }
 }
 
