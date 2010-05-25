@@ -21,6 +21,7 @@ import java.util.Map;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
 
+import fr.irisa.triskell.cache.utilities.KeyTuple;
 import fr.irisa.triskell.cache.utilities.SoftReferenceMapCache;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -80,15 +81,15 @@ public class InheritanceSearch {
 		    result.add(object);
 		
 		// push the result in cache for possible later use
-		allSuperTypesCache.put(c, result);
+		allSuperTypesCache.put(new KeyTuple<Class, TypeCheckerContext>(c, context), result);
 		return result;
 	}
 	
 	/** cache for optimizing call to allSuperTypes
 	 * the GC may collect its content at any time
-	 * Note: shoul we use the context ?
 	 */
-	protected static Map<Class, List<Type>> allSuperTypesCache = new SoftReferenceMapCache<Class, List<Type>>();
+	protected static Map<KeyTuple<Class, TypeCheckerContext>, List<Type>> allSuperTypesCache = new SoftReferenceMapCache<KeyTuple<Class, TypeCheckerContext>, List<Type>>();
+	
 	
 	/**
 	 * Returns the direct super types of a class.
