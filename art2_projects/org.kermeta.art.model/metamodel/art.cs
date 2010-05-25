@@ -1,6 +1,6 @@
  SYNTAXDEF art2
 FOR <http://art/2.0>
-START ContainerRoot,Namespace,Wire,TypedElement,ComponentTypeLibrary,NamedElement
+START ContainerRoot,Namespace,Wire,TypedElement,ComponentTypeLibrary,NamedElement,Metric
 
 TOKENS{
 	DEFINE COMMENT$'//'(~('\n'|'\r'|'\uffff'))*$;
@@ -16,6 +16,7 @@ TOKENSTYLES{
 	"dictionary" COLOR #7F0055, BOLD;
 	"requirePorts" COLOR #7F0055, BOLD;
 	"namespace" COLOR #7F0055, BOLD;
+	"metrics" COLOR #7F0055, BOLD;
 	"ComponentType" COLOR #7F0055, BOLD;
 	"groupName" COLOR #7F0055, BOLD;
 	"unitName" COLOR #7F0055, BOLD;
@@ -28,24 +29,18 @@ TOKENSTYLES{
 	"offeredPortTypes" COLOR #7F0055, BOLD;
 	"ContainerNode" COLOR #7F0055, BOLD;
 	"components" COLOR #7F0055, BOLD;
-	"bindings" COLOR #7F0055, BOLD;
 	"ContainerRoot" COLOR #7F0055, BOLD;
 	"nodes" COLOR #7F0055, BOLD;
 	"componentTypes" COLOR #7F0055, BOLD;
 	"repositories" COLOR #7F0055, BOLD;
-	"dataTypes" COLOR #7F0055, BOLD;
-	"availablePortImpl" COLOR #7F0055, BOLD;
+	"bindings" COLOR #7F0055, BOLD;
 	"PortType" COLOR #7F0055, BOLD;
-	"impl" COLOR #7F0055, BOLD;
 	"interface" COLOR #7F0055, BOLD;
 	"Port" COLOR #7F0055, BOLD;
 	"portTypeRef" COLOR #7F0055, BOLD;
 	"Namespace" COLOR #7F0055, BOLD;
 	"childs" COLOR #7F0055, BOLD;
 	"parent" COLOR #7F0055, BOLD;
-	"PortServiceImpl" COLOR #7F0055, BOLD;
-	"PortActorImpl" COLOR #7F0055, BOLD;
-	"PortMessageImpl" COLOR #7F0055, BOLD;
 	"Dictionary" COLOR #7F0055, BOLD;
 	"values" COLOR #7F0055, BOLD;
 	"DictionaryType" COLOR #7F0055, BOLD;
@@ -77,41 +72,39 @@ TOKENSTYLES{
 	"ComponentTypeLibrary" COLOR #7F0055, BOLD;
 	"subComponentTypes" COLOR #7F0055, BOLD;
 	"NamedElement" COLOR #7F0055, BOLD;
-	"DataType" COLOR #7F0055, BOLD;
 	"IntegrationPattern" COLOR #7F0055, BOLD;
 	"portTypes" COLOR #7F0055, BOLD;
 	"ExtraFonctionalProperty" COLOR #7F0055, BOLD;
-	"OSGiScrDataType" COLOR #7F0055, BOLD;
-	"interfaceImpl" COLOR #7F0055, BOLD;
+	"Metric" COLOR #7F0055, BOLD;
+	"value" COLOR #7F0055, BOLD;
+	"type" COLOR #7F0055, BOLD;
+	"average" COLOR #7F0055, BOLD;
+	"min" COLOR #7F0055, BOLD;
+	"max" COLOR #7F0055, BOLD;
+	"bestValue" COLOR #7F0055, BOLD;
 }
 
 RULES{
 	
-	ComponentInstance::= "ComponentInstance"  "{" ( "name"  ":" name['"','"'] | "componentType"  ":" componentType[]| "hostedPorts"  ":" hostedPorts | "dictionary"  ":" dictionary | "requirePorts"  ":" requirePorts | "namespace"  ":" namespace[] )* "}"  ;
+	ComponentInstance::= "ComponentInstance"  "{" ( "name"  ":" name['"','"'] | "componentType"  ":" componentType[]| "hostedPorts"  ":" hostedPorts | "dictionary"  ":" dictionary | "requirePorts"  ":" requirePorts | "namespace"  ":" namespace[]| "metrics"  ":" metrics[] )* "}"  ;
 	
 	ComponentType::= "ComponentType"  "{" ( "name"  ":" name['"','"'] | "groupName"  ":" groupName['"','"'] | "unitName"  ":" unitName['"','"'] | "version"  ":" version['"','"'] | "hostedPortTypes"  ":" hostedPortTypes | "dictionary"  ":" dictionary | "bean"  ":" bean['"','"'] | "neededPortTypes"  ":" neededPortTypes | "integrationPatterns"  ":" integrationPatterns | "extraFonctionalProperties"  ":" extraFonctionalProperties | "offeredPortTypes"  ":" offeredPortTypes  )* "}"  ;
 	
-	ContainerNode::= "ContainerNode"  "{" ( "name"  ":" name['"','"'] | "components"  ":" components | "bindings"  ":" bindings  )* "}"  ;
+	ContainerNode::= "ContainerNode"  "{" ( "name"  ":" name['"','"'] | "components"  ":" components  )* "}"  ;
 	
-	ContainerRoot::= "ContainerRoot"  "{" ( "nodes"  ":" nodes | "componentTypes"  ":" componentTypes | "repositories"  ":" repositories | "dataTypes"  ":" dataTypes | "availablePortImpl"  ":" availablePortImpl  )* "}"  ;
+	ContainerRoot::= "ContainerRoot"  "{" ( "nodes"  ":" nodes | "componentTypes"  ":" componentTypes | "repositories"  ":" repositories | "bindings"  ":" bindings  )* "}"  ;
 	
-	PortType::=synchrone[]? "PortType"  "{" ( "name"  ":" name['"','"'] | "impl"  ":" impl[]| "interface"  ":" interface | "bean"  ":" bean['"','"']  )* "}"  ;
+	PortType::=synchrone[]? "PortType"  "{" ( "name"  ":" name['"','"'] | "interface"  ":" interface | "bean"  ":" bean['"','"']  )* "}"  ;
 	
-	Port::= "Port"  "{" ( "name"  ":" name['"','"'] | "portTypeRef"  ":" portTypeRef[] )* "}"  ;
+	Port::= "Port"  "{" ( "name"  ":" name['"','"'] | "portTypeRef"  ":" portTypeRef[]| "metrics"  ":" metrics[] )* "}"  ;
 	
 	Namespace::= "Namespace"  "{" ( "name"  ":" name['"','"'] | "childs"  ":" childs | "parent"  ":" parent[] )* "}"  ;
-	
-	PortServiceImpl::= "PortServiceImpl"  "{" ( "name"  ":" name['"','"']  )* "}"  ;
-	
-	PortActorImpl::= "PortActorImpl"  "{" ( "name"  ":" name['"','"']  )* "}"  ;
-	
-	PortMessageImpl::= "PortMessageImpl"  "{" ( "name"  ":" name['"','"']  )* "}"  ;
 	
 	Dictionary::= "Dictionary"  "{" ( "values"  ":" values  )* "}"  ;
 	
 	DictionaryType::= "DictionaryType"  "{" ( "attributes"  ":" attributes | "defaultValues"  ":" defaultValues  )* "}"  ;
 	
-	DictionaryAttribute::=optional[]? "DictionaryAttribute"  "{" ( "name"  ":" name['"','"'] | "datatype"  ":" datatype[] )* "}"  ;
+	DictionaryAttribute::=optional[]? "DictionaryAttribute"  "{" ( "name"  ":" name['"','"'] | "datatype"  ":" datatype['"','"']  )* "}"  ;
 	
 	DictionaryValue::= "DictionaryValue"  "{" ( "attribute"  ":" attribute[] )* "}"  ;
 	
@@ -123,13 +116,13 @@ RULES{
 	
 	Wire::= "Wire"  "{" ( "ports"  ":" ports[] )* "}"  ;
 	
-	ServiceDataType::= "ServiceDataType"  "{" ( "name"  ":" name['"','"'] | "operations"  ":" operations  )* "}"  ;
+	ServiceDataType::= "ServiceDataType"  "{" ( "name"  ":" name['"','"'] | "operations"  ":" operations | "interface"  ":" interface['"','"']  )* "}"  ;
 	
 	Operation::= "Operation"  "{" ( "name"  ":" name['"','"'] | "parameters"  ":" parameters | "returnType"  ":" returnType[] )* "}"  ;
 	
-	Parameter::= "Parameter"  "{" ( "name"  ":" name['"','"'] | "datatype"  ":" datatype[] )* "}"  ;
+	Parameter::= "Parameter"  "{" ( "name"  ":" name['"','"'] | "datatype"  ":" datatype['"','"']  )* "}"  ;
 	
-	TypedElement::= "TypedElement"  "{" ( "name"  ":" name['"','"'] | "datatype"  ":" datatype[] )* "}"  ;
+	TypedElement::= "TypedElement"  "{" ( "name"  ":" name['"','"'] | "datatype"  ":" datatype['"','"']  )* "}"  ;
 	
 	MessageDataType::= "MessageDataType"  "{" ( "name"  ":" name['"','"']  )* "}"  ;
 	
@@ -139,12 +132,10 @@ RULES{
 	
 	NamedElement::= "NamedElement"  "{" ( "name"  ":" name['"','"']  )* "}"  ;
 	
-	DataType::= "DataType"  "{" ( "name"  ":" name['"','"']  )* "}"  ;
-	
 	IntegrationPattern::= "IntegrationPattern"  "{" ( "name"  ":" name['"','"'] | "extraFonctionalProperties"  ":" extraFonctionalProperties | "portTypes"  ":" portTypes[] )* "}"  ;
 	
 	ExtraFonctionalProperty::= "ExtraFonctionalProperty"  "{" ( "portTypes"  ":" portTypes[] )* "}"  ;
 	
-	OSGiScrDataType::= "OSGiScrDataType"  "{" ( "name"  ":" name['"','"'] | "operations"  ":" operations | "interfaceImpl"  ":" interfaceImpl['"','"']  )* "}"  ;
+	Metric::= "Metric"  "{" ( "name"  ":" name['"','"'] | "value"  ":" value['"','"'] | "type"  ":" type['"','"'] | "average"  ":" average['"','"'] | "min"  ":" min['"','"'] | "max"  ":" max['"','"'] | "bestValue"  ":" bestValue['"','"']  )* "}"  ;
 	
 }

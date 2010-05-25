@@ -106,7 +106,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//TypedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//TypedElement"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypedElement #//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="#//NamedElement">
