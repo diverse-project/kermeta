@@ -1,3 +1,4 @@
+
 /* $Id: LogoNXCCompiler.kmt,v 1.2 2008-05-29 12:09:41 vmahe Exp $
  * Creation datresult.append("e: May 30, 2007
  * License:
@@ -25,293 +26,267 @@ using kermeta::io
  */
 package ASM {
 
-	@aspect "true"
-	class LogoProgram 
-	{
-		operation compileToNXC(context : NXCCompiler) : String is do
-			result := context.prefix
-			context.incDepth
-			instructions.each{ instruction  | 
-				result.append(context.prefix + instruction.compileToNXC(context) + "\n") 
-			}
-			context.decDepth
-			result.append(context.prefix)
-		end 
-	}
-
-	@aspect "true"
-	class Instruction 
-	{
-		operation compileToNXC(context : NXCCompiler) : String is do
-			result := "// NOT IMPLEMENTED"
-		end
-	}
-	
-	@aspect "true"
-	class ProcDeclaration
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := "// Declaration of " + name + " function"
-			var proc : String init "sub " + name + "("
-			from var i : Integer init 0
-			until i >= args.size
-			loop
-				proc.append("int " + args.elementAt(i).name)
-				if i < args.size - 1 then proc.append(", ") end
-				i := i + 1
-			end
-			proc.append(")\n")
-			var depth : Integer init context.depth
-			context.depth := 0
-			instructions.each{i | 
-				proc.append(i.compileToNXC(context))
-			}
-			context.subs.add(proc)
-			context.depth := depth
-		end
-	}
-	
-	@aspect "true"
-	class Constant
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			if integerValue >= 0 then
-				result := integerValue.toString
-			else 
-				result := "(" + integerValue.toString + ")"
-			end
-		end 
-	}
-	
-	@aspect "true"
-	class ParameterCall
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := parameter.name
-		end 
-	}
-	
-	@aspect "true"
-	class Plus
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := lhs.compileToNXC(context) + " + " + rhs.compileToNXC(context)
-		end
-	}
-	
-	@aspect "true"
-	class Minus
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := lhs.compileToNXC(context) + " - " + rhs.compileToNXC(context)
-		end
-	}
-	
-	@aspect "true"
-	class Mult
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := lhs.compileToNXC(context) + " * " + rhs.compileToNXC(context)
-		end
-	}
-	
-	@aspect "true"
-	class Div
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := lhs.compileToNXC(context) + " / " + rhs.compileToNXC(context)
-		end
-	}
-	
-	@aspect "true"
-	class Equals
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := lhs.compileToNXC(context) + " == " + rhs.compileToNXC(context)
-		end
-	}
-	
-	@aspect "true"
-	class Greater
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := lhs.compileToNXC(context) + " > " + rhs.compileToNXC(context)
-		end
-	}
-	
-	@aspect "true"
-	class Lower
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := lhs.compileToNXC(context) + " < " + rhs.compileToNXC(context)
-		end
-	}
-	
-	@aspect "true"
-	class Block
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := context.prefix + "{\n"
-			context.incDepth
-			instructions.each{ instruction  | 
-				result.append(context.prefix + instruction.compileToNXC(context) + "\n") 
-			}
-			context.decDepth
-			result.append(context.prefix + "}")
-		end 
-	}
-	
-	
-	@aspect "true"
-	class ProcCall
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := declaration.name + "("
-			from var i : Integer init 0
-			until i >= actualArgs.size
-			loop
-				result.append(actualArgs.elementAt(i).compileToNXC(context))
-				if i < actualArgs.size - 1 then result.append(", ") end
-				i := i+1
-			end
-			result.append(");")
-		end
-	
-	}
-	
-	
-	@aspect "true"
-	class If
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := "if (" + condition.compileToNXC(context) + ")\n"
-			result.append(thenPart.compileToNXC(context))
-			if not elsePart.isVoid() then
-				result.append("\n" + context.prefix + "else\n")
-				result.append(elsePart.compileToNXC(context))
-			end
-		end 
-	}
-	
-	@aspect "true"
-	class While
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := context.prefix + "while (" + condition.compileToNXC(context) + ")\n"
-			result.append(block.compileToNXC(context))	
-		end 
-	}
-	@aspect "true"
-	class Repeat
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := "repeat (" + condition.compileToNXC(context) + ")\n"
-			result.append(block.compileToNXC(context))	
-		end 
-	}
-	
-	/*
-	* The semantics of the primitive constructs 
-	*/
-	@aspect "true"
-	class Back
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := "forward(-(" + steps.compileToNXC(context) + "));"
-		end
-	}
-	@aspect "true"
-	class Forward
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := "forward(" + steps.compileToNXC(context) + ");"
-		end
-	}
-	@aspect "true"
-	class Left
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := "turn(" + angle.compileToNXC(context) + ");"
-		end
-	}
-	@aspect "true"
-	class Right
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := "turn(-(" + angle.compileToNXC(context) + "));"
-		end
-	}
-	@aspect "true"
-	class PenDown
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := "penDown();"
-		end
-	}
-	@aspect "true"
-	class PenUp
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := "penUp();"
-		end
-	}
-	
-	@aspect "true"
-	class Clear
-	{
-		method compileToNXC(context : NXCCompiler) : String is do
-			result := "// RESET NOT IMPLEMENTED"
-		end
-	}
-	
+aspect class LogoProgram 
+{
+operation compileToNXC(context : NXCCompiler) : String is do
+result := context.prefix
+context.incDepth
+instructions.each{ instruction  | 
+result.append(context.prefix + instruction.compileToNXC(context) + "\n") 
+}
+context.decDepth
+result.append(context.prefix)
+end 
 }
 
-class NXCCompiler 
-{	
-	reference root : ASM::LogoProgram
-	
-	reference subs : String[*]
-	reference depth : Integer
-	property readonly prefix : String 
-		getter is do
-			result := ""
-			depth.times{i | result.append("\t")}
-		end 
-	operation incDepth() is do depth := depth + 1 end
-	operation decDepth() is do depth := depth - 1 end
-	
-	operation main() is
-	do
-		compile("./tests/k.xmi", "./tests/k.nxc", void)
-	end
-	
-	operation compile(uri : String, out : String, api : String) : String is
-	do
-		var io : FileIO init FileIO.new
-		depth := 0
-		root := loadProgram(uri)
-		var nxc : String init root.compileToNXC(self)
-		// We shoudl read API from the file but right now it is hard codded
-		result := NXCCodeGenerator.new.generate(subs, nxc)
-		stdio.writeln(out)
-		io.writeTextFile(out, result)
-	end
-	
-	operation compileToStdOut(uri : String) : String is
-	do
-		var io : FileIO init FileIO.new
-		depth := 0
-		root := loadProgram(uri)
-		var nxc : String init root.compileToNXC(self)
-		// We shoudl read API from the file but right now it is hard codded
-		result := NXCCodeGenerator.new.generate(subs, nxc)
-		stdio.writeln(result)
-	end
-	
-	operation loadProgram(uri : String) : ASM::LogoProgram is do
-		var res : EMFRepository init EMFRepository.new
+aspect class Instruction 
+{
+operation compileToNXC(context : NXCCompiler) : String is do
+result := "// NOT IMPLEMENTED"
+end
+}
+
+aspect class ProcDeclaration
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := "// Declaration of " + name + " function"
+var proc : String init "sub " + name + "("
+from var i : Integer init 0
+until i >= args.size
+loop
+proc.append("int " + args.elementAt(i).name)
+if i < args.size - 1 then proc.append(", ") end
+i := i + 1
+end
+proc.append(")\n")
+proc.append("{\n")
+var depth : Integer init context.depth
+context.depth := 0
+instructions.each{i | 
+proc.append(i.compileToNXC(context))
+}
+proc.append("}\n")
+context.subs.add(proc)
+context.depth := depth
+end
+}
+
+aspect class Constant
+{
+method compileToNXC(context : NXCCompiler) : String is do
+if integerValue >= 0 then
+result := integerValue.toString
+else 
+result := "(" + integerValue.toString + ")"
+end
+end 
+}
+
+aspect class ParameterCall
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := parameter.name
+end 
+}
+
+aspect class Plus
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := lhs.compileToNXC(context) + " + " + rhs.compileToNXC(context)
+end
+}
+
+aspect class Minus
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := lhs.compileToNXC(context) + " - " + rhs.compileToNXC(context)
+end
+}
+
+aspect class Mult
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := lhs.compileToNXC(context) + " * " + rhs.compileToNXC(context)
+end
+}
+
+aspect class Div
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := lhs.compileToNXC(context) + " / " + rhs.compileToNXC(context)
+end
+}
+
+aspect class Equals
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := lhs.compileToNXC(context) + " == " + rhs.compileToNXC(context)
+end
+}
+
+aspect class Greater
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := lhs.compileToNXC(context) + " > " + rhs.compileToNXC(context)
+end
+}
+
+aspect class Lower
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := lhs.compileToNXC(context) + " < " + rhs.compileToNXC(context)
+end
+}
+
+aspect class Block
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := context.prefix + "{\n"
+context.incDepth
+instructions.each{ instruction  | 
+result.append(context.prefix + instruction.compileToNXC(context) + "\n") 
+}
+context.decDepth
+result.append(context.prefix + "}")
+end 
+}
+
+aspect class ProcCall
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := declaration.name + "("
+from var i : Integer init 0
+until i >= actualArgs.size
+loop
+result.append(actualArgs.elementAt(i).compileToNXC(context))
+if i < actualArgs.size - 1 then result.append(", ") end
+i := i+1
+end
+result.append(");")
+end
+}
+
+aspect class If
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := "if (" + condition.compileToNXC(context) + ")\n"
+result.append(thenPart.compileToNXC(context))
+if not elsePart.isVoid() then
+result.append("\n" + context.prefix + "else\n")
+result.append(elsePart.compileToNXC(context))
+end
+end 
+}
+
+aspect class While
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := context.prefix + "while (" + condition.compileToNXC(context) + ")\n"
+result.append(block.compileToNXC(context))
+end 
+}
+
+aspect class Repeat
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := "repeat (" + condition.compileToNXC(context) + ");\n"
+result.append(block.compileToNXC(context))
+end 
+}
+/*
+* The semantics of the primitive constructs 
+*/
+
+aspect class Back
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := "forward(-(" + steps.compileToNXC(context) + "));"
+end
+}
+
+aspect class Forward
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := "forward(" + steps.compileToNXC(context) + ");"
+end
+}
+
+aspect class Left
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := "turn(" + angle.compileToNXC(context) + ");"
+end
+}
+
+aspect class Right
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := "turn(-(" + angle.compileToNXC(context) + "));"
+end
+}
+
+aspect class PenDown
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := "penDown();"
+end
+}
+
+aspect class PenUp
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := "penUp();"
+end
+}
+
+aspect class Clear
+{
+method compileToNXC(context : NXCCompiler) : String is do
+result := "// RESET NOT IMPLEMENTED"
+end
+}
+}
+
+aspect class NXCCompiler 
+{
+reference root : ASM::LogoProgram
+reference subs : String[*]
+reference depth : Integer
+property readonly prefix : String 
+getter is do
+result := ""
+depth.times{i | result.append("\t")}
+end 
+operation incDepth() is do depth := depth + 1 end
+operation decDepth() is do depth := depth - 1 end
+operation main() is
+do
+compile("./tests/k.xmi", "./tests/k.nxc", void)
+end
+operation compile(uri : String, out : String, api : String) : String is
+do
+var io : FileIO init FileIO.new
+depth := 0
+root := loadProgram(uri)
+var nxc : String init root.compileToNXC(self)
+// We shoudl read API from the file but right now it is hard codded
+result := NXCCodeGenerator.new.generate(subs, nxc)
+stdio.writeln(out)
+io.writeTextFile(out, result)
+end
+operation compileToStdOut(uri : String) : String is
+do
+var io : FileIO init FileIO.new
+depth := 0
+root := loadProgram(uri)
+var nxc : String init root.compileToNXC(self)
+// We shoudl read API from the file but right now it is hard codded
+result := NXCCodeGenerator.new.generate(subs, nxc)
+stdio.writeln(result)
+end
+operation loadProgram(uri : String) : ASM::LogoProgram is do
+var res : EMFRepository init EMFRepository.new
         var resource : Resource init res.getResource(uri)
         result ?= resource.instances.one  
-	end
+end
 }
-
