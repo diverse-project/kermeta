@@ -9,15 +9,16 @@
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
     <date>$Date::                      $</date>
-
-    <author>
-      <firstname>Didier</firstname>
-      <surname>Vojtisek</surname>
-    </author>
-    <author>
-      <firstname>Cyril</firstname>
-      <surname>Faucher</surname>
-    </author>
+	<authorgroup>
+		<author>
+	      <firstname>Cyril</firstname>
+	      <surname>Faucher</surname>
+	    </author>
+	    <author>
+	      <firstname>Didier</firstname>
+	      <surname>Vojtisek</surname>
+	    </author>
+	</authorgroup>    
 	<mediaobject>
         <imageobject>
           <imagedata fileref="figures/FastKermeta.png" align="right" depth="25mm" format="PNG"
@@ -77,14 +78,14 @@
         role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
       </ulink>
 
-       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v1.3.0 
+       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) 
     </para></important>
 
     <tip><para>
        The most update version of this document is available on line from 
 
       <ulink type=""
-      url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
+      url="http://www.kermeta.org/documents/tutorials/task_oriented_tutorials/deployment_manual">http://www.kermeta.org/documents/tutorials/task_oriented_tutorials/deployment_manual</ulink>
 
        . 
     </para></tip>
@@ -214,27 +215,42 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6</programlisting>
 	<formalpara><title>Use String parameters</title> 
 		<para> The main operation that'll be started should take only String parameters.
 	</para></formalpara>
-	<formalpara><title>If the code must be interpreted, deploy the code in a plugin</title> 
-		<para> all the required kermeta code, kmt, km, ecore must be in a plugin as explained in <xref linkend="chapter_deploying_4_interpreter.link"/>. The only exception is a bout the registered Ecore, which follow EMF way for deploying the java code for the ecore file.
+	<example>
+	<title>Typical kermeta operation used as an entry point</title>
+	<programlisting language="kermeta">operation myMain( inputFileURI : String, outputFileURI : String, option : String) is do
+// ...
+end </programlisting>
+	</example>
+	
+	<formalpara><title>If the code must be interpreted, the easiest way is to deploy the kermeta code in a plugin</title> 
+		<para> all the required kermeta code, kmt, km, ecore must be in plugins as explained in <xref linkend="chapter_deploying_4_interpreter.link"/>. The only exception is a bout the registered Ecore, which follow EMF way for deploying the java code for the ecore file.
 	</para></formalpara>
 	<note><para>There are some ways to pass to the launched program something more complex 
-	that String, however this require a more coupled interaction and knownledge of the Interpreted or the Compiled code. If you need this, 
+	than String, however this requires a more coupled interaction and knownledge of the Interpreted or the Compiled code. If you need this, 
 	please ask on the user mailing list and explain you use case for further assistance. We'll be glad to guide you.</para>
 	</note>
   </chapter>
-
   <chapter id="chapter_launching_interpreter.link">
     <title id="chapter_launching_interpreter.title.link">Launching a kermeta program in interpreted mode</title>
-     <para> Here is a typical code for starting a kermeta interpreter on a kermeta program.</para>
-	<note>
-	   <para> This sample is extracted from the kmLogo example which is distributed with Kermeta. You can retrieve this sample
-	    	by doing the following steps.
-		</para>
-		<synopsis>File &gt; new  &gt; Example...  &gt;  Kermeta samples  &gt; km Logo tutorial (plugins for the main workbench) </synopsis>
-		<para>The action file corresponding to this section are in </para>
-		<synopsis>fr.irisa.triskellkmlogo.ui/src/fr.irisa.triskell.kmlogo.ui.popup.actions</synopsis>
-	</note>
-	<programlisting language="java">
+     <para>
+     	You can start Kermeta interpreter on you kermeta code from a java program, however you must be aware of the run context.
+     	You'll probably run the interpreter in Eclipse environment or as a standard java application. Actually, the simpliest is to run in eclipse
+     	because you don't have to bother about the jar used by the interpreter and eclipse itself but you'll have to do some GUI integration (create a popup menu for example).
+     	On the other hand, you won't have to create a GUI, but you have to care about file name resolution and jar location.
+     </para>
+     <tip><para>Do not be confused, you can run a standard java application from Eclipse IDE. In this case, you need to follow the explanation of <xref linkend="section_interpreter_standard_java.link"/>.</para></tip>
+     <section id="section_interpreter_eclipse_environment.link">
+     	<title>Interpreted mode in Eclipse environment</title>
+	    <para> Here is a typical code for starting a kermeta interpreter on a kermeta program.</para>
+		<note>
+		   <para> This sample is extracted from the kmLogo example which is distributed with Kermeta. You can retrieve this sample
+		    	by doing the following steps.
+			</para>
+			<synopsis>File &gt; new  &gt; Example...  &gt;  Kermeta samples  &gt; km Logo tutorial (plugins for the main workbench) </synopsis>
+			<para>The action file corresponding to this section are in </para>
+			<synopsis>fr.irisa.triskellkmlogo.ui/src/fr.irisa.triskell.kmlogo.ui.popup.actions</synopsis>
+		</note>
+		<programlisting language="java">
 package fr.irisa.triskell.kmlogo.ui.popup.actions;
 
 import java.util.Iterator;
@@ -371,46 +387,78 @@ public class RunLogo implements IObjectActionDelegate, Runnable {
    }
 
 }
-	</programlisting>
-	<calloutlist>
-		<callout arearefs="kmt.path.co" id="kmt.path.callout">
-			<para>Path to the kermeta program that will be run.
+		</programlisting>
+		<calloutlist>
+			<callout arearefs="kmt.path.co" id="kmt.path.callout">
+				<para>Path to the kermeta program that will be run.
+				</para>
+			</callout>
+			<callout arearefs="eclipse.console.co" id="eclipse.console.callout">
+				<para>Kermeta stdio.writeln outputs must be redirected to an IOConsole. This EclipseConsole will print to the user console in eclipse.
+				</para><para>
+					The plugin <filename>fr.irisa.triskell.eclipse.util</filename> also provides so other console kind like <filename>LocalIOConsole</filename> that prints to the standard streams.
+				</para>
+			</callout>
+			<callout arearefs="interpreter.stream.co" id="interpreter.stream.callout">
+				<para>Tells the interpreter where the stdio will be written.
+				</para>
+			</callout>
+			<callout arearefs="interpreter.entrypoint.co" id="interpreter.entrypoint.callout">
+				<para>Indicates the main class and the operation that will be started.
+				</para>
+			</callout>
+			<callout arearefs="interpreter.parameter.co" id="interpreter.parameter.callout">
+				<para>Pass the String parameters to the interpreter. This must conforms to the expected parameters of the main operation specified as entry point.
+				</para>
+			</callout>
+			<callout arearefs="interpreter.launch.co" id="interpreter.launch.callout">
+				<para>Finally starts the interpreter and wait for the end of the kermeta program.
+				</para>
+				<note><para>In the Interpreter API, it exist some other way to start the program, for example <literal>launchAndWait()</literal> which doesn't release the 
+				interpreter memory at the end of the operation which is useful in some special applications. Feel free to ask question to the development team.
+				</para></note>
+			</callout>
+			<callout arearefs="interpreter.exception.co" id="interpreter.exception.callout">
+				<para>Use various means to tell the user that something wrong occurred. However, if you expect some exception 
+				and haven't catched them in the kermeta program (for example
+				when checking a model invariant, you may add here some code to report a better message to your users).  
+				</para>
+			</callout>
+		
+		</calloutlist>
+		
+     </section>
+     <section id="section_interpreter_standard_java.link">
+     	<title>Interpreted mode in standard java</title>
+     	<para>Most of the elements seen in the previous section is still correct (especially how to initialize the Interpreter with your kermeta program and passing the parameters).
+     	In addition to that you must be aware of some point.
+     	</para>
+     	<tip>
+     		<para>A good sample for building your own standard java calling kermeta interpreter is to look at the RunCommandLine.java class which implements a command line argument parser and calls the Interpreter on top of a standalone distribution.
+     			<ulink type=""  url="http://gforge.inria.fr/scm/viewvc.php/trunk/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/src/java/org/kermeta/interpreter/api/RunCommandLine.java?view=markup&root=kermeta">http://gforge.inria.fr/scm/viewvc.php/trunk/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/src/java/org/kermeta/interpreter/api/RunCommandLine.java?view=markup&root=kermeta</ulink>     			
+     		</para></tip>
+     	<section><title><literal>platform:/resource</literal> and <literal>platform:/plugin</literal> resolution</title> 
+			<para>These URI are specific to Eclipse and aren't known by default in Java. You'll need to guide indicate how to map them to the classical <literal>file://</literal> URIs
 			</para>
-		</callout>
-		<callout arearefs="eclipse.console.co" id="eclipse.console.callout">
-			<para>Kermeta stdio.writeln outputs must be redirected to an IOConsole. This EclipseConsole will print to the user console in eclipse.
-			</para><para>
-				The plugin <filename>fr.irisa.triskell.eclipse.util</filename> also provides so other console kind like <filename>LocalIOConsole</filename> that prints to the standard streams.
+			<para>This is done by adding some URI map entry in EMF.</para>
+			<example><title>adding URI map entries in EMF (java)</title>
+			<programlisting language="java">import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+			
+ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI("file://path_to_you_folder_containing_a_kind_of_plugin_structure"));
+ExtensibleURIConverterImpl.URI_MAP.put(URI.createURI("platform:/resource/"), URI.createURI("file://path_to_you_folder_containing_a_kind_of_workspace_structure"));</programlisting>
+			</example>
+			<tip><para>In the above sample, we map only two folders, however you can reach more complex mapping sceme. Please have a look in eclispe help for more details. 
+			<ulink type=""  url="http://help.eclipse.org/galileo/topic/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/resource/impl/ExtensibleURIConverterImpl.html#getURIMap()">http://help.eclipse.org/galileo/topic/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/resource/impl/ExtensibleURIConverterImpl.html#getURIMap()</ulink></para></tip>
+		</section>
+		<section><title>classpath</title> 
+			<para>Obviously, as you run as a standard java application you'll need to include inthe classpath all the jar that constitute Kermeta interpreter and their dependencies to eclipse jars.			
 			</para>
-		</callout>
-		<callout arearefs="interpreter.stream.co" id="interpreter.stream.callout">
-			<para>Tells the interpreter where the stdio will be written.
-			</para>
-		</callout>
-		<callout arearefs="interpreter.entrypoint.co" id="interpreter.entrypoint.callout">
-			<para>Indicates the main class and the operation that will be started.
-			</para>
-		</callout>
-		<callout arearefs="interpreter.parameter.co" id="interpreter.parameter.callout">
-			<para>Pass the String parameters to the interpreter. This must conforms to the expected parameters of the main operation specified as entry point.
-			</para>
-		</callout>
-		<callout arearefs="interpreter.launch.co" id="interpreter.launch.callout">
-			<para>Finally starts the interpreter and wait for the end of the kermeta program.
-			</para>
-			<note><para>In the Interpreter API, it exist some other way to start the program, for example <literal>launchAndWait()</literal> which doesn't release the 
-			interpreter memory at the end of the operation which is useful in some special applications. Feel free to ask question to the development team.
-			</para></note>
-		</callout>
-		<callout arearefs="interpreter.exception.co" id="interpreter.exception.callout">
-			<para>Use various means to tell the user that something wrong occurred. However, if you expect some exception 
-			and haven't catched them in the kermeta program (for example
-			when checking a model invariant, you may add here some code to report a better message to your users).  
-			</para>
-		</callout>
-	
-	</calloutlist>
-	
+			<para>If your code use <literal>extern</literal> call, you'll also need to provide the jar that contains the java implementation of those extern operation. </para>
+			<tip><para>The standalone distribution of kermeta is a repackaging of kermeta and all its dependencies in a convenient jar (or set of jars) that doesn't include those nasty version number eclipse use.
+			It's more convenient to build your classpath from it. 
+			</para></tip> 			
+		</section>
+     </section>
   </chapter>
   <chapter id="chapter_registering_ecore.link">
     <title id="chapter_registering.title.link">Registering Ecore file</title>
@@ -444,7 +492,7 @@ EcoreRegistering.registerPackages(anEcoreIFile);
 	</itemizedlist>
   </chapter>
   <chapter id="chapter_launching_compiled_code.link">
-    <title id="chapter_launching_compiled.title.link">Launching a compiled kermeta program</title>
+    <title id="chapter_launching_compiled.title.link">Launching a compiled kermeta program (Compiler V1)</title>
 
     <para>For each operation having like parameters a sequence of String, a Java "main" method is generated at compilation time in a Java package denoted "runner". A Java package "runner" is generated for all Kermeta or Ecore packages. Thus this main is usable as a classical Java Main method.
 	</para>
