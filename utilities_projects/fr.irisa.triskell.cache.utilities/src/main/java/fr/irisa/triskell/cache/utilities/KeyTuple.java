@@ -42,12 +42,15 @@ public class KeyTuple<FirstInternalKey,SecondInternalKey> {
 			return false;
 		}
 	}
+	
+	private static final int hashConst = 31;
+	
 	@Override
 	public int hashCode() {
 		// see http://www.ibm.com/developerworks/java/library/j-jtp05273.html
 		int hash = 1;
-	    hash = hash * 31 + firstKey.hashCode();
-	    hash = hash * 31 
+	    hash = hash * hashConst + firstKey.hashCode();
+	    hash = hash * hashConst 
 	                + (secondKey == null ? 0 : secondKey.hashCode());
 	    return hash;
 	}
