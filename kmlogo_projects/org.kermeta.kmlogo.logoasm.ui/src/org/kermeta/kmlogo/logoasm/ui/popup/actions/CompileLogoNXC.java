@@ -47,7 +47,7 @@ public class CompileLogoNXC implements IObjectActionDelegate, Runnable {
 		try {			
 			IFile out_file = logoFile.getWorkspace().getRoot().getFile(logoFile.getFullPath().removeFileExtension().addFileExtension("nxc"));
 			String file_uri = "file://" + logoFile.getLocation().toOSString();
-			String out = "file://" + out_file.getLocation().toFile().getCanonicalPath();
+			String out = "file://" + out_file.getLocation().toFile().getCanonicalPath().replace("\\","/");
 			//console.println(new ErrorMessage("Error : " + file_uri + " " +out ));
 			CompileNXCLogoK.run(file_uri, out, console);
 			
