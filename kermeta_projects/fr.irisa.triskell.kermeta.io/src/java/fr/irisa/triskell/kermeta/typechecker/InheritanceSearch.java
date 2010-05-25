@@ -53,7 +53,8 @@ public class InheritanceSearch {
 		List<Type> result;
 		
 		// is it in the cache
-		result = allSuperTypesCache.get(c);
+		KeyTuple<Class, TypeCheckerContext> cacheKey = new KeyTuple<Class, TypeCheckerContext>(c, context);
+		result = allSuperTypesCache.get(cacheKey);
 		if(result != null) 
 			return result;
 		
@@ -81,7 +82,7 @@ public class InheritanceSearch {
 		    result.add(object);
 		
 		// push the result in cache for possible later use
-		allSuperTypesCache.put(new KeyTuple<Class, TypeCheckerContext>(c, context), result);
+		allSuperTypesCache.put(cacheKey, result);
 		return result;
 	}
 	
