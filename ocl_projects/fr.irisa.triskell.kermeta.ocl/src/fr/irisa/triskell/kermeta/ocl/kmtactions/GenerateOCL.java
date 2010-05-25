@@ -80,6 +80,7 @@ public class GenerateOCL {
 				Map<String, Object> options = new HashMap<String, Object>();
 				options.put( InterpreterOptions.MERGE, false );
 				options.put( InterpreterOptions.CLEAN_AT_END, false);
+				options.put(InterpreterOptions.TYPE_CHECKED, false);
 				//				_interpreter = new Interpreter(kermetaUnit.getUri(), InterpreterMode.RUN, options);
 
 				_interpreter = new Interpreter(oclKmtPrinterKmtPath, InterpreterMode.RUN, options);

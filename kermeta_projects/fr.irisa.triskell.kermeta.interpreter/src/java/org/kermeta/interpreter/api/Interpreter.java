@@ -188,7 +188,7 @@ public class Interpreter {
 				// the edition won't interfere with the execution
 				_kermetaUnit = IOPlugin.getDefault().getEditionKermetaUnitStore().get(uri);
 			    new KermetaTypeChecker(_kermetaUnit).checkUnit();
-				new KermetaConstraintChecker(_kermetaUnit).checkUnit();
+				//new KermetaConstraintChecker(_kermetaUnit).checkUnit();
 			} else {
 				Map<String, Object> options = new HashMap<String, Object>();
 				options.put( LoadingOptions.ECORE_QuickFixEnabled, true );
