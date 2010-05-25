@@ -73,4 +73,8 @@
          id="fr.irisa.triskell.ktr.feature"
          version="0.0.0"/>
 
+   <includes
+         id="org.kermeta.uml2.profile.marte"
+         version="0.0.0"/>
+
 </feature>
