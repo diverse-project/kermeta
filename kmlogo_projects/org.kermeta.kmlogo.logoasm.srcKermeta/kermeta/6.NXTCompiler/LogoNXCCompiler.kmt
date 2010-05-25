@@ -271,7 +271,7 @@ root := loadProgram(uri)
 var nxc : String init root.compileToNXC(self)
 // We shoudl read API from the file but right now it is hard codded
 result := NXCCodeGenerator.new.generate(subs, nxc)
-stdio.writeln(out)
+//stdio.writeln(out)
 io.writeTextFile(out, result)
 end
 operation compileToStdOut(uri : String) : String is
