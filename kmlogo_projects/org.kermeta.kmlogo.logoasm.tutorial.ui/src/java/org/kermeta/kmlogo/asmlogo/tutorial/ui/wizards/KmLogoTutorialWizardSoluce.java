@@ -28,7 +28,6 @@ public class KmLogoTutorialWizardSoluce
 		// We need the statements example to be unzipped along with the
 		// EMF library example model, edit and editor examples
 		List<ProjectDescriptor> projects = new ArrayList<ProjectDescriptor>(1);
-		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.tutorial.zip", "org.kermeta.kmlogo.logoasm.tutorial"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.samples.zip", "org.kermeta.kmlogo.logoasm.samples"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.emftexteditor.zip", "org.kermeta.kmlogo.logoasm.emftexteditor"));
 		projects.add(new ProjectDescriptor("org.kermeta.kmlogo.logoasm.tutorial.ui", "zips/org.kermeta.kmlogo.logoasm.model.zip", "org.kermeta.kmlogo.logoasm.model"));
