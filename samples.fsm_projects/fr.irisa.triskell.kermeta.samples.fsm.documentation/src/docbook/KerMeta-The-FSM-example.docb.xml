@@ -5,7 +5,7 @@
   <?oooversion?>
   <bookinfo>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <date>Revision: $Date::                     $</date>
+    <date>Last modification: $Date::                     $</date>
     <author>
       <firstname>François Tanguy, Didier Vojtisek, Zoé Drey, Marie Gouyette</firstname>
       <firstname/>
@@ -16,11 +16,12 @@
       <keyword>metamodeling</keyword>
       <keyword>language</keyword>
     </keywordset>
-    <subtitle>FSM example</subtitle>
+    <subtitle> FSM example</subtitle>
     <bibliomisc>Licence EPL</bibliomisc>
+    <date>19/07/2006</date>
     <abstract>
       <para>This tutorial is part of a serie of tutorials that explain step by step the process
-        explained in the  <ulink url="../../../../fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html"> Building DSL main process</ulink>. In this case, it rely on
+        explained in the  <ulink url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html"> Building DSL main process</ulink>. In this case, it rely on
         the classical Finite State Machine example. </para>
     </abstract>
     <publisher>
@@ -78,7 +79,7 @@
   <chapter>
     <title>Introduction</title>
     <para>This tutorial gives an overview of many concepts used through KerMeta project creation.
-      You can retrieve all the steps defined in the <ulink type="" url="../../../../fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html"> Manual Process to build a DSL </ulink> on which you can iterate in order to progress in your development. Following this
+      You can retrieve all the steps defined in the <ulink type="" url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html"> Manual Process to build a DSL </ulink> on which you can iterate in order to progress in your development. Following this
       tutorial should give you the knowledge : to create a meta model, check its invariants, run
       configurations, add pre and post conditions and add behaviour on it. To cover all this
       features, we decided to start from an existing example. Because it is a complete KerMeta
@@ -98,7 +99,7 @@
       <title> Prerequisites</title>
       <caution>
         <para>KerMeta must be installed (FSM tutorial is only available in this case). If not,
-          please read the "<ulink type="" url="../../../../fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/KerMeta-How-to-install-KerMeta/index.html">How to
+          please read the "<ulink type="" url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/KerMeta-How-to-install-KerMeta/index.html">How to
             install KerMeta</ulink>" tutorial.</para>
       </caution>
       <section>
@@ -199,7 +200,7 @@
         new EMF project (File-> New-> Other -> Eclipse Modeling Framework -> Empty EMF Project) and
         name it <emphasis role="strong">org.kermeta.fsm.emf </emphasis> . Then create a new folder
         model on it. If you want to create an EMF metamodel for fsm from scratch you can follow the
-        tutorial <ulink type="" url="../../../../fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/KerMeta-How-to-create-a-metamodel/index.html">"How to
+        tutorial <ulink type="" url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/KerMeta-How-to-create-a-metamodel/index.html">"How to
           create an EMF meta model?""</ulink> and use the EMF Sample reflexive editor to create a
         metamodel like in the following figure into the folder model. Name it<emphasis role="italic"
           > fsm.ecore</emphasis>. Otherwise, you can simply copy the file fsm.ecore from <emphasis
@@ -265,7 +266,7 @@
           </imageobject>
         </mediaobject>
       </figure>
-      <para>The  <ulink  url="../../../../org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"> Logo tutorial </ulink> presents how to create a dynamic instance with an ecorediag. The next
+      <para>The  <ulink  url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"> Logo tutorial </ulink> presents how to create a dynamic instance with an ecorediag. The next
         section presents another way to create instances of a given metamodel, create a tree view
         editor with an EMF project.</para>
     </section>
@@ -403,7 +404,7 @@
           url="http://www.eclipse.org/Xtext/"> XText</ulink> , <ulink type=""
           url="http://www.emftext.org/index.php/EMFText"> EMFText</ulink>, <ulink type=""
           url="http://www.kermeta.org/sintaks/"> Sintaks </ulink> (which is part of the Kermeta
-        project) . This textuals editors are not detailed here, please refer to the <ulink  url="../../../../org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"> Logo tutorial </ulink>.
+        project) . This textuals editors are not detailed here, please refer to the <ulink  url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"> Logo tutorial </ulink>.
       </para>
     </section>
     <section>
@@ -412,9 +413,8 @@
           url="http://www.eclipse.org/modeling/gmf/"> GMF (Graphical Modelling Framework)</ulink> or
           <ulink type="" url="http://www.topcased.org/"> Topcased</ulink> (the FSM Diagram from
         Kermeta -> Samples FSM was created with Topcased) to create graphical editors for model
-        instances. The tutorial <ulink type=""
-          url="../KerMeta-Create-FSM-Graphical-Editor-With-GMF/index.html"> How to create a FSM
-          graphical editor with GMF? </ulink> explains the creation of an GMF editor with a very
+        instances. The tutorial <ulink url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-Create-FSM-Graphical-Editor-With-GMF/index.html">How to create a FSM
+          graphical editor with GMF?</ulink>  explains the creation of an GMF editor with a very
         simple FSM metamodel. You can retrieve the result of this tutorial and the gmf models into
         fr.irisa.triskell..kermeta.samples.fsm.gmf. </para>
       <para> You know how to create a model conform to the Fsm metamodel. The next chapter explains
@@ -1419,7 +1419,7 @@ post post3 of operation step of class State violated</programlisting>
   <chapter>
     <title> UI improvements </title>
     <para> You can customize your user interface like shown below. For more samples please refer to
-      the <ulink  url="../../../../org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"> Logo tutorial </ulink>. </para>
+      the <ulink  url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"> Logo tutorial </ulink>. </para>
     <section id="CustomizeEMF_Editor">
       <title> Customize the generated EMF editor</title>
       <para> Generated code can be modified for customization. An EMF editor for FSM models is ever
