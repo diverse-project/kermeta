@@ -396,8 +396,7 @@
     <para>This tutorial gives you the basis to create an EMF metamodel. It may be useful to use it
       with Kermeta for : <orderedlist>
         <listitem>
-          <para>Creating model instances conform to an ecore metamodel ( cf the tutorial<ulink
-              url="../KerMeta-The-FSM-example/index.html"> FSM Example </ulink> chapter 4 : Editor)
+          <para>Creating model instances conform to an ecore metamodel ( cf the tutorial <ulink url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"> FSM example</ulink> chapter 4 : Editor)
             ;</para>
         </listitem>
         <listitem>
@@ -405,8 +404,7 @@
             load the ecore metaclasses and use it into a Kermeta program;</para>
         </listitem>
         <listitem>
-          <para>Kermeta use EMF to save and load programmaticaly a model  ( cf the tutorial<ulink
-              url="../KerMeta-The-FSM-example/index.html"> FSM Example </ulink> chapter 5 : Model
+          <para>Kermeta use EMF to save and load programmaticaly a model  ( cf the tutorial  <ulink url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"> FSM example</ulink> chapter 5 : Model
             manipulation in Kermeta)</para>
         </listitem>
       </orderedlist></para>
