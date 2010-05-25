@@ -65,4 +65,8 @@
          id="org.kermeta.kompose.feature"
          version="0.0.0"/>
 
+   <includes
+         id="fr.irisa.triskell.kermeta.ocl"
+         version="0.0.0"/>
+
 </feature>
