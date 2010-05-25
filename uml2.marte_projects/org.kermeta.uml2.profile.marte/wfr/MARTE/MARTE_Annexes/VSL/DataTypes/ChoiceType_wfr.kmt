@@ -1,0 +1,33 @@
+/* $Id:$ 
+ * Creation : March 2, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package MARTE::MARTE_Annexes::VSL::DataTypes;
+
+require "../../../../../model/ecore/MARTE.profile.ecore"
+
+
+require kermeta
+aspect class ChoiceType
+{
+	/** The types of the properties belonging to this DataType are constrained to be 
+	 * UML::DataType or one of its children metaclasses only.
+	 * reference MARTE 09-11-02, p438
+	 */
+	inv umlDataTypeOnly is do
+	
+		not (self.choiceAttrib.exists{ att | att.type.isKindOf(uml::DataType)} )
+		and
+		if not (self.defaultAttrib.isVoid)
+		then
+			self.defaultAttrib.type.isKindOf(uml::DataType)
+		else
+			true
+		end
+
+	end
+}

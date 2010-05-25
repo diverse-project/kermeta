@@ -1,0 +1,21 @@
+/* $Id:$ 
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  :  
+ *            Didier Vojtisek 
+ */
+package uml;
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/TimedValueSpecification_StereotypeAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/profileHelpers/UMLStereotypeHelper.kmt"
+require "http://www.eclipse.org/uml2/3.0.0/UML" 
+
+using kermeta::standard
+aspect class ValueSpecification{
+   /**
+    * List of the TimedValueSpecification stereotypes applied to this ValueSpecification
+    * this is an internal back link to the Stereotypes used by the operation getStereotypesByOppositeAspect()
+    */
+    reference stereotypes_TimedValueSpecification : MARTE::MARTE_Foundations::Time::TimedValueSpecification[0..*]#base_ValueSpecification
+}

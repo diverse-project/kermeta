@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Time="http://MARTE.MARTE_Foundations/schemas/Time/_AzyrAJ1HEd6zgsjJ8hkrLg/14" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http://MARTE.MARTE_Foundations/schemas/Time/_AzyrAJ1HEd6zgsjJ8hkrLg/14 ../../../../uml/marte_papyrus_1.12.3/MARTE.profile.uml#_A1R4wJ1HEd6zgsjJ8hkrLg">
+  <uml:Model xmi:id="_WmlxwEyHEd-Il-n_Fyq5iQ" name="Clock_1">
+    <packageImport xmi:id="_WmlxwUyHEd-Il-n_Fyq5iQ">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_YPZioEyHEd-Il-n_Fyq5iQ" name="Time">
+      <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_nBuugEyHEd-Il-n_Fyq5iQ" name="MyClock" classifier="_0upxgEyHEd-Il-n_Fyq5iQ"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_0upxgEyHEd-Il-n_Fyq5iQ" name="Chrono"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_mOx-4EyYEd-Il-n_Fyq5iQ" name="ClassWithChronoProp">
+        <ownedAttribute xmi:id="_nS4gMEyYEd-Il-n_Fyq5iQ" name="prop" visibility="public" type="_0upxgEyHEd-Il-n_Fyq5iQ" isUnique="false">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ElQ1IEyZEd-Il-n_Fyq5iQ" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ElQOEEyZEd-Il-n_Fyq5iQ" value="1"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_ElRcMEyZEd-Il-n_Fyq5iQ">
+            <value xsi:nil="true"/>
+          </defaultValue>
+        </ownedAttribute>
+      </packagedElement>
+      <profileApplication xmi:id="_cvUqkEyHEd-Il-n_Fyq5iQ">
+        <eAnnotations xmi:id="_cvVRoEyHEd-Il-n_Fyq5iQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="../../../../uml/marte_papyrus_1.12.3/MARTE.profile.uml#_A1R4wJ1HEd6zgsjJ8hkrLg"/>
+        </eAnnotations>
+        <appliedProfile href="../../../../uml/marte_papyrus_1.12.3/MARTE.profile.uml#_WStkoAPMEdyuUt-4qHuVvQ"/>
+      </profileApplication>
+    </packagedElement>
+    <profileApplication xmi:id="_WmlxwkyHEd-Il-n_Fyq5iQ">
+      <eAnnotations xmi:id="_Wmlxw0yHEd-Il-n_Fyq5iQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <Time:Clock xmi:id="_qWr4IEyHEd-Il-n_Fyq5iQ" standard="UTC" base_InstanceSpecification="_nBuugEyHEd-Il-n_Fyq5iQ" type="_21tkoEyHEd-Il-n_Fyq5iQ">
+    <unit href="../../../../uml/marte_papyrus_1.12.3/MARTE_Library.library.uml#_8RDAAJ6XEd2RT_WlaEpTrw"/>
+  </Time:Clock>
+  <Time:ClockType xmi:id="_21tkoEyHEd-Il-n_Fyq5iQ" isLogical="fal" base_Class="_0upxgEyHEd-Il-n_Fyq5iQ">
+    <unitType href="../../../../uml/marte_papyrus_1.12.3/MARTE_Library.library.uml#_DY4Q8A-KEdyNj8xzjk-DoA"/>
+  </Time:ClockType>
+  <Time:Clock xmi:id="_u4Ev8EyYEd-Il-n_Fyq5iQ" type="_21tkoEyHEd-Il-n_Fyq5iQ" base_Property="_nS4gMEyYEd-Il-n_Fyq5iQ"/>
+</xmi:XMI>

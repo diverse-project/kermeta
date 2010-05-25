@@ -1,0 +1,21 @@
+/* $Id: $
+ * Creation date: June 11, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+package MARTE::MARTE_DesignModel::HRM::HwLogical::HwStorage::HwMemory;
+require "../../../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+
+aspect class HwMemory
+{
+	/**
+	* the value of the inherited attribute isprotected is true.
+	* reference MARTE 09-11-02, p266
+	*/
+	inv isProtected is do
+		self.isProtected
+	end
+}

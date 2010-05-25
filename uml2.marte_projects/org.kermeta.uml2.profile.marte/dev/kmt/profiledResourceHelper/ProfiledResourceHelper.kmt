@@ -1,0 +1,159 @@
+/* $Id: ProfiledResourceHelper.kmt,v 1.7 2008/03/10 15:22:08 gperroui Exp $
+ * Creation date: June 19, 2007
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors:
+ * 		Fran�ois Tanguy
+ *		Didier Vojtisek
+ */
+
+
+package profiledResourceHelper;
+
+
+require kermeta
+
+// UMLMARTE.ecore contains everything needed...
+require "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore"
+
+
+using kermeta::persistence
+using kermeta::standard
+
+using ecore
+using uml
+
+/**
+ * This class is an helper for resources containing an UML model with profiles
+ * It provides several operations that will search for stereotypes in the resource 
+ * this is needed because of the special implementation of stereotypes and profiles in UML2
+ */
+class ProfilesHelper {
+	
+	reference profilResource : Resource
+
+
+	reference modelResource : Resource
+
+	/**
+	 * Stereotypes Instances coming from the uml model.
+	 */
+	reference stereotypeInstances : Set <kermeta::language::structure::Object>
+
+	/**
+	 * Stereotypes coming from the profile.
+	 */
+	reference stereotypes : Set <ecore::EClass>
+
+
+	/**
+	 * A call to this operation is mandatory for a correct use of this class
+	 * It takes 2 resources, in case the profile resource is different of the uml model resource.
+	 * However, in most situations you can use the same resource for both parameter
+	 */
+	operation initialize( modelResource : Resource, profileResource : Resource ) : ProfilesHelper is do
+		self.profilResource := profilResource
+		self.modelResource := modelResource
+		stereotypeInstances := Set <Object>.new
+		stereotypes := Set <ecore::EClass>.new
+		getStereotypeInstances()
+		result := self
+	end
+		
+	/**
+	 * Retreives all the stereotypes that decorate the given object 
+	 */
+	operation getStereotypesFor( object : Object ) : Set <Object> is do
+	
+		var stereotypes : Set <Object> init Set <Object>.new
+	 
+		stereotypeInstances.each { instance |
+		 		 
+		 	var prop : kermeta::language::structure::Property init getProperty( "base_Class", instance )	 
+		 
+		 	if ( prop.isVoid() ) then
+		 		var e : InvalidUMLStereotype init InvalidUMLStereotype.new
+		 		e.message := "Stereotype \"" + instance.getMetaClass().name + "\" has no base_Class property"
+		 		raise e
+		 	end
+		 	var base_Class : uml::Class
+			base_Class ?= instance.get( prop )
+			if ( base_Class.isVoid() ) then
+		 		var e : InvalidUMLStereotype init InvalidUMLStereotype.new
+		 		e.message := "Stereotype \"" + instance.getMetaClass().name + "\" base_Class is Void"
+		 		raise e
+		 	end 			 
+			if ( (base_Class != void) and (base_Class.equals(object) ) ) then
+			
+				stereotypes.add( instance )
+			
+			end
+		
+		}
+		
+		result := stereotypes
+	
+	end
+		
+	
+	/**
+	 * Gets the property with the given name for the given object.
+	 */	
+	operation getProperty( name : String, object : Object ) : kermeta::language::structure::Property is do
+	
+		var classDefinition : kermeta::language::structure::ClassDefinition 
+		classDefinition ?= object.getMetaClass.typeDefinition
+		result := classDefinition.allAttribute.detect { o | o.name.equals( name ) }
+	
+	end	
+			
+	/**
+	 * Fills the internal set 'stereotypes'
+	 * (called by the initialize() operation, user is not supposed to call it directly)
+	 */
+	operation getStereotypes() is do
+	
+		var p : EPackage 
+		p ?= profilResource.instances.one
+		p.eClassifiers.each { classifier |
+		
+			if ( classifier.isInstanceOf(ecore::EClass) ) then
+			
+				var c : ecore::EClass
+				c ?= classifier
+				stereotypes.add( c )
+			
+			end
+		
+		}
+	
+	end
+	
+	
+	operation getStereotypeInstances() is do
+	
+		stereotypeInstances.addAll( modelResource.instances.select{ instance | not instance.isInstanceOf(uml::Element) 
+		and getProperty( "base_Class", instance ) != void} ) 
+		//stdio.writeln("stereotypes to add : " + modelResource.instances.size.toString)
+		/*stereotypeInstances.addAll(modelResource.contents.select{ instance | instance.isInstanceOf(uml::Stereotype) })
+		stereotypeInstances.each{i| stdio.writeln(i.asType(uml::Stereotype).name)}
+		stdio.writeln("stereotypes instances " + stereotypeInstances.size.toString)*/
+	end
+	
+	/**
+	 * The content root of a uml model is composed of a model element and possibly several stereotypes instances.
+	 */
+	operation getModel() : uml::Model is do
+	
+		result ?= modelResource.instances.detect{ instance | instance.isInstanceOf(uml::Model) }
+	
+	end
+
+}
+
+/**
+ * Exception used to report errors in UML stereotypes
+ */
+class InvalidUMLStereotype inherits kermeta::exceptions::Exception {
+
+}

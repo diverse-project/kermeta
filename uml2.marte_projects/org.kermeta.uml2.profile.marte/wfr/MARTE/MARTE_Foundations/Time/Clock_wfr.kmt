@@ -1,0 +1,120 @@
+/* $Id: Clock_wfr.kmt 458 2010-02-25 14:32:40Z jfalcou $
+ * Creation date: April 16, 2008
+ * License: EPL
+ * Copyright:	IRISA/INRIA
+ * Authors:
+ *		Didier Vojtisek
+ */
+
+package MARTE::MARTE_Foundations::Time;
+
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+
+aspect class Clock
+{ 
+	
+	/** The base_InstanceSpecification of the Clock must be an InstanceSpecification 
+	 * of the base_Class of its type property.
+	 * OCL : not self.base_InstanceSpecification.oclIsUndefined() implies
+	 *	self.base_InstanceSpecification.classifier->includes(self.type.base_Class)
+	 * reference : MARTE 09-11-02, p77
+	 */
+	@Marte "Clock_1"
+	@implemented "yes"
+	@tested "no"
+	inv clockTypeConformance is do
+		stdio.writeln("Checking invariant clockTypeConformance")
+		if (self.base_InstanceSpecification.isVoid())
+		then
+			true
+		else
+			self.base_InstanceSpecification.classifier.includes(self.type.base_Class)
+		end 
+	end
+	
+	/** The base_Property of the Clock must be a Property of the base_Class of its type property.
+	 * OCL : not self.base_Property.oclIsUndefined() 
+	 * 	implies self.base_Property.type = self.type.base_Class
+	 * reference : MARTE 09-11-02, p77
+	 */
+	@Marte "Clock_2"
+	@implemented "yes"
+	@tested "no"
+	inv clockBasePropertyType is do
+		stdio.writeln("Checking invariant clockBasePropertyType")
+		if self.base_Property.isVoid
+		then
+			true
+		else
+			self.base_Property.type == self.type.base_Class
+		end
+	end
+	
+	/** The unit must be an ownedLiteral of the unitType enumeration of the ClockType.
+	 * OCL : self.unit->notEmpty( ) implies self.type.unitType.ownedLiteral->includes(self.unit)
+	 * reference : MARTE 09-11-02, p77
+	 */
+	@Marte "Clock 3"
+	@implemented "yes"
+	@tested "no"
+	inv clockUnitTypeConformance is do
+		stdio.writeln("Checking invariant clockUnitTypeConformance")
+		if self.unit.isVoid 
+		then
+			true
+		else
+			self.type.unitType.ownedLiteral.includes(self.unit.base_EnumerationLiteral)
+		end
+	end
+
+	/** A logical clock does not have a defined standard.
+	 * OCL : self.type.isLogical implies self.standard->isEmpty( )
+	 * reference : MARTE 09-11-02, p77
+	 */
+	@Marte "Clock 4"
+	@implemented "partially"
+	@tested "no"
+	inv clockNoDefinedStandard is do
+	
+		stdio.writeln("Checking invariant clockNoDefinedStandard")
+	
+	/*
+	
+		if (self.isVoid) then stdio.writeln("self.isVoid") 
+			else stdio.writeln("self : " + self.toString) 
+		end
+		if (self.type.isVoid) then stdio.writeln("self.type.isVoid") 
+			else stdio.writeln("self.type : " + self.type.toString)
+				 stdio.writeln("self.type.isLogical : " + self.type.isLogical.toString) 
+		         stdio.writeln(" - metaclass : " + self.type.isLogical.getMetaClass().toString)
+		end
+	
+	
+	
+		var monBool : kermeta::standard::Boolean
+	//		monBool:= self.type.isLogical
+		monBool:= true
+		
+		stdio.writeln("before if, monBool : " + monBool.toString())
+	
+	
+		
+		if monBool
+		then
+			stdio.writeln("standard must be void")
+			//self.standard.isVoid
+			true
+		else
+			stdio.writeln("OK")
+			true
+		end
+	*/	
+		
+//		stdio.writeln("fin de clockNoDefinedStandard")
+		true
+	end
+
+
+}

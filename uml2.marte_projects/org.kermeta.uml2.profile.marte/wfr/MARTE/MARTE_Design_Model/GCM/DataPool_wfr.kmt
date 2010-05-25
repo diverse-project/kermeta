@@ -1,0 +1,51 @@
+/* $Id:$ 
+ * Creation : February 25, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package MARTE::MARTE_DesignModel::GCM;
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+
+require kermeta
+aspect class DataPool
+{
+	/** If the Property ordering is set to UserDefined, it implies that both properties 
+	 * insertion and selection have to be specified.
+	 * self.ordering = UsedDefined implies (self.insertion.size()=1 and self.selection.size()=1)
+	 * reference MARTE 09-11-02, p157
+	 */
+	inv dataPool_userDefined is do
+		
+		if self.ordering==DataPoolOrderingKind.UserDefined
+		then
+			not(self.insertion.isVoid or self.selection.isVoid)
+		else
+			true
+		end
+	end
+
+	/** The Behavior referenced by the property insertion must have one and only one parameter. 
+	 * Its direction must be in or inout and its type that is compatible with the type of the 
+	 * FlowPort connected to the DataPool.
+	 * reference MARTE 09-11-02, p157
+	 */
+	 inv insertion_behavior_TODO is do
+	 	true
+	 end
+	 
+	 /** The Behavior referenced by the property selection must have one and only one parameter. 
+	  * Its direction must be return and its type and its multiplicity must be compatible with the 
+	  * type and the multiplicity of the Parameter connected to the DataPool 
+	  * (see example 4 shown on Figure 12.24).
+      * reference MARTE 09-11-02, p157
+	  */
+	 inv selection_behavior_TODO is do
+	 	true
+	 end
+	  
+}
+

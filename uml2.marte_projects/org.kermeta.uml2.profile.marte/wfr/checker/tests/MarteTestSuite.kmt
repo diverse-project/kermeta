@@ -1,0 +1,115 @@
+/* $Id:$ 
+ * Creation : March 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+@mainClass "MarteChecker::tests::MarteTestSuite"
+@mainOperation "main"
+
+
+package MarteChecker::tests;
+
+require "platform:/resource/org.kermeta.uml2.profile.marte/wfr/checker/MarteChecker.kmt"
+
+require kermeta
+
+using kermeta::exceptions
+using kermeta::standard
+using kermeta::utils
+using kermeta::language::structure
+
+class MarteTestSuite
+{
+
+	operation main() : Void is do
+	
+		//var checker : MarteChecker::Main init MarteChecker::Main.new
+	
+		//checker.main("platform:/resource/org.kermeta.uml2.profile.marte/model/test/Time3.uml")
+		//checker.main("platform:/resource/org.kermeta.uml2.profile.marte/model/test/umlExample1.uml")
+	//checker.main("platform:/resource/org.kermeta.uml2.profile.marte/model/test/fork-merge.xmi")
+	//checker.main("platform:/resource/org.kermeta.uml2.profile.marte/model/test/MARTE/MARTE_Foundations/Time/Clock_1.uml")
+	
+		//checkFile("platform:/resource/org.kermeta.uml2.profile.marte/model/test/MARTE/MARTE_Foundations/Time/Clock_1.uml")
+//	checkFile("platform:/resource/org.kermeta.uml2.profile.marte/model/test/MARTE/MARTE_Foundations/Time/TestBoolean.uml")
+		checkFile("platform:/resource/org.kermeta.uml2.profile.marte/model/test/MARTE/MARTE_Foundations/Time/TestBoolean2.uml")
+	end
+
+
+	
+	
+	operation checkFile(file : String) : Void is do
+	
+		var mm_name : kermeta::standard::String init "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore" 
+  	    	
+    	// load the given MARTE resource
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	inputRepository.ignoreLoadErrorUnknownProperty := true
+    	inputRepository.ignoreLoadErrorUnknownMetaclass := true
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createUMLResource(file, mm_name)
+    	inputResource.load()
+    	
+    	stdio.writeln("Checking " + inputResource.instances.size.toString + " root instances ...  " )
+
+		
+
+    	var hasFailedConstraint : kermeta::standard::Boolean init false
+		// checking MARTE invariants
+		var generalDiagnostic : ConstraintsDiagnostic init ConstraintsDiagnostic.new.initialize
+    	inputResource.instances.each{e|
+    		
+    		//stdio.write("Checking " +locatorhelper.getLocationString(e) + "... ")
+    		stdio.writeln("Checking resource : " + e.toString)
+    	
+    		var diagnostic : kermeta::exceptions::ConstraintsDiagnostic 
+    		diagnostic := e.getViolatedConstraints()
+    		if not diagnostic.setConstraints.isEmpty() then
+
+    			hasFailedConstraint := true  
+    			generalDiagnostic.setConstraints.addAll(diagnostic.setConstraints)
+	    		// showDiagnosticResume(diagnostic)
+	    		stdio.writeln(diagnostic.setConstraints.size.toString + " failed invariant(s)\n\n")
+	    		
+	    	else
+	    		stdio.writeln("No violated invariants\n\n")
+    		end
+    	}
+    	if not hasFailedConstraint then 
+	   		stdio.writeln("model is valid according to MARTE contraints !")
+	   	else
+	   	    stdio.writeln(generalDiagnostic.setConstraints.size.toString+" failed constaints  in model !")
+	   		//showDiagnosticResume(generalDiagnostic)
+	   		generalDiagnostic.setConstraints.each{ e |
+	   			showFailedConstraint(e)
+	   		}
+	   	end
+	end	
+		
+	operation showFailedConstraint(violatedConstraint : ConstraintViolatedInv) : Void is do
+		var locatorhelper : UMLUtils::UMLElementLocatorHelper init UMLUtils::UMLElementLocatorHelper.new
+	    stdio.errorln(violatedConstraint.message)
+	    stdio.errorln("    | Faulty object is : " + locatorhelper.getLocationString(violatedConstraint.constraintAppliedTo))
+	   
+	   	//stdio.errorln("   | Faulty object getMetaclass = " + violatedConstraint.constraintAppliedTo.getMetaClass.typeDefinition.toString)
+	    
+	    //stdio.errorln(myError.failedConstraint.body.toString)
+	    var basicPP : kermeta::utils::BasicPrettyPrinter init kermeta::utils::BasicPrettyPrinter.new.initialize
+	    if not violatedConstraint.failedConstraint.isVoid then
+	    	if not violatedConstraint.failedConstraint.isInstanceOf(PropertyConstraint) then
+	    		stdio.errorln("    | Violated constraint code is : " +basicPP.accept(violatedConstraint.failedConstraint.body, 0))
+	    	end
+	    end
+	    if not violatedConstraint.stackTrace.isVoid then
+	    	stdio.errorln("    | "+violatedConstraint.stackTrace)
+	    else
+	    	stdio.errorln("    | StackTrace not available")
+	    end
+	end
+	
+
+	
+	
+}

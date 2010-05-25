@@ -1,0 +1,43 @@
+/* $Id: $
+ * Creation date: June 11, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+ 
+package MARTE::MARTE_DesignModel::HRM::HwLogical::HwStorage::HwMemory;
+require "../../../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+using kermeta::standard
+
+aspect class HwRAM
+{
+	/**
+	*[17] memorySize is derived from organization attribute.
+	* reference MARTE 09-11-02, p269
+	* misses a more precise description (see doc)
+	*/
+	inv memSize is do
+		true
+	end
+	
+	/**
+	* [18] addressSize is greater than the number of memory words derived from organization attribute.
+	* reference MARTE 09-11-02, p269
+	* (assumed word number = rows* colums / wordSize)  
+	*/
+	inv addressSize is do
+		var wordNumber : Real init (self.organization.nbColumns.~value * self.organization.nbRows.~value).toReal / self.organization.wordSize.~value
+		 self.adressSize.~value > wordNumber 
+	end
+	
+	/**
+	* [19] synchronous HwRAM must have a clock frequency.
+	* reference MARTE 09-11-02, p269
+	*/
+	inv sycnHWRAM is do
+		if self.isSynchronous.~value then
+			not self.frequency.isVoid
+		end
+	end
+}

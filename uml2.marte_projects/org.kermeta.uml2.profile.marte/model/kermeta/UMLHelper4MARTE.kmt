@@ -1,0 +1,29 @@
+/* $Id: $
+ * Creation date: June 9, 2008
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors: 
+ *  	Didier Vojtisek
+ *		Gilles Perrouin
+ * Description : This file provides some helper on UML that are useful in the context of MARTE
+ */
+package uml;
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+
+using kermeta::standard
+
+
+aspect class Package
+{
+	method allOwnedElements(): set Element[0..*] from Element is do
+		var res: Set<Element> init Set<Element>.new 
+		self.packagedElement.each{pe | 
+			res.add(pe)
+			if pe.isInstanceOf(Package) then
+				res.addAll(pe.asType(Package).allOwnedElements)
+			end
+		}
+		result := res
+	end
+}

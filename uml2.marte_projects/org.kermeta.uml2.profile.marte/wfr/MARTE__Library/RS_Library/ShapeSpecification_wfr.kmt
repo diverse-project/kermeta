@@ -1,0 +1,25 @@
+/* $Id:$ 
+ * Creation : March 2, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+package MARTE_Library::RS_Library;
+
+
+require kermeta
+require "../../../model/ecore/MARTE.profile.ecore"
+
+
+aspect class ShapeSpecification
+{
+	/** At most one element of the collection can be infinite.
+	 * reference MARTE 09-11-02, p528
+	 */
+	inv only_one_infinite_element is do
+		
+		self.size.select{elt | elt=="*"}.size <= 1
+		
+	end
+}

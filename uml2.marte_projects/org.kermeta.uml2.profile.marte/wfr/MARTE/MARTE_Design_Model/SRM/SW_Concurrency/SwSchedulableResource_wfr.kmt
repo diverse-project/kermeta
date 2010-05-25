@@ -1,0 +1,24 @@
+/* $Id: $
+ * Creation date: June 10, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package MARTE::MARTE_DesignModel::SRM::SW_Concurrency;
+
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Resource_UMLAspect.kmt"
+require "../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+
+aspect class SwSchedulableResource
+{
+	/**
+	* The type of scheduler value must be stereotyped either as "Scheduler" or as "Scheduler" sub-Stereotype.
+	* reference MARTE 09-11-02, p228
+	*/
+	inv shedType is do
+		self.schedulers.getStereotypesByOppositeAspect.exists{st|st.isKindOf(MARTE::MARTE_Foundations::GRM::Scheduler)}
+	end
+}

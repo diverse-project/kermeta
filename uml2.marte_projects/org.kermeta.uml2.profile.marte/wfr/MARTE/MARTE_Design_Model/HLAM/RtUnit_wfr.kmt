@@ -1,0 +1,40 @@
+/* $Id: $
+ * Creation date: June 10, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+
+package MARTE::MARTE_DesignModel::HLAM;
+require "../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+
+require kermeta
+aspect class RtUnit
+{
+	/**
+	* If isDynamic is true, the real-time unit do not owns a pool of schedulable resources. Hence, poolSize, poolPolicy and
+	* poolWatingPolicy are not applicable.
+	* typo see doc
+	* reference MARTE 09-11-02, p190
+	*/
+	inv isDynamic is do
+	if self.isDynamic then
+		self.srPoolSize.isVoid and
+		self.srPoolPolicy.isVoid and
+		self.srPoolWaitingTime.isVoid
+	end
+end
+
+ /**
+ * A main real-time unit has to own a main operation.
+ * reference MARTE 07-08-04, p163
+ */
+ inv mainRT is do
+ 	if self.isMain then
+ 		not self.main.isVoid  
+ 	end
+ end
+}
+

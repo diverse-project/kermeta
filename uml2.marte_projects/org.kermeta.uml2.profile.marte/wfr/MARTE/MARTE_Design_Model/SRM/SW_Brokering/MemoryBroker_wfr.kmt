@@ -1,0 +1,29 @@
+/* $Id: $
+ * Creation date: June 10, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+package MARTE::MARTE_DesignModel::SRM::SW_Brokering;
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Resource_UMLAspect.kmt"
+require "../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+
+aspect class MemoryBroker
+{
+	/**
+	* Types of memories values must be stereotyped either as "StorageResource" or as "StorageResource" sub-Stereotype.
+	* 
+	* reference MARTE 09-11-02, p216
+	*/
+	inv mem_types is do
+	
+ 		self.memories.forAll{t | 
+ 			t.type.getStereotypesByOppositeAspect.exists{st | 
+ 				st.isKindOf(MARTE::MARTE_Foundations::GRM::StorageResource)}}
+		
+	end
+}

@@ -1,0 +1,68 @@
+/* $Id: $
+ * Creation date: April 16, 2008
+ * License: EPL
+ * Copyright:	IRISA/INRIA
+ * Authors:
+ *		Didier Vojtisek
+ */
+
+
+package MARTE::MARTE_Foundations::Time;
+
+
+require kermeta
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/UMLHelper4MARTE.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/TimedDomain_UMLAspect.kmt"
+
+using MARTE_Library::TimeTypesLibrary
+
+aspect class TimedConstraint
+{
+	/** The owner of a constraint stereotyped by ClockConstraint must be a 
+	 * Package stereotyped by TimedDomain.
+	 * OCL : base_Constraint.owner.oclIsTypeOf(TimedDomain)
+	 * reference : MARTE 09-11-02, p80
+	 * DVK: pb with oclIsTypeOf : OCL constraint is invalid !?
+	 * DVK : what about Constraints attached to a Class !? need to drill up to the top container ?
+	 */
+	@Marte "TimedConstraint 1"
+	@implemented "yes"
+	inv inTimedDomainPackage is do
+		
+		var constraint : uml::Constraint init base_Constraint
+		var containerPackage : uml::Package
+		containerPackage ?= constraint.container
+		if not containerPackage.isVoid then
+			containerPackage.getStereotypesByOppositeAspect.exists{st| st.isInstanceOf(TimedDomain)}
+		else
+			false
+		end				 
+	end
+	
+	
+	/** The interpretation property is either instant or duration
+	 * This constraint is redundant since TimeInterpretationKind has only instant and duration literals
+	 * reference : MARTE 09-11-02, p80
+	 */
+	@Marte "TimedConstraint 2"
+	@implemented "yes"
+	@cProblem "the constraint is always true given TimeInterpretationKind enumeration values"
+	inv interpretationIsInstantOrDuration is do
+		self.interpretation == TimeInterpretationKind.instant or 
+		self.interpretation == TimeInterpretationKind.duration
+	end	
+	
+ 	/** self.interpretation <> TimeInterpretationKind::any
+	 * reference : MARTE 09-11-02, p80
+	 * DVK Note : useless constraint ?
+	 */
+	@Marte "TimedConstraint 3"
+	@implemented "no"
+	@cProblem "TimeInterpretationKind::any does not exist"
+	inv interpretationMustNotBeAny is do
+		true
+	end
+
+}

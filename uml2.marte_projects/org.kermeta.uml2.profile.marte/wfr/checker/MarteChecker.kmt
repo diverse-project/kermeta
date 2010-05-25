@@ -1,0 +1,200 @@
+/* $Id: MarteChecker.kmt 477 2010-05-25 12:35:45Z jfalcou $
+ * Creation date: January 11, 2008
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors:
+ *		Didier Vojtisek
+ */
+@mainClass "MarteChecker::Main"
+@mainOperation "main"
+
+
+package MarteChecker;
+
+
+require kermeta
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/persistence/UMLResource.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/UMLUtils/UMLElementLocatorHelper.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "../../model/ecore/MARTE.profile.ecore"
+// require "../MARTE/MARTE_wfr.kmt"
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/wfr/MARTE/MARTE_wfr.kmt"
+require "platform:/resource//org.kermeta.uml2.profile.marte/wfr/MARTE/MARTE_Foundations/TimePackage_wfr.kmt"
+require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/visitor/prettyprinters/kmtPrettyPrinter.kmt"
+
+
+
+using kermeta::exceptions
+using kermeta::utils
+using kermeta::standard
+using kermeta::language::structure
+
+class Main
+{
+	operation classic_main( checkedfilename : kermeta::standard::String) : Void is do 	
+		var origModelName : kermeta::standard::String
+		// if no parameter is passed then use the default valid APA model
+		if checkedfilename.isVoid then 
+			origModelName := "platform:/resource/fr.mopcom.wfr/test/APA/valid_input/DefaultValidAPA.uml"
+		else
+			origModelName := checkedfilename
+		end 
+		stdio.writeln("Loading  " + origModelName)
+		var mm_name : kermeta::standard::String init "platform:/plugin/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore" 
+    	
+    	// load the given MARTE resource
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	inputRepository.ignoreLoadErrorUnknownProperty := true
+    	inputRepository.ignoreLoadErrorUnknownMetaclass := true
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createUMLResource(origModelName, mm_name)
+    	inputResource.load()
+    	stdio.writeln("Checking...  " )
+    	do 
+    	// checking MARTE invariants
+    	inputResource.instances.each{e|e.checkInvariants}
+    	 
+    	stdio.writeln("model is valid according to MARTE contraints !")
+    	rescue (myError : ConstraintViolatedInv)
+    		var locatorhelper : UMLUtils::UMLElementLocatorHelper init UMLUtils::UMLElementLocatorHelper.new
+		    stdio.errorln(myError.message)
+		    stdio.errorln("Faulty object is : " + locatorhelper.getLocationString(myError.constraintAppliedTo))
+		    //stdio.errorln(myError.failedConstraint.body.toString)
+		    var basicPP : kermeta::utils::BasicPrettyPrinter init kermeta::utils::BasicPrettyPrinter.new.initialize
+		    if not myError.failedConstraint.isVoid then
+		    	stdio.errorln("Violated constraint is : " +basicPP.accept(myError.failedConstraint.body, 0))
+		    end
+		    if not myError.stackTrace.isVoid then
+		    	stdio.errorln(myError.stackTrace)
+		    else
+		    	stdio.errorln("StackTrace not available")
+		    end
+		end 
+	end
+	
+	operation main( checkedfilename : kermeta::standard::String) : Void is do 	
+		var origModelName : kermeta::standard::String
+		// if no parameter is passed then use the default valid APA model
+		if checkedfilename.isVoid then 
+			origModelName := "platform:/resource/org.kermeta.uml2.profile.marte/model/test/Time.uml"
+		else
+			origModelName := checkedfilename
+		end 
+		stdio.writeln("Loading  " + origModelName)
+		
+		var mm_name : kermeta::standard::String init "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore" 
+    	//var mm_name : kermeta::standard::String init "platform:/plugin/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore"
+    	
+    	    	
+    	// load the given MARTE resource
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	inputRepository.ignoreLoadErrorUnknownProperty := true
+    	inputRepository.ignoreLoadErrorUnknownMetaclass := true
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createUMLResource(origModelName, mm_name)
+    	inputResource.load()
+    	
+    	stdio.writeln("Checking " + inputResource.instances.size.toString+" root instances ...  " )
+
+		
+
+    	var hasFailedConstraint : kermeta::standard::Boolean init false
+    	
+		// checking MARTE invariants
+		var generalDiagnostic : ConstraintsDiagnostic init ConstraintsDiagnostic.new.initialize
+    	inputResource.instances.each{e|
+    		
+    		//stdio.write("Checking " +locatorhelper.getLocationString(e) + "... ")
+    		stdio.writeln("Checking resource : " + e.toString)
+    	
+    		if (e.isInstanceOf(MARTE::MARTE_Foundations::Time::Clock))
+    		then
+    			stdio.writeln( "size  : " + e.toString)
+    		
+    			stdio.writeln( "standard  : " + e.asType(MARTE::MARTE_Foundations::Time::Clock).standard.toString())
+    			stdio.writeln( "type      : " + e.asType(MARTE::MARTE_Foundations::Time::Clock).type.toString())
+    			stdio.writeln( "unit      : " + e.asType(MARTE::MARTE_Foundations::Time::Clock).unit.toString())
+    			stdio.writeln( "base_prop : " + e.asType(MARTE::MARTE_Foundations::Time::Clock).base_Property.toString())
+    			stdio.writeln( "base_inst : " + e.asType(MARTE::MARTE_Foundations::Time::Clock).base_InstanceSpecification.toString())
+    		end
+    		    			
+    		var diagnostic : kermeta::exceptions::ConstraintsDiagnostic 
+    		diagnostic := e.getViolatedConstraints()
+    		if not diagnostic.setConstraints.isEmpty() then
+
+    			hasFailedConstraint := true  
+    			generalDiagnostic.setConstraints.addAll(diagnostic.setConstraints)
+	    		// showDiagnosticResume(diagnostic)
+	    		stdio.writeln(diagnostic.setConstraints.size.toString + " failed invariant(s)")
+	    	else
+	    		stdio.writeln("Pass")
+//	    		stdio.writeln("3: " +locatorhelper.getLocationString(tc))
+//    			stdio.writeln("3: tc.getMetaClass().typeDefinition="+tc.getMetaClass().typeDefinition.toString)	    		
+    		end
+    	}
+    	if not hasFailedConstraint then 
+	   		stdio.writeln("model is valid according to MARTE contraints !")
+	   	else
+	   	    stdio.writeln(generalDiagnostic.setConstraints.size.toString+" failed constaints  in model !")
+	   		showDiagnosticResume(generalDiagnostic)
+	   	end
+    	
+	end
+	operation showDiagnosticResume(diagnostic : ConstraintsDiagnostic) : Void is do
+		stdio.errorln("*\n* Reporting summary of "+diagnostic.setConstraints.size.toString+" failed constraints\n*")
+		var errorMap : Hashtable<ClassDefinition, Bag<ConstraintViolatedInv>> init Hashtable<ClassDefinition, Bag<ConstraintViolatedInv>>.new
+		// sort the failed constraint according to the Metaclass
+		diagnostic.setConstraints.each{c |
+			var cd : ClassDefinition
+			cd ?= c.constraintAppliedTo.getMetaClass.typeDefinition
+			if not cd.isVoid then
+				var failedInvariantsForClassDef : Bag<ConstraintViolatedInv> init errorMap.getValue(cd)
+				if failedInvariantsForClassDef.isVoid then
+					failedInvariantsForClassDef := Bag<ConstraintViolatedInv>.new
+					errorMap.put(cd, failedInvariantsForClassDef)
+				end
+				failedInvariantsForClassDef.add(c)
+			end
+		}
+		errorMap.keys.each{ cd |
+			stdio.errorln("  **************\n  * Reporting "+errorMap.getValue(cd).size.toString+" failed constraints on instances of " + cd.name + "\n  *")			
+			    
+		    if errorMap.getValue(cd).size <= 5 then
+			 	errorMap.getValue(cd).each{cvInv |
+			 		showFailedConstraint(cvInv)
+			 	}				 		
+			else
+				stdio.errorln("  * Reporting only the 5 first failed constraints :")	
+				var it : Iterator<ConstraintViolatedInv> init errorMap.getValue(cd).iterator		
+				from var i : Integer init 0
+				until i == 5 or it.isOff
+				loop
+					showFailedConstraint(it.next)
+    				i := i + 1
+				end
+			end 
+		}
+	end
+	operation showFailedConstraint(violatedConstraint : ConstraintViolatedInv) : Void is do
+		var locatorhelper : UMLUtils::UMLElementLocatorHelper init UMLUtils::UMLElementLocatorHelper.new
+	    stdio.errorln(violatedConstraint.message)
+	    stdio.errorln("    | Faulty object is : " + locatorhelper.getLocationString(violatedConstraint.constraintAppliedTo))
+	   
+	   	//stdio.errorln("   | Faulty object getMetaclass = " + violatedConstraint.constraintAppliedTo.getMetaClass.typeDefinition.toString)
+	    
+	    //stdio.errorln(myError.failedConstraint.body.toString)
+	    var basicPP : kermeta::utils::BasicPrettyPrinter init kermeta::utils::BasicPrettyPrinter.new.initialize
+	    if not violatedConstraint.failedConstraint.isVoid then
+	    	if not violatedConstraint.failedConstraint.isInstanceOf(PropertyConstraint) then
+	    		stdio.errorln("    | Violated constraint code is : " +basicPP.accept(violatedConstraint.failedConstraint.body, 0))
+	    	end
+	    end
+	    if not violatedConstraint.stackTrace.isVoid then
+	    	stdio.errorln("    | "+violatedConstraint.stackTrace)
+	    else
+	    	stdio.errorln("    | StackTrace not available")
+	    end
+	end
+}

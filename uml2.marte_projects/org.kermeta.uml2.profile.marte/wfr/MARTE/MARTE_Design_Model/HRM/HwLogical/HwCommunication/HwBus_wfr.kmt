@@ -1,0 +1,24 @@
+/* $Id: $
+ * Creation date: June 11, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package MARTE::MARTE_DesignModel::HRM::HwLogical::HwCommunication;
+require "../../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+
+
+
+aspect class HwBus
+{
+	/**
+	* Synchronous bus must have a clock frequency.
+	* reference MARTE 09-11-02, p259
+	*/
+	inv syncBus is do
+	 if self.isSynchronous.~value then
+	 	not self.frequency.isVoid
+	 end
+	end
+}

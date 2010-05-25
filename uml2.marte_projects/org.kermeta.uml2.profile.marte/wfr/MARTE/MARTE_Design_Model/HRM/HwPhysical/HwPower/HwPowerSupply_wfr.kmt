@@ -1,0 +1,21 @@
+/* $Id: $
+ * Creation date: June 11, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package MARTE::MARTE_DesignModel::HRM::HwPhysical::HwPower;
+require "../../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+using kermeta::standard
+
+aspect class HwPowerSupply
+{
+	/**
+	* [13] power consumption is greater than dissipation.
+	* reference MARTE 09-11-02, p267
+	*/
+	inv powerConsumption is do
+		self.staticConsumption.~value > self.staticDissipation.~value
+	end
+}

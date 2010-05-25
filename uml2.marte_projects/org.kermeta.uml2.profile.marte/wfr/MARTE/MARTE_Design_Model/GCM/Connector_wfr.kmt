@@ -1,0 +1,47 @@
+/* $Id: $
+ * Creation date: May 30, 2008
+ * License:
+ * Copyright: EPL
+ * Authors: Gilles Perrouin
+ */
+
+
+package uml;
+
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+
+aspect class Connector
+{
+ 	/**
+	* A conjugated port may be involved in only bidirectional connector, i.e., connector with exactly two connector ends.
+	* reference MARTE 07-08-04, p124
+	*/
+	inv conjug_bidi is do
+	
+	if self.~end.exists{e|	e.role.getStereotypesByOppositeAspect.exists{
+						st| st.isInstanceOf(MARTE::MARTE_DesignModel::GCM::FlowPort)
+							and st.asType(MARTE::MARTE_DesignModel::GCM::FlowPort).isConjugated}}
+		then
+			self.~end.size == 2
+		end
+		
+	end
+	
+	/**
+	* A conjugated port may be involved in only bidirectional connector, i.e., connector with exactly two connector ends.
+	* reference MARTE 07-08-04, p128
+	*/
+	inv conjug_bidi2 is do
+	
+	if self.~end.exists{e|	e.role.getStereotypesByOppositeAspect.exists{
+						st| st.isInstanceOf(MARTE::MARTE_DesignModel::GCM::ClientServerPort)
+							and st.asType(MARTE::MARTE_DesignModel::GCM::ClientServerPort).isConjugated}}
+		then
+			self~end.size == 2
+		end
+		
+	end
+}

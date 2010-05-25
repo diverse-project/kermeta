@@ -1,0 +1,42 @@
+/* $Id:$ 
+ * Creation : August 5, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            gperroui
+ */
+
+
+package MARTE::MARTE_Annexes::RSM;
+require kermeta
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/LinkTopology_UMLAspect.kmt"
+
+
+aspect class DefaultLink {
+
+	
+	/** One end of the connector has to be connected to the same port than the end of a 
+	 * connector stereotyped interRepetition.
+	 * reference MARTE 09-11-02, p525
+	 */
+	inv connectorEnd_interRepetition is do
+	
+		self.base_Connector.~end.exists{ connEnd | 
+			if (connEnd.role.isInstanceOf(uml::Port))
+			then
+				// then this port has to be connected to an interRepetition connector
+				connEnd.role.asType(uml::Port).~end.exists{ connectorEnd |
+					connectorEnd.owner.getStereotypesByOppositeAspect.exists{ st |
+						st.isInstanceOf(InterRepetition)
+					}
+				}
+			else
+				false
+			end	
+		}
+	
+	end
+	
+}

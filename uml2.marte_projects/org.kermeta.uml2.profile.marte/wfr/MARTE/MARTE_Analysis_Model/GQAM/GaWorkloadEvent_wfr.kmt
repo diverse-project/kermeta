@@ -1,0 +1,31 @@
+/* $Id:$ 
+ * Creation : March 2, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package MARTE::MARTE_AnalysisModel::GQAM;
+
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+
+
+aspect class GaWorkloadEvent
+{
+	/** Only one of the four attributes may be defined.
+	 * reference MARTE 09-11-02, p309
+	 */
+	inv onlyOneAttribute is do
+		// generator, pattern, timedEvent, trace
+		
+		(not(self.generator.isVoid) and self.pattern.isVoid and self.timedEvent.isVoid and self.trace.isVoid) or
+		(self.generator.isVoid and not(self.pattern.isVoid) and self.timedEvent.isVoid and self.trace.isVoid) or
+		(self.generator.isVoid and self.pattern.isVoid and not(self.timedEvent.isVoid) and self.trace.isVoid) or
+		(self.generator.isVoid and self.pattern.isVoid and self.timedEvent.isVoid and not(self.trace.isVoid)) or
+		(self.generator.isVoid and self.pattern.isVoid and self.timedEvent.isVoid and self.trace.isVoid)
+		
+	end
+}

@@ -1,0 +1,45 @@
+/* $Id: $
+ * Creation date: April 28, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+
+package MARTE::MARTE_Foundations::Time;
+
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+//require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
+
+
+aspect class TimedEvent
+{
+	/**
+	* A TimedEvent is bound to one Clock
+	* on->size( ) = 1
+	* reference: MARTE 09-11-02, p82
+	*/
+	@Marte "TimedEvent 1"
+	@implemented "yes"
+	inv onlyOneClock is do
+		self.on.size() == 1
+	end
+	
+	/**
+	* The optional repetition property of a TimedEvent must be not defined when every is not defined.
+	*	every->isEmpty( ) implies repetition->isEmpty( )	
+	*  reference: MARTE 09-11-02, p82
+	* DVK : repetition is an Integer ! 
+	*/
+	@Marte "TimedEvent 2"
+	@implemented "partially, unclear definition"
+	inv OptRepEmty is do
+		if self.every.isVoid then
+			self.repetition == 0
+		else
+			true
+		end 
+	end
+}

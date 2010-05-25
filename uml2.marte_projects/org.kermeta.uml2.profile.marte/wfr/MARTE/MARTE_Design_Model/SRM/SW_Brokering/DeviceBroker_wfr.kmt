@@ -1,0 +1,35 @@
+/* $Id: $
+ * Creation date: June 10, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+package MARTE::MARTE_DesignModel::SRM::SW_Brokering;
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Resource_UMLAspect.kmt"
+require "../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+
+aspect class DeviceBroker
+{
+	/**
+	* Types of devices values must be stereotyped either as "DeviceResource" or as "DeviceBroker" sub-Stereotype.
+	* reference MARTE 09-11-02, p213
+	*/
+	inv device_types is do
+		
+		// JFA : Does that mean that every device must be stereotyped by the same stereotype
+		// or by one of the two stereotypes ?
+ 		self.devices.forAll{t | 
+ 			t.type.getStereotypesByOppositeAspect.exists{st	|
+ 				st.isInstanceOf(MARTE::MARTE_Foundations::GRM::DeviceResource)
+ 			}
+ 		}
+		or self.devices.forAll{t | 
+			t.type.getStereotypesByOppositeAspect.exists{st|
+				st.isInstanceOf(MARTE::MARTE_DesignModel::SRM::SW_Brokering::DeviceBroker)
+			}
+		}
+	end
+}

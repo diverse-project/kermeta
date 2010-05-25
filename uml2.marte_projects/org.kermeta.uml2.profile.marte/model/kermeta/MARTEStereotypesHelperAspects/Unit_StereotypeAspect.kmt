@@ -1,0 +1,20 @@
+/* $Id:$ 
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  :  
+ *            Didier Vojtisek 
+ */
+package MARTE::MARTE_Foundations::NFPs;
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Unit_UMLAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+//require "http://MARTE"
+
+using kermeta::standard
+aspect class Unit{
+   /**
+    * if != void, this stereotype is applied to this base_EnumerationLiteral
+    */
+    reference base_EnumerationLiteral : uml::EnumerationLiteral#stereotypes_Unit
+}

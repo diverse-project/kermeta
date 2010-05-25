@@ -1,0 +1,229 @@
+/* $Id: UMLProfile2Ecore.kmt,v 1.10 2008/09/18 21:42:41 gperroui Exp $
+ * Creation date: November 29, 2007
+ * License: EPL
+ * Copyright:
+ * Authors: 
+ *		Gilles Perrouin
+ *		Didier Vojtisek
+ */
+@mainClass "UMLProfileUtils::Main"
+@mainOperation "standaloneTestMain" 
+
+
+package UMLProfileUtils;
+require kermeta
+// UMLMARTE.ecore contains everything needed...
+require "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore"
+
+require "platform:/resource/org.kermeta.uml2.profile.marte/dev/kmt/UMLUtils/UMLProfilesUtils.kmt"
+require "platform:/resource/org.kermeta.uml2.profile.marte/dev/kmt/UMLProfile2Ecore/Profile.kmt"
+require "platform:/resource/org.kermeta.uml2.profile.marte/dev/kmt/UMLProfile2Ecore/ToEcore.kmt"
+require "platform:/resource/org.kermeta.uml2.profile.marte/dev/kmt/UMLProfile2Ecore/UMLProfile2EcoreTrace.kmt"
+require "platform:/resource/org.kermeta.uml2.profile.marte/dev/kmt/utils/KLog.kmt"
+require "platform:/resource/org.kermeta.uml2.profile.marte/dev/kmt/persistence/UMLResource.kmt"
+require "platform:/resource/org.kermeta.uml2.profile.marte/dev/kmt/utils/EcorePP.kmt"
+
+// generated Ecore form the UML model via EMF to bootstrap MARTE.profile.uml loading for kermeta
+//require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/MARTE_Library.ecore" 
+//require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/MARTE.ecore"
+
+
+
+using ecore
+using kermeta::persistence
+using kermeta::standard
+using kermeta::exceptions
+using UMLProfileUtils
+ 
+class Main 
+{
+ 
+ 	operation standaloneTestMain() : Void is do
+ 		main("platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta2/MARTE_Library.library.uml", "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/beta2/MARTE_Library.library.ecore",true)
+ 		//main("platform:/resource/org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml", "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore",true)
+ 	end
+ 	
+	operation main(input : String, output : String, isProfiled: Boolean) : Void is do 
+	
+	// source model and metamodel
+	var srcModelURI: String init  input
+	var srcMetamodelURI: String init "http://www.eclipse.org/uml2/2.1.0/UML"
+	
+	// target model and metamodel
+	var tgtModelURI: String init output
+	var tgtMetamodelURI: String init "http://www.eclipse.org/emf/2002/Ecore"
+	
+	var srcEmf_res : EMFResource
+	var srcUML_res : UMLResource
+	var tgtEmf_res: EMFResource
+	 
+	var util : UMLProfileUtils::LoadStoreMM
+	util := UMLProfileUtils::LoadStoreMM.new
+	
+	var log : UMLProfileUtils::KLogger
+	log := UMLProfileUtils::KLogger.new
+	log.enableLog(true) 
+	
+	// Load the UML profile
+	log.print("UML Profile loading...")
+	if isProfiled == true then
+	srcUML_res := util.loadUML(srcModelURI,srcMetamodelURI)
+	else 
+   	srcEmf_res := util.load(srcModelURI,srcMetamodelURI)
+	end
+	log.print("UML profile loaded")
+		
+	log.print("============================================")
+	// Prepare the Ecore representation
+	var tgtEmf_store : EMFRepository init EMFRepository.new
+	tgtEmf_res ?= tgtEmf_store.createResource(tgtModelURI,tgtMetamodelURI)
+	
+	/* stdio.writeln("Displaying contents:")
+	stdio.writeln("============================================")
+	stdio.writeln("size of the profile model: "+ srcEmf_res.contents.size.toString)
+	srcEmf_res.contents.each { e | util.printMM(e,0)} */
+	    
+	// transforming the UML profile
+	do 
+	// initializing trace
+	var trace: UMLProfileUtils::UMLProfile2EcoreTrace init UMLProfileUtils::UMLProfile2EcoreTrace.new
+	trace.initializeLog(true)
+	trace.isLibNeeded(false)
+	//trace.initLibrary("platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore")
+	//trace.initLibrary("platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/MARTE_Library.library.ecore")
+	trace.initRep(tgtEmf_store)
+	trace.initTables  
+	if isProfiled == true then
+		trace.initProfHelper(srcUML_res,srcUML_res)
+
+	// Converting UML elements...  
+	
+	
+	var content : Bag<kermeta::language::structure::Object> init Bag<kermeta::language::structure::Object>.new
+		content.addAll(srcUML_res)
+		
+		var coll : Bag<kermeta::language::structure::Object>
+		srcUML_res.each{e |
+			var s : Set<kermeta::language::structure::Object>
+			s ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getAllContainedObjects(e)
+			coll := s.asBag()
+			content.addAll(coll)
+		}
+	//var content : Set<kermeta::language::structure::Object> init srcUML_res.contents
+	stdio.writeln("size of resource : " + content.size.toString)
+	stdio.writeln("size of Profile : " + content.select{e|e.isInstanceOf(uml::ToEcore)}.size.toString)
+	var createdObjectBag : Bag<Object> init Bag<Object>.new
+	
+		var ecol : Bag<Object> init content.select{e|e.isInstanceOf(uml::ToEcore)} 
+		var progress : Integer init 0
+		var progressMsgTail : String init "/"+content.select{e|e.isInstanceOf(uml::ToEcore)}.size.toString	+ " "	
+		log.print("////////////////// First pass ////////////////// ")
+		ecol.each {e| 
+			progress := progress+1
+			var objectId : String init "("
+			if e.container.isInstanceOf(uml::NamedElement) and not e.container.isVoid then
+				objectId.append(e.container.asType(uml::NamedElement).name.toString + "::")
+			else
+				objectId.append(e.container.toString + "::")
+			end
+			if e.isInstanceOf(uml::NamedElement)  and not e.isVoid then
+				objectId.append( e.asType(uml::NamedElement).name.toString + ")")
+			else
+				objectId.append(e.toString+ ")") 
+			end
+			log.print(progress.toString + progressMsgTail + e.toString+ objectId)
+			
+			if objectId == "(TimedValueType::TUK)" then
+				trace.initializeLog(true)
+			end
+			createdObjectBag.add(e.asType(uml::ToEcore).toEcorePass1(trace))
+			
+		}
+		log.print("////////////////// Second pass ////////////////// ")
+		
+		trace.createdObjectBag := createdObjectBag 
+		ecol.each {e| 
+			e.asType(uml::ToEcore).toEcorePass2(trace)}
+			
+		log.print("////////////////// Third pass ////////////////// ")
+		
+		trace.createdObjectBag := createdObjectBag 
+		ecol.each {e| 
+			e.asType(uml::ToEcore).toEcorePass3(trace)}
+		
+		// pretty print the created bag for debug...
+		createdObjectBag.each{e|e.asType(ecore::EModelElement).prettyPrint}
+		// push content of the bag in the resource : only push element that have no container
+	
+		tgtEmf_res.addAll(createdObjectBag.select{e|e.container.isVoid}) 
+		 
+	else
+		trace.initProfHelper(srcEmf_res,srcEmf_res)
+		
+		var content : Bag<kermeta::language::structure::Object> init Bag<kermeta::language::structure::Object>.new
+		content.addAll(srcEmf_res)
+		
+		var coll : Bag<kermeta::language::structure::Object>
+		srcEmf_res.each{e |
+			var s : Set<kermeta::language::structure::Object>
+			s ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getAllContainedObjects(e)
+			coll := s.asBag()
+			content.addAll(coll)
+		}	
+		
+		stdio.writeln("size of resource : " + content.size.toString)
+		stdio.writeln("size of Profile : " + content.select{e|e.isInstanceOf(uml::ToEcore)}.size.toString)
+		var createdObjectBag : Bag<Object> init Bag<Object>.new
+	
+		var ecol : Bag<Object> init content.select{e|e.isInstanceOf(uml::ToEcore)} 
+		var progress : Integer init 0
+		var progressMsgTail : String init "/"+content.select{e|e.isInstanceOf(uml::ToEcore)}.size.toString	+ " "	
+		ecol.each {e| 
+			progress := progress+1
+			var objectId : String init "("
+			if e.container.isInstanceOf(uml::NamedElement) and not e.container.isVoid then
+				objectId.append(e.container.asType(uml::NamedElement).name.toString + "::")
+			else
+				objectId.append(e.container.toString + "::")
+			end
+			if e.isInstanceOf(uml::NamedElement)  and not e.isVoid then
+				objectId.append( e.asType(uml::NamedElement).name.toString + ")")
+			else
+				objectId.append(e.toString+ ")") 
+			end
+			log.print(progress.toString + progressMsgTail + e.toString+ objectId)
+			
+			if objectId == "(TimedValueType::TUK)" then
+				trace.initializeLog(true)
+			end
+			log.print("////////////////// First pass ////////////////// ")
+			createdObjectBag.add(e.asType(uml::ToEcore).toEcorePass1(trace))
+			
+		}
+		
+		
+		log.print("////////////////// Second pass ////////////////// ")
+		
+		trace.createdObjectBag := createdObjectBag 
+		ecol.each {e| 
+			e.asType(uml::ToEcore).toEcorePass2(trace)}
+			
+		log.print("////////////////// Third pass ////////////////// ")
+		
+		trace.createdObjectBag := createdObjectBag 
+		ecol.each {e| 
+			e.asType(uml::ToEcore).toEcorePass3(trace)}
+		
+		// pretty print the created bag for debug...
+		createdObjectBag.each{e|e.asType(ecore::EModelElement).prettyPrint}
+		// push content of the bag in the resource : only push element that have no container
+	
+		tgtEmf_res.addAll(createdObjectBag.select{e|e.container.isVoid}) 
+	end
+	
+	end
+	// store the Ecore representation
+	log.print("////////////////// Serializing the new Ecore ////////////////// ") 
+	util.store(tgtModelURI,tgtEmf_res)
+	end
+}

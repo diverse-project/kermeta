@@ -1,0 +1,44 @@
+/* $Id:$ 
+ * Creation : February 23, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package MARTE::MARTE_DesignModel::GCM;
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/ClientServerFeature_UMLAspect.kmt"
+
+require kermeta
+
+aspect class ClientServerSpecification
+{
+	/** A ClientServerSpecification can only own ClientServerBFeatures, 
+	 * i.e., Operations and/or Receptions on which the ClientServerBFeature 
+	 * stereotype has been applied. It cannot own properties.
+	 * reference MARTE 09-02-11, p151
+	 */
+	inv clientServerSpecification_owns_clientServerFeatures is do
+			
+		self.base_Interface.ownedAttribute.isEmpty 
+		
+		and
+		
+		self.base_Interface.ownedOperation.forAll{ ~operation | 
+			~operation.getStereotypesByOppositeAspect.exists{ stereotype | 
+				stereotype.isInstanceOf(MARTE::MARTE_DesignModel::GCM::ClientServerFeature)
+			}
+		}
+		
+		and		
+		
+		self.base_Interface.ownedReception.forAll{ reception |
+			reception.getStereotypesByOppositeAspect.exists{ stereotype |
+				stereotype.isInstanceOf(MARTE::MARTE_DesignModel::GCM::ClientServerFeature)
+			}
+		}
+		
+	end
+}

@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  :  
+ *            Didier Vojtisek 
+ */
+package MARTE::MARTE_Foundations::GRM;
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Resource_UMLAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+//require "http://MARTE"
+
+using kermeta::standard
+aspect class Resource{
+   /**
+    * if != void, this stereotype is applied to this base_Property
+    */
+    reference base_Property : uml::Property#stereotypes_Resource
+   /**
+    * if != void, this stereotype is applied to this base_InstanceSpecification
+    */
+    reference base_InstanceSpecification : uml::InstanceSpecification#stereotypes_Resource
+   /**
+    * if != void, this stereotype is applied to this base_Classifier
+    */
+    reference base_Classifier : uml::Classifier#stereotypes_Resource
+   /**
+    * if != void, this stereotype is applied to this base_Lifeline
+    */
+    reference base_Lifeline : uml::Lifeline#stereotypes_Resource
+   /**
+    * if != void, this stereotype is applied to this base_ConnectableElement
+    */
+    reference base_ConnectableElement : uml::ConnectableElement#stereotypes_Resource
+}

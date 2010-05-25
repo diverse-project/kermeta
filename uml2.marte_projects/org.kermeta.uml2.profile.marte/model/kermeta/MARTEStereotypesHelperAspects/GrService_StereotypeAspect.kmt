@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  :  
+ *            Didier Vojtisek 
+ */
+package MARTE::MARTE_Foundations::GRM;
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/GrService_UMLAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+//require "http://MARTE"
+
+using kermeta::standard
+aspect class GrService{
+   /**
+    * if != void, this stereotype is applied to this base_ExecutionSpecification
+    */
+    reference base_ExecutionSpecification : uml::ExecutionSpecification#stereotypes_GrService
+   /**
+    * if != void, this stereotype is applied to this base_BehavioralFeature
+    */
+    reference base_BehavioralFeature : uml::BehavioralFeature#stereotypes_GrService
+   /**
+    * if != void, this stereotype is applied to this base_Behavior
+    */
+    reference base_Behavior : uml::Behavior#stereotypes_GrService
+   /**
+    * if != void, this stereotype is applied to this base_Collaboration
+    */
+    reference base_Collaboration : uml::Collaboration#stereotypes_GrService
+   /**
+    * if != void, this stereotype is applied to this base_CollaborationUse
+    */
+    reference base_CollaborationUse : uml::CollaborationUse#stereotypes_GrService
+}

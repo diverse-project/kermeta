@@ -1,0 +1,31 @@
+/* $Id:$ 
+ * Creation : August 5, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            gperroui
+ */
+
+package MARTE::MARTE_AnalysisModel::GQAM;
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+
+
+aspect class GaScenario
+{
+	/**
+	* The hostDemand and hostDemandOps attributes derive their values from the Steps in the
+	* Scenario, but only in cases where all the Steps have the same Host.
+	* reference MARTE 09-11-02, p306 (unclear invariant)
+	*/
+	inv hostDemand is do
+	
+		// Moreover, in the current version of MARTE.profile.uml, GaScenario does not
+		// have a "steps" association as described in p305
+	
+		true
+	end
+	
+}

@@ -1,0 +1,22 @@
+/* $Id: $
+ * Creation date: June 11, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package MARTE::MARTE_DesignModel::HRM::HwLogical::HwStorage::HwStorageManager;
+require "../../../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+
+aspect class HwMMU
+{
+	/**
+	* [11] nbEntriesTLB is derived from the ownedTLBs number of entries.
+	* reference MARTE 09-11-02, p266
+	* unclear how it can be derived... (see doc)
+	*/
+	inv nbEntriesTLB is do
+		true
+	end
+	
+}

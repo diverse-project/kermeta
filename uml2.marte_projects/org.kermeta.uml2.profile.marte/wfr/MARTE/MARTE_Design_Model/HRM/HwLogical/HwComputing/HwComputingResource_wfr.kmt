@@ -1,0 +1,39 @@
+/* $Id: $
+ * Creation date: June 11, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+package MARTE::MARTE_DesignModel::HRM::HwLogical::HwComputing;
+require "../../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+using kermeta::standard
+
+aspect class HwComputingResource
+{
+	/**
+	* [2] if a clock frequency is specified, it must belong to op_Frequencies.
+	* MARTE 09-02-11, p262
+	*/
+	inv clockFreq is do
+	 
+		var lower : Real init Real.new
+		var upper: Real init Real.new
+		var bound1: Real init self.op_Frequencies.bound.asOrderedSet.elementAt(0).asType(MARTE_Library::BasicNFP_Types::NFP_Frequency).~value
+		var bound2: Real init self.op_Frequencies.bound.asOrderedSet.elementAt(1).asType(MARTE_Library::BasicNFP_Types::NFP_Frequency).~value
+	
+		if bound1 > bound2 then
+			upper := bound1
+			lower := bound2
+		end
+		if bound1 == bound2 then
+			upper := bound1
+			lower : = bound1
+		end
+		if bound1 < bound2 then
+			upper := bound2
+			lower := bound1
+		end
+		self.frequency.~value >= lower and self.frequency.~value <= upper		
+	end	
+}

@@ -1,0 +1,97 @@
+/* $Id: ClockConstraint_wfr.kmt 458 2010-02-25 14:32:40Z jfalcou $
+ * Creation date: April 16, 2008
+ * License: EPL
+ * Copyright:	IRISA/INRIA
+ * Authors:
+ *		Didier Vojtisek
+ */
+
+
+package MARTE::MARTE_Foundations::Time;
+
+
+require kermeta
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/UMLHelper4MARTE.kmt"
+
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+
+aspect class ClockConstraint
+{
+
+	
+
+	/* The constrained clocks are members of the on clock set of the ClockConstraint.
+	 * OCL : self.on->includesAll(self.base_Constraint.constrainedElement->select(c|c.oclIsTypeOf(Clock))
+	 * reference : MARTE 09-11-02, p78
+	 */
+	 /*
+	 
+	 @Marte "ClockConstraint 1"
+	 @implemented "yes"
+	 inv clockConstraintOn_Contains_The_ConstrainedClocks is do
+	 
+	 	var constrainedClocks : kermeta::standard::Collection<Clock> init kermeta::standard::Sequence<Clock>.new
+		 // get only classes that can be casted 
+		 base_Constraint.constrainedElement.each{ c |
+		 	// DVK Note : does constrainedElement really contains Clock ? or classes stereatyped by ClockType ?
+		 	if c.isInstanceOf(Clock) then
+		 		constrainedClocks.add(c.asType(Clock))
+		 	end
+		 }
+		 // other way to write this : 
+		 // constrainedClocks.addAll(base_Constraint.constrainedElement.
+		 //		select{c | c.isInstanceOf(Clock)}.collect{ clock | 	clock.asType(Clock) })
+		
+		 on.containsAll(constrainedClocks)
+	 end
+	 
+	 */
+	 
+	 /* The constrained clock types are types of clock members of the on clock set 
+	  * of the ClockConstraint.
+	  * OCL : self.on->includesAll(self.base_Constraint.constrainedElement->select(c|c.oclIsTypeOf(ClockType).type)	
+      * reference : MARTE 09-11-02, p78
+      */
+      
+      /*
+      
+	 @Marte "ClockConstraint 2"
+	 @implemented "yes"
+     inv clockConstraintOn_contains_constrainedClockTypes is do
+     	
+     	var constrainedClockTypes : kermeta::standard::Collection<ClockType> init kermeta::standard::Sequence<ClockType>.new
+		 
+		 // get only classes that can be casted 
+		 base_Constraint.constrainedElement.each{ c |
+		 	// DVK Note : does constrainedElement really contains Clock ? or classes stereatyped by ClockType ?
+		 	if c.isInstanceOf(Clock) then
+		 		constrainedClockTypes.add(c.asType(Clock).type)
+		 	end
+		 }
+		
+		
+		var onClockTypes : kermeta::standard::Collection<ClockType> 
+			init on.collect{ clock | clock.type } 
+		
+		onClockTypes.containsAll( constrainedClockTypes )
+		
+     end 
+     
+     */
+     
+     inv checkClockConstraintsBooleans is do
+     
+     	stdio.writeln("Checking checkClockConstraintsBooelans on ClockConstraint")
+     
+     	stdio.writeln(" - ClockConstraint.isChronometricBased : " + self.isChronometricBased.getMetaClass.toString)
+     	stdio.writeln(" - ClockConstraint.isCoincidenceBased  : " + self.isCoincidenceBased.getMetaClass.toString)
+     	stdio.writeln(" - ClockConstraint.isPrecedenceBased   : " + self.isPrecedenceBased.getMetaClass.toString)
+     
+     	true
+     end
+     
+	
+ 
+
+}

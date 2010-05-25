@@ -1,0 +1,112 @@
+/* $Id:$ 
+ * Creation : February 25, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package MARTE::MARTE_DesignModel::GCM;
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/FlowPort_UMLAspect.kmt"
+
+
+require kermeta
+
+aspect class GCMTrigger
+{
+	
+	/**
+	 * The Trigger must reference (via Trigger::port) exactly one port.
+	 * reference MARTE 09-11-02, p167
+	 */
+	 inv trigger_references_one_port is do
+	 	self.base_Trigger.port.size == 1
+	 end
+	 
+	 /**
+	  * The referenced port must be a non-atomic FlowPort or a feature-based ClientServerPort.
+	  * reference MARTE 09-11-02, p167
+	  */
+	 inv referencedPort_kind is do
+	 	
+	 	// retrieve the referenced port
+	 	var refPort : uml::Port init self.base_Trigger.port.one  
+	 	
+	 	refPort.getStereotypesByOppositeAspect.exists{ st |
+	 		
+	 		if st.isInstanceOf(MARTE::MARTE_DesignModel::GCM::FlowPort)
+	 		then
+	 			not (st.asType(MARTE::MARTE_DesignModel::GCM::FlowPort).isAtomic)
+	 		else
+	 			if st.isInstanceOf(MARTE::MARTE_DesignModel::GCM::ClientServerPort)
+	 			then
+	 				st.asType(MARTE::MARTE_DesignModel::GCM::ClientServerPort).specificationKind
+	 					==PortSpecificationKind.featureBased
+	 			else
+	 				false
+	 			end
+	 		end
+	 		
+	 	}
+	 end
+
+	/** In the case of FlowPort, feature must reference a FlowProperty owned by the 
+	 * FlowSpecification specifying the port.
+	 * reference MARTE 09-11-02, p168
+	 */
+	inv flowPort_feature_TODO is do
+		// FlowSpecification specify interfaces, not ports
+		false
+	end
+	
+	/** In the case of a ClientServerPort, feature must reference a ClientServerFeature 
+	 * owned by the ClientServerSpecification specifying the port.
+	 * reference MARTE 09-11-02, p168
+	 */
+	inv clientServerPort_feature_TODO is do
+		// ClientServerSpecification specify interfaces, not ports
+		false
+	end
+	
+	/** In the case of a FlowPort, the direction of the FlowProperty referenced 
+	 * by feature must be either in, or inout.
+	 */
+	inv flowPort_feature_direction is do
+		
+		var prop : uml::Property init self.feature.asType(uml::Property) 
+		
+		prop.getStereotypesByOppositeAspect.exists{ st |
+			if st.isInstanceOf(FlowProperty) 
+			then
+				st.asType(FlowProperty).direction == FlowDirectionKind.in or
+				st.asType(FlowProperty).direction == FlowDirectionKind.inout
+			else
+				false
+			end
+		}
+
+	end
+	
+	/** In the case of a ClientServerPort, the kind of the ClientServerSpecification 
+	 * referenced by feature must be either provided, or proreq.
+	 * reference MARTE 09-11-02, p168
+	 */
+	inv clientServerPort_feature_kind is do
+		
+		var prop : uml::Property init self.feature.asType(uml::Property)
+		
+		prop.getStereotypesByOppositeAspect.exists{ st |
+			if st.isInstanceOf(ClientServerFeature) 
+			then
+				st.asType(ClientServerFeature).kind == ClientServerKind.provided or
+				st.asType(ClientServerFeature).kind == ClientServerKind.proreq
+			else
+				false
+			end
+		}
+
+		true
+	end
+}

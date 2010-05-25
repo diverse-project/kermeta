@@ -1,0 +1,35 @@
+/* $Id: $
+ * Creation date: June 10, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+package MARTE::MARTE_DesignModel::HLAM;
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+require "../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+
+require kermeta
+aspect class RtBehavior
+{
+	// RtBehavior doesn't exist anymore
+
+ /*
+ * If the owner of the RtBehavior is a protected passive unit both queueSchedPolicy and queueSize are not applicable.
+ * Reference MARTE 07-08-04, p160
+ */
+ 
+ /*
+  inv owner_passiveUnit is do
+   
+  	
+   if self.base_Behavior.asType(uml::NamedElement).owner.getStereotypesByOppositeAspect.exists{st |st.isInstanceOf(MARTE::MARTE_DesignModel::HLAM::PpUnit)} then 
+   	self.queueSchedPolicy.isVoid and self.queueSize.isVoid
+   end
+   
+   end
+   
+   */
+  	
+}

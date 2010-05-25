@@ -1,0 +1,43 @@
+/* $Id: $
+ * Creation date: June 10, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+ 
+package MARTE::MARTE_DesignModel::SRM::SW_Concurrency;
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+require "../../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Resource_UMLAspect.kmt"
+require kermeta
+aspect class MemoryPartition
+{
+	/**
+	* Types of concurrentResources values must be stereotyped either as "SwConcurrentResource" or as
+	* "SwConcurrentResource" sub-Stereotype.
+	* reference MARTE 09-11-02, p217
+	*/
+	inv concRes_types is do
+	
+ 		self.concurrentResources.forAll{t | 
+ 			t.type.getStereotypesByOppositeAspect.exists{st | 
+ 				st.isKindOf(MARTE::MARTE_DesignModel::SRM::SW_Concurrency::SwConcurrentResource)
+ 			}
+ 		}
+	end
+	
+	/**
+	* Types of memorySpaces values must be stereotyped either as "StorageResource" or as "StorageResource"
+	* sub-Stereotype.
+	* reference MARTE 09-11-02, p217
+	*/
+ 	inv memSpace_types is do 
+ 	
+ 		self.memorySpaces.forAll{t | 
+ 			t.type.getStereotypesByOppositeAspect.exists{st | 
+ 				st.isKindOf(MARTE::MARTE_Foundations::GRM::StorageResource)
+ 			}
+ 		}
+	end
+	
+}

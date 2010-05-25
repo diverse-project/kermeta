@@ -1,0 +1,77 @@
+/* $Id: $
+ * Creation date: June 3, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+package MARTE::MARTE_DesignModel::GCM;
+
+
+require kermeta
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/FlowProperty_UMLAspect.kmt"
+
+aspect class FlowSpecification
+{
+
+	// JFA : FlowSpecification stereotype no longer has a "direction" attribute
+	// only FlowPort and FlowProperty have such an attribute ...
+
+	/**
+	* If the direction of flow specification is "in", all its owned flow property must be conformed to this direction (i.e.,
+	* only in flow properties).
+	* reference MARTE 09-11-02, p166
+	*/
+	inv in_direction is do
+	
+	self.base_Interface.ownedAttribute.forAll{ e| 
+		true
+		/*
+		if e.getStereotypesByOppositeAspect.exists{ st | 
+			st.isInstanceOf(MARTE::MARTE_DesignModel::GCM::FlowProperty)
+		} and self.direction == FlowDirectionKind.in
+	 	then 
+	 		e.asType(MARTE::MARTE_DesignModel::GCM::FlowProperty).direction == FlowDirectionKind.in 
+	 	end
+	 	*/
+	 }
+	 
+	end
+	
+	/**
+	* If the direction of flow specification is "out", all its owned flow property must be conformed to this direction (i.e.,
+	* only out flow properties).
+	* reference MARTE 09-11-02, p166
+	*/
+	inv out_direction is do
+	/*
+	self.base_Interface.ownedAttribute.forAll{
+	 e| if e.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_DesignModel::GCM::FlowProperty)} and self.direction == DirectionKind.out
+	 then e.asType(MARTE::MARTE_DesignModel::GCM::FlowProperty).direction == DirectionKind.out end}
+	 */
+	 true
+	end
+	
+	/**
+	 * A flow specification owns only FlowProperties, i.e., Properties on which the FlowProperty stereotype has been
+	 * applied. It cannot own operations, or receptions (of signal).
+	 * reference  MARTE 09-11-02, p166
+	 */
+	inv flowSpecification_owns_flowProperties is do
+		
+		self.base_Interface.ownedOperation.isEmpty and
+		self.base_Interface.ownedReception.isEmpty and
+		
+		self.base_Interface.ownedAttribute.forAll{ att |
+			// the stereotype FlowProperty must be applied on this property
+			att.getStereotypesByOppositeAspect.exists{ st |
+				st.isInstanceOf(MARTE::MARTE_DesignModel::GCM::FlowProperty)
+			}
+		}
+		
+	end
+	
+}

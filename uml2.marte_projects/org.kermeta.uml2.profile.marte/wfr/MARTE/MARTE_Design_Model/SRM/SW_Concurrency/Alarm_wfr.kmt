@@ -1,0 +1,29 @@
+/* $Id: $
+ * Creation date: June 10, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+ 
+package MARTE::MARTE_DesignModel::SRM::SW_Concurrency;
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Resource_UMLAspect.kmt"
+require "../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+
+
+aspect class Alarm
+{
+	/**
+ 	 * Types of timers values must be stereotyped either as "SwTimerResource". (either ? where is tha alternative ?)
+	 * reference MARTE 09-11-02, p211
+ 	 */
+	inv timer_types is do
+	
+ 		self.timers.forAll{t | 
+ 			t.type.getStereotypesByOppositeAspect.exists{ st |
+ 				st.isInstanceOf(MARTE::MARTE_DesignModel::SRM::SW_Concurrency::SwTimerResource)
+ 			}
+ 		}
+ 	end	
+}

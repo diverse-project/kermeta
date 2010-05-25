@@ -1,0 +1,27 @@
+/* $Id: $
+ * Creation date: April 29, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+package MARTE::MARTE_Foundations::GRM;
+
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
+
+
+aspect class ComputingResource
+{
+	/**
+	* The attribute isActive inherited from Resource is always true.
+	* reference MARTE 09-02-11 p105
+	*/
+	@Marte "ComputingResource 1"
+	@implemented "yes"
+	inv isAlwaysActive is do
+		self.isActive
+	end
+}

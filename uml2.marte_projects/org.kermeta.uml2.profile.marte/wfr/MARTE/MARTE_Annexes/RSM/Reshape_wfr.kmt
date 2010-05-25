@@ -1,0 +1,40 @@
+/* $Id:$ 
+ * Creation : March 2, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package MARTE::MARTE_Annexes::RSM;
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/resource/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Tiler_UMLAspect.kmt"
+
+require kermeta
+aspect class Reshape
+{
+
+	/** The reshape stereotype can only be applied to assembly connectors.
+	 * reference MARTE 09-11-02, p527
+	 */
+	inv assemblyConnector is do
+		
+		self.base_Connector.kind==uml::ConnectorKind.assembly
+		
+	end
+
+	/** A tiler stereotype has to be applied to each connector end to specify how 
+	 * each multidimensional array is tiled.
+	 * reference MARTE 09-11-02, p527
+	 */
+	inv tilerStereotype is do
+	
+		self.base_Connector.~end.forAll{connEnd | 
+			connEnd.getStereotypesByOppositeAspect.exists{st | 
+				st.isInstanceOf(Tiler)
+			}
+		}	
+	end
+
+}

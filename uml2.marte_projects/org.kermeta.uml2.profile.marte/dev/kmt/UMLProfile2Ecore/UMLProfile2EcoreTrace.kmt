@@ -1,0 +1,278 @@
+/* $Id: UMLProfile2EcoreTrace.kmt,v 1.7 2008/09/18 21:42:41 gperroui Exp $
+ * Creation date: December 13, 2007
+ * License: EPL
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+
+package  UMLProfileUtils;
+
+
+require kermeta
+
+// UMLMARTE.ecore contains everything needed...
+require "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore"
+
+require "../utils/KLog.kmt"
+require "platform:/resource/org.kermeta.uml2.profile.marte/dev/kmt/UMLUtils/EcoreQualifiedNameAspect.kmt"
+require "platform:/resource/org.kermeta.uml2.profile.marte/dev/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
+using kermeta::utils
+using kermeta::persistence
+using kermeta::standard
+using uml
+using ecore
+
+/** This class keeps track of some objects useful for ecore creation...  */
+
+class UMLProfile2EcoreTrace {
+
+reference log : KLogger
+reference tgt_store: EMFRepository
+reference profileHelper : profiledResourceHelper::ProfilesHelper
+
+// store Ecore Metaclasses extended by stereotypes
+attribute typesTable : Hashtable<String,ecore::EClassifier>
+
+// deals with ecore primitive types refered by the profile
+attribute ecoreTypesTable : Hashtable<String,ecore::EClassifier>
+
+// store UML qualfied names and their ecore correspondencies. Useful for containement...
+attribute qualNamesTable : Hashtable<String,ecore::EObject>
+
+// resource useful for managing UML types
+attribute uml_resource: EMFResource
+
+// resource useful for managing Ecore types
+attribute ecore_resource: EMFResource
+
+// resource dealing with model libraries
+attribute library_resource : EMFResource
+attribute library_name : String
+attribute hasLibrary : Boolean
+attribute lib_contents : Bag<kermeta::language::structure::Object>
+// bag of created objects...
+reference createdObjectBag : Bag<Object> 
+
+operation initTables(): Void is do
+
+qualNamesTable := Hashtable<String,ecore::EObject>.new
+typesTable := Hashtable<String,ecore::EClassifier>.new
+ecoreTypesTable := Hashtable<String,ecore::EClassifier>.new
+end
+
+operation isLibNeeded(b: Boolean) : Void is do
+	hasLibrary := b
+end
+
+// must imperatively be called before repository initialization !!!
+operation initLibrary(lib: String) : Void is do
+	if hasLibrary == true then
+		library_name : = lib
+	else
+		log.print("ERROR, trying to init a library while not needed: please set one via isLibNeeded operation")
+	end
+end
+
+operation initRep(rep: EMFRepository): Void is do
+	tgt_store := rep
+	uml_resource := EMFResource.new 
+	ecore_resource := EMFResource.new
+	// We need to refer to the actual UML and Ecore element in the plugins (impossible to laod the necessary element via their their uri :( )  
+	uml_resource ?= tgt_store.getResource("platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore") 
+	ecore_resource ?=  tgt_store.getResource("platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore")
+	if hasLibrary then
+	log.print("There is a model library, loading it... ")
+		library_resource ?= tgt_store.getResource(library_name)
+		library_resource.load
+		// hack for getting contents of resources as bags and not as set (billions times faster) 
+		lib_contents := Bag<kermeta::language::structure::Object>.new
+		lib_contents.addAll(library_resource)
+	    var coll : Bag<kermeta::language::structure::Object>
+		library_resource.each{e |
+			var s : Set<kermeta::language::structure::Object>
+			s ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getAllContainedObjects(e)
+			coll := s.asBag()
+			lib_contents.addAll(coll)
+		}
+ 	end
+	uml_resource.load
+	ecore_resource.load
+end
+
+operation initProfHelper(modelResource : Resource, profileResource : Resource ) is do
+profileHelper := profiledResourceHelper::ProfilesHelper.new
+profileHelper.initialize(modelResource, profileResource)
+end
+
+operation setQualNameObj(qualName:String,ecoreObj:ecore::EObject): Void is do
+qualNamesTable.put(qualName,ecoreObj)
+end
+
+operation getEcoreFromUMLQualName(qualName:String): ecore::EObject is do
+	result := qualNamesTable.getValue(qualName)
+	if result.isVoid then
+		log.print("sorry, no uml qualified name (qualNamesTable) for: " + qualName) 
+	 	// qualNamesTable.keys.each{tt | log.print("   -" +tt.toString)}
+	end
+end
+
+operation initializeLog(b: Boolean): Void is do
+	log := UMLProfileUtils::KLogger.new
+	log.enableLog(b) 
+end
+
+operation traceLog(message : String): Void is do
+	log.print(message)
+end
+
+
+
+// registering UML base elements...
+operation registerUMLBaseType(name: String) : Void is do
+	log.print("registering external base type " + name)
+	var c: EClass 
+	log.print("uml classes to search : " + uml_resource.one.asType(EPackage).eClassifiers.size.toString) 
+	var classifier : EClassifier
+	classifier := uml_resource.one.asType(EPackage).eClassifiers.select{c|c.asType(EClassifier).name == name}.one
+	if classifier.isInstanceOf(EClass) then
+		c := classifier.asType(EClass)
+	else
+		log.print("external base type " + name + " found but is not an EClass !!!" + classifier.toString)
+	end
+	
+	if c != void then
+		log.print("external base type " + name + " found")
+		typesTable.put(name,c)
+		log.print("external base type " + name + " found and registered")
+	else
+		log.print("external base type " + name + " is not a UML one, this operation should not have been called, try ")
+		//classifier := library_resource.one.asType(EPackage).eClassifiers.select{c|c.asType(EClassifier).name == name}.one
+	end
+end
+
+// registering external library elements...
+operation registerLibraryType(qualName: String) : Void is do
+
+	if (hasLibrary.isVoid or hasLibrary == false) then
+		log.print("No library has been initialized, doing nothing here")
+	else
+		log.print("registering library type :" + qualName)
+						
+		
+		var classifier : EClassifier	
+		classifier ?= lib_contents.detect{c|
+		if c.isInstanceOf(EClassifier) then
+			c.asType(EClassifier).getQualifiedName == qualName
+		else
+			false
+		end
+		}
+		if classifier.isVoid then
+			log.print("Element " + qualName + "not found in the library !")
+		else
+			if classifier.isInstanceOf(EClass) then
+				var c: EClass init classifier.asType(EClass) 
+				if c != void then
+					log.print("external library type (class) " + qualName + " found")
+					qualNamesTable.put(qualName,c)
+					log.print("external library type (class) " + qualName + " found and registered")
+				end
+			else
+				if classifier.isInstanceOf(EEnum) then
+					var enum : EEnum init classifier.asType(EEnum)
+					if enum != void then
+						log.print("external library type (enum)  " + qualName + " found")
+						qualNamesTable.put(qualName,enum)
+						log.print("external library type (enum) " + qualName + " found and registered")
+					end
+			 	else
+			 		if classifier.isInstanceOf(EDataType) then
+						var ed : EDataType init classifier.asType(EDataType)
+						if ed != void then
+							log.print("external library type (EDataType)  " + qualName + " found")
+							qualNamesTable.put(qualName,ed)
+							log.print("external library type (EDataType) " + qualName + " found and registered")
+						else
+			 				log.print("external library type " + qualName + " type " + classifier.toString + "unhandled yet sorry...")  	
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+operation getBaseType(name: String): EClass is do
+ 	result := typesTable.getValue(name).asType(EClass) 
+	if result.isVoid then
+		log.print("Sorry, no Ecore Class for base type: " + name)
+	end 
+end
+
+operation registerEcoreType(name: String) : Void is do 
+log.print("registering ecore element " + name)
+var e: EDataType //init EDataType.new
+var f : EClassifier
+//ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EEnum)}.each{e|log.print("primitive type found: " + e.name)}
+//log.print("ecore classes to search : " + ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EDataType)}.size.toString)
+ 
+// dealing with UML primitve types mappings...
+ if name == "Integer" then
+ 	log.print("registering an Integer")	
+	e := ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EDataType) and c.name == "EInt"}.one.asType(EDataType)	
+	log.print("registered an EInt")
+	else 
+		if name == "String" then
+			log.print("registering an EString")	
+			e := ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EDataType) and c.name == "EString"}.one.asType(ecore::EDataType)
+			log.print("registered an EString")	
+	else
+		if name == "Boolean" then
+			log.print("registering an EBoolean")	
+			e := ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EDataType) and c.name == "EBoolean"}.one.asType(EDataType)
+			log.print("registered an EBoolean")	
+	else
+		// TODO: not sure for the unlimited natural mapping...
+		if name == "UnlimitedNatural" then
+			log.print("registering an UnlimitedNatural")
+			e := ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EDataType) and c.name == "EInt"}.one.asType(EDataType)
+			log.print("registered an UnlimitedNatural --> EInt")
+		else
+			f := ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EClassifier) and c.name == name}.one.asType(EClassifier)		
+		  	log.print("Warning registered an EClassifier via Element/Package import...")
+		  	end
+		end 
+	end 
+end
+
+ 
+	if e != void then
+		ecoreTypesTable.put(name,e)
+		log.print("ecore element " + name + " found and registered")
+	else
+		if not f.isVoid() then
+	 		ecoreTypesTable.put(name,f)
+			log.print("ecore element " + name + " found and registered")
+		else
+			log.print("ecore element " + name + " not found, houston we have a problem...")
+		end
+	end
+end
+
+operation getEcoreType(name: String): EClassifier is do
+result := ecoreTypesTable.getValue(name).asType(EClassifier)
+	if result.isVoid then
+		log.print("Sorry, no Ecore type for: " + name) 
+	end
+end
+
+
+operation setCreatedEcoreObjectBag (b : Bag<Object>): Void is do
+	self.createdObjectBag := b
+end
+
+operation getCreatedEcoreObjectBag (): Bag<Object> is do
+ result := self.createdObjectBag
+end
+}

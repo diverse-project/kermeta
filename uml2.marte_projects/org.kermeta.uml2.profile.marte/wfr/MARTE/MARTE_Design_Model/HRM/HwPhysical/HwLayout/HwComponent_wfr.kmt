@@ -1,0 +1,41 @@
+/* $Id: $
+ * Creation date: June 11, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package MARTE::MARTE_DesignModel::HRM::HwPhysical::HwLayout;
+require "../../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+using kermeta::standard
+
+aspect class HwComponent
+{
+	/**
+	* area must derive from dimensions.
+	* reference MARTE 09-11-02 p261 
+	* the attribute is ordered but how ? length, width, height ? (see doc)
+	*/
+	inv area_TODO is do
+		true
+	end
+	
+	/**
+	* subComponents positions must not exceed the grid.
+	* reference MARTE 09-11-02 p261 
+	* similar problem, we have to know the dimensions (see doc) 
+	*/
+	inv pos_TODO is do
+		true
+	end
+	
+	/**
+	* requiredConditions intervals must be included within the subcomponents corresponding intervals.
+	* reference MARTE 09-11-02 p261 
+	* unclear invariant (see doc)
+	*/
+	inv reqConditions_TODO is do
+		true
+	end
+}
+

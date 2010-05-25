@@ -1,0 +1,97 @@
+/* $Id: $
+ * Creation date: June 3, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+package MARTE::MARTE_Foundations::Alloc;
+
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/UMLHelper4MARTE.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+require kermeta
+
+aspect class Allocate
+{
+	/**
+	* When the kind is structural, suppliers and clients must all be structural elements: classes, instance specifications or
+	* packages. When the kind is behavioral, suppliers must be UML::Behavior or UML::Action and the clients must be
+	* behavioral elements, a UML::BehavioralFeature for example. When the kind is hybrid, suppliers must be behavioral
+	* elements while the clients must be structural elements.
+	* reference MARTE 09-02-11, p126
+	* (this constraint may be too restrictive see with experience...)
+	*/
+	inv structural_kind is do
+		if self.kind == AllocationKind.structural then
+		
+		self.base_Abstraction.supplier.forAll{e | e.isKindOf(uml::Package) 
+											  or e.isKindOf(uml::Class)
+											  or e.isKindOf(uml::InstanceSpecification)}  
+		self.base_Abstraction.client.forAll{e | e.isKindOf(uml::Package) 
+											  or e.isKindOf(uml::Class)
+											  or e.isKindOf(uml::InstanceSpecification)}
+		
+		
+		end
+	end
+	
+	inv behavioral_kind is do
+		if self.kind == AllocationKind.behavioral then
+		
+		self.base_Abstraction.supplier.forAll{e | e.isKindOf(uml::Behavior) 
+											  or e.isKindOf(uml::Action)}  
+		self.base_Abstraction.client.forAll{e | e.isKindOf(uml::BehavioralFeature)}
+		
+		
+		end
+	end
+	
+	inv hybrid_kind is do
+		if self.kind == AllocationKind.hybrid then
+			self.base_Abstraction.supplier.forAll{e | e.isKindOf(uml::BehavioralFeature)}
+			self.base_Abstraction.client.forAll{e | e.isKindOf(uml::Package) 
+											  or e.isKindOf(uml::Class)
+											  or e.isKindOf(uml::InstanceSpecification)}
+		end
+	end
+	
+	
+	/**
+	* When the nature is TimeScheduling, supplier and the clients must be Time::TimedElement and the
+	* NFPs::NfpConstraint shall include Time::ClockConstraint.
+	* reference MARTE 09-02-11, p126
+	*/
+	inv timeSchedNature is do
+		
+		if self.nature == AllocationNature.timeScheduling then
+			self.base_Abstraction.supplier.forAll{e | e.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_Foundations::Time::TimedElement)}}
+			and
+			self.base_Abstraction.client.forAll{e | e.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_Foundations::Time::TimedElement)}}
+			and  
+		    self.impliedConstraint.exists{c|c.isInstanceOf(MARTE::MARTE_Foundations::Time::ClockConstraint)}
+		end
+	end
+	
+	/** All Actions appearing in an AllocateActivityGroup will be the /suppliers (from) end of a single Allocate dependency.
+	*   The element represented by the AllocateActivityGroup will be the /client (to) end of the same Allocate dependency.
+	*  This allows for defining non functional property constraints applying to all contained actions.
+	* reference MARTE 07-08-04, p142
+	*/
+	
+	inv allocate_group  is do
+ 
+		
+	
+		if self.base_Abstraction.supplier.forAllCpl{e1, e2 | e1.isInstanceOf(uml::ActivityNode) and
+			e2.isInstanceOf(uml::ActivityNode) and
+			e1.asType(uml::ActivityNode).inPartition.select{p|p.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_Foundations::Alloc::AllocateActivityGroup)}}.one ==
+			e2.asType(uml::ActivityNode).inPartition.select{p|p.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_Foundations::Alloc::AllocateActivityGroup)}}.one
+			}
+		then
+			self.base_Abstraction.supplier.one.asType(uml::ActivityNode).inPartition.select{p|p.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_Foundations::Alloc::AllocateActivityGroup)}}.one.represents ==
+			self.base_Abstraction.client.one
+		end 
+	end
+	
+}

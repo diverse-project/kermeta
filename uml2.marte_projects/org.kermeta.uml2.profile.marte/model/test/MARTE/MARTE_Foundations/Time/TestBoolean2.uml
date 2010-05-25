@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Time="http://MARTE.MARTE_Foundations/schemas/Time/_AzyrAJ1HEd6zgsjJ8hkrLg/14" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http://MARTE.MARTE_Foundations/schemas/Time/_AzyrAJ1HEd6zgsjJ8hkrLg/14 ../../../../uml/marte_papyrus_1.12.3/MARTE.profile.uml#_A1R4wJ1HEd6zgsjJ8hkrLg">
+  <uml:Model xmi:id="_rHQN0E1VEd-W0Lft7K8A7w" name="TestBoolean2">
+    <packageImport xmi:id="_rHQN0U1VEd-W0Lft7K8A7w">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_sMcUQE1VEd-W0Lft7K8A7w" name="Package_0">
+      <ownedRule xmi:id="_CQmvAE1WEd-W0Lft7K8A7w" name="Constraint0"/>
+      <profileApplication xmi:id="_vrKd4E1VEd-W0Lft7K8A7w">
+        <eAnnotations xmi:id="_vrLsAE1VEd-W0Lft7K8A7w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="../../../../uml/marte_papyrus_1.12.3/MARTE.profile.uml#_A1R4wJ1HEd6zgsjJ8hkrLg"/>
+        </eAnnotations>
+        <appliedProfile href="../../../../uml/marte_papyrus_1.12.3/MARTE.profile.uml#_WStkoAPMEdyuUt-4qHuVvQ"/>
+      </profileApplication>
+    </packagedElement>
+    <profileApplication xmi:id="_rHQN0k1VEd-W0Lft7K8A7w">
+      <eAnnotations xmi:id="_rHQN001VEd-W0Lft7K8A7w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <Time:ClockConstraint xmi:id="_EomhIE1WEd-W0Lft7K8A7w" base_Constraint="_CQmvAE1WEd-W0Lft7K8A7w" isCoincidenceBased="true" isChronometricBased="false"/>
+</xmi:XMI>

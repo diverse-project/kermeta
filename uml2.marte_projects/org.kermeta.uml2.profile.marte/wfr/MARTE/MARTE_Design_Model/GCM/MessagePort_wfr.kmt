@@ -1,0 +1,69 @@
+/* $Id: $
+ * Creation date: June 3, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package MARTE::MARTE_DesignModel::GCM;
+
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+
+aspect class MessagePort {
+
+/**
+* If a port is non-atomic, it cannot specify a kind.
+* self.isAtomic = false implies self.kind->size() = 0
+* reference MARTE 07-08-04, p128
+* DVK : in MARTE beta2 direction is renamed kind ?
+*/
+inv non_atomic_implies_no_kind is do
+	if self.isAtomic then
+		self.direction.isVoid
+	else
+		true
+	end
+end
+
+/**
+* A conjugated port cannot be an atomic port.
+* self.isConjugated = true implies self.isAtomic = false
+* reference MARTE 07-08-04, p128
+*/
+inv is_conj_non_atomic is do
+	if self.isConjugated then
+		not self.isAtomic
+	else
+		true
+	end 
+end
+
+
+/**
+* If a message port is atomic then its type has to be a Signal.
+* reference MARTE 07-08-04, p128
+*/
+inv isAtomic_implies_signal is do
+	if self.isAtomic then
+		self.base_Port.type.isKindOf(uml::Signal)
+	else
+		true
+	end
+end
+
+/**
+* If a port is atomic, valid values for kind are only in, out or inout.
+* reference MARTE 07-08-04, p128
+* DVK : in MARTE beta2 direction is renamed kind ?
+*/
+inv isAtomic_implies_directionKindInout is do
+	if self.isAtomic then
+		self.direction == DirectionKind.in or
+		self.direction == DirectionKind.out or
+		self.direction == DirectionKind.inout
+	else
+		true
+	end
+end
+}

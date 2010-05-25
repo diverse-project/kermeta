@@ -1,0 +1,64 @@
+/* $Id: $
+ * Creation date: June 10, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package MARTE::MARTE_DesignModel::SRM::SW_Concurrency;
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Resource_UMLAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Allocate_UMLAspect.kmt"
+require "../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+
+aspect class SwConcurrentResource
+{
+	/**
+	* Type of the addressSpace value must be stereotyped as "MemoryPartition".
+	* reference MARTE 09-11-02, p224
+	*/
+	inv addrSpace_type is do
+		self.adressSpace.forAll{t | t.type.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_DesignModel::SRM::SW_Concurrency::MemoryPartition)}}
+	end
+	
+	/**
+	* entryPoints values must be stereotyped as "EntryPoint".
+	* reference MARTE 09-11-02, p224
+	*/
+	inv entryPoints is do
+		self.entryPoints.forAll{t | t.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_DesignModel::SRM::SW_Concurrency::EntryPoint)}}
+	end
+	
+	/**
+	* sharedDataResources values must be stereotyped as "SRM::SW_Interaction::SharedDataComResource".
+	* reference MARTE 09-11-02, p224
+	*/
+	inv sharedDataResources is do
+		self.shareDataResources.forAll{t | t.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_DesignModel::SRM::SW_Interaction::SharedDataComResource)}}
+	end
+	
+	/**
+	* messageResources values must be stereotyped as "SRM::SW_Interaction::SwMutualExclusionResource".
+	* reference MARTE 09-11-02, p224
+	*/
+	inv messageResource is do
+		self.messageResources.forAll{t | t.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_DesignModel::SRM::SW_Interaction::SwMutualExclusionResource)}}
+	end
+	
+	
+	/**
+	* mutualExclusionResources values must be stereotyped as "SRM::SW_Interaction::SwMutualExclusionResource".
+	* reference MARTE 09-11-02, p224
+	*/
+	inv mutualExlusionResources is do
+		self.mutualExclusionResources.forAll{t | t.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_DesignModel::SRM::SW_Interaction::SwMutualExclusionResource)}}
+	end
+	
+	/**
+	* notificationResources values must be stereotyped as "SRM::SW_Interaction::NotificationResource".
+	* reference MARTE 09-11-02, p224
+	*/
+	inv notificationResources is do
+		self.notificationResources.forAll{t | t.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_DesignModel::SRM::SW_Interaction::NotificationResource)}}	
+	end
+}

@@ -1,0 +1,75 @@
+/* $Id:$ 
+ * Creation : September 28, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            gperroui
+ */
+@mainClass "dev::kmt::utils::"
+@mainOperation ""
+
+
+package ecore;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore"
+require "platform:/resource/org.kermeta.uml2.profile.marte/dev/kmt/UMLUtils/EcoreQualifiedNameAspect.kmt"
+using ecore
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::persistence
+
+aspect class EModelElement {
+	operation  prettyPrint() : Void is do 
+	if not self.isVoid then
+		stdio.writeln("EModelElement : " + self.toString)
+	end 
+end
+}
+
+aspect class EEnum
+{
+	method  prettyPrint() : Void is do 
+	 if not self.isVoid() then
+		stdio.writeln("Enumeration name : " + self.name)
+		stdio.writeln("Enumeration location : " + self.getQualifiedName)
+		stdio.writeln("Literals : ")
+		self.eLiterals.each{e| if not e.isVoid then
+								stdio.writeln("	" + e.name)
+								end }
+	end
+end
+}
+
+aspect class EClass
+{
+	method  prettyPrint() : Void is do 
+	 if not self.isVoid then
+		stdio.writeln("EClass name : " + self.name)
+		stdio.writeln("EClass location : " + self.getQualifiedName)
+		stdio.writeln("Attributes/Refs  : ")
+		self.eStructuralFeatures.each{e| 
+			if not e.isVoid then
+				stdio.write("	" + e.name + " : ")
+				if not e.eType.isVoid then
+					stdio.writeln(e.eType.name)
+				else
+					stdio.writeln("")
+				end
+			end
+		}
+	end
+end
+}
+aspect class EPackage {
+
+	method  prettyPrint() : Void is do
+	if not self.isVoid then
+		stdio.writeln("EPackage name : " + self.name)
+		stdio.writeln("EPackage location : " + self.getQualifiedName) 
+		self.eSubpackages.each{p|p.prettyPrint}
+		self.eClassifiers.each{c|c.prettyPrint}
+	end
+end
+}

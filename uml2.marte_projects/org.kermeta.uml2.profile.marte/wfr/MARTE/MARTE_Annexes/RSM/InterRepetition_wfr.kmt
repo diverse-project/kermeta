@@ -1,0 +1,109 @@
+/* $Id:$ 
+ * Creation : August 5, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            gperroui
+ */
+ 
+package MARTE::MARTE_Annexes::RSM;
+
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Shaped_UMLAspect.kmt"
+
+require kermeta
+using kermeta::standard
+
+aspect class InterRepetition
+{
+	/*
+	* If the connector having an InterRepetition topology connects two ports, these two ports must belong to the same part. The
+    * repetition space is defined by the multiplicity of that part. If the ports have themselves a multiplicity, the links are
+	* established between the sets of instances defined by these multiplicities. The connected elements must have the same
+	* shape if specified.
+	* reference MARTE 07-08-04, p457
+	*/
+	
+	/*
+	inv connInterRepet is do 
+		  
+		if self.base_Connector.~end.size == 2 and self.base_Connector.~end.forAll{e|e.role.isKindOf(uml::Port)} then
+			var ports: Set<uml::Port> init Set<uml::Port>.new
+			self.base_Connector.~end.each{e|ports.add(e.role.asType(uml::Port))}
+			ports.forAllCpl{p1,p2| p1.~class == p2.~class}
+			// To complete
+		end
+		
+	end
+	*/
+	
+	/** Both ends of the connector must be connected to the same component. 
+	 * This component must have a shape that defines the repetition space.
+	 * reference MARTE 09-11-02, p526
+	 */
+	inv connectorEnds_TODO is do
+		
+		// JFA : The connectorEnd is connected to its role ? 
+		if self.base_Connector.~end.forAllCpl{c1,c2| c1.role == c2.role}
+		then
+			// this role is a MultiplicityElement, and it must have a shape
+			// i.e. be stereotyped by Shape
+			// But repetition space is defined in Reshape stereotype (on Connectors) ?
+			// and in Distribute stereotype ?
+			
+			/* p521 :
+			If the connector having an InterRepetition topology connects two ports, 
+			these two ports must belong to the same part. The repetition space is defined 
+			by the multiplicity of that part. If the ports have themselves a multiplicity, 
+			the links are established between the sets of instances defined by these 
+			multiplicities. The connected elements must have the same shape if specified.
+			*/
+			
+			// It seems that the repetition is defined by the SpaceSpecification
+			// of stereotype Shaped ?
+			
+			self.base_Connector.~end.one.role
+				.getStereotypesByOppositeAspect.exists{ st |
+					if (st.isInstanceOf(Shaped))
+					then
+						not(st.asType(Shaped).shape.isVoid)
+					else
+						false
+					end
+				}
+				true
+		else
+			false
+		end
+	
+	end
+	
+	/** The size of the repetitionSpaceDependence has to be the same as that 
+	 * shape as it is a vector in the space defined by that shape.
+	 * reference MARTE 09-11-02, p526
+	 */
+	inv repetitionSpaceSize_TODO is do
+		// that shape ? 
+		true
+	end
+	
+	/** Both connector ends must have the same shape.
+	 * reference MARTE 09-11-02, p526
+	 */
+	inv sameShape is do
+		// A ConnectorEnd is a MultiplicityElement that can be steretyped by Shaped
+		self.base_Connector.~end.forAllCpl{c1,c2|
+			var shape1 : Shaped init c1.getStereotypesByOppositeAspect.select{st | st.isInstanceOf(Shaped) }.one.asType(Shaped)
+			var shape2 : Shaped init c2.getStereotypesByOppositeAspect.select{st | st.isInstanceOf(Shaped) }.one.asType(Shaped)
+			
+			if (not(shape1.isVoid) and not(shape2.isVoid))
+			then
+				shape1==shape2
+			else
+				false
+			end
+		}
+	end
+	
+}

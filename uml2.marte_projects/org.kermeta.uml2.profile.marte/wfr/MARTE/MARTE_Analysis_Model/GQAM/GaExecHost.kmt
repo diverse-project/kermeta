@@ -1,0 +1,34 @@
+/* $Id:$ 
+ * Creation : March 2, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package MARTE::MARTE_AnalysisModel::GQAM;
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Resource_UMLAspect.kmt"
+
+
+require kermeta
+aspect class GaExecHost
+{
+	/** The associations processingUnits and mainScheduler inherited from Scheduler 
+	 * and ProcessingResource respectively have as default values the very same element 
+	 * that is being annotated with the GaCommHost stereotype.
+	 * reference MARTE 09-11-02, p303 
+	 */
+	inv associations_coherence_TODO is do
+	
+		// GaCommHost generalizes Scheduler and ProcessingRessource
+		// self.processingUnits is a list of ProcessingResources 
+		
+		// self.mainScheduler is a Scheduler (a Resource)
+		
+		
+		
+		true
+	end
+}

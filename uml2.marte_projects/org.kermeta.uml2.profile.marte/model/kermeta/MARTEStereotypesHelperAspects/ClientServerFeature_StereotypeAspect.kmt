@@ -1,0 +1,24 @@
+/* $Id:$ 
+ * Creation : February 23, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package MARTE::MARTE_DesignModel::GCM;
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/ClientServerFeature_UMLAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+//require "http://MARTE"
+
+using kermeta::standard
+aspect class ClientServerFeature{
+   /**
+    * if != void, this stereotype is applied to this base_Interface
+    */
+    reference base_BehavioralFeature : uml::BehavioralFeature#stereotypes_ClientServerFeature
+}
+

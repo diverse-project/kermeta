@@ -1,0 +1,29 @@
+/* $Id: MARTE_wfr.kmt 417 2009-11-05 07:24:56Z dvojtise $
+ * Creation date: April 16, 2008
+ * License:
+ * Copyright: EPL
+ * Authors:
+ *		Didier Vojtisek
+ */
+
+
+
+package MARTE;
+
+
+require kermeta
+
+require "./MARTE_Foundations/Time/Clock_wfr.kmt"
+require "./MARTE_Foundations/Time/ClockType_wfr.kmt"
+require "./MARTE_Foundations/Time/ClockConstraint_wfr.kmt"
+require "./MARTE_Foundations/Time/TimedConstraint_wfr.kmt"
+require "./MARTE_Foundations/Time/TimedEvent_wfr.kmt"
+
+// not tested
+require "./MARTE_Foundations/Time/TimedProcessing_wfr.kmt"
+require "./MARTE_Foundations/GRM/Acquire_wfr.kmt"
+require "./MARTE_Foundations/GRM/ComputingResource_wfr.kmt"
+require "./MARTE_Foundations/GRM/Release_wfr.kmt"
+require "./MARTE_Foundations/GRM/SecondaryScheduler_wfr.kmt"
+require "./MARTE_Design_Model/GCM/MessagePort_wfr.kmt"
+

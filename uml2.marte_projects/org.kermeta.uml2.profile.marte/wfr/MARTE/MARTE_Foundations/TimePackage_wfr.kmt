@@ -1,0 +1,20 @@
+/* $Id:$ 
+ * Creation : March 3, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package MARTE;
+require kermeta
+
+require "platform:/lookup/org.kermeta.uml2.profile.marte/wfr/MARTE/MARTE_Foundations/Time/Clock_wfr.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/wfr/MARTE/MARTE_Foundations/Time/ClockType_wfr.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/wfr/MARTE/MARTE_Foundations/Time/ClockConstraint_wfr.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/wfr/MARTE/MARTE_Foundations/Time/TimedConstraint_wfr.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/wfr/MARTE/MARTE_Foundations/Time/TimedEvent_wfr.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/wfr/MARTE/MARTE_Foundations/Time/TimedProcessing_wfr.kmt"
+
+

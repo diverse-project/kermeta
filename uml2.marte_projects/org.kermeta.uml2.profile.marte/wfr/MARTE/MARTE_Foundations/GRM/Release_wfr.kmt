@@ -1,0 +1,27 @@
+/* $Id: $
+ * Creation date: April 30, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+package MARTE::MARTE_Foundations::GRM;
+
+
+require kermeta
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
+
+aspect class Release
+{
+	/**
+	* The resource that owns the service must be a protected resource (i.e., its attribute isProtected must be true).
+	* reference MARTE 09-02-11, p109
+	*/
+	@Marte "Release 1"
+	@implemented "yes"
+	inv isResProtected is do
+		self.owner.isProtected 
+	end
+}

@@ -1,0 +1,29 @@
+/* $Id: $
+ * Creation date: May 30, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+
+package MARTE::MARTE_Foundations::GRM;
+
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+
+
+aspect class SecondaryScheduler {
+	
+	/**
+	* A SecondaryScheduler takes its capacity from the virtualProcessingUnits list of schedulable resources, so it is not
+	*	possible to have processing resources capacity through the processingUnits list inherited from Scheduler.
+	* reference MARTE 09-02-11, p113 
+	*/
+    @Marte "SecondaryScheduler 1"
+	@implemented "yes"
+	inv no_proc_capacity is do
+		self.processingUnits.size == 0
+	end
+}

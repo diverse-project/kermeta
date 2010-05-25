@@ -1,0 +1,43 @@
+/* $Id:$ 
+ * Creation : February 25, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+package MARTE::MARTE_DesignModel::HLAM;
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+
+aspect class RtFeature
+{
+
+	/** The set of comments (i.e., property ownedComment) owned by the element on which the 
+	 * stereotype «RtFeature» is applied contains at least one «RtSpecification».
+	 * reference MARTE 09-11-02, p187
+	 */
+	inv rtFeature_comments_contain_RtSpecification is do
+		// This invariant is always true because the derived property "specification" of RtFeature
+		// must have at least an element
+		true
+	end
+	
+	/** If the stereotype «RtFeature» is not applied to a port, the property specification must 
+	 * reference exactly one «RtSpecification».
+	 * reference MARTE 09-11-02, p187
+	 */
+	inv rtFeature_onPort is do
+		
+		if self.base_Port.isVoid
+		then
+			self.specification.size==1
+		else
+			true
+		end
+	
+	end
+
+}

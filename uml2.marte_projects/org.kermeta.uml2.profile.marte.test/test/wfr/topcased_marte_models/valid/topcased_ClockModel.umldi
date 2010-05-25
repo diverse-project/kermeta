@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_AhmfMJt3Ed20prwWoEeypg" activeDiagram="_AhmfMZt3Ed20prwWoEeypg">
+  <model href="topcased_ClockModel.uml#_w8IxIM37EdqwVrslYOdUDA"/>
+  <diagrams xmi:id="_AhmfMZt3Ed20prwWoEeypg" position="0,0" size="100,100" name="topcased_ClockModel" viewport="0,0">
+    <property xmi:id="_Aqi_0Jt3Ed20prwWoEeypg" key="pageFormatName" value="A4"/>
+    <property xmi:id="_Aqi_0Zt3Ed20prwWoEeypg" key="diagramWidth" value="840"/>
+    <property xmi:id="_Aqi_0pt3Ed20prwWoEeypg" key="diagramHeight" value="1188"/>
+    <property xmi:id="_Aqi_05t3Ed20prwWoEeypg" key="pageMarginName" value="Small Margin"/>
+    <property xmi:id="_Aqi_1Jt3Ed20prwWoEeypg" key="diagramTopMargin" value="20"/>
+    <property xmi:id="_Aqi_1Zt3Ed20prwWoEeypg" key="diagramBottomMargin" value="20"/>
+    <property xmi:id="_Aqi_1pt3Ed20prwWoEeypg" key="diagramLeftMargin" value="20"/>
+    <property xmi:id="_Aqi_15t3Ed20prwWoEeypg" key="diagramRightMargin" value="20"/>
+    <property xmi:id="_Aqi_2Jt3Ed20prwWoEeypg" key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_AhwQMJt3Ed20prwWoEeypg" presentation="org.topcased.modeler.uml.classdiagram">
+      <element href="topcased_ClockModel.uml#_w8IxIM37EdqwVrslYOdUDA"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" xmi:id="_KtMJcJt3Ed20prwWoEeypg" position="128,116" size="100,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_KtMJcZt3Ed20prwWoEeypg" presentation="default">
+        <element href="topcased_ClockModel.uml#_Ky_2gJt3Ed20prwWoEeypg"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_KtMJcpt3Ed20prwWoEeypg">
+        <property xmi:id="_KtMJc5t3Ed20prwWoEeypg" key="eStructuralFeatureID" value="37"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_KtMJdJt3Ed20prwWoEeypg" presentation="default">
+          <element href="topcased_ClockModel.uml#_Ky_2gJt3Ed20prwWoEeypg"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_KtMJdZt3Ed20prwWoEeypg">
+        <property xmi:id="_KtMJdpt3Ed20prwWoEeypg" key="eStructuralFeatureID" value="47"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_KtMJd5t3Ed20prwWoEeypg" presentation="default">
+          <element href="topcased_ClockModel.uml#_Ky_2gJt3Ed20prwWoEeypg"/>
+        </semanticModel>
+      </contained>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

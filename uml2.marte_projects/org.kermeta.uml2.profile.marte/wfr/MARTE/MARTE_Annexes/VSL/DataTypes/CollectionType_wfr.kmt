@@ -1,0 +1,26 @@
+/* $Id:$ 
+ * Creation : March 2, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package MARTE::MARTE_Annexes::VSL::DataTypes;
+
+require "../../../../../model/ecore/MARTE.profile.ecore"
+
+require kermeta
+aspect class CollectionType
+{
+	/** The types of the properties belonging to this DataType are constrained to be 
+	 * UML::DataType or one of its children metaclasses only.
+	 * reference MARTE 09-11-02, p439
+	 */
+	inv umlDataTypeOnly is do
+	
+		self.collectionAttrib.type.isKindOf(uml::DataType)
+	end
+	
+	
+}

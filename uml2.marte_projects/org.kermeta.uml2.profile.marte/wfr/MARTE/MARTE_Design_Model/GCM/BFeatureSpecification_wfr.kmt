@@ -1,0 +1,24 @@
+/* $Id: $
+ * Creation date: May 30, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+package MARTE::MARTE_DesignModel::GCM;
+
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+
+aspect class BFeatureSpecification
+{
+	/**
+	* A flow specification owns only properties, it cannot own operation or reception.
+	* reference MARTE 07-08-04, p122
+	*/
+	inv only_prop is do
+		self.base_Interface.ownedOperation.size == 0
+		and self.base_Interface.ownedReception.size == 0
+	end
+}

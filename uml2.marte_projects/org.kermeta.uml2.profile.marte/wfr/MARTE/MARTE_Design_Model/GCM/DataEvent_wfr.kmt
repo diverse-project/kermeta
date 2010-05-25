@@ -1,0 +1,26 @@
+/* $Id:$ 
+ * Creation : February 24, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package MARTE::MARTE_DesignModel::GCM;
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+
+require kermeta
+
+aspect class DataEvent
+{
+
+	/** classifier can be any UML Classifier that can be used to type an atomic 
+	 * FlowPort or a FlowProperty (i.e., DataType or Class) except a Signal.
+	 * reference MARTE 09-02-11, p156
+	 */
+	inv dataEvent_classifier is do
+		
+		self.classifier.isInstanceOf(uml::DataType) or self.classifier.isInstanceOf(uml::Class)
+	end
+}

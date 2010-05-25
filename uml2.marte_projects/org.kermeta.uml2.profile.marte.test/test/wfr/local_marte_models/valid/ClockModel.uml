@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Time="http://MARTE.MARTE_Foundations/schemas/Time/_ktYkcKSsEdy-NrxVBTpLyA/10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http://MARTE.MARTE_Foundations/schemas/Time/_ktYkcKSsEdy-NrxVBTpLyA/10 ../model/uml/MARTE.profile.uml#_kuJZcKSsEdy-NrxVBTpLyA">
+  <uml:Model xmi:id="_GS2K0AvJEd2bPfsovCYJbg">
+    <packagedElement xmi:type="uml:Package" xmi:id="_GS2K0QvJEd2bPfsovCYJbg" name="DefaultName">
+      <packagedElement xmi:type="uml:Class" xmi:id="_GS2K0gvJEd2bPfsovCYJbg" name="Class1"/>
+      <profileApplication xmi:id="_GS2K0wvJEd2bPfsovCYJbg">
+        <eAnnotations xmi:id="_GS2K1AvJEd2bPfsovCYJbg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="../model/uml/MARTE.profile.uml#_kuJZcKSsEdy-NrxVBTpLyA"/>
+        </eAnnotations>
+        <appliedProfile href="../model/uml/MARTE.profile.uml#_WStkoAPMEdyuUt-4qHuVvQ"/>
+      </profileApplication>
+    </packagedElement>
+  </uml:Model>
+  <Time:ClockType xmi:id="_GUVYkAvJEd2bPfsovCYJbg" base_Class="/0/DefaultName/Class1"/>
+  <Time:TimedDomain xmi:id="_GUVYkQvJEd2bPfsovCYJbg" base_Package="/0/DefaultName"/>
+  <Time:ClockType xmi:id="_PPy3sAvJEd2bPfsovCYJbg" base_Class="_GS2K0gvJEd2bPfsovCYJbg"/>
+  <Time:TimedDomain xmi:id="_Qc1SkAvJEd2bPfsovCYJbg" base_Package="_GS2K0QvJEd2bPfsovCYJbg"/>
+</xmi:XMI>

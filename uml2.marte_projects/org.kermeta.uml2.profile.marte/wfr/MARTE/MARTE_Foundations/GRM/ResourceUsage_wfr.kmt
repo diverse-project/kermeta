@@ -1,0 +1,92 @@
+/* $Id: $
+ * Creation date: April 30, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package MARTE::MARTE_Foundations::GRM;
+
+
+require kermeta
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+//require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
+
+aspect class ResourceUsage
+{
+	/**
+	* To consider the ResourceUsage fully specified, if the list usedResources is empty the list subUsages should not be
+	* empty and viceversa. Further refinements of ResoureUsage may define additional attributes that may bring implicit
+	* elements into the usedResources list.
+	* reference MARTE 09-02-11, p110
+	*/
+	@Marte "ResourceUsage 1"
+	@implemented "yes"
+	inv ru_fully_specified is do
+		if self.usedResources.size == 0 then 
+			self.subUsage.size > 0
+		else 
+			if self.subUsage.size ==0 then
+				self.usedResources.size > 0
+			end
+		end  
+	end
+	
+	/**
+	* If the list usedResources has only one element, all the optional lists of attributes 
+	* (execTime, msgSize,allocatedMemory, usedMemory, powerPeak and energy) refer to this 
+	* unique Resource and at least one of them must be present.
+	* reference MARTE 09-02-11, p110 (bad metamodel design see doc)
+	*/
+	@Marte "ResourceUsage 2"
+	@implemented "yes"
+	inv usedRes_one is do
+		if self.usedResources.size==1
+		then
+			not (self.execTime.size==0 and self.msgSize.size==0 and
+			self.allocatedMemory.size==0 and self.usedMemory.size==0 and
+			self.powerPeak.size==0 and self.energy.size==0)
+		else
+			true
+		end
+	end
+	
+	/**
+	* If the list usedResources has more than one element, all of the optional lists of attributes 
+	* (execTime, msgSize, allocatedMemory, usedMemory, powerPeak, and energy) that are present, 
+	* must have that number of elements, and they will be considered to match one to one.
+	* reference MARTE 09-02-11, p111 (bad metamodel design see doc)
+	*/
+	@Marte "ResourceUsage 3"
+	@implemented "yes"
+	inv usedRes_more_than_one is do
+		
+		if self.usedResources.size > 1
+		then
+			(self.execTime.size==0 or self.execTime.size==self.usedResources.size) and
+			(self.msgSize.size==0 or self.msgSize.size==self.usedResources.size) and
+			(self.allocatedMemory.size==0 or self.allocatedMemory.size==self.usedResources.size) and
+			(self.usedMemory.size==0 or self.usedMemory.size==self.usedResources.size) and
+			(self.powerPeak.size==0 or self.powerPeak.size==self.usedResources.size) and
+			(self.energy.size==0 or self.energy.size==self.usedResources.size)
+		else
+			true
+		end
+	end
+	
+	/**
+	* If the list subUsages is not empty, and any of the optional lists of attributes 
+	* (execTime, packetSize, allocatedMemory, usedMemory, powerPeak, and energy) is present, 
+	* then more than one annotation for the same resource and kind of usage may be expressed. 
+	* In this case, if the annotations have also the same source and statistical qualifiers they 
+	* will be considered in conflict, and hence the ResourceUsage inconsistent.
+	* reference MARTE 09-02-11, p111 (bad metamodel design see doc)
+	*/
+	@Marte "ResourceUsage 4"
+	@implemented "no"
+	inv subUsage_not_empty is do
+		true
+	end
+	
+	
+}

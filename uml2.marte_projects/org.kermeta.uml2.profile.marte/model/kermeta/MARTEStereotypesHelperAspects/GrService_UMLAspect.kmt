@@ -1,0 +1,49 @@
+/* $Id:$ 
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  :  
+ *            Didier Vojtisek 
+ */
+package uml;
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/GrService_StereotypeAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/profileHelpers/UMLStereotypeHelper.kmt"
+require "http://www.eclipse.org/uml2/3.0.0/UML" 
+
+using kermeta::standard
+aspect class ExecutionSpecification{
+   /**
+    * List of the GrService stereotypes applied to this ExecutionSpecification
+    * this is an internal back link to the Stereotypes used by the operation getStereotypesByOppositeAspect()
+    */
+    reference stereotypes_GrService : MARTE::MARTE_Foundations::GRM::GrService[0..*]#base_ExecutionSpecification
+}
+aspect class BehavioralFeature{
+   /**
+    * List of the GrService stereotypes applied to this BehavioralFeature
+    * this is an internal back link to the Stereotypes used by the operation getStereotypesByOppositeAspect()
+    */
+    reference stereotypes_GrService : MARTE::MARTE_Foundations::GRM::GrService[0..*]#base_BehavioralFeature
+}
+aspect class Behavior{
+   /**
+    * List of the GrService stereotypes applied to this Behavior
+    * this is an internal back link to the Stereotypes used by the operation getStereotypesByOppositeAspect()
+    */
+    reference stereotypes_GrService : MARTE::MARTE_Foundations::GRM::GrService[0..*]#base_Behavior
+}
+aspect class Collaboration{
+   /**
+    * List of the GrService stereotypes applied to this Collaboration
+    * this is an internal back link to the Stereotypes used by the operation getStereotypesByOppositeAspect()
+    */
+    reference stereotypes_GrService : MARTE::MARTE_Foundations::GRM::GrService[0..*]#base_Collaboration
+}
+aspect class CollaborationUse{
+   /**
+    * List of the GrService stereotypes applied to this CollaborationUse
+    * this is an internal back link to the Stereotypes used by the operation getStereotypesByOppositeAspect()
+    */
+    reference stereotypes_GrService : MARTE::MARTE_Foundations::GRM::GrService[0..*]#base_CollaborationUse
+}

@@ -1,0 +1,77 @@
+
+/* $Id: UMLResource.kmt,v 1.3 2008/02/25 16:54:01 dvojtise Exp $
+ * Creation date: February 11, 2008
+ * License: EPL
+ * Copyright:	IRISA/INRIA
+ * Authors:
+ *		Didier Vojtisek
+ */
+
+
+/**
+ * Aspect that adds support for UMLResource to Kermeta persistence package (in EMFRepository)
+ * It introduces the new Resource and the dedicated builder operation
+ */
+package kermeta::persistence;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::exceptions
+
+/**
+ * Aspect that add UML load/save ability to EMFRepository
+ */
+aspect class EMFRepository
+{
+	/**
+	 * Create a new resource for a model given by its uri, 
+	 * which meta-model is stored in file given by mm_uri
+	 * If file already exists, you'll be able to call the load method to concretly load the model
+	 * otherwise, you can only call the save method
+	 */
+	operation createUMLResource(uri : String, mm_uri : String) : Resource is do
+		var nUri : String
+		nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
+
+	    // make sure we can deal with UML units
+		extern org::kermeta::uml2::profiles::kermeta::runtime::basetypes::Resource.addUMLRuntimeUnitFactory()
+		
+		if(not resources.collect{r | extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(r.uri)}.contains(nUri)) then
+			result ?= extern org::kermeta::uml2::profiles::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)
+		else
+			var e : ResourceCreateException init ResourceCreateException.new
+			e.message := "Trying to create a resource already existing at " + uri + ".\n"
+					+ "Remove existing resource from repository first, or use \"getResource\" operation."
+			raise e
+		end
+	end
+}
+
+/**
+ * Special resource that is able to load UML model that use nested profile
+ */
+class UMLResource inherits EMFResource
+{
+	/** Loads a resource. Once loaded, you'll be able to query the resource for its instances.  
+	 * even if the metamodelURI was not set, (for example the registered packages are enough) after a succesful load
+	 * the attribute metamodelURI will be filled with the nsuri of the root package of the metamodel used to load this resource
+	 */
+	method load() : Void is do
+		self.clear		
+		
+		// make sure we can deal with UML units
+		extern org::kermeta::uml2::profiles::kermeta::runtime::basetypes::Resource.addUMLRuntimeUnitFactory()
+		
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
+		    self, uri, metaModelURI, "UML"
+		)
+		// If load failed
+		if(self.size == 0) then
+			stdio.writeln("Resource load failed!")
+			var e : ResourceLoadException init ResourceLoadException.new
+			raise e
+		end
+	end
+}

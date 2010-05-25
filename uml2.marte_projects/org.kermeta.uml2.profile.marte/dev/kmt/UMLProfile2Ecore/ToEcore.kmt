@@ -1,0 +1,29 @@
+/* $Id: ToEcore.kmt,v 1.2 2008/02/27 14:23:59 gperroui Exp $
+ * Creation date: November 30, 2007
+ * License: EPL
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+
+package uml;
+ 
+
+require kermeta
+// UMLMARTE.ecore contains everything needed...
+require "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore"
+require "UMLProfile2EcoreTrace.kmt"
+
+using UMLProfileUtils
+using ecore 
+
+@aspect "true"
+abstract class ToEcore
+{
+	
+	operation toEcorePass1(trace: UMLProfileUtils::UMLProfile2EcoreTrace) : ecore::EObject is abstract
+	
+	operation toEcorePass2(trace: UMLProfileUtils::UMLProfile2EcoreTrace) : Void is abstract
+	
+	operation toEcorePass3(trace: UMLProfileUtils::UMLProfile2EcoreTrace) : Void is abstract
+}

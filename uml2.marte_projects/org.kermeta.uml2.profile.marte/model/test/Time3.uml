@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Time="http://MARTE.MARTE_Foundations/schemas/Time/_AzyrAJ1HEd6zgsjJ8hkrLg/14" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http://MARTE.MARTE_Foundations/schemas/Time/_AzyrAJ1HEd6zgsjJ8hkrLg/14 ../../../com.cea.papyrus.marte.profile/resources/MARTE.profile.uml#_A1R4wJ1HEd6zgsjJ8hkrLg">
+  <uml:Model xmi:id="_WacqICuAEd-EE4J15nkH3w" name="Time3">
+    <packageImport xmi:id="_WacqISuAEd-EE4J15nkH3w">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_K_GO4CuFEd-EE4J15nkH3w" name="Package_0">
+      <packageImport xmi:id="_Ra3YcCuFEd-EE4J15nkH3w">
+        <importedPackage href="../../../com.cea.papyrus.marte.profile/resources/MARTE_Library.library.uml#_dDxjEAeNEdytasR0-Ec7ew"/>
+      </packageImport>
+      <packageImport xmi:id="_RblxMCuFEd-EE4J15nkH3w">
+        <importedPackage href="../../../com.cea.papyrus.marte.profile/resources/MARTE_Library.library.uml#_3DJKAA4uEdysTsAUPnp57Q"/>
+      </packageImport>
+      <packageImport xmi:id="_Rb4sICuFEd-EE4J15nkH3w">
+        <importedPackage href="../../../com.cea.papyrus.marte.profile/resources/MARTE_Library.library.uml#_X3JtMAeNEdytasR0-Ec7ew"/>
+      </packageImport>
+      <packageImport xmi:id="_ReCoQCuFEd-EE4J15nkH3w">
+        <importedPackage href="../../../com.cea.papyrus.marte.profile/resources/MARTE_Library.library.uml#_g2qR8A74EdyML4mHwjNDrw"/>
+      </packageImport>
+      <packageImport xmi:id="_ReeGECuFEd-EE4J15nkH3w">
+        <importedPackage href="../../../com.cea.papyrus.marte.profile/resources/MARTE_Library.library.uml#_l6ms8A74EdyML4mHwjNDrw"/>
+      </packageImport>
+      <packageImport xmi:id="_RgCMUCuFEd-EE4J15nkH3w">
+        <importedPackage href="../../../com.cea.papyrus.marte.profile/resources/MARTE_Library.library.uml#_x9l9sA74EdyML4mHwjNDrw"/>
+      </packageImport>
+      <packageImport xmi:id="_RgbN4CuFEd-EE4J15nkH3w">
+        <importedPackage href="../../../com.cea.papyrus.marte.profile/resources/MARTE_Library.library.uml#_2GPOEA74EdyML4mHwjNDrw"/>
+      </packageImport>
+      <packageImport xmi:id="_RiAiQCuFEd-EE4J15nkH3w">
+        <importedPackage href="../../../com.cea.papyrus.marte.profile/resources/MARTE_Library.library.uml#_RTwjABgzEdyHL91mBnoLNQ"/>
+      </packageImport>
+      <ownedRule xmi:id="_UZfFsCuFEd-EE4J15nkH3w" name="Constraint0">
+        <specification xmi:type="uml:LiteralString" xmi:id="_Wu9IQCuFEd-EE4J15nkH3w" name="constraintBody" value="Test"/>
+      </ownedRule>
+      <profileApplication xmi:id="_7rvAQCuJEd-3TP5LYMjX8A">
+        <eAnnotations xmi:id="_7tXX8CuJEd-3TP5LYMjX8A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="../../../com.cea.papyrus.marte.profile/resources/MARTE.profile.uml#_A1R4wJ1HEd6zgsjJ8hkrLg"/>
+        </eAnnotations>
+        <appliedProfile href="../../../com.cea.papyrus.marte.profile/resources/MARTE.profile.uml#_WStkoAPMEdyuUt-4qHuVvQ"/>
+      </profileApplication>
+    </packagedElement>
+    <profileApplication xmi:id="_WacqIiuAEd-EE4J15nkH3w">
+      <eAnnotations xmi:id="_WacqIyuAEd-EE4J15nkH3w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <Time:ClockType xmi:id="_4j4tQCuDEd-EE4J15nkH3w"/>
+  <Time:ClockConstraint xmi:id="_5ygcgCuDEd-EE4J15nkH3w"/>
+  <Time:ClockConstraint xmi:id="_9EFTQCuJEd-3TP5LYMjX8A" base_Constraint="_UZfFsCuFEd-EE4J15nkH3w"/>
+</xmi:XMI>

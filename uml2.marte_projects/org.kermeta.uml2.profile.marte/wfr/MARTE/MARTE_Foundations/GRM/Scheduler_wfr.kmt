@@ -1,0 +1,40 @@
+/* $Id: $
+ * Creation date: May 29, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package MARTE::MARTE_Foundations::GRM;
+
+
+require kermeta
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+//require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
+
+
+aspect class Scheduler
+{
+	/**
+	* The scheduling policy of the scheduler must be compatible with the scheduling parameters of all the schedulable
+	* resources that it has associated.
+	* reference MARTE 09-02-11, p112 (unclear invariant see doc)
+    */
+    @Marte "Scheduler 1"
+	@implemented "no"
+    inv schedPolicy_compatibility_schedResources is do
+    	true
+    end
+    
+    /**
+    * The scheduling policy of the scheduler must be compatible with the ProtectProtocolParameters of all the associated
+	* MutualExclusionResources.
+	* reference MARTE 09-02-11, p112 (unclear invariant see doc)
+    */
+    @Marte "Scheduler 2"
+	@implemented "no"
+    inv schedPolicy_compatibility_MutexResources is do
+    	true
+    end 
+}

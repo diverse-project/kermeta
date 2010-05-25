@@ -1,0 +1,78 @@
+/* $Id: $
+ * Creation date: May 30, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+
+package MARTE::MARTE_DesignModel::GCM;
+
+
+require kermeta
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+require "../../../../model/ecore/MARTE.profile.ecore"
+
+aspect class FlowPort
+{
+
+	/* A conjugated port may be involved in only bidirectional connector, 
+	 * i.e., connector with exactly two connector ends.
+	 * reference MARTE 09-11-02, p164
+	 * This invariant is defined on class uml::Connector
+	 * see file Connector_wfr.kmt
+	 */
+
+	/**
+	* A conjugated port cannot be an atomic port.
+	* reference MARTE 09-11-02, p164
+	*/
+	inv conjug_not_atomic is do
+		if self.isConjugated then
+			not self.isAtomic
+		end 
+	end	 
+
+	/**
+	* The type of a non-atomic flow port has to be a flow specification (i.e. an interface stereotyped with
+	* "flowSpecification").
+	* reference MARTE 09-11-02, p164
+	*/
+	inv non_atomic_implies_flow_spec_TODO is do	
+		if not self.isAtomic then 
+			true
+			//self.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_DesignModel::GCM::FlowSpecification)}
+		else
+			true
+		end
+	end
+
+	/** A behavioral flow port cannot have delegation connectors.
+     * reference MARTE 09-11-02, p164
+	 */
+	inv bFlow_no_delegation is do
+		
+		not ( self.base_Port.isBehavior and self.base_Port.~end.exists{ connectorEnd |
+			connectorEnd.owner.asType(uml::Connector).kind == uml::ConnectorKind.delegation}
+		)
+		
+	end
+	
+	/*
+	* If a port is non-atomic, it cannot specify a direction.
+	* reference MARTE 07-08-04, p124
+	*/
+	
+	/*
+	inv atomic_no_direction is do
+		if not self.isAtomic then 
+			self.direction.isVoid
+		end
+	end
+	*/
+
+
+	
+	
+}

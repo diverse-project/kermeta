@@ -1,0 +1,99 @@
+/* $Id:$ 
+ * Creation : March 2, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package MARTE::MARTE_Annexes::RSM;
+
+
+require kermeta
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Reshape_UMLAspect.kmt"
+
+aspect class Tiler
+{
+
+	/** The tiler stereotype can be applied only to delegation connectors.
+	 * reference MARTE 09-11-02, p529
+	 */
+	inv delegation_connectors is do
+	
+		if self.base_Connector.isVoid
+		then
+			true
+		else
+			self.base_Connector.kind==uml::ConnectorKind.delegation
+		end
+	
+	end
+	
+	/** It can be applied to connector ends only if they belong to a connector with the reshape stereotype.
+	 * reference MARTE 09-11-02, p529
+	 */
+	inv reshape_stereotype is do
+		
+		if self.base_ConnectorEnd.isVoid
+		then
+			true
+		else
+			self.base_ConnectorEnd.getStereotypesByOppositeAspect.exists{st |
+				st.isInstanceOf(Reshape)
+			}
+		end		
+	end
+	
+	/** The tiler attribute can be used only if the origin, fitting and paving attributes are not specified.
+	 * reference MARTE 09-11-02, p530
+	 */
+	inv tiler is do
+	
+		self.tiler.isVoid or (self.origin.isVoid and self.fitting.isVoid and self.paving.isVoid)
+		
+	end	
+
+	/** The number of elements of the origin vector, the number of lines of the paving and fitting matrices 
+	 * must be equal to the dimension of the array.
+	 * reference MARTE 09-11-02, p530
+	 */
+	inv dimensions_TODO is do
+		
+		// the dimension of the array ?
+		
+		// 1st case - apllied to a connector end
+		// It means that the Connector owning the ConnectorEnd shoul be stereotyped by Reshape
+		if not(self.base_ConnectorEnd.isVoid)
+		then
+			// retriev the Reshape stereotype
+			var reshape : Reshape init self.base_ConnectorEnd.owner.getStereotypesByOppositeAspect.select{ st |
+				st.isInstanceOf(Reshape) }.one.asType(Reshape)
+				
+			if reshape.isVoid
+			then
+				// is it possible ??
+				false
+			else
+				//reshape.size.size
+			end
+		end
+		
+		
+		true	
+	end
+	
+	/**  
+	 * The number of columns of the paving matrix must be equal to the dimension of the 
+	 * repetition space and the number of columns of the fitting matrix must be equal to the 
+	 * dimension of the pattern.
+	 * reference MARTE 09-11-02, p530
+	 */
+	inv dimensions_2_TODO is do
+		true
+	end	
+		
+	// To be completed with the same two last constraints on self.tiler if it is specified
+	
+}

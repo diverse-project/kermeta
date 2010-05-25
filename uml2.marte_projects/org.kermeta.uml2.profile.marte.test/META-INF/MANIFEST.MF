@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test Plug-in for UML Marte profile
+Bundle-SymbolicName: org.kermeta.uml2.profile.marte.test
+Bundle-Version: 0.1.0
+Bundle-Activator: org.kermeta.uml2.profile.marte.test.Activator
+Bundle-Vendor: IRISA/INRIA
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy

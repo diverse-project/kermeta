@@ -1,0 +1,41 @@
+/* $Id:$ 
+ * Creation : February 22, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+package MARTE::MARTE_Foundations::Alloc;
+
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/UMLHelper4MARTE.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+
+require kermeta
+
+aspect class AllocateActivityGroup
+{
+
+	/** All Actions appearing in an AllocateActivityGroup will be the /suppliers (from) end of a single Allocate dependency.
+	* The element represented by the AllocateActivityGroup will be the /client (to) end of the same Allocate dependency.
+	* This allows for defining non functional property constraints applying to all contained actions.
+	* reference MARTE 09-02-11, p127
+	*/
+	inv allocate_group is do
+	
+		true
+		
+		/*
+		if self.base_Abstraction.supplier.forAllCpl{e1, e2 | e1.isInstanceOf(uml::ActivityNode) and
+			e2.isInstanceOf(uml::ActivityNode) and
+			e1.asType(uml::ActivityNode).inPartition.select{p|p.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_Foundations::Alloc::AllocateActivityGroup)}}.one ==
+			e2.asType(uml::ActivityNode).inPartition.select{p|p.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_Foundations::Alloc::AllocateActivityGroup)}}.one
+			}
+		then
+			self.base_Abstraction.supplier.one.asType(uml::ActivityNode).inPartition.select{p|p.getStereotypesByOppositeAspect.exists{st|st.isInstanceOf(MARTE::MARTE_Foundations::Alloc::AllocateActivityGroup)}}.one.represents ==
+			self.base_Abstraction.client.one
+		end 
+		*/
+	end
+	 
+}

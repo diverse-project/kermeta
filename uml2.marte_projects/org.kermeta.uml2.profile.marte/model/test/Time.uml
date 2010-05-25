@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Time="http://MARTE.MARTE_Foundations/schemas/Time/_AzyrAJ1HEd6zgsjJ8hkrLg/14" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http://MARTE.MARTE_Foundations/schemas/Time/_AzyrAJ1HEd6zgsjJ8hkrLg/14 ../ecore/marte_papyrus_1.12.3/MARTE.profile.uml#_A1R4wJ1HEd6zgsjJ8hkrLg">
+  <uml:Model xmi:id="_rYAXgChyEd-Dm93A4FKcRA" name="Time">
+    <packageImport xmi:id="_rYAXgShyEd-Dm93A4FKcRA">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_tcA2oChyEd-Dm93A4FKcRA" name="Time">
+      <ownedRule xmi:id="_Xyp0cCrWEd-I3Pt7qb6U-A" name="Constraint0">
+        <specification xmi:type="uml:LiteralString" xmi:id="_Y1Fh0CrWEd-I3Pt7qb6U-A" name="constraintBody" value="sdfgsdfg"/>
+      </ownedRule>
+      <packagedElement xmi:type="uml:Class" xmi:id="_uJoxoChyEd-Dm93A4FKcRA" name="Chrono"/>
+      <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_9o-0gChyEd-Dm93A4FKcRA" name="Clock1" visibility="package" classifier="_uJoxoChyEd-Dm93A4FKcRA"/>
+      <profileApplication xmi:id="_5S3v4ChyEd-Dm93A4FKcRA">
+        <eAnnotations xmi:id="_5S4W8ChyEd-Dm93A4FKcRA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="../ecore/marte_papyrus_1.12.3/MARTE.profile.uml#_A1R4wJ1HEd6zgsjJ8hkrLg"/>
+        </eAnnotations>
+        <appliedProfile href="../ecore/marte_papyrus_1.12.3/MARTE.profile.uml#_WStkoAPMEdyuUt-4qHuVvQ"/>
+      </profileApplication>
+    </packagedElement>
+    <profileApplication xmi:id="_rYAXgihyEd-Dm93A4FKcRA">
+      <eAnnotations xmi:id="_rYAXgyhyEd-Dm93A4FKcRA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/schemas/Standard/1#/"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <Time:ClockType xmi:id="_8CD6AChyEd-Dm93A4FKcRA" base_Class="_uJoxoChyEd-Dm93A4FKcRA"/>
+  <Time:Clock xmi:id="_F2qncCq_Ed-MgfweFPJRaw" base_InstanceSpecification="_9o-0gChyEd-Dm93A4FKcRA" type="_8CD6AChyEd-Dm93A4FKcRA"/>
+  <Time:TimedDomain xmi:id="_Gbj0gCrQEd-I3Pt7qb6U-A" base_Namespace="_tcA2oChyEd-Dm93A4FKcRA"/>
+  <Time:ClockConstraint xmi:id="_icNNECrWEd-I3Pt7qb6U-A" base_Constraint="_Xyp0cCrWEd-I3Pt7qb6U-A"/>
+</xmi:XMI>

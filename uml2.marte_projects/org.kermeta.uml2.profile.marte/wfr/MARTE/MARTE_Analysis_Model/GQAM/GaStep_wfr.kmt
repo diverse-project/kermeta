@@ -1,0 +1,36 @@
+/* $Id:$ 
+ * Creation : August 5, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            gperroui
+ */
+
+package MARTE::MARTE_AnalysisModel::GQAM;
+require kermeta
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+
+
+
+aspect class GaStep
+{
+	/**
+	* [1] the elements of the ordered lists servDemand and servCount sorrespond, element to element.
+	* reference MARTE 09-11-02, p307 (bad metamodel design see doc) 
+	*/
+	inv correspondingElements is do
+		true
+	end
+
+	/**
+	* [2] a composite Step (with the behavior association defined) cannot have a host or concur association.
+	* reference MARTE 09-11-02, p307
+	*/
+	inv composImpliesnoHostorConcur is do
+		if not self.behavior.isVoid then
+			self.concurRes.isVoid and self.host.isVoid
+		end
+	end
+	
+}

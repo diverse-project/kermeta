@@ -1,0 +1,62 @@
+/* $Id: UMLProfilesUtils.kmt,v 1.4 2008/09/18 21:42:44 gperroui Exp $
+ * Creation date: November 9, 2007
+ * License: EPL
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+
+
+
+package UMLProfileUtils;
+
+
+require kermeta
+// UMLMARTE.ecore contains everything needed...
+require "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore"
+require "platform:/resource/org.kermeta.uml2.profile.marte/dev/kmt/persistence/UMLResource.kmt"
+
+
+using kermeta::persistence
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::utils
+
+class LoadStoreMM
+{
+operation load(modelURI: String, metamodelURI: String): EMFResource is do 
+ var emf_store : EMFRepository init EMFRepository.new
+ emf_store.ignoreAllLoadErrors := false
+ var emf_res : EMFResource
+emf_res ?= emf_store.createResource(modelURI,metamodelURI)
+emf_res.load
+result := emf_res
+end
+
+operation loadUML(modelURI: String, metamodelURI: String): UMLResource is do 
+ var emf_store : EMFRepository init EMFRepository.new
+ emf_store.ignoreLoadErrorUnknownProperty := true
+ emf_store.ignoreLoadErrorUnknownMetaclass := true
+ var emf_res : UMLResource
+emf_res ?= emf_store.createUMLResource(modelURI,metamodelURI)
+emf_res.load
+result := emf_res
+end
+
+
+
+operation store(newModelURI: String,resource:EMFResource): Void is do
+resource.saveWithNewURI(newModelURI)
+end
+
+operation printMM(cl : Object, level : Integer): Void is do
+
+stdio.writeln(" metaClass name "  + cl.getMetaClass.name)
+cl.getMetaClass.ownedAttribute.each {att |stdio.writeln("Attribute Name: "+att.name +" Default Value"+ att.default) }
+cl.getMetaClass.ownedOperation.each {att |stdio.writeln("Operation Name: "+att.name) }
+stdio.writeln("============================================")
+end
+}
+
+
+

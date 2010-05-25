@@ -1,0 +1,1522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EPackage name="MARTE" nsURI="http://MARTE" nsPrefix="MARTE">
+    <eSubpackages name="MARTE_Foundations" nsURI="http://MARTE/MARTE_Foundations"
+        nsPrefix="MARTE_Foundations">
+      <eSubpackages name="NFPs" nsURI="http://MARTE/MARTE_Foundations/NFPs" nsPrefix="NFPs">
+        <eClassifiers xsi:type="ecore:EEnum" name="ConstraintKind">
+          <eLiterals name="required"/>
+          <eLiterals name="offered" value="1"/>
+          <eLiterals name="contract" value="2"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Nfp">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Unit">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="convFactor" eType="ecore:EDataType MARTE_Library.library.ecore#//MARTE_PrimitivesTypes/Real"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="offsetFactor" eType="ecore:EDataType MARTE_Library.library.ecore#//MARTE_PrimitivesTypes/Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="baseUnit" eType="#/0/MARTE_Foundations/NFPs/Unit"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_EnumerationLiteral"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//EnumerationLiteral"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="NfpConstraint">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#/0/MARTE_Foundations/NFPs/ConstraintKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Constraint"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Constraint"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="mode" upperBound="-1"
+              eType="#/0/MARTE_Foundations/CoreElements/Mode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="NfpType" eSuperTypes="#/0/MARTE_Annexes/VSL/DataTypes/TupleType">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="valueAttrib" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="unitAttrib" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="exprAttrib" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Dimension">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbol" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="baseDimension" upperBound="-1"
+              eType="#/0/MARTE_Foundations/NFPs/Dimension"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseExponent" upperBound="-1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Enumeration"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Enumeration"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="Time" nsURI="http://MARTE/MARTE_Foundations/Time" nsPrefix="Time">
+        <eClassifiers xsi:type="ecore:EClass" name="TimedDomain">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Namespace" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Namespace"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Clock">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="standard" eType="ecore:EEnum MARTE_Library.library.ecore#//TimeTypesLibrary/TimeStandardKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_InstanceSpecification"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//InstanceSpecification"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+              eType="#/0/MARTE_Foundations/Time/ClockType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="#/0/MARTE_Foundations/NFPs/Unit"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ClockType">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="nature" lowerBound="1"
+              eType="ecore:EEnum MARTE_Library.library.ecore#//TimeTypesLibrary/TimeNatureKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="unitType" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Enumeration"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLogical" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="resolAttr" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="maxValAttr" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="offsetAttr" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="getTime" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="setTime" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="indexToValue" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TimedElement" abstract="true">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="on" lowerBound="1"
+              upperBound="-1" eType="#/0/MARTE_Foundations/Time/Clock"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TimedValueSpecification" eSuperTypes="#/0/MARTE_Foundations/Time/TimedElement">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="interpretation" eType="ecore:EEnum MARTE_Library.library.ecore#//TimeTypesLibrary/TimeInterpretationKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_ValueSpecification"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//ValueSpecification"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TimedConstraint" eSuperTypes="#/0/MARTE_Foundations/NFPs/NfpConstraint #/0/MARTE_Foundations/Time/TimedElement">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="interpretation" eType="ecore:EEnum MARTE_Library.library.ecore#//TimeTypesLibrary/TimeInterpretationKind"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ClockConstraint" eSuperTypes="#/0/MARTE_Foundations/Time/TimedElement #/0/MARTE_Foundations/NFPs/NfpConstraint">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCoincidenceBased"
+              lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPrecedenceBased"
+              lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isChronometricBased"
+              lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TimedObservation" abstract="true"
+            eSuperTypes="#/0/MARTE_Foundations/Time/TimedElement"/>
+        <eClassifiers xsi:type="ecore:EClass" name="TimedInstantObservation" eSuperTypes="#/0/MARTE_Foundations/Time/TimedObservation">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="obsKind" eType="ecore:EEnum MARTE_Library.library.ecore#//TimeTypesLibrary/EventKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_TimeObservation"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TimeObservation"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TimedDurationObservation" eSuperTypes="#/0/MARTE_Foundations/Time/TimedObservation">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="obsKind" upperBound="2"
+              eType="ecore:EEnum MARTE_Library.library.ecore#//TimeTypesLibrary/EventKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_DurationObservation"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//DurationObservation"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TimedEvent" eSuperTypes="#/0/MARTE_Foundations/Time/TimedElement">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="repetition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_TimeEvent" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TimeEvent"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="every" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//ValueSpecification"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TimedProcessing" eSuperTypes="#/0/MARTE_Foundations/Time/TimedElement">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Action" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Action"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Behavior" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Behavior"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Message" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Message"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="duration" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//ValueSpecification"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="start" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Event"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="finish" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Event"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="GRM" nsURI="http://MARTE/MARTE_Foundations/GRM" nsPrefix="GRM">
+        <eClassifiers xsi:type="ecore:EClass" name="Resource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="resMult" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isProtected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isActive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_InstanceSpecification"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//InstanceSpecification"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Classifier"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Lifeline" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Lifeline"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_ConnectableElement"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//ConnectableElement"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="StorageResource" eSuperTypes="#/0/MARTE_Foundations/GRM/Resource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="elementSize" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CommunicationEndPoint" eSuperTypes="#/0/MARTE_Foundations/GRM/Resource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="packetSize" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SynchronizationResource" eSuperTypes="#/0/MARTE_Foundations/GRM/Resource"/>
+        <eClassifiers xsi:type="ecore:EClass" name="ConcurrencyResource" eSuperTypes="#/0/MARTE_Foundations/GRM/Resource"/>
+        <eClassifiers xsi:type="ecore:EClass" name="Scheduler" eSuperTypes="#/0/MARTE_Foundations/GRM/Resource">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPreemptible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="schedPolicy" eType="ecore:EEnum MARTE_Library.library.ecore#//GRM_BasicTypes/SchedPolicyKind"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherSchedPolicy"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//OpaqueExpression"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="processingUnits"
+              upperBound="-1" eType="#/0/MARTE_Foundations/GRM/ProcessingResource"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="host" eType="#/0/MARTE_Foundations/GRM/ComputingResource"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="protectedSharedRsources"
+              upperBound="-1" eType="#/0/MARTE_Foundations/GRM/MutualExclusionResource"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="schedulableResources"
+              upperBound="-1" eType="#/0/MARTE_Foundations/GRM/SchedulableResource"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="MutualExclusionResource" eSuperTypes="#/0/MARTE_Foundations/GRM/Resource">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="protectKind" eType="ecore:EEnum MARTE_Library.library.ecore#//GRM_BasicTypes/ProtectProtocolKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ceiling" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherProtectProtocol"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="scheduler" eType="#/0/MARTE_Foundations/GRM/Scheduler"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SecondaryScheduler" eSuperTypes="#/0/MARTE_Foundations/GRM/Scheduler">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="virtualProcessingUnits"
+              upperBound="-1" eType="#/0/MARTE_Foundations/GRM/SchedulableResource"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SchedulableResource" eSuperTypes="#/0/MARTE_Foundations/GRM/Resource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="schedParams" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//GRM_BasicTypes/SchedParameters"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="host" eType="#/0/MARTE_Foundations/GRM/Scheduler"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="dependentScheduler"
+              eType="#/0/MARTE_Foundations/GRM/SecondaryScheduler"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ProcessingResource" eSuperTypes="#/0/MARTE_Foundations/GRM/Resource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="speedFactor" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="mainScheduler" eType="#/0/MARTE_Foundations/GRM/Scheduler"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CommunicationMedia" eSuperTypes="#/0/MARTE_Foundations/GRM/ProcessingResource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="elementSize" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Connector" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Connector"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="transmMode" eType="ecore:EEnum MARTE_Library.library.ecore#//MARTE_DataTypes/TransmModeKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="blockT" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="packetT" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="capacity" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataTxRate"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ComputingResource" eSuperTypes="#/0/MARTE_Foundations/GRM/ProcessingResource"/>
+        <eClassifiers xsi:type="ecore:EClass" name="DeviceResource" eSuperTypes="#/0/MARTE_Foundations/GRM/ProcessingResource"/>
+        <eClassifiers xsi:type="ecore:EClass" name="TimingResource" eSuperTypes="#/0/MARTE_Foundations/GRM/Resource"/>
+        <eClassifiers xsi:type="ecore:EClass" name="ClockResource" eSuperTypes="#/0/MARTE_Foundations/GRM/TimingResource"/>
+        <eClassifiers xsi:type="ecore:EClass" name="TimerResource" eSuperTypes="#/0/MARTE_Foundations/GRM/TimingResource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="duration" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPeriodic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GrService">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#/0/MARTE_Foundations/GRM/Resource"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_ExecutionSpecification"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//ExecutionSpecification"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Behavior" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Behavior"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Collaboration"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Collaboration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_CollaborationUse"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//CollaborationUse"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Release" eSuperTypes="#/0/MARTE_Foundations/GRM/GrService"/>
+        <eClassifiers xsi:type="ecore:EClass" name="Acquire" eSuperTypes="#/0/MARTE_Foundations/GRM/GrService">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isBlocking" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ResourceUsage">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="execTime" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="allocatedMemory"
+              upperBound="-1" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="usedMemory" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="powerPeak" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Power"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="energy" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Energy"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="subUsage" upperBound="-1"
+              eType="#/0/MARTE_Foundations/GRM/ResourceUsage"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="usedResources" upperBound="-1"
+              eType="#/0/MARTE_Foundations/GRM/Resource"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="msgSize" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="Alloc" nsURI="http://MARTE/MARTE_Foundations/Alloc" nsPrefix="Alloc">
+        <eClassifiers xsi:type="ecore:EClass" name="Allocated">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="allocatedTo" upperBound="-1"
+              eType="#/0/MARTE_Foundations/Alloc/Allocated"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="allocatedFrom" upperBound="-1"
+              eType="#/0/MARTE_Foundations/Alloc/Allocated"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#/0/MARTE_Foundations/Alloc/AllocationEndKind"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="AllocationNature">
+          <eLiterals name="spatialDistribution"/>
+          <eLiterals name="timeScheduling" value="1"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="AllocationKind">
+          <eLiterals name="structural"/>
+          <eLiterals name="behavioral" value="1"/>
+          <eLiterals name="hybrid" value="2"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Allocate">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#/0/MARTE_Foundations/Alloc/AllocationKind"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="nature" eType="#/0/MARTE_Foundations/Alloc/AllocationNature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Abstraction"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Abstraction"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="impliedConstraint"
+              upperBound="-1" eType="#/0/MARTE_Foundations/NFPs/NfpConstraint"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="AllocateActivityGroup">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_ActivityPartition"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//ActivityPartition"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="NfpRefine">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Dependency"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Dependency"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" upperBound="-1"
+              eType="#/0/MARTE_Foundations/NFPs/NfpConstraint"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="AllocationEndKind">
+          <eLiterals name="undef"/>
+          <eLiterals name="application" value="1"/>
+          <eLiterals name="executionPlatform" value="2"/>
+          <eLiterals name="both" value="3"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Assign">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1"
+              eType="#/0/MARTE_Foundations/Alloc/AssignmentKind"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="nature" lowerBound="1"
+              eType="#/0/MARTE_Foundations/Alloc/AssignmentNature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="impliedConstraint"
+              upperBound="-1" eType="#/0/MARTE_Foundations/NFPs/NfpConstraint"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
+              upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Element"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1"
+              upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Element"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Comment" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Comment"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="AssignmentNature">
+          <eLiterals name="spatialDistribution"/>
+          <eLiterals name="timeScheduling" value="1"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="AssignmentKind">
+          <eLiterals name="structural"/>
+          <eLiterals name="behavioral" value="1"/>
+          <eLiterals name="hybrid" value="2"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="CoreElements" nsURI="http://MARTE/MARTE_Foundations/CoreElements"
+          nsPrefix="CoreElements">
+        <eClassifiers xsi:type="ecore:EClass" name="Mode">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_State" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//State"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ModeTransition">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Transition"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Transition"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ModeBehavior">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_StateMachine"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//StateMachine"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Configuration">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_StructuredClassifier"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//StructuredClassifier"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Package"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="mode" upperBound="-1"
+              eType="#/0/MARTE_Foundations/CoreElements/Mode"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="MARTE_DesignModel" nsURI="http://MARTE/MARTE_DesignModel"
+        nsPrefix="MARTE_DesignModel">
+      <eSubpackages name="HLAM" nsURI="http://MARTE/MARTE_DesignModel/HLAM" nsPrefix="HLAM">
+        <eClassifiers xsi:type="ecore:EClass" name="RtUnit">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDynamic" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMain" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="srPoolSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="srPoolPolicy" eType="#/0/MARTE_DesignModel/HLAM/PoolMgtPolicyKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="srPoolWaitingTime"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="operationalMode"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Behavior"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="main" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="memorySize" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioredClassifier"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioredClassifier"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="queueSchedPolicy"
+              eType="ecore:EEnum MARTE_Library.library.ecore#//GRM_BasicTypes/SchedPolicyKind"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="queueSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="msgMaxSize" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="PpUnit">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="concPolicy" eType="#/0/MARTE_DesignModel/HLAM/CallConcurrencyKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="memorySize" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioredClassifier"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioredClassifier"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="CallConcurrencyKind">
+          <eLiterals name="sequential"/>
+          <eLiterals name="guarded" value="1"/>
+          <eLiterals name="concurrent" value="2"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="PoolMgtPolicyKind">
+          <eLiterals name="infiniteWait"/>
+          <eLiterals name="timedWait" value="1"/>
+          <eLiterals name="dynamic" value="2"/>
+          <eLiterals name="exception" value="3"/>
+          <eLiterals name="other" value="4"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="RtFeature">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Message" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Message"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Signal" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Port" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_InvocationAction"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//InvocationAction"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="specification" lowerBound="1"
+              upperBound="-1" eType="#/0/MARTE_DesignModel/HLAM/RtSpecification"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="SynchronizationKind">
+          <eLiterals name="synchronous"/>
+          <eLiterals name="asynchronous" value="1"/>
+          <eLiterals name="delayedSynchronous" value="2"/>
+          <eLiterals name="rendezVous" value="3"/>
+          <eLiterals name="other" value="4"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="RtAction">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtomic" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="synchKind" eType="#/0/MARTE_DesignModel/HLAM/SynchronizationKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="msgSize" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_InvocationAction"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//InvocationAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="ExecutionKind">
+          <eLiterals name="deferred"/>
+          <eLiterals name="remoteImmediate" value="1"/>
+          <eLiterals name="localImmediate" value="2"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="ConcurrencyKind">
+          <eLiterals name="reader"/>
+          <eLiterals name="writer" value="1"/>
+          <eLiterals name="parallel" value="2"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="RtService">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="concPolicy" eType="#/0/MARTE_DesignModel/HLAM/ConcurrencyKind"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="exeKind" eType="#/0/MARTE_DesignModel/HLAM/ExecutionKind"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtomic" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="synchKind" eType="#/0/MARTE_DesignModel/HLAM/SynchronizationKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="RtSpecification">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="utility" eType="ecore:EClass MARTE_Library.library.ecore#//MARTE_DataTypes/UtilityType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="occKind" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/ArrivalPattern"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="tRef" eType="#/0/MARTE_Foundations/Time/TimedInstantObservation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="relDl" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="absDl" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DateTime"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="boundDl" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="rdTime" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="miss" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Percentage"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="priority" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Comment" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Comment"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="HRM" nsURI="http://MARTE/MARTE_DesignModel/HRM" nsPrefix="HRM">
+        <eSubpackages name="HwLogical" nsURI="http://MARTE/MARTE_DesignModel/HRM/HwLogical"
+            nsPrefix="HwLogical">
+          <eSubpackages name="HwComputing" nsURI="http://MARTE/MARTE_DesignModel/HRM/HwLogical/HwComputing"
+              nsPrefix="HwComputing">
+            <eClassifiers xsi:type="ecore:EEnum" name="ISA_Type">
+              <eLiterals name="RISC"/>
+              <eLiterals name="CISC" value="1"/>
+              <eLiterals name="VLIW" value="2"/>
+              <eLiterals name="SIMD" value="3"/>
+              <eLiterals name="other" value="4"/>
+              <eLiterals name="undef" value="5"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EEnum" name="PLD_Technology">
+              <eLiterals name="SRAM"/>
+              <eLiterals name="antifuse" value="1"/>
+              <eLiterals name="flash" value="2"/>
+              <eLiterals name="other" value="3"/>
+              <eLiterals name="undef" value="4"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EEnum" name="PLD_Class">
+              <eLiterals name="symetricalArray"/>
+              <eLiterals name="rowBased" value="1"/>
+              <eLiterals name="seaOfGates" value="2"/>
+              <eLiterals name="hierarchicalPLD" value="3"/>
+              <eLiterals name="other" value="4"/>
+              <eLiterals name="undef" value="5"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="PLD_Organization">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="nbRows" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="nbColumns" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="class" eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwComputing/PLD_Class"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="HwProcessor" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwComputing/HwComputingResource">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="architecture"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="mips" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="ipc" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="nbCores" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="nbPipelines"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="nbStages" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="nbALUs" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="nbFPUs" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="ownedISAs" upperBound="-1"
+                  eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwComputing/HwISA"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="predictors" upperBound="-1"
+                  eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwComputing/HwBranchPredictor"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="caches" upperBound="-1"
+                  eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/HwCache"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMMUs" upperBound="-1"
+                  eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwStorageManager/HwMMU"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="HwComputingResource" eSuperTypes="#/0/MARTE_Foundations/GRM/ComputingResource #/0/MARTE_DesignModel/HRM/HwGeneral/HwResource">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="op_Frequencies"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//MARTE_DataTypes/NFP_FrequencyInterval"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="HwASIC" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwComputing/HwComputingResource"/>
+            <eClassifiers xsi:type="ecore:EClass" name="HwPLD" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwComputing/HwComputingResource">
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="technology" eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwComputing/PLD_Technology"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="organization"
+                  eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwComputing/PLD_Organization"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="nbLUTs" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="ndLUT_Inputs"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="nbFlipFlops"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="blocksRAM" upperBound="-1"
+                  eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/HwRAM"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="blocksComputing"
+                  upperBound="-1" eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwComputing/HwComputingResource"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="HwISA" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwGeneral/HwResource">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="family" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_String"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="inst_Width" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwComputing/ISA_Type"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="HwBranchPredictor" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwGeneral/HwResource"/>
+          </eSubpackages>
+          <eSubpackages name="HwCommunication" nsURI="http://MARTE/MARTE_DesignModel/HRM/HwLogical/HwCommunication"
+              nsPrefix="HwCommunication">
+            <eClassifiers xsi:type="ecore:EClass" name="HwCommunicationResource" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwGeneral/HwResource"/>
+            <eClassifiers xsi:type="ecore:EClass" name="HwArbiter" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwCommunicationResource">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="controlledMedias"
+                  upperBound="-1" eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwMedia"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="HwMedia" eSuperTypes="#/0/MARTE_Foundations/GRM/CommunicationMedia #/0/MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwCommunicationResource">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="bandWidth" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataTxRate"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="arbiters" upperBound="-1"
+                  eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwArbiter"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="HwEndPoint" eSuperTypes="#/0/MARTE_Foundations/GRM/CommunicationEndPoint #/0/MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwCommunicationResource">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="connectedTo"
+                  upperBound="-1" eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwMedia"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="HwBus" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwMedia">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="adressWidth"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="wordWidth" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="isSynchronous"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="isSerial" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="HwBridge" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwMedia">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="sides" upperBound="-1"
+                  eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwMedia"/>
+            </eClassifiers>
+          </eSubpackages>
+          <eSubpackages name="HwTiming" nsURI="http://MARTE/MARTE_DesignModel/HRM/HwLogical/HwTiming"
+              nsPrefix="HwTiming">
+            <eClassifiers xsi:type="ecore:EClass" name="HwTimingResource" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwGeneral/HwResource #/0/MARTE_Foundations/GRM/TimingResource"/>
+            <eClassifiers xsi:type="ecore:EClass" name="HwClock" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwTiming/HwTimingResource"/>
+            <eClassifiers xsi:type="ecore:EClass" name="HwTimer" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwTiming/HwTimingResource">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="nbCounters" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="counterWidth"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="inputClock" eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwTiming/HwClock"/>
+            </eClassifiers>
+          </eSubpackages>
+          <eSubpackages name="HwDevice" nsURI="http://MARTE/MARTE_DesignModel/HRM/HwLogical/HwDevice"
+              nsPrefix="HwDevice">
+            <eClassifiers xsi:type="ecore:EClass" name="HwDevice" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwGeneral/HwResource #/0/MARTE_Foundations/GRM/DeviceResource"/>
+            <eClassifiers xsi:type="ecore:EClass" name="HwI_O" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwDevice/HwDevice"/>
+            <eClassifiers xsi:type="ecore:EClass" name="HwSupport" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwDevice/HwDevice"/>
+            <eClassifiers xsi:type="ecore:EClass" name="HWActuator" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwDevice/HwI_O"/>
+            <eClassifiers xsi:type="ecore:EClass" name="HWSensor" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwDevice/HwI_O"/>
+          </eSubpackages>
+          <eSubpackages name="HwStorage" nsURI="http://MARTE/MARTE_DesignModel/HRM/HwLogical/HwStorage"
+              nsPrefix="HwStorage">
+            <eSubpackages name="HwMemory" nsURI="http://MARTE/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory"
+                nsPrefix="HwMemory">
+              <eClassifiers xsi:type="ecore:EClass" name="HwMemory" eSuperTypes="#/0/MARTE_Foundations/GRM/StorageResource #/0/MARTE_DesignModel/HRM/HwGeneral/HwResource">
+                <eStructuralFeatures xsi:type="ecore:EReference" name="memorySize"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="adressSize"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="timings" upperBound="-1"
+                    eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/Timing"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="throughput"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataTxRate"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EClass" name="Timing">
+                <eStructuralFeatures xsi:type="ecore:EReference" name="notation" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_String"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="description"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_String"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EEnum" name="Repl_Policy">
+                <eLiterals name="LRU"/>
+                <eLiterals name="NFU" value="1"/>
+                <eLiterals name="FIFO" value="2"/>
+                <eLiterals name="random" value="3"/>
+                <eLiterals name="other" value="4"/>
+                <eLiterals name="undef" value="5"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EEnum" name="WritePolicy">
+                <eLiterals name="writeBack"/>
+                <eLiterals name="writeThrough" value="1"/>
+                <eLiterals name="other" value="2"/>
+                <eLiterals name="undef" value="3"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EEnum" name="CacheType">
+                <eLiterals name="data"/>
+                <eLiterals name="instruction" value="1"/>
+                <eLiterals name="unified" value="2"/>
+                <eLiterals name="other" value="3"/>
+                <eLiterals name="undef" value="4"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EEnum" name="ROM_Type">
+                <eLiterals name="maskedROM"/>
+                <eLiterals name="EPROM" value="1"/>
+                <eLiterals name="OTP_EPROM" value="2"/>
+                <eLiterals name="EEPROM" value="3"/>
+                <eLiterals name="Flash" value="4"/>
+                <eLiterals name="other" value="5"/>
+                <eLiterals name="undef" value="6"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EClass" name="CacheStructure">
+                <eStructuralFeatures xsi:type="ecore:EReference" name="nbSets" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="blockSize"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="associativity"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EClass" name="MemoryOrganization">
+                <eStructuralFeatures xsi:type="ecore:EReference" name="nbRows" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="nbColumns"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="nbBanks" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="wordSize" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EClass" name="HwCache" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/HwMemory">
+                <eStructuralFeatures xsi:type="ecore:EReference" name="level" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+                <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/CacheType"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="structure"
+                    eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/CacheStructure"/>
+                <eStructuralFeatures xsi:type="ecore:EAttribute" name="repl_Policy"
+                    eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/Repl_Policy"/>
+                <eStructuralFeatures xsi:type="ecore:EAttribute" name="writePolicy"
+                    eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/WritePolicy"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EClass" name="HwRAM" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/HwMemory">
+                <eStructuralFeatures xsi:type="ecore:EReference" name="organization"
+                    eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/MemoryOrganization"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="isSynchronous"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="isStatic" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="isNonVolatile"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+                <eStructuralFeatures xsi:type="ecore:EAttribute" name="repl_Policy"
+                    eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/Repl_Policy"/>
+                <eStructuralFeatures xsi:type="ecore:EAttribute" name="writePolicy"
+                    eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/WritePolicy"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EClass" name="HwROM" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/HwMemory">
+                <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/ROM_Type"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="organization"
+                    eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/MemoryOrganization"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EClass" name="HwDrive" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/HwMemory">
+                <eStructuralFeatures xsi:type="ecore:EReference" name="sectorSize"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="buffer" eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/HwRAM"/>
+              </eClassifiers>
+            </eSubpackages>
+            <eSubpackages name="HwStorageManager" nsURI="http://MARTE/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwStorageManager"
+                nsPrefix="HwStorageManager">
+              <eClassifiers xsi:type="ecore:EClass" name="HwStorageManager" eSuperTypes="#/0/MARTE_Foundations/GRM/StorageResource #/0/MARTE_DesignModel/HRM/HwGeneral/HwResource">
+                <eStructuralFeatures xsi:type="ecore:EReference" name="managedMemories"
+                    upperBound="-1" eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/HwMemory"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EClass" name="HwDMA" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwStorageManager/HwStorageManager #/0/MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwArbiter">
+                <eStructuralFeatures xsi:type="ecore:EReference" name="nbChannels"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="transferWidth"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="drivenBy" upperBound="-1"
+                    eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwComputing/HwProcessor"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EClass" name="HwMMU" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwStorageManager/HwStorageManager">
+                <eStructuralFeatures xsi:type="ecore:EReference" name="virtualAddrSpace"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="physicalAddrSpace"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="memoryProtection"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="nbEntries"
+                    eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+                <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTLBs"
+                    upperBound="-1" eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwStorage/HwMemory/HwCache"/>
+              </eClassifiers>
+            </eSubpackages>
+          </eSubpackages>
+        </eSubpackages>
+        <eSubpackages name="HwPhysical" nsURI="http://MARTE/MARTE_DesignModel/HRM/HwPhysical"
+            nsPrefix="HwPhysical">
+          <eSubpackages name="HwLayout" nsURI="http://MARTE/MARTE_DesignModel/HRM/HwPhysical/HwLayout"
+              nsPrefix="HwLayout">
+            <eClassifiers xsi:type="ecore:EClass" name="HwComponent" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwGeneral/HwResource">
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#/0/MARTE_DesignModel/HRM/HwPhysical/HwLayout/ComponentKind"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="dimensions" upperBound="3"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Length"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="area" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Area"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="position" upperBound="2"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//MARTE_DataTypes/NFP_NaturalInterval"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="grid" upperBound="2"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="nbPins" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Natural"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="weight" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="price" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Price"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="r_Conditions"
+                  upperBound="-1" eType="#/0/MARTE_DesignModel/HRM/HwPhysical/HwLayout/Env_Condition"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="poweredServices"
+                  upperBound="-1" eType="#/0/MARTE_DesignModel/HRM/HwGeneral/HwResourceService"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="staticConsumption"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Power"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="staticDissipation"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Power"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="subComponents"
+                  upperBound="-1" eType="#/0/MARTE_DesignModel/HRM/HwPhysical/HwLayout/HwComponent"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EEnum" name="ComponentKind">
+              <eLiterals name="card"/>
+              <eLiterals name="channel" value="1"/>
+              <eLiterals name="chip" value="2"/>
+              <eLiterals name="port" value="3"/>
+              <eLiterals name="unit" value="4"/>
+              <eLiterals name="other" value="5"/>
+              <eLiterals name="undef" value="6"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EEnum" name="ConditionType">
+              <eLiterals name="temperature"/>
+              <eLiterals name="humidity" value="1"/>
+              <eLiterals name="altitude" value="2"/>
+              <eLiterals name="vibration" value="3"/>
+              <eLiterals name="shock" value="4"/>
+              <eLiterals name="other" value="5"/>
+              <eLiterals name="undef" value="6"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="Env_Condition">
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#/0/MARTE_DesignModel/HRM/HwPhysical/HwLayout/ConditionType"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#/0/MARTE_DesignModel/HRM/HwPhysical/HwLayout/ComponentState"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="description"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_String"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="range" eType="ecore:EClass MARTE_Library.library.ecore#//MARTE_DataTypes/Realnterval"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EEnum" name="ComponentState">
+              <eLiterals name="operating"/>
+              <eLiterals name="storage" value="1"/>
+              <eLiterals name="other" value="2"/>
+              <eLiterals name="undef" value="3"/>
+            </eClassifiers>
+          </eSubpackages>
+          <eSubpackages name="HwPower" nsURI="http://MARTE/MARTE_DesignModel/HRM/HwPhysical/HwPower"
+              nsPrefix="HwPower">
+            <eClassifiers xsi:type="ecore:EClass" name="HwPowerSupply" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwPhysical/HwLayout/HwComponent">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="suppliedPower"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Power"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="capacity" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Energy"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="HwCoolingSupply" eSuperTypes="#/0/MARTE_DesignModel/HRM/HwPhysical/HwLayout/HwComponent">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="coolingPower"
+                  eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Power"/>
+            </eClassifiers>
+          </eSubpackages>
+        </eSubpackages>
+        <eSubpackages name="HwGeneral" nsURI="http://MARTE/MARTE_DesignModel/HRM/HwGeneral"
+            nsPrefix="HwGeneral">
+          <eClassifiers xsi:type="ecore:EClass" name="HwResource" eSuperTypes="#/0/MARTE_Foundations/GRM/Resource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_String"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="p_HW_Services"
+                upperBound="-1" eType="#/0/MARTE_DesignModel/HRM/HwGeneral/HwResourceService"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="r_HW_Services"
+                upperBound="-1" eType="#/0/MARTE_DesignModel/HRM/HwGeneral/HwResourceService"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="ownedHW" upperBound="-1"
+                eType="#/0/MARTE_DesignModel/HRM/HwGeneral/HwResource"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="endPoints" upperBound="-1"
+                eType="#/0/MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwEndPoint"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="frequency" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Frequency"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwResourceService" eSuperTypes="#/0/MARTE_Foundations/GRM/GrService">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="consumption" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Power"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="dissipation" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Power"/>
+          </eClassifiers>
+        </eSubpackages>
+      </eSubpackages>
+      <eSubpackages name="SRM" nsURI="http://MARTE/MARTE_DesignModel/SRM" nsPrefix="SRM">
+        <eSubpackages name="SW_ResourceCore" nsURI="http://MARTE/MARTE_DesignModel/SRM/SW_ResourceCore"
+            nsPrefix="SW_ResourceCore">
+          <eClassifiers xsi:type="ecore:EClass" name="SwResource" abstract="true"
+              eSuperTypes="#/0/MARTE_Foundations/GRM/Resource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="identifierElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="stateElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="memorySizeFootprint"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="createServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="deleteServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="initializeServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="SwAccessService" eSuperTypes="#/0/MARTE_Foundations/GRM/GrService">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="isModifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="accessedElement"
+                lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="SW_Concurrency" nsURI="http://MARTE/MARTE_DesignModel/SRM/SW_Concurrency"
+            nsPrefix="SW_Concurrency">
+          <eClassifiers xsi:type="ecore:EEnum" name="InterruptKind">
+            <eLiterals name="HardwareInterruption"/>
+            <eLiterals name="ProcessorDetectedException" value="1"/>
+            <eLiterals name="ProgrammedException" value="2"/>
+            <eLiterals name="Undef" value="3"/>
+            <eLiterals name="Other" value="4"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="EntryPoint" eSuperTypes="#/0/MARTE_Foundations/Alloc/Allocate">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReentrant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="routine" lowerBound="1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="SwConcurrentResource" abstract="true"
+              eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_ResourceCore/SwResource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/ArrivalPattern"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="activationCapacity"
+                eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="entryPoints" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Element"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="adressSpace" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="periodElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="priorityElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="stackSizeElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="activateServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="enableConcurrencyServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="resumeServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="suspendServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="terminateServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="disableConcurrencyServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="shareDataResources"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="messageResources"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="mutualExclusionResources"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="notificationResources"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="heapSizeElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="InterruptResource" eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_Concurrency/SwConcurrentResource">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#/0/MARTE_DesignModel/SRM/SW_Concurrency/InterruptKind"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMaskable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="vectorElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="maskElements" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="routineConnectServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="routineDisconnectServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="SwSchedulableResource" eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_Concurrency/SwConcurrentResource #/0/MARTE_Foundations/GRM/SchedulableResource">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStaticSchedulingFeature"
+                eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPreemptable"
+                eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="schedulers" lowerBound="1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="deadlineElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="deadlineTypeElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="timeSliceElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="delayServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="joinServices" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="yieldServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="SwTimerResource" eSuperTypes="#/0/MARTE_Foundations/GRM/TimerResource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="durationElements"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="MemoryPartition" eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_ResourceCore/SwResource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="concurrentResources"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="memorySpaces" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="fork" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="exit" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="base_Namespace"
+                ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Namespace"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="Alarm" eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_Concurrency/InterruptResource">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="isWatchdog" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="timers" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="SW_Brokering" nsURI="http://MARTE/MARTE_DesignModel/SRM/SW_Brokering"
+            nsPrefix="SW_Brokering">
+          <eClassifiers xsi:type="ecore:EEnum" name="AccessPolicyKind">
+            <eLiterals name="Read"/>
+            <eLiterals name="Write" value="1"/>
+            <eLiterals name="ReadWrite" value="2"/>
+            <eLiterals name="Undef" value="3"/>
+            <eLiterals name="Other" value="4"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="DeviceBroker" eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_ResourceCore/SwResource">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessPolicy" eType="#/0/MARTE_DesignModel/SRM/SW_Brokering/AccessPolicyKind"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="isBuffered" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="devices" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="closeServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="controlServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="openServices" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="readServices" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="writeServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="MemoryBroker" eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_ResourceCore/SwResource">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessPolicy" eType="#/0/MARTE_DesignModel/SRM/SW_Brokering/AccessPolicyKind"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="memories" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="memoryBlockAdressElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="memoryBlockSizeElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="lockServices" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="unlockServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="mapServices" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="unMapServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="SW_Interaction" nsURI="http://MARTE/MARTE_DesignModel/SRM/SW_Interaction"
+            nsPrefix="SW_Interaction">
+          <eClassifiers xsi:type="ecore:EEnum" name="QueuePolicyKind">
+            <eLiterals name="FIFO"/>
+            <eLiterals name="LIFO" value="1"/>
+            <eLiterals name="Priority" value="2"/>
+            <eLiterals name="Undef" value="3"/>
+            <eLiterals name="Other" value="4"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="MessageResourceKind">
+            <eLiterals name="MessageQueue"/>
+            <eLiterals name="Pipe" value="1"/>
+            <eLiterals name="Blackboard" value="2"/>
+            <eLiterals name="Undef" value="3"/>
+            <eLiterals name="Other" value="4"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="NotificationKind">
+            <eLiterals name="Memorized"/>
+            <eLiterals name="Bounded" value="1"/>
+            <eLiterals name="Memoryless" value="2"/>
+            <eLiterals name="Undef" value="3"/>
+            <eLiterals name="Other" value="4"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="NotificationResourceKind">
+            <eLiterals name="Event"/>
+            <eLiterals name="Barrier" value="1"/>
+            <eLiterals name="Undef" value="2"/>
+            <eLiterals name="Other" value="3"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="MutualExclusionResourceKind">
+            <eLiterals name="BooleanSemaphore"/>
+            <eLiterals name="CountSemaphore" value="1"/>
+            <eLiterals name="Mutex" value="2"/>
+            <eLiterals name="Undef" value="3"/>
+            <eLiterals name="Other" value="4"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="ConcurrentAccessProtocolKind">
+            <eLiterals name="PIP"/>
+            <eLiterals name="PCP" value="1"/>
+            <eLiterals name="NoPreemption" value="2"/>
+            <eLiterals name="Undef" value="3"/>
+            <eLiterals name="Other" value="4"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="SwInteractionResource" abstract="true"
+              eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_ResourceCore/SwResource">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="isIntraMemoryPartitionInteraction"
+                eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="waitingQueuePolicy"
+                eType="#/0/MARTE_DesignModel/SRM/SW_Interaction/QueuePolicyKind"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="waitingQueueCapacity"
+                eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="waitingPolicyElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="SwCommunicationResource" abstract="true"
+              eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_Interaction/SwInteractionResource #/0/MARTE_Foundations/GRM/CommunicationMedia"/>
+          <eClassifiers xsi:type="ecore:EClass" name="SwSynchronizationResource" abstract="true"
+              eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_Interaction/SwInteractionResource #/0/MARTE_Foundations/GRM/SynchronizationResource"/>
+          <eClassifiers xsi:type="ecore:EClass" name="SharedDataComResource" eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_Interaction/SwCommunicationResource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="readServices" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="writeServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="MessageComResource" eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_Interaction/SwCommunicationResource">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="isFixedMessageSize"
+                eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="mechanism" eType="#/0/MARTE_DesignModel/SRM/SW_Interaction/MessageResourceKind"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="messageSizeElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="messageQueueCapacityElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageQueuePolicy"
+                eType="#/0/MARTE_DesignModel/SRM/SW_Interaction/QueuePolicyKind"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="sendServices" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="receiveServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="NotificationResource" eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_Interaction/SwSynchronizationResource">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="occurence" eType="#/0/MARTE_DesignModel/SRM/SW_Interaction/NotificationKind"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="mechanism" eType="#/0/MARTE_DesignModel/SRM/SW_Interaction/NotificationResourceKind"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="occurenceCountElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="maskElements" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="flushServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="signalServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="waitServices" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="clearServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="SwMutualExclusionResource" eSuperTypes="#/0/MARTE_DesignModel/SRM/SW_Interaction/SwSynchronizationResource #/0/MARTE_Foundations/GRM/MutualExclusionResource">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="mechanism" eType="#/0/MARTE_DesignModel/SRM/SW_Interaction/MutualExclusionResourceKind"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="concurrentAccessProtocol"
+                eType="#/0/MARTE_DesignModel/SRM/SW_Interaction/ConcurrentAccessProtocolKind"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="accessTokenElements"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TypedElement"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="releaseServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="acquireServices"
+                upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          </eClassifiers>
+        </eSubpackages>
+      </eSubpackages>
+      <eSubpackages name="GCM" nsURI="http://MARTE/MARTE_DesignModel/GCM" nsPrefix="GCM">
+        <eClassifiers xsi:type="ecore:EClass" name="FlowProperty">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
+              eType="#/0/MARTE_DesignModel/GCM/FlowDirectionKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="FlowDirectionKind">
+          <eLiterals name="in"/>
+          <eLiterals name="out" value="1"/>
+          <eLiterals name="inout" value="2"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="FlowPort">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtomic" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isConjugated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
+              eType="#/0/MARTE_DesignModel/GCM/FlowDirectionKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Port" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Port"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ClientServerPort">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Port" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Port"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="specificationKind"
+              lowerBound="1" eType="#/0/MARTE_DesignModel/GCM/PortSpecificationKind"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isConjugated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1"
+              eType="#/0/MARTE_DesignModel/GCM/ClientServerKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="provInterface" upperBound="-1"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="reqInterface" upperBound="-1"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="featuresSpec" eType="#/0/MARTE_DesignModel/GCM/ClientServerSpecification"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="FlowSpecification">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Interface" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ClientServerSpecification">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Interface" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="ClientServerKind">
+          <eLiterals name="required"/>
+          <eLiterals name="provided" value="1"/>
+          <eLiterals name="proreq" value="2"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ClientServerFeature">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1"
+              eType="#/0/MARTE_DesignModel/GCM/ClientServerKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="PortSpecificationKind">
+          <eLiterals name="atomic"/>
+          <eLiterals name="interfaceBased" value="1"/>
+          <eLiterals name="featureBased" value="2"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GCMTrigger">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Trigger" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Trigger"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Feature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GCMInvocationAction">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_InvocationAction"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//InvocationAction"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="onFeature" lowerBound="1"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Feature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="DataEvent">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_AnyReceiveEvent"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//AnyReceiveEvent"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="classifier" lowerBound="1"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="DataPool">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" lowerBound="1"
+              eType="#/0/MARTE_DesignModel/GCM/DataPoolOrderingKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="insertion" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Behavior"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="selection" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Behavior"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="DataPoolOrderingKind">
+          <eLiterals name="FIFO"/>
+          <eLiterals name="LIFO" value="1"/>
+          <eLiterals name="UserDefined" value="2"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="MARTE_AnalysisModel" nsURI="http://MARTE/MARTE_AnalysisModel"
+        nsPrefix="MARTE_AnalysisModel">
+      <eSubpackages name="GQAM" nsURI="http://MARTE/MARTE_AnalysisModel/GQAM" nsPrefix="GQAM">
+        <eClassifiers xsi:type="ecore:EClass" name="GaWorkloadGenerator">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="pop" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Behavior" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Behavior"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaEventTrace">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaWorkloadEvent">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/ArrivalPattern"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="generator" eType="#/0/MARTE_AnalysisModel/GQAM/GaWorkloadGenerator"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="trace" eType="#/0/MARTE_AnalysisModel/GQAM/GaEventTrace"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="#/0/MARTE_AnalysisModel/GQAM/GaScenario"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="timedEvent" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TimeEvent"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaScenario" eSuperTypes="#/0/MARTE_Foundations/GRM/ResourceUsage #/0/MARTE_Foundations/Time/TimedProcessing">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="cause" eType="#/0/MARTE_AnalysisModel/GQAM/GaWorkloadEvent"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="hostDemand" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="hostDemandOps" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="interOccT" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="throughput" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Frequency"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="respT" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="utilization" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="utilizationOnHost"
+              upperBound="-1" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="#/0/MARTE_AnalysisModel/GQAM/GaStep"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="timing" upperBound="-1"
+              eType="#/0/MARTE_AnalysisModel/GQAM/GaTimedObs"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaStep" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaScenario">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isAtomic" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="blockT" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="rep" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="prob" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="priority" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="concurRes" eType="#/0/MARTE_Foundations/GRM/SchedulableResource"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="host" eType="#/0/MARTE_AnalysisModel/GQAM/GaExecHost"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="servDemand" upperBound="-1"
+              eType="#/0/MARTE_AnalysisModel/GQAM/GaRequestedService"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="servCount" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" eType="#/0/MARTE_AnalysisModel/GQAM/GaScenario"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="selfDelay" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaRequestedService" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaStep">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Operation" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Operation"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaCommStep" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaStep"/>
+        <eClassifiers xsi:type="ecore:EClass" name="GaAcqStep" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaStep">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="acqRes" eType="#/0/MARTE_Foundations/GRM/Resource"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="resUnits" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaRelStep" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaStep">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="relRes" eType="#/0/MARTE_Foundations/GRM/Resource"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="resUnits" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaTimedObs" eSuperTypes="#/0/MARTE_Foundations/NFPs/NfpConstraint">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="laxity" eType="#/0/MARTE_AnalysisModel/GQAM/LaxityKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="startObs" upperBound="-1"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TimeObservation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="endObs" upperBound="-1"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//TimeObservation"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="LaxityKind">
+          <eLiterals name="hard"/>
+          <eLiterals name="soft" value="1"/>
+          <eLiterals name="other" value="2"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaLatencyObs" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaTimedObs">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="latency" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="miss" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="utility" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//MARTE_DataTypes/UtilityType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="maxJitter" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaExecHost" eSuperTypes="#/0/MARTE_Foundations/GRM/Scheduler #/0/MARTE_Foundations/GRM/ComputingResource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="commTxOvh" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="commRcvOvh" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="cntxtSwT" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clockOvh" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="schedPriRange" eType="ecore:EClass MARTE_Library.library.ecore#//MARTE_DataTypes/IntegerInterval"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="memSize" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="utilization" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="throughput" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Frequency"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaCommHost" eSuperTypes="#/0/MARTE_Foundations/GRM/Scheduler #/0/MARTE_Foundations/GRM/CommunicationMedia">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="throughput" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Frequency"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="utilization" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaCommChannel" eSuperTypes="#/0/MARTE_Foundations/GRM/SchedulableResource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="packetSize" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="utlization" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaWorkloadBehavior">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" upperBound="-1"
+              eType="#/0/MARTE_AnalysisModel/GQAM/GaScenario"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="demand" upperBound="-1"
+              eType="#/0/MARTE_AnalysisModel/GQAM/GaWorkloadEvent"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaAnalysisContext" eSuperTypes="#/0/MARTE_Annexes/VSL/Variables/ExpressionContext #/0/MARTE_Foundations/CoreElements/Configuration">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="context" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_String"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="workload" lowerBound="1"
+              upperBound="-1" eType="#/0/MARTE_AnalysisModel/GQAM/GaWorkloadBehavior"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="platform" lowerBound="1"
+              upperBound="-1" eType="#/0/MARTE_AnalysisModel/GQAM/GaResourcesPlatform"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GaResourcesPlatform">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
+              eType="#/0/MARTE_Foundations/GRM/Resource"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Classifier"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="SAM" nsURI="http://MARTE/MARTE_AnalysisModel/SAM" nsPrefix="SAM">
+        <eClassifiers xsi:type="ecore:EEnum" name="OptimallityCriterionKind">
+          <eLiterals name="meetHardDeadlines"/>
+          <eLiterals name="minimizeMissedDeadlines" value="1"/>
+          <eLiterals name="minimizedMeanTardiness" value="2"/>
+          <eLiterals name="undef" value="3"/>
+          <eLiterals name="other" value="4"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SaAnalysisContext" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaAnalysisContext">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isSched" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="optCriterion" eType="#/0/MARTE_AnalysisModel/SAM/OptimallityCriterionKind"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SaEndtoEndFlow">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isSched" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="schSlack" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="end2EndT" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="end2EndD" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="timing" upperBound="-1"
+              eType="#/0/MARTE_AnalysisModel/GQAM/GaTimedObs"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SaCommStep" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaCommStep">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="deadline" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="spareCap" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="schSlack" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SaStep" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaStep">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="deadline" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="spareCap" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="schSlack" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="preemptT" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="readyT" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="nonpreemptionBlocking"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="sharedRes" upperBound="-1"
+              eType="#/0/MARTE_AnalysisModel/SAM/SaSharedResource"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="selfSuspensionBlocking"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="numberSelfSuspensions"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SaSchedObs" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaTimedObs">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suspentions" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="blockT" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="overlaps" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SaSharedResource" eSuperTypes="#/0/MARTE_Foundations/GRM/MutualExclusionResource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="capacity" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isPreemp" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isConsum" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="acquisT" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="releaseT" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SaCommHost" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaCommHost">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isSched" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="schSlack" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SaExecHost" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaExecHost">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isSched" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="schSlack" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="schedUtiliz" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ISRswitchT" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ISRprioRange" eType="ecore:EClass MARTE_Library.library.ecore#//MARTE_DataTypes/IntegerInterval"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="PAM" nsURI="http://MARTE/MARTE_AnalysisModel/PAM" nsPrefix="PAM">
+        <eClassifiers xsi:type="ecore:EClass" name="PaStep" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaStep">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="noSync" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="extOpDemand" upperBound="-1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="extOpCount" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="behavDemand" upperBound="-1"
+              eType="#/0/MARTE_AnalysisModel/GQAM/GaScenario"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="behavCount" upperBound="-1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="PaRequestedStep" eSuperTypes="#/0/MARTE_AnalysisModel/PAM/PaStep #/0/MARTE_AnalysisModel/GQAM/GaRequestedService"/>
+        <eClassifiers xsi:type="ecore:EClass" name="PaCommStep" eSuperTypes="#/0/MARTE_AnalysisModel/PAM/PaStep #/0/MARTE_AnalysisModel/GQAM/GaCommStep"/>
+        <eClassifiers xsi:type="ecore:EClass" name="PaResPassStep" eSuperTypes="#/0/MARTE_AnalysisModel/GQAM/GaStep">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="resource" eType="#/0/MARTE_Foundations/GRM/Resource"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="resUnits" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="PaLogicalResource" eSuperTypes="#/0/MARTE_Foundations/GRM/Resource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="utilization" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="throughput" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Frequency"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="poolSize" lowerBound="1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="PaRunTInstance">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="poolSize" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Integer"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="unbddPool" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="instance" eType="#/0/MARTE_Foundations/GRM/SchedulableResource"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="host" eType="#/0/MARTE_AnalysisModel/GQAM/GaExecHost"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="utilization" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Real"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="throughput" eType="ecore:EClass MARTE_Library.library.ecore#//BasicNFP_Types/NFP_Frequency"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="MARTE_Annexes" nsURI="http://MARTE/MARTE_Annexes" nsPrefix="MARTE_Annexes">
+      <eSubpackages name="RSM" nsURI="http://MARTE/MARTE_Annexes/RSM" nsPrefix="RSM">
+        <eClassifiers xsi:type="ecore:EClass" name="LinkTopology" abstract="true">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Connector" ordered="false"
+              eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Connector"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="DefaultLink" eSuperTypes="#/0/MARTE_Annexes/RSM/LinkTopology"/>
+        <eClassifiers xsi:type="ecore:EClass" name="InterRepetition" eSuperTypes="#/0/MARTE_Annexes/RSM/LinkTopology">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="repetitionShapeDependence"
+              lowerBound="1" eType="ecore:EClass MARTE_Library.library.ecore#//MARTE_DataTypes/IntegerVector"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isModulo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Distribute" eSuperTypes="#/0/MARTE_Foundations/Alloc/Allocate">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="patternShape" lowerBound="1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//RS_Library/ShapeSpecification"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="repetitionSpace"
+              lowerBound="1" eType="ecore:EClass MARTE_Library.library.ecore#//RS_Library/ShapeSpecification"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="fromTiler" lowerBound="1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//RS_Library/TilerSpecification"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="toTiler" lowerBound="1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//RS_Library/TilerSpecification"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Reshape" eSuperTypes="#/0/MARTE_Annexes/RSM/LinkTopology">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="patternShape" lowerBound="1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//RS_Library/ShapeSpecification"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="repetitonShape" lowerBound="1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//RS_Library/ShapeSpecification"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Tiler" eSuperTypes="#/0/MARTE_Annexes/RSM/LinkTopology">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="origin" eType="ecore:EClass MARTE_Library.library.ecore#//MARTE_DataTypes/IntegerVector"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="paving" eType="ecore:EClass MARTE_Library.library.ecore#//MARTE_DataTypes/IntegerMatrix"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="fitting" eType="ecore:EClass MARTE_Library.library.ecore#//MARTE_DataTypes/IntegerMatrix"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="tiler" eType="ecore:EClass MARTE_Library.library.ecore#//RS_Library/TilerSpecification"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_ConnectorEnd"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//ConnectorEnd"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Shaped">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="shape" lowerBound="1"
+              eType="ecore:EClass MARTE_Library.library.ecore#//RS_Library/ShapeSpecification"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_MultiplicityElement"
+              ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//MultiplicityElement"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="VSL" nsURI="http://MARTE/MARTE_Annexes/VSL" nsPrefix="VSL">
+        <eSubpackages name="DataTypes" nsURI="http://MARTE/MARTE_Annexes/VSL/DataTypes"
+            nsPrefix="DataTypes">
+          <eClassifiers xsi:type="ecore:EClass" name="BoundedSubtype">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="baseType" lowerBound="1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="minValue" lowerBound="1"
+                eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxValue" lowerBound="1"
+                eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMinOpen" lowerBound="1"
+                eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMaxOpen" lowerBound="1"
+                eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="base_DataType"
+                ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//DataType"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="IntervalType">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="intervalAttrib"
+                lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="base_DataType"
+                ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//DataType"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="CollectionType">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="collectionAttrib"
+                lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="base_DataType"
+                ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//DataType"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="TupleType">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="tupleAttrib" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="base_DataType"
+                ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//DataType"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="ChoiceType">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="choiceAttrib" upperBound="-1"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="defaultAttrib"
+                eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="base_DataType"
+                ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//DataType"/>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="Variables" nsURI="http://MARTE/MARTE_Annexes/VSL/Variables"
+            nsPrefix="Variables">
+          <eClassifiers xsi:type="ecore:EEnum" name="VariableDirectionKind">
+            <eLiterals name="in"/>
+            <eLiterals name="out" value="1"/>
+            <eLiterals name="inout" value="2"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="Var">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="dir" eType="#/0/MARTE_Annexes/VSL/Variables/VariableDirectionKind"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property"
+                ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="ExpressionContext">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+                ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement"/>
+          </eClassifiers>
+        </eSubpackages>
+      </eSubpackages>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EClass name="SchedulableResource"/>
+</xmi:XMI>

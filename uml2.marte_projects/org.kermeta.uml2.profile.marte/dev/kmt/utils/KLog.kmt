@@ -1,0 +1,32 @@
+/* $Id: KLog.kmt,v 1.2 2008/03/10 15:22:08 gperroui Exp $
+ * Creation date: December 23, 2007
+ * License: EPL
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+@mainClass "UMLProfileUtils::KLogger"
+@mainOperation "print"
+
+
+package UMLProfileUtils; 
+ 
+require kermeta
+using kermeta::standard
+using kermeta::io
+
+class KLogger
+{
+
+	attribute tracingEnabled : Boolean 
+	
+	operation print(message : String) : Void is do 
+		if tracingEnabled then
+			stdio.writeln("KLog ::: " + message)
+		end
+	end
+
+	operation enableLog(b: Boolean): Void is do
+		tracingEnabled := b
+	end
+
+}

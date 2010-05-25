@@ -1,0 +1,27 @@
+/* $Id: $
+ * Creation date: May 29, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package MARTE::MARTE_Foundations::GRM;
+
+
+require kermeta
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+//require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
+
+aspect class SchedulableResource
+{
+	/**
+	* The policy used by the scheduler (host) must be compatible with the scheduling parameters (schedparams) of the
+	* schedulable resource.
+	* reference MARTE 09-02-11, p111
+	*/
+	@Marte "SchedulableResource 1"
+	@implemented "no"
+	inv compatPolicy is do
+		true
+	end
+}

@@ -1,0 +1,20 @@
+/* $Id:$ 
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  :  
+ *            Didier Vojtisek 
+ */
+package MARTE::MARTE_DesignModel::SRM::SW_Concurrency;
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/MemoryPartition_UMLAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+//require "http://MARTE"
+
+using kermeta::standard
+aspect class MemoryPartition{
+   /**
+    * if != void, this stereotype is applied to this base_Namespace
+    */
+    reference base_Namespace : uml::Namespace#stereotypes_MemoryPartition
+}

@@ -1,0 +1,20 @@
+/* $Id:$ 
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  :  
+ *            Didier Vojtisek 
+ */
+package MARTE::MARTE_Annexes::VSL::DataTypes;
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/IntervalType_UMLAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+//require "http://MARTE"
+
+using kermeta::standard
+aspect class IntervalType{
+   /**
+    * if != void, this stereotype is applied to this base_DataType
+    */
+    reference base_DataType : uml::DataType#stereotypes_IntervalType
+}

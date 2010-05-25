@@ -1,0 +1,21 @@
+/* $Id:$ 
+ * Creation : March 2, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+package MARTE::MARTE_Annexes::RSM;
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Reshape_UMLAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+
+aspect class Reshape
+{
+   /**
+    * if != void, this stereotype is applied to this base_ConnectorEnd
+    */
+    reference base_Connector : uml::Connector#stereotypes_Reshape
+
+}

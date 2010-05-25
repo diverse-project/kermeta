@@ -1,0 +1,37 @@
+/* $Id: $
+ * Creation date: June 11, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package MARTE::MARTE_DesignModel::HRM::HwLogical::HwStorage::HwMemory;
+require "../../../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+using kermeta::standard
+
+aspect class HwCache
+{
+	/**
+	* memorySize is derived from structure attribute.
+	* reference MARTE 09-11-02, p259
+	* Not clear to me how this can be derived (see doc)
+	*/
+	inv memSize_derived_TODO is do
+		true
+	end
+	
+	/**
+	* adressSize is greater than the total cache entries number derived from the structure attribute.
+	* reference MARTE 09-11-02, p259
+	*/
+	inv adressSize is do
+	
+		var dCacheSize: Real 
+		dCacheSize := self.structure.nbSets.~value.toReal * self.structure.blockSize.~value 
+					* self.structure.associativity.~value.toReal
+			
+		self.adressSize.~value > dCacheSize.toInteger
+
+	end
+	
+}

@@ -1,0 +1,31 @@
+/* $Id:$ 
+ * Creation : September 22, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            gperroui
+ */
+
+package ecore;
+
+require kermeta
+// UMLMARTE.ecore contains everything needed...
+require "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore"
+
+using kermeta::standard
+using ecore
+
+aspect class ENamedElement 
+{
+operation getQualifiedName(): String[1..1] is do
+
+var elem : ENamedElement init self
+		result := self.name
+		from elem ?= elem.container
+		until elem == void 
+		loop
+			result := elem.name + "::" + result
+			elem ?= elem.container
+		end
+	end	
+}

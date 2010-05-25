@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="MARTE_Library"
+    nsURI="http://MARTE_Library" nsPrefix="MARTE_Library">
+  <eSubpackages name="MARTE_PrimitivesTypes" nsURI="http://MARTE_Library/MARTE_PrimitivesTypes"
+      nsPrefix="MARTE_PrimitivesTypes">
+    <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="java.lang.Float"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Float"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="DateTime" instanceClassName="java.lang.String"/>
+  </eSubpackages>
+  <eSubpackages name="MeasurementUnits" nsURI="http://MARTE_Library/MeasurementUnits"
+      nsPrefix="MeasurementUnits">
+    <eClassifiers xsi:type="ecore:EEnum" name="TimeUnitKind">
+      <eLiterals name="s"/>
+      <eLiterals name="tick" value="1"/>
+      <eLiterals name="ms" value="2"/>
+      <eLiterals name="us" value="3"/>
+      <eLiterals name="min" value="4"/>
+      <eLiterals name="hrs" value="5"/>
+      <eLiterals name="dys" value="6"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="PowerUnitKind">
+      <eLiterals name="W"/>
+      <eLiterals name="mW" value="1"/>
+      <eLiterals name="KW" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="FrequencyUnitKind">
+      <eLiterals name="Hz"/>
+      <eLiterals name="KHz" value="1"/>
+      <eLiterals name="MHz" value="2"/>
+      <eLiterals name="GHz" value="3"/>
+      <eLiterals name="rpm" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="DataSizeUnitKind">
+      <eLiterals name="bits"/>
+      <eLiterals name="Bytes" value="1"/>
+      <eLiterals name="KB" value="2"/>
+      <eLiterals name="MB" value="3"/>
+      <eLiterals name="GB" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="DataTxRateUnitKind">
+      <eLiterals name="b_per_s"/>
+      <eLiterals name="Kb_per_s" value="1"/>
+      <eLiterals name="Mb_per_s" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="EnergyUnitKind">
+      <eLiterals name="J"/>
+      <eLiterals name="KJ" value="1"/>
+      <eLiterals name="Wh" value="2"/>
+      <eLiterals name="KWh" value="3"/>
+      <eLiterals name="mWh" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="LengthUnitKind">
+      <eLiterals name="m"/>
+      <eLiterals name="cm" value="1"/>
+      <eLiterals name="mm" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="AreaUnitKind">
+      <eLiterals name="mm2"/>
+      <eLiterals name="um2" value="1"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="GRM_BasicTypes" nsURI="http://MARTE_Library/GRM_BasicTypes"
+      nsPrefix="GRM_BasicTypes">
+    <eClassifiers xsi:type="ecore:EClass" name="EDFParameters">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="deadline" eType="#//BasicNFP_Types/NFP_Duration"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="SchedPolicyKind">
+      <eLiterals name="EarliestDeadlineFirst"/>
+      <eLiterals name="FIFO" value="1"/>
+      <eLiterals name="FixedPriority" value="2"/>
+      <eLiterals name="LeastLaxityFirst" value="3"/>
+      <eLiterals name="RoundRobin" value="4"/>
+      <eLiterals name="TimeTableDriven" value="5"/>
+      <eLiterals name="Undef" value="6"/>
+      <eLiterals name="Other" value="7"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ProtectProtocolKind">
+      <eLiterals name="FIFO"/>
+      <eLiterals name="NoPreemption" value="1"/>
+      <eLiterals name="PriorityCeiling" value="2"/>
+      <eLiterals name="PriorityInheritance" value="3"/>
+      <eLiterals name="StackBased" value="4"/>
+      <eLiterals name="Undef" value="5"/>
+      <eLiterals name="Other" value="6"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="PeriodicServerKind">
+      <eLiterals name="Sporadic"/>
+      <eLiterals name="Deferrable" value="1"/>
+      <eLiterals name="Undef" value="2"/>
+      <eLiterals name="Other" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SchedParameters">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="edf" eType="#//GRM_BasicTypes/EDFParameters"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fp" eType="#//GRM_BasicTypes/FixedPriorityParameters"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="pooling" eType="#//GRM_BasicTypes/PoolingParameters"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="server" eType="#//GRM_BasicTypes/PeriodicServerParameters"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FixedPriorityParameters">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PeriodicServerParameters" eSuperTypes="#//GRM_BasicTypes/FixedPriorityParameters">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//GRM_BasicTypes/PeriodicServerKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="backgroundPriority" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initialBudget" eType="#//BasicNFP_Types/NFP_Duration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="replenishPeriod" eType="#//BasicNFP_Types/NFP_Duration"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxPendingReplenish"
+          eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PoolingParameters" eSuperTypes="#//GRM_BasicTypes/FixedPriorityParameters">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="period" eType="#//BasicNFP_Types/NFP_Duration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="overhead" upperBound="-1"
+          eType="#//BasicNFP_Types/NFP_Duration"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="MARTE_DataTypes" nsURI="http://MARTE_Library/MARTE_DataTypes"
+      nsPrefix="MARTE_DataTypes">
+    <eClassifiers xsi:type="ecore:EClass" name="IntegerVector">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="vectorElem" upperBound="-1"
+          eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IntegerMatrix">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="matrixElem" upperBound="-1"
+          eType="#//MARTE_DataTypes/IntegerVector"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="VSL_Expression" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IntegerInterval">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="bound" lowerBound="2"
+          upperBound="2" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="TransmModeKind">
+      <eLiterals name="simplex"/>
+      <eLiterals name="halfDuplex" value="1"/>
+      <eLiterals name="fullDuplex" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UtilityType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Array">
+      <eTypeParameters name="T"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="vectorElement" upperBound="-1">
+        <eGenericType eTypeParameter="#//MARTE_DataTypes/Array/T"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Realnterval">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="bound" lowerBound="2"
+          upperBound="2" eType="#//MARTE_PrimitivesTypes/Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_FrequencyInterval">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bound" lowerBound="2"
+          upperBound="2" eType="#//BasicNFP_Types/NFP_Frequency"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Interval">
+      <eTypeParameters name="T"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bound" lowerBound="2"
+          upperBound="2">
+        <eGenericType eTypeParameter="#//MARTE_DataTypes/Interval/T"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_NaturalInterval">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bound" lowerBound="2"
+          upperBound="2" eType="#//BasicNFP_Types/NFP_Natural"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="BasicNFP_Types" nsURI="http://MARTE_Library/BasicNFP_Types"
+      nsPrefix="BasicNFP_Types">
+    <eClassifiers xsi:type="ecore:EEnum" name="SourceKind">
+      <eLiterals name="est"/>
+      <eLiterals name="meas" value="1"/>
+      <eLiterals name="calc" value="2"/>
+      <eLiterals name="req" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="DirectionKind">
+      <eLiterals name="incr"/>
+      <eLiterals name="decr" value="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="StatisticalQualifierKind">
+      <eLiterals name="max"/>
+      <eLiterals name="min" value="1"/>
+      <eLiterals name="mean" value="2"/>
+      <eLiterals name="range" value="3"/>
+      <eLiterals name="percent" value="4"/>
+      <eLiterals name="distrib" value="5"/>
+      <eLiterals name="determ" value="6"/>
+      <eLiterals name="other" value="7"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_CommonType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="expr" eType="#//MARTE_DataTypes/VSL_Expression"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="#//BasicNFP_Types/SourceKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="statQ" eType="#//BasicNFP_Types/StatisticalQualifierKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="dir" eType="#//BasicNFP_Types/DirectionKind"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_Boolean" eSuperTypes="#//BasicNFP_Types/NFP_CommonType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_Natural" eSuperTypes="#//BasicNFP_Types/NFP_CommonType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_String" eSuperTypes="#//BasicNFP_Types/NFP_CommonType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_Real" eSuperTypes="#//BasicNFP_Types/NFP_CommonType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//MARTE_PrimitivesTypes/Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_Integer" eSuperTypes="#//BasicNFP_Types/NFP_CommonType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_DateTime" eSuperTypes="#//BasicNFP_Types/NFP_CommonType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//MARTE_PrimitivesTypes/DateTime"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_Duration" eSuperTypes="#//BasicNFP_Types/NFP_Real">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//MeasurementUnits/TimeUnitKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="clock" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" eType="#//MARTE_PrimitivesTypes/Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_DataTxRate" eSuperTypes="#//BasicNFP_Types/NFP_Real">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//MeasurementUnits/DataTxRateUnitKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" eType="#//MARTE_PrimitivesTypes/Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_Frequency" eSuperTypes="#//BasicNFP_Types/NFP_Real">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//MeasurementUnits/FrequencyUnitKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" eType="#//MARTE_PrimitivesTypes/Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_Power" eSuperTypes="#//BasicNFP_Types/NFP_Real">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//MeasurementUnits/PowerUnitKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" eType="#//MARTE_PrimitivesTypes/Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_DataSize" eSuperTypes="#//BasicNFP_Types/NFP_Real">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//MeasurementUnits/DataSizeUnitKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" eType="#//MARTE_PrimitivesTypes/Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_Energy" eSuperTypes="#//BasicNFP_Types/NFP_Real">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//MeasurementUnits/EnergyUnitKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" eType="#//MARTE_PrimitivesTypes/Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_Length" eSuperTypes="#//BasicNFP_Types/NFP_Real">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//MeasurementUnits/LengthUnitKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" eType="#//MARTE_PrimitivesTypes/Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_Area" eSuperTypes="#//BasicNFP_Types/NFP_Real">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//MeasurementUnits/AreaUnitKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" eType="#//MARTE_PrimitivesTypes/Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ArrivalPattern">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="periodic" eType="#//BasicNFP_Types/PeriodicPattern"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="aperiodic" eType="#//BasicNFP_Types/AperiodicPattern"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="burst" eType="#//BasicNFP_Types/BurstPattern"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="irregular" eType="#//BasicNFP_Types/IrregularPattern"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="closed" eType="#//BasicNFP_Types/ClosedPattern"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sporadic" eType="#//BasicNFP_Types/SporadicPattern"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PeriodicPattern">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="period" eType="#//BasicNFP_Types/NFP_Duration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="jitter" eType="#//BasicNFP_Types/NFP_Duration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="phase" eType="#//BasicNFP_Types/NFP_Duration"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AperiodicPattern">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="distribution" eType="#//BasicNFP_Types/NFP_CommonType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ClosedPattern">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="population" eType="#//BasicNFP_Types/NFP_Integer"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="extDelay" eType="#//BasicNFP_Types/NFP_Duration"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SporadicPattern" eSuperTypes="#//BasicNFP_Types/AperiodicPattern">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="minInterarrival" eType="#//BasicNFP_Types/NFP_Duration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="maxInterarrival" eType="#//BasicNFP_Types/NFP_Duration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="jitter" eType="#//BasicNFP_Types/NFP_Duration"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BurstPattern" eSuperTypes="#//BasicNFP_Types/AperiodicPattern">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="minInterarrival" eType="#//BasicNFP_Types/NFP_Duration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="maxInterarrival" eType="#//BasicNFP_Types/NFP_Duration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="minEventInterval" eType="#//BasicNFP_Types/NFP_Duration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="maxEventInterval" eType="#//BasicNFP_Types/NFP_Duration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="burstSize" eType="#//BasicNFP_Types/NFP_Integer"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IrregularPattern" eSuperTypes="#//BasicNFP_Types/AperiodicPattern">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="phase" eType="#//BasicNFP_Types/NFP_Duration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="interarrivals" upperBound="-1"
+          eType="#//BasicNFP_Types/NFP_Duration"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_BoundedDuration" eSuperTypes="#//BasicNFP_Types/NFP_CommonType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="2"
+          eType="#//MARTE_PrimitivesTypes/Real"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//MeasurementUnits/TimeUnitKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="clock" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" eType="#//MARTE_PrimitivesTypes/Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFP_Percentage" eSuperTypes="#//BasicNFP_Types/NFP_Real">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="TimeTypesLibrary" nsURI="http://MARTE_Library/TimeTypesLibrary"
+      nsPrefix="TimeTypesLibrary">
+    <eClassifiers xsi:type="ecore:EEnum" name="TimeNatureKind">
+      <eLiterals name="discrete"/>
+      <eLiterals name="dense" value="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="TimeInterpretationKind">
+      <eLiterals name="duration"/>
+      <eLiterals name="instant" value="1"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="TimeLibrary" nsURI="http://MARTE_Library/TimeLibrary" nsPrefix="TimeLibrary">
+    <eClassifiers xsi:type="ecore:EClass" name="TimedValueType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//TimeLibrary/TUK"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//MARTE_PrimitivesTypes/Real"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="expr" eType="#//TimeLibrary/ClockedValueSpecification"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="onClock" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="ClockedValueSpecification" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="TimeUnitKind">
+      <eLiterals name="s"/>
+      <eLiterals name="ms" value="1"/>
+      <eLiterals name="us" value="2"/>
+      <eLiterals name="ns" value="3"/>
+      <eLiterals name="min" value="4"/>
+      <eLiterals name="hrs" value="5"/>
+      <eLiterals name="dys" value="6"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="TimeStandardKind">
+      <eLiterals name="TAI"/>
+      <eLiterals name="UT0" value="1"/>
+      <eLiterals name="UT1" value="2"/>
+      <eLiterals name="UTC" value="3"/>
+      <eLiterals name="Local" value="4"/>
+      <eLiterals name="TT" value="5"/>
+      <eLiterals name="TBD" value="6"/>
+      <eLiterals name="TCG" value="7"/>
+      <eLiterals name="TCB" value="8"/>
+      <eLiterals name="Sidereal" value="9"/>
+      <eLiterals name="GPS" value="10"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="LogicalTimeUnit">
+      <eLiterals name="tick"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="EventKind">
+      <eLiterals name="start"/>
+      <eLiterals name="finish" value="1"/>
+      <eLiterals name="send" value="2"/>
+      <eLiterals name="receive" value="3"/>
+      <eLiterals name="consume" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IdealClock"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="TUK"/>
+  </eSubpackages>
+  <eSubpackages name="RS_Library" nsURI="http://MARTE_Library/RS_Library" nsPrefix="RS_Library">
+    <eClassifiers xsi:type="ecore:EClass" name="TilerSpecification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="origin" eType="#//MARTE_DataTypes/IntegerVector"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="paving" lowerBound="1"
+          eType="#//MARTE_DataTypes/IntegerMatrix"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fitting" eType="#//MARTE_DataTypes/IntegerVector"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ShapeSpecification">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" upperBound="-1"
+          eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EInt"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

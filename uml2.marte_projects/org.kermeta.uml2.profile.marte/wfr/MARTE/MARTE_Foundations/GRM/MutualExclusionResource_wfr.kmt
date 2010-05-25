@@ -1,0 +1,38 @@
+/* $Id: $
+ * Creation date: April 30, 2008
+ * License:
+ * Copyright: Gilles Perrouin
+ * Authors:
+ */
+package MARTE::MARTE_Foundations::GRM;
+
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+//require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
+
+aspect class MutualExclusionResource
+{
+	/**
+	* The attribute isProtected inherited from Resource is always true.
+	* reference MARTE 09-02-11, p108
+	*/
+	@Marte "ComputingResource 1"
+	@implemented "yes"
+	inv isAlwaysProtected is do
+		self.isProtected
+	end
+	
+	/**
+	* The scheduling policy of the scheduler must be compatible to the kind of protectKind given to the
+    * MutualExclusionResource.
+	* reference MARTE 09-02-11, p108
+	*/
+	@Marte "MutualExclusionResource 2"
+	@implemented "no, unclear invariant"
+	inv incompatiblePolicy is do
+			//What does compatible mean ?
+		true
+	end		
+	
+}

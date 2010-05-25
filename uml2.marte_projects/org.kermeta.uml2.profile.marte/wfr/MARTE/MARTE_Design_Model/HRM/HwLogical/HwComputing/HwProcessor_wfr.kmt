@@ -1,0 +1,32 @@
+/* $Id: $
+ * Creation date: June 11, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+package MARTE::MARTE_DesignModel::HRM::HwLogical::HwComputing;
+require "../../../../../../model/ecore/MARTE.profile.ecore"
+require kermeta
+using kermeta::standard
+
+aspect class HwProcessor
+{
+	/**
+	* [15] architecture must derive from the inst_Width of the supportedISAs.
+	* reference MARTE 09-11-02, p269
+	*/
+	inv arch is do
+		var isaDataSize: Real init Real.new
+		self.ownedISAs.each{i|isaDataSize:= isaDataSize+ i.inst_Width.~value}
+		self.architecture.~value == isaDataSize
+	end	
+	
+	/**
+	* [16] ipc must derive from mips attribute and clock frequency.
+	* reference MARTE 09-11-02, p269
+	* lacks the precise formula to compute this...
+	*/
+	inv ipc_TODO is do
+		true
+	end
+}

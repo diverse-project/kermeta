@@ -1,0 +1,25 @@
+/* $Id: $
+ * Creation date: April 29, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+package MARTE::MARTE_Foundations::GRM;
+
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+
+aspect class Acquire
+{
+	/**
+	* The resource that owns the service must be a protected resource
+	* reference MARTE 09-02-11, p103
+	*/
+	@Marte "Acquire 1"
+	@implemented "yes"
+	inv owningResourceProtected is do
+		self.owner.isProtected
+	end
+}

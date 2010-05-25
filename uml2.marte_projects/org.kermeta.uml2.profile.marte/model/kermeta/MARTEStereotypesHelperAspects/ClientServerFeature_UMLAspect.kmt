@@ -1,0 +1,22 @@
+/* $Id:$ 
+ * Creation : February 23, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+package uml;
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/ClientServerFeature_StereotypeAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/profileHelpers/UMLStereotypeHelper.kmt"
+require "http://www.eclipse.org/uml2/3.0.0/UML" 
+
+using kermeta::standard
+aspect class BehavioralFeature{
+   /**
+    * List of the ClientServerFeature stereotypes applied to this Interface
+    * this is an internal back link to the Stereotypes used by the operation getStereotypesByOppositeAspect()
+    */
+    reference stereotypes_ClientServerFeature : MARTE::MARTE_DesignModel::GCM::ClientServerFeature[0..*]#base_BehavioralFeature
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Time="http://MARTE.MARTE_Foundations/schemas/Time/_AzyrAJ1HEd6zgsjJ8hkrLg/14" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http://MARTE.MARTE_Foundations/schemas/Time/_AzyrAJ1HEd6zgsjJ8hkrLg/14 ../../../../uml/marte_papyrus_1.12.3/MARTE.profile.uml#_A1R4wJ1HEd6zgsjJ8hkrLg">
+  <uml:Model xmi:id="_we_nME1YEd-W0Lft7K8A7w">
+    <packagedElement xmi:type="uml:Package" xmi:id="_x9HyEE1YEd-W0Lft7K8A7w" name="Package0">
+      <ownedRule xmi:id="_OXjLUE1ZEd-W0Lft7K8A7w"/>
+      <profileApplication xmi:id="_LQQDME1ZEd-W0Lft7K8A7w">
+        <eAnnotations xmi:id="_LQSfcE1ZEd-W0Lft7K8A7w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="../../../../uml/marte_papyrus_1.12.3/MARTE.profile.uml#_A1R4wJ1HEd6zgsjJ8hkrLg"/>
+        </eAnnotations>
+        <appliedProfile href="../../../../uml/marte_papyrus_1.12.3/MARTE.profile.uml#_WStkoAPMEdyuUt-4qHuVvQ"/>
+      </profileApplication>
+    </packagedElement>
+  </uml:Model>
+  <Time:ClockConstraint xmi:id="_QRDqoE1ZEd-W0Lft7K8A7w" base_Constraint="_OXjLUE1ZEd-W0Lft7K8A7w" isCoincidenceBased="dfqs" isPrecedenceBased="true" isChronometricBased="srtgqsdfg"/>
+</xmi:XMI>

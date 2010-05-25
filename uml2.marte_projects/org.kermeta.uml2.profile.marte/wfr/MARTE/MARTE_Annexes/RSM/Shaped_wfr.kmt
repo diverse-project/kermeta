@@ -1,0 +1,57 @@
+/* $Id:$ 
+ * Creation : March 2, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+ 
+package MARTE::MARTE_Annexes::RSM;
+
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+
+using kermeta::standard
+
+aspect class Shaped
+{
+
+	/** If both a multiplicity and its associated shape are specified, then the product of the 
+	 * elements of the sizes of all the dimensions must be equal to the value of the multiplicity property.
+	 * reference MARTE 09-11-02, p528
+	 */
+	inv multiplicity_shape is do
+	
+		if not(self.base_MultiplicityElement.isVoid) and not(self.shape.isVoid)
+		then
+			// compute the product
+			var product : Integer init 1
+			self.shape.size.each{elt | product := product * elt}
+			
+			// compare
+			self.base_MultiplicityElement.upper == product
+			
+		else
+			true
+		end
+	
+	end
+
+	/** A shaped stereotype can only be applied on an element with a fixed multiplicity, not an interval.
+	 * If the multiplicity of the element is *, then one of the dimensions of the shape has to be infinite.
+	 * reference MARTE 09-11-02, p528
+	 */
+	inv fixed_multiplicity is do
+		
+		if self.base_MultiplicityElement.upper=="*"
+		then
+			self.shape.size.exists{elt | elt=="*"}
+		else
+			self.base_MultiplicityElement.upper==self.base_MultiplicityElement.lower
+		end
+		
+		true
+	end
+	
+}

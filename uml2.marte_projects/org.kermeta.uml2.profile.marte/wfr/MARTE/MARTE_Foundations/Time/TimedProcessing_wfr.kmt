@@ -1,0 +1,27 @@
+/* $Id: $
+ * Creation date: April 28, 2008
+ * License:
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+package MARTE::MARTE_Foundations::Time;
+
+
+require kermeta
+require "../../../../model/ecore/MARTE.profile.ecore"
+
+
+aspect class TimedProcessing
+{
+	/**
+	* Not all three properties are empty.
+	* duration->notEmpty( ) or ( start->notEmpty( ) and finish->notEmpty( ) )
+	* reference: MARTE 09-11-02, p96
+	*/
+	@Marte "TimedProcessing 1"
+	@implemented "partially, Description and OCL inconsistent"
+	inv notAllPropEmpty is do
+		not self.duration.isVoid
+		or ( not(self.start.isVoid) and not(self.finish.isVoid) )
+	end
+}

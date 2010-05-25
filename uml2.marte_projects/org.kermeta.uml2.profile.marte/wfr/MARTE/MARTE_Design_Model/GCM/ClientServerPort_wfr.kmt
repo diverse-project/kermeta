@@ -1,0 +1,130 @@
+/* $Id:$ 
+ * Creation : February 22, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+
+
+
+package MARTE::MARTE_DesignModel::GCM;
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "http://www.eclipse.org/uml2/3.0.0/UML"
+
+require kermeta
+
+aspect class ClientServerPort
+{
+
+
+	// Invariant to be applied to uml::Connector ??
+
+	/** A conjugated port may be involved in only bidirectional connector, i.e., connector with 
+	 * exactly two connector ends.
+	 * reference MARTE 09-02-11, p151
+	 */
+	inv conjugated_port_TODO is do
+		if self.isConjugated
+		then
+			true
+		else
+			true
+		end
+	end
+
+	/** Interfaces contained in ClientServerPort.provInterface cannot be FlowSpecification or ClientServerSpecification.
+	 * reference MARTE 09-02-11, p151
+	 */
+	
+	inv provInterface_TODO is do
+		//self.reqInterface.each{int | int.specificationKind}
+		true
+	end 
+
+	/** Interfaces contained in ClientServerPort.reqInterface cannot be FlowSpecification or ClientServerSpecification.
+	 * reference MARTE 09-02-11, p151
+	 */
+	
+	inv reqInterface_TODO is do
+		//self.reqInterface.each{int | int.specificationKind}
+		true
+	end 
+
+	// specification.isEmpty probably means self.featuresSpec.isVoid
+	/** If ClientServerPort.specificationKind = atomic, then: 
+	 * NOT(Port::type.isEmpty) and Port::type instanceof Signal and
+	 * provInterface.isEmpty and reqInterface.isEmpty and specification.isEmpty.
+	 * reference MARTE 09-02-11, p151
+	 */
+	inv clientServerPort_specKind_atomic is do
+		
+		if self.specificationKind==PortSpecificationKind.atomic
+		then
+			not (self.base_Port.type.isVoid) and 
+			self.base_Port.isInstanceOf(uml::Signal) and
+			self.provInterface.isEmpty and
+			self.reqInterface.isEmpty and
+			self.featuresSpec.isVoid
+		else
+			true
+		end
+	end
+	
+	/** If ClientServerPort.specificationKind = interfaceBased, then: 
+	 * Port::type.isEmpty and 
+	 * NOT(provInterface.isEmpty and reqInterface.isEmpty) and 
+	 * specification.isEmpty.
+	 * reference MARTE 09-02-11, p151
+	 */
+	inv clientServerPort_specKind_interface is do
+		
+		if self.specificationKind==PortSpecificationKind.interfaceBased
+		then
+			self.base_Port.type.isVoid and
+			not (self.reqInterface.isEmpty and self.provInterface.isEmpty) and
+			self.featuresSpec.isVoid
+		else
+			true
+		end
+	end
+
+	/** If ClientServerPort.specificationKind = featureBased, then: 
+	 * Port::type.isEmpty and 
+	 * NOT(specification.isEmpty) and
+	 * provInterface.isEmpty and reqInterface.isEmpty.
+	 * reference MARTE 09-02-11, p151
+	 */
+	inv clientServerPort_specKind_featureBased is do
+		
+		if self.specificationKind==PortSpecificationKind.featureBased
+		then
+			self.base_Port.type.isVoid() and
+			not (self.featuresSpec.isVoid) and
+			self.provInterface.isEmpty and
+			self.reqInterface.isEmpty 
+		else
+			true
+		end
+	end
+
+	/** The ClientServerPort.kind property is only applicable to atomic ClientServerPorts.
+	 * reference MARTE 09-02-11, p151
+	 */	
+	inv clientServerPort_kind_for_atomic_TODO is do
+		true
+		// The ClientServerPort.kind property is mandatory ???
+		// This invariant is in contradiction 
+		// with the MARTE spec's definition of the property "kind" 
+	end
+	
+	/** The ClientServerPort.isConjugated property is only applicable to featureBased ClientServerPorts.
+	 * reference MARTE 09-02-11, p151
+	 */
+	inv clientServerPort_conjugated_for_featureBased is do
+		not (self.isConjugated and self.featuresSpec.isVoid)
+	end	
+
+}

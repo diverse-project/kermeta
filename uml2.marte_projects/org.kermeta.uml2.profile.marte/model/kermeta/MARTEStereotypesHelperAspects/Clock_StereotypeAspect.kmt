@@ -1,0 +1,24 @@
+/* $Id:$ 
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  :  
+ *            Didier Vojtisek 
+ */
+package MARTE::MARTE_Foundations::Time;
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/Clock_UMLAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+//require "http://MARTE"
+
+using kermeta::standard
+aspect class Clock{
+   /**
+    * if != void, this stereotype is applied to this base_InstanceSpecification
+    */
+    reference base_InstanceSpecification : uml::InstanceSpecification#stereotypes_Clock
+   /**
+    * if != void, this stereotype is applied to this base_Property
+    */
+    reference base_Property : uml::Property#stereotypes_Clock
+}

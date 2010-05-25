@@ -1,0 +1,82 @@
+/* $Id:$ 
+ * Creation : February 25, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            jfalcou
+ */
+
+package MARTE::MARTE_DesignModel::HLAM;
+
+require "../../../../model/ecore/MARTE.profile.ecore"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/rtFeature_UMLAspect.kmt"
+
+
+require kermeta
+
+aspect class RtSpecification
+{
+
+	/** 
+	 * The element owning this «RtSpecification» must be an element 
+	 * on which the stereotype «RtFeature» is applied.
+	 * reference MARTE 09-11-02, p188
+	 */
+	inv rtSpecification_implies_RtFeature is do
+	
+		self.base_Comment.owner.getStereotypesByOppositeAspect.exists{st | st.isInstanceOf(RtFeature)}
+	
+	end
+	 
+	/** If the owning «RtFeature» is not a port, the property annotatedElement (from Comment) 
+	 * must contain a reference to exactly one element (i.e., the «RtFeature» owning this 
+	 * «RtSpecification»)
+	 * reference MARTE 09-11-02, p188
+	 */
+	inv owningRtFeature_notAPort_annotatedElement is do
+		
+		if self.base_Comment.owner.isInstanceOf(uml::Port)
+		then
+			true
+		else
+			//exactly one element
+			if self.base_Comment.annotatedElement.size==1
+			then
+				// the element must be the onwning RtFeature
+				self.base_Comment.annotatedElement.one==self.base_Comment.owner
+			else
+				false
+			end
+			
+		end
+		
+	end	 
+	
+	/** If the owning «RtFeature» is a port, the property annotatedElement (from Comment) 
+	 * must not contain more than two references (i.e., the «RtFeature» owning this «RtSpecification», 
+	 * and the BehavioralFeature which is used as a context for the «RtSpecification»).
+	 * reference MARTE 09-11-02, p188
+	 */
+	inv owningRtFeature_port_annotatedElement is do
+		true
+	end
+
+	/** If the «RtFeature» owning this «RtSpecification» is a port, the property context of the 
+	 * «RtSpecification» associated with the «RtFeature» must be a feature that is provided or 
+	 * required by the port (see GCM chapter for details about different means of providing/requiring 
+	 * a feature).
+	 * reference MARTE 09-11-02, p188
+	 */	 
+	inv owningRtFeature_port_context is do
+		true
+	end
+
+	/** If the stereotype «RtFeature» is applied to a port, the property context of the «RtSpecification»
+	 * associated to the «RtFeature» can be empty only if the port is atomic (see GCM chapter).
+	 * reference MARTE 09-11-02, p189
+	 */	 
+	inv owningRtFeature_atomicPort_context is do
+		true
+	end
+	 
+}

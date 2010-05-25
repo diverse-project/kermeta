@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.kermeta.uml2.profile.marte.ui.contribution1"
+            nameFilter="*.uml"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               label="Model checking"
+               path="additions"
+               id="org.kermeta.checker.ui.menu">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="check UML MARTE constraints (Interpreted)"
+               class="org.kermeta.uml2.profile.marte.ui.popup.actions.CheckModelAction"
+               menubarPath="org.kermeta.checker.ui.menu/group1"
+               enablesFor="1"
+               id="org.kermeta.uml2.profile.marte.ui.checkUMLMarteAction">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="org.kermeta.uml2.profile.marte.ui.contribution2"
+            nameFilter="*.xmi"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               label="Model checking"
+               path="additions"
+               id="org.kermeta.checker.ui.menu">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="check UML MARTE constraints (Interpreted)"
+               class="org.kermeta.uml2.profile.marte.ui.popup.actions.CheckModelAction"
+               menubarPath="org.kermeta.checker.ui.menu/group1"
+               enablesFor="1"
+               id="org.kermeta.uml2.profile.marte.ui.checkXMIMarteAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

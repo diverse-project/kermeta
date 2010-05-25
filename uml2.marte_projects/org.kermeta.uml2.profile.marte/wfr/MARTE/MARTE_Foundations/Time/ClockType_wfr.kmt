@@ -1,0 +1,51 @@
+/* $Id: ClockType_wfr.kmt 458 2010-02-25 14:32:40Z jfalcou $
+ * Creation date: April 16, 2008
+ * License: EPL
+ * Copyright:	IRISA/INRIA
+ * Authors:
+ *		Didier Vojtisek
+ */
+
+
+package MARTE::MARTE_Foundations::Time;
+
+
+require kermeta
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/UMLHelper4MARTE.kmt"
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore"
+//require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelper.kmt"
+
+aspect class ClockType
+{
+
+	inv clockTypeBoolean is do
+		
+		stdio.writeln("checking clockTypeBoolean")
+		stdio.writeln(" - ClockType.isLogical : " + self.isLogical.getMetaClass.toString)
+		
+		true
+		
+	end
+
+	// No more constraints for this class in MARTE 09-11-02
+
+	/* The owner of a class stereotyped by Clock must be a Package stereotyped by TimedDomain.
+	 * DVK note : typo in the MARTE document : stereotyped by "ClockType"
+	 * OCL : base_Class.owner.oclIsTypeOf(TimedDomain) 
+	 * reference : MARTE 07-08-04, p74
+	 */
+	 
+	 /*
+	inv inTimedDomainPackage is do
+		
+		var p : uml::Package
+		p ?= base_Class.container
+		if not p.isVoid then
+			p.getStereotypesByOppositeAspect.exists{st| st.isInstanceOf(TimedDomain)}
+		else
+			//stdio.writeln("container is not a Package")
+			false
+		end 
+	end
+	*/
+}

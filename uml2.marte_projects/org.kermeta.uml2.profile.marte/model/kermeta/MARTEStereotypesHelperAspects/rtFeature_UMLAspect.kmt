@@ -1,0 +1,42 @@
+/* $Id:$ 
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  :  
+ *            Didier Vojtisek 
+ */
+package uml;
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profile.marte/model/kermeta/MARTEStereotypesHelperAspects/rtFeature_StereotypeAspect.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/profileHelpers/UMLStereotypeHelper.kmt"
+require "http://www.eclipse.org/uml2/3.0.0/UML" 
+
+using kermeta::standard
+aspect class BehavioralFeature{
+   /**
+    * List of the rtFeature stereotypes applied to this BehavioralFeature
+    * this is an internal back link to the Stereotypes used by the operation getStereotypesByOppositeAspect()
+    */
+    reference stereotypes_rtFeature : MARTE::MARTE_DesignModel::HLAM::rtFeature[0..*]#base_BehavioralFeature
+}
+aspect class Action{
+   /**
+    * List of the rtFeature stereotypes applied to this Action
+    * this is an internal back link to the Stereotypes used by the operation getStereotypesByOppositeAspect()
+    */
+    reference stereotypes_rtFeature : MARTE::MARTE_DesignModel::HLAM::rtFeature[0..*]#base_Action
+}
+aspect class Message{
+   /**
+    * List of the rtFeature stereotypes applied to this Message
+    * this is an internal back link to the Stereotypes used by the operation getStereotypesByOppositeAspect()
+    */
+    reference stereotypes_rtFeature : MARTE::MARTE_DesignModel::HLAM::rtFeature[0..*]#base_Message
+}
+aspect class Signal{
+   /**
+    * List of the rtFeature stereotypes applied to this Signal
+    * this is an internal back link to the Stereotypes used by the operation getStereotypesByOppositeAspect()
+    */
+    reference stereotypes_rtFeature : MARTE::MARTE_DesignModel::HLAM::rtFeature[0..*]#base_Signal
+}
