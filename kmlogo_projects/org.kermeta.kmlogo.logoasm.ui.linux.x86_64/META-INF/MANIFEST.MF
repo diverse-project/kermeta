@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Linux Fragment
+Bundle-SymbolicName: org.kermeta.kmlogo.logoasm.ui.linux.x86_64
+Bundle-Version: 1.3.2.qualifier
+Bundle-Vendor: INRIA Bretagne Atlantique
+Fragment-Host: org.kermeta.kmlogo.logoasm.ui.osspecific
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Eclipse-PlatformFilter: (& (osgi.os=linux) (osgi.arch=x86_64))
+Require-Bundle: org.openembedd.launchexec;bundle-version="1.0.0"
