@@ -39,7 +39,7 @@ public class NXC2RXE implements IObjectActionDelegate
 	/** The file selection */
 	private StructuredSelection	selection;
 	
-	private final String PLUGIN_ID = "org.kermeta.kmlogo.logoasm.ui.linux.x86";
+	private final String PLUGIN_ID = "org.kermeta.kmlogo.logoasm.ui.linux.x86_64";
 
 	/**
 	 * Constructor
@@ -110,6 +110,7 @@ public class NXC2RXE implements IObjectActionDelegate
 						catch (CoreException ce)
 						{
 							console.printError("Failed, see error log view for details");
+							ce.printStackTrace();
 							Plugin.getDefault().getLog().log(
 								new Status(IStatus.ERROR, Plugin.PLUGIN_ID, 0, "Refreshing error.", ce));
 						}
