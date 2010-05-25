@@ -6,7 +6,6 @@
   <?oooversion?>
   <bookinfo>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <date>Revision: $Date:: 2010-05-21 15:35:33#$</date>
     <author>
       <firstname> Marie Gouyette</firstname>
       <firstname/>
@@ -19,6 +18,7 @@
     </keywordset>
     <subtitle> How to create a FSM graphical editor with GMF? </subtitle>
     <bibliomisc>Licence EPL</bibliomisc>
+    <date>19/07/2006</date>
     <abstract>
       <para> This tutorial shows how to create a GMF editor for Fsm models.  This tutorial
         consitutes only an example that illustrate the global fsm example. For more informations and
@@ -557,7 +557,7 @@
           </mediaobject>
         </figure>
       </para>
-      <para> We have created a very little graphical editor to illustrate the FSM example . For more
+      <para> We have created a very little graphical editor to illustrate the  <ulink url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"> FSM example</ulink> . For more
         informations please refer to the   <ulink url="http://www.eclipse.org/modeling/gmf/">
               GMF documentation</ulink>.</para>
     </section>
