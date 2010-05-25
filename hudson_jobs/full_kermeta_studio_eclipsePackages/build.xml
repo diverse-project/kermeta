@@ -114,7 +114,7 @@
 		
 		<!-- get kermeta plugin from lastest succesfull updatesite build  -->
 		<antcall target="provision_feature">
-    		<param name="feature.name" value="fr.irisa.triskell.kermeta.feature.group, fr.irisa.triskell.kermeta.ecore.feature.group, fr.irisa.triskell.kermeta.graphical.feature.group, fr.irisa.triskell.kermeta.ket.feature.feature.group, fr.irisa.triskell.traceability.feature.group, org.kermeta.compiler.feature.feature.group, org.kermeta.log4j.feature.group, org.kermeta.uml2.feature.group, org.eclipse.gymnast.runtime.feature.group, org.kermeta.kmlogo.logoasm.feature.feature.group, fr.irisa.triskell.kermeta.samples.fsm.feature.group, org.kermeta.kompose.feature.feature.group"/>
+    		<param name="feature.name" value="fr.irisa.triskell.kermeta.feature.group, fr.irisa.triskell.kermeta.ecore.feature.group, fr.irisa.triskell.kermeta.graphical.feature.group, fr.irisa.triskell.kermeta.ket.feature.feature.group, fr.irisa.triskell.traceability.feature.group, org.kermeta.compiler.feature.feature.group, org.kermeta.log4j.feature.group, org.kermeta.uml2.feature.group, org.eclipse.gymnast.runtime.feature.group, org.kermeta.kmlogo.logoasm.feature.feature.group, fr.irisa.triskell.kermeta.samples.fsm.feature.group, org.kermeta.kompose.feature.feature.group, fr.irisa.triskell.kermeta.ocl.feature.group"/>
 			<param name="feature.repository" value="http://tipimouss.irisa.fr:8090/job/full_kermeta_studio_updatesite/lastSuccessfulBuild/artifact/updatesite/"/>
 			<param name="target.eclipse.dir" value="${env.WORKSPACE}/build/kermeta_${eclipse.version.name}"/>
   		</antcall>
