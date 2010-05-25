@@ -6,7 +6,7 @@
  * @author Christian Brunette
  * @author Vincent Mahe
  */
-package org.kermeta.kmlogo.asmlogo.ui.popup.actions;
+package org.kermeta.kmlogo.logoasm.ui.popup.actions;
 
 import java.io.File;
 import java.io.IOException;
