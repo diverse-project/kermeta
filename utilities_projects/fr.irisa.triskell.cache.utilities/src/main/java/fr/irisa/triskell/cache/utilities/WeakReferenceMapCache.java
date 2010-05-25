@@ -24,8 +24,9 @@ public class WeakReferenceMapCache<Key, Value> extends AbstractReferenceMapCache
 	{ 
 		Reference<Value> ref = new WeakReference<Value>( value );		
 		ref = map.put( key, ref ); 
-		if (ref!=null) 
-			return (Value) (ref.get()); 
+		if (ref!=null) {
+			return (Value) (ref.get());
+		}
 		return null; 
 	}
 

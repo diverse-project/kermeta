@@ -29,8 +29,9 @@ public class SoftReferenceMapCache<Key, Value> extends AbstractReferenceMapCache
 		Reference<Value> ref = new SoftReference<Value>( value );
 		//Reference<List<CallableOperation>> ref = new SoftReference<Value>( value );		
 		ref = map.put( key, ref ); 
-		if (ref!=null) 
-			return (Value) (ref.get()); 
+		if (ref!=null) {
+			return (Value) (ref.get());
+		}
 		return null; 
 	}
 

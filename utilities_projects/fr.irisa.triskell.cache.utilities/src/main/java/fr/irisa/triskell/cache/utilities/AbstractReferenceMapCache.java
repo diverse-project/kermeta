@@ -59,7 +59,9 @@ public abstract class AbstractReferenceMapCache<Key, Value> extends AbstractMap<
 
 	@Override
 	public synchronized Value remove(Object key) {
-		if(map.containsKey(key)) map.remove(key);
+		if(map.containsKey(key)){
+			map.remove(key);
+		}
 		return super.remove(key);
 	}
 
