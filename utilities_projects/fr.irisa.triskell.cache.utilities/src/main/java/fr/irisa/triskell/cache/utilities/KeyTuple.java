@@ -19,8 +19,8 @@ package fr.irisa.triskell.cache.utilities;
  * @param <SecondKey>
  */
 public class KeyTuple<FirstInternalKey,SecondInternalKey> {
-	protected FirstInternalKey firstKey;
-	protected SecondInternalKey secondKey;
+	private FirstInternalKey firstKey;
+	private SecondInternalKey secondKey;
 	
 	public KeyTuple(FirstInternalKey firstKey, SecondInternalKey secondKey) {
 		super();
@@ -31,14 +31,16 @@ public class KeyTuple<FirstInternalKey,SecondInternalKey> {
 	@Override
 	public boolean equals(Object other) {
 		// Not strictly necessary, but often a good optimization
-	    if (this == other)
+	    if (this == other){
 	      return true;
+	    }
 		if(other instanceof KeyTuple<?,?>){
 			KeyTuple<?,?> comparedObj = (KeyTuple<?,?>)other;
 			return comparedObj.firstKey.equals(firstKey) && comparedObj.secondKey.equals(secondKey);
 		}
-		else
+		else{
 			return false;
+		}
 	}
 	@Override
 	public int hashCode() {
