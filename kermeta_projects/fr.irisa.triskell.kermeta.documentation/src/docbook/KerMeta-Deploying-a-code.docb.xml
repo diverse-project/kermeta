@@ -435,7 +435,7 @@ public class RunLogo implements IObjectActionDelegate, Runnable {
      	</para>
      	<tip>
      		<para>A good sample for building your own standard java calling kermeta interpreter is to look at the RunCommandLine.java class which implements a command line argument parser and calls the Interpreter on top of a standalone distribution.
-     			<ulink type=""  url="http://gforge.inria.fr/scm/viewvc.php/trunk/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/src/java/org/kermeta/interpreter/api/RunCommandLine.java?view=markup&root=kermeta">http://gforge.inria.fr/scm/viewvc.php/trunk/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/src/java/org/kermeta/interpreter/api/RunCommandLine.java?view=markup&root=kermeta</ulink>     			
+     			<ulink type=""  url="http://gforge.inria.fr/scm/viewvc.php/trunk/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/src/java/org/kermeta/interpreter/api/RunCommandLine.java?view=markup&amp;root=kermeta">http://gforge.inria.fr/scm/viewvc.php/trunk/kermeta_projects/fr.irisa.triskell.kermeta.interpreter/src/java/org/kermeta/interpreter/api/RunCommandLine.java?view=markup&amp;root=kermeta</ulink>     			
      		</para></tip>
      	<section><title><literal>platform:/resource</literal> and <literal>platform:/plugin</literal> resolution</title> 
 			<para>These URI are specific to Eclipse and aren't known by default in Java. You'll need to guide indicate how to map them to the classical <literal>file://</literal> URIs
