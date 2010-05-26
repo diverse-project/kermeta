@@ -16,4 +16,8 @@ public interface PortKermetaCore {
     /*TODO CREATE KERMETA PROJECT*/
     public ModelingUnit load(String kermetaProject);
 
+
+    //TODO CREATE ACCESSOR TO KermetaProject
+    
+
 }

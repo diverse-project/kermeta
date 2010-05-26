@@ -5,8 +5,6 @@
 
 package org.kermeta.language.api;
 
-import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
-
 /**
  *
  * @author ffouquet
