@@ -189,7 +189,7 @@ public class OCLParseWizard extends Wizard {
 		String oclPath = "platform:/resource" + inputFile.getFullPath().toString();
 		String ecorePath ="platform:/resource" + inputMetaFile.getFullPath().toString();
 		
-		String kmtPath = kmtFile.getLocation().toOSString();
+		String kmtPath = "platform:/resource" + kmtFile.getFullPath().toString();
 		
 		URI ecoreURI = URI.createURI(ecorePath);
 		URI oclURI = URI.createURI(oclPath);
