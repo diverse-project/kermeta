@@ -8,9 +8,9 @@
 @mainOperation "check"
 
 package kmLogo::ASM;
-
+/* //REMOVE BLOCK COMMENT before use with the tuto
 require "../ASMLogoStaticSemantics.kmt"
-
+*/
 require kermeta
 
 using kermeta::standard
@@ -25,8 +25,10 @@ class CheckModels
 		checkProgram("carre_faulty1.logoasm")
 		checkProgram("carre_faulty2.logoasm")
 	end
-	
+
+
 	operation checkProgram(prg : String) is do
+/* //REMOVE BLOCK COMMENT before use with the tuto
 		do
 			var program : Instruction init 
 				loadProgram("platform:/resource/org.kermeta.kmlogo.logoasm.srcKermeta/kermeta/2.Constraints/models/" + prg)
@@ -41,5 +43,6 @@ class CheckModels
 		var res : EMFRepository init EMFRepository.new
         var resource : Resource init res.getResource(uri)
         result ?= resource.instances.one  
+*/
 	end
 }
