@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Export-Package: org.kermeta.kp;uses:="org.eclipse.emf.ecore,org.eclips
+ e.emf.common.util,org.kermeta.kp.impl",org.kermeta.kp.impl;uses:="org
+ .eclipse.emf.ecore,org.kermeta.kp,org.eclipse.emf.common.notify,org.e
+ clipse.emf.ecore.impl,org.eclipse.emf.ecore.util,org.eclipse.emf.comm
+ on.util,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore.resource",
+ org.kermeta.kp.util;uses:="org.eclipse.emf.ecore,org.kermeta.kp,org.e
+ clipse.emf.common.notify,org.eclipse.emf.common.notify.impl,org.eclip
+ se.emf.common.util"
+Private-Package: org.kermeta.kp.impl,org.kermeta.kp,org.kermeta.kp.uti
+ l,
+Bundle-ClassPath: .
+Built-By: ffouquet
+Tool: Bnd-0.0.311
+Bundle-Name: Kermeta :: KP MODEL
+Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 1.0.0.SNAPSHOT
+Build-Jdk: 1.6.0_20
+Bnd-LastModified: 1274875030414
+Bundle-ManifestVersion: 2
+Import-Package: org.eclipse.emf.common.notify,org.eclipse.emf.common.n
+ otify.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.ecli
+ pse.emf.ecore.impl,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore
+ .resource,org.eclipse.emf.ecore.util,org.osgi.framework
+Bundle-SymbolicName: org.kermeta.org.kermeta.kp.model
+
