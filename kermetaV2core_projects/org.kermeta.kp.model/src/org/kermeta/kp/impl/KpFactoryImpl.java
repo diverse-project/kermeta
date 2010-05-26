@@ -71,7 +71,6 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
 			case KpPackage.OPTION: return createOption();
 			case KpPackage.EXPRESSION: return createExpression();
 			case KpPackage.STRING_EXPRESSION: return createStringExpression();
-			case KpPackage.ECLASS0: return createEClass0();
 			case KpPackage.MIX_EXPRESSION: return createMixExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -186,16 +185,6 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
 	public StringExpression createStringExpression() {
 		StringExpressionImpl stringExpression = new StringExpressionImpl();
 		return stringExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass0 createEClass0() {
-		EClass0Impl eClass0 = new EClass0Impl();
-		return eClass0;
 	}
 
 	/**

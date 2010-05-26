@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.kermeta.kp.Dependency;
-import org.kermeta.kp.EClass0;
 import org.kermeta.kp.Expression;
 import org.kermeta.kp.ImportedSource;
 import org.kermeta.kp.KermetaProject;
@@ -128,13 +127,6 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * @generated
 	 */
 	private EClass stringExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eClass0EClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -443,15 +435,6 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEClass0() {
-		return eClass0EClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getMixExpression() {
 		return mixExpressionEClass;
 	}
@@ -541,8 +524,6 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 		stringExpressionEClass = createEClass(STRING_EXPRESSION);
 		createEAttribute(stringExpressionEClass, STRING_EXPRESSION__VALUE);
 
-		eClass0EClass = createEClass(ECLASS0);
-
 		mixExpressionEClass = createEClass(MIX_EXPRESSION);
 		createEReference(mixExpressionEClass, MIX_EXPRESSION__LEFT);
 		createEReference(mixExpressionEClass, MIX_EXPRESSION__RIGHT);
@@ -627,8 +608,6 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 
 		initEClass(stringExpressionEClass, StringExpression.class, "StringExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStringExpression_Value(), ecorePackage.getEString(), "value", null, 1, 1, StringExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(eClass0EClass, EClass0.class, "EClass0", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(mixExpressionEClass, MixExpression.class, "MixExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMixExpression_Left(), this.getExpression(), null, "left", null, 1, 1, MixExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

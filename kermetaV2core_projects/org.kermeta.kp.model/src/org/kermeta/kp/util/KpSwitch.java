@@ -177,12 +177,6 @@ public class KpSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KpPackage.ECLASS0: {
-				EClass0 eClass0 = (EClass0)theEObject;
-				T result = caseEClass0(eClass0);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case KpPackage.MIX_EXPRESSION: {
 				MixExpression mixExpression = (MixExpression)theEObject;
 				T result = caseMixExpression(mixExpression);
@@ -386,21 +380,6 @@ public class KpSwitch<T> {
 	 * @generated
 	 */
 	public T caseStringExpression(StringExpression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EClass0</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EClass0</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEClass0(EClass0 object) {
 		return null;
 	}
 

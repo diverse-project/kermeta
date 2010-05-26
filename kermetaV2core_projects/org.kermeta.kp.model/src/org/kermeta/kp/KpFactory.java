@@ -125,15 +125,6 @@ public interface KpFactory extends EFactory {
 	StringExpression createStringExpression();
 
 	/**
-	 * Returns a new object of class '<em>EClass0</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>EClass0</em>'.
-	 * @generated
-	 */
-	EClass0 createEClass0();
-
-	/**
 	 * Returns a new object of class '<em>Mix Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

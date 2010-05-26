@@ -478,25 +478,6 @@ public interface KpPackage extends EPackage {
 	int STRING_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.kp.impl.EClass0Impl <em>EClass0</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.kp.impl.EClass0Impl
-	 * @see org.kermeta.kp.impl.KpPackageImpl#getEClass0()
-	 * @generated
-	 */
-	int ECLASS0 = 13;
-
-	/**
-	 * The number of structural features of the '<em>EClass0</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS0_FEATURE_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.kermeta.kp.impl.MixExpressionImpl <em>Mix Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -504,7 +485,7 @@ public interface KpPackage extends EPackage {
 	 * @see org.kermeta.kp.impl.KpPackageImpl#getMixExpression()
 	 * @generated
 	 */
-	int MIX_EXPRESSION = 14;
+	int MIX_EXPRESSION = 13;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -808,16 +789,6 @@ public interface KpPackage extends EPackage {
 	EAttribute getStringExpression_Value();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.kp.EClass0 <em>EClass0</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>EClass0</em>'.
-	 * @see org.kermeta.kp.EClass0
-	 * @generated
-	 */
-	EClass getEClass0();
-
-	/**
 	 * Returns the meta object for class '{@link org.kermeta.kp.MixExpression <em>Mix Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1104,16 +1075,6 @@ public interface KpPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STRING_EXPRESSION__VALUE = eINSTANCE.getStringExpression_Value();
-
-		/**
-		 * The meta object literal for the '{@link org.kermeta.kp.impl.EClass0Impl <em>EClass0</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.kp.impl.EClass0Impl
-		 * @see org.kermeta.kp.impl.KpPackageImpl#getEClass0()
-		 * @generated
-		 */
-		EClass ECLASS0 = eINSTANCE.getEClass0();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.kp.impl.MixExpressionImpl <em>Mix Expression</em>}' class.

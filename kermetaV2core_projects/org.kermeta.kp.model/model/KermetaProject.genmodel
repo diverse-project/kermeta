@@ -40,7 +40,6 @@
     <genClasses ecoreClass="KermetaProject.ecore#//StringExpression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KermetaProject.ecore#//StringExpression/value"/>
     </genClasses>
-    <genClasses ecoreClass="KermetaProject.ecore#//EClass0"/>
     <genClasses ecoreClass="KermetaProject.ecore#//MixExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//MixExpression/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference KermetaProject.ecore#//MixExpression/right"/>
