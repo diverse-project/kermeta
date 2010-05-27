@@ -139,8 +139,8 @@
 		<mkdir dir="${report.dir}" />
 		<mkdir dir="${report.dir}/html" />
 		<junit printsummary="yes" haltonfailure="no" showoutput="yes" fork="yes">
-			<jvmarg value="-Xms40m" />
-			<jvmarg value="-Xmx512m" />
+			<jvmarg value="-Xms128m" />
+			<jvmarg value="-Xmx1024m" />
 			<classpath>
 				<pathelement location="${build.bin}"/>
 				<!-- this entry is normally not usefull because duplicate with the instrumented dir, 
