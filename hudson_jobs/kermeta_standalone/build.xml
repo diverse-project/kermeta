@@ -2,6 +2,7 @@
 
 	<property name="env.WORKSPACE" location="."/>
 	<property name="latest.full.kermeta.dir" location="latest_full_kermeta"/>
+	<property name="dist.folder" location="dist"/>
 	
 	
 	<target name="all" depends="clean, get_latest">
@@ -10,6 +11,13 @@
 			dir="imported_projects/fr.irisa.triskell.kermeta.standalone">
 			<property name="kermeta.plugins" location="${latest.full.kermeta.dir}/eclipse/plugins"/>
 		</ant>
+		<mkdir dir="${dist.folder}"/>
+		<zip destfile="${dist.folder}/kemeta_standalone_full.zip"
+				     basedir="imported_projects/fr.irisa.triskell.kermeta.standalone/dist/all_in_one_jar"
+				/>
+		<zip destfile="${dist.folder}/kermeta_standalone_no_thirdparty_in_main_jar.zip"
+						     basedir="imported_projects/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar"
+						/>
 	</target>
 	
 	
