@@ -22,6 +22,9 @@
 						/>
 	</target>
 	<target name="test" >
+		<property name="junit4.jar" location="imported_projects/fr.irisa.triskell.kermeta.standalone/lib/thirdparty/junit.jar"/>
+					
+		<echo>${junit4.jar}</echo>
 		<ant antfile="test_standalone_build.xml" 
 					target="all"
 					dir="imported_projects/org.kermeta.standalone.tests">
@@ -29,6 +32,7 @@
 			<property name="junit4.jar" location="imported_projects/fr.irisa.triskell.kermeta.standalone/lib/thirdparty/junit.jar"/>
 			<!-- <property name="junit4.jar" location="lib/junit.jar"/>-->
 		</ant>
+		
 	</target>
 	
 	
