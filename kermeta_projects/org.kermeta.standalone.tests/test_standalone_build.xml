@@ -7,7 +7,7 @@
 	
     <property name="report.dir" location="./reports"/>
 	<property name="eclipse.home" location="c:/eclipse3.3/eclipse"/>
-	<property name="dist.location" location="c:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.standalone\dist\no_thirdparty_in_main_jar"/>
+	<property name="dist.location" location="../fr.irisa.triskell.kermeta.standalone\dist\no_thirdparty_in_main_jar"/>
 		
 	<property name="build.bin" location="./build/bin"/>
 	<property name="src" location="./src"/>	
@@ -17,6 +17,8 @@
 	<property name="kermeta.standalone.jar" location="${dist.location}\kermeta_standalone.jar"/>
 	
 	<property name="log4j.jar" location="${dist.location}/thirdparty/log4j.jar"/>
+	<property name="slf4j-log4j.jar" location="${dist.location}/thirdparty/slf4j-log4j.jar"/>
+	<property name="slf4j-api.jar" location="${dist.location}/thirdparty/slf4j-api.jar"/>
 	<property name="antlr.jar" location="${dist.location}/thirdparty/antlr.jar"/>
 	
 	<property name="emf.common.jar" location="${dist.location}/thirdparty/eclipse/emf/common.jar"/>
@@ -38,6 +40,8 @@
 	    <pathelement location="${osgi.jar}"/>
 	    <pathelement location="${core.runtime.jar}"/>
 	    <pathelement location="${log4j.jar}"/>
+	    <pathelement location="${slf4j-api.jar}"/>
+	    <pathelement location="${slf4j-log4j.jar}"/>
 		<pathelement location="${junit4.jar}" />
 		<pathelement location="${apache.commons.logging.jar}" />
 		<pathelement location="${hamcrest.core.jar}" />
@@ -78,7 +82,8 @@
 		description="run standalone tests" depends="check.required-properties, compile_java">
 	    <mkdir dir="${report.dir}"/> 
 	    <mkdir dir="${report.dir}/html"/>
-		<junit printsummary="yes" haltonfailure="no" fork="yes" showoutput="false">
+		<junit printsummary="yes" haltonfailure="no" fork="yes" showoutput="false" 
+			dir=".">
 		  	<classpath>
 		  		<pathelement location="${build.bin}"/>
 				<path refid="standalone.class.path"/> 

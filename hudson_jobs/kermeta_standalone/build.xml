@@ -5,7 +5,9 @@
 	<property name="dist.folder" location="dist"/>
 	
 	
-	<target name="all" depends="clean, get_latest">
+	<target name="all" depends="build, test">
+	</target>
+	<target name="build" depends="clean, get_latest">
 		<ant antfile="deploy_build.xml" 
 			target="all"
 			dir="imported_projects/fr.irisa.triskell.kermeta.standalone">
@@ -18,6 +20,15 @@
 		<zip destfile="${dist.folder}/kermeta_standalone_no_thirdparty_in_main_jar.zip"
 						     basedir="imported_projects/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar"
 						/>
+	</target>
+	<target name="test" >
+		<ant antfile="test_standalone_build.xml" 
+					target="all"
+					dir="imported_projects/org.kermeta.standalone.tests">
+			<property name="dist.location" location="imported_projects/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar"/>
+			<!-- <property name="junit4.jar" location="imported_projects/fr.irisa.triskell.kermeta.standalone/lib/thirdparty/junit.jar"/>	-->
+			<property name="junit4.jar" location="lib/junit.jar"/>
+		</ant>
 	</target>
 	
 	
