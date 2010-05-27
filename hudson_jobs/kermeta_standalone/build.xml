@@ -26,8 +26,8 @@
 					target="all"
 					dir="imported_projects/org.kermeta.standalone.tests">
 			<property name="dist.location" location="imported_projects/fr.irisa.triskell.kermeta.standalone/dist/no_thirdparty_in_main_jar"/>
-			<!-- <property name="junit4.jar" location="imported_projects/fr.irisa.triskell.kermeta.standalone/lib/thirdparty/junit.jar"/>	-->
-			<property name="junit4.jar" location="lib/junit.jar"/>
+			<property name="junit4.jar" location="imported_projects/fr.irisa.triskell.kermeta.standalone/lib/thirdparty/junit.jar"/>
+			<!-- <property name="junit4.jar" location="lib/junit.jar"/>-->
 		</ant>
 	</target>
 	
