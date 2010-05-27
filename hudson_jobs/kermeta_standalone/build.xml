@@ -1,10 +1,10 @@
-<project name="build_kermeta_standaolne" default="build_kermeta_standalone">
+<project name="build_kermeta_standaolne" default="all">
 
 	<property name="env.WORKSPACE" location="."/>
 	<property name="latest.full.kermeta.dir" location="latest_full_kermeta"/>
-		
-		
-	<target name="build_kermeta_standalone" depends="clean, get_latest">
+	
+	
+	<target name="all" depends="clean, get_latest">
 		<ant antfile="deploy_build.xml" 
 			target="all"
 			dir="imported_projects/fr.irisa.triskell.kermeta.standalone">
