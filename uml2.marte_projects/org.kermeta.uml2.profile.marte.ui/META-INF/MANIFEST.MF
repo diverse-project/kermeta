@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: uml.marte.profile Ui Plug-in
+Bundle-Name: MARTE MDK Ui Plug-in
 Bundle-SymbolicName: org.kermeta.uml2.profile.marte.ui; singleton:=true
-Bundle-Version: 0.1.0.qualifier
+Bundle-Version: 1.4.0
 Bundle-Activator: org.kermeta.uml2.profile.marte.ui.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

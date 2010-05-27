@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.kermeta.compilerv2; singleton:=true
 Bundle-Vendor: %providerName
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.4.0
 Bundle-Activator: org.kermeta.compiler.Activator
 Import-Package: org.eclipse.core.runtime,
  org.osgi.framework,

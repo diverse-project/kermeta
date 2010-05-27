@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.ktr.feature"
       label="KTR Feature"
-      version="1.0.1"
+      version="1.4.0"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.example.com/description">
@@ -16,6 +16,10 @@
    <license url="http://www.example.com/license">
       [Enter License Description here.]
    </license>
+
+   <url>
+      <update label="Kermeta update site" url="http://www.kermeta.org/update"/>
+   </url>
 
    <plugin
          id="fr.irisa.triskell.ktr.model"

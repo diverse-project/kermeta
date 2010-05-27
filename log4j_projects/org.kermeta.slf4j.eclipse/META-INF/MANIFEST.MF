@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Slf4j
+Bundle-Name: Slf4j For Eclipse
 Bundle-SymbolicName: org.kermeta.slf4j.eclipse;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.4.0
 Implementation-Version: 1.5.11
 Implementation-Title: slf4j-simple
 Bundle-Vendor: IRISA/INRIA

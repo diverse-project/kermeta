@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.compiler.feature"
       label="Kermeta compiler"
-      version="1.3.2.qualifier"
+      version="1.4.0"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org">
@@ -18,6 +18,10 @@ All rights reserved.
       KerMeta workbench and most of its plugins are distributed under
 the terms of the EPL licence.
    </license>
+
+   <url>
+      <update label="Kermeta update site" url="http://www.kermeta.org/update"/>
+   </url>
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
@@ -35,7 +39,6 @@ the terms of the EPL licence.
       <import plugin="org.eclipse.jdt.launching"/>
       <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
       <import plugin="org.kermeta.merger"/>
-     <!--  <import plugin="org.kermeta.io.loader"/> -->
       <import plugin="org.apache.commons.logging" version="1.0.4" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.emf.ecore.editor"/>

@@ -2,10 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kompose RDBSchema Specialization Samples Ui
 Bundle-SymbolicName: org.kermeta.kompose.specialization.rdbschema.ui;singleton:=true
-Bundle-Version: 0.0.5
+Bundle-Version: 0.1.0
 Bundle-Activator: org.kermeta.kompose.specialization.rdbschema.ui.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: IRISA/INRIA

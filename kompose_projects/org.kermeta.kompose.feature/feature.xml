@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.kompose.feature"
       label="Kompose"
-      version="0.0.5.qualifier"
+      version="0.1.0"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/mdk/kompose">
@@ -145,6 +145,7 @@ Inc. in the United States, other countries, or both.
    </license>
 
    <url>
+      <update label="Kermeta update site" url="http://www.kermeta.org/update"/>
       <discovery label="Kermeta update site" url="http://kermeta.org/update"/>
    </url>
 

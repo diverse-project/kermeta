@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.uml2.profile.marte"
       label="Marte profile for UML MDK"
-      version="0.1.0"
+      version="1.4.0"
       provider-name="INRIA">
 
    <description url="http://www.kermeta.org">
@@ -16,6 +16,10 @@
    <license url="http://www.example.com/license">
       [Enter License Description here.]
    </license>
+
+   <url>
+      <update label="Kermeta update site" url="http://www.kermeta.org/update"/>
+   </url>
 
    <plugin
          id="org.kermeta.uml2.profile.marte"
