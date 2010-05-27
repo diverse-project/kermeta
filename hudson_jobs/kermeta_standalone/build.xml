@@ -1,0 +1,32 @@
+<project name="build_kermeta_standaolne" default="build_kermeta_standalone">
+
+	<property name="env.WORKSPACE" location="."/>
+	<property name="latest.full.kermeta.dir" location="latest_full_kermeta"/>
+		
+		
+	<target name="build_kermeta_standalone" depends="clean, get_latest">
+		<ant antfile="deploy_build.xml" 
+			target="all"
+			dir="imported_projects/fr.irisa.triskell.kermeta.standalone">
+			<property name="kermeta.plugins" location="${latest.full.kermeta.dir}/eclipse/plugins"/>
+		</ant>
+	</target>
+	
+	
+	
+	<target name="clean">
+		<delete dir="${latest.full.kermeta.dir}/eclipse"></delete>
+	</target>
+	<target name="get_latest">	
+		<mkdir dir="${latest.full.kermeta.dir}"/>			
+		<get src="http://tipimouss.irisa.fr:8090/view/KermetaRelease/job/full_kermeta_studio_compile/lastSuccessfulBuild/artifact/full_kermeta_studio_compile/I.DevelopmentBuild/org.kermeta.studio.main.feature-DevelopmentBuild.zip" 
+			dest="${latest.full.kermeta.dir}/org.kermeta.studio.main.feature-DevelopmentBuild.zip"
+			usetimestamp="true"/>
+		<unzip dest="${latest.full.kermeta.dir}">
+		    <fileset dir="${latest.full.kermeta.dir}">
+		        <include name="**/*.zip"/>
+		    </fileset>
+		</unzip>
+	</target>
+	
+</project>
