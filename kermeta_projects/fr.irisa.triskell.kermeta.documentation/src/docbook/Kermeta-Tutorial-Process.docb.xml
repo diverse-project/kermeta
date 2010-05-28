@@ -70,25 +70,25 @@
         <important>
             <para>We recommend to the beginner to read this document till the end first. Advanced
                 user might directly jump to the concrete examples : the <ulink
-                    url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"><emphasis
-                        role="underline">FSM tutorial</emphasis></ulink> or the <ulink
-                    url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/"><emphasis
-                        role="underline">Logo Tutorial</emphasis></ulink>. </para>
+                    url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
+                        ><emphasis role="underline">FSM tutorial</emphasis></ulink> or the <ulink
+                    url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
+                        ><emphasis role="underline">Logo Tutorial</emphasis></ulink>. </para>
         </important>
         <para>For the explanation of the concepts mentioned here, please refer to the <ulink
-                url="http://www.kermeta.org/documents/manual/"><emphasis role="underline">Kermeta
-                    manual</emphasis></ulink>.</para>
+                url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/KerMeta-Manual/index.html"
+                    ><emphasis role="underline">Kermeta manual</emphasis></ulink>.</para>
         <para>The main goal of this tutorial is to describe the main processes to provide <emphasis
                 role="bold">Model Development Kit</emphasis> (MDK) to your DSL. </para>
-        <para>The big picture of this tutorial is illustrated in the figure below: <anchor
-                id="big_picture_para"/><orderedlist>
+        <para>The <emphasis role="bold">big picture</emphasis> of this tutorial is illustrated in
+            the figure below: <anchor id="big_picture_para"/><orderedlist>
                 <listitem>
                     <para>starting <link linkend="chapter_define_abstract_syntax.link">from an ecore
                             metamodel</link>;</para>
                 </listitem>
                 <listitem>
-                    <para>we will <link linkend="chapter_define_editor.title.link">provide
-                            editor</link> to create its instance-model; </para>
+                    <para>we will <link linkend="chapter_define_editor.link">provide editor</link>
+                        to create its instance-model; </para>
                 </listitem>
                 <listitem>
                     <para>we will <link linkend="chapter_contract.link">add contracts</link>
@@ -166,26 +166,30 @@
             <tip>
                 <para> If you want to learn more about how to create an ecore metamodel with
                     eclipse, please refer to the <ulink
-                        url="http://www.kermeta.org/documents/tutorials/tut-create_a_mm/">"How to
-                        create metamodel tutorial"</ulink>.</para>
+                        url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/KerMeta-How-to-create-a-metamodel/index.html"
+                        >"How to create metamodel tutorial"</ulink>.</para>
             </tip>
             <note>
                 <para>An overview of an ecore diagram is available inside the examples below :<itemizedlist>
                         <listitem>
-                            <para>"How to create and manipulate metamodel" inside the <ulink
-                                    url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"
+                            <para>"<ulink
+                                    url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#chapter_define_metamodel"
+                                    >Define the FSM metamodel</ulink>" inside the <ulink
+                                    url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
                                     >FSM tutorial</ulink></para>
                         </listitem>
                         <listitem>
-                            <para>"Define the metamodel" section in <ulink
-                                    url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/"
+                            <para>"<ulink
+                                    url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#chapter_define_metamodel.link"
+                                    >Define the metamodel</ulink>" section in <ulink
+                                    url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
                                     >Logo Tutorial</ulink></para>
                         </listitem>
                     </itemizedlist></para>
             </note>
         </section>
     </chapter>
-    <chapter id="chapter_process_define_editor.link">
+    <chapter id="chapter_define_editor.link">
         <title id="chapter_define_editor.title.link">Define the editor<phrase/></title>
         <para>In this task, you will learn how to provide editors to manipulate instance-model which
             conforms to your metamodel. There are many ways to do so. As these techniques are
@@ -202,14 +206,17 @@
                 <para>Illustrations of this technique can be seen in the dedicated part of the
                     tutorials : <itemizedlist>
                         <listitem>
-                            <para>"How to create an instance-model" from a metamodel inside the
-                                    <ulink
-                                    url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"
-                                    > FSM tutorial</ulink></para>
+                            <para>"<ulink
+                                    url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#dynamic_instances"
+                                    >Dynamic instance</ulink>" from a metamodel inside the <ulink
+                                    url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
+                                    >FSM tutorial</ulink></para>
                         </listitem>
                         <listitem>
-                            <para>"Dynamic instance" in the <ulink
-                                    url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/"
+                            <para>"<ulink
+                                    url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#section_dynamic_instance"
+                                    >Dynamic instance</ulink>" in the <ulink
+                                    url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
                                     >Logo Tutorial</ulink></para>
                         </listitem>
                     </itemizedlist></para>
@@ -225,8 +232,17 @@
                 <para>An illustration of create metamodel using tree view is available in :<itemizedlist>
                         <listitem>
                             <para><ulink
-                                    url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"
+                                    url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#treeViewEditor"
+                                    >Tree view editor</ulink> of <ulink
+                                    url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
                                     >FSM tutorial</ulink></para>
+                        </listitem>
+                        <listitem>
+                            <para><ulink
+                                    url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#section_tree_view_editor.link"
+                                    >Tree view editor</ulink> of <ulink
+                                    url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
+                                    >Logo tutorial</ulink></para>
                         </listitem>
                     </itemizedlist></para>
             </note>
@@ -245,8 +261,10 @@
                 <para>If you want to have an example on this technique, please refer to the example
                     in :<itemizedlist>
                         <listitem>
-                            <para>"Textual editor" section in <ulink
-                                    url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/"
+                            <para>"<ulink
+                                    url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#section_textual_editor.link"
+                                    >Textual editor</ulink>" section in <ulink
+                                    url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
                                     >Logo Tutorial</ulink></para>
                         </listitem>
                     </itemizedlist></para>
@@ -262,8 +280,10 @@
                 <itemizedlist>
                     <listitem>
                         <para><ulink
-                                url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/">
-                                FSM tutorial</ulink>.</para>
+                                url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#graphical_editors"
+                                >Graphical editor</ulink> section in <ulink
+                                url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
+                                >FSM tutorial</ulink>.</para>
                     </listitem>
                 </itemizedlist>
             </note>
@@ -300,9 +320,11 @@
                 </listitem>
             </orderedlist>
             <note>
-                <para><ulink url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/">FSM
-                        tutorial</ulink> provide code example to illustrate this model serialization
-                    in Kermeta </para>
+                <para><ulink
+                        url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
+                        >FSM tutorial</ulink> provide code <ulink
+                        url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#section_serialisation"
+                        >example</ulink> to illustrate this model serialization in Kermeta </para>
             </note>
         </section>
         <section id="sec_package_registry.link">
@@ -323,10 +345,12 @@
                 </listitem>
             </itemizedlist>
             <note>
-                <para>Take look at the example below if you want to know how to register a matamodel<itemizedlist>
+                <para>Take look at the example below if you want to know how to register a matamodel :<itemizedlist>
                         <listitem>
                             <para><ulink
-                                    url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"
+                                    url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#PackageRegistry_Presentation"
+                                    >section 5.2</ulink> in <ulink
+                                    url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
                                     >FSM tutorial</ulink></para>
                         </listitem>
                     </itemizedlist></para>
@@ -358,13 +382,18 @@
                 below :</para>
             <itemizedlist>
                 <listitem>
-                    <para><ulink url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"
-                            >FSM tutorial</ulink> : "How to add constraints"</para>
+                    <para><ulink
+                            url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
+                            >FSM tutorial</ulink> : "<ulink
+                            url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#Contract"
+                            >Design by contract</ulink>"</para>
                 </listitem>
                 <listitem>
-                    <para>"Contract" chapter in <ulink
-                            url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/">Logo
-                            Tutorial</ulink>.</para>
+                    <para>"<ulink
+                            url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#chapter_contract.link"
+                            >Add Contract</ulink>" chapter in <ulink
+                            url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
+                            >Logo Tutorial</ulink>.</para>
                 </listitem>
             </itemizedlist>
         </note>
@@ -386,14 +415,19 @@
             <para>A complete example is given inside : </para>
             <itemizedlist>
                 <listitem>
-                    <para><ulink url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/">
-                            FSM tutorial</ulink>
+                    <para>"<ulink
+                            url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#Behaviour"
+                            >Behaviour</ulink>" chapter in <ulink
+                            url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
+                            >FSM tutorial</ulink>
                     </para>
                 </listitem>
                 <listitem>
-                    <para>"Behaviour" chapter in <ulink
-                            url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/">Logo
-                            Tutorial</ulink></para>
+                    <para>"<ulink
+                            url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#chapter_behaviour.link"
+                            >Behaviour</ulink>" chapter in <ulink
+                            url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
+                            >Logo Tutorial</ulink></para>
                 </listitem>
             </itemizedlist>
         </note>
@@ -411,13 +445,18 @@
                 :</para>
             <itemizedlist>
                 <listitem>
-                    <para><ulink url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/">
-                            FSM tutorial</ulink></para>
+                    <para>chapter "<ulink
+                            url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#chapter_model_transformation"
+                            >Model transformation</ulink>" in <ulink
+                            url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
+                            >FSM tutorial</ulink></para>
                 </listitem>
                 <listitem>
-                    <para>"Model transformation" - Compilation chapter in <ulink
-                            url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/">Logo
-                            Tutorial</ulink></para>
+                    <para>"<ulink
+                            url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#chapter_model_transformation_compilation.link"
+                            >Model transformation - Compilation</ulink>" chapter in <ulink
+                            url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
+                            >Logo Tutorial</ulink></para>
                 </listitem>
             </itemizedlist>
         </note>
@@ -434,9 +473,18 @@
                 :</para>
             <itemizedlist>
                 <listitem>
-                    <para>"UI improvements" chapter in <ulink
-                            url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/">Logo
-                            Tutorial</ulink></para>
+                    <para>chapter "<ulink
+                            url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#chapter_ui_improvements"
+                            >UI improvements</ulink>" in <ulink
+                            url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
+                            >FSM tutorial</ulink></para>
+                </listitem>
+                <listitem>
+                    <para>"<ulink
+                            url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#chapter_ui_improvements.link"
+                            >UI improvements</ulink>" chapter in <ulink
+                            url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
+                            >Logo Tutorial</ulink></para>
                 </listitem>
             </itemizedlist>
         </note>
@@ -448,12 +496,12 @@
                 >DSL</emphasis> with <emphasis role="bold">Kermeta</emphasis>. Now, using Kermeta,
             you should be able to implement your own DSL language starting from <emphasis
                 role="bold">"just" an .ecore file</emphasis> (remember our first <link
-                linkend="mdk_big_picture">illustration</link>) .</para>
+                linkend="big_picture_para">illustration</link>) .</para>
         <para>You may either move on to the full examples through the <ulink
-                url="http://www.kermeta.org/documents/tutorials/tut-fsm_sample/"><emphasis
-                    role="underline">FSM tutorial</emphasis></ulink> and the <ulink
-                url="http://www.kermeta.org/documents/tutorials/logo_tutorial_fr/"><emphasis
-                    role="underline">Logo Tutorial</emphasis></ulink> in order to see the
+                url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
+                    ><emphasis role="underline">FSM tutorial</emphasis></ulink> and the <ulink
+                url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
+                    ><emphasis role="underline">Logo Tutorial</emphasis></ulink> in order to see the
             implementation of these processes or either you may play it <link
                 linkend="chapter_introduction.link">back to the begining</link>.</para>
     </chapter>
