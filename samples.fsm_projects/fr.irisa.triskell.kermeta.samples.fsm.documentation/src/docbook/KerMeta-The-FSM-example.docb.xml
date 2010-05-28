@@ -275,7 +275,7 @@
         </mediaobject>
       </figure>
       <para>The <ulink
-          url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
+          url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#chapter_define_metamodel.link"
           > Logo tutorial </ulink> presents how to create a dynamic instance with an ecorediag. The
         next section presents another way to create instances of a given metamodel, create a tree
         view editor with an EMF project.</para>
@@ -417,7 +417,7 @@
           url="http://www.emftext.org/index.php/EMFText"> EMFText</ulink>, <ulink type=""
           url="http://www.kermeta.org/sintaks/"> Sintaks </ulink> (which is part of the Kermeta
         project) . This textuals editors are not detailed here, please refer to the <ulink
-          url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
+          url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#chapter_editor.title.link"
           > Logo tutorial </ulink>. </para>
     </section>
     <section id="graphical_editors">
@@ -1433,7 +1433,7 @@ post post3 of operation step of class State violated</programlisting>
     <title> UI improvements </title>
     <para> You can customize your user interface like shown below. For more samples please refer to
       the <ulink
-        url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html"
+        url="@ONLINE.OR.LOCAL@/org.kermeta.kmlogo.logoasm.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Logo/index.html#chapter_ui_improvements.link"
         > Logo tutorial </ulink>. </para>
     <section id="CustomizeEMF_Editor">
       <title> Customize the generated EMF editor</title>
