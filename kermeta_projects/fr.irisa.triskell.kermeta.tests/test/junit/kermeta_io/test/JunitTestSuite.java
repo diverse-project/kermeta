@@ -447,8 +447,9 @@ public void testWithFile(String dir, String file) {
 		
 		// Exporting the source file into km
 		KmExporter exporter = new KmExporter();
-		exporter.export(source, null, outputKMFileURI, false);
+		exporter.export(source, outputKMFolder, outputKMFileURI, false);
 		
+		IOPlugin.getDefault().getEditionKermetaUnitStore().clear();
 		// Loading the generated km file
 		KermetaUnit kmOutput = IOPlugin.getDefault().getEditionKermetaUnitStore().get(outputKMFileURI, null);
 
