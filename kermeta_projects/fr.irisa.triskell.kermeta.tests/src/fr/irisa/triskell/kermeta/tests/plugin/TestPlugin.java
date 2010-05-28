@@ -33,7 +33,7 @@ public class TestPlugin extends AbstractUIPlugin {
 	//The shared instance.
 	private static TestPlugin plugin = null;
 	
-	public static final String PLUGIN_TESTS_PATH = "platform:/plugin/fr.irisa.triskell.kermeta.tests/";
+	public static final String PLUGIN_TESTS_PATH = "platform:/resource/fr.irisa.triskell.kermeta.tests/";
 	
 	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.tests";
 	
