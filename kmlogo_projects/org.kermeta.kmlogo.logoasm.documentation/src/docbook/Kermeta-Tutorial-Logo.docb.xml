@@ -57,25 +57,27 @@
     <para>The Logo language is a small programming language to manage a pen-drawer turtle. Wherever
       the turtle goes, it draw lines to form figures. Logo was initially dedicated to introduce
       programming concepts to children.You can find more information about logo language on the
-        <ulink url="http://fr.wikipedia.org/wiki/Logo_(langage)">wikipedia page</ulink>.</para>
+        <ulink url="http://fr.wikipedia.org/wiki/Logo_(langage)">wikipedia page</ulink> (external
+      link).</para>
     <para>This tutorial will guide you from the installation of the necessary files to the analysis
       of the different part of the code so as to build a programming environnement for the Logo. </para>
     <note>
       <para>We <emphasis role="bold">recommend</emphasis> that you <emphasis role="bold"
-          >firstly</emphasis> read the <emphasis role="bold"><ulink
+          >firstly</emphasis> read the <emphasis role="underline">10min-reading</emphasis>
+        <emphasis role="bold">
+          <ulink
             url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html"
-            >Building DSL main process</ulink></emphasis> tutorial (See Building DSL with kermeta
-        tutorials) in order to look at the "<emphasis role="bold"><ulink
+            >Building DSL main process</ulink></emphasis> tutorial in order to get the "<emphasis
+          role="bold"><ulink
             url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html#big_picture_para"
-            >big picture</ulink></emphasis>" (See Introduction chapter) of what we are going to
-        build here and to have an overview of the <emphasis role="bold">methodology</emphasis> to
-        follow.</para>
+            >bird's eye view</ulink></emphasis>" of what we are going to build here and to have an
+        overview of the <emphasis role="bold">methodology</emphasis> to follow.</para>
     </note>
   </chapter>
   <chapter id="chapter_installation.link">
     <title id="chapter_installation.title.link">Installation<phrase/></title>
-    <para>In this task you'll learn how to install the predefined logo environment, create and run a
-      workbench and install the predefined logo samples.</para>
+    <para>In this task you'll learn how to install the predefined logo environment, install the
+      predefined logo project for the tutorial.</para>
     <section id="section_prerequisted.link">
       <title id="section_prerequisted.title.link.title.link">Prerequisites<phrase/></title>
       <para>Below is the list of the things that you need to ensure beforehand :<itemizedlist>
@@ -134,9 +136,9 @@
       ... </para>
     <tip>
       <para> If you want to learn more about how to create an ecore metamodel with eclipse, please
-        refer to the available <ulink
-          url="http://www.kermeta.org/documents/tutorials/tut-create_a_mm/">tutorial</ulink>
-        (external link).</para>
+        follow the how-to in the next sections or refer to the other available <ulink
+          url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/KerMeta-How-to-create-a-metamodel/index.html"
+          >tutorial</ulink></para>
     </tip>
     <section id="section_from_ecore_to_generated_code.link">
       <title id="section_from_ecore_to_generated_code.title.link">From Ecore to genenerated
@@ -530,9 +532,9 @@ package ASM
         or sibling for the element to construct you model instance. At the end, you can obtain a
         model conform to the logo language in xmi format.</para>
       <para>If you want to learn more, follow the complete example below or check out the other
-        available example in the <ulink
-          url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
-          >FSM tutorial</ulink>.</para>
+        available <ulink
+          url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html#sec_tree_view_edior"
+          >examples</ulink></para>
       <example>
         <title>Creation of the dots.xmi</title>
         <orderedlist>
@@ -589,8 +591,8 @@ package ASM
           id="section_textual_editor"/></title>
       <para>A textual editor is also available in order to create a model instance conform to our
         metamodel and can be processed by the interpreter. In this example we will use <ulink
-          url="http://www.emftext.org">EMFText</ulink> to generate the concrete syntax of our
-        metamodel. </para>
+          url="http://www.emftext.org">EMFText</ulink> (external link) to generate the concrete
+        syntax of our metamodel. </para>
       <para>Follow these steps to set up the concrete syntax of your language and its associated
         textual editor : </para>
       <procedure>
@@ -612,13 +614,14 @@ package ASM
             With ..." > "EMFText cs editor". Analyse its content : it follows the structure of .cs
             file as described in the <ulink
               url="http://www.emftext.org/index.php/EMFText_CS_Language_Reference">emftext CS
-              language reference</ulink>.</para>
+              language reference</ulink> (external link).</para>
           <para>Here, we defined the file extension of our DSL (logo), link it to our metamodel
             (through the nsUri) and define the style and the concrete rules for each meta-class
             concept that we want to map.</para>
           <tip>
-            <para>If you meet with some errors, be sure that you <link linkend="set_ns_uri"
-                >register</link> your ecore and that the path to your genmodel is correct.</para>
+            <para>If you meet with some errors, be sure that you <link
+                linkend="section_package_registry.link">register</link> your ecore and that the path
+              to your genmodel is correct.</para>
           </tip>
         </step>
         <step><anchor id="generate_text_resource"/><para>Right-click on <emphasis role="bold"
@@ -648,19 +651,28 @@ package ASM
       kermeta tutorials) for the explanation of these model manipulations.</para>
     <section id="section_package_registry.link">
       <title id="section_package_registry.title.link">Package registry<phrase/></title>
-      <para>This step is fully covered in the <ulink
+      <para>An example is fully covered in this <ulink
           url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#PackageRegistry_Presentation"
-          >FSM tutorial</ulink>, please refer to this example for further information.</para>
+          >part</ulink> of <ulink
+          url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
+          >FSM tutorial</ulink>, for further explanation of this step please refer to the <ulink
+          url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html#sec_package_registry.link"
+          >process tutorial</ulink></para>
     </section>
     <section id="section_serialisation.link">
       <title id="section_serialisation.title.link">Serialization<phrase/></title>
-      <para>The <ulink
+      <para>This <ulink
+          url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#section_serialisation"
+          >part</ulink> of <ulink
           url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
-          >FSM tutorial</ulink> provides a complete example for this part.</para>
+          >FSM tutorial</ulink> provides a complete example for this section, explanation can be
+        found inside the <ulink
+          url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html#sec_serialisation.link"
+          >process tutorial</ulink></para>
     </section>
   </chapter>
-  <chapter id="chapter_contract.title.link">
-    <title id="chapter_contract.link">Contract<phrase/><anchor id="chapter_contract"/></title>
+  <chapter id="chapter_contract.link">
+    <title id="chapter_contract.title.link">Contract<phrase/><anchor id="chapter_contract"/></title>
     <para>Let's now add some <emphasis role="bold">static semantic</emphasis> to our metamodel i.e.
       add missing pre/post-conditions to our .ecore in order to express the contraints specified in
       the metamodel.</para>
@@ -743,9 +755,9 @@ aspect class ProcCall{
 </programlisting>
           <note>
             <para>If you get errors on "http://www.kermeta.org/kmLogo", check your <link
-                linkend="set_ns_uri">package registration</link>. you may hit the <emphasis
-                role="bold">check this file</emphasis> button (on Kermeta's perspective toolbar) to
-              refresh.</para>
+                linkend="section_package_registry.link">package registration</link>. you may hit the
+                <emphasis role="bold">check this file</emphasis> button (on Kermeta's perspective
+              toolbar) to refresh.</para>
           </note>
         </step>
         <step>
@@ -778,10 +790,10 @@ aspect class ProcCall{
               role="bold">CheckModels.kmt</emphasis> and choose <emphasis role="bold">Run as > Run
               as Kermeta application</emphasis>. <note>
               <para>If you get errors, again, check that you did not forget to <link
-                  linkend="set_ns_uri">register</link> you ecore. Maybe it is necessary to clean all
-                the projects or launch the kermeta cleaner (trash bin with kermeta icon on your
-                toolbar) or hit the kermeta validator ("check this file" button in Kermeta
-                perspective toolbar)</para>
+                  linkend="section_package_registry.link">register</link> you ecore. Maybe it is
+                necessary to clean all the projects or launch the kermeta cleaner (trash bin with
+                kermeta icon on your toolbar) or hit the kermeta validator ("check this file" button
+                in Kermeta perspective toolbar)</para>
             </note></para>
           <para>On your console view, you should view the result below though the model instances
             are conform to our metamodel (you can right-clic and "validate" to see its conformance
@@ -1492,11 +1504,11 @@ PenUp </programlisting>
           <caution>
             <para>For this last step, you need to set up a corresponding environment (which is not
               covered by the target of this tutorial) if you want to implement the compiler. </para>
-            <para>Maybe you need to check out the <link linkend="chapter_conclusion.link"
-                >solution</link> that we provide in order to succesfully achieve this last step and
-              see the complete version including the linux, macos, and windows integration.
-              Additionally, you may also follow instructions inside <emphasis role="bold"
-                >lib/INSTALL.rxtx</emphasis> inside the project <emphasis role="bold"
+            <para>Maybe you need to check out the solution that we provide in  the <link
+                linkend="chapter_conclusion.link">conclusion</link> in order to succesfully achieve
+              this last step and see the complete version including the linux, macos, and windows
+              integration. Additionally, you may also follow instructions inside <emphasis
+                role="bold">lib/INSTALL.rxtx</emphasis> inside the project <emphasis role="bold"
                 >org.kermeta.kmlogo.logoasm.ui.osspecific</emphasis>.</para>
           </caution>
         </para>
@@ -1523,7 +1535,7 @@ PenUp </programlisting>
       <para>If you want to compare your results with the solution code deployed inside the Kermeta
         Eclipse or if you want to shortcut to the final results directly, you may launch <emphasis
           role="bold">File -> New -> Example... -> Kermeta Samples -> Kermeta 2 Logo tuto
-          (soluce)</emphasis>. You'll then get a project structure as illustrated as below : </para>
+          (solution)</emphasis>. You'll then get a project structure as illustrated as below : </para>
       <figure>
         <title>Logo solution project structure</title>
         <mediaobject>
