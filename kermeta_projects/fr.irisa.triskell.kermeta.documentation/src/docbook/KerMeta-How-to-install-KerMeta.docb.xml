@@ -86,10 +86,9 @@
         <para>Eclipse must be installed. We currently use Eclipse 3.5.0 (Galileo). You can get
           Eclipse from <ulink url="http://www.eclipse.org/downloads/"
             >http://www.eclipse.org/downloads/</ulink>. </para>
-        <para>In this tutorial, your Eclipse installation is supposed to be relatively minimal, so
-          you should download the <emphasis role="strong">Eclipse classic</emphasis> version of
-          Eclipse which is a good base for development with Kermeta. This tutorial will cover every
-          necessary step to get Kermeta working with Eclipse.</para>
+        <para>In this tutorial,  you should download the <emphasis role="strong">Eclipse Modeling
+            Tool</emphasis> version of Eclipse which is a good base for development with Kermeta.
+          This tutorial will cover every necessary step to get Kermeta working with Eclipse.</para>
         <para>Some additional installation instructions are available here : <ulink
             url="http://www.eclipse.org/documentation/"
             >http://www.eclipse.org/documentation/</ulink> .</para>

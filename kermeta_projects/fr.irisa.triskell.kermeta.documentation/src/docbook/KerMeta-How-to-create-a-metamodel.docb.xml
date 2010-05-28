@@ -129,7 +129,11 @@
             the <emphasis role="strong">Sample Ecore Editor</emphasis>. In case the Omondo editor is
             set as the default editor, the sample Ecore editor can be opened (after having closed
             the Omondo editor) by right-clicking onto the Ecore file and selecting <emphasis
-              role="strong">Open with &gt; Sample Ecore Editor</emphasis>.</para>
+              role="strong">Open with &gt; Sample Ecore Model Editor</emphasis>. (Another way
+              is<emphasis role="italic"> Window</emphasis> > <emphasis role="italic">Show View
+              </emphasis>><emphasis role="italic"> Other</emphasis> > <emphasis role="italic"
+              >General folder</emphasis> ><emphasis role="italic"> Properties</emphasis> like shown
+            in the next figure).  Then click on the created EPackage.</para>
           <figure id="refIllustration2">
             <title>New empty ecore model</title>
             <mediaobject>
@@ -143,9 +147,8 @@
         </listitem>
         <listitem>
           <para>If the <emphasis role="strong">Properties</emphasis> view is not visible at the
-            bottom (or left, or right) part of the Eclipse window, open it using the tool bar
-              menu.<emphasis role="strong">Window &gt; Show View &gt; Other &gt; General
-              </emphasis>folder<emphasis role="strong"> &gt; Properties</emphasis>;</para>
+            bottom (or left, or right) part of the Eclipse window, open it clicking into the file
+              -><emphasis role="italic"> Show Property View</emphasis>;</para>
           <figure id="refIllustration3">
             <title>How to show properties view</title>
             <mediaobject>
@@ -172,10 +175,9 @@
             <listitem>
               <para>its <emphasis role="strong">Ns URI</emphasis>: the namespace URI of the Ecore
                 model is mandatory to allow Kermeta being able to correctly load its potential
-                instances, as well as for the Dynamic creation of instances tool. It is strongly
-                recommended to set an absolute Eclipse URI (this kind of URI is actually relative to
-                your Eclipse project), e.g.
-                  <emphasis>platform:/resource/MyFirstEMFSamples/metamodels/fsm.ecore</emphasis></para>
+                instances, as well as for the Dynamic creation of instances tool.  So put
+                  it<emphasis role="italic"> http://www.kermeta.org/fsm</emphasis> which is the
+                NSURI of the fsm metamodel.</para>
               <figure id="Illustration4">
                 <title> ecore file into Eclipse</title>
                 <mediaobject>
@@ -396,7 +398,7 @@
     <para>This tutorial gives you the basis to create an EMF metamodel. It may be useful to use it
       with Kermeta for : <orderedlist>
         <listitem>
-          <para>Creating model instances conform to an ecore metamodel ( cf the tutorial <ulink url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"> FSM example</ulink> chapter 4 : Editor)
+          <para>Creating model instances conform to an ecore metamodel ( cf the tutorial <ulink url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#chapter_editor"> FSM example</ulink> chapter  Editor)
             ;</para>
         </listitem>
         <listitem>
@@ -404,7 +406,7 @@
             load the ecore metaclasses and use it into a Kermeta program;</para>
         </listitem>
         <listitem>
-          <para>Kermeta use EMF to save and load programmaticaly a model  ( cf the tutorial  <ulink url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"> FSM example</ulink> chapter 5 : Model
+          <para>Kermeta use EMF to save and load programmaticaly a model  ( cf the tutorial  <ulink url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#chapter_model_manipulation"> FSM example</ulink> chapter  Model
             manipulation in Kermeta)</para>
         </listitem>
       </orderedlist></para>
