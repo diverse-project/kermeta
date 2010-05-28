@@ -248,11 +248,13 @@ public class TypeDefinitionCacheImpl extends EObjectImpl implements TypeDefiniti
 			entry.setQualifiedName( qualifiedName );
 			getEntries().put(qualifiedName, entry);
 		} else {
-			// Here we got a problem if the definition is not an aspect.
-			// That means that several type definitions with the same qualified name exist.
-			if ( ! typeDefinition.isIsAspect() && ! entry.getTypeDefinition().isIsAspect() ) { 
-				String message = "Type Definition " + qualifiedName + " already exists.";
-				getKermetaUnit().error(message, typeDefinition);
+			if(entry.getTypeDefinition() != typeDefinition){
+				// Here we got a problem if the definition is not an aspect.
+				// That means that several type definitions with the same qualified name exist.
+				if ( ! typeDefinition.isIsAspect() && ! entry.getTypeDefinition().isIsAspect() ) { 
+					String message = "Type Definition " + qualifiedName + " already exists.";
+					getKermetaUnit().error(message, typeDefinition);
+				}
 			}
 		}
 		entry.setTypeDefinition( typeDefinition );
