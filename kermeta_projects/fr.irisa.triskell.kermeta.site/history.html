@@ -11,7 +11,27 @@ $Id: history.html,v 1.38 2008-10-02 15:36:30 dvojtise Exp $
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
 <h2 class="Heading">Repository head </h2>
+<h2 class="Heading">V1.4.0 (31/1/2010)</h2>
 <h3>New features</h3>
+<ul>
+	
+	<li>It is now possible to add an @deprecated tag to prevent from using some features.
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=5272&group_id=32&atid=208">feature request #5272)</a>.  
+	</li>
+	<li>Collections now implement an each operation that provides contextual informations like "first element", "last element", "element count" during the iteration .
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=9331&group_id=32&atid=208">feature request #9331)</a>.  
+	</li>
+</ul>
+
+<h3>Improved features</h3>
+<ul>	
+	<li>Support for property file in compiler V1.
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=9106&group_id=32&atid=208">feature request #9106)</a>.  
+	</li>
+</ul>
+<h2 class="Heading">V1.3.2 (27/10/2009)</h2>
+<h3>New features</h3>
+
 <ul>
 	
 	<li>It is now possible to add an opposite to a reference or attribute by aspect and support model 
@@ -24,15 +44,20 @@ $Id: history.html,v 1.38 2008-10-02 15:36:30 dvojtise Exp $
 	<li>New action UMLprofile2ecore. It is now possible to transform a uml profile into an ecore for use with kermeta via a right click on the uml file
 		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7946&group_id=32&atid=208">feature request #7946)</a>.  
 	</li>
-	<li>Require can now use "platform:/lookup/" in addition to "platform:/plugin" and "platform:/resource". The current implemetation of
+	<li>Added a checkInvariant thats check only one invariant. You can now control the way the invariants will be checked. (<a href="http://gforge.inria.fr/tracker/?group_id=32&atid=208&func=detail&aid=4342">feature request #4342</a>) 
+	    (The implementation is still partial since the current checkAllInvariants still uses the old way and not this new operation.)</li>
+
+	<li>Require can now use "platform:/lookup/" in addition to "platform:/plugin" and "platform:/resource". The current implementation of
 	the lookup searches in resource (ie. workspace) first, then, if not found, searches in plugin.	 
-		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=6568&group_id=32&atid=208">feature request #6568)
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=6568&group_id=32&atid=208">feature request #6568</a> and
+		<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=8783&group_id=32&atid=208">feature request #8783</a>)
 		This greatly eases the development of kermeta code that is intended to be deployed in a plugin later.</li>
 </ul>
 <h3>Improved features</h3>
 <ul>
 	<li>Several compiler improvements : "Filter the main operations to limit the runners generation" (<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7578&group_id=32&atid=208">feature request #7578)</a>,
 	 "Add an action to create the *.compiler.properties file" (<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7584&group_id=32&atid=208">feature request #7584)</a>
+
 	 and "Enable to add operation to the EClass EObject by aspect"   (<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7740&group_id=32&atid=208">feature request #7740)</a>.
 	</li>
 		  	
@@ -45,6 +70,7 @@ $Id: history.html,v 1.38 2008-10-02 15:36:30 dvojtise Exp $
 	<li>FileIO improvement : Save text file with a specific encoding 
 		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7699&group_id=32&atid=208">feature request #7699)</a>.  
 	</li>
+
 	<li>Date improvement : Added an operation on Date for getting the current date 
 		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7742&group_id=32&atid=208">feature request #7742)</a>.  
 	</li>	
@@ -53,12 +79,16 @@ $Id: history.html,v 1.38 2008-10-02 15:36:30 dvojtise Exp $
 <ul>
 	<li>#7632; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7632&group_id=32&atid=205">[merger] doesn't select the appropriate attribute is aspectized.</a></li>
 	<li>#7660; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7660&group_id=32&atid=205">Error when saving a uml model.</a></li>
+
+	<li>#7826; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7826&group_id=32&atid=205">Errors parsing an Ecore file (generated from an xml schema).</a></li>
+	<li>#7830; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7830&group_id=32&atid=205">Conflict with other version of emfatic.</a></li>
 	<li>#7911; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7911&group_id=32&atid=205">FileIO does not report the correct exception when the path is incorrect.</a></li>
 	<li>#7966; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7966&group_id=32&atid=205">KM2KMT Generation failed with Conditional.</a></li>
 	<li>#8009; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=8009&group_id=32&atid=205">Error saving a model whose metamodel is splitted in several ecore files.</a></li>	
-	<li>#7826; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7826&group_id=32&atid=205">Errors parsing an Ecore file (generated from an xml schema).</a></li>
+	<li>#8364; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=8364&group_id=32&atid=205">requiring an ecore with dependency to a nsURI is considered as platform:/plugin.</a></li>
+
 </ul>
-<h2 class="Heading">V1.3.0 (09/03/2003)</h2>
+<h2 class="Heading">V1.3.0 (09/03/2009)</h2>
 <h3>New features</h3>
 <ul>
 	<li>A compiler for you kermeta code. Still experimental in this version, it generates the all the java code
