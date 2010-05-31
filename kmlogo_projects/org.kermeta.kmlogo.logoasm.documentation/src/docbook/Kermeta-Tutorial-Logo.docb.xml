@@ -68,10 +68,9 @@
           <ulink
             url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html"
             >Building DSL main process</ulink></emphasis> tutorial in order to get the "<emphasis
-          role="bold"><ulink
-            url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html#big_picture_para"
-            >bird's eye view</ulink></emphasis>" of what we are going to build here and to have an
-        overview of the <emphasis role="bold">methodology</emphasis> to follow.</para>
+          role="bold">bird's eye view</emphasis>" (see Introduction) of what we are going to build
+        here and to have an overview of the <emphasis role="bold">methodology</emphasis> to
+        follow.</para>
     </note>
   </chapter>
   <chapter id="chapter_installation.link">
@@ -651,23 +650,20 @@ package ASM
       kermeta tutorials) for the explanation of these model manipulations.</para>
     <section id="section_package_registry.link">
       <title id="section_package_registry.title.link">Package registry<phrase/></title>
-      <para>An example is fully covered in this <ulink
-          url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#PackageRegistry_Presentation"
-          >part</ulink> of <ulink
+      <para>An example is fully covered in section 5.2 of <ulink
           url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
-          >FSM tutorial</ulink>, for further explanation of this step please refer to the <ulink
-          url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html#sec_package_registry.link"
+          >FSM tutorial</ulink>, for further explanation of this step please refer to the section
+        4.2 of <ulink
+          url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html"
           >process tutorial</ulink></para>
     </section>
     <section id="section_serialisation.link">
       <title id="section_serialisation.title.link">Serialization<phrase/></title>
-      <para>This <ulink
-          url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html#section_serialisation"
-          >part</ulink> of <ulink
+      <para>The section 5.1 of <ulink
           url="@ONLINE.OR.LOCAL@/fr.irisa.triskell.kermeta.samples.fsm.documentation/build/@OUTPUT.VERSION@/KerMeta-The-FSM-example/index.html"
           >FSM tutorial</ulink> provides a complete example for this section, explanation can be
-        found inside the <ulink
-          url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html#sec_serialisation.link"
+        found inside the section 4.1 of <ulink
+          url="@ONLINE.OR.LOCAL@fr.irisa.triskell.kermeta.documentation/build/@OUTPUT.VERSION@/Kermeta-Tutorial-Process/index.html"
           >process tutorial</ulink></para>
     </section>
   </chapter>
@@ -1504,7 +1500,7 @@ PenUp </programlisting>
           <caution>
             <para>For this last step, you need to set up a corresponding environment (which is not
               covered by the target of this tutorial) if you want to implement the compiler. </para>
-            <para>Maybe you need to check out the solution that we provide in  the <link
+            <para>Maybe you need to check out the solution that we provide in the <link
                 linkend="chapter_conclusion.link">conclusion</link> in order to succesfully achieve
               this last step and see the complete version including the linux, macos, and windows
               integration. Additionally, you may also follow instructions inside <emphasis
